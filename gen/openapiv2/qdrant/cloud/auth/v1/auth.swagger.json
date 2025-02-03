@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/auth/v1/auth.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AuthService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/accounts/{accountId}/auth/api-keys": {
+      "get": {
+        "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api-keys",
+        "operationId": "AuthService_ListApiKeys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ApiKeyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.\n\nTODO: ListOptions",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      },
+      "post": {
+        "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api-keys",
+        "operationId": "AuthService_CreateApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ApiKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthServiceCreateApiKeyBody"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/accounts/{accountId}/auth/api-keys/{apiKeyId}": {
+      "delete": {
+        "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api-keys",
+        "operationId": "AuthService_DeleteApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "description": "The identifier of the api-key (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/auth/api-version": {
+      "get": {
+        "summary": "Get the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AuthService_GetAPIVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Version"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AuthService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AuthServiceCreateApiKeyBody": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the api-key (in Guid format).\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed. TODO: Changable!"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token for the API key.\nThis is a read-only field and will be available only once in the return of CreateApiKey.\nYou should securely store this token and it should be handled as a secret."
+        }
+      },
+      "title": "A ApiKey represents one api-key of a Qdrant cloud account.\nThis api-key can grant access to one or more Qdrant databases (clusters)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the api-key (in Guid format).\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed. TODO: Changable!"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token for the API key.\nThis is a read-only field and will be available only once in the return of CreateApiKey.\nYou should securely store this token and it should be handled as a secret."
+        }
+      },
+      "title": "A ApiKey represents one api-key of a Qdrant cloud account.\nThis api-key can grant access to one or more Qdrant databases (clusters)"
+    },
+    "v1ApiKeyList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ApiKey"
+          },
+          "description": "TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions",
+          "title": "The actual api-keys in this list"
+        }
+      },
+      "description": "List of ApiKeys."
+    },
+    "v1Version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Major version (increasing may break APIs)"
+        },
+        "minor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minor version (increased for new features)"
+        },
+        "patch": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Patch version (increased for fixes)"
+        }
+      },
+      "description": "Semantic version number."
+    }
+  }
+}
