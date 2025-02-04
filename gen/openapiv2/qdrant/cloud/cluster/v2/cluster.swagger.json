@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/cluster/v1/cluster.proto",
+    "title": "qdrant/cloud/cluster/v2/cluster.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/accounts/{accountId}/clusters": {
+    "/api/cluster/v2/accounts/{accountId}/clusters": {
       "get": {
         "summary": "Fetch all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListClusters",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ClusterList"
+              "$ref": "#/definitions/v2ClusterList"
             }
           },
           "default": {
@@ -61,7 +61,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Cluster"
+              "$ref": "#/definitions/v2Cluster"
             }
           },
           "default": {
@@ -93,7 +93,7 @@
         ]
       }
     },
-    "/accounts/{accountId}/clusters/{clusterId}": {
+    "/api/cluster/v2/accounts/{accountId}/clusters/{clusterId}": {
       "get": {
         "summary": "Fetch a cluster in the account identified by the given IDs.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_GetCluster",
@@ -101,7 +101,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Cluster"
+              "$ref": "#/definitions/v2Cluster"
             }
           },
           "default": {
@@ -177,7 +177,7 @@
         ]
       }
     },
-    "/accounts/{accountId}/clusters/{id}": {
+    "/api/cluster/v2/accounts/{accountId}/clusters/{id}": {
       "patch": {
         "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
         "operationId": "ClusterService_UpdateCluster",
@@ -185,7 +185,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Cluster"
+              "$ref": "#/definitions/v2Cluster"
             }
           },
           "default": {
@@ -224,7 +224,7 @@
         ]
       }
     },
-    "/accounts/{accountId}/releases": {
+    "/api/cluster/v2/accounts/{accountId}/releases": {
       "get": {
         "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListQdrantReleases",
@@ -232,7 +232,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1QdrantReleaseList"
+              "$ref": "#/definitions/v2QdrantReleaseList"
             }
           },
           "default": {
@@ -263,7 +263,7 @@
         ]
       }
     },
-    "/cluster/api-version": {
+    "/api/cluster/v2/api-version": {
       "get": {
         "summary": "TODO: Remove in first iteration?\nGet the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "ClusterService_GetAPIVersion",
@@ -313,11 +313,11 @@
           "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
-          "$ref": "#/definitions/v1ClusterConfiguration",
+          "$ref": "#/definitions/v2ClusterConfiguration",
           "description": "Current configuration details of the cluster."
         },
         "state": {
-          "$ref": "#/definitions/v1ClusterState",
+          "$ref": "#/definitions/v2ClusterState",
           "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
         }
       },
@@ -344,11 +344,11 @@
           "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
-          "$ref": "#/definitions/v1ClusterConfiguration",
+          "$ref": "#/definitions/v2ClusterConfiguration",
           "description": "Current configuration details of the cluster."
         },
         "state": {
-          "$ref": "#/definitions/v1ClusterState",
+          "$ref": "#/definitions/v2ClusterState",
           "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
         }
       },
@@ -382,7 +382,28 @@
         }
       }
     },
-    "v1AdditionalResources": {
+    "v1Version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Major version (increasing may break APIs)"
+        },
+        "minor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minor version (increased for new features)"
+        },
+        "patch": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Patch version (increased for fixes)"
+        }
+      },
+      "description": "Semantic version number."
+    },
+    "v2AdditionalResources": {
       "type": "object",
       "properties": {
         "disk": {
@@ -393,7 +414,7 @@
       },
       "title": "Currently not supported, but will be added in the near future:\n Additional CPU (expressed in milli vCPU)\n int cpu = 1;\n Additional Memory (expressed in Gib)\n int ram = 2;"
     },
-    "v1Cluster": {
+    "v2Cluster": {
       "type": "object",
       "properties": {
         "id": {
@@ -422,17 +443,17 @@
           "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
-          "$ref": "#/definitions/v1ClusterConfiguration",
+          "$ref": "#/definitions/v2ClusterConfiguration",
           "description": "Current configuration details of the cluster."
         },
         "state": {
-          "$ref": "#/definitions/v1ClusterState",
+          "$ref": "#/definitions/v2ClusterState",
           "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
         }
       },
       "description": "A Cluster represents one cluster of a Qdrant database."
     },
-    "v1ClusterConfiguration": {
+    "v2ClusterConfiguration": {
       "type": "object",
       "properties": {
         "lastModifiedAt": {
@@ -454,18 +475,18 @@
           "description": "The package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
         },
         "additionalResources": {
-          "$ref": "#/definitions/v1AdditionalResources",
+          "$ref": "#/definitions/v2AdditionalResources",
           "description": "The additional resources on top of the selected package.\nThis is an optional field, if not specified all additional resources are 0."
         },
         "databaseConfiguration": {
-          "$ref": "#/definitions/v1DatabaseConfiguration",
+          "$ref": "#/definitions/v2DatabaseConfiguration",
           "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
         "nodeSelector": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1KeyValue"
+            "$ref": "#/definitions/v2KeyValue"
           },
           "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
@@ -473,7 +494,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Toleration"
+            "$ref": "#/definitions/v2Toleration"
           },
           "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
@@ -481,7 +502,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1KeyValue"
+            "$ref": "#/definitions/v2KeyValue"
           },
           "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
@@ -505,7 +526,7 @@
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
     },
-    "v1ClusterEndpoint": {
+    "v2ClusterEndpoint": {
       "type": "object",
       "properties": {
         "url": {
@@ -525,14 +546,14 @@
       },
       "description": "Endpoint information to access the qdrant cluster (aka database).\nAll fields in this message are a read-only field."
     },
-    "v1ClusterList": {
+    "v2ClusterList": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Cluster"
+            "$ref": "#/definitions/v2Cluster"
           },
           "description": "TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions",
           "title": "The actual clusters in this list"
@@ -540,7 +561,7 @@
       },
       "description": "List of Clusters."
     },
-    "v1ClusterNodeResources": {
+    "v2ClusterNodeResources": {
       "type": "object",
       "properties": {
         "base": {
@@ -571,25 +592,25 @@
       },
       "description": "ClusterNodeResources represents the allocation of various resources for a cluster per node."
     },
-    "v1ClusterNodeResourcesSummary": {
+    "v2ClusterNodeResourcesSummary": {
       "type": "object",
       "properties": {
         "disk": {
-          "$ref": "#/definitions/v1ClusterNodeResources",
+          "$ref": "#/definitions/v2ClusterNodeResources",
           "title": "Disk resources"
         },
         "ram": {
-          "$ref": "#/definitions/v1ClusterNodeResources",
+          "$ref": "#/definitions/v2ClusterNodeResources",
           "title": "Memory resources"
         },
         "cpu": {
-          "$ref": "#/definitions/v1ClusterNodeResources",
+          "$ref": "#/definitions/v2ClusterNodeResources",
           "title": "CPU resouces"
         }
       },
       "description": "ClusterResourcesSummary represents the summary of the resources used in this cluster per node."
     },
-    "v1ClusterState": {
+    "v2ClusterState": {
       "type": "object",
       "properties": {
         "version": {
@@ -615,38 +636,38 @@
           "description": "Reason for the current phase of the cluster."
         },
         "endpoint": {
-          "$ref": "#/definitions/v1ClusterEndpoint",
+          "$ref": "#/definitions/v2ClusterEndpoint",
           "description": "Endpoint information to access the qdrant cluster (aka database)."
         },
         "resources": {
-          "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
+          "$ref": "#/definitions/v2ClusterNodeResourcesSummary",
           "description": "Summary of the resources used by the cluster per node."
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
     },
-    "v1DatabaseConfiguration": {
+    "v2DatabaseConfiguration": {
       "type": "object",
       "properties": {
         "collection": {
-          "$ref": "#/definitions/v1QdrantConfigurationCollection"
+          "$ref": "#/definitions/v2QdrantConfigurationCollection"
         },
         "storage": {
-          "$ref": "#/definitions/v1QdrantConfigurationStorage"
+          "$ref": "#/definitions/v2QdrantConfigurationStorage"
         },
         "service": {
-          "$ref": "#/definitions/v1QdrantConfigurationService"
+          "$ref": "#/definitions/v2QdrantConfigurationService"
         },
         "logLevel": {
           "type": "string"
         },
         "tls": {
-          "$ref": "#/definitions/v1QdrantConfigurationTls"
+          "$ref": "#/definitions/v2QdrantConfigurationTls"
         }
       },
       "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a qdrant database in a hybrid cloud."
     },
-    "v1KeyValue": {
+    "v2KeyValue": {
       "type": "object",
       "properties": {
         "key": {
@@ -660,23 +681,23 @@
       },
       "title": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes.\nTODO: Move to common.v1"
     },
-    "v1QdrantConfigApiKey": {
+    "v2QdrantConfigApiKey": {
       "type": "object",
       "properties": {
         "secretKeyRef": {
-          "$ref": "#/definitions/v1SecretKeyRef"
+          "$ref": "#/definitions/v2SecretKeyRef"
         }
       }
     },
-    "v1QdrantConfigSecretKey": {
+    "v2QdrantConfigSecretKey": {
       "type": "object",
       "properties": {
         "secretKeyRef": {
-          "$ref": "#/definitions/v1SecretKeyRef"
+          "$ref": "#/definitions/v2SecretKeyRef"
         }
       }
     },
-    "v1QdrantConfigurationCollection": {
+    "v2QdrantConfigurationCollection": {
       "type": "object",
       "properties": {
         "replicationFactor": {
@@ -688,11 +709,11 @@
           "format": "int32"
         },
         "vectors": {
-          "$ref": "#/definitions/v1QdrantConfigurationCollectionVectors"
+          "$ref": "#/definitions/v2QdrantConfigurationCollectionVectors"
         }
       }
     },
-    "v1QdrantConfigurationCollectionVectors": {
+    "v2QdrantConfigurationCollectionVectors": {
       "type": "object",
       "properties": {
         "onDisk": {
@@ -700,14 +721,14 @@
         }
       }
     },
-    "v1QdrantConfigurationService": {
+    "v2QdrantConfigurationService": {
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/v1QdrantConfigApiKey"
+          "$ref": "#/definitions/v2QdrantConfigApiKey"
         },
         "readOnlyApiKey": {
-          "$ref": "#/definitions/v1QdrantConfigApiKey"
+          "$ref": "#/definitions/v2QdrantConfigApiKey"
         },
         "jwtRbac": {
           "type": "boolean"
@@ -717,15 +738,15 @@
         }
       }
     },
-    "v1QdrantConfigurationStorage": {
+    "v2QdrantConfigurationStorage": {
       "type": "object",
       "properties": {
         "performance": {
-          "$ref": "#/definitions/v1QdrantConfigurationStoragePerformance"
+          "$ref": "#/definitions/v2QdrantConfigurationStoragePerformance"
         }
       }
     },
-    "v1QdrantConfigurationStoragePerformance": {
+    "v2QdrantConfigurationStoragePerformance": {
       "type": "object",
       "properties": {
         "optimizerCpuBudget": {
@@ -737,18 +758,18 @@
         }
       }
     },
-    "v1QdrantConfigurationTls": {
+    "v2QdrantConfigurationTls": {
       "type": "object",
       "properties": {
         "cert": {
-          "$ref": "#/definitions/v1QdrantConfigSecretKey"
+          "$ref": "#/definitions/v2QdrantConfigSecretKey"
         },
         "key": {
-          "$ref": "#/definitions/v1QdrantConfigSecretKey"
+          "$ref": "#/definitions/v2QdrantConfigSecretKey"
         }
       }
     },
-    "v1QdrantRelease": {
+    "v2QdrantRelease": {
       "type": "object",
       "properties": {
         "version": {
@@ -770,21 +791,21 @@
       },
       "title": "QdrantRelease represent a single Qdrant release"
     },
-    "v1QdrantReleaseList": {
+    "v2QdrantReleaseList": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1QdrantRelease"
+            "$ref": "#/definitions/v2QdrantRelease"
           },
           "title": "The actual Qdrant releases in this list"
         }
       },
       "title": "List of QdrantReleases"
     },
-    "v1SecretKeyRef": {
+    "v2SecretKeyRef": {
       "type": "object",
       "properties": {
         "key": {
@@ -795,7 +816,7 @@
         }
       }
     },
-    "v1Toleration": {
+    "v2Toleration": {
       "type": "object",
       "properties": {
         "key": {
@@ -821,27 +842,6 @@
         }
       },
       "description": "The Toleration message represents a toleration object for Kubernetes."
-    },
-    "v1Version": {
-      "type": "object",
-      "properties": {
-        "major": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Major version (increasing may break APIs)"
-        },
-        "minor": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Minor version (increased for new features)"
-        },
-        "patch": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Patch version (increased for fixes)"
-        }
-      },
-      "description": "Semantic version number."
     }
   }
 }

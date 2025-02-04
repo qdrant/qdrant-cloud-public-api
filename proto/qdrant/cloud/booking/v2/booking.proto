@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package qdrant.cloud.booking.v1;
+package qdrant.cloud.booking.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
@@ -16,7 +16,7 @@ service BookingService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/booking/api-version"};
+    option (google.api.http) = {get: "/api/booking/v2/api-version"};
   }
 
   // Fetch all packages known by the system, optional filtered.
@@ -26,7 +26,7 @@ service BookingService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/account/{account_id}/booking/packages"};
+    option (google.api.http) = {get: "/api/booking/v2/account/{account_id}/booking/packages"};
   }
 
   // Get the package identified by the request identifier
@@ -36,7 +36,7 @@ service BookingService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/account/{account_id}/booking/packages/{id}"};
+    option (google.api.http) = {get: "/api/booking/v2/account/{account_id}/booking/packages/{id}"};
   }
 }
 

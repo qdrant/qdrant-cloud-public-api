@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: qdrant/cloud/auth/v1/auth.proto
+// source: qdrant/cloud/auth/v2/auth.proto
 
-package authv1
+package authv2
 
 import (
 	context "context"
@@ -21,10 +21,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_GetAPIVersion_FullMethodName = "/qdrant.cloud.auth.v1.AuthService/GetAPIVersion"
-	AuthService_ListApiKeys_FullMethodName   = "/qdrant.cloud.auth.v1.AuthService/ListApiKeys"
-	AuthService_CreateApiKey_FullMethodName  = "/qdrant.cloud.auth.v1.AuthService/CreateApiKey"
-	AuthService_DeleteApiKey_FullMethodName  = "/qdrant.cloud.auth.v1.AuthService/DeleteApiKey"
+	AuthService_GetAPIVersion_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/GetAPIVersion"
+	AuthService_ListApiKeys_FullMethodName   = "/qdrant.cloud.auth.v2.AuthService/ListApiKeys"
+	AuthService_CreateApiKey_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/CreateApiKey"
+	AuthService_DeleteApiKey_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/DeleteApiKey"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -240,7 +240,7 @@ func _AuthService_DeleteApiKey_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.auth.v1.AuthService",
+	ServiceName: "qdrant.cloud.auth.v2.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -261,5 +261,5 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/auth/v1/auth.proto",
+	Metadata: "qdrant/cloud/auth/v2/auth.proto",
 }

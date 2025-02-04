@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/auth/v1/auth.proto",
+    "title": "qdrant/cloud/auth/v2/auth.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/accounts/{accountId}/auth/api-keys": {
+    "/api/auth/v2/accounts/{accountId}/auth/api-keys": {
       "get": {
         "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api-keys",
         "operationId": "AuthService_ListApiKeys",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ApiKeyList"
+              "$ref": "#/definitions/v2ApiKeyList"
             }
           },
           "default": {
@@ -54,7 +54,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ApiKey"
+              "$ref": "#/definitions/v2ApiKey"
             }
           },
           "default": {
@@ -86,7 +86,7 @@
         ]
       }
     },
-    "/accounts/{accountId}/auth/api-keys/{apiKeyId}": {
+    "/api/auth/v2/accounts/{accountId}/auth/api-keys/{apiKeyId}": {
       "delete": {
         "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api-keys",
         "operationId": "AuthService_DeleteApiKey",
@@ -126,7 +126,7 @@
         ]
       }
     },
-    "/auth/api-version": {
+    "/api/auth/v2/api-version": {
       "get": {
         "summary": "Get the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AuthService_GetAPIVersion",
@@ -209,7 +209,28 @@
         }
       }
     },
-    "v1ApiKey": {
+    "v1Version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Major version (increasing may break APIs)"
+        },
+        "minor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minor version (increased for new features)"
+        },
+        "patch": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Patch version (increased for fixes)"
+        }
+      },
+      "description": "Semantic version number."
+    },
+    "v2ApiKey": {
       "type": "object",
       "properties": {
         "id": {
@@ -243,41 +264,20 @@
       },
       "title": "A ApiKey represents one api-key of a Qdrant cloud account.\nThis api-key can grant access to one or more Qdrant databases (clusters)"
     },
-    "v1ApiKeyList": {
+    "v2ApiKeyList": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1ApiKey"
+            "$ref": "#/definitions/v2ApiKey"
           },
           "description": "TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions",
           "title": "The actual api-keys in this list"
         }
       },
       "description": "List of ApiKeys."
-    },
-    "v1Version": {
-      "type": "object",
-      "properties": {
-        "major": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Major version (increasing may break APIs)"
-        },
-        "minor": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Minor version (increased for new features)"
-        },
-        "patch": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Patch version (increased for fixes)"
-        }
-      },
-      "description": "Semantic version number."
     }
   }
 }
