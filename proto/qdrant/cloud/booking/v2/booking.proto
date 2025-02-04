@@ -4,7 +4,6 @@ package qdrant.cloud.booking.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
 // BookingService is the API used to configure the booking settings (like packages objects).
@@ -12,7 +11,7 @@ service BookingService {
   // Get the current API version of this service.
   // Required permissions:
   // - None (authenticated only)
-  rpc GetAPIVersion(google.protobuf.Empty) returns (common.v1.Version) {
+  rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
@@ -22,33 +21,36 @@ service BookingService {
   // Fetch all packages known by the system, optional filtered.
   // Required permissions:
   // - None (authenticated only)
-  rpc ListPackages(ListPackagesRequest) returns (PackageList) {
+  rpc ListPackages(ListPackagesRequest) returns (ListPackagesResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/booking/v2/account/{account_id}/booking/packages"};
+    option (google.api.http) = {get: "/api/booking/v2/accounts/{account_id}/booking/packages"};
   }
 
   // Get the package identified by the request identifier
   // Required permissions:
   // - None (authenticated only)
-  rpc GetPackage(GetPackageRequest) returns (Package) {
+  rpc GetPackage(GetPackageRequest) returns (GetPackageResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/booking/v2/account/{account_id}/booking/packages/{id}"};
+    option (google.api.http) = {get: "/api/booking/v2/accounts/{account_id}/booking/packages/{id}"};
   }
 }
 
-message GetPackageRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The unique identifier of the package.
-  // A unique string ID assigned to each package.
-  string id = 2 [(buf.validate.field).string = {uuid: true}];
+// GetAPIVersionRequest is the request for the GetAPIVersion function
+message GetAPIVersionRequest {
+  // Empty
 }
 
+// GetAPIVersionResponse is the response from the GetAPIVersion function
+message GetAPIVersionResponse {
+  // The actual version
+  common.v1.Version version = 1;
+}
+
+// ListPackagesRequest is the request for the ListPackages function
 message ListPackagesRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
@@ -77,10 +79,26 @@ message ListPackagesRequest {
   // TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
 }
 
-// List of Packages.
-message PackageList {
+// ListPackagesResponse is the response from the ListPackages function
+message ListPackagesResponse {
   // The actual packages in this list
   repeated Package items = 1;
+}
+
+// GetAPIVersionRequest is the request for the GetAPIVersion function
+message GetPackageRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The unique identifier of the package.
+  // A unique string ID assigned to each package.
+  string id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetPackageResponse is the response from the GetPackage function
+message GetPackageResponse {
+  // The actual package 
+  Package package = 1;
 }
 
 // Package represents a single package.
