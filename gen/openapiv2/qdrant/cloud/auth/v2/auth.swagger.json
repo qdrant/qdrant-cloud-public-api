@@ -135,7 +135,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetAPIVersionResponse"
+              "$ref": "#/definitions/cloudauthv2GetAPIVersionResponse"
             }
           },
           "default": {
@@ -187,6 +187,16 @@
         }
       },
       "title": "CreateApiKeyRequest is the request for the CreateApiKey function"
+    },
+    "cloudauthv2GetAPIVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/v1Version",
+          "title": "The actual version"
+        }
+      },
+      "title": "GetAPIVersionResponse is the response from the GetAPIVersion function"
     },
     "protobufAny": {
       "type": "object",
@@ -285,16 +295,6 @@
       "type": "object",
       "description": "Empty",
       "title": "DeleteApiKeyResponse is the response from the DeleteApiKey function"
-    },
-    "v2GetAPIVersionResponse": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "$ref": "#/definitions/v1Version",
-          "title": "The actual version"
-        }
-      },
-      "title": "GetAPIVersionResponse is the response from the GetAPIVersion function"
     },
     "v2ListApiKeysResponse": {
       "type": "object",

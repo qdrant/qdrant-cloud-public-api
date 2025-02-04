@@ -22,7 +22,6 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // Suppress "imported and not used" errors
@@ -38,7 +37,7 @@ var (
 
 func request_BookingService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, client BookingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq emptypb.Empty
+		protoReq GetAPIVersionRequest
 		metadata runtime.ServerMetadata
 	)
 	msg, err := client.GetAPIVersion(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -47,7 +46,7 @@ func request_BookingService_GetAPIVersion_0(ctx context.Context, marshaler runti
 
 func local_request_BookingService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, server BookingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq emptypb.Empty
+		protoReq GetAPIVersionRequest
 		metadata runtime.ServerMetadata
 	)
 	msg, err := server.GetAPIVersion(ctx, &protoReq)
@@ -188,7 +187,7 @@ func RegisterBookingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/ListPackages", runtime.WithHTTPPathPattern("/api/booking/v2/account/{account_id}/booking/packages"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/ListPackages", runtime.WithHTTPPathPattern("/api/booking/v2/accounts/{account_id}/booking/packages"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -208,7 +207,7 @@ func RegisterBookingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/GetPackage", runtime.WithHTTPPathPattern("/api/booking/v2/account/{account_id}/booking/packages/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/GetPackage", runtime.WithHTTPPathPattern("/api/booking/v2/accounts/{account_id}/booking/packages/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -283,7 +282,7 @@ func RegisterBookingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/ListPackages", runtime.WithHTTPPathPattern("/api/booking/v2/account/{account_id}/booking/packages"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/ListPackages", runtime.WithHTTPPathPattern("/api/booking/v2/accounts/{account_id}/booking/packages"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -300,7 +299,7 @@ func RegisterBookingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/GetPackage", runtime.WithHTTPPathPattern("/api/booking/v2/account/{account_id}/booking/packages/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.booking.v2.BookingService/GetPackage", runtime.WithHTTPPathPattern("/api/booking/v2/accounts/{account_id}/booking/packages/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -318,8 +317,8 @@ func RegisterBookingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 var (
 	pattern_BookingService_GetAPIVersion_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "booking", "v2", "api-version"}, ""))
-	pattern_BookingService_ListPackages_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5}, []string{"api", "booking", "v2", "account", "account_id", "packages"}, ""))
-	pattern_BookingService_GetPackage_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "booking", "v2", "account", "account_id", "packages", "id"}, ""))
+	pattern_BookingService_ListPackages_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5}, []string{"api", "booking", "v2", "accounts", "account_id", "packages"}, ""))
+	pattern_BookingService_GetPackage_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "booking", "v2", "accounts", "account_id", "packages", "id"}, ""))
 )
 
 var (

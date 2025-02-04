@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/booking/v2/account/{accountId}/booking/packages": {
+    "/api/booking/v2/accounts/{accountId}/booking/packages": {
       "get": {
         "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_ListPackages",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2PackageList"
+              "$ref": "#/definitions/v2ListPackagesResponse"
             }
           },
           "default": {
@@ -73,7 +73,7 @@
         ]
       }
     },
-    "/api/booking/v2/account/{accountId}/booking/packages/{id}": {
+    "/api/booking/v2/accounts/{accountId}/booking/packages/{id}": {
       "get": {
         "summary": "Get the package identified by the request identifier\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_GetPackage",
@@ -81,7 +81,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2Package"
+              "$ref": "#/definitions/v2GetPackageResponse"
             }
           },
           "default": {
@@ -120,7 +120,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Version"
+              "$ref": "#/definitions/cloudbookingv2GetAPIVersionResponse"
             }
           },
           "default": {
@@ -137,6 +137,16 @@
     }
   },
   "definitions": {
+    "cloudbookingv2GetAPIVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/v1Version",
+          "title": "The actual version"
+        }
+      },
+      "title": "GetAPIVersionResponse is the response from the GetAPIVersion function"
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -186,6 +196,30 @@
       },
       "description": "Semantic version number."
     },
+    "v2GetPackageResponse": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "$ref": "#/definitions/v2Package",
+          "title": "The actual package"
+        }
+      },
+      "title": "GetPackageResponse is the response from the GetPackage function"
+    },
+    "v2ListPackagesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2Package"
+          },
+          "title": "The actual packages in this list"
+        }
+      },
+      "title": "ListPackagesResponse is the response from the ListPackages function"
+    },
     "v2Package": {
       "type": "object",
       "properties": {
@@ -224,20 +258,6 @@
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."
-    },
-    "v2PackageList": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2Package"
-          },
-          "title": "The actual packages in this list"
-        }
-      },
-      "description": "List of Packages."
     },
     "v2ResourceConfiguration": {
       "type": "object",

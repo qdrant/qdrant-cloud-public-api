@@ -8,11 +8,9 @@ package bookingv2
 
 import (
 	context "context"
-	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -35,15 +33,15 @@ type BookingServiceClient interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error)
+	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
-	ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*PackageList, error)
+	ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error)
 	// Get the package identified by the request identifier
 	// Required permissions:
 	// - None (authenticated only)
-	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*Package, error)
+	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -54,9 +52,9 @@ func NewBookingServiceClient(cc grpc.ClientConnInterface) BookingServiceClient {
 	return &bookingServiceClient{cc}
 }
 
-func (c *bookingServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error) {
+func (c *bookingServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.Version)
+	out := new(GetAPIVersionResponse)
 	err := c.cc.Invoke(ctx, BookingService_GetAPIVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -64,9 +62,9 @@ func (c *bookingServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *bookingServiceClient) ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*PackageList, error) {
+func (c *bookingServiceClient) ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PackageList)
+	out := new(ListPackagesResponse)
 	err := c.cc.Invoke(ctx, BookingService_ListPackages_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -74,9 +72,9 @@ func (c *bookingServiceClient) ListPackages(ctx context.Context, in *ListPackage
 	return out, nil
 }
 
-func (c *bookingServiceClient) GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*Package, error) {
+func (c *bookingServiceClient) GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Package)
+	out := new(GetPackageResponse)
 	err := c.cc.Invoke(ctx, BookingService_GetPackage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -93,15 +91,15 @@ type BookingServiceServer interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error)
+	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
-	ListPackages(context.Context, *ListPackagesRequest) (*PackageList, error)
+	ListPackages(context.Context, *ListPackagesRequest) (*ListPackagesResponse, error)
 	// Get the package identified by the request identifier
 	// Required permissions:
 	// - None (authenticated only)
-	GetPackage(context.Context, *GetPackageRequest) (*Package, error)
+	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -112,13 +110,13 @@ type BookingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBookingServiceServer struct{}
 
-func (UnimplementedBookingServiceServer) GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error) {
+func (UnimplementedBookingServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
 }
-func (UnimplementedBookingServiceServer) ListPackages(context.Context, *ListPackagesRequest) (*PackageList, error) {
+func (UnimplementedBookingServiceServer) ListPackages(context.Context, *ListPackagesRequest) (*ListPackagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPackages not implemented")
 }
-func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackageRequest) (*Package, error) {
+func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPackage not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
@@ -143,7 +141,7 @@ func RegisterBookingServiceServer(s grpc.ServiceRegistrar, srv BookingServiceSer
 }
 
 func _BookingService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetAPIVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -155,7 +153,7 @@ func _BookingService_GetAPIVersion_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BookingService_GetAPIVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookingServiceServer).GetAPIVersion(ctx, req.(*emptypb.Empty))
+		return srv.(BookingServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
