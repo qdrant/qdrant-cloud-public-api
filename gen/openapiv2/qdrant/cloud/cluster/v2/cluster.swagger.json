@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2ClusterList"
+              "$ref": "#/definitions/v2ListClustersResponse"
             }
           },
           "default": {
@@ -53,44 +53,6 @@
         "tags": [
           "ClusterService"
         ]
-      },
-      "post": {
-        "summary": "Creates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
-        "operationId": "ClusterService_CreateCluster",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2Cluster"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterServiceCreateClusterBody"
-            }
-          }
-        ],
-        "tags": [
-          "ClusterService"
-        ]
       }
     },
     "/api/cluster/v2/accounts/{accountId}/clusters/{clusterId}": {
@@ -101,7 +63,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2Cluster"
+              "$ref": "#/definitions/v2GetClusterResponse"
             }
           },
           "default": {
@@ -138,8 +100,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {}
+              "$ref": "#/definitions/v2DeleteClusterResponse"
             }
           },
           "default": {
@@ -177,53 +138,6 @@
         ]
       }
     },
-    "/api/cluster/v2/accounts/{accountId}/clusters/{id}": {
-      "patch": {
-        "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
-        "operationId": "ClusterService_UpdateCluster",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2Cluster"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterServiceUpdateClusterBody"
-            }
-          }
-        ],
-        "tags": [
-          "ClusterService"
-        ]
-      }
-    },
     "/api/cluster/v2/accounts/{accountId}/releases": {
       "get": {
         "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
@@ -232,7 +146,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2QdrantReleaseList"
+              "$ref": "#/definitions/v2ListQdrantReleasesResponse"
             }
           },
           "default": {
@@ -263,6 +177,93 @@
         ]
       }
     },
+    "/api/cluster/v2/accounts/{cluster.accountId}/clusters": {
+      "post": {
+        "summary": "Creates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_CreateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2CreateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceCreateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v2/accounts/{cluster.accountId}/clusters/{cluster.id}": {
+      "patch": {
+        "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_UpdateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2UpdateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cluster.id",
+            "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceUpdateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v2/api-version": {
       "get": {
         "summary": "TODO: Remove in first iteration?\nGet the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
@@ -271,7 +272,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Version"
+              "$ref": "#/definitions/cloudclusterv2GetAPIVersionResponse"
             }
           },
           "default": {
@@ -291,68 +292,90 @@
     "ClusterServiceCreateClusterBody": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
-        },
-        "name": {
-          "type": "string",
-          "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
-        },
-        "cloudProvider": {
-          "type": "string",
-          "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
-        },
-        "cloudRegion": {
-          "type": "string",
-          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
-        },
-        "configuration": {
-          "$ref": "#/definitions/v2ClusterConfiguration",
-          "description": "Current configuration details of the cluster."
-        },
-        "state": {
-          "$ref": "#/definitions/v2ClusterState",
-          "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "cloudProvider": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+            },
+            "cloudRegion": {
+              "type": "string",
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v2ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v2ClusterState",
+              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "The actual cluster"
         }
       },
-      "description": "A Cluster represents one cluster of a Qdrant database."
+      "title": "CreateClusterRequest is the request for the CreateCluster function"
     },
     "ClusterServiceUpdateClusterBody": {
       "type": "object",
       "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
-        },
-        "name": {
-          "type": "string",
-          "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
-        },
-        "cloudProvider": {
-          "type": "string",
-          "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
-        },
-        "cloudRegion": {
-          "type": "string",
-          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
-        },
-        "configuration": {
-          "$ref": "#/definitions/v2ClusterConfiguration",
-          "description": "Current configuration details of the cluster."
-        },
-        "state": {
-          "$ref": "#/definitions/v2ClusterState",
-          "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "cloudProvider": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+            },
+            "cloudRegion": {
+              "type": "string",
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v2ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v2ClusterState",
+              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "The actual cluster"
         }
       },
-      "description": "A Cluster represents one cluster of a Qdrant database."
+      "title": "UpdateClusterRequest is the request for the UpdateCluster function"
+    },
+    "cloudclusterv2GetAPIVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/v1Version",
+          "title": "The actual version"
+        }
+      },
+      "title": "GetAPIVersionResponse is the response from the GetAPIVersion function"
     },
     "protobufAny": {
       "type": "object",
@@ -546,21 +569,6 @@
       },
       "description": "Endpoint information to access the qdrant cluster (aka database).\nAll fields in this message are a read-only field."
     },
-    "v2ClusterList": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2Cluster"
-          },
-          "description": "TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions",
-          "title": "The actual clusters in this list"
-        }
-      },
-      "description": "List of Clusters."
-    },
     "v2ClusterNodeResources": {
       "type": "object",
       "properties": {
@@ -646,6 +654,16 @@
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
     },
+    "v2CreateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v2Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "CreateClusterResponse is the response from the CreateCluster function"
+    },
     "v2DatabaseConfiguration": {
       "type": "object",
       "properties": {
@@ -667,6 +685,21 @@
       },
       "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a qdrant database in a hybrid cloud."
     },
+    "v2DeleteClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteClusterResponse is the response from the DeleteCluster function"
+    },
+    "v2GetClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v2Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "GetClusterResponse is the response from the GetCluster function"
+    },
     "v2KeyValue": {
       "type": "object",
       "properties": {
@@ -680,6 +713,35 @@
         }
       },
       "title": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes.\nTODO: Move to common.v1"
+    },
+    "v2ListClustersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2Cluster"
+          },
+          "description": "TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions",
+          "title": "The actual clusters in this list"
+        }
+      },
+      "title": "ListClustersResponse is the response from the ListClusters function"
+    },
+    "v2ListQdrantReleasesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2QdrantRelease"
+          },
+          "title": "The actual Qdrant releases in this list"
+        }
+      },
+      "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"
     },
     "v2QdrantConfigApiKey": {
       "type": "object",
@@ -791,20 +853,6 @@
       },
       "title": "QdrantRelease represent a single Qdrant release"
     },
-    "v2QdrantReleaseList": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2QdrantRelease"
-          },
-          "title": "The actual Qdrant releases in this list"
-        }
-      },
-      "title": "List of QdrantReleases"
-    },
     "v2SecretKeyRef": {
       "type": "object",
       "properties": {
@@ -842,6 +890,16 @@
         }
       },
       "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v2UpdateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v2Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "UpdateClusterResponse is the response from the UpdateCluster function"
     }
   }
 }
