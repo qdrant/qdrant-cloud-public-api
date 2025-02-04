@@ -8,11 +8,9 @@ package authv2
 
 import (
 	context "context"
-	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -36,19 +34,19 @@ type AuthServiceClient interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error)
+	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api-keys
-	ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ApiKeyList, error)
+	ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error)
 	// Creates an api-key in the account identified by the given ID.
 	// Required permissions:
 	// - write:api-keys
-	CreateApiKey(ctx context.Context, in *ApiKey, opts ...grpc.CallOption) (*ApiKey, error)
+	CreateApiKey(ctx context.Context, in *CreateApiKeyRequest, opts ...grpc.CallOption) (*CreateApiKeyResponse, error)
 	// Deletes an api-key in the account identified by the given ID.
 	// Required permissions:
 	// - delete:api-keys
-	DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error)
 }
 
 type authServiceClient struct {
@@ -59,9 +57,9 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
 }
 
-func (c *authServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error) {
+func (c *authServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.Version)
+	out := new(GetAPIVersionResponse)
 	err := c.cc.Invoke(ctx, AuthService_GetAPIVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -69,9 +67,9 @@ func (c *authServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Empty
 	return out, nil
 }
 
-func (c *authServiceClient) ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ApiKeyList, error) {
+func (c *authServiceClient) ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ApiKeyList)
+	out := new(ListApiKeysResponse)
 	err := c.cc.Invoke(ctx, AuthService_ListApiKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -79,9 +77,9 @@ func (c *authServiceClient) ListApiKeys(ctx context.Context, in *ListApiKeysRequ
 	return out, nil
 }
 
-func (c *authServiceClient) CreateApiKey(ctx context.Context, in *ApiKey, opts ...grpc.CallOption) (*ApiKey, error) {
+func (c *authServiceClient) CreateApiKey(ctx context.Context, in *CreateApiKeyRequest, opts ...grpc.CallOption) (*CreateApiKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ApiKey)
+	out := new(CreateApiKeyResponse)
 	err := c.cc.Invoke(ctx, AuthService_CreateApiKey_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -89,9 +87,9 @@ func (c *authServiceClient) CreateApiKey(ctx context.Context, in *ApiKey, opts .
 	return out, nil
 }
 
-func (c *authServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *authServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(DeleteApiKeyResponse)
 	err := c.cc.Invoke(ctx, AuthService_DeleteApiKey_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -108,19 +106,19 @@ type AuthServiceServer interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error)
+	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api-keys
-	ListApiKeys(context.Context, *ListApiKeysRequest) (*ApiKeyList, error)
+	ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error)
 	// Creates an api-key in the account identified by the given ID.
 	// Required permissions:
 	// - write:api-keys
-	CreateApiKey(context.Context, *ApiKey) (*ApiKey, error)
+	CreateApiKey(context.Context, *CreateApiKeyRequest) (*CreateApiKeyResponse, error)
 	// Deletes an api-key in the account identified by the given ID.
 	// Required permissions:
 	// - delete:api-keys
-	DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*emptypb.Empty, error)
+	DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -131,16 +129,16 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error) {
+func (UnimplementedAuthServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
 }
-func (UnimplementedAuthServiceServer) ListApiKeys(context.Context, *ListApiKeysRequest) (*ApiKeyList, error) {
+func (UnimplementedAuthServiceServer) ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListApiKeys not implemented")
 }
-func (UnimplementedAuthServiceServer) CreateApiKey(context.Context, *ApiKey) (*ApiKey, error) {
+func (UnimplementedAuthServiceServer) CreateApiKey(context.Context, *CreateApiKeyRequest) (*CreateApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateApiKey not implemented")
 }
-func (UnimplementedAuthServiceServer) DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*emptypb.Empty, error) {
+func (UnimplementedAuthServiceServer) DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiKey not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
@@ -165,7 +163,7 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 }
 
 func _AuthService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetAPIVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -177,7 +175,7 @@ func _AuthService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: AuthService_GetAPIVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetAPIVersion(ctx, req.(*emptypb.Empty))
+		return srv.(AuthServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -201,7 +199,7 @@ func _AuthService_ListApiKeys_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _AuthService_CreateApiKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApiKey)
+	in := new(CreateApiKeyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -213,7 +211,7 @@ func _AuthService_CreateApiKey_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: AuthService_CreateApiKey_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).CreateApiKey(ctx, req.(*ApiKey))
+		return srv.(AuthServiceServer).CreateApiKey(ctx, req.(*CreateApiKeyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

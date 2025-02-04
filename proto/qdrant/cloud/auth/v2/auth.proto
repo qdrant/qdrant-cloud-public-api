@@ -4,7 +4,6 @@ package qdrant.cloud.auth.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
@@ -13,7 +12,7 @@ service AuthService {
   // Get the current API version of this service.
   // Required permissions:
   // - None (authenticated only)
-  rpc GetAPIVersion(google.protobuf.Empty) returns (common.v1.Version) {
+  rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "";
     // gRPC Gateway REST call
@@ -23,7 +22,7 @@ service AuthService {
   // Fetch all api-keys in the account identified by the given ID.
   // Required permissions:
   // - read:api-keys
-  rpc ListApiKeys(ListApiKeysRequest) returns (ApiKeyList) {
+  rpc ListApiKeys(ListApiKeysRequest) returns (ListApiKeysResponse) {
     // permissions
     option (common.v1.permissions) = "read:api-keys";
     // gRPC Gateway REST call
@@ -33,12 +32,12 @@ service AuthService {
   // Creates an api-key in the account identified by the given ID.
   // Required permissions:
   // - write:api-keys
-  rpc CreateApiKey(ApiKey) returns (ApiKey) {
+  rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     // permissions
     option (common.v1.permissions) = "write:api-keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/auth/v2/accounts/{account_id}/auth/api-keys"
+      post: "/api/auth/v2/accounts/{api_key.account_id}/auth/api-keys"
       body: "*"
     };
   }
@@ -48,12 +47,23 @@ service AuthService {
   // Deletes an api-key in the account identified by the given ID.
   // Required permissions:
   // - delete:api-keys
-  rpc DeleteApiKey(DeleteApiKeyRequest) returns (google.protobuf.Empty) {
+  rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
     // permissions
     option (common.v1.permissions) = "delete:api-keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/auth/api-keys/{api_key_id}"};
   }
+}
+
+// GetAPIVersionRequest is the request for the GetAPIVersion function
+message GetAPIVersionRequest {
+  // Empty
+}
+
+// GetAPIVersionResponse is the response from the GetAPIVersion function
+message GetAPIVersionResponse {
+  // The actual version
+  common.v1.Version version = 1;
 }
 
 // ListApiKeysRequest is the request for the ListApiKeys function
@@ -62,6 +72,25 @@ message ListApiKeysRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // TODO: ListOptions
+}
+
+// ListApiKeysResponse is the response from the ListApiKeys function
+message ListApiKeysResponse {
+  // The actual api-keys in this list
+  repeated ApiKey items = 1;
+  // TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions
+}
+
+// CreateApiKeyRequest is the request for the CreateApiKey function
+message CreateApiKeyRequest {
+  // The actual API Key
+  ApiKey api_key = 1;
+}
+
+// CreateApiKeyResponse is the response from the CreateApiKey function
+message CreateApiKeyResponse {
+  // The actual API Key
+  ApiKey api_key = 1;
 }
 
 // DeleteApiKeyRequest is the request for the DeleteApiKey function
@@ -74,11 +103,9 @@ message DeleteApiKeyRequest {
   string api_key_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// List of ApiKeys.
-message ApiKeyList {
-  // The actual api-keys in this list
-  repeated ApiKey items = 1;
-  // TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions
+// DeleteApiKeyResponse is the response from the DeleteApiKey function
+message DeleteApiKeyResponse {
+  // Empty
 }
 
 // A ApiKey represents one api-key of a Qdrant cloud account.
