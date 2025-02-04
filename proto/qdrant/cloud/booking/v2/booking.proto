@@ -97,7 +97,7 @@ message GetPackageRequest {
 
 // GetPackageResponse is the response from the GetPackage function
 message GetPackageResponse {
-  // The actual package 
+  // The actual package
   Package package = 1;
 }
 
