@@ -8,11 +8,9 @@ package clusterv2
 
 import (
 	context "context"
-	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -40,32 +38,32 @@ type ClusterServiceClient interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error)
+	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
-	ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ClusterList, error)
+	ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
 	// Fetch a cluster in the account identified by the given IDs.
 	// Required permissions:
 	// - read:clusters
-	GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
+	GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*GetClusterResponse, error)
 	// Creates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
-	CreateCluster(ctx context.Context, in *Cluster, opts ...grpc.CallOption) (*Cluster, error)
+	CreateCluster(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*CreateClusterResponse, error)
 	// Update a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
-	UpdateCluster(ctx context.Context, in *Cluster, opts ...grpc.CallOption) (*Cluster, error)
+	UpdateCluster(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*UpdateClusterResponse, error)
 	// Deletes a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - delete:clusters
-	DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*DeleteClusterResponse, error)
 	// Fetch all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
 	// - read:clusters
-	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*QdrantReleaseList, error)
+	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error)
 }
 
 type clusterServiceClient struct {
@@ -76,9 +74,9 @@ func NewClusterServiceClient(cc grpc.ClientConnInterface) ClusterServiceClient {
 	return &clusterServiceClient{cc}
 }
 
-func (c *clusterServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.Version, error) {
+func (c *clusterServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.Version)
+	out := new(GetAPIVersionResponse)
 	err := c.cc.Invoke(ctx, ClusterService_GetAPIVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -86,9 +84,9 @@ func (c *clusterServiceClient) GetAPIVersion(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ClusterList, error) {
+func (c *clusterServiceClient) ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ClusterList)
+	out := new(ListClustersResponse)
 	err := c.cc.Invoke(ctx, ClusterService_ListClusters_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -96,9 +94,9 @@ func (c *clusterServiceClient) ListClusters(ctx context.Context, in *ListCluster
 	return out, nil
 }
 
-func (c *clusterServiceClient) GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error) {
+func (c *clusterServiceClient) GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*GetClusterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Cluster)
+	out := new(GetClusterResponse)
 	err := c.cc.Invoke(ctx, ClusterService_GetCluster_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -106,9 +104,9 @@ func (c *clusterServiceClient) GetCluster(ctx context.Context, in *GetClusterReq
 	return out, nil
 }
 
-func (c *clusterServiceClient) CreateCluster(ctx context.Context, in *Cluster, opts ...grpc.CallOption) (*Cluster, error) {
+func (c *clusterServiceClient) CreateCluster(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*CreateClusterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Cluster)
+	out := new(CreateClusterResponse)
 	err := c.cc.Invoke(ctx, ClusterService_CreateCluster_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -116,9 +114,9 @@ func (c *clusterServiceClient) CreateCluster(ctx context.Context, in *Cluster, o
 	return out, nil
 }
 
-func (c *clusterServiceClient) UpdateCluster(ctx context.Context, in *Cluster, opts ...grpc.CallOption) (*Cluster, error) {
+func (c *clusterServiceClient) UpdateCluster(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*UpdateClusterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Cluster)
+	out := new(UpdateClusterResponse)
 	err := c.cc.Invoke(ctx, ClusterService_UpdateCluster_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -126,9 +124,9 @@ func (c *clusterServiceClient) UpdateCluster(ctx context.Context, in *Cluster, o
 	return out, nil
 }
 
-func (c *clusterServiceClient) DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *clusterServiceClient) DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*DeleteClusterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(DeleteClusterResponse)
 	err := c.cc.Invoke(ctx, ClusterService_DeleteCluster_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -136,9 +134,9 @@ func (c *clusterServiceClient) DeleteCluster(ctx context.Context, in *DeleteClus
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*QdrantReleaseList, error) {
+func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(QdrantReleaseList)
+	out := new(ListQdrantReleasesResponse)
 	err := c.cc.Invoke(ctx, ClusterService_ListQdrantReleases_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -156,32 +154,32 @@ type ClusterServiceServer interface {
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
-	GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error)
+	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
-	ListClusters(context.Context, *ListClustersRequest) (*ClusterList, error)
+	ListClusters(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
 	// Fetch a cluster in the account identified by the given IDs.
 	// Required permissions:
 	// - read:clusters
-	GetCluster(context.Context, *GetClusterRequest) (*Cluster, error)
+	GetCluster(context.Context, *GetClusterRequest) (*GetClusterResponse, error)
 	// Creates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
-	CreateCluster(context.Context, *Cluster) (*Cluster, error)
+	CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error)
 	// Update a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
-	UpdateCluster(context.Context, *Cluster) (*Cluster, error)
+	UpdateCluster(context.Context, *UpdateClusterRequest) (*UpdateClusterResponse, error)
 	// Deletes a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - delete:clusters
-	DeleteCluster(context.Context, *DeleteClusterRequest) (*emptypb.Empty, error)
+	DeleteCluster(context.Context, *DeleteClusterRequest) (*DeleteClusterResponse, error)
 	// Fetch all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
 	// - read:clusters
-	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*QdrantReleaseList, error)
+	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error)
 	mustEmbedUnimplementedClusterServiceServer()
 }
 
@@ -192,25 +190,25 @@ type ClusterServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedClusterServiceServer struct{}
 
-func (UnimplementedClusterServiceServer) GetAPIVersion(context.Context, *emptypb.Empty) (*v1.Version, error) {
+func (UnimplementedClusterServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
 }
-func (UnimplementedClusterServiceServer) ListClusters(context.Context, *ListClustersRequest) (*ClusterList, error) {
+func (UnimplementedClusterServiceServer) ListClusters(context.Context, *ListClustersRequest) (*ListClustersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListClusters not implemented")
 }
-func (UnimplementedClusterServiceServer) GetCluster(context.Context, *GetClusterRequest) (*Cluster, error) {
+func (UnimplementedClusterServiceServer) GetCluster(context.Context, *GetClusterRequest) (*GetClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCluster not implemented")
 }
-func (UnimplementedClusterServiceServer) CreateCluster(context.Context, *Cluster) (*Cluster, error) {
+func (UnimplementedClusterServiceServer) CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCluster not implemented")
 }
-func (UnimplementedClusterServiceServer) UpdateCluster(context.Context, *Cluster) (*Cluster, error) {
+func (UnimplementedClusterServiceServer) UpdateCluster(context.Context, *UpdateClusterRequest) (*UpdateClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCluster not implemented")
 }
-func (UnimplementedClusterServiceServer) DeleteCluster(context.Context, *DeleteClusterRequest) (*emptypb.Empty, error) {
+func (UnimplementedClusterServiceServer) DeleteCluster(context.Context, *DeleteClusterRequest) (*DeleteClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCluster not implemented")
 }
-func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*QdrantReleaseList, error) {
+func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQdrantReleases not implemented")
 }
 func (UnimplementedClusterServiceServer) mustEmbedUnimplementedClusterServiceServer() {}
@@ -235,7 +233,7 @@ func RegisterClusterServiceServer(s grpc.ServiceRegistrar, srv ClusterServiceSer
 }
 
 func _ClusterService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetAPIVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -247,7 +245,7 @@ func _ClusterService_GetAPIVersion_Handler(srv interface{}, ctx context.Context,
 		FullMethod: ClusterService_GetAPIVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).GetAPIVersion(ctx, req.(*emptypb.Empty))
+		return srv.(ClusterServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -289,7 +287,7 @@ func _ClusterService_GetCluster_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _ClusterService_CreateCluster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Cluster)
+	in := new(CreateClusterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -301,13 +299,13 @@ func _ClusterService_CreateCluster_Handler(srv interface{}, ctx context.Context,
 		FullMethod: ClusterService_CreateCluster_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).CreateCluster(ctx, req.(*Cluster))
+		return srv.(ClusterServiceServer).CreateCluster(ctx, req.(*CreateClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ClusterService_UpdateCluster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Cluster)
+	in := new(UpdateClusterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -319,7 +317,7 @@ func _ClusterService_UpdateCluster_Handler(srv interface{}, ctx context.Context,
 		FullMethod: ClusterService_UpdateCluster_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).UpdateCluster(ctx, req.(*Cluster))
+		return srv.(ClusterServiceServer).UpdateCluster(ctx, req.(*UpdateClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

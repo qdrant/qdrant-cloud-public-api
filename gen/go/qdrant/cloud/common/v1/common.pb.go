@@ -23,11 +23,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
 // The order of the returned list
 type Order int32
 
 const (
-	Order_ASC  Order = 0
+	// Order ascending
+	Order_ASC Order = 0
+	// Order descending
 	Order_DESC Order = 1
 )
 

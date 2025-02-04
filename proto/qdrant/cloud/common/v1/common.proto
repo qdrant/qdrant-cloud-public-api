@@ -11,9 +11,12 @@ extend google.protobuf.MethodOptions {
   repeated string permissions = 50001;
 }
 
+// TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
 // The order of the returned list
 enum Order {
+  // Order ascending
   ASC = 0;
+  // Order descending
   DESC = 1;
 }
 
