@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: qdrant/cloud/cluster/v1/cluster.proto
+// source: qdrant/cloud/cluster/v2/cluster.proto
 
-package clusterv1
+package clusterv2
 
 import (
 	context "context"
@@ -21,13 +21,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_GetAPIVersion_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/GetAPIVersion"
-	ClusterService_ListClusters_FullMethodName       = "/qdrant.cloud.cluster.v1.ClusterService/ListClusters"
-	ClusterService_GetCluster_FullMethodName         = "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
-	ClusterService_CreateCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/CreateCluster"
-	ClusterService_UpdateCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster"
-	ClusterService_DeleteCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
-	ClusterService_ListQdrantReleases_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
+	ClusterService_GetAPIVersion_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/GetAPIVersion"
+	ClusterService_ListClusters_FullMethodName       = "/qdrant.cloud.cluster.v2.ClusterService/ListClusters"
+	ClusterService_GetCluster_FullMethodName         = "/qdrant.cloud.cluster.v2.ClusterService/GetCluster"
+	ClusterService_CreateCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/CreateCluster"
+	ClusterService_UpdateCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/UpdateCluster"
+	ClusterService_DeleteCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/DeleteCluster"
+	ClusterService_ListQdrantReleases_FullMethodName = "/qdrant.cloud.cluster.v2.ClusterService/ListQdrantReleases"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -364,7 +364,7 @@ func _ClusterService_ListQdrantReleases_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ClusterService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.cluster.v1.ClusterService",
+	ServiceName: "qdrant.cloud.cluster.v2.ClusterService",
 	HandlerType: (*ClusterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -397,5 +397,5 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/cluster/v1/cluster.proto",
+	Metadata: "qdrant/cloud/cluster/v2/cluster.proto",
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package qdrant.cloud.cluster.v1;
+package qdrant.cloud.cluster.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
@@ -18,7 +18,7 @@ service ClusterService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/cluster/api-version"};
+    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
   }
 
   // Fetch all clusters in the account identified by the given ID.
@@ -28,7 +28,7 @@ service ClusterService {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/accounts/{account_id}/clusters"};
+    option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters"};
   }
 
   // Fetch a cluster in the account identified by the given IDs.
@@ -38,7 +38,7 @@ service ClusterService {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/accounts/{account_id}/clusters/{cluster_id}"};
+    option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}"};
   }
 
   // Creates a cluster in the account identified by the given ID.
@@ -49,7 +49,7 @@ service ClusterService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/accounts/{account_id}/clusters"
+      post: "/api/cluster/v2/accounts/{account_id}/clusters"
       body: "*"
     };
   }
@@ -62,7 +62,7 @@ service ClusterService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      patch: "/accounts/{account_id}/clusters/{id}"
+      patch: "/api/cluster/v2/accounts/{account_id}/clusters/{id}"
       body: "*"
     };
   }
@@ -74,7 +74,7 @@ service ClusterService {
     // permissions
     option (common.v1.permissions) = "delete:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/accounts/{account_id}/clusters/{cluster_id}"};
+    option (google.api.http) = {delete: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}"};
   }
 
   // TODO: RestartCluster
@@ -87,7 +87,7 @@ service ClusterService {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/accounts/{account_id}/releases"};
+    option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/releases"};
   }
 }
 

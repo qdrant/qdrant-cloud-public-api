@@ -258,8 +258,9 @@ func (x *IDOptions) GetId() string {
 
 // Response for single boolean.
 type YesOrNo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The actual result of the single boolean
+	Result        bool `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -314,6 +315,8 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
+	// A list of permissions which ALL need to be met by the current user.
+	//
 	// repeated string permissions = 50001;
 	E_Permissions = &file_qdrant_cloud_common_v1_common_proto_extTypes[0]
 )

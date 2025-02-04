@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package qdrant.cloud.auth.v1;
+package qdrant.cloud.auth.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
@@ -17,7 +17,7 @@ service AuthService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/auth/api-version"};
+    option (google.api.http) = {get: "/api/auth/v2/api-version"};
   }
 
   // Fetch all api-keys in the account identified by the given ID.
@@ -27,7 +27,7 @@ service AuthService {
     // permissions
     option (common.v1.permissions) = "read:api-keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/accounts/{account_id}/auth/api-keys"};
+    option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/auth/api-keys"};
   }
 
   // Creates an api-key in the account identified by the given ID.
@@ -38,7 +38,7 @@ service AuthService {
     option (common.v1.permissions) = "write:api-keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/accounts/{account_id}/auth/api-keys"
+      post: "/api/auth/v2/accounts/{account_id}/auth/api-keys"
       body: "*"
     };
   }
@@ -52,7 +52,7 @@ service AuthService {
     // permissions
     option (common.v1.permissions) = "delete:api-keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/accounts/{account_id}/auth/api-keys/{api_key_id}"};
+    option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/auth/api-keys/{api_key_id}"};
   }
 }
 

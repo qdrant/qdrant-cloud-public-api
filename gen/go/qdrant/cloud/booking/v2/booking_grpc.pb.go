@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: qdrant/cloud/booking/v1/booking.proto
+// source: qdrant/cloud/booking/v2/booking.proto
 
-package bookingv1
+package bookingv2
 
 import (
 	context "context"
@@ -21,9 +21,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_GetAPIVersion_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/GetAPIVersion"
-	BookingService_ListPackages_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName    = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_GetAPIVersion_FullMethodName = "/qdrant.cloud.booking.v2.BookingService/GetAPIVersion"
+	BookingService_ListPackages_FullMethodName  = "/qdrant.cloud.booking.v2.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName    = "/qdrant.cloud.booking.v2.BookingService/GetPackage"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -200,7 +200,7 @@ func _BookingService_GetPackage_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BookingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.booking.v1.BookingService",
+	ServiceName: "qdrant.cloud.booking.v2.BookingService",
 	HandlerType: (*BookingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -217,5 +217,5 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/booking/v1/booking.proto",
+	Metadata: "qdrant/cloud/booking/v2/booking.proto",
 }
