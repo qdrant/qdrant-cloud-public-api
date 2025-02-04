@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package qdrant.cloud.booking.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// BookingService is the API used to configure the booking settings (like packages objects).
+service BookingService {
+  // Get the current API version of this service.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetAPIVersion(google.protobuf.Empty) returns (common.v1.Version) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/booking/api-version"};
+  }
+
+  // Fetch all packages known by the system, optional filtered.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListPackages(ListPackagesRequest) returns (PackageList) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/account/{account_id}/booking/packages"};
+  }
+
+  // Get the package identified by the request identifier
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetPackage(GetPackageRequest) returns (Package) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/account/{account_id}/booking/packages/{id}"};
+  }
+}
+
+message GetPackageRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The unique identifier of the package.
+  // A unique string ID assigned to each package.
+  string id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+message ListPackagesRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Cloud provider where the cluster will be hosted.
+  // This is an optional field (if set, it should be one of the following: aws, gcp, azure or hybrid).
+  optional string cloud_provider = 2 [(buf.validate.field).string = {
+    in: [
+      "aws",
+      "gcp",
+      "azure",
+      "hybrid"
+    ]
+  }];
+  // Cloud region where the cluster is located.
+  // This is an optional field and is ignored if the provider is set to 'hybrid'.
+  string cloud_region = 3;
+  // The status of the packages to filter.
+  // This is an optional field. If value is not set, all packages are returned.
+  repeated string statuses = 4 [(buf.validate.field).repeated.items.string = {
+    in: [
+      "Active",
+      "Deactivated"
+    ]
+  }];
+  // TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
+}
+
+// List of Packages.
+message PackageList {
+  // The actual packages in this list
+  repeated Package items = 1;
+}
+
+// Package represents a single package.
+// A package is a configuration (CPU/Memory/Disk size) for a cluster with a price.
+message Package {
+  // The unique identifier of the package.
+  // A unique string ID assigned to each package.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The name of the package.
+  // A human-readable identifier for the package.
+  string name = 2;
+  // Specifies if this is a free or paid package.
+  string type = 3;
+  // A repeated field representing the resource configurations associated with the package.
+  repeated ResourceConfiguration resource_configuration = 4;
+  // The currency of the prices.
+  // Specifies the currency in which the prices are denominated.
+  string currency = 5;
+  // The unit price per hour in millicents, in integer format.
+  // Represents the cost per hour for a single unit of the resource.
+  // TODO: You will be billed by minutes?
+  int32 unit_int_price_per_hour = 6;
+  // The status of the package.
+  // Indicates the current status of the package.
+  // One of: Active, Deactivated
+  string status = 7;
+}
+
+// ResourceConfiguration configures a specific resource in a total resource configuration
+message ResourceConfiguration {
+  // The amount in the specified unit
+  int32 amount = 1;
+  // The unit of the resource, specifying what kind of unit the resource is measured in (e.g., m, Gib).
+  string resource_unit = 2;
+  // The type of the resource, specifying the category or type of resource (e.g., vCPU, DiskSize).
+  string resource_type = 3;
+}

@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package qdrant.cloud.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+service AuthService {
+  // Get the current API version of this service.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetAPIVersion(google.protobuf.Empty) returns (common.v1.Version) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/auth/api-version"};
+  }
+
+  // Fetch all api-keys in the account identified by the given ID.
+  // Required permissions:
+  // - read:api-keys
+  rpc ListApiKeys(ListApiKeysRequest) returns (ApiKeyList) {
+    // permissions
+    option (common.v1.permissions) = "read:api-keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/accounts/{account_id}/auth/api-keys"};
+  }
+
+  // Creates an api-key in the account identified by the given ID.
+  // Required permissions:
+  // - write:api-keys
+  rpc CreateApiKey(ApiKey) returns (ApiKey) {
+    // permissions
+    option (common.v1.permissions) = "write:api-keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/accounts/{account_id}/auth/api-keys"
+      body: "*"
+    };
+  }
+
+  // TODO: Missing Update
+
+  // Deletes an api-key in the account identified by the given ID.
+  // Required permissions:
+  // - delete:api-keys
+  rpc DeleteApiKey(DeleteApiKeyRequest) returns (google.protobuf.Empty) {
+    // permissions
+    option (common.v1.permissions) = "delete:api-keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/accounts/{account_id}/auth/api-keys/{api_key_id}"};
+  }
+}
+
+// ListApiKeysRequest is the request for the ListApiKeys function
+message ListApiKeysRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // TODO: ListOptions
+}
+
+// DeleteApiKeyRequest is the request for the DeleteApiKey function
+message DeleteApiKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the api-key (in Guid format).
+  // This is a required field.
+  string api_key_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// List of ApiKeys.
+message ApiKeyList {
+  // The actual api-keys in this list
+  repeated ApiKey items = 1;
+  // TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions
+}
+
+// A ApiKey represents one api-key of a Qdrant cloud account.
+// This api-key can grant access to one or more Qdrant databases (clusters)
+message ApiKey {
+  // Unique identifier for the api-key (in Guid format).
+  // This is a read-only field and will be available after an api-key is created.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the api-key was created.
+  // This is a read-only field and will be available after an api-key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // A list of cluster IDs
+  // Should contain at least a single ID.
+  // After creation, this field cannot be changed. TODO: Changable!
+  repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
+    items: {
+      string: {pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+    }
+  }];
+  // Prefix for the API key, this represents the first bytes of the token
+  // This is a read-only field and will be available after an api-key is created.
+  string prefix = 5;
+  // The token for the API key.
+  // This is a read-only field and will be available only once in the return of CreateApiKey.
+  // You should securely store this token and it should be handled as a secret.
+  string token = 6;
+}

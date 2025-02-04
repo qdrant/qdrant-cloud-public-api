@@ -1,0 +1,37 @@
+version: v2
+managed:
+  enabled: true
+  disable:
+    - file_option: go_package_prefix
+      module: buf.build/bufbuild/protovalidate
+    - module: buf.build/googleapis/googleapis
+  override:
+    - file_option: go_package_prefix
+      value: github.com/qdrant/qdrant-cloud-public-api/gen/go
+
+plugins:
+  # generate base types for Go
+  - remote: buf.build/protocolbuffers/go:v1.36.4
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  # generate Go client and server stubs for the gRPC framework
+  - remote: buf.build/grpc/go:v1.5.1
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  # generate bindings for gRPC-Gateway
+  - remote: buf.build/grpc-ecosystem/gateway:v2.26.0
+    out: gen/go
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+
+  # generate OpenAPI definitions for Protobuf services
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.26.0
+    out: gen/openapiv2
+
+inputs:
+  - directory: proto
