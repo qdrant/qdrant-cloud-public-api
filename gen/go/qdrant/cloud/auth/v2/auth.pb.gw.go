@@ -22,7 +22,6 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // Suppress "imported and not used" errors
@@ -38,7 +37,7 @@ var (
 
 func request_AuthService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, client AuthServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq emptypb.Empty
+		protoReq GetAPIVersionRequest
 		metadata runtime.ServerMetadata
 	)
 	msg, err := client.GetAPIVersion(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -47,7 +46,7 @@ func request_AuthService_GetAPIVersion_0(ctx context.Context, marshaler runtime.
 
 func local_request_AuthService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, server AuthServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq emptypb.Empty
+		protoReq GetAPIVersionRequest
 		metadata runtime.ServerMetadata
 	)
 	msg, err := server.GetAPIVersion(ctx, &protoReq)
@@ -92,20 +91,20 @@ func local_request_AuthService_ListApiKeys_0(ctx context.Context, marshaler runt
 
 func request_AuthService_CreateApiKey_0(ctx context.Context, marshaler runtime.Marshaler, client AuthServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ApiKey
+		protoReq CreateApiKeyRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "api_key.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "api_key.account_id", err)
 	}
 	msg, err := client.CreateApiKey(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -113,20 +112,20 @@ func request_AuthService_CreateApiKey_0(ctx context.Context, marshaler runtime.M
 
 func local_request_AuthService_CreateApiKey_0(ctx context.Context, marshaler runtime.Marshaler, server AuthServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ApiKey
+		protoReq CreateApiKeyRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "api_key.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "api_key.account_id", err)
 	}
 	msg, err := server.CreateApiKey(ctx, &protoReq)
 	return msg, metadata, err
@@ -236,7 +235,7 @@ func RegisterAuthServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/CreateApiKey", runtime.WithHTTPPathPattern("/api/auth/v2/accounts/{account_id}/auth/api-keys"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/CreateApiKey", runtime.WithHTTPPathPattern("/api/auth/v2/accounts/{api_key.account_id}/auth/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -348,7 +347,7 @@ func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/CreateApiKey", runtime.WithHTTPPathPattern("/api/auth/v2/accounts/{account_id}/auth/api-keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/CreateApiKey", runtime.WithHTTPPathPattern("/api/auth/v2/accounts/{api_key.account_id}/auth/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -384,7 +383,7 @@ func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 var (
 	pattern_AuthService_GetAPIVersion_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "auth", "v2", "api-version"}, ""))
 	pattern_AuthService_ListApiKeys_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys"}, ""))
-	pattern_AuthService_CreateApiKey_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys"}, ""))
+	pattern_AuthService_CreateApiKey_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5}, []string{"api", "auth", "v2", "accounts", "api_key.account_id", "api-keys"}, ""))
 	pattern_AuthService_DeleteApiKey_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 1, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys", "api_key_id"}, ""))
 )
 
