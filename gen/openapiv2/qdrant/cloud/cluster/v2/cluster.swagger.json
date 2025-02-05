@@ -435,7 +435,8 @@
           "title": "Additional Disk (expressed in Gib)"
         }
       },
-      "title": "Currently not supported, but will be added in the near future:\n Additional CPU (expressed in milli vCPU)\n int cpu = 1;\n Additional Memory (expressed in Gib)\n int ram = 2;"
+      "description": "Currently not supported, but will be added in the near future:\n Additional CPU (expressed in milli vCPU)\n int cpu = 1;\n Additional Memory (expressed in Gib)\n int ram = 2;",
+      "title": "AdditionalResources contans the information about additional resources"
     },
     "v2Cluster": {
       "type": "object",
@@ -668,22 +669,118 @@
       "type": "object",
       "properties": {
         "collection": {
-          "$ref": "#/definitions/v2QdrantConfigurationCollection"
+          "$ref": "#/definitions/v2DatabaseConfigurationCollection",
+          "title": "The default Qdrant database collection configuration\nThis is an optional field"
         },
         "storage": {
-          "$ref": "#/definitions/v2QdrantConfigurationStorage"
+          "$ref": "#/definitions/v2DatabaseConfigurationStorage",
+          "title": "The default Qdrant database storage configuration\nThis is an optional field"
         },
         "service": {
-          "$ref": "#/definitions/v2QdrantConfigurationService"
+          "$ref": "#/definitions/v2DatabaseConfigurationService",
+          "title": "The Qdrant database service configuration\nThis is an optional field"
         },
         "logLevel": {
-          "type": "string"
+          "type": "string",
+          "title": "The log level for the database\nThis is an optional field\nTODO: Validation for the allowed values"
         },
         "tls": {
-          "$ref": "#/definitions/v2QdrantConfigurationTls"
+          "$ref": "#/definitions/v2DatabaseConfigurationTls",
+          "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
         }
       },
-      "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a qdrant database in a hybrid cloud."
+      "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a Qdrant database in a hybrid cloud."
+    },
+    "v2DatabaseConfigurationCollection": {
+      "type": "object",
+      "properties": {
+        "replicationFactor": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Number of replicas of each shard that network tries to maintain\nThis is an optional, the default is 1"
+        },
+        "writeConsistencyFactor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "How many replicas should apply the operation for us to consider it successful\nThis is an optional, the default is 1"
+        },
+        "vectors": {
+          "$ref": "#/definitions/v2DatabaseConfigurationCollectionVectors",
+          "description": "The default parameters for vectors."
+        }
+      },
+      "title": "The default Qdrant database collection configuration"
+    },
+    "v2DatabaseConfigurationCollectionVectors": {
+      "type": "object",
+      "properties": {
+        "onDisk": {
+          "type": "boolean",
+          "description": "If set, this will create a collection with all vectors immediately stored in memmap storage.\nThis is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.\nFor more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage\nThis is an optional field, TODO:? default will be true."
+        }
+      },
+      "title": "The default Qdrant database collection vectors configuration"
+    },
+    "v2DatabaseConfigurationService": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/v2SecretKeyRef",
+          "title": "Set an api-key.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "readOnlyApiKey": {
+          "$ref": "#/definitions/v2SecretKeyRef",
+          "title": "Set an api-key for read-only operations.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "jwtRbac": {
+          "type": "boolean",
+          "description": "Enable JWT Role Based Access Control (RBAC).\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nUse generated token instead of API key."
+        },
+        "enableTls": {
+          "type": "boolean",
+          "title": "Enable HTTPS for the REST and gRPC API"
+        }
+      },
+      "title": "The Qdrant database service configuration"
+    },
+    "v2DatabaseConfigurationStorage": {
+      "type": "object",
+      "properties": {
+        "performance": {
+          "$ref": "#/definitions/v2DatabaseConfigurationStoragePerformance",
+          "title": "The performance related Qdrant database storage configuration"
+        }
+      },
+      "title": "The Qdrant storage configuration"
+    },
+    "v2DatabaseConfigurationStoragePerformance": {
+      "type": "object",
+      "properties": {
+        "optimizerCpuBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
+        },
+        "asyncScorer": {
+          "type": "boolean",
+          "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant"
+        }
+      },
+      "title": "The performance related Qdrant database storage configuration"
+    },
+    "v2DatabaseConfigurationTls": {
+      "type": "object",
+      "properties": {
+        "cert": {
+          "$ref": "#/definitions/v2SecretKeyRef",
+          "title": "Secret to use for the certificate"
+        },
+        "key": {
+          "$ref": "#/definitions/v2SecretKeyRef",
+          "title": "Secret to use for the private key"
+        }
+      },
+      "title": "DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint"
     },
     "v2DeleteClusterResponse": {
       "type": "object",
@@ -743,94 +840,6 @@
       },
       "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"
     },
-    "v2QdrantConfigApiKey": {
-      "type": "object",
-      "properties": {
-        "secretKeyRef": {
-          "$ref": "#/definitions/v2SecretKeyRef"
-        }
-      }
-    },
-    "v2QdrantConfigSecretKey": {
-      "type": "object",
-      "properties": {
-        "secretKeyRef": {
-          "$ref": "#/definitions/v2SecretKeyRef"
-        }
-      }
-    },
-    "v2QdrantConfigurationCollection": {
-      "type": "object",
-      "properties": {
-        "replicationFactor": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "writeConsistencyFactor": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "vectors": {
-          "$ref": "#/definitions/v2QdrantConfigurationCollectionVectors"
-        }
-      }
-    },
-    "v2QdrantConfigurationCollectionVectors": {
-      "type": "object",
-      "properties": {
-        "onDisk": {
-          "type": "boolean"
-        }
-      }
-    },
-    "v2QdrantConfigurationService": {
-      "type": "object",
-      "properties": {
-        "apiKey": {
-          "$ref": "#/definitions/v2QdrantConfigApiKey"
-        },
-        "readOnlyApiKey": {
-          "$ref": "#/definitions/v2QdrantConfigApiKey"
-        },
-        "jwtRbac": {
-          "type": "boolean"
-        },
-        "enableTls": {
-          "type": "boolean"
-        }
-      }
-    },
-    "v2QdrantConfigurationStorage": {
-      "type": "object",
-      "properties": {
-        "performance": {
-          "$ref": "#/definitions/v2QdrantConfigurationStoragePerformance"
-        }
-      }
-    },
-    "v2QdrantConfigurationStoragePerformance": {
-      "type": "object",
-      "properties": {
-        "optimizerCpuBudget": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "asyncScorer": {
-          "type": "boolean"
-        }
-      }
-    },
-    "v2QdrantConfigurationTls": {
-      "type": "object",
-      "properties": {
-        "cert": {
-          "$ref": "#/definitions/v2QdrantConfigSecretKey"
-        },
-        "key": {
-          "$ref": "#/definitions/v2QdrantConfigSecretKey"
-        }
-      }
-    },
     "v2QdrantRelease": {
       "type": "object",
       "properties": {
@@ -856,13 +865,16 @@
     "v2SecretKeyRef": {
       "type": "object",
       "properties": {
-        "key": {
-          "type": "string"
-        },
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "The name of the secret (in the same namespace as the QdrantCluster CRD instance)\nThis is a required field"
+        },
+        "key": {
+          "type": "string",
+          "title": "The key inside the secret\nThis is a required field"
         }
-      }
+      },
+      "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
     },
     "v2Toleration": {
       "type": "object",

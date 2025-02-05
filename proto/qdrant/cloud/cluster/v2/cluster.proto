@@ -315,57 +315,100 @@ message ClusterConfiguration {
 }
 
 //TODO: Messages below needs comments and validation!
-// Configuration to setup a qdrant database in a hybrid cloud.
+// Configuration to setup a Qdrant database in a hybrid cloud.
 message DatabaseConfiguration {
-  QdrantConfigurationCollection collection = 1;
-  QdrantConfigurationStorage storage = 2;
-  QdrantConfigurationService service = 3;
-  string log_level = 4;
-  QdrantConfigurationTls tls = 5;
+  // The default Qdrant database collection configuration
+  // This is an optional field
+  optional DatabaseConfigurationCollection collection = 1;
+  // The default Qdrant database storage configuration
+  // This is an optional field
+  optional DatabaseConfigurationStorage storage = 2;
+  // The Qdrant database service configuration
+  // This is an optional field
+  optional DatabaseConfigurationService service = 3;
+  // The log level for the database
+  // This is an optional field
+  // TODO: Validation for the allowed values
+  optional string log_level = 4;
+  // The Qdrant database TLS configuration
+  // This is an optional field, if not set an unsecure connection is provided
+  optional DatabaseConfigurationTls tls = 5;
 }
 
-message QdrantConfigurationCollection {
-  uint32 replication_factor = 1;
+// The default Qdrant database collection configuration
+message DatabaseConfigurationCollection {
+  // Number of replicas of each shard that network tries to maintain
+  // This is an optional, the default is 1
+  optional uint32 replication_factor = 1;
+  // How many replicas should apply the operation for us to consider it successful
+  // This is an optional, the default is 1
   int32 write_consistency_factor = 2;
-  QdrantConfigurationCollectionVectors vectors = 3;
+  // The default parameters for vectors.
+  DatabaseConfigurationCollectionVectors vectors = 3;
 }
 
-message QdrantConfigurationCollectionVectors {
-  bool on_disk = 1;
+// The default Qdrant database collection vectors configuration
+message DatabaseConfigurationCollectionVectors {
+  // If set, this will create a collection with all vectors immediately stored in memmap storage.
+  // This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
+  // For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
+  // This is an optional field, TODO:? default will be true.
+  optional bool on_disk = 1;
 }
 
-message QdrantConfigurationStorage {
-  QdrantConfigurationStoragePerformance performance = 1;
+// The Qdrant storage configuration
+message DatabaseConfigurationStorage {
+  // The performance related Qdrant database storage configuration
+  DatabaseConfigurationStoragePerformance performance = 1;
 }
 
-message QdrantConfigurationStoragePerformance {
+// The performance related Qdrant database storage configuration
+message DatabaseConfigurationStoragePerformance {
+  // CPU budget, how many CPUs (threads) to allocate for an optimization job.
+  // If 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size
+  // If negative - subtract this number of CPUs from the available CPUs.
+  // If positive - use this exact number of CPUs.
   int32 optimizer_cpu_budget = 1;
+  // Enable async scorer which uses io_uring when rescoring.
+  // Only supported on Linux, must be enabled in your kernel.
+  // See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
   bool async_scorer = 2;
 }
 
-message QdrantConfigurationService {
-  QdrantConfigApiKey api_key = 1;
-  QdrantConfigApiKey read_only_api_key = 2;
+// The Qdrant database service configuration
+message DatabaseConfigurationService {
+  // Set an api-key.
+  // If set, all requests must include a header with the api-key.
+  // example header: `api-key: <API-KEY>`
+  optional SecretKeyRef api_key = 1;
+  // Set an api-key for read-only operations.
+  // If set, all requests must include a header with the api-key.
+  // example header: `api-key: <API-KEY>`
+  optional SecretKeyRef read_only_api_key = 2;
+  // Enable JWT Role Based Access Control (RBAC).
+  // If enabled, you can generate JWT tokens with fine-grained rules for access control.
+  // Use generated token instead of API key.
   bool jwt_rbac = 3;
+  // Enable HTTPS for the REST and gRPC API
   bool enable_tls = 4;
 }
 
-message QdrantConfigurationTls {
-  QdrantConfigSecretKey cert = 1;
-  QdrantConfigSecretKey key = 2;
+// DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint
+message DatabaseConfigurationTls {
+  // Secret to use for the certificate
+  SecretKeyRef cert = 1;
+  // Secret to use for the private key
+  SecretKeyRef key = 2;
 }
 
-message QdrantConfigSecretKey {
-  SecretKeyRef secret_key_ref = 1;
-}
-
-message QdrantConfigApiKey {
-  SecretKeyRef secret_key_ref = 1;
-}
-
+// SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret
 message SecretKeyRef {
-  string key = 1;
-  string name = 2;
+  // The name of the secret (in the same namespace as the QdrantCluster CRD instance)
+  // This is a required field
+  string name = 1;
+  // The key inside the secret
+  // This is a required field
+  string key = 2;
 }
 
 // KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
@@ -381,6 +424,7 @@ message KeyValue {
   string value = 2 [(buf.validate.field).string = {max_len: 1024}];
 }
 
+// AdditionalResources contans the information about additional resources
 message AdditionalResources {
   // Currently not supported, but will be added in the near future:
   // Additional CPU (expressed in milli vCPU)
