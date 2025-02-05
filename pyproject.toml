@@ -4,23 +4,33 @@ version = "0.1.0"
 description = "Qdrant cloud public API"
 readme = "README.md"
 requires-python = ">=3.12"
+license = {text = "MIT"}
+
+authors = [
+    {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
+]
+
 dependencies = [
     "protobuf-to-pydantic[all]>=0.3.0.3",
 ]
 
-# This part is required for the sdist _packaging_ process, to select the right folders.
-[tool.hatch.build.targets.sdist]
-only-include = [
-  'gen',
-]
 
-# This part is required for the sdist _installation_ process to accept a different top-level
-# package from the 'project.name'.
+[project.urls]
+Homepage = "https://github.com/qdrant/qdrant-cloud-public-api"
+Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
+
+# For sdist packaging
+[tool.hatch.build.targets.sdist]
+only-include = ["gen"]
+
+# For wheel installation
 [tool.hatch.build.targets.wheel]
-packages = [
-  'gen',
-]
+packages = ["gen"]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+# Versioning (Optional)
+[tool.hatch.version]
+source = "vcs"
