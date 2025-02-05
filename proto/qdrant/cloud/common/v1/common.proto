@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package qdrant.cloud.common.v1;
 
+import "buf/validate/validate.proto";
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/timestamp.proto";
 
 // The extention for adding permissions to the system
 extend google.protobuf.MethodOptions {
@@ -11,55 +11,76 @@ extend google.protobuf.MethodOptions {
   repeated string permissions = 50001;
 }
 
-// TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
-// The order of the returned list
-enum Order {
-  // Order ascending
-  ASC = 0;
-  // Order descending
-  DESC = 1;
-}
+/* // TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
+   //import "google/protobuf/timestamp.proto";
+      // The order of the returned list
+      enum Order {
+        // The order is not specified: TODO: Make this a validated string, 2 options, default to ascending
+        // Added this field to make the linter happy.
+        ORDER_UNSPECIFIED = 0;
+        // Order ascending
+        ORDER_ASC = 1;
+        // Order descending
+        ORDER_DESC = 2;
+      }
 
-// Options for a list request.
-message ListOptions {
-  // Maximum number of items to return.
-  // If not specified, a default number items are returned.
-  // Unless specified otherwise, the default number is DefaultPageSize.
-  int32 page_size = 1;
-  // Page to start with (defaults to 0).
-  int64 page = 2;
+      // Options for a list request.
+      message ListOptions {
+        // Maximum number of items to return.
+        // If not specified, a default number items are returned.
+        // Unless specified otherwise, the default number is DefaultPageSize.
+        int32 page_size = 1;
+        // Page to start with (defaults to 0).
+        int64 page = 2;
 
-  // Optional field to specify the sorting order.
-  Order order_by = 3;
+        // Optional field to specify the sorting order.
+        Order order_by = 3;
 
-  // Optional timestamp to get the 'diff' as of a certain point.
-  // This field can be used to fetch items modified (created/updated/deleted) after this timestamp.
-  google.protobuf.Timestamp since = 4;
+        // Optional timestamp to get the 'diff' as of a certain point.
+        // This field can be used to fetch items modified (created/updated/deleted) after this timestamp.
+        google.protobuf.Timestamp since = 4;
 
-  // TODO: Ordering?
-  // TODO: Make it possible to get the 'diff' as of a certain point
-  //       E.g. Every ListX() call return a timestamp (TS) then the list function was started, with this timestamp
-  //       (all CRUD) operations after this TS can be retieved in a 'streaming' fashion.
-}
+        // TODO: Ordering?
+        // TODO: Make it possible to get the 'diff' as of a certain point
+        //       E.g. Every ListX() call return a timestamp (TS) then the list function was started, with this timestamp
+        //       (all CRUD) operations after this TS can be retieved in a 'streaming' fashion.
+      } */
 
 // Semantic version number.
 message Version {
   // Major version (increasing may break APIs)
-  int32 major = 1;
+  uint32 major = 1;
   // Minor version (increased for new features)
-  int32 minor = 2;
+  uint32 minor = 2;
   // Patch version (increased for fixes)
-  int32 patch = 3;
+  uint32 patch = 3;
 }
 
-// Options for a get-by-id request
-message IDOptions {
-  // System identifier of the object to fetch.
-  string id = 1;
+// SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret
+message SecretKeyRef {
+  // The name of the secret (in the same namespace as the QdrantCluster CRD instance)
+  // This is a required field
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 253 // Kubernetes secret names have a max length of 253
+    pattern: "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$" // Kubernetes secret name restrictions
+  }];
+  // The key inside the secret
+  // This is a required field
+  string key = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1024
+  }];
 }
 
-// Response for single boolean.
-message YesOrNo {
-  // The actual result of the single boolean
-  bool result = 1;
+// KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
+// The message represents an object for Kubernetes.
+message KeyValue {
+  // The key part of a key-value pair
+  string key = 1 [(buf.validate.field).string = {
+    max_len: 63
+    pattern: "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+  }];
+  // The value part of a key-value pair
+  string value = 2 [(buf.validate.field).string = {max_len: 1024}];
 }

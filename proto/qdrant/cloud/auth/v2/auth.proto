@@ -26,7 +26,7 @@ service AuthService {
     // permissions
     option (common.v1.permissions) = "read:api-keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/auth/api-keys"};
+    option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/api-keys"};
   }
 
   // Creates an api-key in the account identified by the given ID.
@@ -37,7 +37,7 @@ service AuthService {
     option (common.v1.permissions) = "write:api-keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/auth/v2/accounts/{api_key.account_id}/auth/api-keys"
+      post: "/api/auth/v2/accounts/{api_key.account_id}/api-keys"
       body: "*"
     };
   }
@@ -51,7 +51,7 @@ service AuthService {
     // permissions
     option (common.v1.permissions) = "delete:api-keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/auth/api-keys/{api_key_id}"};
+    option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}"};
   }
 }
 

@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/auth/v2/accounts/{accountId}/auth/api-keys": {
+    "/api/auth/v2/accounts/{accountId}/api-keys": {
       "get": {
         "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api-keys",
         "operationId": "AuthService_ListApiKeys",
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "/api/auth/v2/accounts/{accountId}/auth/api-keys/{apiKeyId}": {
+    "/api/auth/v2/accounts/{accountId}/api-keys/{apiKeyId}": {
       "delete": {
         "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api-keys",
         "operationId": "AuthService_DeleteApiKey",
@@ -87,7 +87,7 @@
         ]
       }
     },
-    "/api/auth/v2/accounts/{apiKey.accountId}/auth/api-keys": {
+    "/api/auth/v2/accounts/{apiKey.accountId}/api-keys": {
       "post": {
         "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api-keys",
         "operationId": "AuthService_CreateApiKey",
@@ -231,17 +231,17 @@
       "properties": {
         "major": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Major version (increasing may break APIs)"
         },
         "minor": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Minor version (increased for new features)"
         },
         "patch": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Patch version (increased for fixes)"
         }
       },

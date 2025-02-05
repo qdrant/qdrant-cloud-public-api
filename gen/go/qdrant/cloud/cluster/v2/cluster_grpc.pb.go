@@ -34,7 +34,6 @@ const (
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceClient interface {
-	// TODO: Remove in first iteration?
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
@@ -150,7 +149,6 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceServer interface {
-	// TODO: Remove in first iteration?
 	// Get the current API version of this service.
 	// Required permissions:
 	// - None (authenticated only)
