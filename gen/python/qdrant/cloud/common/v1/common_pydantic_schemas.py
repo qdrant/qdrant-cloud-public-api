@@ -2,36 +2,10 @@
 # gen by protobuf_to_pydantic[v0.3.0.3](https://github.com/so1n/protobuf_to_pydantic)
 # Protobuf Version: 5.29.3 
 # Pydantic Version: 2.10.6 
-from datetime import datetime
-from enum import IntEnum
 from google.protobuf.message import Message  # type: ignore
 from pydantic import BaseModel
 from pydantic import Field
 
-class Order(IntEnum):
-    """
-     TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
- The order of the returned list
-    """
-    ASC = 0
-    DESC = 1
-
-class ListOptions(BaseModel):
-    """
-     Options for a list request.
-    """
-
-# Maximum number of items to return.
-# If not specified, a default number items are returned.
-# Unless specified otherwise, the default number is DefaultPageSize.
-    page_size: int = Field(default=0)
-# Page to start with (defaults to 0).
-    page: int = Field(default=0)
-# Optional field to specify the sorting order.
-    order_by: Order = Field(default=0)
-# Optional timestamp to get the 'diff' as of a certain point.
-# This field can be used to fetch items modified (created/updated/deleted) after this timestamp.
-    since: datetime = Field(default_factory=datetime.now)
 
 class Version(BaseModel):
     """
@@ -45,18 +19,25 @@ class Version(BaseModel):
 # Patch version (increased for fixes)
     patch: int = Field(default=0)
 
-class IDOptions(BaseModel):
+class SecretKeyRef(BaseModel):
     """
-     Options for a get-by-id request
-    """
-
-# System identifier of the object to fetch.
-    id: str = Field(default="")
-
-class YesOrNo(BaseModel):
-    """
-     Response for single boolean.
+     SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret
     """
 
-# The actual result of the single boolean
-    result: bool = Field(default=False)
+# The name of the secret (in the same namespace as the QdrantCluster CRD instance)
+# This is a required field
+    name: str = Field(default="")
+# The key inside the secret
+# This is a required field
+    key: str = Field(default="")
+
+class KeyValue(BaseModel):
+    """
+     KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
+ The message represents an object for Kubernetes.
+    """
+
+# The key part of a key-value pair
+    key: str = Field(default="")
+# The value part of a key-value pair
+    value: str = Field(default="")

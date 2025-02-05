@@ -22,11 +22,11 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
-from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xaa\x01\n\x0bListOptions\x12\x1b\n\tpage_size\x18\x01 \x01(\x05R\x08pageSize\x12\x12\n\x04page\x18\x02 \x01(\x03R\x04page\x12\x38\n\x08order_by\x18\x03 \x01(\x0e\x32\x1d.qdrant.cloud.common.v1.OrderR\x07orderBy\x12\x30\n\x05since\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x05since\"K\n\x07Version\x12\x14\n\x05major\x18\x01 \x01(\x05R\x05major\x12\x14\n\x05minor\x18\x02 \x01(\x05R\x05minor\x12\x14\n\x05patch\x18\x03 \x01(\x05R\x05patch\"\x1b\n\tIDOptions\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\"!\n\x07YesOrNo\x12\x16\n\x06result\x18\x01 \x01(\x08R\x06result*\x1a\n\x05Order\x12\x07\n\x03\x41SC\x10\x00\x12\x08\n\x04\x44\x45SC\x10\x01:B\n\x0bpermissions\x12\x1e.google.protobuf.MethodOptions\x18\xd1\x86\x03 \x03(\tR\x0bpermissionsB\xf6\x01\n\x1a\x63om.qdrant.cloud.common.v1B\x0b\x43ommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"K\n\x07Version\x12\x14\n\x05major\x18\x01 \x01(\rR\x05major\x12\x14\n\x05minor\x18\x02 \x01(\rR\x05minor\x12\x14\n\x05patch\x18\x03 \x01(\rR\x05patch\"m\n\x0cSecretKeyRef\x12?\n\x04name\x18\x01 \x01(\tB+\xbaH(r&\x10\x01\x18\xfd\x01\x32\x1f^[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\x04name\x12\x1c\n\x03key\x18\x02 \x01(\tB\n\xbaH\x07r\x05\x10\x01\x18\x80\x08R\x03key\"\xb3\x01\n\x08KeyValue\x12\x86\x01\n\x03key\x18\x01 \x01(\tBt\xbaHqro\x18?2k^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$R\x03key\x12\x1e\n\x05value\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\x18\x80\x08R\x05value:B\n\x0bpermissions\x12\x1e.google.protobuf.MethodOptions\x18\xd1\x86\x03 \x03(\tR\x0bpermissionsB\xf6\x01\n\x1a\x63om.qdrant.cloud.common.v1B\x0b\x43ommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,14 +34,18 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'qdrant.cloud.common.v1.comm
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\032com.qdrant.cloud.common.v1B\013CommonProtoP\001ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\242\002\003QCC\252\002\026Qdrant.Cloud.Common.V1\312\002\026Qdrant\\Cloud\\Common\\V1\342\002\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\352\002\031Qdrant::Cloud::Common::V1'
-  _globals['_ORDER']._serialized_start=444
-  _globals['_ORDER']._serialized_end=470
-  _globals['_LISTOPTIONS']._serialized_start=131
-  _globals['_LISTOPTIONS']._serialized_end=301
-  _globals['_VERSION']._serialized_start=303
-  _globals['_VERSION']._serialized_end=378
-  _globals['_IDOPTIONS']._serialized_start=380
-  _globals['_IDOPTIONS']._serialized_end=407
-  _globals['_YESORNO']._serialized_start=409
-  _globals['_YESORNO']._serialized_end=442
+  _globals['_SECRETKEYREF'].fields_by_name['name']._loaded_options = None
+  _globals['_SECRETKEYREF'].fields_by_name['name']._serialized_options = b'\272H(r&\020\001\030\375\0012\037^[a-z0-9]([-a-z0-9]*[a-z0-9])?$'
+  _globals['_SECRETKEYREF'].fields_by_name['key']._loaded_options = None
+  _globals['_SECRETKEYREF'].fields_by_name['key']._serialized_options = b'\272H\007r\005\020\001\030\200\010'
+  _globals['_KEYVALUE'].fields_by_name['key']._loaded_options = None
+  _globals['_KEYVALUE'].fields_by_name['key']._serialized_options = b'\272Hqro\030?2k^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$'
+  _globals['_KEYVALUE'].fields_by_name['value']._loaded_options = None
+  _globals['_KEYVALUE'].fields_by_name['value']._serialized_options = b'\272H\005r\003\030\200\010'
+  _globals['_VERSION']._serialized_start=126
+  _globals['_VERSION']._serialized_end=201
+  _globals['_SECRETKEYREF']._serialized_start=203
+  _globals['_SECRETKEYREF']._serialized_end=312
+  _globals['_KEYVALUE']._serialized_start=315
+  _globals['_KEYVALUE']._serialized_end=494
 # @@protoc_insertion_point(module_scope)

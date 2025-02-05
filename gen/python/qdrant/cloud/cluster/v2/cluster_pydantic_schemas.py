@@ -2,6 +2,8 @@
 # gen by protobuf_to_pydantic[v0.3.0.3](https://github.com/so1n/protobuf_to_pydantic)
 # Protobuf Version: 5.29.3 
 # Pydantic Version: 2.10.6 
+from ...common.v1.common_pydantic_schemas import KeyValue
+from ...common.v1.common_pydantic_schemas import SecretKeyRef
 from ...common.v1.common_pydantic_schemas import Version
 from datetime import datetime
 from google.protobuf.message import Message  # type: ignore
@@ -40,67 +42,113 @@ class AdditionalResources(BaseModel):#  Currently not supported, but will be add
  int cpu = 1;
  Additional Memory (expressed in Gib)
  int ram = 2;
+    """
+     AdditionalResources contans the information about additional resources
+    """
+
 # Additional Disk (expressed in Gib)
     disk: int = Field(default=0)
 
-class QdrantConfigurationCollectionVectors(BaseModel):
-    on_disk: bool = Field(default=False)
+class DatabaseConfigurationCollectionVectors(BaseModel):
+    """
+     The default Qdrant database collection vectors configuration
+    """
 
-class QdrantConfigurationCollection(BaseModel):
-    replication_factor: int = Field(default=0)
+# If set, this will create a collection with all vectors immediately stored in memmap storage.
+# This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
+# For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
+# This is an optional field, TODO:? default will be true.
+    on_disk: typing.Optional[bool] = Field(default=False)
+
+class DatabaseConfigurationCollection(BaseModel):
+    """
+     The default Qdrant database collection configuration
+    """
+
+# Number of replicas of each shard that network tries to maintain
+# This is an optional, the default is 1
+    replication_factor: typing.Optional[int] = Field(default=0)
+# How many replicas should apply the operation for us to consider it successful
+# This is an optional, the default is 1
     write_consistency_factor: int = Field(default=0)
-    vectors: QdrantConfigurationCollectionVectors = Field()
+# The default parameters for vectors.
+    vectors: DatabaseConfigurationCollectionVectors = Field()
 
-class QdrantConfigurationStoragePerformance(BaseModel):
+class DatabaseConfigurationStoragePerformance(BaseModel):
+    """
+     The performance related Qdrant database storage configuration
+    """
+
+# CPU budget, how many CPUs (threads) to allocate for an optimization job.
+# If 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size
+# If negative - subtract this number of CPUs from the available CPUs.
+# If positive - use this exact number of CPUs.
     optimizer_cpu_budget: int = Field(default=0)
+# Enable async scorer which uses io_uring when rescoring.
+# Only supported on Linux, must be enabled in your kernel.
+# See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
     async_scorer: bool = Field(default=False)
 
-class QdrantConfigurationStorage(BaseModel):
-    performance: QdrantConfigurationStoragePerformance = Field()
+class DatabaseConfigurationStorage(BaseModel):
+    """
+     The Qdrant storage configuration
+    """
 
-class SecretKeyRef(BaseModel):
-    key: str = Field(default="")
-    name: str = Field(default="")
+# The performance related Qdrant database storage configuration
+    performance: DatabaseConfigurationStoragePerformance = Field()
 
-class QdrantConfigApiKey(BaseModel):
-    secret_key_ref: SecretKeyRef = Field()
+class DatabaseConfigurationService(BaseModel):
+    """
+     The Qdrant database service configuration
+    """
 
-class QdrantConfigurationService(BaseModel):
-    api_key: QdrantConfigApiKey = Field()
-    read_only_api_key: QdrantConfigApiKey = Field()
+# Set an api-key.
+# If set, all requests must include a header with the api-key.
+# example header: `api-key: <API-KEY>`
+    api_key: typing.Optional[SecretKeyRef] = Field(default=None)
+# Set an api-key for read-only operations.
+# If set, all requests must include a header with the api-key.
+# example header: `api-key: <API-KEY>`
+    read_only_api_key: typing.Optional[SecretKeyRef] = Field(default=None)
+# Enable JWT Role Based Access Control (RBAC).
+# If enabled, you can generate JWT tokens with fine-grained rules for access control.
+# Use generated token instead of API key.
     jwt_rbac: bool = Field(default=False)
+# Enable HTTPS for the REST and gRPC API
     enable_tls: bool = Field(default=False)
 
-class QdrantConfigSecretKey(BaseModel):
-    secret_key_ref: SecretKeyRef = Field()
+class DatabaseConfigurationTls(BaseModel):
+    """
+     DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint
+    """
 
-class QdrantConfigurationTls(BaseModel):
-    cert: QdrantConfigSecretKey = Field()
-    key: QdrantConfigSecretKey = Field()
+# Secret to use for the certificate
+    cert: SecretKeyRef = Field()
+# Secret to use for the private key
+    key: SecretKeyRef = Field()
 
 class DatabaseConfiguration(BaseModel):
     """
-    TODO: Messages below needs comments and validation!
- Configuration to setup a qdrant database in a hybrid cloud.
+     Configuration to setup a Qdrant database in a hybrid cloud.
     """
 
-    collection: QdrantConfigurationCollection = Field()
-    storage: QdrantConfigurationStorage = Field()
-    service: QdrantConfigurationService = Field()
-    log_level: str = Field(default="")
-    tls: QdrantConfigurationTls = Field()
-
-class KeyValue(BaseModel):
-    """
-     KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
- The message represents an object for Kubernetes.
- TODO: Move to common.v1
-    """
-
-# The key part of a key-value pair
-    key: str = Field(default="")
-# The value part of a key-value pair
-    value: str = Field(default="")
+# The default Qdrant database collection configuration
+# This is an optional field
+    collection: typing.Optional[DatabaseConfigurationCollection] = Field(default=None)
+# The default Qdrant database storage configuration
+# This is an optional field
+    storage: typing.Optional[DatabaseConfigurationStorage] = Field(default=None)
+# The Qdrant database service configuration
+# This is an optional field
+    service: typing.Optional[DatabaseConfigurationService] = Field(default=None)
+# The log level for the database
+# This is an optional field, default is Info
+# The allowed values are: Trace, Debug, Info, Warn, Error, Off
+# Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
+    log_level: typing.Optional[str] = Field(default="")
+# The Qdrant database TLS configuration
+# This is an optional field, if not set an unsecure connection is provided
+    tls: typing.Optional[DatabaseConfigurationTls] = Field(default=None)
 
 class Toleration(BaseModel):
     """

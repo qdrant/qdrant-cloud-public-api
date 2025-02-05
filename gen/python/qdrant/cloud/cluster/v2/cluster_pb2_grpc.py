@@ -57,8 +57,7 @@ class ClusterServiceServicer(object):
     """
 
     def GetAPIVersion(self, request, context):
-        """TODO: Remove in first iteration?
-        Get the current API version of this service.
+        """Get the current API version of this service.
         Required permissions:
         - None (authenticated only)
         """
