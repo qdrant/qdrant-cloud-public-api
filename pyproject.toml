@@ -7,3 +7,24 @@ requires-python = ">=3.12"
 dependencies = [
     "protobuf-to-pydantic[all]>=0.3.0.3",
 ]
+
+[tool.uv.workspace]
+members = ["gen/python"]
+
+
+# This part is required for the sdist _packaging_ process, to select the right folders.
+[tool.hatch.build.targets.sdist]
+only-include = [
+  'gen',
+]
+
+# This part is required for the sdist _installation_ process to accept a different top-level
+# package from the 'project.name'.
+[tool.hatch.build.targets.wheel]
+packages = [
+  'gen',
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
