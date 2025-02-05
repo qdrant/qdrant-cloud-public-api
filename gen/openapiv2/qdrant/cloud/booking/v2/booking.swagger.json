@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/booking/v2/accounts/{accountId}/booking/packages": {
+    "/api/booking/v2/accounts/{accountId}/packages": {
       "get": {
         "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_ListPackages",
@@ -73,7 +73,7 @@
         ]
       }
     },
-    "/api/booking/v2/accounts/{accountId}/booking/packages/{id}": {
+    "/api/booking/v2/accounts/{accountId}/packages/{id}": {
       "get": {
         "summary": "Get the package identified by the request identifier\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_GetPackage",
