@@ -5,6 +5,7 @@ modules:
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/bufbuild/protovalidate
+  - buf.build/so1n/protobuf-to-pydantic
 lint:
   use:
     - STANDARD
