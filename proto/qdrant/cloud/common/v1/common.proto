@@ -75,7 +75,6 @@ message SecretKeyRef {
 
 // KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
 // The message represents an object for Kubernetes.
-// TODO: Move to common.v1
 message KeyValue {
   // The key part of a key-value pair
   string key = 1 [(buf.validate.field).string = {

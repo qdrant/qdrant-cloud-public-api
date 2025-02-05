@@ -325,9 +325,19 @@ message DatabaseConfiguration {
   // This is an optional field
   optional DatabaseConfigurationService service = 3;
   // The log level for the database
-  // This is an optional field
-  // TODO: Validation for the allowed values
-  optional string log_level = 4;
+  // This is an optional field, default is Info
+  // The allowed values are: Trace, Debug, Info, Warn, Error, Off
+  // Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
+  optional string log_level = 4 [(buf.validate.field).string = {
+    in: [
+      "Trace",
+      "Debug",
+      "Info",
+      "Warn",
+      "Error"
+      "Off"
+    ]
+  }];
   // The Qdrant database TLS configuration
   // This is an optional field, if not set an unsecure connection is provided
   optional DatabaseConfigurationTls tls = 5;

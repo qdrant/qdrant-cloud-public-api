@@ -266,7 +266,7 @@
     },
     "/api/cluster/v2/api-version": {
       "get": {
-        "summary": "TODO: Remove in first iteration?\nGet the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Get the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "ClusterService_GetAPIVersion",
         "responses": {
           "200": {
@@ -417,7 +417,7 @@
           "title": "The value part of a key-value pair"
         }
       },
-      "title": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes.\nTODO: Move to common.v1"
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
     },
     "v1SecretKeyRef": {
       "type": "object",
@@ -438,17 +438,17 @@
       "properties": {
         "major": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Major version (increasing may break APIs)"
         },
         "minor": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Minor version (increased for new features)"
         },
         "patch": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Patch version (increased for fixes)"
         }
       },
@@ -710,14 +710,14 @@
         },
         "logLevel": {
           "type": "string",
-          "title": "The log level for the database\nThis is an optional field\nTODO: Validation for the allowed values"
+          "title": "The log level for the database\nThis is an optional field, default is Info\nThe allowed values are: Trace, Debug, Info, Warn, Error, Off\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
         },
         "tls": {
           "$ref": "#/definitions/v2DatabaseConfigurationTls",
           "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
         }
       },
-      "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a Qdrant database in a hybrid cloud."
+      "description": "Configuration to setup a Qdrant database in a hybrid cloud."
     },
     "v2DatabaseConfigurationCollection": {
       "type": "object",
