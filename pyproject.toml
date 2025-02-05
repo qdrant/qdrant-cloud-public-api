@@ -8,10 +8,6 @@ dependencies = [
     "protobuf-to-pydantic[all]>=0.3.0.3",
 ]
 
-[tool.uv.workspace]
-members = ["gen/python"]
-
-
 # This part is required for the sdist _packaging_ process, to select the right folders.
 [tool.hatch.build.targets.sdist]
 only-include = [
