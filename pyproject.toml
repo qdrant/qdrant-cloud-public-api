@@ -1,0 +1,9 @@
+[project]
+name = "qdrant-cloud-public-api"
+version = "0.1.0"
+description = "Qdrant cloud public API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "protobuf-to-pydantic[all]>=0.3.0.3",
+]
