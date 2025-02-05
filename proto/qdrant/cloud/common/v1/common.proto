@@ -14,10 +14,13 @@ extend google.protobuf.MethodOptions {
 // TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
 // The order of the returned list
 enum Order {
+  // The order is not specified: TODO: Make this a validated string, 2 options, default to ascending
+  // Added this field to make the linter happy.
+  ORDER_UNSPECIFIED = 0;
   // Order ascending
-  ASC = 0;
+  ORDER_ASC = 1;
   // Order descending
-  DESC = 1;
+  ORDER_DESC = 2;
 }
 
 // Options for a list request.
@@ -50,16 +53,4 @@ message Version {
   int32 minor = 2;
   // Patch version (increased for fixes)
   int32 patch = 3;
-}
-
-// Options for a get-by-id request
-message IDOptions {
-  // System identifier of the object to fetch.
-  string id = 1;
-}
-
-// Response for single boolean.
-message YesOrNo {
-  // The actual result of the single boolean
-  bool result = 1;
 }
