@@ -266,7 +266,7 @@
     },
     "/api/cluster/v2/api-version": {
       "get": {
-        "summary": "TODO: Remove in first iteration?\nGet the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Get the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "ClusterService_GetAPIVersion",
         "responses": {
           "200": {
@@ -405,22 +405,50 @@
         }
       }
     },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
+    "v1SecretKeyRef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the secret (in the same namespace as the QdrantCluster CRD instance)\nThis is a required field"
+        },
+        "key": {
+          "type": "string",
+          "title": "The key inside the secret\nThis is a required field"
+        }
+      },
+      "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
     "v1Version": {
       "type": "object",
       "properties": {
         "major": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Major version (increasing may break APIs)"
         },
         "minor": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Minor version (increased for new features)"
         },
         "patch": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Patch version (increased for fixes)"
         }
       },
@@ -510,7 +538,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2KeyValue"
+            "$ref": "#/definitions/v1KeyValue"
           },
           "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
@@ -526,7 +554,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2KeyValue"
+            "$ref": "#/definitions/v1KeyValue"
           },
           "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
         },
@@ -682,14 +710,14 @@
         },
         "logLevel": {
           "type": "string",
-          "title": "The log level for the database\nThis is an optional field\nTODO: Validation for the allowed values"
+          "title": "The log level for the database\nThis is an optional field, default is Info\nThe allowed values are: Trace, Debug, Info, Warn, Error, Off\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
         },
         "tls": {
           "$ref": "#/definitions/v2DatabaseConfigurationTls",
           "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
         }
       },
-      "description": "TODO: Messages below needs comments and validation!\nConfiguration to setup a Qdrant database in a hybrid cloud."
+      "description": "Configuration to setup a Qdrant database in a hybrid cloud."
     },
     "v2DatabaseConfigurationCollection": {
       "type": "object",
@@ -725,11 +753,11 @@
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/v2SecretKeyRef",
+          "$ref": "#/definitions/v1SecretKeyRef",
           "title": "Set an api-key.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
         },
         "readOnlyApiKey": {
-          "$ref": "#/definitions/v2SecretKeyRef",
+          "$ref": "#/definitions/v1SecretKeyRef",
           "title": "Set an api-key for read-only operations.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
         },
         "jwtRbac": {
@@ -772,11 +800,11 @@
       "type": "object",
       "properties": {
         "cert": {
-          "$ref": "#/definitions/v2SecretKeyRef",
+          "$ref": "#/definitions/v1SecretKeyRef",
           "title": "Secret to use for the certificate"
         },
         "key": {
-          "$ref": "#/definitions/v2SecretKeyRef",
+          "$ref": "#/definitions/v1SecretKeyRef",
           "title": "Secret to use for the private key"
         }
       },
@@ -796,20 +824,6 @@
         }
       },
       "title": "GetClusterResponse is the response from the GetCluster function"
-    },
-    "v2KeyValue": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "title": "The key part of a key-value pair"
-        },
-        "value": {
-          "type": "string",
-          "title": "The value part of a key-value pair"
-        }
-      },
-      "title": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes.\nTODO: Move to common.v1"
     },
     "v2ListClustersResponse": {
       "type": "object",
@@ -861,20 +875,6 @@
         }
       },
       "title": "QdrantRelease represent a single Qdrant release"
-    },
-    "v2SecretKeyRef": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "The name of the secret (in the same namespace as the QdrantCluster CRD instance)\nThis is a required field"
-        },
-        "key": {
-          "type": "string",
-          "title": "The key inside the secret\nThis is a required field"
-        }
-      },
-      "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
     },
     "v2Toleration": {
       "type": "object",

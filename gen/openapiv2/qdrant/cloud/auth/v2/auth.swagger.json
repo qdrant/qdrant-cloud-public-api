@@ -231,17 +231,17 @@
       "properties": {
         "major": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Major version (increasing may break APIs)"
         },
         "minor": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Minor version (increased for new features)"
         },
         "patch": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Patch version (increased for fixes)"
         }
       },

@@ -9,7 +9,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
-  // TODO: Remove in first iteration?
   // Get the current API version of this service.
   // Required permissions:
   // - None (authenticated only)
@@ -279,13 +278,13 @@ message ClusterConfiguration {
 
   // The node selector for this cluster in a hybrid cloud.
   // It is ignored for Managed Cloud clusters. This is an optional field
-  repeated KeyValue node_selector = 8 [(buf.validate.field).repeated = {max_items: 10}];
+  repeated common.v1.KeyValue node_selector = 8 [(buf.validate.field).repeated = {max_items: 10}];
   // List of tolerations for this cluster in a hybrid cloud.
   // It is ignored for Managed Cloud clusters. This is an optional field
   repeated Toleration tolerations = 9 [(buf.validate.field).repeated = {max_items: 10}];
   // List of annotations for this cluster in a hybrid cloud.
   // It is ignored for Managed Cloud clusters. This is an optional field
-  repeated KeyValue annotations = 10 [(buf.validate.field).repeated = {max_items: 10}];
+  repeated common.v1.KeyValue annotations = 10 [(buf.validate.field).repeated = {max_items: 10}];
   // List of allowed IP source ranges for this cluster. Field is used for both
   // hybrid cloud and Managed Cloud clusters. This is an optional field
   // TODO: Are both IPv4 and IPv6 supported? --> IPv4 only for now?
@@ -314,7 +313,6 @@ message ClusterConfiguration {
   }];
 }
 
-//TODO: Messages below needs comments and validation!
 // Configuration to setup a Qdrant database in a hybrid cloud.
 message DatabaseConfiguration {
   // The default Qdrant database collection configuration
@@ -327,9 +325,19 @@ message DatabaseConfiguration {
   // This is an optional field
   optional DatabaseConfigurationService service = 3;
   // The log level for the database
-  // This is an optional field
-  // TODO: Validation for the allowed values
-  optional string log_level = 4;
+  // This is an optional field, default is Info
+  // The allowed values are: Trace, Debug, Info, Warn, Error, Off
+  // Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
+  optional string log_level = 4 [(buf.validate.field).string = {
+    in: [
+      "Trace",
+      "Debug",
+      "Info",
+      "Warn",
+      "Error"
+      "Off"
+    ]
+  }];
   // The Qdrant database TLS configuration
   // This is an optional field, if not set an unsecure connection is provided
   optional DatabaseConfigurationTls tls = 5;
@@ -380,11 +388,11 @@ message DatabaseConfigurationService {
   // Set an api-key.
   // If set, all requests must include a header with the api-key.
   // example header: `api-key: <API-KEY>`
-  optional SecretKeyRef api_key = 1;
+  optional common.v1.SecretKeyRef api_key = 1;
   // Set an api-key for read-only operations.
   // If set, all requests must include a header with the api-key.
   // example header: `api-key: <API-KEY>`
-  optional SecretKeyRef read_only_api_key = 2;
+  optional common.v1.SecretKeyRef read_only_api_key = 2;
   // Enable JWT Role Based Access Control (RBAC).
   // If enabled, you can generate JWT tokens with fine-grained rules for access control.
   // Use generated token instead of API key.
@@ -396,32 +404,9 @@ message DatabaseConfigurationService {
 // DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint
 message DatabaseConfigurationTls {
   // Secret to use for the certificate
-  SecretKeyRef cert = 1;
+  common.v1.SecretKeyRef cert = 1;
   // Secret to use for the private key
-  SecretKeyRef key = 2;
-}
-
-// SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret
-message SecretKeyRef {
-  // The name of the secret (in the same namespace as the QdrantCluster CRD instance)
-  // This is a required field
-  string name = 1;
-  // The key inside the secret
-  // This is a required field
-  string key = 2;
-}
-
-// KeyValue is a key-value tuple (used in e.g. node selectors / annotations)
-// The message represents an object for Kubernetes.
-// TODO: Move to common.v1
-message KeyValue {
-  // The key part of a key-value pair
-  string key = 1 [(buf.validate.field).string = {
-    max_len: 63
-    pattern: "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
-  }];
-  // The value part of a key-value pair
-  string value = 2 [(buf.validate.field).string = {max_len: 1024}];
+  common.v1.SecretKeyRef key = 2;
 }
 
 // AdditionalResources contans the information about additional resources

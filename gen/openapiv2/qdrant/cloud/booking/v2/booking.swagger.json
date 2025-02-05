@@ -180,17 +180,17 @@
       "properties": {
         "major": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Major version (increasing may break APIs)"
         },
         "minor": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Minor version (increased for new features)"
         },
         "patch": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "title": "Patch version (increased for fixes)"
         }
       },
@@ -250,7 +250,7 @@
         "unitIntPricePerHour": {
           "type": "integer",
           "format": "int32",
-          "title": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nTODO: You will be billed by minutes?"
+          "title": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nTODO: You will be billed by minutes? @Mikheil do you know?"
         },
         "status": {
           "type": "string",
