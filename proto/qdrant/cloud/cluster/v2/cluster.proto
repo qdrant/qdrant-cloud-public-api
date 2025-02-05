@@ -4,7 +4,6 @@ package qdrant.cloud.cluster.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
@@ -14,7 +13,7 @@ service ClusterService {
   // Get the current API version of this service.
   // Required permissions:
   // - None (authenticated only)
-  rpc GetAPIVersion(google.protobuf.Empty) returns (qdrant.cloud.common.v1.Version) {
+  rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
@@ -24,7 +23,7 @@ service ClusterService {
   // Fetch all clusters in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
-  rpc ListClusters(ListClustersRequest) returns (ClusterList) {
+  rpc ListClusters(ListClustersRequest) returns (ListClustersResponse) {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
@@ -34,7 +33,7 @@ service ClusterService {
   // Fetch a cluster in the account identified by the given IDs.
   // Required permissions:
   // - read:clusters
-  rpc GetCluster(GetClusterRequest) returns (Cluster) {
+  rpc GetCluster(GetClusterRequest) returns (GetClusterResponse) {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
@@ -44,12 +43,12 @@ service ClusterService {
   // Creates a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
-  rpc CreateCluster(Cluster) returns (Cluster) {
+  rpc CreateCluster(CreateClusterRequest) returns (CreateClusterResponse) {
     // permissions
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/cluster/v2/accounts/{account_id}/clusters"
+      post: "/api/cluster/v2/accounts/{cluster.account_id}/clusters"
       body: "*"
     };
   }
@@ -57,12 +56,12 @@ service ClusterService {
   // Update a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
-  rpc UpdateCluster(Cluster) returns (Cluster) {
+  rpc UpdateCluster(UpdateClusterRequest) returns (UpdateClusterResponse) {
     // permissions
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      patch: "/api/cluster/v2/accounts/{account_id}/clusters/{id}"
+      patch: "/api/cluster/v2/accounts/{cluster.account_id}/clusters/{cluster.id}"
       body: "*"
     };
   }
@@ -70,7 +69,7 @@ service ClusterService {
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
   // - delete:clusters
-  rpc DeleteCluster(DeleteClusterRequest) returns (google.protobuf.Empty) {
+  rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {
     // permissions
     option (common.v1.permissions) = "delete:clusters";
     // gRPC Gateway REST call
@@ -83,12 +82,23 @@ service ClusterService {
   // Optional a cluster ID can be provided, the list will return the options to update to only.
   // Required permissions:
   // - read:clusters
-  rpc ListQdrantReleases(ListQdrantReleasesRequest) returns (QdrantReleaseList) {
+  rpc ListQdrantReleases(ListQdrantReleasesRequest) returns (ListQdrantReleasesResponse) {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/releases"};
   }
+}
+
+// GetAPIVersionRequest is the request for the GetAPIVersion function
+message GetAPIVersionRequest {
+  // Empty
+}
+
+// GetAPIVersionResponse is the response from the GetAPIVersion function
+message GetAPIVersionResponse {
+  // The actual version
+  common.v1.Version version = 1;
 }
 
 // ListClustersRequest is the request for the ListClusters function
@@ -102,6 +112,13 @@ message ListClustersRequest {
   // TODO: ListOptions
 }
 
+// ListClustersResponse is the response from the ListClusters function
+message ListClustersResponse {
+  // The actual clusters in this list
+  repeated Cluster items = 1;
+  // TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
+}
+
 // GetClusterRequest is the request for the GetCluster function
 message GetClusterRequest {
   // The identifier of the account (in Guid format).
@@ -111,6 +128,36 @@ message GetClusterRequest {
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetClusterResponse is the response from the GetCluster function
+message GetClusterResponse {
+  // The actual cluster
+  Cluster cluster = 1;
+}
+
+// CreateClusterRequest is the request for the CreateCluster function
+message CreateClusterRequest {
+  // The actual cluster
+  Cluster cluster = 1;
+}
+
+// CreateClusterResponse is the response from the CreateCluster function
+message CreateClusterResponse {
+  // The actual cluster
+  Cluster cluster = 1;
+}
+
+// UpdateClusterRequest is the request for the UpdateCluster function
+message UpdateClusterRequest {
+  // The actual cluster
+  Cluster cluster = 1;
+}
+
+// UpdateClusterResponse is the response from the UpdateCluster function
+message UpdateClusterResponse {
+  // The actual cluster
+  Cluster cluster = 1;
 }
 
 // DeleteClusterRequest is the request for the DeleteCluster function
@@ -126,11 +173,27 @@ message DeleteClusterRequest {
   optional bool delete_backups = 3;
 }
 
-// List of Clusters.
-message ClusterList {
-  // The actual clusters in this list
-  repeated Cluster items = 1;
-  // TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
+// DeleteClusterResponse is the response from the DeleteCluster function
+message DeleteClusterResponse {
+  // Empty
+}
+
+// ListQdrantReleasesRequest is the request for the ListQdrantReleases function
+message ListQdrantReleasesRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
+  // The identifier for the cluster (in Guid format).
+  // This cluster should be part of the provided account.
+  // This is an optional field.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListQdrantReleasesResponse is the response from the ListQdrantReleases function
+message ListQdrantReleasesResponse {
+  // The actual Qdrant releases in this list
+  repeated QdrantRelease items = 1;
 }
 
 // A Cluster represents one cluster of a Qdrant database.
@@ -425,24 +488,6 @@ message ClusterNodeResources {
   double reserved = 4;
   // The available is the total (base+complimentary+additional) - reserved
   double available = 5;
-}
-
-// ListQdrantReleasesRequest is the request for the ListQdrantReleases function
-message ListQdrantReleasesRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
-  // The identifier for the cluster (in Guid format).
-  // This cluster should be part of the provided account.
-  // This is an optional field.
-  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-}
-
-// List of QdrantReleases
-message QdrantReleaseList {
-  // The actual Qdrant releases in this list
-  repeated QdrantRelease items = 1;
 }
 
 // QdrantRelease represent a single Qdrant release
