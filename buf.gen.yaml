@@ -30,6 +30,10 @@ plugins:
   - remote: buf.build/protocolbuffers/python:v29.3
     out: gen/python
 
+  # Generate Python type hints
+  - remote: buf.build/protocolbuffers/pyi:v29.3
+    out: gen/python
+
   - local: protoc-gen-protobuf-to-pydantic
     opt:
       - config_path=./plugin_configurations/schemas_plugin_config.py
