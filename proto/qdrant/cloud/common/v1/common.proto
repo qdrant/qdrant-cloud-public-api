@@ -5,17 +5,17 @@ package qdrant.cloud.common.v1;
 import "buf/validate/validate.proto";
 import "google/protobuf/descriptor.proto";
 
-// The extention for adding permissions to the system
+// The extension for adding permissions to the system
 extend google.protobuf.MethodOptions {
   // A list of permissions which ALL need to be met by the current user.
   repeated string permissions = 50001;
 }
 
-// The extention for adding an expression where to find the account ID in a message
-// If the extention is missing 'account_id' will be used.
+// The extension for adding an expression where to find the account ID in a message
+// If the extension is missing 'account_id' will be used.
 extend google.protobuf.MethodOptions {
   // The expression to find the account ID field, which should be a string field.
-  // It's allows to nest fields with a point, like 'cluster.account_id' or 'account.id'
+  // It is allowed to nest fields with a point, like 'cluster.account_id' or 'account.id'
   // If the expression is set to an empty string, no account ID will be used.
   string account_id_expression = 50002;
 }
