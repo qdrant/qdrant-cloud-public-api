@@ -29,7 +29,7 @@ deps: ## Install the required dependencies to use this project.
 	HOMEBREW_NO_AUTO_UPDATE=1 brew install \
 		bufbuild/buf/buf
 	curl -LsSf https://astral.sh/uv/install.sh | sh
-	#uv sync
+	uv sync
 
 
 .PHONY: buf/deps
