@@ -15,7 +15,7 @@ service ClusterService {
   rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (common.v1.permissions) = "";
-    // custom account-id
+    // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/api-version"};
@@ -47,7 +47,7 @@ service ClusterService {
   rpc CreateCluster(CreateClusterRequest) returns (CreateClusterResponse) {
     // permissions
     option (common.v1.permissions) = "write:clusters";
-    // custom account-id
+    // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "cluster.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -62,7 +62,7 @@ service ClusterService {
   rpc UpdateCluster(UpdateClusterRequest) returns (UpdateClusterResponse) {
     // permissions
     option (common.v1.permissions) = "write:clusters";
-    // custom account-id
+    // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "cluster.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {

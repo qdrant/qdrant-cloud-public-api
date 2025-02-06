@@ -15,7 +15,7 @@ service AuthService {
   rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "";
-    // custom account-id
+    // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/auth/v2/api-version"};
@@ -37,7 +37,7 @@ service AuthService {
   rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     // permissions
     option (common.v1.permissions) = "write:api-keys";
-    // custom account-id
+    // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
