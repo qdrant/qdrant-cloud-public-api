@@ -1,11 +1,9 @@
 [project]
-name = "qdrant-cloud-public-api"
+name = "qdrant_cloud_public_api"
 version = "0.1.0"
 description = "Qdrant cloud public API"
 readme = "README.md"
 requires-python = ">=3.12"
-license = {text = "MIT"}
-
 authors = [
     {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
 ]
@@ -19,18 +17,16 @@ dependencies = [
 Homepage = "https://github.com/qdrant/qdrant-cloud-public-api"
 Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
 
-# For sdist packaging
-[tool.hatch.build.targets.sdist]
-only-include = ["gen"]
 
-# For wheel installation
+# For wheel packaging
 [tool.hatch.build.targets.wheel]
-packages = ["gen"]
+# Include only the generated python sources
+include = ["gen/python/qdrant/cloud"]
+# Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
+sources = ["gen/python"]
+
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-# Versioning (Optional)
-[tool.hatch.version]
-source = "vcs"
