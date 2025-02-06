@@ -122,7 +122,7 @@ message ApiKey {
   google.protobuf.Timestamp created_at = 3;
   // A list of cluster IDs
   // Should contain at least a single ID.
-  // After creation, this field cannot be changed. TODO: Changable!
+  // After creation, this field cannot be changed.
   repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
     items: {
       string: {pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}

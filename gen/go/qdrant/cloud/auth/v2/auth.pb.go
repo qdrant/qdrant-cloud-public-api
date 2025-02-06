@@ -402,7 +402,7 @@ type ApiKey struct {
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// A list of cluster IDs
 	// Should contain at least a single ID.
-	// After creation, this field cannot be changed. TODO: Changable!
+	// After creation, this field cannot be changed.
 	ClusterIds []string `protobuf:"bytes,4,rep,name=cluster_ids,json=clusterIds,proto3" json:"cluster_ids,omitempty"`
 	// Prefix for the API key, this represents the first bytes of the token
 	// This is a read-only field and will be available after an api-key is created.

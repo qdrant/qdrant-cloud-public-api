@@ -11,6 +11,14 @@ extend google.protobuf.MethodOptions {
   repeated string permissions = 50001;
 }
 
+// The extention for adding an expression where to find the account ID in a message
+// If the extention is missing 'account_id' will be used.
+extend google.protobuf.MethodOptions {
+  // The expression to find the account ID field, which should be a string field.
+  // It's allows to nest fields with a point, like 'cluster.account_id' or 'account.id'
+  string account_id_expression = 50002;
+}
+
 /* // TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
    //import "google/protobuf/timestamp.proto";
       // The order of the returned list
