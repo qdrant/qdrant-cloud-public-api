@@ -172,7 +172,7 @@
               "items": {
                 "type": "string"
               },
-              "title": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed. TODO: Changable!"
+              "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
             },
             "prefix": {
               "type": "string",
@@ -268,7 +268,7 @@
           "items": {
             "type": "string"
           },
-          "title": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed. TODO: Changable!"
+          "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
         },
         "prefix": {
           "type": "string",
