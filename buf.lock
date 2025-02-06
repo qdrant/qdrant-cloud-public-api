@@ -7,6 +7,3 @@ deps:
   - name: buf.build/googleapis/googleapis
     commit: 83c0f6c19b2f4ea0b0fd84a80e753659
     digest: b5:e9d077ad9d2eaa08a056108a15292a69548880d3a935781c498f2e591e60e531e49e1f5fc1d7356e5f989d3a8540e9885a02df18cb0cecc4ffa439fa4438a09e
-  - name: buf.build/so1n/protobuf-to-pydantic
-    commit: a816ab9aa7724257aa17ce4f2ec93b0d
-    digest: b5:c9bc01b33ddbc61a57da39bbc052c13318f09d652db6d485f9ea683971dc7a37e48d4f05b1b38048e7742f2d57b31e77db8ab11a79e3c83f0ca31111e671f925
