@@ -227,6 +227,7 @@ var (
 	E_Permissions = &file_qdrant_cloud_common_v1_common_proto_extTypes[0]
 	// The expression to find the account ID field, which should be a string field.
 	// It's allows to nest fields with a point, like 'cluster.account_id' or 'account.id'
+	// If the expression is set to an empty string, no account ID will be used.
 	//
 	// optional string account_id_expression = 50002;
 	E_AccountIdExpression = &file_qdrant_cloud_common_v1_common_proto_extTypes[1]

@@ -14,6 +14,8 @@ service BookingService {
   rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom account-id
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v2/api-version"};
   }
