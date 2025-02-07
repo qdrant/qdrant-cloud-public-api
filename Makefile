@@ -27,8 +27,7 @@ clean: ## Clean the directory with the generated language bindings.
 .PHONY: deps
 deps: ## Install the required dependencies to use this project.
 	HOMEBREW_NO_AUTO_UPDATE=1 brew install \
-		bufbuild/buf/buf
-	curl -LsSf https://astral.sh/uv/install.sh | sh
+		bufbuild/buf/buf uv
 	uv sync
 
 
