@@ -20,6 +20,13 @@ extend google.protobuf.MethodOptions {
   string account_id_expression = 50002;
 }
 
+// The extension for allowing a method to be be used without authentication.
+// If the extension is missing the system requires authentication and return a 'permission denied' error if missing.
+extend google.protobuf.MethodOptions {
+  // Set to allow a method to be used without authentication.
+  bool requires_authentication = 50003;
+}
+
 /* // TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
    //import "google/protobuf/timestamp.proto";
       // The order of the returned list
