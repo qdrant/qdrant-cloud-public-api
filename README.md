@@ -42,3 +42,27 @@ import (
 )
 
 ```
+
+### Python projects
+
+First you need to install the repository as a package:
+
+``` sh
+uv add "git+https://github.com/qdrant/qdrant-cloud-public-api"
+```
+
+Then you can import the generated code in your python project. Ex:
+
+```python
+from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
+from qdrant.cloud.booking.v2.booking_pydantic_schemas import ListPackagesRequest
+
+
+def main():
+    print(BookingServiceServicer)
+    print(ListPackagesRequest)
+
+
+if __name__ == "__main__":
+    main()
+```
