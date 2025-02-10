@@ -7,6 +7,10 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 DESCRIPTOR: _descriptor.FileDescriptor
 PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
 permissions: _descriptor.FieldDescriptor
+ACCOUNT_ID_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
+account_id_expression: _descriptor.FieldDescriptor
+REQUIRES_AUTHENTICATION_FIELD_NUMBER: _ClassVar[int]
+requires_authentication: _descriptor.FieldDescriptor
 
 class Version(_message.Message):
     __slots__ = ("major", "minor", "patch")

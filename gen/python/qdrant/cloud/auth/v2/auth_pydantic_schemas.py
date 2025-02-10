@@ -49,7 +49,7 @@ class ApiKey(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
 # A list of cluster IDs
 # Should contain at least a single ID.
-# After creation, this field cannot be changed. TODO: Changable!
+# After creation, this field cannot be changed.
     cluster_ids: typing.List[str] = Field(default_factory=list)
 # Prefix for the API key, this represents the first bytes of the token
 # This is a read-only field and will be available after an api-key is created.
