@@ -36,7 +36,7 @@ plugins:
 
   - local: protoc-gen-protobuf-to-pydantic
     opt:
-      - config_path=./plugin_configurations/schemas_plugin_config.py
+      - config_path=./plugin_configurations/config_for_pydantic_schemas_plugin.py
       - config_worker_dir_path=./
     out: gen/python
 
