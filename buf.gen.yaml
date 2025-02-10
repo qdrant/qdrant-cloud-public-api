@@ -24,14 +24,17 @@ plugins:
 
   # Generates Python client and server stubs
   - remote: buf.build/grpc/python:v1.70.0
+    include_imports: true
     out: gen/python
 
   # Generate base types for Python(message and enum).
   - remote: buf.build/protocolbuffers/python:v29.3
+    include_imports: true
     out: gen/python
 
   # Generate Python type hints
   - remote: buf.build/protocolbuffers/pyi:v29.3
+    include_imports: true
     out: gen/python
 
   - local: protoc-gen-protobuf-to-pydantic
