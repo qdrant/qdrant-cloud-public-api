@@ -221,6 +221,10 @@ message Cluster {
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
 
+  // Timestamp when the cluster was deleted (or is started to be deleting).
+  // This is a read-only field and will be set after DeleteCluster is called.
+  google.protobuf.Timestamp deleted_at = 5;
+
   // TODO2: id, created_at, created_by, last_modified_at, last_modified_by, account_id (deferred discussion)
 
   // Cloud provider where the cluster is hosted.

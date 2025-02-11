@@ -308,6 +308,11 @@
               "type": "string",
               "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
             },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+            },
             "cloudProvider": {
               "type": "string",
               "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
@@ -344,6 +349,11 @@
             "name": {
               "type": "string",
               "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
             },
             "cloudProvider": {
               "type": "string",
@@ -485,6 +495,11 @@
         "name": {
           "type": "string",
           "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
         },
         "cloudProvider": {
           "type": "string",
