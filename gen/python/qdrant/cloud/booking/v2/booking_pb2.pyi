@@ -51,22 +51,22 @@ class GetPackageResponse(_message.Message):
     def __init__(self, package: _Optional[_Union[Package, _Mapping]] = ...) -> None: ...
 
 class Package(_message.Message):
-    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status")
+    __slots__ = ("id", "name", "type", "resource_configurations", "currency", "unit_int_price_per_hour", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
-    RESOURCE_CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
+    RESOURCE_CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     UNIT_INT_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     type: str
-    resource_configuration: _containers.RepeatedCompositeFieldContainer[ResourceConfiguration]
+    resource_configurations: _containers.RepeatedCompositeFieldContainer[ResourceConfiguration]
     currency: str
     unit_int_price_per_hour: int
     status: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Iterable[_Union[ResourceConfiguration, _Mapping]]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configurations: _Optional[_Iterable[_Union[ResourceConfiguration, _Mapping]]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[str] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
     __slots__ = ("amount", "resource_unit", "resource_type")

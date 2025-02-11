@@ -302,6 +302,9 @@ class Cluster(BaseModel):
 # This is a required field.
 # Name can only contain letters, numbers, underscores and dashes
     name: str = Field(default="")
+# Timestamp when the cluster was deleted (or is started to be deleting).
+# This is a read-only field and will be set after DeleteCluster is called.
+    deleted_at: datetime = Field(default_factory=datetime.now)
 # Cloud provider where the cluster is hosted.
 # This is a required field (one of the following: aws, gcp, azure, hybrid).
 # After creation, this field cannot be changed.

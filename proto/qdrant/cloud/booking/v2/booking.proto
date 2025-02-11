@@ -115,7 +115,7 @@ message Package {
   // Specifies if this is a free or paid package.
   string type = 3;
   // A repeated field representing the resource configurations associated with the package.
-  repeated ResourceConfiguration resource_configuration = 4;
+  repeated ResourceConfiguration resource_configurations = 4;
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
   string currency = 5;

@@ -67,7 +67,7 @@ class Package(BaseModel):
 # Specifies if this is a free or paid package.
     type: str = Field(default="")
 # A repeated field representing the resource configurations associated with the package.
-    resource_configuration: typing.List[ResourceConfiguration] = Field(default_factory=list)
+    resource_configurations: typing.List[ResourceConfiguration] = Field(default_factory=list)
 # The currency of the prices.
 # Specifies the currency in which the prices are denominated.
     currency: str = Field(default="")
