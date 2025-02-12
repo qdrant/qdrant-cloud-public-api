@@ -19,9 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_GetAPIVersion_FullMethodName = "/qdrant.cloud.booking.v2.BookingService/GetAPIVersion"
-	BookingService_ListPackages_FullMethodName  = "/qdrant.cloud.booking.v2.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName    = "/qdrant.cloud.booking.v2.BookingService/GetPackage"
+	BookingService_ListPackages_FullMethodName = "/qdrant.cloud.booking.v2.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName   = "/qdrant.cloud.booking.v2.BookingService/GetPackage"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -30,10 +29,6 @@ const (
 //
 // BookingService is the API used to configure the booking settings (like packages objects).
 type BookingServiceClient interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
@@ -50,16 +45,6 @@ type bookingServiceClient struct {
 
 func NewBookingServiceClient(cc grpc.ClientConnInterface) BookingServiceClient {
 	return &bookingServiceClient{cc}
-}
-
-func (c *bookingServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAPIVersionResponse)
-	err := c.cc.Invoke(ctx, BookingService_GetAPIVersion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *bookingServiceClient) ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error) {
@@ -88,10 +73,6 @@ func (c *bookingServiceClient) GetPackage(ctx context.Context, in *GetPackageReq
 //
 // BookingService is the API used to configure the booking settings (like packages objects).
 type BookingServiceServer interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
@@ -110,9 +91,6 @@ type BookingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBookingServiceServer struct{}
 
-func (UnimplementedBookingServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
-}
 func (UnimplementedBookingServiceServer) ListPackages(context.Context, *ListPackagesRequest) (*ListPackagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPackages not implemented")
 }
@@ -138,24 +116,6 @@ func RegisterBookingServiceServer(s grpc.ServiceRegistrar, srv BookingServiceSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BookingService_ServiceDesc, srv)
-}
-
-func _BookingService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAPIVersionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BookingServiceServer).GetAPIVersion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BookingService_GetAPIVersion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookingServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _BookingService_ListPackages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -201,10 +161,6 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.booking.v2.BookingService",
 	HandlerType: (*BookingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetAPIVersion",
-			Handler:    _BookingService_GetAPIVersion_Handler,
-		},
 		{
 			MethodName: "ListPackages",
 			Handler:    _BookingService_ListPackages_Handler,

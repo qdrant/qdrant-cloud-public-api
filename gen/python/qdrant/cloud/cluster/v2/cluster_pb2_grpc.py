@@ -7,6 +7,18 @@ from qdrant.cloud.cluster.v2 import cluster_pb2 as qdrant_dot_cloud_dot_cluster_
 
 class ClusterServiceStub(object):
     """ClusterService is the API used to configure cluster objects.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
+    }
     """
 
     def __init__(self, channel):
@@ -15,11 +27,6 @@ class ClusterServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetAPIVersion = channel.unary_unary(
-                '/qdrant.cloud.cluster.v2.ClusterService/GetAPIVersion',
-                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionResponse.FromString,
-                _registered_method=True)
         self.ListClusters = channel.unary_unary(
                 '/qdrant.cloud.cluster.v2.ClusterService/ListClusters',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClustersRequest.SerializeToString,
@@ -54,16 +61,19 @@ class ClusterServiceStub(object):
 
 class ClusterServiceServicer(object):
     """ClusterService is the API used to configure cluster objects.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
+    }
     """
-
-    def GetAPIVersion(self, request, context):
-        """Get the current API version of this service.
-        Required permissions:
-        - None (authenticated only)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def ListClusters(self, request, context):
         """Fetch all clusters in the account identified by the given ID.
@@ -125,11 +135,6 @@ class ClusterServiceServicer(object):
 
 def add_ClusterServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetAPIVersion': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAPIVersion,
-                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionResponse.SerializeToString,
-            ),
             'ListClusters': grpc.unary_unary_rpc_method_handler(
                     servicer.ListClusters,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClustersRequest.FromString,
@@ -170,34 +175,19 @@ def add_ClusterServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class ClusterService(object):
     """ClusterService is the API used to configure cluster objects.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
+    }
     """
-
-    @staticmethod
-    def GetAPIVersion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.cluster.v2.ClusterService/GetAPIVersion',
-            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.GetAPIVersionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def ListClusters(request,

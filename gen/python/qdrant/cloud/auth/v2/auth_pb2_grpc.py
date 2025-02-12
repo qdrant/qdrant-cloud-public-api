@@ -7,6 +7,18 @@ from qdrant.cloud.auth.v2 import auth_pb2 as qdrant_dot_cloud_dot_auth_dot_v2_do
 
 class AuthServiceStub(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/auth/v2/api-version"};
+    }
     """
 
     def __init__(self, channel):
@@ -15,11 +27,6 @@ class AuthServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetAPIVersion = channel.unary_unary(
-                '/qdrant.cloud.auth.v2.AuthService/GetAPIVersion',
-                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionResponse.FromString,
-                _registered_method=True)
         self.ListApiKeys = channel.unary_unary(
                 '/qdrant.cloud.auth.v2.AuthService/ListApiKeys',
                 request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.SerializeToString,
@@ -39,16 +46,19 @@ class AuthServiceStub(object):
 
 class AuthServiceServicer(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/auth/v2/api-version"};
+    }
     """
-
-    def GetAPIVersion(self, request, context):
-        """Get the current API version of this service.
-        Required permissions:
-        - None (authenticated only)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def ListApiKeys(self, request, context):
         """Fetch all api-keys in the account identified by the given ID.
@@ -82,11 +92,6 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetAPIVersion': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAPIVersion,
-                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionResponse.SerializeToString,
-            ),
             'ListApiKeys': grpc.unary_unary_rpc_method_handler(
                     servicer.ListApiKeys,
                     request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.FromString,
@@ -112,34 +117,19 @@ def add_AuthServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AuthService(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/auth/v2/api-version"};
+    }
     """
-
-    @staticmethod
-    def GetAPIVersion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.auth.v2.AuthService/GetAPIVersion',
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.GetAPIVersionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def ListApiKeys(request,
