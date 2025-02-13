@@ -19,7 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_GetAPIVersion_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/GetAPIVersion"
 	ClusterService_ListClusters_FullMethodName       = "/qdrant.cloud.cluster.v2.ClusterService/ListClusters"
 	ClusterService_GetCluster_FullMethodName         = "/qdrant.cloud.cluster.v2.ClusterService/GetCluster"
 	ClusterService_CreateCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/CreateCluster"
@@ -34,10 +33,6 @@ const (
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceClient interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
@@ -71,16 +66,6 @@ type clusterServiceClient struct {
 
 func NewClusterServiceClient(cc grpc.ClientConnInterface) ClusterServiceClient {
 	return &clusterServiceClient{cc}
-}
-
-func (c *clusterServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAPIVersionResponse)
-	err := c.cc.Invoke(ctx, ClusterService_GetAPIVersion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *clusterServiceClient) ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error) {
@@ -149,10 +134,6 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceServer interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
@@ -188,9 +169,6 @@ type ClusterServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedClusterServiceServer struct{}
 
-func (UnimplementedClusterServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
-}
 func (UnimplementedClusterServiceServer) ListClusters(context.Context, *ListClustersRequest) (*ListClustersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListClusters not implemented")
 }
@@ -228,24 +206,6 @@ func RegisterClusterServiceServer(s grpc.ServiceRegistrar, srv ClusterServiceSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ClusterService_ServiceDesc, srv)
-}
-
-func _ClusterService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAPIVersionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).GetAPIVersion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_GetAPIVersion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ClusterService_ListClusters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -363,10 +323,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.cluster.v2.ClusterService",
 	HandlerType: (*ClusterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetAPIVersion",
-			Handler:    _ClusterService_GetAPIVersion_Handler,
-		},
 		{
 			MethodName: "ListClusters",
 			Handler:    _ClusterService_ListClusters_Handler,

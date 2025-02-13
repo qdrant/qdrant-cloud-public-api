@@ -2,26 +2,12 @@
 # gen by protobuf_to_pydantic[v0.3.0.3](https://github.com/so1n/protobuf_to_pydantic)
 # Protobuf Version: 5.29.3 
 # Pydantic Version: 2.10.6 
-from ...common.v1.common_pydantic_schemas import Version
 from datetime import datetime
 from google.protobuf.message import Message  # type: ignore
 from pydantic import BaseModel
 from pydantic import Field
 import typing
 
-
-class GetAPIVersionRequest(BaseModel):#  Empty
-    """
-     GetAPIVersionRequest is the request for the GetAPIVersion function
-    """
-
-class GetAPIVersionResponse(BaseModel):
-    """
-     GetAPIVersionResponse is the response from the GetAPIVersion function
-    """
-
-# The actual version
-    version: Version = Field()
 
 class ListApiKeysRequest(BaseModel):
     """

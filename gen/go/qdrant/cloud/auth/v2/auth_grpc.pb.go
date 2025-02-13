@@ -19,10 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_GetAPIVersion_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/GetAPIVersion"
-	AuthService_ListApiKeys_FullMethodName   = "/qdrant.cloud.auth.v2.AuthService/ListApiKeys"
-	AuthService_CreateApiKey_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/CreateApiKey"
-	AuthService_DeleteApiKey_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/DeleteApiKey"
+	AuthService_ListApiKeys_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/ListApiKeys"
+	AuthService_CreateApiKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/CreateApiKey"
+	AuthService_DeleteApiKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/DeleteApiKey"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -31,10 +30,6 @@ const (
 //
 // AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
 type AuthServiceClient interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api-keys
@@ -55,16 +50,6 @@ type authServiceClient struct {
 
 func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
-}
-
-func (c *authServiceClient) GetAPIVersion(ctx context.Context, in *GetAPIVersionRequest, opts ...grpc.CallOption) (*GetAPIVersionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAPIVersionResponse)
-	err := c.cc.Invoke(ctx, AuthService_GetAPIVersion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *authServiceClient) ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error) {
@@ -103,10 +88,6 @@ func (c *authServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRe
 //
 // AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
 type AuthServiceServer interface {
-	// Get the current API version of this service.
-	// Required permissions:
-	// - None (authenticated only)
-	GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api-keys
@@ -129,9 +110,6 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) GetAPIVersion(context.Context, *GetAPIVersionRequest) (*GetAPIVersionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAPIVersion not implemented")
-}
 func (UnimplementedAuthServiceServer) ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListApiKeys not implemented")
 }
@@ -160,24 +138,6 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&AuthService_ServiceDesc, srv)
-}
-
-func _AuthService_GetAPIVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAPIVersionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServiceServer).GetAPIVersion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthService_GetAPIVersion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetAPIVersion(ctx, req.(*GetAPIVersionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_ListApiKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -241,10 +201,6 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.auth.v2.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetAPIVersion",
-			Handler:    _AuthService_GetAPIVersion_Handler,
-		},
 		{
 			MethodName: "ListApiKeys",
 			Handler:    _AuthService_ListApiKeys_Handler,

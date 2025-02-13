@@ -35,24 +35,6 @@ var (
 	_ = metadata.Join
 )
 
-func request_AuthService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, client AuthServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq GetAPIVersionRequest
-		metadata runtime.ServerMetadata
-	)
-	msg, err := client.GetAPIVersion(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-}
-
-func local_request_AuthService_GetAPIVersion_0(ctx context.Context, marshaler runtime.Marshaler, server AuthServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq GetAPIVersionRequest
-		metadata runtime.ServerMetadata
-	)
-	msg, err := server.GetAPIVersion(ctx, &protoReq)
-	return msg, metadata, err
-}
-
 func request_AuthService_ListApiKeys_0(ctx context.Context, marshaler runtime.Marshaler, client AuthServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListApiKeysRequest
@@ -189,26 +171,6 @@ func local_request_AuthService_DeleteApiKey_0(ctx context.Context, marshaler run
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterAuthServiceHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterAuthServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AuthServiceServer) error {
-	mux.Handle(http.MethodGet, pattern_AuthService_GetAPIVersion_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/GetAPIVersion", runtime.WithHTTPPathPattern("/api/auth/v2/api-version"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_AuthService_GetAPIVersion_0(annotatedContext, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		forward_AuthService_GetAPIVersion_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-	})
 	mux.Handle(http.MethodGet, pattern_AuthService_ListApiKeys_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -309,23 +271,6 @@ func RegisterAuthServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "AuthServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AuthServiceClient) error {
-	mux.Handle(http.MethodGet, pattern_AuthService_GetAPIVersion_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.auth.v2.AuthService/GetAPIVersion", runtime.WithHTTPPathPattern("/api/auth/v2/api-version"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := request_AuthService_GetAPIVersion_0(annotatedContext, inboundMarshaler, client, req, pathParams)
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		forward_AuthService_GetAPIVersion_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-	})
 	mux.Handle(http.MethodGet, pattern_AuthService_ListApiKeys_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -381,15 +326,13 @@ func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_AuthService_GetAPIVersion_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "auth", "v2", "api-version"}, ""))
-	pattern_AuthService_ListApiKeys_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys"}, ""))
-	pattern_AuthService_CreateApiKey_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "auth", "v2", "accounts", "api_key.account_id", "api-keys"}, ""))
-	pattern_AuthService_DeleteApiKey_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys", "api_key_id"}, ""))
+	pattern_AuthService_ListApiKeys_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys"}, ""))
+	pattern_AuthService_CreateApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "auth", "v2", "accounts", "api_key.account_id", "api-keys"}, ""))
+	pattern_AuthService_DeleteApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "auth", "v2", "accounts", "account_id", "api-keys", "api_key_id"}, ""))
 )
 
 var (
-	forward_AuthService_GetAPIVersion_0 = runtime.ForwardResponseMessage
-	forward_AuthService_ListApiKeys_0   = runtime.ForwardResponseMessage
-	forward_AuthService_CreateApiKey_0  = runtime.ForwardResponseMessage
-	forward_AuthService_DeleteApiKey_0  = runtime.ForwardResponseMessage
+	forward_AuthService_ListApiKeys_0  = runtime.ForwardResponseMessage
+	forward_AuthService_CreateApiKey_0 = runtime.ForwardResponseMessage
+	forward_AuthService_DeleteApiKey_0 = runtime.ForwardResponseMessage
 )

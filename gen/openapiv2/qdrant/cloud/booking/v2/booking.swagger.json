@@ -111,42 +111,9 @@
           "BookingService"
         ]
       }
-    },
-    "/api/booking/v2/api-version": {
-      "get": {
-        "summary": "Get the current API version of this service.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "BookingService_GetAPIVersion",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/cloudbookingv2GetAPIVersionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "BookingService"
-        ]
-      }
     }
   },
   "definitions": {
-    "cloudbookingv2GetAPIVersionResponse": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "$ref": "#/definitions/v1Version",
-          "title": "The actual version"
-        }
-      },
-      "title": "GetAPIVersionResponse is the response from the GetAPIVersion function"
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -174,27 +141,6 @@
           }
         }
       }
-    },
-    "v1Version": {
-      "type": "object",
-      "properties": {
-        "major": {
-          "type": "integer",
-          "format": "int64",
-          "title": "Major version (increasing may break APIs)"
-        },
-        "minor": {
-          "type": "integer",
-          "format": "int64",
-          "title": "Minor version (increased for new features)"
-        },
-        "patch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "Patch version (increased for fixes)"
-        }
-      },
-      "description": "Semantic version number."
     },
     "v2GetPackageResponse": {
       "type": "object",

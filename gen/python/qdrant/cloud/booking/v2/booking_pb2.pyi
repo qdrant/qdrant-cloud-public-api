@@ -8,16 +8,6 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class GetAPIVersionRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class GetAPIVersionResponse(_message.Message):
-    __slots__ = ("version",)
-    VERSION_FIELD_NUMBER: _ClassVar[int]
-    version: _common_pb2.Version
-    def __init__(self, version: _Optional[_Union[_common_pb2.Version, _Mapping]] = ...) -> None: ...
-
 class ListPackagesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider", "cloud_region", "statuses")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

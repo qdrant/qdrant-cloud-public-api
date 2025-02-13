@@ -7,6 +7,18 @@ from qdrant.cloud.booking.v2 import booking_pb2 as qdrant_dot_cloud_dot_booking_
 
 class BookingServiceStub(object):
     """BookingService is the API used to configure the booking settings (like packages objects).
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/booking/v2/api-version"};
+    }
     """
 
     def __init__(self, channel):
@@ -15,11 +27,6 @@ class BookingServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetAPIVersion = channel.unary_unary(
-                '/qdrant.cloud.booking.v2.BookingService/GetAPIVersion',
-                request_serializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionResponse.FromString,
-                _registered_method=True)
         self.ListPackages = channel.unary_unary(
                 '/qdrant.cloud.booking.v2.BookingService/ListPackages',
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.ListPackagesRequest.SerializeToString,
@@ -34,16 +41,19 @@ class BookingServiceStub(object):
 
 class BookingServiceServicer(object):
     """BookingService is the API used to configure the booking settings (like packages objects).
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/booking/v2/api-version"};
+    }
     """
-
-    def GetAPIVersion(self, request, context):
-        """Get the current API version of this service.
-        Required permissions:
-        - None (authenticated only)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def ListPackages(self, request, context):
         """Fetch all packages known by the system, optional filtered.
@@ -66,11 +76,6 @@ class BookingServiceServicer(object):
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetAPIVersion': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAPIVersion,
-                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionResponse.SerializeToString,
-            ),
             'ListPackages': grpc.unary_unary_rpc_method_handler(
                     servicer.ListPackages,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.ListPackagesRequest.FromString,
@@ -91,34 +96,19 @@ def add_BookingServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class BookingService(object):
     """BookingService is the API used to configure the booking settings (like packages objects).
+    TODO:
+    // Get the current API version of this service.
+    // Required permissions:
+    // - None (authenticated only)
+    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/booking/v2/api-version"};
+    }
     """
-
-    @staticmethod
-    def GetAPIVersion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.booking.v2.BookingService/GetAPIVersion',
-            qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_booking_dot_v2_dot_booking__pb2.GetAPIVersionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def ListPackages(request,
