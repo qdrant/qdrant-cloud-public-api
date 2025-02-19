@@ -28,7 +28,7 @@ service AuthService {
   // - read:api-keys
   rpc ListApiKeys(ListApiKeysRequest) returns (ListApiKeysResponse) {
     // permissions
-    option (common.v1.permissions) = "read:api-keys";
+    option (common.v1.permissions) = "read:api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/api-keys"};
   }
@@ -38,7 +38,7 @@ service AuthService {
   // - write:api-keys
   rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     // permissions
-    option (common.v1.permissions) = "write:api-keys";
+    option (common.v1.permissions) = "write:api_keys";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
     // gRPC Gateway REST call
@@ -55,7 +55,7 @@ service AuthService {
   // - delete:api-keys
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
     // permissions
-    option (common.v1.permissions) = "delete:api-keys";
+    option (common.v1.permissions) = "delete:api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}"};
   }
