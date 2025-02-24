@@ -196,7 +196,7 @@
         "unitIntPricePerHour": {
           "type": "integer",
           "format": "int32",
-          "title": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nTODO: You will be billed by minutes? @Mikheil do you know?"
+          "title": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nTODO: You will be billed by minutes?"
         },
         "status": {
           "type": "string",

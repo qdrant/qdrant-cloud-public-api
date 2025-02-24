@@ -116,7 +116,7 @@ message ListClustersRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The optional identifier for hybrid cloud (in Guid format).
-  // If ommited all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
+  // If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
   optional string hybrid_cloud_id = 2 [(buf.validate.field).string = {uuid: true}];
   // TODO: ListOptions
 }
@@ -275,7 +275,7 @@ message ClusterConfiguration {
   }];
 
   // Version of the cluster software.
-  // If ommited the latest version will be used and filled out during create.
+  // If omitted the latest version will be used and filled out during create.
   // Use ListReleases() to determine which versions are allowed to be used.
   // See upgrade guidelines for more info.
   string version = 3 [(buf.validate.field).string = {pattern: "^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$"}];
@@ -423,7 +423,7 @@ message DatabaseConfigurationTls {
   common.v1.SecretKeyRef key = 2;
 }
 
-// AdditionalResources contans the information about additional resources
+// AdditionalResources contains the information about additional resources
 message AdditionalResources {
   // Currently not supported, but will be added in the near future:
   // Additional CPU (expressed in milli vCPU)
@@ -512,7 +512,7 @@ message ClusterNodeResourcesSummary {
   ClusterNodeResources disk = 1;
   // Memory resources
   ClusterNodeResources ram = 2;
-  // CPU resouces
+  // CPU resources
   ClusterNodeResources cpu = 3;
 }
 

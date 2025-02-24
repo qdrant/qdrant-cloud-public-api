@@ -32,7 +32,7 @@ type ListClustersRequest struct {
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The optional identifier for hybrid cloud (in Guid format).
-	// If ommited all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
+	// If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
 	HybridCloudId *string `protobuf:"bytes,2,opt,name=hybrid_cloud_id,json=hybridCloudId,proto3,oneof" json:"hybrid_cloud_id,omitempty"` // TODO: ListOptions
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -764,7 +764,7 @@ type ClusterConfiguration struct {
 	// This should be a number 1...20 [both included].
 	NumberOfNodes uint32 `protobuf:"varint,2,opt,name=number_of_nodes,json=numberOfNodes,proto3" json:"number_of_nodes,omitempty"`
 	// Version of the cluster software.
-	// If ommited the latest version will be used and filled out during create.
+	// If omitted the latest version will be used and filled out during create.
 	// Use ListReleases() to determine which versions are allowed to be used.
 	// See upgrade guidelines for more info.
 	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
@@ -1361,7 +1361,7 @@ func (x *DatabaseConfigurationTls) GetKey() *v1.SecretKeyRef {
 	return nil
 }
 
-// AdditionalResources contans the information about additional resources
+// AdditionalResources contains the information about additional resources
 type AdditionalResources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Additional Disk (expressed in Gib)
@@ -1667,7 +1667,7 @@ type ClusterNodeResourcesSummary struct {
 	Disk *ClusterNodeResources `protobuf:"bytes,1,opt,name=disk,proto3" json:"disk,omitempty"`
 	// Memory resources
 	Ram *ClusterNodeResources `protobuf:"bytes,2,opt,name=ram,proto3" json:"ram,omitempty"`
-	// CPU resouces
+	// CPU resources
 	Cpu           *ClusterNodeResources `protobuf:"bytes,3,opt,name=cpu,proto3" json:"cpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
