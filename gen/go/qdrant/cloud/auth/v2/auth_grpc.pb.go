@@ -32,15 +32,15 @@ const (
 type AuthServiceClient interface {
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
-	// - read:api-keys
+	// - read:api_keys
 	ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error)
 	// Creates an api-key in the account identified by the given ID.
 	// Required permissions:
-	// - write:api-keys
+	// - write:api_keys
 	CreateApiKey(ctx context.Context, in *CreateApiKeyRequest, opts ...grpc.CallOption) (*CreateApiKeyResponse, error)
 	// Deletes an api-key in the account identified by the given ID.
 	// Required permissions:
-	// - delete:api-keys
+	// - delete:api_keys
 	DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error)
 }
 
@@ -90,15 +90,15 @@ func (c *authServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRe
 type AuthServiceServer interface {
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
-	// - read:api-keys
+	// - read:api_keys
 	ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error)
 	// Creates an api-key in the account identified by the given ID.
 	// Required permissions:
-	// - write:api-keys
+	// - write:api_keys
 	CreateApiKey(context.Context, *CreateApiKeyRequest) (*CreateApiKeyResponse, error)
 	// Deletes an api-key in the account identified by the given ID.
 	// Required permissions:
-	// - delete:api-keys
+	// - delete:api_keys
 	DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }

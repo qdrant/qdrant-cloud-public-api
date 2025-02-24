@@ -286,3 +286,98 @@ class QdrantRelease(_message.Message):
     release_notes_url: str
     remarks: str
     def __init__(self, version: _Optional[str] = ..., default: bool = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ...) -> None: ...
+
+class ListClusterJWTsRequest(_message.Message):
+    __slots__ = ("account_id", "cluster_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+
+class ListClusterJWTsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[ClusterJWT]
+    def __init__(self, items: _Optional[_Iterable[_Union[ClusterJWT, _Mapping]]] = ...) -> None: ...
+
+class CreateClusterJWTRequest(_message.Message):
+    __slots__ = ("cluster_jwt",)
+    CLUSTER_JWT_FIELD_NUMBER: _ClassVar[int]
+    cluster_jwt: ClusterJWT
+    def __init__(self, cluster_jwt: _Optional[_Union[ClusterJWT, _Mapping]] = ...) -> None: ...
+
+class CreateClusterJWTResponse(_message.Message):
+    __slots__ = ("cluster_jwt",)
+    CLUSTER_JWT_FIELD_NUMBER: _ClassVar[int]
+    cluster_jwt: ClusterJWT
+    def __init__(self, cluster_jwt: _Optional[_Union[ClusterJWT, _Mapping]] = ...) -> None: ...
+
+class DeleteClusterJWTRequest(_message.Message):
+    __slots__ = ("account_id", "cluster_id", "cluster_jwt_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_JWT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    cluster_jwt_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_jwt_id: _Optional[str] = ...) -> None: ...
+
+class DeleteClusterJWTResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ClusterJWT(_message.Message):
+    __slots__ = ("id", "account_id", "cluster_id", "name", "jwt_payload", "created_at", "created_by_email", "postfix", "token")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    JWT_PAYLOAD_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    POSTFIX_FIELD_NUMBER: _ClassVar[int]
+    TOKEN_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    account_id: str
+    cluster_id: str
+    name: str
+    jwt_payload: ClusterJWTPayload
+    created_at: _timestamp_pb2.Timestamp
+    created_by_email: str
+    postfix: str
+    token: str
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., jwt_payload: _Optional[_Union[ClusterJWTPayload, _Mapping]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., token: _Optional[str] = ...) -> None: ...
+
+class ClusterJWTPayload(_message.Message):
+    __slots__ = ("access", "access_list", "exp")
+    ACCESS_FIELD_NUMBER: _ClassVar[int]
+    ACCESS_LIST_FIELD_NUMBER: _ClassVar[int]
+    EXP_FIELD_NUMBER: _ClassVar[int]
+    access: str
+    access_list: ClusterJWTPayloadAccessList
+    exp: int
+    def __init__(self, access: _Optional[str] = ..., access_list: _Optional[_Union[ClusterJWTPayloadAccessList, _Mapping]] = ..., exp: _Optional[int] = ...) -> None: ...
+
+class ClusterJWTPayloadAccess(_message.Message):
+    __slots__ = ("collection", "access", "payload")
+    class PayloadEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    COLLECTION_FIELD_NUMBER: _ClassVar[int]
+    ACCESS_FIELD_NUMBER: _ClassVar[int]
+    PAYLOAD_FIELD_NUMBER: _ClassVar[int]
+    collection: str
+    access: str
+    payload: _containers.ScalarMap[str, str]
+    def __init__(self, collection: _Optional[str] = ..., access: _Optional[str] = ..., payload: _Optional[_Mapping[str, str]] = ...) -> None: ...
+
+class ClusterJWTPayloadAccessList(_message.Message):
+    __slots__ = ("rules",)
+    RULES_FIELD_NUMBER: _ClassVar[int]
+    rules: _containers.RepeatedCompositeFieldContainer[ClusterJWTPayloadAccess]
+    def __init__(self, rules: _Optional[_Iterable[_Union[ClusterJWTPayloadAccess, _Mapping]]] = ...) -> None: ...

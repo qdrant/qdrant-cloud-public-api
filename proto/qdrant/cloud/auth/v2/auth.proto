@@ -25,7 +25,7 @@ service AuthService {
 
   // Fetch all api-keys in the account identified by the given ID.
   // Required permissions:
-  // - read:api-keys
+  // - read:api_keys
   rpc ListApiKeys(ListApiKeysRequest) returns (ListApiKeysResponse) {
     // permissions
     option (common.v1.permissions) = "read:api_keys";
@@ -35,7 +35,7 @@ service AuthService {
 
   // Creates an api-key in the account identified by the given ID.
   // Required permissions:
-  // - write:api-keys
+  // - write:api_keys
   rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     // permissions
     option (common.v1.permissions) = "write:api_keys";
@@ -52,7 +52,7 @@ service AuthService {
 
   // Deletes an api-key in the account identified by the given ID.
   // Required permissions:
-  // - delete:api-keys
+  // - delete:api_keys
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
     // permissions
     option (common.v1.permissions) = "delete:api_keys";

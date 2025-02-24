@@ -57,6 +57,21 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
                 _registered_method=True)
+        self.ListClusterJWTs = channel.unary_unary(
+                '/qdrant.cloud.cluster.v2.ClusterService/ListClusterJWTs',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsResponse.FromString,
+                _registered_method=True)
+        self.CreateClusterJWT = channel.unary_unary(
+                '/qdrant.cloud.cluster.v2.ClusterService/CreateClusterJWT',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTResponse.FromString,
+                _registered_method=True)
+        self.DeleteClusterJWT = channel.unary_unary(
+                '/qdrant.cloud.cluster.v2.ClusterService/DeleteClusterJWT',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTResponse.FromString,
+                _registered_method=True)
 
 
 class ClusterServiceServicer(object):
@@ -132,6 +147,31 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListClusterJWTs(self, request, context):
+        """Fetch all JWTs for the cluster identified by the given ID.
+        Required permissions:
+        - read:api_keys
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateClusterJWT(self, request, context):
+        """Creates a JWT for the cluster identified by the given ID.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteClusterJWT(self, request, context):
+        """Deletes a JWT for the cluster identified by the given ID.
+        Required permissions:
+        - delete:api_keys
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ClusterServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -164,6 +204,21 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.ListQdrantReleases,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesResponse.SerializeToString,
+            ),
+            'ListClusterJWTs': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListClusterJWTs,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsResponse.SerializeToString,
+            ),
+            'CreateClusterJWT': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateClusterJWT,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTResponse.SerializeToString,
+            ),
+            'DeleteClusterJWT': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteClusterJWT,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -341,6 +396,87 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v2.ClusterService/ListQdrantReleases',
             qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListClusterJWTs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v2.ClusterService/ListClusterJWTs',
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListClusterJWTsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateClusterJWT(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v2.ClusterService/CreateClusterJWT',
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.CreateClusterJWTResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteClusterJWT(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v2.ClusterService/DeleteClusterJWT',
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterJWTResponse.FromString,
             options,
             channel_credentials,
             insecure,

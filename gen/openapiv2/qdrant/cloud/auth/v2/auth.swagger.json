@@ -18,7 +18,7 @@
   "paths": {
     "/api/auth/v2/accounts/{accountId}/api-keys": {
       "get": {
-        "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api-keys",
+        "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api_keys",
         "operationId": "AuthService_ListApiKeys",
         "responses": {
           "200": {
@@ -50,7 +50,7 @@
     },
     "/api/auth/v2/accounts/{accountId}/api-keys/{apiKeyId}": {
       "delete": {
-        "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api-keys",
+        "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api_keys",
         "operationId": "AuthService_DeleteApiKey",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/auth/v2/accounts/{apiKey.accountId}/api-keys": {
       "post": {
-        "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api-keys",
+        "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
         "operationId": "AuthService_CreateApiKey",
         "responses": {
           "200": {
