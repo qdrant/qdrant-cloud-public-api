@@ -158,6 +158,8 @@ class ClusterServiceServicer(object):
 
     def CreateClusterJWT(self, request, context):
         """Creates a JWT for the cluster identified by the given ID.
+        Required permissions:
+        - write:api_keys
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

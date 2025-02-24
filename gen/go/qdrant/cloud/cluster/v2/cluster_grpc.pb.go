@@ -66,6 +66,8 @@ type ClusterServiceClient interface {
 	// - read:api_keys
 	ListClusterJWTs(ctx context.Context, in *ListClusterJWTsRequest, opts ...grpc.CallOption) (*ListClusterJWTsResponse, error)
 	// Creates a JWT for the cluster identified by the given ID.
+	// Required permissions:
+	// - write:api_keys
 	CreateClusterJWT(ctx context.Context, in *CreateClusterJWTRequest, opts ...grpc.CallOption) (*CreateClusterJWTResponse, error)
 	// Deletes a JWT for the cluster identified by the given ID.
 	// Required permissions:
@@ -207,6 +209,8 @@ type ClusterServiceServer interface {
 	// - read:api_keys
 	ListClusterJWTs(context.Context, *ListClusterJWTsRequest) (*ListClusterJWTsResponse, error)
 	// Creates a JWT for the cluster identified by the given ID.
+	// Required permissions:
+	// - write:api_keys
 	CreateClusterJWT(context.Context, *CreateClusterJWTRequest) (*CreateClusterJWTResponse, error)
 	// Deletes a JWT for the cluster identified by the given ID.
 	// Required permissions:

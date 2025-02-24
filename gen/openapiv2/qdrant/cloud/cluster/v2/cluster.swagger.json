@@ -212,7 +212,7 @@
           },
           {
             "name": "clusterJwtId",
-            "description": "The identifier for the JWT (in Guid format).\nThis cluster should belong to the provided account.",
+            "description": "The identifier for the JWT (in Guid format).\nThis JWT should belong to the provided cluster.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -351,7 +351,7 @@
     },
     "/api/cluster/v2/accounts/{clusterJwt.accountId}/clusters/{clusterJwt.clusterId}/jwts": {
       "post": {
-        "summary": "Creates a JWT for the cluster identified by the given ID.",
+        "summary": "Creates a JWT for the cluster identified by the given ID.\nRequired permissions:\n- write:api_keys",
         "operationId": "ClusterService_CreateClusterJWT",
         "responses": {
           "200": {
@@ -789,7 +789,7 @@
         "exp": {
           "type": "string",
           "format": "int64",
-          "description": "The expiration time of the cluster JWT in seconds since the Unix epoch."
+          "description": "TODO check if this field could be defined as duration instead of int64, or\nif there is a better type for it.\n\nThe expiration time of the cluster JWT in seconds since the Unix epoch."
         }
       },
       "description": "A ClusterJWTPayload represents the JWT payload for a Cluster JWT.\nThis payload contains claims that define functionality and access control in the system."
@@ -810,7 +810,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Optional payload as key-value pairs."
+          "description": "TODO confirm if we could add some validation for this field (number of\nitems in the list, key validation) or if it is ok let it like this.\n\nOptional payload as key-value pairs."
         }
       },
       "description": "A ClusterJWTPayloadAccess defines an access rule for a collection in the cluster."

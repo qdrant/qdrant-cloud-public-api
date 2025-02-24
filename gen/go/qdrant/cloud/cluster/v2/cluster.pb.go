@@ -2089,7 +2089,7 @@ type DeleteClusterJWTRequest struct {
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The identifier for the JWT (in Guid format).
-	// This cluster should belong to the provided account.
+	// This JWT should belong to the provided cluster.
 	ClusterJwtId  string `protobuf:"bytes,3,opt,name=cluster_jwt_id,json=clusterJwtId,proto3" json:"cluster_jwt_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2315,6 +2315,8 @@ func (x *ClusterJWT) GetToken() string {
 // This payload contains claims that define functionality and access control in the system.
 type ClusterJWTPayload struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// TODO Ideally, there should be only one single field `access`, to mimic the behavior of the Database payload.
+	//
 	// Access level can be either "r" (read) or "m" (modify), or a list of detailed access rules.
 	//
 	// Types that are valid to be assigned to AccessType:
@@ -2322,6 +2324,9 @@ type ClusterJWTPayload struct {
 	//	*ClusterJWTPayload_Access
 	//	*ClusterJWTPayload_AccessList
 	AccessType isClusterJWTPayload_AccessType `protobuf_oneof:"access_type"`
+	// TODO check if this field could be defined as duration instead of int64, or
+	// if there is a better type for it.
+	//
 	// The expiration time of the cluster JWT in seconds since the Unix epoch.
 	Exp           *int64 `protobuf:"varint,3,opt,name=exp,proto3,oneof" json:"exp,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2415,6 +2420,9 @@ type ClusterJWTPayloadAccess struct {
 	Collection string `protobuf:"bytes,1,opt,name=collection,proto3" json:"collection,omitempty"`
 	// The level of access. Must be either "r" (read) or "rw" (read/write).
 	Access string `protobuf:"bytes,2,opt,name=access,proto3" json:"access,omitempty"`
+	// TODO confirm if we could add some validation for this field (number of
+	// items in the list, key validation) or if it is ok let it like this.
+	//
 	// Optional payload as key-value pairs.
 	Payload       map[string]string `protobuf:"bytes,3,rep,name=payload,proto3" json:"payload,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields

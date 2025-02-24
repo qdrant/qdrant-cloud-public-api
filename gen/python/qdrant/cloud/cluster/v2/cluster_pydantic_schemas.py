@@ -446,6 +446,9 @@ class ClusterJWTPayloadAccess(BaseModel):
     collection: str = Field(default="")
 # The level of access. Must be either "r" (read) or "rw" (read/write).
     access: str = Field(default="")
+# TODO confirm if we could add some validation for this field (number of
+# items in the list, key validation) or if it is ok let it like this.
+#
 # Optional payload as key-value pairs.
     payload: typing.Dict[str, str] = Field(default_factory=dict)
 
@@ -470,6 +473,9 @@ class ClusterJWTPayload(BaseModel):
     access: str = Field(default="")
 # A list of access rules per collection.
     access_list: ClusterJWTPayloadAccessList = Field()
+# TODO check if this field could be defined as duration instead of int64, or
+# if there is a better type for it.
+#
 # The expiration time of the cluster JWT in seconds since the Unix epoch.
     exp: typing.Optional[int] = Field(default=0)
 
@@ -544,7 +550,7 @@ class DeleteClusterJWTRequest(BaseModel):
 # This is a required field.
     cluster_id: str = Field(default="")
 # The identifier for the JWT (in Guid format).
-# This cluster should belong to the provided account.
+# This JWT should belong to the provided cluster.
     cluster_jwt_id: str = Field(default="")
 
 class DeleteClusterJWTResponse(BaseModel):#  Empty
