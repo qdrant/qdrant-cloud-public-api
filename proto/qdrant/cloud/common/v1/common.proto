@@ -59,7 +59,7 @@ extend google.protobuf.MethodOptions {
         // TODO: Ordering?
         // TODO: Make it possible to get the 'diff' as of a certain point
         //       E.g. Every ListX() call return a timestamp (TS) then the list function was started, with this timestamp
-        //       (all CRUD) operations after this TS can be retieved in a 'streaming' fashion.
+        //       (all CRUD) operations after this TS can be retrieved in a 'streaming' fashion.
       } */
 
 // Semantic version number.
