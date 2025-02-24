@@ -1,0 +1,9 @@
+qdrant
+buf
+protobuf
+gcp
+milli
+millicents
+lte
+cel
+memmap

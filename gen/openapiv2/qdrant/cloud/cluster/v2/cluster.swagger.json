@@ -44,7 +44,7 @@
           },
           {
             "name": "hybridCloudId",
-            "description": "The optional identifier for hybrid cloud (in Guid format).\nIf ommited all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.\n\nTODO: ListOptions",
+            "description": "The optional identifier for hybrid cloud (in Guid format).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.\n\nTODO: ListOptions",
             "in": "query",
             "required": false,
             "type": "string"
@@ -593,7 +593,7 @@
         }
       },
       "description": "Currently not supported, but will be added in the near future:\n Additional CPU (expressed in milli vCPU)\n int cpu = 1;\n Additional Memory (expressed in Gib)\n int ram = 2;",
-      "title": "AdditionalResources contans the information about additional resources"
+      "title": "AdditionalResources contains the information about additional resources"
     },
     "v2Cluster": {
       "type": "object",
@@ -654,7 +654,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the cluster software.\nIf ommited the latest version will be used and filled out during create.\nUse ListReleases() to determine which versions are allowed to be used.\nSee upgrade guidelines for more info."
+          "description": "Version of the cluster software.\nIf omitted the latest version will be used and filled out during create.\nUse ListReleases() to determine which versions are allowed to be used.\nSee upgrade guidelines for more info."
         },
         "packageId": {
           "type": "string",
@@ -873,7 +873,7 @@
         },
         "cpu": {
           "$ref": "#/definitions/v2ClusterNodeResources",
-          "title": "CPU resouces"
+          "title": "CPU resources"
         }
       },
       "description": "ClusterResourcesSummary represents the summary of the resources used in this cluster per node."

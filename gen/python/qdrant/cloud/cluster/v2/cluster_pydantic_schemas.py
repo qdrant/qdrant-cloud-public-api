@@ -22,7 +22,7 @@ class ListClustersRequest(BaseModel):
 # This is a required field.
     account_id: str = Field(default="")
 # The optional identifier for hybrid cloud (in Guid format).
-# If ommited all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
+# If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
     hybrid_cloud_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
 
 class AdditionalResources(BaseModel):#  Currently not supported, but will be added in the near future:
@@ -31,7 +31,7 @@ class AdditionalResources(BaseModel):#  Currently not supported, but will be add
  Additional Memory (expressed in Gib)
  int ram = 2;
     """
-     AdditionalResources contans the information about additional resources
+     AdditionalResources contains the information about additional resources
     """
 
 # Additional Disk (expressed in Gib)
@@ -170,7 +170,7 @@ class ClusterConfiguration(BaseModel):
 # This should be a number 1...20 [both included].
     number_of_nodes: int = Field(default=0)
 # Version of the cluster software.
-# If ommited the latest version will be used and filled out during create.
+# If omitted the latest version will be used and filled out during create.
 # Use ListReleases() to determine which versions are allowed to be used.
 # See upgrade guidelines for more info.
     version: str = Field(default="")
@@ -247,7 +247,7 @@ class ClusterNodeResourcesSummary(BaseModel):
     disk: ClusterNodeResources = Field()
 # Memory resources
     ram: ClusterNodeResources = Field()
-# CPU resouces
+# CPU resources
     cpu: ClusterNodeResources = Field()
 
 class ClusterState(BaseModel):
