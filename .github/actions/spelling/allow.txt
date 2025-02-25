@@ -7,3 +7,6 @@ millicents
 lte
 cel
 memmap
+jwt
+jwts
+oneof

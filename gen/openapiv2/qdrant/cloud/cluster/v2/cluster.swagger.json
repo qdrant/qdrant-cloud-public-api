@@ -138,6 +138,91 @@
         ]
       }
     },
+    "/api/cluster/v2/accounts/{accountId}/clusters/{clusterId}/jwts": {
+      "get": {
+        "summary": "Fetch all JWTs for the cluster identified by the given ID.\nRequired permissions:\n- read:api_keys",
+        "operationId": "ClusterService_ListClusterJWTs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2ListClusterJWTsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v2/accounts/{accountId}/clusters/{clusterId}/jwts/{clusterJwtId}": {
+      "delete": {
+        "summary": "Deletes a JWT for the cluster identified by the given ID.\nRequired permissions:\n- delete:api_keys",
+        "operationId": "ClusterService_DeleteClusterJWT",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2DeleteClusterJWTResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterJwtId",
+            "description": "The identifier for the JWT (in Guid format).\nThis JWT should belong to the provided cluster.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v2/accounts/{accountId}/releases": {
       "get": {
         "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
@@ -263,6 +348,53 @@
           "ClusterService"
         ]
       }
+    },
+    "/api/cluster/v2/accounts/{clusterJwt.accountId}/clusters/{clusterJwt.clusterId}/jwts": {
+      "post": {
+        "summary": "Creates a JWT for the cluster identified by the given ID.\nRequired permissions:\n- write:api_keys",
+        "operationId": "ClusterService_CreateClusterJWT",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2CreateClusterJWTResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterJwt.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterJwt.clusterId",
+            "description": "The identifier of the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceCreateClusterJWTBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -311,6 +443,47 @@
         }
       },
       "title": "CreateClusterRequest is the request for the CreateCluster function"
+    },
+    "ClusterServiceCreateClusterJWTBody": {
+      "type": "object",
+      "properties": {
+        "clusterJwt": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the cluster JWT (in Guid format).\nThis is a read-only field and will be available after a cluster JWT is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster JWT.\nThis is a required field\nName can only contain letters, numbers, spaces, underscores and dashes"
+            },
+            "jwtPayload": {
+              "$ref": "#/definitions/v2ClusterJWTPayload",
+              "description": "The JWT payload of the cluster JWT."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster JWT was created.\nThis is a read-only field and will be available after a cluster JWT is created."
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user who created the cluster JWT.\nThis is a read-only field and will be available after a cluster JWT is created."
+            },
+            "postfix": {
+              "type": "string",
+              "description": "Postfix for the Cluster JWT, this represents the last bytes of the token.\nThis is a read-only field and will be available after a cluster JWT is created."
+            },
+            "token": {
+              "type": "string",
+              "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret."
+            }
+          },
+          "title": "The actual Cluster JWT"
+        }
+      },
+      "title": "CreateClusterJWTRequest is the request for the CreateClusterJWT function"
     },
     "ClusterServiceUpdateClusterBody": {
       "type": "object",
@@ -559,6 +732,103 @@
       },
       "description": "Endpoint information to access the qdrant cluster (aka database).\nAll fields in this message are a read-only field."
     },
+    "v2ClusterJWT": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cluster JWT (in Guid format).\nThis is a read-only field and will be available after a cluster JWT is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the cluster JWT.\nThis is a required field\nName can only contain letters, numbers, spaces, underscores and dashes"
+        },
+        "jwtPayload": {
+          "$ref": "#/definitions/v2ClusterJWTPayload",
+          "description": "The JWT payload of the cluster JWT."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster JWT was created.\nThis is a read-only field and will be available after a cluster JWT is created."
+        },
+        "createdByEmail": {
+          "type": "string",
+          "description": "The email of the user who created the cluster JWT.\nThis is a read-only field and will be available after a cluster JWT is created."
+        },
+        "postfix": {
+          "type": "string",
+          "description": "Postfix for the Cluster JWT, this represents the last bytes of the token.\nThis is a read-only field and will be available after a cluster JWT is created."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret."
+        }
+      },
+      "description": "A ClusterJWT represents a JWT to access a Qdrant cloud cluster."
+    },
+    "v2ClusterJWTPayload": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "type": "string",
+          "description": "A general access level claim, either \"r\" (read) or \"m\" (modify)."
+        },
+        "accessList": {
+          "$ref": "#/definitions/v2ClusterJWTPayloadAccessList",
+          "description": "A list of access rules per collection."
+        },
+        "exp": {
+          "type": "string",
+          "format": "int64",
+          "description": "TODO check if this field could be defined as duration instead of int64, or\nif there is a better type for it.\n\nThe expiration time of the cluster JWT in seconds since the Unix epoch."
+        }
+      },
+      "description": "A ClusterJWTPayload represents the JWT payload for a Cluster JWT.\nThis payload contains claims that define functionality and access control in the system."
+    },
+    "v2ClusterJWTPayloadAccess": {
+      "type": "object",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "The name of the collection."
+        },
+        "access": {
+          "type": "string",
+          "description": "The level of access. Must be either \"r\" (read) or \"rw\" (read/write)."
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "TODO confirm if we could add some validation for this field (number of\nitems in the list, key validation) or if it is ok let it like this.\n\nOptional payload as key-value pairs."
+        }
+      },
+      "description": "A ClusterJWTPayloadAccess defines an access rule for a collection in the cluster."
+    },
+    "v2ClusterJWTPayloadAccessList": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2ClusterJWTPayloadAccess"
+          },
+          "description": "A repeated list of access rules for the JWT. Each rule specifies collection-level access."
+        }
+      },
+      "description": "A list of access rules, each specifying access to a specific collection\nand optionally restricting access to data based on payload filters."
+    },
     "v2ClusterNodeResources": {
       "type": "object",
       "properties": {
@@ -643,6 +913,16 @@
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
+    },
+    "v2CreateClusterJWTResponse": {
+      "type": "object",
+      "properties": {
+        "clusterJwt": {
+          "$ref": "#/definitions/v2ClusterJWT",
+          "title": "The actual Cluster JWT"
+        }
+      },
+      "title": "CreateClusterJWTResponse is the response from the the CreateClusterJWT function"
     },
     "v2CreateClusterResponse": {
       "type": "object",
@@ -771,6 +1051,11 @@
       },
       "title": "DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint"
     },
+    "v2DeleteClusterJWTResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteClusterJWTResponse is the response from the DeleteClusterJWT function"
+    },
     "v2DeleteClusterResponse": {
       "type": "object",
       "description": "Empty",
@@ -785,6 +1070,20 @@
         }
       },
       "title": "GetClusterResponse is the response from the GetCluster function"
+    },
+    "v2ListClusterJWTsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2ClusterJWT"
+          },
+          "title": "The actual cluster-jwts in this list"
+        }
+      },
+      "title": "ListClusterJWTsResponse is the response from the ListClusterJWTs function"
     },
     "v2ListClustersResponse": {
       "type": "object",

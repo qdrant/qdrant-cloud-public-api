@@ -63,7 +63,7 @@ class AuthServiceServicer(object):
     def ListApiKeys(self, request, context):
         """Fetch all api-keys in the account identified by the given ID.
         Required permissions:
-        - read:api-keys
+        - read:api_keys
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -72,7 +72,7 @@ class AuthServiceServicer(object):
     def CreateApiKey(self, request, context):
         """Creates an api-key in the account identified by the given ID.
         Required permissions:
-        - write:api-keys
+        - write:api_keys
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -83,7 +83,7 @@ class AuthServiceServicer(object):
 
         Deletes an api-key in the account identified by the given ID.
         Required permissions:
-        - delete:api-keys
+        - delete:api_keys
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

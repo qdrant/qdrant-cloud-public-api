@@ -95,6 +95,41 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/releases"};
   }
+
+  // Fetch all JWTs for the cluster identified by the given ID.
+  // Required permissions:
+  // - read:api_keys
+  rpc ListClusterJWTs(ListClusterJWTsRequest) returns (ListClusterJWTsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/jwts"};
+  }
+
+  // Creates a JWT for the cluster identified by the given ID.
+  // Required permissions:
+  // - write:api_keys
+  rpc CreateClusterJWT(CreateClusterJWTRequest) returns (CreateClusterJWTResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "cluster_jwt.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/cluster/v2/accounts/{cluster_jwt.account_id}/clusters/{cluster_jwt.cluster_id}/jwts"
+      body: "*"
+    };
+  }
+
+  // Deletes a JWT for the cluster identified by the given ID.
+  // Required permissions:
+  // - delete:api_keys
+  rpc DeleteClusterJWT(DeleteClusterJWTRequest) returns (DeleteClusterJWTResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/jwts/{cluster_jwt_id}"};
+  }
 }
 
 /* TODO:
@@ -544,4 +579,139 @@ message QdrantRelease {
   optional string release_notes_url = 3;
   // Additional message regarding this release that might be useful to the client"
   optional string remarks = 4;
+}
+
+// ListClusterJWTsRequest is the request for the ListClusterJWTs function
+message ListClusterJWTsRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListClusterJWTsResponse is the response from the ListClusterJWTs function
+message ListClusterJWTsResponse {
+  // The actual cluster-jwts in this list
+  repeated ClusterJWT items = 1;
+}
+
+// CreateClusterJWTRequest is the request for the CreateClusterJWT function
+message CreateClusterJWTRequest {
+  // The actual Cluster JWT
+  ClusterJWT cluster_jwt = 1;
+}
+
+// CreateClusterJWTResponse is the response from the the CreateClusterJWT function
+message CreateClusterJWTResponse {
+  // The actual Cluster JWT
+  ClusterJWT cluster_jwt = 1;
+}
+
+// DeleteClusterJWTRequest is the request for the DeleteClusterJWT function
+message DeleteClusterJWTRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in Guid format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the JWT (in Guid format).
+  // This JWT should belong to the provided cluster.
+  string cluster_jwt_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteClusterJWTResponse is the response from the DeleteClusterJWT function
+message DeleteClusterJWTResponse {
+  // Empty
+}
+
+// A ClusterJWT represents a JWT to access a Qdrant cloud cluster.
+message ClusterJWT {
+  // Unique identifier for the cluster JWT (in Guid format).
+  // This is a read-only field and will be available after a cluster JWT is created.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 3;
+  // Name of the cluster JWT.
+  // This is a required field
+  // Name can only contain letters, numbers, spaces, underscores and dashes
+  string name = 4 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+    pattern: "^[\\w\\s-]+$"
+  }];
+  // The JWT payload of the cluster JWT.
+  ClusterJWTPayload jwt_payload = 5;
+  // Timestamp when the cluster JWT was created.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  google.protobuf.Timestamp created_at = 6;
+  // The email of the user who created the cluster JWT.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  string created_by_email = 7;
+  // Postfix for the Cluster JWT, this represents the last bytes of the token.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  string postfix = 8;
+  // The token for the Cluster JWT.
+  // This is a read-only field and will be available only once in the return of CreateClusterJWT.
+  // You should securely store this token and it should be handled as a secret.
+  string token = 9;
+}
+
+// A ClusterJWTPayload represents the JWT payload for a Cluster JWT.
+// This payload contains claims that define functionality and access control in the system.
+message ClusterJWTPayload {
+  // TODO Ideally, there should be only one single field `access`, to mimic the behavior of the Database payload.
+  //
+  // Access level can be either "r" (read) or "m" (modify), or a list of detailed access rules.
+  oneof access_type {
+    // A general access level claim, either "r" (read) or "m" (modify).
+    string access = 1 [(buf.validate.field).string = {
+      in: [
+        "r",
+        "m"
+      ]
+    }];
+    // A list of access rules per collection.
+    ClusterJWTPayloadAccessList access_list = 2;
+  }
+  // TODO check if this field could be defined as duration instead of int64, or
+  // if there is a better type for it.
+  //
+  // The expiration time of the cluster JWT in seconds since the Unix epoch.
+  optional int64 exp = 3 [(buf.validate.field).int64 = {
+    gte: 1000000000
+    lte: 10000000000
+  }];
+}
+
+// A ClusterJWTPayloadAccess defines an access rule for a collection in the cluster.
+message ClusterJWTPayloadAccess {
+  // The name of the collection.
+  string collection = 1 [(buf.validate.field).string = {min_len: 1}];
+  // The level of access. Must be either "r" (read) or "rw" (read/write).
+  string access = 2 [(buf.validate.field).string = {
+    in: [
+      "r",
+      "rw"
+    ]
+  }];
+  // TODO confirm if we could add some validation for this field (number of
+  // items in the list, key validation) or if it is ok let it like this.
+  //
+  // Optional payload as key-value pairs.
+  map<string, string> payload = 3;
+}
+
+// A list of access rules, each specifying access to a specific collection
+// and optionally restricting access to data based on payload filters.
+message ClusterJWTPayloadAccessList {
+  // A repeated list of access rules for the JWT. Each rule specifies collection-level access.
+  repeated ClusterJWTPayloadAccess rules = 1;
 }
