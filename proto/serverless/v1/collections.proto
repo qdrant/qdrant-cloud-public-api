@@ -1,0 +1,213 @@
+syntax = "proto3";
+
+package api.v1.collections;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+message ApiKey {
+  string id = 1;
+  string key = 2;
+  string name = 3;
+  string api_key_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+  optional google.protobuf.Timestamp last_used_at = 6;
+  bool is_active = 7;
+  string user_id = 8;
+  string collection_id = 9;
+}
+
+enum Distance {
+  COSINE = 0;
+  EUCLID = 1;
+  DOT = 2;
+  MANHATTAN = 3;
+}
+
+enum StorageTier {
+  STORAGE = 0;
+  BALANCED = 1;
+  PERFORMANCE = 2;
+}
+
+enum PrecisionTier {
+  LOW = 0;
+  MEDIUM = 1;
+  HIGH = 2;
+}
+
+enum Modifier {
+  NONE = 0;
+  IDF = 1;
+}
+
+message DenseVectorConfiguration {
+  int32 dimension = 1;
+  Distance distance = 2;
+  optional bool multivector = 3;
+  optional bool rescoring = 4;
+  optional StorageTier storage_tier = 5;
+  optional PrecisionTier precision_tier = 6;
+}
+
+message SparseVectorConfiguration {
+  PrecisionTier precision_tier = 1;
+  Modifier modifier = 2;
+}
+
+enum KeywordIndexType {
+  KEYWORD = 0;
+}
+
+enum IntegerIndexType {
+  INTEGER = 0;
+}
+
+enum FloatIndexType {
+  FLOAT = 0;
+}
+
+enum GeoIndexType {
+  GEO = 0;
+}
+
+enum TextIndexType {
+  TEXT = 0;
+}
+
+enum BoolIndexType {
+  BOOL = 0;
+}
+
+enum DatetimeIndexType {
+  DATETIME = 0;
+}
+
+enum UuidIndexType {
+  UUID = 0;
+}
+
+enum TokenizerType {
+  PREFIX = 0;
+  WHITESPACE = 1;
+  WORD = 2;
+  MULTILINGUAL = 3;
+}
+
+message KeywordIndexParams {
+  KeywordIndexType type = 1;
+  optional bool is_tenant = 2;
+  optional bool on_disk = 3;
+}
+
+message IntegerIndexParams {
+  IntegerIndexType type = 1;
+  optional bool lookup = 2;
+  optional bool range = 3;
+  optional bool is_principal = 4;
+  optional bool on_disk = 5;
+}
+
+message FloatIndexParams {
+  FloatIndexType type = 1;
+  optional bool is_principal = 2;
+  optional bool on_disk = 3;
+}
+
+message GeoIndexParams {
+  GeoIndexType type = 1;
+  optional bool on_disk = 2;
+}
+
+message TextIndexParams {
+  TextIndexType type = 1;
+  optional TokenizerType tokenizer = 2;
+  optional int32 min_token_len = 3;
+  optional int32 max_token_len = 4;
+  optional bool lowercase = 5;
+  optional bool on_disk = 6;
+}
+
+message BoolIndexParams {
+  BoolIndexType type = 1;
+  optional bool on_disk = 2;
+}
+
+message DatetimeIndexParams {
+  DatetimeIndexType type = 1;
+  optional bool is_principal = 2;
+  optional bool on_disk = 3;
+}
+
+message UuidIndexParams {
+  UuidIndexType type = 1;
+  optional bool is_tenant = 2;
+  optional bool on_disk = 3;
+}
+
+message CollectionConfiguration {
+  optional string tenant_key = 1;
+  map<string, DenseVectorConfiguration> dense_vectors = 2;
+  map<string, SparseVectorConfiguration> sparse_vectors = 3;
+  map<string, google.protobuf.Any> payload_schema = 4;
+}
+
+message CollectionWithKeys {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+  string user_id = 4;
+  string cluster_id = 5;
+  map<string, string> configuration = 6;
+  repeated ApiKey api_keys = 7;
+  string cluster_url = 8;
+}
+
+message CollectionResponse {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+  string api_key = 4;
+  string url = 5;
+  string dashboard = 6;
+}
+
+message CollectionKeyResponse {
+  string api_key = 1;
+}
+
+message CreateCollectionRequest {
+  string collection_name = 1;
+  CollectionConfiguration configuration = 2;
+}
+
+message ListCollectionsRequest {}
+message ListCollectionsResponse {
+  repeated CollectionWithKeys collections = 1;
+}
+
+message DeleteCollectionRequest {
+  string collection_id = 1;
+}
+
+message DeleteCollectionResponse {}
+
+message CreateCollectionKeyRequest {
+  string collection_id = 1;
+  string name = 2;
+}
+
+message DeleteCollectionKeyRequest {
+  string collection_id = 1;
+  string key_id = 2;
+}
+
+message DeleteCollectionKeyResponse {}
+
+service CollectionService {
+  rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse);
+  rpc CreateCollection(CreateCollectionRequest) returns (CollectionResponse);
+  rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse);
+  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CollectionKeyResponse);
+  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse);
+}

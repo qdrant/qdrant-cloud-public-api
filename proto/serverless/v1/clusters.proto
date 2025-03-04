@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package api.v1.clusters;
+
+import "google/protobuf/timestamp.proto";
+
+message Cluster {
+  string id = 1;
+  string name = 2;
+  string url = 3;
+  optional string api_key = 4;
+  bool is_active = 5;
+  optional google.protobuf.Timestamp last_used_at = 6;
+  google.protobuf.Timestamp created_at = 7;
+  string user_id = 8;
+}
+
+message RegisterClusterRequest {
+  string name = 1;
+  string url = 2;
+  optional string api_key = 3;
+}
+
+message ListClustersRequest {}
+
+message ListClustersResponse {
+  repeated Cluster clusters = 1;
+}
+
+message DeleteClusterRequest {
+  string cluster_name = 1;
+}
+
+service ClusterService {
+  rpc RegisterCluster(RegisterClusterRequest) returns (Cluster);
+  rpc ListClusters(ListClustersRequest) returns (ListClustersResponse);
+  rpc DeleteCluster(DeleteClusterRequest) returns (Cluster);
+}
