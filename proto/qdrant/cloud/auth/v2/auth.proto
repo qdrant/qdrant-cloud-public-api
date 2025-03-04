@@ -121,7 +121,12 @@ message DeleteApiKeyResponse {
 message ApiKey {
   // Unique identifier for the api-key (in Guid format).
   // This is a read-only field and will be available after an api-key is created.
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
