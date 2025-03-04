@@ -397,24 +397,20 @@ class ListQdrantReleasesRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# The identifier for the cluster (in Guid format).
-# This cluster should be part of the provided account.
-# This is an optional field.
-    cluster_id: typing.Optional[str] = Field(default="")
 
 class QdrantRelease(BaseModel):
     """
-     QdrantRelease represent a single Qdrant release
+     QdrantRelease represent a single Qdrant release.
     """
 
-# Version of the Qdrant release
+# Version of the Qdrant release.
     version: str = Field(default="")
-# Flag to indicate if this is the default release
+# Flag to indicate if this is the default release.
 # There can be at most a single item in the list that have this property set.
     default: bool = Field(default=False)
-# URL to the release notes
+# URL to the release notes.
     release_notes_url: typing.Optional[str] = Field(default="")
-# Additional message regarding this release that might be useful to the client"
+# Additional message regarding this release that might be useful to the client.
     remarks: typing.Optional[str] = Field(default="")
 
 class ListQdrantReleasesResponse(BaseModel):

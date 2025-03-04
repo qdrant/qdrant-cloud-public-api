@@ -85,8 +85,7 @@ service ClusterService {
 
   // TODO: RestartCluster
 
-  // Fetch all qdrant releases in the account identified by the given ID.
-  // Optional a cluster ID can be provided, the list will return the options to update to only.
+  // Fetch all available Qdrant releases in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc ListQdrantReleases(ListQdrantReleasesRequest) returns (ListQdrantReleasesResponse) {
@@ -227,11 +226,6 @@ message ListQdrantReleasesRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
-  // The identifier for the cluster (in Guid format).
-  // This cluster should be part of the provided account.
-  // This is an optional field.
-  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // ListQdrantReleasesResponse is the response from the ListQdrantReleases function
@@ -573,16 +567,16 @@ message ClusterNodeResources {
   double available = 5;
 }
 
-// QdrantRelease represent a single Qdrant release
+// QdrantRelease represent a single Qdrant release.
 message QdrantRelease {
-  // Version of the Qdrant release
+  // Version of the Qdrant release.
   string version = 1;
-  // Flag to indicate if this is the default release
+  // Flag to indicate if this is the default release.
   // There can be at most a single item in the list that have this property set.
   bool default = 2;
-  // URL to the release notes
+  // URL to the release notes.
   optional string release_notes_url = 3;
-  // Additional message regarding this release that might be useful to the client"
+  // Additional message regarding this release that might be useful to the client.
   optional string remarks = 4;
 }
 

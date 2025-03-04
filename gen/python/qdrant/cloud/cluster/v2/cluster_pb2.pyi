@@ -76,12 +76,10 @@ class DeleteClusterResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ListQdrantReleasesRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    cluster_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListQdrantReleasesResponse(_message.Message):
     __slots__ = ("items",)

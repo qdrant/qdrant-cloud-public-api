@@ -56,8 +56,7 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - delete:clusters
 	DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*DeleteClusterResponse, error)
-	// Fetch all qdrant releases in the account identified by the given ID.
-	// Optional a cluster ID can be provided, the list will return the options to update to only.
+	// Fetch all available Qdrant releases in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error)
@@ -199,8 +198,7 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - delete:clusters
 	DeleteCluster(context.Context, *DeleteClusterRequest) (*DeleteClusterResponse, error)
-	// Fetch all qdrant releases in the account identified by the given ID.
-	// Optional a cluster ID can be provided, the list will return the options to update to only.
+	// Fetch all available Qdrant releases in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error)

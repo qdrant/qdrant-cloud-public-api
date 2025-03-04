@@ -225,7 +225,7 @@
     },
     "/api/cluster/v2/accounts/{accountId}/releases": {
       "get": {
-        "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
+        "summary": "Fetch all available Qdrant releases in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListQdrantReleases",
         "responses": {
           "200": {
@@ -247,13 +247,6 @@
             "description": "The identifier of the account (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
-            "in": "query",
-            "required": false,
             "type": "string"
           }
         ],
@@ -1119,22 +1112,22 @@
       "properties": {
         "version": {
           "type": "string",
-          "title": "Version of the Qdrant release"
+          "description": "Version of the Qdrant release."
         },
         "default": {
           "type": "boolean",
-          "description": "Flag to indicate if this is the default release\nThere can be at most a single item in the list that have this property set."
+          "description": "Flag to indicate if this is the default release.\nThere can be at most a single item in the list that have this property set."
         },
         "releaseNotesUrl": {
           "type": "string",
-          "title": "URL to the release notes"
+          "description": "URL to the release notes."
         },
         "remarks": {
           "type": "string",
-          "title": "Additional message regarding this release that might be useful to the client\""
+          "description": "Additional message regarding this release that might be useful to the client."
         }
       },
-      "title": "QdrantRelease represent a single Qdrant release"
+      "description": "QdrantRelease represent a single Qdrant release."
     },
     "v2Toleration": {
       "type": "object",

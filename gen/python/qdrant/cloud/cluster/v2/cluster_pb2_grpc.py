@@ -138,8 +138,7 @@ class ClusterServiceServicer(object):
     def ListQdrantReleases(self, request, context):
         """TODO: RestartCluster
 
-        Fetch all qdrant releases in the account identified by the given ID.
-        Optional a cluster ID can be provided, the list will return the options to update to only.
+        Fetch all available Qdrant releases in the account identified by the given ID.
         Required permissions:
         - read:clusters
         """
