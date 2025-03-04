@@ -4,11 +4,17 @@ package api.v1.clusters;
 
 import "google/protobuf/timestamp.proto";
 
+// Cluster represents a cluster entity with its details.
 message Cluster {
+  // ID of the cluster.
   string id = 1;
+  // Name of the cluster.
   string name = 2;
+  // URL of the cluster.
   string url = 3;
+  // API key to access the cluster.
   optional string api_key = 4;
+  // Indicates whether the cluster is active.
   bool is_active = 5;
   optional google.protobuf.Timestamp last_used_at = 6;
   google.protobuf.Timestamp created_at = 7;
