@@ -68,7 +68,7 @@ service ClusterService {
     option (qdrant.cloud.common.v1.account_id_expression) = "cluster.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      patch: "/api/cluster/v2/accounts/{cluster.account_id}/clusters/{cluster.id}"
+      put: "/api/cluster/v2/accounts/{cluster.account_id}/clusters/{cluster.id}"
       body: "*"
     };
   }

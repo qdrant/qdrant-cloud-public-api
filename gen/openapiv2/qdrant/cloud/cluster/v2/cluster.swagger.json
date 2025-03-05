@@ -303,7 +303,7 @@
       }
     },
     "/api/cluster/v2/accounts/{cluster.accountId}/clusters/{cluster.id}": {
-      "patch": {
+      "put": {
         "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
         "operationId": "ClusterService_UpdateCluster",
         "responses": {
