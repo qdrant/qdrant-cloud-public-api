@@ -10,3 +10,5 @@ memmap
 jwt
 jwts
 oneof
+multivector
+idf
