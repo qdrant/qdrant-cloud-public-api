@@ -31,7 +31,7 @@ message DenseVectorConfiguration {
     ]
   }];
   // The precision level for vector operations (LOW, MEDIUM, or HIGH)
-  optional string precition_tier = 6 [(buf.validate.field).string = {
+  optional string precision_tier = 6 [(buf.validate.field).string = {
     in: [
       "low",
       "medium",
