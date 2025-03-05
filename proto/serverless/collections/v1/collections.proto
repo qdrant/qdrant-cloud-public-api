@@ -51,20 +51,26 @@ message CreateCollectionResponse {
 
 // CreateCollectionRequest defines parameters for creating a new collection
 message CreateCollectionRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
   // Name for the new collection
-  string collection_name = 1;
+  string collection_name = 2;
 
   // Optional region to host the collection in.
   // If not specified - use default region.
-  optional string region = 2;
+  optional string region = 3;
 
   // Configuration settings for the collection
-  CollectionConfiguration configuration = 3;
+  CollectionConfiguration configuration = 4;
 }
 
 // ListCollectionsRequest is an empty request to list collections
 message ListCollectionsRequest {
-  // Empty
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // ListCollectionsResponse contains the list of collections
@@ -75,8 +81,12 @@ message ListCollectionsResponse {
 
 // DeleteCollectionRequest identifies the collection to delete
 message DeleteCollectionRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
   // ID of the collection to delete
-  string collection_id = 1;
+  string collection_id = 2;
 }
 
 // DeleteCollectionResponse is an empty response for deletion confirmation
@@ -86,8 +96,12 @@ message DeleteCollectionResponse {
 
 // Upgrade limits of the specified collection
 message UpgradeCollectionRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
   // ID of the collection to upgrade
-  string collection_id = 1;
+  string collection_id = 2;
 }
 
 // Response for upgrading collection
