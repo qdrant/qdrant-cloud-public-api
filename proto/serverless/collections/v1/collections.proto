@@ -100,21 +100,21 @@ service CollectionService {
   // ListCollections returns all collections for the authenticated user
   rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
   }
   // CreateCollection creates a new collection with the specified configuration
   rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
   }
   // DeleteCollection removes a collection by ID
   rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
   }
   // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
   rpc UpgradeCollection(UpgradeCollectionRequest) returns (UpgradeCollectionResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
   }
 }

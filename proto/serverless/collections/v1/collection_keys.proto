@@ -69,16 +69,16 @@ service CollectionKeysService {
   // CreateCollectionKey creates a new API key for a collection
   rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
   }
   // DeleteCollectionKey removes an API key from a collection
   rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
   }
   // ListCollectionKeys returns all API keys for a collection
   rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:serveless";
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
   }
 }
