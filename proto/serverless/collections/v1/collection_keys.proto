@@ -3,6 +3,8 @@ syntax = "proto3";
 package serverless.collections.v1;
 
 import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
 
 // Preview of the API key after it is already created
 message ApiKeyPreview {
@@ -59,14 +61,25 @@ message DeleteCollectionKeyRequest {
 }
 
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
-message DeleteCollectionKeyResponse {}
+message DeleteCollectionKeyResponse {
+    // Empty
+}
 
 // Service for managing API keys for a serverless collection
 service CollectionKeysService {
   // CreateCollectionKey creates a new API key for a collection
-  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse);
+  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+  }
   // DeleteCollectionKey removes an API key from a collection
-  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse);
+  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serveless";
+  }
   // ListCollectionKeys returns all API keys for a collection
-  rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse);
+  rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serveless";
+  }
 }

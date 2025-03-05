@@ -3,7 +3,6 @@ syntax = "proto3";
 package serverless.collections.v1;
 
 import "buf/validate/validate.proto";
-import "google/protobuf/struct.proto";
 
 // DenseVectorConfiguration defines the settings for dense vector fields
 message DenseVectorConfiguration {
@@ -136,6 +135,30 @@ message UuidIndexParams {
   optional bool on_disk = 2;
 }
 
+// Describes the schema for a payload field
+message PayloadFieldSchema {
+  // Oneof for index parameters
+  oneof index_params {
+    // Keyword index parameters
+    KeywordIndexParams keyword = 1;
+    // Integer index parameters
+    IntegerIndexParams integer = 2;
+    // Float index parameters
+    FloatIndexParams float = 3;
+    // Geo Index parameters
+    GeoIndexParams geo = 4;
+    // Text index parameters
+    TextIndexParams text = 5;
+    // Boolean index parameters
+    BoolIndexParams bool = 6;
+    // Datetime index parameters
+    DatetimeIndexParams datetime = 7;
+    // UUID index parameters
+    UuidIndexParams uuid = 8;
+  }
+}
+
+
 // CollectionConfiguration defines the structure and settings for a collection
 message CollectionConfiguration {
   // Field name used for tenant isolation
@@ -145,5 +168,5 @@ message CollectionConfiguration {
   // Map of sparse vector configurations with field name as key
   map<string, SparseVectorConfiguration> sparse_vectors = 3;
   // Schema definition for payload fields
-  map<string, google.protobuf.Value> payload_schema = 4;
+  map<string, PayloadFieldSchema> payload_schema = 4;
 }
