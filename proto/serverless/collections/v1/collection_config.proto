@@ -158,7 +158,6 @@ message PayloadFieldSchema {
   }
 }
 
-
 // CollectionConfiguration defines the structure and settings for a collection
 message CollectionConfiguration {
   // Field name used for tenant isolation

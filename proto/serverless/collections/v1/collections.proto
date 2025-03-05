@@ -2,12 +2,11 @@ syntax = "proto3";
 
 package serverless.collections.v1;
 
+import "buf/validate/validate.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "buf/validate/validate.proto";
-import "serverless/collections/v1/collection_config.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "serverless/collections/v1/collection_config.proto";
 
 // Collection represents a collection with its associated API keys
 message Collection {

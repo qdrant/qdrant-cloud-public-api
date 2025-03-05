@@ -5,7 +5,6 @@ package serverless.collections.v1;
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
-
 // Preview of the API key after it is already created
 message ApiKeyPreview {
   // Unique identifier for the API key
@@ -62,7 +61,7 @@ message DeleteCollectionKeyRequest {
 
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
 message DeleteCollectionKeyResponse {
-    // Empty
+  // Empty
 }
 
 // Service for managing API keys for a serverless collection
