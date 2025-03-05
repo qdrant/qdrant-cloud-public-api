@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package serverless.collections.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Preview of the API key after it is already created
+message ApiKeyPreview {
+  // Unique identifier for the API key
+  string id = 1;
+  // Human-readable name for the API key
+  string name = 2;
+  // The time this API key was created.
+  google.protobuf.Timestamp created_at = 4;
+}
+
+// ApiKey returned on ApiKey creation
+message ApiKey {
+  // Unique identifier for the API key
+  string id = 1;
+  // Human-readable name for the API key
+  string name = 3;
+  // The actual API key value
+  string key = 4;
+}
+
+// CreateCollectionKeyRequest defines parameters for creating a new API key
+message CreateCollectionKeyRequest {
+  // Collection the key will access
+  string collection_id = 1;
+  // Name for the API key
+  string name = 2;
+}
+
+// CollectionKeyResponse provides the API key after creation
+message CreateCollectionKeyResponse {
+  // The newly created API key value
+  ApiKey api_key = 1;
+}
+
+// Request all api-keys associated with a collection
+message ListCollectionKeysRequest {
+  // Collection the keys belong to
+  string collection_id = 1;
+}
+
+// Response containing all api-keys associated with a collection
+message ListCollectionKeysResponse {
+  // List of API keys for the collection
+  repeated ApiKeyPreview keys = 1;
+}
+
+// DeleteCollectionKeyRequest identifies the API key to delete
+message DeleteCollectionKeyRequest {
+  // Collection the key belongs to
+  string collection_id = 1;
+  // ID of the key to delete
+  string key_id = 2;
+}
+
+// DeleteCollectionKeyResponse is an empty response for deletion confirmation
+message DeleteCollectionKeyResponse {}
+
+// Service for managing API keys for a serverless collection
+service CollectionKeysService {
+  // CreateCollectionKey creates a new API key for a collection
+  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse);
+  // DeleteCollectionKey removes an API key from a collection
+  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse);
+  // ListCollectionKeys returns all API keys for a collection
+  rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse);
+}
