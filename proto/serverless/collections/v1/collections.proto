@@ -1,213 +1,350 @@
 syntax = "proto3";
 
-package api.v1.collections;
+package serverless.collections.v1;
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 message ApiKey {
-  string id = 1;
-  string key = 2;
-  string name = 3;
-  string api_key_id = 4;
-  google.protobuf.Timestamp created_at = 5;
-  optional google.protobuf.Timestamp last_used_at = 6;
-  bool is_active = 7;
-  string user_id = 8;
-  string collection_id = 9;
+    // Unique identifier for the API key
+    string id = 1;
+    // The actual API key value used for authentication
+    string key = 2;
+    // Human-readable name for the API key
+    string name = 3;
+    // External API key identifier
+    string api_key_id = 4;
+    // The time this API key was created.
+    google.protobuf.Timestamp created_at = 5;
+    // The last time this API key was used to access the collection
+    optional google.protobuf.Timestamp last_used_at = 6;
+    // Whether this API key is currently active
+    bool is_active = 7;
+    // The account ID that owns this API key
+    string account_id = 8;
+    // The collection ID this API key provides access to
+    string collection_id = 9;
 }
 
+// Distance defines the vector distance metrics used for similarity calculations
 enum Distance {
-  COSINE = 0;
-  EUCLID = 1;
-  DOT = 2;
-  MANHATTAN = 3;
+    // Cosine similarity measure
+    COSINE = 0;
+    // Euclidean distance measure
+    EUCLID = 1;
+    // Dot product similarity measure
+    DOT = 2;
+    // Manhattan (L1) distance measure
+    MANHATTAN = 3;
 }
 
+// StorageTier defines the storage performance characteristics
 enum StorageTier {
-  STORAGE = 0;
-  BALANCED = 1;
-  PERFORMANCE = 2;
+    // Optimized for storage capacity over speed
+    STORAGE = 0;
+    // Balance between storage and performance
+    BALANCED = 1;
+    // Optimized for query performance
+    PERFORMANCE = 2;
 }
 
+// PrecisionTier defines the accuracy level for vector operations
 enum PrecisionTier {
-  LOW = 0;
-  MEDIUM = 1;
-  HIGH = 2;
+    // Lower precision, faster performance
+    LOW = 0;
+    // Balanced precision and performance
+    MEDIUM = 1;
+    // Higher precision, may impact performance
+    HIGH = 2;
 }
 
+// Modifier defines how vector values are weighted
 enum Modifier {
-  NONE = 0;
-  IDF = 1;
+    // No modification to vector values
+    NONE = 0;
+    // Inverse Document Frequency weighting
+    IDF = 1;
 }
 
+// DenseVectorConfiguration defines the settings for dense vector fields
 message DenseVectorConfiguration {
-  int32 dimension = 1;
-  Distance distance = 2;
-  optional bool multivector = 3;
-  optional bool rescoring = 4;
-  optional StorageTier storage_tier = 5;
-  optional PrecisionTier precision_tier = 6;
+    // The dimensionality of the vector space
+    int32 dimension = 1;
+    // The distance metric used for vector similarity calculations
+    Distance distance = 2;
+    // Whether to use multi-vector storage for this configuration
+    optional bool multivector = 3;
+    // Whether to enable rescoring for search results
+    optional bool rescoring = 4;
+    // The storage performance tier to use (STORAGE, BALANCED, or PERFORMANCE)
+    optional StorageTier storage_tier = 5;
+    // The precision level for vector operations (LOW, MEDIUM, or HIGH)
+    optional PrecisionTier precision_tier = 6;
 }
 
+// SparseVectorConfiguration defines the settings for sparse vector fields
 message SparseVectorConfiguration {
-  PrecisionTier precision_tier = 1;
-  Modifier modifier = 2;
+    // Precision tier for vector operations
+    PrecisionTier precision_tier = 1;
+    // Vector value modification approach
+    Modifier modifier = 2;
 }
 
+// KeywordIndexType defines the type of keyword index
 enum KeywordIndexType {
-  KEYWORD = 0;
+    // Standard keyword indexing
+    KEYWORD = 0;
 }
 
+// IntegerIndexType defines the type of integer index
 enum IntegerIndexType {
-  INTEGER = 0;
+    // Standard integer indexing
+    INTEGER = 0;
 }
 
+// FloatIndexType defines the type of float index
 enum FloatIndexType {
-  FLOAT = 0;
+    // Standard float indexing
+    FLOAT = 0;
 }
 
+// GeoIndexType defines the type of geo index
 enum GeoIndexType {
-  GEO = 0;
+    // Standard geographical indexing
+    GEO = 0;
 }
 
+// TextIndexType defines the type of text index
 enum TextIndexType {
-  TEXT = 0;
+    // Standard text indexing
+    TEXT = 0;
 }
 
+// BoolIndexType defines the type of boolean index
 enum BoolIndexType {
-  BOOL = 0;
+    // Standard boolean indexing
+    BOOL = 0;
 }
 
+// DatetimeIndexType defines the type of datetime index
 enum DatetimeIndexType {
-  DATETIME = 0;
+    // Standard datetime indexing
+    DATETIME = 0;
 }
 
+// UuidIndexType defines the type of UUID index
 enum UuidIndexType {
-  UUID = 0;
+    // Standard UUID indexing
+    UUID = 0;
 }
 
+// TokenizerType defines the text tokenization strategy
 enum TokenizerType {
-  PREFIX = 0;
-  WHITESPACE = 1;
-  WORD = 2;
-  MULTILINGUAL = 3;
+    // Prefix-based tokenizer
+    PREFIX = 0;
+    // Whitespace-based tokenizer
+    WHITESPACE = 1;
+    // Word-based tokenizer
+    WORD = 2;
+    // Multilingual tokenizer
+    MULTILINGUAL = 3;
 }
 
+// KeywordIndexParams defines parameters for keyword indexing
 message KeywordIndexParams {
-  KeywordIndexType type = 1;
-  optional bool is_tenant = 2;
-  optional bool on_disk = 3;
+    // Type of keyword index
+    KeywordIndexType type = 1;
+    // Whether this field is used as tenant identifier
+    optional bool is_tenant = 2;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 3;
 }
 
+// IntegerIndexParams defines parameters for integer indexing
 message IntegerIndexParams {
-  IntegerIndexType type = 1;
-  optional bool lookup = 2;
-  optional bool range = 3;
-  optional bool is_principal = 4;
-  optional bool on_disk = 5;
+    // Type of integer index
+    IntegerIndexType type = 1;
+    // Enable lookup operations
+    optional bool lookup = 2;
+    // Enable range queries
+    optional bool range = 3;
+    // Whether this is a principal field
+    optional bool is_principal = 4;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 5;
 }
 
+// FloatIndexParams defines parameters for float indexing
 message FloatIndexParams {
-  FloatIndexType type = 1;
-  optional bool is_principal = 2;
-  optional bool on_disk = 3;
+    // Type of float index
+    FloatIndexType type = 1;
+    // Whether this is a principal field
+    optional bool is_principal = 2;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 3;
 }
 
+// GeoIndexParams defines parameters for geographical indexing
 message GeoIndexParams {
-  GeoIndexType type = 1;
-  optional bool on_disk = 2;
+    // Type of geo index
+    GeoIndexType type = 1;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 2;
 }
 
+// TextIndexParams defines parameters for text indexing
 message TextIndexParams {
-  TextIndexType type = 1;
-  optional TokenizerType tokenizer = 2;
-  optional int32 min_token_len = 3;
-  optional int32 max_token_len = 4;
-  optional bool lowercase = 5;
-  optional bool on_disk = 6;
+    // Type of text index
+    TextIndexType type = 1;
+    // Tokenization strategy
+    optional TokenizerType tokenizer = 2;
+    // Minimum token length to index
+    optional int32 min_token_len = 3;
+    // Maximum token length to index
+    optional int32 max_token_len = 4;
+    // Whether to lowercase text before indexing
+    optional bool lowercase = 5;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 6;
 }
 
+// BoolIndexParams defines parameters for boolean indexing
 message BoolIndexParams {
-  BoolIndexType type = 1;
-  optional bool on_disk = 2;
+    // Type of boolean index
+    BoolIndexType type = 1;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 2;
 }
 
+// DatetimeIndexParams defines parameters for datetime indexing
 message DatetimeIndexParams {
-  DatetimeIndexType type = 1;
-  optional bool is_principal = 2;
-  optional bool on_disk = 3;
+    // Type of datetime index
+    DatetimeIndexType type = 1;
+    // Whether this is a principal field
+    optional bool is_principal = 2;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 3;
 }
 
+// UuidIndexParams defines parameters for UUID indexing
 message UuidIndexParams {
-  UuidIndexType type = 1;
-  optional bool is_tenant = 2;
-  optional bool on_disk = 3;
+    // Type of UUID index
+    UuidIndexType type = 1;
+    // Whether this field is used as tenant identifier
+    optional bool is_tenant = 2;
+    // Whether to store index on disk vs memory
+    optional bool on_disk = 3;
 }
 
+// CollectionConfiguration defines the structure and settings for a collection
 message CollectionConfiguration {
-  optional string tenant_key = 1;
-  map<string, DenseVectorConfiguration> dense_vectors = 2;
-  map<string, SparseVectorConfiguration> sparse_vectors = 3;
-  map<string, google.protobuf.Any> payload_schema = 4;
+    // Field name used for tenant isolation
+    optional string tenant_key = 1;
+    // Map of dense vector configurations with field name as key
+    map<string, DenseVectorConfiguration> dense_vectors = 2;
+    // Map of sparse vector configurations with field name as key
+    map<string, SparseVectorConfiguration> sparse_vectors = 3;
+    // Schema definition for payload fields
+    map<string, google.protobuf.Any> payload_schema = 4;
 }
 
+// CollectionWithKeys represents a collection with its associated API keys
 message CollectionWithKeys {
-  string id = 1;
-  string name = 2;
-  google.protobuf.Timestamp created_at = 3;
-  string user_id = 4;
-  string cluster_id = 5;
-  map<string, string> configuration = 6;
-  repeated ApiKey api_keys = 7;
-  string cluster_url = 8;
+    // Unique identifier for the collection
+    string id = 1;
+    // Name of the collection
+    string name = 2;
+    // When the collection was created
+    google.protobuf.Timestamp created_at = 3;
+    // ID of the user who created the collection
+    string user_id = 4;
+    // ID of the cluster hosting the collection
+    string cluster_id = 5;
+    // Configuration parameters as string key-value pairs
+    map<string, string> configuration = 6;
+    // API keys associated with this collection
+    repeated ApiKey api_keys = 7;
+    // URL to access the hosting cluster
+    string cluster_url = 8;
 }
 
+// CollectionResponse provides details about a created collection
 message CollectionResponse {
-  string id = 1;
-  string name = 2;
-  google.protobuf.Timestamp created_at = 3;
-  string api_key = 4;
-  string url = 5;
-  string dashboard = 6;
+    // Unique identifier for the collection
+    string id = 1;
+    // Name of the collection
+    string name = 2;
+    // When the collection was created
+    google.protobuf.Timestamp created_at = 3;
+    // API key for accessing the collection
+    string api_key = 4;
+    // URL to access the collection API
+    string url = 5;
+    // URL for the collection dashboard
+    string dashboard = 6;
 }
 
+// CollectionKeyResponse provides the API key after creation
 message CollectionKeyResponse {
-  string api_key = 1;
+    // The newly created API key value
+    string api_key = 1;
 }
 
+// CreateCollectionRequest defines parameters for creating a new collection
 message CreateCollectionRequest {
-  string collection_name = 1;
-  CollectionConfiguration configuration = 2;
+    // Name for the new collection
+    string collection_name = 1;
+    // Configuration settings for the collection
+    CollectionConfiguration configuration = 2;
 }
 
+// ListCollectionsRequest is an empty request to list collections
 message ListCollectionsRequest {}
+
+// ListCollectionsResponse contains the list of collections
 message ListCollectionsResponse {
-  repeated CollectionWithKeys collections = 1;
+    // List of collections with their details
+    repeated CollectionWithKeys collections = 1;
 }
 
+// DeleteCollectionRequest identifies the collection to delete
 message DeleteCollectionRequest {
-  string collection_id = 1;
+    // ID of the collection to delete
+    string collection_id = 1;
 }
 
+// DeleteCollectionResponse is an empty response for deletion confirmation
 message DeleteCollectionResponse {}
 
+// CreateCollectionKeyRequest defines parameters for creating a new API key
 message CreateCollectionKeyRequest {
-  string collection_id = 1;
-  string name = 2;
+    // Collection the key will access
+    string collection_id = 1;
+    // Name for the API key
+    string name = 2;
 }
 
+// DeleteCollectionKeyRequest identifies the API key to delete
 message DeleteCollectionKeyRequest {
-  string collection_id = 1;
-  string key_id = 2;
+    // Collection the key belongs to
+    string collection_id = 1;
+    // ID of the key to delete
+    string key_id = 2;
 }
 
+// DeleteCollectionKeyResponse is an empty response for deletion confirmation
 message DeleteCollectionKeyResponse {}
 
+// CollectionService provides operations for managing collections
 service CollectionService {
-  rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse);
-  rpc CreateCollection(CreateCollectionRequest) returns (CollectionResponse);
-  rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse);
-  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CollectionKeyResponse);
-  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse);
+    // ListCollections returns all collections for the authenticated user
+    rpc ListCollections (ListCollectionsRequest) returns (ListCollectionsResponse);
+    // CreateCollection creates a new collection with the specified configuration
+    rpc CreateCollection (CreateCollectionRequest) returns (CollectionResponse);
+    // DeleteCollection removes a collection by ID
+    rpc DeleteCollection (DeleteCollectionRequest) returns (DeleteCollectionResponse);
+    // CreateCollectionKey creates a new API key for a collection
+    rpc CreateCollectionKey (CreateCollectionKeyRequest) returns (CollectionKeyResponse);
+    // DeleteCollectionKey removes an API key from a collection
+    rpc DeleteCollectionKey (DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse);
 }
