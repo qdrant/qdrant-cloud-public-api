@@ -16,10 +16,7 @@ service CollectionKeysService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {
-      get: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
-      body: "*"
-    };
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"};
   }
   // CreateCollectionKey creates a new API key for a collection
   // Required Permissions:
@@ -40,10 +37,7 @@ service CollectionKeysService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {
-      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys/{key_id}"
-      body: "*"
-    };
+    option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys/{key_id}"};
   }
 }
 
