@@ -4,7 +4,6 @@ package qdrant.cloud.serverless.collections.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/serverless/collections/v1/collection_config.proto";
@@ -61,35 +60,17 @@ service CollectionService {
   }
 }
 
-// Collection represents a vector search collection in the Qdrant serverless environment
-message Collection {
-  // Unique identifier for the collection
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "collection.id"
-    message: "value must be a valid UUID"
-    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
-  // Name of the collection
-  string name = 2;
-  // When the collection was created
-  google.protobuf.Timestamp created_at = 3;
-  // Configuration parameters as string key-value pairs
-  map<string, google.protobuf.Value> configuration = 6;
-  // URL to access the hosting cluster
-  optional string endpoint = 8;
-  // Status of the collection
-  string status = 9 [(buf.validate.field).string = {
-    in: [
-      "ready",
-      "processing",
-      "disabled"
-    ]
-  }];
+// ListCollectionsRequest is an empty request to list collections
+message ListCollectionsRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
 
-  // In which region the collection is hosted
-  // Example: us-west1
-  optional string region = 10;
+// ListCollectionsResponse contains the list of collections
+message ListCollectionsResponse {
+  // List of collections with their details
+  repeated Collection collections = 1;
 }
 
 // CollectionResponse provides details about a created collection
@@ -105,20 +86,21 @@ message CreateCollectionRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // Name for the new collection
-  string collection_name = 2;
-
-  // Optional region to host the collection in.
-  // If not specified - use default region.
-  optional string region = 3;
+  // This is a read-only field and will be available after a collection is created.
+  string collection_name = 2 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
 
   // Configuration settings for the collection
-  CollectionConfiguration configuration = 4;
+  CollectionConfiguration configuration = 3;
 
   // Cloud provider where the cluster is hosted.
   // This is a required field (one of the following: aws, gcp, azure, hybrid).
   // After creation, this field cannot be changed.
   // If not specified - use default provider
-  optional string cloud_provider = 5 [(buf.validate.field).string = {
+  optional string cloud_provider = 4 [(buf.validate.field).string = {
     in: [
       "aws",
       "gcp",
@@ -126,19 +108,24 @@ message CreateCollectionRequest {
       "hybrid"
     ]
   }];
+  // Optional region to host the collection in.
+  // If not specified - use default region.
+  optional string cloud_region = 5;
 }
 
-// ListCollectionsRequest is an empty request to list collections
-message ListCollectionsRequest {
+// Upgrade limits of the specified collection
+message UpgradeCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
+  // ID of the collection to upgrade
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// ListCollectionsResponse contains the list of collections
-message ListCollectionsResponse {
-  // List of collections with their details
-  repeated Collection collections = 1;
+// Response for upgrading collection
+message UpgradeCollectionResponse {
+  // Empty
 }
 
 // DeleteCollectionRequest identifies the collection to delete
@@ -155,17 +142,61 @@ message DeleteCollectionResponse {
   // Empty
 }
 
-// Upgrade limits of the specified collection
-message UpgradeCollectionRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+// Collection represents a vector search collection in the Qdrant serverless environment
+message Collection {
+  // Unique identifier for the collection
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "collection.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
+  // Name of the collection
+  string name = 2;
+  // When the collection was created
+  google.protobuf.Timestamp created_at = 3;
+  // Configuration parameters
+  CollectionConfiguration configuration = 4;
 
-  // ID of the collection to upgrade
-  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Cloud provider where the cluster is hosted.
+  // This is a required field (one of the following: aws, gcp, azure).
+  // After creation, this field cannot be changed.
+  // If not specified - use default provider
+  optional string cloud_provider = 5 [(buf.validate.field).string = {
+    in: [
+      "aws",
+      "gcp",
+      "azure"
+    ]
+  }];
+  // In which region the collection is hosted
+  // Example: us-west1
+  optional string cloud_region = 6;
+  // URL to access the hosting cluster
+  // Status of the collection
+  CollectionState state = 8;
 }
 
-// Response for upgrading collection
-message UpgradeCollectionResponse {
-  // Empty
+// CollectionState represents the operational state of a collection in the Qdrant serverless environment.
+// It provides status information, error details (if any), and endpoint access information.
+message CollectionState {
+  // The current operational status of the collection.
+  // - ready: Collection is fully operational and available for use
+  // - processing: Collection is being created, updated, or undergoing maintenance
+  // - disabled: Collection has been temporarily or permanently disabled
+  string phase = 1 [(buf.validate.field).string = {
+    in: [
+      "ready",
+      "processing",
+      "disabled"
+    ]
+  }];
+
+  // Descriptive message explaining any errors or issues with the collection.
+  // Empty when the collection is operating normally.
+  string reason = 2;
+
+  // The URL endpoint where clients can connect to and interact with the collection.
+  // May be empty if the collection is not yet ready or is disabled.
+  optional string endpoint = 7;
 }
