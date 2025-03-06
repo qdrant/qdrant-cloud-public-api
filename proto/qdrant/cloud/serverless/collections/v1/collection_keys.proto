@@ -7,14 +7,6 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
-// Preview of the API key after it is already created
-message ApiKeyPreview {
-  // Unique identifier for the API key
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Human-readable name for the API key
-  string name = 2;
-}
-
 // ApiKey returned on ApiKey creation
 message ApiKey {
   // Unique identifier for the API key
@@ -80,7 +72,7 @@ message ListCollectionKeysRequest {
 // Response containing all api-keys associated with a collection
 message ListCollectionKeysResponse {
   // List of API keys for the collection
-  repeated ApiKeyPreview keys = 1;
+  repeated ApiKey keys = 1;
 }
 
 // DeleteCollectionKeyRequest identifies the API key to delete
