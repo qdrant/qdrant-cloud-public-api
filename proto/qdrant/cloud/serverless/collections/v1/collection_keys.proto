@@ -58,7 +58,7 @@ message CreateCollectionKeyRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // Collection the key will access
-  string collection_id = 2;
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Name for the API key
   string name = 3;
 }
@@ -76,7 +76,7 @@ message ListCollectionKeysRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // Collection the keys belong to
-  string collection_id = 2;
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // Response containing all api-keys associated with a collection
@@ -92,9 +92,9 @@ message DeleteCollectionKeyRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // Collection the key belongs to
-  string collection_id = 2;
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
   // ID of the key to delete
-  string key_id = 3;
+  string key_id = 3 [(buf.validate.field).string = {uuid: true}];
 }
 
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
@@ -110,7 +110,7 @@ service CollectionKeysService {
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/key"
+      post: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
       body: "*"
     };
   }
@@ -120,7 +120,7 @@ service CollectionKeysService {
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/key/{key_id}"
+      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys/{key_id}"
       body: "*"
     };
   }

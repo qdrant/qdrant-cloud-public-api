@@ -87,7 +87,7 @@ message DeleteCollectionRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // ID of the collection to delete
-  string collection_id = 2;
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // DeleteCollectionResponse is an empty response for deletion confirmation
@@ -102,7 +102,7 @@ message UpgradeCollectionRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
   // ID of the collection to upgrade
-  string collection_id = 2;
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // Response for upgrading collection
