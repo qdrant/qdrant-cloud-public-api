@@ -23,7 +23,7 @@ message ApiKey {
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // Human-readable name for the API key
   string name = 3;
-  // The actual API key value
+  // This field is filled out in CreateCollectionKey only.
   string key = 4;
   // Postfix for the Cluster JWT, this represents the last bytes of the token.
   // This is a read-only field and will be available after a cluster JWT is created.
