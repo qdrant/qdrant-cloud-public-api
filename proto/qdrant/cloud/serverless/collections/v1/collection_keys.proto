@@ -67,11 +67,11 @@ message ApiKey {
   string created_by_email = 7;
   // The access type
   oneof access_type {
-    // A general access level claim, either "r" (read) or "m" (modify).
+    // A general access level claim, either "r" (read) or "w" (write).
     string access = 8 [(buf.validate.field).string = {
       in: [
         "r",
-        "m"
+        "w"
       ]
     }];
   }
@@ -112,19 +112,9 @@ message ListCollectionKeysRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "list_collection_keys_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 
   // Collection the keys belong to
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "list_collection_keys_request.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // Response containing all api-keys associated with a collection
@@ -138,25 +128,10 @@ message DeleteCollectionKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "delete_collection_key_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
   // Collection the key belongs to
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "delete_collection_key_request.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
   // ID of the key to delete
   string key_id = 3 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "delete_collection_key_request.key_id"
-    message: "value must be a valid UUID"
-    expression: "this.key_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
