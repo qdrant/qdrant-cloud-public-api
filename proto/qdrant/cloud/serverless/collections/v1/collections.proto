@@ -110,11 +110,6 @@ message CreateCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "create_collection_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 
   // Name for the new collection
   string collection_name = 2;
@@ -132,11 +127,6 @@ message ListCollectionsRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "list_collections_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // ListCollectionsResponse contains the list of collections
@@ -150,18 +140,8 @@ message DeleteCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "delete_collection_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
   // ID of the collection to delete
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "delete_collection_request.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // DeleteCollectionResponse is an empty response for deletion confirmation
@@ -174,19 +154,9 @@ message UpgradeCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "upgrade_collection_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 
   // ID of the collection to upgrade
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "upgrade_collection_request.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // Response for upgrading collection

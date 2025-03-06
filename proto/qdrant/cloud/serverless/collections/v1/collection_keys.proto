@@ -44,7 +44,7 @@ service CollectionKeysService {
 // An ApiKey represents a JWT token to access a Qdrant cloud serverless collection.
 message ApiKey {
   // Unique identifier for the API key
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  string id = 1;
   option (buf.validate.message).cel = {
     id: "api_key.id"
     message: "value must be a valid UUID"
@@ -83,19 +83,9 @@ message ApiKey {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 10 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "api_key.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
   // The identifier of the collection (in Guid format).
   // This is a required field.
   string collection_id = 11 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "api_key.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 }
 
 // CreateCollectionKeyRequest defines parameters for creating a new API key
@@ -103,19 +93,9 @@ message CreateCollectionKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "create_collection_key_request.account_id"
-    message: "value must be a valid UUID"
-    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 
   // Collection the key will access
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "create_collection_key_request.collection_id"
-    message: "value must be a valid UUID"
-    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
 
   // The API key to create
   ApiKey api_key = 3;
