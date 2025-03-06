@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package serverless.collections.v1;
+package qdrant.cloud.serverless.collections.v1;
 
 import "buf/validate/validate.proto";
 
