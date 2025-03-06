@@ -77,7 +77,7 @@ message Collection {
   // Configuration parameters as string key-value pairs
   map<string, google.protobuf.Value> configuration = 6;
   // URL to access the hosting cluster
-  optional string cluster_url = 8;
+  optional string endpoint = 8;
   // Status of the collection
   string status = 9 [(buf.validate.field).string = {
     in: [
@@ -110,7 +110,7 @@ message CreateCollectionResponse {
 
   // URL to access the collection API
   // URL might not be available if collection is disabled or in processing state
-  optional string url = 4;
+  optional string endpoint = 4;
 }
 
 // CreateCollectionRequest defines parameters for creating a new collection
