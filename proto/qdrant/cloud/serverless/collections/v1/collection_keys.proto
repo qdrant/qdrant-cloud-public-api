@@ -7,22 +7,29 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
-// ApiKey returned on ApiKey creation
+// An ApiKey represents a JWT token to access a Qdrant cloud serverless collection.
 message ApiKey {
   // Unique identifier for the API key
   string id = 1 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)"
+  };
   // Human-readable name for the API key
   string name = 3;
-  // This field is filled out in CreateCollectionKey only.
+  // The api key itself.
+  // This is a read-only field and will be available only once in the return of CreateCollectionKey.
+  // You should securely store this token, and it should be handled as a secret.
   string key = 4;
-  // Postfix for the Cluster JWT, this represents the last bytes of the token.
-  // This is a read-only field and will be available after a cluster JWT is created.
+  // Postfix for the collection api key, this represents the last bytes of the key.
+  // This is a read-only field and will be available after a collection api key is created.
   string postfix = 5;
-  // Timestamp when the cluster JWT was created.
-  // This is a read-only field and will be available after a cluster JWT is created.
+  // Timestamp when the collection api key was created.
+  // This is a read-only field and will be available after a collection api key is created.
   google.protobuf.Timestamp created_at = 6;
-  // The email of the user who created the cluster JWT.
-  // This is a read-only field and will be available after a cluster JWT is created.
+  // The email of the user who created the collection api key.
+  // This is a read-only field and will be available after a collection api key is created.
   string created_by_email = 7;
   // The access type
   oneof access_type {
@@ -34,11 +41,27 @@ message ApiKey {
       ]
     }];
   }
-  // The expiration time of the cluster JWT in seconds since the Unix epoch.
+  // The expiration time of the collection api key in seconds since the Unix epoch.
   optional int64 exp = 9 [(buf.validate.field).int64 = {
     gte: 1000000000
     lte: 10000000000
   }];
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 10 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "api_key.account_id"
+    message: "value must be a valid UUID"
+    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
+  // The identifier of the collection (in Guid format).
+  // This is a required field.
+  string collection_id = 11 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "api_key.collection_id"
+    message: "value must be a valid UUID"
+    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
 }
 
 // CreateCollectionKeyRequest defines parameters for creating a new API key
@@ -46,9 +69,19 @@ message CreateCollectionKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "create_collection_key_request.account_id"
+    message: "value must be a valid UUID"
+    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
 
   // Collection the key will access
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "create_collection_key_request.collection_id"
+    message: "value must be a valid UUID"
+    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
   // Name for the API key
   string name = 3;
 }
@@ -64,9 +97,19 @@ message ListCollectionKeysRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "list_collection_keys_request.account_id"
+    message: "value must be a valid UUID"
+    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
 
   // Collection the keys belong to
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "list_collection_keys_request.collection_id"
+    message: "value must be a valid UUID"
+    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
 }
 
 // Response containing all api-keys associated with a collection
@@ -80,11 +123,25 @@ message DeleteCollectionKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
+  option (buf.validate.message).cel = {
+    id: "delete_collection_key_request.account_id"
+    message: "value must be a valid UUID"
+    expression: "this.account_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
   // Collection the key belongs to
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "delete_collection_key_request.collection_id"
+    message: "value must be a valid UUID"
+    expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
   // ID of the key to delete
   string key_id = 3 [(buf.validate.field).string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "delete_collection_key_request.key_id"
+    message: "value must be a valid UUID"
+    expression: "this.key_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+  };
 }
 
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
