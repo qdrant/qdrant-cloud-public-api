@@ -12,6 +12,8 @@ import "qdrant/cloud/serverless/collections/v1/collection_config.proto";
 // CollectionService provides operations for managing collections
 service CollectionService {
   // ListCollections returns all collections for the authenticated user
+  // Required Permissions:
+  // - write:serverless
   rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless";
@@ -22,6 +24,8 @@ service CollectionService {
     };
   }
   // CreateCollection creates a new collection with the specified configuration
+  // Required Permissions:
+  // - write:serverless
   rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless";
@@ -32,6 +36,8 @@ service CollectionService {
     };
   }
   // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
+  // Required Permissions:
+  // - write:serverless
   rpc UpgradeCollection(UpgradeCollectionRequest) returns (UpgradeCollectionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless";
@@ -42,6 +48,8 @@ service CollectionService {
     };
   }
   // DeleteCollection removes a collection by ID
+  // Required Permissions:
+  // - write:serverless
   rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless";

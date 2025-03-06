@@ -10,6 +10,8 @@ import "qdrant/cloud/common/v1/common.proto";
 // Service for managing API keys for a serverless collection
 service CollectionKeysService {
   // ListCollectionKeys returns all API keys for a collection
+  // Required Permissions:
+  // - read:serverless_api_keys
   rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
@@ -20,6 +22,8 @@ service CollectionKeysService {
     };
   }
   // CreateCollectionKey creates a new API key for a collection
+  // Required Permissions:
+  // - write:serverless_api_keys
   rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
@@ -30,6 +34,8 @@ service CollectionKeysService {
     };
   }
   // DeleteCollectionKey removes an API key from a collection
+  // Required Permissions:
+  // - write:serverless_api_keys
   rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
