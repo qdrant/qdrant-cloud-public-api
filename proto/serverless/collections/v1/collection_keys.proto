@@ -24,6 +24,30 @@ message ApiKey {
   string name = 3;
   // The actual API key value
   string key = 4;
+  // Postfix for the Cluster JWT, this represents the last bytes of the token.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  string postfix = 5;
+  // Timestamp when the cluster JWT was created.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  google.protobuf.Timestamp created_at = 6;
+  // The email of the user who created the cluster JWT.
+  // This is a read-only field and will be available after a cluster JWT is created.
+  string created_by_email = 7;
+  // The access type
+  oneof access_type {
+    // A general access level claim, either "r" (read) or "m" (modify).
+    string access = 8 [(buf.validate.field).string = {
+      in: [
+        "r",
+        "m"
+      ]
+    }];
+  }
+  // The expiration time of the cluster JWT in seconds since the Unix epoch.
+  optional int64 exp = 9 [(buf.validate.field).int64 = {
+    gte: 1000000000
+    lte: 10000000000
+  }];
 }
 
 // CreateCollectionKeyRequest defines parameters for creating a new API key
