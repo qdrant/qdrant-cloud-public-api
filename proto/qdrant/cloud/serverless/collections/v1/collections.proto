@@ -9,6 +9,50 @@ import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/serverless/collections/v1/collection_config.proto";
 
+// CollectionService provides operations for managing collections
+service CollectionService {
+  // ListCollections returns all collections for the authenticated user
+  rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      get: "/api/serverless/v1/accounts/{account_id}/collections"
+      body: "*"
+    };
+  }
+  // CreateCollection creates a new collection with the specified configuration
+  rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{account_id}/collections"
+      body: "*"
+    };
+  }
+  // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
+  rpc UpgradeCollection(UpgradeCollectionRequest) returns (UpgradeCollectionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"
+      body: "*"
+    };
+  }
+  // DeleteCollection removes a collection by ID
+  rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"
+      body: "*"
+    };
+  }
+}
+
 // Collection represents a vector search collection in the Qdrant serverless environment
 message Collection {
   // Unique identifier for the collection
@@ -148,48 +192,4 @@ message UpgradeCollectionRequest {
 // Response for upgrading collection
 message UpgradeCollectionResponse {
   // Empty
-}
-
-// CollectionService provides operations for managing collections
-service CollectionService {
-  // ListCollections returns all collections for the authenticated user
-  rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      get: "/api/serverless/v1/accounts/{account_id}/collections"
-      body: "*"
-    };
-  }
-  // CreateCollection creates a new collection with the specified configuration
-  rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      post: "/api/serverless/v1/accounts/{account_id}/collections"
-      body: "*"
-    };
-  }
-  // DeleteCollection removes a collection by ID
-  rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"
-      body: "*"
-    };
-  }
-  // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
-  rpc UpgradeCollection(UpgradeCollectionRequest) returns (UpgradeCollectionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      put: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"
-      body: "*"
-    };
-  }
 }

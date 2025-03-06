@@ -7,6 +7,40 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
+// Service for managing API keys for a serverless collection
+service CollectionKeysService {
+  // CreateCollectionKey creates a new API key for a collection
+  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
+      body: "*"
+    };
+  }
+  // ListCollectionKeys returns all API keys for a collection
+  rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      get: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
+      body: "*"
+    };
+  }
+  // DeleteCollectionKey removes an API key from a collection
+  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys/{key_id}"
+      body: "*"
+    };
+  }
+}
+
 // An ApiKey represents a JWT token to access a Qdrant cloud serverless collection.
 message ApiKey {
   // Unique identifier for the API key
@@ -82,8 +116,9 @@ message CreateCollectionKeyRequest {
     message: "value must be a valid UUID"
     expression: "this.collection_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
   };
-  // Name for the API key
-  string name = 3;
+
+  // The API key to create
+  ApiKey api_key = 3;
 }
 
 // CollectionKeyResponse provides the API key after creation
@@ -147,38 +182,4 @@ message DeleteCollectionKeyRequest {
 // DeleteCollectionKeyResponse is an empty response for deletion confirmation
 message DeleteCollectionKeyResponse {
   // Empty
-}
-
-// Service for managing API keys for a serverless collection
-service CollectionKeysService {
-  // CreateCollectionKey creates a new API key for a collection
-  rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      post: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
-      body: "*"
-    };
-  }
-  // DeleteCollectionKey removes an API key from a collection
-  rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys/{key_id}"
-      body: "*"
-    };
-  }
-  // ListCollectionKeys returns all API keys for a collection
-  rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      get: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
-      body: "*"
-    };
-  }
 }
