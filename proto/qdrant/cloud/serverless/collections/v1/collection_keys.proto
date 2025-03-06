@@ -3,6 +3,7 @@ syntax = "proto3";
 package qdrant.cloud.serverless.collections.v1;
 
 import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
