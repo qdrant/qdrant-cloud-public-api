@@ -13,8 +13,6 @@ message ApiKeyPreview {
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // Human-readable name for the API key
   string name = 2;
-  // The time this API key was created.
-  google.protobuf.Timestamp created_at = 4;
 }
 
 // ApiKey returned on ApiKey creation
