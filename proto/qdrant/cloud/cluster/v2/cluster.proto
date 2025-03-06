@@ -681,11 +681,11 @@ message ClusterJWTPayload {
   //
   // Access level can be either "r" (read) or "m" (modify), or a list of detailed access rules.
   oneof access_type {
-    // A general access level claim, either "r" (read) or "w" (write).
+    // A general access level claim, either "r" (read) or "m" (modify).
     string access = 1 [(buf.validate.field).string = {
       in: [
         "r",
-        "w"
+        "m"
       ]
     }];
     // A list of access rules per collection.
