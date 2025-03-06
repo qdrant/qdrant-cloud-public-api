@@ -107,15 +107,30 @@ service CollectionKeysService {
   rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/key"
+      body: "*"
+    };
   }
   // DeleteCollectionKey removes an API key from a collection
   rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/key/{key_id}"
+      body: "*"
+    };
   }
   // ListCollectionKeys returns all API keys for a collection
   rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      get: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}/keys"
+      body: "*"
+    };
   }
 }
