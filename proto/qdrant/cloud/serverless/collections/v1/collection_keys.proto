@@ -9,7 +9,7 @@ import "qdrant/cloud/common/v1/common.proto";
 // Preview of the API key after it is already created
 message ApiKeyPreview {
   // Unique identifier for the API key
-  string id = 1;
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
   // Human-readable name for the API key
   string name = 2;
   // The time this API key was created.
@@ -19,7 +19,7 @@ message ApiKeyPreview {
 // ApiKey returned on ApiKey creation
 message ApiKey {
   // Unique identifier for the API key
-  string id = 1;
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
   // Human-readable name for the API key
   string name = 3;
   // The actual API key value
@@ -106,16 +106,16 @@ service CollectionKeysService {
   // CreateCollectionKey creates a new API key for a collection
   rpc CreateCollectionKey(CreateCollectionKeyRequest) returns (CreateCollectionKeyResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
   }
   // DeleteCollectionKey removes an API key from a collection
   rpc DeleteCollectionKey(DeleteCollectionKeyRequest) returns (DeleteCollectionKeyResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
   }
   // ListCollectionKeys returns all API keys for a collection
   rpc ListCollectionKeys(ListCollectionKeysRequest) returns (ListCollectionKeysResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
   }
 }
