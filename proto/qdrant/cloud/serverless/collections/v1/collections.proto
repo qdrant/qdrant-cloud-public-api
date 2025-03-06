@@ -128,6 +128,19 @@ message CreateCollectionRequest {
 
   // Configuration settings for the collection
   CollectionConfiguration configuration = 4;
+
+  // Cloud provider where the cluster is hosted.
+  // This is a required field (one of the following: aws, gcp, azure, hybrid).
+  // After creation, this field cannot be changed.
+  // If not specified - use default provider
+  optional string cloud_provider = 5 [(buf.validate.field).string = {
+    in: [
+      "aws",
+      "gcp",
+      "azure",
+      "hybrid"
+    ]
+  }];
 }
 
 // ListCollectionsRequest is an empty request to list collections
