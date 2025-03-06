@@ -94,23 +94,8 @@ message Collection {
 
 // CollectionResponse provides details about a created collection
 message CreateCollectionResponse {
-  // Unique identifier for the collection
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
-  option (buf.validate.message).cel = {
-    id: "create_collection_response.id"
-    message: "value must be a valid UUID"
-    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
-  };
-
-  // Name of the collection
-  string name = 2;
-
-  // Region where the collection is hosted
-  optional string region = 3;
-
-  // URL to access the collection API
-  // URL might not be available if collection is disabled or in processing state
-  optional string endpoint = 4;
+  // Collection represents a vector search collection in the Qdrant serverless environment
+  Collection collection = 1;
 }
 
 // CreateCollectionRequest defines parameters for creating a new collection
