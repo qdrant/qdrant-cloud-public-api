@@ -437,6 +437,10 @@
             "state": {
               "$ref": "#/definitions/v2ClusterState",
               "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            },
+            "testField": {
+              "type": "string",
+              "description": "this is to test the workflow, we won't include it."
             }
           },
           "title": "The actual cluster"
@@ -520,6 +524,10 @@
             "state": {
               "$ref": "#/definitions/v2ClusterState",
               "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            },
+            "testField": {
+              "type": "string",
+              "description": "this is to test the workflow, we won't include it."
             }
           },
           "title": "The actual cluster"
@@ -635,6 +643,10 @@
         "state": {
           "$ref": "#/definitions/v2ClusterState",
           "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+        },
+        "testField": {
+          "type": "string",
+          "description": "this is to test the workflow, we won't include it."
         }
       },
       "description": "A Cluster represents one cluster of a Qdrant database."
