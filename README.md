@@ -2,7 +2,9 @@
 
 This repository contains the Protocol Buffer definitions for the Qdrant Cloud API, as well as its generated code. 
 
-We use [Buf](https://buf.build/) to lint the schemas and to generate language bindings. The layout and style of our `.proto` files follow their [style guide](https://docs.buf.build/best-practices/style-guide).
+We use [Buf](https://buf.build/) to lint the schemas and to generate language bindings. 
+
+Additionally, there are [these guidelines](CONTRIBUTING.md#protobuf-guidelines) to ensure our API remains consistent and user-friendly. Please follow them when contributing.
 
 This project leverages Make to automate common tasks. To view all available commands, you can run:
 
