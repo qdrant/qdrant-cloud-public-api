@@ -1,4 +1,4 @@
-name: Buf CI
+name: Pull Request
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
@@ -6,7 +6,8 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
-  buf:
+  linting:
+    name: Linting & check uncommited changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,12 +24,15 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: "Generate code"
         run: make generate
-      - uses: CatChen/check-git-status-action@v1
+      - name: "Check uncommited changes"
+        uses: CatChen/check-git-status-action@v1
         with:
           fail-if-not-clean: true
           request-changes-if-not-clean: true
           request-changes-comment: |
-            Please make sure you've run the following commands from the root directory.
+            Looks like the PR doesn't include the updates for the generated code.
+
+            Please make sure you've run the following commands from the root directory:
 
             ```shell
             make generate
