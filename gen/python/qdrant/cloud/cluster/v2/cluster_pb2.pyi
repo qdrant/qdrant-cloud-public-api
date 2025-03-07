@@ -90,7 +90,7 @@ class ListQdrantReleasesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[QdrantRelease, _Mapping]]] = ...) -> None: ...
 
 class Cluster(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider", "cloud_region", "configuration", "state", "test_field")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider", "cloud_region", "configuration", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -100,7 +100,6 @@ class Cluster(_message.Message):
     CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
-    TEST_FIELD_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -110,8 +109,7 @@ class Cluster(_message.Message):
     cloud_region: str
     configuration: ClusterConfiguration
     state: ClusterState
-    test_field: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ..., test_field: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ...) -> None: ...
 
 class ClusterConfiguration(_message.Message):
     __slots__ = ("last_modified_at", "number_of_nodes", "version", "package_id", "additional_resources", "database_configuration", "node_selector", "tolerations", "annotations", "allowed_ip_source_ranges", "reserved_cpu_percentage", "reserved_memory_percentage")

@@ -300,9 +300,6 @@ message Cluster {
   // Current state of the cluster.
   // All fields inside `state` are read-only.
   ClusterState state = 100;
-
-  // this is to test the workflow, we won't include it.
-  string test_field = 101;
 }
 
 // A ClusterConfiguration represents the configuration of a cluster.

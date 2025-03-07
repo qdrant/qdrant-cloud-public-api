@@ -307,8 +307,6 @@ class Cluster(BaseModel):
 # Current state of the cluster.
 # All fields inside `state` are read-only.
     state: ClusterState = Field()
-# this is to test the workflow, we won't include it.
-    test_field: str = Field(default="")
 
 class ListClustersResponse(BaseModel):
     """
