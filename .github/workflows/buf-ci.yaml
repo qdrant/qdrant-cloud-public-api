@@ -16,3 +16,9 @@ jobs:
           push: false
           # Optional GitHub token for API requests. Ensures requests aren't rate limited.
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      # make sure the PR includes the updated generated code.
+      - name: "Generate code"
+        run: make generate
+      - uses: CatChen/check-git-status-action@v1
+        with:
+          fail-if-not-clean: true
