@@ -165,35 +165,7 @@
       },
       "title": "CreateApiKeyRequest is the request for the CreateApiKey function"
     },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "v2ApiKey": {
+    "authv2ApiKey": {
       "type": "object",
       "properties": {
         "id": {
@@ -227,11 +199,39 @@
       },
       "title": "A ApiKey represents one api-key of a Qdrant cloud account.\nThis api-key can grant access to one or more Qdrant databases (clusters)"
     },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
     "v2CreateApiKeyResponse": {
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/v2ApiKey",
+          "$ref": "#/definitions/authv2ApiKey",
           "title": "The actual API Key"
         }
       },
@@ -249,7 +249,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2ApiKey"
+            "$ref": "#/definitions/authv2ApiKey"
           },
           "description": "TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions",
           "title": "The actual api-keys in this list"
