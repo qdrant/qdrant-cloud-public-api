@@ -7,7 +7,7 @@ permissions:
   pull-requests: write
 jobs:
   linting:
-    name: Linting & check uncommited changes
+    name: Linting & checking uncommited changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
