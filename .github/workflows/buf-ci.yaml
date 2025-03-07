@@ -24,3 +24,10 @@ jobs:
       - uses: CatChen/check-git-status-action@v1
         with:
           fail-if-not-clean: true
+          request-changes-if-not-clean: true
+          request-changes-comment: |
+            Please make sure you've run the following commands from the root directory.
+
+            ```shell
+            make generate
+            ```
