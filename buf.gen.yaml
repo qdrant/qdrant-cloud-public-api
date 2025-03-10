@@ -10,19 +10,19 @@ managed:
       value: github.com/qdrant/qdrant-cloud-public-api/gen/go
 
 plugins:
-  # generate base types for Go
+  # Generate base types for Go
   - remote: buf.build/protocolbuffers/go:v1.36.4
     out: gen/go
     opt:
       - paths=source_relative
 
-  # generate Go client and server stubs for the gRPC framework
+  # Generate Go client and server stubs for the gRPC framework
   - remote: buf.build/grpc/go:v1.5.1
     out: gen/go
     opt:
       - paths=source_relative
 
-  # Generates Python client and server stubs
+  # Generate Python client and server stubs
   - remote: buf.build/grpc/python:v1.70.0
     include_imports: true
     out: gen/python
@@ -37,22 +37,29 @@ plugins:
     include_imports: true
     out: gen/python
 
+  # Generate Python Pydantic schemas
   - local: protoc-gen-protobuf-to-pydantic
     opt:
       - config_path=./plugin_configurations/config_for_pydantic_schemas_plugin.py
       - config_worker_dir_path=./
     out: gen/python
 
-  # generate bindings for gRPC-Gateway
+  # Generate bindings for gRPC-Gateway
   - remote: buf.build/grpc-ecosystem/gateway:v2.26.0
     out: gen/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
 
-  # generate OpenAPI definitions for Protobuf services
+  # Generate OpenAPI definitions for Protobuf services
   - remote: buf.build/grpc-ecosystem/openapiv2:v2.26.0
     out: gen/openapiv2
+
+  # Generate base types and services for Typescript
+  - remote: buf.build/bufbuild/es:v2.2.3
+    include_imports: true
+    opt: target=ts
+    out: gen/typescript
 
 inputs:
   - directory: proto
