@@ -389,6 +389,24 @@ class DeleteClusterResponse(BaseModel):#  Empty
      DeleteClusterResponse is the response from the DeleteCluster function
     """
 
+class RestartClusterRequest(BaseModel):
+    """
+     RestartClusterRequest is the request for the RestartCluster function
+    """
+
+# The identifier of the account (in Guid format).
+# This is a required field.
+    account_id: str = Field(default="")
+# The identifier for the cluster (in Guid format).
+# This cluster should be part of the provided account.
+# This is a required field.
+    cluster_id: str = Field(default="")
+
+class RestartClusterResponse(BaseModel):#  Empty
+    """
+     RestartClusterResponse is the response from the RestartCluster function
+    """
+
 class ListQdrantReleasesRequest(BaseModel):
     """
      ListQdrantReleasesRequest is the request for the ListQdrantReleases function

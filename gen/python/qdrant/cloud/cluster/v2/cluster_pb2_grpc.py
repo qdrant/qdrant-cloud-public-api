@@ -52,6 +52,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterResponse.FromString,
                 _registered_method=True)
+        self.RestartCluster = channel.unary_unary(
+                '/qdrant.cloud.cluster.v2.ClusterService/RestartCluster',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterResponse.FromString,
+                _registered_method=True)
         self.ListQdrantReleases = channel.unary_unary(
                 '/qdrant.cloud.cluster.v2.ClusterService/ListQdrantReleases',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
@@ -135,10 +140,17 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListQdrantReleases(self, request, context):
-        """TODO: RestartCluster
+    def RestartCluster(self, request, context):
+        """Restarts a cluster in the account identified by the given ID.
+        Required permissions:
+        - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-        Fetch all qdrant releases in the account identified by the given ID.
+    def ListQdrantReleases(self, request, context):
+        """Fetch all qdrant releases in the account identified by the given ID.
         Optional a cluster ID can be provided, the list will return the options to update to only.
         Required permissions:
         - read:clusters
@@ -201,6 +213,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.DeleteCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterResponse.SerializeToString,
+            ),
+            'RestartCluster': grpc.unary_unary_rpc_method_handler(
+                    servicer.RestartCluster,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterResponse.SerializeToString,
             ),
             'ListQdrantReleases': grpc.unary_unary_rpc_method_handler(
                     servicer.ListQdrantReleases,
@@ -371,6 +388,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v2.ClusterService/DeleteCluster',
             qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.DeleteClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RestartCluster(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v2.ClusterService/RestartCluster',
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v2_dot_cluster__pb2.RestartClusterResponse.FromString,
             options,
             channel_credentials,
             insecure,
