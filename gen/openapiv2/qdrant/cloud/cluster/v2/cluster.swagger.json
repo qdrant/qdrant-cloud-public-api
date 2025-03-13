@@ -223,6 +223,45 @@
         ]
       }
     },
+    "/api/cluster/v2/accounts/{accountId}/clusters/{clusterId}/restart": {
+      "post": {
+        "summary": "Restarts a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_RestartCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2RestartClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v2/accounts/{accountId}/releases": {
       "get": {
         "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
@@ -1135,6 +1174,11 @@
         }
       },
       "title": "QdrantRelease represent a single Qdrant release"
+    },
+    "v2RestartClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "RestartClusterResponse is the response from the RestartCluster function"
     },
     "v2Toleration": {
       "type": "object",

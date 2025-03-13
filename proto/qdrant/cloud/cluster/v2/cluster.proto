@@ -83,7 +83,15 @@ service ClusterService {
     option (google.api.http) = {delete: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}"};
   }
 
-  // TODO: RestartCluster
+  // Restarts a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - write:clusters
+  rpc RestartCluster(RestartClusterRequest) returns (RestartClusterResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/restart"};
+  }
 
   // Fetch all qdrant releases in the account identified by the given ID.
   // Optional a cluster ID can be provided, the list will return the options to update to only.
@@ -219,6 +227,22 @@ message DeleteClusterRequest {
 
 // DeleteClusterResponse is the response from the DeleteCluster function
 message DeleteClusterResponse {
+  // Empty
+}
+
+// RestartClusterRequest is the request for the RestartCluster function
+message RestartClusterRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in Guid format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// RestartClusterResponse is the response from the RestartCluster function
+message RestartClusterResponse {
   // Empty
 }
 

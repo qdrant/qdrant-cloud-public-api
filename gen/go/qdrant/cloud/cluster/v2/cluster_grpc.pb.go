@@ -24,6 +24,7 @@ const (
 	ClusterService_CreateCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/CreateCluster"
 	ClusterService_UpdateCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/UpdateCluster"
 	ClusterService_DeleteCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/DeleteCluster"
+	ClusterService_RestartCluster_FullMethodName     = "/qdrant.cloud.cluster.v2.ClusterService/RestartCluster"
 	ClusterService_ListQdrantReleases_FullMethodName = "/qdrant.cloud.cluster.v2.ClusterService/ListQdrantReleases"
 	ClusterService_ListClusterJWTs_FullMethodName    = "/qdrant.cloud.cluster.v2.ClusterService/ListClusterJWTs"
 	ClusterService_CreateClusterJWT_FullMethodName   = "/qdrant.cloud.cluster.v2.ClusterService/CreateClusterJWT"
@@ -56,6 +57,10 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - delete:clusters
 	DeleteCluster(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*DeleteClusterResponse, error)
+	// Restarts a cluster in the account identified by the given ID.
+	// Required permissions:
+	// - write:clusters
+	RestartCluster(ctx context.Context, in *RestartClusterRequest, opts ...grpc.CallOption) (*RestartClusterResponse, error)
 	// Fetch all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
@@ -133,6 +138,16 @@ func (c *clusterServiceClient) DeleteCluster(ctx context.Context, in *DeleteClus
 	return out, nil
 }
 
+func (c *clusterServiceClient) RestartCluster(ctx context.Context, in *RestartClusterRequest, opts ...grpc.CallOption) (*RestartClusterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestartClusterResponse)
+	err := c.cc.Invoke(ctx, ClusterService_RestartCluster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListQdrantReleasesResponse)
@@ -199,6 +214,10 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - delete:clusters
 	DeleteCluster(context.Context, *DeleteClusterRequest) (*DeleteClusterResponse, error)
+	// Restarts a cluster in the account identified by the given ID.
+	// Required permissions:
+	// - write:clusters
+	RestartCluster(context.Context, *RestartClusterRequest) (*RestartClusterResponse, error)
 	// Fetch all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
@@ -240,6 +259,9 @@ func (UnimplementedClusterServiceServer) UpdateCluster(context.Context, *UpdateC
 }
 func (UnimplementedClusterServiceServer) DeleteCluster(context.Context, *DeleteClusterRequest) (*DeleteClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCluster not implemented")
+}
+func (UnimplementedClusterServiceServer) RestartCluster(context.Context, *RestartClusterRequest) (*RestartClusterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestartCluster not implemented")
 }
 func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQdrantReleases not implemented")
@@ -364,6 +386,24 @@ func _ClusterService_DeleteCluster_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RestartCluster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestartClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RestartCluster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RestartCluster_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RestartCluster(ctx, req.(*RestartClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListQdrantReleases_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListQdrantReleasesRequest)
 	if err := dec(in); err != nil {
@@ -462,6 +502,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCluster",
 			Handler:    _ClusterService_DeleteCluster_Handler,
+		},
+		{
+			MethodName: "RestartCluster",
+			Handler:    _ClusterService_RestartCluster_Handler,
 		},
 		{
 			MethodName: "ListQdrantReleases",
