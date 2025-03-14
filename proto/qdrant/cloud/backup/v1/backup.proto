@@ -122,13 +122,9 @@ message RestoreBackupRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 
-  // The identifier of the cluster (in Guid format).
-  // This is a required field.
-  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-
   // The identifier of the backup (in Guid format).
   // This is a required field.
-  string backup_id = 3 [(buf.validate.field).string = {uuid: true}];
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // RestoreBackupResponse is the response from the RestoreBackup function.
