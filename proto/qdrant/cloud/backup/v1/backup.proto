@@ -74,8 +74,10 @@ message ListBackupsRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the cluster (in Guid format).
-  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // When this field is set, only backups that belong to the cluster are returned.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the schedule (in Guid format).
+  // When this field is set, only backups triggered by the backup schedule are returned.
   optional string schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
   // TODO: ListOptions
 }
@@ -159,7 +161,9 @@ message Backup {
   // The identifier of the schedule that triggered the creation of the backup.
   // If there isn't value, that means the backup was created manually.
   // This is a read-only field and will be available after a backup is created.
-  string schedule_id = 6;
+  // TODO we don't have this field at this moment (we used to store only `short_id`).
+  // Once we have it, we can enable it here.
+  // string schedule_id = 6;
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
   string status = 7 [(buf.validate.field).string = {
