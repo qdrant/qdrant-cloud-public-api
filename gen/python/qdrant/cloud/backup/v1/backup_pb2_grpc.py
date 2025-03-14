@@ -47,6 +47,31 @@ class BackupServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupResponse.FromString,
                 _registered_method=True)
+        self.ListBackupSchedules = channel.unary_unary(
+                '/qdrant.cloud.backup.v1.BackupService/ListBackupSchedules',
+                request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesResponse.FromString,
+                _registered_method=True)
+        self.GetBackupSchedule = channel.unary_unary(
+                '/qdrant.cloud.backup.v1.BackupService/GetBackupSchedule',
+                request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleResponse.FromString,
+                _registered_method=True)
+        self.CreateBackupSchedule = channel.unary_unary(
+                '/qdrant.cloud.backup.v1.BackupService/CreateBackupSchedule',
+                request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleResponse.FromString,
+                _registered_method=True)
+        self.UpdateBackupSchedule = channel.unary_unary(
+                '/qdrant.cloud.backup.v1.BackupService/UpdateBackupSchedule',
+                request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleResponse.FromString,
+                _registered_method=True)
+        self.DeleteBackupSchedule = channel.unary_unary(
+                '/qdrant.cloud.backup.v1.BackupService/DeleteBackupSchedule',
+                request_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.FromString,
+                _registered_method=True)
 
 
 class BackupServiceServicer(object):
@@ -99,6 +124,51 @@ class BackupServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListBackupSchedules(self, request, context):
+        """Fetch all backup schedules in the account identified by the given ID.
+        Required permissions:
+        - read:backup_schedules
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBackupSchedule(self, request, context):
+        """Fetch a backup schedule in the account identified by the given ID.
+        Required permissions:
+        - read:backup_schedules
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateBackupSchedule(self, request, context):
+        """Creates a backup schedule in the account identified by the given ID.
+        Required permissions:
+        - write:backup_schedules
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateBackupSchedule(self, request, context):
+        """Update a backup schedule in the account identified by the given ID.
+        Required permissions:
+        - write:backup_schedules
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteBackupSchedule(self, request, context):
+        """Deletes a backup schedule in the account identified by the given ID.
+        Required permissions:
+        - delete:backup_schedules
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BackupServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -121,6 +191,31 @@ def add_BackupServiceServicer_to_server(servicer, server):
                     servicer.RestoreBackup,
                     request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupResponse.SerializeToString,
+            ),
+            'ListBackupSchedules': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListBackupSchedules,
+                    request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesResponse.SerializeToString,
+            ),
+            'GetBackupSchedule': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBackupSchedule,
+                    request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleResponse.SerializeToString,
+            ),
+            'CreateBackupSchedule': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateBackupSchedule,
+                    request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleResponse.SerializeToString,
+            ),
+            'UpdateBackupSchedule': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateBackupSchedule,
+                    request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleResponse.SerializeToString,
+            ),
+            'DeleteBackupSchedule': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteBackupSchedule,
+                    request_deserializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -244,6 +339,141 @@ class BackupService(object):
             '/qdrant.cloud.backup.v1.BackupService/RestoreBackup',
             qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupRequest.SerializeToString,
             qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListBackupSchedules(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.backup.v1.BackupService/ListBackupSchedules',
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.ListBackupSchedulesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBackupSchedule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.backup.v1.BackupService/GetBackupSchedule',
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleRequest.SerializeToString,
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.GetBackupScheduleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateBackupSchedule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.backup.v1.BackupService/CreateBackupSchedule',
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleRequest.SerializeToString,
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.CreateBackupScheduleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateBackupSchedule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.backup.v1.BackupService/UpdateBackupSchedule',
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleRequest.SerializeToString,
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupScheduleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteBackupSchedule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.backup.v1.BackupService/DeleteBackupSchedule',
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.SerializeToString,
+            qdrant_dot_cloud_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.FromString,
             options,
             channel_credentials,
             insecure,

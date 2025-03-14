@@ -100,7 +100,7 @@ service BackupService {
       post: "/api/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
       body: "*"
     };
-}
+  }
 
   // Update a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -360,11 +360,11 @@ message BackupSchedule {
   // - NotFound: The backup schedule isn't present in the cluster's region.
   // - Unknown: The system didn't receive status information about the backup schedule from the cluster's region.
   string status = 8 [(buf.validate.field).string = {
-      in: [
-        "Active",
-        "FailedToSync",
-        "NotFound",
-        "Unknown",
-        ]
-    }];
+    in: [
+      "Active",
+      "FailedToSync",
+      "NotFound",
+      "Unknown"
+    ]
+  }];
 }

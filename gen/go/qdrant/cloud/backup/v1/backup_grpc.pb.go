@@ -19,10 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackupService_ListBackups_FullMethodName   = "/qdrant.cloud.backup.v1.BackupService/ListBackups"
-	BackupService_CreateBackup_FullMethodName  = "/qdrant.cloud.backup.v1.BackupService/CreateBackup"
-	BackupService_DeleteBackup_FullMethodName  = "/qdrant.cloud.backup.v1.BackupService/DeleteBackup"
-	BackupService_RestoreBackup_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/RestoreBackup"
+	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.backup.v1.BackupService/ListBackups"
+	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.backup.v1.BackupService/CreateBackup"
+	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.backup.v1.BackupService/DeleteBackup"
+	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.backup.v1.BackupService/RestoreBackup"
+	BackupService_ListBackupSchedules_FullMethodName  = "/qdrant.cloud.backup.v1.BackupService/ListBackupSchedules"
+	BackupService_GetBackupSchedule_FullMethodName    = "/qdrant.cloud.backup.v1.BackupService/GetBackupSchedule"
+	BackupService_CreateBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/CreateBackupSchedule"
+	BackupService_UpdateBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/UpdateBackupSchedule"
+	BackupService_DeleteBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/DeleteBackupSchedule"
 )
 
 // BackupServiceClient is the client API for BackupService service.
@@ -45,6 +50,26 @@ type BackupServiceClient interface {
 	DeleteBackup(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*DeleteBackupResponse, error)
 	// Restores a backup in the account identified by the given ID.
 	RestoreBackup(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*RestoreBackupResponse, error)
+	// Fetch all backup schedules in the account identified by the given ID.
+	// Required permissions:
+	// - read:backup_schedules
+	ListBackupSchedules(ctx context.Context, in *ListBackupSchedulesRequest, opts ...grpc.CallOption) (*ListBackupSchedulesResponse, error)
+	// Fetch a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - read:backup_schedules
+	GetBackupSchedule(ctx context.Context, in *GetBackupScheduleRequest, opts ...grpc.CallOption) (*GetBackupScheduleResponse, error)
+	// Creates a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - write:backup_schedules
+	CreateBackupSchedule(ctx context.Context, in *CreateBackupScheduleRequest, opts ...grpc.CallOption) (*CreateBackupScheduleResponse, error)
+	// Update a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - write:backup_schedules
+	UpdateBackupSchedule(ctx context.Context, in *UpdateBackupScheduleRequest, opts ...grpc.CallOption) (*UpdateBackupScheduleResponse, error)
+	// Deletes a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - delete:backup_schedules
+	DeleteBackupSchedule(ctx context.Context, in *DeleteBackupScheduleRequest, opts ...grpc.CallOption) (*DeleteBackupScheduleResponse, error)
 }
 
 type backupServiceClient struct {
@@ -95,6 +120,56 @@ func (c *backupServiceClient) RestoreBackup(ctx context.Context, in *RestoreBack
 	return out, nil
 }
 
+func (c *backupServiceClient) ListBackupSchedules(ctx context.Context, in *ListBackupSchedulesRequest, opts ...grpc.CallOption) (*ListBackupSchedulesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBackupSchedulesResponse)
+	err := c.cc.Invoke(ctx, BackupService_ListBackupSchedules_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) GetBackupSchedule(ctx context.Context, in *GetBackupScheduleRequest, opts ...grpc.CallOption) (*GetBackupScheduleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackupScheduleResponse)
+	err := c.cc.Invoke(ctx, BackupService_GetBackupSchedule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) CreateBackupSchedule(ctx context.Context, in *CreateBackupScheduleRequest, opts ...grpc.CallOption) (*CreateBackupScheduleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBackupScheduleResponse)
+	err := c.cc.Invoke(ctx, BackupService_CreateBackupSchedule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) UpdateBackupSchedule(ctx context.Context, in *UpdateBackupScheduleRequest, opts ...grpc.CallOption) (*UpdateBackupScheduleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBackupScheduleResponse)
+	err := c.cc.Invoke(ctx, BackupService_UpdateBackupSchedule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) DeleteBackupSchedule(ctx context.Context, in *DeleteBackupScheduleRequest, opts ...grpc.CallOption) (*DeleteBackupScheduleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteBackupScheduleResponse)
+	err := c.cc.Invoke(ctx, BackupService_DeleteBackupSchedule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackupServiceServer is the server API for BackupService service.
 // All implementations must embed UnimplementedBackupServiceServer
 // for forward compatibility.
@@ -115,6 +190,26 @@ type BackupServiceServer interface {
 	DeleteBackup(context.Context, *DeleteBackupRequest) (*DeleteBackupResponse, error)
 	// Restores a backup in the account identified by the given ID.
 	RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error)
+	// Fetch all backup schedules in the account identified by the given ID.
+	// Required permissions:
+	// - read:backup_schedules
+	ListBackupSchedules(context.Context, *ListBackupSchedulesRequest) (*ListBackupSchedulesResponse, error)
+	// Fetch a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - read:backup_schedules
+	GetBackupSchedule(context.Context, *GetBackupScheduleRequest) (*GetBackupScheduleResponse, error)
+	// Creates a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - write:backup_schedules
+	CreateBackupSchedule(context.Context, *CreateBackupScheduleRequest) (*CreateBackupScheduleResponse, error)
+	// Update a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - write:backup_schedules
+	UpdateBackupSchedule(context.Context, *UpdateBackupScheduleRequest) (*UpdateBackupScheduleResponse, error)
+	// Deletes a backup schedule in the account identified by the given ID.
+	// Required permissions:
+	// - delete:backup_schedules
+	DeleteBackupSchedule(context.Context, *DeleteBackupScheduleRequest) (*DeleteBackupScheduleResponse, error)
 	mustEmbedUnimplementedBackupServiceServer()
 }
 
@@ -136,6 +231,21 @@ func (UnimplementedBackupServiceServer) DeleteBackup(context.Context, *DeleteBac
 }
 func (UnimplementedBackupServiceServer) RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RestoreBackup not implemented")
+}
+func (UnimplementedBackupServiceServer) ListBackupSchedules(context.Context, *ListBackupSchedulesRequest) (*ListBackupSchedulesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBackupSchedules not implemented")
+}
+func (UnimplementedBackupServiceServer) GetBackupSchedule(context.Context, *GetBackupScheduleRequest) (*GetBackupScheduleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackupSchedule not implemented")
+}
+func (UnimplementedBackupServiceServer) CreateBackupSchedule(context.Context, *CreateBackupScheduleRequest) (*CreateBackupScheduleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBackupSchedule not implemented")
+}
+func (UnimplementedBackupServiceServer) UpdateBackupSchedule(context.Context, *UpdateBackupScheduleRequest) (*UpdateBackupScheduleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBackupSchedule not implemented")
+}
+func (UnimplementedBackupServiceServer) DeleteBackupSchedule(context.Context, *DeleteBackupScheduleRequest) (*DeleteBackupScheduleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBackupSchedule not implemented")
 }
 func (UnimplementedBackupServiceServer) mustEmbedUnimplementedBackupServiceServer() {}
 func (UnimplementedBackupServiceServer) testEmbeddedByValue()                       {}
@@ -230,6 +340,96 @@ func _BackupService_RestoreBackup_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackupService_ListBackupSchedules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBackupSchedulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).ListBackupSchedules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_ListBackupSchedules_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).ListBackupSchedules(ctx, req.(*ListBackupSchedulesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_GetBackupSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackupScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).GetBackupSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_GetBackupSchedule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).GetBackupSchedule(ctx, req.(*GetBackupScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_CreateBackupSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBackupScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).CreateBackupSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_CreateBackupSchedule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).CreateBackupSchedule(ctx, req.(*CreateBackupScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_UpdateBackupSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBackupScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).UpdateBackupSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_UpdateBackupSchedule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).UpdateBackupSchedule(ctx, req.(*UpdateBackupScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_DeleteBackupSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBackupScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).DeleteBackupSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_DeleteBackupSchedule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).DeleteBackupSchedule(ctx, req.(*DeleteBackupScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackupService_ServiceDesc is the grpc.ServiceDesc for BackupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,6 +452,26 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RestoreBackup",
 			Handler:    _BackupService_RestoreBackup_Handler,
+		},
+		{
+			MethodName: "ListBackupSchedules",
+			Handler:    _BackupService_ListBackupSchedules_Handler,
+		},
+		{
+			MethodName: "GetBackupSchedule",
+			Handler:    _BackupService_GetBackupSchedule_Handler,
+		},
+		{
+			MethodName: "CreateBackupSchedule",
+			Handler:    _BackupService_CreateBackupSchedule_Handler,
+		},
+		{
+			MethodName: "UpdateBackupSchedule",
+			Handler:    _BackupService_UpdateBackupSchedule_Handler,
+		},
+		{
+			MethodName: "DeleteBackupSchedule",
+			Handler:    _BackupService_DeleteBackupSchedule_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
