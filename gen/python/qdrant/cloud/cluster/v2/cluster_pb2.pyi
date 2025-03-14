@@ -152,18 +152,20 @@ class ClusterConfiguration(_message.Message):
     def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ...) -> None: ...
 
 class DatabaseConfiguration(_message.Message):
-    __slots__ = ("collection", "storage", "service", "log_level", "tls")
+    __slots__ = ("collection", "storage", "service", "log_level", "tls", "inference")
     COLLECTION_FIELD_NUMBER: _ClassVar[int]
     STORAGE_FIELD_NUMBER: _ClassVar[int]
     SERVICE_FIELD_NUMBER: _ClassVar[int]
     LOG_LEVEL_FIELD_NUMBER: _ClassVar[int]
     TLS_FIELD_NUMBER: _ClassVar[int]
+    INFERENCE_FIELD_NUMBER: _ClassVar[int]
     collection: DatabaseConfigurationCollection
     storage: DatabaseConfigurationStorage
     service: DatabaseConfigurationService
     log_level: str
     tls: DatabaseConfigurationTls
-    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[str] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ...) -> None: ...
+    inference: DatabaseConfigurationInference
+    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[str] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollection(_message.Message):
     __slots__ = ("replication_factor", "write_consistency_factor", "vectors")
@@ -214,6 +216,12 @@ class DatabaseConfigurationTls(_message.Message):
     cert: _common_pb2.SecretKeyRef
     key: _common_pb2.SecretKeyRef
     def __init__(self, cert: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ...) -> None: ...
+
+class DatabaseConfigurationInference(_message.Message):
+    __slots__ = ("enabled",)
+    ENABLED_FIELD_NUMBER: _ClassVar[int]
+    enabled: bool
+    def __init__(self, enabled: bool = ...) -> None: ...
 
 class AdditionalResources(_message.Message):
     __slots__ = ("disk",)

@@ -995,6 +995,10 @@
         "tls": {
           "$ref": "#/definitions/v2DatabaseConfigurationTls",
           "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
+        },
+        "inference": {
+          "$ref": "#/definitions/v2DatabaseConfigurationInference",
+          "title": "The Qdrant database inference configuration\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
         }
       },
       "description": "Configuration to setup a Qdrant database in a hybrid cloud."
@@ -1028,6 +1032,16 @@
         }
       },
       "title": "The default Qdrant database collection vectors configuration"
+    },
+    "v2DatabaseConfigurationInference": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "If true, the database is configured to use cloud inferencing"
+        }
+      },
+      "title": "DatabaseConfigurationInference contains cloud inferencing configuration"
     },
     "v2DatabaseConfigurationService": {
       "type": "object",

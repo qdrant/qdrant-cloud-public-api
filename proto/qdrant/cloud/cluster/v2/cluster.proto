@@ -419,6 +419,9 @@ message DatabaseConfiguration {
   // The Qdrant database TLS configuration
   // This is an optional field, if not set an unsecure connection is provided
   optional DatabaseConfigurationTls tls = 5;
+  // The Qdrant database inference configuration
+  // This is an optional field, if unset, the database is not configured for cloud inferencing
+  optional DatabaseConfigurationInference inference = 6;
 }
 
 // The default Qdrant database collection configuration
@@ -485,6 +488,12 @@ message DatabaseConfigurationTls {
   common.v1.SecretKeyRef cert = 1;
   // Secret to use for the private key
   common.v1.SecretKeyRef key = 2;
+}
+
+// DatabaseConfigurationInference contains cloud inferencing configuration
+message DatabaseConfigurationInference {
+  // If true, the database is configured to use cloud inferencing
+  bool enabled = 1;
 }
 
 // AdditionalResources contains the information about additional resources
