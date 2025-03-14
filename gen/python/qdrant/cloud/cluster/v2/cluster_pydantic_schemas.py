@@ -115,6 +115,14 @@ class DatabaseConfigurationTls(BaseModel):
 # Secret to use for the private key
     key: SecretKeyRef = Field()
 
+class DatabaseConfigurationInference(BaseModel):
+    """
+     DatabaseConfigurationInference contains cloud inferencing configuration
+    """
+
+# If true, the database is configured to use cloud inferencing
+    enabled: bool = Field(default=False)
+
 class DatabaseConfiguration(BaseModel):
     """
      Configuration to setup a Qdrant database in a hybrid cloud.
@@ -137,6 +145,9 @@ class DatabaseConfiguration(BaseModel):
 # The Qdrant database TLS configuration
 # This is an optional field, if not set an unsecure connection is provided
     tls: typing.Optional[DatabaseConfigurationTls] = Field(default=None)
+# The Qdrant database inference configuration
+# This is an optional field, if unset, the database is not configured for cloud inferencing
+    inference: typing.Optional[DatabaseConfigurationInference] = Field(default=None)
 
 class Toleration(BaseModel):
     """
