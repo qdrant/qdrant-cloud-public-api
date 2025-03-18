@@ -62,26 +62,6 @@ class RestoreBackupResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class Backup(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "creation_duration")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    STATUS_FIELD_NUMBER: _ClassVar[int]
-    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
-    CREATION_DURATION_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    created_at: _timestamp_pb2.Timestamp
-    account_id: str
-    cluster_id: str
-    name: str
-    status: str
-    deleted_at: _timestamp_pb2.Timestamp
-    creation_duration: _duration_pb2.Duration
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., creation_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ...) -> None: ...
-
 class ListBackupSchedulesRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -149,6 +129,26 @@ class DeleteBackupScheduleRequest(_message.Message):
 class DeleteBackupScheduleResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class Backup(_message.Message):
+    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "backup_duration")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_DURATION_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    created_at: _timestamp_pb2.Timestamp
+    account_id: str
+    cluster_id: str
+    name: str
+    status: str
+    deleted_at: _timestamp_pb2.Timestamp
+    backup_duration: _duration_pb2.Duration
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "cluster_id", "schedule", "retention_period", "deleted_at", "status")

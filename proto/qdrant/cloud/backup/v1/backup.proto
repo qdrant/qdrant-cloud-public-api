@@ -181,7 +181,6 @@ message RestoreBackupRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
   // The identifier of the backup (in Guid format).
   // This is a required field.
   string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -190,56 +189,6 @@ message RestoreBackupRequest {
 // RestoreBackupResponse is the response from the RestoreBackup function.
 message RestoreBackupResponse {
   // Empty
-}
-
-// A Backup represents a backup of a Qdrant database.
-message Backup {
-  // Unique identifier for the backup (in Guid format).
-  // This is a read-only field and will be available after a backup is created.
-  string id = 1;
-  option (buf.validate.message).cel = {
-    id: "cluster.id"
-    message: "value must be a valid UUID"
-    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
-  };
-  // The timestamp when the backup was created.
-  // This is a read-only field and will be available after a backup is created.
-  google.protobuf.Timestamp created_at = 2;
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
-  // This is a required field.
-  string cluster_id = 4;
-  // The name of the backup.
-  // This is a read-only field and will be available after a backup is created.
-  string name = 5;
-  // The identifier of the schedule that triggered the creation of the backup.
-  // If there isn't value, that means the backup was created manually.
-  // This is a read-only field and will be available after a backup is created.
-  // TODO we don't have this field at this moment (we used to store only `short_id`).
-  // Once we have it, we can enable it here.
-  // string schedule_id = 6;
-  // The current status of the backup.
-  // This is a read-only field and will be set after CreateBackup is called.
-  string status = 7 [(buf.validate.field).string = {
-    in: [
-      "Running",
-      "Skipped",
-      "Failed",
-      "Succeeded",
-      "FailedToSync",
-      "NotFound",
-      "Unknown"
-    ]
-  }];
-  // The timestamp when the backup was deleted (or when deletion started).
-  // This is a read-only field and will be set after DeleteBackup is called.
-  google.protobuf.Timestamp deleted_at = 8;
-
-  // The total time taken to create the backup.
-  // This is a read-only field and will be available after a backup is created.
-  google.protobuf.Duration creation_duration = 9;
 }
 
 // ListBackupSchedulesRequest is the request for the ListBackupSchedules function
@@ -323,6 +272,57 @@ message DeleteBackupScheduleResponse {
   // Empty
 }
 
+// A Backup represents a backup of a Qdrant database.
+message Backup {
+  // Unique identifier for the backup (in Guid format).
+  // This is a read-only field and will be available after a backup is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "cluster.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the backup was created.
+  // This is a read-only field and will be available after a backup is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The name of the backup.
+  // This is a read-only field and will be available after a backup is created.
+  string name = 5;
+  // The identifier of the schedule that triggered the creation of the backup.
+  // If there isn't value, that means the backup was created manually.
+  // This is a read-only field and will be available after a backup is created.
+  // TODO we don't have this field at this moment (we used to store only `short_id`).
+  // Once we have it, we can enable it here.
+  // string schedule_id = 6;
+  // The current status of the backup.
+  // This is a read-only field and will be set after CreateBackup is called.
+  string status = 7 [(buf.validate.field).string = {
+    in: [
+      "Running",
+      "Skipped",
+      "Failed",
+      "Succeeded",
+      "FailedToSync",
+      "NotFound",
+      "Unknown"
+    ]
+  }];
+  // The timestamp when the backup was deleted (or when deletion started).
+  // This is a read-only field and will be set after DeleteBackup is called.
+  google.protobuf.Timestamp deleted_at = 8;
+
+  // The total time taken to generate the backup. This is a read-only field and
+  // will be available after the backup process is completed, regardless of
+  // whether it succeeded or failed.
+  google.protobuf.Duration backup_duration = 9;
+}
+
 // A BackupSchedule represents a recurring schedule for creating backups.
 message BackupSchedule {
   // Unique identifier for the backup schedule (in Guid format).
@@ -341,14 +341,18 @@ message BackupSchedule {
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the cluster (in Guid format).
   // This is a required field.
-  string cluster_id = 4;
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The schedule that determines when the backup will be created.
   // This field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview
   // This is a required field.
-  string schedule = 5;
-  // The duration after the backups generated by this backup schedule will be automatically deleted after the specified retention period.
-  // If this value is unset, backups will be retained indefinitely.
-  google.protobuf.Duration retention_period = 6;
+  string schedule = 5 [(buf.validate.field).string.pattern = "^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$"];
+  // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+  // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+  // If the value is unset, backups will be retained indefinitely.
+  optional google.protobuf.Duration retention_period = 6 [(buf.validate.field).duration = {
+    gte: {seconds: 86400}
+    lte: {seconds: 31536000}
+  }];
   // The timestamp when the backup schedule was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackupSchedule is called.
   google.protobuf.Timestamp deleted_at = 7;

@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/backup/v1/backup.proto.
  */
 export const file_qdrant_cloud_backup_v1_backup: GenFile = /*@__PURE__*/
-  fileDesc("CiNxZHJhbnQvY2xvdWQvYmFja3VwL3YxL2JhY2t1cC5wcm90bxIWcWRyYW50LmNsb3VkLmJhY2t1cC52MSKYAQoSTGlzdEJhY2t1cHNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEiEKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBSACIAQESIgoLc2NoZWR1bGVfaWQYAyABKAlCCLpIBXIDsAEBSAGIAQFCDQoLX2NsdXN0ZXJfaWRCDgoMX3NjaGVkdWxlX2lkIkQKE0xpc3RCYWNrdXBzUmVzcG9uc2USLQoFaXRlbXMYASADKAsyHi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cCJFChNDcmVhdGVCYWNrdXBSZXF1ZXN0Ei4KBmJhY2t1cBgBIAEoCzIeLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwIkYKFENyZWF0ZUJhY2t1cFJlc3BvbnNlEi4KBmJhY2t1cBgBIAEoCzIeLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwIlAKE0RlbGV0ZUJhY2t1cFJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGwoJYmFja3VwX2lkGAIgASgJQgi6SAVyA7ABASIWChREZWxldGVCYWNrdXBSZXNwb25zZSJRChRSZXN0b3JlQmFja3VwUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIbCgliYWNrdXBfaWQYAiABKAlCCLpIBXIDsAEBIhcKFVJlc3RvcmVCYWNrdXBSZXNwb25zZSL0AwoGQmFja3VwEgoKAmlkGAEgASgJEi4KCmNyZWF0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYAyABKAlCCLpIBXIDsAEBEhIKCmNsdXN0ZXJfaWQYBCABKAkSDAoEbmFtZRgFIAEoCRJbCgZzdGF0dXMYByABKAlCS7pISHJGUgdSdW5uaW5nUgdTa2lwcGVkUgZGYWlsZWRSCVN1Y2NlZWRlZFIMRmFpbGVkVG9TeW5jUghOb3RGb3VuZFIHVW5rbm93bhIuCgpkZWxldGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI0ChFjcmVhdGlvbl9kdXJhdGlvbhgJIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbjqqAbpIpgEaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpImwKGkxpc3RCYWNrdXBTY2hlZHVsZXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEiEKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBSACIAQFCDQoLX2NsdXN0ZXJfaWQiVAobTGlzdEJhY2t1cFNjaGVkdWxlc1Jlc3BvbnNlEjUKBWl0ZW1zGAEgAygLMiYucWRyYW50LmNsb3VkLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJ8ChhHZXRCYWNrdXBTY2hlZHVsZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQESJAoSYmFja3VwX3NjaGVkdWxlX2lkGAMgASgJQgi6SAVyA7ABASJcChlHZXRCYWNrdXBTY2hlZHVsZVJlc3BvbnNlEj8KD2JhY2t1cF9zY2hlZHVsZRgBIAEoCzImLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUiXgobQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0Ej8KD2JhY2t1cF9zY2hlZHVsZRgBIAEoCzImLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUiXwocQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZRI/Cg9iYWNrdXBfc2NoZWR1bGUYASABKAsyJi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIl4KG1VwZGF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBI/Cg9iYWNrdXBfc2NoZWR1bGUYASABKAsyJi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIlcKHFVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2USNwoHY2x1c3RlchgBIAEoCzImLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUikQEKG0RlbGV0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIkChJiYWNrdXBfc2NoZWR1bGVfaWQYAiABKAlCCLpIBXIDsAEBEhsKDmRlbGV0ZV9iYWNrdXBzGAMgASgISACIAQFCEQoPX2RlbGV0ZV9iYWNrdXBzIh4KHERlbGV0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2Ui6gMKDkJhY2t1cFNjaGVkdWxlEgoKAmlkGAEgASgJEi4KCmNyZWF0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYAyABKAlCCLpIBXIDsAEBEhIKCmNsdXN0ZXJfaWQYBCABKAkSEAoIc2NoZWR1bGUYBSABKAkSMwoQcmV0ZW50aW9uX3BlcmlvZBgGIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhIuCgpkZWxldGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI+CgZzdGF0dXMYCCABKAlCLrpIK3IpUgZBY3RpdmVSDEZhaWxlZFRvU3luY1IITm90Rm91bmRSB1Vua25vd246sgG6SK4BGqsBChJiYWNrdXBfc2NoZWR1bGUuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpMoEQCg1CYWNrdXBTZXJ2aWNlEqwBCgtMaXN0QmFja3VwcxIqLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuTGlzdEJhY2t1cHNSZXF1ZXN0GisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5MaXN0QmFja3Vwc1Jlc3BvbnNlIkSKtRgMcmVhZDpiYWNrdXBzgtPkkwIuEiwvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwcxLPAQoMQ3JlYXRlQmFja3VwEisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5DcmVhdGVCYWNrdXBSZXF1ZXN0GiwucWRyYW50LmNsb3VkLmJhY2t1cC52MS5DcmVhdGVCYWNrdXBSZXNwb25zZSJkirUYDXdyaXRlOmJhY2t1cHOStRgRYmFja3VwLmFjY291bnRfaWSC0+STAjg6ASoiMy9hcGkvYmFja3VwL3YxL2FjY291bnRzL3tiYWNrdXAuYWNjb3VudF9pZH0vYmFja3VwcxK9AQoMRGVsZXRlQmFja3VwEisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBSZXF1ZXN0GiwucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBSZXNwb25zZSJSirUYDmRlbGV0ZTpiYWNrdXBzgtPkkwI6KjgvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3Vwcy97YmFja3VwX2lkfRLHAQoNUmVzdG9yZUJhY2t1cBIsLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuUmVzdG9yZUJhY2t1cFJlcXVlc3QaLS5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLlJlc3RvcmVCYWNrdXBSZXNwb25zZSJZirUYDWFkbWluOmJhY2t1cHOC0+STAkIiQC9hcGkvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBzL3tiYWNrdXBfaWR9L3Jlc3RvcmUS1gEKE0xpc3RCYWNrdXBTY2hlZHVsZXMSMi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkxpc3RCYWNrdXBTY2hlZHVsZXNSZXF1ZXN0GjMucWRyYW50LmNsb3VkLmJhY2t1cC52MS5MaXN0QmFja3VwU2NoZWR1bGVzUmVzcG9uc2UiVoq1GBVyZWFkOmJhY2t1cF9zY2hlZHVsZXOC0+STAjcSNS9hcGkvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzEuUBChFHZXRCYWNrdXBTY2hlZHVsZRIwLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuR2V0QmFja3VwU2NoZWR1bGVSZXF1ZXN0GjEucWRyYW50LmNsb3VkLmJhY2t1cC52MS5HZXRCYWNrdXBTY2hlZHVsZVJlc3BvbnNlImuKtRgVcmVhZDpiYWNrdXBfc2NoZWR1bGVzgtPkkwJMEkovYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwX3NjaGVkdWxlcy97YmFja3VwX3NjaGVkdWxlX2lkfRKMAgoUQ3JlYXRlQmFja3VwU2NoZWR1bGUSMy5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkNyZWF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBo0LnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZSKIAYq1GBZ3cml0ZTpiYWNrdXBfc2NoZWR1bGVzkrUYGmJhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkgtPkkwJKOgEqIkUvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YmFja3VwX3NjaGVkdWxlLmFjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMSoQIKFFVwZGF0ZUJhY2t1cFNjaGVkdWxlEjMucWRyYW50LmNsb3VkLmJhY2t1cC52MS5VcGRhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLlVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2UinQGKtRgWd3JpdGU6YmFja3VwX3NjaGVkdWxlc5K1GBpiYWNrdXBfc2NoZWR1bGUuYWNjb3VudF9pZILT5JMCXzoBKhpaL2FwaS9iYWNrdXAvdjEvYWNjb3VudHMve2JhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGUuaWR9EvABChREZWxldGVCYWNrdXBTY2hlZHVsZRIzLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuRGVsZXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0GjQucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlIm2KtRgXZGVsZXRlOmJhY2t1cF9zY2hlZHVsZXOC0+STAkwqSi9hcGkvYmFja3VwL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGVfaWR9QvYBChpjb20ucWRyYW50LmNsb3VkLmJhY2t1cC52MUILQmFja3VwUHJvdG9QAVpQZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9iYWNrdXAvdjE7YmFja3VwdjGiAgNRQ0KqAhZRZHJhbnQuQ2xvdWQuQmFja3VwLlYxygIWUWRyYW50XENsb3VkXEJhY2t1cFxWMeICIlFkcmFudFxDbG91ZFxCYWNrdXBcVjFcR1BCTWV0YWRhdGHqAhlRZHJhbnQ6OkNsb3VkOjpCYWNrdXA6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_duration, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CiNxZHJhbnQvY2xvdWQvYmFja3VwL3YxL2JhY2t1cC5wcm90bxIWcWRyYW50LmNsb3VkLmJhY2t1cC52MSKYAQoSTGlzdEJhY2t1cHNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEiEKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBSACIAQESIgoLc2NoZWR1bGVfaWQYAyABKAlCCLpIBXIDsAEBSAGIAQFCDQoLX2NsdXN0ZXJfaWRCDgoMX3NjaGVkdWxlX2lkIkQKE0xpc3RCYWNrdXBzUmVzcG9uc2USLQoFaXRlbXMYASADKAsyHi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cCJFChNDcmVhdGVCYWNrdXBSZXF1ZXN0Ei4KBmJhY2t1cBgBIAEoCzIeLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwIkYKFENyZWF0ZUJhY2t1cFJlc3BvbnNlEi4KBmJhY2t1cBgBIAEoCzIeLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwIlAKE0RlbGV0ZUJhY2t1cFJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGwoJYmFja3VwX2lkGAIgASgJQgi6SAVyA7ABASIWChREZWxldGVCYWNrdXBSZXNwb25zZSJRChRSZXN0b3JlQmFja3VwUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIbCgliYWNrdXBfaWQYAiABKAlCCLpIBXIDsAEBIhcKFVJlc3RvcmVCYWNrdXBSZXNwb25zZSJsChpMaXN0QmFja3VwU2NoZWR1bGVzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIhCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABAUgAiAEBQg0KC19jbHVzdGVyX2lkIlQKG0xpc3RCYWNrdXBTY2hlZHVsZXNSZXNwb25zZRI1CgVpdGVtcxgBIAMoCzImLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUifAoYR2V0QmFja3VwU2NoZWR1bGVSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBEiQKEmJhY2t1cF9zY2hlZHVsZV9pZBgDIAEoCUIIukgFcgOwAQEiXAoZR2V0QmFja3VwU2NoZWR1bGVSZXNwb25zZRI/Cg9iYWNrdXBfc2NoZWR1bGUYASABKAsyJi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIl4KG0NyZWF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBI/Cg9iYWNrdXBfc2NoZWR1bGUYASABKAsyJi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIl8KHENyZWF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2USPwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMiYucWRyYW50LmNsb3VkLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJeChtVcGRhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QSPwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMiYucWRyYW50LmNsb3VkLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJXChxVcGRhdGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlEjcKB2NsdXN0ZXIYASABKAsyJi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIpEBChtEZWxldGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESJAoSYmFja3VwX3NjaGVkdWxlX2lkGAIgASgJQgi6SAVyA7ABARIbCg5kZWxldGVfYmFja3VwcxgDIAEoCEgAiAEBQhEKD19kZWxldGVfYmFja3VwcyIeChxEZWxldGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlIvwDCgZCYWNrdXASCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHAoKYWNjb3VudF9pZBgDIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgEIAEoCUIIukgFcgOwAQESDAoEbmFtZRgFIAEoCRJbCgZzdGF0dXMYByABKAlCS7pISHJGUgdSdW5uaW5nUgdTa2lwcGVkUgZGYWlsZWRSCVN1Y2NlZWRlZFIMRmFpbGVkVG9TeW5jUghOb3RGb3VuZFIHVW5rbm93bhIuCgpkZWxldGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg9iYWNrdXBfZHVyYXRpb24YCSABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb246qgG6SKYBGqMBCgpjbHVzdGVyLmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KSLABQoOQmFja3VwU2NoZWR1bGUSCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHAoKYWNjb3VudF9pZBgDIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgEIAEoCUIIukgFcgOwAQESrAEKCHNjaGVkdWxlGAUgASgJQpkBukiVAXKSATKPAV4oQChhbm51YWxseXx5ZWFybHl8bW9udGhseXx3ZWVrbHl8ZGFpbHl8aG91cmx5fHJlYm9vdCkpfChAZXZlcnkgKFxkKyhuc3x1c3zCtXN8bXN8c3xtfGgpKSspfCgoKChcZCssKStcZCt8KFtcZFwqXSsoXC98LSlcZCspfFxkK3xcKikgPyl7NSw3fSkkEk0KEHJldGVudGlvbl9wZXJpb2QYBiABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb25CE7pIEKoBDSIFCIDnhA8yBAiAowVIAIgBARIuCgpkZWxldGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI+CgZzdGF0dXMYCCABKAlCLrpIK3IpUgZBY3RpdmVSDEZhaWxlZFRvU3luY1IITm90Rm91bmRSB1Vua25vd246sgG6SK4BGqsBChJiYWNrdXBfc2NoZWR1bGUuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpQhMKEV9yZXRlbnRpb25fcGVyaW9kMoEQCg1CYWNrdXBTZXJ2aWNlEqwBCgtMaXN0QmFja3VwcxIqLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuTGlzdEJhY2t1cHNSZXF1ZXN0GisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5MaXN0QmFja3Vwc1Jlc3BvbnNlIkSKtRgMcmVhZDpiYWNrdXBzgtPkkwIuEiwvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwcxLPAQoMQ3JlYXRlQmFja3VwEisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5DcmVhdGVCYWNrdXBSZXF1ZXN0GiwucWRyYW50LmNsb3VkLmJhY2t1cC52MS5DcmVhdGVCYWNrdXBSZXNwb25zZSJkirUYDXdyaXRlOmJhY2t1cHOStRgRYmFja3VwLmFjY291bnRfaWSC0+STAjg6ASoiMy9hcGkvYmFja3VwL3YxL2FjY291bnRzL3tiYWNrdXAuYWNjb3VudF9pZH0vYmFja3VwcxK9AQoMRGVsZXRlQmFja3VwEisucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBSZXF1ZXN0GiwucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBSZXNwb25zZSJSirUYDmRlbGV0ZTpiYWNrdXBzgtPkkwI6KjgvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3Vwcy97YmFja3VwX2lkfRLHAQoNUmVzdG9yZUJhY2t1cBIsLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuUmVzdG9yZUJhY2t1cFJlcXVlc3QaLS5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLlJlc3RvcmVCYWNrdXBSZXNwb25zZSJZirUYDWFkbWluOmJhY2t1cHOC0+STAkIiQC9hcGkvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBzL3tiYWNrdXBfaWR9L3Jlc3RvcmUS1gEKE0xpc3RCYWNrdXBTY2hlZHVsZXMSMi5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkxpc3RCYWNrdXBTY2hlZHVsZXNSZXF1ZXN0GjMucWRyYW50LmNsb3VkLmJhY2t1cC52MS5MaXN0QmFja3VwU2NoZWR1bGVzUmVzcG9uc2UiVoq1GBVyZWFkOmJhY2t1cF9zY2hlZHVsZXOC0+STAjcSNS9hcGkvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzEuUBChFHZXRCYWNrdXBTY2hlZHVsZRIwLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuR2V0QmFja3VwU2NoZWR1bGVSZXF1ZXN0GjEucWRyYW50LmNsb3VkLmJhY2t1cC52MS5HZXRCYWNrdXBTY2hlZHVsZVJlc3BvbnNlImuKtRgVcmVhZDpiYWNrdXBfc2NoZWR1bGVzgtPkkwJMEkovYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwX3NjaGVkdWxlcy97YmFja3VwX3NjaGVkdWxlX2lkfRKMAgoUQ3JlYXRlQmFja3VwU2NoZWR1bGUSMy5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLkNyZWF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBo0LnFkcmFudC5jbG91ZC5iYWNrdXAudjEuQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZSKIAYq1GBZ3cml0ZTpiYWNrdXBfc2NoZWR1bGVzkrUYGmJhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkgtPkkwJKOgEqIkUvYXBpL2JhY2t1cC92MS9hY2NvdW50cy97YmFja3VwX3NjaGVkdWxlLmFjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMSoQIKFFVwZGF0ZUJhY2t1cFNjaGVkdWxlEjMucWRyYW50LmNsb3VkLmJhY2t1cC52MS5VcGRhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuYmFja3VwLnYxLlVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2UinQGKtRgWd3JpdGU6YmFja3VwX3NjaGVkdWxlc5K1GBpiYWNrdXBfc2NoZWR1bGUuYWNjb3VudF9pZILT5JMCXzoBKhpaL2FwaS9iYWNrdXAvdjEvYWNjb3VudHMve2JhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGUuaWR9EvABChREZWxldGVCYWNrdXBTY2hlZHVsZRIzLnFkcmFudC5jbG91ZC5iYWNrdXAudjEuRGVsZXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0GjQucWRyYW50LmNsb3VkLmJhY2t1cC52MS5EZWxldGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlIm2KtRgXZGVsZXRlOmJhY2t1cF9zY2hlZHVsZXOC0+STAkwqSi9hcGkvYmFja3VwL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGVfaWR9QvYBChpjb20ucWRyYW50LmNsb3VkLmJhY2t1cC52MUILQmFja3VwUHJvdG9QAVpQZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9iYWNrdXAvdjE7YmFja3VwdjGiAgNRQ0KqAhZRZHJhbnQuQ2xvdWQuQmFja3VwLlYxygIWUWRyYW50XENsb3VkXEJhY2t1cFxWMeICIlFkcmFudFxDbG91ZFxCYWNrdXBcVjFcR1BCTWV0YWRhdGHqAhlRZHJhbnQ6OkNsb3VkOjpCYWNrdXA6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_duration, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListBackupsRequest is the request for the ListBackups function
@@ -217,6 +217,261 @@ export const RestoreBackupResponseSchema: GenMessage<RestoreBackupResponse> = /*
   messageDesc(file_qdrant_cloud_backup_v1_backup, 7);
 
 /**
+ * ListBackupSchedulesRequest is the request for the ListBackupSchedules function
+ *
+ * @generated from message qdrant.cloud.backup.v1.ListBackupSchedulesRequest
+ */
+export type ListBackupSchedulesRequest = Message<"qdrant.cloud.backup.v1.ListBackupSchedulesRequest"> & {
+  /**
+   * The identifier of the account (in Guid format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the cluster (in Guid format).
+   * When this field is set, only backup schedules that belong to the cluster are returned.
+   *
+   * TODO: ListOptions
+   *
+   * @generated from field: optional string cluster_id = 2;
+   */
+  clusterId?: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.ListBackupSchedulesRequest.
+ * Use `create(ListBackupSchedulesRequestSchema)` to create a new message.
+ */
+export const ListBackupSchedulesRequestSchema: GenMessage<ListBackupSchedulesRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 8);
+
+/**
+ * ListBackupsResponse is the response from the ListBackups function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.ListBackupSchedulesResponse
+ */
+export type ListBackupSchedulesResponse = Message<"qdrant.cloud.backup.v1.ListBackupSchedulesResponse"> & {
+  /**
+   * The actual backup schedules in this list.
+   *
+   * TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+   *
+   * @generated from field: repeated qdrant.cloud.backup.v1.BackupSchedule items = 1;
+   */
+  items: BackupSchedule[];
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.ListBackupSchedulesResponse.
+ * Use `create(ListBackupSchedulesResponseSchema)` to create a new message.
+ */
+export const ListBackupSchedulesResponseSchema: GenMessage<ListBackupSchedulesResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 9);
+
+/**
+ * GetBackupScheduleRequest is the request for the GetBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.GetBackupScheduleRequest
+ */
+export type GetBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.GetBackupScheduleRequest"> & {
+  /**
+   * The identifier of the account (in Guid format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cluster (in Guid format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+
+  /**
+   * The identifier for the backup schedule (in Guid format).
+   * This backup schedule should be part of the provided cluster and account.
+   * This is a required field.
+   *
+   * @generated from field: string backup_schedule_id = 3;
+   */
+  backupScheduleId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.GetBackupScheduleRequest.
+ * Use `create(GetBackupScheduleRequestSchema)` to create a new message.
+ */
+export const GetBackupScheduleRequestSchema: GenMessage<GetBackupScheduleRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 10);
+
+/**
+ * GetBackupScheduleResponse is the response from the GetBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.GetBackupScheduleResponse
+ */
+export type GetBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.GetBackupScheduleResponse"> & {
+  /**
+   * The actual cluster
+   *
+   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
+   */
+  backupSchedule?: BackupSchedule;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.GetBackupScheduleResponse.
+ * Use `create(GetBackupScheduleResponseSchema)` to create a new message.
+ */
+export const GetBackupScheduleResponseSchema: GenMessage<GetBackupScheduleResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 11);
+
+/**
+ * CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.CreateBackupScheduleRequest
+ */
+export type CreateBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.CreateBackupScheduleRequest"> & {
+  /**
+   * The actual backup schedule.
+   *
+   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
+   */
+  backupSchedule?: BackupSchedule;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.CreateBackupScheduleRequest.
+ * Use `create(CreateBackupScheduleRequestSchema)` to create a new message.
+ */
+export const CreateBackupScheduleRequestSchema: GenMessage<CreateBackupScheduleRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 12);
+
+/**
+ * CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.CreateBackupScheduleResponse
+ */
+export type CreateBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.CreateBackupScheduleResponse"> & {
+  /**
+   * The actual backup schedule.
+   *
+   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
+   */
+  backupSchedule?: BackupSchedule;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.CreateBackupScheduleResponse.
+ * Use `create(CreateBackupScheduleResponseSchema)` to create a new message.
+ */
+export const CreateBackupScheduleResponseSchema: GenMessage<CreateBackupScheduleResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 13);
+
+/**
+ * UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.UpdateBackupScheduleRequest
+ */
+export type UpdateBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.UpdateBackupScheduleRequest"> & {
+  /**
+   * The actual backup schedule.
+   *
+   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
+   */
+  backupSchedule?: BackupSchedule;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.UpdateBackupScheduleRequest.
+ * Use `create(UpdateBackupScheduleRequestSchema)` to create a new message.
+ */
+export const UpdateBackupScheduleRequestSchema: GenMessage<UpdateBackupScheduleRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 14);
+
+/**
+ * UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
+ *
+ * @generated from message qdrant.cloud.backup.v1.UpdateBackupScheduleResponse
+ */
+export type UpdateBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.UpdateBackupScheduleResponse"> & {
+  /**
+   * The actual backup schedule.
+   *
+   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule cluster = 1;
+   */
+  cluster?: BackupSchedule;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.UpdateBackupScheduleResponse.
+ * Use `create(UpdateBackupScheduleResponseSchema)` to create a new message.
+ */
+export const UpdateBackupScheduleResponseSchema: GenMessage<UpdateBackupScheduleResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 15);
+
+/**
+ * DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
+ *
+ * @generated from message qdrant.cloud.backup.v1.DeleteBackupScheduleRequest
+ */
+export type DeleteBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.DeleteBackupScheduleRequest"> & {
+  /**
+   * The identifier of the account (in Guid format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the backup schedule (in Guid format).
+   * This backup schedule should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string backup_schedule_id = 2;
+   */
+  backupScheduleId: string;
+
+  /**
+   * If set, the backups generated by this backup schedule will be deleted as well.
+   *
+   * @generated from field: optional bool delete_backups = 3;
+   */
+  deleteBackups?: boolean;
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.DeleteBackupScheduleRequest.
+ * Use `create(DeleteBackupScheduleRequestSchema)` to create a new message.
+ */
+export const DeleteBackupScheduleRequestSchema: GenMessage<DeleteBackupScheduleRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 16);
+
+/**
+ * DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.backup.v1.DeleteBackupScheduleResponse
+ */
+export type DeleteBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.DeleteBackupScheduleResponse"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.backup.v1.DeleteBackupScheduleResponse.
+ * Use `create(DeleteBackupScheduleResponseSchema)` to create a new message.
+ */
+export const DeleteBackupScheduleResponseSchema: GenMessage<DeleteBackupScheduleResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_backup_v1_backup, 17);
+
+/**
  * A Backup represents a backup of a Qdrant database.
  *
  * @generated from message qdrant.cloud.backup.v1.Backup
@@ -285,12 +540,13 @@ export type Backup = Message<"qdrant.cloud.backup.v1.Backup"> & {
   deletedAt?: Timestamp;
 
   /**
-   * The total time taken to create the backup.
-   * This is a read-only field and will be available after a backup is created.
+   * The total time taken to generate the backup. This is a read-only field and
+   * will be available after the backup process is completed, regardless of
+   * whether it succeeded or failed.
    *
-   * @generated from field: google.protobuf.Duration creation_duration = 9;
+   * @generated from field: google.protobuf.Duration backup_duration = 9;
    */
-  creationDuration?: Duration;
+  backupDuration?: Duration;
 };
 
 /**
@@ -298,261 +554,6 @@ export type Backup = Message<"qdrant.cloud.backup.v1.Backup"> & {
  * Use `create(BackupSchema)` to create a new message.
  */
 export const BackupSchema: GenMessage<Backup> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 8);
-
-/**
- * ListBackupSchedulesRequest is the request for the ListBackupSchedules function
- *
- * @generated from message qdrant.cloud.backup.v1.ListBackupSchedulesRequest
- */
-export type ListBackupSchedulesRequest = Message<"qdrant.cloud.backup.v1.ListBackupSchedulesRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier of the cluster (in Guid format).
-   * When this field is set, only backup schedules that belong to the cluster are returned.
-   *
-   * TODO: ListOptions
-   *
-   * @generated from field: optional string cluster_id = 2;
-   */
-  clusterId?: string;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.ListBackupSchedulesRequest.
- * Use `create(ListBackupSchedulesRequestSchema)` to create a new message.
- */
-export const ListBackupSchedulesRequestSchema: GenMessage<ListBackupSchedulesRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 9);
-
-/**
- * ListBackupsResponse is the response from the ListBackups function.
- *
- * @generated from message qdrant.cloud.backup.v1.ListBackupSchedulesResponse
- */
-export type ListBackupSchedulesResponse = Message<"qdrant.cloud.backup.v1.ListBackupSchedulesResponse"> & {
-  /**
-   * The actual backup schedules in this list.
-   *
-   * TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
-   *
-   * @generated from field: repeated qdrant.cloud.backup.v1.BackupSchedule items = 1;
-   */
-  items: BackupSchedule[];
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.ListBackupSchedulesResponse.
- * Use `create(ListBackupSchedulesResponseSchema)` to create a new message.
- */
-export const ListBackupSchedulesResponseSchema: GenMessage<ListBackupSchedulesResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 10);
-
-/**
- * GetBackupScheduleRequest is the request for the GetBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.GetBackupScheduleRequest
- */
-export type GetBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.GetBackupScheduleRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the cluster (in Guid format).
-   * This cluster should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string cluster_id = 2;
-   */
-  clusterId: string;
-
-  /**
-   * The identifier for the backup schedule (in Guid format).
-   * This backup schedule should be part of the provided cluster and account.
-   * This is a required field.
-   *
-   * @generated from field: string backup_schedule_id = 3;
-   */
-  backupScheduleId: string;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.GetBackupScheduleRequest.
- * Use `create(GetBackupScheduleRequestSchema)` to create a new message.
- */
-export const GetBackupScheduleRequestSchema: GenMessage<GetBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 11);
-
-/**
- * GetBackupScheduleResponse is the response from the GetBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.GetBackupScheduleResponse
- */
-export type GetBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.GetBackupScheduleResponse"> & {
-  /**
-   * The actual cluster
-   *
-   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
-   */
-  backupSchedule?: BackupSchedule;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.GetBackupScheduleResponse.
- * Use `create(GetBackupScheduleResponseSchema)` to create a new message.
- */
-export const GetBackupScheduleResponseSchema: GenMessage<GetBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 12);
-
-/**
- * CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.CreateBackupScheduleRequest
- */
-export type CreateBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.CreateBackupScheduleRequest"> & {
-  /**
-   * The actual backup schedule.
-   *
-   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
-   */
-  backupSchedule?: BackupSchedule;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.CreateBackupScheduleRequest.
- * Use `create(CreateBackupScheduleRequestSchema)` to create a new message.
- */
-export const CreateBackupScheduleRequestSchema: GenMessage<CreateBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 13);
-
-/**
- * CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.CreateBackupScheduleResponse
- */
-export type CreateBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.CreateBackupScheduleResponse"> & {
-  /**
-   * The actual backup schedule.
-   *
-   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
-   */
-  backupSchedule?: BackupSchedule;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.CreateBackupScheduleResponse.
- * Use `create(CreateBackupScheduleResponseSchema)` to create a new message.
- */
-export const CreateBackupScheduleResponseSchema: GenMessage<CreateBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 14);
-
-/**
- * UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.UpdateBackupScheduleRequest
- */
-export type UpdateBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.UpdateBackupScheduleRequest"> & {
-  /**
-   * The actual backup schedule.
-   *
-   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule backup_schedule = 1;
-   */
-  backupSchedule?: BackupSchedule;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.UpdateBackupScheduleRequest.
- * Use `create(UpdateBackupScheduleRequestSchema)` to create a new message.
- */
-export const UpdateBackupScheduleRequestSchema: GenMessage<UpdateBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 15);
-
-/**
- * UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
- *
- * @generated from message qdrant.cloud.backup.v1.UpdateBackupScheduleResponse
- */
-export type UpdateBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.UpdateBackupScheduleResponse"> & {
-  /**
-   * The actual backup schedule.
-   *
-   * @generated from field: qdrant.cloud.backup.v1.BackupSchedule cluster = 1;
-   */
-  cluster?: BackupSchedule;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.UpdateBackupScheduleResponse.
- * Use `create(UpdateBackupScheduleResponseSchema)` to create a new message.
- */
-export const UpdateBackupScheduleResponseSchema: GenMessage<UpdateBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 16);
-
-/**
- * DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
- *
- * @generated from message qdrant.cloud.backup.v1.DeleteBackupScheduleRequest
- */
-export type DeleteBackupScheduleRequest = Message<"qdrant.cloud.backup.v1.DeleteBackupScheduleRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the backup schedule (in Guid format).
-   * This backup schedule should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string backup_schedule_id = 2;
-   */
-  backupScheduleId: string;
-
-  /**
-   * If set, the backups generated by this backup schedule will be deleted as well.
-   *
-   * @generated from field: optional bool delete_backups = 3;
-   */
-  deleteBackups?: boolean;
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.DeleteBackupScheduleRequest.
- * Use `create(DeleteBackupScheduleRequestSchema)` to create a new message.
- */
-export const DeleteBackupScheduleRequestSchema: GenMessage<DeleteBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_backup_v1_backup, 17);
-
-/**
- * DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.
- *
- * Empty
- *
- * @generated from message qdrant.cloud.backup.v1.DeleteBackupScheduleResponse
- */
-export type DeleteBackupScheduleResponse = Message<"qdrant.cloud.backup.v1.DeleteBackupScheduleResponse"> & {
-};
-
-/**
- * Describes the message qdrant.cloud.backup.v1.DeleteBackupScheduleResponse.
- * Use `create(DeleteBackupScheduleResponseSchema)` to create a new message.
- */
-export const DeleteBackupScheduleResponseSchema: GenMessage<DeleteBackupScheduleResponse> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_backup_v1_backup, 18);
 
 /**
@@ -603,10 +604,11 @@ export type BackupSchedule = Message<"qdrant.cloud.backup.v1.BackupSchedule"> & 
   schedule: string;
 
   /**
-   * The duration after the backups generated by this backup schedule will be automatically deleted after the specified retention period.
-   * If this value is unset, backups will be retained indefinitely.
+   * The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+   * The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+   * If the value is unset, backups will be retained indefinitely.
    *
-   * @generated from field: google.protobuf.Duration retention_period = 6;
+   * @generated from field: optional google.protobuf.Duration retention_period = 6;
    */
   retentionPeriod?: Duration;
 
