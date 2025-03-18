@@ -138,7 +138,7 @@ message ListBackupsRequest {
   optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the schedule (in Guid format).
   // When this field is set, only backups triggered by the backup schedule are returned.
-  optional string schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+  optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
   // TODO: ListOptions
 }
 
@@ -251,7 +251,7 @@ message UpdateBackupScheduleRequest {
 // UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
 message UpdateBackupScheduleResponse {
   // The actual backup schedule.
-  BackupSchedule cluster = 1;
+  BackupSchedule backup_schedule = 1;
 }
 
 // DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
@@ -299,7 +299,7 @@ message Backup {
   // This is a read-only field and will be available after a backup is created.
   // TODO we don't have this field at this moment (we used to store only `short_id`).
   // Once we have it, we can enable it here.
-  // string schedule_id = 6;
+  // string backup_schedule_id = 6;
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
   string status = 7 [(buf.validate.field).string = {
