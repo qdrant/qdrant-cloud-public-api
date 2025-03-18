@@ -26,7 +26,7 @@ class ListBackupsRequest(BaseModel):
     cluster_id: typing.Optional[str] = Field(default="")
 # The identifier of the schedule (in Guid format).
 # When this field is set, only backups triggered by the backup schedule are returned.
-    schedule_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
+    backup_schedule_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
 
 class Backup(BaseModel):
     """
@@ -53,7 +53,7 @@ class Backup(BaseModel):
 # This is a read-only field and will be available after a backup is created.
 # TODO we don't have this field at this moment (we used to store only `short_id`).
 # Once we have it, we can enable it here.
-# string schedule_id = 6;
+# string backup_schedule_id = 6;
 # The current status of the backup.
 # This is a read-only field and will be set after CreateBackup is called.
     status: str = Field(default="")
@@ -235,7 +235,7 @@ class UpdateBackupScheduleResponse(BaseModel):
     """
 
 # The actual backup schedule.
-    cluster: BackupSchedule = Field()
+    backup_schedule: BackupSchedule = Field()
 
 class DeleteBackupScheduleRequest(BaseModel):
     """

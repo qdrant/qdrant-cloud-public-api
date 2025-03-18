@@ -11,14 +11,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListBackupsRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "schedule_id")
+    __slots__ = ("account_id", "cluster_id", "backup_schedule_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
-    SCHEDULE_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_SCHEDULE_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
-    schedule_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., schedule_id: _Optional[str] = ...) -> None: ...
+    backup_schedule_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ...) -> None: ...
 
 class ListBackupsResponse(_message.Message):
     __slots__ = ("items",)
@@ -111,10 +111,10 @@ class UpdateBackupScheduleRequest(_message.Message):
     def __init__(self, backup_schedule: _Optional[_Union[BackupSchedule, _Mapping]] = ...) -> None: ...
 
 class UpdateBackupScheduleResponse(_message.Message):
-    __slots__ = ("cluster",)
-    CLUSTER_FIELD_NUMBER: _ClassVar[int]
-    cluster: BackupSchedule
-    def __init__(self, cluster: _Optional[_Union[BackupSchedule, _Mapping]] = ...) -> None: ...
+    __slots__ = ("backup_schedule",)
+    BACKUP_SCHEDULE_FIELD_NUMBER: _ClassVar[int]
+    backup_schedule: BackupSchedule
+    def __init__(self, backup_schedule: _Optional[_Union[BackupSchedule, _Mapping]] = ...) -> None: ...
 
 class DeleteBackupScheduleRequest(_message.Message):
     __slots__ = ("account_id", "backup_schedule_id", "delete_backups")

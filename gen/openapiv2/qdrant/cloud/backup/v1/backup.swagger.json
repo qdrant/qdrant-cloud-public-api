@@ -135,7 +135,7 @@
             "type": "string"
           },
           {
-            "name": "scheduleId",
+            "name": "backupScheduleId",
             "description": "The identifier of the schedule (in Guid format).\nWhen this field is set, only backups triggered by the backup schedule are returned.\n\nTODO: ListOptions",
             "in": "query",
             "required": false,
@@ -425,7 +425,7 @@
             },
             "status": {
               "type": "string",
-              "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+              "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
             },
             "deletedAt": {
               "type": "string",
@@ -579,7 +579,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+          "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
         },
         "deletedAt": {
           "type": "string",
@@ -706,7 +706,7 @@
     "v1UpdateBackupScheduleResponse": {
       "type": "object",
       "properties": {
-        "cluster": {
+        "backupSchedule": {
           "$ref": "#/definitions/v1BackupSchedule",
           "description": "The actual backup schedule."
         }
