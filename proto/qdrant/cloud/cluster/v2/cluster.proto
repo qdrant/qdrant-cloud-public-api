@@ -158,9 +158,9 @@ message ListClustersRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The optional identifier for hybrid cloud (in Guid format).
+  // The optional identifier for hybrid cloud environment (in Guid format).
   // If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
-  optional string hybrid_cloud_id = 2 [(buf.validate.field).string = {uuid: true}];
+  optional string hybrid_cloud_env_id = 2 [(buf.validate.field).string = {uuid: true}];
   // TODO: ListOptions
 }
 
@@ -344,6 +344,11 @@ message ClusterConfiguration {
   // See upgrade guidelines for more info.
   string version = 3 [(buf.validate.field).string = {pattern: "^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$"}];
 
+  // TODO: Needing a package_id here is very bad usability for users.
+  // That means we would need to start documenting all package_ids somewhere.
+  // Rather we should introduce speaking package names in the public api (even if we have them different internally).
+  // In the pricelist we already have them kind of https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0
+  // We could derive them from the SKU, e.g. QN_16x128 fine with something else as well.
   // The package identifier used to configure the resources of the cluster. Use ListPackages() to select one.
   string package_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The additional resources on top of the selected package.
@@ -365,16 +370,14 @@ message ClusterConfiguration {
   repeated common.v1.KeyValue annotations = 10 [(buf.validate.field).repeated = {max_items: 10}];
   // List of allowed IP source ranges for this cluster. Field is used for both
   // hybrid cloud and Managed Cloud clusters. This is an optional field
-  // TODO: Are both IPv4 and IPv6 supported? --> IPv4 only for now?
-  // TODO: Do we want to create a reg-ex for validation?
+  // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 20
     items: {
-      string: {max_len: 43}
+      string: {pattern: "^((25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"}
     }
   }];
 
-  // TODO: Ask Bastian if 80 is OK (or it should be 99/100)?
   // The percentage of CPU resources reserved for system components
   // This is an optional field, default is 0.
   // Number between 0..80
@@ -392,6 +395,7 @@ message ClusterConfiguration {
 }
 
 // Configuration to setup a Qdrant database in a hybrid cloud.
+// All settings apply to hybrid cloud only.
 message DatabaseConfiguration {
   // The default Qdrant database collection configuration
   // This is an optional field
@@ -564,7 +568,8 @@ message ClusterState {
   string reason = 5;
   // Endpoint information to access the qdrant cluster (aka database).
   ClusterEndpoint endpoint = 6;
-  // Summary of the resources used by the cluster per node.
+  // The resources used by the cluster per node.
+  // For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
   ClusterNodeResourcesSummary resources = 7;
 }
 
@@ -579,7 +584,7 @@ message ClusterEndpoint {
   int32 grpc_port = 3;
 }
 
-// ClusterResourcesSummary represents the summary of the resources used in this cluster per node.
+// ClusterNodeResourcesSummary represents the resources used in this cluster per node.
 message ClusterNodeResourcesSummary {
   // Disk resources
   ClusterNodeResources disk = 1;
@@ -666,6 +671,7 @@ message DeleteClusterJWTResponse {
   // Empty
 }
 
+// TODO: ClusterJWT we call them in the ui `Database Api Keys`, we should consider using a better name in the API.
 // A ClusterJWT represents a JWT to access a Qdrant cloud cluster.
 message ClusterJWT {
   // Unique identifier for the cluster JWT (in Guid format).
@@ -690,6 +696,7 @@ message ClusterJWT {
     max_len: 128
     pattern: "^[\\w\\s-]+$"
   }];
+  // TODO: rename to configuration?
   // The JWT payload of the cluster JWT.
   ClusterJWTPayload jwt_payload = 5;
   // Timestamp when the cluster JWT was created.
@@ -704,8 +711,11 @@ message ClusterJWT {
   // The token for the Cluster JWT.
   // This is a read-only field and will be available only once in the return of CreateClusterJWT.
   // You should securely store this token and it should be handled as a secret.
-  string token = 9;
+  string token = 9; // TODO: rename to key?
 }
+
+// TODO: (from Bastian) ClusterJWTPayload and ClusterJWTPayloadAccess is a rather complex object.
+// We could model this nicer in the public api, where access_type does not have two different type of values
 
 // A ClusterJWTPayload represents the JWT payload for a Cluster JWT.
 // This payload contains claims that define functionality and access control in the system.
@@ -717,12 +727,12 @@ message ClusterJWTPayload {
     // A general access level claim, either "r" (read) or "m" (modify).
     string access = 1 [(buf.validate.field).string = {
       in: [
-        "r",
-        "m"
+        "r", // TODO: Consider using 'read'
+        "m" // TODO: Consider using 'modify' (should there be a 'read-write' as well?)
       ]
     }];
     // A list of access rules per collection.
-    ClusterJWTPayloadAccessList access_list = 2;
+    ClusterJWTPayloadAccessList access_list = 2; // TODO: Why not 'simply' repeated ClusterJWTPayloadAccess rules = 1;, do we expect to add more?
   }
   // TODO check if this field could be defined as duration instead of int64, or
   // if there is a better type for it.
@@ -741,8 +751,8 @@ message ClusterJWTPayloadAccess {
   // The level of access. Must be either "r" (read) or "rw" (read/write).
   string access = 2 [(buf.validate.field).string = {
     in: [
-      "r",
-      "rw"
+      "r", // TODO: Consider using 'read'
+      "rw" // TODO: Consider using 'read-write'
     ]
   }];
   // TODO confirm if we could add some validation for this field (number of
