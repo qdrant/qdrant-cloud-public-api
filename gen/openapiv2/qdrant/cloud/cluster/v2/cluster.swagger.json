@@ -697,7 +697,7 @@
         },
         "packageId": {
           "type": "string",
-          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the pricelist we already have them kind of https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
+          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
         },
         "additionalResources": {
           "$ref": "#/definitions/v2AdditionalResources",
