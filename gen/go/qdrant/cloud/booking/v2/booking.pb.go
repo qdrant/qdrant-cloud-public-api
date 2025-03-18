@@ -147,7 +147,7 @@ func (x *ListPackagesResponse) GetItems() []*Package {
 	return nil
 }
 
-// GetAPIVersionRequest is the request for the GetAPIVersion function
+// GetPackageRequest is the request for the GetPackage function
 type GetPackageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in Guid format).

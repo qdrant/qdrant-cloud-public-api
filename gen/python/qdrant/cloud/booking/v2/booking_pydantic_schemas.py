@@ -76,7 +76,7 @@ class ListPackagesResponse(BaseModel):
 
 class GetPackageRequest(BaseModel):
     """
-     GetAPIVersionRequest is the request for the GetAPIVersion function
+     GetPackageRequest is the request for the GetPackage function
     """
 
 # The identifier of the account (in Guid format).

@@ -9,20 +9,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
 service AuthService {
-  /* TODO:
-     // Get the current API version of this service.
-     // Required permissions:
-     // - None (authenticated only)
-     rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-       // permissions
-       option (qdrant.cloud.common.v1.permissions) = "";
-       // custom account-id expression
-       option (qdrant.cloud.common.v1.account_id_expression) = "";
-       // gRPC Gateway REST call
-       option (google.api.http) = {get: "/api/auth/v2/api-version"};
-     }
-  */
-
   // Fetch all api-keys in the account identified by the given ID.
   // Required permissions:
   // - read:api_keys
@@ -60,19 +46,6 @@ service AuthService {
     option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}"};
   }
 }
-
-/* TODO:
-   // GetAPIVersionRequest is the request for the GetAPIVersion function
-   message GetAPIVersionRequest {
-     // Empty
-   }
-
-   // GetAPIVersionResponse is the response from the GetAPIVersion function
-   message GetAPIVersionResponse {
-     // The actual version
-     common.v1.Version version = 1;
-   }
-*/
 
 // ListApiKeysRequest is the request for the ListApiKeys function
 message ListApiKeysRequest {

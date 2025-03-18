@@ -644,19 +644,6 @@ export const BackupScheduleSchema: GenMessage<BackupSchedule> = /*@__PURE__*/
 /**
  * BackupService is the API used to configure backup objects.
  *
- * TODO:
- * // Get the current API version of this service.
- * // Required permissions:
- * // - None (authenticated only)
- * rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
- * // permissions
- * option (common.v1.permissions) = "";
- * // custom account-id expression
- * option (qdrant.cloud.common.v1.account_id_expression) = "";
- * // gRPC Gateway REST call
- * option (google.api.http) = {get: "/api/backup/v1/api-version"};
- * }
- *
  * @generated from service qdrant.cloud.backup.v1.BackupService
  */
 export const BackupService: GenService<{

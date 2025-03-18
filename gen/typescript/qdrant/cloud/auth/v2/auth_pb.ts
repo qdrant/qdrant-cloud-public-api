@@ -221,19 +221,6 @@ export const ApiKeySchema: GenMessage<ApiKey> = /*@__PURE__*/
 /**
  * AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
  *
- * TODO:
- * // Get the current API version of this service.
- * // Required permissions:
- * // - None (authenticated only)
- * rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
- * // permissions
- * option (qdrant.cloud.common.v1.permissions) = "";
- * // custom account-id expression
- * option (qdrant.cloud.common.v1.account_id_expression) = "";
- * // gRPC Gateway REST call
- * option (google.api.http) = {get: "/api/auth/v2/api-version"};
- * }
- *
  * @generated from service qdrant.cloud.auth.v2.AuthService
  */
 export const AuthService: GenService<{
