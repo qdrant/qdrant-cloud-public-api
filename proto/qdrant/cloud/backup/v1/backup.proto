@@ -1,0 +1,374 @@
+syntax = "proto3";
+
+package qdrant.cloud.backup.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// BackupService is the API used to configure backup objects.
+service BackupService {
+  /* TODO:
+     // Get the current API version of this service.
+     // Required permissions:
+     // - None (authenticated only)
+     rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
+       // permissions
+       option (common.v1.permissions) = "";
+       // custom account-id expression
+       option (qdrant.cloud.common.v1.account_id_expression) = "";
+       // gRPC Gateway REST call
+       option (google.api.http) = {get: "/api/backup/v1/api-version"};
+     }
+  */
+
+  // Fetch all backups in the account identified by the given ID.
+  // Required permissions:
+  // - read:backups
+  rpc ListBackups(ListBackupsRequest) returns (ListBackupsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backups"};
+  }
+
+  // Creates a backup for the cluster identified by the given ID.
+  // Required permissions:
+  // - write:backups
+  rpc CreateBackup(CreateBackupRequest) returns (CreateBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:backups";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/backup/v1/accounts/{backup.account_id}/backups"
+      body: "*"
+    };
+  }
+
+  // Deletes a backup in the account identified by the given ID.
+  // Required permissions:
+  // - delete:backups
+  rpc DeleteBackup(DeleteBackupRequest) returns (DeleteBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+  }
+
+  // Restores a backup in the account identified by the given ID.
+  rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "admin:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
+  }
+
+  // Fetch all backup schedules in the account identified by the given ID.
+  // Required permissions:
+  // - read:backup_schedules
+  rpc ListBackupSchedules(ListBackupSchedulesRequest) returns (ListBackupSchedulesResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules"};
+  }
+
+  // Fetch a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - read:backup_schedules
+  rpc GetBackupSchedule(GetBackupScheduleRequest) returns (GetBackupScheduleResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+  }
+
+  // Creates a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - write:backup_schedules
+  rpc CreateBackupSchedule(CreateBackupScheduleRequest) returns (CreateBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:backup_schedules";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
+      body: "*"
+    };
+  }
+
+  // Update a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - write:backup_schedules
+  rpc UpdateBackupSchedule(UpdateBackupScheduleRequest) returns (UpdateBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:backup_schedules";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}"
+      body: "*"
+    };
+  }
+
+  // Deletes a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - delete:backup_schedules
+  rpc DeleteBackupSchedule(DeleteBackupScheduleRequest) returns (DeleteBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/backup/v2/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+  }
+}
+
+// ListBackupsRequest is the request for the ListBackups function
+message ListBackupsRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // When this field is set, only backups that belong to the cluster are returned.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the schedule (in Guid format).
+  // When this field is set, only backups triggered by the backup schedule are returned.
+  optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // TODO: ListOptions
+}
+
+// ListBackupsResponse is the response from the ListBackups function
+message ListBackupsResponse {
+  // The actual backups in this list.
+  repeated Backup items = 1;
+  // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+}
+
+// CreateBackupRequest is the request for the CreateBackup function.
+message CreateBackupRequest {
+  // The actual backup.
+  Backup backup = 1;
+}
+
+// CreateBackupResponse is the response from the CreateBackup function.
+message CreateBackupResponse {
+  // The actual backup.
+  Backup backup = 1;
+}
+
+// DeleteBackupRequest is the request for the DeleteBackup function.
+message DeleteBackupRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in Guid format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteBackupResponse is the response from the DeleteBackup function.
+message DeleteBackupResponse {
+  // Empty
+}
+
+// RestoreBackupRequest is the request for the RestoreBackup function.
+message RestoreBackupRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in Guid format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// RestoreBackupResponse is the response from the RestoreBackup function.
+message RestoreBackupResponse {
+  // Empty
+}
+
+// ListBackupSchedulesRequest is the request for the ListBackupSchedules function
+message ListBackupSchedulesRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // When this field is set, only backup schedules that belong to the cluster are returned.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // TODO: ListOptions
+}
+
+// ListBackupsResponse is the response from the ListBackups function.
+message ListBackupSchedulesResponse {
+  // The actual backup schedules in this list.
+  repeated BackupSchedule items = 1;
+  // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+}
+
+// GetBackupScheduleRequest is the request for the GetBackupSchedule function.
+message GetBackupScheduleRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in Guid format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the backup schedule (in Guid format).
+  // This backup schedule should be part of the provided cluster and account.
+  // This is a required field.
+  string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBackupScheduleResponse is the response from the GetBackupSchedule function.
+message GetBackupScheduleResponse {
+  // The actual cluster
+  BackupSchedule backup_schedule = 1;
+}
+
+// CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
+message CreateBackupScheduleRequest {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1;
+}
+
+// CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
+message CreateBackupScheduleResponse {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1;
+}
+
+// UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
+message UpdateBackupScheduleRequest {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1;
+}
+
+// UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
+message UpdateBackupScheduleResponse {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1;
+}
+
+// DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
+message DeleteBackupScheduleRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the backup schedule (in Guid format).
+  // This backup schedule should be part of the provided account.
+  // This is a required field.
+  string backup_schedule_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // If set, the backups generated by this backup schedule will be deleted as well.
+  optional bool delete_backups = 3;
+}
+
+// DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.
+message DeleteBackupScheduleResponse {
+  // Empty
+}
+
+// A Backup represents a backup of a Qdrant database.
+message Backup {
+  // Unique identifier for the backup (in Guid format).
+  // This is a read-only field and will be available after a backup is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "cluster.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the backup was created.
+  // This is a read-only field and will be available after a backup is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The name of the backup.
+  // This is a read-only field and will be available after a backup is created.
+  string name = 5;
+  // The identifier of the schedule that triggered the creation of the backup.
+  // If there isn't value, that means the backup was created manually.
+  // This is a read-only field and will be available after a backup is created.
+  // TODO we don't have this field at this moment (we used to store only `short_id`).
+  // Once we have it, we can enable it here.
+  // string backup_schedule_id = 6;
+  // The current status of the backup.
+  // This is a read-only field and will be set after CreateBackup is called.
+  string status = 7 [(buf.validate.field).string = {
+    in: [
+      "Running",
+      "Skipped",
+      "Failed",
+      "Succeeded",
+      "FailedToSync",
+      "NotFound",
+      "Unknown"
+    ]
+  }];
+  // The timestamp when the backup was deleted (or when deletion started).
+  // This is a read-only field and will be set after DeleteBackup is called.
+  google.protobuf.Timestamp deleted_at = 8;
+
+  // The total time taken to generate the backup. This is a read-only field and
+  // will be available after the backup process is completed, regardless of
+  // whether it succeeded or failed.
+  google.protobuf.Duration backup_duration = 9;
+}
+
+// A BackupSchedule represents a recurring schedule for creating backups.
+message BackupSchedule {
+  // Unique identifier for the backup schedule (in Guid format).
+  // This is a read-only field and will be available after a backup schedule is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "backup_schedule.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the backup schedule was created.
+  // This is a read-only field and will be available after a backup schedule is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The schedule that determines when the backup will be created.
+  // This field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview
+  // This is a required field.
+  string schedule = 5 [(buf.validate.field).string.pattern = "^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$"];
+  // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+  // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+  // If the value is unset, backups will be retained indefinitely.
+  optional google.protobuf.Duration retention_period = 6 [(buf.validate.field).duration = {
+    gte: {seconds: 86400}
+    lte: {seconds: 31536000}
+  }];
+  // The timestamp when the backup schedule was deleted (or when deletion started).
+  // This is a read-only field and will be set after DeleteBackupSchedule is called.
+  google.protobuf.Timestamp deleted_at = 7;
+  // The current status of the backup schedule.
+  // This is a read-only field and will be set after CreateBackupSchedule is called.
+  // The possible values are:
+  // - Active: The backup schedule is active and functioning correctly.
+  // - FailedToSync: There was an error syncing the backup schedule in the cluster's region.
+  // - NotFound: The backup schedule isn't present in the cluster's region.
+  // - Unknown: The system didn't receive status information about the backup schedule from the cluster's region.
+  string status = 8 [(buf.validate.field).string = {
+    in: [
+      "Active",
+      "FailedToSync",
+      "NotFound",
+      "Unknown"
+    ]
+  }];
+}

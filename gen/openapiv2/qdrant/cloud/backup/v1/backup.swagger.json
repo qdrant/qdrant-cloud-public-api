@@ -1,0 +1,717 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/backup/v1/backup.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BackupService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/backup/v1/accounts/{accountId}/backup_schedules": {
+      "get": {
+        "summary": "Fetch all backup schedules in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
+        "operationId": "BackupService_ListBackupSchedules",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBackupSchedulesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.\n\nTODO: ListOptions",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
+      "get": {
+        "summary": "Fetch a backup schedule in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
+        "operationId": "BackupService_GetBackupSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBackupScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupScheduleId",
+            "description": "The identifier for the backup schedule (in Guid format).\nThis backup schedule should be part of the provided cluster and account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{accountId}/backups": {
+      "get": {
+        "summary": "Fetch all backups in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "operationId": "BackupService_ListBackups",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBackupsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backups that belong to the cluster are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "backupScheduleId",
+            "description": "The identifier of the schedule (in Guid format).\nWhen this field is set, only backups triggered by the backup schedule are returned.\n\nTODO: ListOptions",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{accountId}/backups/{backupId}": {
+      "delete": {
+        "summary": "Deletes a backup in the account identified by the given ID.\nRequired permissions:\n- delete:backups",
+        "operationId": "BackupService_DeleteBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
+      "post": {
+        "summary": "Restores a backup in the account identified by the given ID.",
+        "operationId": "BackupService_RestoreBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RestoreBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{backup.accountId}/backups": {
+      "post": {
+        "summary": "Creates a backup for the cluster identified by the given ID.\nRequired permissions:\n- write:backups",
+        "operationId": "BackupService_CreateBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "backup.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupServiceCreateBackupBody"
+            }
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules": {
+      "post": {
+        "summary": "Creates a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
+        "operationId": "BackupService_CreateBackupSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateBackupScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "backupSchedule.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupServiceCreateBackupScheduleBody"
+            }
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules/{backupSchedule.id}": {
+      "put": {
+        "summary": "Update a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
+        "operationId": "BackupService_UpdateBackupSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateBackupScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "backupSchedule.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupSchedule.id",
+            "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupServiceUpdateBackupScheduleBody"
+            }
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
+    "/api/backup/v2/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
+      "delete": {
+        "summary": "Deletes a backup schedule in the account identified by the given ID.\nRequired permissions:\n- delete:backup_schedules",
+        "operationId": "BackupService_DeleteBackupSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteBackupScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupScheduleId",
+            "description": "The identifier for the backup schedule (in Guid format).\nThis backup schedule should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteBackups",
+            "description": "If set, the backups generated by this backup schedule will be deleted as well.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "BackupServiceCreateBackupBody": {
+      "type": "object",
+      "properties": {
+        "backup": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the backup (in Guid format).\nThis is a read-only field and will be available after a backup is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+            },
+            "clusterId": {
+              "type": "string",
+              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+            },
+            "status": {
+              "type": "string",
+              "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+            },
+            "backupDuration": {
+              "type": "string",
+              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+            }
+          },
+          "description": "The actual backup.",
+          "title": "The actual backup."
+        }
+      },
+      "description": "CreateBackupRequest is the request for the CreateBackup function."
+    },
+    "BackupServiceCreateBackupScheduleBody": {
+      "type": "object",
+      "properties": {
+        "backupSchedule": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+            },
+            "clusterId": {
+              "type": "string",
+              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+            },
+            "schedule": {
+              "type": "string",
+              "description": "The schedule that determines when the backup will be created.\nThis field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview\nThis is a required field."
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+            },
+            "status": {
+              "type": "string",
+              "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+            }
+          },
+          "description": "The actual backup schedule.",
+          "title": "The actual backup schedule."
+        }
+      },
+      "description": "CreateBackupScheduleRequest is the request for the CreateBackupSchedule function."
+    },
+    "BackupServiceUpdateBackupScheduleBody": {
+      "type": "object",
+      "properties": {
+        "backupSchedule": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+            },
+            "clusterId": {
+              "type": "string",
+              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+            },
+            "schedule": {
+              "type": "string",
+              "description": "The schedule that determines when the backup will be created.\nThis field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview\nThis is a required field."
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+            },
+            "status": {
+              "type": "string",
+              "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+            }
+          },
+          "description": "The actual backup schedule.",
+          "title": "The actual backup schedule."
+        }
+      },
+      "description": "UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Backup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the backup (in Guid format).\nThis is a read-only field and will be available after a backup is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+        },
+        "status": {
+          "type": "string",
+          "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+        },
+        "backupDuration": {
+          "type": "string",
+          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+        }
+      },
+      "description": "A Backup represents a backup of a Qdrant database."
+    },
+    "v1BackupSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+        },
+        "schedule": {
+          "type": "string",
+          "description": "The schedule that determines when the backup will be created.\nThis field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview\nThis is a required field."
+        },
+        "retentionPeriod": {
+          "type": "string",
+          "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+        }
+      },
+      "description": "A BackupSchedule represents a recurring schedule for creating backups."
+    },
+    "v1CreateBackupResponse": {
+      "type": "object",
+      "properties": {
+        "backup": {
+          "$ref": "#/definitions/v1Backup",
+          "description": "The actual backup."
+        }
+      },
+      "description": "CreateBackupResponse is the response from the CreateBackup function."
+    },
+    "v1CreateBackupScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "backupSchedule": {
+          "$ref": "#/definitions/v1BackupSchedule",
+          "description": "The actual backup schedule."
+        }
+      },
+      "description": "CreateBackupScheduleResponse is the response from the CreateBackupSchedule function."
+    },
+    "v1DeleteBackupResponse": {
+      "type": "object",
+      "description": "DeleteBackupResponse is the response from the DeleteBackup function.\n\nEmpty"
+    },
+    "v1DeleteBackupScheduleResponse": {
+      "type": "object",
+      "description": "DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.\n\nEmpty"
+    },
+    "v1GetBackupScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "backupSchedule": {
+          "$ref": "#/definitions/v1BackupSchedule",
+          "title": "The actual cluster"
+        }
+      },
+      "description": "GetBackupScheduleResponse is the response from the GetBackupSchedule function."
+    },
+    "v1ListBackupSchedulesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1BackupSchedule"
+          },
+          "description": "The actual backup schedules in this list.\n\nTODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions"
+        }
+      },
+      "description": "ListBackupsResponse is the response from the ListBackups function."
+    },
+    "v1ListBackupsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Backup"
+          },
+          "description": "The actual backups in this list.\n\nTODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions"
+        }
+      },
+      "title": "ListBackupsResponse is the response from the ListBackups function"
+    },
+    "v1RestoreBackupResponse": {
+      "type": "object",
+      "description": "RestoreBackupResponse is the response from the RestoreBackup function.\n\nEmpty"
+    },
+    "v1UpdateBackupScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "backupSchedule": {
+          "$ref": "#/definitions/v1BackupSchedule",
+          "description": "The actual backup schedule."
+        }
+      },
+      "description": "UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function."
+    }
+  }
+}
