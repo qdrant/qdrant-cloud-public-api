@@ -85,7 +85,7 @@ export const ListPackagesResponseSchema: GenMessage<ListPackagesResponse> = /*@_
   messageDesc(file_qdrant_cloud_booking_v2_booking, 1);
 
 /**
- * GetAPIVersionRequest is the request for the GetAPIVersion function
+ * GetPackageRequest is the request for the GetPackage function
  *
  * @generated from message qdrant.cloud.booking.v2.GetPackageRequest
  */
@@ -243,19 +243,6 @@ export const ResourceConfigurationSchema: GenMessage<ResourceConfiguration> = /*
 
 /**
  * BookingService is the API used to configure the booking settings (like packages objects).
- *
- * TODO:
- * // Get the current API version of this service.
- * // Required permissions:
- * // - None (authenticated only)
- * rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
- * // permissions
- * option (common.v1.permissions) = "";
- * // custom account-id expression
- * option (qdrant.cloud.common.v1.account_id_expression) = "";
- * // gRPC Gateway REST call
- * option (google.api.http) = {get: "/api/booking/v2/api-version"};
- * }
  *
  * @generated from service qdrant.cloud.booking.v2.BookingService
  */

@@ -7,18 +7,6 @@ from qdrant.cloud.auth.v2 import auth_pb2 as qdrant_dot_cloud_dot_auth_dot_v2_do
 
 class AuthServiceStub(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/auth/v2/api-version"};
-    }
     """
 
     def __init__(self, channel):
@@ -46,18 +34,6 @@ class AuthServiceStub(object):
 
 class AuthServiceServicer(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/auth/v2/api-version"};
-    }
     """
 
     def ListApiKeys(self, request, context):
@@ -117,18 +93,6 @@ def add_AuthServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AuthService(object):
     """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/auth/v2/api-version"};
-    }
     """
 
     @staticmethod

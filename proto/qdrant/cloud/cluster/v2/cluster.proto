@@ -9,20 +9,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
-  /* TODO:
-     // Get the current API version of this service.
-     // Required permissions:
-     // - None (authenticated only)
-     rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-       // permissions
-       option (common.v1.permissions) = "";
-       // custom account-id expression
-       option (qdrant.cloud.common.v1.account_id_expression) = "";
-       // gRPC Gateway REST call
-       option (google.api.http) = {get: "/api/cluster/v2/api-version"};
-     }
-  */
-
   // Fetch all clusters in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
@@ -139,19 +125,6 @@ service ClusterService {
     option (google.api.http) = {delete: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/jwts/{cluster_jwt_id}"};
   }
 }
-
-/* TODO:
-   // GetAPIVersionRequest is the request for the GetAPIVersion function
-   message GetAPIVersionRequest {
-     // Empty
-   }
-
-   // GetAPIVersionResponse is the response from the GetAPIVersion function
-   message GetAPIVersionResponse {
-     // The actual version
-     common.v1.Version version = 1;
-   }
-*/
 
 // ListClustersRequest is the request for the ListClusters function
 message ListClustersRequest {

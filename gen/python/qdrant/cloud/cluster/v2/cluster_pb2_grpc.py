@@ -7,18 +7,6 @@ from qdrant.cloud.cluster.v2 import cluster_pb2 as qdrant_dot_cloud_dot_cluster_
 
 class ClusterServiceStub(object):
     """ClusterService is the API used to configure cluster objects.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
-    }
     """
 
     def __init__(self, channel):
@@ -81,18 +69,6 @@ class ClusterServiceStub(object):
 
 class ClusterServiceServicer(object):
     """ClusterService is the API used to configure cluster objects.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
-    }
     """
 
     def ListClusters(self, request, context):
@@ -249,18 +225,6 @@ def add_ClusterServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class ClusterService(object):
     """ClusterService is the API used to configure cluster objects.
-    TODO:
-    // Get the current API version of this service.
-    // Required permissions:
-    // - None (authenticated only)
-    rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/cluster/v2/api-version"};
-    }
     """
 
     @staticmethod

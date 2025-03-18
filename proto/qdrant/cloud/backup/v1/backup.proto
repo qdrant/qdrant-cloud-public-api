@@ -10,20 +10,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BackupService is the API used to configure backup objects.
 service BackupService {
-  /* TODO:
-     // Get the current API version of this service.
-     // Required permissions:
-     // - None (authenticated only)
-     rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-       // permissions
-       option (common.v1.permissions) = "";
-       // custom account-id expression
-       option (qdrant.cloud.common.v1.account_id_expression) = "";
-       // gRPC Gateway REST call
-       option (google.api.http) = {get: "/api/backup/v1/api-version"};
-     }
-  */
-
   // Fetch all backups in the account identified by the given ID.
   // Required permissions:
   // - read:backups

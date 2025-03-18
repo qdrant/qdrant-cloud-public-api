@@ -8,20 +8,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BookingService is the API used to configure the booking settings (like packages objects).
 service BookingService {
-  /* TODO:
-     // Get the current API version of this service.
-     // Required permissions:
-     // - None (authenticated only)
-     rpc GetAPIVersion(GetAPIVersionRequest) returns (GetAPIVersionResponse) {
-       // permissions
-       option (common.v1.permissions) = "";
-       // custom account-id expression
-       option (qdrant.cloud.common.v1.account_id_expression) = "";
-       // gRPC Gateway REST call
-       option (google.api.http) = {get: "/api/booking/v2/api-version"};
-     }
-  */
-
   // Fetch all packages known by the system, optional filtered.
   // Required permissions:
   // - None (authenticated only)
@@ -42,19 +28,6 @@ service BookingService {
     option (google.api.http) = {get: "/api/booking/v2/accounts/{account_id}/packages/{id}"};
   }
 }
-
-/* TODO:
-   // GetAPIVersionRequest is the request for the GetAPIVersion function
-   message GetAPIVersionRequest {
-     // Empty
-   }
-
-   // GetAPIVersionResponse is the response from the GetAPIVersion function
-   message GetAPIVersionResponse {
-     // The actual version
-     common.v1.Version version = 1;
-   }
-*/
 
 // ListPackagesRequest is the request for the ListPackages function
 message ListPackagesRequest {
@@ -91,7 +64,7 @@ message ListPackagesResponse {
   repeated Package items = 1;
 }
 
-// GetAPIVersionRequest is the request for the GetAPIVersion function
+// GetPackageRequest is the request for the GetPackage function
 message GetPackageRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
