@@ -857,12 +857,6 @@ export const DatabaseConfigurationInferenceSchema: GenMessage<DatabaseConfigurat
 /**
  * AdditionalResources contains the information about additional resources
  *
- * Currently not supported, but will be added in the near future:
- * Additional CPU (expressed in milli vCPU)
- * int cpu = 1;
- * Additional Memory (expressed in Gib)
- * int ram = 2;
- *
  * @generated from message qdrant.cloud.cluster.v2.AdditionalResources
  */
 export type AdditionalResources = Message<"qdrant.cloud.cluster.v2.AdditionalResources"> & {

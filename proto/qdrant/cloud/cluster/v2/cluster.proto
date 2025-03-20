@@ -266,7 +266,6 @@ message Cluster {
     min_len: 4
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
-
   // Timestamp when the cluster was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteCluster is called.
   google.protobuf.Timestamp deleted_at = 5;
@@ -470,12 +469,6 @@ message DatabaseConfigurationInference {
 
 // AdditionalResources contains the information about additional resources
 message AdditionalResources {
-  // Currently not supported, but will be added in the near future:
-  // Additional CPU (expressed in milli vCPU)
-  // int cpu = 1;
-  // Additional Memory (expressed in Gib)
-  // int ram = 2;
-
   // Additional Disk (expressed in Gib)
   uint32 disk = 3;
 }
