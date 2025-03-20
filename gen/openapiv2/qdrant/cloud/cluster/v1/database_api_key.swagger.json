@@ -142,28 +142,29 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+              "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
             },
             "clusterIds": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
+              "description": "A list of cluster IDs.\nIt should contain at least one ID.\nAfter creation, this field cannot be changed."
             },
             "prefix": {
               "type": "string",
-              "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+              "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
             },
-            "token": {
+            "key": {
               "type": "string",
-              "description": "The token for the database key.\nThis is a read-only field and will be available only once in the return of CreateDatabaseApiKey.\nYou should securely store this token and it should be handled as a secret."
+              "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
             }
           },
-          "title": "The actual database api Key"
+          "description": "The actual database api key.",
+          "title": "The actual database api key."
         }
       },
-      "title": "CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function"
+      "description": "CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function."
     },
     "protobufAny": {
       "type": "object",
@@ -198,10 +199,10 @@
       "properties": {
         "apiKey": {
           "$ref": "#/definitions/v1DatabaseApiKey",
-          "title": "The actual database api key"
+          "description": "The actual database api key."
         }
       },
-      "title": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function"
+      "description": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function."
     },
     "v1DatabaseApiKey": {
       "type": "object",
@@ -217,30 +218,29 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+          "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
         },
         "clusterIds": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
+          "description": "A list of cluster IDs.\nIt should contain at least one ID.\nAfter creation, this field cannot be changed."
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+          "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
         },
-        "token": {
+        "key": {
           "type": "string",
-          "description": "The token for the database key.\nThis is a read-only field and will be available only once in the return of CreateDatabaseApiKey.\nYou should securely store this token and it should be handled as a secret."
+          "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
         }
       },
       "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
     },
     "v1DeleteDatabaseApiKeyResponse": {
       "type": "object",
-      "description": "Empty",
-      "title": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function"
+      "description": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.\n\nEmpty"
     },
     "v1ListDatabaseApiKeysResponse": {
       "type": "object",
@@ -251,10 +251,10 @@
             "type": "object",
             "$ref": "#/definitions/v1DatabaseApiKey"
           },
-          "title": "The actual database api keys in this list"
+          "description": "The actual database api keys in this list."
         }
       },
-      "title": "ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function"
+      "description": "ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function."
     }
   }
 }

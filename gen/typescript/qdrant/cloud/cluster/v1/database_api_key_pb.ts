@@ -15,10 +15,10 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/cluster/v1/database_api_key.proto.
  */
 export const file_qdrant_cloud_cluster_v1_database_api_key: GenFile = /*@__PURE__*/
-  fileDesc("Ci5xZHJhbnQvY2xvdWQvY2x1c3Rlci92MS9kYXRhYmFzZV9hcGlfa2V5LnByb3RvEhdxZHJhbnQuY2xvdWQuY2x1c3Rlci52MSI6ChpMaXN0RGF0YWJhc2VBcGlLZXlzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJVChtMaXN0RGF0YWJhc2VBcGlLZXlzUmVzcG9uc2USNgoFaXRlbXMYASADKAsyJy5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUFwaUtleSJXChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSOAoHYXBpX2tleRgBIAEoCzInLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQXBpS2V5IlgKHENyZWF0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2USOAoHYXBpX2tleRgBIAEoCzInLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQXBpS2V5IlkKG0RlbGV0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgphcGlfa2V5X2lkGAIgASgJQgi6SAVyA7ABASIeChxEZWxldGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlIpcDCg5EYXRhYmFzZUFwaUtleRIKCgJpZBgBIAEoCRIcCgphY2NvdW50X2lkGAIgASgJQgi6SAVyA7ABARIuCgpjcmVhdGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBJfCgtjbHVzdGVyX2lkcxgEIAMoCUJKukhHkgFEIkJyQDI+XlswLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezR9LVswLTlhLWZdezR9LVswLTlhLWZdezEyfSQSDgoGcHJlZml4GAUgASgJEg0KBXRva2VuGAYgASgJOqoBukimARqjAQoKYXBpX2tleS5pZBIadmFsdWUgbXVzdCBiZSBhIHZhbGlkIFVVSUQaeXRoaXMuaWQubWF0Y2hlcygnXlswLTlhLWZBLUZdezh9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezEyfSQnKSB8fCAhaGFzKHRoaXMuY3JlYXRlZF9hdCkysgUKFURhdGFiYXNlQXBpS2V5U2VydmljZRLJAQoTTGlzdERhdGFiYXNlQXBpS2V5cxIzLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkxpc3REYXRhYmFzZUFwaUtleXNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlIkeKtRgNcmVhZDphcGlfa2V5c4LT5JMCMBIuL2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9hcGkta2V5cxLuAQoUQ3JlYXRlRGF0YWJhc2VBcGlLZXkSNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QaNS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlImmKtRgOd3JpdGU6YXBpX2tleXOStRgSYXBpX2tleS5hY2NvdW50X2lkgtPkkwI7OgEqIjYvYXBpL2NsdXN0ZXIvdjEvYWNjb3VudHMve2FwaV9rZXkuYWNjb3VudF9pZH0vYXBpLWtleXMS2wEKFERlbGV0ZURhdGFiYXNlQXBpS2V5EjQucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0GjUucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSJWirUYD2RlbGV0ZTphcGlfa2V5c4LT5JMCPSo7L2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9hcGkta2V5cy97YXBpX2tleV9pZH1ChQIKG2NvbS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MUITRGF0YWJhc2VBcGlLZXlQcm90b1ABWlJnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvdjE7Y2x1c3RlcnYxogIDUUNDqgIXUWRyYW50LkNsb3VkLkNsdXN0ZXIuVjHKAhdRZHJhbnRcQ2xvdWRcQ2x1c3RlclxWMeICI1FkcmFudFxDbG91ZFxDbHVzdGVyXFYxXEdQQk1ldGFkYXRh6gIaUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("Ci5xZHJhbnQvY2xvdWQvY2x1c3Rlci92MS9kYXRhYmFzZV9hcGlfa2V5LnByb3RvEhdxZHJhbnQuY2xvdWQuY2x1c3Rlci52MSI6ChpMaXN0RGF0YWJhc2VBcGlLZXlzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJVChtMaXN0RGF0YWJhc2VBcGlLZXlzUmVzcG9uc2USNgoFaXRlbXMYASADKAsyJy5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUFwaUtleSJXChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSOAoHYXBpX2tleRgBIAEoCzInLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQXBpS2V5IlgKHENyZWF0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2USOAoHYXBpX2tleRgBIAEoCzInLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQXBpS2V5IlkKG0RlbGV0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgphcGlfa2V5X2lkGAIgASgJQgi6SAVyA7ABASIeChxEZWxldGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlItgCCg5EYXRhYmFzZUFwaUtleRIKCgJpZBgBIAEoCRIcCgphY2NvdW50X2lkGAIgASgJQgi6SAVyA7ABARIuCgpjcmVhdGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIiCgtjbHVzdGVyX2lkcxgEIAMoCUINukgKkgEHIgVyA7ABARIOCgZwcmVmaXgYBSABKAkSCwoDa2V5GAYgASgJOqoBukimARqjAQoKYXBpX2tleS5pZBIadmFsdWUgbXVzdCBiZSBhIHZhbGlkIFVVSUQaeXRoaXMuaWQubWF0Y2hlcygnXlswLTlhLWZBLUZdezh9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezEyfSQnKSB8fCAhaGFzKHRoaXMuY3JlYXRlZF9hdCkysgUKFURhdGFiYXNlQXBpS2V5U2VydmljZRLJAQoTTGlzdERhdGFiYXNlQXBpS2V5cxIzLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkxpc3REYXRhYmFzZUFwaUtleXNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlIkeKtRgNcmVhZDphcGlfa2V5c4LT5JMCMBIuL2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9hcGkta2V5cxLuAQoUQ3JlYXRlRGF0YWJhc2VBcGlLZXkSNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QaNS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlImmKtRgOd3JpdGU6YXBpX2tleXOStRgSYXBpX2tleS5hY2NvdW50X2lkgtPkkwI7OgEqIjYvYXBpL2NsdXN0ZXIvdjEvYWNjb3VudHMve2FwaV9rZXkuYWNjb3VudF9pZH0vYXBpLWtleXMS2wEKFERlbGV0ZURhdGFiYXNlQXBpS2V5EjQucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0GjUucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSJWirUYD2RlbGV0ZTphcGlfa2V5c4LT5JMCPSo7L2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9hcGkta2V5cy97YXBpX2tleV9pZH1ChQIKG2NvbS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MUITRGF0YWJhc2VBcGlLZXlQcm90b1ABWlJnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvdjE7Y2x1c3RlcnYxogIDUUNDqgIXUWRyYW50LkNsb3VkLkNsdXN0ZXIuVjHKAhdRZHJhbnRcQ2xvdWRcQ2x1c3RlclxWMeICI1FkcmFudFxDbG91ZFxDbHVzdGVyXFYxXEdQQk1ldGFkYXRh6gIaUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
- * ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function
+ * ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
  *
  * @generated from message qdrant.cloud.cluster.v1.ListDatabaseApiKeysRequest
  */
@@ -40,13 +40,13 @@ export const ListDatabaseApiKeysRequestSchema: GenMessage<ListDatabaseApiKeysReq
   messageDesc(file_qdrant_cloud_cluster_v1_database_api_key, 0);
 
 /**
- * ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function
+ * ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function.
  *
  * @generated from message qdrant.cloud.cluster.v1.ListDatabaseApiKeysResponse
  */
 export type ListDatabaseApiKeysResponse = Message<"qdrant.cloud.cluster.v1.ListDatabaseApiKeysResponse"> & {
   /**
-   * The actual database api keys in this list
+   * The actual database api keys in this list.
    *
    * @generated from field: repeated qdrant.cloud.cluster.v1.DatabaseApiKey items = 1;
    */
@@ -61,13 +61,13 @@ export const ListDatabaseApiKeysResponseSchema: GenMessage<ListDatabaseApiKeysRe
   messageDesc(file_qdrant_cloud_cluster_v1_database_api_key, 1);
 
 /**
- * CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function
+ * CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
  *
  * @generated from message qdrant.cloud.cluster.v1.CreateDatabaseApiKeyRequest
  */
 export type CreateDatabaseApiKeyRequest = Message<"qdrant.cloud.cluster.v1.CreateDatabaseApiKeyRequest"> & {
   /**
-   * The actual database api Key
+   * The actual database api key.
    *
    * @generated from field: qdrant.cloud.cluster.v1.DatabaseApiKey api_key = 1;
    */
@@ -82,13 +82,13 @@ export const CreateDatabaseApiKeyRequestSchema: GenMessage<CreateDatabaseApiKeyR
   messageDesc(file_qdrant_cloud_cluster_v1_database_api_key, 2);
 
 /**
- * CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function
+ * CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
  *
  * @generated from message qdrant.cloud.cluster.v1.CreateDatabaseApiKeyResponse
  */
 export type CreateDatabaseApiKeyResponse = Message<"qdrant.cloud.cluster.v1.CreateDatabaseApiKeyResponse"> & {
   /**
-   * The actual database api key
+   * The actual database api key.
    *
    * @generated from field: qdrant.cloud.cluster.v1.DatabaseApiKey api_key = 1;
    */
@@ -103,7 +103,7 @@ export const CreateDatabaseApiKeyResponseSchema: GenMessage<CreateDatabaseApiKey
   messageDesc(file_qdrant_cloud_cluster_v1_database_api_key, 3);
 
 /**
- * DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function
+ * DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
  *
  * @generated from message qdrant.cloud.cluster.v1.DeleteDatabaseApiKeyRequest
  */
@@ -133,7 +133,7 @@ export const DeleteDatabaseApiKeyRequestSchema: GenMessage<DeleteDatabaseApiKeyR
   messageDesc(file_qdrant_cloud_cluster_v1_database_api_key, 4);
 
 /**
- * DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function
+ * DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.
  *
  * Empty
  *
@@ -173,16 +173,16 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.v1.DatabaseApiKey"> &
   accountId: string;
 
   /**
-   * Timestamp when the api-key was created.
-   * This is a read-only field and will be available after an api-key is created.
+   * Timestamp when the database api key was created.
+   * This is a read-only field and will be available after a database api key is created.
    *
    * @generated from field: google.protobuf.Timestamp created_at = 3;
    */
   createdAt?: Timestamp;
 
   /**
-   * A list of cluster IDs
-   * Should contain at least a single ID.
+   * A list of cluster IDs.
+   * It should contain at least one ID.
    * After creation, this field cannot be changed.
    *
    * @generated from field: repeated string cluster_ids = 4;
@@ -190,21 +190,21 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.v1.DatabaseApiKey"> &
   clusterIds: string[];
 
   /**
-   * Prefix for the API key, this represents the first bytes of the token
-   * This is a read-only field and will be available after an api-key is created.
+   * Prefix for the database api key, this represents the first bytes of the key.
+   * This is a read-only field and will be available after a database api key is created.
    *
    * @generated from field: string prefix = 5;
    */
   prefix: string;
 
   /**
-   * The token for the database key.
-   * This is a read-only field and will be available only once in the return of CreateDatabaseApiKey.
-   * You should securely store this token and it should be handled as a secret.
+   * The key for the database api key.
+   * This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
+   * You should securely store this key and it should be handled as a secret.
    *
-   * @generated from field: string token = 6;
+   * @generated from field: string key = 6;
    */
-  token: string;
+  key: string;
 };
 
 /**

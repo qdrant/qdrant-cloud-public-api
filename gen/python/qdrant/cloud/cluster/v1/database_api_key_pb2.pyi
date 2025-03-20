@@ -46,17 +46,17 @@ class DeleteDatabaseApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "cluster_ids", "prefix", "token")
+    __slots__ = ("id", "account_id", "created_at", "cluster_ids", "prefix", "key")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_IDS_FIELD_NUMBER: _ClassVar[int]
     PREFIX_FIELD_NUMBER: _ClassVar[int]
-    TOKEN_FIELD_NUMBER: _ClassVar[int]
+    KEY_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     created_at: _timestamp_pb2.Timestamp
     cluster_ids: _containers.RepeatedScalarFieldContainer[str]
     prefix: str
-    token: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_ids: _Optional[_Iterable[str]] = ..., prefix: _Optional[str] = ..., token: _Optional[str] = ...) -> None: ...
+    key: str
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_ids: _Optional[_Iterable[str]] = ..., prefix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
