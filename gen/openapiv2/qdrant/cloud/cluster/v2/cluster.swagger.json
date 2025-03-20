@@ -638,7 +638,6 @@
           "title": "Additional Disk (expressed in Gib)"
         }
       },
-      "description": "Currently not supported, but will be added in the near future:\n Additional CPU (expressed in milli vCPU)\n int cpu = 1;\n Additional Memory (expressed in Gib)\n int ram = 2;",
       "title": "AdditionalResources contains the information about additional resources"
     },
     "v2Cluster": {

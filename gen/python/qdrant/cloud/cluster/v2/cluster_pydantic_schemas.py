@@ -29,11 +29,7 @@ class ListClustersRequest(BaseModel):
 # For hybrid this should be the hybrid cloud environment ID.
     cloud_region: typing.Optional[str] = Field(default="")
 
-class AdditionalResources(BaseModel):#  Currently not supported, but will be added in the near future:
- Additional CPU (expressed in milli vCPU)
- int cpu = 1;
- Additional Memory (expressed in Gib)
- int ram = 2;
+class AdditionalResources(BaseModel):
     """
      AdditionalResources contains the information about additional resources
     """
