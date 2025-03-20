@@ -19,17 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_ListApiKeys_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/ListApiKeys"
-	AuthService_CreateApiKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/CreateApiKey"
-	AuthService_DeleteApiKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/DeleteApiKey"
+	AuthService_ListManagementKeys_FullMethodName  = "/qdrant.cloud.auth.v2.AuthService/ListManagementKeys"
+	AuthService_CreateManagementKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/CreateManagementKey"
+	AuthService_DeleteManagementKey_FullMethodName = "/qdrant.cloud.auth.v2.AuthService/DeleteManagementKey"
+	AuthService_ListApiKeys_FullMethodName         = "/qdrant.cloud.auth.v2.AuthService/ListApiKeys"
+	AuthService_CreateApiKey_FullMethodName        = "/qdrant.cloud.auth.v2.AuthService/CreateApiKey"
+	AuthService_DeleteApiKey_FullMethodName        = "/qdrant.cloud.auth.v2.AuthService/DeleteApiKey"
 )
 
 // AuthServiceClient is the client API for AuthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+// AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 type AuthServiceClient interface {
+	// Fetch all management keys in the account identified by the given ID.
+	// Required permissions:
+	// - read:management_keys
+	ListManagementKeys(ctx context.Context, in *ListManagementKeysRequest, opts ...grpc.CallOption) (*ListManagementKeysResponse, error)
+	// Creates a management key in the account identified by the given ID.
+	// Required permissions:
+	// - write:management_keys
+	CreateManagementKey(ctx context.Context, in *CreateManagementKeyRequest, opts ...grpc.CallOption) (*CreateManagementKeyResponse, error)
+	// Deletes a management key in the account identified by the given ID.
+	// Required permissions:
+	// - delete:management_keys
+	DeleteManagementKey(ctx context.Context, in *DeleteManagementKeyRequest, opts ...grpc.CallOption) (*DeleteManagementKeyResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api_keys
@@ -50,6 +65,36 @@ type authServiceClient struct {
 
 func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
+}
+
+func (c *authServiceClient) ListManagementKeys(ctx context.Context, in *ListManagementKeysRequest, opts ...grpc.CallOption) (*ListManagementKeysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListManagementKeysResponse)
+	err := c.cc.Invoke(ctx, AuthService_ListManagementKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) CreateManagementKey(ctx context.Context, in *CreateManagementKeyRequest, opts ...grpc.CallOption) (*CreateManagementKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateManagementKeyResponse)
+	err := c.cc.Invoke(ctx, AuthService_CreateManagementKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) DeleteManagementKey(ctx context.Context, in *DeleteManagementKeyRequest, opts ...grpc.CallOption) (*DeleteManagementKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteManagementKeyResponse)
+	err := c.cc.Invoke(ctx, AuthService_DeleteManagementKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *authServiceClient) ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error) {
@@ -86,8 +131,20 @@ func (c *authServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRe
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
 //
-// AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+// AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 type AuthServiceServer interface {
+	// Fetch all management keys in the account identified by the given ID.
+	// Required permissions:
+	// - read:management_keys
+	ListManagementKeys(context.Context, *ListManagementKeysRequest) (*ListManagementKeysResponse, error)
+	// Creates a management key in the account identified by the given ID.
+	// Required permissions:
+	// - write:management_keys
+	CreateManagementKey(context.Context, *CreateManagementKeyRequest) (*CreateManagementKeyResponse, error)
+	// Deletes a management key in the account identified by the given ID.
+	// Required permissions:
+	// - delete:management_keys
+	DeleteManagementKey(context.Context, *DeleteManagementKeyRequest) (*DeleteManagementKeyResponse, error)
 	// Fetch all api-keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api_keys
@@ -110,6 +167,15 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
+func (UnimplementedAuthServiceServer) ListManagementKeys(context.Context, *ListManagementKeysRequest) (*ListManagementKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListManagementKeys not implemented")
+}
+func (UnimplementedAuthServiceServer) CreateManagementKey(context.Context, *CreateManagementKeyRequest) (*CreateManagementKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateManagementKey not implemented")
+}
+func (UnimplementedAuthServiceServer) DeleteManagementKey(context.Context, *DeleteManagementKeyRequest) (*DeleteManagementKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteManagementKey not implemented")
+}
 func (UnimplementedAuthServiceServer) ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListApiKeys not implemented")
 }
@@ -138,6 +204,60 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&AuthService_ServiceDesc, srv)
+}
+
+func _AuthService_ListManagementKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListManagementKeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ListManagementKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ListManagementKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ListManagementKeys(ctx, req.(*ListManagementKeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_CreateManagementKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateManagementKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).CreateManagementKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_CreateManagementKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).CreateManagementKey(ctx, req.(*CreateManagementKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_DeleteManagementKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteManagementKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).DeleteManagementKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_DeleteManagementKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).DeleteManagementKey(ctx, req.(*DeleteManagementKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _AuthService_ListApiKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -201,6 +321,18 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.auth.v2.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListManagementKeys",
+			Handler:    _AuthService_ListManagementKeys_Handler,
+		},
+		{
+			MethodName: "CreateManagementKey",
+			Handler:    _AuthService_CreateManagementKey_Handler,
+		},
+		{
+			MethodName: "DeleteManagementKey",
+			Handler:    _AuthService_DeleteManagementKey_Handler,
+		},
 		{
 			MethodName: "ListApiKeys",
 			Handler:    _AuthService_ListApiKeys_Handler,

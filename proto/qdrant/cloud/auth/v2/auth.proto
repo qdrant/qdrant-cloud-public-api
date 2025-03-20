@@ -7,8 +7,40 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
-// AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+// AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 service AuthService {
+  // Fetch all management keys in the account identified by the given ID.
+  // Required permissions:
+  // - read:management_keys
+  rpc ListManagementKeys(ListManagementKeysRequest) returns (ListManagementKeysResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:management_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/management-keys"};
+  }
+  // Creates a management key in the account identified by the given ID.
+  // Required permissions:
+  // - write:management_keys
+  rpc CreateManagementKey(CreateManagementKeyRequest) returns (CreateManagementKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:management_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "management_key.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/auth/v2/accounts/{management_key.account_id}/management-keys"
+      body: "*"
+    };
+  }
+  // Deletes a management key in the account identified by the given ID.
+  // Required permissions:
+  // - delete:management_keys
+  rpc DeleteManagementKey(DeleteManagementKeyRequest) returns (DeleteManagementKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:management_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/management-keys/{management_key_id}"};
+  }
   // Fetch all api-keys in the account identified by the given ID.
   // Required permissions:
   // - read:api_keys
@@ -18,7 +50,6 @@ service AuthService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/api-keys"};
   }
-
   // Creates an api-key in the account identified by the given ID.
   // Required permissions:
   // - write:api_keys
@@ -33,9 +64,6 @@ service AuthService {
       body: "*"
     };
   }
-
-  // TODO: Missing Update
-
   // Deletes an api-key in the account identified by the given ID.
   // Required permissions:
   // - delete:api_keys
@@ -45,6 +73,46 @@ service AuthService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}"};
   }
+}
+
+// ListManagementKeysRequest is the request for the ListManagementKeys function
+message ListManagementKeysRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListManagementKeysResponse is the response from the ListManagementKeys function
+message ListManagementKeysResponse {
+  // The actual management keys in this list.
+  repeated ManagementKey items = 1;
+}
+
+// CreateManagementKeyRequest is the request for the CreateManagementKey function
+message CreateManagementKeyRequest {
+  // The actual management key.
+  ManagementKey management_key = 1;
+}
+
+// CreateManagementKeyResponse is the response from the CreateManagementKey function
+message CreateManagementKeyResponse {
+  // The actual management key.
+  ManagementKey management_key = 1;
+}
+
+// DeleteManagementKeyRequest is the request for the DeleteManagementKey function
+message DeleteManagementKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the management key (in Guid format).
+  // This is a required field.
+  string management_key_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteManagementKeyResponse is the response from the DeleteManagementKey function
+message DeleteManagementKeyResponse {
+  // Empty
 }
 
 // ListApiKeysRequest is the request for the ListApiKeys function
@@ -87,6 +155,32 @@ message DeleteApiKeyRequest {
 // DeleteApiKeyResponse is the response from the DeleteApiKey function
 message DeleteApiKeyResponse {
   // Empty
+}
+
+// A ManagementKey represents a management key of a Qdrant Cloud account.
+// This management key grants access to the Qdrant Cloud API.
+message ManagementKey {
+  // Unique identifier for the management key (in Guid format).
+  // This is a read-only field and will be available after a management key is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the management key was created.
+  // This is a read-only field and will be available after a management key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // Prefix for the management key, this represents the first bytes of the key.
+  // This is a read-only field and will be available after a management key is created.
+  string prefix = 4;
+  // The value of the key, to be used to authenticate requests to the Qdrant Cloud API.
+  // This is a read-only field and will be available only once in the response of CreateManagementKey.
+  // You should securely store this key and it should be handled as a secret.
+  string key = 5;
 }
 
 // A ApiKey represents one api-key of a Qdrant cloud account.

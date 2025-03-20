@@ -6,7 +6,7 @@ from qdrant.cloud.auth.v2 import auth_pb2 as qdrant_dot_cloud_dot_auth_dot_v2_do
 
 
 class AuthServiceStub(object):
-    """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    """AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
     """
 
     def __init__(self, channel):
@@ -15,6 +15,21 @@ class AuthServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.ListManagementKeys = channel.unary_unary(
+                '/qdrant.cloud.auth.v2.AuthService/ListManagementKeys',
+                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysResponse.FromString,
+                _registered_method=True)
+        self.CreateManagementKey = channel.unary_unary(
+                '/qdrant.cloud.auth.v2.AuthService/CreateManagementKey',
+                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyResponse.FromString,
+                _registered_method=True)
+        self.DeleteManagementKey = channel.unary_unary(
+                '/qdrant.cloud.auth.v2.AuthService/DeleteManagementKey',
+                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.FromString,
+                _registered_method=True)
         self.ListApiKeys = channel.unary_unary(
                 '/qdrant.cloud.auth.v2.AuthService/ListApiKeys',
                 request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.SerializeToString,
@@ -33,8 +48,35 @@ class AuthServiceStub(object):
 
 
 class AuthServiceServicer(object):
-    """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    """AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
     """
+
+    def ListManagementKeys(self, request, context):
+        """Fetch all management keys in the account identified by the given ID.
+        Required permissions:
+        - read:management_keys
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateManagementKey(self, request, context):
+        """Creates a management key in the account identified by the given ID.
+        Required permissions:
+        - write:management_keys
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteManagementKey(self, request, context):
+        """Deletes a management key in the account identified by the given ID.
+        Required permissions:
+        - delete:management_keys
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def ListApiKeys(self, request, context):
         """Fetch all api-keys in the account identified by the given ID.
@@ -55,9 +97,7 @@ class AuthServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteApiKey(self, request, context):
-        """TODO: Missing Update
-
-        Deletes an api-key in the account identified by the given ID.
+        """Deletes an api-key in the account identified by the given ID.
         Required permissions:
         - delete:api_keys
         """
@@ -68,6 +108,21 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'ListManagementKeys': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListManagementKeys,
+                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysResponse.SerializeToString,
+            ),
+            'CreateManagementKey': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateManagementKey,
+                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyResponse.SerializeToString,
+            ),
+            'DeleteManagementKey': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteManagementKey,
+                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.SerializeToString,
+            ),
             'ListApiKeys': grpc.unary_unary_rpc_method_handler(
                     servicer.ListApiKeys,
                     request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.FromString,
@@ -92,8 +147,89 @@ def add_AuthServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class AuthService(object):
-    """AuthService is the API used to configure the auth settings (like api-key objects) for a cluster.
+    """AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
     """
+
+    @staticmethod
+    def ListManagementKeys(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.auth.v2.AuthService/ListManagementKeys',
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysRequest.SerializeToString,
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListManagementKeysResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateManagementKey(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.auth.v2.AuthService/CreateManagementKey',
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyRequest.SerializeToString,
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateManagementKeyResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteManagementKey(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.auth.v2.AuthService/DeleteManagementKey',
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.SerializeToString,
+            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def ListApiKeys(request,
