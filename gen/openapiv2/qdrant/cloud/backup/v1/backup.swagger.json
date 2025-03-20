@@ -44,7 +44,7 @@
           },
           {
             "name": "clusterId",
-            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.\n\nTODO: ListOptions",
+            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -136,7 +136,7 @@
           },
           {
             "name": "backupScheduleId",
-            "description": "The identifier of the schedule (in Guid format).\nWhen this field is set, only backups triggered by the backup schedule are returned.\n\nTODO: ListOptions",
+            "description": "The identifier of the schedule (in Guid format).\nWhen this field is set, only backups triggered by the backup schedule are returned.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -680,7 +680,7 @@
             "type": "object",
             "$ref": "#/definitions/v1BackupSchedule"
           },
-          "description": "The actual backup schedules in this list.\n\nTODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions"
+          "description": "The actual backup schedules in this list."
         }
       },
       "description": "ListBackupsResponse is the response from the ListBackups function."
@@ -694,7 +694,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Backup"
           },
-          "description": "The actual backups in this list.\n\nTODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions"
+          "description": "The actual backups in this list."
         }
       },
       "title": "ListBackupsResponse is the response from the ListBackups function"

@@ -66,8 +66,6 @@ export type ListClustersResponse = Message<"qdrant.cloud.cluster.v2.ListClusters
   /**
    * The actual clusters in this list
    *
-   * TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
-   *
    * @generated from field: repeated qdrant.cloud.cluster.v2.Cluster items = 1;
    */
   items: Cluster[];
@@ -691,7 +689,7 @@ export type DatabaseConfigurationCollectionVectors = Message<"qdrant.cloud.clust
    * If set, this will create a collection with all vectors immediately stored in memmap storage.
    * This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
    * For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
-   * This is an optional field, TODO:? default will be true.
+   * This is an optional field, the default value will be true.
    *
    * @generated from field: optional bool on_disk = 1;
    */

@@ -1035,7 +1035,7 @@
       "properties": {
         "onDisk": {
           "type": "boolean",
-          "description": "If set, this will create a collection with all vectors immediately stored in memmap storage.\nThis is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.\nFor more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage\nThis is an optional field, TODO:? default will be true."
+          "description": "If set, this will create a collection with all vectors immediately stored in memmap storage.\nThis is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.\nFor more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage\nThis is an optional field, the default value will be true."
         }
       },
       "title": "The default Qdrant database collection vectors configuration"
@@ -1154,7 +1154,6 @@
             "type": "object",
             "$ref": "#/definitions/v2Cluster"
           },
-          "description": "TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions",
           "title": "The actual clusters in this list"
         }
       },

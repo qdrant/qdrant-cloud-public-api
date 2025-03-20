@@ -58,7 +58,7 @@
           },
           {
             "name": "statuses",
-            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.\n\nTODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)",
+            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.",
             "in": "query",
             "required": false,
             "type": "array",

@@ -18,7 +18,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters"};
   }
-
   // Fetch a cluster in the account identified by the given IDs.
   // Required permissions:
   // - read:clusters
@@ -28,7 +27,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}"};
   }
-
   // Creates a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
@@ -43,7 +41,6 @@ service ClusterService {
       body: "*"
     };
   }
-
   // Update a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
@@ -58,7 +55,6 @@ service ClusterService {
       body: "*"
     };
   }
-
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
   // - delete:clusters
@@ -68,7 +64,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}"};
   }
-
   // Restarts a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
@@ -78,7 +73,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/restart"};
   }
-
   // Fetch all qdrant releases in the account identified by the given ID.
   // Optional a cluster ID can be provided, the list will return the options to update to only.
   // Required permissions:
@@ -89,7 +83,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/releases"};
   }
-
   // Fetch all JWTs for the cluster identified by the given ID.
   // Required permissions:
   // - read:api_keys
@@ -99,7 +92,6 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v2/accounts/{account_id}/clusters/{cluster_id}/jwts"};
   }
-
   // Creates a JWT for the cluster identified by the given ID.
   // Required permissions:
   // - write:api_keys
@@ -114,7 +106,6 @@ service ClusterService {
       body: "*"
     };
   }
-
   // Deletes a JWT for the cluster identified by the given ID.
   // Required permissions:
   // - delete:api_keys
@@ -131,7 +122,6 @@ message ListClustersRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
   // Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).
   // If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
   optional string cloud_provider = 10 [(buf.validate.field).string = {
@@ -152,15 +142,12 @@ message ListClustersRequest {
     message: "cloud_region must be a UUID if cloud_provider is 'hybrid'"
     expression: "this.cloud_region.matches('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$') || this.cloud_provider!= 'hybrid'"
   };
-
-  // TODO: ListOptions
 }
 
 // ListClustersResponse is the response from the ListClusters function
 message ListClustersResponse {
   // The actual clusters in this list
   repeated Cluster items = 1;
-  // TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
 }
 
 // GetClusterRequest is the request for the GetCluster function
@@ -243,7 +230,6 @@ message ListQdrantReleasesRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
   // The identifier for the cluster (in Guid format).
   // This cluster should be part of the provided account.
   // This is an optional field.
@@ -284,9 +270,6 @@ message Cluster {
   // Timestamp when the cluster was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteCluster is called.
   google.protobuf.Timestamp deleted_at = 5;
-
-  // TODO2: id, created_at, created_by, last_modified_at, last_modified_by, account_id (deferred discussion)
-
   // Cloud provider where the cluster is hosted.
   // This is a required field (one of the following: aws, gcp, azure, hybrid).
   // After creation, this field cannot be changed.
@@ -309,10 +292,8 @@ message Cluster {
     message: "cloud_region must be a UUID if cloud_provider is 'hybrid'"
     expression: "this.cloud_region.matches('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$') || this.cloud_provider!= 'hybrid'"
   };
-
   // Current configuration details of the cluster.
   ClusterConfiguration configuration = 20;
-
   // Current state of the cluster.
   // All fields inside `state` are read-only.
   ClusterState state = 100;
@@ -329,13 +310,11 @@ message ClusterConfiguration {
     gte: 1
     lte: 20
   }];
-
   // Version of the cluster software.
   // If omitted the latest version will be used and filled out during create.
   // Use ListReleases() to determine which versions are allowed to be used.
   // See upgrade guidelines for more info.
   string version = 3 [(buf.validate.field).string = {pattern: "^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$"}];
-
   // TODO: Needing a package_id here is very bad usability for users.
   // That means we would need to start documenting all package_ids somewhere.
   // Rather we should introduce speaking package names in the public api (even if we have them different internally).
@@ -346,11 +325,9 @@ message ClusterConfiguration {
   // The additional resources on top of the selected package.
   // This is an optional field, if not specified all additional resources are 0.
   optional AdditionalResources additional_resources = 5;
-
   // Configuration to setup a qdrant database in a hybrid cloud.
   // It is ignored for managed cloud clusters. This is an optional field
   optional DatabaseConfiguration database_configuration = 7;
-
   // The node selector for this cluster in a hybrid cloud.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue node_selector = 8 [(buf.validate.field).repeated = {max_items: 10}];
@@ -369,7 +346,6 @@ message ClusterConfiguration {
       string: {ipv4_prefix: true}
     }
   }];
-
   // The percentage of CPU resources reserved for system components
   // This is an optional field, default is 0.
   // Number between 0..80
@@ -437,7 +413,7 @@ message DatabaseConfigurationCollectionVectors {
   // If set, this will create a collection with all vectors immediately stored in memmap storage.
   // This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
   // For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
-  // This is an optional field, TODO:? default will be true.
+  // This is an optional field, the default value will be true.
   optional bool on_disk = 1;
 }
 
@@ -513,7 +489,6 @@ message Toleration {
     // Must be a valid DNS label as per RFC 1123.
     pattern: "^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$"
   }];
-
   // The operator represents a key's relationship to the value.
   // Valid operators are "Exists" and "Equal".
   // The default is Exists
@@ -523,10 +498,8 @@ message Toleration {
       "Equal"
     ]
   }];
-
   // The value to match against the value of a node label.
   string value = 3;
-
   // The effect indicates the taint effect to match.
   // Valid effects are "NoSchedule", "PreferNoSchedule", and "NoExecute".
   // The default is NoSchedule
@@ -537,7 +510,6 @@ message Toleration {
       "NoExecute"
     ]
   }];
-
   // The toleration seconds indicates the duration to tolerate the taint.
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)

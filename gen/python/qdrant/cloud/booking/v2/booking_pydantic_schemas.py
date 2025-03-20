@@ -24,7 +24,7 @@ class ListPackagesRequest(BaseModel):
     cloud_region: str = Field(default="")
 # The status of the packages to filter.
 # This is an optional field. If value is not set, all packages are returned.
-    statuses: typing.List[str] = Field(default_factory=list)# TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
+    statuses: typing.List[str] = Field(default_factory=list)
 
 class ResourceConfiguration(BaseModel):
     """

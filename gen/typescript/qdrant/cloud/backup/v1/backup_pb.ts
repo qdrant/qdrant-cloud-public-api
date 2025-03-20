@@ -43,8 +43,6 @@ export type ListBackupsRequest = Message<"qdrant.cloud.backup.v1.ListBackupsRequ
    * The identifier of the schedule (in Guid format).
    * When this field is set, only backups triggered by the backup schedule are returned.
    *
-   * TODO: ListOptions
-   *
    * @generated from field: optional string backup_schedule_id = 3;
    */
   backupScheduleId?: string;
@@ -65,8 +63,6 @@ export const ListBackupsRequestSchema: GenMessage<ListBackupsRequest> = /*@__PUR
 export type ListBackupsResponse = Message<"qdrant.cloud.backup.v1.ListBackupsResponse"> & {
   /**
    * The actual backups in this list.
-   *
-   * TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
    *
    * @generated from field: repeated qdrant.cloud.backup.v1.Backup items = 1;
    */
@@ -234,8 +230,6 @@ export type ListBackupSchedulesRequest = Message<"qdrant.cloud.backup.v1.ListBac
    * The identifier of the cluster (in Guid format).
    * When this field is set, only backup schedules that belong to the cluster are returned.
    *
-   * TODO: ListOptions
-   *
    * @generated from field: optional string cluster_id = 2;
    */
   clusterId?: string;
@@ -256,8 +250,6 @@ export const ListBackupSchedulesRequestSchema: GenMessage<ListBackupSchedulesReq
 export type ListBackupSchedulesResponse = Message<"qdrant.cloud.backup.v1.ListBackupSchedulesResponse"> & {
   /**
    * The actual backup schedules in this list.
-   *
-   * TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
    *
    * @generated from field: repeated qdrant.cloud.backup.v1.BackupSchedule items = 1;
    */

@@ -49,8 +49,6 @@ export type ListPackagesRequest = Message<"qdrant.cloud.booking.v2.ListPackagesR
    * The status of the packages to filter.
    * This is an optional field. If value is not set, all packages are returned.
    *
-   * TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
-   *
    * @generated from field: repeated string statuses = 4;
    */
   statuses: string[];
