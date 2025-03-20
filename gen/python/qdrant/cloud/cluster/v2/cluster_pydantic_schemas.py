@@ -21,9 +21,13 @@ class ListClustersRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# The optional identifier for hybrid cloud (in Guid format).
+# Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).
 # If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
-    hybrid_cloud_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
+    cloud_provider: typing.Optional[str] = Field(default="")
+# Optional filter for cloud region where the cluster is located
+# If this field is set the cloud_provider is required to set as well (and it should match).
+# For hybrid this should be the hybrid cloud environment ID.
+    cloud_region: typing.Optional[str] = Field(default="")
 
 class AdditionalResources(BaseModel):#  Currently not supported, but will be added in the near future:
  Additional CPU (expressed in milli vCPU)
@@ -126,6 +130,7 @@ class DatabaseConfigurationInference(BaseModel):
 class DatabaseConfiguration(BaseModel):
     """
      Configuration to setup a Qdrant database in a hybrid cloud.
+ All settings apply to hybrid cloud only.
     """
 
 # The default Qdrant database collection configuration
@@ -185,29 +190,32 @@ class ClusterConfiguration(BaseModel):
 # Use ListReleases() to determine which versions are allowed to be used.
 # See upgrade guidelines for more info.
     version: str = Field(default="")
+# TODO: Needing a package_id here is very bad usability for users.
+# That means we would need to start documenting all package_ids somewhere.
+# Rather we should introduce speaking package names in the public api (even if we have them different internally).
+# In the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'
+# We could derive them from the SKU, e.g. QN_16x128 fine with something else as well.
 # The package identifier used to configure the resources of the cluster. Use ListPackages() to select one.
     package_id: str = Field(default="")
 # The additional resources on top of the selected package.
 # This is an optional field, if not specified all additional resources are 0.
     additional_resources: typing.Optional[AdditionalResources] = Field(default=None)
 # Configuration to setup a qdrant database in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     database_configuration: typing.Optional[DatabaseConfiguration] = Field(default=None)
 # The node selector for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     node_selector: typing.List[KeyValue] = Field(default_factory=list)
 # List of tolerations for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     tolerations: typing.List[Toleration] = Field(default_factory=list)
 # List of annotations for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     annotations: typing.List[KeyValue] = Field(default_factory=list)
-# List of allowed IP source ranges for this cluster. Field is used for both
-# hybrid cloud and Managed Cloud clusters. This is an optional field
-# TODO: Are both IPv4 and IPv6 supported? --> IPv4 only for now?
-# TODO: Do we want to create a reg-ex for validation?
+# List of allowed IP source ranges for this cluster.
+# Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
+# The CIDRs supports IPv4 only.
     allowed_ip_source_ranges: typing.List[str] = Field(default_factory=list)
-# TODO: Ask Bastian if 80 is OK (or it should be 99/100)?
 # The percentage of CPU resources reserved for system components
 # This is an optional field, default is 0.
 # Number between 0..80
@@ -251,7 +259,7 @@ class ClusterNodeResources(BaseModel):
 
 class ClusterNodeResourcesSummary(BaseModel):
     """
-     ClusterResourcesSummary represents the summary of the resources used in this cluster per node.
+     ClusterNodeResourcesSummary represents the resources used in this cluster per node.
     """
 
 # Disk resources
@@ -280,7 +288,8 @@ class ClusterState(BaseModel):
     reason: str = Field(default="")
 # Endpoint information to access the qdrant cluster (aka database).
     endpoint: ClusterEndpoint = Field()
-# Summary of the resources used by the cluster per node.
+# The resources used by the cluster per node.
+# For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
     resources: ClusterNodeResourcesSummary = Field()
 
 class Cluster(BaseModel):
@@ -309,7 +318,7 @@ class Cluster(BaseModel):
 # After creation, this field cannot be changed.
     cloud_provider: str = Field(default="")
 # Cloud region where the cluster is located.
-# For hybrid this should be the hybrid cloud ID.
+# For hybrid this should be the hybrid cloud environment ID.
 # This is a required field.
 # After creation, this field cannot be changed.
     cloud_region: str = Field(default="")
@@ -501,7 +510,7 @@ class ClusterJWTPayload(BaseModel):
 # A general access level claim, either "r" (read) or "m" (modify).
     access: str = Field(default="")
 # A list of access rules per collection.
-    access_list: ClusterJWTPayloadAccessList = Field()
+    access_list: ClusterJWTPayloadAccessList = Field()# TODO: Why not 'simply' repeated ClusterJWTPayloadAccess rules = 1;, do we expect to add more?
 # TODO check if this field could be defined as duration instead of int64, or
 # if there is a better type for it.
 #
@@ -510,7 +519,8 @@ class ClusterJWTPayload(BaseModel):
 
 class ClusterJWT(BaseModel):
     """
-     A ClusterJWT represents a JWT to access a Qdrant cloud cluster.
+     TODO: ClusterJWT we call them in the ui `Database Api Keys`, we should consider using a better name in the API.
+ A ClusterJWT represents a JWT to access a Qdrant cloud cluster.
     """
 
 # Unique identifier for the cluster JWT (in Guid format).
@@ -526,6 +536,7 @@ class ClusterJWT(BaseModel):
 # This is a required field
 # Name can only contain letters, numbers, spaces, underscores and dashes
     name: str = Field(default="")
+# TODO: rename to configuration?
 # The JWT payload of the cluster JWT.
     jwt_payload: ClusterJWTPayload = Field()
 # Timestamp when the cluster JWT was created.
@@ -540,7 +551,7 @@ class ClusterJWT(BaseModel):
 # The token for the Cluster JWT.
 # This is a read-only field and will be available only once in the return of CreateClusterJWT.
 # You should securely store this token and it should be handled as a secret.
-    token: str = Field(default="")
+    token: str = Field(default="")# TODO: rename to key?
 
 class ListClusterJWTsResponse(BaseModel):
     """

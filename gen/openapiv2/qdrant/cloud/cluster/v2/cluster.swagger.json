@@ -43,8 +43,15 @@
             "type": "string"
           },
           {
-            "name": "hybridCloudId",
-            "description": "The optional identifier for hybrid cloud (in Guid format).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.\n\nTODO: ListOptions",
+            "name": "cloudProvider",
+            "description": "Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudRegion",
+            "description": "Optional filter for cloud region where the cluster is located\nIf this field is set the cloud_provider is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -467,7 +474,7 @@
             },
             "cloudRegion": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v2ClusterConfiguration",
@@ -499,7 +506,7 @@
             },
             "jwtPayload": {
               "$ref": "#/definitions/v2ClusterJWTPayload",
-              "description": "The JWT payload of the cluster JWT."
+              "description": "TODO: rename to configuration?\nThe JWT payload of the cluster JWT."
             },
             "createdAt": {
               "type": "string",
@@ -516,7 +523,7 @@
             },
             "token": {
               "type": "string",
-              "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret."
+              "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret.\n\nTODO: rename to key?"
             }
           },
           "title": "The actual Cluster JWT"
@@ -550,7 +557,7 @@
             },
             "cloudRegion": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v2ClusterConfiguration",
@@ -665,7 +672,7 @@
         },
         "cloudRegion": {
           "type": "string",
-          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
           "$ref": "#/definitions/v2ClusterConfiguration",
@@ -697,7 +704,7 @@
         },
         "packageId": {
           "type": "string",
-          "description": "The package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
+          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
         },
         "additionalResources": {
           "$ref": "#/definitions/v2AdditionalResources",
@@ -705,7 +712,7 @@
         },
         "databaseConfiguration": {
           "$ref": "#/definitions/v2DatabaseConfiguration",
-          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "nodeSelector": {
           "type": "array",
@@ -713,7 +720,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "tolerations": {
           "type": "array",
@@ -721,7 +728,7 @@
             "type": "object",
             "$ref": "#/definitions/v2Toleration"
           },
-          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "annotations": {
           "type": "array",
@@ -729,19 +736,19 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "allowedIpSourceRanges": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "title": "List of allowed IP source ranges for this cluster. Field is used for both\nhybrid cloud and Managed Cloud clusters. This is an optional field\nTODO: Are both IPv4 and IPv6 supported? --\u003e IPv4 only for now?\nTODO: Do we want to create a reg-ex for validation?"
+          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. This is an optional field\nThe CIDRs supports IPv4 only."
         },
         "reservedCpuPercentage": {
           "type": "integer",
           "format": "int64",
-          "title": "TODO: Ask Bastian if 80 is OK (or it should be 99/100)?\nThe percentage of CPU resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+          "title": "The percentage of CPU resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
         },
         "reservedMemoryPercentage": {
           "type": "integer",
@@ -792,7 +799,7 @@
         },
         "jwtPayload": {
           "$ref": "#/definitions/v2ClusterJWTPayload",
-          "description": "The JWT payload of the cluster JWT."
+          "description": "TODO: rename to configuration?\nThe JWT payload of the cluster JWT."
         },
         "createdAt": {
           "type": "string",
@@ -809,10 +816,10 @@
         },
         "token": {
           "type": "string",
-          "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret."
+          "description": "The token for the Cluster JWT.\nThis is a read-only field and will be available only once in the return of CreateClusterJWT.\nYou should securely store this token and it should be handled as a secret.\n\nTODO: rename to key?"
         }
       },
-      "description": "A ClusterJWT represents a JWT to access a Qdrant cloud cluster."
+      "description": "TODO: ClusterJWT we call them in the ui `Database Api Keys`, we should consider using a better name in the API.\nA ClusterJWT represents a JWT to access a Qdrant cloud cluster."
     },
     "v2ClusterJWTPayload": {
       "type": "object",
@@ -823,7 +830,7 @@
         },
         "accessList": {
           "$ref": "#/definitions/v2ClusterJWTPayloadAccessList",
-          "description": "A list of access rules per collection."
+          "description": "A list of access rules per collection.\n\nTODO: Why not 'simply' repeated ClusterJWTPayloadAccess rules = 1;, do we expect to add more?"
         },
         "exp": {
           "type": "string",
@@ -915,7 +922,7 @@
           "title": "CPU resources"
         }
       },
-      "description": "ClusterResourcesSummary represents the summary of the resources used in this cluster per node."
+      "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
     },
     "v2ClusterState": {
       "type": "object",
@@ -948,7 +955,7 @@
         },
         "resources": {
           "$ref": "#/definitions/v2ClusterNodeResourcesSummary",
-          "description": "Summary of the resources used by the cluster per node."
+          "title": "The resources used by the cluster per node.\nFor the complete cluster you have to multiply by cluster.configuration.number_of_nodes"
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
@@ -1001,7 +1008,7 @@
           "title": "The Qdrant database inference configuration\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
         }
       },
-      "description": "Configuration to setup a Qdrant database in a hybrid cloud."
+      "description": "Configuration to setup a Qdrant database in a hybrid cloud.\nAll settings apply to hybrid cloud only."
     },
     "v2DatabaseConfigurationCollection": {
       "type": "object",
