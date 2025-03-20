@@ -87,6 +87,77 @@
         ]
       }
     },
+    "/api/auth/v2/accounts/{accountId}/management-keys": {
+      "get": {
+        "summary": "Fetch all management keys in the account identified by the given ID.\nRequired permissions:\n- read:management_keys",
+        "operationId": "AuthService_ListManagementKeys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2ListManagementKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/api/auth/v2/accounts/{accountId}/management-keys/{managementKeyId}": {
+      "delete": {
+        "summary": "Deletes a management key in the account identified by the given ID.\nRequired permissions:\n- delete:management_keys",
+        "operationId": "AuthService_DeleteManagementKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2DeleteManagementKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managementKeyId",
+            "description": "The identifier of the management key (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
     "/api/auth/v2/accounts/{apiKey.accountId}/api-keys": {
       "post": {
         "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
@@ -119,6 +190,46 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/AuthServiceCreateApiKeyBody"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/api/auth/v2/accounts/{managementKey.accountId}/management-keys": {
+      "post": {
+        "summary": "Creates a management key in the account identified by the given ID.\nRequired permissions:\n- write:management_keys",
+        "operationId": "AuthService_CreateManagementKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2CreateManagementKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "managementKey.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthServiceCreateManagementKeyBody"
             }
           }
         ],
@@ -164,6 +275,36 @@
         }
       },
       "title": "CreateApiKeyRequest is the request for the CreateApiKey function"
+    },
+    "AuthServiceCreateManagementKeyBody": {
+      "type": "object",
+      "properties": {
+        "managementKey": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the management key (in Guid format).\nThis is a read-only field and will be available after a management key is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created."
+            },
+            "prefix": {
+              "type": "string",
+              "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created."
+            },
+            "key": {
+              "type": "string",
+              "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+            }
+          },
+          "description": "The actual management key.",
+          "title": "The actual management key."
+        }
+      },
+      "title": "CreateManagementKeyRequest is the request for the CreateManagementKey function"
     },
     "authv2ApiKey": {
       "type": "object",
@@ -237,10 +378,25 @@
       },
       "title": "CreateApiKeyResponse is the response from the CreateApiKey function"
     },
+    "v2CreateManagementKeyResponse": {
+      "type": "object",
+      "properties": {
+        "managementKey": {
+          "$ref": "#/definitions/v2ManagementKey",
+          "description": "The actual management key."
+        }
+      },
+      "title": "CreateManagementKeyResponse is the response from the CreateManagementKey function"
+    },
     "v2DeleteApiKeyResponse": {
       "type": "object",
       "description": "Empty",
       "title": "DeleteApiKeyResponse is the response from the DeleteApiKey function"
+    },
+    "v2DeleteManagementKeyResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteManagementKeyResponse is the response from the DeleteManagementKey function"
     },
     "v2ListApiKeysResponse": {
       "type": "object",
@@ -256,6 +412,47 @@
         }
       },
       "title": "ListApiKeysResponse is the response from the ListApiKeys function"
+    },
+    "v2ListManagementKeysResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2ManagementKey"
+          },
+          "description": "The actual management keys in this list."
+        }
+      },
+      "title": "ListManagementKeysResponse is the response from the ListManagementKeys function"
+    },
+    "v2ManagementKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the management key (in Guid format).\nThis is a read-only field and will be available after a management key is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created."
+        },
+        "key": {
+          "type": "string",
+          "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+        }
+      },
+      "description": "A ManagementKey represents a management key of a Qdrant Cloud account.\nThis management key grants access to the Qdrant Cloud API."
     }
   }
 }
