@@ -19,7 +19,6 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backups"};
   }
-
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
   // - write:backups
@@ -34,7 +33,6 @@ service BackupService {
       body: "*"
     };
   }
-
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
   // - delete:backups
@@ -44,7 +42,6 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}"};
   }
-
   // Restores a backup in the account identified by the given ID.
   rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
     // permissions
@@ -52,7 +49,6 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
   }
-
   // Fetch all backup schedules in the account identified by the given ID.
   // Required permissions:
   // - read:backup_schedules
@@ -62,7 +58,6 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules"};
   }
-
   // Fetch a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - read:backup_schedules
@@ -72,7 +67,6 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
   }
-
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - write:backup_schedules
@@ -87,7 +81,6 @@ service BackupService {
       body: "*"
     };
   }
-
   // Update a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - write:backup_schedules
@@ -102,7 +95,6 @@ service BackupService {
       body: "*"
     };
   }
-
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - delete:backup_schedules
@@ -125,14 +117,12 @@ message ListBackupsRequest {
   // The identifier of the schedule (in Guid format).
   // When this field is set, only backups triggered by the backup schedule are returned.
   optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
-  // TODO: ListOptions
 }
 
 // ListBackupsResponse is the response from the ListBackups function
 message ListBackupsResponse {
   // The actual backups in this list.
   repeated Backup items = 1;
-  // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
 }
 
 // CreateBackupRequest is the request for the CreateBackup function.
@@ -185,14 +175,12 @@ message ListBackupSchedulesRequest {
   // The identifier of the cluster (in Guid format).
   // When this field is set, only backup schedules that belong to the cluster are returned.
   optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // TODO: ListOptions
 }
 
 // ListBackupsResponse is the response from the ListBackups function.
 message ListBackupSchedulesResponse {
   // The actual backup schedules in this list.
   repeated BackupSchedule items = 1;
-  // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
 }
 
 // GetBackupScheduleRequest is the request for the GetBackupSchedule function.

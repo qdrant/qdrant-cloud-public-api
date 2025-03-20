@@ -17,7 +17,6 @@ service BookingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v2/accounts/{account_id}/packages"};
   }
-
   // Get the package identified by the request identifier
   // Required permissions:
   // - None (authenticated only)
@@ -55,7 +54,6 @@ message ListPackagesRequest {
       "Deactivated"
     ]
   }];
-  // TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
 }
 
 // ListPackagesResponse is the response from the ListPackages function

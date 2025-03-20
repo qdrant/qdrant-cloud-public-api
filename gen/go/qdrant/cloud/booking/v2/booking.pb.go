@@ -38,7 +38,7 @@ type ListPackagesRequest struct {
 	CloudRegion string `protobuf:"bytes,3,opt,name=cloud_region,json=cloudRegion,proto3" json:"cloud_region,omitempty"`
 	// The status of the packages to filter.
 	// This is an optional field. If value is not set, all packages are returned.
-	Statuses      []string `protobuf:"bytes,4,rep,name=statuses,proto3" json:"statuses,omitempty"` // TODO: ListOptions (however without since, the result doesn't contain any created_at/updated_at)
+	Statuses      []string `protobuf:"bytes,4,rep,name=statuses,proto3" json:"statuses,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

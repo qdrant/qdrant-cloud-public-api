@@ -97,7 +97,7 @@ func (x *ListClustersRequest) GetCloudRegion() string {
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual clusters in this list
-	Items         []*Cluster `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"` // TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
+	Items         []*Cluster `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1198,7 +1198,7 @@ type DatabaseConfigurationCollectionVectors struct {
 	// If set, this will create a collection with all vectors immediately stored in memmap storage.
 	// This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
 	// For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
-	// This is an optional field, TODO:? default will be true.
+	// This is an optional field, the default value will be true.
 	OnDisk        *bool `protobuf:"varint,1,opt,name=on_disk,json=onDisk,proto3,oneof" json:"on_disk,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

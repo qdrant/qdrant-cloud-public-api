@@ -49,7 +49,7 @@ class DatabaseConfigurationCollectionVectors(BaseModel):
 # If set, this will create a collection with all vectors immediately stored in memmap storage.
 # This is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.
 # For more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage
-# This is an optional field, TODO:? default will be true.
+# This is an optional field, the default value will be true.
     on_disk: typing.Optional[bool] = Field(default=False)
 
 class DatabaseConfigurationCollection(BaseModel):
@@ -334,7 +334,7 @@ class ListClustersResponse(BaseModel):
     """
 
 # The actual clusters in this list
-    items: typing.List[Cluster] = Field(default_factory=list)# TODO: Add an operation timestamp the ListClusters is started, to support the `since` in ListOptions
+    items: typing.List[Cluster] = Field(default_factory=list)
 
 class GetClusterRequest(BaseModel):
     """

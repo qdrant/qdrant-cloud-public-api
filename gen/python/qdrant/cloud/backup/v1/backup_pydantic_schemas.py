@@ -26,7 +26,7 @@ class ListBackupsRequest(BaseModel):
     cluster_id: typing.Optional[str] = Field(default="")
 # The identifier of the schedule (in Guid format).
 # When this field is set, only backups triggered by the backup schedule are returned.
-    backup_schedule_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
+    backup_schedule_id: typing.Optional[str] = Field(default="")
 
 class Backup(BaseModel):
     """
@@ -71,7 +71,7 @@ class ListBackupsResponse(BaseModel):
     """
 
 # The actual backups in this list.
-    items: typing.List[Backup] = Field(default_factory=list)# TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+    items: typing.List[Backup] = Field(default_factory=list)
 
 class CreateBackupRequest(BaseModel):
     """
@@ -133,7 +133,7 @@ class ListBackupSchedulesRequest(BaseModel):
     account_id: str = Field(default="")
 # The identifier of the cluster (in Guid format).
 # When this field is set, only backup schedules that belong to the cluster are returned.
-    cluster_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
+    cluster_id: typing.Optional[str] = Field(default="")
 
 class BackupSchedule(BaseModel):
     """
@@ -178,7 +178,7 @@ class ListBackupSchedulesResponse(BaseModel):
     """
 
 # The actual backup schedules in this list.
-    items: typing.List[BackupSchedule] = Field(default_factory=list)# TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+    items: typing.List[BackupSchedule] = Field(default_factory=list)
 
 class GetBackupScheduleRequest(BaseModel):
     """

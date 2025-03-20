@@ -37,7 +37,7 @@ type ListBackupsRequest struct {
 	ClusterId *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
 	// The identifier of the schedule (in Guid format).
 	// When this field is set, only backups triggered by the backup schedule are returned.
-	BackupScheduleId *string `protobuf:"bytes,3,opt,name=backup_schedule_id,json=backupScheduleId,proto3,oneof" json:"backup_schedule_id,omitempty"` // TODO: ListOptions
+	BackupScheduleId *string `protobuf:"bytes,3,opt,name=backup_schedule_id,json=backupScheduleId,proto3,oneof" json:"backup_schedule_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -97,7 +97,7 @@ func (x *ListBackupsRequest) GetBackupScheduleId() string {
 type ListBackupsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backups in this list.
-	Items         []*Backup `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"` // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+	Items         []*Backup `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -427,7 +427,7 @@ type ListBackupSchedulesRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier of the cluster (in Guid format).
 	// When this field is set, only backup schedules that belong to the cluster are returned.
-	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"` // TODO: ListOptions
+	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -480,7 +480,7 @@ func (x *ListBackupSchedulesRequest) GetClusterId() string {
 type ListBackupSchedulesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup schedules in this list.
-	Items         []*BackupSchedule `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"` // TODO: Add an operation timestamp the ListBackups is started, to support the `since` in ListOptions
+	Items         []*BackupSchedule `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
