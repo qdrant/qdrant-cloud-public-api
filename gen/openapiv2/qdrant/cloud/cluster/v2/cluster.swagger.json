@@ -43,8 +43,15 @@
             "type": "string"
           },
           {
-            "name": "hybridCloudEnvId",
-            "description": "The optional identifier for hybrid cloud environment (in Guid format).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.\n\nTODO: ListOptions",
+            "name": "cloudProvider",
+            "description": "Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudRegion",
+            "description": "Optional filter for cloud region where the cluster is located\nIf this field is set the cloud_provider is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -467,7 +474,7 @@
             },
             "cloudRegion": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v2ClusterConfiguration",
@@ -550,7 +557,7 @@
             },
             "cloudRegion": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v2ClusterConfiguration",
@@ -665,7 +672,7 @@
         },
         "cloudRegion": {
           "type": "string",
-          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
           "$ref": "#/definitions/v2ClusterConfiguration",
@@ -705,7 +712,7 @@
         },
         "databaseConfiguration": {
           "$ref": "#/definitions/v2DatabaseConfiguration",
-          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "nodeSelector": {
           "type": "array",
@@ -713,7 +720,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "tolerations": {
           "type": "array",
@@ -721,7 +728,7 @@
             "type": "object",
             "$ref": "#/definitions/v2Toleration"
           },
-          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "annotations": {
           "type": "array",
@@ -729,14 +736,14 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for Managed Cloud clusters. This is an optional field"
+          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "allowedIpSourceRanges": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of allowed IP source ranges for this cluster. Field is used for both\nhybrid cloud and Managed Cloud clusters. This is an optional field\nThe CIDRs supports IPv4 only."
+          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. This is an optional field\nThe CIDRs supports IPv4 only."
         },
         "reservedCpuPercentage": {
           "type": "integer",

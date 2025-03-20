@@ -21,9 +21,13 @@ class ListClustersRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# The optional identifier for hybrid cloud environment (in Guid format).
+# Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).
 # If omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.
-    hybrid_cloud_env_id: typing.Optional[str] = Field(default="")# TODO: ListOptions
+    cloud_provider: typing.Optional[str] = Field(default="")
+# Optional filter for cloud region where the cluster is located
+# If this field is set the cloud_provider is required to set as well (and it should match).
+# For hybrid this should be the hybrid cloud environment ID.
+    cloud_region: typing.Optional[str] = Field(default="")
 
 class AdditionalResources(BaseModel):#  Currently not supported, but will be added in the near future:
  Additional CPU (expressed in milli vCPU)
@@ -197,19 +201,19 @@ class ClusterConfiguration(BaseModel):
 # This is an optional field, if not specified all additional resources are 0.
     additional_resources: typing.Optional[AdditionalResources] = Field(default=None)
 # Configuration to setup a qdrant database in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     database_configuration: typing.Optional[DatabaseConfiguration] = Field(default=None)
 # The node selector for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     node_selector: typing.List[KeyValue] = Field(default_factory=list)
 # List of tolerations for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     tolerations: typing.List[Toleration] = Field(default_factory=list)
 # List of annotations for this cluster in a hybrid cloud.
-# It is ignored for Managed Cloud clusters. This is an optional field
+# It is ignored for managed cloud clusters. This is an optional field
     annotations: typing.List[KeyValue] = Field(default_factory=list)
-# List of allowed IP source ranges for this cluster. Field is used for both
-# hybrid cloud and Managed Cloud clusters. This is an optional field
+# List of allowed IP source ranges for this cluster.
+# Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
 # The CIDRs supports IPv4 only.
     allowed_ip_source_ranges: typing.List[str] = Field(default_factory=list)
 # The percentage of CPU resources reserved for system components
@@ -314,7 +318,7 @@ class Cluster(BaseModel):
 # After creation, this field cannot be changed.
     cloud_provider: str = Field(default="")
 # Cloud region where the cluster is located.
-# For hybrid this should be the hybrid cloud ID.
+# For hybrid this should be the hybrid cloud environment ID.
 # This is a required field.
 # After creation, this field cannot be changed.
     cloud_region: str = Field(default="")

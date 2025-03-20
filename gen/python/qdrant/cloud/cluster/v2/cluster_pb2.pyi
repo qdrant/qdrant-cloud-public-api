@@ -10,12 +10,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListClustersRequest(_message.Message):
-    __slots__ = ("account_id", "hybrid_cloud_env_id")
+    __slots__ = ("account_id", "cloud_provider", "cloud_region")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    HYBRID_CLOUD_ENV_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    hybrid_cloud_env_id: str
-    def __init__(self, account_id: _Optional[str] = ..., hybrid_cloud_env_id: _Optional[str] = ...) -> None: ...
+    cloud_provider: str
+    cloud_region: str
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ...) -> None: ...
 
 class ListClustersResponse(_message.Message):
     __slots__ = ("items",)
