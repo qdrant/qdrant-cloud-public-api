@@ -28,7 +28,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fqdrant/cloud/auth/v2/auth.proto\x12\x14qdrant.cloud.auth.v2\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"D\n\x19ListManagementKeysRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n\x1aListManagementKeysResponse\x12\x39\n\x05items\x18\x01 \x03(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\x05items\"h\n\x1a\x43reateManagementKeyRequest\x12J\n\x0emanagement_key\x18\x01 \x01(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\rmanagementKey\"i\n\x1b\x43reateManagementKeyResponse\x12J\n\x0emanagement_key\x18\x01 \x01(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\rmanagementKey\"{\n\x1a\x44\x65leteManagementKeyRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x34\n\x11management_key_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x0fmanagementKeyId\"\x1d\n\x1b\x44\x65leteManagementKeyResponse\"=\n\x12ListApiKeysRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"I\n\x13ListApiKeysResponse\x12\x32\n\x05items\x18\x01 \x03(\x0b\x32\x1c.qdrant.cloud.auth.v2.ApiKeyR\x05items\"L\n\x13\x43reateApiKeyRequest\x12\x35\n\x07\x61pi_key\x18\x01 \x01(\x0b\x32\x1c.qdrant.cloud.auth.v2.ApiKeyR\x06\x61piKey\"M\n\x14\x43reateApiKeyResponse\x12\x35\n\x07\x61pi_key\x18\x01 \x01(\x0b\x32\x1c.qdrant.cloud.auth.v2.ApiKeyR\x06\x61piKey\"f\n\x13\x44\x65leteApiKeyRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n\napi_key_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x08\x61piKeyId\"\x16\n\x14\x44\x65leteApiKeyResponse\"\xda\x02\n\rManagementKey\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\'\n\naccount_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x39\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n\x03key\x18\x05 \x01(\tR\x03key:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n\napi_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)\"\xc4\x03\n\x06\x41piKey\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\'\n\naccount_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x39\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12k\n\x0b\x63luster_ids\x18\x04 \x03(\tBJ\xbaHG\x92\x01\x44\"Br@2>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$R\nclusterIds\x12\x16\n\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x14\n\x05token\x18\x06 \x01(\tR\x05token:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n\napi_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)2\xfc\t\n\x0b\x41uthService\x12\xcb\x01\n\x12ListManagementKeys\x12/.qdrant.cloud.auth.v2.ListManagementKeysRequest\x1a\x30.qdrant.cloud.auth.v2.ListManagementKeysResponse\"R\x8a\xb5\x18\x14read:management_keys\x82\xd3\xe4\x93\x02\x34\x12\x32/api/auth/v2/accounts/{account_id}/management-keys\x12\xff\x01\n\x13\x43reateManagementKey\x12\x30.qdrant.cloud.auth.v2.CreateManagementKeyRequest\x1a\x31.qdrant.cloud.auth.v2.CreateManagementKeyResponse\"\x82\x01\x8a\xb5\x18\x15write:management_keys\x92\xb5\x18\x19management_key.account_id\x82\xd3\xe4\x93\x02\x46\"A/api/auth/v2/accounts/{management_key.account_id}/management-keys:\x01*\x12\xe4\x01\n\x13\x44\x65leteManagementKey\x12\x30.qdrant.cloud.auth.v2.DeleteManagementKeyRequest\x1a\x31.qdrant.cloud.auth.v2.DeleteManagementKeyResponse\"h\x8a\xb5\x18\x16\x64\x65lete:management_keys\x82\xd3\xe4\x93\x02H*F/api/auth/v2/accounts/{account_id}/management-keys/{management_key_id}\x12\xa8\x01\n\x0bListApiKeys\x12(.qdrant.cloud.auth.v2.ListApiKeysRequest\x1a).qdrant.cloud.auth.v2.ListApiKeysResponse\"D\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02-\x12+/api/auth/v2/accounts/{account_id}/api-keys\x12\xcd\x01\n\x0c\x43reateApiKey\x12).qdrant.cloud.auth.v2.CreateApiKeyRequest\x1a*.qdrant.cloud.auth.v2.CreateApiKeyResponse\"f\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x12\x61pi_key.account_id\x82\xd3\xe4\x93\x02\x38\"3/api/auth/v2/accounts/{api_key.account_id}/api-keys:\x01*\x12\xba\x01\n\x0c\x44\x65leteApiKey\x12).qdrant.cloud.auth.v2.DeleteApiKeyRequest\x1a*.qdrant.cloud.auth.v2.DeleteApiKeyResponse\"S\x8a\xb5\x18\x0f\x64\x65lete:api_keys\x82\xd3\xe4\x93\x02:*8/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}B\xe6\x01\n\x18\x63om.qdrant.cloud.auth.v2B\tAuthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v2;authv2\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V2\xca\x02\x14Qdrant\\Cloud\\Auth\\V2\xe2\x02 Qdrant\\Cloud\\Auth\\V2\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fqdrant/cloud/auth/v2/auth.proto\x12\x14qdrant.cloud.auth.v2\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"D\n\x19ListManagementKeysRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n\x1aListManagementKeysResponse\x12\x39\n\x05items\x18\x01 \x03(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\x05items\"h\n\x1a\x43reateManagementKeyRequest\x12J\n\x0emanagement_key\x18\x01 \x01(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\rmanagementKey\"i\n\x1b\x43reateManagementKeyResponse\x12J\n\x0emanagement_key\x18\x01 \x01(\x0b\x32#.qdrant.cloud.auth.v2.ManagementKeyR\rmanagementKey\"{\n\x1a\x44\x65leteManagementKeyRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x34\n\x11management_key_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x0fmanagementKeyId\"\x1d\n\x1b\x44\x65leteManagementKeyResponse\"\xda\x02\n\rManagementKey\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\'\n\naccount_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x39\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n\x03key\x18\x05 \x01(\tR\x03key:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n\napi_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)2\xc4\x05\n\x0b\x41uthService\x12\xcb\x01\n\x12ListManagementKeys\x12/.qdrant.cloud.auth.v2.ListManagementKeysRequest\x1a\x30.qdrant.cloud.auth.v2.ListManagementKeysResponse\"R\x8a\xb5\x18\x14read:management_keys\x82\xd3\xe4\x93\x02\x34\x12\x32/api/auth/v2/accounts/{account_id}/management-keys\x12\xff\x01\n\x13\x43reateManagementKey\x12\x30.qdrant.cloud.auth.v2.CreateManagementKeyRequest\x1a\x31.qdrant.cloud.auth.v2.CreateManagementKeyResponse\"\x82\x01\x8a\xb5\x18\x15write:management_keys\x92\xb5\x18\x19management_key.account_id\x82\xd3\xe4\x93\x02\x46\"A/api/auth/v2/accounts/{management_key.account_id}/management-keys:\x01*\x12\xe4\x01\n\x13\x44\x65leteManagementKey\x12\x30.qdrant.cloud.auth.v2.DeleteManagementKeyRequest\x1a\x31.qdrant.cloud.auth.v2.DeleteManagementKeyResponse\"h\x8a\xb5\x18\x16\x64\x65lete:management_keys\x82\xd3\xe4\x93\x02H*F/api/auth/v2/accounts/{account_id}/management-keys/{management_key_id}B\xe6\x01\n\x18\x63om.qdrant.cloud.auth.v2B\tAuthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v2;authv2\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V2\xca\x02\x14Qdrant\\Cloud\\Auth\\V2\xe2\x02 Qdrant\\Cloud\\Auth\\V2\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -42,34 +42,16 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DELETEMANAGEMENTKEYREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_DELETEMANAGEMENTKEYREQUEST'].fields_by_name['management_key_id']._loaded_options = None
   _globals['_DELETEMANAGEMENTKEYREQUEST'].fields_by_name['management_key_id']._serialized_options = b'\272H\005r\003\260\001\001'
-  _globals['_LISTAPIKEYSREQUEST'].fields_by_name['account_id']._loaded_options = None
-  _globals['_LISTAPIKEYSREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
-  _globals['_DELETEAPIKEYREQUEST'].fields_by_name['account_id']._loaded_options = None
-  _globals['_DELETEAPIKEYREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
-  _globals['_DELETEAPIKEYREQUEST'].fields_by_name['api_key_id']._loaded_options = None
-  _globals['_DELETEAPIKEYREQUEST'].fields_by_name['api_key_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_MANAGEMENTKEY'].fields_by_name['account_id']._loaded_options = None
   _globals['_MANAGEMENTKEY'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_MANAGEMENTKEY']._loaded_options = None
   _globals['_MANAGEMENTKEY']._serialized_options = b'\272H\246\001\032\243\001\n\napi_key.id\022\032value must be a valid UUID\032ythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)'
-  _globals['_APIKEY'].fields_by_name['account_id']._loaded_options = None
-  _globals['_APIKEY'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
-  _globals['_APIKEY'].fields_by_name['cluster_ids']._loaded_options = None
-  _globals['_APIKEY'].fields_by_name['cluster_ids']._serialized_options = b'\272HG\222\001D\"Br@2>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  _globals['_APIKEY']._loaded_options = None
-  _globals['_APIKEY']._serialized_options = b'\272H\246\001\032\243\001\n\napi_key.id\022\032value must be a valid UUID\032ythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)'
   _globals['_AUTHSERVICE'].methods_by_name['ListManagementKeys']._loaded_options = None
   _globals['_AUTHSERVICE'].methods_by_name['ListManagementKeys']._serialized_options = b'\212\265\030\024read:management_keys\202\323\344\223\0024\0222/api/auth/v2/accounts/{account_id}/management-keys'
   _globals['_AUTHSERVICE'].methods_by_name['CreateManagementKey']._loaded_options = None
   _globals['_AUTHSERVICE'].methods_by_name['CreateManagementKey']._serialized_options = b'\212\265\030\025write:management_keys\222\265\030\031management_key.account_id\202\323\344\223\002F\"A/api/auth/v2/accounts/{management_key.account_id}/management-keys:\001*'
   _globals['_AUTHSERVICE'].methods_by_name['DeleteManagementKey']._loaded_options = None
   _globals['_AUTHSERVICE'].methods_by_name['DeleteManagementKey']._serialized_options = b'\212\265\030\026delete:management_keys\202\323\344\223\002H*F/api/auth/v2/accounts/{account_id}/management-keys/{management_key_id}'
-  _globals['_AUTHSERVICE'].methods_by_name['ListApiKeys']._loaded_options = None
-  _globals['_AUTHSERVICE'].methods_by_name['ListApiKeys']._serialized_options = b'\212\265\030\rread:api_keys\202\323\344\223\002-\022+/api/auth/v2/accounts/{account_id}/api-keys'
-  _globals['_AUTHSERVICE'].methods_by_name['CreateApiKey']._loaded_options = None
-  _globals['_AUTHSERVICE'].methods_by_name['CreateApiKey']._serialized_options = b'\212\265\030\016write:api_keys\222\265\030\022api_key.account_id\202\323\344\223\0028\"3/api/auth/v2/accounts/{api_key.account_id}/api-keys:\001*'
-  _globals['_AUTHSERVICE'].methods_by_name['DeleteApiKey']._loaded_options = None
-  _globals['_AUTHSERVICE'].methods_by_name['DeleteApiKey']._serialized_options = b'\212\265\030\017delete:api_keys\202\323\344\223\002:*8/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}'
   _globals['_LISTMANAGEMENTKEYSREQUEST']._serialized_start=186
   _globals['_LISTMANAGEMENTKEYSREQUEST']._serialized_end=254
   _globals['_LISTMANAGEMENTKEYSRESPONSE']._serialized_start=256
@@ -82,22 +64,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DELETEMANAGEMENTKEYREQUEST']._serialized_end=681
   _globals['_DELETEMANAGEMENTKEYRESPONSE']._serialized_start=683
   _globals['_DELETEMANAGEMENTKEYRESPONSE']._serialized_end=712
-  _globals['_LISTAPIKEYSREQUEST']._serialized_start=714
-  _globals['_LISTAPIKEYSREQUEST']._serialized_end=775
-  _globals['_LISTAPIKEYSRESPONSE']._serialized_start=777
-  _globals['_LISTAPIKEYSRESPONSE']._serialized_end=850
-  _globals['_CREATEAPIKEYREQUEST']._serialized_start=852
-  _globals['_CREATEAPIKEYREQUEST']._serialized_end=928
-  _globals['_CREATEAPIKEYRESPONSE']._serialized_start=930
-  _globals['_CREATEAPIKEYRESPONSE']._serialized_end=1007
-  _globals['_DELETEAPIKEYREQUEST']._serialized_start=1009
-  _globals['_DELETEAPIKEYREQUEST']._serialized_end=1111
-  _globals['_DELETEAPIKEYRESPONSE']._serialized_start=1113
-  _globals['_DELETEAPIKEYRESPONSE']._serialized_end=1135
-  _globals['_MANAGEMENTKEY']._serialized_start=1138
-  _globals['_MANAGEMENTKEY']._serialized_end=1484
-  _globals['_APIKEY']._serialized_start=1487
-  _globals['_APIKEY']._serialized_end=1939
-  _globals['_AUTHSERVICE']._serialized_start=1942
-  _globals['_AUTHSERVICE']._serialized_end=3218
+  _globals['_MANAGEMENTKEY']._serialized_start=715
+  _globals['_MANAGEMENTKEY']._serialized_end=1061
+  _globals['_AUTHSERVICE']._serialized_start=1064
+  _globals['_AUTHSERVICE']._serialized_end=1772
 # @@protoc_insertion_point(module_scope)

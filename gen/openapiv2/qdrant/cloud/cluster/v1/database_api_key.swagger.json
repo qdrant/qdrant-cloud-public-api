@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/cluster/v1/database_api_key.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "DatabaseApiKeyService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/cluster/v1/accounts/{accountId}/api-keys": {
+      "get": {
+        "summary": "Fetch all database api keys in the account identified by the given ID.\nRequired permissions:\n- read:api_keys",
+        "operationId": "DatabaseApiKeyService_ListDatabaseApiKeys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDatabaseApiKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DatabaseApiKeyService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/api-keys/{apiKeyId}": {
+      "delete": {
+        "summary": "Deletes a database api key in the account identified by the given ID.\nRequired permissions:\n- delete:api_keys",
+        "operationId": "DatabaseApiKeyService_DeleteDatabaseApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDatabaseApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "description": "The identifier of the database api key (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DatabaseApiKeyService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{apiKey.accountId}/api-keys": {
+      "post": {
+        "summary": "Creates a database api key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
+        "operationId": "DatabaseApiKeyService_CreateDatabaseApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateDatabaseApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiKey.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseApiKeyServiceCreateDatabaseApiKeyBody"
+            }
+          }
+        ],
+        "tags": [
+          "DatabaseApiKeyService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the database api key (in Guid format).\nThis is a read-only field and will be available after a database api key is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+            },
+            "clusterIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
+            },
+            "prefix": {
+              "type": "string",
+              "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+            },
+            "token": {
+              "type": "string",
+              "description": "The token for the database key.\nThis is a read-only field and will be available only once in the return of CreateDatabaseApiKey.\nYou should securely store this token and it should be handled as a secret."
+            }
+          },
+          "title": "The actual database api Key"
+        }
+      },
+      "title": "CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateDatabaseApiKeyResponse": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/v1DatabaseApiKey",
+          "title": "The actual database api key"
+        }
+      },
+      "title": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function"
+    },
+    "v1DatabaseApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the database api key (in Guid format).\nThis is a read-only field and will be available after a database api key is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token for the database key.\nThis is a read-only field and will be available only once in the return of CreateDatabaseApiKey.\nYou should securely store this token and it should be handled as a secret."
+        }
+      },
+      "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
+    },
+    "v1DeleteDatabaseApiKeyResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function"
+    },
+    "v1ListDatabaseApiKeysResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1DatabaseApiKey"
+          },
+          "title": "The actual database api keys in this list"
+        }
+      },
+      "title": "ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function"
+    }
+  }
+}

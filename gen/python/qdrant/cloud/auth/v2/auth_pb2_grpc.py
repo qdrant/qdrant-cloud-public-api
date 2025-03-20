@@ -30,21 +30,6 @@ class AuthServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.FromString,
                 _registered_method=True)
-        self.ListApiKeys = channel.unary_unary(
-                '/qdrant.cloud.auth.v2.AuthService/ListApiKeys',
-                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysResponse.FromString,
-                _registered_method=True)
-        self.CreateApiKey = channel.unary_unary(
-                '/qdrant.cloud.auth.v2.AuthService/CreateApiKey',
-                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyResponse.FromString,
-                _registered_method=True)
-        self.DeleteApiKey = channel.unary_unary(
-                '/qdrant.cloud.auth.v2.AuthService/DeleteApiKey',
-                request_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyResponse.FromString,
-                _registered_method=True)
 
 
 class AuthServiceServicer(object):
@@ -78,33 +63,6 @@ class AuthServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListApiKeys(self, request, context):
-        """Fetch all api-keys in the account identified by the given ID.
-        Required permissions:
-        - read:api_keys
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CreateApiKey(self, request, context):
-        """Creates an api-key in the account identified by the given ID.
-        Required permissions:
-        - write:api_keys
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DeleteApiKey(self, request, context):
-        """Deletes an api-key in the account identified by the given ID.
-        Required permissions:
-        - delete:api_keys
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -122,21 +80,6 @@ def add_AuthServiceServicer_to_server(servicer, server):
                     servicer.DeleteManagementKey,
                     request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.SerializeToString,
-            ),
-            'ListApiKeys': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListApiKeys,
-                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysResponse.SerializeToString,
-            ),
-            'CreateApiKey': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateApiKey,
-                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyResponse.SerializeToString,
-            ),
-            'DeleteApiKey': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteApiKey,
-                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -221,87 +164,6 @@ class AuthService(object):
             '/qdrant.cloud.auth.v2.AuthService/DeleteManagementKey',
             qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyRequest.SerializeToString,
             qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteManagementKeyResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ListApiKeys(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.auth.v2.AuthService/ListApiKeys',
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysRequest.SerializeToString,
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.ListApiKeysResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def CreateApiKey(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.auth.v2.AuthService/CreateApiKey',
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyRequest.SerializeToString,
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.CreateApiKeyResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def DeleteApiKey(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.auth.v2.AuthService/DeleteApiKey',
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyRequest.SerializeToString,
-            qdrant_dot_cloud_dot_auth_dot_v2_dot_auth__pb2.DeleteApiKeyResponse.FromString,
             options,
             channel_credentials,
             insecure,

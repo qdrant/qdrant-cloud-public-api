@@ -152,13 +152,41 @@
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/collectionsv1ApiKey",
+          "$ref": "#/definitions/v1ApiKey",
           "title": "The API key to create"
         }
       },
       "title": "CreateCollectionKeyRequest defines parameters for creating a new API key"
     },
-    "collectionsv1ApiKey": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ApiKey": {
       "type": "object",
       "properties": {
         "id": {
@@ -206,39 +234,11 @@
       },
       "description": "An ApiKey represents a JWT token to access a Qdrant cloud serverless collection."
     },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
     "v1CreateCollectionKeyResponse": {
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/collectionsv1ApiKey",
+          "$ref": "#/definitions/v1ApiKey",
           "title": "The newly created API key value"
         }
       },
@@ -256,7 +256,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/collectionsv1ApiKey"
+            "$ref": "#/definitions/v1ApiKey"
           },
           "title": "List of API keys for the collection"
         }
