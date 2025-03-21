@@ -28,7 +28,7 @@ service DatabaseApiKeyService {
     option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/cluster/auth/v2/accounts/{api_key.account_id}/database-api-keys"
+      post: "/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys"
       body: "*"
     };
   }
@@ -59,13 +59,13 @@ message ListDatabaseApiKeysResponse {
 // CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyRequest {
   // The actual database api key.
-  DatabaseApiKey api_key = 1;
+  DatabaseApiKey database_api_key = 1;
 }
 
 // CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyResponse {
   // The actual database api key.
-  DatabaseApiKey api_key = 1;
+  DatabaseApiKey database_api_key = 1;
 }
 
 // DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.

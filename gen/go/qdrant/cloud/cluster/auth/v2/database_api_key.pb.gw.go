@@ -80,13 +80,13 @@ func request_DatabaseApiKeyService_CreateDatabaseApiKey_0(ctx context.Context, m
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["api_key.account_id"]
+	val, ok := pathParams["database_api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "api_key.account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "database_api_key.account_id")
 	}
-	err = runtime.PopulateFieldFromPath(&protoReq, "api_key.account_id", val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "database_api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "api_key.account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "database_api_key.account_id", err)
 	}
 	msg, err := client.CreateDatabaseApiKey(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -101,13 +101,13 @@ func local_request_DatabaseApiKeyService_CreateDatabaseApiKey_0(ctx context.Cont
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["api_key.account_id"]
+	val, ok := pathParams["database_api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "api_key.account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "database_api_key.account_id")
 	}
-	err = runtime.PopulateFieldFromPath(&protoReq, "api_key.account_id", val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "database_api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "api_key.account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "database_api_key.account_id", err)
 	}
 	msg, err := server.CreateDatabaseApiKey(ctx, &protoReq)
 	return msg, metadata, err
@@ -197,7 +197,7 @@ func RegisterDatabaseApiKeyServiceHandlerServer(ctx context.Context, mux *runtim
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey", runtime.WithHTTPPathPattern("/api/cluster/auth/v2/accounts/{api_key.account_id}/database-api-keys"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey", runtime.WithHTTPPathPattern("/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -292,7 +292,7 @@ func RegisterDatabaseApiKeyServiceHandlerClient(ctx context.Context, mux *runtim
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey", runtime.WithHTTPPathPattern("/api/cluster/auth/v2/accounts/{api_key.account_id}/database-api-keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey", runtime.WithHTTPPathPattern("/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -327,7 +327,7 @@ func RegisterDatabaseApiKeyServiceHandlerClient(ctx context.Context, mux *runtim
 
 var (
 	pattern_DatabaseApiKeyService_ListDatabaseApiKeys_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6}, []string{"api", "cluster", "auth", "v2", "accounts", "account_id", "database-api-keys"}, ""))
-	pattern_DatabaseApiKeyService_CreateDatabaseApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6}, []string{"api", "cluster", "auth", "v2", "accounts", "api_key.account_id", "database-api-keys"}, ""))
+	pattern_DatabaseApiKeyService_CreateDatabaseApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6}, []string{"api", "cluster", "auth", "v2", "accounts", "database_api_key.account_id", "database-api-keys"}, ""))
 	pattern_DatabaseApiKeyService_DeleteDatabaseApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7}, []string{"api", "cluster", "auth", "v2", "accounts", "account_id", "database-api-keys", "database_api_key_id"}, ""))
 )
 

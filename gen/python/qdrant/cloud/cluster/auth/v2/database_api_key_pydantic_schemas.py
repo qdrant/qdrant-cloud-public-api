@@ -59,7 +59,7 @@ class CreateDatabaseApiKeyRequest(BaseModel):
     """
 
 # The actual database api key.
-    api_key: DatabaseApiKey = Field()
+    database_api_key: DatabaseApiKey = Field()
 
 class CreateDatabaseApiKeyResponse(BaseModel):
     """
@@ -67,7 +67,7 @@ class CreateDatabaseApiKeyResponse(BaseModel):
     """
 
 # The actual database api key.
-    api_key: DatabaseApiKey = Field()
+    database_api_key: DatabaseApiKey = Field()
 
 class DeleteDatabaseApiKeyRequest(BaseModel):
     """

@@ -87,7 +87,7 @@
         ]
       }
     },
-    "/api/cluster/auth/v2/accounts/{apiKey.accountId}/database-api-keys": {
+    "/api/cluster/auth/v2/accounts/{databaseApiKey.accountId}/database-api-keys": {
       "post": {
         "summary": "Creates a database api key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
         "operationId": "DatabaseApiKeyService_CreateDatabaseApiKey",
@@ -107,7 +107,7 @@
         },
         "parameters": [
           {
-            "name": "apiKey.accountId",
+            "name": "databaseApiKey.accountId",
             "description": "The identifier of the account (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
@@ -132,7 +132,7 @@
     "DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
       "type": "object",
       "properties": {
-        "apiKey": {
+        "databaseApiKey": {
           "type": "object",
           "properties": {
             "id": {
@@ -197,7 +197,7 @@
     "v2CreateDatabaseApiKeyResponse": {
       "type": "object",
       "properties": {
-        "apiKey": {
+        "databaseApiKey": {
           "$ref": "#/definitions/v2DatabaseApiKey",
           "description": "The actual database api key."
         }

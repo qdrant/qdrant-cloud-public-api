@@ -22,16 +22,16 @@ class ListDatabaseApiKeysResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[DatabaseApiKey, _Mapping]]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ("api_key",)
-    API_KEY_FIELD_NUMBER: _ClassVar[int]
-    api_key: DatabaseApiKey
-    def __init__(self, api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
+    __slots__ = ("database_api_key",)
+    DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
+    database_api_key: DatabaseApiKey
+    def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyResponse(_message.Message):
-    __slots__ = ("api_key",)
-    API_KEY_FIELD_NUMBER: _ClassVar[int]
-    api_key: DatabaseApiKey
-    def __init__(self, api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
+    __slots__ = ("database_api_key",)
+    DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
+    database_api_key: DatabaseApiKey
+    def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyRequest(_message.Message):
     __slots__ = ("account_id", "database_api_key_id")
