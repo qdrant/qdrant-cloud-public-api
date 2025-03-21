@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: qdrant/cloud/cluster/v1/database_api_key.proto
+// source: qdrant/cloud/cluster/auth/v2/database_api_key.proto
 
-package clusterv1
+package authv2
 
 import (
 	context "context"
@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DatabaseApiKeyService_ListDatabaseApiKeys_FullMethodName  = "/qdrant.cloud.cluster.v1.DatabaseApiKeyService/ListDatabaseApiKeys"
-	DatabaseApiKeyService_CreateDatabaseApiKey_FullMethodName = "/qdrant.cloud.cluster.v1.DatabaseApiKeyService/CreateDatabaseApiKey"
-	DatabaseApiKeyService_DeleteDatabaseApiKey_FullMethodName = "/qdrant.cloud.cluster.v1.DatabaseApiKeyService/DeleteDatabaseApiKey"
+	DatabaseApiKeyService_ListDatabaseApiKeys_FullMethodName  = "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/ListDatabaseApiKeys"
+	DatabaseApiKeyService_CreateDatabaseApiKey_FullMethodName = "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey"
+	DatabaseApiKeyService_DeleteDatabaseApiKey_FullMethodName = "/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/DeleteDatabaseApiKey"
 )
 
 // DatabaseApiKeyServiceClient is the client API for DatabaseApiKeyService service.
@@ -198,7 +198,7 @@ func _DatabaseApiKeyService_DeleteDatabaseApiKey_Handler(srv interface{}, ctx co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DatabaseApiKeyService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.cluster.v1.DatabaseApiKeyService",
+	ServiceName: "qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService",
 	HandlerType: (*DatabaseApiKeyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -215,5 +215,5 @@ var DatabaseApiKeyService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/cluster/v1/database_api_key.proto",
+	Metadata: "qdrant/cloud/cluster/auth/v2/database_api_key.proto",
 }

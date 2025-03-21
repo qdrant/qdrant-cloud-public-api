@@ -34,12 +34,12 @@ class CreateDatabaseApiKeyResponse(_message.Message):
     def __init__(self, api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ("account_id", "api_key_id")
+    __slots__ = ("account_id", "database_api_key_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
+    DATABASE_API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    api_key_id: str
-    def __init__(self, account_id: _Optional[str] = ..., api_key_id: _Optional[str] = ...) -> None: ...
+    database_api_key_id: str
+    def __init__(self, account_id: _Optional[str] = ..., database_api_key_id: _Optional[str] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyResponse(_message.Message):
     __slots__ = ()

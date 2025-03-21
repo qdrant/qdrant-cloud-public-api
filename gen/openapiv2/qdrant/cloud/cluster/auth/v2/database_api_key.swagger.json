@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/cluster/v1/database_api_key.proto",
+    "title": "qdrant/cloud/cluster/auth/v2/database_api_key.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/cluster/v1/accounts/{accountId}/api-keys": {
+    "/api/cluster/auth/v2/accounts/{accountId}/database-api-keys": {
       "get": {
         "summary": "Fetch all database api keys in the account identified by the given ID.\nRequired permissions:\n- read:api_keys",
         "operationId": "DatabaseApiKeyService_ListDatabaseApiKeys",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListDatabaseApiKeysResponse"
+              "$ref": "#/definitions/v2ListDatabaseApiKeysResponse"
             }
           },
           "default": {
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "/api/cluster/v1/accounts/{accountId}/api-keys/{apiKeyId}": {
+    "/api/cluster/auth/v2/accounts/{accountId}/database-api-keys/{databaseApiKeyId}": {
       "delete": {
         "summary": "Deletes a database api key in the account identified by the given ID.\nRequired permissions:\n- delete:api_keys",
         "operationId": "DatabaseApiKeyService_DeleteDatabaseApiKey",
@@ -56,7 +56,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1DeleteDatabaseApiKeyResponse"
+              "$ref": "#/definitions/v2DeleteDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -75,7 +75,7 @@
             "type": "string"
           },
           {
-            "name": "apiKeyId",
+            "name": "databaseApiKeyId",
             "description": "The identifier of the database api key (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
@@ -87,7 +87,7 @@
         ]
       }
     },
-    "/api/cluster/v1/accounts/{apiKey.accountId}/api-keys": {
+    "/api/cluster/auth/v2/accounts/{apiKey.accountId}/database-api-keys": {
       "post": {
         "summary": "Creates a database api key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
         "operationId": "DatabaseApiKeyService_CreateDatabaseApiKey",
@@ -95,7 +95,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreateDatabaseApiKeyResponse"
+              "$ref": "#/definitions/v2CreateDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -194,17 +194,17 @@
         }
       }
     },
-    "v1CreateDatabaseApiKeyResponse": {
+    "v2CreateDatabaseApiKeyResponse": {
       "type": "object",
       "properties": {
         "apiKey": {
-          "$ref": "#/definitions/v1DatabaseApiKey",
+          "$ref": "#/definitions/v2DatabaseApiKey",
           "description": "The actual database api key."
         }
       },
       "description": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function."
     },
-    "v1DatabaseApiKey": {
+    "v2DatabaseApiKey": {
       "type": "object",
       "properties": {
         "id": {
@@ -238,18 +238,18 @@
       },
       "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
     },
-    "v1DeleteDatabaseApiKeyResponse": {
+    "v2DeleteDatabaseApiKeyResponse": {
       "type": "object",
       "description": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.\n\nEmpty"
     },
-    "v1ListDatabaseApiKeysResponse": {
+    "v2ListDatabaseApiKeysResponse": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1DatabaseApiKey"
+            "$ref": "#/definitions/v2DatabaseApiKey"
           },
           "description": "The actual database api keys in this list."
         }

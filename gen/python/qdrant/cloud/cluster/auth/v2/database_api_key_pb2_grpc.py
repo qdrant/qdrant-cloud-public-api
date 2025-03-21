@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from qdrant.cloud.cluster.v1 import database_api_key_pb2 as qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2
+from qdrant.cloud.cluster.auth.v2 import database_api_key_pb2 as qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2
 
 
 class DatabaseApiKeyServiceStub(object):
@@ -16,19 +16,19 @@ class DatabaseApiKeyServiceStub(object):
             channel: A grpc.Channel.
         """
         self.ListDatabaseApiKeys = channel.unary_unary(
-                '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/ListDatabaseApiKeys',
-                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.FromString,
+                '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/ListDatabaseApiKeys',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.FromString,
                 _registered_method=True)
         self.CreateDatabaseApiKey = channel.unary_unary(
-                '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/CreateDatabaseApiKey',
-                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.FromString,
+                '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.FromString,
                 _registered_method=True)
         self.DeleteDatabaseApiKey = channel.unary_unary(
-                '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/DeleteDatabaseApiKey',
-                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.FromString,
+                '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/DeleteDatabaseApiKey',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.FromString,
                 _registered_method=True)
 
 
@@ -68,24 +68,24 @@ def add_DatabaseApiKeyServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListDatabaseApiKeys': grpc.unary_unary_rpc_method_handler(
                     servicer.ListDatabaseApiKeys,
-                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.SerializeToString,
             ),
             'CreateDatabaseApiKey': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateDatabaseApiKey,
-                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.SerializeToString,
             ),
             'DeleteDatabaseApiKey': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteDatabaseApiKey,
-                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'qdrant.cloud.cluster.v1.DatabaseApiKeyService', rpc_method_handlers)
+            'qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('qdrant.cloud.cluster.v1.DatabaseApiKeyService', rpc_method_handlers)
+    server.add_registered_method_handlers('qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -107,9 +107,9 @@ class DatabaseApiKeyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/ListDatabaseApiKeys',
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.SerializeToString,
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.FromString,
+            '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/ListDatabaseApiKeys',
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.ListDatabaseApiKeysResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -134,9 +134,9 @@ class DatabaseApiKeyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/CreateDatabaseApiKey',
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.SerializeToString,
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.FromString,
+            '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/CreateDatabaseApiKey',
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.CreateDatabaseApiKeyResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -161,9 +161,9 @@ class DatabaseApiKeyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.cluster.v1.DatabaseApiKeyService/DeleteDatabaseApiKey',
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.SerializeToString,
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.FromString,
+            '/qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService/DeleteDatabaseApiKey',
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_auth_dot_v2_dot_database__api__key__pb2.DeleteDatabaseApiKeyResponse.FromString,
             options,
             channel_credentials,
             insecure,

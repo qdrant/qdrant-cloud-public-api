@@ -79,7 +79,7 @@ class DeleteDatabaseApiKeyRequest(BaseModel):
     account_id: str = Field(default="")
 # The identifier of the database api key (in Guid format).
 # This is a required field.
-    api_key_id: str = Field(default="")
+    database_api_key_id: str = Field(default="")
 
 class DeleteDatabaseApiKeyResponse(BaseModel):#  Empty
     """
