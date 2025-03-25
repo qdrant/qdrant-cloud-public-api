@@ -76,7 +76,7 @@
           },
           {
             "name": "cloudProviderId",
-            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is an required field.",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -122,11 +122,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "The identifier for the cloud provider.\ne.g. \"aws\", \"gcp\", \"azure\", \"hybrid\""
+          "description": "The identifier for the cloud provider.\ne.g. \"aws\", \"gcp\", \"azure\", \"hybrid\"."
         },
         "name": {
           "type": "string",
-          "title": "The human-readable name of the cloud provider.\ne.g. \"Amazon Web Services\", \"Google Cloud\", \"Microsoft Azure\", \"Hybrid Cloud\""
+          "description": "The human-readable name of the cloud provider.\ne.g. \"Amazon Web Services\", \"Google Cloud\", \"Microsoft Azure\", \"Hybrid Cloud\"."
         }
       },
       "description": "CloudProvider represents a cloud provider identifier and name."
@@ -136,10 +136,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "The identifier for the cloud provider region.\ne.g. \"us-west-1\", \"europe-west1\", \"eastus\", \"hybrid\""
+          "description": "The identifier for the cloud provider region.\ne.g. \"us-west-1\", \"europe-west1\", \"eastus\", \"{UUID in case of hybrid cloud}\"."
         }
       },
-      "title": "CloudProvider represents a cloud provider region identifier"
+      "description": "CloudProvider represents a cloud provider region."
     },
     "v1ListCloudProviderRegionsResponse": {
       "type": "object",
@@ -150,10 +150,10 @@
             "type": "object",
             "$ref": "#/definitions/v1CloudProviderRegion"
           },
-          "title": "The cloud provider regions"
+          "description": "The cloud provider regions."
         }
       },
-      "title": "ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function"
+      "description": "ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function."
     },
     "v1ListCloudProvidersResponse": {
       "type": "object",
@@ -167,7 +167,7 @@
           "title": "The cloud providers"
         }
       },
-      "title": "ListCloudProvidersResponse is the response from the ListCloudProviders function"
+      "description": "ListCloudProvidersResponse is the response from the ListCloudProviders function."
     }
   }
 }

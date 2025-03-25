@@ -8,14 +8,6 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class CloudProvider(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
 class ListCloudProvidersRequest(_message.Message):
     __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -28,11 +20,13 @@ class ListCloudProvidersResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[CloudProvider]
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProvider, _Mapping]]] = ...) -> None: ...
 
-class CloudProviderRegion(_message.Message):
-    __slots__ = ("id",)
+class CloudProvider(_message.Message):
+    __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
     id: str
-    def __init__(self, id: _Optional[str] = ...) -> None: ...
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class ListCloudProviderRegionsRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id")
@@ -47,3 +41,9 @@ class ListCloudProviderRegionsResponse(_message.Message):
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[CloudProviderRegion]
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProviderRegion, _Mapping]]] = ...) -> None: ...
+
+class CloudProviderRegion(_message.Message):
+    __slots__ = ("id",)
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    def __init__(self, id: _Optional[str] = ...) -> None: ...

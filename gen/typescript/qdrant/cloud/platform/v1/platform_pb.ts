@@ -13,40 +13,10 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/platform/v1/platform.proto.
  */
 export const file_qdrant_cloud_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSIpCg1DbG91ZFByb3ZpZGVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkiOQoZTGlzdENsb3VkUHJvdmlkZXJzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJUChpMaXN0Q2xvdWRQcm92aWRlcnNSZXNwb25zZRI2CgVpdGVtcxgBIAMoCzInLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyIiEKE0Nsb3VkUHJvdmlkZXJSZWdpb24SCgoCaWQYASABKAkiYwofTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIiChFjbG91ZF9wcm92aWRlcl9pZBgCIAEoCUIHukgEcgIQASJgCiBMaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXNwb25zZRI8CgVpdGVtcxgBIAMoCzItLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyUmVnaW9uMssDCg9QbGF0Zm9ybVNlcnZpY2USwwEKEkxpc3RDbG91ZFByb3ZpZGVycxIzLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIkKKtRgAgtPkkwI4EjYvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMS8QEKGExpc3RDbG91ZFByb3ZpZGVyUmVnaW9ucxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIl6KtRgAgtPkkwJUElIvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMve2Nsb3VkX3Byb3ZpZGVyX2lkfS9yZWdpb25zQoYCChxjb20ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaVGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1FDUKoCGFFkcmFudC5DbG91ZC5QbGF0Zm9ybS5WMcoCGFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMeICJFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCG1FkcmFudDo6Q2xvdWQ6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSI5ChlMaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlQKGkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlEjYKBWl0ZW1zGAEgAygLMicucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXIiKQoNQ2xvdWRQcm92aWRlchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJImMKH0xpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIgoRY2xvdWRfcHJvdmlkZXJfaWQYAiABKAlCB7pIBHICEAMiYAogTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVzcG9uc2USPAoFaXRlbXMYASADKAsyLS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuQ2xvdWRQcm92aWRlclJlZ2lvbiIhChNDbG91ZFByb3ZpZGVyUmVnaW9uEgoKAmlkGAEgASgJMssDCg9QbGF0Zm9ybVNlcnZpY2USwwEKEkxpc3RDbG91ZFByb3ZpZGVycxIzLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIkKKtRgAgtPkkwI4EjYvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMS8QEKGExpc3RDbG91ZFByb3ZpZGVyUmVnaW9ucxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIl6KtRgAgtPkkwJUElIvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMve2Nsb3VkX3Byb3ZpZGVyX2lkfS9yZWdpb25zQoYCChxjb20ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaVGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1FDUKoCGFFkcmFudC5DbG91ZC5QbGF0Zm9ybS5WMcoCGFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMeICJFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCG1FkcmFudDo6Q2xvdWQ6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
 
 /**
- * CloudProvider represents a cloud provider identifier and name.
- *
- * @generated from message qdrant.cloud.platform.v1.CloudProvider
- */
-export type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvider"> & {
-  /**
-   * The identifier for the cloud provider.
-   * e.g. "aws", "gcp", "azure", "hybrid"
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * The human-readable name of the cloud provider.
-   * e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-};
-
-/**
- * Describes the message qdrant.cloud.platform.v1.CloudProvider.
- * Use `create(CloudProviderSchema)` to create a new message.
- */
-export const CloudProviderSchema: GenMessage<CloudProvider> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 0);
-
-/**
- * ListCloudProvidersRequest is the request for the ListCloudProviders function
+ * ListCloudProvidersRequest is the request for the ListCloudProviders function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProvidersRequest
  */
@@ -65,10 +35,10 @@ export type ListCloudProvidersRequest = Message<"qdrant.cloud.platform.v1.ListCl
  * Use `create(ListCloudProvidersRequestSchema)` to create a new message.
  */
 export const ListCloudProvidersRequestSchema: GenMessage<ListCloudProvidersRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 1);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 0);
 
 /**
- * ListCloudProvidersResponse is the response from the ListCloudProviders function
+ * ListCloudProvidersResponse is the response from the ListCloudProviders function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProvidersResponse
  */
@@ -86,32 +56,40 @@ export type ListCloudProvidersResponse = Message<"qdrant.cloud.platform.v1.ListC
  * Use `create(ListCloudProvidersResponseSchema)` to create a new message.
  */
 export const ListCloudProvidersResponseSchema: GenMessage<ListCloudProvidersResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 2);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 1);
 
 /**
- * CloudProvider represents a cloud provider region identifier
+ * CloudProvider represents a cloud provider identifier and name.
  *
- * @generated from message qdrant.cloud.platform.v1.CloudProviderRegion
+ * @generated from message qdrant.cloud.platform.v1.CloudProvider
  */
-export type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.CloudProviderRegion"> & {
+export type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvider"> & {
   /**
-   * The identifier for the cloud provider region.
-   * e.g. "us-west-1", "europe-west1", "eastus", "hybrid"
+   * The identifier for the cloud provider.
+   * e.g. "aws", "gcp", "azure", "hybrid".
    *
    * @generated from field: string id = 1;
    */
   id: string;
+
+  /**
+   * The human-readable name of the cloud provider.
+   * e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
 };
 
 /**
- * Describes the message qdrant.cloud.platform.v1.CloudProviderRegion.
- * Use `create(CloudProviderRegionSchema)` to create a new message.
+ * Describes the message qdrant.cloud.platform.v1.CloudProvider.
+ * Use `create(CloudProviderSchema)` to create a new message.
  */
-export const CloudProviderRegionSchema: GenMessage<CloudProviderRegion> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 3);
+export const CloudProviderSchema: GenMessage<CloudProvider> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 2);
 
 /**
- * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
+ * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
  */
@@ -126,7 +104,7 @@ export type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.
 
   /**
    * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-   * This is an required field.
+   * This is a required field.
    *
    * @generated from field: string cloud_provider_id = 2;
    */
@@ -138,16 +116,16 @@ export type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.
  * Use `create(ListCloudProviderRegionsRequestSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsRequestSchema: GenMessage<ListCloudProviderRegionsRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 3);
 
 /**
- * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function
+ * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
  */
 export type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse"> & {
   /**
-   * The cloud provider regions
+   * The cloud provider regions.
    *
    * @generated from field: repeated qdrant.cloud.platform.v1.CloudProviderRegion items = 1;
    */
@@ -159,6 +137,28 @@ export type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.platform.v1
  * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
+
+/**
+ * CloudProvider represents a cloud provider region.
+ *
+ * @generated from message qdrant.cloud.platform.v1.CloudProviderRegion
+ */
+export type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.CloudProviderRegion"> & {
+  /**
+   * The identifier for the cloud provider region.
+   * e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.CloudProviderRegion.
+ * Use `create(CloudProviderRegionSchema)` to create a new message.
+ */
+export const CloudProviderRegionSchema: GenMessage<CloudProviderRegion> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_platform_v1_platform, 5);
 
 /**

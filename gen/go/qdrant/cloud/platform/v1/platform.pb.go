@@ -24,14 +24,107 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ListCloudProvidersRequest is the request for the ListCloudProviders function.
+type ListCloudProvidersRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in Guid format).
+	// This is a required field.
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCloudProvidersRequest) Reset() {
+	*x = ListCloudProvidersRequest{}
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCloudProvidersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCloudProvidersRequest) ProtoMessage() {}
+
+func (x *ListCloudProvidersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCloudProvidersRequest.ProtoReflect.Descriptor instead.
+func (*ListCloudProvidersRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ListCloudProvidersRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+// ListCloudProvidersResponse is the response from the ListCloudProviders function.
+type ListCloudProvidersResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The cloud providers
+	Items         []*CloudProvider `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCloudProvidersResponse) Reset() {
+	*x = ListCloudProvidersResponse{}
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCloudProvidersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCloudProvidersResponse) ProtoMessage() {}
+
+func (x *ListCloudProvidersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCloudProvidersResponse.ProtoReflect.Descriptor instead.
+func (*ListCloudProvidersResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListCloudProvidersResponse) GetItems() []*CloudProvider {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // CloudProvider represents a cloud provider identifier and name.
 type CloudProvider struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier for the cloud provider.
-	// e.g. "aws", "gcp", "azure", "hybrid"
+	// e.g. "aws", "gcp", "azure", "hybrid".
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The human-readable name of the cloud provider.
-	// e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
+	// e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
 	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -39,7 +132,7 @@ type CloudProvider struct {
 
 func (x *CloudProvider) Reset() {
 	*x = CloudProvider{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51,7 +144,7 @@ func (x *CloudProvider) String() string {
 func (*CloudProvider) ProtoMessage() {}
 
 func (x *CloudProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +157,7 @@ func (x *CloudProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloudProvider.ProtoReflect.Descriptor instead.
 func (*CloudProvider) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CloudProvider) GetId() string {
@@ -81,154 +174,14 @@ func (x *CloudProvider) GetName() string {
 	return ""
 }
 
-// ListCloudProvidersRequest is the request for the ListCloudProviders function
-type ListCloudProvidersRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
-	// This is a required field.
-	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCloudProvidersRequest) Reset() {
-	*x = ListCloudProvidersRequest{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProvidersRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProvidersRequest) ProtoMessage() {}
-
-func (x *ListCloudProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProvidersRequest.ProtoReflect.Descriptor instead.
-func (*ListCloudProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListCloudProvidersRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-// ListCloudProvidersResponse is the response from the ListCloudProviders function
-type ListCloudProvidersResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud providers
-	Items         []*CloudProvider `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCloudProvidersResponse) Reset() {
-	*x = ListCloudProvidersResponse{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProvidersResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProvidersResponse) ProtoMessage() {}
-
-func (x *ListCloudProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProvidersResponse.ProtoReflect.Descriptor instead.
-func (*ListCloudProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListCloudProvidersResponse) GetItems() []*CloudProvider {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-// CloudProvider represents a cloud provider region identifier
-type CloudProviderRegion struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier for the cloud provider region.
-	// e.g. "us-west-1", "europe-west1", "eastus", "hybrid"
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CloudProviderRegion) Reset() {
-	*x = CloudProviderRegion{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CloudProviderRegion) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CloudProviderRegion) ProtoMessage() {}
-
-func (x *CloudProviderRegion) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CloudProviderRegion.ProtoReflect.Descriptor instead.
-func (*CloudProviderRegion) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *CloudProviderRegion) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
+// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 type ListCloudProviderRegionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in Guid format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-	// This is an required field.
+	// This is a required field.
 	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -236,7 +189,7 @@ type ListCloudProviderRegionsRequest struct {
 
 func (x *ListCloudProviderRegionsRequest) Reset() {
 	*x = ListCloudProviderRegionsRequest{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -248,7 +201,7 @@ func (x *ListCloudProviderRegionsRequest) String() string {
 func (*ListCloudProviderRegionsRequest) ProtoMessage() {}
 
 func (x *ListCloudProviderRegionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,7 +214,7 @@ func (x *ListCloudProviderRegionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCloudProviderRegionsRequest.ProtoReflect.Descriptor instead.
 func (*ListCloudProviderRegionsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ListCloudProviderRegionsRequest) GetAccountId() string {
@@ -278,10 +231,10 @@ func (x *ListCloudProviderRegionsRequest) GetCloudProviderId() string {
 	return ""
 }
 
-// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function
+// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
 type ListCloudProviderRegionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud provider regions
+	// The cloud provider regions.
 	Items         []*CloudProviderRegion `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -289,7 +242,7 @@ type ListCloudProviderRegionsResponse struct {
 
 func (x *ListCloudProviderRegionsResponse) Reset() {
 	*x = ListCloudProviderRegionsResponse{}
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -301,7 +254,7 @@ func (x *ListCloudProviderRegionsResponse) String() string {
 func (*ListCloudProviderRegionsResponse) ProtoMessage() {}
 
 func (x *ListCloudProviderRegionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,7 +267,7 @@ func (x *ListCloudProviderRegionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCloudProviderRegionsResponse.ProtoReflect.Descriptor instead.
 func (*ListCloudProviderRegionsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListCloudProviderRegionsResponse) GetItems() []*CloudProviderRegion {
@@ -322,6 +275,53 @@ func (x *ListCloudProviderRegionsResponse) GetItems() []*CloudProviderRegion {
 		return x.Items
 	}
 	return nil
+}
+
+// CloudProvider represents a cloud provider region.
+type CloudProviderRegion struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier for the cloud provider region.
+	// e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloudProviderRegion) Reset() {
+	*x = CloudProviderRegion{}
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloudProviderRegion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloudProviderRegion) ProtoMessage() {}
+
+func (x *CloudProviderRegion) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_platform_v1_platform_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloudProviderRegion.ProtoReflect.Descriptor instead.
+func (*CloudProviderRegion) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CloudProviderRegion) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 var File_qdrant_cloud_platform_v1_platform_proto protoreflect.FileDescriptor
@@ -337,37 +337,37 @@ var file_qdrant_cloud_platform_v1_platform_proto_rawDesc = string([]byte{
 	0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x23,
 	0x71, 0x64, 0x72, 0x61, 0x6e, 0x74, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6f, 0x6d,
 	0x6d, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x22, 0x33, 0x0a, 0x0d, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x44, 0x0a, 0x19, 0x4c, 0x69, 0x73, 0x74,
-	0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xba, 0x48, 0x05, 0x72, 0x03,
-	0xb0, 0x01, 0x01, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x5b,
-	0x0a, 0x1a, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69,
-	0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3d, 0x0a, 0x05,
-	0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x71, 0x64,
-	0x72, 0x61, 0x6e, 0x74, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x70, 0x6c, 0x61, 0x74, 0x66,
-	0x6f, 0x72, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x25, 0x0a, 0x13, 0x43,
-	0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x67, 0x69,
-	0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
-	0x69, 0x64, 0x22, 0x7f, 0x0a, 0x1f, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50,
-	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xba, 0x48, 0x05, 0x72, 0x03,
-	0xb0, 0x01, 0x01, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x33,
-	0x0a, 0x11, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
-	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x07, 0xba, 0x48, 0x04, 0x72, 0x02,
-	0x10, 0x01, 0x52, 0x0f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
-	0x72, 0x49, 0x64, 0x22, 0x67, 0x0a, 0x20, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64,
-	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x43, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73,
-	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x71, 0x64, 0x72, 0x61, 0x6e, 0x74, 0x2e,
+	0x6f, 0x74, 0x6f, 0x22, 0x44, 0x0a, 0x19, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64,
+	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x27, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xba, 0x48, 0x05, 0x72, 0x03, 0xb0, 0x01, 0x01, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x5b, 0x0a, 0x1a, 0x4c, 0x69, 0x73,
+	0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3d, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73,
+	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x71, 0x64, 0x72, 0x61, 0x6e, 0x74, 0x2e,
 	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x70, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2e, 0x76,
 	0x31, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52,
-	0x65, 0x67, 0x69, 0x6f, 0x6e, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x32, 0xcb, 0x03, 0x0a,
+	0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x33, 0x0a, 0x0d, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50,
+	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x7f, 0x0a, 0x1f, 0x4c,
+	0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
+	0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27,
+	0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x08, 0xba, 0x48, 0x05, 0x72, 0x03, 0xb0, 0x01, 0x01, 0x52, 0x09, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x33, 0x0a, 0x11, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x07, 0xba, 0x48, 0x04, 0x72, 0x02, 0x10, 0x03, 0x52, 0x0f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x49, 0x64, 0x22, 0x67, 0x0a, 0x20,
+	0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
+	0x72, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x43, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x2d, 0x2e, 0x71, 0x64, 0x72, 0x61, 0x6e, 0x74, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x70,
+	0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6c, 0x6f, 0x75, 0x64,
+	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x52, 0x05,
+	0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x25, 0x0a, 0x13, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72,
+	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x32, 0xcb, 0x03, 0x0a,
 	0x0f, 0x50, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0xc3, 0x01, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72,
 	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x33, 0x2e, 0x71, 0x64, 0x72, 0x61, 0x6e, 0x74,
@@ -430,20 +430,20 @@ func file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP() []byte {
 
 var file_qdrant_cloud_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_qdrant_cloud_platform_v1_platform_proto_goTypes = []any{
-	(*CloudProvider)(nil),                    // 0: qdrant.cloud.platform.v1.CloudProvider
-	(*ListCloudProvidersRequest)(nil),        // 1: qdrant.cloud.platform.v1.ListCloudProvidersRequest
-	(*ListCloudProvidersResponse)(nil),       // 2: qdrant.cloud.platform.v1.ListCloudProvidersResponse
-	(*CloudProviderRegion)(nil),              // 3: qdrant.cloud.platform.v1.CloudProviderRegion
-	(*ListCloudProviderRegionsRequest)(nil),  // 4: qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
-	(*ListCloudProviderRegionsResponse)(nil), // 5: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
+	(*ListCloudProvidersRequest)(nil),        // 0: qdrant.cloud.platform.v1.ListCloudProvidersRequest
+	(*ListCloudProvidersResponse)(nil),       // 1: qdrant.cloud.platform.v1.ListCloudProvidersResponse
+	(*CloudProvider)(nil),                    // 2: qdrant.cloud.platform.v1.CloudProvider
+	(*ListCloudProviderRegionsRequest)(nil),  // 3: qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
+	(*ListCloudProviderRegionsResponse)(nil), // 4: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
+	(*CloudProviderRegion)(nil),              // 5: qdrant.cloud.platform.v1.CloudProviderRegion
 }
 var file_qdrant_cloud_platform_v1_platform_proto_depIdxs = []int32{
-	0, // 0: qdrant.cloud.platform.v1.ListCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
-	3, // 1: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
-	1, // 2: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:input_type -> qdrant.cloud.platform.v1.ListCloudProvidersRequest
-	4, // 3: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
-	2, // 4: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:output_type -> qdrant.cloud.platform.v1.ListCloudProvidersResponse
-	5, // 5: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
+	2, // 0: qdrant.cloud.platform.v1.ListCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
+	5, // 1: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
+	0, // 2: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:input_type -> qdrant.cloud.platform.v1.ListCloudProvidersRequest
+	3, // 3: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
+	1, // 4: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:output_type -> qdrant.cloud.platform.v1.ListCloudProvidersResponse
+	4, // 5: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

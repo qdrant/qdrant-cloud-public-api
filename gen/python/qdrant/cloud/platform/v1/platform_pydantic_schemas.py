@@ -8,60 +8,60 @@ from pydantic import Field
 import typing
 
 
+class ListCloudProvidersRequest(BaseModel):
+    """
+     ListCloudProvidersRequest is the request for the ListCloudProviders function.
+    """
+
+# The identifier of the account (in Guid format).
+# This is a required field.
+    account_id: str = Field(default="")
+
 class CloudProvider(BaseModel):
     """
      CloudProvider represents a cloud provider identifier and name.
     """
 
 # The identifier for the cloud provider.
-# e.g. "aws", "gcp", "azure", "hybrid"
+# e.g. "aws", "gcp", "azure", "hybrid".
     id: str = Field(default="")
 # The human-readable name of the cloud provider.
-# e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
+# e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
     name: str = Field(default="")
-
-class ListCloudProvidersRequest(BaseModel):
-    """
-     ListCloudProvidersRequest is the request for the ListCloudProviders function
-    """
-
-# The identifier of the account (in Guid format).
-# This is a required field.
-    account_id: str = Field(default="")
 
 class ListCloudProvidersResponse(BaseModel):
     """
-     ListCloudProvidersResponse is the response from the ListCloudProviders function
+     ListCloudProvidersResponse is the response from the ListCloudProviders function.
     """
 
 # The cloud providers
     items: typing.List[CloudProvider] = Field(default_factory=list)
 
-class CloudProviderRegion(BaseModel):
-    """
-     CloudProvider represents a cloud provider region identifier
-    """
-
-# The identifier for the cloud provider region.
-# e.g. "us-west-1", "europe-west1", "eastus", "hybrid"
-    id: str = Field(default="")
-
 class ListCloudProviderRegionsRequest(BaseModel):
     """
-     ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
+     ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
     """
 
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
 # The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-# This is an required field.
+# This is a required field.
     cloud_provider_id: str = Field(default="")
+
+class CloudProviderRegion(BaseModel):
+    """
+     CloudProvider represents a cloud provider region.
+    """
+
+# The identifier for the cloud provider region.
+# e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
+    id: str = Field(default="")
 
 class ListCloudProviderRegionsResponse(BaseModel):
     """
-     ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function
+     ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
     """
 
-# The cloud provider regions
+# The cloud provider regions.
     items: typing.List[CloudProviderRegion] = Field(default_factory=list)
