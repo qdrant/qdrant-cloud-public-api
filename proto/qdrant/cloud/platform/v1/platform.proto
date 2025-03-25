@@ -68,7 +68,7 @@ message ListCloudProviderRegionsResponse {
   repeated CloudProviderRegion items = 1;
 }
 
-// CloudProvider represents a cloud provider region identifier.
+// CloudProvider represents a cloud provider region.
 message CloudProviderRegion {
   // The identifier for the cloud provider region.
   // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
