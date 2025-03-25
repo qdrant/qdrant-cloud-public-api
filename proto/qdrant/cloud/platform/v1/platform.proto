@@ -45,14 +45,14 @@ message ListCloudProvidersResponse {
 // CloudProvider represents a cloud provider identifier and name.
 message CloudProvider {
   // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure", "hybrid"
+  // e.g. "aws", "gcp", "azure", "hybrid".
   string id = 1;
   // The human-readable name of the cloud provider.
-  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
+  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
   string name = 2;
 }
 
-// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
+// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 message ListCloudProviderRegionsRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
@@ -62,16 +62,16 @@ message ListCloudProviderRegionsRequest {
   string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 1}];
 }
 
-// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function
+// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
 message ListCloudProviderRegionsResponse {
-  // The cloud provider regions
+  // The cloud provider regions.
   repeated CloudProviderRegion items = 1;
 }
 
-// CloudProvider represents a cloud provider region identifier
+// CloudProvider represents a cloud provider region identifier.
 message CloudProviderRegion {
   // The identifier for the cloud provider region.
-  // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}"
+  // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
   string id = 1;
 }
 
