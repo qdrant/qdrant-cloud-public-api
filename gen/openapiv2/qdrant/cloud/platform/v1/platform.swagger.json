@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/platform/v1/platform.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PlatformService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/platform/v1/accounts/{accountId}/cloud-providers": {
+      "get": {
+        "summary": "Fetch all cloud providers in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "PlatformService_ListCloudProviders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudProvidersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
+      "get": {
+        "summary": "Fetch all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "PlatformService_ListCloudProviderRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudProviderRegionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is an required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CloudProvider": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The identifier for the cloud provider.\ne.g. \"aws\", \"gcp\", \"azure\", \"hybrid\""
+        },
+        "name": {
+          "type": "string",
+          "title": "The human-readable name of the cloud provider.\ne.g. \"Amazon Web Services\", \"Google Cloud\", \"Microsoft Azure\", \"Hybrid Cloud\""
+        }
+      },
+      "description": "CloudProvider represents a cloud provider identifier and name."
+    },
+    "v1CloudProviderRegion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The identifier for the cloud provider region.\ne.g. \"us-west-1\", \"europe-west1\", \"eastus\", \"hybrid\""
+        }
+      },
+      "title": "CloudProvider represents a cloud provider region identifier"
+    },
+    "v1ListCloudProviderRegionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProviderRegion"
+          },
+          "title": "The cloud provider regions"
+        }
+      },
+      "title": "ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function"
+    },
+    "v1ListCloudProvidersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProvider"
+          },
+          "title": "The cloud providers"
+        }
+      },
+      "title": "ListCloudProvidersResponse is the response from the ListCloudProviders function"
+    }
+  }
+}
