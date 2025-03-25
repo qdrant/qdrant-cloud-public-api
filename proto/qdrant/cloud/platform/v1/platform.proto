@@ -28,6 +28,20 @@ service PlatformService {
   }
 }
 
+
+// ListCloudProvidersRequest is the request for the ListCloudProviders function.
+message ListCloudProvidersRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCloudProvidersResponse is the response from the ListCloudProviders function.
+message ListCloudProvidersResponse {
+  // The cloud providers
+  repeated CloudProvider items = 1;
+}
+
 // CloudProvider represents a cloud provider identifier and name.
 message CloudProvider {
   // The identifier for the cloud provider.
@@ -36,26 +50,6 @@ message CloudProvider {
   // The human-readable name of the cloud provider.
   // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
   string name = 2;
-}
-
-// ListCloudProvidersRequest is the request for the ListCloudProviders function
-message ListCloudProvidersRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-}
-
-// ListCloudProvidersResponse is the response from the ListCloudProviders function
-message ListCloudProvidersResponse {
-  // The cloud providers
-  repeated CloudProvider items = 1;
-}
-
-// CloudProvider represents a cloud provider region identifier
-message CloudProviderRegion {
-  // The identifier for the cloud provider region.
-  // e.g. "us-west-1", "europe-west1", "eastus", "hybrid"
-  string id = 1;
 }
 
 // ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
@@ -73,3 +67,11 @@ message ListCloudProviderRegionsResponse {
   // The cloud provider regions
   repeated CloudProviderRegion items = 1;
 }
+
+// CloudProvider represents a cloud provider region identifier
+message CloudProviderRegion {
+  // The identifier for the cloud provider region.
+  // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}"
+  string id = 1;
+}
+
