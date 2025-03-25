@@ -58,7 +58,7 @@ message ListCloudProviderRegionsRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-  // This is an required field.
+  // This is a required field.
   string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 1}];
 }
 
