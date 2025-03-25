@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package qdrant.cloud.platform.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// PlatformService is the API used to query for cloud provider & regional information.
+service PlatformService {
+  // Fetch all cloud providers in the account identified by the given ID.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListCloudProviders(ListCloudProvidersRequest) returns (ListCloudProvidersResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers"};
+  }
+  // Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListCloudProviderRegions(ListCloudProviderRegionsRequest) returns (ListCloudProviderRegionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
+  }
+}
+
+// CloudProvider represents a cloud provider identifier and name.
+message CloudProvider {
+  // The identifier for the cloud provider.
+  // e.g. "aws", "gcp", "azure", "hybrid"
+  string id = 1;
+  // The human-readable name of the cloud provider.
+  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud"
+  string name = 2;
+}
+
+// ListCloudProvidersRequest is the request for the ListCloudProviders function
+message ListCloudProvidersRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCloudProvidersResponse is the response from the ListCloudProviders function
+message ListCloudProvidersResponse {
+  // The cloud providers
+  repeated CloudProvider items = 1;
+}
+
+// CloudProvider represents a cloud provider region identifier
+message CloudProviderRegion {
+  // The identifier for the cloud provider region.
+  // e.g. "us-west-1", "europe-west1", "eastus", "hybrid"
+  string id = 1;
+}
+
+// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function
+message ListCloudProviderRegionsRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+  // This is an required field.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function
+message ListCloudProviderRegionsResponse {
+  // The cloud provider regions
+  repeated CloudProviderRegion items = 1;
+}
