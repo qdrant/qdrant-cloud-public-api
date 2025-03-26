@@ -27,7 +27,7 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'qdrant/cloud/platform/v1/platform.proto\x12\x18qdrant.cloud.platform.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"D\n\x19ListCloudProvidersRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"[\n\x1aListCloudProvidersResponse\x12=\n\x05items\x18\x01 \x03(\x0b\x32\'.qdrant.cloud.platform.v1.CloudProviderR\x05items\"3\n\rCloudProvider\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n\x04name\x18\x02 \x01(\tR\x04name\"\x7f\n\x1fListCloudProviderRegionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x33\n\x11\x63loud_provider_id\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x03R\x0f\x63loudProviderId\"g\n ListCloudProviderRegionsResponse\x12\x43\n\x05items\x18\x01 \x03(\x0b\x32-.qdrant.cloud.platform.v1.CloudProviderRegionR\x05items\"%\n\x13\x43loudProviderRegion\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id2\xcb\x03\n\x0fPlatformService\x12\xc3\x01\n\x12ListCloudProviders\x12\x33.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a\x34.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02\x38\x12\x36/api/platform/v1/accounts/{account_id}/cloud-providers\x12\xf1\x01\n\x18ListCloudProviderRegions\x12\x39.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"^\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regionsB\x86\x02\n\x1c\x63om.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'qdrant/cloud/platform/v1/platform.proto\x12\x18qdrant.cloud.platform.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"D\n\x19ListCloudProvidersRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"[\n\x1aListCloudProvidersResponse\x12=\n\x05items\x18\x01 \x03(\x0b\x32\'.qdrant.cloud.platform.v1.CloudProviderR\x05items\"\x7f\n\x1fListCloudProviderRegionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x33\n\x11\x63loud_provider_id\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x03R\x0f\x63loudProviderId\"g\n ListCloudProviderRegionsResponse\x12\x43\n\x05items\x18\x01 \x03(\x0b\x32-.qdrant.cloud.platform.v1.CloudProviderRegionR\x05items\"3\n\rCloudProvider\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n\x04name\x18\x02 \x01(\tR\x04name\"%\n\x13\x43loudProviderRegion\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id2\xcb\x03\n\x0fPlatformService\x12\xc3\x01\n\x12ListCloudProviders\x12\x33.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a\x34.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02\x38\x12\x36/api/platform/v1/accounts/{account_id}/cloud-providers\x12\xf1\x01\n\x18ListCloudProviderRegions\x12\x39.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"^\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regionsB\x86\x02\n\x1c\x63om.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -49,12 +49,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_LISTCLOUDPROVIDERSREQUEST']._serialized_end=233
   _globals['_LISTCLOUDPROVIDERSRESPONSE']._serialized_start=235
   _globals['_LISTCLOUDPROVIDERSRESPONSE']._serialized_end=326
-  _globals['_CLOUDPROVIDER']._serialized_start=328
-  _globals['_CLOUDPROVIDER']._serialized_end=379
-  _globals['_LISTCLOUDPROVIDERREGIONSREQUEST']._serialized_start=381
-  _globals['_LISTCLOUDPROVIDERREGIONSREQUEST']._serialized_end=508
-  _globals['_LISTCLOUDPROVIDERREGIONSRESPONSE']._serialized_start=510
-  _globals['_LISTCLOUDPROVIDERREGIONSRESPONSE']._serialized_end=613
+  _globals['_LISTCLOUDPROVIDERREGIONSREQUEST']._serialized_start=328
+  _globals['_LISTCLOUDPROVIDERREGIONSREQUEST']._serialized_end=455
+  _globals['_LISTCLOUDPROVIDERREGIONSRESPONSE']._serialized_start=457
+  _globals['_LISTCLOUDPROVIDERREGIONSRESPONSE']._serialized_end=560
+  _globals['_CLOUDPROVIDER']._serialized_start=562
+  _globals['_CLOUDPROVIDER']._serialized_end=613
   _globals['_CLOUDPROVIDERREGION']._serialized_start=615
   _globals['_CLOUDPROVIDERREGION']._serialized_end=652
   _globals['_PLATFORMSERVICE']._serialized_start=655

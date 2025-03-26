@@ -41,16 +41,6 @@ message ListCloudProvidersResponse {
   repeated CloudProvider items = 1;
 }
 
-// CloudProvider represents a cloud provider identifier and name.
-message CloudProvider {
-  // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure", "hybrid".
-  string id = 1;
-  // The human-readable name of the cloud provider.
-  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
-  string name = 2;
-}
-
 // ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 message ListCloudProviderRegionsRequest {
   // The identifier of the account (in Guid format).
@@ -65,6 +55,16 @@ message ListCloudProviderRegionsRequest {
 message ListCloudProviderRegionsResponse {
   // The cloud provider regions.
   repeated CloudProviderRegion items = 1;
+}
+
+// CloudProvider represents a cloud provider identifier and name.
+message CloudProvider {
+  // The identifier for the cloud provider.
+  // e.g. "aws", "gcp", "azure", "hybrid".
+  string id = 1;
+  // The human-readable name of the cloud provider.
+  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
+  string name = 2;
 }
 
 // CloudProvider represents a cloud provider region.
