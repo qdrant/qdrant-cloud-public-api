@@ -41,38 +41,6 @@ service AuthService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/management-keys/{management_key_id}"};
   }
-  // Fetch all api-keys in the account identified by the given ID.
-  // Required permissions:
-  // - read:api_keys
-  rpc ListApiKeys(ListApiKeysRequest) returns (ListApiKeysResponse) {
-    // permissions
-    option (common.v1.permissions) = "read:api_keys";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/auth/v2/accounts/{account_id}/api-keys"};
-  }
-  // Creates an api-key in the account identified by the given ID.
-  // Required permissions:
-  // - write:api_keys
-  rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
-    // permissions
-    option (common.v1.permissions) = "write:api_keys";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      post: "/api/auth/v2/accounts/{api_key.account_id}/api-keys"
-      body: "*"
-    };
-  }
-  // Deletes an api-key in the account identified by the given ID.
-  // Required permissions:
-  // - delete:api_keys
-  rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
-    // permissions
-    option (common.v1.permissions) = "delete:api_keys";
-    // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/auth/v2/accounts/{account_id}/api-keys/{api_key_id}"};
-  }
 }
 
 // ListManagementKeysRequest is the request for the ListManagementKeys function
@@ -115,48 +83,6 @@ message DeleteManagementKeyResponse {
   // Empty
 }
 
-// ListApiKeysRequest is the request for the ListApiKeys function
-message ListApiKeysRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // TODO: ListOptions
-}
-
-// ListApiKeysResponse is the response from the ListApiKeys function
-message ListApiKeysResponse {
-  // The actual api-keys in this list
-  repeated ApiKey items = 1;
-  // TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions
-}
-
-// CreateApiKeyRequest is the request for the CreateApiKey function
-message CreateApiKeyRequest {
-  // The actual API Key
-  ApiKey api_key = 1;
-}
-
-// CreateApiKeyResponse is the response from the CreateApiKey function
-message CreateApiKeyResponse {
-  // The actual API Key
-  ApiKey api_key = 1;
-}
-
-// DeleteApiKeyRequest is the request for the DeleteApiKey function
-message DeleteApiKeyRequest {
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the api-key (in Guid format).
-  // This is a required field.
-  string api_key_id = 2 [(buf.validate.field).string = {uuid: true}];
-}
-
-// DeleteApiKeyResponse is the response from the DeleteApiKey function
-message DeleteApiKeyResponse {
-  // Empty
-}
-
 // A ManagementKey represents a management key of a Qdrant Cloud account.
 // This management key grants access to the Qdrant Cloud API.
 message ManagementKey {
@@ -181,38 +107,4 @@ message ManagementKey {
   // This is a read-only field and will be available only once in the response of CreateManagementKey.
   // You should securely store this key and it should be handled as a secret.
   string key = 5;
-}
-
-// A ApiKey represents one api-key of a Qdrant cloud account.
-// This api-key can grant access to one or more Qdrant databases (clusters)
-message ApiKey {
-  // Unique identifier for the api-key (in Guid format).
-  // This is a read-only field and will be available after an api-key is created.
-  string id = 1;
-  option (buf.validate.message).cel = {
-    id: "api_key.id"
-    message: "value must be a valid UUID"
-    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
-  };
-  // The identifier of the account (in Guid format).
-  // This is a required field.
-  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // Timestamp when the api-key was created.
-  // This is a read-only field and will be available after an api-key is created.
-  google.protobuf.Timestamp created_at = 3;
-  // A list of cluster IDs
-  // Should contain at least a single ID.
-  // After creation, this field cannot be changed.
-  repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
-    items: {
-      string: {pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
-    }
-  }];
-  // Prefix for the API key, this represents the first bytes of the token
-  // This is a read-only field and will be available after an api-key is created.
-  string prefix = 5;
-  // The token for the API key.
-  // This is a read-only field and will be available only once in the return of CreateApiKey.
-  // You should securely store this token and it should be handled as a secret.
-  string token = 6;
 }

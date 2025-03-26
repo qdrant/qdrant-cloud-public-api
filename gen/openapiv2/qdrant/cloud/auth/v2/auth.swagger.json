@@ -16,77 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/auth/v2/accounts/{accountId}/api-keys": {
-      "get": {
-        "summary": "Fetch all api-keys in the account identified by the given ID.\nRequired permissions:\n- read:api_keys",
-        "operationId": "AuthService_ListApiKeys",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2ListApiKeysResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.\n\nTODO: ListOptions",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "AuthService"
-        ]
-      }
-    },
-    "/api/auth/v2/accounts/{accountId}/api-keys/{apiKeyId}": {
-      "delete": {
-        "summary": "Deletes an api-key in the account identified by the given ID.\nRequired permissions:\n- delete:api_keys",
-        "operationId": "AuthService_DeleteApiKey",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2DeleteApiKeyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "apiKeyId",
-            "description": "The identifier of the api-key (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "AuthService"
-        ]
-      }
-    },
     "/api/auth/v2/accounts/{accountId}/management-keys": {
       "get": {
         "summary": "Fetch all management keys in the account identified by the given ID.\nRequired permissions:\n- read:management_keys",
@@ -158,46 +87,6 @@
         ]
       }
     },
-    "/api/auth/v2/accounts/{apiKey.accountId}/api-keys": {
-      "post": {
-        "summary": "Creates an api-key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
-        "operationId": "AuthService_CreateApiKey",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2CreateApiKeyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "apiKey.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AuthServiceCreateApiKeyBody"
-            }
-          }
-        ],
-        "tags": [
-          "AuthService"
-        ]
-      }
-    },
     "/api/auth/v2/accounts/{managementKey.accountId}/management-keys": {
       "post": {
         "summary": "Creates a management key in the account identified by the given ID.\nRequired permissions:\n- write:management_keys",
@@ -240,42 +129,6 @@
     }
   },
   "definitions": {
-    "AuthServiceCreateApiKeyBody": {
-      "type": "object",
-      "properties": {
-        "apiKey": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Unique identifier for the api-key (in Guid format).\nThis is a read-only field and will be available after an api-key is created."
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
-            },
-            "clusterIds": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
-            },
-            "prefix": {
-              "type": "string",
-              "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
-            },
-            "token": {
-              "type": "string",
-              "description": "The token for the API key.\nThis is a read-only field and will be available only once in the return of CreateApiKey.\nYou should securely store this token and it should be handled as a secret."
-            }
-          },
-          "title": "The actual API Key"
-        }
-      },
-      "title": "CreateApiKeyRequest is the request for the CreateApiKey function"
-    },
     "AuthServiceCreateManagementKeyBody": {
       "type": "object",
       "properties": {
@@ -306,40 +159,6 @@
       },
       "title": "CreateManagementKeyRequest is the request for the CreateManagementKey function"
     },
-    "authv2ApiKey": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the api-key (in Guid format).\nThis is a read-only field and will be available after an api-key is created."
-        },
-        "accountId": {
-          "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the api-key was created.\nThis is a read-only field and will be available after an api-key is created."
-        },
-        "clusterIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of cluster IDs\nShould contain at least a single ID.\nAfter creation, this field cannot be changed."
-        },
-        "prefix": {
-          "type": "string",
-          "description": "Prefix for the API key, this represents the first bytes of the token\nThis is a read-only field and will be available after an api-key is created."
-        },
-        "token": {
-          "type": "string",
-          "description": "The token for the API key.\nThis is a read-only field and will be available only once in the return of CreateApiKey.\nYou should securely store this token and it should be handled as a secret."
-        }
-      },
-      "title": "A ApiKey represents one api-key of a Qdrant cloud account.\nThis api-key can grant access to one or more Qdrant databases (clusters)"
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -368,16 +187,6 @@
         }
       }
     },
-    "v2CreateApiKeyResponse": {
-      "type": "object",
-      "properties": {
-        "apiKey": {
-          "$ref": "#/definitions/authv2ApiKey",
-          "title": "The actual API Key"
-        }
-      },
-      "title": "CreateApiKeyResponse is the response from the CreateApiKey function"
-    },
     "v2CreateManagementKeyResponse": {
       "type": "object",
       "properties": {
@@ -388,30 +197,10 @@
       },
       "title": "CreateManagementKeyResponse is the response from the CreateManagementKey function"
     },
-    "v2DeleteApiKeyResponse": {
-      "type": "object",
-      "description": "Empty",
-      "title": "DeleteApiKeyResponse is the response from the DeleteApiKey function"
-    },
     "v2DeleteManagementKeyResponse": {
       "type": "object",
       "description": "Empty",
       "title": "DeleteManagementKeyResponse is the response from the DeleteManagementKey function"
-    },
-    "v2ListApiKeysResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/authv2ApiKey"
-          },
-          "description": "TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions",
-          "title": "The actual api-keys in this list"
-        }
-      },
-      "title": "ListApiKeysResponse is the response from the ListApiKeys function"
     },
     "v2ListManagementKeysResponse": {
       "type": "object",

@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package qdrant.cloud.cluster.auth.v2;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+service DatabaseApiKeyService {
+  // Fetch all database api keys in the account identified by the given ID.
+  // Required permissions:
+  // - read:api_keys
+  rpc ListDatabaseApiKeys(ListDatabaseApiKeysRequest) returns (ListDatabaseApiKeysResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/auth/v2/accounts/{account_id}/database-api-keys"};
+  }
+  // Creates a database api key in the account identified by the given ID.
+  // Required permissions:
+  // - write:api_keys
+  rpc CreateDatabaseApiKey(CreateDatabaseApiKeyRequest) returns (CreateDatabaseApiKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys"
+      body: "*"
+    };
+  }
+  // Deletes a database api key in the account identified by the given ID.
+  // Required permissions:
+  // - delete:api_keys
+  rpc DeleteDatabaseApiKey(DeleteDatabaseApiKeyRequest) returns (DeleteDatabaseApiKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}"};
+  }
+}
+
+// ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
+message ListDatabaseApiKeysRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function.
+message ListDatabaseApiKeysResponse {
+  // The actual database api keys in this list.
+  repeated DatabaseApiKey items = 1;
+}
+
+// CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
+message CreateDatabaseApiKeyRequest {
+  // The actual database api key.
+  DatabaseApiKey database_api_key = 1;
+}
+
+// CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
+message CreateDatabaseApiKeyResponse {
+  // The actual database api key.
+  DatabaseApiKey database_api_key = 1;
+}
+
+// DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
+message DeleteDatabaseApiKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the database api key (in Guid format).
+  // This is a required field.
+  string database_api_key_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.
+message DeleteDatabaseApiKeyResponse {
+  // Empty
+}
+
+// A DatabaseApiKey represents one database api key of a Qdrant cloud account.
+// This database key can grant access to one or more Qdrant databases (clusters).
+message DatabaseApiKey {
+  // Unique identifier for the database api key (in Guid format).
+  // This is a read-only field and will be available after a database api key is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the database api key was created.
+  // This is a read-only field and will be available after a database api key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // A list of cluster IDs.
+  // It should contain at least one ID.
+  // After creation, this field cannot be changed.
+  repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
+    items: {
+      string: {uuid: true}
+    }
+  }];
+  // Prefix for the database api key, this represents the first bytes of the key.
+  // This is a read-only field and will be available after a database api key is created.
+  string prefix = 5;
+  // The key for the database api key.
+  // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
+  // You should securely store this key and it should be handled as a secret.
+  string key = 6;
+}

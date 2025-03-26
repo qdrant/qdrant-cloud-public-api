@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/auth/v2/auth.proto.
  */
 export const file_qdrant_cloud_auth_v2_auth: GenFile = /*@__PURE__*/
-  fileDesc("Ch9xZHJhbnQvY2xvdWQvYXV0aC92Mi9hdXRoLnByb3RvEhRxZHJhbnQuY2xvdWQuYXV0aC52MiI5ChlMaXN0TWFuYWdlbWVudEtleXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlAKGkxpc3RNYW5hZ2VtZW50S2V5c1Jlc3BvbnNlEjIKBWl0ZW1zGAEgAygLMiMucWRyYW50LmNsb3VkLmF1dGgudjIuTWFuYWdlbWVudEtleSJZChpDcmVhdGVNYW5hZ2VtZW50S2V5UmVxdWVzdBI7Cg5tYW5hZ2VtZW50X2tleRgBIAEoCzIjLnFkcmFudC5jbG91ZC5hdXRoLnYyLk1hbmFnZW1lbnRLZXkiWgobQ3JlYXRlTWFuYWdlbWVudEtleVJlc3BvbnNlEjsKDm1hbmFnZW1lbnRfa2V5GAEgASgLMiMucWRyYW50LmNsb3VkLmF1dGgudjIuTWFuYWdlbWVudEtleSJfChpEZWxldGVNYW5hZ2VtZW50S2V5UmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIjChFtYW5hZ2VtZW50X2tleV9pZBgCIAEoCUIIukgFcgOwAQEiHQobRGVsZXRlTWFuYWdlbWVudEtleVJlc3BvbnNlIjIKEkxpc3RBcGlLZXlzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJCChNMaXN0QXBpS2V5c1Jlc3BvbnNlEisKBWl0ZW1zGAEgAygLMhwucWRyYW50LmNsb3VkLmF1dGgudjIuQXBpS2V5IkQKE0NyZWF0ZUFwaUtleVJlcXVlc3QSLQoHYXBpX2tleRgBIAEoCzIcLnFkcmFudC5jbG91ZC5hdXRoLnYyLkFwaUtleSJFChRDcmVhdGVBcGlLZXlSZXNwb25zZRItCgdhcGlfa2V5GAEgASgLMhwucWRyYW50LmNsb3VkLmF1dGgudjIuQXBpS2V5IlEKE0RlbGV0ZUFwaUtleVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKYXBpX2tleV9pZBgCIAEoCUIIukgFcgOwAQEiFgoURGVsZXRlQXBpS2V5UmVzcG9uc2UiswIKDU1hbmFnZW1lbnRLZXkSCgoCaWQYASABKAkSHAoKYWNjb3VudF9pZBgCIAEoCUIIukgFcgOwAQESLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGcHJlZml4GAQgASgJEgsKA2tleRgFIAEoCTqqAbpIpgEaowEKCmFwaV9rZXkuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpIo8DCgZBcGlLZXkSCgoCaWQYASABKAkSHAoKYWNjb3VudF9pZBgCIAEoCUIIukgFcgOwAQESLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASXwoLY2x1c3Rlcl9pZHMYBCADKAlCSrpIR5IBRCJCckAyPl5bMC05YS1mXXs4fS1bMC05YS1mXXs0fS1bMC05YS1mXXs0fS1bMC05YS1mXXs0fS1bMC05YS1mXXsxMn0kEg4KBnByZWZpeBgFIAEoCRINCgV0b2tlbhgGIAEoCTqqAbpIpgEaowEKCmFwaV9rZXkuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpMvwJCgtBdXRoU2VydmljZRLLAQoSTGlzdE1hbmFnZW1lbnRLZXlzEi8ucWRyYW50LmNsb3VkLmF1dGgudjIuTGlzdE1hbmFnZW1lbnRLZXlzUmVxdWVzdBowLnFkcmFudC5jbG91ZC5hdXRoLnYyLkxpc3RNYW5hZ2VtZW50S2V5c1Jlc3BvbnNlIlKKtRgUcmVhZDptYW5hZ2VtZW50X2tleXOC0+STAjQSMi9hcGkvYXV0aC92Mi9hY2NvdW50cy97YWNjb3VudF9pZH0vbWFuYWdlbWVudC1rZXlzEv8BChNDcmVhdGVNYW5hZ2VtZW50S2V5EjAucWRyYW50LmNsb3VkLmF1dGgudjIuQ3JlYXRlTWFuYWdlbWVudEtleVJlcXVlc3QaMS5xZHJhbnQuY2xvdWQuYXV0aC52Mi5DcmVhdGVNYW5hZ2VtZW50S2V5UmVzcG9uc2UiggGKtRgVd3JpdGU6bWFuYWdlbWVudF9rZXlzkrUYGW1hbmFnZW1lbnRfa2V5LmFjY291bnRfaWSC0+STAkY6ASoiQS9hcGkvYXV0aC92Mi9hY2NvdW50cy97bWFuYWdlbWVudF9rZXkuYWNjb3VudF9pZH0vbWFuYWdlbWVudC1rZXlzEuQBChNEZWxldGVNYW5hZ2VtZW50S2V5EjAucWRyYW50LmNsb3VkLmF1dGgudjIuRGVsZXRlTWFuYWdlbWVudEtleVJlcXVlc3QaMS5xZHJhbnQuY2xvdWQuYXV0aC52Mi5EZWxldGVNYW5hZ2VtZW50S2V5UmVzcG9uc2UiaIq1GBZkZWxldGU6bWFuYWdlbWVudF9rZXlzgtPkkwJIKkYvYXBpL2F1dGgvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L21hbmFnZW1lbnQta2V5cy97bWFuYWdlbWVudF9rZXlfaWR9EqgBCgtMaXN0QXBpS2V5cxIoLnFkcmFudC5jbG91ZC5hdXRoLnYyLkxpc3RBcGlLZXlzUmVxdWVzdBopLnFkcmFudC5jbG91ZC5hdXRoLnYyLkxpc3RBcGlLZXlzUmVzcG9uc2UiRIq1GA1yZWFkOmFwaV9rZXlzgtPkkwItEisvYXBpL2F1dGgvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L2FwaS1rZXlzEs0BCgxDcmVhdGVBcGlLZXkSKS5xZHJhbnQuY2xvdWQuYXV0aC52Mi5DcmVhdGVBcGlLZXlSZXF1ZXN0GioucWRyYW50LmNsb3VkLmF1dGgudjIuQ3JlYXRlQXBpS2V5UmVzcG9uc2UiZoq1GA53cml0ZTphcGlfa2V5c5K1GBJhcGlfa2V5LmFjY291bnRfaWSC0+STAjg6ASoiMy9hcGkvYXV0aC92Mi9hY2NvdW50cy97YXBpX2tleS5hY2NvdW50X2lkfS9hcGkta2V5cxK6AQoMRGVsZXRlQXBpS2V5EikucWRyYW50LmNsb3VkLmF1dGgudjIuRGVsZXRlQXBpS2V5UmVxdWVzdBoqLnFkcmFudC5jbG91ZC5hdXRoLnYyLkRlbGV0ZUFwaUtleVJlc3BvbnNlIlOKtRgPZGVsZXRlOmFwaV9rZXlzgtPkkwI6KjgvYXBpL2F1dGgvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L2FwaS1rZXlzL3thcGlfa2V5X2lkfULmAQoYY29tLnFkcmFudC5jbG91ZC5hdXRoLnYyQglBdXRoUHJvdG9QAVpMZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9hdXRoL3YyO2F1dGh2MqICA1FDQaoCFFFkcmFudC5DbG91ZC5BdXRoLlYyygIUUWRyYW50XENsb3VkXEF1dGhcVjLiAiBRZHJhbnRcQ2xvdWRcQXV0aFxWMlxHUEJNZXRhZGF0YeoCF1FkcmFudDo6Q2xvdWQ6OkF1dGg6OlYyYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("Ch9xZHJhbnQvY2xvdWQvYXV0aC92Mi9hdXRoLnByb3RvEhRxZHJhbnQuY2xvdWQuYXV0aC52MiI5ChlMaXN0TWFuYWdlbWVudEtleXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlAKGkxpc3RNYW5hZ2VtZW50S2V5c1Jlc3BvbnNlEjIKBWl0ZW1zGAEgAygLMiMucWRyYW50LmNsb3VkLmF1dGgudjIuTWFuYWdlbWVudEtleSJZChpDcmVhdGVNYW5hZ2VtZW50S2V5UmVxdWVzdBI7Cg5tYW5hZ2VtZW50X2tleRgBIAEoCzIjLnFkcmFudC5jbG91ZC5hdXRoLnYyLk1hbmFnZW1lbnRLZXkiWgobQ3JlYXRlTWFuYWdlbWVudEtleVJlc3BvbnNlEjsKDm1hbmFnZW1lbnRfa2V5GAEgASgLMiMucWRyYW50LmNsb3VkLmF1dGgudjIuTWFuYWdlbWVudEtleSJfChpEZWxldGVNYW5hZ2VtZW50S2V5UmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIjChFtYW5hZ2VtZW50X2tleV9pZBgCIAEoCUIIukgFcgOwAQEiHQobRGVsZXRlTWFuYWdlbWVudEtleVJlc3BvbnNlIrMCCg1NYW5hZ2VtZW50S2V5EgoKAmlkGAEgASgJEhwKCmFjY291bnRfaWQYAiABKAlCCLpIBXIDsAEBEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBnByZWZpeBgEIAEoCRILCgNrZXkYBSABKAk6qgG6SKYBGqMBCgphcGlfa2V5LmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KTLEBQoLQXV0aFNlcnZpY2USywEKEkxpc3RNYW5hZ2VtZW50S2V5cxIvLnFkcmFudC5jbG91ZC5hdXRoLnYyLkxpc3RNYW5hZ2VtZW50S2V5c1JlcXVlc3QaMC5xZHJhbnQuY2xvdWQuYXV0aC52Mi5MaXN0TWFuYWdlbWVudEtleXNSZXNwb25zZSJSirUYFHJlYWQ6bWFuYWdlbWVudF9rZXlzgtPkkwI0EjIvYXBpL2F1dGgvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L21hbmFnZW1lbnQta2V5cxL/AQoTQ3JlYXRlTWFuYWdlbWVudEtleRIwLnFkcmFudC5jbG91ZC5hdXRoLnYyLkNyZWF0ZU1hbmFnZW1lbnRLZXlSZXF1ZXN0GjEucWRyYW50LmNsb3VkLmF1dGgudjIuQ3JlYXRlTWFuYWdlbWVudEtleVJlc3BvbnNlIoIBirUYFXdyaXRlOm1hbmFnZW1lbnRfa2V5c5K1GBltYW5hZ2VtZW50X2tleS5hY2NvdW50X2lkgtPkkwJGOgEqIkEvYXBpL2F1dGgvdjIvYWNjb3VudHMve21hbmFnZW1lbnRfa2V5LmFjY291bnRfaWR9L21hbmFnZW1lbnQta2V5cxLkAQoTRGVsZXRlTWFuYWdlbWVudEtleRIwLnFkcmFudC5jbG91ZC5hdXRoLnYyLkRlbGV0ZU1hbmFnZW1lbnRLZXlSZXF1ZXN0GjEucWRyYW50LmNsb3VkLmF1dGgudjIuRGVsZXRlTWFuYWdlbWVudEtleVJlc3BvbnNlImiKtRgWZGVsZXRlOm1hbmFnZW1lbnRfa2V5c4LT5JMCSCpGL2FwaS9hdXRoL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9tYW5hZ2VtZW50LWtleXMve21hbmFnZW1lbnRfa2V5X2lkfULmAQoYY29tLnFkcmFudC5jbG91ZC5hdXRoLnYyQglBdXRoUHJvdG9QAVpMZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9hdXRoL3YyO2F1dGh2MqICA1FDQaoCFFFkcmFudC5DbG91ZC5BdXRoLlYyygIUUWRyYW50XENsb3VkXEF1dGhcVjLiAiBRZHJhbnRcQ2xvdWRcQXV0aFxWMlxHUEJNZXRhZGF0YeoCF1FkcmFudDo6Q2xvdWQ6OkF1dGg6OlYyYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListManagementKeysRequest is the request for the ListManagementKeys function
@@ -150,142 +150,6 @@ export const DeleteManagementKeyResponseSchema: GenMessage<DeleteManagementKeyRe
   messageDesc(file_qdrant_cloud_auth_v2_auth, 5);
 
 /**
- * ListApiKeysRequest is the request for the ListApiKeys function
- *
- * @generated from message qdrant.cloud.auth.v2.ListApiKeysRequest
- */
-export type ListApiKeysRequest = Message<"qdrant.cloud.auth.v2.ListApiKeysRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * TODO: ListOptions
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.ListApiKeysRequest.
- * Use `create(ListApiKeysRequestSchema)` to create a new message.
- */
-export const ListApiKeysRequestSchema: GenMessage<ListApiKeysRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 6);
-
-/**
- * ListApiKeysResponse is the response from the ListApiKeys function
- *
- * @generated from message qdrant.cloud.auth.v2.ListApiKeysResponse
- */
-export type ListApiKeysResponse = Message<"qdrant.cloud.auth.v2.ListApiKeysResponse"> & {
-  /**
-   * The actual api-keys in this list
-   *
-   * TODO: Add an operation timestamp the ListApiKeys is started, to support the `since` in ListOptions
-   *
-   * @generated from field: repeated qdrant.cloud.auth.v2.ApiKey items = 1;
-   */
-  items: ApiKey[];
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.ListApiKeysResponse.
- * Use `create(ListApiKeysResponseSchema)` to create a new message.
- */
-export const ListApiKeysResponseSchema: GenMessage<ListApiKeysResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 7);
-
-/**
- * CreateApiKeyRequest is the request for the CreateApiKey function
- *
- * @generated from message qdrant.cloud.auth.v2.CreateApiKeyRequest
- */
-export type CreateApiKeyRequest = Message<"qdrant.cloud.auth.v2.CreateApiKeyRequest"> & {
-  /**
-   * The actual API Key
-   *
-   * @generated from field: qdrant.cloud.auth.v2.ApiKey api_key = 1;
-   */
-  apiKey?: ApiKey;
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.CreateApiKeyRequest.
- * Use `create(CreateApiKeyRequestSchema)` to create a new message.
- */
-export const CreateApiKeyRequestSchema: GenMessage<CreateApiKeyRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 8);
-
-/**
- * CreateApiKeyResponse is the response from the CreateApiKey function
- *
- * @generated from message qdrant.cloud.auth.v2.CreateApiKeyResponse
- */
-export type CreateApiKeyResponse = Message<"qdrant.cloud.auth.v2.CreateApiKeyResponse"> & {
-  /**
-   * The actual API Key
-   *
-   * @generated from field: qdrant.cloud.auth.v2.ApiKey api_key = 1;
-   */
-  apiKey?: ApiKey;
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.CreateApiKeyResponse.
- * Use `create(CreateApiKeyResponseSchema)` to create a new message.
- */
-export const CreateApiKeyResponseSchema: GenMessage<CreateApiKeyResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 9);
-
-/**
- * DeleteApiKeyRequest is the request for the DeleteApiKey function
- *
- * @generated from message qdrant.cloud.auth.v2.DeleteApiKeyRequest
- */
-export type DeleteApiKeyRequest = Message<"qdrant.cloud.auth.v2.DeleteApiKeyRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier of the api-key (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string api_key_id = 2;
-   */
-  apiKeyId: string;
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.DeleteApiKeyRequest.
- * Use `create(DeleteApiKeyRequestSchema)` to create a new message.
- */
-export const DeleteApiKeyRequestSchema: GenMessage<DeleteApiKeyRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 10);
-
-/**
- * DeleteApiKeyResponse is the response from the DeleteApiKey function
- *
- * Empty
- *
- * @generated from message qdrant.cloud.auth.v2.DeleteApiKeyResponse
- */
-export type DeleteApiKeyResponse = Message<"qdrant.cloud.auth.v2.DeleteApiKeyResponse"> & {
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.DeleteApiKeyResponse.
- * Use `create(DeleteApiKeyResponseSchema)` to create a new message.
- */
-export const DeleteApiKeyResponseSchema: GenMessage<DeleteApiKeyResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 11);
-
-/**
  * A ManagementKey represents a management key of a Qdrant Cloud account.
  * This management key grants access to the Qdrant Cloud API.
  *
@@ -339,72 +203,7 @@ export type ManagementKey = Message<"qdrant.cloud.auth.v2.ManagementKey"> & {
  * Use `create(ManagementKeySchema)` to create a new message.
  */
 export const ManagementKeySchema: GenMessage<ManagementKey> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 12);
-
-/**
- * A ApiKey represents one api-key of a Qdrant cloud account.
- * This api-key can grant access to one or more Qdrant databases (clusters)
- *
- * @generated from message qdrant.cloud.auth.v2.ApiKey
- */
-export type ApiKey = Message<"qdrant.cloud.auth.v2.ApiKey"> & {
-  /**
-   * Unique identifier for the api-key (in Guid format).
-   * This is a read-only field and will be available after an api-key is created.
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 2;
-   */
-  accountId: string;
-
-  /**
-   * Timestamp when the api-key was created.
-   * This is a read-only field and will be available after an api-key is created.
-   *
-   * @generated from field: google.protobuf.Timestamp created_at = 3;
-   */
-  createdAt?: Timestamp;
-
-  /**
-   * A list of cluster IDs
-   * Should contain at least a single ID.
-   * After creation, this field cannot be changed.
-   *
-   * @generated from field: repeated string cluster_ids = 4;
-   */
-  clusterIds: string[];
-
-  /**
-   * Prefix for the API key, this represents the first bytes of the token
-   * This is a read-only field and will be available after an api-key is created.
-   *
-   * @generated from field: string prefix = 5;
-   */
-  prefix: string;
-
-  /**
-   * The token for the API key.
-   * This is a read-only field and will be available only once in the return of CreateApiKey.
-   * You should securely store this token and it should be handled as a secret.
-   *
-   * @generated from field: string token = 6;
-   */
-  token: string;
-};
-
-/**
- * Describes the message qdrant.cloud.auth.v2.ApiKey.
- * Use `create(ApiKeySchema)` to create a new message.
- */
-export const ApiKeySchema: GenMessage<ApiKey> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_auth_v2_auth, 13);
+  messageDesc(file_qdrant_cloud_auth_v2_auth, 6);
 
 /**
  * AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
@@ -447,42 +246,6 @@ export const AuthService: GenService<{
     methodKind: "unary";
     input: typeof DeleteManagementKeyRequestSchema;
     output: typeof DeleteManagementKeyResponseSchema;
-  },
-  /**
-   * Fetch all api-keys in the account identified by the given ID.
-   * Required permissions:
-   * - read:api_keys
-   *
-   * @generated from rpc qdrant.cloud.auth.v2.AuthService.ListApiKeys
-   */
-  listApiKeys: {
-    methodKind: "unary";
-    input: typeof ListApiKeysRequestSchema;
-    output: typeof ListApiKeysResponseSchema;
-  },
-  /**
-   * Creates an api-key in the account identified by the given ID.
-   * Required permissions:
-   * - write:api_keys
-   *
-   * @generated from rpc qdrant.cloud.auth.v2.AuthService.CreateApiKey
-   */
-  createApiKey: {
-    methodKind: "unary";
-    input: typeof CreateApiKeyRequestSchema;
-    output: typeof CreateApiKeyResponseSchema;
-  },
-  /**
-   * Deletes an api-key in the account identified by the given ID.
-   * Required permissions:
-   * - delete:api_keys
-   *
-   * @generated from rpc qdrant.cloud.auth.v2.AuthService.DeleteApiKey
-   */
-  deleteApiKey: {
-    methodKind: "unary";
-    input: typeof DeleteApiKeyRequestSchema;
-    output: typeof DeleteApiKeyResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_qdrant_cloud_auth_v2_auth, 0);
