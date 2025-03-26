@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package qdrant.cloud.backup.v1;
+package qdrant.cloud.cluster.backup.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
@@ -17,7 +17,7 @@ service BackupService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:backups";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backups"};
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups"};
   }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
@@ -29,7 +29,7 @@ service BackupService {
     option (qdrant.cloud.common.v1.account_id_expression) = "backup.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/backup/v1/accounts/{backup.account_id}/backups"
+      post: "/api/cluster/backup/v1/accounts/{backup.account_id}/backups"
       body: "*"
     };
   }
@@ -40,14 +40,14 @@ service BackupService {
     // permissions
     option (common.v1.permissions) = "delete:backups";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+    option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
   }
   // Restores a backup in the account identified by the given ID.
   rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
     // permissions
     option (common.v1.permissions) = "admin:backups";
     // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
+    option (google.api.http) = {post: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
   }
   // Fetch all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -56,7 +56,7 @@ service BackupService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules"};
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules"};
   }
   // Fetch a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -65,7 +65,7 @@ service BackupService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
   }
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -77,7 +77,7 @@ service BackupService {
     option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
+      post: "/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
       body: "*"
     };
   }
@@ -91,7 +91,7 @@ service BackupService {
     option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      put: "/api/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}"
+      put: "/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}"
       body: "*"
     };
   }
@@ -102,7 +102,7 @@ service BackupService {
     // permissions
     option (common.v1.permissions) = "delete:backup_schedules";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/backup/v2/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    option (google.api.http) = {delete: "/api/cluster/backup/v2/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
   }
 }
 
