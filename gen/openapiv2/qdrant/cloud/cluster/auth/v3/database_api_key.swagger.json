@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/cluster/auth/v2/database_api_key.proto",
+    "title": "qdrant/cloud/cluster/auth/v3/database_api_key.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/cluster/auth/v2/accounts/{accountId}/database-api-keys": {
+    "/api/cluster/auth/v3/accounts/{accountId}/database-api-keys": {
       "get": {
         "summary": "Fetch all database api keys in the account identified by the given ID.\nRequired permissions:\n- read:api_keys",
         "operationId": "DatabaseApiKeyService_ListDatabaseApiKeys",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2ListDatabaseApiKeysResponse"
+              "$ref": "#/definitions/authv3ListDatabaseApiKeysResponse"
             }
           },
           "default": {
@@ -41,6 +41,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster (in Guid format).\nThis is a required field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -48,7 +55,7 @@
         ]
       }
     },
-    "/api/cluster/auth/v2/accounts/{accountId}/database-api-keys/{databaseApiKeyId}": {
+    "/api/cluster/auth/v3/accounts/{accountId}/database-api-keys/{databaseApiKeyId}": {
       "delete": {
         "summary": "Deletes a database api key in the account identified by the given ID.\nRequired permissions:\n- delete:api_keys",
         "operationId": "DatabaseApiKeyService_DeleteDatabaseApiKey",
@@ -56,7 +63,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2DeleteDatabaseApiKeyResponse"
+              "$ref": "#/definitions/authv3DeleteDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -80,6 +87,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -87,7 +101,7 @@
         ]
       }
     },
-    "/api/cluster/auth/v2/accounts/{databaseApiKey.accountId}/database-api-keys": {
+    "/api/cluster/auth/v3/accounts/{databaseApiKey.accountId}/database-api-keys": {
       "post": {
         "summary": "Creates a database api key in the account identified by the given ID.\nRequired permissions:\n- write:api_keys",
         "operationId": "DatabaseApiKeyService_CreateDatabaseApiKey",
@@ -95,7 +109,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2CreateDatabaseApiKeyResponse"
+              "$ref": "#/definitions/authv3CreateDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -118,7 +132,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/authv2DatabaseApiKeyServiceCreateDatabaseApiKeyBody"
+              "$ref": "#/definitions/authv3DatabaseApiKeyServiceCreateDatabaseApiKeyBody"
             }
           }
         ],
@@ -129,17 +143,17 @@
     }
   },
   "definitions": {
-    "authv2CreateDatabaseApiKeyResponse": {
+    "authv3CreateDatabaseApiKeyResponse": {
       "type": "object",
       "properties": {
         "databaseApiKey": {
-          "$ref": "#/definitions/authv2DatabaseApiKey",
+          "$ref": "#/definitions/authv3DatabaseApiKey",
           "description": "The actual database api key."
         }
       },
       "description": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function."
     },
-    "authv2DatabaseApiKey": {
+    "authv3DatabaseApiKey": {
       "type": "object",
       "properties": {
         "id": {
@@ -155,16 +169,34 @@
           "format": "date-time",
           "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
         },
-        "clusterIds": {
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+        },
+        "accessRules": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/v3AccessRule"
           },
-          "description": "A list of cluster IDs.\nIt should contain at least one ID.\nAfter creation, this field cannot be changed."
+          "description": "A list of rules to grant access to the Qdrant database or to specific\ncollections. If no access rules are provided, global access to the database\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
         },
-        "prefix": {
+        "createdByEmail": {
           "type": "string",
-          "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
+          "description": "The email of the user who created the database api key.\nThis is a read-only field and will be available after a database api key is created."
+        },
+        "postfix": {
+          "type": "string",
+          "description": "Postfix for the database api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
         },
         "key": {
           "type": "string",
@@ -173,7 +205,7 @@
       },
       "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
     },
-    "authv2DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
+    "authv3DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
       "type": "object",
       "properties": {
         "databaseApiKey": {
@@ -188,16 +220,34 @@
               "format": "date-time",
               "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
             },
-            "clusterIds": {
+            "clusterId": {
+              "type": "string",
+              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+            },
+            "expirationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+            },
+            "accessRules": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "$ref": "#/definitions/v3AccessRule"
               },
-              "description": "A list of cluster IDs.\nIt should contain at least one ID.\nAfter creation, this field cannot be changed."
+              "description": "A list of rules to grant access to the Qdrant database or to specific\ncollections. If no access rules are provided, global access to the database\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
             },
-            "prefix": {
+            "createdByEmail": {
               "type": "string",
-              "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
+              "description": "The email of the user who created the database api key.\nThis is a read-only field and will be available after a database api key is created."
+            },
+            "postfix": {
+              "type": "string",
+              "description": "Postfix for the database api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
             },
             "key": {
               "type": "string",
@@ -210,18 +260,18 @@
       },
       "description": "CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function."
     },
-    "authv2DeleteDatabaseApiKeyResponse": {
+    "authv3DeleteDatabaseApiKeyResponse": {
       "type": "object",
       "description": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.\n\nEmpty"
     },
-    "authv2ListDatabaseApiKeysResponse": {
+    "authv3ListDatabaseApiKeysResponse": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/authv2DatabaseApiKey"
+            "$ref": "#/definitions/authv3DatabaseApiKey"
           },
           "description": "The actual database api keys in this list."
         }
@@ -255,6 +305,51 @@
           }
         }
       }
+    },
+    "v3AccessRule": {
+      "type": "object",
+      "properties": {
+        "globalAccess": {
+          "$ref": "#/definitions/v3GlobalAccessRule",
+          "description": "A rule granting global access to the entire database.\nOnly one of the fields (global_access or collection_access) should be set in a single rule."
+        },
+        "collectionAccess": {
+          "$ref": "#/definitions/v3CollectionAccessRule",
+          "description": "A rule granting access to a specific collection in the database.\nOnly one of the fields (global_access or collection_access) should be set in a single rule."
+        }
+      },
+      "description": "Represents an access rule. An access rule can either define global access to\nthe database or access to a specific collection."
+    },
+    "v3CollectionAccessRule": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the collection.\nThis is a required field."
+        },
+        "accessType": {
+          "type": "string",
+          "description": "The type of access granted for the collection.\n\"read\" allows read-only access, while \"read-write\" allows both read and write access.\nThis is a required field."
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "An optional payload containing key-value pairs."
+        }
+      },
+      "description": "Represents an access rule for a specific collection in the database."
+    },
+    "v3GlobalAccessRule": {
+      "type": "object",
+      "properties": {
+        "accessType": {
+          "type": "string",
+          "description": "The type of access granted at the global level.\n\"read\" allows read-only access to the database, while \"manage\" allows read and write access.\nThis is a required field."
+        }
+      },
+      "description": "Represents a global access rule that grants access to the entire database."
     }
   }
 }

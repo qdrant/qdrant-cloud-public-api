@@ -26,9 +26,6 @@ const (
 	ClusterService_DeleteCluster_FullMethodName      = "/qdrant.cloud.cluster.v2.ClusterService/DeleteCluster"
 	ClusterService_RestartCluster_FullMethodName     = "/qdrant.cloud.cluster.v2.ClusterService/RestartCluster"
 	ClusterService_ListQdrantReleases_FullMethodName = "/qdrant.cloud.cluster.v2.ClusterService/ListQdrantReleases"
-	ClusterService_ListClusterJWTs_FullMethodName    = "/qdrant.cloud.cluster.v2.ClusterService/ListClusterJWTs"
-	ClusterService_CreateClusterJWT_FullMethodName   = "/qdrant.cloud.cluster.v2.ClusterService/CreateClusterJWT"
-	ClusterService_DeleteClusterJWT_FullMethodName   = "/qdrant.cloud.cluster.v2.ClusterService/DeleteClusterJWT"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -66,18 +63,6 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error)
-	// Fetch all JWTs for the cluster identified by the given ID.
-	// Required permissions:
-	// - read:api_keys
-	ListClusterJWTs(ctx context.Context, in *ListClusterJWTsRequest, opts ...grpc.CallOption) (*ListClusterJWTsResponse, error)
-	// Creates a JWT for the cluster identified by the given ID.
-	// Required permissions:
-	// - write:api_keys
-	CreateClusterJWT(ctx context.Context, in *CreateClusterJWTRequest, opts ...grpc.CallOption) (*CreateClusterJWTResponse, error)
-	// Deletes a JWT for the cluster identified by the given ID.
-	// Required permissions:
-	// - delete:api_keys
-	DeleteClusterJWT(ctx context.Context, in *DeleteClusterJWTRequest, opts ...grpc.CallOption) (*DeleteClusterJWTResponse, error)
 }
 
 type clusterServiceClient struct {
@@ -158,36 +143,6 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListClusterJWTs(ctx context.Context, in *ListClusterJWTsRequest, opts ...grpc.CallOption) (*ListClusterJWTsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterJWTsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListClusterJWTs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) CreateClusterJWT(ctx context.Context, in *CreateClusterJWTRequest, opts ...grpc.CallOption) (*CreateClusterJWTResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateClusterJWTResponse)
-	err := c.cc.Invoke(ctx, ClusterService_CreateClusterJWT_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) DeleteClusterJWT(ctx context.Context, in *DeleteClusterJWTRequest, opts ...grpc.CallOption) (*DeleteClusterJWTResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteClusterJWTResponse)
-	err := c.cc.Invoke(ctx, ClusterService_DeleteClusterJWT_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations must embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -223,18 +178,6 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error)
-	// Fetch all JWTs for the cluster identified by the given ID.
-	// Required permissions:
-	// - read:api_keys
-	ListClusterJWTs(context.Context, *ListClusterJWTsRequest) (*ListClusterJWTsResponse, error)
-	// Creates a JWT for the cluster identified by the given ID.
-	// Required permissions:
-	// - write:api_keys
-	CreateClusterJWT(context.Context, *CreateClusterJWTRequest) (*CreateClusterJWTResponse, error)
-	// Deletes a JWT for the cluster identified by the given ID.
-	// Required permissions:
-	// - delete:api_keys
-	DeleteClusterJWT(context.Context, *DeleteClusterJWTRequest) (*DeleteClusterJWTResponse, error)
 	mustEmbedUnimplementedClusterServiceServer()
 }
 
@@ -265,15 +208,6 @@ func (UnimplementedClusterServiceServer) RestartCluster(context.Context, *Restar
 }
 func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQdrantReleases not implemented")
-}
-func (UnimplementedClusterServiceServer) ListClusterJWTs(context.Context, *ListClusterJWTsRequest) (*ListClusterJWTsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListClusterJWTs not implemented")
-}
-func (UnimplementedClusterServiceServer) CreateClusterJWT(context.Context, *CreateClusterJWTRequest) (*CreateClusterJWTResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateClusterJWT not implemented")
-}
-func (UnimplementedClusterServiceServer) DeleteClusterJWT(context.Context, *DeleteClusterJWTRequest) (*DeleteClusterJWTResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteClusterJWT not implemented")
 }
 func (UnimplementedClusterServiceServer) mustEmbedUnimplementedClusterServiceServer() {}
 func (UnimplementedClusterServiceServer) testEmbeddedByValue()                        {}
@@ -422,60 +356,6 @@ func _ClusterService_ListQdrantReleases_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_ListClusterJWTs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterJWTsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListClusterJWTs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListClusterJWTs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListClusterJWTs(ctx, req.(*ListClusterJWTsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_CreateClusterJWT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateClusterJWTRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).CreateClusterJWT(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_CreateClusterJWT_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).CreateClusterJWT(ctx, req.(*CreateClusterJWTRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_DeleteClusterJWT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteClusterJWTRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).DeleteClusterJWT(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_DeleteClusterJWT_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).DeleteClusterJWT(ctx, req.(*DeleteClusterJWTRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -510,18 +390,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListQdrantReleases",
 			Handler:    _ClusterService_ListQdrantReleases_Handler,
-		},
-		{
-			MethodName: "ListClusterJWTs",
-			Handler:    _ClusterService_ListClusterJWTs_Handler,
-		},
-		{
-			MethodName: "CreateClusterJWT",
-			Handler:    _ClusterService_CreateClusterJWT_Handler,
-		},
-		{
-			MethodName: "DeleteClusterJWT",
-			Handler:    _ClusterService_DeleteClusterJWT_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
