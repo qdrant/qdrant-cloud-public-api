@@ -269,7 +269,7 @@ type Package struct {
 	Currency string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The unit price per hour in millicents, in integer format.
 	// Represents the cost per hour for a single unit of the resource.
-	// TODO: You will be billed by minutes?
+	// You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
 	UnitIntPricePerHour int32 `protobuf:"varint,6,opt,name=unit_int_price_per_hour,json=unitIntPricePerHour,proto3" json:"unit_int_price_per_hour,omitempty"`
 	// The status of the package.
 	// Indicates the current status of the package.

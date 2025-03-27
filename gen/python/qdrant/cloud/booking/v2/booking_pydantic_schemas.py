@@ -59,7 +59,7 @@ class Package(BaseModel):
     currency: str = Field(default="")
 # The unit price per hour in millicents, in integer format.
 # Represents the cost per hour for a single unit of the resource.
-# TODO: You will be billed by minutes?
+# You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
     unit_int_price_per_hour: int = Field(default=0)
 # The status of the package.
 # Indicates the current status of the package.
