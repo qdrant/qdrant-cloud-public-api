@@ -177,7 +177,7 @@
           "type": "string",
           "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
         },
-        "expirationTime": {
+        "expiresAt": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
@@ -228,7 +228,7 @@
               "type": "string",
               "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
             },
-            "expirationTime": {
+            "expiresAt": {
               "type": "string",
               "format": "date-time",
               "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."

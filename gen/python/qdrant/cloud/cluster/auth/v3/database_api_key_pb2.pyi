@@ -50,13 +50,13 @@ class DeleteDatabaseApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expiration_time", "access_rules", "created_by_email", "postfix", "key")
+    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    EXPIRATION_TIME_FIELD_NUMBER: _ClassVar[int]
+    EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
     ACCESS_RULES_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
     POSTFIX_FIELD_NUMBER: _ClassVar[int]
@@ -66,12 +66,12 @@ class DatabaseApiKey(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     cluster_id: str
     name: str
-    expiration_time: _timestamp_pb2.Timestamp
+    expires_at: _timestamp_pb2.Timestamp
     access_rules: _containers.RepeatedCompositeFieldContainer[AccessRule]
     created_by_email: str
     postfix: str
     key: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expiration_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
 
 class AccessRule(_message.Message):
     __slots__ = ("global_access", "collection_access")

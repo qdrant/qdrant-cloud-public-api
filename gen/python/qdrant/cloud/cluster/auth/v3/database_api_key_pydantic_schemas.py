@@ -83,7 +83,7 @@ class DatabaseApiKey(BaseModel):
     name: str = Field(default="")
 # The expiration time of the database api key. The key will be invalid after this time.
 # This field is optional, and if not provided, the key does not expire.
-    expiration_time: typing.Optional[datetime] = Field(default_factory=datetime.now)
+    expires_at: typing.Optional[datetime] = Field(default_factory=datetime.now)
 # A list of rules to grant access to the Qdrant database or to specific
 # collections. If no access rules are provided, global access to the database
 # with manage permissions is assumed. The list can contain a maximum of 20
