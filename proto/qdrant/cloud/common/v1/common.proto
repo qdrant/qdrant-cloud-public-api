@@ -27,41 +27,6 @@ extend google.protobuf.MethodOptions {
   bool requires_authentication = 50003;
 }
 
-/* // TODO: Do we want to be this a enum (aka number, or string which is user-friendly in JSON)?
-   //import "google/protobuf/timestamp.proto";
-      // The order of the returned list
-      enum Order {
-        // The order is not specified: TODO: Make this a validated string, 2 options, default to ascending
-        // Added this field to make the linter happy.
-        ORDER_UNSPECIFIED = 0;
-        // Order ascending
-        ORDER_ASC = 1;
-        // Order descending
-        ORDER_DESC = 2;
-      }
-
-      // Options for a list request.
-      message ListOptions {
-        // Maximum number of items to return.
-        // If not specified, a default number items are returned.
-        // Unless specified otherwise, the default number is DefaultPageSize.
-        int32 page_size = 1;
-        // Page to start with (defaults to 0).
-        int64 page = 2;
-
-        // Optional field to specify the sorting order.
-        Order order_by = 3;
-
-        // Optional timestamp to get the 'diff' as of a certain point.
-        // This field can be used to fetch items modified (created/updated/deleted) after this timestamp.
-        google.protobuf.Timestamp since = 4;
-
-        // TODO: Ordering?
-        // TODO: Make it possible to get the 'diff' as of a certain point
-        //       E.g. Every ListX() call return a timestamp (TS) then the list function was started, with this timestamp
-        //       (all CRUD) operations after this TS can be retrieved in a 'streaming' fashion.
-      } */
-
 // Semantic version number.
 message Version {
   // Major version (increasing may break APIs)
