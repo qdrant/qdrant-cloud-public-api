@@ -181,7 +181,7 @@ export type Package = Message<"qdrant.cloud.booking.v2.Package"> & {
   /**
    * The unit price per hour in millicents, in integer format.
    * Represents the cost per hour for a single unit of the resource.
-   * TODO: You will be billed by minutes?
+   * You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
    *
    * @generated from field: int32 unit_int_price_per_hour = 6;
    */
