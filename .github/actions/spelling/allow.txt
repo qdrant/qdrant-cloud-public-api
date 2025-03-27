@@ -13,3 +13,4 @@ oneof
 multivector
 idf
 CIDRs
+upsert
