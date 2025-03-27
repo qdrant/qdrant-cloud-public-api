@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: qdrant/cloud/backup/v1/backup.proto
+// source: qdrant/cloud/cluster/backup/v1/backup.proto
 
 package backupv1
 
@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.backup.v1.BackupService/ListBackups"
-	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.backup.v1.BackupService/CreateBackup"
-	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.backup.v1.BackupService/DeleteBackup"
-	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.backup.v1.BackupService/RestoreBackup"
-	BackupService_ListBackupSchedules_FullMethodName  = "/qdrant.cloud.backup.v1.BackupService/ListBackupSchedules"
-	BackupService_GetBackupSchedule_FullMethodName    = "/qdrant.cloud.backup.v1.BackupService/GetBackupSchedule"
-	BackupService_CreateBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/CreateBackupSchedule"
-	BackupService_UpdateBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/UpdateBackupSchedule"
-	BackupService_DeleteBackupSchedule_FullMethodName = "/qdrant.cloud.backup.v1.BackupService/DeleteBackupSchedule"
+	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
+	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
+	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
+	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup"
+	BackupService_ListBackupSchedules_FullMethodName  = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupSchedules"
+	BackupService_GetBackupSchedule_FullMethodName    = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupSchedule"
+	BackupService_CreateBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackupSchedule"
+	BackupService_UpdateBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackupSchedule"
+	BackupService_DeleteBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackupSchedule"
 )
 
 // BackupServiceClient is the client API for BackupService service.
@@ -434,7 +434,7 @@ func _BackupService_DeleteBackupSchedule_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BackupService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.backup.v1.BackupService",
+	ServiceName: "qdrant.cloud.cluster.backup.v1.BackupService",
 	HandlerType: (*BackupServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -475,5 +475,5 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/backup/v1/backup.proto",
+	Metadata: "qdrant/cloud/cluster/backup/v1/backup.proto",
 }

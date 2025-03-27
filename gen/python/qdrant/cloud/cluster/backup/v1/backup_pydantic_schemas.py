@@ -48,12 +48,6 @@ class Backup(BaseModel):
 # The name of the backup.
 # This is a read-only field and will be available after a backup is created.
     name: str = Field(default="")
-# The identifier of the schedule that triggered the creation of the backup.
-# If there isn't value, that means the backup was created manually.
-# This is a read-only field and will be available after a backup is created.
-# TODO we don't have this field at this moment (we used to store only `short_id`).
-# Once we have it, we can enable it here.
-# string backup_schedule_id = 6;
 # The current status of the backup.
 # This is a read-only field and will be set after CreateBackup is called.
     status: str = Field(default="")
