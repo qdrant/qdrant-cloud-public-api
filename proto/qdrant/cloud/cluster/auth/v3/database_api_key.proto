@@ -131,7 +131,7 @@ message DatabaseApiKey {
   option (buf.validate.message).cel = {
     id: "no_mixed_global_and_collection"
     expression: "!(this.access_rules.exists(r, r.global_access != null) && this.access_rules.exists(r, r.collection_access != null))"
-    message: "Cannot mix global and collection access rules in the same configuration."
+    message: "There can't be global and collection access rules in the same database api key."
   };
   // Validation rule to ensure that there is only one global access rule in the configuration.
   option (buf.validate.message).cel = {
@@ -154,28 +154,27 @@ message DatabaseApiKey {
 // Represents an access rule. An access rule can either define global access to
 // the database or access to a specific collection.
 message AccessRule {
-  // A rule granting global access to the entire database.
-  // Only one of the fields (global_access or collection_access) should be set in a single rule.
-  GlobalAccessRule global_access = 1;
-  // A rule granting access to a specific collection in the database.
-  // Only one of the fields (global_access or collection_access) should be set in a single rule.
-  CollectionAccessRule collection_access = 2;
-  // A validation rule to ensure that an AccessRule has either a global access rule or a collection access rule, but not both.
-  option (buf.validate.message).cel = {
-    id: "only_one_kind_of_rule"
-    expression: "(this.global_access == null) != (this.collection_access == null)"
-    message: "Each AccessRule must specify either global_access or collection_access, but not both."
-  };
+  // Defines the scope of the access rule, determining whether it applies globally
+  // to the entire database or is restricted to a specific collection.
+  oneof scope {
+    // A rule granting global access to the entire database.
+    GlobalAccessRule global_access = 1;
+    // A rule granting access to a specific collection in the database.
+    CollectionAccessRule collection_access = 2;
+  }
 }
 
 // Represents a global access rule that grants access to the entire database.
 message GlobalAccessRule {
   // The type of access granted at the global level.
-  // "read" allows read-only access to the database, while "manage" allows read and write access.
+  // - "read-only": Grants access to perform actions that only read data (like `list collections`).
+  // - "manage": Grants access to perform all actions available in the database (like `update aliases`).
+  // For a detailed list of actions allowed for each access type, see:
+  // https://qdrant.tech/documentation/guides/security/#table-of-access
   // This is a required field.
   string access_type = 1 [(buf.validate.field).string = {
     in: [
-      "read",
+      "read-only",
       "manage"
     ]
   }];
@@ -191,14 +190,18 @@ message CollectionAccessRule {
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The type of access granted for the collection.
-  // "read" allows read-only access, while "read-write" allows both read and write access.
+  // - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
+  // - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  // For a detailed list of actions allowed for each access type, see:
+  // https://qdrant.tech/documentation/guides/security/#table-of-access
   // This is a required field.
   string access_type = 2 [(buf.validate.field).string = {
     in: [
-      "read",
+      "read-only",
       "read-write"
     ]
   }];
-  // An optional payload containing key-value pairs.
+  // An optional set of key-value pairs used to restrict access within the collection.
+  // Only points containing the specified key-value pairs in their payload will be accessible.
   map<string, string> payload = 3;
 }

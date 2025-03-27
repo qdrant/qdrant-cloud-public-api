@@ -311,11 +311,11 @@
       "properties": {
         "globalAccess": {
           "$ref": "#/definitions/v3GlobalAccessRule",
-          "description": "A rule granting global access to the entire database.\nOnly one of the fields (global_access or collection_access) should be set in a single rule."
+          "description": "A rule granting global access to the entire database."
         },
         "collectionAccess": {
           "$ref": "#/definitions/v3CollectionAccessRule",
-          "description": "A rule granting access to a specific collection in the database.\nOnly one of the fields (global_access or collection_access) should be set in a single rule."
+          "description": "A rule granting access to a specific collection in the database."
         }
       },
       "description": "Represents an access rule. An access rule can either define global access to\nthe database or access to a specific collection."
@@ -329,14 +329,14 @@
         },
         "accessType": {
           "type": "string",
-          "description": "The type of access granted for the collection.\n\"read\" allows read-only access, while \"read-write\" allows both read and write access.\nThis is a required field."
+          "description": "The type of access granted for the collection.\n- \"read-only\": Grants access to perform collection-related actions that only read data (like `get collection info`).\n- \"read-write\": Grants access to perform collection-related actions that read or write data (like `upsert points`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
         },
         "payload": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "An optional payload containing key-value pairs."
+          "description": "An optional set of key-value pairs used to restrict access within the collection.\nOnly points containing the specified key-value pairs in their payload will be accessible."
         }
       },
       "description": "Represents an access rule for a specific collection in the database."
@@ -346,7 +346,7 @@
       "properties": {
         "accessType": {
           "type": "string",
-          "description": "The type of access granted at the global level.\n\"read\" allows read-only access to the database, while \"manage\" allows read and write access.\nThis is a required field."
+          "description": "The type of access granted at the global level.\n- \"read-only\": Grants access to perform actions that only read data (like `list collections`).\n- \"manage\": Grants access to perform all actions available in the database (like `update aliases`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
         }
       },
       "description": "Represents a global access rule that grants access to the entire database."

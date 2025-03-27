@@ -4,8 +4,10 @@
 # Pydantic Version: 2.10.6 
 from datetime import datetime
 from google.protobuf.message import Message  # type: ignore
+from protobuf_to_pydantic.customer_validator import check_one_of
 from pydantic import BaseModel
 from pydantic import Field
+from pydantic import model_validator
 import typing
 
 
@@ -27,7 +29,10 @@ class GlobalAccessRule(BaseModel):
     """
 
 # The type of access granted at the global level.
-# "read" allows read-only access to the database, while "manage" allows read and write access.
+# - "read-only": Grants access to perform actions that only read data (like `list collections`).
+# - "manage": Grants access to perform all actions available in the database (like `update aliases`).
+# For a detailed list of actions allowed for each access type, see:
+# https://qdrant.tech/documentation/guides/security/#table-of-access
 # This is a required field.
     access_type: str = Field(default="")
 
@@ -40,10 +45,14 @@ class CollectionAccessRule(BaseModel):
 # This is a required field.
     collection_name: str = Field(default="")
 # The type of access granted for the collection.
-# "read" allows read-only access, while "read-write" allows both read and write access.
+# - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
+# - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
+# For a detailed list of actions allowed for each access type, see:
+# https://qdrant.tech/documentation/guides/security/#table-of-access
 # This is a required field.
     access_type: str = Field(default="")
-# An optional payload containing key-value pairs.
+# An optional set of key-value pairs used to restrict access within the collection.
+# Only points containing the specified key-value pairs in their payload will be accessible.
     payload: typing.Dict[str, str] = Field(default_factory=dict)
 
 class AccessRule(BaseModel):
@@ -52,11 +61,11 @@ class AccessRule(BaseModel):
  the database or access to a specific collection.
     """
 
+    _one_of_dict = {"AccessRule.scope": {"fields": {"collection_access", "global_access"}}}
+    one_of_validator = model_validator(mode="before")(check_one_of)
 # A rule granting global access to the entire database.
-# Only one of the fields (global_access or collection_access) should be set in a single rule.
     global_access: GlobalAccessRule = Field()
 # A rule granting access to a specific collection in the database.
-# Only one of the fields (global_access or collection_access) should be set in a single rule.
     collection_access: CollectionAccessRule = Field()
 
 class DatabaseApiKey(BaseModel):
