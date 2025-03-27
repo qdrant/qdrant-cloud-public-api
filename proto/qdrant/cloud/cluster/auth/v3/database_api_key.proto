@@ -1,0 +1,207 @@
+syntax = "proto3";
+
+package qdrant.cloud.cluster.auth.v3;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+service DatabaseApiKeyService {
+  // Fetch all database api keys in the account identified by the given ID.
+  // Required permissions:
+  // - read:api_keys
+  rpc ListDatabaseApiKeys(ListDatabaseApiKeysRequest) returns (ListDatabaseApiKeysResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/auth/v3/accounts/{account_id}/database-api-keys"};
+  }
+  // Creates a database api key in the account identified by the given ID.
+  // Required permissions:
+  // - write:api_keys
+  rpc CreateDatabaseApiKey(CreateDatabaseApiKeyRequest) returns (CreateDatabaseApiKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/cluster/auth/v3/accounts/{database_api_key.account_id}/database-api-keys"
+      body: "*"
+    };
+  }
+  // Deletes a database api key in the account identified by the given ID.
+  // Required permissions:
+  // - delete:api_keys
+  rpc DeleteDatabaseApiKey(DeleteDatabaseApiKeyRequest) returns (DeleteDatabaseApiKeyResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/cluster/auth/v3/accounts/{account_id}/database-api-keys/{database_api_key_id}"};
+  }
+}
+
+// ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
+message ListDatabaseApiKeysRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function.
+message ListDatabaseApiKeysResponse {
+  // The actual database api keys in this list.
+  repeated DatabaseApiKey items = 1;
+}
+
+// CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
+message CreateDatabaseApiKeyRequest {
+  // The actual database api key.
+  DatabaseApiKey database_api_key = 1;
+}
+
+// CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
+message CreateDatabaseApiKeyResponse {
+  // The actual database api key.
+  DatabaseApiKey database_api_key = 1;
+}
+
+// DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
+message DeleteDatabaseApiKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in Guid format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the database api key (in Guid format).
+  // This is a required field.
+  string database_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.
+message DeleteDatabaseApiKeyResponse {
+  // Empty
+}
+
+// A DatabaseApiKey represents one database api key of a Qdrant cloud account.
+// This database key can grant access to one or more Qdrant databases (clusters).
+message DatabaseApiKey {
+  // Unique identifier for the database api key (in Guid format).
+  // This is a read-only field and will be available after a database api key is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the database api key was created.
+  // This is a read-only field and will be available after a database api key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // The identifier of the cluster (in Guid format).
+  // This is a required field.
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // Name of the database api key.
+  // This is a required field.
+  // Name can only contain letters, numbers, spaces, underscores and dashes.
+  string name = 5 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+    pattern: "^[\\w\\s-]+$"
+  }];
+  // The expiration time of the database api key. The key will be invalid after this time.
+  // This field is optional, and if not provided, the key does not expire.
+  optional google.protobuf.Timestamp expires_at = 6;
+  // A list of rules to grant access to the Qdrant database or to specific
+  // collections. If no access rules are provided, global access to the database
+  // with manage permissions is assumed. The list can contain a maximum of 20
+  // access rules.
+  repeated AccessRule access_rules = 7 [(buf.validate.field).repeated = {max_items: 20}];
+  // A validation rule to ensure that if any rule specifies global access,
+  // there should be no collection access rules present in the same configuration.
+  option (buf.validate.message).cel = {
+    id: "no_mixed_global_and_collection"
+    expression: "!(this.access_rules.exists(r, r.global_access != null) && this.access_rules.exists(r, r.collection_access != null))"
+    message: "There can't be global and collection access rules in the same database api key."
+  };
+  // Validation rule to ensure that there is only one global access rule in the configuration.
+  option (buf.validate.message).cel = {
+    id: "only_one_global_access"
+    expression: "size(this.access_rules.filter(r, r.global_access != null)) <= 1"
+    message: "There can't be more than one global access rule in the configuration."
+  };
+  // The email of the user who created the database api key.
+  // This is a read-only field and will be available after a database api key is created.
+  string created_by_email = 8;
+  // Postfix for the database api key, this represents the last bytes of the key.
+  // This is a read-only field and will be available after a database api key is created.
+  string postfix = 9;
+  // The key for the database api key.
+  // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
+  // You should securely store this key and it should be handled as a secret.
+  string key = 10;
+}
+
+// Represents an access rule. An access rule can either define global access to
+// the database or access to a specific collection.
+message AccessRule {
+  // Defines the scope of the access rule, determining whether it applies globally
+  // to the entire database or is restricted to a specific collection.
+  oneof scope {
+    // A rule granting global access to the entire database.
+    GlobalAccessRule global_access = 1;
+    // A rule granting access to a specific collection in the database.
+    CollectionAccessRule collection_access = 2;
+  }
+}
+
+// Represents a global access rule that grants access to the entire database.
+message GlobalAccessRule {
+  // The type of access granted at the global level.
+  // - "read-only": Grants access to perform actions that only read data (like `list collections`).
+  // - "manage": Grants access to perform all actions available in the database (like `update aliases`).
+  // For a detailed list of actions allowed for each access type, see:
+  // https://qdrant.tech/documentation/guides/security/#table-of-access
+  // This is a required field.
+  string access_type = 1 [(buf.validate.field).string = {
+    in: [
+      "read-only",
+      "manage"
+    ]
+  }];
+}
+
+// Represents an access rule for a specific collection in the database.
+message CollectionAccessRule {
+  // The name of the collection.
+  // This is a required field.
+  string collection_name = 1 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 64
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // The type of access granted for the collection.
+  // - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
+  // - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  // For a detailed list of actions allowed for each access type, see:
+  // https://qdrant.tech/documentation/guides/security/#table-of-access
+  // This is a required field.
+  string access_type = 2 [(buf.validate.field).string = {
+    in: [
+      "read-only",
+      "read-write"
+    ]
+  }];
+  // An optional set of key-value pairs used to restrict access within the collection.
+  // Only points containing the specified key-value pairs in their payload will be accessible.
+  map<string, string> payload = 3;
+}
