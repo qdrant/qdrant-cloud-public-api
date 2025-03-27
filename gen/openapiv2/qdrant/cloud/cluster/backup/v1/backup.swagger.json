@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/backup/v1/backup.proto",
+    "title": "qdrant/cloud/cluster/backup/v1/backup.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/backup/v1/accounts/{accountId}/backup_schedules": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backup_schedules": {
       "get": {
         "summary": "Fetch all backup schedules in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
         "operationId": "BackupService_ListBackupSchedules",
@@ -55,7 +55,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
       "get": {
         "summary": "Fetch a backup schedule in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
         "operationId": "BackupService_GetBackupSchedule",
@@ -101,7 +101,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{accountId}/backups": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backups": {
       "get": {
         "summary": "Fetch all backups in the account identified by the given ID.\nRequired permissions:\n- read:backups",
         "operationId": "BackupService_ListBackups",
@@ -147,7 +147,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{accountId}/backups/{backupId}": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}": {
       "delete": {
         "summary": "Deletes a backup in the account identified by the given ID.\nRequired permissions:\n- delete:backups",
         "operationId": "BackupService_DeleteBackup",
@@ -186,7 +186,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
       "post": {
         "summary": "Restores a backup in the account identified by the given ID.",
         "operationId": "BackupService_RestoreBackup",
@@ -225,7 +225,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{backup.accountId}/backups": {
+    "/api/cluster/backup/v1/accounts/{backup.accountId}/backups": {
       "post": {
         "summary": "Creates a backup for the cluster identified by the given ID.\nRequired permissions:\n- write:backups",
         "operationId": "BackupService_CreateBackup",
@@ -265,7 +265,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules": {
+    "/api/cluster/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules": {
       "post": {
         "summary": "Creates a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
         "operationId": "BackupService_CreateBackupSchedule",
@@ -305,7 +305,7 @@
         ]
       }
     },
-    "/api/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules/{backupSchedule.id}": {
+    "/api/cluster/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules/{backupSchedule.id}": {
       "put": {
         "summary": "Update a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
         "operationId": "BackupService_UpdateBackupSchedule",
@@ -352,7 +352,7 @@
         ]
       }
     },
-    "/api/backup/v2/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
+    "/api/cluster/backup/v2/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
       "delete": {
         "summary": "Deletes a backup schedule in the account identified by the given ID.\nRequired permissions:\n- delete:backup_schedules",
         "operationId": "BackupService_DeleteBackupSchedule",
@@ -425,7 +425,7 @@
             },
             "status": {
               "type": "string",
-              "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
             },
             "deletedAt": {
               "type": "string",
@@ -579,7 +579,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The identifier of the schedule that triggered the creation of the backup.\nIf there isn't value, that means the backup was created manually.\nThis is a read-only field and will be available after a backup is created.\nTODO we don't have this field at this moment (we used to store only `short_id`).\nOnce we have it, we can enable it here.\nstring backup_schedule_id = 6;\nThe current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+          "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
         },
         "deletedAt": {
           "type": "string",
