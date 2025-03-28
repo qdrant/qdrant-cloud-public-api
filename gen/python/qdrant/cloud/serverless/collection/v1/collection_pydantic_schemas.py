@@ -19,7 +19,7 @@ class ListCollectionsRequest(BaseModel):
 # This is a required field.
     account_id: str = Field(default="")
 
-class ClusterEndpoint(BaseModel):
+class CollectionEndpoint(BaseModel):
     """
      Endpoint information to access the qdrant collection (aka serverless database).
  All fields in this message are a read-only field.
@@ -48,7 +48,7 @@ class CollectionState(BaseModel):
     reason: str = Field(default="")
 # The URL endpoint where clients can connect to and interact with the collection.
 # Not set if the collection is not yet ready or is disabled.
-    endpoint: typing.Optional[ClusterEndpoint] = Field(default=None)
+    endpoint: typing.Optional[CollectionEndpoint] = Field(default=None)
 
 class Collection(BaseModel):
     """

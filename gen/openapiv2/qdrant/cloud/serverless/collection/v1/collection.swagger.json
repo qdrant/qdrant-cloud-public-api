@@ -224,26 +224,6 @@
       "type": "object",
       "title": "Upgrade limits of the specified collection"
     },
-    "collectionv1ClusterEndpoint": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "title": "URL to access the qdrant collection (aka serverless database) without port"
-        },
-        "restPort": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The port to use for HTTP REST calls (6333)"
-        },
-        "grpcPort": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The port to use for gRPC calls (6334)"
-        }
-      },
-      "description": "Endpoint information to access the qdrant collection (aka serverless database).\nAll fields in this message are a read-only field."
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -357,6 +337,26 @@
       },
       "title": "CollectionConfiguration defines the structure and settings for a collection"
     },
+    "v1CollectionEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant collection (aka serverless database) without port"
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant collection (aka serverless database).\nAll fields in this message are a read-only field."
+    },
     "v1CollectionState": {
       "type": "object",
       "properties": {
@@ -369,7 +369,7 @@
           "description": "Descriptive message explaining any errors or issues with the collection.\nEmpty when the collection is operating normally."
         },
         "endpoint": {
-          "$ref": "#/definitions/collectionv1ClusterEndpoint",
+          "$ref": "#/definitions/v1CollectionEndpoint",
           "description": "The URL endpoint where clients can connect to and interact with the collection.\nNot set if the collection is not yet ready or is disabled."
         }
       },

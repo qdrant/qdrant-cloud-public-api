@@ -87,10 +87,10 @@ class CollectionState(_message.Message):
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     phase: str
     reason: str
-    endpoint: ClusterEndpoint
-    def __init__(self, phase: _Optional[str] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ...) -> None: ...
+    endpoint: CollectionEndpoint
+    def __init__(self, phase: _Optional[str] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[CollectionEndpoint, _Mapping]] = ...) -> None: ...
 
-class ClusterEndpoint(_message.Message):
+class CollectionEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")
     URL_FIELD_NUMBER: _ClassVar[int]
     REST_PORT_FIELD_NUMBER: _ClassVar[int]
