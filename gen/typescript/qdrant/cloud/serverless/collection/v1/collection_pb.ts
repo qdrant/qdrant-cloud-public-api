@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/serverless/collection/v1/collection.proto.
  */
 export const file_qdrant_cloud_serverless_collection_v1_collection: GenFile = /*@__PURE__*/
-  fileDesc("CjZxZHJhbnQvY2xvdWQvc2VydmVybGVzcy9jb2xsZWN0aW9uL3YxL2NvbGxlY3Rpb24ucHJvdG8SJXFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEiNgoWTGlzdENvbGxlY3Rpb25zUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJhChdMaXN0Q29sbGVjdGlvbnNSZXNwb25zZRJGCgtjb2xsZWN0aW9ucxgBIAMoCzIxLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbiJhChhDcmVhdGVDb2xsZWN0aW9uUmVzcG9uc2USRQoKY29sbGVjdGlvbhgBIAEoCzIxLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbiK4AgoXQ3JlYXRlQ29sbGVjdGlvblJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESNAoPY29sbGVjdGlvbl9uYW1lGAIgASgJQhu6SBhyFhAEGEAyEF5bYS16QS1aMC05LV9dKyQSVQoNY29uZmlndXJhdGlvbhgDIAEoCzI+LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbkNvbmZpZ3VyYXRpb24SMwoOY2xvdWRfcHJvdmlkZXIYBCABKAlCFrpIE3IRUgNhd3NSA2djcFIFYXp1cmVIAIgBARIZCgxjbG91ZF9yZWdpb24YBSABKAlIAYgBAUIRCg9fY2xvdWRfcHJvdmlkZXJCDwoNX2Nsb3VkX3JlZ2lvbiJZChhVcGdyYWRlQ29sbGVjdGlvblJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHwoNY29sbGVjdGlvbl9pZBgCIAEoCUIIukgFcgOwAQEiGwoZVXBncmFkZUNvbGxlY3Rpb25SZXNwb25zZSJYChdEZWxldGVDb2xsZWN0aW9uUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIfCg1jb2xsZWN0aW9uX2lkGAIgASgJQgi6SAVyA7ABASIaChhEZWxldGVDb2xsZWN0aW9uUmVzcG9uc2UimAQKCkNvbGxlY3Rpb24SCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIuCgpjcmVhdGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBJVCg1jb25maWd1cmF0aW9uGAQgASgLMj4ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Db2xsZWN0aW9uQ29uZmlndXJhdGlvbhIzCg5jbG91ZF9wcm92aWRlchgFIAEoCUIWukgTchFSA2F3c1IDZ2NwUgVhenVyZUgAiAEBEhkKDGNsb3VkX3JlZ2lvbhgGIAEoCUgBiAEBEkUKBXN0YXRlGGQgASgLMjYucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Db2xsZWN0aW9uU3RhdGU6rQG6SKkBGqYBCg1jb2xsZWN0aW9uLmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KUIRCg9fY2xvdWRfcHJvdmlkZXJCDwoNX2Nsb3VkX3JlZ2lvbiJ4Cg9Db2xsZWN0aW9uU3RhdGUSMQoFcGhhc2UYASABKAlCIrpIH3IdUgVyZWFkeVIKcHJvY2Vzc2luZ1IIZGlzYWJsZWQSDgoGcmVhc29uGAIgASgJEhUKCGVuZHBvaW50GAcgASgJSACIAQFCCwoJX2VuZHBvaW50MtkHChFDb2xsZWN0aW9uU2VydmljZRLiAQoPTGlzdENvbGxlY3Rpb25zEj0ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5MaXN0Q29sbGVjdGlvbnNSZXF1ZXN0Gj4ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5MaXN0Q29sbGVjdGlvbnNSZXNwb25zZSJQirUYEHdyaXRlOnNlcnZlcmxlc3OC0+STAjYSNC9hcGkvc2VydmVybGVzcy92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vY29sbGVjdGlvbnMS6AEKEENyZWF0ZUNvbGxlY3Rpb24SPi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkNyZWF0ZUNvbGxlY3Rpb25SZXF1ZXN0Gj8ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5DcmVhdGVDb2xsZWN0aW9uUmVzcG9uc2UiU4q1GBB3cml0ZTpzZXJ2ZXJsZXNzgtPkkwI5OgEqIjQvYXBpL3NlcnZlcmxlc3MvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2NvbGxlY3Rpb25zEvsBChFVcGdyYWRlQ29sbGVjdGlvbhI/LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuVXBncmFkZUNvbGxlY3Rpb25SZXF1ZXN0GkAucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5VcGdyYWRlQ29sbGVjdGlvblJlc3BvbnNlImOKtRgQd3JpdGU6c2VydmVybGVzc4LT5JMCSToBKhpEL2FwaS9zZXJ2ZXJsZXNzL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jb2xsZWN0aW9ucy97Y29sbGVjdGlvbl9pZH0S9QEKEERlbGV0ZUNvbGxlY3Rpb24SPi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkRlbGV0ZUNvbGxlY3Rpb25SZXF1ZXN0Gj8ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5EZWxldGVDb2xsZWN0aW9uUmVzcG9uc2UiYIq1GBB3cml0ZTpzZXJ2ZXJsZXNzgtPkkwJGKkQvYXBpL3NlcnZlcmxlc3MvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2NvbGxlY3Rpb25zL3tjb2xsZWN0aW9uX2lkfULaAgopY29tLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjFCD0NvbGxlY3Rpb25Qcm90b1ABWmNnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL3NlcnZlcmxlc3MvY29sbGVjdGlvbi92MTtjb2xsZWN0aW9udjGiAgRRQ1NDqgIlUWRyYW50LkNsb3VkLlNlcnZlcmxlc3MuQ29sbGVjdGlvbi5WMcoCJVFkcmFudFxDbG91ZFxTZXJ2ZXJsZXNzXENvbGxlY3Rpb25cVjHiAjFRZHJhbnRcQ2xvdWRcU2VydmVybGVzc1xDb2xsZWN0aW9uXFYxXEdQQk1ldGFkYXRh6gIpUWRyYW50OjpDbG91ZDo6U2VydmVybGVzczo6Q29sbGVjdGlvbjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common, file_qdrant_cloud_serverless_collection_v1_collection_config]);
+  fileDesc("CjZxZHJhbnQvY2xvdWQvc2VydmVybGVzcy9jb2xsZWN0aW9uL3YxL2NvbGxlY3Rpb24ucHJvdG8SJXFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEiNgoWTGlzdENvbGxlY3Rpb25zUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJhChdMaXN0Q29sbGVjdGlvbnNSZXNwb25zZRJGCgtjb2xsZWN0aW9ucxgBIAMoCzIxLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbiJgChdDcmVhdGVDb2xsZWN0aW9uUmVxdWVzdBJFCgpjb2xsZWN0aW9uGAEgASgLMjEucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Db2xsZWN0aW9uImEKGENyZWF0ZUNvbGxlY3Rpb25SZXNwb25zZRJFCgpjb2xsZWN0aW9uGAEgASgLMjEucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Db2xsZWN0aW9uIlkKGFVwZ3JhZGVDb2xsZWN0aW9uUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIfCg1jb2xsZWN0aW9uX2lkGAIgASgJQgi6SAVyA7ABASIbChlVcGdyYWRlQ29sbGVjdGlvblJlc3BvbnNlIlgKF0RlbGV0ZUNvbGxlY3Rpb25SZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEh8KDWNvbGxlY3Rpb25faWQYAiABKAlCCLpIBXIDsAEBIhoKGERlbGV0ZUNvbGxlY3Rpb25SZXNwb25zZSKDBQoKQ29sbGVjdGlvbhIKCgJpZBgBIAEoCRIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIcCgphY2NvdW50X2lkGAMgASgJQgi6SAVyA7ABARIpCgRuYW1lGAQgASgJQhu6SBhyFhAEGEAyEF5bYS16QS1aMC05LV9dKyQSLgoKZGVsZXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMwoOY2xvdWRfcHJvdmlkZXIYCiABKAlCFrpIE3IRUgNhd3NSA2djcFIFYXp1cmVIAIgBARIZCgxjbG91ZF9yZWdpb24YCyABKAlIAYgBARJVCg1jb25maWd1cmF0aW9uGBQgASgLMj4ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Db2xsZWN0aW9uQ29uZmlndXJhdGlvbhJFCgVzdGF0ZRhkIAEoCzI2LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvblN0YXRlOq0BukipARqmAQoNY29sbGVjdGlvbi5pZBIadmFsdWUgbXVzdCBiZSBhIHZhbGlkIFVVSUQaeXRoaXMuaWQubWF0Y2hlcygnXlswLTlhLWZBLUZdezh9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezEyfSQnKSB8fCAhaGFzKHRoaXMuY3JlYXRlZF9hdClCEQoPX2Nsb3VkX3Byb3ZpZGVyQg8KDV9jbG91ZF9yZWdpb24isAEKD0NvbGxlY3Rpb25TdGF0ZRIxCgVwaGFzZRgBIAEoCUIiukgfch1SBXJlYWR5Ugpwcm9jZXNzaW5nUghkaXNhYmxlZBIOCgZyZWFzb24YAiABKAkSTQoIZW5kcG9pbnQYByABKAsyNi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkNsdXN0ZXJFbmRwb2ludEgAiAEBQgsKCV9lbmRwb2ludCJOCg9DbHVzdGVyRW5kcG9pbnQSFQoDdXJsGAEgASgJQgi6SAVyA6gBARIRCglyZXN0X3BvcnQYAiABKAUSEQoJZ3JwY19wb3J0GAMgASgFMv0HChFDb2xsZWN0aW9uU2VydmljZRLiAQoPTGlzdENvbGxlY3Rpb25zEj0ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5MaXN0Q29sbGVjdGlvbnNSZXF1ZXN0Gj4ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5MaXN0Q29sbGVjdGlvbnNSZXNwb25zZSJQirUYEHdyaXRlOnNlcnZlcmxlc3OC0+STAjYSNC9hcGkvc2VydmVybGVzcy92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vY29sbGVjdGlvbnMSjAIKEENyZWF0ZUNvbGxlY3Rpb24SPi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkNyZWF0ZUNvbGxlY3Rpb25SZXF1ZXN0Gj8ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5DcmVhdGVDb2xsZWN0aW9uUmVzcG9uc2Uid4q1GBB3cml0ZTpzZXJ2ZXJsZXNzkrUYFWNvbGxlY3Rpb24uYWNjb3VudF9pZILT5JMCRDoBKiI/L2FwaS9zZXJ2ZXJsZXNzL3YxL2FjY291bnRzL3tjb2xsZWN0aW9uLmFjY291bnRfaWR9L2NvbGxlY3Rpb25zEvsBChFVcGdyYWRlQ29sbGVjdGlvbhI/LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuVXBncmFkZUNvbGxlY3Rpb25SZXF1ZXN0GkAucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5VcGdyYWRlQ29sbGVjdGlvblJlc3BvbnNlImOKtRgQd3JpdGU6c2VydmVybGVzc4LT5JMCSToBKhpEL2FwaS9zZXJ2ZXJsZXNzL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jb2xsZWN0aW9ucy97Y29sbGVjdGlvbl9pZH0S9QEKEERlbGV0ZUNvbGxlY3Rpb24SPi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkRlbGV0ZUNvbGxlY3Rpb25SZXF1ZXN0Gj8ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5EZWxldGVDb2xsZWN0aW9uUmVzcG9uc2UiYIq1GBB3cml0ZTpzZXJ2ZXJsZXNzgtPkkwJGKkQvYXBpL3NlcnZlcmxlc3MvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2NvbGxlY3Rpb25zL3tjb2xsZWN0aW9uX2lkfULaAgopY29tLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjFCD0NvbGxlY3Rpb25Qcm90b1ABWmNnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL3NlcnZlcmxlc3MvY29sbGVjdGlvbi92MTtjb2xsZWN0aW9udjGiAgRRQ1NDqgIlUWRyYW50LkNsb3VkLlNlcnZlcmxlc3MuQ29sbGVjdGlvbi5WMcoCJVFkcmFudFxDbG91ZFxTZXJ2ZXJsZXNzXENvbGxlY3Rpb25cVjHiAjFRZHJhbnRcQ2xvdWRcU2VydmVybGVzc1xDb2xsZWN0aW9uXFYxXEdQQk1ldGFkYXRh6gIpUWRyYW50OjpDbG91ZDo6U2VydmVybGVzczo6Q29sbGVjdGlvbjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common, file_qdrant_cloud_serverless_collection_v1_collection_config]);
 
 /**
  * ListCollectionsRequest is an empty request to list collections
@@ -63,6 +63,27 @@ export const ListCollectionsResponseSchema: GenMessage<ListCollectionsResponse> 
   messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 1);
 
 /**
+ * CreateCollectionRequest defines parameters for creating a new collection
+ *
+ * @generated from message qdrant.cloud.serverless.collection.v1.CreateCollectionRequest
+ */
+export type CreateCollectionRequest = Message<"qdrant.cloud.serverless.collection.v1.CreateCollectionRequest"> & {
+  /**
+   * Collection represents a vector search collection in the Qdrant serverless environment
+   *
+   * @generated from field: qdrant.cloud.serverless.collection.v1.Collection collection = 1;
+   */
+  collection?: Collection;
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.collection.v1.CreateCollectionRequest.
+ * Use `create(CreateCollectionRequestSchema)` to create a new message.
+ */
+export const CreateCollectionRequestSchema: GenMessage<CreateCollectionRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 2);
+
+/**
  * CollectionResponse provides details about a created collection
  *
  * @generated from message qdrant.cloud.serverless.collection.v1.CreateCollectionResponse
@@ -81,61 +102,6 @@ export type CreateCollectionResponse = Message<"qdrant.cloud.serverless.collecti
  * Use `create(CreateCollectionResponseSchema)` to create a new message.
  */
 export const CreateCollectionResponseSchema: GenMessage<CreateCollectionResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 2);
-
-/**
- * CreateCollectionRequest defines parameters for creating a new collection
- *
- * @generated from message qdrant.cloud.serverless.collection.v1.CreateCollectionRequest
- */
-export type CreateCollectionRequest = Message<"qdrant.cloud.serverless.collection.v1.CreateCollectionRequest"> & {
-  /**
-   * The identifier of the account (in Guid format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * Name for the new collection
-   * This is a read-only field and will be available after a collection is created.
-   *
-   * @generated from field: string collection_name = 2;
-   */
-  collectionName: string;
-
-  /**
-   * Configuration settings for the collection
-   *
-   * @generated from field: qdrant.cloud.serverless.collection.v1.CollectionConfiguration configuration = 3;
-   */
-  configuration?: CollectionConfiguration;
-
-  /**
-   * Cloud provider where the cluster is hosted.
-   * This is a required field (one of the following: aws, gcp, azure).
-   * After creation, this field cannot be changed.
-   * If not specified - use default provider
-   *
-   * @generated from field: optional string cloud_provider = 4;
-   */
-  cloudProvider?: string;
-
-  /**
-   * Optional region to host the collection in.
-   * If not specified - use default region.
-   *
-   * @generated from field: optional string cloud_region = 5;
-   */
-  cloudRegion?: string;
-};
-
-/**
- * Describes the message qdrant.cloud.serverless.collection.v1.CreateCollectionRequest.
- * Use `create(CreateCollectionRequestSchema)` to create a new message.
- */
-export const CreateCollectionRequestSchema: GenMessage<CreateCollectionRequest> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 3);
 
 /**
@@ -245,46 +211,66 @@ export type Collection = Message<"qdrant.cloud.serverless.collection.v1.Collecti
   id: string;
 
   /**
-   * Name of the collection
+   * Timestamp when the collection was created.
+   * This is a read-only field and will be available after a collection is created.
    *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * When the collection was created
-   *
-   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
    */
   createdAt?: Timestamp;
 
   /**
-   * Configuration parameters
+   * Identifier of the account associated with the collection (in Guid format).
+   * This is a required field.
    *
-   * @generated from field: qdrant.cloud.serverless.collection.v1.CollectionConfiguration configuration = 4;
+   * @generated from field: string account_id = 3;
    */
-  configuration?: CollectionConfiguration;
+  accountId: string;
 
   /**
-   * Cloud provider where the cluster is hosted.
-   * This is a required field (one of the following: aws, gcp, azure).
+   * Name of the collection.
+   * This is a required field.
+   * Name can only contain letters, numbers, underscores and dashes
+   *
+   * @generated from field: string name = 4;
+   */
+  name: string;
+
+  /**
+   * Timestamp when the collection was deleted (or is started to be deleting).
+   * This is a read-only field and will be set after DeleteCollection is called.
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 5;
+   */
+  deletedAt?: Timestamp;
+
+  /**
+   * Cloud provider where the collection is hosted.
+   * This is a optional field (one of the following: aws, gcp, azure).
    * After creation, this field cannot be changed.
    * If not specified - use default provider
    *
-   * @generated from field: optional string cloud_provider = 5;
+   * @generated from field: optional string cloud_provider = 10;
    */
   cloudProvider?: string;
 
   /**
    * In which region the collection is hosted
+   * After creation, this field cannot be changed.
    * Example: us-west1
+   * If not specified - use default region for the selected provider (or default provider if not specified)
    *
-   * @generated from field: optional string cloud_region = 6;
+   * @generated from field: optional string cloud_region = 11;
    */
   cloudRegion?: string;
 
   /**
-   * URL to access the hosting cluster
+   * Configuration parameters
+   *
+   * @generated from field: qdrant.cloud.serverless.collection.v1.CollectionConfiguration configuration = 20;
+   */
+  configuration?: CollectionConfiguration;
+
+  /**
    * Status of the collection
    *
    * @generated from field: qdrant.cloud.serverless.collection.v1.CollectionState state = 100;
@@ -326,11 +312,11 @@ export type CollectionState = Message<"qdrant.cloud.serverless.collection.v1.Col
 
   /**
    * The URL endpoint where clients can connect to and interact with the collection.
-   * May be empty if the collection is not yet ready or is disabled.
+   * Not set if the collection is not yet ready or is disabled.
    *
-   * @generated from field: optional string endpoint = 7;
+   * @generated from field: optional qdrant.cloud.serverless.collection.v1.ClusterEndpoint endpoint = 7;
    */
-  endpoint?: string;
+  endpoint?: ClusterEndpoint;
 };
 
 /**
@@ -339,6 +325,42 @@ export type CollectionState = Message<"qdrant.cloud.serverless.collection.v1.Col
  */
 export const CollectionStateSchema: GenMessage<CollectionState> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 9);
+
+/**
+ * Endpoint information to access the qdrant collection (aka serverless database).
+ * All fields in this message are a read-only field.
+ *
+ * @generated from message qdrant.cloud.serverless.collection.v1.ClusterEndpoint
+ */
+export type ClusterEndpoint = Message<"qdrant.cloud.serverless.collection.v1.ClusterEndpoint"> & {
+  /**
+   * URL to access the qdrant collection (aka serverless database) without port
+   *
+   * @generated from field: string url = 1;
+   */
+  url: string;
+
+  /**
+   * The port to use for HTTP REST calls (6333)
+   *
+   * @generated from field: int32 rest_port = 2;
+   */
+  restPort: number;
+
+  /**
+   * The port to use for gRPC calls (6334)
+   *
+   * @generated from field: int32 grpc_port = 3;
+   */
+  grpcPort: number;
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.collection.v1.ClusterEndpoint.
+ * Use `create(ClusterEndpointSchema)` to create a new message.
+ */
+export const ClusterEndpointSchema: GenMessage<ClusterEndpoint> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_serverless_collection_v1_collection, 10);
 
 /**
  * CollectionService provides operations for managing collections

@@ -46,44 +46,6 @@
         "tags": [
           "CollectionService"
         ]
-      },
-      "post": {
-        "summary": "CreateCollection creates a new collection with the specified configuration\nRequired Permissions:\n- write:serverless",
-        "operationId": "CollectionService_CreateCollection",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateCollectionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollectionServiceCreateCollectionBody"
-            }
-          }
-        ],
-        "tags": [
-          "CollectionService"
-        ]
       }
     },
     "/api/serverless/v1/accounts/{accountId}/collections/{collectionId}": {
@@ -169,27 +131,91 @@
           "CollectionService"
         ]
       }
+    },
+    "/api/serverless/v1/accounts/{collection.accountId}/collections": {
+      "post": {
+        "summary": "CreateCollection creates a new collection with the specified configuration\nRequired Permissions:\n- write:serverless",
+        "operationId": "CollectionService_CreateCollection",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "collection.accountId",
+            "description": "Identifier of the account associated with the collection (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionServiceCreateCollectionBody"
+            }
+          }
+        ],
+        "tags": [
+          "CollectionService"
+        ]
+      }
     }
   },
   "definitions": {
     "CollectionServiceCreateCollectionBody": {
       "type": "object",
       "properties": {
-        "collectionName": {
-          "type": "string",
-          "description": "Name for the new collection\nThis is a read-only field and will be available after a collection is created."
-        },
-        "configuration": {
-          "$ref": "#/definitions/v1CollectionConfiguration",
-          "title": "Configuration settings for the collection"
-        },
-        "cloudProvider": {
-          "type": "string",
-          "title": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
-        },
-        "cloudRegion": {
-          "type": "string",
-          "description": "Optional region to host the collection in.\nIf not specified - use default region."
+        "collection": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the collection (in Guid format).\nThis is a read-only field and will be available after a collection is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the collection was created.\nThis is a read-only field and will be available after a collection is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the collection.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
+            },
+            "cloudProvider": {
+              "type": "string",
+              "title": "Cloud provider where the collection is hosted.\nThis is a optional field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
+            },
+            "cloudRegion": {
+              "type": "string",
+              "title": "In which region the collection is hosted\nAfter creation, this field cannot be changed.\nExample: us-west1\nIf not specified - use default region for the selected provider (or default provider if not specified)"
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1CollectionConfiguration",
+              "title": "Configuration parameters"
+            },
+            "state": {
+              "$ref": "#/definitions/v1CollectionState",
+              "title": "Status of the collection"
+            }
+          },
+          "title": "Collection represents a vector search collection in the Qdrant serverless environment"
         }
       },
       "title": "CreateCollectionRequest defines parameters for creating a new collection"
@@ -197,6 +223,26 @@
     "CollectionServiceUpgradeCollectionBody": {
       "type": "object",
       "title": "Upgrade limits of the specified collection"
+    },
+    "collectionv1ClusterEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant collection (aka serverless database) without port"
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant collection (aka serverless database).\nAll fields in this message are a read-only field."
     },
     "protobufAny": {
       "type": "object",
@@ -243,30 +289,39 @@
           "type": "string",
           "description": "Unique identifier for the collection (in Guid format).\nThis is a read-only field and will be available after a collection is created."
         },
-        "name": {
-          "type": "string",
-          "title": "Name of the collection"
-        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "title": "When the collection was created"
+          "description": "Timestamp when the collection was created.\nThis is a read-only field and will be available after a collection is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the collection (in Guid format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the collection.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
+        },
+        "cloudProvider": {
+          "type": "string",
+          "title": "Cloud provider where the collection is hosted.\nThis is a optional field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
+        },
+        "cloudRegion": {
+          "type": "string",
+          "title": "In which region the collection is hosted\nAfter creation, this field cannot be changed.\nExample: us-west1\nIf not specified - use default region for the selected provider (or default provider if not specified)"
         },
         "configuration": {
           "$ref": "#/definitions/v1CollectionConfiguration",
           "title": "Configuration parameters"
         },
-        "cloudProvider": {
-          "type": "string",
-          "title": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
-        },
-        "cloudRegion": {
-          "type": "string",
-          "title": "In which region the collection is hosted\nExample: us-west1"
-        },
         "state": {
           "$ref": "#/definitions/v1CollectionState",
-          "title": "URL to access the hosting cluster\nStatus of the collection"
+          "title": "Status of the collection"
         }
       },
       "title": "Collection represents a vector search collection in the Qdrant serverless environment"
@@ -314,8 +369,8 @@
           "description": "Descriptive message explaining any errors or issues with the collection.\nEmpty when the collection is operating normally."
         },
         "endpoint": {
-          "type": "string",
-          "description": "The URL endpoint where clients can connect to and interact with the collection.\nMay be empty if the collection is not yet ready or is disabled."
+          "$ref": "#/definitions/collectionv1ClusterEndpoint",
+          "description": "The URL endpoint where clients can connect to and interact with the collection.\nNot set if the collection is not yet ready or is disabled."
         }
       },
       "description": "CollectionState represents the operational state of a collection in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."

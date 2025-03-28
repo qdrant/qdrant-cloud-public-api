@@ -22,25 +22,17 @@ class ListCollectionsResponse(_message.Message):
     collections: _containers.RepeatedCompositeFieldContainer[Collection]
     def __init__(self, collections: _Optional[_Iterable[_Union[Collection, _Mapping]]] = ...) -> None: ...
 
-class CreateCollectionResponse(_message.Message):
+class CreateCollectionRequest(_message.Message):
     __slots__ = ("collection",)
     COLLECTION_FIELD_NUMBER: _ClassVar[int]
     collection: Collection
     def __init__(self, collection: _Optional[_Union[Collection, _Mapping]] = ...) -> None: ...
 
-class CreateCollectionRequest(_message.Message):
-    __slots__ = ("account_id", "collection_name", "configuration", "cloud_provider", "cloud_region")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
-    CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    collection_name: str
-    configuration: _collection_config_pb2.CollectionConfiguration
-    cloud_provider: str
-    cloud_region: str
-    def __init__(self, account_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., configuration: _Optional[_Union[_collection_config_pb2.CollectionConfiguration, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ...) -> None: ...
+class CreateCollectionResponse(_message.Message):
+    __slots__ = ("collection",)
+    COLLECTION_FIELD_NUMBER: _ClassVar[int]
+    collection: Collection
+    def __init__(self, collection: _Optional[_Union[Collection, _Mapping]] = ...) -> None: ...
 
 class UpgradeCollectionRequest(_message.Message):
     __slots__ = ("account_id", "collection_id")
@@ -67,22 +59,26 @@ class DeleteCollectionResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Collection(_message.Message):
-    __slots__ = ("id", "name", "created_at", "configuration", "cloud_provider", "cloud_region", "state")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider", "cloud_region", "configuration", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
-    CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
     CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
+    CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
-    name: str
     created_at: _timestamp_pb2.Timestamp
-    configuration: _collection_config_pb2.CollectionConfiguration
+    account_id: str
+    name: str
+    deleted_at: _timestamp_pb2.Timestamp
     cloud_provider: str
     cloud_region: str
+    configuration: _collection_config_pb2.CollectionConfiguration
     state: CollectionState
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., configuration: _Optional[_Union[_collection_config_pb2.CollectionConfiguration, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., state: _Optional[_Union[CollectionState, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., configuration: _Optional[_Union[_collection_config_pb2.CollectionConfiguration, _Mapping]] = ..., state: _Optional[_Union[CollectionState, _Mapping]] = ...) -> None: ...
 
 class CollectionState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")
@@ -91,5 +87,15 @@ class CollectionState(_message.Message):
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     phase: str
     reason: str
-    endpoint: str
-    def __init__(self, phase: _Optional[str] = ..., reason: _Optional[str] = ..., endpoint: _Optional[str] = ...) -> None: ...
+    endpoint: ClusterEndpoint
+    def __init__(self, phase: _Optional[str] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ...) -> None: ...
+
+class ClusterEndpoint(_message.Message):
+    __slots__ = ("url", "rest_port", "grpc_port")
+    URL_FIELD_NUMBER: _ClassVar[int]
+    REST_PORT_FIELD_NUMBER: _ClassVar[int]
+    GRPC_PORT_FIELD_NUMBER: _ClassVar[int]
+    url: str
+    rest_port: int
+    grpc_port: int
+    def __init__(self, url: _Optional[str] = ..., rest_port: _Optional[int] = ..., grpc_port: _Optional[int] = ...) -> None: ...

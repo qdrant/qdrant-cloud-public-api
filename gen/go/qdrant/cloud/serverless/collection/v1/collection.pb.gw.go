@@ -80,13 +80,13 @@ func request_CollectionService_CreateCollection_0(ctx context.Context, marshaler
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["collection.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "collection.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "collection.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "collection.account_id", err)
 	}
 	msg, err := client.CreateCollection(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -101,13 +101,13 @@ func local_request_CollectionService_CreateCollection_0(ctx context.Context, mar
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["collection.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "collection.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "collection.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "collection.account_id", err)
 	}
 	msg, err := server.CreateCollection(ctx, &protoReq)
 	return msg, metadata, err
@@ -255,7 +255,7 @@ func RegisterCollectionServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.v1.CollectionService/CreateCollection", runtime.WithHTTPPathPattern("/api/serverless/v1/accounts/{account_id}/collections"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.v1.CollectionService/CreateCollection", runtime.WithHTTPPathPattern("/api/serverless/v1/accounts/{collection.account_id}/collections"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -370,7 +370,7 @@ func RegisterCollectionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.v1.CollectionService/CreateCollection", runtime.WithHTTPPathPattern("/api/serverless/v1/accounts/{account_id}/collections"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.v1.CollectionService/CreateCollection", runtime.WithHTTPPathPattern("/api/serverless/v1/accounts/{collection.account_id}/collections"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -422,7 +422,7 @@ func RegisterCollectionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 
 var (
 	pattern_CollectionService_ListCollections_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "serverless", "v1", "accounts", "account_id", "collections"}, ""))
-	pattern_CollectionService_CreateCollection_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "serverless", "v1", "accounts", "account_id", "collections"}, ""))
+	pattern_CollectionService_CreateCollection_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"api", "serverless", "v1", "accounts", "collection.account_id", "collections"}, ""))
 	pattern_CollectionService_UpgradeCollection_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "serverless", "v1", "accounts", "account_id", "collections", "collection_id"}, ""))
 	pattern_CollectionService_DeleteCollection_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"api", "serverless", "v1", "accounts", "account_id", "collections", "collection_id"}, ""))
 )
