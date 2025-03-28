@@ -241,7 +241,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the collectiin (in Guid format).\nThis is a read-only field and will be available after a collection is created."
+          "description": "Unique identifier for the collection (in Guid format).\nThis is a read-only field and will be available after a collection is created."
         },
         "name": {
           "type": "string",

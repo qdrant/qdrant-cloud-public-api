@@ -441,7 +441,7 @@ func (*DeleteCollectionResponse) Descriptor() ([]byte, []int) {
 // Collection represents a vector search collection in the Qdrant serverless environment
 type Collection struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the collectiin (in Guid format).
+	// Unique identifier for the collection (in Guid format).
 	// This is a read-only field and will be available after a collection is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the collection

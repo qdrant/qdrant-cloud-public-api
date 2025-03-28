@@ -237,7 +237,7 @@ export const DeleteCollectionResponseSchema: GenMessage<DeleteCollectionResponse
  */
 export type Collection = Message<"qdrant.cloud.serverless.collection.v1.Collection"> & {
   /**
-   * Unique identifier for the collectiin (in Guid format).
+   * Unique identifier for the collection (in Guid format).
    * This is a read-only field and will be available after a collection is created.
    *
    * @generated from field: string id = 1;

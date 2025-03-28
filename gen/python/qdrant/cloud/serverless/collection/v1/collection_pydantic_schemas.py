@@ -42,7 +42,7 @@ class Collection(BaseModel):
      Collection represents a vector search collection in the Qdrant serverless environment
     """
 
-# Unique identifier for the collectiin (in Guid format).
+# Unique identifier for the collection (in Guid format).
 # This is a read-only field and will be available after a collection is created.
     id: str = Field(default="")
 # Name of the collection
