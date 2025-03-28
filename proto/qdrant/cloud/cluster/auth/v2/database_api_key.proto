@@ -25,7 +25,7 @@ service DatabaseApiKeyService {
     // permissions
     option (common.v1.permissions) = "write:api_keys";
     // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "api_key.account_id";
+    option (qdrant.cloud.common.v1.account_id_expression) = "database_api_key.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys"
@@ -90,7 +90,7 @@ message DatabaseApiKey {
   // This is a read-only field and will be available after a database api key is created.
   string id = 1;
   option (buf.validate.message).cel = {
-    id: "api_key.id"
+    id: "database_api_key.id"
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
