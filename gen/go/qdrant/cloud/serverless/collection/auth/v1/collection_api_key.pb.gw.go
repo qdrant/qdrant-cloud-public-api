@@ -225,7 +225,7 @@ func RegisterCollectionApiKeyServiceHandlerServer(ctx context.Context, mux *runt
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/ListCollectionApiKeys", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/ListCollectionApiKeys", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -245,7 +245,7 @@ func RegisterCollectionApiKeyServiceHandlerServer(ctx context.Context, mux *runt
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -265,7 +265,7 @@ func RegisterCollectionApiKeyServiceHandlerServer(ctx context.Context, mux *runt
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/DeleteCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys/{collection_api_key_id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/DeleteCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -323,7 +323,7 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/ListCollectionApiKeys", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/ListCollectionApiKeys", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -340,7 +340,7 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -357,7 +357,7 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/DeleteCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys/{collection_api_key_id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/DeleteCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -374,9 +374,9 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 }
 
 var (
-	pattern_CollectionApiKeyService_ListCollectionApiKeys_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "keys"}, ""))
-	pattern_CollectionApiKeyService_CreateCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "keys"}, ""))
-	pattern_CollectionApiKeyService_DeleteCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8, 1, 0, 4, 1, 5, 9}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "keys", "collection_api_key_id"}, ""))
+	pattern_CollectionApiKeyService_ListCollectionApiKeys_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys"}, ""))
+	pattern_CollectionApiKeyService_CreateCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys"}, ""))
+	pattern_CollectionApiKeyService_DeleteCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8, 1, 0, 4, 1, 5, 9}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys", "collection_api_key_id"}, ""))
 )
 
 var (

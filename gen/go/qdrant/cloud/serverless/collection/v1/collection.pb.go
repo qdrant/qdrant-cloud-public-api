@@ -216,7 +216,8 @@ type UpgradeCollectionRequest struct {
 	// The identifier of the account (in Guid format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// ID of the collection to upgrade
+	// ID of the collection to upgrade (in Guid format).
+	// This is a required field.
 	CollectionId  string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -309,7 +310,8 @@ type DeleteCollectionRequest struct {
 	// The identifier of the account (in Guid format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// ID of the collection to delete
+	// ID of the collection to delete (in Guid format).
+	// This is a required field.
 	CollectionId  string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -428,6 +430,7 @@ type Collection struct {
 	// Configuration parameters
 	Configuration *CollectionConfiguration `protobuf:"bytes,20,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	// Status of the collection
+	// All fields inside `state` are read-only.
 	State         *CollectionState `protobuf:"bytes,100,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

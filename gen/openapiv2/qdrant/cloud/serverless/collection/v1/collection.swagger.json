@@ -76,7 +76,7 @@
           },
           {
             "name": "collectionId",
-            "description": "ID of the collection to delete",
+            "description": "ID of the collection to delete (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -113,7 +113,7 @@
           },
           {
             "name": "collectionId",
-            "description": "ID of the collection to upgrade",
+            "description": "ID of the collection to upgrade (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -212,7 +212,7 @@
             },
             "state": {
               "$ref": "#/definitions/v1CollectionState",
-              "title": "Status of the collection"
+              "description": "Status of the collection\nAll fields inside `state` are read-only."
             }
           },
           "title": "Collection represents a vector search collection in the Qdrant serverless environment"
@@ -321,7 +321,7 @@
         },
         "state": {
           "$ref": "#/definitions/v1CollectionState",
-          "title": "Status of the collection"
+          "description": "Status of the collection\nAll fields inside `state` are read-only."
         }
       },
       "title": "Collection represents a vector search collection in the Qdrant serverless environment"

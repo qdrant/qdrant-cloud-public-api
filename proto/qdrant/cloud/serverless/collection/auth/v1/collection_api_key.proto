@@ -16,7 +16,7 @@ service CollectionApiKeyService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"};
+    option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"};
   }
   // CreateCollectionApiKey creates a new API key for a collection
   // Required Permissions:
@@ -26,7 +26,7 @@ service CollectionApiKeyService {
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"
+      post: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"
       body: "*"
     };
   }
@@ -37,17 +37,17 @@ service CollectionApiKeyService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys/{collection_api_key_id}"};
+    option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}"};
   }
 }
 
-// Request all api-keys associated with a collection
+// Request all API keys associated with a collection
 message ListCollectionApiKeysRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
-  // Collection the API keys belong to
+  // Collection the API keys belong to (in Guid format).
+  // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
@@ -62,11 +62,11 @@ message CreateCollectionApiKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
-  // Collection the key will access
+  // Collection the key will access (in Guid format).
+  // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-
-  // The API key to create
+  // The API key to create.
+  // This is a required field.
   CollectionApiKey collection_api_key = 3;
 }
 
@@ -81,9 +81,11 @@ message DeleteCollectionApiKeyRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Collection the key belongs to
+  // Collection the key belongs to (in Guid format).
+  // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // ID of the key to delete
+  // ID of the key to delete (in Guid format).
+  // This is a required field.
   string collection_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
 }
 
@@ -95,8 +97,8 @@ message DeleteCollectionApiKeyResponse {
 // A CollectionApiKey represents one collection api key of a Qdrant cloud account.
 // This collection key can grant access to a Qdrant cloud serverless collection.
 message CollectionApiKey {
-  // Unique identifier for the database api key (in Guid format).
-  // This is a read-only field and will be available after a database api key is created.
+  // Unique identifier for the collection api key (in Guid format).
+  // This is a read-only field and will be available after a collection api key is created.
   string id = 1;
   option (buf.validate.message).cel = {
     id: "collection_api_key.id"
@@ -120,7 +122,7 @@ message CollectionApiKey {
     max_len: 128
     pattern: "^[\\w\\s-]+$"
   }];
-  // The expiration time of the database api key. The key will be invalid after this time.
+  // The expiration time of the collection api key. The key will be invalid after this time.
   // This field is optional, and if not provided, the key does not expire.
   optional google.protobuf.Timestamp expires_at = 6;
   // The type of access granted for the collection.

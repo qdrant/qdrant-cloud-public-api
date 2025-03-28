@@ -86,8 +86,8 @@ message UpgradeCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-
-  // ID of the collection to upgrade
+  // ID of the collection to upgrade (in Guid format).
+  // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
@@ -101,7 +101,8 @@ message DeleteCollectionRequest {
   // The identifier of the account (in Guid format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // ID of the collection to delete
+  // ID of the collection to delete (in Guid format).
+  // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
@@ -156,6 +157,7 @@ message Collection {
   // Configuration parameters
   CollectionConfiguration configuration = 20;
   // Status of the collection
+  // All fields inside `state` are read-only.
   CollectionState state = 100;
 }
 

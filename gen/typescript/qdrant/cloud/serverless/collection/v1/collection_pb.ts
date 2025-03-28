@@ -119,7 +119,8 @@ export type UpgradeCollectionRequest = Message<"qdrant.cloud.serverless.collecti
   accountId: string;
 
   /**
-   * ID of the collection to upgrade
+   * ID of the collection to upgrade (in Guid format).
+   * This is a required field.
    *
    * @generated from field: string collection_id = 2;
    */
@@ -165,7 +166,8 @@ export type DeleteCollectionRequest = Message<"qdrant.cloud.serverless.collectio
   accountId: string;
 
   /**
-   * ID of the collection to delete
+   * ID of the collection to delete (in Guid format).
+   * This is a required field.
    *
    * @generated from field: string collection_id = 2;
    */
@@ -272,6 +274,7 @@ export type Collection = Message<"qdrant.cloud.serverless.collection.v1.Collecti
 
   /**
    * Status of the collection
+   * All fields inside `state` are read-only.
    *
    * @generated from field: qdrant.cloud.serverless.collection.v1.CollectionState state = 100;
    */

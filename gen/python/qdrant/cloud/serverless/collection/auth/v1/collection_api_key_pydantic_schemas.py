@@ -11,13 +11,14 @@ import typing
 
 class ListCollectionApiKeysRequest(BaseModel):
     """
-     Request all api-keys associated with a collection
+     Request all API keys associated with a collection
     """
 
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# Collection the API keys belong to
+# Collection the API keys belong to (in Guid format).
+# This is a required field.
     collection_id: str = Field(default="")
 
 class CollectionApiKey(BaseModel):
@@ -26,8 +27,8 @@ class CollectionApiKey(BaseModel):
  This collection key can grant access to a Qdrant cloud serverless collection.
     """
 
-# Unique identifier for the database api key (in Guid format).
-# This is a read-only field and will be available after a database api key is created.
+# Unique identifier for the collection api key (in Guid format).
+# This is a read-only field and will be available after a collection api key is created.
     id: str = Field(default="")
 # The identifier of the account (in Guid format).
 # This is a required field.
@@ -42,7 +43,7 @@ class CollectionApiKey(BaseModel):
 # This is a required field.
 # Name can only contain letters, numbers, spaces, underscores and dashes.
     name: str = Field(default="")
-# The expiration time of the database api key. The key will be invalid after this time.
+# The expiration time of the collection api key. The key will be invalid after this time.
 # This field is optional, and if not provided, the key does not expire.
     expires_at: typing.Optional[datetime] = Field(default_factory=datetime.now)
 # The type of access granted for the collection.
@@ -79,9 +80,11 @@ class CreateCollectionApiKeyRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# Collection the key will access
+# Collection the key will access (in Guid format).
+# This is a required field.
     collection_id: str = Field(default="")
-# The API key to create
+# The API key to create.
+# This is a required field.
     collection_api_key: CollectionApiKey = Field()
 
 class CreateCollectionApiKeyResponse(BaseModel):
@@ -100,9 +103,11 @@ class DeleteCollectionApiKeyRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# Collection the key belongs to
+# Collection the key belongs to (in Guid format).
+# This is a required field.
     collection_id: str = Field(default="")
-# ID of the key to delete
+# ID of the key to delete (in Guid format).
+# This is a required field.
     collection_api_key_id: str = Field(default="")
 
 class DeleteCollectionApiKeyResponse(BaseModel):#  Empty

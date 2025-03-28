@@ -84,6 +84,7 @@ class Collection(BaseModel):
 # Configuration parameters
     configuration: CollectionConfiguration = Field()
 # Status of the collection
+# All fields inside `state` are read-only.
     state: CollectionState = Field()
 
 class ListCollectionsResponse(BaseModel):
@@ -118,7 +119,8 @@ class UpgradeCollectionRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# ID of the collection to upgrade
+# ID of the collection to upgrade (in Guid format).
+# This is a required field.
     collection_id: str = Field(default="")
 
 class UpgradeCollectionResponse(BaseModel):#  Empty
@@ -134,7 +136,8 @@ class DeleteCollectionRequest(BaseModel):
 # The identifier of the account (in Guid format).
 # This is a required field.
     account_id: str = Field(default="")
-# ID of the collection to delete
+# ID of the collection to delete (in Guid format).
+# This is a required field.
     collection_id: str = Field(default="")
 
 class DeleteCollectionResponse(BaseModel):#  Empty

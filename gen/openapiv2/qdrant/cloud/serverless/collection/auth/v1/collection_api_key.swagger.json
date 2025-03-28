@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/keys": {
+    "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/api-keys": {
       "get": {
         "summary": "ListCollectionApiKeys returns all API keys for a collection\nRequired Permissions:\n- read:serverless_api_keys",
         "operationId": "CollectionApiKeyService_ListCollectionApiKeys",
@@ -44,7 +44,7 @@
           },
           {
             "name": "collectionId",
-            "description": "Collection the API keys belong to",
+            "description": "Collection the API keys belong to (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -81,7 +81,7 @@
           },
           {
             "name": "collectionId",
-            "description": "Collection the key will access",
+            "description": "Collection the key will access (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -100,7 +100,7 @@
         ]
       }
     },
-    "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/keys/{collectionApiKeyId}": {
+    "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/api-keys/{collectionApiKeyId}": {
       "delete": {
         "summary": "DeleteCollectionApiKey removes an API key from a collection\nRequired Permissions:\n- write:serverless_api_keys",
         "operationId": "CollectionApiKeyService_DeleteCollectionApiKey",
@@ -128,14 +128,14 @@
           },
           {
             "name": "collectionId",
-            "description": "Collection the key belongs to",
+            "description": "Collection the key belongs to (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionApiKeyId",
-            "description": "ID of the key to delete",
+            "description": "ID of the key to delete (in Guid format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -153,7 +153,7 @@
       "properties": {
         "collectionApiKey": {
           "$ref": "#/definitions/v1CollectionApiKey",
-          "title": "The API key to create"
+          "description": "The API key to create.\nThis is a required field."
         }
       },
       "title": "CreateCollectionApiKeyRequest defines parameters for creating a new collection API key"
@@ -191,7 +191,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the database api key (in Guid format).\nThis is a read-only field and will be available after a database api key is created."
+          "description": "Unique identifier for the collection api key (in Guid format).\nThis is a read-only field and will be available after a collection api key is created."
         },
         "accountId": {
           "type": "string",
@@ -213,7 +213,7 @@
         "expiresAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+          "description": "The expiration time of the collection api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
         },
         "accessType": {
           "type": "string",
