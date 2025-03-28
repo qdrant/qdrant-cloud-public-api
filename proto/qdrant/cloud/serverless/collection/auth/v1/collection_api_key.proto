@@ -1,0 +1,148 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.collection.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// Service for managing API keys for a serverless collection
+service CollectionApiKeyService {
+  // ListCollectionApiKeys returns all API keys for a collection
+  // Required Permissions:
+  // - read:serverless_api_keys
+  rpc ListCollectionApiKeys(ListCollectionApiKeysRequest) returns (ListCollectionApiKeysResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"};
+  }
+  // CreateCollectionApiKey creates a new API key for a collection
+  // Required Permissions:
+  // - write:serverless_api_keys
+  rpc CreateCollectionApiKey(CreateCollectionApiKeyRequest) returns (CreateCollectionApiKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys"
+      body: "*"
+    };
+  }
+  // DeleteCollectionApiKey removes an API key from a collection
+  // Required Permissions:
+  // - write:serverless_api_keys
+  rpc DeleteCollectionApiKey(DeleteCollectionApiKeyRequest) returns (DeleteCollectionApiKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/keys/{collection_api_key_id}"};
+  }
+}
+
+// Request all api-keys associated with a collection
+message ListCollectionApiKeysRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
+  // Collection the API keys belong to
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing all API keys associated with a collection
+message ListCollectionApiKeysResponse {
+  // List of API keys for the collection
+  repeated CollectionApiKey items = 1;
+}
+
+// CreateCollectionApiKeyRequest defines parameters for creating a new collection API key
+message CreateCollectionApiKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+
+  // Collection the key will access
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+
+  // The API key to create
+  CollectionApiKey collection_api_key = 3;
+}
+
+// CollectionApiKeyResponse provides the API key after creation
+message CreateCollectionApiKeyResponse {
+  // The newly created API key value
+  CollectionApiKey collection_api_key = 1;
+}
+
+// DeleteCollectionApiKeyRequest identifies the API key to delete
+message DeleteCollectionApiKeyRequest {
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Collection the key belongs to
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // ID of the key to delete
+  string collection_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteCollectionApiKeyResponse is an empty response for deletion confirmation
+message DeleteCollectionApiKeyResponse {
+  // Empty
+}
+
+// A CollectionApiKey represents one collection api key of a Qdrant cloud account.
+// This collection key can grant access to a Qdrant cloud serverless collection.
+message CollectionApiKey {
+  // Unique identifier for the database api key (in Guid format).
+  // This is a read-only field and will be available after a database api key is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "collection_api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in Guid format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the collection api key was created.
+  // This is a read-only field and will be available after a collection api key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // The identifier of the collection (in Guid format).
+  // This is a required field.
+  string collection_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // Name of the collection api key.
+  // This is a required field.
+  // Name can only contain letters, numbers, spaces, underscores and dashes.
+  string name = 5 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+    pattern: "^[\\w\\s-]+$"
+  }];
+  // The expiration time of the database api key. The key will be invalid after this time.
+  // This field is optional, and if not provided, the key does not expire.
+  optional google.protobuf.Timestamp expires_at = 6;
+  // The type of access granted for the collection.
+  // - "read-only": Grants access to perform collection-related actions that only read data.
+  // - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  // For a detailed list of actions allowed for each access type, see:
+  // https://qdrant.tech/documentation/guides/security/#table-of-access
+  // This is a required field.
+  string access_type = 7 [(buf.validate.field).string = {
+    in: [
+      "read-only",
+      "read-write"
+    ]
+  }];
+  // The email of the user who created the collection api key.
+  // This is a read-only field and will be available after a collection api key is created.
+  string created_by_email = 8;
+  // Postfix for the collection api key, this represents the last bytes of the key.
+  // This is a read-only field and will be available after a collection api key is created.
+  string postfix = 9;
+  // The key for the collection api key.
+  // This is a read-only field and will be available only once in the response of CreateCollectionApiKey.
+  // You should securely store this key and it should be handled as a secret.
+  string key = 10;
+}
