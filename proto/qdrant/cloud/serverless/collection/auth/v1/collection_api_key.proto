@@ -24,9 +24,11 @@ service CollectionApiKeyService {
   rpc CreateCollectionApiKey(CreateCollectionApiKeyRequest) returns (CreateCollectionApiKeyResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "collection_api_key.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"
+      post: "/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_id}/api-keys"
       body: "*"
     };
   }

@@ -96,13 +96,13 @@ func request_CollectionApiKeyService_CreateCollectionApiKey_0(ctx context.Contex
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["collection_api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "collection_api_key.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "collection_api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "collection_api_key.account_id", err)
 	}
 	val, ok = pathParams["collection_id"]
 	if !ok {
@@ -125,13 +125,13 @@ func local_request_CollectionApiKeyService_CreateCollectionApiKey_0(ctx context.
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["account_id"]
+	val, ok := pathParams["collection_api_key.account_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "account_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "collection_api_key.account_id")
 	}
-	protoReq.AccountId, err = runtime.String(val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "collection_api_key.account_id", val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "account_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "collection_api_key.account_id", err)
 	}
 	val, ok = pathParams["collection_id"]
 	if !ok {
@@ -245,7 +245,7 @@ func RegisterCollectionApiKeyServiceHandlerServer(ctx context.Context, mux *runt
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -340,7 +340,7 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService/CreateCollectionApiKey", runtime.WithHTTPPathPattern("/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_id}/api-keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -375,7 +375,7 @@ func RegisterCollectionApiKeyServiceHandlerClient(ctx context.Context, mux *runt
 
 var (
 	pattern_CollectionApiKeyService_ListCollectionApiKeys_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys"}, ""))
-	pattern_CollectionApiKeyService_CreateCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys"}, ""))
+	pattern_CollectionApiKeyService_CreateCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8}, []string{"api", "serverless", "auth", "v1", "accounts", "collection_api_key.account_id", "collections", "collection_id", "api-keys"}, ""))
 	pattern_CollectionApiKeyService_DeleteCollectionApiKey_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5, 2, 6, 1, 0, 4, 1, 5, 7, 2, 8, 1, 0, 4, 1, 5, 9}, []string{"api", "serverless", "auth", "v1", "accounts", "account_id", "collections", "collection_id", "api-keys", "collection_api_key_id"}, ""))
 )
 

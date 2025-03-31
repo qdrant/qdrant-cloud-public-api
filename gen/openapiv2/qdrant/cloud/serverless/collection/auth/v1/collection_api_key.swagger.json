@@ -53,51 +53,6 @@
         "tags": [
           "CollectionApiKeyService"
         ]
-      },
-      "post": {
-        "summary": "CreateCollectionApiKey creates a new API key for a collection\nRequired Permissions:\n- write:serverless_api_keys",
-        "operationId": "CollectionApiKeyService_CreateCollectionApiKey",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateCollectionApiKeyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionId",
-            "description": "Collection the key will access (in Guid format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollectionApiKeyServiceCreateCollectionApiKeyBody"
-            }
-          }
-        ],
-        "tags": [
-          "CollectionApiKeyService"
-        ]
       }
     },
     "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/api-keys/{collectionApiKeyId}": {
@@ -145,15 +100,107 @@
           "CollectionApiKeyService"
         ]
       }
+    },
+    "/api/serverless/auth/v1/accounts/{collectionApiKey.accountId}/collections/{collectionId}/api-keys": {
+      "post": {
+        "summary": "CreateCollectionApiKey creates a new API key for a collection\nRequired Permissions:\n- write:serverless_api_keys",
+        "operationId": "CollectionApiKeyService_CreateCollectionApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateCollectionApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "collectionApiKey.accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionId",
+            "description": "Collection the key will access (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionApiKeyServiceCreateCollectionApiKeyBody"
+            }
+          }
+        ],
+        "tags": [
+          "CollectionApiKeyService"
+        ]
+      }
     }
   },
   "definitions": {
     "CollectionApiKeyServiceCreateCollectionApiKeyBody": {
       "type": "object",
       "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+        },
         "collectionApiKey": {
-          "$ref": "#/definitions/v1CollectionApiKey",
-          "description": "The API key to create.\nThis is a required field."
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the collection api key (in Guid format).\nThis is a read-only field and will be available after a collection api key is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the collection api key was created.\nThis is a read-only field and will be available after a collection api key is created."
+            },
+            "collectionId": {
+              "type": "string",
+              "description": "The identifier of the collection (in Guid format).\nThis is a required field."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the collection api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The expiration time of the collection api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+            },
+            "accessType": {
+              "type": "string",
+              "description": "The type of access granted for the collection.\n- \"read-only\": Grants access to perform collection-related actions that only read data.\n- \"read-write\": Grants access to perform collection-related actions that read or write data (like `upsert points`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user who created the collection api key.\nThis is a read-only field and will be available after a collection api key is created."
+            },
+            "postfix": {
+              "type": "string",
+              "description": "Postfix for the collection api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a collection api key is created."
+            },
+            "key": {
+              "type": "string",
+              "description": "The key for the collection api key.\nThis is a read-only field and will be available only once in the response of CreateCollectionApiKey.\nYou should securely store this key and it should be handled as a secret."
+            }
+          },
+          "description": "The API key to create.\nThis is a required field.",
+          "title": "The API key to create.\nThis is a required field."
         }
       },
       "title": "CreateCollectionApiKeyRequest defines parameters for creating a new collection API key"
