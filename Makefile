@@ -30,7 +30,12 @@ deps: ## Install the required dependencies to use this project.
 		bufbuild/buf/buf uv
 	uv sync
 
+.PHONY: buf/plugins
+buf/plugins: ## Install the required buf plugins (those that can't be install using Buf's deps)
+	export GOPRIVATE=github.com/qdrant/ && \
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-required-fields@latest && \
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-method-options@latest
 
 .PHONY: buf/deps
-buf/deps: ## Install the required dependencies to work with the protobuf files.
+buf/deps: buf/plugins ## Install the required dependencies to work with the protobuf files.
 	buf dep update

@@ -10,6 +10,12 @@ lint:
   use:
     - STANDARD
     - COMMENTS
+    - QDRANT_CLOUD_METHOD_OPTIONS
+    - QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+    - QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 breaking:
   use:
     - FILE
+plugins:
+  - plugin: buf-plugin-method-options
+  - plugin: buf-plugin-required-fields
