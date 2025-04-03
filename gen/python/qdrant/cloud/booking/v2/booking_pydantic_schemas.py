@@ -28,15 +28,15 @@ class ListPackagesRequest(BaseModel):
 
 class ResourceConfiguration(BaseModel):
     """
-     ResourceConfiguration configures a specific resource in a total resource configuration
+     ResourceConfiguration configures the resources of a package.
     """
 
-# The amount in the specified unit
-    amount: int = Field(default=0)
-# The unit of the resource, specifying what kind of unit the resource is measured in (e.g., m, Gib).
-    resource_unit: str = Field(default="")
-# The type of the resource, specifying the category or type of resource (e.g., vCPU, DiskSize).
-    resource_type: str = Field(default="")
+# The amount of the RAM resource. E.G 1GiB
+    ram: str = Field(default="")
+# The amount of the CPU resource. E.G 1000m (1 vCPU)
+    cpu: str = Field(default="")
+# The amount of the disk resource. E.G 10GiB
+    disk: str = Field(default="")
 
 class Package(BaseModel):
     """
@@ -52,8 +52,8 @@ class Package(BaseModel):
     name: str = Field(default="")
 # Specifies if this is a free or paid package.
     type: str = Field(default="")
-# A repeated field representing the resource configurations associated with the package.
-    resource_configurations: typing.List[ResourceConfiguration] = Field(default_factory=list)
+# A Field representing the resource configuration associated with the package.
+    resource_configuration: ResourceConfiguration = Field()
 # The currency of the prices.
 # Specifies the currency in which the prices are denominated.
     currency: str = Field(default="")

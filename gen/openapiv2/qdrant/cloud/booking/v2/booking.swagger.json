@@ -181,13 +181,9 @@
           "type": "string",
           "description": "Specifies if this is a free or paid package."
         },
-        "resourceConfigurations": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2ResourceConfiguration"
-          },
-          "description": "A repeated field representing the resource configurations associated with the package."
+        "resourceConfiguration": {
+          "$ref": "#/definitions/v2ResourceConfiguration",
+          "description": "A Field representing the resource configuration associated with the package."
         },
         "currency": {
           "type": "string",
@@ -208,21 +204,20 @@
     "v2ResourceConfiguration": {
       "type": "object",
       "properties": {
-        "amount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The amount in the specified unit"
-        },
-        "resourceUnit": {
+        "ram": {
           "type": "string",
-          "description": "The unit of the resource, specifying what kind of unit the resource is measured in (e.g., m, Gib)."
+          "title": "The amount of the RAM resource. E.G 1GiB"
         },
-        "resourceType": {
+        "cpu": {
           "type": "string",
-          "description": "The type of the resource, specifying the category or type of resource (e.g., vCPU, DiskSize)."
+          "title": "The amount of the CPU resource. E.G 1000m (1 vCPU)"
+        },
+        "disk": {
+          "type": "string",
+          "title": "The amount of the disk resource. E.G 10GiB"
         }
       },
-      "title": "ResourceConfiguration configures a specific resource in a total resource configuration"
+      "description": "ResourceConfiguration configures the resources of a package."
     }
   }
 }
