@@ -8,11 +8,6 @@ authors = [
     {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
 ]
 
-dependencies = [
-    "protobuf-to-pydantic[all]>=0.3.0.3",
-]
-
-
 [project.urls]
 Homepage = "https://github.com/qdrant/qdrant-cloud-public-api"
 Repository = "https://github.com/qdrant/qdrant-cloud-public-api"

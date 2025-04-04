@@ -37,13 +37,6 @@ plugins:
     include_imports: true
     out: gen/python
 
-  # Generate Python Pydantic schemas
-  - local: protoc-gen-protobuf-to-pydantic
-    opt:
-      - config_path=./plugin_configurations/config_for_pydantic_schemas_plugin.py
-      - config_worker_dir_path=./
-    out: gen/python
-
   # Generate bindings for gRPC-Gateway
   - remote: buf.build/grpc-ecosystem/gateway:v2.26.0
     out: gen/go
