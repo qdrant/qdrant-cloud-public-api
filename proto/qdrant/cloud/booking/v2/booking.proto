@@ -89,7 +89,7 @@ message Package {
   string name = 2;
   // Specifies if this is a free or paid package.
   string type = 3;
-  // A field representing the resource configuration associated with the package.
+  // The resource configuration associated with the package
   ResourceConfiguration resource_configuration = 4;
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
@@ -104,12 +104,12 @@ message Package {
   string status = 7;
 }
 
-// ResourceConfiguration configures the resources of a package.
+// ResourceConfiguration defines the resource configuration for a package.
 message ResourceConfiguration {
-  // The amount of the RAM resource. E.G 1GiB
+  // The amount of RAM (e.g., "1GiB")
   string ram = 1;
-  // The amount of the CPU resource. E.G 1000m (1 vCPU)
+  // The amount of CPU (e.g., "1000m" (1 vCPU))
   string cpu = 2;
-  // The amount of the disk resource. E.G 10GiB
+  // The amount of disk (e.g., "100GiB")
   string disk = 3;
 }
