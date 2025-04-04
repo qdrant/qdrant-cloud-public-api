@@ -89,8 +89,8 @@ message Package {
   string name = 2;
   // Specifies if this is a free or paid package.
   string type = 3;
-  // A repeated field representing the resource configurations associated with the package.
-  repeated ResourceConfiguration resource_configurations = 4;
+  // The resource configuration associated with the package
+  ResourceConfiguration resource_configuration = 4;
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
   string currency = 5;
@@ -104,12 +104,12 @@ message Package {
   string status = 7;
 }
 
-// ResourceConfiguration configures a specific resource in a total resource configuration
+// ResourceConfiguration defines the resource configuration for a package.
 message ResourceConfiguration {
-  // The amount in the specified unit
-  int32 amount = 1;
-  // The unit of the resource, specifying what kind of unit the resource is measured in (e.g., m, Gib).
-  string resource_unit = 2;
-  // The type of the resource, specifying the category or type of resource (e.g., vCPU, DiskSize).
-  string resource_type = 3;
+  // The amount of RAM (e.g., "1GiB")
+  string ram = 1;
+  // The amount of CPU (e.g., "1000m" (1 vCPU))
+  string cpu = 2;
+  // The amount of disk (e.g., "100GiB")
+  string disk = 3;
 }
