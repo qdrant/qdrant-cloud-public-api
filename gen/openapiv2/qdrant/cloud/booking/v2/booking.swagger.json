@@ -183,7 +183,7 @@
         },
         "resourceConfiguration": {
           "$ref": "#/definitions/v2ResourceConfiguration",
-          "description": "A Field representing the resource configuration associated with the package."
+          "title": "The resource configuration associated with the package"
         },
         "currency": {
           "type": "string",
@@ -206,18 +206,18 @@
       "properties": {
         "ram": {
           "type": "string",
-          "title": "The amount of the RAM resource. E.G 1GiB"
+          "title": "The amount of RAM (e.g., \"1GiB\")"
         },
         "cpu": {
           "type": "string",
-          "title": "The amount of the CPU resource. E.G 1000m (1 vCPU)"
+          "title": "The amount of CPU (e.g., \"1000m\" (1 vCPU))"
         },
         "disk": {
           "type": "string",
-          "title": "The amount of the disk resource. E.G 10GiB"
+          "title": "The amount of disk (e.g., \"100GiB\")"
         }
       },
-      "description": "ResourceConfiguration configures the resources of a package."
+      "description": "ResourceConfiguration defines the resource configuration for a package."
     }
   }
 }

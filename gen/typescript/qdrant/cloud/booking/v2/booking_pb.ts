@@ -164,7 +164,7 @@ export type Package = Message<"qdrant.cloud.booking.v2.Package"> & {
   type: string;
 
   /**
-   * A Field representing the resource configuration associated with the package.
+   * The resource configuration associated with the package
    *
    * @generated from field: qdrant.cloud.booking.v2.ResourceConfiguration resource_configuration = 4;
    */
@@ -205,27 +205,27 @@ export const PackageSchema: GenMessage<Package> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_booking_v2_booking, 4);
 
 /**
- * ResourceConfiguration configures the resources of a package.
+ * ResourceConfiguration defines the resource configuration for a package.
  *
  * @generated from message qdrant.cloud.booking.v2.ResourceConfiguration
  */
 export type ResourceConfiguration = Message<"qdrant.cloud.booking.v2.ResourceConfiguration"> & {
   /**
-   * The amount of the RAM resource. E.G 1GiB
+   * The amount of RAM (e.g., "1GiB")
    *
    * @generated from field: string ram = 1;
    */
   ram: string;
 
   /**
-   * The amount of the CPU resource. E.G 1000m (1 vCPU)
+   * The amount of CPU (e.g., "1000m" (1 vCPU))
    *
    * @generated from field: string cpu = 2;
    */
   cpu: string;
 
   /**
-   * The amount of the disk resource. E.G 10GiB
+   * The amount of disk (e.g., "100GiB")
    *
    * @generated from field: string disk = 3;
    */

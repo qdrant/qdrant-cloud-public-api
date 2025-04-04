@@ -262,7 +262,7 @@ type Package struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Specifies if this is a free or paid package.
 	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	// A Field representing the resource configuration associated with the package.
+	// The resource configuration associated with the package
 	ResourceConfiguration *ResourceConfiguration `protobuf:"bytes,4,opt,name=resource_configuration,json=resourceConfiguration,proto3" json:"resource_configuration,omitempty"`
 	// The currency of the prices.
 	// Specifies the currency in which the prices are denominated.
@@ -358,14 +358,14 @@ func (x *Package) GetStatus() string {
 	return ""
 }
 
-// ResourceConfiguration configures the resources of a package.
+// ResourceConfiguration defines the resource configuration for a package.
 type ResourceConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The amount of the RAM resource. E.G 1GiB
+	// The amount of RAM (e.g., "1GiB")
 	Ram string `protobuf:"bytes,1,opt,name=ram,proto3" json:"ram,omitempty"`
-	// The amount of the CPU resource. E.G 1000m (1 vCPU)
+	// The amount of CPU (e.g., "1000m" (1 vCPU))
 	Cpu string `protobuf:"bytes,2,opt,name=cpu,proto3" json:"cpu,omitempty"`
-	// The amount of the disk resource. E.G 10GiB
+	// The amount of disk (e.g., "100GiB")
 	Disk          string `protobuf:"bytes,3,opt,name=disk,proto3" json:"disk,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
