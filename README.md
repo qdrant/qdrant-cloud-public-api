@@ -57,7 +57,7 @@ Then you can import the generated code in your python project. Ex:
 
 ```python
 from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
-from qdrant.cloud.booking.v2.booking_pydantic_schemas import ListPackagesRequest
+from qdrant.cloud.booking.v2.booking_pb2 import ListPackagesRequest
 
 
 def main():
