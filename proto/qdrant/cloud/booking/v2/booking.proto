@@ -78,6 +78,7 @@ message GetPackageResponse {
   Package package = 1;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // Package represents a single package.
 // A package is a configuration (CPU/Memory/Disk size) for a cluster with a price.
 message Package {
