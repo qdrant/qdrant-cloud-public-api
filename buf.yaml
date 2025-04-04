@@ -3,11 +3,9 @@ version: v2
 modules:
   - path: proto
     name: github.com/qdrant/qdrant-cloud-public-api
-
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/bufbuild/protovalidate
-#  - https://github.com/so1n/protobuf_to_pydantic does not have supported remote. We use local plugin instead.
 lint:
   use:
     - STANDARD
