@@ -13,6 +13,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Setup access for private go modules
+        run: |
+          git config --global url.'https://${{ secrets.GH_REPO_READ_TOKEN }}@github.com'.insteadOf 'https://github.com'
+      - name: Install buf plugins
+        run: make buf/plugins
       - uses: bufbuild/buf-action@v1
         with:
           # Don't push the schema to the Buf Schema Registry

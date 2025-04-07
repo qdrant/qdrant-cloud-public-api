@@ -5,7 +5,7 @@ help: ## Display this help.
 ##@ Formatting & linting
 
 .PHONY: lint
-lint: buf/deps ## Check protobuf files for linting errors
+lint: buf/deps ## Check protobuf files for linting errors.
 	buf lint
 
 .PHONY: format
@@ -17,6 +17,7 @@ format: buf/deps ## Format protobuf files (in-place) using `buf format`.
 .PHONY: generate
 generate: clean format lint ## Generate language bindings.
 	uv run buf generate
+	./scripts/cleanup-gencode-comments.sh
 
 .PHONY: clean
 clean: ## Clean the directory with the generated language bindings.
@@ -30,7 +31,12 @@ deps: ## Install the required dependencies to use this project.
 		bufbuild/buf/buf uv
 	uv sync
 
+.PHONY: buf/plugins
+buf/plugins: ## Install the required buf plugins (those that can't be installed using Buf's deps option).
+	export GOPRIVATE=github.com/qdrant/ && \
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-required-fields@latest && \
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-method-options@latest
 
 .PHONY: buf/deps
-buf/deps: ## Install the required dependencies to work with the protobuf files.
+buf/deps: buf/plugins ## Install the required dependencies to work with the protobuf files.
 	buf dep update

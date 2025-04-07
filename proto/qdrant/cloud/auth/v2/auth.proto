@@ -83,6 +83,7 @@ message DeleteManagementKeyResponse {
   // Empty
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // A ManagementKey represents a management key of a Qdrant Cloud account.
 // This management key grants access to the Qdrant Cloud API.
 message ManagementKey {

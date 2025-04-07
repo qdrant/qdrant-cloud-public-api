@@ -536,6 +536,7 @@ message ClusterNodeResources {
   double available = 5;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // QdrantRelease represent a single Qdrant release
 message QdrantRelease {
   // Version of the Qdrant release
