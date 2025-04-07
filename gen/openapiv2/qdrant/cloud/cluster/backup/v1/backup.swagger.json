@@ -424,7 +424,7 @@
               "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
             },
             "status": {
-              "type": "string",
+              "$ref": "#/definitions/v1BackupStatus",
               "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
             },
             "deletedAt": {
@@ -476,8 +476,8 @@
               "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
             },
             "status": {
-              "type": "string",
-              "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+              "$ref": "#/definitions/v1BackupScheduleStatus",
+              "description": "The current status of the backup schedule."
             }
           },
           "description": "The actual backup schedule.",
@@ -515,8 +515,8 @@
               "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
             },
             "status": {
-              "type": "string",
-              "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+              "$ref": "#/definitions/v1BackupScheduleStatus",
+              "description": "The current status of the backup schedule."
             }
           },
           "description": "The actual backup schedule.",
@@ -578,7 +578,7 @@
           "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/v1BackupStatus",
           "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
         },
         "deletedAt": {
@@ -627,11 +627,38 @@
           "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
         },
         "status": {
-          "type": "string",
-          "description": "The current status of the backup schedule.\nThis is a read-only field and will be set after CreateBackupSchedule is called.\nThe possible values are:\n- Active: The backup schedule is active and functioning correctly.\n- FailedToSync: There was an error syncing the backup schedule in the cluster's region.\n- NotFound: The backup schedule isn't present in the cluster's region.\n- Unknown: The system didn't receive status information about the backup schedule from the cluster's region."
+          "$ref": "#/definitions/v1BackupScheduleStatus",
+          "description": "The current status of the backup schedule."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
+    },
+    "v1BackupScheduleStatus": {
+      "type": "string",
+      "enum": [
+        "BACKUP_SCHEDULE_STATUS_UNSPECIFIED",
+        "BACKUP_SCHEDULE_STATUS_ACTIVE",
+        "BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC",
+        "BACKUP_SCHEDULE_STATUS_NOT_FOUND",
+        "BACKUP_SCHEDULE_STATUS_UNKNOWN"
+      ],
+      "default": "BACKUP_SCHEDULE_STATUS_UNSPECIFIED",
+      "description": "BackupScheduleStatus represents the current status of a backup schedule.\n\n - BACKUP_SCHEDULE_STATUS_UNSPECIFIED: The status has not been specified. This is the default value.\n - BACKUP_SCHEDULE_STATUS_ACTIVE: The backup schedule is active and functioning correctly.\n - BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: There was an error syncing the backup schedule in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_NOT_FOUND: The backup schedule is missing in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_UNKNOWN: The system has not received any status information from the cluster's region."
+    },
+    "v1BackupStatus": {
+      "type": "string",
+      "enum": [
+        "BACKUP_STATUS_UNSPECIFIED",
+        "BACKUP_STATUS_RUNNING",
+        "BACKUP_STATUS_SKIPPED",
+        "BACKUP_STATUS_FAILED",
+        "BACKUP_STATUS_SUCCEEDED",
+        "BACKUP_STATUS_FAILED_TO_SYNC",
+        "BACKUP_STATUS_NOT_FOUND",
+        "BACKUP_STATUS_UNKNOWN"
+      ],
+      "default": "BACKUP_STATUS_UNSPECIFIED",
+      "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status has not been specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region.\n - BACKUP_STATUS_UNKNOWN: The system has not received any status information from the cluster's region."
     },
     "v1CreateBackupResponse": {
       "type": "object",

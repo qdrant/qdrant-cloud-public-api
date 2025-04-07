@@ -4,11 +4,44 @@ from google.protobuf import duration_pb2 as _duration_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class BackupStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    BACKUP_STATUS_UNSPECIFIED: _ClassVar[BackupStatus]
+    BACKUP_STATUS_RUNNING: _ClassVar[BackupStatus]
+    BACKUP_STATUS_SKIPPED: _ClassVar[BackupStatus]
+    BACKUP_STATUS_FAILED: _ClassVar[BackupStatus]
+    BACKUP_STATUS_SUCCEEDED: _ClassVar[BackupStatus]
+    BACKUP_STATUS_FAILED_TO_SYNC: _ClassVar[BackupStatus]
+    BACKUP_STATUS_NOT_FOUND: _ClassVar[BackupStatus]
+    BACKUP_STATUS_UNKNOWN: _ClassVar[BackupStatus]
+
+class BackupScheduleStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    BACKUP_SCHEDULE_STATUS_UNSPECIFIED: _ClassVar[BackupScheduleStatus]
+    BACKUP_SCHEDULE_STATUS_ACTIVE: _ClassVar[BackupScheduleStatus]
+    BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupScheduleStatus]
+    BACKUP_SCHEDULE_STATUS_NOT_FOUND: _ClassVar[BackupScheduleStatus]
+    BACKUP_SCHEDULE_STATUS_UNKNOWN: _ClassVar[BackupScheduleStatus]
+BACKUP_STATUS_UNSPECIFIED: BackupStatus
+BACKUP_STATUS_RUNNING: BackupStatus
+BACKUP_STATUS_SKIPPED: BackupStatus
+BACKUP_STATUS_FAILED: BackupStatus
+BACKUP_STATUS_SUCCEEDED: BackupStatus
+BACKUP_STATUS_FAILED_TO_SYNC: BackupStatus
+BACKUP_STATUS_NOT_FOUND: BackupStatus
+BACKUP_STATUS_UNKNOWN: BackupStatus
+BACKUP_SCHEDULE_STATUS_UNSPECIFIED: BackupScheduleStatus
+BACKUP_SCHEDULE_STATUS_ACTIVE: BackupScheduleStatus
+BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: BackupScheduleStatus
+BACKUP_SCHEDULE_STATUS_NOT_FOUND: BackupScheduleStatus
+BACKUP_SCHEDULE_STATUS_UNKNOWN: BackupScheduleStatus
 
 class ListBackupsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id", "backup_schedule_id")
@@ -145,10 +178,10 @@ class Backup(_message.Message):
     account_id: str
     cluster_id: str
     name: str
-    status: str
+    status: BackupStatus
     deleted_at: _timestamp_pb2.Timestamp
     backup_duration: _duration_pb2.Duration
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "cluster_id", "schedule", "retention_period", "deleted_at", "status")
@@ -167,5 +200,5 @@ class BackupSchedule(_message.Message):
     schedule: str
     retention_period: _duration_pb2.Duration
     deleted_at: _timestamp_pb2.Timestamp
-    status: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[str] = ...) -> None: ...
+    status: BackupScheduleStatus
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[BackupScheduleStatus, str]] = ...) -> None: ...

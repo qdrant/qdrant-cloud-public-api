@@ -246,6 +246,26 @@ message DeleteBackupScheduleResponse {
   // Empty
 }
 
+// BackupStatus represents the current status of a backup operation.
+enum BackupStatus {
+  // The status has not been specified. This is the default value.
+  BACKUP_STATUS_UNSPECIFIED = 0;
+  // The backup is currently in progress.
+  BACKUP_STATUS_RUNNING = 1;
+  // The backup was skipped.
+  BACKUP_STATUS_SKIPPED = 2;
+  // The backup failed to complete successfully.
+  BACKUP_STATUS_FAILED = 3;
+  // The backup completed successfully.
+  BACKUP_STATUS_SUCCEEDED = 4;
+  // There was an error syncing the backup in the cluster's region.
+  BACKUP_STATUS_FAILED_TO_SYNC = 5;
+  // The backup was expected but not found in the cluster's region.
+  BACKUP_STATUS_NOT_FOUND = 6;
+  // The system has not received any status information from the cluster's region.
+  BACKUP_STATUS_UNKNOWN = 7;
+}
+
 // A Backup represents a backup of a Qdrant database.
 message Backup {
   // Unique identifier for the backup (in Guid format).
@@ -270,17 +290,7 @@ message Backup {
   string name = 5;
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
-  string status = 6 [(buf.validate.field).string = {
-    in: [
-      "Running",
-      "Skipped",
-      "Failed",
-      "Succeeded",
-      "FailedToSync",
-      "NotFound",
-      "Unknown"
-    ]
-  }];
+  BackupStatus status = 6;
   // The timestamp when the backup was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackup is called.
   google.protobuf.Timestamp deleted_at = 7;
@@ -288,6 +298,20 @@ message Backup {
   // will be available after the backup process is completed, regardless of
   // whether it succeeded or failed.
   google.protobuf.Duration backup_duration = 8;
+}
+
+// BackupScheduleStatus represents the current status of a backup schedule.
+enum BackupScheduleStatus {
+  // The status has not been specified. This is the default value.
+  BACKUP_SCHEDULE_STATUS_UNSPECIFIED = 0;
+  // The backup schedule is active and functioning correctly.
+  BACKUP_SCHEDULE_STATUS_ACTIVE = 1;
+  // There was an error syncing the backup schedule in the cluster's region.
+  BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC = 2;
+  // The backup schedule is missing in the cluster's region.
+  BACKUP_SCHEDULE_STATUS_NOT_FOUND = 3;
+  // The system has not received any status information from the cluster's region.
+  BACKUP_SCHEDULE_STATUS_UNKNOWN = 4;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -325,18 +349,5 @@ message BackupSchedule {
   // This is a read-only field and will be set after DeleteBackupSchedule is called.
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
-  // This is a read-only field and will be set after CreateBackupSchedule is called.
-  // The possible values are:
-  // - Active: The backup schedule is active and functioning correctly.
-  // - FailedToSync: There was an error syncing the backup schedule in the cluster's region.
-  // - NotFound: The backup schedule isn't present in the cluster's region.
-  // - Unknown: The system didn't receive status information about the backup schedule from the cluster's region.
-  string status = 8 [(buf.validate.field).string = {
-    in: [
-      "Active",
-      "FailedToSync",
-      "NotFound",
-      "Unknown"
-    ]
-  }];
+  BackupScheduleStatus status = 8;
 }
