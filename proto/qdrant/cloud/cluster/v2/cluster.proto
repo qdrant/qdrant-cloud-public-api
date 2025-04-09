@@ -327,7 +327,7 @@ message ClusterConfiguration {
     gte: 0
     lte: 80
   }];
-  // The gpu type that should be usd for the dtabase
+  // The gpu type that should be usd for the database
   // This is an optional field, default is No configured GPU
   // The allowed values are: nvidia, amd
   optional string gpu_type = 22 [(buf.validate.field).string = {
