@@ -126,7 +126,7 @@ class Cluster(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ...) -> None: ...
 
 class ClusterConfiguration(_message.Message):
-    __slots__ = ("last_modified_at", "number_of_nodes", "version", "package_id", "additional_resources", "database_configuration", "node_selector", "tolerations", "annotations", "allowed_ip_source_ranges", "reserved_cpu_percentage", "reserved_memory_percentage")
+    __slots__ = ("last_modified_at", "number_of_nodes", "version", "package_id", "additional_resources", "database_configuration", "node_selector", "tolerations", "annotations", "allowed_ip_source_ranges", "reserved_cpu_percentage", "reserved_memory_percentage", "gpu_type", "restart_policy")
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -139,6 +139,8 @@ class ClusterConfiguration(_message.Message):
     ALLOWED_IP_SOURCE_RANGES_FIELD_NUMBER: _ClassVar[int]
     RESERVED_CPU_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
     RESERVED_MEMORY_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    GPU_TYPE_FIELD_NUMBER: _ClassVar[int]
+    RESTART_POLICY_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
     number_of_nodes: int
     version: str
@@ -151,7 +153,9 @@ class ClusterConfiguration(_message.Message):
     allowed_ip_source_ranges: _containers.RepeatedScalarFieldContainer[str]
     reserved_cpu_percentage: int
     reserved_memory_percentage: int
-    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ...) -> None: ...
+    gpu_type: str
+    restart_policy: str
+    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[str] = ..., restart_policy: _Optional[str] = ...) -> None: ...
 
 class DatabaseConfiguration(_message.Message):
     __slots__ = ("collection", "storage", "service", "log_level", "tls", "inference")

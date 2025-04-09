@@ -327,6 +327,25 @@ message ClusterConfiguration {
     gte: 0
     lte: 80
   }];
+  // The gpu type that should be usd for the dtabase
+  // This is an optional field, default is No configured GPU
+  // The allowed values are: nvidia, amd
+  optional string gpu_type = 22 [(buf.validate.field).string = {
+    in: [
+      "nvidia",
+      "amd"
+    ]
+  }];
+  // The restart policy for the database
+  // This is an optional field, default is Automatic
+  // The allowed values are: Rolling, Parallel, Automatic
+  optional string restart_policy = 23 [(buf.validate.field).string = {
+    in: [
+      "Rolling",
+      "Parallel",
+      "Automatic"
+    ]
+  }];
 }
 
 // Configuration to setup a Qdrant database in a hybrid cloud.

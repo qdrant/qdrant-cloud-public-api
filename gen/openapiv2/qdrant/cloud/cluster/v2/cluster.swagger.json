@@ -580,6 +580,14 @@
           "type": "integer",
           "format": "int64",
           "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+        },
+        "gpuType": {
+          "type": "string",
+          "title": "The gpu type that should be usd for the dtabase\nThis is an optional field, default is No configured GPU\nThe allowed values are: nvidia, amd"
+        },
+        "restartPolicy": {
+          "type": "string",
+          "title": "The restart policy for the database\nThis is an optional field, default is Automatic\nThe allowed values are: Rolling, Parallel, Automatic"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
