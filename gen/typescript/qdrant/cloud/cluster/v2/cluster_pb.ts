@@ -570,7 +570,7 @@ export type ClusterConfiguration = Message<"qdrant.cloud.cluster.v2.ClusterConfi
   reservedMemoryPercentage: number;
 
   /**
-   * The gpu type that should be usd for the database
+   * The gpu type that should be used for the database
    * This is an optional field, default is No configured GPU
    * The allowed values are: nvidia, amd
    *

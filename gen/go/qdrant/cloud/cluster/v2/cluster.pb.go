@@ -908,7 +908,7 @@ type ClusterConfiguration struct {
 	// This is an optional field, default is 0.
 	// Number between 0..80
 	ReservedMemoryPercentage uint32 `protobuf:"varint,21,opt,name=reserved_memory_percentage,json=reservedMemoryPercentage,proto3" json:"reserved_memory_percentage,omitempty"`
-	// The gpu type that should be usd for the database
+	// The gpu type that should be used for the database
 	// This is an optional field, default is No configured GPU
 	// The allowed values are: nvidia, amd
 	GpuType *string `protobuf:"bytes,22,opt,name=gpu_type,json=gpuType,proto3,oneof" json:"gpu_type,omitempty"`

@@ -583,7 +583,7 @@
         },
         "gpuType": {
           "type": "string",
-          "title": "The gpu type that should be usd for the database\nThis is an optional field, default is No configured GPU\nThe allowed values are: nvidia, amd"
+          "title": "The gpu type that should be used for the database\nThis is an optional field, default is No configured GPU\nThe allowed values are: nvidia, amd"
         },
         "restartPolicy": {
           "type": "string",
