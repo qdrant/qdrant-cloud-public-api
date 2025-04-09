@@ -346,6 +346,16 @@ message ClusterConfiguration {
       "Automatic"
     ]
   }];
+  // The automatic shard rebalancing strategy for the database
+  // This is an optional field, default is none
+  // The allowed values are: by_count, by_size, by_count_and_size
+  optional string rebalance_strategy = 24 [(buf.validate.field).string = {
+    in: [
+      "by_count",
+      "by_size",
+      "by_count_and_size"
+    ]
+  }];
 }
 
 // Configuration to setup a Qdrant database in a hybrid cloud.

@@ -588,6 +588,10 @@
         "restartPolicy": {
           "type": "string",
           "title": "The restart policy for the database\nThis is an optional field, default is Automatic\nThe allowed values are: Rolling, Parallel, Automatic"
+        },
+        "rebalanceStrategy": {
+          "type": "string",
+          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none\nThe allowed values are: by_count, by_size, by_count_and_size"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
