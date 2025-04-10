@@ -327,6 +327,35 @@ message ClusterConfiguration {
     gte: 0
     lte: 80
   }];
+  // The gpu type that should be used for the database
+  // This is an optional field, default is No configured GPU
+  // The allowed values are: nvidia, amd
+  optional string gpu_type = 22 [(buf.validate.field).string = {
+    in: [
+      "nvidia",
+      "amd"
+    ]
+  }];
+  // The restart policy for the database
+  // This is an optional field, default is Automatic
+  // The allowed values are: Rolling, Parallel, Automatic
+  optional string restart_policy = 23 [(buf.validate.field).string = {
+    in: [
+      "Rolling",
+      "Parallel",
+      "Automatic"
+    ]
+  }];
+  // The automatic shard rebalancing strategy for the database
+  // This is an optional field, default is none
+  // The allowed values are: by_count, by_size, by_count_and_size
+  optional string rebalance_strategy = 24 [(buf.validate.field).string = {
+    in: [
+      "by_count",
+      "by_size",
+      "by_count_and_size"
+    ]
+  }];
 }
 
 // Configuration to setup a Qdrant database in a hybrid cloud.
