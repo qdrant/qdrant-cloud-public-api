@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/platform/v1/platform.proto.
  */
 export const file_qdrant_cloud_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSI5ChlMaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlQKGkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlEjYKBWl0ZW1zGAEgAygLMicucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXIiYwofTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIiChFjbG91ZF9wcm92aWRlcl9pZBgCIAEoCUIHukgEcgIQAyJgCiBMaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXNwb25zZRI8CgVpdGVtcxgBIAMoCzItLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyUmVnaW9uIikKDUNsb3VkUHJvdmlkZXISCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCSIhChNDbG91ZFByb3ZpZGVyUmVnaW9uEgoKAmlkGAEgASgJMssDCg9QbGF0Zm9ybVNlcnZpY2USwwEKEkxpc3RDbG91ZFByb3ZpZGVycxIzLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIkKKtRgAgtPkkwI4EjYvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMS8QEKGExpc3RDbG91ZFByb3ZpZGVyUmVnaW9ucxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIl6KtRgAgtPkkwJUElIvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMve2Nsb3VkX3Byb3ZpZGVyX2lkfS9yZWdpb25zQoYCChxjb20ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaVGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1FDUKoCGFFkcmFudC5DbG91ZC5QbGF0Zm9ybS5WMcoCGFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMeICJFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCG1FkcmFudDo6Q2xvdWQ6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSI5ChlMaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlQKGkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlEjYKBWl0ZW1zGAEgAygLMicucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXIiIQofTGlzdEdsb2JhbENsb3VkUHJvdmlkZXJzUmVxdWVzdCJaCiBMaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXNwb25zZRI2CgVpdGVtcxgBIAMoCzInLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyImMKH0xpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIgoRY2xvdWRfcHJvdmlkZXJfaWQYAiABKAlCB7pIBHICEAMiYAogTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVzcG9uc2USPAoFaXRlbXMYASADKAsyLS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuQ2xvdWRQcm92aWRlclJlZ2lvbiI8Cg1DbG91ZFByb3ZpZGVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSEQoJZnJlZV90aWVyGAMgASgIImoKE0Nsb3VkUHJvdmlkZXJSZWdpb24SCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIYChBjb3VudHJ5X2lzb19jb2RlGAMgASgJEh8KF2dlb2dyYXBoaWNhbF9zdWJfcmVnaW9uGAQgASgJMpEFCg9QbGF0Zm9ybVNlcnZpY2USwwEKGExpc3RHbG9iYWxDbG91ZFByb3ZpZGVycxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RHbG9iYWxDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIjCKtRgAmLUYAILT5JMCIhIgL2FwaS9wbGF0Zm9ybS92MS9jbG91ZC1wcm92aWRlcnMSwwEKEkxpc3RDbG91ZFByb3ZpZGVycxIzLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIkKKtRgAgtPkkwI4EjYvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMS8QEKGExpc3RDbG91ZFByb3ZpZGVyUmVnaW9ucxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIl6KtRgAgtPkkwJUElIvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMve2Nsb3VkX3Byb3ZpZGVyX2lkfS9yZWdpb25zQoYCChxjb20ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaVGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1FDUKoCGFFkcmFudC5DbG91ZC5QbGF0Zm9ybS5WMcoCGFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMeICJFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCG1FkcmFudDo6Q2xvdWQ6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListCloudProvidersRequest is the request for the ListCloudProviders function.
@@ -59,6 +59,42 @@ export const ListCloudProvidersResponseSchema: GenMessage<ListCloudProvidersResp
   messageDesc(file_qdrant_cloud_platform_v1_platform, 1);
 
 /**
+ * ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest
+ */
+export type ListGlobalCloudProvidersRequest = Message<"qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest.
+ * Use `create(ListGlobalCloudProvidersRequestSchema)` to create a new message.
+ */
+export const ListGlobalCloudProvidersRequestSchema: GenMessage<ListGlobalCloudProvidersRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 2);
+
+/**
+ * ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse
+ */
+export type ListGlobalCloudProvidersResponse = Message<"qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse"> & {
+  /**
+   * The cloud providers
+   *
+   * @generated from field: repeated qdrant.cloud.platform.v1.CloudProvider items = 1;
+   */
+  items: CloudProvider[];
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse.
+ * Use `create(ListGlobalCloudProvidersResponseSchema)` to create a new message.
+ */
+export const ListGlobalCloudProvidersResponseSchema: GenMessage<ListGlobalCloudProvidersResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 3);
+
+/**
  * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
@@ -86,7 +122,7 @@ export type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.
  * Use `create(ListCloudProviderRegionsRequestSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsRequestSchema: GenMessage<ListCloudProviderRegionsRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 2);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
 
 /**
  * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
@@ -107,7 +143,7 @@ export type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.platform.v1
  * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 3);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 5);
 
 /**
  * CloudProvider represents a cloud provider identifier and name.
@@ -130,6 +166,13 @@ export type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvider"> & 
    * @generated from field: string name = 2;
    */
   name: string;
+
+  /**
+   * Whether the cloud provider is part of the free-tier offering.
+   *
+   * @generated from field: bool free_tier = 3;
+   */
+  freeTier: boolean;
 };
 
 /**
@@ -137,7 +180,7 @@ export type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvider"> & 
  * Use `create(CloudProviderSchema)` to create a new message.
  */
 export const CloudProviderSchema: GenMessage<CloudProvider> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 6);
 
 /**
  * CloudProvider represents a cloud provider region.
@@ -152,6 +195,29 @@ export type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.CloudProvide
    * @generated from field: string id = 1;
    */
   id: string;
+
+  /**
+   * The human-readable name of the cloud provider region.
+   * e.g. "Frankfurt", "Tokyo", etc.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * ISO 3166-1 alpha-2 country codes for different countries to display for each region.
+   *
+   * @generated from field: string country_iso_code = 3;
+   */
+  countryIsoCode: string;
+
+  /**
+   * Geographic location grouping of the region.
+   * e.g. "Europe", "Asia", "North America", etc.
+   *
+   * @generated from field: string geographical_sub_region = 4;
+   */
+  geographicalSubRegion: string;
 };
 
 /**
@@ -159,7 +225,7 @@ export type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.CloudProvide
  * Use `create(CloudProviderRegionSchema)` to create a new message.
  */
 export const CloudProviderRegionSchema: GenMessage<CloudProviderRegion> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 5);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 7);
 
 /**
  * PlatformService is the API used to query for cloud provider & regional information.
@@ -167,6 +233,18 @@ export const CloudProviderRegionSchema: GenMessage<CloudProviderRegion> = /*@__P
  * @generated from service qdrant.cloud.platform.v1.PlatformService
  */
 export const PlatformService: GenService<{
+  /**
+   * Fetch all available cloud providers globally (not account-specific).
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders
+   */
+  listGlobalCloudProviders: {
+    methodKind: "unary";
+    input: typeof ListGlobalCloudProvidersRequestSchema;
+    output: typeof ListGlobalCloudProvidersResponseSchema;
+  },
   /**
    * Fetch all cloud providers in the account identified by the given ID.
    * Required permissions:

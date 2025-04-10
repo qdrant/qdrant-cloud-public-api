@@ -15,6 +15,11 @@ class PlatformServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.ListGlobalCloudProviders = channel.unary_unary(
+                '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders',
+                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
+                _registered_method=True)
         self.ListCloudProviders = channel.unary_unary(
                 '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders',
                 request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
@@ -30,6 +35,15 @@ class PlatformServiceStub(object):
 class PlatformServiceServicer(object):
     """PlatformService is the API used to query for cloud provider & regional information.
     """
+
+    def ListGlobalCloudProviders(self, request, context):
+        """Fetch all available cloud providers globally (not account-specific).
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def ListCloudProviders(self, request, context):
         """Fetch all cloud providers in the account identified by the given ID.
@@ -52,6 +66,11 @@ class PlatformServiceServicer(object):
 
 def add_PlatformServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'ListGlobalCloudProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListGlobalCloudProviders,
+                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.SerializeToString,
+            ),
             'ListCloudProviders': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCloudProviders,
                     request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.FromString,
@@ -73,6 +92,33 @@ def add_PlatformServiceServicer_to_server(servicer, server):
 class PlatformService(object):
     """PlatformService is the API used to query for cloud provider & regional information.
     """
+
+    @staticmethod
+    def ListGlobalCloudProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders',
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def ListCloudProviders(request,
