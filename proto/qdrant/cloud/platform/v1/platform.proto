@@ -98,8 +98,8 @@ message CloudProviderRegion {
   // e.g. "Frankfurt", "Tokyo", etc.
   string name = 2;
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
-  string country_iso_code = 3;
+  optional string country_iso_code = 3;
   // Geographic location grouping of the region.
   // e.g. "Europe", "Asia", "North America", etc.
-  string geographical_sub_region = 4;
+  optional string geographical_sub_region = 4;
 }
