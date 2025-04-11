@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	PlatformService_ListGlobalCloudProviders_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders"
 	PlatformService_ListCloudProviders_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders"
 	PlatformService_ListCloudProviderRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
 )
@@ -29,6 +30,8 @@ const (
 //
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceClient interface {
+	// Fetch all available cloud providers globally (not account-specific).
+	ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error)
 	// Fetch all cloud providers in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
@@ -45,6 +48,16 @@ type platformServiceClient struct {
 
 func NewPlatformServiceClient(cc grpc.ClientConnInterface) PlatformServiceClient {
 	return &platformServiceClient{cc}
+}
+
+func (c *platformServiceClient) ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGlobalCloudProvidersResponse)
+	err := c.cc.Invoke(ctx, PlatformService_ListGlobalCloudProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *platformServiceClient) ListCloudProviders(ctx context.Context, in *ListCloudProvidersRequest, opts ...grpc.CallOption) (*ListCloudProvidersResponse, error) {
@@ -73,6 +86,8 @@ func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in
 //
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceServer interface {
+	// Fetch all available cloud providers globally (not account-specific).
+	ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error)
 	// Fetch all cloud providers in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
@@ -91,6 +106,9 @@ type PlatformServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPlatformServiceServer struct{}
 
+func (UnimplementedPlatformServiceServer) ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalCloudProviders not implemented")
+}
 func (UnimplementedPlatformServiceServer) ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCloudProviders not implemented")
 }
@@ -116,6 +134,24 @@ func RegisterPlatformServiceServer(s grpc.ServiceRegistrar, srv PlatformServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&PlatformService_ServiceDesc, srv)
+}
+
+func _PlatformService_ListGlobalCloudProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalCloudProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformServiceServer).ListGlobalCloudProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformService_ListGlobalCloudProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformServiceServer).ListGlobalCloudProviders(ctx, req.(*ListGlobalCloudProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _PlatformService_ListCloudProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -161,6 +197,10 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.platform.v1.PlatformService",
 	HandlerType: (*PlatformServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListGlobalCloudProviders",
+			Handler:    _PlatformService_ListGlobalCloudProviders_Handler,
+		},
 		{
 			MethodName: "ListCloudProviders",
 			Handler:    _PlatformService_ListCloudProviders_Handler,

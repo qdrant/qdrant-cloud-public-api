@@ -86,6 +86,29 @@
           "PlatformService"
         ]
       }
+    },
+    "/api/platform/v1/cloud-providers": {
+      "get": {
+        "summary": "Fetch all available cloud providers globally (not account-specific).",
+        "operationId": "PlatformService_ListGlobalCloudProviders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListGlobalCloudProvidersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PlatformService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -127,6 +150,10 @@
         "name": {
           "type": "string",
           "description": "The human-readable name of the cloud provider.\ne.g. \"Amazon Web Services\", \"Google Cloud\", \"Microsoft Azure\", \"Hybrid Cloud\"."
+        },
+        "freeTier": {
+          "type": "boolean",
+          "description": "Whether the cloud provider is part of the free-tier offering."
         }
       },
       "description": "CloudProvider represents a cloud provider identifier and name."
@@ -137,6 +164,18 @@
         "id": {
           "type": "string",
           "description": "The identifier for the cloud provider region.\ne.g. \"us-west-1\", \"europe-west1\", \"eastus\", \"{UUID in case of hybrid cloud}\"."
+        },
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the cloud provider region.\ne.g. \"Frankfurt\", \"Tokyo\", etc."
+        },
+        "countryIsoCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country codes for different countries to display for each region."
+        },
+        "geographicalSubRegion": {
+          "type": "string",
+          "description": "Geographic location grouping of the region.\ne.g. \"Europe\", \"Asia\", \"North America\", etc."
         }
       },
       "description": "CloudProvider represents a cloud provider region."
@@ -168,6 +207,20 @@
         }
       },
       "description": "ListCloudProvidersResponse is the response from the ListCloudProviders function."
+    },
+    "v1ListGlobalCloudProvidersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProvider"
+          },
+          "title": "The cloud providers"
+        }
+      },
+      "description": "ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function."
     }
   }
 }
