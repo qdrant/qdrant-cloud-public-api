@@ -89,7 +89,7 @@
     },
     "/api/platform/v1/cloud-providers": {
       "get": {
-        "summary": "Fetch all available cloud providers globally (not account-specific).\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Fetch all available cloud providers globally (not account-specific).",
         "operationId": "PlatformService_ListGlobalCloudProviders",
         "responses": {
           "200": {

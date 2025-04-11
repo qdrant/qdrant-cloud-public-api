@@ -8,12 +8,9 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // PlatformService is the API used to query for cloud provider & regional information.
 service PlatformService {
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Fetch all available cloud providers globally (not account-specific).
-  // Required permissions:
-  // - None (authenticated only)
   rpc ListGlobalCloudProviders(ListGlobalCloudProvidersRequest) returns (ListGlobalCloudProvidersResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call

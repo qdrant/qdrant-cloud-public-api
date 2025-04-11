@@ -31,8 +31,6 @@ const (
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceClient interface {
 	// Fetch all available cloud providers globally (not account-specific).
-	// Required permissions:
-	// - None (authenticated only)
 	ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error)
 	// Fetch all cloud providers in the account identified by the given ID.
 	// Required permissions:
@@ -89,8 +87,6 @@ func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceServer interface {
 	// Fetch all available cloud providers globally (not account-specific).
-	// Required permissions:
-	// - None (authenticated only)
 	ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error)
 	// Fetch all cloud providers in the account identified by the given ID.
 	// Required permissions:
