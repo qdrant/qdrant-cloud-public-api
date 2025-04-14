@@ -10,10 +10,12 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListDatabaseApiKeysRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ("account_id", "cluster_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class ListDatabaseApiKeysResponse(_message.Message):
     __slots__ = ("items",)
@@ -34,29 +36,70 @@ class CreateDatabaseApiKeyResponse(_message.Message):
     def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ("account_id", "database_api_key_id")
+    __slots__ = ("account_id", "cluster_id", "database_api_key_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     DATABASE_API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
+    cluster_id: str
     database_api_key_id: str
-    def __init__(self, account_id: _Optional[str] = ..., database_api_key_id: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., database_api_key_id: _Optional[str] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "cluster_ids", "prefix", "key")
+    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
-    CLUSTER_IDS_FIELD_NUMBER: _ClassVar[int]
-    PREFIX_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
+    ACCESS_RULES_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    POSTFIX_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     created_at: _timestamp_pb2.Timestamp
-    cluster_ids: _containers.RepeatedScalarFieldContainer[str]
-    prefix: str
+    cluster_id: str
+    name: str
+    expires_at: _timestamp_pb2.Timestamp
+    access_rules: _containers.RepeatedCompositeFieldContainer[AccessRule]
+    created_by_email: str
+    postfix: str
     key: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_ids: _Optional[_Iterable[str]] = ..., prefix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+
+class AccessRule(_message.Message):
+    __slots__ = ("global_access", "collection_access")
+    GLOBAL_ACCESS_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_ACCESS_FIELD_NUMBER: _ClassVar[int]
+    global_access: GlobalAccessRule
+    collection_access: CollectionAccessRule
+    def __init__(self, global_access: _Optional[_Union[GlobalAccessRule, _Mapping]] = ..., collection_access: _Optional[_Union[CollectionAccessRule, _Mapping]] = ...) -> None: ...
+
+class GlobalAccessRule(_message.Message):
+    __slots__ = ("access_type",)
+    ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
+    access_type: str
+    def __init__(self, access_type: _Optional[str] = ...) -> None: ...
+
+class CollectionAccessRule(_message.Message):
+    __slots__ = ("collection_name", "access_type", "payload")
+    class PayloadEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
+    PAYLOAD_FIELD_NUMBER: _ClassVar[int]
+    collection_name: str
+    access_type: str
+    payload: _containers.ScalarMap[str, str]
+    def __init__(self, collection_name: _Optional[str] = ..., access_type: _Optional[str] = ..., payload: _Optional[_Mapping[str, str]] = ...) -> None: ...

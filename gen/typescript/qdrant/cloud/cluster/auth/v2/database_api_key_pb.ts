@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/cluster/auth/v2/database_api_key.proto.
  */
 export const file_qdrant_cloud_cluster_auth_v2_database_api_key: GenFile = /*@__PURE__*/
-  fileDesc("CjNxZHJhbnQvY2xvdWQvY2x1c3Rlci9hdXRoL3YyL2RhdGFiYXNlX2FwaV9rZXkucHJvdG8SHHFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIiOgoaTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQEiWgobTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlEjsKBWl0ZW1zGAEgAygLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSJlChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSRgoQZGF0YWJhc2VfYXBpX2tleRgBIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGF0YWJhc2VBcGlLZXkiZgocQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZRJGChBkYXRhYmFzZV9hcGlfa2V5GAEgASgLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSJiChtEZWxldGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESJQoTZGF0YWJhc2VfYXBpX2tleV9pZBgCIAEoCUIIukgFcgOwAQEiHgocRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSLhAgoORGF0YWJhc2VBcGlLZXkSCgoCaWQYASABKAkSHAoKYWNjb3VudF9pZBgCIAEoCUIIukgFcgOwAQESLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASIgoLY2x1c3Rlcl9pZHMYBCADKAlCDbpICpIBByIFcgOwAQESDgoGcHJlZml4GAUgASgJEgsKA2tleRgGIAEoCTqzAbpIrwEarAEKE2RhdGFiYXNlX2FwaV9rZXkuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpMpYGChVEYXRhYmFzZUFwaUtleVNlcnZpY2US4QEKE0xpc3REYXRhYmFzZUFwaUtleXMSOC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkxpc3REYXRhYmFzZUFwaUtleXNSZXF1ZXN0GjkucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5MaXN0RGF0YWJhc2VBcGlLZXlzUmVzcG9uc2UiVYq1GA1yZWFkOmFwaV9rZXlzgtPkkwI+EjwvYXBpL2NsdXN0ZXIvYXV0aC92Mi9hY2NvdW50cy97YWNjb3VudF9pZH0vZGF0YWJhc2UtYXBpLWtleXMSmQIKFENyZWF0ZURhdGFiYXNlQXBpS2V5EjkucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5DcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QaOi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNyZWF0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2UiiQGKtRgOd3JpdGU6YXBpX2tleXOStRgbZGF0YWJhc2VfYXBpX2tleS5hY2NvdW50X2lkgtPkkwJSOgEqIk0vYXBpL2NsdXN0ZXIvYXV0aC92Mi9hY2NvdW50cy97ZGF0YWJhc2VfYXBpX2tleS5hY2NvdW50X2lkfS9kYXRhYmFzZS1hcGkta2V5cxL8AQoURGVsZXRlRGF0YWJhc2VBcGlLZXkSOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkRlbGV0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBo6LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSJtirUYD2RlbGV0ZTphcGlfa2V5c4LT5JMCVCpSL2FwaS9jbHVzdGVyL2F1dGgvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L2RhdGFiYXNlLWFwaS1rZXlzL3tkYXRhYmFzZV9hcGlfa2V5X2lkfUKiAgogY29tLnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjJCE0RhdGFiYXNlQXBpS2V5UHJvdG9QAVpUZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9jbHVzdGVyL2F1dGgvdjI7YXV0aHYyogIEUUNDQaoCHFFkcmFudC5DbG91ZC5DbHVzdGVyLkF1dGguVjLKAhxRZHJhbnRcQ2xvdWRcQ2x1c3RlclxBdXRoXFYy4gIoUWRyYW50XENsb3VkXENsdXN0ZXJcQXV0aFxWMlxHUEJNZXRhZGF0YeoCIFFkcmFudDo6Q2xvdWQ6OkNsdXN0ZXI6OkF1dGg6OlYyYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CjNxZHJhbnQvY2xvdWQvY2x1c3Rlci9hdXRoL3YyL2RhdGFiYXNlX2FwaV9rZXkucHJvdG8SHHFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIiWAoaTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQEiWgobTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlEjsKBWl0ZW1zGAEgAygLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSJlChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSRgoQZGF0YWJhc2VfYXBpX2tleRgBIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGF0YWJhc2VBcGlLZXkiZgocQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZRJGChBkYXRhYmFzZV9hcGlfa2V5GAEgASgLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSKAAQobRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBEiUKE2RhdGFiYXNlX2FwaV9rZXlfaWQYAyABKAlCCLpIBXIDsAEBIh4KHERlbGV0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2UitgcKDkRhdGFiYXNlQXBpS2V5EgoKAmlkGAEgASgJEhwKCmFjY291bnRfaWQYAiABKAlCCLpIBXIDsAEBEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmNsdXN0ZXJfaWQYBCABKAlCCLpIBXIDsAEBEiQKBG5hbWUYBSABKAlCFrpIE3IREAQYgAEyCl5bXHdccy1dKyQSMwoKZXhwaXJlc19hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAIgBARJICgxhY2Nlc3NfcnVsZXMYByADKAsyKC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkFjY2Vzc1J1bGVCCLpIBZIBAhAUEhgKEGNyZWF0ZWRfYnlfZW1haWwYCCABKAkSDwoHcG9zdGZpeBgJIAEoCRILCgNrZXkYCiABKAk6vwS6SLsEGqwBChNkYXRhYmFzZV9hcGlfa2V5LmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KRrmAQoebm9fbWl4ZWRfZ2xvYmFsX2FuZF9jb2xsZWN0aW9uEk9UaGVyZSBjYW4ndCBiZSBnbG9iYWwgYW5kIGNvbGxlY3Rpb24gYWNjZXNzIHJ1bGVzIGluIHRoZSBzYW1lIGRhdGFiYXNlIGFwaSBrZXkuGnMhKHRoaXMuYWNjZXNzX3J1bGVzLmV4aXN0cyhyLCByLmdsb2JhbF9hY2Nlc3MgIT0gbnVsbCkgJiYgdGhpcy5hY2Nlc3NfcnVsZXMuZXhpc3RzKHIsIHIuY29sbGVjdGlvbl9hY2Nlc3MgIT0gbnVsbCkpGqABChZvbmx5X29uZV9nbG9iYWxfYWNjZXNzEkVUaGVyZSBjYW4ndCBiZSBtb3JlIHRoYW4gb25lIGdsb2JhbCBhY2Nlc3MgcnVsZSBpbiB0aGUgY29uZmlndXJhdGlvbi4aP3NpemUodGhpcy5hY2Nlc3NfcnVsZXMuZmlsdGVyKHIsIHIuZ2xvYmFsX2FjY2VzcyAhPSBudWxsKSkgPD0gMUINCgtfZXhwaXJlc19hdCKvAQoKQWNjZXNzUnVsZRJHCg1nbG9iYWxfYWNjZXNzGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5HbG9iYWxBY2Nlc3NSdWxlSAASTwoRY29sbGVjdGlvbl9hY2Nlc3MYAiABKAsyMi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNvbGxlY3Rpb25BY2Nlc3NSdWxlSABCBwoFc2NvcGUiQQoQR2xvYmFsQWNjZXNzUnVsZRItCgthY2Nlc3NfdHlwZRgBIAEoCUIYukgVchNSCXJlYWQtb25seVIGbWFuYWdlIoECChRDb2xsZWN0aW9uQWNjZXNzUnVsZRI0Cg9jb2xsZWN0aW9uX25hbWUYASABKAlCG7pIGHIWEAQYQDIQXlthLXpBLVowLTktX10rJBIxCgthY2Nlc3NfdHlwZRgCIAEoCUIcukgZchdSCXJlYWQtb25seVIKcmVhZC13cml0ZRJQCgdwYXlsb2FkGAMgAygLMj8ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5Db2xsZWN0aW9uQWNjZXNzUnVsZS5QYXlsb2FkRW50cnkaLgoMUGF5bG9hZEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEylgYKFURhdGFiYXNlQXBpS2V5U2VydmljZRLhAQoTTGlzdERhdGFiYXNlQXBpS2V5cxI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QaOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkxpc3REYXRhYmFzZUFwaUtleXNSZXNwb25zZSJVirUYDXJlYWQ6YXBpX2tleXOC0+STAj4SPC9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9kYXRhYmFzZS1hcGkta2V5cxKZAgoUQ3JlYXRlRGF0YWJhc2VBcGlLZXkSOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNyZWF0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBo6LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSKJAYq1GA53cml0ZTphcGlfa2V5c5K1GBtkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWSC0+STAlI6ASoiTS9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3tkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWR9L2RhdGFiYXNlLWFwaS1rZXlzEvwBChREZWxldGVEYXRhYmFzZUFwaUtleRI5LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0GjoucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EZWxldGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlIm2KtRgPZGVsZXRlOmFwaV9rZXlzgtPkkwJUKlIvYXBpL2NsdXN0ZXIvYXV0aC92Mi9hY2NvdW50cy97YWNjb3VudF9pZH0vZGF0YWJhc2UtYXBpLWtleXMve2RhdGFiYXNlX2FwaV9rZXlfaWR9QqICCiBjb20ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52MkITRGF0YWJhc2VBcGlLZXlQcm90b1ABWlRnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvYXV0aC92MjthdXRodjKiAgRRQ0NBqgIcUWRyYW50LkNsb3VkLkNsdXN0ZXIuQXV0aC5WMsoCHFFkcmFudFxDbG91ZFxDbHVzdGVyXEF1dGhcVjLiAihRZHJhbnRcQ2xvdWRcQ2x1c3RlclxBdXRoXFYyXEdQQk1ldGFkYXRh6gIgUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6QXV0aDo6VjJiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
@@ -30,6 +30,14 @@ export type ListDatabaseApiKeysRequest = Message<"qdrant.cloud.cluster.auth.v2.L
    * @generated from field: string account_id = 1;
    */
   accountId: string;
+
+  /**
+   * The identifier of the cluster (in Guid format).
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
 };
 
 /**
@@ -117,10 +125,19 @@ export type DeleteDatabaseApiKeyRequest = Message<"qdrant.cloud.cluster.auth.v2.
   accountId: string;
 
   /**
+   * The identifier for the cluster (in Guid format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+
+  /**
    * The identifier of the database api key (in Guid format).
    * This is a required field.
    *
-   * @generated from field: string database_api_key_id = 2;
+   * @generated from field: string database_api_key_id = 3;
    */
   databaseApiKeyId: string;
 };
@@ -181,28 +198,62 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.DatabaseApiKe
   createdAt?: Timestamp;
 
   /**
-   * A list of cluster IDs.
-   * It should contain at least one ID.
-   * After creation, this field cannot be changed.
+   * The identifier of the cluster (in Guid format).
+   * This is a required field.
    *
-   * @generated from field: repeated string cluster_ids = 4;
+   * @generated from field: string cluster_id = 4;
    */
-  clusterIds: string[];
+  clusterId: string;
 
   /**
-   * Prefix for the database api key, this represents the first bytes of the key.
+   * Name of the database api key.
+   * This is a required field.
+   * Name can only contain letters, numbers, spaces, underscores and dashes.
+   *
+   * @generated from field: string name = 5;
+   */
+  name: string;
+
+  /**
+   * The expiration time of the database api key. The key will be invalid after this time.
+   * This field is optional, and if not provided, the key does not expire.
+   *
+   * @generated from field: optional google.protobuf.Timestamp expires_at = 6;
+   */
+  expiresAt?: Timestamp;
+
+  /**
+   * A list of rules to grant access to the Qdrant database or to specific
+   * collections. If no access rules are provided, global access to the database
+   * with manage permissions is assumed. The list can contain a maximum of 20
+   * access rules.
+   *
+   * @generated from field: repeated qdrant.cloud.cluster.auth.v2.AccessRule access_rules = 7;
+   */
+  accessRules: AccessRule[];
+
+  /**
+   * The email of the user who created the database api key.
    * This is a read-only field and will be available after a database api key is created.
    *
-   * @generated from field: string prefix = 5;
+   * @generated from field: string created_by_email = 8;
    */
-  prefix: string;
+  createdByEmail: string;
+
+  /**
+   * Postfix for the database api key, this represents the last bytes of the key.
+   * This is a read-only field and will be available after a database api key is created.
+   *
+   * @generated from field: string postfix = 9;
+   */
+  postfix: string;
 
   /**
    * The key for the database api key.
    * This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
    * You should securely store this key and it should be handled as a secret.
    *
-   * @generated from field: string key = 6;
+   * @generated from field: string key = 10;
    */
   key: string;
 };
@@ -213,6 +264,113 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.DatabaseApiKe
  */
 export const DatabaseApiKeySchema: GenMessage<DatabaseApiKey> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 6);
+
+/**
+ * Represents an access rule. An access rule can either define global access to
+ * the database or access to a specific collection.
+ *
+ * @generated from message qdrant.cloud.cluster.auth.v2.AccessRule
+ */
+export type AccessRule = Message<"qdrant.cloud.cluster.auth.v2.AccessRule"> & {
+  /**
+   * Defines the scope of the access rule, determining whether it applies globally
+   * to the entire database or is restricted to a specific collection.
+   *
+   * @generated from oneof qdrant.cloud.cluster.auth.v2.AccessRule.scope
+   */
+  scope: {
+    /**
+     * A rule granting global access to the entire database.
+     *
+     * @generated from field: qdrant.cloud.cluster.auth.v2.GlobalAccessRule global_access = 1;
+     */
+    value: GlobalAccessRule;
+    case: "globalAccess";
+  } | {
+    /**
+     * A rule granting access to a specific collection in the database.
+     *
+     * @generated from field: qdrant.cloud.cluster.auth.v2.CollectionAccessRule collection_access = 2;
+     */
+    value: CollectionAccessRule;
+    case: "collectionAccess";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.auth.v2.AccessRule.
+ * Use `create(AccessRuleSchema)` to create a new message.
+ */
+export const AccessRuleSchema: GenMessage<AccessRule> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 7);
+
+/**
+ * Represents a global access rule that grants access to the entire database.
+ *
+ * @generated from message qdrant.cloud.cluster.auth.v2.GlobalAccessRule
+ */
+export type GlobalAccessRule = Message<"qdrant.cloud.cluster.auth.v2.GlobalAccessRule"> & {
+  /**
+   * The type of access granted at the global level.
+   * - "read-only": Grants access to perform actions that only read data (like `list collections`).
+   * - "manage": Grants access to perform all actions available in the database (like `update aliases`).
+   * For a detailed list of actions allowed for each access type, see:
+   * https://qdrant.tech/documentation/guides/security/#table-of-access
+   * This is a required field.
+   *
+   * @generated from field: string access_type = 1;
+   */
+  accessType: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.auth.v2.GlobalAccessRule.
+ * Use `create(GlobalAccessRuleSchema)` to create a new message.
+ */
+export const GlobalAccessRuleSchema: GenMessage<GlobalAccessRule> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 8);
+
+/**
+ * Represents an access rule for a specific collection in the database.
+ *
+ * @generated from message qdrant.cloud.cluster.auth.v2.CollectionAccessRule
+ */
+export type CollectionAccessRule = Message<"qdrant.cloud.cluster.auth.v2.CollectionAccessRule"> & {
+  /**
+   * The name of the collection.
+   * This is a required field.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * The type of access granted for the collection.
+   * - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
+   * - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
+   * For a detailed list of actions allowed for each access type, see:
+   * https://qdrant.tech/documentation/guides/security/#table-of-access
+   * This is a required field.
+   *
+   * @generated from field: string access_type = 2;
+   */
+  accessType: string;
+
+  /**
+   * An optional set of key-value pairs used to restrict access within the collection.
+   * Only points containing the specified key-value pairs in their payload will be accessible.
+   *
+   * @generated from field: map<string, string> payload = 3;
+   */
+  payload: { [key: string]: string };
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.auth.v2.CollectionAccessRule.
+ * Use `create(CollectionAccessRuleSchema)` to create a new message.
+ */
+export const CollectionAccessRuleSchema: GenMessage<CollectionAccessRule> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 9);
 
 /**
  * DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
