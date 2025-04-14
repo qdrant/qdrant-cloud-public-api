@@ -1,0 +1,953 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/cluster/v1/cluster.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ClusterService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/cluster/v1/accounts/{accountId}/clusters": {
+      "get": {
+        "summary": "Fetch all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_ListClusters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListClustersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProvider",
+            "description": "Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudRegion",
+            "description": "Optional filter for cloud region where the cluster is located\nIf this field is set the cloud_provider is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}": {
+      "get": {
+        "summary": "Fetch a cluster in the account identified by the given IDs.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a cluster in the account identified by the given ID.\nRequired permissions:\n- delete:clusters",
+        "operationId": "ClusterService_DeleteCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteBackups",
+            "description": "If set, the backups of this cluster will be deleted as well.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/restart": {
+      "post": {
+        "summary": "Restarts a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_RestartCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RestartClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/releases": {
+      "get": {
+        "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_ListQdrantReleases",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListQdrantReleasesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{cluster.accountId}/clusters": {
+      "post": {
+        "summary": "Creates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_CreateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceCreateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{cluster.accountId}/clusters/{cluster.id}": {
+      "put": {
+        "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_UpdateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cluster.id",
+            "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceUpdateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ClusterServiceCreateClusterBody": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+            },
+            "cloudProvider": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+            },
+            "cloudRegion": {
+              "type": "string",
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v1ClusterState",
+              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "The actual cluster"
+        }
+      },
+      "title": "CreateClusterRequest is the request for the CreateCluster function"
+    },
+    "ClusterServiceUpdateClusterBody": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+            },
+            "cloudProvider": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+            },
+            "cloudRegion": {
+              "type": "string",
+              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v1ClusterState",
+              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "The actual cluster"
+        }
+      },
+      "title": "UpdateClusterRequest is the request for the UpdateCluster function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AdditionalResources": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Additional Disk (expressed in Gib)"
+        }
+      },
+      "title": "AdditionalResources contains the information about additional resources"
+    },
+    "v1Cluster": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+        },
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+        },
+        "cloudRegion": {
+          "type": "string",
+          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1ClusterConfiguration",
+          "description": "Current configuration details of the cluster."
+        },
+        "state": {
+          "$ref": "#/definitions/v1ClusterState",
+          "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+        }
+      },
+      "description": "A Cluster represents one cluster of a Qdrant database."
+    },
+    "v1ClusterConfiguration": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created."
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of nodes in a cluster.\nThis should be a number 1...20 [both included]."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the cluster software.\nIf omitted the latest version will be used and filled out during create.\nUse ListReleases() to determine which versions are allowed to be used.\nSee upgrade guidelines for more info."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
+        },
+        "additionalResources": {
+          "$ref": "#/definitions/v1AdditionalResources",
+          "description": "The additional resources on top of the selected package.\nThis is an optional field, if not specified all additional resources are 0."
+        },
+        "databaseConfiguration": {
+          "$ref": "#/definitions/v1DatabaseConfiguration",
+          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "nodeSelector": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "tolerations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Toleration"
+          },
+          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "allowedIpSourceRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. This is an optional field\nThe CIDRs supports IPv4 only."
+        },
+        "reservedCpuPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "title": "The percentage of CPU resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+        },
+        "reservedMemoryPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+        },
+        "gpuType": {
+          "type": "string",
+          "title": "The gpu type that should be used for the database\nThis is an optional field, default is No configured GPU\nThe allowed values are: nvidia, amd"
+        },
+        "restartPolicy": {
+          "type": "string",
+          "title": "The restart policy for the database\nThis is an optional field, default is Automatic\nThe allowed values are: Rolling, Parallel, Automatic"
+        },
+        "rebalanceStrategy": {
+          "type": "string",
+          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none\nThe allowed values are: by_count, by_size, by_count_and_size"
+        }
+      },
+      "description": "A ClusterConfiguration represents the configuration of a cluster."
+    },
+    "v1ClusterEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant cluster (aka database) without port"
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant cluster (aka database).\nAll fields in this message are a read-only field."
+    },
+    "v1ClusterNodeResources": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number",
+          "format": "double",
+          "description": "Base resources that are part of the standard allocation for the cluster per node.\nThis includes default CPU, memory, storage, etc."
+        },
+        "complimentary": {
+          "type": "number",
+          "format": "double",
+          "description": "Complimentary resources provided to the cluster at no additional cost.\nThis might include complimentary network bandwidth, credits, etc."
+        },
+        "additional": {
+          "type": "number",
+          "format": "double",
+          "description": "Additional resources allocated to the cluster.\nThis could include additional storage, compute power, etc."
+        },
+        "reserved": {
+          "type": "number",
+          "format": "double",
+          "description": "The reserved is the amount used by the system, which cannot be used by the database itself."
+        },
+        "available": {
+          "type": "number",
+          "format": "double",
+          "title": "The available is the total (base+complimentary+additional) - reserved"
+        }
+      },
+      "description": "ClusterNodeResources represents the allocation of various resources for a cluster per node."
+    },
+    "v1ClusterNodeResourcesSummary": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Disk resources"
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Memory resources"
+        },
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "CPU resources"
+        }
+      },
+      "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
+    },
+    "v1ClusterState": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version of the cluster software"
+        },
+        "nodesUp": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Number of cluster nodes that are up and running"
+        },
+        "restartedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The date and time when the cluster was restarted"
+        },
+        "phase": {
+          "type": "string",
+          "description": "Current phase of the cluster\nOne of the following: Creating, ..."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the current phase of the cluster."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1ClusterEndpoint",
+          "description": "Endpoint information to access the qdrant cluster (aka database)."
+        },
+        "resources": {
+          "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
+          "title": "The resources used by the cluster per node.\nFor the complete cluster you have to multiply by cluster.configuration.number_of_nodes"
+        }
+      },
+      "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
+    },
+    "v1CreateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "CreateClusterResponse is the response from the CreateCluster function"
+    },
+    "v1DatabaseConfiguration": {
+      "type": "object",
+      "properties": {
+        "collection": {
+          "$ref": "#/definitions/v1DatabaseConfigurationCollection",
+          "title": "The default Qdrant database collection configuration\nThis is an optional field"
+        },
+        "storage": {
+          "$ref": "#/definitions/v1DatabaseConfigurationStorage",
+          "title": "The default Qdrant database storage configuration\nThis is an optional field"
+        },
+        "service": {
+          "$ref": "#/definitions/v1DatabaseConfigurationService",
+          "title": "The Qdrant database service configuration\nThis is an optional field"
+        },
+        "logLevel": {
+          "type": "string",
+          "title": "The log level for the database\nThis is an optional field, default is Info\nThe allowed values are: Trace, Debug, Info, Warn, Error, Off\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
+        },
+        "tls": {
+          "$ref": "#/definitions/v1DatabaseConfigurationTls",
+          "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
+        },
+        "inference": {
+          "$ref": "#/definitions/v1DatabaseConfigurationInference",
+          "title": "The Qdrant database inference configuration\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
+        }
+      },
+      "description": "Configuration to setup a Qdrant database in a hybrid cloud.\nAll settings apply to hybrid cloud only."
+    },
+    "v1DatabaseConfigurationCollection": {
+      "type": "object",
+      "properties": {
+        "replicationFactor": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Number of replicas of each shard that network tries to maintain\nThis is an optional, the default is 1"
+        },
+        "writeConsistencyFactor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "How many replicas should apply the operation for us to consider it successful\nThis is an optional, the default is 1"
+        },
+        "vectors": {
+          "$ref": "#/definitions/v1DatabaseConfigurationCollectionVectors",
+          "description": "The default parameters for vectors."
+        }
+      },
+      "title": "The default Qdrant database collection configuration"
+    },
+    "v1DatabaseConfigurationCollectionVectors": {
+      "type": "object",
+      "properties": {
+        "onDisk": {
+          "type": "boolean",
+          "description": "If set, this will create a collection with all vectors immediately stored in memmap storage.\nThis is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.\nFor more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage\nThis is an optional field, the default value will be true."
+        }
+      },
+      "title": "The default Qdrant database collection vectors configuration"
+    },
+    "v1DatabaseConfigurationInference": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "If true, the database is configured to use cloud inferencing"
+        }
+      },
+      "title": "DatabaseConfigurationInference contains cloud inferencing configuration"
+    },
+    "v1DatabaseConfigurationService": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Set an api-key.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "readOnlyApiKey": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Set an api-key for read-only operations.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "jwtRbac": {
+          "type": "boolean",
+          "description": "Enable JWT Role Based Access Control (RBAC).\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nUse generated token instead of API key."
+        },
+        "enableTls": {
+          "type": "boolean",
+          "title": "Enable HTTPS for the REST and gRPC API"
+        }
+      },
+      "title": "The Qdrant database service configuration"
+    },
+    "v1DatabaseConfigurationStorage": {
+      "type": "object",
+      "properties": {
+        "performance": {
+          "$ref": "#/definitions/v1DatabaseConfigurationStoragePerformance",
+          "title": "The performance related Qdrant database storage configuration"
+        }
+      },
+      "title": "The Qdrant storage configuration"
+    },
+    "v1DatabaseConfigurationStoragePerformance": {
+      "type": "object",
+      "properties": {
+        "optimizerCpuBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
+        },
+        "asyncScorer": {
+          "type": "boolean",
+          "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant"
+        }
+      },
+      "title": "The performance related Qdrant database storage configuration"
+    },
+    "v1DatabaseConfigurationTls": {
+      "type": "object",
+      "properties": {
+        "cert": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Secret to use for the certificate"
+        },
+        "key": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Secret to use for the private key"
+        }
+      },
+      "title": "DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint"
+    },
+    "v1DeleteClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteClusterResponse is the response from the DeleteCluster function"
+    },
+    "v1GetClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "GetClusterResponse is the response from the GetCluster function"
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
+    "v1ListClustersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Cluster"
+          },
+          "title": "The actual clusters in this list"
+        }
+      },
+      "title": "ListClustersResponse is the response from the ListClusters function"
+    },
+    "v1ListQdrantReleasesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1QdrantRelease"
+          },
+          "title": "The actual Qdrant releases in this list"
+        }
+      },
+      "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"
+    },
+    "v1QdrantRelease": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version of the Qdrant release"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Flag to indicate if this is the default release\nThere can be at most a single item in the list that have this property set."
+        },
+        "releaseNotesUrl": {
+          "type": "string",
+          "title": "URL to the release notes"
+        },
+        "remarks": {
+          "type": "string",
+          "title": "Additional message regarding this release that might be useful to the client\""
+        }
+      },
+      "title": "QdrantRelease represent a single Qdrant release"
+    },
+    "v1RestartClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "RestartClusterResponse is the response from the RestartCluster function"
+    },
+    "v1SecretKeyRef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the secret (in the same namespace as the QdrantCluster CRD instance)\nThis is a required field"
+        },
+        "key": {
+          "type": "string",
+          "title": "The key inside the secret\nThis is a required field"
+        }
+      },
+      "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
+    "v1Toleration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to match against the key of a node label."
+        },
+        "operator": {
+          "type": "string",
+          "title": "The operator represents a key's relationship to the value.\nValid operators are \"Exists\" and \"Equal\".\nThe default is Exists"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to match against the value of a node label."
+        },
+        "effect": {
+          "type": "string",
+          "title": "The effect indicates the taint effect to match.\nValid effects are \"NoSchedule\", \"PreferNoSchedule\", and \"NoExecute\".\nThe default is NoSchedule"
+        },
+        "tolerationSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        }
+      },
+      "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v1UpdateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "UpdateClusterResponse is the response from the UpdateCluster function"
+    }
+  }
+}

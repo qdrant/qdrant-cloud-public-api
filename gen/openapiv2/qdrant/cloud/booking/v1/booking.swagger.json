@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/booking/v1/booking.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BookingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/booking/v1/accounts/{accountId}/packages": {
+      "get": {
+        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "BookingService_ListPackages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPackagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProvider",
+            "description": "Cloud provider where the cluster will be hosted.\nThis is an optional field (if set, it should be one of the following: aws, gcp, azure or hybrid).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudRegion",
+            "description": "Cloud region where the cluster is located.\nThis is an optional field and is ignored if the provider is set to 'hybrid'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "statuses",
+            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    },
+    "/api/booking/v1/accounts/{accountId}/packages/{id}": {
+      "get": {
+        "summary": "Get the package identified by the request identifier\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "BookingService_GetPackage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPackageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "The unique identifier of the package.\nA unique string ID assigned to each package.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1GetPackageResponse": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "$ref": "#/definitions/v1Package",
+          "title": "The actual package"
+        }
+      },
+      "title": "GetPackageResponse is the response from the GetPackage function"
+    },
+    "v1ListPackagesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Package"
+          },
+          "title": "The actual packages in this list"
+        }
+      },
+      "title": "ListPackagesResponse is the response from the ListPackages function"
+    },
+    "v1Package": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the package.\nA unique string ID assigned to each package."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the package.\nA human-readable identifier for the package."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies if this is a free or paid package."
+        },
+        "resourceConfiguration": {
+          "$ref": "#/definitions/v1ResourceConfiguration",
+          "title": "The resource configuration associated with the package"
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated."
+        },
+        "unitIntPricePerHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nYou will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours."
+        },
+        "status": {
+          "type": "string",
+          "title": "The status of the package.\nIndicates the current status of the package.\nOne of: Active, Deactivated"
+        }
+      },
+      "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."
+    },
+    "v1ResourceConfiguration": {
+      "type": "object",
+      "properties": {
+        "ram": {
+          "type": "string",
+          "title": "The amount of RAM (e.g., \"1GiB\")"
+        },
+        "cpu": {
+          "type": "string",
+          "title": "The amount of CPU (e.g., \"1000m\" (1 vCPU))"
+        },
+        "disk": {
+          "type": "string",
+          "title": "The amount of disk (e.g., \"100GiB\")"
+        }
+      },
+      "description": "ResourceConfiguration defines the resource configuration for a package."
+    }
+  }
+}
