@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/platform/v1/platform.proto.
  */
 export const file_qdrant_cloud_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSI5ChlMaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlQKGkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlEjYKBWl0ZW1zGAEgAygLMicucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXIiIQofTGlzdEdsb2JhbENsb3VkUHJvdmlkZXJzUmVxdWVzdCJaCiBMaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXNwb25zZRI2CgVpdGVtcxgBIAMoCzInLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyImMKH0xpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIgoRY2xvdWRfcHJvdmlkZXJfaWQYAiABKAlCB7pIBHICEAMiYAogTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVzcG9uc2USPAoFaXRlbXMYASADKAsyLS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuQ2xvdWRQcm92aWRlclJlZ2lvbiI8Cg1DbG91ZFByb3ZpZGVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSEQoJZnJlZV90aWVyGAMgASgIIqUBChNDbG91ZFByb3ZpZGVyUmVnaW9uEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSHQoQY291bnRyeV9pc29fY29kZRgDIAEoCUgAiAEBEiQKF2dlb2dyYXBoaWNhbF9zdWJfcmVnaW9uGAQgASgJSAGIAQFCEwoRX2NvdW50cnlfaXNvX2NvZGVCGgoYX2dlb2dyYXBoaWNhbF9zdWJfcmVnaW9uMo0FCg9QbGF0Zm9ybVNlcnZpY2USvwEKGExpc3RHbG9iYWxDbG91ZFByb3ZpZGVycxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RHbG9iYWxDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIiyYtRgAgtPkkwIiEiAvYXBpL3BsYXRmb3JtL3YxL2Nsb3VkLXByb3ZpZGVycxLDAQoSTGlzdENsb3VkUHJvdmlkZXJzEjMucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1JlcXVlc3QaNC5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuTGlzdENsb3VkUHJvdmlkZXJzUmVzcG9uc2UiQoq1GACC0+STAjgSNi9hcGkvcGxhdGZvcm0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2Nsb3VkLXByb3ZpZGVycxLxAQoYTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zEjkucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1JlcXVlc3QaOi5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuTGlzdENsb3VkUHJvdmlkZXJSZWdpb25zUmVzcG9uc2UiXoq1GACC0+STAlQSUi9hcGkvcGxhdGZvcm0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2Nsb3VkLXByb3ZpZGVycy97Y2xvdWRfcHJvdmlkZXJfaWR9L3JlZ2lvbnNChgIKHGNvbS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjFCDVBsYXRmb3JtUHJvdG9QAVpUZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9wbGF0Zm9ybS92MTtwbGF0Zm9ybXYxogIDUUNQqgIYUWRyYW50LkNsb3VkLlBsYXRmb3JtLlYxygIYUWRyYW50XENsb3VkXFBsYXRmb3JtXFYx4gIkUWRyYW50XENsb3VkXFBsYXRmb3JtXFYxXEdQQk1ldGFkYXRh6gIbUWRyYW50OjpDbG91ZDo6UGxhdGZvcm06OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CidxZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjEvcGxhdGZvcm0ucHJvdG8SGHFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MSI5ChlMaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIlQKGkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlEjYKBWl0ZW1zGAEgAygLMicucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXIiIQofTGlzdEdsb2JhbENsb3VkUHJvdmlkZXJzUmVxdWVzdCJaCiBMaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXNwb25zZRI2CgVpdGVtcxgBIAMoCzInLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5DbG91ZFByb3ZpZGVyIksKJUxpc3RHbG9iYWxDbG91ZFByb3ZpZGVyUmVnaW9uc1JlcXVlc3QSIgoRY2xvdWRfcHJvdmlkZXJfaWQYASABKAlCB7pIBHICEAMiZgomTGlzdEdsb2JhbENsb3VkUHJvdmlkZXJSZWdpb25zUmVzcG9uc2USPAoFaXRlbXMYASADKAsyLS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuQ2xvdWRQcm92aWRlclJlZ2lvbiJjCh9MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEiIKEWNsb3VkX3Byb3ZpZGVyX2lkGAIgASgJQge6SARyAhADImAKIExpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlEjwKBWl0ZW1zGAEgAygLMi0ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkNsb3VkUHJvdmlkZXJSZWdpb24iPAoNQ2xvdWRQcm92aWRlchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhEKCWZyZWVfdGllchgDIAEoCCKlAQoTQ2xvdWRQcm92aWRlclJlZ2lvbhIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEh0KEGNvdW50cnlfaXNvX2NvZGUYAyABKAlIAIgBARIkChdnZW9ncmFwaGljYWxfc3ViX3JlZ2lvbhgEIAEoCUgBiAEBQhMKEV9jb3VudHJ5X2lzb19jb2RlQhoKGF9nZW9ncmFwaGljYWxfc3ViX3JlZ2lvbjL9BgoPUGxhdGZvcm1TZXJ2aWNlEr8BChhMaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnMSOS5xZHJhbnQuY2xvdWQucGxhdGZvcm0udjEuTGlzdEdsb2JhbENsb3VkUHJvdmlkZXJzUmVxdWVzdBo6LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0R2xvYmFsQ2xvdWRQcm92aWRlcnNSZXNwb25zZSIsmLUYAILT5JMCIhIgL2FwaS9wbGF0Zm9ybS92MS9jbG91ZC1wcm92aWRlcnMSwwEKEkxpc3RDbG91ZFByb3ZpZGVycxIzLnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlcnNSZXF1ZXN0GjQucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyc1Jlc3BvbnNlIkKKtRgAgtPkkwI4EjYvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMS7QEKHkxpc3RHbG9iYWxDbG91ZFByb3ZpZGVyUmVnaW9ucxI/LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0R2xvYmFsQ2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GkAucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RHbG9iYWxDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIkiYtRgAgtPkkwI+EjwvYXBpL3BsYXRmb3JtL3YxL2Nsb3VkLXByb3ZpZGVycy97Y2xvdWRfcHJvdmlkZXJfaWR9L3JlZ2lvbnMS8QEKGExpc3RDbG91ZFByb3ZpZGVyUmVnaW9ucxI5LnFkcmFudC5jbG91ZC5wbGF0Zm9ybS52MS5MaXN0Q2xvdWRQcm92aWRlclJlZ2lvbnNSZXF1ZXN0GjoucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxLkxpc3RDbG91ZFByb3ZpZGVyUmVnaW9uc1Jlc3BvbnNlIl6KtRgAgtPkkwJUElIvYXBpL3BsYXRmb3JtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbG91ZC1wcm92aWRlcnMve2Nsb3VkX3Byb3ZpZGVyX2lkfS9yZWdpb25zQoYCChxjb20ucWRyYW50LmNsb3VkLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaVGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1FDUKoCGFFkcmFudC5DbG91ZC5QbGF0Zm9ybS5WMcoCGFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMeICJFFkcmFudFxDbG91ZFxQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCG1FkcmFudDo6Q2xvdWQ6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListCloudProvidersRequest is the request for the ListCloudProviders function.
@@ -95,6 +95,49 @@ export const ListGlobalCloudProvidersResponseSchema: GenMessage<ListGlobalCloudP
   messageDesc(file_qdrant_cloud_platform_v1_platform, 3);
 
 /**
+ * ListGlobalCloudProviderRegionsRequest is the request for the ListGlobalCloudProviderRegions function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest
+ */
+export type ListGlobalCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest"> & {
+  /**
+   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * This is a required field.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest.
+ * Use `create(ListGlobalCloudProviderRegionsRequestSchema)` to create a new message.
+ */
+export const ListGlobalCloudProviderRegionsRequestSchema: GenMessage<ListGlobalCloudProviderRegionsRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
+
+/**
+ * ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse
+ */
+export type ListGlobalCloudProviderRegionsResponse = Message<"qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse"> & {
+  /**
+   * The cloud provider regions.
+   *
+   * @generated from field: repeated qdrant.cloud.platform.v1.CloudProviderRegion items = 1;
+   */
+  items: CloudProviderRegion[];
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse.
+ * Use `create(ListGlobalCloudProviderRegionsResponseSchema)` to create a new message.
+ */
+export const ListGlobalCloudProviderRegionsResponseSchema: GenMessage<ListGlobalCloudProviderRegionsResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 5);
+
+/**
  * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
@@ -122,7 +165,7 @@ export type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.
  * Use `create(ListCloudProviderRegionsRequestSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsRequestSchema: GenMessage<ListCloudProviderRegionsRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 4);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 6);
 
 /**
  * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
@@ -143,7 +186,7 @@ export type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.platform.v1
  * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
  */
 export const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 5);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 7);
 
 /**
  * CloudProvider represents a cloud provider identifier and name.
@@ -180,7 +223,7 @@ export type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvider"> & 
  * Use `create(CloudProviderSchema)` to create a new message.
  */
 export const CloudProviderSchema: GenMessage<CloudProvider> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 6);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 8);
 
 /**
  * CloudProvider represents a cloud provider region.
@@ -225,7 +268,7 @@ export type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.CloudProvide
  * Use `create(CloudProviderRegionSchema)` to create a new message.
  */
 export const CloudProviderRegionSchema: GenMessage<CloudProviderRegion> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_platform_v1_platform, 7);
+  messageDesc(file_qdrant_cloud_platform_v1_platform, 9);
 
 /**
  * PlatformService is the API used to query for cloud provider & regional information.
@@ -254,6 +297,16 @@ export const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof ListCloudProvidersRequestSchema;
     output: typeof ListCloudProvidersResponseSchema;
+  },
+  /**
+   * Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions
+   */
+  listGlobalCloudProviderRegions: {
+    methodKind: "unary";
+    input: typeof ListGlobalCloudProviderRegionsRequestSchema;
+    output: typeof ListGlobalCloudProviderRegionsResponseSchema;
   },
   /**
    * Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
