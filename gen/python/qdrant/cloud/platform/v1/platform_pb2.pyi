@@ -30,6 +30,18 @@ class ListGlobalCloudProvidersResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[CloudProvider]
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProvider, _Mapping]]] = ...) -> None: ...
 
+class ListGlobalCloudProviderRegionsRequest(_message.Message):
+    __slots__ = ("cloud_provider_id",)
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    def __init__(self, cloud_provider_id: _Optional[str] = ...) -> None: ...
+
+class ListGlobalCloudProviderRegionsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[CloudProviderRegion]
+    def __init__(self, items: _Optional[_Iterable[_Union[CloudProviderRegion, _Mapping]]] = ...) -> None: ...
+
 class ListCloudProviderRegionsRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

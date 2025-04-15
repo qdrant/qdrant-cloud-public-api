@@ -25,6 +25,11 @@ class PlatformServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
                 _registered_method=True)
+        self.ListGlobalCloudProviderRegions = channel.unary_unary(
+                '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
+                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
+                _registered_method=True)
         self.ListCloudProviderRegions = channel.unary_unary(
                 '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions',
                 request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
@@ -53,6 +58,14 @@ class PlatformServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListGlobalCloudProviderRegions(self, request, context):
+        """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+        Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListCloudProviderRegions(self, request, context):
         """Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
         Required permissions:
@@ -74,6 +87,11 @@ def add_PlatformServiceServicer_to_server(servicer, server):
                     servicer.ListCloudProviders,
                     request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.SerializeToString,
+            ),
+            'ListGlobalCloudProviderRegions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListGlobalCloudProviderRegions,
+                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.SerializeToString,
             ),
             'ListCloudProviderRegions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCloudProviderRegions,
@@ -136,6 +154,33 @@ class PlatformService(object):
             '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders',
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListGlobalCloudProviderRegions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
             options,
             channel_credentials,
             insecure,

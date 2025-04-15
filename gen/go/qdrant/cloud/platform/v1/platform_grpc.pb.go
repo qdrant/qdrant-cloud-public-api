@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlatformService_ListGlobalCloudProviders_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders"
-	PlatformService_ListCloudProviders_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders"
-	PlatformService_ListCloudProviderRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
+	PlatformService_ListGlobalCloudProviders_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders"
+	PlatformService_ListCloudProviders_FullMethodName             = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders"
+	PlatformService_ListGlobalCloudProviderRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions"
+	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
@@ -36,6 +37,8 @@ type PlatformServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviders(ctx context.Context, in *ListCloudProvidersRequest, opts ...grpc.CallOption) (*ListCloudProvidersResponse, error)
+	// Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+	ListGlobalCloudProviderRegions(ctx context.Context, in *ListGlobalCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudProviderRegionsResponse, error)
 	// Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
@@ -70,6 +73,16 @@ func (c *platformServiceClient) ListCloudProviders(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *platformServiceClient) ListGlobalCloudProviderRegions(ctx context.Context, in *ListGlobalCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudProviderRegionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGlobalCloudProviderRegionsResponse)
+	err := c.cc.Invoke(ctx, PlatformService_ListGlobalCloudProviderRegions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListCloudProviderRegionsResponse)
@@ -92,6 +105,8 @@ type PlatformServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error)
+	// Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+	ListGlobalCloudProviderRegions(context.Context, *ListGlobalCloudProviderRegionsRequest) (*ListGlobalCloudProviderRegionsResponse, error)
 	// Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
@@ -111,6 +126,9 @@ func (UnimplementedPlatformServiceServer) ListGlobalCloudProviders(context.Conte
 }
 func (UnimplementedPlatformServiceServer) ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCloudProviders not implemented")
+}
+func (UnimplementedPlatformServiceServer) ListGlobalCloudProviderRegions(context.Context, *ListGlobalCloudProviderRegionsRequest) (*ListGlobalCloudProviderRegionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalCloudProviderRegions not implemented")
 }
 func (UnimplementedPlatformServiceServer) ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCloudProviderRegions not implemented")
@@ -172,6 +190,24 @@ func _PlatformService_ListCloudProviders_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlatformService_ListGlobalCloudProviderRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalCloudProviderRegionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformServiceServer).ListGlobalCloudProviderRegions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformService_ListGlobalCloudProviderRegions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformServiceServer).ListGlobalCloudProviderRegions(ctx, req.(*ListGlobalCloudProviderRegionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PlatformService_ListCloudProviderRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCloudProviderRegionsRequest)
 	if err := dec(in); err != nil {
@@ -204,6 +240,10 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCloudProviders",
 			Handler:    _PlatformService_ListCloudProviders_Handler,
+		},
+		{
+			MethodName: "ListGlobalCloudProviderRegions",
+			Handler:    _PlatformService_ListGlobalCloudProviderRegions_Handler,
 		},
 		{
 			MethodName: "ListCloudProviderRegions",

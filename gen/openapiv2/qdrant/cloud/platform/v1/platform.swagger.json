@@ -109,6 +109,38 @@
           "PlatformService"
         ]
       }
+    },
+    "/api/platform/v1/cloud-providers/{cloudProviderId}/regions": {
+      "get": {
+        "summary": "Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.",
+        "operationId": "PlatformService_ListGlobalCloudProviderRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListGlobalCloudProviderRegionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -207,6 +239,20 @@
         }
       },
       "description": "ListCloudProvidersResponse is the response from the ListCloudProviders function."
+    },
+    "v1ListGlobalCloudProviderRegionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProviderRegion"
+          },
+          "description": "The cloud provider regions."
+        }
+      },
+      "description": "ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function."
     },
     "v1ListGlobalCloudProvidersResponse": {
       "type": "object",
