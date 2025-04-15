@@ -206,16 +206,18 @@ class DatabaseConfigurationStoragePerformance(_message.Message):
     def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: bool = ...) -> None: ...
 
 class DatabaseConfigurationService(_message.Message):
-    __slots__ = ("api_key", "read_only_api_key", "jwt_rbac", "enable_tls")
+    __slots__ = ("api_key", "read_only_api_key", "jwt_rbac", "enable_tls", "hide_jwt_dashboard")
     API_KEY_FIELD_NUMBER: _ClassVar[int]
     READ_ONLY_API_KEY_FIELD_NUMBER: _ClassVar[int]
     JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
     ENABLE_TLS_FIELD_NUMBER: _ClassVar[int]
+    HIDE_JWT_DASHBOARD_FIELD_NUMBER: _ClassVar[int]
     api_key: _common_pb2.SecretKeyRef
     read_only_api_key: _common_pb2.SecretKeyRef
     jwt_rbac: bool
     enable_tls: bool
-    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: bool = ..., enable_tls: bool = ...) -> None: ...
+    hide_jwt_dashboard: bool
+    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: bool = ..., enable_tls: bool = ..., hide_jwt_dashboard: bool = ...) -> None: ...
 
 class DatabaseConfigurationTls(_message.Message):
     __slots__ = ("cert", "key")

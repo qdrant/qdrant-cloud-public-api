@@ -771,6 +771,10 @@
         "enableTls": {
           "type": "boolean",
           "title": "Enable HTTPS for the REST and gRPC API"
+        },
+        "hideJwtDashboard": {
+          "type": "boolean",
+          "title": "Hide JWT dashboard option in Qdrant's embedded UI\nIt is ignored for managed cloud clusters"
         }
       },
       "title": "The Qdrant database service configuration"

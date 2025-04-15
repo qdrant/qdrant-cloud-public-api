@@ -448,6 +448,9 @@ message DatabaseConfigurationService {
   bool jwt_rbac = 3;
   // Enable HTTPS for the REST and gRPC API
   bool enable_tls = 4;
+  // Hide JWT dashboard option in Qdrant's embedded UI
+  // It is ignored for managed cloud clusters
+  bool hide_jwt_dashboard = 5;
 }
 
 // DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint
