@@ -201,6 +201,10 @@
           "type": "string",
           "description": "The human-readable name of the cloud provider region.\ne.g. \"Frankfurt\", \"Tokyo\", etc."
         },
+        "freeTier": {
+          "type": "boolean",
+          "description": "Whether the cloud region is part of the free-tier offering."
+        },
         "available": {
           "type": "boolean",
           "description": "Indicates whether the cloud region is available or the hybrid cloud region is ready for clusters."

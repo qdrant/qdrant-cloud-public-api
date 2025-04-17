@@ -67,17 +67,19 @@ class CloudProvider(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: bool = ...) -> None: ...
 
 class CloudProviderRegion(_message.Message):
-    __slots__ = ("id", "name", "available", "provider", "country_iso_code", "geographical_sub_region")
+    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    FREE_TIER_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_FIELD_NUMBER: _ClassVar[int]
     PROVIDER_FIELD_NUMBER: _ClassVar[int]
     COUNTRY_ISO_CODE_FIELD_NUMBER: _ClassVar[int]
     GEOGRAPHICAL_SUB_REGION_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    free_tier: bool
     available: bool
     provider: str
     country_iso_code: str
     geographical_sub_region: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., available: bool = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: bool = ..., available: bool = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ...) -> None: ...
