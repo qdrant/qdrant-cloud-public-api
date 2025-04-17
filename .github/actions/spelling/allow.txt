@@ -17,3 +17,5 @@ upsert
 gpu
 nvidia
 amd
+linode
+openshift
