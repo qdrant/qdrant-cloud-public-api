@@ -119,14 +119,16 @@ message CloudProviderRegion {
   // The human-readable name of the cloud provider region.
   // e.g. "Frankfurt", "Tokyo", etc.
   string name = 2;
+  // Whether the cloud region is part of the free-tier offering.
+  bool free_tier = 3;
   // Indicates whether the cloud region is available or the hybrid cloud region is ready for clusters.
-  bool available = 3;
+  bool available = 4;
   // The identifier for the cloud provider.
   // e.g. "aws", "gcp", "azure", "openshift", "linode", "unknown".
-  string provider = 4;
+  string provider = 5;
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
-  optional string country_iso_code = 5;
+  optional string country_iso_code = 6;
   // Geographic location grouping of the region.
   // e.g. "Europe", "Asia", "North America", etc.
-  optional string geographical_sub_region = 6;
+  optional string geographical_sub_region = 7;
 }
