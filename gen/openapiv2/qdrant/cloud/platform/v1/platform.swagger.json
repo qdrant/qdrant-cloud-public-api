@@ -186,6 +186,10 @@
         "freeTier": {
           "type": "boolean",
           "description": "Whether the cloud provider is part of the free-tier offering."
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Indicates whether the cloud provider is available for the use case."
         }
       },
       "description": "CloudProvider represents a cloud provider identifier and name."
