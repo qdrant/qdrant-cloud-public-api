@@ -554,19 +554,51 @@
           "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
         },
         "gpuType": {
-          "type": "string",
-          "title": "The gpu type that should be used for the database\nThis is an optional field, default is No configured GPU\nThe allowed values are: nvidia, amd"
+          "$ref": "#/definitions/v1ClusterConfigurationGpuType",
+          "title": "The gpu type that should be used for the database\nThis is an optional field, default is No configured GPU"
         },
         "restartPolicy": {
-          "type": "string",
-          "title": "The restart policy for the database\nThis is an optional field, default is Automatic\nThe allowed values are: Rolling, Parallel, Automatic"
+          "$ref": "#/definitions/v1ClusterConfigurationRestartPolicy",
+          "title": "The restart policy for the database\nThis is an optional field, default is Automatic"
         },
         "rebalanceStrategy": {
-          "type": "string",
-          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none\nThe allowed values are: by_count, by_size, by_count_and_size"
+          "$ref": "#/definitions/v1ClusterConfigurationRebalanceStrategy",
+          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
+    },
+    "v1ClusterConfigurationGpuType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA",
+        "CLUSTER_CONFIGURATION_GPU_TYPE_AMD"
+      ],
+      "default": "CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED",
+      "description": "ClusterConfigurationGpuType defines GPU types available for clusters.\n\n - CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: No GPU is configured.\n - CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: Use an NVIDIA GPU.\n - CLUSTER_CONFIGURATION_GPU_TYPE_AMD: Use an AMD GPU."
+    },
+    "v1ClusterConfigurationRebalanceStrategy": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE"
+      ],
+      "default": "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
+      "description": "ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.\n\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: No rebalancing strategy is configured.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: Rebalance shards by count.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: Rebalance shards by size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: Rebalance shards by both count and size."
+    },
+    "v1ClusterConfigurationRestartPolicy": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC"
+      ],
+      "default": "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
+      "description": "ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.\n\n - CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: Restart policy is unspecified.\n - CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: Rolling restart policy (one by one).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: Parallel restart policy (restart all at once).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: Automatic restart policy."
     },
     "v1ClusterEndpoint": {
       "type": "object",
@@ -699,8 +731,8 @@
           "title": "The Qdrant database service configuration\nThis is an optional field"
         },
         "logLevel": {
-          "type": "string",
-          "title": "The log level for the database\nThis is an optional field, default is Info\nThe allowed values are: Trace, Debug, Info, Warn, Error, Off\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
+          "$ref": "#/definitions/v1DatabaseConfigurationLogLevel",
+          "title": "The log level for the database\nThis is an optional field, default is Info.\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
         },
         "tls": {
           "$ref": "#/definitions/v1DatabaseConfigurationTls",
@@ -752,6 +784,21 @@
         }
       },
       "title": "DatabaseConfigurationInference contains cloud inferencing configuration"
+    },
+    "v1DatabaseConfigurationLogLevel": {
+      "type": "string",
+      "enum": [
+        "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_TRACE",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_INFO",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_WARN",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_ERROR",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_OFF"
+      ],
+      "default": "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+      "description": "- DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: Unspecified log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: Trace log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: Debug log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_INFO: Info log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_WARN: Warn log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: Error log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_OFF: Off log level.",
+      "title": "DatabaseConfigurationLogLevel defines the supported logging levels for the\nQdrant database. See: https://docs.rs/log/latest/log/enum.LevelFilter.html"
     },
     "v1DatabaseConfigurationService": {
       "type": "object",
@@ -920,16 +967,16 @@
           "description": "The key to match against the key of a node label."
         },
         "operator": {
-          "type": "string",
-          "title": "The operator represents a key's relationship to the value.\nValid operators are \"Exists\" and \"Equal\".\nThe default is Exists"
+          "$ref": "#/definitions/v1TolerationOperator",
+          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EXISTS."
         },
         "value": {
           "type": "string",
           "description": "The value to match against the value of a node label."
         },
         "effect": {
-          "type": "string",
-          "title": "The effect indicates the taint effect to match.\nValid effects are \"NoSchedule\", \"PreferNoSchedule\", and \"NoExecute\".\nThe default is NoSchedule"
+          "$ref": "#/definitions/v1TolerationEffect",
+          "description": "The effect indicates the taint effect to match.\nThe default is TOLERATION_EFFECT_NO_SCHEDULE."
         },
         "tolerationSeconds": {
           "type": "string",
@@ -938,6 +985,29 @@
         }
       },
       "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v1TolerationEffect": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_EFFECT_UNSPECIFIED",
+        "TOLERATION_EFFECT_NO_SCHEDULE",
+        "TOLERATION_EFFECT_PREFER_NO_SCHEDULE",
+        "TOLERATION_EFFECT_NO_EXECUTE"
+      ],
+      "default": "TOLERATION_EFFECT_UNSPECIFIED",
+      "description": "- TOLERATION_EFFECT_UNSPECIFIED: Unspecified effect.\n - TOLERATION_EFFECT_NO_SCHEDULE: NoSchedule taint effect.\n - TOLERATION_EFFECT_PREFER_NO_SCHEDULE: PreferNoSchedule taint effect.\n - TOLERATION_EFFECT_NO_EXECUTE: NoExecute taint effect.",
+      "title": "TolerationEffect represents the effects a taint has on pod scheduling and eviction.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1TolerationOperator": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_OPERATOR_UNSPECIFIED",
+        "TOLERATION_OPERATOR_EXISTS",
+        "TOLERATION_OPERATOR_EQUAL"
+      ],
+      "default": "TOLERATION_OPERATOR_UNSPECIFIED",
+      "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
+      "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
     },
     "v1UpdateClusterResponse": {
       "type": "object",

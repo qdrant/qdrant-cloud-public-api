@@ -2,8 +2,8 @@
 // @generated from file qdrant/cloud/cluster/v1/cluster.proto (package qdrant.cloud.cluster.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
 import { file_google_api_annotations } from "../../../../google/api/annotations_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/cluster/v1/cluster.proto.
  */
 export const file_qdrant_cloud_cluster_v1_cluster: GenFile = /*@__PURE__*/
-  fileDesc("CiVxZHJhbnQvY2xvdWQvY2x1c3Rlci92MS9jbHVzdGVyLnByb3RvEhdxZHJhbnQuY2xvdWQuY2x1c3Rlci52MSKRAwoTTGlzdENsdXN0ZXJzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARI7Cg5jbG91ZF9wcm92aWRlchgKIAEoCUIeukgbchlSA2F3c1IDZ2NwUgVhenVyZVIGaHlicmlkSACIAQESGQoMY2xvdWRfcmVnaW9uGAsgASgJSAGIAQE63wG6SNsBGtgBChRjbHVzdGVyLmNsb3VkX3JlZ2lvbhI5Y2xvdWRfcmVnaW9uIG11c3QgYmUgYSBVVUlEIGlmIGNsb3VkX3Byb3ZpZGVyIGlzICdoeWJyaWQnGoQBdGhpcy5jbG91ZF9yZWdpb24ubWF0Y2hlcygnXlswLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezN9LVswODlhYl1bMC05YS1mXXszfS1bMC05YS1mXXsxMn0kJykgfHwgdGhpcy5jbG91ZF9wcm92aWRlciE9ICdoeWJyaWQnQhEKD19jbG91ZF9wcm92aWRlckIPCg1fY2xvdWRfcmVnaW9uIkcKFExpc3RDbHVzdGVyc1Jlc3BvbnNlEi8KBWl0ZW1zGAEgAygLMiAucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ2x1c3RlciJPChFHZXRDbHVzdGVyUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABASJHChJHZXRDbHVzdGVyUmVzcG9uc2USMQoHY2x1c3RlchgBIAEoCzIgLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXIiSQoUQ3JlYXRlQ2x1c3RlclJlcXVlc3QSMQoHY2x1c3RlchgBIAEoCzIgLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXIiSgoVQ3JlYXRlQ2x1c3RlclJlc3BvbnNlEjEKB2NsdXN0ZXIYASABKAsyIC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyIkkKFFVwZGF0ZUNsdXN0ZXJSZXF1ZXN0EjEKB2NsdXN0ZXIYASABKAsyIC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyIkoKFVVwZGF0ZUNsdXN0ZXJSZXNwb25zZRIxCgdjbHVzdGVyGAEgASgLMiAucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ2x1c3RlciKCAQoURGVsZXRlQ2x1c3RlclJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQESGwoOZGVsZXRlX2JhY2t1cHMYAyABKAhIAIgBAUIRCg9fZGVsZXRlX2JhY2t1cHMiFwoVRGVsZXRlQ2x1c3RlclJlc3BvbnNlIlMKFVJlc3RhcnRDbHVzdGVyUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABASIYChZSZXN0YXJ0Q2x1c3RlclJlc3BvbnNlImsKGUxpc3RRZHJhbnRSZWxlYXNlc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIQoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQFIAIgBAUINCgtfY2x1c3Rlcl9pZCJTChpMaXN0UWRyYW50UmVsZWFzZXNSZXNwb25zZRI1CgVpdGVtcxgBIAMoCzImLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLlFkcmFudFJlbGVhc2UikAYKB0NsdXN0ZXISCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHAoKYWNjb3VudF9pZBgDIAEoCUIIukgFcgOwAQESKQoEbmFtZRgEIAEoCUIbukgYchYQBBhAMhBeW2EtekEtWjAtOS1fXSskEi4KCmRlbGV0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjYKDmNsb3VkX3Byb3ZpZGVyGAogASgJQh66SBtyGVIDYXdzUgNnY3BSBWF6dXJlUgZoeWJyaWQSFAoMY2xvdWRfcmVnaW9uGAsgASgJEkQKDWNvbmZpZ3VyYXRpb24YFCABKAsyLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyQ29uZmlndXJhdGlvbhI0CgVzdGF0ZRhkIAEoCzIlLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJTdGF0ZTqFA7pIgQMaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpGtgBChRjbHVzdGVyLmNsb3VkX3JlZ2lvbhI5Y2xvdWRfcmVnaW9uIG11c3QgYmUgYSBVVUlEIGlmIGNsb3VkX3Byb3ZpZGVyIGlzICdoeWJyaWQnGoQBdGhpcy5jbG91ZF9yZWdpb24ubWF0Y2hlcygnXlswLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezN9LVswODlhYl1bMC05YS1mXXszfS1bMC05YS1mXXsxMn0kJykgfHwgdGhpcy5jbG91ZF9wcm92aWRlciE9ICdoeWJyaWQnIukHChRDbHVzdGVyQ29uZmlndXJhdGlvbhI0ChBsYXN0X21vZGlmaWVkX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIiCg9udW1iZXJfb2Zfbm9kZXMYAiABKA1CCbpIBioEGBQoARI3Cgd2ZXJzaW9uGAMgASgJQia6SCNyITIfXih2KFxkKylcLihcZCspXC4oXGQrKXxsYXRlc3QpJBIcCgpwYWNrYWdlX2lkGAQgASgJQgi6SAVyA7ABARJPChRhZGRpdGlvbmFsX3Jlc291cmNlcxgFIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkFkZGl0aW9uYWxSZXNvdXJjZXNIAIgBARJTChZkYXRhYmFzZV9jb25maWd1cmF0aW9uGAcgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uSAGIAQESQQoNbm9kZV9zZWxlY3RvchgIIAMoCzIgLnFkcmFudC5jbG91ZC5jb21tb24udjEuS2V5VmFsdWVCCLpIBZIBAhAKEkIKC3RvbGVyYXRpb25zGAkgAygLMiMucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVG9sZXJhdGlvbkIIukgFkgECEAoSPwoLYW5ub3RhdGlvbnMYCiADKAsyIC5xZHJhbnQuY2xvdWQuY29tbW9uLnYxLktleVZhbHVlQgi6SAWSAQIQChIxChhhbGxvd2VkX2lwX3NvdXJjZV9yYW5nZXMYCyADKAlCD7pIDJIBCRAUIgVyA/ABARIqChdyZXNlcnZlZF9jcHVfcGVyY2VudGFnZRgUIAEoDUIJukgGKgQYUCgAEi0KGnJlc2VydmVkX21lbW9yeV9wZXJjZW50YWdlGBUgASgNQgm6SAYqBBhQKAASKQoIZ3B1X3R5cGUYFiABKAlCErpID3INUgZudmlkaWFSA2FtZEgCiAEBEkAKDnJlc3RhcnRfcG9saWN5GBcgASgJQiO6SCByHlIHUm9sbGluZ1IIUGFyYWxsZWxSCUF1dG9tYXRpY0gDiAEBEkwKEnJlYmFsYW5jZV9zdHJhdGVneRgYIAEoCUIrukgociZSCGJ5X2NvdW50UgdieV9zaXplUhFieV9jb3VudF9hbmRfc2l6ZUgEiAEBQhcKFV9hZGRpdGlvbmFsX3Jlc291cmNlc0IZChdfZGF0YWJhc2VfY29uZmlndXJhdGlvbkILCglfZ3B1X3R5cGVCEQoPX3Jlc3RhcnRfcG9saWN5QhUKE19yZWJhbGFuY2Vfc3RyYXRlZ3kiqAQKFURhdGFiYXNlQ29uZmlndXJhdGlvbhJRCgpjb2xsZWN0aW9uGAEgASgLMjgucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uQ29sbGVjdGlvbkgAiAEBEksKB3N0b3JhZ2UYAiABKAsyNS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25TdG9yYWdlSAGIAQESSwoHc2VydmljZRgDIAEoCzI1LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQ29uZmlndXJhdGlvblNlcnZpY2VIAogBARJBCglsb2dfbGV2ZWwYBCABKAlCKbpIJnIkUgVUcmFjZVIFRGVidWdSBEluZm9SBFdhcm5SCEVycm9yT2ZmSAOIAQESQwoDdGxzGAUgASgLMjEucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uVGxzSASIAQESTwoJaW5mZXJlbmNlGAYgASgLMjcucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uSW5mZXJlbmNlSAWIAQFCDQoLX2NvbGxlY3Rpb25CCgoIX3N0b3JhZ2VCCgoIX3NlcnZpY2VCDAoKX2xvZ19sZXZlbEIGCgRfdGxzQgwKCl9pbmZlcmVuY2UizQEKH0RhdGFiYXNlQ29uZmlndXJhdGlvbkNvbGxlY3Rpb24SHwoScmVwbGljYXRpb25fZmFjdG9yGAEgASgNSACIAQESIAoYd3JpdGVfY29uc2lzdGVuY3lfZmFjdG9yGAIgASgFElAKB3ZlY3RvcnMYAyABKAsyPy5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25Db2xsZWN0aW9uVmVjdG9yc0IVChNfcmVwbGljYXRpb25fZmFjdG9yIkoKJkRhdGFiYXNlQ29uZmlndXJhdGlvbkNvbGxlY3Rpb25WZWN0b3JzEhQKB29uX2Rpc2sYASABKAhIAIgBAUIKCghfb25fZGlzayJ1ChxEYXRhYmFzZUNvbmZpZ3VyYXRpb25TdG9yYWdlElUKC3BlcmZvcm1hbmNlGAEgASgLMkAucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uU3RvcmFnZVBlcmZvcm1hbmNlIl0KJ0RhdGFiYXNlQ29uZmlndXJhdGlvblN0b3JhZ2VQZXJmb3JtYW5jZRIcChRvcHRpbWl6ZXJfY3B1X2J1ZGdldBgBIAEoBRIUCgxhc3luY19zY29yZXIYAiABKAgi6AEKHERhdGFiYXNlQ29uZmlndXJhdGlvblNlcnZpY2USOgoHYXBpX2tleRgBIAEoCzIkLnFkcmFudC5jbG91ZC5jb21tb24udjEuU2VjcmV0S2V5UmVmSACIAQESRAoRcmVhZF9vbmx5X2FwaV9rZXkYAiABKAsyJC5xZHJhbnQuY2xvdWQuY29tbW9uLnYxLlNlY3JldEtleVJlZkgBiAEBEhAKCGp3dF9yYmFjGAMgASgIEhIKCmVuYWJsZV90bHMYBCABKAhCCgoIX2FwaV9rZXlCFAoSX3JlYWRfb25seV9hcGlfa2V5IoEBChhEYXRhYmFzZUNvbmZpZ3VyYXRpb25UbHMSMgoEY2VydBgBIAEoCzIkLnFkcmFudC5jbG91ZC5jb21tb24udjEuU2VjcmV0S2V5UmVmEjEKA2tleRgCIAEoCzIkLnFkcmFudC5jbG91ZC5jb21tb24udjEuU2VjcmV0S2V5UmVmIjEKHkRhdGFiYXNlQ29uZmlndXJhdGlvbkluZmVyZW5jZRIPCgdlbmFibGVkGAEgASgIIiMKE0FkZGl0aW9uYWxSZXNvdXJjZXMSDAoEZGlzaxgDIAEoDSKrAgoKVG9sZXJhdGlvbhJDCgNrZXkYASABKAlCNrpIM3IxGD8yLV4oW2EtekEtWjAtOV0oWy1hLXpBLVowLTlfLl0qW2EtekEtWjAtOV0pPyk/JBIrCghvcGVyYXRvchgCIAEoCUIUukgRcg9SBkV4aXN0c1IFRXF1YWxIAIgBARINCgV2YWx1ZRgDIAEoCRJDCgZlZmZlY3QYBCABKAlCLrpIK3IpUgpOb1NjaGVkdWxlUhBQcmVmZXJOb1NjaGVkdWxlUglOb0V4ZWN1dGVIAYgBARIoChJ0b2xlcmF0aW9uX3NlY29uZHMYBSABKARCB7pIBDICKABIAogBAUILCglfb3BlcmF0b3JCCQoHX2VmZmVjdEIVChNfdG9sZXJhdGlvbl9zZWNvbmRzIocCCgxDbHVzdGVyU3RhdGUSDwoHdmVyc2lvbhgBIAEoCRIQCghub2Rlc191cBgCIAEoDRIwCgxyZXN0YXJ0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBXBoYXNlGAQgASgJEg4KBnJlYXNvbhgFIAEoCRI6CghlbmRwb2ludBgGIAEoCzIoLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJFbmRwb2ludBJHCglyZXNvdXJjZXMYByABKAsyNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyTm9kZVJlc291cmNlc1N1bW1hcnkiTgoPQ2x1c3RlckVuZHBvaW50EhUKA3VybBgBIAEoCUIIukgFcgOoAQESEQoJcmVzdF9wb3J0GAIgASgFEhEKCWdycGNfcG9ydBgDIAEoBSLSAQobQ2x1c3Rlck5vZGVSZXNvdXJjZXNTdW1tYXJ5EjsKBGRpc2sYASABKAsyLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyTm9kZVJlc291cmNlcxI6CgNyYW0YAiABKAsyLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyTm9kZVJlc291cmNlcxI6CgNjcHUYAyABKAsyLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyTm9kZVJlc291cmNlcyJ0ChRDbHVzdGVyTm9kZVJlc291cmNlcxIMCgRiYXNlGAEgASgBEhUKDWNvbXBsaW1lbnRhcnkYAiABKAESEgoKYWRkaXRpb25hbBgDIAEoARIQCghyZXNlcnZlZBgEIAEoARIRCglhdmFpbGFibGUYBSABKAEiiQEKDVFkcmFudFJlbGVhc2USDwoHdmVyc2lvbhgBIAEoCRIPCgdkZWZhdWx0GAIgASgIEh4KEXJlbGVhc2Vfbm90ZXNfdXJsGAMgASgJSACIAQESFAoHcmVtYXJrcxgEIAEoCUgBiAEBQhQKEl9yZWxlYXNlX25vdGVzX3VybEIKCghfcmVtYXJrczKvCwoOQ2x1c3RlclNlcnZpY2UStAEKDExpc3RDbHVzdGVycxIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkxpc3RDbHVzdGVyc1JlcXVlc3QaLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5MaXN0Q2x1c3RlcnNSZXNwb25zZSJHirUYDXJlYWQ6Y2x1c3RlcnOC0+STAjASLi9hcGkvY2x1c3Rlci92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vY2x1c3RlcnMSuwEKCkdldENsdXN0ZXISKi5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5HZXRDbHVzdGVyUmVxdWVzdBorLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkdldENsdXN0ZXJSZXNwb25zZSJUirUYDXJlYWQ6Y2x1c3RlcnOC0+STAj0SOy9hcGkvY2x1c3Rlci92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vY2x1c3RlcnMve2NsdXN0ZXJfaWR9EtkBCg1DcmVhdGVDbHVzdGVyEi0ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ3JlYXRlQ2x1c3RlclJlcXVlc3QaLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVDbHVzdGVyUmVzcG9uc2UiaYq1GA53cml0ZTpjbHVzdGVyc5K1GBJjbHVzdGVyLmFjY291bnRfaWSC0+STAjs6ASoiNi9hcGkvY2x1c3Rlci92MS9hY2NvdW50cy97Y2x1c3Rlci5hY2NvdW50X2lkfS9jbHVzdGVycxLmAQoNVXBkYXRlQ2x1c3RlchItLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLlVwZGF0ZUNsdXN0ZXJSZXF1ZXN0Gi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVXBkYXRlQ2x1c3RlclJlc3BvbnNlInaKtRgOd3JpdGU6Y2x1c3RlcnOStRgSY2x1c3Rlci5hY2NvdW50X2lkgtPkkwJIOgEqGkMvYXBpL2NsdXN0ZXIvdjEvYWNjb3VudHMve2NsdXN0ZXIuYWNjb3VudF9pZH0vY2x1c3RlcnMve2NsdXN0ZXIuaWR9EsYBCg1EZWxldGVDbHVzdGVyEi0ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGVsZXRlQ2x1c3RlclJlcXVlc3QaLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EZWxldGVDbHVzdGVyUmVzcG9uc2UiVoq1GA9kZWxldGU6Y2x1c3RlcnOC0+STAj0qOy9hcGkvY2x1c3Rlci92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vY2x1c3RlcnMve2NsdXN0ZXJfaWR9EtABCg5SZXN0YXJ0Q2x1c3RlchIuLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLlJlc3RhcnRDbHVzdGVyUmVxdWVzdBovLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLlJlc3RhcnRDbHVzdGVyUmVzcG9uc2UiXYq1GA53cml0ZTpjbHVzdGVyc4LT5JMCRSJDL2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbHVzdGVycy97Y2x1c3Rlcl9pZH0vcmVzdGFydBLGAQoSTGlzdFFkcmFudFJlbGVhc2VzEjIucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuTGlzdFFkcmFudFJlbGVhc2VzUmVxdWVzdBozLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkxpc3RRZHJhbnRSZWxlYXNlc1Jlc3BvbnNlIkeKtRgNcmVhZDpjbHVzdGVyc4LT5JMCMBIuL2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9yZWxlYXNlc0L+AQobY29tLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxQgxDbHVzdGVyUHJvdG9QAVpSZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9jbHVzdGVyL3YxO2NsdXN0ZXJ2MaICA1FDQ6oCF1FkcmFudC5DbG91ZC5DbHVzdGVyLlYxygIXUWRyYW50XENsb3VkXENsdXN0ZXJcVjHiAiNRZHJhbnRcQ2xvdWRcQ2x1c3RlclxWMVxHUEJNZXRhZGF0YeoCGlFkcmFudDo6Q2xvdWQ6OkNsdXN0ZXI6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CiVxZHJhbnQvY2xvdWQvY2x1c3Rlci92MS9jbHVzdGVyLnByb3RvEhdxZHJhbnQuY2xvdWQuY2x1c3Rlci52MSKRAwoTTGlzdENsdXN0ZXJzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARI7Cg5jbG91ZF9wcm92aWRlchgKIAEoCUIeukgbchlSA2F3c1IDZ2NwUgVhenVyZVIGaHlicmlkSACIAQESGQoMY2xvdWRfcmVnaW9uGAsgASgJSAGIAQE63wG6SNsBGtgBChRjbHVzdGVyLmNsb3VkX3JlZ2lvbhI5Y2xvdWRfcmVnaW9uIG11c3QgYmUgYSBVVUlEIGlmIGNsb3VkX3Byb3ZpZGVyIGlzICdoeWJyaWQnGoQBdGhpcy5jbG91ZF9yZWdpb24ubWF0Y2hlcygnXlswLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezN9LVswODlhYl1bMC05YS1mXXszfS1bMC05YS1mXXsxMn0kJykgfHwgdGhpcy5jbG91ZF9wcm92aWRlciE9ICdoeWJyaWQnQhEKD19jbG91ZF9wcm92aWRlckIPCg1fY2xvdWRfcmVnaW9uIkcKFExpc3RDbHVzdGVyc1Jlc3BvbnNlEi8KBWl0ZW1zGAEgAygLMiAucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ2x1c3RlciJPChFHZXRDbHVzdGVyUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABASJHChJHZXRDbHVzdGVyUmVzcG9uc2USMQoHY2x1c3RlchgBIAEoCzIgLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXIiSQoUQ3JlYXRlQ2x1c3RlclJlcXVlc3QSMQoHY2x1c3RlchgBIAEoCzIgLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXIiSgoVQ3JlYXRlQ2x1c3RlclJlc3BvbnNlEjEKB2NsdXN0ZXIYASABKAsyIC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyIkkKFFVwZGF0ZUNsdXN0ZXJSZXF1ZXN0EjEKB2NsdXN0ZXIYASABKAsyIC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyIkoKFVVwZGF0ZUNsdXN0ZXJSZXNwb25zZRIxCgdjbHVzdGVyGAEgASgLMiAucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ2x1c3RlciKCAQoURGVsZXRlQ2x1c3RlclJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQESGwoOZGVsZXRlX2JhY2t1cHMYAyABKAhIAIgBAUIRCg9fZGVsZXRlX2JhY2t1cHMiFwoVRGVsZXRlQ2x1c3RlclJlc3BvbnNlIlMKFVJlc3RhcnRDbHVzdGVyUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABASIYChZSZXN0YXJ0Q2x1c3RlclJlc3BvbnNlImsKGUxpc3RRZHJhbnRSZWxlYXNlc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIQoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQFIAIgBAUINCgtfY2x1c3Rlcl9pZCJTChpMaXN0UWRyYW50UmVsZWFzZXNSZXNwb25zZRI1CgVpdGVtcxgBIAMoCzImLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLlFkcmFudFJlbGVhc2UikAYKB0NsdXN0ZXISCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHAoKYWNjb3VudF9pZBgDIAEoCUIIukgFcgOwAQESKQoEbmFtZRgEIAEoCUIbukgYchYQBBhAMhBeW2EtekEtWjAtOS1fXSskEi4KCmRlbGV0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjYKDmNsb3VkX3Byb3ZpZGVyGAogASgJQh66SBtyGVIDYXdzUgNnY3BSBWF6dXJlUgZoeWJyaWQSFAoMY2xvdWRfcmVnaW9uGAsgASgJEkQKDWNvbmZpZ3VyYXRpb24YFCABKAsyLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyQ29uZmlndXJhdGlvbhI0CgVzdGF0ZRhkIAEoCzIlLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJTdGF0ZTqFA7pIgQMaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpGtgBChRjbHVzdGVyLmNsb3VkX3JlZ2lvbhI5Y2xvdWRfcmVnaW9uIG11c3QgYmUgYSBVVUlEIGlmIGNsb3VkX3Byb3ZpZGVyIGlzICdoeWJyaWQnGoQBdGhpcy5jbG91ZF9yZWdpb24ubWF0Y2hlcygnXlswLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezN9LVswODlhYl1bMC05YS1mXXszfS1bMC05YS1mXXsxMn0kJykgfHwgdGhpcy5jbG91ZF9wcm92aWRlciE9ICdoeWJyaWQnIrUIChRDbHVzdGVyQ29uZmlndXJhdGlvbhI0ChBsYXN0X21vZGlmaWVkX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIiCg9udW1iZXJfb2Zfbm9kZXMYAiABKA1CCbpIBioEGBQoARI3Cgd2ZXJzaW9uGAMgASgJQia6SCNyITIfXih2KFxkKylcLihcZCspXC4oXGQrKXxsYXRlc3QpJBIcCgpwYWNrYWdlX2lkGAQgASgJQgi6SAVyA7ABARJPChRhZGRpdGlvbmFsX3Jlc291cmNlcxgFIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkFkZGl0aW9uYWxSZXNvdXJjZXNIAIgBARJTChZkYXRhYmFzZV9jb25maWd1cmF0aW9uGAcgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uSAGIAQESQQoNbm9kZV9zZWxlY3RvchgIIAMoCzIgLnFkcmFudC5jbG91ZC5jb21tb24udjEuS2V5VmFsdWVCCLpIBZIBAhAKEkIKC3RvbGVyYXRpb25zGAkgAygLMiMucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVG9sZXJhdGlvbkIIukgFkgECEAoSPwoLYW5ub3RhdGlvbnMYCiADKAsyIC5xZHJhbnQuY2xvdWQuY29tbW9uLnYxLktleVZhbHVlQgi6SAWSAQIQChIxChhhbGxvd2VkX2lwX3NvdXJjZV9yYW5nZXMYCyADKAlCD7pIDJIBCRAUIgVyA/ABARIqChdyZXNlcnZlZF9jcHVfcGVyY2VudGFnZRgUIAEoDUIJukgGKgQYUCgAEi0KGnJlc2VydmVkX21lbW9yeV9wZXJjZW50YWdlGBUgASgNQgm6SAYqBBhQKAASSwoIZ3B1X3R5cGUYFiABKA4yNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DbHVzdGVyQ29uZmlndXJhdGlvbkdwdVR5cGVIAogBARJXCg5yZXN0YXJ0X3BvbGljeRgXIAEoDjI6LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJDb25maWd1cmF0aW9uUmVzdGFydFBvbGljeUgDiAEBEl8KEnJlYmFsYW5jZV9zdHJhdGVneRgYIAEoDjI+LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJDb25maWd1cmF0aW9uUmViYWxhbmNlU3RyYXRlZ3lIBIgBAUIXChVfYWRkaXRpb25hbF9yZXNvdXJjZXNCGQoXX2RhdGFiYXNlX2NvbmZpZ3VyYXRpb25CCwoJX2dwdV90eXBlQhEKD19yZXN0YXJ0X3BvbGljeUIVChNfcmViYWxhbmNlX3N0cmF0ZWd5IrUEChVEYXRhYmFzZUNvbmZpZ3VyYXRpb24SUQoKY29sbGVjdGlvbhgBIAEoCzI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQ29uZmlndXJhdGlvbkNvbGxlY3Rpb25IAIgBARJLCgdzdG9yYWdlGAIgASgLMjUucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uU3RvcmFnZUgBiAEBEksKB3NlcnZpY2UYAyABKAsyNS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25TZXJ2aWNlSAKIAQESTgoJbG9nX2xldmVsGAQgASgOMjYucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuRGF0YWJhc2VDb25maWd1cmF0aW9uTG9nTGV2ZWxIA4gBARJDCgN0bHMYBSABKAsyMS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25UbHNIBIgBARJPCglpbmZlcmVuY2UYBiABKAsyNy5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25JbmZlcmVuY2VIBYgBAUINCgtfY29sbGVjdGlvbkIKCghfc3RvcmFnZUIKCghfc2VydmljZUIMCgpfbG9nX2xldmVsQgYKBF90bHNCDAoKX2luZmVyZW5jZSLNAQofRGF0YWJhc2VDb25maWd1cmF0aW9uQ29sbGVjdGlvbhIfChJyZXBsaWNhdGlvbl9mYWN0b3IYASABKA1IAIgBARIgChh3cml0ZV9jb25zaXN0ZW5jeV9mYWN0b3IYAiABKAUSUAoHdmVjdG9ycxgDIAEoCzI/LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRhdGFiYXNlQ29uZmlndXJhdGlvbkNvbGxlY3Rpb25WZWN0b3JzQhUKE19yZXBsaWNhdGlvbl9mYWN0b3IiSgomRGF0YWJhc2VDb25maWd1cmF0aW9uQ29sbGVjdGlvblZlY3RvcnMSFAoHb25fZGlzaxgBIAEoCEgAiAEBQgoKCF9vbl9kaXNrInUKHERhdGFiYXNlQ29uZmlndXJhdGlvblN0b3JhZ2USVQoLcGVyZm9ybWFuY2UYASABKAsyQC5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EYXRhYmFzZUNvbmZpZ3VyYXRpb25TdG9yYWdlUGVyZm9ybWFuY2UiXQonRGF0YWJhc2VDb25maWd1cmF0aW9uU3RvcmFnZVBlcmZvcm1hbmNlEhwKFG9wdGltaXplcl9jcHVfYnVkZ2V0GAEgASgFEhQKDGFzeW5jX3Njb3JlchgCIAEoCCLoAQocRGF0YWJhc2VDb25maWd1cmF0aW9uU2VydmljZRI6CgdhcGlfa2V5GAEgASgLMiQucWRyYW50LmNsb3VkLmNvbW1vbi52MS5TZWNyZXRLZXlSZWZIAIgBARJEChFyZWFkX29ubHlfYXBpX2tleRgCIAEoCzIkLnFkcmFudC5jbG91ZC5jb21tb24udjEuU2VjcmV0S2V5UmVmSAGIAQESEAoIand0X3JiYWMYAyABKAgSEgoKZW5hYmxlX3RscxgEIAEoCEIKCghfYXBpX2tleUIUChJfcmVhZF9vbmx5X2FwaV9rZXkigQEKGERhdGFiYXNlQ29uZmlndXJhdGlvblRscxIyCgRjZXJ0GAEgASgLMiQucWRyYW50LmNsb3VkLmNvbW1vbi52MS5TZWNyZXRLZXlSZWYSMQoDa2V5GAIgASgLMiQucWRyYW50LmNsb3VkLmNvbW1vbi52MS5TZWNyZXRLZXlSZWYiMQoeRGF0YWJhc2VDb25maWd1cmF0aW9uSW5mZXJlbmNlEg8KB2VuYWJsZWQYASABKAgiIwoTQWRkaXRpb25hbFJlc291cmNlcxIMCgRkaXNrGAMgASgNIr0CCgpUb2xlcmF0aW9uEkMKA2tleRgBIAEoCUI2ukgzcjEYPzItXihbYS16QS1aMC05XShbLWEtekEtWjAtOV8uXSpbYS16QS1aMC05XSk/KT8kEkIKCG9wZXJhdG9yGAIgASgOMisucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVG9sZXJhdGlvbk9wZXJhdG9ySACIAQESDQoFdmFsdWUYAyABKAkSPgoGZWZmZWN0GAQgASgOMikucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVG9sZXJhdGlvbkVmZmVjdEgBiAEBEigKEnRvbGVyYXRpb25fc2Vjb25kcxgFIAEoBEIHukgEMgIoAEgCiAEBQgsKCV9vcGVyYXRvckIJCgdfZWZmZWN0QhUKE190b2xlcmF0aW9uX3NlY29uZHMihwIKDENsdXN0ZXJTdGF0ZRIPCgd2ZXJzaW9uGAEgASgJEhAKCG5vZGVzX3VwGAIgASgNEjAKDHJlc3RhcnRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFcGhhc2UYBCABKAkSDgoGcmVhc29uGAUgASgJEjoKCGVuZHBvaW50GAYgASgLMigucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuQ2x1c3RlckVuZHBvaW50EkcKCXJlc291cmNlcxgHIAEoCzI0LnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJOb2RlUmVzb3VyY2VzU3VtbWFyeSJOCg9DbHVzdGVyRW5kcG9pbnQSFQoDdXJsGAEgASgJQgi6SAVyA6gBARIRCglyZXN0X3BvcnQYAiABKAUSEQoJZ3JwY19wb3J0GAMgASgFItIBChtDbHVzdGVyTm9kZVJlc291cmNlc1N1bW1hcnkSOwoEZGlzaxgBIAEoCzItLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJOb2RlUmVzb3VyY2VzEjoKA3JhbRgCIAEoCzItLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJOb2RlUmVzb3VyY2VzEjoKA2NwdRgDIAEoCzItLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNsdXN0ZXJOb2RlUmVzb3VyY2VzInQKFENsdXN0ZXJOb2RlUmVzb3VyY2VzEgwKBGJhc2UYASABKAESFQoNY29tcGxpbWVudGFyeRgCIAEoARISCgphZGRpdGlvbmFsGAMgASgBEhAKCHJlc2VydmVkGAQgASgBEhEKCWF2YWlsYWJsZRgFIAEoASKJAQoNUWRyYW50UmVsZWFzZRIPCgd2ZXJzaW9uGAEgASgJEg8KB2RlZmF1bHQYAiABKAgSHgoRcmVsZWFzZV9ub3Rlc191cmwYAyABKAlIAIgBARIUCgdyZW1hcmtzGAQgASgJSAGIAQFCFAoSX3JlbGVhc2Vfbm90ZXNfdXJsQgoKCF9yZW1hcmtzKqABChtDbHVzdGVyQ29uZmlndXJhdGlvbkdwdVR5cGUSLgoqQ0xVU1RFUl9DT05GSUdVUkFUSU9OX0dQVV9UWVBFX1VOU1BFQ0lGSUVEEAASKQolQ0xVU1RFUl9DT05GSUdVUkFUSU9OX0dQVV9UWVBFX05WSURJQRABEiYKIkNMVVNURVJfQ09ORklHVVJBVElPTl9HUFVfVFlQRV9BTUQQAiryAQohQ2x1c3RlckNvbmZpZ3VyYXRpb25SZXN0YXJ0UG9saWN5EjQKMENMVVNURVJfQ09ORklHVVJBVElPTl9SRVNUQVJUX1BPTElDWV9VTlNQRUNJRklFRBAAEjAKLENMVVNURVJfQ09ORklHVVJBVElPTl9SRVNUQVJUX1BPTElDWV9ST0xMSU5HEAESMQotQ0xVU1RFUl9DT05GSUdVUkFUSU9OX1JFU1RBUlRfUE9MSUNZX1BBUkFMTEVMEAISMgouQ0xVU1RFUl9DT05GSUdVUkFUSU9OX1JFU1RBUlRfUE9MSUNZX0FVVE9NQVRJQxADKo4CCiVDbHVzdGVyQ29uZmlndXJhdGlvblJlYmFsYW5jZVN0cmF0ZWd5EjgKNENMVVNURVJfQ09ORklHVVJBVElPTl9SRUJBTEFOQ0VfU1RSQVRFR1lfVU5TUEVDSUZJRUQQABI1CjFDTFVTVEVSX0NPTkZJR1VSQVRJT05fUkVCQUxBTkNFX1NUUkFURUdZX0JZX0NPVU5UEAESNAowQ0xVU1RFUl9DT05GSUdVUkFUSU9OX1JFQkFMQU5DRV9TVFJBVEVHWV9CWV9TSVpFEAISPgo6Q0xVU1RFUl9DT05GSUdVUkFUSU9OX1JFQkFMQU5DRV9TVFJBVEVHWV9CWV9DT1VOVF9BTkRfU0laRRADKtUCCh1EYXRhYmFzZUNvbmZpZ3VyYXRpb25Mb2dMZXZlbBIwCixEQVRBQkFTRV9DT05GSUdVUkFUSU9OX0xPR19MRVZFTF9VTlNQRUNJRklFRBAAEioKJkRBVEFCQVNFX0NPTkZJR1VSQVRJT05fTE9HX0xFVkVMX1RSQUNFEAESKgomREFUQUJBU0VfQ09ORklHVVJBVElPTl9MT0dfTEVWRUxfREVCVUcQAhIpCiVEQVRBQkFTRV9DT05GSUdVUkFUSU9OX0xPR19MRVZFTF9JTkZPEAMSKQolREFUQUJBU0VfQ09ORklHVVJBVElPTl9MT0dfTEVWRUxfV0FSThAEEioKJkRBVEFCQVNFX0NPTkZJR1VSQVRJT05fTE9HX0xFVkVMX0VSUk9SEAUSKAokREFUQUJBU0VfQ09ORklHVVJBVElPTl9MT0dfTEVWRUxfT0ZGEAYqeAoSVG9sZXJhdGlvbk9wZXJhdG9yEiMKH1RPTEVSQVRJT05fT1BFUkFUT1JfVU5TUEVDSUZJRUQQABIeChpUT0xFUkFUSU9OX09QRVJBVE9SX0VYSVNUUxABEh0KGVRPTEVSQVRJT05fT1BFUkFUT1JfRVFVQUwQAiqkAQoQVG9sZXJhdGlvbkVmZmVjdBIhCh1UT0xFUkFUSU9OX0VGRkVDVF9VTlNQRUNJRklFRBAAEiEKHVRPTEVSQVRJT05fRUZGRUNUX05PX1NDSEVEVUxFEAESKAokVE9MRVJBVElPTl9FRkZFQ1RfUFJFRkVSX05PX1NDSEVEVUxFEAISIAocVE9MRVJBVElPTl9FRkZFQ1RfTk9fRVhFQ1VURRADMq8LCg5DbHVzdGVyU2VydmljZRK0AQoMTGlzdENsdXN0ZXJzEiwucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuTGlzdENsdXN0ZXJzUmVxdWVzdBotLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkxpc3RDbHVzdGVyc1Jlc3BvbnNlIkeKtRgNcmVhZDpjbHVzdGVyc4LT5JMCMBIuL2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbHVzdGVycxK7AQoKR2V0Q2x1c3RlchIqLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkdldENsdXN0ZXJSZXF1ZXN0GisucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuR2V0Q2x1c3RlclJlc3BvbnNlIlSKtRgNcmVhZDpjbHVzdGVyc4LT5JMCPRI7L2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbHVzdGVycy97Y2x1c3Rlcl9pZH0S2QEKDUNyZWF0ZUNsdXN0ZXISLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5DcmVhdGVDbHVzdGVyUmVxdWVzdBouLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkNyZWF0ZUNsdXN0ZXJSZXNwb25zZSJpirUYDndyaXRlOmNsdXN0ZXJzkrUYEmNsdXN0ZXIuYWNjb3VudF9pZILT5JMCOzoBKiI2L2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3tjbHVzdGVyLmFjY291bnRfaWR9L2NsdXN0ZXJzEuYBCg1VcGRhdGVDbHVzdGVyEi0ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuVXBkYXRlQ2x1c3RlclJlcXVlc3QaLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5VcGRhdGVDbHVzdGVyUmVzcG9uc2Uidoq1GA53cml0ZTpjbHVzdGVyc5K1GBJjbHVzdGVyLmFjY291bnRfaWSC0+STAkg6ASoaQy9hcGkvY2x1c3Rlci92MS9hY2NvdW50cy97Y2x1c3Rlci5hY2NvdW50X2lkfS9jbHVzdGVycy97Y2x1c3Rlci5pZH0SxgEKDURlbGV0ZUNsdXN0ZXISLS5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5EZWxldGVDbHVzdGVyUmVxdWVzdBouLnFkcmFudC5jbG91ZC5jbHVzdGVyLnYxLkRlbGV0ZUNsdXN0ZXJSZXNwb25zZSJWirUYD2RlbGV0ZTpjbHVzdGVyc4LT5JMCPSo7L2FwaS9jbHVzdGVyL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9jbHVzdGVycy97Y2x1c3Rlcl9pZH0S0AEKDlJlc3RhcnRDbHVzdGVyEi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuUmVzdGFydENsdXN0ZXJSZXF1ZXN0Gi8ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuUmVzdGFydENsdXN0ZXJSZXNwb25zZSJdirUYDndyaXRlOmNsdXN0ZXJzgtPkkwJFIkMvYXBpL2NsdXN0ZXIvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2NsdXN0ZXJzL3tjbHVzdGVyX2lkfS9yZXN0YXJ0EsYBChJMaXN0UWRyYW50UmVsZWFzZXMSMi5xZHJhbnQuY2xvdWQuY2x1c3Rlci52MS5MaXN0UWRyYW50UmVsZWFzZXNSZXF1ZXN0GjMucWRyYW50LmNsb3VkLmNsdXN0ZXIudjEuTGlzdFFkcmFudFJlbGVhc2VzUmVzcG9uc2UiR4q1GA1yZWFkOmNsdXN0ZXJzgtPkkwIwEi4vYXBpL2NsdXN0ZXIvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3JlbGVhc2VzQv4BChtjb20ucWRyYW50LmNsb3VkLmNsdXN0ZXIudjFCDENsdXN0ZXJQcm90b1ABWlJnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvdjE7Y2x1c3RlcnYxogIDUUNDqgIXUWRyYW50LkNsb3VkLkNsdXN0ZXIuVjHKAhdRZHJhbnRcQ2xvdWRcQ2x1c3RlclxWMeICI1FkcmFudFxDbG91ZFxDbHVzdGVyXFYxXEdQQk1ldGFkYXRh6gIaUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListClustersRequest is the request for the ListClusters function
@@ -572,29 +572,26 @@ export type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.ClusterConfi
   /**
    * The gpu type that should be used for the database
    * This is an optional field, default is No configured GPU
-   * The allowed values are: nvidia, amd
    *
-   * @generated from field: optional string gpu_type = 22;
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationGpuType gpu_type = 22;
    */
-  gpuType?: string;
+  gpuType?: ClusterConfigurationGpuType;
 
   /**
    * The restart policy for the database
    * This is an optional field, default is Automatic
-   * The allowed values are: Rolling, Parallel, Automatic
    *
-   * @generated from field: optional string restart_policy = 23;
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy restart_policy = 23;
    */
-  restartPolicy?: string;
+  restartPolicy?: ClusterConfigurationRestartPolicy;
 
   /**
    * The automatic shard rebalancing strategy for the database
    * This is an optional field, default is none
-   * The allowed values are: by_count, by_size, by_count_and_size
    *
-   * @generated from field: optional string rebalance_strategy = 24;
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy rebalance_strategy = 24;
    */
-  rebalanceStrategy?: string;
+  rebalanceStrategy?: ClusterConfigurationRebalanceStrategy;
 };
 
 /**
@@ -637,13 +634,12 @@ export type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.DatabaseCon
 
   /**
    * The log level for the database
-   * This is an optional field, default is Info
-   * The allowed values are: Trace, Debug, Info, Warn, Error, Off
+   * This is an optional field, default is Info.
    * Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
    *
-   * @generated from field: optional string log_level = 4;
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel log_level = 4;
    */
-  logLevel?: string;
+  logLevel?: DatabaseConfigurationLogLevel;
 
   /**
    * The Qdrant database TLS configuration
@@ -917,12 +913,11 @@ export type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> & {
 
   /**
    * The operator represents a key's relationship to the value.
-   * Valid operators are "Exists" and "Equal".
-   * The default is Exists
+   * The default is TOLERATION_OPERATOR_EXISTS.
    *
-   * @generated from field: optional string operator = 2;
+   * @generated from field: optional qdrant.cloud.cluster.v1.TolerationOperator operator = 2;
    */
-  operator?: string;
+  operator?: TolerationOperator;
 
   /**
    * The value to match against the value of a node label.
@@ -933,12 +928,11 @@ export type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> & {
 
   /**
    * The effect indicates the taint effect to match.
-   * Valid effects are "NoSchedule", "PreferNoSchedule", and "NoExecute".
-   * The default is NoSchedule
+   * The default is TOLERATION_EFFECT_NO_SCHEDULE.
    *
-   * @generated from field: optional string effect = 4;
+   * @generated from field: optional qdrant.cloud.cluster.v1.TolerationEffect effect = 4;
    */
-  effect?: string;
+  effect?: TolerationEffect;
 
   /**
    * The toleration seconds indicates the duration to tolerate the taint.
@@ -1186,6 +1180,262 @@ export type QdrantRelease = Message<"qdrant.cloud.cluster.v1.QdrantRelease"> & {
  */
 export const QdrantReleaseSchema: GenMessage<QdrantRelease> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_cluster_v1_cluster, 30);
+
+/**
+ * ClusterConfigurationGpuType defines GPU types available for clusters.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterConfigurationGpuType
+ */
+export enum ClusterConfigurationGpuType {
+  /**
+   * No GPU is configured.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Use an NVIDIA GPU.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA = 1;
+   */
+  NVIDIA = 1,
+
+  /**
+   * Use an AMD GPU.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_GPU_TYPE_AMD = 2;
+   */
+  AMD = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterConfigurationGpuType.
+ */
+export const ClusterConfigurationGpuTypeSchema: GenEnum<ClusterConfigurationGpuType> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 0);
+
+/**
+ * ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy
+ */
+export enum ClusterConfigurationRestartPolicy {
+  /**
+   * Restart policy is unspecified.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Rolling restart policy (one by one).
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING = 1;
+   */
+  ROLLING = 1,
+
+  /**
+   * Parallel restart policy (restart all at once).
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL = 2;
+   */
+  PARALLEL = 2,
+
+  /**
+   * Automatic restart policy.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC = 3;
+   */
+  AUTOMATIC = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy.
+ */
+export const ClusterConfigurationRestartPolicySchema: GenEnum<ClusterConfigurationRestartPolicy> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 1);
+
+/**
+ * ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy
+ */
+export enum ClusterConfigurationRebalanceStrategy {
+  /**
+   * No rebalancing strategy is configured.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Rebalance shards by count.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT = 1;
+   */
+  BY_COUNT = 1,
+
+  /**
+   * Rebalance shards by size.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE = 2;
+   */
+  BY_SIZE = 2,
+
+  /**
+   * Rebalance shards by both count and size.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE = 3;
+   */
+  BY_COUNT_AND_SIZE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy.
+ */
+export const ClusterConfigurationRebalanceStrategySchema: GenEnum<ClusterConfigurationRebalanceStrategy> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 2);
+
+/**
+ * DatabaseConfigurationLogLevel defines the supported logging levels for the
+ * Qdrant database. See: https://docs.rs/log/latest/log/enum.LevelFilter.html
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel
+ */
+export enum DatabaseConfigurationLogLevel {
+  /**
+   * Unspecified log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Trace log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_TRACE = 1;
+   */
+  TRACE = 1,
+
+  /**
+   * Debug log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG = 2;
+   */
+  DEBUG = 2,
+
+  /**
+   * Info log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_INFO = 3;
+   */
+  INFO = 3,
+
+  /**
+   * Warn log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_WARN = 4;
+   */
+  WARN = 4,
+
+  /**
+   * Error log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_ERROR = 5;
+   */
+  ERROR = 5,
+
+  /**
+   * Off log level.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_LOG_LEVEL_OFF = 6;
+   */
+  OFF = 6,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel.
+ */
+export const DatabaseConfigurationLogLevelSchema: GenEnum<DatabaseConfigurationLogLevel> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 3);
+
+/**
+ * TolerationOperator defines the valid operators for tolerations.
+ * See: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.TolerationOperator
+ */
+export enum TolerationOperator {
+  /**
+   * Unspecified operator.
+   *
+   * @generated from enum value: TOLERATION_OPERATOR_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The operator means the key exists.
+   *
+   * @generated from enum value: TOLERATION_OPERATOR_EXISTS = 1;
+   */
+  EXISTS = 1,
+
+  /**
+   * The operator means the key equals the given value.
+   *
+   * @generated from enum value: TOLERATION_OPERATOR_EQUAL = 2;
+   */
+  EQUAL = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.TolerationOperator.
+ */
+export const TolerationOperatorSchema: GenEnum<TolerationOperator> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 4);
+
+/**
+ * TolerationEffect represents the effects a taint has on pod scheduling and eviction.
+ * See: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.TolerationEffect
+ */
+export enum TolerationEffect {
+  /**
+   * Unspecified effect.
+   *
+   * @generated from enum value: TOLERATION_EFFECT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * NoSchedule taint effect.
+   *
+   * @generated from enum value: TOLERATION_EFFECT_NO_SCHEDULE = 1;
+   */
+  NO_SCHEDULE = 1,
+
+  /**
+   * PreferNoSchedule taint effect.
+   *
+   * @generated from enum value: TOLERATION_EFFECT_PREFER_NO_SCHEDULE = 2;
+   */
+  PREFER_NO_SCHEDULE = 2,
+
+  /**
+   * NoExecute taint effect.
+   *
+   * @generated from enum value: TOLERATION_EFFECT_NO_EXECUTE = 3;
+   */
+  NO_EXECUTE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.TolerationEffect.
+ */
+export const TolerationEffectSchema: GenEnum<TolerationEffect> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_v1_cluster, 5);
 
 /**
  * ClusterService is the API used to configure cluster objects.
