@@ -57,14 +57,16 @@ class ListCloudProviderRegionsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProviderRegion, _Mapping]]] = ...) -> None: ...
 
 class CloudProvider(_message.Message):
-    __slots__ = ("id", "name", "free_tier")
+    __slots__ = ("id", "name", "free_tier", "available")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     FREE_TIER_FIELD_NUMBER: _ClassVar[int]
+    AVAILABLE_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     free_tier: bool
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: bool = ...) -> None: ...
+    available: bool
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: bool = ..., available: bool = ...) -> None: ...
 
 class CloudProviderRegion(_message.Message):
     __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region")
