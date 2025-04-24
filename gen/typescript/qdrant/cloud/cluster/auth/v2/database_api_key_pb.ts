@@ -2,8 +2,8 @@
 // @generated from file qdrant/cloud/cluster/auth/v2/database_api_key.proto (package qdrant.cloud.cluster.auth.v2, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
 import { file_buf_validate_validate } from "../../../../../buf/validate/validate_pb";
 import { file_google_api_annotations } from "../../../../../google/api/annotations_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/cluster/auth/v2/database_api_key.proto.
  */
 export const file_qdrant_cloud_cluster_auth_v2_database_api_key: GenFile = /*@__PURE__*/
-  fileDesc("CjNxZHJhbnQvY2xvdWQvY2x1c3Rlci9hdXRoL3YyL2RhdGFiYXNlX2FwaV9rZXkucHJvdG8SHHFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIiWAoaTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQEiWgobTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlEjsKBWl0ZW1zGAEgAygLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSJlChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSRgoQZGF0YWJhc2VfYXBpX2tleRgBIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGF0YWJhc2VBcGlLZXkiZgocQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZRJGChBkYXRhYmFzZV9hcGlfa2V5GAEgASgLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSKAAQobRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBEiUKE2RhdGFiYXNlX2FwaV9rZXlfaWQYAyABKAlCCLpIBXIDsAEBIh4KHERlbGV0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2UitgcKDkRhdGFiYXNlQXBpS2V5EgoKAmlkGAEgASgJEhwKCmFjY291bnRfaWQYAiABKAlCCLpIBXIDsAEBEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmNsdXN0ZXJfaWQYBCABKAlCCLpIBXIDsAEBEiQKBG5hbWUYBSABKAlCFrpIE3IREAQYgAEyCl5bXHdccy1dKyQSMwoKZXhwaXJlc19hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAIgBARJICgxhY2Nlc3NfcnVsZXMYByADKAsyKC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkFjY2Vzc1J1bGVCCLpIBZIBAhAUEhgKEGNyZWF0ZWRfYnlfZW1haWwYCCABKAkSDwoHcG9zdGZpeBgJIAEoCRILCgNrZXkYCiABKAk6vwS6SLsEGqwBChNkYXRhYmFzZV9hcGlfa2V5LmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KRrmAQoebm9fbWl4ZWRfZ2xvYmFsX2FuZF9jb2xsZWN0aW9uEk9UaGVyZSBjYW4ndCBiZSBnbG9iYWwgYW5kIGNvbGxlY3Rpb24gYWNjZXNzIHJ1bGVzIGluIHRoZSBzYW1lIGRhdGFiYXNlIGFwaSBrZXkuGnMhKHRoaXMuYWNjZXNzX3J1bGVzLmV4aXN0cyhyLCByLmdsb2JhbF9hY2Nlc3MgIT0gbnVsbCkgJiYgdGhpcy5hY2Nlc3NfcnVsZXMuZXhpc3RzKHIsIHIuY29sbGVjdGlvbl9hY2Nlc3MgIT0gbnVsbCkpGqABChZvbmx5X29uZV9nbG9iYWxfYWNjZXNzEkVUaGVyZSBjYW4ndCBiZSBtb3JlIHRoYW4gb25lIGdsb2JhbCBhY2Nlc3MgcnVsZSBpbiB0aGUgY29uZmlndXJhdGlvbi4aP3NpemUodGhpcy5hY2Nlc3NfcnVsZXMuZmlsdGVyKHIsIHIuZ2xvYmFsX2FjY2VzcyAhPSBudWxsKSkgPD0gMUINCgtfZXhwaXJlc19hdCKvAQoKQWNjZXNzUnVsZRJHCg1nbG9iYWxfYWNjZXNzGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5HbG9iYWxBY2Nlc3NSdWxlSAASTwoRY29sbGVjdGlvbl9hY2Nlc3MYAiABKAsyMi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNvbGxlY3Rpb25BY2Nlc3NSdWxlSABCBwoFc2NvcGUiQQoQR2xvYmFsQWNjZXNzUnVsZRItCgthY2Nlc3NfdHlwZRgBIAEoCUIYukgVchNSCXJlYWQtb25seVIGbWFuYWdlIoECChRDb2xsZWN0aW9uQWNjZXNzUnVsZRI0Cg9jb2xsZWN0aW9uX25hbWUYASABKAlCG7pIGHIWEAQYQDIQXlthLXpBLVowLTktX10rJBIxCgthY2Nlc3NfdHlwZRgCIAEoCUIcukgZchdSCXJlYWQtb25seVIKcmVhZC13cml0ZRJQCgdwYXlsb2FkGAMgAygLMj8ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5Db2xsZWN0aW9uQWNjZXNzUnVsZS5QYXlsb2FkRW50cnkaLgoMUGF5bG9hZEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEylgYKFURhdGFiYXNlQXBpS2V5U2VydmljZRLhAQoTTGlzdERhdGFiYXNlQXBpS2V5cxI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QaOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkxpc3REYXRhYmFzZUFwaUtleXNSZXNwb25zZSJVirUYDXJlYWQ6YXBpX2tleXOC0+STAj4SPC9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9kYXRhYmFzZS1hcGkta2V5cxKZAgoUQ3JlYXRlRGF0YWJhc2VBcGlLZXkSOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNyZWF0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBo6LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSKJAYq1GA53cml0ZTphcGlfa2V5c5K1GBtkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWSC0+STAlI6ASoiTS9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3tkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWR9L2RhdGFiYXNlLWFwaS1rZXlzEvwBChREZWxldGVEYXRhYmFzZUFwaUtleRI5LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0GjoucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EZWxldGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlIm2KtRgPZGVsZXRlOmFwaV9rZXlzgtPkkwJUKlIvYXBpL2NsdXN0ZXIvYXV0aC92Mi9hY2NvdW50cy97YWNjb3VudF9pZH0vZGF0YWJhc2UtYXBpLWtleXMve2RhdGFiYXNlX2FwaV9rZXlfaWR9QqICCiBjb20ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52MkITRGF0YWJhc2VBcGlLZXlQcm90b1ABWlRnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvYXV0aC92MjthdXRodjKiAgRRQ0NBqgIcUWRyYW50LkNsb3VkLkNsdXN0ZXIuQXV0aC5WMsoCHFFkcmFudFxDbG91ZFxDbHVzdGVyXEF1dGhcVjLiAihRZHJhbnRcQ2xvdWRcQ2x1c3RlclxBdXRoXFYyXEdQQk1ldGFkYXRh6gIgUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6QXV0aDo6VjJiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CjNxZHJhbnQvY2xvdWQvY2x1c3Rlci9hdXRoL3YyL2RhdGFiYXNlX2FwaV9rZXkucHJvdG8SHHFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIiWAoaTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQEiWgobTGlzdERhdGFiYXNlQXBpS2V5c1Jlc3BvbnNlEjsKBWl0ZW1zGAEgAygLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSJlChtDcmVhdGVEYXRhYmFzZUFwaUtleVJlcXVlc3QSRgoQZGF0YWJhc2VfYXBpX2tleRgBIAEoCzIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGF0YWJhc2VBcGlLZXkiZgocQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZRJGChBkYXRhYmFzZV9hcGlfa2V5GAEgASgLMiwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EYXRhYmFzZUFwaUtleSKAAQobRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBEiUKE2RhdGFiYXNlX2FwaV9rZXlfaWQYAyABKAlCCLpIBXIDsAEBIh4KHERlbGV0ZURhdGFiYXNlQXBpS2V5UmVzcG9uc2UitgcKDkRhdGFiYXNlQXBpS2V5EgoKAmlkGAEgASgJEhwKCmFjY291bnRfaWQYAiABKAlCCLpIBXIDsAEBEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmNsdXN0ZXJfaWQYBCABKAlCCLpIBXIDsAEBEiQKBG5hbWUYBSABKAlCFrpIE3IREAQYgAEyCl5bXHdccy1dKyQSMwoKZXhwaXJlc19hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAIgBARJICgxhY2Nlc3NfcnVsZXMYByADKAsyKC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkFjY2Vzc1J1bGVCCLpIBZIBAhAUEhgKEGNyZWF0ZWRfYnlfZW1haWwYCCABKAkSDwoHcG9zdGZpeBgJIAEoCRILCgNrZXkYCiABKAk6vwS6SLsEGqwBChNkYXRhYmFzZV9hcGlfa2V5LmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KRrmAQoebm9fbWl4ZWRfZ2xvYmFsX2FuZF9jb2xsZWN0aW9uEk9UaGVyZSBjYW4ndCBiZSBnbG9iYWwgYW5kIGNvbGxlY3Rpb24gYWNjZXNzIHJ1bGVzIGluIHRoZSBzYW1lIGRhdGFiYXNlIGFwaSBrZXkuGnMhKHRoaXMuYWNjZXNzX3J1bGVzLmV4aXN0cyhyLCByLmdsb2JhbF9hY2Nlc3MgIT0gbnVsbCkgJiYgdGhpcy5hY2Nlc3NfcnVsZXMuZXhpc3RzKHIsIHIuY29sbGVjdGlvbl9hY2Nlc3MgIT0gbnVsbCkpGqABChZvbmx5X29uZV9nbG9iYWxfYWNjZXNzEkVUaGVyZSBjYW4ndCBiZSBtb3JlIHRoYW4gb25lIGdsb2JhbCBhY2Nlc3MgcnVsZSBpbiB0aGUgY29uZmlndXJhdGlvbi4aP3NpemUodGhpcy5hY2Nlc3NfcnVsZXMuZmlsdGVyKHIsIHIuZ2xvYmFsX2FjY2VzcyAhPSBudWxsKSkgPD0gMUINCgtfZXhwaXJlc19hdCKvAQoKQWNjZXNzUnVsZRJHCg1nbG9iYWxfYWNjZXNzGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5HbG9iYWxBY2Nlc3NSdWxlSAASTwoRY29sbGVjdGlvbl9hY2Nlc3MYAiABKAsyMi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNvbGxlY3Rpb25BY2Nlc3NSdWxlSABCBwoFc2NvcGUiYQoQR2xvYmFsQWNjZXNzUnVsZRJNCgthY2Nlc3NfdHlwZRgBIAEoDjI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuR2xvYmFsQWNjZXNzUnVsZUFjY2Vzc1R5cGUioQIKFENvbGxlY3Rpb25BY2Nlc3NSdWxlEjQKD2NvbGxlY3Rpb25fbmFtZRgBIAEoCUIbukgYchYQBBhAMhBeW2EtekEtWjAtOS1fXSskElEKC2FjY2Vzc190eXBlGAIgASgOMjwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5Db2xsZWN0aW9uQWNjZXNzUnVsZUFjY2Vzc1R5cGUSUAoHcGF5bG9hZBgDIAMoCzI/LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuQ29sbGVjdGlvbkFjY2Vzc1J1bGUuUGF5bG9hZEVudHJ5Gi4KDFBheWxvYWRFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBKqUBChpHbG9iYWxBY2Nlc3NSdWxlQWNjZXNzVHlwZRIuCipHTE9CQUxfQUNDRVNTX1JVTEVfQUNDRVNTX1RZUEVfVU5TUEVDSUZJRUQQABIsCihHTE9CQUxfQUNDRVNTX1JVTEVfQUNDRVNTX1RZUEVfUkVBRF9PTkxZEAESKQolR0xPQkFMX0FDQ0VTU19SVUxFX0FDQ0VTU19UWVBFX01BTkFHRRACKrkBCh5Db2xsZWN0aW9uQWNjZXNzUnVsZUFjY2Vzc1R5cGUSMgouQ09MTEVDVElPTl9BQ0NFU1NfUlVMRV9BQ0NFU1NfVFlQRV9VTlNQRUNJRklFRBAAEjAKLENPTExFQ1RJT05fQUNDRVNTX1JVTEVfQUNDRVNTX1RZUEVfUkVBRF9PTkxZEAESMQotQ09MTEVDVElPTl9BQ0NFU1NfUlVMRV9BQ0NFU1NfVFlQRV9SRUFEX1dSSVRFEAIylgYKFURhdGFiYXNlQXBpS2V5U2VydmljZRLhAQoTTGlzdERhdGFiYXNlQXBpS2V5cxI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuTGlzdERhdGFiYXNlQXBpS2V5c1JlcXVlc3QaOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkxpc3REYXRhYmFzZUFwaUtleXNSZXNwb25zZSJVirUYDXJlYWQ6YXBpX2tleXOC0+STAj4SPC9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9kYXRhYmFzZS1hcGkta2V5cxKZAgoUQ3JlYXRlRGF0YWJhc2VBcGlLZXkSOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5hdXRoLnYyLkNyZWF0ZURhdGFiYXNlQXBpS2V5UmVxdWVzdBo6LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuQ3JlYXRlRGF0YWJhc2VBcGlLZXlSZXNwb25zZSKJAYq1GA53cml0ZTphcGlfa2V5c5K1GBtkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWSC0+STAlI6ASoiTS9hcGkvY2x1c3Rlci9hdXRoL3YyL2FjY291bnRzL3tkYXRhYmFzZV9hcGlfa2V5LmFjY291bnRfaWR9L2RhdGFiYXNlLWFwaS1rZXlzEvwBChREZWxldGVEYXRhYmFzZUFwaUtleRI5LnFkcmFudC5jbG91ZC5jbHVzdGVyLmF1dGgudjIuRGVsZXRlRGF0YWJhc2VBcGlLZXlSZXF1ZXN0GjoucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52Mi5EZWxldGVEYXRhYmFzZUFwaUtleVJlc3BvbnNlIm2KtRgPZGVsZXRlOmFwaV9rZXlzgtPkkwJUKlIvYXBpL2NsdXN0ZXIvYXV0aC92Mi9hY2NvdW50cy97YWNjb3VudF9pZH0vZGF0YWJhc2UtYXBpLWtleXMve2RhdGFiYXNlX2FwaV9rZXlfaWR9QqICCiBjb20ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYXV0aC52MkITRGF0YWJhc2VBcGlLZXlQcm90b1ABWlRnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvYXV0aC92MjthdXRodjKiAgRRQ0NBqgIcUWRyYW50LkNsb3VkLkNsdXN0ZXIuQXV0aC5WMsoCHFFkcmFudFxDbG91ZFxDbHVzdGVyXEF1dGhcVjLiAihRZHJhbnRcQ2xvdWRcQ2x1c3RlclxBdXRoXFYyXEdQQk1ldGFkYXRh6gIgUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6QXV0aDo6VjJiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
@@ -312,15 +312,11 @@ export const AccessRuleSchema: GenMessage<AccessRule> = /*@__PURE__*/
 export type GlobalAccessRule = Message<"qdrant.cloud.cluster.auth.v2.GlobalAccessRule"> & {
   /**
    * The type of access granted at the global level.
-   * - "read-only": Grants access to perform actions that only read data (like `list collections`).
-   * - "manage": Grants access to perform all actions available in the database (like `update aliases`).
-   * For a detailed list of actions allowed for each access type, see:
-   * https://qdrant.tech/documentation/guides/security/#table-of-access
    * This is a required field.
    *
-   * @generated from field: string access_type = 1;
+   * @generated from field: qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType access_type = 1;
    */
-  accessType: string;
+  accessType: GlobalAccessRuleAccessType;
 };
 
 /**
@@ -346,15 +342,11 @@ export type CollectionAccessRule = Message<"qdrant.cloud.cluster.auth.v2.Collect
 
   /**
    * The type of access granted for the collection.
-   * - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
-   * - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
-   * For a detailed list of actions allowed for each access type, see:
-   * https://qdrant.tech/documentation/guides/security/#table-of-access
    * This is a required field.
    *
-   * @generated from field: string access_type = 2;
+   * @generated from field: qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType access_type = 2;
    */
-  accessType: string;
+  accessType: CollectionAccessRuleAccessType;
 
   /**
    * An optional set of key-value pairs used to restrict access within the collection.
@@ -371,6 +363,78 @@ export type CollectionAccessRule = Message<"qdrant.cloud.cluster.auth.v2.Collect
  */
 export const CollectionAccessRuleSchema: GenMessage<CollectionAccessRule> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 9);
+
+/**
+ * GlobalAccessRuleAccessType defines the possible access levels for global access rules.
+ * For a detailed list of actions allowed for each access type, see:
+ * https://qdrant.tech/documentation/guides/security/#table-of-access
+ *
+ * @generated from enum qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType
+ */
+export enum GlobalAccessRuleAccessType {
+  /**
+   * Unspecified access type.
+   *
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Grants access to perform actions that only read data (e.g., list collections).
+   *
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+   */
+  READ_ONLY = 1,
+
+  /**
+   * Grants access to perform all actions available in the database (e.g., update aliases).
+   *
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 2;
+   */
+  MANAGE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType.
+ */
+export const GlobalAccessRuleAccessTypeSchema: GenEnum<GlobalAccessRuleAccessType> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 0);
+
+/**
+ * CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.
+ * For a detailed list of actions allowed for each access type, see:
+ * https://qdrant.tech/documentation/guides/security/#table-of-access
+ *
+ * @generated from enum qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType
+ */
+export enum CollectionAccessRuleAccessType {
+  /**
+   * Unspecified access type.
+   *
+   * @generated from enum value: COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Grants access to perform collection-related actions that only read data (like `get collection info`).
+   *
+   * @generated from enum value: COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+   */
+  READ_ONLY = 1,
+
+  /**
+   * Grants access to perform collection-related actions that read or write data (like `upsert points`).
+   *
+   * @generated from enum value: COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE = 2;
+   */
+  READ_WRITE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType.
+ */
+export const CollectionAccessRuleAccessTypeSchema: GenEnum<CollectionAccessRuleAccessType> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_auth_v2_database_api_key, 1);
 
 /**
  * DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.

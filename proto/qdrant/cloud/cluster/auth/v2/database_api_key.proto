@@ -164,20 +164,35 @@ message AccessRule {
   }
 }
 
+// GlobalAccessRuleAccessType defines the possible access levels for global access rules.
+// For a detailed list of actions allowed for each access type, see:
+// https://qdrant.tech/documentation/guides/security/#table-of-access
+enum GlobalAccessRuleAccessType {
+  // Unspecified access type.
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+  // Grants access to perform actions that only read data (e.g., list collections).
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform all actions available in the database (e.g., update aliases).
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 2;
+}
+
 // Represents a global access rule that grants access to the entire database.
 message GlobalAccessRule {
   // The type of access granted at the global level.
-  // - "read-only": Grants access to perform actions that only read data (like `list collections`).
-  // - "manage": Grants access to perform all actions available in the database (like `update aliases`).
-  // For a detailed list of actions allowed for each access type, see:
-  // https://qdrant.tech/documentation/guides/security/#table-of-access
   // This is a required field.
-  string access_type = 1 [(buf.validate.field).string = {
-    in: [
-      "read-only",
-      "manage"
-    ]
-  }];
+  GlobalAccessRuleAccessType access_type = 1;
+}
+
+// CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.
+// For a detailed list of actions allowed for each access type, see:
+// https://qdrant.tech/documentation/guides/security/#table-of-access
+enum CollectionAccessRuleAccessType {
+  // Unspecified access type.
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+  // Grants access to perform collection-related actions that only read data (like `get collection info`).
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE = 2;
 }
 
 // Represents an access rule for a specific collection in the database.
@@ -190,17 +205,8 @@ message CollectionAccessRule {
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The type of access granted for the collection.
-  // - "read-only": Grants access to perform collection-related actions that only read data (like `get collection info`).
-  // - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
-  // For a detailed list of actions allowed for each access type, see:
-  // https://qdrant.tech/documentation/guides/security/#table-of-access
   // This is a required field.
-  string access_type = 2 [(buf.validate.field).string = {
-    in: [
-      "read-only",
-      "read-write"
-    ]
-  }];
+  CollectionAccessRuleAccessType access_type = 2;
   // An optional set of key-value pairs used to restrict access within the collection.
   // Only points containing the specified key-value pairs in their payload will be accessible.
   map<string, string> payload = 3;

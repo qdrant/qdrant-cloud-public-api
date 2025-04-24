@@ -3,11 +3,30 @@ from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class GlobalAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: _ClassVar[GlobalAccessRuleAccessType]
+    GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: _ClassVar[GlobalAccessRuleAccessType]
+    GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: _ClassVar[GlobalAccessRuleAccessType]
+
+class CollectionAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: _ClassVar[CollectionAccessRuleAccessType]
+    COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: _ClassVar[CollectionAccessRuleAccessType]
+    COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: _ClassVar[CollectionAccessRuleAccessType]
+GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: GlobalAccessRuleAccessType
+GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: GlobalAccessRuleAccessType
+GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: GlobalAccessRuleAccessType
+COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: CollectionAccessRuleAccessType
+COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: CollectionAccessRuleAccessType
+COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: CollectionAccessRuleAccessType
 
 class ListDatabaseApiKeysRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id")
@@ -84,8 +103,8 @@ class AccessRule(_message.Message):
 class GlobalAccessRule(_message.Message):
     __slots__ = ("access_type",)
     ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
-    access_type: str
-    def __init__(self, access_type: _Optional[str] = ...) -> None: ...
+    access_type: GlobalAccessRuleAccessType
+    def __init__(self, access_type: _Optional[_Union[GlobalAccessRuleAccessType, str]] = ...) -> None: ...
 
 class CollectionAccessRule(_message.Message):
     __slots__ = ("collection_name", "access_type", "payload")
@@ -100,6 +119,6 @@ class CollectionAccessRule(_message.Message):
     ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
     PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     collection_name: str
-    access_type: str
+    access_type: CollectionAccessRuleAccessType
     payload: _containers.ScalarMap[str, str]
-    def __init__(self, collection_name: _Optional[str] = ..., access_type: _Optional[str] = ..., payload: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, collection_name: _Optional[str] = ..., access_type: _Optional[_Union[CollectionAccessRuleAccessType, str]] = ..., payload: _Optional[_Mapping[str, str]] = ...) -> None: ...

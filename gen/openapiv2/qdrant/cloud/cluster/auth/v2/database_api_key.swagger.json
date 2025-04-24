@@ -328,8 +328,8 @@
           "description": "The name of the collection.\nThis is a required field."
         },
         "accessType": {
-          "type": "string",
-          "description": "The type of access granted for the collection.\n- \"read-only\": Grants access to perform collection-related actions that only read data (like `get collection info`).\n- \"read-write\": Grants access to perform collection-related actions that read or write data (like `upsert points`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
+          "$ref": "#/definitions/v2CollectionAccessRuleAccessType",
+          "description": "The type of access granted for the collection.\nThis is a required field."
         },
         "payload": {
           "type": "object",
@@ -341,15 +341,37 @@
       },
       "description": "Represents an access rule for a specific collection in the database."
     },
+    "v2CollectionAccessRuleAccessType": {
+      "type": "string",
+      "enum": [
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE"
+      ],
+      "default": "COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+      "description": "- COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform collection-related actions that only read data (like `get collection info`).\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: Grants access to perform collection-related actions that read or write data (like `upsert points`).",
+      "title": "CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
+    },
     "v2GlobalAccessRule": {
       "type": "object",
       "properties": {
         "accessType": {
-          "type": "string",
-          "description": "The type of access granted at the global level.\n- \"read-only\": Grants access to perform actions that only read data (like `list collections`).\n- \"manage\": Grants access to perform all actions available in the database (like `update aliases`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
+          "$ref": "#/definitions/v2GlobalAccessRuleAccessType",
+          "description": "The type of access granted at the global level.\nThis is a required field."
         }
       },
       "description": "Represents a global access rule that grants access to the entire database."
+    },
+    "v2GlobalAccessRuleAccessType": {
+      "type": "string",
+      "enum": [
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE"
+      ],
+      "default": "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+      "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the database (e.g., update aliases).",
+      "title": "GlobalAccessRuleAccessType defines the possible access levels for global access rules.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
     }
   }
 }
