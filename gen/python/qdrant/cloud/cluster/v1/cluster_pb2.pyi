@@ -3,11 +3,80 @@ from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class ClusterConfigurationGpuType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: _ClassVar[ClusterConfigurationGpuType]
+    CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: _ClassVar[ClusterConfigurationGpuType]
+    CLUSTER_CONFIGURATION_GPU_TYPE_AMD: _ClassVar[ClusterConfigurationGpuType]
+
+class ClusterConfigurationRestartPolicy(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: _ClassVar[ClusterConfigurationRestartPolicy]
+    CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: _ClassVar[ClusterConfigurationRestartPolicy]
+    CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: _ClassVar[ClusterConfigurationRestartPolicy]
+    CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: _ClassVar[ClusterConfigurationRestartPolicy]
+
+class ClusterConfigurationRebalanceStrategy(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: _ClassVar[ClusterConfigurationRebalanceStrategy]
+    CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: _ClassVar[ClusterConfigurationRebalanceStrategy]
+    CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: _ClassVar[ClusterConfigurationRebalanceStrategy]
+    CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: _ClassVar[ClusterConfigurationRebalanceStrategy]
+
+class DatabaseConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_INFO: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_WARN: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: _ClassVar[DatabaseConfigurationLogLevel]
+    DATABASE_CONFIGURATION_LOG_LEVEL_OFF: _ClassVar[DatabaseConfigurationLogLevel]
+
+class TolerationOperator(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TOLERATION_OPERATOR_UNSPECIFIED: _ClassVar[TolerationOperator]
+    TOLERATION_OPERATOR_EXISTS: _ClassVar[TolerationOperator]
+    TOLERATION_OPERATOR_EQUAL: _ClassVar[TolerationOperator]
+
+class TolerationEffect(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TOLERATION_EFFECT_UNSPECIFIED: _ClassVar[TolerationEffect]
+    TOLERATION_EFFECT_NO_SCHEDULE: _ClassVar[TolerationEffect]
+    TOLERATION_EFFECT_PREFER_NO_SCHEDULE: _ClassVar[TolerationEffect]
+    TOLERATION_EFFECT_NO_EXECUTE: _ClassVar[TolerationEffect]
+CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: ClusterConfigurationGpuType
+CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: ClusterConfigurationGpuType
+CLUSTER_CONFIGURATION_GPU_TYPE_AMD: ClusterConfigurationGpuType
+CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: ClusterConfigurationRestartPolicy
+CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: ClusterConfigurationRestartPolicy
+CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: ClusterConfigurationRestartPolicy
+CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: ClusterConfigurationRestartPolicy
+CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: ClusterConfigurationRebalanceStrategy
+CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: ClusterConfigurationRebalanceStrategy
+CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: ClusterConfigurationRebalanceStrategy
+CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: ClusterConfigurationRebalanceStrategy
+DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_INFO: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_WARN: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_LOG_LEVEL_OFF: DatabaseConfigurationLogLevel
+TOLERATION_OPERATOR_UNSPECIFIED: TolerationOperator
+TOLERATION_OPERATOR_EXISTS: TolerationOperator
+TOLERATION_OPERATOR_EQUAL: TolerationOperator
+TOLERATION_EFFECT_UNSPECIFIED: TolerationEffect
+TOLERATION_EFFECT_NO_SCHEDULE: TolerationEffect
+TOLERATION_EFFECT_PREFER_NO_SCHEDULE: TolerationEffect
+TOLERATION_EFFECT_NO_EXECUTE: TolerationEffect
 
 class ListClustersRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider", "cloud_region")
@@ -154,10 +223,10 @@ class ClusterConfiguration(_message.Message):
     allowed_ip_source_ranges: _containers.RepeatedScalarFieldContainer[str]
     reserved_cpu_percentage: int
     reserved_memory_percentage: int
-    gpu_type: str
-    restart_policy: str
-    rebalance_strategy: str
-    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[str] = ..., restart_policy: _Optional[str] = ..., rebalance_strategy: _Optional[str] = ...) -> None: ...
+    gpu_type: ClusterConfigurationGpuType
+    restart_policy: ClusterConfigurationRestartPolicy
+    rebalance_strategy: ClusterConfigurationRebalanceStrategy
+    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[_Union[ClusterConfigurationGpuType, str]] = ..., restart_policy: _Optional[_Union[ClusterConfigurationRestartPolicy, str]] = ..., rebalance_strategy: _Optional[_Union[ClusterConfigurationRebalanceStrategy, str]] = ...) -> None: ...
 
 class DatabaseConfiguration(_message.Message):
     __slots__ = ("collection", "storage", "service", "log_level", "tls", "inference")
@@ -170,10 +239,10 @@ class DatabaseConfiguration(_message.Message):
     collection: DatabaseConfigurationCollection
     storage: DatabaseConfigurationStorage
     service: DatabaseConfigurationService
-    log_level: str
+    log_level: DatabaseConfigurationLogLevel
     tls: DatabaseConfigurationTls
     inference: DatabaseConfigurationInference
-    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[str] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ...) -> None: ...
+    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollection(_message.Message):
     __slots__ = ("replication_factor", "write_consistency_factor", "vectors")
@@ -245,11 +314,11 @@ class Toleration(_message.Message):
     EFFECT_FIELD_NUMBER: _ClassVar[int]
     TOLERATION_SECONDS_FIELD_NUMBER: _ClassVar[int]
     key: str
-    operator: str
+    operator: TolerationOperator
     value: str
-    effect: str
+    effect: TolerationEffect
     toleration_seconds: int
-    def __init__(self, key: _Optional[str] = ..., operator: _Optional[str] = ..., value: _Optional[str] = ..., effect: _Optional[str] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
+    def __init__(self, key: _Optional[str] = ..., operator: _Optional[_Union[TolerationOperator, str]] = ..., value: _Optional[str] = ..., effect: _Optional[_Union[TolerationEffect, str]] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
 
 class ClusterState(_message.Message):
     __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources")

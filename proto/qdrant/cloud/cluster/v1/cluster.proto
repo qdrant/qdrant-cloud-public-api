@@ -266,6 +266,40 @@ message Cluster {
   ClusterState state = 100;
 }
 
+// ClusterConfigurationGpuType defines GPU types available for clusters.
+enum ClusterConfigurationGpuType {
+  // No GPU is configured.
+  CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED = 0;
+  // Use an NVIDIA GPU.
+  CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA = 1;
+  // Use an AMD GPU.
+  CLUSTER_CONFIGURATION_GPU_TYPE_AMD = 2;
+}
+
+// ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.
+enum ClusterConfigurationRestartPolicy {
+  // Restart policy is unspecified.
+  CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED = 0;
+  // Rolling restart policy (one by one).
+  CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING = 1;
+  // Parallel restart policy (restart all at once).
+  CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL = 2;
+  // Automatic restart policy.
+  CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC = 3;
+}
+
+// ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.
+enum ClusterConfigurationRebalanceStrategy {
+  // No rebalancing strategy is configured.
+  CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED = 0;
+  // Rebalance shards by count.
+  CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT = 1;
+  // Rebalance shards by size.
+  CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE = 2;
+  // Rebalance shards by both count and size.
+  CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE = 3;
+}
+
 // A ClusterConfiguration represents the configuration of a cluster.
 message ClusterConfiguration {
   // Timestamp when the cluster configuration was last updated.
@@ -329,33 +363,32 @@ message ClusterConfiguration {
   }];
   // The gpu type that should be used for the database
   // This is an optional field, default is No configured GPU
-  // The allowed values are: nvidia, amd
-  optional string gpu_type = 22 [(buf.validate.field).string = {
-    in: [
-      "nvidia",
-      "amd"
-    ]
-  }];
+  optional ClusterConfigurationGpuType gpu_type = 22;
   // The restart policy for the database
   // This is an optional field, default is Automatic
-  // The allowed values are: Rolling, Parallel, Automatic
-  optional string restart_policy = 23 [(buf.validate.field).string = {
-    in: [
-      "Rolling",
-      "Parallel",
-      "Automatic"
-    ]
-  }];
+  optional ClusterConfigurationRestartPolicy restart_policy = 23;
   // The automatic shard rebalancing strategy for the database
   // This is an optional field, default is none
-  // The allowed values are: by_count, by_size, by_count_and_size
-  optional string rebalance_strategy = 24 [(buf.validate.field).string = {
-    in: [
-      "by_count",
-      "by_size",
-      "by_count_and_size"
-    ]
-  }];
+  optional ClusterConfigurationRebalanceStrategy rebalance_strategy = 24;
+}
+
+// DatabaseConfigurationLogLevel defines the supported logging levels for the
+// Qdrant database. See: https://docs.rs/log/latest/log/enum.LevelFilter.html
+enum DatabaseConfigurationLogLevel {
+  // Unspecified log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED = 0;
+  // Trace log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_TRACE = 1;
+  // Debug log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG = 2;
+  // Info log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_INFO = 3;
+  // Warn log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_WARN = 4;
+  // Error log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_ERROR = 5;
+  // Off log level.
+  DATABASE_CONFIGURATION_LOG_LEVEL_OFF = 6;
 }
 
 // Configuration to setup a Qdrant database in a hybrid cloud.
@@ -371,19 +404,9 @@ message DatabaseConfiguration {
   // This is an optional field
   optional DatabaseConfigurationService service = 3;
   // The log level for the database
-  // This is an optional field, default is Info
-  // The allowed values are: Trace, Debug, Info, Warn, Error, Off
+  // This is an optional field, default is Info.
   // Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
-  optional string log_level = 4 [(buf.validate.field).string = {
-    in: [
-      "Trace",
-      "Debug",
-      "Info",
-      "Warn",
-      "Error"
-      "Off"
-    ]
-  }];
+  optional DatabaseConfigurationLogLevel log_level = 4;
   // The Qdrant database TLS configuration
   // This is an optional field, if not set an unsecure connection is provided
   optional DatabaseConfigurationTls tls = 5;
@@ -470,6 +493,30 @@ message AdditionalResources {
   uint32 disk = 3;
 }
 
+// TolerationOperator defines the valid operators for tolerations.
+// See: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+enum TolerationOperator {
+  // Unspecified operator.
+  TOLERATION_OPERATOR_UNSPECIFIED = 0;
+  // The operator means the key exists.
+  TOLERATION_OPERATOR_EXISTS = 1;
+  // The operator means the key equals the given value.
+  TOLERATION_OPERATOR_EQUAL = 2;
+}
+
+// TolerationEffect represents the effects a taint has on pod scheduling and eviction.
+// See: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+enum TolerationEffect {
+  // Unspecified effect.
+  TOLERATION_EFFECT_UNSPECIFIED = 0;
+  // NoSchedule taint effect.
+  TOLERATION_EFFECT_NO_SCHEDULE = 1;
+  // PreferNoSchedule taint effect.
+  TOLERATION_EFFECT_PREFER_NO_SCHEDULE = 2;
+  // NoExecute taint effect.
+  TOLERATION_EFFECT_NO_EXECUTE = 3;
+}
+
 // The Toleration message represents a toleration object for Kubernetes.
 message Toleration {
   // The key to match against the key of a node label.
@@ -480,26 +527,13 @@ message Toleration {
     pattern: "^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$"
   }];
   // The operator represents a key's relationship to the value.
-  // Valid operators are "Exists" and "Equal".
-  // The default is Exists
-  optional string operator = 2 [(buf.validate.field).string = {
-    in: [
-      "Exists",
-      "Equal"
-    ]
-  }];
+  // The default is TOLERATION_OPERATOR_EXISTS.
+  optional TolerationOperator operator = 2;
   // The value to match against the value of a node label.
   string value = 3;
   // The effect indicates the taint effect to match.
-  // Valid effects are "NoSchedule", "PreferNoSchedule", and "NoExecute".
-  // The default is NoSchedule
-  optional string effect = 4 [(buf.validate.field).string = {
-    in: [
-      "NoSchedule",
-      "PreferNoSchedule",
-      "NoExecute"
-    ]
-  }];
+  // The default is TOLERATION_EFFECT_NO_SCHEDULE.
+  optional TolerationEffect effect = 4;
   // The toleration seconds indicates the duration to tolerate the taint.
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)
