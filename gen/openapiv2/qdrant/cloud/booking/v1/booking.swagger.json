@@ -58,12 +58,17 @@
           },
           {
             "name": "statuses",
-            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.",
+            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.\n\n - PACKAGE_STATUS_UNSPECIFIED: Unspecified package status.\n - PACKAGE_STATUS_ACTIVE: The package is active and available for use.\n - PACKAGE_STATUS_DEACTIVATED: The package is deactivated.",
             "in": "query",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PACKAGE_STATUS_UNSPECIFIED",
+                "PACKAGE_STATUS_ACTIVE",
+                "PACKAGE_STATUS_DEACTIVATED"
+              ]
             },
             "collectionFormat": "multi"
           }
@@ -195,11 +200,21 @@
           "description": "The unit price per hour in millicents, in integer format.\nRepresents the cost per hour for a single unit of the resource.\nYou will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours."
         },
         "status": {
-          "type": "string",
-          "title": "The status of the package.\nIndicates the current status of the package.\nOne of: Active, Deactivated"
+          "$ref": "#/definitions/v1PackageStatus",
+          "description": "The status of the package.\nIndicates the current status of the package."
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."
+    },
+    "v1PackageStatus": {
+      "type": "string",
+      "enum": [
+        "PACKAGE_STATUS_UNSPECIFIED",
+        "PACKAGE_STATUS_ACTIVE",
+        "PACKAGE_STATUS_DEACTIVATED"
+      ],
+      "default": "PACKAGE_STATUS_UNSPECIFIED",
+      "description": "PackageStatus defines the valid states a package can be in.\n\n - PACKAGE_STATUS_UNSPECIFIED: Unspecified package status.\n - PACKAGE_STATUS_ACTIVE: The package is active and available for use.\n - PACKAGE_STATUS_DEACTIVATED: The package is deactivated."
     },
     "v1ResourceConfiguration": {
       "type": "object",

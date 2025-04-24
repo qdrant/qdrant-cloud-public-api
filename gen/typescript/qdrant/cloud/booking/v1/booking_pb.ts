@@ -2,8 +2,8 @@
 // @generated from file qdrant/cloud/booking/v1/booking.proto (package qdrant.cloud.booking.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
-import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
 import { file_google_api_annotations } from "../../../../google/api/annotations_pb";
 import { file_qdrant_cloud_common_v1_common } from "../../common/v1/common_pb";
@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/booking/v1/booking.proto.
  */
 export const file_qdrant_cloud_booking_v1_booking: GenFile = /*@__PURE__*/
-  fileDesc("CiVxZHJhbnQvY2xvdWQvYm9va2luZy92MS9ib29raW5nLnByb3RvEhdxZHJhbnQuY2xvdWQuYm9va2luZy52MSLMAQoTTGlzdFBhY2thZ2VzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARI7Cg5jbG91ZF9wcm92aWRlchgCIAEoCUIeukgbchlSA2F3c1IDZ2NwUgVhenVyZVIGaHlicmlkSACIAQESFAoMY2xvdWRfcmVnaW9uGAMgASgJEjEKCHN0YXR1c2VzGAQgAygJQh+6SBySARkiF3IVUgZBY3RpdmVSC0RlYWN0aXZhdGVkQhEKD19jbG91ZF9wcm92aWRlciJHChRMaXN0UGFja2FnZXNSZXNwb25zZRIvCgVpdGVtcxgBIAMoCzIgLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLlBhY2thZ2UiRwoRR2V0UGFja2FnZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESFAoCaWQYAiABKAlCCLpIBXIDsAEBIkcKEkdldFBhY2thZ2VSZXNwb25zZRIxCgdwYWNrYWdlGAEgASgLMiAucWRyYW50LmNsb3VkLmJvb2tpbmcudjEuUGFja2FnZSLOAQoHUGFja2FnZRIUCgJpZBgBIAEoCUIIukgFcgOwAQESDAoEbmFtZRgCIAEoCRIMCgR0eXBlGAMgASgJEk4KFnJlc291cmNlX2NvbmZpZ3VyYXRpb24YBCABKAsyLi5xZHJhbnQuY2xvdWQuYm9va2luZy52MS5SZXNvdXJjZUNvbmZpZ3VyYXRpb24SEAoIY3VycmVuY3kYBSABKAkSHwoXdW5pdF9pbnRfcHJpY2VfcGVyX2hvdXIYBiABKAUSDgoGc3RhdHVzGAcgASgJIj8KFVJlc291cmNlQ29uZmlndXJhdGlvbhILCgNyYW0YASABKAkSCwoDY3B1GAIgASgJEgwKBGRpc2sYAyABKAky4wIKDkJvb2tpbmdTZXJ2aWNlEqcBCgxMaXN0UGFja2FnZXMSLC5xZHJhbnQuY2xvdWQuYm9va2luZy52MS5MaXN0UGFja2FnZXNSZXF1ZXN0Gi0ucWRyYW50LmNsb3VkLmJvb2tpbmcudjEuTGlzdFBhY2thZ2VzUmVzcG9uc2UiOoq1GACC0+STAjASLi9hcGkvYm9va2luZy92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vcGFja2FnZXMSpgEKCkdldFBhY2thZ2USKi5xZHJhbnQuY2xvdWQuYm9va2luZy52MS5HZXRQYWNrYWdlUmVxdWVzdBorLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLkdldFBhY2thZ2VSZXNwb25zZSI/irUYAILT5JMCNRIzL2FwaS9ib29raW5nL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9wYWNrYWdlcy97aWR9Qv4BChtjb20ucWRyYW50LmNsb3VkLmJvb2tpbmcudjFCDEJvb2tpbmdQcm90b1ABWlJnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2Jvb2tpbmcvdjE7Ym9va2luZ3YxogIDUUNCqgIXUWRyYW50LkNsb3VkLkJvb2tpbmcuVjHKAhdRZHJhbnRcQ2xvdWRcQm9va2luZ1xWMeICI1FkcmFudFxDbG91ZFxCb29raW5nXFYxXEdQQk1ldGFkYXRh6gIaUWRyYW50OjpDbG91ZDo6Qm9va2luZzo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CiVxZHJhbnQvY2xvdWQvYm9va2luZy92MS9ib29raW5nLnByb3RvEhdxZHJhbnQuY2xvdWQuYm9va2luZy52MSLTAQoTTGlzdFBhY2thZ2VzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARI7Cg5jbG91ZF9wcm92aWRlchgCIAEoCUIeukgbchlSA2F3c1IDZ2NwUgVhenVyZVIGaHlicmlkSACIAQESFAoMY2xvdWRfcmVnaW9uGAMgASgJEjgKCHN0YXR1c2VzGAQgAygOMiYucWRyYW50LmNsb3VkLmJvb2tpbmcudjEuUGFja2FnZVN0YXR1c0IRCg9fY2xvdWRfcHJvdmlkZXIiRwoUTGlzdFBhY2thZ2VzUmVzcG9uc2USLwoFaXRlbXMYASADKAsyIC5xZHJhbnQuY2xvdWQuYm9va2luZy52MS5QYWNrYWdlIkcKEUdldFBhY2thZ2VSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhQKAmlkGAIgASgJQgi6SAVyA7ABASJHChJHZXRQYWNrYWdlUmVzcG9uc2USMQoHcGFja2FnZRgBIAEoCzIgLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLlBhY2thZ2Ui9gEKB1BhY2thZ2USFAoCaWQYASABKAlCCLpIBXIDsAEBEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRJOChZyZXNvdXJjZV9jb25maWd1cmF0aW9uGAQgASgLMi4ucWRyYW50LmNsb3VkLmJvb2tpbmcudjEuUmVzb3VyY2VDb25maWd1cmF0aW9uEhAKCGN1cnJlbmN5GAUgASgJEh8KF3VuaXRfaW50X3ByaWNlX3Blcl9ob3VyGAYgASgFEjYKBnN0YXR1cxgHIAEoDjImLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLlBhY2thZ2VTdGF0dXMiPwoVUmVzb3VyY2VDb25maWd1cmF0aW9uEgsKA3JhbRgBIAEoCRILCgNjcHUYAiABKAkSDAoEZGlzaxgDIAEoCSpqCg1QYWNrYWdlU3RhdHVzEh4KGlBBQ0tBR0VfU1RBVFVTX1VOU1BFQ0lGSUVEEAASGQoVUEFDS0FHRV9TVEFUVVNfQUNUSVZFEAESHgoaUEFDS0FHRV9TVEFUVVNfREVBQ1RJVkFURUQQAjLjAgoOQm9va2luZ1NlcnZpY2USpwEKDExpc3RQYWNrYWdlcxIsLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLkxpc3RQYWNrYWdlc1JlcXVlc3QaLS5xZHJhbnQuY2xvdWQuYm9va2luZy52MS5MaXN0UGFja2FnZXNSZXNwb25zZSI6irUYAILT5JMCMBIuL2FwaS9ib29raW5nL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9wYWNrYWdlcxKmAQoKR2V0UGFja2FnZRIqLnFkcmFudC5jbG91ZC5ib29raW5nLnYxLkdldFBhY2thZ2VSZXF1ZXN0GisucWRyYW50LmNsb3VkLmJvb2tpbmcudjEuR2V0UGFja2FnZVJlc3BvbnNlIj+KtRgAgtPkkwI1EjMvYXBpL2Jvb2tpbmcvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3BhY2thZ2VzL3tpZH1C/gEKG2NvbS5xZHJhbnQuY2xvdWQuYm9va2luZy52MUIMQm9va2luZ1Byb3RvUAFaUmdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvYm9va2luZy92MTtib29raW5ndjGiAgNRQ0KqAhdRZHJhbnQuQ2xvdWQuQm9va2luZy5WMcoCF1FkcmFudFxDbG91ZFxCb29raW5nXFYx4gIjUWRyYW50XENsb3VkXEJvb2tpbmdcVjFcR1BCTWV0YWRhdGHqAhpRZHJhbnQ6OkNsb3VkOjpCb29raW5nOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListPackagesRequest is the request for the ListPackages function
@@ -49,9 +49,9 @@ export type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListPackagesR
    * The status of the packages to filter.
    * This is an optional field. If value is not set, all packages are returned.
    *
-   * @generated from field: repeated string statuses = 4;
+   * @generated from field: repeated qdrant.cloud.booking.v1.PackageStatus statuses = 4;
    */
-  statuses: string[];
+  statuses: PackageStatus[];
 };
 
 /**
@@ -190,11 +190,10 @@ export type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   /**
    * The status of the package.
    * Indicates the current status of the package.
-   * One of: Active, Deactivated
    *
-   * @generated from field: string status = 7;
+   * @generated from field: qdrant.cloud.booking.v1.PackageStatus status = 7;
    */
-  status: string;
+  status: PackageStatus;
 };
 
 /**
@@ -238,6 +237,40 @@ export type ResourceConfiguration = Message<"qdrant.cloud.booking.v1.ResourceCon
  */
 export const ResourceConfigurationSchema: GenMessage<ResourceConfiguration> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_booking_v1_booking, 5);
+
+/**
+ * PackageStatus defines the valid states a package can be in.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.PackageStatus
+ */
+export enum PackageStatus {
+  /**
+   * Unspecified package status.
+   *
+   * @generated from enum value: PACKAGE_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The package is active and available for use.
+   *
+   * @generated from enum value: PACKAGE_STATUS_ACTIVE = 1;
+   */
+  ACTIVE = 1,
+
+  /**
+   * The package is deactivated.
+   *
+   * @generated from enum value: PACKAGE_STATUS_DEACTIVATED = 2;
+   */
+  DEACTIVATED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.PackageStatus.
+ */
+export const PackageStatusSchema: GenEnum<PackageStatus> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_booking_v1_booking, 0);
 
 /**
  * BookingService is the API used to configure the booking settings (like packages objects).

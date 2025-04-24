@@ -48,12 +48,7 @@ message ListPackagesRequest {
   string cloud_region = 3;
   // The status of the packages to filter.
   // This is an optional field. If value is not set, all packages are returned.
-  repeated string statuses = 4 [(buf.validate.field).repeated.items.string = {
-    in: [
-      "Active",
-      "Deactivated"
-    ]
-  }];
+  repeated PackageStatus statuses = 4;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -76,6 +71,16 @@ message GetPackageRequest {
 message GetPackageResponse {
   // The actual package
   Package package = 1;
+}
+
+// PackageStatus defines the valid states a package can be in.
+enum PackageStatus {
+  // Unspecified package status.
+  PACKAGE_STATUS_UNSPECIFIED = 0;
+  // The package is active and available for use.
+  PACKAGE_STATUS_ACTIVE = 1;
+  // The package is deactivated.
+  PACKAGE_STATUS_DEACTIVATED = 2;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -101,8 +106,7 @@ message Package {
   int32 unit_int_price_per_hour = 6;
   // The status of the package.
   // Indicates the current status of the package.
-  // One of: Active, Deactivated
-  string status = 7;
+  PackageStatus status = 7;
 }
 
 // ResourceConfiguration defines the resource configuration for a package.
