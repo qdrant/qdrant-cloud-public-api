@@ -1,10 +1,67 @@
-from buf.validate import validate_pb2 as _validate_pb2
 from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class DistanceMetric(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    DISTANCE_METRIC_UNSPECIFIED: _ClassVar[DistanceMetric]
+    DISTANCE_METRIC_COSINE: _ClassVar[DistanceMetric]
+    DISTANCE_METRIC_EUCLID: _ClassVar[DistanceMetric]
+    DISTANCE_METRIC_DOT: _ClassVar[DistanceMetric]
+    DISTANCE_METRIC_MANHATTAN: _ClassVar[DistanceMetric]
+
+class StorageTier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    STORAGE_TIER_UNSPECIFIED: _ClassVar[StorageTier]
+    STORAGE_TIER_STORAGE: _ClassVar[StorageTier]
+    STORAGE_TIER_BALANCED: _ClassVar[StorageTier]
+    STORAGE_TIER_PERFORMANCE: _ClassVar[StorageTier]
+
+class PrecisionTier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PRECISION_TIER_UNSPECIFIED: _ClassVar[PrecisionTier]
+    PRECISION_TIER_LOW: _ClassVar[PrecisionTier]
+    PRECISION_TIER_MEDIUM: _ClassVar[PrecisionTier]
+    PRECISION_TIER_HIGH: _ClassVar[PrecisionTier]
+
+class VectorModifier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    VECTOR_MODIFIER_UNSPECIFIED: _ClassVar[VectorModifier]
+    VECTOR_MODIFIER_NONE: _ClassVar[VectorModifier]
+    VECTOR_MODIFIER_IDF: _ClassVar[VectorModifier]
+
+class Tokenizer(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TOKENIZER_UNSPECIFIED: _ClassVar[Tokenizer]
+    TOKENIZER_PREFIX: _ClassVar[Tokenizer]
+    TOKENIZER_WHITESPACE: _ClassVar[Tokenizer]
+    TOKENIZER_WORD: _ClassVar[Tokenizer]
+    TOKENIZER_MULTILINGUAL: _ClassVar[Tokenizer]
+DISTANCE_METRIC_UNSPECIFIED: DistanceMetric
+DISTANCE_METRIC_COSINE: DistanceMetric
+DISTANCE_METRIC_EUCLID: DistanceMetric
+DISTANCE_METRIC_DOT: DistanceMetric
+DISTANCE_METRIC_MANHATTAN: DistanceMetric
+STORAGE_TIER_UNSPECIFIED: StorageTier
+STORAGE_TIER_STORAGE: StorageTier
+STORAGE_TIER_BALANCED: StorageTier
+STORAGE_TIER_PERFORMANCE: StorageTier
+PRECISION_TIER_UNSPECIFIED: PrecisionTier
+PRECISION_TIER_LOW: PrecisionTier
+PRECISION_TIER_MEDIUM: PrecisionTier
+PRECISION_TIER_HIGH: PrecisionTier
+VECTOR_MODIFIER_UNSPECIFIED: VectorModifier
+VECTOR_MODIFIER_NONE: VectorModifier
+VECTOR_MODIFIER_IDF: VectorModifier
+TOKENIZER_UNSPECIFIED: Tokenizer
+TOKENIZER_PREFIX: Tokenizer
+TOKENIZER_WHITESPACE: Tokenizer
+TOKENIZER_WORD: Tokenizer
+TOKENIZER_MULTILINGUAL: Tokenizer
 
 class CollectionConfiguration(_message.Message):
     __slots__ = ("tenant_key", "dense_vectors", "sparse_vectors", "payload_schema")
@@ -48,20 +105,20 @@ class DenseVectorConfiguration(_message.Message):
     STORAGE_TIER_FIELD_NUMBER: _ClassVar[int]
     PRECISION_TIER_FIELD_NUMBER: _ClassVar[int]
     dimension: int
-    distance: str
+    distance: DistanceMetric
     multivector: bool
     rescoring: bool
-    storage_tier: str
-    precision_tier: str
-    def __init__(self, dimension: _Optional[int] = ..., distance: _Optional[str] = ..., multivector: bool = ..., rescoring: bool = ..., storage_tier: _Optional[str] = ..., precision_tier: _Optional[str] = ...) -> None: ...
+    storage_tier: StorageTier
+    precision_tier: PrecisionTier
+    def __init__(self, dimension: _Optional[int] = ..., distance: _Optional[_Union[DistanceMetric, str]] = ..., multivector: bool = ..., rescoring: bool = ..., storage_tier: _Optional[_Union[StorageTier, str]] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
 
 class SparseVectorConfiguration(_message.Message):
     __slots__ = ("precision_tier", "modifier")
     PRECISION_TIER_FIELD_NUMBER: _ClassVar[int]
     MODIFIER_FIELD_NUMBER: _ClassVar[int]
-    precision_tier: str
-    modifier: str
-    def __init__(self, precision_tier: _Optional[str] = ..., modifier: _Optional[str] = ...) -> None: ...
+    precision_tier: PrecisionTier
+    modifier: VectorModifier
+    def __init__(self, precision_tier: _Optional[_Union[PrecisionTier, str]] = ..., modifier: _Optional[_Union[VectorModifier, str]] = ...) -> None: ...
 
 class KeywordIndexParams(_message.Message):
     __slots__ = ("is_tenant", "on_disk")
@@ -104,12 +161,12 @@ class TextIndexParams(_message.Message):
     MAX_TOKEN_LEN_FIELD_NUMBER: _ClassVar[int]
     LOWERCASE_FIELD_NUMBER: _ClassVar[int]
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
-    tokenizer: str
+    tokenizer: Tokenizer
     min_token_len: int
     max_token_len: int
     lowercase: bool
     on_disk: bool
-    def __init__(self, tokenizer: _Optional[str] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., lowercase: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., lowercase: bool = ..., on_disk: bool = ...) -> None: ...
 
 class BoolIndexParams(_message.Message):
     __slots__ = ("on_disk",)

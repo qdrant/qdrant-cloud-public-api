@@ -2,16 +2,15 @@
 // @generated from file qdrant/cloud/serverless/collection/v1/collection_config.proto (package qdrant.cloud.serverless.collection.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
-import { file_buf_validate_validate } from "../../../../../buf/validate/validate_pb";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file qdrant/cloud/serverless/collection/v1/collection_config.proto.
  */
 export const file_qdrant_cloud_serverless_collection_v1_collection_config: GenFile = /*@__PURE__*/
-  fileDesc("Cj1xZHJhbnQvY2xvdWQvc2VydmVybGVzcy9jb2xsZWN0aW9uL3YxL2NvbGxlY3Rpb25fY29uZmlnLnByb3RvEiVxZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxIt8FChdDb2xsZWN0aW9uQ29uZmlndXJhdGlvbhIXCgp0ZW5hbnRfa2V5GAEgASgJSACIAQESZwoNZGVuc2VfdmVjdG9ycxgCIAMoCzJQLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbkNvbmZpZ3VyYXRpb24uRGVuc2VWZWN0b3JzRW50cnkSaQoOc3BhcnNlX3ZlY3RvcnMYAyADKAsyUS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkNvbGxlY3Rpb25Db25maWd1cmF0aW9uLlNwYXJzZVZlY3RvcnNFbnRyeRJpCg5wYXlsb2FkX3NjaGVtYRgEIAMoCzJRLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbkNvbmZpZ3VyYXRpb24uUGF5bG9hZFNjaGVtYUVudHJ5GnQKEURlbnNlVmVjdG9yc0VudHJ5EgsKA2tleRgBIAEoCRJOCgV2YWx1ZRgCIAEoCzI/LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuRGVuc2VWZWN0b3JDb25maWd1cmF0aW9uOgI4ARp2ChJTcGFyc2VWZWN0b3JzRW50cnkSCwoDa2V5GAEgASgJEk8KBXZhbHVlGAIgASgLMkAucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5TcGFyc2VWZWN0b3JDb25maWd1cmF0aW9uOgI4ARpvChJQYXlsb2FkU2NoZW1hRW50cnkSCwoDa2V5GAEgASgJEkgKBXZhbHVlGAIgASgLMjkucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5QYXlsb2FkRmllbGRTY2hlbWE6AjgBQg0KC190ZW5hbnRfa2V5ItMCChhEZW5zZVZlY3RvckNvbmZpZ3VyYXRpb24SEQoJZGltZW5zaW9uGAEgASgFEjcKCGRpc3RhbmNlGAIgASgJQiW6SCJyIFIGY29zaW5lUgZldWNsaWRSA2RvdFIJbWFuaGF0dGFuEhgKC211bHRpdmVjdG9yGAMgASgISACIAQESFgoJcmVzY29yaW5nGAQgASgISAGIAQESQAoMc3RvcmFnZV90aWVyGAUgASgJQiW6SCJyIFIHc3RvcmFnZVIIYmFsYW5jZWRSC3BlcmZvcm1hbmNlSAKIAQESNQoOcHJlY2lzaW9uX3RpZXIYBiABKAlCGLpIFXITUgNsb3dSBm1lZGl1bVIEaGlnaEgDiAEBQg4KDF9tdWx0aXZlY3RvckIMCgpfcmVzY29yaW5nQg8KDV9zdG9yYWdlX3RpZXJCEQoPX3ByZWNpc2lvbl90aWVyInEKGVNwYXJzZVZlY3RvckNvbmZpZ3VyYXRpb24SMAoOcHJlY2lzaW9uX3RpZXIYASABKAlCGLpIFXITUgNsb3dSBm1lZGl1bVIEaGlnaBIiCghtb2RpZmllchgCIAEoCUIQukgNcgtSBG5vbmVSA2lkZiJcChJLZXl3b3JkSW5kZXhQYXJhbXMSFgoJaXNfdGVuYW50GAEgASgISACIAQESFAoHb25fZGlzaxgCIAEoCEgBiAEBQgwKCl9pc190ZW5hbnRCCgoIX29uX2Rpc2sioAEKEkludGVnZXJJbmRleFBhcmFtcxITCgZsb29rdXAYASABKAhIAIgBARISCgVyYW5nZRgCIAEoCEgBiAEBEhkKDGlzX3ByaW5jaXBhbBgDIAEoCEgCiAEBEhQKB29uX2Rpc2sYBCABKAhIA4gBAUIJCgdfbG9va3VwQggKBl9yYW5nZUIPCg1faXNfcHJpbmNpcGFsQgoKCF9vbl9kaXNrImAKEEZsb2F0SW5kZXhQYXJhbXMSGQoMaXNfcHJpbmNpcGFsGAEgASgISACIAQESFAoHb25fZGlzaxgCIAEoCEgBiAEBQg8KDV9pc19wcmluY2lwYWxCCgoIX29uX2Rpc2siMgoOR2VvSW5kZXhQYXJhbXMSFAoHb25fZGlzaxgBIAEoCEgAiAEBQgoKCF9vbl9kaXNrIooCCg9UZXh0SW5kZXhQYXJhbXMSRQoJdG9rZW5pemVyGAEgASgJQi26SCpyKFIGcHJlZml4Ugp3aGl0ZXNwYWNlUgR3b3JkUgxtdWx0aWxpbmd1YWxIAIgBARIaCg1taW5fdG9rZW5fbGVuGAIgASgFSAGIAQESGgoNbWF4X3Rva2VuX2xlbhgDIAEoBUgCiAEBEhYKCWxvd2VyY2FzZRgEIAEoCEgDiAEBEhQKB29uX2Rpc2sYBSABKAhIBIgBAUIMCgpfdG9rZW5pemVyQhAKDl9taW5fdG9rZW5fbGVuQhAKDl9tYXhfdG9rZW5fbGVuQgwKCl9sb3dlcmNhc2VCCgoIX29uX2Rpc2siMwoPQm9vbEluZGV4UGFyYW1zEhQKB29uX2Rpc2sYASABKAhIAIgBAUIKCghfb25fZGlzayJjChNEYXRldGltZUluZGV4UGFyYW1zEhkKDGlzX3ByaW5jaXBhbBgBIAEoCEgAiAEBEhQKB29uX2Rpc2sYAiABKAhIAYgBAUIPCg1faXNfcHJpbmNpcGFsQgoKCF9vbl9kaXNrIlkKD1V1aWRJbmRleFBhcmFtcxIWCglpc190ZW5hbnQYASABKAhIAIgBARIUCgdvbl9kaXNrGAIgASgISAGIAQFCDAoKX2lzX3RlbmFudEIKCghfb25fZGlzayL4BAoSUGF5bG9hZEZpZWxkU2NoZW1hEkwKB2tleXdvcmQYASABKAsyOS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLktleXdvcmRJbmRleFBhcmFtc0gAEkwKB2ludGVnZXIYAiABKAsyOS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkludGVnZXJJbmRleFBhcmFtc0gAEkgKBWZsb2F0GAMgASgLMjcucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5GbG9hdEluZGV4UGFyYW1zSAASRAoDZ2VvGAQgASgLMjUucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5HZW9JbmRleFBhcmFtc0gAEkYKBHRleHQYBSABKAsyNi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLlRleHRJbmRleFBhcmFtc0gAEkYKBGJvb2wYBiABKAsyNi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkJvb2xJbmRleFBhcmFtc0gAEk4KCGRhdGV0aW1lGAcgASgLMjoucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5EYXRldGltZUluZGV4UGFyYW1zSAASRgoEdXVpZBgIIAEoCzI2LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuVXVpZEluZGV4UGFyYW1zSABCDgoMaW5kZXhfcGFyYW1zQuACCiljb20ucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MUIVQ29sbGVjdGlvbkNvbmZpZ1Byb3RvUAFaY2dpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvc2VydmVybGVzcy9jb2xsZWN0aW9uL3YxO2NvbGxlY3Rpb252MaICBFFDU0OqAiVRZHJhbnQuQ2xvdWQuU2VydmVybGVzcy5Db2xsZWN0aW9uLlYxygIlUWRyYW50XENsb3VkXFNlcnZlcmxlc3NcQ29sbGVjdGlvblxWMeICMVFkcmFudFxDbG91ZFxTZXJ2ZXJsZXNzXENvbGxlY3Rpb25cVjFcR1BCTWV0YWRhdGHqAilRZHJhbnQ6OkNsb3VkOjpTZXJ2ZXJsZXNzOjpDb2xsZWN0aW9uOjpWMWIGcHJvdG8z", [file_buf_validate_validate]);
+  fileDesc("Cj1xZHJhbnQvY2xvdWQvc2VydmVybGVzcy9jb2xsZWN0aW9uL3YxL2NvbGxlY3Rpb25fY29uZmlnLnByb3RvEiVxZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxIt8FChdDb2xsZWN0aW9uQ29uZmlndXJhdGlvbhIXCgp0ZW5hbnRfa2V5GAEgASgJSACIAQESZwoNZGVuc2VfdmVjdG9ycxgCIAMoCzJQLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbkNvbmZpZ3VyYXRpb24uRGVuc2VWZWN0b3JzRW50cnkSaQoOc3BhcnNlX3ZlY3RvcnMYAyADKAsyUS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkNvbGxlY3Rpb25Db25maWd1cmF0aW9uLlNwYXJzZVZlY3RvcnNFbnRyeRJpCg5wYXlsb2FkX3NjaGVtYRgEIAMoCzJRLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuQ29sbGVjdGlvbkNvbmZpZ3VyYXRpb24uUGF5bG9hZFNjaGVtYUVudHJ5GnQKEURlbnNlVmVjdG9yc0VudHJ5EgsKA2tleRgBIAEoCRJOCgV2YWx1ZRgCIAEoCzI/LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuRGVuc2VWZWN0b3JDb25maWd1cmF0aW9uOgI4ARp2ChJTcGFyc2VWZWN0b3JzRW50cnkSCwoDa2V5GAEgASgJEk8KBXZhbHVlGAIgASgLMkAucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5TcGFyc2VWZWN0b3JDb25maWd1cmF0aW9uOgI4ARpvChJQYXlsb2FkU2NoZW1hRW50cnkSCwoDa2V5GAEgASgJEkgKBXZhbHVlGAIgASgLMjkucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5QYXlsb2FkRmllbGRTY2hlbWE6AjgBQg0KC190ZW5hbnRfa2V5IowDChhEZW5zZVZlY3RvckNvbmZpZ3VyYXRpb24SEQoJZGltZW5zaW9uGAEgASgFEkcKCGRpc3RhbmNlGAIgASgOMjUucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5EaXN0YW5jZU1ldHJpYxIYCgttdWx0aXZlY3RvchgDIAEoCEgAiAEBEhYKCXJlc2NvcmluZxgEIAEoCEgBiAEBEk0KDHN0b3JhZ2VfdGllchgFIAEoDjIyLnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuU3RvcmFnZVRpZXJIAogBARJRCg5wcmVjaXNpb25fdGllchgGIAEoDjI0LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuUHJlY2lzaW9uVGllckgDiAEBQg4KDF9tdWx0aXZlY3RvckIMCgpfcmVzY29yaW5nQg8KDV9zdG9yYWdlX3RpZXJCEQoPX3ByZWNpc2lvbl90aWVyIrIBChlTcGFyc2VWZWN0b3JDb25maWd1cmF0aW9uEkwKDnByZWNpc2lvbl90aWVyGAEgASgOMjQucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5QcmVjaXNpb25UaWVyEkcKCG1vZGlmaWVyGAIgASgOMjUucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5WZWN0b3JNb2RpZmllciJcChJLZXl3b3JkSW5kZXhQYXJhbXMSFgoJaXNfdGVuYW50GAEgASgISACIAQESFAoHb25fZGlzaxgCIAEoCEgBiAEBQgwKCl9pc190ZW5hbnRCCgoIX29uX2Rpc2sioAEKEkludGVnZXJJbmRleFBhcmFtcxITCgZsb29rdXAYASABKAhIAIgBARISCgVyYW5nZRgCIAEoCEgBiAEBEhkKDGlzX3ByaW5jaXBhbBgDIAEoCEgCiAEBEhQKB29uX2Rpc2sYBCABKAhIA4gBAUIJCgdfbG9va3VwQggKBl9yYW5nZUIPCg1faXNfcHJpbmNpcGFsQgoKCF9vbl9kaXNrImAKEEZsb2F0SW5kZXhQYXJhbXMSGQoMaXNfcHJpbmNpcGFsGAEgASgISACIAQESFAoHb25fZGlzaxgCIAEoCEgBiAEBQg8KDV9pc19wcmluY2lwYWxCCgoIX29uX2Rpc2siMgoOR2VvSW5kZXhQYXJhbXMSFAoHb25fZGlzaxgBIAEoCEgAiAEBQgoKCF9vbl9kaXNrIo0CCg9UZXh0SW5kZXhQYXJhbXMSSAoJdG9rZW5pemVyGAEgASgOMjAucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5Ub2tlbml6ZXJIAIgBARIaCg1taW5fdG9rZW5fbGVuGAIgASgFSAGIAQESGgoNbWF4X3Rva2VuX2xlbhgDIAEoBUgCiAEBEhYKCWxvd2VyY2FzZRgEIAEoCEgDiAEBEhQKB29uX2Rpc2sYBSABKAhIBIgBAUIMCgpfdG9rZW5pemVyQhAKDl9taW5fdG9rZW5fbGVuQhAKDl9tYXhfdG9rZW5fbGVuQgwKCl9sb3dlcmNhc2VCCgoIX29uX2Rpc2siMwoPQm9vbEluZGV4UGFyYW1zEhQKB29uX2Rpc2sYASABKAhIAIgBAUIKCghfb25fZGlzayJjChNEYXRldGltZUluZGV4UGFyYW1zEhkKDGlzX3ByaW5jaXBhbBgBIAEoCEgAiAEBEhQKB29uX2Rpc2sYAiABKAhIAYgBAUIPCg1faXNfcHJpbmNpcGFsQgoKCF9vbl9kaXNrIlkKD1V1aWRJbmRleFBhcmFtcxIWCglpc190ZW5hbnQYASABKAhIAIgBARIUCgdvbl9kaXNrGAIgASgISAGIAQFCDAoKX2lzX3RlbmFudEIKCghfb25fZGlzayL4BAoSUGF5bG9hZEZpZWxkU2NoZW1hEkwKB2tleXdvcmQYASABKAsyOS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLktleXdvcmRJbmRleFBhcmFtc0gAEkwKB2ludGVnZXIYAiABKAsyOS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkludGVnZXJJbmRleFBhcmFtc0gAEkgKBWZsb2F0GAMgASgLMjcucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5GbG9hdEluZGV4UGFyYW1zSAASRAoDZ2VvGAQgASgLMjUucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5HZW9JbmRleFBhcmFtc0gAEkYKBHRleHQYBSABKAsyNi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLlRleHRJbmRleFBhcmFtc0gAEkYKBGJvb2wYBiABKAsyNi5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxLkJvb2xJbmRleFBhcmFtc0gAEk4KCGRhdGV0aW1lGAcgASgLMjoucWRyYW50LmNsb3VkLnNlcnZlcmxlc3MuY29sbGVjdGlvbi52MS5EYXRldGltZUluZGV4UGFyYW1zSAASRgoEdXVpZBgIIAEoCzI2LnFkcmFudC5jbG91ZC5zZXJ2ZXJsZXNzLmNvbGxlY3Rpb24udjEuVXVpZEluZGV4UGFyYW1zSABCDgoMaW5kZXhfcGFyYW1zKqEBCg5EaXN0YW5jZU1ldHJpYxIfChtESVNUQU5DRV9NRVRSSUNfVU5TUEVDSUZJRUQQABIaChZESVNUQU5DRV9NRVRSSUNfQ09TSU5FEAESGgoWRElTVEFOQ0VfTUVUUklDX0VVQ0xJRBACEhcKE0RJU1RBTkNFX01FVFJJQ19ET1QQAxIdChlESVNUQU5DRV9NRVRSSUNfTUFOSEFUVEFOEAQqfgoLU3RvcmFnZVRpZXISHAoYU1RPUkFHRV9USUVSX1VOU1BFQ0lGSUVEEAASGAoUU1RPUkFHRV9USUVSX1NUT1JBR0UQARIZChVTVE9SQUdFX1RJRVJfQkFMQU5DRUQQAhIcChhTVE9SQUdFX1RJRVJfUEVSRk9STUFOQ0UQAyp7Cg1QcmVjaXNpb25UaWVyEh4KGlBSRUNJU0lPTl9USUVSX1VOU1BFQ0lGSUVEEAASFgoSUFJFQ0lTSU9OX1RJRVJfTE9XEAESGQoVUFJFQ0lTSU9OX1RJRVJfTUVESVVNEAISFwoTUFJFQ0lTSU9OX1RJRVJfSElHSBADKmQKDlZlY3Rvck1vZGlmaWVyEh8KG1ZFQ1RPUl9NT0RJRklFUl9VTlNQRUNJRklFRBAAEhgKFFZFQ1RPUl9NT0RJRklFUl9OT05FEAESFwoTVkVDVE9SX01PRElGSUVSX0lERhACKoYBCglUb2tlbml6ZXISGQoVVE9LRU5JWkVSX1VOU1BFQ0lGSUVEEAASFAoQVE9LRU5JWkVSX1BSRUZJWBABEhgKFFRPS0VOSVpFUl9XSElURVNQQUNFEAISEgoOVE9LRU5JWkVSX1dPUkQQAxIaChZUT0tFTklaRVJfTVVMVElMSU5HVUFMEARC4AIKKWNvbS5xZHJhbnQuY2xvdWQuc2VydmVybGVzcy5jb2xsZWN0aW9uLnYxQhVDb2xsZWN0aW9uQ29uZmlnUHJvdG9QAVpjZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9zZXJ2ZXJsZXNzL2NvbGxlY3Rpb24vdjE7Y29sbGVjdGlvbnYxogIEUUNTQ6oCJVFkcmFudC5DbG91ZC5TZXJ2ZXJsZXNzLkNvbGxlY3Rpb24uVjHKAiVRZHJhbnRcQ2xvdWRcU2VydmVybGVzc1xDb2xsZWN0aW9uXFYx4gIxUWRyYW50XENsb3VkXFNlcnZlcmxlc3NcQ29sbGVjdGlvblxWMVxHUEJNZXRhZGF0YeoCKVFkcmFudDo6Q2xvdWQ6OlNlcnZlcmxlc3M6OkNvbGxlY3Rpb246OlYxYgZwcm90bzM");
 
 /**
  * CollectionConfiguration defines the structure and settings for a collection
@@ -71,9 +70,9 @@ export type DenseVectorConfiguration = Message<"qdrant.cloud.serverless.collecti
   /**
    * The distance metric used for vector similarity calculations
    *
-   * @generated from field: string distance = 2;
+   * @generated from field: qdrant.cloud.serverless.collection.v1.DistanceMetric distance = 2;
    */
-  distance: string;
+  distance: DistanceMetric;
 
   /**
    * Whether to use multi-vector storage for this configuration
@@ -90,18 +89,18 @@ export type DenseVectorConfiguration = Message<"qdrant.cloud.serverless.collecti
   rescoring?: boolean;
 
   /**
-   * The storage performance tier to use (STORAGE, BALANCED, or PERFORMANCE)
+   * The storage performance tier to use.
    *
-   * @generated from field: optional string storage_tier = 5;
+   * @generated from field: optional qdrant.cloud.serverless.collection.v1.StorageTier storage_tier = 5;
    */
-  storageTier?: string;
+  storageTier?: StorageTier;
 
   /**
-   * The precision level for vector operations (LOW, MEDIUM, or HIGH)
+   * The precision level for vector operations.
    *
-   * @generated from field: optional string precision_tier = 6;
+   * @generated from field: optional qdrant.cloud.serverless.collection.v1.PrecisionTier precision_tier = 6;
    */
-  precisionTier?: string;
+  precisionTier?: PrecisionTier;
 };
 
 /**
@@ -118,18 +117,18 @@ export const DenseVectorConfigurationSchema: GenMessage<DenseVectorConfiguration
  */
 export type SparseVectorConfiguration = Message<"qdrant.cloud.serverless.collection.v1.SparseVectorConfiguration"> & {
   /**
-   * Precision tier for vector operations
+   * The precision level for vector operations.
    *
-   * @generated from field: string precision_tier = 1;
+   * @generated from field: qdrant.cloud.serverless.collection.v1.PrecisionTier precision_tier = 1;
    */
-  precisionTier: string;
+  precisionTier: PrecisionTier;
 
   /**
    * Vector value modification approach
    *
-   * @generated from field: string modifier = 2;
+   * @generated from field: qdrant.cloud.serverless.collection.v1.VectorModifier modifier = 2;
    */
-  modifier: string;
+  modifier: VectorModifier;
 };
 
 /**
@@ -267,9 +266,9 @@ export type TextIndexParams = Message<"qdrant.cloud.serverless.collection.v1.Tex
   /**
    * Tokenization strategy
    *
-   * @generated from field: optional string tokenizer = 1;
+   * @generated from field: optional qdrant.cloud.serverless.collection.v1.Tokenizer tokenizer = 1;
    */
-  tokenizer?: string;
+  tokenizer?: Tokenizer;
 
   /**
    * Minimum token length to index
@@ -468,4 +467,216 @@ export type PayloadFieldSchema = Message<"qdrant.cloud.serverless.collection.v1.
  */
 export const PayloadFieldSchemaSchema: GenMessage<PayloadFieldSchema> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 11);
+
+/**
+ * DistanceMetric defines the possible distance metrics used in DenseVectorConfiguration.
+ *
+ * @generated from enum qdrant.cloud.serverless.collection.v1.DistanceMetric
+ */
+export enum DistanceMetric {
+  /**
+   * Unspecified distance metric.
+   *
+   * @generated from enum value: DISTANCE_METRIC_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Cosine similarity.
+   *
+   * @generated from enum value: DISTANCE_METRIC_COSINE = 1;
+   */
+  COSINE = 1,
+
+  /**
+   * Euclidean distance.
+   *
+   * @generated from enum value: DISTANCE_METRIC_EUCLID = 2;
+   */
+  EUCLID = 2,
+
+  /**
+   * Dot product.
+   *
+   * @generated from enum value: DISTANCE_METRIC_DOT = 3;
+   */
+  DOT = 3,
+
+  /**
+   * Manhattan distance.
+   *
+   * @generated from enum value: DISTANCE_METRIC_MANHATTAN = 4;
+   */
+  MANHATTAN = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.collection.v1.DistanceMetric.
+ */
+export const DistanceMetricSchema: GenEnum<DistanceMetric> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 0);
+
+/**
+ * StorageTier defines the possible storage performance tiers used in DenseVectorConfiguration.
+ *
+ * @generated from enum qdrant.cloud.serverless.collection.v1.StorageTier
+ */
+export enum StorageTier {
+  /**
+   * Unspecified storage tier.
+   *
+   * @generated from enum value: STORAGE_TIER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Storage tier.
+   *
+   * @generated from enum value: STORAGE_TIER_STORAGE = 1;
+   */
+  STORAGE = 1,
+
+  /**
+   * Balanced tier.
+   *
+   * @generated from enum value: STORAGE_TIER_BALANCED = 2;
+   */
+  BALANCED = 2,
+
+  /**
+   * Performance tier.
+   *
+   * @generated from enum value: STORAGE_TIER_PERFORMANCE = 3;
+   */
+  PERFORMANCE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.collection.v1.StorageTier.
+ */
+export const StorageTierSchema: GenEnum<StorageTier> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 1);
+
+/**
+ * PrecisionTier defines the level of precision for vector operations.
+ *
+ * @generated from enum qdrant.cloud.serverless.collection.v1.PrecisionTier
+ */
+export enum PrecisionTier {
+  /**
+   * Unspecified precision level.
+   *
+   * @generated from enum value: PRECISION_TIER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Low precision.
+   *
+   * @generated from enum value: PRECISION_TIER_LOW = 1;
+   */
+  LOW = 1,
+
+  /**
+   * Medium precision.
+   *
+   * @generated from enum value: PRECISION_TIER_MEDIUM = 2;
+   */
+  MEDIUM = 2,
+
+  /**
+   * High precision.
+   *
+   * @generated from enum value: PRECISION_TIER_HIGH = 3;
+   */
+  HIGH = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.collection.v1.PrecisionTier.
+ */
+export const PrecisionTierSchema: GenEnum<PrecisionTier> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 2);
+
+/**
+ * VectorModifier defines the transformations to apply to vectors.
+ *
+ * @generated from enum qdrant.cloud.serverless.collection.v1.VectorModifier
+ */
+export enum VectorModifier {
+  /**
+   * Unspecified modifier.
+   *
+   * @generated from enum value: VECTOR_MODIFIER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * No modifications.
+   *
+   * @generated from enum value: VECTOR_MODIFIER_NONE = 1;
+   */
+  NONE = 1,
+
+  /**
+   * Inverse Document Frequency (IDF).
+   *
+   * @generated from enum value: VECTOR_MODIFIER_IDF = 2;
+   */
+  IDF = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.collection.v1.VectorModifier.
+ */
+export const VectorModifierSchema: GenEnum<VectorModifier> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 3);
+
+/**
+ * Tokenizer defines the strategies for tokenizing text during indexing.
+ *
+ * @generated from enum qdrant.cloud.serverless.collection.v1.Tokenizer
+ */
+export enum Tokenizer {
+  /**
+   * Unspecified tokenizer.
+   *
+   * @generated from enum value: TOKENIZER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Prefix tokenizer.
+   *
+   * @generated from enum value: TOKENIZER_PREFIX = 1;
+   */
+  PREFIX = 1,
+
+  /**
+   * Whitespace tokenizer.
+   *
+   * @generated from enum value: TOKENIZER_WHITESPACE = 2;
+   */
+  WHITESPACE = 2,
+
+  /**
+   * Word tokenizer.
+   *
+   * @generated from enum value: TOKENIZER_WORD = 3;
+   */
+  WORD = 3,
+
+  /**
+   * Multilingual tokenizer.
+   *
+   * @generated from enum value: TOKENIZER_MULTILINGUAL = 4;
+   */
+  MULTILINGUAL = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.collection.v1.Tokenizer.
+ */
+export const TokenizerSchema: GenEnum<Tokenizer> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_serverless_collection_v1_collection_config, 4);
 

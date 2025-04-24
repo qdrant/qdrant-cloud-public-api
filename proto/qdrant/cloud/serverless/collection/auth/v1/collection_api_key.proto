@@ -96,6 +96,18 @@ message DeleteCollectionApiKeyResponse {
   // Empty
 }
 
+// CollectionApiKeyAccessType defines the access types that can be granted to a collection API key.
+// For a detailed list of actions allowed for each access type, see:
+// https://qdrant.tech/documentation/guides/security/#table-of-access
+enum CollectionApiKeyAccessType {
+  // Unspecified access type.
+  COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED = 0;
+  // Grants access to perform collection-related actions that only read data.
+  COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE = 2;
+}
+
 // A CollectionApiKey represents one collection api key of a Qdrant cloud account.
 // This collection key can grant access to a Qdrant cloud serverless collection.
 message CollectionApiKey {
@@ -128,17 +140,8 @@ message CollectionApiKey {
   // This field is optional, and if not provided, the key does not expire.
   optional google.protobuf.Timestamp expires_at = 6;
   // The type of access granted for the collection.
-  // - "read-only": Grants access to perform collection-related actions that only read data.
-  // - "read-write": Grants access to perform collection-related actions that read or write data (like `upsert points`).
-  // For a detailed list of actions allowed for each access type, see:
-  // https://qdrant.tech/documentation/guides/security/#table-of-access
   // This is a required field.
-  string access_type = 7 [(buf.validate.field).string = {
-    in: [
-      "read-only",
-      "read-write"
-    ]
-  }];
+  CollectionApiKeyAccessType access_type = 7;
   // The email of the user who created the collection api key.
   // This is a read-only field and will be available after a collection api key is created.
   string created_by_email = 8;
