@@ -161,20 +161,23 @@ message Collection {
   CollectionState state = 100;
 }
 
+// CollectionStatePhase defines the operational phases of a Qdrant collection.
+enum CollectionStatePhase {
+  // Unspecified phase.
+  COLLECTION_STATE_PHASE_UNSPECIFIED = 0;
+  // The Collection is fully operational and available for use.
+  COLLECTION_STATE_PHASE_READY = 1;
+  // The Collection is being created, updated, or undergoing maintenance.
+  COLLECTION_STATE_PHASE_PROCESSING = 2;
+  // The Collection has been temporarily or permanently disabled.
+  COLLECTION_STATE_PHASE_DISABLED = 3;
+}
+
 // CollectionState represents the operational state of a collection in the Qdrant serverless environment.
 // It provides status information, error details (if any), and endpoint access information.
 message CollectionState {
   // The current operational status of the collection.
-  // - ready: Collection is fully operational and available for use
-  // - processing: Collection is being created, updated, or undergoing maintenance
-  // - disabled: Collection has been temporarily or permanently disabled
-  string phase = 1 [(buf.validate.field).string = {
-    in: [
-      "ready",
-      "processing",
-      "disabled"
-    ]
-  }];
+  CollectionStatePhase phase = 1;
   // Descriptive message explaining any errors or issues with the collection.
   // Empty when the collection is operating normally.
   string reason = 2;

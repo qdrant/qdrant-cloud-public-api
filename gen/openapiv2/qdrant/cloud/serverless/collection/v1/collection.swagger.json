@@ -361,8 +361,8 @@
       "type": "object",
       "properties": {
         "phase": {
-          "type": "string",
-          "title": "The current operational status of the collection.\n- ready: Collection is fully operational and available for use\n- processing: Collection is being created, updated, or undergoing maintenance\n- disabled: Collection has been temporarily or permanently disabled"
+          "$ref": "#/definitions/v1CollectionStatePhase",
+          "description": "The current operational status of the collection."
         },
         "reason": {
           "type": "string",
@@ -374,6 +374,17 @@
         }
       },
       "description": "CollectionState represents the operational state of a collection in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."
+    },
+    "v1CollectionStatePhase": {
+      "type": "string",
+      "enum": [
+        "COLLECTION_STATE_PHASE_UNSPECIFIED",
+        "COLLECTION_STATE_PHASE_READY",
+        "COLLECTION_STATE_PHASE_PROCESSING",
+        "COLLECTION_STATE_PHASE_DISABLED"
+      ],
+      "default": "COLLECTION_STATE_PHASE_UNSPECIFIED",
+      "description": "CollectionStatePhase defines the operational phases of a Qdrant collection.\n\n - COLLECTION_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - COLLECTION_STATE_PHASE_READY: The Collection is fully operational and available for use.\n - COLLECTION_STATE_PHASE_PROCESSING: The Collection is being created, updated, or undergoing maintenance.\n - COLLECTION_STATE_PHASE_DISABLED: The Collection has been temporarily or permanently disabled."
     },
     "v1CreateCollectionResponse": {
       "type": "object",
@@ -413,7 +424,7 @@
           "title": "The dimensionality of the vector space"
         },
         "distance": {
-          "type": "string",
+          "$ref": "#/definitions/v1DistanceMetric",
           "title": "The distance metric used for vector similarity calculations"
         },
         "multivector": {
@@ -425,15 +436,27 @@
           "title": "Whether to enable rescoring for search results"
         },
         "storageTier": {
-          "type": "string",
-          "title": "The storage performance tier to use (STORAGE, BALANCED, or PERFORMANCE)"
+          "$ref": "#/definitions/v1StorageTier",
+          "description": "The storage performance tier to use."
         },
         "precisionTier": {
-          "type": "string",
-          "title": "The precision level for vector operations (LOW, MEDIUM, or HIGH)"
+          "$ref": "#/definitions/v1PrecisionTier",
+          "description": "The precision level for vector operations."
         }
       },
       "title": "DenseVectorConfiguration defines the settings for dense vector fields"
+    },
+    "v1DistanceMetric": {
+      "type": "string",
+      "enum": [
+        "DISTANCE_METRIC_UNSPECIFIED",
+        "DISTANCE_METRIC_COSINE",
+        "DISTANCE_METRIC_EUCLID",
+        "DISTANCE_METRIC_DOT",
+        "DISTANCE_METRIC_MANHATTAN"
+      ],
+      "default": "DISTANCE_METRIC_UNSPECIFIED",
+      "description": "DistanceMetric defines the possible distance metrics used in DenseVectorConfiguration.\n\n - DISTANCE_METRIC_UNSPECIFIED: Unspecified distance metric.\n - DISTANCE_METRIC_COSINE: Cosine similarity.\n - DISTANCE_METRIC_EUCLID: Euclidean distance.\n - DISTANCE_METRIC_DOT: Dot product.\n - DISTANCE_METRIC_MANHATTAN: Manhattan distance."
     },
     "v1FloatIndexParams": {
       "type": "object",
@@ -547,25 +570,47 @@
       },
       "title": "Describes the schema for a payload field"
     },
+    "v1PrecisionTier": {
+      "type": "string",
+      "enum": [
+        "PRECISION_TIER_UNSPECIFIED",
+        "PRECISION_TIER_LOW",
+        "PRECISION_TIER_MEDIUM",
+        "PRECISION_TIER_HIGH"
+      ],
+      "default": "PRECISION_TIER_UNSPECIFIED",
+      "description": "PrecisionTier defines the level of precision for vector operations.\n\n - PRECISION_TIER_UNSPECIFIED: Unspecified precision level.\n - PRECISION_TIER_LOW: Low precision.\n - PRECISION_TIER_MEDIUM: Medium precision.\n - PRECISION_TIER_HIGH: High precision."
+    },
     "v1SparseVectorConfiguration": {
       "type": "object",
       "properties": {
         "precisionTier": {
-          "type": "string",
-          "title": "Precision tier for vector operations"
+          "$ref": "#/definitions/v1PrecisionTier",
+          "description": "The precision level for vector operations."
         },
         "modifier": {
-          "type": "string",
+          "$ref": "#/definitions/v1VectorModifier",
           "title": "Vector value modification approach"
         }
       },
       "title": "SparseVectorConfiguration defines the settings for sparse vector fields"
     },
+    "v1StorageTier": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_UNSPECIFIED",
+        "STORAGE_TIER_STORAGE",
+        "STORAGE_TIER_BALANCED",
+        "STORAGE_TIER_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_UNSPECIFIED",
+      "description": "StorageTier defines the possible storage performance tiers used in DenseVectorConfiguration.\n\n - STORAGE_TIER_UNSPECIFIED: Unspecified storage tier.\n - STORAGE_TIER_STORAGE: Storage tier.\n - STORAGE_TIER_BALANCED: Balanced tier.\n - STORAGE_TIER_PERFORMANCE: Performance tier."
+    },
     "v1TextIndexParams": {
       "type": "object",
       "properties": {
         "tokenizer": {
-          "type": "string",
+          "$ref": "#/definitions/v1Tokenizer",
           "title": "Tokenization strategy"
         },
         "minTokenLen": {
@@ -589,6 +634,18 @@
       },
       "title": "TextIndexParams defines parameters for text indexing"
     },
+    "v1Tokenizer": {
+      "type": "string",
+      "enum": [
+        "TOKENIZER_UNSPECIFIED",
+        "TOKENIZER_PREFIX",
+        "TOKENIZER_WHITESPACE",
+        "TOKENIZER_WORD",
+        "TOKENIZER_MULTILINGUAL"
+      ],
+      "default": "TOKENIZER_UNSPECIFIED",
+      "description": "Tokenizer defines the strategies for tokenizing text during indexing.\n\n - TOKENIZER_UNSPECIFIED: Unspecified tokenizer.\n - TOKENIZER_PREFIX: Prefix tokenizer.\n - TOKENIZER_WHITESPACE: Whitespace tokenizer.\n - TOKENIZER_WORD: Word tokenizer.\n - TOKENIZER_MULTILINGUAL: Multilingual tokenizer."
+    },
     "v1UpgradeCollectionResponse": {
       "type": "object",
       "description": "Empty",
@@ -607,6 +664,16 @@
         }
       },
       "title": "UuidIndexParams defines parameters for UUID indexing"
+    },
+    "v1VectorModifier": {
+      "type": "string",
+      "enum": [
+        "VECTOR_MODIFIER_UNSPECIFIED",
+        "VECTOR_MODIFIER_NONE",
+        "VECTOR_MODIFIER_IDF"
+      ],
+      "default": "VECTOR_MODIFIER_UNSPECIFIED",
+      "description": "VectorModifier defines the transformations to apply to vectors.\n\n - VECTOR_MODIFIER_UNSPECIFIED: Unspecified modifier.\n - VECTOR_MODIFIER_NONE: No modifications.\n - VECTOR_MODIFIER_IDF: Inverse Document Frequency (IDF)."
     }
   }
 }

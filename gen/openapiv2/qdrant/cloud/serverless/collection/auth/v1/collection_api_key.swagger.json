@@ -183,8 +183,8 @@
               "description": "The expiration time of the collection api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
             },
             "accessType": {
-              "type": "string",
-              "description": "The type of access granted for the collection.\n- \"read-only\": Grants access to perform collection-related actions that only read data.\n- \"read-write\": Grants access to perform collection-related actions that read or write data (like `upsert points`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
+              "$ref": "#/definitions/v1CollectionApiKeyAccessType",
+              "description": "The type of access granted for the collection.\nThis is a required field."
             },
             "createdByEmail": {
               "type": "string",
@@ -263,8 +263,8 @@
           "description": "The expiration time of the collection api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
         },
         "accessType": {
-          "type": "string",
-          "description": "The type of access granted for the collection.\n- \"read-only\": Grants access to perform collection-related actions that only read data.\n- \"read-write\": Grants access to perform collection-related actions that read or write data (like `upsert points`).\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access\nThis is a required field."
+          "$ref": "#/definitions/v1CollectionApiKeyAccessType",
+          "description": "The type of access granted for the collection.\nThis is a required field."
         },
         "createdByEmail": {
           "type": "string",
@@ -280,6 +280,17 @@
         }
       },
       "description": "A CollectionApiKey represents one collection api key of a Qdrant cloud account.\nThis collection key can grant access to a Qdrant cloud serverless collection."
+    },
+    "v1CollectionApiKeyAccessType": {
+      "type": "string",
+      "enum": [
+        "COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED",
+        "COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY",
+        "COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE"
+      ],
+      "default": "COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED",
+      "description": "- COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY: Grants access to perform collection-related actions that only read data.\n - COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE: Grants access to perform collection-related actions that read or write data (like `upsert points`).",
+      "title": "CollectionApiKeyAccessType defines the access types that can be granted to a collection API key.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
     },
     "v1CreateCollectionApiKeyResponse": {
       "type": "object",

@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package qdrant.cloud.serverless.collection.v1;
 
-import "buf/validate/validate.proto";
-
 // CollectionConfiguration defines the structure and settings for a collection
 message CollectionConfiguration {
   // Field name used for tenant isolation
@@ -16,58 +14,76 @@ message CollectionConfiguration {
   map<string, PayloadFieldSchema> payload_schema = 4;
 }
 
+// DistanceMetric defines the possible distance metrics used in DenseVectorConfiguration.
+enum DistanceMetric {
+  // Unspecified distance metric.
+  DISTANCE_METRIC_UNSPECIFIED = 0;
+  // Cosine similarity.
+  DISTANCE_METRIC_COSINE = 1;
+  // Euclidean distance.
+  DISTANCE_METRIC_EUCLID = 2;
+  // Dot product.
+  DISTANCE_METRIC_DOT = 3;
+  // Manhattan distance.
+  DISTANCE_METRIC_MANHATTAN = 4;
+}
+
+// StorageTier defines the possible storage performance tiers used in DenseVectorConfiguration.
+enum StorageTier {
+  // Unspecified storage tier.
+  STORAGE_TIER_UNSPECIFIED = 0;
+  // Storage tier.
+  STORAGE_TIER_STORAGE = 1;
+  // Balanced tier.
+  STORAGE_TIER_BALANCED = 2;
+  // Performance tier.
+  STORAGE_TIER_PERFORMANCE = 3;
+}
+
+// PrecisionTier defines the level of precision for vector operations.
+enum PrecisionTier {
+  // Unspecified precision level.
+  PRECISION_TIER_UNSPECIFIED = 0;
+  // Low precision.
+  PRECISION_TIER_LOW = 1;
+  // Medium precision.
+  PRECISION_TIER_MEDIUM = 2;
+  // High precision.
+  PRECISION_TIER_HIGH = 3;
+}
+
+// VectorModifier defines the transformations to apply to vectors.
+enum VectorModifier {
+  // Unspecified modifier.
+  VECTOR_MODIFIER_UNSPECIFIED = 0;
+  // No modifications.
+  VECTOR_MODIFIER_NONE = 1;
+  // Inverse Document Frequency (IDF).
+  VECTOR_MODIFIER_IDF = 2;
+}
+
 // DenseVectorConfiguration defines the settings for dense vector fields
 message DenseVectorConfiguration {
   // The dimensionality of the vector space
   int32 dimension = 1;
   // The distance metric used for vector similarity calculations
-  string distance = 2 [(buf.validate.field).string = {
-    in: [
-      "cosine",
-      "euclid",
-      "dot",
-      "manhattan"
-    ]
-  }];
+  DistanceMetric distance = 2;
   // Whether to use multi-vector storage for this configuration
   optional bool multivector = 3;
   // Whether to enable rescoring for search results
   optional bool rescoring = 4;
-  // The storage performance tier to use (STORAGE, BALANCED, or PERFORMANCE)
-  optional string storage_tier = 5 [(buf.validate.field).string = {
-    in: [
-      "storage",
-      "balanced",
-      "performance"
-    ]
-  }];
-  // The precision level for vector operations (LOW, MEDIUM, or HIGH)
-  optional string precision_tier = 6 [(buf.validate.field).string = {
-    in: [
-      "low",
-      "medium",
-      "high"
-    ]
-  }];
+  // The storage performance tier to use.
+  optional StorageTier storage_tier = 5;
+  // The precision level for vector operations.
+  optional PrecisionTier precision_tier = 6;
 }
 
 // SparseVectorConfiguration defines the settings for sparse vector fields
 message SparseVectorConfiguration {
-  // Precision tier for vector operations
-  string precision_tier = 1 [(buf.validate.field).string = {
-    in: [
-      "low",
-      "medium",
-      "high"
-    ]
-  }];
+  // The precision level for vector operations.
+  PrecisionTier precision_tier = 1;
   // Vector value modification approach
-  string modifier = 2 [(buf.validate.field).string = {
-    in: [
-      "none",
-      "idf"
-    ]
-  }];
+  VectorModifier modifier = 2;
 }
 
 // KeywordIndexParams defines parameters for keyword indexing
@@ -104,17 +120,24 @@ message GeoIndexParams {
   optional bool on_disk = 1;
 }
 
+// Tokenizer defines the strategies for tokenizing text during indexing.
+enum Tokenizer {
+  // Unspecified tokenizer.
+  TOKENIZER_UNSPECIFIED = 0;
+  //Prefix tokenizer.
+  TOKENIZER_PREFIX = 1;
+  // Whitespace tokenizer.
+  TOKENIZER_WHITESPACE = 2;
+  // Word tokenizer.
+  TOKENIZER_WORD = 3;
+  // Multilingual tokenizer.
+  TOKENIZER_MULTILINGUAL = 4;
+}
+
 // TextIndexParams defines parameters for text indexing
 message TextIndexParams {
   // Tokenization strategy
-  optional string tokenizer = 1 [(buf.validate.field).string = {
-    in: [
-      "prefix",
-      "whitespace",
-      "word",
-      "multilingual"
-    ]
-  }];
+  optional Tokenizer tokenizer = 1;
   // Minimum token length to index
   optional int32 min_token_len = 2;
   // Maximum token length to index
