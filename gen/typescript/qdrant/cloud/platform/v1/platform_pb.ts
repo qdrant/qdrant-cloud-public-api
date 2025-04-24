@@ -233,7 +233,7 @@ export const CloudProviderSchema: GenMessage<CloudProvider> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_platform_v1_platform, 8);
 
 /**
- * CloudProvider represents a cloud provider region.
+ * CloudProviderRegion represents a cloud provider region.
  *
  * @generated from message qdrant.cloud.platform.v1.CloudProviderRegion
  */

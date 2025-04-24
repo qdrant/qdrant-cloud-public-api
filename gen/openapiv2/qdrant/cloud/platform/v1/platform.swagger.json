@@ -226,7 +226,7 @@
           "description": "Geographic location grouping of the region.\ne.g. \"Europe\", \"Asia\", \"North America\", etc."
         }
       },
-      "description": "CloudProvider represents a cloud provider region."
+      "description": "CloudProviderRegion represents a cloud provider region."
     },
     "v1ListCloudProviderRegionsResponse": {
       "type": "object",

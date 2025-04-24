@@ -19,16 +19,16 @@ PACKAGE_STATUS_ACTIVE: PackageStatus
 PACKAGE_STATUS_DEACTIVATED: PackageStatus
 
 class ListPackagesRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider", "cloud_region", "statuses")
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     STATUSES_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    cloud_provider: str
-    cloud_region: str
+    cloud_provider_id: str
+    cloud_provider_region_id: str
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ("items",)

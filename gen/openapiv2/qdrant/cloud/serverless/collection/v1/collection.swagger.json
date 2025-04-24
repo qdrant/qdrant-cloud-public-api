@@ -198,13 +198,13 @@
               "format": "date-time",
               "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
             },
-            "cloudProvider": {
+            "cloudProviderId": {
               "type": "string",
-              "title": "Cloud provider where the collection is hosted.\nThis is a optional field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
+              "title": "Cloud provider where the collection is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
             },
-            "cloudRegion": {
+            "cloudProviderRegionId": {
               "type": "string",
-              "title": "In which region the collection is hosted\nAfter creation, this field cannot be changed.\nExample: us-west1\nIf not specified - use default region for the selected provider (or default provider if not specified)"
+              "description": "Cloud provider region where the collection is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed.\nIf not specified - use default region for the selected provider (or default provider if not specified)."
             },
             "configuration": {
               "$ref": "#/definitions/v1CollectionConfiguration",
@@ -287,13 +287,13 @@
           "format": "date-time",
           "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
         },
-        "cloudProvider": {
+        "cloudProviderId": {
           "type": "string",
-          "title": "Cloud provider where the collection is hosted.\nThis is a optional field (one of the following: aws, gcp, azure).\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
+          "title": "Cloud provider where the collection is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed.\nIf not specified - use default provider"
         },
-        "cloudRegion": {
+        "cloudProviderRegionId": {
           "type": "string",
-          "title": "In which region the collection is hosted\nAfter creation, this field cannot be changed.\nExample: us-west1\nIf not specified - use default region for the selected provider (or default provider if not specified)"
+          "description": "Cloud provider region where the collection is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed.\nIf not specified - use default region for the selected provider (or default provider if not specified)."
         },
         "configuration": {
           "$ref": "#/definitions/v1CollectionConfiguration",

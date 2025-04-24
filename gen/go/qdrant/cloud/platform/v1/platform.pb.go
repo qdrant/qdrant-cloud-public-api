@@ -471,7 +471,7 @@ func (x *CloudProvider) GetAvailable() bool {
 	return false
 }
 
-// CloudProvider represents a cloud provider region.
+// CloudProviderRegion represents a cloud provider region.
 type CloudProviderRegion struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier for the cloud provider region.

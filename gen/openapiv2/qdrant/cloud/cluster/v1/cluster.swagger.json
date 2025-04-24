@@ -43,15 +43,15 @@
             "type": "string"
           },
           {
-            "name": "cloudProvider",
-            "description": "Optional filter for cloud provider where the cluster is hosted (one of the following: aws, gcp, azure, hybrid).\nIf omitted all clusters, including the hybrid cloud ones, which belongs to the provided account are returned.",
+            "name": "cloudProviderId",
+            "description": "Optional filter specifying the cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIf omitted, all clusters, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "cloudRegion",
-            "description": "Optional filter for cloud region where the cluster is located\nIf this field is set the cloud_provider is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
+            "name": "cloudProviderRegionId",
+            "description": "Optional filter specifying the cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nIf this field is set, the `cloud_provider_id` is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -336,13 +336,13 @@
               "format": "date-time",
               "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
             },
-            "cloudProvider": {
+            "cloudProviderId": {
               "type": "string",
-              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
             },
-            "cloudRegion": {
+            "cloudProviderRegionId": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
@@ -378,13 +378,13 @@
               "format": "date-time",
               "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
             },
-            "cloudProvider": {
+            "cloudProviderId": {
               "type": "string",
-              "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
             },
-            "cloudRegion": {
+            "cloudProviderRegionId": {
               "type": "string",
-              "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
@@ -464,13 +464,13 @@
           "format": "date-time",
           "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
         },
-        "cloudProvider": {
+        "cloudProviderId": {
           "type": "string",
-          "description": "Cloud provider where the cluster is hosted.\nThis is a required field (one of the following: aws, gcp, azure, hybrid).\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
         },
-        "cloudRegion": {
+        "cloudProviderRegionId": {
           "type": "string",
-          "description": "Cloud region where the cluster is located.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
