@@ -287,18 +287,16 @@ wheels = [
 
 [[package]]
 name = "qdrant-cloud-public-api"
-version = "0.1.1"
+version = "0.1.4"
 source = { editable = "." }
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 dev = [
     { name = "twine" },
 ]
 
 [package.metadata]
-
-[package.metadata.requires-dev]
-dev = [{ name = "twine", specifier = ">=6.1.0" }]
+requires-dist = [{ name = "twine", marker = "extra == 'dev'", specifier = ">=6.1.0" }]
 
 [[package]]
 name = "readme-renderer"
