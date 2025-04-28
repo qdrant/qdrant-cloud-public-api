@@ -8,7 +8,7 @@ name: Upload Python Package to GCP Artifact Registry
 on:
   push:
     branches:
-      - feature/mikheil/use-private-package-registry   # <-- TEMPORARY trigger
+      - '**'   # <-- TEMPORARY trigger
 
 jobs:
   upload:
