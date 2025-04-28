@@ -382,7 +382,7 @@ type ListClustersRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Optional filter specifying the cloud provider where the cluster is hosted.
 	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-	// If omitted, all clusters, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.
+	// If omitted, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.
 	CloudProviderId *string `protobuf:"bytes,10,opt,name=cloud_provider_id,json=cloudProviderId,proto3,oneof" json:"cloud_provider_id,omitempty"`
 	// Optional filter specifying the cloud provider region where the cluster is hosted.
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.

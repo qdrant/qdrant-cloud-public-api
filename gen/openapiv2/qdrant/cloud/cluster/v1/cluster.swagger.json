@@ -44,7 +44,7 @@
           },
           {
             "name": "cloudProviderId",
-            "description": "Optional filter specifying the cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIf omitted, all clusters, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.",
+            "description": "Optional filter specifying the cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIf omitted, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.",
             "in": "query",
             "required": false,
             "type": "string"

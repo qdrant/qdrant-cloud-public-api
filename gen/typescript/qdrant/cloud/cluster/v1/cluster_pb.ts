@@ -35,7 +35,7 @@ export type ListClustersRequest = Message<"qdrant.cloud.cluster.v1.ListClustersR
   /**
    * Optional filter specifying the cloud provider where the cluster is hosted.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-   * If omitted, all clusters, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.
+   * If omitted, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.
    *
    * @generated from field: optional string cloud_provider_id = 10;
    */
