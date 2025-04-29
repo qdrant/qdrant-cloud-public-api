@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload to Artifact Registry
         run: |
-          twine upload \
+          uv run twine upload \
             --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
             --username oauth2accesstoken \
             --password "$(gcloud auth print-access-token)" \
