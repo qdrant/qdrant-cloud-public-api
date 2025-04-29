@@ -68,3 +68,5 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+## [Release Process](docs/release.md)

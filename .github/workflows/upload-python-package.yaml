@@ -1,14 +1,10 @@
 name: Upload Python Package to GCP Artifact Registry
 
-#on:
-#  push:
-#    tags:
-#      - '*'    # trigger on every new tag push
-
 on:
   push:
-    branches:
-      - '**'   # <-- TEMPORARY trigger
+    tags:
+      - 'v*'   # only tags starting with v, like v0.1.5
+
 
 jobs:
   upload:
@@ -16,7 +12,7 @@ jobs:
 
     permissions:
       contents: read
-      id-token: write # needed for authentication if using Workload Identity Federation
+      id-token: write # needed for authentication since we are using Workload Identity Federation
 
     steps:
       - name: Checkout repository
@@ -40,6 +36,10 @@ jobs:
           gcloud config set project qdrant-cloud
           gcloud config set artifacts/repository python
           gcloud config set artifacts/location us
+
+      - name: Set version in pyproject.toml
+        run: |
+          sed -i "s/^version = .*/version = \"${GITHUB_REF_NAME#v}\"/" pyproject.toml
 
       - name: Build the package
         run: |
