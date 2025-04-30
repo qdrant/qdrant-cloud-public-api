@@ -1,8 +1,8 @@
 # Qdrant Cloud Public API - Release Process
 
-This document explains how to release a new version of the generated client libraries (Python, Go, JavaScript, etc.) from the proto repository.
+This document explains how to release a new version of the generated client libraries (Python, JavaScript, etc.) from the proto repository.
 > **Note:**  
-> Only python is supported for now, but the process is designed to be extensible for Go and JavaScript in the future.
+> Only python is supported for now, but the process is designed to be extensible for JavaScript or other languages in the future.
 
 ---
 ## Release Steps
@@ -10,6 +10,7 @@ This document explains how to release a new version of the generated client libr
 ### 1. Prepare changes
 - Update .proto files as needed. 
 - Regenerate the code for all target languages (Python, Go, JavaScript, etc.). 
+  - `make generate`
 - Test that the generated code works correctly if necessary.
 
 > **Note:**  
@@ -38,7 +39,7 @@ Once the tag is pushed:
 - Inject the Git tag version into the generated clients dynamically.
 - Build the Python package (qdrant-cloud-public-api).
 - Upload the Python package to the Google Artifact Registry.
-- (Future extension: Publish Go and JavaScript packages, if needed.)
+- (Future extension: Publish JavaScript packages, if needed.)
 
 ---
 
