@@ -1,9 +1,10 @@
 [project]
 name = "qdrant_cloud_public_api"
-version = "0.1.0"
+# The version is replaced by the version from Git branch name during the release process
+version = "0.0.0"
 description = "Qdrant cloud public API"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12, <3.13"
 authors = [
     {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
 ]
@@ -25,3 +26,11 @@ sources = ["gen/python"]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[dependency-groups]
+dev = [
+    "twine>=6.1.0",
+]
+
+
+[project.optional-dependencies]
+dev = []

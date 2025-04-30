@@ -1,0 +1,61 @@
+name: Upload Python Package to GCP Artifact Registry
+
+on:
+  push:
+    branches:
+      - "releases/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write # needed for authentication since we are using Workload Identity Federation
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          # Install a specific version of uv.
+          version: "0.7.0"
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+      - run: |
+          make python/dev-install
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Configure gcloud
+        run: |
+          gcloud config set project qdrant-cloud
+          gcloud config set artifacts/repository python
+          gcloud config set artifacts/location us
+
+      - name: Set version in pyproject.toml from branch name
+        run: |
+          VERSION="${GITHUB_REF##*/}"
+          echo "Detected version: $VERSION"
+          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+
+      - name: Build the package
+        run: |
+           uv build
+
+      - name: Upload to Artifact Registry
+        run: |
+          uv run twine upload \
+            --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
+            --username oauth2accesstoken \
+            --password "$(gcloud auth print-access-token)" \
+            dist/*

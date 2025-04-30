@@ -2,6 +2,19 @@
 help: ## Display this help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9\/-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+
+##@ Setup
+.PHONY: bootstrap/uv
+bootstrap/uv:
+	@case "$$(uname -s)" in \
+		Darwin*) which uv || HOMEBREW_NO_AUTO_UPDATE=1 brew install uv ;; \
+		Linux*) which uv || curl -LsSf https://astral.sh/uv/install.sh | sh ;; \
+		*) echo -e "\033[33mCannot install 'uv' automatically. Install manually instead: https://docs.astral.sh/uv/getting-started/installation/#standalone-installer\033[0m" ;; \
+	esac
+
+.PHONY: bootstrap
+bootstrap: bootstrap/uv ## Install the required dependencies to use this project.
+
 ##@ Formatting & linting
 
 .PHONY: lint
@@ -40,3 +53,9 @@ buf/plugins: ## Install the required buf plugins (those that can't be installed 
 .PHONY: buf/deps
 buf/deps: buf/plugins ## Install the required dependencies to work with the protobuf files.
 	buf dep update
+
+.PHONY: python/dev-install
+python/dev-install: ## Install the required Python dependencies to work with the project.
+	uv sync \
+		--dev \
+		--locked
