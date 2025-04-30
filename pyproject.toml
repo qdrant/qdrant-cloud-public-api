@@ -1,6 +1,6 @@
 [project]
 name = "qdrant_cloud_public_api"
-# The version is replaced by git tags during the release process
+# The version is replaced by the version from Git branch name during the release process
 version = "0.0.0"
 description = "Qdrant cloud public API"
 readme = "README.md"
