@@ -52,6 +52,25 @@ class TolerationEffect(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     TOLERATION_EFFECT_NO_SCHEDULE: _ClassVar[TolerationEffect]
     TOLERATION_EFFECT_PREFER_NO_SCHEDULE: _ClassVar[TolerationEffect]
     TOLERATION_EFFECT_NO_EXECUTE: _ClassVar[TolerationEffect]
+
+class ClusterPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_PHASE_UNSPECIFIED: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_CREATING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_FAILED_TO_CREATE: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_UPDATING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_FAILED_TO_UPDATE: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_SCALING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_UPGRADING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_SUSPENDING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_SUSPENDED: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_FAILED_TO_SUSPEND: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_RESUMING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_FAILED_TO_RESUME: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_HEALTHY: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_NOT_READY: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_RECOVERY_MODE: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_MANUAL_MAINTENANCE: _ClassVar[ClusterPhase]
 CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_AMD: ClusterConfigurationGpuType
@@ -77,6 +96,22 @@ TOLERATION_EFFECT_UNSPECIFIED: TolerationEffect
 TOLERATION_EFFECT_NO_SCHEDULE: TolerationEffect
 TOLERATION_EFFECT_PREFER_NO_SCHEDULE: TolerationEffect
 TOLERATION_EFFECT_NO_EXECUTE: TolerationEffect
+CLUSTER_PHASE_UNSPECIFIED: ClusterPhase
+CLUSTER_PHASE_CREATING: ClusterPhase
+CLUSTER_PHASE_FAILED_TO_CREATE: ClusterPhase
+CLUSTER_PHASE_UPDATING: ClusterPhase
+CLUSTER_PHASE_FAILED_TO_UPDATE: ClusterPhase
+CLUSTER_PHASE_SCALING: ClusterPhase
+CLUSTER_PHASE_UPGRADING: ClusterPhase
+CLUSTER_PHASE_SUSPENDING: ClusterPhase
+CLUSTER_PHASE_SUSPENDED: ClusterPhase
+CLUSTER_PHASE_FAILED_TO_SUSPEND: ClusterPhase
+CLUSTER_PHASE_RESUMING: ClusterPhase
+CLUSTER_PHASE_FAILED_TO_RESUME: ClusterPhase
+CLUSTER_PHASE_HEALTHY: ClusterPhase
+CLUSTER_PHASE_NOT_READY: ClusterPhase
+CLUSTER_PHASE_RECOVERY_MODE: ClusterPhase
+CLUSTER_PHASE_MANUAL_MAINTENANCE: ClusterPhase
 
 class ListClustersRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
@@ -332,11 +367,11 @@ class ClusterState(_message.Message):
     version: str
     nodes_up: int
     restarted_at: _timestamp_pb2.Timestamp
-    phase: str
+    phase: ClusterPhase
     reason: str
     endpoint: ClusterEndpoint
     resources: ClusterNodeResourcesSummary
-    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[str] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ...) -> None: ...
+    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")

@@ -494,7 +494,7 @@
         "numberOfNodes": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of nodes in a cluster.\nThis should be a number 1...20 [both included]."
+          "description": "The number of nodes in a cluster.\nThis should be a number 1...20 [both included].\nThis is a required field."
         },
         "version": {
           "type": "string",
@@ -502,7 +502,7 @@
         },
         "packageId": {
           "type": "string",
-          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one."
+          "description": "TODO: Needing a package_id here is very bad usability for users.\nThat means we would need to start documenting all package_ids somewhere.\nRather we should introduce speaking package names in the public api (even if we have them different internally).\nIn the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'\nWe could derive them from the SKU, e.g. QN_16x128 fine with something else as well.\nThe package identifier used to configure the resources of the cluster. Use ListPackages() to select one.\nThis is a required field."
         },
         "additionalResources": {
           "$ref": "#/definitions/v1AdditionalResources",
@@ -669,26 +669,49 @@
       },
       "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
     },
+    "v1ClusterPhase": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_PHASE_UNSPECIFIED",
+        "CLUSTER_PHASE_CREATING",
+        "CLUSTER_PHASE_FAILED_TO_CREATE",
+        "CLUSTER_PHASE_UPDATING",
+        "CLUSTER_PHASE_FAILED_TO_UPDATE",
+        "CLUSTER_PHASE_SCALING",
+        "CLUSTER_PHASE_UPGRADING",
+        "CLUSTER_PHASE_SUSPENDING",
+        "CLUSTER_PHASE_SUSPENDED",
+        "CLUSTER_PHASE_FAILED_TO_SUSPEND",
+        "CLUSTER_PHASE_RESUMING",
+        "CLUSTER_PHASE_FAILED_TO_RESUME",
+        "CLUSTER_PHASE_HEALTHY",
+        "CLUSTER_PHASE_NOT_READY",
+        "CLUSTER_PHASE_RECOVERY_MODE",
+        "CLUSTER_PHASE_MANUAL_MAINTENANCE"
+      ],
+      "default": "CLUSTER_PHASE_UNSPECIFIED",
+      "description": "Defines the operational or transitional state of the Qdrant cluster.\n\n - CLUSTER_PHASE_UNSPECIFIED: The phase is unknown or not specified. Should not normally be used.\n - CLUSTER_PHASE_CREATING: The cluster is currently being created.\n - CLUSTER_PHASE_FAILED_TO_CREATE: The cluster creation process failed.\n - CLUSTER_PHASE_UPDATING: The cluster configuration is being updated.\n - CLUSTER_PHASE_FAILED_TO_UPDATE: The cluster update process failed.\n - CLUSTER_PHASE_SCALING: The cluster is undergoing scaling (up or down).\n - CLUSTER_PHASE_UPGRADING: The Qdrant version in the cluster is being upgraded.\n - CLUSTER_PHASE_SUSPENDING: The cluster is in the process of being suspended.\n - CLUSTER_PHASE_SUSPENDED: The cluster is currently suspended (inactive).\n - CLUSTER_PHASE_FAILED_TO_SUSPEND: The cluster suspension process failed.\n - CLUSTER_PHASE_RESUMING: The cluster is resuming from a suspended state.\n - CLUSTER_PHASE_FAILED_TO_RESUME: The cluster resumption process failed.\n - CLUSTER_PHASE_HEALTHY: The cluster is operational and healthy.\n - CLUSTER_PHASE_NOT_READY: The cluster is operational but not all components are ready or healthy.\n - CLUSTER_PHASE_RECOVERY_MODE: The cluster is in recovery mode, potentially after a failure.\n - CLUSTER_PHASE_MANUAL_MAINTENANCE: The cluster is under manual maintenance."
+    },
     "v1ClusterState": {
       "type": "object",
       "properties": {
         "version": {
           "type": "string",
-          "title": "Version of the cluster software"
+          "description": "Version of the cluster software."
         },
         "nodesUp": {
           "type": "integer",
           "format": "int64",
-          "title": "Number of cluster nodes that are up and running"
+          "description": "Number of cluster nodes that are up and running."
         },
         "restartedAt": {
           "type": "string",
           "format": "date-time",
-          "title": "The date and time when the cluster was restarted"
+          "description": "The date and time when the cluster was restarted."
         },
         "phase": {
-          "type": "string",
-          "description": "Current phase of the cluster\nOne of the following: Creating, ..."
+          "$ref": "#/definitions/v1ClusterPhase",
+          "description": "Current phase of the cluster."
         },
         "reason": {
           "type": "string",
