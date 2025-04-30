@@ -79,14 +79,14 @@ TOLERATION_EFFECT_PREFER_NO_SCHEDULE: TolerationEffect
 TOLERATION_EFFECT_NO_EXECUTE: TolerationEffect
 
 class ListClustersRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider", "cloud_region")
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    cloud_provider: str
-    cloud_region: str
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ...) -> None: ...
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class ListClustersResponse(_message.Message):
     __slots__ = ("items",)
@@ -173,14 +173,14 @@ class ListQdrantReleasesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[QdrantRelease, _Mapping]]] = ...) -> None: ...
 
 class Cluster(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider", "cloud_region", "configuration", "state")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "configuration", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_REGION_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
@@ -188,11 +188,11 @@ class Cluster(_message.Message):
     account_id: str
     name: str
     deleted_at: _timestamp_pb2.Timestamp
-    cloud_provider: str
-    cloud_region: str
+    cloud_provider_id: str
+    cloud_provider_region_id: str
     configuration: ClusterConfiguration
     state: ClusterState
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider: _Optional[str] = ..., cloud_region: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ...) -> None: ...
 
 class ClusterConfiguration(_message.Message):
     __slots__ = ("last_modified_at", "number_of_nodes", "version", "package_id", "additional_resources", "database_configuration", "node_selector", "tolerations", "annotations", "allowed_ip_source_ranges", "reserved_cpu_percentage", "reserved_memory_percentage", "gpu_type", "restart_policy", "rebalance_strategy")

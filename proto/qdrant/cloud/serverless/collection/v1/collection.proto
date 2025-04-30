@@ -139,21 +139,14 @@ message Collection {
   // This is a read-only field and will be set after DeleteCollection is called.
   google.protobuf.Timestamp deleted_at = 5;
   // Cloud provider where the collection is hosted.
-  // This is a optional field (one of the following: aws, gcp, azure).
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  // In this case, `hybrid` isn't supported.
   // After creation, this field cannot be changed.
-  // If not specified - use default provider
-  optional string cloud_provider = 10 [(buf.validate.field).string = {
-    in: [
-      "aws",
-      "gcp",
-      "azure"
-    ]
-  }];
-  // In which region the collection is hosted
+  string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  // Cloud provider region where the collection is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // After creation, this field cannot be changed.
-  // Example: us-west1
-  // If not specified - use default region for the selected provider (or default provider if not specified)
-  optional string cloud_region = 11;
+  string cloud_provider_region_id = 11;
   // Configuration parameters
   CollectionConfiguration configuration = 20;
   // Status of the collection
