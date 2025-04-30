@@ -3,7 +3,7 @@ name: Upload Python Package to GCP Artifact Registry
 on:
   push:
     branches:
-      - "releases/**"
+      - "releases/v*"
 
 jobs:
   upload:
@@ -44,7 +44,8 @@ jobs:
 
       - name: Set version in pyproject.toml from branch name
         run: |
-          VERSION="${GITHUB_REF##*/}"
+          VERSION="${GITHUB_REF##*/}"           # Extract 'v1.1.1' from 'refs/heads/releases/v1.1.1'
+          VERSION="${VERSION#v}"                # Strip leading 'v' -> '1.1.1'
           echo "Detected version: $VERSION"
           sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
 
