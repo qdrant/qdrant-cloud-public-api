@@ -99,7 +99,7 @@ message ListClustersRequest {
   // If this field is set, the `cloud_provider_id` is required to set as well (and it should match).
   // For hybrid this should be the hybrid cloud environment ID.
   optional string cloud_provider_region_id = 11;
-  // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider as well, so this can't be a simple field validator.
+  // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider_id as well, so this can't be a simple field validator.
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
     message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
