@@ -47,7 +47,6 @@ jobs:
 
       - name: Set version in pyproject.toml
         run: |
-#          sed -i "s/^version = .*/version = \"${GITHUB_REF_NAME#v}\"/" pyproject.toml
           sed -i "s/^version = .*/version = \"0.1.6\"/" pyproject.toml
 
       - name: Build the package
