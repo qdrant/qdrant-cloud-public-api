@@ -4,7 +4,7 @@ name = "qdrant_cloud_public_api"
 version = "0.0.0"
 description = "Qdrant cloud public API"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12, <3.13"
 authors = [
     {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
 ]

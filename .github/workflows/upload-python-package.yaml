@@ -1,9 +1,14 @@
 name: Upload Python Package to GCP Artifact Registry
 
+#on:
+#  push:
+#    tags:
+#      - 'v*'   # only tags starting with v, like v0.1.5
+
 on:
-  push:
-    tags:
-      - 'v*'   # only tags starting with v, like v0.1.5
+  push:  # triggers on every commit to any branch
+    branches:
+      - '**'
 
 
 jobs:
@@ -18,12 +23,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: "Set up Python"
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: "pyproject.toml"
       - run: |
-          make bootstrap python/dev-install
+          make python/dev-install
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -39,7 +47,8 @@ jobs:
 
       - name: Set version in pyproject.toml
         run: |
-          sed -i "s/^version = .*/version = \"${GITHUB_REF_NAME#v}\"/" pyproject.toml
+#          sed -i "s/^version = .*/version = \"${GITHUB_REF_NAME#v}\"/" pyproject.toml
+          sed -i "s/^version = .*/version = \"0.1.6\"/" pyproject.toml
 
       - name: Build the package
         run: |
