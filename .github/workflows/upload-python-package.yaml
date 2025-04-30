@@ -1,15 +1,9 @@
 name: Upload Python Package to GCP Artifact Registry
 
-#on:
-#  push:
-#    tags:
-#      - 'v*'   # only tags starting with v, like v0.1.5
-
 on:
-  push:  # triggers on every commit to any branch
-    branches:
-      - '**'
-
+  push:
+    tags:
+      - 'v*'   # only tags starting with v, like v0.1.5
 
 jobs:
   upload:
@@ -25,6 +19,9 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
+        with:
+          # Install a specific version of uv.
+          version: "0.7.0"
 
       - name: "Set up Python"
         uses: actions/setup-python@v5
@@ -47,7 +44,7 @@ jobs:
 
       - name: Set version in pyproject.toml
         run: |
-          sed -i "s/^version = .*/version = \"0.1.6\"/" pyproject.toml
+          sed -i "s/^version = .*/version = \"${GITHUB_REF_NAME#v}\"/" pyproject.toml
 
       - name: Build the package
         run: |
