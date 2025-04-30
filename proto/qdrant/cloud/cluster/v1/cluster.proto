@@ -296,6 +296,7 @@ message ClusterConfiguration {
   google.protobuf.Timestamp last_modified_at = 1;
   // The number of nodes in a cluster.
   // This should be a number 1...20 [both included].
+  // This is a required field.
   uint32 number_of_nodes = 2 [(buf.validate.field).uint32 = {
     gte: 1
     lte: 20
@@ -304,13 +305,14 @@ message ClusterConfiguration {
   // If omitted the latest version will be used and filled out during create.
   // Use ListReleases() to determine which versions are allowed to be used.
   // See upgrade guidelines for more info.
-  string version = 3 [(buf.validate.field).string = {pattern: "^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$"}];
+  optional string version = 3 [(buf.validate.field).string = {pattern: "^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$"}];
   // TODO: Needing a package_id here is very bad usability for users.
   // That means we would need to start documenting all package_ids somewhere.
   // Rather we should introduce speaking package names in the public api (even if we have them different internally).
   // In the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'
   // We could derive them from the SKU, e.g. QN_16x128 fine with something else as well.
   // The package identifier used to configure the resources of the cluster. Use ListPackages() to select one.
+  // This is a required field.
   string package_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The additional resources on top of the selected package.
   // This is an optional field, if not specified all additional resources are 0.
@@ -529,18 +531,53 @@ message Toleration {
   }];
 }
 
+// Defines the operational or transitional state of the Qdrant cluster.
+enum ClusterPhase {
+  // The phase is unknown or not specified. Should not normally be used.
+  CLUSTER_PHASE_UNSPECIFIED = 0;
+  // The cluster is currently being created.
+  CLUSTER_PHASE_CREATING = 1;
+  // The cluster creation process failed.
+  CLUSTER_PHASE_FAILED_TO_CREATE = 2;
+  // The cluster configuration is being updated.
+  CLUSTER_PHASE_UPDATING = 3;
+  // The cluster update process failed.
+  CLUSTER_PHASE_FAILED_TO_UPDATE = 4;
+  // The cluster is undergoing scaling (up or down).
+  CLUSTER_PHASE_SCALING = 5;
+  // The Qdrant version in the cluster is being upgraded.
+  CLUSTER_PHASE_UPGRADING = 6;
+  // The cluster is in the process of being suspended.
+  CLUSTER_PHASE_SUSPENDING = 7;
+  // The cluster is currently suspended (inactive).
+  CLUSTER_PHASE_SUSPENDED = 8;
+  // The cluster suspension process failed.
+  CLUSTER_PHASE_FAILED_TO_SUSPEND = 9;
+  // The cluster is resuming from a suspended state.
+  CLUSTER_PHASE_RESUMING = 10;
+  // The cluster resumption process failed.
+  CLUSTER_PHASE_FAILED_TO_RESUME = 11;
+  // The cluster is operational and healthy.
+  CLUSTER_PHASE_HEALTHY = 12;
+  // The cluster is operational but not all components are ready or healthy.
+  CLUSTER_PHASE_NOT_READY = 13;
+  // The cluster is in recovery mode, potentially after a failure.
+  CLUSTER_PHASE_RECOVERY_MODE = 14;
+  // The cluster is under manual maintenance.
+  CLUSTER_PHASE_MANUAL_MAINTENANCE = 15;
+}
+
 // ClusterState represents the current state of a cluster
 // All fields in this message are read-only.
 message ClusterState {
-  // Version of the cluster software
+  // Version of the cluster software.
   string version = 1;
-  // Number of cluster nodes that are up and running
+  // Number of cluster nodes that are up and running.
   uint32 nodes_up = 2;
-  // The date and time when the cluster was restarted
+  // The date and time when the cluster was restarted.
   google.protobuf.Timestamp restarted_at = 3;
-  // Current phase of the cluster
-  // One of the following: Creating, ...
-  string phase = 4;
+  // Current phase of the cluster.
+  ClusterPhase phase = 4;
   // Reason for the current phase of the cluster.
   string reason = 5;
   // Endpoint information to access the qdrant cluster (aka database).
