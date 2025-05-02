@@ -64,23 +64,8 @@ service ClusterService {
 }
 ```
 - Use well-known types (e.g., `google.protobuf.Timestamp` instead of string for timestamps).
-- Avoid enums. Instead, use a string field with a validation containing the list of possible options. Example:
-```proto
-message Toleration {
-
-  // The effect indicates the taint effect to match.
-  // Valid effects are "NoSchedule", "PreferNoSchedule", and "NoExecute".
-  // The default is NoSchedule
-  optional string effect = 4 [(buf.validate.field).string = {
-    in: [
-      "NoSchedule",
-       "PreferNoSchedule",
-       "NoExecute"
-    ]
-  }];
-
-}
-```
+- Use enum values for static, well-defined sets of options that are unlikely to change.
+- Use RPC methods to expose values that may change over time, vary between users or accounts, or include additional metadata (e.g., `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` for supported cloud providers). Reference them using fields like `cloud_provider_id` instead of hardcoded enums.
 - Use strong typing and avoid weak types like maps or key-value lists. Example:
 
 Do:
