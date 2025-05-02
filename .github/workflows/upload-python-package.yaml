@@ -7,7 +7,7 @@ name: Upload Python Package to GCP Artifact Registry
 on:
   push:
     branches:
-      - "*"
+      - "**"
 
 jobs:
   Release:
