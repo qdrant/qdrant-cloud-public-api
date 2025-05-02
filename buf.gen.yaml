@@ -38,8 +38,10 @@ plugins:
     out: gen/python
 
   # Generate bindings for gRPC-Gateway
+  # We don't need the output (the api-gateway is building this dynamically), however
+  # we still want to run the validation logic inside this plugin
   - remote: buf.build/grpc-ecosystem/gateway:v2.26.0
-    out: gen/go
+    out: gen-dummy/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
