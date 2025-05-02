@@ -1,21 +1,18 @@
 name: Upload Python Package to GCP Artifact Registry
 
-#on:
-#  push:
-#    branches:
-#      - "releases/v*"
 on:
   push:
     branches:
-      - "**"
+      - "releases/v*"
+
 
 jobs:
   Release:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write         # <-- allow pushing tags
-      id-token: write # needed for authentication since we are using Workload Identity Federation
+      contents: write         # allow pushing tags
+      id-token: write         # needed for authentication since we are using Workload Identity Federation
 
     steps:
       - name: Checkout repository
@@ -50,7 +47,6 @@ jobs:
         run: |
           VERSION="${GITHUB_REF##*/}"           # Extract 'v1.1.1' from 'refs/heads/releases/v1.1.1'
           VERSION="${VERSION#v}"                # Strip leading 'v' -> '1.1.1'
-          VERSION="0.2.3"                # TODO remove me
           echo "Detected version: $VERSION"
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
