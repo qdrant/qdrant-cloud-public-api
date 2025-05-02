@@ -1,0 +1,23 @@
+name: Draft Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: ['main']
+
+jobs:
+  update-release-draft:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Update Release Draft
+        uses: release-drafter/release-drafter@v6
+        with:
+          disable-autolabeler: true
+          commitish: main
+          publish: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
