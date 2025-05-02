@@ -45,11 +45,14 @@ jobs:
 
       - name: Set version in pyproject.toml from branch name
         run: |
-          VERSION="${GITHUB_REF##*/}"           # Extract 'v1.1.1' from 'refs/heads/releases/v1.1.1'
-          VERSION="${VERSION#v}"                # Strip leading 'v' -> '1.1.1'
+          VERSION="${GITHUB_REF##*/}"        # e.g., v1.1.1
+          STRIPPED_VERSION="${VERSION#v}"    # e.g., 1.1.1
+          
           echo "Detected version: $VERSION"
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
-          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+          echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
+          
+          sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
 
       - name: Build the package
         run: |
