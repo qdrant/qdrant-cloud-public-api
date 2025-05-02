@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write         # <-- allow pushing tags
       id-token: write # needed for authentication since we are using Workload Identity Federation
 
     steps:
