@@ -1332,12 +1332,7 @@ type ClusterConfiguration struct {
 	// Use ListReleases() to determine which versions are allowed to be used.
 	// See upgrade guidelines for more info.
 	Version *string `protobuf:"bytes,3,opt,name=version,proto3,oneof" json:"version,omitempty"`
-	// TODO: Needing a package_id here is very bad usability for users.
-	// That means we would need to start documenting all package_ids somewhere.
-	// Rather we should introduce speaking package names in the public api (even if we have them different internally).
-	// In the price list we already have them kind of 'https://docs.google.com/spreadsheets/d/1dDo1u6YExocd2MJfi_Xgjnret2vJqo84S-9-gcOltkc/edit?gid=0#gid=0'
-	// We could derive them from the SKU, e.g. QN_16x128 fine with something else as well.
-	// The package identifier used to configure the resources of the cluster. Use ListPackages() to select one.
+	// The package identifier used to configure the resources of the cluster. Use `qdrant.cloud.booking.v1.BookingService.ListPackages` to select one.
 	// This is a required field.
 	PackageId string `protobuf:"bytes,4,opt,name=package_id,json=packageId,proto3" json:"package_id,omitempty"`
 	// The additional resources on top of the selected package.
