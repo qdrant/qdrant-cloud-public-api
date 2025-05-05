@@ -8,9 +8,11 @@ on:
 
 jobs:
   Release:
+    name: Release Workflow
     runs-on: ubuntu-latest
 
     permissions:
+      pull-requests: write    # write permission is required to create a github release
       contents: write         # allow pushing tags
       id-token: write         # needed for authentication since we are using Workload Identity Federation
 
