@@ -8,9 +8,10 @@ on:
 jobs:
   update-release-draft:
     runs-on: ubuntu-latest
-
     permissions:
+      # write permission is required to create a github release
       contents: write
+      pull-requests: write
 
     steps:
       - name: Update Release Draft
