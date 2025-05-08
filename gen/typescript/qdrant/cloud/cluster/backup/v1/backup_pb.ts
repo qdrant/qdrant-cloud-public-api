@@ -24,7 +24,7 @@ export const file_qdrant_cloud_cluster_backup_v1_backup: GenFile = /*@__PURE__*/
  */
 export type ListBackupsRequest = Message<"qdrant.cloud.cluster.backup.v1.ListBackupsRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -32,7 +32,7 @@ export type ListBackupsRequest = Message<"qdrant.cloud.cluster.backup.v1.ListBac
   accountId: string;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * When this field is set, only backups that belong to the cluster are returned.
    *
    * @generated from field: optional string cluster_id = 2;
@@ -40,7 +40,7 @@ export type ListBackupsRequest = Message<"qdrant.cloud.cluster.backup.v1.ListBac
   clusterId?: string;
 
   /**
-   * The identifier of the schedule (in Guid format).
+   * The identifier of the schedule (in GUID format).
    * When this field is set, only backups triggered by the backup schedule are returned.
    *
    * @generated from field: optional string backup_schedule_id = 3;
@@ -125,7 +125,7 @@ export const CreateBackupResponseSchema: GenMessage<CreateBackupResponse> = /*@_
  */
 export type DeleteBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.DeleteBackupRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -133,7 +133,7 @@ export type DeleteBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.Delete
   accountId: string;
 
   /**
-   * The identifier of the backup (in Guid format).
+   * The identifier of the backup (in GUID format).
    * This is a required field.
    *
    * @generated from field: string backup_id = 2;
@@ -172,7 +172,7 @@ export const DeleteBackupResponseSchema: GenMessage<DeleteBackupResponse> = /*@_
  */
 export type RestoreBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.RestoreBackupRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -180,7 +180,7 @@ export type RestoreBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.Resto
   accountId: string;
 
   /**
-   * The identifier of the backup (in Guid format).
+   * The identifier of the backup (in GUID format).
    * This is a required field.
    *
    * @generated from field: string backup_id = 2;
@@ -219,7 +219,7 @@ export const RestoreBackupResponseSchema: GenMessage<RestoreBackupResponse> = /*
  */
 export type ListBackupSchedulesRequest = Message<"qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -227,7 +227,7 @@ export type ListBackupSchedulesRequest = Message<"qdrant.cloud.cluster.backup.v1
   accountId: string;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * When this field is set, only backup schedules that belong to the cluster are returned.
    *
    * @generated from field: optional string cluster_id = 2;
@@ -270,7 +270,7 @@ export const ListBackupSchedulesResponseSchema: GenMessage<ListBackupSchedulesRe
  */
 export type GetBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -278,7 +278,7 @@ export type GetBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v1.G
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is a required field.
    *
@@ -287,7 +287,7 @@ export type GetBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v1.G
   clusterId: string;
 
   /**
-   * The identifier for the backup schedule (in Guid format).
+   * The identifier for the backup schedule (in GUID format).
    * This backup schedule should be part of the provided cluster and account.
    * This is a required field.
    *
@@ -415,7 +415,7 @@ export const UpdateBackupScheduleResponseSchema: GenMessage<UpdateBackupSchedule
  */
 export type DeleteBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -423,7 +423,7 @@ export type DeleteBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v
   accountId: string;
 
   /**
-   * The identifier for the backup schedule (in Guid format).
+   * The identifier for the backup schedule (in GUID format).
    * This backup schedule should be part of the provided account.
    * This is a required field.
    *
@@ -470,7 +470,7 @@ export const DeleteBackupScheduleResponseSchema: GenMessage<DeleteBackupSchedule
  */
 export type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & {
   /**
-   * Unique identifier for the backup (in Guid format).
+   * Unique identifier for the backup (in GUID format).
    * This is a read-only field and will be available after a backup is created.
    *
    * @generated from field: string id = 1;
@@ -486,7 +486,7 @@ export type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & {
   createdAt?: Timestamp;
 
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 3;
@@ -494,7 +494,7 @@ export type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & {
   accountId: string;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * This is a required field.
    *
    * @generated from field: string cluster_id = 4;
@@ -549,7 +549,7 @@ export const BackupSchema: GenMessage<Backup> = /*@__PURE__*/
  */
 export type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.BackupSchedule"> & {
   /**
-   * Unique identifier for the backup schedule (in Guid format).
+   * Unique identifier for the backup schedule (in GUID format).
    * This is a read-only field and will be available after a backup schedule is created.
    *
    * @generated from field: string id = 1;
@@ -565,7 +565,7 @@ export type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.BackupSched
   createdAt?: Timestamp;
 
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 3;
@@ -573,7 +573,7 @@ export type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.BackupSched
   accountId: string;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * This is a required field.
    *
    * @generated from field: string cluster_id = 4;

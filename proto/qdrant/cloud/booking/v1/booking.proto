@@ -30,7 +30,7 @@ service BookingService {
 
 // ListPackagesRequest is the request for the ListPackages function
 message ListPackagesRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // Optional filter specifying the cloud provider where the cluster will be hosted.
@@ -55,7 +55,7 @@ message ListPackagesResponse {
 
 // GetPackageRequest is the request for the GetPackage function
 message GetPackageRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The unique identifier of the package.

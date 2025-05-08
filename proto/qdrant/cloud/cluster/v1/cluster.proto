@@ -87,7 +87,7 @@ service ClusterService {
 
 // ListClustersRequest is the request for the ListClusters function
 message ListClustersRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // Optional filter specifying the cloud provider where the cluster is hosted.
@@ -115,10 +115,10 @@ message ListClustersResponse {
 
 // GetClusterRequest is the request for the GetCluster function
 message GetClusterRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -156,10 +156,10 @@ message UpdateClusterResponse {
 
 // DeleteClusterRequest is the request for the DeleteCluster function
 message DeleteClusterRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -174,10 +174,10 @@ message DeleteClusterResponse {
 
 // RestartClusterRequest is the request for the RestartCluster function
 message RestartClusterRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -190,10 +190,10 @@ message RestartClusterResponse {
 
 // ListQdrantReleasesRequest is the request for the ListQdrantReleases function
 message ListQdrantReleasesRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is an optional field.
   optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -207,7 +207,7 @@ message ListQdrantReleasesResponse {
 
 // A Cluster represents one cluster of a Qdrant database.
 message Cluster {
-  // Unique identifier for the cluster (in Guid format).
+  // Unique identifier for the cluster (in GUID format).
   // This is a read-only field and will be available after a cluster is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -218,7 +218,7 @@ message Cluster {
   // Timestamp when the cluster was created.
   // This is a read-only field and will be available after a cluster is created.
   google.protobuf.Timestamp created_at = 2;
-  // Identifier of the account associated with the cluster (in Guid format).
+  // Identifier of the account associated with the cluster (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
   // Name of the cluster.

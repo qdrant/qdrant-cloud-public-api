@@ -25,7 +25,7 @@ export const file_qdrant_cloud_cluster_v1_cluster: GenFile = /*@__PURE__*/
  */
 export type ListClustersRequest = Message<"qdrant.cloud.cluster.v1.ListClustersRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -87,7 +87,7 @@ export const ListClustersResponseSchema: GenMessage<ListClustersResponse> = /*@_
  */
 export type GetClusterRequest = Message<"qdrant.cloud.cluster.v1.GetClusterRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -95,7 +95,7 @@ export type GetClusterRequest = Message<"qdrant.cloud.cluster.v1.GetClusterReque
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is a required field.
    *
@@ -223,7 +223,7 @@ export const UpdateClusterResponseSchema: GenMessage<UpdateClusterResponse> = /*
  */
 export type DeleteClusterRequest = Message<"qdrant.cloud.cluster.v1.DeleteClusterRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -231,7 +231,7 @@ export type DeleteClusterRequest = Message<"qdrant.cloud.cluster.v1.DeleteCluste
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is a required field.
    *
@@ -278,7 +278,7 @@ export const DeleteClusterResponseSchema: GenMessage<DeleteClusterResponse> = /*
  */
 export type RestartClusterRequest = Message<"qdrant.cloud.cluster.v1.RestartClusterRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -286,7 +286,7 @@ export type RestartClusterRequest = Message<"qdrant.cloud.cluster.v1.RestartClus
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is a required field.
    *
@@ -326,7 +326,7 @@ export const RestartClusterResponseSchema: GenMessage<RestartClusterResponse> = 
  */
 export type ListQdrantReleasesRequest = Message<"qdrant.cloud.cluster.v1.ListQdrantReleasesRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -334,7 +334,7 @@ export type ListQdrantReleasesRequest = Message<"qdrant.cloud.cluster.v1.ListQdr
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is an optional field.
    *
@@ -378,7 +378,7 @@ export const ListQdrantReleasesResponseSchema: GenMessage<ListQdrantReleasesResp
  */
 export type Cluster = Message<"qdrant.cloud.cluster.v1.Cluster"> & {
   /**
-   * Unique identifier for the cluster (in Guid format).
+   * Unique identifier for the cluster (in GUID format).
    * This is a read-only field and will be available after a cluster is created.
    *
    * @generated from field: string id = 1;
@@ -394,7 +394,7 @@ export type Cluster = Message<"qdrant.cloud.cluster.v1.Cluster"> & {
   createdAt?: Timestamp;
 
   /**
-   * Identifier of the account associated with the cluster (in Guid format).
+   * Identifier of the account associated with the cluster (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 3;

@@ -45,10 +45,10 @@ service DatabaseApiKeyService {
 
 // ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
 message ListDatabaseApiKeysRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -73,14 +73,14 @@ message CreateDatabaseApiKeyResponse {
 
 // DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
 message DeleteDatabaseApiKeyRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the database api key (in Guid format).
+  // The identifier of the database api key (in GUID format).
   // This is a required field.
   string database_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
 }
@@ -93,7 +93,7 @@ message DeleteDatabaseApiKeyResponse {
 // A DatabaseApiKey represents one database api key of a Qdrant cloud account.
 // This database key can grant access to one or more Qdrant databases (clusters).
 message DatabaseApiKey {
-  // Unique identifier for the database api key (in Guid format).
+  // Unique identifier for the database api key (in GUID format).
   // This is a read-only field and will be available after a database api key is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -101,13 +101,13 @@ message DatabaseApiKey {
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the database api key was created.
   // This is a read-only field and will be available after a database api key is created.
   google.protobuf.Timestamp created_at = 3;
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // This is a required field.
   string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
   // Name of the database api key.

@@ -37,14 +37,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.",
+            "description": "The identifier of the cluster (in GUID format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -76,21 +76,21 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupScheduleId",
-            "description": "The identifier for the backup schedule (in Guid format).\nThis backup schedule should be part of the provided cluster and account.\nThis is a required field.",
+            "description": "The identifier for the backup schedule (in GUID format).\nThis backup schedule should be part of the provided cluster and account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -122,21 +122,21 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier of the cluster (in Guid format).\nWhen this field is set, only backups that belong to the cluster are returned.",
+            "description": "The identifier of the cluster (in GUID format).\nWhen this field is set, only backups that belong to the cluster are returned.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "backupScheduleId",
-            "description": "The identifier of the schedule (in Guid format).\nWhen this field is set, only backups triggered by the backup schedule are returned.",
+            "description": "The identifier of the schedule (in GUID format).\nWhen this field is set, only backups triggered by the backup schedule are returned.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -168,14 +168,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupId",
-            "description": "The identifier of the backup (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -207,14 +207,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupId",
-            "description": "The identifier of the backup (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -246,7 +246,7 @@
         "parameters": [
           {
             "name": "backup.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -286,7 +286,7 @@
         "parameters": [
           {
             "name": "backupSchedule.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -326,14 +326,14 @@
         "parameters": [
           {
             "name": "backupSchedule.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupSchedule.id",
-            "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created.",
+            "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -373,14 +373,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupScheduleId",
-            "description": "The identifier for the backup schedule (in Guid format).\nThis backup schedule should be part of the provided account.\nThis is a required field.",
+            "description": "The identifier for the backup schedule (in GUID format).\nThis backup schedule should be part of the provided account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -408,7 +408,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup (in Guid format).\nThis is a read-only field and will be available after a backup is created."
+              "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
             },
             "createdAt": {
               "type": "string",
@@ -417,7 +417,7 @@
             },
             "clusterId": {
               "type": "string",
-              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+              "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
             },
             "name": {
               "type": "string",
@@ -451,7 +451,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
             },
             "createdAt": {
               "type": "string",
@@ -460,7 +460,7 @@
             },
             "clusterId": {
               "type": "string",
-              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+              "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
             },
             "schedule": {
               "type": "string",
@@ -499,7 +499,7 @@
             },
             "clusterId": {
               "type": "string",
-              "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+              "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
             },
             "schedule": {
               "type": "string",
@@ -558,7 +558,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup (in Guid format).\nThis is a read-only field and will be available after a backup is created."
+          "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
         },
         "createdAt": {
           "type": "string",
@@ -567,11 +567,11 @@
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "clusterId": {
           "type": "string",
-          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+          "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
         },
         "name": {
           "type": "string",
@@ -598,7 +598,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup schedule (in Guid format).\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
         },
         "createdAt": {
           "type": "string",
@@ -607,11 +607,11 @@
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "clusterId": {
           "type": "string",
-          "description": "The identifier of the cluster (in Guid format).\nThis is a required field."
+          "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
         },
         "schedule": {
           "type": "string",

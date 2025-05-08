@@ -27,7 +27,7 @@ const (
 // ListCloudProvidersRequest is the request for the ListCloudProviders function.
 type ListCloudProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -296,7 +296,7 @@ func (x *ListGlobalCloudProviderRegionsResponse) GetItems() []*CloudProviderRegi
 // ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 type ListCloudProviderRegionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.

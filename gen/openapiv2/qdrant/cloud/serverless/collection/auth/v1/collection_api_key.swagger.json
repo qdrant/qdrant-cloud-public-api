@@ -37,14 +37,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
-            "description": "Collection the API keys belong to (in Guid format).\nThis is a required field.",
+            "description": "Collection the API keys belong to (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -76,21 +76,21 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
-            "description": "Collection the key belongs to (in Guid format).\nThis is a required field.",
+            "description": "Collection the key belongs to (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionApiKeyId",
-            "description": "ID of the key to delete (in Guid format).\nThis is a required field.",
+            "description": "ID of the key to delete (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -122,14 +122,14 @@
         "parameters": [
           {
             "name": "collectionApiKey.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
-            "description": "Collection the key will access (in Guid format).\nThis is a required field.",
+            "description": "Collection the key will access (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -155,14 +155,14 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "collectionApiKey": {
           "type": "object",
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the collection api key (in Guid format).\nThis is a read-only field and will be available after a collection api key is created."
+              "description": "Unique identifier for the collection api key (in GUID format).\nThis is a read-only field and will be available after a collection api key is created."
             },
             "createdAt": {
               "type": "string",
@@ -171,7 +171,7 @@
             },
             "collectionId": {
               "type": "string",
-              "description": "The identifier of the collection (in Guid format).\nThis is a required field."
+              "description": "The identifier of the collection (in GUID format).\nThis is a required field."
             },
             "name": {
               "type": "string",
@@ -238,11 +238,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the collection api key (in Guid format).\nThis is a read-only field and will be available after a collection api key is created."
+          "description": "Unique identifier for the collection api key (in GUID format).\nThis is a read-only field and will be available after a collection api key is created."
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "createdAt": {
           "type": "string",
@@ -251,7 +251,7 @@
         },
         "collectionId": {
           "type": "string",
-          "description": "The identifier of the collection (in Guid format).\nThis is a required field."
+          "description": "The identifier of the collection (in GUID format).\nThis is a required field."
         },
         "name": {
           "type": "string",

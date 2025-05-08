@@ -45,7 +45,7 @@ service AuthService {
 
 // ListManagementKeysRequest is the request for the ListManagementKeys function
 message ListManagementKeysRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
@@ -70,10 +70,10 @@ message CreateManagementKeyResponse {
 
 // DeleteManagementKeyRequest is the request for the DeleteManagementKey function
 message DeleteManagementKeyRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the management key (in Guid format).
+  // The identifier of the management key (in GUID format).
   // This is a required field.
   string management_key_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -87,7 +87,7 @@ message DeleteManagementKeyResponse {
 // A ManagementKey represents a management key of a Qdrant Cloud account.
 // This management key grants access to the Qdrant Cloud API.
 message ManagementKey {
-  // Unique identifier for the management key (in Guid format).
+  // Unique identifier for the management key (in GUID format).
   // This is a read-only field and will be available after a management key is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -95,7 +95,7 @@ message ManagementKey {
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the management key was created.

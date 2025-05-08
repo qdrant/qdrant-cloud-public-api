@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -69,14 +69,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "databaseApiKeyId",
-            "description": "The identifier of the database api key (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the database api key (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -108,7 +108,7 @@
         "parameters": [
           {
             "name": "databaseApiKey.accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -144,11 +144,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the database api key (in Guid format).\nThis is a read-only field and will be available after a database api key is created."
+          "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in Guid format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "createdAt": {
           "type": "string",
@@ -181,7 +181,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the database api key (in Guid format).\nThis is a read-only field and will be available after a database api key is created."
+              "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
             },
             "createdAt": {
               "type": "string",

@@ -26,7 +26,7 @@ export const file_qdrant_cloud_serverless_collection_v1_collection: GenFile = /*
  */
 export type ListCollectionsRequest = Message<"qdrant.cloud.serverless.collection.v1.ListCollectionsRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -111,7 +111,7 @@ export const CreateCollectionResponseSchema: GenMessage<CreateCollectionResponse
  */
 export type UpgradeCollectionRequest = Message<"qdrant.cloud.serverless.collection.v1.UpgradeCollectionRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -119,7 +119,7 @@ export type UpgradeCollectionRequest = Message<"qdrant.cloud.serverless.collecti
   accountId: string;
 
   /**
-   * ID of the collection to upgrade (in Guid format).
+   * ID of the collection to upgrade (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 2;
@@ -158,7 +158,7 @@ export const UpgradeCollectionResponseSchema: GenMessage<UpgradeCollectionRespon
  */
 export type DeleteCollectionRequest = Message<"qdrant.cloud.serverless.collection.v1.DeleteCollectionRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -166,7 +166,7 @@ export type DeleteCollectionRequest = Message<"qdrant.cloud.serverless.collectio
   accountId: string;
 
   /**
-   * ID of the collection to delete (in Guid format).
+   * ID of the collection to delete (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 2;
@@ -205,7 +205,7 @@ export const DeleteCollectionResponseSchema: GenMessage<DeleteCollectionResponse
  */
 export type Collection = Message<"qdrant.cloud.serverless.collection.v1.Collection"> & {
   /**
-   * Unique identifier for the collection (in Guid format).
+   * Unique identifier for the collection (in GUID format).
    * This is a read-only field and will be available after a collection is created.
    *
    * @generated from field: string id = 1;
@@ -221,7 +221,7 @@ export type Collection = Message<"qdrant.cloud.serverless.collection.v1.Collecti
   createdAt?: Timestamp;
 
   /**
-   * Identifier of the account associated with the collection (in Guid format).
+   * Identifier of the account associated with the collection (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 3;

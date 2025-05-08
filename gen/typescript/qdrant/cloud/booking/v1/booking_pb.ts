@@ -22,7 +22,7 @@ export const file_qdrant_cloud_booking_v1_booking: GenFile = /*@__PURE__*/
  */
 export type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListPackagesRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -92,7 +92,7 @@ export const ListPackagesResponseSchema: GenMessage<ListPackagesResponse> = /*@_
  */
 export type GetPackageRequest = Message<"qdrant.cloud.booking.v1.GetPackageRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
