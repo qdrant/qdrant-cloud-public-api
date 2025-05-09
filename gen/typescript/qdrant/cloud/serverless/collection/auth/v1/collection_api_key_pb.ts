@@ -24,7 +24,7 @@ export const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key:
  */
 export type ListCollectionApiKeysRequest = Message<"qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -32,7 +32,7 @@ export type ListCollectionApiKeysRequest = Message<"qdrant.cloud.serverless.coll
   accountId: string;
 
   /**
-   * Collection the API keys belong to (in Guid format).
+   * Collection the API keys belong to (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 2;
@@ -75,7 +75,7 @@ export const ListCollectionApiKeysResponseSchema: GenMessage<ListCollectionApiKe
  */
 export type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -83,7 +83,7 @@ export type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.col
   accountId: string;
 
   /**
-   * Collection the key will access (in Guid format).
+   * Collection the key will access (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 2;
@@ -134,7 +134,7 @@ export const CreateCollectionApiKeyResponseSchema: GenMessage<CreateCollectionAp
  */
 export type DeleteCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -142,7 +142,7 @@ export type DeleteCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.col
   accountId: string;
 
   /**
-   * Collection the key belongs to (in Guid format).
+   * Collection the key belongs to (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 2;
@@ -150,7 +150,7 @@ export type DeleteCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.col
   collectionId: string;
 
   /**
-   * ID of the key to delete (in Guid format).
+   * ID of the key to delete (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_api_key_id = 3;
@@ -190,7 +190,7 @@ export const DeleteCollectionApiKeyResponseSchema: GenMessage<DeleteCollectionAp
  */
 export type CollectionApiKey = Message<"qdrant.cloud.serverless.collection.auth.v1.CollectionApiKey"> & {
   /**
-   * Unique identifier for the collection api key (in Guid format).
+   * Unique identifier for the collection api key (in GUID format).
    * This is a read-only field and will be available after a collection api key is created.
    *
    * @generated from field: string id = 1;
@@ -198,7 +198,7 @@ export type CollectionApiKey = Message<"qdrant.cloud.serverless.collection.auth.
   id: string;
 
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 2;
@@ -214,7 +214,7 @@ export type CollectionApiKey = Message<"qdrant.cloud.serverless.collection.auth.
   createdAt?: Timestamp;
 
   /**
-   * The identifier of the collection (in Guid format).
+   * The identifier of the collection (in GUID format).
    * This is a required field.
    *
    * @generated from field: string collection_id = 4;

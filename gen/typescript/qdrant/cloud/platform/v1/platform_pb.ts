@@ -22,7 +22,7 @@ export const file_qdrant_cloud_platform_v1_platform: GenFile = /*@__PURE__*/
  */
 export type ListCloudProvidersRequest = Message<"qdrant.cloud.platform.v1.ListCloudProvidersRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -144,7 +144,7 @@ export const ListGlobalCloudProviderRegionsResponseSchema: GenMessage<ListGlobal
  */
 export type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;

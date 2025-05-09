@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -83,14 +83,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -120,14 +120,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -166,14 +166,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -205,14 +205,14 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "The identifier for the cluster (in Guid format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -244,7 +244,7 @@
         "parameters": [
           {
             "name": "cluster.accountId",
-            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -284,14 +284,14 @@
         "parameters": [
           {
             "name": "cluster.accountId",
-            "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field.",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "cluster.id",
-            "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created.",
+            "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -320,7 +320,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
+              "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
             },
             "createdAt": {
               "type": "string",
@@ -444,7 +444,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the cluster (in Guid format).\nThis is a read-only field and will be available after a cluster is created."
+          "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
         },
         "createdAt": {
           "type": "string",
@@ -453,7 +453,7 @@
         },
         "accountId": {
           "type": "string",
-          "description": "Identifier of the account associated with the cluster (in Guid format).\nThis is a required field."
+          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
         },
         "name": {
           "type": "string",

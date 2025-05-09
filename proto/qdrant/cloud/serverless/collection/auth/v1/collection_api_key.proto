@@ -45,10 +45,10 @@ service CollectionApiKeyService {
 
 // Request all API keys associated with a collection
 message ListCollectionApiKeysRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Collection the API keys belong to (in Guid format).
+  // Collection the API keys belong to (in GUID format).
   // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -61,10 +61,10 @@ message ListCollectionApiKeysResponse {
 
 // CreateCollectionApiKeyRequest defines parameters for creating a new collection API key
 message CreateCollectionApiKeyRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Collection the key will access (in Guid format).
+  // Collection the key will access (in GUID format).
   // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The API key to create.
@@ -80,13 +80,13 @@ message CreateCollectionApiKeyResponse {
 
 // DeleteCollectionApiKeyRequest identifies the API key to delete
 message DeleteCollectionApiKeyRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Collection the key belongs to (in Guid format).
+  // Collection the key belongs to (in GUID format).
   // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // ID of the key to delete (in Guid format).
+  // ID of the key to delete (in GUID format).
   // This is a required field.
   string collection_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
 }
@@ -111,7 +111,7 @@ enum CollectionApiKeyAccessType {
 // A CollectionApiKey represents one collection api key of a Qdrant cloud account.
 // This collection key can grant access to a Qdrant cloud serverless collection.
 message CollectionApiKey {
-  // Unique identifier for the collection api key (in Guid format).
+  // Unique identifier for the collection api key (in GUID format).
   // This is a read-only field and will be available after a collection api key is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -119,13 +119,13 @@ message CollectionApiKey {
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the collection api key was created.
   // This is a read-only field and will be available after a collection api key is created.
   google.protobuf.Timestamp created_at = 3;
-  // The identifier of the collection (in Guid format).
+  // The identifier of the collection (in GUID format).
   // This is a required field.
   string collection_id = 4 [(buf.validate.field).string = {uuid: true}];
   // Name of the collection api key.

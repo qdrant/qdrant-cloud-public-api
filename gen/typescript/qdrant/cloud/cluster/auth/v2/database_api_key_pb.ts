@@ -24,7 +24,7 @@ export const file_qdrant_cloud_cluster_auth_v2_database_api_key: GenFile = /*@__
  */
 export type ListDatabaseApiKeysRequest = Message<"qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -32,7 +32,7 @@ export type ListDatabaseApiKeysRequest = Message<"qdrant.cloud.cluster.auth.v2.L
   accountId: string;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * This is a required field.
    *
    * @generated from field: string cluster_id = 2;
@@ -117,7 +117,7 @@ export const CreateDatabaseApiKeyResponseSchema: GenMessage<CreateDatabaseApiKey
  */
 export type DeleteDatabaseApiKeyRequest = Message<"qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -125,7 +125,7 @@ export type DeleteDatabaseApiKeyRequest = Message<"qdrant.cloud.cluster.auth.v2.
   accountId: string;
 
   /**
-   * The identifier for the cluster (in Guid format).
+   * The identifier for the cluster (in GUID format).
    * This cluster should be part of the provided account.
    * This is a required field.
    *
@@ -134,7 +134,7 @@ export type DeleteDatabaseApiKeyRequest = Message<"qdrant.cloud.cluster.auth.v2.
   clusterId: string;
 
   /**
-   * The identifier of the database api key (in Guid format).
+   * The identifier of the database api key (in GUID format).
    * This is a required field.
    *
    * @generated from field: string database_api_key_id = 3;
@@ -174,7 +174,7 @@ export const DeleteDatabaseApiKeyResponseSchema: GenMessage<DeleteDatabaseApiKey
  */
 export type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.DatabaseApiKey"> & {
   /**
-   * Unique identifier for the database api key (in Guid format).
+   * Unique identifier for the database api key (in GUID format).
    * This is a read-only field and will be available after a database api key is created.
    *
    * @generated from field: string id = 1;
@@ -182,7 +182,7 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.DatabaseApiKe
   id: string;
 
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 2;
@@ -198,7 +198,7 @@ export type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.DatabaseApiKe
   createdAt?: Timestamp;
 
   /**
-   * The identifier of the cluster (in Guid format).
+   * The identifier of the cluster (in GUID format).
    * This is a required field.
    *
    * @generated from field: string cluster_id = 4;

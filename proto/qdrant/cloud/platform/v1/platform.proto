@@ -46,7 +46,7 @@ service PlatformService {
 
 // ListCloudProvidersRequest is the request for the ListCloudProviders function.
 message ListCloudProvidersRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
@@ -83,7 +83,7 @@ message ListGlobalCloudProviderRegionsResponse {
 
 // ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 message ListCloudProviderRegionsRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.

@@ -482,7 +482,7 @@ func (ClusterPhase) EnumDescriptor() ([]byte, []int) {
 // ListClustersRequest is the request for the ListClusters function
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Optional filter specifying the cloud provider where the cluster is hosted.
@@ -598,10 +598,10 @@ func (x *ListClustersResponse) GetItems() []*Cluster {
 // GetClusterRequest is the request for the GetCluster function
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cluster (in Guid format).
+	// The identifier for the cluster (in GUID format).
 	// This cluster should be part of the provided account.
 	// This is a required field.
 	ClusterId     string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -886,10 +886,10 @@ func (x *UpdateClusterResponse) GetCluster() *Cluster {
 // DeleteClusterRequest is the request for the DeleteCluster function
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cluster (in Guid format).
+	// The identifier for the cluster (in GUID format).
 	// This cluster should be part of the provided account.
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -990,10 +990,10 @@ func (*DeleteClusterResponse) Descriptor() ([]byte, []int) {
 // RestartClusterRequest is the request for the RestartCluster function
 type RestartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cluster (in Guid format).
+	// The identifier for the cluster (in GUID format).
 	// This cluster should be part of the provided account.
 	// This is a required field.
 	ClusterId     string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -1085,10 +1085,10 @@ func (*RestartClusterResponse) Descriptor() ([]byte, []int) {
 // ListQdrantReleasesRequest is the request for the ListQdrantReleases function
 type ListQdrantReleasesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cluster (in Guid format).
+	// The identifier for the cluster (in GUID format).
 	// This cluster should be part of the provided account.
 	// This is an optional field.
 	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
@@ -1189,13 +1189,13 @@ func (x *ListQdrantReleasesResponse) GetItems() []*QdrantRelease {
 // A Cluster represents one cluster of a Qdrant database.
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the cluster (in Guid format).
+	// Unique identifier for the cluster (in GUID format).
 	// This is a read-only field and will be available after a cluster is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Timestamp when the cluster was created.
 	// This is a read-only field and will be available after a cluster is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Identifier of the account associated with the cluster (in Guid format).
+	// Identifier of the account associated with the cluster (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Name of the cluster.

@@ -80,7 +80,7 @@ func (PackageStatus) EnumDescriptor() ([]byte, []int) {
 // ListPackagesRequest is the request for the ListPackages function
 type ListPackagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Optional filter specifying the cloud provider where the cluster will be hosted.
@@ -206,7 +206,7 @@ func (x *ListPackagesResponse) GetItems() []*Package {
 // GetPackageRequest is the request for the GetPackage function
 type GetPackageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The unique identifier of the package.

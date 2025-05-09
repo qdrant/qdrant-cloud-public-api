@@ -83,10 +83,10 @@ func (CollectionApiKeyAccessType) EnumDescriptor() ([]byte, []int) {
 // Request all API keys associated with a collection
 type ListCollectionApiKeysRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Collection the API keys belong to (in Guid format).
+	// Collection the API keys belong to (in GUID format).
 	// This is a required field.
 	CollectionId  string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -186,10 +186,10 @@ func (x *ListCollectionApiKeysResponse) GetItems() []*CollectionApiKey {
 // CreateCollectionApiKeyRequest defines parameters for creating a new collection API key
 type CreateCollectionApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Collection the key will access (in Guid format).
+	// Collection the key will access (in GUID format).
 	// This is a required field.
 	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	// The API key to create.
@@ -299,13 +299,13 @@ func (x *CreateCollectionApiKeyResponse) GetCollectionApiKey() *CollectionApiKey
 // DeleteCollectionApiKeyRequest identifies the API key to delete
 type DeleteCollectionApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Collection the key belongs to (in Guid format).
+	// Collection the key belongs to (in GUID format).
 	// This is a required field.
 	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
-	// ID of the key to delete (in Guid format).
+	// ID of the key to delete (in GUID format).
 	// This is a required field.
 	CollectionApiKeyId string `protobuf:"bytes,3,opt,name=collection_api_key_id,json=collectionApiKeyId,proto3" json:"collection_api_key_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -404,16 +404,16 @@ func (*DeleteCollectionApiKeyResponse) Descriptor() ([]byte, []int) {
 // This collection key can grant access to a Qdrant cloud serverless collection.
 type CollectionApiKey struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the collection api key (in Guid format).
+	// Unique identifier for the collection api key (in GUID format).
 	// This is a read-only field and will be available after a collection api key is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Timestamp when the collection api key was created.
 	// This is a read-only field and will be available after a collection api key is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The identifier of the collection (in Guid format).
+	// The identifier of the collection (in GUID format).
 	// This is a required field.
 	CollectionId string `protobuf:"bytes,4,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	// Name of the collection api key.

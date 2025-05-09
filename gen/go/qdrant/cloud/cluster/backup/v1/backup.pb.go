@@ -163,13 +163,13 @@ func (BackupScheduleStatus) EnumDescriptor() ([]byte, []int) {
 // ListBackupsRequest is the request for the ListBackups function
 type ListBackupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the cluster (in Guid format).
+	// The identifier of the cluster (in GUID format).
 	// When this field is set, only backups that belong to the cluster are returned.
 	ClusterId *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
-	// The identifier of the schedule (in Guid format).
+	// The identifier of the schedule (in GUID format).
 	// When this field is set, only backups triggered by the backup schedule are returned.
 	BackupScheduleId *string `protobuf:"bytes,3,opt,name=backup_schedule_id,json=backupScheduleId,proto3,oneof" json:"backup_schedule_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -368,10 +368,10 @@ func (x *CreateBackupResponse) GetBackup() *Backup {
 // DeleteBackupRequest is the request for the DeleteBackup function.
 type DeleteBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the backup (in Guid format).
+	// The identifier of the backup (in GUID format).
 	// This is a required field.
 	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -462,10 +462,10 @@ func (*DeleteBackupResponse) Descriptor() ([]byte, []int) {
 // RestoreBackupRequest is the request for the RestoreBackup function.
 type RestoreBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the backup (in Guid format).
+	// The identifier of the backup (in GUID format).
 	// This is a required field.
 	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -556,10 +556,10 @@ func (*RestoreBackupResponse) Descriptor() ([]byte, []int) {
 // ListBackupSchedulesRequest is the request for the ListBackupSchedules function
 type ListBackupSchedulesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the cluster (in Guid format).
+	// The identifier of the cluster (in GUID format).
 	// When this field is set, only backup schedules that belong to the cluster are returned.
 	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -659,14 +659,14 @@ func (x *ListBackupSchedulesResponse) GetItems() []*BackupSchedule {
 // GetBackupScheduleRequest is the request for the GetBackupSchedule function.
 type GetBackupScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cluster (in Guid format).
+	// The identifier for the cluster (in GUID format).
 	// This cluster should be part of the provided account.
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The identifier for the backup schedule (in Guid format).
+	// The identifier for the backup schedule (in GUID format).
 	// This backup schedule should be part of the provided cluster and account.
 	// This is a required field.
 	BackupScheduleId string `protobuf:"bytes,3,opt,name=backup_schedule_id,json=backupScheduleId,proto3" json:"backup_schedule_id,omitempty"`
@@ -958,10 +958,10 @@ func (x *UpdateBackupScheduleResponse) GetBackupSchedule() *BackupSchedule {
 // DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
 type DeleteBackupScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the backup schedule (in Guid format).
+	// The identifier for the backup schedule (in GUID format).
 	// This backup schedule should be part of the provided account.
 	// This is a required field.
 	BackupScheduleId string `protobuf:"bytes,2,opt,name=backup_schedule_id,json=backupScheduleId,proto3" json:"backup_schedule_id,omitempty"`
@@ -1062,16 +1062,16 @@ func (*DeleteBackupScheduleResponse) Descriptor() ([]byte, []int) {
 // A Backup represents a backup of a Qdrant database.
 type Backup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the backup (in Guid format).
+	// Unique identifier for the backup (in GUID format).
 	// This is a read-only field and will be available after a backup is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The timestamp when the backup was created.
 	// This is a read-only field and will be available after a backup is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the cluster (in Guid format).
+	// The identifier of the cluster (in GUID format).
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,4,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The name of the backup.
@@ -1180,16 +1180,16 @@ func (x *Backup) GetBackupDuration() *durationpb.Duration {
 // A BackupSchedule represents a recurring schedule for creating backups.
 type BackupSchedule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the backup schedule (in Guid format).
+	// Unique identifier for the backup schedule (in GUID format).
 	// This is a read-only field and will be available after a backup schedule is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The timestamp when the backup schedule was created.
 	// This is a read-only field and will be available after a backup schedule is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the cluster (in Guid format).
+	// The identifier of the cluster (in GUID format).
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,4,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The schedule that determines when the backup will be created.

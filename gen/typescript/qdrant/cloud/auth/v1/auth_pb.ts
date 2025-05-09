@@ -24,7 +24,7 @@ export const file_qdrant_cloud_auth_v1_auth: GenFile = /*@__PURE__*/
  */
 export type ListManagementKeysRequest = Message<"qdrant.cloud.auth.v1.ListManagementKeysRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -109,7 +109,7 @@ export const CreateManagementKeyResponseSchema: GenMessage<CreateManagementKeyRe
  */
 export type DeleteManagementKeyRequest = Message<"qdrant.cloud.auth.v1.DeleteManagementKeyRequest"> & {
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -117,7 +117,7 @@ export type DeleteManagementKeyRequest = Message<"qdrant.cloud.auth.v1.DeleteMan
   accountId: string;
 
   /**
-   * The identifier of the management key (in Guid format).
+   * The identifier of the management key (in GUID format).
    * This is a required field.
    *
    * @generated from field: string management_key_id = 2;
@@ -157,7 +157,7 @@ export const DeleteManagementKeyResponseSchema: GenMessage<DeleteManagementKeyRe
  */
 export type ManagementKey = Message<"qdrant.cloud.auth.v1.ManagementKey"> & {
   /**
-   * Unique identifier for the management key (in Guid format).
+   * Unique identifier for the management key (in GUID format).
    * This is a read-only field and will be available after a management key is created.
    *
    * @generated from field: string id = 1;
@@ -165,7 +165,7 @@ export type ManagementKey = Message<"qdrant.cloud.auth.v1.ManagementKey"> & {
   id: string;
 
   /**
-   * The identifier of the account (in Guid format).
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 2;

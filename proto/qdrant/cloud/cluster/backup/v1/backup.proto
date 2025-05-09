@@ -108,13 +108,13 @@ service BackupService {
 
 // ListBackupsRequest is the request for the ListBackups function
 message ListBackupsRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // When this field is set, only backups that belong to the cluster are returned.
   optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the schedule (in Guid format).
+  // The identifier of the schedule (in GUID format).
   // When this field is set, only backups triggered by the backup schedule are returned.
   optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
 }
@@ -139,10 +139,10 @@ message CreateBackupResponse {
 
 // DeleteBackupRequest is the request for the DeleteBackup function.
 message DeleteBackupRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the backup (in Guid format).
+  // The identifier of the backup (in GUID format).
   // This is a required field.
   string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -154,10 +154,10 @@ message DeleteBackupResponse {
 
 // RestoreBackupRequest is the request for the RestoreBackup function.
 message RestoreBackupRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the backup (in Guid format).
+  // The identifier of the backup (in GUID format).
   // This is a required field.
   string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -169,10 +169,10 @@ message RestoreBackupResponse {
 
 // ListBackupSchedulesRequest is the request for the ListBackupSchedules function
 message ListBackupSchedulesRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // When this field is set, only backup schedules that belong to the cluster are returned.
   optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
@@ -185,14 +185,14 @@ message ListBackupSchedulesResponse {
 
 // GetBackupScheduleRequest is the request for the GetBackupSchedule function.
 message GetBackupScheduleRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in Guid format).
+  // The identifier for the cluster (in GUID format).
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the backup schedule (in Guid format).
+  // The identifier for the backup schedule (in GUID format).
   // This backup schedule should be part of the provided cluster and account.
   // This is a required field.
   string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
@@ -230,10 +230,10 @@ message UpdateBackupScheduleResponse {
 
 // DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
 message DeleteBackupScheduleRequest {
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the backup schedule (in Guid format).
+  // The identifier for the backup schedule (in GUID format).
   // This backup schedule should be part of the provided account.
   // This is a required field.
   string backup_schedule_id = 2 [(buf.validate.field).string = {uuid: true}];
@@ -268,7 +268,7 @@ enum BackupStatus {
 
 // A Backup represents a backup of a Qdrant database.
 message Backup {
-  // Unique identifier for the backup (in Guid format).
+  // Unique identifier for the backup (in GUID format).
   // This is a read-only field and will be available after a backup is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -279,10 +279,10 @@ message Backup {
   // The timestamp when the backup was created.
   // This is a read-only field and will be available after a backup is created.
   google.protobuf.Timestamp created_at = 2;
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // This is a required field.
   string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The name of the backup.
@@ -317,7 +317,7 @@ enum BackupScheduleStatus {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // A BackupSchedule represents a recurring schedule for creating backups.
 message BackupSchedule {
-  // Unique identifier for the backup schedule (in Guid format).
+  // Unique identifier for the backup schedule (in GUID format).
   // This is a read-only field and will be available after a backup schedule is created.
   string id = 1;
   option (buf.validate.message).cel = {
@@ -328,10 +328,10 @@ message BackupSchedule {
   // The timestamp when the backup schedule was created.
   // This is a read-only field and will be available after a backup schedule is created.
   google.protobuf.Timestamp created_at = 2;
-  // The identifier of the account (in Guid format).
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the cluster (in Guid format).
+  // The identifier of the cluster (in GUID format).
   // This is a required field.
   string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The schedule that determines when the backup will be created.

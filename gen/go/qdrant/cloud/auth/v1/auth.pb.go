@@ -28,7 +28,7 @@ const (
 // ListManagementKeysRequest is the request for the ListManagementKeys function
 type ListManagementKeysRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -213,10 +213,10 @@ func (x *CreateManagementKeyResponse) GetManagementKey() *ManagementKey {
 // DeleteManagementKeyRequest is the request for the DeleteManagementKey function
 type DeleteManagementKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the management key (in Guid format).
+	// The identifier of the management key (in GUID format).
 	// This is a required field.
 	ManagementKeyId string `protobuf:"bytes,2,opt,name=management_key_id,json=managementKeyId,proto3" json:"management_key_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -308,10 +308,10 @@ func (*DeleteManagementKeyResponse) Descriptor() ([]byte, []int) {
 // This management key grants access to the Qdrant Cloud API.
 type ManagementKey struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the management key (in Guid format).
+	// Unique identifier for the management key (in GUID format).
 	// This is a read-only field and will be available after a management key is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Timestamp when the management key was created.

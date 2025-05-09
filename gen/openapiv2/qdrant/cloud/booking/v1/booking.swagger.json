@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -99,7 +99,7 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the account (in Guid format).\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"

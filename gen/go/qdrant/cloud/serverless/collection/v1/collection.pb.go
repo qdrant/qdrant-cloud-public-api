@@ -85,7 +85,7 @@ func (CollectionStatePhase) EnumDescriptor() ([]byte, []int) {
 // ListCollectionsRequest is an empty request to list collections
 type ListCollectionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -270,10 +270,10 @@ func (x *CreateCollectionResponse) GetCollection() *Collection {
 // Upgrade limits of the specified collection
 type UpgradeCollectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// ID of the collection to upgrade (in Guid format).
+	// ID of the collection to upgrade (in GUID format).
 	// This is a required field.
 	CollectionId  string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -364,10 +364,10 @@ func (*UpgradeCollectionResponse) Descriptor() ([]byte, []int) {
 // DeleteCollectionRequest identifies the collection to delete
 type DeleteCollectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// ID of the collection to delete (in Guid format).
+	// ID of the collection to delete (in GUID format).
 	// This is a required field.
 	CollectionId  string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -458,13 +458,13 @@ func (*DeleteCollectionResponse) Descriptor() ([]byte, []int) {
 // Collection represents a vector search collection in the Qdrant serverless environment
 type Collection struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the collection (in Guid format).
+	// Unique identifier for the collection (in GUID format).
 	// This is a read-only field and will be available after a collection is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Timestamp when the collection was created.
 	// This is a read-only field and will be available after a collection is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Identifier of the account associated with the collection (in Guid format).
+	// Identifier of the account associated with the collection (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Name of the collection.

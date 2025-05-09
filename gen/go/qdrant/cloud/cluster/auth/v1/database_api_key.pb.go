@@ -28,7 +28,7 @@ const (
 // ListDatabaseApiKeysRequest is the request for the ListDatabaseApiKeys function.
 type ListDatabaseApiKeysRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -213,10 +213,10 @@ func (x *CreateDatabaseApiKeyResponse) GetDatabaseApiKey() *DatabaseApiKey {
 // DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
 type DeleteDatabaseApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the database api key (in Guid format).
+	// The identifier of the database api key (in GUID format).
 	// This is a required field.
 	DatabaseApiKeyId string `protobuf:"bytes,2,opt,name=database_api_key_id,json=databaseApiKeyId,proto3" json:"database_api_key_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -308,10 +308,10 @@ func (*DeleteDatabaseApiKeyResponse) Descriptor() ([]byte, []int) {
 // This database key can grant access to one or more Qdrant databases (clusters).
 type DatabaseApiKey struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the database api key (in Guid format).
+	// Unique identifier for the database api key (in GUID format).
 	// This is a read-only field and will be available after a database api key is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The identifier of the account (in Guid format).
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Timestamp when the database api key was created.
