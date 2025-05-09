@@ -184,6 +184,45 @@
         ]
       }
     },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/suspend": {
+      "post": {
+        "summary": "Suspends a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_SuspendCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuspendClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/releases": {
       "get": {
         "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
@@ -981,6 +1020,11 @@
         }
       },
       "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
+    "v1SuspendClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "SuspendClusterResponse is the response from the SuspendCluster function"
     },
     "v1Toleration": {
       "type": "object",

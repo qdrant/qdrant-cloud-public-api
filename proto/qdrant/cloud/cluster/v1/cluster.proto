@@ -73,6 +73,15 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart"};
   }
+  // Suspends a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - write:clusters
+  rpc SuspendCluster(SuspendClusterRequest) returns (SuspendClusterResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend"};
+  }
   // Fetch all qdrant releases in the account identified by the given ID.
   // Optional a cluster ID can be provided, the list will return the options to update to only.
   // Required permissions:
@@ -185,6 +194,22 @@ message RestartClusterRequest {
 
 // RestartClusterResponse is the response from the RestartCluster function
 message RestartClusterResponse {
+  // Empty
+}
+
+// SuspendClusterRequest is the request for the SuspendCluster function
+message SuspendClusterRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// SuspendClusterResponse is the response from the SuspendCluster function
+message SuspendClusterResponse {
   // Empty
 }
 
