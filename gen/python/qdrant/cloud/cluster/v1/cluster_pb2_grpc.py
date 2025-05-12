@@ -45,6 +45,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterResponse.FromString,
                 _registered_method=True)
+        self.SuspendCluster = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
+                _registered_method=True)
         self.ListQdrantReleases = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
@@ -110,6 +115,15 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SuspendCluster(self, request, context):
+        """Suspends a cluster in the account identified by the given ID.
+        Required permissions:
+        - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListQdrantReleases(self, request, context):
         """Fetch all qdrant releases in the account identified by the given ID.
         Optional a cluster ID can be provided, the list will return the options to update to only.
@@ -152,6 +166,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.RestartCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterResponse.SerializeToString,
+            ),
+            'SuspendCluster': grpc.unary_unary_rpc_method_handler(
+                    servicer.SuspendCluster,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.SerializeToString,
             ),
             'ListQdrantReleases': grpc.unary_unary_rpc_method_handler(
                     servicer.ListQdrantReleases,
@@ -322,6 +341,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/RestartCluster',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.RestartClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SuspendCluster(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
             options,
             channel_credentials,
             insecure,
