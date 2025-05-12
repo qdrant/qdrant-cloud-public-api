@@ -50,6 +50,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
                 _registered_method=True)
+        self.SuggestClusterName = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameResponse.FromString,
+                _registered_method=True)
         self.ListQdrantReleases = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
@@ -124,6 +129,16 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SuggestClusterName(self, request, context):
+        """Suggests a unique and human-friendly name for a new cluster in the specified account.
+        This can be used by clients to pre-fill the name field when creating a new cluster.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListQdrantReleases(self, request, context):
         """Fetch all qdrant releases in the account identified by the given ID.
         Optional a cluster ID can be provided, the list will return the options to update to only.
@@ -171,6 +186,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.SuspendCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.SerializeToString,
+            ),
+            'SuggestClusterName': grpc.unary_unary_rpc_method_handler(
+                    servicer.SuggestClusterName,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameResponse.SerializeToString,
             ),
             'ListQdrantReleases': grpc.unary_unary_rpc_method_handler(
                     servicer.ListQdrantReleases,
@@ -368,6 +388,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SuggestClusterName(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameResponse.FromString,
             options,
             channel_credentials,
             insecure,

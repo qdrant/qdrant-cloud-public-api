@@ -82,6 +82,16 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend"};
   }
+  // Suggests a unique and human-friendly name for a new cluster in the specified account.
+  // This can be used by clients to pre-fill the name field when creating a new cluster.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc SuggestClusterName(SuggestClusterNameRequest) returns (SuggestClusterNameResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/suggest-name"};
+  }
   // Fetch all qdrant releases in the account identified by the given ID.
   // Optional a cluster ID can be provided, the list will return the options to update to only.
   // Required permissions:
@@ -211,6 +221,19 @@ message SuspendClusterRequest {
 // SuspendClusterResponse is the response from the SuspendCluster function
 message SuspendClusterResponse {
   // Empty
+}
+
+// SuggestClusterNameRequest is the request for the SuggestClusterName function
+message SuggestClusterNameRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// SuggestClusterNameResponse is the response from the SuggestClusterName function
+message SuggestClusterNameResponse {
+  // The suggested name for a new cluster.
+  string name = 1;
 }
 
 // ListQdrantReleasesRequest is the request for the ListQdrantReleases function
