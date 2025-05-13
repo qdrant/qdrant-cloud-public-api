@@ -62,6 +62,38 @@
         ]
       }
     },
+    "/api/cluster/v1/accounts/{accountId}/clusters/suggest-name": {
+      "get": {
+        "summary": "Suggests a unique and human-friendly name for a new cluster in the specified account.\nThis can be used by clients to pre-fill the name field when creating a new cluster.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "ClusterService_SuggestClusterName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuggestClusterNameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}": {
       "get": {
         "summary": "Fetch a cluster in the account identified by the given IDs.\nRequired permissions:\n- read:clusters",
@@ -1020,6 +1052,16 @@
         }
       },
       "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
+    "v1SuggestClusterNameResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The suggested name for a new cluster."
+        }
+      },
+      "title": "SuggestClusterNameResponse is the response from the SuggestClusterName function"
     },
     "v1SuspendClusterResponse": {
       "type": "object",
