@@ -432,13 +432,17 @@ class ClusterNodeResources(_message.Message):
     def __init__(self, base: _Optional[float] = ..., complimentary: _Optional[float] = ..., additional: _Optional[float] = ..., reserved: _Optional[float] = ..., available: _Optional[float] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
-    __slots__ = ("version", "default", "release_notes_url", "remarks")
+    __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     DEFAULT_FIELD_NUMBER: _ClassVar[int]
     RELEASE_NOTES_URL_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
+    END_OF_LIFE_FIELD_NUMBER: _ClassVar[int]
+    UNAVAILABLE_FIELD_NUMBER: _ClassVar[int]
     version: str
     default: bool
     release_notes_url: str
     remarks: str
-    def __init__(self, version: _Optional[str] = ..., default: bool = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ...) -> None: ...
+    end_of_life: bool
+    unavailable: bool
+    def __init__(self, version: _Optional[str] = ..., default: bool = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: bool = ..., unavailable: bool = ...) -> None: ...

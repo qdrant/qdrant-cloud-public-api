@@ -680,4 +680,8 @@ message QdrantRelease {
   optional string release_notes_url = 3;
   // Additional message regarding this release that might be useful to the client"
   optional string remarks = 4;
+  // True, if the release version is end of life and not supported anymore
+  bool end_of_life = 5;
+  // True, if the release is not available for the cluster creation or updates
+  bool unavailable = 6;
 }
