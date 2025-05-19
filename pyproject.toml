@@ -6,7 +6,7 @@ description = "Qdrant cloud public API"
 readme = "README.md"
 requires-python = ">=3.12, <3.13"
 authors = [
-    {name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com"}
+    { name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com" },
 ]
 
 [project.urls]
@@ -14,12 +14,14 @@ Homepage = "https://github.com/qdrant/qdrant-cloud-public-api"
 Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
 
 
-# For wheel packaging
-[tool.hatch.build.targets.wheel]
-# Include only the generated python sources
-include = ["gen/python"]
+# Consider this as *happens in the time of `sdist` creation* i.e. at the time of packaging.
+[tool.hatch.build.targets.sdist]
 # Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
-sources = ["gen/python"]
+packages = ["gen/python/qdrant", "gen/python/google", "gen/python/buf"]
+
+[tool.hatch.build.targets.wheel]
+# Here we already have shortened packages, due to `packages` in `sdist`
+packages = ["qdrant", "google", "buf"]
 
 
 [build-system]
@@ -27,9 +29,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
-dev = [
-    "twine>=6.1.0",
-]
+dev = ["twine>=6.1.0"]
 
 
 [project.optional-dependencies]
