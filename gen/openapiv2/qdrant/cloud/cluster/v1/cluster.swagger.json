@@ -1030,6 +1030,14 @@
         "remarks": {
           "type": "string",
           "title": "Additional message regarding this release that might be useful to the client\""
+        },
+        "endOfLife": {
+          "type": "boolean",
+          "title": "True, if the release version is end of life and not supported anymore"
+        },
+        "unavailable": {
+          "type": "boolean",
+          "title": "True, if the release is not available for the cluster creation or updates"
         }
       },
       "title": "QdrantRelease represent a single Qdrant release"
