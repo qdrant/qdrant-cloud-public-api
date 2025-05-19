@@ -916,7 +916,7 @@ export enum BackupRestoreStatus {
   UNKNOWN = 6,
 
   /**
-   * The backup restore is running.
+   * The backup restore is skipped.
    *
    * @generated from enum value: BACKUP_RESTORE_STATUS_SKIPPED = 7;
    */

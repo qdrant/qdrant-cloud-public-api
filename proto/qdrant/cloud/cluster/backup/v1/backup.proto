@@ -417,6 +417,6 @@ enum BackupRestoreStatus {
   BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
   // The system has not received any status information from the cluster's region.
   BACKUP_RESTORE_STATUS_UNKNOWN = 6;
-  // The backup restore is running.
+  // The backup restore is skipped.
   BACKUP_RESTORE_STATUS_SKIPPED = 7;
 }

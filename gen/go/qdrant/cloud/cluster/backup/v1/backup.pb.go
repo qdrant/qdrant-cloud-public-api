@@ -182,7 +182,7 @@ const (
 	BackupRestoreStatus_BACKUP_RESTORE_STATUS_NOT_FOUND BackupRestoreStatus = 5
 	// The system has not received any status information from the cluster's region.
 	BackupRestoreStatus_BACKUP_RESTORE_STATUS_UNKNOWN BackupRestoreStatus = 6
-	// The backup restore is running.
+	// The backup restore is skipped.
 	BackupRestoreStatus_BACKUP_RESTORE_STATUS_SKIPPED BackupRestoreStatus = 7
 )
 
