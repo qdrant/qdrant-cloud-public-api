@@ -59,3 +59,10 @@ python/dev-install: ## Install the required Python dependencies to work with the
 	uv sync \
 		--dev \
 		--locked
+
+.PHONY: py.sdist.public-api
+py.sdist.public-api:
+	rm -rf dist
+	uv build -v \
+		--sdist \
+		.
