@@ -42,7 +42,18 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
   }
+  // Fetch all backup restores in the account identified by the given ID.
+  // Required permissions:
+  // - read:backups
+  rpc ListBackupRestores(ListBackupRestoresRequest) returns (ListBackupRestoresResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_restores"};
+  }
   // Restores a backup in the account identified by the given ID.
+  // Required permissions:
+  // - admin:backups
   rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
     // permissions
     option (common.v1.permissions) = "admin:backups";
@@ -150,6 +161,22 @@ message DeleteBackupRequest {
 // DeleteBackupResponse is the response from the DeleteBackup function.
 message DeleteBackupResponse {
   // Empty
+}
+
+// ListBackupRestoresRequest is the request for the ListBackupRestores function.
+message ListBackupRestoresRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in GUID format).
+  // When this field is set, only backup restores that belong to the cluster are returned.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListBackupRestoresResponse is the response from the ListBackupRestores function.
+message ListBackupRestoresResponse {
+  // The actual backup restores in this list.
+  repeated BackupRestore items = 1;
 }
 
 // RestoreBackupRequest is the request for the RestoreBackup function.
@@ -350,4 +377,42 @@ message BackupSchedule {
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
   BackupScheduleStatus status = 8;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A BackupRestore represents the status of a backup restore.
+// All fields in this message are read-only.
+message BackupRestore {
+  // Unique identifier for the backup restore (in GUID format).
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The timestamp when the backup restore was created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in GUID format).
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in GUID format).
+  string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The Identifier of the backup (in GUID format).
+  string backup_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The current status of the backup restore.
+  BackupRestoreStatus status = 6;
+  // The timestamp when the backup restore was deleted (or when deletion started).
+  google.protobuf.Timestamp deleted_at = 7;
+}
+
+// BackupRestoreStatus represents the current status of a backup restore.
+enum BackupRestoreStatus {
+  // The status has not been specified. This is the default value.
+  BACKUP_RESTORE_STATUS_UNSPECIFIED = 0;
+  // The backup restore is running.
+  BACKUP_RESTORE_STATUS_RUNNING = 1;
+  // The backup restore failed to complete successfully.
+  BACKUP_RESTORE_STATUS_FAILED = 2;
+  // The backup restore completed successfully.
+  BACKUP_RESTORE_STATUS_SUCCEEDED = 3;
+  // There was an error syncing the backup restore in the cluster's region.
+  BACKUP_RESTORE_STATUS_FAILED_TO_SYNC = 4;
+  // The backup restore is missing in the cluster's region.
+  BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
+  // The system has not received any status information from the cluster's region.
+  BACKUP_RESTORE_STATUS_UNKNOWN = 6;
 }

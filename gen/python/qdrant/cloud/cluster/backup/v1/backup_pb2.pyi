@@ -29,6 +29,16 @@ class BackupScheduleStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupScheduleStatus]
     BACKUP_SCHEDULE_STATUS_NOT_FOUND: _ClassVar[BackupScheduleStatus]
     BACKUP_SCHEDULE_STATUS_UNKNOWN: _ClassVar[BackupScheduleStatus]
+
+class BackupRestoreStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    BACKUP_RESTORE_STATUS_UNSPECIFIED: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_RUNNING: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_FAILED: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_SUCCEEDED: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_NOT_FOUND: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_UNKNOWN: _ClassVar[BackupRestoreStatus]
 BACKUP_STATUS_UNSPECIFIED: BackupStatus
 BACKUP_STATUS_RUNNING: BackupStatus
 BACKUP_STATUS_SKIPPED: BackupStatus
@@ -42,6 +52,13 @@ BACKUP_SCHEDULE_STATUS_ACTIVE: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_NOT_FOUND: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_UNKNOWN: BackupScheduleStatus
+BACKUP_RESTORE_STATUS_UNSPECIFIED: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_RUNNING: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_FAILED: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_SUCCEEDED: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_NOT_FOUND: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_UNKNOWN: BackupRestoreStatus
 
 class ListBackupsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id", "backup_schedule_id")
@@ -82,6 +99,20 @@ class DeleteBackupRequest(_message.Message):
 class DeleteBackupResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class ListBackupRestoresRequest(_message.Message):
+    __slots__ = ("account_id", "cluster_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+
+class ListBackupRestoresResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[BackupRestore]
+    def __init__(self, items: _Optional[_Iterable[_Union[BackupRestore, _Mapping]]] = ...) -> None: ...
 
 class RestoreBackupRequest(_message.Message):
     __slots__ = ("account_id", "backup_id")
@@ -202,3 +233,21 @@ class BackupSchedule(_message.Message):
     deleted_at: _timestamp_pb2.Timestamp
     status: BackupScheduleStatus
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[BackupScheduleStatus, str]] = ...) -> None: ...
+
+class BackupRestore(_message.Message):
+    __slots__ = ("id", "created_at", "account_id", "cluster_id", "backup_id", "status", "deleted_at")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    created_at: _timestamp_pb2.Timestamp
+    account_id: str
+    cluster_id: str
+    backup_id: str
+    status: BackupRestoreStatus
+    deleted_at: _timestamp_pb2.Timestamp
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...

@@ -30,6 +30,11 @@ class BackupServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupResponse.FromString,
                 _registered_method=True)
+        self.ListBackupRestores = channel.unary_unary(
+                '/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresResponse.FromString,
+                _registered_method=True)
         self.RestoreBackup = channel.unary_unary(
                 '/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.RestoreBackupRequest.SerializeToString,
@@ -93,8 +98,19 @@ class BackupServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListBackupRestores(self, request, context):
+        """Fetch all backup restores in the account identified by the given ID.
+        Required permissions:
+        - read:backups
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def RestoreBackup(self, request, context):
         """Restores a backup in the account identified by the given ID.
+        Required permissions:
+        - admin:backups
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -162,6 +178,11 @@ def add_BackupServiceServicer_to_server(servicer, server):
                     servicer.DeleteBackup,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupResponse.SerializeToString,
+            ),
+            'ListBackupRestores': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListBackupRestores,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresResponse.SerializeToString,
             ),
             'RestoreBackup': grpc.unary_unary_rpc_method_handler(
                     servicer.RestoreBackup,
@@ -276,6 +297,33 @@ class BackupService(object):
             '/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup',
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListBackupRestores(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores',
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupRestoresResponse.FromString,
             options,
             channel_credentials,
             insecure,
