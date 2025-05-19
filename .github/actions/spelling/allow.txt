@@ -19,3 +19,4 @@ nvidia
 amd
 linode
 openshift
+backuprestores
