@@ -16,8 +16,6 @@ Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
 
 [tool.hatch.build.targets.sdist]
 only-include = ["gen/python"]
-# Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
-sources = ["gen/python"]
 
 [tool.hatch.build.targets.wheel]
 # Include only the generated python sources
