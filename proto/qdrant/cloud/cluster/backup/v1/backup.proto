@@ -49,7 +49,7 @@ service BackupService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:backups";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backuprestores"};
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_restores"};
   }
   // Restores a backup in the account identified by the given ID.
   // Required permissions:

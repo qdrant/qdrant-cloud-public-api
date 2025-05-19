@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/cluster/backup/v1/accounts/{accountId}/backup_restores": {
+      "get": {
+        "summary": "Fetch all backup restores in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "operationId": "BackupService_ListBackupRestores",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBackupRestoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
     "/api/cluster/backup/v1/accounts/{accountId}/backup_schedules": {
       "get": {
         "summary": "Fetch all backup schedules in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
@@ -93,38 +125,6 @@
             "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "query",
             "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "BackupService"
-        ]
-      }
-    },
-    "/api/cluster/backup/v1/accounts/{accountId}/backuprestores": {
-      "get": {
-        "summary": "Fetch all backup restores in the account identified by the given ID.\nRequired permissions:\n- read:backups",
-        "operationId": "BackupService_ListBackupRestores",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListBackupRestoresResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],
