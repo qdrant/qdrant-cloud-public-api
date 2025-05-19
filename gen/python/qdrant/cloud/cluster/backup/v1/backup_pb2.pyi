@@ -29,6 +29,7 @@ class BackupScheduleStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupScheduleStatus]
     BACKUP_SCHEDULE_STATUS_NOT_FOUND: _ClassVar[BackupScheduleStatus]
     BACKUP_SCHEDULE_STATUS_UNKNOWN: _ClassVar[BackupScheduleStatus]
+    BACKUP_SCHEDULE_STATUS_DISABLED: _ClassVar[BackupScheduleStatus]
 
 class BackupRestoreStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -39,6 +40,7 @@ class BackupRestoreStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_NOT_FOUND: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_UNKNOWN: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_SKIPPED: _ClassVar[BackupRestoreStatus]
 BACKUP_STATUS_UNSPECIFIED: BackupStatus
 BACKUP_STATUS_RUNNING: BackupStatus
 BACKUP_STATUS_SKIPPED: BackupStatus
@@ -52,6 +54,7 @@ BACKUP_SCHEDULE_STATUS_ACTIVE: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_NOT_FOUND: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_UNKNOWN: BackupScheduleStatus
+BACKUP_SCHEDULE_STATUS_DISABLED: BackupScheduleStatus
 BACKUP_RESTORE_STATUS_UNSPECIFIED: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_RUNNING: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_FAILED: BackupRestoreStatus
@@ -59,6 +62,7 @@ BACKUP_RESTORE_STATUS_SUCCEEDED: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_NOT_FOUND: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_UNKNOWN: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_SKIPPED: BackupRestoreStatus
 
 class ListBackupsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id", "backup_schedule_id")
