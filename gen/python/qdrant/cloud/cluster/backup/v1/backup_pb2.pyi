@@ -35,7 +35,7 @@ class BackupRestoreStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BACKUP_RESTORE_STATUS_UNSPECIFIED: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_RUNNING: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_FAILED: _ClassVar[BackupRestoreStatus]
-    BACKUP_RESTORE_STATUS_SUCCEEEDED: _ClassVar[BackupRestoreStatus]
+    BACKUP_RESTORE_STATUS_SUCCEEDED: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_NOT_FOUND: _ClassVar[BackupRestoreStatus]
     BACKUP_RESTORE_STATUS_UNKNOWN: _ClassVar[BackupRestoreStatus]
@@ -55,7 +55,7 @@ BACKUP_SCHEDULE_STATUS_UNKNOWN: BackupScheduleStatus
 BACKUP_RESTORE_STATUS_UNSPECIFIED: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_RUNNING: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_FAILED: BackupRestoreStatus
-BACKUP_RESTORE_STATUS_SUCCEEEDED: BackupRestoreStatus
+BACKUP_RESTORE_STATUS_SUCCEEDED: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_NOT_FOUND: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_UNKNOWN: BackupRestoreStatus

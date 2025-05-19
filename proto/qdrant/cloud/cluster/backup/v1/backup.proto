@@ -405,7 +405,7 @@ enum BackupRestoreStatus {
   // The backup restore failed to complete successfully.
   BACKUP_RESTORE_STATUS_FAILED = 2;
   // The backup restore completed successfully.
-  BACKUP_RESTORE_STATUS_SUCCEEEDED = 3;
+  BACKUP_RESTORE_STATUS_SUCCEEDED = 3;
   // There was an error syncing the backup restore in the cluster's region.
   BACKUP_RESTORE_STATUS_FAILED_TO_SYNC = 4;
   // The backup restore is missing in the cluster's region.
