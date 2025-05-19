@@ -22,6 +22,7 @@ const (
 	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
 	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
 	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
+	BackupService_ListBackupRestores_FullMethodName   = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores"
 	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup"
 	BackupService_ListBackupSchedules_FullMethodName  = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupSchedules"
 	BackupService_GetBackupSchedule_FullMethodName    = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupSchedule"
@@ -48,7 +49,13 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - delete:backups
 	DeleteBackup(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*DeleteBackupResponse, error)
+	// Fetch all backup restores in the account identified by the given ID.
+	// Required permissions:
+	// - read:backups
+	ListBackupRestores(ctx context.Context, in *ListBackupRestoresRequest, opts ...grpc.CallOption) (*ListBackupRestoresResponse, error)
 	// Restores a backup in the account identified by the given ID.
+	// Required permissions:
+	// - admin:backups
 	RestoreBackup(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*RestoreBackupResponse, error)
 	// Fetch all backup schedules in the account identified by the given ID.
 	// Required permissions:
@@ -104,6 +111,16 @@ func (c *backupServiceClient) DeleteBackup(ctx context.Context, in *DeleteBackup
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteBackupResponse)
 	err := c.cc.Invoke(ctx, BackupService_DeleteBackup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) ListBackupRestores(ctx context.Context, in *ListBackupRestoresRequest, opts ...grpc.CallOption) (*ListBackupRestoresResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBackupRestoresResponse)
+	err := c.cc.Invoke(ctx, BackupService_ListBackupRestores_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -188,7 +205,13 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - delete:backups
 	DeleteBackup(context.Context, *DeleteBackupRequest) (*DeleteBackupResponse, error)
+	// Fetch all backup restores in the account identified by the given ID.
+	// Required permissions:
+	// - read:backups
+	ListBackupRestores(context.Context, *ListBackupRestoresRequest) (*ListBackupRestoresResponse, error)
 	// Restores a backup in the account identified by the given ID.
+	// Required permissions:
+	// - admin:backups
 	RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error)
 	// Fetch all backup schedules in the account identified by the given ID.
 	// Required permissions:
@@ -228,6 +251,9 @@ func (UnimplementedBackupServiceServer) CreateBackup(context.Context, *CreateBac
 }
 func (UnimplementedBackupServiceServer) DeleteBackup(context.Context, *DeleteBackupRequest) (*DeleteBackupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBackup not implemented")
+}
+func (UnimplementedBackupServiceServer) ListBackupRestores(context.Context, *ListBackupRestoresRequest) (*ListBackupRestoresResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBackupRestores not implemented")
 }
 func (UnimplementedBackupServiceServer) RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RestoreBackup not implemented")
@@ -318,6 +344,24 @@ func _BackupService_DeleteBackup_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackupServiceServer).DeleteBackup(ctx, req.(*DeleteBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_ListBackupRestores_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBackupRestoresRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).ListBackupRestores(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_ListBackupRestores_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).ListBackupRestores(ctx, req.(*ListBackupRestoresRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -448,6 +492,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteBackup",
 			Handler:    _BackupService_DeleteBackup_Handler,
+		},
+		{
+			MethodName: "ListBackupRestores",
+			Handler:    _BackupService_ListBackupRestores_Handler,
 		},
 		{
 			MethodName: "RestoreBackup",

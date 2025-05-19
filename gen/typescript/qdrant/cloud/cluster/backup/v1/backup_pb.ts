@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/cluster/backup/v1/backup.proto.
  */
 export const file_qdrant_cloud_cluster_backup_v1_backup: GenFile = /*@__PURE__*/
-  fileDesc("CitxZHJhbnQvY2xvdWQvY2x1c3Rlci9iYWNrdXAvdjEvYmFja3VwLnByb3RvEh5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEipgEKEkxpc3RCYWNrdXBzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIhCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABAUgAiAEBEikKEmJhY2t1cF9zY2hlZHVsZV9pZBgDIAEoCUIIukgFcgOwAQFIAYgBAUINCgtfY2x1c3Rlcl9pZEIVChNfYmFja3VwX3NjaGVkdWxlX2lkIkwKE0xpc3RCYWNrdXBzUmVzcG9uc2USNQoFaXRlbXMYASADKAsyJi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwIk0KE0NyZWF0ZUJhY2t1cFJlcXVlc3QSNgoGYmFja3VwGAEgASgLMiYucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cCJOChRDcmVhdGVCYWNrdXBSZXNwb25zZRI2CgZiYWNrdXAYASABKAsyJi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwIlAKE0RlbGV0ZUJhY2t1cFJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGwoJYmFja3VwX2lkGAIgASgJQgi6SAVyA7ABASIWChREZWxldGVCYWNrdXBSZXNwb25zZSJRChRSZXN0b3JlQmFja3VwUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIbCgliYWNrdXBfaWQYAiABKAlCCLpIBXIDsAEBIhcKFVJlc3RvcmVCYWNrdXBSZXNwb25zZSJsChpMaXN0QmFja3VwU2NoZWR1bGVzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIhCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABAUgAiAEBQg0KC19jbHVzdGVyX2lkIlwKG0xpc3RCYWNrdXBTY2hlZHVsZXNSZXNwb25zZRI9CgVpdGVtcxgBIAMoCzIuLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJ8ChhHZXRCYWNrdXBTY2hlZHVsZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQESJAoSYmFja3VwX3NjaGVkdWxlX2lkGAMgASgJQgi6SAVyA7ABASJkChlHZXRCYWNrdXBTY2hlZHVsZVJlc3BvbnNlEkcKD2JhY2t1cF9zY2hlZHVsZRgBIAEoCzIuLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJmChtDcmVhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QSRwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlImcKHENyZWF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2USRwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlImYKG1VwZGF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBJHCg9iYWNrdXBfc2NoZWR1bGUYASABKAsyLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUiZwocVXBkYXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZRJHCg9iYWNrdXBfc2NoZWR1bGUYASABKAsyLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUikQEKG0RlbGV0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIkChJiYWNrdXBfc2NoZWR1bGVfaWQYAiABKAlCCLpIBXIDsAEBEhsKDmRlbGV0ZV9iYWNrdXBzGAMgASgISACIAQFCEQoPX2RlbGV0ZV9iYWNrdXBzIh4KHERlbGV0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2Ui3QMKBkJhY2t1cBIKCgJpZBgBIAEoCRIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIcCgphY2NvdW50X2lkGAMgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAQgASgJQgi6SAVyA7ABARIMCgRuYW1lGAUgASgJEjwKBnN0YXR1cxgGIAEoDjIsLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTdGF0dXMSLgoKZGVsZXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoPYmFja3VwX2R1cmF0aW9uGAggASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uOqoBukimARqjAQoKY2x1c3Rlci5pZBIadmFsdWUgbXVzdCBiZSBhIHZhbGlkIFVVSUQaeXRoaXMuaWQubWF0Y2hlcygnXlswLTlhLWZBLUZdezh9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezEyfSQnKSB8fCAhaGFzKHRoaXMuY3JlYXRlZF9hdCkixgUKDkJhY2t1cFNjaGVkdWxlEgoKAmlkGAEgASgJEi4KCmNyZWF0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYAyABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYBCABKAlCCLpIBXIDsAEBEqwBCghzY2hlZHVsZRgFIAEoCUKZAbpIlQFykgEyjwFeKEAoYW5udWFsbHl8eWVhcmx5fG1vbnRobHl8d2Vla2x5fGRhaWx5fGhvdXJseXxyZWJvb3QpKXwoQGV2ZXJ5IChcZCsobnN8dXN8wrVzfG1zfHN8bXxoKSkrKXwoKCgoXGQrLCkrXGQrfChbXGRcKl0rKFwvfC0pXGQrKXxcZCt8XCopID8pezUsN30pJBJNChByZXRlbnRpb25fcGVyaW9kGAYgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uQhO6SBCqAQ0iBQiA54QPMgQIgKMFSACIAQESLgoKZGVsZXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASRAoGc3RhdHVzGAggASgOMjQucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlU3RhdHVzOrIBukiuARqrAQoSYmFja3VwX3NjaGVkdWxlLmlkEhp2YWx1ZSBtdXN0IGJlIGEgdmFsaWQgVVVJRBp5dGhpcy5pZC5tYXRjaGVzKCdeWzAtOWEtZkEtRl17OH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17NH0tWzAtOWEtZkEtRl17MTJ9JCcpIHx8ICFoYXModGhpcy5jcmVhdGVkX2F0KUITChFfcmV0ZW50aW9uX3BlcmlvZCr0AQoMQmFja3VwU3RhdHVzEh0KGUJBQ0tVUF9TVEFUVVNfVU5TUEVDSUZJRUQQABIZChVCQUNLVVBfU1RBVFVTX1JVTk5JTkcQARIZChVCQUNLVVBfU1RBVFVTX1NLSVBQRUQQAhIYChRCQUNLVVBfU1RBVFVTX0ZBSUxFRBADEhsKF0JBQ0tVUF9TVEFUVVNfU1VDQ0VFREVEEAQSIAocQkFDS1VQX1NUQVRVU19GQUlMRURfVE9fU1lOQxAFEhsKF0JBQ0tVUF9TVEFUVVNfTk9UX0ZPVU5EEAYSGQoVQkFDS1VQX1NUQVRVU19VTktOT1dOEAcq1gEKFEJhY2t1cFNjaGVkdWxlU3RhdHVzEiYKIkJBQ0tVUF9TQ0hFRFVMRV9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1CQUNLVVBfU0NIRURVTEVfU1RBVFVTX0FDVElWRRABEikKJUJBQ0tVUF9TQ0hFRFVMRV9TVEFUVVNfRkFJTEVEX1RPX1NZTkMQAhIkCiBCQUNLVVBfU0NIRURVTEVfU1RBVFVTX05PVF9GT1VORBADEiIKHkJBQ0tVUF9TQ0hFRFVMRV9TVEFUVVNfVU5LTk9XThAEMtkRCg1CYWNrdXBTZXJ2aWNlEsQBCgtMaXN0QmFja3VwcxIyLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5MaXN0QmFja3Vwc1JlcXVlc3QaMy5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuTGlzdEJhY2t1cHNSZXNwb25zZSJMirUYDHJlYWQ6YmFja3Vwc4LT5JMCNhI0L2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwcxLnAQoMQ3JlYXRlQmFja3VwEjMucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkNyZWF0ZUJhY2t1cFJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQ3JlYXRlQmFja3VwUmVzcG9uc2UibIq1GA13cml0ZTpiYWNrdXBzkrUYEWJhY2t1cC5hY2NvdW50X2lkgtPkkwJAOgEqIjsvYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3tiYWNrdXAuYWNjb3VudF9pZH0vYmFja3VwcxLVAQoMRGVsZXRlQmFja3VwEjMucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkRlbGV0ZUJhY2t1cFJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuRGVsZXRlQmFja3VwUmVzcG9uc2UiWoq1GA5kZWxldGU6YmFja3Vwc4LT5JMCQipAL2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3Vwcy97YmFja3VwX2lkfRLfAQoNUmVzdG9yZUJhY2t1cBI0LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5SZXN0b3JlQmFja3VwUmVxdWVzdBo1LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5SZXN0b3JlQmFja3VwUmVzcG9uc2UiYYq1GA1hZG1pbjpiYWNrdXBzgtPkkwJKIkgvYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBzL3tiYWNrdXBfaWR9L3Jlc3RvcmUS7gEKE0xpc3RCYWNrdXBTY2hlZHVsZXMSOi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuTGlzdEJhY2t1cFNjaGVkdWxlc1JlcXVlc3QaOy5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuTGlzdEJhY2t1cFNjaGVkdWxlc1Jlc3BvbnNlIl6KtRgVcmVhZDpiYWNrdXBfc2NoZWR1bGVzgtPkkwI/Ej0vYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzEv0BChFHZXRCYWNrdXBTY2hlZHVsZRI4LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5HZXRCYWNrdXBTY2hlZHVsZVJlcXVlc3QaOS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuR2V0QmFja3VwU2NoZWR1bGVSZXNwb25zZSJzirUYFXJlYWQ6YmFja3VwX3NjaGVkdWxlc4LT5JMCVBJSL2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwX3NjaGVkdWxlcy97YmFja3VwX3NjaGVkdWxlX2lkfRKkAgoUQ3JlYXRlQmFja3VwU2NoZWR1bGUSOy5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0GjwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkNyZWF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2UikAGKtRgWd3JpdGU6YmFja3VwX3NjaGVkdWxlc5K1GBpiYWNrdXBfc2NoZWR1bGUuYWNjb3VudF9pZILT5JMCUjoBKiJNL2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YmFja3VwX3NjaGVkdWxlLmFjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMSuQIKFFVwZGF0ZUJhY2t1cFNjaGVkdWxlEjsucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLlVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBo8LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5VcGRhdGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlIqUBirUYFndyaXRlOmJhY2t1cF9zY2hlZHVsZXOStRgaYmFja3VwX3NjaGVkdWxlLmFjY291bnRfaWSC0+STAmc6ASoaYi9hcGkvY2x1c3Rlci9iYWNrdXAvdjEvYWNjb3VudHMve2JhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGUuaWR9EogCChREZWxldGVCYWNrdXBTY2hlZHVsZRI7LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5EZWxldGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QaPC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuRGVsZXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZSJ1irUYF2RlbGV0ZTpiYWNrdXBfc2NoZWR1bGVzgtPkkwJUKlIvYXBpL2NsdXN0ZXIvYmFja3VwL3YyL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGVfaWR9QqgCCiJjb20ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxQgtCYWNrdXBQcm90b1ABWlhnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NsdXN0ZXIvYmFja3VwL3YxO2JhY2t1cHYxogIEUUNDQqoCHlFkcmFudC5DbG91ZC5DbHVzdGVyLkJhY2t1cC5WMcoCHlFkcmFudFxDbG91ZFxDbHVzdGVyXEJhY2t1cFxWMeICKlFkcmFudFxDbG91ZFxDbHVzdGVyXEJhY2t1cFxWMVxHUEJNZXRhZGF0YeoCIlFkcmFudDo6Q2xvdWQ6OkNsdXN0ZXI6OkJhY2t1cDo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_duration, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CitxZHJhbnQvY2xvdWQvY2x1c3Rlci9iYWNrdXAvdjEvYmFja3VwLnByb3RvEh5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEipgEKEkxpc3RCYWNrdXBzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIhCgpjbHVzdGVyX2lkGAIgASgJQgi6SAVyA7ABAUgAiAEBEikKEmJhY2t1cF9zY2hlZHVsZV9pZBgDIAEoCUIIukgFcgOwAQFIAYgBAUINCgtfY2x1c3Rlcl9pZEIVChNfYmFja3VwX3NjaGVkdWxlX2lkIkwKE0xpc3RCYWNrdXBzUmVzcG9uc2USNQoFaXRlbXMYASADKAsyJi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwIk0KE0NyZWF0ZUJhY2t1cFJlcXVlc3QSNgoGYmFja3VwGAEgASgLMiYucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cCJOChRDcmVhdGVCYWNrdXBSZXNwb25zZRI2CgZiYWNrdXAYASABKAsyJi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwIlAKE0RlbGV0ZUJhY2t1cFJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGwoJYmFja3VwX2lkGAIgASgJQgi6SAVyA7ABASIWChREZWxldGVCYWNrdXBSZXNwb25zZSI5ChlMaXN0QmFja3VwUmVzdG9yZXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIloKGkxpc3RCYWNrdXBSZXN0b3Jlc1Jlc3BvbnNlEjwKBWl0ZW1zGAEgAygLMi0ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFJlc3RvcmUiUQoUUmVzdG9yZUJhY2t1cFJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGwoJYmFja3VwX2lkGAIgASgJQgi6SAVyA7ABASIXChVSZXN0b3JlQmFja3VwUmVzcG9uc2UibAoaTGlzdEJhY2t1cFNjaGVkdWxlc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESIQoKY2x1c3Rlcl9pZBgCIAEoCUIIukgFcgOwAQFIAIgBAUINCgtfY2x1c3Rlcl9pZCJcChtMaXN0QmFja3VwU2NoZWR1bGVzUmVzcG9uc2USPQoFaXRlbXMYASADKAsyLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUifAoYR2V0QmFja3VwU2NoZWR1bGVSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYAiABKAlCCLpIBXIDsAEBEiQKEmJhY2t1cF9zY2hlZHVsZV9pZBgDIAEoCUIIukgFcgOwAQEiZAoZR2V0QmFja3VwU2NoZWR1bGVSZXNwb25zZRJHCg9iYWNrdXBfc2NoZWR1bGUYASABKAsyLi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwU2NoZWR1bGUiZgobQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0EkcKD2JhY2t1cF9zY2hlZHVsZRgBIAEoCzIuLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJnChxDcmVhdGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlEkcKD2JhY2t1cF9zY2hlZHVsZRgBIAEoCzIuLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZSJmChtVcGRhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QSRwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlImcKHFVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2USRwoPYmFja3VwX3NjaGVkdWxlGAEgASgLMi4ucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFNjaGVkdWxlIpEBChtEZWxldGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESJAoSYmFja3VwX3NjaGVkdWxlX2lkGAIgASgJQgi6SAVyA7ABARIbCg5kZWxldGVfYmFja3VwcxgDIAEoCEgAiAEBQhEKD19kZWxldGVfYmFja3VwcyIeChxEZWxldGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlIt0DCgZCYWNrdXASCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHAoKYWNjb3VudF9pZBgDIAEoCUIIukgFcgOwAQESHAoKY2x1c3Rlcl9pZBgEIAEoCUIIukgFcgOwAQESDAoEbmFtZRgFIAEoCRI8CgZzdGF0dXMYBiABKA4yLC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQmFja3VwU3RhdHVzEi4KCmRlbGV0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKD2JhY2t1cF9kdXJhdGlvbhgIIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbjqqAbpIpgEaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpIsYFCg5CYWNrdXBTY2hlZHVsZRIKCgJpZBgBIAEoCRIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIcCgphY2NvdW50X2lkGAMgASgJQgi6SAVyA7ABARIcCgpjbHVzdGVyX2lkGAQgASgJQgi6SAVyA7ABARKsAQoIc2NoZWR1bGUYBSABKAlCmQG6SJUBcpIBMo8BXihAKGFubnVhbGx5fHllYXJseXxtb250aGx5fHdlZWtseXxkYWlseXxob3VybHl8cmVib290KSl8KEBldmVyeSAoXGQrKG5zfHVzfMK1c3xtc3xzfG18aCkpKyl8KCgoKFxkKywpK1xkK3woW1xkXCpdKyhcL3wtKVxkKyl8XGQrfFwqKSA/KXs1LDd9KSQSTQoQcmV0ZW50aW9uX3BlcmlvZBgGIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbkITukgQqgENIgUIgOeEDzIECICjBUgAiAEBEi4KCmRlbGV0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEkQKBnN0YXR1cxgIIAEoDjI0LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5CYWNrdXBTY2hlZHVsZVN0YXR1czqyAbpIrgEaqwEKEmJhY2t1cF9zY2hlZHVsZS5pZBIadmFsdWUgbXVzdCBiZSBhIHZhbGlkIFVVSUQaeXRoaXMuaWQubWF0Y2hlcygnXlswLTlhLWZBLUZdezh9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezR9LVswLTlhLWZBLUZdezEyfSQnKSB8fCAhaGFzKHRoaXMuY3JlYXRlZF9hdClCEwoRX3JldGVudGlvbl9wZXJpb2QiowIKDUJhY2t1cFJlc3RvcmUSFAoCaWQYASABKAlCCLpIBXIDsAEBEi4KCmNyZWF0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYAyABKAlCCLpIBXIDsAEBEhwKCmNsdXN0ZXJfaWQYBCABKAlCCLpIBXIDsAEBEhsKCWJhY2t1cF9pZBgFIAEoCUIIukgFcgOwAQESQwoGc3RhdHVzGAYgASgOMjMucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkJhY2t1cFJlc3RvcmVTdGF0dXMSLgoKZGVsZXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAq9AEKDEJhY2t1cFN0YXR1cxIdChlCQUNLVVBfU1RBVFVTX1VOU1BFQ0lGSUVEEAASGQoVQkFDS1VQX1NUQVRVU19SVU5OSU5HEAESGQoVQkFDS1VQX1NUQVRVU19TS0lQUEVEEAISGAoUQkFDS1VQX1NUQVRVU19GQUlMRUQQAxIbChdCQUNLVVBfU1RBVFVTX1NVQ0NFRURFRBAEEiAKHEJBQ0tVUF9TVEFUVVNfRkFJTEVEX1RPX1NZTkMQBRIbChdCQUNLVVBfU1RBVFVTX05PVF9GT1VORBAGEhkKFUJBQ0tVUF9TVEFUVVNfVU5LTk9XThAHKtYBChRCYWNrdXBTY2hlZHVsZVN0YXR1cxImCiJCQUNLVVBfU0NIRURVTEVfU1RBVFVTX1VOU1BFQ0lGSUVEEAASIQodQkFDS1VQX1NDSEVEVUxFX1NUQVRVU19BQ1RJVkUQARIpCiVCQUNLVVBfU0NIRURVTEVfU1RBVFVTX0ZBSUxFRF9UT19TWU5DEAISJAogQkFDS1VQX1NDSEVEVUxFX1NUQVRVU19OT1RfRk9VTkQQAxIiCh5CQUNLVVBfU0NIRURVTEVfU1RBVFVTX1VOS05PV04QBCqZAgoTQmFja3VwUmVzdG9yZVN0YXR1cxIlCiFCQUNLVVBfUkVTVE9SRV9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1CQUNLVVBfUkVTVE9SRV9TVEFUVVNfUlVOTklORxABEiAKHEJBQ0tVUF9SRVNUT1JFX1NUQVRVU19GQUlMRUQQAhIkCiBCQUNLVVBfUkVTVE9SRV9TVEFUVVNfU1VDQ0VFRURFRBADEigKJEJBQ0tVUF9SRVNUT1JFX1NUQVRVU19GQUlMRURfVE9fU1lOQxAEEiMKH0JBQ0tVUF9SRVNUT1JFX1NUQVRVU19OT1RfRk9VTkQQBRIhCh1CQUNLVVBfUkVTVE9SRV9TVEFUVVNfVU5LTk9XThAGMrwTCg1CYWNrdXBTZXJ2aWNlEsQBCgtMaXN0QmFja3VwcxIyLnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5MaXN0QmFja3Vwc1JlcXVlc3QaMy5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuTGlzdEJhY2t1cHNSZXNwb25zZSJMirUYDHJlYWQ6YmFja3Vwc4LT5JMCNhI0L2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3VwcxLnAQoMQ3JlYXRlQmFja3VwEjMucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkNyZWF0ZUJhY2t1cFJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQ3JlYXRlQmFja3VwUmVzcG9uc2UibIq1GA13cml0ZTpiYWNrdXBzkrUYEWJhY2t1cC5hY2NvdW50X2lkgtPkkwJAOgEqIjsvYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3tiYWNrdXAuYWNjb3VudF9pZH0vYmFja3VwcxLVAQoMRGVsZXRlQmFja3VwEjMucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkRlbGV0ZUJhY2t1cFJlcXVlc3QaNC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuRGVsZXRlQmFja3VwUmVzcG9uc2UiWoq1GA5kZWxldGU6YmFja3Vwc4LT5JMCQipAL2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vYmFja3Vwcy97YmFja3VwX2lkfRLgAQoSTGlzdEJhY2t1cFJlc3RvcmVzEjkucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkxpc3RCYWNrdXBSZXN0b3Jlc1JlcXVlc3QaOi5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuTGlzdEJhY2t1cFJlc3RvcmVzUmVzcG9uc2UiU4q1GAxyZWFkOmJhY2t1cHOC0+STAj0SOy9hcGkvY2x1c3Rlci9iYWNrdXAvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2JhY2t1cHJlc3RvcmVzEt8BCg1SZXN0b3JlQmFja3VwEjQucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLlJlc3RvcmVCYWNrdXBSZXF1ZXN0GjUucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLlJlc3RvcmVCYWNrdXBSZXNwb25zZSJhirUYDWFkbWluOmJhY2t1cHOC0+STAkoiSC9hcGkvY2x1c3Rlci9iYWNrdXAvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2JhY2t1cHMve2JhY2t1cF9pZH0vcmVzdG9yZRLuAQoTTGlzdEJhY2t1cFNjaGVkdWxlcxI6LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5MaXN0QmFja3VwU2NoZWR1bGVzUmVxdWVzdBo7LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5MaXN0QmFja3VwU2NoZWR1bGVzUmVzcG9uc2UiXoq1GBVyZWFkOmJhY2t1cF9zY2hlZHVsZXOC0+STAj8SPS9hcGkvY2x1c3Rlci9iYWNrdXAvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMS/QEKEUdldEJhY2t1cFNjaGVkdWxlEjgucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkdldEJhY2t1cFNjaGVkdWxlUmVxdWVzdBo5LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5HZXRCYWNrdXBTY2hlZHVsZVJlc3BvbnNlInOKtRgVcmVhZDpiYWNrdXBfc2NoZWR1bGVzgtPkkwJUElIvYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9iYWNrdXBfc2NoZWR1bGVzL3tiYWNrdXBfc2NoZWR1bGVfaWR9EqQCChRDcmVhdGVCYWNrdXBTY2hlZHVsZRI7LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5DcmVhdGVCYWNrdXBTY2hlZHVsZVJlcXVlc3QaPC5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuQ3JlYXRlQmFja3VwU2NoZWR1bGVSZXNwb25zZSKQAYq1GBZ3cml0ZTpiYWNrdXBfc2NoZWR1bGVzkrUYGmJhY2t1cF9zY2hlZHVsZS5hY2NvdW50X2lkgtPkkwJSOgEqIk0vYXBpL2NsdXN0ZXIvYmFja3VwL3YxL2FjY291bnRzL3tiYWNrdXBfc2NoZWR1bGUuYWNjb3VudF9pZH0vYmFja3VwX3NjaGVkdWxlcxK5AgoUVXBkYXRlQmFja3VwU2NoZWR1bGUSOy5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjEuVXBkYXRlQmFja3VwU2NoZWR1bGVSZXF1ZXN0GjwucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLlVwZGF0ZUJhY2t1cFNjaGVkdWxlUmVzcG9uc2UipQGKtRgWd3JpdGU6YmFja3VwX3NjaGVkdWxlc5K1GBpiYWNrdXBfc2NoZWR1bGUuYWNjb3VudF9pZILT5JMCZzoBKhpiL2FwaS9jbHVzdGVyL2JhY2t1cC92MS9hY2NvdW50cy97YmFja3VwX3NjaGVkdWxlLmFjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMve2JhY2t1cF9zY2hlZHVsZS5pZH0SiAIKFERlbGV0ZUJhY2t1cFNjaGVkdWxlEjsucWRyYW50LmNsb3VkLmNsdXN0ZXIuYmFja3VwLnYxLkRlbGV0ZUJhY2t1cFNjaGVkdWxlUmVxdWVzdBo8LnFkcmFudC5jbG91ZC5jbHVzdGVyLmJhY2t1cC52MS5EZWxldGVCYWNrdXBTY2hlZHVsZVJlc3BvbnNlInWKtRgXZGVsZXRlOmJhY2t1cF9zY2hlZHVsZXOC0+STAlQqUi9hcGkvY2x1c3Rlci9iYWNrdXAvdjIvYWNjb3VudHMve2FjY291bnRfaWR9L2JhY2t1cF9zY2hlZHVsZXMve2JhY2t1cF9zY2hlZHVsZV9pZH1CqAIKImNvbS5xZHJhbnQuY2xvdWQuY2x1c3Rlci5iYWNrdXAudjFCC0JhY2t1cFByb3RvUAFaWGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvY2x1c3Rlci9iYWNrdXAvdjE7YmFja3VwdjGiAgRRQ0NCqgIeUWRyYW50LkNsb3VkLkNsdXN0ZXIuQmFja3VwLlYxygIeUWRyYW50XENsb3VkXENsdXN0ZXJcQmFja3VwXFYx4gIqUWRyYW50XENsb3VkXENsdXN0ZXJcQmFja3VwXFYxXEdQQk1ldGFkYXRh6gIiUWRyYW50OjpDbG91ZDo6Q2x1c3Rlcjo6QmFja3VwOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_duration, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListBackupsRequest is the request for the ListBackups function
@@ -166,6 +166,49 @@ export const DeleteBackupResponseSchema: GenMessage<DeleteBackupResponse> = /*@_
   messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 5);
 
 /**
+ * ListBackupRestoresRequest is the request for the ListBackupRestores function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
+ */
+export type ListBackupRestoresRequest = Message<"qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest.
+ * Use `create(ListBackupRestoresRequestSchema)` to create a new message.
+ */
+export const ListBackupRestoresRequestSchema: GenMessage<ListBackupRestoresRequest> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 6);
+
+/**
+ * ListBackupRestoresResponse is the response from the ListBackupRestores function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
+ */
+export type ListBackupRestoresResponse = Message<"qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse"> & {
+  /**
+   * The actual backup restores in this list.
+   *
+   * @generated from field: repeated qdrant.cloud.cluster.backup.v1.BackupRestore items = 1;
+   */
+  items: BackupRestore[];
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse.
+ * Use `create(ListBackupRestoresResponseSchema)` to create a new message.
+ */
+export const ListBackupRestoresResponseSchema: GenMessage<ListBackupRestoresResponse> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 7);
+
+/**
  * RestoreBackupRequest is the request for the RestoreBackup function.
  *
  * @generated from message qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
@@ -193,7 +236,7 @@ export type RestoreBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.Resto
  * Use `create(RestoreBackupRequestSchema)` to create a new message.
  */
 export const RestoreBackupRequestSchema: GenMessage<RestoreBackupRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 6);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 8);
 
 /**
  * RestoreBackupResponse is the response from the RestoreBackup function.
@@ -210,7 +253,7 @@ export type RestoreBackupResponse = Message<"qdrant.cloud.cluster.backup.v1.Rest
  * Use `create(RestoreBackupResponseSchema)` to create a new message.
  */
 export const RestoreBackupResponseSchema: GenMessage<RestoreBackupResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 7);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 9);
 
 /**
  * ListBackupSchedulesRequest is the request for the ListBackupSchedules function
@@ -240,7 +283,7 @@ export type ListBackupSchedulesRequest = Message<"qdrant.cloud.cluster.backup.v1
  * Use `create(ListBackupSchedulesRequestSchema)` to create a new message.
  */
 export const ListBackupSchedulesRequestSchema: GenMessage<ListBackupSchedulesRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 8);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 10);
 
 /**
  * ListBackupsResponse is the response from the ListBackups function.
@@ -261,7 +304,7 @@ export type ListBackupSchedulesResponse = Message<"qdrant.cloud.cluster.backup.v
  * Use `create(ListBackupSchedulesResponseSchema)` to create a new message.
  */
 export const ListBackupSchedulesResponseSchema: GenMessage<ListBackupSchedulesResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 9);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 11);
 
 /**
  * GetBackupScheduleRequest is the request for the GetBackupSchedule function.
@@ -301,7 +344,7 @@ export type GetBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v1.G
  * Use `create(GetBackupScheduleRequestSchema)` to create a new message.
  */
 export const GetBackupScheduleRequestSchema: GenMessage<GetBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 10);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 12);
 
 /**
  * GetBackupScheduleResponse is the response from the GetBackupSchedule function.
@@ -322,7 +365,7 @@ export type GetBackupScheduleResponse = Message<"qdrant.cloud.cluster.backup.v1.
  * Use `create(GetBackupScheduleResponseSchema)` to create a new message.
  */
 export const GetBackupScheduleResponseSchema: GenMessage<GetBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 11);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 13);
 
 /**
  * CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
@@ -343,7 +386,7 @@ export type CreateBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v
  * Use `create(CreateBackupScheduleRequestSchema)` to create a new message.
  */
 export const CreateBackupScheduleRequestSchema: GenMessage<CreateBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 12);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 14);
 
 /**
  * CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
@@ -364,7 +407,7 @@ export type CreateBackupScheduleResponse = Message<"qdrant.cloud.cluster.backup.
  * Use `create(CreateBackupScheduleResponseSchema)` to create a new message.
  */
 export const CreateBackupScheduleResponseSchema: GenMessage<CreateBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 13);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 15);
 
 /**
  * UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
@@ -385,7 +428,7 @@ export type UpdateBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v
  * Use `create(UpdateBackupScheduleRequestSchema)` to create a new message.
  */
 export const UpdateBackupScheduleRequestSchema: GenMessage<UpdateBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 14);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 16);
 
 /**
  * UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
@@ -406,7 +449,7 @@ export type UpdateBackupScheduleResponse = Message<"qdrant.cloud.cluster.backup.
  * Use `create(UpdateBackupScheduleResponseSchema)` to create a new message.
  */
 export const UpdateBackupScheduleResponseSchema: GenMessage<UpdateBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 15);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 17);
 
 /**
  * DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
@@ -444,7 +487,7 @@ export type DeleteBackupScheduleRequest = Message<"qdrant.cloud.cluster.backup.v
  * Use `create(DeleteBackupScheduleRequestSchema)` to create a new message.
  */
 export const DeleteBackupScheduleRequestSchema: GenMessage<DeleteBackupScheduleRequest> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 16);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 18);
 
 /**
  * DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.
@@ -461,7 +504,7 @@ export type DeleteBackupScheduleResponse = Message<"qdrant.cloud.cluster.backup.
  * Use `create(DeleteBackupScheduleResponseSchema)` to create a new message.
  */
 export const DeleteBackupScheduleResponseSchema: GenMessage<DeleteBackupScheduleResponse> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 17);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 19);
 
 /**
  * A Backup represents a backup of a Qdrant database.
@@ -540,7 +583,7 @@ export type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & {
  * Use `create(BackupSchema)` to create a new message.
  */
 export const BackupSchema: GenMessage<Backup> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 18);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 20);
 
 /**
  * A BackupSchedule represents a recurring schedule for creating backups.
@@ -619,7 +662,71 @@ export type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.BackupSched
  * Use `create(BackupScheduleSchema)` to create a new message.
  */
 export const BackupScheduleSchema: GenMessage<BackupSchedule> = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 19);
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 21);
+
+/**
+ * A BackupRestore represents the status of a backup restore.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.BackupRestore
+ */
+export type BackupRestore = Message<"qdrant.cloud.cluster.backup.v1.BackupRestore"> & {
+  /**
+   * Unique identifier for the backup restore (in GUID format).
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The timestamp when the backup restore was created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * The identifier of the account (in GUID format).
+   *
+   * @generated from field: string account_id = 3;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the cluster (in GUID format).
+   *
+   * @generated from field: string cluster_id = 4;
+   */
+  clusterId: string;
+
+  /**
+   * The Identifier of the backup (in GUID format).
+   *
+   * @generated from field: string backup_id = 5;
+   */
+  backupId: string;
+
+  /**
+   * The current status of the backup restore.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.BackupRestoreStatus status = 6;
+   */
+  status: BackupRestoreStatus;
+
+  /**
+   * The timestamp when the backup restore was deleted (or when deletion started).
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 7;
+   */
+  deletedAt?: Timestamp;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.BackupRestore.
+ * Use `create(BackupRestoreSchema)` to create a new message.
+ */
+export const BackupRestoreSchema: GenMessage<BackupRestore> = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_cluster_backup_v1_backup, 22);
 
 /**
  * BackupStatus represents the current status of a backup operation.
@@ -739,6 +846,68 @@ export const BackupScheduleStatusSchema: GenEnum<BackupScheduleStatus> = /*@__PU
   enumDesc(file_qdrant_cloud_cluster_backup_v1_backup, 1);
 
 /**
+ * BackupRestoreStatus represents the current status of a backup restore.
+ *
+ * @generated from enum qdrant.cloud.cluster.backup.v1.BackupRestoreStatus
+ */
+export enum BackupRestoreStatus {
+  /**
+   * The status has not been specified. This is the default value.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The backup restore is running.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_RUNNING = 1;
+   */
+  RUNNING = 1,
+
+  /**
+   * The backup restore failed to complete successfully.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_FAILED = 2;
+   */
+  FAILED = 2,
+
+  /**
+   * The backup restore completed successfully.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_SUCCEEEDED = 3;
+   */
+  SUCCEEEDED = 3,
+
+  /**
+   * There was an error syncing the backup restore in the cluster's region.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_FAILED_TO_SYNC = 4;
+   */
+  FAILED_TO_SYNC = 4,
+
+  /**
+   * The backup restore is missing in the cluster's region.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
+   */
+  NOT_FOUND = 5,
+
+  /**
+   * The system has not received any status information from the cluster's region.
+   *
+   * @generated from enum value: BACKUP_RESTORE_STATUS_UNKNOWN = 6;
+   */
+  UNKNOWN = 6,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.backup.v1.BackupRestoreStatus.
+ */
+export const BackupRestoreStatusSchema: GenEnum<BackupRestoreStatus> = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_cluster_backup_v1_backup, 2);
+
+/**
  * BackupService is the API used to configure backup objects.
  *
  * @generated from service qdrant.cloud.cluster.backup.v1.BackupService
@@ -781,7 +950,21 @@ export const BackupService: GenService<{
     output: typeof DeleteBackupResponseSchema;
   },
   /**
+   * Fetch all backup restores in the account identified by the given ID.
+   * Required permissions:
+   * - read:backups
+   *
+   * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores
+   */
+  listBackupRestores: {
+    methodKind: "unary";
+    input: typeof ListBackupRestoresRequestSchema;
+    output: typeof ListBackupRestoresResponseSchema;
+  },
+  /**
    * Restores a backup in the account identified by the given ID.
+   * Required permissions:
+   * - admin:backups
    *
    * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup
    */

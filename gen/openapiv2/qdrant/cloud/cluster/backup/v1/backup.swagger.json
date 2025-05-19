@@ -101,6 +101,38 @@
         ]
       }
     },
+    "/api/cluster/backup/v1/accounts/{accountId}/backuprestores": {
+      "get": {
+        "summary": "Fetch all backup restores in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "operationId": "BackupService_ListBackupRestores",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBackupRestoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
     "/api/cluster/backup/v1/accounts/{accountId}/backups": {
       "get": {
         "summary": "Fetch all backups in the account identified by the given ID.\nRequired permissions:\n- read:backups",
@@ -188,7 +220,7 @@
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
       "post": {
-        "summary": "Restores a backup in the account identified by the given ID.",
+        "summary": "Restores a backup in the account identified by the given ID.\nRequired permissions:\n- admin:backups",
         "operationId": "BackupService_RestoreBackup",
         "responses": {
           "200": {
@@ -593,6 +625,56 @@
       },
       "description": "A Backup represents a backup of a Qdrant database."
     },
+    "v1BackupRestore": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the backup restore (in GUID format)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup restore was created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format)."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in GUID format)."
+        },
+        "backupId": {
+          "type": "string",
+          "description": "The Identifier of the backup (in GUID format)."
+        },
+        "status": {
+          "$ref": "#/definitions/v1BackupRestoreStatus",
+          "description": "The current status of the backup restore."
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the backup restore was deleted (or when deletion started)."
+        }
+      },
+      "description": "A BackupRestore represents the status of a backup restore.\nAll fields in this message are read-only."
+    },
+    "v1BackupRestoreStatus": {
+      "type": "string",
+      "enum": [
+        "BACKUP_RESTORE_STATUS_UNSPECIFIED",
+        "BACKUP_RESTORE_STATUS_RUNNING",
+        "BACKUP_RESTORE_STATUS_FAILED",
+        "BACKUP_RESTORE_STATUS_SUCCEEEDED",
+        "BACKUP_RESTORE_STATUS_FAILED_TO_SYNC",
+        "BACKUP_RESTORE_STATUS_NOT_FOUND",
+        "BACKUP_RESTORE_STATUS_UNKNOWN"
+      ],
+      "default": "BACKUP_RESTORE_STATUS_UNSPECIFIED",
+      "description": "BackupRestoreStatus represents the current status of a backup restore.\n\n - BACKUP_RESTORE_STATUS_UNSPECIFIED: The status has not been specified. This is the default value.\n - BACKUP_RESTORE_STATUS_RUNNING: The backup restore is running.\n - BACKUP_RESTORE_STATUS_FAILED: The backup restore failed to complete successfully.\n - BACKUP_RESTORE_STATUS_SUCCEEEDED: The backup restore completed successfully.\n - BACKUP_RESTORE_STATUS_FAILED_TO_SYNC: There was an error syncing the backup restore in the cluster's region.\n - BACKUP_RESTORE_STATUS_NOT_FOUND: The backup restore is missing in the cluster's region.\n - BACKUP_RESTORE_STATUS_UNKNOWN: The system has not received any status information from the cluster's region."
+    },
     "v1BackupSchedule": {
       "type": "object",
       "properties": {
@@ -697,6 +779,20 @@
         }
       },
       "description": "GetBackupScheduleResponse is the response from the GetBackupSchedule function."
+    },
+    "v1ListBackupRestoresResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1BackupRestore"
+          },
+          "description": "The actual backup restores in this list."
+        }
+      },
+      "description": "ListBackupRestoresResponse is the response from the ListBackupRestores function."
     },
     "v1ListBackupSchedulesResponse": {
       "type": "object",
