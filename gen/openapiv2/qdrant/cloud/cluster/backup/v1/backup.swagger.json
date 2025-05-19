@@ -41,6 +41,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster (in GUID format).\nWhen this field is set, only backup restores that belong to the cluster are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

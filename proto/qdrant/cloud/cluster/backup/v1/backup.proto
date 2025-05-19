@@ -168,6 +168,9 @@ message ListBackupRestoresRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in GUID format).
+  // When this field is set, only backup restores that belong to the cluster are returned.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // ListBackupRestoresResponse is the response from the ListBackupRestores function.

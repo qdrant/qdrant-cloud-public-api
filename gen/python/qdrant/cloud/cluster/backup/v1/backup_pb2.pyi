@@ -101,10 +101,12 @@ class DeleteBackupResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ListBackupRestoresRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ("account_id", "cluster_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class ListBackupRestoresResponse(_message.Message):
     __slots__ = ("items",)
