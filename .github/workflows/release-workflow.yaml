@@ -119,20 +119,18 @@ jobs:
 
           jq --arg version "0.0.2" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
-      - name: Configure npm for GCP Artifact Registry
-        run: |
-          echo "@qdrant:registry=https://us-npm.pkg.dev/qdrant-cloud/npm/" > .npmrc
-          echo "//us-npm.pkg.dev/qdrant-cloud/npm/:always-auth=true" >> .npmrc
-
-      - name: Refresh the access token for connecting to the repository
-        run: npm run artifactregistry-login
-
-      - name: Move build output to publish root
+      - name: Configure npm for GCP Artifact Registry and Move build output to publish root
         run: |
           mkdir -p npm_publish
           cp -r gen/typescript/* npm_publish/
           cp package.json npm_publish/
+          echo "@qdrant:registry=https://us-npm.pkg.dev/qdrant-cloud/npm/" > npm_publish/.npmrc
+          echo "//us-npm.pkg.dev/qdrant-cloud/npm/:always-auth=true" >> npm_publish/.npmrc
           cp README.md npm_publish/ || true
+
+      - name: Refresh the access token for connecting to the repository
+        working-directory: npm_publish
+        run: npm run artifactregistry-login
 
       - name: Publish JS package
         working-directory: npm_publish
