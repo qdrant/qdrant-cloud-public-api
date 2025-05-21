@@ -100,7 +100,7 @@ import (
     npm  install @qdrant/qdrant-cloud-public-api
     ```
 
-- Now you can import the generated code in your python project. Ex:
+- Now you can import the generated code in your typescript project. Ex:
 
     ```typescript
     import { ClusterService } from '@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/v1/cluster_pb'
