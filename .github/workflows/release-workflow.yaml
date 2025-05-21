@@ -1,86 +1,81 @@
 name: Upload Python and JS Packages to GCP Artifact Registry
 
-#on:
-#  push:
-#    branches:
-#      - "releases/v*"
 on:
   push:
     branches:
-      - "**"
+      - "releases/v*"
 
 jobs:
-# todo mikheil: uncomment me
-#  python-release:
-#    name: Python Release
-#    runs-on: ubuntu-latest
-#
-#    permissions:
-#      pull-requests: write
-#      contents: write
-#      id-token: write
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#
-#      - name: Install uv
-#        uses: astral-sh/setup-uv@v5
-#        with:
-#          # Install a specific version of uv.
-#          version: "0.7.0"
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version-file: "pyproject.toml"
-#
-#      - run: make python/dev-install
-#
-#      - name: Authenticate to Google Cloud
-#        uses: google-github-actions/auth@v2
-#        with:
-#          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-#          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
-#
-#      - name: Configure gcloud for Python
-#        run: |
-#          gcloud config set project qdrant-cloud
-#          gcloud config set artifacts/location us
-#          gcloud config set artifacts/repository python
-#
-#      - name: Set Python version from branch name
-#        run: |
-#          VERSION="${GITHUB_REF##*/}"
-#          STRIPPED_VERSION="${VERSION#v}"
-#
-#          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
-#          echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
-#
-#          sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
-#
-#      - name: Build and upload Python package
-#        run: |
-#          uv build
-#          uv run twine upload \
-#            --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
-#            --username oauth2accesstoken \
-#            --password "$(gcloud auth print-access-token)" \
-#            dist/*
-#      - name: Tag Release
-#        run: |
-#          git tag ${{ env.RELEASE_VERSION }}
-#          git push origin ${{ env.RELEASE_VERSION }}
-#
-#      - name: Publish Release Notes
-#        uses: release-drafter/release-drafter@v6
-#        with:
-#          disable-autolabeler: true
-#          commitish: ${{ github.ref }}
-#          tag: ${{ env.RELEASE_VERSION }}
-#          publish: true
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  python-release:
+    name: Python Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          # Install a specific version of uv.
+          version: "0.7.0"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+
+      - run: make python/dev-install
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Configure gcloud for Python
+        run: |
+          gcloud config set project qdrant-cloud
+          gcloud config set artifacts/location us
+          gcloud config set artifacts/repository python
+
+      - name: Set Python version from branch name
+        run: |
+          VERSION="${GITHUB_REF##*/}"
+          STRIPPED_VERSION="${VERSION#v}"
+
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
+
+          sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
+
+      - name: Build and upload Python package
+        run: |
+          uv build
+          uv run twine upload \
+            --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
+            --username oauth2accesstoken \
+            --password "$(gcloud auth print-access-token)" \
+            dist/*
+      - name: Tag Release
+        run: |
+          git tag ${{ env.RELEASE_VERSION }}
+          git push origin ${{ env.RELEASE_VERSION }}
+
+      - name: Publish Release Notes
+        uses: release-drafter/release-drafter@v6
+        with:
+          disable-autolabeler: true
+          commitish: ${{ github.ref }}
+          tag: ${{ env.RELEASE_VERSION }}
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   js-release:
     name: Node.js Release
@@ -117,7 +112,7 @@ jobs:
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
 
-          jq --arg version "0.0.5" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          jq --arg version "$STRIPPED_VERSION" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
       - name: Move build output to publish root
         run: |
