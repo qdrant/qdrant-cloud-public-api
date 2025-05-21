@@ -117,7 +117,7 @@ jobs:
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
 
-          jq --arg version "0.0.4" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          jq --arg version "0.0.5" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
       - name: Move build output to publish root
         run: |
