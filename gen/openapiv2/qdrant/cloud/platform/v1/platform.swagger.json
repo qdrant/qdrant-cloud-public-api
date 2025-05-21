@@ -48,6 +48,38 @@
         ]
       }
     },
+    "/api/platform/v1/accounts/{accountId}/cloud-providers/hybrid/regions": {
+      "get": {
+        "summary": "Fetch all cloud provider regions in the account identified by hybrid and cloud provider.\nRequired permissions:\n- read:hybrid_cloud_environments",
+        "operationId": "PlatformService_ListCloudProviderHybridRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudProviderHybridRegionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
     "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
       "get": {
         "summary": "Fetch all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
@@ -227,6 +259,20 @@
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."
+    },
+    "v1ListCloudProviderHybridRegionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProviderRegion"
+          },
+          "description": "The cloud provider regions."
+        }
+      },
+      "description": "ListCloudProviderHybridRegionsResponse is the response from the ListCloudProviderHybridRegions function."
     },
     "v1ListCloudProviderRegionsResponse": {
       "type": "object",

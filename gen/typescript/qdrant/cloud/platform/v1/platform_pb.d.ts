@@ -156,6 +156,27 @@ export declare type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.plat
 export declare const ListCloudProviderRegionsRequestSchema: GenMessage<ListCloudProviderRegionsRequest>;
 
 /**
+ * ListCloudProviderHybridRegionsRequest is the request for the ListCloudProviderHybridRegions function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsRequest
+ */
+export declare type ListCloudProviderHybridRegionsRequest = Message<"qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsRequest.
+ * Use `create(ListCloudProviderHybridRegionsRequestSchema)` to create a new message.
+ */
+export declare const ListCloudProviderHybridRegionsRequestSchema: GenMessage<ListCloudProviderHybridRegionsRequest>;
+
+/**
  * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
@@ -174,6 +195,26 @@ export declare type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.pla
  * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
  */
 export declare const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse>;
+
+/**
+ * ListCloudProviderHybridRegionsResponse is the response from the ListCloudProviderHybridRegions function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsResponse
+ */
+export declare type ListCloudProviderHybridRegionsResponse = Message<"qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsResponse"> & {
+  /**
+   * The cloud provider regions.
+   *
+   * @generated from field: repeated qdrant.cloud.platform.v1.CloudProviderRegion items = 1;
+   */
+  items: CloudProviderRegion[];
+};
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.ListCloudProviderHybridRegionsResponse.
+ * Use `create(ListCloudProviderHybridRegionsResponseSchema)` to create a new message.
+ */
+export declare const ListCloudProviderHybridRegionsResponseSchema: GenMessage<ListCloudProviderHybridRegionsResponse>;
 
 /**
  * CloudProvider represents a cloud provider identifier and name.
@@ -333,6 +374,18 @@ export declare const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof ListCloudProviderRegionsRequestSchema;
     output: typeof ListCloudProviderRegionsResponseSchema;
+  },
+  /**
+   * Fetch all cloud provider regions in the account identified by hybrid and cloud provider.
+   * Required permissions:
+   * - read:hybrid_cloud_environments
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListCloudProviderHybridRegions
+   */
+  listCloudProviderHybridRegions: {
+    methodKind: "unary";
+    input: typeof ListCloudProviderHybridRegionsRequestSchema;
+    output: typeof ListCloudProviderHybridRegionsResponseSchema;
   },
 }>;
 

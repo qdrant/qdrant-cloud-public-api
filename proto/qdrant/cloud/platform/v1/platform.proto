@@ -42,6 +42,16 @@ service PlatformService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
   }
+
+  // Fetch all cloud provider regions in the account identified by hybrid and cloud provider.
+  // Required permissions:
+  // - read:hybrid_cloud_environments
+  rpc ListCloudProviderHybridRegions(ListCloudProviderHybridRegionsRequest) returns (ListCloudProviderHybridRegionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:hybrid_cloud_environments";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/hybrid/regions"};
+  }
 }
 
 // ListCloudProvidersRequest is the request for the ListCloudProviders function.
@@ -91,8 +101,21 @@ message ListCloudProviderRegionsRequest {
   string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
 }
 
+// ListCloudProviderHybridRegionsRequest is the request for the ListCloudProviderHybridRegions function.
+message ListCloudProviderHybridRegionsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
 // ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
 message ListCloudProviderRegionsResponse {
+  // The cloud provider regions.
+  repeated CloudProviderRegion items = 1;
+}
+
+// ListCloudProviderHybridRegionsResponse is the response from the ListCloudProviderHybridRegions function.
+message ListCloudProviderHybridRegionsResponse {
   // The cloud provider regions.
   repeated CloudProviderRegion items = 1;
 }

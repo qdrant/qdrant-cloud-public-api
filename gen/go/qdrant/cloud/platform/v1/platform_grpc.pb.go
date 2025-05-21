@@ -23,6 +23,7 @@ const (
 	PlatformService_ListCloudProviders_FullMethodName             = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders"
 	PlatformService_ListGlobalCloudProviderRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions"
 	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
+	PlatformService_ListCloudProviderHybridRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderHybridRegions"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
@@ -43,6 +44,10 @@ type PlatformServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
+	// Fetch all cloud provider regions in the account identified by hybrid and cloud provider.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	ListCloudProviderHybridRegions(ctx context.Context, in *ListCloudProviderHybridRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderHybridRegionsResponse, error)
 }
 
 type platformServiceClient struct {
@@ -93,6 +98,16 @@ func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in
 	return out, nil
 }
 
+func (c *platformServiceClient) ListCloudProviderHybridRegions(ctx context.Context, in *ListCloudProviderHybridRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderHybridRegionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCloudProviderHybridRegionsResponse)
+	err := c.cc.Invoke(ctx, PlatformService_ListCloudProviderHybridRegions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlatformServiceServer is the server API for PlatformService service.
 // All implementations must embed UnimplementedPlatformServiceServer
 // for forward compatibility.
@@ -111,6 +126,10 @@ type PlatformServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
+	// Fetch all cloud provider regions in the account identified by hybrid and cloud provider.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	ListCloudProviderHybridRegions(context.Context, *ListCloudProviderHybridRegionsRequest) (*ListCloudProviderHybridRegionsResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
 
@@ -132,6 +151,9 @@ func (UnimplementedPlatformServiceServer) ListGlobalCloudProviderRegions(context
 }
 func (UnimplementedPlatformServiceServer) ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCloudProviderRegions not implemented")
+}
+func (UnimplementedPlatformServiceServer) ListCloudProviderHybridRegions(context.Context, *ListCloudProviderHybridRegionsRequest) (*ListCloudProviderHybridRegionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCloudProviderHybridRegions not implemented")
 }
 func (UnimplementedPlatformServiceServer) mustEmbedUnimplementedPlatformServiceServer() {}
 func (UnimplementedPlatformServiceServer) testEmbeddedByValue()                         {}
@@ -226,6 +248,24 @@ func _PlatformService_ListCloudProviderRegions_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlatformService_ListCloudProviderHybridRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCloudProviderHybridRegionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformServiceServer).ListCloudProviderHybridRegions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformService_ListCloudProviderHybridRegions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformServiceServer).ListCloudProviderHybridRegions(ctx, req.(*ListCloudProviderHybridRegionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PlatformService_ServiceDesc is the grpc.ServiceDesc for PlatformService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +288,10 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCloudProviderRegions",
 			Handler:    _PlatformService_ListCloudProviderRegions_Handler,
+		},
+		{
+			MethodName: "ListCloudProviderHybridRegions",
+			Handler:    _PlatformService_ListCloudProviderHybridRegions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

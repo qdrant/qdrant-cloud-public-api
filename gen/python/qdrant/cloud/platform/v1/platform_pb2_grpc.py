@@ -35,6 +35,11 @@ class PlatformServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
                 _registered_method=True)
+        self.ListCloudProviderHybridRegions = channel.unary_unary(
+                '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderHybridRegions',
+                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsResponse.FromString,
+                _registered_method=True)
 
 
 class PlatformServiceServicer(object):
@@ -75,6 +80,15 @@ class PlatformServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListCloudProviderHybridRegions(self, request, context):
+        """Fetch all cloud provider regions in the account identified by hybrid and cloud provider.
+        Required permissions:
+        - read:hybrid_cloud_environments
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PlatformServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -97,6 +111,11 @@ def add_PlatformServiceServicer_to_server(servicer, server):
                     servicer.ListCloudProviderRegions,
                     request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.SerializeToString,
+            ),
+            'ListCloudProviderHybridRegions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCloudProviderHybridRegions,
+                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -208,6 +227,33 @@ class PlatformService(object):
             '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions',
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListCloudProviderHybridRegions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderHybridRegions',
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderHybridRegionsResponse.FromString,
             options,
             channel_credentials,
             insecure,
