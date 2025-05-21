@@ -119,7 +119,7 @@ jobs:
 
           jq --arg version "0.0.4" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
-      - name: Configure npm for GCP Artifact Registry and Move build output to publish root
+      - name: Move build output to publish root
         run: |
           mkdir -p npm_publish
           cp -r gen/typescript/* npm_publish/
