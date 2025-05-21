@@ -1,0 +1,1194 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/hybrid/v1/hybrid_cloud.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HybridCloudService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/cluster/v1/accounts/{accountId}/clusters/{hybridCloudEnvironmentId}": {
+      "delete": {
+        "operationId": "HybridCloudService_DeleteCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments": {
+      "get": {
+        "operationId": "HybridCloudService_ListCloudEnvironments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudEnvironmentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}": {
+      "get": {
+        "operationId": "HybridCloudService_GetCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/initial-installation-command": {
+      "get": {
+        "operationId": "HybridCloudService_GetInitialInstallationCommand",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetInitialInstallationCommandResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid-cloud-environment/v1/accounts/{hybridCloudEnvironment.accountId}/hybrid-cloud-environments": {
+      "post": {
+        "operationId": "HybridCloudService_CreateCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hybridCloudEnvironment.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceCreateCloudEnvironmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid-cloud-environment/v1/accounts/{hybridCloudEnvironment.accountId}/hybrid-cloud-environments/{hybridCloudEnvironment.id}": {
+      "put": {
+        "operationId": "HybridCloudService_UpdateCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hybridCloudEnvironment.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironment.id",
+            "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceUpdateCloudEnvironmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "HybridCloudServiceCreateCloudEnvironmentBody": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "modifiedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "programmaticAccessKeyId": {
+              "type": "string"
+            },
+            "createdBy": {
+              "type": "string"
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration"
+            },
+            "status": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentStatus"
+            }
+          }
+        }
+      }
+    },
+    "HybridCloudServiceUpdateCloudEnvironmentBody": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+            },
+            "modifiedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "programmaticAccessKeyId": {
+              "type": "string"
+            },
+            "createdBy": {
+              "type": "string"
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration"
+            },
+            "status": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentStatus"
+            }
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment"
+        }
+      }
+    },
+    "v1DeleteCloudEnvironmentResponse": {
+      "type": "object"
+    },
+    "v1GetCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment"
+        }
+      }
+    },
+    "v1GetInitialInstallationCommandResponse": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "accessKey": {
+          "type": "string"
+        },
+        "registryUsername": {
+          "type": "string"
+        },
+        "registryPassword": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "regionId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1HybridCloudEnvironment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "programmaticAccessKeyId": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration"
+        },
+        "status": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentStatus"
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentCapabilities": {
+      "type": "object",
+      "properties": {
+        "volumeSnapshot": {
+          "type": "boolean"
+        },
+        "volumeExpansion": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentComponentStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatusPhase"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentComponentStatusPhase": {
+      "type": "string",
+      "enum": [
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_FOUND",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_UNKNOWN"
+      ],
+      "default": "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_READY"
+    },
+    "v1HybridCloudEnvironmentConfiguration": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "operatorConfig": {
+          "$ref": "#/definitions/v1OperatorConfiguration"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "httpProxyUrl": {
+          "type": "string"
+        },
+        "httpsProxyUrl": {
+          "type": "string"
+        },
+        "noProxyConfig": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerRegistryUrl": {
+          "type": "string"
+        },
+        "chartRepositoryUrl": {
+          "type": "string"
+        },
+        "registrySecretName": {
+          "type": "string"
+        },
+        "caCertificates": {
+          "type": "string"
+        },
+        "qdrantKubernetesApiVersion": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "operatorVersion": {
+          "type": "string"
+        },
+        "prometheusVersion": {
+          "type": "string"
+        },
+        "kubernetesEventExporterVersion": {
+          "type": "string"
+        },
+        "qdrantNodeExporterVersion": {
+          "type": "string"
+        },
+        "qdrantClusterExporterVersion": {
+          "type": "string"
+        },
+        "qdrantClusterManagerVersion": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "logLevel": {
+          "type": "string"
+        },
+        "tolerations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Toleration"
+          }
+        },
+        "nodeSelector": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentNodeInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "instanceType": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "capacity": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentNodeResourceInfo"
+        },
+        "allocatable": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentNodeResourceInfo"
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentNodeResourceInfo": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "string"
+        },
+        "memory": {
+          "type": "string"
+        },
+        "pods": {
+          "type": "string"
+        },
+        "ephemeralStorage": {
+          "type": "string"
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentStatus": {
+      "type": "object",
+      "properties": {
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "schemaVersion": {
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentStatusPhase"
+        },
+        "k8sVersion": {
+          "type": "string"
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentCapabilities"
+        },
+        "helmRepositories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
+          }
+        },
+        "helmReleases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
+          }
+        },
+        "readyForClusterCreation": {
+          "type": "boolean"
+        },
+        "k8sDistribution": {
+          "$ref": "#/definitions/v1KubernetesDistribution"
+        },
+        "message": {
+          "type": "string"
+        },
+        "storageClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentStorageClass"
+          }
+        },
+        "volumeSnapshotClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
+          }
+        },
+        "nodeInfos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentNodeInfo"
+          }
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentStatusPhase": {
+      "type": "string",
+      "enum": [
+        "PRIVATE_REGION_STATUS_PHASE_READY",
+        "PRIVATE_REGION_STATUS_PHASE_NOT_READY",
+        "PRIVATE_REGION_STATUS_PHASE_FAILED_TO_SYNC",
+        "PRIVATE_REGION_STATUS_PHASE_UNKNOWN"
+      ],
+      "default": "PRIVATE_REGION_STATUS_PHASE_READY"
+    },
+    "v1HybridCloudEnvironmentStorageClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "provisioner": {
+          "type": "string"
+        },
+        "allowVolumeExpansion": {
+          "type": "boolean"
+        },
+        "reclaimPolicy": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      }
+    },
+    "v1HybridCloudEnvironmentVolumeSnapshotClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "driver": {
+          "type": "string"
+        }
+      }
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
+    "v1KubernetesDistribution": {
+      "type": "string",
+      "enum": [
+        "KUBERNETES_DISTRIBUTION_UNKNOWN",
+        "KUBERNETES_DISTRIBUTION_AWS",
+        "KUBERNETES_DISTRIBUTION_GCP",
+        "KUBERNETES_DISTRIBUTION_AZURE",
+        "KUBERNETES_DISTRIBUTION_DO",
+        "KUBERNETES_DISTRIBUTION_SCALEWAY",
+        "KUBERNETES_DISTRIBUTION_OPENSHIFT",
+        "KUBERNETES_DISTRIBUTION_LINODE",
+        "KUBERNETES_DISTRIBUTION_CIVO",
+        "KUBERNETES_DISTRIBUTION_OCI",
+        "KUBERNETES_DISTRIBUTION_OVHCLOUD",
+        "KUBERNETES_DISTRIBUTION_STACKIT",
+        "KUBERNETES_DISTRIBUTION_VULTR",
+        "KUBERNETES_DISTRIBUTION_K3S"
+      ],
+      "default": "KUBERNETES_DISTRIBUTION_UNKNOWN"
+    },
+    "v1ListCloudEnvironmentsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironment"
+          }
+        }
+      }
+    },
+    "v1NetworkPolicyEgress": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyItem"
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPort"
+          }
+        }
+      }
+    },
+    "v1NetworkPolicyIngress": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyItem"
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPort"
+          }
+        }
+      }
+    },
+    "v1NetworkPolicyItem": {
+      "type": "object",
+      "properties": {
+        "namespaceSelector": {
+          "$ref": "#/definitions/v1NetworkPolicyItemSelector"
+        },
+        "podSelector": {
+          "$ref": "#/definitions/v1NetworkPolicyItemSelector"
+        }
+      }
+    },
+    "v1NetworkPolicyItemSelector": {
+      "type": "object",
+      "properties": {
+        "matchLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      }
+    },
+    "v1NetworkPolicyPort": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1OperatorBackupManagement": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "snapshots": {
+          "$ref": "#/definitions/v1OperatorSnapshots"
+        },
+        "scheduledSnapshots": {
+          "$ref": "#/definitions/v1OperatorScheduledSnapshots"
+        },
+        "restores": {
+          "$ref": "#/definitions/v1OperatorRestores"
+        }
+      }
+    },
+    "v1OperatorClusterManagement": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "storageClass": {
+          "$ref": "#/definitions/v1OperatorStorageClass"
+        },
+        "qdrant": {
+          "$ref": "#/definitions/v1OperatorQdrant"
+        },
+        "scheduling": {
+          "$ref": "#/definitions/v1OperatorScheduling"
+        },
+        "clusterManager": {
+          "$ref": "#/definitions/v1OperatorClusterManager"
+        },
+        "ingress": {
+          "$ref": "#/definitions/v1OperatorIngress"
+        },
+        "telemetryTimeout": {
+          "type": "string"
+        },
+        "maxConcurrentReconciles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "volumeExpansionMode": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorClusterManager": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "endpointAddress": {
+          "type": "string"
+        },
+        "invocationInterval": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "string"
+        },
+        "manageRulesOverrides": {
+          "$ref": "#/definitions/v1OperatorClusterManagerOverrides"
+        }
+      }
+    },
+    "v1OperatorClusterManagerOverrides": {
+      "type": "object",
+      "properties": {
+        "dryRun": {
+          "type": "boolean"
+        },
+        "maxTransfers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxTransfersPerCollection": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rebalance": {
+          "type": "string"
+        },
+        "replicate": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorConfiguration": {
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "type": "string"
+        },
+        "features": {
+          "$ref": "#/definitions/v1OperatorFeatures"
+        }
+      }
+    },
+    "v1OperatorFeatures": {
+      "type": "object",
+      "properties": {
+        "clusterManagement": {
+          "$ref": "#/definitions/v1OperatorClusterManagement"
+        },
+        "backupManagement": {
+          "$ref": "#/definitions/v1OperatorBackupManagement"
+        }
+      }
+    },
+    "v1OperatorIngress": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "kubernetesIngress": {
+          "$ref": "#/definitions/v1OperatorKubernetesIngress"
+        }
+      }
+    },
+    "v1OperatorKubernetesIngress": {
+      "type": "object",
+      "properties": {
+        "ingressClassName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorQdrant": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/v1OperatorQdrantImage"
+        },
+        "storage": {
+          "$ref": "#/definitions/v1OperatorQdrantStorage"
+        },
+        "logLevel": {
+          "type": "string"
+        },
+        "securityContext": {
+          "$ref": "#/definitions/v1OperatorSecurityContext"
+        },
+        "networkPolicies": {
+          "$ref": "#/definitions/v1OperatorV2NetworkPolicy"
+        }
+      }
+    },
+    "v1OperatorQdrantImage": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string"
+        },
+        "pullSecretName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorQdrantPerformance": {
+      "type": "object",
+      "properties": {
+        "optimizerCpuBudget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asyncScorer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1OperatorQdrantStorage": {
+      "type": "object",
+      "properties": {
+        "performance": {
+          "$ref": "#/definitions/v1OperatorQdrantPerformance"
+        }
+      }
+    },
+    "v1OperatorRestores": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "maxConcurrentReconciles": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1OperatorScheduledSnapshots": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "removeCronJobs": {
+          "type": "boolean"
+        },
+        "maxConcurrentReconciles": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1OperatorScheduling": {
+      "type": "object",
+      "properties": {
+        "topologySpreadConstraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "TODO question"
+        },
+        "podDisruptionBudget": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      }
+    },
+    "v1OperatorSecurityContext": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "fsGroup": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorSnapshots": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "volumeSnapshotClass": {
+          "type": "string"
+        },
+        "retainUnsuccessful": {
+          "type": "string"
+        },
+        "maxConcurrentReconciles": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1OperatorStorageClass": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "database": {
+          "type": "string"
+        },
+        "snapshot": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OperatorV2NetworkPolicy": {
+      "type": "object",
+      "properties": {
+        "ingress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyIngress"
+          }
+        },
+        "egress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyEgress"
+          }
+        }
+      }
+    },
+    "v1Toleration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to match against the key of a node label."
+        },
+        "operator": {
+          "$ref": "#/definitions/v1TolerationOperator",
+          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EXISTS."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to match against the value of a node label."
+        },
+        "effect": {
+          "$ref": "#/definitions/v1TolerationEffect",
+          "description": "The effect indicates the taint effect to match.\nThe default is TOLERATION_EFFECT_NO_SCHEDULE."
+        },
+        "tolerationSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        }
+      },
+      "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v1TolerationEffect": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_EFFECT_UNSPECIFIED",
+        "TOLERATION_EFFECT_NO_SCHEDULE",
+        "TOLERATION_EFFECT_PREFER_NO_SCHEDULE",
+        "TOLERATION_EFFECT_NO_EXECUTE"
+      ],
+      "default": "TOLERATION_EFFECT_UNSPECIFIED",
+      "description": "- TOLERATION_EFFECT_UNSPECIFIED: Unspecified effect.\n - TOLERATION_EFFECT_NO_SCHEDULE: NoSchedule taint effect.\n - TOLERATION_EFFECT_PREFER_NO_SCHEDULE: PreferNoSchedule taint effect.\n - TOLERATION_EFFECT_NO_EXECUTE: NoExecute taint effect.",
+      "title": "TolerationEffect represents the effects a taint has on pod scheduling and eviction.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1TolerationOperator": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_OPERATOR_UNSPECIFIED",
+        "TOLERATION_OPERATOR_EXISTS",
+        "TOLERATION_OPERATOR_EQUAL"
+      ],
+      "default": "TOLERATION_OPERATOR_UNSPECIFIED",
+      "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
+      "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1UpdateCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment"
+        }
+      }
+    }
+  }
+}
