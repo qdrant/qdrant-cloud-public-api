@@ -117,7 +117,7 @@ jobs:
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
 
-          jq --arg version "0.0.2" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          jq --arg version "0.0.3" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
       - name: Configure npm for GCP Artifact Registry and Move build output to publish root
         run: |
