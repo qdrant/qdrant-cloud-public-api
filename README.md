@@ -102,10 +102,12 @@ import (
 
 - Now you can import the generated code in your typescript project. Ex:
 
-    ```typescript
-    import { ClusterService } from '@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/v1/cluster_pb'
-    
-    console.log("Available cluster service:", ClusterService);
-    ```
+  ```typescript
+  import * as grpc from '@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/v1/cluster_pb.js';
+  import { DatabaseApiKeyService } from "@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/auth/v1/database_api_key_pb.js";
+  
+  console.log('Loaded service definition keys:', Object.keys(grpc));
+  console.log(DatabaseApiKeyService);
+  ```
 
 ## [Release Process](docs/release.md)
