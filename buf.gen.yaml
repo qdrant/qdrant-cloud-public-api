@@ -53,7 +53,9 @@ plugins:
   # Generate base types and services for Typescript
   - remote: buf.build/bufbuild/es:v2.2.3
     include_imports: true
-    opt: target=ts
+    opt:
+      - target=js+dts
+
     out: gen/typescript
 
 inputs:

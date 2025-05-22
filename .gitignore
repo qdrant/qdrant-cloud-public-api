@@ -5,3 +5,4 @@ tmp/
 __pycache__/
 *.pyc
 /gen-dummy
+node_modules/
