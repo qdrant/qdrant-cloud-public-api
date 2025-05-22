@@ -118,7 +118,8 @@ jobs:
 
       - name: Tag Release
         run: |
-          VERSION="${GITHUB_REF##*/}"
+          VERSION="${GITHUB_REF##*/}"  # from 'refs/heads/releases/v1.2.1' → 'v1.2.1'
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           git tag "$VERSION"
           git push origin "$VERSION"
 
@@ -127,7 +128,7 @@ jobs:
         with:
           disable-autolabeler: true
           commitish: ${{ github.ref }}
-          tag: ${{ github.ref_name }}
+          tag: ${{ env.RELEASE_VERSION }}
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
