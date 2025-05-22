@@ -275,7 +275,7 @@ message DeleteBackupScheduleResponse {
 
 // BackupStatus represents the current status of a backup operation.
 enum BackupStatus {
-  // The status has not been specified. This is the default value.
+  // The status is unknown or not specified. This is the default value.
   BACKUP_STATUS_UNSPECIFIED = 0;
   // The backup is currently in progress.
   BACKUP_STATUS_RUNNING = 1;
@@ -289,8 +289,6 @@ enum BackupStatus {
   BACKUP_STATUS_FAILED_TO_SYNC = 5;
   // The backup was expected but not found in the cluster's region.
   BACKUP_STATUS_NOT_FOUND = 6;
-  // The system has not received any status information from the cluster's region.
-  BACKUP_STATUS_UNKNOWN = 7;
 }
 
 // A Backup represents a backup of a Qdrant database.
@@ -329,7 +327,7 @@ message Backup {
 
 // BackupScheduleStatus represents the current status of a backup schedule.
 enum BackupScheduleStatus {
-  // The status has not been specified. This is the default value.
+  // The status is unknown or not specified. This is the default value.
   BACKUP_SCHEDULE_STATUS_UNSPECIFIED = 0;
   // The backup schedule is active and functioning correctly.
   BACKUP_SCHEDULE_STATUS_ACTIVE = 1;
@@ -337,10 +335,8 @@ enum BackupScheduleStatus {
   BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC = 2;
   // The backup schedule is missing in the cluster's region.
   BACKUP_SCHEDULE_STATUS_NOT_FOUND = 3;
-  // The system has not received any status information from the cluster's region.
-  BACKUP_SCHEDULE_STATUS_UNKNOWN = 4;
   // The backup schedule is disabled.
-  BACKUP_SCHEDULE_STATUS_DISABLED = 5;
+  BACKUP_SCHEDULE_STATUS_DISABLED = 4;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -403,7 +399,7 @@ message BackupRestore {
 
 // BackupRestoreStatus represents the current status of a backup restore.
 enum BackupRestoreStatus {
-  // The status has not been specified. This is the default value.
+  // The status is unknown or not specified. This is the default value.
   BACKUP_RESTORE_STATUS_UNSPECIFIED = 0;
   // The backup restore is running.
   BACKUP_RESTORE_STATUS_RUNNING = 1;
@@ -415,8 +411,6 @@ enum BackupRestoreStatus {
   BACKUP_RESTORE_STATUS_FAILED_TO_SYNC = 4;
   // The backup restore is missing in the cluster's region.
   BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
-  // The system has not received any status information from the cluster's region.
-  BACKUP_RESTORE_STATUS_UNKNOWN = 6;
   // The backup restore is skipped.
-  BACKUP_RESTORE_STATUS_SKIPPED = 7;
+  BACKUP_RESTORE_STATUS_SKIPPED = 6;
 }
