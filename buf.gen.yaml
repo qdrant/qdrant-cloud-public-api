@@ -55,6 +55,7 @@ plugins:
     include_imports: true
     opt:
       - target=js+dts
+      - import_extension=js
 
     out: gen/typescript
 
