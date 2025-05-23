@@ -361,7 +361,7 @@ export type AssignUserRolesRequest = Message<"qdrant.cloud.iam.v1.AssignUserRole
 
   /**
    * The roles to be deleted from the provided user.
-   * If a role is part of the role_ids_to_add this field takes presendence.
+   * If a role is part of the role_ids_to_add this field takes precedence.
    *
    * @generated from field: repeated string role_ids_to_delete = 4;
    */

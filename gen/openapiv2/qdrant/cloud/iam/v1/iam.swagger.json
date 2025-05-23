@@ -339,7 +339,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The roles to be deleted from the provided user.\nIf a role is part of the role_ids_to_add this field takes presendence."
+          "description": "The roles to be deleted from the provided user.\nIf a role is part of the role_ids_to_add this field takes precedence."
         }
       },
       "title": "AssignUserRolesRequest is the request for the AssignUserRoles function"

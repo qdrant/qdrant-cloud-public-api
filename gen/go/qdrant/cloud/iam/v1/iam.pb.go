@@ -753,7 +753,7 @@ type AssignUserRolesRequest struct {
 	// If a role was already part of the user or the same role is provided multiple times, the role will be added exactly one time.
 	RoleIdsToAdd []string `protobuf:"bytes,3,rep,name=role_ids_to_add,json=roleIdsToAdd,proto3" json:"role_ids_to_add,omitempty"`
 	// The roles to be deleted from the provided user.
-	// If a role is part of the role_ids_to_add this field takes presendence.
+	// If a role is part of the role_ids_to_add this field takes precedence.
 	RoleIdsToDelete []string `protobuf:"bytes,4,rep,name=role_ids_to_delete,json=roleIdsToDelete,proto3" json:"role_ids_to_delete,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache

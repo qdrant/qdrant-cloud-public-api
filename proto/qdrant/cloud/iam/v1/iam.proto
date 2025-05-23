@@ -210,7 +210,7 @@ message AssignUserRolesRequest {
   // If a role was already part of the user or the same role is provided multiple times, the role will be added exactly one time.
   repeated string role_ids_to_add = 3;
   // The roles to be deleted from the provided user.
-  // If a role is part of the role_ids_to_add this field takes presendence.
+  // If a role is part of the role_ids_to_add this field takes precedence.
   repeated string role_ids_to_delete = 4;
 }
 
