@@ -1,0 +1,259 @@
+syntax = "proto3";
+
+package qdrant.cloud.iam.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// IAMService is the API used to configure IAM (identity and access management) objects..
+service IAMService {
+  // Fetch all permissions known in the system for the provided account.
+  // Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
+  // Required permissions:
+  // - read:roles
+  rpc ListPermissions(ListPermissionsRequest) returns (ListPermissionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/permissions"};
+  }
+  // Fetch all roles in the account identified by the given ID.
+  // Required permissions:
+  // - read:roles
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles"};
+  }
+  // Get a role for the account identified by the given ID.
+  // Required permissions:
+  // - read:roles
+  rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
+  }
+  // Creates a role for the account identified by the given ID.
+  // Note: The role_type must be ROLE_TYPE_CUSTOM.
+  // Required permissions:
+  // - write:roles
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:roles";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/iam/v1/accounts/{role.account_id}/roles"
+      body: "*"
+    };
+  }
+  // Update a role in the account identified by the given ID.
+  // Note: The role_type must be ROLE_TYPE_CUSTOM.
+  // Required permissions:
+  // - write:roles
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:roles";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/iam/v1/accounts/{role.account_id}/roles/{role.id}"
+      body: "*"
+    };
+  }
+  // Deletes a role in the account identified by the given ID.
+  // Note: The role_type must be ROLE_TYPE_CUSTOM.
+  // Required permissions:
+  // - delete:roles
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
+  }
+  // Get the effective permissions for the user in the account identified by the given ID.
+  // Required permissions:
+  // - read:roles
+  rpc GetEffectivePermissions(GetEffectivePermissionsRequest) returns (GetEffectivePermissionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/effective-permissions"};
+  }
+
+  // Assign the provided roles to the user in the account identified by the given ID.
+  // Required permissions:
+  // - write:roles
+  rpc AssignUserRoles(AssignUserRolesRequest) returns (AssignUserRolesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"
+      body: "*"
+    };
+  }
+}
+
+// ListPermissionsRequest is the request for the ListPermissions function
+message ListPermissionsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListPermissionsResponse is the response from the ListPermissions function
+message ListPermissionsResponse {
+  // The permissions know by the system.
+  repeated string permissions = 1;
+}
+
+// ListRolesRequest is the request for the ListRoles function
+message ListRolesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListRolesResponse is the response from the ListRoles function
+message ListRolesResponse {
+  // The actual roles in this list.
+  repeated Role items = 1;
+}
+
+// GetRoleRequest is the request for the GetRole function
+message GetRoleRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the role (in GUID format).
+  // This is a required field.
+  string role_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetRoleResponse is the response from the GetRole function
+message GetRoleResponse {
+  // The actual role.
+  Role role = 1;
+}
+
+// CreateRoleRequest is the request for the CreateRole function.
+message CreateRoleRequest {
+  // The actual role.
+  Role role = 1;
+}
+
+// CreateRoleResponse is the response from the CreateRole function.
+message CreateRoleResponse {
+  // The actual role.
+  Role role = 1;
+}
+
+// UpdateRoleRequest is the request for the UpdateRole function.
+message UpdateRoleRequest {
+  // The actual role.
+  Role role = 1;
+}
+
+// UpdateRoleResponse is the response from the UpdateRole function.
+message UpdateRoleResponse {
+  // The actual role.
+  Role role = 1;
+}
+
+// DeleteRoleRequest is the request for the DeleteRole function.
+message DeleteRoleRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the role (in GUID format).
+  // This is a required field.
+  string role_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteRoleResponse is the response from the DeleteRole function.
+message DeleteRoleResponse {
+  // Empty
+}
+
+// GetEffectivePermissionsRequest is the request for the GetEffectivePermissions function
+message GetEffectivePermissionsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetEffectivePermissionsResponse is the response from the GetEffectivePermissions function
+message GetEffectivePermissionsResponse {
+  // The effective permissions.
+  repeated string permissions = 1;
+}
+
+// AssignUserRolesRequest is the request for the AssignUserRoles function
+message AssignUserRolesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the user (in GUID format).
+  // This user should be part of the provided account.
+  // This is a required field.
+  string user_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The roles to add to the provided user.
+  // If a role was already part of the user or the same role is provided multiple times, the role will be added exactly one time.
+  repeated string role_ids_to_add = 3;
+  // The roles to be deleted from the provided user.
+  // If a role is part of the role_ids_to_add this field takes presendence.
+  repeated string role_ids_to_delete = 4;
+}
+
+// AssignUserRolesResponse is the response from the AssignUserRoles function
+message AssignUserRolesResponse {
+  // Empty
+}
+
+// A Role represents a role in the Qdrant cloud.
+message Role {
+  // Unique identifier for the role (in GUID format).
+  // This is a read-only field and will be available after a role is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "cluster.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the role was created.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The name of the role.
+  string name = 4;
+  // The human readable description of this role.
+  string description = 5;
+  // Set if this role represents the admin role.
+  bool is_admin = 6;
+  // The role type.
+  RoleType role_type = 7;
+  // The permissions associated with this role.
+  repeated string permissions = 8;
+}
+
+// RoleType specified the type of the role
+enum RoleType {
+  // The role type is unspecified.
+  ROLE_TYPE_UNSPECIFIED = 0;
+  // The role type is system.
+  // Note: system roles cannot be changed (create/update/delete).
+  ROLE_TYPE_SYSTEM = 1;
+  // The role type is custom defined.
+  ROLE_TYPE_CUSTOM = 2;
+}
