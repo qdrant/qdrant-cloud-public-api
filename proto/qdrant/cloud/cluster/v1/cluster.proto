@@ -608,6 +608,10 @@ enum ClusterPhase {
   CLUSTER_PHASE_RECOVERY_MODE = 14;
   // The cluster is under manual maintenance.
   CLUSTER_PHASE_MANUAL_MAINTENANCE = 15;
+  // There was an error syncing the cluster in the cloud provider region.
+  CLUSTER_PHASE_FAILED_TO_SYNC = 16;
+  // The cluster was expected but not found in the cloud provider region.
+  CLUSTER_PHASE_NOT_FOUND = 17;
 }
 
 // ClusterState represents the current state of a cluster

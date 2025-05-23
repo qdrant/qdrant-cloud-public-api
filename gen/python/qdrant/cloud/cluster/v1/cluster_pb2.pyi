@@ -71,6 +71,8 @@ class ClusterPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_PHASE_NOT_READY: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_RECOVERY_MODE: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_MANUAL_MAINTENANCE: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_FAILED_TO_SYNC: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_NOT_FOUND: _ClassVar[ClusterPhase]
 CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_AMD: ClusterConfigurationGpuType
@@ -112,6 +114,8 @@ CLUSTER_PHASE_HEALTHY: ClusterPhase
 CLUSTER_PHASE_NOT_READY: ClusterPhase
 CLUSTER_PHASE_RECOVERY_MODE: ClusterPhase
 CLUSTER_PHASE_MANUAL_MAINTENANCE: ClusterPhase
+CLUSTER_PHASE_FAILED_TO_SYNC: ClusterPhase
+CLUSTER_PHASE_NOT_FOUND: ClusterPhase
 
 class ListClustersRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
