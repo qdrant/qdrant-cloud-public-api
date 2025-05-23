@@ -71,10 +71,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: "Shared: Auth + Version Info"
         uses: ./.github/actions/shared-setup
@@ -121,7 +121,7 @@ jobs:
           VERSION="${GITHUB_REF##*/}"  # from 'refs/heads/releases/v1.2.1' → 'v1.2.1'
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           git tag "$VERSION"
-          git push origin "$VERSION"
+          git push origin tag "$VERSION"
 
       - name: Publish Release Notes
         uses: release-drafter/release-drafter@v6
