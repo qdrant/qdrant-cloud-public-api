@@ -73,9 +73,6 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
-
       - name: "Shared: Auth + Version Info"
         uses: ./.github/actions/shared-setup
         with:
@@ -88,7 +85,7 @@ jobs:
         run: |
           mkdir -p npm_publish
           cp -r gen/typescript/* npm_publish/
-          cp package.json npm_publish/
+          cp package.example.json npm_publish/package.json
           cp .npmrc npm_publish/
           cp README.md npm_publish/ || true
 
