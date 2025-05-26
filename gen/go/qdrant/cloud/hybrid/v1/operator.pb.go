@@ -215,7 +215,6 @@ type OperatorSnapshots struct {
 	// Set to true when enabled
 	Enabled *bool `protobuf:"varint,1,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	// The VolumeSnapshotClass used to make VolumeSnapshots.
-	// Default is "csi-snapclass".
 	VolumeSnapshotClass *string `protobuf:"bytes,2,opt,name=volume_snapshot_class,json=volumeSnapshotClass,proto3,oneof" json:"volume_snapshot_class,omitempty"`
 	// The duration a snapshot is retained when the phase becomes Failed or Skipped
 	// Default is 72h (3d).
@@ -1233,7 +1232,7 @@ func (x *OperatorQdrantPerformance) GetAsyncScorer() bool {
 	return false
 }
 
-// config where to find the image for Qqdrant
+// config where to find the image for Qdrant
 type OperatorQdrantImage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The repository where to find the image for qdrant

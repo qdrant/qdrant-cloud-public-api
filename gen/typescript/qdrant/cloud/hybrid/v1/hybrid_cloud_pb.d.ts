@@ -51,7 +51,7 @@ export declare const GetInitialInstallationCommandRequestSchema: GenMessage<GetI
  */
 export declare type GetInitialInstallationCommandResponse = Message<"qdrant.cloud.hybrid.v1.GetInitialInstallationCommandResponse"> & {
   /**
-   * Command to execute for bootstrapin a kubernetes cluster into hybrid cloud environment
+   * Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment
    * `kubectl` and `helm` CLIs are required for execution.
    *
    * @generated from field: string command = 1;
@@ -777,7 +777,7 @@ export declare type HybridCloudEnvironmentStorageClass = Message<"qdrant.cloud.h
 export declare const HybridCloudEnvironmentStorageClassSchema: GenMessage<HybridCloudEnvironmentStorageClass>;
 
 /**
- * Volume snaphost class available in the hybrid cloud environment
+ * Volume snapshot class available in the hybrid cloud environment
  *
  * @generated from message qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
  */

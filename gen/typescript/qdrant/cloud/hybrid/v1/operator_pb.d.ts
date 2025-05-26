@@ -125,7 +125,6 @@ export declare type OperatorSnapshots = Message<"qdrant.cloud.hybrid.v1.Operator
 
   /**
    * The VolumeSnapshotClass used to make VolumeSnapshots.
-   * Default is "csi-snapclass".
    *
    * @generated from field: optional string volume_snapshot_class = 2;
    */
@@ -675,7 +674,7 @@ export declare type OperatorQdrantPerformance = Message<"qdrant.cloud.hybrid.v1.
 export declare const OperatorQdrantPerformanceSchema: GenMessage<OperatorQdrantPerformance>;
 
 /**
- * config where to find the image for Qqdrant
+ * config where to find the image for Qdrant
  *
  * @generated from message qdrant.cloud.hybrid.v1.OperatorQdrantImage
  */

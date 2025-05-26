@@ -41,7 +41,6 @@ message OperatorSnapshots {
   // Set to true when enabled
   optional bool enabled = 1;
   // The VolumeSnapshotClass used to make VolumeSnapshots.
-  // Default is "csi-snapclass".
   optional string volume_snapshot_class = 2;
   // The duration a snapshot is retained when the phase becomes Failed or Skipped
   // Default is 72h (3d).
@@ -215,7 +214,7 @@ message OperatorQdrantPerformance {
   optional bool async_scorer = 2;
 }
 
-// config where to find the image for Qqdrant
+// config where to find the image for Qdrant
 message OperatorQdrantImage {
   // The repository where to find the image for qdrant
   // Default is "qdrant/qdrant"

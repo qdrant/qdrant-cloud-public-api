@@ -298,7 +298,7 @@ func (x *GetInitialInstallationCommandRequest) GetAccountId() string {
 // GetInitialInstallationCommandResponse is the response for GetInitialInstallationCommand function
 type GetInitialInstallationCommandResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Command to execute for bootstrapin a kubernetes cluster into hybrid cloud environment
+	// Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment
 	// `kubectl` and `helm` CLIs are required for execution.
 	Command       string `protobuf:"bytes,1,opt,name=command,proto3" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1568,7 +1568,7 @@ func (x *HybridCloudEnvironmentStorageClass) GetParameters() []*v11.KeyValue {
 	return nil
 }
 
-// Volume snaphost class available in the hybrid cloud environment
+// Volume snapshot class available in the hybrid cloud environment
 type HybridCloudEnvironmentVolumeSnapshotClass struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the volume snapshot class

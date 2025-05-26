@@ -71,7 +71,8 @@ service HybridCloudService {
   // bootstrap it to the hybrid cloud environment
   rpc GetInitialInstallationCommand(GetInitialInstallationCommandRequest) returns (GetInitialInstallationCommandResponse) {
     // permissions
-    option (common.v1.permissions) = "write:hybrid_cloud_environments"; // TODO(pedjak) do we need read:hybrid_cloud_environments instead?
+    // TODO do we need read:hybrid_cloud_environments instead?
+    option (common.v1.permissions) = "write:hybrid_cloud_environments";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid-cloud-environment/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/initial-installation-command"};
   }
@@ -90,7 +91,7 @@ message GetInitialInstallationCommandRequest {
 
 // GetInitialInstallationCommandResponse is the response for GetInitialInstallationCommand function
 message GetInitialInstallationCommandResponse {
-  // Command to execute for bootstrapin a kubernetes cluster into hybrid cloud environment
+  // Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment
   // `kubectl` and `helm` CLIs are required for execution.
   string command = 1;
 }
@@ -380,7 +381,7 @@ enum KubernetesDistribution {
   KUBERNETES_DISTRIBUTION_K3S = 13;
 }
 
-// Volume snaphost class available in the hybrid cloud environment
+// Volume snapshot class available in the hybrid cloud environment
 message HybridCloudEnvironmentVolumeSnapshotClass {
   // Name of the volume snapshot class
   string name = 1;

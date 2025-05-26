@@ -495,7 +495,7 @@
       "properties": {
         "command": {
           "type": "string",
-          "description": "Command to execute for bootstrapin a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
+          "description": "Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
         }
       },
       "title": "GetInitialInstallationCommandResponse is the response for GetInitialInstallationCommand function"
@@ -903,7 +903,7 @@
           "title": "Driver of the volume snapshot class"
         }
       },
-      "title": "Volume snaphost class available in the hybrid cloud environment"
+      "title": "Volume snapshot class available in the hybrid cloud environment"
     },
     "v1IPBlock": {
       "type": "object",
@@ -1461,7 +1461,7 @@
           "title": "Image pull secret name"
         }
       },
-      "title": "config where to find the image for Qqdrant"
+      "title": "config where to find the image for Qdrant"
     },
     "v1OperatorQdrantPerformance": {
       "type": "object",
@@ -1571,7 +1571,7 @@
         },
         "volumeSnapshotClass": {
           "type": "string",
-          "description": "The VolumeSnapshotClass used to make VolumeSnapshots.\nDefault is \"csi-snapclass\"."
+          "description": "The VolumeSnapshotClass used to make VolumeSnapshots."
         },
         "retainUnsuccessful": {
           "type": "string",
