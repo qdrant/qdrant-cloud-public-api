@@ -1,0 +1,227 @@
+syntax = "proto3";
+
+package qdrant.cloud.hybrid.v1;
+
+import "k8s.io/api/core/v1/generated.proto";
+import "k8s.io/api/networking/v1/generated.proto";
+import "k8s.io/api/policy/v1/generated.proto";
+import "qdrant/cloud/cluster/v1/cluster.proto";
+
+// OperatorConfiguration represents the operator configuration
+message OperatorConfiguration {
+  // Log level
+  optional string log_level = 1;
+  // Operator features
+  optional OperatorFeatures features = 2;
+}
+
+// Operator features
+message OperatorFeatures {
+  // Cluster management feature
+  optional OperatorClusterManagement cluster_management = 1;
+  // Backup management feature
+  optional OperatorBackupManagement backup_management = 2;
+}
+
+// Backup management operator feature
+message OperatorBackupManagement {
+  // Whether or not the backup features are enabled.
+  // Default is true.
+  optional bool enabled = 1;
+  // Snapshots configuration
+  optional OperatorSnapshots snapshots = 2;
+  // Scheduled snapshot configuration
+  optional OperatorScheduledSnapshots scheduled_snapshots = 3;
+  // Restores configuration
+  optional OperatorRestores restores = 4;
+}
+
+// Operator snapshots configuration
+message OperatorSnapshots {
+  // Set to true when enabled
+  optional bool enabled = 1;
+  // The VolumeSnapshotClass used to make VolumeSnapshots.
+  // Default is "csi-snapclass".
+  optional string volume_snapshot_class = 2;
+  // The duration a snapshot is retained when the phase becomes Failed or Skipped
+  // Default is 72h (3d).
+  optional string retain_unsuccessful = 3;
+  // the maximum number of concurrent Reconciles which can be run. Defaults to 1.
+  optional uint32 max_concurrent_reconciles = 4;
+}
+
+// Operator scheduled snapshots configuration
+message OperatorScheduledSnapshots {
+  // Whether or not the ScheduledSnapshot feature is enabled.
+  // Default is true.
+  optional bool enable = 1;
+  // the maximum number of concurrent Reconciles which can be run. Defaults to 1.
+  optional int32 max_concurrent_reconciles = 3;
+}
+
+// Operator restores configuration
+message OperatorRestores {
+  // Whether or not the Restore feature is enabled.
+  // Default is true.
+  optional bool enable = 1;
+  // the maximum number of concurrent Reconciles which can be run. Defaults to 1.
+  optional int32 max_concurrent_reconciles = 2;
+}
+
+// Operator cluster management feature
+message OperatorClusterManagement {
+  // Whether or not the ClusterManagement feature is enabled.
+  // Default is true.
+  optional bool enabled = 1;
+  // The StorageClass used to make database and snapshot PVCs.
+  // If unset, the default storage class of Kubernetes is used.
+  optional OperatorStorageClass storage_class = 2;
+  // Qdrant config contains settings specific for the database
+  optional OperatorQdrant qdrant = 3;
+  // Scheduling config contains the settings specific for scheduling
+  optional OperatorScheduling scheduling = 4;
+  // ClusterManager config contains the settings specific for cluster manager
+  optional OperatorClusterManager cluster_manager = 5;
+  // Ingress config contains the settings specific for ingress
+  optional OperatorIngress ingress = 6;
+  // The duration of a single call to the cluster telemetry endpoint is allowed to take.
+  // Default is 3 seconds
+  optional string telemetry_timeout = 7;
+  // the maximum number of concurrent Reconciles which can be run. Defaults to 20.
+  optional uint32 max_concurrent_reconciles = 8;
+  // VolumeExpansionMode specifies the expansion mode, which can be online or offline (e.g. in case of Azure).
+  optional string volume_expansion_mode = 9;
+}
+
+// TODO is it worth of exposing this through API?
+message OperatorScheduling {
+  // Topology constraints for Qdrant pod scheduling
+  repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 1;
+  // Default Qdrant pod disruption budget
+  repeated k8s.io.api.policy.v1.PodDisruptionBudget pod_disruption_budget = 2;
+}
+
+// TODO is it worth of exposing this, given that cluster manager is always installed?
+message OperatorClusterManager {
+  // TODO
+  optional bool enable = 1;
+  // TODO
+  optional string endpoint_address = 2;
+  // TODO
+  optional string invocation_interval = 3;
+  // TODO
+  optional string timeout = 4;
+  // TODO
+  optional OperatorClusterManagerOverrides manage_rules_overrides = 5;
+}
+
+// TODO - should not be exposed through API because in hybrid cloud we expose clusters only via clusterIP
+message OperatorIngress {
+  // TODO
+  optional bool enable = 1;
+  // TODO
+  optional string provider = 2;
+  // TODO
+  optional OperatorKubernetesIngress kubernetes_ingress = 3;
+}
+
+// TODO
+message OperatorKubernetesIngress {
+  // TODO
+  optional string ingress_class_name = 1;
+}
+
+// TODO
+message OperatorClusterManagerOverrides {
+  // TODO
+  optional bool dry_run = 1;
+  // TODO
+  optional int32 max_transfers = 2;
+  // TODO
+  optional int32 max_transfers_per_collection = 3;
+  // TODO
+  optional string rebalance = 4;
+  // TODO
+  optional string replicate = 5;
+}
+
+// Operator storage class
+message OperatorStorageClass {
+  // The StorageClass used to make database PVCs.
+  // If unset, the default storage class of Kubernetes is used.
+  optional string database = 2;
+  // The StorageClass used to make snapshot PVCs.
+  // If unset, the default storage class of Kubernetes is used.
+  optional string snapshot = 3;
+}
+
+// Operator Qdrant database config
+message OperatorQdrant {
+  // The config where to find images for Qdrant cluster
+  optional OperatorQdrantImage image = 1;
+  // storage contains the settings for the storage of the Qdrant cluster
+  optional OperatorQdrantStorage storage = 2;
+  // Qdrant DB log level
+  // Default is INFO.
+  optional qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel log_level = 3;
+  // Default Qdrant security context configuration
+  optional OperatorSecurityContext security_context = 4;
+  // Network policies configuration for the Qdrant databases
+  // TODO, not sure if needs to be exposed.
+  optional OperatorNetworkPolicy network_policies = 5;
+}
+
+// Network policies configuration for the Qdrant databases
+message OperatorNetworkPolicy {
+  // Whether or not NetworkPolicy management is enabled.
+  // If set to false, no NetworkPolicies will be created.
+  // Default is true.
+  optional bool enabled = 1;
+  // Ingress rules
+  repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 2;
+  // Egress rules
+  repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 3;
+}
+
+// Default Qdrant security context configuration
+message OperatorSecurityContext {
+  // Enable default security context.
+  // Default is false.
+  optional bool enabled = 1;
+  // Default user for qdrant container
+  optional string user = 2;
+  // Default fsGroup for qdrant container
+  optional string fs_group = 3;
+  // Default group for qdrant container
+  optional string group = 4;
+}
+
+// Storage contains the settings for the storage of the Qdrant cluster
+message OperatorQdrantStorage {
+  // Performance storage settings
+  optional OperatorQdrantPerformance performance = 1;
+}
+
+// Storage performance config
+message OperatorQdrantPerformance {
+  // CPU budget, how many CPUs (threads) to allocate for an optimization job.
+  // If 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size
+  // If negative - subtract this number of CPUs from the available CPUs.
+  // If positive - use this exact number of CPUs.
+  optional int32 optimizer_cpu_budget = 1;
+  // Enable async scorer which uses io_uring when rescoring.
+  // Only supported on Linux, must be enabled in your kernel.
+  // See: <https://qdrant.tech/articles/io_uring/#and-what-about-qdrant>
+  optional bool async_scorer = 2;
+}
+
+// config where to find the image for Qqdrant
+message OperatorQdrantImage {
+  // The repository where to find the image for qdrant
+  // Default is "qdrant/qdrant"
+  optional string repository = 1;
+  // Image pull policy
+  optional string pull_policy = 2;
+  // Image pull secret name
+  optional string pull_secret_name = 3;
+}

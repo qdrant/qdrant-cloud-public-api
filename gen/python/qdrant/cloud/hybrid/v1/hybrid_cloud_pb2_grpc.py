@@ -6,7 +6,8 @@ from qdrant.cloud.hybrid.v1 import hybrid_cloud_pb2 as qdrant_dot_cloud_dot_hybr
 
 
 class HybridCloudServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """HybridCloudService is the API used for configuring hybrid cloud environments.
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -14,30 +15,30 @@ class HybridCloudServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ListCloudEnvironments = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/ListCloudEnvironments',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsResponse.FromString,
+        self.ListHybridCloudEnvironments = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/ListHybridCloudEnvironments',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsResponse.FromString,
                 _registered_method=True)
-        self.GetCloudEnvironment = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/GetCloudEnvironment',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentResponse.FromString,
+        self.GetHybridCloudEnvironment = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentResponse.FromString,
                 _registered_method=True)
-        self.CreateCloudEnvironment = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/CreateCloudEnvironment',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentResponse.FromString,
+        self.CreateHybridCloudEnvironment = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/CreateHybridCloudEnvironment',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentResponse.FromString,
                 _registered_method=True)
-        self.UpdateCloudEnvironment = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateCloudEnvironment',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentResponse.FromString,
+        self.UpdateHybridCloudEnvironment = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateHybridCloudEnvironment',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentResponse.FromString,
                 _registered_method=True)
-        self.DeleteCloudEnvironment = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteCloudEnvironment',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentResponse.FromString,
+        self.DeleteHybridCloudEnvironment = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteHybridCloudEnvironment',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentResponse.FromString,
                 _registered_method=True)
         self.GetInitialInstallationCommand = channel.unary_unary(
                 '/qdrant.cloud.hybrid.v1.HybridCloudService/GetInitialInstallationCommand',
@@ -47,40 +48,58 @@ class HybridCloudServiceStub(object):
 
 
 class HybridCloudServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """HybridCloudService is the API used for configuring hybrid cloud environments.
+    """
 
-    def ListCloudEnvironments(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def ListHybridCloudEnvironments(self, request, context):
+        """Fetch all hybrid cloud environments in the account identified by the given ID.
+        Required permissions:
+        - read:hybrid_cloud_environments
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetCloudEnvironment(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def GetHybridCloudEnvironment(self, request, context):
+        """Fetch a hybrid cloud environment in the account identified by the given ID.
+        Required permissions:
+        - read:hybrid_cloud_environments
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateCloudEnvironment(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def CreateHybridCloudEnvironment(self, request, context):
+        """Creates a hybrid cloud environment in the account identified by the given ID.
+        Required permissions:
+        - write:hybrid_cloud_environments
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UpdateCloudEnvironment(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def UpdateHybridCloudEnvironment(self, request, context):
+        """Updates a hybrid cloud environment in the account identified by the given ID.
+        Required permissions:
+        - write:hybrid_cloud_environments
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteCloudEnvironment(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def DeleteHybridCloudEnvironment(self, request, context):
+        """Deletes a hybrid cloud environment in the account identified by the given ID.
+        Required permissions:
+        - delete:hybrid_cloud_environments
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInitialInstallationCommand(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Fetch the command that should be executed against a kubernetes cluster to
+        bootstrap it to the hybrid cloud environment
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -88,30 +107,30 @@ class HybridCloudServiceServicer(object):
 
 def add_HybridCloudServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ListCloudEnvironments': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListCloudEnvironments,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsResponse.SerializeToString,
+            'ListHybridCloudEnvironments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListHybridCloudEnvironments,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsResponse.SerializeToString,
             ),
-            'GetCloudEnvironment': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCloudEnvironment,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentResponse.SerializeToString,
+            'GetHybridCloudEnvironment': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetHybridCloudEnvironment,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentResponse.SerializeToString,
             ),
-            'CreateCloudEnvironment': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateCloudEnvironment,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentResponse.SerializeToString,
+            'CreateHybridCloudEnvironment': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateHybridCloudEnvironment,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentResponse.SerializeToString,
             ),
-            'UpdateCloudEnvironment': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateCloudEnvironment,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentResponse.SerializeToString,
+            'UpdateHybridCloudEnvironment': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateHybridCloudEnvironment,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentResponse.SerializeToString,
             ),
-            'DeleteCloudEnvironment': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteCloudEnvironment,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentResponse.SerializeToString,
+            'DeleteHybridCloudEnvironment': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteHybridCloudEnvironment,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentResponse.SerializeToString,
             ),
             'GetInitialInstallationCommand': grpc.unary_unary_rpc_method_handler(
                     servicer.GetInitialInstallationCommand,
@@ -127,10 +146,11 @@ def add_HybridCloudServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class HybridCloudService(object):
-    """Missing associated documentation comment in .proto file."""
+    """HybridCloudService is the API used for configuring hybrid cloud environments.
+    """
 
     @staticmethod
-    def ListCloudEnvironments(request,
+    def ListHybridCloudEnvironments(request,
             target,
             options=(),
             channel_credentials=None,
@@ -143,9 +163,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/ListCloudEnvironments',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListCloudEnvironmentsResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/ListHybridCloudEnvironments',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.ListHybridCloudEnvironmentsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -157,7 +177,7 @@ class HybridCloudService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetCloudEnvironment(request,
+    def GetHybridCloudEnvironment(request,
             target,
             options=(),
             channel_credentials=None,
@@ -170,9 +190,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/GetCloudEnvironment',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetCloudEnvironmentResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetHybridCloudEnvironmentResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -184,7 +204,7 @@ class HybridCloudService(object):
             _registered_method=True)
 
     @staticmethod
-    def CreateCloudEnvironment(request,
+    def CreateHybridCloudEnvironment(request,
             target,
             options=(),
             channel_credentials=None,
@@ -197,9 +217,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/CreateCloudEnvironment',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateCloudEnvironmentResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/CreateHybridCloudEnvironment',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.CreateHybridCloudEnvironmentResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -211,7 +231,7 @@ class HybridCloudService(object):
             _registered_method=True)
 
     @staticmethod
-    def UpdateCloudEnvironment(request,
+    def UpdateHybridCloudEnvironment(request,
             target,
             options=(),
             channel_credentials=None,
@@ -224,9 +244,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateCloudEnvironment',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateCloudEnvironmentResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateHybridCloudEnvironment',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.UpdateHybridCloudEnvironmentResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -238,7 +258,7 @@ class HybridCloudService(object):
             _registered_method=True)
 
     @staticmethod
-    def DeleteCloudEnvironment(request,
+    def DeleteHybridCloudEnvironment(request,
             target,
             options=(),
             channel_credentials=None,
@@ -251,9 +271,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteCloudEnvironment',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteCloudEnvironmentResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteHybridCloudEnvironment',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentResponse.FromString,
             options,
             channel_credentials,
             insecure,

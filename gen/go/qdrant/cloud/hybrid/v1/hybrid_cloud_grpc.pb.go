@@ -19,23 +19,42 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	HybridCloudService_ListCloudEnvironments_FullMethodName         = "/qdrant.cloud.hybrid.v1.HybridCloudService/ListCloudEnvironments"
-	HybridCloudService_GetCloudEnvironment_FullMethodName           = "/qdrant.cloud.hybrid.v1.HybridCloudService/GetCloudEnvironment"
-	HybridCloudService_CreateCloudEnvironment_FullMethodName        = "/qdrant.cloud.hybrid.v1.HybridCloudService/CreateCloudEnvironment"
-	HybridCloudService_UpdateCloudEnvironment_FullMethodName        = "/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateCloudEnvironment"
-	HybridCloudService_DeleteCloudEnvironment_FullMethodName        = "/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteCloudEnvironment"
+	HybridCloudService_ListHybridCloudEnvironments_FullMethodName   = "/qdrant.cloud.hybrid.v1.HybridCloudService/ListHybridCloudEnvironments"
+	HybridCloudService_GetHybridCloudEnvironment_FullMethodName     = "/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment"
+	HybridCloudService_CreateHybridCloudEnvironment_FullMethodName  = "/qdrant.cloud.hybrid.v1.HybridCloudService/CreateHybridCloudEnvironment"
+	HybridCloudService_UpdateHybridCloudEnvironment_FullMethodName  = "/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateHybridCloudEnvironment"
+	HybridCloudService_DeleteHybridCloudEnvironment_FullMethodName  = "/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteHybridCloudEnvironment"
 	HybridCloudService_GetInitialInstallationCommand_FullMethodName = "/qdrant.cloud.hybrid.v1.HybridCloudService/GetInitialInstallationCommand"
 )
 
 // HybridCloudServiceClient is the client API for HybridCloudService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceClient interface {
-	ListCloudEnvironments(ctx context.Context, in *ListCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListCloudEnvironmentsResponse, error)
-	GetCloudEnvironment(ctx context.Context, in *GetCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetCloudEnvironmentResponse, error)
-	CreateCloudEnvironment(ctx context.Context, in *CreateCloudEnvironmentRequest, opts ...grpc.CallOption) (*CreateCloudEnvironmentResponse, error)
-	UpdateCloudEnvironment(ctx context.Context, in *UpdateCloudEnvironmentRequest, opts ...grpc.CallOption) (*UpdateCloudEnvironmentResponse, error)
-	DeleteCloudEnvironment(ctx context.Context, in *DeleteCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteCloudEnvironmentResponse, error)
+	// Fetch all hybrid cloud environments in the account identified by the given ID.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	ListHybridCloudEnvironments(ctx context.Context, in *ListHybridCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListHybridCloudEnvironmentsResponse, error)
+	// Fetch a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	GetHybridCloudEnvironment(ctx context.Context, in *GetHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetHybridCloudEnvironmentResponse, error)
+	// Creates a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - write:hybrid_cloud_environments
+	CreateHybridCloudEnvironment(ctx context.Context, in *CreateHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*CreateHybridCloudEnvironmentResponse, error)
+	// Updates a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - write:hybrid_cloud_environments
+	UpdateHybridCloudEnvironment(ctx context.Context, in *UpdateHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*UpdateHybridCloudEnvironmentResponse, error)
+	// Deletes a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - delete:hybrid_cloud_environments
+	DeleteHybridCloudEnvironment(ctx context.Context, in *DeleteHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteHybridCloudEnvironmentResponse, error)
+	// Fetch the command that should be executed against a kubernetes cluster to
+	// bootstrap it to the hybrid cloud environment
 	GetInitialInstallationCommand(ctx context.Context, in *GetInitialInstallationCommandRequest, opts ...grpc.CallOption) (*GetInitialInstallationCommandResponse, error)
 }
 
@@ -47,50 +66,50 @@ func NewHybridCloudServiceClient(cc grpc.ClientConnInterface) HybridCloudService
 	return &hybridCloudServiceClient{cc}
 }
 
-func (c *hybridCloudServiceClient) ListCloudEnvironments(ctx context.Context, in *ListCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListCloudEnvironmentsResponse, error) {
+func (c *hybridCloudServiceClient) ListHybridCloudEnvironments(ctx context.Context, in *ListHybridCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListHybridCloudEnvironmentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCloudEnvironmentsResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_ListCloudEnvironments_FullMethodName, in, out, cOpts...)
+	out := new(ListHybridCloudEnvironmentsResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_ListHybridCloudEnvironments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hybridCloudServiceClient) GetCloudEnvironment(ctx context.Context, in *GetCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetCloudEnvironmentResponse, error) {
+func (c *hybridCloudServiceClient) GetHybridCloudEnvironment(ctx context.Context, in *GetHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetHybridCloudEnvironmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCloudEnvironmentResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_GetCloudEnvironment_FullMethodName, in, out, cOpts...)
+	out := new(GetHybridCloudEnvironmentResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_GetHybridCloudEnvironment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hybridCloudServiceClient) CreateCloudEnvironment(ctx context.Context, in *CreateCloudEnvironmentRequest, opts ...grpc.CallOption) (*CreateCloudEnvironmentResponse, error) {
+func (c *hybridCloudServiceClient) CreateHybridCloudEnvironment(ctx context.Context, in *CreateHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*CreateHybridCloudEnvironmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateCloudEnvironmentResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_CreateCloudEnvironment_FullMethodName, in, out, cOpts...)
+	out := new(CreateHybridCloudEnvironmentResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_CreateHybridCloudEnvironment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hybridCloudServiceClient) UpdateCloudEnvironment(ctx context.Context, in *UpdateCloudEnvironmentRequest, opts ...grpc.CallOption) (*UpdateCloudEnvironmentResponse, error) {
+func (c *hybridCloudServiceClient) UpdateHybridCloudEnvironment(ctx context.Context, in *UpdateHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*UpdateHybridCloudEnvironmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateCloudEnvironmentResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_UpdateCloudEnvironment_FullMethodName, in, out, cOpts...)
+	out := new(UpdateHybridCloudEnvironmentResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_UpdateHybridCloudEnvironment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hybridCloudServiceClient) DeleteCloudEnvironment(ctx context.Context, in *DeleteCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteCloudEnvironmentResponse, error) {
+func (c *hybridCloudServiceClient) DeleteHybridCloudEnvironment(ctx context.Context, in *DeleteHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteHybridCloudEnvironmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteCloudEnvironmentResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_DeleteCloudEnvironment_FullMethodName, in, out, cOpts...)
+	out := new(DeleteHybridCloudEnvironmentResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_DeleteHybridCloudEnvironment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -110,12 +129,31 @@ func (c *hybridCloudServiceClient) GetInitialInstallationCommand(ctx context.Con
 // HybridCloudServiceServer is the server API for HybridCloudService service.
 // All implementations must embed UnimplementedHybridCloudServiceServer
 // for forward compatibility.
+//
+// HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceServer interface {
-	ListCloudEnvironments(context.Context, *ListCloudEnvironmentsRequest) (*ListCloudEnvironmentsResponse, error)
-	GetCloudEnvironment(context.Context, *GetCloudEnvironmentRequest) (*GetCloudEnvironmentResponse, error)
-	CreateCloudEnvironment(context.Context, *CreateCloudEnvironmentRequest) (*CreateCloudEnvironmentResponse, error)
-	UpdateCloudEnvironment(context.Context, *UpdateCloudEnvironmentRequest) (*UpdateCloudEnvironmentResponse, error)
-	DeleteCloudEnvironment(context.Context, *DeleteCloudEnvironmentRequest) (*DeleteCloudEnvironmentResponse, error)
+	// Fetch all hybrid cloud environments in the account identified by the given ID.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	ListHybridCloudEnvironments(context.Context, *ListHybridCloudEnvironmentsRequest) (*ListHybridCloudEnvironmentsResponse, error)
+	// Fetch a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - read:hybrid_cloud_environments
+	GetHybridCloudEnvironment(context.Context, *GetHybridCloudEnvironmentRequest) (*GetHybridCloudEnvironmentResponse, error)
+	// Creates a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - write:hybrid_cloud_environments
+	CreateHybridCloudEnvironment(context.Context, *CreateHybridCloudEnvironmentRequest) (*CreateHybridCloudEnvironmentResponse, error)
+	// Updates a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - write:hybrid_cloud_environments
+	UpdateHybridCloudEnvironment(context.Context, *UpdateHybridCloudEnvironmentRequest) (*UpdateHybridCloudEnvironmentResponse, error)
+	// Deletes a hybrid cloud environment in the account identified by the given ID.
+	// Required permissions:
+	// - delete:hybrid_cloud_environments
+	DeleteHybridCloudEnvironment(context.Context, *DeleteHybridCloudEnvironmentRequest) (*DeleteHybridCloudEnvironmentResponse, error)
+	// Fetch the command that should be executed against a kubernetes cluster to
+	// bootstrap it to the hybrid cloud environment
 	GetInitialInstallationCommand(context.Context, *GetInitialInstallationCommandRequest) (*GetInitialInstallationCommandResponse, error)
 	mustEmbedUnimplementedHybridCloudServiceServer()
 }
@@ -127,20 +165,20 @@ type HybridCloudServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedHybridCloudServiceServer struct{}
 
-func (UnimplementedHybridCloudServiceServer) ListCloudEnvironments(context.Context, *ListCloudEnvironmentsRequest) (*ListCloudEnvironmentsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCloudEnvironments not implemented")
+func (UnimplementedHybridCloudServiceServer) ListHybridCloudEnvironments(context.Context, *ListHybridCloudEnvironmentsRequest) (*ListHybridCloudEnvironmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListHybridCloudEnvironments not implemented")
 }
-func (UnimplementedHybridCloudServiceServer) GetCloudEnvironment(context.Context, *GetCloudEnvironmentRequest) (*GetCloudEnvironmentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCloudEnvironment not implemented")
+func (UnimplementedHybridCloudServiceServer) GetHybridCloudEnvironment(context.Context, *GetHybridCloudEnvironmentRequest) (*GetHybridCloudEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHybridCloudEnvironment not implemented")
 }
-func (UnimplementedHybridCloudServiceServer) CreateCloudEnvironment(context.Context, *CreateCloudEnvironmentRequest) (*CreateCloudEnvironmentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCloudEnvironment not implemented")
+func (UnimplementedHybridCloudServiceServer) CreateHybridCloudEnvironment(context.Context, *CreateHybridCloudEnvironmentRequest) (*CreateHybridCloudEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateHybridCloudEnvironment not implemented")
 }
-func (UnimplementedHybridCloudServiceServer) UpdateCloudEnvironment(context.Context, *UpdateCloudEnvironmentRequest) (*UpdateCloudEnvironmentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCloudEnvironment not implemented")
+func (UnimplementedHybridCloudServiceServer) UpdateHybridCloudEnvironment(context.Context, *UpdateHybridCloudEnvironmentRequest) (*UpdateHybridCloudEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHybridCloudEnvironment not implemented")
 }
-func (UnimplementedHybridCloudServiceServer) DeleteCloudEnvironment(context.Context, *DeleteCloudEnvironmentRequest) (*DeleteCloudEnvironmentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteCloudEnvironment not implemented")
+func (UnimplementedHybridCloudServiceServer) DeleteHybridCloudEnvironment(context.Context, *DeleteHybridCloudEnvironmentRequest) (*DeleteHybridCloudEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHybridCloudEnvironment not implemented")
 }
 func (UnimplementedHybridCloudServiceServer) GetInitialInstallationCommand(context.Context, *GetInitialInstallationCommandRequest) (*GetInitialInstallationCommandResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInitialInstallationCommand not implemented")
@@ -166,92 +204,92 @@ func RegisterHybridCloudServiceServer(s grpc.ServiceRegistrar, srv HybridCloudSe
 	s.RegisterService(&HybridCloudService_ServiceDesc, srv)
 }
 
-func _HybridCloudService_ListCloudEnvironments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCloudEnvironmentsRequest)
+func _HybridCloudService_ListHybridCloudEnvironments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHybridCloudEnvironmentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).ListCloudEnvironments(ctx, in)
+		return srv.(HybridCloudServiceServer).ListHybridCloudEnvironments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_ListCloudEnvironments_FullMethodName,
+		FullMethod: HybridCloudService_ListHybridCloudEnvironments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).ListCloudEnvironments(ctx, req.(*ListCloudEnvironmentsRequest))
+		return srv.(HybridCloudServiceServer).ListHybridCloudEnvironments(ctx, req.(*ListHybridCloudEnvironmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HybridCloudService_GetCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCloudEnvironmentRequest)
+func _HybridCloudService_GetHybridCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHybridCloudEnvironmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).GetCloudEnvironment(ctx, in)
+		return srv.(HybridCloudServiceServer).GetHybridCloudEnvironment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_GetCloudEnvironment_FullMethodName,
+		FullMethod: HybridCloudService_GetHybridCloudEnvironment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).GetCloudEnvironment(ctx, req.(*GetCloudEnvironmentRequest))
+		return srv.(HybridCloudServiceServer).GetHybridCloudEnvironment(ctx, req.(*GetHybridCloudEnvironmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HybridCloudService_CreateCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateCloudEnvironmentRequest)
+func _HybridCloudService_CreateHybridCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateHybridCloudEnvironmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).CreateCloudEnvironment(ctx, in)
+		return srv.(HybridCloudServiceServer).CreateHybridCloudEnvironment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_CreateCloudEnvironment_FullMethodName,
+		FullMethod: HybridCloudService_CreateHybridCloudEnvironment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).CreateCloudEnvironment(ctx, req.(*CreateCloudEnvironmentRequest))
+		return srv.(HybridCloudServiceServer).CreateHybridCloudEnvironment(ctx, req.(*CreateHybridCloudEnvironmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HybridCloudService_UpdateCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCloudEnvironmentRequest)
+func _HybridCloudService_UpdateHybridCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHybridCloudEnvironmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).UpdateCloudEnvironment(ctx, in)
+		return srv.(HybridCloudServiceServer).UpdateHybridCloudEnvironment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_UpdateCloudEnvironment_FullMethodName,
+		FullMethod: HybridCloudService_UpdateHybridCloudEnvironment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).UpdateCloudEnvironment(ctx, req.(*UpdateCloudEnvironmentRequest))
+		return srv.(HybridCloudServiceServer).UpdateHybridCloudEnvironment(ctx, req.(*UpdateHybridCloudEnvironmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HybridCloudService_DeleteCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteCloudEnvironmentRequest)
+func _HybridCloudService_DeleteHybridCloudEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteHybridCloudEnvironmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).DeleteCloudEnvironment(ctx, in)
+		return srv.(HybridCloudServiceServer).DeleteHybridCloudEnvironment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_DeleteCloudEnvironment_FullMethodName,
+		FullMethod: HybridCloudService_DeleteHybridCloudEnvironment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).DeleteCloudEnvironment(ctx, req.(*DeleteCloudEnvironmentRequest))
+		return srv.(HybridCloudServiceServer).DeleteHybridCloudEnvironment(ctx, req.(*DeleteHybridCloudEnvironmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -282,24 +320,24 @@ var HybridCloudService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*HybridCloudServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListCloudEnvironments",
-			Handler:    _HybridCloudService_ListCloudEnvironments_Handler,
+			MethodName: "ListHybridCloudEnvironments",
+			Handler:    _HybridCloudService_ListHybridCloudEnvironments_Handler,
 		},
 		{
-			MethodName: "GetCloudEnvironment",
-			Handler:    _HybridCloudService_GetCloudEnvironment_Handler,
+			MethodName: "GetHybridCloudEnvironment",
+			Handler:    _HybridCloudService_GetHybridCloudEnvironment_Handler,
 		},
 		{
-			MethodName: "CreateCloudEnvironment",
-			Handler:    _HybridCloudService_CreateCloudEnvironment_Handler,
+			MethodName: "CreateHybridCloudEnvironment",
+			Handler:    _HybridCloudService_CreateHybridCloudEnvironment_Handler,
 		},
 		{
-			MethodName: "UpdateCloudEnvironment",
-			Handler:    _HybridCloudService_UpdateCloudEnvironment_Handler,
+			MethodName: "UpdateHybridCloudEnvironment",
+			Handler:    _HybridCloudService_UpdateHybridCloudEnvironment_Handler,
 		},
 		{
-			MethodName: "DeleteCloudEnvironment",
-			Handler:    _HybridCloudService_DeleteCloudEnvironment_Handler,
+			MethodName: "DeleteHybridCloudEnvironment",
+			Handler:    _HybridCloudService_DeleteHybridCloudEnvironment_Handler,
 		},
 		{
 			MethodName: "GetInitialInstallationCommand",

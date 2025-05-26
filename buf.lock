@@ -4,6 +4,9 @@ deps:
   - name: buf.build/bufbuild/protovalidate
     commit: b52ab10f44684cb19d1fbcad56aedd36
     digest: b5:5f464399f5ea7546eb3c6a4e822a306da538298f3d87e9f974f4523d4955de396eb2b8b52a2f3f06ac290764d80cecbaa0a4c96560558e43d9b1c722e61a9d5c
+  - name: buf.build/common/protos
+    commit: 8e61745a05234b5ca6985e15b97c61fd
+    digest: b5:8acdce29fe0c82245aee65361d7400aaa6b95df4a65ded8ff2465cafc09928039ab846ceff30b14bad7678c53a1d7554c76b868afde31d919f7b10f9e3c2898c
   - name: buf.build/googleapis/googleapis
     commit: 61b203b9a9164be9a834f58c37be6f62
     digest: b5:7811a98b35bd2e4ae5c3ac73c8b3d9ae429f3a790da15de188dc98fc2b77d6bb10e45711f14903af9553fa9821dff256054f2e4b7795789265bc476bec2f088c
