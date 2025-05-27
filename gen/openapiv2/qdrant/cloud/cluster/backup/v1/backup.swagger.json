@@ -474,6 +474,10 @@
             "backupDuration": {
               "type": "string",
               "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+            },
+            "backupScheduleId": {
+              "type": "string",
+              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
             }
           },
           "description": "The actual backup.",
@@ -628,6 +632,10 @@
         "backupDuration": {
           "type": "string",
           "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+        },
+        "backupScheduleId": {
+          "type": "string",
+          "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
         }
       },
       "description": "A Backup represents a backup of a Qdrant database."
