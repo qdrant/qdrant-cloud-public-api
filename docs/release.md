@@ -2,7 +2,7 @@
 
 This document explains how to release a new version of the generated libraries (Python, JavaScript, etc.) from the proto repository.
 > **Note:**  
-> Only python is supported for now, but the process is designed to be extensible for JavaScript or other languages in the future.
+> Only python and typescript is supported for now, but the process is designed to be extensible for other languages in the future.
 
 ---
 ## Release Steps
@@ -26,16 +26,15 @@ Once the branch is pushed:
 - A GitHub Actions workflow will trigger automatically.
 - The workflow will:
   - Inject the version into the generated client(s) dynamically.
-  - Build the Python package (qdrant-cloud-public-api).
-  - Upload the Python package to the Google Artifact Registry.
-  - (Future extension: Publish JavaScript packages, if needed.)
+  - Build the Python and Typescript package (qdrant-cloud-public-api).
+  - Upload the Python and Typescript package to the Google Artifact Registry.
 
 ---
 
 ## How Versioning Works
-- The version in pyproject.toml is automatically replaced by the version from Git branch name during the build.
-- Example: if the pushed branch is releases/v1.3.0, the final Python package version will be 1.3.0.
-- Developers should not manually edit the version field in pyproject.toml.
+- The version in pyproject.toml and package.json is automatically replaced by the version from Git branch name during the build.
+- Example: if the pushed branch is releases/v1.3.0, the final Python/Typescript package version will be 1.3.0.
+- Developers should not manually edit the version field in pyproject.toml or package.json.
 
 Inside pyproject.toml, you will see:
 ```toml
@@ -43,6 +42,14 @@ Inside pyproject.toml, you will see:
 version = "0.0.0"
 ```
 This is normal.
+Same for package.json:
+```json
+{
+  "name": "@qdrant/qdrant-cloud-public-api",
+  "version": "0.0.0",
+  ...
+}
+```
 
 ---
 

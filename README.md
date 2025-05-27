@@ -47,26 +47,67 @@ import (
 
 ### Python projects
 
-First you need to install the repository as a package:
+- Make sure you are authorised to gcloud. `gcloud auth application-default login`
 
-``` sh
-uv add "git+https://github.com/qdrant/qdrant-cloud-public-api"
-```
-
-Then you can import the generated code in your python project. Ex:
-
-```python
-from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
-from qdrant.cloud.booking.v2.booking_pb2 import ListPackagesRequest
+- Install the package:
+    ``` sh
+    # install auth tool
+    uv tool install keyring --with keyrings.google-artifactregistry-auth --force
+    # install
+    uv add qdrant-cloud-public-api --keyring-provider subprocess  --index https://oauth2accesstoken@us-python.pkg.dev/qdrant-cloud/python/simple
+    ```
 
 
-def main():
-    print(BookingServiceServicer)
-    print(ListPackagesRequest)
+- Now you can import the generated code in your python project. Ex:
+
+    ```python
+    from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
+    from qdrant.cloud.booking.v2.booking_pb2 import ListPackagesRequest
+    
+    
+    def main():
+        print(BookingServiceServicer)
+        print(ListPackagesRequest)
+    
+    
+    if __name__ == "__main__":
+        main()
+    ```
 
 
-if __name__ == "__main__":
-    main()
-```
+### Typescript projects
+
+- Make sure you are authorised to gcloud. `gcloud auth application-default login`
+- Create `.npmrc` file in the root of your project with the following content:
+    ```text
+    @qdrant:registry=https://us-npm.pkg.dev/qdrant-cloud/npm/
+    //us-npm.pkg.dev/qdrant-cloud/npm/:always-auth=true
+    ```
+- Add auth script to your package.json file:
+    ```json
+      "scripts": {
+        ...
+        "artifactregistry-login": "npx --registry=https://registry.npmjs.org google-artifactregistry-auth"
+        ...
+      },
+    ```
+- Run the auth script:
+    ```shell
+    npm run artifactregistry-login
+    ```
+- Install the package:
+    ``` sh
+    npm  install @qdrant/qdrant-cloud-public-api
+    ```
+
+- Now you can import the generated code in your typescript project. Ex:
+
+  ```typescript
+  import * as grpc from '@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/v1/cluster_pb.js';
+  import { DatabaseApiKeyService } from "@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/auth/v1/database_api_key_pb.js";
+  
+  console.log('Loaded service definition keys:', Object.keys(grpc));
+  console.log(DatabaseApiKeyService);
+  ```
 
 ## [Release Process](docs/release.md)

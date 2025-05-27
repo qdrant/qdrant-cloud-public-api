@@ -1,20 +1,19 @@
-name: Upload Python Package to GCP Artifact Registry
+name: Upload Python and JS Packages to GCP Artifact Registry
 
 on:
   push:
     branches:
       - "releases/v*"
 
-
 jobs:
-  Release:
-    name: Release Workflow
+  python-release:
+    name: Python Release
     runs-on: ubuntu-latest
 
     permissions:
-      pull-requests: write    # write permission is required to create a github release
-      contents: write         # allow pushing tags
-      id-token: write         # needed for authentication since we are using Workload Identity Federation
+      pull-requests: write
+      contents: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -26,53 +25,100 @@ jobs:
           # Install a specific version of uv.
           version: "0.7.0"
 
-      - name: "Set up Python"
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: "pyproject.toml"
-      - run: |
-          make python/dev-install
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
+      - run: make python/dev-install
+
+      - name: "Shared: Auth + Version Info"
+        uses: ./.github/actions/shared-setup
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          version_source: ${{ github.ref }}
+          target: python
 
-      - name: Configure gcloud
+      - name: Configure gcloud for Python
         run: |
           gcloud config set project qdrant-cloud
-          gcloud config set artifacts/repository python
           gcloud config set artifacts/location us
+          gcloud config set artifacts/repository python
 
-      - name: Set version in pyproject.toml from branch name
+      - name: Build and upload Python package
         run: |
-          VERSION="${GITHUB_REF##*/}"        # e.g., v1.1.1
-          STRIPPED_VERSION="${VERSION#v}"    # e.g., 1.1.1
-          
-          echo "Detected version: $VERSION"
-          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
-          echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
-          
-          sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
-
-      - name: Build the package
-        run: |
-           uv build
-
-      - name: Upload to Artifact Registry
-        run: |
+          uv build
           uv run twine upload \
             --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
             --username oauth2accesstoken \
             --password "$(gcloud auth print-access-token)" \
             dist/*
-      
-      - name: Tag Release
-        shell: bash
+
+  js-release:
+    name: Node.js Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: "Shared: Auth + Version Info"
+        uses: ./.github/actions/shared-setup
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          version_source: ${{ github.ref }}
+          target: node
+
+      - name: Move build output to publish root
         run: |
-          git tag ${{ env.RELEASE_VERSION }}
-          git push origin ${{ env.RELEASE_VERSION }}
+          mkdir -p npm_publish
+          cp -r gen/typescript/* npm_publish/
+          cp package.example.json npm_publish/package.json
+          cp .npmrc npm_publish/
+          cp README.md npm_publish/ || true
+
+      - name: Refresh the access token for connecting to the repository
+        working-directory: npm_publish
+        run: npm run artifactregistry-login
+
+      - name: Publish JS package
+        working-directory: npm_publish
+        run: npm publish
+  finalize-release:
+    name: Finalize Release
+    runs-on: ubuntu-latest
+
+    needs:
+      - python-release
+      - js-release
+
+    permissions:
+      pull-requests: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Tag Release
+        run: |
+          VERSION="${GITHUB_REF##*/}"  # from 'refs/heads/releases/v1.2.1' → 'v1.2.1'
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+          git tag "$VERSION"
+          git push origin tag "$VERSION"
 
       - name: Publish Release Notes
         uses: release-drafter/release-drafter@v6

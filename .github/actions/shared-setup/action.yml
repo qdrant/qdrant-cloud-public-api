@@ -1,0 +1,38 @@
+name: "Shared Setup"
+description: "GCP auth and version environment setup"
+inputs:
+  workload_identity_provider:
+    required: true
+    description: "The Workload Identity Provider to use for authentication"
+  service_account:
+    required: true
+    description: "The Service Account to impersonate"
+  version_source:
+    required: true
+    description: "The source of the version to set, typically the branch name"
+  target:
+    required: true
+    description: "The target language for the versioning, either 'python' or 'node'"
+runs:
+  using: "composite"
+  steps:
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+
+    - name: Extract version from branch name
+      shell: bash
+      run: |
+        VERSION="${{ inputs.version_source##*/ }}"
+        STRIPPED_VERSION="${VERSION#v}"
+
+        echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+        echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
+
+        if [ "${{ inputs.target }}" = "python" ]; then
+          sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
+        elif [ "${{ inputs.target }}" = "node" ]; then
+          jq --arg version "$STRIPPED_VERSION" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
+        fi
