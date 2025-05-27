@@ -24,15 +24,18 @@ runs:
 
     - name: Extract version from branch name
       shell: bash
+      env:
+        INPUT_VERSION_SOURCE: ${{ inputs.version_source }}
+        INPUT_TARGET: ${{ inputs.target }}
       run: |
-        VERSION="${{ inputs.version_source##*/ }}"
+        VERSION="${INPUT_VERSION_SOURCE##*/}"
         STRIPPED_VERSION="${VERSION#v}"
-
+    
         echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
-
-        if [ "${{ inputs.target }}" = "python" ]; then
+    
+        if [ "${INPUT_TARGET}" = "python" ]; then
           sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
-        elif [ "${{ inputs.target }}" = "node" ]; then
+        elif [ "${INPUT_TARGET}" = "node" ]; then
           jq --arg version "$STRIPPED_VERSION" '.version = $version' package.json > tmp.$$.json && mv tmp.$$.json package.json
         fi
