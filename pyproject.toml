@@ -16,12 +16,11 @@ Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
 
 # Consider this as *happens in the time of `sdist` creation* i.e. at the time of packaging.
 [tool.hatch.build.targets.sdist]
-# Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
-packages = ["gen/python/qdrant", "gen/python/google", "gen/python/buf"]
+include = ["gen/python/qdrant", "gen/python/google", "gen/python/buf"]
 
 [tool.hatch.build.targets.wheel]
-# Here we already have shortened packages, due to `packages` in `sdist`
-packages = ["qdrant", "google", "buf"]
+# Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
+packages = ["gen/python/qdrant", "gen/python/google", "gen/python/buf"]
 
 
 [build-system]
