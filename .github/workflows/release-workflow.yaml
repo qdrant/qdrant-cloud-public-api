@@ -85,7 +85,7 @@ jobs:
         run: |
           mkdir -p npm_publish
           cp -r gen/typescript/* npm_publish/
-          cp package.example.json npm_publish/package.json
+          cp package.json npm_publish/package.json
           cp .npmrc npm_publish/
           cp README.md npm_publish/ || true
 
