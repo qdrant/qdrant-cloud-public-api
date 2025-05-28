@@ -193,7 +193,7 @@ class DeleteBackupScheduleResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Backup(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "backup_duration")
+    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "backup_duration", "backup_schedule_id")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -202,6 +202,7 @@ class Backup(_message.Message):
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     BACKUP_DURATION_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_SCHEDULE_ID_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -210,7 +211,8 @@ class Backup(_message.Message):
     status: BackupStatus
     deleted_at: _timestamp_pb2.Timestamp
     backup_duration: _duration_pb2.Duration
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ...) -> None: ...
+    backup_schedule_id: str
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "cluster_id", "schedule", "retention_period", "deleted_at", "status")

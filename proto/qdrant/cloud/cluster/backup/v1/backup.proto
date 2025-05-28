@@ -323,6 +323,9 @@ message Backup {
   // will be available after the backup process is completed, regardless of
   // whether it succeeded or failed.
   google.protobuf.Duration backup_duration = 8;
+  // The identifier of the backup schedule (in GUID format).
+  // This is a read-only field and will be present if the backup was created by a backup schedule.
+  optional string backup_schedule_id = 9 [(buf.validate.field).string = {uuid: true}];
 }
 
 // BackupScheduleStatus represents the current status of a backup schedule.

@@ -558,6 +558,14 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: google.protobuf.Duration backup_duration = 8;
    */
   backupDuration?: Duration;
+
+  /**
+   * The identifier of the backup schedule (in GUID format).
+   * This is a read-only field and will be present if the backup was created by a backup schedule.
+   *
+   * @generated from field: optional string backup_schedule_id = 9;
+   */
+  backupScheduleId?: string;
 };
 
 /**
