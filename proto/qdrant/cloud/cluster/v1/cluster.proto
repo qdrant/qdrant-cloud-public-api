@@ -632,6 +632,8 @@ message ClusterState {
   // The resources used by the cluster per node.
   // For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
   ClusterNodeResourcesSummary resources = 7;
+  // Whether the cluster can be scaled up or down.
+  ClusterScalabilityInfo scalability_info = 8;
 }
 
 // Endpoint information to access the qdrant cluster (aka database).
@@ -670,6 +672,25 @@ message ClusterNodeResources {
   double reserved = 4;
   // The available is the total (base+complimentary+additional) - reserved
   double available = 5;
+}
+
+// ClusterScalabilityStatus defines the scalability states of a cluster.
+enum ClusterScalabilityStatus {
+  // Scalability status is unspecified.
+  CLUSTER_SCALABILITY_STATUS_UNSPECIFIED = 0;
+  // The cluster is not scalable.
+  CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE = 1;
+  // The cluster supports scaling operations.
+  CLUSTER_SCALABILITY_STATUS_SCALABLE = 2;
+}
+
+// ClusterScalabilityInfo provides information about the
+message ClusterScalabilityInfo {
+  // The current scalability status of the cluster.
+  ClusterScalabilityStatus status = 1;
+  // Optional human-readable reason providing more context about the scalability status.
+  // When a cluster is not scalable, this field explains why.
+  optional string reason = 2;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
