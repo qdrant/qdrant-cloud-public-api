@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/featureflag/v1/featureflag.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FeatureFlagService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/featureflag/v1/flags": {
+      "get": {
+        "summary": "List all feature flags.",
+        "operationId": "FeatureFlagService_ListFeatureFlags",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListFeatureFlagsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "FeatureFlagService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1FeatureFlag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier of the feature flag."
+        },
+        "status": {
+          "$ref": "#/definitions/v1FeatureFlagStatus",
+          "title": "Is it enabled or not"
+        }
+      },
+      "title": "A single feature flag definition.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1FeatureFlagStatus": {
+      "type": "string",
+      "enum": [
+        "FEATURE_FLAG_STATUS_UNSPECIFIED",
+        "FEATURE_FLAG_STATUS_ENABLED",
+        "FEATURE_FLAG_STATUS_DISABLED"
+      ],
+      "default": "FEATURE_FLAG_STATUS_UNSPECIFIED",
+      "description": "FeatureFlagStatus defines the activation state of a flag.\n\n - FEATURE_FLAG_STATUS_UNSPECIFIED: Unspecified feature flag status.\n - FEATURE_FLAG_STATUS_ENABLED: The feature flag is enabled.\n - FEATURE_FLAG_STATUS_DISABLED: The feature flag is disabled."
+    },
+    "v1ListFeatureFlagsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1FeatureFlag"
+          },
+          "description": "The actual feature flags in this list."
+        }
+      },
+      "description": "Response containing a list of feature flags."
+    }
+  }
+}
