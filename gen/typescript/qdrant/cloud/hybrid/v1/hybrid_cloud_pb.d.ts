@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { OperatorConfiguration } from "./operator_pb.js";
+import type { NetworkPolicyEgressRule, NetworkPolicyIngressRule } from "../../../../k8s.io/api/networking/v1/generated_pb.js";
 import type { Toleration } from "../../cluster/v1/cluster_pb.js";
 import type { KeyValue } from "../../common/v1/common_pb.js";
 
@@ -15,55 +15,55 @@ import type { KeyValue } from "../../common/v1/common_pb.js";
 export declare const file_qdrant_cloud_hybrid_v1_hybrid_cloud: GenFile;
 
 /**
- * GetInitialInstallationCommandRequest is the request for GetInitialInstallationCommand function
+ * GetBootstrapCommandsRequest is the request for GetBootstrapCommands function
  *
- * @generated from message qdrant.cloud.hybrid.v1.GetInitialInstallationCommandRequest
+ * @generated from message qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest
  */
-export declare type GetInitialInstallationCommandRequest = Message<"qdrant.cloud.hybrid.v1.GetInitialInstallationCommandRequest"> & {
+export declare type GetBootstrapCommandsRequest = Message<"qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
   /**
    * The identifier for the hybrid cloud environment (in GUID format).
    * It should be part of the provided account.
    * This is a required field.
    *
-   * @generated from field: string hybrid_cloud_environment_id = 1;
+   * @generated from field: string hybrid_cloud_environment_id = 2;
    */
   hybridCloudEnvironmentId: string;
-
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 2;
-   */
-  accountId: string;
 };
 
 /**
- * Describes the message qdrant.cloud.hybrid.v1.GetInitialInstallationCommandRequest.
- * Use `create(GetInitialInstallationCommandRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest.
+ * Use `create(GetBootstrapCommandsRequestSchema)` to create a new message.
  */
-export declare const GetInitialInstallationCommandRequestSchema: GenMessage<GetInitialInstallationCommandRequest>;
+export declare const GetBootstrapCommandsRequestSchema: GenMessage<GetBootstrapCommandsRequest>;
 
 /**
- * GetInitialInstallationCommandResponse is the response for GetInitialInstallationCommand function
+ * GetBootstrapCommandsResponse is the response for GetBootstrapCommands function
  *
- * @generated from message qdrant.cloud.hybrid.v1.GetInitialInstallationCommandResponse
+ * @generated from message qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse
  */
-export declare type GetInitialInstallationCommandResponse = Message<"qdrant.cloud.hybrid.v1.GetInitialInstallationCommandResponse"> & {
+export declare type GetBootstrapCommandsResponse = Message<"qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse"> & {
   /**
-   * Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment
+   * Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
    * `kubectl` and `helm` CLIs are required for execution.
    *
-   * @generated from field: string command = 1;
+   * @generated from field: repeated string commands = 1;
    */
-  command: string;
+  commands: string[];
 };
 
 /**
- * Describes the message qdrant.cloud.hybrid.v1.GetInitialInstallationCommandResponse.
- * Use `create(GetInitialInstallationCommandResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse.
+ * Use `create(GetBootstrapCommandsResponseSchema)` to create a new message.
  */
-export declare const GetInitialInstallationCommandResponseSchema: GenMessage<GetInitialInstallationCommandResponse>;
+export declare const GetBootstrapCommandsResponseSchema: GenMessage<GetBootstrapCommandsResponse>;
 
 /**
  * DeleteHybridCloudEnvironmentRequest is the request for DeleteHybridCloudEnvironment function
@@ -72,21 +72,21 @@ export declare const GetInitialInstallationCommandResponseSchema: GenMessage<Get
  */
 export declare type DeleteHybridCloudEnvironmentRequest = Message<"qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest"> & {
   /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
    * The identifier for the hybrid cloud environment (in GUID format).
    * It should be part of the provided account.
    * This is a required field.
    *
-   * @generated from field: string hybrid_cloud_environment_id = 1;
+   * @generated from field: string hybrid_cloud_environment_id = 2;
    */
   hybridCloudEnvironmentId: string;
-
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 2;
-   */
-  accountId: string;
 };
 
 /**
@@ -198,21 +198,21 @@ export declare const CreateHybridCloudEnvironmentResponseSchema: GenMessage<Crea
  */
 export declare type GetHybridCloudEnvironmentRequest = Message<"qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest"> & {
   /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
    * The identifier for the hybrid cloud environment (in GUID format).
    * It should be part of the provided account.
    * This is a required field.
    *
-   * @generated from field: string hybrid_cloud_environment_id = 1;
+   * @generated from field: string hybrid_cloud_environment_id = 2;
    */
   hybridCloudEnvironmentId: string;
-
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 2;
-   */
-  accountId: string;
 };
 
 /**
@@ -289,10 +289,18 @@ export declare const ListHybridCloudEnvironmentsResponseSchema: GenMessage<ListH
  */
 export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.HybridCloudEnvironment"> & {
   /**
+   * Identifier of the account associated with the cluster (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
    * Unique identifier for the hybrid cloud environment (in GUID format).
    * This is a read-only field and will be available after it is created.
    *
-   * @generated from field: string id = 1;
+   * @generated from field: string id = 2;
    */
   id: string;
 
@@ -300,24 +308,16 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
    * Timestamp when the hybrid cloud environment was created.
    * This is a read-only field and will be available after it is created.
    *
-   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   * @generated from field: google.protobuf.Timestamp created_at = 3;
    */
   createdAt?: Timestamp;
 
   /**
    * Timestamp when the hybrid cloud environment was modified the last time.
    *
-   * @generated from field: google.protobuf.Timestamp modified_at = 3;
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 4;
    */
-  modifiedAt?: Timestamp;
-
-  /**
-   * Identifier of the account associated with the cluster (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 4;
-   */
-  accountId: string;
+  lastModifiedAt?: Timestamp;
 
   /**
    * Name of the hybrid cloud environment
@@ -327,13 +327,6 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
    * @generated from field: string name = 5;
    */
   name: string;
-
-  /**
-   * Creator of the environment
-   *
-   * @generated from field: string created_by = 7;
-   */
-  createdBy: string;
 
   /**
    * Configuration of the environment
@@ -363,29 +356,15 @@ export declare const HybridCloudEnvironmentSchema: GenMessage<HybridCloudEnviron
  */
 export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration"> & {
   /**
-   * Timestamp when the configuration was created.
+   * Timestamp when the configuration waslast updated.
    * This is a read-only field and will be available after it is created.
    *
-   * @generated from field: google.protobuf.Timestamp created_at = 1;
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 1;
    */
-  createdAt?: Timestamp;
+  lastModifiedAt?: Timestamp;
 
   /**
-   * Configuration version
-   *
-   * @generated from field: uint32 version = 2;
-   */
-  version: number;
-
-  /**
-   * Operator configuration
-   *
-   * @generated from field: optional qdrant.cloud.hybrid.v1.OperatorConfiguration operator_config = 3;
-   */
-  operatorConfig?: OperatorConfiguration;
-
-  /**
-   * Namespace where qdrant components are deployed, readonly
+   * Namespace where qdrant components are deployed, readonly after bootstrapping
    *
    * @generated from field: string namespace = 4;
    */
@@ -408,9 +387,9 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
   /**
    * no proxy config
    *
-   * @generated from field: repeated string no_proxy_config = 7;
+   * @generated from field: repeated string no_proxy_configs = 7;
    */
-  noProxyConfig: string[];
+  noProxyConfigs: string[];
 
   /**
    * Container registry URL
@@ -441,76 +420,49 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
   caCertificates?: string;
 
   /**
-   * Deployed Qdrant kubernetes API version, readonly
+   * Default database storage class, if omitted
+   * kubernetes cluster default is used
    *
-   * @generated from field: optional string qdrant_kubernetes_api_version = 12;
+   * @generated from field: optional string database_storage_class = 12;
    */
-  qdrantKubernetesApiVersion?: string;
+  databaseStorageClass?: string;
 
   /**
-   * Deployed agent version, readonly
+   * Default snapshot storage class, if omitted
+   * kubernetes cluster default is used
    *
-   * @generated from field: string agent_version = 13;
+   * @generated from field: optional string snapshot_storage_class = 13;
    */
-  agentVersion: string;
+  snapshotStorageClass?: string;
 
   /**
-   * Deployed operator version, readonly
+   * Default volume snapshot storage class, if omitted
+   * csi-snapclass is used
    *
-   * @generated from field: optional string operator_version = 14;
+   * @generated from field: optional string volume_snapshot_storage_class = 14;
    */
-  operatorVersion?: string;
+  volumeSnapshotStorageClass?: string;
 
   /**
-   * Deployed Prometheus version, readonly
+   * Optional Ingress rules for Qdrant databases
    *
-   * @generated from field: optional string prometheus_version = 15;
+   * @generated from field: repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 15;
    */
-  prometheusVersion?: string;
+  ingress: NetworkPolicyIngressRule[];
 
   /**
-   * Deployed k8s event exporter version, readonly
+   * Optional Egress rules for Qdrant databases
    *
-   * @generated from field: optional string kubernetes_event_exporter_version = 16;
+   * @generated from field: repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
    */
-  kubernetesEventExporterVersion?: string;
-
-  /**
-   * Deployed Qdrant node exporter version, readonly
-   *
-   * @generated from field: optional string qdrant_node_exporter_version = 17;
-   */
-  qdrantNodeExporterVersion?: string;
-
-  /**
-   * Deployed Qdrant cluster exporter version, readonly
-   *
-   * @generated from field: optional string qdrant_cluster_exporter_version = 18;
-   */
-  qdrantClusterExporterVersion?: string;
-
-  /**
-   * Deployed Qdrant cluster manager version, readonly
-   *
-   * @generated from field: optional string qdrant_cluster_manager_version = 19;
-   */
-  qdrantClusterManagerVersion?: string;
-
-  /**
-   * User that has created this configuration
-   *
-   * @generated from field: string created_by = 20;
-   */
-  createdBy: string;
+  egress: NetworkPolicyEgressRule[];
 
   /**
    * Log level for deployed components
    *
-   * TODO not used?
-   *
-   * @generated from field: optional string log_level = 21;
+   * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevel log_level = 21;
    */
-  logLevel?: string;
+  logLevel?: HybridCloudEnvironmentConfigurationLogLevel;
 
   /**
    * List of tolerations for clusters in this hybrid cloud environment
@@ -542,16 +494,9 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   /**
    * Timestamp when the hybrid cloud environment status was modified the last time.
    *
-   * @generated from field: optional google.protobuf.Timestamp modified_at = 1;
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 1;
    */
-  modifiedAt?: Timestamp;
-
-  /**
-   * TODO what does it represent?
-   *
-   * @generated from field: string schema_version = 2;
-   */
-  schemaVersion: string;
+  lastModifiedAt?: Timestamp;
 
   /**
    * Phase
@@ -563,9 +508,16 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   /**
    * Kubernetes version
    *
-   * @generated from field: string k8s_version = 4;
+   * @generated from field: string kubernetes_version = 4;
    */
-  k8sVersion: string;
+  kubernetesVersion: string;
+
+  /**
+   * Kubernetes distribution
+   *
+   * @generated from field: optional qdrant.cloud.hybrid.v1.KubernetesDistribution kubernetes_distribution = 10;
+   */
+  kubernetesDistribution?: KubernetesDistribution;
 
   /**
    * Number of kubernetes nodes
@@ -582,32 +534,18 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   capabilities?: HybridCloudEnvironmentCapabilities;
 
   /**
-   * TODO used?
+   * Status of deployed component
    *
-   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus helm_repositories = 7;
+   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus component_statuses = 7;
    */
-  helmRepositories: HybridCloudEnvironmentComponentStatus[];
-
-  /**
-   * TODO used?
-   *
-   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus helm_releases = 8;
-   */
-  helmReleases: HybridCloudEnvironmentComponentStatus[];
+  componentStatuses: HybridCloudEnvironmentComponentStatus[];
 
   /**
    * True if the hybrid cloud environment is ready for Qdrant cluster creation
    *
-   * @generated from field: optional bool ready_for_cluster_creation = 9;
+   * @generated from field: qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus ready_for_cluster_creation = 9;
    */
-  readyForClusterCreation?: boolean;
-
-  /**
-   * Kubernetes distribution
-   *
-   * @generated from field: optional qdrant.cloud.hybrid.v1.KubernetesDistribution k8s_distribution = 10;
-   */
-  k8sDistribution?: KubernetesDistribution;
+  readyForClusterCreation: QdrantClusterCreationStatus;
 
   /**
    * Status message
@@ -629,15 +567,6 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
    */
   volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClass[];
-
-  /**
-   * Node infos
-   *
-   * TODO do we need this?
-   *
-   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo node_infos = 14;
-   */
-  nodeInfos: HybridCloudEnvironmentNodeInfo[];
 };
 
 /**
@@ -708,7 +637,7 @@ export declare type HybridCloudEnvironmentComponentStatus = Message<"qdrant.clou
   phase: HybridCloudEnvironmentComponentStatusPhase;
 
   /**
-   * Message
+   * Status message
    *
    * @generated from field: optional string message = 5;
    */
@@ -905,6 +834,86 @@ export declare type HybridCloudEnvironmentNodeResourceInfo = Message<"qdrant.clo
  * Use `create(HybridCloudEnvironmentNodeResourceInfoSchema)` to create a new message.
  */
 export declare const HybridCloudEnvironmentNodeResourceInfoSchema: GenMessage<HybridCloudEnvironmentNodeResourceInfo>;
+
+/**
+ * HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components
+ *
+ * @generated from enum qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevel
+ */
+export enum HybridCloudEnvironmentConfigurationLogLevel {
+  /**
+   * UNSPECIFIED
+   *
+   * @generated from enum value: HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * DEBUG
+   *
+   * @generated from enum value: HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG = 1;
+   */
+  DEBUG = 1,
+
+  /**
+   * INFO
+   *
+   * @generated from enum value: HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO = 2;
+   */
+  INFO = 2,
+
+  /**
+   * WARNING
+   *
+   * @generated from enum value: HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN = 3;
+   */
+  WARN = 3,
+
+  /**
+   * ERROR
+   *
+   * @generated from enum value: HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR = 4;
+   */
+  ERROR = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevel.
+ */
+export declare const HybridCloudEnvironmentConfigurationLogLevelSchema: GenEnum<HybridCloudEnvironmentConfigurationLogLevel>;
+
+/**
+ * QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment
+ *
+ * @generated from enum qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus
+ */
+export enum QdrantClusterCreationStatus {
+  /**
+   * Unspecified
+   *
+   * @generated from enum value: QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Clusters can be created
+   *
+   * @generated from enum value: QDRANT_CLUSTER_CREATION_STATUS_READY = 1;
+   */
+  READY = 1,
+
+  /**
+   * Clusters cannot be created
+   *
+   * @generated from enum value: QDRANT_CLUSTER_CREATION_STATUS_NOT_READY = 2;
+   */
+  NOT_READY = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus.
+ */
+export declare const QdrantClusterCreationStatusSchema: GenEnum<QdrantClusterCreationStatus>;
 
 /**
  * Status phase of hybrid cloud environment
@@ -1163,15 +1172,17 @@ export declare const HybridCloudService: GenService<{
     output: typeof DeleteHybridCloudEnvironmentResponseSchema;
   },
   /**
-   * Fetch the command that should be executed against a kubernetes cluster to
-   * bootstrap it to the hybrid cloud environment
+   * Fetch the commands that should be executed against a kubernetes cluster to
+   * bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
+   * but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
+   * Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
    *
-   * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GetInitialInstallationCommand
+   * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GetBootstrapCommands
    */
-  getInitialInstallationCommand: {
+  getBootstrapCommands: {
     methodKind: "unary";
-    input: typeof GetInitialInstallationCommandRequestSchema;
-    output: typeof GetInitialInstallationCommandResponseSchema;
+    input: typeof GetBootstrapCommandsRequestSchema;
+    output: typeof GetBootstrapCommandsResponseSchema;
   },
 }>;
 

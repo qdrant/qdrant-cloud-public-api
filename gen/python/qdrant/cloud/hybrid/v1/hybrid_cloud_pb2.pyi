@@ -1,9 +1,9 @@
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from k8s.io.api.networking.v1 import generated_pb2 as _generated_pb2
 from qdrant.cloud.cluster.v1 import cluster_pb2 as _cluster_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
-from qdrant.cloud.hybrid.v1 import operator_pb2 as _operator_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -11,6 +11,20 @@ from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class HybridCloudEnvironmentConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: _ClassVar[HybridCloudEnvironmentConfigurationLogLevel]
+    HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG: _ClassVar[HybridCloudEnvironmentConfigurationLogLevel]
+    HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO: _ClassVar[HybridCloudEnvironmentConfigurationLogLevel]
+    HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN: _ClassVar[HybridCloudEnvironmentConfigurationLogLevel]
+    HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR: _ClassVar[HybridCloudEnvironmentConfigurationLogLevel]
+
+class QdrantClusterCreationStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: _ClassVar[QdrantClusterCreationStatus]
+    QDRANT_CLUSTER_CREATION_STATUS_READY: _ClassVar[QdrantClusterCreationStatus]
+    QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: _ClassVar[QdrantClusterCreationStatus]
 
 class HybridCloudEnvironmentStatusPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -42,6 +56,14 @@ class KubernetesDistribution(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     KUBERNETES_DISTRIBUTION_STACKIT: _ClassVar[KubernetesDistribution]
     KUBERNETES_DISTRIBUTION_VULTR: _ClassVar[KubernetesDistribution]
     KUBERNETES_DISTRIBUTION_K3S: _ClassVar[KubernetesDistribution]
+HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: HybridCloudEnvironmentConfigurationLogLevel
+HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG: HybridCloudEnvironmentConfigurationLogLevel
+HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO: HybridCloudEnvironmentConfigurationLogLevel
+HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN: HybridCloudEnvironmentConfigurationLogLevel
+HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR: HybridCloudEnvironmentConfigurationLogLevel
+QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: QdrantClusterCreationStatus
+QDRANT_CLUSTER_CREATION_STATUS_READY: QdrantClusterCreationStatus
+QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: QdrantClusterCreationStatus
 HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_UNSPECIFIED: HybridCloudEnvironmentStatusPhase
 HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_READY: HybridCloudEnvironmentStatusPhase
 HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_NOT_READY: HybridCloudEnvironmentStatusPhase
@@ -65,27 +87,27 @@ KUBERNETES_DISTRIBUTION_STACKIT: KubernetesDistribution
 KUBERNETES_DISTRIBUTION_VULTR: KubernetesDistribution
 KUBERNETES_DISTRIBUTION_K3S: KubernetesDistribution
 
-class GetInitialInstallationCommandRequest(_message.Message):
-    __slots__ = ("hybrid_cloud_environment_id", "account_id")
-    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
+class GetBootstrapCommandsRequest(_message.Message):
+    __slots__ = ("account_id", "hybrid_cloud_environment_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    hybrid_cloud_environment_id: str
+    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, hybrid_cloud_environment_id: _Optional[str] = ..., account_id: _Optional[str] = ...) -> None: ...
+    hybrid_cloud_environment_id: str
+    def __init__(self, account_id: _Optional[str] = ..., hybrid_cloud_environment_id: _Optional[str] = ...) -> None: ...
 
-class GetInitialInstallationCommandResponse(_message.Message):
-    __slots__ = ("command",)
-    COMMAND_FIELD_NUMBER: _ClassVar[int]
-    command: str
-    def __init__(self, command: _Optional[str] = ...) -> None: ...
+class GetBootstrapCommandsResponse(_message.Message):
+    __slots__ = ("commands",)
+    COMMANDS_FIELD_NUMBER: _ClassVar[int]
+    commands: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, commands: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class DeleteHybridCloudEnvironmentRequest(_message.Message):
-    __slots__ = ("hybrid_cloud_environment_id", "account_id")
-    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("account_id", "hybrid_cloud_environment_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    hybrid_cloud_environment_id: str
+    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, hybrid_cloud_environment_id: _Optional[str] = ..., account_id: _Optional[str] = ...) -> None: ...
+    hybrid_cloud_environment_id: str
+    def __init__(self, account_id: _Optional[str] = ..., hybrid_cloud_environment_id: _Optional[str] = ...) -> None: ...
 
 class DeleteHybridCloudEnvironmentResponse(_message.Message):
     __slots__ = ()
@@ -116,12 +138,12 @@ class CreateHybridCloudEnvironmentResponse(_message.Message):
     def __init__(self, hybrid_cloud_environment: _Optional[_Union[HybridCloudEnvironment, _Mapping]] = ...) -> None: ...
 
 class GetHybridCloudEnvironmentRequest(_message.Message):
-    __slots__ = ("hybrid_cloud_environment_id", "account_id")
-    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("account_id", "hybrid_cloud_environment_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    hybrid_cloud_environment_id: str
+    HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, hybrid_cloud_environment_id: _Optional[str] = ..., account_id: _Optional[str] = ...) -> None: ...
+    hybrid_cloud_environment_id: str
+    def __init__(self, account_id: _Optional[str] = ..., hybrid_cloud_environment_id: _Optional[str] = ...) -> None: ...
 
 class GetHybridCloudEnvironmentResponse(_message.Message):
     __slots__ = ("hybrid_cloud_environment",)
@@ -142,106 +164,86 @@ class ListHybridCloudEnvironmentsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[HybridCloudEnvironment, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironment(_message.Message):
-    __slots__ = ("id", "created_at", "modified_at", "account_id", "name", "created_by", "configuration", "status")
+    __slots__ = ("account_id", "id", "created_at", "last_modified_at", "name", "configuration", "status")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
-    MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    CREATED_BY_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
     id: str
     created_at: _timestamp_pb2.Timestamp
-    modified_at: _timestamp_pb2.Timestamp
-    account_id: str
+    last_modified_at: _timestamp_pb2.Timestamp
     name: str
-    created_by: str
     configuration: HybridCloudEnvironmentConfiguration
     status: HybridCloudEnvironmentStatus
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., created_by: _Optional[str] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
 
 class HybridCloudEnvironmentConfiguration(_message.Message):
-    __slots__ = ("created_at", "version", "operator_config", "namespace", "http_proxy_url", "https_proxy_url", "no_proxy_config", "container_registry_url", "chart_repository_url", "registry_secret_name", "ca_certificates", "qdrant_kubernetes_api_version", "agent_version", "operator_version", "prometheus_version", "kubernetes_event_exporter_version", "qdrant_node_exporter_version", "qdrant_cluster_exporter_version", "qdrant_cluster_manager_version", "created_by", "log_level", "tolerations", "node_selector")
-    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
-    VERSION_FIELD_NUMBER: _ClassVar[int]
-    OPERATOR_CONFIG_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("last_modified_at", "namespace", "http_proxy_url", "https_proxy_url", "no_proxy_configs", "container_registry_url", "chart_repository_url", "registry_secret_name", "ca_certificates", "database_storage_class", "snapshot_storage_class", "volume_snapshot_storage_class", "ingress", "egress", "log_level", "tolerations", "node_selector")
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAMESPACE_FIELD_NUMBER: _ClassVar[int]
     HTTP_PROXY_URL_FIELD_NUMBER: _ClassVar[int]
     HTTPS_PROXY_URL_FIELD_NUMBER: _ClassVar[int]
-    NO_PROXY_CONFIG_FIELD_NUMBER: _ClassVar[int]
+    NO_PROXY_CONFIGS_FIELD_NUMBER: _ClassVar[int]
     CONTAINER_REGISTRY_URL_FIELD_NUMBER: _ClassVar[int]
     CHART_REPOSITORY_URL_FIELD_NUMBER: _ClassVar[int]
     REGISTRY_SECRET_NAME_FIELD_NUMBER: _ClassVar[int]
     CA_CERTIFICATES_FIELD_NUMBER: _ClassVar[int]
-    QDRANT_KUBERNETES_API_VERSION_FIELD_NUMBER: _ClassVar[int]
-    AGENT_VERSION_FIELD_NUMBER: _ClassVar[int]
-    OPERATOR_VERSION_FIELD_NUMBER: _ClassVar[int]
-    PROMETHEUS_VERSION_FIELD_NUMBER: _ClassVar[int]
-    KUBERNETES_EVENT_EXPORTER_VERSION_FIELD_NUMBER: _ClassVar[int]
-    QDRANT_NODE_EXPORTER_VERSION_FIELD_NUMBER: _ClassVar[int]
-    QDRANT_CLUSTER_EXPORTER_VERSION_FIELD_NUMBER: _ClassVar[int]
-    QDRANT_CLUSTER_MANAGER_VERSION_FIELD_NUMBER: _ClassVar[int]
-    CREATED_BY_FIELD_NUMBER: _ClassVar[int]
+    DATABASE_STORAGE_CLASS_FIELD_NUMBER: _ClassVar[int]
+    SNAPSHOT_STORAGE_CLASS_FIELD_NUMBER: _ClassVar[int]
+    VOLUME_SNAPSHOT_STORAGE_CLASS_FIELD_NUMBER: _ClassVar[int]
+    INGRESS_FIELD_NUMBER: _ClassVar[int]
+    EGRESS_FIELD_NUMBER: _ClassVar[int]
     LOG_LEVEL_FIELD_NUMBER: _ClassVar[int]
     TOLERATIONS_FIELD_NUMBER: _ClassVar[int]
     NODE_SELECTOR_FIELD_NUMBER: _ClassVar[int]
-    created_at: _timestamp_pb2.Timestamp
-    version: int
-    operator_config: _operator_pb2.OperatorConfiguration
+    last_modified_at: _timestamp_pb2.Timestamp
     namespace: str
     http_proxy_url: str
     https_proxy_url: str
-    no_proxy_config: _containers.RepeatedScalarFieldContainer[str]
+    no_proxy_configs: _containers.RepeatedScalarFieldContainer[str]
     container_registry_url: str
     chart_repository_url: str
     registry_secret_name: str
     ca_certificates: str
-    qdrant_kubernetes_api_version: str
-    agent_version: str
-    operator_version: str
-    prometheus_version: str
-    kubernetes_event_exporter_version: str
-    qdrant_node_exporter_version: str
-    qdrant_cluster_exporter_version: str
-    qdrant_cluster_manager_version: str
-    created_by: str
-    log_level: str
+    database_storage_class: str
+    snapshot_storage_class: str
+    volume_snapshot_storage_class: str
+    ingress: _containers.RepeatedCompositeFieldContainer[_generated_pb2.NetworkPolicyIngressRule]
+    egress: _containers.RepeatedCompositeFieldContainer[_generated_pb2.NetworkPolicyEgressRule]
+    log_level: HybridCloudEnvironmentConfigurationLogLevel
     tolerations: _containers.RepeatedCompositeFieldContainer[_cluster_pb2.Toleration]
     node_selector: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
-    def __init__(self, created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[int] = ..., operator_config: _Optional[_Union[_operator_pb2.OperatorConfiguration, _Mapping]] = ..., namespace: _Optional[str] = ..., http_proxy_url: _Optional[str] = ..., https_proxy_url: _Optional[str] = ..., no_proxy_config: _Optional[_Iterable[str]] = ..., container_registry_url: _Optional[str] = ..., chart_repository_url: _Optional[str] = ..., registry_secret_name: _Optional[str] = ..., ca_certificates: _Optional[str] = ..., qdrant_kubernetes_api_version: _Optional[str] = ..., agent_version: _Optional[str] = ..., operator_version: _Optional[str] = ..., prometheus_version: _Optional[str] = ..., kubernetes_event_exporter_version: _Optional[str] = ..., qdrant_node_exporter_version: _Optional[str] = ..., qdrant_cluster_exporter_version: _Optional[str] = ..., qdrant_cluster_manager_version: _Optional[str] = ..., created_by: _Optional[str] = ..., log_level: _Optional[str] = ..., tolerations: _Optional[_Iterable[_Union[_cluster_pb2.Toleration, _Mapping]]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
+    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., namespace: _Optional[str] = ..., http_proxy_url: _Optional[str] = ..., https_proxy_url: _Optional[str] = ..., no_proxy_configs: _Optional[_Iterable[str]] = ..., container_registry_url: _Optional[str] = ..., chart_repository_url: _Optional[str] = ..., registry_secret_name: _Optional[str] = ..., ca_certificates: _Optional[str] = ..., database_storage_class: _Optional[str] = ..., snapshot_storage_class: _Optional[str] = ..., volume_snapshot_storage_class: _Optional[str] = ..., ingress: _Optional[_Iterable[_Union[_generated_pb2.NetworkPolicyIngressRule, _Mapping]]] = ..., egress: _Optional[_Iterable[_Union[_generated_pb2.NetworkPolicyEgressRule, _Mapping]]] = ..., log_level: _Optional[_Union[HybridCloudEnvironmentConfigurationLogLevel, str]] = ..., tolerations: _Optional[_Iterable[_Union[_cluster_pb2.Toleration, _Mapping]]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironmentStatus(_message.Message):
-    __slots__ = ("modified_at", "schema_version", "phase", "k8s_version", "number_of_nodes", "capabilities", "helm_repositories", "helm_releases", "ready_for_cluster_creation", "k8s_distribution", "message", "storage_classes", "volume_snapshot_classes", "node_infos")
-    MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
-    SCHEMA_VERSION_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("last_modified_at", "phase", "kubernetes_version", "kubernetes_distribution", "number_of_nodes", "capabilities", "component_statuses", "ready_for_cluster_creation", "message", "storage_classes", "volume_snapshot_classes")
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     PHASE_FIELD_NUMBER: _ClassVar[int]
-    K8S_VERSION_FIELD_NUMBER: _ClassVar[int]
+    KUBERNETES_VERSION_FIELD_NUMBER: _ClassVar[int]
+    KUBERNETES_DISTRIBUTION_FIELD_NUMBER: _ClassVar[int]
     NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
     CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
-    HELM_REPOSITORIES_FIELD_NUMBER: _ClassVar[int]
-    HELM_RELEASES_FIELD_NUMBER: _ClassVar[int]
+    COMPONENT_STATUSES_FIELD_NUMBER: _ClassVar[int]
     READY_FOR_CLUSTER_CREATION_FIELD_NUMBER: _ClassVar[int]
-    K8S_DISTRIBUTION_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     STORAGE_CLASSES_FIELD_NUMBER: _ClassVar[int]
     VOLUME_SNAPSHOT_CLASSES_FIELD_NUMBER: _ClassVar[int]
-    NODE_INFOS_FIELD_NUMBER: _ClassVar[int]
-    modified_at: _timestamp_pb2.Timestamp
-    schema_version: str
+    last_modified_at: _timestamp_pb2.Timestamp
     phase: HybridCloudEnvironmentStatusPhase
-    k8s_version: str
+    kubernetes_version: str
+    kubernetes_distribution: KubernetesDistribution
     number_of_nodes: int
     capabilities: HybridCloudEnvironmentCapabilities
-    helm_repositories: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentComponentStatus]
-    helm_releases: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentComponentStatus]
-    ready_for_cluster_creation: bool
-    k8s_distribution: KubernetesDistribution
+    component_statuses: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentComponentStatus]
+    ready_for_cluster_creation: QdrantClusterCreationStatus
     message: str
     storage_classes: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentStorageClass]
     volume_snapshot_classes: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentVolumeSnapshotClass]
-    node_infos: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentNodeInfo]
-    def __init__(self, modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., schema_version: _Optional[str] = ..., phase: _Optional[_Union[HybridCloudEnvironmentStatusPhase, str]] = ..., k8s_version: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., capabilities: _Optional[_Union[HybridCloudEnvironmentCapabilities, _Mapping]] = ..., helm_repositories: _Optional[_Iterable[_Union[HybridCloudEnvironmentComponentStatus, _Mapping]]] = ..., helm_releases: _Optional[_Iterable[_Union[HybridCloudEnvironmentComponentStatus, _Mapping]]] = ..., ready_for_cluster_creation: bool = ..., k8s_distribution: _Optional[_Union[KubernetesDistribution, str]] = ..., message: _Optional[str] = ..., storage_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ..., node_infos: _Optional[_Iterable[_Union[HybridCloudEnvironmentNodeInfo, _Mapping]]] = ...) -> None: ...
+    def __init__(self, last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[HybridCloudEnvironmentStatusPhase, str]] = ..., kubernetes_version: _Optional[str] = ..., kubernetes_distribution: _Optional[_Union[KubernetesDistribution, str]] = ..., number_of_nodes: _Optional[int] = ..., capabilities: _Optional[_Union[HybridCloudEnvironmentCapabilities, _Mapping]] = ..., component_statuses: _Optional[_Iterable[_Union[HybridCloudEnvironmentComponentStatus, _Mapping]]] = ..., ready_for_cluster_creation: _Optional[_Union[QdrantClusterCreationStatus, str]] = ..., message: _Optional[str] = ..., storage_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironmentCapabilities(_message.Message):
     __slots__ = ("volume_snapshot", "volume_expansion")

@@ -18,13 +18,13 @@
   "paths": {
     "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/initial-installation-command": {
       "get": {
-        "summary": "Fetch the command that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment",
-        "operationId": "HybridCloudService_GetInitialInstallationCommand",
+        "summary": "Fetch the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.",
+        "operationId": "HybridCloudService_GetBootstrapCommands",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetInitialInstallationCommandResponse"
+              "$ref": "#/definitions/v1GetBootstrapCommandsResponse"
             }
           },
           "default": {
@@ -269,7 +269,7 @@
               "format": "date-time",
               "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
             },
-            "modifiedAt": {
+            "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
               "description": "Timestamp when the hybrid cloud environment was modified the last time."
@@ -277,10 +277,6 @@
             "name": {
               "type": "string",
               "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
-            },
-            "createdBy": {
-              "type": "string",
-              "title": "Creator of the environment"
             },
             "configuration": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
@@ -307,7 +303,7 @@
               "format": "date-time",
               "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
             },
-            "modifiedAt": {
+            "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
               "description": "Timestamp when the hybrid cloud environment was modified the last time."
@@ -315,10 +311,6 @@
             "name": {
               "type": "string",
               "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
-            },
-            "createdBy": {
-              "type": "string",
-              "title": "Creator of the environment"
             },
             "configuration": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
@@ -407,38 +399,6 @@
       },
       "additionalProperties": {}
     },
-    "v1Condition": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "title": "type of condition in CamelCase or in foo.example.com/CamelCase.\n---\nMany .condition.type values are consistent across resources like Available, but because arbitrary conditions can be\nuseful (see .node.status.conditions), the ability to deconflict is important.\nThe regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)\n+required\n+kubebuilder:validation:Required\n+kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`\n+kubebuilder:validation:MaxLength=316"
-        },
-        "status": {
-          "type": "string",
-          "title": "status of the condition, one of True, False, Unknown.\n+required\n+kubebuilder:validation:Required\n+kubebuilder:validation:Enum=True;False;Unknown"
-        },
-        "observedGeneration": {
-          "type": "string",
-          "format": "int64",
-          "title": "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.\n+optional\n+kubebuilder:validation:Minimum=0"
-        },
-        "lastTransitionTime": {
-          "$ref": "#/definitions/v1Time",
-          "title": "lastTransitionTime is the last time the condition transitioned from one status to another.\nThis should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.\n+required\n+kubebuilder:validation:Required\n+kubebuilder:validation:Type=string\n+kubebuilder:validation:Format=date-time"
-        },
-        "reason": {
-          "type": "string",
-          "title": "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.\n+required\n+kubebuilder:validation:Required\n+kubebuilder:validation:MaxLength=1024\n+kubebuilder:validation:MinLength=1\n+kubebuilder:validation:Pattern=`^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$`"
-        },
-        "message": {
-          "type": "string",
-          "title": "message is a human readable message indicating details about the transition.\nThis may be an empty string.\n+required\n+kubebuilder:validation:Required\n+kubebuilder:validation:MaxLength=32768"
-        }
-      },
-      "description": "// other fields\n}",
-      "title": "Condition contains details for one aspect of the current state of this API Resource.\n---\nThis struct is intended for direct use as an array at the field path .status.conditions.  For example,\ntype FooStatus struct{\n    // Represents the observations of a foo's current state.\n    // Known .status.conditions.type are: \"Available\", \"Progressing\", and \"Degraded\"\n    // +patchMergeKey=type\n    // +patchStrategy=merge\n    // +listType=map\n    // +listMapKey=type\n    Conditions []metav1.Condition `json:\"conditions,omitempty\" patchStrategy:\"merge\" patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`"
-    },
     "v1CreateHybridCloudEnvironmentResponse": {
       "type": "object",
       "properties": {
@@ -449,36 +409,23 @@
       },
       "title": "CreateHybridCloudEnvironmentResponse is the response for CreateHybridCloudEnvironment function"
     },
-    "v1DatabaseConfigurationLogLevel": {
-      "type": "string",
-      "enum": [
-        "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_TRACE",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_INFO",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_WARN",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_ERROR",
-        "DATABASE_CONFIGURATION_LOG_LEVEL_OFF"
-      ],
-      "default": "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
-      "description": "- DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: Unspecified log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: Trace log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: Debug log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_INFO: Info log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_WARN: Warn log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: Error log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_OFF: Off log level.",
-      "title": "DatabaseConfigurationLogLevel defines the supported logging levels for the\nQdrant database. See: https://docs.rs/log/latest/log/enum.LevelFilter.html"
-    },
     "v1DeleteHybridCloudEnvironmentResponse": {
       "type": "object",
       "description": "Empty",
       "title": "DeleteHybridCloudEnvironmentResponse is the response for DeleteHybridCloudEnvironment function"
     },
-    "v1FieldsV1": {
+    "v1GetBootstrapCommandsResponse": {
       "type": "object",
       "properties": {
-        "Raw": {
-          "type": "string",
-          "format": "byte",
-          "description": "Raw is the underlying serialization of this object."
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
         }
       },
-      "description": "FieldsV1 stores a set of fields in a data structure like a Trie, in JSON format.\n\nEach key is either a '.' representing the field itself, and will always map to an empty set,\nor a string representing a sub-field or item. The string will follow one of these four formats:\n'f:\u003cname\u003e', where \u003cname\u003e is the name of a field in a struct, or key in a map\n'v:\u003cvalue\u003e', where \u003cvalue\u003e is the exact json formatted value of a list item\n'i:\u003cindex\u003e', where \u003cindex\u003e is position of a item in a list\n'k:\u003ckeys\u003e', where \u003ckeys\u003e is a map of  a list item's key fields to their unique values\nIf a key maps to an empty Fields value, the field that key represents is part of the set.\n\nThe exact format is defined in sigs.k8s.io/structured-merge-diff\n+protobuf.options.(gogoproto.goproto_stringer)=false"
+      "title": "GetBootstrapCommandsResponse is the response for GetBootstrapCommands function"
     },
     "v1GetHybridCloudEnvironmentResponse": {
       "type": "object",
@@ -490,19 +437,13 @@
       },
       "title": "GetHybridCloudEnvironmentResponse is the response for GetHybridCloudEnvironment function"
     },
-    "v1GetInitialInstallationCommandResponse": {
-      "type": "object",
-      "properties": {
-        "command": {
-          "type": "string",
-          "description": "Command to execute for bootstraping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
-        }
-      },
-      "title": "GetInitialInstallationCommandResponse is the response for GetInitialInstallationCommand function"
-    },
     "v1HybridCloudEnvironment": {
       "type": "object",
       "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
+        },
         "id": {
           "type": "string",
           "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created."
@@ -512,22 +453,14 @@
           "format": "date-time",
           "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
         },
-        "modifiedAt": {
+        "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the hybrid cloud environment was modified the last time."
         },
-        "accountId": {
-          "type": "string",
-          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
-        },
         "name": {
           "type": "string",
           "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
-        },
-        "createdBy": {
-          "type": "string",
-          "title": "Creator of the environment"
         },
         "configuration": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
@@ -575,7 +508,7 @@
         },
         "message": {
           "type": "string",
-          "title": "Message"
+          "title": "Status message"
         }
       },
       "title": "Status of a component deployed in the hybrid cloud environment"
@@ -595,23 +528,14 @@
     "v1HybridCloudEnvironmentConfiguration": {
       "type": "object",
       "properties": {
-        "createdAt": {
+        "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the configuration was created.\nThis is a read-only field and will be available after it is created."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64",
-          "title": "Configuration version"
-        },
-        "operatorConfig": {
-          "$ref": "#/definitions/v1OperatorConfiguration",
-          "title": "Operator configuration"
+          "description": "Timestamp when the configuration waslast updated.\nThis is a read-only field and will be available after it is created."
         },
         "namespace": {
           "type": "string",
-          "title": "Namespace where qdrant components are deployed, readonly"
+          "title": "Namespace where qdrant components are deployed, readonly after bootstrapping"
         },
         "httpProxyUrl": {
           "type": "string",
@@ -621,7 +545,7 @@
           "type": "string",
           "title": "optional HTTPS proxy URL"
         },
-        "noProxyConfig": {
+        "noProxyConfigs": {
           "type": "array",
           "items": {
             "type": "string"
@@ -644,45 +568,36 @@
           "type": "string",
           "title": "CA certificates"
         },
-        "qdrantKubernetesApiVersion": {
+        "databaseStorageClass": {
           "type": "string",
-          "title": "Deployed Qdrant kubernetes API version, readonly"
+          "title": "Default database storage class, if omitted\nkubernetes cluster default is used"
         },
-        "agentVersion": {
+        "snapshotStorageClass": {
           "type": "string",
-          "title": "Deployed agent version, readonly"
+          "title": "Default snapshot storage class, if omitted\nkubernetes cluster default is used"
         },
-        "operatorVersion": {
+        "volumeSnapshotStorageClass": {
           "type": "string",
-          "title": "Deployed operator version, readonly"
+          "title": "Default volume snapshot storage class, if omitted\ncsi-snapclass is used"
         },
-        "prometheusVersion": {
-          "type": "string",
-          "title": "Deployed Prometheus version, readonly"
+        "ingress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyIngressRule"
+          },
+          "title": "Optional Ingress rules for Qdrant databases"
         },
-        "kubernetesEventExporterVersion": {
-          "type": "string",
-          "title": "Deployed k8s event exporter version, readonly"
-        },
-        "qdrantNodeExporterVersion": {
-          "type": "string",
-          "title": "Deployed Qdrant node exporter version, readonly"
-        },
-        "qdrantClusterExporterVersion": {
-          "type": "string",
-          "title": "Deployed Qdrant cluster exporter version, readonly"
-        },
-        "qdrantClusterManagerVersion": {
-          "type": "string",
-          "title": "Deployed Qdrant cluster manager version, readonly"
-        },
-        "createdBy": {
-          "type": "string",
-          "title": "User that has created this configuration"
+        "egress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyEgressRule"
+          },
+          "title": "Optional Egress rules for Qdrant databases"
         },
         "logLevel": {
-          "type": "string",
-          "description": "TODO not used?",
+          "$ref": "#/definitions/v1HybridCloudEnvironmentConfigurationLogLevel",
           "title": "Log level for deployed components"
         },
         "tolerations": {
@@ -704,81 +619,38 @@
       },
       "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"
     },
-    "v1HybridCloudEnvironmentNodeInfo": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name of the node"
-        },
-        "region": {
-          "type": "string",
-          "title": "Region of the node"
-        },
-        "zone": {
-          "type": "string",
-          "title": "Zone of the node"
-        },
-        "instanceType": {
-          "type": "string",
-          "title": "Instance type of the node"
-        },
-        "arch": {
-          "type": "string",
-          "title": "CPU architecture of the node"
-        },
-        "capacity": {
-          "$ref": "#/definitions/v1HybridCloudEnvironmentNodeResourceInfo",
-          "title": "Capacity of the node"
-        },
-        "allocatable": {
-          "$ref": "#/definitions/v1HybridCloudEnvironmentNodeResourceInfo",
-          "title": "The allocatable resources of the node"
-        }
-      },
-      "title": "Info about a node of a hybrid cloud environment"
-    },
-    "v1HybridCloudEnvironmentNodeResourceInfo": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "type": "string",
-          "title": "CPU resources of the node"
-        },
-        "memory": {
-          "type": "string",
-          "title": "Memory resources of the node"
-        },
-        "pods": {
-          "type": "string",
-          "title": "Pods resources of the node"
-        },
-        "ephemeralStorage": {
-          "type": "string",
-          "title": "Ephemeral storage resources of the node"
-        }
-      },
-      "title": "Node resource infos"
+    "v1HybridCloudEnvironmentConfigurationLogLevel": {
+      "type": "string",
+      "enum": [
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR"
+      ],
+      "default": "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+      "description": "- HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: UNSPECIFIED\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG: DEBUG\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO: INFO\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN: WARNING\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR: ERROR",
+      "title": "HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components"
     },
     "v1HybridCloudEnvironmentStatus": {
       "type": "object",
       "properties": {
-        "modifiedAt": {
+        "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the hybrid cloud environment status was modified the last time."
-        },
-        "schemaVersion": {
-          "type": "string",
-          "title": "TODO what does it represent?"
         },
         "phase": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentStatusPhase",
           "title": "Phase"
         },
-        "k8sVersion": {
+        "kubernetesVersion": {
           "type": "string",
           "title": "Kubernetes version"
+        },
+        "kubernetesDistribution": {
+          "$ref": "#/definitions/v1KubernetesDistribution",
+          "title": "Kubernetes distribution"
         },
         "numberOfNodes": {
           "type": "integer",
@@ -789,29 +661,17 @@
           "$ref": "#/definitions/v1HybridCloudEnvironmentCapabilities",
           "title": "Capabilities of hybrid cloud environment"
         },
-        "helmRepositories": {
+        "componentStatuses": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
           },
-          "title": "TODO used?"
-        },
-        "helmReleases": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
-          },
-          "title": "TODO used?"
+          "title": "Status of deployed component"
         },
         "readyForClusterCreation": {
-          "type": "boolean",
+          "$ref": "#/definitions/v1QdrantClusterCreationStatus",
           "title": "True if the hybrid cloud environment is ready for Qdrant cluster creation"
-        },
-        "k8sDistribution": {
-          "$ref": "#/definitions/v1KubernetesDistribution",
-          "title": "Kubernetes distribution"
         },
         "message": {
           "type": "string",
@@ -832,15 +692,6 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
           "title": "Volume snapshot classes available in the hybrid cloud environment"
-        },
-        "nodeInfos": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1HybridCloudEnvironmentNodeInfo"
-          },
-          "description": "TODO do we need this?",
-          "title": "Node infos"
         }
       },
       "title": "Status of a hybrid cloud environment, read only"
@@ -1014,40 +865,6 @@
       },
       "title": "ListHybridCloudEnvironmentsResponse is the response for ListHybridCloudEnvironments function"
     },
-    "v1ManagedFieldsEntry": {
-      "type": "object",
-      "properties": {
-        "manager": {
-          "type": "string",
-          "description": "Manager is an identifier of the workflow managing these fields."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation is the type of operation which lead to this ManagedFieldsEntry being created.\nThe only valid values for this field are 'Apply' and 'Update'."
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "APIVersion defines the version of this resource that this field set\napplies to. The format is \"group/version\" just like the top-level\nAPIVersion field. It is necessary to track the version of a field\nset because it cannot be automatically converted."
-        },
-        "time": {
-          "$ref": "#/definitions/v1Time",
-          "title": "Time is the timestamp of when the ManagedFields entry was added. The\ntimestamp will also be updated if a field is added, the manager\nchanges any of the owned fields value or removes a field. The\ntimestamp does not update when a field is removed from the entry\nbecause another manager took it over.\n+optional"
-        },
-        "fieldsType": {
-          "type": "string",
-          "title": "FieldsType is the discriminator for the different fields format and version.\nThere is currently only one possible value: \"FieldsV1\""
-        },
-        "fieldsV1": {
-          "$ref": "#/definitions/v1FieldsV1",
-          "title": "FieldsV1 holds the first JSON version format as described in the \"FieldsV1\" type.\n+optional"
-        },
-        "subresource": {
-          "type": "string",
-          "description": "Subresource is the name of the subresource used to update that object, or\nempty string if the object was updated through the main resource. The\nvalue of this field is used to distinguish between managers, even if they\nshare the same name. For example, a status update will be distinct from a\nregular update using the same manager name.\nNote that the APIVersion field is not related to the Subresource field and\nit always corresponds to the version of the main resource."
-        }
-      },
-      "description": "ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource\nthat the fieldset applies to."
-    },
     "v1NetworkPolicyEgressRule": {
       "type": "object",
       "properties": {
@@ -1129,603 +946,16 @@
       },
       "title": "NetworkPolicyPort describes a port to allow traffic on"
     },
-    "v1ObjectMeta": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name must be unique within a namespace. Is required when creating resources, although\nsome resources may allow a client to request the generation of an appropriate name\nautomatically. Name is primarily intended for creation idempotence and configuration\ndefinition.\nCannot be updated.\nMore info: http://kubernetes.io/docs/user-guide/identifiers#names\n+optional"
-        },
-        "generateName": {
-          "type": "string",
-          "description": "GenerateName is an optional prefix, used by the server, to generate a unique\nname ONLY IF the Name field has not been provided.\nIf this field is used, the name returned to the client will be different\nthan the name passed. This value will also be combined with a unique suffix.\nThe provided value has the same validation rules as the Name field,\nand may be truncated by the length of the suffix required to make the value\nunique on the server.\n\nIf this field is specified and the generated name exists, the server will\nNOT return a 409 - instead, it will either return 201 Created or 500 with Reason\nServerTimeout indicating a unique name could not be found in the time allotted, and the client\nshould retry (optionally after the time indicated in the Retry-After header).\n\nApplied only if Name is not specified.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency\n+optional"
-        },
-        "namespace": {
-          "type": "string",
-          "description": "Namespace defines the space within which each name must be unique. An empty namespace is\nequivalent to the \"default\" namespace, but \"default\" is the canonical representation.\nNot all objects are required to be scoped to a namespace - the value of this field for\nthose objects will be empty.\n\nMust be a DNS_LABEL.\nCannot be updated.\nMore info: http://kubernetes.io/docs/user-guide/namespaces\n+optional"
-        },
-        "selfLink": {
-          "type": "string",
-          "title": "Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.\n+optional"
-        },
-        "uid": {
-          "type": "string",
-          "description": "UID is the unique in time and space value for this object. It is typically generated by\nthe server on successful creation of a resource and is not allowed to change on PUT\noperations.\n\nPopulated by the system.\nRead-only.\nMore info: http://kubernetes.io/docs/user-guide/identifiers#uids\n+optional"
-        },
-        "resourceVersion": {
-          "type": "string",
-          "description": "An opaque value that represents the internal version of this object that can\nbe used by clients to determine when objects have changed. May be used for optimistic\nconcurrency, change detection, and the watch operation on a resource or set of resources.\nClients must treat these values as opaque and passed unmodified back to the server.\nThey may only be valid for a particular resource or set of resources.\n\nPopulated by the system.\nRead-only.\nValue must be treated as opaque by clients and .\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency\n+optional"
-        },
-        "generation": {
-          "type": "string",
-          "format": "int64",
-          "title": "A sequence number representing a specific generation of the desired state.\nPopulated by the system. Read-only.\n+optional"
-        },
-        "creationTimestamp": {
-          "$ref": "#/definitions/v1Time",
-          "description": "CreationTimestamp is a timestamp representing the server time when this object was\ncreated. It is not guaranteed to be set in happens-before order across separate operations.\nClients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system.\nRead-only.\nNull for lists.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata\n+optional"
-        },
-        "deletionTimestamp": {
-          "$ref": "#/definitions/v1Time",
-          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This\nfield is set by the server when a graceful deletion is requested by the user, and is not\ndirectly settable by a client. The resource is expected to be deleted (no longer visible\nfrom resource lists, and not reachable by name) after the time in this field, once the\nfinalizers list is empty. As long as the finalizers list contains items, deletion is blocked.\nOnce the deletionTimestamp is set, this value may not be unset or be set further into the\nfuture, although it may be shortened or the resource may be deleted prior to this time.\nFor example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react\nby sending a graceful termination signal to the containers in the pod. After that 30 seconds,\nthe Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup,\nremove the pod from the API. In the presence of network partitions, this object may still\nexist after this timestamp, until an administrator or automated process can determine the\nresource is fully terminated.\nIf not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested.\nRead-only.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata\n+optional"
-        },
-        "deletionGracePeriodSeconds": {
-          "type": "string",
-          "format": "int64",
-          "title": "Number of seconds allowed for this object to gracefully terminate before\nit will be removed from the system. Only set when deletionTimestamp is also set.\nMay only be shortened.\nRead-only.\n+optional"
-        },
-        "labels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "title": "Map of string keys and values that can be used to organize and categorize\n(scope and select) objects. May match selectors of replication controllers\nand services.\nMore info: http://kubernetes.io/docs/user-guide/labels\n+optional"
-        },
-        "annotations": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "title": "Annotations is an unstructured key value map stored with a resource that may be\nset by external tools to store and retrieve arbitrary metadata. They are not\nqueryable and should be preserved when modifying objects.\nMore info: http://kubernetes.io/docs/user-guide/annotations\n+optional"
-        },
-        "ownerReferences": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1OwnerReference"
-          },
-          "title": "List of objects depended by this object. If ALL objects in the list have\nbeen deleted, this object will be garbage collected. If this object is managed by a controller,\nthen an entry in this list will point to this controller, with the controller field set to true.\nThere cannot be more than one managing controller.\n+optional\n+patchMergeKey=uid\n+patchStrategy=merge"
-        },
-        "finalizers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Must be empty before the object is deleted from the registry. Each entry\nis an identifier for the responsible component that will remove the entry\nfrom the list. If the deletionTimestamp of the object is non-nil, entries\nin this list can only be removed.\nFinalizers may be processed and removed in any order.  Order is NOT enforced\nbecause it introduces significant risk of stuck finalizers.\nfinalizers is a shared field, any actor with permission can reorder it.\nIf the finalizer list is processed in order, then this can lead to a situation\nin which the component responsible for the first finalizer in the list is\nwaiting for a signal (field value, external system, or other) produced by a\ncomponent responsible for a finalizer later in the list, resulting in a deadlock.\nWithout enforced ordering finalizers are free to order amongst themselves and\nare not vulnerable to ordering changes in the list.\n+optional\n+patchStrategy=merge"
-        },
-        "clusterName": {
-          "type": "string",
-          "title": "The name of the cluster which the object belongs to.\nThis is used to distinguish resources with same name and namespace in different clusters.\nThis field is not set anywhere right now and apiserver is going to ignore it if set in create or update request.\n+optional"
-        },
-        "managedFields": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1ManagedFieldsEntry"
-          },
-          "description": "ManagedFields maps workflow-id and version to the set of fields\nthat are managed by that workflow. This is mostly for internal\nhousekeeping, and users typically shouldn't need to set or\nunderstand this field. A workflow can be the user's name, a\ncontroller's name, or the name of a specific apply path like\n\"ci-cd\". The set of fields is always in the version that the\nworkflow used when modifying the object.\n\n+optional"
-        }
-      },
-      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects\nusers must create."
-    },
-    "v1OperatorBackupManagement": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether or not the backup features are enabled.\nDefault is true."
-        },
-        "snapshots": {
-          "$ref": "#/definitions/v1OperatorSnapshots",
-          "title": "Snapshots configuration"
-        },
-        "scheduledSnapshots": {
-          "$ref": "#/definitions/v1OperatorScheduledSnapshots",
-          "title": "Scheduled snapshot configuration"
-        },
-        "restores": {
-          "$ref": "#/definitions/v1OperatorRestores",
-          "title": "Restores configuration"
-        }
-      },
-      "title": "Backup management operator feature"
-    },
-    "v1OperatorClusterManagement": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether or not the ClusterManagement feature is enabled.\nDefault is true."
-        },
-        "storageClass": {
-          "$ref": "#/definitions/v1OperatorStorageClass",
-          "description": "The StorageClass used to make database and snapshot PVCs.\nIf unset, the default storage class of Kubernetes is used."
-        },
-        "qdrant": {
-          "$ref": "#/definitions/v1OperatorQdrant",
-          "title": "Qdrant config contains settings specific for the database"
-        },
-        "scheduling": {
-          "$ref": "#/definitions/v1OperatorScheduling",
-          "title": "Scheduling config contains the settings specific for scheduling"
-        },
-        "clusterManager": {
-          "$ref": "#/definitions/v1OperatorClusterManager",
-          "title": "ClusterManager config contains the settings specific for cluster manager"
-        },
-        "ingress": {
-          "$ref": "#/definitions/v1OperatorIngress",
-          "title": "Ingress config contains the settings specific for ingress"
-        },
-        "telemetryTimeout": {
-          "type": "string",
-          "title": "The duration of a single call to the cluster telemetry endpoint is allowed to take.\nDefault is 3 seconds"
-        },
-        "maxConcurrentReconciles": {
-          "type": "integer",
-          "format": "int64",
-          "description": "the maximum number of concurrent Reconciles which can be run. Defaults to 20."
-        },
-        "volumeExpansionMode": {
-          "type": "string",
-          "description": "VolumeExpansionMode specifies the expansion mode, which can be online or offline (e.g. in case of Azure)."
-        }
-      },
-      "title": "Operator cluster management feature"
-    },
-    "v1OperatorClusterManager": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "title": "TODO"
-        },
-        "endpointAddress": {
-          "type": "string",
-          "title": "TODO"
-        },
-        "invocationInterval": {
-          "type": "string",
-          "title": "TODO"
-        },
-        "timeout": {
-          "type": "string",
-          "title": "TODO"
-        },
-        "manageRulesOverrides": {
-          "$ref": "#/definitions/v1OperatorClusterManagerOverrides",
-          "title": "TODO"
-        }
-      },
-      "title": "TODO is it worth of exposing this, given that cluster manager is always installed?"
-    },
-    "v1OperatorClusterManagerOverrides": {
-      "type": "object",
-      "properties": {
-        "dryRun": {
-          "type": "boolean",
-          "title": "TODO"
-        },
-        "maxTransfers": {
-          "type": "integer",
-          "format": "int32",
-          "title": "TODO"
-        },
-        "maxTransfersPerCollection": {
-          "type": "integer",
-          "format": "int32",
-          "title": "TODO"
-        },
-        "rebalance": {
-          "type": "string",
-          "title": "TODO"
-        },
-        "replicate": {
-          "type": "string",
-          "title": "TODO"
-        }
-      },
-      "title": "TODO"
-    },
-    "v1OperatorConfiguration": {
-      "type": "object",
-      "properties": {
-        "logLevel": {
-          "type": "string",
-          "title": "Log level"
-        },
-        "features": {
-          "$ref": "#/definitions/v1OperatorFeatures",
-          "title": "Operator features"
-        }
-      },
-      "title": "OperatorConfiguration represents the operator configuration"
-    },
-    "v1OperatorFeatures": {
-      "type": "object",
-      "properties": {
-        "clusterManagement": {
-          "$ref": "#/definitions/v1OperatorClusterManagement",
-          "title": "Cluster management feature"
-        },
-        "backupManagement": {
-          "$ref": "#/definitions/v1OperatorBackupManagement",
-          "title": "Backup management feature"
-        }
-      },
-      "title": "Operator features"
-    },
-    "v1OperatorIngress": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "title": "TODO"
-        },
-        "provider": {
-          "type": "string",
-          "title": "TODO"
-        },
-        "kubernetesIngress": {
-          "$ref": "#/definitions/v1OperatorKubernetesIngress",
-          "title": "TODO"
-        }
-      },
-      "title": "TODO - should not be exposed through API because in hybrid cloud we expose clusters only via clusterIP"
-    },
-    "v1OperatorKubernetesIngress": {
-      "type": "object",
-      "properties": {
-        "ingressClassName": {
-          "type": "string",
-          "title": "TODO"
-        }
-      },
-      "title": "TODO"
-    },
-    "v1OperatorNetworkPolicy": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether or not NetworkPolicy management is enabled.\nIf set to false, no NetworkPolicies will be created.\nDefault is true."
-        },
-        "ingress": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1NetworkPolicyIngressRule"
-          },
-          "title": "Ingress rules"
-        },
-        "egress": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1NetworkPolicyEgressRule"
-          },
-          "title": "Egress rules"
-        }
-      },
-      "title": "Network policies configuration for the Qdrant databases"
-    },
-    "v1OperatorQdrant": {
-      "type": "object",
-      "properties": {
-        "image": {
-          "$ref": "#/definitions/v1OperatorQdrantImage",
-          "title": "The config where to find images for Qdrant cluster"
-        },
-        "storage": {
-          "$ref": "#/definitions/v1OperatorQdrantStorage",
-          "title": "storage contains the settings for the storage of the Qdrant cluster"
-        },
-        "logLevel": {
-          "$ref": "#/definitions/v1DatabaseConfigurationLogLevel",
-          "description": "Qdrant DB log level\nDefault is INFO."
-        },
-        "securityContext": {
-          "$ref": "#/definitions/v1OperatorSecurityContext",
-          "title": "Default Qdrant security context configuration"
-        },
-        "networkPolicies": {
-          "$ref": "#/definitions/v1OperatorNetworkPolicy",
-          "description": "Network policies configuration for the Qdrant databases\nTODO, not sure if needs to be exposed."
-        }
-      },
-      "title": "Operator Qdrant database config"
-    },
-    "v1OperatorQdrantImage": {
-      "type": "object",
-      "properties": {
-        "repository": {
-          "type": "string",
-          "title": "The repository where to find the image for qdrant\nDefault is \"qdrant/qdrant\""
-        },
-        "pullPolicy": {
-          "type": "string",
-          "title": "Image pull policy"
-        },
-        "pullSecretName": {
-          "type": "string",
-          "title": "Image pull secret name"
-        }
-      },
-      "title": "config where to find the image for Qdrant"
-    },
-    "v1OperatorQdrantPerformance": {
-      "type": "object",
-      "properties": {
-        "optimizerCpuBudget": {
-          "type": "integer",
-          "format": "int32",
-          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
-        },
-        "asyncScorer": {
-          "type": "boolean",
-          "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: \u003chttps://qdrant.tech/articles/io_uring/#and-what-about-qdrant\u003e"
-        }
-      },
-      "title": "Storage performance config"
-    },
-    "v1OperatorQdrantStorage": {
-      "type": "object",
-      "properties": {
-        "performance": {
-          "$ref": "#/definitions/v1OperatorQdrantPerformance",
-          "title": "Performance storage settings"
-        }
-      },
-      "title": "Storage contains the settings for the storage of the Qdrant cluster"
-    },
-    "v1OperatorRestores": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "description": "Whether or not the Restore feature is enabled.\nDefault is true."
-        },
-        "maxConcurrentReconciles": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the maximum number of concurrent Reconciles which can be run. Defaults to 1."
-        }
-      },
-      "title": "Operator restores configuration"
-    },
-    "v1OperatorScheduledSnapshots": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "description": "Whether or not the ScheduledSnapshot feature is enabled.\nDefault is true."
-        },
-        "maxConcurrentReconciles": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the maximum number of concurrent Reconciles which can be run. Defaults to 1."
-        }
-      },
-      "title": "Operator scheduled snapshots configuration"
-    },
-    "v1OperatorScheduling": {
-      "type": "object",
-      "properties": {
-        "topologySpreadConstraints": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1TopologySpreadConstraint"
-          },
-          "title": "Topology constraints for Qdrant pod scheduling"
-        },
-        "podDisruptionBudget": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1PodDisruptionBudget"
-          },
-          "title": "Default Qdrant pod disruption budget"
-        }
-      },
-      "title": "TODO is it worth of exposing this through API?"
-    },
-    "v1OperatorSecurityContext": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Enable default security context.\nDefault is false."
-        },
-        "user": {
-          "type": "string",
-          "title": "Default user for qdrant container"
-        },
-        "fsGroup": {
-          "type": "string",
-          "title": "Default fsGroup for qdrant container"
-        },
-        "group": {
-          "type": "string",
-          "title": "Default group for qdrant container"
-        }
-      },
-      "title": "Default Qdrant security context configuration"
-    },
-    "v1OperatorSnapshots": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "title": "Set to true when enabled"
-        },
-        "volumeSnapshotClass": {
-          "type": "string",
-          "description": "The VolumeSnapshotClass used to make VolumeSnapshots."
-        },
-        "retainUnsuccessful": {
-          "type": "string",
-          "description": "The duration a snapshot is retained when the phase becomes Failed or Skipped\nDefault is 72h (3d)."
-        },
-        "maxConcurrentReconciles": {
-          "type": "integer",
-          "format": "int64",
-          "description": "the maximum number of concurrent Reconciles which can be run. Defaults to 1."
-        }
-      },
-      "title": "Operator snapshots configuration"
-    },
-    "v1OperatorStorageClass": {
-      "type": "object",
-      "properties": {
-        "database": {
-          "type": "string",
-          "description": "The StorageClass used to make database PVCs.\nIf unset, the default storage class of Kubernetes is used."
-        },
-        "snapshot": {
-          "type": "string",
-          "description": "The StorageClass used to make snapshot PVCs.\nIf unset, the default storage class of Kubernetes is used."
-        }
-      },
-      "title": "Operator storage class"
-    },
-    "v1OwnerReference": {
-      "type": "object",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "API version of the referent."
-        },
-        "kind": {
-          "type": "string",
-          "title": "Kind of the referent.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
-        },
-        "name": {
-          "type": "string",
-          "title": "Name of the referent.\nMore info: http://kubernetes.io/docs/user-guide/identifiers#names"
-        },
-        "uid": {
-          "type": "string",
-          "title": "UID of the referent.\nMore info: http://kubernetes.io/docs/user-guide/identifiers#uids"
-        },
-        "controller": {
-          "type": "boolean",
-          "title": "If true, this reference points to the managing controller.\n+optional"
-        },
-        "blockOwnerDeletion": {
-          "type": "boolean",
-          "title": "If true, AND if the owner has the \"foregroundDeletion\" finalizer, then\nthe owner cannot be deleted from the key-value store until this\nreference is removed.\nSee https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion\nfor how the garbage collector interacts with this field and enforces the foreground deletion.\nDefaults to false.\nTo set this field, a user needs \"delete\" permission of the owner,\notherwise 422 (Unprocessable Entity) will be returned.\n+optional"
-        }
-      },
-      "title": "OwnerReference contains enough information to let you identify an owning\nobject. An owning object must be in the same namespace as the dependent, or\nbe cluster-scoped, so there is no namespace field.\n+structType=atomic"
-    },
-    "v1PodDisruptionBudget": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/v1ObjectMeta",
-          "title": "Standard object's metadata.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata\n+optional"
-        },
-        "spec": {
-          "$ref": "#/definitions/v1PodDisruptionBudgetSpec",
-          "title": "Specification of the desired behavior of the PodDisruptionBudget.\n+optional"
-        },
-        "status": {
-          "$ref": "#/definitions/v1PodDisruptionBudgetStatus",
-          "title": "Most recently observed status of the PodDisruptionBudget.\n+optional"
-        }
-      },
-      "title": "PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods"
-    },
-    "v1PodDisruptionBudgetSpec": {
-      "type": "object",
-      "properties": {
-        "minAvailable": {
-          "$ref": "#/definitions/intstrIntOrString",
-          "title": "An eviction is allowed if at least \"minAvailable\" pods selected by\n\"selector\" will still be available after the eviction, i.e. even in the\nabsence of the evicted pod.  So for example you can prevent all voluntary\nevictions by specifying \"100%\".\n+optional"
-        },
-        "selector": {
-          "$ref": "#/definitions/v1LabelSelector",
-          "title": "Label query over pods whose evictions are managed by the disruption\nbudget.\nA null selector will match no pods, while an empty ({}) selector will select\nall pods within the namespace.\n+patchStrategy=replace\n+optional"
-        },
-        "maxUnavailable": {
-          "$ref": "#/definitions/intstrIntOrString",
-          "title": "An eviction is allowed if at most \"maxUnavailable\" pods selected by\n\"selector\" are unavailable after the eviction, i.e. even in absence of\nthe evicted pod. For example, one can prevent all voluntary evictions\nby specifying 0. This is a mutually exclusive setting with \"minAvailable\".\n+optional"
-        }
-      },
-      "description": "PodDisruptionBudgetSpec is a description of a PodDisruptionBudget."
-    },
-    "v1PodDisruptionBudgetStatus": {
-      "type": "object",
-      "properties": {
-        "observedGeneration": {
-          "type": "string",
-          "format": "int64",
-          "title": "Most recent generation observed when updating this PDB status. DisruptionsAllowed and other\nstatus information is valid only if observedGeneration equals to PDB's object generation.\n+optional"
-        },
-        "disruptedPods": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v1Time"
-          },
-          "title": "DisruptedPods contains information about pods whose eviction was\nprocessed by the API server eviction subresource handler but has not\nyet been observed by the PodDisruptionBudget controller.\nA pod will be in this map from the time when the API server processed the\neviction request to the time when the pod is seen by PDB controller\nas having been marked for deletion (or after a timeout). The key in the map is the name of the pod\nand the value is the time when the API server processed the eviction request. If\nthe deletion didn't occur and a pod is still there it will be removed from\nthe list automatically by PodDisruptionBudget controller after some time.\nIf everything goes smooth this map should be empty for the most of the time.\nLarge number of entries in the map may indicate problems with pod deletions.\n+optional"
-        },
-        "disruptionsAllowed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of pod disruptions that are currently allowed."
-        },
-        "currentHealthy": {
-          "type": "integer",
-          "format": "int32",
-          "title": "current number of healthy pods"
-        },
-        "desiredHealthy": {
-          "type": "integer",
-          "format": "int32",
-          "title": "minimum desired number of healthy pods"
-        },
-        "expectedPods": {
-          "type": "integer",
-          "format": "int32",
-          "title": "total number of pods counted by this disruption budget"
-        },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1Condition"
-          },
-          "description": "Conditions contain conditions for PDB. The disruption controller sets the\nDisruptionAllowed condition. The following are known values for the reason field\n(additional reasons could be added in the future):\n- SyncFailed: The controller encountered an error and wasn't able to compute\n              the number of allowed disruptions. Therefore no disruptions are\n              allowed and the status of the condition will be False.\n- InsufficientPods: The number of pods are either at or below the number\n                    required by the PodDisruptionBudget. No disruptions are\n                    allowed and the status of the condition will be False.\n- SufficientPods: There are more pods than required by the PodDisruptionBudget.\n                  The condition will be True, and the number of allowed\n                  disruptions are provided by the disruptionsAllowed property.\n\n+optional\n+patchMergeKey=type\n+patchStrategy=merge\n+listType=map\n+listMapKey=type"
-        }
-      },
-      "description": "PodDisruptionBudgetStatus represents information about the status of a\nPodDisruptionBudget. Status may trail the actual state of a system."
-    },
-    "v1Time": {
-      "type": "object",
-      "properties": {
-        "seconds": {
-          "type": "string",
-          "format": "int64",
-          "description": "Represents seconds of UTC time since Unix epoch\n1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n9999-12-31T23:59:59Z inclusive."
-        },
-        "nanos": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Non-negative fractions of a second at nanosecond resolution. Negative\nsecond values with fractions must still have non-negative nanos values\nthat count forward in time. Must be from 0 to 999,999,999\ninclusive. This field may be limited in precision depending on context."
-        }
-      },
-      "description": "Time is a wrapper around time.Time which supports correct\nmarshaling to YAML and JSON.  Wrappers are provided for many\nof the factory methods that the time package offers.\n\n+protobuf.options.marshal=false\n+protobuf.as=Timestamp\n+protobuf.options.(gogoproto.goproto_stringer)=false"
+    "v1QdrantClusterCreationStatus": {
+      "type": "string",
+      "enum": [
+        "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
+        "QDRANT_CLUSTER_CREATION_STATUS_READY",
+        "QDRANT_CLUSTER_CREATION_STATUS_NOT_READY"
+      ],
+      "default": "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
+      "description": "- QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: Unspecified\n - QDRANT_CLUSTER_CREATION_STATUS_READY: Clusters can be created\n - QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: Clusters cannot be created",
+      "title": "QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment"
     },
     "v1TolerationEffect": {
       "type": "string",
@@ -1749,29 +979,6 @@
       "default": "TOLERATION_OPERATOR_UNSPECIFIED",
       "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
       "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
-    },
-    "v1TopologySpreadConstraint": {
-      "type": "object",
-      "properties": {
-        "maxSkew": {
-          "type": "integer",
-          "format": "int32",
-          "description": "MaxSkew describes the degree to which pods may be unevenly distributed.\nWhen `whenUnsatisfiable=DoNotSchedule`, it is the maximum permitted difference\nbetween the number of matching pods in the target topology and the global minimum.\nFor example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same\nlabelSelector spread as 1/1/0:\n+-------+-------+-------+\n| zone1 | zone2 | zone3 |\n+-------+-------+-------+\n|   P   |   P   |       |\n+-------+-------+-------+\n- if MaxSkew is 1, incoming pod can only be scheduled to zone3 to become 1/1/1;\nscheduling it onto zone1(zone2) would make the ActualSkew(2-0) on zone1(zone2)\nviolate MaxSkew(1).\n- if MaxSkew is 2, incoming pod can be scheduled onto any zone.\nWhen `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence\nto topologies that satisfy it.\nIt's a required field. Default value is 1 and 0 is not allowed."
-        },
-        "topologyKey": {
-          "type": "string",
-          "description": "TopologyKey is the key of node labels. Nodes that have a label with this key\nand identical values are considered to be in the same topology.\nWe consider each \u003ckey, value\u003e as a \"bucket\", and try to put balanced number\nof pods into each bucket.\nIt's a required field."
-        },
-        "whenUnsatisfiable": {
-          "type": "string",
-          "description": "WhenUnsatisfiable indicates how to deal with a pod if it doesn't satisfy\nthe spread constraint.\n- DoNotSchedule (default) tells the scheduler not to schedule it.\n- ScheduleAnyway tells the scheduler to schedule the pod in any location,\n  but giving higher precedence to topologies that would help reduce the\n  skew.\nA constraint is considered \"Unsatisfiable\" for an incoming pod\nif and only if every possible node assignment for that pod would violate\n\"MaxSkew\" on some topology.\nFor example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same\nlabelSelector spread as 3/1/1:\n+-------+-------+-------+\n| zone1 | zone2 | zone3 |\n+-------+-------+-------+\n| P P P |   P   |   P   |\n+-------+-------+-------+\nIf WhenUnsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled\nto zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies\nMaxSkew(1). In other words, the cluster can still be imbalanced, but scheduler\nwon't make it *more* imbalanced.\nIt's a required field."
-        },
-        "labelSelector": {
-          "$ref": "#/definitions/v1LabelSelector",
-          "title": "LabelSelector is used to find matching pods.\nPods that match this label selector are counted to determine the number of pods\nin their corresponding topology domain.\n+optional"
-        }
-      },
-      "description": "TopologySpreadConstraint specifies how to spread matching pods among the given topology."
     },
     "v1UpdateHybridCloudEnvironmentResponse": {
       "type": "object",
