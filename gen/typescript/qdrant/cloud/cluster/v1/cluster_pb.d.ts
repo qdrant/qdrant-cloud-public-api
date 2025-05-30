@@ -1060,6 +1060,13 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 7;
    */
   resources?: ClusterNodeResourcesSummary;
+
+  /**
+   * Whether the cluster can be scaled up or down.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8;
+   */
+  scalabilityInfo?: ClusterScalabilityInfo;
 };
 
 /**
@@ -1187,6 +1194,34 @@ export declare type ClusterNodeResources = Message<"qdrant.cloud.cluster.v1.Clus
  * Use `create(ClusterNodeResourcesSchema)` to create a new message.
  */
 export declare const ClusterNodeResourcesSchema: GenMessage<ClusterNodeResources>;
+
+/**
+ * ClusterScalabilityInfo provides information about the
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterScalabilityInfo
+ */
+export declare type ClusterScalabilityInfo = Message<"qdrant.cloud.cluster.v1.ClusterScalabilityInfo"> & {
+  /**
+   * The current scalability status of the cluster.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityStatus status = 1;
+   */
+  status: ClusterScalabilityStatus;
+
+  /**
+   * Optional human-readable reason providing more context about the scalability status.
+   * When a cluster is not scalable, this field explains why.
+   *
+   * @generated from field: optional string reason = 2;
+   */
+  reason?: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterScalabilityInfo.
+ * Use `create(ClusterScalabilityInfoSchema)` to create a new message.
+ */
+export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalabilityInfo>;
 
 /**
  * QdrantRelease represent a single Qdrant release
@@ -1631,6 +1666,39 @@ export enum ClusterPhase {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterPhase.
  */
 export declare const ClusterPhaseSchema: GenEnum<ClusterPhase>;
+
+/**
+ * ClusterScalabilityStatus defines the scalability states of a cluster.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterScalabilityStatus
+ */
+export enum ClusterScalabilityStatus {
+  /**
+   * Scalability status is unspecified.
+   *
+   * @generated from enum value: CLUSTER_SCALABILITY_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The cluster is not scalable.
+   *
+   * @generated from enum value: CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE = 1;
+   */
+  NOT_SCALABLE = 1,
+
+  /**
+   * The cluster supports scaling operations.
+   *
+   * @generated from enum value: CLUSTER_SCALABILITY_STATUS_SCALABLE = 2;
+   */
+  SCALABLE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterScalabilityStatus.
+ */
+export declare const ClusterScalabilityStatusSchema: GenEnum<ClusterScalabilityStatus>;
 
 /**
  * ClusterService is the API used to configure cluster objects.
