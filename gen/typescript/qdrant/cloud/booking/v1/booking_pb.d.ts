@@ -59,6 +59,46 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
 export declare const ListPackagesRequestSchema: GenMessage<ListPackagesRequest>;
 
 /**
+ * ListPublicPackagesRequest is the request for the ListPublicPackages function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListPublicPackagesRequest
+ */
+export declare type ListPublicPackagesRequest = Message<"qdrant.cloud.booking.v1.ListPublicPackagesRequest"> & {
+  /**
+   * Optional filter specifying the cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+   * If omitted, all packages for the specified account are returned.
+   *
+   * @generated from field: optional string cloud_provider_id = 1;
+   */
+  cloudProviderId?: string;
+
+  /**
+   * Optional filter specifying the cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+   * If omitted, all packages for the specified account are returned.
+   * This field is ignored when the `cloud_provider_id` is set to 'hybrid'.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 2;
+   */
+  cloudProviderRegionId?: string;
+
+  /**
+   * The status of the packages to filter.
+   * This is an optional field. If value is not set, all packages are returned.
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.PackageStatus statuses = 3;
+   */
+  statuses: PackageStatus[];
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListPublicPackagesRequest.
+ * Use `create(ListPublicPackagesRequestSchema)` to create a new message.
+ */
+export declare const ListPublicPackagesRequestSchema: GenMessage<ListPublicPackagesRequest>;
+
+/**
  * ListPackagesResponse is the response from the ListPackages function
  *
  * @generated from message qdrant.cloud.booking.v1.ListPackagesResponse
@@ -292,6 +332,26 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof GetPackageRequestSchema;
     output: typeof GetPackageResponseSchema;
+  },
+}>;
+
+/**
+ * PublicBookingService is the API used to fetch public packages.
+ *
+ * @generated from service qdrant.cloud.booking.v1.PublicBookingService
+ */
+export declare const PublicBookingService: GenService<{
+  /**
+   * Fetch all public packages
+   * Required permissions:
+   * - None (public endpoint)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.PublicBookingService.ListPublicPackages
+   */
+  listPublicPackages: {
+    methodKind: "unary";
+    input: typeof ListPublicPackagesRequestSchema;
+    output: typeof ListPackagesResponseSchema;
   },
 }>;
 

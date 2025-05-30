@@ -30,6 +30,16 @@ class ListPackagesRequest(_message.Message):
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
 
+class ListPublicPackagesRequest(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "statuses")
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUSES_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
+
 class ListPackagesResponse(_message.Message):
     __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]

@@ -7,6 +7,9 @@
   "tags": [
     {
       "name": "BookingService"
+    },
+    {
+      "name": "PublicBookingService"
     }
   ],
   "consumes": [
@@ -18,7 +21,7 @@
   "paths": {
     "/api/booking/v1/accounts/{accountId}/packages": {
       "get": {
-        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)\nbuf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE",
         "operationId": "BookingService_ListPackages",
         "responses": {
           "200": {
@@ -114,6 +117,61 @@
         ],
         "tags": [
           "BookingService"
+        ]
+      }
+    },
+    "/api/public/v1/packages": {
+      "get": {
+        "summary": "Fetch all public packages\nRequired permissions:\n- None (public endpoint)\nbuf:lint:ignore RPC_RESPONSE_STANDARD_NAME",
+        "operationId": "PublicBookingService_ListPublicPackages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPackagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cloudProviderId",
+            "description": "Optional filter specifying the cloud provider where the cluster will be hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.\nIf omitted, all packages for the specified account are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderRegionId",
+            "description": "Optional filter specifying the cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nIf omitted, all packages for the specified account are returned.\nThis field is ignored when the `cloud_provider_id` is set to 'hybrid'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "statuses",
+            "description": "The status of the packages to filter.\nThis is an optional field. If value is not set, all packages are returned.\n\n - PACKAGE_STATUS_UNSPECIFIED: Unspecified package status.\n - PACKAGE_STATUS_ACTIVE: The package is active and available for use.\n - PACKAGE_STATUS_DEACTIVATED: The package is deactivated.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "PACKAGE_STATUS_UNSPECIFIED",
+                "PACKAGE_STATUS_ACTIVE",
+                "PACKAGE_STATUS_DEACTIVATED"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "PublicBookingService"
         ]
       }
     }

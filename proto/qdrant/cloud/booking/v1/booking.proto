@@ -64,6 +64,7 @@ message ListPackagesRequest {
   // This is an optional field. If value is not set, all packages are returned.
   repeated PackageStatus statuses = 4;
 }
+
 // ListPublicPackagesRequest is the request for the ListPublicPackages function
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 message ListPublicPackagesRequest {
