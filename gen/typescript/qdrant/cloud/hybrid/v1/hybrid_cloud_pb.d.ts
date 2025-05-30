@@ -541,11 +541,11 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   componentStatuses: HybridCloudEnvironmentComponentStatus[];
 
   /**
-   * True if the hybrid cloud environment is ready for Qdrant cluster creation
+   * Report if the hybrid cloud environment is ready for Qdrant cluster creation
    *
-   * @generated from field: qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus ready_for_cluster_creation = 9;
+   * @generated from field: qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus cluster_creation_readiness = 9;
    */
-  readyForClusterCreation: QdrantClusterCreationStatus;
+  clusterCreationReadiness: QdrantClusterCreationStatus;
 
   /**
    * Status message

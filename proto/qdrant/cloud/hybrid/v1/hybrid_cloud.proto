@@ -65,7 +65,7 @@ service HybridCloudService {
     // permissions
     option (common.v1.permissions) = "delete:hybrid_cloud_environments";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/hybrid/v1/accounts/{account_id}/clusters/{hybrid_cloud_environment_id}"};
+    option (google.api.http) = {delete: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
   }
   // Fetch the commands that should be executed against a kubernetes cluster to
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
@@ -275,8 +275,8 @@ message HybridCloudEnvironmentStatus {
   HybridCloudEnvironmentCapabilities capabilities = 6;
   // Status of deployed component
   repeated HybridCloudEnvironmentComponentStatus component_statuses = 7;
-  // True if the hybrid cloud environment is ready for Qdrant cluster creation
-  QdrantClusterCreationStatus ready_for_cluster_creation = 9;
+  // Report if the hybrid cloud environment is ready for Qdrant cluster creation
+  QdrantClusterCreationStatus cluster_creation_readiness = 9;
   // Status message
   optional string message = 11;
   // Storage classes available in the hybrid cloud environment

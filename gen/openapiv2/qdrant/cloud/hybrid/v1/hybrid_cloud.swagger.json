@@ -55,45 +55,6 @@
         ]
       }
     },
-    "/api/hybrid/v1/accounts/{accountId}/clusters/{hybridCloudEnvironmentId}": {
-      "delete": {
-        "summary": "Deletes a hybrid cloud environment in the account identified by the given ID.\nRequired permissions:\n- delete:hybrid_cloud_environments",
-        "operationId": "HybridCloudService_DeleteHybridCloudEnvironment",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1DeleteHybridCloudEnvironmentResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hybridCloudEnvironmentId",
-            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "HybridCloudService"
-        ]
-      }
-    },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments": {
       "get": {
         "summary": "Fetch all hybrid cloud environments in the account identified by the given ID.\nRequired permissions:\n- read:hybrid_cloud_environments",
@@ -135,6 +96,43 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v1GetHybridCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a hybrid cloud environment in the account identified by the given ID.\nRequired permissions:\n- delete:hybrid_cloud_environments",
+        "operationId": "HybridCloudService_DeleteHybridCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteHybridCloudEnvironmentResponse"
             }
           },
           "default": {
@@ -669,9 +667,9 @@
           },
           "title": "Status of deployed component"
         },
-        "readyForClusterCreation": {
+        "clusterCreationReadiness": {
           "$ref": "#/definitions/v1QdrantClusterCreationStatus",
-          "title": "True if the hybrid cloud environment is ready for Qdrant cluster creation"
+          "title": "Report if the hybrid cloud environment is ready for Qdrant cluster creation"
         },
         "message": {
           "type": "string",
