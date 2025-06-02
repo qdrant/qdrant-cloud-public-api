@@ -19,3 +19,5 @@ nvidia
 amd
 linode
 openshift
+gibibytes
+millicore
