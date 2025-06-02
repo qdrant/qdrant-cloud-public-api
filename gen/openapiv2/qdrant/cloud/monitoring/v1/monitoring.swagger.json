@@ -64,14 +64,6 @@
             "required": false,
             "type": "string",
             "format": "date-time"
-          },
-          {
-            "name": "limit",
-            "description": "Maximum number of events to return.\nIf omitted, Defaults to 100.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "tags": [
@@ -111,6 +103,22 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the logs query.\nIf omitted, defaults to 3 days ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the logs query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -382,17 +390,13 @@
     "v1GetClusterEventsResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "TODO do we really need this status? In case it is != success, we could return an error."
-        },
         "items": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1LogEntry"
           },
-          "description": "TODO The current response has more fields that we don't really use, that's why I simplified it to use LogEntry."
+          "description": "A list of entries representing events that have happened in the cluster."
         }
       },
       "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
@@ -508,7 +512,7 @@
       "properties": {
         "interval": {
           "type": "string",
-          "title": "TODO which unit do they represent? minutes? Also, can we change them to int?\ne.g. \"1\", \"5\", \"60\""
+          "description": "The duration of the interval."
         },
         "value": {
           "type": "number",
@@ -544,7 +548,7 @@
         "value": {
           "type": "number",
           "format": "double",
-          "description": "Numerical value of the metric at the given timestamp.\n\nTODO can we add a unit or metric type ?"
+          "description": "Numerical value of the metric at the given timestamp."
         }
       },
       "description": "A single metric data point."
@@ -553,13 +557,13 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "string",
-          "description": "TODO do we want to keep it as string? we could use a double.\nValue of the resource, e.g., \"0.5\"."
+          "type": "number",
+          "format": "double",
+          "description": "Value of the resource, e.g., 0.5."
         },
         "unit": {
           "type": "string",
-          "description": "e.g., \"vcpu/core\"",
-          "title": "Unit of the resource value, e.g., \"vcpu/core\".\nTODO we could have an enum with units?"
+          "description": "Unit of the resource value, e.g., \"vcpu/core\"."
         }
       },
       "description": "ResourceValue represents the total value of a resource along with its unit."

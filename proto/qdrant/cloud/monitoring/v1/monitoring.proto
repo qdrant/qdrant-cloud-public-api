@@ -4,6 +4,7 @@ package qdrant.cloud.monitoring.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
@@ -116,6 +117,12 @@ message GetClusterLogsRequest {
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the logs query.
+  // If omitted, defaults to 3 days ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the logs query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
 }
 
 // GetClusterLogsResponse is the response from the GetClusterLogs function
@@ -139,20 +146,12 @@ message GetClusterEventsRequest {
   // Optional end time for the events query.
   // If omitted, defaults to current time.
   optional google.protobuf.Timestamp until = 4;
-  // Maximum number of events to return.
-  // If omitted, Defaults to 100.
-  optional uint32 limit = 5 [(buf.validate.field).uint32 = {
-    gte: 1
-    lte: 1000
-  }];
 }
 
 // GetClusterEventsRequest is the response from the GetClusterEvents function
 message GetClusterEventsResponse {
-  // TODO do we really need this status? In case it is != success, we could return an error.
-  string status = 1;
-  // TODO The current response has more fields that we don't really use, that's why I simplified it to use LogEntry.
-  repeated LogEntry items = 2;
+  // A list of entries representing events that have happened in the cluster.
+  repeated LogEntry items = 1;
 }
 
 // ClusterNodeMetrics contains metric overview for a node.
@@ -184,21 +183,18 @@ message ClusterMetricOverview {
 
 // IntervalAverage represents the average value of a metric over a specific time interval.
 message IntervalAverage {
-  // TODO which unit do they represent? minutes? Also, can we change them to int?
-  // e.g. "1", "5", "60"
-  string interval = 1;
+  // The duration of the interval.
+  google.protobuf.Duration interval = 1;
   // Average value of the metric during the specified interval.
   double value = 2;
 }
 
 // ResourceValue represents the total value of a resource along with its unit.
 message ResourceValue {
-  // TODO do we want to keep it as string? we could use a double.
-  // Value of the resource, e.g., "0.5".
-  string value = 1;
+  // Value of the resource, e.g., 0.5.
+  double value = 1;
   // Unit of the resource value, e.g., "vcpu/core".
-  // TODO we could have an enum with units?
-  string unit = 2; // e.g., "vcpu/core"
+  string unit = 2;
 }
 
 // ClusterNodeUsageMetrics defines per-node usage metrics.
@@ -225,7 +221,6 @@ message Metric {
   google.protobuf.Timestamp timestamp = 1;
   // Numerical value of the metric at the given timestamp.
   double value = 2;
-  // TODO can we add a unit or metric type ?
 }
 
 // LogEntry represents a single log line.

@@ -1,5 +1,6 @@
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import duration_pb2 as _duration_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
@@ -74,12 +75,16 @@ class GetClusterUsageMetricsResponse(_message.Message):
     def __init__(self, cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., rps: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeUsageMetrics, _Mapping]]] = ...) -> None: ...
 
 class GetClusterLogsRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ("account_id", "cluster_id", "since", "until")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    SINCE_FIELD_NUMBER: _ClassVar[int]
+    UNTIL_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+    since: _timestamp_pb2.Timestamp
+    until: _timestamp_pb2.Timestamp
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class GetClusterLogsResponse(_message.Message):
     __slots__ = ("items",)
@@ -88,26 +93,22 @@ class GetClusterLogsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
 
 class GetClusterEventsRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "since", "until", "limit")
+    __slots__ = ("account_id", "cluster_id", "since", "until")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     SINCE_FIELD_NUMBER: _ClassVar[int]
     UNTIL_FIELD_NUMBER: _ClassVar[int]
-    LIMIT_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
-    limit: int
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., limit: _Optional[int] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class GetClusterEventsResponse(_message.Message):
-    __slots__ = ("status", "items")
-    STATUS_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
-    status: str
     items: _containers.RepeatedCompositeFieldContainer[LogEntry]
-    def __init__(self, status: _Optional[str] = ..., items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
+    def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeMetrics(_message.Message):
     __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk")
@@ -139,17 +140,17 @@ class IntervalAverage(_message.Message):
     __slots__ = ("interval", "value")
     INTERVAL_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
-    interval: str
+    interval: _duration_pb2.Duration
     value: float
-    def __init__(self, interval: _Optional[str] = ..., value: _Optional[float] = ...) -> None: ...
+    def __init__(self, interval: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
 
 class ResourceValue(_message.Message):
     __slots__ = ("value", "unit")
     VALUE_FIELD_NUMBER: _ClassVar[int]
     UNIT_FIELD_NUMBER: _ClassVar[int]
-    value: str
+    value: float
     unit: str
-    def __init__(self, value: _Optional[str] = ..., unit: _Optional[str] = ...) -> None: ...
+    def __init__(self, value: _Optional[float] = ..., unit: _Optional[str] = ...) -> None: ...
 
 class ClusterNodeUsageMetrics(_message.Message):
     __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk")

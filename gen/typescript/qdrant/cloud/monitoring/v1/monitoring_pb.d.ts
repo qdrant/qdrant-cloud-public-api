@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file qdrant/cloud/monitoring/v1/monitoring.proto.
@@ -213,6 +213,22 @@ export declare type GetClusterLogsRequest = Message<"qdrant.cloud.monitoring.v1.
    * @generated from field: string cluster_id = 2;
    */
   clusterId: string;
+
+  /**
+   * Optional start time for the logs query.
+   * If omitted, defaults to 3 days ago.
+   *
+   * @generated from field: optional google.protobuf.Timestamp since = 3;
+   */
+  since?: Timestamp;
+
+  /**
+   * Optional end time for the logs query.
+   * If omitted, defaults to current time.
+   *
+   * @generated from field: optional google.protobuf.Timestamp until = 4;
+   */
+  until?: Timestamp;
 };
 
 /**
@@ -279,14 +295,6 @@ export declare type GetClusterEventsRequest = Message<"qdrant.cloud.monitoring.v
    * @generated from field: optional google.protobuf.Timestamp until = 4;
    */
   until?: Timestamp;
-
-  /**
-   * Maximum number of events to return.
-   * If omitted, Defaults to 100.
-   *
-   * @generated from field: optional uint32 limit = 5;
-   */
-  limit?: number;
 };
 
 /**
@@ -302,16 +310,9 @@ export declare const GetClusterEventsRequestSchema: GenMessage<GetClusterEventsR
  */
 export declare type GetClusterEventsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
   /**
-   * TODO do we really need this status? In case it is != success, we could return an error.
+   * A list of entries representing events that have happened in the cluster.
    *
-   * @generated from field: string status = 1;
-   */
-  status: string;
-
-  /**
-   * TODO The current response has more fields that we don't really use, that's why I simplified it to use LogEntry.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 2;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
    */
   items: LogEntry[];
 };
@@ -419,12 +420,11 @@ export declare const ClusterMetricOverviewSchema: GenMessage<ClusterMetricOvervi
  */
 export declare type IntervalAverage = Message<"qdrant.cloud.monitoring.v1.IntervalAverage"> & {
   /**
-   * TODO which unit do they represent? minutes? Also, can we change them to int?
-   * e.g. "1", "5", "60"
+   * The duration of the interval.
    *
-   * @generated from field: string interval = 1;
+   * @generated from field: google.protobuf.Duration interval = 1;
    */
-  interval: string;
+  interval?: Duration;
 
   /**
    * Average value of the metric during the specified interval.
@@ -447,18 +447,14 @@ export declare const IntervalAverageSchema: GenMessage<IntervalAverage>;
  */
 export declare type ResourceValue = Message<"qdrant.cloud.monitoring.v1.ResourceValue"> & {
   /**
-   * TODO do we want to keep it as string? we could use a double.
-   * Value of the resource, e.g., "0.5".
+   * Value of the resource, e.g., 0.5.
    *
-   * @generated from field: string value = 1;
+   * @generated from field: double value = 1;
    */
-  value: string;
+  value: number;
 
   /**
    * Unit of the resource value, e.g., "vcpu/core".
-   * TODO we could have an enum with units?
-   *
-   * e.g., "vcpu/core"
    *
    * @generated from field: string unit = 2;
    */
@@ -548,8 +544,6 @@ export declare type Metric = Message<"qdrant.cloud.monitoring.v1.Metric"> & {
 
   /**
    * Numerical value of the metric at the given timestamp.
-   *
-   * TODO can we add a unit or metric type ?
    *
    * @generated from field: double value = 2;
    */
