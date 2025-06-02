@@ -234,7 +234,7 @@ message Role {
   google.protobuf.Timestamp created_at = 2;
   // The timestamp when the role was last updated.
   // This is a read-only field and will be available after a role is created.
-  google.protobuf.Timestamp last_updated_at = 3;
+  google.protobuf.Timestamp last_modified_at = 3;
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 4 [(buf.validate.field).string = {uuid: true}];
