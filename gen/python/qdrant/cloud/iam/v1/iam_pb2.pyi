@@ -122,14 +122,13 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Role(_message.Message):
-    __slots__ = ("id", "created_at", "last_updated_at", "account_id", "name", "description", "is_admin", "role_type", "permissions")
+    __slots__ = ("id", "created_at", "last_updated_at", "account_id", "name", "description", "role_type", "permissions")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    IS_ADMIN_FIELD_NUMBER: _ClassVar[int]
     ROLE_TYPE_FIELD_NUMBER: _ClassVar[int]
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
     id: str
@@ -138,7 +137,6 @@ class Role(_message.Message):
     account_id: str
     name: str
     description: str
-    is_admin: bool
     role_type: RoleType
     permissions: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_updated_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., is_admin: bool = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_updated_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...

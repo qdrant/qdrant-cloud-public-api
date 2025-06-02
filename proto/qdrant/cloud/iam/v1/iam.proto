@@ -247,13 +247,11 @@ message Role {
   }];
   // The human readable description of this role.
   string description = 6;
-  // Set if this role represents the admin role.
-  bool is_admin = 7;
   // The role type.
-  RoleType role_type = 8;
+  RoleType role_type = 7;
   // The permissions associated with this role.
   // Must contain at least one permission.
-  repeated string permissions = 9 [(buf.validate.field).repeated = {min_items: 1}];
+  repeated string permissions = 8 [(buf.validate.field).repeated = {min_items: 1}];
 }
 
 // RoleType specified the type of the role

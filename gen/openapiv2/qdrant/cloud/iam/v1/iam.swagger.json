@@ -372,10 +372,6 @@
               "type": "string",
               "description": "The human readable description of this role."
             },
-            "isAdmin": {
-              "type": "boolean",
-              "description": "Set if this role represents the admin role."
-            },
             "roleType": {
               "$ref": "#/definitions/v1RoleType",
               "description": "The role type."
@@ -417,10 +413,6 @@
             "description": {
               "type": "string",
               "description": "The human readable description of this role."
-            },
-            "isAdmin": {
-              "type": "boolean",
-              "description": "Set if this role represents the admin role."
             },
             "roleType": {
               "$ref": "#/definitions/v1RoleType",
@@ -565,10 +557,6 @@
         "description": {
           "type": "string",
           "description": "The human readable description of this role."
-        },
-        "isAdmin": {
-          "type": "boolean",
-          "description": "Set if this role represents the admin role."
         },
         "roleType": {
           "$ref": "#/definitions/v1RoleType",
