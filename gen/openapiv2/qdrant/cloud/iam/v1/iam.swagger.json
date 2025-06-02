@@ -359,7 +359,7 @@
               "format": "date-time",
               "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
             },
-            "lastUpdatedat": {
+            "lastUpdatedAt": {
               "type": "string",
               "format": "date-time",
               "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
@@ -405,7 +405,7 @@
               "format": "date-time",
               "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
             },
-            "lastUpdatedat": {
+            "lastUpdatedAt": {
               "type": "string",
               "format": "date-time",
               "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
@@ -549,7 +549,7 @@
           "format": "date-time",
           "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
         },
-        "lastUpdatedat": {
+        "lastUpdatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
