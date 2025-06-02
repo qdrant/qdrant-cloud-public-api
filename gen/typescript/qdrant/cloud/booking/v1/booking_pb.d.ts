@@ -129,6 +129,64 @@ export declare type ListGlobalPackagesResponse = Message<"qdrant.cloud.booking.v
 export declare const ListGlobalPackagesResponseSchema: GenMessage<ListGlobalPackagesResponse>;
 
 /**
+ * ListGlobalResourceOptionsRequest is the request for the ListGlobalResourceOptions function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalResourceOptionsRequest
+ */
+export declare type ListGlobalResourceOptionsRequest = Message<"qdrant.cloud.booking.v1.ListGlobalResourceOptionsRequest"> & {
+  /**
+   * Mandatory filter specifying the cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+   * Field can be empty, if cloud_provider_id is `hybrid`
+   *
+   * @generated from field: optional string cloud_provider_region_id = 2;
+   */
+  cloudProviderRegionId?: string;
+
+  /**
+   * Optional filter specifying the type of resources to return.
+   * If not set, all resource options are returned.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.ResourceType resource_type = 3;
+   */
+  resourceType: ResourceType;
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalResourceOptionsRequest.
+ * Use `create(ListGlobalResourceOptionsRequestSchema)` to create a new message.
+ */
+export declare const ListGlobalResourceOptionsRequestSchema: GenMessage<ListGlobalResourceOptionsRequest>;
+
+/**
+ * ListGlobalResourceOptionsResponse is the response from the ListGlobalResourceOptions function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalResourceOptionsResponse
+ */
+export declare type ListGlobalResourceOptionsResponse = Message<"qdrant.cloud.booking.v1.ListGlobalResourceOptionsResponse"> & {
+  /**
+   * The actual resource options in this list
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.ResourceOption items = 1;
+   */
+  items: ResourceOption[];
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalResourceOptionsResponse.
+ * Use `create(ListGlobalResourceOptionsResponseSchema)` to create a new message.
+ */
+export declare const ListGlobalResourceOptionsResponseSchema: GenMessage<ListGlobalResourceOptionsResponse>;
+
+/**
  * GetPackageRequest is the request for the GetPackage function
  *
  * @generated from message qdrant.cloud.booking.v1.GetPackageRequest
@@ -281,6 +339,148 @@ export declare type ResourceConfiguration = Message<"qdrant.cloud.booking.v1.Res
 export declare const ResourceConfigurationSchema: GenMessage<ResourceConfiguration>;
 
 /**
+ * ResourceOption represents a single resource option.
+ *
+ * @generated from message qdrant.cloud.booking.v1.ResourceOption
+ */
+export declare type ResourceOption = Message<"qdrant.cloud.booking.v1.ResourceOption"> & {
+  /**
+   * The unique identifier of the resource option.
+   * A unique string ID assigned to each resource option.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The name of the resource option.
+   * A human-readable name for the resource option.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * The type of the resource option.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.ResourceType type = 3;
+   */
+  type: ResourceType;
+
+  /**
+   * The status of the resource option.
+   * Indicates the current status of the resource option.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.PackageStatus status = 4;
+   */
+  status: PackageStatus;
+
+  /**
+   * The unit of the resource option.
+   * Specifies the unit in which the resource option is measured.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.ResourceUnit unit = 5;
+   */
+  unit: ResourceUnit;
+
+  /**
+   * The currency of the prices.
+   * Specifies the currency in which prices are denominated.
+   *
+   * @generated from field: string currency = 6;
+   */
+  currency: string;
+
+  /**
+   * The unit price per hour, in millicents, as an integer.
+   * Represents the cost per hour for a single unit of the resource.
+   * You will be billed hourly for the resources you use; partial hours are rounded up and billed as full hours.
+   *
+   * @generated from field: int32 unit_int_price_per_hour = 7;
+   */
+  unitIntPricePerHour: number;
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ResourceOption.
+ * Use `create(ResourceOptionSchema)` to create a new message.
+ */
+export declare const ResourceOptionSchema: GenMessage<ResourceOption>;
+
+/**
+ * ResourceUnit defines the units of the available resources options.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.ResourceUnit
+ */
+export enum ResourceUnit {
+  /**
+   * Unspecified resource unit.
+   *
+   * @generated from enum value: RESOURCE_UNIT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The resource is measured in GiB (Gibibytes).
+   *
+   * @generated from enum value: RESOURCE_UNIT_GIB = 1;
+   */
+  GIB = 1,
+
+  /**
+   * The resource is measured in millicore units.
+   *
+   * @generated from enum value: RESOURCE_UNIT_MILLICORE = 2;
+   */
+  MILLICORE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.ResourceUnit.
+ */
+export declare const ResourceUnitSchema: GenEnum<ResourceUnit>;
+
+/**
+ * ResourceType defines the types of the available resources options.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.ResourceType
+ */
+export enum ResourceType {
+  /**
+   * Unspecified resource type.
+   *
+   * @generated from enum value: RESOURCE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * CPU resource type.
+   *
+   * @generated from enum value: RESOURCE_TYPE_CPU = 1;
+   */
+  CPU = 1,
+
+  /**
+   * RAM resource type.
+   *
+   * @generated from enum value: RESOURCE_TYPE_RAM = 2;
+   */
+  RAM = 2,
+
+  /**
+   * Disk resource type.
+   *
+   * @generated from enum value: RESOURCE_TYPE_DISK = 3;
+   */
+  DISK = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.ResourceType.
+ */
+export declare const ResourceTypeSchema: GenEnum<ResourceType>;
+
+/**
  * PackageStatus defines the valid states a package can be in.
  *
  * @generated from enum qdrant.cloud.booking.v1.PackageStatus
@@ -354,6 +554,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof ListGlobalPackagesRequestSchema;
     output: typeof ListGlobalPackagesResponseSchema;
+  },
+  /**
+   * Fetch all public resource options
+   * Required permissions:
+   * - None (public endpoint)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalResourceOptions
+   */
+  listGlobalResourceOptions: {
+    methodKind: "unary";
+    input: typeof ListGlobalResourceOptionsRequestSchema;
+    output: typeof ListGlobalResourceOptionsResponseSchema;
   },
 }>;
 
