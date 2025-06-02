@@ -1,0 +1,597 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/iam/v1/iam.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "IAMService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/iam/v1/accounts/{accountId}/effective-permissions": {
+      "get": {
+        "summary": "List the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_ListEffectivePermissions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListEffectivePermissionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}/permissions": {
+      "get": {
+        "summary": "Fetch all permissions known in the system for the provided account.\nNote: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_ListPermissions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPermissionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}/roles": {
+      "get": {
+        "summary": "Fetch all roles in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_ListRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}/roles/{roleId}": {
+      "get": {
+        "summary": "Get a role for the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_GetRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleId",
+            "description": "The identifier of the role (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- delete:roles",
+        "operationId": "IAMService_DeleteRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleId",
+            "description": "The identifier of the role (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}/users/{userId}/roles": {
+      "post": {
+        "summary": "Assign the provided roles to the user in the account identified by the given ID.\nRequired permissions:\n- write:roles",
+        "operationId": "IAMService_AssignUserRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AssignUserRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format).\nThis user should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IAMServiceAssignUserRolesBody"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{role.accountId}/roles": {
+      "post": {
+        "summary": "Creates a role for the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
+        "operationId": "IAMService_CreateRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "role.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IAMServiceCreateRoleBody"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{role.accountId}/roles/{role.id}": {
+      "put": {
+        "summary": "Update a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
+        "operationId": "IAMService_UpdateRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "role.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "role.id",
+            "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IAMServiceUpdateRoleBody"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "IAMServiceAssignUserRolesBody": {
+      "type": "object",
+      "properties": {
+        "roleIdsToAdd": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The roles to add to the provided user.\nIf a role was already part of the user or the same role is provided multiple times, the role will be added exactly one time."
+        },
+        "roleIdsToDelete": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The roles to be deleted from the provided user.\nIf a role is part of the role_ids_to_add this field takes precedence."
+        }
+      },
+      "title": "AssignUserRolesRequest is the request for the AssignUserRoles function"
+    },
+    "IAMServiceCreateRoleBody": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "description": {
+              "type": "string",
+              "description": "The human readable description of this role."
+            },
+            "roleType": {
+              "$ref": "#/definitions/v1RoleType",
+              "description": "The role type."
+            },
+            "permissions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The permissions associated with this role.\nMust contain at least one permission."
+            }
+          },
+          "description": "The actual role.",
+          "title": "The actual role."
+        }
+      },
+      "description": "CreateRoleRequest is the request for the CreateRole function."
+    },
+    "IAMServiceUpdateRoleBody": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "description": {
+              "type": "string",
+              "description": "The human readable description of this role."
+            },
+            "roleType": {
+              "$ref": "#/definitions/v1RoleType",
+              "description": "The role type."
+            },
+            "permissions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The permissions associated with this role.\nMust contain at least one permission."
+            }
+          },
+          "description": "The actual role.",
+          "title": "The actual role."
+        }
+      },
+      "description": "UpdateRoleRequest is the request for the UpdateRole function."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AssignUserRolesResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "AssignUserRolesResponse is the response from the AssignUserRoles function"
+    },
+    "v1CreateRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "description": "The actual role."
+        }
+      },
+      "description": "CreateRoleResponse is the response from the CreateRole function."
+    },
+    "v1DeleteRoleResponse": {
+      "type": "object",
+      "description": "DeleteRoleResponse is the response from the DeleteRole function.\n\nEmpty"
+    },
+    "v1GetRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "description": "The actual role."
+        }
+      },
+      "title": "GetRoleResponse is the response from the GetRole function"
+    },
+    "v1ListEffectivePermissionsResponse": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The effective permissions."
+        }
+      },
+      "title": "ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function"
+    },
+    "v1ListPermissionsResponse": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The permissions know by the system."
+        }
+      },
+      "title": "ListPermissionsResponse is the response from the ListPermissions function"
+    },
+    "v1ListRolesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Role"
+          },
+          "description": "The actual roles in this list."
+        }
+      },
+      "title": "ListRolesResponse is the response from the ListRoles function"
+    },
+    "v1Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "description": {
+          "type": "string",
+          "description": "The human readable description of this role."
+        },
+        "roleType": {
+          "$ref": "#/definitions/v1RoleType",
+          "description": "The role type."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The permissions associated with this role.\nMust contain at least one permission."
+        }
+      },
+      "description": "A Role represents a role in the Qdrant cloud."
+    },
+    "v1RoleType": {
+      "type": "string",
+      "enum": [
+        "ROLE_TYPE_UNSPECIFIED",
+        "ROLE_TYPE_SYSTEM",
+        "ROLE_TYPE_CUSTOM"
+      ],
+      "default": "ROLE_TYPE_UNSPECIFIED",
+      "description": "- ROLE_TYPE_UNSPECIFIED: The role type is unspecified.\n - ROLE_TYPE_SYSTEM: The role type is system.\nNote: system roles cannot be changed (create/update/delete).\n - ROLE_TYPE_CUSTOM: The role type is custom defined.",
+      "title": "RoleType specified the type of the role"
+    },
+    "v1UpdateRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "description": "The actual role."
+        }
+      },
+      "description": "UpdateRoleResponse is the response from the UpdateRole function."
+    }
+  }
+}
