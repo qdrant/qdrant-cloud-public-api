@@ -356,7 +356,7 @@ export declare const HybridCloudEnvironmentSchema: GenMessage<HybridCloudEnviron
  */
 export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration"> & {
   /**
-   * Timestamp when the configuration waslast updated.
+   * Timestamp when the configuration was last updated.
    * This is a read-only field and will be available after it is created.
    *
    * @generated from field: google.protobuf.Timestamp last_modified_at = 1;

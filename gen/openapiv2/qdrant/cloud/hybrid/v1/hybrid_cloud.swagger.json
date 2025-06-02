@@ -529,7 +529,7 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the configuration waslast updated.\nThis is a read-only field and will be available after it is created."
+          "description": "Timestamp when the configuration was last updated.\nThis is a read-only field and will be available after it is created."
         },
         "namespace": {
           "type": "string",

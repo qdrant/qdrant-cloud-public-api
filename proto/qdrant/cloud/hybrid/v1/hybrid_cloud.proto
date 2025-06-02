@@ -201,7 +201,7 @@ message HybridCloudEnvironment {
 
 // A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment
 message HybridCloudEnvironmentConfiguration {
-  // Timestamp when the configuration waslast updated.
+  // Timestamp when the configuration was last updated.
   // This is a read-only field and will be available after it is created.
   google.protobuf.Timestamp last_modified_at = 1;
   // Namespace where qdrant components are deployed, readonly after bootstrapping

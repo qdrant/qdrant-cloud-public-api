@@ -1041,7 +1041,7 @@ func (x *HybridCloudEnvironment) GetStatus() *HybridCloudEnvironmentStatus {
 // A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment
 type HybridCloudEnvironmentConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Timestamp when the configuration waslast updated.
+	// Timestamp when the configuration was last updated.
 	// This is a read-only field and will be available after it is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// Namespace where qdrant components are deployed, readonly after bootstrapping
