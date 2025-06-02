@@ -83,7 +83,6 @@ message ListGlobalPackagesResponse {
   repeated Package items = 1;
 }
 
-
 // GetPackageRequest is the request for the GetPackage function
 message GetPackageRequest {
   // The identifier of the account (in GUID format).

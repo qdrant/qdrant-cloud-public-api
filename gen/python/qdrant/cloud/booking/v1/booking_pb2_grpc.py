@@ -25,6 +25,11 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetPackageRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetPackageResponse.FromString,
                 _registered_method=True)
+        self.ListGlobalPackages = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
+                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -50,6 +55,15 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListGlobalPackages(self, request, context):
+        """Fetch all public packages
+        Required permissions:
+        - None (public endpoint)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -62,6 +76,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.GetPackage,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetPackageRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetPackageResponse.SerializeToString,
+            ),
+            'ListGlobalPackages': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListGlobalPackages,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -129,61 +148,8 @@ class BookingService(object):
             metadata,
             _registered_method=True)
 
-
-class PublicBookingServiceStub(object):
-    """PublicBookingService is the API used to fetch public packages.
-    """
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.ListPublicPackages = channel.unary_unary(
-                '/qdrant.cloud.booking.v1.PublicBookingService/ListPublicPackages',
-                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPublicPackagesRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPackagesResponse.FromString,
-                _registered_method=True)
-
-
-class PublicBookingServiceServicer(object):
-    """PublicBookingService is the API used to fetch public packages.
-    """
-
-    def ListPublicPackages(self, request, context):
-        """Fetch all public packages
-        Required permissions:
-        - None (public endpoint)
-        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-        buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_PublicBookingServiceServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'ListPublicPackages': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListPublicPackages,
-                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPublicPackagesRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPackagesResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'qdrant.cloud.booking.v1.PublicBookingService', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('qdrant.cloud.booking.v1.PublicBookingService', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class PublicBookingService(object):
-    """PublicBookingService is the API used to fetch public packages.
-    """
-
     @staticmethod
-    def ListPublicPackages(request,
+    def ListGlobalPackages(request,
             target,
             options=(),
             channel_credentials=None,
@@ -196,9 +162,9 @@ class PublicBookingService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.booking.v1.PublicBookingService/ListPublicPackages',
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPublicPackagesRequest.SerializeToString,
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListPackagesResponse.FromString,
+            '/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
             options,
             channel_credentials,
             insecure,

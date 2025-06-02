@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName   = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -37,6 +38,10 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
+	// Fetch all public packages
+	// Required permissions:
+	// - None (public endpoint)
+	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -67,6 +72,16 @@ func (c *bookingServiceClient) GetPackage(ctx context.Context, in *GetPackageReq
 	return out, nil
 }
 
+func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGlobalPackagesResponse)
+	err := c.cc.Invoke(ctx, BookingService_ListGlobalPackages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -81,6 +96,10 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
+	// Fetch all public packages
+	// Required permissions:
+	// - None (public endpoint)
+	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -96,6 +115,9 @@ func (UnimplementedBookingServiceServer) ListPackages(context.Context, *ListPack
 }
 func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPackage not implemented")
+}
+func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalPackages not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -154,6 +176,24 @@ func _BookingService_GetPackage_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_ListGlobalPackages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalPackagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).ListGlobalPackages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_ListGlobalPackages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).ListGlobalPackages(ctx, req.(*ListGlobalPackagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -169,117 +209,9 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetPackage",
 			Handler:    _BookingService_GetPackage_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/booking/v1/booking.proto",
-}
-
-const (
-	PublicBookingService_ListPublicPackages_FullMethodName = "/qdrant.cloud.booking.v1.PublicBookingService/ListPublicPackages"
-)
-
-// PublicBookingServiceClient is the client API for PublicBookingService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// PublicBookingService is the API used to fetch public packages.
-type PublicBookingServiceClient interface {
-	// Fetch all public packages
-	// Required permissions:
-	// - None (public endpoint)
-	ListPublicPackages(ctx context.Context, in *ListPublicPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error)
-}
-
-type publicBookingServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewPublicBookingServiceClient(cc grpc.ClientConnInterface) PublicBookingServiceClient {
-	return &publicBookingServiceClient{cc}
-}
-
-func (c *publicBookingServiceClient) ListPublicPackages(ctx context.Context, in *ListPublicPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListPackagesResponse)
-	err := c.cc.Invoke(ctx, PublicBookingService_ListPublicPackages_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// PublicBookingServiceServer is the server API for PublicBookingService service.
-// All implementations must embed UnimplementedPublicBookingServiceServer
-// for forward compatibility.
-//
-// PublicBookingService is the API used to fetch public packages.
-type PublicBookingServiceServer interface {
-	// Fetch all public packages
-	// Required permissions:
-	// - None (public endpoint)
-	ListPublicPackages(context.Context, *ListPublicPackagesRequest) (*ListPackagesResponse, error)
-	mustEmbedUnimplementedPublicBookingServiceServer()
-}
-
-// UnimplementedPublicBookingServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedPublicBookingServiceServer struct{}
-
-func (UnimplementedPublicBookingServiceServer) ListPublicPackages(context.Context, *ListPublicPackagesRequest) (*ListPackagesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPublicPackages not implemented")
-}
-func (UnimplementedPublicBookingServiceServer) mustEmbedUnimplementedPublicBookingServiceServer() {}
-func (UnimplementedPublicBookingServiceServer) testEmbeddedByValue()                              {}
-
-// UnsafePublicBookingServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PublicBookingServiceServer will
-// result in compilation errors.
-type UnsafePublicBookingServiceServer interface {
-	mustEmbedUnimplementedPublicBookingServiceServer()
-}
-
-func RegisterPublicBookingServiceServer(s grpc.ServiceRegistrar, srv PublicBookingServiceServer) {
-	// If the following call pancis, it indicates UnimplementedPublicBookingServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&PublicBookingService_ServiceDesc, srv)
-}
-
-func _PublicBookingService_ListPublicPackages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPublicPackagesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PublicBookingServiceServer).ListPublicPackages(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PublicBookingService_ListPublicPackages_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PublicBookingServiceServer).ListPublicPackages(ctx, req.(*ListPublicPackagesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// PublicBookingService_ServiceDesc is the grpc.ServiceDesc for PublicBookingService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var PublicBookingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.booking.v1.PublicBookingService",
-	HandlerType: (*PublicBookingServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListPublicPackages",
-			Handler:    _PublicBookingService_ListPublicPackages_Handler,
+			MethodName: "ListGlobalPackages",
+			Handler:    _BookingService_ListGlobalPackages_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

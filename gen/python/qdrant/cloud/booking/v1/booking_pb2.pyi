@@ -30,17 +30,21 @@ class ListPackagesRequest(_message.Message):
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
 
-class ListPublicPackagesRequest(_message.Message):
-    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "statuses")
+class ListPackagesResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Package]
+    def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
+
+class ListGlobalPackagesRequest(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id")
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
-    STATUSES_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
     cloud_provider_region_id: str
-    statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
-    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
-class ListPackagesResponse(_message.Message):
+class ListGlobalPackagesResponse(_message.Message):
     __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Package]
