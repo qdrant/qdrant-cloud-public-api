@@ -93,13 +93,13 @@ class DeleteRoleResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class GetEffectivePermissionsRequest(_message.Message):
+class ListEffectivePermissionsRequest(_message.Message):
     __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
-class GetEffectivePermissionsResponse(_message.Message):
+class ListEffectivePermissionsResponse(_message.Message):
     __slots__ = ("permissions",)
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
     permissions: _containers.RepeatedScalarFieldContainer[str]
@@ -122,9 +122,10 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Role(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "description", "is_admin", "role_type", "permissions")
+    __slots__ = ("id", "created_at", "last_updatedat", "account_id", "name", "description", "is_admin", "role_type", "permissions")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_UPDATEDAT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
@@ -133,10 +134,11 @@ class Role(_message.Message):
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
+    last_updatedat: _timestamp_pb2.Timestamp
     account_id: str
     name: str
     description: str
     is_admin: bool
     role_type: RoleType
     permissions: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., is_admin: bool = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_updatedat: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., is_admin: bool = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...

@@ -18,13 +18,13 @@
   "paths": {
     "/api/iam/v1/accounts/{accountId}/effective-permissions": {
       "get": {
-        "summary": "Get the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
-        "operationId": "IAMService_GetEffectivePermissions",
+        "summary": "List the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_ListEffectivePermissions",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetEffectivePermissionsResponse"
+              "$ref": "#/definitions/v1ListEffectivePermissionsResponse"
             }
           },
           "default": {
@@ -359,9 +359,14 @@
               "format": "date-time",
               "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
             },
+            "lastUpdatedat": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+            },
             "name": {
               "type": "string",
-              "description": "The name of the role."
+              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
             },
             "description": {
               "type": "string",
@@ -380,7 +385,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The permissions associated with this role."
+              "description": "The permissions associated with this role.\nMust contain at least one permission."
             }
           },
           "description": "The actual role.",
@@ -400,9 +405,14 @@
               "format": "date-time",
               "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
             },
+            "lastUpdatedat": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+            },
             "name": {
               "type": "string",
-              "description": "The name of the role."
+              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
             },
             "description": {
               "type": "string",
@@ -421,7 +431,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The permissions associated with this role."
+              "description": "The permissions associated with this role.\nMust contain at least one permission."
             }
           },
           "description": "The actual role.",
@@ -477,7 +487,17 @@
       "type": "object",
       "description": "DeleteRoleResponse is the response from the DeleteRole function.\n\nEmpty"
     },
-    "v1GetEffectivePermissionsResponse": {
+    "v1GetRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "description": "The actual role."
+        }
+      },
+      "title": "GetRoleResponse is the response from the GetRole function"
+    },
+    "v1ListEffectivePermissionsResponse": {
       "type": "object",
       "properties": {
         "permissions": {
@@ -488,17 +508,7 @@
           "description": "The effective permissions."
         }
       },
-      "title": "GetEffectivePermissionsResponse is the response from the GetEffectivePermissions function"
-    },
-    "v1GetRoleResponse": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/v1Role",
-          "description": "The actual role."
-        }
-      },
-      "title": "GetRoleResponse is the response from the GetRole function"
+      "title": "ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function"
     },
     "v1ListPermissionsResponse": {
       "type": "object",
@@ -539,13 +549,18 @@
           "format": "date-time",
           "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
         },
+        "lastUpdatedat": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+        },
         "accountId": {
           "type": "string",
           "description": "The identifier of the account (in GUID format).\nThis is a required field."
         },
         "name": {
           "type": "string",
-          "description": "The name of the role."
+          "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
         },
         "description": {
           "type": "string",
@@ -564,7 +579,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The permissions associated with this role."
+          "description": "The permissions associated with this role.\nMust contain at least one permission."
         }
       },
       "description": "A Role represents a role in the Qdrant cloud."

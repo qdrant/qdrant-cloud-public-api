@@ -45,10 +45,10 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteRoleRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteRoleResponse.FromString,
                 _registered_method=True)
-        self.GetEffectivePermissions = channel.unary_unary(
-                '/qdrant.cloud.iam.v1.IAMService/GetEffectivePermissions',
-                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsResponse.FromString,
+        self.ListEffectivePermissions = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsResponse.FromString,
                 _registered_method=True)
         self.AssignUserRoles = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/AssignUserRoles',
@@ -119,8 +119,8 @@ class IAMServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetEffectivePermissions(self, request, context):
-        """Get the effective permissions for the user in the account identified by the given ID.
+    def ListEffectivePermissions(self, request, context):
+        """List the effective permissions for the user in the account identified by the given ID.
         Required permissions:
         - read:roles
         """
@@ -170,10 +170,10 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteRoleRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteRoleResponse.SerializeToString,
             ),
-            'GetEffectivePermissions': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetEffectivePermissions,
-                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsResponse.SerializeToString,
+            'ListEffectivePermissions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListEffectivePermissions,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsResponse.SerializeToString,
             ),
             'AssignUserRoles': grpc.unary_unary_rpc_method_handler(
                     servicer.AssignUserRoles,
@@ -355,7 +355,7 @@ class IAMService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetEffectivePermissions(request,
+    def ListEffectivePermissions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -368,9 +368,9 @@ class IAMService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.iam.v1.IAMService/GetEffectivePermissions',
-            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetEffectivePermissionsResponse.FromString,
+            '/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListEffectivePermissionsResponse.FromString,
             options,
             channel_credentials,
             insecure,

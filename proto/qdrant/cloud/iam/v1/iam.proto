@@ -79,10 +79,10 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
   }
-  // Get the effective permissions for the user in the account identified by the given ID.
+  // List the effective permissions for the user in the account identified by the given ID.
   // Required permissions:
   // - read:roles
-  rpc GetEffectivePermissions(GetEffectivePermissionsRequest) returns (GetEffectivePermissionsResponse) {
+  rpc ListEffectivePermissions(ListEffectivePermissionsRequest) returns (ListEffectivePermissionsResponse) {
     // permissions
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
@@ -184,15 +184,15 @@ message DeleteRoleResponse {
   // Empty
 }
 
-// GetEffectivePermissionsRequest is the request for the GetEffectivePermissions function
-message GetEffectivePermissionsRequest {
+// ListEffectivePermissionsRequest is the request for the ListEffectivePermissions function
+message ListEffectivePermissionsRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// GetEffectivePermissionsResponse is the response from the GetEffectivePermissions function
-message GetEffectivePermissionsResponse {
+// ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function
+message ListEffectivePermissionsResponse {
   // The effective permissions.
   repeated string permissions = 1;
 }
@@ -208,10 +208,10 @@ message AssignUserRolesRequest {
   string user_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The roles to add to the provided user.
   // If a role was already part of the user or the same role is provided multiple times, the role will be added exactly one time.
-  repeated string role_ids_to_add = 3;
+  repeated string role_ids_to_add = 3 [(buf.validate.field).repeated.items.string = {uuid: true}];
   // The roles to be deleted from the provided user.
   // If a role is part of the role_ids_to_add this field takes precedence.
-  repeated string role_ids_to_delete = 4;
+  repeated string role_ids_to_delete = 4 [(buf.validate.field).repeated.items.string = {uuid: true}];
 }
 
 // AssignUserRolesResponse is the response from the AssignUserRoles function
@@ -232,19 +232,28 @@ message Role {
   // The timestamp when the role was created.
   // This is a read-only field and will be available after a role is created.
   google.protobuf.Timestamp created_at = 2;
+  // The timestamp when the role was last updated.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp last_updatedat = 3;
   // The identifier of the account (in GUID format).
   // This is a required field.
-  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  string account_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The name of the role.
-  string name = 4;
+  // Name can only contain letters, numbers, underscores and dashes
+  string name = 5 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
   // The human readable description of this role.
-  string description = 5;
+  string description = 6;
   // Set if this role represents the admin role.
-  bool is_admin = 6;
+  bool is_admin = 7;
   // The role type.
-  RoleType role_type = 7;
+  RoleType role_type = 8;
   // The permissions associated with this role.
-  repeated string permissions = 8;
+  // Must contain at least one permission.
+  repeated string permissions = 9 [(buf.validate.field).repeated = {min_items: 1}];
 }
 
 // RoleType specified the type of the role

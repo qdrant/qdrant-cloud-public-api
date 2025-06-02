@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IAMService_ListPermissions_FullMethodName         = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
-	IAMService_ListRoles_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
-	IAMService_GetRole_FullMethodName                 = "/qdrant.cloud.iam.v1.IAMService/GetRole"
-	IAMService_CreateRole_FullMethodName              = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
-	IAMService_UpdateRole_FullMethodName              = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
-	IAMService_DeleteRole_FullMethodName              = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
-	IAMService_GetEffectivePermissions_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/GetEffectivePermissions"
-	IAMService_AssignUserRoles_FullMethodName         = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
+	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
+	IAMService_ListRoles_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
+	IAMService_GetRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetRole"
+	IAMService_CreateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
+	IAMService_UpdateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
+	IAMService_DeleteRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
+	IAMService_ListEffectivePermissions_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
+	IAMService_AssignUserRoles_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -63,10 +63,10 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
-	// Get the effective permissions for the user in the account identified by the given ID.
+	// List the effective permissions for the user in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
-	GetEffectivePermissions(ctx context.Context, in *GetEffectivePermissionsRequest, opts ...grpc.CallOption) (*GetEffectivePermissionsResponse, error)
+	ListEffectivePermissions(ctx context.Context, in *ListEffectivePermissionsRequest, opts ...grpc.CallOption) (*ListEffectivePermissionsResponse, error)
 	// Assign the provided roles to the user in the account identified by the given ID.
 	// Required permissions:
 	// - write:roles
@@ -141,10 +141,10 @@ func (c *iAMServiceClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest
 	return out, nil
 }
 
-func (c *iAMServiceClient) GetEffectivePermissions(ctx context.Context, in *GetEffectivePermissionsRequest, opts ...grpc.CallOption) (*GetEffectivePermissionsResponse, error) {
+func (c *iAMServiceClient) ListEffectivePermissions(ctx context.Context, in *ListEffectivePermissionsRequest, opts ...grpc.CallOption) (*ListEffectivePermissionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetEffectivePermissionsResponse)
-	err := c.cc.Invoke(ctx, IAMService_GetEffectivePermissions_FullMethodName, in, out, cOpts...)
+	out := new(ListEffectivePermissionsResponse)
+	err := c.cc.Invoke(ctx, IAMService_ListEffectivePermissions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,10 +195,10 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
-	// Get the effective permissions for the user in the account identified by the given ID.
+	// List the effective permissions for the user in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
-	GetEffectivePermissions(context.Context, *GetEffectivePermissionsRequest) (*GetEffectivePermissionsResponse, error)
+	ListEffectivePermissions(context.Context, *ListEffectivePermissionsRequest) (*ListEffectivePermissionsResponse, error)
 	// Assign the provided roles to the user in the account identified by the given ID.
 	// Required permissions:
 	// - write:roles
@@ -231,8 +231,8 @@ func (UnimplementedIAMServiceServer) UpdateRole(context.Context, *UpdateRoleRequ
 func (UnimplementedIAMServiceServer) DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
-func (UnimplementedIAMServiceServer) GetEffectivePermissions(context.Context, *GetEffectivePermissionsRequest) (*GetEffectivePermissionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetEffectivePermissions not implemented")
+func (UnimplementedIAMServiceServer) ListEffectivePermissions(context.Context, *ListEffectivePermissionsRequest) (*ListEffectivePermissionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEffectivePermissions not implemented")
 }
 func (UnimplementedIAMServiceServer) AssignUserRoles(context.Context, *AssignUserRolesRequest) (*AssignUserRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignUserRoles not implemented")
@@ -366,20 +366,20 @@ func _IAMService_DeleteRole_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IAMService_GetEffectivePermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetEffectivePermissionsRequest)
+func _IAMService_ListEffectivePermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEffectivePermissionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IAMServiceServer).GetEffectivePermissions(ctx, in)
+		return srv.(IAMServiceServer).ListEffectivePermissions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IAMService_GetEffectivePermissions_FullMethodName,
+		FullMethod: IAMService_ListEffectivePermissions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IAMServiceServer).GetEffectivePermissions(ctx, req.(*GetEffectivePermissionsRequest))
+		return srv.(IAMServiceServer).ListEffectivePermissions(ctx, req.(*ListEffectivePermissionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -434,8 +434,8 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IAMService_DeleteRole_Handler,
 		},
 		{
-			MethodName: "GetEffectivePermissions",
-			Handler:    _IAMService_GetEffectivePermissions_Handler,
+			MethodName: "ListEffectivePermissions",
+			Handler:    _IAMService_ListEffectivePermissions_Handler,
 		},
 		{
 			MethodName: "AssignUserRoles",

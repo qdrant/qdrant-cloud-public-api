@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file qdrant/cloud/iam/v1/iam.proto.
  */
 export const file_qdrant_cloud_iam_v1_iam: GenFile = /*@__PURE__*/
-  fileDesc("Ch1xZHJhbnQvY2xvdWQvaWFtL3YxL2lhbS5wcm90bxITcWRyYW50LmNsb3VkLmlhbS52MSI2ChZMaXN0UGVybWlzc2lvbnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIi4KF0xpc3RQZXJtaXNzaW9uc1Jlc3BvbnNlEhMKC3Blcm1pc3Npb25zGAEgAygJIjAKEExpc3RSb2xlc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQEiPQoRTGlzdFJvbGVzUmVzcG9uc2USKAoFaXRlbXMYASADKAsyGS5xZHJhbnQuY2xvdWQuaWFtLnYxLlJvbGUiSQoOR2V0Um9sZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGQoHcm9sZV9pZBgCIAEoCUIIukgFcgOwAQEiOgoPR2V0Um9sZVJlc3BvbnNlEicKBHJvbGUYASABKAsyGS5xZHJhbnQuY2xvdWQuaWFtLnYxLlJvbGUiPAoRQ3JlYXRlUm9sZVJlcXVlc3QSJwoEcm9sZRgBIAEoCzIZLnFkcmFudC5jbG91ZC5pYW0udjEuUm9sZSI9ChJDcmVhdGVSb2xlUmVzcG9uc2USJwoEcm9sZRgBIAEoCzIZLnFkcmFudC5jbG91ZC5pYW0udjEuUm9sZSI8ChFVcGRhdGVSb2xlUmVxdWVzdBInCgRyb2xlGAEgASgLMhkucWRyYW50LmNsb3VkLmlhbS52MS5Sb2xlIj0KElVwZGF0ZVJvbGVSZXNwb25zZRInCgRyb2xlGAEgASgLMhkucWRyYW50LmNsb3VkLmlhbS52MS5Sb2xlIkwKEURlbGV0ZVJvbGVSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhkKB3JvbGVfaWQYAiABKAlCCLpIBXIDsAEBIhQKEkRlbGV0ZVJvbGVSZXNwb25zZSI+Ch5HZXRFZmZlY3RpdmVQZXJtaXNzaW9uc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQEiNgofR2V0RWZmZWN0aXZlUGVybWlzc2lvbnNSZXNwb25zZRITCgtwZXJtaXNzaW9ucxgBIAMoCSKGAQoWQXNzaWduVXNlclJvbGVzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABARIZCgd1c2VyX2lkGAIgASgJQgi6SAVyA7ABARIXCg9yb2xlX2lkc190b19hZGQYAyADKAkSGgoScm9sZV9pZHNfdG9fZGVsZXRlGAQgAygJIhkKF0Fzc2lnblVzZXJSb2xlc1Jlc3BvbnNlIokDCgRSb2xlEgoKAmlkGAEgASgJEi4KCmNyZWF0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYAyABKAlCCLpIBXIDsAEBEgwKBG5hbWUYBCABKAkSEwoLZGVzY3JpcHRpb24YBSABKAkSEAoIaXNfYWRtaW4YBiABKAgSMAoJcm9sZV90eXBlGAcgASgOMh0ucWRyYW50LmNsb3VkLmlhbS52MS5Sb2xlVHlwZRITCgtwZXJtaXNzaW9ucxgIIAMoCTqqAbpIpgEaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpKlEKCFJvbGVUeXBlEhkKFVJPTEVfVFlQRV9VTlNQRUNJRklFRBAAEhQKEFJPTEVfVFlQRV9TWVNURU0QARIUChBST0xFX1RZUEVfQ1VTVE9NEAIy0QsKCklBTVNlcnZpY2USsQEKD0xpc3RQZXJtaXNzaW9ucxIrLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFBlcm1pc3Npb25zUmVxdWVzdBosLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFBlcm1pc3Npb25zUmVzcG9uc2UiQ4q1GApyZWFkOnJvbGVzgtPkkwIvEi0vYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vcGVybWlzc2lvbnMSmQEKCUxpc3RSb2xlcxIlLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFJvbGVzUmVxdWVzdBomLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFJvbGVzUmVzcG9uc2UiPYq1GApyZWFkOnJvbGVzgtPkkwIpEicvYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vcm9sZXMSsAEKB0dldFJvbGUSIy5xZHJhbnQuY2xvdWQuaWFtLnYxLkdldFJvbGVSZXF1ZXN0GiQucWRyYW50LmNsb3VkLmlhbS52MS5HZXRSb2xlUmVzcG9uc2UiWoq1GApyZWFkOnJvbGVzkrUYD3JvbGUuYWNjb3VudF9pZILT5JMCMxIxL2FwaS9pYW0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3JvbGVzL3tyb2xlX2lkfRK4AQoKQ3JlYXRlUm9sZRImLnFkcmFudC5jbG91ZC5pYW0udjEuQ3JlYXRlUm9sZVJlcXVlc3QaJy5xZHJhbnQuY2xvdWQuaWFtLnYxLkNyZWF0ZVJvbGVSZXNwb25zZSJZirUYC3dyaXRlOnJvbGVzkrUYD3JvbGUuYWNjb3VudF9pZILT5JMCMToBKiIsL2FwaS9pYW0vdjEvYWNjb3VudHMve3JvbGUuYWNjb3VudF9pZH0vcm9sZXMSwgEKClVwZGF0ZVJvbGUSJi5xZHJhbnQuY2xvdWQuaWFtLnYxLlVwZGF0ZVJvbGVSZXF1ZXN0GicucWRyYW50LmNsb3VkLmlhbS52MS5VcGRhdGVSb2xlUmVzcG9uc2UiY4q1GAt3cml0ZTpyb2xlc5K1GA9yb2xlLmFjY291bnRfaWSC0+STAjs6ASoaNi9hcGkvaWFtL3YxL2FjY291bnRzL3tyb2xlLmFjY291bnRfaWR9L3JvbGVzL3tyb2xlLmlkfRKoAQoKRGVsZXRlUm9sZRImLnFkcmFudC5jbG91ZC5pYW0udjEuRGVsZXRlUm9sZVJlcXVlc3QaJy5xZHJhbnQuY2xvdWQuaWFtLnYxLkRlbGV0ZVJvbGVSZXNwb25zZSJJirUYDGRlbGV0ZTpyb2xlc4LT5JMCMyoxL2FwaS9pYW0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3JvbGVzL3tyb2xlX2lkfRLTAQoXR2V0RWZmZWN0aXZlUGVybWlzc2lvbnMSMy5xZHJhbnQuY2xvdWQuaWFtLnYxLkdldEVmZmVjdGl2ZVBlcm1pc3Npb25zUmVxdWVzdBo0LnFkcmFudC5jbG91ZC5pYW0udjEuR2V0RWZmZWN0aXZlUGVybWlzc2lvbnNSZXNwb25zZSJNirUYCnJlYWQ6cm9sZXOC0+STAjkSNy9hcGkvaWFtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9lZmZlY3RpdmUtcGVybWlzc2lvbnMSvgEKD0Fzc2lnblVzZXJSb2xlcxIrLnFkcmFudC5jbG91ZC5pYW0udjEuQXNzaWduVXNlclJvbGVzUmVxdWVzdBosLnFkcmFudC5jbG91ZC5pYW0udjEuQXNzaWduVXNlclJvbGVzUmVzcG9uc2UiUIq1GApyZWFkOnJvbGVzgtPkkwI8OgEqIjcvYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vdXNlcnMve3VzZXJfaWR9L3JvbGVzQt4BChdjb20ucWRyYW50LmNsb3VkLmlhbS52MUIISWFtUHJvdG9QAVpKZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9pYW0vdjE7aWFtdjGiAgNRQ0mqAhNRZHJhbnQuQ2xvdWQuSWFtLlYxygITUWRyYW50XENsb3VkXElhbVxWMeICH1FkcmFudFxDbG91ZFxJYW1cVjFcR1BCTWV0YWRhdGHqAhZRZHJhbnQ6OkNsb3VkOjpJYW06OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("Ch1xZHJhbnQvY2xvdWQvaWFtL3YxL2lhbS5wcm90bxITcWRyYW50LmNsb3VkLmlhbS52MSI2ChZMaXN0UGVybWlzc2lvbnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIi4KF0xpc3RQZXJtaXNzaW9uc1Jlc3BvbnNlEhMKC3Blcm1pc3Npb25zGAEgAygJIjAKEExpc3RSb2xlc1JlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQEiPQoRTGlzdFJvbGVzUmVzcG9uc2USKAoFaXRlbXMYASADKAsyGS5xZHJhbnQuY2xvdWQuaWFtLnYxLlJvbGUiSQoOR2V0Um9sZVJlcXVlc3QSHAoKYWNjb3VudF9pZBgBIAEoCUIIukgFcgOwAQESGQoHcm9sZV9pZBgCIAEoCUIIukgFcgOwAQEiOgoPR2V0Um9sZVJlc3BvbnNlEicKBHJvbGUYASABKAsyGS5xZHJhbnQuY2xvdWQuaWFtLnYxLlJvbGUiPAoRQ3JlYXRlUm9sZVJlcXVlc3QSJwoEcm9sZRgBIAEoCzIZLnFkcmFudC5jbG91ZC5pYW0udjEuUm9sZSI9ChJDcmVhdGVSb2xlUmVzcG9uc2USJwoEcm9sZRgBIAEoCzIZLnFkcmFudC5jbG91ZC5pYW0udjEuUm9sZSI8ChFVcGRhdGVSb2xlUmVxdWVzdBInCgRyb2xlGAEgASgLMhkucWRyYW50LmNsb3VkLmlhbS52MS5Sb2xlIj0KElVwZGF0ZVJvbGVSZXNwb25zZRInCgRyb2xlGAEgASgLMhkucWRyYW50LmNsb3VkLmlhbS52MS5Sb2xlIkwKEURlbGV0ZVJvbGVSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhkKB3JvbGVfaWQYAiABKAlCCLpIBXIDsAEBIhQKEkRlbGV0ZVJvbGVSZXNwb25zZSI/Ch9MaXN0RWZmZWN0aXZlUGVybWlzc2lvbnNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIjcKIExpc3RFZmZlY3RpdmVQZXJtaXNzaW9uc1Jlc3BvbnNlEhMKC3Blcm1pc3Npb25zGAEgAygJIqQBChZBc3NpZ25Vc2VyUm9sZXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBEhkKB3VzZXJfaWQYAiABKAlCCLpIBXIDsAEBEiYKD3JvbGVfaWRzX3RvX2FkZBgDIAMoCUINukgKkgEHIgVyA7ABARIpChJyb2xlX2lkc190b19kZWxldGUYBCADKAlCDbpICpIBByIFcgOwAQEiGQoXQXNzaWduVXNlclJvbGVzUmVzcG9uc2Ui5AMKBFJvbGUSCgoCaWQYASABKAkSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoObGFzdF91cGRhdGVkYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhwKCmFjY291bnRfaWQYBCABKAlCCLpIBXIDsAEBEikKBG5hbWUYBSABKAlCG7pIGHIWEAQYQDIQXlthLXpBLVowLTktX10rJBITCgtkZXNjcmlwdGlvbhgGIAEoCRIQCghpc19hZG1pbhgHIAEoCBIwCglyb2xlX3R5cGUYCCABKA4yHS5xZHJhbnQuY2xvdWQuaWFtLnYxLlJvbGVUeXBlEh0KC3Blcm1pc3Npb25zGAkgAygJQgi6SAWSAQIIATqqAbpIpgEaowEKCmNsdXN0ZXIuaWQSGnZhbHVlIG11c3QgYmUgYSB2YWxpZCBVVUlEGnl0aGlzLmlkLm1hdGNoZXMoJ15bMC05YS1mQS1GXXs4fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXs0fS1bMC05YS1mQS1GXXsxMn0kJykgfHwgIWhhcyh0aGlzLmNyZWF0ZWRfYXQpKlEKCFJvbGVUeXBlEhkKFVJPTEVfVFlQRV9VTlNQRUNJRklFRBAAEhQKEFJPTEVfVFlQRV9TWVNURU0QARIUChBST0xFX1RZUEVfQ1VTVE9NEAIy1AsKCklBTVNlcnZpY2USsQEKD0xpc3RQZXJtaXNzaW9ucxIrLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFBlcm1pc3Npb25zUmVxdWVzdBosLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFBlcm1pc3Npb25zUmVzcG9uc2UiQ4q1GApyZWFkOnJvbGVzgtPkkwIvEi0vYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vcGVybWlzc2lvbnMSmQEKCUxpc3RSb2xlcxIlLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFJvbGVzUmVxdWVzdBomLnFkcmFudC5jbG91ZC5pYW0udjEuTGlzdFJvbGVzUmVzcG9uc2UiPYq1GApyZWFkOnJvbGVzgtPkkwIpEicvYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vcm9sZXMSsAEKB0dldFJvbGUSIy5xZHJhbnQuY2xvdWQuaWFtLnYxLkdldFJvbGVSZXF1ZXN0GiQucWRyYW50LmNsb3VkLmlhbS52MS5HZXRSb2xlUmVzcG9uc2UiWoq1GApyZWFkOnJvbGVzkrUYD3JvbGUuYWNjb3VudF9pZILT5JMCMxIxL2FwaS9pYW0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3JvbGVzL3tyb2xlX2lkfRK4AQoKQ3JlYXRlUm9sZRImLnFkcmFudC5jbG91ZC5pYW0udjEuQ3JlYXRlUm9sZVJlcXVlc3QaJy5xZHJhbnQuY2xvdWQuaWFtLnYxLkNyZWF0ZVJvbGVSZXNwb25zZSJZirUYC3dyaXRlOnJvbGVzkrUYD3JvbGUuYWNjb3VudF9pZILT5JMCMToBKiIsL2FwaS9pYW0vdjEvYWNjb3VudHMve3JvbGUuYWNjb3VudF9pZH0vcm9sZXMSwgEKClVwZGF0ZVJvbGUSJi5xZHJhbnQuY2xvdWQuaWFtLnYxLlVwZGF0ZVJvbGVSZXF1ZXN0GicucWRyYW50LmNsb3VkLmlhbS52MS5VcGRhdGVSb2xlUmVzcG9uc2UiY4q1GAt3cml0ZTpyb2xlc5K1GA9yb2xlLmFjY291bnRfaWSC0+STAjs6ASoaNi9hcGkvaWFtL3YxL2FjY291bnRzL3tyb2xlLmFjY291bnRfaWR9L3JvbGVzL3tyb2xlLmlkfRKoAQoKRGVsZXRlUm9sZRImLnFkcmFudC5jbG91ZC5pYW0udjEuRGVsZXRlUm9sZVJlcXVlc3QaJy5xZHJhbnQuY2xvdWQuaWFtLnYxLkRlbGV0ZVJvbGVSZXNwb25zZSJJirUYDGRlbGV0ZTpyb2xlc4LT5JMCMyoxL2FwaS9pYW0vdjEvYWNjb3VudHMve2FjY291bnRfaWR9L3JvbGVzL3tyb2xlX2lkfRLWAQoYTGlzdEVmZmVjdGl2ZVBlcm1pc3Npb25zEjQucWRyYW50LmNsb3VkLmlhbS52MS5MaXN0RWZmZWN0aXZlUGVybWlzc2lvbnNSZXF1ZXN0GjUucWRyYW50LmNsb3VkLmlhbS52MS5MaXN0RWZmZWN0aXZlUGVybWlzc2lvbnNSZXNwb25zZSJNirUYCnJlYWQ6cm9sZXOC0+STAjkSNy9hcGkvaWFtL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9lZmZlY3RpdmUtcGVybWlzc2lvbnMSvgEKD0Fzc2lnblVzZXJSb2xlcxIrLnFkcmFudC5jbG91ZC5pYW0udjEuQXNzaWduVXNlclJvbGVzUmVxdWVzdBosLnFkcmFudC5jbG91ZC5pYW0udjEuQXNzaWduVXNlclJvbGVzUmVzcG9uc2UiUIq1GApyZWFkOnJvbGVzgtPkkwI8OgEqIjcvYXBpL2lhbS92MS9hY2NvdW50cy97YWNjb3VudF9pZH0vdXNlcnMve3VzZXJfaWR9L3JvbGVzQt4BChdjb20ucWRyYW50LmNsb3VkLmlhbS52MUIISWFtUHJvdG9QAVpKZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9pYW0vdjE7aWFtdjGiAgNRQ0mqAhNRZHJhbnQuQ2xvdWQuSWFtLlYxygITUWRyYW50XENsb3VkXElhbVxWMeICH1FkcmFudFxDbG91ZFxJYW1cVjFcR1BCTWV0YWRhdGHqAhZRZHJhbnQ6OkNsb3VkOjpJYW06OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * ListPermissionsRequest is the request for the ListPermissions function
@@ -286,11 +286,11 @@ export const DeleteRoleResponseSchema: GenMessage<DeleteRoleResponse> = /*@__PUR
   messageDesc(file_qdrant_cloud_iam_v1_iam, 11);
 
 /**
- * GetEffectivePermissionsRequest is the request for the GetEffectivePermissions function
+ * ListEffectivePermissionsRequest is the request for the ListEffectivePermissions function
  *
- * @generated from message qdrant.cloud.iam.v1.GetEffectivePermissionsRequest
+ * @generated from message qdrant.cloud.iam.v1.ListEffectivePermissionsRequest
  */
-export type GetEffectivePermissionsRequest = Message<"qdrant.cloud.iam.v1.GetEffectivePermissionsRequest"> & {
+export type ListEffectivePermissionsRequest = Message<"qdrant.cloud.iam.v1.ListEffectivePermissionsRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -301,18 +301,18 @@ export type GetEffectivePermissionsRequest = Message<"qdrant.cloud.iam.v1.GetEff
 };
 
 /**
- * Describes the message qdrant.cloud.iam.v1.GetEffectivePermissionsRequest.
- * Use `create(GetEffectivePermissionsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.iam.v1.ListEffectivePermissionsRequest.
+ * Use `create(ListEffectivePermissionsRequestSchema)` to create a new message.
  */
-export const GetEffectivePermissionsRequestSchema: GenMessage<GetEffectivePermissionsRequest> = /*@__PURE__*/
+export const ListEffectivePermissionsRequestSchema: GenMessage<ListEffectivePermissionsRequest> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_iam_v1_iam, 12);
 
 /**
- * GetEffectivePermissionsResponse is the response from the GetEffectivePermissions function
+ * ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function
  *
- * @generated from message qdrant.cloud.iam.v1.GetEffectivePermissionsResponse
+ * @generated from message qdrant.cloud.iam.v1.ListEffectivePermissionsResponse
  */
-export type GetEffectivePermissionsResponse = Message<"qdrant.cloud.iam.v1.GetEffectivePermissionsResponse"> & {
+export type ListEffectivePermissionsResponse = Message<"qdrant.cloud.iam.v1.ListEffectivePermissionsResponse"> & {
   /**
    * The effective permissions.
    *
@@ -322,10 +322,10 @@ export type GetEffectivePermissionsResponse = Message<"qdrant.cloud.iam.v1.GetEf
 };
 
 /**
- * Describes the message qdrant.cloud.iam.v1.GetEffectivePermissionsResponse.
- * Use `create(GetEffectivePermissionsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.iam.v1.ListEffectivePermissionsResponse.
+ * Use `create(ListEffectivePermissionsResponseSchema)` to create a new message.
  */
-export const GetEffectivePermissionsResponseSchema: GenMessage<GetEffectivePermissionsResponse> = /*@__PURE__*/
+export const ListEffectivePermissionsResponseSchema: GenMessage<ListEffectivePermissionsResponse> = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_iam_v1_iam, 13);
 
 /**
@@ -415,45 +415,55 @@ export type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
   createdAt?: Timestamp;
 
   /**
+   * The timestamp when the role was last updated.
+   * This is a read-only field and will be available after a role is created.
+   *
+   * @generated from field: google.protobuf.Timestamp last_updatedat = 3;
+   */
+  lastUpdatedat?: Timestamp;
+
+  /**
    * The identifier of the account (in GUID format).
    * This is a required field.
    *
-   * @generated from field: string account_id = 3;
+   * @generated from field: string account_id = 4;
    */
   accountId: string;
 
   /**
    * The name of the role.
+   * Name can only contain letters, numbers, underscores and dashes
    *
-   * @generated from field: string name = 4;
+   * @generated from field: string name = 5;
    */
   name: string;
 
   /**
    * The human readable description of this role.
    *
-   * @generated from field: string description = 5;
+   * @generated from field: string description = 6;
    */
   description: string;
 
   /**
    * Set if this role represents the admin role.
    *
-   * @generated from field: bool is_admin = 6;
+   * @generated from field: bool is_admin = 7;
    */
   isAdmin: boolean;
 
   /**
    * The role type.
    *
-   * @generated from field: qdrant.cloud.iam.v1.RoleType role_type = 7;
+   * @generated from field: qdrant.cloud.iam.v1.RoleType role_type = 8;
    */
   roleType: RoleType;
 
   /**
    * The permissions associated with this role.
+   * Must contain at least one permission.
    *
-   * @generated from field: repeated string permissions = 8;
+   * @generated from field: repeated string permissions = 9;
    */
   permissions: string[];
 };
@@ -583,16 +593,16 @@ export const IAMService: GenService<{
     output: typeof DeleteRoleResponseSchema;
   },
   /**
-   * Get the effective permissions for the user in the account identified by the given ID.
+   * List the effective permissions for the user in the account identified by the given ID.
    * Required permissions:
    * - read:roles
    *
-   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetEffectivePermissions
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions
    */
-  getEffectivePermissions: {
+  listEffectivePermissions: {
     methodKind: "unary";
-    input: typeof GetEffectivePermissionsRequestSchema;
-    output: typeof GetEffectivePermissionsResponseSchema;
+    input: typeof ListEffectivePermissionsRequestSchema;
+    output: typeof ListEffectivePermissionsResponseSchema;
   },
   /**
    * Assign the provided roles to the user in the account identified by the given ID.
