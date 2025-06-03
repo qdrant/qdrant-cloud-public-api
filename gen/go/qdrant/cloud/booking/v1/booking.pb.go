@@ -211,7 +211,7 @@ type ListGlobalPackagesRequest struct {
 	CloudProviderId string `protobuf:"bytes,1,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
 	// Filter specifying the cloud region where the cluster will be hosted.
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
-	// Field can be empty, if cloud_provider_id is `hybrid`
+	// Field can be omitted, if cloud_provider_id is `hybrid`
 	CloudProviderRegionId *string `protobuf:"bytes,2,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -435,7 +435,7 @@ type Package struct {
 	// Indicates the current status of the package.
 	Status PackageStatus `protobuf:"varint,7,opt,name=status,proto3,enum=qdrant.cloud.booking.v1.PackageStatus" json:"status,omitempty"`
 	// Optional additional resources that can be added to the cluster.
-	// if not set, no additional resources are available
+	// if not set, additional resources are not available for this package.
 	// Currently, only `DISK` is supported.
 	AvailableAdditionalResources *AvailableAdditionalResources `protobuf:"bytes,8,opt,name=available_additional_resources,json=availableAdditionalResources,proto3,oneof" json:"available_additional_resources,omitempty"`
 	unknownFields                protoimpl.UnknownFields

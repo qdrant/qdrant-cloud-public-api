@@ -95,7 +95,7 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
   /**
    * Filter specifying the cloud region where the cluster will be hosted.
    * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
-   * Field can be empty, if cloud_provider_id is `hybrid`
+   * Field can be omitted, if cloud_provider_id is `hybrid`
    *
    * @generated from field: optional string cloud_provider_region_id = 2;
    */
@@ -241,7 +241,7 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
 
   /**
    * Optional additional resources that can be added to the cluster.
-   * if not set, no additional resources are available
+   * if not set, additional resources are not available for this package.
    * Currently, only `DISK` is supported.
    *
    * @generated from field: optional qdrant.cloud.booking.v1.AvailableAdditionalResources available_additional_resources = 8;

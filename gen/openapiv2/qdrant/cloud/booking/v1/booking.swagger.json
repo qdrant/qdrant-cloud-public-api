@@ -18,7 +18,7 @@
   "paths": {
     "/api/booking/v1/accounts/{accountId}/packages": {
       "get": {
-        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)\nbuf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE",
+        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_ListPackages",
         "responses": {
           "200": {
@@ -145,7 +145,7 @@
           },
           {
             "name": "cloudProviderRegionId",
-            "description": "Filter specifying the cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nField can be empty, if cloud_provider_id is `hybrid`",
+            "description": "Filter specifying the cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nField can be omitted, if cloud_provider_id is `hybrid`",
             "in": "query",
             "required": false,
             "type": "string"
@@ -269,7 +269,7 @@
         },
         "availableAdditionalResources": {
           "$ref": "#/definitions/v1AvailableAdditionalResources",
-          "description": "Optional additional resources that can be added to the cluster.\nif not set, no additional resources are available\nCurrently, only `DISK` is supported."
+          "description": "Optional additional resources that can be added to the cluster.\nif not set, additional resources are not available for this package.\nCurrently, only `DISK` is supported."
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."

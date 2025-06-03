@@ -40,7 +40,6 @@ class BookingServiceServicer(object):
         """Fetch all packages known by the system, optional filtered.
         Required permissions:
         - None (authenticated only)
-        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
