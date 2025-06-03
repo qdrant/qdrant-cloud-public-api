@@ -30,11 +30,6 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
                 _registered_method=True)
-        self.ListGlobalResourceOptions = channel.unary_unary(
-                '/qdrant.cloud.booking.v1.BookingService/ListGlobalResourceOptions',
-                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsResponse.FromString,
-                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -70,16 +65,6 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListGlobalResourceOptions(self, request, context):
-        """Fetch all public resource options
-        Required permissions:
-        - None (public endpoint)
-        buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -97,11 +82,6 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.ListGlobalPackages,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.SerializeToString,
-            ),
-            'ListGlobalResourceOptions': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListGlobalResourceOptions,
-                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -186,33 +166,6 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ListGlobalResourceOptions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.booking.v1.BookingService/ListGlobalResourceOptions',
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalResourceOptionsResponse.FromString,
             options,
             channel_credentials,
             insecure,

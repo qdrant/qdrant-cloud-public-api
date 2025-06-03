@@ -37,16 +37,6 @@ service BookingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/packages"};
   }
-  // Fetch all public resource options
-  // Required permissions:
-  // - None (public endpoint)
-  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
-  rpc ListGlobalResourceOptions(ListGlobalResourceOptionsRequest) returns (ListGlobalResourceOptionsResponse) {
-    // authentication not required
-    option (qdrant.cloud.common.v1.requires_authentication) = false;
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/booking/v1/resource-options"};
-  }
 }
 
 // ListPackagesRequest is the request for the ListPackages function
@@ -92,27 +82,6 @@ message ListGlobalPackagesResponse {
   repeated Package items = 1;
 }
 
-// ListGlobalResourceOptionsRequest is the request for the ListGlobalResourceOptions function
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-message ListGlobalResourceOptionsRequest {
-  // Mandatory filter specifying the cloud provider where the cluster will be hosted.
-  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
-  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
-  // Filter specifying the cloud region where the cluster will be hosted.
-  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
-  // Field can be empty, if cloud_provider_id is `hybrid`
-  optional string cloud_provider_region_id = 2;
-  // Optional filter specifying the type of resources to return.
-  // If not set, all resource options are returned.
-  ResourceType resource_type = 3;
-}
-
-// ListGlobalResourceOptionsResponse is the response from the ListGlobalResourceOptions function
-message ListGlobalResourceOptionsResponse {
-  // The actual resource options in this list
-  repeated ResourceOption items = 1;
-}
-
 // GetPackageRequest is the request for the GetPackage function
 message GetPackageRequest {
   // The identifier of the account (in GUID format).
@@ -127,28 +96,6 @@ message GetPackageRequest {
 message GetPackageResponse {
   // The actual package
   Package package = 1;
-}
-
-// ResourceUnit defines the units of the available resources options.
-enum ResourceUnit {
-  // Unspecified resource unit.
-  RESOURCE_UNIT_UNSPECIFIED = 0;
-  // The resource is measured in GiB (Gibibytes).
-  RESOURCE_UNIT_GIB = 1;
-  // The resource is measured in millicore units.
-  RESOURCE_UNIT_MILLICORE = 2;
-}
-
-// ResourceType defines the types of the available resources options.
-enum ResourceType {
-  // Unspecified resource type.
-  RESOURCE_TYPE_UNSPECIFIED = 0;
-  // CPU resource type.
-  RESOURCE_TYPE_CPU = 1;
-  // RAM resource type.
-  RESOURCE_TYPE_RAM = 2;
-  // Disk resource type.
-  RESOURCE_TYPE_DISK = 3;
 }
 
 // PackageStatus defines the valid states a package can be in.
@@ -185,6 +132,18 @@ message Package {
   // The status of the package.
   // Indicates the current status of the package.
   PackageStatus status = 7;
+  // Optional additional resources that can be added to the cluster.
+  // if not set, no additional resources are available
+  // Currently, only `DISK` is supported.
+  optional AvailableAdditionalResources available_additional_resources = 8;
+}
+
+// AvailableAdditionalResources represents additional resources that can be added to the cluster.
+message AvailableAdditionalResources {
+  // The unit price per hour in millicents, in integer format.
+  // Represents the cost per hour for a single unit(GiB) of the resource.
+  // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
+  uint32 disk_price_per_hour = 1;
 }
 
 // ResourceConfiguration defines the resource configuration for a package.
@@ -195,31 +154,4 @@ message ResourceConfiguration {
   string cpu = 2;
   // The amount of disk (e.g., "100GiB")
   string disk = 3;
-}
-
-// ResourceOption represents an additional resource that users can add to the cluster.
-// It allows users to view and select optional resources, such as extra disk space or CPU, to enhance cluster capabilities.
-// Currently, only `DISK` is supported.
-message ResourceOption {
-  // The unique identifier of the resource option.
-  // A unique string ID assigned to each resource option.
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The name of the resource option.
-  // A human-readable name for the resource option.
-  string name = 2;
-  // The type of the resource option.
-  ResourceType type = 3;
-  // The status of the resource option.
-  // Indicates the current status of the resource option.
-  PackageStatus status = 4;
-  // The unit of the resource option.
-  // Specifies the unit in which the resource option is measured.
-  ResourceUnit unit = 5;
-  // The currency of the prices.
-  // Specifies the currency in which prices are denominated.
-  string currency = 6;
-  // The unit price per hour, in millicents, as an integer.
-  // Represents the cost per hour for a single unit of the resource.
-  // You will be billed hourly for the resources you use; partial hours are rounded up and billed as full hours.
-  int32 unit_int_price_per_hour = 7;
 }

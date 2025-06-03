@@ -19,10 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName              = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName                = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
-	BookingService_ListGlobalPackages_FullMethodName        = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
-	BookingService_ListGlobalResourceOptions_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalResourceOptions"
+	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -43,10 +42,6 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - None (public endpoint)
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
-	// Fetch all public resource options
-	// Required permissions:
-	// - None (public endpoint)
-	ListGlobalResourceOptions(ctx context.Context, in *ListGlobalResourceOptionsRequest, opts ...grpc.CallOption) (*ListGlobalResourceOptionsResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -87,16 +82,6 @@ func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListG
 	return out, nil
 }
 
-func (c *bookingServiceClient) ListGlobalResourceOptions(ctx context.Context, in *ListGlobalResourceOptionsRequest, opts ...grpc.CallOption) (*ListGlobalResourceOptionsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListGlobalResourceOptionsResponse)
-	err := c.cc.Invoke(ctx, BookingService_ListGlobalResourceOptions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -115,10 +100,6 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - None (public endpoint)
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
-	// Fetch all public resource options
-	// Required permissions:
-	// - None (public endpoint)
-	ListGlobalResourceOptions(context.Context, *ListGlobalResourceOptionsRequest) (*ListGlobalResourceOptionsResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -137,9 +118,6 @@ func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackage
 }
 func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalPackages not implemented")
-}
-func (UnimplementedBookingServiceServer) ListGlobalResourceOptions(context.Context, *ListGlobalResourceOptionsRequest) (*ListGlobalResourceOptionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalResourceOptions not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -216,24 +194,6 @@ func _BookingService_ListGlobalPackages_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BookingService_ListGlobalResourceOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListGlobalResourceOptionsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BookingServiceServer).ListGlobalResourceOptions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BookingService_ListGlobalResourceOptions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookingServiceServer).ListGlobalResourceOptions(ctx, req.(*ListGlobalResourceOptionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,10 +212,6 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGlobalPackages",
 			Handler:    _BookingService_ListGlobalPackages_Handler,
-		},
-		{
-			MethodName: "ListGlobalResourceOptions",
-			Handler:    _BookingService_ListGlobalResourceOptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
