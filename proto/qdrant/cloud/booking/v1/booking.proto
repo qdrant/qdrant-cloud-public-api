@@ -133,7 +133,7 @@ message Package {
   // Indicates the current status of the package.
   PackageStatus status = 7;
   // Optional additional resources that can be added to the cluster.
-  // if not set, no additional resources are available
+  // if not set, additional resources are not available for this package.
   // Currently, only `DISK` is supported.
   optional AvailableAdditionalResources available_additional_resources = 8;
 }
