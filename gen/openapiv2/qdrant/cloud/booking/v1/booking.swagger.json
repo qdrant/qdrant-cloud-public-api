@@ -119,7 +119,7 @@
     },
     "/api/booking/v1/packages": {
       "get": {
-        "summary": "Fetch all public packages\nRequired permissions:\n- None (public endpoint)",
+        "summary": "Fetch all public packages\nRequired permissions:\n- None (public endpoint)\nbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS",
         "operationId": "BookingService_ListGlobalPackages",
         "responses": {
           "200": {
@@ -158,7 +158,7 @@
     },
     "/api/booking/v1/resource-options": {
       "get": {
-        "summary": "Fetch all public resource options\nRequired permissions:\n- None (public endpoint)",
+        "summary": "Fetch all public resource options\nRequired permissions:\n- None (public endpoint)\nbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS",
         "operationId": "BookingService_ListGlobalResourceOptions",
         "responses": {
           "200": {
@@ -387,7 +387,7 @@
           "description": "The unit price per hour, in millicents, as an integer.\nRepresents the cost per hour for a single unit of the resource.\nYou will be billed hourly for the resources you use; partial hours are rounded up and billed as full hours."
         }
       },
-      "description": "ResourceOption represents a single resource option."
+      "description": "ResourceOption represents an additional resource that users can add to the cluster.\nIt allows users to view and select optional resources, such as extra disk space or CPU, to enhance cluster capabilities.\nCurrently, only `DISK` is supported."
     },
     "v1ResourceType": {
       "type": "string",

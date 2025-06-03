@@ -339,7 +339,9 @@ export declare type ResourceConfiguration = Message<"qdrant.cloud.booking.v1.Res
 export declare const ResourceConfigurationSchema: GenMessage<ResourceConfiguration>;
 
 /**
- * ResourceOption represents a single resource option.
+ * ResourceOption represents an additional resource that users can add to the cluster.
+ * It allows users to view and select optional resources, such as extra disk space or CPU, to enhance cluster capabilities.
+ * Currently, only `DISK` is supported.
  *
  * @generated from message qdrant.cloud.booking.v1.ResourceOption
  */

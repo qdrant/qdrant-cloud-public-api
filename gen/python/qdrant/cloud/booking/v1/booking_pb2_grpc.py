@@ -64,6 +64,7 @@ class BookingServiceServicer(object):
         """Fetch all public packages
         Required permissions:
         - None (public endpoint)
+        buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -73,6 +74,7 @@ class BookingServiceServicer(object):
         """Fetch all public resource options
         Required permissions:
         - None (public endpoint)
+        buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

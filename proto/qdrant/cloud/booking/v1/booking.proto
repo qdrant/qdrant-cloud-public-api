@@ -30,22 +30,20 @@ service BookingService {
   // Fetch all public packages
   // Required permissions:
   // - None (public endpoint)
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   rpc ListGlobalPackages(ListGlobalPackagesRequest) returns (ListGlobalPackagesResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
-    // permissions
-    option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/packages"};
   }
   // Fetch all public resource options
   // Required permissions:
   // - None (public endpoint)
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   rpc ListGlobalResourceOptions(ListGlobalResourceOptionsRequest) returns (ListGlobalResourceOptionsResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
-    // permissions
-    option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/resource-options"};
   }
@@ -199,7 +197,9 @@ message ResourceConfiguration {
   string disk = 3;
 }
 
-// ResourceOption represents a single resource option.
+// ResourceOption represents an additional resource that users can add to the cluster.
+// It allows users to view and select optional resources, such as extra disk space or CPU, to enhance cluster capabilities.
+// Currently, only `DISK` is supported.
 message ResourceOption {
   // The unique identifier of the resource option.
   // A unique string ID assigned to each resource option.
