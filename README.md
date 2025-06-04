@@ -9,7 +9,7 @@ This repository hosts the Protocol Buffer (`.proto`) definitions that define the
 The Qdrant Cloud API offers two main ways to interact:
 
 * **gRPC:** For high-performance, type-safe communication, ideal for backend services and (newer) clients.
-* **REST/JSON:** A conventional HTTP/1.1 interface with JSON payloads, provided via gRPC Gateway for ease of use with tools.
+* **REST/JSON:** A conventional HTTP/1.1 (and HTTP/2) based interface with JSON payloads, provided via gRPC Gateway for ease of use with tools.
 
 This repository also contains generated client libraries (SDKs) for Go, Python, and TypeScript (found in the `gen/` directory) to help you get started quickly.
 
