@@ -73,6 +73,12 @@ class ClusterPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_PHASE_MANUAL_MAINTENANCE: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_FAILED_TO_SYNC: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_NOT_FOUND: _ClassVar[ClusterPhase]
+
+class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: _ClassVar[ClusterScalabilityStatus]
+    CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: _ClassVar[ClusterScalabilityStatus]
+    CLUSTER_SCALABILITY_STATUS_SCALABLE: _ClassVar[ClusterScalabilityStatus]
 CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: ClusterConfigurationGpuType
 CLUSTER_CONFIGURATION_GPU_TYPE_AMD: ClusterConfigurationGpuType
@@ -116,6 +122,9 @@ CLUSTER_PHASE_RECOVERY_MODE: ClusterPhase
 CLUSTER_PHASE_MANUAL_MAINTENANCE: ClusterPhase
 CLUSTER_PHASE_FAILED_TO_SYNC: ClusterPhase
 CLUSTER_PHASE_NOT_FOUND: ClusterPhase
+CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
+CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
+CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
 
 class ListClustersRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
@@ -384,7 +393,7 @@ class Toleration(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[_Union[TolerationOperator, str]] = ..., value: _Optional[str] = ..., effect: _Optional[_Union[TolerationEffect, str]] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
 
 class ClusterState(_message.Message):
-    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources")
+    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     NODES_UP_FIELD_NUMBER: _ClassVar[int]
     RESTARTED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -392,6 +401,7 @@ class ClusterState(_message.Message):
     REASON_FIELD_NUMBER: _ClassVar[int]
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     RESOURCES_FIELD_NUMBER: _ClassVar[int]
+    SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
     version: str
     nodes_up: int
     restarted_at: _timestamp_pb2.Timestamp
@@ -399,7 +409,8 @@ class ClusterState(_message.Message):
     reason: str
     endpoint: ClusterEndpoint
     resources: ClusterNodeResourcesSummary
-    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ...) -> None: ...
+    scalability_info: ClusterScalabilityInfo
+    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")
@@ -434,6 +445,14 @@ class ClusterNodeResources(_message.Message):
     reserved: float
     available: float
     def __init__(self, base: _Optional[float] = ..., complimentary: _Optional[float] = ..., additional: _Optional[float] = ..., reserved: _Optional[float] = ..., available: _Optional[float] = ...) -> None: ...
+
+class ClusterScalabilityInfo(_message.Message):
+    __slots__ = ("status", "reason")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    REASON_FIELD_NUMBER: _ClassVar[int]
+    status: ClusterScalabilityStatus
+    reason: str
+    def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
     __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")

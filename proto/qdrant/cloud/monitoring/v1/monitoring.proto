@@ -1,0 +1,246 @@
+syntax = "proto3";
+
+package qdrant.cloud.monitoring.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
+service MonitoringService {
+  // Get summary metrics of a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterSummaryMetrics(GetClusterSummaryMetricsRequest) returns (GetClusterSummaryMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics"};
+  }
+  // Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterUsageMetrics(GetClusterUsageMetricsRequest) returns (GetClusterUsageMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics"};
+  }
+  // Get the logs of a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterLogs(GetClusterLogsRequest) returns (GetClusterLogsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs"};
+  }
+  // Get the events of a cluster in the account identified by the given ID.
+  // This method is currently available only for clusters running in hybrid cloud environments.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterEvents(GetClusterEventsRequest) returns (GetClusterEventsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events"};
+  }
+}
+
+// GetClusterSummaryMetricsRequest is the request for the GetClusterSummaryMetrics function
+message GetClusterSummaryMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetClusterSummaryMetricsResponse is the response from the GetClusterSummaryMetrics function
+message GetClusterSummaryMetricsResponse {
+  // List of metrics aggregated per node in the cluster.
+  repeated ClusterNodeMetrics nodes = 1;
+}
+
+// GetClusterUsageMetricsRequest is the request for the GetClusterUsageMetrics function
+message GetClusterUsageMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the metrics query.
+  // If omitted, defaults to 1 hour ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the metrics query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
+  // Aggregation function to apply to the time series data.
+  // If omitted, defaults to SUM.
+  optional Aggregator aggregator = 5;
+}
+
+// GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function
+message GetClusterUsageMetricsResponse {
+  // Timeseries of overall CPU usage across the cluster.
+  repeated Metric cpu = 1;
+  // Timeseries of overall RAM usage across the cluster.
+  repeated Metric ram = 2;
+  // Timeseries of RAM used for cache across the cluster.
+  repeated Metric ram_cache = 3;
+  // Timeseries of RSS memory used across the cluster.
+  repeated Metric ram_rss = 4;
+  // Timeseries of RSS memory used by the Qdrant database across the cluster.
+  repeated Metric ram_qdrant_rss = 5;
+  // Timeseries of disk usage across the cluster.
+  repeated Metric disk = 6;
+  // Timeseries of requests per second (RPS) across the cluster.
+  repeated Metric rps = 7;
+  // Timeseries of request latency across the cluster.
+  repeated Metric latency = 8;
+  // Per-node metrics.
+  repeated ClusterNodeUsageMetrics nodes = 9;
+}
+
+// GetClusterLogsRequest is the request for the GetClusterLogs function
+message GetClusterLogsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the logs query.
+  // If omitted, defaults to 3 days ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the logs query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
+}
+
+// GetClusterLogsResponse is the response from the GetClusterLogs function
+message GetClusterLogsResponse {
+  // A list of log entries from the cluster.
+  repeated LogEntry items = 1;
+}
+
+// GetClusterEventsRequest is the request for the GetClusterEvents function
+message GetClusterEventsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the events query.
+  // If omitted, defaults to 7 days ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the events query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
+}
+
+// GetClusterEventsRequest is the response from the GetClusterEvents function
+message GetClusterEventsResponse {
+  // A list of entries representing events that have happened in the cluster.
+  repeated LogEntry items = 1;
+}
+
+// ClusterNodeMetrics contains metric overview for a node.
+message ClusterNodeMetrics {
+  // Unique identifier of the node.
+  string node_id = 1;
+  // Overview of CPU usage.
+  ClusterMetricOverview cpu = 2;
+  // Overview of RAM usage.
+  ClusterMetricOverview ram = 3;
+  // Overview of RAM cache usage.
+  ClusterMetricOverview ram_cache = 4;
+  // Overview of RSS memory usage.
+  ClusterMetricOverview ram_rss = 5;
+  // Overview of RSS memory usage by the Qdrant database.
+  ClusterMetricOverview ram_qdrant_rss = 6;
+  // Overview of disk usage.
+  ClusterMetricOverview disk = 7;
+}
+
+// ClusterMetricOverview contains both the average values of a metric over
+// predefined intervals, and the total available value of that resource.
+message ClusterMetricOverview {
+  // Average metric values calculated over various time intervals.
+  repeated IntervalAverage avg = 1;
+  // Total available value of the resource on the node.
+  ResourceValue total = 2;
+}
+
+// IntervalAverage represents the average value of a metric over a specific time interval.
+message IntervalAverage {
+  // The duration of the interval.
+  google.protobuf.Duration interval = 1;
+  // Average value of the metric during the specified interval.
+  double value = 2;
+}
+
+// ResourceValue represents the total value of a resource along with its unit.
+message ResourceValue {
+  // Value of the resource, e.g., 0.5.
+  double value = 1;
+  // Unit of the resource value, e.g., "vcpu/core".
+  string unit = 2;
+}
+
+// ClusterNodeUsageMetrics defines per-node usage metrics.
+message ClusterNodeUsageMetrics {
+  // Unique identifier of the node.
+  string node_id = 1;
+  // Timeseries of CPU usage for the node.
+  repeated Metric cpu = 2;
+  // Timeseries of RAM usage for the node.
+  repeated Metric ram = 3;
+  // Timeseries of RAM cache usage for the node.
+  repeated Metric ram_cache = 4;
+  // Timeseries of RSS memory usage for the node.
+  repeated Metric ram_rss = 5;
+  // Timeseries of RSS memory usage by the Qdrant database for the node.
+  repeated Metric ram_qdrant_rss = 6;
+  // Timeseries of disk usage for the node.
+  repeated Metric disk = 7;
+}
+
+// A single metric data point.
+message Metric {
+  // Timestamp of the data point.
+  google.protobuf.Timestamp timestamp = 1;
+  // Numerical value of the metric at the given timestamp.
+  double value = 2;
+}
+
+// LogEntry represents a single log line.
+message LogEntry {
+  // The timestamp indicating when the log entry was recorded.
+  google.protobuf.Timestamp timestamp = 1;
+  // The content of the log message.
+  string message = 2;
+}
+
+// Aggregator defines how metrics should be aggregated over time.
+enum Aggregator {
+  // Unspecified aggregation function.
+  AGGREGATOR_UNSPECIFIED = 0;
+  // SUM aggregation function.
+  AGGREGATOR_SUM = 1;
+  // AVG aggregation function.
+  AGGREGATOR_AVG = 2;
+  // MAX aggregation function.
+  AGGREGATOR_MAX = 3;
+  // MIN aggregation function.
+  AGGREGATOR_MIN = 4;
+}

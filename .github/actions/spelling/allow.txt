@@ -21,3 +21,5 @@ linode
 openshift
 gibibytes
 millicore
+timeseries
+vcpu
