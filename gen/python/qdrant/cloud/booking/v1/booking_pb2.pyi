@@ -36,6 +36,20 @@ class ListPackagesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Package]
     def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
 
+class ListGlobalPackagesRequest(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id")
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
+
+class ListGlobalPackagesResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Package]
+    def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
+
 class GetPackageRequest(_message.Message):
     __slots__ = ("account_id", "id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -51,7 +65,7 @@ class GetPackageResponse(_message.Message):
     def __init__(self, package: _Optional[_Union[Package, _Mapping]] = ...) -> None: ...
 
 class Package(_message.Message):
-    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status")
+    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status", "available_additional_resources")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -59,6 +73,7 @@ class Package(_message.Message):
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     UNIT_INT_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    AVAILABLE_ADDITIONAL_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     type: str
@@ -66,7 +81,14 @@ class Package(_message.Message):
     currency: str
     unit_int_price_per_hour: int
     status: PackageStatus
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ...) -> None: ...
+    available_additional_resources: AvailableAdditionalResources
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
+
+class AvailableAdditionalResources(_message.Message):
+    __slots__ = ("disk_price_per_hour",)
+    DISK_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    disk_price_per_hour: int
+    def __init__(self, disk_price_per_hour: _Optional[int] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
     __slots__ = ("ram", "cpu", "disk")

@@ -26,6 +26,16 @@ service BookingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/packages/{id}"};
   }
+  // Fetch all public packages
+  // Required permissions:
+  // - None (public endpoint)
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+  rpc ListGlobalPackages(ListGlobalPackagesRequest) returns (ListGlobalPackagesResponse) {
+    // authentication not required
+    option (qdrant.cloud.common.v1.requires_authentication) = false;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/booking/v1/packages"};
+  }
 }
 
 // ListPackagesRequest is the request for the ListPackages function
@@ -49,6 +59,24 @@ message ListPackagesRequest {
 
 // ListPackagesResponse is the response from the ListPackages function
 message ListPackagesResponse {
+  // The actual packages in this list
+  repeated Package items = 1;
+}
+
+// ListGlobalPackagesRequest is the request for the ListGlobalPackages function
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+message ListGlobalPackagesRequest {
+  // Mandatory filter specifying the cloud provider where the cluster will be hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
+  // Filter specifying the cloud region where the cluster will be hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+  // Field can be omitted, if cloud_provider_id is `hybrid`
+  optional string cloud_provider_region_id = 2;
+}
+
+// ListPackagesResponse is the response from the ListPackages function
+message ListGlobalPackagesResponse {
   // The actual packages in this list
   repeated Package items = 1;
 }
@@ -103,6 +131,18 @@ message Package {
   // The status of the package.
   // Indicates the current status of the package.
   PackageStatus status = 7;
+  // Optional additional resources that can be added to the cluster.
+  // if not set, additional resources are not available for this package.
+  // Currently, only `DISK` is supported.
+  optional AvailableAdditionalResources available_additional_resources = 8;
+}
+
+// AvailableAdditionalResources represents additional resources that can be added to the cluster.
+message AvailableAdditionalResources {
+  // The unit price per hour in millicents, in integer format.
+  // Represents the cost per hour for a single unit(GiB) of the resource.
+  // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
+  uint32 disk_price_per_hour = 1;
 }
 
 // ResourceConfiguration defines the resource configuration for a package.

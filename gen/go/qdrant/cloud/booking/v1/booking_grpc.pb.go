@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName   = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -37,6 +38,10 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
+	// Fetch all public packages
+	// Required permissions:
+	// - None (public endpoint)
+	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -67,6 +72,16 @@ func (c *bookingServiceClient) GetPackage(ctx context.Context, in *GetPackageReq
 	return out, nil
 }
 
+func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGlobalPackagesResponse)
+	err := c.cc.Invoke(ctx, BookingService_ListGlobalPackages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -81,6 +96,10 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
+	// Fetch all public packages
+	// Required permissions:
+	// - None (public endpoint)
+	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -96,6 +115,9 @@ func (UnimplementedBookingServiceServer) ListPackages(context.Context, *ListPack
 }
 func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPackage not implemented")
+}
+func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalPackages not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -154,6 +176,24 @@ func _BookingService_GetPackage_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_ListGlobalPackages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalPackagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).ListGlobalPackages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_ListGlobalPackages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).ListGlobalPackages(ctx, req.(*ListGlobalPackagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -168,6 +208,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPackage",
 			Handler:    _BookingService_GetPackage_Handler,
+		},
+		{
+			MethodName: "ListGlobalPackages",
+			Handler:    _BookingService_ListGlobalPackages_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

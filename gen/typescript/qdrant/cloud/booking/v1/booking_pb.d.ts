@@ -79,6 +79,56 @@ export declare type ListPackagesResponse = Message<"qdrant.cloud.booking.v1.List
 export declare const ListPackagesResponseSchema: GenMessage<ListPackagesResponse>;
 
 /**
+ * ListGlobalPackagesRequest is the request for the ListGlobalPackages function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+ */
+export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1.ListGlobalPackagesRequest"> & {
+  /**
+   * Mandatory filter specifying the cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+   * Field can be omitted, if cloud_provider_id is `hybrid`
+   *
+   * @generated from field: optional string cloud_provider_region_id = 2;
+   */
+  cloudProviderRegionId?: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalPackagesRequest.
+ * Use `create(ListGlobalPackagesRequestSchema)` to create a new message.
+ */
+export declare const ListGlobalPackagesRequestSchema: GenMessage<ListGlobalPackagesRequest>;
+
+/**
+ * ListPackagesResponse is the response from the ListPackages function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+ */
+export declare type ListGlobalPackagesResponse = Message<"qdrant.cloud.booking.v1.ListGlobalPackagesResponse"> & {
+  /**
+   * The actual packages in this list
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.Package items = 1;
+   */
+  items: Package[];
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalPackagesResponse.
+ * Use `create(ListGlobalPackagesResponseSchema)` to create a new message.
+ */
+export declare const ListGlobalPackagesResponseSchema: GenMessage<ListGlobalPackagesResponse>;
+
+/**
  * GetPackageRequest is the request for the GetPackage function
  *
  * @generated from message qdrant.cloud.booking.v1.GetPackageRequest
@@ -188,6 +238,15 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
    * @generated from field: qdrant.cloud.booking.v1.PackageStatus status = 7;
    */
   status: PackageStatus;
+
+  /**
+   * Optional additional resources that can be added to the cluster.
+   * if not set, additional resources are not available for this package.
+   * Currently, only `DISK` is supported.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.AvailableAdditionalResources available_additional_resources = 8;
+   */
+  availableAdditionalResources?: AvailableAdditionalResources;
 };
 
 /**
@@ -195,6 +254,28 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
  * Use `create(PackageSchema)` to create a new message.
  */
 export declare const PackageSchema: GenMessage<Package>;
+
+/**
+ * AvailableAdditionalResources represents additional resources that can be added to the cluster.
+ *
+ * @generated from message qdrant.cloud.booking.v1.AvailableAdditionalResources
+ */
+export declare type AvailableAdditionalResources = Message<"qdrant.cloud.booking.v1.AvailableAdditionalResources"> & {
+  /**
+   * The unit price per hour in millicents, in integer format.
+   * Represents the cost per hour for a single unit(GiB) of the resource.
+   * You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
+   *
+   * @generated from field: uint32 disk_price_per_hour = 1;
+   */
+  diskPricePerHour: number;
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.AvailableAdditionalResources.
+ * Use `create(AvailableAdditionalResourcesSchema)` to create a new message.
+ */
+export declare const AvailableAdditionalResourcesSchema: GenMessage<AvailableAdditionalResources>;
 
 /**
  * ResourceConfiguration defines the resource configuration for a package.
@@ -292,6 +373,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof GetPackageRequestSchema;
     output: typeof GetPackageResponseSchema;
+  },
+  /**
+   * Fetch all public packages
+   * Required permissions:
+   * - None (public endpoint)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalPackages
+   */
+  listGlobalPackages: {
+    methodKind: "unary";
+    input: typeof ListGlobalPackagesRequestSchema;
+    output: typeof ListGlobalPackagesResponseSchema;
   },
 }>;
 

@@ -19,5 +19,7 @@ nvidia
 amd
 linode
 openshift
+gibibytes
+millicore
 timeseries
 vcpu
