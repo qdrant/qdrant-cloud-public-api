@@ -122,7 +122,7 @@ message ListClustersRequest {
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
     message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
-    expression: "this.cloud_provider_region_id.matches('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$') || this.cloud_provider_id!= 'hybrid'"
+    expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
   };
 }
 
@@ -294,7 +294,7 @@ message Cluster {
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
     message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
-    expression: "this.cloud_provider_region_id.matches('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$') || this.cloud_provider_id!= 'hybrid'"
+    expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
   };
   // Current configuration details of the cluster.
   ClusterConfiguration configuration = 20;
