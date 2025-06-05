@@ -25,7 +25,9 @@ Authentication is typically handled via API keys (so called management keys), wh
 ## Interacting with the API
 
 You can interact with the Qdrant Cloud API directly using tools like `grpcurl` (for gRPC) and `curl` (for REST/JSON), or by using the provided client libraries.
+
 The API is used in the [TerraformProvider](https://registry.terraform.io/providers/qdrant/qdrant-cloud/latest) as well, so this can be used to interact as well.
+
 The sources can be found [in Github here](https://github.com/qdrant/terraform-provider-qdrant-cloud).
 
 ### Using `grpcurl` (for gRPC)
