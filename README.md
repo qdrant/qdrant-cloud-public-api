@@ -55,7 +55,7 @@ grpcurl -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
   qdrant.cloud.cluster.v1.ClusterService/ListClusters   
 ```
 
-*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
+*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
 
 Assuming you have exported your management key in the environment variable `MANAGEMENT_KEY`, you can replace the first line with:
 
@@ -76,9 +76,9 @@ curl -X GET \
   "https://api.cloud.qdrant.io/api/cluster/v1/accounts/<YOUR_ACCOUNT_ID>/clusters"
 ```
 
-*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files.*
+*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files.*
 
-You can typically infer these from the gRPC service and method names, or refer to the API documentation. Or check the output of grpcurl like
+You can typically infer these from the gRPC service and method names, or refer to the API documentation. Or check the output of grpcurl like:
 
 ```
   rpc CreateCluster ( .qdrant.cloud.cluster.v1.CreateClusterRequest ) returns ( .qdrant.cloud.cluster.v1.CreateClusterResponse ) {
@@ -91,7 +91,7 @@ You can typically infer these from the gRPC service and method names, or refer t
   ...
 ```
 
-consider using `| jq` to format the output*
+Consider using `| jq` to format the output.
 
 *For methods requiring a request body (e.g., POST, PUT), you would use the `-d` option with a JSON payload:*
 
