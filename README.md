@@ -20,7 +20,7 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 * **gRPC:** `grpc.cloud.qdrant.io:443`
 * **REST/JSON:** `https://api.cloud.qdrant.io`
 
-Authentication is typically handled via API keys passed in the `Authorization` header as a Bearer token (e.g., `Authorization: Bearer YOUR_AUTH0_KEY`) or Programmatic access key (e.g., `Authorization: apikey YOUR_PAK`).
+Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey YOUR_MANAGEMENT_KEY`).
 
 ## Interacting with the API
 
@@ -47,18 +47,18 @@ grpcurl grpc.cloud.qdrant.io:443 describe qdrant.cloud.cluster.v1.ClusterService
 #### Example: Call a method with gRPC (e.g., ListClusters on ClusterService)
 
 ```sh
-grpcurl -H "Authorization: apikey YOUR_PAK" \
+grpcurl -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
   -d '{"account_id": "<YOUR_ACCOUNT_ID>"}' \
   grpc.cloud.qdrant.io:443 \
   qdrant.cloud.cluster.v1.ClusterService/ListClusters   
 ```
 
-*Note: Replace `YOUR_PAK` with your actual programatic access key. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
+*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
 
-Assuming you have exported your programatic access key in the environment variable `PAK`, you can replace the first line with:
+Assuming you have exported your management key in the environment variable `MANAGEMENT_KEY`, you can replace the first line with:
 
 ```sh
-grpcurl -H "Authorization: apikey ${PAK}" \
+grpcurl -H "Authorization: apikey ${MANAGEMENT_KEY}" \
 ...
 ``` 
 
@@ -70,11 +70,13 @@ The REST/JSON API is available over HTTPS and uses standard HTTP methods.
 
 ```sh
 curl -X GET \
-  -H "Authorization: apikey YOUR_PAK" \
+  -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
   "https://api.cloud.qdrant.io/api/cluster/v1/accounts/<YOUR_ACCOUNT_ID>/clusters"
 ```
 
-*Note: Replace `YOUR_PAK` with your actual programmatic access key. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files. You can typically infer these from the gRPC service and method names, or refer to the API documentation. Or check the output of grpcurl like
+*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files.*
+
+You can typically infer these from the gRPC service and method names, or refer to the API documentation. Or check the output of grpcurl like
 
 ```
   rpc CreateCluster ( .qdrant.cloud.cluster.v1.CreateClusterRequest ) returns ( .qdrant.cloud.cluster.v1.CreateClusterResponse ) {
@@ -87,13 +89,13 @@ curl -X GET \
   ...
 ```
 
-concider using `| jq` to format the output*
+consider using `| jq` to format the output*
 
 *For methods requiring a request body (e.g., POST, PUT), you would use the `-d` option with a JSON payload:*
 
 ```sh
 curl -X POST \
-  -H "Authorization: apikey YOUR_PAK" \
+  -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
   -H "Content-Type: application/json" \
   -d '{"field1": "value1", "field2": "value2"}' \
   "https://api.cloud.qdrant.io/v2/your-service/your-resource"
@@ -108,7 +110,7 @@ We currently provide support for:
 * **Python:** `gen/python/`
 * **TypeScript:** `gen/ts/`
 
-See (below)[## Using generated code] for more details.
+See [below](## Using generated code) for more details.
 
 
 ## Working with Protocol Buffer definitions
