@@ -111,7 +111,7 @@ We currently provide support for:
 * **Python:** `gen/python/`
 * **TypeScript:** `gen/ts/`
 
-See [below](## Using generated code) for more details.
+See [below](#using-generated-code) for more details.
 
 
 ## Working with Protocol Buffer definitions
