@@ -1,0 +1,171 @@
+syntax = "proto3";
+
+package qdrant.cloud.account.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// AccountService is the API used to configure Accounts.
+service AccountService {
+  // Fetch all accounts associated for the provided user, where the user has the provided permission.
+  // Required permissions:
+  // - read:accounts
+  rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+    // permissions
+    option (common.v1.permissions) = ""; // check must be performed in the implementation
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relavant for this method
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts"};
+  }
+  // Get an account identified by the given ID.
+  // Required permissions:
+  // - read:account
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account"; // not 'read:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}"};
+  }
+  // Creates an account for the user identified by the given ID.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relavant for this method
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/iam/v1/accounts"
+      body: "*"
+    };
+  }
+  // Update an account identified by the given ID.
+  // Required permissions:
+  // - write:account
+  rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account.id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/iam/v1/accounts/{account.id}"
+      body: "*"
+    };
+  }
+  // Deletes an account identified by the given ID.
+  // Required permissions:
+  // - delete:account
+  rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:account"; // not 'delete:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}"};
+  }
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// ListAccountsRequest is the request for the ListAccounts function
+message ListAccountsRequest {
+  // Empty
+}
+
+// ListAccountsResponse is the response from the ListAccounts function
+message ListAccountsResponse {
+  // The actual accounts in this list.
+  repeated Account items = 1;
+}
+
+// GetAccountRequest is the request for the GetAccount function
+message GetAccountRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetAccountResponse is the response from the GetAccount function
+message GetAccountResponse {
+  // The actual account.
+  Account account = 1;
+}
+
+// CreateAccountRequest is the request for the CreateAccount function.
+message CreateAccountRequest {
+  // The actual account.
+  Account account = 1;
+}
+
+// CreateAccountResponse is the response from the CreateAccount function.
+message CreateAccountResponse {
+  // The actual account.
+  Account account = 1;
+}
+
+// UpdateAccountRequest is the request for the UpdateAccount function.
+message UpdateAccountRequest {
+  // The actual account.
+  Account account = 1;
+}
+
+// UpdateAccountResponse is the response from the UpdateAccount function.
+message UpdateAccountResponse {
+  // The actual account.
+  Account account = 1;
+}
+
+// DeleteAccountRequest is the request for the DeleteAccount function.
+message DeleteAccountRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteAccountResponse is the response from the DeleteAccount function.
+message DeleteAccountResponse {
+  // Empty
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An Account represents an account in the Qdrant cloud.
+message Account {
+  // Unique identifier for the account (in GUID format).
+  // This is a read-only field and will be available after an account is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "cluster.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the account was created.
+  // This is a read-only field and will be available after an account is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The timestamp when the account was last updated.
+  // This is a read-only field and will be available after an account is created.
+  google.protobuf.Timestamp last_modified_at = 3;
+  // The name of the account.
+  // Name can only contain letters, numbers, underscores and dashes
+  string name = 5 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // The Identifier of the owner of the account (in GUID format).
+  // This is a required field. TODO: Can it be changed by the owner, or is this read-only?
+  string owner_id = 6 [(buf.validate.field).string = {uuid: true}];
+  // The email address of the owner of the account.
+  // This is a read-only field and will be derived from the owner_id field.
+  string owner_email = 7 [(buf.validate.field).string = {email: true}];
+  // Wether or not the account is billed manually.
+  // This is a read-only field. TODO: Is this correct, should it be an internal field only?
+  bool is_billed_manually = 8;
+  // Wether or not the account is a business account.
+  // This is a read-only field. TODO: Is this correct, should it be an internal field only?
+  bool is_business = 9;
+  // Wether or not the alerts need to be send to all users (not only the owner).
+  // This is a read-only field? TODO: Is this correct, should it be an internal field only?
+  bool send_alert_to_all = 10;
+}

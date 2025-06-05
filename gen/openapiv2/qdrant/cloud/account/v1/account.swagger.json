@@ -1,0 +1,356 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/account/v1/account.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AccountService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/iam/v1/accounts": {
+      "get": {
+        "summary": "Fetch all accounts associated for the provided user, where the user has the provided permission.\nRequired permissions:\n- read:accounts",
+        "operationId": "AccountService_ListAccounts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AccountService"
+        ]
+      },
+      "post": {
+        "summary": "Creates an account for the user identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_CreateAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateAccountRequest is the request for the CreateAccount function.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{account.id}": {
+      "put": {
+        "summary": "Update an account identified by the given ID.\nRequired permissions:\n- write:account",
+        "operationId": "AccountService_UpdateAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account.id",
+            "description": "Unique identifier for the account (in GUID format).\nThis is a read-only field and will be available after an account is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServiceUpdateAccountBody"
+            }
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}": {
+      "get": {
+        "summary": "Get an account identified by the given ID.\nRequired permissions:\n- read:account",
+        "operationId": "AccountService_GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes an account identified by the given ID.\nRequired permissions:\n- delete:account",
+        "operationId": "AccountService_DeleteAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AccountServiceUpdateAccountBody": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "ownerId": {
+              "type": "string",
+              "title": "The Identifier of the owner of the account (in GUID format).\nThis is a required field. TODO: Can it be changed by the owner, or is this read-only?"
+            },
+            "ownerEmail": {
+              "type": "string",
+              "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
+            },
+            "isBilledManually": {
+              "type": "boolean",
+              "title": "Wether or not the account is billed manually.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
+            },
+            "isBusiness": {
+              "type": "boolean",
+              "title": "Wether or not the account is a business account.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
+            },
+            "sendAlertToAll": {
+              "type": "boolean",
+              "title": "Wether or not the alerts need to be send to all users (not only the owner).\nThis is a read-only field? TODO: Is this correct, should it be an internal field only?"
+            }
+          },
+          "description": "The actual account.",
+          "title": "The actual account."
+        }
+      },
+      "description": "UpdateAccountRequest is the request for the UpdateAccount function."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the account (in GUID format).\nThis is a read-only field and will be available after an account is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created."
+        },
+        "name": {
+          "type": "string",
+          "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "ownerId": {
+          "type": "string",
+          "title": "The Identifier of the owner of the account (in GUID format).\nThis is a required field. TODO: Can it be changed by the owner, or is this read-only?"
+        },
+        "ownerEmail": {
+          "type": "string",
+          "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
+        },
+        "isBilledManually": {
+          "type": "boolean",
+          "title": "Wether or not the account is billed manually.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
+        },
+        "isBusiness": {
+          "type": "boolean",
+          "title": "Wether or not the account is a business account.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
+        },
+        "sendAlertToAll": {
+          "type": "boolean",
+          "title": "Wether or not the alerts need to be send to all users (not only the owner).\nThis is a read-only field? TODO: Is this correct, should it be an internal field only?"
+        }
+      },
+      "description": "An Account represents an account in the Qdrant cloud."
+    },
+    "v1CreateAccountRequest": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account",
+          "description": "The actual account."
+        }
+      },
+      "description": "CreateAccountRequest is the request for the CreateAccount function."
+    },
+    "v1CreateAccountResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account",
+          "description": "The actual account."
+        }
+      },
+      "description": "CreateAccountResponse is the response from the CreateAccount function."
+    },
+    "v1DeleteAccountResponse": {
+      "type": "object",
+      "description": "DeleteAccountResponse is the response from the DeleteAccount function.\n\nEmpty"
+    },
+    "v1GetAccountResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account",
+          "description": "The actual account."
+        }
+      },
+      "title": "GetAccountResponse is the response from the GetAccount function"
+    },
+    "v1ListAccountsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Account"
+          },
+          "description": "The actual accounts in this list."
+        }
+      },
+      "title": "ListAccountsResponse is the response from the ListAccounts function"
+    },
+    "v1UpdateAccountResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account",
+          "description": "The actual account."
+        }
+      },
+      "description": "UpdateAccountResponse is the response from the UpdateAccount function."
+    }
+  }
+}
