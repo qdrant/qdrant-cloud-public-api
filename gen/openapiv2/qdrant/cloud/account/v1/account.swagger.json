@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/iam/v1/accounts": {
+    "/api/account/v1/accounts": {
       "get": {
         "summary": "Fetch all accounts associated for the provided user, where the user has the provided permission.\nRequired permissions:\n- read:accounts",
         "operationId": "AccountService_ListAccounts",
@@ -71,7 +71,7 @@
         ]
       }
     },
-    "/api/iam/v1/accounts/{account.id}": {
+    "/api/account/v1/accounts/{account.id}": {
       "put": {
         "summary": "Update an account identified by the given ID.\nRequired permissions:\n- write:account",
         "operationId": "AccountService_UpdateAccount",
@@ -111,7 +111,7 @@
         ]
       }
     },
-    "/api/iam/v1/accounts/{accountId}": {
+    "/api/account/v1/accounts/{accountId}": {
       "get": {
         "summary": "Get an account identified by the given ID.\nRequired permissions:\n- read:account",
         "operationId": "AccountService_GetAccount",

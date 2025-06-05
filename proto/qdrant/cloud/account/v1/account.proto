@@ -18,7 +18,7 @@ service AccountService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/iam/v1/accounts"};
+    option (google.api.http) = {get: "/api/account/v1/accounts"};
   }
   // Get an account identified by the given ID.
   // Required permissions:
@@ -27,7 +27,7 @@ service AccountService {
     // permissions
     option (common.v1.permissions) = "read:account"; // not 'read:accounts' for historical reasons
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}"};
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}"};
   }
   // Creates an account for the user identified by the given ID.
   // Required permissions:
@@ -39,7 +39,7 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/iam/v1/accounts"
+      post: "/api/account/v1/accounts"
       body: "*"
     };
   }
@@ -53,7 +53,7 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = "account.id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      put: "/api/iam/v1/accounts/{account.id}"
+      put: "/api/account/v1/accounts/{account.id}"
       body: "*"
     };
   }
@@ -64,7 +64,7 @@ service AccountService {
     // permissions
     option (common.v1.permissions) = "delete:account"; // not 'delete:accounts' for historical reasons
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}"};
+    option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
   }
 }
 
