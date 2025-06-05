@@ -16,7 +16,7 @@ service AccountService {
     // permissions
     option (common.v1.permissions) = ""; // check must be performed in the implementation
     // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relavant for this method
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts"};
   }
@@ -36,7 +36,7 @@ service AccountService {
     // permissions
     option (common.v1.permissions) = "";
     // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relavant for this method
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/accounts"
