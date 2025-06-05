@@ -20,7 +20,7 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 * **gRPC:** `grpc.cloud.qdrant.io:443`
 * **REST/JSON:** `https://api.cloud.qdrant.io`
 
-Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey YOUR_MANAGEMENT_KEY`).
+Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey <YOUR_MANAGEMENT_KEY>`).
 
 ## Interacting with the API
 
@@ -48,13 +48,13 @@ grpcurl grpc.cloud.qdrant.io:443 describe qdrant.cloud.cluster.v1.ClusterService
 #### Example: Call a method with gRPC (e.g., ListClusters on ClusterService)
 
 ```sh
-grpcurl -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
+grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   -d '{"account_id": "<YOUR_ACCOUNT_ID>"}' \
   grpc.cloud.qdrant.io:443 \
   qdrant.cloud.cluster.v1.ClusterService/ListClusters   
 ```
 
-*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
+*Note: Replace `<YOUR_MANAGEMENT_KEY>` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
 
 Assuming you have exported your management key in the environment variable `MANAGEMENT_KEY`, you can replace the first line with:
 
@@ -71,11 +71,11 @@ The REST/JSON API is available over HTTPS and uses standard HTTP methods.
 
 ```sh
 curl -X GET \
-  -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
+  -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   "https://api.cloud.qdrant.io/api/cluster/v1/accounts/<YOUR_ACCOUNT_ID>/clusters"
 ```
 
-*Note: Replace `YOUR_MANAGEMENT_KEY` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files.*
+*Note: Replace `<YOUR_MANAGEMENT_KEY>` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The exact REST path and HTTP method depend on the `google.api.http` annotations in the `.proto` files.*
 
 You can typically infer these from the gRPC service and method names, or refer to the API documentation. Or check the output of grpcurl like:
 
@@ -96,7 +96,7 @@ Consider using `| jq` to format the output.
 
 ```sh
 curl -X POST \
-  -H "Authorization: apikey YOUR_MANAGEMENT_KEY" \
+  -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   -H "Content-Type: application/json" \
   -d '{"field1": "value1", "field2": "value2"}' \
   "https://api.cloud.qdrant.io/v2/your-service/your-resource"
