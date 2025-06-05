@@ -282,6 +282,14 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
    * @generated from field: bool send_alert_to_all = 10;
    */
   sendAlertToAll: boolean;
+
+  /**
+   * The privileges of the account, if any.
+   * This is a read-only field.
+   *
+   * @generated from field: repeated string privileges = 11;
+   */
+  privileges: string[];
 };
 
 /**

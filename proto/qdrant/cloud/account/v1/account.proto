@@ -168,4 +168,7 @@ message Account {
   // Wether or not the alerts need to be send to all users (not only the owner).
   // This is a read-only field? TODO: Is this correct, should it be an internal field only?
   bool send_alert_to_all = 10;
+  // The privileges of the account, if any.
+  // This is a read-only field.
+  repeated string privileges = 11;
 }
