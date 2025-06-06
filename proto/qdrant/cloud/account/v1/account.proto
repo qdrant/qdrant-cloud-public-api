@@ -154,21 +154,12 @@ message Account {
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The Identifier of the owner of the account (in GUID format).
-  // This is a required field. TODO: Can it be changed by the owner, or is this read-only?
+  // This is a read-only field.
   string owner_id = 6 [(buf.validate.field).string = {uuid: true}];
   // The email address of the owner of the account.
   // This is a read-only field and will be derived from the owner_id field.
   string owner_email = 7 [(buf.validate.field).string = {email: true}];
-  // Wether or not the account is billed manually.
-  // This is a read-only field. TODO: Is this correct, should it be an internal field only?
-  bool is_billed_manually = 8;
-  // Wether or not the account is a business account.
-  // This is a read-only field. TODO: Is this correct, should it be an internal field only?
-  bool is_business = 9;
-  // Wether or not the alerts need to be send to all users (not only the owner).
-  // This is a read-only field? TODO: Is this correct, should it be an internal field only?
-  bool send_alert_to_all = 10;
   // The privileges of the account, if any.
   // This is a read-only field.
-  repeated string privileges = 11;
+  repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
 }

@@ -197,23 +197,11 @@
             },
             "ownerId": {
               "type": "string",
-              "title": "The Identifier of the owner of the account (in GUID format).\nThis is a required field. TODO: Can it be changed by the owner, or is this read-only?"
+              "description": "The Identifier of the owner of the account (in GUID format).\nThis is a read-only field."
             },
             "ownerEmail": {
               "type": "string",
               "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
-            },
-            "isBilledManually": {
-              "type": "boolean",
-              "title": "Wether or not the account is billed manually.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
-            },
-            "isBusiness": {
-              "type": "boolean",
-              "title": "Wether or not the account is a business account.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
-            },
-            "sendAlertToAll": {
-              "type": "boolean",
-              "title": "Wether or not the alerts need to be send to all users (not only the owner).\nThis is a read-only field? TODO: Is this correct, should it be an internal field only?"
             },
             "privileges": {
               "type": "array",
@@ -280,23 +268,11 @@
         },
         "ownerId": {
           "type": "string",
-          "title": "The Identifier of the owner of the account (in GUID format).\nThis is a required field. TODO: Can it be changed by the owner, or is this read-only?"
+          "description": "The Identifier of the owner of the account (in GUID format).\nThis is a read-only field."
         },
         "ownerEmail": {
           "type": "string",
           "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
-        },
-        "isBilledManually": {
-          "type": "boolean",
-          "title": "Wether or not the account is billed manually.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
-        },
-        "isBusiness": {
-          "type": "boolean",
-          "title": "Wether or not the account is a business account.\nThis is a read-only field. TODO: Is this correct, should it be an internal field only?"
-        },
-        "sendAlertToAll": {
-          "type": "boolean",
-          "title": "Wether or not the alerts need to be send to all users (not only the owner).\nThis is a read-only field? TODO: Is this correct, should it be an internal field only?"
         },
         "privileges": {
           "type": "array",

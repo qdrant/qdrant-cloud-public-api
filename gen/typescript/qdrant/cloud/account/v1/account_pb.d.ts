@@ -245,7 +245,7 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 
   /**
    * The Identifier of the owner of the account (in GUID format).
-   * This is a required field. TODO: Can it be changed by the owner, or is this read-only?
+   * This is a read-only field.
    *
    * @generated from field: string owner_id = 6;
    */
@@ -260,34 +260,10 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
   ownerEmail: string;
 
   /**
-   * Wether or not the account is billed manually.
-   * This is a read-only field. TODO: Is this correct, should it be an internal field only?
-   *
-   * @generated from field: bool is_billed_manually = 8;
-   */
-  isBilledManually: boolean;
-
-  /**
-   * Wether or not the account is a business account.
-   * This is a read-only field. TODO: Is this correct, should it be an internal field only?
-   *
-   * @generated from field: bool is_business = 9;
-   */
-  isBusiness: boolean;
-
-  /**
-   * Wether or not the alerts need to be send to all users (not only the owner).
-   * This is a read-only field? TODO: Is this correct, should it be an internal field only?
-   *
-   * @generated from field: bool send_alert_to_all = 10;
-   */
-  sendAlertToAll: boolean;
-
-  /**
    * The privileges of the account, if any.
    * This is a read-only field.
    *
-   * @generated from field: repeated string privileges = 11;
+   * @generated from field: repeated string privileges = 8;
    */
   privileges: string[];
 };
