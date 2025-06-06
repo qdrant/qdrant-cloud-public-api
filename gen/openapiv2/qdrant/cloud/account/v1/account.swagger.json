@@ -175,7 +175,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites": {
       "get": {
-        "summary": "Fetch all account invites in the account identified by the given account ID.\nThe authenticated user must be a member of the account identifier by the given account ID.\nRequired permissions:\n- read:invites",
+        "summary": "Fetch all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_ListAccountInvites",
         "responses": {
           "200": {
@@ -207,7 +207,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}": {
       "get": {
-        "summary": "Fetch an account invite by its id.\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- read:invites",
+        "summary": "Fetch an account invite identified by the given account ID and invite ID.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_GetAccountInvite",
         "responses": {
           "200": {
@@ -244,7 +244,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an account invite\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- delete:invites",
+        "summary": "Delete an account invite\nRequired permissions:\n- delete:invites",
         "operationId": "AccountService_DeleteAccountInvite",
         "responses": {
           "200": {
@@ -323,12 +323,12 @@
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}/reject": {
       "post": {
         "summary": "Reject an account invite\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "AccountService_RejectOrganizationInvite",
+        "operationId": "AccountService_RejectAccountInvite",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RejectOrganizationInviteResponse"
+              "$ref": "#/definitions/v1RejectAccountInviteResponse"
             }
           },
           "default": {
@@ -467,9 +467,9 @@
         ]
       }
     },
-    "/api/account/v1/accounts/{invite.accountId}/invites": {
+    "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
       "post": {
-        "summary": "Create a new account invite.\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- write:invites",
+        "summary": "Create a new account invite.\nRequired permissions:\n- write:invites",
         "operationId": "AccountService_CreateAccountInvite",
         "responses": {
           "200": {
@@ -487,7 +487,7 @@
         },
         "parameters": [
           {
-            "name": "invite.accountId",
+            "name": "accountInvite.accountId",
             "description": "The identifier of the account this invite is for (in GUID format).\nThis field is required when creating an invite.",
             "in": "path",
             "required": true,
@@ -509,13 +509,13 @@
     },
     "/api/account/v1/self/invites": {
       "get": {
-        "summary": "Fetch all account invites for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "AccountService_ListMyAccountInvites",
+        "summary": "Fetch all account invites for the authenticated user (across all accounts).\nThese are the invites you are invited to join, not the ones you have sent.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_ListReceivedAccountInvites",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListMyAccountInvitesResponse"
+              "$ref": "#/definitions/v1ListReceivedAccountInvitesResponse"
             }
           },
           "default": {
@@ -528,7 +528,7 @@
         "parameters": [
           {
             "name": "statusFilter",
-            "description": "Optional: Filter invites by status (e.g. pending only).\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_EXPIRED: The invite has expired.\n\nTODO: Do we want to add this?\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
+            "description": "Optional: Filter invites by status (e.g. pending only).\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
             "in": "query",
             "required": false,
             "type": "string",
@@ -537,7 +537,6 @@
               "ACCOUNT_INVITE_STATUS_PENDING",
               "ACCOUNT_INVITE_STATUS_ACCEPTED",
               "ACCOUNT_INVITE_STATUS_REJECTED",
-              "ACCOUNT_INVITE_STATUS_EXPIRED",
               "ACCOUNT_INVITE_STATUS_CANCELED"
             ],
             "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED"
@@ -553,7 +552,7 @@
     "AccountServiceCreateAccountInviteBody": {
       "type": "object",
       "properties": {
-        "invite": {
+        "accountInvite": {
           "type": "object",
           "properties": {
             "id": {
@@ -564,16 +563,16 @@
               "type": "string",
               "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
             },
-            "email": {
+            "userEmail": {
               "type": "string",
               "description": "The email address of the user being invited.\nThis field is required when creating an invite."
             },
-            "roleIds": {
+            "userRoleIds": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account."
+              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
             },
             "createdAt": {
               "type": "string",
@@ -582,16 +581,11 @@
             },
             "createdByUserId": {
               "type": "string",
-              "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user.\n\nTODO: Optional (for system generated invites)?"
+              "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
             },
             "createdByName": {
               "type": "string",
               "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
-            },
-            "expiresAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The timestamp when the invite expires. If not set, the invite may use a default expiration period or not expire.\nThis is a read-only field, potentially set at creation or managed by the server.\n\nTODO: Do we want to add this?"
             },
             "lastModifiedAt": {
               "type": "string",
@@ -747,16 +741,16 @@
           "type": "string",
           "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
         },
-        "email": {
+        "userEmail": {
           "type": "string",
           "description": "The email address of the user being invited.\nThis field is required when creating an invite."
         },
-        "roleIds": {
+        "userRoleIds": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account."
+          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
         },
         "createdAt": {
           "type": "string",
@@ -765,16 +759,11 @@
         },
         "createdByUserId": {
           "type": "string",
-          "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user.\n\nTODO: Optional (for system generated invites)?"
+          "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
         },
         "createdByName": {
           "type": "string",
           "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the invite expires. If not set, the invite may use a default expiration period or not expire.\nThis is a read-only field, potentially set at creation or managed by the server.\n\nTODO: Do we want to add this?"
         },
         "lastModifiedAt": {
           "type": "string",
@@ -799,11 +788,10 @@
         "ACCOUNT_INVITE_STATUS_PENDING",
         "ACCOUNT_INVITE_STATUS_ACCEPTED",
         "ACCOUNT_INVITE_STATUS_REJECTED",
-        "ACCOUNT_INVITE_STATUS_EXPIRED",
         "ACCOUNT_INVITE_STATUS_CANCELED"
       ],
       "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
-      "description": "AccountInviteStatus defines the possible statuses of an account invitation.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_EXPIRED: The invite has expired.\n\nTODO: Do we want to add this?\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin)."
+      "description": "AccountInviteStatus defines the possible statuses of an account invitation.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin)."
     },
     "v1AccountMember": {
       "type": "object",
@@ -827,7 +815,7 @@
     "v1CreateAccountInviteResponse": {
       "type": "object",
       "properties": {
-        "invite": {
+        "accountInvite": {
           "$ref": "#/definitions/v1AccountInvite",
           "description": "The created account invite."
         }
@@ -869,9 +857,9 @@
     "v1GetAccountInviteResponse": {
       "type": "object",
       "properties": {
-        "invite": {
+        "accountInvite": {
           "$ref": "#/definitions/v1AccountInvite",
-          "description": "The retrieved account invite."
+          "description": "The account invite."
         }
       },
       "description": "GetAccountInviteResponse is the response from the GetAccountInvite function."
@@ -879,7 +867,7 @@
     "v1GetAccountMemberResponse": {
       "type": "object",
       "properties": {
-        "member": {
+        "accountMember": {
           "$ref": "#/definitions/v1AccountMember",
           "description": "The retrieved account member."
         }
@@ -938,7 +926,7 @@
       },
       "title": "ListAccountsResponse is the response from the ListAccounts function"
     },
-    "v1ListMyAccountInvitesResponse": {
+    "v1ListReceivedAccountInvitesResponse": {
       "type": "object",
       "properties": {
         "items": {
@@ -950,9 +938,9 @@
           "description": "The list of account invites for the authenticated user."
         }
       },
-      "description": "ListMyAccountInvitesResponse is the response from the ListMyAccountInvites function."
+      "description": "ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function."
     },
-    "v1RejectOrganizationInviteResponse": {
+    "v1RejectAccountInviteResponse": {
       "type": "object",
       "properties": {
         "invite": {
@@ -960,7 +948,7 @@
           "description": "The invite that was rejected, with its status updated."
         }
       },
-      "description": "RejectOrganizationInviteResponse is the response from the RejectOrganizationInvite function."
+      "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

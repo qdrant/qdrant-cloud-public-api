@@ -17,13 +17,11 @@ class AccountInviteStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     ACCOUNT_INVITE_STATUS_PENDING: _ClassVar[AccountInviteStatus]
     ACCOUNT_INVITE_STATUS_ACCEPTED: _ClassVar[AccountInviteStatus]
     ACCOUNT_INVITE_STATUS_REJECTED: _ClassVar[AccountInviteStatus]
-    ACCOUNT_INVITE_STATUS_EXPIRED: _ClassVar[AccountInviteStatus]
     ACCOUNT_INVITE_STATUS_CANCELED: _ClassVar[AccountInviteStatus]
 ACCOUNT_INVITE_STATUS_UNSPECIFIED: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_PENDING: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_ACCEPTED: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_REJECTED: AccountInviteStatus
-ACCOUNT_INVITE_STATUS_EXPIRED: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_CANCELED: AccountInviteStatus
 
 class ListAccountsRequest(_message.Message):
@@ -94,13 +92,13 @@ class ListAccountInvitesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[AccountInvite]
     def __init__(self, items: _Optional[_Iterable[_Union[AccountInvite, _Mapping]]] = ...) -> None: ...
 
-class ListMyAccountInvitesRequest(_message.Message):
+class ListReceivedAccountInvitesRequest(_message.Message):
     __slots__ = ("status_filter",)
     STATUS_FILTER_FIELD_NUMBER: _ClassVar[int]
     status_filter: AccountInviteStatus
     def __init__(self, status_filter: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
 
-class ListMyAccountInvitesResponse(_message.Message):
+class ListReceivedAccountInvitesResponse(_message.Message):
     __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[AccountInvite]
@@ -115,22 +113,22 @@ class GetAccountInviteRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., invite_id: _Optional[str] = ...) -> None: ...
 
 class GetAccountInviteResponse(_message.Message):
-    __slots__ = ("invite",)
-    INVITE_FIELD_NUMBER: _ClassVar[int]
-    invite: AccountInvite
-    def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
+    __slots__ = ("account_invite",)
+    ACCOUNT_INVITE_FIELD_NUMBER: _ClassVar[int]
+    account_invite: AccountInvite
+    def __init__(self, account_invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
 class CreateAccountInviteRequest(_message.Message):
-    __slots__ = ("invite",)
-    INVITE_FIELD_NUMBER: _ClassVar[int]
-    invite: AccountInvite
-    def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
+    __slots__ = ("account_invite",)
+    ACCOUNT_INVITE_FIELD_NUMBER: _ClassVar[int]
+    account_invite: AccountInvite
+    def __init__(self, account_invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
 class CreateAccountInviteResponse(_message.Message):
-    __slots__ = ("invite",)
-    INVITE_FIELD_NUMBER: _ClassVar[int]
-    invite: AccountInvite
-    def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
+    __slots__ = ("account_invite",)
+    ACCOUNT_INVITE_FIELD_NUMBER: _ClassVar[int]
+    account_invite: AccountInvite
+    def __init__(self, account_invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
 class DeleteAccountInviteRequest(_message.Message):
     __slots__ = ("account_id", "invite_id")
@@ -158,7 +156,7 @@ class AcceptAccountInviteResponse(_message.Message):
     invite: AccountInvite
     def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
-class RejectOrganizationInviteRequest(_message.Message):
+class RejectAccountInviteRequest(_message.Message):
     __slots__ = ("account_id", "invite_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     INVITE_ID_FIELD_NUMBER: _ClassVar[int]
@@ -166,7 +164,7 @@ class RejectOrganizationInviteRequest(_message.Message):
     invite_id: str
     def __init__(self, account_id: _Optional[str] = ..., invite_id: _Optional[str] = ...) -> None: ...
 
-class RejectOrganizationInviteResponse(_message.Message):
+class RejectAccountInviteResponse(_message.Message):
     __slots__ = ("invite",)
     INVITE_FIELD_NUMBER: _ClassVar[int]
     invite: AccountInvite
@@ -193,10 +191,10 @@ class GetAccountMemberRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
 
 class GetAccountMemberResponse(_message.Message):
-    __slots__ = ("member",)
-    MEMBER_FIELD_NUMBER: _ClassVar[int]
-    member: AccountMember
-    def __init__(self, member: _Optional[_Union[AccountMember, _Mapping]] = ...) -> None: ...
+    __slots__ = ("account_member",)
+    ACCOUNT_MEMBER_FIELD_NUMBER: _ClassVar[int]
+    account_member: AccountMember
+    def __init__(self, account_member: _Optional[_Union[AccountMember, _Mapping]] = ...) -> None: ...
 
 class DeleteAccountMemberRequest(_message.Message):
     __slots__ = ("account_id", "user_id")
@@ -229,32 +227,30 @@ class Account(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
-    __slots__ = ("id", "account_id", "account_name", "email", "role_ids", "created_at", "created_by_user_id", "created_by_name", "expires_at", "last_modified_at", "user_id", "status")
+    __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_name", "last_modified_at", "user_id", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_NAME_FIELD_NUMBER: _ClassVar[int]
-    EMAIL_FIELD_NUMBER: _ClassVar[int]
-    ROLE_IDS_FIELD_NUMBER: _ClassVar[int]
+    USER_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    USER_ROLE_IDS_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_USER_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_NAME_FIELD_NUMBER: _ClassVar[int]
-    EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     account_name: str
-    email: str
-    role_ids: _containers.RepeatedScalarFieldContainer[str]
+    user_email: str
+    user_role_ids: _containers.RepeatedScalarFieldContainer[str]
     created_at: _timestamp_pb2.Timestamp
     created_by_user_id: str
     created_by_name: str
-    expires_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     user_id: str
     status: AccountInviteStatus
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., email: _Optional[str] = ..., role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_name: _Optional[str] = ..., expires_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., user_id: _Optional[str] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., user_email: _Optional[str] = ..., user_role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_name: _Optional[str] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., user_id: _Optional[str] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
 
 class AccountMember(_message.Message):
     __slots__ = ("user", "is_owner", "joined_at")

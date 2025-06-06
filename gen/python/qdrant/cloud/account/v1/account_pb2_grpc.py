@@ -45,10 +45,10 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesResponse.FromString,
                 _registered_method=True)
-        self.ListMyAccountInvites = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/ListMyAccountInvites',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.FromString,
+        self.ListReceivedAccountInvites = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.FromString,
                 _registered_method=True)
         self.GetAccountInvite = channel.unary_unary(
                 '/qdrant.cloud.account.v1.AccountService/GetAccountInvite',
@@ -70,10 +70,10 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteResponse.FromString,
                 _registered_method=True)
-        self.RejectOrganizationInvite = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
+        self.RejectAccountInvite = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/RejectAccountInvite',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.FromString,
                 _registered_method=True)
         self.ListAccountMembers = channel.unary_unary(
                 '/qdrant.cloud.account.v1.AccountService/ListAccountMembers',
@@ -143,7 +143,6 @@ class AccountServiceServicer(object):
 
     def ListAccountInvites(self, request, context):
         """Fetch all account invites in the account identified by the given account ID.
-        The authenticated user must be a member of the account identifier by the given account ID.
         Required permissions:
         - read:invites
         """
@@ -151,8 +150,9 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListMyAccountInvites(self, request, context):
-        """Fetch all account invites for the authenticated user.
+    def ListReceivedAccountInvites(self, request, context):
+        """Fetch all account invites for the authenticated user (across all accounts).
+        These are the invites you are invited to join, not the ones you have sent.
         Required permissions:
         - None (authenticated only)
         """
@@ -161,8 +161,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccountInvite(self, request, context):
-        """Fetch an account invite by its id.
-        The authenticated user must be a member of the account that the invite is for.
+        """Fetch an account invite identified by the given account ID and invite ID.
         Required permissions:
         - read:invites
         """
@@ -172,7 +171,6 @@ class AccountServiceServicer(object):
 
     def CreateAccountInvite(self, request, context):
         """Create a new account invite.
-        The authenticated user must be a member of the account that the invite is for.
         Required permissions:
         - write:invites
         """
@@ -182,7 +180,6 @@ class AccountServiceServicer(object):
 
     def DeleteAccountInvite(self, request, context):
         """Delete an account invite
-        The authenticated user must be a member of the account that the invite is for.
         Required permissions:
         - delete:invites
         """
@@ -201,7 +198,7 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RejectOrganizationInvite(self, request, context):
+    def RejectAccountInvite(self, request, context):
         """Reject an account invite
         The authenticated user's email address must match the email address specified in
         the invite.
@@ -275,10 +272,10 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesResponse.SerializeToString,
             ),
-            'ListMyAccountInvites': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListMyAccountInvites,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.SerializeToString,
+            'ListReceivedAccountInvites': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListReceivedAccountInvites,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.SerializeToString,
             ),
             'GetAccountInvite': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccountInvite,
@@ -300,10 +297,10 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteResponse.SerializeToString,
             ),
-            'RejectOrganizationInvite': grpc.unary_unary_rpc_method_handler(
-                    servicer.RejectOrganizationInvite,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.SerializeToString,
+            'RejectAccountInvite': grpc.unary_unary_rpc_method_handler(
+                    servicer.RejectAccountInvite,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.SerializeToString,
             ),
             'ListAccountMembers': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAccountMembers,
@@ -495,7 +492,7 @@ class AccountService(object):
             _registered_method=True)
 
     @staticmethod
-    def ListMyAccountInvites(request,
+    def ListReceivedAccountInvites(request,
             target,
             options=(),
             channel_credentials=None,
@@ -508,9 +505,9 @@ class AccountService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.account.v1.AccountService/ListMyAccountInvites',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.FromString,
+            '/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -630,7 +627,7 @@ class AccountService(object):
             _registered_method=True)
 
     @staticmethod
-    def RejectOrganizationInvite(request,
+    def RejectAccountInvite(request,
             target,
             options=(),
             channel_credentials=None,
@@ -643,9 +640,9 @@ class AccountService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
+            '/qdrant.cloud.account.v1.AccountService/RejectAccountInvite',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.FromString,
             options,
             channel_credentials,
             insecure,
