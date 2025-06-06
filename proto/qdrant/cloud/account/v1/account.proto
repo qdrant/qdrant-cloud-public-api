@@ -29,7 +29,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}"};
   }
-  // Creates an account for the user identified by the given ID.
+  // Creates an account for the authenticated user.
   // Required permissions:
   // - None (authenticated only)
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {

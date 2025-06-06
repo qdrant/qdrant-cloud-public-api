@@ -40,7 +40,7 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - read:account
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
-	// Creates an account for the user identified by the given ID.
+	// Creates an account for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
@@ -126,7 +126,7 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - read:account
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
-	// Creates an account for the user identified by the given ID.
+	// Creates an account for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)

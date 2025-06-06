@@ -39,7 +39,7 @@
         ]
       },
       "post": {
-        "summary": "Creates an account for the user identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Creates an account for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_CreateAccount",
         "responses": {
           "200": {

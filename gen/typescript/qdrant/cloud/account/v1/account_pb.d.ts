@@ -305,7 +305,7 @@ export declare const AccountService: GenService<{
     output: typeof GetAccountResponseSchema;
   },
   /**
-   * Creates an account for the user identified by the given ID.
+   * Creates an account for the authenticated user.
    * Required permissions:
    * - None (authenticated only)
    *

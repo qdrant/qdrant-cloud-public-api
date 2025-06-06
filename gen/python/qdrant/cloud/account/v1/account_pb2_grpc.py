@@ -65,7 +65,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateAccount(self, request, context):
-        """Creates an account for the user identified by the given ID.
+        """Creates an account for the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
