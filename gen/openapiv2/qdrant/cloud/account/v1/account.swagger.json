@@ -175,7 +175,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites": {
       "get": {
-        "summary": "Fetch all account invites in the account identified by the given account ID.\nThe authenticated user must be a member of the account identifier by the given account ID.\nRequired permissions:\n- read:invites",
+        "summary": "Fetch all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_ListAccountInvites",
         "responses": {
           "200": {
@@ -207,7 +207,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}": {
       "get": {
-        "summary": "Fetch an account invite by its id.\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- read:invites",
+        "summary": "Fetch an account invite by its id.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_GetAccountInvite",
         "responses": {
           "200": {
@@ -244,7 +244,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an account invite\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- delete:invites",
+        "summary": "Delete an account invite\nRequired permissions:\n- delete:invites",
         "operationId": "AccountService_DeleteAccountInvite",
         "responses": {
           "200": {
@@ -361,7 +361,7 @@
     },
     "/api/account/v1/accounts/{invite.accountId}/invites": {
       "post": {
-        "summary": "Create a new account invite.\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- write:invites",
+        "summary": "Create a new account invite.\nRequired permissions:\n- write:invites",
         "operationId": "AccountService_CreateAccountInvite",
         "responses": {
           "200": {

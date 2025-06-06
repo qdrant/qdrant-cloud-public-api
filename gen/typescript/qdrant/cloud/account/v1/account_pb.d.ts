@@ -828,7 +828,6 @@ export declare const AccountService: GenService<{
   },
   /**
    * Fetch all account invites in the account identified by the given account ID.
-   * The authenticated user must be a member of the account identifier by the given account ID.
    * Required permissions:
    * - read:invites
    *
@@ -853,7 +852,6 @@ export declare const AccountService: GenService<{
   },
   /**
    * Fetch an account invite by its id.
-   * The authenticated user must be a member of the account that the invite is for.
    * Required permissions:
    * - read:invites
    *
@@ -866,7 +864,6 @@ export declare const AccountService: GenService<{
   },
   /**
    * Create a new account invite.
-   * The authenticated user must be a member of the account that the invite is for.
    * Required permissions:
    * - write:invites
    *
@@ -879,7 +876,6 @@ export declare const AccountService: GenService<{
   },
   /**
    * Delete an account invite
-   * The authenticated user must be a member of the account that the invite is for.
    * Required permissions:
    * - delete:invites
    *

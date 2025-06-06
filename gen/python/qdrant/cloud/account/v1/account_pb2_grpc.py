@@ -128,7 +128,6 @@ class AccountServiceServicer(object):
 
     def ListAccountInvites(self, request, context):
         """Fetch all account invites in the account identified by the given account ID.
-        The authenticated user must be a member of the account identifier by the given account ID.
         Required permissions:
         - read:invites
         """
@@ -147,7 +146,6 @@ class AccountServiceServicer(object):
 
     def GetAccountInvite(self, request, context):
         """Fetch an account invite by its id.
-        The authenticated user must be a member of the account that the invite is for.
         Required permissions:
         - read:invites
         """
@@ -157,7 +155,6 @@ class AccountServiceServicer(object):
 
     def CreateAccountInvite(self, request, context):
         """Create a new account invite.
-        The authenticated user must be a member of the account that the invite is for.
         Required permissions:
         - write:invites
         """
@@ -167,7 +164,6 @@ class AccountServiceServicer(object):
 
     def DeleteAccountInvite(self, request, context):
         """Delete an account invite
-        The authenticated user must be a member of the account that the invite is for.
         Required permissions:
         - delete:invites
         """

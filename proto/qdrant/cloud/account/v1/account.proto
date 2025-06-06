@@ -67,7 +67,6 @@ service AccountService {
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
   }
   // Fetch all account invites in the account identified by the given account ID.
-  // The authenticated user must be a member of the account identifier by the given account ID.
   // Required permissions:
   // - read:invites
   rpc ListAccountInvites(ListAccountInvitesRequest) returns (ListAccountInvitesResponse) {
@@ -88,7 +87,6 @@ service AccountService {
     option (google.api.http) = {get: "/api/account/v1/self/invites"};
   }
   // Fetch an account invite by its id.
-  // The authenticated user must be a member of the account that the invite is for.
   // Required permissions:
   // - read:invites
   rpc GetAccountInvite(GetAccountInviteRequest) returns (GetAccountInviteResponse) {
@@ -98,7 +96,6 @@ service AccountService {
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
   }
   // Create a new account invite.
-  // The authenticated user must be a member of the account that the invite is for.
   // Required permissions:
   // - write:invites
   rpc CreateAccountInvite(CreateAccountInviteRequest) returns (CreateAccountInviteResponse) {
@@ -113,7 +110,6 @@ service AccountService {
     };
   }
   // Delete an account invite
-  // The authenticated user must be a member of the account that the invite is for.
   // Required permissions:
   // - delete:invites
   rpc DeleteAccountInvite(DeleteAccountInviteRequest) returns (DeleteAccountInviteResponse) {

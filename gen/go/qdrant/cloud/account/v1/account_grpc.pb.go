@@ -60,7 +60,6 @@ type AccountServiceClient interface {
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
 	// Fetch all account invites in the account identified by the given account ID.
-	// The authenticated user must be a member of the account identifier by the given account ID.
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(ctx context.Context, in *ListAccountInvitesRequest, opts ...grpc.CallOption) (*ListAccountInvitesResponse, error)
@@ -69,17 +68,14 @@ type AccountServiceClient interface {
 	// - None (authenticated only)
 	ListMyAccountInvites(ctx context.Context, in *ListMyAccountInvitesRequest, opts ...grpc.CallOption) (*ListMyAccountInvitesResponse, error)
 	// Fetch an account invite by its id.
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(ctx context.Context, in *GetAccountInviteRequest, opts ...grpc.CallOption) (*GetAccountInviteResponse, error)
 	// Create a new account invite.
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - write:invites
 	CreateAccountInvite(ctx context.Context, in *CreateAccountInviteRequest, opts ...grpc.CallOption) (*CreateAccountInviteResponse, error)
 	// Delete an account invite
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - delete:invites
 	DeleteAccountInvite(ctx context.Context, in *DeleteAccountInviteRequest, opts ...grpc.CallOption) (*DeleteAccountInviteResponse, error)
@@ -252,7 +248,6 @@ type AccountServiceServer interface {
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
 	// Fetch all account invites in the account identified by the given account ID.
-	// The authenticated user must be a member of the account identifier by the given account ID.
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error)
@@ -261,17 +256,14 @@ type AccountServiceServer interface {
 	// - None (authenticated only)
 	ListMyAccountInvites(context.Context, *ListMyAccountInvitesRequest) (*ListMyAccountInvitesResponse, error)
 	// Fetch an account invite by its id.
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(context.Context, *GetAccountInviteRequest) (*GetAccountInviteResponse, error)
 	// Create a new account invite.
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - write:invites
 	CreateAccountInvite(context.Context, *CreateAccountInviteRequest) (*CreateAccountInviteResponse, error)
 	// Delete an account invite
-	// The authenticated user must be a member of the account that the invite is for.
 	// Required permissions:
 	// - delete:invites
 	DeleteAccountInvite(context.Context, *DeleteAccountInviteRequest) (*DeleteAccountInviteResponse, error)
