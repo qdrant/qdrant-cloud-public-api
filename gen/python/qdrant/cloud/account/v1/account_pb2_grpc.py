@@ -45,10 +45,10 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesResponse.FromString,
                 _registered_method=True)
-        self.ListMyAccountInvites = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/ListMyAccountInvites',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.FromString,
+        self.ListReceivedAccountInvites = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.FromString,
                 _registered_method=True)
         self.GetAccountInvite = channel.unary_unary(
                 '/qdrant.cloud.account.v1.AccountService/GetAccountInvite',
@@ -135,12 +135,11 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListMyAccountInvites(self, request, context):
+    def ListReceivedAccountInvites(self, request, context):
         """Fetch all account invites for the authenticated user (across all accounts).
         These are the invites you are invited to join, not the ones you have sent.
         Required permissions:
         - None (authenticated only)
-        TODO: Rename to ListReceivedAccountInvites ?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -228,10 +227,10 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesResponse.SerializeToString,
             ),
-            'ListMyAccountInvites': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListMyAccountInvites,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.SerializeToString,
+            'ListReceivedAccountInvites': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListReceivedAccountInvites,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.SerializeToString,
             ),
             'GetAccountInvite': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccountInvite,
@@ -433,7 +432,7 @@ class AccountService(object):
             _registered_method=True)
 
     @staticmethod
-    def ListMyAccountInvites(request,
+    def ListReceivedAccountInvites(request,
             target,
             options=(),
             channel_credentials=None,
@@ -446,9 +445,9 @@ class AccountService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.account.v1.AccountService/ListMyAccountInvites',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListMyAccountInvitesResponse.FromString,
+            '/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListReceivedAccountInvitesResponse.FromString,
             options,
             channel_credentials,
             insecure,

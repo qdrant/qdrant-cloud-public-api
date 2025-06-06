@@ -91,13 +91,13 @@ class ListAccountInvitesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[AccountInvite]
     def __init__(self, items: _Optional[_Iterable[_Union[AccountInvite, _Mapping]]] = ...) -> None: ...
 
-class ListMyAccountInvitesRequest(_message.Message):
+class ListReceivedAccountInvitesRequest(_message.Message):
     __slots__ = ("status_filter",)
     STATUS_FILTER_FIELD_NUMBER: _ClassVar[int]
     status_filter: AccountInviteStatus
     def __init__(self, status_filter: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
 
-class ListMyAccountInvitesResponse(_message.Message):
+class ListReceivedAccountInvitesResponse(_message.Message):
     __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[AccountInvite]

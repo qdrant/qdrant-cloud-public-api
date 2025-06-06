@@ -247,12 +247,12 @@ export declare type ListAccountInvitesResponse = Message<"qdrant.cloud.account.v
 export declare const ListAccountInvitesResponseSchema: GenMessage<ListAccountInvitesResponse>;
 
 /**
- * ListMyAccountInvitesRequest is the request for the ListMyAccountInvites function.
+ * ListReceivedAccountInvitesRequest is the request for the ListReceivedAccountInvites function.
  * This lists invites for the authenticated user across all accounts.
  *
- * @generated from message qdrant.cloud.account.v1.ListMyAccountInvitesRequest
+ * @generated from message qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest
  */
-export declare type ListMyAccountInvitesRequest = Message<"qdrant.cloud.account.v1.ListMyAccountInvitesRequest"> & {
+export declare type ListReceivedAccountInvitesRequest = Message<"qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest"> & {
   /**
    * Optional: Filter invites by status (e.g. pending only).
    *
@@ -262,17 +262,17 @@ export declare type ListMyAccountInvitesRequest = Message<"qdrant.cloud.account.
 };
 
 /**
- * Describes the message qdrant.cloud.account.v1.ListMyAccountInvitesRequest.
- * Use `create(ListMyAccountInvitesRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest.
+ * Use `create(ListReceivedAccountInvitesRequestSchema)` to create a new message.
  */
-export declare const ListMyAccountInvitesRequestSchema: GenMessage<ListMyAccountInvitesRequest>;
+export declare const ListReceivedAccountInvitesRequestSchema: GenMessage<ListReceivedAccountInvitesRequest>;
 
 /**
- * ListMyAccountInvitesResponse is the response from the ListMyAccountInvites function.
+ * ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function.
  *
- * @generated from message qdrant.cloud.account.v1.ListMyAccountInvitesResponse
+ * @generated from message qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse
  */
-export declare type ListMyAccountInvitesResponse = Message<"qdrant.cloud.account.v1.ListMyAccountInvitesResponse"> & {
+export declare type ListReceivedAccountInvitesResponse = Message<"qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse"> & {
   /**
    * The list of account invites for the authenticated user.
    *
@@ -282,10 +282,10 @@ export declare type ListMyAccountInvitesResponse = Message<"qdrant.cloud.account
 };
 
 /**
- * Describes the message qdrant.cloud.account.v1.ListMyAccountInvitesResponse.
- * Use `create(ListMyAccountInvitesResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse.
+ * Use `create(ListReceivedAccountInvitesResponseSchema)` to create a new message.
  */
-export declare const ListMyAccountInvitesResponseSchema: GenMessage<ListMyAccountInvitesResponse>;
+export declare const ListReceivedAccountInvitesResponseSchema: GenMessage<ListReceivedAccountInvitesResponse>;
 
 /**
  * GetAccountInviteRequest is the request for the GetAccountInvite function.
@@ -824,14 +824,12 @@ export declare const AccountService: GenService<{
    * Required permissions:
    * - None (authenticated only)
    *
-   * TODO: Rename to ListReceivedAccountInvites ?
-   *
-   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListMyAccountInvites
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites
    */
-  listMyAccountInvites: {
+  listReceivedAccountInvites: {
     methodKind: "unary";
-    input: typeof ListMyAccountInvitesRequestSchema;
-    output: typeof ListMyAccountInvitesResponseSchema;
+    input: typeof ListReceivedAccountInvitesRequestSchema;
+    output: typeof ListReceivedAccountInvitesResponseSchema;
   },
   /**
    * Fetch an account invite identified by the given account ID and invite ID.

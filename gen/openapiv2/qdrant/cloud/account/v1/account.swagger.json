@@ -402,13 +402,12 @@
     "/api/account/v1/self/invites": {
       "get": {
         "summary": "Fetch all account invites for the authenticated user (across all accounts).\nThese are the invites you are invited to join, not the ones you have sent.\nRequired permissions:\n- None (authenticated only)",
-        "description": "TODO: Rename to ListReceivedAccountInvites ?",
-        "operationId": "AccountService_ListMyAccountInvites",
+        "operationId": "AccountService_ListReceivedAccountInvites",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListMyAccountInvitesResponse"
+              "$ref": "#/definitions/v1ListReceivedAccountInvitesResponse"
             }
           },
           "default": {
@@ -772,7 +771,7 @@
       },
       "title": "ListAccountsResponse is the response from the ListAccounts function"
     },
-    "v1ListMyAccountInvitesResponse": {
+    "v1ListReceivedAccountInvitesResponse": {
       "type": "object",
       "properties": {
         "items": {
@@ -784,7 +783,7 @@
           "description": "The list of account invites for the authenticated user."
         }
       },
-      "description": "ListMyAccountInvitesResponse is the response from the ListMyAccountInvites function."
+      "description": "ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function."
     },
     "v1RejectAccountInviteResponse": {
       "type": "object",

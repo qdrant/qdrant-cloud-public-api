@@ -79,7 +79,7 @@ service AccountService {
   // These are the invites you are invited to join, not the ones you have sent.
   // Required permissions:
   // - None (authenticated only)
-  rpc ListMyAccountInvites(ListMyAccountInvitesRequest) returns (ListMyAccountInvitesResponse) { // TODO: Rename to ListReceivedAccountInvites ?
+  rpc ListReceivedAccountInvites(ListReceivedAccountInvitesRequest) returns (ListReceivedAccountInvitesResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // custom account-id expression
@@ -217,16 +217,16 @@ message ListAccountInvitesResponse {
   repeated AccountInvite items = 1;
 }
 
-// ListMyAccountInvitesRequest is the request for the ListMyAccountInvites function.
+// ListReceivedAccountInvitesRequest is the request for the ListReceivedAccountInvites function.
 // This lists invites for the authenticated user across all accounts.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-message ListMyAccountInvitesRequest {
+message ListReceivedAccountInvitesRequest {
   // Optional: Filter invites by status (e.g. pending only).
   optional AccountInviteStatus status_filter = 1;
 }
 
-// ListMyAccountInvitesResponse is the response from the ListMyAccountInvites function.
-message ListMyAccountInvitesResponse {
+// ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function.
+message ListReceivedAccountInvitesResponse {
   // The list of account invites for the authenticated user.
   repeated AccountInvite items = 1;
 }
