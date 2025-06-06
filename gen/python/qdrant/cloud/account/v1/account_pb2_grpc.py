@@ -75,6 +75,21 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
                 _registered_method=True)
+        self.ListAccountMembers = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/ListAccountMembers',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersResponse.FromString,
+                _registered_method=True)
+        self.GetAccountMember = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/GetAccountMember',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberResponse.FromString,
+                _registered_method=True)
+        self.DeleteAccountMember = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/DeleteAccountMember',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.FromString,
+                _registered_method=True)
 
 
 class AccountServiceServicer(object):
@@ -197,6 +212,36 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListAccountMembers(self, request, context):
+        """Fetch all account members in the account identified by the given account ID.
+        The authenticated user must be a member of the account identifier by the given account ID.
+        Required permissions:
+        - read:users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAccountMember(self, request, context):
+        """Fetch an account member by its id.
+        The authenticated user must be a member of the account that the member is for.
+        Required permissions:
+        - read:users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteAccountMember(self, request, context):
+        """Delete an account member
+        The authenticated user must be a member of the account that the member is for.
+        Required permissions:
+        - delete:users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AccountServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -259,6 +304,21 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     servicer.RejectOrganizationInvite,
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.SerializeToString,
+            ),
+            'ListAccountMembers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAccountMembers,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersResponse.SerializeToString,
+            ),
+            'GetAccountMember': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAccountMember,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberResponse.SerializeToString,
+            ),
+            'DeleteAccountMember': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteAccountMember,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -586,6 +646,87 @@ class AccountService(object):
             '/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite',
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListAccountMembers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/ListAccountMembers',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountMembersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAccountMember(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/GetAccountMember',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountMemberResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteAccountMember(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/DeleteAccountMember',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.FromString,
             options,
             channel_credentials,
             insecure,

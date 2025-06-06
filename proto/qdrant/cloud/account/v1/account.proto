@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
 service AccountService {
@@ -143,6 +144,36 @@ service AccountService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
+  }
+  // Fetch all account members in the account identified by the given account ID.
+  // The authenticated user must be a member of the account identifier by the given account ID.
+  // Required permissions:
+  // - read:users
+  rpc ListAccountMembers(ListAccountMembersRequest) returns (ListAccountMembersResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:users"; // Not 'read:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members"};
+  }
+  // Fetch an account member by its id.
+  // The authenticated user must be a member of the account that the member is for.
+  // Required permissions:
+  // - read:users
+  rpc GetAccountMember(GetAccountMemberRequest) returns (GetAccountMemberResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:users"; // Not 'read:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
+  }
+  // Delete an account member
+  // The authenticated user must be a member of the account that the member is for.
+  // Required permissions:
+  // - delete:users
+  rpc DeleteAccountMember(DeleteAccountMemberRequest) returns (DeleteAccountMemberResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:users"; // Not 'delete:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
   }
 }
 
@@ -311,6 +342,53 @@ message RejectOrganizationInviteResponse {
   AccountInvite invite = 1;
 }
 
+// ListAccountMembersRequest is the request for the ListAccountMembers function.
+message ListAccountMembersRequest {
+  // The identifier of the account (in GUID format) to list members for.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListAccountMembersResponse is the response from the ListAccountMembers function.
+message ListAccountMembersResponse {
+  // The list of account members.
+  repeated AccountMember items = 1;
+}
+
+// GetAccountMemberRequest is the request for the GetAccountMember function.
+message GetAccountMemberRequest {
+  // The identifier of the account (in GUID format) the member belongs to.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the user (in GUID format).
+  // This is a required field.
+  string user_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetAccountMemberResponse is the response from the GetAccountMember function.
+message GetAccountMemberResponse {
+  // The retrieved account member.
+  AccountMember member = 1;
+}
+
+// DeleteAccountMemberRequest is the request for the DeleteAccountMember function.
+message DeleteAccountMemberRequest {
+  // The identifier of the account (in GUID format) the member belongs to.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the user (in GUID format) to delete.
+  // It is allowed to delete the authenticated user (aka leave account), however only if at least one other user remains in the account.
+  // If you are the owner of the account a random other user will be automatically assigned as owner.
+  // It is recommended to transfer ownership of the account before leaving. // TODO: how?
+  // This is a required field.
+  string user_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteAccountMemberResponse is the response from the DeleteAccountMember function.
+message DeleteAccountMemberResponse {
+  // Empty
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An Account represents an account in the Qdrant cloud.
 message Account {
@@ -410,4 +488,18 @@ enum AccountInviteStatus {
   ACCOUNT_INVITE_STATUS_EXPIRED = 4; // TODO: Do we want to add this?
   // The invite has been canceled (e.g., by an account admin).
   ACCOUNT_INVITE_STATUS_CANCELED = 5;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An AccountMember represents a user who is a member of an account.
+message AccountMember {
+  // The user asociated with this membership record.
+  // This is a read-only field.
+  iam.v1.User user = 1;
+  // Wether or not this user is the owner of the account.
+  // This is a read-only field.
+  bool is_owner = 2;
+  // The timestamp when the user joined the account or when this membership record was created.
+  // This is a read-only field.
+  google.protobuf.Timestamp joined_at = 3; //TODO: Is this data available?
 }

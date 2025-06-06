@@ -359,6 +359,114 @@
         ]
       }
     },
+    "/api/account/v1/accounts/{accountId}/members": {
+      "get": {
+        "summary": "Fetch all account members in the account identified by the given account ID.\nThe authenticated user must be a member of the account identifier by the given account ID.\nRequired permissions:\n- read:users",
+        "operationId": "AccountService_ListAccountMembers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountMembersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) to list members for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/accounts/{accountId}/members/{userId}": {
+      "get": {
+        "summary": "Fetch an account member by its id.\nThe authenticated user must be a member of the account that the member is for.\nRequired permissions:\n- read:users",
+        "operationId": "AccountService_GetAccountMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountMemberResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the member belongs to.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete an account member\nThe authenticated user must be a member of the account that the member is for.\nRequired permissions:\n- delete:users",
+        "operationId": "AccountService_DeleteAccountMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteAccountMemberResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the member belongs to.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format) to delete.\nIt is allowed to delete the authenticated user (aka leave account), however only if at least one other user remains in the account.\nIf you are the owner of the account a random other user will be automatically assigned as owner.\nIt is recommended to transfer ownership of the account before leaving. // TODO: how?\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
     "/api/account/v1/accounts/{invite.accountId}/invites": {
       "post": {
         "summary": "Create a new account invite.\nThe authenticated user must be a member of the account that the invite is for.\nRequired permissions:\n- write:invites",
@@ -697,6 +805,25 @@
       "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
       "description": "AccountInviteStatus defines the possible statuses of an account invitation.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_EXPIRED: The invite has expired.\n\nTODO: Do we want to add this?\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin)."
     },
+    "v1AccountMember": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "description": "The user asociated with this membership record.\nThis is a read-only field."
+        },
+        "isOwner": {
+          "type": "boolean",
+          "description": "Wether or not this user is the owner of the account.\nThis is a read-only field."
+        },
+        "joinedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user joined the account or when this membership record was created.\nThis is a read-only field.\n\nTODO: Is this data available?"
+        }
+      },
+      "description": "An AccountMember represents a user who is a member of an account."
+    },
     "v1CreateAccountInviteResponse": {
       "type": "object",
       "properties": {
@@ -731,6 +858,10 @@
       "type": "object",
       "description": "DeleteAccountInviteResponse is the response from the DeleteAccountInvite function.\n\nEmpty"
     },
+    "v1DeleteAccountMemberResponse": {
+      "type": "object",
+      "description": "DeleteAccountMemberResponse is the response from the DeleteAccountMember function.\n\nEmpty"
+    },
     "v1DeleteAccountResponse": {
       "type": "object",
       "description": "DeleteAccountResponse is the response from the DeleteAccount function.\n\nEmpty"
@@ -744,6 +875,16 @@
         }
       },
       "description": "GetAccountInviteResponse is the response from the GetAccountInvite function."
+    },
+    "v1GetAccountMemberResponse": {
+      "type": "object",
+      "properties": {
+        "member": {
+          "$ref": "#/definitions/v1AccountMember",
+          "description": "The retrieved account member."
+        }
+      },
+      "description": "GetAccountMemberResponse is the response from the GetAccountMember function."
     },
     "v1GetAccountResponse": {
       "type": "object",
@@ -768,6 +909,20 @@
         }
       },
       "description": "ListAccountInvitesResponse is the response from the ListAccountInvites function."
+    },
+    "v1ListAccountMembersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccountMember"
+          },
+          "description": "The list of account members."
+        }
+      },
+      "description": "ListAccountMembersResponse is the response from the ListAccountMembers function."
     },
     "v1ListAccountsResponse": {
       "type": "object",
@@ -816,6 +971,49 @@
         }
       },
       "description": "UpdateAccountResponse is the response from the UpdateAccount function."
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the user."
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserStatus",
+          "description": "The status of the user.\nThis is a read-only field.\n\nTODO: Discuss\n - Accounts?\n - Roles?\n - default_account_id? [isn't this a preference in a browser?]"
+        }
+      },
+      "title": "A User represents a user in the Qdrant cloud.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1UserStatus": {
+      "type": "string",
+      "enum": [
+        "USER_STATUS_UNSPECIFIED",
+        "USER_STATUS_ACTIVE",
+        "USER_STATUS_BLOCKED",
+        "USER_STATUS_DELETED"
+      ],
+      "default": "USER_STATUS_UNSPECIFIED",
+      "description": "UserStatus defines the possible statuses of a user account.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted."
     }
   }
 }

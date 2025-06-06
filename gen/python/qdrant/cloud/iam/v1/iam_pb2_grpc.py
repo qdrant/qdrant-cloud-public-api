@@ -15,6 +15,16 @@ class IAMServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.GetAuthenticatedUser = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
+                _registered_method=True)
+        self.UpdateUser = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
+                _registered_method=True)
         self.ListPermissions = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/ListPermissions',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListPermissionsRequest.SerializeToString,
@@ -60,6 +70,24 @@ class IAMServiceStub(object):
 class IAMServiceServicer(object):
     """IAMService is the API used to configure IAM (identity and access management) objects..
     """
+
+    def GetAuthenticatedUser(self, request, context):
+        """Fetch the authenticated user.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateUser(self, request, context):
+        """Update the user identified by the given ID.
+        Required permissions:
+        - write:user
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def ListPermissions(self, request, context):
         """Fetch all permissions known in the system for the provided account.
@@ -140,6 +168,16 @@ class IAMServiceServicer(object):
 
 def add_IAMServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'GetAuthenticatedUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAuthenticatedUser,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.SerializeToString,
+            ),
+            'UpdateUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateUser,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.SerializeToString,
+            ),
             'ListPermissions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListPermissions,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListPermissionsRequest.FromString,
@@ -191,6 +229,60 @@ def add_IAMServiceServicer_to_server(servicer, server):
 class IAMService(object):
     """IAMService is the API used to configure IAM (identity and access management) objects..
     """
+
+    @staticmethod
+    def GetAuthenticatedUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def ListPermissions(request,

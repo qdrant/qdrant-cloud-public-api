@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
+	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
 	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
 	IAMService_ListRoles_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
 	IAMService_GetRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetRole"
@@ -35,6 +37,14 @@ const (
 //
 // IAMService is the API used to configure IAM (identity and access management) objects..
 type IAMServiceClient interface {
+	// Fetch the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	GetAuthenticatedUser(ctx context.Context, in *GetAuthenticatedUserRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserResponse, error)
+	// Update the user identified by the given ID.
+	// Required permissions:
+	// - write:user
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	// Fetch all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
@@ -79,6 +89,26 @@ type iAMServiceClient struct {
 
 func NewIAMServiceClient(cc grpc.ClientConnInterface) IAMServiceClient {
 	return &iAMServiceClient{cc}
+}
+
+func (c *iAMServiceClient) GetAuthenticatedUser(ctx context.Context, in *GetAuthenticatedUserRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAuthenticatedUserResponse)
+	err := c.cc.Invoke(ctx, IAMService_GetAuthenticatedUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserResponse)
+	err := c.cc.Invoke(ctx, IAMService_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *iAMServiceClient) ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error) {
@@ -167,6 +197,14 @@ func (c *iAMServiceClient) AssignUserRoles(ctx context.Context, in *AssignUserRo
 //
 // IAMService is the API used to configure IAM (identity and access management) objects..
 type IAMServiceServer interface {
+	// Fetch the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	GetAuthenticatedUser(context.Context, *GetAuthenticatedUserRequest) (*GetAuthenticatedUserResponse, error)
+	// Update the user identified by the given ID.
+	// Required permissions:
+	// - write:user
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	// Fetch all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
@@ -213,6 +251,12 @@ type IAMServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedIAMServiceServer struct{}
 
+func (UnimplementedIAMServiceServer) GetAuthenticatedUser(context.Context, *GetAuthenticatedUserRequest) (*GetAuthenticatedUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAuthenticatedUser not implemented")
+}
+func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
 func (UnimplementedIAMServiceServer) ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPermissions not implemented")
 }
@@ -256,6 +300,42 @@ func RegisterIAMServiceServer(s grpc.ServiceRegistrar, srv IAMServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&IAMService_ServiceDesc, srv)
+}
+
+func _IAMService_GetAuthenticatedUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuthenticatedUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).GetAuthenticatedUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_GetAuthenticatedUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).GetAuthenticatedUser(ctx, req.(*GetAuthenticatedUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_UpdateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _IAMService_ListPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -409,6 +489,14 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "qdrant.cloud.iam.v1.IAMService",
 	HandlerType: (*IAMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAuthenticatedUser",
+			Handler:    _IAMService_GetAuthenticatedUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _IAMService_UpdateUser_Handler,
+		},
 		{
 			MethodName: "ListPermissions",
 			Handler:    _IAMService_ListPermissions_Handler,

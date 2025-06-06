@@ -31,6 +31,9 @@ const (
 	AccountService_DeleteAccountInvite_FullMethodName      = "/qdrant.cloud.account.v1.AccountService/DeleteAccountInvite"
 	AccountService_AcceptAccountInvite_FullMethodName      = "/qdrant.cloud.account.v1.AccountService/AcceptAccountInvite"
 	AccountService_RejectOrganizationInvite_FullMethodName = "/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite"
+	AccountService_ListAccountMembers_FullMethodName       = "/qdrant.cloud.account.v1.AccountService/ListAccountMembers"
+	AccountService_GetAccountMember_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/GetAccountMember"
+	AccountService_DeleteAccountMember_FullMethodName      = "/qdrant.cloud.account.v1.AccountService/DeleteAccountMember"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -95,6 +98,21 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	RejectOrganizationInvite(ctx context.Context, in *RejectOrganizationInviteRequest, opts ...grpc.CallOption) (*RejectOrganizationInviteResponse, error)
+	// Fetch all account members in the account identified by the given account ID.
+	// The authenticated user must be a member of the account identifier by the given account ID.
+	// Required permissions:
+	// - read:users
+	ListAccountMembers(ctx context.Context, in *ListAccountMembersRequest, opts ...grpc.CallOption) (*ListAccountMembersResponse, error)
+	// Fetch an account member by its id.
+	// The authenticated user must be a member of the account that the member is for.
+	// Required permissions:
+	// - read:users
+	GetAccountMember(ctx context.Context, in *GetAccountMemberRequest, opts ...grpc.CallOption) (*GetAccountMemberResponse, error)
+	// Delete an account member
+	// The authenticated user must be a member of the account that the member is for.
+	// Required permissions:
+	// - delete:users
+	DeleteAccountMember(ctx context.Context, in *DeleteAccountMemberRequest, opts ...grpc.CallOption) (*DeleteAccountMemberResponse, error)
 }
 
 type accountServiceClient struct {
@@ -225,6 +243,36 @@ func (c *accountServiceClient) RejectOrganizationInvite(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *accountServiceClient) ListAccountMembers(ctx context.Context, in *ListAccountMembersRequest, opts ...grpc.CallOption) (*ListAccountMembersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAccountMembersResponse)
+	err := c.cc.Invoke(ctx, AccountService_ListAccountMembers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) GetAccountMember(ctx context.Context, in *GetAccountMemberRequest, opts ...grpc.CallOption) (*GetAccountMemberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountMemberResponse)
+	err := c.cc.Invoke(ctx, AccountService_GetAccountMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) DeleteAccountMember(ctx context.Context, in *DeleteAccountMemberRequest, opts ...grpc.CallOption) (*DeleteAccountMemberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAccountMemberResponse)
+	err := c.cc.Invoke(ctx, AccountService_DeleteAccountMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServiceServer is the server API for AccountService service.
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility.
@@ -287,6 +335,21 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	RejectOrganizationInvite(context.Context, *RejectOrganizationInviteRequest) (*RejectOrganizationInviteResponse, error)
+	// Fetch all account members in the account identified by the given account ID.
+	// The authenticated user must be a member of the account identifier by the given account ID.
+	// Required permissions:
+	// - read:users
+	ListAccountMembers(context.Context, *ListAccountMembersRequest) (*ListAccountMembersResponse, error)
+	// Fetch an account member by its id.
+	// The authenticated user must be a member of the account that the member is for.
+	// Required permissions:
+	// - read:users
+	GetAccountMember(context.Context, *GetAccountMemberRequest) (*GetAccountMemberResponse, error)
+	// Delete an account member
+	// The authenticated user must be a member of the account that the member is for.
+	// Required permissions:
+	// - delete:users
+	DeleteAccountMember(context.Context, *DeleteAccountMemberRequest) (*DeleteAccountMemberResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -332,6 +395,15 @@ func (UnimplementedAccountServiceServer) AcceptAccountInvite(context.Context, *A
 }
 func (UnimplementedAccountServiceServer) RejectOrganizationInvite(context.Context, *RejectOrganizationInviteRequest) (*RejectOrganizationInviteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RejectOrganizationInvite not implemented")
+}
+func (UnimplementedAccountServiceServer) ListAccountMembers(context.Context, *ListAccountMembersRequest) (*ListAccountMembersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccountMembers not implemented")
+}
+func (UnimplementedAccountServiceServer) GetAccountMember(context.Context, *GetAccountMemberRequest) (*GetAccountMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountMember not implemented")
+}
+func (UnimplementedAccountServiceServer) DeleteAccountMember(context.Context, *DeleteAccountMemberRequest) (*DeleteAccountMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountMember not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 func (UnimplementedAccountServiceServer) testEmbeddedByValue()                        {}
@@ -570,6 +642,60 @@ func _AccountService_RejectOrganizationInvite_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountService_ListAccountMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccountMembersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).ListAccountMembers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_ListAccountMembers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).ListAccountMembers(ctx, req.(*ListAccountMembersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_GetAccountMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).GetAccountMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_GetAccountMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).GetAccountMember(ctx, req.(*GetAccountMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_DeleteAccountMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).DeleteAccountMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_DeleteAccountMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).DeleteAccountMember(ctx, req.(*DeleteAccountMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -624,6 +750,18 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RejectOrganizationInvite",
 			Handler:    _AccountService_RejectOrganizationInvite_Handler,
+		},
+		{
+			MethodName: "ListAccountMembers",
+			Handler:    _AccountService_ListAccountMembers_Handler,
+		},
+		{
+			MethodName: "GetAccountMember",
+			Handler:    _AccountService_GetAccountMember_Handler,
+		},
+		{
+			MethodName: "DeleteAccountMember",
+			Handler:    _AccountService_DeleteAccountMember_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

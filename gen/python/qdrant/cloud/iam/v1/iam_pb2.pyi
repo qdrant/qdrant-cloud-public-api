@@ -10,14 +10,47 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class UserStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_STATUS_UNSPECIFIED: _ClassVar[UserStatus]
+    USER_STATUS_ACTIVE: _ClassVar[UserStatus]
+    USER_STATUS_BLOCKED: _ClassVar[UserStatus]
+    USER_STATUS_DELETED: _ClassVar[UserStatus]
+
 class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ROLE_TYPE_UNSPECIFIED: _ClassVar[RoleType]
     ROLE_TYPE_SYSTEM: _ClassVar[RoleType]
     ROLE_TYPE_CUSTOM: _ClassVar[RoleType]
+USER_STATUS_UNSPECIFIED: UserStatus
+USER_STATUS_ACTIVE: UserStatus
+USER_STATUS_BLOCKED: UserStatus
+USER_STATUS_DELETED: UserStatus
 ROLE_TYPE_UNSPECIFIED: RoleType
 ROLE_TYPE_SYSTEM: RoleType
 ROLE_TYPE_CUSTOM: RoleType
+
+class GetAuthenticatedUserRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetAuthenticatedUserResponse(_message.Message):
+    __slots__ = ("user",)
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class UpdateUserRequest(_message.Message):
+    __slots__ = ("user",)
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class UpdateUserResponse(_message.Message):
+    __slots__ = ("user",)
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
 class ListPermissionsRequest(_message.Message):
     __slots__ = ("account_id",)
@@ -120,6 +153,22 @@ class AssignUserRolesRequest(_message.Message):
 class AssignUserRolesResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class User(_message.Message):
+    __slots__ = ("id", "created_at", "last_modified_at", "email", "name", "status")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    EMAIL_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    created_at: _timestamp_pb2.Timestamp
+    last_modified_at: _timestamp_pb2.Timestamp
+    email: str
+    name: str
+    status: UserStatus
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ...) -> None: ...
 
 class Role(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions")

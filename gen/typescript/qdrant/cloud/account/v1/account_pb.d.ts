@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { User } from "../../iam/v1/iam_pb.js";
 
 /**
  * Describes the file qdrant/cloud/account/v1/account.proto.
@@ -522,6 +523,144 @@ export declare type RejectOrganizationInviteResponse = Message<"qdrant.cloud.acc
 export declare const RejectOrganizationInviteResponseSchema: GenMessage<RejectOrganizationInviteResponse>;
 
 /**
+ * ListAccountMembersRequest is the request for the ListAccountMembers function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountMembersRequest
+ */
+export declare type ListAccountMembersRequest = Message<"qdrant.cloud.account.v1.ListAccountMembersRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) to list members for.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountMembersRequest.
+ * Use `create(ListAccountMembersRequestSchema)` to create a new message.
+ */
+export declare const ListAccountMembersRequestSchema: GenMessage<ListAccountMembersRequest>;
+
+/**
+ * ListAccountMembersResponse is the response from the ListAccountMembers function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountMembersResponse
+ */
+export declare type ListAccountMembersResponse = Message<"qdrant.cloud.account.v1.ListAccountMembersResponse"> & {
+  /**
+   * The list of account members.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.AccountMember items = 1;
+   */
+  items: AccountMember[];
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountMembersResponse.
+ * Use `create(ListAccountMembersResponseSchema)` to create a new message.
+ */
+export declare const ListAccountMembersResponseSchema: GenMessage<ListAccountMembersResponse>;
+
+/**
+ * GetAccountMemberRequest is the request for the GetAccountMember function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountMemberRequest
+ */
+export declare type GetAccountMemberRequest = Message<"qdrant.cloud.account.v1.GetAccountMemberRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the member belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the user (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountMemberRequest.
+ * Use `create(GetAccountMemberRequestSchema)` to create a new message.
+ */
+export declare const GetAccountMemberRequestSchema: GenMessage<GetAccountMemberRequest>;
+
+/**
+ * GetAccountMemberResponse is the response from the GetAccountMember function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountMemberResponse
+ */
+export declare type GetAccountMemberResponse = Message<"qdrant.cloud.account.v1.GetAccountMemberResponse"> & {
+  /**
+   * The retrieved account member.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountMember member = 1;
+   */
+  member?: AccountMember;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountMemberResponse.
+ * Use `create(GetAccountMemberResponseSchema)` to create a new message.
+ */
+export declare const GetAccountMemberResponseSchema: GenMessage<GetAccountMemberResponse>;
+
+/**
+ * DeleteAccountMemberRequest is the request for the DeleteAccountMember function.
+ *
+ * @generated from message qdrant.cloud.account.v1.DeleteAccountMemberRequest
+ */
+export declare type DeleteAccountMemberRequest = Message<"qdrant.cloud.account.v1.DeleteAccountMemberRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the member belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the user (in GUID format) to delete.
+   * It is allowed to delete the authenticated user (aka leave account), however only if at least one other user remains in the account.
+   * If you are the owner of the account a random other user will be automatically assigned as owner.
+   * It is recommended to transfer ownership of the account before leaving. // TODO: how?
+   * This is a required field.
+   *
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.DeleteAccountMemberRequest.
+ * Use `create(DeleteAccountMemberRequestSchema)` to create a new message.
+ */
+export declare const DeleteAccountMemberRequestSchema: GenMessage<DeleteAccountMemberRequest>;
+
+/**
+ * DeleteAccountMemberResponse is the response from the DeleteAccountMember function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.account.v1.DeleteAccountMemberResponse
+ */
+export declare type DeleteAccountMemberResponse = Message<"qdrant.cloud.account.v1.DeleteAccountMemberResponse"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.DeleteAccountMemberResponse.
+ * Use `create(DeleteAccountMemberResponseSchema)` to create a new message.
+ */
+export declare const DeleteAccountMemberResponseSchema: GenMessage<DeleteAccountMemberResponse>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -703,6 +842,45 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
  * Use `create(AccountInviteSchema)` to create a new message.
  */
 export declare const AccountInviteSchema: GenMessage<AccountInvite>;
+
+/**
+ * An AccountMember represents a user who is a member of an account.
+ *
+ * @generated from message qdrant.cloud.account.v1.AccountMember
+ */
+export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMember"> & {
+  /**
+   * The user asociated with this membership record.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user?: User;
+
+  /**
+   * Wether or not this user is the owner of the account.
+   * This is a read-only field.
+   *
+   * @generated from field: bool is_owner = 2;
+   */
+  isOwner: boolean;
+
+  /**
+   * The timestamp when the user joined the account or when this membership record was created.
+   * This is a read-only field.
+   *
+   * TODO: Is this data available?
+   *
+   * @generated from field: google.protobuf.Timestamp joined_at = 3;
+   */
+  joinedAt?: Timestamp;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AccountMember.
+ * Use `create(AccountMemberSchema)` to create a new message.
+ */
+export declare const AccountMemberSchema: GenMessage<AccountMember>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.
@@ -917,6 +1095,45 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof RejectOrganizationInviteRequestSchema;
     output: typeof RejectOrganizationInviteResponseSchema;
+  },
+  /**
+   * Fetch all account members in the account identified by the given account ID.
+   * The authenticated user must be a member of the account identifier by the given account ID.
+   * Required permissions:
+   * - read:users
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccountMembers
+   */
+  listAccountMembers: {
+    methodKind: "unary";
+    input: typeof ListAccountMembersRequestSchema;
+    output: typeof ListAccountMembersResponseSchema;
+  },
+  /**
+   * Fetch an account member by its id.
+   * The authenticated user must be a member of the account that the member is for.
+   * Required permissions:
+   * - read:users
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountMember
+   */
+  getAccountMember: {
+    methodKind: "unary";
+    input: typeof GetAccountMemberRequestSchema;
+    output: typeof GetAccountMemberResponseSchema;
+  },
+  /**
+   * Delete an account member
+   * The authenticated user must be a member of the account that the member is for.
+   * Required permissions:
+   * - delete:users
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.DeleteAccountMember
+   */
+  deleteAccountMember: {
+    methodKind: "unary";
+    input: typeof DeleteAccountMemberRequestSchema;
+    output: typeof DeleteAccountMemberResponseSchema;
   },
 }>;
 

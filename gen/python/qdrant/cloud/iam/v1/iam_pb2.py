@@ -28,7 +28,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"A\n\x16ListPermissionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\";\n\x17ListPermissionsResponse\x12 \n\x0bpermissions\x18\x01 \x03(\tR\x0bpermissions\";\n\x10ListRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n\x11ListRolesResponse\x12/\n\x05items\x18\x01 \x03(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x05items\"\\\n\x0eGetRoleRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07role_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"@\n\x0fGetRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n\x11\x43reateRoleRequest\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n\x12\x43reateRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n\x11UpdateRoleRequest\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n\x12UpdateRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"_\n\x11\x44\x65leteRoleRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07role_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"\x14\n\x12\x44\x65leteRoleResponse\"J\n\x1fListEffectivePermissionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n ListEffectivePermissionsResponse\x12 \n\x0bpermissions\x18\x01 \x03(\tR\x0bpermissions\"\xd6\x01\n\x16\x41ssignUserRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07user_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06userId\x12\x34\n\x0frole_ids_to_add\x18\x03 \x03(\tB\r\xbaH\n\x92\x01\x07\"\x05r\x03\xb0\x01\x01R\x0croleIdsToAdd\x12:\n\x12role_ids_to_delete\x18\x04 \x03(\tB\r\xbaH\n\x92\x01\x07\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete\"\x19\n\x17\x41ssignUserRolesResponse\"\xa8\x04\n\x04Role\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x39\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x44\n\x10last_modified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\'\n\naccount_id\x18\x04 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12 \n\x0b\x64\x65scription\x18\x06 \x01(\tR\x0b\x64\x65scription\x12:\n\trole_type\x18\x07 \x01(\x0e\x32\x1d.qdrant.cloud.iam.v1.RoleTypeR\x08roleType\x12*\n\x0bpermissions\x18\x08 \x03(\tB\x08\xbaH\x05\x92\x01\x02\x08\x01R\x0bpermissions:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n\ncluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)*Q\n\x08RoleType\x12\x19\n\x15ROLE_TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10ROLE_TYPE_SYSTEM\x10\x01\x12\x14\n\x10ROLE_TYPE_CUSTOM\x10\x02\x32\xd4\x0b\n\nIAMService\x12\xb1\x01\n\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02)\x12\'/api/iam/v1/accounts/{account_id}/roles\x12\xb0\x01\n\x07GetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"Z\x8a\xb5\x18\nread:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02\x33\x12\x31/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xb8\x01\n\nCreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a\'.qdrant.cloud.iam.v1.CreateRoleResponse\"Y\x8a\xb5\x18\x0bwrite:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02\x31\",/api/iam/v1/accounts/{role.account_id}/roles:\x01*\x12\xc2\x01\n\nUpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a\'.qdrant.cloud.iam.v1.UpdateRoleResponse\"c\x8a\xb5\x18\x0bwrite:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02;\x1a\x36/api/iam/v1/accounts/{role.account_id}/roles/{role.id}:\x01*\x12\xa8\x01\n\nDeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a\'.qdrant.cloud.iam.v1.DeleteRoleResponse\"I\x8a\xb5\x18\x0c\x64\x65lete:roles\x82\xd3\xe4\x93\x02\x33*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xd6\x01\n\x18ListEffectivePermissions\x12\x34.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a\x35.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"M\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02\x39\x12\x37/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xbe\x01\n\x0f\x41ssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"P\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02<\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles:\x01*B\xde\x01\n\x17\x63om.qdrant.cloud.iam.v1B\x08IamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x1d\n\x1bGetAuthenticatedUserRequest\"M\n\x1cGetAuthenticatedUserResponse\x12-\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserR\x04user\"B\n\x11UpdateUserRequest\x12-\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserR\x04user\"C\n\x12UpdateUserResponse\x12-\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserR\x04user\"A\n\x16ListPermissionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\";\n\x17ListPermissionsResponse\x12 \n\x0bpermissions\x18\x01 \x03(\tR\x0bpermissions\";\n\x10ListRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n\x11ListRolesResponse\x12/\n\x05items\x18\x01 \x03(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x05items\"\\\n\x0eGetRoleRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07role_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"@\n\x0fGetRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n\x11\x43reateRoleRequest\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n\x12\x43reateRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n\x11UpdateRoleRequest\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n\x12UpdateRoleResponse\x12-\n\x04role\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x04role\"_\n\x11\x44\x65leteRoleRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07role_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"\x14\n\x12\x44\x65leteRoleResponse\"J\n\x1fListEffectivePermissionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n ListEffectivePermissionsResponse\x12 \n\x0bpermissions\x18\x01 \x03(\tR\x0bpermissions\"\xd6\x01\n\x16\x41ssignUserRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n\x07user_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x06userId\x12\x34\n\x0frole_ids_to_add\x18\x03 \x03(\tB\r\xbaH\n\x92\x01\x07\"\x05r\x03\xb0\x01\x01R\x0croleIdsToAdd\x12:\n\x12role_ids_to_delete\x18\x04 \x03(\tB\r\xbaH\n\x92\x01\x07\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete\"\x19\n\x17\x41ssignUserRolesResponse\"\x8e\x02\n\x04User\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x39\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x44\n\x10last_modified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n\x05\x65mail\x18\x04 \x01(\tB\x07\xbaH\x04r\x02`\x01R\x05\x65mail\x12\x1d\n\x04name\x18\x05 \x01(\tB\t\xbaH\x06r\x04\x10\x02\x18@R\x04name\x12\x37\n\x06status\x18\x06 \x01(\x0e\x32\x1f.qdrant.cloud.iam.v1.UserStatusR\x06status\"\xa8\x04\n\x04Role\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x39\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x44\n\x10last_modified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\'\n\naccount_id\x18\x04 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12 \n\x0b\x64\x65scription\x18\x06 \x01(\tR\x0b\x64\x65scription\x12:\n\trole_type\x18\x07 \x01(\x0e\x32\x1d.qdrant.cloud.iam.v1.RoleTypeR\x08roleType\x12*\n\x0bpermissions\x18\x08 \x03(\tB\x08\xbaH\x05\x92\x01\x02\x08\x01R\x0bpermissions:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n\ncluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)*s\n\nUserStatus\x12\x1b\n\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n\x12USER_STATUS_ACTIVE\x10\x01\x12\x17\n\x13USER_STATUS_BLOCKED\x10\x02\x12\x17\n\x13USER_STATUS_DELETED\x10\x03*Q\n\x08RoleType\x12\x19\n\x15ROLE_TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10ROLE_TYPE_SYSTEM\x10\x01\x12\x14\n\x10ROLE_TYPE_CUSTOM\x10\x02\x32\x92\x0e\n\nIAMService\x12\xa1\x01\n\x14GetAuthenticatedUser\x12\x30.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a\x31.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\"$\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x97\x01\n\nUpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a\'.qdrant.cloud.iam.v1.UpdateUserResponse\"8\x8a\xb5\x18\nwrite:user\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02 \x1a\x1b/api/iam/v1/users/{user.id}:\x01*\x12\xb1\x01\n\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02)\x12\'/api/iam/v1/accounts/{account_id}/roles\x12\xb0\x01\n\x07GetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"Z\x8a\xb5\x18\nread:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02\x33\x12\x31/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xb8\x01\n\nCreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a\'.qdrant.cloud.iam.v1.CreateRoleResponse\"Y\x8a\xb5\x18\x0bwrite:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02\x31\",/api/iam/v1/accounts/{role.account_id}/roles:\x01*\x12\xc2\x01\n\nUpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a\'.qdrant.cloud.iam.v1.UpdateRoleResponse\"c\x8a\xb5\x18\x0bwrite:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x02;\x1a\x36/api/iam/v1/accounts/{role.account_id}/roles/{role.id}:\x01*\x12\xa8\x01\n\nDeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a\'.qdrant.cloud.iam.v1.DeleteRoleResponse\"I\x8a\xb5\x18\x0c\x64\x65lete:roles\x82\xd3\xe4\x93\x02\x33*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xd6\x01\n\x18ListEffectivePermissions\x12\x34.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a\x35.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"M\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02\x39\x12\x37/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xbe\x01\n\x0f\x41ssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"P\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02<\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles:\x01*B\xde\x01\n\x17\x63om.qdrant.cloud.iam.v1B\x08IamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -58,6 +58,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ASSIGNUSERROLESREQUEST'].fields_by_name['role_ids_to_add']._serialized_options = b'\272H\n\222\001\007\"\005r\003\260\001\001'
   _globals['_ASSIGNUSERROLESREQUEST'].fields_by_name['role_ids_to_delete']._loaded_options = None
   _globals['_ASSIGNUSERROLESREQUEST'].fields_by_name['role_ids_to_delete']._serialized_options = b'\272H\n\222\001\007\"\005r\003\260\001\001'
+  _globals['_USER'].fields_by_name['email']._loaded_options = None
+  _globals['_USER'].fields_by_name['email']._serialized_options = b'\272H\004r\002`\001'
+  _globals['_USER'].fields_by_name['name']._loaded_options = None
+  _globals['_USER'].fields_by_name['name']._serialized_options = b'\272H\006r\004\020\002\030@'
   _globals['_ROLE'].fields_by_name['account_id']._loaded_options = None
   _globals['_ROLE'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_ROLE'].fields_by_name['name']._loaded_options = None
@@ -66,6 +70,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ROLE'].fields_by_name['permissions']._serialized_options = b'\272H\005\222\001\002\010\001'
   _globals['_ROLE']._loaded_options = None
   _globals['_ROLE']._serialized_options = b'\272H\246\001\032\243\001\n\ncluster.id\022\032value must be a valid UUID\032ythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)'
+  _globals['_IAMSERVICE'].methods_by_name['GetAuthenticatedUser']._loaded_options = None
+  _globals['_IAMSERVICE'].methods_by_name['GetAuthenticatedUser']._serialized_options = b'\212\265\030\000\222\265\030\000\202\323\344\223\002\026\022\024/api/iam/v1/users/me'
+  _globals['_IAMSERVICE'].methods_by_name['UpdateUser']._loaded_options = None
+  _globals['_IAMSERVICE'].methods_by_name['UpdateUser']._serialized_options = b'\212\265\030\nwrite:user\222\265\030\000\202\323\344\223\002 \032\033/api/iam/v1/users/{user.id}:\001*'
   _globals['_IAMSERVICE'].methods_by_name['ListPermissions']._loaded_options = None
   _globals['_IAMSERVICE'].methods_by_name['ListPermissions']._serialized_options = b'\212\265\030\nread:roles\202\323\344\223\002/\022-/api/iam/v1/accounts/{account_id}/permissions'
   _globals['_IAMSERVICE'].methods_by_name['ListRoles']._loaded_options = None
@@ -82,42 +90,54 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_IAMSERVICE'].methods_by_name['ListEffectivePermissions']._serialized_options = b'\212\265\030\nread:roles\202\323\344\223\0029\0227/api/iam/v1/accounts/{account_id}/effective-permissions'
   _globals['_IAMSERVICE'].methods_by_name['AssignUserRoles']._loaded_options = None
   _globals['_IAMSERVICE'].methods_by_name['AssignUserRoles']._serialized_options = b'\212\265\030\nread:roles\202\323\344\223\002<\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles:\001*'
-  _globals['_ROLETYPE']._serialized_start=1940
-  _globals['_ROLETYPE']._serialized_end=2021
-  _globals['_LISTPERMISSIONSREQUEST']._serialized_start=183
-  _globals['_LISTPERMISSIONSREQUEST']._serialized_end=248
-  _globals['_LISTPERMISSIONSRESPONSE']._serialized_start=250
-  _globals['_LISTPERMISSIONSRESPONSE']._serialized_end=309
-  _globals['_LISTROLESREQUEST']._serialized_start=311
-  _globals['_LISTROLESREQUEST']._serialized_end=370
-  _globals['_LISTROLESRESPONSE']._serialized_start=372
-  _globals['_LISTROLESRESPONSE']._serialized_end=440
-  _globals['_GETROLEREQUEST']._serialized_start=442
-  _globals['_GETROLEREQUEST']._serialized_end=534
-  _globals['_GETROLERESPONSE']._serialized_start=536
-  _globals['_GETROLERESPONSE']._serialized_end=600
-  _globals['_CREATEROLEREQUEST']._serialized_start=602
-  _globals['_CREATEROLEREQUEST']._serialized_end=668
-  _globals['_CREATEROLERESPONSE']._serialized_start=670
-  _globals['_CREATEROLERESPONSE']._serialized_end=737
-  _globals['_UPDATEROLEREQUEST']._serialized_start=739
-  _globals['_UPDATEROLEREQUEST']._serialized_end=805
-  _globals['_UPDATEROLERESPONSE']._serialized_start=807
-  _globals['_UPDATEROLERESPONSE']._serialized_end=874
-  _globals['_DELETEROLEREQUEST']._serialized_start=876
-  _globals['_DELETEROLEREQUEST']._serialized_end=971
-  _globals['_DELETEROLERESPONSE']._serialized_start=973
-  _globals['_DELETEROLERESPONSE']._serialized_end=993
-  _globals['_LISTEFFECTIVEPERMISSIONSREQUEST']._serialized_start=995
-  _globals['_LISTEFFECTIVEPERMISSIONSREQUEST']._serialized_end=1069
-  _globals['_LISTEFFECTIVEPERMISSIONSRESPONSE']._serialized_start=1071
-  _globals['_LISTEFFECTIVEPERMISSIONSRESPONSE']._serialized_end=1139
-  _globals['_ASSIGNUSERROLESREQUEST']._serialized_start=1142
-  _globals['_ASSIGNUSERROLESREQUEST']._serialized_end=1356
-  _globals['_ASSIGNUSERROLESRESPONSE']._serialized_start=1358
-  _globals['_ASSIGNUSERROLESRESPONSE']._serialized_end=1383
-  _globals['_ROLE']._serialized_start=1386
-  _globals['_ROLE']._serialized_end=1938
-  _globals['_IAMSERVICE']._serialized_start=2024
-  _globals['_IAMSERVICE']._serialized_end=3516
+  _globals['_USERSTATUS']._serialized_start=2460
+  _globals['_USERSTATUS']._serialized_end=2575
+  _globals['_ROLETYPE']._serialized_start=2577
+  _globals['_ROLETYPE']._serialized_end=2658
+  _globals['_GETAUTHENTICATEDUSERREQUEST']._serialized_start=183
+  _globals['_GETAUTHENTICATEDUSERREQUEST']._serialized_end=212
+  _globals['_GETAUTHENTICATEDUSERRESPONSE']._serialized_start=214
+  _globals['_GETAUTHENTICATEDUSERRESPONSE']._serialized_end=291
+  _globals['_UPDATEUSERREQUEST']._serialized_start=293
+  _globals['_UPDATEUSERREQUEST']._serialized_end=359
+  _globals['_UPDATEUSERRESPONSE']._serialized_start=361
+  _globals['_UPDATEUSERRESPONSE']._serialized_end=428
+  _globals['_LISTPERMISSIONSREQUEST']._serialized_start=430
+  _globals['_LISTPERMISSIONSREQUEST']._serialized_end=495
+  _globals['_LISTPERMISSIONSRESPONSE']._serialized_start=497
+  _globals['_LISTPERMISSIONSRESPONSE']._serialized_end=556
+  _globals['_LISTROLESREQUEST']._serialized_start=558
+  _globals['_LISTROLESREQUEST']._serialized_end=617
+  _globals['_LISTROLESRESPONSE']._serialized_start=619
+  _globals['_LISTROLESRESPONSE']._serialized_end=687
+  _globals['_GETROLEREQUEST']._serialized_start=689
+  _globals['_GETROLEREQUEST']._serialized_end=781
+  _globals['_GETROLERESPONSE']._serialized_start=783
+  _globals['_GETROLERESPONSE']._serialized_end=847
+  _globals['_CREATEROLEREQUEST']._serialized_start=849
+  _globals['_CREATEROLEREQUEST']._serialized_end=915
+  _globals['_CREATEROLERESPONSE']._serialized_start=917
+  _globals['_CREATEROLERESPONSE']._serialized_end=984
+  _globals['_UPDATEROLEREQUEST']._serialized_start=986
+  _globals['_UPDATEROLEREQUEST']._serialized_end=1052
+  _globals['_UPDATEROLERESPONSE']._serialized_start=1054
+  _globals['_UPDATEROLERESPONSE']._serialized_end=1121
+  _globals['_DELETEROLEREQUEST']._serialized_start=1123
+  _globals['_DELETEROLEREQUEST']._serialized_end=1218
+  _globals['_DELETEROLERESPONSE']._serialized_start=1220
+  _globals['_DELETEROLERESPONSE']._serialized_end=1240
+  _globals['_LISTEFFECTIVEPERMISSIONSREQUEST']._serialized_start=1242
+  _globals['_LISTEFFECTIVEPERMISSIONSREQUEST']._serialized_end=1316
+  _globals['_LISTEFFECTIVEPERMISSIONSRESPONSE']._serialized_start=1318
+  _globals['_LISTEFFECTIVEPERMISSIONSRESPONSE']._serialized_end=1386
+  _globals['_ASSIGNUSERROLESREQUEST']._serialized_start=1389
+  _globals['_ASSIGNUSERROLESREQUEST']._serialized_end=1603
+  _globals['_ASSIGNUSERROLESRESPONSE']._serialized_start=1605
+  _globals['_ASSIGNUSERROLESRESPONSE']._serialized_end=1630
+  _globals['_USER']._serialized_start=1633
+  _globals['_USER']._serialized_end=1903
+  _globals['_ROLE']._serialized_start=1906
+  _globals['_ROLE']._serialized_end=2458
+  _globals['_IAMSERVICE']._serialized_start=2661
+  _globals['_IAMSERVICE']._serialized_end=4471
 # @@protoc_insertion_point(module_scope)
