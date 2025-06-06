@@ -810,7 +810,7 @@
       "properties": {
         "user": {
           "$ref": "#/definitions/v1User",
-          "description": "The user asociated with this membership record.\nThis is a read-only field."
+          "description": "The user associated with this membership record.\nThis is a read-only field."
         },
         "isOwner": {
           "type": "boolean",

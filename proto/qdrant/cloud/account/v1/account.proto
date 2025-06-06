@@ -493,7 +493,7 @@ enum AccountInviteStatus {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An AccountMember represents a user who is a member of an account.
 message AccountMember {
-  // The user asociated with this membership record.
+  // The user associated with this membership record.
   // This is a read-only field.
   iam.v1.User user = 1;
   // Wether or not this user is the owner of the account.

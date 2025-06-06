@@ -850,7 +850,7 @@ export declare const AccountInviteSchema: GenMessage<AccountInvite>;
  */
 export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMember"> & {
   /**
-   * The user asociated with this membership record.
+   * The user associated with this membership record.
    * This is a read-only field.
    *
    * @generated from field: qdrant.cloud.iam.v1.User user = 1;

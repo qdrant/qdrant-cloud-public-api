@@ -1779,7 +1779,7 @@ func (x *AccountInvite) GetStatus() AccountInviteStatus {
 // An AccountMember represents a user who is a member of an account.
 type AccountMember struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The user asociated with this membership record.
+	// The user associated with this membership record.
 	// This is a read-only field.
 	User *v1.User `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	// Wether or not this user is the owner of the account.
