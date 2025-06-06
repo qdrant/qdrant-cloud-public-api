@@ -172,9 +172,333 @@
           "AccountService"
         ]
       }
+    },
+    "/api/account/v1/accounts/{accountId}/invites": {
+      "get": {
+        "summary": "Fetch all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
+        "operationId": "AccountService_ListAccountInvites",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountInvitesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) to list invites for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/accounts/{accountId}/invites/{inviteId}": {
+      "get": {
+        "summary": "Fetch an account invite identified by the given account ID and invite ID.\nRequired permissions:\n- read:invites",
+        "operationId": "AccountService_GetAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the invite belongs to.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inviteId",
+            "description": "The identifier of the invite (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete an account invite\nRequired permissions:\n- delete:invites",
+        "operationId": "AccountService_DeleteAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the invite belongs to.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inviteId",
+            "description": "The identifier of the invite (in GUID format) to delete.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/accounts/{accountId}/invites/{inviteId}/accept": {
+      "post": {
+        "summary": "Accept an account invite\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_AcceptAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AcceptAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the invite is for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inviteId",
+            "description": "The identifier of the invite (in GUID format) to accept.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/accounts/{accountId}/invites/{inviteId}/reject": {
+      "post": {
+        "summary": "Reject an account invite\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_RejectAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RejectAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) the invite is for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inviteId",
+            "description": "The identifier of the invite (in GUID format) to reject.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
+      "post": {
+        "summary": "Create a new account invite.\nRequired permissions:\n- write:invites",
+        "operationId": "AccountService_CreateAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountInvite.accountId",
+            "description": "The identifier of the account this invite is for (in GUID format).\nThis field is required when creating an invite.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServiceCreateAccountInviteBody"
+            }
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/api/account/v1/self/invites": {
+      "get": {
+        "summary": "Fetch all account invites for the authenticated user (across all accounts).\nThese are the invites you are invited to join, not the ones you have sent.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_ListReceivedAccountInvites",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListReceivedAccountInvitesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "statusFilter",
+            "description": "Optional: Filter invites by status (e.g. pending only).\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
+              "ACCOUNT_INVITE_STATUS_PENDING",
+              "ACCOUNT_INVITE_STATUS_ACCEPTED",
+              "ACCOUNT_INVITE_STATUS_REJECTED",
+              "ACCOUNT_INVITE_STATUS_CANCELED"
+            ],
+            "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
     }
   },
   "definitions": {
+    "AccountServiceCreateAccountInviteBody": {
+      "type": "object",
+      "properties": {
+        "accountInvite": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field, generated by the server."
+            },
+            "accountName": {
+              "type": "string",
+              "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
+            },
+            "userEmail": {
+              "type": "string",
+              "description": "The email address of the user being invited.\nThis field is required when creating an invite."
+            },
+            "userRoleIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the invite was created.\nThis is a read-only field."
+            },
+            "createdByUserId": {
+              "type": "string",
+              "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
+            },
+            "createdByName": {
+              "type": "string",
+              "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
+            },
+            "userId": {
+              "type": "string",
+              "description": "Identifier of the user that accepted or rejected this invite.\nThis is a read-only value."
+            },
+            "status": {
+              "$ref": "#/definitions/v1AccountInviteStatus",
+              "description": "The status of the invite.\nThis is a read-only field."
+            }
+          },
+          "description": "The details of the invite to create.\nThis is a required field.",
+          "title": "The details of the invite to create.\nThis is a required field."
+        }
+      },
+      "description": "CreateAccountInviteRequest is the request for the CreateAccountInvite function."
+    },
     "AccountServiceUpdateAccountBody": {
       "type": "object",
       "properties": {
@@ -245,6 +569,16 @@
         }
       }
     },
+    "v1AcceptAccountInviteResponse": {
+      "type": "object",
+      "properties": {
+        "invite": {
+          "$ref": "#/definitions/v1AccountInvite",
+          "description": "The invite that was accepted, with its status updated."
+        }
+      },
+      "description": "AcceptAccountInviteResponse is the response from the AcceptAccountInvite function."
+    },
     "v1Account": {
       "type": "object",
       "properties": {
@@ -284,6 +618,83 @@
       },
       "description": "An Account represents an account in the Qdrant cloud."
     },
+    "v1AccountInvite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field, generated by the server."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account this invite is for (in GUID format).\nThis field is required when creating an invite."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "The email address of the user being invited.\nThis field is required when creating an invite."
+        },
+        "userRoleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invite was created.\nThis is a read-only field."
+        },
+        "createdByUserId": {
+          "type": "string",
+          "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
+        },
+        "createdByName": {
+          "type": "string",
+          "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier of the user that accepted or rejected this invite.\nThis is a read-only value."
+        },
+        "status": {
+          "$ref": "#/definitions/v1AccountInviteStatus",
+          "description": "The status of the invite.\nThis is a read-only field."
+        }
+      },
+      "description": "An AccountInvite represents an invitation for a user to join an account."
+    },
+    "v1AccountInviteStatus": {
+      "type": "string",
+      "enum": [
+        "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
+        "ACCOUNT_INVITE_STATUS_PENDING",
+        "ACCOUNT_INVITE_STATUS_ACCEPTED",
+        "ACCOUNT_INVITE_STATUS_REJECTED",
+        "ACCOUNT_INVITE_STATUS_CANCELED"
+      ],
+      "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
+      "description": "AccountInviteStatus defines the possible statuses of an account invitation.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin)."
+    },
+    "v1CreateAccountInviteResponse": {
+      "type": "object",
+      "properties": {
+        "accountInvite": {
+          "$ref": "#/definitions/v1AccountInvite",
+          "description": "The created account invite."
+        }
+      },
+      "description": "CreateAccountInviteResponse is the response from the CreateAccountInvite function."
+    },
     "v1CreateAccountRequest": {
       "type": "object",
       "properties": {
@@ -304,9 +715,23 @@
       },
       "description": "CreateAccountResponse is the response from the CreateAccount function."
     },
+    "v1DeleteAccountInviteResponse": {
+      "type": "object",
+      "description": "DeleteAccountInviteResponse is the response from the DeleteAccountInvite function.\n\nEmpty"
+    },
     "v1DeleteAccountResponse": {
       "type": "object",
       "description": "DeleteAccountResponse is the response from the DeleteAccount function.\n\nEmpty"
+    },
+    "v1GetAccountInviteResponse": {
+      "type": "object",
+      "properties": {
+        "accountInvite": {
+          "$ref": "#/definitions/v1AccountInvite",
+          "description": "The account invite."
+        }
+      },
+      "description": "GetAccountInviteResponse is the response from the GetAccountInvite function."
     },
     "v1GetAccountResponse": {
       "type": "object",
@@ -317,6 +742,20 @@
         }
       },
       "title": "GetAccountResponse is the response from the GetAccount function"
+    },
+    "v1ListAccountInvitesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccountInvite"
+          },
+          "description": "The list of account invites."
+        }
+      },
+      "description": "ListAccountInvitesResponse is the response from the ListAccountInvites function."
     },
     "v1ListAccountsResponse": {
       "type": "object",
@@ -331,6 +770,30 @@
         }
       },
       "title": "ListAccountsResponse is the response from the ListAccounts function"
+    },
+    "v1ListReceivedAccountInvitesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccountInvite"
+          },
+          "description": "The list of account invites for the authenticated user."
+        }
+      },
+      "description": "ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function."
+    },
+    "v1RejectAccountInviteResponse": {
+      "type": "object",
+      "properties": {
+        "invite": {
+          "$ref": "#/definitions/v1AccountInvite",
+          "description": "The invite that was rejected, with its status updated."
+        }
+      },
+      "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

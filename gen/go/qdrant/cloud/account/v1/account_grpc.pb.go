@@ -19,11 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AccountService_ListAccounts_FullMethodName  = "/qdrant.cloud.account.v1.AccountService/ListAccounts"
-	AccountService_GetAccount_FullMethodName    = "/qdrant.cloud.account.v1.AccountService/GetAccount"
-	AccountService_CreateAccount_FullMethodName = "/qdrant.cloud.account.v1.AccountService/CreateAccount"
-	AccountService_UpdateAccount_FullMethodName = "/qdrant.cloud.account.v1.AccountService/UpdateAccount"
-	AccountService_DeleteAccount_FullMethodName = "/qdrant.cloud.account.v1.AccountService/DeleteAccount"
+	AccountService_ListAccounts_FullMethodName               = "/qdrant.cloud.account.v1.AccountService/ListAccounts"
+	AccountService_GetAccount_FullMethodName                 = "/qdrant.cloud.account.v1.AccountService/GetAccount"
+	AccountService_CreateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/CreateAccount"
+	AccountService_UpdateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/UpdateAccount"
+	AccountService_DeleteAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/DeleteAccount"
+	AccountService_ListAccountInvites_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/ListAccountInvites"
+	AccountService_ListReceivedAccountInvites_FullMethodName = "/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites"
+	AccountService_GetAccountInvite_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountInvite"
+	AccountService_CreateAccountInvite_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/CreateAccountInvite"
+	AccountService_DeleteAccountInvite_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/DeleteAccountInvite"
+	AccountService_AcceptAccountInvite_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/AcceptAccountInvite"
+	AccountService_RejectAccountInvite_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/RejectAccountInvite"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -52,6 +59,39 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	// Fetch all account invites in the account identified by the given account ID.
+	// Required permissions:
+	// - read:invites
+	ListAccountInvites(ctx context.Context, in *ListAccountInvitesRequest, opts ...grpc.CallOption) (*ListAccountInvitesResponse, error)
+	// Fetch all account invites for the authenticated user (across all accounts).
+	// These are the invites you are invited to join, not the ones you have sent.
+	// Required permissions:
+	// - None (authenticated only)
+	ListReceivedAccountInvites(ctx context.Context, in *ListReceivedAccountInvitesRequest, opts ...grpc.CallOption) (*ListReceivedAccountInvitesResponse, error)
+	// Fetch an account invite identified by the given account ID and invite ID.
+	// Required permissions:
+	// - read:invites
+	GetAccountInvite(ctx context.Context, in *GetAccountInviteRequest, opts ...grpc.CallOption) (*GetAccountInviteResponse, error)
+	// Create a new account invite.
+	// Required permissions:
+	// - write:invites
+	CreateAccountInvite(ctx context.Context, in *CreateAccountInviteRequest, opts ...grpc.CallOption) (*CreateAccountInviteResponse, error)
+	// Delete an account invite
+	// Required permissions:
+	// - delete:invites
+	DeleteAccountInvite(ctx context.Context, in *DeleteAccountInviteRequest, opts ...grpc.CallOption) (*DeleteAccountInviteResponse, error)
+	// Accept an account invite
+	// The authenticated user's email address must match the email address specified in
+	// the invite.
+	// Required permissions:
+	// - None (authenticated only)
+	AcceptAccountInvite(ctx context.Context, in *AcceptAccountInviteRequest, opts ...grpc.CallOption) (*AcceptAccountInviteResponse, error)
+	// Reject an account invite
+	// The authenticated user's email address must match the email address specified in
+	// the invite.
+	// Required permissions:
+	// - None (authenticated only)
+	RejectAccountInvite(ctx context.Context, in *RejectAccountInviteRequest, opts ...grpc.CallOption) (*RejectAccountInviteResponse, error)
 }
 
 type accountServiceClient struct {
@@ -112,6 +152,76 @@ func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAcco
 	return out, nil
 }
 
+func (c *accountServiceClient) ListAccountInvites(ctx context.Context, in *ListAccountInvitesRequest, opts ...grpc.CallOption) (*ListAccountInvitesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAccountInvitesResponse)
+	err := c.cc.Invoke(ctx, AccountService_ListAccountInvites_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) ListReceivedAccountInvites(ctx context.Context, in *ListReceivedAccountInvitesRequest, opts ...grpc.CallOption) (*ListReceivedAccountInvitesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReceivedAccountInvitesResponse)
+	err := c.cc.Invoke(ctx, AccountService_ListReceivedAccountInvites_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) GetAccountInvite(ctx context.Context, in *GetAccountInviteRequest, opts ...grpc.CallOption) (*GetAccountInviteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountInviteResponse)
+	err := c.cc.Invoke(ctx, AccountService_GetAccountInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) CreateAccountInvite(ctx context.Context, in *CreateAccountInviteRequest, opts ...grpc.CallOption) (*CreateAccountInviteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAccountInviteResponse)
+	err := c.cc.Invoke(ctx, AccountService_CreateAccountInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) DeleteAccountInvite(ctx context.Context, in *DeleteAccountInviteRequest, opts ...grpc.CallOption) (*DeleteAccountInviteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAccountInviteResponse)
+	err := c.cc.Invoke(ctx, AccountService_DeleteAccountInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) AcceptAccountInvite(ctx context.Context, in *AcceptAccountInviteRequest, opts ...grpc.CallOption) (*AcceptAccountInviteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcceptAccountInviteResponse)
+	err := c.cc.Invoke(ctx, AccountService_AcceptAccountInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) RejectAccountInvite(ctx context.Context, in *RejectAccountInviteRequest, opts ...grpc.CallOption) (*RejectAccountInviteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RejectAccountInviteResponse)
+	err := c.cc.Invoke(ctx, AccountService_RejectAccountInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServiceServer is the server API for AccountService service.
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility.
@@ -138,6 +248,39 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	// Fetch all account invites in the account identified by the given account ID.
+	// Required permissions:
+	// - read:invites
+	ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error)
+	// Fetch all account invites for the authenticated user (across all accounts).
+	// These are the invites you are invited to join, not the ones you have sent.
+	// Required permissions:
+	// - None (authenticated only)
+	ListReceivedAccountInvites(context.Context, *ListReceivedAccountInvitesRequest) (*ListReceivedAccountInvitesResponse, error)
+	// Fetch an account invite identified by the given account ID and invite ID.
+	// Required permissions:
+	// - read:invites
+	GetAccountInvite(context.Context, *GetAccountInviteRequest) (*GetAccountInviteResponse, error)
+	// Create a new account invite.
+	// Required permissions:
+	// - write:invites
+	CreateAccountInvite(context.Context, *CreateAccountInviteRequest) (*CreateAccountInviteResponse, error)
+	// Delete an account invite
+	// Required permissions:
+	// - delete:invites
+	DeleteAccountInvite(context.Context, *DeleteAccountInviteRequest) (*DeleteAccountInviteResponse, error)
+	// Accept an account invite
+	// The authenticated user's email address must match the email address specified in
+	// the invite.
+	// Required permissions:
+	// - None (authenticated only)
+	AcceptAccountInvite(context.Context, *AcceptAccountInviteRequest) (*AcceptAccountInviteResponse, error)
+	// Reject an account invite
+	// The authenticated user's email address must match the email address specified in
+	// the invite.
+	// Required permissions:
+	// - None (authenticated only)
+	RejectAccountInvite(context.Context, *RejectAccountInviteRequest) (*RejectAccountInviteResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -162,6 +305,27 @@ func (UnimplementedAccountServiceServer) UpdateAccount(context.Context, *UpdateA
 }
 func (UnimplementedAccountServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccountInvites not implemented")
+}
+func (UnimplementedAccountServiceServer) ListReceivedAccountInvites(context.Context, *ListReceivedAccountInvitesRequest) (*ListReceivedAccountInvitesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReceivedAccountInvites not implemented")
+}
+func (UnimplementedAccountServiceServer) GetAccountInvite(context.Context, *GetAccountInviteRequest) (*GetAccountInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountInvite not implemented")
+}
+func (UnimplementedAccountServiceServer) CreateAccountInvite(context.Context, *CreateAccountInviteRequest) (*CreateAccountInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountInvite not implemented")
+}
+func (UnimplementedAccountServiceServer) DeleteAccountInvite(context.Context, *DeleteAccountInviteRequest) (*DeleteAccountInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountInvite not implemented")
+}
+func (UnimplementedAccountServiceServer) AcceptAccountInvite(context.Context, *AcceptAccountInviteRequest) (*AcceptAccountInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptAccountInvite not implemented")
+}
+func (UnimplementedAccountServiceServer) RejectAccountInvite(context.Context, *RejectAccountInviteRequest) (*RejectAccountInviteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RejectAccountInvite not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 func (UnimplementedAccountServiceServer) testEmbeddedByValue()                        {}
@@ -274,6 +438,132 @@ func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountService_ListAccountInvites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccountInvitesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).ListAccountInvites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_ListAccountInvites_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).ListAccountInvites(ctx, req.(*ListAccountInvitesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_ListReceivedAccountInvites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReceivedAccountInvitesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).ListReceivedAccountInvites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_ListReceivedAccountInvites_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).ListReceivedAccountInvites(ctx, req.(*ListReceivedAccountInvitesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_GetAccountInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).GetAccountInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_GetAccountInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).GetAccountInvite(ctx, req.(*GetAccountInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_CreateAccountInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).CreateAccountInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_CreateAccountInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).CreateAccountInvite(ctx, req.(*CreateAccountInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_DeleteAccountInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).DeleteAccountInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_DeleteAccountInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).DeleteAccountInvite(ctx, req.(*DeleteAccountInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_AcceptAccountInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptAccountInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).AcceptAccountInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_AcceptAccountInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).AcceptAccountInvite(ctx, req.(*AcceptAccountInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_RejectAccountInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectAccountInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).RejectAccountInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_RejectAccountInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).RejectAccountInvite(ctx, req.(*RejectAccountInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -300,6 +590,34 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccount",
 			Handler:    _AccountService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "ListAccountInvites",
+			Handler:    _AccountService_ListAccountInvites_Handler,
+		},
+		{
+			MethodName: "ListReceivedAccountInvites",
+			Handler:    _AccountService_ListReceivedAccountInvites_Handler,
+		},
+		{
+			MethodName: "GetAccountInvite",
+			Handler:    _AccountService_GetAccountInvite_Handler,
+		},
+		{
+			MethodName: "CreateAccountInvite",
+			Handler:    _AccountService_CreateAccountInvite_Handler,
+		},
+		{
+			MethodName: "DeleteAccountInvite",
+			Handler:    _AccountService_DeleteAccountInvite_Handler,
+		},
+		{
+			MethodName: "AcceptAccountInvite",
+			Handler:    _AccountService_AcceptAccountInvite_Handler,
+		},
+		{
+			MethodName: "RejectAccountInvite",
+			Handler:    _AccountService_RejectAccountInvite_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

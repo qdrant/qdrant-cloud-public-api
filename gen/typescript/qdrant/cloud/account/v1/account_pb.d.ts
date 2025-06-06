@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/account/v1/account.proto (package qdrant.cloud.account.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 
@@ -206,6 +206,322 @@ export declare type DeleteAccountResponse = Message<"qdrant.cloud.account.v1.Del
 export declare const DeleteAccountResponseSchema: GenMessage<DeleteAccountResponse>;
 
 /**
+ * ListAccountInvitesRequest is the request for the ListAccountInvites function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountInvitesRequest
+ */
+export declare type ListAccountInvitesRequest = Message<"qdrant.cloud.account.v1.ListAccountInvitesRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) to list invites for.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountInvitesRequest.
+ * Use `create(ListAccountInvitesRequestSchema)` to create a new message.
+ */
+export declare const ListAccountInvitesRequestSchema: GenMessage<ListAccountInvitesRequest>;
+
+/**
+ * ListAccountInvitesResponse is the response from the ListAccountInvites function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountInvitesResponse
+ */
+export declare type ListAccountInvitesResponse = Message<"qdrant.cloud.account.v1.ListAccountInvitesResponse"> & {
+  /**
+   * The list of account invites.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.AccountInvite items = 1;
+   */
+  items: AccountInvite[];
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountInvitesResponse.
+ * Use `create(ListAccountInvitesResponseSchema)` to create a new message.
+ */
+export declare const ListAccountInvitesResponseSchema: GenMessage<ListAccountInvitesResponse>;
+
+/**
+ * ListReceivedAccountInvitesRequest is the request for the ListReceivedAccountInvites function.
+ * This lists invites for the authenticated user across all accounts.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest
+ */
+export declare type ListReceivedAccountInvitesRequest = Message<"qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest"> & {
+  /**
+   * Optional: Filter invites by status (e.g. pending only).
+   *
+   * @generated from field: optional qdrant.cloud.account.v1.AccountInviteStatus status_filter = 1;
+   */
+  statusFilter?: AccountInviteStatus;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest.
+ * Use `create(ListReceivedAccountInvitesRequestSchema)` to create a new message.
+ */
+export declare const ListReceivedAccountInvitesRequestSchema: GenMessage<ListReceivedAccountInvitesRequest>;
+
+/**
+ * ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse
+ */
+export declare type ListReceivedAccountInvitesResponse = Message<"qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse"> & {
+  /**
+   * The list of account invites for the authenticated user.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.AccountInvite items = 1;
+   */
+  items: AccountInvite[];
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse.
+ * Use `create(ListReceivedAccountInvitesResponseSchema)` to create a new message.
+ */
+export declare const ListReceivedAccountInvitesResponseSchema: GenMessage<ListReceivedAccountInvitesResponse>;
+
+/**
+ * GetAccountInviteRequest is the request for the GetAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountInviteRequest
+ */
+export declare type GetAccountInviteRequest = Message<"qdrant.cloud.account.v1.GetAccountInviteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the invite belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the invite (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string invite_id = 2;
+   */
+  inviteId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountInviteRequest.
+ * Use `create(GetAccountInviteRequestSchema)` to create a new message.
+ */
+export declare const GetAccountInviteRequestSchema: GenMessage<GetAccountInviteRequest>;
+
+/**
+ * GetAccountInviteResponse is the response from the GetAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountInviteResponse
+ */
+export declare type GetAccountInviteResponse = Message<"qdrant.cloud.account.v1.GetAccountInviteResponse"> & {
+  /**
+   * The account invite.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
+   */
+  accountInvite?: AccountInvite;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountInviteResponse.
+ * Use `create(GetAccountInviteResponseSchema)` to create a new message.
+ */
+export declare const GetAccountInviteResponseSchema: GenMessage<GetAccountInviteResponse>;
+
+/**
+ * CreateAccountInviteRequest is the request for the CreateAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.CreateAccountInviteRequest
+ */
+export declare type CreateAccountInviteRequest = Message<"qdrant.cloud.account.v1.CreateAccountInviteRequest"> & {
+  /**
+   * The details of the invite to create.
+   * This is a required field.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
+   */
+  accountInvite?: AccountInvite;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.CreateAccountInviteRequest.
+ * Use `create(CreateAccountInviteRequestSchema)` to create a new message.
+ */
+export declare const CreateAccountInviteRequestSchema: GenMessage<CreateAccountInviteRequest>;
+
+/**
+ * CreateAccountInviteResponse is the response from the CreateAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.CreateAccountInviteResponse
+ */
+export declare type CreateAccountInviteResponse = Message<"qdrant.cloud.account.v1.CreateAccountInviteResponse"> & {
+  /**
+   * The created account invite.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
+   */
+  accountInvite?: AccountInvite;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.CreateAccountInviteResponse.
+ * Use `create(CreateAccountInviteResponseSchema)` to create a new message.
+ */
+export declare const CreateAccountInviteResponseSchema: GenMessage<CreateAccountInviteResponse>;
+
+/**
+ * DeleteAccountInviteRequest is the request for the DeleteAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.DeleteAccountInviteRequest
+ */
+export declare type DeleteAccountInviteRequest = Message<"qdrant.cloud.account.v1.DeleteAccountInviteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the invite belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the invite (in GUID format) to delete.
+   * This is a required field.
+   *
+   * @generated from field: string invite_id = 2;
+   */
+  inviteId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.DeleteAccountInviteRequest.
+ * Use `create(DeleteAccountInviteRequestSchema)` to create a new message.
+ */
+export declare const DeleteAccountInviteRequestSchema: GenMessage<DeleteAccountInviteRequest>;
+
+/**
+ * DeleteAccountInviteResponse is the response from the DeleteAccountInvite function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.account.v1.DeleteAccountInviteResponse
+ */
+export declare type DeleteAccountInviteResponse = Message<"qdrant.cloud.account.v1.DeleteAccountInviteResponse"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.DeleteAccountInviteResponse.
+ * Use `create(DeleteAccountInviteResponseSchema)` to create a new message.
+ */
+export declare const DeleteAccountInviteResponseSchema: GenMessage<DeleteAccountInviteResponse>;
+
+/**
+ * AcceptAccountInviteRequest is the request for the AcceptAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.AcceptAccountInviteRequest
+ */
+export declare type AcceptAccountInviteRequest = Message<"qdrant.cloud.account.v1.AcceptAccountInviteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the invite is for.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the invite (in GUID format) to accept.
+   * This is a required field.
+   *
+   * @generated from field: string invite_id = 2;
+   */
+  inviteId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AcceptAccountInviteRequest.
+ * Use `create(AcceptAccountInviteRequestSchema)` to create a new message.
+ */
+export declare const AcceptAccountInviteRequestSchema: GenMessage<AcceptAccountInviteRequest>;
+
+/**
+ * AcceptAccountInviteResponse is the response from the AcceptAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.AcceptAccountInviteResponse
+ */
+export declare type AcceptAccountInviteResponse = Message<"qdrant.cloud.account.v1.AcceptAccountInviteResponse"> & {
+  /**
+   * The invite that was accepted, with its status updated.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite invite = 1;
+   */
+  invite?: AccountInvite;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AcceptAccountInviteResponse.
+ * Use `create(AcceptAccountInviteResponseSchema)` to create a new message.
+ */
+export declare const AcceptAccountInviteResponseSchema: GenMessage<AcceptAccountInviteResponse>;
+
+/**
+ * RejectAccountInviteRequest is the request for the RejectAccountInvite function.
+ * Note: This RPC, despite its name, is used to reject an *Account Invite*.
+ *
+ * @generated from message qdrant.cloud.account.v1.RejectAccountInviteRequest
+ */
+export declare type RejectAccountInviteRequest = Message<"qdrant.cloud.account.v1.RejectAccountInviteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the invite is for.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the invite (in GUID format) to reject.
+   * This is a required field.
+   *
+   * @generated from field: string invite_id = 2;
+   */
+  inviteId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.RejectAccountInviteRequest.
+ * Use `create(RejectAccountInviteRequestSchema)` to create a new message.
+ */
+export declare const RejectAccountInviteRequestSchema: GenMessage<RejectAccountInviteRequest>;
+
+/**
+ * RejectAccountInviteResponse is the response from the RejectAccountInvite function.
+ *
+ * @generated from message qdrant.cloud.account.v1.RejectAccountInviteResponse
+ */
+export declare type RejectAccountInviteResponse = Message<"qdrant.cloud.account.v1.RejectAccountInviteResponse"> & {
+  /**
+   * The invite that was rejected, with its status updated.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite invite = 1;
+   */
+  invite?: AccountInvite;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.RejectAccountInviteResponse.
+ * Use `create(RejectAccountInviteResponseSchema)` to create a new message.
+ */
+export declare const RejectAccountInviteResponseSchema: GenMessage<RejectAccountInviteResponse>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -275,6 +591,156 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 export declare const AccountSchema: GenMessage<Account>;
 
 /**
+ * An AccountInvite represents an invitation for a user to join an account.
+ *
+ * @generated from message qdrant.cloud.account.v1.AccountInvite
+ */
+export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvite"> & {
+  /**
+   * Unique identifier for the invite (in GUID format).
+   * This is a read-only field, generated by the server.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the account this invite is for (in GUID format).
+   * This field is required when creating an invite.
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * Human readable name of the account that the human is invited to join.
+   * This is a read-only value.
+   *
+   * @generated from field: string account_name = 3;
+   */
+  accountName: string;
+
+  /**
+   * The email address of the user being invited.
+   * This field is required when creating an invite.
+   *
+   * @generated from field: string user_email = 4;
+   */
+  userEmail: string;
+
+  /**
+   * The identifiers of the roles to be assigned to the user upon accepting the invite.
+   * This field is required when creating an invite, and the list must not be empty.
+   * Each string in the list must be a valid UUID, to be resolved in the provided account.
+   * Please use IAMService.ListRoles to get the possible roles to assign.
+   *
+   * @generated from field: repeated string user_role_ids = 5;
+   */
+  userRoleIds: string[];
+
+  /**
+   * The timestamp when the invite was created.
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 6;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * The identifier of the user who created the invite (in GUID format).
+   * This is a read-only field, populated by the server based on the authenticated user.
+   *
+   * @generated from field: optional string created_by_user_id = 7;
+   */
+  createdByUserId?: string;
+
+  /**
+   * Name of the user that created this invite.
+   * This is a read-only value, populated by the server based on the created_by_user_id field.
+   *
+   * @generated from field: optional string created_by_name = 8;
+   */
+  createdByName?: string;
+
+  /**
+   * The timestamp when the invite was last updated (e.g., status change).
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 9;
+   */
+  lastModifiedAt?: Timestamp;
+
+  /**
+   * Identifier of the user that accepted or rejected this invite.
+   * This is a read-only value.
+   *
+   * @generated from field: optional string user_id = 10;
+   */
+  userId?: string;
+
+  /**
+   * The status of the invite.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountInviteStatus status = 11;
+   */
+  status: AccountInviteStatus;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AccountInvite.
+ * Use `create(AccountInviteSchema)` to create a new message.
+ */
+export declare const AccountInviteSchema: GenMessage<AccountInvite>;
+
+/**
+ * AccountInviteStatus defines the possible statuses of an account invitation.
+ *
+ * @generated from enum qdrant.cloud.account.v1.AccountInviteStatus
+ */
+export enum AccountInviteStatus {
+  /**
+   * Default, unspecified status.
+   *
+   * @generated from enum value: ACCOUNT_INVITE_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The invite is pending and waiting for the user to accept or reject.
+   *
+   * @generated from enum value: ACCOUNT_INVITE_STATUS_PENDING = 1;
+   */
+  PENDING = 1,
+
+  /**
+   * The invite has been accepted by the user.
+   *
+   * @generated from enum value: ACCOUNT_INVITE_STATUS_ACCEPTED = 2;
+   */
+  ACCEPTED = 2,
+
+  /**
+   * The invite has been rejected by the user.
+   *
+   * @generated from enum value: ACCOUNT_INVITE_STATUS_REJECTED = 3;
+   */
+  REJECTED = 3,
+
+  /**
+   * The invite has been canceled (e.g., by an account admin).
+   *
+   * @generated from enum value: ACCOUNT_INVITE_STATUS_CANCELED = 5;
+   */
+  CANCELED = 5,
+}
+
+/**
+ * Describes the enum qdrant.cloud.account.v1.AccountInviteStatus.
+ */
+export declare const AccountInviteStatusSchema: GenEnum<AccountInviteStatus>;
+
+/**
  * AccountService is the API used to configure Accounts.
  *
  * @generated from service qdrant.cloud.account.v1.AccountService
@@ -339,6 +805,95 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountRequestSchema;
     output: typeof DeleteAccountResponseSchema;
+  },
+  /**
+   * Fetch all account invites in the account identified by the given account ID.
+   * Required permissions:
+   * - read:invites
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccountInvites
+   */
+  listAccountInvites: {
+    methodKind: "unary";
+    input: typeof ListAccountInvitesRequestSchema;
+    output: typeof ListAccountInvitesResponseSchema;
+  },
+  /**
+   * Fetch all account invites for the authenticated user (across all accounts).
+   * These are the invites you are invited to join, not the ones you have sent.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites
+   */
+  listReceivedAccountInvites: {
+    methodKind: "unary";
+    input: typeof ListReceivedAccountInvitesRequestSchema;
+    output: typeof ListReceivedAccountInvitesResponseSchema;
+  },
+  /**
+   * Fetch an account invite identified by the given account ID and invite ID.
+   * Required permissions:
+   * - read:invites
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountInvite
+   */
+  getAccountInvite: {
+    methodKind: "unary";
+    input: typeof GetAccountInviteRequestSchema;
+    output: typeof GetAccountInviteResponseSchema;
+  },
+  /**
+   * Create a new account invite.
+   * Required permissions:
+   * - write:invites
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.CreateAccountInvite
+   */
+  createAccountInvite: {
+    methodKind: "unary";
+    input: typeof CreateAccountInviteRequestSchema;
+    output: typeof CreateAccountInviteResponseSchema;
+  },
+  /**
+   * Delete an account invite
+   * Required permissions:
+   * - delete:invites
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.DeleteAccountInvite
+   */
+  deleteAccountInvite: {
+    methodKind: "unary";
+    input: typeof DeleteAccountInviteRequestSchema;
+    output: typeof DeleteAccountInviteResponseSchema;
+  },
+  /**
+   * Accept an account invite
+   * The authenticated user's email address must match the email address specified in
+   * the invite.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.AcceptAccountInvite
+   */
+  acceptAccountInvite: {
+    methodKind: "unary";
+    input: typeof AcceptAccountInviteRequestSchema;
+    output: typeof AcceptAccountInviteResponseSchema;
+  },
+  /**
+   * Reject an account invite
+   * The authenticated user's email address must match the email address specified in
+   * the invite.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.RejectAccountInvite
+   */
+  rejectAccountInvite: {
+    methodKind: "unary";
+    input: typeof RejectAccountInviteRequestSchema;
+    output: typeof RejectAccountInviteResponseSchema;
   },
 }>;
 
