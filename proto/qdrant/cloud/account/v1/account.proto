@@ -94,8 +94,6 @@ service AccountService {
   rpc GetAccountInvite(GetAccountInviteRequest) returns (GetAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "read:invites";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "account_id"; // TODO: Remove?
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
   }
