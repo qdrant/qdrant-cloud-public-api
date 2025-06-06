@@ -22,6 +22,25 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 
 Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey <YOUR_MANAGEMENT_KEY>`).
 
+## Available Services
+
+The Qdrant Cloud API is organized into several gRPC services, each responsible for a specific domain of functionality. Below is a list of the primary services available:
+
+| Service Name            | Description   |
+|-------------------------|---------------|
+| [`AccountService`](/proto//qdrant/cloud/account/v1/account.proto) | Manages user accounts and their configurations. |
+| [`AuthService`](/proto//qdrant/cloud/auth/v1/auth.proto) | Handles authentication and authorization for accessing cloud resources. |
+| [`BackupService`](/proto//qdrant/cloud/cluster/backup/v1/backup.proto) | Manages backup and restore operations for Qdrant clusters. |
+| [`BookingService`](/proto//qdrant/cloud/booking/v1/booking.proto) | Service for price listings-related information (called packages). |
+| [`ClusterService`](/proto/qdrant/cloud/cluster/v1/cluster.proto) | Provides operations for creating, configuring, and managing Qdrant clusters. |
+| [`DatabaseApiKeyService v1`](/proto/qdrant/cloud/cluster/auth/v1/database_api_key.proto) | Deprecated: Manages API keys for accessing data within Qdrant clusters. |
+| [`DatabaseApiKeyService v2`](/proto/qdrant/cloud/cluster/auth/v2/database_api_key.proto) | Manages API keys for accessing data within Qdrant clusters. |
+| [`MonitoringService`](proto/qdrant/cloud/monitoring/v1/monitoring.proto) | Provides access to monitoring data such as cluster metrics, logs, and events. |
+| [`PlatformService`](/proto//qdrant/cloud/platform/v1/platform.proto) | Service to query for cloud provider & regional information. |
+
+*Note: The `Service Name` links point to the respective Protocol Buffer file where that service is formally defined.
+You can explore these files for detailed information on methods, request/response messages, and field validations.*
+
 ## Interacting with the API
 
 You can interact with the Qdrant Cloud API directly using tools like `grpcurl` (for gRPC) and `curl` (for REST/JSON), or by using the provided client libraries.
