@@ -323,12 +323,12 @@
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}/reject": {
       "post": {
         "summary": "Reject an account invite\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "AccountService_RejectOrganizationInvite",
+        "operationId": "AccountService_RejectAccountInvite",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RejectOrganizationInviteResponse"
+              "$ref": "#/definitions/v1RejectAccountInviteResponse"
             }
           },
           "default": {
@@ -797,7 +797,7 @@
       },
       "description": "ListMyAccountInvitesResponse is the response from the ListMyAccountInvites function."
     },
-    "v1RejectOrganizationInviteResponse": {
+    "v1RejectAccountInviteResponse": {
       "type": "object",
       "properties": {
         "invite": {
@@ -805,7 +805,7 @@
           "description": "The invite that was rejected, with its status updated."
         }
       },
-      "description": "RejectOrganizationInviteResponse is the response from the RejectOrganizationInvite function."
+      "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

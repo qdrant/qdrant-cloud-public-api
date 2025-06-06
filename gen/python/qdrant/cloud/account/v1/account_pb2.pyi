@@ -157,7 +157,7 @@ class AcceptAccountInviteResponse(_message.Message):
     invite: AccountInvite
     def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
-class RejectOrganizationInviteRequest(_message.Message):
+class RejectAccountInviteRequest(_message.Message):
     __slots__ = ("account_id", "invite_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     INVITE_ID_FIELD_NUMBER: _ClassVar[int]
@@ -165,7 +165,7 @@ class RejectOrganizationInviteRequest(_message.Message):
     invite_id: str
     def __init__(self, account_id: _Optional[str] = ..., invite_id: _Optional[str] = ...) -> None: ...
 
-class RejectOrganizationInviteResponse(_message.Message):
+class RejectAccountInviteResponse(_message.Message):
     __slots__ = ("invite",)
     INVITE_FIELD_NUMBER: _ClassVar[int]
     invite: AccountInvite

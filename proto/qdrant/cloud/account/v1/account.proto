@@ -138,7 +138,7 @@ service AccountService {
   // the invite.
   // Required permissions:
   // - None (authenticated only)
-  rpc RejectOrganizationInvite(RejectOrganizationInviteRequest) returns (RejectOrganizationInviteResponse) {
+  rpc RejectAccountInvite(RejectAccountInviteRequest) returns (RejectAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
@@ -294,9 +294,9 @@ message AcceptAccountInviteResponse {
   AccountInvite invite = 1;
 }
 
-// RejectOrganizationInviteRequest is the request for the RejectOrganizationInvite function.
+// RejectAccountInviteRequest is the request for the RejectAccountInvite function.
 // Note: This RPC, despite its name, is used to reject an *Account Invite*.
-message RejectOrganizationInviteRequest {
+message RejectAccountInviteRequest {
   // The identifier of the account (in GUID format) the invite is for.
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
@@ -305,8 +305,8 @@ message RejectOrganizationInviteRequest {
   string invite_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// RejectOrganizationInviteResponse is the response from the RejectOrganizationInvite function.
-message RejectOrganizationInviteResponse {
+// RejectAccountInviteResponse is the response from the RejectAccountInvite function.
+message RejectAccountInviteResponse {
   // The invite that was rejected, with its status updated.
   AccountInvite invite = 1;
 }

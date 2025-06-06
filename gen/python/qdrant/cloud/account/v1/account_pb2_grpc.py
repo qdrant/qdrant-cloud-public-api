@@ -70,10 +70,10 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteResponse.FromString,
                 _registered_method=True)
-        self.RejectOrganizationInvite = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
+        self.RejectAccountInvite = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/RejectAccountInvite',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.FromString,
                 _registered_method=True)
 
 
@@ -186,7 +186,7 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RejectOrganizationInvite(self, request, context):
+    def RejectAccountInvite(self, request, context):
         """Reject an account invite
         The authenticated user's email address must match the email address specified in
         the invite.
@@ -255,10 +255,10 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.AcceptAccountInviteResponse.SerializeToString,
             ),
-            'RejectOrganizationInvite': grpc.unary_unary_rpc_method_handler(
-                    servicer.RejectOrganizationInvite,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.SerializeToString,
+            'RejectAccountInvite': grpc.unary_unary_rpc_method_handler(
+                    servicer.RejectAccountInvite,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -570,7 +570,7 @@ class AccountService(object):
             _registered_method=True)
 
     @staticmethod
-    def RejectOrganizationInvite(request,
+    def RejectAccountInvite(request,
             target,
             options=(),
             channel_credentials=None,
@@ -583,9 +583,9 @@ class AccountService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.account.v1.AccountService/RejectOrganizationInvite',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectOrganizationInviteResponse.FromString,
+            '/qdrant.cloud.account.v1.AccountService/RejectAccountInvite',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.RejectAccountInviteResponse.FromString,
             options,
             channel_credentials,
             insecure,

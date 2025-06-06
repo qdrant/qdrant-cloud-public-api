@@ -472,12 +472,12 @@ export declare type AcceptAccountInviteResponse = Message<"qdrant.cloud.account.
 export declare const AcceptAccountInviteResponseSchema: GenMessage<AcceptAccountInviteResponse>;
 
 /**
- * RejectOrganizationInviteRequest is the request for the RejectOrganizationInvite function.
+ * RejectAccountInviteRequest is the request for the RejectAccountInvite function.
  * Note: This RPC, despite its name, is used to reject an *Account Invite*.
  *
- * @generated from message qdrant.cloud.account.v1.RejectOrganizationInviteRequest
+ * @generated from message qdrant.cloud.account.v1.RejectAccountInviteRequest
  */
-export declare type RejectOrganizationInviteRequest = Message<"qdrant.cloud.account.v1.RejectOrganizationInviteRequest"> & {
+export declare type RejectAccountInviteRequest = Message<"qdrant.cloud.account.v1.RejectAccountInviteRequest"> & {
   /**
    * The identifier of the account (in GUID format) the invite is for.
    * This is a required field.
@@ -496,17 +496,17 @@ export declare type RejectOrganizationInviteRequest = Message<"qdrant.cloud.acco
 };
 
 /**
- * Describes the message qdrant.cloud.account.v1.RejectOrganizationInviteRequest.
- * Use `create(RejectOrganizationInviteRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.RejectAccountInviteRequest.
+ * Use `create(RejectAccountInviteRequestSchema)` to create a new message.
  */
-export declare const RejectOrganizationInviteRequestSchema: GenMessage<RejectOrganizationInviteRequest>;
+export declare const RejectAccountInviteRequestSchema: GenMessage<RejectAccountInviteRequest>;
 
 /**
- * RejectOrganizationInviteResponse is the response from the RejectOrganizationInvite function.
+ * RejectAccountInviteResponse is the response from the RejectAccountInvite function.
  *
- * @generated from message qdrant.cloud.account.v1.RejectOrganizationInviteResponse
+ * @generated from message qdrant.cloud.account.v1.RejectAccountInviteResponse
  */
-export declare type RejectOrganizationInviteResponse = Message<"qdrant.cloud.account.v1.RejectOrganizationInviteResponse"> & {
+export declare type RejectAccountInviteResponse = Message<"qdrant.cloud.account.v1.RejectAccountInviteResponse"> & {
   /**
    * The invite that was rejected, with its status updated.
    *
@@ -516,10 +516,10 @@ export declare type RejectOrganizationInviteResponse = Message<"qdrant.cloud.acc
 };
 
 /**
- * Describes the message qdrant.cloud.account.v1.RejectOrganizationInviteResponse.
- * Use `create(RejectOrganizationInviteResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.RejectAccountInviteResponse.
+ * Use `create(RejectAccountInviteResponseSchema)` to create a new message.
  */
-export declare const RejectOrganizationInviteResponseSchema: GenMessage<RejectOrganizationInviteResponse>;
+export declare const RejectAccountInviteResponseSchema: GenMessage<RejectAccountInviteResponse>;
 
 /**
  * An Account represents an account in the Qdrant cloud.
@@ -911,12 +911,12 @@ export declare const AccountService: GenService<{
    * Required permissions:
    * - None (authenticated only)
    *
-   * @generated from rpc qdrant.cloud.account.v1.AccountService.RejectOrganizationInvite
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.RejectAccountInvite
    */
-  rejectOrganizationInvite: {
+  rejectAccountInvite: {
     methodKind: "unary";
-    input: typeof RejectOrganizationInviteRequestSchema;
-    output: typeof RejectOrganizationInviteResponseSchema;
+    input: typeof RejectAccountInviteRequestSchema;
+    output: typeof RejectAccountInviteResponseSchema;
   },
 }>;
 
