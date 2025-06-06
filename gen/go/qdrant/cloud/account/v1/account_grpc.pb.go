@@ -63,11 +63,12 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(ctx context.Context, in *ListAccountInvitesRequest, opts ...grpc.CallOption) (*ListAccountInvitesResponse, error)
-	// Fetch all account invites for the authenticated user.
+	// Fetch all account invites for the authenticated user (across all accounts).
+	// These are the invites you are invited to join, not the ones you have sent.
 	// Required permissions:
 	// - None (authenticated only)
 	ListMyAccountInvites(ctx context.Context, in *ListMyAccountInvitesRequest, opts ...grpc.CallOption) (*ListMyAccountInvitesResponse, error)
-	// Fetch an account invite by its id.
+	// Fetch an account invite identified by the given account ID and invite ID.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(ctx context.Context, in *GetAccountInviteRequest, opts ...grpc.CallOption) (*GetAccountInviteResponse, error)
@@ -251,11 +252,12 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error)
-	// Fetch all account invites for the authenticated user.
+	// Fetch all account invites for the authenticated user (across all accounts).
+	// These are the invites you are invited to join, not the ones you have sent.
 	// Required permissions:
 	// - None (authenticated only)
 	ListMyAccountInvites(context.Context, *ListMyAccountInvitesRequest) (*ListMyAccountInvitesResponse, error)
-	// Fetch an account invite by its id.
+	// Fetch an account invite identified by the given account ID and invite ID.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(context.Context, *GetAccountInviteRequest) (*GetAccountInviteResponse, error)

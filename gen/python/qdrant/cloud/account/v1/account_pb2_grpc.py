@@ -136,16 +136,18 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListMyAccountInvites(self, request, context):
-        """Fetch all account invites for the authenticated user.
+        """Fetch all account invites for the authenticated user (across all accounts).
+        These are the invites you are invited to join, not the ones you have sent.
         Required permissions:
         - None (authenticated only)
+        TODO: Rename to ListReceivedAccountInvites ?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAccountInvite(self, request, context):
-        """Fetch an account invite by its id.
+        """Fetch an account invite identified by the given account ID and invite ID.
         Required permissions:
         - read:invites
         """

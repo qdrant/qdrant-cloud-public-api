@@ -323,11 +323,11 @@ export declare const GetAccountInviteRequestSchema: GenMessage<GetAccountInviteR
  */
 export declare type GetAccountInviteResponse = Message<"qdrant.cloud.account.v1.GetAccountInviteResponse"> & {
   /**
-   * The retrieved account invite.
+   * The account invite.
    *
-   * @generated from field: qdrant.cloud.account.v1.AccountInvite invite = 1;
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
    */
-  invite?: AccountInvite;
+  accountInvite?: AccountInvite;
 };
 
 /**
@@ -346,9 +346,9 @@ export declare type CreateAccountInviteRequest = Message<"qdrant.cloud.account.v
    * The details of the invite to create.
    * This is a required field.
    *
-   * @generated from field: qdrant.cloud.account.v1.AccountInvite invite = 1;
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
    */
-  invite?: AccountInvite;
+  accountInvite?: AccountInvite;
 };
 
 /**
@@ -366,9 +366,9 @@ export declare type CreateAccountInviteResponse = Message<"qdrant.cloud.account.
   /**
    * The created account invite.
    *
-   * @generated from field: qdrant.cloud.account.v1.AccountInvite invite = 1;
+   * @generated from field: qdrant.cloud.account.v1.AccountInvite account_invite = 1;
    */
-  invite?: AccountInvite;
+  accountInvite?: AccountInvite;
 };
 
 /**
@@ -624,18 +624,19 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
    * The email address of the user being invited.
    * This field is required when creating an invite.
    *
-   * @generated from field: string email = 4;
+   * @generated from field: string user_email = 4;
    */
-  email: string;
+  userEmail: string;
 
   /**
    * The identifiers of the roles to be assigned to the user upon accepting the invite.
    * This field is required when creating an invite, and the list must not be empty.
    * Each string in the list must be a valid UUID, to be resolved in the provided account.
+   * Please use IAMService.ListRoles to get the possible roles to assign.
    *
-   * @generated from field: repeated string role_ids = 5;
+   * @generated from field: repeated string user_role_ids = 5;
    */
-  roleIds: string[];
+  userRoleIds: string[];
 
   /**
    * The timestamp when the invite was created.
@@ -649,35 +650,23 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
    * The identifier of the user who created the invite (in GUID format).
    * This is a read-only field, populated by the server based on the authenticated user.
    *
-   * TODO: Optional (for system generated invites)?
-   *
-   * @generated from field: string created_by_user_id = 7;
+   * @generated from field: optional string created_by_user_id = 7;
    */
-  createdByUserId: string;
+  createdByUserId?: string;
 
   /**
    * Name of the user that created this invite.
    * This is a read-only value, populated by the server based on the created_by_user_id field.
    *
-   * @generated from field: string created_by_name = 8;
+   * @generated from field: optional string created_by_name = 8;
    */
-  createdByName: string;
-
-  /**
-   * The timestamp when the invite expires. If not set, the invite may use a default expiration period or not expire.
-   * This is a read-only field, potentially set at creation or managed by the server.
-   *
-   * TODO: Do we want to add this?
-   *
-   * @generated from field: google.protobuf.Timestamp expires_at = 9;
-   */
-  expiresAt?: Timestamp;
+  createdByName?: string;
 
   /**
    * The timestamp when the invite was last updated (e.g., status change).
    * This is a read-only field.
    *
-   * @generated from field: google.protobuf.Timestamp last_modified_at = 10;
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 9;
    */
   lastModifiedAt?: Timestamp;
 
@@ -685,7 +674,7 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
    * Identifier of the user that accepted or rejected this invite.
    * This is a read-only value.
    *
-   * @generated from field: optional string user_id = 11;
+   * @generated from field: optional string user_id = 10;
    */
   userId?: string;
 
@@ -693,7 +682,7 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
    * The status of the invite.
    * This is a read-only field.
    *
-   * @generated from field: qdrant.cloud.account.v1.AccountInviteStatus status = 12;
+   * @generated from field: qdrant.cloud.account.v1.AccountInviteStatus status = 11;
    */
   status: AccountInviteStatus;
 };
@@ -737,15 +726,6 @@ export enum AccountInviteStatus {
    * @generated from enum value: ACCOUNT_INVITE_STATUS_REJECTED = 3;
    */
   REJECTED = 3,
-
-  /**
-   * The invite has expired.
-   *
-   * TODO: Do we want to add this?
-   *
-   * @generated from enum value: ACCOUNT_INVITE_STATUS_EXPIRED = 4;
-   */
-  EXPIRED = 4,
 
   /**
    * The invite has been canceled (e.g., by an account admin).
@@ -839,9 +819,12 @@ export declare const AccountService: GenService<{
     output: typeof ListAccountInvitesResponseSchema;
   },
   /**
-   * Fetch all account invites for the authenticated user.
+   * Fetch all account invites for the authenticated user (across all accounts).
+   * These are the invites you are invited to join, not the ones you have sent.
    * Required permissions:
    * - None (authenticated only)
+   *
+   * TODO: Rename to ListReceivedAccountInvites ?
    *
    * @generated from rpc qdrant.cloud.account.v1.AccountService.ListMyAccountInvites
    */
@@ -851,7 +834,7 @@ export declare const AccountService: GenService<{
     output: typeof ListMyAccountInvitesResponseSchema;
   },
   /**
-   * Fetch an account invite by its id.
+   * Fetch an account invite identified by the given account ID and invite ID.
    * Required permissions:
    * - read:invites
    *
