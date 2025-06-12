@@ -155,20 +155,22 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "email", "name", "status")
+    __slots__ = ("id", "created_at", "last_modified_at", "email", "name", "status", "default_account_id")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    DEFAULT_ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     email: str
     name: str
     status: UserStatus
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ...) -> None: ...
+    default_account_id: str
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ...) -> None: ...
 
 class Role(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions")

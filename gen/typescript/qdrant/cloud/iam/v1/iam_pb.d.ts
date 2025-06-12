@@ -494,14 +494,17 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * The status of the user.
    * This is a read-only field.
    *
-   * TODO: Discuss
-   * - Accounts?
-   * - Roles?
-   * - default_account_id? [isn't this a preference in a browser?]
-   *
    * @generated from field: qdrant.cloud.iam.v1.UserStatus status = 6;
    */
   status: UserStatus;
+
+  /**
+   * The default account ID of the user (in GUID format).
+   * You should be member of the account when updating.
+   *
+   * @generated from field: string default_account_id = 7;
+   */
+  defaultAccountId: string;
 };
 
 /**
@@ -586,7 +589,7 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 export declare const RoleSchema: GenMessage<Role>;
 
 /**
- * UserStatus defines the possible statuses of a user account.
+ * UserStatus defines the possible statuses of a user.
  *
  * @generated from enum qdrant.cloud.iam.v1.UserStatus
  */

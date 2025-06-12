@@ -253,11 +253,9 @@ class AccountInvite(_message.Message):
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., user_email: _Optional[str] = ..., user_role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_name: _Optional[str] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., user_id: _Optional[str] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
 
 class AccountMember(_message.Message):
-    __slots__ = ("user", "is_owner", "joined_at")
-    USER_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("account_member", "is_owner")
+    ACCOUNT_MEMBER_FIELD_NUMBER: _ClassVar[int]
     IS_OWNER_FIELD_NUMBER: _ClassVar[int]
-    JOINED_AT_FIELD_NUMBER: _ClassVar[int]
-    user: _iam_pb2.User
+    account_member: _iam_pb2.User
     is_owner: bool
-    joined_at: _timestamp_pb2.Timestamp
-    def __init__(self, user: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., is_owner: bool = ..., joined_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_member: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., is_owner: bool = ...) -> None: ...

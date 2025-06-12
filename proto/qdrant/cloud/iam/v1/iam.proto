@@ -273,7 +273,7 @@ message AssignUserRolesResponse {
 message User {
   // Unique identifier for the user (in GUID format).
   // This is a read-only field and will be available after the user is created.
-  string id = 1;
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
   // The timestamp when the user was created.
   // This is a read-only field and will be available after the user is created.
   google.protobuf.Timestamp created_at = 2;
@@ -290,13 +290,12 @@ message User {
   // The status of the user.
   // This is a read-only field.
   UserStatus status = 6;
-  // TODO: Discuss
-  // - Accounts?
-  // - Roles?
-  // - default_account_id? [isn't this a preference in a browser?]
+  // The default account ID of the user (in GUID format).
+  // You should be member of the account when updating.
+  string default_account_id = 7 [(buf.validate.field).string = {uuid: true}];
 }
 
-// UserStatus defines the possible statuses of a user account.
+// UserStatus defines the possible statuses of a user.
 enum UserStatus {
   // Default, unspecified status.
   USER_STATUS_UNSPECIFIED = 0;

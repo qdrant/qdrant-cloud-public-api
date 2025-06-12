@@ -521,7 +521,11 @@
             },
             "status": {
               "$ref": "#/definitions/v1UserStatus",
-              "description": "The status of the user.\nThis is a read-only field.\n\nTODO: Discuss\n - Accounts?\n - Roles?\n - default_account_id? [isn't this a preference in a browser?]"
+              "description": "The status of the user.\nThis is a read-only field."
+            },
+            "defaultAccountId": {
+              "type": "string",
+              "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
             }
           },
           "description": "The actual user.",
@@ -738,7 +742,11 @@
         },
         "status": {
           "$ref": "#/definitions/v1UserStatus",
-          "description": "The status of the user.\nThis is a read-only field.\n\nTODO: Discuss\n - Accounts?\n - Roles?\n - default_account_id? [isn't this a preference in a browser?]"
+          "description": "The status of the user.\nThis is a read-only field."
+        },
+        "defaultAccountId": {
+          "type": "string",
+          "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
         }
       },
       "title": "A User represents a user in the Qdrant cloud.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
@@ -752,7 +760,7 @@
         "USER_STATUS_DELETED"
       ],
       "default": "USER_STATUS_UNSPECIFIED",
-      "description": "UserStatus defines the possible statuses of a user account.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted."
+      "description": "UserStatus defines the possible statuses of a user.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted."
     }
   }
 }

@@ -630,7 +630,7 @@ export declare type DeleteAccountMemberRequest = Message<"qdrant.cloud.account.v
    * The identifier of the user (in GUID format) to delete.
    * It is allowed to delete the authenticated user (aka leave account), however only if at least one other user remains in the account.
    * If you are the owner of the account a random other user will be automatically assigned as owner.
-   * It is recommended to transfer ownership of the account before leaving. // TODO: how?
+   * It is recommended to transfer ownership of the account before leaving.
    * This is a required field.
    *
    * @generated from field: string user_id = 2;
@@ -700,7 +700,7 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 
   /**
    * The Identifier of the owner of the account (in GUID format).
-   * This is a read-only field.
+   * The owner must be a member of the account when updating.
    *
    * @generated from field: string owner_id = 6;
    */
@@ -842,9 +842,9 @@ export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMemb
    * The user associated with this membership record.
    * This is a read-only field.
    *
-   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   * @generated from field: qdrant.cloud.iam.v1.User account_member = 1;
    */
-  user?: User;
+  accountMember?: User;
 
   /**
    * Wether or not this user is the owner of the account.
@@ -853,16 +853,6 @@ export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMemb
    * @generated from field: bool is_owner = 2;
    */
   isOwner: boolean;
-
-  /**
-   * The timestamp when the user joined the account or when this membership record was created.
-   * This is a read-only field.
-   *
-   * TODO: Is this data available?
-   *
-   * @generated from field: google.protobuf.Timestamp joined_at = 3;
-   */
-  joinedAt?: Timestamp;
 };
 
 /**
