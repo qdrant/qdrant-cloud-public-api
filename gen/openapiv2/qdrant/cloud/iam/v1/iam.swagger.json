@@ -345,6 +345,77 @@
         ]
       }
     },
+    "/api/iam/v1/users/me/consent": {
+      "get": {
+        "summary": "Fetches the authenticated user's consent status for a specific legal document.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_GetUserConsent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserConsentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentType",
+            "description": "The type of the legal document.\nThis is a required field and cannot be UNSPECIFIED.\n\n - LEGAL_DOCUMENT_TYPE_UNSPECIFIED: Unspecified document type.\n - LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: Terms of Service document.\n - LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: Privacy Policy document.\n - LEGAL_DOCUMENT_TYPE_SLA: Service Level Agreement document.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "LEGAL_DOCUMENT_TYPE_UNSPECIFIED",
+              "LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE",
+              "LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY",
+              "LEGAL_DOCUMENT_TYPE_SLA"
+            ],
+            "default": "LEGAL_DOCUMENT_TYPE_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      },
+      "post": {
+        "summary": "Records the authenticated user's consent for a legal document.\nRequired permissions:\n- write:user",
+        "operationId": "IAMService_RecordUserConsent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecordUserConsentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "RecordUserConsentRequest is the request for the RecordUserConsent function.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RecordUserConsentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/users/{user.id}": {
       "put": {
         "summary": "Update the user identified by the given ID.\nRequired permissions:\n- write:user",
@@ -601,6 +672,40 @@
       },
       "title": "GetRoleResponse is the response from the GetRole function"
     },
+    "v1GetUserConsentResponse": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "$ref": "#/definitions/v1LegalDocumentType",
+          "description": "The type of the legal document for which consent status is reported."
+        },
+        "action": {
+          "$ref": "#/definitions/v1UserConsentAction",
+          "description": "The latest action taken by the user for this document type.\nWill be USER_CONSENT_ACTION_UNSPECIFIED if no action has been recorded."
+        },
+        "actionAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when this action was recorded.\nUnset if no action has been recorded."
+        },
+        "isAccepted": {
+          "type": "boolean",
+          "description": "A convenience field indicating if the current status is an acceptance.\nTrue if action is USER_CONSENT_ACTION_ACCEPT, false otherwise."
+        }
+      },
+      "description": "GetUserConsentResponse is the response from the GetUserConsent function."
+    },
+    "v1LegalDocumentType": {
+      "type": "string",
+      "enum": [
+        "LEGAL_DOCUMENT_TYPE_UNSPECIFIED",
+        "LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE",
+        "LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY",
+        "LEGAL_DOCUMENT_TYPE_SLA"
+      ],
+      "default": "LEGAL_DOCUMENT_TYPE_UNSPECIFIED",
+      "description": "LegalDocumentType specifies the type of a legal document.\n\n - LEGAL_DOCUMENT_TYPE_UNSPECIFIED: Unspecified document type.\n - LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: Terms of Service document.\n - LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: Privacy Policy document.\n - LEGAL_DOCUMENT_TYPE_SLA: Service Level Agreement document."
+    },
     "v1ListEffectivePermissionsResponse": {
       "type": "object",
       "properties": {
@@ -640,6 +745,24 @@
         }
       },
       "title": "ListRolesResponse is the response from the ListRoles function"
+    },
+    "v1RecordUserConsentRequest": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "$ref": "#/definitions/v1LegalDocumentType",
+          "description": "The type of the legal document.\nThis is a required field and cannot be UNSPECIFIED."
+        },
+        "action": {
+          "$ref": "#/definitions/v1UserConsentAction",
+          "description": "The action taken by the user.\nThis is a required field and cannot be UNSPECIFIED."
+        }
+      },
+      "description": "RecordUserConsentRequest is the request for the RecordUserConsent function."
+    },
+    "v1RecordUserConsentResponse": {
+      "type": "object",
+      "description": "RecordUserConsentResponse is the response from the RecordUserConsent function.\n\nEmpty"
     },
     "v1Role": {
       "type": "object",
@@ -750,6 +873,17 @@
         }
       },
       "title": "A User represents a user in the Qdrant cloud.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1UserConsentAction": {
+      "type": "string",
+      "enum": [
+        "USER_CONSENT_ACTION_UNSPECIFIED",
+        "USER_CONSENT_ACTION_ACCEPT",
+        "USER_CONSENT_ACTION_REVOKE",
+        "USER_CONSENT_ACTION_PENDING"
+      ],
+      "default": "USER_CONSENT_ACTION_UNSPECIFIED",
+      "description": "UserConsentAction specifies the action taken by a user regarding a consent.\n\n - USER_CONSENT_ACTION_UNSPECIFIED: Unspecified consent action.\n - USER_CONSENT_ACTION_ACCEPT: The user accepts the consent.\n - USER_CONSENT_ACTION_REVOKE: The user revokes the consent.\n - USER_CONSENT_ACTION_PENDING: The consent is pending action from the user.\nPending consent means that the user got notified about the new version of the document. After a certain\nperiod of time, we auto accept pending consents depending on the document type."
     },
     "v1UserStatus": {
       "type": "string",
