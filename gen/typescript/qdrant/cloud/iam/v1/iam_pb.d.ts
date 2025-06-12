@@ -12,6 +12,82 @@ import type { Timestamp } from "@bufbuild/protobuf/wkt";
 export declare const file_qdrant_cloud_iam_v1_iam: GenFile;
 
 /**
+ * GetAuthenticatedUserRequest is the request for the GetAuthenticatedUser function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
+ */
+export declare type GetAuthenticatedUserRequest = Message<"qdrant.cloud.iam.v1.GetAuthenticatedUserRequest"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetAuthenticatedUserRequest.
+ * Use `create(GetAuthenticatedUserRequestSchema)` to create a new message.
+ */
+export declare const GetAuthenticatedUserRequestSchema: GenMessage<GetAuthenticatedUserRequest>;
+
+/**
+ * GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetAuthenticatedUserResponse
+ */
+export declare type GetAuthenticatedUserResponse = Message<"qdrant.cloud.iam.v1.GetAuthenticatedUserResponse"> & {
+  /**
+   * The actual user.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user?: User;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetAuthenticatedUserResponse.
+ * Use `create(GetAuthenticatedUserResponseSchema)` to create a new message.
+ */
+export declare const GetAuthenticatedUserResponseSchema: GenMessage<GetAuthenticatedUserResponse>;
+
+/**
+ * UpdateUserRequest is the request for the UpdateUser function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserRequest
+ */
+export declare type UpdateUserRequest = Message<"qdrant.cloud.iam.v1.UpdateUserRequest"> & {
+  /**
+   * The actual user.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user?: User;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserRequest.
+ * Use `create(UpdateUserRequestSchema)` to create a new message.
+ */
+export declare const UpdateUserRequestSchema: GenMessage<UpdateUserRequest>;
+
+/**
+ * UpdateUserResponse is the response from the UpdateUser function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserResponse
+ */
+export declare type UpdateUserResponse = Message<"qdrant.cloud.iam.v1.UpdateUserResponse"> & {
+  /**
+   * The actual user.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user?: User;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserResponse.
+ * Use `create(UpdateUserResponseSchema)` to create a new message.
+ */
+export declare const UpdateUserResponseSchema: GenMessage<UpdateUserResponse>;
+
+/**
  * ListPermissionsRequest is the request for the ListPermissions function
  *
  * @generated from message qdrant.cloud.iam.v1.ListPermissionsRequest
@@ -371,6 +447,73 @@ export declare type AssignUserRolesResponse = Message<"qdrant.cloud.iam.v1.Assig
 export declare const AssignUserRolesResponseSchema: GenMessage<AssignUserRolesResponse>;
 
 /**
+ * A User represents a user in the Qdrant cloud.
+ *
+ * @generated from message qdrant.cloud.iam.v1.User
+ */
+export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
+  /**
+   * Unique identifier for the user (in GUID format).
+   * This is a read-only field and will be available after the user is created.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The timestamp when the user was created.
+   * This is a read-only field and will be available after the user is created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * The timestamp when the user was last updated.
+   * This is a read-only field and will be available after the user is created.
+   *
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 3;
+   */
+  lastModifiedAt?: Timestamp;
+
+  /**
+   * The email address of the user.
+   *
+   * @generated from field: string email = 4;
+   */
+  email: string;
+
+  /**
+   * The name of the user.
+   *
+   * @generated from field: string name = 5;
+   */
+  name: string;
+
+  /**
+   * The status of the user.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserStatus status = 6;
+   */
+  status: UserStatus;
+
+  /**
+   * The default account ID of the user (in GUID format).
+   * You should be member of the account when updating.
+   *
+   * @generated from field: string default_account_id = 7;
+   */
+  defaultAccountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.User.
+ * Use `create(UserSchema)` to create a new message.
+ */
+export declare const UserSchema: GenMessage<User>;
+
+/**
  * A Role represents a role in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.iam.v1.Role
@@ -446,6 +589,46 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 export declare const RoleSchema: GenMessage<Role>;
 
 /**
+ * UserStatus defines the possible statuses of a user.
+ *
+ * @generated from enum qdrant.cloud.iam.v1.UserStatus
+ */
+export enum UserStatus {
+  /**
+   * Default, unspecified status.
+   *
+   * @generated from enum value: USER_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The user account is active and can be used.
+   *
+   * @generated from enum value: USER_STATUS_ACTIVE = 1;
+   */
+  ACTIVE = 1,
+
+  /**
+   * The user account is blocked and cannot be used.
+   *
+   * @generated from enum value: USER_STATUS_BLOCKED = 2;
+   */
+  BLOCKED = 2,
+
+  /**
+   * The user account has been marked for deletion or is deleted.
+   *
+   * @generated from enum value: USER_STATUS_DELETED = 3;
+   */
+  DELETED = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.UserStatus.
+ */
+export declare const UserStatusSchema: GenEnum<UserStatus>;
+
+/**
  * RoleType specified the type of the role
  *
  * @generated from enum qdrant.cloud.iam.v1.RoleType
@@ -485,6 +668,30 @@ export declare const RoleTypeSchema: GenEnum<RoleType>;
  * @generated from service qdrant.cloud.iam.v1.IAMService
  */
 export declare const IAMService: GenService<{
+  /**
+   * Fetch the authenticated user.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser
+   */
+  getAuthenticatedUser: {
+    methodKind: "unary";
+    input: typeof GetAuthenticatedUserRequestSchema;
+    output: typeof GetAuthenticatedUserResponseSchema;
+  },
+  /**
+   * Update the user identified by the given ID.
+   * Required permissions:
+   * - write:user
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUser
+   */
+  updateUser: {
+    methodKind: "unary";
+    input: typeof UpdateUserRequestSchema;
+    output: typeof UpdateUserResponseSchema;
+  },
   /**
    * Fetch all permissions known in the system for the provided account.
    * Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.

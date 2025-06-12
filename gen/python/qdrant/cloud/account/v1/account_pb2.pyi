@@ -2,6 +2,7 @@ from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
+from qdrant.cloud.iam.v1 import iam_pb2 as _iam_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -169,6 +170,44 @@ class RejectAccountInviteResponse(_message.Message):
     invite: AccountInvite
     def __init__(self, invite: _Optional[_Union[AccountInvite, _Mapping]] = ...) -> None: ...
 
+class ListAccountMembersRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListAccountMembersResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[AccountMember]
+    def __init__(self, items: _Optional[_Iterable[_Union[AccountMember, _Mapping]]] = ...) -> None: ...
+
+class GetAccountMemberRequest(_message.Message):
+    __slots__ = ("account_id", "user_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
+class GetAccountMemberResponse(_message.Message):
+    __slots__ = ("account_member",)
+    ACCOUNT_MEMBER_FIELD_NUMBER: _ClassVar[int]
+    account_member: AccountMember
+    def __init__(self, account_member: _Optional[_Union[AccountMember, _Mapping]] = ...) -> None: ...
+
+class DeleteAccountMemberRequest(_message.Message):
+    __slots__ = ("account_id", "user_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
+class DeleteAccountMemberResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class Account(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "name", "owner_id", "owner_email", "privileges")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -212,3 +251,11 @@ class AccountInvite(_message.Message):
     user_id: str
     status: AccountInviteStatus
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., user_email: _Optional[str] = ..., user_role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_name: _Optional[str] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., user_id: _Optional[str] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
+
+class AccountMember(_message.Message):
+    __slots__ = ("account_member", "is_owner")
+    ACCOUNT_MEMBER_FIELD_NUMBER: _ClassVar[int]
+    IS_OWNER_FIELD_NUMBER: _ClassVar[int]
+    account_member: _iam_pb2.User
+    is_owner: bool
+    def __init__(self, account_member: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., is_owner: bool = ...) -> None: ...

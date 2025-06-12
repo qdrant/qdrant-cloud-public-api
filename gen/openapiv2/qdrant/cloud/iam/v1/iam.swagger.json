@@ -321,6 +321,69 @@
           "IAMService"
         ]
       }
+    },
+    "/api/iam/v1/users/me": {
+      "get": {
+        "summary": "Fetch the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_GetAuthenticatedUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAuthenticatedUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/users/{user.id}": {
+      "put": {
+        "summary": "Update the user identified by the given ID.\nRequired permissions:\n- write:user",
+        "operationId": "IAMService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "user.id",
+            "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IAMServiceUpdateUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -432,6 +495,45 @@
       },
       "description": "UpdateRoleRequest is the request for the UpdateRole function."
     },
+    "IAMServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+            },
+            "email": {
+              "type": "string",
+              "description": "The email address of the user."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the user."
+            },
+            "status": {
+              "$ref": "#/definitions/v1UserStatus",
+              "description": "The status of the user.\nThis is a read-only field."
+            },
+            "defaultAccountId": {
+              "type": "string",
+              "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+            }
+          },
+          "description": "The actual user.",
+          "title": "The actual user."
+        }
+      },
+      "description": "UpdateUserRequest is the request for the UpdateUser function."
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -478,6 +580,16 @@
     "v1DeleteRoleResponse": {
       "type": "object",
       "description": "DeleteRoleResponse is the response from the DeleteRole function.\n\nEmpty"
+    },
+    "v1GetAuthenticatedUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "description": "The actual user."
+        }
+      },
+      "title": "GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function"
     },
     "v1GetRoleResponse": {
       "type": "object",
@@ -592,6 +704,63 @@
         }
       },
       "description": "UpdateRoleResponse is the response from the UpdateRole function."
+    },
+    "v1UpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "description": "The actual user."
+        }
+      },
+      "description": "UpdateUserResponse is the response from the UpdateUser function."
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the user."
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserStatus",
+          "description": "The status of the user.\nThis is a read-only field."
+        },
+        "defaultAccountId": {
+          "type": "string",
+          "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+        }
+      },
+      "title": "A User represents a user in the Qdrant cloud.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1UserStatus": {
+      "type": "string",
+      "enum": [
+        "USER_STATUS_UNSPECIFIED",
+        "USER_STATUS_ACTIVE",
+        "USER_STATUS_BLOCKED",
+        "USER_STATUS_DELETED"
+      ],
+      "default": "USER_STATUS_UNSPECIFIED",
+      "description": "UserStatus defines the possible statuses of a user.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted."
     }
   }
 }
