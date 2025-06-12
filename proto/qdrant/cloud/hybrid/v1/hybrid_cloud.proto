@@ -1,0 +1,430 @@
+syntax = "proto3";
+
+package qdrant.cloud.hybrid.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "k8s.io/api/networking/v1/generated.proto";
+import "qdrant/cloud/cluster/v1/cluster.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// HybridCloudService is the API used for configuring hybrid cloud environments.
+service HybridCloudService {
+  // Fetch all hybrid cloud environments in the account identified by the given ID.
+  // Required permissions:
+  // - read:hybrid_cloud_environments
+  rpc ListHybridCloudEnvironments(ListHybridCloudEnvironmentsRequest) returns (ListHybridCloudEnvironmentsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:hybrid_cloud_environments";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments"};
+  }
+  // Fetch a hybrid cloud environment in the account identified by the given ID.
+  // Required permissions:
+  // - read:hybrid_cloud_environments
+  rpc GetHybridCloudEnvironment(GetHybridCloudEnvironmentRequest) returns (GetHybridCloudEnvironmentResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:hybrid_cloud_environments";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
+  }
+  // Creates a hybrid cloud environment in the account identified by the given ID.
+  // Required permissions:
+  // - write:hybrid_cloud_environments
+  rpc CreateHybridCloudEnvironment(CreateHybridCloudEnvironmentRequest) returns (CreateHybridCloudEnvironmentResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:hybrid_cloud_environments";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "hybrid_cloud_environment.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments"
+      body: "*"
+    };
+  }
+  // Updates a hybrid cloud environment in the account identified by the given ID.
+  // Required permissions:
+  // - write:hybrid_cloud_environments
+  rpc UpdateHybridCloudEnvironment(UpdateHybridCloudEnvironmentRequest) returns (UpdateHybridCloudEnvironmentResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:hybrid_cloud_environments";
+
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "hybrid_cloud_environment.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{hybrid_cloud_environment.id}"
+      body: "*"
+    };
+  }
+  // Deletes a hybrid cloud environment in the account identified by the given ID.
+  // Required permissions:
+  // - delete:hybrid_cloud_environments
+  rpc DeleteHybridCloudEnvironment(DeleteHybridCloudEnvironmentRequest) returns (DeleteHybridCloudEnvironmentResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:hybrid_cloud_environments";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
+  }
+  // Fetch the commands that should be executed against a kubernetes cluster to
+  // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
+  // but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
+  // Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+  // Required permission:
+  // - write:hybrid_cloud_environments
+  rpc GetBootstrapCommands(GetBootstrapCommandsRequest) returns (GetBootstrapCommandsResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:hybrid_cloud_environments";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/hybrid-cloud-environment/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/initial-installation-command"};
+  }
+}
+
+// GetBootstrapCommandsRequest is the request for GetBootstrapCommands function
+message GetBootstrapCommandsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the hybrid cloud environment (in GUID format).
+  // It should be part of the provided account.
+  // This is a required field.
+  string hybrid_cloud_environment_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBootstrapCommandsResponse is the response for GetBootstrapCommands function
+message GetBootstrapCommandsResponse {
+  // Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
+  // `kubectl` and `helm` CLIs are required for execution.
+  repeated string commands = 1;
+}
+
+// DeleteHybridCloudEnvironmentRequest is the request for DeleteHybridCloudEnvironment function
+message DeleteHybridCloudEnvironmentRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the hybrid cloud environment (in GUID format).
+  // It should be part of the provided account.
+  // This is a required field.
+  string hybrid_cloud_environment_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteHybridCloudEnvironmentResponse is the response for DeleteHybridCloudEnvironment function
+message DeleteHybridCloudEnvironmentResponse {
+  // Empty
+}
+
+// UpdateHybridCloudEnvironmentRequest is the request for UpdateHybridCloudEnvironment function
+message UpdateHybridCloudEnvironmentRequest {
+  // The actual hybrid cloud environment
+  HybridCloudEnvironment hybrid_cloud_environment = 1;
+}
+
+// UpdateHybridCloudEnvironmentResponse is the response for UpdateHybridCloudEnvironment function
+message UpdateHybridCloudEnvironmentResponse {
+  // The actual hybrid cloud environment
+  HybridCloudEnvironment hybrid_cloud_environment = 1;
+}
+
+// CreateHybridCloudEnvironmentRequest is the request for CreateHybridCloudEnvironment function
+message CreateHybridCloudEnvironmentRequest {
+  // The actual hybrid cloud environment
+  HybridCloudEnvironment hybrid_cloud_environment = 1;
+}
+
+// CreateHybridCloudEnvironmentResponse is the response for CreateHybridCloudEnvironment function
+message CreateHybridCloudEnvironmentResponse {
+  // The actual hybrid cloud environment
+  HybridCloudEnvironment hybrid_cloud_environment = 1;
+}
+
+// GetHybridCloudEnvironmentRequest is the request for GetHybridCloudEnvironment function
+message GetHybridCloudEnvironmentRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the hybrid cloud environment (in GUID format).
+  // It should be part of the provided account.
+  // This is a required field.
+  string hybrid_cloud_environment_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetHybridCloudEnvironmentResponse is the response for GetHybridCloudEnvironment function
+message GetHybridCloudEnvironmentResponse {
+  // The actual hybrid cloud environment
+  HybridCloudEnvironment hybrid_cloud_environment = 1;
+}
+
+// ListHybridCloudEnvironmentsRequest is the request for ListHybridCloudEnvironments function
+message ListHybridCloudEnvironmentsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListHybridCloudEnvironmentsResponse is the response for ListHybridCloudEnvironments function
+message ListHybridCloudEnvironmentsResponse {
+  // The actual hybrid cloud environments in this list
+  repeated HybridCloudEnvironment items = 1;
+}
+
+// HybridCloudEnvironment represents a hybrid cloud environment
+message HybridCloudEnvironment {
+  // Identifier of the account associated with the cluster (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Unique identifier for the hybrid cloud environment (in GUID format).
+  // This is a read-only field and will be available after it is created.
+  string id = 2;
+  option (buf.validate.message).cel = {
+    id: "hybrid_cloud_environment.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // Timestamp when the hybrid cloud environment was created.
+  // This is a read-only field and will be available after it is created.
+  google.protobuf.Timestamp created_at = 3;
+  // Timestamp when the hybrid cloud environment was modified the last time.
+  google.protobuf.Timestamp last_modified_at = 4;
+  // Name of the hybrid cloud environment
+  // This is a required field.
+  // Name can only contain letters, numbers, underscores and dashes
+  string name = 5 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // Configuration of the environment
+  optional HybridCloudEnvironmentConfiguration configuration = 20;
+  // Status of the environment, readonly
+  optional HybridCloudEnvironmentStatus status = 21;
+}
+
+// A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment
+message HybridCloudEnvironmentConfiguration {
+  // Timestamp when the configuration was last updated.
+  // This is a read-only field and will be available after it is created.
+  google.protobuf.Timestamp last_modified_at = 1;
+  // Namespace where qdrant components are deployed, readonly after bootstrapping
+  string namespace = 4 [(buf.validate.field).string = {
+    max_len: 253
+    min_len: 1
+    pattern: "^[a-zA-Z0-9-]+$"
+  }];
+  // optional HTTP proxy URL
+  optional string http_proxy_url = 5;
+  // optional HTTPS proxy URL
+  optional string https_proxy_url = 6;
+  // no proxy config
+  repeated string no_proxy_configs = 7;
+  // Container registry URL
+  optional string container_registry_url = 8;
+  // Chart registry URL
+  optional string chart_repository_url = 9;
+  // k8s secret name containing registry credentials for accessing container and helm repositories
+  optional string registry_secret_name = 10;
+  // CA certificates
+  optional string ca_certificates = 11;
+  // Default database storage class, if omitted
+  // kubernetes cluster default is used
+  optional string database_storage_class = 12;
+  // Default snapshot storage class, if omitted
+  // kubernetes cluster default is used
+  optional string snapshot_storage_class = 13;
+  // Default volume snapshot storage class, if omitted
+  // csi-snapclass is used
+  optional string volume_snapshot_storage_class = 14;
+  // Optional Ingress rules for Qdrant databases
+  repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 15;
+  // Optional Egress rules for Qdrant databases
+  repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
+  // Log level for deployed components
+  optional HybridCloudEnvironmentConfigurationLogLevel log_level = 21;
+  // List of tolerations for clusters in this hybrid cloud environment
+  repeated qdrant.cloud.cluster.v1.Toleration tolerations = 22;
+  // Node selector for Qdrant nodes in this hybrid cloud environment
+  repeated common.v1.KeyValue node_selector = 23 [(buf.validate.field).repeated = {max_items: 10}];
+}
+
+// HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components
+enum HybridCloudEnvironmentConfigurationLogLevel {
+  // UNSPECIFIED
+  HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED = 0;
+  // DEBUG
+  HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG = 1;
+  // INFO
+  HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO = 2;
+  // WARNING
+  HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN = 3;
+  // ERROR
+  HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR = 4;
+}
+
+// Status of a hybrid cloud environment, read only
+message HybridCloudEnvironmentStatus {
+  // Timestamp when the hybrid cloud environment status was modified the last time.
+  optional google.protobuf.Timestamp last_modified_at = 1;
+  // Phase
+  HybridCloudEnvironmentStatusPhase phase = 3;
+  // Kubernetes version
+  string kubernetes_version = 4;
+  // Kubernetes distribution
+  optional KubernetesDistribution kubernetes_distribution = 10;
+  // Number of kubernetes nodes
+  uint32 number_of_nodes = 5;
+  // Capabilities of hybrid cloud environment
+  HybridCloudEnvironmentCapabilities capabilities = 6;
+  // Status of deployed component
+  repeated HybridCloudEnvironmentComponentStatus component_statuses = 7;
+  // Report if the hybrid cloud environment is ready for Qdrant cluster creation
+  QdrantClusterCreationStatus cluster_creation_readiness = 9;
+  // Status message
+  optional string message = 11;
+  // Storage classes available in the hybrid cloud environment
+  repeated HybridCloudEnvironmentStorageClass storage_classes = 12;
+  // Volume snapshot classes available in the hybrid cloud environment
+  repeated HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
+}
+
+// QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment
+enum QdrantClusterCreationStatus {
+  // Unspecified
+  QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED = 0;
+  // Clusters can be created
+  QDRANT_CLUSTER_CREATION_STATUS_READY = 1;
+  // Clusters cannot be created
+  QDRANT_CLUSTER_CREATION_STATUS_NOT_READY = 2;
+}
+
+// Status phase of hybrid cloud environment
+enum HybridCloudEnvironmentStatusPhase {
+  // Unspecified
+  HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_UNSPECIFIED = 0;
+  // Ready
+  HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_READY = 1;
+  // Not ready
+  HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_NOT_READY = 2;
+  // Failed to sync
+  HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_FAILED_TO_SYNC = 3;
+}
+
+// Capabilities of hybrid cloud environment
+message HybridCloudEnvironmentCapabilities {
+  // True if volume snapshotting is available
+  bool volume_snapshot = 1;
+  // True if volume expansion is available
+  bool volume_expansion = 2;
+}
+
+// Status of a component deployed in the hybrid cloud environment
+message HybridCloudEnvironmentComponentStatus {
+  // Component name
+  string name = 1;
+  // Component namespace
+  string namespace = 2;
+  // Component version
+  optional string version = 3;
+  // Phase
+  HybridCloudEnvironmentComponentStatusPhase phase = 4;
+  // Status message
+  optional string message = 5;
+}
+
+// Component status phase
+enum HybridCloudEnvironmentComponentStatusPhase {
+  // Unspecified
+  HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_UNSPECIFIED = 0;
+  // Ready
+  HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_READY = 1;
+  // Not ready
+  HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_READY = 2;
+  // Not found
+  HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_FOUND = 3;
+}
+
+// A storage class available in hybrid cloud environment
+message HybridCloudEnvironmentStorageClass {
+  // Name specifies the name of the storage class
+  string name = 1;
+  // Default specifies whether the storage class is the default storage class
+  bool default = 2;
+  // Provisioner specifies the provisioner of the storage class
+  string provisioner = 3;
+  // It specifies whether the storage class allows volume expansion
+  bool allow_volume_expansion = 4;
+  // Specifies the reclaim policy of the storage class
+  string reclaim_policy = 5;
+  // parameters of the storage class
+  repeated common.v1.KeyValue parameters = 6;
+}
+
+// Kubernetes distributions
+enum KubernetesDistribution {
+  // Unspecified
+  KUBERNETES_DISTRIBUTION_UNSPECIFIED = 0;
+  // AWS
+  KUBERNETES_DISTRIBUTION_AWS = 1;
+  // GCP
+  KUBERNETES_DISTRIBUTION_GCP = 2;
+  // Azure
+  KUBERNETES_DISTRIBUTION_AZURE = 3;
+  // DigitalOcean
+  KUBERNETES_DISTRIBUTION_DO = 4;
+  // Scaleway
+  KUBERNETES_DISTRIBUTION_SCALEWAY = 5;
+  // Openshift
+  KUBERNETES_DISTRIBUTION_OPENSHIFT = 6;
+  // Linode
+  KUBERNETES_DISTRIBUTION_LINODE = 7;
+  // Civo
+  KUBERNETES_DISTRIBUTION_CIVO = 8;
+  // OracleCloud
+  KUBERNETES_DISTRIBUTION_OCI = 9;
+  // OVHcloud
+  KUBERNETES_DISTRIBUTION_OVHCLOUD = 10;
+  // Stackit
+  KUBERNETES_DISTRIBUTION_STACKIT = 11;
+  // Vultr
+  KUBERNETES_DISTRIBUTION_VULTR = 12;
+  // K3S
+  KUBERNETES_DISTRIBUTION_K3S = 13;
+}
+
+// Volume snapshot class available in the hybrid cloud environment
+message HybridCloudEnvironmentVolumeSnapshotClass {
+  // Name of the volume snapshot class
+  string name = 1;
+  // Driver of the volume snapshot class
+  string driver = 2;
+}
+
+// Info about a node of a hybrid cloud environment
+message HybridCloudEnvironmentNodeInfo {
+  // Name of the node
+  string name = 1;
+  // Region of the node
+  optional string region = 2;
+  // Zone of the node
+  optional string zone = 3;
+  // Instance type of the node
+  optional string instance_type = 4;
+  // CPU architecture of the node
+  optional string arch = 5;
+  // Capacity of the node
+  HybridCloudEnvironmentNodeResourceInfo capacity = 6;
+  // The allocatable resources of the node
+  HybridCloudEnvironmentNodeResourceInfo allocatable = 7;
+}
+
+// Node resource infos
+message HybridCloudEnvironmentNodeResourceInfo {
+  // CPU resources of the node
+  string cpu = 1;
+  // Memory resources of the node
+  string memory = 2;
+  // Pods resources of the node
+  string pods = 3;
+  // Ephemeral storage resources of the node
+  string ephemeral_storage = 4;
+}
