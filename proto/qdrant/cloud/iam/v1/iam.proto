@@ -192,14 +192,14 @@ message GetUserConsentRequest {
 message GetUserConsentResponse {
   // The type of the legal document for which consent status is reported.
   LegalDocumentType document_type = 1;
-  // The latest action taken by the user for this document type.
-  // Will be USER_CONSENT_ACTION_UNSPECIFIED if no action has been recorded.
-  UserConsentAction action = 2;
-  // The timestamp when this action was recorded.
-  // Unset if no action has been recorded.
-  optional google.protobuf.Timestamp action_at = 3;
+  // The latest status by the user for this document type.
+  // Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
+  UserConsentStatus status = 2;
+  // The timestamp when the status is last updated.
+  // Unset if no status update has been recorded.
+  optional google.protobuf.Timestamp last_modified_at = 3;
   // A convenience field indicating if the current status is an acceptance.
-  // True if action is USER_CONSENT_ACTION_ACCEPT, false otherwise.
+  // True if action is USER_CONSENT_STATUS_ACCEPT, false otherwise.
   bool is_accepted = 4;
 }
 
@@ -211,11 +211,14 @@ message RecordUserConsentRequest {
     defined_only: true
     not_in: [0]
   }];
-  // The action taken by the user.
-  // This is a required field and cannot be UNSPECIFIED.
-  UserConsentAction action = 2 [(buf.validate.field).enum = {
+  // The status update initiated by the user.
+  // This is a required field and cannot be UNSPECIFIED or PENDING.
+  UserConsentStatus status_update = 2 [(buf.validate.field).enum = {
     defined_only: true
-    not_in: [0]
+    not_in: [
+      0,
+      2
+    ]
   }];
 }
 
@@ -391,18 +394,18 @@ enum LegalDocumentType {
   LEGAL_DOCUMENT_TYPE_SLA = 3;
 }
 
-// UserConsentAction specifies the action taken by a user regarding a consent.
-enum UserConsentAction {
-  // Unspecified consent action.
-  USER_CONSENT_ACTION_UNSPECIFIED = 0;
+// UserConsentStatus specifies the status from an user for a consent.
+enum UserConsentStatus {
+  // Unspecified consent status.
+  USER_CONSENT_STATUS_UNSPECIFIED = 0;
   // The user accepts the consent.
-  USER_CONSENT_ACTION_ACCEPT = 1;
+  USER_CONSENT_STATUS_ACCEPT = 1;
   // The user revokes the consent.
-  USER_CONSENT_ACTION_REVOKE = 2;
+  USER_CONSENT_STATUS_REVOKE = 2;
   // The consent is pending action from the user.
   // Pending consent means that the user got notified about the new version of the document. After a certain
   // period of time, we auto accept pending consents depending on the document type.
-  USER_CONSENT_ACTION_PENDING = 3;
+  USER_CONSENT_STATUS_PENDING = 3;
 }
 
 // A Role represents a role in the Qdrant cloud.

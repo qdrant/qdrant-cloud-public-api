@@ -122,24 +122,24 @@ export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUse
   documentType: LegalDocumentType;
 
   /**
-   * The latest action taken by the user for this document type.
-   * Will be USER_CONSENT_ACTION_UNSPECIFIED if no action has been recorded.
+   * The latest status by the user for this document type.
+   * Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
    *
-   * @generated from field: qdrant.cloud.iam.v1.UserConsentAction action = 2;
+   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status = 2;
    */
-  action: UserConsentAction;
+  status: UserConsentStatus;
 
   /**
-   * The timestamp when this action was recorded.
-   * Unset if no action has been recorded.
+   * The timestamp when the status is last updated.
+   * Unset if no status update has been recorded.
    *
-   * @generated from field: optional google.protobuf.Timestamp action_at = 3;
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 3;
    */
-  actionAt?: Timestamp;
+  lastModifiedAt?: Timestamp;
 
   /**
    * A convenience field indicating if the current status is an acceptance.
-   * True if action is USER_CONSENT_ACTION_ACCEPT, false otherwise.
+   * True if action is USER_CONSENT_STATUS_ACCEPT, false otherwise.
    *
    * @generated from field: bool is_accepted = 4;
    */
@@ -167,12 +167,12 @@ export declare type RecordUserConsentRequest = Message<"qdrant.cloud.iam.v1.Reco
   documentType: LegalDocumentType;
 
   /**
-   * The action taken by the user.
-   * This is a required field and cannot be UNSPECIFIED.
+   * The status update initiated by the user.
+   * This is a required field and cannot be UNSPECIFIED or PENDING.
    *
-   * @generated from field: qdrant.cloud.iam.v1.UserConsentAction action = 2;
+   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status_update = 2;
    */
-  action: UserConsentAction;
+  statusUpdate: UserConsentStatus;
 };
 
 /**
@@ -779,29 +779,29 @@ export enum LegalDocumentType {
 export declare const LegalDocumentTypeSchema: GenEnum<LegalDocumentType>;
 
 /**
- * UserConsentAction specifies the action taken by a user regarding a consent.
+ * UserConsentStatus specifies the status from an user for a consent.
  *
- * @generated from enum qdrant.cloud.iam.v1.UserConsentAction
+ * @generated from enum qdrant.cloud.iam.v1.UserConsentStatus
  */
-export enum UserConsentAction {
+export enum UserConsentStatus {
   /**
-   * Unspecified consent action.
+   * Unspecified consent status.
    *
-   * @generated from enum value: USER_CONSENT_ACTION_UNSPECIFIED = 0;
+   * @generated from enum value: USER_CONSENT_STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
    * The user accepts the consent.
    *
-   * @generated from enum value: USER_CONSENT_ACTION_ACCEPT = 1;
+   * @generated from enum value: USER_CONSENT_STATUS_ACCEPT = 1;
    */
   ACCEPT = 1,
 
   /**
    * The user revokes the consent.
    *
-   * @generated from enum value: USER_CONSENT_ACTION_REVOKE = 2;
+   * @generated from enum value: USER_CONSENT_STATUS_REVOKE = 2;
    */
   REVOKE = 2,
 
@@ -810,15 +810,15 @@ export enum UserConsentAction {
    * Pending consent means that the user got notified about the new version of the document. After a certain
    * period of time, we auto accept pending consents depending on the document type.
    *
-   * @generated from enum value: USER_CONSENT_ACTION_PENDING = 3;
+   * @generated from enum value: USER_CONSENT_STATUS_PENDING = 3;
    */
   PENDING = 3,
 }
 
 /**
- * Describes the enum qdrant.cloud.iam.v1.UserConsentAction.
+ * Describes the enum qdrant.cloud.iam.v1.UserConsentStatus.
  */
-export declare const UserConsentActionSchema: GenEnum<UserConsentAction>;
+export declare const UserConsentStatusSchema: GenEnum<UserConsentStatus>;
 
 /**
  * RoleType specified the type of the role
