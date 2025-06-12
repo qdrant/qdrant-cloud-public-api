@@ -217,7 +217,7 @@ message RecordUserConsentRequest {
     defined_only: true
     not_in: [
       0,
-      2
+      3
     ]
   }];
 }
