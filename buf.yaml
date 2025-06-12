@@ -6,6 +6,7 @@ modules:
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/bufbuild/protovalidate
+  - buf.build/common/protos
 lint:
   use:
     - STANDARD

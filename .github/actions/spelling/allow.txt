@@ -23,3 +23,11 @@ gibibytes
 millicore
 timeseries
 vcpu
+civo
+CLIs
+Hcloud
+OVHCLOUD
+scaleway
+snapclass
+stackit
+vultr
