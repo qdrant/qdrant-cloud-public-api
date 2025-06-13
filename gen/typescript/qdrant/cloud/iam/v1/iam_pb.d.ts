@@ -882,7 +882,7 @@ export enum RoleType {
 export declare const RoleTypeSchema: GenEnum<RoleType>;
 
 /**
- * IAMService is the API used to configure IAM (identity and access management) objects..
+ * IAMService is the API used to configure IAM (identity and access management) objects.
  *
  * @generated from service qdrant.cloud.iam.v1.IAMService
  */

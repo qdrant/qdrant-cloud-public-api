@@ -35,6 +35,8 @@ The Qdrant Cloud API is organized into several gRPC services, each responsible f
 | [`ClusterService`](/proto/qdrant/cloud/cluster/v1/cluster.proto) | Provides operations for creating, configuring, and managing Qdrant clusters. |
 | [`DatabaseApiKeyService v1`](/proto/qdrant/cloud/cluster/auth/v1/database_api_key.proto) | Deprecated: Manages API keys for accessing data within Qdrant clusters. |
 | [`DatabaseApiKeyService v2`](/proto/qdrant/cloud/cluster/auth/v2/database_api_key.proto) | Manages API keys for accessing data within Qdrant clusters. |
+| [`HybridCloudService`](/proto/qdrant/cloud/hybrid/v1/hybrid_cloud.proto) | Service for for configuring hybrid cloud environments. |
+| [`IAMService`](/proto/qdrant/cloud/iam/v1/iam.proto) | Service to configure IAM (identity and access management) objects. |
 | [`MonitoringService`](proto/qdrant/cloud/monitoring/v1/monitoring.proto) | Provides access to monitoring data such as cluster metrics, logs, and events. |
 | [`PlatformService`](/proto//qdrant/cloud/platform/v1/platform.proto) | Service to query for cloud provider & regional information. |
 

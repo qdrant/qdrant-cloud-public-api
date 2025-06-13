@@ -37,7 +37,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// IAMService is the API used to configure IAM (identity and access management) objects..
+// IAMService is the API used to configure IAM (identity and access management) objects.
 type IAMServiceClient interface {
 	// Fetch the authenticated user.
 	// Required permissions:
@@ -225,7 +225,7 @@ func (c *iAMServiceClient) AssignUserRoles(ctx context.Context, in *AssignUserRo
 // All implementations must embed UnimplementedIAMServiceServer
 // for forward compatibility.
 //
-// IAMService is the API used to configure IAM (identity and access management) objects..
+// IAMService is the API used to configure IAM (identity and access management) objects.
 type IAMServiceServer interface {
 	// Fetch the authenticated user.
 	// Required permissions:
