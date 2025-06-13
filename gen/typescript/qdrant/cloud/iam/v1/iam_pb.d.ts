@@ -122,7 +122,7 @@ export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUse
   documentType: LegalDocumentType;
 
   /**
-   * The latest status by the user for this document type.
+   * The latest consent status recorded from the user for this document type.
    * Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
    *
    * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status = 2;
@@ -130,7 +130,7 @@ export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUse
   status: UserConsentStatus;
 
   /**
-   * The timestamp when the status is last updated.
+   * Timestamp of the most recent status update.
    * Unset if no status update has been recorded.
    *
    * @generated from field: optional google.protobuf.Timestamp last_modified_at = 3;
@@ -139,7 +139,7 @@ export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUse
 
   /**
    * A convenience field indicating if the current status is an acceptance.
-   * True if action is USER_CONSENT_STATUS_ACCEPT, false otherwise.
+   * True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
    *
    * @generated from field: bool is_accepted = 4;
    */
@@ -792,18 +792,18 @@ export enum UserConsentStatus {
   UNSPECIFIED = 0,
 
   /**
-   * The user accepts the consent.
+   * The user accepted the consent.
    *
-   * @generated from enum value: USER_CONSENT_STATUS_ACCEPT = 1;
+   * @generated from enum value: USER_CONSENT_STATUS_ACCEPTED = 1;
    */
-  ACCEPT = 1,
+  ACCEPTED = 1,
 
   /**
-   * The user revokes the consent.
+   * The user revoked the consent.
    *
-   * @generated from enum value: USER_CONSENT_STATUS_REVOKE = 2;
+   * @generated from enum value: USER_CONSENT_STATUS_REVOKED = 2;
    */
-  REVOKE = 2,
+  REVOKED = 2,
 
   /**
    * The consent is pending action from the user.

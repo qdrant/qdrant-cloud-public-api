@@ -681,16 +681,16 @@
         },
         "status": {
           "$ref": "#/definitions/v1UserConsentStatus",
-          "description": "The latest status by the user for this document type.\nWill be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded."
+          "description": "The latest consent status recorded from the user for this document type.\nWill be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the status is last updated.\nUnset if no status update has been recorded."
+          "description": "Timestamp of the most recent status update.\nUnset if no status update has been recorded."
         },
         "isAccepted": {
           "type": "boolean",
-          "description": "A convenience field indicating if the current status is an acceptance.\nTrue if action is USER_CONSENT_STATUS_ACCEPT, false otherwise."
+          "description": "A convenience field indicating if the current status is an acceptance.\nTrue if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise."
         }
       },
       "description": "GetUserConsentResponse is the response from the GetUserConsent function."
@@ -878,12 +878,12 @@
       "type": "string",
       "enum": [
         "USER_CONSENT_STATUS_UNSPECIFIED",
-        "USER_CONSENT_STATUS_ACCEPT",
-        "USER_CONSENT_STATUS_REVOKE",
+        "USER_CONSENT_STATUS_ACCEPTED",
+        "USER_CONSENT_STATUS_REVOKED",
         "USER_CONSENT_STATUS_PENDING"
       ],
       "default": "USER_CONSENT_STATUS_UNSPECIFIED",
-      "description": "UserConsentStatus specifies the status from an user for a consent.\n\n - USER_CONSENT_STATUS_UNSPECIFIED: Unspecified consent status.\n - USER_CONSENT_STATUS_ACCEPT: The user accepts the consent.\n - USER_CONSENT_STATUS_REVOKE: The user revokes the consent.\n - USER_CONSENT_STATUS_PENDING: The consent is pending action from the user.\nPending consent means that the user got notified about the new version of the document. After a certain\nperiod of time, we auto accept pending consents depending on the document type."
+      "description": "UserConsentStatus specifies the status from an user for a consent.\n\n - USER_CONSENT_STATUS_UNSPECIFIED: Unspecified consent status.\n - USER_CONSENT_STATUS_ACCEPTED: The user accepted the consent.\n - USER_CONSENT_STATUS_REVOKED: The user revoked the consent.\n - USER_CONSENT_STATUS_PENDING: The consent is pending action from the user.\nPending consent means that the user got notified about the new version of the document. After a certain\nperiod of time, we auto accept pending consents depending on the document type."
     },
     "v1UserStatus": {
       "type": "string",

@@ -192,14 +192,14 @@ message GetUserConsentRequest {
 message GetUserConsentResponse {
   // The type of the legal document for which consent status is reported.
   LegalDocumentType document_type = 1;
-  // The latest status by the user for this document type.
+  // The latest consent status recorded from the user for this document type.
   // Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
   UserConsentStatus status = 2;
-  // The timestamp when the status is last updated.
+  // Timestamp of the most recent status update.
   // Unset if no status update has been recorded.
   optional google.protobuf.Timestamp last_modified_at = 3;
   // A convenience field indicating if the current status is an acceptance.
-  // True if action is USER_CONSENT_STATUS_ACCEPT, false otherwise.
+  // True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
   bool is_accepted = 4;
 }
 
@@ -398,10 +398,10 @@ enum LegalDocumentType {
 enum UserConsentStatus {
   // Unspecified consent status.
   USER_CONSENT_STATUS_UNSPECIFIED = 0;
-  // The user accepts the consent.
-  USER_CONSENT_STATUS_ACCEPT = 1;
-  // The user revokes the consent.
-  USER_CONSENT_STATUS_REVOKE = 2;
+  // The user accepted the consent.
+  USER_CONSENT_STATUS_ACCEPTED = 1;
+  // The user revoked the consent.
+  USER_CONSENT_STATUS_REVOKED = 2;
   // The consent is pending action from the user.
   // Pending consent means that the user got notified about the new version of the document. After a certain
   // period of time, we auto accept pending consents depending on the document type.

@@ -27,8 +27,8 @@ class LegalDocumentType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
 class UserConsentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     USER_CONSENT_STATUS_UNSPECIFIED: _ClassVar[UserConsentStatus]
-    USER_CONSENT_STATUS_ACCEPT: _ClassVar[UserConsentStatus]
-    USER_CONSENT_STATUS_REVOKE: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_ACCEPTED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_REVOKED: _ClassVar[UserConsentStatus]
     USER_CONSENT_STATUS_PENDING: _ClassVar[UserConsentStatus]
 
 class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -45,8 +45,8 @@ LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: LegalDocumentType
 LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: LegalDocumentType
 LEGAL_DOCUMENT_TYPE_SLA: LegalDocumentType
 USER_CONSENT_STATUS_UNSPECIFIED: UserConsentStatus
-USER_CONSENT_STATUS_ACCEPT: UserConsentStatus
-USER_CONSENT_STATUS_REVOKE: UserConsentStatus
+USER_CONSENT_STATUS_ACCEPTED: UserConsentStatus
+USER_CONSENT_STATUS_REVOKED: UserConsentStatus
 USER_CONSENT_STATUS_PENDING: UserConsentStatus
 ROLE_TYPE_UNSPECIFIED: RoleType
 ROLE_TYPE_SYSTEM: RoleType
