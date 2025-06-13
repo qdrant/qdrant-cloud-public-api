@@ -6,7 +6,7 @@ from qdrant.cloud.iam.v1 import iam_pb2 as qdrant_dot_cloud_dot_iam_dot_v1_dot_i
 
 
 class IAMServiceStub(object):
-    """IAMService is the API used to configure IAM (identity and access management) objects..
+    """IAMService is the API used to configure IAM (identity and access management) objects.
     """
 
     def __init__(self, channel):
@@ -78,7 +78,7 @@ class IAMServiceStub(object):
 
 
 class IAMServiceServicer(object):
-    """IAMService is the API used to configure IAM (identity and access management) objects..
+    """IAMService is the API used to configure IAM (identity and access management) objects.
     """
 
     def GetAuthenticatedUser(self, request, context):
@@ -265,7 +265,7 @@ def add_IAMServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class IAMService(object):
-    """IAMService is the API used to configure IAM (identity and access management) objects..
+    """IAMService is the API used to configure IAM (identity and access management) objects.
     """
 
     @staticmethod
