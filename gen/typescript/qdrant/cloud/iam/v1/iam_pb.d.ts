@@ -88,6 +88,116 @@ export declare type UpdateUserResponse = Message<"qdrant.cloud.iam.v1.UpdateUser
 export declare const UpdateUserResponseSchema: GenMessage<UpdateUserResponse>;
 
 /**
+ * GetUserConsentRequest is the request for the GetUserConsent function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserConsentRequest
+ */
+export declare type GetUserConsentRequest = Message<"qdrant.cloud.iam.v1.GetUserConsentRequest"> & {
+  /**
+   * The type of the legal document.
+   * This is a required field and cannot be UNSPECIFIED.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.LegalDocumentType document_type = 1;
+   */
+  documentType: LegalDocumentType;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserConsentRequest.
+ * Use `create(GetUserConsentRequestSchema)` to create a new message.
+ */
+export declare const GetUserConsentRequestSchema: GenMessage<GetUserConsentRequest>;
+
+/**
+ * GetUserConsentResponse is the response from the GetUserConsent function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserConsentResponse
+ */
+export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUserConsentResponse"> & {
+  /**
+   * The type of the legal document for which consent status is reported.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.LegalDocumentType document_type = 1;
+   */
+  documentType: LegalDocumentType;
+
+  /**
+   * The latest consent status recorded from the user for this document type.
+   * Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status = 2;
+   */
+  status: UserConsentStatus;
+
+  /**
+   * Timestamp of the most recent status update.
+   * Unset if no status update has been recorded.
+   *
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 3;
+   */
+  lastModifiedAt?: Timestamp;
+
+  /**
+   * A convenience field indicating if the current status is an acceptance.
+   * True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
+   *
+   * @generated from field: bool is_accepted = 4;
+   */
+  isAccepted: boolean;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserConsentResponse.
+ * Use `create(GetUserConsentResponseSchema)` to create a new message.
+ */
+export declare const GetUserConsentResponseSchema: GenMessage<GetUserConsentResponse>;
+
+/**
+ * RecordUserConsentRequest is the request for the RecordUserConsent function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.RecordUserConsentRequest
+ */
+export declare type RecordUserConsentRequest = Message<"qdrant.cloud.iam.v1.RecordUserConsentRequest"> & {
+  /**
+   * The type of the legal document.
+   * This is a required field and cannot be UNSPECIFIED.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.LegalDocumentType document_type = 1;
+   */
+  documentType: LegalDocumentType;
+
+  /**
+   * The status update initiated by the user.
+   * This is a required field and cannot be UNSPECIFIED or PENDING.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status_update = 2;
+   */
+  statusUpdate: UserConsentStatus;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.RecordUserConsentRequest.
+ * Use `create(RecordUserConsentRequestSchema)` to create a new message.
+ */
+export declare const RecordUserConsentRequestSchema: GenMessage<RecordUserConsentRequest>;
+
+/**
+ * RecordUserConsentResponse is the response from the RecordUserConsent function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.RecordUserConsentResponse
+ */
+export declare type RecordUserConsentResponse = Message<"qdrant.cloud.iam.v1.RecordUserConsentResponse"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.RecordUserConsentResponse.
+ * Use `create(RecordUserConsentResponseSchema)` to create a new message.
+ */
+export declare const RecordUserConsentResponseSchema: GenMessage<RecordUserConsentResponse>;
+
+/**
  * ListPermissionsRequest is the request for the ListPermissions function
  *
  * @generated from message qdrant.cloud.iam.v1.ListPermissionsRequest
@@ -629,6 +739,88 @@ export enum UserStatus {
 export declare const UserStatusSchema: GenEnum<UserStatus>;
 
 /**
+ * LegalDocumentType specifies the type of a legal document.
+ *
+ * @generated from enum qdrant.cloud.iam.v1.LegalDocumentType
+ */
+export enum LegalDocumentType {
+  /**
+   * Unspecified document type.
+   *
+   * @generated from enum value: LEGAL_DOCUMENT_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Terms of Service document.
+   *
+   * @generated from enum value: LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE = 1;
+   */
+  TERMS_OF_SERVICE = 1,
+
+  /**
+   * Privacy Policy document.
+   *
+   * @generated from enum value: LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY = 2;
+   */
+  PRIVACY_POLICY = 2,
+
+  /**
+   * Service Level Agreement document.
+   *
+   * @generated from enum value: LEGAL_DOCUMENT_TYPE_SLA = 3;
+   */
+  SLA = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.LegalDocumentType.
+ */
+export declare const LegalDocumentTypeSchema: GenEnum<LegalDocumentType>;
+
+/**
+ * UserConsentStatus specifies the status from an user for a consent.
+ *
+ * @generated from enum qdrant.cloud.iam.v1.UserConsentStatus
+ */
+export enum UserConsentStatus {
+  /**
+   * Unspecified consent status.
+   *
+   * @generated from enum value: USER_CONSENT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The user accepted the consent.
+   *
+   * @generated from enum value: USER_CONSENT_STATUS_ACCEPTED = 1;
+   */
+  ACCEPTED = 1,
+
+  /**
+   * The user revoked the consent.
+   *
+   * @generated from enum value: USER_CONSENT_STATUS_REVOKED = 2;
+   */
+  REVOKED = 2,
+
+  /**
+   * The consent is pending action from the user.
+   * Pending consent means that the user got notified about the new version of the document. After a certain
+   * period of time, we auto accept pending consents depending on the document type.
+   *
+   * @generated from enum value: USER_CONSENT_STATUS_PENDING = 3;
+   */
+  PENDING = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.UserConsentStatus.
+ */
+export declare const UserConsentStatusSchema: GenEnum<UserConsentStatus>;
+
+/**
  * RoleType specified the type of the role
  *
  * @generated from enum qdrant.cloud.iam.v1.RoleType
@@ -691,6 +883,30 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof UpdateUserRequestSchema;
     output: typeof UpdateUserResponseSchema;
+  },
+  /**
+   * Fetches the authenticated user's consent status for a specific legal document.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUserConsent
+   */
+  getUserConsent: {
+    methodKind: "unary";
+    input: typeof GetUserConsentRequestSchema;
+    output: typeof GetUserConsentResponseSchema;
+  },
+  /**
+   * Records the authenticated user's consent for a legal document.
+   * Required permissions:
+   * - write:user
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.RecordUserConsent
+   */
+  recordUserConsent: {
+    methodKind: "unary";
+    input: typeof RecordUserConsentRequestSchema;
+    output: typeof RecordUserConsentResponseSchema;
   },
   /**
    * Fetch all permissions known in the system for the provided account.

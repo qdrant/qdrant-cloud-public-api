@@ -17,6 +17,20 @@ class UserStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     USER_STATUS_BLOCKED: _ClassVar[UserStatus]
     USER_STATUS_DELETED: _ClassVar[UserStatus]
 
+class LegalDocumentType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    LEGAL_DOCUMENT_TYPE_UNSPECIFIED: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_SLA: _ClassVar[LegalDocumentType]
+
+class UserConsentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_CONSENT_STATUS_UNSPECIFIED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_ACCEPTED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_REVOKED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_PENDING: _ClassVar[UserConsentStatus]
+
 class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ROLE_TYPE_UNSPECIFIED: _ClassVar[RoleType]
@@ -26,6 +40,14 @@ USER_STATUS_UNSPECIFIED: UserStatus
 USER_STATUS_ACTIVE: UserStatus
 USER_STATUS_BLOCKED: UserStatus
 USER_STATUS_DELETED: UserStatus
+LEGAL_DOCUMENT_TYPE_UNSPECIFIED: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_SLA: LegalDocumentType
+USER_CONSENT_STATUS_UNSPECIFIED: UserConsentStatus
+USER_CONSENT_STATUS_ACCEPTED: UserConsentStatus
+USER_CONSENT_STATUS_REVOKED: UserConsentStatus
+USER_CONSENT_STATUS_PENDING: UserConsentStatus
 ROLE_TYPE_UNSPECIFIED: RoleType
 ROLE_TYPE_SYSTEM: RoleType
 ROLE_TYPE_CUSTOM: RoleType
@@ -51,6 +73,36 @@ class UpdateUserResponse(_message.Message):
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class GetUserConsentRequest(_message.Message):
+    __slots__ = ("document_type",)
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ...) -> None: ...
+
+class GetUserConsentResponse(_message.Message):
+    __slots__ = ("document_type", "status", "last_modified_at", "is_accepted")
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    IS_ACCEPTED_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    status: UserConsentStatus
+    last_modified_at: _timestamp_pb2.Timestamp
+    is_accepted: bool
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status: _Optional[_Union[UserConsentStatus, str]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., is_accepted: bool = ...) -> None: ...
+
+class RecordUserConsentRequest(_message.Message):
+    __slots__ = ("document_type", "status_update")
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STATUS_UPDATE_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    status_update: UserConsentStatus
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status_update: _Optional[_Union[UserConsentStatus, str]] = ...) -> None: ...
+
+class RecordUserConsentResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
 
 class ListPermissionsRequest(_message.Message):
     __slots__ = ("account_id",)

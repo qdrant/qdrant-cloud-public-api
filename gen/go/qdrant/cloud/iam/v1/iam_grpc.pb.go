@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
 	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
+	IAMService_GetUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
+	IAMService_RecordUserConsent_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
 	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
 	IAMService_ListRoles_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
 	IAMService_GetRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetRole"
@@ -45,6 +47,14 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - write:user
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	// Fetches the authenticated user's consent status for a specific legal document.
+	// Required permissions:
+	// - None (authenticated only)
+	GetUserConsent(ctx context.Context, in *GetUserConsentRequest, opts ...grpc.CallOption) (*GetUserConsentResponse, error)
+	// Records the authenticated user's consent for a legal document.
+	// Required permissions:
+	// - write:user
+	RecordUserConsent(ctx context.Context, in *RecordUserConsentRequest, opts ...grpc.CallOption) (*RecordUserConsentResponse, error)
 	// Fetch all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
@@ -105,6 +115,26 @@ func (c *iAMServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, IAMService_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) GetUserConsent(ctx context.Context, in *GetUserConsentRequest, opts ...grpc.CallOption) (*GetUserConsentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserConsentResponse)
+	err := c.cc.Invoke(ctx, IAMService_GetUserConsent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) RecordUserConsent(ctx context.Context, in *RecordUserConsentRequest, opts ...grpc.CallOption) (*RecordUserConsentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RecordUserConsentResponse)
+	err := c.cc.Invoke(ctx, IAMService_RecordUserConsent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -205,6 +235,14 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - write:user
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	// Fetches the authenticated user's consent status for a specific legal document.
+	// Required permissions:
+	// - None (authenticated only)
+	GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error)
+	// Records the authenticated user's consent for a legal document.
+	// Required permissions:
+	// - write:user
+	RecordUserConsent(context.Context, *RecordUserConsentRequest) (*RecordUserConsentResponse, error)
 	// Fetch all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
@@ -256,6 +294,12 @@ func (UnimplementedIAMServiceServer) GetAuthenticatedUser(context.Context, *GetA
 }
 func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedIAMServiceServer) GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserConsent not implemented")
+}
+func (UnimplementedIAMServiceServer) RecordUserConsent(context.Context, *RecordUserConsentRequest) (*RecordUserConsentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecordUserConsent not implemented")
 }
 func (UnimplementedIAMServiceServer) ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPermissions not implemented")
@@ -334,6 +378,42 @@ func _IAMService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_GetUserConsent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserConsentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).GetUserConsent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_GetUserConsent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).GetUserConsent(ctx, req.(*GetUserConsentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_RecordUserConsent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordUserConsentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).RecordUserConsent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_RecordUserConsent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).RecordUserConsent(ctx, req.(*RecordUserConsentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -496,6 +576,14 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _IAMService_UpdateUser_Handler,
+		},
+		{
+			MethodName: "GetUserConsent",
+			Handler:    _IAMService_GetUserConsent_Handler,
+		},
+		{
+			MethodName: "RecordUserConsent",
+			Handler:    _IAMService_RecordUserConsent_Handler,
 		},
 		{
 			MethodName: "ListPermissions",

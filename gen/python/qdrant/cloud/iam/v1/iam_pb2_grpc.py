@@ -25,6 +25,16 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
                 _registered_method=True)
+        self.GetUserConsent = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/GetUserConsent',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentResponse.FromString,
+                _registered_method=True)
+        self.RecordUserConsent = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/RecordUserConsent',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentResponse.FromString,
+                _registered_method=True)
         self.ListPermissions = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/ListPermissions',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListPermissionsRequest.SerializeToString,
@@ -82,6 +92,24 @@ class IAMServiceServicer(object):
 
     def UpdateUser(self, request, context):
         """Update the user identified by the given ID.
+        Required permissions:
+        - write:user
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserConsent(self, request, context):
+        """Fetches the authenticated user's consent status for a specific legal document.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RecordUserConsent(self, request, context):
+        """Records the authenticated user's consent for a legal document.
         Required permissions:
         - write:user
         """
@@ -177,6 +205,16 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.UpdateUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.SerializeToString,
+            ),
+            'GetUserConsent': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserConsent,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentResponse.SerializeToString,
+            ),
+            'RecordUserConsent': grpc.unary_unary_rpc_method_handler(
+                    servicer.RecordUserConsent,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentResponse.SerializeToString,
             ),
             'ListPermissions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListPermissions,
@@ -274,6 +312,60 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUserConsent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/GetUserConsent',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RecordUserConsent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/RecordUserConsent',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.RecordUserConsentResponse.FromString,
             options,
             channel_credentials,
             insecure,

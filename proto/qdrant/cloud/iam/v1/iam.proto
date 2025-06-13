@@ -34,6 +34,31 @@ service IAMService {
       body: "*"
     };
   }
+  // Fetches the authenticated user's consent status for a specific legal document.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetUserConsent(GetUserConsentRequest) returns (GetUserConsentResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/users/me/consent"};
+  }
+  // Records the authenticated user's consent for a legal document.
+  // Required permissions:
+  // - write:user
+  rpc RecordUserConsent(RecordUserConsentRequest) returns (RecordUserConsentResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:user";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/iam/v1/users/me/consent"
+      body: "*"
+    };
+  }
   // Fetch all permissions known in the system for the provided account.
   // Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
   // Required permissions:
@@ -150,6 +175,56 @@ message UpdateUserRequest {
 message UpdateUserResponse {
   // The actual user.
   User user = 1;
+}
+
+// GetUserConsentRequest is the request for the GetUserConsent function.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+message GetUserConsentRequest {
+  // The type of the legal document.
+  // This is a required field and cannot be UNSPECIFIED.
+  LegalDocumentType document_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// GetUserConsentResponse is the response from the GetUserConsent function.
+message GetUserConsentResponse {
+  // The type of the legal document for which consent status is reported.
+  LegalDocumentType document_type = 1;
+  // The latest consent status recorded from the user for this document type.
+  // Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
+  UserConsentStatus status = 2;
+  // Timestamp of the most recent status update.
+  // Unset if no status update has been recorded.
+  optional google.protobuf.Timestamp last_modified_at = 3;
+  // A convenience field indicating if the current status is an acceptance.
+  // True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
+  bool is_accepted = 4;
+}
+
+// RecordUserConsentRequest is the request for the RecordUserConsent function.
+message RecordUserConsentRequest {
+  // The type of the legal document.
+  // This is a required field and cannot be UNSPECIFIED.
+  LegalDocumentType document_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The status update initiated by the user.
+  // This is a required field and cannot be UNSPECIFIED or PENDING.
+  UserConsentStatus status_update = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [
+      0,
+      3
+    ]
+  }];
+}
+
+// RecordUserConsentResponse is the response from the RecordUserConsent function.
+message RecordUserConsentResponse {
+  // Empty
 }
 
 // ListPermissionsRequest is the request for the ListPermissions function
@@ -305,6 +380,32 @@ enum UserStatus {
   USER_STATUS_BLOCKED = 2;
   // The user account has been marked for deletion or is deleted.
   USER_STATUS_DELETED = 3;
+}
+
+// LegalDocumentType specifies the type of a legal document.
+enum LegalDocumentType {
+  // Unspecified document type.
+  LEGAL_DOCUMENT_TYPE_UNSPECIFIED = 0;
+  // Terms of Service document.
+  LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE = 1;
+  // Privacy Policy document.
+  LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY = 2;
+  // Service Level Agreement document.
+  LEGAL_DOCUMENT_TYPE_SLA = 3;
+}
+
+// UserConsentStatus specifies the status from an user for a consent.
+enum UserConsentStatus {
+  // Unspecified consent status.
+  USER_CONSENT_STATUS_UNSPECIFIED = 0;
+  // The user accepted the consent.
+  USER_CONSENT_STATUS_ACCEPTED = 1;
+  // The user revoked the consent.
+  USER_CONSENT_STATUS_REVOKED = 2;
+  // The consent is pending action from the user.
+  // Pending consent means that the user got notified about the new version of the document. After a certain
+  // period of time, we auto accept pending consents depending on the document type.
+  USER_CONSENT_STATUS_PENDING = 3;
 }
 
 // A Role represents a role in the Qdrant cloud.
