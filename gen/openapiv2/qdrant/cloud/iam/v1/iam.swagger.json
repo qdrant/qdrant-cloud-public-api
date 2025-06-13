@@ -755,7 +755,7 @@
       "properties": {
         "emailNewsletterEnabled": {
           "type": "boolean",
-          "description": "Wether or not the newsletter will be sent to the user (via email)."
+          "description": "Whether the user wants to receive newsletters by email."
         }
       },
       "description": "NotificationPreferences defines the notification preferences of a user."

@@ -386,7 +386,7 @@ enum UserStatus {
 
 // NotificationPreferences defines the notification preferences of a user.
 message NotificationPreferences {
-  // Wether or not the newsletter will be sent to the user (via email).
+  // Whether the user wants to receive newsletters by email.
   bool email_newsletter_enabled = 1;
 }
 

@@ -1536,7 +1536,7 @@ func (x *User) GetNotificationPreferences() *NotificationPreferences {
 // NotificationPreferences defines the notification preferences of a user.
 type NotificationPreferences struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Wether or not the newsletter will be sent to the user (via email).
+	// Whether the user wants to receive newsletters by email.
 	EmailNewsletterEnabled bool `protobuf:"varint,1,opt,name=email_newsletter_enabled,json=emailNewsletterEnabled,proto3" json:"email_newsletter_enabled,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache

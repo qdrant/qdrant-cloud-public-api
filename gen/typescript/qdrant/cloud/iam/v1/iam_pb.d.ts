@@ -637,7 +637,7 @@ export declare const UserSchema: GenMessage<User>;
  */
 export declare type NotificationPreferences = Message<"qdrant.cloud.iam.v1.NotificationPreferences"> & {
   /**
-   * Wether or not the newsletter will be sent to the user (via email).
+   * Whether the user wants to receive newsletters by email.
    *
    * @generated from field: bool email_newsletter_enabled = 1;
    */
