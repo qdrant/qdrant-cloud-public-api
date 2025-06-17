@@ -30,8 +30,8 @@ jobs:
       # make sure the PR includes the updated generated code.
       - name: Install uv
         uses: astral-sh/setup-uv@v5
-      - name: "Generate code"
-        run: make generate
+      - name: "Generate code and compile Go files"
+        run: make compile-go
       - name: "Check uncommited changes"
         uses: CatChen/check-git-status-action@v1
         with:
