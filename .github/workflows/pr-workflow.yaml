@@ -31,7 +31,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: "Generate code and compile Go files"
-        run: make compile-go
+        run: make build-go
       - name: "Check uncommited changes"
         uses: CatChen/check-git-status-action@v1
         with:
