@@ -32,6 +32,8 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: "Generate code"
         run: make generate
+      - name: "Compile Go files"
+        run: make build-go
       - name: "Check uncommited changes"
         uses: CatChen/check-git-status-action@v1
         with:

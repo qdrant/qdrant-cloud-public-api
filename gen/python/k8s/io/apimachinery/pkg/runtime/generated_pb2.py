@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n/k8s.io/apimachinery/pkg/runtime/generated.proto\x12\x1fk8s.io.apimachinery.pkg.runtime\" \n\x0cRawExtension\x12\x10\n\x03raw\x18\x01 \x01(\x0cR\x03raw\">\n\x08TypeMeta\x12\x1e\n\napiVersion\x18\x01 \x01(\tR\napiVersion\x12\x12\n\x04kind\x18\x02 \x01(\tR\x04kind\"\xae\x01\n\x07Unknown\x12\x45\n\x08typeMeta\x18\x01 \x01(\x0b\x32).k8s.io.apimachinery.pkg.runtime.TypeMetaR\x08typeMeta\x12\x10\n\x03raw\x18\x02 \x01(\x0cR\x03raw\x12(\n\x0f\x63ontentEncoding\x18\x03 \x01(\tR\x0f\x63ontentEncoding\x12 \n\x0b\x63ontentType\x18\x04 \x01(\tR\x0b\x63ontentTypeB\xa9\x02\n#com.k8s.io.apimachinery.pkg.runtimeB\x0eGeneratedProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/runtime\xa2\x02\x05KIAPR\xaa\x02\x1fK8s.Io.Apimachinery.Pkg.Runtime\xca\x02\x1fK8s\\Io\\Apimachinery\\Pkg\\Runtime\xe2\x02+K8s\\Io\\Apimachinery\\Pkg\\Runtime\\GPBMetadata\xea\x02#K8s::Io::Apimachinery::Pkg::Runtime')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n/k8s.io/apimachinery/pkg/runtime/generated.proto\x12\x1fk8s.io.apimachinery.pkg.runtime\" \n\x0cRawExtension\x12\x10\n\x03raw\x18\x01 \x01(\x0cR\x03raw\">\n\x08TypeMeta\x12\x1e\n\napiVersion\x18\x01 \x01(\tR\napiVersion\x12\x12\n\x04kind\x18\x02 \x01(\tR\x04kind\"\xae\x01\n\x07Unknown\x12\x45\n\x08typeMeta\x18\x01 \x01(\x0b\x32).k8s.io.apimachinery.pkg.runtime.TypeMetaR\x08typeMeta\x12\x10\n\x03raw\x18\x02 \x01(\x0cR\x03raw\x12(\n\x0f\x63ontentEncoding\x18\x03 \x01(\tR\x0f\x63ontentEncoding\x12 \n\x0b\x63ontentType\x18\x04 \x01(\tR\x0b\x63ontentTypeB!Z\x1fk8s.io/apimachinery/pkg/runtime')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'k8s.io.apimachinery.pkg.runtime.generated_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n#com.k8s.io.apimachinery.pkg.runtimeB\016GeneratedProtoP\001ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/runtime\242\002\005KIAPR\252\002\037K8s.Io.Apimachinery.Pkg.Runtime\312\002\037K8s\\Io\\Apimachinery\\Pkg\\Runtime\342\002+K8s\\Io\\Apimachinery\\Pkg\\Runtime\\GPBMetadata\352\002#K8s::Io::Apimachinery::Pkg::Runtime'
+  _globals['DESCRIPTOR']._serialized_options = b'Z\037k8s.io/apimachinery/pkg/runtime'
   _globals['_RAWEXTENSION']._serialized_start=84
   _globals['_RAWEXTENSION']._serialized_end=116
   _globals['_TYPEMETA']._serialized_start=118

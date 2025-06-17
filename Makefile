@@ -31,10 +31,16 @@ format: buf/deps ## Format protobuf files (in-place) using `buf format`.
 generate: clean format lint ## Generate language bindings.
 	uv run buf generate
 	./scripts/cleanup-gencode-comments.sh
+	rm -rf gen-dummy/
+	
+.PHONY: build-go
+build-go:
+	go build ./...
 
 .PHONY: clean
 clean: ## Clean the directory with the generated language bindings.
 	rm -rf gen/
+	rm -rf gen-dummy/
 
 ##@ Dependencies
 
