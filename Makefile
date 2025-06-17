@@ -34,7 +34,7 @@ generate: clean format lint ## Generate language bindings.
 	rm -rf gen-dummy/
 	
 .PHONY: build-go
-build-go: generate
+build-go:
 	go build ./...
 
 .PHONY: clean
