@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3k8s.io/apimachinery/pkg/util/intstr/generated.proto\x12#k8s.io.apimachinery.pkg.util.intstr\"Q\n\x0bIntOrString\x12\x12\n\x04type\x18\x01 \x01(\x03R\x04type\x12\x16\n\x06intVal\x18\x02 \x01(\x05R\x06intVal\x12\x16\n\x06strVal\x18\x03 \x01(\tR\x06strValB\xc3\x02\n\'com.k8s.io.apimachinery.pkg.util.intstrB\x0eGeneratedProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/util/intstr\xa2\x02\x06KIAPUI\xaa\x02#K8s.Io.Apimachinery.Pkg.Util.Intstr\xca\x02#K8s\\Io\\Apimachinery\\Pkg\\Util\\Intstr\xe2\x02/K8s\\Io\\Apimachinery\\Pkg\\Util\\Intstr\\GPBMetadata\xea\x02(K8s::Io::Apimachinery::Pkg::Util::Intstr')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3k8s.io/apimachinery/pkg/util/intstr/generated.proto\x12#k8s.io.apimachinery.pkg.util.intstr\"Q\n\x0bIntOrString\x12\x12\n\x04type\x18\x01 \x01(\x03R\x04type\x12\x16\n\x06intVal\x18\x02 \x01(\x05R\x06intVal\x12\x16\n\x06strVal\x18\x03 \x01(\tR\x06strValB%Z#k8s.io/apimachinery/pkg/util/intstr')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'k8s.io.apimachinery.pkg.util.intstr.generated_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n\'com.k8s.io.apimachinery.pkg.util.intstrB\016GeneratedProtoP\001ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/util/intstr\242\002\006KIAPUI\252\002#K8s.Io.Apimachinery.Pkg.Util.Intstr\312\002#K8s\\Io\\Apimachinery\\Pkg\\Util\\Intstr\342\002/K8s\\Io\\Apimachinery\\Pkg\\Util\\Intstr\\GPBMetadata\352\002(K8s::Io::Apimachinery::Pkg::Util::Intstr'
+  _globals['DESCRIPTOR']._serialized_options = b'Z#k8s.io/apimachinery/pkg/util/intstr'
   _globals['_INTORSTRING']._serialized_start=92
   _globals['_INTORSTRING']._serialized_end=173
 # @@protoc_insertion_point(module_scope)

@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n4k8s.io/apimachinery/pkg/api/resource/generated.proto\x12$k8s.io.apimachinery.pkg.api.resource\"\"\n\x08Quantity\x12\x16\n\x06string\x18\x01 \x01(\tR\x06string\"\'\n\rQuantityValue\x12\x16\n\x06string\x18\x01 \x01(\tR\x06stringB\xc9\x02\n(com.k8s.io.apimachinery.pkg.api.resourceB\x0eGeneratedProtoP\x01ZUgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/api/resource\xa2\x02\x06KIAPAR\xaa\x02$K8s.Io.Apimachinery.Pkg.Api.Resource\xca\x02$K8s\\Io\\Apimachinery\\Pkg\\Api\\Resource\xe2\x02\x30K8s\\Io\\Apimachinery\\Pkg\\Api\\Resource\\GPBMetadata\xea\x02)K8s::Io::Apimachinery::Pkg::Api::Resource')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n4k8s.io/apimachinery/pkg/api/resource/generated.proto\x12$k8s.io.apimachinery.pkg.api.resource\"\"\n\x08Quantity\x12\x16\n\x06string\x18\x01 \x01(\tR\x06string\"\'\n\rQuantityValue\x12\x16\n\x06string\x18\x01 \x01(\tR\x06stringB&Z$k8s.io/apimachinery/pkg/api/resource')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'k8s.io.apimachinery.pkg.api.resource.generated_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n(com.k8s.io.apimachinery.pkg.api.resourceB\016GeneratedProtoP\001ZUgithub.com/qdrant/qdrant-cloud-public-api/gen/go/k8s.io/apimachinery/pkg/api/resource\242\002\006KIAPAR\252\002$K8s.Io.Apimachinery.Pkg.Api.Resource\312\002$K8s\\Io\\Apimachinery\\Pkg\\Api\\Resource\342\0020K8s\\Io\\Apimachinery\\Pkg\\Api\\Resource\\GPBMetadata\352\002)K8s::Io::Apimachinery::Pkg::Api::Resource'
+  _globals['DESCRIPTOR']._serialized_options = b'Z$k8s.io/apimachinery/pkg/api/resource'
   _globals['_QUANTITY']._serialized_start=94
   _globals['_QUANTITY']._serialized_end=128
   _globals['_QUANTITYVALUE']._serialized_start=130
