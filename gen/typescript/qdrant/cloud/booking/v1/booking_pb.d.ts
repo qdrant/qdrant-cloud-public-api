@@ -25,19 +25,17 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
   accountId: string;
 
   /**
-   * Optional filter specifying the cloud provider where the cluster will be hosted.
+   * Required field specifying the cloud provider where the cluster will be hosted.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-   * If omitted, all packages for the specified account are returned.
    *
-   * @generated from field: optional string cloud_provider_id = 2;
+   * @generated from field: string cloud_provider_id = 2;
    */
-  cloudProviderId?: string;
+  cloudProviderId: string;
 
   /**
-   * Optional filter specifying the cloud region where the cluster will be hosted.
+   * Filter specifying the cloud region where the cluster will be hosted.
    * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-   * If omitted, all packages for the specified account are returned.
-   * This field is ignored when the `cloud_provider_id` is set to 'hybrid'.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
    *
    * @generated from field: optional string cloud_provider_region_id = 3;
    */
@@ -45,7 +43,7 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
 
   /**
    * The status of the packages to filter.
-   * This is an optional field. If value is not set, all packages are returned.
+   * This is an optional field. If value is not set, only active packages are returned.
    *
    * @generated from field: repeated qdrant.cloud.booking.v1.PackageStatus statuses = 4;
    */
