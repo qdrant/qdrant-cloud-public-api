@@ -93,10 +93,8 @@ class ListAccountInvitesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[AccountInvite, _Mapping]]] = ...) -> None: ...
 
 class ListReceivedAccountInvitesRequest(_message.Message):
-    __slots__ = ("status_filter",)
-    STATUS_FILTER_FIELD_NUMBER: _ClassVar[int]
-    status_filter: AccountInviteStatus
-    def __init__(self, status_filter: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
+    __slots__ = ()
+    def __init__(self) -> None: ...
 
 class ListReceivedAccountInvitesResponse(_message.Message):
     __slots__ = ("items",)
@@ -227,7 +225,7 @@ class Account(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
-    __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_name", "last_modified_at", "user_id", "status")
+    __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_email", "last_modified_at", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -235,9 +233,8 @@ class AccountInvite(_message.Message):
     USER_ROLE_IDS_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_USER_ID_FIELD_NUMBER: _ClassVar[int]
-    CREATED_BY_NAME_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
-    USER_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
@@ -246,11 +243,10 @@ class AccountInvite(_message.Message):
     user_role_ids: _containers.RepeatedScalarFieldContainer[str]
     created_at: _timestamp_pb2.Timestamp
     created_by_user_id: str
-    created_by_name: str
+    created_by_email: str
     last_modified_at: _timestamp_pb2.Timestamp
-    user_id: str
     status: AccountInviteStatus
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., user_email: _Optional[str] = ..., user_role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_name: _Optional[str] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., user_id: _Optional[str] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., user_email: _Optional[str] = ..., user_role_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., created_by_user_id: _Optional[str] = ..., created_by_email: _Optional[str] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[AccountInviteStatus, str]] = ...) -> None: ...
 
 class AccountMember(_message.Message):
     __slots__ = ("account_member", "is_owner")

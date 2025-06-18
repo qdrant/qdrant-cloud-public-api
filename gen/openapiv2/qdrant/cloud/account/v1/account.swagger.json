@@ -525,23 +525,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "statusFilter",
-            "description": "Optional: Filter invites by status (e.g. pending only).\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
-              "ACCOUNT_INVITE_STATUS_PENDING",
-              "ACCOUNT_INVITE_STATUS_ACCEPTED",
-              "ACCOUNT_INVITE_STATUS_REJECTED",
-              "ACCOUNT_INVITE_STATUS_CANCELED"
-            ],
-            "default": "ACCOUNT_INVITE_STATUS_UNSPECIFIED"
-          }
-        ],
         "tags": [
           "AccountService"
         ]
@@ -583,18 +566,14 @@
               "type": "string",
               "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
             },
-            "createdByName": {
+            "createdByEmail": {
               "type": "string",
-              "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+              "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
               "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
-            },
-            "userId": {
-              "type": "string",
-              "description": "Identifier of the user that accepted or rejected this invite.\nThis is a read-only value."
             },
             "status": {
               "$ref": "#/definitions/v1AccountInviteStatus",
@@ -761,18 +740,14 @@
           "type": "string",
           "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
         },
-        "createdByName": {
+        "createdByEmail": {
           "type": "string",
-          "description": "Name of the user that created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+          "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Identifier of the user that accepted or rejected this invite.\nThis is a read-only value."
         },
         "status": {
           "$ref": "#/definitions/v1AccountInviteStatus",
