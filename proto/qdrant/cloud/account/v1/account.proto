@@ -252,8 +252,7 @@ message ListAccountInvitesResponse {
 // This lists invites for the authenticated user across all accounts.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 message ListReceivedAccountInvitesRequest {
-  // Optional: Filter invites by status (e.g. pending only).
-  optional AccountInviteStatus status_filter = 1;
+  // Empty
 }
 
 // ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function.
@@ -455,18 +454,15 @@ message AccountInvite {
   // The identifier of the user who created the invite (in GUID format).
   // This is a read-only field, populated by the server based on the authenticated user.
   optional string created_by_user_id = 7 [(buf.validate.field).string = {uuid: true}];
-  // Name of the user that created this invite.
+  // The email of the user who created this invite.
   // This is a read-only value, populated by the server based on the created_by_user_id field.
-  optional string created_by_name = 8;
+  optional string created_by_email = 8;
   // The timestamp when the invite was last updated (e.g., status change).
   // This is a read-only field.
   google.protobuf.Timestamp last_modified_at = 9;
-  // Identifier of the user that accepted or rejected this invite.
-  // This is a read-only value.
-  optional string user_id = 10 [(buf.validate.field).string = {uuid: true}];
   // The status of the invite.
   // This is a read-only field.
-  AccountInviteStatus status = 11;
+  AccountInviteStatus status = 10;
 }
 
 // AccountInviteStatus defines the possible statuses of an account invitation.

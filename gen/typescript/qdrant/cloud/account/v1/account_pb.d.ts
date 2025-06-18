@@ -251,15 +251,11 @@ export declare const ListAccountInvitesResponseSchema: GenMessage<ListAccountInv
  * ListReceivedAccountInvitesRequest is the request for the ListReceivedAccountInvites function.
  * This lists invites for the authenticated user across all accounts.
  *
+ * Empty
+ *
  * @generated from message qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest
  */
 export declare type ListReceivedAccountInvitesRequest = Message<"qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest"> & {
-  /**
-   * Optional: Filter invites by status (e.g. pending only).
-   *
-   * @generated from field: optional qdrant.cloud.account.v1.AccountInviteStatus status_filter = 1;
-   */
-  statusFilter?: AccountInviteStatus;
 };
 
 /**
@@ -794,12 +790,12 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
   createdByUserId?: string;
 
   /**
-   * Name of the user that created this invite.
+   * The email of the user who created this invite.
    * This is a read-only value, populated by the server based on the created_by_user_id field.
    *
-   * @generated from field: optional string created_by_name = 8;
+   * @generated from field: optional string created_by_email = 8;
    */
-  createdByName?: string;
+  createdByEmail?: string;
 
   /**
    * The timestamp when the invite was last updated (e.g., status change).
@@ -810,18 +806,10 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
   lastModifiedAt?: Timestamp;
 
   /**
-   * Identifier of the user that accepted or rejected this invite.
-   * This is a read-only value.
-   *
-   * @generated from field: optional string user_id = 10;
-   */
-  userId?: string;
-
-  /**
    * The status of the invite.
    * This is a read-only field.
    *
-   * @generated from field: qdrant.cloud.account.v1.AccountInviteStatus status = 11;
+   * @generated from field: qdrant.cloud.account.v1.AccountInviteStatus status = 10;
    */
   status: AccountInviteStatus;
 };
