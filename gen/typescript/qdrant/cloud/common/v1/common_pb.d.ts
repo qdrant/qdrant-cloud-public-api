@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/common/v1/common.proto (package qdrant.cloud.common.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
 import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 
@@ -103,6 +103,49 @@ export declare type KeyValue = Message<"qdrant.cloud.common.v1.KeyValue"> & {
 export declare const KeyValueSchema: GenMessage<KeyValue>;
 
 /**
+ * ActorType specifies the type of actor that can call a method.
+ *
+ * @generated from enum qdrant.cloud.common.v1.ActorType
+ */
+export enum ActorType {
+  /**
+   * Default, unspecified actor type. Should generally not be used explicitly in options
+   * unless to signify an error or uninitialized state.
+   *
+   * @generated from enum value: ACTOR_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Represents a human user, typically authenticated via an identity provider (Auth0).
+   *
+   * @generated from enum value: ACTOR_TYPE_USER = 1;
+   */
+  USER = 1,
+
+  /**
+   * Represents a programmatic access key, also called management key,
+   * that is not be tied to a specific user or service account identity, but rather an account.
+   *
+   * @generated from enum value: ACTOR_TYPE_MANAGEMENT_KEY = 2;
+   */
+  MANAGEMENT_KEY = 2,
+
+  /**
+   * Represents a service account or machine user, often used for M2M communication.
+   * This is for internal platform use only.
+   *
+   * @generated from enum value: ACTOR_TYPE_SERVICE_ACCOUNT = 3;
+   */
+  SERVICE_ACCOUNT = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.ActorType.
+ */
+export declare const ActorTypeSchema: GenEnum<ActorType>;
+
+/**
  * A list of permissions which ALL need to be met by the current user.
  *
  * @generated from extension: repeated string permissions = 50001;
@@ -124,4 +167,12 @@ export declare const account_id_expression: GenExtension<MethodOptions, string>;
  * @generated from extension: bool requires_authentication = 50003;
  */
 export declare const requires_authentication: GenExtension<MethodOptions, boolean>;
+
+/**
+ * If this option is set, only the specified actor types are allowed to call the method.
+ * If empty or not set, all authenticated actor types (that pass other permission checks) are allowed.
+ *
+ * @generated from extension: repeated qdrant.cloud.common.v1.ActorType supported_actor_types = 50004 [packed = true];
+ */
+export declare const supported_actor_types: GenExtension<MethodOptions, ActorType[]>;
 
