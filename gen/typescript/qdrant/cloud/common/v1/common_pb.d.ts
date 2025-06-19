@@ -124,19 +124,20 @@ export enum ActorType {
   USER = 1,
 
   /**
-   * Represents a service account or machine user, often used for M2M communication.
-   *
-   * @generated from enum value: ACTOR_TYPE_SERVICE_ACCOUNT = 2;
-   */
-  SERVICE_ACCOUNT = 2,
-
-  /**
    * Represents a programmatic access key, also called management key,
    * that is not be tied to a specific user or service account identity, but rather an account.
    *
-   * @generated from enum value: ACTOR_TYPE_MANAGEMENT_KEY = 3;
+   * @generated from enum value: ACTOR_TYPE_MANAGEMENT_KEY = 2;
    */
-  MANAGEMENT_KEY = 3,
+  MANAGEMENT_KEY = 2,
+
+  /**
+   * Represents a service account or machine user, often used for M2M communication.
+   * This is for internal platform use only.
+   *
+   * @generated from enum value: ACTOR_TYPE_SERVICE_ACCOUNT = 3;
+   */
+  SERVICE_ACCOUNT = 3,
 }
 
 /**

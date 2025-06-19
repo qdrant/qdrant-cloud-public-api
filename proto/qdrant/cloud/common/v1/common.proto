@@ -48,11 +48,12 @@ enum ActorType {
   ACTOR_TYPE_UNSPECIFIED = 0;
   // Represents a human user, typically authenticated via an identity provider (Auth0).
   ACTOR_TYPE_USER = 1;
-  // Represents a service account or machine user, often used for M2M communication.
-  ACTOR_TYPE_SERVICE_ACCOUNT = 2;
   // Represents a programmatic access key, also called management key,
   // that is not be tied to a specific user or service account identity, but rather an account.
-  ACTOR_TYPE_MANAGEMENT_KEY = 3;
+  ACTOR_TYPE_MANAGEMENT_KEY = 2;
+  // Represents a service account or machine user, often used for M2M communication.
+  // This is for internal platform use only.
+  ACTOR_TYPE_SERVICE_ACCOUNT = 3;
 }
 
 // Semantic version number.

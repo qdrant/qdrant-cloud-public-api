@@ -11,12 +11,12 @@ class ActorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ACTOR_TYPE_UNSPECIFIED: _ClassVar[ActorType]
     ACTOR_TYPE_USER: _ClassVar[ActorType]
-    ACTOR_TYPE_SERVICE_ACCOUNT: _ClassVar[ActorType]
     ACTOR_TYPE_MANAGEMENT_KEY: _ClassVar[ActorType]
+    ACTOR_TYPE_SERVICE_ACCOUNT: _ClassVar[ActorType]
 ACTOR_TYPE_UNSPECIFIED: ActorType
 ACTOR_TYPE_USER: ActorType
-ACTOR_TYPE_SERVICE_ACCOUNT: ActorType
 ACTOR_TYPE_MANAGEMENT_KEY: ActorType
+ACTOR_TYPE_SERVICE_ACCOUNT: ActorType
 PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
 permissions: _descriptor.FieldDescriptor
 ACCOUNT_ID_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
