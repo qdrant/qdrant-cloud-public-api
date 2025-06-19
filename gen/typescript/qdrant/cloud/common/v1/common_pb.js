@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/common/v1/common.proto (package qdrant.cloud.common.v1, syntax proto3)
 /* eslint-disable */
 
-import { extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, extDesc, fileDesc, messageDesc, tsEnum } from "@bufbuild/protobuf/codegenv1";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb.js";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 
@@ -10,7 +10,7 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file qdrant/cloud/common/v1/common.proto.
  */
 export const file_qdrant_cloud_common_v1_common = /*@__PURE__*/
-  fileDesc("CiNxZHJhbnQvY2xvdWQvY29tbW9uL3YxL2NvbW1vbi5wcm90bxIWcWRyYW50LmNsb3VkLmNvbW1vbi52MSI2CgdWZXJzaW9uEg0KBW1ham9yGAEgASgNEg0KBW1pbm9yGAIgASgNEg0KBXBhdGNoGAMgASgNImIKDFNlY3JldEtleVJlZhI5CgRuYW1lGAEgASgJQiu6SChyJhABGP0BMh9eW2EtejAtOV0oWy1hLXowLTldKlthLXowLTldKT8kEhcKA2tleRgCIAEoCUIKukgHcgUQARiACCKnAQoIS2V5VmFsdWUSgQEKA2tleRgBIAEoCUJ0ukhxcm8YPzJrXigoW2EtekEtWjAtOV18W2EtekEtWjAtOV1bYS16QS1aMC05XC1dKlthLXpBLVowLTldKVwuKSooW0EtWmEtejAtOV18W0EtWmEtejAtOV1bQS1aYS16MC05XC1dKltBLVphLXowLTldKSQSFwoFdmFsdWUYAiABKAlCCLpIBXIDGIAIOkIKC3Blcm1pc3Npb25zEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY0YYDIAMoCVILcGVybWlzc2lvbnM6VAoVYWNjb3VudF9pZF9leHByZXNzaW9uEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY0oYDIAEoCVITYWNjb3VudElkRXhwcmVzc2lvbjpZChdyZXF1aXJlc19hdXRoZW50aWNhdGlvbhIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGNOGAyABKAhSFnJlcXVpcmVzQXV0aGVudGljYXRpb25C9gEKGmNvbS5xZHJhbnQuY2xvdWQuY29tbW9uLnYxQgtDb21tb25Qcm90b1ABWlBnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2NvbW1vbi92MTtjb21tb252MaICA1FDQ6oCFlFkcmFudC5DbG91ZC5Db21tb24uVjHKAhZRZHJhbnRcQ2xvdWRcQ29tbW9uXFYx4gIiUWRyYW50XENsb3VkXENvbW1vblxWMVxHUEJNZXRhZGF0YeoCGVFkcmFudDo6Q2xvdWQ6OkNvbW1vbjo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_protobuf_descriptor]);
+  fileDesc("CiNxZHJhbnQvY2xvdWQvY29tbW9uL3YxL2NvbW1vbi5wcm90bxIWcWRyYW50LmNsb3VkLmNvbW1vbi52MSI2CgdWZXJzaW9uEg0KBW1ham9yGAEgASgNEg0KBW1pbm9yGAIgASgNEg0KBXBhdGNoGAMgASgNImIKDFNlY3JldEtleVJlZhI5CgRuYW1lGAEgASgJQiu6SChyJhABGP0BMh9eW2EtejAtOV0oWy1hLXowLTldKlthLXowLTldKT8kEhcKA2tleRgCIAEoCUIKukgHcgUQARiACCKnAQoIS2V5VmFsdWUSgQEKA2tleRgBIAEoCUJ0ukhxcm8YPzJrXigoW2EtekEtWjAtOV18W2EtekEtWjAtOV1bYS16QS1aMC05XC1dKlthLXpBLVowLTldKVwuKSooW0EtWmEtejAtOV18W0EtWmEtejAtOV1bQS1aYS16MC05XC1dKltBLVphLXowLTldKSQSFwoFdmFsdWUYAiABKAlCCLpIBXIDGIAIKnsKCUFjdG9yVHlwZRIaChZBQ1RPUl9UWVBFX1VOU1BFQ0lGSUVEEAASEwoPQUNUT1JfVFlQRV9VU0VSEAESHgoaQUNUT1JfVFlQRV9TRVJWSUNFX0FDQ09VTlQQAhIdChlBQ1RPUl9UWVBFX01BTkFHRU1FTlRfS0VZEAM6QgoLcGVybWlzc2lvbnMSHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxjRhgMgAygJUgtwZXJtaXNzaW9uczpUChVhY2NvdW50X2lkX2V4cHJlc3Npb24SHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxjShgMgASgJUhNhY2NvdW50SWRFeHByZXNzaW9uOlkKF3JlcXVpcmVzX2F1dGhlbnRpY2F0aW9uEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY04YDIAEoCFIWcmVxdWlyZXNBdXRoZW50aWNhdGlvbjqKAQoVc3VwcG9ydGVkX2FjdG9yX3R5cGVzEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY1IYDIAMoDjIhLnFkcmFudC5jbG91ZC5jb21tb24udjEuQWN0b3JUeXBlQhEQAbpIDJIBCSIHggEEEAEgAFITc3VwcG9ydGVkQWN0b3JUeXBlc0L2AQoaY29tLnFkcmFudC5jbG91ZC5jb21tb24udjFCC0NvbW1vblByb3RvUAFaUGdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvY29tbW9uL3YxO2NvbW1vbnYxogIDUUNDqgIWUWRyYW50LkNsb3VkLkNvbW1vbi5WMcoCFlFkcmFudFxDbG91ZFxDb21tb25cVjHiAiJRZHJhbnRcQ2xvdWRcQ29tbW9uXFYxXEdQQk1ldGFkYXRh6gIZUWRyYW50OjpDbG91ZDo6Q29tbW9uOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_protobuf_descriptor]);
 
 /**
  * Describes the message qdrant.cloud.common.v1.Version.
@@ -32,6 +32,20 @@ export const SecretKeyRefSchema = /*@__PURE__*/
  */
 export const KeyValueSchema = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_common_v1_common, 2);
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.ActorType.
+ */
+export const ActorTypeSchema = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_common_v1_common, 0);
+
+/**
+ * ActorType specifies the type of actor that can call a method.
+ *
+ * @generated from enum qdrant.cloud.common.v1.ActorType
+ */
+export const ActorType = /*@__PURE__*/
+  tsEnum(ActorTypeSchema);
 
 /**
  * A list of permissions which ALL need to be met by the current user.
@@ -58,4 +72,13 @@ export const account_id_expression = /*@__PURE__*/
  */
 export const requires_authentication = /*@__PURE__*/
   extDesc(file_qdrant_cloud_common_v1_common, 2);
+
+/**
+ * If this option is set, only the specified actor types are allowed to call the method.
+ * If empty or not set, all authenticated actor types (that pass other permission checks) are allowed.
+ *
+ * @generated from extension: repeated qdrant.cloud.common.v1.ActorType supported_actor_types = 50004 [packed = true];
+ */
+export const supported_actor_types = /*@__PURE__*/
+  extDesc(file_qdrant_cloud_common_v1_common, 3);
 

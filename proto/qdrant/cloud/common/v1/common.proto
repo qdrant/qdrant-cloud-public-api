@@ -27,6 +27,34 @@ extend google.protobuf.MethodOptions {
   bool requires_authentication = 50003;
 }
 
+// The extension for allowing a method to be be used with specific actor types.
+// If the extension is missing the system allows all actor types.
+extend google.protobuf.MethodOptions {
+  // If this option is set, only the specified actor types are allowed to call the method.
+  // If empty or not set, all authenticated actor types (that pass other permission checks) are allowed.
+  repeated ActorType supported_actor_types = 50004 [
+    packed = true,
+    (buf.validate.field).repeated.items.enum = {
+      defined_only: true // Ensures only defined enum values are used
+      not_in: [0] /* Disallows ACTOR_TYPE_UNSPECIFIED (value 0) */
+    }
+  ];
+}
+
+// ActorType specifies the type of actor that can call a method.
+enum ActorType {
+  // Default, unspecified actor type. Should generally not be used explicitly in options
+  // unless to signify an error or uninitialized state.
+  ACTOR_TYPE_UNSPECIFIED = 0;
+  // Represents a human user, typically authenticated via an identity provider (Auth0).
+  ACTOR_TYPE_USER = 1;
+  // Represents a service account or machine user, often used for M2M communication.
+  ACTOR_TYPE_SERVICE_ACCOUNT = 2;
+  // Represents a programmatic access key, also called management key,
+  // that is not be tied to a specific user or service account identity, but rather an account.
+  ACTOR_TYPE_MANAGEMENT_KEY = 3;
+}
+
 // Semantic version number.
 message Version {
   // Major version (increasing may break APIs)
