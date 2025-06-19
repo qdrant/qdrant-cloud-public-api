@@ -47,11 +47,11 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - write:user
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
-	// Fetches the authenticated user's consent status for a specific legal document.
+	// Fetch the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
 	GetUserConsent(ctx context.Context, in *GetUserConsentRequest, opts ...grpc.CallOption) (*GetUserConsentResponse, error)
-	// Records the authenticated user's consent for a legal document.
+	// Record the authenticated user's consent for a legal document.
 	// Required permissions:
 	// - write:user
 	RecordUserConsent(ctx context.Context, in *RecordUserConsentRequest, opts ...grpc.CallOption) (*RecordUserConsentResponse, error)
@@ -68,7 +68,7 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - read:roles
 	GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*GetRoleResponse, error)
-	// Creates a role for the account identified by the given ID.
+	// Create a role for the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
@@ -78,7 +78,7 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - write:roles
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
-	// Deletes a role in the account identified by the given ID.
+	// Delete a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - delete:roles
@@ -235,11 +235,11 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - write:user
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
-	// Fetches the authenticated user's consent status for a specific legal document.
+	// Fetch the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
 	GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error)
-	// Records the authenticated user's consent for a legal document.
+	// Record the authenticated user's consent for a legal document.
 	// Required permissions:
 	// - write:user
 	RecordUserConsent(context.Context, *RecordUserConsentRequest) (*RecordUserConsentResponse, error)
@@ -256,7 +256,7 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - read:roles
 	GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
-	// Creates a role for the account identified by the given ID.
+	// Create a role for the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
@@ -266,7 +266,7 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - write:roles
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
-	// Deletes a role in the account identified by the given ID.
+	// Delete a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - delete:roles

@@ -10,7 +10,7 @@ import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
 service AccountService {
-  // Fetch all accounts associated for the provided user, where the user has the provided permission.
+  // Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
   // Required permissions:
   // - read:accounts
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
@@ -30,7 +30,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}"};
   }
-  // Creates an account for the authenticated user.
+  // Create an account for the authenticated user.
   // Required permissions:
   // - None (authenticated only)
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
@@ -58,7 +58,7 @@ service AccountService {
       body: "*"
     };
   }
-  // Deletes an account identified by the given ID.
+  // Delete an account identified by the given ID.
   // Required permissions:
   // - delete:account
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
@@ -77,7 +77,7 @@ service AccountService {
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites"};
   }
   // Fetch all account invites for the authenticated user (across all accounts).
-  // These are the invites you are invited to join, not the ones you have sent.
+  // These are the invites the user has received, not the ones they have sent.
   // Required permissions:
   // - None (authenticated only)
   rpc ListReceivedAccountInvites(ListReceivedAccountInvitesRequest) returns (ListReceivedAccountInvitesResponse) {
@@ -85,6 +85,8 @@ service AccountService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/self/invites"};
   }
@@ -105,13 +107,15 @@ service AccountService {
     option (common.v1.permissions) = "write:invites";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account_invite.account_id";
+    // custom supported-actor-types expression. (Sending an invite requires being authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/account/v1/accounts/{account_invite.account_id}/invites"
       body: "*"
     };
   }
-  // Delete an account invite
+  // Delete an account invite.
   // Required permissions:
   // - delete:invites
   rpc DeleteAccountInvite(DeleteAccountInviteRequest) returns (DeleteAccountInviteResponse) {
@@ -120,7 +124,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
   }
-  // Accept an account invite
+  // Accept an account invite.
   // The authenticated user's email address must match the email address specified in
   // the invite.
   // Required permissions:
@@ -128,10 +132,12 @@ service AccountService {
   rpc AcceptAccountInvite(AcceptAccountInviteRequest) returns (AcceptAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept"};
   }
-  // Reject an account invite
+  // Reject an account invite.
   // The authenticated user's email address must match the email address specified in
   // the invite.
   // Required permissions:
@@ -139,11 +145,13 @@ service AccountService {
   rpc RejectAccountInvite(RejectAccountInviteRequest) returns (RejectAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
   }
   // Fetch all account members in the account identified by the given account ID.
-  // The authenticated user must be a member of the account identifier by the given account ID.
+  // The authenticated actor must be a member of the account identified by the given account ID.
   // Required permissions:
   // - read:users
   rpc ListAccountMembers(ListAccountMembersRequest) returns (ListAccountMembersResponse) {
@@ -152,8 +160,8 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members"};
   }
-  // Fetch an account member by its id.
-  // The authenticated user must be a member of the account that the member is for.
+  // Fetch an account member by ID.
+  // The authenticated actor must be a member of the same account as the member being fetch.
   // Required permissions:
   // - read:users
   rpc GetAccountMember(GetAccountMemberRequest) returns (GetAccountMemberResponse) {
@@ -162,8 +170,8 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
   }
-  // Delete an account member
-  // The authenticated user must be a member of the account that the member is for.
+  // Delete an account member.
+  // The authenticated actor must be a member of the account from which the the member is being removed.
   // Required permissions:
   // - delete:users
   rpc DeleteAccountMember(DeleteAccountMemberRequest) returns (DeleteAccountMemberResponse) {

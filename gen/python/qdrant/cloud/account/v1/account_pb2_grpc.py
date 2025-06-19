@@ -97,7 +97,7 @@ class AccountServiceServicer(object):
     """
 
     def ListAccounts(self, request, context):
-        """Fetch all accounts associated for the provided user, where the user has the provided permission.
+        """Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
         Required permissions:
         - read:accounts
         """
@@ -115,7 +115,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateAccount(self, request, context):
-        """Creates an account for the authenticated user.
+        """Create an account for the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
@@ -133,7 +133,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccount(self, request, context):
-        """Deletes an account identified by the given ID.
+        """Delete an account identified by the given ID.
         Required permissions:
         - delete:account
         """
@@ -152,7 +152,7 @@ class AccountServiceServicer(object):
 
     def ListReceivedAccountInvites(self, request, context):
         """Fetch all account invites for the authenticated user (across all accounts).
-        These are the invites you are invited to join, not the ones you have sent.
+        These are the invites the user has received, not the ones they have sent.
         Required permissions:
         - None (authenticated only)
         """
@@ -179,7 +179,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccountInvite(self, request, context):
-        """Delete an account invite
+        """Delete an account invite.
         Required permissions:
         - delete:invites
         """
@@ -188,7 +188,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def AcceptAccountInvite(self, request, context):
-        """Accept an account invite
+        """Accept an account invite.
         The authenticated user's email address must match the email address specified in
         the invite.
         Required permissions:
@@ -199,7 +199,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RejectAccountInvite(self, request, context):
-        """Reject an account invite
+        """Reject an account invite.
         The authenticated user's email address must match the email address specified in
         the invite.
         Required permissions:
@@ -211,7 +211,7 @@ class AccountServiceServicer(object):
 
     def ListAccountMembers(self, request, context):
         """Fetch all account members in the account identified by the given account ID.
-        The authenticated user must be a member of the account identifier by the given account ID.
+        The authenticated actor must be a member of the account identified by the given account ID.
         Required permissions:
         - read:users
         """
@@ -220,8 +220,8 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccountMember(self, request, context):
-        """Fetch an account member by its id.
-        The authenticated user must be a member of the account that the member is for.
+        """Fetch an account member by ID.
+        The authenticated actor must be a member of the same account as the member being fetch.
         Required permissions:
         - read:users
         """
@@ -230,8 +230,8 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccountMember(self, request, context):
-        """Delete an account member
-        The authenticated user must be a member of the account that the member is for.
+        """Delete an account member.
+        The authenticated actor must be a member of the account from which the the member is being removed.
         Required permissions:
         - delete:users
         """

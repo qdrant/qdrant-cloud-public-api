@@ -17,6 +17,8 @@ service IAMService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me"};
   }
@@ -34,7 +36,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Fetches the authenticated user's consent status for a specific legal document.
+  // Fetch the authenticated user's consent status for a specific legal document.
   // Required permissions:
   // - None (authenticated only)
   rpc GetUserConsent(GetUserConsentRequest) returns (GetUserConsentResponse) {
@@ -42,10 +44,12 @@ service IAMService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/consent"};
   }
-  // Records the authenticated user's consent for a legal document.
+  // Record the authenticated user's consent for a legal document.
   // Required permissions:
   // - write:user
   rpc RecordUserConsent(RecordUserConsentRequest) returns (RecordUserConsentResponse) {
@@ -53,6 +57,8 @@ service IAMService {
     option (common.v1.permissions) = "write:user";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/users/me/consent"
@@ -89,7 +95,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
   }
-  // Creates a role for the account identified by the given ID.
+  // Create a role for the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
   // Required permissions:
   // - write:roles
@@ -119,7 +125,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Deletes a role in the account identified by the given ID.
+  // Delete a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
   // Required permissions:
   // - delete:roles

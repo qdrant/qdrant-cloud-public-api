@@ -100,7 +100,7 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetUserConsent(self, request, context):
-        """Fetches the authenticated user's consent status for a specific legal document.
+        """Fetch the authenticated user's consent status for a specific legal document.
         Required permissions:
         - None (authenticated only)
         """
@@ -109,7 +109,7 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RecordUserConsent(self, request, context):
-        """Records the authenticated user's consent for a legal document.
+        """Record the authenticated user's consent for a legal document.
         Required permissions:
         - write:user
         """
@@ -146,7 +146,7 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateRole(self, request, context):
-        """Creates a role for the account identified by the given ID.
+        """Create a role for the account identified by the given ID.
         Note: The role_type must be ROLE_TYPE_CUSTOM.
         Required permissions:
         - write:roles
@@ -166,7 +166,7 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteRole(self, request, context):
-        """Deletes a role in the account identified by the given ID.
+        """Delete a role in the account identified by the given ID.
         Note: The role_type must be ROLE_TYPE_CUSTOM.
         Required permissions:
         - delete:roles

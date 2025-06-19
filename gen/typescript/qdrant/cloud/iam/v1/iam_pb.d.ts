@@ -905,7 +905,7 @@ export declare const IAMService: GenService<{
     output: typeof UpdateUserResponseSchema;
   },
   /**
-   * Fetches the authenticated user's consent status for a specific legal document.
+   * Fetch the authenticated user's consent status for a specific legal document.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -917,7 +917,7 @@ export declare const IAMService: GenService<{
     output: typeof GetUserConsentResponseSchema;
   },
   /**
-   * Records the authenticated user's consent for a legal document.
+   * Record the authenticated user's consent for a legal document.
    * Required permissions:
    * - write:user
    *
@@ -966,7 +966,7 @@ export declare const IAMService: GenService<{
     output: typeof GetRoleResponseSchema;
   },
   /**
-   * Creates a role for the account identified by the given ID.
+   * Create a role for the account identified by the given ID.
    * Note: The role_type must be ROLE_TYPE_CUSTOM.
    * Required permissions:
    * - write:roles
@@ -992,7 +992,7 @@ export declare const IAMService: GenService<{
     output: typeof UpdateRoleResponseSchema;
   },
   /**
-   * Deletes a role in the account identified by the given ID.
+   * Delete a role in the account identified by the given ID.
    * Note: The role_type must be ROLE_TYPE_CUSTOM.
    * Required permissions:
    * - delete:roles
