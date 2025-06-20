@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package qdrant.cloud.featureflag.v1;
+
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// FeatureFlagService provides APIs to list feature flags.
+service FeatureFlagService {
+  // List all feature flags.
+  rpc ListFeatureFlags(ListFeatureFlagsRequest) returns (ListFeatureFlagsResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/featureflag/v1/flags"};
+  }
+}
+
+// Request to list all feature flags.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+message ListFeatureFlagsRequest {}
+
+// Response containing a list of feature flags.
+message ListFeatureFlagsResponse {
+  // The actual feature flags in this list.
+  repeated FeatureFlag items = 1;
+}
+
+// FeatureFlagStatus defines the activation state of a flag.
+enum FeatureFlagStatus {
+  // Unspecified feature flag status.
+  FEATURE_FLAG_STATUS_UNSPECIFIED = 0;
+  // The feature flag is enabled.
+  FEATURE_FLAG_STATUS_ENABLED = 1;
+  // The feature flag is disabled.
+  FEATURE_FLAG_STATUS_DISABLED = 2;
+}
+
+// A single feature flag definition.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message FeatureFlag {
+  // The unique identifier of the feature flag.
+  string name = 2;
+  // Is it enabled or not
+  FeatureFlagStatus status = 4;
+}
