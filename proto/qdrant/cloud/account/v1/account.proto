@@ -418,6 +418,12 @@ message Account {
   // The privileges of the account, if any.
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
+  // This field is read-only and is set by the server based on the authenticated user.
+  // It indicates whether the authenticated user is the owner of the account.
+  bool is_owner = 9;
+  // This field is read-only and is set by the server based on the authenticated user.
+  // It indicates whether the account is the default account for the authenticated user.
+  bool is_default = 10;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

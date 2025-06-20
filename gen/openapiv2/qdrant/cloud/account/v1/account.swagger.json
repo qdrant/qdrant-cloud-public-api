@@ -620,6 +620,14 @@
                 "type": "string"
               },
               "description": "The privileges of the account, if any.\nThis is a read-only field."
+            },
+            "isOwner": {
+              "type": "boolean",
+              "description": "This field is read-only and is set by the server based on the authenticated user.\nIt indicates whether the authenticated user is the owner of the account."
+            },
+            "isDefault": {
+              "type": "boolean",
+              "description": "This field is read-only and is set by the server based on the authenticated user.\nIt indicates whether the account is the default account for the authenticated user."
             }
           },
           "description": "The actual account.",
@@ -701,6 +709,14 @@
             "type": "string"
           },
           "description": "The privileges of the account, if any.\nThis is a read-only field."
+        },
+        "isOwner": {
+          "type": "boolean",
+          "description": "This field is read-only and is set by the server based on the authenticated user.\nIt indicates whether the authenticated user is the owner of the account."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "This field is read-only and is set by the server based on the authenticated user.\nIt indicates whether the account is the default account for the authenticated user."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."

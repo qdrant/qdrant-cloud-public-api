@@ -717,6 +717,22 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
    * @generated from field: repeated string privileges = 8;
    */
   privileges: string[];
+
+  /**
+   * This field is read-only and is set by the server based on the authenticated user.
+   * It indicates whether the authenticated user is the owner of the account.
+   *
+   * @generated from field: bool is_owner = 9;
+   */
+  isOwner: boolean;
+
+  /**
+   * This field is read-only and is set by the server based on the authenticated user.
+   * It indicates whether the account is the default account for the authenticated user.
+   *
+   * @generated from field: bool is_default = 10;
+   */
+  isDefault: boolean;
 };
 
 /**
