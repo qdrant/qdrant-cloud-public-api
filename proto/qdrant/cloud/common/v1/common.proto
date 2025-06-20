@@ -7,7 +7,9 @@ import "google/protobuf/descriptor.proto";
 
 // The extension for adding permissions to the system
 extend google.protobuf.MethodOptions {
-  // A list of permissions which ALL need to be met by the current user.
+  // A list of permissions which need to be met by the current user.
+  // If `requires_all_permissions` is true (or missing): ALL of the permissions should be met (and)
+  // If `requires_all_permissions` is false: ANY-OF the permissions should be met (or)
   repeated string permissions = 50001;
 }
 
@@ -39,6 +41,14 @@ extend google.protobuf.MethodOptions {
       not_in: [0] /* Disallows ACTOR_TYPE_UNSPECIFIED (value 0) */
     }
   ];
+}
+
+// The extension for switching `permissions` from ALL to ANY-OF
+// If the extension is missing 'true' will be used (defaulting to ALL).
+extend google.protobuf.MethodOptions {
+  // If set to true the provided permissions are ALL (and)
+  // if set to false the provided permissions are ANY-OF (or).
+  bool requires_all_permissions = 50005;
 }
 
 // ActorType specifies the type of actor that can call a method.
