@@ -10,7 +10,7 @@ import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
 service AccountService {
-  // Fetch all accounts associated for the provided user, where the user has the provided permission.
+  // Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
   // Required permissions:
   // - read:accounts
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
@@ -21,7 +21,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts"};
   }
-  // Get an account identified by the given ID.
+  // Gets an account identified by the given ID.
   // Required permissions:
   // - read:account
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
@@ -44,7 +44,7 @@ service AccountService {
       body: "*"
     };
   }
-  // Update an account identified by the given ID.
+  // Updates an account identified by the given ID.
   // Required permissions:
   // - write:account
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
@@ -67,7 +67,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
   }
-  // Fetch all account invites in the account identified by the given account ID.
+  // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
   // - read:invites
   rpc ListAccountInvites(ListAccountInvitesRequest) returns (ListAccountInvitesResponse) {
@@ -76,8 +76,8 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites"};
   }
-  // Fetch all account invites for the authenticated user (across all accounts).
-  // These are the invites you are invited to join, not the ones you have sent.
+  // Lists all account invites for the authenticated user (across all accounts).
+  // These are the invites the user has received, not the ones they have sent.
   // Required permissions:
   // - None (authenticated only)
   rpc ListReceivedAccountInvites(ListReceivedAccountInvitesRequest) returns (ListReceivedAccountInvitesResponse) {
@@ -85,10 +85,12 @@ service AccountService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/self/invites"};
   }
-  // Fetch an account invite identified by the given account ID and invite ID.
+  // Gets an account invite identified by the given account ID and invite ID.
   // Required permissions:
   // - read:invites
   rpc GetAccountInvite(GetAccountInviteRequest) returns (GetAccountInviteResponse) {
@@ -97,7 +99,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
   }
-  // Create a new account invite.
+  // Creates a new account invite.
   // Required permissions:
   // - write:invites
   rpc CreateAccountInvite(CreateAccountInviteRequest) returns (CreateAccountInviteResponse) {
@@ -105,13 +107,15 @@ service AccountService {
     option (common.v1.permissions) = "write:invites";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account_invite.account_id";
+    // custom supported-actor-types expression. (Sending an invite requires being authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/account/v1/accounts/{account_invite.account_id}/invites"
       body: "*"
     };
   }
-  // Delete an account invite
+  // Deletes an account invite.
   // Required permissions:
   // - delete:invites
   rpc DeleteAccountInvite(DeleteAccountInviteRequest) returns (DeleteAccountInviteResponse) {
@@ -120,7 +124,7 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
   }
-  // Accept an account invite
+  // Accepts an account invite.
   // The authenticated user's email address must match the email address specified in
   // the invite.
   // Required permissions:
@@ -128,10 +132,12 @@ service AccountService {
   rpc AcceptAccountInvite(AcceptAccountInviteRequest) returns (AcceptAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept"};
   }
-  // Reject an account invite
+  // Rejects an account invite.
   // The authenticated user's email address must match the email address specified in
   // the invite.
   // Required permissions:
@@ -139,11 +145,13 @@ service AccountService {
   rpc RejectAccountInvite(RejectAccountInviteRequest) returns (RejectAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom supported-actor-types expression. (Account invites are sent to users)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
   }
-  // Fetch all account members in the account identified by the given account ID.
-  // The authenticated user must be a member of the account identifier by the given account ID.
+  // Lists all account members in the account identified by the given account ID.
+  // The authenticated actor must be a member of the account identified by the given account ID.
   // Required permissions:
   // - read:users
   rpc ListAccountMembers(ListAccountMembersRequest) returns (ListAccountMembersResponse) {
@@ -152,8 +160,8 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members"};
   }
-  // Fetch an account member by its id.
-  // The authenticated user must be a member of the account that the member is for.
+  // Gets an account member by ID.
+  // The authenticated actor must be a member of the same account as the member being fetch.
   // Required permissions:
   // - read:users
   rpc GetAccountMember(GetAccountMemberRequest) returns (GetAccountMemberResponse) {
@@ -162,8 +170,8 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
   }
-  // Delete an account member
-  // The authenticated user must be a member of the account that the member is for.
+  // Deletes an account member.
+  // The authenticated actor must be a member of the account from which the the member is being removed.
   // Required permissions:
   // - delete:users
   rpc DeleteAccountMember(DeleteAccountMemberRequest) returns (DeleteAccountMemberResponse) {

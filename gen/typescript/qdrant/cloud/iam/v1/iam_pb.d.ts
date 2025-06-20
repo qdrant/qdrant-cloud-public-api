@@ -881,7 +881,7 @@ export declare const RoleTypeSchema: GenEnum<RoleType>;
  */
 export declare const IAMService: GenService<{
   /**
-   * Fetch the authenticated user.
+   * Gets the authenticated user.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -893,7 +893,7 @@ export declare const IAMService: GenService<{
     output: typeof GetAuthenticatedUserResponseSchema;
   },
   /**
-   * Update the user identified by the given ID.
+   * Updates the user identified by the given ID.
    * Required permissions:
    * - write:user
    *
@@ -905,7 +905,7 @@ export declare const IAMService: GenService<{
     output: typeof UpdateUserResponseSchema;
   },
   /**
-   * Fetches the authenticated user's consent status for a specific legal document.
+   * Gets the authenticated user's consent status for a specific legal document.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -929,7 +929,7 @@ export declare const IAMService: GenService<{
     output: typeof RecordUserConsentResponseSchema;
   },
   /**
-   * Fetch all permissions known in the system for the provided account.
+   * Lists all permissions known in the system for the provided account.
    * Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
    * Required permissions:
    * - read:roles
@@ -942,7 +942,7 @@ export declare const IAMService: GenService<{
     output: typeof ListPermissionsResponseSchema;
   },
   /**
-   * Fetch all roles in the account identified by the given ID.
+   * Lists all roles in the account identified by the given ID.
    * Required permissions:
    * - read:roles
    *
@@ -954,7 +954,7 @@ export declare const IAMService: GenService<{
     output: typeof ListRolesResponseSchema;
   },
   /**
-   * Get a role for the account identified by the given ID.
+   * Gets a role for the account identified by the given ID.
    * Required permissions:
    * - read:roles
    *
@@ -979,7 +979,7 @@ export declare const IAMService: GenService<{
     output: typeof CreateRoleResponseSchema;
   },
   /**
-   * Update a role in the account identified by the given ID.
+   * Updates a role in the account identified by the given ID.
    * Note: The role_type must be ROLE_TYPE_CUSTOM.
    * Required permissions:
    * - write:roles
@@ -1005,7 +1005,7 @@ export declare const IAMService: GenService<{
     output: typeof DeleteRoleResponseSchema;
   },
   /**
-   * List the effective permissions for the user in the account identified by the given ID.
+   * Lists the effective permissions for the user in the account identified by the given ID.
    * Required permissions:
    * - read:roles
    *
@@ -1017,7 +1017,7 @@ export declare const IAMService: GenService<{
     output: typeof ListEffectivePermissionsResponseSchema;
   },
   /**
-   * Assign the provided roles to the user in the account identified by the given ID.
+   * Assigns the provided roles to the user in the account identified by the given ID.
    * Required permissions:
    * - write:roles
    *
