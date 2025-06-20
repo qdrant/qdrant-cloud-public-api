@@ -359,12 +359,12 @@ message User {
   string email = 4 [(buf.validate.field).string = {email: true}];
   // The status of the user.
   // This is a read-only field.
-  UserStatus status = 6;
+  UserStatus status = 5;
   // The default account ID of the user (in GUID format).
   // You should be member of the account when updating.
-  string default_account_id = 7 [(buf.validate.field).string = {uuid: true}];
+  string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
   // The notification preferences of the user.
-  NotificationPreferences notification_preferences = 8;
+  NotificationPreferences notification_preferences = 7;
 }
 
 // UserStatus defines the possible statuses of a user.

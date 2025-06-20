@@ -597,7 +597,7 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * The status of the user.
    * This is a read-only field.
    *
-   * @generated from field: qdrant.cloud.iam.v1.UserStatus status = 6;
+   * @generated from field: qdrant.cloud.iam.v1.UserStatus status = 5;
    */
   status: UserStatus;
 
@@ -605,14 +605,14 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * The default account ID of the user (in GUID format).
    * You should be member of the account when updating.
    *
-   * @generated from field: string default_account_id = 7;
+   * @generated from field: string default_account_id = 6;
    */
   defaultAccountId: string;
 
   /**
    * The notification preferences of the user.
    *
-   * @generated from field: qdrant.cloud.iam.v1.NotificationPreferences notification_preferences = 8;
+   * @generated from field: qdrant.cloud.iam.v1.NotificationPreferences notification_preferences = 7;
    */
   notificationPreferences?: NotificationPreferences;
 };
