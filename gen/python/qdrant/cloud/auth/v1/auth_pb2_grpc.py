@@ -37,7 +37,7 @@ class AuthServiceServicer(object):
     """
 
     def ListManagementKeys(self, request, context):
-        """Fetch all management keys in the account identified by the given ID.
+        """Lists all management keys in the account identified by the given ID.
         Required permissions:
         - read:management_keys
         """

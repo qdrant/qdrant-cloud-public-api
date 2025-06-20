@@ -30,7 +30,7 @@ const (
 //
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 type DatabaseApiKeyServiceClient interface {
-	// Fetch all database api keys in the account identified by the given ID.
+	// Lists all database api keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api_keys
 	ListDatabaseApiKeys(ctx context.Context, in *ListDatabaseApiKeysRequest, opts ...grpc.CallOption) (*ListDatabaseApiKeysResponse, error)
@@ -88,7 +88,7 @@ func (c *databaseApiKeyServiceClient) DeleteDatabaseApiKey(ctx context.Context, 
 //
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 type DatabaseApiKeyServiceServer interface {
-	// Fetch all database api keys in the account identified by the given ID.
+	// Lists all database api keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:api_keys
 	ListDatabaseApiKeys(context.Context, *ListDatabaseApiKeysRequest) (*ListDatabaseApiKeysResponse, error)

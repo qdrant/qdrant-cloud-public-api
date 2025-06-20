@@ -9,7 +9,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 service AuthService {
-  // Fetch all management keys in the account identified by the given ID.
+  // Lists all management keys in the account identified by the given ID.
   // Required permissions:
   // - read:management_keys
   rpc ListManagementKeys(ListManagementKeysRequest) returns (ListManagementKeysResponse) {

@@ -637,7 +637,7 @@ export declare const AggregatorSchema: GenEnum<Aggregator>;
  */
 export declare const MonitoringService: GenService<{
   /**
-   * Get summary metrics of a cluster in the account identified by the given ID.
+   * Gets the summary metrics of a cluster in the account identified by the given ID.
    * Required permissions:
    * - read:clusters
    *
@@ -649,7 +649,7 @@ export declare const MonitoringService: GenService<{
     output: typeof GetClusterSummaryMetricsResponseSchema;
   },
   /**
-   * Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+   * Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
    * Required permissions:
    * - read:clusters
    *
@@ -661,7 +661,7 @@ export declare const MonitoringService: GenService<{
     output: typeof GetClusterUsageMetricsResponseSchema;
   },
   /**
-   * Get the logs of a cluster in the account identified by the given ID.
+   * Gets the logs of a cluster in the account identified by the given ID.
    * Required permissions:
    * - read:clusters
    *
@@ -673,7 +673,7 @@ export declare const MonitoringService: GenService<{
     output: typeof GetClusterLogsResponseSchema;
   },
   /**
-   * Get the events of a cluster in the account identified by the given ID.
+   * Gets the events of a cluster in the account identified by the given ID.
    * This method is currently available only for clusters running in hybrid cloud environments.
    * Required permissions:
    * - read:clusters

@@ -42,7 +42,7 @@ class MonitoringServiceServicer(object):
     """
 
     def GetClusterSummaryMetrics(self, request, context):
-        """Get summary metrics of a cluster in the account identified by the given ID.
+        """Gets the summary metrics of a cluster in the account identified by the given ID.
         Required permissions:
         - read:clusters
         """
@@ -51,7 +51,7 @@ class MonitoringServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetClusterUsageMetrics(self, request, context):
-        """Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+        """Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
         Required permissions:
         - read:clusters
         """
@@ -60,7 +60,7 @@ class MonitoringServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetClusterLogs(self, request, context):
-        """Get the logs of a cluster in the account identified by the given ID.
+        """Gets the logs of a cluster in the account identified by the given ID.
         Required permissions:
         - read:clusters
         """
@@ -69,7 +69,7 @@ class MonitoringServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetClusterEvents(self, request, context):
-        """Get the events of a cluster in the account identified by the given ID.
+        """Gets the events of a cluster in the account identified by the given ID.
         This method is currently available only for clusters running in hybrid cloud environments.
         Required permissions:
         - read:clusters
