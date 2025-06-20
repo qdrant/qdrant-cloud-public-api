@@ -1707,7 +1707,7 @@ export declare const ClusterScalabilityStatusSchema: GenEnum<ClusterScalabilityS
  */
 export declare const ClusterService: GenService<{
   /**
-   * Fetch all clusters in the account identified by the given ID.
+   * Lists all clusters in the account identified by the given ID.
    * Required permissions:
    * - read:clusters
    *
@@ -1719,7 +1719,7 @@ export declare const ClusterService: GenService<{
     output: typeof ListClustersResponseSchema;
   },
   /**
-   * Fetch a cluster in the account identified by the given IDs.
+   * Gets a cluster in the account identified by the given ID.
    * Required permissions:
    * - read:clusters
    *
@@ -1743,7 +1743,7 @@ export declare const ClusterService: GenService<{
     output: typeof CreateClusterResponseSchema;
   },
   /**
-   * Update a cluster in the account identified by the given ID.
+   * Updates a cluster in the account identified by the given ID.
    * Required permissions:
    * - write:clusters
    *
@@ -1804,7 +1804,7 @@ export declare const ClusterService: GenService<{
     output: typeof SuggestClusterNameResponseSchema;
   },
   /**
-   * Fetch all qdrant releases in the account identified by the given ID.
+   * Lists all qdrant releases in the account identified by the given ID.
    * Optional a cluster ID can be provided, the list will return the options to update to only.
    * Required permissions:
    * - read:clusters

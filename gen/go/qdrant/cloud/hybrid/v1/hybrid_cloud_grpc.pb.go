@@ -33,11 +33,11 @@ const (
 //
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceClient interface {
-	// Fetch all hybrid cloud environments in the account identified by the given ID.
+	// Lists all hybrid cloud environments in the account identified by the given ID.
 	// Required permissions:
 	// - read:hybrid_cloud_environments
 	ListHybridCloudEnvironments(ctx context.Context, in *ListHybridCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListHybridCloudEnvironmentsResponse, error)
-	// Fetch a hybrid cloud environment in the account identified by the given ID.
+	// Gets a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:
 	// - read:hybrid_cloud_environments
 	GetHybridCloudEnvironment(ctx context.Context, in *GetHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetHybridCloudEnvironmentResponse, error)
@@ -53,7 +53,7 @@ type HybridCloudServiceClient interface {
 	// Required permissions:
 	// - delete:hybrid_cloud_environments
 	DeleteHybridCloudEnvironment(ctx context.Context, in *DeleteHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteHybridCloudEnvironmentResponse, error)
-	// Fetch the commands that should be executed against a kubernetes cluster to
+	// Gets the commands that should be executed against a kubernetes cluster to
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
 	// Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
@@ -136,11 +136,11 @@ func (c *hybridCloudServiceClient) GetBootstrapCommands(ctx context.Context, in 
 //
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceServer interface {
-	// Fetch all hybrid cloud environments in the account identified by the given ID.
+	// Lists all hybrid cloud environments in the account identified by the given ID.
 	// Required permissions:
 	// - read:hybrid_cloud_environments
 	ListHybridCloudEnvironments(context.Context, *ListHybridCloudEnvironmentsRequest) (*ListHybridCloudEnvironmentsResponse, error)
-	// Fetch a hybrid cloud environment in the account identified by the given ID.
+	// Gets a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:
 	// - read:hybrid_cloud_environments
 	GetHybridCloudEnvironment(context.Context, *GetHybridCloudEnvironmentRequest) (*GetHybridCloudEnvironmentResponse, error)
@@ -156,7 +156,7 @@ type HybridCloudServiceServer interface {
 	// Required permissions:
 	// - delete:hybrid_cloud_environments
 	DeleteHybridCloudEnvironment(context.Context, *DeleteHybridCloudEnvironmentRequest) (*DeleteHybridCloudEnvironmentResponse, error)
-	// Fetch the commands that should be executed against a kubernetes cluster to
+	// Gets the commands that should be executed against a kubernetes cluster to
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
 	// Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.

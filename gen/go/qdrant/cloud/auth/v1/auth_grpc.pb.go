@@ -30,7 +30,7 @@ const (
 //
 // AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 type AuthServiceClient interface {
-	// Fetch all management keys in the account identified by the given ID.
+	// Lists all management keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:management_keys
 	ListManagementKeys(ctx context.Context, in *ListManagementKeysRequest, opts ...grpc.CallOption) (*ListManagementKeysResponse, error)
@@ -88,7 +88,7 @@ func (c *authServiceClient) DeleteManagementKey(ctx context.Context, in *DeleteM
 //
 // AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 type AuthServiceServer interface {
-	// Fetch all management keys in the account identified by the given ID.
+	// Lists all management keys in the account identified by the given ID.
 	// Required permissions:
 	// - read:management_keys
 	ListManagementKeys(context.Context, *ListManagementKeysRequest) (*ListManagementKeysResponse, error)

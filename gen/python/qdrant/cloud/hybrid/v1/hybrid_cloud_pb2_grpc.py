@@ -52,7 +52,7 @@ class HybridCloudServiceServicer(object):
     """
 
     def ListHybridCloudEnvironments(self, request, context):
-        """Fetch all hybrid cloud environments in the account identified by the given ID.
+        """Lists all hybrid cloud environments in the account identified by the given ID.
         Required permissions:
         - read:hybrid_cloud_environments
         """
@@ -61,7 +61,7 @@ class HybridCloudServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetHybridCloudEnvironment(self, request, context):
-        """Fetch a hybrid cloud environment in the account identified by the given ID.
+        """Gets a hybrid cloud environment in the account identified by the given ID.
         Required permissions:
         - read:hybrid_cloud_environments
         """
@@ -97,7 +97,7 @@ class HybridCloudServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetBootstrapCommands(self, request, context):
-        """Fetch the commands that should be executed against a kubernetes cluster to
+        """Gets the commands that should be executed against a kubernetes cluster to
         bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
         but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
         Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.

@@ -9,7 +9,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 service DatabaseApiKeyService {
-  // Fetch all database api keys in the account identified by the given ID.
+  // Lists all database api keys in the account identified by the given ID.
   // Required permissions:
   // - read:api_keys
   rpc ListDatabaseApiKeys(ListDatabaseApiKeysRequest) returns (ListDatabaseApiKeysResponse) {

@@ -18,7 +18,7 @@
   "paths": {
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/events": {
       "get": {
-        "summary": "Get the events of a cluster in the account identified by the given ID.\nThis method is currently available only for clusters running in hybrid cloud environments.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets the events of a cluster in the account identified by the given ID.\nThis method is currently available only for clusters running in hybrid cloud environments.\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_GetClusterEvents",
         "responses": {
           "200": {
@@ -73,7 +73,7 @@
     },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/logs": {
       "get": {
-        "summary": "Get the logs of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets the logs of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_GetClusterLogs",
         "responses": {
           "200": {
@@ -128,7 +128,7 @@
     },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/summary-metrics": {
       "get": {
-        "summary": "Get summary metrics of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets the summary metrics of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_GetClusterSummaryMetrics",
         "responses": {
           "200": {
@@ -167,7 +167,7 @@
     },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/usage-metrics": {
       "get": {
-        "summary": "Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_GetClusterUsageMetrics",
         "responses": {
           "200": {

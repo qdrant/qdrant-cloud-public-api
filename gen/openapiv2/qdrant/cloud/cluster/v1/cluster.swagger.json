@@ -18,7 +18,7 @@
   "paths": {
     "/api/cluster/v1/accounts/{accountId}/clusters": {
       "get": {
-        "summary": "Fetch all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "summary": "Lists all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListClusters",
         "responses": {
           "200": {
@@ -96,7 +96,7 @@
     },
     "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}": {
       "get": {
-        "summary": "Fetch a cluster in the account identified by the given IDs.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_GetCluster",
         "responses": {
           "200": {
@@ -257,7 +257,7 @@
     },
     "/api/cluster/v1/accounts/{accountId}/releases": {
       "get": {
-        "summary": "Fetch all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
+        "summary": "Lists all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListQdrantReleases",
         "responses": {
           "200": {
@@ -336,7 +336,7 @@
     },
     "/api/cluster/v1/accounts/{cluster.accountId}/clusters/{cluster.id}": {
       "put": {
-        "summary": "Update a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "summary": "Updates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
         "operationId": "ClusterService_UpdateCluster",
         "responses": {
           "200": {

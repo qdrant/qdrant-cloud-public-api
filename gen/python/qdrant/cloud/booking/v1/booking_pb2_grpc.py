@@ -37,7 +37,7 @@ class BookingServiceServicer(object):
     """
 
     def ListPackages(self, request, context):
-        """Fetch all packages known by the system, optional filtered.
+        """Lists all packages known by the system, optional filtered.
         Required permissions:
         - None (authenticated only)
         """
@@ -46,7 +46,7 @@ class BookingServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetPackage(self, request, context):
-        """Get the package identified by the request identifier
+        """Gets the package identified by the given ID.
         Required permissions:
         - None (authenticated only)
         """
@@ -55,7 +55,7 @@ class BookingServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListGlobalPackages(self, request, context):
-        """Fetch all public packages
+        """Lists all public packages
         Required permissions:
         - None (public endpoint)
         buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
