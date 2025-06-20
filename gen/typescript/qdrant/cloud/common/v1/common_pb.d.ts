@@ -146,7 +146,9 @@ export enum ActorType {
 export declare const ActorTypeSchema: GenEnum<ActorType>;
 
 /**
- * A list of permissions which ALL need to be met by the current user.
+ * A list of permissions which need to be met by the current user.
+ * If `requires_all_permissions` is true (or missing): ALL of the permissions should be met (and)
+ * If `requires_all_permissions` is false: ANY-OF the permissions should be met (or)
  *
  * @generated from extension: repeated string permissions = 50001;
  */
@@ -175,4 +177,12 @@ export declare const requires_authentication: GenExtension<MethodOptions, boolea
  * @generated from extension: repeated qdrant.cloud.common.v1.ActorType supported_actor_types = 50004 [packed = true];
  */
 export declare const supported_actor_types: GenExtension<MethodOptions, ActorType[]>;
+
+/**
+ * If set to true the provided permissions are ALL (and)
+ * if set to false the provided permissions are ANY-OF (or).
+ *
+ * @generated from extension: bool requires_all_permissions = 50005;
+ */
+export declare const requires_all_permissions: GenExtension<MethodOptions, boolean>;
 
