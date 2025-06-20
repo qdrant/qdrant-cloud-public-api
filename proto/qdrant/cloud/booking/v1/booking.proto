@@ -8,7 +8,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BookingService is the API used to configure the booking settings (like packages objects).
 service BookingService {
-  // Fetch all packages known by the system, optional filtered.
+  // Lists all packages known by the system, optional filtered.
   // Required permissions:
   // - None (authenticated only)
   rpc ListPackages(ListPackagesRequest) returns (ListPackagesResponse) {
@@ -17,7 +17,7 @@ service BookingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/packages"};
   }
-  // Get the package identified by the request identifier
+  // Gets the package identified by the given ID.
   // Required permissions:
   // - None (authenticated only)
   rpc GetPackage(GetPackageRequest) returns (GetPackageResponse) {
@@ -27,7 +27,7 @@ service BookingService {
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/packages/{id}"};
   }
   // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
-  // Fetch all public packages
+  // Lists all public packages.
   // Authentication not required
   rpc ListGlobalPackages(ListGlobalPackagesRequest) returns (ListGlobalPackagesResponse) {
     // authentication not required

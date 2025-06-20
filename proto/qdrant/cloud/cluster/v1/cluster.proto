@@ -9,7 +9,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
-  // Fetch all clusters in the account identified by the given ID.
+  // Lists all clusters in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc ListClusters(ListClustersRequest) returns (ListClustersResponse) {
@@ -18,7 +18,7 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters"};
   }
-  // Fetch a cluster in the account identified by the given IDs.
+  // Gets a cluster in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc GetCluster(GetClusterRequest) returns (GetClusterResponse) {
@@ -41,7 +41,7 @@ service ClusterService {
       body: "*"
     };
   }
-  // Update a cluster in the account identified by the given ID.
+  // Updates a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
   rpc UpdateCluster(UpdateClusterRequest) returns (UpdateClusterResponse) {
@@ -92,7 +92,7 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/suggest-name"};
   }
-  // Fetch all qdrant releases in the account identified by the given ID.
+  // Lists all qdrant releases in the account identified by the given ID.
   // Optional a cluster ID can be provided, the list will return the options to update to only.
   // Required permissions:
   // - read:clusters

@@ -891,7 +891,7 @@ export declare const BackupRestoreStatusSchema: GenEnum<BackupRestoreStatus>;
  */
 export declare const BackupService: GenService<{
   /**
-   * Fetch all backups in the account identified by the given ID.
+   * Lists all backups in the account identified by the given ID.
    * Required permissions:
    * - read:backups
    *
@@ -927,7 +927,7 @@ export declare const BackupService: GenService<{
     output: typeof DeleteBackupResponseSchema;
   },
   /**
-   * Fetch all backup restores in the account identified by the given ID.
+   * Lists all backup restores in the account identified by the given ID.
    * Required permissions:
    * - read:backups
    *
@@ -951,7 +951,7 @@ export declare const BackupService: GenService<{
     output: typeof RestoreBackupResponseSchema;
   },
   /**
-   * Fetch all backup schedules in the account identified by the given ID.
+   * Lists all backup schedules in the account identified by the given ID.
    * Required permissions:
    * - read:backup_schedules
    *
@@ -963,7 +963,7 @@ export declare const BackupService: GenService<{
     output: typeof ListBackupSchedulesResponseSchema;
   },
   /**
-   * Fetch a backup schedule in the account identified by the given ID.
+   * Gets a backup schedule in the account identified by the given ID.
    * Required permissions:
    * - read:backup_schedules
    *
@@ -987,7 +987,7 @@ export declare const BackupService: GenService<{
     output: typeof CreateBackupScheduleResponseSchema;
   },
   /**
-   * Update a backup schedule in the account identified by the given ID.
+   * Updates a backup schedule in the account identified by the given ID.
    * Required permissions:
    * - write:backup_schedules
    *

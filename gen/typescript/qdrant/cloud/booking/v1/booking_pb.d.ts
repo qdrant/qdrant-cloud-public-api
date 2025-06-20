@@ -349,7 +349,7 @@ export declare const PackageStatusSchema: GenEnum<PackageStatus>;
  */
 export declare const BookingService: GenService<{
   /**
-   * Fetch all packages known by the system, optional filtered.
+   * Lists all packages known by the system, optional filtered.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -361,7 +361,7 @@ export declare const BookingService: GenService<{
     output: typeof ListPackagesResponseSchema;
   },
   /**
-   * Get the package identified by the request identifier
+   * Gets the package identified by the given ID.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -373,7 +373,7 @@ export declare const BookingService: GenService<{
     output: typeof GetPackageResponseSchema;
   },
   /**
-   * Fetch all public packages
+   * Lists all public packages.
    * Authentication not required
    *
    * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalPackages

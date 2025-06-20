@@ -291,7 +291,7 @@ export declare const CloudProviderRegionSchema: GenMessage<CloudProviderRegion>;
  */
 export declare const PlatformService: GenService<{
   /**
-   * Fetch all available cloud providers globally (not account-specific).
+   * Lists all available cloud providers globally (not account-specific).
    * Authentication is not required.
    *
    * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders
@@ -302,7 +302,7 @@ export declare const PlatformService: GenService<{
     output: typeof ListGlobalCloudProvidersResponseSchema;
   },
   /**
-   * Fetch all cloud providers in the account identified by the given ID.
+   * Lists all cloud providers in the account identified by the given ID.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -314,7 +314,7 @@ export declare const PlatformService: GenService<{
     output: typeof ListCloudProvidersResponseSchema;
   },
   /**
-   * Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+   * Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
    * Authentication is not required.
    *
    * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions
@@ -325,7 +325,7 @@ export declare const PlatformService: GenService<{
     output: typeof ListGlobalCloudProviderRegionsResponseSchema;
   },
   /**
-   * Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
+   * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
    * Required permissions:
    * - None (authenticated only)
    *

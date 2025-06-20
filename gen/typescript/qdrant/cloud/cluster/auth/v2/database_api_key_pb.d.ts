@@ -425,7 +425,7 @@ export declare const CollectionAccessRuleAccessTypeSchema: GenEnum<CollectionAcc
  */
 export declare const DatabaseApiKeyService: GenService<{
   /**
-   * Fetch all database api keys in the account identified by the given ID.
+   * Lists all database api keys in the account identified by the given ID.
    * Required permissions:
    * - read:api_keys
    *

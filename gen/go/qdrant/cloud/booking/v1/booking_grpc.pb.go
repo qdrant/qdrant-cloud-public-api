@@ -30,15 +30,15 @@ const (
 //
 // BookingService is the API used to configure the booking settings (like packages objects).
 type BookingServiceClient interface {
-	// Fetch all packages known by the system, optional filtered.
+	// Lists all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
 	ListPackages(ctx context.Context, in *ListPackagesRequest, opts ...grpc.CallOption) (*ListPackagesResponse, error)
-	// Get the package identified by the request identifier
+	// Gets the package identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
-	// Fetch all public packages
+	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 }
@@ -87,15 +87,15 @@ func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListG
 //
 // BookingService is the API used to configure the booking settings (like packages objects).
 type BookingServiceServer interface {
-	// Fetch all packages known by the system, optional filtered.
+	// Lists all packages known by the system, optional filtered.
 	// Required permissions:
 	// - None (authenticated only)
 	ListPackages(context.Context, *ListPackagesRequest) (*ListPackagesResponse, error)
-	// Get the package identified by the request identifier
+	// Gets the package identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
-	// Fetch all public packages
+	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()

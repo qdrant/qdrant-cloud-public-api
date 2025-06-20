@@ -10,7 +10,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
 service MonitoringService {
-  // Get summary metrics of a cluster in the account identified by the given ID.
+  // Gets the summary metrics of a cluster in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc GetClusterSummaryMetrics(GetClusterSummaryMetricsRequest) returns (GetClusterSummaryMetricsResponse) {
@@ -19,7 +19,7 @@ service MonitoringService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics"};
   }
-  // Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+  // Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc GetClusterUsageMetrics(GetClusterUsageMetricsRequest) returns (GetClusterUsageMetricsResponse) {
@@ -28,7 +28,7 @@ service MonitoringService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics"};
   }
-  // Get the logs of a cluster in the account identified by the given ID.
+  // Gets the logs of a cluster in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
   rpc GetClusterLogs(GetClusterLogsRequest) returns (GetClusterLogsResponse) {
@@ -37,7 +37,7 @@ service MonitoringService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs"};
   }
-  // Get the events of a cluster in the account identified by the given ID.
+  // Gets the events of a cluster in the account identified by the given ID.
   // This method is currently available only for clusters running in hybrid cloud environments.
   // Required permissions:
   // - read:clusters

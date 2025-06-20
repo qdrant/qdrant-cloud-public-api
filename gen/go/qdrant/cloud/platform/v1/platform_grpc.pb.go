@@ -31,17 +31,17 @@ const (
 //
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceClient interface {
-	// Fetch all available cloud providers globally (not account-specific).
+	// Lists all available cloud providers globally (not account-specific).
 	// Authentication is not required.
 	ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error)
-	// Fetch all cloud providers in the account identified by the given ID.
+	// Lists all cloud providers in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviders(ctx context.Context, in *ListCloudProvidersRequest, opts ...grpc.CallOption) (*ListCloudProvidersResponse, error)
-	// Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+	// Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
 	// Authentication is not required.
 	ListGlobalCloudProviderRegions(ctx context.Context, in *ListGlobalCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudProviderRegionsResponse, error)
-	// Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
+	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
@@ -101,17 +101,17 @@ func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in
 //
 // PlatformService is the API used to query for cloud provider & regional information.
 type PlatformServiceServer interface {
-	// Fetch all available cloud providers globally (not account-specific).
+	// Lists all available cloud providers globally (not account-specific).
 	// Authentication is not required.
 	ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error)
-	// Fetch all cloud providers in the account identified by the given ID.
+	// Lists all cloud providers in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error)
-	// Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+	// Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
 	// Authentication is not required.
 	ListGlobalCloudProviderRegions(context.Context, *ListGlobalCloudProviderRegionsRequest) (*ListGlobalCloudProviderRegionsResponse, error)
-	// Fetch all cloud provider regions in the account identified by the given ID and cloud provider.
+	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
 	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
