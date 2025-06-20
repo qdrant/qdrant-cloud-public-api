@@ -18,7 +18,7 @@
   "paths": {
     "/api/account/v1/accounts": {
       "get": {
-        "summary": "Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.\nRequired permissions:\n- read:accounts",
+        "summary": "Lists all accounts associated with the authenticated actor, where the actor has the specified permission.\nRequired permissions:\n- read:accounts",
         "operationId": "AccountService_ListAccounts",
         "responses": {
           "200": {
@@ -39,7 +39,7 @@
         ]
       },
       "post": {
-        "summary": "Create an account for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Creates an account for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_CreateAccount",
         "responses": {
           "200": {
@@ -73,7 +73,7 @@
     },
     "/api/account/v1/accounts/{account.id}": {
       "put": {
-        "summary": "Update an account identified by the given ID.\nRequired permissions:\n- write:account",
+        "summary": "Updates an account identified by the given ID.\nRequired permissions:\n- write:account",
         "operationId": "AccountService_UpdateAccount",
         "responses": {
           "200": {
@@ -113,7 +113,7 @@
     },
     "/api/account/v1/accounts/{accountId}": {
       "get": {
-        "summary": "Get an account identified by the given ID.\nRequired permissions:\n- read:account",
+        "summary": "Gets an account identified by the given ID.\nRequired permissions:\n- read:account",
         "operationId": "AccountService_GetAccount",
         "responses": {
           "200": {
@@ -143,7 +143,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an account identified by the given ID.\nRequired permissions:\n- delete:account",
+        "summary": "Deletes an account identified by the given ID.\nRequired permissions:\n- delete:account",
         "operationId": "AccountService_DeleteAccount",
         "responses": {
           "200": {
@@ -175,7 +175,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites": {
       "get": {
-        "summary": "Fetch all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
+        "summary": "Lists all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_ListAccountInvites",
         "responses": {
           "200": {
@@ -207,7 +207,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}": {
       "get": {
-        "summary": "Fetch an account invite identified by the given account ID and invite ID.\nRequired permissions:\n- read:invites",
+        "summary": "Gets an account invite identified by the given account ID and invite ID.\nRequired permissions:\n- read:invites",
         "operationId": "AccountService_GetAccountInvite",
         "responses": {
           "200": {
@@ -244,7 +244,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an account invite.\nRequired permissions:\n- delete:invites",
+        "summary": "Deletes an account invite.\nRequired permissions:\n- delete:invites",
         "operationId": "AccountService_DeleteAccountInvite",
         "responses": {
           "200": {
@@ -283,7 +283,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}/accept": {
       "post": {
-        "summary": "Accept an account invite.\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Accepts an account invite.\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_AcceptAccountInvite",
         "responses": {
           "200": {
@@ -322,7 +322,7 @@
     },
     "/api/account/v1/accounts/{accountId}/invites/{inviteId}/reject": {
       "post": {
-        "summary": "Reject an account invite.\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Rejects an account invite.\nThe authenticated user's email address must match the email address specified in\nthe invite.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_RejectAccountInvite",
         "responses": {
           "200": {
@@ -361,7 +361,7 @@
     },
     "/api/account/v1/accounts/{accountId}/members": {
       "get": {
-        "summary": "Fetch all account members in the account identified by the given account ID.\nThe authenticated actor must be a member of the account identified by the given account ID.\nRequired permissions:\n- read:users",
+        "summary": "Lists all account members in the account identified by the given account ID.\nThe authenticated actor must be a member of the account identified by the given account ID.\nRequired permissions:\n- read:users",
         "operationId": "AccountService_ListAccountMembers",
         "responses": {
           "200": {
@@ -393,7 +393,7 @@
     },
     "/api/account/v1/accounts/{accountId}/members/{userId}": {
       "get": {
-        "summary": "Fetch an account member by ID.\nThe authenticated actor must be a member of the same account as the member being fetch.\nRequired permissions:\n- read:users",
+        "summary": "Gets an account member by ID.\nThe authenticated actor must be a member of the same account as the member being fetch.\nRequired permissions:\n- read:users",
         "operationId": "AccountService_GetAccountMember",
         "responses": {
           "200": {
@@ -430,7 +430,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an account member.\nThe authenticated actor must be a member of the account from which the the member is being removed.\nRequired permissions:\n- delete:users",
+        "summary": "Deletes an account member.\nThe authenticated actor must be a member of the account from which the the member is being removed.\nRequired permissions:\n- delete:users",
         "operationId": "AccountService_DeleteAccountMember",
         "responses": {
           "200": {
@@ -469,7 +469,7 @@
     },
     "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
       "post": {
-        "summary": "Create a new account invite.\nRequired permissions:\n- write:invites",
+        "summary": "Creates a new account invite.\nRequired permissions:\n- write:invites",
         "operationId": "AccountService_CreateAccountInvite",
         "responses": {
           "200": {
@@ -509,7 +509,7 @@
     },
     "/api/account/v1/self/invites": {
       "get": {
-        "summary": "Fetch all account invites for the authenticated user (across all accounts).\nThese are the invites the user has received, not the ones they have sent.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists all account invites for the authenticated user (across all accounts).\nThese are the invites the user has received, not the ones they have sent.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_ListReceivedAccountInvites",
         "responses": {
           "200": {

@@ -39,55 +39,55 @@ const (
 //
 // IAMService is the API used to configure IAM (identity and access management) objects.
 type IAMServiceClient interface {
-	// Fetch the authenticated user.
+	// Gets the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	GetAuthenticatedUser(ctx context.Context, in *GetAuthenticatedUserRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserResponse, error)
-	// Update the user identified by the given ID.
+	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - write:user
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
-	// Fetch the authenticated user's consent status for a specific legal document.
+	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
 	GetUserConsent(ctx context.Context, in *GetUserConsentRequest, opts ...grpc.CallOption) (*GetUserConsentResponse, error)
-	// Record the authenticated user's consent for a legal document.
+	// Records the authenticated user's consent for a legal document.
 	// Required permissions:
 	// - write:user
 	RecordUserConsent(ctx context.Context, in *RecordUserConsentRequest, opts ...grpc.CallOption) (*RecordUserConsentResponse, error)
-	// Fetch all permissions known in the system for the provided account.
+	// Lists all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
 	// - read:roles
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
-	// Fetch all roles in the account identified by the given ID.
+	// Lists all roles in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
-	// Get a role for the account identified by the given ID.
+	// Gets a role for the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*GetRoleResponse, error)
-	// Create a role for the account identified by the given ID.
+	// Creates a role for the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
-	// Update a role in the account identified by the given ID.
+	// Updates a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
-	// Delete a role in the account identified by the given ID.
+	// Deletes a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
-	// List the effective permissions for the user in the account identified by the given ID.
+	// Lists the effective permissions for the user in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	ListEffectivePermissions(ctx context.Context, in *ListEffectivePermissionsRequest, opts ...grpc.CallOption) (*ListEffectivePermissionsResponse, error)
-	// Assign the provided roles to the user in the account identified by the given ID.
+	// Assigns the provided roles to the user in the account identified by the given ID.
 	// Required permissions:
 	// - write:roles
 	AssignUserRoles(ctx context.Context, in *AssignUserRolesRequest, opts ...grpc.CallOption) (*AssignUserRolesResponse, error)
@@ -227,55 +227,55 @@ func (c *iAMServiceClient) AssignUserRoles(ctx context.Context, in *AssignUserRo
 //
 // IAMService is the API used to configure IAM (identity and access management) objects.
 type IAMServiceServer interface {
-	// Fetch the authenticated user.
+	// Gets the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	GetAuthenticatedUser(context.Context, *GetAuthenticatedUserRequest) (*GetAuthenticatedUserResponse, error)
-	// Update the user identified by the given ID.
+	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - write:user
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
-	// Fetch the authenticated user's consent status for a specific legal document.
+	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
 	GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error)
-	// Record the authenticated user's consent for a legal document.
+	// Records the authenticated user's consent for a legal document.
 	// Required permissions:
 	// - write:user
 	RecordUserConsent(context.Context, *RecordUserConsentRequest) (*RecordUserConsentResponse, error)
-	// Fetch all permissions known in the system for the provided account.
+	// Lists all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
 	// Required permissions:
 	// - read:roles
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
-	// Fetch all roles in the account identified by the given ID.
+	// Lists all roles in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
-	// Get a role for the account identified by the given ID.
+	// Gets a role for the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
-	// Create a role for the account identified by the given ID.
+	// Creates a role for the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
-	// Update a role in the account identified by the given ID.
+	// Updates a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - write:roles
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
-	// Delete a role in the account identified by the given ID.
+	// Deletes a role in the account identified by the given ID.
 	// Note: The role_type must be ROLE_TYPE_CUSTOM.
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
-	// List the effective permissions for the user in the account identified by the given ID.
+	// Lists the effective permissions for the user in the account identified by the given ID.
 	// Required permissions:
 	// - read:roles
 	ListEffectivePermissions(context.Context, *ListEffectivePermissionsRequest) (*ListEffectivePermissionsResponse, error)
-	// Assign the provided roles to the user in the account identified by the given ID.
+	// Assigns the provided roles to the user in the account identified by the given ID.
 	// Required permissions:
 	// - write:roles
 	AssignUserRoles(context.Context, *AssignUserRolesRequest) (*AssignUserRolesResponse, error)

@@ -97,7 +97,7 @@ class AccountServiceServicer(object):
     """
 
     def ListAccounts(self, request, context):
-        """Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
+        """Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
         Required permissions:
         - read:accounts
         """
@@ -106,7 +106,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccount(self, request, context):
-        """Get an account identified by the given ID.
+        """Gets an account identified by the given ID.
         Required permissions:
         - read:account
         """
@@ -115,7 +115,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateAccount(self, request, context):
-        """Create an account for the authenticated user.
+        """Creates an account for the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
@@ -124,7 +124,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def UpdateAccount(self, request, context):
-        """Update an account identified by the given ID.
+        """Updates an account identified by the given ID.
         Required permissions:
         - write:account
         """
@@ -133,7 +133,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccount(self, request, context):
-        """Delete an account identified by the given ID.
+        """Deletes an account identified by the given ID.
         Required permissions:
         - delete:account
         """
@@ -142,7 +142,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListAccountInvites(self, request, context):
-        """Fetch all account invites in the account identified by the given account ID.
+        """Lists all account invites in the account identified by the given account ID.
         Required permissions:
         - read:invites
         """
@@ -151,7 +151,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListReceivedAccountInvites(self, request, context):
-        """Fetch all account invites for the authenticated user (across all accounts).
+        """Lists all account invites for the authenticated user (across all accounts).
         These are the invites the user has received, not the ones they have sent.
         Required permissions:
         - None (authenticated only)
@@ -161,7 +161,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccountInvite(self, request, context):
-        """Fetch an account invite identified by the given account ID and invite ID.
+        """Gets an account invite identified by the given account ID and invite ID.
         Required permissions:
         - read:invites
         """
@@ -170,7 +170,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateAccountInvite(self, request, context):
-        """Create a new account invite.
+        """Creates a new account invite.
         Required permissions:
         - write:invites
         """
@@ -179,7 +179,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccountInvite(self, request, context):
-        """Delete an account invite.
+        """Deletes an account invite.
         Required permissions:
         - delete:invites
         """
@@ -188,7 +188,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def AcceptAccountInvite(self, request, context):
-        """Accept an account invite.
+        """Accepts an account invite.
         The authenticated user's email address must match the email address specified in
         the invite.
         Required permissions:
@@ -199,7 +199,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RejectAccountInvite(self, request, context):
-        """Reject an account invite.
+        """Rejects an account invite.
         The authenticated user's email address must match the email address specified in
         the invite.
         Required permissions:
@@ -210,7 +210,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListAccountMembers(self, request, context):
-        """Fetch all account members in the account identified by the given account ID.
+        """Lists all account members in the account identified by the given account ID.
         The authenticated actor must be a member of the account identified by the given account ID.
         Required permissions:
         - read:users
@@ -220,7 +220,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccountMember(self, request, context):
-        """Fetch an account member by ID.
+        """Gets an account member by ID.
         The authenticated actor must be a member of the same account as the member being fetch.
         Required permissions:
         - read:users
@@ -230,7 +230,7 @@ class AccountServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteAccountMember(self, request, context):
-        """Delete an account member.
+        """Deletes an account member.
         The authenticated actor must be a member of the account from which the the member is being removed.
         Required permissions:
         - delete:users

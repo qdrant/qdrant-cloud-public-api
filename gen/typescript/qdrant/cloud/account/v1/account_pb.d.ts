@@ -903,7 +903,7 @@ export declare const AccountInviteStatusSchema: GenEnum<AccountInviteStatus>;
  */
 export declare const AccountService: GenService<{
   /**
-   * Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
+   * Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
    * Required permissions:
    * - read:accounts
    *
@@ -915,7 +915,7 @@ export declare const AccountService: GenService<{
     output: typeof ListAccountsResponseSchema;
   },
   /**
-   * Get an account identified by the given ID.
+   * Gets an account identified by the given ID.
    * Required permissions:
    * - read:account
    *
@@ -927,7 +927,7 @@ export declare const AccountService: GenService<{
     output: typeof GetAccountResponseSchema;
   },
   /**
-   * Create an account for the authenticated user.
+   * Creates an account for the authenticated user.
    * Required permissions:
    * - None (authenticated only)
    *
@@ -939,7 +939,7 @@ export declare const AccountService: GenService<{
     output: typeof CreateAccountResponseSchema;
   },
   /**
-   * Update an account identified by the given ID.
+   * Updates an account identified by the given ID.
    * Required permissions:
    * - write:account
    *
@@ -951,7 +951,7 @@ export declare const AccountService: GenService<{
     output: typeof UpdateAccountResponseSchema;
   },
   /**
-   * Delete an account identified by the given ID.
+   * Deletes an account identified by the given ID.
    * Required permissions:
    * - delete:account
    *
@@ -963,7 +963,7 @@ export declare const AccountService: GenService<{
     output: typeof DeleteAccountResponseSchema;
   },
   /**
-   * Fetch all account invites in the account identified by the given account ID.
+   * Lists all account invites in the account identified by the given account ID.
    * Required permissions:
    * - read:invites
    *
@@ -975,7 +975,7 @@ export declare const AccountService: GenService<{
     output: typeof ListAccountInvitesResponseSchema;
   },
   /**
-   * Fetch all account invites for the authenticated user (across all accounts).
+   * Lists all account invites for the authenticated user (across all accounts).
    * These are the invites the user has received, not the ones they have sent.
    * Required permissions:
    * - None (authenticated only)
@@ -988,7 +988,7 @@ export declare const AccountService: GenService<{
     output: typeof ListReceivedAccountInvitesResponseSchema;
   },
   /**
-   * Fetch an account invite identified by the given account ID and invite ID.
+   * Gets an account invite identified by the given account ID and invite ID.
    * Required permissions:
    * - read:invites
    *
@@ -1000,7 +1000,7 @@ export declare const AccountService: GenService<{
     output: typeof GetAccountInviteResponseSchema;
   },
   /**
-   * Create a new account invite.
+   * Creates a new account invite.
    * Required permissions:
    * - write:invites
    *
@@ -1012,7 +1012,7 @@ export declare const AccountService: GenService<{
     output: typeof CreateAccountInviteResponseSchema;
   },
   /**
-   * Delete an account invite.
+   * Deletes an account invite.
    * Required permissions:
    * - delete:invites
    *
@@ -1024,7 +1024,7 @@ export declare const AccountService: GenService<{
     output: typeof DeleteAccountInviteResponseSchema;
   },
   /**
-   * Accept an account invite.
+   * Accepts an account invite.
    * The authenticated user's email address must match the email address specified in
    * the invite.
    * Required permissions:
@@ -1038,7 +1038,7 @@ export declare const AccountService: GenService<{
     output: typeof AcceptAccountInviteResponseSchema;
   },
   /**
-   * Reject an account invite.
+   * Rejects an account invite.
    * The authenticated user's email address must match the email address specified in
    * the invite.
    * Required permissions:
@@ -1052,7 +1052,7 @@ export declare const AccountService: GenService<{
     output: typeof RejectAccountInviteResponseSchema;
   },
   /**
-   * Fetch all account members in the account identified by the given account ID.
+   * Lists all account members in the account identified by the given account ID.
    * The authenticated actor must be a member of the account identified by the given account ID.
    * Required permissions:
    * - read:users
@@ -1065,7 +1065,7 @@ export declare const AccountService: GenService<{
     output: typeof ListAccountMembersResponseSchema;
   },
   /**
-   * Fetch an account member by ID.
+   * Gets an account member by ID.
    * The authenticated actor must be a member of the same account as the member being fetch.
    * Required permissions:
    * - read:users
@@ -1078,7 +1078,7 @@ export declare const AccountService: GenService<{
     output: typeof GetAccountMemberResponseSchema;
   },
   /**
-   * Delete an account member.
+   * Deletes an account member.
    * The authenticated actor must be a member of the account from which the the member is being removed.
    * Required permissions:
    * - delete:users

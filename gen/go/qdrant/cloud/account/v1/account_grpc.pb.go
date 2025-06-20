@@ -42,70 +42,70 @@ const (
 //
 // AccountService is the API used to configure Accounts.
 type AccountServiceClient interface {
-	// Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
+	// Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
 	// Required permissions:
 	// - read:accounts
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
-	// Get an account identified by the given ID.
+	// Gets an account identified by the given ID.
 	// Required permissions:
 	// - read:account
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
-	// Create an account for the authenticated user.
+	// Creates an account for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
-	// Update an account identified by the given ID.
+	// Updates an account identified by the given ID.
 	// Required permissions:
 	// - write:account
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
-	// Delete an account identified by the given ID.
+	// Deletes an account identified by the given ID.
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
-	// Fetch all account invites in the account identified by the given account ID.
+	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(ctx context.Context, in *ListAccountInvitesRequest, opts ...grpc.CallOption) (*ListAccountInvitesResponse, error)
-	// Fetch all account invites for the authenticated user (across all accounts).
+	// Lists all account invites for the authenticated user (across all accounts).
 	// These are the invites the user has received, not the ones they have sent.
 	// Required permissions:
 	// - None (authenticated only)
 	ListReceivedAccountInvites(ctx context.Context, in *ListReceivedAccountInvitesRequest, opts ...grpc.CallOption) (*ListReceivedAccountInvitesResponse, error)
-	// Fetch an account invite identified by the given account ID and invite ID.
+	// Gets an account invite identified by the given account ID and invite ID.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(ctx context.Context, in *GetAccountInviteRequest, opts ...grpc.CallOption) (*GetAccountInviteResponse, error)
-	// Create a new account invite.
+	// Creates a new account invite.
 	// Required permissions:
 	// - write:invites
 	CreateAccountInvite(ctx context.Context, in *CreateAccountInviteRequest, opts ...grpc.CallOption) (*CreateAccountInviteResponse, error)
-	// Delete an account invite.
+	// Deletes an account invite.
 	// Required permissions:
 	// - delete:invites
 	DeleteAccountInvite(ctx context.Context, in *DeleteAccountInviteRequest, opts ...grpc.CallOption) (*DeleteAccountInviteResponse, error)
-	// Accept an account invite.
+	// Accepts an account invite.
 	// The authenticated user's email address must match the email address specified in
 	// the invite.
 	// Required permissions:
 	// - None (authenticated only)
 	AcceptAccountInvite(ctx context.Context, in *AcceptAccountInviteRequest, opts ...grpc.CallOption) (*AcceptAccountInviteResponse, error)
-	// Reject an account invite.
+	// Rejects an account invite.
 	// The authenticated user's email address must match the email address specified in
 	// the invite.
 	// Required permissions:
 	// - None (authenticated only)
 	RejectAccountInvite(ctx context.Context, in *RejectAccountInviteRequest, opts ...grpc.CallOption) (*RejectAccountInviteResponse, error)
-	// Fetch all account members in the account identified by the given account ID.
+	// Lists all account members in the account identified by the given account ID.
 	// The authenticated actor must be a member of the account identified by the given account ID.
 	// Required permissions:
 	// - read:users
 	ListAccountMembers(ctx context.Context, in *ListAccountMembersRequest, opts ...grpc.CallOption) (*ListAccountMembersResponse, error)
-	// Fetch an account member by ID.
+	// Gets an account member by ID.
 	// The authenticated actor must be a member of the same account as the member being fetch.
 	// Required permissions:
 	// - read:users
 	GetAccountMember(ctx context.Context, in *GetAccountMemberRequest, opts ...grpc.CallOption) (*GetAccountMemberResponse, error)
-	// Delete an account member.
+	// Deletes an account member.
 	// The authenticated actor must be a member of the account from which the the member is being removed.
 	// Required permissions:
 	// - delete:users
@@ -276,70 +276,70 @@ func (c *accountServiceClient) DeleteAccountMember(ctx context.Context, in *Dele
 //
 // AccountService is the API used to configure Accounts.
 type AccountServiceServer interface {
-	// Fetch all accounts associated with the authenticated actor, where the actor has the specified permission.
+	// Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
 	// Required permissions:
 	// - read:accounts
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
-	// Get an account identified by the given ID.
+	// Gets an account identified by the given ID.
 	// Required permissions:
 	// - read:account
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
-	// Create an account for the authenticated user.
+	// Creates an account for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
-	// Update an account identified by the given ID.
+	// Updates an account identified by the given ID.
 	// Required permissions:
 	// - write:account
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
-	// Delete an account identified by the given ID.
+	// Deletes an account identified by the given ID.
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
-	// Fetch all account invites in the account identified by the given account ID.
+	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
 	ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error)
-	// Fetch all account invites for the authenticated user (across all accounts).
+	// Lists all account invites for the authenticated user (across all accounts).
 	// These are the invites the user has received, not the ones they have sent.
 	// Required permissions:
 	// - None (authenticated only)
 	ListReceivedAccountInvites(context.Context, *ListReceivedAccountInvitesRequest) (*ListReceivedAccountInvitesResponse, error)
-	// Fetch an account invite identified by the given account ID and invite ID.
+	// Gets an account invite identified by the given account ID and invite ID.
 	// Required permissions:
 	// - read:invites
 	GetAccountInvite(context.Context, *GetAccountInviteRequest) (*GetAccountInviteResponse, error)
-	// Create a new account invite.
+	// Creates a new account invite.
 	// Required permissions:
 	// - write:invites
 	CreateAccountInvite(context.Context, *CreateAccountInviteRequest) (*CreateAccountInviteResponse, error)
-	// Delete an account invite.
+	// Deletes an account invite.
 	// Required permissions:
 	// - delete:invites
 	DeleteAccountInvite(context.Context, *DeleteAccountInviteRequest) (*DeleteAccountInviteResponse, error)
-	// Accept an account invite.
+	// Accepts an account invite.
 	// The authenticated user's email address must match the email address specified in
 	// the invite.
 	// Required permissions:
 	// - None (authenticated only)
 	AcceptAccountInvite(context.Context, *AcceptAccountInviteRequest) (*AcceptAccountInviteResponse, error)
-	// Reject an account invite.
+	// Rejects an account invite.
 	// The authenticated user's email address must match the email address specified in
 	// the invite.
 	// Required permissions:
 	// - None (authenticated only)
 	RejectAccountInvite(context.Context, *RejectAccountInviteRequest) (*RejectAccountInviteResponse, error)
-	// Fetch all account members in the account identified by the given account ID.
+	// Lists all account members in the account identified by the given account ID.
 	// The authenticated actor must be a member of the account identified by the given account ID.
 	// Required permissions:
 	// - read:users
 	ListAccountMembers(context.Context, *ListAccountMembersRequest) (*ListAccountMembersResponse, error)
-	// Fetch an account member by ID.
+	// Gets an account member by ID.
 	// The authenticated actor must be a member of the same account as the member being fetch.
 	// Required permissions:
 	// - read:users
 	GetAccountMember(context.Context, *GetAccountMemberRequest) (*GetAccountMemberResponse, error)
-	// Delete an account member.
+	// Deletes an account member.
 	// The authenticated actor must be a member of the account from which the the member is being removed.
 	// Required permissions:
 	// - delete:users

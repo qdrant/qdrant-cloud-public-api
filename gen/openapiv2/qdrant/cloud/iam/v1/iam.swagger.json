@@ -18,7 +18,7 @@
   "paths": {
     "/api/iam/v1/accounts/{accountId}/effective-permissions": {
       "get": {
-        "summary": "List the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "summary": "Lists the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
         "operationId": "IAMService_ListEffectivePermissions",
         "responses": {
           "200": {
@@ -50,7 +50,7 @@
     },
     "/api/iam/v1/accounts/{accountId}/permissions": {
       "get": {
-        "summary": "Fetch all permissions known in the system for the provided account.\nNote: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.\nRequired permissions:\n- read:roles",
+        "summary": "Lists all permissions known in the system for the provided account.\nNote: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.\nRequired permissions:\n- read:roles",
         "operationId": "IAMService_ListPermissions",
         "responses": {
           "200": {
@@ -82,7 +82,7 @@
     },
     "/api/iam/v1/accounts/{accountId}/roles": {
       "get": {
-        "summary": "Fetch all roles in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "summary": "Lists all roles in the account identified by the given ID.\nRequired permissions:\n- read:roles",
         "operationId": "IAMService_ListRoles",
         "responses": {
           "200": {
@@ -114,7 +114,7 @@
     },
     "/api/iam/v1/accounts/{accountId}/roles/{roleId}": {
       "get": {
-        "summary": "Get a role for the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "summary": "Gets a role for the account identified by the given ID.\nRequired permissions:\n- read:roles",
         "operationId": "IAMService_GetRole",
         "responses": {
           "200": {
@@ -151,7 +151,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- delete:roles",
+        "summary": "Deletes a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- delete:roles",
         "operationId": "IAMService_DeleteRole",
         "responses": {
           "200": {
@@ -190,7 +190,7 @@
     },
     "/api/iam/v1/accounts/{accountId}/users/{userId}/roles": {
       "post": {
-        "summary": "Assign the provided roles to the user in the account identified by the given ID.\nRequired permissions:\n- write:roles",
+        "summary": "Assigns the provided roles to the user in the account identified by the given ID.\nRequired permissions:\n- write:roles",
         "operationId": "IAMService_AssignUserRoles",
         "responses": {
           "200": {
@@ -237,7 +237,7 @@
     },
     "/api/iam/v1/accounts/{role.accountId}/roles": {
       "post": {
-        "summary": "Create a role for the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
+        "summary": "Creates a role for the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
         "operationId": "IAMService_CreateRole",
         "responses": {
           "200": {
@@ -277,7 +277,7 @@
     },
     "/api/iam/v1/accounts/{role.accountId}/roles/{role.id}": {
       "put": {
-        "summary": "Update a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
+        "summary": "Updates a role in the account identified by the given ID.\nNote: The role_type must be ROLE_TYPE_CUSTOM.\nRequired permissions:\n- write:roles",
         "operationId": "IAMService_UpdateRole",
         "responses": {
           "200": {
@@ -324,7 +324,7 @@
     },
     "/api/iam/v1/users/me": {
       "get": {
-        "summary": "Fetch the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Gets the authenticated user.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_GetAuthenticatedUser",
         "responses": {
           "200": {
@@ -347,7 +347,7 @@
     },
     "/api/iam/v1/users/me/consent": {
       "get": {
-        "summary": "Fetch the authenticated user's consent status for a specific legal document.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Gets the authenticated user's consent status for a specific legal document.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_GetUserConsent",
         "responses": {
           "200": {
@@ -384,7 +384,7 @@
         ]
       },
       "post": {
-        "summary": "Record the authenticated user's consent for a legal document.\nRequired permissions:\n- write:user",
+        "summary": "Records the authenticated user's consent for a legal document.\nRequired permissions:\n- write:user",
         "operationId": "IAMService_RecordUserConsent",
         "responses": {
           "200": {
@@ -418,7 +418,7 @@
     },
     "/api/iam/v1/users/{user.id}": {
       "put": {
-        "summary": "Update the user identified by the given ID.\nRequired permissions:\n- write:user",
+        "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- write:user",
         "operationId": "IAMService_UpdateUser",
         "responses": {
           "200": {

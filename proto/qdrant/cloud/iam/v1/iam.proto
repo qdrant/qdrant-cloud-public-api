@@ -9,7 +9,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // IAMService is the API used to configure IAM (identity and access management) objects.
 service IAMService {
-  // Fetch the authenticated user.
+  // Gets the authenticated user.
   // Required permissions:
   // - None (authenticated only)
   rpc GetAuthenticatedUser(GetAuthenticatedUserRequest) returns (GetAuthenticatedUserResponse) {
@@ -22,7 +22,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me"};
   }
-  // Update the user identified by the given ID.
+  // Updates the user identified by the given ID.
   // Required permissions:
   // - write:user
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
@@ -36,7 +36,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Fetch the authenticated user's consent status for a specific legal document.
+  // Gets the authenticated user's consent status for a specific legal document.
   // Required permissions:
   // - None (authenticated only)
   rpc GetUserConsent(GetUserConsentRequest) returns (GetUserConsentResponse) {
@@ -49,7 +49,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/consent"};
   }
-  // Record the authenticated user's consent for a legal document.
+  // Records the authenticated user's consent for a legal document.
   // Required permissions:
   // - write:user
   rpc RecordUserConsent(RecordUserConsentRequest) returns (RecordUserConsentResponse) {
@@ -65,7 +65,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Fetch all permissions known in the system for the provided account.
+  // Lists all permissions known in the system for the provided account.
   // Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
   // Required permissions:
   // - read:roles
@@ -75,7 +75,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/permissions"};
   }
-  // Fetch all roles in the account identified by the given ID.
+  // Lists all roles in the account identified by the given ID.
   // Required permissions:
   // - read:roles
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
@@ -84,7 +84,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles"};
   }
-  // Get a role for the account identified by the given ID.
+  // Gets a role for the account identified by the given ID.
   // Required permissions:
   // - read:roles
   rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {
@@ -95,7 +95,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
   }
-  // Create a role for the account identified by the given ID.
+  // Creates a role for the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
   // Required permissions:
   // - write:roles
@@ -110,7 +110,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Update a role in the account identified by the given ID.
+  // Updates a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
   // Required permissions:
   // - write:roles
@@ -125,7 +125,7 @@ service IAMService {
       body: "*"
     };
   }
-  // Delete a role in the account identified by the given ID.
+  // Deletes a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
   // Required permissions:
   // - delete:roles
@@ -135,7 +135,7 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
   }
-  // List the effective permissions for the user in the account identified by the given ID.
+  // Lists the effective permissions for the user in the account identified by the given ID.
   // Required permissions:
   // - read:roles
   rpc ListEffectivePermissions(ListEffectivePermissionsRequest) returns (ListEffectivePermissionsResponse) {
@@ -145,7 +145,7 @@ service IAMService {
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/effective-permissions"};
   }
 
-  // Assign the provided roles to the user in the account identified by the given ID.
+  // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:
   // - write:roles
   rpc AssignUserRoles(AssignUserRolesRequest) returns (AssignUserRolesResponse) {
