@@ -207,12 +207,11 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "email", "name", "status", "default_account_id", "notification_preferences")
+    __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id", "notification_preferences")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DEFAULT_ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     NOTIFICATION_PREFERENCES_FIELD_NUMBER: _ClassVar[int]
@@ -220,11 +219,10 @@ class User(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     email: str
-    name: str
     status: UserStatus
     default_account_id: str
     notification_preferences: NotificationPreferences
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ..., notification_preferences: _Optional[_Union[NotificationPreferences, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ..., notification_preferences: _Optional[_Union[NotificationPreferences, _Mapping]] = ...) -> None: ...
 
 class NotificationPreferences(_message.Message):
     __slots__ = ("email_newsletter_enabled",)
