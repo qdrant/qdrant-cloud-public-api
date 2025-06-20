@@ -961,10 +961,6 @@
           "type": "string",
           "description": "The email address of the user."
         },
-        "name": {
-          "type": "string",
-          "description": "The name of the user."
-        },
         "status": {
           "$ref": "#/definitions/v1UserStatus",
           "description": "The status of the user.\nThis is a read-only field."

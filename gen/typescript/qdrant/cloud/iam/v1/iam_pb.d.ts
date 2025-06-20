@@ -594,13 +594,6 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
   email: string;
 
   /**
-   * The name of the user.
-   *
-   * @generated from field: string name = 5;
-   */
-  name: string;
-
-  /**
    * The status of the user.
    * This is a read-only field.
    *
