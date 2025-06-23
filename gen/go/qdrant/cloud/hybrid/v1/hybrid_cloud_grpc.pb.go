@@ -36,12 +36,12 @@ type HybridCloudServiceClient interface {
 	// Fetch all hybrid cloud environments in the account identified by the given ID.
 	// Required permissions (any-of):
 	// - read:hybrid_cloud_environments
-	// - write: clusters
+	// - write:clusters
 	ListHybridCloudEnvironments(ctx context.Context, in *ListHybridCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListHybridCloudEnvironmentsResponse, error)
 	// Fetch a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions (any-of):
 	// - read:hybrid_cloud_environments
-	// - write: clusters
+	// - write:clusters
 	GetHybridCloudEnvironment(ctx context.Context, in *GetHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetHybridCloudEnvironmentResponse, error)
 	// Creates a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:
@@ -141,12 +141,12 @@ type HybridCloudServiceServer interface {
 	// Fetch all hybrid cloud environments in the account identified by the given ID.
 	// Required permissions (any-of):
 	// - read:hybrid_cloud_environments
-	// - write: clusters
+	// - write:clusters
 	ListHybridCloudEnvironments(context.Context, *ListHybridCloudEnvironmentsRequest) (*ListHybridCloudEnvironmentsResponse, error)
 	// Fetch a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions (any-of):
 	// - read:hybrid_cloud_environments
-	// - write: clusters
+	// - write:clusters
 	GetHybridCloudEnvironment(context.Context, *GetHybridCloudEnvironmentRequest) (*GetHybridCloudEnvironmentResponse, error)
 	// Creates a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:

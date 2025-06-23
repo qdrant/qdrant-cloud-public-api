@@ -57,7 +57,7 @@
     },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments": {
       "get": {
-        "summary": "Fetch all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write: clusters",
+        "summary": "Fetch all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
         "operationId": "HybridCloudService_ListHybridCloudEnvironments",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}": {
       "get": {
-        "summary": "Fetch a hybrid cloud environment in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write: clusters",
+        "summary": "Fetch a hybrid cloud environment in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
         "operationId": "HybridCloudService_GetHybridCloudEnvironment",
         "responses": {
           "200": {
