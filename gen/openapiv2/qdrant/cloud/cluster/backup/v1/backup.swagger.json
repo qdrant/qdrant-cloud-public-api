@@ -18,7 +18,7 @@
   "paths": {
     "/api/cluster/backup/v1/accounts/{accountId}/backup_restores": {
       "get": {
-        "summary": "Fetch all backup restores in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "summary": "Lists all backup restores in the account identified by the given ID.\nRequired permissions:\n- read:backups",
         "operationId": "BackupService_ListBackupRestores",
         "responses": {
           "200": {
@@ -57,7 +57,7 @@
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backup_schedules": {
       "get": {
-        "summary": "Fetch all backup schedules in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
+        "summary": "Lists all backup schedules in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
         "operationId": "BackupService_ListBackupSchedules",
         "responses": {
           "200": {
@@ -96,7 +96,7 @@
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backup_schedules/{backupScheduleId}": {
       "get": {
-        "summary": "Fetch a backup schedule in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
+        "summary": "Gets a backup schedule in the account identified by the given ID.\nRequired permissions:\n- read:backup_schedules",
         "operationId": "BackupService_GetBackupSchedule",
         "responses": {
           "200": {
@@ -142,7 +142,7 @@
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backups": {
       "get": {
-        "summary": "Fetch all backups in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "summary": "Lists all backups in the account identified by the given ID.\nRequired permissions:\n- read:backups",
         "operationId": "BackupService_ListBackups",
         "responses": {
           "200": {
@@ -346,7 +346,7 @@
     },
     "/api/cluster/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules/{backupSchedule.id}": {
       "put": {
-        "summary": "Update a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
+        "summary": "Updates a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
         "operationId": "BackupService_UpdateBackupSchedule",
         "responses": {
           "200": {

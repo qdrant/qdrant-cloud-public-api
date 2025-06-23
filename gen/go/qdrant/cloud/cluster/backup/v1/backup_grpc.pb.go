@@ -37,7 +37,7 @@ const (
 //
 // BackupService is the API used to configure backup objects.
 type BackupServiceClient interface {
-	// Fetch all backups in the account identified by the given ID.
+	// Lists all backups in the account identified by the given ID.
 	// Required permissions:
 	// - read:backups
 	ListBackups(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
@@ -49,7 +49,7 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - delete:backups
 	DeleteBackup(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*DeleteBackupResponse, error)
-	// Fetch all backup restores in the account identified by the given ID.
+	// Lists all backup restores in the account identified by the given ID.
 	// Required permissions:
 	// - read:backups
 	ListBackupRestores(ctx context.Context, in *ListBackupRestoresRequest, opts ...grpc.CallOption) (*ListBackupRestoresResponse, error)
@@ -57,11 +57,11 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - admin:backups
 	RestoreBackup(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*RestoreBackupResponse, error)
-	// Fetch all backup schedules in the account identified by the given ID.
+	// Lists all backup schedules in the account identified by the given ID.
 	// Required permissions:
 	// - read:backup_schedules
 	ListBackupSchedules(ctx context.Context, in *ListBackupSchedulesRequest, opts ...grpc.CallOption) (*ListBackupSchedulesResponse, error)
-	// Fetch a backup schedule in the account identified by the given ID.
+	// Gets a backup schedule in the account identified by the given ID.
 	// Required permissions:
 	// - read:backup_schedules
 	GetBackupSchedule(ctx context.Context, in *GetBackupScheduleRequest, opts ...grpc.CallOption) (*GetBackupScheduleResponse, error)
@@ -69,7 +69,7 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - write:backup_schedules
 	CreateBackupSchedule(ctx context.Context, in *CreateBackupScheduleRequest, opts ...grpc.CallOption) (*CreateBackupScheduleResponse, error)
-	// Update a backup schedule in the account identified by the given ID.
+	// Updates a backup schedule in the account identified by the given ID.
 	// Required permissions:
 	// - write:backup_schedules
 	UpdateBackupSchedule(ctx context.Context, in *UpdateBackupScheduleRequest, opts ...grpc.CallOption) (*UpdateBackupScheduleResponse, error)
@@ -193,7 +193,7 @@ func (c *backupServiceClient) DeleteBackupSchedule(ctx context.Context, in *Dele
 //
 // BackupService is the API used to configure backup objects.
 type BackupServiceServer interface {
-	// Fetch all backups in the account identified by the given ID.
+	// Lists all backups in the account identified by the given ID.
 	// Required permissions:
 	// - read:backups
 	ListBackups(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
@@ -205,7 +205,7 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - delete:backups
 	DeleteBackup(context.Context, *DeleteBackupRequest) (*DeleteBackupResponse, error)
-	// Fetch all backup restores in the account identified by the given ID.
+	// Lists all backup restores in the account identified by the given ID.
 	// Required permissions:
 	// - read:backups
 	ListBackupRestores(context.Context, *ListBackupRestoresRequest) (*ListBackupRestoresResponse, error)
@@ -213,11 +213,11 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - admin:backups
 	RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error)
-	// Fetch all backup schedules in the account identified by the given ID.
+	// Lists all backup schedules in the account identified by the given ID.
 	// Required permissions:
 	// - read:backup_schedules
 	ListBackupSchedules(context.Context, *ListBackupSchedulesRequest) (*ListBackupSchedulesResponse, error)
-	// Fetch a backup schedule in the account identified by the given ID.
+	// Gets a backup schedule in the account identified by the given ID.
 	// Required permissions:
 	// - read:backup_schedules
 	GetBackupSchedule(context.Context, *GetBackupScheduleRequest) (*GetBackupScheduleResponse, error)
@@ -225,7 +225,7 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - write:backup_schedules
 	CreateBackupSchedule(context.Context, *CreateBackupScheduleRequest) (*CreateBackupScheduleResponse, error)
-	// Update a backup schedule in the account identified by the given ID.
+	// Updates a backup schedule in the account identified by the given ID.
 	// Required permissions:
 	// - write:backup_schedules
 	UpdateBackupSchedule(context.Context, *UpdateBackupScheduleRequest) (*UpdateBackupScheduleResponse, error)

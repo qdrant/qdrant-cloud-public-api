@@ -37,7 +37,7 @@ class DatabaseApiKeyServiceServicer(object):
     """
 
     def ListDatabaseApiKeys(self, request, context):
-        """Fetch all database api keys in the account identified by the given ID.
+        """Lists all database api keys in the account identified by the given ID.
         Required permissions:
         - read:api_keys
         """

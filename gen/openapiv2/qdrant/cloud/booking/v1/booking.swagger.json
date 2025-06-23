@@ -18,7 +18,7 @@
   "paths": {
     "/api/booking/v1/accounts/{accountId}/packages": {
       "get": {
-        "summary": "Fetch all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists all packages known by the system, optional filtered.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_ListPackages",
         "responses": {
           "200": {
@@ -80,7 +80,7 @@
     },
     "/api/booking/v1/accounts/{accountId}/packages/{id}": {
       "get": {
-        "summary": "Get the package identified by the request identifier\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Gets the package identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BookingService_GetPackage",
         "responses": {
           "200": {
@@ -119,7 +119,7 @@
     },
     "/api/booking/v1/packages": {
       "get": {
-        "summary": "Fetch all public packages\nAuthentication not required",
+        "summary": "Lists all public packages.\nAuthentication not required",
         "operationId": "BookingService_ListGlobalPackages",
         "responses": {
           "200": {

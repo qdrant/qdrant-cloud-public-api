@@ -18,7 +18,7 @@
   "paths": {
     "/api/platform/v1/accounts/{accountId}/cloud-providers": {
       "get": {
-        "summary": "Fetch all cloud providers in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists all cloud providers in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "PlatformService_ListCloudProviders",
         "responses": {
           "200": {
@@ -50,7 +50,7 @@
     },
     "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
       "get": {
-        "summary": "Fetch all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "PlatformService_ListCloudProviderRegions",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/platform/v1/cloud-providers": {
       "get": {
-        "summary": "Fetch all available cloud providers globally (not account-specific).\nAuthentication is not required.",
+        "summary": "Lists all available cloud providers globally (not account-specific).\nAuthentication is not required.",
         "operationId": "PlatformService_ListGlobalCloudProviders",
         "responses": {
           "200": {
@@ -112,7 +112,7 @@
     },
     "/api/platform/v1/cloud-providers/{cloudProviderId}/regions": {
       "get": {
-        "summary": "Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.\nAuthentication is not required.",
+        "summary": "Lists all cloud provider regions (not account-specific) identified by cloud provider ID.\nAuthentication is not required.",
         "operationId": "PlatformService_ListGlobalCloudProviderRegions",
         "responses": {
           "200": {

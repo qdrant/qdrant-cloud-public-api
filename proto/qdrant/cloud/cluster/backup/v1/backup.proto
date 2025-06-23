@@ -10,7 +10,7 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BackupService is the API used to configure backup objects.
 service BackupService {
-  // Fetch all backups in the account identified by the given ID.
+  // Lists all backups in the account identified by the given ID.
   // Required permissions:
   // - read:backups
   rpc ListBackups(ListBackupsRequest) returns (ListBackupsResponse) {
@@ -42,7 +42,7 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
   }
-  // Fetch all backup restores in the account identified by the given ID.
+  // Lists all backup restores in the account identified by the given ID.
   // Required permissions:
   // - read:backups
   rpc ListBackupRestores(ListBackupRestoresRequest) returns (ListBackupRestoresResponse) {
@@ -60,7 +60,7 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
   }
-  // Fetch all backup schedules in the account identified by the given ID.
+  // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
   // - read:backup_schedules
   rpc ListBackupSchedules(ListBackupSchedulesRequest) returns (ListBackupSchedulesResponse) {
@@ -69,7 +69,7 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules"};
   }
-  // Fetch a backup schedule in the account identified by the given ID.
+  // Gets a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - read:backup_schedules
   rpc GetBackupSchedule(GetBackupScheduleRequest) returns (GetBackupScheduleResponse) {
@@ -92,7 +92,7 @@ service BackupService {
       body: "*"
     };
   }
-  // Update a backup schedule in the account identified by the given ID.
+  // Updates a backup schedule in the account identified by the given ID.
   // Required permissions:
   // - write:backup_schedules
   rpc UpdateBackupSchedule(UpdateBackupScheduleRequest) returns (UpdateBackupScheduleResponse) {

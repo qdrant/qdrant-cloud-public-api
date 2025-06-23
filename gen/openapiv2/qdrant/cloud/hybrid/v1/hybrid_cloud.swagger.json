@@ -18,7 +18,7 @@
   "paths": {
     "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/initial-installation-command": {
       "get": {
-        "summary": "Fetch the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permission:\n- write:hybrid_cloud_environments",
+        "summary": "Gets the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permission:\n- write:hybrid_cloud_environments",
         "operationId": "HybridCloudService_GetBootstrapCommands",
         "responses": {
           "200": {
@@ -57,7 +57,7 @@
     },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments": {
       "get": {
-        "summary": "Fetch all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
+        "summary": "Lists all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
         "operationId": "HybridCloudService_ListHybridCloudEnvironments",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}": {
       "get": {
-        "summary": "Fetch a hybrid cloud environment in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
+        "summary": "Gets a hybrid cloud environment in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
         "operationId": "HybridCloudService_GetHybridCloudEnvironment",
         "responses": {
           "200": {

@@ -72,7 +72,7 @@ class BackupServiceServicer(object):
     """
 
     def ListBackups(self, request, context):
-        """Fetch all backups in the account identified by the given ID.
+        """Lists all backups in the account identified by the given ID.
         Required permissions:
         - read:backups
         """
@@ -99,7 +99,7 @@ class BackupServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListBackupRestores(self, request, context):
-        """Fetch all backup restores in the account identified by the given ID.
+        """Lists all backup restores in the account identified by the given ID.
         Required permissions:
         - read:backups
         """
@@ -117,7 +117,7 @@ class BackupServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListBackupSchedules(self, request, context):
-        """Fetch all backup schedules in the account identified by the given ID.
+        """Lists all backup schedules in the account identified by the given ID.
         Required permissions:
         - read:backup_schedules
         """
@@ -126,7 +126,7 @@ class BackupServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetBackupSchedule(self, request, context):
-        """Fetch a backup schedule in the account identified by the given ID.
+        """Gets a backup schedule in the account identified by the given ID.
         Required permissions:
         - read:backup_schedules
         """
@@ -144,7 +144,7 @@ class BackupServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def UpdateBackupSchedule(self, request, context):
-        """Update a backup schedule in the account identified by the given ID.
+        """Updates a backup schedule in the account identified by the given ID.
         Required permissions:
         - write:backup_schedules
         """

@@ -31,19 +31,19 @@ const (
 //
 // MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
 type MonitoringServiceClient interface {
-	// Get summary metrics of a cluster in the account identified by the given ID.
+	// Gets the summary metrics of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterSummaryMetrics(ctx context.Context, in *GetClusterSummaryMetricsRequest, opts ...grpc.CallOption) (*GetClusterSummaryMetricsResponse, error)
-	// Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+	// Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterUsageMetrics(ctx context.Context, in *GetClusterUsageMetricsRequest, opts ...grpc.CallOption) (*GetClusterUsageMetricsResponse, error)
-	// Get the logs of a cluster in the account identified by the given ID.
+	// Gets the logs of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterLogs(ctx context.Context, in *GetClusterLogsRequest, opts ...grpc.CallOption) (*GetClusterLogsResponse, error)
-	// Get the events of a cluster in the account identified by the given ID.
+	// Gets the events of a cluster in the account identified by the given ID.
 	// This method is currently available only for clusters running in hybrid cloud environments.
 	// Required permissions:
 	// - read:clusters
@@ -104,19 +104,19 @@ func (c *monitoringServiceClient) GetClusterEvents(ctx context.Context, in *GetC
 //
 // MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
 type MonitoringServiceServer interface {
-	// Get summary metrics of a cluster in the account identified by the given ID.
+	// Gets the summary metrics of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterSummaryMetrics(context.Context, *GetClusterSummaryMetricsRequest) (*GetClusterSummaryMetricsResponse, error)
-	// Get detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
+	// Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterUsageMetrics(context.Context, *GetClusterUsageMetricsRequest) (*GetClusterUsageMetricsResponse, error)
-	// Get the logs of a cluster in the account identified by the given ID.
+	// Gets the logs of a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetClusterLogs(context.Context, *GetClusterLogsRequest) (*GetClusterLogsResponse, error)
-	// Get the events of a cluster in the account identified by the given ID.
+	// Gets the events of a cluster in the account identified by the given ID.
 	// This method is currently available only for clusters running in hybrid cloud environments.
 	// Required permissions:
 	// - read:clusters

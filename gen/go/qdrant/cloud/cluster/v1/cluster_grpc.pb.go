@@ -36,11 +36,11 @@ const (
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceClient interface {
-	// Fetch all clusters in the account identified by the given ID.
+	// Lists all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	ListClusters(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Fetch a cluster in the account identified by the given IDs.
+	// Gets a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*GetClusterResponse, error)
@@ -48,7 +48,7 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	CreateCluster(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*CreateClusterResponse, error)
-	// Update a cluster in the account identified by the given ID.
+	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
 	UpdateCluster(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*UpdateClusterResponse, error)
@@ -69,7 +69,7 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestClusterName(ctx context.Context, in *SuggestClusterNameRequest, opts ...grpc.CallOption) (*SuggestClusterNameResponse, error)
-	// Fetch all qdrant releases in the account identified by the given ID.
+	// Lists all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
 	// - read:clusters
@@ -180,11 +180,11 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 //
 // ClusterService is the API used to configure cluster objects.
 type ClusterServiceServer interface {
-	// Fetch all clusters in the account identified by the given ID.
+	// Lists all clusters in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	ListClusters(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Fetch a cluster in the account identified by the given IDs.
+	// Gets a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - read:clusters
 	GetCluster(context.Context, *GetClusterRequest) (*GetClusterResponse, error)
@@ -192,7 +192,7 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error)
-	// Update a cluster in the account identified by the given ID.
+	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
 	UpdateCluster(context.Context, *UpdateClusterRequest) (*UpdateClusterResponse, error)
@@ -213,7 +213,7 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestClusterName(context.Context, *SuggestClusterNameRequest) (*SuggestClusterNameResponse, error)
-	// Fetch all qdrant releases in the account identified by the given ID.
+	// Lists all qdrant releases in the account identified by the given ID.
 	// Optional a cluster ID can be provided, the list will return the options to update to only.
 	// Required permissions:
 	// - read:clusters
