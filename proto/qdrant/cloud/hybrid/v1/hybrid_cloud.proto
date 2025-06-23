@@ -12,20 +12,26 @@ import "qdrant/cloud/common/v1/common.proto";
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 service HybridCloudService {
   // Fetch all hybrid cloud environments in the account identified by the given ID.
-  // Required permissions:
+  // Required permissions (any-of):
   // - read:hybrid_cloud_environments
+  // - write: clusters
   rpc ListHybridCloudEnvironments(ListHybridCloudEnvironmentsRequest) returns (ListHybridCloudEnvironmentsResponse) {
     // permissions
+    option (common.v1.requires_all_permissions) = false;
     option (common.v1.permissions) = "read:hybrid_cloud_environments";
+    option (common.v1.permissions) = "write: clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments"};
   }
   // Fetch a hybrid cloud environment in the account identified by the given ID.
-  // Required permissions:
+  // Required permissions (any-of):
   // - read:hybrid_cloud_environments
+  // - write: clusters
   rpc GetHybridCloudEnvironment(GetHybridCloudEnvironmentRequest) returns (GetHybridCloudEnvironmentResponse) {
     // permissions
+    option (common.v1.requires_all_permissions) = false;
     option (common.v1.permissions) = "read:hybrid_cloud_environments";
+    option (common.v1.permissions) = "write: clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
   }
