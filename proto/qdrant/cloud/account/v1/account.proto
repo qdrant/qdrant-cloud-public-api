@@ -256,9 +256,9 @@ message ListAccountInvitesResponse {
   repeated AccountInvite items = 1;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // ListReceivedAccountInvitesRequest is the request for the ListReceivedAccountInvites function.
 // This lists invites for the authenticated user across all accounts.
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 message ListReceivedAccountInvitesRequest {
   // Empty
 }

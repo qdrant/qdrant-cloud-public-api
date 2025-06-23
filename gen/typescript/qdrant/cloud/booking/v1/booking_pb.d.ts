@@ -374,8 +374,7 @@ export declare const BookingService: GenService<{
   },
   /**
    * Fetch all public packages
-   * Required permissions:
-   * - None (public endpoint)
+   * Authentication not required
    *
    * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalPackages
    */

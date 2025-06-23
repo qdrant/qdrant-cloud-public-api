@@ -39,8 +39,7 @@ type BookingServiceClient interface {
 	// - None (authenticated only)
 	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
 	// Fetch all public packages
-	// Required permissions:
-	// - None (public endpoint)
+	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 }
 
@@ -97,8 +96,7 @@ type BookingServiceServer interface {
 	// - None (authenticated only)
 	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
 	// Fetch all public packages
-	// Required permissions:
-	// - None (public endpoint)
+	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }

@@ -55,10 +55,9 @@ class BookingServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListGlobalPackages(self, request, context):
-        """Fetch all public packages
-        Required permissions:
-        - None (public endpoint)
-        buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+        """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+        Fetch all public packages
+        Authentication not required
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
