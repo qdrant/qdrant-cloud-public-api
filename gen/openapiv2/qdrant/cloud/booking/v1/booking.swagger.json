@@ -119,7 +119,7 @@
     },
     "/api/booking/v1/packages": {
       "get": {
-        "summary": "Fetch all public packages\nRequired permissions:\n- None (public endpoint)\nbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS",
+        "summary": "Fetch all public packages\nAuthentication not required",
         "operationId": "BookingService_ListGlobalPackages",
         "responses": {
           "200": {

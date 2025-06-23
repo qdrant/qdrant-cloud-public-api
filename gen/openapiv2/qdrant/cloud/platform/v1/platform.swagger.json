@@ -89,7 +89,7 @@
     },
     "/api/platform/v1/cloud-providers": {
       "get": {
-        "summary": "Fetch all available cloud providers globally (not account-specific).",
+        "summary": "Fetch all available cloud providers globally (not account-specific).\nAuthentication is not required.",
         "operationId": "PlatformService_ListGlobalCloudProviders",
         "responses": {
           "200": {
@@ -112,7 +112,7 @@
     },
     "/api/platform/v1/cloud-providers/{cloudProviderId}/regions": {
       "get": {
-        "summary": "Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.",
+        "summary": "Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.\nAuthentication is not required.",
         "operationId": "PlatformService_ListGlobalCloudProviderRegions",
         "responses": {
           "200": {

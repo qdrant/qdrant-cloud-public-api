@@ -44,6 +44,7 @@ class PlatformServiceServicer(object):
     def ListGlobalCloudProviders(self, request, context):
         """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         Fetch all available cloud providers globally (not account-specific).
+        Authentication is not required.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -61,6 +62,7 @@ class PlatformServiceServicer(object):
     def ListGlobalCloudProviderRegions(self, request, context):
         """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         Fetch all cloud provider regions (not account-specific) identified by cloud provider ID.
+        Authentication is not required.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
