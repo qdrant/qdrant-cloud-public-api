@@ -1113,8 +1113,9 @@ export declare const KubernetesDistributionSchema: GenEnum<KubernetesDistributio
 export declare const HybridCloudService: GenService<{
   /**
    * Fetch all hybrid cloud environments in the account identified by the given ID.
-   * Required permissions:
+   * Required permissions (any-of):
    * - read:hybrid_cloud_environments
+   * - write: clusters
    *
    * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments
    */
@@ -1125,8 +1126,9 @@ export declare const HybridCloudService: GenService<{
   },
   /**
    * Fetch a hybrid cloud environment in the account identified by the given ID.
-   * Required permissions:
+   * Required permissions (any-of):
    * - read:hybrid_cloud_environments
+   * - write: clusters
    *
    * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment
    */
