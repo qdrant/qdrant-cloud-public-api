@@ -53,9 +53,8 @@ class HybridCloudServiceServicer(object):
 
     def ListHybridCloudEnvironments(self, request, context):
         """Fetch all hybrid cloud environments in the account identified by the given ID.
-        Required permissions (any-of):
+        Required permissions:
         - read:hybrid_cloud_environments
-        - write: clusters
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,9 +62,8 @@ class HybridCloudServiceServicer(object):
 
     def GetHybridCloudEnvironment(self, request, context):
         """Fetch a hybrid cloud environment in the account identified by the given ID.
-        Required permissions (any-of):
+        Required permissions:
         - read:hybrid_cloud_environments
-        - write: clusters
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

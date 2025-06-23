@@ -34,14 +34,12 @@ const (
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceClient interface {
 	// Fetch all hybrid cloud environments in the account identified by the given ID.
-	// Required permissions (any-of):
+	// Required permissions:
 	// - read:hybrid_cloud_environments
-	// - write: clusters
 	ListHybridCloudEnvironments(ctx context.Context, in *ListHybridCloudEnvironmentsRequest, opts ...grpc.CallOption) (*ListHybridCloudEnvironmentsResponse, error)
 	// Fetch a hybrid cloud environment in the account identified by the given ID.
-	// Required permissions (any-of):
+	// Required permissions:
 	// - read:hybrid_cloud_environments
-	// - write: clusters
 	GetHybridCloudEnvironment(ctx context.Context, in *GetHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*GetHybridCloudEnvironmentResponse, error)
 	// Creates a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:
@@ -139,14 +137,12 @@ func (c *hybridCloudServiceClient) GetBootstrapCommands(ctx context.Context, in 
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 type HybridCloudServiceServer interface {
 	// Fetch all hybrid cloud environments in the account identified by the given ID.
-	// Required permissions (any-of):
+	// Required permissions:
 	// - read:hybrid_cloud_environments
-	// - write: clusters
 	ListHybridCloudEnvironments(context.Context, *ListHybridCloudEnvironmentsRequest) (*ListHybridCloudEnvironmentsResponse, error)
 	// Fetch a hybrid cloud environment in the account identified by the given ID.
-	// Required permissions (any-of):
+	// Required permissions:
 	// - read:hybrid_cloud_environments
-	// - write: clusters
 	GetHybridCloudEnvironment(context.Context, *GetHybridCloudEnvironmentRequest) (*GetHybridCloudEnvironmentResponse, error)
 	// Creates a hybrid cloud environment in the account identified by the given ID.
 	// Required permissions:
