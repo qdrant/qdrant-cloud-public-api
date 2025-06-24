@@ -1,3 +1,5 @@
+import datetime
+
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import duration_pb2 as _duration_pb2
@@ -7,7 +9,8 @@ from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -50,7 +53,7 @@ class GetClusterUsageMetricsRequest(_message.Message):
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
     aggregator: Aggregator
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ...) -> None: ...
 
 class GetClusterUsageMetricsResponse(_message.Message):
     __slots__ = ("cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "rps", "latency", "nodes")
@@ -84,7 +87,7 @@ class GetClusterLogsRequest(_message.Message):
     cluster_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class GetClusterLogsResponse(_message.Message):
     __slots__ = ("items",)
@@ -102,7 +105,7 @@ class GetClusterEventsRequest(_message.Message):
     cluster_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class GetClusterEventsResponse(_message.Message):
     __slots__ = ("items",)
@@ -142,7 +145,7 @@ class IntervalAverage(_message.Message):
     VALUE_FIELD_NUMBER: _ClassVar[int]
     interval: _duration_pb2.Duration
     value: float
-    def __init__(self, interval: _Optional[_Union[_duration_pb2.Duration, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
+    def __init__(self, interval: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
 
 class ResourceValue(_message.Message):
     __slots__ = ("value", "unit")
@@ -176,7 +179,7 @@ class Metric(_message.Message):
     VALUE_FIELD_NUMBER: _ClassVar[int]
     timestamp: _timestamp_pb2.Timestamp
     value: float
-    def __init__(self, timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
+    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
 
 class LogEntry(_message.Message):
     __slots__ = ("timestamp", "message")
@@ -184,4 +187,4 @@ class LogEntry(_message.Message):
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     timestamp: _timestamp_pb2.Timestamp
     message: str
-    def __init__(self, timestamp: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...
+    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...

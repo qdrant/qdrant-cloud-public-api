@@ -12,7 +12,7 @@ managed:
 
 plugins:
   # Generate base types for Go
-  - remote: buf.build/protocolbuffers/go:v1.36.4
+  - remote: buf.build/protocolbuffers/go:v1.36.6
     out: gen/go
     opt:
       - paths=source_relative
@@ -24,35 +24,35 @@ plugins:
       - paths=source_relative
 
   # Generate Python client and server stubs
-  - remote: buf.build/grpc/python:v1.70.0
+  - remote: buf.build/grpc/python:v1.72.1
     include_imports: true
     out: gen/python
 
   # Generate base types for Python(message and enum).
-  - remote: buf.build/protocolbuffers/python:v29.3
+  - remote: buf.build/protocolbuffers/python:v31.1
     include_imports: true
     out: gen/python
 
   # Generate Python type hints
-  - remote: buf.build/protocolbuffers/pyi:v29.3
+  - remote: buf.build/protocolbuffers/pyi:v31.1
     include_imports: true
     out: gen/python
 
   # Generate bindings for gRPC-Gateway
   # We don't need the output (the api-gateway is building this dynamically), however
   # we still want to run the validation logic inside this plugin
-  - remote: buf.build/grpc-ecosystem/gateway:v2.26.0
+  - remote: buf.build/grpc-ecosystem/gateway:v2.27.0
     out: gen-dummy/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
 
   # Generate OpenAPI definitions for Protobuf services
-  - remote: buf.build/grpc-ecosystem/openapiv2:v2.26.0
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.26.3
     out: gen/openapiv2
 
   # Generate base types and services for Typescript
-  - remote: buf.build/bufbuild/es:v2.2.3
+  - remote: buf.build/bufbuild/es:v2.5.2
     include_imports: true
     opt:
       - target=js+dts
