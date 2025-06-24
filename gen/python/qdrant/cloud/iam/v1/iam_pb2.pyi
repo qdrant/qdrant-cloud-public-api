@@ -206,6 +206,20 @@ class AssignUserRolesResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class ListUserRolesRequest(_message.Message):
+    __slots__ = ("account_id", "user_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
+class ListUserRolesResponse(_message.Message):
+    __slots__ = ("roles",)
+    ROLES_FIELD_NUMBER: _ClassVar[int]
+    roles: _containers.RepeatedCompositeFieldContainer[Role]
+    def __init__(self, roles: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
+
 class User(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id", "notification_preferences")
     ID_FIELD_NUMBER: _ClassVar[int]
