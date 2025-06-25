@@ -495,6 +495,57 @@ export declare type ListEffectivePermissionsResponse = Message<"qdrant.cloud.iam
 export declare const ListEffectivePermissionsResponseSchema: GenMessage<ListEffectivePermissionsResponse>;
 
 /**
+ * ListUserRolesRequest is the request for the ListUserRoles function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUserRolesRequest
+ */
+export declare type ListUserRolesRequest = Message<"qdrant.cloud.iam.v1.ListUserRolesRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the user (in GUID format).
+   * This user should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUserRolesRequest.
+ * Use `create(ListUserRolesRequestSchema)` to create a new message.
+ */
+export declare const ListUserRolesRequestSchema: GenMessage<ListUserRolesRequest>;
+
+/**
+ * ListUserRolesResponse is the response from the ListUserRoles function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUserRolesResponse
+ */
+export declare type ListUserRolesResponse = Message<"qdrant.cloud.iam.v1.ListUserRolesResponse"> & {
+  /**
+   * The roles assigned to the user.
+   * If the user has no roles, this list will be empty.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.Role roles = 1;
+   */
+  roles: Role[];
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUserRolesResponse.
+ * Use `create(ListUserRolesResponseSchema)` to create a new message.
+ */
+export declare const ListUserRolesResponseSchema: GenMessage<ListUserRolesResponse>;
+
+/**
  * AssignUserRolesRequest is the request for the AssignUserRoles function
  *
  * @generated from message qdrant.cloud.iam.v1.AssignUserRolesRequest
@@ -555,57 +606,6 @@ export declare type AssignUserRolesResponse = Message<"qdrant.cloud.iam.v1.Assig
  * Use `create(AssignUserRolesResponseSchema)` to create a new message.
  */
 export declare const AssignUserRolesResponseSchema: GenMessage<AssignUserRolesResponse>;
-
-/**
- * ListUserRolesRequest is the request for the ListUserRoles function
- *
- * @generated from message qdrant.cloud.iam.v1.ListUserRolesRequest
- */
-export declare type ListUserRolesRequest = Message<"qdrant.cloud.iam.v1.ListUserRolesRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier of the user (in GUID format).
-   * This user should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string user_id = 2;
-   */
-  userId: string;
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.ListUserRolesRequest.
- * Use `create(ListUserRolesRequestSchema)` to create a new message.
- */
-export declare const ListUserRolesRequestSchema: GenMessage<ListUserRolesRequest>;
-
-/**
- * ListUserRolesResponse is the response from the ListUserRoles function
- *
- * @generated from message qdrant.cloud.iam.v1.ListUserRolesResponse
- */
-export declare type ListUserRolesResponse = Message<"qdrant.cloud.iam.v1.ListUserRolesResponse"> & {
-  /**
-   * The roles assigned to the user.
-   * If the user has no roles, this list will be empty.
-   *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Role roles = 1;
-   */
-  roles: Role[];
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.ListUserRolesResponse.
- * Use `create(ListUserRolesResponseSchema)` to create a new message.
- */
-export declare const ListUserRolesResponseSchema: GenMessage<ListUserRolesResponse>;
 
 /**
  * A User represents a user in the Qdrant cloud.
@@ -1068,18 +1068,6 @@ export declare const IAMService: GenService<{
     output: typeof ListEffectivePermissionsResponseSchema;
   },
   /**
-   * Assigns the provided roles to the user in the account identified by the given ID.
-   * Required permissions:
-   * - write:roles
-   *
-   * @generated from rpc qdrant.cloud.iam.v1.IAMService.AssignUserRoles
-   */
-  assignUserRoles: {
-    methodKind: "unary";
-    input: typeof AssignUserRolesRequestSchema;
-    output: typeof AssignUserRolesResponseSchema;
-  },
-  /**
    * List roles of the user identified by the given ID.
    * Required permissions:
    * - read:roles
@@ -1090,6 +1078,18 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof ListUserRolesRequestSchema;
     output: typeof ListUserRolesResponseSchema;
+  },
+  /**
+   * Assigns the provided roles to the user in the account identified by the given ID.
+   * Required permissions:
+   * - write:roles
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.AssignUserRoles
+   */
+  assignUserRoles: {
+    methodKind: "unary";
+    input: typeof AssignUserRolesRequestSchema;
+    output: typeof AssignUserRolesResponseSchema;
   },
 }>;
 
