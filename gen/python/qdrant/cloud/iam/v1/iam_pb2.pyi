@@ -193,6 +193,20 @@ class ListEffectivePermissionsResponse(_message.Message):
     permissions: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, permissions: _Optional[_Iterable[str]] = ...) -> None: ...
 
+class ListUserRolesRequest(_message.Message):
+    __slots__ = ("account_id", "user_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
+class ListUserRolesResponse(_message.Message):
+    __slots__ = ("roles",)
+    ROLES_FIELD_NUMBER: _ClassVar[int]
+    roles: _containers.RepeatedCompositeFieldContainer[Role]
+    def __init__(self, roles: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
+
 class AssignUserRolesRequest(_message.Message):
     __slots__ = ("account_id", "user_id", "role_ids_to_add", "role_ids_to_delete")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

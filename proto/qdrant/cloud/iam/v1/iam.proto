@@ -145,12 +145,22 @@ service IAMService {
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/effective-permissions"};
   }
 
+  // List roles of the user identified by the given ID.
+  // Required permissions:
+  // - read:roles
+  rpc ListUserRoles(ListUserRolesRequest) returns (ListUserRolesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"};
+  }
+
   // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:
   // - write:roles
   rpc AssignUserRoles(AssignUserRolesRequest) returns (AssignUserRolesResponse) {
     // permissions
-    option (common.v1.permissions) = "read:roles";
+    option (common.v1.permissions) = "write:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"
@@ -325,6 +335,24 @@ message ListEffectivePermissionsRequest {
 message ListEffectivePermissionsResponse {
   // The effective permissions.
   repeated string permissions = 1;
+}
+
+// ListUserRolesRequest is the request for the ListUserRoles function
+message ListUserRolesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the user (in GUID format).
+  // This user should be part of the provided account.
+  // This is a required field.
+  string user_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListUserRolesResponse is the response from the ListUserRoles function
+message ListUserRolesResponse {
+  // The roles assigned to the user.
+  // If the user has no roles, this list will be empty.
+  repeated Role roles = 1;
 }
 
 // AssignUserRolesRequest is the request for the AssignUserRoles function
