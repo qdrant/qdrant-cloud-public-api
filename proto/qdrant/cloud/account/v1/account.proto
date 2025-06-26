@@ -64,6 +64,8 @@ service AccountService {
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
     // permissions
     option (common.v1.permissions) = "delete:account"; // not 'delete:accounts' for historical reasons
+    // custom supported-actor-types expression. (Only the owner user can delete an account)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
   }
