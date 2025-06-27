@@ -630,10 +630,6 @@
             "defaultAccountId": {
               "type": "string",
               "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
-            },
-            "notificationPreferences": {
-              "$ref": "#/definitions/v1NotificationPreferences",
-              "description": "The notification preferences of the user."
             }
           },
           "description": "The actual user.",
@@ -797,16 +793,6 @@
       },
       "title": "ListUserRolesResponse is the response from the ListUserRoles function"
     },
-    "v1NotificationPreferences": {
-      "type": "object",
-      "properties": {
-        "emailNewsletterEnabled": {
-          "type": "boolean",
-          "description": "Whether the user wants to receive newsletters by email."
-        }
-      },
-      "description": "NotificationPreferences defines the notification preferences of a user."
-    },
     "v1RecordUserConsentRequest": {
       "type": "object",
       "properties": {
@@ -927,10 +913,6 @@
         "defaultAccountId": {
           "type": "string",
           "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
-        },
-        "notificationPreferences": {
-          "$ref": "#/definitions/v1NotificationPreferences",
-          "description": "The notification preferences of the user."
         }
       },
       "description": "A User represents a user in the Qdrant cloud."

@@ -405,8 +405,6 @@ message User {
   // The default account ID of the user (in GUID format).
   // You should be member of the account when updating.
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
-  // The notification preferences of the user.
-  NotificationPreferences notification_preferences = 7;
 }
 
 // UserStatus defines the possible statuses of a user.
@@ -419,12 +417,6 @@ enum UserStatus {
   USER_STATUS_BLOCKED = 2;
   // The user account has been marked for deletion or is deleted.
   USER_STATUS_DELETED = 3;
-}
-
-// NotificationPreferences defines the notification preferences of a user.
-message NotificationPreferences {
-  // Whether the user wants to receive newsletters by email.
-  bool email_newsletter_enabled = 1;
 }
 
 // LegalDocumentType specifies the type of a legal document.

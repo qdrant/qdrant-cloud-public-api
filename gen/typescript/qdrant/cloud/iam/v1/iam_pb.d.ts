@@ -659,13 +659,6 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * @generated from field: string default_account_id = 6;
    */
   defaultAccountId: string;
-
-  /**
-   * The notification preferences of the user.
-   *
-   * @generated from field: qdrant.cloud.iam.v1.NotificationPreferences notification_preferences = 7;
-   */
-  notificationPreferences?: NotificationPreferences;
 };
 
 /**
@@ -673,26 +666,6 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
  * Use `create(UserSchema)` to create a new message.
  */
 export declare const UserSchema: GenMessage<User>;
-
-/**
- * NotificationPreferences defines the notification preferences of a user.
- *
- * @generated from message qdrant.cloud.iam.v1.NotificationPreferences
- */
-export declare type NotificationPreferences = Message<"qdrant.cloud.iam.v1.NotificationPreferences"> & {
-  /**
-   * Whether the user wants to receive newsletters by email.
-   *
-   * @generated from field: bool email_newsletter_enabled = 1;
-   */
-  emailNewsletterEnabled: boolean;
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.NotificationPreferences.
- * Use `create(NotificationPreferencesSchema)` to create a new message.
- */
-export declare const NotificationPreferencesSchema: GenMessage<NotificationPreferences>;
 
 /**
  * A Role represents a role in the Qdrant cloud.
