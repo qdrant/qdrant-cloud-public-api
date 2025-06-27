@@ -1916,7 +1916,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xaa\x17\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xaf\x17\n" +
 	"\x0eAccountService\x12\x95\x01\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xa4\x01\n" +
 	"\n" +
@@ -1935,8 +1935,8 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x12ListAccountMembers\x122.qdrant.cloud.account.v1.ListAccountMembersRequest\x1a3.qdrant.cloud.account.v1.ListAccountMembersResponse\"C\x8a\xb5\x18\n" +
 	"read:users\x82\xd3\xe4\x93\x02/\x12-/api/account/v1/accounts/{account_id}/members\x12\xc6\x01\n" +
 	"\x10GetAccountMember\x120.qdrant.cloud.account.v1.GetAccountMemberRequest\x1a1.qdrant.cloud.account.v1.GetAccountMemberResponse\"M\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd1\x01\n" +
-	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"O\x8a\xb5\x18\fdelete:users\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}B\xfe\x01\n" +
+	"read:users\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd6\x01\n" +
+	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"T\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
 
 var (
