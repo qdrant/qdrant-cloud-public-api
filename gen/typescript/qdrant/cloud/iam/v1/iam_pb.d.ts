@@ -115,35 +115,11 @@ export declare const GetUserConsentRequestSchema: GenMessage<GetUserConsentReque
  */
 export declare type GetUserConsentResponse = Message<"qdrant.cloud.iam.v1.GetUserConsentResponse"> & {
   /**
-   * The type of the legal document for which consent status is reported.
+   * The user consent for the requested document type.
    *
-   * @generated from field: qdrant.cloud.iam.v1.LegalDocumentType document_type = 1;
+   * @generated from field: qdrant.cloud.iam.v1.UserConsent user_consent = 1;
    */
-  documentType: LegalDocumentType;
-
-  /**
-   * The latest consent status recorded from the user for this document type.
-   * Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
-   *
-   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status = 2;
-   */
-  status: UserConsentStatus;
-
-  /**
-   * Timestamp of the most recent status update.
-   * Unset if no status update has been recorded.
-   *
-   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 3;
-   */
-  lastModifiedAt?: Timestamp;
-
-  /**
-   * A convenience field indicating if the current status is an acceptance.
-   * True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
-   *
-   * @generated from field: bool is_accepted = 4;
-   */
-  isAccepted: boolean;
+  userConsent?: UserConsent;
 };
 
 /**
@@ -639,6 +615,7 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
 
   /**
    * The email address of the user.
+   * This is a read-only field.
    *
    * @generated from field: string email = 4;
    */
@@ -743,6 +720,50 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 export declare const RoleSchema: GenMessage<Role>;
 
 /**
+ * User Consent represents the consent status of a user for a specific legal document.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UserConsent
+ */
+export declare type UserConsent = Message<"qdrant.cloud.iam.v1.UserConsent"> & {
+  /**
+   * The type of the legal document for which consent status is reported.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.LegalDocumentType document_type = 1;
+   */
+  documentType: LegalDocumentType;
+
+  /**
+   * The latest consent status recorded from the user for this document type.
+   * Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserConsentStatus status = 2;
+   */
+  status: UserConsentStatus;
+
+  /**
+   * Timestamp of the most recent status update.
+   * Unset if no status update has been recorded.
+   *
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 3;
+   */
+  lastModifiedAt?: Timestamp;
+
+  /**
+   * A convenience field indicating if the current status is an acceptance.
+   * True if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise.
+   *
+   * @generated from field: bool is_accepted = 4;
+   */
+  isAccepted: boolean;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UserConsent.
+ * Use `create(UserConsentSchema)` to create a new message.
+ */
+export declare const UserConsentSchema: GenMessage<UserConsent>;
+
+/**
  * UserStatus defines the possible statuses of a user.
  *
  * @generated from enum qdrant.cloud.iam.v1.UserStatus
@@ -781,6 +802,40 @@ export enum UserStatus {
  * Describes the enum qdrant.cloud.iam.v1.UserStatus.
  */
 export declare const UserStatusSchema: GenEnum<UserStatus>;
+
+/**
+ * RoleType specified the type of the role
+ *
+ * @generated from enum qdrant.cloud.iam.v1.RoleType
+ */
+export enum RoleType {
+  /**
+   * The role type is unspecified.
+   *
+   * @generated from enum value: ROLE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The role type is system.
+   * Note: system roles cannot be changed (create/update/delete).
+   *
+   * @generated from enum value: ROLE_TYPE_SYSTEM = 1;
+   */
+  SYSTEM = 1,
+
+  /**
+   * The role type is custom defined.
+   *
+   * @generated from enum value: ROLE_TYPE_CUSTOM = 2;
+   */
+  CUSTOM = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.RoleType.
+ */
+export declare const RoleTypeSchema: GenEnum<RoleType>;
 
 /**
  * LegalDocumentType specifies the type of a legal document.
@@ -863,40 +918,6 @@ export enum UserConsentStatus {
  * Describes the enum qdrant.cloud.iam.v1.UserConsentStatus.
  */
 export declare const UserConsentStatusSchema: GenEnum<UserConsentStatus>;
-
-/**
- * RoleType specified the type of the role
- *
- * @generated from enum qdrant.cloud.iam.v1.RoleType
- */
-export enum RoleType {
-  /**
-   * The role type is unspecified.
-   *
-   * @generated from enum value: ROLE_TYPE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * The role type is system.
-   * Note: system roles cannot be changed (create/update/delete).
-   *
-   * @generated from enum value: ROLE_TYPE_SYSTEM = 1;
-   */
-  SYSTEM = 1,
-
-  /**
-   * The role type is custom defined.
-   *
-   * @generated from enum value: ROLE_TYPE_CUSTOM = 2;
-   */
-  CUSTOM = 2,
-}
-
-/**
- * Describes the enum qdrant.cloud.iam.v1.RoleType.
- */
-export declare const RoleTypeSchema: GenEnum<RoleType>;
 
 /**
  * IAMService is the API used to configure IAM (identity and access management) objects.

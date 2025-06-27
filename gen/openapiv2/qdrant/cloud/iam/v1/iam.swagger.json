@@ -621,7 +621,7 @@
             },
             "email": {
               "type": "string",
-              "description": "The email address of the user."
+              "description": "The email address of the user.\nThis is a read-only field."
             },
             "status": {
               "$ref": "#/definitions/v1UserStatus",
@@ -708,22 +708,9 @@
     "v1GetUserConsentResponse": {
       "type": "object",
       "properties": {
-        "documentType": {
-          "$ref": "#/definitions/v1LegalDocumentType",
-          "description": "The type of the legal document for which consent status is reported."
-        },
-        "status": {
-          "$ref": "#/definitions/v1UserConsentStatus",
-          "description": "The latest consent status recorded from the user for this document type.\nWill be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the most recent status update.\nUnset if no status update has been recorded."
-        },
-        "isAccepted": {
-          "type": "boolean",
-          "description": "A convenience field indicating if the current status is an acceptance.\nTrue if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise."
+        "userConsent": {
+          "$ref": "#/definitions/v1UserConsent",
+          "description": "The user consent for the requested document type."
         }
       },
       "description": "GetUserConsentResponse is the response from the GetUserConsent function."
@@ -904,7 +891,7 @@
         },
         "email": {
           "type": "string",
-          "description": "The email address of the user."
+          "description": "The email address of the user.\nThis is a read-only field."
         },
         "status": {
           "$ref": "#/definitions/v1UserStatus",
@@ -916,6 +903,29 @@
         }
       },
       "description": "A User represents a user in the Qdrant cloud."
+    },
+    "v1UserConsent": {
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "$ref": "#/definitions/v1LegalDocumentType",
+          "description": "The type of the legal document for which consent status is reported."
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserConsentStatus",
+          "description": "The latest consent status recorded from the user for this document type.\nWill be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the most recent status update.\nUnset if no status update has been recorded."
+        },
+        "isAccepted": {
+          "type": "boolean",
+          "description": "A convenience field indicating if the current status is an acceptance.\nTrue if status is USER_CONSENT_STATUS_ACCEPTED, false otherwise."
+        }
+      },
+      "description": "User Consent represents the consent status of a user for a specific legal document."
     },
     "v1UserConsentStatus": {
       "type": "string",
