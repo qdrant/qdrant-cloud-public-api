@@ -421,12 +421,10 @@ message Account {
     min_len: 4
     pattern: "^[\\w\\s-]+$"
   }];
-  // The Identifier of the owner of the account.
-  // This ID refers to the user identifier provided by the identity provider (auth0).
-  // The owner must be a member of the account when updating.
-  string owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
+  // The external identifier of the owner of the account.
+  string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
-  // This is a read-only field and will be derived from the owner_id field.
+  // This is a read-only field and is derived from the owner user.
   string owner_email = 7 [(buf.validate.field).string = {email: true}];
   // The privileges of the account, if any.
   // This is a read-only field.

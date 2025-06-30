@@ -1513,12 +1513,10 @@ type Account struct {
 	// The name of the account.
 	// Name can only contain letters, numbers, underscores and dashes
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	// The Identifier of the owner of the account.
-	// This ID refers to the user identifier provided by the identity provider (auth0).
-	// The owner must be a member of the account when updating.
-	OwnerId string `protobuf:"bytes,6,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	// The external identifier of the owner of the account.
+	ExternalOwnerId string `protobuf:"bytes,6,opt,name=external_owner_id,json=externalOwnerId,proto3" json:"external_owner_id,omitempty"`
 	// The email address of the owner of the account.
-	// This is a read-only field and will be derived from the owner_id field.
+	// This is a read-only field and is derived from the owner user.
 	OwnerEmail string `protobuf:"bytes,7,opt,name=owner_email,json=ownerEmail,proto3" json:"owner_email,omitempty"`
 	// The privileges of the account, if any.
 	// This is a read-only field.
@@ -1585,9 +1583,9 @@ func (x *Account) GetName() string {
 	return ""
 }
 
-func (x *Account) GetOwnerId() string {
+func (x *Account) GetExternalOwnerId() string {
 	if x != nil {
-		return x.OwnerId
+		return x.ExternalOwnerId
 	}
 	return ""
 }
@@ -1877,15 +1875,15 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"\x1d\n" +
-	"\x1bDeleteAccountMemberResponse\"\xef\x03\n" +
+	"\x1bDeleteAccountMemberResponse\"\x80\x04\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12*\n" +
 	"\x04name\x18\x05 \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x022\n" +
-	"^[\\w\\s-]+$R\x04name\x12\"\n" +
-	"\bowner_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aownerId\x12(\n" +
+	"^[\\w\\s-]+$R\x04name\x123\n" +
+	"\x11external_owner_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x0fexternalOwnerId\x12(\n" +
 	"\vowner_email\x18\a \x01(\tB\a\xbaH\x04r\x02`\x01R\n" +
 	"ownerEmail\x12,\n" +
 	"\n" +

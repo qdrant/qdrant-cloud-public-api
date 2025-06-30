@@ -210,22 +210,22 @@ class DeleteAccountMemberResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Account(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "name", "owner_id", "owner_email", "privileges")
+    __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    OWNER_ID_FIELD_NUMBER: _ClassVar[int]
+    EXTERNAL_OWNER_ID_FIELD_NUMBER: _ClassVar[int]
     OWNER_EMAIL_FIELD_NUMBER: _ClassVar[int]
     PRIVILEGES_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     name: str
-    owner_id: str
+    external_owner_id: str
     owner_email: str
     privileges: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_email", "last_modified_at", "status")

@@ -606,13 +606,13 @@
               "type": "string",
               "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
             },
-            "ownerId": {
+            "externalOwnerId": {
               "type": "string",
-              "description": "The Identifier of the owner of the account.\nThis ID refers to the user identifier provided by the identity provider (auth0).\nThe owner must be a member of the account when updating."
+              "description": "The external identifier of the owner of the account."
             },
             "ownerEmail": {
               "type": "string",
-              "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
+              "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user."
             },
             "privileges": {
               "type": "array",
@@ -687,13 +687,13 @@
           "type": "string",
           "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
         },
-        "ownerId": {
+        "externalOwnerId": {
           "type": "string",
-          "description": "The Identifier of the owner of the account.\nThis ID refers to the user identifier provided by the identity provider (auth0).\nThe owner must be a member of the account when updating."
+          "description": "The external identifier of the owner of the account."
         },
         "ownerEmail": {
           "type": "string",
-          "description": "The email address of the owner of the account.\nThis is a read-only field and will be derived from the owner_id field."
+          "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user."
         },
         "privileges": {
           "type": "array",
