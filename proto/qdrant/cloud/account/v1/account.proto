@@ -417,15 +417,14 @@ message Account {
   // The name of the account.
   // Name can only contain letters, numbers, underscores and dashes
   string name = 5 [(buf.validate.field).string = {
-    max_len: 64
+    max_len: 256
     min_len: 4
-    pattern: "^[a-zA-Z0-9-_]+$"
+    pattern: "^[\\w\\s-]+$"
   }];
-  // The Identifier of the owner of the account (in GUID format).
-  // The owner must be a member of the account when updating.
-  string owner_id = 6 [(buf.validate.field).string = {uuid: true}];
+  // The external identifier of the owner of the account.
+  string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
-  // This is a read-only field and will be derived from the owner_id field.
+  // This is a read-only field and is derived from the owner user.
   string owner_email = 7 [(buf.validate.field).string = {email: true}];
   // The privileges of the account, if any.
   // This is a read-only field.

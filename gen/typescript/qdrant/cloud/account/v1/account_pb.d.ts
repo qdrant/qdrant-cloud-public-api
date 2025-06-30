@@ -695,16 +695,15 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
   name: string;
 
   /**
-   * The Identifier of the owner of the account (in GUID format).
-   * The owner must be a member of the account when updating.
+   * The external identifier of the owner of the account.
    *
-   * @generated from field: string owner_id = 6;
+   * @generated from field: string external_owner_id = 6;
    */
-  ownerId: string;
+  externalOwnerId: string;
 
   /**
    * The email address of the owner of the account.
-   * This is a read-only field and will be derived from the owner_id field.
+   * This is a read-only field and is derived from the owner user.
    *
    * @generated from field: string owner_email = 7;
    */
