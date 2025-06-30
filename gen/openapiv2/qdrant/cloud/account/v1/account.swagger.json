@@ -608,7 +608,7 @@
             },
             "ownerId": {
               "type": "string",
-              "description": "The Identifier of the owner of the account (in GUID format).\nThe owner must be a member of the account when updating."
+              "description": "The Identifier of the owner of the account.\nThis ID refers to the user identifier provided by the identity provider (auth0).\nThe owner must be a member of the account when updating."
             },
             "ownerEmail": {
               "type": "string",
@@ -689,7 +689,7 @@
         },
         "ownerId": {
           "type": "string",
-          "description": "The Identifier of the owner of the account (in GUID format).\nThe owner must be a member of the account when updating."
+          "description": "The Identifier of the owner of the account.\nThis ID refers to the user identifier provided by the identity provider (auth0).\nThe owner must be a member of the account when updating."
         },
         "ownerEmail": {
           "type": "string",

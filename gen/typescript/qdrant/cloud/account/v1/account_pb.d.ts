@@ -695,7 +695,8 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
   name: string;
 
   /**
-   * The Identifier of the owner of the account (in GUID format).
+   * The Identifier of the owner of the account.
+   * This ID refers to the user identifier provided by the identity provider (auth0).
    * The owner must be a member of the account when updating.
    *
    * @generated from field: string owner_id = 6;
