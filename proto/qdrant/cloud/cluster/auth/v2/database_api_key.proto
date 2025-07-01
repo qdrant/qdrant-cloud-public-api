@@ -130,13 +130,13 @@ message DatabaseApiKey {
   // there should be no collection access rules present in the same configuration.
   option (buf.validate.message).cel = {
     id: "no_mixed_global_and_collection"
-    expression: "!(this.access_rules.exists(r, r.global_access != null) && this.access_rules.exists(r, r.collection_access != null))"
+    expression: "!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))"
     message: "There can't be global and collection access rules in the same database api key."
   };
   // Validation rule to ensure that there is only one global access rule in the configuration.
   option (buf.validate.message).cel = {
     id: "only_one_global_access"
-    expression: "size(this.access_rules.filter(r, r.global_access != null)) <= 1"
+    expression: "size(this.access_rules.filter(r, has(r.global_access))) <= 1"
     message: "There can't be more than one global access rule in the configuration."
   };
   // The email of the user who created the database api key.
