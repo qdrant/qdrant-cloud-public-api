@@ -69,6 +69,15 @@ service AccountService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
   }
+  // Lists all quotas for the account identified by the given account ID.
+  // Required permissions:
+  // - read:account
+  rpc ListAccountQuotas(ListAccountQuotasRequest) returns (ListAccountQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/quotas"};
+  }
   // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
   // - read:invites
@@ -245,6 +254,19 @@ message DeleteAccountRequest {
 // DeleteAccountResponse is the response from the DeleteAccount function.
 message DeleteAccountResponse {
   // Empty
+}
+
+// ListAccountQuotasRequest is the request for the ListAccountQuotas function.
+message ListAccountQuotasRequest {
+  // The identifier of the account (in GUID format) to list quotas for.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListAccountQuotasResponse is the response from the ListAccountQuotas function.
+message ListAccountQuotasResponse {
+  // The list of account quotas.
+  repeated AccountQuota items = 1;
 }
 
 // ListAccountInvitesRequest is the request for the ListAccountInvites function.
@@ -432,6 +454,16 @@ message Account {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An AccountQuota represents a quota for an account.
+message AccountQuota {
+  // The value of the quota.
+  int32 value = 1;
+  // The type of the quota.
+  // This is a read-only field.
+  AccountQuotaType type = 2;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An AccountInvite represents an invitation for a user to join an account.
 message AccountInvite {
   // Unique identifier for the invite (in GUID format).
@@ -474,6 +506,18 @@ message AccountInvite {
   // The status of the invite.
   // This is a read-only field.
   AccountInviteStatus status = 10;
+}
+
+// AccountQuotaType defines the possible quota types of an account.
+enum AccountQuotaType {
+  // Default, unspecified status.
+  ACCOUNT_QUOTA_TYPE_UNSPECIFIED = 0;
+  // The maximum number of allowed clusters for the account.
+  ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS = 1;
+  // The maximum number of allowed nodes in a cluster for the account.
+  ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES = 2;
+  // The maximum number of allowed JWTs in a cluster for the account.
+  ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS = 3;
 }
 
 // AccountInviteStatus defines the possible statuses of an account invitation.

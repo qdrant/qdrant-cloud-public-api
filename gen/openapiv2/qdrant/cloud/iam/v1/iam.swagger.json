@@ -453,6 +453,29 @@
         ]
       }
     },
+    "/api/iam/v1/users/me/quotas": {
+      "get": {
+        "summary": "Lists all quotas for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_ListAuthenticatedUserQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAuthenticatedUserQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/users/{user.id}": {
       "put": {
         "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- write:user",
@@ -726,6 +749,20 @@
       "default": "LEGAL_DOCUMENT_TYPE_UNSPECIFIED",
       "description": "LegalDocumentType specifies the type of a legal document.\n\n - LEGAL_DOCUMENT_TYPE_UNSPECIFIED: Unspecified document type.\n - LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: Terms of Service document.\n - LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: Privacy Policy document.\n - LEGAL_DOCUMENT_TYPE_SLA: Service Level Agreement document."
     },
+    "v1ListAuthenticatedUserQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserQuota"
+          },
+          "description": "The list of user quotas."
+        }
+      },
+      "title": "ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function"
+    },
     "v1ListEffectivePermissionsResponse": {
       "type": "object",
       "properties": {
@@ -937,6 +974,30 @@
       ],
       "default": "USER_CONSENT_STATUS_UNSPECIFIED",
       "description": "UserConsentStatus specifies the status from an user for a consent.\n\n - USER_CONSENT_STATUS_UNSPECIFIED: Unspecified consent status.\n - USER_CONSENT_STATUS_ACCEPTED: The user accepted the consent.\n - USER_CONSENT_STATUS_REVOKED: The user revoked the consent.\n - USER_CONSENT_STATUS_PENDING: The consent is pending action from the user.\nPending consent means that the user got notified about the new version of the document. After a certain\nperiod of time, we auto accept pending consents depending on the document type."
+    },
+    "v1UserQuota": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value of the quota."
+        },
+        "type": {
+          "$ref": "#/definitions/v1UserQuotaType",
+          "description": "The type of the quota.\nThis is a read-only field."
+        }
+      },
+      "description": "An UserQuota represents a quota for an authenticated user."
+    },
+    "v1UserQuotaType": {
+      "type": "string",
+      "enum": [
+        "USER_QUOTA_TYPE_UNSPECIFIED",
+        "USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS"
+      ],
+      "default": "USER_QUOTA_TYPE_UNSPECIFIED",
+      "description": "UserQuotaType defines the possible quota types of a user.\n\n - USER_QUOTA_TYPE_UNSPECIFIED: Default, unspecified status.\n - USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS: The maximum number of allowed accounts owned by a user."
     },
     "v1UserStatus": {
       "type": "string",

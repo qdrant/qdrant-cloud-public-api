@@ -50,6 +50,15 @@ export const updateAccount = AccountService.method.updateAccount;
 export const deleteAccount = AccountService.method.deleteAccount;
 
 /**
+ * Lists all quotas for the account identified by the given account ID.
+ * Required permissions:
+ * - read:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccountQuotas
+ */
+export const listAccountQuotas = AccountService.method.listAccountQuotas;
+
+/**
  * Lists all account invites in the account identified by the given account ID.
  * Required permissions:
  * - read:invites

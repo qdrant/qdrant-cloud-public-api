@@ -207,6 +207,47 @@ export declare type DeleteAccountResponse = Message<"qdrant.cloud.account.v1.Del
 export declare const DeleteAccountResponseSchema: GenMessage<DeleteAccountResponse>;
 
 /**
+ * ListAccountQuotasRequest is the request for the ListAccountQuotas function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountQuotasRequest
+ */
+export declare type ListAccountQuotasRequest = Message<"qdrant.cloud.account.v1.ListAccountQuotasRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) to list quotas for.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountQuotasRequest.
+ * Use `create(ListAccountQuotasRequestSchema)` to create a new message.
+ */
+export declare const ListAccountQuotasRequestSchema: GenMessage<ListAccountQuotasRequest>;
+
+/**
+ * ListAccountQuotasResponse is the response from the ListAccountQuotas function.
+ *
+ * @generated from message qdrant.cloud.account.v1.ListAccountQuotasResponse
+ */
+export declare type ListAccountQuotasResponse = Message<"qdrant.cloud.account.v1.ListAccountQuotasResponse"> & {
+  /**
+   * The list of account quotas.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.AccountQuota items = 1;
+   */
+  items: AccountQuota[];
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.ListAccountQuotasResponse.
+ * Use `create(ListAccountQuotasResponseSchema)` to create a new message.
+ */
+export declare const ListAccountQuotasResponseSchema: GenMessage<ListAccountQuotasResponse>;
+
+/**
  * ListAccountInvitesRequest is the request for the ListAccountInvites function.
  *
  * @generated from message qdrant.cloud.account.v1.ListAccountInvitesRequest
@@ -725,6 +766,34 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 export declare const AccountSchema: GenMessage<Account>;
 
 /**
+ * An AccountQuota represents a quota for an account.
+ *
+ * @generated from message qdrant.cloud.account.v1.AccountQuota
+ */
+export declare type AccountQuota = Message<"qdrant.cloud.account.v1.AccountQuota"> & {
+  /**
+   * The value of the quota.
+   *
+   * @generated from field: int32 value = 1;
+   */
+  value: number;
+
+  /**
+   * The type of the quota.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountQuotaType type = 2;
+   */
+  type: AccountQuotaType;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AccountQuota.
+ * Use `create(AccountQuotaSchema)` to create a new message.
+ */
+export declare const AccountQuotaSchema: GenMessage<AccountQuota>;
+
+/**
  * An AccountInvite represents an invitation for a user to join an account.
  *
  * @generated from message qdrant.cloud.account.v1.AccountInvite
@@ -849,6 +918,46 @@ export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMemb
 export declare const AccountMemberSchema: GenMessage<AccountMember>;
 
 /**
+ * AccountQuotaType defines the possible quota types of an account.
+ *
+ * @generated from enum qdrant.cloud.account.v1.AccountQuotaType
+ */
+export enum AccountQuotaType {
+  /**
+   * Default, unspecified status.
+   *
+   * @generated from enum value: ACCOUNT_QUOTA_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The maximum number of allowed clusters for the account.
+   *
+   * @generated from enum value: ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS = 1;
+   */
+  MAX_CLUSTERS = 1,
+
+  /**
+   * The maximum number of allowed nodes in a cluster for the account.
+   *
+   * @generated from enum value: ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES = 2;
+   */
+  MAX_CLUSTER_NUM_NODES = 2,
+
+  /**
+   * The maximum number of allowed JWTs in a cluster for the account.
+   *
+   * @generated from enum value: ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS = 3;
+   */
+  MAX_CLUSTER_JWTS = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.account.v1.AccountQuotaType.
+ */
+export declare const AccountQuotaTypeSchema: GenEnum<AccountQuotaType>;
+
+/**
  * AccountInviteStatus defines the possible statuses of an account invitation.
  *
  * @generated from enum qdrant.cloud.account.v1.AccountInviteStatus
@@ -960,6 +1069,18 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountRequestSchema;
     output: typeof DeleteAccountResponseSchema;
+  },
+  /**
+   * Lists all quotas for the account identified by the given account ID.
+   * Required permissions:
+   * - read:account
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccountQuotas
+   */
+  listAccountQuotas: {
+    methodKind: "unary";
+    input: typeof ListAccountQuotasRequestSchema;
+    output: typeof ListAccountQuotasResponseSchema;
   },
   /**
    * Lists all account invites in the account identified by the given account ID.

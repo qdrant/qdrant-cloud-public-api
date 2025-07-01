@@ -14,6 +14,13 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class AccountQuotaType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ACCOUNT_QUOTA_TYPE_UNSPECIFIED: _ClassVar[AccountQuotaType]
+    ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS: _ClassVar[AccountQuotaType]
+    ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES: _ClassVar[AccountQuotaType]
+    ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS: _ClassVar[AccountQuotaType]
+
 class AccountInviteStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ACCOUNT_INVITE_STATUS_UNSPECIFIED: _ClassVar[AccountInviteStatus]
@@ -21,6 +28,10 @@ class AccountInviteStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     ACCOUNT_INVITE_STATUS_ACCEPTED: _ClassVar[AccountInviteStatus]
     ACCOUNT_INVITE_STATUS_REJECTED: _ClassVar[AccountInviteStatus]
     ACCOUNT_INVITE_STATUS_CANCELED: _ClassVar[AccountInviteStatus]
+ACCOUNT_QUOTA_TYPE_UNSPECIFIED: AccountQuotaType
+ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS: AccountQuotaType
+ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES: AccountQuotaType
+ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS: AccountQuotaType
 ACCOUNT_INVITE_STATUS_UNSPECIFIED: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_PENDING: AccountInviteStatus
 ACCOUNT_INVITE_STATUS_ACCEPTED: AccountInviteStatus
@@ -82,6 +93,18 @@ class DeleteAccountRequest(_message.Message):
 class DeleteAccountResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class ListAccountQuotasRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListAccountQuotasResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[AccountQuota]
+    def __init__(self, items: _Optional[_Iterable[_Union[AccountQuota, _Mapping]]] = ...) -> None: ...
 
 class ListAccountInvitesRequest(_message.Message):
     __slots__ = ("account_id",)
@@ -226,6 +249,14 @@ class Account(_message.Message):
     owner_email: str
     privileges: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class AccountQuota(_message.Message):
+    __slots__ = ("value", "type")
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    value: int
+    type: AccountQuotaType
+    def __init__(self, value: _Optional[int] = ..., type: _Optional[_Union[AccountQuotaType, str]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_email", "last_modified_at", "status")

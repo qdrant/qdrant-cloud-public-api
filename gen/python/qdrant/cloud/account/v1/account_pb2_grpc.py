@@ -40,6 +40,11 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountResponse.FromString,
                 _registered_method=True)
+        self.ListAccountQuotas = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/ListAccountQuotas',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasResponse.FromString,
+                _registered_method=True)
         self.ListAccountInvites = channel.unary_unary(
                 '/qdrant.cloud.account.v1.AccountService/ListAccountInvites',
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountInvitesRequest.SerializeToString,
@@ -136,6 +141,15 @@ class AccountServiceServicer(object):
         """Deletes an account identified by the given ID.
         Required permissions:
         - delete:account
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAccountQuotas(self, request, context):
+        """Lists all quotas for the account identified by the given account ID.
+        Required permissions:
+        - read:account
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -266,6 +280,11 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     servicer.DeleteAccount,
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountResponse.SerializeToString,
+            ),
+            'ListAccountQuotas': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAccountQuotas,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasResponse.SerializeToString,
             ),
             'ListAccountInvites': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAccountInvites,
@@ -454,6 +473,33 @@ class AccountService(object):
             '/qdrant.cloud.account.v1.AccountService/DeleteAccount',
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountRequest.SerializeToString,
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListAccountQuotas(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/ListAccountQuotas',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.ListAccountQuotasResponse.FromString,
             options,
             channel_credentials,
             insecure,

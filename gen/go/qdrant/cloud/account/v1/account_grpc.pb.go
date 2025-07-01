@@ -24,6 +24,7 @@ const (
 	AccountService_CreateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/CreateAccount"
 	AccountService_UpdateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/UpdateAccount"
 	AccountService_DeleteAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/DeleteAccount"
+	AccountService_ListAccountQuotas_FullMethodName          = "/qdrant.cloud.account.v1.AccountService/ListAccountQuotas"
 	AccountService_ListAccountInvites_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/ListAccountInvites"
 	AccountService_ListReceivedAccountInvites_FullMethodName = "/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites"
 	AccountService_GetAccountInvite_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountInvite"
@@ -62,6 +63,10 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	// Lists all quotas for the account identified by the given account ID.
+	// Required permissions:
+	// - read:account
+	ListAccountQuotas(ctx context.Context, in *ListAccountQuotasRequest, opts ...grpc.CallOption) (*ListAccountQuotasResponse, error)
 	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
@@ -164,6 +169,16 @@ func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAcco
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAccountResponse)
 	err := c.cc.Invoke(ctx, AccountService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) ListAccountQuotas(ctx context.Context, in *ListAccountQuotasRequest, opts ...grpc.CallOption) (*ListAccountQuotasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAccountQuotasResponse)
+	err := c.cc.Invoke(ctx, AccountService_ListAccountQuotas_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -296,6 +311,10 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	// Lists all quotas for the account identified by the given account ID.
+	// Required permissions:
+	// - read:account
+	ListAccountQuotas(context.Context, *ListAccountQuotasRequest) (*ListAccountQuotasResponse, error)
 	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
@@ -368,6 +387,9 @@ func (UnimplementedAccountServiceServer) UpdateAccount(context.Context, *UpdateA
 }
 func (UnimplementedAccountServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) ListAccountQuotas(context.Context, *ListAccountQuotasRequest) (*ListAccountQuotasResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccountQuotas not implemented")
 }
 func (UnimplementedAccountServiceServer) ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccountInvites not implemented")
@@ -506,6 +528,24 @@ func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_ListAccountQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccountQuotasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).ListAccountQuotas(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_ListAccountQuotas_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).ListAccountQuotas(ctx, req.(*ListAccountQuotasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -716,6 +756,10 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccount",
 			Handler:    _AccountService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "ListAccountQuotas",
+			Handler:    _AccountService_ListAccountQuotas_Handler,
 		},
 		{
 			MethodName: "ListAccountInvites",

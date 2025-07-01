@@ -22,6 +22,19 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me"};
   }
+  // Lists all quotas for the authenticated user.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListAuthenticatedUserQuotas(ListAuthenticatedUserQuotasRequest) returns (ListAuthenticatedUserQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/users/me/quotas"};
+  }
   // Updates the user identified by the given ID.
   // Required permissions:
   // - write:user
@@ -187,6 +200,18 @@ message GetAuthenticatedUserRequest {
 message GetAuthenticatedUserResponse {
   // The actual user.
   User user = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
+message ListAuthenticatedUserQuotasRequest {
+  // Empty
+}
+
+// ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
+message ListAuthenticatedUserQuotasResponse {
+  // The list of user quotas.
+  repeated UserQuota items = 1;
 }
 
 // UpdateUserRequest is the request for the UpdateUser function.
@@ -399,6 +424,16 @@ message User {
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An UserQuota represents a quota for an authenticated user.
+message UserQuota {
+  // The value of the quota.
+  int32 value = 1;
+  // The type of the quota.
+  // This is a read-only field.
+  UserQuotaType type = 2;
+}
+
 // UserStatus defines the possible statuses of a user.
 enum UserStatus {
   // Default, unspecified status.
@@ -497,4 +532,12 @@ enum UserConsentStatus {
   // Pending consent means that the user got notified about the new version of the document. After a certain
   // period of time, we auto accept pending consents depending on the document type.
   USER_CONSENT_STATUS_PENDING = 3;
+}
+
+// UserQuotaType defines the possible quota types of a user.
+enum UserQuotaType {
+  // Default, unspecified status.
+  USER_QUOTA_TYPE_UNSPECIFIED = 0;
+  // The maximum number of allowed accounts owned by a user.
+  USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS = 1;
 }
