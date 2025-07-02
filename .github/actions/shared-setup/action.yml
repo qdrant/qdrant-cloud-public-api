@@ -37,5 +37,5 @@ runs:
         if [ "${INPUT_TARGET}" = "python" ]; then
           sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
         elif [ "${INPUT_TARGET}" = "node" ]; then
-          jq --arg version "$STRIPPED_VERSION" '.version = $version' package.example.json > tmp.$$.json && mv tmp.$$.json package.json
+          ./scripts/generate-package-package.json "$STRIPPED_VERSION"
         fi
