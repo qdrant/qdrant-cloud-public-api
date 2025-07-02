@@ -10,7 +10,6 @@ import { ListCloudProviderRegionsRequest, ListCloudProviderRegionsResponse, List
 export const typeName = "qdrant.cloud.platform.v1.PlatformService";
 
 /**
- * buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
  * Lists all available cloud providers globally (not account-specific).
  * Authentication is not required.
  *
@@ -52,7 +51,6 @@ export const listCloudProviders = createQueryService({
 }).listCloudProviders;
 
 /**
- * buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
  * Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
  * Authentication is not required.
  *
