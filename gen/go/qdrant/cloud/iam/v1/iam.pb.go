@@ -1860,7 +1860,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x127\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusR\x06status\x126\n" +
-	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xa8\x04\n" +
+	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xa5\x04\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1871,9 +1871,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12:\n" +
 	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeR\broleType\x12*\n" +
-	"\vpermissions\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
-	"\n" +
-	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x9b\x02\n" +
+	"\vpermissions\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
+	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x9b\x02\n" +
 	"\vUserConsent\x12K\n" +
 	"\rdocument_type\x18\x01 \x01(\x0e2&.qdrant.cloud.iam.v1.LegalDocumentTypeR\fdocumentType\x12>\n" +
 	"\x06status\x18\x02 \x01(\x0e2&.qdrant.cloud.iam.v1.UserConsentStatusR\x06status\x12I\n" +
