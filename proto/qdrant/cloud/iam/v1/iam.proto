@@ -417,7 +417,7 @@ message Role {
   // This is a read-only field and will be available after a role is created.
   string id = 1;
   option (buf.validate.message).cel = {
-    id: "cluster.id"
+    id: "role.id"
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
