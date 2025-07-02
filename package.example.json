@@ -7,11 +7,7 @@
   "directories": {
     "doc": "docs"
   },
-  "files": [
-    "qdrant",
-    "google",
-    "buf"
-  ],
+  "files": ["qdrant", "google", "buf"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "artifactregistry-login": "npx --registry=https://registry.npmjs.org google-artifactregistry-auth"
@@ -31,5 +27,25 @@
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@connectrpc/connect": "^0.4.1",
+    "@connectrpc/connect-node": "^2.0.2",
+    "@connectrpc/connect-query": "^2.1.0",
+    "@connectrpc/connect-web": "^2.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@connectrpc/connect": {
+      "optional": true
+    },
+    "@connectrpc/connect-node": {
+      "optional": true
+    },
+    "@connectrpc/connect-query": {
+      "optional": true
+    },
+    "@connectrpc/connect-web": {
+      "optional": true
+    }
   }
 }

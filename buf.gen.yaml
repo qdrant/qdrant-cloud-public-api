@@ -60,5 +60,9 @@ plugins:
 
     out: gen/typescript
 
+  - remote: buf.build/bufbuild/connect-query:v0.4.1
+    include_imports: true
+    out: gen/typescript
+
 inputs:
   - directory: proto
