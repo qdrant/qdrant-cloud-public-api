@@ -57,11 +57,13 @@ plugins:
     opt:
       - target=js+dts
       - import_extension=js
-
     out: gen/typescript
 
-  - remote: buf.build/bufbuild/connect-query:v0.4.1
+  - remote: buf.build/connectrpc/query-es:v2.1.0
     include_imports: true
+    opt:
+      - target=js+dts
+      - import_extension=js
     out: gen/typescript
 
 inputs:
