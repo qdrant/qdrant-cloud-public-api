@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package qdrant.cloud.payment.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// PaymentService is the API used to manage payment settings.
+service PaymentService {
+  // Lists all payment methods known by the system for the provided account.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListPaymentMethods(ListPaymentMethodsRequest) returns (ListPaymentMethodsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
+  }
+}
+
+// Request to list payment methods for a specific account.
+message ListPaymentMethodsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing a list of payment methods.
+message ListPaymentMethodsResponse {
+  // The list of payment methods.
+  repeated PaymentMethod payment_methods = 1;
+}
+
+// Represents a payment method.
+message PaymentMethod {
+
+
+  // The timestamp when the role was created.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp created_at = 1;
+  // The timestamp when the role was last updated.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp last_modified_at = 2;
+}
