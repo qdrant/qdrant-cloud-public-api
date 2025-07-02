@@ -16,6 +16,11 @@ find gen/ -type f -name '*.ts' | while read -r file; do
     grep -v "\* buf:lint:ignore" "$file" >tmp_file && mv tmp_file "$file"
 done
 
+# Clean JS files: remove the * buf:lint:ignore RULE pattern
+find gen/ -type f -name '*.js' | while read -r file; do
+    grep -v "\* buf:lint:ignore" "$file" >tmp_file && mv tmp_file "$file"
+done
+
 # Clean JSON files: remove the \nbuf:lint:ignore RULE pattern
 find gen/ -type f -name '*.json' | while read -r file; do
     awk '{gsub(/buf:lint:ignore [A-Z_]+\\n/, ""); print}' "$file" >tmp_file && mv tmp_file "$file"
