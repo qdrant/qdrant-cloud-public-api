@@ -7,7 +7,7 @@
   "directories": {
     "doc": "docs"
   },
-  "files": ["qdrant", "google", "buf"],
+  "files": ["qdrant", "google", "buf", "k8s.io"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "artifactregistry-login": "npx --registry=https://registry.npmjs.org google-artifactregistry-auth"
