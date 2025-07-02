@@ -52,7 +52,6 @@ export const getPackage = createQueryService({
 }).getPackage;
 
 /**
- * buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
  * Lists all public packages.
  * Authentication not required
  *
