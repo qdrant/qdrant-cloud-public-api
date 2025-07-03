@@ -64,10 +64,8 @@ func (*ListAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 // ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
 type ListAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the user this quota applies to
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// Maximum number of accounts this user can be the owner of
-	MaxOwnedAccounts uint32 `protobuf:"varint,2,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
+	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -100,13 +98,6 @@ func (x *ListAuthenticatedUserQuotasResponse) ProtoReflect() protoreflect.Messag
 // Deprecated: Use ListAuthenticatedUserQuotasResponse.ProtoReflect.Descriptor instead.
 func (*ListAuthenticatedUserQuotasResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListAuthenticatedUserQuotasResponse) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
 }
 
 func (x *ListAuthenticatedUserQuotasResponse) GetMaxOwnedAccounts() uint32 {
@@ -241,10 +232,9 @@ var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
 	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"$\n" +
-	"\"ListAuthenticatedUserQuotasRequest\"l\n" +
-	"#ListAuthenticatedUserQuotasResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12,\n" +
-	"\x12max_owned_accounts\x18\x02 \x01(\rR\x10maxOwnedAccounts\"C\n" +
+	"\"ListAuthenticatedUserQuotasRequest\"S\n" +
+	"#ListAuthenticatedUserQuotasResponse\x12,\n" +
+	"\x12max_owned_accounts\x18\x01 \x01(\rR\x10maxOwnedAccounts\"C\n" +
 	"\x18ListAccountQuotasRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xb3\x01\n" +

@@ -33,16 +33,9 @@ export declare const ListAuthenticatedUserQuotasRequestSchema: GenMessage<ListAu
  */
 export declare type ListAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse"> & {
   /**
-   * ID of the user this quota applies to
-   *
-   * @generated from field: string user_id = 1;
-   */
-  userId: string;
-
-  /**
    * Maximum number of accounts this user can be the owner of
    *
-   * @generated from field: uint32 max_owned_accounts = 2;
+   * @generated from field: uint32 max_owned_accounts = 1;
    */
   maxOwnedAccounts: number;
 };

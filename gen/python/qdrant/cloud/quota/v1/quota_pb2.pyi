@@ -12,12 +12,10 @@ class ListAuthenticatedUserQuotasRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class ListAuthenticatedUserQuotasResponse(_message.Message):
-    __slots__ = ("user_id", "max_owned_accounts")
-    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("max_owned_accounts",)
     MAX_OWNED_ACCOUNTS_FIELD_NUMBER: _ClassVar[int]
-    user_id: str
     max_owned_accounts: int
-    def __init__(self, user_id: _Optional[str] = ..., max_owned_accounts: _Optional[int] = ...) -> None: ...
+    def __init__(self, max_owned_accounts: _Optional[int] = ...) -> None: ...
 
 class ListAccountQuotasRequest(_message.Message):
     __slots__ = ("account_id",)

@@ -129,10 +129,6 @@
     "v1ListAuthenticatedUserQuotasResponse": {
       "type": "object",
       "properties": {
-        "userId": {
-          "type": "string",
-          "title": "ID of the user this quota applies to"
-        },
         "maxOwnedAccounts": {
           "type": "integer",
           "format": "int64",
