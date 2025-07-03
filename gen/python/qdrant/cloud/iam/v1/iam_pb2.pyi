@@ -39,11 +39,6 @@ class UserConsentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     USER_CONSENT_STATUS_ACCEPTED: _ClassVar[UserConsentStatus]
     USER_CONSENT_STATUS_REVOKED: _ClassVar[UserConsentStatus]
     USER_CONSENT_STATUS_PENDING: _ClassVar[UserConsentStatus]
-
-class UserQuotaType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    USER_QUOTA_TYPE_UNSPECIFIED: _ClassVar[UserQuotaType]
-    USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS: _ClassVar[UserQuotaType]
 USER_STATUS_UNSPECIFIED: UserStatus
 USER_STATUS_ACTIVE: UserStatus
 USER_STATUS_BLOCKED: UserStatus
@@ -59,8 +54,6 @@ USER_CONSENT_STATUS_UNSPECIFIED: UserConsentStatus
 USER_CONSENT_STATUS_ACCEPTED: UserConsentStatus
 USER_CONSENT_STATUS_REVOKED: UserConsentStatus
 USER_CONSENT_STATUS_PENDING: UserConsentStatus
-USER_QUOTA_TYPE_UNSPECIFIED: UserQuotaType
-USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS: UserQuotaType
 
 class GetAuthenticatedUserRequest(_message.Message):
     __slots__ = ()
@@ -71,16 +64,6 @@ class GetAuthenticatedUserResponse(_message.Message):
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
-
-class ListAuthenticatedUserQuotasRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class ListAuthenticatedUserQuotasResponse(_message.Message):
-    __slots__ = ("items",)
-    ITEMS_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[UserQuota]
-    def __init__(self, items: _Optional[_Iterable[_Union[UserQuota, _Mapping]]] = ...) -> None: ...
 
 class UpdateUserRequest(_message.Message):
     __slots__ = ("user",)
@@ -249,14 +232,6 @@ class User(_message.Message):
     status: UserStatus
     default_account_id: str
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ...) -> None: ...
-
-class UserQuota(_message.Message):
-    __slots__ = ("value", "type")
-    VALUE_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
-    value: int
-    type: UserQuotaType
-    def __init__(self, value: _Optional[int] = ..., type: _Optional[_Union[UserQuotaType, str]] = ...) -> None: ...
 
 class Role(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions")

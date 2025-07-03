@@ -19,20 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IAMService_GetAuthenticatedUser_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
-	IAMService_ListAuthenticatedUserQuotas_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/ListAuthenticatedUserQuotas"
-	IAMService_UpdateUser_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
-	IAMService_GetUserConsent_FullMethodName              = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
-	IAMService_RecordUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
-	IAMService_ListPermissions_FullMethodName             = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
-	IAMService_ListRoles_FullMethodName                   = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
-	IAMService_GetRole_FullMethodName                     = "/qdrant.cloud.iam.v1.IAMService/GetRole"
-	IAMService_CreateRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
-	IAMService_UpdateRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
-	IAMService_DeleteRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
-	IAMService_ListEffectivePermissions_FullMethodName    = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
-	IAMService_ListUserRoles_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/ListUserRoles"
-	IAMService_AssignUserRoles_FullMethodName             = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
+	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
+	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
+	IAMService_GetUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
+	IAMService_RecordUserConsent_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
+	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
+	IAMService_ListRoles_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
+	IAMService_GetRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetRole"
+	IAMService_CreateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
+	IAMService_UpdateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
+	IAMService_DeleteRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
+	IAMService_ListEffectivePermissions_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
+	IAMService_ListUserRoles_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/ListUserRoles"
+	IAMService_AssignUserRoles_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -45,10 +44,6 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetAuthenticatedUser(ctx context.Context, in *GetAuthenticatedUserRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserResponse, error)
-	// Lists all quotas for the authenticated user.
-	// Required permissions:
-	// - None (authenticated only)
-	ListAuthenticatedUserQuotas(ctx context.Context, in *ListAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*ListAuthenticatedUserQuotasResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - write:user
@@ -115,16 +110,6 @@ func (c *iAMServiceClient) GetAuthenticatedUser(ctx context.Context, in *GetAuth
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAuthenticatedUserResponse)
 	err := c.cc.Invoke(ctx, IAMService_GetAuthenticatedUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *iAMServiceClient) ListAuthenticatedUserQuotas(ctx context.Context, in *ListAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*ListAuthenticatedUserQuotasResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAuthenticatedUserQuotasResponse)
-	err := c.cc.Invoke(ctx, IAMService_ListAuthenticatedUserQuotas_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -261,10 +246,6 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	GetAuthenticatedUser(context.Context, *GetAuthenticatedUserRequest) (*GetAuthenticatedUserResponse, error)
-	// Lists all quotas for the authenticated user.
-	// Required permissions:
-	// - None (authenticated only)
-	ListAuthenticatedUserQuotas(context.Context, *ListAuthenticatedUserQuotasRequest) (*ListAuthenticatedUserQuotasResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - write:user
@@ -329,9 +310,6 @@ type UnimplementedIAMServiceServer struct{}
 
 func (UnimplementedIAMServiceServer) GetAuthenticatedUser(context.Context, *GetAuthenticatedUserRequest) (*GetAuthenticatedUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthenticatedUser not implemented")
-}
-func (UnimplementedIAMServiceServer) ListAuthenticatedUserQuotas(context.Context, *ListAuthenticatedUserQuotasRequest) (*ListAuthenticatedUserQuotasResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAuthenticatedUserQuotas not implemented")
 }
 func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -404,24 +382,6 @@ func _IAMService_GetAuthenticatedUser_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).GetAuthenticatedUser(ctx, req.(*GetAuthenticatedUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IAMService_ListAuthenticatedUserQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAuthenticatedUserQuotasRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IAMServiceServer).ListAuthenticatedUserQuotas(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IAMService_ListAuthenticatedUserQuotas_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IAMServiceServer).ListAuthenticatedUserQuotas(ctx, req.(*ListAuthenticatedUserQuotasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -652,10 +612,6 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAuthenticatedUser",
 			Handler:    _IAMService_GetAuthenticatedUser_Handler,
-		},
-		{
-			MethodName: "ListAuthenticatedUserQuotas",
-			Handler:    _IAMService_ListAuthenticatedUserQuotas_Handler,
 		},
 		{
 			MethodName: "UpdateUser",

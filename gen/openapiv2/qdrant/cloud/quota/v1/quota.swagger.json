@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/quota/v1/quota.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "QuotaService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/quota/v1/accounts/{accountId}/quotas": {
+      "get": {
+        "summary": "Lists all quotas for the account identified by the given account ID.\nRequired permissions:\n- read:account",
+        "operationId": "QuotaService_ListAccountQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) to list quotas for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "QuotaService"
+        ]
+      }
+    },
+    "/api/quota/v1/users/me/quotas": {
+      "get": {
+        "summary": "Lists all quotas for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "QuotaService_ListAuthenticatedUserQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAuthenticatedUserQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "QuotaService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1ListAccountQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "title": "ID of the account this quota applies to"
+        },
+        "maxClusters": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Maximum number of clusters this account is allowed to create"
+        },
+        "maxClusterNodes": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Maximum number of nodes clusters can be scaled to"
+        },
+        "maxClusterJwts": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Maximum number of JWTs"
+        }
+      },
+      "description": "ListAccountQuotasResponse is the response from the ListAccountQuotas function."
+    },
+    "v1ListAuthenticatedUserQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "ID of the user this quota applies to"
+        },
+        "maxOwnedAccounts": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Maximum number of accounts this user can be the owner of"
+        }
+      },
+      "title": "ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function"
+    }
+  }
+}

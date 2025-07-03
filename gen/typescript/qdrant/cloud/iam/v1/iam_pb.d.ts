@@ -48,42 +48,6 @@ export declare type GetAuthenticatedUserResponse = Message<"qdrant.cloud.iam.v1.
 export declare const GetAuthenticatedUserResponseSchema: GenMessage<GetAuthenticatedUserResponse>;
 
 /**
- * ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
- *
- * Empty
- *
- * @generated from message qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasRequest
- */
-export declare type ListAuthenticatedUserQuotasRequest = Message<"qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasRequest"> & {
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasRequest.
- * Use `create(ListAuthenticatedUserQuotasRequestSchema)` to create a new message.
- */
-export declare const ListAuthenticatedUserQuotasRequestSchema: GenMessage<ListAuthenticatedUserQuotasRequest>;
-
-/**
- * ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
- *
- * @generated from message qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasResponse
- */
-export declare type ListAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasResponse"> & {
-  /**
-   * The list of user quotas.
-   *
-   * @generated from field: repeated qdrant.cloud.iam.v1.UserQuota items = 1;
-   */
-  items: UserQuota[];
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.ListAuthenticatedUserQuotasResponse.
- * Use `create(ListAuthenticatedUserQuotasResponseSchema)` to create a new message.
- */
-export declare const ListAuthenticatedUserQuotasResponseSchema: GenMessage<ListAuthenticatedUserQuotasResponse>;
-
-/**
  * UpdateUserRequest is the request for the UpdateUser function.
  *
  * @generated from message qdrant.cloud.iam.v1.UpdateUserRequest
@@ -681,34 +645,6 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
 export declare const UserSchema: GenMessage<User>;
 
 /**
- * An UserQuota represents a quota for an authenticated user.
- *
- * @generated from message qdrant.cloud.iam.v1.UserQuota
- */
-export declare type UserQuota = Message<"qdrant.cloud.iam.v1.UserQuota"> & {
-  /**
-   * The value of the quota.
-   *
-   * @generated from field: int32 value = 1;
-   */
-  value: number;
-
-  /**
-   * The type of the quota.
-   * This is a read-only field.
-   *
-   * @generated from field: qdrant.cloud.iam.v1.UserQuotaType type = 2;
-   */
-  type: UserQuotaType;
-};
-
-/**
- * Describes the message qdrant.cloud.iam.v1.UserQuota.
- * Use `create(UserQuotaSchema)` to create a new message.
- */
-export declare const UserQuotaSchema: GenMessage<UserQuota>;
-
-/**
  * A Role represents a role in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.iam.v1.Role
@@ -984,32 +920,6 @@ export enum UserConsentStatus {
 export declare const UserConsentStatusSchema: GenEnum<UserConsentStatus>;
 
 /**
- * UserQuotaType defines the possible quota types of a user.
- *
- * @generated from enum qdrant.cloud.iam.v1.UserQuotaType
- */
-export enum UserQuotaType {
-  /**
-   * Default, unspecified status.
-   *
-   * @generated from enum value: USER_QUOTA_TYPE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * The maximum number of allowed accounts owned by a user.
-   *
-   * @generated from enum value: USER_QUOTA_TYPE_MAX_OWNED_ACCOUNTS = 1;
-   */
-  MAX_OWNED_ACCOUNTS = 1,
-}
-
-/**
- * Describes the enum qdrant.cloud.iam.v1.UserQuotaType.
- */
-export declare const UserQuotaTypeSchema: GenEnum<UserQuotaType>;
-
-/**
  * IAMService is the API used to configure IAM (identity and access management) objects.
  *
  * @generated from service qdrant.cloud.iam.v1.IAMService
@@ -1026,18 +936,6 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof GetAuthenticatedUserRequestSchema;
     output: typeof GetAuthenticatedUserResponseSchema;
-  },
-  /**
-   * Lists all quotas for the authenticated user.
-   * Required permissions:
-   * - None (authenticated only)
-   *
-   * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListAuthenticatedUserQuotas
-   */
-  listAuthenticatedUserQuotas: {
-    methodKind: "unary";
-    input: typeof ListAuthenticatedUserQuotasRequestSchema;
-    output: typeof ListAuthenticatedUserQuotasResponseSchema;
   },
   /**
    * Updates the user identified by the given ID.

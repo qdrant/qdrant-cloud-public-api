@@ -20,11 +20,6 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
                 _registered_method=True)
-        self.ListAuthenticatedUserQuotas = channel.unary_unary(
-                '/qdrant.cloud.iam.v1.IAMService/ListAuthenticatedUserQuotas',
-                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasResponse.FromString,
-                _registered_method=True)
         self.UpdateUser = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
@@ -93,15 +88,6 @@ class IAMServiceServicer(object):
 
     def GetAuthenticatedUser(self, request, context):
         """Gets the authenticated user.
-        Required permissions:
-        - None (authenticated only)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListAuthenticatedUserQuotas(self, request, context):
-        """Lists all quotas for the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
@@ -229,11 +215,6 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.SerializeToString,
             ),
-            'ListAuthenticatedUserQuotas': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAuthenticatedUserQuotas,
-                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasResponse.SerializeToString,
-            ),
             'UpdateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
@@ -323,33 +304,6 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ListAuthenticatedUserQuotas(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.iam.v1.IAMService/ListAuthenticatedUserQuotas',
-            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasRequest.SerializeToString,
-            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListAuthenticatedUserQuotasResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -467,38 +467,6 @@
         ]
       }
     },
-    "/api/account/v1/accounts/{accountId}/quotas": {
-      "get": {
-        "summary": "Lists all quotas for the account identified by the given account ID.\nRequired permissions:\n- read:account",
-        "operationId": "AccountService_ListAccountQuotas",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListAccountQuotasResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format) to list quotas for.\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
     "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
       "post": {
         "summary": "Creates a new account invite.\nRequired permissions:\n- write:invites",
@@ -814,32 +782,6 @@
       },
       "description": "An AccountMember represents a user who is a member of an account."
     },
-    "v1AccountQuota": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The value of the quota."
-        },
-        "type": {
-          "$ref": "#/definitions/v1AccountQuotaType",
-          "description": "The type of the quota.\nThis is a read-only field."
-        }
-      },
-      "description": "An AccountQuota represents a quota for an account."
-    },
-    "v1AccountQuotaType": {
-      "type": "string",
-      "enum": [
-        "ACCOUNT_QUOTA_TYPE_UNSPECIFIED",
-        "ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS",
-        "ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES",
-        "ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS"
-      ],
-      "default": "ACCOUNT_QUOTA_TYPE_UNSPECIFIED",
-      "description": "AccountQuotaType defines the possible quota types of an account.\n\n - ACCOUNT_QUOTA_TYPE_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_QUOTA_TYPE_MAX_CLUSTERS: The maximum number of allowed clusters for the account.\n - ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_NUM_NODES: The maximum number of allowed nodes in a cluster for the account.\n - ACCOUNT_QUOTA_TYPE_MAX_CLUSTER_JWTS: The maximum number of allowed JWTs in a cluster for the account."
-    },
     "v1CreateAccountInviteResponse": {
       "type": "object",
       "properties": {
@@ -939,20 +881,6 @@
         }
       },
       "description": "ListAccountMembersResponse is the response from the ListAccountMembers function."
-    },
-    "v1ListAccountQuotasResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1AccountQuota"
-          },
-          "description": "The list of account quotas."
-        }
-      },
-      "description": "ListAccountQuotasResponse is the response from the ListAccountQuotas function."
     },
     "v1ListAccountsResponse": {
       "type": "object",

@@ -14,15 +14,6 @@ import { IAMService } from "./iam_pb.js";
 export const getAuthenticatedUser = IAMService.method.getAuthenticatedUser;
 
 /**
- * Lists all quotas for the authenticated user.
- * Required permissions:
- * - None (authenticated only)
- *
- * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListAuthenticatedUserQuotas
- */
-export const listAuthenticatedUserQuotas = IAMService.method.listAuthenticatedUserQuotas;
-
-/**
  * Updates the user identified by the given ID.
  * Required permissions:
  * - write:user

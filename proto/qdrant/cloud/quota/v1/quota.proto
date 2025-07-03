@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package qdrant.cloud.quota.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// Quota is the API used to configure Quotas.
+service QuotaService {
+  // Lists all quotas for the authenticated user.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListAuthenticatedUserQuotas(ListAuthenticatedUserQuotasRequest) returns (ListAuthenticatedUserQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/quota/v1/users/me/quotas"};
+  }
+  // Lists all quotas for the account identified by the given account ID.
+  // Required permissions:
+  // - read:account
+  rpc ListAccountQuotas(ListAccountQuotasRequest) returns (ListAccountQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/quota/v1/accounts/{account_id}/quotas"};
+  }
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
+message ListAuthenticatedUserQuotasRequest {
+  // Empty
+}
+
+// ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
+message ListAuthenticatedUserQuotasResponse {
+  // ID of the user this quota applies to
+  string user_id = 1;
+
+  // Maximum number of accounts this user can be the owner of
+  uint32 max_owned_accounts = 2;
+}
+
+// ListAccountQuotasRequest is the request for the ListAccountQuotas function.
+message ListAccountQuotasRequest {
+  // The identifier of the account (in GUID format) to list quotas for.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListAccountQuotasResponse is the response from the ListAccountQuotas function.
+message ListAccountQuotasResponse {
+  // ID of the account this quota applies to
+  string account_id = 1;
+
+  // Maximum number of clusters this account is allowed to create
+  uint32 max_clusters = 2;
+
+  // Maximum number of nodes clusters can be scaled to
+  uint32 max_cluster_nodes = 3;
+
+  // Maximum number of JWTs
+  uint32 max_cluster_jwts = 4;
+}
