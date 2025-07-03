@@ -96,7 +96,14 @@ jobs:
 
       - name: Publish JS package
         working-directory: npm_publish
-        run: npm publish
+        run: |
+          PACKAGE_VERSION=$(jq -r .version package.json)
+          if npm view @qdrant/qdrant-cloud-public-api@"$PACKAGE_VERSION"; then
+            echo
+            echo "Package $PACKAGE_VERSION already exists, skipping publish."
+            exit 0
+          fi
+          npm publish
   finalize-release:
     name: Finalize Release
     runs-on: ubuntu-latest
