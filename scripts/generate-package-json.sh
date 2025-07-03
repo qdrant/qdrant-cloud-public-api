@@ -109,20 +109,20 @@ while read -r dts_file; do
     if [ -z "$submodules" ]; then
         # Direct service: service/version/file (e.g., auth/v1/auth_pb.d.ts)
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$version/$service/connect-query"
+            export_key="$service/$version/connect-query"
             sort_prefix="$service-$version-1"
         else
-            export_key="$version/$service"
+            export_key="$service/$version"
             sort_prefix="$service-$version-0"
         fi
     else
         # Has submodules: service/submodule(s)/version/file (e.g., cluster/auth/v1/file.d.ts, serverless/collection/auth/v1/file.d.ts)
         submodules_normalized=$(echo "$submodules" | tr '/' '-')
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$version/$service/$submodules/connect-query"
+            export_key="$service/$submodules/$version/connect-query"
             sort_prefix="$service-$version-$submodules_normalized-1"
         else
-            export_key="$version/$service/$submodules"
+            export_key="$service/$submodules/$version"
             sort_prefix="$service-$version-$submodules_normalized-0"
         fi
     fi
