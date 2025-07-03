@@ -37,5 +37,5 @@ runs:
         if [ "${INPUT_TARGET}" = "python" ]; then
           sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
         elif [ "${INPUT_TARGET}" = "node" ]; then
-          ./scripts/generate-package-package.json "$STRIPPED_VERSION"
+          ./scripts/generate-package-json.sh "$STRIPPED_VERSION"
         fi
