@@ -47,5 +47,7 @@
     "@connectrpc/connect-web": {
       "optional": true
     }
-  }
+  },
+  "exports": {},
+  "sideEffects": false
 }

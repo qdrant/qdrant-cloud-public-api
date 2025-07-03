@@ -7,3 +7,4 @@ __pycache__/
 /gen-dummy
 node_modules/
 var/
+/package.json
