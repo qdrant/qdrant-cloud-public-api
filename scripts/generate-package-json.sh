@@ -44,6 +44,10 @@ get_package_paths() {
     echo "$js_path|$ts_path"
 }
 
+# Create temporary file for processing results
+temp_file=$(mktemp)
+trap 'rm -f "$temp_file"' EXIT
+
 # Find all .d.ts files and process them
 find gen/typescript/qdrant/cloud -name "*.d.ts" -type f | \
 while read -r dts_file; do
@@ -59,31 +63,67 @@ while read -r dts_file; do
     # Extract service and potential submodule from path
     rel_path=$(echo "$dts_file" | sed 's|gen/typescript/qdrant/cloud/||')
     service=$(echo "$rel_path" | cut -d'/' -f1)
-    submodule=$(echo "$rel_path" | cut -d'/' -f2)
-    version=$(echo "$rel_path" | cut -d'/' -f3)
     filename=$(basename "$dts_file" .d.ts)
     
-    # Determine if this is a direct service or has submodules
-    # Count how many levels deep we are (service/version/file vs service/submodule/version/file)
-    num_levels=$(echo "$rel_path" | tr '/' '\n' | wc -l)
+    # Extract path components dynamically
+    # Structure: service/[submodule1/submodule2/...]/version/file
+    # Find the version (v1, v2, etc.) to split the path correctly
+    path_parts=$(echo "$rel_path" | tr '/' '\n')
     
-    if [ "$num_levels" -le 3 ]; then
+    # Find which part is the version by looking for v[0-9]+
+    version=""
+    version_index=0
+    i=1
+    for part in $path_parts; do
+        if echo "$part" | grep -q "^v[0-9]\+$"; then
+            version="$part"
+            version_index=$i
+            break
+        fi
+        i=$((i + 1))
+    done
+    
+    if [ -z "$version" ]; then
+        echo "ERROR: No version found in path $rel_path" >&2
+        echo "ERROR" > "$temp_file"
+        exit 1
+    fi
+    
+    # Build submodule path (everything between service and version)
+    submodules=""
+    if [ "$version_index" -gt 2 ]; then
+        # Extract submodules: everything from position 2 to version_index-1
+        j=2
+        while [ $j -lt "$version_index" ]; do
+            submodule_part=$(echo "$rel_path" | cut -d'/' -f$j)
+            if [ -z "$submodules" ]; then
+                submodules="$submodule_part"
+            else
+                submodules="$submodules/$submodule_part"
+            fi
+            j=$((j + 1))
+        done
+    fi
+    
+    # Generate export key and sort prefix
+    if [ -z "$submodules" ]; then
         # Direct service: service/version/file (e.g., auth/v1/auth_pb.d.ts)
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$service/connect-query"
-            sort_prefix="$service-1"
+            export_key="$version/$service/connect-query"
+            sort_prefix="$service-$version-1"
         else
-            export_key="$service"
-            sort_prefix="$service-0"
+            export_key="$version/$service"
+            sort_prefix="$service-$version-0"
         fi
     else
-        # Has submodules: service/submodule/version/file (e.g., cluster/auth/v1/file.d.ts)
+        # Has submodules: service/submodule(s)/version/file (e.g., cluster/auth/v1/file.d.ts, serverless/collection/auth/v1/file.d.ts)
+        submodules_normalized=$(echo "$submodules" | tr '/' '-')
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$service/$submodule/connect-query"
-            sort_prefix="$service-$submodule-1"
+            export_key="$version/$service/$submodules/connect-query"
+            sort_prefix="$service-$version-$submodules_normalized-1"
         else
-            export_key="$service/$submodule"
-            sort_prefix="$service-$submodule-0"
+            export_key="$version/$service/$submodules"
+            sort_prefix="$service-$version-$submodules_normalized-0"
         fi
     fi
     
@@ -91,7 +131,13 @@ while read -r dts_file; do
 done | \
 sort | \
 while IFS='|' read -r sort_prefix export_key js_path ts_path; do
-    add_export "$export_key" "$js_path" "$ts_path"
+    add_export "./$export_key" "$js_path" "$ts_path"
 done
+
+# Check if there was an error
+if [ -f "$temp_file" ] && [ "$(cat "$temp_file")" = "ERROR" ]; then
+    echo "Script terminated due to error in processing files"
+    exit 1
+fi
 
 echo "Generated exports for package.json"
