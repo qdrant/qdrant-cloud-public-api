@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package qdrant.cloud.quota.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// QuotaService is the API used to configure Quotas.
+service QuotaService {
+  // Get quotas for the authenticated user.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetAuthenticatedUserQuotas(GetAuthenticatedUserQuotasRequest) returns (GetAuthenticatedUserQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/quota/v1/users/me/quotas"};
+  }
+  // Get quotas for the account identified by the given account ID.
+  // Required permissions:
+  // - read:account
+  rpc GetAccountQuotas(GetAccountQuotasRequest) returns (GetAccountQuotasResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/quota/v1/accounts/{account_id}/quotas"};
+  }
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetAuthenticatedUserQuotasRequest is the request for the GetAuthenticatedUserQuotas function
+message GetAuthenticatedUserQuotasRequest {
+  // Empty
+}
+
+// GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
+message GetAuthenticatedUserQuotasResponse {
+  // Maximum number of accounts this user can be the owner of.
+  // To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
+  uint32 max_owned_accounts = 1 [(buf.validate.field).uint32.gt = 0];
+}
+
+// GetAccountQuotasRequest is the request for the GetAccountQuotas function.
+message GetAccountQuotasRequest {
+  // The identifier of the account (in GUID format) to list quotas for.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetAccountQuotasResponse is the response from the GetAccountQuotas function.
+message GetAccountQuotasResponse {
+  // ID of the account this quota applies to
+  string account_id = 1;
+  // Maximum number of clusters this account is allowed to create.
+  // To get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`.
+  uint32 max_clusters = 2 [(buf.validate.field).uint32.gt = 0];
+  // Maximum number of nodes clusters can be scaled to.
+  // To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
+  uint32 max_cluster_nodes = 3 [(buf.validate.field).uint32.gt = 0];
+  // Maximum number of Database API keys this account can create (for each cluster).
+  // To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
+  uint32 max_cluster_database_api_keys = 4 [(buf.validate.field).uint32.gt = 0];
+}
