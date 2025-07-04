@@ -6,7 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
-// Quota is the API used to configure Quotas.
+// QuotaService is the API used to configure Quotas.
 service QuotaService {
   // Get quotas for the authenticated user.
   // Required permissions:

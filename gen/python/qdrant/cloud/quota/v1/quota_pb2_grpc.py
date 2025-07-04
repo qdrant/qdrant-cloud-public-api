@@ -6,7 +6,7 @@ from qdrant.cloud.quota.v1 import quota_pb2 as qdrant_dot_cloud_dot_quota_dot_v1
 
 
 class QuotaServiceStub(object):
-    """Quota is the API used to configure Quotas.
+    """QuotaService is the API used to configure Quotas.
     """
 
     def __init__(self, channel):
@@ -28,7 +28,7 @@ class QuotaServiceStub(object):
 
 
 class QuotaServiceServicer(object):
-    """Quota is the API used to configure Quotas.
+    """QuotaService is the API used to configure Quotas.
     """
 
     def GetAuthenticatedUserQuotas(self, request, context):
@@ -71,7 +71,7 @@ def add_QuotaServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class QuotaService(object):
-    """Quota is the API used to configure Quotas.
+    """QuotaService is the API used to configure Quotas.
     """
 
     @staticmethod

@@ -109,7 +109,7 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
 export declare const GetAccountQuotasResponseSchema: GenMessage<GetAccountQuotasResponse>;
 
 /**
- * Quota is the API used to configure Quotas.
+ * QuotaService is the API used to configure Quotas.
  *
  * @generated from service qdrant.cloud.quota.v1.QuotaService
  */

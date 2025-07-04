@@ -42,7 +42,7 @@ export const GetAccountQuotasResponseSchema = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_quota_v1_quota, 3);
 
 /**
- * Quota is the API used to configure Quotas.
+ * QuotaService is the API used to configure Quotas.
  *
  * @generated from service qdrant.cloud.quota.v1.QuotaService
  */

@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Quota is the API used to configure Quotas.
+// QuotaService is the API used to configure Quotas.
 type QuotaServiceClient interface {
 	// Get quotas for the authenticated user.
 	// Required permissions:
@@ -71,7 +71,7 @@ func (c *quotaServiceClient) GetAccountQuotas(ctx context.Context, in *GetAccoun
 // All implementations must embed UnimplementedQuotaServiceServer
 // for forward compatibility.
 //
-// Quota is the API used to configure Quotas.
+// QuotaService is the API used to configure Quotas.
 type QuotaServiceServer interface {
 	// Get quotas for the authenticated user.
 	// Required permissions:
