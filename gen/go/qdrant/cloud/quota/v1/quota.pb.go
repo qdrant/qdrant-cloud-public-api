@@ -24,27 +24,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
-type ListAuthenticatedUserQuotasRequest struct {
+// GetAuthenticatedUserQuotasRequest is the request for the GetAuthenticatedUserQuotas function
+type GetAuthenticatedUserQuotasRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAuthenticatedUserQuotasRequest) Reset() {
-	*x = ListAuthenticatedUserQuotasRequest{}
+func (x *GetAuthenticatedUserQuotasRequest) Reset() {
+	*x = GetAuthenticatedUserQuotasRequest{}
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAuthenticatedUserQuotasRequest) String() string {
+func (x *GetAuthenticatedUserQuotasRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAuthenticatedUserQuotasRequest) ProtoMessage() {}
+func (*GetAuthenticatedUserQuotasRequest) ProtoMessage() {}
 
-func (x *ListAuthenticatedUserQuotasRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAuthenticatedUserQuotasRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,13 +56,13 @@ func (x *ListAuthenticatedUserQuotasRequest) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAuthenticatedUserQuotasRequest.ProtoReflect.Descriptor instead.
-func (*ListAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAuthenticatedUserQuotasRequest.ProtoReflect.Descriptor instead.
+func (*GetAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP(), []int{0}
 }
 
-// ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
-type ListAuthenticatedUserQuotasResponse struct {
+// GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
+type GetAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum number of accounts this user can be the owner of
 	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
@@ -70,20 +70,20 @@ type ListAuthenticatedUserQuotasResponse struct {
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *ListAuthenticatedUserQuotasResponse) Reset() {
-	*x = ListAuthenticatedUserQuotasResponse{}
+func (x *GetAuthenticatedUserQuotasResponse) Reset() {
+	*x = GetAuthenticatedUserQuotasResponse{}
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAuthenticatedUserQuotasResponse) String() string {
+func (x *GetAuthenticatedUserQuotasResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAuthenticatedUserQuotasResponse) ProtoMessage() {}
+func (*GetAuthenticatedUserQuotasResponse) ProtoMessage() {}
 
-func (x *ListAuthenticatedUserQuotasResponse) ProtoReflect() protoreflect.Message {
+func (x *GetAuthenticatedUserQuotasResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -95,20 +95,20 @@ func (x *ListAuthenticatedUserQuotasResponse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAuthenticatedUserQuotasResponse.ProtoReflect.Descriptor instead.
-func (*ListAuthenticatedUserQuotasResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAuthenticatedUserQuotasResponse.ProtoReflect.Descriptor instead.
+func (*GetAuthenticatedUserQuotasResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListAuthenticatedUserQuotasResponse) GetMaxOwnedAccounts() uint32 {
+func (x *GetAuthenticatedUserQuotasResponse) GetMaxOwnedAccounts() uint32 {
 	if x != nil {
 		return x.MaxOwnedAccounts
 	}
 	return 0
 }
 
-// ListAccountQuotasRequest is the request for the ListAccountQuotas function.
-type ListAccountQuotasRequest struct {
+// GetAccountQuotasRequest is the request for the GetAccountQuotas function.
+type GetAccountQuotasRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format) to list quotas for.
 	// This is a required field.
@@ -117,20 +117,20 @@ type ListAccountQuotasRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAccountQuotasRequest) Reset() {
-	*x = ListAccountQuotasRequest{}
+func (x *GetAccountQuotasRequest) Reset() {
+	*x = GetAccountQuotasRequest{}
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAccountQuotasRequest) String() string {
+func (x *GetAccountQuotasRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAccountQuotasRequest) ProtoMessage() {}
+func (*GetAccountQuotasRequest) ProtoMessage() {}
 
-func (x *ListAccountQuotasRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAccountQuotasRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -142,20 +142,20 @@ func (x *ListAccountQuotasRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAccountQuotasRequest.ProtoReflect.Descriptor instead.
-func (*ListAccountQuotasRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAccountQuotasRequest.ProtoReflect.Descriptor instead.
+func (*GetAccountQuotasRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListAccountQuotasRequest) GetAccountId() string {
+func (x *GetAccountQuotasRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-// ListAccountQuotasResponse is the response from the ListAccountQuotas function.
-type ListAccountQuotasResponse struct {
+// GetAccountQuotasResponse is the response from the GetAccountQuotas function.
+type GetAccountQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the account this quota applies to
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -169,20 +169,20 @@ type ListAccountQuotasResponse struct {
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *ListAccountQuotasResponse) Reset() {
-	*x = ListAccountQuotasResponse{}
+func (x *GetAccountQuotasResponse) Reset() {
+	*x = GetAccountQuotasResponse{}
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAccountQuotasResponse) String() string {
+func (x *GetAccountQuotasResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAccountQuotasResponse) ProtoMessage() {}
+func (*GetAccountQuotasResponse) ProtoMessage() {}
 
-func (x *ListAccountQuotasResponse) ProtoReflect() protoreflect.Message {
+func (x *GetAccountQuotasResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_quota_v1_quota_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -194,33 +194,33 @@ func (x *ListAccountQuotasResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAccountQuotasResponse.ProtoReflect.Descriptor instead.
-func (*ListAccountQuotasResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAccountQuotasResponse.ProtoReflect.Descriptor instead.
+func (*GetAccountQuotasResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListAccountQuotasResponse) GetAccountId() string {
+func (x *GetAccountQuotasResponse) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *ListAccountQuotasResponse) GetMaxClusters() uint32 {
+func (x *GetAccountQuotasResponse) GetMaxClusters() uint32 {
 	if x != nil {
 		return x.MaxClusters
 	}
 	return 0
 }
 
-func (x *ListAccountQuotasResponse) GetMaxClusterNodes() uint32 {
+func (x *GetAccountQuotasResponse) GetMaxClusterNodes() uint32 {
 	if x != nil {
 		return x.MaxClusterNodes
 	}
 	return 0
 }
 
-func (x *ListAccountQuotasResponse) GetMaxClusterJwts() uint32 {
+func (x *GetAccountQuotasResponse) GetMaxClusterJwts() uint32 {
 	if x != nil {
 		return x.MaxClusterJwts
 	}
@@ -231,22 +231,22 @@ var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
-	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"$\n" +
-	"\"ListAuthenticatedUserQuotasRequest\"S\n" +
-	"#ListAuthenticatedUserQuotasResponse\x12,\n" +
-	"\x12max_owned_accounts\x18\x01 \x01(\rR\x10maxOwnedAccounts\"C\n" +
-	"\x18ListAccountQuotasRequest\x12'\n" +
+	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"#\n" +
+	"!GetAuthenticatedUserQuotasRequest\"R\n" +
+	"\"GetAuthenticatedUserQuotasResponse\x12,\n" +
+	"\x12max_owned_accounts\x18\x01 \x01(\rR\x10maxOwnedAccounts\"B\n" +
+	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xb3\x01\n" +
-	"\x19ListAccountQuotasResponse\x12\x1d\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xb2\x01\n" +
+	"\x18GetAccountQuotasResponse\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
 	"\fmax_clusters\x18\x02 \x01(\rR\vmaxClusters\x12*\n" +
 	"\x11max_cluster_nodes\x18\x03 \x01(\rR\x0fmaxClusterNodes\x12(\n" +
-	"\x10max_cluster_jwts\x18\x04 \x01(\rR\x0emaxClusterJwts2\x96\x03\n" +
-	"\fQuotaService\x12\xc8\x01\n" +
-	"\x1bListAuthenticatedUserQuotas\x129.qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest\x1a:.qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xba\x01\n" +
-	"\x11ListAccountQuotas\x12/.qdrant.cloud.quota.v1.ListAccountQuotasRequest\x1a0.qdrant.cloud.quota.v1.ListAccountQuotasResponse\"B\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotasB\xee\x01\n" +
+	"\x10max_cluster_jwts\x18\x04 \x01(\rR\x0emaxClusterJwts2\x90\x03\n" +
+	"\fQuotaService\x12\xc5\x01\n" +
+	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xb7\x01\n" +
+	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"B\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotasB\xee\x01\n" +
 	"\x19com.qdrant.cloud.quota.v1B\n" +
 	"QuotaProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/quota/v1;quotav1\xa2\x02\x03QCQ\xaa\x02\x15Qdrant.Cloud.Quota.V1\xca\x02\x15Qdrant\\Cloud\\Quota\\V1\xe2\x02!Qdrant\\Cloud\\Quota\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Quota::V1b\x06proto3"
 
@@ -264,16 +264,16 @@ func file_qdrant_cloud_quota_v1_quota_proto_rawDescGZIP() []byte {
 
 var file_qdrant_cloud_quota_v1_quota_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_qdrant_cloud_quota_v1_quota_proto_goTypes = []any{
-	(*ListAuthenticatedUserQuotasRequest)(nil),  // 0: qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest
-	(*ListAuthenticatedUserQuotasResponse)(nil), // 1: qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse
-	(*ListAccountQuotasRequest)(nil),            // 2: qdrant.cloud.quota.v1.ListAccountQuotasRequest
-	(*ListAccountQuotasResponse)(nil),           // 3: qdrant.cloud.quota.v1.ListAccountQuotasResponse
+	(*GetAuthenticatedUserQuotasRequest)(nil),  // 0: qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest
+	(*GetAuthenticatedUserQuotasResponse)(nil), // 1: qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse
+	(*GetAccountQuotasRequest)(nil),            // 2: qdrant.cloud.quota.v1.GetAccountQuotasRequest
+	(*GetAccountQuotasResponse)(nil),           // 3: qdrant.cloud.quota.v1.GetAccountQuotasResponse
 }
 var file_qdrant_cloud_quota_v1_quota_proto_depIdxs = []int32{
-	0, // 0: qdrant.cloud.quota.v1.QuotaService.ListAuthenticatedUserQuotas:input_type -> qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest
-	2, // 1: qdrant.cloud.quota.v1.QuotaService.ListAccountQuotas:input_type -> qdrant.cloud.quota.v1.ListAccountQuotasRequest
-	1, // 2: qdrant.cloud.quota.v1.QuotaService.ListAuthenticatedUserQuotas:output_type -> qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse
-	3, // 3: qdrant.cloud.quota.v1.QuotaService.ListAccountQuotas:output_type -> qdrant.cloud.quota.v1.ListAccountQuotasResponse
+	0, // 0: qdrant.cloud.quota.v1.QuotaService.GetAuthenticatedUserQuotas:input_type -> qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest
+	2, // 1: qdrant.cloud.quota.v1.QuotaService.GetAccountQuotas:input_type -> qdrant.cloud.quota.v1.GetAccountQuotasRequest
+	1, // 2: qdrant.cloud.quota.v1.QuotaService.GetAuthenticatedUserQuotas:output_type -> qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse
+	3, // 3: qdrant.cloud.quota.v1.QuotaService.GetAccountQuotas:output_type -> qdrant.cloud.quota.v1.GetAccountQuotasResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -15,15 +15,15 @@ class QuotaServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ListAuthenticatedUserQuotas = channel.unary_unary(
-                '/qdrant.cloud.quota.v1.QuotaService/ListAuthenticatedUserQuotas',
-                request_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasResponse.FromString,
+        self.GetAuthenticatedUserQuotas = channel.unary_unary(
+                '/qdrant.cloud.quota.v1.QuotaService/GetAuthenticatedUserQuotas',
+                request_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasResponse.FromString,
                 _registered_method=True)
-        self.ListAccountQuotas = channel.unary_unary(
-                '/qdrant.cloud.quota.v1.QuotaService/ListAccountQuotas',
-                request_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasResponse.FromString,
+        self.GetAccountQuotas = channel.unary_unary(
+                '/qdrant.cloud.quota.v1.QuotaService/GetAccountQuotas',
+                request_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasResponse.FromString,
                 _registered_method=True)
 
 
@@ -31,8 +31,8 @@ class QuotaServiceServicer(object):
     """Quota is the API used to configure Quotas.
     """
 
-    def ListAuthenticatedUserQuotas(self, request, context):
-        """Lists all quotas for the authenticated user.
+    def GetAuthenticatedUserQuotas(self, request, context):
+        """Get quotas for the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
@@ -40,8 +40,8 @@ class QuotaServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListAccountQuotas(self, request, context):
-        """Lists all quotas for the account identified by the given account ID.
+    def GetAccountQuotas(self, request, context):
+        """Get quotas for the account identified by the given account ID.
         Required permissions:
         - read:account
         """
@@ -52,15 +52,15 @@ class QuotaServiceServicer(object):
 
 def add_QuotaServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ListAuthenticatedUserQuotas': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAuthenticatedUserQuotas,
-                    request_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasResponse.SerializeToString,
+            'GetAuthenticatedUserQuotas': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAuthenticatedUserQuotas,
+                    request_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasResponse.SerializeToString,
             ),
-            'ListAccountQuotas': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAccountQuotas,
-                    request_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasResponse.SerializeToString,
+            'GetAccountQuotas': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAccountQuotas,
+                    request_deserializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -75,7 +75,7 @@ class QuotaService(object):
     """
 
     @staticmethod
-    def ListAuthenticatedUserQuotas(request,
+    def GetAuthenticatedUserQuotas(request,
             target,
             options=(),
             channel_credentials=None,
@@ -88,9 +88,9 @@ class QuotaService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.quota.v1.QuotaService/ListAuthenticatedUserQuotas',
-            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasRequest.SerializeToString,
-            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAuthenticatedUserQuotasResponse.FromString,
+            '/qdrant.cloud.quota.v1.QuotaService/GetAuthenticatedUserQuotas',
+            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasRequest.SerializeToString,
+            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAuthenticatedUserQuotasResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -102,7 +102,7 @@ class QuotaService(object):
             _registered_method=True)
 
     @staticmethod
-    def ListAccountQuotas(request,
+    def GetAccountQuotas(request,
             target,
             options=(),
             channel_credentials=None,
@@ -115,9 +115,9 @@ class QuotaService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.quota.v1.QuotaService/ListAccountQuotas',
-            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasRequest.SerializeToString,
-            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.ListAccountQuotasResponse.FromString,
+            '/qdrant.cloud.quota.v1.QuotaService/GetAccountQuotas',
+            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasRequest.SerializeToString,
+            qdrant_dot_cloud_dot_quota_dot_v1_dot_quota__pb2.GetAccountQuotasResponse.FromString,
             options,
             channel_credentials,
             insecure,

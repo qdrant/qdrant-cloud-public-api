@@ -11,27 +11,27 @@ import type { Message } from "@bufbuild/protobuf";
 export declare const file_qdrant_cloud_quota_v1_quota: GenFile;
 
 /**
- * ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
+ * GetAuthenticatedUserQuotasRequest is the request for the GetAuthenticatedUserQuotas function
  *
  * Empty
  *
- * @generated from message qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest
+ * @generated from message qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest
  */
-export declare type ListAuthenticatedUserQuotasRequest = Message<"qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest"> & {
+export declare type GetAuthenticatedUserQuotasRequest = Message<"qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest"> & {
 };
 
 /**
- * Describes the message qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasRequest.
- * Use `create(ListAuthenticatedUserQuotasRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest.
+ * Use `create(GetAuthenticatedUserQuotasRequestSchema)` to create a new message.
  */
-export declare const ListAuthenticatedUserQuotasRequestSchema: GenMessage<ListAuthenticatedUserQuotasRequest>;
+export declare const GetAuthenticatedUserQuotasRequestSchema: GenMessage<GetAuthenticatedUserQuotasRequest>;
 
 /**
- * ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
+ * GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
  *
- * @generated from message qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse
+ * @generated from message qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse
  */
-export declare type ListAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse"> & {
+export declare type GetAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse"> & {
   /**
    * Maximum number of accounts this user can be the owner of
    *
@@ -41,17 +41,17 @@ export declare type ListAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.
 };
 
 /**
- * Describes the message qdrant.cloud.quota.v1.ListAuthenticatedUserQuotasResponse.
- * Use `create(ListAuthenticatedUserQuotasResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse.
+ * Use `create(GetAuthenticatedUserQuotasResponseSchema)` to create a new message.
  */
-export declare const ListAuthenticatedUserQuotasResponseSchema: GenMessage<ListAuthenticatedUserQuotasResponse>;
+export declare const GetAuthenticatedUserQuotasResponseSchema: GenMessage<GetAuthenticatedUserQuotasResponse>;
 
 /**
- * ListAccountQuotasRequest is the request for the ListAccountQuotas function.
+ * GetAccountQuotasRequest is the request for the GetAccountQuotas function.
  *
- * @generated from message qdrant.cloud.quota.v1.ListAccountQuotasRequest
+ * @generated from message qdrant.cloud.quota.v1.GetAccountQuotasRequest
  */
-export declare type ListAccountQuotasRequest = Message<"qdrant.cloud.quota.v1.ListAccountQuotasRequest"> & {
+export declare type GetAccountQuotasRequest = Message<"qdrant.cloud.quota.v1.GetAccountQuotasRequest"> & {
   /**
    * The identifier of the account (in GUID format) to list quotas for.
    * This is a required field.
@@ -62,17 +62,17 @@ export declare type ListAccountQuotasRequest = Message<"qdrant.cloud.quota.v1.Li
 };
 
 /**
- * Describes the message qdrant.cloud.quota.v1.ListAccountQuotasRequest.
- * Use `create(ListAccountQuotasRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.quota.v1.GetAccountQuotasRequest.
+ * Use `create(GetAccountQuotasRequestSchema)` to create a new message.
  */
-export declare const ListAccountQuotasRequestSchema: GenMessage<ListAccountQuotasRequest>;
+export declare const GetAccountQuotasRequestSchema: GenMessage<GetAccountQuotasRequest>;
 
 /**
- * ListAccountQuotasResponse is the response from the ListAccountQuotas function.
+ * GetAccountQuotasResponse is the response from the GetAccountQuotas function.
  *
- * @generated from message qdrant.cloud.quota.v1.ListAccountQuotasResponse
+ * @generated from message qdrant.cloud.quota.v1.GetAccountQuotasResponse
  */
-export declare type ListAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.ListAccountQuotasResponse"> & {
+export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.GetAccountQuotasResponse"> & {
   /**
    * ID of the account this quota applies to
    *
@@ -103,10 +103,10 @@ export declare type ListAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.L
 };
 
 /**
- * Describes the message qdrant.cloud.quota.v1.ListAccountQuotasResponse.
- * Use `create(ListAccountQuotasResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.quota.v1.GetAccountQuotasResponse.
+ * Use `create(GetAccountQuotasResponseSchema)` to create a new message.
  */
-export declare const ListAccountQuotasResponseSchema: GenMessage<ListAccountQuotasResponse>;
+export declare const GetAccountQuotasResponseSchema: GenMessage<GetAccountQuotasResponse>;
 
 /**
  * Quota is the API used to configure Quotas.
@@ -115,28 +115,28 @@ export declare const ListAccountQuotasResponseSchema: GenMessage<ListAccountQuot
  */
 export declare const QuotaService: GenService<{
   /**
-   * Lists all quotas for the authenticated user.
+   * Get quotas for the authenticated user.
    * Required permissions:
    * - None (authenticated only)
    *
-   * @generated from rpc qdrant.cloud.quota.v1.QuotaService.ListAuthenticatedUserQuotas
+   * @generated from rpc qdrant.cloud.quota.v1.QuotaService.GetAuthenticatedUserQuotas
    */
-  listAuthenticatedUserQuotas: {
+  getAuthenticatedUserQuotas: {
     methodKind: "unary";
-    input: typeof ListAuthenticatedUserQuotasRequestSchema;
-    output: typeof ListAuthenticatedUserQuotasResponseSchema;
+    input: typeof GetAuthenticatedUserQuotasRequestSchema;
+    output: typeof GetAuthenticatedUserQuotasResponseSchema;
   },
   /**
-   * Lists all quotas for the account identified by the given account ID.
+   * Get quotas for the account identified by the given account ID.
    * Required permissions:
    * - read:account
    *
-   * @generated from rpc qdrant.cloud.quota.v1.QuotaService.ListAccountQuotas
+   * @generated from rpc qdrant.cloud.quota.v1.QuotaService.GetAccountQuotas
    */
-  listAccountQuotas: {
+  getAccountQuotas: {
     methodKind: "unary";
-    input: typeof ListAccountQuotasRequestSchema;
-    output: typeof ListAccountQuotasResponseSchema;
+    input: typeof GetAccountQuotasRequestSchema;
+    output: typeof GetAccountQuotasResponseSchema;
   },
 }>;
 

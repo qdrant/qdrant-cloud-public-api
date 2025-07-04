@@ -18,13 +18,13 @@
   "paths": {
     "/api/quota/v1/accounts/{accountId}/quotas": {
       "get": {
-        "summary": "Lists all quotas for the account identified by the given account ID.\nRequired permissions:\n- read:account",
-        "operationId": "QuotaService_ListAccountQuotas",
+        "summary": "Get quotas for the account identified by the given account ID.\nRequired permissions:\n- read:account",
+        "operationId": "QuotaService_GetAccountQuotas",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListAccountQuotasResponse"
+              "$ref": "#/definitions/v1GetAccountQuotasResponse"
             }
           },
           "default": {
@@ -50,13 +50,13 @@
     },
     "/api/quota/v1/users/me/quotas": {
       "get": {
-        "summary": "Lists all quotas for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "QuotaService_ListAuthenticatedUserQuotas",
+        "summary": "Get quotas for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "QuotaService_GetAuthenticatedUserQuotas",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListAuthenticatedUserQuotasResponse"
+              "$ref": "#/definitions/v1GetAuthenticatedUserQuotasResponse"
             }
           },
           "default": {
@@ -101,7 +101,7 @@
       },
       "additionalProperties": {}
     },
-    "v1ListAccountQuotasResponse": {
+    "v1GetAccountQuotasResponse": {
       "type": "object",
       "properties": {
         "accountId": {
@@ -124,9 +124,9 @@
           "title": "Maximum number of JWTs"
         }
       },
-      "description": "ListAccountQuotasResponse is the response from the ListAccountQuotas function."
+      "description": "GetAccountQuotasResponse is the response from the GetAccountQuotas function."
     },
-    "v1ListAuthenticatedUserQuotasResponse": {
+    "v1GetAuthenticatedUserQuotasResponse": {
       "type": "object",
       "properties": {
         "maxOwnedAccounts": {
@@ -135,7 +135,7 @@
           "title": "Maximum number of accounts this user can be the owner of"
         }
       },
-      "title": "ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function"
+      "title": "GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function"
     }
   }
 }

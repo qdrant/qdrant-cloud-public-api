@@ -5,18 +5,18 @@
 import { QuotaService } from "./quota_pb.js";
 
 /**
- * Lists all quotas for the authenticated user.
+ * Get quotas for the authenticated user.
  * Required permissions:
  * - None (authenticated only)
  *
- * @generated from rpc qdrant.cloud.quota.v1.QuotaService.ListAuthenticatedUserQuotas
+ * @generated from rpc qdrant.cloud.quota.v1.QuotaService.GetAuthenticatedUserQuotas
  */
-export const listAuthenticatedUserQuotas: typeof QuotaService["method"]["listAuthenticatedUserQuotas"];
+export const getAuthenticatedUserQuotas: typeof QuotaService["method"]["getAuthenticatedUserQuotas"];
 /**
- * Lists all quotas for the account identified by the given account ID.
+ * Get quotas for the account identified by the given account ID.
  * Required permissions:
  * - read:account
  *
- * @generated from rpc qdrant.cloud.quota.v1.QuotaService.ListAccountQuotas
+ * @generated from rpc qdrant.cloud.quota.v1.QuotaService.GetAccountQuotas
  */
-export const listAccountQuotas: typeof QuotaService["method"]["listAccountQuotas"];
+export const getAccountQuotas: typeof QuotaService["method"]["getAccountQuotas"];

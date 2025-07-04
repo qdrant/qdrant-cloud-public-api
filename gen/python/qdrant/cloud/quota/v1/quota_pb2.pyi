@@ -7,23 +7,23 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class ListAuthenticatedUserQuotasRequest(_message.Message):
+class GetAuthenticatedUserQuotasRequest(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class ListAuthenticatedUserQuotasResponse(_message.Message):
+class GetAuthenticatedUserQuotasResponse(_message.Message):
     __slots__ = ("max_owned_accounts",)
     MAX_OWNED_ACCOUNTS_FIELD_NUMBER: _ClassVar[int]
     max_owned_accounts: int
     def __init__(self, max_owned_accounts: _Optional[int] = ...) -> None: ...
 
-class ListAccountQuotasRequest(_message.Message):
+class GetAccountQuotasRequest(_message.Message):
     __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
-class ListAccountQuotasResponse(_message.Message):
+class GetAccountQuotasResponse(_message.Message):
     __slots__ = ("account_id", "max_clusters", "max_cluster_nodes", "max_cluster_jwts")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MAX_CLUSTERS_FIELD_NUMBER: _ClassVar[int]

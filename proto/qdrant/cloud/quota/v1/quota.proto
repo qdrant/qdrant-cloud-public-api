@@ -8,10 +8,10 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // Quota is the API used to configure Quotas.
 service QuotaService {
-  // Lists all quotas for the authenticated user.
+  // Get quotas for the authenticated user.
   // Required permissions:
   // - None (authenticated only)
-  rpc ListAuthenticatedUserQuotas(ListAuthenticatedUserQuotasRequest) returns (ListAuthenticatedUserQuotasResponse) {
+  rpc GetAuthenticatedUserQuotas(GetAuthenticatedUserQuotasRequest) returns (GetAuthenticatedUserQuotasResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // custom account-id expression
@@ -21,10 +21,10 @@ service QuotaService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/quota/v1/users/me/quotas"};
   }
-  // Lists all quotas for the account identified by the given account ID.
+  // Get quotas for the account identified by the given account ID.
   // Required permissions:
   // - read:account
-  rpc ListAccountQuotas(ListAccountQuotasRequest) returns (ListAccountQuotasResponse) {
+  rpc GetAccountQuotas(GetAccountQuotasRequest) returns (GetAccountQuotasResponse) {
     // permissions
     option (common.v1.permissions) = "read:account";
     // gRPC Gateway REST call
@@ -33,26 +33,26 @@ service QuotaService {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// ListAuthenticatedUserQuotasRequest is the request for the ListAuthenticatedUserQuotas function
-message ListAuthenticatedUserQuotasRequest {
+// GetAuthenticatedUserQuotasRequest is the request for the GetAuthenticatedUserQuotas function
+message GetAuthenticatedUserQuotasRequest {
   // Empty
 }
 
-// ListAuthenticatedUserQuotasResponse is the response from the ListAuthenticatedUserQuotas function
-message ListAuthenticatedUserQuotasResponse {
+// GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
+message GetAuthenticatedUserQuotasResponse {
   // Maximum number of accounts this user can be the owner of
   uint32 max_owned_accounts = 1;
 }
 
-// ListAccountQuotasRequest is the request for the ListAccountQuotas function.
-message ListAccountQuotasRequest {
+// GetAccountQuotasRequest is the request for the GetAccountQuotas function.
+message GetAccountQuotasRequest {
   // The identifier of the account (in GUID format) to list quotas for.
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// ListAccountQuotasResponse is the response from the ListAccountQuotas function.
-message ListAccountQuotasResponse {
+// GetAccountQuotasResponse is the response from the GetAccountQuotas function.
+message GetAccountQuotasResponse {
   // ID of the account this quota applies to
   string account_id = 1;
   // Maximum number of clusters this account is allowed to create

@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	QuotaService_ListAuthenticatedUserQuotas_FullMethodName = "/qdrant.cloud.quota.v1.QuotaService/ListAuthenticatedUserQuotas"
-	QuotaService_ListAccountQuotas_FullMethodName           = "/qdrant.cloud.quota.v1.QuotaService/ListAccountQuotas"
+	QuotaService_GetAuthenticatedUserQuotas_FullMethodName = "/qdrant.cloud.quota.v1.QuotaService/GetAuthenticatedUserQuotas"
+	QuotaService_GetAccountQuotas_FullMethodName           = "/qdrant.cloud.quota.v1.QuotaService/GetAccountQuotas"
 )
 
 // QuotaServiceClient is the client API for QuotaService service.
@@ -29,14 +29,14 @@ const (
 //
 // Quota is the API used to configure Quotas.
 type QuotaServiceClient interface {
-	// Lists all quotas for the authenticated user.
+	// Get quotas for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
-	ListAuthenticatedUserQuotas(ctx context.Context, in *ListAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*ListAuthenticatedUserQuotasResponse, error)
-	// Lists all quotas for the account identified by the given account ID.
+	GetAuthenticatedUserQuotas(ctx context.Context, in *GetAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserQuotasResponse, error)
+	// Get quotas for the account identified by the given account ID.
 	// Required permissions:
 	// - read:account
-	ListAccountQuotas(ctx context.Context, in *ListAccountQuotasRequest, opts ...grpc.CallOption) (*ListAccountQuotasResponse, error)
+	GetAccountQuotas(ctx context.Context, in *GetAccountQuotasRequest, opts ...grpc.CallOption) (*GetAccountQuotasResponse, error)
 }
 
 type quotaServiceClient struct {
@@ -47,20 +47,20 @@ func NewQuotaServiceClient(cc grpc.ClientConnInterface) QuotaServiceClient {
 	return &quotaServiceClient{cc}
 }
 
-func (c *quotaServiceClient) ListAuthenticatedUserQuotas(ctx context.Context, in *ListAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*ListAuthenticatedUserQuotasResponse, error) {
+func (c *quotaServiceClient) GetAuthenticatedUserQuotas(ctx context.Context, in *GetAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserQuotasResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAuthenticatedUserQuotasResponse)
-	err := c.cc.Invoke(ctx, QuotaService_ListAuthenticatedUserQuotas_FullMethodName, in, out, cOpts...)
+	out := new(GetAuthenticatedUserQuotasResponse)
+	err := c.cc.Invoke(ctx, QuotaService_GetAuthenticatedUserQuotas_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *quotaServiceClient) ListAccountQuotas(ctx context.Context, in *ListAccountQuotasRequest, opts ...grpc.CallOption) (*ListAccountQuotasResponse, error) {
+func (c *quotaServiceClient) GetAccountQuotas(ctx context.Context, in *GetAccountQuotasRequest, opts ...grpc.CallOption) (*GetAccountQuotasResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAccountQuotasResponse)
-	err := c.cc.Invoke(ctx, QuotaService_ListAccountQuotas_FullMethodName, in, out, cOpts...)
+	out := new(GetAccountQuotasResponse)
+	err := c.cc.Invoke(ctx, QuotaService_GetAccountQuotas_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,14 +73,14 @@ func (c *quotaServiceClient) ListAccountQuotas(ctx context.Context, in *ListAcco
 //
 // Quota is the API used to configure Quotas.
 type QuotaServiceServer interface {
-	// Lists all quotas for the authenticated user.
+	// Get quotas for the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
-	ListAuthenticatedUserQuotas(context.Context, *ListAuthenticatedUserQuotasRequest) (*ListAuthenticatedUserQuotasResponse, error)
-	// Lists all quotas for the account identified by the given account ID.
+	GetAuthenticatedUserQuotas(context.Context, *GetAuthenticatedUserQuotasRequest) (*GetAuthenticatedUserQuotasResponse, error)
+	// Get quotas for the account identified by the given account ID.
 	// Required permissions:
 	// - read:account
-	ListAccountQuotas(context.Context, *ListAccountQuotasRequest) (*ListAccountQuotasResponse, error)
+	GetAccountQuotas(context.Context, *GetAccountQuotasRequest) (*GetAccountQuotasResponse, error)
 	mustEmbedUnimplementedQuotaServiceServer()
 }
 
@@ -91,11 +91,11 @@ type QuotaServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedQuotaServiceServer struct{}
 
-func (UnimplementedQuotaServiceServer) ListAuthenticatedUserQuotas(context.Context, *ListAuthenticatedUserQuotasRequest) (*ListAuthenticatedUserQuotasResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAuthenticatedUserQuotas not implemented")
+func (UnimplementedQuotaServiceServer) GetAuthenticatedUserQuotas(context.Context, *GetAuthenticatedUserQuotasRequest) (*GetAuthenticatedUserQuotasResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAuthenticatedUserQuotas not implemented")
 }
-func (UnimplementedQuotaServiceServer) ListAccountQuotas(context.Context, *ListAccountQuotasRequest) (*ListAccountQuotasResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAccountQuotas not implemented")
+func (UnimplementedQuotaServiceServer) GetAccountQuotas(context.Context, *GetAccountQuotasRequest) (*GetAccountQuotasResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountQuotas not implemented")
 }
 func (UnimplementedQuotaServiceServer) mustEmbedUnimplementedQuotaServiceServer() {}
 func (UnimplementedQuotaServiceServer) testEmbeddedByValue()                      {}
@@ -118,38 +118,38 @@ func RegisterQuotaServiceServer(s grpc.ServiceRegistrar, srv QuotaServiceServer)
 	s.RegisterService(&QuotaService_ServiceDesc, srv)
 }
 
-func _QuotaService_ListAuthenticatedUserQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAuthenticatedUserQuotasRequest)
+func _QuotaService_GetAuthenticatedUserQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuthenticatedUserQuotasRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QuotaServiceServer).ListAuthenticatedUserQuotas(ctx, in)
+		return srv.(QuotaServiceServer).GetAuthenticatedUserQuotas(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: QuotaService_ListAuthenticatedUserQuotas_FullMethodName,
+		FullMethod: QuotaService_GetAuthenticatedUserQuotas_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QuotaServiceServer).ListAuthenticatedUserQuotas(ctx, req.(*ListAuthenticatedUserQuotasRequest))
+		return srv.(QuotaServiceServer).GetAuthenticatedUserQuotas(ctx, req.(*GetAuthenticatedUserQuotasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _QuotaService_ListAccountQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAccountQuotasRequest)
+func _QuotaService_GetAccountQuotas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountQuotasRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QuotaServiceServer).ListAccountQuotas(ctx, in)
+		return srv.(QuotaServiceServer).GetAccountQuotas(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: QuotaService_ListAccountQuotas_FullMethodName,
+		FullMethod: QuotaService_GetAccountQuotas_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QuotaServiceServer).ListAccountQuotas(ctx, req.(*ListAccountQuotasRequest))
+		return srv.(QuotaServiceServer).GetAccountQuotas(ctx, req.(*GetAccountQuotasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -162,12 +162,12 @@ var QuotaService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*QuotaServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListAuthenticatedUserQuotas",
-			Handler:    _QuotaService_ListAuthenticatedUserQuotas_Handler,
+			MethodName: "GetAuthenticatedUserQuotas",
+			Handler:    _QuotaService_GetAuthenticatedUserQuotas_Handler,
 		},
 		{
-			MethodName: "ListAccountQuotas",
-			Handler:    _QuotaService_ListAccountQuotas_Handler,
+			MethodName: "GetAccountQuotas",
+			Handler:    _QuotaService_GetAccountQuotas_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
