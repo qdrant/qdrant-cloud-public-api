@@ -62,7 +62,7 @@ message GetAccountQuotasResponse {
   // Maximum number of nodes clusters can be scaled to.
   // To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
   uint32 max_cluster_nodes = 3 [(buf.validate.field).uint32.gt = 0];
-  // Maximum number of Database API keys this account can create.
+  // Maximum number of Database API keys this account can create (for each cluster).
   // To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
   uint32 max_cluster_database_api_keys = 4 [(buf.validate.field).uint32.gt = 0];
 }

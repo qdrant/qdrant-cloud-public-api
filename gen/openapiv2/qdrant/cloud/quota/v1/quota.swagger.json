@@ -121,7 +121,7 @@
         "maxClusterDatabaseApiKeys": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum number of Database API keys this account can create.\nTo get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`."
+          "description": "Maximum number of Database API keys this account can create (for each cluster).\nTo get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`."
         }
       },
       "description": "GetAccountQuotasResponse is the response from the GetAccountQuotas function."

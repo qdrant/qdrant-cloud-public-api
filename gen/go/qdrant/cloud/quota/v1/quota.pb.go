@@ -166,7 +166,7 @@ type GetAccountQuotasResponse struct {
 	// Maximum number of nodes clusters can be scaled to.
 	// To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
 	MaxClusterNodes uint32 `protobuf:"varint,3,opt,name=max_cluster_nodes,json=maxClusterNodes,proto3" json:"max_cluster_nodes,omitempty"`
-	// Maximum number of Database API keys this account can create.
+	// Maximum number of Database API keys this account can create (for each cluster).
 	// To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
 	MaxClusterDatabaseApiKeys uint32 `protobuf:"varint,4,opt,name=max_cluster_database_api_keys,json=maxClusterDatabaseApiKeys,proto3" json:"max_cluster_database_api_keys,omitempty"`
 	unknownFields             protoimpl.UnknownFields

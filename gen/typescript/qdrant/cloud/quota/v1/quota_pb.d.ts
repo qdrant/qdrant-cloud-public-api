@@ -98,7 +98,7 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   maxClusterNodes: number;
 
   /**
-   * Maximum number of Database API keys this account can create.
+   * Maximum number of Database API keys this account can create (for each cluster).
    * To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
    *
    * @generated from field: uint32 max_cluster_database_api_keys = 4;
