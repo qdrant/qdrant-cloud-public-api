@@ -63,6 +63,6 @@ message GetAccountQuotasResponse {
   // xref: Cluster.configuration.number_of_nodes
   uint32 max_cluster_nodes = 3 [(buf.validate.field).uint32.gt = 0];
   // Maximum number of JWTs
-  // xref: ClusterService.ListClusterJwts
-  uint32 max_cluster_jwts = 4 [(buf.validate.field).uint32.gt = 0];
+  // xref: DatabaseApiKeyService.ListDatabaseApiKeys
+  uint32 max_cluster_database_api_keys = 4 [(buf.validate.field).uint32.gt = 0];
 }
