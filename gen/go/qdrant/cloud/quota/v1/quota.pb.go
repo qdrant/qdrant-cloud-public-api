@@ -65,7 +65,7 @@ func (*GetAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 type GetAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum number of accounts this user can be the owner of.
-	// To get the actual list invoke: AccountService.ListAccounts
+	// To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
 	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -161,13 +161,13 @@ type GetAccountQuotasResponse struct {
 	// ID of the account this quota applies to
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Maximum number of clusters this account is allowed to create.
-	// To get the actual list invoke: ClusterService.ListClusters
+	// To get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`.
 	MaxClusters uint32 `protobuf:"varint,2,opt,name=max_clusters,json=maxClusters,proto3" json:"max_clusters,omitempty"`
 	// Maximum number of nodes clusters can be scaled to.
-	// To get the actual field: Cluster.configuration.number_of_nodes
+	// To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
 	MaxClusterNodes uint32 `protobuf:"varint,3,opt,name=max_cluster_nodes,json=maxClusterNodes,proto3" json:"max_cluster_nodes,omitempty"`
 	// Maximum number of Database API keys this account can create.
-	// To get the actual list invoke: v2.DatabaseApiKeyService.ListDatabaseApiKeys
+	// To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
 	MaxClusterDatabaseApiKeys uint32 `protobuf:"varint,4,opt,name=max_cluster_database_api_keys,json=maxClusterDatabaseApiKeys,proto3" json:"max_cluster_database_api_keys,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache

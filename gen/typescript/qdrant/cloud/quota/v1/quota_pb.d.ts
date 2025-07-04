@@ -34,7 +34,7 @@ export declare const GetAuthenticatedUserQuotasRequestSchema: GenMessage<GetAuth
 export declare type GetAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse"> & {
   /**
    * Maximum number of accounts this user can be the owner of.
-   * To get the actual list invoke: AccountService.ListAccounts
+   * To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
    *
    * @generated from field: uint32 max_owned_accounts = 1;
    */
@@ -83,7 +83,7 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
 
   /**
    * Maximum number of clusters this account is allowed to create.
-   * To get the actual list invoke: ClusterService.ListClusters
+   * To get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`.
    *
    * @generated from field: uint32 max_clusters = 2;
    */
@@ -91,7 +91,7 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
 
   /**
    * Maximum number of nodes clusters can be scaled to.
-   * To get the actual field: Cluster.configuration.number_of_nodes
+   * To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
    *
    * @generated from field: uint32 max_cluster_nodes = 3;
    */
@@ -99,7 +99,7 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
 
   /**
    * Maximum number of Database API keys this account can create.
-   * To get the actual list invoke: v2.DatabaseApiKeyService.ListDatabaseApiKeys
+   * To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
    *
    * @generated from field: uint32 max_cluster_database_api_keys = 4;
    */
