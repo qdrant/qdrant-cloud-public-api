@@ -33,7 +33,8 @@ export declare const GetAuthenticatedUserQuotasRequestSchema: GenMessage<GetAuth
  */
 export declare type GetAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse"> & {
   /**
-   * Maximum number of accounts this user can be the owner of
+   * Maximum number of accounts this user can be the owner of.
+   * To get the actual list invoke: AccountService.ListAccounts
    *
    * @generated from field: uint32 max_owned_accounts = 1;
    */
@@ -81,25 +82,28 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   accountId: string;
 
   /**
-   * Maximum number of clusters this account is allowed to create
+   * Maximum number of clusters this account is allowed to create.
+   * To get the actual list invoke: ClusterService.ListClusters
    *
    * @generated from field: uint32 max_clusters = 2;
    */
   maxClusters: number;
 
   /**
-   * Maximum number of nodes clusters can be scaled to
+   * Maximum number of nodes clusters can be scaled to.
+   * To get the actual field: Cluster.configuration.number_of_nodes
    *
    * @generated from field: uint32 max_cluster_nodes = 3;
    */
   maxClusterNodes: number;
 
   /**
-   * Maximum number of JWTs
+   * Maximum number of Database API keys this account can create.
+   * To get the actual list invoke: v2.DatabaseApiKeyService.ListDatabaseApiKeys
    *
-   * @generated from field: uint32 max_cluster_jwts = 4;
+   * @generated from field: uint32 max_cluster_database_api_keys = 4;
    */
-  maxClusterJwts: number;
+  maxClusterDatabaseApiKeys: number;
 };
 
 /**

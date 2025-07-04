@@ -24,13 +24,13 @@ class GetAccountQuotasRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class GetAccountQuotasResponse(_message.Message):
-    __slots__ = ("account_id", "max_clusters", "max_cluster_nodes", "max_cluster_jwts")
+    __slots__ = ("account_id", "max_clusters", "max_cluster_nodes", "max_cluster_database_api_keys")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MAX_CLUSTERS_FIELD_NUMBER: _ClassVar[int]
     MAX_CLUSTER_NODES_FIELD_NUMBER: _ClassVar[int]
-    MAX_CLUSTER_JWTS_FIELD_NUMBER: _ClassVar[int]
+    MAX_CLUSTER_DATABASE_API_KEYS_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     max_clusters: int
     max_cluster_nodes: int
-    max_cluster_jwts: int
-    def __init__(self, account_id: _Optional[str] = ..., max_clusters: _Optional[int] = ..., max_cluster_nodes: _Optional[int] = ..., max_cluster_jwts: _Optional[int] = ...) -> None: ...
+    max_cluster_database_api_keys: int
+    def __init__(self, account_id: _Optional[str] = ..., max_clusters: _Optional[int] = ..., max_cluster_nodes: _Optional[int] = ..., max_cluster_database_api_keys: _Optional[int] = ...) -> None: ...

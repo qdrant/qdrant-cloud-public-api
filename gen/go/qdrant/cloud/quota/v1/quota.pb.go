@@ -64,7 +64,8 @@ func (*GetAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 // GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
 type GetAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Maximum number of accounts this user can be the owner of
+	// Maximum number of accounts this user can be the owner of.
+	// To get the actual list invoke: AccountService.ListAccounts
 	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -159,14 +160,17 @@ type GetAccountQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the account this quota applies to
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Maximum number of clusters this account is allowed to create
+	// Maximum number of clusters this account is allowed to create.
+	// To get the actual list invoke: ClusterService.ListClusters
 	MaxClusters uint32 `protobuf:"varint,2,opt,name=max_clusters,json=maxClusters,proto3" json:"max_clusters,omitempty"`
-	// Maximum number of nodes clusters can be scaled to
+	// Maximum number of nodes clusters can be scaled to.
+	// To get the actual field: Cluster.configuration.number_of_nodes
 	MaxClusterNodes uint32 `protobuf:"varint,3,opt,name=max_cluster_nodes,json=maxClusterNodes,proto3" json:"max_cluster_nodes,omitempty"`
-	// Maximum number of JWTs
-	MaxClusterJwts uint32 `protobuf:"varint,4,opt,name=max_cluster_jwts,json=maxClusterJwts,proto3" json:"max_cluster_jwts,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Maximum number of Database API keys this account can create.
+	// To get the actual list invoke: v2.DatabaseApiKeyService.ListDatabaseApiKeys
+	MaxClusterDatabaseApiKeys uint32 `protobuf:"varint,4,opt,name=max_cluster_database_api_keys,json=maxClusterDatabaseApiKeys,proto3" json:"max_cluster_database_api_keys,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetAccountQuotasResponse) Reset() {
@@ -220,9 +224,9 @@ func (x *GetAccountQuotasResponse) GetMaxClusterNodes() uint32 {
 	return 0
 }
 
-func (x *GetAccountQuotasResponse) GetMaxClusterJwts() uint32 {
+func (x *GetAccountQuotasResponse) GetMaxClusterDatabaseApiKeys() uint32 {
 	if x != nil {
-		return x.MaxClusterJwts
+		return x.MaxClusterDatabaseApiKeys
 	}
 	return 0
 }
@@ -237,13 +241,13 @@ const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xcd\x01\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xe5\x01\n" +
 	"\x18GetAccountQuotasResponse\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12*\n" +
 	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\vmaxClusters\x123\n" +
-	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0fmaxClusterNodes\x121\n" +
-	"\x10max_cluster_jwts\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0emaxClusterJwts2\x90\x03\n" +
+	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0fmaxClusterNodes\x12I\n" +
+	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x19maxClusterDatabaseApiKeys2\x90\x03\n" +
 	"\fQuotaService\x12\xc5\x01\n" +
 	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xb7\x01\n" +
 	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"B\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotasB\xee\x01\n" +
