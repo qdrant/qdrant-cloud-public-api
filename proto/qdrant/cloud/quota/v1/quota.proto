@@ -41,7 +41,7 @@ message GetAuthenticatedUserQuotasRequest {
 // GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
 message GetAuthenticatedUserQuotasResponse {
   // Maximum number of accounts this user can be the owner of
-  uint32 max_owned_accounts = 1;
+  uint32 max_owned_accounts = 1 [(buf.validate.field).uint32.gt = 0];
 }
 
 // GetAccountQuotasRequest is the request for the GetAccountQuotas function.
@@ -56,9 +56,9 @@ message GetAccountQuotasResponse {
   // ID of the account this quota applies to
   string account_id = 1;
   // Maximum number of clusters this account is allowed to create
-  uint32 max_clusters = 2;
+  uint32 max_clusters = 2 [(buf.validate.field).uint32.gt = 0];
   // Maximum number of nodes clusters can be scaled to
-  uint32 max_cluster_nodes = 3;
+  uint32 max_cluster_nodes = 3 [(buf.validate.field).uint32.gt = 0];
   // Maximum number of JWTs
-  uint32 max_cluster_jwts = 4;
+  uint32 max_cluster_jwts = 4 [(buf.validate.field).uint32.gt = 0];
 }

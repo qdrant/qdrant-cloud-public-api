@@ -232,18 +232,18 @@ var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
 	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"#\n" +
-	"!GetAuthenticatedUserQuotasRequest\"R\n" +
-	"\"GetAuthenticatedUserQuotasResponse\x12,\n" +
-	"\x12max_owned_accounts\x18\x01 \x01(\rR\x10maxOwnedAccounts\"B\n" +
+	"!GetAuthenticatedUserQuotasRequest\"[\n" +
+	"\"GetAuthenticatedUserQuotasResponse\x125\n" +
+	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xb2\x01\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xcd\x01\n" +
 	"\x18GetAccountQuotasResponse\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
-	"\fmax_clusters\x18\x02 \x01(\rR\vmaxClusters\x12*\n" +
-	"\x11max_cluster_nodes\x18\x03 \x01(\rR\x0fmaxClusterNodes\x12(\n" +
-	"\x10max_cluster_jwts\x18\x04 \x01(\rR\x0emaxClusterJwts2\x90\x03\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\x12*\n" +
+	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\vmaxClusters\x123\n" +
+	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0fmaxClusterNodes\x121\n" +
+	"\x10max_cluster_jwts\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0emaxClusterJwts2\x90\x03\n" +
 	"\fQuotaService\x12\xc5\x01\n" +
 	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xb7\x01\n" +
 	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"B\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotasB\xee\x01\n" +
