@@ -41,7 +41,7 @@ message GetAuthenticatedUserQuotasRequest {
 // GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
 message GetAuthenticatedUserQuotasResponse {
   // Maximum number of accounts this user can be the owner of.
-  // xref: AccountService.ListAccounts
+  // To get the actual list invoke: AccountService.ListAccounts
   uint32 max_owned_accounts = 1 [(buf.validate.field).uint32.gt = 0];
 }
 
@@ -57,12 +57,12 @@ message GetAccountQuotasResponse {
   // ID of the account this quota applies to
   string account_id = 1;
   // Maximum number of clusters this account is allowed to create.
-  // xref: ClusterService.ListClusters
+  // To get the actual list invoke: ClusterService.ListClusters
   uint32 max_clusters = 2 [(buf.validate.field).uint32.gt = 0];
   // Maximum number of nodes clusters can be scaled to.
-  // xref: Cluster.configuration.number_of_nodes
+  // To get the actual field: Cluster.configuration.number_of_nodes
   uint32 max_cluster_nodes = 3 [(buf.validate.field).uint32.gt = 0];
   // Maximum number of JWTs
-  // xref: DatabaseApiKeyService.ListDatabaseApiKeys
+  // To get the actual list invoke: DatabaseApiKeyService.ListDatabaseApiKeys
   uint32 max_cluster_database_api_keys = 4 [(buf.validate.field).uint32.gt = 0];
 }
