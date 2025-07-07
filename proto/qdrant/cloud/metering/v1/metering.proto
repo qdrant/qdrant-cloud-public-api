@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package qdrant.cloud.metering.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// MeteringService is the API to retrieve usage data used for billing purposes.
+service MeteringService {
+  // Lists aggregated monthly meterings for the account identified by the given ID.
+  // Each summary represents the total metering amount for one month.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListMonthlyMeterings(ListMonthlyMeteringsRequest) returns (ListMonthlyMeteringsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/meterings"};
+  }
+  // Lists detailed metering entries for a specific month for the account identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListMeterings(ListMeteringsRequest) returns (ListMeteringsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}"};
+  }
+}
+
+// ListMonthlyMeteringsRequest is the request for the ListMonthlyMeterings function
+message ListMonthlyMeteringsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListMonthlyMeterings is the response from the ListMonthlyMeterings function
+message ListMonthlyMeteringsResponse {
+  // List of monthly metering summaries.
+  repeated MonthlyMeteringSummary items = 1;
+}
+
+// ListMeteringsRequest is the request for the ListMeterings function
+message ListMeteringsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The year to filter meterings by (e.g., 2025).
+  int32 year = 2 [(buf.validate.field).int32 = {
+    gte: 2000
+    lte: 3000
+  }];
+  // The month to filter meterings by (1 = January, 12 = December).
+  int32 month = 3 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 12
+  }];
+}
+
+// ListMeteringsResponse is the response from the ListMeterings function
+message ListMeteringsResponse {
+  // List of detailed metering items for the specified month.
+  repeated MeteringItem items = 1;
+}
+
+// MonthlyMeteringSummary represents a single month's metering summary.
+message MonthlyMeteringSummary {
+  // The year this summary represents (e.g., 2025).
+  int32 year = 1;
+  // The month this summary represents (1 = January, 12 = December).
+  int32 month = 2;
+  // Total amount for the month in millicents.
+  // Example: 499900 = $4.999
+  int64 amount = 3;
+  // Currency of the amount, in ISO 4217 format (e.g., "USD").
+  string currency = 4;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// Metering represents a detailed metering item.
+message MeteringItem {
+  // The identifier of the account this metering item belongs to (in GUID format).
+  string account_id = 1;
+  // The identifier of the cluster associated with this usage (in GUID format).
+  string cluster_id = 2;
+  // The name of the cluster involved in this metering.
+  string cluster_name = 3;
+  // The start time of the metering window (UTC).
+  google.protobuf.Timestamp start_time = 4;
+  // The end time of the metering window (UTC).
+  google.protobuf.Timestamp end_time = 5;
+  // The identifier of the billable entity (in GUID format), such as a cluster
+  // booking or another billable resource.
+  string billable_entity_id = 6;
+  // The type of the billable entity (e.g., "ClusterBooking").
+  // TODO do we want to have a list (enum) of billable resources?
+  string billable_entity_type = 7;
+  // TODO in my account, I only see `aws`, `azure`, `gcp`. Are there other "partners"? Could this be renamed to `cloud_provider_id`?
+  string partner = 8;
+  // The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
+  int32 price_per_hour = 9;
+  // Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
+  double usage_hours = 10;
+  // The total charge for this item, in millicents.
+  int64 amount = 11;
+  // The total discount applied to this item, in millicents.
+  optional int64 discount_amount = 12;
+  // The Discount applied as a percentage (e.g., 12.5).
+  optional double discount_amount_percent = 13;
+}
