@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/billing/v1/billing.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BillingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/billing/v1/accounts/{accountId}/invoices": {
+      "get": {
+        "summary": "Lists all invoices for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListInvoices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1Invoice": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Optional invoice identifier."
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total invoice amount."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invoice was created."
+        },
+        "status": {
+          "$ref": "#/definitions/v1InvoiceStatus",
+          "description": "The current status of the invoice."
+        },
+        "pdfUrl": {
+          "type": "string",
+          "description": "The URL to download the PDF for the invoice. If the invoice has not been\nfinalized yet, this will be null."
+        }
+      },
+      "title": "Invoice represents a billing invoice issued to an account.\nTODO should we add the id field ?\nTODO do we want to link it with the payment method or indicate it is from stripe?"
+    },
+    "v1InvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_UNSPECIFIED",
+        "INVOICE_STATUS_DRAFT",
+        "INVOICE_STATUS_OPEN",
+        "INVOICE_STATUS_VOID",
+        "INVOICE_STATUS_PAID",
+        "INVOICE_STATUS_UNCOLLECTIBLE"
+      ],
+      "default": "INVOICE_STATUS_UNSPECIFIED",
+      "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListInvoicesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Invoice"
+          },
+          "description": "The list of invoices."
+        }
+      },
+      "title": "ListInvoicesResponse is the response from the ListInvoices function"
+    }
+  }
+}
