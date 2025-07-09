@@ -127,6 +127,10 @@ message PaymentInformation {
   // The timestamp when the payment information was last updated.
   // This is a read-only field and will be available after a payment information is created.
   google.protobuf.Timestamp last_modified_at = 9;
+  // TODO before there was an api which was checking if the payment information is valid. I think,
+  //  it should be an attribute of the payment information.
+  // This is a read-only field and will be available after a payment information is created.
+  // bool is_valid = 10;
 }
 
 // PaymentInformationType defines the type of payment information.
