@@ -18,6 +18,15 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
   }
+  // Gets the payment information identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc GetPaymentInformation(GetPaymentInformationRequest) returns (GetPaymentInformationResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
+  }
   // Get Stripe payment method for the account.
   // Required permissions:
   // - read:payment_information
@@ -26,6 +35,8 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/stripe"};
+    // TODO decide which url to use for this method.
+   //    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}/payment-method"};
   }
 }
 
@@ -40,6 +51,22 @@ message ListPaymentInformationRequest {
 message ListPaymentInformationResponse {
   // The list of payment methods.
   repeated PaymentInformation payment_methods = 1;
+}
+
+// Request to get payment information by id.
+message GetPaymentInformationRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the payment information (in GUID format).
+  // This is a required field.
+  string payment_information_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing the payment information.
+message GetPaymentInformationResponse {
+  // The actual payment information.
+  PaymentInformation payment_methods = 1;
 }
 
 // Represents a payment information.
