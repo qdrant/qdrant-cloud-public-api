@@ -38,6 +38,15 @@ service PaymentService {
     // TODO decide which url to use for this method.
    //    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}/payment-method"};
   }
+  // Delete the payment information identified by the given ID.
+  // Required permissions:
+  // - write:payment_information
+  rpc DeletePaymentInformation(DeletePaymentInformationRequest) returns (DeletePaymentInformationResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
+  }
 }
 
 // Request to list payment methods for a specific account.
@@ -67,6 +76,21 @@ message GetPaymentInformationRequest {
 message GetPaymentInformationResponse {
   // The actual payment information.
   PaymentInformation payment_methods = 1;
+}
+
+// DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
+message DeletePaymentInformationRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the payment information (in GUID format).
+  // This is a required field.
+  string payment_information_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeletePaymentInformationResponse is the response from the DeletePaymentInformation function
+message DeletePaymentInformationResponse {
+  // Empty
 }
 
 // Represents a payment information.
