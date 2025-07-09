@@ -9,38 +9,104 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // PaymentService is the API used to manage payment settings.
 service PaymentService {
-  // Lists all payment methods known by the system for the provided account.
+  // Lists all payment information known by the system for the provided account.
   // Required permissions:
   // - read:payment_information
-  rpc ListPaymentMethods(ListPaymentMethodsRequest) returns (ListPaymentMethodsResponse) {
+  rpc ListPaymentInformation(ListPaymentInformationRequest) returns (ListPaymentInformationResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "";
+    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
   }
 }
 
 // Request to list payment methods for a specific account.
-message ListPaymentMethodsRequest {
+message ListPaymentInformationRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // Response containing a list of payment methods.
-message ListPaymentMethodsResponse {
+message ListPaymentInformationResponse {
   // The list of payment methods.
-  repeated PaymentMethod payment_methods = 1;
+  repeated PaymentInformation payment_methods = 1;
 }
 
-// Represents a payment method.
-message PaymentMethod {
+// Represents a payment information.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message PaymentInformation {
+  // Unique identifier for the payment information (in GUID format).
+  // This is a read-only field and will be available after a payment information is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "payment_information.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The type of the payment method (e.g., "Stripe", "AWS Marketplace", etc.).
+  // This is a required field.
+  PaymentInformationType payment_information_type = 3;
+  // The identifier of the marketplace account (e.g., Stripe account ID, AWS Marketplace account ID, etc.).
+  // This is a required field for marketplace payment information types.
+  optional string marketplace_account_id = 4;
+  // The identifier of the Stripe customer (e.g., "cus_1234", "cus_5678", etc.).
+  // This is an optional field for Stripe payment information type.
+  optional string stripe_customer_id = 5;
+  // The identifier of the payment method (e.g., "card_1234", "pm_5678", etc.).
+  // This is a required field for Stripe payment information type.
+  optional string stripe_payment_method_id = 6;
+  // The billing address associated with the payment information.
+  optional BillingAddress billing_address = 7;
+  // The timestamp when the payment information was created.
+  // This is a read-only field and will be available after a payment information is created.
+  google.protobuf.Timestamp created_at = 8;
+  // The timestamp when the payment information was last updated.
+  // This is a read-only field and will be available after a payment information is created.
+  google.protobuf.Timestamp last_modified_at = 9;
+}
 
+// PaymentInformationType defines the type of payment information.
+enum PaymentInformationType {
+  // Unspecified type, should not be used.
+  PAYMENT_INFORMATION_TYPE_UNSPECIFIED = 0;
+  // Stripe payment information.
+  PAYMENT_INFORMATION_TYPE_STRIPE = 1;
+  // AWS marketplace payment information.
+  PAYMENT_INFORMATION_TYPE_AWS_MARKETPLACE = 2;
+  // Google Cloud Platform marketplace payment information.
+  PAYMENT_INFORMATION_TYPE_GCP_MARKETPLACE = 3;
+  // Azure marketplace payment information.
+  PAYMENT_INFORMATION_TYPE_AZURE_MARKETPLACE = 4;
+  // Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.
+  PAYMENT_INFORMATION_TYPE_CUSTOM = 5;
+}
 
-  // The timestamp when the role was created.
-  // This is a read-only field and will be available after a role is created.
-  google.protobuf.Timestamp created_at = 1;
-  // The timestamp when the role was last updated.
-  // This is a read-only field and will be available after a role is created.
-  google.protobuf.Timestamp last_modified_at = 2;
+// Represents a billing address for a payment information.
+message BillingAddress {
+  // The name of the person or entity associated with the billing address.
+  string name = 1 [(buf.validate.field).string = {min_len: 1}];
+  // The first line of the billing address.
+  string line1 = 2 [(buf.validate.field).string = {min_len: 1}];
+  // The second line of the billing address.
+  // This is an optional field.
+  optional string line2 = 3 [(buf.validate.field).string = {min_len: 1}];
+  // The postal code of the billing address.
+  // This is an optional field.
+  optional string postal_code = 4 [(buf.validate.field).string = {min_len: 1}];
+  // The city of the billing address.
+  string city = 5 [(buf.validate.field).string = {min_len: 1}];
+  // The state or province of the billing address.
+  string state = 6 [(buf.validate.field).string = {min_len: 1}];
+  // The country of the billing address.
+  string country = 7 [(buf.validate.field).string = {min_len: 1}];
+  // The formatted country name.
+  string country_formatted = 8 [(buf.validate.field).string = {min_len: 1}];
+  // The formatted state or province name.
+  string state_formatted = 9 [(buf.validate.field).string = {min_len: 1}];
+  // Indicates if the country supports tax.
+  bool tax_supported_country = 10;
 }
