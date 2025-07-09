@@ -18,6 +18,15 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
   }
+  // Get Stripe payment method for the account.
+  // Required permissions:
+  // - read:payment_information
+  rpc GetStripePaymentMethod(GetStripePaymentMethodRequest) returns (GetStripePaymentMethodResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/stripe"};
+  }
 }
 
 // Request to list payment methods for a specific account.
@@ -109,4 +118,44 @@ message BillingAddress {
   string state_formatted = 9 [(buf.validate.field).string = {min_len: 1}];
   // Indicates if the country supports tax.
   bool tax_supported_country = 10;
+}
+
+// GetStripePaymentMethodRequest is the request for the GetStripePaymentMethod function
+message GetStripePaymentMethodRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // TODO Current api tries to get the valid stripe payment info for account and then tries to
+  //   return the payment method. I think, this rpc should get the payment information id and return the
+  // payment method for it.
+}
+
+// GetStripePaymentMethodResponse is the response from the GetStripePaymentMethod function
+message GetStripePaymentMethodResponse {
+  // The Stripe payment method for the account.
+  StripePaymentMethod payment_method = 1;
+}
+
+// Represents Stripe payment method
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message StripePaymentMethod {
+  // The identifier of the Stripe payment method (e.g., "pm_1234", "pm_5678", etc.).
+  string id = 1 [(buf.validate.field).string = {min_len: 1}];
+  // The type of the Stripe payment method (e.g., "card", "bank_account", etc.).
+  // TODO we only support type card. I think type can be removed for now and added if we support different types.
+  string type = 2 [(buf.validate.field).string = {min_len: 1}];
+  // Card details.
+  Card card = 3;
+}
+
+// Represents Stripe payment method card details
+message Card {
+  // The brand of the card (e.g., "Visa", "Mastercard").
+  string brand = 1;
+  // The last 4 digits of the card number.
+  string last4 = 2;
+  // The expiration month of the card.
+  int32 expiration_month = 3;
+  // The expiration year of the card.
+  int32 expiration_year = 4;
 }
