@@ -57,6 +57,17 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
   }
+  // Get the Stripe Checkout session by its ID.
+  // This method is used to retrieve the session details after it has been created.
+  // Required permissions:
+  // - write:payment_information
+  rpc GetStripeSession(GetStripeSessionRequest) returns (GetStripeSessionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
+  }
+
 }
 
 // Request to list payment methods for a specific account.
@@ -158,6 +169,22 @@ enum SetupIntentStatus {
 
   // The SetupIntent has succeeded.
   SETUP_INTENT_STATUS_SUCCEEDED = 6;
+}
+
+// GetStripeSessionRequest is the request for the GetStripeSession function
+message GetStripeSessionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the Stripe session.
+  // This is a required field.
+  string session_id = 2;
+}
+
+// GetStripeSessionResponse is the response from the GetStripeSession function
+message GetStripeSessionResponse {
+  // The Stripe session for the account.
+  StripeSession stripe_session = 1;
 }
 
 // Represents a payment information.
