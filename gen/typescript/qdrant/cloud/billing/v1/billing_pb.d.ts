@@ -54,37 +54,43 @@ export declare const ListInvoicesResponseSchema: GenMessage<ListInvoicesResponse
 
 /**
  * Invoice represents a billing invoice issued to an account.
- * TODO should we add the id field ?
- * TODO do we want to link it with the payment method or indicate it is from stripe?
  *
  * @generated from message qdrant.cloud.billing.v1.Invoice
  */
 export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
   /**
-   * Optional invoice identifier.
+   * Unique identifier for the invoice.
    *
-   * @generated from field: optional string number = 1;
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * Optional invoice unique identifier. It appears on emails sent to the
+   * customer for this invoice.
+   *
+   * @generated from field: optional string number = 2;
    */
   number?: string;
 
   /**
    * Total invoice amount.
    *
-   * @generated from field: int64 total_amount = 2;
+   * @generated from field: int64 total_amount = 3;
    */
   totalAmount: bigint;
 
   /**
    * The timestamp when the invoice was created.
    *
-   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
    */
   createdAt?: Timestamp;
 
   /**
    * The current status of the invoice.
    *
-   * @generated from field: qdrant.cloud.billing.v1.InvoiceStatus status = 4;
+   * @generated from field: qdrant.cloud.billing.v1.InvoiceStatus status = 5;
    */
   status: InvoiceStatus;
 
@@ -92,7 +98,7 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
    * The URL to download the PDF for the invoice. If the invoice has not been
    * finalized yet, this will be null.
    *
-   * @generated from field: optional string pdf_url = 5;
+   * @generated from field: optional string pdf_url = 6;
    */
   pdfUrl?: string;
 };

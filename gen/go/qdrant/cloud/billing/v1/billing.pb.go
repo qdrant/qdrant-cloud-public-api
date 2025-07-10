@@ -184,21 +184,22 @@ func (x *ListInvoicesResponse) GetItems() []*Invoice {
 }
 
 // Invoice represents a billing invoice issued to an account.
-// TODO should we add the id field ?
-// TODO do we want to link it with the payment method or indicate it is from stripe?
 type Invoice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional invoice identifier.
-	Number *string `protobuf:"bytes,1,opt,name=number,proto3,oneof" json:"number,omitempty"`
+	// Unique identifier for the invoice.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Optional invoice unique identifier. It appears on emails sent to the
+	// customer for this invoice.
+	Number *string `protobuf:"bytes,2,opt,name=number,proto3,oneof" json:"number,omitempty"`
 	// Total invoice amount.
-	TotalAmount int64 `protobuf:"varint,2,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	TotalAmount int64 `protobuf:"varint,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	// The timestamp when the invoice was created.
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// The current status of the invoice.
-	Status InvoiceStatus `protobuf:"varint,4,opt,name=status,proto3,enum=qdrant.cloud.billing.v1.InvoiceStatus" json:"status,omitempty"`
+	Status InvoiceStatus `protobuf:"varint,5,opt,name=status,proto3,enum=qdrant.cloud.billing.v1.InvoiceStatus" json:"status,omitempty"`
 	// The URL to download the PDF for the invoice. If the invoice has not been
 	// finalized yet, this will be null.
-	PdfUrl        *string `protobuf:"bytes,5,opt,name=pdf_url,json=pdfUrl,proto3,oneof" json:"pdf_url,omitempty"`
+	PdfUrl        *string `protobuf:"bytes,6,opt,name=pdf_url,json=pdfUrl,proto3,oneof" json:"pdf_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -231,6 +232,13 @@ func (x *Invoice) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Invoice.ProtoReflect.Descriptor instead.
 func (*Invoice) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Invoice) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *Invoice) GetNumber() string {
@@ -277,14 +285,15 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n" +
 	"\x14ListInvoicesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\xf9\x01\n" +
-	"\aInvoice\x12\x1b\n" +
-	"\x06number\x18\x01 \x01(\tH\x00R\x06number\x88\x01\x01\x12!\n" +
-	"\ftotal_amount\x18\x02 \x01(\x03R\vtotalAmount\x129\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\x89\x02\n" +
+	"\aInvoice\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\x06number\x18\x02 \x01(\tH\x00R\x06number\x88\x01\x01\x12!\n" +
+	"\ftotal_amount\x18\x03 \x01(\x03R\vtotalAmount\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
-	"\x06status\x18\x04 \x01(\x0e2&.qdrant.cloud.billing.v1.InvoiceStatusR\x06status\x12\x1c\n" +
-	"\apdf_url\x18\x05 \x01(\tH\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
+	"\x06status\x18\x05 \x01(\x0e2&.qdrant.cloud.billing.v1.InvoiceStatusR\x06status\x12\x1c\n" +
+	"\apdf_url\x18\x06 \x01(\tH\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
 	"\b_pdf_url*\xb6\x01\n" +

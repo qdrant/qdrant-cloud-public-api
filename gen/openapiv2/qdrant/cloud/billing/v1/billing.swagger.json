@@ -81,9 +81,13 @@
     "v1Invoice": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the invoice."
+        },
         "number": {
           "type": "string",
-          "description": "Optional invoice identifier."
+          "description": "Optional invoice unique identifier. It appears on emails sent to the\ncustomer for this invoice."
         },
         "totalAmount": {
           "type": "string",
@@ -104,7 +108,7 @@
           "description": "The URL to download the PDF for the invoice. If the invoice has not been\nfinalized yet, this will be null."
         }
       },
-      "title": "Invoice represents a billing invoice issued to an account.\nTODO should we add the id field ?\nTODO do we want to link it with the payment method or indicate it is from stripe?"
+      "description": "Invoice represents a billing invoice issued to an account."
     },
     "v1InvoiceStatus": {
       "type": "string",
