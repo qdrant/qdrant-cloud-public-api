@@ -238,7 +238,7 @@ type MonthlyMeteringSummary struct {
 	Month int32 `protobuf:"varint,2,opt,name=month,proto3" json:"month,omitempty"`
 	// Total amount for the month in millicents.
 	// Example: 499900 = $4.999
-	Amount int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountMillicents int64 `protobuf:"varint,3,opt,name=amount_millicents,json=amountMillicents,proto3" json:"amount_millicents,omitempty"`
 	// Currency of the amount, in ISO 4217 format (e.g., "USD").
 	Currency      string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -289,9 +289,9 @@ func (x *MonthlyMeteringSummary) GetMonth() int32 {
 	return 0
 }
 
-func (x *MonthlyMeteringSummary) GetAmount() int64 {
+func (x *MonthlyMeteringSummary) GetAmountMillicents() int64 {
 	if x != nil {
-		return x.Amount
+		return x.AmountMillicents
 	}
 	return 0
 }
@@ -329,13 +329,15 @@ type MeteringItem struct {
 	// Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
 	UsageHours float64 `protobuf:"fixed64,10,opt,name=usage_hours,json=usageHours,proto3" json:"usage_hours,omitempty"`
 	// The total charge for this item, in millicents.
-	Amount int64 `protobuf:"varint,11,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountMillicents int64 `protobuf:"varint,11,opt,name=amount_millicents,json=amountMillicents,proto3" json:"amount_millicents,omitempty"`
 	// The total discount applied to this item, in millicents.
-	DiscountAmount *int64 `protobuf:"varint,12,opt,name=discount_amount,json=discountAmount,proto3,oneof" json:"discount_amount,omitempty"`
+	DiscountAmountMillicents *int64 `protobuf:"varint,12,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
 	// The Discount applied as a percentage (e.g., 12.5).
 	DiscountAmountPercent *float64 `protobuf:"fixed64,13,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Currency of the different amount values, in ISO 4217 format (e.g., "USD").
+	Currency      string `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MeteringItem) Reset() {
@@ -438,16 +440,16 @@ func (x *MeteringItem) GetUsageHours() float64 {
 	return 0
 }
 
-func (x *MeteringItem) GetAmount() int64 {
+func (x *MeteringItem) GetAmountMillicents() int64 {
 	if x != nil {
-		return x.Amount
+		return x.AmountMillicents
 	}
 	return 0
 }
 
-func (x *MeteringItem) GetDiscountAmount() int64 {
-	if x != nil && x.DiscountAmount != nil {
-		return *x.DiscountAmount
+func (x *MeteringItem) GetDiscountAmountMillicents() int64 {
+	if x != nil && x.DiscountAmountMillicents != nil {
+		return *x.DiscountAmountMillicents
 	}
 	return 0
 }
@@ -457,6 +459,13 @@ func (x *MeteringItem) GetDiscountAmountPercent() float64 {
 		return *x.DiscountAmountPercent
 	}
 	return 0
+}
+
+func (x *MeteringItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
@@ -475,12 +484,12 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x04year\x18\x02 \x01(\x05B\v\xbaH\b\x1a\x06\x18\xb8\x17(\xd0\x0fR\x04year\x12\x1f\n" +
 	"\x05month\x18\x03 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\"U\n" +
 	"\x15ListMeteringsResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.metering.v1.MeteringItemR\x05items\"v\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.metering.v1.MeteringItemR\x05items\"\x8b\x01\n" +
 	"\x16MonthlyMeteringSummary\x12\x12\n" +
 	"\x04year\x18\x01 \x01(\x05R\x04year\x12\x14\n" +
-	"\x05month\x18\x02 \x01(\x05R\x05month\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x03R\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\xd5\x04\n" +
+	"\x05month\x18\x02 \x01(\x05R\x05month\x12+\n" +
+	"\x11amount_millicents\x18\x03 \x01(\x03R\x10amountMillicents\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\xa6\x05\n" +
 	"\fMeteringItem\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x1d\n" +
@@ -496,11 +505,12 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x0eprice_per_hour\x18\t \x01(\x05R\fpricePerHour\x12\x1f\n" +
 	"\vusage_hours\x18\n" +
 	" \x01(\x01R\n" +
-	"usageHours\x12\x16\n" +
-	"\x06amount\x18\v \x01(\x03R\x06amount\x12,\n" +
-	"\x0fdiscount_amount\x18\f \x01(\x03H\x00R\x0ediscountAmount\x88\x01\x01\x12;\n" +
-	"\x17discount_amount_percent\x18\r \x01(\x01H\x01R\x15discountAmountPercent\x88\x01\x01B\x12\n" +
-	"\x10_discount_amountB\x1a\n" +
+	"usageHours\x12+\n" +
+	"\x11amount_millicents\x18\v \x01(\x03R\x10amountMillicents\x12A\n" +
+	"\x1adiscount_amount_millicents\x18\f \x01(\x03H\x00R\x18discountAmountMillicents\x88\x01\x01\x12;\n" +
+	"\x17discount_amount_percent\x18\r \x01(\x01H\x01R\x15discountAmountPercent\x88\x01\x01\x12\x1a\n" +
+	"\bcurrency\x18\x0e \x01(\tR\bcurrencyB\x1d\n" +
+	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xc7\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
 	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
