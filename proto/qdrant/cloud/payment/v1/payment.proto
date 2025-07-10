@@ -36,7 +36,7 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/stripe"};
     // TODO decide which url to use for this method.
-   //    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}/payment-method"};
+    //    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}/payment-method"};
   }
   // Delete the payment information identified by the given ID.
   // Required permissions:
@@ -46,6 +46,16 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
+  }
+  // Initiates the creation of a Stripe Checkout session for the specified account.
+  // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+  // Required permissions:
+  // - write:payment_information
+  rpc CreateStripeSession(CreateStripeSessionRequest) returns (CreateStripeSessionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
   }
 }
 
@@ -91,6 +101,63 @@ message DeletePaymentInformationRequest {
 // DeletePaymentInformationResponse is the response from the DeletePaymentInformation function
 message DeletePaymentInformationResponse {
   // Empty
+}
+
+// CreateStripeSessionRequest is the request for the CreateStripeSession function
+message CreateStripeSessionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Redirect URL to which the user will be redirected after the payment setup is completed.
+  string redirect_url = 2;
+}
+
+// CreateStripeSessionResponse is the response from the CreateStripeSession function
+message CreateStripeSessionResponse {
+  // Stripe session created for payment method setup or collection.
+  StripeSession stripe_session = 1;
+}
+
+// Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message StripeSession {
+  // The unique identifier of the Stripe Checkout session.
+  string id = 1;
+  // The URL to redirect the user to complete the Checkout session.
+  // This may be null if the session is incomplete or improperly initialized.
+  optional string url = 2;
+  // The Stripe customer ID associated with this session.
+  string customer = 3;
+  // The ID of the associated Stripe SetupIntent.
+  string setup_intent_id = 4;
+  // The status of the associated Stripe SetupIntent.
+  SetupIntentStatus setup_intent_status = 5;
+  // The payment method attached to the associated SetupIntent.
+  string setup_intent_payment_method = 6;
+}
+
+// Represents the status of a SetupIntent in Stripe.
+enum SetupIntentStatus {
+  // Default unspecified value.
+  SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+
+  // A payment method is required to proceed.
+  SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+
+  // The SetupIntent is ready to be confirmed.
+  SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+
+  // The SetupIntent requires further action (e.g., 3D Secure).
+  SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+
+  // The SetupIntent is being processed.
+  SETUP_INTENT_STATUS_PROCESSING = 4;
+
+  // The SetupIntent has been canceled.
+  SETUP_INTENT_STATUS_CANCELED = 5;
+
+  // The SetupIntent has succeeded.
+  SETUP_INTENT_STATUS_SUCCEEDED = 6;
 }
 
 // Represents a payment information.
