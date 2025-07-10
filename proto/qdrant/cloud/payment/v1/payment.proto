@@ -67,7 +67,7 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
   }
-
+  // TODO: Add method to change the payment information for the account.
 }
 
 // Request to list payment methods for a specific account.
