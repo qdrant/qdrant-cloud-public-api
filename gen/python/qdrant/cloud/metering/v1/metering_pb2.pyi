@@ -41,19 +41,19 @@ class ListMeteringsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[MeteringItem, _Mapping]]] = ...) -> None: ...
 
 class MonthlyMeteringSummary(_message.Message):
-    __slots__ = ("year", "month", "amount", "currency")
+    __slots__ = ("year", "month", "amount_millicents", "currency")
     YEAR_FIELD_NUMBER: _ClassVar[int]
     MONTH_FIELD_NUMBER: _ClassVar[int]
-    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     year: int
     month: int
-    amount: int
+    amount_millicents: int
     currency: str
-    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount: _Optional[int] = ..., currency: _Optional[str] = ...) -> None: ...
+    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class MeteringItem(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "cluster_name", "start_time", "end_time", "billable_entity_id", "billable_entity_type", "partner", "price_per_hour", "usage_hours", "amount", "discount_amount", "discount_amount_percent")
+    __slots__ = ("account_id", "cluster_id", "cluster_name", "start_time", "end_time", "billable_entity_id", "billable_entity_type", "partner", "price_per_hour", "usage_hours", "amount_millicents", "discount_amount_millicents", "discount_amount_percent", "currency")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -64,9 +64,10 @@ class MeteringItem(_message.Message):
     PARTNER_FIELD_NUMBER: _ClassVar[int]
     PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     USAGE_HOURS_FIELD_NUMBER: _ClassVar[int]
-    AMOUNT_FIELD_NUMBER: _ClassVar[int]
-    DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
     DISCOUNT_AMOUNT_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     cluster_name: str
@@ -77,7 +78,8 @@ class MeteringItem(_message.Message):
     partner: str
     price_per_hour: int
     usage_hours: float
-    amount: int
-    discount_amount: int
+    amount_millicents: int
+    discount_amount_millicents: int
     discount_amount_percent: float
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., partner: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount: _Optional[int] = ..., discount_amount: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ...) -> None: ...
+    currency: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., partner: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...

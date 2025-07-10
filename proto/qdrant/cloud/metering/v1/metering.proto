@@ -74,7 +74,7 @@ message MonthlyMeteringSummary {
   int32 month = 2;
   // Total amount for the month in millicents.
   // Example: 499900 = $4.999
-  int64 amount = 3;
+  int64 amount_millicents = 3;
   // Currency of the amount, in ISO 4217 format (e.g., "USD").
   string currency = 4;
 }
@@ -105,9 +105,11 @@ message MeteringItem {
   // Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
   double usage_hours = 10;
   // The total charge for this item, in millicents.
-  int64 amount = 11;
+  int64 amount_millicents = 11;
   // The total discount applied to this item, in millicents.
-  optional int64 discount_amount = 12;
+  optional int64 discount_amount_millicents = 12;
   // The Discount applied as a percentage (e.g., 12.5).
   optional double discount_amount_percent = 13;
+  // Currency of the different amount values, in ISO 4217 format (e.g., "USD").
+  string currency = 14;
 }

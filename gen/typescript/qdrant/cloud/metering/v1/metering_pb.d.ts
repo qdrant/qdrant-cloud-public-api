@@ -131,9 +131,9 @@ export declare type MonthlyMeteringSummary = Message<"qdrant.cloud.metering.v1.M
    * Total amount for the month in millicents.
    * Example: 499900 = $4.999
    *
-   * @generated from field: int64 amount = 3;
+   * @generated from field: int64 amount_millicents = 3;
    */
-  amount: bigint;
+  amountMillicents: bigint;
 
   /**
    * Currency of the amount, in ISO 4217 format (e.g., "USD").
@@ -230,16 +230,16 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
   /**
    * The total charge for this item, in millicents.
    *
-   * @generated from field: int64 amount = 11;
+   * @generated from field: int64 amount_millicents = 11;
    */
-  amount: bigint;
+  amountMillicents: bigint;
 
   /**
    * The total discount applied to this item, in millicents.
    *
-   * @generated from field: optional int64 discount_amount = 12;
+   * @generated from field: optional int64 discount_amount_millicents = 12;
    */
-  discountAmount?: bigint;
+  discountAmountMillicents?: bigint;
 
   /**
    * The Discount applied as a percentage (e.g., 12.5).
@@ -247,6 +247,13 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
    * @generated from field: optional double discount_amount_percent = 13;
    */
   discountAmountPercent?: number;
+
+  /**
+   * Currency of the different amount values, in ISO 4217 format (e.g., "USD").
+   *
+   * @generated from field: string currency = 14;
+   */
+  currency: string;
 };
 
 /**
