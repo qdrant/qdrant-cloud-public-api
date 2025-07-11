@@ -12,6 +12,7 @@ service PaymentService {
   // Lists all payment information known by the system for the provided account.
   // Required permissions:
   // - read:payment_information
+  // TODO: How user can know which payment information is used for charging when there are multiple payment information?
   rpc ListPaymentInformation(ListPaymentInformationRequest) returns (ListPaymentInformationResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
@@ -56,7 +57,15 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
   }
-  // TODO: Add method to change the payment information for the account.
+  // This method will allow the user to use a different payment information for the account.
+  // Required permissions:
+  // - write:payment_information
+  rpc ChangePaymentInformation(ChangePaymentInformationRequest) returns (ChangePaymentInformationResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {put: "/api/payment/v1/accounts/{account_id}/change-payment-information"};
+  }
 }
 
 // Request to list payment methods for a specific account.
@@ -168,6 +177,20 @@ message GetStripeSessionRequest {
 message GetStripeSessionResponse {
   // The Stripe session for the account.
   StripeSession stripe_session = 1;
+}
+
+// ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
+message ChangePaymentInformationRequest {
+  // The identifier of the account (in GUID format).
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the new payment information to set.
+  string new_payment_information_id = 3 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// ChangePaymentInformationResponse is the response returned after a successful update.
+message ChangePaymentInformationResponse {
+  // New payment information that has been set for the account.
+  PaymentInformation payment_information = 1;
 }
 
 // Represents a payment information.
