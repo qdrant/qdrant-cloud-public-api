@@ -195,6 +195,7 @@ message ChangePaymentInformationResponse {
 
 // Represents a payment information.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// TODO: Is payment method a better name?
 message PaymentInformation {
   // Unique identifier for the payment information (in GUID format).
   // This is a read-only field and will be available after a payment information is created.
