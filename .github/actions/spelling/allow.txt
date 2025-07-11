@@ -31,3 +31,5 @@ scaleway
 snapclass
 stackit
 vultr
+Mastercard
+Visa
