@@ -169,8 +169,10 @@ type GetAccountQuotasResponse struct {
 	// Maximum number of Database API keys this account can create (for each cluster).
 	// To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
 	MaxClusterDatabaseApiKeys uint32 `protobuf:"varint,4,opt,name=max_cluster_database_api_keys,json=maxClusterDatabaseApiKeys,proto3" json:"max_cluster_database_api_keys,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Maximum number of free-tier clusters this account can create.
+	MaxFreeTierClusters uint32 `protobuf:"varint,5,opt,name=max_free_tier_clusters,json=maxFreeTierClusters,proto3" json:"max_free_tier_clusters,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetAccountQuotasResponse) Reset() {
@@ -231,6 +233,13 @@ func (x *GetAccountQuotasResponse) GetMaxClusterDatabaseApiKeys() uint32 {
 	return 0
 }
 
+func (x *GetAccountQuotasResponse) GetMaxFreeTierClusters() uint32 {
+	if x != nil {
+		return x.MaxFreeTierClusters
+	}
+	return 0
+}
+
 var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
@@ -241,13 +250,14 @@ const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xe5\x01\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xa3\x02\n" +
 	"\x18GetAccountQuotasResponse\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12*\n" +
 	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\vmaxClusters\x123\n" +
 	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0fmaxClusterNodes\x12I\n" +
-	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x19maxClusterDatabaseApiKeys2\x90\x03\n" +
+	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x19maxClusterDatabaseApiKeys\x12<\n" +
+	"\x16max_free_tier_clusters\x18\x05 \x01(\rB\a\xbaH\x04*\x02 \x00R\x13maxFreeTierClusters2\x90\x03\n" +
 	"\fQuotaService\x12\xc5\x01\n" +
 	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xb7\x01\n" +
 	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"B\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotasB\xee\x01\n" +
