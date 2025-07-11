@@ -1,0 +1,530 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/payment/v1/payment.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PaymentService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/payment/v1/accounts/{accountId}/change-payment-information": {
+      "put": {
+        "summary": "This method will allow the user to use a different payment information for the account.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_ChangePaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ChangePaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "newPaymentInformationId",
+            "description": "The identifier of the new payment information to set.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/api/payment/v1/accounts/{accountId}/payment-information/{paymentInformationId}": {
+      "get": {
+        "summary": "Gets the payment information identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "PaymentService_GetPaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformationId",
+            "description": "The identifier of the payment information (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the payment information identified by the given ID.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_DeletePaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeletePaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformationId",
+            "description": "The identifier of the payment information (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/api/payment/v1/accounts/{accountId}/payment-methods": {
+      "get": {
+        "summary": "Lists all payment information known by the system for the provided account.\nRequired permissions:\n- read:payment_information\nTODO: How user can know which payment information is used for charging when there are multiple payment information?",
+        "operationId": "PaymentService_ListPaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/api/payment/v1/accounts/{accountId}/stripe-session": {
+      "post": {
+        "summary": "Initiates the creation of a Stripe Checkout session for the specified account.\nThis session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_CreateStripeSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateStripeSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "redirectUrl",
+            "description": "Redirect URL to which the user will be redirected after the payment setup is completed.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/api/payment/v1/accounts/{accountId}/stripe-session/{sessionId}": {
+      "get": {
+        "summary": "Get the Stripe Checkout session by its ID.\nThis method is used to retrieve the session details after it has been created.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_GetStripeSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetStripeSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionId",
+            "description": "The identifier of the Stripe session.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1BillingAddress": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the person or entity associated with the billing address."
+        },
+        "line1": {
+          "type": "string",
+          "description": "The first line of the billing address."
+        },
+        "line2": {
+          "type": "string",
+          "description": "The second line of the billing address.\nThis is an optional field."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code of the billing address.\nThis is an optional field."
+        },
+        "city": {
+          "type": "string",
+          "description": "The city of the billing address."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province of the billing address."
+        },
+        "country": {
+          "type": "string",
+          "description": "The country of the billing address."
+        },
+        "countryFormatted": {
+          "type": "string",
+          "description": "The formatted country name."
+        },
+        "stateFormatted": {
+          "type": "string",
+          "description": "The formatted state or province name."
+        },
+        "taxSupportedCountry": {
+          "type": "boolean",
+          "description": "Indicates if the country supports tax."
+        }
+      },
+      "description": "Represents a billing address for a payment information."
+    },
+    "v1Card": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "The brand of the card (e.g., \"Visa\", \"Mastercard\")."
+        },
+        "last4": {
+          "type": "string",
+          "description": "The last 4 digits of the card number."
+        },
+        "expirationMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The expiration month of the card."
+        },
+        "expirationYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The expiration year of the card."
+        }
+      },
+      "title": "Represents Stripe payment method card details"
+    },
+    "v1ChangePaymentInformationResponse": {
+      "type": "object",
+      "properties": {
+        "paymentInformation": {
+          "$ref": "#/definitions/v1PaymentInformation",
+          "description": "New payment information that has been set for the account."
+        }
+      },
+      "description": "ChangePaymentInformationResponse is the response returned after a successful update."
+    },
+    "v1CreateStripeSessionResponse": {
+      "type": "object",
+      "properties": {
+        "stripeSession": {
+          "$ref": "#/definitions/v1StripeSession",
+          "description": "Stripe session created for payment method setup or collection."
+        }
+      },
+      "title": "CreateStripeSessionResponse is the response from the CreateStripeSession function"
+    },
+    "v1DeletePaymentInformationResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeletePaymentInformationResponse is the response from the DeletePaymentInformation function"
+    },
+    "v1GetPaymentInformationResponse": {
+      "type": "object",
+      "properties": {
+        "paymentInformation": {
+          "$ref": "#/definitions/v1PaymentInformation",
+          "description": "The actual payment information."
+        }
+      },
+      "description": "Response containing the payment information."
+    },
+    "v1GetStripeSessionResponse": {
+      "type": "object",
+      "properties": {
+        "stripeSession": {
+          "$ref": "#/definitions/v1StripeSession",
+          "description": "The Stripe session for the account."
+        }
+      },
+      "title": "GetStripeSessionResponse is the response from the GetStripeSession function"
+    },
+    "v1ListPaymentInformationResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1PaymentInformation"
+          },
+          "description": "The list of payment methods."
+        }
+      },
+      "description": "Response containing a list of payment methods."
+    },
+    "v1PaymentInformation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the payment information (in GUID format).\nThis is a read-only field and will be available after a payment information is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+        },
+        "type": {
+          "$ref": "#/definitions/v1PaymentProviderType",
+          "description": "The type of the payment information provider.\nThis is a required field."
+        },
+        "status": {
+          "$ref": "#/definitions/v1PaymentInformationStatus",
+          "description": "Payment information status."
+        },
+        "paymentProviderId": {
+          "type": "string",
+          "description": "The customer account identifier in the payment provider system.\nThis is a required field."
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/v1PaymentMethod",
+          "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for payment provider type Stripe."
+        },
+        "billingAddress": {
+          "$ref": "#/definitions/v1BillingAddress",
+          "description": "The billing address associated with the payment information.\nThis field is optional and only available for payment provider type Stripe."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the payment information was created.\nThis is a read-only field and will be available after a payment information is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the payment information was last updated.\nThis is a read-only field and will be available after a payment information is created."
+        }
+      },
+      "title": "Represents a payment information.\nTODO: Is payment method a better name?"
+    },
+    "v1PaymentInformationStatus": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_INFORMATION_STATUS_UNSPECIFIED",
+        "PAYMENT_INFORMATION_STATUS_ACTIVE",
+        "PAYMENT_INFORMATION_STATUS_INACTIVE",
+        "PAYMENT_INFORMATION_STATUS_PENDING"
+      ],
+      "default": "PAYMENT_INFORMATION_STATUS_UNSPECIFIED",
+      "description": "PaymentInformationStatus defines the status of the payment information.\n\n - PAYMENT_INFORMATION_STATUS_UNSPECIFIED: Unspecified status, should not be used.\n - PAYMENT_INFORMATION_STATUS_ACTIVE: The payment information is active and can be used for payments.\n - PAYMENT_INFORMATION_STATUS_INACTIVE: The payment information is inactive and cannot be used for payments.\n - PAYMENT_INFORMATION_STATUS_PENDING: The payment information is pending verification or setup."
+    },
+    "v1PaymentMethod": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the payment method."
+        },
+        "card": {
+          "$ref": "#/definitions/v1Card",
+          "description": "Card details."
+        }
+      },
+      "title": "Represents Stripe payment method\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1PaymentProviderType": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
+        "PAYMENT_PROVIDER_TYPE_STRIPE",
+        "PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE",
+        "PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE",
+        "PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE",
+        "PAYMENT_PROVIDER_TYPE_CUSTOM"
+      ],
+      "default": "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
+      "description": "PaymentProviderType defines the type of payment information.\n\n - PAYMENT_PROVIDER_TYPE_UNSPECIFIED: Unspecified type, should not be used.\n - PAYMENT_PROVIDER_TYPE_STRIPE: Stripe payment information.\n - PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: AWS marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE: Google Cloud Platform marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE: Azure marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_CUSTOM: Custom payment information. This is used for custom payment methods that do not fit into the predefined categories."
+    },
+    "v1SetupIntentStatus": {
+      "type": "string",
+      "enum": [
+        "SETUP_INTENT_STATUS_UNSPECIFIED",
+        "SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD",
+        "SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION",
+        "SETUP_INTENT_STATUS_REQUIRES_ACTION",
+        "SETUP_INTENT_STATUS_PROCESSING",
+        "SETUP_INTENT_STATUS_CANCELED",
+        "SETUP_INTENT_STATUS_SUCCEEDED"
+      ],
+      "default": "SETUP_INTENT_STATUS_UNSPECIFIED",
+      "description": "Represents the status of a SetupIntent in Stripe.\n\n - SETUP_INTENT_STATUS_UNSPECIFIED: Default unspecified value.\n - SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: A payment method is required to proceed.\n - SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: The SetupIntent is ready to be confirmed.\n - SETUP_INTENT_STATUS_REQUIRES_ACTION: The SetupIntent requires further action (e.g., 3D Secure).\n - SETUP_INTENT_STATUS_PROCESSING: The SetupIntent is being processed.\n - SETUP_INTENT_STATUS_CANCELED: The SetupIntent has been canceled.\n - SETUP_INTENT_STATUS_SUCCEEDED: The SetupIntent has succeeded."
+    },
+    "v1StripeSession": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the Stripe Checkout session."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to redirect the user to complete the Checkout session.\nThis may be null if the session is incomplete or improperly initialized."
+        },
+        "customer": {
+          "type": "string",
+          "description": "The Stripe customer ID associated with this session."
+        },
+        "setupIntentId": {
+          "type": "string",
+          "description": "The ID of the associated Stripe SetupIntent."
+        },
+        "setupIntentStatus": {
+          "$ref": "#/definitions/v1SetupIntentStatus",
+          "description": "The status of the associated Stripe SetupIntent."
+        },
+        "setupIntentPaymentMethod": {
+          "type": "string",
+          "description": "The payment method attached to the associated SetupIntent."
+        }
+      },
+      "title": "Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    }
+  }
+}
