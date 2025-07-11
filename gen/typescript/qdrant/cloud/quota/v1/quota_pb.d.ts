@@ -104,6 +104,13 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
    * @generated from field: uint32 max_cluster_database_api_keys = 4;
    */
   maxClusterDatabaseApiKeys: number;
+
+  /**
+   * Maximum number of free-tier clusters this account can create.
+   *
+   * @generated from field: uint32 max_free_tier_clusters = 5;
+   */
+  maxFreeTierClusters: number;
 };
 
 /**

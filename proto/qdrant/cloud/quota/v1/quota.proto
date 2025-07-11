@@ -65,4 +65,6 @@ message GetAccountQuotasResponse {
   // Maximum number of Database API keys this account can create (for each cluster).
   // To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
   uint32 max_cluster_database_api_keys = 4 [(buf.validate.field).uint32.gt = 0];
+  // Maximum number of free-tier clusters this account can create.
+  uint32 max_free_tier_clusters = 5 [(buf.validate.field).uint32.gt = 0];
 }
