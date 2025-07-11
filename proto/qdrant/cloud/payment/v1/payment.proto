@@ -69,7 +69,7 @@ message ListPaymentInformationRequest {
 // Response containing a list of payment methods.
 message ListPaymentInformationResponse {
   // The list of payment methods.
-  repeated PaymentInformation payment_methods = 1;
+  repeated PaymentInformation items = 1;
 }
 
 // Request to get payment information by id.
@@ -85,7 +85,7 @@ message GetPaymentInformationRequest {
 // Response containing the payment information.
 message GetPaymentInformationResponse {
   // The actual payment information.
-  PaymentInformation payment_methods = 1;
+  PaymentInformation payment_information = 1;
 }
 
 // DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
