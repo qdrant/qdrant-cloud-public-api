@@ -25,7 +25,7 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
   }
   // Delete the payment information identified by the given ID.
   // Required permissions:
@@ -34,7 +34,7 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
+    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
   }
   // Initiates the creation of a Stripe Checkout session for the specified account.
   // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
