@@ -27,17 +27,6 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}"};
   }
-  // Get Stripe payment method for the account.
-  // Required permissions:
-  // - read:payment_information
-  rpc GetStripePaymentMethod(GetStripePaymentMethodRequest) returns (GetStripePaymentMethodResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/stripe"};
-    // TODO decide which url to use for this method.
-    //    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{id}/payment-method"};
-  }
   // Delete the payment information identified by the given ID.
   // Required permissions:
   // - write:payment_information
@@ -151,22 +140,16 @@ message StripeSession {
 enum SetupIntentStatus {
   // Default unspecified value.
   SETUP_INTENT_STATUS_UNSPECIFIED = 0;
-
   // A payment method is required to proceed.
   SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
-
   // The SetupIntent is ready to be confirmed.
   SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
-
   // The SetupIntent requires further action (e.g., 3D Secure).
   SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
-
   // The SetupIntent is being processed.
   SETUP_INTENT_STATUS_PROCESSING = 4;
-
   // The SetupIntent has been canceled.
   SETUP_INTENT_STATUS_CANCELED = 5;
-
   // The SetupIntent has succeeded.
   SETUP_INTENT_STATUS_SUCCEEDED = 6;
 }
@@ -201,19 +184,19 @@ message PaymentInformation {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The type of the payment method (e.g., "Stripe", "AWS Marketplace", etc.).
+  // The type of the payment information provider.
   // This is a required field.
-  PaymentInformationType payment_information_type = 3;
-  // The identifier of the marketplace account (e.g., Stripe account ID, AWS Marketplace account ID, etc.).
-  // This is a required field for marketplace payment information types.
-  optional string marketplace_account_id = 4;
-  // The identifier of the Stripe customer (e.g., "cus_1234", "cus_5678", etc.).
-  // This is an optional field for Stripe payment information type.
-  optional string stripe_customer_id = 5;
-  // The identifier of the payment method (e.g., "card_1234", "pm_5678", etc.).
-  // This is a required field for Stripe payment information type.
-  optional string stripe_payment_method_id = 6;
+  PaymentProviderType type = 3;
+  // Payment information status.
+  PaymentInformationStatus status = 4;
+  // The customer account identifier in the payment provider system.
+  // This is a required field.
+  string payment_provider_id = 5;
+  // Represents the payment method details, such as card information.
+  // This field is optional and only available for payment provider type Stripe.
+  optional PaymentMethod payment_method = 6;
   // The billing address associated with the payment information.
+  // This field is optional and only available for payment provider type Stripe.
   optional BillingAddress billing_address = 7;
   // The timestamp when the payment information was created.
   // This is a read-only field and will be available after a payment information is created.
@@ -221,26 +204,34 @@ message PaymentInformation {
   // The timestamp when the payment information was last updated.
   // This is a read-only field and will be available after a payment information is created.
   google.protobuf.Timestamp last_modified_at = 9;
-  // TODO before there was an api which was checking if the payment information is valid. I think,
-  //  it should be an attribute of the payment information.
-  // This is a read-only field and will be available after a payment information is created.
-  // bool is_valid = 10;
 }
 
-// PaymentInformationType defines the type of payment information.
-enum PaymentInformationType {
+// PaymentProviderType defines the type of payment information.
+enum PaymentProviderType {
   // Unspecified type, should not be used.
-  PAYMENT_INFORMATION_TYPE_UNSPECIFIED = 0;
+  PAYMENT_PROVIDER_TYPE_UNSPECIFIED = 0;
   // Stripe payment information.
-  PAYMENT_INFORMATION_TYPE_STRIPE = 1;
+  PAYMENT_PROVIDER_TYPE_STRIPE = 1;
   // AWS marketplace payment information.
-  PAYMENT_INFORMATION_TYPE_AWS_MARKETPLACE = 2;
+  PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE = 2;
   // Google Cloud Platform marketplace payment information.
-  PAYMENT_INFORMATION_TYPE_GCP_MARKETPLACE = 3;
+  PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE = 3;
   // Azure marketplace payment information.
-  PAYMENT_INFORMATION_TYPE_AZURE_MARKETPLACE = 4;
+  PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE = 4;
   // Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.
-  PAYMENT_INFORMATION_TYPE_CUSTOM = 5;
+  PAYMENT_PROVIDER_TYPE_CUSTOM = 5;
+}
+
+// PaymentInformationStatus defines the status of the payment information.
+enum PaymentInformationStatus {
+  // Unspecified status, should not be used.
+  PAYMENT_INFORMATION_STATUS_UNSPECIFIED = 0;
+  // The payment information is active and can be used for payments.
+  PAYMENT_INFORMATION_STATUS_ACTIVE = 1;
+  // The payment information is inactive and cannot be used for payments.
+  PAYMENT_INFORMATION_STATUS_INACTIVE = 2;
+  // The payment information is pending verification or setup.
+  PAYMENT_INFORMATION_STATUS_PENDING = 3;
 }
 
 // Represents a billing address for a payment information.
@@ -269,32 +260,13 @@ message BillingAddress {
   bool tax_supported_country = 10;
 }
 
-// GetStripePaymentMethodRequest is the request for the GetStripePaymentMethod function
-message GetStripePaymentMethodRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // TODO Current api tries to get the valid stripe payment info for account and then tries to
-  //   return the payment method. I think, this rpc should get the payment information id and return the
-  // payment method for it.
-}
-
-// GetStripePaymentMethodResponse is the response from the GetStripePaymentMethod function
-message GetStripePaymentMethodResponse {
-  // The Stripe payment method for the account.
-  StripePaymentMethod payment_method = 1;
-}
-
 // Represents Stripe payment method
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-message StripePaymentMethod {
-  // The identifier of the Stripe payment method (e.g., "pm_1234", "pm_5678", etc.).
+message PaymentMethod {
+  // The identifier of the payment method.
   string id = 1 [(buf.validate.field).string = {min_len: 1}];
-  // The type of the Stripe payment method (e.g., "card", "bank_account", etc.).
-  // TODO we only support type card. I think type can be removed for now and added if we support different types.
-  string type = 2 [(buf.validate.field).string = {min_len: 1}];
   // Card details.
-  Card card = 3;
+  Card card = 2;
 }
 
 // Represents Stripe payment method card details
