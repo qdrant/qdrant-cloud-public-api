@@ -55,6 +55,38 @@
         ]
       }
     },
+    "/api/payment/v1/accounts/{accountId}/payment-information": {
+      "get": {
+        "summary": "Lists all payment information known by the system for the provided account.\nRequired permissions:\n- read:payment_information\nTODO: How user can know which payment information is used for charging when there are multiple payment information?",
+        "operationId": "PaymentService_ListPaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
     "/api/payment/v1/accounts/{accountId}/payment-information/{paymentInformationId}": {
       "get": {
         "summary": "Gets the payment information identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -121,38 +153,6 @@
           {
             "name": "paymentInformationId",
             "description": "The identifier of the payment information (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "PaymentService"
-        ]
-      }
-    },
-    "/api/payment/v1/accounts/{accountId}/payment-methods": {
-      "get": {
-        "summary": "Lists all payment information known by the system for the provided account.\nRequired permissions:\n- read:payment_information\nTODO: How user can know which payment information is used for charging when there are multiple payment information?",
-        "operationId": "PaymentService_ListPaymentInformation",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListPaymentInformationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -339,7 +339,7 @@
           "description": "The expiration year of the card."
         }
       },
-      "title": "Represents Stripe payment method card details"
+      "title": "Represents payment method card details"
     },
     "v1ChangePaymentInformationResponse": {
       "type": "object",
@@ -395,10 +395,10 @@
             "type": "object",
             "$ref": "#/definitions/v1PaymentInformation"
           },
-          "description": "The list of payment methods."
+          "description": "The list of payment information."
         }
       },
-      "description": "Response containing a list of payment methods."
+      "description": "Response containing a list of payment information."
     },
     "v1PaymentInformation": {
       "type": "object",
@@ -425,7 +425,7 @@
         },
         "paymentMethod": {
           "$ref": "#/definitions/v1PaymentMethod",
-          "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for payment provider type Stripe."
+          "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for payment provider type Stripe for now."
         },
         "billingAddress": {
           "$ref": "#/definitions/v1BillingAddress",
@@ -471,7 +471,7 @@
           "description": "Card details."
         }
       },
-      "title": "Represents Stripe payment method\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+      "title": "Represents payment method\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
     },
     "v1PaymentProviderType": {
       "type": "string",

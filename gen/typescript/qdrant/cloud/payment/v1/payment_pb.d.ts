@@ -12,7 +12,7 @@ import type { Timestamp } from "@bufbuild/protobuf/wkt";
 export declare const file_qdrant_cloud_payment_v1_payment: GenFile;
 
 /**
- * Request to list payment methods for a specific account.
+ * Request to list payment information for a specific account.
  *
  * @generated from message qdrant.cloud.payment.v1.ListPaymentInformationRequest
  */
@@ -33,13 +33,13 @@ export declare type ListPaymentInformationRequest = Message<"qdrant.cloud.paymen
 export declare const ListPaymentInformationRequestSchema: GenMessage<ListPaymentInformationRequest>;
 
 /**
- * Response containing a list of payment methods.
+ * Response containing a list of payment information.
  *
  * @generated from message qdrant.cloud.payment.v1.ListPaymentInformationResponse
  */
 export declare type ListPaymentInformationResponse = Message<"qdrant.cloud.payment.v1.ListPaymentInformationResponse"> & {
   /**
-   * The list of payment methods.
+   * The list of payment information.
    *
    * @generated from field: repeated qdrant.cloud.payment.v1.PaymentInformation items = 1;
    */
@@ -394,7 +394,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
 
   /**
    * Represents the payment method details, such as card information.
-   * This field is optional and only available for payment provider type Stripe.
+   * This field is optional and only available for payment provider type Stripe for now.
    *
    * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethod payment_method = 6;
    */
@@ -525,7 +525,7 @@ export declare type BillingAddress = Message<"qdrant.cloud.payment.v1.BillingAdd
 export declare const BillingAddressSchema: GenMessage<BillingAddress>;
 
 /**
- * Represents Stripe payment method
+ * Represents payment method
  *
  * @generated from message qdrant.cloud.payment.v1.PaymentMethod
  */
@@ -552,7 +552,7 @@ export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMeth
 export declare const PaymentMethodSchema: GenMessage<PaymentMethod>;
 
 /**
- * Represents Stripe payment method card details
+ * Represents payment method card details
  *
  * @generated from message qdrant.cloud.payment.v1.Card
  */

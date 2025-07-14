@@ -216,7 +216,7 @@ func (PaymentInformationStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
-// Request to list payment methods for a specific account.
+// Request to list payment information for a specific account.
 type ListPaymentInformationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
@@ -263,10 +263,10 @@ func (x *ListPaymentInformationRequest) GetAccountId() string {
 	return ""
 }
 
-// Response containing a list of payment methods.
+// Response containing a list of payment information.
 type ListPaymentInformationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The list of payment methods.
+	// The list of payment information.
 	Items         []*PaymentInformation `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -923,7 +923,7 @@ type PaymentInformation struct {
 	// This is a required field.
 	PaymentProviderId string `protobuf:"bytes,5,opt,name=payment_provider_id,json=paymentProviderId,proto3" json:"payment_provider_id,omitempty"`
 	// Represents the payment method details, such as card information.
-	// This field is optional and only available for payment provider type Stripe.
+	// This field is optional and only available for payment provider type Stripe for now.
 	PaymentMethod *PaymentMethod `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3,oneof" json:"payment_method,omitempty"`
 	// The billing address associated with the payment information.
 	// This field is optional and only available for payment provider type Stripe.
@@ -1170,7 +1170,7 @@ func (x *BillingAddress) GetTaxSupportedCountry() bool {
 	return false
 }
 
-// Represents Stripe payment method
+// Represents payment method
 type PaymentMethod struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the payment method.
@@ -1225,7 +1225,7 @@ func (x *PaymentMethod) GetCard() *Card {
 	return nil
 }
 
-// Represents Stripe payment method card details
+// Represents payment method card details
 type Card struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The brand of the card (e.g., "Visa", "Mastercard").
@@ -1406,9 +1406,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"&PAYMENT_INFORMATION_STATUS_UNSPECIFIED\x10\x00\x12%\n" +
 	"!PAYMENT_INFORMATION_STATUS_ACTIVE\x10\x01\x12'\n" +
 	"#PAYMENT_INFORMATION_STATUS_INACTIVE\x10\x02\x12&\n" +
-	"\"PAYMENT_INFORMATION_STATUS_PENDING\x10\x032\xbc\v\n" +
-	"\x0ePaymentService\x12\xe4\x01\n" +
-	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\xfe\x01\n" +
+	"\"PAYMENT_INFORMATION_STATUS_PENDING\x10\x032\xc0\v\n" +
+	"\x0ePaymentService\x12\xe8\x01\n" +
+	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"]\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02;\x129/api/payment/v1/accounts/{account_id}/payment-information\x12\xfe\x01\n" +
 	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\x88\x02\n" +
 	"\x18DeletePaymentInformation\x128.qdrant.cloud.payment.v1.DeletePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.DeletePaymentInformationResponse\"w\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02T*R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xdb\x01\n" +
 	"\x13CreateStripeSession\x123.qdrant.cloud.payment.v1.CreateStripeSessionRequest\x1a4.qdrant.cloud.payment.v1.CreateStripeSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xdf\x01\n" +

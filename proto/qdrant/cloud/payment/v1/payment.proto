@@ -17,7 +17,7 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information"};
   }
   // Gets the payment information identified by the given ID.
   // Required permissions:
@@ -68,16 +68,16 @@ service PaymentService {
   }
 }
 
-// Request to list payment methods for a specific account.
+// Request to list payment information for a specific account.
 message ListPaymentInformationRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// Response containing a list of payment methods.
+// Response containing a list of payment information.
 message ListPaymentInformationResponse {
-  // The list of payment methods.
+  // The list of payment information.
   repeated PaymentInformation items = 1;
 }
 
@@ -217,7 +217,7 @@ message PaymentInformation {
   // This is a required field.
   string payment_provider_id = 5;
   // Represents the payment method details, such as card information.
-  // This field is optional and only available for payment provider type Stripe.
+  // This field is optional and only available for payment provider type Stripe for now.
   optional PaymentMethod payment_method = 6;
   // The billing address associated with the payment information.
   // This field is optional and only available for payment provider type Stripe.
@@ -287,7 +287,7 @@ message BillingAddress {
   bool tax_supported_country = 10;
 }
 
-// Represents Stripe payment method
+// Represents payment method
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 message PaymentMethod {
   // The identifier of the payment method.
@@ -296,7 +296,7 @@ message PaymentMethod {
   Card card = 2;
 }
 
-// Represents Stripe payment method card details
+// Represents payment method card details
 message Card {
   // The brand of the card (e.g., "Visa", "Mastercard").
   string brand = 1;
