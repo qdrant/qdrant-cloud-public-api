@@ -423,6 +423,14 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * @generated from field: google.protobuf.Timestamp last_modified_at = 9;
    */
   lastModifiedAt?: Timestamp;
+
+  /**
+   * The tax ID associated with the payment information.
+   * This is an optional field.
+   *
+   * @generated from field: optional string tax_id = 10;
+   */
+  taxId?: string;
 };
 
 /**

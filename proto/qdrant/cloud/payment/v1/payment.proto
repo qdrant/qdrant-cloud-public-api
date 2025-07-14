@@ -228,6 +228,9 @@ message PaymentInformation {
   // The timestamp when the payment information was last updated.
   // This is a read-only field and will be available after a payment information is created.
   google.protobuf.Timestamp last_modified_at = 9;
+  // The tax ID associated with the payment information.
+  // This is an optional field.
+  optional string tax_id = 10 [(buf.validate.field).string = {min_len: 1}];
 }
 
 // PaymentProviderType defines the type of payment information.

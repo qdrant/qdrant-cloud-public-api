@@ -934,8 +934,11 @@ type PaymentInformation struct {
 	// The timestamp when the payment information was last updated.
 	// This is a read-only field and will be available after a payment information is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// The tax ID associated with the payment information.
+	// This is an optional field.
+	TaxId         *string `protobuf:"bytes,10,opt,name=tax_id,json=taxId,proto3,oneof" json:"tax_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PaymentInformation) Reset() {
@@ -1029,6 +1032,13 @@ func (x *PaymentInformation) GetLastModifiedAt() *timestamppb.Timestamp {
 		return x.LastModifiedAt
 	}
 	return nil
+}
+
+func (x *PaymentInformation) GetTaxId() string {
+	if x != nil && x.TaxId != nil {
+		return *x.TaxId
+	}
+	return ""
 }
 
 // Represents a billing address for a payment information.
@@ -1335,7 +1345,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12D\n" +
 	"\x1anew_payment_information_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x17newPaymentInformationId\"\x80\x01\n" +
 	" ChangePaymentInformationResponse\x12\\\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x96\x06\n" +
+	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\xc6\x06\n" +
 	"\x12PaymentInformation\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1347,10 +1357,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x0fbilling_address\x18\a \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x01R\x0ebillingAddress\x88\x01\x01\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
+	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12#\n" +
+	"\x06tax_id\x18\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x05taxId\x88\x01\x01:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
 	"\x16payment_information.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x11\n" +
 	"\x0f_payment_methodB\x12\n" +
-	"\x10_billing_address\"\xb4\x03\n" +
+	"\x10_billing_addressB\t\n" +
+	"\a_tax_id\"\xb4\x03\n" +
 	"\x0eBillingAddress\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05line1\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05line1\x12\"\n" +

@@ -440,6 +440,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the payment information was last updated.\nThis is a read-only field and will be available after a payment information is created."
+        },
+        "taxId": {
+          "type": "string",
+          "description": "The tax ID associated with the payment information.\nThis is an optional field."
         }
       },
       "title": "Represents a payment information.\nTODO: Is payment method a better name?"
