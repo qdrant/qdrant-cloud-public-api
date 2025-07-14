@@ -37,25 +37,25 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
   }
-  // Initiates the creation of a Stripe Checkout session for the specified account.
-  // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
-  // Required permissions:
-  // - write:payment_information
-  rpc CreateStripeSession(CreateStripeSessionRequest) returns (CreateStripeSessionResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
-    // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
-  }
   // Get the Stripe Checkout session by its ID.
   // This method is used to retrieve the session details after it has been created.
   // Required permissions:
   // - write:payment_information
-  rpc GetStripeSession(GetStripeSessionRequest) returns (GetStripeSessionResponse) {
+  rpc GetStripeCheckoutSession(GetStripeCheckoutSessionRequest) returns (GetStripeCheckoutSessionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
+  }
+  // Initiates the creation of a Stripe Checkout session for the specified account.
+  // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+  // Required permissions:
+  // - write:payment_information
+  rpc CreateStripeCheckoutSession(CreateStripeCheckoutSessionRequest) returns (CreateStripeCheckoutSessionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
   }
   // Updates the current payment information associated with the account.
   // After this change, the new payment information will be used for all future charges.
@@ -114,23 +114,8 @@ message DeletePaymentInformationResponse {
   // Empty
 }
 
-// CreateStripeSessionRequest is the request for the CreateStripeSession function
-message CreateStripeSessionRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Redirect URL to which the user will be redirected after the payment setup is completed.
-  string redirect_url = 2;
-}
-
-// CreateStripeSessionResponse is the response from the CreateStripeSession function
-message CreateStripeSessionResponse {
-  // Stripe session created for payment method setup or collection.
-  StripeSession stripe_session = 1;
-}
-
-// GetStripeSessionRequest is the request for the GetStripeSession function
-message GetStripeSessionRequest {
+// GetStripeCheckoutSessionRequest is the request for the GetStripeCheckoutSession function
+message GetStripeCheckoutSessionRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
@@ -139,10 +124,25 @@ message GetStripeSessionRequest {
   string session_id = 2;
 }
 
-// GetStripeSessionResponse is the response from the GetStripeSession function
-message GetStripeSessionResponse {
+// GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function
+message GetStripeCheckoutSessionResponse {
   // The Stripe session for the account.
-  StripeSession stripe_session = 1;
+  StripeCheckoutSession stripe_session = 1;
+}
+
+// CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function
+message CreateStripeCheckoutSessionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Redirect URL to which the user will be redirected after the payment setup is completed.
+  string redirect_url = 2;
+}
+
+// CreateStripeCheckoutSessionResponse is the response from the CreateStripeCheckoutSession function
+message CreateStripeCheckoutSessionResponse {
+  // Stripe session created for payment method setup or collection.
+  StripeCheckoutSession stripe_session = 1;
 }
 
 // ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
@@ -161,7 +161,7 @@ message ChangePaymentInformationResponse {
 
 // Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-message StripeSession {
+message StripeCheckoutSession {
   // The unique identifier of the Stripe Checkout session.
   string id = 1;
   // The URL to redirect the user to complete the Checkout session.

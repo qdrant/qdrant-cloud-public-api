@@ -94,21 +94,7 @@ class DeletePaymentInformationResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class CreateStripeSessionRequest(_message.Message):
-    __slots__ = ("account_id", "redirect_url")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    REDIRECT_URL_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    redirect_url: str
-    def __init__(self, account_id: _Optional[str] = ..., redirect_url: _Optional[str] = ...) -> None: ...
-
-class CreateStripeSessionResponse(_message.Message):
-    __slots__ = ("stripe_session",)
-    STRIPE_SESSION_FIELD_NUMBER: _ClassVar[int]
-    stripe_session: StripeSession
-    def __init__(self, stripe_session: _Optional[_Union[StripeSession, _Mapping]] = ...) -> None: ...
-
-class GetStripeSessionRequest(_message.Message):
+class GetStripeCheckoutSessionRequest(_message.Message):
     __slots__ = ("account_id", "session_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -116,11 +102,25 @@ class GetStripeSessionRequest(_message.Message):
     session_id: str
     def __init__(self, account_id: _Optional[str] = ..., session_id: _Optional[str] = ...) -> None: ...
 
-class GetStripeSessionResponse(_message.Message):
+class GetStripeCheckoutSessionResponse(_message.Message):
     __slots__ = ("stripe_session",)
     STRIPE_SESSION_FIELD_NUMBER: _ClassVar[int]
-    stripe_session: StripeSession
-    def __init__(self, stripe_session: _Optional[_Union[StripeSession, _Mapping]] = ...) -> None: ...
+    stripe_session: StripeCheckoutSession
+    def __init__(self, stripe_session: _Optional[_Union[StripeCheckoutSession, _Mapping]] = ...) -> None: ...
+
+class CreateStripeCheckoutSessionRequest(_message.Message):
+    __slots__ = ("account_id", "redirect_url")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    REDIRECT_URL_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    redirect_url: str
+    def __init__(self, account_id: _Optional[str] = ..., redirect_url: _Optional[str] = ...) -> None: ...
+
+class CreateStripeCheckoutSessionResponse(_message.Message):
+    __slots__ = ("stripe_session",)
+    STRIPE_SESSION_FIELD_NUMBER: _ClassVar[int]
+    stripe_session: StripeCheckoutSession
+    def __init__(self, stripe_session: _Optional[_Union[StripeCheckoutSession, _Mapping]] = ...) -> None: ...
 
 class ChangePaymentInformationRequest(_message.Message):
     __slots__ = ("account_id", "new_payment_information_id")
@@ -136,7 +136,7 @@ class ChangePaymentInformationResponse(_message.Message):
     payment_information: PaymentInformation
     def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
 
-class StripeSession(_message.Message):
+class StripeCheckoutSession(_message.Message):
     __slots__ = ("id", "url", "customer", "setup_intent_id", "setup_intent_status", "setup_intent_payment_method")
     ID_FIELD_NUMBER: _ClassVar[int]
     URL_FIELD_NUMBER: _ClassVar[int]

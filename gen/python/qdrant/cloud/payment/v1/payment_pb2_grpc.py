@@ -30,15 +30,15 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationResponse.FromString,
                 _registered_method=True)
-        self.CreateStripeSession = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/CreateStripeSession',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionResponse.FromString,
+        self.GetStripeCheckoutSession = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionResponse.FromString,
                 _registered_method=True)
-        self.GetStripeSession = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/GetStripeSession',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionResponse.FromString,
+        self.CreateStripeCheckoutSession = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
                 _registered_method=True)
         self.ChangePaymentInformation = channel.unary_unary(
                 '/qdrant.cloud.payment.v1.PaymentService/ChangePaymentInformation',
@@ -79,9 +79,9 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateStripeSession(self, request, context):
-        """Initiates the creation of a Stripe Checkout session for the specified account.
-        This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+    def GetStripeCheckoutSession(self, request, context):
+        """Get the Stripe Checkout session by its ID.
+        This method is used to retrieve the session details after it has been created.
         Required permissions:
         - write:payment_information
         """
@@ -89,9 +89,9 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetStripeSession(self, request, context):
-        """Get the Stripe Checkout session by its ID.
-        This method is used to retrieve the session details after it has been created.
+    def CreateStripeCheckoutSession(self, request, context):
+        """Initiates the creation of a Stripe Checkout session for the specified account.
+        This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
         Required permissions:
         - write:payment_information
         """
@@ -128,15 +128,15 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationResponse.SerializeToString,
             ),
-            'CreateStripeSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateStripeSession,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionResponse.SerializeToString,
+            'GetStripeCheckoutSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStripeCheckoutSession,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionResponse.SerializeToString,
             ),
-            'GetStripeSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetStripeSession,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionResponse.SerializeToString,
+            'CreateStripeCheckoutSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateStripeCheckoutSession,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.SerializeToString,
             ),
             'ChangePaymentInformation': grpc.unary_unary_rpc_method_handler(
                     servicer.ChangePaymentInformation,
@@ -237,7 +237,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def CreateStripeSession(request,
+    def GetStripeCheckoutSession(request,
             target,
             options=(),
             channel_credentials=None,
@@ -250,9 +250,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/CreateStripeSession',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeSessionResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeCheckoutSessionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -264,7 +264,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetStripeSession(request,
+    def CreateStripeCheckoutSession(request,
             target,
             options=(),
             channel_credentials=None,
@@ -277,9 +277,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/GetStripeSession',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetStripeSessionResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
             options,
             channel_credentials,
             insecure,

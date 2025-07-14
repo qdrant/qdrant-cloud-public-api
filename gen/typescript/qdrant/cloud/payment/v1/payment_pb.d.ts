@@ -147,59 +147,11 @@ export declare type DeletePaymentInformationResponse = Message<"qdrant.cloud.pay
 export declare const DeletePaymentInformationResponseSchema: GenMessage<DeletePaymentInformationResponse>;
 
 /**
- * CreateStripeSessionRequest is the request for the CreateStripeSession function
+ * GetStripeCheckoutSessionRequest is the request for the GetStripeCheckoutSession function
  *
- * @generated from message qdrant.cloud.payment.v1.CreateStripeSessionRequest
+ * @generated from message qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
  */
-export declare type CreateStripeSessionRequest = Message<"qdrant.cloud.payment.v1.CreateStripeSessionRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * Redirect URL to which the user will be redirected after the payment setup is completed.
-   *
-   * @generated from field: string redirect_url = 2;
-   */
-  redirectUrl: string;
-};
-
-/**
- * Describes the message qdrant.cloud.payment.v1.CreateStripeSessionRequest.
- * Use `create(CreateStripeSessionRequestSchema)` to create a new message.
- */
-export declare const CreateStripeSessionRequestSchema: GenMessage<CreateStripeSessionRequest>;
-
-/**
- * CreateStripeSessionResponse is the response from the CreateStripeSession function
- *
- * @generated from message qdrant.cloud.payment.v1.CreateStripeSessionResponse
- */
-export declare type CreateStripeSessionResponse = Message<"qdrant.cloud.payment.v1.CreateStripeSessionResponse"> & {
-  /**
-   * Stripe session created for payment method setup or collection.
-   *
-   * @generated from field: qdrant.cloud.payment.v1.StripeSession stripe_session = 1;
-   */
-  stripeSession?: StripeSession;
-};
-
-/**
- * Describes the message qdrant.cloud.payment.v1.CreateStripeSessionResponse.
- * Use `create(CreateStripeSessionResponseSchema)` to create a new message.
- */
-export declare const CreateStripeSessionResponseSchema: GenMessage<CreateStripeSessionResponse>;
-
-/**
- * GetStripeSessionRequest is the request for the GetStripeSession function
- *
- * @generated from message qdrant.cloud.payment.v1.GetStripeSessionRequest
- */
-export declare type GetStripeSessionRequest = Message<"qdrant.cloud.payment.v1.GetStripeSessionRequest"> & {
+export declare type GetStripeCheckoutSessionRequest = Message<"qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -218,30 +170,78 @@ export declare type GetStripeSessionRequest = Message<"qdrant.cloud.payment.v1.G
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.GetStripeSessionRequest.
- * Use `create(GetStripeSessionRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest.
+ * Use `create(GetStripeCheckoutSessionRequestSchema)` to create a new message.
  */
-export declare const GetStripeSessionRequestSchema: GenMessage<GetStripeSessionRequest>;
+export declare const GetStripeCheckoutSessionRequestSchema: GenMessage<GetStripeCheckoutSessionRequest>;
 
 /**
- * GetStripeSessionResponse is the response from the GetStripeSession function
+ * GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function
  *
- * @generated from message qdrant.cloud.payment.v1.GetStripeSessionResponse
+ * @generated from message qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
  */
-export declare type GetStripeSessionResponse = Message<"qdrant.cloud.payment.v1.GetStripeSessionResponse"> & {
+export declare type GetStripeCheckoutSessionResponse = Message<"qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse"> & {
   /**
    * The Stripe session for the account.
    *
-   * @generated from field: qdrant.cloud.payment.v1.StripeSession stripe_session = 1;
+   * @generated from field: qdrant.cloud.payment.v1.StripeCheckoutSession stripe_session = 1;
    */
-  stripeSession?: StripeSession;
+  stripeSession?: StripeCheckoutSession;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.GetStripeSessionResponse.
- * Use `create(GetStripeSessionResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.
+ * Use `create(GetStripeCheckoutSessionResponseSchema)` to create a new message.
  */
-export declare const GetStripeSessionResponseSchema: GenMessage<GetStripeSessionResponse>;
+export declare const GetStripeCheckoutSessionResponseSchema: GenMessage<GetStripeCheckoutSessionResponse>;
+
+/**
+ * CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function
+ *
+ * @generated from message qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
+ */
+export declare type CreateStripeCheckoutSessionRequest = Message<"qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * Redirect URL to which the user will be redirected after the payment setup is completed.
+   *
+   * @generated from field: string redirect_url = 2;
+   */
+  redirectUrl: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest.
+ * Use `create(CreateStripeCheckoutSessionRequestSchema)` to create a new message.
+ */
+export declare const CreateStripeCheckoutSessionRequestSchema: GenMessage<CreateStripeCheckoutSessionRequest>;
+
+/**
+ * CreateStripeCheckoutSessionResponse is the response from the CreateStripeCheckoutSession function
+ *
+ * @generated from message qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
+ */
+export declare type CreateStripeCheckoutSessionResponse = Message<"qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse"> & {
+  /**
+   * Stripe session created for payment method setup or collection.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.StripeCheckoutSession stripe_session = 1;
+   */
+  stripeSession?: StripeCheckoutSession;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.
+ * Use `create(CreateStripeCheckoutSessionResponseSchema)` to create a new message.
+ */
+export declare const CreateStripeCheckoutSessionResponseSchema: GenMessage<CreateStripeCheckoutSessionResponse>;
 
 /**
  * ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
@@ -293,9 +293,9 @@ export declare const ChangePaymentInformationResponseSchema: GenMessage<ChangePa
 /**
  * Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
  *
- * @generated from message qdrant.cloud.payment.v1.StripeSession
+ * @generated from message qdrant.cloud.payment.v1.StripeCheckoutSession
  */
-export declare type StripeSession = Message<"qdrant.cloud.payment.v1.StripeSession"> & {
+export declare type StripeCheckoutSession = Message<"qdrant.cloud.payment.v1.StripeCheckoutSession"> & {
   /**
    * The unique identifier of the Stripe Checkout session.
    *
@@ -341,10 +341,10 @@ export declare type StripeSession = Message<"qdrant.cloud.payment.v1.StripeSessi
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.StripeSession.
- * Use `create(StripeSessionSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.StripeCheckoutSession.
+ * Use `create(StripeCheckoutSessionSchema)` to create a new message.
  */
-export declare const StripeSessionSchema: GenMessage<StripeSession>;
+export declare const StripeCheckoutSessionSchema: GenMessage<StripeCheckoutSession>;
 
 /**
  * Represents a payment information.
@@ -791,30 +791,30 @@ export declare const PaymentService: GenService<{
     output: typeof DeletePaymentInformationResponseSchema;
   },
   /**
-   * Initiates the creation of a Stripe Checkout session for the specified account.
-   * This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
-   * Required permissions:
-   * - write:payment_information
-   *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.CreateStripeSession
-   */
-  createStripeSession: {
-    methodKind: "unary";
-    input: typeof CreateStripeSessionRequestSchema;
-    output: typeof CreateStripeSessionResponseSchema;
-  },
-  /**
    * Get the Stripe Checkout session by its ID.
    * This method is used to retrieve the session details after it has been created.
    * Required permissions:
    * - write:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetStripeSession
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession
    */
-  getStripeSession: {
+  getStripeCheckoutSession: {
     methodKind: "unary";
-    input: typeof GetStripeSessionRequestSchema;
-    output: typeof GetStripeSessionResponseSchema;
+    input: typeof GetStripeCheckoutSessionRequestSchema;
+    output: typeof GetStripeCheckoutSessionResponseSchema;
+  },
+  /**
+   * Initiates the creation of a Stripe Checkout session for the specified account.
+   * This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+   * Required permissions:
+   * - write:payment_information
+   *
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession
+   */
+  createStripeCheckoutSession: {
+    methodKind: "unary";
+    input: typeof CreateStripeCheckoutSessionRequestSchema;
+    output: typeof CreateStripeCheckoutSessionResponseSchema;
   },
   /**
    * Updates the current payment information associated with the account.

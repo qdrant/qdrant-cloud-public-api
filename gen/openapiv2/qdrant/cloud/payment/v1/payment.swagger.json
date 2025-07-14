@@ -166,12 +166,12 @@
     "/api/payment/v1/accounts/{accountId}/stripe-session": {
       "post": {
         "summary": "Initiates the creation of a Stripe Checkout session for the specified account.\nThis session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.\nRequired permissions:\n- write:payment_information",
-        "operationId": "PaymentService_CreateStripeSession",
+        "operationId": "PaymentService_CreateStripeCheckoutSession",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreateStripeSessionResponse"
+              "$ref": "#/definitions/v1CreateStripeCheckoutSessionResponse"
             }
           },
           "default": {
@@ -205,12 +205,12 @@
     "/api/payment/v1/accounts/{accountId}/stripe-session/{sessionId}": {
       "get": {
         "summary": "Get the Stripe Checkout session by its ID.\nThis method is used to retrieve the session details after it has been created.\nRequired permissions:\n- write:payment_information",
-        "operationId": "PaymentService_GetStripeSession",
+        "operationId": "PaymentService_GetStripeCheckoutSession",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetStripeSessionResponse"
+              "$ref": "#/definitions/v1GetStripeCheckoutSessionResponse"
             }
           },
           "default": {
@@ -351,15 +351,15 @@
       },
       "description": "ChangePaymentInformationResponse is the response returned after a successful update."
     },
-    "v1CreateStripeSessionResponse": {
+    "v1CreateStripeCheckoutSessionResponse": {
       "type": "object",
       "properties": {
         "stripeSession": {
-          "$ref": "#/definitions/v1StripeSession",
+          "$ref": "#/definitions/v1StripeCheckoutSession",
           "description": "Stripe session created for payment method setup or collection."
         }
       },
-      "title": "CreateStripeSessionResponse is the response from the CreateStripeSession function"
+      "title": "CreateStripeCheckoutSessionResponse is the response from the CreateStripeCheckoutSession function"
     },
     "v1DeletePaymentInformationResponse": {
       "type": "object",
@@ -376,15 +376,15 @@
       },
       "description": "Response containing the payment information."
     },
-    "v1GetStripeSessionResponse": {
+    "v1GetStripeCheckoutSessionResponse": {
       "type": "object",
       "properties": {
         "stripeSession": {
-          "$ref": "#/definitions/v1StripeSession",
+          "$ref": "#/definitions/v1StripeCheckoutSession",
           "description": "The Stripe session for the account."
         }
       },
-      "title": "GetStripeSessionResponse is the response from the GetStripeSession function"
+      "title": "GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function"
     },
     "v1ListPaymentInformationResponse": {
       "type": "object",
@@ -500,7 +500,7 @@
       "default": "SETUP_INTENT_STATUS_UNSPECIFIED",
       "description": "Represents the status of a SetupIntent in Stripe.\n\n - SETUP_INTENT_STATUS_UNSPECIFIED: Default unspecified value.\n - SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: A payment method is required to proceed.\n - SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: The SetupIntent is ready to be confirmed.\n - SETUP_INTENT_STATUS_REQUIRES_ACTION: The SetupIntent requires further action (e.g., 3D Secure).\n - SETUP_INTENT_STATUS_PROCESSING: The SetupIntent is being processed.\n - SETUP_INTENT_STATUS_CANCELED: The SetupIntent has been canceled.\n - SETUP_INTENT_STATUS_SUCCEEDED: The SetupIntent has succeeded."
     },
-    "v1StripeSession": {
+    "v1StripeCheckoutSession": {
       "type": "object",
       "properties": {
         "id": {

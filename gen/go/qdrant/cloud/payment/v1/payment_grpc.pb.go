@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_ListPaymentInformation_FullMethodName   = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
-	PaymentService_GetPaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
-	PaymentService_DeletePaymentInformation_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
-	PaymentService_CreateStripeSession_FullMethodName      = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeSession"
-	PaymentService_GetStripeSession_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/GetStripeSession"
-	PaymentService_ChangePaymentInformation_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/ChangePaymentInformation"
+	PaymentService_ListPaymentInformation_FullMethodName      = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
+	PaymentService_GetPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
+	PaymentService_DeletePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
+	PaymentService_GetStripeCheckoutSession_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
+	PaymentService_CreateStripeCheckoutSession_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
+	PaymentService_ChangePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/ChangePaymentInformation"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -46,16 +46,16 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - write:payment_information
 	DeletePaymentInformation(ctx context.Context, in *DeletePaymentInformationRequest, opts ...grpc.CallOption) (*DeletePaymentInformationResponse, error)
-	// Initiates the creation of a Stripe Checkout session for the specified account.
-	// This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
-	// Required permissions:
-	// - write:payment_information
-	CreateStripeSession(ctx context.Context, in *CreateStripeSessionRequest, opts ...grpc.CallOption) (*CreateStripeSessionResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
 	// Required permissions:
 	// - write:payment_information
-	GetStripeSession(ctx context.Context, in *GetStripeSessionRequest, opts ...grpc.CallOption) (*GetStripeSessionResponse, error)
+	GetStripeCheckoutSession(ctx context.Context, in *GetStripeCheckoutSessionRequest, opts ...grpc.CallOption) (*GetStripeCheckoutSessionResponse, error)
+	// Initiates the creation of a Stripe Checkout session for the specified account.
+	// This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+	// Required permissions:
+	// - write:payment_information
+	CreateStripeCheckoutSession(ctx context.Context, in *CreateStripeCheckoutSessionRequest, opts ...grpc.CallOption) (*CreateStripeCheckoutSessionResponse, error)
 	// Updates the current payment information associated with the account.
 	// After this change, the new payment information will be used for all future charges.
 	// This does not create a new payment information, it simply switches to one already linked to the account.
@@ -102,20 +102,20 @@ func (c *paymentServiceClient) DeletePaymentInformation(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *paymentServiceClient) CreateStripeSession(ctx context.Context, in *CreateStripeSessionRequest, opts ...grpc.CallOption) (*CreateStripeSessionResponse, error) {
+func (c *paymentServiceClient) GetStripeCheckoutSession(ctx context.Context, in *GetStripeCheckoutSessionRequest, opts ...grpc.CallOption) (*GetStripeCheckoutSessionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateStripeSessionResponse)
-	err := c.cc.Invoke(ctx, PaymentService_CreateStripeSession_FullMethodName, in, out, cOpts...)
+	out := new(GetStripeCheckoutSessionResponse)
+	err := c.cc.Invoke(ctx, PaymentService_GetStripeCheckoutSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) GetStripeSession(ctx context.Context, in *GetStripeSessionRequest, opts ...grpc.CallOption) (*GetStripeSessionResponse, error) {
+func (c *paymentServiceClient) CreateStripeCheckoutSession(ctx context.Context, in *CreateStripeCheckoutSessionRequest, opts ...grpc.CallOption) (*CreateStripeCheckoutSessionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStripeSessionResponse)
-	err := c.cc.Invoke(ctx, PaymentService_GetStripeSession_FullMethodName, in, out, cOpts...)
+	out := new(CreateStripeCheckoutSessionResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreateStripeCheckoutSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -151,16 +151,16 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - write:payment_information
 	DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error)
-	// Initiates the creation of a Stripe Checkout session for the specified account.
-	// This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
-	// Required permissions:
-	// - write:payment_information
-	CreateStripeSession(context.Context, *CreateStripeSessionRequest) (*CreateStripeSessionResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
 	// Required permissions:
 	// - write:payment_information
-	GetStripeSession(context.Context, *GetStripeSessionRequest) (*GetStripeSessionResponse, error)
+	GetStripeCheckoutSession(context.Context, *GetStripeCheckoutSessionRequest) (*GetStripeCheckoutSessionResponse, error)
+	// Initiates the creation of a Stripe Checkout session for the specified account.
+	// This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+	// Required permissions:
+	// - write:payment_information
+	CreateStripeCheckoutSession(context.Context, *CreateStripeCheckoutSessionRequest) (*CreateStripeCheckoutSessionResponse, error)
 	// Updates the current payment information associated with the account.
 	// After this change, the new payment information will be used for all future charges.
 	// This does not create a new payment information, it simply switches to one already linked to the account.
@@ -186,11 +186,11 @@ func (UnimplementedPaymentServiceServer) GetPaymentInformation(context.Context, 
 func (UnimplementedPaymentServiceServer) DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentInformation not implemented")
 }
-func (UnimplementedPaymentServiceServer) CreateStripeSession(context.Context, *CreateStripeSessionRequest) (*CreateStripeSessionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateStripeSession not implemented")
+func (UnimplementedPaymentServiceServer) GetStripeCheckoutSession(context.Context, *GetStripeCheckoutSessionRequest) (*GetStripeCheckoutSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStripeCheckoutSession not implemented")
 }
-func (UnimplementedPaymentServiceServer) GetStripeSession(context.Context, *GetStripeSessionRequest) (*GetStripeSessionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStripeSession not implemented")
+func (UnimplementedPaymentServiceServer) CreateStripeCheckoutSession(context.Context, *CreateStripeCheckoutSessionRequest) (*CreateStripeCheckoutSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateStripeCheckoutSession not implemented")
 }
 func (UnimplementedPaymentServiceServer) ChangePaymentInformation(context.Context, *ChangePaymentInformationRequest) (*ChangePaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangePaymentInformation not implemented")
@@ -270,38 +270,38 @@ func _PaymentService_DeletePaymentInformation_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_CreateStripeSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateStripeSessionRequest)
+func _PaymentService_GetStripeCheckoutSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStripeCheckoutSessionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).CreateStripeSession(ctx, in)
+		return srv.(PaymentServiceServer).GetStripeCheckoutSession(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_CreateStripeSession_FullMethodName,
+		FullMethod: PaymentService_GetStripeCheckoutSession_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).CreateStripeSession(ctx, req.(*CreateStripeSessionRequest))
+		return srv.(PaymentServiceServer).GetStripeCheckoutSession(ctx, req.(*GetStripeCheckoutSessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_GetStripeSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStripeSessionRequest)
+func _PaymentService_CreateStripeCheckoutSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateStripeCheckoutSessionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).GetStripeSession(ctx, in)
+		return srv.(PaymentServiceServer).CreateStripeCheckoutSession(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_GetStripeSession_FullMethodName,
+		FullMethod: PaymentService_CreateStripeCheckoutSession_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).GetStripeSession(ctx, req.(*GetStripeSessionRequest))
+		return srv.(PaymentServiceServer).CreateStripeCheckoutSession(ctx, req.(*CreateStripeCheckoutSessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -344,12 +344,12 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentService_DeletePaymentInformation_Handler,
 		},
 		{
-			MethodName: "CreateStripeSession",
-			Handler:    _PaymentService_CreateStripeSession_Handler,
+			MethodName: "GetStripeCheckoutSession",
+			Handler:    _PaymentService_GetStripeCheckoutSession_Handler,
 		},
 		{
-			MethodName: "GetStripeSession",
-			Handler:    _PaymentService_GetStripeSession_Handler,
+			MethodName: "CreateStripeCheckoutSession",
+			Handler:    _PaymentService_CreateStripeCheckoutSession_Handler,
 		},
 		{
 			MethodName: "ChangePaymentInformation",
