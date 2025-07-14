@@ -13,16 +13,6 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class SetupIntentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    SETUP_INTENT_STATUS_UNSPECIFIED: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_ACTION: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_PROCESSING: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_CANCELED: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_SUCCEEDED: _ClassVar[SetupIntentStatus]
-
 class PaymentProviderType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     PAYMENT_PROVIDER_TYPE_UNSPECIFIED: _ClassVar[PaymentProviderType]
@@ -38,13 +28,16 @@ class PaymentInformationStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     PAYMENT_INFORMATION_STATUS_ACTIVE: _ClassVar[PaymentInformationStatus]
     PAYMENT_INFORMATION_STATUS_INACTIVE: _ClassVar[PaymentInformationStatus]
     PAYMENT_INFORMATION_STATUS_PENDING: _ClassVar[PaymentInformationStatus]
-SETUP_INTENT_STATUS_UNSPECIFIED: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_ACTION: SetupIntentStatus
-SETUP_INTENT_STATUS_PROCESSING: SetupIntentStatus
-SETUP_INTENT_STATUS_CANCELED: SetupIntentStatus
-SETUP_INTENT_STATUS_SUCCEEDED: SetupIntentStatus
+
+class SetupIntentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SETUP_INTENT_STATUS_UNSPECIFIED: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_REQUIRES_ACTION: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_PROCESSING: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_CANCELED: _ClassVar[SetupIntentStatus]
+    SETUP_INTENT_STATUS_SUCCEEDED: _ClassVar[SetupIntentStatus]
 PAYMENT_PROVIDER_TYPE_UNSPECIFIED: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_STRIPE: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: PaymentProviderType
@@ -55,6 +48,13 @@ PAYMENT_INFORMATION_STATUS_UNSPECIFIED: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_ACTIVE: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_INACTIVE: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_PENDING: PaymentInformationStatus
+SETUP_INTENT_STATUS_UNSPECIFIED: SetupIntentStatus
+SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: SetupIntentStatus
+SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: SetupIntentStatus
+SETUP_INTENT_STATUS_REQUIRES_ACTION: SetupIntentStatus
+SETUP_INTENT_STATUS_PROCESSING: SetupIntentStatus
+SETUP_INTENT_STATUS_CANCELED: SetupIntentStatus
+SETUP_INTENT_STATUS_SUCCEEDED: SetupIntentStatus
 
 class ListPaymentInformationRequest(_message.Message):
     __slots__ = ("account_id",)
@@ -108,22 +108,6 @@ class CreateStripeSessionResponse(_message.Message):
     stripe_session: StripeSession
     def __init__(self, stripe_session: _Optional[_Union[StripeSession, _Mapping]] = ...) -> None: ...
 
-class StripeSession(_message.Message):
-    __slots__ = ("id", "url", "customer", "setup_intent_id", "setup_intent_status", "setup_intent_payment_method")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    URL_FIELD_NUMBER: _ClassVar[int]
-    CUSTOMER_FIELD_NUMBER: _ClassVar[int]
-    SETUP_INTENT_ID_FIELD_NUMBER: _ClassVar[int]
-    SETUP_INTENT_STATUS_FIELD_NUMBER: _ClassVar[int]
-    SETUP_INTENT_PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    url: str
-    customer: str
-    setup_intent_id: str
-    setup_intent_status: SetupIntentStatus
-    setup_intent_payment_method: str
-    def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[SetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
-
 class GetStripeSessionRequest(_message.Message):
     __slots__ = ("account_id", "session_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -152,29 +136,45 @@ class ChangePaymentInformationResponse(_message.Message):
     payment_information: PaymentInformation
     def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
 
+class StripeSession(_message.Message):
+    __slots__ = ("id", "url", "customer", "setup_intent_id", "setup_intent_status", "setup_intent_payment_method")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    URL_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_FIELD_NUMBER: _ClassVar[int]
+    SETUP_INTENT_ID_FIELD_NUMBER: _ClassVar[int]
+    SETUP_INTENT_STATUS_FIELD_NUMBER: _ClassVar[int]
+    SETUP_INTENT_PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    url: str
+    customer: str
+    setup_intent_id: str
+    setup_intent_status: SetupIntentStatus
+    setup_intent_payment_method: str
+    def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[SetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
+
 class PaymentInformation(_message.Message):
-    __slots__ = ("id", "account_id", "type", "status", "payment_provider_id", "payment_method", "billing_address", "created_at", "last_modified_at", "tax_id")
+    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method", "billing_address", "created_at", "last_modified_at", "tax_id", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
-    STATUS_FIELD_NUMBER: _ClassVar[int]
     PAYMENT_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     BILLING_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     TAX_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     type: PaymentProviderType
-    status: PaymentInformationStatus
     payment_provider_id: str
     payment_method: PaymentMethod
     billing_address: BillingAddress
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     tax_id: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., status: _Optional[_Union[PaymentInformationStatus, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ...) -> None: ...
+    status: PaymentInformationStatus
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., status: _Optional[_Union[PaymentInformationStatus, str]] = ...) -> None: ...
 
 class BillingAddress(_message.Message):
     __slots__ = ("name", "line1", "line2", "postal_code", "city", "state", "country", "country_formatted", "state_formatted", "tax_supported_country")

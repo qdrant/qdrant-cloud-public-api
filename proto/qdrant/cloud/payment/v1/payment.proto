@@ -129,42 +129,6 @@ message CreateStripeSessionResponse {
   StripeSession stripe_session = 1;
 }
 
-// Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-message StripeSession {
-  // The unique identifier of the Stripe Checkout session.
-  string id = 1;
-  // The URL to redirect the user to complete the Checkout session.
-  // This may be null if the session is incomplete or improperly initialized.
-  optional string url = 2;
-  // The Stripe customer ID associated with this session.
-  string customer = 3;
-  // The ID of the associated Stripe SetupIntent.
-  string setup_intent_id = 4;
-  // The status of the associated Stripe SetupIntent.
-  SetupIntentStatus setup_intent_status = 5;
-  // The payment method attached to the associated SetupIntent.
-  string setup_intent_payment_method = 6;
-}
-
-// Represents the status of a SetupIntent in Stripe.
-enum SetupIntentStatus {
-  // Default unspecified value.
-  SETUP_INTENT_STATUS_UNSPECIFIED = 0;
-  // A payment method is required to proceed.
-  SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
-  // The SetupIntent is ready to be confirmed.
-  SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
-  // The SetupIntent requires further action (e.g., 3D Secure).
-  SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
-  // The SetupIntent is being processed.
-  SETUP_INTENT_STATUS_PROCESSING = 4;
-  // The SetupIntent has been canceled.
-  SETUP_INTENT_STATUS_CANCELED = 5;
-  // The SetupIntent has succeeded.
-  SETUP_INTENT_STATUS_SUCCEEDED = 6;
-}
-
 // GetStripeSessionRequest is the request for the GetStripeSession function
 message GetStripeSessionRequest {
   // The identifier of the account (in GUID format).
@@ -195,6 +159,24 @@ message ChangePaymentInformationResponse {
   PaymentInformation payment_information = 1;
 }
 
+// Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message StripeSession {
+  // The unique identifier of the Stripe Checkout session.
+  string id = 1;
+  // The URL to redirect the user to complete the Checkout session.
+  // This may be null if the session is incomplete or improperly initialized.
+  optional string url = 2;
+  // The Stripe customer ID associated with this session.
+  string customer = 3;
+  // The ID of the associated Stripe SetupIntent.
+  string setup_intent_id = 4;
+  // The status of the associated Stripe SetupIntent.
+  SetupIntentStatus setup_intent_status = 5;
+  // The payment method attached to the associated SetupIntent.
+  string setup_intent_payment_method = 6;
+}
+
 // Represents a payment information.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // TODO: Is payment method a better name?
@@ -213,26 +195,26 @@ message PaymentInformation {
   // The type of the payment information provider.
   // This is a required field.
   PaymentProviderType type = 3;
-  // Payment information status.
-  PaymentInformationStatus status = 4;
   // The customer account identifier in the payment provider system.
   // This is a required field.
-  string payment_provider_id = 5;
+  string payment_provider_id = 4;
   // Represents the payment method details, such as card information.
   // This field is optional and only available for payment provider type Stripe for now.
-  optional PaymentMethod payment_method = 6;
+  optional PaymentMethod payment_method = 5;
   // The billing address associated with the payment information.
   // This field is optional and only available for payment provider type Stripe.
-  optional BillingAddress billing_address = 7;
+  optional BillingAddress billing_address = 6;
   // The timestamp when the payment information was created.
   // This is a read-only field and will be available after a payment information is created.
-  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp created_at = 7;
   // The timestamp when the payment information was last updated.
   // This is a read-only field and will be available after a payment information is created.
-  google.protobuf.Timestamp last_modified_at = 9;
+  google.protobuf.Timestamp last_modified_at = 8;
   // The tax ID associated with the payment information.
   // This is an optional field.
-  optional string tax_id = 10 [(buf.validate.field).string = {min_len: 1}];
+  optional string tax_id = 9 [(buf.validate.field).string = {min_len: 1}];
+  // Payment information status.
+  PaymentInformationStatus status = 10;
 }
 
 // PaymentProviderType defines the type of payment information.
@@ -308,4 +290,22 @@ message Card {
   int32 expiration_month = 3;
   // The expiration year of the card.
   int32 expiration_year = 4;
+}
+
+// Represents the status of a SetupIntent in Stripe.
+enum SetupIntentStatus {
+  // Default unspecified value.
+  SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+  // A payment method is required to proceed.
+  SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+  // The SetupIntent is ready to be confirmed.
+  SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+  // The SetupIntent requires further action (e.g., 3D Secure).
+  SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+  // The SetupIntent is being processed.
+  SETUP_INTENT_STATUS_PROCESSING = 4;
+  // The SetupIntent has been canceled.
+  SETUP_INTENT_STATUS_CANCELED = 5;
+  // The SetupIntent has succeeded.
+  SETUP_INTENT_STATUS_SUCCEEDED = 6;
 }

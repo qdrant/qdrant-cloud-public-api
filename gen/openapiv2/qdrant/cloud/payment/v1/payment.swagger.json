@@ -415,10 +415,6 @@
           "$ref": "#/definitions/v1PaymentProviderType",
           "description": "The type of the payment information provider.\nThis is a required field."
         },
-        "status": {
-          "$ref": "#/definitions/v1PaymentInformationStatus",
-          "description": "Payment information status."
-        },
         "paymentProviderId": {
           "type": "string",
           "description": "The customer account identifier in the payment provider system.\nThis is a required field."
@@ -444,6 +440,10 @@
         "taxId": {
           "type": "string",
           "description": "The tax ID associated with the payment information.\nThis is an optional field."
+        },
+        "status": {
+          "$ref": "#/definitions/v1PaymentInformationStatus",
+          "description": "Payment information status."
         }
       },
       "title": "Represents a payment information.\nTODO: Is payment method a better name?"

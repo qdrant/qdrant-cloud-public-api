@@ -195,62 +195,6 @@ export declare type CreateStripeSessionResponse = Message<"qdrant.cloud.payment.
 export declare const CreateStripeSessionResponseSchema: GenMessage<CreateStripeSessionResponse>;
 
 /**
- * Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
- *
- * @generated from message qdrant.cloud.payment.v1.StripeSession
- */
-export declare type StripeSession = Message<"qdrant.cloud.payment.v1.StripeSession"> & {
-  /**
-   * The unique identifier of the Stripe Checkout session.
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * The URL to redirect the user to complete the Checkout session.
-   * This may be null if the session is incomplete or improperly initialized.
-   *
-   * @generated from field: optional string url = 2;
-   */
-  url?: string;
-
-  /**
-   * The Stripe customer ID associated with this session.
-   *
-   * @generated from field: string customer = 3;
-   */
-  customer: string;
-
-  /**
-   * The ID of the associated Stripe SetupIntent.
-   *
-   * @generated from field: string setup_intent_id = 4;
-   */
-  setupIntentId: string;
-
-  /**
-   * The status of the associated Stripe SetupIntent.
-   *
-   * @generated from field: qdrant.cloud.payment.v1.SetupIntentStatus setup_intent_status = 5;
-   */
-  setupIntentStatus: SetupIntentStatus;
-
-  /**
-   * The payment method attached to the associated SetupIntent.
-   *
-   * @generated from field: string setup_intent_payment_method = 6;
-   */
-  setupIntentPaymentMethod: string;
-};
-
-/**
- * Describes the message qdrant.cloud.payment.v1.StripeSession.
- * Use `create(StripeSessionSchema)` to create a new message.
- */
-export declare const StripeSessionSchema: GenMessage<StripeSession>;
-
-/**
  * GetStripeSessionRequest is the request for the GetStripeSession function
  *
  * @generated from message qdrant.cloud.payment.v1.GetStripeSessionRequest
@@ -347,6 +291,62 @@ export declare type ChangePaymentInformationResponse = Message<"qdrant.cloud.pay
 export declare const ChangePaymentInformationResponseSchema: GenMessage<ChangePaymentInformationResponse>;
 
 /**
+ * Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
+ *
+ * @generated from message qdrant.cloud.payment.v1.StripeSession
+ */
+export declare type StripeSession = Message<"qdrant.cloud.payment.v1.StripeSession"> & {
+  /**
+   * The unique identifier of the Stripe Checkout session.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The URL to redirect the user to complete the Checkout session.
+   * This may be null if the session is incomplete or improperly initialized.
+   *
+   * @generated from field: optional string url = 2;
+   */
+  url?: string;
+
+  /**
+   * The Stripe customer ID associated with this session.
+   *
+   * @generated from field: string customer = 3;
+   */
+  customer: string;
+
+  /**
+   * The ID of the associated Stripe SetupIntent.
+   *
+   * @generated from field: string setup_intent_id = 4;
+   */
+  setupIntentId: string;
+
+  /**
+   * The status of the associated Stripe SetupIntent.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.SetupIntentStatus setup_intent_status = 5;
+   */
+  setupIntentStatus: SetupIntentStatus;
+
+  /**
+   * The payment method attached to the associated SetupIntent.
+   *
+   * @generated from field: string setup_intent_payment_method = 6;
+   */
+  setupIntentPaymentMethod: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.StripeSession.
+ * Use `create(StripeSessionSchema)` to create a new message.
+ */
+export declare const StripeSessionSchema: GenMessage<StripeSession>;
+
+/**
  * Represents a payment information.
  * TODO: Is payment method a better name?
  *
@@ -378,17 +378,10 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
   type: PaymentProviderType;
 
   /**
-   * Payment information status.
-   *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformationStatus status = 4;
-   */
-  status: PaymentInformationStatus;
-
-  /**
    * The customer account identifier in the payment provider system.
    * This is a required field.
    *
-   * @generated from field: string payment_provider_id = 5;
+   * @generated from field: string payment_provider_id = 4;
    */
   paymentProviderId: string;
 
@@ -396,7 +389,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * Represents the payment method details, such as card information.
    * This field is optional and only available for payment provider type Stripe for now.
    *
-   * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethod payment_method = 6;
+   * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethod payment_method = 5;
    */
   paymentMethod?: PaymentMethod;
 
@@ -404,7 +397,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * The billing address associated with the payment information.
    * This field is optional and only available for payment provider type Stripe.
    *
-   * @generated from field: optional qdrant.cloud.payment.v1.BillingAddress billing_address = 7;
+   * @generated from field: optional qdrant.cloud.payment.v1.BillingAddress billing_address = 6;
    */
   billingAddress?: BillingAddress;
 
@@ -412,7 +405,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * The timestamp when the payment information was created.
    * This is a read-only field and will be available after a payment information is created.
    *
-   * @generated from field: google.protobuf.Timestamp created_at = 8;
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
    */
   createdAt?: Timestamp;
 
@@ -420,7 +413,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * The timestamp when the payment information was last updated.
    * This is a read-only field and will be available after a payment information is created.
    *
-   * @generated from field: google.protobuf.Timestamp last_modified_at = 9;
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 8;
    */
   lastModifiedAt?: Timestamp;
 
@@ -428,9 +421,16 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * The tax ID associated with the payment information.
    * This is an optional field.
    *
-   * @generated from field: optional string tax_id = 10;
+   * @generated from field: optional string tax_id = 9;
    */
   taxId?: string;
+
+  /**
+   * Payment information status.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentInformationStatus status = 10;
+   */
+  status: PaymentInformationStatus;
 };
 
 /**
@@ -593,67 +593,6 @@ export declare type Card = Message<"qdrant.cloud.payment.v1.Card"> & {
 export declare const CardSchema: GenMessage<Card>;
 
 /**
- * Represents the status of a SetupIntent in Stripe.
- *
- * @generated from enum qdrant.cloud.payment.v1.SetupIntentStatus
- */
-export enum SetupIntentStatus {
-  /**
-   * Default unspecified value.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * A payment method is required to proceed.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
-   */
-  REQUIRES_PAYMENT_METHOD = 1,
-
-  /**
-   * The SetupIntent is ready to be confirmed.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
-   */
-  REQUIRES_CONFIRMATION = 2,
-
-  /**
-   * The SetupIntent requires further action (e.g., 3D Secure).
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
-   */
-  REQUIRES_ACTION = 3,
-
-  /**
-   * The SetupIntent is being processed.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_PROCESSING = 4;
-   */
-  PROCESSING = 4,
-
-  /**
-   * The SetupIntent has been canceled.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_CANCELED = 5;
-   */
-  CANCELED = 5,
-
-  /**
-   * The SetupIntent has succeeded.
-   *
-   * @generated from enum value: SETUP_INTENT_STATUS_SUCCEEDED = 6;
-   */
-  SUCCEEDED = 6,
-}
-
-/**
- * Describes the enum qdrant.cloud.payment.v1.SetupIntentStatus.
- */
-export declare const SetupIntentStatusSchema: GenEnum<SetupIntentStatus>;
-
-/**
  * PaymentProviderType defines the type of payment information.
  *
  * @generated from enum qdrant.cloud.payment.v1.PaymentProviderType
@@ -746,6 +685,67 @@ export enum PaymentInformationStatus {
  * Describes the enum qdrant.cloud.payment.v1.PaymentInformationStatus.
  */
 export declare const PaymentInformationStatusSchema: GenEnum<PaymentInformationStatus>;
+
+/**
+ * Represents the status of a SetupIntent in Stripe.
+ *
+ * @generated from enum qdrant.cloud.payment.v1.SetupIntentStatus
+ */
+export enum SetupIntentStatus {
+  /**
+   * Default unspecified value.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * A payment method is required to proceed.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+   */
+  REQUIRES_PAYMENT_METHOD = 1,
+
+  /**
+   * The SetupIntent is ready to be confirmed.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+   */
+  REQUIRES_CONFIRMATION = 2,
+
+  /**
+   * The SetupIntent requires further action (e.g., 3D Secure).
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+   */
+  REQUIRES_ACTION = 3,
+
+  /**
+   * The SetupIntent is being processed.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_PROCESSING = 4;
+   */
+  PROCESSING = 4,
+
+  /**
+   * The SetupIntent has been canceled.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_CANCELED = 5;
+   */
+  CANCELED = 5,
+
+  /**
+   * The SetupIntent has succeeded.
+   *
+   * @generated from enum value: SETUP_INTENT_STATUS_SUCCEEDED = 6;
+   */
+  SUCCEEDED = 6,
+}
+
+/**
+ * Describes the enum qdrant.cloud.payment.v1.SetupIntentStatus.
+ */
+export declare const SetupIntentStatusSchema: GenEnum<SetupIntentStatus>;
 
 /**
  * PaymentService is the API used to manage payment settings.
