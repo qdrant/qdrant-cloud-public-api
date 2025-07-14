@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package qdrant.cloud.billing.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// BillingService is the API used to retrieve billing information, such as invoices.
+service BillingService {
+  // Lists all invoices for the account identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListInvoices(ListInvoicesRequest) returns (ListInvoicesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/invoices"};
+  }
+}
+
+// ListInvoicesRequest is the request for the ListInvoices function
+message ListInvoicesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListInvoicesResponse is the response from the ListInvoices function
+message ListInvoicesResponse {
+  // The list of invoices.
+  repeated Invoice items = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// Invoice represents a billing invoice issued to an account.
+message Invoice {
+  // Unique identifier for the invoice.
+  string id = 1;
+  // Optional invoice unique identifier. It appears on emails sent to the
+  // customer for this invoice.
+  optional string number = 2;
+  // Total invoice amount.
+  int64 total_amount = 3;
+  // The timestamp when the invoice was created.
+  google.protobuf.Timestamp created_at = 4;
+  // The current status of the invoice.
+  InvoiceStatus status = 5;
+  // The URL to download the PDF for the invoice. If the invoice has not been
+  // finalized yet, this will be null.
+  optional string pdf_url = 6;
+}
+
+// The possible status of an invoice.
+enum InvoiceStatus {
+  // Unspecified
+  INVOICE_STATUS_UNSPECIFIED = 0;
+  // Draft
+  INVOICE_STATUS_DRAFT = 1;
+  // Open
+  INVOICE_STATUS_OPEN = 2;
+  // Void
+  INVOICE_STATUS_VOID = 3;
+  // Paid
+  INVOICE_STATUS_PAID = 4;
+  // Uncollectible
+  INVOICE_STATUS_UNCOLLECTIBLE = 5;
+}
