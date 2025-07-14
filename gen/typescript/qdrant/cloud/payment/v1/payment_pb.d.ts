@@ -244,11 +244,11 @@ export declare type CreateStripeCheckoutSessionResponse = Message<"qdrant.cloud.
 export declare const CreateStripeCheckoutSessionResponseSchema: GenMessage<CreateStripeCheckoutSessionResponse>;
 
 /**
- * ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
+ * SetDefaultPaymentInformationRequest is the request for the ChangePaymentInformation function
  *
- * @generated from message qdrant.cloud.payment.v1.ChangePaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
  */
-export declare type ChangePaymentInformationRequest = Message<"qdrant.cloud.payment.v1.ChangePaymentInformationRequest"> & {
+export declare type SetDefaultPaymentInformationRequest = Message<"qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    *
@@ -259,23 +259,23 @@ export declare type ChangePaymentInformationRequest = Message<"qdrant.cloud.paym
   /**
    * The identifier of the new payment information to set.
    *
-   * @generated from field: string new_payment_information_id = 3;
+   * @generated from field: string payment_information_id = 3;
    */
-  newPaymentInformationId: string;
+  paymentInformationId: string;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.ChangePaymentInformationRequest.
- * Use `create(ChangePaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest.
+ * Use `create(SetDefaultPaymentInformationRequestSchema)` to create a new message.
  */
-export declare const ChangePaymentInformationRequestSchema: GenMessage<ChangePaymentInformationRequest>;
+export declare const SetDefaultPaymentInformationRequestSchema: GenMessage<SetDefaultPaymentInformationRequest>;
 
 /**
- * ChangePaymentInformationResponse is the response returned after a successful update.
+ * SetDefaultPaymentInformationResponse is the response returned after a successful update.
  *
- * @generated from message qdrant.cloud.payment.v1.ChangePaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
  */
-export declare type ChangePaymentInformationResponse = Message<"qdrant.cloud.payment.v1.ChangePaymentInformationResponse"> & {
+export declare type SetDefaultPaymentInformationResponse = Message<"qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse"> & {
   /**
    * New payment information that has been set for the account.
    *
@@ -285,10 +285,10 @@ export declare type ChangePaymentInformationResponse = Message<"qdrant.cloud.pay
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.ChangePaymentInformationResponse.
- * Use `create(ChangePaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse.
+ * Use `create(SetDefaultPaymentInformationResponseSchema)` to create a new message.
  */
-export declare const ChangePaymentInformationResponseSchema: GenMessage<ChangePaymentInformationResponse>;
+export declare const SetDefaultPaymentInformationResponseSchema: GenMessage<SetDefaultPaymentInformationResponse>;
 
 /**
  * Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
@@ -823,12 +823,12 @@ export declare const PaymentService: GenService<{
    * Required permissions:
    * - write:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.ChangePaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation
    */
-  changePaymentInformation: {
+  setDefaultPaymentInformation: {
     methodKind: "unary";
-    input: typeof ChangePaymentInformationRequestSchema;
-    output: typeof ChangePaymentInformationResponseSchema;
+    input: typeof SetDefaultPaymentInformationRequestSchema;
+    output: typeof SetDefaultPaymentInformationResponseSchema;
   },
 }>;
 

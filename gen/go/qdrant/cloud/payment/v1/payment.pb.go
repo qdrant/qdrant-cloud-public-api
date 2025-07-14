@@ -711,31 +711,31 @@ func (x *CreateStripeCheckoutSessionResponse) GetStripeSession() *StripeCheckout
 	return nil
 }
 
-// ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
-type ChangePaymentInformationRequest struct {
+// SetDefaultPaymentInformationRequest is the request for the ChangePaymentInformation function
+type SetDefaultPaymentInformationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier of the new payment information to set.
-	NewPaymentInformationId string `protobuf:"bytes,3,opt,name=new_payment_information_id,json=newPaymentInformationId,proto3" json:"new_payment_information_id,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	PaymentInformationId string `protobuf:"bytes,3,opt,name=payment_information_id,json=paymentInformationId,proto3" json:"payment_information_id,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
-func (x *ChangePaymentInformationRequest) Reset() {
-	*x = ChangePaymentInformationRequest{}
+func (x *SetDefaultPaymentInformationRequest) Reset() {
+	*x = SetDefaultPaymentInformationRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ChangePaymentInformationRequest) String() string {
+func (x *SetDefaultPaymentInformationRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ChangePaymentInformationRequest) ProtoMessage() {}
+func (*SetDefaultPaymentInformationRequest) ProtoMessage() {}
 
-func (x *ChangePaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *SetDefaultPaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -747,27 +747,27 @@ func (x *ChangePaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangePaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*ChangePaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDefaultPaymentInformationRequest.ProtoReflect.Descriptor instead.
+func (*SetDefaultPaymentInformationRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *ChangePaymentInformationRequest) GetAccountId() string {
+func (x *SetDefaultPaymentInformationRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *ChangePaymentInformationRequest) GetNewPaymentInformationId() string {
+func (x *SetDefaultPaymentInformationRequest) GetPaymentInformationId() string {
 	if x != nil {
-		return x.NewPaymentInformationId
+		return x.PaymentInformationId
 	}
 	return ""
 }
 
-// ChangePaymentInformationResponse is the response returned after a successful update.
-type ChangePaymentInformationResponse struct {
+// SetDefaultPaymentInformationResponse is the response returned after a successful update.
+type SetDefaultPaymentInformationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// New payment information that has been set for the account.
 	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
@@ -775,20 +775,20 @@ type ChangePaymentInformationResponse struct {
 	sizeCache          protoimpl.SizeCache
 }
 
-func (x *ChangePaymentInformationResponse) Reset() {
-	*x = ChangePaymentInformationResponse{}
+func (x *SetDefaultPaymentInformationResponse) Reset() {
+	*x = SetDefaultPaymentInformationResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ChangePaymentInformationResponse) String() string {
+func (x *SetDefaultPaymentInformationResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ChangePaymentInformationResponse) ProtoMessage() {}
+func (*SetDefaultPaymentInformationResponse) ProtoMessage() {}
 
-func (x *ChangePaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *SetDefaultPaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -800,12 +800,12 @@ func (x *ChangePaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangePaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*ChangePaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDefaultPaymentInformationResponse.ProtoReflect.Descriptor instead.
+func (*SetDefaultPaymentInformationResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ChangePaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
+func (x *SetDefaultPaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
 	if x != nil {
 		return x.PaymentInformation
 	}
@@ -1331,12 +1331,12 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\fredirect_url\x18\x02 \x01(\tR\vredirectUrl\"|\n" +
 	"#CreateStripeCheckoutSessionResponse\x12U\n" +
-	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionR\rstripeSession\"\x90\x01\n" +
-	"\x1fChangePaymentInformationRequest\x12'\n" +
+	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionR\rstripeSession\"\x8d\x01\n" +
+	"#SetDefaultPaymentInformationRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12D\n" +
-	"\x1anew_payment_information_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x17newPaymentInformationId\"\x80\x01\n" +
-	" ChangePaymentInformationResponse\x12\\\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12=\n" +
+	"\x16payment_information_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x14paymentInformationId\"\x84\x01\n" +
+	"$SetDefaultPaymentInformationResponse\x12\\\n" +
 	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\xab\x02\n" +
 	"\x15StripeCheckoutSession\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
@@ -1406,14 +1406,14 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0\v\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\x81\f\n" +
 	"\x0ePaymentService\x12\xe8\x01\n" +
 	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"]\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02;\x129/api/payment/v1/accounts/{account_id}/payment-information\x12\xfe\x01\n" +
 	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\x88\x02\n" +
 	"\x18DeletePaymentInformation\x128.qdrant.cloud.payment.v1.DeletePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.DeletePaymentInformationResponse\"w\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02T*R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xf7\x01\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"f\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf3\x01\n" +
-	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xf6\x01\n" +
-	"\x18ChangePaymentInformation\x128.qdrant.cloud.payment.v1.ChangePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.ChangePaymentInformationResponse\"e\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02B\x1a@/api/payment/v1/accounts/{account_id}/change-payment-informationB\xfe\x01\n" +
+	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\x87\x02\n" +
+	"\x1cSetDefaultPaymentInformation\x12<.qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest\x1a=.qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse\"j\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02G\x1aE/api/payment/v1/accounts/{account_id}/set-default-payment-informationB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.payment.v1B\fPaymentProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/payment/v1;paymentv1\xa2\x02\x03QCP\xaa\x02\x17Qdrant.Cloud.Payment.V1\xca\x02\x17Qdrant\\Cloud\\Payment\\V1\xe2\x02#Qdrant\\Cloud\\Payment\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Payment::V1b\x06proto3"
 
 var (
@@ -1431,34 +1431,34 @@ func file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP() []byte {
 var file_qdrant_cloud_payment_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_qdrant_cloud_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_qdrant_cloud_payment_v1_payment_proto_goTypes = []any{
-	(PaymentProviderType)(0),                    // 0: qdrant.cloud.payment.v1.PaymentProviderType
-	(PaymentInformationStatus)(0),               // 1: qdrant.cloud.payment.v1.PaymentInformationStatus
-	(StripeSetupIntentStatus)(0),                // 2: qdrant.cloud.payment.v1.StripeSetupIntentStatus
-	(*ListPaymentInformationRequest)(nil),       // 3: qdrant.cloud.payment.v1.ListPaymentInformationRequest
-	(*ListPaymentInformationResponse)(nil),      // 4: qdrant.cloud.payment.v1.ListPaymentInformationResponse
-	(*GetPaymentInformationRequest)(nil),        // 5: qdrant.cloud.payment.v1.GetPaymentInformationRequest
-	(*GetPaymentInformationResponse)(nil),       // 6: qdrant.cloud.payment.v1.GetPaymentInformationResponse
-	(*DeletePaymentInformationRequest)(nil),     // 7: qdrant.cloud.payment.v1.DeletePaymentInformationRequest
-	(*DeletePaymentInformationResponse)(nil),    // 8: qdrant.cloud.payment.v1.DeletePaymentInformationResponse
-	(*GetStripeCheckoutSessionRequest)(nil),     // 9: qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
-	(*GetStripeCheckoutSessionResponse)(nil),    // 10: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
-	(*CreateStripeCheckoutSessionRequest)(nil),  // 11: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	(*CreateStripeCheckoutSessionResponse)(nil), // 12: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
-	(*ChangePaymentInformationRequest)(nil),     // 13: qdrant.cloud.payment.v1.ChangePaymentInformationRequest
-	(*ChangePaymentInformationResponse)(nil),    // 14: qdrant.cloud.payment.v1.ChangePaymentInformationResponse
-	(*StripeCheckoutSession)(nil),               // 15: qdrant.cloud.payment.v1.StripeCheckoutSession
-	(*PaymentInformation)(nil),                  // 16: qdrant.cloud.payment.v1.PaymentInformation
-	(*BillingAddress)(nil),                      // 17: qdrant.cloud.payment.v1.BillingAddress
-	(*PaymentMethod)(nil),                       // 18: qdrant.cloud.payment.v1.PaymentMethod
-	(*Card)(nil),                                // 19: qdrant.cloud.payment.v1.Card
-	(*timestamppb.Timestamp)(nil),               // 20: google.protobuf.Timestamp
+	(PaymentProviderType)(0),                     // 0: qdrant.cloud.payment.v1.PaymentProviderType
+	(PaymentInformationStatus)(0),                // 1: qdrant.cloud.payment.v1.PaymentInformationStatus
+	(StripeSetupIntentStatus)(0),                 // 2: qdrant.cloud.payment.v1.StripeSetupIntentStatus
+	(*ListPaymentInformationRequest)(nil),        // 3: qdrant.cloud.payment.v1.ListPaymentInformationRequest
+	(*ListPaymentInformationResponse)(nil),       // 4: qdrant.cloud.payment.v1.ListPaymentInformationResponse
+	(*GetPaymentInformationRequest)(nil),         // 5: qdrant.cloud.payment.v1.GetPaymentInformationRequest
+	(*GetPaymentInformationResponse)(nil),        // 6: qdrant.cloud.payment.v1.GetPaymentInformationResponse
+	(*DeletePaymentInformationRequest)(nil),      // 7: qdrant.cloud.payment.v1.DeletePaymentInformationRequest
+	(*DeletePaymentInformationResponse)(nil),     // 8: qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+	(*GetStripeCheckoutSessionRequest)(nil),      // 9: qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
+	(*GetStripeCheckoutSessionResponse)(nil),     // 10: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
+	(*CreateStripeCheckoutSessionRequest)(nil),   // 11: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
+	(*CreateStripeCheckoutSessionResponse)(nil),  // 12: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
+	(*SetDefaultPaymentInformationRequest)(nil),  // 13: qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
+	(*SetDefaultPaymentInformationResponse)(nil), // 14: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
+	(*StripeCheckoutSession)(nil),                // 15: qdrant.cloud.payment.v1.StripeCheckoutSession
+	(*PaymentInformation)(nil),                   // 16: qdrant.cloud.payment.v1.PaymentInformation
+	(*BillingAddress)(nil),                       // 17: qdrant.cloud.payment.v1.BillingAddress
+	(*PaymentMethod)(nil),                        // 18: qdrant.cloud.payment.v1.PaymentMethod
+	(*Card)(nil),                                 // 19: qdrant.cloud.payment.v1.Card
+	(*timestamppb.Timestamp)(nil),                // 20: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
 	16, // 0: qdrant.cloud.payment.v1.ListPaymentInformationResponse.items:type_name -> qdrant.cloud.payment.v1.PaymentInformation
 	16, // 1: qdrant.cloud.payment.v1.GetPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
 	15, // 2: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
 	15, // 3: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
-	16, // 4: qdrant.cloud.payment.v1.ChangePaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	16, // 4: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
 	2,  // 5: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.StripeSetupIntentStatus
 	0,  // 6: qdrant.cloud.payment.v1.PaymentInformation.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
 	18, // 7: qdrant.cloud.payment.v1.PaymentInformation.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
@@ -1472,13 +1472,13 @@ var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
 	7,  // 15: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:input_type -> qdrant.cloud.payment.v1.DeletePaymentInformationRequest
 	9,  // 16: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
 	11, // 17: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	13, // 18: qdrant.cloud.payment.v1.PaymentService.ChangePaymentInformation:input_type -> qdrant.cloud.payment.v1.ChangePaymentInformationRequest
+	13, // 18: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:input_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
 	4,  // 19: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:output_type -> qdrant.cloud.payment.v1.ListPaymentInformationResponse
 	6,  // 20: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:output_type -> qdrant.cloud.payment.v1.GetPaymentInformationResponse
 	8,  // 21: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:output_type -> qdrant.cloud.payment.v1.DeletePaymentInformationResponse
 	10, // 22: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
 	12, // 23: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
-	14, // 24: qdrant.cloud.payment.v1.PaymentService.ChangePaymentInformation:output_type -> qdrant.cloud.payment.v1.ChangePaymentInformationResponse
+	14, // 24: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:output_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
 	19, // [19:25] is the sub-list for method output_type
 	13, // [13:19] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name

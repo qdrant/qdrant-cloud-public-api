@@ -62,11 +62,11 @@ service PaymentService {
   // This does not create a new payment information, it simply switches to one already linked to the account.
   // Required permissions:
   // - write:payment_information
-  rpc ChangePaymentInformation(ChangePaymentInformationRequest) returns (ChangePaymentInformationResponse) {
+  rpc SetDefaultPaymentInformation(SetDefaultPaymentInformationRequest) returns (SetDefaultPaymentInformationResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {put: "/api/payment/v1/accounts/{account_id}/change-payment-information"};
+    option (google.api.http) = {put: "/api/payment/v1/accounts/{account_id}/set-default-payment-information"};
   }
 }
 
@@ -145,16 +145,16 @@ message CreateStripeCheckoutSessionResponse {
   StripeCheckoutSession stripe_session = 1;
 }
 
-// ChangePaymentInformationRequest is the request for the ChangePaymentInformation function
-message ChangePaymentInformationRequest {
+// SetDefaultPaymentInformationRequest is the request for the ChangePaymentInformation function
+message SetDefaultPaymentInformationRequest {
   // The identifier of the account (in GUID format).
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the new payment information to set.
-  string new_payment_information_id = 3 [(buf.validate.field).string = {min_len: 1}];
+  string payment_information_id = 3 [(buf.validate.field).string = {min_len: 1}];
 }
 
-// ChangePaymentInformationResponse is the response returned after a successful update.
-message ChangePaymentInformationResponse {
+// SetDefaultPaymentInformationResponse is the response returned after a successful update.
+message SetDefaultPaymentInformationResponse {
   // New payment information that has been set for the account.
   PaymentInformation payment_information = 1;
 }

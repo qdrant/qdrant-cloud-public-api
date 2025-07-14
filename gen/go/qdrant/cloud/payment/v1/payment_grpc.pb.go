@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_ListPaymentInformation_FullMethodName      = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
-	PaymentService_GetPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
-	PaymentService_DeletePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
-	PaymentService_GetStripeCheckoutSession_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
-	PaymentService_CreateStripeCheckoutSession_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
-	PaymentService_ChangePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/ChangePaymentInformation"
+	PaymentService_ListPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
+	PaymentService_GetPaymentInformation_FullMethodName        = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
+	PaymentService_DeletePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
+	PaymentService_GetStripeCheckoutSession_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
+	PaymentService_CreateStripeCheckoutSession_FullMethodName  = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
+	PaymentService_SetDefaultPaymentInformation_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/SetDefaultPaymentInformation"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -61,7 +61,7 @@ type PaymentServiceClient interface {
 	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
-	ChangePaymentInformation(ctx context.Context, in *ChangePaymentInformationRequest, opts ...grpc.CallOption) (*ChangePaymentInformationResponse, error)
+	SetDefaultPaymentInformation(ctx context.Context, in *SetDefaultPaymentInformationRequest, opts ...grpc.CallOption) (*SetDefaultPaymentInformationResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -122,10 +122,10 @@ func (c *paymentServiceClient) CreateStripeCheckoutSession(ctx context.Context, 
 	return out, nil
 }
 
-func (c *paymentServiceClient) ChangePaymentInformation(ctx context.Context, in *ChangePaymentInformationRequest, opts ...grpc.CallOption) (*ChangePaymentInformationResponse, error) {
+func (c *paymentServiceClient) SetDefaultPaymentInformation(ctx context.Context, in *SetDefaultPaymentInformationRequest, opts ...grpc.CallOption) (*SetDefaultPaymentInformationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ChangePaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_ChangePaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(SetDefaultPaymentInformationResponse)
+	err := c.cc.Invoke(ctx, PaymentService_SetDefaultPaymentInformation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -166,7 +166,7 @@ type PaymentServiceServer interface {
 	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
-	ChangePaymentInformation(context.Context, *ChangePaymentInformationRequest) (*ChangePaymentInformationResponse, error)
+	SetDefaultPaymentInformation(context.Context, *SetDefaultPaymentInformationRequest) (*SetDefaultPaymentInformationResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }
 
@@ -192,8 +192,8 @@ func (UnimplementedPaymentServiceServer) GetStripeCheckoutSession(context.Contex
 func (UnimplementedPaymentServiceServer) CreateStripeCheckoutSession(context.Context, *CreateStripeCheckoutSessionRequest) (*CreateStripeCheckoutSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStripeCheckoutSession not implemented")
 }
-func (UnimplementedPaymentServiceServer) ChangePaymentInformation(context.Context, *ChangePaymentInformationRequest) (*ChangePaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangePaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) SetDefaultPaymentInformation(context.Context, *SetDefaultPaymentInformationRequest) (*SetDefaultPaymentInformationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDefaultPaymentInformation not implemented")
 }
 func (UnimplementedPaymentServiceServer) mustEmbedUnimplementedPaymentServiceServer() {}
 func (UnimplementedPaymentServiceServer) testEmbeddedByValue()                        {}
@@ -306,20 +306,20 @@ func _PaymentService_CreateStripeCheckoutSession_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_ChangePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChangePaymentInformationRequest)
+func _PaymentService_SetDefaultPaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDefaultPaymentInformationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).ChangePaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).SetDefaultPaymentInformation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_ChangePaymentInformation_FullMethodName,
+		FullMethod: PaymentService_SetDefaultPaymentInformation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).ChangePaymentInformation(ctx, req.(*ChangePaymentInformationRequest))
+		return srv.(PaymentServiceServer).SetDefaultPaymentInformation(ctx, req.(*SetDefaultPaymentInformationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -352,8 +352,8 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentService_CreateStripeCheckoutSession_Handler,
 		},
 		{
-			MethodName: "ChangePaymentInformation",
-			Handler:    _PaymentService_ChangePaymentInformation_Handler,
+			MethodName: "SetDefaultPaymentInformation",
+			Handler:    _PaymentService_SetDefaultPaymentInformation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
