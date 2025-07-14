@@ -322,20 +322,18 @@ type MeteringItem struct {
 	// The type of the billable entity (e.g., "ClusterBooking").
 	// TODO do we want to have a list (enum) of billable resources?
 	BillableEntityType string `protobuf:"bytes,7,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
-	// TODO in my account, I only see `aws`, `azure`, `gcp`. Are there other "partners"? Could this be renamed to `cloud_provider_id`?
-	Partner string `protobuf:"bytes,8,opt,name=partner,proto3" json:"partner,omitempty"`
 	// The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
-	PricePerHour int32 `protobuf:"varint,9,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
+	PricePerHour int32 `protobuf:"varint,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	// Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
-	UsageHours float64 `protobuf:"fixed64,10,opt,name=usage_hours,json=usageHours,proto3" json:"usage_hours,omitempty"`
+	UsageHours float64 `protobuf:"fixed64,9,opt,name=usage_hours,json=usageHours,proto3" json:"usage_hours,omitempty"`
 	// The total charge for this item, in millicents.
-	AmountMillicents int64 `protobuf:"varint,11,opt,name=amount_millicents,json=amountMillicents,proto3" json:"amount_millicents,omitempty"`
+	AmountMillicents int64 `protobuf:"varint,10,opt,name=amount_millicents,json=amountMillicents,proto3" json:"amount_millicents,omitempty"`
 	// The total discount applied to this item, in millicents.
-	DiscountAmountMillicents *int64 `protobuf:"varint,12,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
+	DiscountAmountMillicents *int64 `protobuf:"varint,11,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
 	// The Discount applied as a percentage (e.g., 12.5).
-	DiscountAmountPercent *float64 `protobuf:"fixed64,13,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
+	DiscountAmountPercent *float64 `protobuf:"fixed64,12,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
 	// Currency of the different amount values, in ISO 4217 format (e.g., "USD").
-	Currency      string `protobuf:"bytes,14,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency      string `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -419,13 +417,6 @@ func (x *MeteringItem) GetBillableEntityType() string {
 	return ""
 }
 
-func (x *MeteringItem) GetPartner() string {
-	if x != nil {
-		return x.Partner
-	}
-	return ""
-}
-
 func (x *MeteringItem) GetPricePerHour() int32 {
 	if x != nil {
 		return x.PricePerHour
@@ -489,7 +480,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x04year\x18\x01 \x01(\x05R\x04year\x12\x14\n" +
 	"\x05month\x18\x02 \x01(\x05R\x05month\x12+\n" +
 	"\x11amount_millicents\x18\x03 \x01(\x03R\x10amountMillicents\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\xa6\x05\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\x8c\x05\n" +
 	"\fMeteringItem\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x1d\n" +
@@ -500,16 +491,15 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
 	"\x12billable_entity_id\x18\x06 \x01(\tR\x10billableEntityId\x120\n" +
-	"\x14billable_entity_type\x18\a \x01(\tR\x12billableEntityType\x12\x18\n" +
-	"\apartner\x18\b \x01(\tR\apartner\x12$\n" +
-	"\x0eprice_per_hour\x18\t \x01(\x05R\fpricePerHour\x12\x1f\n" +
-	"\vusage_hours\x18\n" +
-	" \x01(\x01R\n" +
+	"\x14billable_entity_type\x18\a \x01(\tR\x12billableEntityType\x12$\n" +
+	"\x0eprice_per_hour\x18\b \x01(\x05R\fpricePerHour\x12\x1f\n" +
+	"\vusage_hours\x18\t \x01(\x01R\n" +
 	"usageHours\x12+\n" +
-	"\x11amount_millicents\x18\v \x01(\x03R\x10amountMillicents\x12A\n" +
-	"\x1adiscount_amount_millicents\x18\f \x01(\x03H\x00R\x18discountAmountMillicents\x88\x01\x01\x12;\n" +
-	"\x17discount_amount_percent\x18\r \x01(\x01H\x01R\x15discountAmountPercent\x88\x01\x01\x12\x1a\n" +
-	"\bcurrency\x18\x0e \x01(\tR\bcurrencyB\x1d\n" +
+	"\x11amount_millicents\x18\n" +
+	" \x01(\x03R\x10amountMillicents\x12A\n" +
+	"\x1adiscount_amount_millicents\x18\v \x01(\x03H\x00R\x18discountAmountMillicents\x88\x01\x01\x12;\n" +
+	"\x17discount_amount_percent\x18\f \x01(\x01H\x01R\x15discountAmountPercent\x88\x01\x01\x12\x1a\n" +
+	"\bcurrency\x18\r \x01(\tR\bcurrencyB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xc7\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +

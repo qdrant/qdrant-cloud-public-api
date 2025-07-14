@@ -207,51 +207,44 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
   billableEntityType: string;
 
   /**
-   * TODO in my account, I only see `aws`, `azure`, `gcp`. Are there other "partners"? Could this be renamed to `cloud_provider_id`?
-   *
-   * @generated from field: string partner = 8;
-   */
-  partner: string;
-
-  /**
    * The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
    *
-   * @generated from field: int32 price_per_hour = 9;
+   * @generated from field: int32 price_per_hour = 8;
    */
   pricePerHour: number;
 
   /**
    * Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
    *
-   * @generated from field: double usage_hours = 10;
+   * @generated from field: double usage_hours = 9;
    */
   usageHours: number;
 
   /**
    * The total charge for this item, in millicents.
    *
-   * @generated from field: int64 amount_millicents = 11;
+   * @generated from field: int64 amount_millicents = 10;
    */
   amountMillicents: bigint;
 
   /**
    * The total discount applied to this item, in millicents.
    *
-   * @generated from field: optional int64 discount_amount_millicents = 12;
+   * @generated from field: optional int64 discount_amount_millicents = 11;
    */
   discountAmountMillicents?: bigint;
 
   /**
    * The Discount applied as a percentage (e.g., 12.5).
    *
-   * @generated from field: optional double discount_amount_percent = 13;
+   * @generated from field: optional double discount_amount_percent = 12;
    */
   discountAmountPercent?: number;
 
   /**
    * Currency of the different amount values, in ISO 4217 format (e.g., "USD").
    *
-   * @generated from field: string currency = 14;
+   * @generated from field: string currency = 13;
    */
   currency: string;
 };

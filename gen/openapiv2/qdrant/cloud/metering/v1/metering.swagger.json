@@ -187,10 +187,6 @@
           "type": "string",
           "title": "The type of the billable entity (e.g., \"ClusterBooking\").\nTODO do we want to have a list (enum) of billable resources?"
         },
-        "partner": {
-          "type": "string",
-          "title": "TODO in my account, I only see `aws`, `azure`, `gcp`. Are there other \"partners\"? Could this be renamed to `cloud_provider_id`?"
-        },
         "pricePerHour": {
           "type": "integer",
           "format": "int32",
