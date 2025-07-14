@@ -18,7 +18,7 @@
   "paths": {
     "/api/payment/v1/accounts/{accountId}/payment-information": {
       "get": {
-        "summary": "Lists all payment information known by the system for the provided account.\nRequired permissions:\n- read:payment_information\nTODO: How user can know which payment information is used for charging when there are multiple payment information?",
+        "summary": "Lists all payment information known by the system for the provided account.\nRequired permissions:\n- read:payment_information",
         "operationId": "PaymentService_ListPaymentInformation",
         "responses": {
           "200": {
@@ -430,6 +430,10 @@
         "taxId": {
           "type": "string",
           "description": "The tax ID associated with the payment information.\nThis is an optional field."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "The us default flag indicates if this payment information is the default one for the account.\nDefault payment information is used for all charges in the account."
         },
         "status": {
           "$ref": "#/definitions/v1PaymentInformationStatus",

@@ -55,7 +55,6 @@ class PaymentServiceServicer(object):
         """Lists all payment information known by the system for the provided account.
         Required permissions:
         - read:payment_information
-        TODO: How user can know which payment information is used for charging when there are multiple payment information?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -153,7 +153,7 @@ class StripeCheckoutSession(_message.Message):
     def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[StripeSetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
 
 class PaymentInformation(_message.Message):
-    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method", "billing_address", "created_at", "last_modified_at", "tax_id", "status")
+    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method", "billing_address", "created_at", "last_modified_at", "tax_id", "is_default", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -163,6 +163,7 @@ class PaymentInformation(_message.Message):
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     TAX_ID_FIELD_NUMBER: _ClassVar[int]
+    IS_DEFAULT_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
@@ -173,8 +174,9 @@ class PaymentInformation(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     tax_id: str
+    is_default: bool
     status: PaymentInformationStatus
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., status: _Optional[_Union[PaymentInformationStatus, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: bool = ..., status: _Optional[_Union[PaymentInformationStatus, str]] = ...) -> None: ...
 
 class BillingAddress(_message.Message):
     __slots__ = ("name", "line1", "line2", "postal_code", "city", "state", "country", "country_formatted", "state_formatted", "tax_supported_country")

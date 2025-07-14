@@ -12,7 +12,6 @@ service PaymentService {
   // Lists all payment information known by the system for the provided account.
   // Required permissions:
   // - read:payment_information
-  // TODO: How user can know which payment information is used for charging when there are multiple payment information?
   rpc ListPaymentInformation(ListPaymentInformationRequest) returns (ListPaymentInformationResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
@@ -213,8 +212,11 @@ message PaymentInformation {
   // The tax ID associated with the payment information.
   // This is an optional field.
   optional string tax_id = 9 [(buf.validate.field).string = {min_len: 1}];
+  // The us default flag indicates if this payment information is the default one for the account.
+  // Default payment information is used for all charges in the account.
+  bool is_default = 10;
   // Payment information status.
-  PaymentInformationStatus status = 10;
+  PaymentInformationStatus status = 11;
 }
 
 // PaymentProviderType defines the type of payment information.

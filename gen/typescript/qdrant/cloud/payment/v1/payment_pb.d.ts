@@ -426,9 +426,17 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
   taxId?: string;
 
   /**
+   * The us default flag indicates if this payment information is the default one for the account.
+   * Default payment information is used for all charges in the account.
+   *
+   * @generated from field: bool is_default = 10;
+   */
+  isDefault: boolean;
+
+  /**
    * Payment information status.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformationStatus status = 10;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentInformationStatus status = 11;
    */
   status: PaymentInformationStatus;
 };
@@ -757,7 +765,6 @@ export declare const PaymentService: GenService<{
    * Lists all payment information known by the system for the provided account.
    * Required permissions:
    * - read:payment_information
-   * TODO: How user can know which payment information is used for charging when there are multiple payment information?
    *
    * @generated from rpc qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation
    */

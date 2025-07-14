@@ -935,8 +935,11 @@ type PaymentInformation struct {
 	// The tax ID associated with the payment information.
 	// This is an optional field.
 	TaxId *string `protobuf:"bytes,9,opt,name=tax_id,json=taxId,proto3,oneof" json:"tax_id,omitempty"`
+	// The us default flag indicates if this payment information is the default one for the account.
+	// Default payment information is used for all charges in the account.
+	IsDefault bool `protobuf:"varint,10,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
 	// Payment information status.
-	Status        PaymentInformationStatus `protobuf:"varint,10,opt,name=status,proto3,enum=qdrant.cloud.payment.v1.PaymentInformationStatus" json:"status,omitempty"`
+	Status        PaymentInformationStatus `protobuf:"varint,11,opt,name=status,proto3,enum=qdrant.cloud.payment.v1.PaymentInformationStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1032,6 +1035,13 @@ func (x *PaymentInformation) GetTaxId() string {
 		return *x.TaxId
 	}
 	return ""
+}
+
+func (x *PaymentInformation) GetIsDefault() bool {
+	if x != nil {
+		return x.IsDefault
+	}
+	return false
 }
 
 func (x *PaymentInformation) GetStatus() PaymentInformationStatus {
@@ -1345,7 +1355,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xc6\x06\n" +
+	"\x04_url\"\xe5\x06\n" +
 	"\x12PaymentInformation\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1357,9 +1367,11 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12#\n" +
-	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x05taxId\x88\x01\x01\x12I\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e21.qdrant.cloud.payment.v1.PaymentInformationStatusR\x06status:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
+	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x05taxId\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"is_default\x18\n" +
+	" \x01(\bR\tisDefault\x12I\n" +
+	"\x06status\x18\v \x01(\x0e21.qdrant.cloud.payment.v1.PaymentInformationStatusR\x06status:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
 	"\x16payment_information.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x11\n" +
 	"\x0f_payment_methodB\x12\n" +
 	"\x10_billing_addressB\t\n" +

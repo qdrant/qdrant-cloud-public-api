@@ -36,7 +36,6 @@ type PaymentServiceClient interface {
 	// Lists all payment information known by the system for the provided account.
 	// Required permissions:
 	// - read:payment_information
-	// TODO: How user can know which payment information is used for charging when there are multiple payment information?
 	ListPaymentInformation(ctx context.Context, in *ListPaymentInformationRequest, opts ...grpc.CallOption) (*ListPaymentInformationResponse, error)
 	// Gets the payment information identified by the given ID.
 	// Required permissions:
@@ -141,7 +140,6 @@ type PaymentServiceServer interface {
 	// Lists all payment information known by the system for the provided account.
 	// Required permissions:
 	// - read:payment_information
-	// TODO: How user can know which payment information is used for charging when there are multiple payment information?
 	ListPaymentInformation(context.Context, *ListPaymentInformationRequest) (*ListPaymentInformationResponse, error)
 	// Gets the payment information identified by the given ID.
 	// Required permissions:
