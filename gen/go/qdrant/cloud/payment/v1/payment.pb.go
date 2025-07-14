@@ -148,71 +148,71 @@ func (PaymentInformationStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 // Represents the status of a SetupIntent in Stripe.
-type SetupIntentStatus int32
+type StripeSetupIntentStatus int32
 
 const (
 	// Default unspecified value.
-	SetupIntentStatus_SETUP_INTENT_STATUS_UNSPECIFIED SetupIntentStatus = 0
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED StripeSetupIntentStatus = 0
 	// A payment method is required to proceed.
-	SetupIntentStatus_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD SetupIntentStatus = 1
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD StripeSetupIntentStatus = 1
 	// The SetupIntent is ready to be confirmed.
-	SetupIntentStatus_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION SetupIntentStatus = 2
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION StripeSetupIntentStatus = 2
 	// The SetupIntent requires further action (e.g., 3D Secure).
-	SetupIntentStatus_SETUP_INTENT_STATUS_REQUIRES_ACTION SetupIntentStatus = 3
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION StripeSetupIntentStatus = 3
 	// The SetupIntent is being processed.
-	SetupIntentStatus_SETUP_INTENT_STATUS_PROCESSING SetupIntentStatus = 4
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_PROCESSING StripeSetupIntentStatus = 4
 	// The SetupIntent has been canceled.
-	SetupIntentStatus_SETUP_INTENT_STATUS_CANCELED SetupIntentStatus = 5
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_CANCELED StripeSetupIntentStatus = 5
 	// The SetupIntent has succeeded.
-	SetupIntentStatus_SETUP_INTENT_STATUS_SUCCEEDED SetupIntentStatus = 6
+	StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_SUCCEEDED StripeSetupIntentStatus = 6
 )
 
-// Enum value maps for SetupIntentStatus.
+// Enum value maps for StripeSetupIntentStatus.
 var (
-	SetupIntentStatus_name = map[int32]string{
-		0: "SETUP_INTENT_STATUS_UNSPECIFIED",
-		1: "SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD",
-		2: "SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION",
-		3: "SETUP_INTENT_STATUS_REQUIRES_ACTION",
-		4: "SETUP_INTENT_STATUS_PROCESSING",
-		5: "SETUP_INTENT_STATUS_CANCELED",
-		6: "SETUP_INTENT_STATUS_SUCCEEDED",
+	StripeSetupIntentStatus_name = map[int32]string{
+		0: "STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED",
+		1: "STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD",
+		2: "STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION",
+		3: "STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION",
+		4: "STRIPE_SETUP_INTENT_STATUS_PROCESSING",
+		5: "STRIPE_SETUP_INTENT_STATUS_CANCELED",
+		6: "STRIPE_SETUP_INTENT_STATUS_SUCCEEDED",
 	}
-	SetupIntentStatus_value = map[string]int32{
-		"SETUP_INTENT_STATUS_UNSPECIFIED":             0,
-		"SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD": 1,
-		"SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION":   2,
-		"SETUP_INTENT_STATUS_REQUIRES_ACTION":         3,
-		"SETUP_INTENT_STATUS_PROCESSING":              4,
-		"SETUP_INTENT_STATUS_CANCELED":                5,
-		"SETUP_INTENT_STATUS_SUCCEEDED":               6,
+	StripeSetupIntentStatus_value = map[string]int32{
+		"STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED":             0,
+		"STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD": 1,
+		"STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION":   2,
+		"STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION":         3,
+		"STRIPE_SETUP_INTENT_STATUS_PROCESSING":              4,
+		"STRIPE_SETUP_INTENT_STATUS_CANCELED":                5,
+		"STRIPE_SETUP_INTENT_STATUS_SUCCEEDED":               6,
 	}
 )
 
-func (x SetupIntentStatus) Enum() *SetupIntentStatus {
-	p := new(SetupIntentStatus)
+func (x StripeSetupIntentStatus) Enum() *StripeSetupIntentStatus {
+	p := new(StripeSetupIntentStatus)
 	*p = x
 	return p
 }
 
-func (x SetupIntentStatus) String() string {
+func (x StripeSetupIntentStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SetupIntentStatus) Descriptor() protoreflect.EnumDescriptor {
+func (StripeSetupIntentStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_payment_v1_payment_proto_enumTypes[2].Descriptor()
 }
 
-func (SetupIntentStatus) Type() protoreflect.EnumType {
+func (StripeSetupIntentStatus) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_payment_v1_payment_proto_enumTypes[2]
 }
 
-func (x SetupIntentStatus) Number() protoreflect.EnumNumber {
+func (x StripeSetupIntentStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SetupIntentStatus.Descriptor instead.
-func (SetupIntentStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use StripeSetupIntentStatus.Descriptor instead.
+func (StripeSetupIntentStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
@@ -825,7 +825,7 @@ type StripeCheckoutSession struct {
 	// The ID of the associated Stripe SetupIntent.
 	SetupIntentId string `protobuf:"bytes,4,opt,name=setup_intent_id,json=setupIntentId,proto3" json:"setup_intent_id,omitempty"`
 	// The status of the associated Stripe SetupIntent.
-	SetupIntentStatus SetupIntentStatus `protobuf:"varint,5,opt,name=setup_intent_status,json=setupIntentStatus,proto3,enum=qdrant.cloud.payment.v1.SetupIntentStatus" json:"setup_intent_status,omitempty"`
+	SetupIntentStatus StripeSetupIntentStatus `protobuf:"varint,5,opt,name=setup_intent_status,json=setupIntentStatus,proto3,enum=qdrant.cloud.payment.v1.StripeSetupIntentStatus" json:"setup_intent_status,omitempty"`
 	// The payment method attached to the associated SetupIntent.
 	SetupIntentPaymentMethod string `protobuf:"bytes,6,opt,name=setup_intent_payment_method,json=setupIntentPaymentMethod,proto3" json:"setup_intent_payment_method,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -890,11 +890,11 @@ func (x *StripeCheckoutSession) GetSetupIntentId() string {
 	return ""
 }
 
-func (x *StripeCheckoutSession) GetSetupIntentStatus() SetupIntentStatus {
+func (x *StripeCheckoutSession) GetSetupIntentStatus() StripeSetupIntentStatus {
 	if x != nil {
 		return x.SetupIntentStatus
 	}
-	return SetupIntentStatus_SETUP_INTENT_STATUS_UNSPECIFIED
+	return StripeSetupIntentStatus_STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED
 }
 
 func (x *StripeCheckoutSession) GetSetupIntentPaymentMethod() string {
@@ -1337,13 +1337,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12D\n" +
 	"\x1anew_payment_information_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x17newPaymentInformationId\"\x80\x01\n" +
 	" ChangePaymentInformationResponse\x12\\\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\xa5\x02\n" +
+	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\xab\x02\n" +
 	"\x15StripeCheckoutSession\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
 	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01\x12\x1a\n" +
 	"\bcustomer\x18\x03 \x01(\tR\bcustomer\x12&\n" +
-	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12Z\n" +
-	"\x13setup_intent_status\x18\x05 \x01(\x0e2*.qdrant.cloud.payment.v1.SetupIntentStatusR\x11setupIntentStatus\x12=\n" +
+	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
+	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
 	"\x04_url\"\xc6\x06\n" +
 	"\x12PaymentInformation\x12\x0e\n" +
@@ -1398,15 +1398,15 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"&PAYMENT_INFORMATION_STATUS_UNSPECIFIED\x10\x00\x12%\n" +
 	"!PAYMENT_INFORMATION_STATUS_ACTIVE\x10\x01\x12'\n" +
 	"#PAYMENT_INFORMATION_STATUS_INACTIVE\x10\x02\x12&\n" +
-	"\"PAYMENT_INFORMATION_STATUS_PENDING\x10\x03*\xaa\x02\n" +
-	"\x11SetupIntentStatus\x12#\n" +
-	"\x1fSETUP_INTENT_STATUS_UNSPECIFIED\x10\x00\x12/\n" +
-	"+SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD\x10\x01\x12-\n" +
-	")SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION\x10\x02\x12'\n" +
-	"#SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12\"\n" +
-	"\x1eSETUP_INTENT_STATUS_PROCESSING\x10\x04\x12 \n" +
-	"\x1cSETUP_INTENT_STATUS_CANCELED\x10\x05\x12!\n" +
-	"\x1dSETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0\v\n" +
+	"\"PAYMENT_INFORMATION_STATUS_PENDING\x10\x03*\xe1\x02\n" +
+	"\x17StripeSetupIntentStatus\x12*\n" +
+	"&STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED\x10\x00\x126\n" +
+	"2STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD\x10\x01\x124\n" +
+	"0STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION\x10\x02\x12.\n" +
+	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
+	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
+	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0\v\n" +
 	"\x0ePaymentService\x12\xe8\x01\n" +
 	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"]\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02;\x129/api/payment/v1/accounts/{account_id}/payment-information\x12\xfe\x01\n" +
 	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\x88\x02\n" +
@@ -1433,7 +1433,7 @@ var file_qdrant_cloud_payment_v1_payment_proto_msgTypes = make([]protoimpl.Messa
 var file_qdrant_cloud_payment_v1_payment_proto_goTypes = []any{
 	(PaymentProviderType)(0),                    // 0: qdrant.cloud.payment.v1.PaymentProviderType
 	(PaymentInformationStatus)(0),               // 1: qdrant.cloud.payment.v1.PaymentInformationStatus
-	(SetupIntentStatus)(0),                      // 2: qdrant.cloud.payment.v1.SetupIntentStatus
+	(StripeSetupIntentStatus)(0),                // 2: qdrant.cloud.payment.v1.StripeSetupIntentStatus
 	(*ListPaymentInformationRequest)(nil),       // 3: qdrant.cloud.payment.v1.ListPaymentInformationRequest
 	(*ListPaymentInformationResponse)(nil),      // 4: qdrant.cloud.payment.v1.ListPaymentInformationResponse
 	(*GetPaymentInformationRequest)(nil),        // 5: qdrant.cloud.payment.v1.GetPaymentInformationRequest
@@ -1459,7 +1459,7 @@ var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
 	15, // 2: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
 	15, // 3: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
 	16, // 4: qdrant.cloud.payment.v1.ChangePaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	2,  // 5: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.SetupIntentStatus
+	2,  // 5: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.StripeSetupIntentStatus
 	0,  // 6: qdrant.cloud.payment.v1.PaymentInformation.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
 	18, // 7: qdrant.cloud.payment.v1.PaymentInformation.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
 	17, // 8: qdrant.cloud.payment.v1.PaymentInformation.billing_address:type_name -> qdrant.cloud.payment.v1.BillingAddress

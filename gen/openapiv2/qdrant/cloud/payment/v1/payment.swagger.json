@@ -486,20 +486,6 @@
       "default": "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
       "description": "PaymentProviderType defines the type of payment information.\n\n - PAYMENT_PROVIDER_TYPE_UNSPECIFIED: Unspecified type, should not be used.\n - PAYMENT_PROVIDER_TYPE_STRIPE: Stripe payment information.\n - PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: AWS marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE: Google Cloud Platform marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE: Azure marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_CUSTOM: Custom payment information. This is used for custom payment methods that do not fit into the predefined categories."
     },
-    "v1SetupIntentStatus": {
-      "type": "string",
-      "enum": [
-        "SETUP_INTENT_STATUS_UNSPECIFIED",
-        "SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD",
-        "SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION",
-        "SETUP_INTENT_STATUS_REQUIRES_ACTION",
-        "SETUP_INTENT_STATUS_PROCESSING",
-        "SETUP_INTENT_STATUS_CANCELED",
-        "SETUP_INTENT_STATUS_SUCCEEDED"
-      ],
-      "default": "SETUP_INTENT_STATUS_UNSPECIFIED",
-      "description": "Represents the status of a SetupIntent in Stripe.\n\n - SETUP_INTENT_STATUS_UNSPECIFIED: Default unspecified value.\n - SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: A payment method is required to proceed.\n - SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: The SetupIntent is ready to be confirmed.\n - SETUP_INTENT_STATUS_REQUIRES_ACTION: The SetupIntent requires further action (e.g., 3D Secure).\n - SETUP_INTENT_STATUS_PROCESSING: The SetupIntent is being processed.\n - SETUP_INTENT_STATUS_CANCELED: The SetupIntent has been canceled.\n - SETUP_INTENT_STATUS_SUCCEEDED: The SetupIntent has succeeded."
-    },
     "v1StripeCheckoutSession": {
       "type": "object",
       "properties": {
@@ -520,7 +506,7 @@
           "description": "The ID of the associated Stripe SetupIntent."
         },
         "setupIntentStatus": {
-          "$ref": "#/definitions/v1SetupIntentStatus",
+          "$ref": "#/definitions/v1StripeSetupIntentStatus",
           "description": "The status of the associated Stripe SetupIntent."
         },
         "setupIntentPaymentMethod": {
@@ -529,6 +515,20 @@
         }
       },
       "title": "Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
+    "v1StripeSetupIntentStatus": {
+      "type": "string",
+      "enum": [
+        "STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED",
+        "STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD",
+        "STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION",
+        "STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION",
+        "STRIPE_SETUP_INTENT_STATUS_PROCESSING",
+        "STRIPE_SETUP_INTENT_STATUS_CANCELED",
+        "STRIPE_SETUP_INTENT_STATUS_SUCCEEDED"
+      ],
+      "default": "STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED",
+      "description": "Represents the status of a SetupIntent in Stripe.\n\n - STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED: Default unspecified value.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: A payment method is required to proceed.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: The SetupIntent is ready to be confirmed.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION: The SetupIntent requires further action (e.g., 3D Secure).\n - STRIPE_SETUP_INTENT_STATUS_PROCESSING: The SetupIntent is being processed.\n - STRIPE_SETUP_INTENT_STATUS_CANCELED: The SetupIntent has been canceled.\n - STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: The SetupIntent has succeeded."
     }
   }
 }

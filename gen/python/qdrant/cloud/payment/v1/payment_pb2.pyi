@@ -29,15 +29,15 @@ class PaymentInformationStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     PAYMENT_INFORMATION_STATUS_INACTIVE: _ClassVar[PaymentInformationStatus]
     PAYMENT_INFORMATION_STATUS_PENDING: _ClassVar[PaymentInformationStatus]
 
-class SetupIntentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class StripeSetupIntentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    SETUP_INTENT_STATUS_UNSPECIFIED: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_REQUIRES_ACTION: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_PROCESSING: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_CANCELED: _ClassVar[SetupIntentStatus]
-    SETUP_INTENT_STATUS_SUCCEEDED: _ClassVar[SetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_PROCESSING: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_CANCELED: _ClassVar[StripeSetupIntentStatus]
+    STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: _ClassVar[StripeSetupIntentStatus]
 PAYMENT_PROVIDER_TYPE_UNSPECIFIED: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_STRIPE: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: PaymentProviderType
@@ -48,13 +48,13 @@ PAYMENT_INFORMATION_STATUS_UNSPECIFIED: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_ACTIVE: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_INACTIVE: PaymentInformationStatus
 PAYMENT_INFORMATION_STATUS_PENDING: PaymentInformationStatus
-SETUP_INTENT_STATUS_UNSPECIFIED: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: SetupIntentStatus
-SETUP_INTENT_STATUS_REQUIRES_ACTION: SetupIntentStatus
-SETUP_INTENT_STATUS_PROCESSING: SetupIntentStatus
-SETUP_INTENT_STATUS_CANCELED: SetupIntentStatus
-SETUP_INTENT_STATUS_SUCCEEDED: SetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_PROCESSING: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_CANCELED: StripeSetupIntentStatus
+STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: StripeSetupIntentStatus
 
 class ListPaymentInformationRequest(_message.Message):
     __slots__ = ("account_id",)
@@ -148,9 +148,9 @@ class StripeCheckoutSession(_message.Message):
     url: str
     customer: str
     setup_intent_id: str
-    setup_intent_status: SetupIntentStatus
+    setup_intent_status: StripeSetupIntentStatus
     setup_intent_payment_method: str
-    def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[SetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[StripeSetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
 
 class PaymentInformation(_message.Message):
     __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method", "billing_address", "created_at", "last_modified_at", "tax_id", "status")

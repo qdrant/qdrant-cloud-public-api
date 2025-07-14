@@ -328,9 +328,9 @@ export declare type StripeCheckoutSession = Message<"qdrant.cloud.payment.v1.Str
   /**
    * The status of the associated Stripe SetupIntent.
    *
-   * @generated from field: qdrant.cloud.payment.v1.SetupIntentStatus setup_intent_status = 5;
+   * @generated from field: qdrant.cloud.payment.v1.StripeSetupIntentStatus setup_intent_status = 5;
    */
-  setupIntentStatus: SetupIntentStatus;
+  setupIntentStatus: StripeSetupIntentStatus;
 
   /**
    * The payment method attached to the associated SetupIntent.
@@ -689,63 +689,63 @@ export declare const PaymentInformationStatusSchema: GenEnum<PaymentInformationS
 /**
  * Represents the status of a SetupIntent in Stripe.
  *
- * @generated from enum qdrant.cloud.payment.v1.SetupIntentStatus
+ * @generated from enum qdrant.cloud.payment.v1.StripeSetupIntentStatus
  */
-export enum SetupIntentStatus {
+export enum StripeSetupIntentStatus {
   /**
    * Default unspecified value.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
    * A payment method is required to proceed.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
    */
   REQUIRES_PAYMENT_METHOD = 1,
 
   /**
    * The SetupIntent is ready to be confirmed.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
    */
   REQUIRES_CONFIRMATION = 2,
 
   /**
    * The SetupIntent requires further action (e.g., 3D Secure).
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
    */
   REQUIRES_ACTION = 3,
 
   /**
    * The SetupIntent is being processed.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_PROCESSING = 4;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_PROCESSING = 4;
    */
   PROCESSING = 4,
 
   /**
    * The SetupIntent has been canceled.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_CANCELED = 5;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_CANCELED = 5;
    */
   CANCELED = 5,
 
   /**
    * The SetupIntent has succeeded.
    *
-   * @generated from enum value: SETUP_INTENT_STATUS_SUCCEEDED = 6;
+   * @generated from enum value: STRIPE_SETUP_INTENT_STATUS_SUCCEEDED = 6;
    */
   SUCCEEDED = 6,
 }
 
 /**
- * Describes the enum qdrant.cloud.payment.v1.SetupIntentStatus.
+ * Describes the enum qdrant.cloud.payment.v1.StripeSetupIntentStatus.
  */
-export declare const SetupIntentStatusSchema: GenEnum<SetupIntentStatus>;
+export declare const StripeSetupIntentStatusSchema: GenEnum<StripeSetupIntentStatus>;
 
 /**
  * PaymentService is the API used to manage payment settings.
