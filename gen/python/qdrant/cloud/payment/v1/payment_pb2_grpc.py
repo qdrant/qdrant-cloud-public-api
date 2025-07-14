@@ -100,7 +100,9 @@ class PaymentServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ChangePaymentInformation(self, request, context):
-        """This method will allow the user to use a different payment information for the account.
+        """Updates the current payment information associated with the account.
+        After this change, the new payment information will be used for all future charges.
+        This does not create a new payment information, it simply switches to one already linked to the account.
         Required permissions:
         - write:payment_information
         """

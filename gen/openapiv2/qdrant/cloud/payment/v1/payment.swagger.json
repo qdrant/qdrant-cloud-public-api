@@ -18,7 +18,7 @@
   "paths": {
     "/api/payment/v1/accounts/{accountId}/change-payment-information": {
       "put": {
-        "summary": "This method will allow the user to use a different payment information for the account.\nRequired permissions:\n- write:payment_information",
+        "summary": "Updates the current payment information associated with the account.\nAfter this change, the new payment information will be used for all future charges.\nThis does not create a new payment information, it simply switches to one already linked to the account.\nRequired permissions:\n- write:payment_information",
         "operationId": "PaymentService_ChangePaymentInformation",
         "responses": {
           "200": {

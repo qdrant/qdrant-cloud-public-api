@@ -56,7 +56,9 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - write:payment_information
 	GetStripeSession(ctx context.Context, in *GetStripeSessionRequest, opts ...grpc.CallOption) (*GetStripeSessionResponse, error)
-	// This method will allow the user to use a different payment information for the account.
+	// Updates the current payment information associated with the account.
+	// After this change, the new payment information will be used for all future charges.
+	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
 	ChangePaymentInformation(ctx context.Context, in *ChangePaymentInformationRequest, opts ...grpc.CallOption) (*ChangePaymentInformationResponse, error)
@@ -159,7 +161,9 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - write:payment_information
 	GetStripeSession(context.Context, *GetStripeSessionRequest) (*GetStripeSessionResponse, error)
-	// This method will allow the user to use a different payment information for the account.
+	// Updates the current payment information associated with the account.
+	// After this change, the new payment information will be used for all future charges.
+	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
 	ChangePaymentInformation(context.Context, *ChangePaymentInformationRequest) (*ChangePaymentInformationResponse, error)
