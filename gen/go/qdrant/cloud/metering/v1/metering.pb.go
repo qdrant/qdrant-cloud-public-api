@@ -320,7 +320,6 @@ type MeteringItem struct {
 	// booking or another billable resource.
 	BillableEntityId string `protobuf:"bytes,6,opt,name=billable_entity_id,json=billableEntityId,proto3" json:"billable_entity_id,omitempty"`
 	// The type of the billable entity (e.g., "ClusterBooking").
-	// TODO do we want to have a list (enum) of billable resources?
 	BillableEntityType string `protobuf:"bytes,7,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
 	// The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
 	PricePerHour int32 `protobuf:"varint,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`

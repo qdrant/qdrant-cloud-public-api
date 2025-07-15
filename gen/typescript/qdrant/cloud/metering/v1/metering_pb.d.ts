@@ -200,7 +200,6 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
 
   /**
    * The type of the billable entity (e.g., "ClusterBooking").
-   * TODO do we want to have a list (enum) of billable resources?
    *
    * @generated from field: string billable_entity_type = 7;
    */

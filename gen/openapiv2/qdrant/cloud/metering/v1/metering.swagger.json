@@ -185,7 +185,7 @@
         },
         "billableEntityType": {
           "type": "string",
-          "title": "The type of the billable entity (e.g., \"ClusterBooking\").\nTODO do we want to have a list (enum) of billable resources?"
+          "description": "The type of the billable entity (e.g., \"ClusterBooking\")."
         },
         "pricePerHour": {
           "type": "integer",
