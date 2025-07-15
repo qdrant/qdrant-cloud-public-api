@@ -241,6 +241,219 @@
         ]
       }
     },
+    "/api/payment/v1/accounts/{paymentInformation.accountId}/payment-information": {
+      "post": {
+        "summary": "Creates a new payment information for the account.\nThis method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_CreatePaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreatePaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "paymentInformation.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.id",
+            "description": "Unique identifier for the payment information (in GUID format).\nThis is a read-only field and will be available after a payment information is created.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.type",
+            "description": "The type of the payment information provider.\nThis is a required field.\n\n - PAYMENT_PROVIDER_TYPE_UNSPECIFIED: Unspecified type, should not be used.\n - PAYMENT_PROVIDER_TYPE_STRIPE: Stripe payment information.\n - PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: AWS marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE: Google Cloud Platform marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE: Azure marketplace payment information.\n - PAYMENT_PROVIDER_TYPE_CUSTOM: Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
+              "PAYMENT_PROVIDER_TYPE_STRIPE",
+              "PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE",
+              "PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE",
+              "PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE",
+              "PAYMENT_PROVIDER_TYPE_CUSTOM"
+            ],
+            "default": "PAYMENT_PROVIDER_TYPE_UNSPECIFIED"
+          },
+          {
+            "name": "paymentInformation.paymentProviderId",
+            "description": "The customer account identifier in the payment provider system.\nThis is read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.paymentMethod.id",
+            "description": "The identifier of the payment method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.paymentMethod.card.brand",
+            "description": "The brand of the card (e.g., \"Visa\", \"Mastercard\").",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.paymentMethod.card.last4",
+            "description": "The last 4 digits of the card number.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.paymentMethod.card.expirationMonth",
+            "description": "The expiration month of the card.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paymentInformation.paymentMethod.card.expirationYear",
+            "description": "The expiration year of the card.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paymentInformation.billingAddress.name",
+            "description": "The name of the person or entity associated with the billing address.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.line1",
+            "description": "The first line of the billing address.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.line2",
+            "description": "The second line of the billing address.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.postalCode",
+            "description": "The postal code of the billing address.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.city",
+            "description": "The city of the billing address.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.state",
+            "description": "The state or province of the billing address.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.country",
+            "description": "The country of the billing address.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.countryFormatted",
+            "description": "The formatted country name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.stateFormatted",
+            "description": "The formatted state or province name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.billingAddress.taxSupportedCountry",
+            "description": "Indicates if the country supports tax.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "paymentInformation.createdAt",
+            "description": "The timestamp when the payment information was created.\nThis is a read-only field and will be available after a payment information is created.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "paymentInformation.lastModifiedAt",
+            "description": "The timestamp when the payment information was last updated.\nThis is a read-only field and will be available after a payment information is created.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "paymentInformation.taxId",
+            "description": "The tax ID associated with the payment information.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.isDefault",
+            "description": "The us default flag indicates if this payment information is the default one for the account.\nDefault payment information is used for all charges in the account.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "paymentInformation.status",
+            "description": "Payment information status.\nThis is read-only field.\n\n - PAYMENT_INFORMATION_STATUS_UNSPECIFIED: Unspecified status, should not be used.\n - PAYMENT_INFORMATION_STATUS_ACTIVE: The payment information is active and can be used for payments.\n - PAYMENT_INFORMATION_STATUS_INACTIVE: The payment information is inactive and cannot be used for payments.\n - PAYMENT_INFORMATION_STATUS_PENDING: The payment information is pending verification or setup.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PAYMENT_INFORMATION_STATUS_UNSPECIFIED",
+              "PAYMENT_INFORMATION_STATUS_ACTIVE",
+              "PAYMENT_INFORMATION_STATUS_INACTIVE",
+              "PAYMENT_INFORMATION_STATUS_PENDING"
+            ],
+            "default": "PAYMENT_INFORMATION_STATUS_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
     "/api/payment/v1/accounts/{paymentInformation.accountId}/payment-information/{paymentInformation.id}": {
       "put": {
         "summary": "Updates the payment information for the account.\nThis method is used to update the payment information details, such as billing address.\nRequired permissions:\n- write:payment_information",
@@ -302,7 +515,7 @@
             },
             "paymentProviderId": {
               "type": "string",
-              "description": "The customer account identifier in the payment provider system.\nThis is a required field."
+              "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
             },
             "paymentMethod": {
               "$ref": "#/definitions/v1PaymentMethod",
@@ -332,7 +545,7 @@
             },
             "status": {
               "$ref": "#/definitions/v1PaymentInformationStatus",
-              "description": "Payment information status."
+              "description": "Payment information status.\nThis is read-only field."
             }
           },
           "description": "The payment information to update.",
@@ -439,6 +652,16 @@
       },
       "title": "Represents payment method card details"
     },
+    "v1CreatePaymentInformationResponse": {
+      "type": "object",
+      "properties": {
+        "paymentInformation": {
+          "$ref": "#/definitions/v1PaymentInformation",
+          "description": "The created payment information."
+        }
+      },
+      "title": "CreatePaymentInformationResponse is the response from the CreatePaymentInformation function"
+    },
     "v1CreateStripeCheckoutSessionResponse": {
       "type": "object",
       "properties": {
@@ -505,7 +728,7 @@
         },
         "paymentProviderId": {
           "type": "string",
-          "description": "The customer account identifier in the payment provider system.\nThis is a required field."
+          "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
         },
         "paymentMethod": {
           "$ref": "#/definitions/v1PaymentMethod",
@@ -535,7 +758,7 @@
         },
         "status": {
           "$ref": "#/definitions/v1PaymentInformationStatus",
-          "description": "Payment information status."
+          "description": "Payment information status.\nThis is read-only field."
         }
       },
       "title": "Represents a payment information.\nTODO: Is payment method a better name?"

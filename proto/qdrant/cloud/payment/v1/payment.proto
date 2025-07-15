@@ -27,6 +27,18 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
   }
+  // Creates a new payment information for the account.
+  // This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+  // Required permissions:
+  // - write:payment_information
+  rpc CreatePaymentInformation(CreatePaymentInformationRequest) returns (CreatePaymentInformationResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_information.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{payment_information.account_id}/payment-information"};
+  }
   // Updates the payment information for the account.
   // This method is used to update the payment information details, such as billing address.
   // Required permissions:
@@ -111,6 +123,19 @@ message GetPaymentInformationRequest {
 // Response containing the payment information.
 message GetPaymentInformationResponse {
   // The actual payment information.
+  PaymentInformation payment_information = 1;
+}
+
+// CreatePaymentInformationRequest is the request for the CreatePaymentInformation function
+message CreatePaymentInformationRequest {
+  // The payment information to create.
+  // This is a required field.
+  PaymentInformation payment_information = 1 [(buf.validate.field).required = true];
+}
+
+// CreatePaymentInformationResponse is the response from the CreatePaymentInformation function
+message CreatePaymentInformationResponse {
+  // The created payment information.
   PaymentInformation payment_information = 1;
 }
 
@@ -223,8 +248,8 @@ message PaymentInformation {
   // This is a required field.
   PaymentProviderType type = 3;
   // The customer account identifier in the payment provider system.
-  // This is a required field.
-  string payment_provider_id = 4;
+  // This is read-only field.
+  optional string payment_provider_id = 4;
   // Represents the payment method details, such as card information.
   // This field is optional and only available for payment provider type Stripe for now.
   optional PaymentMethod payment_method = 5;
@@ -244,7 +269,8 @@ message PaymentInformation {
   // Default payment information is used for all charges in the account.
   bool is_default = 10;
   // Payment information status.
-  PaymentInformationStatus status = 11;
+  // This is read-only field.
+  optional PaymentInformationStatus status = 11;
 }
 
 // PaymentProviderType defines the type of payment information.

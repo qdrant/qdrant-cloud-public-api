@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	PaymentService_ListPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
 	PaymentService_GetPaymentInformation_FullMethodName        = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
+	PaymentService_CreatePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation"
 	PaymentService_UpdatePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation"
 	PaymentService_DeletePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
 	PaymentService_GetStripeCheckoutSession_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
@@ -42,6 +43,11 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentInformation(ctx context.Context, in *GetPaymentInformationRequest, opts ...grpc.CallOption) (*GetPaymentInformationResponse, error)
+	// Creates a new payment information for the account.
+	// This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+	// Required permissions:
+	// - write:payment_information
+	CreatePaymentInformation(ctx context.Context, in *CreatePaymentInformationRequest, opts ...grpc.CallOption) (*CreatePaymentInformationResponse, error)
 	// Updates the payment information for the account.
 	// This method is used to update the payment information details, such as billing address.
 	// Required permissions:
@@ -92,6 +98,16 @@ func (c *paymentServiceClient) GetPaymentInformation(ctx context.Context, in *Ge
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPaymentInformationResponse)
 	err := c.cc.Invoke(ctx, PaymentService_GetPaymentInformation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) CreatePaymentInformation(ctx context.Context, in *CreatePaymentInformationRequest, opts ...grpc.CallOption) (*CreatePaymentInformationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePaymentInformationResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreatePaymentInformation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +178,11 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error)
+	// Creates a new payment information for the account.
+	// This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+	// Required permissions:
+	// - write:payment_information
+	CreatePaymentInformation(context.Context, *CreatePaymentInformationRequest) (*CreatePaymentInformationResponse, error)
 	// Updates the payment information for the account.
 	// This method is used to update the payment information details, such as billing address.
 	// Required permissions:
@@ -203,6 +224,9 @@ func (UnimplementedPaymentServiceServer) ListPaymentInformation(context.Context,
 }
 func (UnimplementedPaymentServiceServer) GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentInformation not implemented")
+}
+func (UnimplementedPaymentServiceServer) CreatePaymentInformation(context.Context, *CreatePaymentInformationRequest) (*CreatePaymentInformationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentInformation not implemented")
 }
 func (UnimplementedPaymentServiceServer) UpdatePaymentInformation(context.Context, *UpdatePaymentInformationRequest) (*UpdatePaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentInformation not implemented")
@@ -272,6 +296,24 @@ func _PaymentService_GetPaymentInformation_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).GetPaymentInformation(ctx, req.(*GetPaymentInformationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_CreatePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentInformationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).CreatePaymentInformation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_CreatePaymentInformation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).CreatePaymentInformation(ctx, req.(*CreatePaymentInformationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -380,6 +422,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentInformation",
 			Handler:    _PaymentService_GetPaymentInformation_Handler,
+		},
+		{
+			MethodName: "CreatePaymentInformation",
+			Handler:    _PaymentService_CreatePaymentInformation_Handler,
 		},
 		{
 			MethodName: "UpdatePaymentInformation",

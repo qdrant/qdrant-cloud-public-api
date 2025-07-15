@@ -82,6 +82,18 @@ class GetPaymentInformationResponse(_message.Message):
     payment_information: PaymentInformation
     def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
 
+class CreatePaymentInformationRequest(_message.Message):
+    __slots__ = ("payment_information",)
+    PAYMENT_INFORMATION_FIELD_NUMBER: _ClassVar[int]
+    payment_information: PaymentInformation
+    def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
+
+class CreatePaymentInformationResponse(_message.Message):
+    __slots__ = ("payment_information",)
+    PAYMENT_INFORMATION_FIELD_NUMBER: _ClassVar[int]
+    payment_information: PaymentInformation
+    def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
+
 class UpdatePaymentInformationRequest(_message.Message):
     __slots__ = ("payment_information",)
     PAYMENT_INFORMATION_FIELD_NUMBER: _ClassVar[int]

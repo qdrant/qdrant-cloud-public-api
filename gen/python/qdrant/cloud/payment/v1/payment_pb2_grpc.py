@@ -25,6 +25,11 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
                 _registered_method=True)
+        self.CreatePaymentInformation = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.FromString,
+                _registered_method=True)
         self.UpdatePaymentInformation = channel.unary_unary(
                 '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation',
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.SerializeToString,
@@ -69,6 +74,16 @@ class PaymentServiceServicer(object):
         """Gets the payment information identified by the given ID.
         Required permissions:
         - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreatePaymentInformation(self, request, context):
+        """Creates a new payment information for the account.
+        This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+        Required permissions:
+        - write:payment_information
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -137,6 +152,11 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     servicer.GetPaymentInformation,
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.SerializeToString,
+            ),
+            'CreatePaymentInformation': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreatePaymentInformation,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.SerializeToString,
             ),
             'UpdatePaymentInformation': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdatePaymentInformation,
@@ -219,6 +239,33 @@ class PaymentService(object):
             '/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation',
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreatePaymentInformation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.FromString,
             options,
             channel_credentials,
             insecure,
