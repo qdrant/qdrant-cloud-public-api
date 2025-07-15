@@ -25,6 +25,11 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
                 _registered_method=True)
+        self.UpdatePaymentInformation = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.FromString,
+                _registered_method=True)
         self.DeletePaymentInformation = channel.unary_unary(
                 '/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation',
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.SerializeToString,
@@ -69,10 +74,21 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def UpdatePaymentInformation(self, request, context):
+        """Updates the payment information for the account.
+        This method is used to update the payment information details, such as billing address.
+        Required permissions:
+        - write:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DeletePaymentInformation(self, request, context):
         """Delete the payment information identified by the given ID.
         Required permissions:
         - write:payment_information
+        TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -121,6 +137,11 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     servicer.GetPaymentInformation,
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.SerializeToString,
+            ),
+            'UpdatePaymentInformation': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdatePaymentInformation,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.SerializeToString,
             ),
             'DeletePaymentInformation': grpc.unary_unary_rpc_method_handler(
                     servicer.DeletePaymentInformation,
@@ -198,6 +219,33 @@ class PaymentService(object):
             '/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation',
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdatePaymentInformation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.FromString,
             options,
             channel_credentials,
             insecure,

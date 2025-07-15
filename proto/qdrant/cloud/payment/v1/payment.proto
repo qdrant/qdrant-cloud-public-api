@@ -27,9 +27,25 @@ service PaymentService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
   }
+  // Updates the payment information for the account.
+  // This method is used to update the payment information details, such as billing address.
+  // Required permissions:
+  // - write:payment_information
+  rpc UpdatePaymentInformation(UpdatePaymentInformationRequest) returns (UpdatePaymentInformationResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_information.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/payment/v1/accounts/{payment_information.account_id}/payment-information/{payment_information.id}"
+      body: "*"
+    };
+  }
   // Delete the payment information identified by the given ID.
   // Required permissions:
   // - write:payment_information
+  // TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
   rpc DeletePaymentInformation(DeletePaymentInformationRequest) returns (DeletePaymentInformationResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
@@ -95,6 +111,18 @@ message GetPaymentInformationRequest {
 // Response containing the payment information.
 message GetPaymentInformationResponse {
   // The actual payment information.
+  PaymentInformation payment_information = 1;
+}
+
+// UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
+message UpdatePaymentInformationRequest {
+  // The payment information to update.
+  PaymentInformation payment_information = 2;
+}
+
+// UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
+message UpdatePaymentInformationResponse {
+  // The updated payment information.
   PaymentInformation payment_information = 1;
 }
 

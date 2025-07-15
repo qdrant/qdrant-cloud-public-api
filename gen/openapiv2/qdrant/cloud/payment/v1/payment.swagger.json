@@ -87,7 +87,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete the payment information identified by the given ID.\nRequired permissions:\n- write:payment_information",
+        "summary": "Delete the payment information identified by the given ID.\nRequired permissions:\n- write:payment_information\nTODO: This endpoint is not supported in the current version of the API. Should we remove it from here?",
         "operationId": "PaymentService_DeletePaymentInformation",
         "responses": {
           "200": {
@@ -240,9 +240,107 @@
           "PaymentService"
         ]
       }
+    },
+    "/api/payment/v1/accounts/{paymentInformation.accountId}/payment-information/{paymentInformation.id}": {
+      "put": {
+        "summary": "Updates the payment information for the account.\nThis method is used to update the payment information details, such as billing address.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_UpdatePaymentInformation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdatePaymentInformationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "paymentInformation.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paymentInformation.id",
+            "description": "Unique identifier for the payment information (in GUID format).\nThis is a read-only field and will be available after a payment information is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentServiceUpdatePaymentInformationBody"
+            }
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
     }
   },
   "definitions": {
+    "PaymentServiceUpdatePaymentInformationBody": {
+      "type": "object",
+      "properties": {
+        "paymentInformation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/v1PaymentProviderType",
+              "description": "The type of the payment information provider.\nThis is a required field."
+            },
+            "paymentProviderId": {
+              "type": "string",
+              "description": "The customer account identifier in the payment provider system.\nThis is a required field."
+            },
+            "paymentMethod": {
+              "$ref": "#/definitions/v1PaymentMethod",
+              "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for payment provider type Stripe for now."
+            },
+            "billingAddress": {
+              "$ref": "#/definitions/v1BillingAddress",
+              "description": "The billing address associated with the payment information.\nThis field is optional and only available for payment provider type Stripe."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the payment information was created.\nThis is a read-only field and will be available after a payment information is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the payment information was last updated.\nThis is a read-only field and will be available after a payment information is created."
+            },
+            "taxId": {
+              "type": "string",
+              "description": "The tax ID associated with the payment information.\nThis is an optional field."
+            },
+            "isDefault": {
+              "type": "boolean",
+              "description": "The us default flag indicates if this payment information is the default one for the account.\nDefault payment information is used for all charges in the account."
+            },
+            "status": {
+              "$ref": "#/definitions/v1PaymentInformationStatus",
+              "description": "Payment information status."
+            }
+          },
+          "description": "The payment information to update.",
+          "title": "The payment information to update."
+        }
+      },
+      "title": "UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function"
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -533,6 +631,16 @@
       ],
       "default": "STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED",
       "description": "Represents the status of a SetupIntent in Stripe.\n\n - STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED: Default unspecified value.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD: A payment method is required to proceed.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION: The SetupIntent is ready to be confirmed.\n - STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION: The SetupIntent requires further action (e.g., 3D Secure).\n - STRIPE_SETUP_INTENT_STATUS_PROCESSING: The SetupIntent is being processed.\n - STRIPE_SETUP_INTENT_STATUS_CANCELED: The SetupIntent has been canceled.\n - STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: The SetupIntent has succeeded."
+    },
+    "v1UpdatePaymentInformationResponse": {
+      "type": "object",
+      "properties": {
+        "paymentInformation": {
+          "$ref": "#/definitions/v1PaymentInformation",
+          "description": "The updated payment information."
+        }
+      },
+      "title": "UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function"
     }
   }
 }

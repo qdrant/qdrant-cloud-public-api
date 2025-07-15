@@ -102,6 +102,46 @@ export declare type GetPaymentInformationResponse = Message<"qdrant.cloud.paymen
 export declare const GetPaymentInformationResponseSchema: GenMessage<GetPaymentInformationResponse>;
 
 /**
+ * UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
+ *
+ * @generated from message qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
+ */
+export declare type UpdatePaymentInformationRequest = Message<"qdrant.cloud.payment.v1.UpdatePaymentInformationRequest"> & {
+  /**
+   * The payment information to update.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 2;
+   */
+  paymentInformation?: PaymentInformation;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.UpdatePaymentInformationRequest.
+ * Use `create(UpdatePaymentInformationRequestSchema)` to create a new message.
+ */
+export declare const UpdatePaymentInformationRequestSchema: GenMessage<UpdatePaymentInformationRequest>;
+
+/**
+ * UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
+ *
+ * @generated from message qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
+ */
+export declare type UpdatePaymentInformationResponse = Message<"qdrant.cloud.payment.v1.UpdatePaymentInformationResponse"> & {
+  /**
+   * The updated payment information.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
+   */
+  paymentInformation?: PaymentInformation;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.UpdatePaymentInformationResponse.
+ * Use `create(UpdatePaymentInformationResponseSchema)` to create a new message.
+ */
+export declare const UpdatePaymentInformationResponseSchema: GenMessage<UpdatePaymentInformationResponse>;
+
+/**
  * DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
  *
  * @generated from message qdrant.cloud.payment.v1.DeletePaymentInformationRequest
@@ -786,9 +826,23 @@ export declare const PaymentService: GenService<{
     output: typeof GetPaymentInformationResponseSchema;
   },
   /**
+   * Updates the payment information for the account.
+   * This method is used to update the payment information details, such as billing address.
+   * Required permissions:
+   * - write:payment_information
+   *
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation
+   */
+  updatePaymentInformation: {
+    methodKind: "unary";
+    input: typeof UpdatePaymentInformationRequestSchema;
+    output: typeof UpdatePaymentInformationResponseSchema;
+  },
+  /**
    * Delete the payment information identified by the given ID.
    * Required permissions:
    * - write:payment_information
+   * TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
    *
    * @generated from rpc qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation
    */

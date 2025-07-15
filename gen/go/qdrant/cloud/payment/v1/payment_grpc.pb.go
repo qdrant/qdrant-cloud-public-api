@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	PaymentService_ListPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
 	PaymentService_GetPaymentInformation_FullMethodName        = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
+	PaymentService_UpdatePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation"
 	PaymentService_DeletePaymentInformation_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
 	PaymentService_GetStripeCheckoutSession_FullMethodName     = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
 	PaymentService_CreateStripeCheckoutSession_FullMethodName  = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
@@ -41,9 +42,15 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentInformation(ctx context.Context, in *GetPaymentInformationRequest, opts ...grpc.CallOption) (*GetPaymentInformationResponse, error)
+	// Updates the payment information for the account.
+	// This method is used to update the payment information details, such as billing address.
+	// Required permissions:
+	// - write:payment_information
+	UpdatePaymentInformation(ctx context.Context, in *UpdatePaymentInformationRequest, opts ...grpc.CallOption) (*UpdatePaymentInformationResponse, error)
 	// Delete the payment information identified by the given ID.
 	// Required permissions:
 	// - write:payment_information
+	// TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
 	DeletePaymentInformation(ctx context.Context, in *DeletePaymentInformationRequest, opts ...grpc.CallOption) (*DeletePaymentInformationResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
@@ -85,6 +92,16 @@ func (c *paymentServiceClient) GetPaymentInformation(ctx context.Context, in *Ge
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPaymentInformationResponse)
 	err := c.cc.Invoke(ctx, PaymentService_GetPaymentInformation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) UpdatePaymentInformation(ctx context.Context, in *UpdatePaymentInformationRequest, opts ...grpc.CallOption) (*UpdatePaymentInformationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdatePaymentInformationResponse)
+	err := c.cc.Invoke(ctx, PaymentService_UpdatePaymentInformation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -145,9 +162,15 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error)
+	// Updates the payment information for the account.
+	// This method is used to update the payment information details, such as billing address.
+	// Required permissions:
+	// - write:payment_information
+	UpdatePaymentInformation(context.Context, *UpdatePaymentInformationRequest) (*UpdatePaymentInformationResponse, error)
 	// Delete the payment information identified by the given ID.
 	// Required permissions:
 	// - write:payment_information
+	// TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
 	DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
@@ -180,6 +203,9 @@ func (UnimplementedPaymentServiceServer) ListPaymentInformation(context.Context,
 }
 func (UnimplementedPaymentServiceServer) GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentInformation not implemented")
+}
+func (UnimplementedPaymentServiceServer) UpdatePaymentInformation(context.Context, *UpdatePaymentInformationRequest) (*UpdatePaymentInformationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentInformation not implemented")
 }
 func (UnimplementedPaymentServiceServer) DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentInformation not implemented")
@@ -246,6 +272,24 @@ func _PaymentService_GetPaymentInformation_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).GetPaymentInformation(ctx, req.(*GetPaymentInformationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_UpdatePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentInformationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).UpdatePaymentInformation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_UpdatePaymentInformation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).UpdatePaymentInformation(ctx, req.(*UpdatePaymentInformationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -336,6 +380,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentInformation",
 			Handler:    _PaymentService_GetPaymentInformation_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentInformation",
+			Handler:    _PaymentService_UpdatePaymentInformation_Handler,
 		},
 		{
 			MethodName: "DeletePaymentInformation",

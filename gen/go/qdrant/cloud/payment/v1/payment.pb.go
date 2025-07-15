@@ -412,6 +412,98 @@ func (x *GetPaymentInformationResponse) GetPaymentInformation() *PaymentInformat
 	return nil
 }
 
+// UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
+type UpdatePaymentInformationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The payment information to update.
+	PaymentInformation *PaymentInformation `protobuf:"bytes,2,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UpdatePaymentInformationRequest) Reset() {
+	*x = UpdatePaymentInformationRequest{}
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePaymentInformationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePaymentInformationRequest) ProtoMessage() {}
+
+func (x *UpdatePaymentInformationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePaymentInformationRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentInformationRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdatePaymentInformationRequest) GetPaymentInformation() *PaymentInformation {
+	if x != nil {
+		return x.PaymentInformation
+	}
+	return nil
+}
+
+// UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
+type UpdatePaymentInformationResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The updated payment information.
+	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UpdatePaymentInformationResponse) Reset() {
+	*x = UpdatePaymentInformationResponse{}
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePaymentInformationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePaymentInformationResponse) ProtoMessage() {}
+
+func (x *UpdatePaymentInformationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePaymentInformationResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentInformationResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdatePaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
+	if x != nil {
+		return x.PaymentInformation
+	}
+	return nil
+}
+
 // DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
 type DeletePaymentInformationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -427,7 +519,7 @@ type DeletePaymentInformationRequest struct {
 
 func (x *DeletePaymentInformationRequest) Reset() {
 	*x = DeletePaymentInformationRequest{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +531,7 @@ func (x *DeletePaymentInformationRequest) String() string {
 func (*DeletePaymentInformationRequest) ProtoMessage() {}
 
 func (x *DeletePaymentInformationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +544,7 @@ func (x *DeletePaymentInformationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePaymentInformationRequest.ProtoReflect.Descriptor instead.
 func (*DeletePaymentInformationRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeletePaymentInformationRequest) GetAccountId() string {
@@ -478,7 +570,7 @@ type DeletePaymentInformationResponse struct {
 
 func (x *DeletePaymentInformationResponse) Reset() {
 	*x = DeletePaymentInformationResponse{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -490,7 +582,7 @@ func (x *DeletePaymentInformationResponse) String() string {
 func (*DeletePaymentInformationResponse) ProtoMessage() {}
 
 func (x *DeletePaymentInformationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -503,7 +595,7 @@ func (x *DeletePaymentInformationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePaymentInformationResponse.ProtoReflect.Descriptor instead.
 func (*DeletePaymentInformationResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{7}
 }
 
 // GetStripeCheckoutSessionRequest is the request for the GetStripeCheckoutSession function
@@ -521,7 +613,7 @@ type GetStripeCheckoutSessionRequest struct {
 
 func (x *GetStripeCheckoutSessionRequest) Reset() {
 	*x = GetStripeCheckoutSessionRequest{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -533,7 +625,7 @@ func (x *GetStripeCheckoutSessionRequest) String() string {
 func (*GetStripeCheckoutSessionRequest) ProtoMessage() {}
 
 func (x *GetStripeCheckoutSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -546,7 +638,7 @@ func (x *GetStripeCheckoutSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStripeCheckoutSessionRequest.ProtoReflect.Descriptor instead.
 func (*GetStripeCheckoutSessionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetStripeCheckoutSessionRequest) GetAccountId() string {
@@ -574,7 +666,7 @@ type GetStripeCheckoutSessionResponse struct {
 
 func (x *GetStripeCheckoutSessionResponse) Reset() {
 	*x = GetStripeCheckoutSessionResponse{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -586,7 +678,7 @@ func (x *GetStripeCheckoutSessionResponse) String() string {
 func (*GetStripeCheckoutSessionResponse) ProtoMessage() {}
 
 func (x *GetStripeCheckoutSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -599,7 +691,7 @@ func (x *GetStripeCheckoutSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStripeCheckoutSessionResponse.ProtoReflect.Descriptor instead.
 func (*GetStripeCheckoutSessionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetStripeCheckoutSessionResponse) GetStripeSession() *StripeCheckoutSession {
@@ -623,7 +715,7 @@ type CreateStripeCheckoutSessionRequest struct {
 
 func (x *CreateStripeCheckoutSessionRequest) Reset() {
 	*x = CreateStripeCheckoutSessionRequest{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -635,7 +727,7 @@ func (x *CreateStripeCheckoutSessionRequest) String() string {
 func (*CreateStripeCheckoutSessionRequest) ProtoMessage() {}
 
 func (x *CreateStripeCheckoutSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -648,7 +740,7 @@ func (x *CreateStripeCheckoutSessionRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CreateStripeCheckoutSessionRequest.ProtoReflect.Descriptor instead.
 func (*CreateStripeCheckoutSessionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateStripeCheckoutSessionRequest) GetAccountId() string {
@@ -676,7 +768,7 @@ type CreateStripeCheckoutSessionResponse struct {
 
 func (x *CreateStripeCheckoutSessionResponse) Reset() {
 	*x = CreateStripeCheckoutSessionResponse{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -688,7 +780,7 @@ func (x *CreateStripeCheckoutSessionResponse) String() string {
 func (*CreateStripeCheckoutSessionResponse) ProtoMessage() {}
 
 func (x *CreateStripeCheckoutSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -701,7 +793,7 @@ func (x *CreateStripeCheckoutSessionResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CreateStripeCheckoutSessionResponse.ProtoReflect.Descriptor instead.
 func (*CreateStripeCheckoutSessionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreateStripeCheckoutSessionResponse) GetStripeSession() *StripeCheckoutSession {
@@ -724,7 +816,7 @@ type SetDefaultPaymentInformationRequest struct {
 
 func (x *SetDefaultPaymentInformationRequest) Reset() {
 	*x = SetDefaultPaymentInformationRequest{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +828,7 @@ func (x *SetDefaultPaymentInformationRequest) String() string {
 func (*SetDefaultPaymentInformationRequest) ProtoMessage() {}
 
 func (x *SetDefaultPaymentInformationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +841,7 @@ func (x *SetDefaultPaymentInformationRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use SetDefaultPaymentInformationRequest.ProtoReflect.Descriptor instead.
 func (*SetDefaultPaymentInformationRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SetDefaultPaymentInformationRequest) GetAccountId() string {
@@ -777,7 +869,7 @@ type SetDefaultPaymentInformationResponse struct {
 
 func (x *SetDefaultPaymentInformationResponse) Reset() {
 	*x = SetDefaultPaymentInformationResponse{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -789,7 +881,7 @@ func (x *SetDefaultPaymentInformationResponse) String() string {
 func (*SetDefaultPaymentInformationResponse) ProtoMessage() {}
 
 func (x *SetDefaultPaymentInformationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -802,7 +894,7 @@ func (x *SetDefaultPaymentInformationResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SetDefaultPaymentInformationResponse.ProtoReflect.Descriptor instead.
 func (*SetDefaultPaymentInformationResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SetDefaultPaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
@@ -834,7 +926,7 @@ type StripeCheckoutSession struct {
 
 func (x *StripeCheckoutSession) Reset() {
 	*x = StripeCheckoutSession{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -846,7 +938,7 @@ func (x *StripeCheckoutSession) String() string {
 func (*StripeCheckoutSession) ProtoMessage() {}
 
 func (x *StripeCheckoutSession) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -859,7 +951,7 @@ func (x *StripeCheckoutSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StripeCheckoutSession.ProtoReflect.Descriptor instead.
 func (*StripeCheckoutSession) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StripeCheckoutSession) GetId() string {
@@ -946,7 +1038,7 @@ type PaymentInformation struct {
 
 func (x *PaymentInformation) Reset() {
 	*x = PaymentInformation{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -958,7 +1050,7 @@ func (x *PaymentInformation) String() string {
 func (*PaymentInformation) ProtoMessage() {}
 
 func (x *PaymentInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -971,7 +1063,7 @@ func (x *PaymentInformation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentInformation.ProtoReflect.Descriptor instead.
 func (*PaymentInformation) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PaymentInformation) GetId() string {
@@ -1082,7 +1174,7 @@ type BillingAddress struct {
 
 func (x *BillingAddress) Reset() {
 	*x = BillingAddress{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1094,7 +1186,7 @@ func (x *BillingAddress) String() string {
 func (*BillingAddress) ProtoMessage() {}
 
 func (x *BillingAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1107,7 +1199,7 @@ func (x *BillingAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BillingAddress.ProtoReflect.Descriptor instead.
 func (*BillingAddress) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *BillingAddress) GetName() string {
@@ -1193,7 +1285,7 @@ type PaymentMethod struct {
 
 func (x *PaymentMethod) Reset() {
 	*x = PaymentMethod{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1205,7 +1297,7 @@ func (x *PaymentMethod) String() string {
 func (*PaymentMethod) ProtoMessage() {}
 
 func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1218,7 +1310,7 @@ func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentMethod.ProtoReflect.Descriptor instead.
 func (*PaymentMethod) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *PaymentMethod) GetId() string {
@@ -1252,7 +1344,7 @@ type Card struct {
 
 func (x *Card) Reset() {
 	*x = Card{}
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1264,7 +1356,7 @@ func (x *Card) String() string {
 func (*Card) ProtoMessage() {}
 
 func (x *Card) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1277,7 +1369,7 @@ func (x *Card) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Card.ProtoReflect.Descriptor instead.
 func (*Card) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *Card) GetBrand() string {
@@ -1323,6 +1415,10 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
 	"\x16payment_information_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x14paymentInformationId\"}\n" +
 	"\x1dGetPaymentInformationResponse\x12\\\n" +
+	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x7f\n" +
+	"\x1fUpdatePaymentInformationRequest\x12\\\n" +
+	"\x13payment_information\x18\x02 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x80\x01\n" +
+	" UpdatePaymentInformationResponse\x12\\\n" +
 	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x8a\x01\n" +
 	"\x1fDeletePaymentInformationRequest\x12'\n" +
 	"\n" +
@@ -1418,10 +1514,11 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\x81\f\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xc6\x0e\n" +
 	"\x0ePaymentService\x12\xe8\x01\n" +
 	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"]\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02;\x129/api/payment/v1/accounts/{account_id}/payment-information\x12\xfe\x01\n" +
-	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\x88\x02\n" +
+	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xc2\x02\n" +
+	"\x18UpdatePaymentInformation\x128.qdrant.cloud.payment.v1.UpdatePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.UpdatePaymentInformationResponse\"\xb0\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x1epayment_information.account_id\x82\xd3\xe4\x93\x02k:\x01*\x1af/api/payment/v1/accounts/{payment_information.account_id}/payment-information/{payment_information.id}\x12\x88\x02\n" +
 	"\x18DeletePaymentInformation\x128.qdrant.cloud.payment.v1.DeletePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.DeletePaymentInformationResponse\"w\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02T*R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xf7\x01\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"f\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf3\x01\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\x87\x02\n" +
@@ -1441,7 +1538,7 @@ func file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_payment_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_cloud_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_qdrant_cloud_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_qdrant_cloud_payment_v1_payment_proto_goTypes = []any{
 	(PaymentProviderType)(0),                     // 0: qdrant.cloud.payment.v1.PaymentProviderType
 	(PaymentInformationStatus)(0),                // 1: qdrant.cloud.payment.v1.PaymentInformationStatus
@@ -1450,52 +1547,58 @@ var file_qdrant_cloud_payment_v1_payment_proto_goTypes = []any{
 	(*ListPaymentInformationResponse)(nil),       // 4: qdrant.cloud.payment.v1.ListPaymentInformationResponse
 	(*GetPaymentInformationRequest)(nil),         // 5: qdrant.cloud.payment.v1.GetPaymentInformationRequest
 	(*GetPaymentInformationResponse)(nil),        // 6: qdrant.cloud.payment.v1.GetPaymentInformationResponse
-	(*DeletePaymentInformationRequest)(nil),      // 7: qdrant.cloud.payment.v1.DeletePaymentInformationRequest
-	(*DeletePaymentInformationResponse)(nil),     // 8: qdrant.cloud.payment.v1.DeletePaymentInformationResponse
-	(*GetStripeCheckoutSessionRequest)(nil),      // 9: qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
-	(*GetStripeCheckoutSessionResponse)(nil),     // 10: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
-	(*CreateStripeCheckoutSessionRequest)(nil),   // 11: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	(*CreateStripeCheckoutSessionResponse)(nil),  // 12: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
-	(*SetDefaultPaymentInformationRequest)(nil),  // 13: qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
-	(*SetDefaultPaymentInformationResponse)(nil), // 14: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
-	(*StripeCheckoutSession)(nil),                // 15: qdrant.cloud.payment.v1.StripeCheckoutSession
-	(*PaymentInformation)(nil),                   // 16: qdrant.cloud.payment.v1.PaymentInformation
-	(*BillingAddress)(nil),                       // 17: qdrant.cloud.payment.v1.BillingAddress
-	(*PaymentMethod)(nil),                        // 18: qdrant.cloud.payment.v1.PaymentMethod
-	(*Card)(nil),                                 // 19: qdrant.cloud.payment.v1.Card
-	(*timestamppb.Timestamp)(nil),                // 20: google.protobuf.Timestamp
+	(*UpdatePaymentInformationRequest)(nil),      // 7: qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
+	(*UpdatePaymentInformationResponse)(nil),     // 8: qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
+	(*DeletePaymentInformationRequest)(nil),      // 9: qdrant.cloud.payment.v1.DeletePaymentInformationRequest
+	(*DeletePaymentInformationResponse)(nil),     // 10: qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+	(*GetStripeCheckoutSessionRequest)(nil),      // 11: qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
+	(*GetStripeCheckoutSessionResponse)(nil),     // 12: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
+	(*CreateStripeCheckoutSessionRequest)(nil),   // 13: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
+	(*CreateStripeCheckoutSessionResponse)(nil),  // 14: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
+	(*SetDefaultPaymentInformationRequest)(nil),  // 15: qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
+	(*SetDefaultPaymentInformationResponse)(nil), // 16: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
+	(*StripeCheckoutSession)(nil),                // 17: qdrant.cloud.payment.v1.StripeCheckoutSession
+	(*PaymentInformation)(nil),                   // 18: qdrant.cloud.payment.v1.PaymentInformation
+	(*BillingAddress)(nil),                       // 19: qdrant.cloud.payment.v1.BillingAddress
+	(*PaymentMethod)(nil),                        // 20: qdrant.cloud.payment.v1.PaymentMethod
+	(*Card)(nil),                                 // 21: qdrant.cloud.payment.v1.Card
+	(*timestamppb.Timestamp)(nil),                // 22: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
-	16, // 0: qdrant.cloud.payment.v1.ListPaymentInformationResponse.items:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	16, // 1: qdrant.cloud.payment.v1.GetPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	15, // 2: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
-	15, // 3: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
-	16, // 4: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	2,  // 5: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.StripeSetupIntentStatus
-	0,  // 6: qdrant.cloud.payment.v1.PaymentInformation.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
-	18, // 7: qdrant.cloud.payment.v1.PaymentInformation.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
-	17, // 8: qdrant.cloud.payment.v1.PaymentInformation.billing_address:type_name -> qdrant.cloud.payment.v1.BillingAddress
-	20, // 9: qdrant.cloud.payment.v1.PaymentInformation.created_at:type_name -> google.protobuf.Timestamp
-	20, // 10: qdrant.cloud.payment.v1.PaymentInformation.last_modified_at:type_name -> google.protobuf.Timestamp
-	1,  // 11: qdrant.cloud.payment.v1.PaymentInformation.status:type_name -> qdrant.cloud.payment.v1.PaymentInformationStatus
-	19, // 12: qdrant.cloud.payment.v1.PaymentMethod.card:type_name -> qdrant.cloud.payment.v1.Card
-	3,  // 13: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:input_type -> qdrant.cloud.payment.v1.ListPaymentInformationRequest
-	5,  // 14: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:input_type -> qdrant.cloud.payment.v1.GetPaymentInformationRequest
-	7,  // 15: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:input_type -> qdrant.cloud.payment.v1.DeletePaymentInformationRequest
-	9,  // 16: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
-	11, // 17: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	13, // 18: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:input_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
-	4,  // 19: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:output_type -> qdrant.cloud.payment.v1.ListPaymentInformationResponse
-	6,  // 20: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:output_type -> qdrant.cloud.payment.v1.GetPaymentInformationResponse
-	8,  // 21: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:output_type -> qdrant.cloud.payment.v1.DeletePaymentInformationResponse
-	10, // 22: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
-	12, // 23: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
-	14, // 24: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:output_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
-	19, // [19:25] is the sub-list for method output_type
-	13, // [13:19] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	18, // 0: qdrant.cloud.payment.v1.ListPaymentInformationResponse.items:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	18, // 1: qdrant.cloud.payment.v1.GetPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	18, // 2: qdrant.cloud.payment.v1.UpdatePaymentInformationRequest.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	18, // 3: qdrant.cloud.payment.v1.UpdatePaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	17, // 4: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
+	17, // 5: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
+	18, // 6: qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	2,  // 7: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.StripeSetupIntentStatus
+	0,  // 8: qdrant.cloud.payment.v1.PaymentInformation.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
+	20, // 9: qdrant.cloud.payment.v1.PaymentInformation.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	19, // 10: qdrant.cloud.payment.v1.PaymentInformation.billing_address:type_name -> qdrant.cloud.payment.v1.BillingAddress
+	22, // 11: qdrant.cloud.payment.v1.PaymentInformation.created_at:type_name -> google.protobuf.Timestamp
+	22, // 12: qdrant.cloud.payment.v1.PaymentInformation.last_modified_at:type_name -> google.protobuf.Timestamp
+	1,  // 13: qdrant.cloud.payment.v1.PaymentInformation.status:type_name -> qdrant.cloud.payment.v1.PaymentInformationStatus
+	21, // 14: qdrant.cloud.payment.v1.PaymentMethod.card:type_name -> qdrant.cloud.payment.v1.Card
+	3,  // 15: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:input_type -> qdrant.cloud.payment.v1.ListPaymentInformationRequest
+	5,  // 16: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:input_type -> qdrant.cloud.payment.v1.GetPaymentInformationRequest
+	7,  // 17: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation:input_type -> qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
+	9,  // 18: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:input_type -> qdrant.cloud.payment.v1.DeletePaymentInformationRequest
+	11, // 19: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
+	13, // 20: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
+	15, // 21: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:input_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
+	4,  // 22: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:output_type -> qdrant.cloud.payment.v1.ListPaymentInformationResponse
+	6,  // 23: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:output_type -> qdrant.cloud.payment.v1.GetPaymentInformationResponse
+	8,  // 24: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation:output_type -> qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
+	10, // 25: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:output_type -> qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+	12, // 26: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
+	14, // 27: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
+	16, // 28: qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation:output_type -> qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
+	22, // [22:29] is the sub-list for method output_type
+	15, // [15:22] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_payment_v1_payment_proto_init() }
@@ -1503,16 +1606,16 @@ func file_qdrant_cloud_payment_v1_payment_proto_init() {
 	if File_qdrant_cloud_payment_v1_payment_proto != nil {
 		return
 	}
-	file_qdrant_cloud_payment_v1_payment_proto_msgTypes[12].OneofWrappers = []any{}
-	file_qdrant_cloud_payment_v1_payment_proto_msgTypes[13].OneofWrappers = []any{}
 	file_qdrant_cloud_payment_v1_payment_proto_msgTypes[14].OneofWrappers = []any{}
+	file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15].OneofWrappers = []any{}
+	file_qdrant_cloud_payment_v1_payment_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_payment_v1_payment_proto_rawDesc), len(file_qdrant_cloud_payment_v1_payment_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
