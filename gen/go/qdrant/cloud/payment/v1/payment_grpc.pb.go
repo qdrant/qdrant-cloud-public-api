@@ -73,6 +73,7 @@ type PaymentServiceClient interface {
 	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
+	// TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
 	SetDefaultPaymentInformation(ctx context.Context, in *SetDefaultPaymentInformationRequest, opts ...grpc.CallOption) (*SetDefaultPaymentInformationResponse, error)
 }
 
@@ -208,6 +209,7 @@ type PaymentServiceServer interface {
 	// This does not create a new payment information, it simply switches to one already linked to the account.
 	// Required permissions:
 	// - write:payment_information
+	// TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
 	SetDefaultPaymentInformation(context.Context, *SetDefaultPaymentInformationRequest) (*SetDefaultPaymentInformationResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }

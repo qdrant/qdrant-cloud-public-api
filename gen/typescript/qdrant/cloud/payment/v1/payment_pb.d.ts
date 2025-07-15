@@ -938,6 +938,7 @@ export declare const PaymentService: GenService<{
    * This does not create a new payment information, it simply switches to one already linked to the account.
    * Required permissions:
    * - write:payment_information
+   * TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
    *
    * @generated from rpc qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation
    */
