@@ -25,21 +25,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// PaymentProviderType defines the type of payment information.
+// PaymentProviderType defines the type of payment method.
 type PaymentProviderType int32
 
 const (
 	// Unspecified type, should not be used.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_UNSPECIFIED PaymentProviderType = 0
-	// Stripe payment information.
+	// Stripe payment method.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_STRIPE PaymentProviderType = 1
-	// AWS marketplace payment information.
+	// AWS marketplace payment method.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE PaymentProviderType = 2
-	// Google Cloud Platform marketplace payment information.
+	// Google Cloud Platform marketplace payment method.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE PaymentProviderType = 3
-	// Azure marketplace payment information.
+	// Azure marketplace payment method.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE PaymentProviderType = 4
-	// Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.
+	// Custom payment method. This is used for custom payment methods that do not fit into the predefined categories.
 	PaymentProviderType_PAYMENT_PROVIDER_TYPE_CUSTOM PaymentProviderType = 5
 )
 
@@ -90,60 +90,60 @@ func (PaymentProviderType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{0}
 }
 
-// PaymentInformationStatus defines the status of the payment information.
-type PaymentInformationStatus int32
+// PaymentMethodStatus defines the status of the payment method.
+type PaymentMethodStatus int32
 
 const (
 	// Unspecified status, should not be used.
-	PaymentInformationStatus_PAYMENT_INFORMATION_STATUS_UNSPECIFIED PaymentInformationStatus = 0
-	// The payment information is active and can be used for payments.
-	PaymentInformationStatus_PAYMENT_INFORMATION_STATUS_ACTIVE PaymentInformationStatus = 1
-	// The payment information is inactive and cannot be used for payments.
-	PaymentInformationStatus_PAYMENT_INFORMATION_STATUS_INACTIVE PaymentInformationStatus = 2
-	// The payment information is pending verification or setup.
-	PaymentInformationStatus_PAYMENT_INFORMATION_STATUS_PENDING PaymentInformationStatus = 3
+	PaymentMethodStatus_PAYMENT_METHOD_STATUS_UNSPECIFIED PaymentMethodStatus = 0
+	// The payment method is active and can be used for payments.
+	PaymentMethodStatus_PAYMENT_METHOD_STATUS_ACTIVE PaymentMethodStatus = 1
+	// The payment method is inactive and cannot be used for payments.
+	PaymentMethodStatus_PAYMENT_METHOD_STATUS_INACTIVE PaymentMethodStatus = 2
+	// The payment method is pending verification or setup.
+	PaymentMethodStatus_PAYMENT_METHOD_STATUS_PENDING PaymentMethodStatus = 3
 )
 
-// Enum value maps for PaymentInformationStatus.
+// Enum value maps for PaymentMethodStatus.
 var (
-	PaymentInformationStatus_name = map[int32]string{
-		0: "PAYMENT_INFORMATION_STATUS_UNSPECIFIED",
-		1: "PAYMENT_INFORMATION_STATUS_ACTIVE",
-		2: "PAYMENT_INFORMATION_STATUS_INACTIVE",
-		3: "PAYMENT_INFORMATION_STATUS_PENDING",
+	PaymentMethodStatus_name = map[int32]string{
+		0: "PAYMENT_METHOD_STATUS_UNSPECIFIED",
+		1: "PAYMENT_METHOD_STATUS_ACTIVE",
+		2: "PAYMENT_METHOD_STATUS_INACTIVE",
+		3: "PAYMENT_METHOD_STATUS_PENDING",
 	}
-	PaymentInformationStatus_value = map[string]int32{
-		"PAYMENT_INFORMATION_STATUS_UNSPECIFIED": 0,
-		"PAYMENT_INFORMATION_STATUS_ACTIVE":      1,
-		"PAYMENT_INFORMATION_STATUS_INACTIVE":    2,
-		"PAYMENT_INFORMATION_STATUS_PENDING":     3,
+	PaymentMethodStatus_value = map[string]int32{
+		"PAYMENT_METHOD_STATUS_UNSPECIFIED": 0,
+		"PAYMENT_METHOD_STATUS_ACTIVE":      1,
+		"PAYMENT_METHOD_STATUS_INACTIVE":    2,
+		"PAYMENT_METHOD_STATUS_PENDING":     3,
 	}
 )
 
-func (x PaymentInformationStatus) Enum() *PaymentInformationStatus {
-	p := new(PaymentInformationStatus)
+func (x PaymentMethodStatus) Enum() *PaymentMethodStatus {
+	p := new(PaymentMethodStatus)
 	*p = x
 	return p
 }
 
-func (x PaymentInformationStatus) String() string {
+func (x PaymentMethodStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (PaymentInformationStatus) Descriptor() protoreflect.EnumDescriptor {
+func (PaymentMethodStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_payment_v1_payment_proto_enumTypes[1].Descriptor()
 }
 
-func (PaymentInformationStatus) Type() protoreflect.EnumType {
+func (PaymentMethodStatus) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_payment_v1_payment_proto_enumTypes[1]
 }
 
-func (x PaymentInformationStatus) Number() protoreflect.EnumNumber {
+func (x PaymentMethodStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use PaymentInformationStatus.Descriptor instead.
-func (PaymentInformationStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use PaymentMethodStatus.Descriptor instead.
+func (PaymentMethodStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{1}
 }
 
@@ -216,8 +216,8 @@ func (StripeSetupIntentStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
-// Request to list payment information for a specific account.
-type ListPaymentInformationRequest struct {
+// Request to list payment methods for a specific account.
+type ListPaymentMethodsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
@@ -226,20 +226,20 @@ type ListPaymentInformationRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListPaymentInformationRequest) Reset() {
-	*x = ListPaymentInformationRequest{}
+func (x *ListPaymentMethodsRequest) Reset() {
+	*x = ListPaymentMethodsRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListPaymentInformationRequest) String() string {
+func (x *ListPaymentMethodsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPaymentInformationRequest) ProtoMessage() {}
+func (*ListPaymentMethodsRequest) ProtoMessage() {}
 
-func (x *ListPaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *ListPaymentMethodsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -251,41 +251,41 @@ func (x *ListPaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*ListPaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListPaymentMethodsRequest.ProtoReflect.Descriptor instead.
+func (*ListPaymentMethodsRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListPaymentInformationRequest) GetAccountId() string {
+func (x *ListPaymentMethodsRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-// Response containing a list of payment information.
-type ListPaymentInformationResponse struct {
+// Response containing a list of payment methods.
+type ListPaymentMethodsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The list of payment information.
-	Items         []*PaymentInformation `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The list of payment methods.
+	Items         []*PaymentMethod `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListPaymentInformationResponse) Reset() {
-	*x = ListPaymentInformationResponse{}
+func (x *ListPaymentMethodsResponse) Reset() {
+	*x = ListPaymentMethodsResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListPaymentInformationResponse) String() string {
+func (x *ListPaymentMethodsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPaymentInformationResponse) ProtoMessage() {}
+func (*ListPaymentMethodsResponse) ProtoMessage() {}
 
-func (x *ListPaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *ListPaymentMethodsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -297,45 +297,45 @@ func (x *ListPaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*ListPaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListPaymentMethodsResponse.ProtoReflect.Descriptor instead.
+func (*ListPaymentMethodsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListPaymentInformationResponse) GetItems() []*PaymentInformation {
+func (x *ListPaymentMethodsResponse) GetItems() []*PaymentMethod {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-// Request to get payment information by id.
-type GetPaymentInformationRequest struct {
+// Request to get payment method by id.
+type GetPaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the payment information (in GUID format).
+	// The identifier of the payment method (in GUID format).
 	// This is a required field.
-	PaymentInformationId string `protobuf:"bytes,2,opt,name=payment_information_id,json=paymentInformationId,proto3" json:"payment_information_id,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetPaymentInformationRequest) Reset() {
-	*x = GetPaymentInformationRequest{}
+func (x *GetPaymentMethodRequest) Reset() {
+	*x = GetPaymentMethodRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPaymentInformationRequest) String() string {
+func (x *GetPaymentMethodRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPaymentInformationRequest) ProtoMessage() {}
+func (*GetPaymentMethodRequest) ProtoMessage() {}
 
-func (x *GetPaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *GetPaymentMethodRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -347,48 +347,48 @@ func (x *GetPaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*GetPaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPaymentMethodRequest.ProtoReflect.Descriptor instead.
+func (*GetPaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetPaymentInformationRequest) GetAccountId() string {
+func (x *GetPaymentMethodRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *GetPaymentInformationRequest) GetPaymentInformationId() string {
+func (x *GetPaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
-		return x.PaymentInformationId
+		return x.PaymentMethodId
 	}
 	return ""
 }
 
-// Response containing the payment information.
-type GetPaymentInformationResponse struct {
+// Response containing the payment method.
+type GetPaymentMethodResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The actual payment information.
-	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The actual payment method.
+	PaymentMethod *PaymentMethod `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPaymentInformationResponse) Reset() {
-	*x = GetPaymentInformationResponse{}
+func (x *GetPaymentMethodResponse) Reset() {
+	*x = GetPaymentMethodResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPaymentInformationResponse) String() string {
+func (x *GetPaymentMethodResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPaymentInformationResponse) ProtoMessage() {}
+func (*GetPaymentMethodResponse) ProtoMessage() {}
 
-func (x *GetPaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *GetPaymentMethodResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -400,42 +400,42 @@ func (x *GetPaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*GetPaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPaymentMethodResponse.ProtoReflect.Descriptor instead.
+func (*GetPaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetPaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
+func (x *GetPaymentMethodResponse) GetPaymentMethod() *PaymentMethod {
 	if x != nil {
-		return x.PaymentInformation
+		return x.PaymentMethod
 	}
 	return nil
 }
 
-// CreatePaymentInformationRequest is the request for the CreatePaymentInformation function
-type CreatePaymentInformationRequest struct {
+// CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
+type CreatePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The payment information to create.
+	// The payment method to create.
 	// This is a required field.
-	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	PaymentMethod *PaymentMethod `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreatePaymentInformationRequest) Reset() {
-	*x = CreatePaymentInformationRequest{}
+func (x *CreatePaymentMethodRequest) Reset() {
+	*x = CreatePaymentMethodRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreatePaymentInformationRequest) String() string {
+func (x *CreatePaymentMethodRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePaymentInformationRequest) ProtoMessage() {}
+func (*CreatePaymentMethodRequest) ProtoMessage() {}
 
-func (x *CreatePaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *CreatePaymentMethodRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -447,41 +447,41 @@ func (x *CreatePaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*CreatePaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreatePaymentMethodRequest.ProtoReflect.Descriptor instead.
+func (*CreatePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CreatePaymentInformationRequest) GetPaymentInformation() *PaymentInformation {
+func (x *CreatePaymentMethodRequest) GetPaymentMethod() *PaymentMethod {
 	if x != nil {
-		return x.PaymentInformation
+		return x.PaymentMethod
 	}
 	return nil
 }
 
-// CreatePaymentInformationResponse is the response from the CreatePaymentInformation function
-type CreatePaymentInformationResponse struct {
+// CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
+type CreatePaymentMethodResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The created payment information.
-	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The created payment method.
+	PaymentMethod *PaymentMethod `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreatePaymentInformationResponse) Reset() {
-	*x = CreatePaymentInformationResponse{}
+func (x *CreatePaymentMethodResponse) Reset() {
+	*x = CreatePaymentMethodResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreatePaymentInformationResponse) String() string {
+func (x *CreatePaymentMethodResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePaymentInformationResponse) ProtoMessage() {}
+func (*CreatePaymentMethodResponse) ProtoMessage() {}
 
-func (x *CreatePaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *CreatePaymentMethodResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -493,41 +493,41 @@ func (x *CreatePaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*CreatePaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreatePaymentMethodResponse.ProtoReflect.Descriptor instead.
+func (*CreatePaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreatePaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
+func (x *CreatePaymentMethodResponse) GetPaymentMethod() *PaymentMethod {
 	if x != nil {
-		return x.PaymentInformation
+		return x.PaymentMethod
 	}
 	return nil
 }
 
-// UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
-type UpdatePaymentInformationRequest struct {
+// UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function
+type UpdatePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The payment information to update.
-	PaymentInformation *PaymentInformation `protobuf:"bytes,2,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The payment method to update.
+	PaymentMethod *PaymentMethod `protobuf:"bytes,2,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdatePaymentInformationRequest) Reset() {
-	*x = UpdatePaymentInformationRequest{}
+func (x *UpdatePaymentMethodRequest) Reset() {
+	*x = UpdatePaymentMethodRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdatePaymentInformationRequest) String() string {
+func (x *UpdatePaymentMethodRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdatePaymentInformationRequest) ProtoMessage() {}
+func (*UpdatePaymentMethodRequest) ProtoMessage() {}
 
-func (x *UpdatePaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdatePaymentMethodRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -539,41 +539,41 @@ func (x *UpdatePaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdatePaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*UpdatePaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdatePaymentMethodRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdatePaymentInformationRequest) GetPaymentInformation() *PaymentInformation {
+func (x *UpdatePaymentMethodRequest) GetPaymentMethod() *PaymentMethod {
 	if x != nil {
-		return x.PaymentInformation
+		return x.PaymentMethod
 	}
 	return nil
 }
 
-// UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
-type UpdatePaymentInformationResponse struct {
+// UpdatePaymentMethodResponse is the response from the UpdatePaymentMethod function
+type UpdatePaymentMethodResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The updated payment information.
-	PaymentInformation *PaymentInformation `protobuf:"bytes,1,opt,name=payment_information,json=paymentInformation,proto3" json:"payment_information,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The updated payment method.
+	PaymentMethod *PaymentMethod `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdatePaymentInformationResponse) Reset() {
-	*x = UpdatePaymentInformationResponse{}
+func (x *UpdatePaymentMethodResponse) Reset() {
+	*x = UpdatePaymentMethodResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdatePaymentInformationResponse) String() string {
+func (x *UpdatePaymentMethodResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdatePaymentInformationResponse) ProtoMessage() {}
+func (*UpdatePaymentMethodResponse) ProtoMessage() {}
 
-func (x *UpdatePaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdatePaymentMethodResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -585,45 +585,45 @@ func (x *UpdatePaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdatePaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*UpdatePaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdatePaymentMethodResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *UpdatePaymentInformationResponse) GetPaymentInformation() *PaymentInformation {
+func (x *UpdatePaymentMethodResponse) GetPaymentMethod() *PaymentMethod {
 	if x != nil {
-		return x.PaymentInformation
+		return x.PaymentMethod
 	}
 	return nil
 }
 
-// DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
-type DeletePaymentInformationRequest struct {
+// DeletePaymentMethodRequest is the request for the DeletePaymentMethod function
+type DeletePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier of the payment information (in GUID format).
+	// The identifier of the payment method (in GUID format).
 	// This is a required field.
-	PaymentInformationId string `protobuf:"bytes,2,opt,name=payment_information_id,json=paymentInformationId,proto3" json:"payment_information_id,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *DeletePaymentInformationRequest) Reset() {
-	*x = DeletePaymentInformationRequest{}
+func (x *DeletePaymentMethodRequest) Reset() {
+	*x = DeletePaymentMethodRequest{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeletePaymentInformationRequest) String() string {
+func (x *DeletePaymentMethodRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeletePaymentInformationRequest) ProtoMessage() {}
+func (*DeletePaymentMethodRequest) ProtoMessage() {}
 
-func (x *DeletePaymentInformationRequest) ProtoReflect() protoreflect.Message {
+func (x *DeletePaymentMethodRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -635,46 +635,46 @@ func (x *DeletePaymentInformationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeletePaymentInformationRequest.ProtoReflect.Descriptor instead.
-func (*DeletePaymentInformationRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeletePaymentMethodRequest.ProtoReflect.Descriptor instead.
+func (*DeletePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *DeletePaymentInformationRequest) GetAccountId() string {
+func (x *DeletePaymentMethodRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *DeletePaymentInformationRequest) GetPaymentInformationId() string {
+func (x *DeletePaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
-		return x.PaymentInformationId
+		return x.PaymentMethodId
 	}
 	return ""
 }
 
-// DeletePaymentInformationResponse is the response from the DeletePaymentInformation function
-type DeletePaymentInformationResponse struct {
+// DeletePaymentMethodResponse is the response from the DeletePaymentMethod function
+type DeletePaymentMethodResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeletePaymentInformationResponse) Reset() {
-	*x = DeletePaymentInformationResponse{}
+func (x *DeletePaymentMethodResponse) Reset() {
+	*x = DeletePaymentMethodResponse{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeletePaymentInformationResponse) String() string {
+func (x *DeletePaymentMethodResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeletePaymentInformationResponse) ProtoMessage() {}
+func (*DeletePaymentMethodResponse) ProtoMessage() {}
 
-func (x *DeletePaymentInformationResponse) ProtoReflect() protoreflect.Message {
+func (x *DeletePaymentMethodResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -686,8 +686,8 @@ func (x *DeletePaymentInformationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeletePaymentInformationResponse.ProtoReflect.Descriptor instead.
-func (*DeletePaymentInformationResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeletePaymentMethodResponse.ProtoReflect.Descriptor instead.
+func (*DeletePaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
@@ -988,17 +988,16 @@ func (x *StripeCheckoutSession) GetSetupIntentPaymentMethod() string {
 	return ""
 }
 
-// Represents a payment information.
-// TODO: Is payment method a better name?
-type PaymentInformation struct {
+// Represents a payment method.
+type PaymentMethod struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the payment information (in GUID format).
-	// This is a read-only field and will be available after a payment information is created.
+	// Unique identifier for the payment method (in GUID format).
+	// This is a read-only field and will be available after a payment method is created.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The type of the payment information provider.
+	// The type of the payment method provider.
 	// This is a required field.
 	Type PaymentProviderType `protobuf:"varint,3,opt,name=type,proto3,enum=qdrant.cloud.payment.v1.PaymentProviderType" json:"type,omitempty"`
 	// The customer account identifier in the payment provider system.
@@ -1006,43 +1005,43 @@ type PaymentInformation struct {
 	PaymentProviderId *string `protobuf:"bytes,4,opt,name=payment_provider_id,json=paymentProviderId,proto3,oneof" json:"payment_provider_id,omitempty"`
 	// Represents the payment method details, such as card information.
 	// This field is optional and only available for payment provider type Stripe for now.
-	PaymentMethod *PaymentMethod `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3,oneof" json:"payment_method,omitempty"`
-	// The billing address associated with the payment information.
+	PaymentMethodDetails *PaymentMethodDetails `protobuf:"bytes,5,opt,name=payment_method_details,json=paymentMethodDetails,proto3,oneof" json:"payment_method_details,omitempty"`
+	// The billing address associated with the payment method.
 	// This field is optional and only available for payment provider type Stripe.
 	BillingAddress *BillingAddress `protobuf:"bytes,6,opt,name=billing_address,json=billingAddress,proto3,oneof" json:"billing_address,omitempty"`
-	// The timestamp when the payment information was created.
-	// This is a read-only field and will be available after a payment information is created.
+	// The timestamp when the payment method was created.
+	// This is a read-only field and will be available after a payment method is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The timestamp when the payment information was last updated.
-	// This is a read-only field and will be available after a payment information is created.
+	// The timestamp when the payment method was last updated.
+	// This is a read-only field and will be available after a payment method is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
-	// The tax ID associated with the payment information.
+	// The tax ID associated with the payment method.
 	// This is an optional field.
 	TaxId *string `protobuf:"bytes,9,opt,name=tax_id,json=taxId,proto3,oneof" json:"tax_id,omitempty"`
-	// The us default flag indicates if this payment information is the default one for the account.
-	// Default payment information is used for all charges in the account.
+	// The us default flag indicates if this payment method is the default one for the account.
+	// Default payment method is used for all charges in the account.
 	IsDefault bool `protobuf:"varint,10,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
-	// Payment information status.
+	// Payment method status.
 	// This is read-only field.
-	Status        *PaymentInformationStatus `protobuf:"varint,11,opt,name=status,proto3,enum=qdrant.cloud.payment.v1.PaymentInformationStatus,oneof" json:"status,omitempty"`
+	Status        *PaymentMethodStatus `protobuf:"varint,11,opt,name=status,proto3,enum=qdrant.cloud.payment.v1.PaymentMethodStatus,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PaymentInformation) Reset() {
-	*x = PaymentInformation{}
+func (x *PaymentMethod) Reset() {
+	*x = PaymentMethod{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PaymentInformation) String() string {
+func (x *PaymentMethod) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PaymentInformation) ProtoMessage() {}
+func (*PaymentMethod) ProtoMessage() {}
 
-func (x *PaymentInformation) ProtoReflect() protoreflect.Message {
+func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1054,89 +1053,89 @@ func (x *PaymentInformation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PaymentInformation.ProtoReflect.Descriptor instead.
-func (*PaymentInformation) Descriptor() ([]byte, []int) {
+// Deprecated: Use PaymentMethod.ProtoReflect.Descriptor instead.
+func (*PaymentMethod) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *PaymentInformation) GetId() string {
+func (x *PaymentMethod) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *PaymentInformation) GetAccountId() string {
+func (x *PaymentMethod) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *PaymentInformation) GetType() PaymentProviderType {
+func (x *PaymentMethod) GetType() PaymentProviderType {
 	if x != nil {
 		return x.Type
 	}
 	return PaymentProviderType_PAYMENT_PROVIDER_TYPE_UNSPECIFIED
 }
 
-func (x *PaymentInformation) GetPaymentProviderId() string {
+func (x *PaymentMethod) GetPaymentProviderId() string {
 	if x != nil && x.PaymentProviderId != nil {
 		return *x.PaymentProviderId
 	}
 	return ""
 }
 
-func (x *PaymentInformation) GetPaymentMethod() *PaymentMethod {
+func (x *PaymentMethod) GetPaymentMethodDetails() *PaymentMethodDetails {
 	if x != nil {
-		return x.PaymentMethod
+		return x.PaymentMethodDetails
 	}
 	return nil
 }
 
-func (x *PaymentInformation) GetBillingAddress() *BillingAddress {
+func (x *PaymentMethod) GetBillingAddress() *BillingAddress {
 	if x != nil {
 		return x.BillingAddress
 	}
 	return nil
 }
 
-func (x *PaymentInformation) GetCreatedAt() *timestamppb.Timestamp {
+func (x *PaymentMethod) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return nil
 }
 
-func (x *PaymentInformation) GetLastModifiedAt() *timestamppb.Timestamp {
+func (x *PaymentMethod) GetLastModifiedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastModifiedAt
 	}
 	return nil
 }
 
-func (x *PaymentInformation) GetTaxId() string {
+func (x *PaymentMethod) GetTaxId() string {
 	if x != nil && x.TaxId != nil {
 		return *x.TaxId
 	}
 	return ""
 }
 
-func (x *PaymentInformation) GetIsDefault() bool {
+func (x *PaymentMethod) GetIsDefault() bool {
 	if x != nil {
 		return x.IsDefault
 	}
 	return false
 }
 
-func (x *PaymentInformation) GetStatus() PaymentInformationStatus {
+func (x *PaymentMethod) GetStatus() PaymentMethodStatus {
 	if x != nil && x.Status != nil {
 		return *x.Status
 	}
-	return PaymentInformationStatus_PAYMENT_INFORMATION_STATUS_UNSPECIFIED
+	return PaymentMethodStatus_PAYMENT_METHOD_STATUS_UNSPECIFIED
 }
 
-// Represents a billing address for a payment information.
+// Represents a billing address for a payment method.
 type BillingAddress struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The name of the person or entity associated with the billing address.
@@ -1266,7 +1265,7 @@ func (x *BillingAddress) GetTaxSupportedCountry() bool {
 }
 
 // Represents payment method
-type PaymentMethod struct {
+type PaymentMethodDetails struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the payment method.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1276,20 +1275,20 @@ type PaymentMethod struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PaymentMethod) Reset() {
-	*x = PaymentMethod{}
+func (x *PaymentMethodDetails) Reset() {
+	*x = PaymentMethodDetails{}
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PaymentMethod) String() string {
+func (x *PaymentMethodDetails) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PaymentMethod) ProtoMessage() {}
+func (*PaymentMethodDetails) ProtoMessage() {}
 
-func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
+func (x *PaymentMethodDetails) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_payment_v1_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1301,19 +1300,19 @@ func (x *PaymentMethod) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PaymentMethod.ProtoReflect.Descriptor instead.
-func (*PaymentMethod) Descriptor() ([]byte, []int) {
+// Deprecated: Use PaymentMethodDetails.ProtoReflect.Descriptor instead.
+func (*PaymentMethodDetails) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *PaymentMethod) GetId() string {
+func (x *PaymentMethodDetails) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *PaymentMethod) GetCard() *Card {
+func (x *PaymentMethodDetails) GetCard() *Card {
 	if x != nil {
 		return x.Card
 	}
@@ -1397,31 +1396,31 @@ var File_qdrant_cloud_payment_v1_payment_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"H\n" +
-	"\x1dListPaymentInformationRequest\x12'\n" +
+	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"D\n" +
+	"\x19ListPaymentMethodsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"c\n" +
-	"\x1eListPaymentInformationResponse\x12A\n" +
-	"\x05items\x18\x01 \x03(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x05items\"\x87\x01\n" +
-	"\x1cGetPaymentInformationRequest\x12'\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"Z\n" +
+	"\x1aListPaymentMethodsResponse\x12<\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\x05items\"x\n" +
+	"\x17GetPaymentMethodRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
-	"\x16payment_information_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x14paymentInformationId\"}\n" +
-	"\x1dGetPaymentInformationResponse\x12\\\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x87\x01\n" +
-	"\x1fCreatePaymentInformationRequest\x12d\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationB\x06\xbaH\x03\xc8\x01\x01R\x12paymentInformation\"\x80\x01\n" +
-	" CreatePaymentInformationResponse\x12\\\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x7f\n" +
-	"\x1fUpdatePaymentInformationRequest\x12\\\n" +
-	"\x13payment_information\x18\x02 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x80\x01\n" +
-	" UpdatePaymentInformationResponse\x12\\\n" +
-	"\x13payment_information\x18\x01 \x01(\v2+.qdrant.cloud.payment.v1.PaymentInformationR\x12paymentInformation\"\x8a\x01\n" +
-	"\x1fDeletePaymentInformationRequest\x12'\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"i\n" +
+	"\x18GetPaymentMethodResponse\x12M\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"s\n" +
+	"\x1aCreatePaymentMethodRequest\x12U\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"l\n" +
+	"\x1bCreatePaymentMethodResponse\x12M\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"k\n" +
+	"\x1aUpdatePaymentMethodRequest\x12M\n" +
+	"\x0epayment_method\x18\x02 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"l\n" +
+	"\x1bUpdatePaymentMethodResponse\x12M\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"{\n" +
+	"\x1aDeletePaymentMethodRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
-	"\x16payment_information_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x14paymentInformationId\"\"\n" +
-	" DeletePaymentInformationResponse\"i\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"\x1d\n" +
+	"\x1bDeletePaymentMethodResponse\"i\n" +
 	"\x1fGetStripeCheckoutSessionRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x1d\n" +
@@ -1442,14 +1441,14 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\x92\a\n" +
-	"\x12PaymentInformation\x12\x0e\n" +
+	"\x04_url\"\xa1\a\n" +
+	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12@\n" +
 	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeR\x04type\x123\n" +
-	"\x13payment_provider_id\x18\x04 \x01(\tH\x00R\x11paymentProviderId\x88\x01\x01\x12R\n" +
-	"\x0epayment_method\x18\x05 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodH\x01R\rpaymentMethod\x88\x01\x01\x12U\n" +
+	"\x13payment_provider_id\x18\x04 \x01(\tH\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
+	"\x16payment_method_details\x18\x05 \x01(\v2-.qdrant.cloud.payment.v1.PaymentMethodDetailsH\x01R\x14paymentMethodDetails\x88\x01\x01\x12U\n" +
 	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
@@ -1457,11 +1456,11 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05taxId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\x12N\n" +
-	"\x06status\x18\v \x01(\x0e21.qdrant.cloud.payment.v1.PaymentInformationStatusH\x04R\x06status\x88\x01\x01:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
-	"\x16payment_information.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
-	"\x14_payment_provider_idB\x11\n" +
-	"\x0f_payment_methodB\x12\n" +
+	" \x01(\bR\tisDefault\x12I\n" +
+	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusH\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
+	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
+	"\x14_payment_provider_idB\x19\n" +
+	"\x17_payment_method_detailsB\x12\n" +
 	"\x10_billing_addressB\t\n" +
 	"\a_tax_idB\t\n" +
 	"\a_status\"\xb4\x03\n" +
@@ -1479,8 +1478,8 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x15tax_supported_country\x18\n" +
 	" \x01(\bR\x13taxSupportedCountryB\b\n" +
 	"\x06_line2B\x0e\n" +
-	"\f_postal_code\"[\n" +
-	"\rPaymentMethod\x12\x17\n" +
+	"\f_postal_code\"b\n" +
+	"\x14PaymentMethodDetails\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x121\n" +
 	"\x04card\x18\x02 \x01(\v2\x1d.qdrant.cloud.payment.v1.CardR\x04card\"\x86\x01\n" +
 	"\x04Card\x12\x14\n" +
@@ -1494,12 +1493,12 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"%PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE\x10\x02\x12)\n" +
 	"%PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE\x10\x03\x12+\n" +
 	"'PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE\x10\x04\x12 \n" +
-	"\x1cPAYMENT_PROVIDER_TYPE_CUSTOM\x10\x05*\xbe\x01\n" +
-	"\x18PaymentInformationStatus\x12*\n" +
-	"&PAYMENT_INFORMATION_STATUS_UNSPECIFIED\x10\x00\x12%\n" +
-	"!PAYMENT_INFORMATION_STATUS_ACTIVE\x10\x01\x12'\n" +
-	"#PAYMENT_INFORMATION_STATUS_INACTIVE\x10\x02\x12&\n" +
-	"\"PAYMENT_INFORMATION_STATUS_PENDING\x10\x03*\xe1\x02\n" +
+	"\x1cPAYMENT_PROVIDER_TYPE_CUSTOM\x10\x05*\xa5\x01\n" +
+	"\x13PaymentMethodStatus\x12%\n" +
+	"!PAYMENT_METHOD_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cPAYMENT_METHOD_STATUS_ACTIVE\x10\x01\x12\"\n" +
+	"\x1ePAYMENT_METHOD_STATUS_INACTIVE\x10\x02\x12!\n" +
+	"\x1dPAYMENT_METHOD_STATUS_PENDING\x10\x03*\xe1\x02\n" +
 	"\x17StripeSetupIntentStatus\x12*\n" +
 	"&STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED\x10\x00\x126\n" +
 	"2STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD\x10\x01\x124\n" +
@@ -1507,13 +1506,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xe5\x0e\n" +
-	"\x0ePaymentService\x12\xe8\x01\n" +
-	"\x16ListPaymentInformation\x126.qdrant.cloud.payment.v1.ListPaymentInformationRequest\x1a7.qdrant.cloud.payment.v1.ListPaymentInformationResponse\"]\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02;\x129/api/payment/v1/accounts/{account_id}/payment-information\x12\xfe\x01\n" +
-	"\x15GetPaymentInformation\x125.qdrant.cloud.payment.v1.GetPaymentInformationRequest\x1a6.qdrant.cloud.payment.v1.GetPaymentInformationResponse\"v\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02T\x12R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xa6\x02\n" +
-	"\x18CreatePaymentInformation\x128.qdrant.cloud.payment.v1.CreatePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.CreatePaymentInformationResponse\"\x94\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x1epayment_information.account_id\x82\xd3\xe4\x93\x02O\"M/api/payment/v1/accounts/{payment_information.account_id}/payment-information\x12\xc2\x02\n" +
-	"\x18UpdatePaymentInformation\x128.qdrant.cloud.payment.v1.UpdatePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.UpdatePaymentInformationResponse\"\xb0\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x1epayment_information.account_id\x82\xd3\xe4\x93\x02k:\x01*\x1af/api/payment/v1/accounts/{payment_information.account_id}/payment-information/{payment_information.id}\x12\x88\x02\n" +
-	"\x18DeletePaymentInformation\x128.qdrant.cloud.payment.v1.DeletePaymentInformationRequest\x1a9.qdrant.cloud.payment.v1.DeletePaymentInformationResponse\"w\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02T*R/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}\x12\xf7\x01\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xe6\r\n" +
+	"\x0ePaymentService\x12\xd8\x01\n" +
+	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\xe6\x01\n" +
+	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"m\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\x89\x02\n" +
+	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\x86\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\x82\xd3\xe4\x93\x02F\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xa0\x02\n" +
+	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\x9d\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\xf0\x01\n" +
+	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"n\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xf7\x01\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"f\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf3\x01\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-sessionB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.payment.v1B\fPaymentProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/payment/v1;paymentv1\xa2\x02\x03QCP\xaa\x02\x17Qdrant.Cloud.Payment.V1\xca\x02\x17Qdrant\\Cloud\\Payment\\V1\xe2\x02#Qdrant\\Cloud\\Payment\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Payment::V1b\x06proto3"
@@ -1534,58 +1533,58 @@ var file_qdrant_cloud_payment_v1_payment_proto_enumTypes = make([]protoimpl.Enum
 var file_qdrant_cloud_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_qdrant_cloud_payment_v1_payment_proto_goTypes = []any{
 	(PaymentProviderType)(0),                    // 0: qdrant.cloud.payment.v1.PaymentProviderType
-	(PaymentInformationStatus)(0),               // 1: qdrant.cloud.payment.v1.PaymentInformationStatus
+	(PaymentMethodStatus)(0),                    // 1: qdrant.cloud.payment.v1.PaymentMethodStatus
 	(StripeSetupIntentStatus)(0),                // 2: qdrant.cloud.payment.v1.StripeSetupIntentStatus
-	(*ListPaymentInformationRequest)(nil),       // 3: qdrant.cloud.payment.v1.ListPaymentInformationRequest
-	(*ListPaymentInformationResponse)(nil),      // 4: qdrant.cloud.payment.v1.ListPaymentInformationResponse
-	(*GetPaymentInformationRequest)(nil),        // 5: qdrant.cloud.payment.v1.GetPaymentInformationRequest
-	(*GetPaymentInformationResponse)(nil),       // 6: qdrant.cloud.payment.v1.GetPaymentInformationResponse
-	(*CreatePaymentInformationRequest)(nil),     // 7: qdrant.cloud.payment.v1.CreatePaymentInformationRequest
-	(*CreatePaymentInformationResponse)(nil),    // 8: qdrant.cloud.payment.v1.CreatePaymentInformationResponse
-	(*UpdatePaymentInformationRequest)(nil),     // 9: qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
-	(*UpdatePaymentInformationResponse)(nil),    // 10: qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
-	(*DeletePaymentInformationRequest)(nil),     // 11: qdrant.cloud.payment.v1.DeletePaymentInformationRequest
-	(*DeletePaymentInformationResponse)(nil),    // 12: qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+	(*ListPaymentMethodsRequest)(nil),           // 3: qdrant.cloud.payment.v1.ListPaymentMethodsRequest
+	(*ListPaymentMethodsResponse)(nil),          // 4: qdrant.cloud.payment.v1.ListPaymentMethodsResponse
+	(*GetPaymentMethodRequest)(nil),             // 5: qdrant.cloud.payment.v1.GetPaymentMethodRequest
+	(*GetPaymentMethodResponse)(nil),            // 6: qdrant.cloud.payment.v1.GetPaymentMethodResponse
+	(*CreatePaymentMethodRequest)(nil),          // 7: qdrant.cloud.payment.v1.CreatePaymentMethodRequest
+	(*CreatePaymentMethodResponse)(nil),         // 8: qdrant.cloud.payment.v1.CreatePaymentMethodResponse
+	(*UpdatePaymentMethodRequest)(nil),          // 9: qdrant.cloud.payment.v1.UpdatePaymentMethodRequest
+	(*UpdatePaymentMethodResponse)(nil),         // 10: qdrant.cloud.payment.v1.UpdatePaymentMethodResponse
+	(*DeletePaymentMethodRequest)(nil),          // 11: qdrant.cloud.payment.v1.DeletePaymentMethodRequest
+	(*DeletePaymentMethodResponse)(nil),         // 12: qdrant.cloud.payment.v1.DeletePaymentMethodResponse
 	(*GetStripeCheckoutSessionRequest)(nil),     // 13: qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
 	(*GetStripeCheckoutSessionResponse)(nil),    // 14: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
 	(*CreateStripeCheckoutSessionRequest)(nil),  // 15: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
 	(*CreateStripeCheckoutSessionResponse)(nil), // 16: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
 	(*StripeCheckoutSession)(nil),               // 17: qdrant.cloud.payment.v1.StripeCheckoutSession
-	(*PaymentInformation)(nil),                  // 18: qdrant.cloud.payment.v1.PaymentInformation
+	(*PaymentMethod)(nil),                       // 18: qdrant.cloud.payment.v1.PaymentMethod
 	(*BillingAddress)(nil),                      // 19: qdrant.cloud.payment.v1.BillingAddress
-	(*PaymentMethod)(nil),                       // 20: qdrant.cloud.payment.v1.PaymentMethod
+	(*PaymentMethodDetails)(nil),                // 20: qdrant.cloud.payment.v1.PaymentMethodDetails
 	(*Card)(nil),                                // 21: qdrant.cloud.payment.v1.Card
 	(*timestamppb.Timestamp)(nil),               // 22: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
-	18, // 0: qdrant.cloud.payment.v1.ListPaymentInformationResponse.items:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	18, // 1: qdrant.cloud.payment.v1.GetPaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	18, // 2: qdrant.cloud.payment.v1.CreatePaymentInformationRequest.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	18, // 3: qdrant.cloud.payment.v1.CreatePaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	18, // 4: qdrant.cloud.payment.v1.UpdatePaymentInformationRequest.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
-	18, // 5: qdrant.cloud.payment.v1.UpdatePaymentInformationResponse.payment_information:type_name -> qdrant.cloud.payment.v1.PaymentInformation
+	18, // 0: qdrant.cloud.payment.v1.ListPaymentMethodsResponse.items:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	18, // 1: qdrant.cloud.payment.v1.GetPaymentMethodResponse.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	18, // 2: qdrant.cloud.payment.v1.CreatePaymentMethodRequest.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	18, // 3: qdrant.cloud.payment.v1.CreatePaymentMethodResponse.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	18, // 4: qdrant.cloud.payment.v1.UpdatePaymentMethodRequest.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	18, // 5: qdrant.cloud.payment.v1.UpdatePaymentMethodResponse.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
 	17, // 6: qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
 	17, // 7: qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse.stripe_session:type_name -> qdrant.cloud.payment.v1.StripeCheckoutSession
 	2,  // 8: qdrant.cloud.payment.v1.StripeCheckoutSession.setup_intent_status:type_name -> qdrant.cloud.payment.v1.StripeSetupIntentStatus
-	0,  // 9: qdrant.cloud.payment.v1.PaymentInformation.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
-	20, // 10: qdrant.cloud.payment.v1.PaymentInformation.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
-	19, // 11: qdrant.cloud.payment.v1.PaymentInformation.billing_address:type_name -> qdrant.cloud.payment.v1.BillingAddress
-	22, // 12: qdrant.cloud.payment.v1.PaymentInformation.created_at:type_name -> google.protobuf.Timestamp
-	22, // 13: qdrant.cloud.payment.v1.PaymentInformation.last_modified_at:type_name -> google.protobuf.Timestamp
-	1,  // 14: qdrant.cloud.payment.v1.PaymentInformation.status:type_name -> qdrant.cloud.payment.v1.PaymentInformationStatus
-	21, // 15: qdrant.cloud.payment.v1.PaymentMethod.card:type_name -> qdrant.cloud.payment.v1.Card
-	3,  // 16: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:input_type -> qdrant.cloud.payment.v1.ListPaymentInformationRequest
-	5,  // 17: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:input_type -> qdrant.cloud.payment.v1.GetPaymentInformationRequest
-	7,  // 18: qdrant.cloud.payment.v1.PaymentService.CreatePaymentInformation:input_type -> qdrant.cloud.payment.v1.CreatePaymentInformationRequest
-	9,  // 19: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation:input_type -> qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
-	11, // 20: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:input_type -> qdrant.cloud.payment.v1.DeletePaymentInformationRequest
+	0,  // 9: qdrant.cloud.payment.v1.PaymentMethod.type:type_name -> qdrant.cloud.payment.v1.PaymentProviderType
+	20, // 10: qdrant.cloud.payment.v1.PaymentMethod.payment_method_details:type_name -> qdrant.cloud.payment.v1.PaymentMethodDetails
+	19, // 11: qdrant.cloud.payment.v1.PaymentMethod.billing_address:type_name -> qdrant.cloud.payment.v1.BillingAddress
+	22, // 12: qdrant.cloud.payment.v1.PaymentMethod.created_at:type_name -> google.protobuf.Timestamp
+	22, // 13: qdrant.cloud.payment.v1.PaymentMethod.last_modified_at:type_name -> google.protobuf.Timestamp
+	1,  // 14: qdrant.cloud.payment.v1.PaymentMethod.status:type_name -> qdrant.cloud.payment.v1.PaymentMethodStatus
+	21, // 15: qdrant.cloud.payment.v1.PaymentMethodDetails.card:type_name -> qdrant.cloud.payment.v1.Card
+	3,  // 16: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:input_type -> qdrant.cloud.payment.v1.ListPaymentMethodsRequest
+	5,  // 17: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:input_type -> qdrant.cloud.payment.v1.GetPaymentMethodRequest
+	7,  // 18: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:input_type -> qdrant.cloud.payment.v1.CreatePaymentMethodRequest
+	9,  // 19: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:input_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodRequest
+	11, // 20: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:input_type -> qdrant.cloud.payment.v1.DeletePaymentMethodRequest
 	13, // 21: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
 	15, // 22: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	4,  // 23: qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation:output_type -> qdrant.cloud.payment.v1.ListPaymentInformationResponse
-	6,  // 24: qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation:output_type -> qdrant.cloud.payment.v1.GetPaymentInformationResponse
-	8,  // 25: qdrant.cloud.payment.v1.PaymentService.CreatePaymentInformation:output_type -> qdrant.cloud.payment.v1.CreatePaymentInformationResponse
-	10, // 26: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation:output_type -> qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
-	12, // 27: qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation:output_type -> qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+	4,  // 23: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:output_type -> qdrant.cloud.payment.v1.ListPaymentMethodsResponse
+	6,  // 24: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:output_type -> qdrant.cloud.payment.v1.GetPaymentMethodResponse
+	8,  // 25: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:output_type -> qdrant.cloud.payment.v1.CreatePaymentMethodResponse
+	10, // 26: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:output_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodResponse
+	12, // 27: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:output_type -> qdrant.cloud.payment.v1.DeletePaymentMethodResponse
 	14, // 28: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
 	16, // 29: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
 	23, // [23:30] is the sub-list for method output_type

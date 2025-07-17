@@ -9,59 +9,59 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // PaymentService is the API used to manage payment settings.
 service PaymentService {
-  // Lists all payment information known by the system for the provided account.
+  // Lists all payment methods known by the system for the provided account.
   // Required permissions:
   // - read:payment_information
-  rpc ListPaymentInformation(ListPaymentInformationRequest) returns (ListPaymentInformationResponse) {
+  rpc ListPaymentMethods(ListPaymentMethodsRequest) returns (ListPaymentMethodsResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information"};
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
   }
-  // Gets the payment information identified by the given ID.
+  // Gets the payment method identified by the given ID.
   // Required permissions:
   // - read:payment_information
-  rpc GetPaymentInformation(GetPaymentInformationRequest) returns (GetPaymentInformationResponse) {
+  rpc GetPaymentMethod(GetPaymentMethodRequest) returns (GetPaymentMethodResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
   }
-  // Creates a new payment information for the account.
-  // This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+  // Creates a new payment method for the account.
+  // This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
   // Required permissions:
   // - write:payment_information
-  rpc CreatePaymentInformation(CreatePaymentInformationRequest) returns (CreatePaymentInformationResponse) {
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "payment_information.account_id";
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
     // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/payment/v1/accounts/{payment_information.account_id}/payment-information"};
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods"};
   }
-  // Updates the payment information for the account.
-  // This method is used to update the payment information details, such as billing address.
+  // Updates the payment method for the account.
+  // This method is used to update the payment method details, such as billing address.
   // Required permissions:
   // - write:payment_information
-  rpc UpdatePaymentInformation(UpdatePaymentInformationRequest) returns (UpdatePaymentInformationResponse) {
+  rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (UpdatePaymentMethodResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "payment_information.account_id";
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      put: "/api/payment/v1/accounts/{payment_information.account_id}/payment-information/{payment_information.id}"
+      put: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}"
       body: "*"
     };
   }
-  // Delete the payment information identified by the given ID.
+  // Delete the payment method identified by the given ID.
   // Required permissions:
   // - write:payment_information
-  rpc DeletePaymentInformation(DeletePaymentInformationRequest) returns (DeletePaymentInformationResponse) {
+  rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (DeletePaymentMethodResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-information/{payment_information_id}"};
+    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
   }
   // Get the Stripe Checkout session by its ID.
   // This method is used to retrieve the session details after it has been created.
@@ -85,72 +85,72 @@ service PaymentService {
   }
 }
 
-// Request to list payment information for a specific account.
-message ListPaymentInformationRequest {
+// Request to list payment methods for a specific account.
+message ListPaymentMethodsRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// Response containing a list of payment information.
-message ListPaymentInformationResponse {
-  // The list of payment information.
-  repeated PaymentInformation items = 1;
+// Response containing a list of payment methods.
+message ListPaymentMethodsResponse {
+  // The list of payment methods.
+  repeated PaymentMethod items = 1;
 }
 
-// Request to get payment information by id.
-message GetPaymentInformationRequest {
+// Request to get payment method by id.
+message GetPaymentMethodRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the payment information (in GUID format).
+  // The identifier of the payment method (in GUID format).
   // This is a required field.
-  string payment_information_id = 2 [(buf.validate.field).string = {uuid: true}];
+  string payment_method_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// Response containing the payment information.
-message GetPaymentInformationResponse {
-  // The actual payment information.
-  PaymentInformation payment_information = 1;
+// Response containing the payment method.
+message GetPaymentMethodResponse {
+  // The actual payment method.
+  PaymentMethod payment_method = 1;
 }
 
-// CreatePaymentInformationRequest is the request for the CreatePaymentInformation function
-message CreatePaymentInformationRequest {
-  // The payment information to create.
+// CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
+message CreatePaymentMethodRequest {
+  // The payment method to create.
   // This is a required field.
-  PaymentInformation payment_information = 1 [(buf.validate.field).required = true];
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
 }
 
-// CreatePaymentInformationResponse is the response from the CreatePaymentInformation function
-message CreatePaymentInformationResponse {
-  // The created payment information.
-  PaymentInformation payment_information = 1;
+// CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
+message CreatePaymentMethodResponse {
+  // The created payment method.
+  PaymentMethod payment_method = 1;
 }
 
-// UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
-message UpdatePaymentInformationRequest {
-  // The payment information to update.
-  PaymentInformation payment_information = 2;
+// UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function
+message UpdatePaymentMethodRequest {
+  // The payment method to update.
+  PaymentMethod payment_method = 2;
 }
 
-// UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
-message UpdatePaymentInformationResponse {
-  // The updated payment information.
-  PaymentInformation payment_information = 1;
+// UpdatePaymentMethodResponse is the response from the UpdatePaymentMethod function
+message UpdatePaymentMethodResponse {
+  // The updated payment method.
+  PaymentMethod payment_method = 1;
 }
 
-// DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
-message DeletePaymentInformationRequest {
+// DeletePaymentMethodRequest is the request for the DeletePaymentMethod function
+message DeletePaymentMethodRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the payment information (in GUID format).
+  // The identifier of the payment method (in GUID format).
   // This is a required field.
-  string payment_information_id = 2 [(buf.validate.field).string = {uuid: true}];
+  string payment_method_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// DeletePaymentInformationResponse is the response from the DeletePaymentInformation function
-message DeletePaymentInformationResponse {
+// DeletePaymentMethodResponse is the response from the DeletePaymentMethod function
+message DeletePaymentMethodResponse {
   // Empty
 }
 
@@ -203,22 +203,21 @@ message StripeCheckoutSession {
   string setup_intent_payment_method = 6;
 }
 
-// Represents a payment information.
+// Represents a payment method.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// TODO: Is payment method a better name?
-message PaymentInformation {
-  // Unique identifier for the payment information (in GUID format).
-  // This is a read-only field and will be available after a payment information is created.
+message PaymentMethod {
+  // Unique identifier for the payment method (in GUID format).
+  // This is a read-only field and will be available after a payment method is created.
   string id = 1;
   option (buf.validate.message).cel = {
-    id: "payment_information.id"
+    id: "payment_method.id"
     message: "value must be a valid UUID"
-    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)"
   };
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The type of the payment information provider.
+  // The type of the payment method provider.
   // This is a required field.
   PaymentProviderType type = 3;
   // The customer account identifier in the payment provider system.
@@ -226,56 +225,56 @@ message PaymentInformation {
   optional string payment_provider_id = 4;
   // Represents the payment method details, such as card information.
   // This field is optional and only available for payment provider type Stripe for now.
-  optional PaymentMethod payment_method = 5;
-  // The billing address associated with the payment information.
+  optional PaymentMethodDetails payment_method_details = 5;
+  // The billing address associated with the payment method.
   // This field is optional and only available for payment provider type Stripe.
   optional BillingAddress billing_address = 6;
-  // The timestamp when the payment information was created.
-  // This is a read-only field and will be available after a payment information is created.
+  // The timestamp when the payment method was created.
+  // This is a read-only field and will be available after a payment method is created.
   google.protobuf.Timestamp created_at = 7;
-  // The timestamp when the payment information was last updated.
-  // This is a read-only field and will be available after a payment information is created.
+  // The timestamp when the payment method was last updated.
+  // This is a read-only field and will be available after a payment method is created.
   google.protobuf.Timestamp last_modified_at = 8;
-  // The tax ID associated with the payment information.
+  // The tax ID associated with the payment method.
   // This is an optional field.
   optional string tax_id = 9 [(buf.validate.field).string = {min_len: 1}];
-  // The us default flag indicates if this payment information is the default one for the account.
-  // Default payment information is used for all charges in the account.
+  // The us default flag indicates if this payment method is the default one for the account.
+  // Default payment method is used for all charges in the account.
   bool is_default = 10;
-  // Payment information status.
+  // Payment method status.
   // This is read-only field.
-  optional PaymentInformationStatus status = 11;
+  optional PaymentMethodStatus status = 11;
 }
 
-// PaymentProviderType defines the type of payment information.
+// PaymentProviderType defines the type of payment method.
 enum PaymentProviderType {
   // Unspecified type, should not be used.
   PAYMENT_PROVIDER_TYPE_UNSPECIFIED = 0;
-  // Stripe payment information.
+  // Stripe payment method.
   PAYMENT_PROVIDER_TYPE_STRIPE = 1;
-  // AWS marketplace payment information.
+  // AWS marketplace payment method.
   PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE = 2;
-  // Google Cloud Platform marketplace payment information.
+  // Google Cloud Platform marketplace payment method.
   PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE = 3;
-  // Azure marketplace payment information.
+  // Azure marketplace payment method.
   PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE = 4;
-  // Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.
+  // Custom payment method. This is used for custom payment methods that do not fit into the predefined categories.
   PAYMENT_PROVIDER_TYPE_CUSTOM = 5;
 }
 
-// PaymentInformationStatus defines the status of the payment information.
-enum PaymentInformationStatus {
+// PaymentMethodStatus defines the status of the payment method.
+enum PaymentMethodStatus {
   // Unspecified status, should not be used.
-  PAYMENT_INFORMATION_STATUS_UNSPECIFIED = 0;
-  // The payment information is active and can be used for payments.
-  PAYMENT_INFORMATION_STATUS_ACTIVE = 1;
-  // The payment information is inactive and cannot be used for payments.
-  PAYMENT_INFORMATION_STATUS_INACTIVE = 2;
-  // The payment information is pending verification or setup.
-  PAYMENT_INFORMATION_STATUS_PENDING = 3;
+  PAYMENT_METHOD_STATUS_UNSPECIFIED = 0;
+  // The payment method is active and can be used for payments.
+  PAYMENT_METHOD_STATUS_ACTIVE = 1;
+  // The payment method is inactive and cannot be used for payments.
+  PAYMENT_METHOD_STATUS_INACTIVE = 2;
+  // The payment method is pending verification or setup.
+  PAYMENT_METHOD_STATUS_PENDING = 3;
 }
 
-// Represents a billing address for a payment information.
+// Represents a billing address for a payment method.
 message BillingAddress {
   // The name of the person or entity associated with the billing address.
   string name = 1 [(buf.validate.field).string = {min_len: 1}];
@@ -303,7 +302,7 @@ message BillingAddress {
 
 // Represents payment method
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-message PaymentMethod {
+message PaymentMethodDetails {
   // The identifier of the payment method.
   string id = 1 [(buf.validate.field).string = {min_len: 1}];
   // Card details.

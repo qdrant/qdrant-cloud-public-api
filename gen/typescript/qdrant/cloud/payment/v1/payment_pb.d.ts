@@ -12,11 +12,11 @@ import type { Timestamp } from "@bufbuild/protobuf/wkt";
 export declare const file_qdrant_cloud_payment_v1_payment: GenFile;
 
 /**
- * Request to list payment information for a specific account.
+ * Request to list payment methods for a specific account.
  *
- * @generated from message qdrant.cloud.payment.v1.ListPaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.ListPaymentMethodsRequest
  */
-export declare type ListPaymentInformationRequest = Message<"qdrant.cloud.payment.v1.ListPaymentInformationRequest"> & {
+export declare type ListPaymentMethodsRequest = Message<"qdrant.cloud.payment.v1.ListPaymentMethodsRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -27,37 +27,37 @@ export declare type ListPaymentInformationRequest = Message<"qdrant.cloud.paymen
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.ListPaymentInformationRequest.
- * Use `create(ListPaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.ListPaymentMethodsRequest.
+ * Use `create(ListPaymentMethodsRequestSchema)` to create a new message.
  */
-export declare const ListPaymentInformationRequestSchema: GenMessage<ListPaymentInformationRequest>;
+export declare const ListPaymentMethodsRequestSchema: GenMessage<ListPaymentMethodsRequest>;
 
 /**
- * Response containing a list of payment information.
+ * Response containing a list of payment methods.
  *
- * @generated from message qdrant.cloud.payment.v1.ListPaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.ListPaymentMethodsResponse
  */
-export declare type ListPaymentInformationResponse = Message<"qdrant.cloud.payment.v1.ListPaymentInformationResponse"> & {
+export declare type ListPaymentMethodsResponse = Message<"qdrant.cloud.payment.v1.ListPaymentMethodsResponse"> & {
   /**
-   * The list of payment information.
+   * The list of payment methods.
    *
-   * @generated from field: repeated qdrant.cloud.payment.v1.PaymentInformation items = 1;
+   * @generated from field: repeated qdrant.cloud.payment.v1.PaymentMethod items = 1;
    */
-  items: PaymentInformation[];
+  items: PaymentMethod[];
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.ListPaymentInformationResponse.
- * Use `create(ListPaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.ListPaymentMethodsResponse.
+ * Use `create(ListPaymentMethodsResponseSchema)` to create a new message.
  */
-export declare const ListPaymentInformationResponseSchema: GenMessage<ListPaymentInformationResponse>;
+export declare const ListPaymentMethodsResponseSchema: GenMessage<ListPaymentMethodsResponse>;
 
 /**
- * Request to get payment information by id.
+ * Request to get payment method by id.
  *
- * @generated from message qdrant.cloud.payment.v1.GetPaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.GetPaymentMethodRequest
  */
-export declare type GetPaymentInformationRequest = Message<"qdrant.cloud.payment.v1.GetPaymentInformationRequest"> & {
+export declare type GetPaymentMethodRequest = Message<"qdrant.cloud.payment.v1.GetPaymentMethodRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -67,127 +67,127 @@ export declare type GetPaymentInformationRequest = Message<"qdrant.cloud.payment
   accountId: string;
 
   /**
-   * The identifier of the payment information (in GUID format).
+   * The identifier of the payment method (in GUID format).
    * This is a required field.
    *
-   * @generated from field: string payment_information_id = 2;
+   * @generated from field: string payment_method_id = 2;
    */
-  paymentInformationId: string;
+  paymentMethodId: string;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.GetPaymentInformationRequest.
- * Use `create(GetPaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.GetPaymentMethodRequest.
+ * Use `create(GetPaymentMethodRequestSchema)` to create a new message.
  */
-export declare const GetPaymentInformationRequestSchema: GenMessage<GetPaymentInformationRequest>;
+export declare const GetPaymentMethodRequestSchema: GenMessage<GetPaymentMethodRequest>;
 
 /**
- * Response containing the payment information.
+ * Response containing the payment method.
  *
- * @generated from message qdrant.cloud.payment.v1.GetPaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.GetPaymentMethodResponse
  */
-export declare type GetPaymentInformationResponse = Message<"qdrant.cloud.payment.v1.GetPaymentInformationResponse"> & {
+export declare type GetPaymentMethodResponse = Message<"qdrant.cloud.payment.v1.GetPaymentMethodResponse"> & {
   /**
-   * The actual payment information.
+   * The actual payment method.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
    */
-  paymentInformation?: PaymentInformation;
+  paymentMethod?: PaymentMethod;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.GetPaymentInformationResponse.
- * Use `create(GetPaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.GetPaymentMethodResponse.
+ * Use `create(GetPaymentMethodResponseSchema)` to create a new message.
  */
-export declare const GetPaymentInformationResponseSchema: GenMessage<GetPaymentInformationResponse>;
+export declare const GetPaymentMethodResponseSchema: GenMessage<GetPaymentMethodResponse>;
 
 /**
- * CreatePaymentInformationRequest is the request for the CreatePaymentInformation function
+ * CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
  *
- * @generated from message qdrant.cloud.payment.v1.CreatePaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.CreatePaymentMethodRequest
  */
-export declare type CreatePaymentInformationRequest = Message<"qdrant.cloud.payment.v1.CreatePaymentInformationRequest"> & {
+export declare type CreatePaymentMethodRequest = Message<"qdrant.cloud.payment.v1.CreatePaymentMethodRequest"> & {
   /**
-   * The payment information to create.
+   * The payment method to create.
    * This is a required field.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
    */
-  paymentInformation?: PaymentInformation;
+  paymentMethod?: PaymentMethod;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.CreatePaymentInformationRequest.
- * Use `create(CreatePaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.CreatePaymentMethodRequest.
+ * Use `create(CreatePaymentMethodRequestSchema)` to create a new message.
  */
-export declare const CreatePaymentInformationRequestSchema: GenMessage<CreatePaymentInformationRequest>;
+export declare const CreatePaymentMethodRequestSchema: GenMessage<CreatePaymentMethodRequest>;
 
 /**
- * CreatePaymentInformationResponse is the response from the CreatePaymentInformation function
+ * CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
  *
- * @generated from message qdrant.cloud.payment.v1.CreatePaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.CreatePaymentMethodResponse
  */
-export declare type CreatePaymentInformationResponse = Message<"qdrant.cloud.payment.v1.CreatePaymentInformationResponse"> & {
+export declare type CreatePaymentMethodResponse = Message<"qdrant.cloud.payment.v1.CreatePaymentMethodResponse"> & {
   /**
-   * The created payment information.
+   * The created payment method.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
    */
-  paymentInformation?: PaymentInformation;
+  paymentMethod?: PaymentMethod;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.CreatePaymentInformationResponse.
- * Use `create(CreatePaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.CreatePaymentMethodResponse.
+ * Use `create(CreatePaymentMethodResponseSchema)` to create a new message.
  */
-export declare const CreatePaymentInformationResponseSchema: GenMessage<CreatePaymentInformationResponse>;
+export declare const CreatePaymentMethodResponseSchema: GenMessage<CreatePaymentMethodResponse>;
 
 /**
- * UpdatePaymentInformationRequest is the request for the UpdatePaymentInformation function
+ * UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function
  *
- * @generated from message qdrant.cloud.payment.v1.UpdatePaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.UpdatePaymentMethodRequest
  */
-export declare type UpdatePaymentInformationRequest = Message<"qdrant.cloud.payment.v1.UpdatePaymentInformationRequest"> & {
+export declare type UpdatePaymentMethodRequest = Message<"qdrant.cloud.payment.v1.UpdatePaymentMethodRequest"> & {
   /**
-   * The payment information to update.
+   * The payment method to update.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 2;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 2;
    */
-  paymentInformation?: PaymentInformation;
+  paymentMethod?: PaymentMethod;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.UpdatePaymentInformationRequest.
- * Use `create(UpdatePaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.UpdatePaymentMethodRequest.
+ * Use `create(UpdatePaymentMethodRequestSchema)` to create a new message.
  */
-export declare const UpdatePaymentInformationRequestSchema: GenMessage<UpdatePaymentInformationRequest>;
+export declare const UpdatePaymentMethodRequestSchema: GenMessage<UpdatePaymentMethodRequest>;
 
 /**
- * UpdatePaymentInformationResponse is the response from the UpdatePaymentInformation function
+ * UpdatePaymentMethodResponse is the response from the UpdatePaymentMethod function
  *
- * @generated from message qdrant.cloud.payment.v1.UpdatePaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.UpdatePaymentMethodResponse
  */
-export declare type UpdatePaymentInformationResponse = Message<"qdrant.cloud.payment.v1.UpdatePaymentInformationResponse"> & {
+export declare type UpdatePaymentMethodResponse = Message<"qdrant.cloud.payment.v1.UpdatePaymentMethodResponse"> & {
   /**
-   * The updated payment information.
+   * The updated payment method.
    *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
    */
-  paymentInformation?: PaymentInformation;
+  paymentMethod?: PaymentMethod;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.UpdatePaymentInformationResponse.
- * Use `create(UpdatePaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.UpdatePaymentMethodResponse.
+ * Use `create(UpdatePaymentMethodResponseSchema)` to create a new message.
  */
-export declare const UpdatePaymentInformationResponseSchema: GenMessage<UpdatePaymentInformationResponse>;
+export declare const UpdatePaymentMethodResponseSchema: GenMessage<UpdatePaymentMethodResponse>;
 
 /**
- * DeletePaymentInformationRequest is the request for the DeletePaymentInformation function
+ * DeletePaymentMethodRequest is the request for the DeletePaymentMethod function
  *
- * @generated from message qdrant.cloud.payment.v1.DeletePaymentInformationRequest
+ * @generated from message qdrant.cloud.payment.v1.DeletePaymentMethodRequest
  */
-export declare type DeletePaymentInformationRequest = Message<"qdrant.cloud.payment.v1.DeletePaymentInformationRequest"> & {
+export declare type DeletePaymentMethodRequest = Message<"qdrant.cloud.payment.v1.DeletePaymentMethodRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -197,35 +197,35 @@ export declare type DeletePaymentInformationRequest = Message<"qdrant.cloud.paym
   accountId: string;
 
   /**
-   * The identifier of the payment information (in GUID format).
+   * The identifier of the payment method (in GUID format).
    * This is a required field.
    *
-   * @generated from field: string payment_information_id = 2;
+   * @generated from field: string payment_method_id = 2;
    */
-  paymentInformationId: string;
+  paymentMethodId: string;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.DeletePaymentInformationRequest.
- * Use `create(DeletePaymentInformationRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.DeletePaymentMethodRequest.
+ * Use `create(DeletePaymentMethodRequestSchema)` to create a new message.
  */
-export declare const DeletePaymentInformationRequestSchema: GenMessage<DeletePaymentInformationRequest>;
+export declare const DeletePaymentMethodRequestSchema: GenMessage<DeletePaymentMethodRequest>;
 
 /**
- * DeletePaymentInformationResponse is the response from the DeletePaymentInformation function
+ * DeletePaymentMethodResponse is the response from the DeletePaymentMethod function
  *
  * Empty
  *
- * @generated from message qdrant.cloud.payment.v1.DeletePaymentInformationResponse
+ * @generated from message qdrant.cloud.payment.v1.DeletePaymentMethodResponse
  */
-export declare type DeletePaymentInformationResponse = Message<"qdrant.cloud.payment.v1.DeletePaymentInformationResponse"> & {
+export declare type DeletePaymentMethodResponse = Message<"qdrant.cloud.payment.v1.DeletePaymentMethodResponse"> & {
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.DeletePaymentInformationResponse.
- * Use `create(DeletePaymentInformationResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.DeletePaymentMethodResponse.
+ * Use `create(DeletePaymentMethodResponseSchema)` to create a new message.
  */
-export declare const DeletePaymentInformationResponseSchema: GenMessage<DeletePaymentInformationResponse>;
+export declare const DeletePaymentMethodResponseSchema: GenMessage<DeletePaymentMethodResponse>;
 
 /**
  * GetStripeCheckoutSessionRequest is the request for the GetStripeCheckoutSession function
@@ -381,15 +381,14 @@ export declare type StripeCheckoutSession = Message<"qdrant.cloud.payment.v1.Str
 export declare const StripeCheckoutSessionSchema: GenMessage<StripeCheckoutSession>;
 
 /**
- * Represents a payment information.
- * TODO: Is payment method a better name?
+ * Represents a payment method.
  *
- * @generated from message qdrant.cloud.payment.v1.PaymentInformation
+ * @generated from message qdrant.cloud.payment.v1.PaymentMethod
  */
-export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.PaymentInformation"> & {
+export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMethod"> & {
   /**
-   * Unique identifier for the payment information (in GUID format).
-   * This is a read-only field and will be available after a payment information is created.
+   * Unique identifier for the payment method (in GUID format).
+   * This is a read-only field and will be available after a payment method is created.
    *
    * @generated from field: string id = 1;
    */
@@ -404,7 +403,7 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
   accountId: string;
 
   /**
-   * The type of the payment information provider.
+   * The type of the payment method provider.
    * This is a required field.
    *
    * @generated from field: qdrant.cloud.payment.v1.PaymentProviderType type = 3;
@@ -423,12 +422,12 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
    * Represents the payment method details, such as card information.
    * This field is optional and only available for payment provider type Stripe for now.
    *
-   * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethod payment_method = 5;
+   * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethodDetails payment_method_details = 5;
    */
-  paymentMethod?: PaymentMethod;
+  paymentMethodDetails?: PaymentMethodDetails;
 
   /**
-   * The billing address associated with the payment information.
+   * The billing address associated with the payment method.
    * This field is optional and only available for payment provider type Stripe.
    *
    * @generated from field: optional qdrant.cloud.payment.v1.BillingAddress billing_address = 6;
@@ -436,23 +435,23 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
   billingAddress?: BillingAddress;
 
   /**
-   * The timestamp when the payment information was created.
-   * This is a read-only field and will be available after a payment information is created.
+   * The timestamp when the payment method was created.
+   * This is a read-only field and will be available after a payment method is created.
    *
    * @generated from field: google.protobuf.Timestamp created_at = 7;
    */
   createdAt?: Timestamp;
 
   /**
-   * The timestamp when the payment information was last updated.
-   * This is a read-only field and will be available after a payment information is created.
+   * The timestamp when the payment method was last updated.
+   * This is a read-only field and will be available after a payment method is created.
    *
    * @generated from field: google.protobuf.Timestamp last_modified_at = 8;
    */
   lastModifiedAt?: Timestamp;
 
   /**
-   * The tax ID associated with the payment information.
+   * The tax ID associated with the payment method.
    * This is an optional field.
    *
    * @generated from field: optional string tax_id = 9;
@@ -460,30 +459,30 @@ export declare type PaymentInformation = Message<"qdrant.cloud.payment.v1.Paymen
   taxId?: string;
 
   /**
-   * The us default flag indicates if this payment information is the default one for the account.
-   * Default payment information is used for all charges in the account.
+   * The us default flag indicates if this payment method is the default one for the account.
+   * Default payment method is used for all charges in the account.
    *
    * @generated from field: bool is_default = 10;
    */
   isDefault: boolean;
 
   /**
-   * Payment information status.
+   * Payment method status.
    * This is read-only field.
    *
-   * @generated from field: optional qdrant.cloud.payment.v1.PaymentInformationStatus status = 11;
+   * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethodStatus status = 11;
    */
-  status?: PaymentInformationStatus;
+  status?: PaymentMethodStatus;
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.PaymentInformation.
- * Use `create(PaymentInformationSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.PaymentMethod.
+ * Use `create(PaymentMethodSchema)` to create a new message.
  */
-export declare const PaymentInformationSchema: GenMessage<PaymentInformation>;
+export declare const PaymentMethodSchema: GenMessage<PaymentMethod>;
 
 /**
- * Represents a billing address for a payment information.
+ * Represents a billing address for a payment method.
  *
  * @generated from message qdrant.cloud.payment.v1.BillingAddress
  */
@@ -570,9 +569,9 @@ export declare const BillingAddressSchema: GenMessage<BillingAddress>;
 /**
  * Represents payment method
  *
- * @generated from message qdrant.cloud.payment.v1.PaymentMethod
+ * @generated from message qdrant.cloud.payment.v1.PaymentMethodDetails
  */
-export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMethod"> & {
+export declare type PaymentMethodDetails = Message<"qdrant.cloud.payment.v1.PaymentMethodDetails"> & {
   /**
    * The identifier of the payment method.
    *
@@ -589,10 +588,10 @@ export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMeth
 };
 
 /**
- * Describes the message qdrant.cloud.payment.v1.PaymentMethod.
- * Use `create(PaymentMethodSchema)` to create a new message.
+ * Describes the message qdrant.cloud.payment.v1.PaymentMethodDetails.
+ * Use `create(PaymentMethodDetailsSchema)` to create a new message.
  */
-export declare const PaymentMethodSchema: GenMessage<PaymentMethod>;
+export declare const PaymentMethodDetailsSchema: GenMessage<PaymentMethodDetails>;
 
 /**
  * Represents payment method card details
@@ -636,7 +635,7 @@ export declare type Card = Message<"qdrant.cloud.payment.v1.Card"> & {
 export declare const CardSchema: GenMessage<Card>;
 
 /**
- * PaymentProviderType defines the type of payment information.
+ * PaymentProviderType defines the type of payment method.
  *
  * @generated from enum qdrant.cloud.payment.v1.PaymentProviderType
  */
@@ -649,35 +648,35 @@ export enum PaymentProviderType {
   UNSPECIFIED = 0,
 
   /**
-   * Stripe payment information.
+   * Stripe payment method.
    *
    * @generated from enum value: PAYMENT_PROVIDER_TYPE_STRIPE = 1;
    */
   STRIPE = 1,
 
   /**
-   * AWS marketplace payment information.
+   * AWS marketplace payment method.
    *
    * @generated from enum value: PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE = 2;
    */
   AWS_MARKETPLACE = 2,
 
   /**
-   * Google Cloud Platform marketplace payment information.
+   * Google Cloud Platform marketplace payment method.
    *
    * @generated from enum value: PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE = 3;
    */
   GCP_MARKETPLACE = 3,
 
   /**
-   * Azure marketplace payment information.
+   * Azure marketplace payment method.
    *
    * @generated from enum value: PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE = 4;
    */
   AZURE_MARKETPLACE = 4,
 
   /**
-   * Custom payment information. This is used for custom payment methods that do not fit into the predefined categories.
+   * Custom payment method. This is used for custom payment methods that do not fit into the predefined categories.
    *
    * @generated from enum value: PAYMENT_PROVIDER_TYPE_CUSTOM = 5;
    */
@@ -690,44 +689,44 @@ export enum PaymentProviderType {
 export declare const PaymentProviderTypeSchema: GenEnum<PaymentProviderType>;
 
 /**
- * PaymentInformationStatus defines the status of the payment information.
+ * PaymentMethodStatus defines the status of the payment method.
  *
- * @generated from enum qdrant.cloud.payment.v1.PaymentInformationStatus
+ * @generated from enum qdrant.cloud.payment.v1.PaymentMethodStatus
  */
-export enum PaymentInformationStatus {
+export enum PaymentMethodStatus {
   /**
    * Unspecified status, should not be used.
    *
-   * @generated from enum value: PAYMENT_INFORMATION_STATUS_UNSPECIFIED = 0;
+   * @generated from enum value: PAYMENT_METHOD_STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * The payment information is active and can be used for payments.
+   * The payment method is active and can be used for payments.
    *
-   * @generated from enum value: PAYMENT_INFORMATION_STATUS_ACTIVE = 1;
+   * @generated from enum value: PAYMENT_METHOD_STATUS_ACTIVE = 1;
    */
   ACTIVE = 1,
 
   /**
-   * The payment information is inactive and cannot be used for payments.
+   * The payment method is inactive and cannot be used for payments.
    *
-   * @generated from enum value: PAYMENT_INFORMATION_STATUS_INACTIVE = 2;
+   * @generated from enum value: PAYMENT_METHOD_STATUS_INACTIVE = 2;
    */
   INACTIVE = 2,
 
   /**
-   * The payment information is pending verification or setup.
+   * The payment method is pending verification or setup.
    *
-   * @generated from enum value: PAYMENT_INFORMATION_STATUS_PENDING = 3;
+   * @generated from enum value: PAYMENT_METHOD_STATUS_PENDING = 3;
    */
   PENDING = 3,
 }
 
 /**
- * Describes the enum qdrant.cloud.payment.v1.PaymentInformationStatus.
+ * Describes the enum qdrant.cloud.payment.v1.PaymentMethodStatus.
  */
-export declare const PaymentInformationStatusSchema: GenEnum<PaymentInformationStatus>;
+export declare const PaymentMethodStatusSchema: GenEnum<PaymentMethodStatus>;
 
 /**
  * Represents the status of a SetupIntent in Stripe.
@@ -797,66 +796,66 @@ export declare const StripeSetupIntentStatusSchema: GenEnum<StripeSetupIntentSta
  */
 export declare const PaymentService: GenService<{
   /**
-   * Lists all payment information known by the system for the provided account.
+   * Lists all payment methods known by the system for the provided account.
    * Required permissions:
    * - read:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.ListPaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods
    */
-  listPaymentInformation: {
+  listPaymentMethods: {
     methodKind: "unary";
-    input: typeof ListPaymentInformationRequestSchema;
-    output: typeof ListPaymentInformationResponseSchema;
+    input: typeof ListPaymentMethodsRequestSchema;
+    output: typeof ListPaymentMethodsResponseSchema;
   },
   /**
-   * Gets the payment information identified by the given ID.
+   * Gets the payment method identified by the given ID.
    * Required permissions:
    * - read:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetPaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod
    */
-  getPaymentInformation: {
+  getPaymentMethod: {
     methodKind: "unary";
-    input: typeof GetPaymentInformationRequestSchema;
-    output: typeof GetPaymentInformationResponseSchema;
+    input: typeof GetPaymentMethodRequestSchema;
+    output: typeof GetPaymentMethodResponseSchema;
   },
   /**
-   * Creates a new payment information for the account.
-   * This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+   * Creates a new payment method for the account.
+   * This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
    * Required permissions:
    * - write:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.CreatePaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod
    */
-  createPaymentInformation: {
+  createPaymentMethod: {
     methodKind: "unary";
-    input: typeof CreatePaymentInformationRequestSchema;
-    output: typeof CreatePaymentInformationResponseSchema;
+    input: typeof CreatePaymentMethodRequestSchema;
+    output: typeof CreatePaymentMethodResponseSchema;
   },
   /**
-   * Updates the payment information for the account.
-   * This method is used to update the payment information details, such as billing address.
+   * Updates the payment method for the account.
+   * This method is used to update the payment method details, such as billing address.
    * Required permissions:
    * - write:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.UpdatePaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod
    */
-  updatePaymentInformation: {
+  updatePaymentMethod: {
     methodKind: "unary";
-    input: typeof UpdatePaymentInformationRequestSchema;
-    output: typeof UpdatePaymentInformationResponseSchema;
+    input: typeof UpdatePaymentMethodRequestSchema;
+    output: typeof UpdatePaymentMethodResponseSchema;
   },
   /**
-   * Delete the payment information identified by the given ID.
+   * Delete the payment method identified by the given ID.
    * Required permissions:
    * - write:payment_information
    *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod
    */
-  deletePaymentInformation: {
+  deletePaymentMethod: {
     methodKind: "unary";
-    input: typeof DeletePaymentInformationRequestSchema;
-    output: typeof DeletePaymentInformationResponseSchema;
+    input: typeof DeletePaymentMethodRequestSchema;
+    output: typeof DeletePaymentMethodResponseSchema;
   },
   /**
    * Get the Stripe Checkout session by its ID.

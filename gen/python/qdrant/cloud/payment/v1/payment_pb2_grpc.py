@@ -15,30 +15,30 @@ class PaymentServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ListPaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationResponse.FromString,
+        self.ListPaymentMethods = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsResponse.FromString,
                 _registered_method=True)
-        self.GetPaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
+        self.GetPaymentMethod = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.FromString,
                 _registered_method=True)
-        self.CreatePaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.FromString,
+        self.CreatePaymentMethod = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodResponse.FromString,
                 _registered_method=True)
-        self.UpdatePaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.FromString,
+        self.UpdatePaymentMethod = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodResponse.FromString,
                 _registered_method=True)
-        self.DeletePaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationResponse.FromString,
+        self.DeletePaymentMethod = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodResponse.FromString,
                 _registered_method=True)
         self.GetStripeCheckoutSession = channel.unary_unary(
                 '/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession',
@@ -56,8 +56,8 @@ class PaymentServiceServicer(object):
     """PaymentService is the API used to manage payment settings.
     """
 
-    def ListPaymentInformation(self, request, context):
-        """Lists all payment information known by the system for the provided account.
+    def ListPaymentMethods(self, request, context):
+        """Lists all payment methods known by the system for the provided account.
         Required permissions:
         - read:payment_information
         """
@@ -65,8 +65,8 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetPaymentInformation(self, request, context):
-        """Gets the payment information identified by the given ID.
+    def GetPaymentMethod(self, request, context):
+        """Gets the payment method identified by the given ID.
         Required permissions:
         - read:payment_information
         """
@@ -74,9 +74,9 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreatePaymentInformation(self, request, context):
-        """Creates a new payment information for the account.
-        This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+    def CreatePaymentMethod(self, request, context):
+        """Creates a new payment method for the account.
+        This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
         Required permissions:
         - write:payment_information
         """
@@ -84,9 +84,9 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UpdatePaymentInformation(self, request, context):
-        """Updates the payment information for the account.
-        This method is used to update the payment information details, such as billing address.
+    def UpdatePaymentMethod(self, request, context):
+        """Updates the payment method for the account.
+        This method is used to update the payment method details, such as billing address.
         Required permissions:
         - write:payment_information
         """
@@ -94,8 +94,8 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeletePaymentInformation(self, request, context):
-        """Delete the payment information identified by the given ID.
+    def DeletePaymentMethod(self, request, context):
+        """Delete the payment method identified by the given ID.
         Required permissions:
         - write:payment_information
         """
@@ -126,30 +126,30 @@ class PaymentServiceServicer(object):
 
 def add_PaymentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ListPaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListPaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationResponse.SerializeToString,
+            'ListPaymentMethods': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPaymentMethods,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsResponse.SerializeToString,
             ),
-            'GetPaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.SerializeToString,
+            'GetPaymentMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPaymentMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.SerializeToString,
             ),
-            'CreatePaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreatePaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.SerializeToString,
+            'CreatePaymentMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreatePaymentMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodResponse.SerializeToString,
             ),
-            'UpdatePaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdatePaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.SerializeToString,
+            'UpdatePaymentMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdatePaymentMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodResponse.SerializeToString,
             ),
-            'DeletePaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeletePaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationResponse.SerializeToString,
+            'DeletePaymentMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeletePaymentMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodResponse.SerializeToString,
             ),
             'GetStripeCheckoutSession': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStripeCheckoutSession,
@@ -174,7 +174,7 @@ class PaymentService(object):
     """
 
     @staticmethod
-    def ListPaymentInformation(request,
+    def ListPaymentMethods(request,
             target,
             options=(),
             channel_credentials=None,
@@ -187,9 +187,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentInformationResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.ListPaymentMethodsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -201,7 +201,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetPaymentInformation(request,
+    def GetPaymentMethod(request,
             target,
             options=(),
             channel_credentials=None,
@@ -214,9 +214,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentInformationResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -228,7 +228,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def CreatePaymentInformation(request,
+    def CreatePaymentMethod(request,
             target,
             options=(),
             channel_credentials=None,
@@ -241,9 +241,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentInformationResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -255,7 +255,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def UpdatePaymentInformation(request,
+    def UpdatePaymentMethod(request,
             target,
             options=(),
             channel_credentials=None,
@@ -268,9 +268,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentInformationResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.UpdatePaymentMethodResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -282,7 +282,7 @@ class PaymentService(object):
             _registered_method=True)
 
     @staticmethod
-    def DeletePaymentInformation(request,
+    def DeletePaymentMethod(request,
             target,
             options=(),
             channel_credentials=None,
@@ -295,9 +295,9 @@ class PaymentService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentInformationResponse.FromString,
+            '/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.DeletePaymentMethodResponse.FromString,
             options,
             channel_credentials,
             insecure,

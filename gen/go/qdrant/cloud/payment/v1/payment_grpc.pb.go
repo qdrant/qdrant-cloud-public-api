@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_ListPaymentInformation_FullMethodName      = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentInformation"
-	PaymentService_GetPaymentInformation_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentInformation"
-	PaymentService_CreatePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentInformation"
-	PaymentService_UpdatePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentInformation"
-	PaymentService_DeletePaymentInformation_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentInformation"
+	PaymentService_ListPaymentMethods_FullMethodName          = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods"
+	PaymentService_GetPaymentMethod_FullMethodName            = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
+	PaymentService_CreatePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod"
+	PaymentService_UpdatePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod"
+	PaymentService_DeletePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod"
 	PaymentService_GetStripeCheckoutSession_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
 	PaymentService_CreateStripeCheckoutSession_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
 )
@@ -34,28 +34,28 @@ const (
 //
 // PaymentService is the API used to manage payment settings.
 type PaymentServiceClient interface {
-	// Lists all payment information known by the system for the provided account.
+	// Lists all payment methods known by the system for the provided account.
 	// Required permissions:
 	// - read:payment_information
-	ListPaymentInformation(ctx context.Context, in *ListPaymentInformationRequest, opts ...grpc.CallOption) (*ListPaymentInformationResponse, error)
-	// Gets the payment information identified by the given ID.
+	ListPaymentMethods(ctx context.Context, in *ListPaymentMethodsRequest, opts ...grpc.CallOption) (*ListPaymentMethodsResponse, error)
+	// Gets the payment method identified by the given ID.
 	// Required permissions:
 	// - read:payment_information
-	GetPaymentInformation(ctx context.Context, in *GetPaymentInformationRequest, opts ...grpc.CallOption) (*GetPaymentInformationResponse, error)
-	// Creates a new payment information for the account.
-	// This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+	GetPaymentMethod(ctx context.Context, in *GetPaymentMethodRequest, opts ...grpc.CallOption) (*GetPaymentMethodResponse, error)
+	// Creates a new payment method for the account.
+	// This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
 	// Required permissions:
 	// - write:payment_information
-	CreatePaymentInformation(ctx context.Context, in *CreatePaymentInformationRequest, opts ...grpc.CallOption) (*CreatePaymentInformationResponse, error)
-	// Updates the payment information for the account.
-	// This method is used to update the payment information details, such as billing address.
+	CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
+	// Updates the payment method for the account.
+	// This method is used to update the payment method details, such as billing address.
 	// Required permissions:
 	// - write:payment_information
-	UpdatePaymentInformation(ctx context.Context, in *UpdatePaymentInformationRequest, opts ...grpc.CallOption) (*UpdatePaymentInformationResponse, error)
-	// Delete the payment information identified by the given ID.
+	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*UpdatePaymentMethodResponse, error)
+	// Delete the payment method identified by the given ID.
 	// Required permissions:
 	// - write:payment_information
-	DeletePaymentInformation(ctx context.Context, in *DeletePaymentInformationRequest, opts ...grpc.CallOption) (*DeletePaymentInformationResponse, error)
+	DeletePaymentMethod(ctx context.Context, in *DeletePaymentMethodRequest, opts ...grpc.CallOption) (*DeletePaymentMethodResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
 	// Required permissions:
@@ -76,50 +76,50 @@ func NewPaymentServiceClient(cc grpc.ClientConnInterface) PaymentServiceClient {
 	return &paymentServiceClient{cc}
 }
 
-func (c *paymentServiceClient) ListPaymentInformation(ctx context.Context, in *ListPaymentInformationRequest, opts ...grpc.CallOption) (*ListPaymentInformationResponse, error) {
+func (c *paymentServiceClient) ListPaymentMethods(ctx context.Context, in *ListPaymentMethodsRequest, opts ...grpc.CallOption) (*ListPaymentMethodsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListPaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_ListPaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(ListPaymentMethodsResponse)
+	err := c.cc.Invoke(ctx, PaymentService_ListPaymentMethods_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) GetPaymentInformation(ctx context.Context, in *GetPaymentInformationRequest, opts ...grpc.CallOption) (*GetPaymentInformationResponse, error) {
+func (c *paymentServiceClient) GetPaymentMethod(ctx context.Context, in *GetPaymentMethodRequest, opts ...grpc.CallOption) (*GetPaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_GetPaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(GetPaymentMethodResponse)
+	err := c.cc.Invoke(ctx, PaymentService_GetPaymentMethod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) CreatePaymentInformation(ctx context.Context, in *CreatePaymentInformationRequest, opts ...grpc.CallOption) (*CreatePaymentInformationResponse, error) {
+func (c *paymentServiceClient) CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreatePaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_CreatePaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(CreatePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreatePaymentMethod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) UpdatePaymentInformation(ctx context.Context, in *UpdatePaymentInformationRequest, opts ...grpc.CallOption) (*UpdatePaymentInformationResponse, error) {
+func (c *paymentServiceClient) UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*UpdatePaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdatePaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_UpdatePaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(UpdatePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, PaymentService_UpdatePaymentMethod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) DeletePaymentInformation(ctx context.Context, in *DeletePaymentInformationRequest, opts ...grpc.CallOption) (*DeletePaymentInformationResponse, error) {
+func (c *paymentServiceClient) DeletePaymentMethod(ctx context.Context, in *DeletePaymentMethodRequest, opts ...grpc.CallOption) (*DeletePaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeletePaymentInformationResponse)
-	err := c.cc.Invoke(ctx, PaymentService_DeletePaymentInformation_FullMethodName, in, out, cOpts...)
+	out := new(DeletePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, PaymentService_DeletePaymentMethod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,28 +152,28 @@ func (c *paymentServiceClient) CreateStripeCheckoutSession(ctx context.Context, 
 //
 // PaymentService is the API used to manage payment settings.
 type PaymentServiceServer interface {
-	// Lists all payment information known by the system for the provided account.
+	// Lists all payment methods known by the system for the provided account.
 	// Required permissions:
 	// - read:payment_information
-	ListPaymentInformation(context.Context, *ListPaymentInformationRequest) (*ListPaymentInformationResponse, error)
-	// Gets the payment information identified by the given ID.
+	ListPaymentMethods(context.Context, *ListPaymentMethodsRequest) (*ListPaymentMethodsResponse, error)
+	// Gets the payment method identified by the given ID.
 	// Required permissions:
 	// - read:payment_information
-	GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error)
-	// Creates a new payment information for the account.
-	// This method is used to create a new payment information, which can then be connected to a payment provider (like Stripe).
+	GetPaymentMethod(context.Context, *GetPaymentMethodRequest) (*GetPaymentMethodResponse, error)
+	// Creates a new payment method for the account.
+	// This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
 	// Required permissions:
 	// - write:payment_information
-	CreatePaymentInformation(context.Context, *CreatePaymentInformationRequest) (*CreatePaymentInformationResponse, error)
-	// Updates the payment information for the account.
-	// This method is used to update the payment information details, such as billing address.
+	CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
+	// Updates the payment method for the account.
+	// This method is used to update the payment method details, such as billing address.
 	// Required permissions:
 	// - write:payment_information
-	UpdatePaymentInformation(context.Context, *UpdatePaymentInformationRequest) (*UpdatePaymentInformationResponse, error)
-	// Delete the payment information identified by the given ID.
+	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*UpdatePaymentMethodResponse, error)
+	// Delete the payment method identified by the given ID.
 	// Required permissions:
 	// - write:payment_information
-	DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error)
+	DeletePaymentMethod(context.Context, *DeletePaymentMethodRequest) (*DeletePaymentMethodResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
 	// Required permissions:
@@ -194,20 +194,20 @@ type PaymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentServiceServer struct{}
 
-func (UnimplementedPaymentServiceServer) ListPaymentInformation(context.Context, *ListPaymentInformationRequest) (*ListPaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) ListPaymentMethods(context.Context, *ListPaymentMethodsRequest) (*ListPaymentMethodsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentMethods not implemented")
 }
-func (UnimplementedPaymentServiceServer) GetPaymentInformation(context.Context, *GetPaymentInformationRequest) (*GetPaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) GetPaymentMethod(context.Context, *GetPaymentMethodRequest) (*GetPaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethod not implemented")
 }
-func (UnimplementedPaymentServiceServer) CreatePaymentInformation(context.Context, *CreatePaymentInformationRequest) (*CreatePaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*CreatePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentMethod not implemented")
 }
-func (UnimplementedPaymentServiceServer) UpdatePaymentInformation(context.Context, *UpdatePaymentInformationRequest) (*UpdatePaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*UpdatePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
 }
-func (UnimplementedPaymentServiceServer) DeletePaymentInformation(context.Context, *DeletePaymentInformationRequest) (*DeletePaymentInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentInformation not implemented")
+func (UnimplementedPaymentServiceServer) DeletePaymentMethod(context.Context, *DeletePaymentMethodRequest) (*DeletePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentMethod not implemented")
 }
 func (UnimplementedPaymentServiceServer) GetStripeCheckoutSession(context.Context, *GetStripeCheckoutSessionRequest) (*GetStripeCheckoutSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStripeCheckoutSession not implemented")
@@ -236,92 +236,92 @@ func RegisterPaymentServiceServer(s grpc.ServiceRegistrar, srv PaymentServiceSer
 	s.RegisterService(&PaymentService_ServiceDesc, srv)
 }
 
-func _PaymentService_ListPaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPaymentInformationRequest)
+func _PaymentService_ListPaymentMethods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentMethodsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).ListPaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).ListPaymentMethods(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_ListPaymentInformation_FullMethodName,
+		FullMethod: PaymentService_ListPaymentMethods_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).ListPaymentInformation(ctx, req.(*ListPaymentInformationRequest))
+		return srv.(PaymentServiceServer).ListPaymentMethods(ctx, req.(*ListPaymentMethodsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_GetPaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentInformationRequest)
+func _PaymentService_GetPaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).GetPaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).GetPaymentMethod(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_GetPaymentInformation_FullMethodName,
+		FullMethod: PaymentService_GetPaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).GetPaymentInformation(ctx, req.(*GetPaymentInformationRequest))
+		return srv.(PaymentServiceServer).GetPaymentMethod(ctx, req.(*GetPaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_CreatePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePaymentInformationRequest)
+func _PaymentService_CreatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).CreatePaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).CreatePaymentMethod(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_CreatePaymentInformation_FullMethodName,
+		FullMethod: PaymentService_CreatePaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).CreatePaymentInformation(ctx, req.(*CreatePaymentInformationRequest))
+		return srv.(PaymentServiceServer).CreatePaymentMethod(ctx, req.(*CreatePaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_UpdatePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePaymentInformationRequest)
+func _PaymentService_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).UpdatePaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).UpdatePaymentMethod(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_UpdatePaymentInformation_FullMethodName,
+		FullMethod: PaymentService_UpdatePaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).UpdatePaymentInformation(ctx, req.(*UpdatePaymentInformationRequest))
+		return srv.(PaymentServiceServer).UpdatePaymentMethod(ctx, req.(*UpdatePaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_DeletePaymentInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeletePaymentInformationRequest)
+func _PaymentService_DeletePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).DeletePaymentInformation(ctx, in)
+		return srv.(PaymentServiceServer).DeletePaymentMethod(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_DeletePaymentInformation_FullMethodName,
+		FullMethod: PaymentService_DeletePaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).DeletePaymentInformation(ctx, req.(*DeletePaymentInformationRequest))
+		return srv.(PaymentServiceServer).DeletePaymentMethod(ctx, req.(*DeletePaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -370,24 +370,24 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListPaymentInformation",
-			Handler:    _PaymentService_ListPaymentInformation_Handler,
+			MethodName: "ListPaymentMethods",
+			Handler:    _PaymentService_ListPaymentMethods_Handler,
 		},
 		{
-			MethodName: "GetPaymentInformation",
-			Handler:    _PaymentService_GetPaymentInformation_Handler,
+			MethodName: "GetPaymentMethod",
+			Handler:    _PaymentService_GetPaymentMethod_Handler,
 		},
 		{
-			MethodName: "CreatePaymentInformation",
-			Handler:    _PaymentService_CreatePaymentInformation_Handler,
+			MethodName: "CreatePaymentMethod",
+			Handler:    _PaymentService_CreatePaymentMethod_Handler,
 		},
 		{
-			MethodName: "UpdatePaymentInformation",
-			Handler:    _PaymentService_UpdatePaymentInformation_Handler,
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _PaymentService_UpdatePaymentMethod_Handler,
 		},
 		{
-			MethodName: "DeletePaymentInformation",
-			Handler:    _PaymentService_DeletePaymentInformation_Handler,
+			MethodName: "DeletePaymentMethod",
+			Handler:    _PaymentService_DeletePaymentMethod_Handler,
 		},
 		{
 			MethodName: "GetStripeCheckoutSession",
