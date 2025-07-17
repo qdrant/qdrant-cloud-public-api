@@ -32,3 +32,5 @@ timeseries
 upsert
 vcpu
 vultr
+Mastercard
+Visa

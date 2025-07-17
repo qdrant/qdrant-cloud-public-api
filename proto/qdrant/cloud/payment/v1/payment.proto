@@ -1,0 +1,340 @@
+syntax = "proto3";
+
+package qdrant.cloud.payment.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// PaymentService is the API used to manage payment settings.
+service PaymentService {
+  // Lists all payment methods known by the system for the provided account.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListPaymentMethods(ListPaymentMethodsRequest) returns (ListPaymentMethodsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
+  }
+  // Gets the payment method identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc GetPaymentMethod(GetPaymentMethodRequest) returns (GetPaymentMethodResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
+  }
+  // Creates a new payment method for the account.
+  // This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
+  // Required permissions:
+  // - write:payment_information
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods"};
+  }
+  // Updates the payment method for the account.
+  // This method is used to update the payment method details, such as billing address.
+  // Required permissions:
+  // - write:payment_information
+  rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (UpdatePaymentMethodResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}"
+      body: "*"
+    };
+  }
+  // Delete the payment method identified by the given ID.
+  // Required permissions:
+  // - delete:payment_information
+  rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (DeletePaymentMethodResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
+  }
+  // Get the Stripe Checkout session by its ID.
+  // This method is used to retrieve the session details after it has been created.
+  // Required permissions:
+  // - write:payment_information
+  rpc GetStripeCheckoutSession(GetStripeCheckoutSessionRequest) returns (GetStripeCheckoutSessionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
+  }
+  // Initiates the creation of a Stripe Checkout session for the specified account.
+  // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
+  // Required permissions:
+  // - write:payment_information
+  rpc CreateStripeCheckoutSession(CreateStripeCheckoutSessionRequest) returns (CreateStripeCheckoutSessionResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
+  }
+}
+
+// Request to list payment methods for a specific account.
+message ListPaymentMethodsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing a list of payment methods.
+message ListPaymentMethodsResponse {
+  // The list of payment methods.
+  repeated PaymentMethod items = 1;
+}
+
+// Request to get payment method by id.
+message GetPaymentMethodRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the payment method (in GUID format).
+  // This is a required field.
+  string payment_method_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing the payment method.
+message GetPaymentMethodResponse {
+  // The actual payment method.
+  PaymentMethod payment_method = 1;
+}
+
+// CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
+message CreatePaymentMethodRequest {
+  // The payment method to create.
+  // This is a required field.
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
+}
+
+// CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
+message CreatePaymentMethodResponse {
+  // The created payment method.
+  PaymentMethod payment_method = 1;
+}
+
+// UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function
+message UpdatePaymentMethodRequest {
+  // The payment method to update.
+  PaymentMethod payment_method = 2;
+}
+
+// UpdatePaymentMethodResponse is the response from the UpdatePaymentMethod function
+message UpdatePaymentMethodResponse {
+  // The updated payment method.
+  PaymentMethod payment_method = 1;
+}
+
+// DeletePaymentMethodRequest is the request for the DeletePaymentMethod function
+message DeletePaymentMethodRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the payment method (in GUID format).
+  // This is a required field.
+  string payment_method_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeletePaymentMethodResponse is the response from the DeletePaymentMethod function
+message DeletePaymentMethodResponse {
+  // Empty
+}
+
+// GetStripeCheckoutSessionRequest is the request for the GetStripeCheckoutSession function
+message GetStripeCheckoutSessionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the Stripe session.
+  // This is a required field.
+  string session_id = 2;
+}
+
+// GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function
+message GetStripeCheckoutSessionResponse {
+  // The Stripe session for the account.
+  StripeCheckoutSession stripe_session = 1;
+}
+
+// CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function
+message CreateStripeCheckoutSessionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Redirect URL to which the user will be redirected after the payment setup is completed.
+  string redirect_url = 2;
+}
+
+// CreateStripeCheckoutSessionResponse is the response from the CreateStripeCheckoutSession function
+message CreateStripeCheckoutSessionResponse {
+  // Stripe session created for payment method setup or collection.
+  StripeCheckoutSession stripe_session = 1;
+}
+
+// Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message StripeCheckoutSession {
+  // The unique identifier of the Stripe Checkout session.
+  string id = 1;
+  // The URL to redirect the user to complete the Checkout session.
+  // This may be null if the session is incomplete or improperly initialized.
+  optional string url = 2;
+  // The Stripe customer ID associated with this session.
+  string customer = 3;
+  // The ID of the associated Stripe SetupIntent.
+  string setup_intent_id = 4;
+  // The status of the associated Stripe SetupIntent.
+  StripeSetupIntentStatus setup_intent_status = 5;
+  // The payment method attached to the associated SetupIntent.
+  string setup_intent_payment_method = 6;
+}
+
+// Represents a payment method.
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message PaymentMethod {
+  // Unique identifier for the payment method (in GUID format).
+  // This is a read-only field and will be available after a payment method is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "payment_method.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)"
+  };
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The type of the payment method provider.
+  // This is a required field.
+  PaymentProviderType type = 3;
+  // The customer account identifier in the payment provider system.
+  // This is read-only field.
+  optional string payment_provider_id = 4;
+  // Represents the payment method details, such as card information.
+  // This field is optional and only available for payment provider type Stripe for now.
+  optional PaymentMethodDetails payment_method_details = 5;
+  // The billing address associated with the payment method.
+  // This field is optional and only available for payment provider type Stripe.
+  optional BillingAddress billing_address = 6;
+  // The timestamp when the payment method was created.
+  // This is a read-only field and will be available after a payment method is created.
+  google.protobuf.Timestamp created_at = 7;
+  // The timestamp when the payment method was last updated.
+  // This is a read-only field and will be available after a payment method is created.
+  google.protobuf.Timestamp last_modified_at = 8;
+  // The tax ID associated with the payment method.
+  // This is an optional field.
+  optional string tax_id = 9 [(buf.validate.field).string = {min_len: 1}];
+  // The us default flag indicates if this payment method is the default one for the account.
+  // Default payment method is used for all charges in the account.
+  bool is_default = 10;
+  // Payment method status.
+  // This is read-only field.
+  optional PaymentMethodStatus status = 11;
+}
+
+// PaymentProviderType defines the type of payment method.
+enum PaymentProviderType {
+  // Unspecified type, should not be used.
+  PAYMENT_PROVIDER_TYPE_UNSPECIFIED = 0;
+  // Stripe payment method.
+  PAYMENT_PROVIDER_TYPE_STRIPE = 1;
+  // AWS marketplace payment method.
+  PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE = 2;
+  // Google Cloud Platform marketplace payment method.
+  PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE = 3;
+  // Azure marketplace payment method.
+  PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE = 4;
+  // Custom payment method. This is used for custom payment methods that do not fit into the predefined categories.
+  PAYMENT_PROVIDER_TYPE_CUSTOM = 5;
+}
+
+// PaymentMethodStatus defines the status of the payment method.
+enum PaymentMethodStatus {
+  // Unspecified status, should not be used.
+  PAYMENT_METHOD_STATUS_UNSPECIFIED = 0;
+  // The payment method is active and can be used for payments.
+  PAYMENT_METHOD_STATUS_ACTIVE = 1;
+  // The payment method is inactive and cannot be used for payments.
+  PAYMENT_METHOD_STATUS_INACTIVE = 2;
+  // The payment method is pending verification or setup.
+  PAYMENT_METHOD_STATUS_PENDING = 3;
+}
+
+// Represents a billing address for a payment method.
+message BillingAddress {
+  // The name of the person or entity associated with the billing address.
+  string name = 1 [(buf.validate.field).string = {min_len: 1}];
+  // The first line of the billing address.
+  string line1 = 2 [(buf.validate.field).string = {min_len: 1}];
+  // The second line of the billing address.
+  // This is an optional field.
+  optional string line2 = 3 [(buf.validate.field).string = {min_len: 1}];
+  // The postal code of the billing address.
+  // This is an optional field.
+  optional string postal_code = 4 [(buf.validate.field).string = {min_len: 1}];
+  // The city of the billing address.
+  string city = 5 [(buf.validate.field).string = {min_len: 1}];
+  // The state or province of the billing address.
+  string state = 6 [(buf.validate.field).string = {min_len: 1}];
+  // The country of the billing address.
+  string country = 7 [(buf.validate.field).string = {min_len: 1}];
+  // The formatted country name.
+  string country_formatted = 8 [(buf.validate.field).string = {min_len: 1}];
+  // The formatted state or province name.
+  string state_formatted = 9 [(buf.validate.field).string = {min_len: 1}];
+  // Indicates if the country supports tax.
+  bool tax_supported_country = 10;
+}
+
+// Represents payment method
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message PaymentMethodDetails {
+  // The identifier of the payment method.
+  string id = 1 [(buf.validate.field).string = {min_len: 1}];
+  // Card details.
+  Card card = 2;
+}
+
+// Represents payment method card details
+message Card {
+  // The brand of the card (e.g., "Visa", "Mastercard").
+  string brand = 1;
+  // The last 4 digits of the card number.
+  string last4 = 2;
+  // The expiration month of the card.
+  int32 expiration_month = 3;
+  // The expiration year of the card.
+  int32 expiration_year = 4;
+}
+
+// Represents the status of a SetupIntent in Stripe.
+enum StripeSetupIntentStatus {
+  // Default unspecified value.
+  STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+  // A payment method is required to proceed.
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+  // The SetupIntent is ready to be confirmed.
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+  // The SetupIntent requires further action (e.g., 3D Secure).
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+  // The SetupIntent is being processed.
+  STRIPE_SETUP_INTENT_STATUS_PROCESSING = 4;
+  // The SetupIntent has been canceled.
+  STRIPE_SETUP_INTENT_STATUS_CANCELED = 5;
+  // The SetupIntent has succeeded.
+  STRIPE_SETUP_INTENT_STATUS_SUCCEEDED = 6;
+}
