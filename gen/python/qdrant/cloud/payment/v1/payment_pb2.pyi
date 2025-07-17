@@ -146,20 +146,6 @@ class CreateStripeCheckoutSessionResponse(_message.Message):
     stripe_session: StripeCheckoutSession
     def __init__(self, stripe_session: _Optional[_Union[StripeCheckoutSession, _Mapping]] = ...) -> None: ...
 
-class SetDefaultPaymentInformationRequest(_message.Message):
-    __slots__ = ("account_id", "payment_information_id")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    PAYMENT_INFORMATION_ID_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    payment_information_id: str
-    def __init__(self, account_id: _Optional[str] = ..., payment_information_id: _Optional[str] = ...) -> None: ...
-
-class SetDefaultPaymentInformationResponse(_message.Message):
-    __slots__ = ("payment_information",)
-    PAYMENT_INFORMATION_FIELD_NUMBER: _ClassVar[int]
-    payment_information: PaymentInformation
-    def __init__(self, payment_information: _Optional[_Union[PaymentInformation, _Mapping]] = ...) -> None: ...
-
 class StripeCheckoutSession(_message.Message):
     __slots__ = ("id", "url", "customer", "setup_intent_id", "setup_intent_status", "setup_intent_payment_method")
     ID_FIELD_NUMBER: _ClassVar[int]

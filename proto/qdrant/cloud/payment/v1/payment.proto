@@ -57,7 +57,6 @@ service PaymentService {
   // Delete the payment information identified by the given ID.
   // Required permissions:
   // - write:payment_information
-  // TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
   rpc DeletePaymentInformation(DeletePaymentInformationRequest) returns (DeletePaymentInformationResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
@@ -83,18 +82,6 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
-  }
-  // Updates the current payment information associated with the account.
-  // After this change, the new payment information will be used for all future charges.
-  // This does not create a new payment information, it simply switches to one already linked to the account.
-  // Required permissions:
-  // - write:payment_information
-  // TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
-  rpc SetDefaultPaymentInformation(SetDefaultPaymentInformationRequest) returns (SetDefaultPaymentInformationResponse) {
-    // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
-    // gRPC Gateway REST call
-    option (google.api.http) = {put: "/api/payment/v1/accounts/{account_id}/set-default-payment-information"};
   }
 }
 
@@ -196,20 +183,6 @@ message CreateStripeCheckoutSessionRequest {
 message CreateStripeCheckoutSessionResponse {
   // Stripe session created for payment method setup or collection.
   StripeCheckoutSession stripe_session = 1;
-}
-
-// SetDefaultPaymentInformationRequest is the request for the ChangePaymentInformation function
-message SetDefaultPaymentInformationRequest {
-  // The identifier of the account (in GUID format).
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the new payment information to set.
-  string payment_information_id = 3 [(buf.validate.field).string = {min_len: 1}];
-}
-
-// SetDefaultPaymentInformationResponse is the response returned after a successful update.
-message SetDefaultPaymentInformationResponse {
-  // New payment information that has been set for the account.
-  PaymentInformation payment_information = 1;
 }
 
 // Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.

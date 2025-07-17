@@ -325,53 +325,6 @@ export declare type CreateStripeCheckoutSessionResponse = Message<"qdrant.cloud.
 export declare const CreateStripeCheckoutSessionResponseSchema: GenMessage<CreateStripeCheckoutSessionResponse>;
 
 /**
- * SetDefaultPaymentInformationRequest is the request for the ChangePaymentInformation function
- *
- * @generated from message qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest
- */
-export declare type SetDefaultPaymentInformationRequest = Message<"qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier of the new payment information to set.
-   *
-   * @generated from field: string payment_information_id = 3;
-   */
-  paymentInformationId: string;
-};
-
-/**
- * Describes the message qdrant.cloud.payment.v1.SetDefaultPaymentInformationRequest.
- * Use `create(SetDefaultPaymentInformationRequestSchema)` to create a new message.
- */
-export declare const SetDefaultPaymentInformationRequestSchema: GenMessage<SetDefaultPaymentInformationRequest>;
-
-/**
- * SetDefaultPaymentInformationResponse is the response returned after a successful update.
- *
- * @generated from message qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse
- */
-export declare type SetDefaultPaymentInformationResponse = Message<"qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse"> & {
-  /**
-   * New payment information that has been set for the account.
-   *
-   * @generated from field: qdrant.cloud.payment.v1.PaymentInformation payment_information = 1;
-   */
-  paymentInformation?: PaymentInformation;
-};
-
-/**
- * Describes the message qdrant.cloud.payment.v1.SetDefaultPaymentInformationResponse.
- * Use `create(SetDefaultPaymentInformationResponseSchema)` to create a new message.
- */
-export declare const SetDefaultPaymentInformationResponseSchema: GenMessage<SetDefaultPaymentInformationResponse>;
-
-/**
  * Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
  *
  * @generated from message qdrant.cloud.payment.v1.StripeCheckoutSession
@@ -897,7 +850,6 @@ export declare const PaymentService: GenService<{
    * Delete the payment information identified by the given ID.
    * Required permissions:
    * - write:payment_information
-   * TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
    *
    * @generated from rpc qdrant.cloud.payment.v1.PaymentService.DeletePaymentInformation
    */
@@ -931,21 +883,6 @@ export declare const PaymentService: GenService<{
     methodKind: "unary";
     input: typeof CreateStripeCheckoutSessionRequestSchema;
     output: typeof CreateStripeCheckoutSessionResponseSchema;
-  },
-  /**
-   * Updates the current payment information associated with the account.
-   * After this change, the new payment information will be used for all future charges.
-   * This does not create a new payment information, it simply switches to one already linked to the account.
-   * Required permissions:
-   * - write:payment_information
-   * TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
-   *
-   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.SetDefaultPaymentInformation
-   */
-  setDefaultPaymentInformation: {
-    methodKind: "unary";
-    input: typeof SetDefaultPaymentInformationRequestSchema;
-    output: typeof SetDefaultPaymentInformationResponseSchema;
   },
 }>;
 

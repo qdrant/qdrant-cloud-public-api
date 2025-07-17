@@ -50,11 +50,6 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
                 _registered_method=True)
-        self.SetDefaultPaymentInformation = channel.unary_unary(
-                '/qdrant.cloud.payment.v1.PaymentService/SetDefaultPaymentInformation',
-                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationResponse.FromString,
-                _registered_method=True)
 
 
 class PaymentServiceServicer(object):
@@ -103,7 +98,6 @@ class PaymentServiceServicer(object):
         """Delete the payment information identified by the given ID.
         Required permissions:
         - write:payment_information
-        TODO: This endpoint is not supported in the current version of the API. Should we remove it from here?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -124,18 +118,6 @@ class PaymentServiceServicer(object):
         This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
         Required permissions:
         - write:payment_information
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def SetDefaultPaymentInformation(self, request, context):
-        """Updates the current payment information associated with the account.
-        After this change, the new payment information will be used for all future charges.
-        This does not create a new payment information, it simply switches to one already linked to the account.
-        Required permissions:
-        - write:payment_information
-        TODO: I added UpdatePaymentInformation rpc. Should we remove this one?
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -178,11 +160,6 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     servicer.CreateStripeCheckoutSession,
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.SerializeToString,
-            ),
-            'SetDefaultPaymentInformation': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetDefaultPaymentInformation,
-                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -375,33 +352,6 @@ class PaymentService(object):
             '/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession',
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def SetDefaultPaymentInformation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.payment.v1.PaymentService/SetDefaultPaymentInformation',
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationRequest.SerializeToString,
-            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.SetDefaultPaymentInformationResponse.FromString,
             options,
             channel_credentials,
             insecure,
