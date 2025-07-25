@@ -24,7 +24,7 @@ plugins:
       - paths=source_relative
 
   # Generate Python client and server stubs
-  - remote: buf.build/grpc/python:v1.72.1
+  - remote: buf.build/grpc/python:v1.73.1
     include_imports: true
     out: gen/python
 
@@ -41,14 +41,14 @@ plugins:
   # Generate bindings for gRPC-Gateway
   # We don't need the output (the api-gateway is building this dynamically), however
   # we still want to run the validation logic inside this plugin
-  - remote: buf.build/grpc-ecosystem/gateway:v2.27.0
+  - remote: buf.build/grpc-ecosystem/gateway:v2.27.1
     out: gen-dummy/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
 
   # Generate OpenAPI definitions for Protobuf services
-  - remote: buf.build/grpc-ecosystem/openapiv2:v2.26.3
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.0
     out: gen/openapiv2
 
   # Generate base types and services for Typescript
@@ -59,7 +59,7 @@ plugins:
       - import_extension=js
     out: gen/typescript
 
-  - remote: buf.build/connectrpc/query-es:v2.1.0
+  - remote: buf.build/connectrpc/query-es:v2.1.1
     include_imports: true
     opt:
       - target=js+dts
