@@ -453,6 +453,29 @@
         ]
       }
     },
+    "/api/iam/v1/users/me/logout": {
+      "post": {
+        "summary": "Logs out the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_LogoutUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LogoutUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/users/{user.id}": {
       "put": {
         "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- write:user",
@@ -779,6 +802,11 @@
         }
       },
       "title": "ListUserRolesResponse is the response from the ListUserRoles function"
+    },
+    "v1LogoutUserResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "LogoutUserResponse is the response from the Logout function"
     },
     "v1RecordUserConsentRequest": {
       "type": "object",

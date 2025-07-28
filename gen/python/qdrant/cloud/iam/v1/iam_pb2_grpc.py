@@ -80,6 +80,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesResponse.FromString,
                 _registered_method=True)
+        self.LogoutUser = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/LogoutUser',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.FromString,
+                _registered_method=True)
 
 
 class IAMServiceServicer(object):
@@ -207,6 +212,15 @@ class IAMServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def LogoutUser(self, request, context):
+        """Logs out the authenticated user.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IAMServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -274,6 +288,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.AssignUserRoles,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesResponse.SerializeToString,
+            ),
+            'LogoutUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.LogoutUser,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -628,6 +647,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/AssignUserRoles',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LogoutUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/LogoutUser',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.FromString,
             options,
             channel_credentials,
             insecure,

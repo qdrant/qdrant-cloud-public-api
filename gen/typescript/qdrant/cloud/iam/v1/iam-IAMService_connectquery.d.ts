@@ -112,3 +112,11 @@ export const listUserRoles: typeof IAMService["method"]["listUserRoles"];
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.AssignUserRoles
  */
 export const assignUserRoles: typeof IAMService["method"]["assignUserRoles"];
+/**
+ * Logs out the authenticated user.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.LogoutUser
+ */
+export const logoutUser: typeof IAMService["method"]["logoutUser"];

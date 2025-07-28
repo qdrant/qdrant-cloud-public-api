@@ -720,6 +720,38 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 export declare const RoleSchema: GenMessage<Role>;
 
 /**
+ * LogoutUserRequest is the request for the Logout function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.LogoutUserRequest
+ */
+export declare type LogoutUserRequest = Message<"qdrant.cloud.iam.v1.LogoutUserRequest"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.LogoutUserRequest.
+ * Use `create(LogoutUserRequestSchema)` to create a new message.
+ */
+export declare const LogoutUserRequestSchema: GenMessage<LogoutUserRequest>;
+
+/**
+ * LogoutUserResponse is the response from the Logout function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.LogoutUserResponse
+ */
+export declare type LogoutUserResponse = Message<"qdrant.cloud.iam.v1.LogoutUserResponse"> & {
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.LogoutUserResponse.
+ * Use `create(LogoutUserResponseSchema)` to create a new message.
+ */
+export declare const LogoutUserResponseSchema: GenMessage<LogoutUserResponse>;
+
+/**
  * User Consent represents the consent status of a user for a specific legal document.
  *
  * @generated from message qdrant.cloud.iam.v1.UserConsent
@@ -1084,6 +1116,18 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof AssignUserRolesRequestSchema;
     output: typeof AssignUserRolesResponseSchema;
+  },
+  /**
+   * Logs out the authenticated user.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.LogoutUser
+   */
+  logoutUser: {
+    methodKind: "unary";
+    input: typeof LogoutUserRequestSchema;
+    output: typeof LogoutUserResponseSchema;
   },
 }>;
 
