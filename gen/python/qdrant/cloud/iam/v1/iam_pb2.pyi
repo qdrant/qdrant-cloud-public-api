@@ -253,6 +253,14 @@ class Role(_message.Message):
     permissions: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...
 
+class LogoutUserRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class LogoutUserResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class UserConsent(_message.Message):
     __slots__ = ("document_type", "status", "last_modified_at", "is_accepted")
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]

@@ -32,6 +32,7 @@ const (
 	IAMService_ListEffectivePermissions_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
 	IAMService_ListUserRoles_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/ListUserRoles"
 	IAMService_AssignUserRoles_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
+	IAMService_LogoutUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/LogoutUser"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -96,6 +97,10 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - write:roles
 	AssignUserRoles(ctx context.Context, in *AssignUserRolesRequest, opts ...grpc.CallOption) (*AssignUserRolesResponse, error)
+	// Logs out the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	LogoutUser(ctx context.Context, in *LogoutUserRequest, opts ...grpc.CallOption) (*LogoutUserResponse, error)
 }
 
 type iAMServiceClient struct {
@@ -236,6 +241,16 @@ func (c *iAMServiceClient) AssignUserRoles(ctx context.Context, in *AssignUserRo
 	return out, nil
 }
 
+func (c *iAMServiceClient) LogoutUser(ctx context.Context, in *LogoutUserRequest, opts ...grpc.CallOption) (*LogoutUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LogoutUserResponse)
+	err := c.cc.Invoke(ctx, IAMService_LogoutUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IAMServiceServer is the server API for IAMService service.
 // All implementations must embed UnimplementedIAMServiceServer
 // for forward compatibility.
@@ -298,6 +313,10 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - write:roles
 	AssignUserRoles(context.Context, *AssignUserRolesRequest) (*AssignUserRolesResponse, error)
+	// Logs out the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error)
 	mustEmbedUnimplementedIAMServiceServer()
 }
 
@@ -346,6 +365,9 @@ func (UnimplementedIAMServiceServer) ListUserRoles(context.Context, *ListUserRol
 }
 func (UnimplementedIAMServiceServer) AssignUserRoles(context.Context, *AssignUserRolesRequest) (*AssignUserRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignUserRoles not implemented")
+}
+func (UnimplementedIAMServiceServer) LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogoutUser not implemented")
 }
 func (UnimplementedIAMServiceServer) mustEmbedUnimplementedIAMServiceServer() {}
 func (UnimplementedIAMServiceServer) testEmbeddedByValue()                    {}
@@ -602,6 +624,24 @@ func _IAMService_AssignUserRoles_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IAMService_LogoutUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogoutUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).LogoutUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_LogoutUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).LogoutUser(ctx, req.(*LogoutUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IAMService_ServiceDesc is the grpc.ServiceDesc for IAMService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -660,6 +700,10 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AssignUserRoles",
 			Handler:    _IAMService_AssignUserRoles_Handler,
+		},
+		{
+			MethodName: "LogoutUser",
+			Handler:    _IAMService_LogoutUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
