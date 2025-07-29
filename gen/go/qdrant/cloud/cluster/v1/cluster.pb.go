@@ -1763,30 +1763,30 @@ func (x *ClusterConfiguration) GetRebalanceStrategy() ClusterConfigurationRebala
 // The settings apply to managed and/or hybrid cloud, see documentation on each message for more details.
 type DatabaseConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The default Qdrant database collection configuration
+	// The default Qdrant database collection configuration.
 	// This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
-	// This is an optional field
+	// This is an optional field.
 	Collection *DatabaseConfigurationCollection `protobuf:"bytes,1,opt,name=collection,proto3,oneof" json:"collection,omitempty"`
-	// The default Qdrant database storage configuration
+	// The default Qdrant database storage configuration.
 	// This setting is for both managed and hybrid cloud clusters.
-	// This is an optional field
+	// This is an optional field.
 	Storage *DatabaseConfigurationStorage `protobuf:"bytes,2,opt,name=storage,proto3,oneof" json:"storage,omitempty"`
 	// The Qdrant database service configuration
 	// This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
 	// This is an optional field
 	Service *DatabaseConfigurationService `protobuf:"bytes,3,opt,name=service,proto3,oneof" json:"service,omitempty"`
-	// The log level for the database
-	// This is an optional field, default is Info.
+	// The log level for the database.
 	// Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
 	// This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+	// This is an optional field, default is Info.
 	LogLevel *DatabaseConfigurationLogLevel `protobuf:"varint,4,opt,name=log_level,json=logLevel,proto3,enum=qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel,oneof" json:"log_level,omitempty"`
-	// The Qdrant database TLS configuration
-	// This is an optional field, if not set an unsecure connection is provided
+	// The Qdrant database TLS configuration.
 	// This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+	// This is an optional field, if not set an unsecure connection is provided.
 	Tls *DatabaseConfigurationTls `protobuf:"bytes,5,opt,name=tls,proto3,oneof" json:"tls,omitempty"`
-	// The Qdrant database inference configuration
-	// This is an optional field, if unset, the database is not configured for cloud inferencing
+	// The Qdrant database inference configuration.
 	// This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
+	// This is an optional field, if unset, the database is not configured for cloud inferencing
 	Inference     *DatabaseConfigurationInference `protobuf:"bytes,6,opt,name=inference,proto3,oneof" json:"inference,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
