@@ -577,8 +577,8 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   additionalResources?: AdditionalResources;
 
   /**
-   * Configuration to setup a qdrant database in a hybrid cloud.
-   * It is ignored for managed cloud clusters. This is an optional field
+   * Configuration to setup a qdrant database.
+   * This is an optional field.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfiguration database_configuration = 7;
    */
@@ -667,23 +667,25 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
 export declare const ClusterConfigurationSchema: GenMessage<ClusterConfiguration>;
 
 /**
- * Configuration to setup a Qdrant database in a hybrid cloud.
- * All settings apply to hybrid cloud only.
+ * Configuration to setup a Qdrant database.
+ * The settings apply to managed and/or hybrid cloud, see documentation on each message for more details.
  *
  * @generated from message qdrant.cloud.cluster.v1.DatabaseConfiguration
  */
 export declare type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.DatabaseConfiguration"> & {
   /**
-   * The default Qdrant database collection configuration
-   * This is an optional field
+   * The default Qdrant database collection configuration.
+   * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
+   * This is an optional field.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationCollection collection = 1;
    */
   collection?: DatabaseConfigurationCollection;
 
   /**
-   * The default Qdrant database storage configuration
-   * This is an optional field
+   * The default Qdrant database storage configuration.
+   * This setting is for both managed and hybrid cloud clusters.
+   * This is an optional field.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationStorage storage = 2;
    */
@@ -691,6 +693,7 @@ export declare type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.Dat
 
   /**
    * The Qdrant database service configuration
+   * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
    * This is an optional field
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationService service = 3;
@@ -698,24 +701,27 @@ export declare type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.Dat
   service?: DatabaseConfigurationService;
 
   /**
-   * The log level for the database
-   * This is an optional field, default is Info.
+   * The log level for the database.
    * Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
+   * This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+   * This is an optional field, default is Info.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel log_level = 4;
    */
   logLevel?: DatabaseConfigurationLogLevel;
 
   /**
-   * The Qdrant database TLS configuration
-   * This is an optional field, if not set an unsecure connection is provided
+   * The Qdrant database TLS configuration.
+   * This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+   * This is an optional field, if not set an unsecure connection is provided.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationTls tls = 5;
    */
   tls?: DatabaseConfigurationTls;
 
   /**
-   * The Qdrant database inference configuration
+   * The Qdrant database inference configuration.
+   * This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
    * This is an optional field, if unset, the database is not configured for cloud inferencing
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationInference inference = 6;
@@ -848,6 +854,7 @@ export declare const DatabaseConfigurationStoragePerformanceSchema: GenMessage<D
 export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster.v1.DatabaseConfigurationService"> & {
   /**
    * Set an api-key.
+   * This setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.
    * If set, all requests must include a header with the api-key.
    * example header: `api-key: <API-KEY>`
    *
@@ -857,6 +864,7 @@ export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster
 
   /**
    * Set an api-key for read-only operations.
+   * This setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.
    * If set, all requests must include a header with the api-key.
    * example header: `api-key: <API-KEY>`
    *
@@ -866,6 +874,7 @@ export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster
 
   /**
    * Enable JWT Role Based Access Control (RBAC).
+   * This setting is for both managed and hybrid cloud clusters.
    * If enabled, you can generate JWT tokens with fine-grained rules for access control.
    * Use generated token instead of API key.
    *
@@ -875,6 +884,7 @@ export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster
 
   /**
    * Enable HTTPS for the REST and gRPC API
+   * This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
    *
    * @generated from field: bool enable_tls = 4;
    */

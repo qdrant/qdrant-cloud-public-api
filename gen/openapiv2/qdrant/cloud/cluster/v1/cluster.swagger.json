@@ -608,7 +608,7 @@
         },
         "databaseConfiguration": {
           "$ref": "#/definitions/v1DatabaseConfiguration",
-          "title": "Configuration to setup a qdrant database in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+          "description": "Configuration to setup a qdrant database.\nThis is an optional field."
         },
         "nodeSelector": {
           "type": "array",
@@ -871,30 +871,30 @@
       "properties": {
         "collection": {
           "$ref": "#/definitions/v1DatabaseConfigurationCollection",
-          "title": "The default Qdrant database collection configuration\nThis is an optional field"
+          "description": "The default Qdrant database collection configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
         },
         "storage": {
           "$ref": "#/definitions/v1DatabaseConfigurationStorage",
-          "title": "The default Qdrant database storage configuration\nThis is an optional field"
+          "description": "The default Qdrant database storage configuration.\nThis setting is for both managed and hybrid cloud clusters.\nThis is an optional field."
         },
         "service": {
           "$ref": "#/definitions/v1DatabaseConfigurationService",
-          "title": "The Qdrant database service configuration\nThis is an optional field"
+          "title": "The Qdrant database service configuration\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field"
         },
         "logLevel": {
           "$ref": "#/definitions/v1DatabaseConfigurationLogLevel",
-          "title": "The log level for the database\nThis is an optional field, default is Info.\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html"
+          "description": "The log level for the database.\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html\nThis setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.\nThis is an optional field, default is Info."
         },
         "tls": {
           "$ref": "#/definitions/v1DatabaseConfigurationTls",
-          "title": "The Qdrant database TLS configuration\nThis is an optional field, if not set an unsecure connection is provided"
+          "description": "The Qdrant database TLS configuration.\nThis setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.\nThis is an optional field, if not set an unsecure connection is provided."
         },
         "inference": {
           "$ref": "#/definitions/v1DatabaseConfigurationInference",
-          "title": "The Qdrant database inference configuration\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
+          "title": "The Qdrant database inference configuration.\nThis setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
         }
       },
-      "description": "Configuration to setup a Qdrant database in a hybrid cloud.\nAll settings apply to hybrid cloud only."
+      "description": "Configuration to setup a Qdrant database.\nThe settings apply to managed and/or hybrid cloud, see documentation on each message for more details."
     },
     "v1DatabaseConfigurationCollection": {
       "type": "object",
@@ -956,19 +956,19 @@
       "properties": {
         "apiKey": {
           "$ref": "#/definitions/v1SecretKeyRef",
-          "title": "Set an api-key.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+          "title": "Set an api-key.\nThis setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
         },
         "readOnlyApiKey": {
           "$ref": "#/definitions/v1SecretKeyRef",
-          "title": "Set an api-key for read-only operations.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+          "title": "Set an api-key for read-only operations.\nThis setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
         },
         "jwtRbac": {
           "type": "boolean",
-          "description": "Enable JWT Role Based Access Control (RBAC).\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nUse generated token instead of API key."
+          "description": "Enable JWT Role Based Access Control (RBAC).\nThis setting is for both managed and hybrid cloud clusters.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nUse generated token instead of API key."
         },
         "enableTls": {
           "type": "boolean",
-          "title": "Enable HTTPS for the REST and gRPC API"
+          "description": "Enable HTTPS for the REST and gRPC API\nThis setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection)."
         }
       },
       "title": "The Qdrant database service configuration"

@@ -1587,8 +1587,8 @@ type ClusterConfiguration struct {
 	// The additional resources on top of the selected package.
 	// This is an optional field, if not specified all additional resources are 0.
 	AdditionalResources *AdditionalResources `protobuf:"bytes,5,opt,name=additional_resources,json=additionalResources,proto3,oneof" json:"additional_resources,omitempty"`
-	// Configuration to setup a qdrant database in a hybrid cloud.
-	// It is ignored for managed cloud clusters. This is an optional field
+	// Configuration to setup a qdrant database.
+	// This is an optional field.
 	DatabaseConfiguration *DatabaseConfiguration `protobuf:"bytes,7,opt,name=database_configuration,json=databaseConfiguration,proto3,oneof" json:"database_configuration,omitempty"`
 	// The node selector for this cluster in a hybrid cloud.
 	// It is ignored for managed cloud clusters. This is an optional field
@@ -1759,27 +1759,33 @@ func (x *ClusterConfiguration) GetRebalanceStrategy() ClusterConfigurationRebala
 	return ClusterConfigurationRebalanceStrategy_CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED
 }
 
-// Configuration to setup a Qdrant database in a hybrid cloud.
-// All settings apply to hybrid cloud only.
+// Configuration to setup a Qdrant database.
+// The settings apply to managed and/or hybrid cloud, see documentation on each message for more details.
 type DatabaseConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The default Qdrant database collection configuration
-	// This is an optional field
+	// The default Qdrant database collection configuration.
+	// This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
+	// This is an optional field.
 	Collection *DatabaseConfigurationCollection `protobuf:"bytes,1,opt,name=collection,proto3,oneof" json:"collection,omitempty"`
-	// The default Qdrant database storage configuration
-	// This is an optional field
+	// The default Qdrant database storage configuration.
+	// This setting is for both managed and hybrid cloud clusters.
+	// This is an optional field.
 	Storage *DatabaseConfigurationStorage `protobuf:"bytes,2,opt,name=storage,proto3,oneof" json:"storage,omitempty"`
 	// The Qdrant database service configuration
+	// This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
 	// This is an optional field
 	Service *DatabaseConfigurationService `protobuf:"bytes,3,opt,name=service,proto3,oneof" json:"service,omitempty"`
-	// The log level for the database
-	// This is an optional field, default is Info.
+	// The log level for the database.
 	// Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
+	// This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+	// This is an optional field, default is Info.
 	LogLevel *DatabaseConfigurationLogLevel `protobuf:"varint,4,opt,name=log_level,json=logLevel,proto3,enum=qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel,oneof" json:"log_level,omitempty"`
-	// The Qdrant database TLS configuration
-	// This is an optional field, if not set an unsecure connection is provided
+	// The Qdrant database TLS configuration.
+	// This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
+	// This is an optional field, if not set an unsecure connection is provided.
 	Tls *DatabaseConfigurationTls `protobuf:"bytes,5,opt,name=tls,proto3,oneof" json:"tls,omitempty"`
-	// The Qdrant database inference configuration
+	// The Qdrant database inference configuration.
+	// This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
 	// This is an optional field, if unset, the database is not configured for cloud inferencing
 	Inference     *DatabaseConfigurationInference `protobuf:"bytes,6,opt,name=inference,proto3,oneof" json:"inference,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2083,18 +2089,22 @@ func (x *DatabaseConfigurationStoragePerformance) GetAsyncScorer() bool {
 type DatabaseConfigurationService struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Set an api-key.
+	// This setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.
 	// If set, all requests must include a header with the api-key.
 	// example header: `api-key: <API-KEY>`
 	ApiKey *v1.SecretKeyRef `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3,oneof" json:"api_key,omitempty"`
 	// Set an api-key for read-only operations.
+	// This setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.
 	// If set, all requests must include a header with the api-key.
 	// example header: `api-key: <API-KEY>`
 	ReadOnlyApiKey *v1.SecretKeyRef `protobuf:"bytes,2,opt,name=read_only_api_key,json=readOnlyApiKey,proto3,oneof" json:"read_only_api_key,omitempty"`
 	// Enable JWT Role Based Access Control (RBAC).
+	// This setting is for both managed and hybrid cloud clusters.
 	// If enabled, you can generate JWT tokens with fine-grained rules for access control.
 	// Use generated token instead of API key.
 	JwtRbac bool `protobuf:"varint,3,opt,name=jwt_rbac,json=jwtRbac,proto3" json:"jwt_rbac,omitempty"`
 	// Enable HTTPS for the REST and gRPC API
+	// This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
 	EnableTls     bool `protobuf:"varint,4,opt,name=enable_tls,json=enableTls,proto3" json:"enable_tls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
