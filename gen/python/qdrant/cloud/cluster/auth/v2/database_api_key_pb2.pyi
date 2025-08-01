@@ -110,18 +110,9 @@ class GlobalAccessRule(_message.Message):
     def __init__(self, access_type: _Optional[_Union[GlobalAccessRuleAccessType, str]] = ...) -> None: ...
 
 class CollectionAccessRule(_message.Message):
-    __slots__ = ("collection_name", "access_type", "payload")
-    class PayloadEntry(_message.Message):
-        __slots__ = ("key", "value")
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: str
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    __slots__ = ("collection_name", "access_type")
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
-    PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     collection_name: str
     access_type: CollectionAccessRuleAccessType
-    payload: _containers.ScalarMap[str, str]
-    def __init__(self, collection_name: _Optional[str] = ..., access_type: _Optional[_Union[CollectionAccessRuleAccessType, str]] = ..., payload: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, collection_name: _Optional[str] = ..., access_type: _Optional[_Union[CollectionAccessRuleAccessType, str]] = ...) -> None: ...
