@@ -27,6 +27,8 @@ SUPPORTED_ACTOR_TYPES_FIELD_NUMBER: _ClassVar[int]
 supported_actor_types: _descriptor.FieldDescriptor
 REQUIRES_ALL_PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
 requires_all_permissions: _descriptor.FieldDescriptor
+MAX_MESSAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+max_message_size: _descriptor.FieldDescriptor
 
 class Version(_message.Message):
     __slots__ = ("major", "minor", "patch")

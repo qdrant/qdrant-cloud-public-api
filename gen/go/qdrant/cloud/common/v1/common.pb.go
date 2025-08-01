@@ -301,6 +301,14 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 		Tag:           "varint,50005,opt,name=requires_all_permissions",
 		Filename:      "qdrant/cloud/common/v1/common.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: (*int32)(nil),
+		Field:         50006,
+		Name:          "qdrant.cloud.common.v1.max_message_size",
+		Tag:           "varint,50006,opt,name=max_message_size",
+		Filename:      "qdrant/cloud/common/v1/common.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -331,6 +339,10 @@ var (
 	//
 	// optional bool requires_all_permissions = 50005;
 	E_RequiresAllPermissions = &file_qdrant_cloud_common_v1_common_proto_extTypes[4]
+	// The override of the default maximum message size in MB (per message).
+	//
+	// optional int32 max_message_size = 50006;
+	E_MaxMessageSize = &file_qdrant_cloud_common_v1_common_proto_extTypes[5]
 )
 
 var File_qdrant_cloud_common_v1_common_proto protoreflect.FileDescriptor
@@ -358,7 +370,9 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x15account_id_expression\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x01(\tR\x13accountIdExpression:Y\n" +
 	"\x17requires_authentication\x12\x1e.google.protobuf.MethodOptions\x18ӆ\x03 \x01(\bR\x16requiresAuthentication:\x8a\x01\n" +
 	"\x15supported_actor_types\x12\x1e.google.protobuf.MethodOptions\x18Ԇ\x03 \x03(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\x11\xbaH\f\x92\x01\t\"\a\x82\x01\x04\x10\x01 \x00\x10\x01R\x13supportedActorTypes:Z\n" +
-	"\x18requires_all_permissions\x12\x1e.google.protobuf.MethodOptions\x18Ն\x03 \x01(\bR\x16requiresAllPermissionsB\xf6\x01\n" +
+	"\x18requires_all_permissions\x12\x1e.google.protobuf.MethodOptions\x18Ն\x03 \x01(\bR\x16requiresAllPermissions:V\n" +
+	"\x10max_message_size\x12\x1e.google.protobuf.MethodOptions\x18ֆ\x03 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\x80\b(\x01R\x0emaxMessageSizeB\xf6\x01\n" +
 	"\x1acom.qdrant.cloud.common.v1B\vCommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3"
 
 var (
@@ -388,11 +402,12 @@ var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
 	4, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
 	4, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
 	4, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	0, // 5: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	5, // [5:6] is the sub-list for extension type_name
-	0, // [0:5] is the sub-list for extension extendee
+	4, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	0, // 6: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	6, // [6:7] is the sub-list for extension type_name
+	0, // [0:6] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -408,7 +423,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   3,
-			NumExtensions: 5,
+			NumExtensions: 6,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_common_v1_common_proto_goTypes,

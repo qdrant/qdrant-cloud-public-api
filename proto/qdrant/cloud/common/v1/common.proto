@@ -51,6 +51,15 @@ extend google.protobuf.MethodOptions {
   bool requires_all_permissions = 50005;
 }
 
+// The extension for adding an override of the default maximum message size (in MB).
+extend google.protobuf.MethodOptions {
+  // The override of the default maximum message size in MB (per message).
+  int32 max_message_size = 50006 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 1024
+  }];
+}
+
 // ActorType specifies the type of actor that can call a method.
 enum ActorType {
   // Default, unspecified actor type. Should generally not be used explicitly in options
