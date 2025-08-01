@@ -186,3 +186,10 @@ export declare const supported_actor_types: GenExtension<MethodOptions, ActorTyp
  */
 export declare const requires_all_permissions: GenExtension<MethodOptions, boolean>;
 
+/**
+ * The override of the default maximum message size in MB (per message).
+ *
+ * @generated from extension: int32 max_message_size = 50006;
+ */
+export declare const max_message_size: GenExtension<MethodOptions, number>;
+
