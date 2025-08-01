@@ -330,13 +330,6 @@
         "accessType": {
           "$ref": "#/definitions/v2CollectionAccessRuleAccessType",
           "description": "The type of access granted for the collection.\nThis is a required field."
-        },
-        "payload": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "An optional set of key-value pairs used to restrict access within the collection.\nOnly points containing the specified key-value pairs in their payload will be accessible."
         }
       },
       "description": "Represents an access rule for a specific collection in the database."
