@@ -1290,6 +1290,62 @@ export declare type QdrantRelease = Message<"qdrant.cloud.cluster.v1.QdrantRelea
 export declare const QdrantReleaseSchema: GenMessage<QdrantRelease>;
 
 /**
+ * CreateClusterFromBackupRequest is the request for the CreateCluster function.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest
+ */
+export declare type CreateClusterFromBackupRequest = Message<"qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the backup (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string backup_id = 2;
+   */
+  backupId: string;
+
+  /**
+   * Name of the new cluster
+   *
+   * @generated from field: string cluster_name = 3;
+   */
+  clusterName: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest.
+ * Use `create(CreateClusterFromBackupRequestSchema)` to create a new message.
+ */
+export declare const CreateClusterFromBackupRequestSchema: GenMessage<CreateClusterFromBackupRequest>;
+
+/**
+ * CreateClusterFromBackupResponse is the response for the CreateCluster function.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse
+ */
+export declare type CreateClusterFromBackupResponse = Message<"qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse"> & {
+  /**
+   * Cluster created from the backup
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.Cluster cluster = 1;
+   */
+  cluster?: Cluster;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse.
+ * Use `create(CreateClusterFromBackupResponseSchema)` to create a new message.
+ */
+export declare const CreateClusterFromBackupResponseSchema: GenMessage<CreateClusterFromBackupResponse>;
+
+/**
  * ClusterConfigurationGpuType defines GPU types available for clusters.
  *
  * @generated from enum qdrant.cloud.cluster.v1.ClusterConfigurationGpuType
@@ -1751,6 +1807,19 @@ export declare const ClusterService: GenService<{
     methodKind: "unary";
     input: typeof CreateClusterRequestSchema;
     output: typeof CreateClusterResponseSchema;
+  },
+  /**
+   * Create a new cluster from an existing backup
+   * Required permissions (both):
+   * - admin:backups
+   * - write:clusters
+   *
+   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup
+   */
+  createClusterFromBackup: {
+    methodKind: "unary";
+    input: typeof CreateClusterFromBackupRequestSchema;
+    output: typeof CreateClusterFromBackupResponseSchema;
   },
   /**
    * Updates a cluster in the account identified by the given ID.

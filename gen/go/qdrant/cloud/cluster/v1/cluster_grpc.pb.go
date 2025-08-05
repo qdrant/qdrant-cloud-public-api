@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_ListClusters_FullMethodName       = "/qdrant.cloud.cluster.v1.ClusterService/ListClusters"
-	ClusterService_GetCluster_FullMethodName         = "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
-	ClusterService_CreateCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/CreateCluster"
-	ClusterService_UpdateCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster"
-	ClusterService_DeleteCluster_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
-	ClusterService_RestartCluster_FullMethodName     = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
-	ClusterService_SuspendCluster_FullMethodName     = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
-	ClusterService_SuggestClusterName_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
-	ClusterService_ListQdrantReleases_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
+	ClusterService_ListClusters_FullMethodName            = "/qdrant.cloud.cluster.v1.ClusterService/ListClusters"
+	ClusterService_GetCluster_FullMethodName              = "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
+	ClusterService_CreateCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/CreateCluster"
+	ClusterService_CreateClusterFromBackup_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup"
+	ClusterService_UpdateCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster"
+	ClusterService_DeleteCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
+	ClusterService_RestartCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
+	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
+	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
+	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -48,6 +49,11 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	CreateCluster(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*CreateClusterResponse, error)
+	// Create a new cluster from an existing backup
+	// Required permissions (both):
+	// - admin:backups
+	// - write:clusters
+	CreateClusterFromBackup(ctx context.Context, in *CreateClusterFromBackupRequest, opts ...grpc.CallOption) (*CreateClusterFromBackupResponse, error)
 	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
@@ -108,6 +114,16 @@ func (c *clusterServiceClient) CreateCluster(ctx context.Context, in *CreateClus
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateClusterResponse)
 	err := c.cc.Invoke(ctx, ClusterService_CreateCluster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) CreateClusterFromBackup(ctx context.Context, in *CreateClusterFromBackupRequest, opts ...grpc.CallOption) (*CreateClusterFromBackupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateClusterFromBackupResponse)
+	err := c.cc.Invoke(ctx, ClusterService_CreateClusterFromBackup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -192,6 +208,11 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error)
+	// Create a new cluster from an existing backup
+	// Required permissions (both):
+	// - admin:backups
+	// - write:clusters
+	CreateClusterFromBackup(context.Context, *CreateClusterFromBackupRequest) (*CreateClusterFromBackupResponse, error)
 	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
@@ -236,6 +257,9 @@ func (UnimplementedClusterServiceServer) GetCluster(context.Context, *GetCluster
 }
 func (UnimplementedClusterServiceServer) CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCluster not implemented")
+}
+func (UnimplementedClusterServiceServer) CreateClusterFromBackup(context.Context, *CreateClusterFromBackupRequest) (*CreateClusterFromBackupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateClusterFromBackup not implemented")
 }
 func (UnimplementedClusterServiceServer) UpdateCluster(context.Context, *UpdateClusterRequest) (*UpdateClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCluster not implemented")
@@ -326,6 +350,24 @@ func _ClusterService_CreateCluster_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).CreateCluster(ctx, req.(*CreateClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_CreateClusterFromBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateClusterFromBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).CreateClusterFromBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_CreateClusterFromBackup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).CreateClusterFromBackup(ctx, req.(*CreateClusterFromBackupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -456,6 +498,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateCluster",
 			Handler:    _ClusterService_CreateCluster_Handler,
+		},
+		{
+			MethodName: "CreateClusterFromBackup",
+			Handler:    _ClusterService_CreateClusterFromBackup_Handler,
 		},
 		{
 			MethodName: "UpdateCluster",

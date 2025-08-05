@@ -472,3 +472,19 @@ class QdrantRelease(_message.Message):
     end_of_life: bool
     unavailable: bool
     def __init__(self, version: _Optional[str] = ..., default: bool = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: bool = ..., unavailable: bool = ...) -> None: ...
+
+class CreateClusterFromBackupRequest(_message.Message):
+    __slots__ = ("account_id", "backup_id", "cluster_name")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    backup_id: str
+    cluster_name: str
+    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., cluster_name: _Optional[str] = ...) -> None: ...
+
+class CreateClusterFromBackupResponse(_message.Message):
+    __slots__ = ("cluster",)
+    CLUSTER_FIELD_NUMBER: _ClassVar[int]
+    cluster: Cluster
+    def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
