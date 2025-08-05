@@ -1588,11 +1588,11 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\v_cluster_idB\x15\n" +
 	"\x13_backup_schedule_id\"S\n" +
 	"\x13ListBackupsResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\"U\n" +
-	"\x13CreateBackupRequest\x12>\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x06backup\"V\n" +
-	"\x14CreateBackupResponse\x12>\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x06backup\"e\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\"]\n" +
+	"\x13CreateBackupRequest\x12F\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"^\n" +
+	"\x14CreateBackupResponse\x12F\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"e\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
@@ -1624,24 +1624,24 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x126\n" +
-	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"t\n" +
-	"\x19GetBackupScheduleResponse\x12W\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x0ebackupSchedule\"v\n" +
-	"\x1bCreateBackupScheduleRequest\x12W\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x0ebackupSchedule\"w\n" +
-	"\x1cCreateBackupScheduleResponse\x12W\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x0ebackupSchedule\"v\n" +
-	"\x1bUpdateBackupScheduleRequest\x12W\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x0ebackupSchedule\"w\n" +
-	"\x1cUpdateBackupScheduleResponse\x12W\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x0ebackupSchedule\"\xbd\x01\n" +
+	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"|\n" +
+	"\x19GetBackupScheduleResponse\x12_\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"~\n" +
+	"\x1bCreateBackupScheduleRequest\x12_\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x7f\n" +
+	"\x1cCreateBackupScheduleResponse\x12_\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"~\n" +
+	"\x1bUpdateBackupScheduleRequest\x12_\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x7f\n" +
+	"\x1cUpdateBackupScheduleResponse\x12_\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
 	"\x1bDeleteBackupScheduleRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x126\n" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xff\x04\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xd5\x05\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1655,9 +1655,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12B\n" +
 	"\x0fbackup_duration\x18\b \x01(\v2\x19.google.protobuf.DurationR\x0ebackupDuration\x12;\n" +
-	"\x12backup_schedule_id\x18\t \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
+	"\x12backup_schedule_id\x18\t \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01:\x80\x02\xbaH\xfc\x01\x1a\xa3\x01\n" +
 	"\n" +
-	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x15\n" +
+	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
+	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)B\x15\n" +
 	"\x13_backup_schedule_id\"\x99\x06\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +

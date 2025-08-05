@@ -139,13 +139,13 @@ message ListBackupsResponse {
 // CreateBackupRequest is the request for the CreateBackup function.
 message CreateBackupRequest {
   // The actual backup.
-  Backup backup = 1;
+  Backup backup = 1 [(buf.validate.field).required = true];
 }
 
 // CreateBackupResponse is the response from the CreateBackup function.
 message CreateBackupResponse {
   // The actual backup.
-  Backup backup = 1;
+  Backup backup = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteBackupRequest is the request for the DeleteBackup function.
@@ -228,31 +228,31 @@ message GetBackupScheduleRequest {
 // GetBackupScheduleResponse is the response from the GetBackupSchedule function.
 message GetBackupScheduleResponse {
   // The actual cluster
-  BackupSchedule backup_schedule = 1;
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
 }
 
 // CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
 message CreateBackupScheduleRequest {
   // The actual backup schedule.
-  BackupSchedule backup_schedule = 1;
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
 }
 
 // CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
 message CreateBackupScheduleResponse {
   // The actual backup schedule.
-  BackupSchedule backup_schedule = 1;
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
 message UpdateBackupScheduleRequest {
   // The actual backup schedule.
-  BackupSchedule backup_schedule = 1;
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
 message UpdateBackupScheduleResponse {
   // The actual backup schedule.
-  BackupSchedule backup_schedule = 1;
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
@@ -313,6 +313,11 @@ message Backup {
   // The name of the backup.
   // This is a read-only field and will be available after a backup is created.
   string name = 5;
+  option (buf.validate.message).cel = {
+    id: "backup.name"
+    message: "name must not be empty"
+    expression: "this.name.size() > 0 || !has(this.created_at)"
+  };
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
   BackupStatus status = 6;
