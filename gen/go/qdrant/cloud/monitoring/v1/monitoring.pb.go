@@ -1132,17 +1132,18 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"h\n" +
 	" GetClusterSummaryMetricsResponse\x12D\n" +
-	"\x05nodes\x18\x01 \x03(\v2..qdrant.cloud.monitoring.v1.ClusterNodeMetricsR\x05nodes\"\xcf\x02\n" +
+	"\x05nodes\x18\x01 \x03(\v2..qdrant.cloud.monitoring.v1.ClusterNodeMetricsR\x05nodes\"\xe9\x03\n" +
 	"\x1dGetClusterUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12K\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12U\n" +
 	"\n" +
-	"aggregator\x18\x05 \x01(\x0e2&.qdrant.cloud.monitoring.v1.AggregatorH\x02R\n" +
-	"aggregator\x88\x01\x01B\b\n" +
+	"aggregator\x18\x05 \x01(\x0e2&.qdrant.cloud.monitoring.v1.AggregatorB\b\xbaH\x05\x82\x01\x02 \x00H\x02R\n" +
+	"aggregator\x88\x01\x01:\x8d\x01\xbaH\x89\x01\x1a\x86\x01\n" +
+	"(get_cluster_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_untilB\r\n" +
 	"\v_aggregator\"\xcb\x04\n" +
@@ -1155,60 +1156,62 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x04disk\x18\x06 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\x124\n" +
 	"\x03rps\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03rps\x12<\n" +
 	"\alatency\x18\b \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\alatency\x12I\n" +
-	"\x05nodes\x18\t \x03(\v23.qdrant.cloud.monitoring.v1.ClusterNodeUsageMetricsR\x05nodes\"\xeb\x01\n" +
+	"\x05nodes\x18\t \x03(\v23.qdrant.cloud.monitoring.v1.ClusterNodeUsageMetricsR\x05nodes\"\xf0\x02\n" +
 	"\x15GetClusterLogsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01B\b\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01:\x82\x01\xbaH\x7f\x1a}\n" +
+	"\x1fget_cluster_logs.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"T\n" +
 	"\x16GetClusterLogsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xed\x01\n" +
+	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xf5\x02\n" +
 	"\x17GetClusterEventsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01B\b\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01:\x85\x01\xbaH\x81\x01\x1a\x7f\n" +
+	"!get_cluster_events.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"V\n" +
 	"\x18GetClusterEventsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xf3\x03\n" +
-	"\x12ClusterNodeMetrics\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12C\n" +
-	"\x03cpu\x18\x02 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\x03cpu\x12C\n" +
-	"\x03ram\x18\x03 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\x03ram\x12N\n" +
-	"\tram_cache\x18\x04 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\bramCache\x12J\n" +
-	"\aram_rss\x18\x05 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\x06ramRss\x12W\n" +
-	"\x0eram_qdrant_rss\x18\x06 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\framQdrantRss\x12E\n" +
-	"\x04disk\x18\a \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewR\x04disk\"\x97\x01\n" +
+	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xac\x04\n" +
+	"\x12ClusterNodeMetrics\x12 \n" +
+	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x12K\n" +
+	"\x03cpu\x18\x02 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\x12K\n" +
+	"\x03ram\x18\x03 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x03ram\x12V\n" +
+	"\tram_cache\x18\x04 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\bramCache\x12R\n" +
+	"\aram_rss\x18\x05 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x06ramRss\x12_\n" +
+	"\x0eram_qdrant_rss\x18\x06 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\framQdrantRss\x12M\n" +
+	"\x04disk\x18\a \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x04disk\"\x9f\x01\n" +
 	"\x15ClusterMetricOverview\x12=\n" +
-	"\x03avg\x18\x01 \x03(\v2+.qdrant.cloud.monitoring.v1.IntervalAverageR\x03avg\x12?\n" +
-	"\x05total\x18\x02 \x01(\v2).qdrant.cloud.monitoring.v1.ResourceValueR\x05total\"^\n" +
-	"\x0fIntervalAverage\x125\n" +
-	"\binterval\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\binterval\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x01R\x05value\"9\n" +
-	"\rResourceValue\x12\x14\n" +
-	"\x05value\x18\x01 \x01(\x01R\x05value\x12\x12\n" +
-	"\x04unit\x18\x02 \x01(\tR\x04unit\"\x9e\x03\n" +
-	"\x17ClusterNodeUsageMetrics\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x124\n" +
+	"\x03avg\x18\x01 \x03(\v2+.qdrant.cloud.monitoring.v1.IntervalAverageR\x03avg\x12G\n" +
+	"\x05total\x18\x02 \x01(\v2).qdrant.cloud.monitoring.v1.ResourceValueB\x06\xbaH\x03\xc8\x01\x01R\x05total\"v\n" +
+	"\x0fIntervalAverage\x12=\n" +
+	"\binterval\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x06\xbaH\x03\xc8\x01\x01R\binterval\x12$\n" +
+	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"R\n" +
+	"\rResourceValue\x12$\n" +
+	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12\x1b\n" +
+	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xa7\x03\n" +
+	"\x17ClusterNodeUsageMetrics\x12 \n" +
+	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x124\n" +
 	"\x03cpu\x18\x02 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03cpu\x124\n" +
 	"\x03ram\x18\x03 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03ram\x12?\n" +
 	"\tram_cache\x18\x04 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\bramCache\x12;\n" +
 	"\aram_rss\x18\x05 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06ramRss\x12H\n" +
 	"\x0eram_qdrant_rss\x18\x06 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\framQdrantRss\x126\n" +
-	"\x04disk\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\"X\n" +
-	"\x06Metric\x128\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x01R\x05value\"^\n" +
-	"\bLogEntry\x128\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage*x\n" +
+	"\x04disk\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\"p\n" +
+	"\x06Metric\x12@\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12$\n" +
+	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"o\n" +
+	"\bLogEntry\x12@\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12!\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage*x\n" +
 	"\n" +
 	"Aggregator\x12\x1a\n" +
 	"\x16AGGREGATOR_UNSPECIFIED\x10\x00\x12\x12\n" +

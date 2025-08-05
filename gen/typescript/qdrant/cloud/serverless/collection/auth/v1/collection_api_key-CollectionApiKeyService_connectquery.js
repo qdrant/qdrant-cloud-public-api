@@ -25,7 +25,7 @@ export const createCollectionApiKey = CollectionApiKeyService.method.createColle
 /**
  * DeleteCollectionApiKey removes an API key from a collection
  * Required Permissions:
- * - write:serverless_api_keys
+ * - delete:serverless_api_keys
  *
  * @generated from rpc qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService.DeleteCollectionApiKey
  */

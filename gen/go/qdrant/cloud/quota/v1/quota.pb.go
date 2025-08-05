@@ -64,7 +64,7 @@ func (*GetAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 // GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
 type GetAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Maximum number of accounts this user can be the owner of.
+	// Maximum number of accounts this user can be the owner of (at least 1).
 	// To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
 	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -160,16 +160,16 @@ type GetAccountQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the account this quota applies to
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Maximum number of clusters this account is allowed to create.
+	// Maximum number of clusters this account is allowed to create (at least 1).
 	// To get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`.
 	MaxClusters uint32 `protobuf:"varint,2,opt,name=max_clusters,json=maxClusters,proto3" json:"max_clusters,omitempty"`
-	// Maximum number of nodes clusters can be scaled to.
+	// Maximum number of nodes clusters can be scaled to (at least 1).
 	// To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
 	MaxClusterNodes uint32 `protobuf:"varint,3,opt,name=max_cluster_nodes,json=maxClusterNodes,proto3" json:"max_cluster_nodes,omitempty"`
-	// Maximum number of Database API keys this account can create (for each cluster).
+	// Maximum number of Database API keys this account can create (for each cluster)(at least 1).
 	// To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
 	MaxClusterDatabaseApiKeys uint32 `protobuf:"varint,4,opt,name=max_cluster_database_api_keys,json=maxClusterDatabaseApiKeys,proto3" json:"max_cluster_database_api_keys,omitempty"`
-	// Maximum number of free-tier clusters this account can create.
+	// Maximum number of free-tier clusters this account can create (at least 1).
 	MaxFreeTierClusters uint32 `protobuf:"varint,5,opt,name=max_free_tier_clusters,json=maxFreeTierClusters,proto3" json:"max_free_tier_clusters,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -250,10 +250,10 @@ const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xa3\x02\n" +
-	"\x18GetAccountQuotasResponse\x12\x1d\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xad\x02\n" +
+	"\x18GetAccountQuotasResponse\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\x12*\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\vmaxClusters\x123\n" +
 	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00R\x0fmaxClusterNodes\x12I\n" +
 	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00R\x19maxClusterDatabaseApiKeys\x12<\n" +

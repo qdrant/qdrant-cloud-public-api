@@ -83,7 +83,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the invoice."
+          "description": "Unique identifier for the invoice.\n\nTODO: Is this a GUID?"
         },
         "number": {
           "type": "string",
@@ -92,7 +92,7 @@
         "totalAmount": {
           "type": "string",
           "format": "int64",
-          "description": "Total invoice amount."
+          "description": "Total invoice amount.\n\nTODO: can this be a negative number (credit invoice, if not we should add: [(buf.validate.field).int64.gte = 0])"
         },
         "createdAt": {
           "type": "string",

@@ -44,7 +44,7 @@ class CollectionServiceServicer(object):
     def ListCollections(self, request, context):
         """ListCollections returns all collections for the authenticated user
         Required Permissions:
-        - write:serverless
+        - read:serverless
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -7,7 +7,7 @@ import { CollectionService } from "./collection_pb.js";
 /**
  * ListCollections returns all collections for the authenticated user
  * Required Permissions:
- * - write:serverless
+ * - read:serverless
  *
  * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.ListCollections
  */

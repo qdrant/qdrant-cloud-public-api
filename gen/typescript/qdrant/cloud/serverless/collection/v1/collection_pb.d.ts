@@ -392,7 +392,7 @@ export declare const CollectionService: GenService<{
   /**
    * ListCollections returns all collections for the authenticated user
    * Required Permissions:
-   * - write:serverless
+   * - read:serverless
    *
    * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.ListCollections
    */

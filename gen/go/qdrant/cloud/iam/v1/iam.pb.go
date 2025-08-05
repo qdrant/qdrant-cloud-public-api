@@ -1861,18 +1861,19 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
 	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x1d\n" +
-	"\x1bGetAuthenticatedUserRequest\"M\n" +
-	"\x1cGetAuthenticatedUserResponse\x12-\n" +
-	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserR\x04user\"B\n" +
-	"\x11UpdateUserRequest\x12-\n" +
-	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserR\x04user\"C\n" +
-	"\x12UpdateUserResponse\x12-\n" +
-	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserR\x04user\"p\n" +
+	"\x1bGetAuthenticatedUserRequest\"U\n" +
+	"\x1cGetAuthenticatedUserResponse\x125\n" +
+	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\"\xa0\x01\n" +
+	"\x11UpdateUserRequest\x125\n" +
+	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user:T\xbaHQ\x1aO\n" +
+	"\x16update_user.id_present\x12!user.id is required for an update\x1a\x12this.user.id != ''\"K\n" +
+	"\x12UpdateUserResponse\x125\n" +
+	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\"p\n" +
 	"\x15GetUserConsentRequest\x12W\n" +
 	"\rdocument_type\x18\x01 \x01(\x0e2&.qdrant.cloud.iam.v1.LegalDocumentTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\fdocumentType\"]\n" +
-	"\x16GetUserConsentResponse\x12C\n" +
-	"\fuser_consent\x18\x01 \x01(\v2 .qdrant.cloud.iam.v1.UserConsentR\vuserConsent\"\xce\x01\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\fdocumentType\"e\n" +
+	"\x16GetUserConsentResponse\x12K\n" +
+	"\fuser_consent\x18\x01 \x01(\v2 .qdrant.cloud.iam.v1.UserConsentB\x06\xbaH\x03\xc8\x01\x01R\vuserConsent\"\xce\x01\n" +
 	"\x18RecordUserConsentRequest\x12W\n" +
 	"\rdocument_type\x18\x01 \x01(\x0e2&.qdrant.cloud.iam.v1.LegalDocumentTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\fdocumentType\x12Y\n" +
@@ -1880,9 +1881,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x19RecordUserConsentResponse\"A\n" +
 	"\x16ListPermissionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\";\n" +
-	"\x17ListPermissionsResponse\x12 \n" +
-	"\vpermissions\x18\x01 \x03(\tR\vpermissions\";\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"I\n" +
+	"\x17ListPermissionsResponse\x12.\n" +
+	"\vpermissions\x18\x01 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions\";\n" +
 	"\x10ListRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n" +
@@ -1891,17 +1892,20 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0eGetRoleRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
-	"\arole_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"@\n" +
-	"\x0fGetRoleResponse\x12-\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n" +
-	"\x11CreateRoleRequest\x12-\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n" +
-	"\x12CreateRoleResponse\x12-\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleR\x04role\"B\n" +
-	"\x11UpdateRoleRequest\x12-\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleR\x04role\"C\n" +
-	"\x12UpdateRoleResponse\x12-\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleR\x04role\"_\n" +
+	"\arole_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"H\n" +
+	"\x0fGetRoleResponse\x125\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\xab\x01\n" +
+	"\x11CreateRoleRequest\x125\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role:_\xbaH\\\x1aZ\n" +
+	"\x15create_role.role_type\x12'role.role_type must be ROLE_TYPE_CUSTOM\x1a\x18this.role.role_type == 2\"K\n" +
+	"\x12CreateRoleResponse\x125\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\xfe\x01\n" +
+	"\x11UpdateRoleRequest\x125\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role:\xb1\x01\xbaH\xad\x01\x1aO\n" +
+	"\x16update_role.id_present\x12!role.id is required for an update\x1a\x12this.role.id != ''\x1aZ\n" +
+	"\x15update_role.role_type\x12'role.role_type must be ROLE_TYPE_CUSTOM\x1a\x18this.role.role_type == 2\"K\n" +
+	"\x12UpdateRoleResponse\x125\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"_\n" +
 	"\x11DeleteRoleRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
@@ -1909,15 +1913,15 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x12DeleteRoleResponse\"J\n" +
 	"\x1fListEffectivePermissionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n" +
-	" ListEffectivePermissionsResponse\x12 \n" +
-	"\vpermissions\x18\x01 \x03(\tR\vpermissions\"b\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"R\n" +
+	" ListEffectivePermissionsResponse\x12.\n" +
+	"\vpermissions\x18\x01 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions\"b\n" +
 	"\x14ListUserRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"H\n" +
 	"\x15ListUserRolesResponse\x12/\n" +
-	"\x05roles\x18\x01 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles\"\xd6\x01\n" +
+	"\x05roles\x18\x01 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles\"\xf3\x02\n" +
 	"\x16AssignUserRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
@@ -1925,16 +1929,17 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0frole_ids_to_add\x18\x03 \x03(\tB\r\xbaH\n" +
 	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\froleIdsToAdd\x12:\n" +
 	"\x12role_ids_to_delete\x18\x04 \x03(\tB\r\xbaH\n" +
-	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete\"\x19\n" +
-	"\x17AssignUserRolesResponse\"\xb1\x02\n" +
+	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete:\x9a\x01\xbaH\x96\x01\x1a\x93\x01\n" +
+	"\x1eassign_user_roles.at_least_one\x12*at least one role must be added or deleted\x1aEthis.role_ids_to_add.size() > 0 || this.role_ids_to_delete.size() > 0\"\x19\n" +
+	"\x17AssignUserRolesResponse\"\xbb\x02\n" +
 	"\x04User\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n" +
-	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x127\n" +
-	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusR\x06status\x126\n" +
-	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xa5\x04\n" +
+	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
+	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
+	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xb5\x04\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1943,15 +1948,15 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
 	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12:\n" +
-	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeR\broleType\x12*\n" +
-	"\vpermissions\x18\b \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12D\n" +
+	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\broleType\x120\n" +
+	"\vpermissions\x18\b \x03(\tB\x0e\xbaH\v\x92\x01\b\b\x01\"\x04r\x02\x10\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
 	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x13\n" +
 	"\x11LogoutUserRequest\"\x14\n" +
-	"\x12LogoutUserResponse\"\x9b\x02\n" +
-	"\vUserConsent\x12K\n" +
-	"\rdocument_type\x18\x01 \x01(\x0e2&.qdrant.cloud.iam.v1.LegalDocumentTypeR\fdocumentType\x12>\n" +
-	"\x06status\x18\x02 \x01(\x0e2&.qdrant.cloud.iam.v1.UserConsentStatusR\x06status\x12I\n" +
+	"\x12LogoutUserResponse\"\xaf\x02\n" +
+	"\vUserConsent\x12U\n" +
+	"\rdocument_type\x18\x01 \x01(\x0e2&.qdrant.cloud.iam.v1.LegalDocumentTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\fdocumentType\x12H\n" +
+	"\x06status\x18\x02 \x01(\x0e2&.qdrant.cloud.iam.v1.UserConsentStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12I\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +

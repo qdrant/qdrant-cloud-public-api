@@ -81,9 +81,16 @@ message GetClusterUsageMetricsRequest {
   // Optional end time for the metrics query.
   // If omitted, defaults to current time.
   optional google.protobuf.Timestamp until = 4;
+  option (buf.validate.message).cel = {
+    id: "get_cluster_usage_metrics.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
   // Aggregation function to apply to the time series data.
   // If omitted, defaults to SUM.
-  optional Aggregator aggregator = 5;
+  optional Aggregator aggregator = 5 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
 }
 
 // GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function
@@ -123,6 +130,11 @@ message GetClusterLogsRequest {
   // Optional end time for the logs query.
   // If omitted, defaults to current time.
   optional google.protobuf.Timestamp until = 4;
+  option (buf.validate.message).cel = {
+    id: "get_cluster_logs.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
 }
 
 // GetClusterLogsResponse is the response from the GetClusterLogs function
@@ -146,6 +158,11 @@ message GetClusterEventsRequest {
   // Optional end time for the events query.
   // If omitted, defaults to current time.
   optional google.protobuf.Timestamp until = 4;
+  option (buf.validate.message).cel = {
+    id: "get_cluster_events.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
 }
 
 // GetClusterEventsRequest is the response from the GetClusterEvents function
@@ -157,19 +174,19 @@ message GetClusterEventsResponse {
 // ClusterNodeMetrics contains metric overview for a node.
 message ClusterNodeMetrics {
   // Unique identifier of the node.
-  string node_id = 1;
+  string node_id = 1 [(buf.validate.field).string.min_len = 1];
   // Overview of CPU usage.
-  ClusterMetricOverview cpu = 2;
+  ClusterMetricOverview cpu = 2 [(buf.validate.field).required = true];
   // Overview of RAM usage.
-  ClusterMetricOverview ram = 3;
+  ClusterMetricOverview ram = 3 [(buf.validate.field).required = true];
   // Overview of RAM cache usage.
-  ClusterMetricOverview ram_cache = 4;
+  ClusterMetricOverview ram_cache = 4 [(buf.validate.field).required = true];
   // Overview of RSS memory usage.
-  ClusterMetricOverview ram_rss = 5;
+  ClusterMetricOverview ram_rss = 5 [(buf.validate.field).required = true];
   // Overview of RSS memory usage by the Qdrant database.
-  ClusterMetricOverview ram_qdrant_rss = 6;
+  ClusterMetricOverview ram_qdrant_rss = 6 [(buf.validate.field).required = true];
   // Overview of disk usage.
-  ClusterMetricOverview disk = 7;
+  ClusterMetricOverview disk = 7 [(buf.validate.field).required = true];
 }
 
 // ClusterMetricOverview contains both the average values of a metric over
@@ -178,29 +195,29 @@ message ClusterMetricOverview {
   // Average metric values calculated over various time intervals.
   repeated IntervalAverage avg = 1;
   // Total available value of the resource on the node.
-  ResourceValue total = 2;
+  ResourceValue total = 2 [(buf.validate.field).required = true];
 }
 
 // IntervalAverage represents the average value of a metric over a specific time interval.
 message IntervalAverage {
   // The duration of the interval.
-  google.protobuf.Duration interval = 1;
+  google.protobuf.Duration interval = 1 [(buf.validate.field).required = true];
   // Average value of the metric during the specified interval.
-  double value = 2;
+  double value = 2 [(buf.validate.field).double.gte = 0];
 }
 
 // ResourceValue represents the total value of a resource along with its unit.
 message ResourceValue {
   // Value of the resource, e.g., 0.5.
-  double value = 1;
+  double value = 1 [(buf.validate.field).double.gte = 0];
   // Unit of the resource value, e.g., "vcpu/core".
-  string unit = 2;
+  string unit = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // ClusterNodeUsageMetrics defines per-node usage metrics.
 message ClusterNodeUsageMetrics {
   // Unique identifier of the node.
-  string node_id = 1;
+  string node_id = 1 [(buf.validate.field).string.min_len = 1];
   // Timeseries of CPU usage for the node.
   repeated Metric cpu = 2;
   // Timeseries of RAM usage for the node.
@@ -218,17 +235,17 @@ message ClusterNodeUsageMetrics {
 // A single metric data point.
 message Metric {
   // Timestamp of the data point.
-  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.Timestamp timestamp = 1 [(buf.validate.field).required = true];
   // Numerical value of the metric at the given timestamp.
-  double value = 2;
+  double value = 2 [(buf.validate.field).double.gte = 0];
 }
 
 // LogEntry represents a single log line.
 message LogEntry {
   // The timestamp indicating when the log entry was recorded.
-  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.Timestamp timestamp = 1 [(buf.validate.field).required = true];
   // The content of the log message.
-  string message = 2;
+  string message = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // Aggregator defines how metrics should be aggregated over time.

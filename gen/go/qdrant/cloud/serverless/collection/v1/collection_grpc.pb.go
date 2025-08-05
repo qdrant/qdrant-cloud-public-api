@@ -33,7 +33,7 @@ const (
 type CollectionServiceClient interface {
 	// ListCollections returns all collections for the authenticated user
 	// Required Permissions:
-	// - write:serverless
+	// - read:serverless
 	ListCollections(ctx context.Context, in *ListCollectionsRequest, opts ...grpc.CallOption) (*ListCollectionsResponse, error)
 	// CreateCollection creates a new collection with the specified configuration
 	// Required Permissions:
@@ -105,7 +105,7 @@ func (c *collectionServiceClient) DeleteCollection(ctx context.Context, in *Dele
 type CollectionServiceServer interface {
 	// ListCollections returns all collections for the authenticated user
 	// Required Permissions:
-	// - write:serverless
+	// - read:serverless
 	ListCollections(context.Context, *ListCollectionsRequest) (*ListCollectionsResponse, error)
 	// CreateCollection creates a new collection with the specified configuration
 	// Required Permissions:

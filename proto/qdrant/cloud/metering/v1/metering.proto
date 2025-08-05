@@ -69,44 +69,64 @@ message ListMeteringsResponse {
 // MonthlyMeteringSummary represents a single month's metering summary.
 message MonthlyMeteringSummary {
   // The year this summary represents (e.g., 2025).
-  int32 year = 1;
+  int32 year = 1 [(buf.validate.field).int32 = {
+    gte: 2000
+    lte: 3000
+  }];
   // The month this summary represents (1 = January, 12 = December).
-  int32 month = 2;
+  int32 month = 2 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 12
+  }];
   // Total amount for the month in millicents.
   // Example: 499900 = $4.999
-  int64 amount_millicents = 3;
+  int64 amount_millicents = 3 [(buf.validate.field).int64.gte = 0];
   // Currency of the amount, in ISO 4217 format (e.g., "USD").
-  string currency = 4;
+  string currency = 4 [(buf.validate.field).string = {
+    len: 3
+    pattern: "^[A-Z]{3}$"
+  }];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // Metering represents a detailed metering item.
 message MeteringItem {
   // The identifier of the account this metering item belongs to (in GUID format).
-  string account_id = 1;
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the cluster associated with this usage (in GUID format).
-  string cluster_id = 2;
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The name of the cluster involved in this metering.
-  string cluster_name = 3;
+  string cluster_name = 3 [(buf.validate.field).string.min_len = 1];
   // The start time of the metering window (UTC).
-  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp start_time = 4 [(buf.validate.field).required = true];
   // The end time of the metering window (UTC).
-  google.protobuf.Timestamp end_time = 5;
+  google.protobuf.Timestamp end_time = 5 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "metering_item.end_time_gt_start_time"
+    message: "end_time must be after start_time"
+    expression: "this.end_time > this.start_time"
+  };
   // The identifier of the billable entity (in GUID format), such as a cluster
   // booking or another billable resource.
-  string billable_entity_id = 6;
+  string billable_entity_id = 6 [(buf.validate.field).string = {uuid: true}];
   // The type of the billable entity (e.g., "ClusterBooking").
-  string billable_entity_type = 7;
+  string billable_entity_type = 7 [(buf.validate.field).string.min_len = 1];
   // The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
-  int32 price_per_hour = 8;
+  int32 price_per_hour = 8 [(buf.validate.field).int32.gte = 0];
   // Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
-  double usage_hours = 9;
+  double usage_hours = 9 [(buf.validate.field).double.gte = 0];
   // The total charge for this item, in millicents.
-  int64 amount_millicents = 10;
+  int64 amount_millicents = 10 [(buf.validate.field).int64.gte = 0];
   // The total discount applied to this item, in millicents.
-  optional int64 discount_amount_millicents = 11;
+  optional int64 discount_amount_millicents = 11 [(buf.validate.field).int64.gte = 0];
   // The Discount applied as a percentage (e.g., 12.5).
-  optional double discount_amount_percent = 12;
+  optional double discount_amount_percent = 12 [(buf.validate.field).double = {
+    gte: 0
+    lte: 100
+  }];
   // Currency of the different amount values, in ISO 4217 format (e.g., "USD").
-  string currency = 13;
+  string currency = 13 [(buf.validate.field).string = {
+    len: 3
+    pattern: "^[A-Z]{3}$"
+  }];
 }

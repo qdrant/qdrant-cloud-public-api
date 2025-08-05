@@ -104,10 +104,10 @@ message ListCloudProviderRegionsResponse {
 message CloudProvider {
   // The identifier for the cloud provider.
   // e.g. "aws", "gcp", "azure", "hybrid".
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.min_len = 3];
   // The human-readable name of the cloud provider.
   // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
-  string name = 2;
+  string name = 2 [(buf.validate.field).string.min_len = 1];
   // Whether the cloud provider is part of the free-tier offering.
   bool free_tier = 3;
   // Indicates whether the cloud provider is available for the use case.
@@ -119,20 +119,23 @@ message CloudProvider {
 message CloudProviderRegion {
   // The identifier for the cloud provider region.
   // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.min_len = 1];
   // The human-readable name of the cloud provider region.
   // e.g. "Frankfurt", "Tokyo", etc.
-  string name = 2;
+  string name = 2 [(buf.validate.field).string.min_len = 1];
   // Whether the cloud region is part of the free-tier offering.
   bool free_tier = 3;
   // Indicates whether the cloud region is available or the hybrid cloud region is ready for clusters.
   bool available = 4;
   // The identifier for the cloud provider.
   // e.g. "aws", "gcp", "azure", "openshift", "linode", "unknown".
-  string provider = 5;
+  string provider = 5 [(buf.validate.field).string.min_len = 1];
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
-  optional string country_iso_code = 6;
+  optional string country_iso_code = 6 [(buf.validate.field).string = {
+    len: 2
+    pattern: "^[A-Z]{2}$"
+  }];
   // Geographic location grouping of the region.
   // e.g. "Europe", "Asia", "North America", etc.
-  optional string geographical_sub_region = 7;
+  optional string geographical_sub_region = 7 [(buf.validate.field).string.min_len = 1];
 }

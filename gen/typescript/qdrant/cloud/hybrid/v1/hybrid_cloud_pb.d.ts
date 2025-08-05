@@ -494,7 +494,7 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   /**
    * Timestamp when the hybrid cloud environment status was modified the last time.
    *
-   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 1;
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 1;
    */
   lastModifiedAt?: Timestamp;
 

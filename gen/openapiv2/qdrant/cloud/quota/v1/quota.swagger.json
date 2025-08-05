@@ -111,22 +111,22 @@
         "maxClusters": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum number of clusters this account is allowed to create.\nTo get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`."
+          "description": "Maximum number of clusters this account is allowed to create (at least 1).\nTo get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`."
         },
         "maxClusterNodes": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum number of nodes clusters can be scaled to.\nTo get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`."
+          "description": "Maximum number of nodes clusters can be scaled to (at least 1).\nTo get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`."
         },
         "maxClusterDatabaseApiKeys": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum number of Database API keys this account can create (for each cluster).\nTo get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`."
+          "description": "Maximum number of Database API keys this account can create (for each cluster)(at least 1).\nTo get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`."
         },
         "maxFreeTierClusters": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum number of free-tier clusters this account can create."
+          "description": "Maximum number of free-tier clusters this account can create (at least 1)."
         }
       },
       "description": "GetAccountQuotasResponse is the response from the GetAccountQuotas function."
@@ -137,7 +137,7 @@
         "maxOwnedAccounts": {
           "type": "integer",
           "format": "int64",
-          "title": "Maximum number of accounts this user can be the owner of.\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`"
+          "title": "Maximum number of accounts this user can be the owner of (at least 1).\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`"
         }
       },
       "title": "GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function"

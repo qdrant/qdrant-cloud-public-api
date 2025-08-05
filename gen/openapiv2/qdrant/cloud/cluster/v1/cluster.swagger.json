@@ -421,7 +421,7 @@
             },
             "state": {
               "$ref": "#/definitions/v1ClusterState",
-              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
             }
           },
           "title": "The actual cluster"
@@ -463,7 +463,7 @@
             },
             "state": {
               "$ref": "#/definitions/v1ClusterState",
-              "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
             }
           },
           "title": "The actual cluster"
@@ -576,7 +576,7 @@
         },
         "state": {
           "$ref": "#/definitions/v1ClusterState",
-          "description": "Current state of the cluster.\nAll fields inside `state` are read-only."
+          "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
         }
       },
       "description": "A Cluster represents one cluster of a Qdrant database."

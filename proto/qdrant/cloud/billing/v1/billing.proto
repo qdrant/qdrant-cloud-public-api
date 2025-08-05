@@ -37,16 +37,16 @@ message ListInvoicesResponse {
 // Invoice represents a billing invoice issued to an account.
 message Invoice {
   // Unique identifier for the invoice.
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.min_len = 1]; // TODO: Is this a GUID?
   // Optional invoice unique identifier. It appears on emails sent to the
   // customer for this invoice.
   optional string number = 2;
   // Total invoice amount.
-  int64 total_amount = 3;
+  int64 total_amount = 3; // TODO: can this be a negative number (credit invoice, if not we should add: [(buf.validate.field).int64.gte = 0])
   // The timestamp when the invoice was created.
-  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp created_at = 4 [(buf.validate.field).required = true];
   // The current status of the invoice.
-  InvoiceStatus status = 5;
+  InvoiceStatus status = 5 [(buf.validate.field).enum.defined_only = true];
   // The URL to download the PDF for the invoice. If the invoice has not been
   // finalized yet, this will be null.
   optional string pdf_url = 6;

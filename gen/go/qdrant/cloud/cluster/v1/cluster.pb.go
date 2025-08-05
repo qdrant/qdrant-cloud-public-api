@@ -1466,7 +1466,7 @@ type Cluster struct {
 	CloudProviderRegionId string `protobuf:"bytes,11,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
 	// Current configuration details of the cluster.
 	Configuration *ClusterConfiguration `protobuf:"bytes,20,opt,name=configuration,proto3" json:"configuration,omitempty"`
-	// Current state of the cluster.
+	// Current state of the cluster (available after the cluster has been created).
 	// All fields inside `state` are read-only.
 	State         *ClusterState `protobuf:"bytes,100,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2876,13 +2876,14 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xfd\x03\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xb1\x05\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
 	"\x11cloud_provider_id\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x03H\x00R\x0fcloudProviderId\x88\x01\x01\x12<\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tH\x01R\x15cloudProviderRegionId\x88\x01\x01:\x91\x02\xbaH\x8d\x02\x1a\x8a\x02\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tH\x01R\x15cloudProviderRegionId\x88\x01\x01:\xc5\x03\xbaH\xc1\x03\x1a\xb1\x01\n" +
+	"'list_clusters.cloud_provider_id_present\x12Bcloud_provider_id is required when cloud_provider_region_id is set\x1aB!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'B\x14\n" +
 	"\x12_cloud_provider_idB\x1b\n" +
 	"\x19_cloud_provider_region_id\"N\n" +
@@ -2892,17 +2893,18 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"P\n" +
-	"\x12GetClusterResponse\x12:\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterR\acluster\"R\n" +
-	"\x14CreateClusterRequest\x12:\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterR\acluster\"S\n" +
-	"\x15CreateClusterResponse\x12:\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterR\acluster\"R\n" +
-	"\x14UpdateClusterRequest\x12:\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterR\acluster\"S\n" +
-	"\x15UpdateClusterResponse\x12:\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterR\acluster\"\xa7\x01\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"X\n" +
+	"\x12GetClusterResponse\x12B\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"Z\n" +
+	"\x14CreateClusterRequest\x12B\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"[\n" +
+	"\x15CreateClusterResponse\x12B\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"\xb9\x01\n" +
+	"\x14UpdateClusterRequest\x12B\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:]\xbaHZ\x1aX\n" +
+	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\"[\n" +
+	"\x15UpdateClusterResponse\x12B\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"\xa7\x01\n" +
 	"\x14DeleteClusterRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -2925,9 +2927,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x16SuspendClusterResponse\"D\n" +
 	"\x19SuggestClusterNameRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"0\n" +
-	"\x1aSuggestClusterNameResponse\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x81\x01\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"9\n" +
+	"\x1aSuggestClusterNameResponse\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\x81\x01\n" +
 	"\x19ListQdrantReleasesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -2935,7 +2937,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01B\r\n" +
 	"\v_cluster_id\"Z\n" +
 	"\x1aListQdrantReleasesResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.v1.QdrantReleaseR\x05items\"\xa3\a\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.v1.QdrantReleaseR\x05items\"\xa2\b\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2946,13 +2948,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x123\n" +
 	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x127\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tR\x15cloudProviderRegionId\x12S\n" +
-	"\rconfiguration\x18\x14 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationR\rconfiguration\x12;\n" +
-	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12[\n" +
+	"\rconfiguration\x18\x14 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12;\n" +
+	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xa5\x04\xbaH\xa1\x04\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xc0\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\x1al\n" +
+	"\x15cluster.state_present\x12)state is required for an existing cluster\x1a(has(this.state) || !has(this.created_at)\"\xde\n" +
 	"\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
@@ -2971,24 +2974,24 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"R\vannotations\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\x14\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12A\n" +
 	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x15reservedCpuPercentage\x12G\n" +
-	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x18reservedMemoryPercentage\x12T\n" +
-	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeH\x03R\agpuType\x88\x01\x01\x12f\n" +
-	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyH\x04R\rrestartPolicy\x88\x01\x01\x12r\n" +
-	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyH\x05R\x11rebalanceStrategy\x88\x01\x01B\n" +
+	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x18reservedMemoryPercentage\x12^\n" +
+	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeB\b\xbaH\x05\x82\x01\x02 \x00H\x03R\agpuType\x88\x01\x01\x12p\n" +
+	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\b\xbaH\x05\x82\x01\x02 \x00H\x04R\rrestartPolicy\x88\x01\x01\x12|\n" +
+	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyB\b\xbaH\x05\x82\x01\x02 \x00H\x05R\x11rebalanceStrategy\x88\x01\x01B\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
 	"\x17_database_configurationB\v\n" +
 	"\t_gpu_typeB\x11\n" +
 	"\x0f_restart_policyB\x15\n" +
-	"\x13_rebalance_strategy\"\xed\x04\n" +
+	"\x13_rebalance_strategy\"\xf7\x04\n" +
 	"\x15DatabaseConfiguration\x12]\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionH\x00R\n" +
 	"collection\x88\x01\x01\x12T\n" +
 	"\astorage\x18\x02 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationStorageH\x01R\astorage\x88\x01\x01\x12T\n" +
-	"\aservice\x18\x03 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationServiceH\x02R\aservice\x88\x01\x01\x12X\n" +
-	"\tlog_level\x18\x04 \x01(\x0e26.qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevelH\x03R\blogLevel\x88\x01\x01\x12H\n" +
+	"\aservice\x18\x03 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationServiceH\x02R\aservice\x88\x01\x01\x12b\n" +
+	"\tlog_level\x18\x04 \x01(\x0e26.qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevelB\b\xbaH\x05\x82\x01\x02 \x00H\x03R\blogLevel\x88\x01\x01\x12H\n" +
 	"\x03tls\x18\x05 \x01(\v21.qdrant.cloud.cluster.v1.DatabaseConfigurationTlsH\x04R\x03tls\x88\x01\x01\x12Z\n" +
 	"\tinference\x18\x06 \x01(\v27.qdrant.cloud.cluster.v1.DatabaseConfigurationInferenceH\x05R\tinference\x88\x01\x01B\r\n" +
 	"\v_collectionB\n" +
@@ -3000,11 +3003,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"_log_levelB\x06\n" +
 	"\x04_tlsB\f\n" +
 	"\n" +
-	"_inference\"\x81\x02\n" +
-	"\x1fDatabaseConfigurationCollection\x122\n" +
-	"\x12replication_factor\x18\x01 \x01(\rH\x00R\x11replicationFactor\x88\x01\x01\x128\n" +
-	"\x18write_consistency_factor\x18\x02 \x01(\x05R\x16writeConsistencyFactor\x12Y\n" +
-	"\avectors\x18\x03 \x01(\v2?.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectorsR\avectorsB\x15\n" +
+	"_inference\"\x9b\x02\n" +
+	"\x1fDatabaseConfigurationCollection\x12;\n" +
+	"\x12replication_factor\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x01H\x00R\x11replicationFactor\x88\x01\x01\x12A\n" +
+	"\x18write_consistency_factor\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x01R\x16writeConsistencyFactor\x12a\n" +
+	"\avectors\x18\x03 \x01(\v2?.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectorsB\x06\xbaH\x03\xc8\x01\x01R\avectorsB\x15\n" +
 	"\x13_replication_factor\"R\n" +
 	"&DatabaseConfigurationCollectionVectors\x12\x1c\n" +
 	"\aon_disk\x18\x01 \x01(\bH\x00R\x06onDisk\x88\x01\x01B\n" +
@@ -3023,55 +3026,55 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"enable_tls\x18\x04 \x01(\bR\tenableTlsB\n" +
 	"\n" +
 	"\b_api_keyB\x14\n" +
-	"\x12_read_only_api_key\"\x8c\x01\n" +
-	"\x18DatabaseConfigurationTls\x128\n" +
-	"\x04cert\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefR\x04cert\x126\n" +
-	"\x03key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefR\x03key\":\n" +
+	"\x12_read_only_api_key\"\x9c\x01\n" +
+	"\x18DatabaseConfigurationTls\x12@\n" +
+	"\x04cert\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefB\x06\xbaH\x03\xc8\x01\x01R\x04cert\x12>\n" +
+	"\x03key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefB\x06\xbaH\x03\xc8\x01\x01R\x03key\":\n" +
 	"\x1eDatabaseConfigurationInference\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\")\n" +
 	"\x13AdditionalResources\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xee\x02\n" +
+	"\x04disk\x18\x03 \x01(\rR\x04disk\"\x82\x03\n" +
 	"\n" +
 	"Toleration\x12H\n" +
-	"\x03key\x18\x01 \x01(\tB6\xbaH3r1\x18?2-^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$R\x03key\x12L\n" +
-	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorH\x00R\boperator\x88\x01\x01\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\tR\x05value\x12F\n" +
-	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectH\x01R\x06effect\x88\x01\x01\x12;\n" +
+	"\x03key\x18\x01 \x01(\tB6\xbaH3r1\x18?2-^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$R\x03key\x12V\n" +
+	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\b\xbaH\x05\x82\x01\x02 \x00H\x00R\boperator\x88\x01\x01\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\x12P\n" +
+	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectB\b\xbaH\x05\x82\x01\x02 \x00H\x01R\x06effect\x88\x01\x01\x12;\n" +
 	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\x11tolerationSeconds\x88\x01\x01B\v\n" +
 	"\t_operatorB\t\n" +
 	"\a_effectB\x15\n" +
-	"\x13_toleration_seconds\"\xcd\x03\n" +
-	"\fClusterState\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12\x19\n" +
+	"\x13_toleration_seconds\"\xf8\x03\n" +
+	"\fClusterState\x12!\n" +
+	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x19\n" +
 	"\bnodes_up\x18\x02 \x01(\rR\anodesUp\x12=\n" +
-	"\frestarted_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vrestartedAt\x12;\n" +
-	"\x05phase\x18\x04 \x01(\x0e2%.qdrant.cloud.cluster.v1.ClusterPhaseR\x05phase\x12\x16\n" +
-	"\x06reason\x18\x05 \x01(\tR\x06reason\x12D\n" +
-	"\bendpoint\x18\x06 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointR\bendpoint\x12R\n" +
-	"\tresources\x18\a \x01(\v24.qdrant.cloud.cluster.v1.ClusterNodeResourcesSummaryR\tresources\x12Z\n" +
-	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoR\x0fscalabilityInfo\"g\n" +
+	"\frestarted_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vrestartedAt\x12E\n" +
+	"\x05phase\x18\x04 \x01(\x0e2%.qdrant.cloud.cluster.v1.ClusterPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
+	"\x06reason\x18\x05 \x01(\tR\x06reason\x12L\n" +
+	"\bendpoint\x18\x06 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointB\x06\xbaH\x03\xc8\x01\x01R\bendpoint\x12Z\n" +
+	"\tresources\x18\a \x01(\v24.qdrant.cloud.cluster.v1.ClusterNodeResourcesSummaryB\x06\xbaH\x03\xc8\x01\x01R\tresources\x12b\n" +
+	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\x06\xbaH\x03\xc8\x01\x01R\x0fscalabilityInfo\"y\n" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xa8\x01\x01R\x03url\x12\x1b\n" +
-	"\trest_port\x18\x02 \x01(\x05R\brestPort\x12\x1b\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05R\bgrpcPort\"\xe2\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xa8\x01\x01R\x03url\x12$\n" +
+	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xe2\x01\n" +
 	"\x1bClusterNodeResourcesSummary\x12A\n" +
 	"\x04disk\x18\x01 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x04disk\x12?\n" +
 	"\x03ram\x18\x02 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x03ram\x12?\n" +
-	"\x03cpu\x18\x03 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x03cpu\"\xaa\x01\n" +
-	"\x14ClusterNodeResources\x12\x12\n" +
-	"\x04base\x18\x01 \x01(\x01R\x04base\x12$\n" +
-	"\rcomplimentary\x18\x02 \x01(\x01R\rcomplimentary\x12\x1e\n" +
+	"\x03cpu\x18\x03 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x03cpu\"\xfa\x01\n" +
+	"\x14ClusterNodeResources\x12\"\n" +
+	"\x04base\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x04base\x124\n" +
+	"\rcomplimentary\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\rcomplimentary\x12.\n" +
 	"\n" +
-	"additional\x18\x03 \x01(\x01R\n" +
-	"additional\x12\x1a\n" +
-	"\breserved\x18\x04 \x01(\x01R\breserved\x12\x1c\n" +
-	"\tavailable\x18\x05 \x01(\x01R\tavailable\"\x8b\x01\n" +
-	"\x16ClusterScalabilityInfo\x12I\n" +
-	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusR\x06status\x12\x1b\n" +
+	"additional\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
+	"additional\x12*\n" +
+	"\breserved\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\breserved\x12,\n" +
+	"\tavailable\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\tavailable\"\x95\x01\n" +
+	"\x16ClusterScalabilityInfo\x12S\n" +
+	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1b\n" +
 	"\x06reason\x18\x02 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\xf7\x01\n" +
-	"\rQdrantRelease\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12\x18\n" +
+	"\a_reason\"\x80\x02\n" +
+	"\rQdrantRelease\x12!\n" +
+	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x18\n" +
 	"\adefault\x18\x02 \x01(\bR\adefault\x12/\n" +
 	"\x11release_notes_url\x18\x03 \x01(\tH\x00R\x0freleaseNotesUrl\x88\x01\x01\x12\x1d\n" +
 	"\aremarks\x18\x04 \x01(\tH\x01R\aremarks\x88\x01\x01\x12\x1e\n" +

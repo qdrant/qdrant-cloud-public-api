@@ -113,6 +113,11 @@ message ListClustersRequest {
   // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
   // If omitted, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.
   optional string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  option (buf.validate.message).cel = {
+    id: "list_clusters.cloud_provider_id_present"
+    message: "cloud_provider_id is required when cloud_provider_region_id is set"
+    expression: "!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)"
+  };
   // Optional filter specifying the cloud provider region where the cluster is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // If this field is set, the `cloud_provider_id` is required to set as well (and it should match).
@@ -146,31 +151,36 @@ message GetClusterRequest {
 // GetClusterResponse is the response from the GetCluster function
 message GetClusterResponse {
   // The actual cluster
-  Cluster cluster = 1;
+  Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
 // CreateClusterRequest is the request for the CreateCluster function
 message CreateClusterRequest {
   // The actual cluster
-  Cluster cluster = 1;
+  Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
 // CreateClusterResponse is the response from the CreateCluster function
 message CreateClusterResponse {
   // The actual cluster
-  Cluster cluster = 1;
+  Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateClusterRequest is the request for the UpdateCluster function
 message UpdateClusterRequest {
   // The actual cluster
-  Cluster cluster = 1;
+  Cluster cluster = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_cluster.id_present"
+    message: "cluster.id is required for an update"
+    expression: "this.cluster.id != ''"
+  };
 }
 
 // UpdateClusterResponse is the response from the UpdateCluster function
 message UpdateClusterResponse {
   // The actual cluster
-  Cluster cluster = 1;
+  Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteClusterRequest is the request for the DeleteCluster function
@@ -233,7 +243,7 @@ message SuggestClusterNameRequest {
 // SuggestClusterNameResponse is the response from the SuggestClusterName function
 message SuggestClusterNameResponse {
   // The suggested name for a new cluster.
-  string name = 1;
+  string name = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 // ListQdrantReleasesRequest is the request for the ListQdrantReleases function
@@ -289,7 +299,7 @@ message Cluster {
   // For hybrid this should be the hybrid cloud environment ID.
   // This is a required field.
   // After creation, this field cannot be changed.
-  string cloud_provider_region_id = 11;
+  string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
   // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider_id as well, so this can't be a simple field validator.
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
@@ -297,10 +307,15 @@ message Cluster {
     expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
   };
   // Current configuration details of the cluster.
-  ClusterConfiguration configuration = 20;
-  // Current state of the cluster.
+  ClusterConfiguration configuration = 20 [(buf.validate.field).required = true];
+  // Current state of the cluster (available after the cluster has been created).
   // All fields inside `state` are read-only.
   ClusterState state = 100;
+  option (buf.validate.message).cel = {
+    id: "cluster.state_present"
+    message: "state is required for an existing cluster"
+    expression: "has(this.state) || !has(this.created_at)"
+  };
 }
 
 // ClusterConfigurationGpuType defines GPU types available for clusters.
@@ -397,13 +412,19 @@ message ClusterConfiguration {
   }];
   // The gpu type that should be used for the database
   // This is an optional field, default is No configured GPU
-  optional ClusterConfigurationGpuType gpu_type = 22;
+  optional ClusterConfigurationGpuType gpu_type = 22 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
   // The restart policy for the database
   // This is an optional field, default is Automatic
-  optional ClusterConfigurationRestartPolicy restart_policy = 23;
+  optional ClusterConfigurationRestartPolicy restart_policy = 23 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
   // The automatic shard rebalancing strategy for the database
   // This is an optional field, default is none
-  optional ClusterConfigurationRebalanceStrategy rebalance_strategy = 24;
+  optional ClusterConfigurationRebalanceStrategy rebalance_strategy = 24 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
@@ -444,7 +465,9 @@ message DatabaseConfiguration {
   // Qdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html
   // This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
   // This is an optional field, default is Info.
-  optional DatabaseConfigurationLogLevel log_level = 4;
+  optional DatabaseConfigurationLogLevel log_level = 4 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
   // The Qdrant database TLS configuration.
   // This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
   // This is an optional field, if not set an unsecure connection is provided.
@@ -459,12 +482,12 @@ message DatabaseConfiguration {
 message DatabaseConfigurationCollection {
   // Number of replicas of each shard that network tries to maintain
   // This is an optional, the default is 1
-  optional uint32 replication_factor = 1;
+  optional uint32 replication_factor = 1 [(buf.validate.field).uint32.gte = 1];
   // How many replicas should apply the operation for us to consider it successful
   // This is an optional, the default is 1
-  int32 write_consistency_factor = 2;
+  int32 write_consistency_factor = 2 [(buf.validate.field).int32.gte = 1];
   // The default parameters for vectors.
-  DatabaseConfigurationCollectionVectors vectors = 3;
+  DatabaseConfigurationCollectionVectors vectors = 3 [(buf.validate.field).required = true];
 }
 
 // The default Qdrant database collection vectors configuration
@@ -520,9 +543,9 @@ message DatabaseConfigurationService {
 // DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint
 message DatabaseConfigurationTls {
   // Secret to use for the certificate
-  common.v1.SecretKeyRef cert = 1;
+  common.v1.SecretKeyRef cert = 1 [(buf.validate.field).required = true];
   // Secret to use for the private key
-  common.v1.SecretKeyRef key = 2;
+  common.v1.SecretKeyRef key = 2 [(buf.validate.field).required = true];
 }
 
 // DatabaseConfigurationInference contains cloud inferencing configuration
@@ -572,12 +595,16 @@ message Toleration {
   }];
   // The operator represents a key's relationship to the value.
   // The default is TOLERATION_OPERATOR_EXISTS.
-  optional TolerationOperator operator = 2;
+  optional TolerationOperator operator = 2 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
   // The value to match against the value of a node label.
   string value = 3;
   // The effect indicates the taint effect to match.
   // The default is TOLERATION_EFFECT_NO_SCHEDULE.
-  optional TolerationEffect effect = 4;
+  optional TolerationEffect effect = 4 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
   // The toleration seconds indicates the duration to tolerate the taint.
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)
@@ -628,22 +655,22 @@ enum ClusterPhase {
 // All fields in this message are read-only.
 message ClusterState {
   // Version of the cluster software.
-  string version = 1;
+  string version = 1 [(buf.validate.field).string.min_len = 1];
   // Number of cluster nodes that are up and running.
   uint32 nodes_up = 2;
   // The date and time when the cluster was restarted.
   google.protobuf.Timestamp restarted_at = 3;
   // Current phase of the cluster.
-  ClusterPhase phase = 4;
+  ClusterPhase phase = 4 [(buf.validate.field).enum.defined_only = true];
   // Reason for the current phase of the cluster.
   string reason = 5;
   // Endpoint information to access the qdrant cluster (aka database).
-  ClusterEndpoint endpoint = 6;
+  ClusterEndpoint endpoint = 6 [(buf.validate.field).required = true];
   // The resources used by the cluster per node.
   // For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
-  ClusterNodeResourcesSummary resources = 7;
+  ClusterNodeResourcesSummary resources = 7 [(buf.validate.field).required = true];
   // Whether the cluster can be scaled up or down.
-  ClusterScalabilityInfo scalability_info = 8;
+  ClusterScalabilityInfo scalability_info = 8 [(buf.validate.field).required = true];
 }
 
 // Endpoint information to access the qdrant cluster (aka database).
@@ -652,9 +679,9 @@ message ClusterEndpoint {
   // URL to access the qdrant cluster (aka database) without port
   string url = 1 [(buf.validate.field).string = {address: true}];
   // The port to use for HTTP REST calls (6333)
-  int32 rest_port = 2;
+  int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
   // The port to use for gRPC calls (6334)
-  int32 grpc_port = 3;
+  int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
 }
 
 // ClusterNodeResourcesSummary represents the resources used in this cluster per node.
@@ -671,17 +698,17 @@ message ClusterNodeResourcesSummary {
 message ClusterNodeResources {
   // Base resources that are part of the standard allocation for the cluster per node.
   // This includes default CPU, memory, storage, etc.
-  double base = 1;
+  double base = 1 [(buf.validate.field).double.gte = 0];
   // Complimentary resources provided to the cluster at no additional cost.
   // This might include complimentary network bandwidth, credits, etc.
-  double complimentary = 2;
+  double complimentary = 2 [(buf.validate.field).double.gte = 0];
   // Additional resources allocated to the cluster.
   // This could include additional storage, compute power, etc.
-  double additional = 3;
+  double additional = 3 [(buf.validate.field).double.gte = 0];
   // The reserved is the amount used by the system, which cannot be used by the database itself.
-  double reserved = 4;
+  double reserved = 4 [(buf.validate.field).double.gte = 0];
   // The available is the total (base+complimentary+additional) - reserved
-  double available = 5;
+  double available = 5 [(buf.validate.field).double.gte = 0];
 }
 
 // ClusterScalabilityStatus defines the scalability states of a cluster.
@@ -697,7 +724,7 @@ enum ClusterScalabilityStatus {
 // ClusterScalabilityInfo provides information about the
 message ClusterScalabilityInfo {
   // The current scalability status of the cluster.
-  ClusterScalabilityStatus status = 1;
+  ClusterScalabilityStatus status = 1 [(buf.validate.field).enum.defined_only = true];
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
   optional string reason = 2;
@@ -707,7 +734,7 @@ message ClusterScalabilityInfo {
 // QdrantRelease represent a single Qdrant release
 message QdrantRelease {
   // Version of the Qdrant release
-  string version = 1;
+  string version = 1 [(buf.validate.field).string.min_len = 1];
   // Flag to indicate if this is the default release
   // There can be at most a single item in the list that have this property set.
   bool default = 2;

@@ -188,13 +188,13 @@ type CreateCollectionApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //TODO: Remove! However this is a breaking change, so will be done in seperate PR
 	// Collection the key will access (in GUID format).
 	// This is a required field.
-	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
+	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"` //TODO: Remove!
 	// The API key to create.
 	// This is a required field.
-	CollectionApiKey *CollectionApiKey `protobuf:"bytes,3,opt,name=collection_api_key,json=collectionApiKey,proto3" json:"collection_api_key,omitempty"`
+	CollectionApiKey *CollectionApiKey `protobuf:"bytes,3,opt,name=collection_api_key,json=collectionApiKey,proto3" json:"collection_api_key,omitempty"` //TODO: Renumber to 1
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -550,20 +550,20 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\"s\n" +
 	"\x1dListCollectionApiKeysResponse\x12R\n" +
-	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\xe3\x01\n" +
+	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\xeb\x01\n" +
 	"\x1dCreateCollectionApiKeyRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
-	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\x12j\n" +
-	"\x12collection_api_key\x18\x03 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x10collectionApiKey\"\x8c\x01\n" +
-	"\x1eCreateCollectionApiKeyResponse\x12j\n" +
-	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x10collectionApiKey\"\xb4\x01\n" +
+	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\x12r\n" +
+	"\x12collection_api_key\x18\x03 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\x94\x01\n" +
+	"\x1eCreateCollectionApiKeyResponse\x12r\n" +
+	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\xb4\x01\n" +
 	"\x1dDeleteCollectionApiKeyRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\x12;\n" +
 	"\x15collection_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x12collectionApiKeyId\" \n" +
-	"\x1eDeleteCollectionApiKeyResponse\"\xa7\x05\n" +
+	"\x1eDeleteCollectionApiKeyResponse\"\xa3\a\n" +
 	"\x10CollectionApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -574,23 +574,25 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"\x04name\x18\x05 \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x012\n" +
 	"^[\\w\\s-]+$R\x04name\x12>\n" +
 	"\n" +
-	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12g\n" +
-	"\vaccess_type\x18\a \x01(\x0e2F.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyAccessTypeR\n" +
+	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12q\n" +
+	"\vaccess_type\x18\a \x01(\x0e2F.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyAccessTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
 	"accessType\x12(\n" +
 	"\x10created_by_email\x18\b \x01(\tR\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key:\xb5\x01\xbaH\xb1\x01\x1a\xae\x01\n" +
-	"\x15collection_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\r\n" +
+	" \x01(\tR\x03key:\xa7\x03\xbaH\xa3\x03\x1a\xae\x01\n" +
+	"\x15collection_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x84\x01\n" +
+	"#collection_api_key.created_by_email\x12\"created_by_email must not be empty\x1a9this.created_by_email.size() > 0 || !has(this.created_at)\x1ai\n" +
+	"\x1acollection_api_key.postfix\x12\x19postfix must not be empty\x1a0this.postfix.size() > 0 || !has(this.created_at)B\r\n" +
 	"\v_expires_at*\xa9\x01\n" +
 	"\x1aCollectionApiKeyAccessType\x12.\n" +
 	"*COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +
 	"(COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY\x10\x01\x12-\n" +
-	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xe7\a\n" +
+	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xfb\a\n" +
 	"\x17CollectionApiKeyService\x12\xa4\x02\n" +
-	"\x15ListCollectionApiKeys\x12H.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest\x1aI.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysResponse\"v\x8a\xb5\x18\x18read:serverless_api_keys\x82\xd3\xe4\x93\x02T\x12R/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys\x12\xe0\x02\n" +
-	"\x16CreateCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyResponse\"\xae\x01\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x1dcollection_api_key.account_id\x82\xd3\xe4\x93\x02j:\x01*\"e/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_id}/api-keys\x12\xc1\x02\n" +
-	"\x16DeleteCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyResponse\"\x8f\x01\x8a\xb5\x18\x19write:serverless_api_keys\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}B\xfa\x02\n" +
+	"\x15ListCollectionApiKeys\x12H.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest\x1aI.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysResponse\"v\x8a\xb5\x18\x18read:serverless_api_keys\x82\xd3\xe4\x93\x02T\x12R/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys\x12\xf3\x02\n" +
+	"\x16CreateCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyResponse\"\xc1\x01\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x1dcollection_api_key.account_id\x82\xd3\xe4\x93\x02}:\x01*\"x/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_api_key.collection_id}/api-keys\x12\xc2\x02\n" +
+	"\x16DeleteCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyResponse\"\x90\x01\x8a\xb5\x18\x1adelete:serverless_api_keys\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}B\xfa\x02\n" +
 	".com.qdrant.cloud.serverless.collection.auth.v1B\x15CollectionApiKeyProtoP\x01Zbgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/auth/v1;authv1\xa2\x02\x05QCSCA\xaa\x02*Qdrant.Cloud.Serverless.Collection.Auth.V1\xca\x02*Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\xe2\x026Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\\GPBMetadata\xea\x02/Qdrant::Cloud::Serverless::Collection::Auth::V1b\x06proto3"
 
 var (

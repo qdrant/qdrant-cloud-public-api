@@ -726,14 +726,14 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"n\n" +
 	"\x17ListCollectionsResponse\x12S\n" +
-	"\vcollections\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\vcollections\"l\n" +
-	"\x17CreateCollectionRequest\x12Q\n" +
+	"\vcollections\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\vcollections\"t\n" +
+	"\x17CreateCollectionRequest\x12Y\n" +
 	"\n" +
-	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\n" +
-	"collection\"m\n" +
-	"\x18CreateCollectionResponse\x12Q\n" +
+	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"collection\"u\n" +
+	"\x18CreateCollectionResponse\x12Y\n" +
 	"\n" +
-	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\n" +
+	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionB\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"collection\"r\n" +
 	"\x18UpgradeCollectionRequest\x12'\n" +
 	"\n" +
@@ -744,7 +744,7 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\"\x1a\n" +
-	"\x18DeleteCollectionResponse\"\xbe\x05\n" +
+	"\x18DeleteCollectionResponse\"\xc7\x05\n" +
 	"\n" +
 	"Collection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
@@ -756,30 +756,30 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\n" +
 	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x123\n" +
 	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x127\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tR\x15cloudProviderRegionId\x12d\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12d\n" +
 	"\rconfiguration\x18\x14 \x01(\v2>.qdrant.cloud.serverless.collection.v1.CollectionConfigurationR\rconfiguration\x12L\n" +
 	"\x05state\x18d \x01(\v26.qdrant.cloud.serverless.collection.v1.CollectionStateR\x05state:\xad\x01\xbaH\xa9\x01\x1a\xa6\x01\n" +
-	"\rcollection.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\xe5\x01\n" +
-	"\x0fCollectionState\x12Q\n" +
-	"\x05phase\x18\x01 \x01(\x0e2;.qdrant.cloud.serverless.collection.v1.CollectionStatePhaseR\x05phase\x12\x16\n" +
+	"\rcollection.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\xef\x01\n" +
+	"\x0fCollectionState\x12[\n" +
+	"\x05phase\x18\x01 \x01(\x0e2;.qdrant.cloud.serverless.collection.v1.CollectionStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12Z\n" +
 	"\bendpoint\x18\a \x01(\v29.qdrant.cloud.serverless.collection.v1.CollectionEndpointH\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\"j\n" +
+	"\t_endpoint\"|\n" +
 	"\x12CollectionEndpoint\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xa8\x01\x01R\x03url\x12\x1b\n" +
-	"\trest_port\x18\x02 \x01(\x05R\brestPort\x12\x1b\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05R\bgrpcPort*\xac\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xa8\x01\x01R\x03url\x12$\n" +
+	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xac\x01\n" +
 	"\x14CollectionStatePhase\x12&\n" +
 	"\"COLLECTION_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cCOLLECTION_STATE_PHASE_READY\x10\x01\x12%\n" +
 	"!COLLECTION_STATE_PHASE_PROCESSING\x10\x02\x12#\n" +
 	"\x1fCOLLECTION_STATE_PHASE_DISABLED\x10\x032\xfd\a\n" +
-	"\x11CollectionService\x12\xe2\x01\n" +
-	"\x0fListCollections\x12=.qdrant.cloud.serverless.collection.v1.ListCollectionsRequest\x1a>.qdrant.cloud.serverless.collection.v1.ListCollectionsResponse\"P\x8a\xb5\x18\x10write:serverless\x82\xd3\xe4\x93\x026\x124/api/serverless/v1/accounts/{account_id}/collections\x12\x8c\x02\n" +
+	"\x11CollectionService\x12\xe1\x01\n" +
+	"\x0fListCollections\x12=.qdrant.cloud.serverless.collection.v1.ListCollectionsRequest\x1a>.qdrant.cloud.serverless.collection.v1.ListCollectionsResponse\"O\x8a\xb5\x18\x0fread:serverless\x82\xd3\xe4\x93\x026\x124/api/serverless/v1/accounts/{account_id}/collections\x12\x8c\x02\n" +
 	"\x10CreateCollection\x12>.qdrant.cloud.serverless.collection.v1.CreateCollectionRequest\x1a?.qdrant.cloud.serverless.collection.v1.CreateCollectionResponse\"w\x8a\xb5\x18\x10write:serverless\x92\xb5\x18\x15collection.account_id\x82\xd3\xe4\x93\x02D:\x01*\"?/api/serverless/v1/accounts/{collection.account_id}/collections\x12\xfb\x01\n" +
-	"\x11UpgradeCollection\x12?.qdrant.cloud.serverless.collection.v1.UpgradeCollectionRequest\x1a@.qdrant.cloud.serverless.collection.v1.UpgradeCollectionResponse\"c\x8a\xb5\x18\x10write:serverless\x82\xd3\xe4\x93\x02I:\x01*\x1aD/api/serverless/v1/accounts/{account_id}/collections/{collection_id}\x12\xf5\x01\n" +
-	"\x10DeleteCollection\x12>.qdrant.cloud.serverless.collection.v1.DeleteCollectionRequest\x1a?.qdrant.cloud.serverless.collection.v1.DeleteCollectionResponse\"`\x8a\xb5\x18\x10write:serverless\x82\xd3\xe4\x93\x02F*D/api/serverless/v1/accounts/{account_id}/collections/{collection_id}B\xda\x02\n" +
+	"\x11UpgradeCollection\x12?.qdrant.cloud.serverless.collection.v1.UpgradeCollectionRequest\x1a@.qdrant.cloud.serverless.collection.v1.UpgradeCollectionResponse\"c\x8a\xb5\x18\x10write:serverless\x82\xd3\xe4\x93\x02I:\x01*\x1aD/api/serverless/v1/accounts/{account_id}/collections/{collection_id}\x12\xf6\x01\n" +
+	"\x10DeleteCollection\x12>.qdrant.cloud.serverless.collection.v1.DeleteCollectionRequest\x1a?.qdrant.cloud.serverless.collection.v1.DeleteCollectionResponse\"a\x8a\xb5\x18\x11delete:serverless\x82\xd3\xe4\x93\x02F*D/api/serverless/v1/accounts/{account_id}/collections/{collection_id}B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.collection.v1B\x0fCollectionProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/v1;collectionv1\xa2\x02\x04QCSC\xaa\x02%Qdrant.Cloud.Serverless.Collection.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Collection\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Collection\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Collection::V1b\x06proto3"
 
 var (

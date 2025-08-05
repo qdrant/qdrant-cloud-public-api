@@ -70,6 +70,8 @@ export declare type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.server
    * The identifier of the account (in GUID format).
    * This is a required field.
    *
+   * TODO: Remove! However this is a breaking change, so will be done in seperate PR
+   *
    * @generated from field: string account_id = 1;
    */
   accountId: string;
@@ -78,6 +80,8 @@ export declare type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.server
    * Collection the key will access (in GUID format).
    * This is a required field.
    *
+   * TODO: Remove!
+   *
    * @generated from field: string collection_id = 2;
    */
   collectionId: string;
@@ -85,6 +89,8 @@ export declare type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.server
   /**
    * The API key to create.
    * This is a required field.
+   *
+   * TODO: Renumber to 1
    *
    * @generated from field: qdrant.cloud.serverless.collection.auth.v1.CollectionApiKey collection_api_key = 3;
    */
@@ -334,7 +340,7 @@ export declare const CollectionApiKeyService: GenService<{
   /**
    * DeleteCollectionApiKey removes an API key from a collection
    * Required Permissions:
-   * - write:serverless_api_keys
+   * - delete:serverless_api_keys
    *
    * @generated from rpc qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyService.DeleteCollectionApiKey
    */

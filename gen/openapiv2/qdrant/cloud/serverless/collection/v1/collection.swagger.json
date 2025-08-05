@@ -18,7 +18,7 @@
   "paths": {
     "/api/serverless/v1/accounts/{accountId}/collections": {
       "get": {
-        "summary": "ListCollections returns all collections for the authenticated user\nRequired Permissions:\n- write:serverless",
+        "summary": "ListCollections returns all collections for the authenticated user\nRequired Permissions:\n- read:serverless",
         "operationId": "CollectionService_ListCollections",
         "responses": {
           "200": {
