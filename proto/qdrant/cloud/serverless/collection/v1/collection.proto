@@ -47,7 +47,7 @@ service CollectionService {
   }
   // DeleteCollection removes a collection by ID
   // Required Permissions:
-  // - write:serverless
+  // - delete:serverless
   rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "delete:serverless";

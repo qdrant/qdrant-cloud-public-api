@@ -50,7 +50,7 @@
     },
     "/api/serverless/v1/accounts/{accountId}/collections/{collectionId}": {
       "delete": {
-        "summary": "DeleteCollection removes a collection by ID\nRequired Permissions:\n- write:serverless",
+        "summary": "DeleteCollection removes a collection by ID\nRequired Permissions:\n- delete:serverless",
         "operationId": "CollectionService_DeleteCollection",
         "responses": {
           "200": {

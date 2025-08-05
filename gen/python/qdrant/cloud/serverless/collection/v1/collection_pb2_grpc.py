@@ -71,7 +71,7 @@ class CollectionServiceServicer(object):
     def DeleteCollection(self, request, context):
         """DeleteCollection removes a collection by ID
         Required Permissions:
-        - write:serverless
+        - delete:serverless
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

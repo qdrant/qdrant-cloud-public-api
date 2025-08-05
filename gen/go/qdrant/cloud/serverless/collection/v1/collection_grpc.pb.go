@@ -45,7 +45,7 @@ type CollectionServiceClient interface {
 	UpgradeCollection(ctx context.Context, in *UpgradeCollectionRequest, opts ...grpc.CallOption) (*UpgradeCollectionResponse, error)
 	// DeleteCollection removes a collection by ID
 	// Required Permissions:
-	// - write:serverless
+	// - delete:serverless
 	DeleteCollection(ctx context.Context, in *DeleteCollectionRequest, opts ...grpc.CallOption) (*DeleteCollectionResponse, error)
 }
 
@@ -117,7 +117,7 @@ type CollectionServiceServer interface {
 	UpgradeCollection(context.Context, *UpgradeCollectionRequest) (*UpgradeCollectionResponse, error)
 	// DeleteCollection removes a collection by ID
 	// Required Permissions:
-	// - write:serverless
+	// - delete:serverless
 	DeleteCollection(context.Context, *DeleteCollectionRequest) (*DeleteCollectionResponse, error)
 	mustEmbedUnimplementedCollectionServiceServer()
 }

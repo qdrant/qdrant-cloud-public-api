@@ -34,7 +34,7 @@ export const upgradeCollection = CollectionService.method.upgradeCollection;
 /**
  * DeleteCollection removes a collection by ID
  * Required Permissions:
- * - write:serverless
+ * - delete:serverless
  *
  * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.DeleteCollection
  */
