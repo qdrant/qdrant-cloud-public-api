@@ -1630,9 +1630,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1bCreateBackupScheduleRequest\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x7f\n" +
 	"\x1cCreateBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"~\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xf5\x01\n" +
 	"\x1bUpdateBackupScheduleRequest\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x7f\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:u\xbaHr\x1ap\n" +
+	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\"\x7f\n" +
 	"\x1cUpdateBackupScheduleResponse\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
 	"\x1bDeleteBackupScheduleRequest\x12'\n" +
@@ -1641,7 +1642,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xd5\x05\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xdf\x05\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1650,8 +1651,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12D\n" +
-	"\x06status\x18\x06 \x01(\x0e2,.qdrant.cloud.cluster.backup.v1.BackupStatusR\x06status\x129\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12N\n" +
+	"\x06status\x18\x06 \x01(\x0e2,.qdrant.cloud.cluster.backup.v1.BackupStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12B\n" +
 	"\x0fbackup_duration\x18\b \x01(\v2\x19.google.protobuf.DurationR\x0ebackupDuration\x12;\n" +
@@ -1659,7 +1660,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
 	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)B\x15\n" +
-	"\x13_backup_schedule_id\"\x99\x06\n" +
+	"\x13_backup_schedule_id\"\xa3\x06\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1671,10 +1672,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\bschedule\x18\x05 \x01(\tB\x99\x01\xbaH\x95\x01r\x92\x012\x8f\x01^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$R\bschedule\x12^\n" +
 	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12L\n" +
-	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusR\x06status:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12V\n" +
+	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
-	"\x11_retention_period\"\xe5\x02\n" +
+	"\x11_retention_period\"\xef\x02\n" +
 	"\rBackupRestore\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -1683,8 +1684,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12%\n" +
-	"\tbackup_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12K\n" +
-	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusR\x06status\x129\n" +
+	"\tbackup_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12U\n" +
+	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt*\xd9\x01\n" +
 	"\fBackupStatus\x12\x1d\n" +
@@ -1719,7 +1720,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x11GetBackupSchedule\x128.qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest\x1a9.qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse\"s\x8a\xb5\x18\x15read:backup_schedules\x82\xd3\xe4\x93\x02T\x12R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x12\xa4\x02\n" +
 	"\x14CreateBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse\"\x90\x01\x8a\xb5\x18\x16write:backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\xb9\x02\n" +
 	"\x14UpdateBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse\"\xa5\x01\x8a\xb5\x18\x16write:backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\x82\xd3\xe4\x93\x02g:\x01*\x1ab/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\x88\x02\n" +
-	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"u\x8a\xb5\x18\x17delete:backup_schedules\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v2/accounts/{account_id}/backup_schedules/{backup_schedule_id}B\xa8\x02\n" +
+	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"u\x8a\xb5\x18\x17delete:backup_schedules\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}B\xa8\x02\n" +
 	"\"com.qdrant.cloud.cluster.backup.v1B\vBackupProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/backup/v1;backupv1\xa2\x02\x04QCCB\xaa\x02\x1eQdrant.Cloud.Cluster.Backup.V1\xca\x02\x1eQdrant\\Cloud\\Cluster\\Backup\\V1\xe2\x02*Qdrant\\Cloud\\Cluster\\Backup\\V1\\GPBMetadata\xea\x02\"Qdrant::Cloud::Cluster::Backup::V1b\x06proto3"
 
 var (

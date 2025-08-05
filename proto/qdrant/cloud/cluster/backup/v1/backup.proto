@@ -113,7 +113,7 @@ service BackupService {
     // permissions
     option (common.v1.permissions) = "delete:backup_schedules";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/cluster/backup/v2/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
   }
 }
 
@@ -247,6 +247,11 @@ message CreateBackupScheduleResponse {
 message UpdateBackupScheduleRequest {
   // The actual backup schedule.
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_backup_schedule.id_present"
+    message: "backup_schedule.id is required for an update"
+    expression: "this.backup_schedule.id != ''"
+  };
 }
 
 // UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
@@ -320,7 +325,7 @@ message Backup {
   };
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
-  BackupStatus status = 6;
+  BackupStatus status = 6 [(buf.validate.field).enum.defined_only = true];
   // The timestamp when the backup was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackup is called.
   google.protobuf.Timestamp deleted_at = 7;
@@ -382,7 +387,7 @@ message BackupSchedule {
   // This is a read-only field and will be set after DeleteBackupSchedule is called.
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
-  BackupScheduleStatus status = 8;
+  BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -400,7 +405,7 @@ message BackupRestore {
   // The Identifier of the backup (in GUID format).
   string backup_id = 5 [(buf.validate.field).string = {uuid: true}];
   // The current status of the backup restore.
-  BackupRestoreStatus status = 6;
+  BackupRestoreStatus status = 6 [(buf.validate.field).enum.defined_only = true];
   // The timestamp when the backup restore was deleted (or when deletion started).
   google.protobuf.Timestamp deleted_at = 7;
 }
