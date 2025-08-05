@@ -63,7 +63,7 @@ message ListCollectionApiKeysResponse {
 message CreateCollectionApiKeyRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove! However this is a breaking change, so will be done in seperate PR
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove! However this is a breaking change, so will be done in separate PR
   // Collection the key will access (in GUID format).
   // This is a required field.
   string collection_id = 2 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove!

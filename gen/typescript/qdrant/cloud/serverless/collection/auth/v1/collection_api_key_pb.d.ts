@@ -70,7 +70,7 @@ export declare type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.server
    * The identifier of the account (in GUID format).
    * This is a required field.
    *
-   * TODO: Remove! However this is a breaking change, so will be done in seperate PR
+   * TODO: Remove! However this is a breaking change, so will be done in separate PR
    *
    * @generated from field: string account_id = 1;
    */

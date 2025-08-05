@@ -155,7 +155,7 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in GUID format).\nThis is a required field.\n\nTODO: Remove! However this is a breaking change, so will be done in seperate PR"
+          "description": "The identifier of the account (in GUID format).\nThis is a required field.\n\nTODO: Remove! However this is a breaking change, so will be done in separate PR"
         },
         "collectionId": {
           "type": "string",

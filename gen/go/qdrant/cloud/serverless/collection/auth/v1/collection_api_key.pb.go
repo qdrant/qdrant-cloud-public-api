@@ -188,7 +188,7 @@ type CreateCollectionApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //TODO: Remove! However this is a breaking change, so will be done in seperate PR
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //TODO: Remove! However this is a breaking change, so will be done in separate PR
 	// Collection the key will access (in GUID format).
 	// This is a required field.
 	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"` //TODO: Remove!
