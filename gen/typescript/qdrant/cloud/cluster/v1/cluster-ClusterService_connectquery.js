@@ -33,6 +33,9 @@ export const createCluster = ClusterService.method.createCluster;
 
 /**
  * Create a new cluster from an existing backup
+ * Required permissions (both):
+ * - admin:backups
+ * - write:clusters
  *
  * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup
  */

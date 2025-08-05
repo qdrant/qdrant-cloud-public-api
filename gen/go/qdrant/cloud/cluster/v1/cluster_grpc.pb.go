@@ -50,6 +50,9 @@ type ClusterServiceClient interface {
 	// - write:clusters
 	CreateCluster(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*CreateClusterResponse, error)
 	// Create a new cluster from an existing backup
+	// Required permissions (both):
+	// - admin:backups
+	// - write:clusters
 	CreateClusterFromBackup(ctx context.Context, in *CreateClusterFromBackupRequest, opts ...grpc.CallOption) (*CreateClusterFromBackupResponse, error)
 	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:
@@ -206,6 +209,9 @@ type ClusterServiceServer interface {
 	// - write:clusters
 	CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error)
 	// Create a new cluster from an existing backup
+	// Required permissions (both):
+	// - admin:backups
+	// - write:clusters
 	CreateClusterFromBackup(context.Context, *CreateClusterFromBackupRequest) (*CreateClusterFromBackupResponse, error)
 	// Updates a cluster in the account identified by the given ID.
 	// Required permissions:

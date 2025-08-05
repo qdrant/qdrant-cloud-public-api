@@ -42,6 +42,9 @@ service ClusterService {
     };
   }
   // Create a new cluster from an existing backup
+  // Required permissions (both):
+  // - admin:backups
+  // - write:clusters
   rpc CreateClusterFromBackup(CreateClusterFromBackupRequest) returns (CreateClusterFromBackupResponse) {
     // permissions
     option (common.v1.requires_all_permissions) = true;

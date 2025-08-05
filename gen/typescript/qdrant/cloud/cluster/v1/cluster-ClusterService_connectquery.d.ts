@@ -30,6 +30,9 @@ export const getCluster: typeof ClusterService["method"]["getCluster"];
 export const createCluster: typeof ClusterService["method"]["createCluster"];
 /**
  * Create a new cluster from an existing backup
+ * Required permissions (both):
+ * - admin:backups
+ * - write:clusters
  *
  * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup
  */
