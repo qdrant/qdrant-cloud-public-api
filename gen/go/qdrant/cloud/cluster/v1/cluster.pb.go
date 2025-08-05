@@ -3253,13 +3253,13 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
-	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\xda\x10\n" +
+	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\xcd\x10\n" +
 	"\x0eClusterService\x12\xb4\x01\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xbb\x01\n" +
 	"\n" +
 	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"T\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xd9\x01\n" +
-	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"i\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\x8c\x02\n" +
-	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"~\x8a\xb5\x18\radmin:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02Q\"O/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/create-cluster\x12\xe6\x01\n" +
+	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"i\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xff\x01\n" +
+	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"q\x8a\xb5\x18\radmin:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xe6\x01\n" +
 	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"v\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xc6\x01\n" +
 	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"V\x8a\xb5\x18\x0fdelete:clusters\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xd0\x01\n" +
 	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"]\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xd0\x01\n" +

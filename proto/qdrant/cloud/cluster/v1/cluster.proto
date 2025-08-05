@@ -51,7 +51,7 @@ service ClusterService {
     option (common.v1.permissions) = "admin:backups";
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/create-cluster"};
+    option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters"};
   }
 
   // Updates a cluster in the account identified by the given ID.

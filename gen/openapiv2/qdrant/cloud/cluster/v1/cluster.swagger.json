@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/create-cluster": {
+    "/api/cluster/v1/accounts/{accountId}/backups/{backupId}/clusters": {
       "post": {
         "summary": "Create a new cluster from an existing backup\nRequired permissions (both):\n- admin:backups\n- write:clusters",
         "operationId": "ClusterService_CreateClusterFromBackup",
