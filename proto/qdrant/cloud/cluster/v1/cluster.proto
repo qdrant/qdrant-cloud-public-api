@@ -41,6 +41,19 @@ service ClusterService {
       body: "*"
     };
   }
+  // Create a new cluster from an existing backup
+  // Required permissions (both):
+  // - admin:backups
+  // - write:clusters
+  rpc CreateClusterFromBackup(CreateClusterFromBackupRequest) returns (CreateClusterFromBackupResponse) {
+    // permissions
+    option (common.v1.requires_all_permissions) = true;
+    option (common.v1.permissions) = "admin:backups";
+    option (common.v1.permissions) = "write:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters"};
+  }
+
   // Updates a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
@@ -719,4 +732,26 @@ message QdrantRelease {
   bool end_of_life = 5;
   // True, if the release is not available for the cluster creation or updates
   bool unavailable = 6;
+}
+
+// CreateClusterFromBackupRequest is the request for the CreateCluster function.
+message CreateClusterFromBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Name of the new cluster
+  string cluster_name = 3 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+}
+
+// CreateClusterFromBackupResponse is the response for the CreateCluster function.
+message CreateClusterFromBackupResponse {
+  // Cluster created from the backup
+  Cluster cluster = 1 [(buf.validate.field).required = true];
 }

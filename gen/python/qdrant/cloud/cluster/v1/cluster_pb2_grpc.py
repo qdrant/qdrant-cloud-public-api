@@ -30,6 +30,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterResponse.FromString,
                 _registered_method=True)
+        self.CreateClusterFromBackup = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupResponse.FromString,
+                _registered_method=True)
         self.UpdateCluster = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UpdateClusterRequest.SerializeToString,
@@ -87,6 +92,16 @@ class ClusterServiceServicer(object):
     def CreateCluster(self, request, context):
         """Creates a cluster in the account identified by the given ID.
         Required permissions:
+        - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateClusterFromBackup(self, request, context):
+        """Create a new cluster from an existing backup
+        Required permissions (both):
+        - admin:backups
         - write:clusters
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -166,6 +181,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.CreateCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterResponse.SerializeToString,
+            ),
+            'CreateClusterFromBackup': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateClusterFromBackup,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupResponse.SerializeToString,
             ),
             'UpdateCluster': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateCluster,
@@ -280,6 +300,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/CreateCluster',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateClusterFromBackup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.CreateClusterFromBackupResponse.FromString,
             options,
             channel_credentials,
             insecure,

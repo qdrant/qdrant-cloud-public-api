@@ -16,6 +16,52 @@
     "application/json"
   ],
   "paths": {
+    "/api/cluster/v1/accounts/{accountId}/backups/{backupId}/clusters": {
+      "post": {
+        "summary": "Create a new cluster from an existing backup\nRequired permissions (both):\n- admin:backups\n- write:clusters",
+        "operationId": "ClusterService_CreateClusterFromBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateClusterFromBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "description": "Name of the new cluster",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/clusters": {
       "get": {
         "summary": "Lists all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
@@ -855,6 +901,16 @@
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
+    },
+    "v1CreateClusterFromBackupResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "Cluster created from the backup"
+        }
+      },
+      "description": "CreateClusterFromBackupResponse is the response for the CreateCluster function."
     },
     "v1CreateClusterResponse": {
       "type": "object",
