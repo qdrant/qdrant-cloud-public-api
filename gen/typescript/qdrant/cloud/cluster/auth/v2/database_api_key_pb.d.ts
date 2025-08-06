@@ -332,14 +332,6 @@ export declare type CollectionAccessRule = Message<"qdrant.cloud.cluster.auth.v2
    * @generated from field: qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType access_type = 2;
    */
   accessType: CollectionAccessRuleAccessType;
-
-  /**
-   * An optional set of key-value pairs used to restrict access within the collection.
-   * Only points containing the specified key-value pairs in their payload will be accessible.
-   *
-   * @generated from field: map<string, string> payload = 3;
-   */
-  payload: { [key: string]: string };
 };
 
 /**

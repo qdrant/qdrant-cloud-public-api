@@ -207,7 +207,4 @@ message CollectionAccessRule {
   // The type of access granted for the collection.
   // This is a required field.
   CollectionAccessRuleAccessType access_type = 2;
-  // An optional set of key-value pairs used to restrict access within the collection.
-  // Only points containing the specified key-value pairs in their payload will be accessible.
-  map<string, string> payload = 3;
 }
