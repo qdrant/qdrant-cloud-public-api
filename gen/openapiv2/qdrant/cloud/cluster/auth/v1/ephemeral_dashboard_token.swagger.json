@@ -99,9 +99,9 @@
     "v1CreateEphemeralDashboardTokenResponse": {
       "type": "object",
       "properties": {
-        "encryptedCookie": {
+        "ephemeralDashboardToken": {
           "$ref": "#/definitions/v1EphemeralDashboardToken",
-          "description": "The encrypted cookie."
+          "description": "The actual ephemeral dashboard token."
         }
       },
       "description": "CreateEphemeralDashboardTokenResponse is the response from the CreateEphemeralDashboardToken function."

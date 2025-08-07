@@ -27,7 +27,7 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n<qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"x\n$CreateEphemeralDashboardTokenRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\'\n\ncluster_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\x89\x01\n%CreateEphemeralDashboardTokenResponse\x12`\n\x10\x65ncrypted_cookie\x18\x01 \x01(\x0b\x32\x35.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenR\x0f\x65ncryptedCookie\"]\n\x17\x45phemeralDashboardToken\x12\x42\n\x05token\x18\x01 \x01(\tB,\xbaH)r\'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xbc\x02\n\x1e\x45phemeralDashboardTokenService\x12\x99\x02\n\x1d\x43reateEphemeralDashboardToken\x12\x42.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1a\x43.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"o\x8a\xb5\x18\rread:clusters\x92\xb5\x18\naccount_id\x82\xd3\xe4\x93\x02J\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens:\x01*B\xab\x02\n com.qdrant.cloud.cluster.auth.v1B\x1c\x45phemeralDashboardTokenProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n<qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"x\n$CreateEphemeralDashboardTokenRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\'\n\ncluster_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\x9a\x01\n%CreateEphemeralDashboardTokenResponse\x12q\n\x19\x65phemeral_dashboard_token\x18\x01 \x01(\x0b\x32\x35.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenR\x17\x65phemeralDashboardToken\"]\n\x17\x45phemeralDashboardToken\x12\x42\n\x05token\x18\x01 \x01(\tB,\xbaH)r\'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xbc\x02\n\x1e\x45phemeralDashboardTokenService\x12\x99\x02\n\x1d\x43reateEphemeralDashboardToken\x12\x42.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1a\x43.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"o\x8a\xb5\x18\rread:clusters\x92\xb5\x18\naccount_id\x82\xd3\xe4\x93\x02J\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens:\x01*B\xab\x02\n com.qdrant.cloud.cluster.auth.v1B\x1c\x45phemeralDashboardTokenProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -46,9 +46,9 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CREATEEPHEMERALDASHBOARDTOKENREQUEST']._serialized_start=190
   _globals['_CREATEEPHEMERALDASHBOARDTOKENREQUEST']._serialized_end=310
   _globals['_CREATEEPHEMERALDASHBOARDTOKENRESPONSE']._serialized_start=313
-  _globals['_CREATEEPHEMERALDASHBOARDTOKENRESPONSE']._serialized_end=450
-  _globals['_EPHEMERALDASHBOARDTOKEN']._serialized_start=452
-  _globals['_EPHEMERALDASHBOARDTOKEN']._serialized_end=545
-  _globals['_EPHEMERALDASHBOARDTOKENSERVICE']._serialized_start=548
-  _globals['_EPHEMERALDASHBOARDTOKENSERVICE']._serialized_end=864
+  _globals['_CREATEEPHEMERALDASHBOARDTOKENRESPONSE']._serialized_end=467
+  _globals['_EPHEMERALDASHBOARDTOKEN']._serialized_start=469
+  _globals['_EPHEMERALDASHBOARDTOKEN']._serialized_end=562
+  _globals['_EPHEMERALDASHBOARDTOKENSERVICE']._serialized_start=565
+  _globals['_EPHEMERALDASHBOARDTOKENSERVICE']._serialized_end=881
 # @@protoc_insertion_point(module_scope)

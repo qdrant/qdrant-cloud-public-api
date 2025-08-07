@@ -17,10 +17,10 @@ class CreateEphemeralDashboardTokenRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class CreateEphemeralDashboardTokenResponse(_message.Message):
-    __slots__ = ("encrypted_cookie",)
-    ENCRYPTED_COOKIE_FIELD_NUMBER: _ClassVar[int]
-    encrypted_cookie: EphemeralDashboardToken
-    def __init__(self, encrypted_cookie: _Optional[_Union[EphemeralDashboardToken, _Mapping]] = ...) -> None: ...
+    __slots__ = ("ephemeral_dashboard_token",)
+    EPHEMERAL_DASHBOARD_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    ephemeral_dashboard_token: EphemeralDashboardToken
+    def __init__(self, ephemeral_dashboard_token: _Optional[_Union[EphemeralDashboardToken, _Mapping]] = ...) -> None: ...
 
 class EphemeralDashboardToken(_message.Message):
     __slots__ = ("token",)

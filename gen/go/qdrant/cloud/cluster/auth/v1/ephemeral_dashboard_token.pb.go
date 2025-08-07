@@ -85,10 +85,10 @@ func (x *CreateEphemeralDashboardTokenRequest) GetClusterId() string {
 // CreateEphemeralDashboardTokenResponse is the response from the CreateEphemeralDashboardToken function.
 type CreateEphemeralDashboardTokenResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The encrypted cookie.
-	EncryptedCookie *EphemeralDashboardToken `protobuf:"bytes,1,opt,name=encrypted_cookie,json=encryptedCookie,proto3" json:"encrypted_cookie,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The actual ephemeral dashboard token.
+	EphemeralDashboardToken *EphemeralDashboardToken `protobuf:"bytes,1,opt,name=ephemeral_dashboard_token,json=ephemeralDashboardToken,proto3" json:"ephemeral_dashboard_token,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CreateEphemeralDashboardTokenResponse) Reset() {
@@ -121,9 +121,9 @@ func (*CreateEphemeralDashboardTokenResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateEphemeralDashboardTokenResponse) GetEncryptedCookie() *EphemeralDashboardToken {
+func (x *CreateEphemeralDashboardTokenResponse) GetEphemeralDashboardToken() *EphemeralDashboardToken {
 	if x != nil {
-		return x.EncryptedCookie
+		return x.EphemeralDashboardToken
 	}
 	return nil
 }
@@ -184,9 +184,9 @@ const file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDesc 
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\x89\x01\n" +
-	"%CreateEphemeralDashboardTokenResponse\x12`\n" +
-	"\x10encrypted_cookie\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenR\x0fencryptedCookie\"]\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\x9a\x01\n" +
+	"%CreateEphemeralDashboardTokenResponse\x12q\n" +
+	"\x19ephemeral_dashboard_token\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenR\x17ephemeralDashboardToken\"]\n" +
 	"\x17EphemeralDashboardToken\x12B\n" +
 	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xbc\x02\n" +
 	"\x1eEphemeralDashboardTokenService\x12\x99\x02\n" +
@@ -213,7 +213,7 @@ var file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_goTypes = 
 	(*EphemeralDashboardToken)(nil),               // 2: qdrant.cloud.cluster.auth.v1.EphemeralDashboardToken
 }
 var file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_depIdxs = []int32{
-	2, // 0: qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse.encrypted_cookie:type_name -> qdrant.cloud.cluster.auth.v1.EphemeralDashboardToken
+	2, // 0: qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse.ephemeral_dashboard_token:type_name -> qdrant.cloud.cluster.auth.v1.EphemeralDashboardToken
 	0, // 1: qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenService.CreateEphemeralDashboardToken:input_type -> qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest
 	1, // 2: qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenService.CreateEphemeralDashboardToken:output_type -> qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse
 	2, // [2:3] is the sub-list for method output_type
