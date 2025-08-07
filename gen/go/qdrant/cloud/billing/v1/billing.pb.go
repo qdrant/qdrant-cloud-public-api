@@ -285,14 +285,14 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n" +
 	"\x14ListInvoicesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\x89\x02\n" +
-	"\aInvoice\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\x06number\x18\x02 \x01(\tH\x00R\x06number\x88\x01\x01\x12!\n" +
-	"\ftotal_amount\x18\x03 \x01(\x03R\vtotalAmount\x129\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\xad\x02\n" +
+	"\aInvoice\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
+	"\x06number\x18\x02 \x01(\tH\x00R\x06number\x88\x01\x01\x12*\n" +
+	"\ftotal_amount\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\vtotalAmount\x12A\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
-	"\x06status\x18\x05 \x01(\x0e2&.qdrant.cloud.billing.v1.InvoiceStatusR\x06status\x12\x1c\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12H\n" +
+	"\x06status\x18\x05 \x01(\x0e2&.qdrant.cloud.billing.v1.InvoiceStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1c\n" +
 	"\apdf_url\x18\x06 \x01(\tH\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +

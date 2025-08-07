@@ -1810,17 +1810,18 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.AccountR\x05items\"<\n" +
 	"\x11GetAccountRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"P\n" +
-	"\x12GetAccountResponse\x12:\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountR\aaccount\"R\n" +
-	"\x14CreateAccountRequest\x12:\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountR\aaccount\"S\n" +
-	"\x15CreateAccountResponse\x12:\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountR\aaccount\"R\n" +
-	"\x14UpdateAccountRequest\x12:\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountR\aaccount\"S\n" +
-	"\x15UpdateAccountResponse\x12:\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountR\aaccount\"?\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"X\n" +
+	"\x12GetAccountResponse\x12B\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"Z\n" +
+	"\x14CreateAccountRequest\x12B\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"[\n" +
+	"\x15CreateAccountResponse\x12B\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"\xb9\x01\n" +
+	"\x14UpdateAccountRequest\x12B\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount:]\xbaHZ\x1aX\n" +
+	"\x19update_account.id_present\x12$account.id is required for an update\x1a\x15this.account.id != ''\"[\n" +
+	"\x15UpdateAccountResponse\x12B\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"?\n" +
 	"\x14DeleteAccountRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\x17\n" +
@@ -1836,13 +1837,13 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x17GetAccountInviteRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
-	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"i\n" +
-	"\x18GetAccountInviteResponse\x12M\n" +
-	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteR\raccountInvite\"k\n" +
-	"\x1aCreateAccountInviteRequest\x12M\n" +
-	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteR\raccountInvite\"l\n" +
-	"\x1bCreateAccountInviteResponse\x12M\n" +
-	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteR\raccountInvite\"l\n" +
+	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"q\n" +
+	"\x18GetAccountInviteResponse\x12U\n" +
+	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"s\n" +
+	"\x1aCreateAccountInviteRequest\x12U\n" +
+	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"t\n" +
+	"\x1bCreateAccountInviteResponse\x12U\n" +
+	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"l\n" +
 	"\x1aDeleteAccountInviteRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
@@ -1851,15 +1852,15 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1aAcceptAccountInviteRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
-	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"]\n" +
-	"\x1bAcceptAccountInviteResponse\x12>\n" +
-	"\x06invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteR\x06invite\"l\n" +
+	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"e\n" +
+	"\x1bAcceptAccountInviteResponse\x12F\n" +
+	"\x06invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\x06invite\"l\n" +
 	"\x1aRejectAccountInviteRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
-	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"]\n" +
-	"\x1bRejectAccountInviteResponse\x12>\n" +
-	"\x06invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteR\x06invite\"D\n" +
+	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"e\n" +
+	"\x1bRejectAccountInviteResponse\x12F\n" +
+	"\x06invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\x06invite\"D\n" +
 	"\x19ListAccountMembersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"Z\n" +
@@ -1868,9 +1869,9 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x17GetAccountMemberRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
-	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"i\n" +
-	"\x18GetAccountMemberResponse\x12M\n" +
-	"\x0eaccount_member\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountMemberR\raccountMember\"h\n" +
+	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"q\n" +
+	"\x18GetAccountMemberResponse\x12U\n" +
+	"\x0eaccount_member\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountMemberB\x06\xbaH\x03\xc8\x01\x01R\raccountMember\"h\n" +
 	"\x1aDeleteAccountMemberRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
@@ -1890,7 +1891,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"privileges\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
 	"privileges:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
 	"\n" +
-	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\xdc\x05\n" +
+	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x84\b\n" +
 	"\rAccountInvite\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1903,14 +1904,16 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
 	"\x12created_by_user_id\x18\a \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x12-\n" +
 	"\x10created_by_email\x18\b \x01(\tH\x01R\x0ecreatedByEmail\x88\x01\x01\x12D\n" +
-	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12D\n" +
+	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12N\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusR\x06status:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
-	"\x11account_invite.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x15\n" +
+	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xcf\x03\xbaH\xcb\x03\x1a\xaa\x01\n" +
+	"\x11account_invite.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1at\n" +
+	"\x1baccount_invite.account_name\x12\x1eaccount_name must not be empty\x1a5this.account_name.size() > 0 || !has(this.created_at)\x1a\xa5\x01\n" +
+	"\x1faccount_invite.created_by_email\x12?created_by_email must not be empty if created_by_user_id is set\x1aA!has(this.created_by_user_id) || this.created_by_email.size() > 0B\x15\n" +
 	"\x13_created_by_user_idB\x13\n" +
-	"\x11_created_by_email\"l\n" +
-	"\rAccountMember\x12@\n" +
-	"\x0eaccount_member\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserR\raccountMember\x12\x19\n" +
+	"\x11_created_by_email\"t\n" +
+	"\rAccountMember\x12H\n" +
+	"\x0eaccount_member\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\raccountMember\x12\x19\n" +
 	"\bis_owner\x18\x02 \x01(\bR\aisOwner*\xcb\x01\n" +
 	"\x13AccountInviteStatus\x12%\n" +
 	"!ACCOUNT_INVITE_STATUS_UNSPECIFIED\x10\x00\x12!\n" +

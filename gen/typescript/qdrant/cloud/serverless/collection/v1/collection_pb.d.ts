@@ -392,7 +392,7 @@ export declare const CollectionService: GenService<{
   /**
    * ListCollections returns all collections for the authenticated user
    * Required Permissions:
-   * - write:serverless
+   * - read:serverless
    *
    * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.ListCollections
    */
@@ -428,7 +428,7 @@ export declare const CollectionService: GenService<{
   /**
    * DeleteCollection removes a collection by ID
    * Required Permissions:
-   * - write:serverless
+   * - delete:serverless
    *
    * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.DeleteCollection
    */

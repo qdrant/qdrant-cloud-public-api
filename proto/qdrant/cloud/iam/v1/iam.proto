@@ -199,19 +199,24 @@ message GetAuthenticatedUserRequest {
 // GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function
 message GetAuthenticatedUserResponse {
   // The actual user.
-  User user = 1;
+  User user = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateUserRequest is the request for the UpdateUser function.
 message UpdateUserRequest {
   // The actual user.
-  User user = 1;
+  User user = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_user.id_present"
+    message: "user.id is required for an update"
+    expression: "this.user.id != ''"
+  };
 }
 
 // UpdateUserResponse is the response from the UpdateUser function.
 message UpdateUserResponse {
   // The actual user.
-  User user = 1;
+  User user = 1 [(buf.validate.field).required = true];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
@@ -228,7 +233,7 @@ message GetUserConsentRequest {
 // GetUserConsentResponse is the response from the GetUserConsent function.
 message GetUserConsentResponse {
   // The user consent for the requested document type.
-  UserConsent user_consent = 1;
+  UserConsent user_consent = 1 [(buf.validate.field).required = true];
 }
 
 // RecordUserConsentRequest is the request for the RecordUserConsent function.
@@ -265,7 +270,7 @@ message ListPermissionsRequest {
 // ListPermissionsResponse is the response from the ListPermissions function
 message ListPermissionsResponse {
   // The permissions know by the system.
-  repeated string permissions = 1;
+  repeated string permissions = 1 [(buf.validate.field).repeated.items.string.min_len = 1];
 }
 
 // ListRolesRequest is the request for the ListRoles function
@@ -294,31 +299,46 @@ message GetRoleRequest {
 // GetRoleResponse is the response from the GetRole function
 message GetRoleResponse {
   // The actual role.
-  Role role = 1;
+  Role role = 1 [(buf.validate.field).required = true];
 }
 
 // CreateRoleRequest is the request for the CreateRole function.
 message CreateRoleRequest {
   // The actual role.
-  Role role = 1;
+  Role role = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_role.role_type"
+    message: "role.role_type must be ROLE_TYPE_CUSTOM"
+    expression: "this.role.role_type == 2"
+  };
 }
 
 // CreateRoleResponse is the response from the CreateRole function.
 message CreateRoleResponse {
   // The actual role.
-  Role role = 1;
+  Role role = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateRoleRequest is the request for the UpdateRole function.
 message UpdateRoleRequest {
   // The actual role.
-  Role role = 1;
+  Role role = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_role.id_present"
+    message: "role.id is required for an update"
+    expression: "this.role.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_role.role_type"
+    message: "role.role_type must be ROLE_TYPE_CUSTOM"
+    expression: "this.role.role_type == 2"
+  };
 }
 
 // UpdateRoleResponse is the response from the UpdateRole function.
 message UpdateRoleResponse {
   // The actual role.
-  Role role = 1;
+  Role role = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteRoleRequest is the request for the DeleteRole function.
@@ -346,7 +366,7 @@ message ListEffectivePermissionsRequest {
 // ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function
 message ListEffectivePermissionsResponse {
   // The effective permissions.
-  repeated string permissions = 1;
+  repeated string permissions = 1 [(buf.validate.field).repeated.items.string.min_len = 1];
 }
 
 // ListUserRolesRequest is the request for the ListUserRoles function
@@ -382,6 +402,11 @@ message AssignUserRolesRequest {
   // The roles to be deleted from the provided user.
   // If a role is part of the role_ids_to_add this field takes precedence.
   repeated string role_ids_to_delete = 4 [(buf.validate.field).repeated.items.string = {uuid: true}];
+  option (buf.validate.message).cel = {
+    id: "assign_user_roles.at_least_one"
+    message: "at least one role must be added or deleted"
+    expression: "this.role_ids_to_add.size() > 0 || this.role_ids_to_delete.size() > 0"
+  };
 }
 
 // AssignUserRolesResponse is the response from the AssignUserRoles function
@@ -406,7 +431,7 @@ message User {
   string email = 4 [(buf.validate.field).string = {email: true}];
   // The status of the user.
   // This is a read-only field.
-  UserStatus status = 5;
+  UserStatus status = 5 [(buf.validate.field).enum.defined_only = true];
   // The default account ID of the user (in GUID format).
   // You should be member of the account when updating.
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
@@ -453,10 +478,13 @@ message Role {
   // The human readable description of this role.
   string description = 6;
   // The role type.
-  RoleType role_type = 7;
+  RoleType role_type = 7 [(buf.validate.field).enum.defined_only = true];
   // The permissions associated with this role.
-  // Must contain at least one permission.
-  repeated string permissions = 8 [(buf.validate.field).repeated = {min_items: 1}];
+  repeated string permissions = 8 [(buf.validate.field).repeated = {
+    items: {
+      string: {min_len: 1}
+    }
+  }];
 }
 
 // RoleType specified the type of the role
@@ -485,10 +513,10 @@ message LogoutUserResponse {
 // User Consent represents the consent status of a user for a specific legal document.
 message UserConsent {
   // The type of the legal document for which consent status is reported.
-  LegalDocumentType document_type = 1;
+  LegalDocumentType document_type = 1 [(buf.validate.field).enum.defined_only = true];
   // The latest consent status recorded from the user for this document type.
   // Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
-  UserConsentStatus status = 2;
+  UserConsentStatus status = 2 [(buf.validate.field).enum.defined_only = true];
   // Timestamp of the most recent status update.
   // Unset if no status update has been recorded.
   optional google.protobuf.Timestamp last_modified_at = 3;

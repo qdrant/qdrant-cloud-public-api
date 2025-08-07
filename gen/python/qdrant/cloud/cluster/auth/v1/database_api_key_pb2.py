@@ -28,7 +28,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"E\n\x1aListDatabaseApiKeysRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n\x1bListDatabaseApiKeysResponse\x12\x42\n\x05items\x18\x01 \x03(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"u\n\x1b\x43reateDatabaseApiKeyRequest\x12V\n\x10\x64\x61tabase_api_key\x18\x01 \x01(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x0e\x64\x61tabaseApiKey\"v\n\x1c\x43reateDatabaseApiKeyResponse\x12V\n\x10\x64\x61tabase_api_key\x18\x01 \x01(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x0e\x64\x61tabaseApiKey\"\x7f\n\x1b\x44\x65leteDatabaseApiKeyRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x37\n\x13\x64\x61tabase_api_key_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x10\x64\x61tabaseApiKeyId\"\x1e\n\x1c\x44\x65leteDatabaseApiKeyResponse\"\x94\x03\n\x0e\x44\x61tabaseApiKey\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\'\n\naccount_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x39\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12.\n\x0b\x63luster_ids\x18\x04 \x03(\tB\r\xbaH\n\x92\x01\x07\"\x05r\x03\xb0\x01\x01R\nclusterIds\x12\x16\n\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x10\n\x03key\x18\x06 \x01(\tR\x03key:\xb3\x01\xbaH\xaf\x01\x1a\xac\x01\n\x13\x64\x61tabase_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)2\x96\x06\n\x15\x44\x61tabaseApiKeyService\x12\xe1\x01\n\x13ListDatabaseApiKeys\x12\x38.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysRequest\x1a\x39.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v1/accounts/{account_id}/database-api-keys\x12\x99\x02\n\x14\x43reateDatabaseApiKey\x12\x39.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyResponse\"\x89\x01\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1b\x64\x61tabase_api_key.account_id\x82\xd3\xe4\x93\x02R\"M/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys:\x01*\x12\xfc\x01\n\x14\x44\x65leteDatabaseApiKey\x12\x39.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyResponse\"m\x8a\xb5\x18\x0f\x64\x65lete:api_keys\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v1/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n com.qdrant.cloud.cluster.auth.v1B\x13\x44\x61tabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"E\n\x1aListDatabaseApiKeysRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n\x1bListDatabaseApiKeysResponse\x12\x42\n\x05items\x18\x01 \x03(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"}\n\x1b\x43reateDatabaseApiKeyRequest\x12^\n\x10\x64\x61tabase_api_key\x18\x01 \x01(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0e\x64\x61tabaseApiKey\"~\n\x1c\x43reateDatabaseApiKeyResponse\x12^\n\x10\x64\x61tabase_api_key\x18\x01 \x01(\x0b\x32,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0e\x64\x61tabaseApiKey\"\x7f\n\x1b\x44\x65leteDatabaseApiKeyRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x37\n\x13\x64\x61tabase_api_key_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x10\x64\x61tabaseApiKeyId\"\x1e\n\x1c\x44\x65leteDatabaseApiKeyResponse\"\xfc\x03\n\x0e\x44\x61tabaseApiKey\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\'\n\naccount_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x39\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x30\n\x0b\x63luster_ids\x18\x04 \x03(\tB\x0f\xbaH\x0c\x92\x01\t\x08\x01\"\x05r\x03\xb0\x01\x01R\nclusterIds\x12\x16\n\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x10\n\x03key\x18\x06 \x01(\tR\x03key:\x99\x02\xbaH\x95\x02\x1a\xac\x01\n\x13\x64\x61tabase_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)\x1a\x64\n\x17\x64\x61tabase_api_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\x96\x06\n\x15\x44\x61tabaseApiKeyService\x12\xe1\x01\n\x13ListDatabaseApiKeys\x12\x38.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysRequest\x1a\x39.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v1/accounts/{account_id}/database-api-keys\x12\x99\x02\n\x14\x43reateDatabaseApiKey\x12\x39.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyResponse\"\x89\x01\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1b\x64\x61tabase_api_key.account_id\x82\xd3\xe4\x93\x02R\"M/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys:\x01*\x12\xfc\x01\n\x14\x44\x65leteDatabaseApiKey\x12\x39.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyResponse\"m\x8a\xb5\x18\x0f\x64\x65lete:api_keys\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v1/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n com.qdrant.cloud.cluster.auth.v1B\x13\x44\x61tabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,6 +38,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'\n com.qdrant.cloud.cluster.auth.v1B\023DatabaseApiKeyProtoP\001ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\242\002\004QCCA\252\002\034Qdrant.Cloud.Cluster.Auth.V1\312\002\034Qdrant\\Cloud\\Cluster\\Auth\\V1\342\002(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\352\002 Qdrant::Cloud::Cluster::Auth::V1'
   _globals['_LISTDATABASEAPIKEYSREQUEST'].fields_by_name['account_id']._loaded_options = None
   _globals['_LISTDATABASEAPIKEYSREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
+  _globals['_CREATEDATABASEAPIKEYREQUEST'].fields_by_name['database_api_key']._loaded_options = None
+  _globals['_CREATEDATABASEAPIKEYREQUEST'].fields_by_name['database_api_key']._serialized_options = b'\272H\003\310\001\001'
+  _globals['_CREATEDATABASEAPIKEYRESPONSE'].fields_by_name['database_api_key']._loaded_options = None
+  _globals['_CREATEDATABASEAPIKEYRESPONSE'].fields_by_name['database_api_key']._serialized_options = b'\272H\003\310\001\001'
   _globals['_DELETEDATABASEAPIKEYREQUEST'].fields_by_name['account_id']._loaded_options = None
   _globals['_DELETEDATABASEAPIKEYREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_DELETEDATABASEAPIKEYREQUEST'].fields_by_name['database_api_key_id']._loaded_options = None
@@ -45,9 +49,9 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DATABASEAPIKEY'].fields_by_name['account_id']._loaded_options = None
   _globals['_DATABASEAPIKEY'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_DATABASEAPIKEY'].fields_by_name['cluster_ids']._loaded_options = None
-  _globals['_DATABASEAPIKEY'].fields_by_name['cluster_ids']._serialized_options = b'\272H\n\222\001\007\"\005r\003\260\001\001'
+  _globals['_DATABASEAPIKEY'].fields_by_name['cluster_ids']._serialized_options = b'\272H\014\222\001\t\010\001\"\005r\003\260\001\001'
   _globals['_DATABASEAPIKEY']._loaded_options = None
-  _globals['_DATABASEAPIKEY']._serialized_options = b'\272H\257\001\032\254\001\n\023database_api_key.id\022\032value must be a valid UUID\032ythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)'
+  _globals['_DATABASEAPIKEY']._serialized_options = b'\272H\225\002\032\254\001\n\023database_api_key.id\022\032value must be a valid UUID\032ythis.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)\032d\n\027database_api_key.prefix\022\030prefix must not be empty\032/this.prefix.size() > 0 || !has(this.created_at)'
   _globals['_DATABASEAPIKEYSERVICE'].methods_by_name['ListDatabaseApiKeys']._loaded_options = None
   _globals['_DATABASEAPIKEYSERVICE'].methods_by_name['ListDatabaseApiKeys']._serialized_options = b'\212\265\030\rread:api_keys\202\323\344\223\002>\022</api/cluster/auth/v1/accounts/{account_id}/database-api-keys'
   _globals['_DATABASEAPIKEYSERVICE'].methods_by_name['CreateDatabaseApiKey']._loaded_options = None
@@ -59,15 +63,15 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_LISTDATABASEAPIKEYSRESPONSE']._serialized_start=285
   _globals['_LISTDATABASEAPIKEYSRESPONSE']._serialized_end=382
   _globals['_CREATEDATABASEAPIKEYREQUEST']._serialized_start=384
-  _globals['_CREATEDATABASEAPIKEYREQUEST']._serialized_end=501
-  _globals['_CREATEDATABASEAPIKEYRESPONSE']._serialized_start=503
-  _globals['_CREATEDATABASEAPIKEYRESPONSE']._serialized_end=621
-  _globals['_DELETEDATABASEAPIKEYREQUEST']._serialized_start=623
-  _globals['_DELETEDATABASEAPIKEYREQUEST']._serialized_end=750
-  _globals['_DELETEDATABASEAPIKEYRESPONSE']._serialized_start=752
-  _globals['_DELETEDATABASEAPIKEYRESPONSE']._serialized_end=782
-  _globals['_DATABASEAPIKEY']._serialized_start=785
-  _globals['_DATABASEAPIKEY']._serialized_end=1189
-  _globals['_DATABASEAPIKEYSERVICE']._serialized_start=1192
-  _globals['_DATABASEAPIKEYSERVICE']._serialized_end=1982
+  _globals['_CREATEDATABASEAPIKEYREQUEST']._serialized_end=509
+  _globals['_CREATEDATABASEAPIKEYRESPONSE']._serialized_start=511
+  _globals['_CREATEDATABASEAPIKEYRESPONSE']._serialized_end=637
+  _globals['_DELETEDATABASEAPIKEYREQUEST']._serialized_start=639
+  _globals['_DELETEDATABASEAPIKEYREQUEST']._serialized_end=766
+  _globals['_DELETEDATABASEAPIKEYRESPONSE']._serialized_start=768
+  _globals['_DELETEDATABASEAPIKEYRESPONSE']._serialized_end=798
+  _globals['_DATABASEAPIKEY']._serialized_start=801
+  _globals['_DATABASEAPIKEY']._serialized_end=1309
+  _globals['_DATABASEAPIKEYSERVICE']._serialized_start=1312
+  _globals['_DATABASEAPIKEYSERVICE']._serialized_end=2102
 # @@protoc_insertion_point(module_scope)

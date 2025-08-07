@@ -12,10 +12,10 @@ import "qdrant/cloud/serverless/collection/v1/collection_config.proto";
 service CollectionService {
   // ListCollections returns all collections for the authenticated user
   // Required Permissions:
-  // - write:serverless
+  // - read:serverless
   rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/collections"};
   }
@@ -47,10 +47,10 @@ service CollectionService {
   }
   // DeleteCollection removes a collection by ID
   // Required Permissions:
-  // - write:serverless
+  // - delete:serverless
   rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "delete:serverless";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"};
   }
@@ -72,13 +72,13 @@ message ListCollectionsResponse {
 // CreateCollectionRequest defines parameters for creating a new collection
 message CreateCollectionRequest {
   // Collection represents a vector search collection in the Qdrant serverless environment
-  Collection collection = 1;
+  Collection collection = 1 [(buf.validate.field).required = true];
 }
 
 // CollectionResponse provides details about a created collection
 message CreateCollectionResponse {
   // Collection represents a vector search collection in the Qdrant serverless environment
-  Collection collection = 1;
+  Collection collection = 1 [(buf.validate.field).required = true];
 }
 
 // Upgrade limits of the specified collection
@@ -146,7 +146,7 @@ message Collection {
   // Cloud provider region where the collection is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // After creation, this field cannot be changed.
-  string cloud_provider_region_id = 11;
+  string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
   // Configuration parameters
   CollectionConfiguration configuration = 20;
   // Status of the collection
@@ -170,7 +170,7 @@ enum CollectionStatePhase {
 // It provides status information, error details (if any), and endpoint access information.
 message CollectionState {
   // The current operational status of the collection.
-  CollectionStatePhase phase = 1;
+  CollectionStatePhase phase = 1 [(buf.validate.field).enum.defined_only = true];
   // Descriptive message explaining any errors or issues with the collection.
   // Empty when the collection is operating normally.
   string reason = 2;
@@ -185,7 +185,7 @@ message CollectionEndpoint {
   // URL to access the qdrant collection (aka serverless database) without port
   string url = 1 [(buf.validate.field).string = {address: true}];
   // The port to use for HTTP REST calls (6333)
-  int32 rest_port = 2;
+  int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
   // The port to use for gRPC calls (6334)
-  int32 grpc_port = 3;
+  int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
 }

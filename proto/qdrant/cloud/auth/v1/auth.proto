@@ -59,13 +59,13 @@ message ListManagementKeysResponse {
 // CreateManagementKeyRequest is the request for the CreateManagementKey function
 message CreateManagementKeyRequest {
   // The actual management key.
-  ManagementKey management_key = 1;
+  ManagementKey management_key = 1 [(buf.validate.field).required = true];
 }
 
 // CreateManagementKeyResponse is the response from the CreateManagementKey function
 message CreateManagementKeyResponse {
   // The actual management key.
-  ManagementKey management_key = 1;
+  ManagementKey management_key = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteManagementKeyRequest is the request for the DeleteManagementKey function
@@ -91,7 +91,7 @@ message ManagementKey {
   // This is a read-only field and will be available after a management key is created.
   string id = 1;
   option (buf.validate.message).cel = {
-    id: "api_key.id"
+    id: "management_key.id"
     message: "value must be a valid UUID"
     expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
   };
@@ -104,6 +104,11 @@ message ManagementKey {
   // Prefix for the management key, this represents the first bytes of the key.
   // This is a read-only field and will be available after a management key is created.
   string prefix = 4;
+  option (buf.validate.message).cel = {
+    id: "management_key.prefix"
+    message: "prefix must not be empty"
+    expression: "this.prefix.size() > 0 || !has(this.created_at)"
+  };
   // The value of the key, to be used to authenticate requests to the Qdrant Cloud API.
   // This is a read-only field and will be available only once in the response of CreateManagementKey.
   // You should securely store this key and it should be handled as a secret.

@@ -44,7 +44,7 @@ class CollectionServiceServicer(object):
     def ListCollections(self, request, context):
         """ListCollections returns all collections for the authenticated user
         Required Permissions:
-        - write:serverless
+        - read:serverless
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -71,7 +71,7 @@ class CollectionServiceServicer(object):
     def DeleteCollection(self, request, context):
         """DeleteCollection removes a collection by ID
         Required Permissions:
-        - write:serverless
+        - delete:serverless
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

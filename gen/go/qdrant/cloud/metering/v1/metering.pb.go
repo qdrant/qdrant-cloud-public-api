@@ -474,31 +474,34 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x04year\x18\x02 \x01(\x05B\v\xbaH\b\x1a\x06\x18\xb8\x17(\xd0\x0fR\x04year\x12\x1f\n" +
 	"\x05month\x18\x03 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\"U\n" +
 	"\x15ListMeteringsResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.metering.v1.MeteringItemR\x05items\"\x8b\x01\n" +
-	"\x16MonthlyMeteringSummary\x12\x12\n" +
-	"\x04year\x18\x01 \x01(\x05R\x04year\x12\x14\n" +
-	"\x05month\x18\x02 \x01(\x05R\x05month\x12+\n" +
-	"\x11amount_millicents\x18\x03 \x01(\x03R\x10amountMillicents\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\"\x8c\x05\n" +
-	"\fMeteringItem\x12\x1d\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.metering.v1.MeteringItemR\x05items\"\xc2\x01\n" +
+	"\x16MonthlyMeteringSummary\x12\x1f\n" +
+	"\x04year\x18\x01 \x01(\x05B\v\xbaH\b\x1a\x06\x18\xb8\x17(\xd0\x0fR\x04year\x12\x1f\n" +
+	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x124\n" +
+	"\x11amount_millicents\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
+	"\bcurrency\x18\x04 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x97\a\n" +
+	"\fMeteringItem\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\x12\x1d\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12!\n" +
-	"\fcluster_name\x18\x03 \x01(\tR\vclusterName\x129\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
+	"\fcluster_name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vclusterName\x12A\n" +
 	"\n" +
-	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
-	"\x12billable_entity_id\x18\x06 \x01(\tR\x10billableEntityId\x120\n" +
-	"\x14billable_entity_type\x18\a \x01(\tR\x12billableEntityType\x12$\n" +
-	"\x0eprice_per_hour\x18\b \x01(\x05R\fpricePerHour\x12\x1f\n" +
-	"\vusage_hours\x18\t \x01(\x01R\n" +
-	"usageHours\x12+\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tstartTime\x12=\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\aendTime\x126\n" +
+	"\x12billable_entity_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10billableEntityId\x129\n" +
+	"\x14billable_entity_type\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12-\n" +
+	"\x0eprice_per_hour\x18\b \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\fpricePerHour\x12/\n" +
+	"\vusage_hours\x18\t \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
+	"usageHours\x124\n" +
 	"\x11amount_millicents\x18\n" +
-	" \x01(\x03R\x10amountMillicents\x12A\n" +
-	"\x1adiscount_amount_millicents\x18\v \x01(\x03H\x00R\x18discountAmountMillicents\x88\x01\x01\x12;\n" +
-	"\x17discount_amount_percent\x18\f \x01(\x01H\x01R\x15discountAmountPercent\x88\x01\x01\x12\x1a\n" +
-	"\bcurrency\x18\r \x01(\tR\bcurrencyB\x1d\n" +
+	" \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x12J\n" +
+	"\x1adiscount_amount_millicents\x18\v \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
+	"\x17discount_amount_percent\x18\f \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x15discountAmountPercent\x88\x01\x01\x120\n" +
+	"\bcurrency\x18\r \x01(\tB\x14\xbaH\x11r\x0f2\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency:o\xbaHl\x1aj\n" +
+	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xc7\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +

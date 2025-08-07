@@ -62,13 +62,13 @@ message ListDatabaseApiKeysResponse {
 // CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyRequest {
   // The actual database api key.
-  DatabaseApiKey database_api_key = 1;
+  DatabaseApiKey database_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyResponse {
   // The actual database api key.
-  DatabaseApiKey database_api_key = 1;
+  DatabaseApiKey database_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
@@ -142,9 +142,19 @@ message DatabaseApiKey {
   // The email of the user who created the database api key.
   // This is a read-only field and will be available after a database api key is created.
   string created_by_email = 8;
+  option (buf.validate.message).cel = {
+    id: "database_api_key.created_by_email"
+    message: "created_by_email must not be empty"
+    expression: "this.created_by_email.size() > 0 || !has(this.created_at)"
+  };
   // Postfix for the database api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a database api key is created.
   string postfix = 9;
+  option (buf.validate.message).cel = {
+    id: "database_api_key.postfix"
+    message: "postfix must not be empty"
+    expression: "this.postfix.size() > 0 || !has(this.created_at)"
+  };
   // The key for the database api key.
   // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
   // You should securely store this key and it should be handled as a secret.
@@ -157,6 +167,7 @@ message AccessRule {
   // Defines the scope of the access rule, determining whether it applies globally
   // to the entire database or is restricted to a specific collection.
   oneof scope {
+    option (buf.validate.oneof).required = true;
     // A rule granting global access to the entire database.
     GlobalAccessRule global_access = 1;
     // A rule granting access to a specific collection in the database.
@@ -180,7 +191,10 @@ enum GlobalAccessRuleAccessType {
 message GlobalAccessRule {
   // The type of access granted at the global level.
   // This is a required field.
-  GlobalAccessRuleAccessType access_type = 1;
+  GlobalAccessRuleAccessType access_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.
@@ -206,5 +220,8 @@ message CollectionAccessRule {
   }];
   // The type of access granted for the collection.
   // This is a required field.
-  CollectionAccessRuleAccessType access_type = 2;
+  CollectionAccessRuleAccessType access_type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }

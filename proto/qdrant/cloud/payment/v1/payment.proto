@@ -59,7 +59,7 @@ service PaymentService {
   // - delete:payment_information
   rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (DeletePaymentMethodResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    option (qdrant.cloud.common.v1.permissions) = "delete:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
   }
@@ -111,7 +111,7 @@ message GetPaymentMethodRequest {
 // Response containing the payment method.
 message GetPaymentMethodResponse {
   // The actual payment method.
-  PaymentMethod payment_method = 1;
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
 }
 
 // CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
@@ -124,19 +124,24 @@ message CreatePaymentMethodRequest {
 // CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
 message CreatePaymentMethodResponse {
   // The created payment method.
-  PaymentMethod payment_method = 1;
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
 }
 
 // UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function
 message UpdatePaymentMethodRequest {
   // The payment method to update.
-  PaymentMethod payment_method = 2;
+  PaymentMethod payment_method = 2 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_payment_method.id_present"
+    message: "payment_method.id is required for an update"
+    expression: "this.payment_method.id != ''"
+  };
 }
 
 // UpdatePaymentMethodResponse is the response from the UpdatePaymentMethod function
 message UpdatePaymentMethodResponse {
   // The updated payment method.
-  PaymentMethod payment_method = 1;
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
 }
 
 // DeletePaymentMethodRequest is the request for the DeletePaymentMethod function
@@ -219,7 +224,10 @@ message PaymentMethod {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // The type of the payment method provider.
   // This is a required field.
-  PaymentProviderType type = 3;
+  PaymentProviderType type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The customer account identifier in the payment provider system.
   // This is read-only field.
   optional string payment_provider_id = 4;
@@ -243,7 +251,7 @@ message PaymentMethod {
   bool is_default = 10;
   // Payment method status.
   // This is read-only field.
-  optional PaymentMethodStatus status = 11;
+  optional PaymentMethodStatus status = 11 [(buf.validate.field).enum.defined_only = true];
 }
 
 // PaymentProviderType defines the type of payment method.
@@ -306,19 +314,25 @@ message PaymentMethodDetails {
   // The identifier of the payment method.
   string id = 1 [(buf.validate.field).string = {min_len: 1}];
   // Card details.
-  Card card = 2;
+  Card card = 2 [(buf.validate.field).required = true];
 }
 
 // Represents payment method card details
 message Card {
   // The brand of the card (e.g., "Visa", "Mastercard").
-  string brand = 1;
+  string brand = 1 [(buf.validate.field).string.min_len = 1];
   // The last 4 digits of the card number.
-  string last4 = 2;
+  string last4 = 2 [(buf.validate.field).string = {
+    len: 4
+    pattern: "^[0-9]{4}$"
+  }];
   // The expiration month of the card.
-  int32 expiration_month = 3;
+  int32 expiration_month = 3 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 12
+  }];
   // The expiration year of the card.
-  int32 expiration_year = 4;
+  int32 expiration_year = 4 [(buf.validate.field).int32.gte = 2000];
 }
 
 // Represents the status of a SetupIntent in Stripe.

@@ -57,7 +57,7 @@ class CollectionApiKeyServiceServicer(object):
     def DeleteCollectionApiKey(self, request, context):
         """DeleteCollectionApiKey removes an API key from a collection
         Required Permissions:
-        - write:serverless_api_keys
+        - delete:serverless_api_keys
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -7,7 +7,7 @@ import { CollectionService } from "./collection_pb.js";
 /**
  * ListCollections returns all collections for the authenticated user
  * Required Permissions:
- * - write:serverless
+ * - read:serverless
  *
  * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.ListCollections
  */
@@ -34,7 +34,7 @@ export const upgradeCollection = CollectionService.method.upgradeCollection;
 /**
  * DeleteCollection removes a collection by ID
  * Required Permissions:
- * - write:serverless
+ * - delete:serverless
  *
  * @generated from rpc qdrant.cloud.serverless.collection.v1.CollectionService.DeleteCollection
  */

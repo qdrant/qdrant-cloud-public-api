@@ -1405,17 +1405,18 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x17GetPaymentMethodRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"i\n" +
-	"\x18GetPaymentMethodResponse\x12M\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"s\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"q\n" +
+	"\x18GetPaymentMethodResponse\x12U\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"s\n" +
 	"\x1aCreatePaymentMethodRequest\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"l\n" +
-	"\x1bCreatePaymentMethodResponse\x12M\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"k\n" +
-	"\x1aUpdatePaymentMethodRequest\x12M\n" +
-	"\x0epayment_method\x18\x02 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"l\n" +
-	"\x1bUpdatePaymentMethodResponse\x12M\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodR\rpaymentMethod\"{\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"t\n" +
+	"\x1bCreatePaymentMethodResponse\x12U\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xe7\x01\n" +
+	"\x1aUpdatePaymentMethodRequest\x12U\n" +
+	"\x0epayment_method\x18\x02 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod:r\xbaHo\x1am\n" +
+	" update_payment_method.id_present\x12+payment_method.id is required for an update\x1a\x1cthis.payment_method.id != ''\"t\n" +
+	"\x1bUpdatePaymentMethodResponse\x12U\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"{\n" +
 	"\x1aDeletePaymentMethodRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
@@ -1441,12 +1442,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xa1\a\n" +
+	"\x04_url\"\xb7\a\n" +
 	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12@\n" +
-	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeR\x04type\x123\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12L\n" +
+	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x123\n" +
 	"\x13payment_provider_id\x18\x04 \x01(\tH\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
 	"\x16payment_method_details\x18\x05 \x01(\v2-.qdrant.cloud.payment.v1.PaymentMethodDetailsH\x01R\x14paymentMethodDetails\x88\x01\x01\x12U\n" +
 	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x129\n" +
@@ -1456,8 +1458,8 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05taxId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\x12I\n" +
-	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusH\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
+	" \x01(\bR\tisDefault\x12S\n" +
+	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\b\xbaH\x05\x82\x01\x02\x10\x01H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
 	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
 	"\x14_payment_provider_idB\x19\n" +
 	"\x17_payment_method_detailsB\x12\n" +
@@ -1478,15 +1480,16 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x15tax_supported_country\x18\n" +
 	" \x01(\bR\x13taxSupportedCountryB\b\n" +
 	"\x06_line2B\x0e\n" +
-	"\f_postal_code\"b\n" +
+	"\f_postal_code\"j\n" +
 	"\x14PaymentMethodDetails\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x121\n" +
-	"\x04card\x18\x02 \x01(\v2\x1d.qdrant.cloud.payment.v1.CardR\x04card\"\x86\x01\n" +
-	"\x04Card\x12\x14\n" +
-	"\x05brand\x18\x01 \x01(\tR\x05brand\x12\x14\n" +
-	"\x05last4\x18\x02 \x01(\tR\x05last4\x12)\n" +
-	"\x10expiration_month\x18\x03 \x01(\x05R\x0fexpirationMonth\x12'\n" +
-	"\x0fexpiration_year\x18\x04 \x01(\x05R\x0eexpirationYear*\x83\x02\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x129\n" +
+	"\x04card\x18\x02 \x01(\v2\x1d.qdrant.cloud.payment.v1.CardB\x06\xbaH\x03\xc8\x01\x01R\x04card\"\xba\x01\n" +
+	"\x04Card\x12\x1d\n" +
+	"\x05brand\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05brand\x12*\n" +
+	"\x05last4\x18\x02 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
+	"^[0-9]{4}$\x98\x01\x04R\x05last4\x124\n" +
+	"\x10expiration_month\x18\x03 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x0fexpirationMonth\x121\n" +
+	"\x0fexpiration_year\x18\x04 \x01(\x05B\b\xbaH\x05\x1a\x03(\xd0\x0fR\x0eexpirationYear*\x83\x02\n" +
 	"\x13PaymentProviderType\x12%\n" +
 	"!PAYMENT_PROVIDER_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cPAYMENT_PROVIDER_TYPE_STRIPE\x10\x01\x12)\n" +
@@ -1506,13 +1509,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xe6\r\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xe7\r\n" +
 	"\x0ePaymentService\x12\xd8\x01\n" +
 	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\xe6\x01\n" +
 	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"m\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\x89\x02\n" +
 	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\x86\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\x82\xd3\xe4\x93\x02F\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xa0\x02\n" +
-	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\x9d\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\xf0\x01\n" +
-	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"n\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xf7\x01\n" +
+	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\x9d\x01\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\xf1\x01\n" +
+	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"o\x8a\xb5\x18\x1adelete:payment_information\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xf7\x01\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"f\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf3\x01\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"Y\x8a\xb5\x18\x19write:payment_information\x82\xd3\xe4\x93\x026\"4/api/payment/v1/accounts/{account_id}/stripe-sessionB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.payment.v1B\fPaymentProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/payment/v1;paymentv1\xa2\x02\x03QCP\xaa\x02\x17Qdrant.Cloud.Payment.V1\xca\x02\x17Qdrant\\Cloud\\Payment\\V1\xe2\x02#Qdrant\\Cloud\\Payment\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Payment::V1b\x06proto3"

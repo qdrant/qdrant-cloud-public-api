@@ -781,18 +781,18 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"a\n" +
 	"\x1bListDatabaseApiKeysResponse\x12B\n" +
-	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x05items\"u\n" +
-	"\x1bCreateDatabaseApiKeyRequest\x12V\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x0edatabaseApiKey\"v\n" +
-	"\x1cCreateDatabaseApiKeyResponse\x12V\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x0edatabaseApiKey\"\xa8\x01\n" +
+	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x05items\"}\n" +
+	"\x1bCreateDatabaseApiKeyRequest\x12^\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"~\n" +
+	"\x1cCreateDatabaseApiKeyResponse\x12^\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"\xa8\x01\n" +
 	"\x1bDeleteDatabaseApiKeyRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x127\n" +
 	"\x13database_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\x8e\b\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\xfc\t\n" +
 	"\x0eDatabaseApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -809,22 +809,26 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x10created_by_email\x18\b \x01(\tR\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key:\xb6\x04\xbaH\xb2\x04\x1a\xac\x01\n" +
+	" \x01(\tR\x03key:\xa4\x06\xbaH\xa0\x06\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xe0\x01\n" +
 	"\x1eno_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\x9d\x01\n" +
-	"\x16only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1B\r\n" +
-	"\v_expires_at\"\xcf\x01\n" +
+	"\x16only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1a\x82\x01\n" +
+	"!database_api_key.created_by_email\x12\"created_by_email must not be empty\x1a9this.created_by_email.size() > 0 || !has(this.created_at)\x1ag\n" +
+	"\x18database_api_key.postfix\x12\x19postfix must not be empty\x1a0this.postfix.size() > 0 || !has(this.created_at)B\r\n" +
+	"\v_expires_at\"\xd6\x01\n" +
 	"\n" +
 	"AccessRule\x12U\n" +
 	"\rglobal_access\x18\x01 \x01(\v2..qdrant.cloud.cluster.auth.v2.GlobalAccessRuleH\x00R\fglobalAccess\x12a\n" +
-	"\x11collection_access\x18\x02 \x01(\v22.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleH\x00R\x10collectionAccessB\a\n" +
-	"\x05scope\"m\n" +
-	"\x10GlobalAccessRule\x12Y\n" +
-	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeR\n" +
-	"accessType\"\xbb\x01\n" +
+	"\x11collection_access\x18\x02 \x01(\v22.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleH\x00R\x10collectionAccessB\x0e\n" +
+	"\x05scope\x12\x05\xbaH\x02\b\x01\"y\n" +
+	"\x10GlobalAccessRule\x12e\n" +
+	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
+	"accessType\"\xc7\x01\n" +
 	"\x14CollectionAccessRule\x12D\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12]\n" +
-	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeR\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12i\n" +
+	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
 	"accessType*\xa5\x01\n" +
 	"\x1aGlobalAccessRuleAccessType\x12.\n" +
 	"*GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +

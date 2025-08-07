@@ -33,7 +33,7 @@ const (
 type CollectionServiceClient interface {
 	// ListCollections returns all collections for the authenticated user
 	// Required Permissions:
-	// - write:serverless
+	// - read:serverless
 	ListCollections(ctx context.Context, in *ListCollectionsRequest, opts ...grpc.CallOption) (*ListCollectionsResponse, error)
 	// CreateCollection creates a new collection with the specified configuration
 	// Required Permissions:
@@ -45,7 +45,7 @@ type CollectionServiceClient interface {
 	UpgradeCollection(ctx context.Context, in *UpgradeCollectionRequest, opts ...grpc.CallOption) (*UpgradeCollectionResponse, error)
 	// DeleteCollection removes a collection by ID
 	// Required Permissions:
-	// - write:serverless
+	// - delete:serverless
 	DeleteCollection(ctx context.Context, in *DeleteCollectionRequest, opts ...grpc.CallOption) (*DeleteCollectionResponse, error)
 }
 
@@ -105,7 +105,7 @@ func (c *collectionServiceClient) DeleteCollection(ctx context.Context, in *Dele
 type CollectionServiceServer interface {
 	// ListCollections returns all collections for the authenticated user
 	// Required Permissions:
-	// - write:serverless
+	// - read:serverless
 	ListCollections(context.Context, *ListCollectionsRequest) (*ListCollectionsResponse, error)
 	// CreateCollection creates a new collection with the specified configuration
 	// Required Permissions:
@@ -117,7 +117,7 @@ type CollectionServiceServer interface {
 	UpgradeCollection(context.Context, *UpgradeCollectionRequest) (*UpgradeCollectionResponse, error)
 	// DeleteCollection removes a collection by ID
 	// Required Permissions:
-	// - write:serverless
+	// - delete:serverless
 	DeleteCollection(context.Context, *DeleteCollectionRequest) (*DeleteCollectionResponse, error)
 	mustEmbedUnimplementedCollectionServiceServer()
 }

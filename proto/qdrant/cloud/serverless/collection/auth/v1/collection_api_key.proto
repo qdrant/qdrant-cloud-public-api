@@ -28,16 +28,16 @@ service CollectionApiKeyService {
     option (qdrant.cloud.common.v1.account_id_expression) = "collection_api_key.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
-      post: "/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_id}/api-keys"
+      post: "/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_api_key.collection_id}/api-keys"
       body: "*"
     };
   }
   // DeleteCollectionApiKey removes an API key from a collection
   // Required Permissions:
-  // - write:serverless_api_keys
+  // - delete:serverless_api_keys
   rpc DeleteCollectionApiKey(DeleteCollectionApiKeyRequest) returns (DeleteCollectionApiKeyResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    option (qdrant.cloud.common.v1.permissions) = "delete:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}"};
   }
@@ -63,19 +63,19 @@ message ListCollectionApiKeysResponse {
 message CreateCollectionApiKeyRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove! However this is a breaking change, so will be done in separate PR
   // Collection the key will access (in GUID format).
   // This is a required field.
-  string collection_id = 2 [(buf.validate.field).string = {uuid: true}];
+  string collection_id = 2 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove!
   // The API key to create.
   // This is a required field.
-  CollectionApiKey collection_api_key = 3;
+  CollectionApiKey collection_api_key = 3 [(buf.validate.field).required = true]; //TODO: Renumber to 1
 }
 
 // CollectionApiKeyResponse provides the API key after creation
 message CreateCollectionApiKeyResponse {
   // The newly created API key value
-  CollectionApiKey collection_api_key = 1;
+  CollectionApiKey collection_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteCollectionApiKeyRequest identifies the API key to delete
@@ -141,13 +141,26 @@ message CollectionApiKey {
   optional google.protobuf.Timestamp expires_at = 6;
   // The type of access granted for the collection.
   // This is a required field.
-  CollectionApiKeyAccessType access_type = 7;
+  CollectionApiKeyAccessType access_type = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The email of the user who created the collection api key.
   // This is a read-only field and will be available after a collection api key is created.
   string created_by_email = 8;
+  option (buf.validate.message).cel = {
+    id: "collection_api_key.created_by_email"
+    message: "created_by_email must not be empty"
+    expression: "this.created_by_email.size() > 0 || !has(this.created_at)"
+  };
   // Postfix for the collection api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a collection api key is created.
   string postfix = 9;
+  option (buf.validate.message).cel = {
+    id: "collection_api_key.postfix"
+    message: "postfix must not be empty"
+    expression: "this.postfix.size() > 0 || !has(this.created_at)"
+  };
   // The key for the collection api key.
   // This is a read-only field and will be available only once in the response of CreateCollectionApiKey.
   // You should securely store this key and it should be handled as a secret.

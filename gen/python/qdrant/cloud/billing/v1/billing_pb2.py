@@ -28,7 +28,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\">\n\x13ListInvoicesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n\x14ListInvoicesResponse\x12\x36\n\x05items\x18\x01 \x03(\x0b\x32 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\x89\x02\n\x07Invoice\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n\x06number\x18\x02 \x01(\tH\x00R\x06number\x88\x01\x01\x12!\n\x0ctotal_amount\x18\x03 \x01(\x03R\x0btotalAmount\x12\x39\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n\x06status\x18\x05 \x01(\x0e\x32&.qdrant.cloud.billing.v1.InvoiceStatusR\x06status\x12\x1c\n\x07pdf_url\x18\x06 \x01(\tH\x01R\x06pdfUrl\x88\x01\x01\x42\t\n\x07_numberB\n\n\x08_pdf_url*\xb6\x01\n\rInvoiceStatus\x12\x1e\n\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n\x13INVOICE_STATUS_PAID\x10\x04\x12 \n\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x05\x32\xd2\x01\n\x0e\x42illingService\x12\xbf\x01\n\x0cListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02\x30\x12./api/billing/v1/accounts/{account_id}/invoicesB\xfe\x01\n\x1b\x63om.qdrant.cloud.billing.v1B\x0c\x42illingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\">\n\x13ListInvoicesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n\x14ListInvoicesResponse\x12\x36\n\x05items\x18\x01 \x03(\x0b\x32 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\xad\x02\n\x07Invoice\x12\x17\n\x02id\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n\x06number\x18\x02 \x01(\tH\x00R\x06number\x88\x01\x01\x12*\n\x0ctotal_amount\x18\x03 \x01(\x03\x42\x07\xbaH\x04\"\x02(\x00R\x0btotalAmount\x12\x41\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12H\n\x06status\x18\x05 \x01(\x0e\x32&.qdrant.cloud.billing.v1.InvoiceStatusB\x08\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1c\n\x07pdf_url\x18\x06 \x01(\tH\x01R\x06pdfUrl\x88\x01\x01\x42\t\n\x07_numberB\n\n\x08_pdf_url*\xb6\x01\n\rInvoiceStatus\x12\x1e\n\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n\x13INVOICE_STATUS_PAID\x10\x04\x12 \n\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x05\x32\xd2\x01\n\x0e\x42illingService\x12\xbf\x01\n\x0cListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02\x30\x12./api/billing/v1/accounts/{account_id}/invoicesB\xfe\x01\n\x1b\x63om.qdrant.cloud.billing.v1B\x0c\x42illingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,16 +38,24 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'\n\033com.qdrant.cloud.billing.v1B\014BillingProtoP\001ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\242\002\003QCB\252\002\027Qdrant.Cloud.Billing.V1\312\002\027Qdrant\\Cloud\\Billing\\V1\342\002#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\352\002\032Qdrant::Cloud::Billing::V1'
   _globals['_LISTINVOICESREQUEST'].fields_by_name['account_id']._loaded_options = None
   _globals['_LISTINVOICESREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
+  _globals['_INVOICE'].fields_by_name['id']._loaded_options = None
+  _globals['_INVOICE'].fields_by_name['id']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_INVOICE'].fields_by_name['total_amount']._loaded_options = None
+  _globals['_INVOICE'].fields_by_name['total_amount']._serialized_options = b'\272H\004\"\002(\000'
+  _globals['_INVOICE'].fields_by_name['created_at']._loaded_options = None
+  _globals['_INVOICE'].fields_by_name['created_at']._serialized_options = b'\272H\003\310\001\001'
+  _globals['_INVOICE'].fields_by_name['status']._loaded_options = None
+  _globals['_INVOICE'].fields_by_name['status']._serialized_options = b'\272H\005\202\001\002\020\001'
   _globals['_BILLINGSERVICE'].methods_by_name['ListInvoices']._loaded_options = None
   _globals['_BILLINGSERVICE'].methods_by_name['ListInvoices']._serialized_options = b'\212\265\030\030read:payment_information\202\323\344\223\0020\022./api/billing/v1/accounts/{account_id}/invoices'
-  _globals['_INVOICESTATUS']._serialized_start=608
-  _globals['_INVOICESTATUS']._serialized_end=790
+  _globals['_INVOICESTATUS']._serialized_start=644
+  _globals['_INVOICESTATUS']._serialized_end=826
   _globals['_LISTINVOICESREQUEST']._serialized_start=195
   _globals['_LISTINVOICESREQUEST']._serialized_end=257
   _globals['_LISTINVOICESRESPONSE']._serialized_start=259
   _globals['_LISTINVOICESRESPONSE']._serialized_end=337
   _globals['_INVOICE']._serialized_start=340
-  _globals['_INVOICE']._serialized_end=605
-  _globals['_BILLINGSERVICE']._serialized_start=793
-  _globals['_BILLINGSERVICE']._serialized_end=1003
+  _globals['_INVOICE']._serialized_end=641
+  _globals['_BILLINGSERVICE']._serialized_start=829
+  _globals['_BILLINGSERVICE']._serialized_end=1039
 # @@protoc_insertion_point(module_scope)

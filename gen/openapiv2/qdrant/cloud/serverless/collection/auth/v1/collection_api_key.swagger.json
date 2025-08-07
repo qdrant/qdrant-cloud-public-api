@@ -57,7 +57,7 @@
     },
     "/api/serverless/auth/v1/accounts/{accountId}/collections/{collectionId}/api-keys/{collectionApiKeyId}": {
       "delete": {
-        "summary": "DeleteCollectionApiKey removes an API key from a collection\nRequired Permissions:\n- write:serverless_api_keys",
+        "summary": "DeleteCollectionApiKey removes an API key from a collection\nRequired Permissions:\n- delete:serverless_api_keys",
         "operationId": "CollectionApiKeyService_DeleteCollectionApiKey",
         "responses": {
           "200": {
@@ -101,7 +101,7 @@
         ]
       }
     },
-    "/api/serverless/auth/v1/accounts/{collectionApiKey.accountId}/collections/{collectionId}/api-keys": {
+    "/api/serverless/auth/v1/accounts/{collectionApiKey.accountId}/collections/{collectionApiKey.collectionId}/api-keys": {
       "post": {
         "summary": "CreateCollectionApiKey creates a new API key for a collection\nRequired Permissions:\n- write:serverless_api_keys",
         "operationId": "CollectionApiKeyService_CreateCollectionApiKey",
@@ -128,8 +128,8 @@
             "type": "string"
           },
           {
-            "name": "collectionId",
-            "description": "Collection the key will access (in GUID format).\nThis is a required field.",
+            "name": "collectionApiKey.collectionId",
+            "description": "The identifier of the collection (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -155,7 +155,11 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+          "description": "The identifier of the account (in GUID format).\nThis is a required field.\n\nTODO: Remove! However this is a breaking change, so will be done in separate PR"
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Collection the key will access (in GUID format).\nThis is a required field.\n\nTODO: Remove!"
         },
         "collectionApiKey": {
           "type": "object",
@@ -168,10 +172,6 @@
               "type": "string",
               "format": "date-time",
               "description": "Timestamp when the collection api key was created.\nThis is a read-only field and will be available after a collection api key is created."
-            },
-            "collectionId": {
-              "type": "string",
-              "description": "The identifier of the collection (in GUID format).\nThis is a required field."
             },
             "name": {
               "type": "string",
@@ -199,7 +199,7 @@
               "description": "The key for the collection api key.\nThis is a read-only field and will be available only once in the response of CreateCollectionApiKey.\nYou should securely store this key and it should be handled as a secret."
             }
           },
-          "description": "The API key to create.\nThis is a required field.",
+          "description": "TODO: Renumber to 1",
           "title": "The API key to create.\nThis is a required field."
         }
       },

@@ -40,7 +40,7 @@ type CollectionApiKeyServiceClient interface {
 	CreateCollectionApiKey(ctx context.Context, in *CreateCollectionApiKeyRequest, opts ...grpc.CallOption) (*CreateCollectionApiKeyResponse, error)
 	// DeleteCollectionApiKey removes an API key from a collection
 	// Required Permissions:
-	// - write:serverless_api_keys
+	// - delete:serverless_api_keys
 	DeleteCollectionApiKey(ctx context.Context, in *DeleteCollectionApiKeyRequest, opts ...grpc.CallOption) (*DeleteCollectionApiKeyResponse, error)
 }
 
@@ -98,7 +98,7 @@ type CollectionApiKeyServiceServer interface {
 	CreateCollectionApiKey(context.Context, *CreateCollectionApiKeyRequest) (*CreateCollectionApiKeyResponse, error)
 	// DeleteCollectionApiKey removes an API key from a collection
 	// Required Permissions:
-	// - write:serverless_api_keys
+	// - delete:serverless_api_keys
 	DeleteCollectionApiKey(context.Context, *DeleteCollectionApiKeyRequest) (*DeleteCollectionApiKeyResponse, error)
 	mustEmbedUnimplementedCollectionApiKeyServiceServer()
 }

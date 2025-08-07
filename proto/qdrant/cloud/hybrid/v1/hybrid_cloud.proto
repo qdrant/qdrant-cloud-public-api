@@ -124,25 +124,30 @@ message DeleteHybridCloudEnvironmentResponse {
 // UpdateHybridCloudEnvironmentRequest is the request for UpdateHybridCloudEnvironment function
 message UpdateHybridCloudEnvironmentRequest {
   // The actual hybrid cloud environment
-  HybridCloudEnvironment hybrid_cloud_environment = 1;
+  HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_hybrid_cloud_environment.id_present"
+    message: "hybrid_cloud_environment.id is required for an update"
+    expression: "this.hybrid_cloud_environment.id != ''"
+  };
 }
 
 // UpdateHybridCloudEnvironmentResponse is the response for UpdateHybridCloudEnvironment function
 message UpdateHybridCloudEnvironmentResponse {
   // The actual hybrid cloud environment
-  HybridCloudEnvironment hybrid_cloud_environment = 1;
+  HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
 }
 
 // CreateHybridCloudEnvironmentRequest is the request for CreateHybridCloudEnvironment function
 message CreateHybridCloudEnvironmentRequest {
   // The actual hybrid cloud environment
-  HybridCloudEnvironment hybrid_cloud_environment = 1;
+  HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
 }
 
 // CreateHybridCloudEnvironmentResponse is the response for CreateHybridCloudEnvironment function
 message CreateHybridCloudEnvironmentResponse {
   // The actual hybrid cloud environment
-  HybridCloudEnvironment hybrid_cloud_environment = 1;
+  HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
 }
 
 // GetHybridCloudEnvironmentRequest is the request for GetHybridCloudEnvironment function
@@ -159,7 +164,7 @@ message GetHybridCloudEnvironmentRequest {
 // GetHybridCloudEnvironmentResponse is the response for GetHybridCloudEnvironment function
 message GetHybridCloudEnvironmentResponse {
   // The actual hybrid cloud environment
-  HybridCloudEnvironment hybrid_cloud_environment = 1;
+  HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
 }
 
 // ListHybridCloudEnvironmentsRequest is the request for ListHybridCloudEnvironments function
@@ -219,34 +224,37 @@ message HybridCloudEnvironmentConfiguration {
     pattern: "^[a-zA-Z0-9-]+$"
   }];
   // optional HTTP proxy URL
-  optional string http_proxy_url = 5;
+  optional string http_proxy_url = 5 [(buf.validate.field).string.uri = true];
   // optional HTTPS proxy URL
-  optional string https_proxy_url = 6;
+  optional string https_proxy_url = 6 [(buf.validate.field).string.uri = true];
   // no proxy config
   repeated string no_proxy_configs = 7;
   // Container registry URL
-  optional string container_registry_url = 8;
+  optional string container_registry_url = 8 [(buf.validate.field).string.uri = true];
   // Chart registry URL
-  optional string chart_repository_url = 9;
+  optional string chart_repository_url = 9 [(buf.validate.field).string.uri = true];
   // k8s secret name containing registry credentials for accessing container and helm repositories
   optional string registry_secret_name = 10;
   // CA certificates
   optional string ca_certificates = 11;
   // Default database storage class, if omitted
   // kubernetes cluster default is used
-  optional string database_storage_class = 12;
+  optional string database_storage_class = 12 [(buf.validate.field).string.min_len = 1];
   // Default snapshot storage class, if omitted
   // kubernetes cluster default is used
-  optional string snapshot_storage_class = 13;
+  optional string snapshot_storage_class = 13 [(buf.validate.field).string.min_len = 1];
   // Default volume snapshot storage class, if omitted
   // csi-snapclass is used
-  optional string volume_snapshot_storage_class = 14;
+  optional string volume_snapshot_storage_class = 14 [(buf.validate.field).string.min_len = 1];
   // Optional Ingress rules for Qdrant databases
   repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 15;
   // Optional Egress rules for Qdrant databases
   repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
   // Log level for deployed components
-  optional HybridCloudEnvironmentConfigurationLogLevel log_level = 21;
+  optional HybridCloudEnvironmentConfigurationLogLevel log_level = 21 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // List of tolerations for clusters in this hybrid cloud environment
   repeated qdrant.cloud.cluster.v1.Toleration tolerations = 22;
   // Node selector for Qdrant nodes in this hybrid cloud environment
@@ -270,13 +278,13 @@ enum HybridCloudEnvironmentConfigurationLogLevel {
 // Status of a hybrid cloud environment, read only
 message HybridCloudEnvironmentStatus {
   // Timestamp when the hybrid cloud environment status was modified the last time.
-  optional google.protobuf.Timestamp last_modified_at = 1;
+  google.protobuf.Timestamp last_modified_at = 1 [(buf.validate.field).required = true];
   // Phase
-  HybridCloudEnvironmentStatusPhase phase = 3;
+  HybridCloudEnvironmentStatusPhase phase = 3 [(buf.validate.field).enum.defined_only = true];
   // Kubernetes version
-  string kubernetes_version = 4;
+  string kubernetes_version = 4 [(buf.validate.field).string.min_len = 1];
   // Kubernetes distribution
-  optional KubernetesDistribution kubernetes_distribution = 10;
+  optional KubernetesDistribution kubernetes_distribution = 10 [(buf.validate.field).enum.defined_only = true];
   // Number of kubernetes nodes
   uint32 number_of_nodes = 5;
   // Capabilities of hybrid cloud environment
@@ -284,7 +292,7 @@ message HybridCloudEnvironmentStatus {
   // Status of deployed component
   repeated HybridCloudEnvironmentComponentStatus component_statuses = 7;
   // Report if the hybrid cloud environment is ready for Qdrant cluster creation
-  QdrantClusterCreationStatus cluster_creation_readiness = 9;
+  QdrantClusterCreationStatus cluster_creation_readiness = 9 [(buf.validate.field).enum.defined_only = true];
   // Status message
   optional string message = 11;
   // Storage classes available in the hybrid cloud environment
@@ -326,13 +334,13 @@ message HybridCloudEnvironmentCapabilities {
 // Status of a component deployed in the hybrid cloud environment
 message HybridCloudEnvironmentComponentStatus {
   // Component name
-  string name = 1;
+  string name = 1 [(buf.validate.field).string.min_len = 1];
   // Component namespace
-  string namespace = 2;
+  string namespace = 2 [(buf.validate.field).string.min_len = 1];
   // Component version
   optional string version = 3;
   // Phase
-  HybridCloudEnvironmentComponentStatusPhase phase = 4;
+  HybridCloudEnvironmentComponentStatusPhase phase = 4 [(buf.validate.field).enum.defined_only = true];
   // Status message
   optional string message = 5;
 }
@@ -352,11 +360,11 @@ enum HybridCloudEnvironmentComponentStatusPhase {
 // A storage class available in hybrid cloud environment
 message HybridCloudEnvironmentStorageClass {
   // Name specifies the name of the storage class
-  string name = 1;
+  string name = 1 [(buf.validate.field).string.min_len = 1];
   // Default specifies whether the storage class is the default storage class
   bool default = 2;
   // Provisioner specifies the provisioner of the storage class
-  string provisioner = 3;
+  string provisioner = 3 [(buf.validate.field).string.min_len = 1];
   // It specifies whether the storage class allows volume expansion
   bool allow_volume_expansion = 4;
   // Specifies the reclaim policy of the storage class
@@ -400,9 +408,9 @@ enum KubernetesDistribution {
 // Volume snapshot class available in the hybrid cloud environment
 message HybridCloudEnvironmentVolumeSnapshotClass {
   // Name of the volume snapshot class
-  string name = 1;
+  string name = 1 [(buf.validate.field).string.min_len = 1];
   // Driver of the volume snapshot class
-  string driver = 2;
+  string driver = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // Info about a node of a hybrid cloud environment

@@ -413,28 +413,28 @@ const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n" +
 	"\x1bListDatabaseApiKeysResponse\x12B\n" +
-	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"u\n" +
-	"\x1bCreateDatabaseApiKeyRequest\x12V\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x0edatabaseApiKey\"v\n" +
-	"\x1cCreateDatabaseApiKeyResponse\x12V\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x0edatabaseApiKey\"\x7f\n" +
+	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"}\n" +
+	"\x1bCreateDatabaseApiKeyRequest\x12^\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"~\n" +
+	"\x1cCreateDatabaseApiKeyResponse\x12^\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"\x7f\n" +
 	"\x1bDeleteDatabaseApiKeyRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x127\n" +
 	"\x13database_api_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\x94\x03\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\xfc\x03\n" +
 	"\x0eDatabaseApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12.\n" +
-	"\vcluster_ids\x18\x04 \x03(\tB\r\xbaH\n" +
-	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x120\n" +
+	"\vcluster_ids\x18\x04 \x03(\tB\x0f\xbaH\f\x92\x01\t\b\x01\"\x05r\x03\xb0\x01\x01R\n" +
 	"clusterIds\x12\x16\n" +
 	"\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x10\n" +
-	"\x03key\x18\x06 \x01(\tR\x03key:\xb3\x01\xbaH\xaf\x01\x1a\xac\x01\n" +
-	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)2\x96\x06\n" +
+	"\x03key\x18\x06 \x01(\tR\x03key:\x99\x02\xbaH\x95\x02\x1a\xac\x01\n" +
+	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ad\n" +
+	"\x17database_api_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\x96\x06\n" +
 	"\x15DatabaseApiKeyService\x12\xe1\x01\n" +
 	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v1/accounts/{account_id}/database-api-keys\x12\x99\x02\n" +
 	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyResponse\"\x89\x01\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys\x12\xfc\x01\n" +

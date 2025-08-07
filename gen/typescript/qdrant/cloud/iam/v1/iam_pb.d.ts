@@ -706,7 +706,6 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 
   /**
    * The permissions associated with this role.
-   * Must contain at least one permission.
    *
    * @generated from field: repeated string permissions = 8;
    */

@@ -402,16 +402,16 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n" +
 	"\x1aListManagementKeysResponse\x129\n" +
-	"\x05items\x18\x01 \x03(\v2#.qdrant.cloud.auth.v1.ManagementKeyR\x05items\"h\n" +
-	"\x1aCreateManagementKeyRequest\x12J\n" +
-	"\x0emanagement_key\x18\x01 \x01(\v2#.qdrant.cloud.auth.v1.ManagementKeyR\rmanagementKey\"i\n" +
-	"\x1bCreateManagementKeyResponse\x12J\n" +
-	"\x0emanagement_key\x18\x01 \x01(\v2#.qdrant.cloud.auth.v1.ManagementKeyR\rmanagementKey\"{\n" +
+	"\x05items\x18\x01 \x03(\v2#.qdrant.cloud.auth.v1.ManagementKeyR\x05items\"p\n" +
+	"\x1aCreateManagementKeyRequest\x12R\n" +
+	"\x0emanagement_key\x18\x01 \x01(\v2#.qdrant.cloud.auth.v1.ManagementKeyB\x06\xbaH\x03\xc8\x01\x01R\rmanagementKey\"q\n" +
+	"\x1bCreateManagementKeyResponse\x12R\n" +
+	"\x0emanagement_key\x18\x01 \x01(\v2#.qdrant.cloud.auth.v1.ManagementKeyB\x06\xbaH\x03\xc8\x01\x01R\rmanagementKey\"{\n" +
 	"\x1aDeleteManagementKeyRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11management_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fmanagementKeyId\"\x1d\n" +
-	"\x1bDeleteManagementKeyResponse\"\xda\x02\n" +
+	"\x1bDeleteManagementKeyResponse\"\xc5\x03\n" +
 	"\rManagementKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -419,9 +419,9 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
 	"\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n" +
-	"\x03key\x18\x05 \x01(\tR\x03key:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
-	"\n" +
-	"api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)2\xc4\x05\n" +
+	"\x03key\x18\x05 \x01(\tR\x03key:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
+	"\x11management_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ab\n" +
+	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xc4\x05\n" +
 	"\vAuthService\x12\xcb\x01\n" +
 	"\x12ListManagementKeys\x12/.qdrant.cloud.auth.v1.ListManagementKeysRequest\x1a0.qdrant.cloud.auth.v1.ListManagementKeysResponse\"R\x8a\xb5\x18\x14read:management_keys\x82\xd3\xe4\x93\x024\x122/api/auth/v1/accounts/{account_id}/management-keys\x12\xff\x01\n" +
 	"\x13CreateManagementKey\x120.qdrant.cloud.auth.v1.CreateManagementKeyRequest\x1a1.qdrant.cloud.auth.v1.CreateManagementKeyResponse\"\x82\x01\x8a\xb5\x18\x15write:management_keys\x92\xb5\x18\x19management_key.account_id\x82\xd3\xe4\x93\x02F:\x01*\"A/api/auth/v1/accounts/{management_key.account_id}/management-keys\x12\xe4\x01\n" +

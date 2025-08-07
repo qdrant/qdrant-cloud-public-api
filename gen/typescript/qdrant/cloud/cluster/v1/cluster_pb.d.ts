@@ -513,7 +513,7 @@ export declare type Cluster = Message<"qdrant.cloud.cluster.v1.Cluster"> & {
   configuration?: ClusterConfiguration;
 
   /**
-   * Current state of the cluster.
+   * Current state of the cluster (available after the cluster has been created).
    * All fields inside `state` are read-only.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterState state = 100;

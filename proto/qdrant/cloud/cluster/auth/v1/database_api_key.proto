@@ -59,13 +59,13 @@ message ListDatabaseApiKeysResponse {
 // CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyRequest {
   // The actual database api key.
-  DatabaseApiKey database_api_key = 1;
+  DatabaseApiKey database_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.
 message CreateDatabaseApiKeyResponse {
   // The actual database api key.
-  DatabaseApiKey database_api_key = 1;
+  DatabaseApiKey database_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteDatabaseApiKeyRequest is the request for the DeleteDatabaseApiKey function.
@@ -105,6 +105,7 @@ message DatabaseApiKey {
   // It should contain at least one ID.
   // After creation, this field cannot be changed.
   repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
+    min_items: 1
     items: {
       string: {uuid: true}
     }
@@ -112,6 +113,11 @@ message DatabaseApiKey {
   // Prefix for the database api key, this represents the first bytes of the key.
   // This is a read-only field and will be available after a database api key is created.
   string prefix = 5;
+  option (buf.validate.message).cel = {
+    id: "database_api_key.prefix"
+    message: "prefix must not be empty"
+    expression: "this.prefix.size() > 0 || !has(this.created_at)"
+  };
   // The key for the database api key.
   // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
   // You should securely store this key and it should be handled as a secret.
