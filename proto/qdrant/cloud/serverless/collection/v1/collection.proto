@@ -183,7 +183,7 @@ message CollectionState {
 // All fields in this message are a read-only field.
 message CollectionEndpoint {
   // URL to access the qdrant collection (aka serverless database) without port
-  string url = 1 [(buf.validate.field).string = {address: true}];
+  string url = 1 [(buf.validate.field).string = {uri: true}];
   // The port to use for HTTP REST calls (6333)
   int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
   // The port to use for gRPC calls (6334)

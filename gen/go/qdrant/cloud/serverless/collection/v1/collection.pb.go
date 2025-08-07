@@ -767,7 +767,7 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\bendpoint\x18\a \x01(\v29.qdrant.cloud.serverless.collection.v1.CollectionEndpointH\x00R\bendpoint\x88\x01\x01B\v\n" +
 	"\t_endpoint\"|\n" +
 	"\x12CollectionEndpoint\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xa8\x01\x01R\x03url\x12$\n" +
+	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
 	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
 	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xac\x01\n" +
 	"\x14CollectionStatePhase\x12&\n" +
