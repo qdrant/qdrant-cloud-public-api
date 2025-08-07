@@ -47,11 +47,11 @@ export declare const CreateEphemeralDashboardTokenRequestSchema: GenMessage<Crea
  */
 export declare type CreateEphemeralDashboardTokenResponse = Message<"qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse"> & {
   /**
-   * The encrypted cookie.
+   * The actual ephemeral dashboard token.
    *
-   * @generated from field: qdrant.cloud.cluster.auth.v1.EphemeralDashboardToken encrypted_cookie = 1;
+   * @generated from field: qdrant.cloud.cluster.auth.v1.EphemeralDashboardToken ephemeral_dashboard_token = 1;
    */
-  encryptedCookie?: EphemeralDashboardToken;
+  ephemeralDashboardToken?: EphemeralDashboardToken;
 };
 
 /**
