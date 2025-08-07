@@ -1872,7 +1872,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusH\x01R\x06status\x88\x01\x01:\xbb\x01\xbaH\xb7\x01\x1a\xb4\x01\n" +
 	"\x1bhybrid_cloud_environment.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\x90\v\n" +
+	"\a_status\"\x92\v\n" +
 	"#HybridCloudEnvironmentConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x129\n" +
 	"\tnamespace\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18\xfd\x012\x0f^[a-zA-Z0-9-]+$R\tnamespace\x123\n" +
@@ -1888,8 +1888,9 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x16snapshot_storage_class\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\x14snapshotStorageClass\x88\x01\x01\x12O\n" +
 	"\x1dvolume_snapshot_storage_class\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\x1avolumeSnapshotStorageClass\x88\x01\x01\x12L\n" +
 	"\aingress\x18\x0f \x03(\v22.k8s.io.api.networking.v1.NetworkPolicyIngressRuleR\aingress\x12I\n" +
-	"\x06egress\x18\x10 \x03(\v21.k8s.io.api.networking.v1.NetworkPolicyEgressRuleR\x06egress\x12o\n" +
-	"\tlog_level\x18\x15 \x01(\x0e2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevelB\b\xbaH\x05\x82\x01\x02 \x00H\tR\blogLevel\x88\x01\x01\x12E\n" +
+	"\x06egress\x18\x10 \x03(\v21.k8s.io.api.networking.v1.NetworkPolicyEgressRuleR\x06egress\x12q\n" +
+	"\tlog_level\x18\x15 \x01(\x0e2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevelB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\tR\blogLevel\x88\x01\x01\x12E\n" +
 	"\vtolerations\x18\x16 \x03(\v2#.qdrant.cloud.cluster.v1.TolerationR\vtolerations\x12O\n" +
 	"\rnode_selector\x18\x17 \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\fnodeSelectorB\x11\n" +

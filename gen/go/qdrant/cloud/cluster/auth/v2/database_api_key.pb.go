@@ -820,13 +820,15 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"AccessRule\x12U\n" +
 	"\rglobal_access\x18\x01 \x01(\v2..qdrant.cloud.cluster.auth.v2.GlobalAccessRuleH\x00R\fglobalAccess\x12a\n" +
 	"\x11collection_access\x18\x02 \x01(\v22.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleH\x00R\x10collectionAccessB\x0e\n" +
-	"\x05scope\x12\x05\xbaH\x02\b\x01\"w\n" +
-	"\x10GlobalAccessRule\x12c\n" +
-	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
-	"accessType\"\xc5\x01\n" +
+	"\x05scope\x12\x05\xbaH\x02\b\x01\"y\n" +
+	"\x10GlobalAccessRule\x12e\n" +
+	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
+	"accessType\"\xc7\x01\n" +
 	"\x14CollectionAccessRule\x12D\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12g\n" +
-	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12i\n" +
+	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
 	"accessType*\xa5\x01\n" +
 	"\x1aGlobalAccessRuleAccessType\x12.\n" +
 	"*GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +

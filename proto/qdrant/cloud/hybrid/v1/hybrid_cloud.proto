@@ -252,6 +252,7 @@ message HybridCloudEnvironmentConfiguration {
   repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
   // Log level for deployed components
   optional HybridCloudEnvironmentConfigurationLogLevel log_level = 21 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // List of tolerations for clusters in this hybrid cloud environment

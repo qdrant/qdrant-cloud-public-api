@@ -225,6 +225,7 @@ message PaymentMethod {
   // The type of the payment method provider.
   // This is a required field.
   PaymentProviderType type = 3 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The customer account identifier in the payment provider system.

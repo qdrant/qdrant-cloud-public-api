@@ -192,6 +192,7 @@ message GlobalAccessRule {
   // The type of access granted at the global level.
   // This is a required field.
   GlobalAccessRuleAccessType access_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
 }
@@ -220,6 +221,7 @@ message CollectionAccessRule {
   // The type of access granted for the collection.
   // This is a required field.
   CollectionAccessRuleAccessType access_type = 2 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
 }

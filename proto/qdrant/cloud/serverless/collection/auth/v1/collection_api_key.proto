@@ -142,6 +142,7 @@ message CollectionApiKey {
   // The type of access granted for the collection.
   // This is a required field.
   CollectionApiKeyAccessType access_type = 7 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The email of the user who created the collection api key.

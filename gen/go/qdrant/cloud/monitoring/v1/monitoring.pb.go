@@ -1132,16 +1132,17 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"h\n" +
 	" GetClusterSummaryMetricsResponse\x12D\n" +
-	"\x05nodes\x18\x01 \x03(\v2..qdrant.cloud.monitoring.v1.ClusterNodeMetricsR\x05nodes\"\xe9\x03\n" +
+	"\x05nodes\x18\x01 \x03(\v2..qdrant.cloud.monitoring.v1.ClusterNodeMetricsR\x05nodes\"\xeb\x03\n" +
 	"\x1dGetClusterUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12U\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12W\n" +
 	"\n" +
-	"aggregator\x18\x05 \x01(\x0e2&.qdrant.cloud.monitoring.v1.AggregatorB\b\xbaH\x05\x82\x01\x02 \x00H\x02R\n" +
+	"aggregator\x18\x05 \x01(\x0e2&.qdrant.cloud.monitoring.v1.AggregatorB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\n" +
 	"aggregator\x88\x01\x01:\x8d\x01\xbaH\x89\x01\x1a\x86\x01\n" +
 	"(get_cluster_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +

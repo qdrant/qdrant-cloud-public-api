@@ -1442,12 +1442,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xb5\a\n" +
+	"\x04_url\"\xb7\a\n" +
 	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12J\n" +
-	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeB\b\xbaH\x05\x82\x01\x02 \x00R\x04type\x123\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12L\n" +
+	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x123\n" +
 	"\x13payment_provider_id\x18\x04 \x01(\tH\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
 	"\x16payment_method_details\x18\x05 \x01(\v2-.qdrant.cloud.payment.v1.PaymentMethodDetailsH\x01R\x14paymentMethodDetails\x88\x01\x01\x12U\n" +
 	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x129\n" +

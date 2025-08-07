@@ -89,6 +89,7 @@ message GetClusterUsageMetricsRequest {
   // Aggregation function to apply to the time series data.
   // If omitted, defaults to SUM.
   optional Aggregator aggregator = 5 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
 }

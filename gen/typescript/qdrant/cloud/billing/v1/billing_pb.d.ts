@@ -61,8 +61,6 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
   /**
    * Unique identifier for the invoice.
    *
-   * TODO: Is this a GUID?
-   *
    * @generated from field: string id = 1;
    */
   id: string;
@@ -77,8 +75,6 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
 
   /**
    * Total invoice amount.
-   *
-   * TODO: can this be a negative number (credit invoice, if not we should add: [(buf.validate.field).int64.gte = 0])
    *
    * @generated from field: int64 total_amount = 3;
    */

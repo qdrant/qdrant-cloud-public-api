@@ -426,16 +426,19 @@ message ClusterConfiguration {
   // The gpu type that should be used for the database
   // This is an optional field, default is No configured GPU
   optional ClusterConfigurationGpuType gpu_type = 22 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The restart policy for the database
   // This is an optional field, default is Automatic
   optional ClusterConfigurationRestartPolicy restart_policy = 23 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The automatic shard rebalancing strategy for the database
   // This is an optional field, default is none
   optional ClusterConfigurationRebalanceStrategy rebalance_strategy = 24 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
 }
@@ -479,6 +482,7 @@ message DatabaseConfiguration {
   // This setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.
   // This is an optional field, default is Info.
   optional DatabaseConfigurationLogLevel log_level = 4 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The Qdrant database TLS configuration.
@@ -609,6 +613,7 @@ message Toleration {
   // The operator represents a key's relationship to the value.
   // The default is TOLERATION_OPERATOR_EXISTS.
   optional TolerationOperator operator = 2 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The value to match against the value of a node label.
@@ -616,6 +621,7 @@ message Toleration {
   // The effect indicates the taint effect to match.
   // The default is TOLERATION_EFFECT_NO_SCHEDULE.
   optional TolerationEffect effect = 4 [(buf.validate.field).enum = {
+    defined_only: true
     not_in: [0]
   }];
   // The toleration seconds indicates the duration to tolerate the taint.

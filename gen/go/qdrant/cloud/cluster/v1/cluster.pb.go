@@ -3067,7 +3067,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\x1al\n" +
-	"\x15cluster.state_present\x12)state is required for an existing cluster\x1a(has(this.state) || !has(this.created_at)\"\xde\n" +
+	"\x15cluster.state_present\x12)state is required for an existing cluster\x1a(has(this.state) || !has(this.created_at)\"\xe4\n" +
 	"\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
@@ -3086,24 +3086,28 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"R\vannotations\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\x14\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12A\n" +
 	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x15reservedCpuPercentage\x12G\n" +
-	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x18reservedMemoryPercentage\x12^\n" +
-	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeB\b\xbaH\x05\x82\x01\x02 \x00H\x03R\agpuType\x88\x01\x01\x12p\n" +
-	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\b\xbaH\x05\x82\x01\x02 \x00H\x04R\rrestartPolicy\x88\x01\x01\x12|\n" +
-	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyB\b\xbaH\x05\x82\x01\x02 \x00H\x05R\x11rebalanceStrategy\x88\x01\x01B\n" +
+	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x18reservedMemoryPercentage\x12`\n" +
+	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\agpuType\x88\x01\x01\x12r\n" +
+	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\rrestartPolicy\x88\x01\x01\x12~\n" +
+	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\x11rebalanceStrategy\x88\x01\x01B\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
 	"\x17_database_configurationB\v\n" +
 	"\t_gpu_typeB\x11\n" +
 	"\x0f_restart_policyB\x15\n" +
-	"\x13_rebalance_strategy\"\xf7\x04\n" +
+	"\x13_rebalance_strategy\"\xf9\x04\n" +
 	"\x15DatabaseConfiguration\x12]\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionH\x00R\n" +
 	"collection\x88\x01\x01\x12T\n" +
 	"\astorage\x18\x02 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationStorageH\x01R\astorage\x88\x01\x01\x12T\n" +
-	"\aservice\x18\x03 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationServiceH\x02R\aservice\x88\x01\x01\x12b\n" +
-	"\tlog_level\x18\x04 \x01(\x0e26.qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevelB\b\xbaH\x05\x82\x01\x02 \x00H\x03R\blogLevel\x88\x01\x01\x12H\n" +
+	"\aservice\x18\x03 \x01(\v25.qdrant.cloud.cluster.v1.DatabaseConfigurationServiceH\x02R\aservice\x88\x01\x01\x12d\n" +
+	"\tlog_level\x18\x04 \x01(\x0e26.qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevelB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\blogLevel\x88\x01\x01\x12H\n" +
 	"\x03tls\x18\x05 \x01(\v21.qdrant.cloud.cluster.v1.DatabaseConfigurationTlsH\x04R\x03tls\x88\x01\x01\x12Z\n" +
 	"\tinference\x18\x06 \x01(\v27.qdrant.cloud.cluster.v1.DatabaseConfigurationInferenceH\x05R\tinference\x88\x01\x01B\r\n" +
 	"\v_collectionB\n" +
@@ -3145,13 +3149,15 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1eDatabaseConfigurationInference\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\")\n" +
 	"\x13AdditionalResources\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\rR\x04disk\"\x82\x03\n" +
+	"\x04disk\x18\x03 \x01(\rR\x04disk\"\x86\x03\n" +
 	"\n" +
 	"Toleration\x12H\n" +
-	"\x03key\x18\x01 \x01(\tB6\xbaH3r1\x18?2-^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$R\x03key\x12V\n" +
-	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\b\xbaH\x05\x82\x01\x02 \x00H\x00R\boperator\x88\x01\x01\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\tR\x05value\x12P\n" +
-	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectB\b\xbaH\x05\x82\x01\x02 \x00H\x01R\x06effect\x88\x01\x01\x12;\n" +
+	"\x03key\x18\x01 \x01(\tB6\xbaH3r1\x18?2-^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$R\x03key\x12X\n" +
+	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\boperator\x88\x01\x01\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\x12R\n" +
+	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\x06effect\x88\x01\x01\x12;\n" +
 	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\x11tolerationSeconds\x88\x01\x01B\v\n" +
 	"\t_operatorB\t\n" +
 	"\a_effectB\x15\n" +
