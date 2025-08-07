@@ -480,9 +480,7 @@ message Role {
   // The role type.
   RoleType role_type = 7 [(buf.validate.field).enum.defined_only = true];
   // The permissions associated with this role.
-  // Must contain at least one permission.
   repeated string permissions = 8 [(buf.validate.field).repeated = {
-    min_items: 1
     items: {
       string: {min_len: 1}
     }

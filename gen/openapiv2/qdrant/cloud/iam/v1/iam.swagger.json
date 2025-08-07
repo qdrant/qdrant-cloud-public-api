@@ -575,7 +575,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The permissions associated with this role.\nMust contain at least one permission."
+              "description": "The permissions associated with this role."
             }
           },
           "description": "The actual role.",
@@ -617,7 +617,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The permissions associated with this role.\nMust contain at least one permission."
+              "description": "The permissions associated with this role."
             }
           },
           "description": "The actual role.",
@@ -864,7 +864,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The permissions associated with this role.\nMust contain at least one permission."
+          "description": "The permissions associated with this role."
         }
       },
       "description": "A Role represents a role in the Qdrant cloud."

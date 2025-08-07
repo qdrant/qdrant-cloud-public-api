@@ -1614,7 +1614,6 @@ type Role struct {
 	// The role type.
 	RoleType RoleType `protobuf:"varint,7,opt,name=role_type,json=roleType,proto3,enum=qdrant.cloud.iam.v1.RoleType" json:"role_type,omitempty"`
 	// The permissions associated with this role.
-	// Must contain at least one permission.
 	Permissions   []string `protobuf:"bytes,8,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1939,7 +1938,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
-	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xb5\x04\n" +
+	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xb3\x04\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1949,8 +1948,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
 	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12D\n" +
-	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\broleType\x120\n" +
-	"\vpermissions\x18\b \x03(\tB\x0e\xbaH\v\x92\x01\b\b\x01\"\x04r\x02\x10\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
+	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\broleType\x12.\n" +
+	"\vpermissions\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
 	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x13\n" +
 	"\x11LogoutUserRequest\"\x14\n" +
 	"\x12LogoutUserResponse\"\xaf\x02\n" +
