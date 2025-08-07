@@ -67,32 +67,10 @@ export declare const ListCollectionApiKeysResponseSchema: GenMessage<ListCollect
  */
 export declare type CreateCollectionApiKeyRequest = Message<"qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest"> & {
   /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * TODO: Remove! However this is a breaking change, so will be done in separate PR
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * Collection the key will access (in GUID format).
-   * This is a required field.
-   *
-   * TODO: Remove!
-   *
-   * @generated from field: string collection_id = 2;
-   */
-  collectionId: string;
-
-  /**
    * The API key to create.
    * This is a required field.
    *
-   * TODO: Renumber to 1
-   *
-   * @generated from field: qdrant.cloud.serverless.collection.auth.v1.CollectionApiKey collection_api_key = 3;
+   * @generated from field: qdrant.cloud.serverless.collection.auth.v1.CollectionApiKey collection_api_key = 1;
    */
   collectionApiKey?: CollectionApiKey;
 };

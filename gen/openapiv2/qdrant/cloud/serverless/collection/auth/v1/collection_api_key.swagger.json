@@ -153,14 +153,6 @@
     "CollectionApiKeyServiceCreateCollectionApiKeyBody": {
       "type": "object",
       "properties": {
-        "accountId": {
-          "type": "string",
-          "description": "The identifier of the account (in GUID format).\nThis is a required field.\n\nTODO: Remove! However this is a breaking change, so will be done in separate PR"
-        },
-        "collectionId": {
-          "type": "string",
-          "description": "Collection the key will access (in GUID format).\nThis is a required field.\n\nTODO: Remove!"
-        },
         "collectionApiKey": {
           "type": "object",
           "properties": {
@@ -199,7 +191,7 @@
               "description": "The key for the collection api key.\nThis is a read-only field and will be available only once in the response of CreateCollectionApiKey.\nYou should securely store this key and it should be handled as a secret."
             }
           },
-          "description": "TODO: Renumber to 1",
+          "description": "The API key to create.\nThis is a required field.",
           "title": "The API key to create.\nThis is a required field."
         }
       },

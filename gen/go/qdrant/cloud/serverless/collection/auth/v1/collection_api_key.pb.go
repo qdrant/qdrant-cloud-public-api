@@ -186,15 +186,9 @@ func (x *ListCollectionApiKeysResponse) GetItems() []*CollectionApiKey {
 // CreateCollectionApiKeyRequest defines parameters for creating a new collection API key
 type CreateCollectionApiKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in GUID format).
-	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` //TODO: Remove! However this is a breaking change, so will be done in separate PR
-	// Collection the key will access (in GUID format).
-	// This is a required field.
-	CollectionId string `protobuf:"bytes,2,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"` //TODO: Remove!
 	// The API key to create.
 	// This is a required field.
-	CollectionApiKey *CollectionApiKey `protobuf:"bytes,3,opt,name=collection_api_key,json=collectionApiKey,proto3" json:"collection_api_key,omitempty"` //TODO: Renumber to 1
+	CollectionApiKey *CollectionApiKey `protobuf:"bytes,1,opt,name=collection_api_key,json=collectionApiKey,proto3" json:"collection_api_key,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -227,20 +221,6 @@ func (x *CreateCollectionApiKeyRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateCollectionApiKeyRequest.ProtoReflect.Descriptor instead.
 func (*CreateCollectionApiKeyRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CreateCollectionApiKeyRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *CreateCollectionApiKeyRequest) GetCollectionId() string {
-	if x != nil {
-		return x.CollectionId
-	}
-	return ""
 }
 
 func (x *CreateCollectionApiKeyRequest) GetCollectionApiKey() *CollectionApiKey {
@@ -550,12 +530,9 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\"s\n" +
 	"\x1dListCollectionApiKeysResponse\x12R\n" +
-	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\xeb\x01\n" +
-	"\x1dCreateCollectionApiKeyRequest\x12'\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
-	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\x12r\n" +
-	"\x12collection_api_key\x18\x03 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\x94\x01\n" +
+	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\x93\x01\n" +
+	"\x1dCreateCollectionApiKeyRequest\x12r\n" +
+	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\x94\x01\n" +
 	"\x1eCreateCollectionApiKeyResponse\x12r\n" +
 	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\xb4\x01\n" +
 	"\x1dDeleteCollectionApiKeyRequest\x12'\n" +
