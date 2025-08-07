@@ -61,15 +61,9 @@ message ListCollectionApiKeysResponse {
 
 // CreateCollectionApiKeyRequest defines parameters for creating a new collection API key
 message CreateCollectionApiKeyRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove! However this is a breaking change, so will be done in separate PR
-  // Collection the key will access (in GUID format).
-  // This is a required field.
-  string collection_id = 2 [(buf.validate.field).string = {uuid: true}]; //TODO: Remove!
   // The API key to create.
   // This is a required field.
-  CollectionApiKey collection_api_key = 3 [(buf.validate.field).required = true]; //TODO: Renumber to 1
+  CollectionApiKey collection_api_key = 1 [(buf.validate.field).required = true];
 }
 
 // CollectionApiKeyResponse provides the API key after creation

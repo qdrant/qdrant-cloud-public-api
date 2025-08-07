@@ -37,14 +37,10 @@ class ListCollectionApiKeysResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[CollectionApiKey, _Mapping]]] = ...) -> None: ...
 
 class CreateCollectionApiKeyRequest(_message.Message):
-    __slots__ = ("account_id", "collection_id", "collection_api_key")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    COLLECTION_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("collection_api_key",)
     COLLECTION_API_KEY_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    collection_id: str
     collection_api_key: CollectionApiKey
-    def __init__(self, account_id: _Optional[str] = ..., collection_id: _Optional[str] = ..., collection_api_key: _Optional[_Union[CollectionApiKey, _Mapping]] = ...) -> None: ...
+    def __init__(self, collection_api_key: _Optional[_Union[CollectionApiKey, _Mapping]] = ...) -> None: ...
 
 class CreateCollectionApiKeyResponse(_message.Message):
     __slots__ = ("collection_api_key",)
