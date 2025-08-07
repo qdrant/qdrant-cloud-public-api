@@ -222,7 +222,4 @@ message CollectionAccessRule {
   CollectionAccessRuleAccessType access_type = 2 [(buf.validate.field).enum = {
     not_in: [0]
   }];
-  // An optional set of key-value pairs used to restrict access within the collection.
-  // Only points containing the specified key-value pairs in their payload will be accessible.
-  map<string, string> payload = 3;
 }

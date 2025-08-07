@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package qdrant.cloud.cluster.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard, used by the Qdrant Cloud UI
+service EphemeralDashboardTokenService {
+  // Creates an ephemeral dashboard token in the account identified by the given ID.
+  // Required permissions:
+  // - read:clusters
+  rpc CreateEphemeralDashboardToken(CreateEphemeralDashboardTokenRequest) returns (CreateEphemeralDashboardTokenResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens"
+      body: "*"
+    };
+  }
+}
+
+// CreateEphemeralDashboardTokenRequest is the request for the CreateEphemeralDashboardToken function.
+message CreateEphemeralDashboardTokenRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// CreateEphemeralDashboardTokenResponse is the response from the CreateEphemeralDashboardToken function.
+message CreateEphemeralDashboardTokenResponse {
+  // The encrypted cookie.
+  EphemeralDashboardToken encrypted_cookie = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An EphemeralDashboardToken represents the encrypted cookie to access one Qdrant database (cluster).
+message EphemeralDashboardToken {
+  // token is used as cookie value
+  // Example: local:v1:string
+  string token = 1 [(buf.validate.field).string.pattern = "^(local|vault):v([1-9][0-9]{0,4}):.*$"];
+}

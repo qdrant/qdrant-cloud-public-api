@@ -721,10 +721,7 @@ type CollectionAccessRule struct {
 	CollectionName string `protobuf:"bytes,1,opt,name=collection_name,json=collectionName,proto3" json:"collection_name,omitempty"`
 	// The type of access granted for the collection.
 	// This is a required field.
-	AccessType CollectionAccessRuleAccessType `protobuf:"varint,2,opt,name=access_type,json=accessType,proto3,enum=qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType" json:"access_type,omitempty"`
-	// An optional set of key-value pairs used to restrict access within the collection.
-	// Only points containing the specified key-value pairs in their payload will be accessible.
-	Payload       map[string]string `protobuf:"bytes,3,rep,name=payload,proto3" json:"payload,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	AccessType    CollectionAccessRuleAccessType `protobuf:"varint,2,opt,name=access_type,json=accessType,proto3,enum=qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType" json:"access_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -771,13 +768,6 @@ func (x *CollectionAccessRule) GetAccessType() CollectionAccessRuleAccessType {
 		return x.AccessType
 	}
 	return CollectionAccessRuleAccessType_COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED
-}
-
-func (x *CollectionAccessRule) GetPayload() map[string]string {
-	if x != nil {
-		return x.Payload
-	}
-	return nil
 }
 
 var File_qdrant_cloud_cluster_auth_v2_database_api_key_proto protoreflect.FileDescriptor
@@ -833,15 +823,11 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x05scope\x12\x05\xbaH\x02\b\x01\"w\n" +
 	"\x10GlobalAccessRule\x12c\n" +
 	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
-	"accessType\"\xdc\x02\n" +
+	"accessType\"\xc5\x01\n" +
 	"\x14CollectionAccessRule\x12D\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12g\n" +
 	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
-	"accessType\x12Y\n" +
-	"\apayload\x18\x03 \x03(\v2?.qdrant.cloud.cluster.auth.v2.CollectionAccessRule.PayloadEntryR\apayload\x1a:\n" +
-	"\fPayloadEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xa5\x01\n" +
+	"accessType*\xa5\x01\n" +
 	"\x1aGlobalAccessRuleAccessType\x12.\n" +
 	"*GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +
 	"(GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x12)\n" +
@@ -869,7 +855,7 @@ func file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDescGZIP() []by
 }
 
 var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_goTypes = []any{
 	(GlobalAccessRuleAccessType)(0),      // 0: qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType
 	(CollectionAccessRuleAccessType)(0),  // 1: qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType
@@ -883,32 +869,30 @@ var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_goTypes = []any{
 	(*AccessRule)(nil),                   // 9: qdrant.cloud.cluster.auth.v2.AccessRule
 	(*GlobalAccessRule)(nil),             // 10: qdrant.cloud.cluster.auth.v2.GlobalAccessRule
 	(*CollectionAccessRule)(nil),         // 11: qdrant.cloud.cluster.auth.v2.CollectionAccessRule
-	nil,                                  // 12: qdrant.cloud.cluster.auth.v2.CollectionAccessRule.PayloadEntry
-	(*timestamppb.Timestamp)(nil),        // 13: google.protobuf.Timestamp
+	(*timestamppb.Timestamp)(nil),        // 12: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_depIdxs = []int32{
 	8,  // 0: qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse.items:type_name -> qdrant.cloud.cluster.auth.v2.DatabaseApiKey
 	8,  // 1: qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest.database_api_key:type_name -> qdrant.cloud.cluster.auth.v2.DatabaseApiKey
 	8,  // 2: qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse.database_api_key:type_name -> qdrant.cloud.cluster.auth.v2.DatabaseApiKey
-	13, // 3: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.created_at:type_name -> google.protobuf.Timestamp
-	13, // 4: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.expires_at:type_name -> google.protobuf.Timestamp
+	12, // 3: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.created_at:type_name -> google.protobuf.Timestamp
+	12, // 4: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.expires_at:type_name -> google.protobuf.Timestamp
 	9,  // 5: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.access_rules:type_name -> qdrant.cloud.cluster.auth.v2.AccessRule
 	10, // 6: qdrant.cloud.cluster.auth.v2.AccessRule.global_access:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRule
 	11, // 7: qdrant.cloud.cluster.auth.v2.AccessRule.collection_access:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRule
 	0,  // 8: qdrant.cloud.cluster.auth.v2.GlobalAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType
 	1,  // 9: qdrant.cloud.cluster.auth.v2.CollectionAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType
-	12, // 10: qdrant.cloud.cluster.auth.v2.CollectionAccessRule.payload:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRule.PayloadEntry
-	2,  // 11: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:input_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest
-	4,  // 12: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest
-	6,  // 13: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest
-	3,  // 14: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:output_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse
-	5,  // 15: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse
-	7,  // 16: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	2,  // 10: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:input_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest
+	4,  // 11: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest
+	6,  // 12: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest
+	3,  // 13: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:output_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse
+	5,  // 14: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse
+	7,  // 15: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse
+	13, // [13:16] is the sub-list for method output_type
+	10, // [10:13] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_init() }
@@ -927,7 +911,7 @@ func file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc), len(file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   11,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
