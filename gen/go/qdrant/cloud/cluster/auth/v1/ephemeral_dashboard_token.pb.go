@@ -184,9 +184,9 @@ const file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDesc 
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\x9a\x01\n" +
-	"%CreateEphemeralDashboardTokenResponse\x12q\n" +
-	"\x19ephemeral_dashboard_token\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenR\x17ephemeralDashboardToken\"]\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"\xa2\x01\n" +
+	"%CreateEphemeralDashboardTokenResponse\x12y\n" +
+	"\x19ephemeral_dashboard_token\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenB\x06\xbaH\x03\xc8\x01\x01R\x17ephemeralDashboardToken\"]\n" +
 	"\x17EphemeralDashboardToken\x12B\n" +
 	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xbc\x02\n" +
 	"\x1eEphemeralDashboardTokenService\x12\x99\x02\n" +

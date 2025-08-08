@@ -147,6 +147,11 @@ message CollectionApiKey {
     message: "created_by_email must not be empty"
     expression: "this.created_by_email.size() > 0 || !has(this.created_at)"
   };
+  option (buf.validate.message).cel = {
+    id: "collection_api_key.created_by_email_format"
+    message: "created_by_email must be a valid email address"
+    expression: "this.created_by_email.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$') || !has(this.created_at)"
+  };
   // Postfix for the collection api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a collection api key is created.
   string postfix = 9;

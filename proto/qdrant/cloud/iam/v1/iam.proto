@@ -476,9 +476,12 @@ message Role {
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The human readable description of this role.
-  string description = 6;
+  string description = 6 [(buf.validate.field).string = {max_len: 256}];
   // The role type.
-  RoleType role_type = 7 [(buf.validate.field).enum.defined_only = true];
+  RoleType role_type = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The permissions associated with this role.
   repeated string permissions = 8 [(buf.validate.field).repeated = {
     items: {
@@ -513,10 +516,16 @@ message LogoutUserResponse {
 // User Consent represents the consent status of a user for a specific legal document.
 message UserConsent {
   // The type of the legal document for which consent status is reported.
-  LegalDocumentType document_type = 1 [(buf.validate.field).enum.defined_only = true];
+  LegalDocumentType document_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The latest consent status recorded from the user for this document type.
   // Will be USER_CONSENT_STATUS_UNSPECIFIED if no status update has been recorded.
-  UserConsentStatus status = 2 [(buf.validate.field).enum.defined_only = true];
+  UserConsentStatus status = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Timestamp of the most recent status update.
   // Unset if no status update has been recorded.
   optional google.protobuf.Timestamp last_modified_at = 3;

@@ -179,7 +179,7 @@ message AvailableAdditionalResources {
   // The unit price per hour in millicents, in integer format.
   // Represents the cost per hour for a single unit(GiB) of the resource.
   // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
-  uint32 disk_price_per_hour = 1 [(buf.validate.field).uint32.gte = 0];
+  uint32 disk_price_per_hour = 1;
 }
 
 // ResourceConfiguration defines the resource configuration for a package.

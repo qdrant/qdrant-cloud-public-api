@@ -3068,7 +3068,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xe4\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xe0\n" +
 	"\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
@@ -3085,9 +3085,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\vannotations\x18\n" +
 	" \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\vannotations\x12H\n" +
-	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\x14\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12A\n" +
-	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x15reservedCpuPercentage\x12G\n" +
-	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x00R\x18reservedMemoryPercentage\x12`\n" +
+	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\x14\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12?\n" +
+	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\a\xbaH\x04*\x02\x18PR\x15reservedCpuPercentage\x12E\n" +
+	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\a\xbaH\x04*\x02\x18PR\x18reservedMemoryPercentage\x12`\n" +
 	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\agpuType\x88\x01\x01\x12r\n" +
 	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\n" +
@@ -3175,11 +3175,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
 	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
 	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xe2\x01\n" +
-	"\x1bClusterNodeResourcesSummary\x12A\n" +
-	"\x04disk\x18\x01 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x04disk\x12?\n" +
-	"\x03ram\x18\x02 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x03ram\x12?\n" +
-	"\x03cpu\x18\x03 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesR\x03cpu\"\xfa\x01\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xfa\x01\n" +
+	"\x1bClusterNodeResourcesSummary\x12I\n" +
+	"\x04disk\x18\x01 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x04disk\x12G\n" +
+	"\x03ram\x18\x02 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x03ram\x12G\n" +
+	"\x03cpu\x18\x03 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\"\xfa\x01\n" +
 	"\x14ClusterNodeResources\x12\"\n" +
 	"\x04base\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x04base\x124\n" +
 	"\rcomplimentary\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\rcomplimentary\x12.\n" +
@@ -3187,15 +3187,16 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"additional\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
 	"additional\x12*\n" +
 	"\breserved\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\breserved\x12,\n" +
-	"\tavailable\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\tavailable\"\x95\x01\n" +
-	"\x16ClusterScalabilityInfo\x12S\n" +
-	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1b\n" +
+	"\tavailable\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\tavailable\"\x97\x01\n" +
+	"\x16ClusterScalabilityInfo\x12U\n" +
+	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12\x1b\n" +
 	"\x06reason\x18\x02 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\x80\x02\n" +
+	"\a_reason\"\x8a\x02\n" +
 	"\rQdrantRelease\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x18\n" +
-	"\adefault\x18\x02 \x01(\bR\adefault\x12/\n" +
-	"\x11release_notes_url\x18\x03 \x01(\tH\x00R\x0freleaseNotesUrl\x88\x01\x01\x12\x1d\n" +
+	"\adefault\x18\x02 \x01(\bR\adefault\x129\n" +
+	"\x11release_notes_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x0freleaseNotesUrl\x88\x01\x01\x12\x1d\n" +
 	"\aremarks\x18\x04 \x01(\tH\x01R\aremarks\x88\x01\x01\x12\x1e\n" +
 	"\vend_of_life\x18\x05 \x01(\bR\tendOfLife\x12 \n" +
 	"\vunavailable\x18\x06 \x01(\bR\vunavailableB\x14\n" +

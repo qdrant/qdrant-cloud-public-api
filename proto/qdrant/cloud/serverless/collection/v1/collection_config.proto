@@ -2,16 +2,30 @@ syntax = "proto3";
 
 package qdrant.cloud.serverless.collection.v1;
 
+import "buf/validate/validate.proto";
+
 // CollectionConfiguration defines the structure and settings for a collection
 message CollectionConfiguration {
   // Field name used for tenant isolation
-  optional string tenant_key = 1;
+  optional string tenant_key = 1 [(buf.validate.field).string.min_len = 1];
   // Map of dense vector configurations with field name as key
-  map<string, DenseVectorConfiguration> dense_vectors = 2;
+  map<string, DenseVectorConfiguration> dense_vectors = 2 [(buf.validate.field).map = {
+    keys: {
+      string: {pattern: "^[a-zA-Z0-9-_]+$"}
+    }
+  }];
   // Map of sparse vector configurations with field name as key
-  map<string, SparseVectorConfiguration> sparse_vectors = 3;
+  map<string, SparseVectorConfiguration> sparse_vectors = 3 [(buf.validate.field).map = {
+    keys: {
+      string: {pattern: "^[a-zA-Z0-9-_]+$"}
+    }
+  }];
   // Schema definition for payload fields
-  map<string, PayloadFieldSchema> payload_schema = 4;
+  map<string, PayloadFieldSchema> payload_schema = 4 [(buf.validate.field).map = {
+    keys: {
+      string: {pattern: "^[a-zA-Z0-9-_]+$"}
+    }
+  }];
 }
 
 // DistanceMetric defines the possible distance metrics used in DenseVectorConfiguration.
@@ -65,25 +79,40 @@ enum VectorModifier {
 // DenseVectorConfiguration defines the settings for dense vector fields
 message DenseVectorConfiguration {
   // The dimensionality of the vector space
-  int32 dimension = 1;
+  int32 dimension = 1 [(buf.validate.field).int32.gt = 0];
   // The distance metric used for vector similarity calculations
-  DistanceMetric distance = 2;
+  DistanceMetric distance = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Whether to use multi-vector storage for this configuration
   optional bool multivector = 3;
   // Whether to enable rescoring for search results
   optional bool rescoring = 4;
   // The storage performance tier to use.
-  optional StorageTier storage_tier = 5;
+  optional StorageTier storage_tier = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The precision level for vector operations.
-  optional PrecisionTier precision_tier = 6;
+  optional PrecisionTier precision_tier = 6 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // SparseVectorConfiguration defines the settings for sparse vector fields
 message SparseVectorConfiguration {
   // The precision level for vector operations.
-  PrecisionTier precision_tier = 1;
+  PrecisionTier precision_tier = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Vector value modification approach
-  VectorModifier modifier = 2;
+  VectorModifier modifier = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // KeywordIndexParams defines parameters for keyword indexing
@@ -137,11 +166,19 @@ enum Tokenizer {
 // TextIndexParams defines parameters for text indexing
 message TextIndexParams {
   // Tokenization strategy
-  optional Tokenizer tokenizer = 1;
+  optional Tokenizer tokenizer = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Minimum token length to index
-  optional int32 min_token_len = 2;
+  optional int32 min_token_len = 2 [(buf.validate.field).int32.gte = 0];
   // Maximum token length to index
-  optional int32 max_token_len = 3;
+  optional int32 max_token_len = 3 [(buf.validate.field).int32.gte = 0];
+  option (buf.validate.message).cel = {
+    id: "text_index_params.max_len_ge_min_len"
+    message: "max_token_len must be greater than or equal to min_token_len"
+    expression: "!has(this.min_token_len) || !has(this.max_token_len) || this.max_token_len >= this.min_token_len"
+  };
   // Whether to lowercase text before indexing
   optional bool lowercase = 4;
   // Whether to store index on disk vs memory
@@ -174,6 +211,7 @@ message UuidIndexParams {
 message PayloadFieldSchema {
   // Oneof for index parameters
   oneof index_params {
+    option (buf.validate.oneof).required = true;
     // Keyword index parameters
     KeywordIndexParams keyword = 1;
     // Integer index parameters

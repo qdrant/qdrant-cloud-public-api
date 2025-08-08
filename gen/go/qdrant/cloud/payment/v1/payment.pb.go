@@ -902,7 +902,7 @@ type StripeCheckoutSession struct {
 	// The unique identifier of the Stripe Checkout session.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The URL to redirect the user to complete the Checkout session.
-	// This may be null if the session is incomplete or improperly initialized.
+	// This may be not set in case the session is incomplete or improperly initialized.
 	Url *string `protobuf:"bytes,2,opt,name=url,proto3,oneof" json:"url,omitempty"`
 	// The Stripe customer ID associated with this session.
 	Customer string `protobuf:"bytes,3,opt,name=customer,proto3" json:"customer,omitempty"`
@@ -1421,28 +1421,29 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"\x1d\n" +
-	"\x1bDeletePaymentMethodResponse\"i\n" +
+	"\x1bDeletePaymentMethodResponse\"r\n" +
 	"\x1fGetStripeCheckoutSessionRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x1d\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n" +
 	"\n" +
-	"session_id\x18\x02 \x01(\tR\tsessionId\"y\n" +
-	" GetStripeCheckoutSessionResponse\x12U\n" +
-	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionR\rstripeSession\"p\n" +
+	"session_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tsessionId\"\x81\x01\n" +
+	" GetStripeCheckoutSessionResponse\x12]\n" +
+	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionB\x06\xbaH\x03\xc8\x01\x01R\rstripeSession\"z\n" +
 	"\"CreateStripeCheckoutSessionRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
-	"\fredirect_url\x18\x02 \x01(\tR\vredirectUrl\"|\n" +
-	"#CreateStripeCheckoutSessionResponse\x12U\n" +
-	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionR\rstripeSession\"\xab\x02\n" +
-	"\x15StripeCheckoutSession\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
-	"\x03url\x18\x02 \x01(\tH\x00R\x03url\x88\x01\x01\x12\x1a\n" +
-	"\bcustomer\x18\x03 \x01(\tR\bcustomer\x12&\n" +
-	"\x0fsetup_intent_id\x18\x04 \x01(\tR\rsetupIntentId\x12`\n" +
-	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusR\x11setupIntentStatus\x12=\n" +
-	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tR\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xb7\a\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12+\n" +
+	"\fredirect_url\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\vredirectUrl\"\x84\x01\n" +
+	"#CreateStripeCheckoutSessionResponse\x12]\n" +
+	"\x0estripe_session\x18\x01 \x01(\v2..qdrant.cloud.payment.v1.StripeCheckoutSessionB\x06\xbaH\x03\xc8\x01\x01R\rstripeSession\"\xe5\x02\n" +
+	"\x15StripeCheckoutSession\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1f\n" +
+	"\x03url\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x03url\x88\x01\x01\x12#\n" +
+	"\bcustomer\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bcustomer\x12/\n" +
+	"\x0fsetup_intent_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rsetupIntentId\x12l\n" +
+	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x11setupIntentStatus\x12F\n" +
+	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x18setupIntentPaymentMethodB\x06\n" +
+	"\x04_url\"\xb9\a\n" +
 	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1458,8 +1459,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05taxId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\x12S\n" +
-	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\b\xbaH\x05\x82\x01\x02\x10\x01H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
+	" \x01(\bR\tisDefault\x12U\n" +
+	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
 	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
 	"\x14_payment_provider_idB\x19\n" +
 	"\x17_payment_method_detailsB\x12\n" +

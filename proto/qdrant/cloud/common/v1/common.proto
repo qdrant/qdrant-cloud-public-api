@@ -10,7 +10,7 @@ extend google.protobuf.MethodOptions {
   // A list of permissions which need to be met by the current user.
   // If `requires_all_permissions` is true (or missing): ALL of the permissions should be met (and)
   // If `requires_all_permissions` is false: ANY-OF the permissions should be met (or)
-  repeated string permissions = 50001;
+  repeated string permissions = 50001 [(buf.validate.field).repeated.items.string = {min_len: 1}];
 }
 
 // The extension for adding an expression where to find the account ID in a message
@@ -19,7 +19,7 @@ extend google.protobuf.MethodOptions {
   // The expression to find the account ID field, which should be a string field.
   // It is allowed to nest fields with a point, like 'cluster.account_id' or 'account.id'
   // If the expression is set to an empty string, no account ID will be used.
-  string account_id_expression = 50002;
+  string account_id_expression = 50002 [(buf.validate.field).string = {pattern: "^(|[a-z_]+(\\.[a-z_]+)*)$"}];
 }
 
 // The extension for allowing a method to be be used without authentication.

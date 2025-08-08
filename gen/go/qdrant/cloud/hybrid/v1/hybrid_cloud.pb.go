@@ -1904,13 +1904,14 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x17_snapshot_storage_classB \n" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
-	"_log_level\"\x91\b\n" +
+	"_log_level\"\x93\b\n" +
 	"\x1cHybridCloudEnvironmentStatus\x12L\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12Y\n" +
 	"\x05phase\x18\x03 \x01(\x0e29.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x126\n" +
-	"\x12kubernetes_version\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11kubernetesVersion\x12v\n" +
+	"\x12kubernetes_version\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11kubernetesVersion\x12x\n" +
 	"\x17kubernetes_distribution\x18\n" +
-	" \x01(\x0e2..qdrant.cloud.hybrid.v1.KubernetesDistributionB\b\xbaH\x05\x82\x01\x02\x10\x01H\x00R\x16kubernetesDistribution\x88\x01\x01\x12&\n" +
+	" \x01(\x0e2..qdrant.cloud.hybrid.v1.KubernetesDistributionB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x16kubernetesDistribution\x88\x01\x01\x12&\n" +
 	"\x0fnumber_of_nodes\x18\x05 \x01(\rR\rnumberOfNodes\x12^\n" +
 	"\fcapabilities\x18\x06 \x01(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentCapabilitiesR\fcapabilities\x12l\n" +
 	"\x12component_statuses\x18\a \x03(\v2=.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusR\x11componentStatuses\x12{\n" +

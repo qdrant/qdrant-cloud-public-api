@@ -482,7 +482,7 @@ message AccountInvite {
   optional string created_by_user_id = 7 [(buf.validate.field).string = {uuid: true}];
   // The email of the user who created this invite.
   // This is a read-only value, populated by the server based on the created_by_user_id field.
-  optional string created_by_email = 8;
+  optional string created_by_email = 8 [(buf.validate.field).string.email = true];
   option (buf.validate.message).cel = {
     id: "account_invite.created_by_email"
     message: "created_by_email must not be empty if created_by_user_id is set"
