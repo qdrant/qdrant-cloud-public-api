@@ -1893,10 +1893,11 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\arole_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06roleId\"H\n" +
 	"\x0fGetRoleResponse\x125\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\xab\x01\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\xf6\x02\n" +
 	"\x11CreateRoleRequest\x125\n" +
-	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role:_\xbaH\\\x1aZ\n" +
-	"\x15create_role.role_type\x12'role.role_type must be ROLE_TYPE_CUSTOM\x1a\x18this.role.role_type == 2\"K\n" +
+	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role:\xa9\x02\xbaH\xa5\x02\x1aZ\n" +
+	"\x15create_role.role_type\x12'role.role_type must be ROLE_TYPE_CUSTOM\x1a\x18this.role.role_type == 2\x1a\xc6\x01\n" +
+	"\x1fcreate_role.no_read_only_fields\x12Mread-only fields (id, created_at, last_modified_at) must not be set on create\x1aTthis.role.id == '' && !has(this.role.created_at) && !has(this.role.last_modified_at)\"K\n" +
 	"\x12CreateRoleResponse\x125\n" +
 	"\x04role\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.RoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\xfe\x01\n" +
 	"\x11UpdateRoleRequest\x125\n" +

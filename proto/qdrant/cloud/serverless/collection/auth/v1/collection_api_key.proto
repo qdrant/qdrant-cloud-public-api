@@ -64,6 +64,11 @@ message CreateCollectionApiKeyRequest {
   // The API key to create.
   // This is a required field.
   CollectionApiKey collection_api_key = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_collection_api_key.no_read_only_fields"
+    message: "read-only fields (id, created_at, created_by_email, postfix, key) must not be set on create"
+    expression: "this.collection_api_key.id == '' && !has(this.collection_api_key.created_at) && this.collection_api_key.created_by_email == '' && this.collection_api_key.postfix == '' && this.collection_api_key.key == ''"
+  };
 }
 
 // CollectionApiKeyResponse provides the API key after creation

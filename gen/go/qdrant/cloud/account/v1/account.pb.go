@@ -1812,9 +1812,10 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"X\n" +
 	"\x12GetAccountResponse\x12B\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"Z\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"\x99\x03\n" +
 	"\x14CreateAccountRequest\x12B\n" +
-	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"[\n" +
+	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount:\xbc\x02\xbaH\xb8\x02\x1a\xb5\x02\n" +
+	"\"create_account.no_read_only_fields\x12fread-only fields (id, created_at, last_modified_at, owner_email, privileges) must not be set on create\x1a\xa6\x01this.account.id == '' && !has(this.account.created_at) && !has(this.account.last_modified_at) && this.account.owner_email == '' && this.account.privileges.size() == 0\"[\n" +
 	"\x15CreateAccountResponse\x12B\n" +
 	"\aaccount\x18\x01 \x01(\v2 .qdrant.cloud.account.v1.AccountB\x06\xbaH\x03\xc8\x01\x01R\aaccount\"\xb9\x01\n" +
 	"\x14UpdateAccountRequest\x12B\n" +
@@ -1839,9 +1840,10 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tinvite_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\binviteId\"q\n" +
 	"\x18GetAccountInviteResponse\x12U\n" +
-	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"s\n" +
+	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"\xd4\x04\n" +
 	"\x1aCreateAccountInviteRequest\x12U\n" +
-	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"t\n" +
+	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite:\xde\x03\xbaH\xda\x03\x1a\xd7\x03\n" +
+	")create_account_invite.no_read_only_fields\x12\x89\x01read-only fields (id, account_name, created_at, created_by_user_id, created_by_email, last_modified_at, status) must not be set on create\x1a\x9d\x02this.account_invite.id == '' && this.account_invite.account_name == '' && !has(this.account_invite.created_at) && !has(this.account_invite.created_by_user_id) && !has(this.account_invite.created_by_email) && !has(this.account_invite.last_modified_at) && this.account_invite.status == 0\"t\n" +
 	"\x1bCreateAccountInviteResponse\x12U\n" +
 	"\x0eaccount_invite\x18\x01 \x01(\v2&.qdrant.cloud.account.v1.AccountInviteB\x06\xbaH\x03\xc8\x01\x01R\raccountInvite\"l\n" +
 	"\x1aDeleteAccountInviteRequest\x12'\n" +

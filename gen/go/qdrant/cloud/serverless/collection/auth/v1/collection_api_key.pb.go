@@ -530,9 +530,10 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\"s\n" +
 	"\x1dListCollectionApiKeysResponse\x12R\n" +
-	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\x93\x01\n" +
+	"\x05items\x18\x01 \x03(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyR\x05items\"\xf8\x03\n" +
 	"\x1dCreateCollectionApiKeyRequest\x12r\n" +
-	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\x94\x01\n" +
+	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey:\xe2\x02\xbaH\xde\x02\x1a\xdb\x02\n" +
+	"-create_collection_api_key.no_read_only_fields\x12[read-only fields (id, created_at, created_by_email, postfix, key) must not be set on create\x1a\xcc\x01this.collection_api_key.id == '' && !has(this.collection_api_key.created_at) && this.collection_api_key.created_by_email == '' && this.collection_api_key.postfix == '' && this.collection_api_key.key == ''\"\x94\x01\n" +
 	"\x1eCreateCollectionApiKeyResponse\x12r\n" +
 	"\x12collection_api_key\x18\x01 \x01(\v2<.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x10collectionApiKey\"\xb4\x01\n" +
 	"\x1dDeleteCollectionApiKeyRequest\x12'\n" +

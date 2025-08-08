@@ -1407,9 +1407,10 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"q\n" +
 	"\x18GetPaymentMethodResponse\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"s\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xde\x03\n" +
 	"\x1aCreatePaymentMethodRequest\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"t\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod:\xe8\x02\xbaH\xe4\x02\x1a\xe1\x02\n" +
+	")create_payment_method.no_read_only_fields\x12jread-only fields (id, payment_provider_id, created_at, last_modified_at, status) must not be set on create\x1a\xc7\x01this.payment_method.id == '' && !has(this.payment_method.payment_provider_id) && !has(this.payment_method.created_at) && !has(this.payment_method.last_modified_at) && !has(this.payment_method.status)\"t\n" +
 	"\x1bCreatePaymentMethodResponse\x12U\n" +
 	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xe7\x01\n" +
 	"\x1aUpdatePaymentMethodRequest\x12U\n" +

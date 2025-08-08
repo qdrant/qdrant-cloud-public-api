@@ -119,6 +119,11 @@ message CreatePaymentMethodRequest {
   // The payment method to create.
   // This is a required field.
   PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_payment_method.no_read_only_fields"
+    message: "read-only fields (id, payment_provider_id, created_at, last_modified_at, status) must not be set on create"
+    expression: "this.payment_method.id == '' && !has(this.payment_method.payment_provider_id) && !has(this.payment_method.created_at) && !has(this.payment_method.last_modified_at) && !has(this.payment_method.status)"
+  };
 }
 
 // CreatePaymentMethodResponse is the response from the CreatePaymentMethod function

@@ -215,6 +215,11 @@ message GetAccountResponse {
 message CreateAccountRequest {
   // The actual account.
   Account account = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_account.no_read_only_fields"
+    message: "read-only fields (id, created_at, last_modified_at, owner_email, privileges) must not be set on create"
+    expression: "this.account.id == '' && !has(this.account.created_at) && !has(this.account.last_modified_at) && this.account.owner_email == '' && this.account.privileges.size() == 0"
+  };
 }
 
 // CreateAccountResponse is the response from the CreateAccount function.
@@ -299,6 +304,11 @@ message CreateAccountInviteRequest {
   // The details of the invite to create.
   // This is a required field.
   AccountInvite account_invite = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_account_invite.no_read_only_fields"
+    message: "read-only fields (id, account_name, created_at, created_by_user_id, created_by_email, last_modified_at, status) must not be set on create"
+    expression: "this.account_invite.id == '' && this.account_invite.account_name == '' && !has(this.account_invite.created_at) && !has(this.account_invite.created_by_user_id) && !has(this.account_invite.created_by_email) && !has(this.account_invite.last_modified_at) && this.account_invite.status == 0"
+  };
 }
 
 // CreateAccountInviteResponse is the response from the CreateAccountInvite function.

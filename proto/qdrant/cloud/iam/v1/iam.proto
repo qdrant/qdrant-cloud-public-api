@@ -311,6 +311,11 @@ message CreateRoleRequest {
     message: "role.role_type must be ROLE_TYPE_CUSTOM"
     expression: "this.role.role_type == 2"
   };
+  option (buf.validate.message).cel = {
+    id: "create_role.no_read_only_fields"
+    message: "read-only fields (id, created_at, last_modified_at) must not be set on create"
+    expression: "this.role.id == '' && !has(this.role.created_at) && !has(this.role.last_modified_at)"
+  };
 }
 
 // CreateRoleResponse is the response from the CreateRole function.

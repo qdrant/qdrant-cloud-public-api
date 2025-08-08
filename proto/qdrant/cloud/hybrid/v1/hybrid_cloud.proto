@@ -142,6 +142,11 @@ message UpdateHybridCloudEnvironmentResponse {
 message CreateHybridCloudEnvironmentRequest {
   // The actual hybrid cloud environment
   HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_hybrid_cloud_environment.no_read_only_fields"
+    message: "read-only fields (id, created_at, last_modified_at, status) must not be set on create"
+    expression: "this.hybrid_cloud_environment.id == '' && !has(this.hybrid_cloud_environment.created_at) && !has(this.hybrid_cloud_environment.last_modified_at) && !has(this.hybrid_cloud_environment.status)"
+  };
 }
 
 // CreateHybridCloudEnvironmentResponse is the response for CreateHybridCloudEnvironment function

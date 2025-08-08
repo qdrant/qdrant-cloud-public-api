@@ -1844,9 +1844,10 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment:\x92\x01\xbaH\x8e\x01\x1a\x8b\x01\n" +
 	"*update_hybrid_cloud_environment.id_present\x125hybrid_cloud_environment.id is required for an update\x1a&this.hybrid_cloud_environment.id != ''\"\x98\x01\n" +
 	"$UpdateHybridCloudEnvironmentResponse\x12p\n" +
-	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment\"\x97\x01\n" +
+	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment\"\xee\x03\n" +
 	"#CreateHybridCloudEnvironmentRequest\x12p\n" +
-	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment\"\x98\x01\n" +
+	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment:\xd4\x02\xbaH\xd0\x02\x1a\xcd\x02\n" +
+	"3create_hybrid_cloud_environment.no_read_only_fields\x12Uread-only fields (id, created_at, last_modified_at, status) must not be set on create\x1a\xbe\x01this.hybrid_cloud_environment.id == '' && !has(this.hybrid_cloud_environment.created_at) && !has(this.hybrid_cloud_environment.last_modified_at) && !has(this.hybrid_cloud_environment.status)\"\x98\x01\n" +
 	"$CreateHybridCloudEnvironmentResponse\x12p\n" +
 	"\x18hybrid_cloud_environment\x18\x01 \x01(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentB\x06\xbaH\x03\xc8\x01\x01R\x16hybridCloudEnvironment\"\x94\x01\n" +
 	" GetHybridCloudEnvironmentRequest\x12'\n" +

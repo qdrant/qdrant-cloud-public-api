@@ -726,11 +726,12 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"n\n" +
 	"\x17ListCollectionsResponse\x12S\n" +
-	"\vcollections\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\vcollections\"t\n" +
+	"\vcollections\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\vcollections\"\xf6\x02\n" +
 	"\x17CreateCollectionRequest\x12Y\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"collection\"u\n" +
+	"collection:\xff\x01\xbaH\xfb\x01\x1a\xf8\x01\n" +
+	"%create_collection.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1a\x7fthis.collection.id == '' && !has(this.collection.created_at) && !has(this.collection.deleted_at) && !has(this.collection.state)\"u\n" +
 	"\x18CreateCollectionResponse\x12Y\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionB\x06\xbaH\x03\xc8\x01\x01R\n" +

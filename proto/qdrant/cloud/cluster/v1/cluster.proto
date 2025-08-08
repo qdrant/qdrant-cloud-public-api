@@ -171,6 +171,11 @@ message GetClusterResponse {
 message CreateClusterRequest {
   // The actual cluster
   Cluster cluster = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_cluster.no_read_only_fields"
+    message: "read-only fields (id, created_at, deleted_at, state) must not be set on create"
+    expression: "this.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)"
+  };
 }
 
 // CreateClusterResponse is the response from the CreateCluster function
