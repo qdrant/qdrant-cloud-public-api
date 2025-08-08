@@ -49,6 +49,11 @@ message ListPackagesRequest {
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
   optional string cloud_provider_region_id = 3;
+  option (buf.validate.message).cel = {
+    id: "list_packages.cloud_provider_region_id_present"
+    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
+    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
+  };
   // The status of the packages to filter.
   // This is an optional field. If value is not set, only active packages are returned.
   repeated PackageStatus statuses = 4;
@@ -70,6 +75,11 @@ message ListGlobalPackagesRequest {
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
   // Field can be omitted, if cloud_provider_id is `hybrid`
   optional string cloud_provider_region_id = 2;
+  option (buf.validate.message).cel = {
+    id: "list_global_packages.cloud_provider_region_id_present"
+    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
+    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
+  };
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -91,7 +101,7 @@ message GetPackageRequest {
 // GetPackageResponse is the response from the GetPackage function
 message GetPackageResponse {
   // The actual package
-  Package package = 1;
+  Package package = 1 [(buf.validate.field).required = true];
 }
 
 // PackageStatus defines the valid states a package can be in.
@@ -113,21 +123,35 @@ message Package {
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // The name of the package.
   // A human-readable identifier for the package.
-  string name = 2;
+  string name = 2 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 64
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
   // Specifies if this is a free or paid package.
-  string type = 3;
+  // Must be either "free" or "paid".
+  string type = 3 [(buf.validate.field).string = {
+    in: [
+      "free",
+      "paid"
+    ]
+  }];
   // The resource configuration associated with the package
   ResourceConfiguration resource_configuration = 4;
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
-  string currency = 5;
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 5 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
   // The unit price per hour in millicents, in integer format.
   // Represents the cost per hour for a single unit of the resource.
   // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
-  int32 unit_int_price_per_hour = 6;
+  int32 unit_int_price_per_hour = 6 [(buf.validate.field).int32.gte = 0];
   // The status of the package.
   // Indicates the current status of the package.
-  PackageStatus status = 7;
+  PackageStatus status = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Optional additional resources that can be added to the cluster.
   // if not set, additional resources are not available for this package.
   // Currently, only `DISK` is supported.
@@ -139,15 +163,15 @@ message AvailableAdditionalResources {
   // The unit price per hour in millicents, in integer format.
   // Represents the cost per hour for a single unit(GiB) of the resource.
   // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
-  uint32 disk_price_per_hour = 1;
+  uint32 disk_price_per_hour = 1 [(buf.validate.field).uint32.gte = 0];
 }
 
 // ResourceConfiguration defines the resource configuration for a package.
 message ResourceConfiguration {
   // The amount of RAM (e.g., "1GiB")
-  string ram = 1;
+  string ram = 1 [(buf.validate.field).string.min_len = 1];
   // The amount of CPU (e.g., "1000m" (1 vCPU))
-  string cpu = 2;
+  string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
-  string disk = 3;
+  string disk = 3 [(buf.validate.field).string.min_len = 1];
 }
