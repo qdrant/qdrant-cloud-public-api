@@ -540,7 +540,7 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
 	"\rcollection_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\fcollectionId\x12;\n" +
 	"\x15collection_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x12collectionApiKeyId\" \n" +
-	"\x1eDeleteCollectionApiKeyResponse\"\xa5\a\n" +
+	"\x1eDeleteCollectionApiKeyResponse\"\xae\a\n" +
 	"\x10CollectionApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -554,8 +554,8 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12s\n" +
 	"\vaccess_type\x18\a \x01(\x0e2F.qdrant.cloud.serverless.collection.auth.v1.CollectionApiKeyAccessTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
-	"accessType\x12(\n" +
-	"\x10created_by_email\x18\b \x01(\tR\x0ecreatedByEmail\x12\x18\n" +
+	"accessType\x121\n" +
+	"\x10created_by_email\x18\b \x01(\tB\a\xbaH\x04r\x02`\x01R\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
 	" \x01(\tR\x03key:\xa7\x03\xbaH\xa3\x03\x1a\xae\x01\n" +

@@ -105,7 +105,7 @@
         },
         "pdfUrl": {
           "type": "string",
-          "description": "The URL to download the PDF for the invoice. If the invoice has not been\nfinalized yet, this will be null."
+          "description": "The URL to download the PDF for the invoice.\nIf the invoice has not been finalized yet, this field will not be set."
         }
       },
       "description": "Invoice represents a billing invoice issued to an account."

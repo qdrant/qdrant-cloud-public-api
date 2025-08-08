@@ -679,9 +679,9 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x06status\x18\a \x01(\x0e2&.qdrant.cloud.booking.v1.PackageStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12\x80\x01\n" +
 	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01B!\n" +
-	"\x1f_available_additional_resources\"V\n" +
-	"\x1cAvailableAdditionalResources\x126\n" +
-	"\x13disk_price_per_hour\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x00R\x10diskPricePerHour\"j\n" +
+	"\x1f_available_additional_resources\"M\n" +
+	"\x1cAvailableAdditionalResources\x12-\n" +
+	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"j\n" +
 	"\x15ResourceConfiguration\x12\x19\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03ram\x12\x19\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03cpu\x12\x1b\n" +

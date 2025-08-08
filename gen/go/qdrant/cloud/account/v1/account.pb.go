@@ -1891,7 +1891,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"privileges\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
 	"privileges:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
 	"\n" +
-	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x84\b\n" +
+	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x8d\b\n" +
 	"\rAccountInvite\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1902,8 +1902,8 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\ruser_role_ids\x18\x05 \x03(\tB\x0f\xbaH\f\x92\x01\t\b\x01\"\x05r\x03\xb0\x01\x01R\vuserRoleIds\x129\n" +
 	"\n" +
 	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
-	"\x12created_by_user_id\x18\a \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x12-\n" +
-	"\x10created_by_email\x18\b \x01(\tH\x01R\x0ecreatedByEmail\x88\x01\x01\x12D\n" +
+	"\x12created_by_user_id\x18\a \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x126\n" +
+	"\x10created_by_email\x18\b \x01(\tB\a\xbaH\x04r\x02`\x01H\x01R\x0ecreatedByEmail\x88\x01\x01\x12D\n" +
 	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12N\n" +
 	"\x06status\x18\n" +
 	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xcf\x03\xbaH\xcb\x03\x1a\xaa\x01\n" +

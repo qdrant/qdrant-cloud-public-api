@@ -7,6 +7,7 @@
 package collectionv1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1189,13 +1190,13 @@ var File_qdrant_cloud_serverless_collection_v1_collection_config_proto protorefl
 
 const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc = "" +
 	"\n" +
-	"=qdrant/cloud/serverless/collection/v1/collection_config.proto\x12%qdrant.cloud.serverless.collection.v1\"\xbc\x06\n" +
-	"\x17CollectionConfiguration\x12\"\n" +
+	"=qdrant/cloud/serverless/collection/v1/collection_config.proto\x12%qdrant.cloud.serverless.collection.v1\x1a\x1bbuf/validate/validate.proto\"\xa2\a\n" +
+	"\x17CollectionConfiguration\x12+\n" +
 	"\n" +
-	"tenant_key\x18\x01 \x01(\tH\x00R\ttenantKey\x88\x01\x01\x12u\n" +
-	"\rdense_vectors\x18\x02 \x03(\v2P.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.DenseVectorsEntryR\fdenseVectors\x12x\n" +
-	"\x0esparse_vectors\x18\x03 \x03(\v2Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.SparseVectorsEntryR\rsparseVectors\x12x\n" +
-	"\x0epayload_schema\x18\x04 \x03(\v2Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.PayloadSchemaEntryR\rpayloadSchema\x1a\x80\x01\n" +
+	"tenant_key\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\ttenantKey\x88\x01\x01\x12\x93\x01\n" +
+	"\rdense_vectors\x18\x02 \x03(\v2P.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.DenseVectorsEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x122\x10^[a-zA-Z0-9-_]+$R\fdenseVectors\x12\x96\x01\n" +
+	"\x0esparse_vectors\x18\x03 \x03(\v2Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.SparseVectorsEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x122\x10^[a-zA-Z0-9-_]+$R\rsparseVectors\x12\x96\x01\n" +
+	"\x0epayload_schema\x18\x04 \x03(\v2Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.PayloadSchemaEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x122\x10^[a-zA-Z0-9-_]+$R\rpayloadSchema\x1a\x80\x01\n" +
 	"\x11DenseVectorsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12U\n" +
 	"\x05value\x18\x02 \x01(\v2?.qdrant.cloud.serverless.collection.v1.DenseVectorConfigurationR\x05value:\x028\x01\x1a\x82\x01\n" +
@@ -1205,22 +1206,25 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\x12PayloadSchemaEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12O\n" +
 	"\x05value\x18\x02 \x01(\v29.qdrant.cloud.serverless.collection.v1.PayloadFieldSchemaR\x05value:\x028\x01B\r\n" +
-	"\v_tenant_key\"\xd5\x03\n" +
-	"\x18DenseVectorConfiguration\x12\x1c\n" +
-	"\tdimension\x18\x01 \x01(\x05R\tdimension\x12Q\n" +
-	"\bdistance\x18\x02 \x01(\x0e25.qdrant.cloud.serverless.collection.v1.DistanceMetricR\bdistance\x12%\n" +
+	"\v_tenant_key\"\xfe\x03\n" +
+	"\x18DenseVectorConfiguration\x12%\n" +
+	"\tdimension\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\tdimension\x12]\n" +
+	"\bdistance\x18\x02 \x01(\x0e25.qdrant.cloud.serverless.collection.v1.DistanceMetricB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\bdistance\x12%\n" +
 	"\vmultivector\x18\x03 \x01(\bH\x00R\vmultivector\x88\x01\x01\x12!\n" +
-	"\trescoring\x18\x04 \x01(\bH\x01R\trescoring\x88\x01\x01\x12Z\n" +
-	"\fstorage_tier\x18\x05 \x01(\x0e22.qdrant.cloud.serverless.collection.v1.StorageTierH\x02R\vstorageTier\x88\x01\x01\x12`\n" +
-	"\x0eprecision_tier\x18\x06 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierH\x03R\rprecisionTier\x88\x01\x01B\x0e\n" +
+	"\trescoring\x18\x04 \x01(\bH\x01R\trescoring\x88\x01\x01\x12d\n" +
+	"\fstorage_tier\x18\x05 \x01(\x0e22.qdrant.cloud.serverless.collection.v1.StorageTierB\b\xbaH\x05\x82\x01\x02\x10\x01H\x02R\vstorageTier\x88\x01\x01\x12j\n" +
+	"\x0eprecision_tier\x18\x06 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierB\b\xbaH\x05\x82\x01\x02\x10\x01H\x03R\rprecisionTier\x88\x01\x01B\x0e\n" +
 	"\f_multivectorB\f\n" +
 	"\n" +
 	"_rescoringB\x0f\n" +
 	"\r_storage_tierB\x11\n" +
-	"\x0f_precision_tier\"\xcb\x01\n" +
-	"\x19SparseVectorConfiguration\x12[\n" +
-	"\x0eprecision_tier\x18\x01 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierR\rprecisionTier\x12Q\n" +
-	"\bmodifier\x18\x02 \x01(\x0e25.qdrant.cloud.serverless.collection.v1.VectorModifierR\bmodifier\"n\n" +
+	"\x0f_precision_tier\"\xe3\x01\n" +
+	"\x19SparseVectorConfiguration\x12g\n" +
+	"\x0eprecision_tier\x18\x01 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rprecisionTier\x12]\n" +
+	"\bmodifier\x18\x02 \x01(\x0e25.qdrant.cloud.serverless.collection.v1.VectorModifierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\bmodifier\"n\n" +
 	"\x12KeywordIndexParams\x12 \n" +
 	"\tis_tenant\x18\x01 \x01(\bH\x00R\bisTenant\x88\x01\x01\x12\x1c\n" +
 	"\aon_disk\x18\x02 \x01(\bH\x01R\x06onDisk\x88\x01\x01B\f\n" +
@@ -1247,13 +1251,14 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\x0eGeoIndexParams\x12\x1c\n" +
 	"\aon_disk\x18\x01 \x01(\bH\x00R\x06onDisk\x88\x01\x01B\n" +
 	"\n" +
-	"\b_on_disk\"\xc5\x02\n" +
-	"\x0fTextIndexParams\x12S\n" +
-	"\ttokenizer\x18\x01 \x01(\x0e20.qdrant.cloud.serverless.collection.v1.TokenizerH\x00R\ttokenizer\x88\x01\x01\x12'\n" +
-	"\rmin_token_len\x18\x02 \x01(\x05H\x01R\vminTokenLen\x88\x01\x01\x12'\n" +
-	"\rmax_token_len\x18\x03 \x01(\x05H\x02R\vmaxTokenLen\x88\x01\x01\x12!\n" +
+	"\b_on_disk\"\xb1\x04\n" +
+	"\x0fTextIndexParams\x12]\n" +
+	"\ttokenizer\x18\x01 \x01(\x0e20.qdrant.cloud.serverless.collection.v1.TokenizerB\b\xbaH\x05\x82\x01\x02\x10\x01H\x00R\ttokenizer\x88\x01\x01\x120\n" +
+	"\rmin_token_len\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x01R\vminTokenLen\x88\x01\x01\x120\n" +
+	"\rmax_token_len\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x02R\vmaxTokenLen\x88\x01\x01\x12!\n" +
 	"\tlowercase\x18\x04 \x01(\bH\x03R\tlowercase\x88\x01\x01\x12\x1c\n" +
-	"\aon_disk\x18\x05 \x01(\bH\x04R\x06onDisk\x88\x01\x01B\f\n" +
+	"\aon_disk\x18\x05 \x01(\bH\x04R\x06onDisk\x88\x01\x01:\xcd\x01\xbaH\xc9\x01\x1a\xc6\x01\n" +
+	"$text_index_params.max_len_ge_min_len\x12<max_token_len must be greater than or equal to min_token_len\x1a`!has(this.min_token_len) || !has(this.max_token_len) || this.max_token_len >= this.min_token_lenB\f\n" +
 	"\n" +
 	"_tokenizerB\x10\n" +
 	"\x0e_min_token_lenB\x10\n" +
@@ -1278,7 +1283,7 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\n" +
 	"_is_tenantB\n" +
 	"\n" +
-	"\b_on_disk\"\xb2\x05\n" +
+	"\b_on_disk\"\xb9\x05\n" +
 	"\x12PayloadFieldSchema\x12U\n" +
 	"\akeyword\x18\x01 \x01(\v29.qdrant.cloud.serverless.collection.v1.KeywordIndexParamsH\x00R\akeyword\x12U\n" +
 	"\ainteger\x18\x02 \x01(\v29.qdrant.cloud.serverless.collection.v1.IntegerIndexParamsH\x00R\ainteger\x12O\n" +
@@ -1287,8 +1292,8 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\x04text\x18\x05 \x01(\v26.qdrant.cloud.serverless.collection.v1.TextIndexParamsH\x00R\x04text\x12L\n" +
 	"\x04bool\x18\x06 \x01(\v26.qdrant.cloud.serverless.collection.v1.BoolIndexParamsH\x00R\x04bool\x12X\n" +
 	"\bdatetime\x18\a \x01(\v2:.qdrant.cloud.serverless.collection.v1.DatetimeIndexParamsH\x00R\bdatetime\x12L\n" +
-	"\x04uuid\x18\b \x01(\v26.qdrant.cloud.serverless.collection.v1.UuidIndexParamsH\x00R\x04uuidB\x0e\n" +
-	"\findex_params*\xa1\x01\n" +
+	"\x04uuid\x18\b \x01(\v26.qdrant.cloud.serverless.collection.v1.UuidIndexParamsH\x00R\x04uuidB\x15\n" +
+	"\findex_params\x12\x05\xbaH\x02\b\x01*\xa1\x01\n" +
 	"\x0eDistanceMetric\x12\x1f\n" +
 	"\x1bDISTANCE_METRIC_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16DISTANCE_METRIC_COSINE\x10\x01\x12\x1a\n" +

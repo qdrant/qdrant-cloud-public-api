@@ -95,8 +95,8 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
   status: InvoiceStatus;
 
   /**
-   * The URL to download the PDF for the invoice. If the invoice has not been
-   * finalized yet, this will be null.
+   * The URL to download the PDF for the invoice.
+   * If the invoice has not been finalized yet, this field will not be set.
    *
    * @generated from field: optional string pdf_url = 6;
    */

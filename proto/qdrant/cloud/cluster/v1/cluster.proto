@@ -417,17 +417,11 @@ message ClusterConfiguration {
   // The percentage of CPU resources reserved for system components
   // This is an optional field, default is 0.
   // Number between 0..80
-  uint32 reserved_cpu_percentage = 20 [(buf.validate.field).uint32 = {
-    gte: 0
-    lte: 80
-  }];
+  uint32 reserved_cpu_percentage = 20 [(buf.validate.field).uint32 = {lte: 80}];
   // The percentage of RAM resources reserved for system components
   // This is an optional field, default is 0.
   // Number between 0..80
-  uint32 reserved_memory_percentage = 21 [(buf.validate.field).uint32 = {
-    gte: 0
-    lte: 80
-  }];
+  uint32 reserved_memory_percentage = 21 [(buf.validate.field).uint32 = {lte: 80}];
   // The gpu type that should be used for the database
   // This is an optional field, default is No configured GPU
   optional ClusterConfigurationGpuType gpu_type = 22 [(buf.validate.field).enum = {
@@ -711,11 +705,11 @@ message ClusterEndpoint {
 // ClusterNodeResourcesSummary represents the resources used in this cluster per node.
 message ClusterNodeResourcesSummary {
   // Disk resources
-  ClusterNodeResources disk = 1;
+  ClusterNodeResources disk = 1 [(buf.validate.field).required = true];
   // Memory resources
-  ClusterNodeResources ram = 2;
+  ClusterNodeResources ram = 2 [(buf.validate.field).required = true];
   // CPU resources
-  ClusterNodeResources cpu = 3;
+  ClusterNodeResources cpu = 3 [(buf.validate.field).required = true];
 }
 
 // ClusterNodeResources represents the allocation of various resources for a cluster per node.
@@ -748,7 +742,10 @@ enum ClusterScalabilityStatus {
 // ClusterScalabilityInfo provides information about the
 message ClusterScalabilityInfo {
   // The current scalability status of the cluster.
-  ClusterScalabilityStatus status = 1 [(buf.validate.field).enum.defined_only = true];
+  ClusterScalabilityStatus status = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
   optional string reason = 2;
@@ -763,7 +760,7 @@ message QdrantRelease {
   // There can be at most a single item in the list that have this property set.
   bool default = 2;
   // URL to the release notes
-  optional string release_notes_url = 3;
+  optional string release_notes_url = 3 [(buf.validate.field).string.uri = true];
   // Additional message regarding this release that might be useful to the client"
   optional string remarks = 4;
   // True, if the release version is end of life and not supported anymore

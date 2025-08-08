@@ -339,7 +339,7 @@ export declare type StripeCheckoutSession = Message<"qdrant.cloud.payment.v1.Str
 
   /**
    * The URL to redirect the user to complete the Checkout session.
-   * This may be null if the session is incomplete or improperly initialized.
+   * This may be not set in case the session is incomplete or improperly initialized.
    *
    * @generated from field: optional string url = 2;
    */

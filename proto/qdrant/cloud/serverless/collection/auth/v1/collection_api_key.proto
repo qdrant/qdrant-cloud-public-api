@@ -141,7 +141,7 @@ message CollectionApiKey {
   }];
   // The email of the user who created the collection api key.
   // This is a read-only field and will be available after a collection api key is created.
-  string created_by_email = 8;
+  string created_by_email = 8 [(buf.validate.field).string.email = true];
   option (buf.validate.message).cel = {
     id: "collection_api_key.created_by_email"
     message: "created_by_email must not be empty"

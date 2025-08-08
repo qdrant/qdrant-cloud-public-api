@@ -22,9 +22,10 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=qdrant/cloud/serverless/collection/v1/collection_config.proto\x12%qdrant.cloud.serverless.collection.v1\"\xbc\x06\n\x17\x43ollectionConfiguration\x12\"\n\ntenant_key\x18\x01 \x01(\tH\x00R\ttenantKey\x88\x01\x01\x12u\n\rdense_vectors\x18\x02 \x03(\x0b\x32P.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.DenseVectorsEntryR\x0c\x64\x65nseVectors\x12x\n\x0esparse_vectors\x18\x03 \x03(\x0b\x32Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.SparseVectorsEntryR\rsparseVectors\x12x\n\x0epayload_schema\x18\x04 \x03(\x0b\x32Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.PayloadSchemaEntryR\rpayloadSchema\x1a\x80\x01\n\x11\x44\x65nseVectorsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12U\n\x05value\x18\x02 \x01(\x0b\x32?.qdrant.cloud.serverless.collection.v1.DenseVectorConfigurationR\x05value:\x02\x38\x01\x1a\x82\x01\n\x12SparseVectorsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12V\n\x05value\x18\x02 \x01(\x0b\x32@.qdrant.cloud.serverless.collection.v1.SparseVectorConfigurationR\x05value:\x02\x38\x01\x1a{\n\x12PayloadSchemaEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12O\n\x05value\x18\x02 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.PayloadFieldSchemaR\x05value:\x02\x38\x01\x42\r\n\x0b_tenant_key\"\xd5\x03\n\x18\x44\x65nseVectorConfiguration\x12\x1c\n\tdimension\x18\x01 \x01(\x05R\tdimension\x12Q\n\x08\x64istance\x18\x02 \x01(\x0e\x32\x35.qdrant.cloud.serverless.collection.v1.DistanceMetricR\x08\x64istance\x12%\n\x0bmultivector\x18\x03 \x01(\x08H\x00R\x0bmultivector\x88\x01\x01\x12!\n\trescoring\x18\x04 \x01(\x08H\x01R\trescoring\x88\x01\x01\x12Z\n\x0cstorage_tier\x18\x05 \x01(\x0e\x32\x32.qdrant.cloud.serverless.collection.v1.StorageTierH\x02R\x0bstorageTier\x88\x01\x01\x12`\n\x0eprecision_tier\x18\x06 \x01(\x0e\x32\x34.qdrant.cloud.serverless.collection.v1.PrecisionTierH\x03R\rprecisionTier\x88\x01\x01\x42\x0e\n\x0c_multivectorB\x0c\n\n_rescoringB\x0f\n\r_storage_tierB\x11\n\x0f_precision_tier\"\xcb\x01\n\x19SparseVectorConfiguration\x12[\n\x0eprecision_tier\x18\x01 \x01(\x0e\x32\x34.qdrant.cloud.serverless.collection.v1.PrecisionTierR\rprecisionTier\x12Q\n\x08modifier\x18\x02 \x01(\x0e\x32\x35.qdrant.cloud.serverless.collection.v1.VectorModifierR\x08modifier\"n\n\x12KeywordIndexParams\x12 \n\tis_tenant\x18\x01 \x01(\x08H\x00R\x08isTenant\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0c\n\n_is_tenantB\n\n\x08_on_disk\"\xc4\x01\n\x12IntegerIndexParams\x12\x1b\n\x06lookup\x18\x01 \x01(\x08H\x00R\x06lookup\x88\x01\x01\x12\x19\n\x05range\x18\x02 \x01(\x08H\x01R\x05range\x88\x01\x01\x12&\n\x0cis_principal\x18\x03 \x01(\x08H\x02R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x04 \x01(\x08H\x03R\x06onDisk\x88\x01\x01\x42\t\n\x07_lookupB\x08\n\x06_rangeB\x0f\n\r_is_principalB\n\n\x08_on_disk\"u\n\x10\x46loatIndexParams\x12&\n\x0cis_principal\x18\x01 \x01(\x08H\x00R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0f\n\r_is_principalB\n\n\x08_on_disk\":\n\x0eGeoIndexParams\x12\x1c\n\x07on_disk\x18\x01 \x01(\x08H\x00R\x06onDisk\x88\x01\x01\x42\n\n\x08_on_disk\"\xc5\x02\n\x0fTextIndexParams\x12S\n\ttokenizer\x18\x01 \x01(\x0e\x32\x30.qdrant.cloud.serverless.collection.v1.TokenizerH\x00R\ttokenizer\x88\x01\x01\x12\'\n\rmin_token_len\x18\x02 \x01(\x05H\x01R\x0bminTokenLen\x88\x01\x01\x12\'\n\rmax_token_len\x18\x03 \x01(\x05H\x02R\x0bmaxTokenLen\x88\x01\x01\x12!\n\tlowercase\x18\x04 \x01(\x08H\x03R\tlowercase\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x05 \x01(\x08H\x04R\x06onDisk\x88\x01\x01\x42\x0c\n\n_tokenizerB\x10\n\x0e_min_token_lenB\x10\n\x0e_max_token_lenB\x0c\n\n_lowercaseB\n\n\x08_on_disk\";\n\x0f\x42oolIndexParams\x12\x1c\n\x07on_disk\x18\x01 \x01(\x08H\x00R\x06onDisk\x88\x01\x01\x42\n\n\x08_on_disk\"x\n\x13\x44\x61tetimeIndexParams\x12&\n\x0cis_principal\x18\x01 \x01(\x08H\x00R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0f\n\r_is_principalB\n\n\x08_on_disk\"k\n\x0fUuidIndexParams\x12 \n\tis_tenant\x18\x01 \x01(\x08H\x00R\x08isTenant\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0c\n\n_is_tenantB\n\n\x08_on_disk\"\xb2\x05\n\x12PayloadFieldSchema\x12U\n\x07keyword\x18\x01 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.KeywordIndexParamsH\x00R\x07keyword\x12U\n\x07integer\x18\x02 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.IntegerIndexParamsH\x00R\x07integer\x12O\n\x05\x66loat\x18\x03 \x01(\x0b\x32\x37.qdrant.cloud.serverless.collection.v1.FloatIndexParamsH\x00R\x05\x66loat\x12I\n\x03geo\x18\x04 \x01(\x0b\x32\x35.qdrant.cloud.serverless.collection.v1.GeoIndexParamsH\x00R\x03geo\x12L\n\x04text\x18\x05 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.TextIndexParamsH\x00R\x04text\x12L\n\x04\x62ool\x18\x06 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.BoolIndexParamsH\x00R\x04\x62ool\x12X\n\x08\x64\x61tetime\x18\x07 \x01(\x0b\x32:.qdrant.cloud.serverless.collection.v1.DatetimeIndexParamsH\x00R\x08\x64\x61tetime\x12L\n\x04uuid\x18\x08 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.UuidIndexParamsH\x00R\x04uuidB\x0e\n\x0cindex_params*\xa1\x01\n\x0e\x44istanceMetric\x12\x1f\n\x1b\x44ISTANCE_METRIC_UNSPECIFIED\x10\x00\x12\x1a\n\x16\x44ISTANCE_METRIC_COSINE\x10\x01\x12\x1a\n\x16\x44ISTANCE_METRIC_EUCLID\x10\x02\x12\x17\n\x13\x44ISTANCE_METRIC_DOT\x10\x03\x12\x1d\n\x19\x44ISTANCE_METRIC_MANHATTAN\x10\x04*~\n\x0bStorageTier\x12\x1c\n\x18STORAGE_TIER_UNSPECIFIED\x10\x00\x12\x18\n\x14STORAGE_TIER_STORAGE\x10\x01\x12\x19\n\x15STORAGE_TIER_BALANCED\x10\x02\x12\x1c\n\x18STORAGE_TIER_PERFORMANCE\x10\x03*{\n\rPrecisionTier\x12\x1e\n\x1aPRECISION_TIER_UNSPECIFIED\x10\x00\x12\x16\n\x12PRECISION_TIER_LOW\x10\x01\x12\x19\n\x15PRECISION_TIER_MEDIUM\x10\x02\x12\x17\n\x13PRECISION_TIER_HIGH\x10\x03*d\n\x0eVectorModifier\x12\x1f\n\x1bVECTOR_MODIFIER_UNSPECIFIED\x10\x00\x12\x18\n\x14VECTOR_MODIFIER_NONE\x10\x01\x12\x17\n\x13VECTOR_MODIFIER_IDF\x10\x02*\x86\x01\n\tTokenizer\x12\x19\n\x15TOKENIZER_UNSPECIFIED\x10\x00\x12\x14\n\x10TOKENIZER_PREFIX\x10\x01\x12\x18\n\x14TOKENIZER_WHITESPACE\x10\x02\x12\x12\n\x0eTOKENIZER_WORD\x10\x03\x12\x1a\n\x16TOKENIZER_MULTILINGUAL\x10\x04\x42\xe0\x02\n)com.qdrant.cloud.serverless.collection.v1B\x15\x43ollectionConfigProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/v1;collectionv1\xa2\x02\x04QCSC\xaa\x02%Qdrant.Cloud.Serverless.Collection.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Collection\\V1\xe2\x02\x31Qdrant\\Cloud\\Serverless\\Collection\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Collection::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=qdrant/cloud/serverless/collection/v1/collection_config.proto\x12%qdrant.cloud.serverless.collection.v1\x1a\x1b\x62uf/validate/validate.proto\"\xa2\x07\n\x17\x43ollectionConfiguration\x12+\n\ntenant_key\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x00R\ttenantKey\x88\x01\x01\x12\x93\x01\n\rdense_vectors\x18\x02 \x03(\x0b\x32P.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.DenseVectorsEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x12\x32\x10^[a-zA-Z0-9-_]+$R\x0c\x64\x65nseVectors\x12\x96\x01\n\x0esparse_vectors\x18\x03 \x03(\x0b\x32Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.SparseVectorsEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x12\x32\x10^[a-zA-Z0-9-_]+$R\rsparseVectors\x12\x96\x01\n\x0epayload_schema\x18\x04 \x03(\x0b\x32Q.qdrant.cloud.serverless.collection.v1.CollectionConfiguration.PayloadSchemaEntryB\x1c\xbaH\x19\x9a\x01\x16\"\x14r\x12\x32\x10^[a-zA-Z0-9-_]+$R\rpayloadSchema\x1a\x80\x01\n\x11\x44\x65nseVectorsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12U\n\x05value\x18\x02 \x01(\x0b\x32?.qdrant.cloud.serverless.collection.v1.DenseVectorConfigurationR\x05value:\x02\x38\x01\x1a\x82\x01\n\x12SparseVectorsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12V\n\x05value\x18\x02 \x01(\x0b\x32@.qdrant.cloud.serverless.collection.v1.SparseVectorConfigurationR\x05value:\x02\x38\x01\x1a{\n\x12PayloadSchemaEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12O\n\x05value\x18\x02 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.PayloadFieldSchemaR\x05value:\x02\x38\x01\x42\r\n\x0b_tenant_key\"\xfe\x03\n\x18\x44\x65nseVectorConfiguration\x12%\n\tdimension\x18\x01 \x01(\x05\x42\x07\xbaH\x04\x1a\x02 \x00R\tdimension\x12]\n\x08\x64istance\x18\x02 \x01(\x0e\x32\x35.qdrant.cloud.serverless.collection.v1.DistanceMetricB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x08\x64istance\x12%\n\x0bmultivector\x18\x03 \x01(\x08H\x00R\x0bmultivector\x88\x01\x01\x12!\n\trescoring\x18\x04 \x01(\x08H\x01R\trescoring\x88\x01\x01\x12\x64\n\x0cstorage_tier\x18\x05 \x01(\x0e\x32\x32.qdrant.cloud.serverless.collection.v1.StorageTierB\x08\xbaH\x05\x82\x01\x02\x10\x01H\x02R\x0bstorageTier\x88\x01\x01\x12j\n\x0eprecision_tier\x18\x06 \x01(\x0e\x32\x34.qdrant.cloud.serverless.collection.v1.PrecisionTierB\x08\xbaH\x05\x82\x01\x02\x10\x01H\x03R\rprecisionTier\x88\x01\x01\x42\x0e\n\x0c_multivectorB\x0c\n\n_rescoringB\x0f\n\r_storage_tierB\x11\n\x0f_precision_tier\"\xe3\x01\n\x19SparseVectorConfiguration\x12g\n\x0eprecision_tier\x18\x01 \x01(\x0e\x32\x34.qdrant.cloud.serverless.collection.v1.PrecisionTierB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\rprecisionTier\x12]\n\x08modifier\x18\x02 \x01(\x0e\x32\x35.qdrant.cloud.serverless.collection.v1.VectorModifierB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x08modifier\"n\n\x12KeywordIndexParams\x12 \n\tis_tenant\x18\x01 \x01(\x08H\x00R\x08isTenant\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0c\n\n_is_tenantB\n\n\x08_on_disk\"\xc4\x01\n\x12IntegerIndexParams\x12\x1b\n\x06lookup\x18\x01 \x01(\x08H\x00R\x06lookup\x88\x01\x01\x12\x19\n\x05range\x18\x02 \x01(\x08H\x01R\x05range\x88\x01\x01\x12&\n\x0cis_principal\x18\x03 \x01(\x08H\x02R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x04 \x01(\x08H\x03R\x06onDisk\x88\x01\x01\x42\t\n\x07_lookupB\x08\n\x06_rangeB\x0f\n\r_is_principalB\n\n\x08_on_disk\"u\n\x10\x46loatIndexParams\x12&\n\x0cis_principal\x18\x01 \x01(\x08H\x00R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0f\n\r_is_principalB\n\n\x08_on_disk\":\n\x0eGeoIndexParams\x12\x1c\n\x07on_disk\x18\x01 \x01(\x08H\x00R\x06onDisk\x88\x01\x01\x42\n\n\x08_on_disk\"\xb1\x04\n\x0fTextIndexParams\x12]\n\ttokenizer\x18\x01 \x01(\x0e\x32\x30.qdrant.cloud.serverless.collection.v1.TokenizerB\x08\xbaH\x05\x82\x01\x02\x10\x01H\x00R\ttokenizer\x88\x01\x01\x12\x30\n\rmin_token_len\x18\x02 \x01(\x05\x42\x07\xbaH\x04\x1a\x02(\x00H\x01R\x0bminTokenLen\x88\x01\x01\x12\x30\n\rmax_token_len\x18\x03 \x01(\x05\x42\x07\xbaH\x04\x1a\x02(\x00H\x02R\x0bmaxTokenLen\x88\x01\x01\x12!\n\tlowercase\x18\x04 \x01(\x08H\x03R\tlowercase\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x05 \x01(\x08H\x04R\x06onDisk\x88\x01\x01:\xcd\x01\xbaH\xc9\x01\x1a\xc6\x01\n$text_index_params.max_len_ge_min_len\x12<max_token_len must be greater than or equal to min_token_len\x1a`!has(this.min_token_len) || !has(this.max_token_len) || this.max_token_len >= this.min_token_lenB\x0c\n\n_tokenizerB\x10\n\x0e_min_token_lenB\x10\n\x0e_max_token_lenB\x0c\n\n_lowercaseB\n\n\x08_on_disk\";\n\x0f\x42oolIndexParams\x12\x1c\n\x07on_disk\x18\x01 \x01(\x08H\x00R\x06onDisk\x88\x01\x01\x42\n\n\x08_on_disk\"x\n\x13\x44\x61tetimeIndexParams\x12&\n\x0cis_principal\x18\x01 \x01(\x08H\x00R\x0bisPrincipal\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0f\n\r_is_principalB\n\n\x08_on_disk\"k\n\x0fUuidIndexParams\x12 \n\tis_tenant\x18\x01 \x01(\x08H\x00R\x08isTenant\x88\x01\x01\x12\x1c\n\x07on_disk\x18\x02 \x01(\x08H\x01R\x06onDisk\x88\x01\x01\x42\x0c\n\n_is_tenantB\n\n\x08_on_disk\"\xb9\x05\n\x12PayloadFieldSchema\x12U\n\x07keyword\x18\x01 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.KeywordIndexParamsH\x00R\x07keyword\x12U\n\x07integer\x18\x02 \x01(\x0b\x32\x39.qdrant.cloud.serverless.collection.v1.IntegerIndexParamsH\x00R\x07integer\x12O\n\x05\x66loat\x18\x03 \x01(\x0b\x32\x37.qdrant.cloud.serverless.collection.v1.FloatIndexParamsH\x00R\x05\x66loat\x12I\n\x03geo\x18\x04 \x01(\x0b\x32\x35.qdrant.cloud.serverless.collection.v1.GeoIndexParamsH\x00R\x03geo\x12L\n\x04text\x18\x05 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.TextIndexParamsH\x00R\x04text\x12L\n\x04\x62ool\x18\x06 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.BoolIndexParamsH\x00R\x04\x62ool\x12X\n\x08\x64\x61tetime\x18\x07 \x01(\x0b\x32:.qdrant.cloud.serverless.collection.v1.DatetimeIndexParamsH\x00R\x08\x64\x61tetime\x12L\n\x04uuid\x18\x08 \x01(\x0b\x32\x36.qdrant.cloud.serverless.collection.v1.UuidIndexParamsH\x00R\x04uuidB\x15\n\x0cindex_params\x12\x05\xbaH\x02\x08\x01*\xa1\x01\n\x0e\x44istanceMetric\x12\x1f\n\x1b\x44ISTANCE_METRIC_UNSPECIFIED\x10\x00\x12\x1a\n\x16\x44ISTANCE_METRIC_COSINE\x10\x01\x12\x1a\n\x16\x44ISTANCE_METRIC_EUCLID\x10\x02\x12\x17\n\x13\x44ISTANCE_METRIC_DOT\x10\x03\x12\x1d\n\x19\x44ISTANCE_METRIC_MANHATTAN\x10\x04*~\n\x0bStorageTier\x12\x1c\n\x18STORAGE_TIER_UNSPECIFIED\x10\x00\x12\x18\n\x14STORAGE_TIER_STORAGE\x10\x01\x12\x19\n\x15STORAGE_TIER_BALANCED\x10\x02\x12\x1c\n\x18STORAGE_TIER_PERFORMANCE\x10\x03*{\n\rPrecisionTier\x12\x1e\n\x1aPRECISION_TIER_UNSPECIFIED\x10\x00\x12\x16\n\x12PRECISION_TIER_LOW\x10\x01\x12\x19\n\x15PRECISION_TIER_MEDIUM\x10\x02\x12\x17\n\x13PRECISION_TIER_HIGH\x10\x03*d\n\x0eVectorModifier\x12\x1f\n\x1bVECTOR_MODIFIER_UNSPECIFIED\x10\x00\x12\x18\n\x14VECTOR_MODIFIER_NONE\x10\x01\x12\x17\n\x13VECTOR_MODIFIER_IDF\x10\x02*\x86\x01\n\tTokenizer\x12\x19\n\x15TOKENIZER_UNSPECIFIED\x10\x00\x12\x14\n\x10TOKENIZER_PREFIX\x10\x01\x12\x18\n\x14TOKENIZER_WHITESPACE\x10\x02\x12\x12\n\x0eTOKENIZER_WORD\x10\x03\x12\x1a\n\x16TOKENIZER_MULTILINGUAL\x10\x04\x42\xe0\x02\n)com.qdrant.cloud.serverless.collection.v1B\x15\x43ollectionConfigProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/v1;collectionv1\xa2\x02\x04QCSC\xaa\x02%Qdrant.Cloud.Serverless.Collection.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Collection\\V1\xe2\x02\x31Qdrant\\Cloud\\Serverless\\Collection\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Collection::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,44 +39,74 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_COLLECTIONCONFIGURATION_SPARSEVECTORSENTRY']._serialized_options = b'8\001'
   _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._loaded_options = None
   _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._serialized_options = b'8\001'
-  _globals['_DISTANCEMETRIC']._serialized_start=3417
-  _globals['_DISTANCEMETRIC']._serialized_end=3578
-  _globals['_STORAGETIER']._serialized_start=3580
-  _globals['_STORAGETIER']._serialized_end=3706
-  _globals['_PRECISIONTIER']._serialized_start=3708
-  _globals['_PRECISIONTIER']._serialized_end=3831
-  _globals['_VECTORMODIFIER']._serialized_start=3833
-  _globals['_VECTORMODIFIER']._serialized_end=3933
-  _globals['_TOKENIZER']._serialized_start=3936
-  _globals['_TOKENIZER']._serialized_end=4070
-  _globals['_COLLECTIONCONFIGURATION']._serialized_start=105
-  _globals['_COLLECTIONCONFIGURATION']._serialized_end=933
-  _globals['_COLLECTIONCONFIGURATION_DENSEVECTORSENTRY']._serialized_start=532
-  _globals['_COLLECTIONCONFIGURATION_DENSEVECTORSENTRY']._serialized_end=660
-  _globals['_COLLECTIONCONFIGURATION_SPARSEVECTORSENTRY']._serialized_start=663
-  _globals['_COLLECTIONCONFIGURATION_SPARSEVECTORSENTRY']._serialized_end=793
-  _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._serialized_start=795
-  _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._serialized_end=918
-  _globals['_DENSEVECTORCONFIGURATION']._serialized_start=936
-  _globals['_DENSEVECTORCONFIGURATION']._serialized_end=1405
-  _globals['_SPARSEVECTORCONFIGURATION']._serialized_start=1408
-  _globals['_SPARSEVECTORCONFIGURATION']._serialized_end=1611
-  _globals['_KEYWORDINDEXPARAMS']._serialized_start=1613
-  _globals['_KEYWORDINDEXPARAMS']._serialized_end=1723
-  _globals['_INTEGERINDEXPARAMS']._serialized_start=1726
-  _globals['_INTEGERINDEXPARAMS']._serialized_end=1922
-  _globals['_FLOATINDEXPARAMS']._serialized_start=1924
-  _globals['_FLOATINDEXPARAMS']._serialized_end=2041
-  _globals['_GEOINDEXPARAMS']._serialized_start=2043
-  _globals['_GEOINDEXPARAMS']._serialized_end=2101
-  _globals['_TEXTINDEXPARAMS']._serialized_start=2104
-  _globals['_TEXTINDEXPARAMS']._serialized_end=2429
-  _globals['_BOOLINDEXPARAMS']._serialized_start=2431
-  _globals['_BOOLINDEXPARAMS']._serialized_end=2490
-  _globals['_DATETIMEINDEXPARAMS']._serialized_start=2492
-  _globals['_DATETIMEINDEXPARAMS']._serialized_end=2612
-  _globals['_UUIDINDEXPARAMS']._serialized_start=2614
-  _globals['_UUIDINDEXPARAMS']._serialized_end=2721
-  _globals['_PAYLOADFIELDSCHEMA']._serialized_start=2724
-  _globals['_PAYLOADFIELDSCHEMA']._serialized_end=3414
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['tenant_key']._loaded_options = None
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['tenant_key']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['dense_vectors']._loaded_options = None
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['dense_vectors']._serialized_options = b'\272H\031\232\001\026\"\024r\0222\020^[a-zA-Z0-9-_]+$'
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['sparse_vectors']._loaded_options = None
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['sparse_vectors']._serialized_options = b'\272H\031\232\001\026\"\024r\0222\020^[a-zA-Z0-9-_]+$'
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['payload_schema']._loaded_options = None
+  _globals['_COLLECTIONCONFIGURATION'].fields_by_name['payload_schema']._serialized_options = b'\272H\031\232\001\026\"\024r\0222\020^[a-zA-Z0-9-_]+$'
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['dimension']._loaded_options = None
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['dimension']._serialized_options = b'\272H\004\032\002 \000'
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['distance']._loaded_options = None
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['distance']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['storage_tier']._loaded_options = None
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['storage_tier']._serialized_options = b'\272H\005\202\001\002\020\001'
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['precision_tier']._loaded_options = None
+  _globals['_DENSEVECTORCONFIGURATION'].fields_by_name['precision_tier']._serialized_options = b'\272H\005\202\001\002\020\001'
+  _globals['_SPARSEVECTORCONFIGURATION'].fields_by_name['precision_tier']._loaded_options = None
+  _globals['_SPARSEVECTORCONFIGURATION'].fields_by_name['precision_tier']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
+  _globals['_SPARSEVECTORCONFIGURATION'].fields_by_name['modifier']._loaded_options = None
+  _globals['_SPARSEVECTORCONFIGURATION'].fields_by_name['modifier']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['tokenizer']._loaded_options = None
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['tokenizer']._serialized_options = b'\272H\005\202\001\002\020\001'
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['min_token_len']._loaded_options = None
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['min_token_len']._serialized_options = b'\272H\004\032\002(\000'
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['max_token_len']._loaded_options = None
+  _globals['_TEXTINDEXPARAMS'].fields_by_name['max_token_len']._serialized_options = b'\272H\004\032\002(\000'
+  _globals['_TEXTINDEXPARAMS']._loaded_options = None
+  _globals['_TEXTINDEXPARAMS']._serialized_options = b'\272H\311\001\032\306\001\n$text_index_params.max_len_ge_min_len\022<max_token_len must be greater than or equal to min_token_len\032`!has(this.min_token_len) || !has(this.max_token_len) || this.max_token_len >= this.min_token_len'
+  _globals['_PAYLOADFIELDSCHEMA'].oneofs_by_name['index_params']._loaded_options = None
+  _globals['_PAYLOADFIELDSCHEMA'].oneofs_by_name['index_params']._serialized_options = b'\272H\002\010\001'
+  _globals['_DISTANCEMETRIC']._serialized_start=3856
+  _globals['_DISTANCEMETRIC']._serialized_end=4017
+  _globals['_STORAGETIER']._serialized_start=4019
+  _globals['_STORAGETIER']._serialized_end=4145
+  _globals['_PRECISIONTIER']._serialized_start=4147
+  _globals['_PRECISIONTIER']._serialized_end=4270
+  _globals['_VECTORMODIFIER']._serialized_start=4272
+  _globals['_VECTORMODIFIER']._serialized_end=4372
+  _globals['_TOKENIZER']._serialized_start=4375
+  _globals['_TOKENIZER']._serialized_end=4509
+  _globals['_COLLECTIONCONFIGURATION']._serialized_start=134
+  _globals['_COLLECTIONCONFIGURATION']._serialized_end=1064
+  _globals['_COLLECTIONCONFIGURATION_DENSEVECTORSENTRY']._serialized_start=663
+  _globals['_COLLECTIONCONFIGURATION_DENSEVECTORSENTRY']._serialized_end=791
+  _globals['_COLLECTIONCONFIGURATION_SPARSEVECTORSENTRY']._serialized_start=794
+  _globals['_COLLECTIONCONFIGURATION_SPARSEVECTORSENTRY']._serialized_end=924
+  _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._serialized_start=926
+  _globals['_COLLECTIONCONFIGURATION_PAYLOADSCHEMAENTRY']._serialized_end=1049
+  _globals['_DENSEVECTORCONFIGURATION']._serialized_start=1067
+  _globals['_DENSEVECTORCONFIGURATION']._serialized_end=1577
+  _globals['_SPARSEVECTORCONFIGURATION']._serialized_start=1580
+  _globals['_SPARSEVECTORCONFIGURATION']._serialized_end=1807
+  _globals['_KEYWORDINDEXPARAMS']._serialized_start=1809
+  _globals['_KEYWORDINDEXPARAMS']._serialized_end=1919
+  _globals['_INTEGERINDEXPARAMS']._serialized_start=1922
+  _globals['_INTEGERINDEXPARAMS']._serialized_end=2118
+  _globals['_FLOATINDEXPARAMS']._serialized_start=2120
+  _globals['_FLOATINDEXPARAMS']._serialized_end=2237
+  _globals['_GEOINDEXPARAMS']._serialized_start=2239
+  _globals['_GEOINDEXPARAMS']._serialized_end=2297
+  _globals['_TEXTINDEXPARAMS']._serialized_start=2300
+  _globals['_TEXTINDEXPARAMS']._serialized_end=2861
+  _globals['_BOOLINDEXPARAMS']._serialized_start=2863
+  _globals['_BOOLINDEXPARAMS']._serialized_end=2922
+  _globals['_DATETIMEINDEXPARAMS']._serialized_start=2924
+  _globals['_DATETIMEINDEXPARAMS']._serialized_end=3044
+  _globals['_UUIDINDEXPARAMS']._serialized_start=3046
+  _globals['_UUIDINDEXPARAMS']._serialized_end=3153
+  _globals['_PAYLOADFIELDSCHEMA']._serialized_start=3156
+  _globals['_PAYLOADFIELDSCHEMA']._serialized_end=3853
 # @@protoc_insertion_point(module_scope)

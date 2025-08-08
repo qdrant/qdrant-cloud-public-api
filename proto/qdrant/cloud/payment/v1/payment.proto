@@ -166,13 +166,13 @@ message GetStripeCheckoutSessionRequest {
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the Stripe session.
   // This is a required field.
-  string session_id = 2;
+  string session_id = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function
 message GetStripeCheckoutSessionResponse {
   // The Stripe session for the account.
-  StripeCheckoutSession stripe_session = 1;
+  StripeCheckoutSession stripe_session = 1 [(buf.validate.field).required = true];
 }
 
 // CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function
@@ -181,31 +181,34 @@ message CreateStripeCheckoutSessionRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // Redirect URL to which the user will be redirected after the payment setup is completed.
-  string redirect_url = 2;
+  string redirect_url = 2 [(buf.validate.field).string.uri = true];
 }
 
 // CreateStripeCheckoutSessionResponse is the response from the CreateStripeCheckoutSession function
 message CreateStripeCheckoutSessionResponse {
   // Stripe session created for payment method setup or collection.
-  StripeCheckoutSession stripe_session = 1;
+  StripeCheckoutSession stripe_session = 1 [(buf.validate.field).required = true];
 }
 
 // Represents a Stripe Session abstraction containing Checkout session and SetupIntent references.
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 message StripeCheckoutSession {
   // The unique identifier of the Stripe Checkout session.
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.min_len = 1];
   // The URL to redirect the user to complete the Checkout session.
-  // This may be null if the session is incomplete or improperly initialized.
-  optional string url = 2;
+  // This may be not set in case the session is incomplete or improperly initialized.
+  optional string url = 2 [(buf.validate.field).string.uri = true];
   // The Stripe customer ID associated with this session.
-  string customer = 3;
+  string customer = 3 [(buf.validate.field).string.min_len = 1];
   // The ID of the associated Stripe SetupIntent.
-  string setup_intent_id = 4;
+  string setup_intent_id = 4 [(buf.validate.field).string.min_len = 1];
   // The status of the associated Stripe SetupIntent.
-  StripeSetupIntentStatus setup_intent_status = 5;
+  StripeSetupIntentStatus setup_intent_status = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The payment method attached to the associated SetupIntent.
-  string setup_intent_payment_method = 6;
+  string setup_intent_payment_method = 6 [(buf.validate.field).string.min_len = 1];
 }
 
 // Represents a payment method.

@@ -771,7 +771,7 @@
         },
         "url": {
           "type": "string",
-          "description": "The URL to redirect the user to complete the Checkout session.\nThis may be null if the session is incomplete or improperly initialized."
+          "description": "The URL to redirect the user to complete the Checkout session.\nThis may be not set in case the session is incomplete or improperly initialized."
         },
         "customer": {
           "type": "string",

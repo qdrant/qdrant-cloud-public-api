@@ -40,16 +40,19 @@ message Invoice {
   string id = 1 [(buf.validate.field).string.min_len = 1];
   // Optional invoice unique identifier. It appears on emails sent to the
   // customer for this invoice.
-  optional string number = 2;
+  optional string number = 2 [(buf.validate.field).string.min_len = 1];
   // Total invoice amount.
   int64 total_amount = 3 [(buf.validate.field).int64.gte = 0];
   // The timestamp when the invoice was created.
   google.protobuf.Timestamp created_at = 4 [(buf.validate.field).required = true];
   // The current status of the invoice.
-  InvoiceStatus status = 5 [(buf.validate.field).enum.defined_only = true];
-  // The URL to download the PDF for the invoice. If the invoice has not been
-  // finalized yet, this will be null.
-  optional string pdf_url = 6;
+  InvoiceStatus status = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The URL to download the PDF for the invoice.
+  // If the invoice has not been finalized yet, this field will not be set.
+  optional string pdf_url = 6 [(buf.validate.field).string.uri = true];
 }
 
 // The possible status of an invoice.

@@ -365,9 +365,9 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fACTOR_TYPE_USER\x10\x01\x12\x1d\n" +
 	"\x19ACTOR_TYPE_MANAGEMENT_KEY\x10\x02\x12\x1e\n" +
-	"\x1aACTOR_TYPE_SERVICE_ACCOUNT\x10\x03:B\n" +
-	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x03(\tR\vpermissions:T\n" +
-	"\x15account_id_expression\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x01(\tR\x13accountIdExpression:Y\n" +
+	"\x1aACTOR_TYPE_SERVICE_ACCOUNT\x10\x03:P\n" +
+	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions:u\n" +
+	"\x15account_id_expression\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x01(\tB\x1f\xbaH\x1cr\x1a2\x18^(|[a-z_]+(\\.[a-z_]+)*)$R\x13accountIdExpression:Y\n" +
 	"\x17requires_authentication\x12\x1e.google.protobuf.MethodOptions\x18ӆ\x03 \x01(\bR\x16requiresAuthentication:\x8a\x01\n" +
 	"\x15supported_actor_types\x12\x1e.google.protobuf.MethodOptions\x18Ԇ\x03 \x03(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\x11\xbaH\f\x92\x01\t\"\a\x82\x01\x04\x10\x01 \x00\x10\x01R\x13supportedActorTypes:Z\n" +
 	"\x18requires_all_permissions\x12\x1e.google.protobuf.MethodOptions\x18Ն\x03 \x01(\bR\x16requiresAllPermissions:V\n" +
