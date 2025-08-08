@@ -247,7 +247,7 @@
           "description": "The name of the package.\nA human-readable identifier for the package."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/v1PackageType",
           "description": "Specifies if this is a free or paid package."
         },
         "resourceConfiguration": {
@@ -256,7 +256,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated."
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         },
         "unitIntPricePerHour": {
           "type": "integer",
@@ -283,6 +283,16 @@
       ],
       "default": "PACKAGE_STATUS_UNSPECIFIED",
       "description": "PackageStatus defines the valid states a package can be in.\n\n - PACKAGE_STATUS_UNSPECIFIED: Unspecified package status.\n - PACKAGE_STATUS_ACTIVE: The package is active and available for use.\n - PACKAGE_STATUS_DEACTIVATED: The package is deactivated."
+    },
+    "v1PackageType": {
+      "type": "string",
+      "enum": [
+        "PACKAGE_TYPE_UNSPECIFIED",
+        "PACKAGE_TYPE_FREE",
+        "PACKAGE_TYPE_PAID"
+      ],
+      "default": "PACKAGE_TYPE_UNSPECIFIED",
+      "description": "PackageType defines the type of a package.\n\n - PACKAGE_TYPE_UNSPECIFIED: Unspecified package type.\n - PACKAGE_TYPE_FREE: A free package.\n - PACKAGE_TYPE_PAID: A paid package."
     },
     "v1ResourceConfiguration": {
       "type": "object",

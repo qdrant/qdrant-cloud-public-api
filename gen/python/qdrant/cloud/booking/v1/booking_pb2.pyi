@@ -15,9 +15,18 @@ class PackageStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     PACKAGE_STATUS_UNSPECIFIED: _ClassVar[PackageStatus]
     PACKAGE_STATUS_ACTIVE: _ClassVar[PackageStatus]
     PACKAGE_STATUS_DEACTIVATED: _ClassVar[PackageStatus]
+
+class PackageType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PACKAGE_TYPE_UNSPECIFIED: _ClassVar[PackageType]
+    PACKAGE_TYPE_FREE: _ClassVar[PackageType]
+    PACKAGE_TYPE_PAID: _ClassVar[PackageType]
 PACKAGE_STATUS_UNSPECIFIED: PackageStatus
 PACKAGE_STATUS_ACTIVE: PackageStatus
 PACKAGE_STATUS_DEACTIVATED: PackageStatus
+PACKAGE_TYPE_UNSPECIFIED: PackageType
+PACKAGE_TYPE_FREE: PackageType
+PACKAGE_TYPE_PAID: PackageType
 
 class ListPackagesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses")
@@ -77,13 +86,13 @@ class Package(_message.Message):
     AVAILABLE_ADDITIONAL_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
-    type: str
+    type: PackageType
     resource_configuration: ResourceConfiguration
     currency: str
     unit_int_price_per_hour: int
     status: PackageStatus
     available_additional_resources: AvailableAdditionalResources
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[PackageType, str]] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
     __slots__ = ("disk_price_per_hour",)

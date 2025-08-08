@@ -201,9 +201,9 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   /**
    * Specifies if this is a free or paid package.
    *
-   * @generated from field: string type = 3;
+   * @generated from field: qdrant.cloud.booking.v1.PackageType type = 3;
    */
-  type: string;
+  type: PackageType;
 
   /**
    * The resource configuration associated with the package
@@ -215,6 +215,7 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   /**
    * The currency of the prices.
    * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
    *
    * @generated from field: string currency = 5;
    */
@@ -341,6 +342,39 @@ export enum PackageStatus {
  * Describes the enum qdrant.cloud.booking.v1.PackageStatus.
  */
 export declare const PackageStatusSchema: GenEnum<PackageStatus>;
+
+/**
+ * PackageType defines the type of a package.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.PackageType
+ */
+export enum PackageType {
+  /**
+   * Unspecified package type.
+   *
+   * @generated from enum value: PACKAGE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * A free package.
+   *
+   * @generated from enum value: PACKAGE_TYPE_FREE = 1;
+   */
+  FREE = 1,
+
+  /**
+   * A paid package.
+   *
+   * @generated from enum value: PACKAGE_TYPE_PAID = 2;
+   */
+  PAID = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.PackageType.
+ */
+export declare const PackageTypeSchema: GenEnum<PackageType>;
 
 /**
  * BookingService is the API used to configure the booking settings (like packages objects).

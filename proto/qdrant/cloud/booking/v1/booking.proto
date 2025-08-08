@@ -104,6 +104,16 @@ enum PackageStatus {
   PACKAGE_STATUS_DEACTIVATED = 2;
 }
 
+// PackageType defines the type of a package.
+enum PackageType {
+  // Unspecified package type.
+  PACKAGE_TYPE_UNSPECIFIED = 0;
+  // A free package.
+  PACKAGE_TYPE_FREE = 1;
+  // A paid package.
+  PACKAGE_TYPE_PAID = 2;
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // Package represents a single package.
 // A package is a configuration (CPU/Memory/Disk size) for a cluster with a price.
@@ -115,12 +125,16 @@ message Package {
   // A human-readable identifier for the package.
   string name = 2;
   // Specifies if this is a free or paid package.
-  string type = 3;
+  PackageType type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The resource configuration associated with the package
   ResourceConfiguration resource_configuration = 4;
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
-  string currency = 5;
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 5 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
   // The unit price per hour in millicents, in integer format.
   // Represents the cost per hour for a single unit of the resource.
   // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
