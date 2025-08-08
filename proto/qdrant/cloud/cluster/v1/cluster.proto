@@ -135,7 +135,7 @@ message ListClustersRequest {
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // If this field is set, the `cloud_provider_id` is required to set as well (and it should match).
   // For hybrid this should be the hybrid cloud environment ID.
-  optional string cloud_provider_region_id = 11;
+  optional string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
   // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider_id as well, so this can't be a simple field validator.
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
@@ -748,7 +748,7 @@ message ClusterScalabilityInfo {
   }];
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
-  optional string reason = 2;
+  optional string reason = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -762,7 +762,7 @@ message QdrantRelease {
   // URL to the release notes
   optional string release_notes_url = 3 [(buf.validate.field).string.uri = true];
   // Additional message regarding this release that might be useful to the client"
-  optional string remarks = 4;
+  optional string remarks = 4 [(buf.validate.field).string.min_len = 1];
   // True, if the release version is end of life and not supported anymore
   bool end_of_life = 5;
   // True, if the release is not available for the cluster creation or updates

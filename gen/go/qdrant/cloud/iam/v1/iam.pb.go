@@ -1930,7 +1930,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x12role_ids_to_delete\x18\x04 \x03(\tB\r\xbaH\n" +
 	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete:\x9a\x01\xbaH\x96\x01\x1a\x93\x01\n" +
 	"\x1eassign_user_roles.at_least_one\x12*at least one role must be added or deleted\x1aEthis.role_ids_to_add.size() > 0 || this.role_ids_to_delete.size() > 0\"\x19\n" +
-	"\x17AssignUserRolesResponse\"\xbb\x02\n" +
+	"\x17AssignUserRolesResponse\"\x9b\x04\n" +
 	"\x04User\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -1938,7 +1938,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
-	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\"\xbf\x04\n" +
+	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId:\xdd\x01\xbaH\xd9\x01\x1a\xd6\x01\n" +
+	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\x98\x06\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1950,8 +1951,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\vdescription\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x02R\vdescription\x12F\n" +
 	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\broleType\x12.\n" +
-	"\vpermissions\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions:\xa7\x01\xbaH\xa3\x01\x1a\xa0\x01\n" +
-	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x13\n" +
+	"\vpermissions\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions:\x80\x03\xbaH\xfc\x02\x1a\xa0\x01\n" +
+	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xd6\x01\n" +
+	"\x15role.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\x13\n" +
 	"\x11LogoutUserRequest\"\x14\n" +
 	"\x12LogoutUserResponse\"\xb3\x02\n" +
 	"\vUserConsent\x12W\n" +

@@ -1859,7 +1859,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"k\n" +
 	"#ListHybridCloudEnvironmentsResponse\x12D\n" +
-	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\x99\x05\n" +
+	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\x88\f\n" +
 	"\x16HybridCloudEnvironment\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x0e\n" +
@@ -1869,8 +1869,11 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
 	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12f\n" +
 	"\rconfiguration\x18\x14 \x01(\v2;.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationH\x00R\rconfiguration\x88\x01\x01\x12Q\n" +
-	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusH\x01R\x06status\x88\x01\x01:\xbb\x01\xbaH\xb7\x01\x1a\xb4\x01\n" +
-	"\x1bhybrid_cloud_environment.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x10\n" +
+	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusH\x01R\x06status\x88\x01\x01:\xaa\b\xbaH\xa6\b\x1a\xb4\x01\n" +
+	"\x1bhybrid_cloud_environment.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xea\x01\n" +
+	")hybrid_cloud_environment.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\x1a\xd3\x02\n" +
+	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
+	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
 	"\a_status\"\x92\v\n" +
 	"#HybridCloudEnvironmentConfiguration\x12D\n" +

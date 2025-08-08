@@ -48,7 +48,7 @@ message ListPackagesRequest {
   // Filter specifying the cloud region where the cluster will be hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
-  optional string cloud_provider_region_id = 3;
+  optional string cloud_provider_region_id = 3 [(buf.validate.field).string = {min_len: 1}];
   option (buf.validate.message).cel = {
     id: "list_packages.cloud_provider_region_id_present"
     message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
@@ -74,7 +74,7 @@ message ListGlobalPackagesRequest {
   // Filter specifying the cloud region where the cluster will be hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
   // Field can be omitted, if cloud_provider_id is `hybrid`
-  optional string cloud_provider_region_id = 2;
+  optional string cloud_provider_region_id = 2 [(buf.validate.field).string = {min_len: 1}];
   option (buf.validate.message).cel = {
     id: "list_global_packages.cloud_provider_region_id_present"
     message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"

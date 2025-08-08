@@ -1876,7 +1876,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"\x1d\n" +
-	"\x1bDeleteAccountMemberResponse\"\x80\x04\n" +
+	"\x1bDeleteAccountMemberResponse\"\xdc\x05\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1889,9 +1889,10 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"ownerEmail\x12,\n" +
 	"\n" +
 	"privileges\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
-	"privileges:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
+	"privileges:\x86\x03\xbaH\x82\x03\x1a\xa3\x01\n" +
 	"\n" +
-	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x8d\b\n" +
+	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xd9\x01\n" +
+	"\x18account.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\xf0\t\n" +
 	"\rAccountInvite\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1906,10 +1907,11 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x10created_by_email\x18\b \x01(\tB\a\xbaH\x04r\x02`\x01H\x01R\x0ecreatedByEmail\x88\x01\x01\x12D\n" +
 	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12N\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xcf\x03\xbaH\xcb\x03\x1a\xaa\x01\n" +
+	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x05\xbaH\xae\x05\x1a\xaa\x01\n" +
 	"\x11account_invite.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1at\n" +
 	"\x1baccount_invite.account_name\x12\x1eaccount_name must not be empty\x1a5this.account_name.size() > 0 || !has(this.created_at)\x1a\xa5\x01\n" +
-	"\x1faccount_invite.created_by_email\x12?created_by_email must not be empty if created_by_user_id is set\x1aA!has(this.created_by_user_id) || this.created_by_email.size() > 0B\x15\n" +
+	"\x1faccount_invite.created_by_email\x12?created_by_email must not be empty if created_by_user_id is set\x1aA!has(this.created_by_user_id) || this.created_by_email.size() > 0\x1a\xe0\x01\n" +
+	"\x1faccount_invite.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\x15\n" +
 	"\x13_created_by_user_idB\x13\n" +
 	"\x11_created_by_email\"t\n" +
 	"\rAccountMember\x12H\n" +

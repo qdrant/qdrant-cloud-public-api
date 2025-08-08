@@ -198,6 +198,21 @@ message HybridCloudEnvironment {
   google.protobuf.Timestamp created_at = 3;
   // Timestamp when the hybrid cloud environment was modified the last time.
   google.protobuf.Timestamp last_modified_at = 4;
+  option (buf.validate.message).cel = {
+    id: "hybrid_cloud_environment.last_modified_at"
+    message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
+    expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
+  };
+  option (buf.validate.message).cel = {
+    id: "hybrid_cloud_environment.configuration.last_modified_at"
+    message: "configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at"
+    expression: "!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)"
+  };
+  option (buf.validate.message).cel = {
+    id: "hybrid_cloud_environment.status.last_modified_at"
+    message: "status.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at"
+    expression: "!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)"
+  };
   // Name of the hybrid cloud environment
   // This is a required field.
   // Name can only contain letters, numbers, underscores and dashes
