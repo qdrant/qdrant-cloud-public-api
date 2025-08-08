@@ -77,6 +77,59 @@ func (PackageStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{0}
 }
 
+// PackageTier defines the valid tiers a package can be in.
+type PackageTier int32
+
+const (
+	// Unspecified package tier.
+	PackageTier_PACKAGE_TIER_STATUS_UNSPECIFIED PackageTier = 0
+	// Standard tier.
+	PackageTier_PACKAGE_TIER_STANDARD PackageTier = 1
+	// Premium tier.
+	PackageTier_PACKAGE_TIER_PREMIUM PackageTier = 2
+)
+
+// Enum value maps for PackageTier.
+var (
+	PackageTier_name = map[int32]string{
+		0: "PACKAGE_TIER_STATUS_UNSPECIFIED",
+		1: "PACKAGE_TIER_STANDARD",
+		2: "PACKAGE_TIER_PREMIUM",
+	}
+	PackageTier_value = map[string]int32{
+		"PACKAGE_TIER_STATUS_UNSPECIFIED": 0,
+		"PACKAGE_TIER_STANDARD":           1,
+		"PACKAGE_TIER_PREMIUM":            2,
+	}
+)
+
+func (x PackageTier) Enum() *PackageTier {
+	p := new(PackageTier)
+	*p = x
+	return p
+}
+
+func (x PackageTier) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PackageTier) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_booking_v1_booking_proto_enumTypes[1].Descriptor()
+}
+
+func (PackageTier) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_booking_v1_booking_proto_enumTypes[1]
+}
+
+func (x PackageTier) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PackageTier.Descriptor instead.
+func (PackageTier) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{1}
+}
+
 // ListPackagesRequest is the request for the ListPackages function
 type ListPackagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -434,6 +487,8 @@ type Package struct {
 	// The status of the package.
 	// Indicates the current status of the package.
 	Status PackageStatus `protobuf:"varint,7,opt,name=status,proto3,enum=qdrant.cloud.booking.v1.PackageStatus" json:"status,omitempty"`
+	// The tier of the package.
+	Tier PackageTier `protobuf:"varint,9,opt,name=tier,proto3,enum=qdrant.cloud.booking.v1.PackageTier" json:"tier,omitempty"`
 	// Optional additional resources that can be added to the cluster.
 	// if not set, additional resources are not available for this package.
 	// Currently, only `DISK` is supported.
@@ -519,6 +574,13 @@ func (x *Package) GetStatus() PackageStatus {
 		return x.Status
 	}
 	return PackageStatus_PACKAGE_STATUS_UNSPECIFIED
+}
+
+func (x *Package) GetTier() PackageTier {
+	if x != nil {
+		return x.Tier
+	}
+	return PackageTier_PACKAGE_TIER_STATUS_UNSPECIFIED
 }
 
 func (x *Package) GetAvailableAdditionalResources() *AvailableAdditionalResources {
@@ -667,7 +729,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x18\n" +
 	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"X\n" +
 	"\x12GetPackageResponse\x12B\n" +
-	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xc2\x04\n" +
+	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\x88\x05\n" +
 	"\aPackage\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
 	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
@@ -677,7 +739,9 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"^[A-Z]{3}$R\bcurrency\x12=\n" +
 	"\x17unit_int_price_per_hour\x18\x06 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x13unitIntPricePerHour\x12J\n" +
 	"\x06status\x18\a \x01(\x0e2&.qdrant.cloud.booking.v1.PackageStatusB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12\x80\x01\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12D\n" +
+	"\x04tier\x18\t \x01(\x0e2$.qdrant.cloud.booking.v1.PackageTierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04tier\x12\x80\x01\n" +
 	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01B!\n" +
 	"\x1f_available_additional_resources\"V\n" +
 	"\x1cAvailableAdditionalResources\x126\n" +
@@ -689,7 +753,11 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rPackageStatus\x12\x1e\n" +
 	"\x1aPACKAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
-	"\x1aPACKAGE_STATUS_DEACTIVATED\x10\x022\x89\x04\n" +
+	"\x1aPACKAGE_STATUS_DEACTIVATED\x10\x02*g\n" +
+	"\vPackageTier\x12#\n" +
+	"\x1fPACKAGE_TIER_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15PACKAGE_TIER_STANDARD\x10\x01\x12\x18\n" +
+	"\x14PACKAGE_TIER_PREMIUM\x10\x022\x89\x04\n" +
 	"\x0eBookingService\x12\xa7\x01\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\":\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\xa6\x01\n" +
 	"\n" +
@@ -709,39 +777,41 @@ func file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_booking_v1_booking_proto_rawDescData
 }
 
-var file_qdrant_cloud_booking_v1_booking_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_qdrant_cloud_booking_v1_booking_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_qdrant_cloud_booking_v1_booking_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
 	(PackageStatus)(0),                   // 0: qdrant.cloud.booking.v1.PackageStatus
-	(*ListPackagesRequest)(nil),          // 1: qdrant.cloud.booking.v1.ListPackagesRequest
-	(*ListPackagesResponse)(nil),         // 2: qdrant.cloud.booking.v1.ListPackagesResponse
-	(*ListGlobalPackagesRequest)(nil),    // 3: qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	(*ListGlobalPackagesResponse)(nil),   // 4: qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	(*GetPackageRequest)(nil),            // 5: qdrant.cloud.booking.v1.GetPackageRequest
-	(*GetPackageResponse)(nil),           // 6: qdrant.cloud.booking.v1.GetPackageResponse
-	(*Package)(nil),                      // 7: qdrant.cloud.booking.v1.Package
-	(*AvailableAdditionalResources)(nil), // 8: qdrant.cloud.booking.v1.AvailableAdditionalResources
-	(*ResourceConfiguration)(nil),        // 9: qdrant.cloud.booking.v1.ResourceConfiguration
+	(PackageTier)(0),                     // 1: qdrant.cloud.booking.v1.PackageTier
+	(*ListPackagesRequest)(nil),          // 2: qdrant.cloud.booking.v1.ListPackagesRequest
+	(*ListPackagesResponse)(nil),         // 3: qdrant.cloud.booking.v1.ListPackagesResponse
+	(*ListGlobalPackagesRequest)(nil),    // 4: qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+	(*ListGlobalPackagesResponse)(nil),   // 5: qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+	(*GetPackageRequest)(nil),            // 6: qdrant.cloud.booking.v1.GetPackageRequest
+	(*GetPackageResponse)(nil),           // 7: qdrant.cloud.booking.v1.GetPackageResponse
+	(*Package)(nil),                      // 8: qdrant.cloud.booking.v1.Package
+	(*AvailableAdditionalResources)(nil), // 9: qdrant.cloud.booking.v1.AvailableAdditionalResources
+	(*ResourceConfiguration)(nil),        // 10: qdrant.cloud.booking.v1.ResourceConfiguration
 }
 var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	0,  // 0: qdrant.cloud.booking.v1.ListPackagesRequest.statuses:type_name -> qdrant.cloud.booking.v1.PackageStatus
-	7,  // 1: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	7,  // 2: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	7,  // 3: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
-	9,  // 4: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
+	8,  // 1: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	8,  // 2: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	8,  // 3: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
+	10, // 4: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
 	0,  // 5: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
-	8,  // 6: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
-	1,  // 7: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
-	5,  // 8: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
-	3,  // 9: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	2,  // 10: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
-	6,  // 11: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
-	4,  // 12: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	10, // [10:13] is the sub-list for method output_type
-	7,  // [7:10] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	1,  // 6: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
+	9,  // 7: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
+	2,  // 8: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
+	6,  // 9: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
+	4,  // 10: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+	3,  // 11: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
+	7,  // 12: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
+	5,  // 13: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+	11, // [11:14] is the sub-list for method output_type
+	8,  // [8:11] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_booking_v1_booking_proto_init() }
@@ -757,7 +827,7 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_booking_v1_booking_proto_rawDesc), len(file_qdrant_cloud_booking_v1_booking_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,

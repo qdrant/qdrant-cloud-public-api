@@ -114,6 +114,16 @@ enum PackageStatus {
   PACKAGE_STATUS_DEACTIVATED = 2;
 }
 
+// PackageTier defines the valid tiers a package can be in.
+enum PackageTier {
+  // Unspecified package tier.
+  PACKAGE_TIER_STATUS_UNSPECIFIED = 0;
+  // Standard tier.
+  PACKAGE_TIER_STANDARD = 1;
+  // Premium tier.
+  PACKAGE_TIER_PREMIUM = 2;
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // Package represents a single package.
 // A package is a configuration (CPU/Memory/Disk size) for a cluster with a price.
@@ -150,6 +160,12 @@ message Package {
   // Indicates the current status of the package.
   PackageStatus status = 7 [(buf.validate.field).enum = {
     defined_only: true
+    not_in: [0]
+  }];
+  // The tier of the package.
+  PackageTier tier = 9 [(buf.validate.field).enum = {
+    defined_only: true
+    // Deny `PackageTier.PACKAGE_TIER_STATUS_UNSPECIFIED`
     not_in: [0]
   }];
   // Optional additional resources that can be added to the cluster.
