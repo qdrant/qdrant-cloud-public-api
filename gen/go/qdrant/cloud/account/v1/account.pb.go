@@ -1511,7 +1511,7 @@ type Account struct {
 	// This is a read-only field and will be available after an account is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// The name of the account.
-	// Name can only contain letters, numbers, underscores and dashes
+	// Name can only contain letters, numbers, underscores, spaces and dashes.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The external identifier of the owner of the account.
 	ExternalOwnerId string `protobuf:"bytes,6,opt,name=external_owner_id,json=externalOwnerId,proto3" json:"external_owner_id,omitempty"`

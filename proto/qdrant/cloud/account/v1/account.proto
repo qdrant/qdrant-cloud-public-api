@@ -425,7 +425,7 @@ message Account {
     expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
   };
   // The name of the account.
-  // Name can only contain letters, numbers, underscores and dashes
+  // Name can only contain letters, numbers, underscores, spaces and dashes.
   string name = 5 [(buf.validate.field).string = {
     max_len: 256
     min_len: 4

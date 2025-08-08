@@ -688,7 +688,7 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 
   /**
    * The name of the account.
-   * Name can only contain letters, numbers, underscores and dashes
+   * Name can only contain letters, numbers, underscores, spaces and dashes.
    *
    * @generated from field: string name = 5;
    */

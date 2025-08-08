@@ -604,7 +604,7 @@
             },
             "name": {
               "type": "string",
-              "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
+              "description": "The name of the account.\nName can only contain letters, numbers, underscores, spaces and dashes."
             },
             "externalOwnerId": {
               "type": "string",
@@ -685,7 +685,7 @@
         },
         "name": {
           "type": "string",
-          "title": "The name of the account.\nName can only contain letters, numbers, underscores and dashes"
+          "description": "The name of the account.\nName can only contain letters, numbers, underscores, spaces and dashes."
         },
         "externalOwnerId": {
           "type": "string",
