@@ -781,9 +781,10 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"a\n" +
 	"\x1bListDatabaseApiKeysResponse\x12B\n" +
-	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x05items\"}\n" +
+	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyR\x05items\"\xd6\x03\n" +
 	"\x1bCreateDatabaseApiKeyRequest\x12^\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"~\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey:\xd6\x02\xbaH\xd2\x02\x1a\xcf\x02\n" +
+	"+create_database_api_key.no_read_only_fields\x12[read-only fields (id, created_at, created_by_email, postfix, key) must not be set on create\x1a\xc2\x01this.database_api_key.id == '' && !has(this.database_api_key.created_at) && this.database_api_key.created_by_email == '' && this.database_api_key.postfix == '' && this.database_api_key.key == ''\"~\n" +
 	"\x1cCreateDatabaseApiKeyResponse\x12^\n" +
 	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v2.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"\xa8\x01\n" +
 	"\x1bDeleteDatabaseApiKeyRequest\x12'\n" +

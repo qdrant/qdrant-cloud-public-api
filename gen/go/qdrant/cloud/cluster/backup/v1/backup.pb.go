@@ -1588,9 +1588,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\v_cluster_idB\x15\n" +
 	"\x13_backup_schedule_id\"S\n" +
 	"\x13ListBackupsResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\"]\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\"\xdf\x03\n" +
 	"\x13CreateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xff\x02\xbaH\xfb\x02\x1a\xf8\x02\n" +
+	"!create_backup.no_read_only_fields\x12zread-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id) must not be set on create\x1a\xd6\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id)\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"e\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
@@ -1626,9 +1627,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x126\n" +
 	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"|\n" +
 	"\x19GetBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"~\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x9b\x03\n" +
 	"\x1bCreateBackupScheduleRequest\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x7f\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x9a\x02\xbaH\x96\x02\x1a\x93\x02\n" +
+	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x7f\n" +
 	"\x1cCreateBackupScheduleResponse\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xf5\x01\n" +
 	"\x1bUpdateBackupScheduleRequest\x12_\n" +

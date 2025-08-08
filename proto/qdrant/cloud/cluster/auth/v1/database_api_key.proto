@@ -60,6 +60,11 @@ message ListDatabaseApiKeysResponse {
 message CreateDatabaseApiKeyRequest {
   // The actual database api key.
   DatabaseApiKey database_api_key = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_database_api_key.no_read_only_fields"
+    message: "read-only fields (id, created_at, prefix, key) must not be set on create"
+    expression: "this.database_api_key.id == '' && !has(this.database_api_key.created_at) && this.database_api_key.prefix == '' && this.database_api_key.key == ''"
+  };
 }
 
 // CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function.

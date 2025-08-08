@@ -706,20 +706,20 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xe3\x03\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xec\x03\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
-	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12<\n" +
-	"\x18cloud_provider_region_id\x18\x03 \x01(\tH\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
+	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
+	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
 	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x83\x03\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x8c\x03\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
-	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12<\n" +
-	"\x18cloud_provider_region_id\x18\x02 \x01(\tH\x00R\x15cloudProviderRegionId\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
+	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
+	"\x18cloud_provider_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
 	"5list_global_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"T\n" +
 	"\x1aListGlobalPackagesResponse\x126\n" +

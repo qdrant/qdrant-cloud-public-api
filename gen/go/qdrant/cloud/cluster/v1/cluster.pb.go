@@ -2988,13 +2988,13 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xb1\x05\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xba\x05\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
 	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x03H\x00R\x0fcloudProviderId\x88\x01\x01\x12<\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tH\x01R\x15cloudProviderRegionId\x88\x01\x01:\xc5\x03\xbaH\xc1\x03\x1a\xb1\x01\n" +
+	" \x01(\tB\a\xbaH\x04r\x02\x10\x03H\x00R\x0fcloudProviderId\x88\x01\x01\x12E\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15cloudProviderRegionId\x88\x01\x01:\xc5\x03\xbaH\xc1\x03\x1a\xb1\x01\n" +
 	"'list_clusters.cloud_provider_id_present\x12Bcloud_provider_id is required when cloud_provider_region_id is set\x1aB!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'B\x14\n" +
 	"\x12_cloud_provider_idB\x1b\n" +
@@ -3007,9 +3007,10 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"X\n" +
 	"\x12GetClusterResponse\x12B\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"Z\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"\xcd\x02\n" +
 	"\x14CreateClusterRequest\x12B\n" +
-	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\"\xc4\x01\n" +
+	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:\xf0\x01\xbaH\xec\x01\x1a\xe9\x01\n" +
+	"\"create_cluster.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1asthis.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)\"\xc4\x01\n" +
 	"\x15CreateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
 	"\x1ccreate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xb9\x01\n" +
@@ -3187,17 +3188,17 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"additional\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
 	"additional\x12*\n" +
 	"\breserved\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\breserved\x12,\n" +
-	"\tavailable\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\tavailable\"\x97\x01\n" +
+	"\tavailable\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\tavailable\"\xa0\x01\n" +
 	"\x16ClusterScalabilityInfo\x12U\n" +
 	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12\x1b\n" +
-	"\x06reason\x18\x02 \x01(\tH\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\x8a\x02\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12$\n" +
+	"\x06reason\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06reason\x88\x01\x01B\t\n" +
+	"\a_reason\"\x93\x02\n" +
 	"\rQdrantRelease\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x18\n" +
 	"\adefault\x18\x02 \x01(\bR\adefault\x129\n" +
-	"\x11release_notes_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x0freleaseNotesUrl\x88\x01\x01\x12\x1d\n" +
-	"\aremarks\x18\x04 \x01(\tH\x01R\aremarks\x88\x01\x01\x12\x1e\n" +
+	"\x11release_notes_url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x0freleaseNotesUrl\x88\x01\x01\x12&\n" +
+	"\aremarks\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\aremarks\x88\x01\x01\x12\x1e\n" +
 	"\vend_of_life\x18\x05 \x01(\bR\tendOfLife\x12 \n" +
 	"\vunavailable\x18\x06 \x01(\bR\vunavailableB\x14\n" +
 	"\x12_release_notes_urlB\n" +

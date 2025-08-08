@@ -119,6 +119,11 @@ message CreatePaymentMethodRequest {
   // The payment method to create.
   // This is a required field.
   PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_payment_method.no_read_only_fields"
+    message: "read-only fields (id, payment_provider_id, created_at, last_modified_at, status) must not be set on create"
+    expression: "this.payment_method.id == '' && !has(this.payment_method.payment_provider_id) && !has(this.payment_method.created_at) && !has(this.payment_method.last_modified_at) && !has(this.payment_method.status)"
+  };
 }
 
 // CreatePaymentMethodResponse is the response from the CreatePaymentMethod function
@@ -233,7 +238,7 @@ message PaymentMethod {
   }];
   // The customer account identifier in the payment provider system.
   // This is read-only field.
-  optional string payment_provider_id = 4;
+  optional string payment_provider_id = 4 [(buf.validate.field).string = {min_len: 1}];
   // Represents the payment method details, such as card information.
   // This field is optional and only available for payment provider type Stripe for now.
   optional PaymentMethodDetails payment_method_details = 5;
@@ -246,6 +251,11 @@ message PaymentMethod {
   // The timestamp when the payment method was last updated.
   // This is a read-only field and will be available after a payment method is created.
   google.protobuf.Timestamp last_modified_at = 8;
+  option (buf.validate.message).cel = {
+    id: "payment_method.last_modified_at"
+    message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
+    expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
+  };
   // The tax ID associated with the payment method.
   // This is an optional field.
   optional string tax_id = 9 [(buf.validate.field).string = {min_len: 1}];

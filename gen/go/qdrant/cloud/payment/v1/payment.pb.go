@@ -1407,9 +1407,10 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11payment_method_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fpaymentMethodId\"q\n" +
 	"\x18GetPaymentMethodResponse\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"s\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xde\x03\n" +
 	"\x1aCreatePaymentMethodRequest\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"t\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod:\xe8\x02\xbaH\xe4\x02\x1a\xe1\x02\n" +
+	")create_payment_method.no_read_only_fields\x12jread-only fields (id, payment_provider_id, created_at, last_modified_at, status) must not be set on create\x1a\xc7\x01this.payment_method.id == '' && !has(this.payment_method.payment_provider_id) && !has(this.payment_method.created_at) && !has(this.payment_method.last_modified_at) && !has(this.payment_method.status)\"t\n" +
 	"\x1bCreatePaymentMethodResponse\x12U\n" +
 	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xe7\x01\n" +
 	"\x1aUpdatePaymentMethodRequest\x12U\n" +
@@ -1443,14 +1444,14 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x11setupIntentStatus\x12F\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xb9\a\n" +
+	"\x04_url\"\xa5\t\n" +
 	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12L\n" +
 	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x123\n" +
-	"\x13payment_provider_id\x18\x04 \x01(\tH\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12<\n" +
+	"\x13payment_provider_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
 	"\x16payment_method_details\x18\x05 \x01(\v2-.qdrant.cloud.payment.v1.PaymentMethodDetailsH\x01R\x14paymentMethodDetails\x88\x01\x01\x12U\n" +
 	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x129\n" +
 	"\n" +
@@ -1461,8 +1462,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"is_default\x18\n" +
 	" \x01(\bR\tisDefault\x12U\n" +
 	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
-	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\x94\x03\xbaH\x90\x03\x1a\xaa\x01\n" +
+	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xe0\x01\n" +
+	"\x1fpayment_method.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\x16\n" +
 	"\x14_payment_provider_idB\x19\n" +
 	"\x17_payment_method_detailsB\x12\n" +
 	"\x10_billing_addressB\t\n" +

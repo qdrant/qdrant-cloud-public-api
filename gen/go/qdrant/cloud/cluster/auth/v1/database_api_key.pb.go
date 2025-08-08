@@ -413,9 +413,10 @@ const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n" +
 	"\x1bListDatabaseApiKeysResponse\x12B\n" +
-	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"}\n" +
+	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"\x92\x03\n" +
 	"\x1bCreateDatabaseApiKeyRequest\x12^\n" +
-	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"~\n" +
+	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey:\x92\x02\xbaH\x8e\x02\x1a\x8b\x02\n" +
+	"+create_database_api_key.no_read_only_fields\x12Hread-only fields (id, created_at, prefix, key) must not be set on create\x1a\x91\x01this.database_api_key.id == '' && !has(this.database_api_key.created_at) && this.database_api_key.prefix == '' && this.database_api_key.key == ''\"~\n" +
 	"\x1cCreateDatabaseApiKeyResponse\x12^\n" +
 	"\x10database_api_key\x18\x01 \x01(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyB\x06\xbaH\x03\xc8\x01\x01R\x0edatabaseApiKey\"\x7f\n" +
 	"\x1bDeleteDatabaseApiKeyRequest\x12'\n" +

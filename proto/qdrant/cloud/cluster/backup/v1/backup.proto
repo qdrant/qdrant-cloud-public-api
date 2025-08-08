@@ -140,6 +140,11 @@ message ListBackupsResponse {
 message CreateBackupRequest {
   // The actual backup.
   Backup backup = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_backup.no_read_only_fields"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id)"
+  };
 }
 
 // CreateBackupResponse is the response from the CreateBackup function.
@@ -235,6 +240,11 @@ message GetBackupScheduleResponse {
 message CreateBackupScheduleRequest {
   // The actual backup schedule.
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_backup_schedule.no_read_only_fields"
+    message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
+    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
+  };
 }
 
 // CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.

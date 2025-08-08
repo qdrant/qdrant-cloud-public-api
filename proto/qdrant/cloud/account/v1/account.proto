@@ -215,6 +215,11 @@ message GetAccountResponse {
 message CreateAccountRequest {
   // The actual account.
   Account account = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_account.no_read_only_fields"
+    message: "read-only fields (id, created_at, last_modified_at, owner_email, privileges) must not be set on create"
+    expression: "this.account.id == '' && !has(this.account.created_at) && !has(this.account.last_modified_at) && this.account.owner_email == '' && this.account.privileges.size() == 0"
+  };
 }
 
 // CreateAccountResponse is the response from the CreateAccount function.
@@ -299,6 +304,11 @@ message CreateAccountInviteRequest {
   // The details of the invite to create.
   // This is a required field.
   AccountInvite account_invite = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_account_invite.no_read_only_fields"
+    message: "read-only fields (id, account_name, created_at, created_by_user_id, created_by_email, last_modified_at, status) must not be set on create"
+    expression: "this.account_invite.id == '' && this.account_invite.account_name == '' && !has(this.account_invite.created_at) && !has(this.account_invite.created_by_user_id) && !has(this.account_invite.created_by_email) && !has(this.account_invite.last_modified_at) && this.account_invite.status == 0"
+  };
 }
 
 // CreateAccountInviteResponse is the response from the CreateAccountInvite function.
@@ -419,8 +429,13 @@ message Account {
   // The timestamp when the account was last updated.
   // This is a read-only field and will be available after an account is created.
   google.protobuf.Timestamp last_modified_at = 3;
+  option (buf.validate.message).cel = {
+    id: "account.last_modified_at"
+    message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
+    expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
+  };
   // The name of the account.
-  // Name can only contain letters, numbers, underscores and dashes
+  // Name can only contain letters, numbers, underscores, spaces and dashes.
   string name = 5 [(buf.validate.field).string = {
     max_len: 256
     min_len: 4
@@ -491,6 +506,11 @@ message AccountInvite {
   // The timestamp when the invite was last updated (e.g., status change).
   // This is a read-only field.
   google.protobuf.Timestamp last_modified_at = 9;
+  option (buf.validate.message).cel = {
+    id: "account_invite.last_modified_at"
+    message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
+    expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
+  };
   // The status of the invite.
   // This is a read-only field.
   AccountInviteStatus status = 10 [(buf.validate.field).enum.defined_only = true];

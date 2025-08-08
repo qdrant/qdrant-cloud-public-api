@@ -73,6 +73,11 @@ message ListCollectionsResponse {
 message CreateCollectionRequest {
   // Collection represents a vector search collection in the Qdrant serverless environment
   Collection collection = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_collection.no_read_only_fields"
+    message: "read-only fields (id, created_at, deleted_at, state) must not be set on create"
+    expression: "this.collection.id == '' && !has(this.collection.created_at) && !has(this.collection.deleted_at) && !has(this.collection.state)"
+  };
 }
 
 // CollectionResponse provides details about a created collection
