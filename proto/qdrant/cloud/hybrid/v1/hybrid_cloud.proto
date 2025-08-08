@@ -284,7 +284,10 @@ message HybridCloudEnvironmentStatus {
   // Kubernetes version
   string kubernetes_version = 4 [(buf.validate.field).string.min_len = 1];
   // Kubernetes distribution
-  optional KubernetesDistribution kubernetes_distribution = 10 [(buf.validate.field).enum.defined_only = true];
+  optional KubernetesDistribution kubernetes_distribution = 10 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Number of kubernetes nodes
   uint32 number_of_nodes = 5;
   // Capabilities of hybrid cloud environment

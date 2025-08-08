@@ -1443,7 +1443,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x11setupIntentStatus\x12F\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xb7\a\n" +
+	"\x04_url\"\xb9\a\n" +
 	"\rPaymentMethod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -1459,8 +1459,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05taxId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\x12S\n" +
-	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\b\xbaH\x05\x82\x01\x02\x10\x01H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
+	" \x01(\bR\tisDefault\x12U\n" +
+	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\xb1\x01\xbaH\xad\x01\x1a\xaa\x01\n" +
 	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x16\n" +
 	"\x14_payment_provider_idB\x19\n" +
 	"\x17_payment_method_detailsB\x12\n" +

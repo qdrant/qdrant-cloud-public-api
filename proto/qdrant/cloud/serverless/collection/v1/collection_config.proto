@@ -90,9 +90,15 @@ message DenseVectorConfiguration {
   // Whether to enable rescoring for search results
   optional bool rescoring = 4;
   // The storage performance tier to use.
-  optional StorageTier storage_tier = 5 [(buf.validate.field).enum.defined_only = true];
+  optional StorageTier storage_tier = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // The precision level for vector operations.
-  optional PrecisionTier precision_tier = 6 [(buf.validate.field).enum.defined_only = true];
+  optional PrecisionTier precision_tier = 6 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // SparseVectorConfiguration defines the settings for sparse vector fields
@@ -160,7 +166,10 @@ enum Tokenizer {
 // TextIndexParams defines parameters for text indexing
 message TextIndexParams {
   // Tokenization strategy
-  optional Tokenizer tokenizer = 1 [(buf.validate.field).enum.defined_only = true];
+  optional Tokenizer tokenizer = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // Minimum token length to index
   optional int32 min_token_len = 2 [(buf.validate.field).int32.gte = 0];
   // Maximum token length to index

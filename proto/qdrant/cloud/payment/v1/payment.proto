@@ -254,7 +254,10 @@ message PaymentMethod {
   bool is_default = 10;
   // Payment method status.
   // This is read-only field.
-  optional PaymentMethodStatus status = 11 [(buf.validate.field).enum.defined_only = true];
+  optional PaymentMethodStatus status = 11 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // PaymentProviderType defines the type of payment method.

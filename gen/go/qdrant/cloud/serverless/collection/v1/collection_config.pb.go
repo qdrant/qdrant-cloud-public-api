@@ -1206,15 +1206,17 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\x12PayloadSchemaEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12O\n" +
 	"\x05value\x18\x02 \x01(\v29.qdrant.cloud.serverless.collection.v1.PayloadFieldSchemaR\x05value:\x028\x01B\r\n" +
-	"\v_tenant_key\"\xfe\x03\n" +
+	"\v_tenant_key\"\x82\x04\n" +
 	"\x18DenseVectorConfiguration\x12%\n" +
 	"\tdimension\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\tdimension\x12]\n" +
 	"\bdistance\x18\x02 \x01(\x0e25.qdrant.cloud.serverless.collection.v1.DistanceMetricB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\bdistance\x12%\n" +
 	"\vmultivector\x18\x03 \x01(\bH\x00R\vmultivector\x88\x01\x01\x12!\n" +
-	"\trescoring\x18\x04 \x01(\bH\x01R\trescoring\x88\x01\x01\x12d\n" +
-	"\fstorage_tier\x18\x05 \x01(\x0e22.qdrant.cloud.serverless.collection.v1.StorageTierB\b\xbaH\x05\x82\x01\x02\x10\x01H\x02R\vstorageTier\x88\x01\x01\x12j\n" +
-	"\x0eprecision_tier\x18\x06 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierB\b\xbaH\x05\x82\x01\x02\x10\x01H\x03R\rprecisionTier\x88\x01\x01B\x0e\n" +
+	"\trescoring\x18\x04 \x01(\bH\x01R\trescoring\x88\x01\x01\x12f\n" +
+	"\fstorage_tier\x18\x05 \x01(\x0e22.qdrant.cloud.serverless.collection.v1.StorageTierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\vstorageTier\x88\x01\x01\x12l\n" +
+	"\x0eprecision_tier\x18\x06 \x01(\x0e24.qdrant.cloud.serverless.collection.v1.PrecisionTierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\rprecisionTier\x88\x01\x01B\x0e\n" +
 	"\f_multivectorB\f\n" +
 	"\n" +
 	"_rescoringB\x0f\n" +
@@ -1251,9 +1253,10 @@ const file_qdrant_cloud_serverless_collection_v1_collection_config_proto_rawDesc
 	"\x0eGeoIndexParams\x12\x1c\n" +
 	"\aon_disk\x18\x01 \x01(\bH\x00R\x06onDisk\x88\x01\x01B\n" +
 	"\n" +
-	"\b_on_disk\"\xb1\x04\n" +
-	"\x0fTextIndexParams\x12]\n" +
-	"\ttokenizer\x18\x01 \x01(\x0e20.qdrant.cloud.serverless.collection.v1.TokenizerB\b\xbaH\x05\x82\x01\x02\x10\x01H\x00R\ttokenizer\x88\x01\x01\x120\n" +
+	"\b_on_disk\"\xb3\x04\n" +
+	"\x0fTextIndexParams\x12_\n" +
+	"\ttokenizer\x18\x01 \x01(\x0e20.qdrant.cloud.serverless.collection.v1.TokenizerB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\ttokenizer\x88\x01\x01\x120\n" +
 	"\rmin_token_len\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x01R\vminTokenLen\x88\x01\x01\x120\n" +
 	"\rmax_token_len\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x02R\vmaxTokenLen\x88\x01\x01\x12!\n" +
 	"\tlowercase\x18\x04 \x01(\bH\x03R\tlowercase\x88\x01\x01\x12\x1c\n" +
