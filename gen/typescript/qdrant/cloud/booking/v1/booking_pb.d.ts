@@ -240,6 +240,13 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   status: PackageStatus;
 
   /**
+   * The tier of the package.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.PackageTier tier = 9;
+   */
+  tier: PackageTier;
+
+  /**
    * Optional additional resources that can be added to the cluster.
    * if not set, additional resources are not available for this package.
    * Currently, only `DISK` is supported.
@@ -343,6 +350,39 @@ export enum PackageStatus {
  * Describes the enum qdrant.cloud.booking.v1.PackageStatus.
  */
 export declare const PackageStatusSchema: GenEnum<PackageStatus>;
+
+/**
+ * PackageTier defines the valid tiers a package can be in.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.PackageTier
+ */
+export enum PackageTier {
+  /**
+   * Unspecified package tier.
+   *
+   * @generated from enum value: PACKAGE_TIER_STATUS_UNSPECIFIED = 0;
+   */
+  STATUS_UNSPECIFIED = 0,
+
+  /**
+   * Standard tier.
+   *
+   * @generated from enum value: PACKAGE_TIER_STANDARD = 1;
+   */
+  STANDARD = 1,
+
+  /**
+   * Premium tier.
+   *
+   * @generated from enum value: PACKAGE_TIER_PREMIUM = 2;
+   */
+  PREMIUM = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.PackageTier.
+ */
+export declare const PackageTierSchema: GenEnum<PackageTier>;
 
 /**
  * BookingService is the API used to configure the booking settings (like packages objects).

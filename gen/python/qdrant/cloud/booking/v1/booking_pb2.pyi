@@ -15,9 +15,18 @@ class PackageStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     PACKAGE_STATUS_UNSPECIFIED: _ClassVar[PackageStatus]
     PACKAGE_STATUS_ACTIVE: _ClassVar[PackageStatus]
     PACKAGE_STATUS_DEACTIVATED: _ClassVar[PackageStatus]
+
+class PackageTier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PACKAGE_TIER_STATUS_UNSPECIFIED: _ClassVar[PackageTier]
+    PACKAGE_TIER_STANDARD: _ClassVar[PackageTier]
+    PACKAGE_TIER_PREMIUM: _ClassVar[PackageTier]
 PACKAGE_STATUS_UNSPECIFIED: PackageStatus
 PACKAGE_STATUS_ACTIVE: PackageStatus
 PACKAGE_STATUS_DEACTIVATED: PackageStatus
+PACKAGE_TIER_STATUS_UNSPECIFIED: PackageTier
+PACKAGE_TIER_STANDARD: PackageTier
+PACKAGE_TIER_PREMIUM: PackageTier
 
 class ListPackagesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses")
@@ -66,7 +75,7 @@ class GetPackageResponse(_message.Message):
     def __init__(self, package: _Optional[_Union[Package, _Mapping]] = ...) -> None: ...
 
 class Package(_message.Message):
-    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status", "available_additional_resources")
+    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status", "tier", "available_additional_resources")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -74,6 +83,7 @@ class Package(_message.Message):
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     UNIT_INT_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    TIER_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_ADDITIONAL_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
@@ -82,8 +92,9 @@ class Package(_message.Message):
     currency: str
     unit_int_price_per_hour: int
     status: PackageStatus
+    tier: PackageTier
     available_additional_resources: AvailableAdditionalResources
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
     __slots__ = ("disk_price_per_hour",)

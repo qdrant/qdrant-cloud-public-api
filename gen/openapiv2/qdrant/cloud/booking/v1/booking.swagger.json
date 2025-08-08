@@ -267,6 +267,10 @@
           "$ref": "#/definitions/v1PackageStatus",
           "description": "The status of the package.\nIndicates the current status of the package."
         },
+        "tier": {
+          "$ref": "#/definitions/v1PackageTier",
+          "description": "The tier of the package."
+        },
         "availableAdditionalResources": {
           "$ref": "#/definitions/v1AvailableAdditionalResources",
           "description": "Optional additional resources that can be added to the cluster.\nif not set, additional resources are not available for this package.\nCurrently, only `DISK` is supported."
@@ -283,6 +287,16 @@
       ],
       "default": "PACKAGE_STATUS_UNSPECIFIED",
       "description": "PackageStatus defines the valid states a package can be in.\n\n - PACKAGE_STATUS_UNSPECIFIED: Unspecified package status.\n - PACKAGE_STATUS_ACTIVE: The package is active and available for use.\n - PACKAGE_STATUS_DEACTIVATED: The package is deactivated."
+    },
+    "v1PackageTier": {
+      "type": "string",
+      "enum": [
+        "PACKAGE_TIER_STATUS_UNSPECIFIED",
+        "PACKAGE_TIER_STANDARD",
+        "PACKAGE_TIER_PREMIUM"
+      ],
+      "default": "PACKAGE_TIER_STATUS_UNSPECIFIED",
+      "description": "PackageTier defines the valid tiers a package can be in.\n\n - PACKAGE_TIER_STATUS_UNSPECIFIED: Unspecified package tier.\n - PACKAGE_TIER_STANDARD: Standard tier.\n - PACKAGE_TIER_PREMIUM: Premium tier."
     },
     "v1ResourceConfiguration": {
       "type": "object",
