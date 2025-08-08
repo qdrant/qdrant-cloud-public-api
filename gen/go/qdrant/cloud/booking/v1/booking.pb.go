@@ -419,11 +419,13 @@ type Package struct {
 	// A human-readable identifier for the package.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Specifies if this is a free or paid package.
+	// Must be either "free" or "paid".
 	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	// The resource configuration associated with the package
 	ResourceConfiguration *ResourceConfiguration `protobuf:"bytes,4,opt,name=resource_configuration,json=resourceConfiguration,proto3" json:"resource_configuration,omitempty"`
 	// The currency of the prices.
 	// Specifies the currency in which the prices are denominated.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
 	Currency string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The unit price per hour in millicents, in integer format.
 	// Represents the cost per hour for a single unit of the resource.
@@ -642,44 +644,48 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x92\x02\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xe3\x03\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12<\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tH\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
-	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatusesB\x1b\n" +
+	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\xab\x01\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x83\x03\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
 	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12<\n" +
-	"\x18cloud_provider_region_id\x18\x02 \x01(\tH\x00R\x15cloudProviderRegionId\x88\x01\x01B\x1b\n" +
+	"\x18cloud_provider_region_id\x18\x02 \x01(\tH\x00R\x15cloudProviderRegionId\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
+	"5list_global_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"T\n" +
 	"\x1aListGlobalPackagesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"V\n" +
 	"\x11GetPackageRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x18\n" +
-	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"P\n" +
-	"\x12GetPackageResponse\x12:\n" +
-	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageR\apackage\"\xea\x03\n" +
+	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"X\n" +
+	"\x12GetPackageResponse\x12B\n" +
+	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xc2\x04\n" +
 	"\aPackage\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12e\n" +
-	"\x16resource_configuration\x18\x04 \x01(\v2..qdrant.cloud.booking.v1.ResourceConfigurationR\x15resourceConfiguration\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x124\n" +
-	"\x17unit_int_price_per_hour\x18\x06 \x01(\x05R\x13unitIntPricePerHour\x12>\n" +
-	"\x06status\x18\a \x01(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\x06status\x12\x80\x01\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
+	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
+	"\x04type\x18\x03 \x01(\tB\x11\xbaH\x0er\fR\x04freeR\x04paidR\x04type\x12e\n" +
+	"\x16resource_configuration\x18\x04 \x01(\v2..qdrant.cloud.booking.v1.ResourceConfigurationR\x15resourceConfiguration\x12-\n" +
+	"\bcurrency\x18\x05 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency\x12=\n" +
+	"\x17unit_int_price_per_hour\x18\x06 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x13unitIntPricePerHour\x12J\n" +
+	"\x06status\x18\a \x01(\x0e2&.qdrant.cloud.booking.v1.PackageStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12\x80\x01\n" +
 	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01B!\n" +
-	"\x1f_available_additional_resources\"M\n" +
-	"\x1cAvailableAdditionalResources\x12-\n" +
-	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"O\n" +
-	"\x15ResourceConfiguration\x12\x10\n" +
-	"\x03ram\x18\x01 \x01(\tR\x03ram\x12\x10\n" +
-	"\x03cpu\x18\x02 \x01(\tR\x03cpu\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\tR\x04disk*j\n" +
+	"\x1f_available_additional_resources\"V\n" +
+	"\x1cAvailableAdditionalResources\x126\n" +
+	"\x13disk_price_per_hour\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x00R\x10diskPricePerHour\"j\n" +
+	"\x15ResourceConfiguration\x12\x19\n" +
+	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03ram\x12\x19\n" +
+	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03cpu\x12\x1b\n" +
+	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04disk*j\n" +
 	"\rPackageStatus\x12\x1e\n" +
 	"\x1aPACKAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_STATUS_ACTIVE\x10\x01\x12\x1e\n" +

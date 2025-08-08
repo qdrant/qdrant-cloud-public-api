@@ -248,7 +248,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Specifies if this is a free or paid package."
+          "description": "Specifies if this is a free or paid package.\nMust be either \"free\" or \"paid\"."
         },
         "resourceConfiguration": {
           "$ref": "#/definitions/v1ResourceConfiguration",
@@ -256,7 +256,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated."
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         },
         "unitIntPricePerHour": {
           "type": "integer",

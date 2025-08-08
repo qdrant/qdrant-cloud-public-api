@@ -200,6 +200,7 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
 
   /**
    * Specifies if this is a free or paid package.
+   * Must be either "free" or "paid".
    *
    * @generated from field: string type = 3;
    */
@@ -215,6 +216,7 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   /**
    * The currency of the prices.
    * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
    *
    * @generated from field: string currency = 5;
    */
