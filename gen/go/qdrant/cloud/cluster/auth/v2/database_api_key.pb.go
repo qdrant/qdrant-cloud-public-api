@@ -792,7 +792,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x127\n" +
 	"\x13database_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\xfc\t\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\xb3\v\n" +
 	"\x0eDatabaseApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -809,11 +809,12 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x10created_by_email\x18\b \x01(\tR\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key:\xa4\x06\xbaH\xa0\x06\x1a\xac\x01\n" +
+	" \x01(\tR\x03key:\xdb\a\xbaH\xd7\a\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xe0\x01\n" +
 	"\x1eno_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\x9d\x01\n" +
 	"\x16only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1a\x82\x01\n" +
-	"!database_api_key.created_by_email\x12\"created_by_email must not be empty\x1a9this.created_by_email.size() > 0 || !has(this.created_at)\x1ag\n" +
+	"!database_api_key.created_by_email\x12\"created_by_email must not be empty\x1a9this.created_by_email.size() > 0 || !has(this.created_at)\x1a\xb4\x01\n" +
+	"(database_api_key.created_by_email_format\x12.created_by_email must be a valid email address\x1aXthis.created_by_email.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$') || !has(this.created_at)\x1ag\n" +
 	"\x18database_api_key.postfix\x12\x19postfix must not be empty\x1a0this.postfix.size() > 0 || !has(this.created_at)B\r\n" +
 	"\v_expires_at\"\xd6\x01\n" +
 	"\n" +
