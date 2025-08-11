@@ -18,7 +18,7 @@
   "paths": {
     "/api/quota/v1/accounts/{accountId}/quotas": {
       "get": {
-        "summary": "Get quotas for the account identified by the given account ID.\nRequired permissions:\n- read:account",
+        "summary": "Get quotas for the account identified by the given account ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "QuotaService_GetAccountQuotas",
         "responses": {
           "200": {

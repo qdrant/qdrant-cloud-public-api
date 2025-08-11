@@ -16,7 +16,7 @@ export const getAuthenticatedUserQuotas = QuotaService.method.getAuthenticatedUs
 /**
  * Get quotas for the account identified by the given account ID.
  * Required permissions:
- * - read:account
+ * - None (authenticated only)
  *
  * @generated from rpc qdrant.cloud.quota.v1.QuotaService.GetAccountQuotas
  */

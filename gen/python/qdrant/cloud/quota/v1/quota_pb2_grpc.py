@@ -43,7 +43,7 @@ class QuotaServiceServicer(object):
     def GetAccountQuotas(self, request, context):
         """Get quotas for the account identified by the given account ID.
         Required permissions:
-        - read:account
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
