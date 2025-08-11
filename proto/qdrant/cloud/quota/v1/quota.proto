@@ -23,10 +23,10 @@ service QuotaService {
   }
   // Get quotas for the account identified by the given account ID.
   // Required permissions:
-  // - read:account
+  // - None (authenticated only)
   rpc GetAccountQuotas(GetAccountQuotasRequest) returns (GetAccountQuotasResponse) {
     // permissions
-    option (common.v1.permissions) = "read:account";
+    option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/quota/v1/accounts/{account_id}/quotas"};
   }

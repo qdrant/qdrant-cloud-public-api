@@ -35,7 +35,7 @@ type QuotaServiceClient interface {
 	GetAuthenticatedUserQuotas(ctx context.Context, in *GetAuthenticatedUserQuotasRequest, opts ...grpc.CallOption) (*GetAuthenticatedUserQuotasResponse, error)
 	// Get quotas for the account identified by the given account ID.
 	// Required permissions:
-	// - read:account
+	// - None (authenticated only)
 	GetAccountQuotas(ctx context.Context, in *GetAccountQuotasRequest, opts ...grpc.CallOption) (*GetAccountQuotasResponse, error)
 }
 
@@ -79,7 +79,7 @@ type QuotaServiceServer interface {
 	GetAuthenticatedUserQuotas(context.Context, *GetAuthenticatedUserQuotasRequest) (*GetAuthenticatedUserQuotasResponse, error)
 	// Get quotas for the account identified by the given account ID.
 	// Required permissions:
-	// - read:account
+	// - None (authenticated only)
 	GetAccountQuotas(context.Context, *GetAccountQuotasRequest) (*GetAccountQuotasResponse, error)
 	mustEmbedUnimplementedQuotaServiceServer()
 }
