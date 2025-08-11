@@ -134,7 +134,7 @@ message Package {
   // The name of the package.
   // A human-readable identifier for the package.
   string name = 2 [(buf.validate.field).string = {
-    min_len: 4
+    min_len: 3
     max_len: 64
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
@@ -165,7 +165,6 @@ message Package {
   // The tier of the package.
   PackageTier tier = 9 [(buf.validate.field).enum = {
     defined_only: true
-    // Deny `PackageTier.PACKAGE_TIER_STATUS_UNSPECIFIED`
     not_in: [0]
   }];
   // Optional additional resources that can be added to the cluster.

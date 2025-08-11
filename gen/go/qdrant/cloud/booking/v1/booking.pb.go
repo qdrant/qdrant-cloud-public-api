@@ -732,7 +732,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\x88\x05\n" +
 	"\aPackage\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
-	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
+	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
 	"\x04type\x18\x03 \x01(\tB\x11\xbaH\x0er\fR\x04freeR\x04paidR\x04type\x12e\n" +
 	"\x16resource_configuration\x18\x04 \x01(\v2..qdrant.cloud.booking.v1.ResourceConfigurationR\x15resourceConfiguration\x12-\n" +
 	"\bcurrency\x18\x05 \x01(\tB\x11\xbaH\x0er\f2\n" +
