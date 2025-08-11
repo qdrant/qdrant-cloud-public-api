@@ -37,8 +37,8 @@ extend google.protobuf.MethodOptions {
   repeated ActorType supported_actor_types = 50004 [
     packed = true,
     (buf.validate.field).repeated.items.enum = {
-      defined_only: true // Ensures only defined enum values are used
-      not_in: [0] /* Disallows ACTOR_TYPE_UNSPECIFIED (value 0) */
+      defined_only: true
+      not_in: [0]
     }
   ];
 }
