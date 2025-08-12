@@ -192,7 +192,7 @@
         },
         "createdByEmail": {
           "type": "string",
-          "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programatically the field will be empty."
+          "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
         },
         "postfix": {
           "type": "string",
@@ -243,7 +243,7 @@
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programatically the field will be empty."
+              "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
             },
             "postfix": {
               "type": "string",

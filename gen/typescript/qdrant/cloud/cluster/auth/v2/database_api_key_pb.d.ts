@@ -223,7 +223,7 @@ export declare type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.Datab
   /**
    * The email of the user who created the database api key.
    * This is an optional read-only field and will be available after a database api key is created.
-   * If the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programatically the field will be empty.
+   * If the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
    *
    * @generated from field: string created_by_email = 8;
    */

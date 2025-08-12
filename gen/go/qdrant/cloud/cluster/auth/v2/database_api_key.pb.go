@@ -465,7 +465,7 @@ type DatabaseApiKey struct {
 	AccessRules []*AccessRule `protobuf:"bytes,7,rep,name=access_rules,json=accessRules,proto3" json:"access_rules,omitempty"`
 	// The email of the user who created the database api key.
 	// This is an optional read-only field and will be available after a database api key is created.
-	// If the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programatically the field will be empty.
+	// If the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
 	CreatedByEmail string `protobuf:"bytes,8,opt,name=created_by_email,json=createdByEmail,proto3" json:"created_by_email,omitempty"`
 	// Postfix for the database api key, this represents the last bytes of the key.
 	// This is a read-only field and will be available after a database api key is created.
