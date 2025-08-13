@@ -294,7 +294,7 @@ enum BackupStatus {
   BACKUP_STATUS_UNSPECIFIED = 0;
   // The backup is currently in progress.
   BACKUP_STATUS_RUNNING = 1;
-  // The backup was skipped.
+  // The backup was skipped or was not started because it has no suitable target.
   BACKUP_STATUS_SKIPPED = 2;
   // The backup failed to complete successfully.
   BACKUP_STATUS_FAILED = 3;

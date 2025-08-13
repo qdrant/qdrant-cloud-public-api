@@ -736,7 +736,7 @@ export enum BackupStatus {
   RUNNING = 1,
 
   /**
-   * The backup was skipped.
+   * The backup was skipped or was not started because it has no suitable target.
    *
    * @generated from enum value: BACKUP_STATUS_SKIPPED = 2;
    */

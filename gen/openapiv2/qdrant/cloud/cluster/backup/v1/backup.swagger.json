@@ -752,7 +752,7 @@
         "BACKUP_STATUS_NOT_FOUND"
       ],
       "default": "BACKUP_STATUS_UNSPECIFIED",
-      "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region."
+      "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped or was not started because it has no suitable target.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region."
     },
     "v1CreateBackupResponse": {
       "type": "object",
