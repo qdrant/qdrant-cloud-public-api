@@ -435,11 +435,11 @@ message Account {
     expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
   };
   // The name of the account.
-  // Name can only contain letters, numbers, underscores, spaces and dashes.
+  // Name can only contain printable characters.
   string name = 5 [(buf.validate.field).string = {
     max_len: 256
     min_len: 4
-    pattern: "^[\\w\\s-]+$"
+    pattern: "^([^\\x00-\\x1F\\x7F])*$"
   }];
   // The external identifier of the owner of the account.
   string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];

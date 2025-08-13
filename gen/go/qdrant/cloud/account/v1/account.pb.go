@@ -1511,7 +1511,7 @@ type Account struct {
 	// This is a read-only field and will be available after an account is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// The name of the account.
-	// Name can only contain letters, numbers, underscores, spaces and dashes.
+	// Name can only contain printable characters.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The external identifier of the owner of the account.
 	ExternalOwnerId string `protobuf:"bytes,6,opt,name=external_owner_id,json=externalOwnerId,proto3" json:"external_owner_id,omitempty"`
@@ -1878,14 +1878,13 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"\x1d\n" +
-	"\x1bDeleteAccountMemberResponse\"\xdc\x05\n" +
+	"\x1bDeleteAccountMemberResponse\"\xe7\x05\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12*\n" +
-	"\x04name\x18\x05 \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x022\n" +
-	"^[\\w\\s-]+$R\x04name\x123\n" +
+	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x125\n" +
+	"\x04name\x18\x05 \x01(\tB!\xbaH\x1er\x1c\x10\x04\x18\x80\x022\x15^([^\\x00-\\x1F\\x7F])*$R\x04name\x123\n" +
 	"\x11external_owner_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x0fexternalOwnerId\x12(\n" +
 	"\vowner_email\x18\a \x01(\tB\a\xbaH\x04r\x02`\x01R\n" +
 	"ownerEmail\x12,\n" +
