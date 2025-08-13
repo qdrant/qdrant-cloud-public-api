@@ -34,7 +34,7 @@ const (
 	BackupStatus_BACKUP_STATUS_UNSPECIFIED BackupStatus = 0
 	// The backup is currently in progress.
 	BackupStatus_BACKUP_STATUS_RUNNING BackupStatus = 1
-	// The backup was skipped.
+	// The backup was skipped or was not started because it has no suitable target.
 	BackupStatus_BACKUP_STATUS_SKIPPED BackupStatus = 2
 	// The backup failed to complete successfully.
 	BackupStatus_BACKUP_STATUS_FAILED BackupStatus = 3
