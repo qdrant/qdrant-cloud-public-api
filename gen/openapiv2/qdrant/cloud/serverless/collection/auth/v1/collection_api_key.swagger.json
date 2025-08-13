@@ -180,7 +180,7 @@
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user who created the collection api key.\nThis is a read-only field and will be available after a collection api key is created."
+              "description": "The email of the user who created the collection api key.\nThis is an optional read-only field and will be available after a collection api key is created.\nIf the CollectionApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
             },
             "postfix": {
               "type": "string",
@@ -260,7 +260,7 @@
         },
         "createdByEmail": {
           "type": "string",
-          "description": "The email of the user who created the collection api key.\nThis is a read-only field and will be available after a collection api key is created."
+          "description": "The email of the user who created the collection api key.\nThis is an optional read-only field and will be available after a collection api key is created.\nIf the CollectionApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
         },
         "postfix": {
           "type": "string",
