@@ -794,7 +794,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x127\n" +
 	"\x13database_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\xc2\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\xc4\n" +
 	"\n" +
 	"\x0eDatabaseApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
@@ -808,15 +808,15 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"^[\\w\\s-]+$R\x04name\x12>\n" +
 	"\n" +
 	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12U\n" +
-	"\faccess_rules\x18\a \x03(\v2(.qdrant.cloud.cluster.auth.v2.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12(\n" +
-	"\x10created_by_email\x18\b \x01(\tR\x0ecreatedByEmail\x12\x18\n" +
+	"\faccess_rules\x18\a \x03(\v2(.qdrant.cloud.cluster.auth.v2.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12\xd2\x01\n" +
+	"\x10created_by_email\x18\b \x01(\tB\xa7\x01\xbaH\xa3\x01\xba\x01\x9f\x01\n" +
+	"!database_api_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key:\xea\x06\xbaH\xe6\x06\x1a\xac\x01\n" +
-	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xe0\x01\n" +
-	"\x1eno_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\x9d\x01\n" +
-	"\x16only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1a\xc8\x01\n" +
-	"(database_api_key.created_by_email_format\x126if set, created_by_email must be a valid email address\x1adthis.created_by_email.size() == 0 || this.created_by_email.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')\x1ag\n" +
+	" \x01(\tR\x03key:\xc1\x05\xbaH\xbd\x05\x1a\xac\x01\n" +
+	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xf1\x01\n" +
+	"/database_api_key.no_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\xae\x01\n" +
+	"'database_api_key.only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1ag\n" +
 	"\x18database_api_key.postfix\x12\x19postfix must not be empty\x1a0this.postfix.size() > 0 || !has(this.created_at)B\r\n" +
 	"\v_expires_at\"\xd6\x01\n" +
 	"\n" +

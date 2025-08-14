@@ -220,7 +220,8 @@ export declare type CollectionApiKey = Message<"qdrant.cloud.serverless.collecti
 
   /**
    * The email of the user who created the collection api key.
-   * This is a read-only field and will be available after a collection api key is created.
+   * This is an optional read-only field and will be available after a collection api key is created.
+   * If the CollectionApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
    *
    * @generated from field: string created_by_email = 8;
    */
