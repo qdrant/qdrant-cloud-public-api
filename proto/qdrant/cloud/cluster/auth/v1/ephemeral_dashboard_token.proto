@@ -16,6 +16,8 @@ service EphemeralDashboardTokenService {
     option (common.v1.permissions) = "read:clusters";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // custom supported-actor-types expression
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens"

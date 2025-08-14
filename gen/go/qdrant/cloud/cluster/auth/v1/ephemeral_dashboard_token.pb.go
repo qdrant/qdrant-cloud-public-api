@@ -188,10 +188,10 @@ const file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDesc 
 	"%CreateEphemeralDashboardTokenResponse\x12y\n" +
 	"\x19ephemeral_dashboard_token\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenB\x06\xbaH\x03\xc8\x01\x01R\x17ephemeralDashboardToken\"]\n" +
 	"\x17EphemeralDashboardToken\x12B\n" +
-	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xbc\x02\n" +
-	"\x1eEphemeralDashboardTokenService\x12\x99\x02\n" +
-	"\x1dCreateEphemeralDashboardToken\x12B.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1aC.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"o\x8a\xb5\x18\rread:clusters\x92\xb5\x18\n" +
-	"account_id\x82\xd3\xe4\x93\x02J:\x01*\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokensB\xab\x02\n" +
+	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xc1\x02\n" +
+	"\x1eEphemeralDashboardTokenService\x12\x9e\x02\n" +
+	"\x1dCreateEphemeralDashboardToken\x12B.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1aC.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"t\x8a\xb5\x18\rread:clusters\x92\xb5\x18\n" +
+	"account_id\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02J:\x01*\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokensB\xab\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v1B\x1cEphemeralDashboardTokenProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3"
 
 var (
