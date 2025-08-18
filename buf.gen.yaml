@@ -57,6 +57,7 @@ plugins:
     opt:
       - target=js+dts
       - import_extension=js
+      - valid_types=protovalidate_required
     out: gen/typescript
 
   - remote: buf.build/connectrpc/query-es:v2.1.1
