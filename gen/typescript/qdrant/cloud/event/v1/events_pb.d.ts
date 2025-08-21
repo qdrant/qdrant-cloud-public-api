@@ -37,7 +37,7 @@ export declare type EventOptions = Message<"qdrant.cloud.event.v1.EventOptions">
 
   /**
    * Whether or not this event should be marked as a status only event.
-   * TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, imo this bool makes more sense.
+   * TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, in my opinion this bool makes more sense.
    *
    * @generated from field: bool status_only = 3;
    */

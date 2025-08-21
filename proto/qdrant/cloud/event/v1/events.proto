@@ -40,7 +40,7 @@ message EventOptions {
   // The type of the resource that this event is about (e.g., "cluster", "backup").
   string resource_type = 2 [(buf.validate.field).string.min_len = 1];
   // Whether or not this event should be marked as a status only event.
-  // TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, imo this bool makes more sense.
+  // TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, in my opinion this bool makes more sense.
   bool status_only = 3;
   // The unique identifier field of the resource.
   // This should be a resolvable (nested) field.

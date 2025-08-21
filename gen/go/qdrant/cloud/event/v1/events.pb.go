@@ -93,7 +93,7 @@ type EventOptions struct {
 	// The type of the resource that this event is about (e.g., "cluster", "backup").
 	ResourceType string `protobuf:"bytes,2,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
 	// Whether or not this event should be marked as a status only event.
-	// TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, imo this bool makes more sense.
+	// TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, in my opinion this bool makes more sense.
 	StatusOnly bool `protobuf:"varint,3,opt,name=status_only,json=statusOnly,proto3" json:"status_only,omitempty"`
 	// The unique identifier field of the resource.
 	// This should be a resolvable (nested) field.
