@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package qdrant.cloud.event.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// The method options for configuring the event options.
+// If this option is not found for an RPC, no event will be generated.
+//
+// Example for a CreateBackup RPC:
+//  option (qdrant.cloud.event.v1.event_options) = {
+//    event_type: qdrant.cloud.event.v1.EVENT_TYPE_CREATED,
+//    resource_type: "backup",
+//    resource_id_field: "resp.backup.id",
+//    resource_url_template: "/Accounts/{req.backup.account_id}/Clusters/{req.backup.cluster_id}/Backups/{resp.backup.id}",
+//    additional_context_fields: {
+//      key: "cluster_id"
+//      value: "req.cluster_id"
+//    }
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // The actual event options.
+  EventOptions event_options = 51001;
+}
+
+// EventOptions is a custom method option to indicate that an event should be
+// generated when this RPC is successfully called.
+// The fields should start with 'req.' or 'resp.' to indicate whether the info needs to be
+// extracted from the request or the response.
+message EventOptions {
+  // The type of the event that should be generated.
+  EventType event_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The type of the resource that this event is about (e.g., "cluster", "backup").
+  string resource_type = 2 [(buf.validate.field).string.min_len = 1];
+  // Whether or not this event should be marked as a status only event.
+  // TODO: Alternative we can make EVENT_TYPE_UPDATED_SPEC and EVENT_TYPE_UPDATED_STATUS, in my opinion this bool makes more sense.
+  bool status_only = 3;
+  // The unique identifier field of the resource.
+  // This should be a resolvable (nested) field.
+  // E.g. 'resp.cluster_id'
+  string resource_id_field = 4 [(buf.validate.field).string.min_len = 1];
+  // The URL for the resource.
+  // This URL can be used to filter if subscribing to events.
+  // Like '/Accounts/123/Clusters/*'
+  // This should be a resolvable (nested) field template.
+  // E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
+  string resource_url_template = 5 [(buf.validate.field).string.min_len = 1];
+  // The additional context field.
+  // Key will be copied as-is, the value should be a resolvable (nested) field.
+  // E.g. {'cluster_id': 'resp.cluster_id', 'backup_id': 'resp.backup_id'}
+  map<string, string> additional_context_fields = 10;
+}
+
+// EventType defines the type of the event that occurred to the resource.
+enum EventType {
+  // Unspecified event type.
+  EVENT_TYPE_UNSPECIFIED = 0;
+  // The resource was created.
+  EVENT_TYPE_CREATED = 1;
+  // The resource was updated.
+  EVENT_TYPE_UPDATED = 2;
+  // The resource was deleted.
+  EVENT_TYPE_DELETED = 3;
+}
+
+// Event represents a significant occurrence in the system, like a resource
+// being created, updated, or deleted.
+message Event {
+  // A unique identifier for the event, in the form of a UUID.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The time at which the event occurred.
+  google.protobuf.Timestamp created_at = 2;
+  // The unique identifier of the authenticated actor.
+  string actor_id = 3 [(buf.validate.field).string.min_len = 1];
+  // The type of the authenticated actor.
+  qdrant.cloud.common.v1.ActorType actor_type = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The account ID associated with this event (if applicable, UUID).
+  // This field will be set if the event is bound to a specific account.
+  optional string account_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The type of the event.
+  EventType event_type = 10 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The type of the resource that this event is about (e.g., "cluster", "backup").
+  string resource_type = 11 [(buf.validate.field).string.min_len = 1];
+  // Whether or not this event is a status only event.
+  // Applicable when event_type is EVENT_TYPE_UPDATED.
+  // For example, this can be used to distinguish between a spec update and a status update.
+  bool status_only = 12;
+  // The unique identifier of the resource.
+  // This field will be set if the event is bound to a specific resource.
+  // In most cases this is in the form of a UUID.
+  optional string resource_id = 13 [(buf.validate.field).string.min_len = 1];
+  // The URL associated with the resource for this event.
+  string resource_url = 14 [(buf.validate.field).string.min_len = 1];
+  // Additional key-value context about the event.
+  // For example, for a backup event, this could include the "cluster_id".
+  map<string, string> additional_context = 20;
+}
