@@ -20,7 +20,7 @@ class AWSElasticBlockStoreVolumeSource(_message.Message):
     fsType: str
     partition: int
     readOnly: bool
-    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Affinity(_message.Message):
     __slots__ = ("nodeAffinity", "podAffinity", "podAntiAffinity")
@@ -60,7 +60,7 @@ class AzureDiskVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     kind: str
-    def __init__(self, diskName: _Optional[str] = ..., diskURI: _Optional[str] = ..., cachingMode: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., kind: _Optional[str] = ...) -> None: ...
+    def __init__(self, diskName: _Optional[str] = ..., diskURI: _Optional[str] = ..., cachingMode: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., kind: _Optional[str] = ...) -> None: ...
 
 class AzureFilePersistentVolumeSource(_message.Message):
     __slots__ = ("secretName", "shareName", "readOnly", "secretNamespace")
@@ -72,7 +72,7 @@ class AzureFilePersistentVolumeSource(_message.Message):
     shareName: str
     readOnly: bool
     secretNamespace: str
-    def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: bool = ..., secretNamespace: _Optional[str] = ...) -> None: ...
+    def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretNamespace: _Optional[str] = ...) -> None: ...
 
 class AzureFileVolumeSource(_message.Message):
     __slots__ = ("secretName", "shareName", "readOnly")
@@ -82,7 +82,7 @@ class AzureFileVolumeSource(_message.Message):
     secretName: str
     shareName: str
     readOnly: bool
-    def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Binding(_message.Message):
     __slots__ = ("metadata", "target")
@@ -119,7 +119,7 @@ class CSIPersistentVolumeSource(_message.Message):
     nodeStageSecretRef: SecretReference
     nodePublishSecretRef: SecretReference
     controllerExpandSecretRef: SecretReference
-    def __init__(self, driver: _Optional[str] = ..., volumeHandle: _Optional[str] = ..., readOnly: bool = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., controllerPublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodeStageSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodePublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., controllerExpandSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, driver: _Optional[str] = ..., volumeHandle: _Optional[str] = ..., readOnly: _Optional[bool] = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., controllerPublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodeStageSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodePublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., controllerExpandSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
 
 class CSIVolumeSource(_message.Message):
     __slots__ = ("driver", "readOnly", "fsType", "volumeAttributes", "nodePublishSecretRef")
@@ -140,7 +140,7 @@ class CSIVolumeSource(_message.Message):
     fsType: str
     volumeAttributes: _containers.ScalarMap[str, str]
     nodePublishSecretRef: LocalObjectReference
-    def __init__(self, driver: _Optional[str] = ..., readOnly: bool = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., nodePublishSecretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, driver: _Optional[str] = ..., readOnly: _Optional[bool] = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., nodePublishSecretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class Capabilities(_message.Message):
     __slots__ = ("add", "drop")
@@ -164,7 +164,7 @@ class CephFSPersistentVolumeSource(_message.Message):
     secretFile: str
     secretRef: SecretReference
     readOnly: bool
-    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class CephFSVolumeSource(_message.Message):
     __slots__ = ("monitors", "path", "user", "secretFile", "secretRef", "readOnly")
@@ -180,7 +180,7 @@ class CephFSVolumeSource(_message.Message):
     secretFile: str
     secretRef: LocalObjectReference
     readOnly: bool
-    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class CinderPersistentVolumeSource(_message.Message):
     __slots__ = ("volumeID", "fsType", "readOnly", "secretRef")
@@ -192,7 +192,7 @@ class CinderPersistentVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     secretRef: SecretReference
-    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
 
 class CinderVolumeSource(_message.Message):
     __slots__ = ("volumeID", "fsType", "readOnly", "secretRef")
@@ -204,7 +204,7 @@ class CinderVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     secretRef: LocalObjectReference
-    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class ClientIPConfig(_message.Message):
     __slots__ = ("timeoutSeconds",)
@@ -264,7 +264,7 @@ class ConfigMap(_message.Message):
     immutable: bool
     data: _containers.ScalarMap[str, str]
     binaryData: _containers.ScalarMap[str, bytes]
-    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: bool = ..., data: _Optional[_Mapping[str, str]] = ..., binaryData: _Optional[_Mapping[str, bytes]] = ...) -> None: ...
+    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: _Optional[bool] = ..., data: _Optional[_Mapping[str, str]] = ..., binaryData: _Optional[_Mapping[str, bytes]] = ...) -> None: ...
 
 class ConfigMapEnvSource(_message.Message):
     __slots__ = ("localObjectReference", "optional")
@@ -272,7 +272,7 @@ class ConfigMapEnvSource(_message.Message):
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
     localObjectReference: LocalObjectReference
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapKeySelector(_message.Message):
     __slots__ = ("localObjectReference", "key", "optional")
@@ -282,7 +282,7 @@ class ConfigMapKeySelector(_message.Message):
     localObjectReference: LocalObjectReference
     key: str
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapList(_message.Message):
     __slots__ = ("metadata", "items")
@@ -314,7 +314,7 @@ class ConfigMapProjection(_message.Message):
     localObjectReference: LocalObjectReference
     items: _containers.RepeatedCompositeFieldContainer[KeyToPath]
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapVolumeSource(_message.Message):
     __slots__ = ("localObjectReference", "items", "defaultMode", "optional")
@@ -326,7 +326,7 @@ class ConfigMapVolumeSource(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[KeyToPath]
     defaultMode: int
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class Container(_message.Message):
     __slots__ = ("name", "image", "command", "args", "workingDir", "ports", "envFrom", "env", "resources", "volumeMounts", "volumeDevices", "livenessProbe", "readinessProbe", "startupProbe", "lifecycle", "terminationMessagePath", "terminationMessagePolicy", "imagePullPolicy", "securityContext", "stdin", "stdinOnce", "tty")
@@ -374,7 +374,7 @@ class Container(_message.Message):
     stdin: bool
     stdinOnce: bool
     tty: bool
-    def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: bool = ..., stdinOnce: bool = ..., tty: bool = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: _Optional[bool] = ..., stdinOnce: _Optional[bool] = ..., tty: _Optional[bool] = ...) -> None: ...
 
 class ContainerImage(_message.Message):
     __slots__ = ("names", "sizeBytes")
@@ -460,7 +460,7 @@ class ContainerStatus(_message.Message):
     imageID: str
     containerID: str
     started: bool
-    def __init__(self, name: _Optional[str] = ..., state: _Optional[_Union[ContainerState, _Mapping]] = ..., lastState: _Optional[_Union[ContainerState, _Mapping]] = ..., ready: bool = ..., restartCount: _Optional[int] = ..., image: _Optional[str] = ..., imageID: _Optional[str] = ..., containerID: _Optional[str] = ..., started: bool = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., state: _Optional[_Union[ContainerState, _Mapping]] = ..., lastState: _Optional[_Union[ContainerState, _Mapping]] = ..., ready: _Optional[bool] = ..., restartCount: _Optional[int] = ..., image: _Optional[str] = ..., imageID: _Optional[str] = ..., containerID: _Optional[str] = ..., started: _Optional[bool] = ...) -> None: ...
 
 class DaemonEndpoint(_message.Message):
     __slots__ = ("Port",)
@@ -638,7 +638,7 @@ class EphemeralContainerCommon(_message.Message):
     stdin: bool
     stdinOnce: bool
     tty: bool
-    def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: bool = ..., stdinOnce: bool = ..., tty: bool = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: _Optional[bool] = ..., stdinOnce: _Optional[bool] = ..., tty: _Optional[bool] = ...) -> None: ...
 
 class EphemeralVolumeSource(_message.Message):
     __slots__ = ("volumeClaimTemplate",)
@@ -722,7 +722,7 @@ class FCVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     wwids: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, targetWWNs: _Optional[_Iterable[str]] = ..., lun: _Optional[int] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., wwids: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, targetWWNs: _Optional[_Iterable[str]] = ..., lun: _Optional[int] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., wwids: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class FlexPersistentVolumeSource(_message.Message):
     __slots__ = ("driver", "fsType", "secretRef", "readOnly", "options")
@@ -743,7 +743,7 @@ class FlexPersistentVolumeSource(_message.Message):
     secretRef: SecretReference
     readOnly: bool
     options: _containers.ScalarMap[str, str]
-    def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: bool = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class FlexVolumeSource(_message.Message):
     __slots__ = ("driver", "fsType", "secretRef", "readOnly", "options")
@@ -764,7 +764,7 @@ class FlexVolumeSource(_message.Message):
     secretRef: LocalObjectReference
     readOnly: bool
     options: _containers.ScalarMap[str, str]
-    def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: bool = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class FlockerVolumeSource(_message.Message):
     __slots__ = ("datasetName", "datasetUUID")
@@ -784,7 +784,7 @@ class GCEPersistentDiskVolumeSource(_message.Message):
     fsType: str
     partition: int
     readOnly: bool
-    def __init__(self, pdName: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, pdName: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class GRPCAction(_message.Message):
     __slots__ = ("port", "service")
@@ -814,7 +814,7 @@ class GlusterfsPersistentVolumeSource(_message.Message):
     path: str
     readOnly: bool
     endpointsNamespace: str
-    def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: bool = ..., endpointsNamespace: _Optional[str] = ...) -> None: ...
+    def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ..., endpointsNamespace: _Optional[str] = ...) -> None: ...
 
 class GlusterfsVolumeSource(_message.Message):
     __slots__ = ("endpoints", "path", "readOnly")
@@ -824,7 +824,7 @@ class GlusterfsVolumeSource(_message.Message):
     endpoints: str
     path: str
     readOnly: bool
-    def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class HTTPGetAction(_message.Message):
     __slots__ = ("path", "port", "host", "scheme", "httpHeaders")
@@ -888,7 +888,7 @@ class ISCSIPersistentVolumeSource(_message.Message):
     chapAuthSession: bool
     secretRef: SecretReference
     initiatorName: str
-    def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: bool = ..., chapAuthSession: bool = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
+    def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: _Optional[bool] = ..., chapAuthSession: _Optional[bool] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
 
 class ISCSIVolumeSource(_message.Message):
     __slots__ = ("targetPortal", "iqn", "lun", "iscsiInterface", "fsType", "readOnly", "portals", "chapAuthDiscovery", "chapAuthSession", "secretRef", "initiatorName")
@@ -914,7 +914,7 @@ class ISCSIVolumeSource(_message.Message):
     chapAuthSession: bool
     secretRef: LocalObjectReference
     initiatorName: str
-    def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: bool = ..., chapAuthSession: bool = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
+    def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: _Optional[bool] = ..., chapAuthSession: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
 
 class KeyToPath(_message.Message):
     __slots__ = ("key", "path", "mode")
@@ -1063,7 +1063,7 @@ class NFSVolumeSource(_message.Message):
     server: str
     path: str
     readOnly: bool
-    def __init__(self, server: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, server: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Namespace(_message.Message):
     __slots__ = ("metadata", "spec", "status")
@@ -1244,7 +1244,7 @@ class NodeSpec(_message.Message):
     taints: _containers.RepeatedCompositeFieldContainer[Taint]
     configSource: NodeConfigSource
     externalID: str
-    def __init__(self, podCIDR: _Optional[str] = ..., podCIDRs: _Optional[_Iterable[str]] = ..., providerID: _Optional[str] = ..., unschedulable: bool = ..., taints: _Optional[_Iterable[_Union[Taint, _Mapping]]] = ..., configSource: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., externalID: _Optional[str] = ...) -> None: ...
+    def __init__(self, podCIDR: _Optional[str] = ..., podCIDRs: _Optional[_Iterable[str]] = ..., providerID: _Optional[str] = ..., unschedulable: _Optional[bool] = ..., taints: _Optional[_Iterable[_Union[Taint, _Mapping]]] = ..., configSource: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., externalID: _Optional[str] = ...) -> None: ...
 
 class NodeStatus(_message.Message):
     __slots__ = ("capacity", "allocatable", "phase", "conditions", "addresses", "daemonEndpoints", "nodeInfo", "images", "volumesInUse", "volumesAttached", "config")
@@ -1444,7 +1444,7 @@ class PersistentVolumeClaimVolumeSource(_message.Message):
     READONLY_FIELD_NUMBER: _ClassVar[int]
     claimName: str
     readOnly: bool
-    def __init__(self, claimName: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, claimName: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class PersistentVolumeList(_message.Message):
     __slots__ = ("metadata", "items")
@@ -1599,7 +1599,7 @@ class PodAttachOptions(_message.Message):
     stderr: bool
     tty: bool
     container: str
-    def __init__(self, stdin: bool = ..., stdout: bool = ..., stderr: bool = ..., tty: bool = ..., container: _Optional[str] = ...) -> None: ...
+    def __init__(self, stdin: _Optional[bool] = ..., stdout: _Optional[bool] = ..., stderr: _Optional[bool] = ..., tty: _Optional[bool] = ..., container: _Optional[str] = ...) -> None: ...
 
 class PodCondition(_message.Message):
     __slots__ = ("type", "status", "lastProbeTime", "lastTransitionTime", "reason", "message")
@@ -1649,7 +1649,7 @@ class PodExecOptions(_message.Message):
     tty: bool
     container: str
     command: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, stdin: bool = ..., stdout: bool = ..., stderr: bool = ..., tty: bool = ..., container: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, stdin: _Optional[bool] = ..., stdout: _Optional[bool] = ..., stderr: _Optional[bool] = ..., tty: _Optional[bool] = ..., container: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class PodIP(_message.Message):
     __slots__ = ("ip",)
@@ -1685,7 +1685,7 @@ class PodLogOptions(_message.Message):
     tailLines: int
     limitBytes: int
     insecureSkipTLSVerifyBackend: bool
-    def __init__(self, container: _Optional[str] = ..., follow: bool = ..., previous: bool = ..., sinceSeconds: _Optional[int] = ..., sinceTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., timestamps: bool = ..., tailLines: _Optional[int] = ..., limitBytes: _Optional[int] = ..., insecureSkipTLSVerifyBackend: bool = ...) -> None: ...
+    def __init__(self, container: _Optional[str] = ..., follow: _Optional[bool] = ..., previous: _Optional[bool] = ..., sinceSeconds: _Optional[int] = ..., sinceTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., timestamps: _Optional[bool] = ..., tailLines: _Optional[int] = ..., limitBytes: _Optional[int] = ..., insecureSkipTLSVerifyBackend: _Optional[bool] = ...) -> None: ...
 
 class PodOS(_message.Message):
     __slots__ = ("name",)
@@ -1733,7 +1733,7 @@ class PodSecurityContext(_message.Message):
     sysctls: _containers.RepeatedCompositeFieldContainer[Sysctl]
     fsGroupChangePolicy: str
     seccompProfile: SeccompProfile
-    def __init__(self, seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: bool = ..., supplementalGroups: _Optional[_Iterable[int]] = ..., fsGroup: _Optional[int] = ..., sysctls: _Optional[_Iterable[_Union[Sysctl, _Mapping]]] = ..., fsGroupChangePolicy: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
+    def __init__(self, seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: _Optional[bool] = ..., supplementalGroups: _Optional[_Iterable[int]] = ..., fsGroup: _Optional[int] = ..., sysctls: _Optional[_Iterable[_Union[Sysctl, _Mapping]]] = ..., fsGroupChangePolicy: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
 
 class PodSignature(_message.Message):
     __slots__ = ("podController",)
@@ -1829,7 +1829,7 @@ class PodSpec(_message.Message):
     topologySpreadConstraints: _containers.RepeatedCompositeFieldContainer[TopologySpreadConstraint]
     setHostnameAsFQDN: bool
     os: PodOS
-    def __init__(self, volumes: _Optional[_Iterable[_Union[Volume, _Mapping]]] = ..., initContainers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., containers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., ephemeralContainers: _Optional[_Iterable[_Union[EphemeralContainer, _Mapping]]] = ..., restartPolicy: _Optional[str] = ..., terminationGracePeriodSeconds: _Optional[int] = ..., activeDeadlineSeconds: _Optional[int] = ..., dnsPolicy: _Optional[str] = ..., nodeSelector: _Optional[_Mapping[str, str]] = ..., serviceAccountName: _Optional[str] = ..., serviceAccount: _Optional[str] = ..., automountServiceAccountToken: bool = ..., nodeName: _Optional[str] = ..., hostNetwork: bool = ..., hostPID: bool = ..., hostIPC: bool = ..., shareProcessNamespace: bool = ..., securityContext: _Optional[_Union[PodSecurityContext, _Mapping]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., hostname: _Optional[str] = ..., subdomain: _Optional[str] = ..., affinity: _Optional[_Union[Affinity, _Mapping]] = ..., schedulerName: _Optional[str] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., hostAliases: _Optional[_Iterable[_Union[HostAlias, _Mapping]]] = ..., priorityClassName: _Optional[str] = ..., priority: _Optional[int] = ..., dnsConfig: _Optional[_Union[PodDNSConfig, _Mapping]] = ..., readinessGates: _Optional[_Iterable[_Union[PodReadinessGate, _Mapping]]] = ..., runtimeClassName: _Optional[str] = ..., enableServiceLinks: bool = ..., preemptionPolicy: _Optional[str] = ..., overhead: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., topologySpreadConstraints: _Optional[_Iterable[_Union[TopologySpreadConstraint, _Mapping]]] = ..., setHostnameAsFQDN: bool = ..., os: _Optional[_Union[PodOS, _Mapping]] = ...) -> None: ...
+    def __init__(self, volumes: _Optional[_Iterable[_Union[Volume, _Mapping]]] = ..., initContainers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., containers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., ephemeralContainers: _Optional[_Iterable[_Union[EphemeralContainer, _Mapping]]] = ..., restartPolicy: _Optional[str] = ..., terminationGracePeriodSeconds: _Optional[int] = ..., activeDeadlineSeconds: _Optional[int] = ..., dnsPolicy: _Optional[str] = ..., nodeSelector: _Optional[_Mapping[str, str]] = ..., serviceAccountName: _Optional[str] = ..., serviceAccount: _Optional[str] = ..., automountServiceAccountToken: _Optional[bool] = ..., nodeName: _Optional[str] = ..., hostNetwork: _Optional[bool] = ..., hostPID: _Optional[bool] = ..., hostIPC: _Optional[bool] = ..., shareProcessNamespace: _Optional[bool] = ..., securityContext: _Optional[_Union[PodSecurityContext, _Mapping]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., hostname: _Optional[str] = ..., subdomain: _Optional[str] = ..., affinity: _Optional[_Union[Affinity, _Mapping]] = ..., schedulerName: _Optional[str] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., hostAliases: _Optional[_Iterable[_Union[HostAlias, _Mapping]]] = ..., priorityClassName: _Optional[str] = ..., priority: _Optional[int] = ..., dnsConfig: _Optional[_Union[PodDNSConfig, _Mapping]] = ..., readinessGates: _Optional[_Iterable[_Union[PodReadinessGate, _Mapping]]] = ..., runtimeClassName: _Optional[str] = ..., enableServiceLinks: _Optional[bool] = ..., preemptionPolicy: _Optional[str] = ..., overhead: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., topologySpreadConstraints: _Optional[_Iterable[_Union[TopologySpreadConstraint, _Mapping]]] = ..., setHostnameAsFQDN: _Optional[bool] = ..., os: _Optional[_Union[PodOS, _Mapping]] = ...) -> None: ...
 
 class PodStatus(_message.Message):
     __slots__ = ("phase", "conditions", "message", "reason", "nominatedNodeName", "hostIP", "podIP", "podIPs", "startTime", "initContainerStatuses", "containerStatuses", "qosClass", "ephemeralContainerStatuses")
@@ -1911,7 +1911,7 @@ class PortworxVolumeSource(_message.Message):
     volumeID: str
     fsType: str
     readOnly: bool
-    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Preconditions(_message.Message):
     __slots__ = ("uid",)
@@ -1991,7 +1991,7 @@ class QuobyteVolumeSource(_message.Message):
     user: str
     group: str
     tenant: str
-    def __init__(self, registry: _Optional[str] = ..., volume: _Optional[str] = ..., readOnly: bool = ..., user: _Optional[str] = ..., group: _Optional[str] = ..., tenant: _Optional[str] = ...) -> None: ...
+    def __init__(self, registry: _Optional[str] = ..., volume: _Optional[str] = ..., readOnly: _Optional[bool] = ..., user: _Optional[str] = ..., group: _Optional[str] = ..., tenant: _Optional[str] = ...) -> None: ...
 
 class RBDPersistentVolumeSource(_message.Message):
     __slots__ = ("monitors", "image", "fsType", "pool", "user", "keyring", "secretRef", "readOnly")
@@ -2011,7 +2011,7 @@ class RBDPersistentVolumeSource(_message.Message):
     keyring: str
     secretRef: SecretReference
     readOnly: bool
-    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class RBDVolumeSource(_message.Message):
     __slots__ = ("monitors", "image", "fsType", "pool", "user", "keyring", "secretRef", "readOnly")
@@ -2031,7 +2031,7 @@ class RBDVolumeSource(_message.Message):
     keyring: str
     secretRef: LocalObjectReference
     readOnly: bool
-    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class RangeAllocation(_message.Message):
     __slots__ = ("metadata", "range", "data")
@@ -2233,7 +2233,7 @@ class ScaleIOPersistentVolumeSource(_message.Message):
     volumeName: str
     fsType: str
     readOnly: bool
-    def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., sslEnabled: bool = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., sslEnabled: _Optional[bool] = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class ScaleIOVolumeSource(_message.Message):
     __slots__ = ("gateway", "system", "secretRef", "sslEnabled", "protectionDomain", "storagePool", "storageMode", "volumeName", "fsType", "readOnly")
@@ -2257,7 +2257,7 @@ class ScaleIOVolumeSource(_message.Message):
     volumeName: str
     fsType: str
     readOnly: bool
-    def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., sslEnabled: bool = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ...) -> None: ...
+    def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., sslEnabled: _Optional[bool] = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class ScopeSelector(_message.Message):
     __slots__ = ("matchExpressions",)
@@ -2309,7 +2309,7 @@ class Secret(_message.Message):
     data: _containers.ScalarMap[str, bytes]
     stringData: _containers.ScalarMap[str, str]
     type: str
-    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: bool = ..., data: _Optional[_Mapping[str, bytes]] = ..., stringData: _Optional[_Mapping[str, str]] = ..., type: _Optional[str] = ...) -> None: ...
+    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: _Optional[bool] = ..., data: _Optional[_Mapping[str, bytes]] = ..., stringData: _Optional[_Mapping[str, str]] = ..., type: _Optional[str] = ...) -> None: ...
 
 class SecretEnvSource(_message.Message):
     __slots__ = ("localObjectReference", "optional")
@@ -2317,7 +2317,7 @@ class SecretEnvSource(_message.Message):
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
     localObjectReference: LocalObjectReference
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretKeySelector(_message.Message):
     __slots__ = ("localObjectReference", "key", "optional")
@@ -2327,7 +2327,7 @@ class SecretKeySelector(_message.Message):
     localObjectReference: LocalObjectReference
     key: str
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretList(_message.Message):
     __slots__ = ("metadata", "items")
@@ -2345,7 +2345,7 @@ class SecretProjection(_message.Message):
     localObjectReference: LocalObjectReference
     items: _containers.RepeatedCompositeFieldContainer[KeyToPath]
     optional: bool
-    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretReference(_message.Message):
     __slots__ = ("name", "namespace")
@@ -2365,7 +2365,7 @@ class SecretVolumeSource(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[KeyToPath]
     defaultMode: int
     optional: bool
-    def __init__(self, secretName: _Optional[str] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: bool = ...) -> None: ...
+    def __init__(self, secretName: _Optional[str] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecurityContext(_message.Message):
     __slots__ = ("capabilities", "privileged", "seLinuxOptions", "windowsOptions", "runAsUser", "runAsGroup", "runAsNonRoot", "readOnlyRootFilesystem", "allowPrivilegeEscalation", "procMount", "seccompProfile")
@@ -2391,7 +2391,7 @@ class SecurityContext(_message.Message):
     allowPrivilegeEscalation: bool
     procMount: str
     seccompProfile: SeccompProfile
-    def __init__(self, capabilities: _Optional[_Union[Capabilities, _Mapping]] = ..., privileged: bool = ..., seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: bool = ..., readOnlyRootFilesystem: bool = ..., allowPrivilegeEscalation: bool = ..., procMount: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
+    def __init__(self, capabilities: _Optional[_Union[Capabilities, _Mapping]] = ..., privileged: _Optional[bool] = ..., seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: _Optional[bool] = ..., readOnlyRootFilesystem: _Optional[bool] = ..., allowPrivilegeEscalation: _Optional[bool] = ..., procMount: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
 
 class SerializedReference(_message.Message):
     __slots__ = ("reference",)
@@ -2419,7 +2419,7 @@ class ServiceAccount(_message.Message):
     secrets: _containers.RepeatedCompositeFieldContainer[ObjectReference]
     imagePullSecrets: _containers.RepeatedCompositeFieldContainer[LocalObjectReference]
     automountServiceAccountToken: bool
-    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., secrets: _Optional[_Iterable[_Union[ObjectReference, _Mapping]]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., automountServiceAccountToken: bool = ...) -> None: ...
+    def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., secrets: _Optional[_Iterable[_Union[ObjectReference, _Mapping]]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., automountServiceAccountToken: _Optional[bool] = ...) -> None: ...
 
 class ServiceAccountList(_message.Message):
     __slots__ = ("metadata", "items")
@@ -2516,7 +2516,7 @@ class ServiceSpec(_message.Message):
     allocateLoadBalancerNodePorts: bool
     loadBalancerClass: str
     internalTrafficPolicy: str
-    def __init__(self, ports: _Optional[_Iterable[_Union[ServicePort, _Mapping]]] = ..., selector: _Optional[_Mapping[str, str]] = ..., clusterIP: _Optional[str] = ..., clusterIPs: _Optional[_Iterable[str]] = ..., type: _Optional[str] = ..., externalIPs: _Optional[_Iterable[str]] = ..., sessionAffinity: _Optional[str] = ..., loadBalancerIP: _Optional[str] = ..., loadBalancerSourceRanges: _Optional[_Iterable[str]] = ..., externalName: _Optional[str] = ..., externalTrafficPolicy: _Optional[str] = ..., healthCheckNodePort: _Optional[int] = ..., publishNotReadyAddresses: bool = ..., sessionAffinityConfig: _Optional[_Union[SessionAffinityConfig, _Mapping]] = ..., ipFamilies: _Optional[_Iterable[str]] = ..., ipFamilyPolicy: _Optional[str] = ..., allocateLoadBalancerNodePorts: bool = ..., loadBalancerClass: _Optional[str] = ..., internalTrafficPolicy: _Optional[str] = ...) -> None: ...
+    def __init__(self, ports: _Optional[_Iterable[_Union[ServicePort, _Mapping]]] = ..., selector: _Optional[_Mapping[str, str]] = ..., clusterIP: _Optional[str] = ..., clusterIPs: _Optional[_Iterable[str]] = ..., type: _Optional[str] = ..., externalIPs: _Optional[_Iterable[str]] = ..., sessionAffinity: _Optional[str] = ..., loadBalancerIP: _Optional[str] = ..., loadBalancerSourceRanges: _Optional[_Iterable[str]] = ..., externalName: _Optional[str] = ..., externalTrafficPolicy: _Optional[str] = ..., healthCheckNodePort: _Optional[int] = ..., publishNotReadyAddresses: _Optional[bool] = ..., sessionAffinityConfig: _Optional[_Union[SessionAffinityConfig, _Mapping]] = ..., ipFamilies: _Optional[_Iterable[str]] = ..., ipFamilyPolicy: _Optional[str] = ..., allocateLoadBalancerNodePorts: _Optional[bool] = ..., loadBalancerClass: _Optional[str] = ..., internalTrafficPolicy: _Optional[str] = ...) -> None: ...
 
 class ServiceStatus(_message.Message):
     __slots__ = ("loadBalancer", "conditions")
@@ -2544,7 +2544,7 @@ class StorageOSPersistentVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     secretRef: ObjectReference
-    def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., secretRef: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
 
 class StorageOSVolumeSource(_message.Message):
     __slots__ = ("volumeName", "volumeNamespace", "fsType", "readOnly", "secretRef")
@@ -2558,7 +2558,7 @@ class StorageOSVolumeSource(_message.Message):
     fsType: str
     readOnly: bool
     secretRef: LocalObjectReference
-    def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: bool = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
+    def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class Sysctl(_message.Message):
     __slots__ = ("name", "value")
@@ -2668,7 +2668,7 @@ class VolumeMount(_message.Message):
     subPath: str
     mountPropagation: str
     subPathExpr: str
-    def __init__(self, name: _Optional[str] = ..., readOnly: bool = ..., mountPath: _Optional[str] = ..., subPath: _Optional[str] = ..., mountPropagation: _Optional[str] = ..., subPathExpr: _Optional[str] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., readOnly: _Optional[bool] = ..., mountPath: _Optional[str] = ..., subPath: _Optional[str] = ..., mountPropagation: _Optional[str] = ..., subPathExpr: _Optional[str] = ...) -> None: ...
 
 class VolumeNodeAffinity(_message.Message):
     __slots__ = ("required",)
@@ -2780,4 +2780,4 @@ class WindowsSecurityContextOptions(_message.Message):
     gmsaCredentialSpec: str
     runAsUserName: str
     hostProcess: bool
-    def __init__(self, gmsaCredentialSpecName: _Optional[str] = ..., gmsaCredentialSpec: _Optional[str] = ..., runAsUserName: _Optional[str] = ..., hostProcess: bool = ...) -> None: ...
+    def __init__(self, gmsaCredentialSpecName: _Optional[str] = ..., gmsaCredentialSpec: _Optional[str] = ..., runAsUserName: _Optional[str] = ..., hostProcess: _Optional[bool] = ...) -> None: ...

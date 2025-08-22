@@ -47,7 +47,7 @@ class APIResource(_message.Message):
     shortNames: _containers.RepeatedScalarFieldContainer[str]
     categories: _containers.RepeatedScalarFieldContainer[str]
     storageVersionHash: str
-    def __init__(self, name: _Optional[str] = ..., singularName: _Optional[str] = ..., namespaced: bool = ..., group: _Optional[str] = ..., version: _Optional[str] = ..., kind: _Optional[str] = ..., verbs: _Optional[_Union[Verbs, _Mapping]] = ..., shortNames: _Optional[_Iterable[str]] = ..., categories: _Optional[_Iterable[str]] = ..., storageVersionHash: _Optional[str] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., singularName: _Optional[str] = ..., namespaced: _Optional[bool] = ..., group: _Optional[str] = ..., version: _Optional[str] = ..., kind: _Optional[str] = ..., verbs: _Optional[_Union[Verbs, _Mapping]] = ..., shortNames: _Optional[_Iterable[str]] = ..., categories: _Optional[_Iterable[str]] = ..., storageVersionHash: _Optional[str] = ...) -> None: ...
 
 class APIResourceList(_message.Message):
     __slots__ = ("groupVersion", "resources")
@@ -73,7 +73,7 @@ class ApplyOptions(_message.Message):
     dryRun: _containers.RepeatedScalarFieldContainer[str]
     force: bool
     fieldManager: str
-    def __init__(self, dryRun: _Optional[_Iterable[str]] = ..., force: bool = ..., fieldManager: _Optional[str] = ...) -> None: ...
+    def __init__(self, dryRun: _Optional[_Iterable[str]] = ..., force: _Optional[bool] = ..., fieldManager: _Optional[str] = ...) -> None: ...
 
 class Condition(_message.Message):
     __slots__ = ("type", "status", "observedGeneration", "lastTransitionTime", "reason", "message")
@@ -113,7 +113,7 @@ class DeleteOptions(_message.Message):
     orphanDependents: bool
     propagationPolicy: str
     dryRun: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, gracePeriodSeconds: _Optional[int] = ..., preconditions: _Optional[_Union[Preconditions, _Mapping]] = ..., orphanDependents: bool = ..., propagationPolicy: _Optional[str] = ..., dryRun: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, gracePeriodSeconds: _Optional[int] = ..., preconditions: _Optional[_Union[Preconditions, _Mapping]] = ..., orphanDependents: _Optional[bool] = ..., propagationPolicy: _Optional[str] = ..., dryRun: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class Duration(_message.Message):
     __slots__ = ("duration",)
@@ -248,7 +248,7 @@ class ListOptions(_message.Message):
     resourceVersionMatch: str
     timeoutSeconds: int
     limit: int
-    def __init__(self, labelSelector: _Optional[str] = ..., fieldSelector: _Optional[str] = ..., watch: bool = ..., allowWatchBookmarks: bool = ..., resourceVersion: _Optional[str] = ..., resourceVersionMatch: _Optional[str] = ..., timeoutSeconds: _Optional[int] = ..., limit: _Optional[int] = ..., **kwargs) -> None: ...
+    def __init__(self, labelSelector: _Optional[str] = ..., fieldSelector: _Optional[str] = ..., watch: _Optional[bool] = ..., allowWatchBookmarks: _Optional[bool] = ..., resourceVersion: _Optional[str] = ..., resourceVersionMatch: _Optional[str] = ..., timeoutSeconds: _Optional[int] = ..., limit: _Optional[int] = ..., **kwargs) -> None: ...
 
 class ManagedFieldsEntry(_message.Message):
     __slots__ = ("manager", "operation", "apiVersion", "time", "fieldsType", "fieldsV1", "subresource")
@@ -340,7 +340,7 @@ class OwnerReference(_message.Message):
     uid: str
     controller: bool
     blockOwnerDeletion: bool
-    def __init__(self, apiVersion: _Optional[str] = ..., kind: _Optional[str] = ..., name: _Optional[str] = ..., uid: _Optional[str] = ..., controller: bool = ..., blockOwnerDeletion: bool = ...) -> None: ...
+    def __init__(self, apiVersion: _Optional[str] = ..., kind: _Optional[str] = ..., name: _Optional[str] = ..., uid: _Optional[str] = ..., controller: _Optional[bool] = ..., blockOwnerDeletion: _Optional[bool] = ...) -> None: ...
 
 class PartialObjectMetadata(_message.Message):
     __slots__ = ("metadata",)
@@ -370,7 +370,7 @@ class PatchOptions(_message.Message):
     force: bool
     fieldManager: str
     fieldValidation: str
-    def __init__(self, dryRun: _Optional[_Iterable[str]] = ..., force: bool = ..., fieldManager: _Optional[str] = ..., fieldValidation: _Optional[str] = ...) -> None: ...
+    def __init__(self, dryRun: _Optional[_Iterable[str]] = ..., force: _Optional[bool] = ..., fieldManager: _Optional[str] = ..., fieldValidation: _Optional[str] = ...) -> None: ...
 
 class Preconditions(_message.Message):
     __slots__ = ("uid", "resourceVersion")

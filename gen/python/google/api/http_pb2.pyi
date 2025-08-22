@@ -12,7 +12,7 @@ class Http(_message.Message):
     FULLY_DECODE_RESERVED_EXPANSION_FIELD_NUMBER: _ClassVar[int]
     rules: _containers.RepeatedCompositeFieldContainer[HttpRule]
     fully_decode_reserved_expansion: bool
-    def __init__(self, rules: _Optional[_Iterable[_Union[HttpRule, _Mapping]]] = ..., fully_decode_reserved_expansion: bool = ...) -> None: ...
+    def __init__(self, rules: _Optional[_Iterable[_Union[HttpRule, _Mapping]]] = ..., fully_decode_reserved_expansion: _Optional[bool] = ...) -> None: ...
 
 class HttpRule(_message.Message):
     __slots__ = ("selector", "get", "put", "post", "delete", "patch", "custom", "body", "response_body", "additional_bindings")

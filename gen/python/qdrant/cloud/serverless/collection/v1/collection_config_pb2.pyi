@@ -112,7 +112,7 @@ class DenseVectorConfiguration(_message.Message):
     rescoring: bool
     storage_tier: StorageTier
     precision_tier: PrecisionTier
-    def __init__(self, dimension: _Optional[int] = ..., distance: _Optional[_Union[DistanceMetric, str]] = ..., multivector: bool = ..., rescoring: bool = ..., storage_tier: _Optional[_Union[StorageTier, str]] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
+    def __init__(self, dimension: _Optional[int] = ..., distance: _Optional[_Union[DistanceMetric, str]] = ..., multivector: _Optional[bool] = ..., rescoring: _Optional[bool] = ..., storage_tier: _Optional[_Union[StorageTier, str]] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
 
 class SparseVectorConfiguration(_message.Message):
     __slots__ = ("precision_tier", "modifier")
@@ -128,7 +128,7 @@ class KeywordIndexParams(_message.Message):
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_tenant: bool
     on_disk: bool
-    def __init__(self, is_tenant: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, is_tenant: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class IntegerIndexParams(_message.Message):
     __slots__ = ("lookup", "range", "is_principal", "on_disk")
@@ -140,7 +140,7 @@ class IntegerIndexParams(_message.Message):
     range: bool
     is_principal: bool
     on_disk: bool
-    def __init__(self, lookup: bool = ..., range: bool = ..., is_principal: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, lookup: _Optional[bool] = ..., range: _Optional[bool] = ..., is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class FloatIndexParams(_message.Message):
     __slots__ = ("is_principal", "on_disk")
@@ -148,13 +148,13 @@ class FloatIndexParams(_message.Message):
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_principal: bool
     on_disk: bool
-    def __init__(self, is_principal: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class GeoIndexParams(_message.Message):
     __slots__ = ("on_disk",)
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
-    def __init__(self, on_disk: bool = ...) -> None: ...
+    def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class TextIndexParams(_message.Message):
     __slots__ = ("tokenizer", "min_token_len", "max_token_len", "lowercase", "on_disk")
@@ -168,13 +168,13 @@ class TextIndexParams(_message.Message):
     max_token_len: int
     lowercase: bool
     on_disk: bool
-    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., lowercase: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., lowercase: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class BoolIndexParams(_message.Message):
     __slots__ = ("on_disk",)
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
-    def __init__(self, on_disk: bool = ...) -> None: ...
+    def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class DatetimeIndexParams(_message.Message):
     __slots__ = ("is_principal", "on_disk")
@@ -182,7 +182,7 @@ class DatetimeIndexParams(_message.Message):
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_principal: bool
     on_disk: bool
-    def __init__(self, is_principal: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class UuidIndexParams(_message.Message):
     __slots__ = ("is_tenant", "on_disk")
@@ -190,7 +190,7 @@ class UuidIndexParams(_message.Message):
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_tenant: bool
     on_disk: bool
-    def __init__(self, is_tenant: bool = ..., on_disk: bool = ...) -> None: ...
+    def __init__(self, is_tenant: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class PayloadFieldSchema(_message.Message):
     __slots__ = ("keyword", "integer", "float", "geo", "text", "bool", "datetime", "uuid")
