@@ -254,7 +254,7 @@ class HybridCloudEnvironmentCapabilities(_message.Message):
     VOLUME_EXPANSION_FIELD_NUMBER: _ClassVar[int]
     volume_snapshot: bool
     volume_expansion: bool
-    def __init__(self, volume_snapshot: bool = ..., volume_expansion: bool = ...) -> None: ...
+    def __init__(self, volume_snapshot: _Optional[bool] = ..., volume_expansion: _Optional[bool] = ...) -> None: ...
 
 class HybridCloudEnvironmentComponentStatus(_message.Message):
     __slots__ = ("name", "namespace", "version", "phase", "message")
@@ -284,7 +284,7 @@ class HybridCloudEnvironmentStorageClass(_message.Message):
     allow_volume_expansion: bool
     reclaim_policy: str
     parameters: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
-    def __init__(self, name: _Optional[str] = ..., default: bool = ..., provisioner: _Optional[str] = ..., allow_volume_expansion: bool = ..., reclaim_policy: _Optional[str] = ..., parameters: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., default: _Optional[bool] = ..., provisioner: _Optional[str] = ..., allow_volume_expansion: _Optional[bool] = ..., reclaim_policy: _Optional[str] = ..., parameters: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironmentVolumeSnapshotClass(_message.Message):
     __slots__ = ("name", "driver")

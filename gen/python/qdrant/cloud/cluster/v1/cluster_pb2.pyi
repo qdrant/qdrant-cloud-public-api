@@ -191,7 +191,7 @@ class DeleteClusterRequest(_message.Message):
     account_id: str
     cluster_id: str
     delete_backups: bool
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., delete_backups: bool = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., delete_backups: _Optional[bool] = ...) -> None: ...
 
 class DeleteClusterResponse(_message.Message):
     __slots__ = ()
@@ -333,7 +333,7 @@ class DatabaseConfigurationCollectionVectors(_message.Message):
     __slots__ = ("on_disk",)
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
-    def __init__(self, on_disk: bool = ...) -> None: ...
+    def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationStorage(_message.Message):
     __slots__ = ("performance",)
@@ -347,7 +347,7 @@ class DatabaseConfigurationStoragePerformance(_message.Message):
     ASYNC_SCORER_FIELD_NUMBER: _ClassVar[int]
     optimizer_cpu_budget: int
     async_scorer: bool
-    def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: bool = ...) -> None: ...
+    def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationService(_message.Message):
     __slots__ = ("api_key", "read_only_api_key", "jwt_rbac", "enable_tls")
@@ -359,7 +359,7 @@ class DatabaseConfigurationService(_message.Message):
     read_only_api_key: _common_pb2.SecretKeyRef
     jwt_rbac: bool
     enable_tls: bool
-    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: bool = ..., enable_tls: bool = ...) -> None: ...
+    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: _Optional[bool] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationTls(_message.Message):
     __slots__ = ("cert", "key")
@@ -373,7 +373,7 @@ class DatabaseConfigurationInference(_message.Message):
     __slots__ = ("enabled",)
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
-    def __init__(self, enabled: bool = ...) -> None: ...
+    def __init__(self, enabled: _Optional[bool] = ...) -> None: ...
 
 class AdditionalResources(_message.Message):
     __slots__ = ("disk",)
@@ -471,7 +471,7 @@ class QdrantRelease(_message.Message):
     remarks: str
     end_of_life: bool
     unavailable: bool
-    def __init__(self, version: _Optional[str] = ..., default: bool = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: bool = ..., unavailable: bool = ...) -> None: ...
+    def __init__(self, version: _Optional[str] = ..., default: _Optional[bool] = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: _Optional[bool] = ..., unavailable: _Optional[bool] = ...) -> None: ...
 
 class CreateClusterFromBackupRequest(_message.Message):
     __slots__ = ("account_id", "backup_id", "cluster_name")

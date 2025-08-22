@@ -186,7 +186,7 @@ class PaymentMethod(_message.Message):
     tax_id: str
     is_default: bool
     status: PaymentMethodStatus
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: bool = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
 
 class BillingAddress(_message.Message):
     __slots__ = ("name", "line1", "line2", "postal_code", "city", "state", "country", "country_formatted", "state_formatted", "tax_supported_country")
@@ -210,7 +210,7 @@ class BillingAddress(_message.Message):
     country_formatted: str
     state_formatted: str
     tax_supported_country: bool
-    def __init__(self, name: _Optional[str] = ..., line1: _Optional[str] = ..., line2: _Optional[str] = ..., postal_code: _Optional[str] = ..., city: _Optional[str] = ..., state: _Optional[str] = ..., country: _Optional[str] = ..., country_formatted: _Optional[str] = ..., state_formatted: _Optional[str] = ..., tax_supported_country: bool = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., line1: _Optional[str] = ..., line2: _Optional[str] = ..., postal_code: _Optional[str] = ..., city: _Optional[str] = ..., state: _Optional[str] = ..., country: _Optional[str] = ..., country_formatted: _Optional[str] = ..., state_formatted: _Optional[str] = ..., tax_supported_country: _Optional[bool] = ...) -> None: ...
 
 class PaymentMethodDetails(_message.Message):
     __slots__ = ("id", "card")

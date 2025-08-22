@@ -189,7 +189,7 @@ class DeleteBackupScheduleRequest(_message.Message):
     account_id: str
     backup_schedule_id: str
     delete_backups: bool
-    def __init__(self, account_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ..., delete_backups: bool = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ..., delete_backups: _Optional[bool] = ...) -> None: ...
 
 class DeleteBackupScheduleResponse(_message.Message):
     __slots__ = ()
