@@ -230,7 +230,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "pageToken",
@@ -895,7 +895,7 @@
         },
         "totalCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
         },
         "nextPageToken": {

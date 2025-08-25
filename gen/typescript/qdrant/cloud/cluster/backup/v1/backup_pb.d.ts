@@ -45,7 +45,7 @@ export declare type ListBackupsRequest = Message<"qdrant.cloud.cluster.backup.v1
    * Maximum number of items to return.
    * If not specified, all items are returned.
    *
-   * @generated from field: optional uint32 page_size = 10;
+   * @generated from field: optional int32 page_size = 10;
    */
   pageSize?: number;
 
@@ -86,7 +86,7 @@ export declare type ListBackupsResponse = Message<"qdrant.cloud.cluster.backup.v
    * The total number of items available (useful in relation with pagination).
    * This field is fill out when pagination is used (aka in the request `page_size` was provided).
    *
-   * @generated from field: optional uint32 total_count = 10;
+   * @generated from field: optional int32 total_count = 10;
    */
   totalCount?: number;
 
