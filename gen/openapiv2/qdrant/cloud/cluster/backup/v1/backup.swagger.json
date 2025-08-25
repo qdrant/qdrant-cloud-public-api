@@ -231,6 +231,43 @@
       }
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}": {
+      "get": {
+        "summary": "Gets a backup in the account identified by the given ID.\nRequired permissions:\n- read:backups",
+        "operationId": "BackupService_GetBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      },
       "delete": {
         "summary": "Deletes a backup in the account identified by the given ID.\nRequired permissions:\n- delete:backups",
         "operationId": "BackupService_DeleteBackup",
@@ -781,6 +818,16 @@
     "v1DeleteBackupScheduleResponse": {
       "type": "object",
       "description": "DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.\n\nEmpty"
+    },
+    "v1GetBackupResponse": {
+      "type": "object",
+      "properties": {
+        "backup": {
+          "$ref": "#/definitions/v1Backup",
+          "description": "The actual backup."
+        }
+      },
+      "description": "GetBackupResponse is the response from the GetBackup function."
     },
     "v1GetBackupScheduleResponse": {
       "type": "object",

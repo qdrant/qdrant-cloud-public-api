@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
+	BackupService_GetBackup_FullMethodName            = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup"
 	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
 	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
 	BackupService_ListBackupRestores_FullMethodName   = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores"
@@ -41,6 +42,10 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - read:backups
 	ListBackups(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
+	// Gets a backup in the account identified by the given ID.
+	// Required permissions:
+	// - read:backups
+	GetBackup(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*GetBackupResponse, error)
 	// Creates a backup for the cluster identified by the given ID.
 	// Required permissions:
 	// - write:backups
@@ -91,6 +96,16 @@ func (c *backupServiceClient) ListBackups(ctx context.Context, in *ListBackupsRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBackupsResponse)
 	err := c.cc.Invoke(ctx, BackupService_ListBackups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) GetBackup(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*GetBackupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackupResponse)
+	err := c.cc.Invoke(ctx, BackupService_GetBackup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -197,6 +212,10 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - read:backups
 	ListBackups(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
+	// Gets a backup in the account identified by the given ID.
+	// Required permissions:
+	// - read:backups
+	GetBackup(context.Context, *GetBackupRequest) (*GetBackupResponse, error)
 	// Creates a backup for the cluster identified by the given ID.
 	// Required permissions:
 	// - write:backups
@@ -245,6 +264,9 @@ type UnimplementedBackupServiceServer struct{}
 
 func (UnimplementedBackupServiceServer) ListBackups(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBackups not implemented")
+}
+func (UnimplementedBackupServiceServer) GetBackup(context.Context, *GetBackupRequest) (*GetBackupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackup not implemented")
 }
 func (UnimplementedBackupServiceServer) CreateBackup(context.Context, *CreateBackupRequest) (*CreateBackupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBackup not implemented")
@@ -308,6 +330,24 @@ func _BackupService_ListBackups_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackupServiceServer).ListBackups(ctx, req.(*ListBackupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_GetBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).GetBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_GetBackup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).GetBackup(ctx, req.(*GetBackupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -484,6 +524,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBackups",
 			Handler:    _BackupService_ListBackups_Handler,
+		},
+		{
+			MethodName: "GetBackup",
+			Handler:    _BackupService_GetBackup_Handler,
 		},
 		{
 			MethodName: "CreateBackup",
