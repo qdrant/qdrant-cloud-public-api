@@ -62,20 +62,28 @@ BACKUP_RESTORE_STATUS_NOT_FOUND: BackupRestoreStatus
 BACKUP_RESTORE_STATUS_SKIPPED: BackupRestoreStatus
 
 class ListBackupsRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "backup_schedule_id")
+    __slots__ = ("account_id", "cluster_id", "backup_schedule_id", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     BACKUP_SCHEDULE_ID_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     backup_schedule_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ...) -> None: ...
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListBackupsResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ("items", "total_size", "next_page_token")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Backup]
-    def __init__(self, items: _Optional[_Iterable[_Union[Backup, _Mapping]]] = ...) -> None: ...
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[Backup, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetBackupRequest(_message.Message):
     __slots__ = ("account_id", "backup_id")
