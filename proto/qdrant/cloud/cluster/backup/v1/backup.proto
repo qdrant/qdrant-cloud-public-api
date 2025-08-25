@@ -19,6 +19,15 @@ service BackupService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups"};
   }
+  // Gets a backup in the account identified by the given ID.
+  // Required permissions:
+  // - read:backups
+  rpc GetBackup(GetBackupRequest) returns (GetBackupResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+  }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
   // - write:backups
@@ -134,6 +143,22 @@ message ListBackupsRequest {
 message ListBackupsResponse {
   // The actual backups in this list.
   repeated Backup items = 1;
+}
+
+// GetBackupRequest is the request for the GetBackup function.
+message GetBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBackupResponse is the response from the GetBackup function.
+message GetBackupResponse {
+  // The actual backup.
+  Backup backup = 1 [(buf.validate.field).required = true];
 }
 
 // CreateBackupRequest is the request for the CreateBackup function.

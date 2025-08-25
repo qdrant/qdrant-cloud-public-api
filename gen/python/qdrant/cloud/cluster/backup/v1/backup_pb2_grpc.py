@@ -20,6 +20,11 @@ class BackupServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsResponse.FromString,
                 _registered_method=True)
+        self.GetBackup = channel.unary_unary(
+                '/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupResponse.FromString,
+                _registered_method=True)
         self.CreateBackup = channel.unary_unary(
                 '/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupRequest.SerializeToString,
@@ -73,6 +78,15 @@ class BackupServiceServicer(object):
 
     def ListBackups(self, request, context):
         """Lists all backups in the account identified by the given ID.
+        Required permissions:
+        - read:backups
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBackup(self, request, context):
+        """Gets a backup in the account identified by the given ID.
         Required permissions:
         - read:backups
         """
@@ -169,6 +183,11 @@ def add_BackupServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsResponse.SerializeToString,
             ),
+            'GetBackup': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBackup,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupResponse.SerializeToString,
+            ),
             'CreateBackup': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateBackup,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupRequest.FromString,
@@ -243,6 +262,33 @@ class BackupService(object):
             '/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups',
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.ListBackupsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBackup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup',
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupResponse.FromString,
             options,
             channel_credentials,
             insecure,

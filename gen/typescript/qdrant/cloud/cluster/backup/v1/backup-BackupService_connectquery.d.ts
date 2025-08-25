@@ -13,6 +13,14 @@ import { BackupService } from "./backup_pb.js";
  */
 export const listBackups: typeof BackupService["method"]["listBackups"];
 /**
+ * Gets a backup in the account identified by the given ID.
+ * Required permissions:
+ * - read:backups
+ *
+ * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.GetBackup
+ */
+export const getBackup: typeof BackupService["method"]["getBackup"];
+/**
  * Creates a backup for the cluster identified by the given ID.
  * Required permissions:
  * - write:backups

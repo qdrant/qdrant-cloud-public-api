@@ -73,6 +73,71 @@ export declare type ListBackupsResponseValid = ListBackupsResponse;
 export declare const ListBackupsResponseSchema: GenMessage<ListBackupsResponse, {validType: ListBackupsResponseValid}>;
 
 /**
+ * GetBackupRequest is the request for the GetBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupRequest
+ */
+export declare type GetBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.GetBackupRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the backup (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string backup_id = 2;
+   */
+  backupId: string;
+};
+
+export declare type GetBackupRequestValid = GetBackupRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.GetBackupRequest.
+ * Use `create(GetBackupRequestSchema)` to create a new message.
+ */
+export declare const GetBackupRequestSchema: GenMessage<GetBackupRequest, {validType: GetBackupRequestValid}>;
+
+/**
+ * GetBackupResponse is the response from the GetBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupResponse
+ */
+export declare type GetBackupResponse = Message<"qdrant.cloud.cluster.backup.v1.GetBackupResponse"> & {
+  /**
+   * The actual backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup?: Backup;
+};
+
+/**
+ * GetBackupResponse is the response from the GetBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupResponse
+ */
+export declare type GetBackupResponseValid = Message<"qdrant.cloud.cluster.backup.v1.GetBackupResponse"> & {
+  /**
+   * The actual backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup: BackupValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.GetBackupResponse.
+ * Use `create(GetBackupResponseSchema)` to create a new message.
+ */
+export declare const GetBackupResponseSchema: GenMessage<GetBackupResponse, {validType: GetBackupResponseValid}>;
+
+/**
  * CreateBackupRequest is the request for the CreateBackup function.
  *
  * @generated from message qdrant.cloud.cluster.backup.v1.CreateBackupRequest
@@ -1031,6 +1096,18 @@ export declare const BackupService: GenService<{
     methodKind: "unary";
     input: typeof ListBackupsRequestSchema;
     output: typeof ListBackupsResponseSchema;
+  },
+  /**
+   * Gets a backup in the account identified by the given ID.
+   * Required permissions:
+   * - read:backups
+   *
+   * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.GetBackup
+   */
+  getBackup: {
+    methodKind: "unary";
+    input: typeof GetBackupRequestSchema;
+    output: typeof GetBackupResponseSchema;
   },
   /**
    * Creates a backup for the cluster identified by the given ID.
