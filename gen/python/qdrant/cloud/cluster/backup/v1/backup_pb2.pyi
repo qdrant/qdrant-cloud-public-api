@@ -76,14 +76,14 @@ class ListBackupsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_schedule_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListBackupsResponse(_message.Message):
-    __slots__ = ("items", "total_count", "next_page_token")
+    __slots__ = ("items", "total_size", "next_page_token")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
-    TOTAL_COUNT_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
     NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Backup]
-    total_count: int
+    total_size: int
     next_page_token: str
-    def __init__(self, items: _Optional[_Iterable[_Union[Backup, _Mapping]]] = ..., total_count: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, items: _Optional[_Iterable[_Union[Backup, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetBackupRequest(_message.Message):
     __slots__ = ("account_id", "backup_id")

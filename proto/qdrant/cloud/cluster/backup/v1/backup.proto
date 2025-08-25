@@ -157,7 +157,7 @@ message ListBackupsResponse {
   repeated Backup items = 1;
   // The total number of items available (useful in relation with pagination).
   // This field is fill out when pagination is used (aka in the request `page_size` was provided).
-  optional int32 total_count = 10 [(buf.validate.field).int32.gte = 0];
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
   // A token that can be sent as `page_token` to retrieve the next page.
   // If this field is omitted, there are no subsequent pages.
   optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];

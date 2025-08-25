@@ -322,7 +322,7 @@ type ListBackupsResponse struct {
 	Items []*Backup `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// The total number of items available (useful in relation with pagination).
 	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
-	TotalCount *int32 `protobuf:"varint,10,opt,name=total_count,json=totalCount,proto3,oneof" json:"total_count,omitempty"`
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
 	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
@@ -367,9 +367,9 @@ func (x *ListBackupsResponse) GetItems() []*Backup {
 	return nil
 }
 
-func (x *ListBackupsResponse) GetTotalCount() int32 {
-	if x != nil && x.TotalCount != nil {
-		return *x.TotalCount
+func (x *ListBackupsResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
 	}
 	return 0
 }
@@ -1740,14 +1740,14 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x13_backup_schedule_idB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_page_token\"\xdc\x01\n" +
+	"\v_page_token\"\xd9\x01\n" +
 	"\x13ListBackupsResponse\x12<\n" +
-	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\x12-\n" +
-	"\vtotal_count\x18\n" +
-	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\n" +
-	"totalCount\x88\x01\x01\x124\n" +
-	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\x0e\n" +
-	"\f_total_countB\x12\n" +
+	"\x05items\x18\x01 \x03(\v2&.qdrant.cloud.cluster.backup.v1.BackupR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
 	"\x10_next_page_token\"b\n" +
 	"\x10GetBackupRequest\x12'\n" +
 	"\n" +

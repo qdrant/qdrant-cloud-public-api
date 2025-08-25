@@ -893,7 +893,7 @@
           },
           "description": "The actual backups in this list.\nWhen pagination is used it contains a single page only, not all items."
         },
-        "totalCount": {
+        "totalSize": {
           "type": "integer",
           "format": "int32",
           "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
