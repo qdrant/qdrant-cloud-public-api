@@ -896,7 +896,7 @@
         "totalCount": {
           "type": "integer",
           "format": "int64",
-          "description": "The total number of items available (usefull in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
         },
         "nextPageToken": {
           "type": "string",

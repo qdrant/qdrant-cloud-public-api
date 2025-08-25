@@ -320,7 +320,7 @@ type ListBackupsResponse struct {
 	// The actual backups in this list.
 	// When pagination is used it contains a single page only, not all items.
 	Items []*Backup `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	// The total number of items available (usefull in relation with pagination).
+	// The total number of items available (useful in relation with pagination).
 	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
 	TotalCount *uint32 `protobuf:"varint,10,opt,name=total_count,json=totalCount,proto3,oneof" json:"total_count,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.

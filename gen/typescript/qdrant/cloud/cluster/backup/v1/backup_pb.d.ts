@@ -83,7 +83,7 @@ export declare type ListBackupsResponse = Message<"qdrant.cloud.cluster.backup.v
   items: Backup[];
 
   /**
-   * The total number of items available (usefull in relation with pagination).
+   * The total number of items available (useful in relation with pagination).
    * This field is fill out when pagination is used (aka in the request `page_size` was provided).
    *
    * @generated from field: optional uint32 total_count = 10;

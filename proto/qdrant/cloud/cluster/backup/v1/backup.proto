@@ -152,7 +152,7 @@ message ListBackupsResponse {
   // The actual backups in this list.
   // When pagination is used it contains a single page only, not all items.
   repeated Backup items = 1;
-  // The total number of items available (usefull in relation with pagination).
+  // The total number of items available (useful in relation with pagination).
   // This field is fill out when pagination is used (aka in the request `page_size` was provided).
   optional uint32 total_count = 10;
   // A token that can be sent as `page_token` to retrieve the next page.
