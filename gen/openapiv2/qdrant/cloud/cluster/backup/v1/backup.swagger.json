@@ -223,6 +223,21 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -876,7 +891,16 @@
             "type": "object",
             "$ref": "#/definitions/v1Backup"
           },
-          "description": "The actual backups in this list."
+          "description": "The actual backups in this list.\nWhen pagination is used it contains a single page only, not all items."
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available (usefull in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "title": "ListBackupsResponse is the response from the ListBackups function"

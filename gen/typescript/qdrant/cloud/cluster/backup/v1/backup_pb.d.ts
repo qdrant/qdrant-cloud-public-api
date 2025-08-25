@@ -40,6 +40,24 @@ export declare type ListBackupsRequest = Message<"qdrant.cloud.cluster.backup.v1
    * @generated from field: optional string backup_schedule_id = 3;
    */
   backupScheduleId?: string;
+
+  /**
+   * Maximum number of items to return.
+   * If not specified, all items are returned.
+   *
+   * @generated from field: optional uint32 page_size = 10;
+   */
+  pageSize?: number;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 11;
+   */
+  pageToken?: string;
 };
 
 export declare type ListBackupsRequestValid = ListBackupsRequest;
@@ -58,10 +76,27 @@ export declare const ListBackupsRequestSchema: GenMessage<ListBackupsRequest, {v
 export declare type ListBackupsResponse = Message<"qdrant.cloud.cluster.backup.v1.ListBackupsResponse"> & {
   /**
    * The actual backups in this list.
+   * When pagination is used it contains a single page only, not all items.
    *
    * @generated from field: repeated qdrant.cloud.cluster.backup.v1.Backup items = 1;
    */
   items: Backup[];
+
+  /**
+   * The total number of items available (usefull in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional uint32 total_count = 10;
+   */
+  totalCount?: number;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string;
 };
 
 export declare type ListBackupsResponseValid = ListBackupsResponse;
