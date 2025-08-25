@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
 // BackupService is the API used to configure backup objects.
@@ -185,8 +186,8 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id)"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)"
   };
 }
 
@@ -389,6 +390,40 @@ message Backup {
   // The identifier of the backup schedule (in GUID format).
   // This is a read-only field and will be present if the backup was created by a backup schedule.
   optional string backup_schedule_id = 9 [(buf.validate.field).string = {uuid: true}];
+  // Cluster details associated with the backup.
+  // Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
+  // This is a read-only field and will be available after the backup is created.
+  ClusterInfo cluster_info = 12;
+}
+
+// Represents the cluster details associated with a backup.
+// The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.
+// The configuration field is immutable and represents the values at backup time.
+message ClusterInfo {
+  // The latest name of the cluster that this backup was token from.
+  string name = 1 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // Cloud provider where the cluster is hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  // After creation, this field cannot be changed.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // Cloud provider region where the cluster is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  // For hybrid this should be the hybrid cloud environment ID.
+  // This is a required field.
+  // After creation, this field cannot be changed.
+  string cloud_provider_region_id = 3 [(buf.validate.field).string.min_len = 1];
+  // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider_id as well, so this can't be a simple field validator.
+  option (buf.validate.message).cel = {
+    id: "cluster.cloud_provider_region_id"
+    message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
+    expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
+  };
+  // The cluster configuration at the time of backup.
+  qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4 [(buf.validate.field).required = true];
 }
 
 // BackupScheduleStatus represents the current status of a backup schedule.
