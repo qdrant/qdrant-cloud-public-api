@@ -872,6 +872,14 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
    * @generated from field: repeated string permissions = 8;
    */
   permissions: string[];
+
+  /**
+   * The sub-type of the system role.
+   * This field is set for system role only.
+   *
+   * @generated from field: optional qdrant.cloud.iam.v1.SystemRoleSubType sub_type = 9;
+   */
+  subType?: SystemRoleSubType;
 };
 
 export declare type RoleValid = Role;
@@ -1037,6 +1045,46 @@ export enum RoleType {
  * Describes the enum qdrant.cloud.iam.v1.RoleType.
  */
 export declare const RoleTypeSchema: GenEnum<RoleType>;
+
+/**
+ * SystemRoleSubType specified the sub-type of the system role
+ *
+ * @generated from enum qdrant.cloud.iam.v1.SystemRoleSubType
+ */
+export enum SystemRoleSubType {
+  /**
+   * The system role sub-type is unspecified.
+   *
+   * @generated from enum value: SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The system role sub-type is owner.
+   *
+   * @generated from enum value: SYSTEM_ROLE_SUB_TYPE_OWNER = 1;
+   */
+  OWNER = 1,
+
+  /**
+   * The system role sub-type is admin.
+   *
+   * @generated from enum value: SYSTEM_ROLE_SUB_TYPE_ADMIN = 2;
+   */
+  ADMIN = 2,
+
+  /**
+   * The system role sub-type is base.
+   *
+   * @generated from enum value: SYSTEM_ROLE_SUB_TYPE_BASE = 3;
+   */
+  BASE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.SystemRoleSubType.
+ */
+export declare const SystemRoleSubTypeSchema: GenEnum<SystemRoleSubType>;
 
 /**
  * LegalDocumentType specifies the type of a legal document.
