@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { ClusterConfiguration, ClusterConfigurationValid } from "../../v1/cluster_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/backup/v1/backup.proto.
@@ -790,6 +791,15 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: optional string backup_schedule_id = 9;
    */
   backupScheduleId?: string;
+
+  /**
+   * Cluster details associated with the backup.
+   * Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
+   * This is a read-only field and will be available after the backup is created.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterInfo cluster_info = 12;
+   */
+  clusterInfo?: ClusterInfo;
 };
 
 export declare type BackupValid = Backup;
@@ -799,6 +809,92 @@ export declare type BackupValid = Backup;
  * Use `create(BackupSchema)` to create a new message.
  */
 export declare const BackupSchema: GenMessage<Backup, {validType: BackupValid}>;
+
+/**
+ * Represents the cluster details associated with a backup.
+ * The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.
+ * The configuration field is immutable and represents the values at backup time.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ClusterInfo
+ */
+export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.ClusterInfo"> & {
+  /**
+   * The latest name of the cluster that this backup was token from.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Cloud provider where the cluster is hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Cloud provider region where the cluster is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * For hybrid this should be the hybrid cloud environment ID.
+   *
+   * @generated from field: string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId: string;
+
+  /**
+   * The cluster configuration at the time of backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
+   */
+  configuration?: ClusterConfiguration;
+};
+
+/**
+ * Represents the cluster details associated with a backup.
+ * The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.
+ * The configuration field is immutable and represents the values at backup time.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ClusterInfo
+ */
+export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.ClusterInfo"> & {
+  /**
+   * The latest name of the cluster that this backup was token from.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Cloud provider where the cluster is hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Cloud provider region where the cluster is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * For hybrid this should be the hybrid cloud environment ID.
+   *
+   * @generated from field: string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId: string;
+
+  /**
+   * The cluster configuration at the time of backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
+   */
+  configuration: ClusterConfigurationValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.ClusterInfo.
+ * Use `create(ClusterInfoSchema)` to create a new message.
+ */
+export declare const ClusterInfoSchema: GenMessage<ClusterInfo, {validType: ClusterInfoValid}>;
 
 /**
  * A BackupSchedule represents a recurring schedule for creating backups.
