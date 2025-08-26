@@ -474,14 +474,16 @@ class QdrantRelease(_message.Message):
     def __init__(self, version: _Optional[str] = ..., default: _Optional[bool] = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: _Optional[bool] = ..., unavailable: _Optional[bool] = ...) -> None: ...
 
 class CreateClusterFromBackupRequest(_message.Message):
-    __slots__ = ("account_id", "backup_id", "cluster_name")
+    __slots__ = ("account_id", "backup_id", "cluster_name", "package_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     backup_id: str
     cluster_name: str
-    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., cluster_name: _Optional[str] = ...) -> None: ...
+    package_id: str
+    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., package_id: _Optional[str] = ...) -> None: ...
 
 class CreateClusterFromBackupResponse(_message.Message):
     __slots__ = ("cluster",)

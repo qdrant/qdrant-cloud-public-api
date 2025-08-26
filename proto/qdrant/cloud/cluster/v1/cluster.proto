@@ -788,6 +788,9 @@ message CreateClusterFromBackupRequest {
     min_len: 4
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
+  // The package identifier to use for the new cluster (optional).
+  // If not specified, the package from backup cluster will be used.
+  optional string package_id = 4 [(buf.validate.field).string = {uuid: true}];
 }
 
 // CreateClusterFromBackupResponse is the response for the CreateCluster function.

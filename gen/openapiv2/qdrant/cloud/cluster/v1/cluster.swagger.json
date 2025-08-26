@@ -55,6 +55,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "packageId",
+            "description": "The package identifier to use for the new cluster (optional).\nIf not specified, the package from backup cluster will be used.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
