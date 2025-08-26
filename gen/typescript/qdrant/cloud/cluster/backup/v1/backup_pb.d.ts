@@ -828,7 +828,6 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
   /**
    * Cloud provider where the cluster is hosted.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-   * After creation, this field cannot be changed.
    *
    * @generated from field: string cloud_provider_id = 2;
    */
@@ -838,8 +837,6 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
    * Cloud provider region where the cluster is hosted.
    * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
    * For hybrid this should be the hybrid cloud environment ID.
-   * This is a required field.
-   * After creation, this field cannot be changed.
    *
    * @generated from field: string cloud_provider_region_id = 3;
    */
@@ -871,7 +868,6 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
   /**
    * Cloud provider where the cluster is hosted.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-   * After creation, this field cannot be changed.
    *
    * @generated from field: string cloud_provider_id = 2;
    */
@@ -881,8 +877,6 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
    * Cloud provider region where the cluster is hosted.
    * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
    * For hybrid this should be the hybrid cloud environment ID.
-   * This is a required field.
-   * After creation, this field cannot be changed.
    *
    * @generated from field: string cloud_provider_region_id = 3;
    */

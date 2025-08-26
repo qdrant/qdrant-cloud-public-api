@@ -1522,13 +1522,10 @@ type ClusterInfo struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Cloud provider where the cluster is hosted.
 	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-	// After creation, this field cannot be changed.
 	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
 	// Cloud provider region where the cluster is hosted.
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
 	// For hybrid this should be the hybrid cloud environment ID.
-	// This is a required field.
-	// After creation, this field cannot be changed.
 	CloudProviderRegionId string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
 	// The cluster configuration at the time of backup.
 	Configuration *v1.ClusterConfiguration `protobuf:"bytes,4,opt,name=configuration,proto3" json:"configuration,omitempty"`

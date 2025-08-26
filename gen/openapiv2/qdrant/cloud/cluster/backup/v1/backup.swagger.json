@@ -978,11 +978,11 @@
         },
         "cloudProviderId": {
           "type": "string",
-          "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method."
         },
         "cloudProviderRegionId": {
           "type": "string",
-          "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID."
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
