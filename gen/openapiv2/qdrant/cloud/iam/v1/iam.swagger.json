@@ -576,6 +576,10 @@
                 "type": "string"
               },
               "description": "The permissions associated with this role."
+            },
+            "subType": {
+              "$ref": "#/definitions/v1SystemRoleSubType",
+              "description": "The sub-type of the system role.\nThis field is set for system role only."
             }
           },
           "description": "The actual role.",
@@ -618,6 +622,10 @@
                 "type": "string"
               },
               "description": "The permissions associated with this role."
+            },
+            "subType": {
+              "$ref": "#/definitions/v1SystemRoleSubType",
+              "description": "The sub-type of the system role.\nThis field is set for system role only."
             }
           },
           "description": "The actual role.",
@@ -865,6 +873,10 @@
             "type": "string"
           },
           "description": "The permissions associated with this role."
+        },
+        "subType": {
+          "$ref": "#/definitions/v1SystemRoleSubType",
+          "description": "The sub-type of the system role.\nThis field is set for system role only."
         }
       },
       "description": "A Role represents a role in the Qdrant cloud."
@@ -879,6 +891,18 @@
       "default": "ROLE_TYPE_UNSPECIFIED",
       "description": "- ROLE_TYPE_UNSPECIFIED: The role type is unspecified.\n - ROLE_TYPE_SYSTEM: The role type is system.\nNote: system roles cannot be changed (create/update/delete).\n - ROLE_TYPE_CUSTOM: The role type is custom defined.",
       "title": "RoleType specified the type of the role"
+    },
+    "v1SystemRoleSubType": {
+      "type": "string",
+      "enum": [
+        "SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED",
+        "SYSTEM_ROLE_SUB_TYPE_OWNER",
+        "SYSTEM_ROLE_SUB_TYPE_ADMIN",
+        "SYSTEM_ROLE_SUB_TYPE_BASE"
+      ],
+      "default": "SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED",
+      "description": "- SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: The system role sub-type is unspecified.\n - SYSTEM_ROLE_SUB_TYPE_OWNER: The system role sub-type is owner.\n - SYSTEM_ROLE_SUB_TYPE_ADMIN: The system role sub-type is admin.\n - SYSTEM_ROLE_SUB_TYPE_BASE: The system role sub-type is base.",
+      "title": "SystemRoleSubType specified the sub-type of the system role"
     },
     "v1UpdateRoleResponse": {
       "type": "object",

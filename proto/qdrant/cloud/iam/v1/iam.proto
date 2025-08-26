@@ -503,6 +503,12 @@ message Role {
       string: {min_len: 1}
     }
   }];
+  // The sub-type of the system role.
+  // This field is set for system role only.
+  optional SystemRoleSubType sub_type = 9 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // RoleType specified the type of the role
@@ -514,6 +520,18 @@ enum RoleType {
   ROLE_TYPE_SYSTEM = 1;
   // The role type is custom defined.
   ROLE_TYPE_CUSTOM = 2;
+}
+
+// SystemRoleSubType specified the sub-type of the system role
+enum SystemRoleSubType {
+  // The system role sub-type is unspecified.
+  SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED = 0;
+  // The system role sub-type is owner.
+  SYSTEM_ROLE_SUB_TYPE_OWNER = 1;
+  // The system role sub-type is admin.
+  SYSTEM_ROLE_SUB_TYPE_ADMIN = 2;
+  // The system role sub-type is base.
+  SYSTEM_ROLE_SUB_TYPE_BASE = 3;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS

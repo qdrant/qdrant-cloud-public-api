@@ -26,6 +26,13 @@ class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     ROLE_TYPE_SYSTEM: _ClassVar[RoleType]
     ROLE_TYPE_CUSTOM: _ClassVar[RoleType]
 
+class SystemRoleSubType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_OWNER: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_ADMIN: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_BASE: _ClassVar[SystemRoleSubType]
+
 class LegalDocumentType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     LEGAL_DOCUMENT_TYPE_UNSPECIFIED: _ClassVar[LegalDocumentType]
@@ -46,6 +53,10 @@ USER_STATUS_DELETED: UserStatus
 ROLE_TYPE_UNSPECIFIED: RoleType
 ROLE_TYPE_SYSTEM: RoleType
 ROLE_TYPE_CUSTOM: RoleType
+SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_OWNER: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_ADMIN: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_BASE: SystemRoleSubType
 LEGAL_DOCUMENT_TYPE_UNSPECIFIED: LegalDocumentType
 LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: LegalDocumentType
 LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: LegalDocumentType
@@ -234,7 +245,7 @@ class User(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ...) -> None: ...
 
 class Role(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions")
+    __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions", "sub_type")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -243,6 +254,7 @@ class Role(_message.Message):
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     ROLE_TYPE_FIELD_NUMBER: _ClassVar[int]
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+    SUB_TYPE_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
@@ -251,7 +263,8 @@ class Role(_message.Message):
     description: str
     role_type: RoleType
     permissions: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ...) -> None: ...
+    sub_type: SystemRoleSubType
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[str]] = ..., sub_type: _Optional[_Union[SystemRoleSubType, str]] = ...) -> None: ...
 
 class LogoutUserRequest(_message.Message):
     __slots__ = ()
