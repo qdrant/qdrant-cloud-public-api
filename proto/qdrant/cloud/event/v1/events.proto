@@ -30,7 +30,8 @@ extend google.protobuf.MethodOptions {
 // EventOptions is a custom method option to indicate that an event should be
 // generated when this RPC is successfully called.
 // The fields should start with 'req.' or 'resp.' to indicate whether the info needs to be
-// extracted from the request or the response.
+// extracted from the request or the response. Or 'req-md.' or 'resp-md.' to extract the info
+// from the metadata.
 message EventOptions {
   // The type of the event that should be generated.
   EventType event_type = 1 [(buf.validate.field).enum = {
@@ -52,6 +53,10 @@ message EventOptions {
   // This should be a resolvable (nested) field template.
   // E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
   string resource_url_template = 5 [(buf.validate.field).string.min_len = 1];
+  // The action type.
+  // This field is set when the event type is EVENT_TYPE_ACTION.
+  // E.g. 'restore' in case of a backup restore.
+  optional string action_type = 6 [(buf.validate.field).string.min_len = 1];
   // The additional context field.
   // Key will be copied as-is, the value should be a resolvable (nested) field.
   // E.g. {'cluster_id': 'resp.cluster_id', 'backup_id': 'resp.backup_id'}
@@ -68,6 +73,8 @@ enum EventType {
   EVENT_TYPE_UPDATED = 2;
   // The resource was deleted.
   EVENT_TYPE_DELETED = 3;
+  // The resource has executed an action.
+  EVENT_TYPE_ACTION = 4;
 }
 
 // Event represents a significant occurrence in the system, like a resource

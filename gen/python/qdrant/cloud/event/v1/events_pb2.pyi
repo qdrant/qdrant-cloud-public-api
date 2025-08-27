@@ -47,7 +47,7 @@ class EventOptions(_message.Message):
     resource_id_field: str
     resource_url_template: str
     additional_context_fields: _containers.ScalarMap[str, str]
-    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: bool = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class Event(_message.Message):
     __slots__ = ("id", "created_at", "actor_id", "actor_type", "account_id", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "additional_context")
@@ -80,4 +80,4 @@ class Event(_message.Message):
     resource_id: str
     resource_url: str
     additional_context: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[_common_pb2.ActorType, str]] = ..., account_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: bool = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[_common_pb2.ActorType, str]] = ..., account_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
