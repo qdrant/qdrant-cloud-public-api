@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 service AuthService {
@@ -31,6 +32,13 @@ service AuthService {
       post: "/api/auth/v1/accounts/{management_key.account_id}/management-keys"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "management-key"
+      resource_id_field: "resp.management_key.id"
+      resource_url_template: "/accounts/{req.management_key.account_id}/management-keys/{resp.management_key.id}"
+    };
   }
   // Deletes a management key in the account identified by the given ID.
   // Required permissions:
@@ -40,6 +48,13 @@ service AuthService {
     option (common.v1.permissions) = "delete:management_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/auth/v1/accounts/{account_id}/management-keys/{management_key_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "management-key"
+      resource_id_field: "req.management_key_id"
+      resource_url_template: "/accounts/{req.account_id}/management-keys/{req.management_key_id}"
+    };
   }
 }
 

@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // Service for managing API keys for a serverless collection
 service CollectionApiKeyService {
@@ -31,6 +32,17 @@ service CollectionApiKeyService {
       post: "/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_api_key.collection_id}/api-keys"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-api-key"
+      resource_id_field: "resp.collection_api_key.id"
+      resource_url_template: "/accounts/{req.collection_api_key.account_id}/serverless-collections/{req.collection_api_key.collection_id}/api-keys/{resp.collection_api_key.id}"
+      additional_context_fields: {
+        key: "collection_id"
+        value: "req.collection_api_key.collection_id"
+      }
+    };
   }
   // DeleteCollectionApiKey removes an API key from a collection
   // Required Permissions:
@@ -40,6 +52,17 @@ service CollectionApiKeyService {
     option (qdrant.cloud.common.v1.permissions) = "delete:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-api-key"
+      resource_id_field: "req.collection_api_key_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-collections/{req.collection_id}/api-keys/{req.collection_api_key_id}"
+      additional_context_fields: {
+        key: "collection_id"
+        value: "req.collection_id"
+      }
+    };
   }
 }
 

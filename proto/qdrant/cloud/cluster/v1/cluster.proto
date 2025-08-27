@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
@@ -40,6 +41,13 @@ service ClusterService {
       post: "/api/cluster/v1/accounts/{cluster.account_id}/clusters"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "cluster"
+      resource_id_field: "resp.cluster.id"
+      resource_url_template: "/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}"
+    };
   }
   // Create a new cluster from an existing backup
   // Required permissions (both):
@@ -52,6 +60,17 @@ service ClusterService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "cluster"
+      resource_id_field: "resp.cluster.id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp.cluster.id}"
+      additional_context_fields: {
+        key: "from_backup_id"
+        value: "req.backup_id"
+      }
+    };
   }
 
   // Updates a cluster in the account identified by the given ID.
@@ -67,6 +86,13 @@ service ClusterService {
       put: "/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "cluster"
+      resource_id_field: "req.cluster.id"
+      resource_url_template: "/accounts/{req.cluster.account_id}/clusters/{req.cluster.id}"
+    };
   }
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
@@ -76,6 +102,13 @@ service ClusterService {
     option (common.v1.permissions) = "delete:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "cluster"
+      resource_id_field: "req.cluster_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
   }
   // Restarts a cluster in the account identified by the given ID.
   // Required permissions:
@@ -85,6 +118,14 @@ service ClusterService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "restart"
+      resource_type: "cluster"
+      resource_id_field: "req.cluster_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
   }
   // Suspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -94,6 +135,14 @@ service ClusterService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "suspend"
+      resource_type: "cluster"
+      resource_id_field: "req.cluster_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
   }
   // Suggests a unique and human-friendly name for a new cluster in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new cluster.

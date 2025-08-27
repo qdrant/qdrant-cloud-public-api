@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "k8s.io/api/networking/v1/generated.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 service HybridCloudService {
@@ -48,6 +49,13 @@ service HybridCloudService {
       post: "/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "hybrid-cloud-environment"
+      resource_id_field: "resp.hybrid_cloud_environment.id"
+      resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}"
+    };
   }
   // Updates a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -63,6 +71,13 @@ service HybridCloudService {
       put: "/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{hybrid_cloud_environment.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "hybrid-cloud-environment"
+      resource_id_field: "req.hybrid_cloud_environment.id"
+      resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}"
+    };
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -72,6 +87,13 @@ service HybridCloudService {
     option (common.v1.permissions) = "delete:hybrid_cloud_environments";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "hybrid-cloud-environment"
+      resource_id_field: "req.hybrid_cloud_environment_id"
+      resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
+    };
   }
   // Gets the commands that should be executed against a kubernetes cluster to
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
@@ -84,6 +106,14 @@ service HybridCloudService {
     option (common.v1.permissions) = "write:hybrid_cloud_environments";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid-cloud-environment/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/initial-installation-command"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "get-bootstrap-commands"
+      resource_type: "hybrid-cloud-environment"
+      resource_id_field: "req.hybrid_cloud_environment_id"
+      resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
+    };
   }
 }
 

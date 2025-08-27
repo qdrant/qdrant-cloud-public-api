@@ -9,6 +9,7 @@ package clusterv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -2998,7 +2999,7 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xba\x05\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xba\x05\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -3278,17 +3279,18 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
-	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\xcd\x10\n" +
+	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\x98\x15\n" +
 	"\x0eClusterService\x12\xb4\x01\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xbb\x01\n" +
 	"\n" +
-	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"T\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xd9\x01\n" +
-	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"i\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xff\x01\n" +
-	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"q\x8a\xb5\x18\radmin:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xe6\x01\n" +
-	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"v\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xc6\x01\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"V\x8a\xb5\x18\x0fdelete:clusters\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xd0\x01\n" +
-	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"]\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xd0\x01\n" +
-	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"]\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc6\x01\n" +
+	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"T\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xb9\x02\n" +
+	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xc8\x01\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xca\xf3\x18[\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xf8\x02\n" +
+	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\xe9\x01\x8a\xb5\x18\radmin:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xca\xf3\x18t\b\x01\x12\acluster\"\x0fresp.cluster.id*5/accounts/{req.account_id}/clusters/{resp.cluster.id}R\x1f\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xc4\x02\n" +
+	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xd3\x01\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\x9c\x02\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xab\x01\x8a\xb5\x18\x0fdelete:clusters\xca\xf3\x18Q\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xaf\x02\n" +
+	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xbb\x01\x8a\xb5\x18\x0ewrite:clusters\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestart\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xaf\x02\n" +
+	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\xbb\x01\x8a\xb5\x18\x0ewrite:clusters\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspend\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc6\x01\n" +
 	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"G\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xc6\x01\n" +
 	"\x12ListQdrantReleases\x122.qdrant.cloud.cluster.v1.ListQdrantReleasesRequest\x1a3.qdrant.cloud.cluster.v1.ListQdrantReleasesResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releasesB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.cluster.v1B\fClusterProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1;clusterv1\xa2\x02\x03QCC\xaa\x02\x17Qdrant.Cloud.Cluster.V1\xca\x02\x17Qdrant\\Cloud\\Cluster\\V1\xe2\x02#Qdrant\\Cloud\\Cluster\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Cluster::V1b\x06proto3"

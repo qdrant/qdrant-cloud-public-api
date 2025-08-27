@@ -10,15 +10,16 @@ import "qdrant/cloud/common/v1/common.proto";
 // The method options for configuring the event options.
 // If this option is not found for an RPC, no event will be generated.
 //
-// Example for a CreateBackup RPC:
+// Example for a RestoreBackup RPC:
 //  option (qdrant.cloud.event.v1.event_options) = {
-//    event_type: qdrant.cloud.event.v1.EVENT_TYPE_CREATED,
+//    event_type: EVENT_TYPE_ACTION,
+//    action_type: "restore",
 //    resource_type: "backup",
-//    resource_id_field: "resp.backup.id",
-//    resource_url_template: "/Accounts/{req.backup.account_id}/Clusters/{req.backup.cluster_id}/Backups/{resp.backup.id}",
+//    resource_id_field: "req.backup_id",
+//    resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}",
 //    additional_context_fields: {
 //      key: "cluster_id"
-//      value: "req.cluster_id"
+//      value: "resp-md.qc-event-cluster-id"
 //    }
 //  };
 //
@@ -30,7 +31,8 @@ extend google.protobuf.MethodOptions {
 // EventOptions is a custom method option to indicate that an event should be
 // generated when this RPC is successfully called.
 // The fields should start with 'req.' or 'resp.' to indicate whether the info needs to be
-// extracted from the request or the response.
+// extracted from the request or the response. Or 'req-md.' or 'resp-md.' to extract the info
+// from the metadata.
 message EventOptions {
   // The type of the event that should be generated.
   EventType event_type = 1 [(buf.validate.field).enum = {
@@ -52,6 +54,10 @@ message EventOptions {
   // This should be a resolvable (nested) field template.
   // E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
   string resource_url_template = 5 [(buf.validate.field).string.min_len = 1];
+  // The action type.
+  // This field is set when the event_type is EVENT_TYPE_ACTION.
+  // E.g. 'restore' in case of a backup restore.
+  optional string action_type = 6 [(buf.validate.field).string.min_len = 1];
   // The additional context field.
   // Key will be copied as-is, the value should be a resolvable (nested) field.
   // E.g. {'cluster_id': 'resp.cluster_id', 'backup_id': 'resp.backup_id'}
@@ -68,6 +74,8 @@ enum EventType {
   EVENT_TYPE_UPDATED = 2;
   // The resource was deleted.
   EVENT_TYPE_DELETED = 3;
+  // The resource has executed an action.
+  EVENT_TYPE_ACTION = 4;
 }
 
 // Event represents a significant occurrence in the system, like a resource
@@ -87,6 +95,9 @@ message Event {
   // The account ID associated with this event (if applicable, UUID).
   // This field will be set if the event is bound to a specific account.
   optional string account_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The fullname of the RPC which was invoked.
+  // E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
+  string source_rpc = 6 [(buf.validate.field).string.min_len = 1];
   // The type of the event.
   EventType event_type = 10 [(buf.validate.field).enum = {
     defined_only: true
@@ -104,6 +115,10 @@ message Event {
   optional string resource_id = 13 [(buf.validate.field).string.min_len = 1];
   // The URL associated with the resource for this event.
   string resource_url = 14 [(buf.validate.field).string.min_len = 1];
+  // The action type.
+  // This field is set when the event_type is EVENT_TYPE_ACTION.
+  // E.g. 'restore' in case of a backup restore.
+  optional string action_type = 15 [(buf.validate.field).string.min_len = 1];
   // Additional key-value context about the event.
   // For example, for a backup event, this could include the "cluster_id".
   map<string, string> additional_context = 20;

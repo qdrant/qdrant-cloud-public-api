@@ -9,6 +9,7 @@ package authv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -179,7 +180,7 @@ var File_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto protorefle
 
 const file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDesc = "" +
 	"\n" +
-	"<qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"x\n" +
+	"<qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"x\n" +
 	"$CreateEphemeralDashboardTokenRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -188,10 +189,10 @@ const file_qdrant_cloud_cluster_auth_v1_ephemeral_dashboard_token_proto_rawDesc 
 	"%CreateEphemeralDashboardTokenResponse\x12y\n" +
 	"\x19ephemeral_dashboard_token\x18\x01 \x01(\v25.qdrant.cloud.cluster.auth.v1.EphemeralDashboardTokenB\x06\xbaH\x03\xc8\x01\x01R\x17ephemeralDashboardToken\"]\n" +
 	"\x17EphemeralDashboardToken\x12B\n" +
-	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xc1\x02\n" +
-	"\x1eEphemeralDashboardTokenService\x12\x9e\x02\n" +
-	"\x1dCreateEphemeralDashboardToken\x12B.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1aC.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"t\x8a\xb5\x18\rread:clusters\x92\xb5\x18\n" +
-	"account_id\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02J:\x01*\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokensB\xab\x02\n" +
+	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xb9\x03\n" +
+	"\x1eEphemeralDashboardTokenService\x12\x96\x03\n" +
+	"\x1dCreateEphemeralDashboardToken\x12B.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenRequest\x1aC.qdrant.cloud.cluster.auth.v1.CreateEphemeralDashboardTokenResponse\"\xeb\x01\x8a\xb5\x18\rread:clusters\x92\xb5\x18\n" +
+	"account_id\xa2\xb5\x18\x01\x01\xca\xf3\x18s\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2 create-ephemeral-dashboard-token\x82\xd3\xe4\x93\x02J:\x01*\"E/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokensB\xab\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v1B\x1cEphemeralDashboardTokenProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3"
 
 var (

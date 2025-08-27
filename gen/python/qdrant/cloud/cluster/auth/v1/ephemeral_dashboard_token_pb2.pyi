@@ -1,6 +1,7 @@
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
+from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Mapping as _Mapping

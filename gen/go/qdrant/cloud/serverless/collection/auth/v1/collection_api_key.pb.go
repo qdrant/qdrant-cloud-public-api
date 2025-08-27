@@ -9,6 +9,7 @@ package authv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -525,7 +526,7 @@ var File_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto pro
 
 const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_rawDesc = "" +
 	"\n" +
-	"Cqdrant/cloud/serverless/collection/auth/v1/collection_api_key.proto\x12*qdrant.cloud.serverless.collection.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"v\n" +
+	"Cqdrant/cloud/serverless/collection/auth/v1/collection_api_key.proto\x12*qdrant.cloud.serverless.collection.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"v\n" +
 	"\x1cListCollectionApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12-\n" +
@@ -568,11 +569,13 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"\x1aCollectionApiKeyAccessType\x12.\n" +
 	"*COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +
 	"(COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY\x10\x01\x12-\n" +
-	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xfb\a\n" +
+	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xc3\v\n" +
 	"\x17CollectionApiKeyService\x12\xa4\x02\n" +
-	"\x15ListCollectionApiKeys\x12H.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest\x1aI.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysResponse\"v\x8a\xb5\x18\x18read:serverless_api_keys\x82\xd3\xe4\x93\x02T\x12R/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys\x12\xf3\x02\n" +
-	"\x16CreateCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyResponse\"\xc1\x01\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x1dcollection_api_key.account_id\x82\xd3\xe4\x93\x02}:\x01*\"x/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_api_key.collection_id}/api-keys\x12\xc2\x02\n" +
-	"\x16DeleteCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyResponse\"\x90\x01\x8a\xb5\x18\x1adelete:serverless_api_keys\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}B\xfa\x02\n" +
+	"\x15ListCollectionApiKeys\x12H.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest\x1aI.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysResponse\"v\x8a\xb5\x18\x18read:serverless_api_keys\x82\xd3\xe4\x93\x02T\x12R/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys\x12\xf5\x04\n" +
+	"\x16CreateCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.CreateCollectionApiKeyResponse\"\xc3\x03\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x1dcollection_api_key.account_id\xca\xf3\x18\xfd\x01\b\x01\x12\x12serverless-api-key\"\x1aresp.collection_api_key.id*\x91\x01/accounts/{req.collection_api_key.account_id}/serverless-collections/{req.collection_api_key.collection_id}/api-keys/{resp.collection_api_key.id}R5\n" +
+	"\rcollection_id\x12$req.collection_api_key.collection_id\x82\xd3\xe4\x93\x02}:\x01*\"x/api/serverless/auth/v1/accounts/{collection_api_key.account_id}/collections/{collection_api_key.collection_id}/api-keys\x12\x88\x04\n" +
+	"\x16DeleteCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyResponse\"\xd6\x02\x8a\xb5\x18\x1adelete:serverless_api_keys\xca\xf3\x18\xc1\x01\b\x03\x12\x12serverless-api-key\"\x19req.collection_api_key_id*j/accounts/{req.account_id}/serverless-collections/{req.collection_id}/api-keys/{req.collection_api_key_id}R\"\n" +
+	"\rcollection_id\x12\x11req.collection_id\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}B\xfa\x02\n" +
 	".com.qdrant.cloud.serverless.collection.auth.v1B\x15CollectionApiKeyProtoP\x01Zbgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/auth/v1;authv1\xa2\x02\x05QCSCA\xaa\x02*Qdrant.Cloud.Serverless.Collection.Auth.V1\xca\x02*Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\xe2\x026Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\\GPBMetadata\xea\x02/Qdrant::Cloud::Serverless::Collection::Auth::V1b\x06proto3"
 
 var (

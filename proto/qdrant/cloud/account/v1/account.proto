@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
@@ -43,6 +44,13 @@ service AccountService {
       post: "/api/account/v1/accounts"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "account"
+      resource_id_field: "resp.account.id"
+      resource_url_template: "/accounts/{resp.account.id}"
+    };
   }
   // Updates an account identified by the given ID.
   // Required permissions:
@@ -57,6 +65,13 @@ service AccountService {
       put: "/api/account/v1/accounts/{account.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "account"
+      resource_id_field: "req.account.id"
+      resource_url_template: "/accounts/{req.account.id}"
+    };
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
@@ -68,6 +83,13 @@ service AccountService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "account"
+      resource_id_field: "req.account_id"
+      resource_url_template: "/accounts/{req.account_id}"
+    };
   }
   // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
@@ -116,6 +138,13 @@ service AccountService {
       post: "/api/account/v1/accounts/{account_invite.account_id}/invites"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "account-invite"
+      resource_id_field: "resp.account_invite.id"
+      resource_url_template: "/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}"
+    };
   }
   // Deletes an account invite.
   // Required permissions:
@@ -125,6 +154,13 @@ service AccountService {
     option (common.v1.permissions) = "delete:invites";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "account-invite"
+      resource_id_field: "req.invite_id"
+      resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+    };
   }
   // Accepts an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -138,6 +174,14 @@ service AccountService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "accept"
+      resource_type: "account-invite"
+      resource_id_field: "req.invite_id"
+      resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+    };
   }
   // Rejects an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -151,6 +195,14 @@ service AccountService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "reject"
+      resource_type: "account-invite"
+      resource_id_field: "req.invite_id"
+      resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+    };
   }
   // Lists all account members in the account identified by the given account ID.
   // The authenticated actor must be a member of the account identified by the given account ID.
@@ -183,6 +235,13 @@ service AccountService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "account-member"
+      resource_id_field: "req.user_id"
+      resource_url_template: "/accounts/{req.account_id}/members/{req.user_id}"
+    };
   }
 }
 

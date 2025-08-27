@@ -8,6 +8,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // BackupService is the API used to configure backup objects.
 service BackupService {
@@ -42,6 +43,17 @@ service BackupService {
       post: "/api/cluster/backup/v1/accounts/{backup.account_id}/backups"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "backup"
+      resource_id_field: "resp.backup.id"
+      resource_url_template: "/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{resp.backup.id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "req.backup.cluster_id"
+      }
+    };
   }
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
@@ -51,6 +63,17 @@ service BackupService {
     option (common.v1.permissions) = "delete:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "backup"
+      resource_id_field: "req.backup_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "resp-md.qc-event-cluster-id"
+      }
+    };
   }
   // Lists all backup restores in the account identified by the given ID.
   // Required permissions:
@@ -69,6 +92,18 @@ service BackupService {
     option (common.v1.permissions) = "admin:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "restore"
+      resource_type: "backup"
+      resource_id_field: "req.backup_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "resp-md.qc-event-cluster-id"
+      }
+    };
   }
   // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -101,6 +136,17 @@ service BackupService {
       post: "/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "backup-schedule"
+      resource_id_field: "resp.backup_schedule.id"
+      resource_url_template: "/accounts/{req.backup_schedule.account_id}/clusters/{req.backup_schedule.cluster_id}/backup_schedules/{resp.backup_schedule.id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "req.backup_schedule.cluster_id"
+      }
+    };
   }
   // Updates a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -115,6 +161,17 @@ service BackupService {
       put: "/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "backup-schedule"
+      resource_id_field: "req.backup_schedule.id"
+      resource_url_template: "/accounts/{req.backup_schedule.account_id}/clusters/{req.backup_schedule.cluster_id}/backup_schedules/{req.backup_schedule.id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "req.backup_schedule.cluster_id"
+      }
+    };
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -124,6 +181,17 @@ service BackupService {
     option (common.v1.permissions) = "delete:backup_schedules";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "backup-schedule"
+      resource_id_field: "req.backup_schedule_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backup_schedules/{req.backup_schedule_id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "resp-md.qc-event-cluster-id"
+      }
+    };
   }
 }
 

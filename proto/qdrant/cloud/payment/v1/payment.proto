@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // PaymentService is the API used to manage payment settings.
 service PaymentService {
@@ -37,7 +38,17 @@ service PaymentService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
     // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods"};
+    option (google.api.http) = {
+      post: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "payment-method"
+      resource_id_field: "resp.payment_method.id"
+      resource_url_template: "/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}"
+    };
   }
   // Updates the payment method for the account.
   // This method is used to update the payment method details, such as billing address.
@@ -53,6 +64,13 @@ service PaymentService {
       put: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "payment-method"
+      resource_id_field: "req.payment_method.id"
+      resource_url_template: "/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}"
+    };
   }
   // Delete the payment method identified by the given ID.
   // Required permissions:
@@ -62,6 +80,13 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "delete:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "payment-method"
+      resource_id_field: "req.payment_method_id"
+      resource_url_template: "/accounts/{req.account_id}/payment-methods/{req.payment_method_id}"
+    };
   }
   // Get the Stripe Checkout session by its ID.
   // This method is used to retrieve the session details after it has been created.
@@ -81,7 +106,18 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {post: "/api/payment/v1/accounts/{account_id}/stripe-session"};
+    option (google.api.http) = {
+      post: "/api/payment/v1/accounts/{account_id}/stripe-session"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "create-stripe-checkout-session"
+      resource_type: "account"
+      resource_id_field: "req.account_id"
+      resource_url_template: "/accounts/{req.account_id}"
+    };
   }
 }
 
