@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 import "qdrant/cloud/serverless/collection/v1/collection_config.proto";
 
 // CollectionService provides operations for managing collections
@@ -32,6 +33,13 @@ service CollectionService {
       post: "/api/serverless/v1/accounts/{collection.account_id}/collections"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-collection"
+      resource_id_field: "resp.collection.id"
+      resource_url_template: "/accounts/{req.collection.account_id}/serverless-collections/{resp.collection.id}"
+    };
   }
   // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
   // Required Permissions:
@@ -44,6 +52,13 @@ service CollectionService {
       put: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "serverless-collection"
+      resource_id_field: "req.collection_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-collections/{req.collection_id}"
+    };
   }
   // DeleteCollection removes a collection by ID
   // Required Permissions:
@@ -53,6 +68,13 @@ service CollectionService {
     option (qdrant.cloud.common.v1.permissions) = "delete:serverless";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/collections/{collection_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-collection"
+      resource_id_field: "req.collection_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-collections/{req.collection_id}"
+    };
   }
 }
 

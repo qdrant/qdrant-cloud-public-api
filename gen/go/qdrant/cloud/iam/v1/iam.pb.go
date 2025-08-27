@@ -2061,16 +2061,17 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xc1\x16\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\x91\x18\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\xc6\x01\n" +
 	"\n" +
 	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"g\x8a\xb5\x18\n" +
 	"write:user\x92\xb5\x18\x00\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
-	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\xb2\x01\n" +
-	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\">\x8a\xb5\x18\n" +
-	"write:user\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/iam/v1/users/me/consent\x12\xb1\x01\n" +
+	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\xb0\x02\n" +
+	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\"\xbb\x01\x8a\xb5\x18\n" +
+	"write:user\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18y\b\x04\x12\x04user\"\x18resp-md.qc-event-user-id*!/users/{resp-md.qc-event-user-id}2\x0erecord-consentR\"\n" +
+	"\rdocument_type\x12\x11req.document_type\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/iam/v1/users/me/consent\x12\xb1\x01\n" +
 	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\n" +
 	"read:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n" +
 	"\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\n" +
@@ -2087,9 +2088,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xb5\x01\n" +
 	"\rListUserRoles\x12).qdrant.cloud.iam.v1.ListUserRolesRequest\x1a*.qdrant.cloud.iam.v1.ListUserRolesResponse\"M\x8a\xb5\x18\n" +
 	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xa2\x02\n" +
-	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xb3\x01\x8a\xb5\x18\vwrite:roles\xa2\xb5\x18\x01\x01\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\x8f\x01\n" +
+	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xb3\x01\x8a\xb5\x18\vwrite:roles\xa2\xb5\x18\x01\x01\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xe1\x01\n" +
 	"\n" +
-	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"0\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logoutB\xde\x01\n" +
+	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"\x81\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18M\b\x04\x12\x04user\"\x18resp-md.qc-event-user-id*!/users/{resp-md.qc-event-user-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logoutB\xde\x01\n" +
 	"\x17com.qdrant.cloud.iam.v1B\bIamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3"
 
 var (

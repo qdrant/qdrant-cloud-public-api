@@ -151,11 +151,12 @@
             "type": "string"
           },
           {
-            "name": "redirectUrl",
-            "description": "Redirect URL to which the user will be redirected after the payment setup is completed.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentServiceCreateStripeCheckoutSessionBody"
+            }
           }
         ],
         "tags": [
@@ -229,185 +230,12 @@
             "type": "string"
           },
           {
-            "name": "paymentMethod.id",
-            "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.type",
-            "description": "The type of the payment method provider.\nThis is a required field.\n\n - PAYMENT_PROVIDER_TYPE_UNSPECIFIED: Unspecified type, should not be used.\n - PAYMENT_PROVIDER_TYPE_STRIPE: Stripe payment method.\n - PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: AWS marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE: Google Cloud Platform marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE: Azure marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_CUSTOM: Custom payment method. This is used for custom payment methods that do not fit into the predefined categories.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
-              "PAYMENT_PROVIDER_TYPE_STRIPE",
-              "PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE",
-              "PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE",
-              "PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE",
-              "PAYMENT_PROVIDER_TYPE_CUSTOM"
-            ],
-            "default": "PAYMENT_PROVIDER_TYPE_UNSPECIFIED"
-          },
-          {
-            "name": "paymentMethod.paymentProviderId",
-            "description": "The customer account identifier in the payment provider system.\nThis is read-only field.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.paymentMethodDetails.id",
-            "description": "The identifier of the payment method.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.paymentMethodDetails.card.brand",
-            "description": "The brand of the card (e.g., \"Visa\", \"Mastercard\").",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.paymentMethodDetails.card.last4",
-            "description": "The last 4 digits of the card number.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.paymentMethodDetails.card.expirationMonth",
-            "description": "The expiration month of the card.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "paymentMethod.paymentMethodDetails.card.expirationYear",
-            "description": "The expiration year of the card.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "paymentMethod.billingAddress.name",
-            "description": "The name of the person or entity associated with the billing address.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.line1",
-            "description": "The first line of the billing address.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.line2",
-            "description": "The second line of the billing address.\nThis is an optional field.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.postalCode",
-            "description": "The postal code of the billing address.\nThis is an optional field.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.city",
-            "description": "The city of the billing address.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.state",
-            "description": "The state or province of the billing address.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.country",
-            "description": "The country of the billing address.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.countryFormatted",
-            "description": "The formatted country name.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.stateFormatted",
-            "description": "The formatted state or province name.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.billingAddress.taxSupportedCountry",
-            "description": "Indicates if the country supports tax.",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "paymentMethod.createdAt",
-            "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "paymentMethod.lastModifiedAt",
-            "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "paymentMethod.taxId",
-            "description": "The tax ID associated with the payment method.\nThis is an optional field.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "paymentMethod.isDefault",
-            "description": "The us default flag indicates if this payment method is the default one for the account.\nDefault payment method is used for all charges in the account.",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "paymentMethod.status",
-            "description": "Payment method status.\nThis is read-only field.\n\n - PAYMENT_METHOD_STATUS_UNSPECIFIED: Unspecified status, should not be used.\n - PAYMENT_METHOD_STATUS_ACTIVE: The payment method is active and can be used for payments.\n - PAYMENT_METHOD_STATUS_INACTIVE: The payment method is inactive and cannot be used for payments.\n - PAYMENT_METHOD_STATUS_PENDING: The payment method is pending verification or setup.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PAYMENT_METHOD_STATUS_UNSPECIFIED",
-              "PAYMENT_METHOD_STATUS_ACTIVE",
-              "PAYMENT_METHOD_STATUS_INACTIVE",
-              "PAYMENT_METHOD_STATUS_PENDING"
-            ],
-            "default": "PAYMENT_METHOD_STATUS_UNSPECIFIED"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentServiceCreatePaymentMethodBody"
+            }
           }
         ],
         "tags": [
@@ -464,6 +292,71 @@
     }
   },
   "definitions": {
+    "PaymentServiceCreatePaymentMethodBody": {
+      "type": "object",
+      "properties": {
+        "paymentMethod": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created."
+            },
+            "type": {
+              "$ref": "#/definitions/v1PaymentProviderType",
+              "description": "The type of the payment method provider.\nThis is a required field."
+            },
+            "paymentProviderId": {
+              "type": "string",
+              "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
+            },
+            "paymentMethodDetails": {
+              "$ref": "#/definitions/v1PaymentMethodDetails",
+              "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for payment provider type Stripe for now."
+            },
+            "billingAddress": {
+              "$ref": "#/definitions/v1BillingAddress",
+              "description": "The billing address associated with the payment method.\nThis field is optional and only available for payment provider type Stripe."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created."
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created."
+            },
+            "taxId": {
+              "type": "string",
+              "description": "The tax ID associated with the payment method.\nThis is an optional field."
+            },
+            "isDefault": {
+              "type": "boolean",
+              "description": "The us default flag indicates if this payment method is the default one for the account.\nDefault payment method is used for all charges in the account."
+            },
+            "status": {
+              "$ref": "#/definitions/v1PaymentMethodStatus",
+              "description": "Payment method status.\nThis is read-only field."
+            }
+          },
+          "description": "The payment method to create.\nThis is a required field.",
+          "title": "The payment method to create.\nThis is a required field."
+        }
+      },
+      "title": "CreatePaymentMethodRequest is the request for the CreatePaymentMethod function"
+    },
+    "PaymentServiceCreateStripeCheckoutSessionBody": {
+      "type": "object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "Redirect URL to which the user will be redirected after the payment setup is completed."
+        }
+      },
+      "title": "CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function"
+    },
     "PaymentServiceUpdatePaymentMethodBody": {
       "type": "object",
       "properties": {

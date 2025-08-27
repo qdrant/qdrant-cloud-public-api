@@ -72,6 +72,18 @@ service IAMService {
       post: "/api/iam/v1/users/me/consent"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "record-consent"
+      resource_type: "user"
+      resource_id_field: "resp-md.qc-event-user-id"
+      resource_url_template: "/users/{resp-md.qc-event-user-id}"
+      additional_context_fields: {
+        key: "document_type"
+        value: "req.document_type"
+      }
+    };
   }
   // Lists all permissions known in the system for the provided account.
   // Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
@@ -224,6 +236,14 @@ service IAMService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/iam/v1/users/me/logout"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "logout"
+      resource_type: "user"
+      resource_id_field: "resp-md.qc-event-user-id"
+      resource_url_template: "/users/{resp-md.qc-event-user-id}"
+    };
   }
 }
 
