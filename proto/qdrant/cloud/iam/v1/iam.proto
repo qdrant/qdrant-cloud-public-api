@@ -77,8 +77,8 @@ service IAMService {
       event_type: EVENT_TYPE_ACTION
       action_type: "record-consent"
       resource_type: "user"
-      resource_id_field: "resp-md.qc-event-user-id"
-      resource_url_template: "/users/{resp-md.qc-event-user-id}"
+      resource_id_field: "req-md.qc-actor-id"
+      resource_url_template: "/users/{req-md.qc-actor-id}"
       additional_context_fields: {
         key: "document_type"
         value: "req.document_type"
@@ -241,8 +241,8 @@ service IAMService {
       event_type: EVENT_TYPE_ACTION
       action_type: "logout"
       resource_type: "user"
-      resource_id_field: "resp-md.qc-event-user-id"
-      resource_url_template: "/users/{resp-md.qc-event-user-id}"
+      resource_id_field: "req-md.qc-actor-id"
+      resource_url_template: "/users/{req-md.qc-actor-id}"
     };
   }
 }
