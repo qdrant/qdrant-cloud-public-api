@@ -37,6 +37,8 @@ const (
 	EventType_EVENT_TYPE_UPDATED EventType = 2
 	// The resource was deleted.
 	EventType_EVENT_TYPE_DELETED EventType = 3
+	// The resource has executed an action.
+	EventType_EVENT_TYPE_ACTION EventType = 4
 )
 
 // Enum value maps for EventType.
@@ -46,12 +48,14 @@ var (
 		1: "EVENT_TYPE_CREATED",
 		2: "EVENT_TYPE_UPDATED",
 		3: "EVENT_TYPE_DELETED",
+		4: "EVENT_TYPE_ACTION",
 	}
 	EventType_value = map[string]int32{
 		"EVENT_TYPE_UNSPECIFIED": 0,
 		"EVENT_TYPE_CREATED":     1,
 		"EVENT_TYPE_UPDATED":     2,
 		"EVENT_TYPE_DELETED":     3,
+		"EVENT_TYPE_ACTION":      4,
 	}
 )
 
@@ -85,7 +89,8 @@ func (EventType) EnumDescriptor() ([]byte, []int) {
 // EventOptions is a custom method option to indicate that an event should be
 // generated when this RPC is successfully called.
 // The fields should start with 'req.' or 'resp.' to indicate whether the info needs to be
-// extracted from the request or the response.
+// extracted from the request or the response. Or 'req-md.' or 'resp-md.' to extract the info
+// from the metadata.
 type EventOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The type of the event that should be generated.
@@ -105,6 +110,10 @@ type EventOptions struct {
 	// This should be a resolvable (nested) field template.
 	// E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
 	ResourceUrlTemplate string `protobuf:"bytes,5,opt,name=resource_url_template,json=resourceUrlTemplate,proto3" json:"resource_url_template,omitempty"`
+	// The action type.
+	// This field is set when the event type is EVENT_TYPE_ACTION.
+	// E.g. 'restore' in case of a backup restore.
+	ActionType *string `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3,oneof" json:"action_type,omitempty"`
 	// The additional context field.
 	// Key will be copied as-is, the value should be a resolvable (nested) field.
 	// E.g. {'cluster_id': 'resp.cluster_id', 'backup_id': 'resp.backup_id'}
@@ -174,6 +183,13 @@ func (x *EventOptions) GetResourceIdField() string {
 func (x *EventOptions) GetResourceUrlTemplate() string {
 	if x != nil {
 		return x.ResourceUrlTemplate
+	}
+	return ""
+}
+
+func (x *EventOptions) GetActionType() string {
+	if x != nil && x.ActionType != nil {
+		return *x.ActionType
 	}
 	return ""
 }
@@ -351,7 +367,7 @@ var File_qdrant_cloud_event_v1_events_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\n" +
-	"\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xe6\x03\n" +
+	"\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xa5\x04\n" +
 	"\fEventOptions\x12K\n" +
 	"\n" +
 	"event_type\x18\x01 \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +
@@ -360,12 +376,15 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\vstatus_only\x18\x03 \x01(\bR\n" +
 	"statusOnly\x123\n" +
 	"\x11resource_id_field\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x0fresourceIdField\x12;\n" +
-	"\x15resource_url_template\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x13resourceUrlTemplate\x12|\n" +
+	"\x15resource_url_template\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x13resourceUrlTemplate\x12-\n" +
+	"\vaction_type\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\n" +
+	"actionType\x88\x01\x01\x12|\n" +
 	"\x19additional_context_fields\x18\n" +
 	" \x03(\v2@.qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntryR\x17additionalContextFields\x1aJ\n" +
 	"\x1cAdditionalContextFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbc\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
+	"\f_action_type\"\xbc\x05\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -391,12 +410,13 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_account_idB\x0e\n" +
-	"\f_resource_id*o\n" +
+	"\f_resource_id*\x86\x01\n" +
 	"\tEventType\x12\x1a\n" +
 	"\x16EVENT_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12EVENT_TYPE_CREATED\x10\x01\x12\x16\n" +
 	"\x12EVENT_TYPE_UPDATED\x10\x02\x12\x16\n" +
-	"\x12EVENT_TYPE_DELETED\x10\x03:j\n" +
+	"\x12EVENT_TYPE_DELETED\x10\x03\x12\x15\n" +
+	"\x11EVENT_TYPE_ACTION\x10\x04:j\n" +
 	"\revent_options\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x8e\x03 \x01(\v2#.qdrant.cloud.event.v1.EventOptionsR\feventOptionsB\xef\x01\n" +
 	"\x19com.qdrant.cloud.event.v1B\vEventsProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1;eventv1\xa2\x02\x03QCE\xaa\x02\x15Qdrant.Cloud.Event.V1\xca\x02\x15Qdrant\\Cloud\\Event\\V1\xe2\x02!Qdrant\\Cloud\\Event\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Event::V1b\x06proto3"
 
@@ -445,6 +465,7 @@ func file_qdrant_cloud_event_v1_events_proto_init() {
 	if File_qdrant_cloud_event_v1_events_proto != nil {
 		return
 	}
+	file_qdrant_cloud_event_v1_events_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_event_v1_events_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

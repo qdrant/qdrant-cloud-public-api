@@ -19,15 +19,17 @@ class EventType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     EVENT_TYPE_CREATED: _ClassVar[EventType]
     EVENT_TYPE_UPDATED: _ClassVar[EventType]
     EVENT_TYPE_DELETED: _ClassVar[EventType]
+    EVENT_TYPE_ACTION: _ClassVar[EventType]
 EVENT_TYPE_UNSPECIFIED: EventType
 EVENT_TYPE_CREATED: EventType
 EVENT_TYPE_UPDATED: EventType
 EVENT_TYPE_DELETED: EventType
+EVENT_TYPE_ACTION: EventType
 EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
 class EventOptions(_message.Message):
-    __slots__ = ("event_type", "resource_type", "status_only", "resource_id_field", "resource_url_template", "additional_context_fields")
+    __slots__ = ("event_type", "resource_type", "status_only", "resource_id_field", "resource_url_template", "action_type", "additional_context_fields")
     class AdditionalContextFieldsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -40,14 +42,16 @@ class EventOptions(_message.Message):
     STATUS_ONLY_FIELD_NUMBER: _ClassVar[int]
     RESOURCE_ID_FIELD_FIELD_NUMBER: _ClassVar[int]
     RESOURCE_URL_TEMPLATE_FIELD_NUMBER: _ClassVar[int]
+    ACTION_TYPE_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_CONTEXT_FIELDS_FIELD_NUMBER: _ClassVar[int]
     event_type: EventType
     resource_type: str
     status_only: bool
     resource_id_field: str
     resource_url_template: str
+    action_type: str
     additional_context_fields: _containers.ScalarMap[str, str]
-    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class Event(_message.Message):
     __slots__ = ("id", "created_at", "actor_id", "actor_type", "account_id", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "additional_context")

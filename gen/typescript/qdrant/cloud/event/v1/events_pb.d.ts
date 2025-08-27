@@ -16,7 +16,8 @@ export declare const file_qdrant_cloud_event_v1_events: GenFile;
  * EventOptions is a custom method option to indicate that an event should be
  * generated when this RPC is successfully called.
  * The fields should start with 'req.' or 'resp.' to indicate whether the info needs to be
- * extracted from the request or the response.
+ * extracted from the request or the response. Or 'req-md.' or 'resp-md.' to extract the info
+ * from the metadata.
  *
  * @generated from message qdrant.cloud.event.v1.EventOptions
  */
@@ -62,6 +63,15 @@ export declare type EventOptions = Message<"qdrant.cloud.event.v1.EventOptions">
    * @generated from field: string resource_url_template = 5;
    */
   resourceUrlTemplate: string;
+
+  /**
+   * The action type.
+   * This field is set when the event type is EVENT_TYPE_ACTION.
+   * E.g. 'restore' in case of a backup restore.
+   *
+   * @generated from field: optional string action_type = 6;
+   */
+  actionType?: string;
 
   /**
    * The additional context field.
@@ -213,6 +223,13 @@ export enum EventType {
    * @generated from enum value: EVENT_TYPE_DELETED = 3;
    */
   DELETED = 3,
+
+  /**
+   * The resource has executed an action.
+   *
+   * @generated from enum value: EVENT_TYPE_ACTION = 4;
+   */
+  ACTION = 4,
 }
 
 /**

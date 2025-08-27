@@ -10,15 +10,16 @@ import "qdrant/cloud/common/v1/common.proto";
 // The method options for configuring the event options.
 // If this option is not found for an RPC, no event will be generated.
 //
-// Example for a CreateBackup RPC:
+// Example for a RestoreBackup RPC:
 //  option (qdrant.cloud.event.v1.event_options) = {
-//    event_type: qdrant.cloud.event.v1.EVENT_TYPE_CREATED,
+//    event_type: EVENT_TYPE_ACTION,
+//    action_type: "restore",
 //    resource_type: "backup",
-//    resource_id_field: "resp.backup.id",
-//    resource_url_template: "/Accounts/{req.backup.account_id}/Clusters/{req.backup.cluster_id}/Backups/{resp.backup.id}",
+//    resource_id_field: "req.backup_id",
+//    resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}",
 //    additional_context_fields: {
 //      key: "cluster_id"
-//      value: "req.cluster_id"
+//      value: "resp-md.qc-event-cluster-id"
 //    }
 //  };
 //

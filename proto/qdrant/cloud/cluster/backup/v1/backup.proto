@@ -68,10 +68,10 @@ service BackupService {
       event_type: EVENT_TYPE_DELETED
       resource_type: "backup"
       resource_id_field: "req.backup_id"
-      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc_event_cluster_id}/backups/{req.backup_id}"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}"
       additional_context_fields: {
         key: "cluster_id"
-        value: "resp-md.qc_event_cluster_id"
+        value: "resp-md.qc-event-cluster-id"
       }
     };
   }
@@ -98,10 +98,10 @@ service BackupService {
       action_type: "restore"
       resource_type: "backup"
       resource_id_field: "req.backup_id"
-      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc_event_cluster_id}/backups/{req.backup_id}"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}"
       additional_context_fields: {
         key: "cluster_id"
-        value: "resp-md.qc_event_cluster_id"
+        value: "resp-md.qc-event-cluster-id"
       }
     };
   }
@@ -186,10 +186,10 @@ service BackupService {
       event_type: EVENT_TYPE_DELETED
       resource_type: "backup-schedule"
       resource_id_field: "req.backup_schedule_id"
-      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc_event_cluster_id}/backup_schedules/{req.backup_schedule_id}"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backup_schedules/{req.backup_schedule_id}"
       additional_context_fields: {
         key: "cluster_id"
-        value: "resp-md.qc_event_cluster_id"
+        value: "resp-md.qc-event-cluster-id"
       }
     };
   }
