@@ -9,6 +9,7 @@ package authv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -408,7 +409,7 @@ var File_qdrant_cloud_cluster_auth_v1_database_api_key_proto protoreflect.FileDe
 
 const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
-	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"E\n" +
+	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"E\n" +
 	"\x1aListDatabaseApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n" +
@@ -435,11 +436,12 @@ const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x10\n" +
 	"\x03key\x18\x06 \x01(\tR\x03key:\x99\x02\xbaH\x95\x02\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ad\n" +
-	"\x17database_api_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\x96\x06\n" +
+	"\x17database_api_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xce\b\n" +
 	"\x15DatabaseApiKeyService\x12\xe1\x01\n" +
-	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v1/accounts/{account_id}/database-api-keys\x12\x99\x02\n" +
-	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyResponse\"\x89\x01\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys\x12\xfc\x01\n" +
-	"\x14DeleteDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyResponse\"m\x8a\xb5\x18\x0fdelete:api_keys\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v1/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n" +
+	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v1.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v1/accounts/{account_id}/database-api-keys\x12\xd7\x03\n" +
+	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.CreateDatabaseApiKeyResponse\"\xc7\x02\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\xca\xf3\x18\xb9\x01\b\x01\x12\x10database-api-key\"\x18resp.database_api_key.id*X/accounts/{req.database_api_key.account_id}/database-api-keys/{resp.database_api_key.id}R/\n" +
+	"\vcluster_ids\x12 req.database_api_key.cluster_ids\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys\x12\xf6\x02\n" +
+	"\x14DeleteDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v1.DeleteDatabaseApiKeyResponse\"\xe6\x01\x8a\xb5\x18\x0fdelete:api_keys\xca\xf3\x18u\b\x03\x12\x10database-api-key\"\x17req.database_api_key_id*F/accounts/{req.account_id}/database-api-keys/{req.database_api_key_id}\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v1/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v1B\x13DatabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v1;authv1\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V1\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V1\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V1\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V1b\x06proto3"
 
 var (

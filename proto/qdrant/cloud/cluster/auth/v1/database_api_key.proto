@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 service DatabaseApiKeyService {
@@ -31,6 +32,17 @@ service DatabaseApiKeyService {
       post: "/api/cluster/auth/v1/accounts/{database_api_key.account_id}/database-api-keys"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "database-api-key"
+      resource_id_field: "resp.database_api_key.id"
+      resource_url_template: "/accounts/{req.database_api_key.account_id}/database-api-keys/{resp.database_api_key.id}"
+      additional_context_fields: {
+        key: "cluster_ids"
+        value: "req.database_api_key.cluster_ids"
+      }
+    };
   }
   // Deletes a database api key in the account identified by the given ID.
   // Required permissions:
@@ -40,6 +52,13 @@ service DatabaseApiKeyService {
     option (common.v1.permissions) = "delete:api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/cluster/auth/v1/accounts/{account_id}/database-api-keys/{database_api_key_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "database-api-key"
+      resource_id_field: "req.database_api_key_id"
+      resource_url_template: "/accounts/{req.account_id}/database-api-keys/{req.database_api_key_id}"
+    };
   }
 }
 
