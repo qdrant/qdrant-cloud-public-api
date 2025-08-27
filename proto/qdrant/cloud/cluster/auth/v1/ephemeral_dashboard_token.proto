@@ -5,6 +5,7 @@ package qdrant.cloud.cluster.auth.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard, used by the Qdrant Cloud UI
 service EphemeralDashboardTokenService {
@@ -22,6 +23,14 @@ service EphemeralDashboardTokenService {
     option (google.api.http) = {
       post: "/api/cluster/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens"
       body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "create-ephemeral-dashboard-token"
+      resource_type: "cluster"
+      resource_id_field: "req.cluster_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
     };
   }
 }
