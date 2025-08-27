@@ -66,7 +66,7 @@ export declare type EventOptions = Message<"qdrant.cloud.event.v1.EventOptions">
 
   /**
    * The action type.
-   * This field is set when the event type is EVENT_TYPE_ACTION.
+   * This field is set when the event_type is EVENT_TYPE_ACTION.
    * E.g. 'restore' in case of a backup restore.
    *
    * @generated from field: optional string action_type = 6;
@@ -172,6 +172,15 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: string resource_url = 14;
    */
   resourceUrl: string;
+
+  /**
+   * The action type.
+   * This field is set when the event_type is EVENT_TYPE_ACTION.
+   * E.g. 'restore' in case of a backup restore.
+   *
+   * @generated from field: optional string action_type = 15;
+   */
+  actionType?: string;
 
   /**
    * Additional key-value context about the event.

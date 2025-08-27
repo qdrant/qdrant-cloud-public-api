@@ -111,7 +111,7 @@ type EventOptions struct {
 	// E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
 	ResourceUrlTemplate string `protobuf:"bytes,5,opt,name=resource_url_template,json=resourceUrlTemplate,proto3" json:"resource_url_template,omitempty"`
 	// The action type.
-	// This field is set when the event type is EVENT_TYPE_ACTION.
+	// This field is set when the event_type is EVENT_TYPE_ACTION.
 	// E.g. 'restore' in case of a backup restore.
 	ActionType *string `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3,oneof" json:"action_type,omitempty"`
 	// The additional context field.
@@ -230,6 +230,10 @@ type Event struct {
 	ResourceId *string `protobuf:"bytes,13,opt,name=resource_id,json=resourceId,proto3,oneof" json:"resource_id,omitempty"`
 	// The URL associated with the resource for this event.
 	ResourceUrl string `protobuf:"bytes,14,opt,name=resource_url,json=resourceUrl,proto3" json:"resource_url,omitempty"`
+	// The action type.
+	// This field is set when the event_type is EVENT_TYPE_ACTION.
+	// E.g. 'restore' in case of a backup restore.
+	ActionType *string `protobuf:"bytes,15,opt,name=action_type,json=actionType,proto3,oneof" json:"action_type,omitempty"`
 	// Additional key-value context about the event.
 	// For example, for a backup event, this could include the "cluster_id".
 	AdditionalContext map[string]string `protobuf:"bytes,20,rep,name=additional_context,json=additionalContext,proto3" json:"additional_context,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -337,6 +341,13 @@ func (x *Event) GetResourceUrl() string {
 	return ""
 }
 
+func (x *Event) GetActionType() string {
+	if x != nil && x.ActionType != nil {
+		return *x.ActionType
+	}
+	return ""
+}
+
 func (x *Event) GetAdditionalContext() map[string]string {
 	if x != nil {
 		return x.AdditionalContext
@@ -384,7 +395,7 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x1cAdditionalContextFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_action_type\"\xbc\x05\n" +
+	"\f_action_type\"\xfb\x05\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -404,13 +415,16 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"statusOnly\x12-\n" +
 	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\n" +
 	"resourceId\x88\x01\x01\x12*\n" +
-	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12b\n" +
+	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12-\n" +
+	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\n" +
+	"actionType\x88\x01\x01\x12b\n" +
 	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x1aD\n" +
 	"\x16AdditionalContextEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\v_account_idB\x0e\n" +
-	"\f_resource_id*\x86\x01\n" +
+	"\f_resource_idB\x0e\n" +
+	"\f_action_type*\x86\x01\n" +
 	"\tEventType\x12\x1a\n" +
 	"\x16EVENT_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12EVENT_TYPE_CREATED\x10\x01\x12\x16\n" +

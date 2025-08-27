@@ -55,7 +55,7 @@ message EventOptions {
   // E.g. '/Accounts/{resp.account_id}/Clusters/{resp.cluster_id}/Backups/{resp.backup_id}'
   string resource_url_template = 5 [(buf.validate.field).string.min_len = 1];
   // The action type.
-  // This field is set when the event type is EVENT_TYPE_ACTION.
+  // This field is set when the event_type is EVENT_TYPE_ACTION.
   // E.g. 'restore' in case of a backup restore.
   optional string action_type = 6 [(buf.validate.field).string.min_len = 1];
   // The additional context field.
@@ -112,6 +112,10 @@ message Event {
   optional string resource_id = 13 [(buf.validate.field).string.min_len = 1];
   // The URL associated with the resource for this event.
   string resource_url = 14 [(buf.validate.field).string.min_len = 1];
+  // The action type.
+  // This field is set when the event_type is EVENT_TYPE_ACTION.
+  // E.g. 'restore' in case of a backup restore.
+  optional string action_type = 15 [(buf.validate.field).string.min_len = 1];
   // Additional key-value context about the event.
   // For example, for a backup event, this could include the "cluster_id".
   map<string, string> additional_context = 20;
