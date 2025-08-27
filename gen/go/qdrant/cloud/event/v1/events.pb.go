@@ -216,6 +216,9 @@ type Event struct {
 	// The account ID associated with this event (if applicable, UUID).
 	// This field will be set if the event is bound to a specific account.
 	AccountId *string `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
+	// The fullname of the RPC which was invoked.
+	// E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
+	SourceRpc string `protobuf:"bytes,6,opt,name=source_rpc,json=sourceRpc,proto3" json:"source_rpc,omitempty"`
 	// The type of the event.
 	EventType EventType `protobuf:"varint,10,opt,name=event_type,json=eventType,proto3,enum=qdrant.cloud.event.v1.EventType" json:"event_type,omitempty"`
 	// The type of the resource that this event is about (e.g., "cluster", "backup").
@@ -302,6 +305,13 @@ func (x *Event) GetActorType() v1.ActorType {
 func (x *Event) GetAccountId() string {
 	if x != nil && x.AccountId != nil {
 		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Event) GetSourceRpc() string {
+	if x != nil {
+		return x.SourceRpc
 	}
 	return ""
 }
@@ -395,7 +405,7 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x1cAdditionalContextFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_action_type\"\xfb\x05\n" +
+	"\f_action_type\"\xa3\x06\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -405,7 +415,9 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"actor_type\x18\x04 \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\tactorType\x12,\n" +
 	"\n" +
-	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\taccountId\x88\x01\x01\x12K\n" +
+	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\taccountId\x88\x01\x01\x12&\n" +
+	"\n" +
+	"source_rpc\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n" +
 	"\n" +
 	"event_type\x18\n" +
 	" \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +

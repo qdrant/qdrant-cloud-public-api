@@ -135,6 +135,14 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   accountId?: string;
 
   /**
+   * The fullname of the RPC which was invoked.
+   * E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
+   *
+   * @generated from field: string source_rpc = 6;
+   */
+  sourceRpc: string;
+
+  /**
    * The type of the event.
    *
    * @generated from field: qdrant.cloud.event.v1.EventType event_type = 10;

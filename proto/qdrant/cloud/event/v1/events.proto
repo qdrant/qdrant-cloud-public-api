@@ -95,6 +95,9 @@ message Event {
   // The account ID associated with this event (if applicable, UUID).
   // This field will be set if the event is bound to a specific account.
   optional string account_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The fullname of the RPC which was invoked.
+  // E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
+  string source_rpc = 6 [(buf.validate.field).string.min_len = 1];
   // The type of the event.
   EventType event_type = 10 [(buf.validate.field).enum = {
     defined_only: true
