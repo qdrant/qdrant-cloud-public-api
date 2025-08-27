@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
 
 // IAMService is the API used to configure IAM (identity and access management) objects.
 service IAMService {
@@ -34,6 +35,13 @@ service IAMService {
     option (google.api.http) = {
       put: "/api/iam/v1/users/{user.id}"
       body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "user"
+      resource_id_field: "req.user.id"
+      resource_url_template: "/users/{req.user.id}"
     };
   }
   // Gets the authenticated user's consent status for a specific legal document.
@@ -111,6 +119,13 @@ service IAMService {
       post: "/api/iam/v1/accounts/{role.account_id}/roles"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "role"
+      resource_id_field: "resp.role.id"
+      resource_url_template: "/accounts/{req.role.account_id}/roles/{resp.role.id}"
+    };
   }
   // Updates a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -128,6 +143,13 @@ service IAMService {
       put: "/api/iam/v1/accounts/{role.account_id}/roles/{role.id}"
       body: "*"
     };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "role"
+      resource_id_field: "req.role.id"
+      resource_url_template: "/accounts/{req.role.account_id}/roles/{req.role.id}"
+    };
   }
   // Deletes a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -140,6 +162,13 @@ service IAMService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "role"
+      resource_id_field: "req.role_id"
+      resource_url_template: "/accounts/{req.account_id}/roles/{req.role_id}"
+    };
   }
   // Lists the effective permissions for the user in the account identified by the given ID.
   // Required permissions:
@@ -173,6 +202,14 @@ service IAMService {
     option (google.api.http) = {
       post: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"
       body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "assign-roles"
+      resource_type: "user"
+      resource_id_field: "req.user_id"
+      resource_url_template: "/accounts/{req.account_id}/users/{req.user_id}/roles"
     };
   }
   // Logs out the authenticated user.

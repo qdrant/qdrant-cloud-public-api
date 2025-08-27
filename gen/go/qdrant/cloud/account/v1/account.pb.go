@@ -9,6 +9,7 @@ package accountv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -1804,7 +1805,7 @@ var File_qdrant_cloud_account_v1_account_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
+	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
 	"\x13ListAccountsRequest\"N\n" +
 	"\x14ListAccountsResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.AccountR\x05items\"<\n" +
@@ -1923,27 +1924,27 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xaf\x17\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xd2\x1c\n" +
 	"\x0eAccountService\x12\x95\x01\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xa4\x01\n" +
 	"\n" +
-	"GetAccount\x12*.qdrant.cloud.account.v1.GetAccountRequest\x1a+.qdrant.cloud.account.v1.GetAccountResponse\"=\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\x9b\x01\n" +
-	"\rCreateAccount\x12-.qdrant.cloud.account.v1.CreateAccountRequest\x1a..qdrant.cloud.account.v1.CreateAccountResponse\"+\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/account/v1/accounts\x12\xbf\x01\n" +
-	"\rUpdateAccount\x12-.qdrant.cloud.account.v1.UpdateAccountRequest\x1a..qdrant.cloud.account.v1.UpdateAccountResponse\"O\x8a\xb5\x18\rwrite:account\x92\xb5\x18\n" +
-	"account.id\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/account/v1/accounts/{account.id}\x12\xb4\x01\n" +
-	"\rDeleteAccount\x12-.qdrant.cloud.account.v1.DeleteAccountRequest\x1a..qdrant.cloud.account.v1.DeleteAccountResponse\"D\x8a\xb5\x18\x0edelete:account\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02'*%/api/account/v1/accounts/{account_id}\x12\xc4\x01\n" +
+	"GetAccount\x12*.qdrant.cloud.account.v1.GetAccountRequest\x1a+.qdrant.cloud.account.v1.GetAccountResponse\"=\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\xd8\x01\n" +
+	"\rCreateAccount\x12-.qdrant.cloud.account.v1.CreateAccountRequest\x1a..qdrant.cloud.account.v1.CreateAccountResponse\"h\x8a\xb5\x18\x00\x92\xb5\x18\x00\xca\xf3\x189\b\x01\x12\aaccount\"\x0fresp.account.id*\x1b/accounts/{resp.account.id}\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/account/v1/accounts\x12\xfb\x01\n" +
+	"\rUpdateAccount\x12-.qdrant.cloud.account.v1.UpdateAccountRequest\x1a..qdrant.cloud.account.v1.UpdateAccountResponse\"\x8a\x01\x8a\xb5\x18\rwrite:account\x92\xb5\x18\n" +
+	"account.id\xca\xf3\x187\b\x02\x12\aaccount\"\x0ereq.account.id*\x1a/accounts/{req.account.id}\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/account/v1/accounts/{account.id}\x12\xef\x01\n" +
+	"\rDeleteAccount\x12-.qdrant.cloud.account.v1.DeleteAccountRequest\x1a..qdrant.cloud.account.v1.DeleteAccountResponse\"\x7f\x8a\xb5\x18\x0edelete:account\xa2\xb5\x18\x01\x01\xca\xf3\x187\b\x03\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}\x82\xd3\xe4\x93\x02'*%/api/account/v1/accounts/{account_id}\x12\xc4\x01\n" +
 	"\x12ListAccountInvites\x122.qdrant.cloud.account.v1.ListAccountInvitesRequest\x1a3.qdrant.cloud.account.v1.ListAccountInvitesResponse\"E\x8a\xb5\x18\fread:invites\x82\xd3\xe4\x93\x02/\x12-/api/account/v1/accounts/{account_id}/invites\x12\xc8\x01\n" +
 	"\x1aListReceivedAccountInvites\x12:.qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest\x1a;.qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/account/v1/self/invites\x12\xca\x01\n" +
-	"\x10GetAccountInvite\x120.qdrant.cloud.account.v1.GetAccountInviteRequest\x1a1.qdrant.cloud.account.v1.GetAccountInviteResponse\"Q\x8a\xb5\x18\fread:invites\x82\xd3\xe4\x93\x02;\x129/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xfc\x01\n" +
-	"\x13CreateAccountInvite\x123.qdrant.cloud.account.v1.CreateAccountInviteRequest\x1a4.qdrant.cloud.account.v1.CreateAccountInviteResponse\"z\x8a\xb5\x18\rwrite:invites\x92\xb5\x18\x19account_invite.account_id\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02A:\x01*\"</api/account/v1/accounts/{account_invite.account_id}/invites\x12\xd5\x01\n" +
-	"\x13DeleteAccountInvite\x123.qdrant.cloud.account.v1.DeleteAccountInviteRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountInviteResponse\"S\x8a\xb5\x18\x0edelete:invites\x82\xd3\xe4\x93\x02;*9/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xd3\x01\n" +
-	"\x13AcceptAccountInvite\x123.qdrant.cloud.account.v1.AcceptAccountInviteRequest\x1a4.qdrant.cloud.account.v1.AcceptAccountInviteResponse\"Q\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept\x12\xd3\x01\n" +
-	"\x13RejectAccountInvite\x123.qdrant.cloud.account.v1.RejectAccountInviteRequest\x1a4.qdrant.cloud.account.v1.RejectAccountInviteResponse\"Q\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject\x12\xc2\x01\n" +
+	"\x10GetAccountInvite\x120.qdrant.cloud.account.v1.GetAccountInviteRequest\x1a1.qdrant.cloud.account.v1.GetAccountInviteResponse\"Q\x8a\xb5\x18\fread:invites\x82\xd3\xe4\x93\x02;\x129/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xf7\x02\n" +
+	"\x13CreateAccountInvite\x123.qdrant.cloud.account.v1.CreateAccountInviteRequest\x1a4.qdrant.cloud.account.v1.CreateAccountInviteResponse\"\xf4\x01\x8a\xb5\x18\rwrite:invites\x92\xb5\x18\x19account_invite.account_id\xa2\xb5\x18\x01\x01\xca\xf3\x18v\b\x01\x12\x0eaccount-invite\"\x16resp.account_invite.id*J/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}\x82\xd3\xe4\x93\x02A:\x01*\"</api/account/v1/accounts/{account_invite.account_id}/invites\x12\xaf\x02\n" +
+	"\x13DeleteAccountInvite\x123.qdrant.cloud.account.v1.DeleteAccountInviteRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountInviteResponse\"\xac\x01\x8a\xb5\x18\x0edelete:invites\xca\xf3\x18U\b\x03\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}\x82\xd3\xe4\x93\x02;*9/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xb5\x02\n" +
+	"\x13AcceptAccountInvite\x123.qdrant.cloud.account.v1.AcceptAccountInviteRequest\x1a4.qdrant.cloud.account.v1.AcceptAccountInviteResponse\"\xb2\x01\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06accept\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept\x12\xb5\x02\n" +
+	"\x13RejectAccountInvite\x123.qdrant.cloud.account.v1.RejectAccountInviteRequest\x1a4.qdrant.cloud.account.v1.RejectAccountInviteResponse\"\xb2\x01\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06reject\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject\x12\xc2\x01\n" +
 	"\x12ListAccountMembers\x122.qdrant.cloud.account.v1.ListAccountMembersRequest\x1a3.qdrant.cloud.account.v1.ListAccountMembersResponse\"C\x8a\xb5\x18\n" +
 	"read:users\x82\xd3\xe4\x93\x02/\x12-/api/account/v1/accounts/{account_id}/members\x12\xc6\x01\n" +
 	"\x10GetAccountMember\x120.qdrant.cloud.account.v1.GetAccountMemberRequest\x1a1.qdrant.cloud.account.v1.GetAccountMemberResponse\"M\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd6\x01\n" +
-	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"T\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}B\xfe\x01\n" +
+	"read:users\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xac\x02\n" +
+	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"\xa9\x01\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
 
 var (
