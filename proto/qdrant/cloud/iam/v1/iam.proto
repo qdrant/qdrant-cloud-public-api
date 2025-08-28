@@ -23,6 +23,15 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me"};
   }
+  // List users in the account identified by the given ID.
+  // Required permissions:
+  // - read:users
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:users";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users"};
+  }
   // Updates the user identified by the given ID.
   // Required permissions:
   // - write:user
@@ -202,6 +211,16 @@ service IAMService {
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"};
   }
 
+  // List users for the role identified by the given ID.
+  // Required permissions:
+  // - read:roles
+  rpc ListRoleUsers(ListRoleUsersRequest) returns (ListRoleUsersResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}/users"};
+  }
+
   // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:
   // - write:roles
@@ -257,6 +276,19 @@ message GetAuthenticatedUserRequest {
 message GetAuthenticatedUserResponse {
   // The actual user.
   User user = 1 [(buf.validate.field).required = true];
+}
+
+// ListUsersRequest is the request for the ListUsers function
+message ListUsersRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListUsersResponse is the response from the ListUsers function
+message ListUsersResponse {
+  // The actual users in this list.
+  repeated User items = 1;
 }
 
 // UpdateUserRequest is the request for the UpdateUser function.
@@ -447,6 +479,23 @@ message ListUserRolesResponse {
   // The roles assigned to the user.
   // If the user has no roles, this list will be empty.
   repeated Role roles = 1;
+}
+
+// ListRoleUsersRequest is the request for the ListRoleUsers function
+message ListRoleUsersRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the role (in GUID format).
+  // This is a required field.
+  string role_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListRoleUsersResponse is the response from the ListRoleUsers function
+message ListRoleUsersResponse {
+  // The users assigned to the role.
+  // If the role has no users, this list will be empty.
+  repeated User users = 1;
 }
 
 // AssignUserRolesRequest is the request for the AssignUserRoles function

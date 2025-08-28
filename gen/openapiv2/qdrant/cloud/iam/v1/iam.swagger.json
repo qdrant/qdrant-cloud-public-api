@@ -188,6 +188,77 @@
         ]
       }
     },
+    "/api/iam/v1/accounts/{accountId}/roles/{roleId}/users": {
+      "get": {
+        "summary": "List users for the role identified by the given ID.\nRequired permissions:\n- read:roles",
+        "operationId": "IAMService_ListRoleUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRoleUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleId",
+            "description": "The identifier of the role (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/accounts/{accountId}/users": {
+      "get": {
+        "summary": "List users in the account identified by the given ID.\nRequired permissions:\n- read:users",
+        "operationId": "IAMService_ListUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/accounts/{accountId}/users/{userId}/roles": {
       "get": {
         "summary": "List roles of the user identified by the given ID.\nRequired permissions:\n- read:roles",
@@ -783,6 +854,20 @@
       },
       "title": "ListPermissionsResponse is the response from the ListPermissions function"
     },
+    "v1ListRoleUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1User"
+          },
+          "description": "The users assigned to the role.\nIf the role has no users, this list will be empty."
+        }
+      },
+      "title": "ListRoleUsersResponse is the response from the ListRoleUsers function"
+    },
     "v1ListRolesResponse": {
       "type": "object",
       "properties": {
@@ -810,6 +895,20 @@
         }
       },
       "title": "ListUserRolesResponse is the response from the ListUserRoles function"
+    },
+    "v1ListUsersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1User"
+          },
+          "description": "The actual users in this list."
+        }
+      },
+      "title": "ListUsersResponse is the response from the ListUsers function"
     },
     "v1LogoutUserResponse": {
       "type": "object",

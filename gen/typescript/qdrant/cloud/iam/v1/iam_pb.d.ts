@@ -64,6 +64,51 @@ export declare type GetAuthenticatedUserResponseValid = Message<"qdrant.cloud.ia
 export declare const GetAuthenticatedUserResponseSchema: GenMessage<GetAuthenticatedUserResponse, {validType: GetAuthenticatedUserResponseValid}>;
 
 /**
+ * ListUsersRequest is the request for the ListUsers function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUsersRequest
+ */
+export declare type ListUsersRequest = Message<"qdrant.cloud.iam.v1.ListUsersRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListUsersRequestValid = ListUsersRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUsersRequest.
+ * Use `create(ListUsersRequestSchema)` to create a new message.
+ */
+export declare const ListUsersRequestSchema: GenMessage<ListUsersRequest, {validType: ListUsersRequestValid}>;
+
+/**
+ * ListUsersResponse is the response from the ListUsers function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUsersResponse
+ */
+export declare type ListUsersResponse = Message<"qdrant.cloud.iam.v1.ListUsersResponse"> & {
+  /**
+   * The actual users in this list.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.User items = 1;
+   */
+  items: User[];
+};
+
+export declare type ListUsersResponseValid = ListUsersResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUsersResponse.
+ * Use `create(ListUsersResponseSchema)` to create a new message.
+ */
+export declare const ListUsersResponseSchema: GenMessage<ListUsersResponse, {validType: ListUsersResponseValid}>;
+
+/**
  * UpdateUserRequest is the request for the UpdateUser function.
  *
  * @generated from message qdrant.cloud.iam.v1.UpdateUserRequest
@@ -678,6 +723,60 @@ export declare type ListUserRolesResponseValid = ListUserRolesResponse;
 export declare const ListUserRolesResponseSchema: GenMessage<ListUserRolesResponse, {validType: ListUserRolesResponseValid}>;
 
 /**
+ * ListRoleUsersRequest is the request for the ListRoleUsers function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListRoleUsersRequest
+ */
+export declare type ListRoleUsersRequest = Message<"qdrant.cloud.iam.v1.ListRoleUsersRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the role (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string role_id = 2;
+   */
+  roleId: string;
+};
+
+export declare type ListRoleUsersRequestValid = ListRoleUsersRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListRoleUsersRequest.
+ * Use `create(ListRoleUsersRequestSchema)` to create a new message.
+ */
+export declare const ListRoleUsersRequestSchema: GenMessage<ListRoleUsersRequest, {validType: ListRoleUsersRequestValid}>;
+
+/**
+ * ListRoleUsersResponse is the response from the ListRoleUsers function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListRoleUsersResponse
+ */
+export declare type ListRoleUsersResponse = Message<"qdrant.cloud.iam.v1.ListRoleUsersResponse"> & {
+  /**
+   * The users assigned to the role.
+   * If the role has no users, this list will be empty.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.User users = 1;
+   */
+  users: User[];
+};
+
+export declare type ListRoleUsersResponseValid = ListRoleUsersResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListRoleUsersResponse.
+ * Use `create(ListRoleUsersResponseSchema)` to create a new message.
+ */
+export declare const ListRoleUsersResponseSchema: GenMessage<ListRoleUsersResponse, {validType: ListRoleUsersResponseValid}>;
+
+/**
  * AssignUserRolesRequest is the request for the AssignUserRoles function
  *
  * @generated from message qdrant.cloud.iam.v1.AssignUserRolesRequest
@@ -1187,6 +1286,18 @@ export declare const IAMService: GenService<{
     output: typeof GetAuthenticatedUserResponseSchema;
   },
   /**
+   * List users in the account identified by the given ID.
+   * Required permissions:
+   * - read:users
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUsers
+   */
+  listUsers: {
+    methodKind: "unary";
+    input: typeof ListUsersRequestSchema;
+    output: typeof ListUsersResponseSchema;
+  },
+  /**
    * Updates the user identified by the given ID.
    * Required permissions:
    * - write:user
@@ -1321,6 +1432,18 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof ListUserRolesRequestSchema;
     output: typeof ListUserRolesResponseSchema;
+  },
+  /**
+   * List users for the role identified by the given ID.
+   * Required permissions:
+   * - read:roles
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListRoleUsers
+   */
+  listRoleUsers: {
+    methodKind: "unary";
+    input: typeof ListRoleUsersRequestSchema;
+    output: typeof ListRoleUsersResponseSchema;
   },
   /**
    * Assigns the provided roles to the user in the account identified by the given ID.

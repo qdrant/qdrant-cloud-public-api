@@ -20,6 +20,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
                 _registered_method=True)
+        self.ListUsers = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/ListUsers',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.FromString,
+                _registered_method=True)
         self.UpdateUser = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
@@ -75,6 +80,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesResponse.FromString,
                 _registered_method=True)
+        self.ListRoleUsers = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/ListRoleUsers',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersResponse.FromString,
+                _registered_method=True)
         self.AssignUserRoles = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/AssignUserRoles',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesRequest.SerializeToString,
@@ -95,6 +105,15 @@ class IAMServiceServicer(object):
         """Gets the authenticated user.
         Required permissions:
         - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUsers(self, request, context):
+        """List users in the account identified by the given ID.
+        Required permissions:
+        - read:users
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -203,6 +222,15 @@ class IAMServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListRoleUsers(self, request, context):
+        """List users for the role identified by the given ID.
+        Required permissions:
+        - read:roles
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def AssignUserRoles(self, request, context):
         """Assigns the provided roles to the user in the account identified by the given ID.
         Required permissions:
@@ -228,6 +256,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.GetAuthenticatedUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.SerializeToString,
+            ),
+            'ListUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUsers,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.SerializeToString,
             ),
             'UpdateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateUser,
@@ -284,6 +317,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesResponse.SerializeToString,
             ),
+            'ListRoleUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListRoleUsers,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersResponse.SerializeToString,
+            ),
             'AssignUserRoles': grpc.unary_unary_rpc_method_handler(
                     servicer.AssignUserRoles,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.AssignUserRolesRequest.FromString,
@@ -323,6 +361,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetAuthenticatedUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/ListUsers',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -620,6 +685,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/ListUserRoles',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserRolesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListRoleUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/ListRoleUsers',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListRoleUsersResponse.FromString,
             options,
             channel_credentials,
             insecure,

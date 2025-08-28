@@ -77,6 +77,18 @@ class GetAuthenticatedUserResponse(_message.Message):
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
+class ListUsersRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListUsersResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[User]
+    def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
+
 class UpdateUserRequest(_message.Message):
     __slots__ = ("user",)
     USER_FIELD_NUMBER: _ClassVar[int]
@@ -212,6 +224,20 @@ class ListUserRolesResponse(_message.Message):
     ROLES_FIELD_NUMBER: _ClassVar[int]
     roles: _containers.RepeatedCompositeFieldContainer[Role]
     def __init__(self, roles: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
+
+class ListRoleUsersRequest(_message.Message):
+    __slots__ = ("account_id", "role_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ROLE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    role_id: str
+    def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
+
+class ListRoleUsersResponse(_message.Message):
+    __slots__ = ("users",)
+    USERS_FIELD_NUMBER: _ClassVar[int]
+    users: _containers.RepeatedCompositeFieldContainer[User]
+    def __init__(self, users: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
 class AssignUserRolesRequest(_message.Message):
     __slots__ = ("account_id", "user_id", "role_ids_to_add", "role_ids_to_delete")
