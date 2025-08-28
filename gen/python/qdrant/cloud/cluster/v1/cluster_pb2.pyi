@@ -78,6 +78,14 @@ class ClusterPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_PHASE_FAILED_TO_SYNC: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_NOT_FOUND: _ClassVar[ClusterPhase]
 
+class ClusterNodeState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_NODE_STATE_UNSPECIFIED: _ClassVar[ClusterNodeState]
+    CLUSTER_NODE_STATE_STARTING: _ClassVar[ClusterNodeState]
+    CLUSTER_NODE_STATE_HEALTHY: _ClassVar[ClusterNodeState]
+    CLUSTER_NODE_STATE_UNHEALTHY: _ClassVar[ClusterNodeState]
+    CLUSTER_NODE_STATE_SUSPENDED: _ClassVar[ClusterNodeState]
+
 class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: _ClassVar[ClusterScalabilityStatus]
@@ -126,6 +134,11 @@ CLUSTER_PHASE_RECOVERY_MODE: ClusterPhase
 CLUSTER_PHASE_MANUAL_MAINTENANCE: ClusterPhase
 CLUSTER_PHASE_FAILED_TO_SYNC: ClusterPhase
 CLUSTER_PHASE_NOT_FOUND: ClusterPhase
+CLUSTER_NODE_STATE_UNSPECIFIED: ClusterNodeState
+CLUSTER_NODE_STATE_STARTING: ClusterNodeState
+CLUSTER_NODE_STATE_HEALTHY: ClusterNodeState
+CLUSTER_NODE_STATE_UNHEALTHY: ClusterNodeState
+CLUSTER_NODE_STATE_SUSPENDED: ClusterNodeState
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
@@ -397,7 +410,7 @@ class Toleration(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[_Union[TolerationOperator, str]] = ..., value: _Optional[str] = ..., effect: _Optional[_Union[TolerationEffect, str]] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
 
 class ClusterState(_message.Message):
-    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info")
+    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info", "nodes")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     NODES_UP_FIELD_NUMBER: _ClassVar[int]
     RESTARTED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -406,6 +419,7 @@ class ClusterState(_message.Message):
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     RESOURCES_FIELD_NUMBER: _ClassVar[int]
     SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
+    NODES_FIELD_NUMBER: _ClassVar[int]
     version: str
     nodes_up: int
     restarted_at: _timestamp_pb2.Timestamp
@@ -414,7 +428,22 @@ class ClusterState(_message.Message):
     endpoint: ClusterEndpoint
     resources: ClusterNodeResourcesSummary
     scalability_info: ClusterScalabilityInfo
-    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
+    nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeInfo]
+    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ...) -> None: ...
+
+class ClusterNodeInfo(_message.Message):
+    __slots__ = ("name", "started_at", "version", "endpoint", "state")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    STARTED_AT_FIELD_NUMBER: _ClassVar[int]
+    VERSION_FIELD_NUMBER: _ClassVar[int]
+    ENDPOINT_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    started_at: _timestamp_pb2.Timestamp
+    version: str
+    endpoint: ClusterEndpoint
+    state: ClusterNodeState
+    def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")

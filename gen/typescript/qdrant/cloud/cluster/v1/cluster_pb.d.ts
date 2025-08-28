@@ -1325,6 +1325,13 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
    * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8;
    */
   scalabilityInfo?: ClusterScalabilityInfo;
+
+  /**
+   * List of nodes in the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeInfo nodes = 9;
+   */
+  nodes: ClusterNodeInfo[];
 };
 
 /**
@@ -1390,6 +1397,13 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
    * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8;
    */
   scalabilityInfo: ClusterScalabilityInfoValid;
+
+  /**
+   * List of nodes in the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeInfo nodes = 9;
+   */
+  nodes: ClusterNodeInfoValid[];
 };
 
 /**
@@ -1399,7 +1413,58 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
 export declare const ClusterStateSchema: GenMessage<ClusterState, {validType: ClusterStateValid}>;
 
 /**
- * Endpoint information to access the qdrant cluster (aka database).
+ * ClusterNodeInfo represents a node in a cluster.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterNodeInfo
+ */
+export declare type ClusterNodeInfo = Message<"qdrant.cloud.cluster.v1.ClusterNodeInfo"> & {
+  /**
+   * Name specifies the name of the node.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * StartedAt specifies the time when the node started.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 2;
+   */
+  startedAt?: Timestamp;
+
+  /**
+   * Version specifies the version of Qdrant running on the node.
+   *
+   * @generated from field: string version = 3;
+   */
+  version: string;
+
+  /**
+   * Endpoint specific to this node.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterEndpoint endpoint = 4;
+   */
+  endpoint?: ClusterEndpoint;
+
+  /**
+   * State of the node.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeState state = 10;
+   */
+  state: ClusterNodeState;
+};
+
+export declare type ClusterNodeInfoValid = ClusterNodeInfo;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterNodeInfo.
+ * Use `create(ClusterNodeInfoSchema)` to create a new message.
+ */
+export declare const ClusterNodeInfoSchema: GenMessage<ClusterNodeInfo, {validType: ClusterNodeInfoValid}>;
+
+/**
+ * Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
  * All fields in this message are a read-only field.
  *
  * @generated from message qdrant.cloud.cluster.v1.ClusterEndpoint
@@ -2105,6 +2170,53 @@ export enum ClusterPhase {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterPhase.
  */
 export declare const ClusterPhaseSchema: GenEnum<ClusterPhase>;
+
+/**
+ * ClusterNodeState represents the state of a cluster node.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeState
+ */
+export enum ClusterNodeState {
+  /**
+   * The state is unspecified.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The node is starting.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_STARTING = 1;
+   */
+  STARTING = 1,
+
+  /**
+   * The node is healthy.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_HEALTHY = 2;
+   */
+  HEALTHY = 2,
+
+  /**
+   * The node is unhealthy.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_UNHEALTHY = 3;
+   */
+  UNHEALTHY = 3,
+
+  /**
+   * The node is suspended.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_SUSPENDED = 4;
+   */
+  SUSPENDED = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeState.
+ */
+export declare const ClusterNodeStateSchema: GenEnum<ClusterNodeState>;
 
 /**
  * ClusterScalabilityStatus defines the scalability states of a cluster.
