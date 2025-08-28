@@ -13,6 +13,14 @@ import { IAMService } from "./iam_pb.js";
  */
 export const getAuthenticatedUser: typeof IAMService["method"]["getAuthenticatedUser"];
 /**
+ * List users in the account identified by the given ID.
+ * Required permissions:
+ * - read:users
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUsers
+ */
+export const listUsers: typeof IAMService["method"]["listUsers"];
+/**
  * Updates the user identified by the given ID.
  * Required permissions:
  * - write:user
@@ -104,6 +112,14 @@ export const listEffectivePermissions: typeof IAMService["method"]["listEffectiv
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUserRoles
  */
 export const listUserRoles: typeof IAMService["method"]["listUserRoles"];
+/**
+ * List users for the role identified by the given ID.
+ * Required permissions:
+ * - read:roles
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListRoleUsers
+ */
+export const listRoleUsers: typeof IAMService["method"]["listRoleUsers"];
 /**
  * Assigns the provided roles to the user in the account identified by the given ID.
  * Required permissions:
