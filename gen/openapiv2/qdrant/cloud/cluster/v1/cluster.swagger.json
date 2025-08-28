@@ -781,11 +781,11 @@
         "startedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "StartedAt specifies the time when the node started.\n\nTODO: add validation: [(buf.validate.field).required = true];"
+          "description": "StartedAt specifies the time when the node started."
         },
         "version": {
           "type": "string",
-          "description": "Version specifies the version of Qdrant running on the node.\n\nTODO: add validation [(buf.validate.field).string.min_len = 1];"
+          "description": "Version specifies the version of Qdrant running on the node."
         },
         "endpoint": {
           "$ref": "#/definitions/v1ClusterEndpoint",
@@ -796,7 +796,7 @@
           "description": "State of the node."
         }
       },
-      "description": "ClusterNodeInfo represents a node in a cluster."
+      "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."
     },
     "v1ClusterNodeResources": {
       "type": "object",
@@ -853,10 +853,11 @@
         "CLUSTER_NODE_STATE_UNSPECIFIED",
         "CLUSTER_NODE_STATE_STARTING",
         "CLUSTER_NODE_STATE_HEALTHY",
-        "CLUSTER_NODE_STATE_UNHEALTHY"
+        "CLUSTER_NODE_STATE_UNHEALTHY",
+        "CLUSTER_NODE_STATE_SUSPENDED"
       ],
       "default": "CLUSTER_NODE_STATE_UNSPECIFIED",
-      "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n\nTODO Do we need this: CLUSTER_NODE_STATE_SUSPENDED = 4;"
+      "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended."
     },
     "v1ClusterPhase": {
       "type": "string",

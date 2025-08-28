@@ -1414,6 +1414,7 @@ export declare const ClusterStateSchema: GenMessage<ClusterState, {validType: Cl
 
 /**
  * ClusterNodeInfo represents a node in a cluster.
+ * All fields in this message are read-only.
  *
  * @generated from message qdrant.cloud.cluster.v1.ClusterNodeInfo
  */
@@ -1428,16 +1429,12 @@ export declare type ClusterNodeInfo = Message<"qdrant.cloud.cluster.v1.ClusterNo
   /**
    * StartedAt specifies the time when the node started.
    *
-   * TODO: add validation: [(buf.validate.field).required = true];
-   *
    * @generated from field: google.protobuf.Timestamp started_at = 2;
    */
   startedAt?: Timestamp;
 
   /**
    * Version specifies the version of Qdrant running on the node.
-   *
-   * TODO: add validation [(buf.validate.field).string.min_len = 1];
    *
    * @generated from field: string version = 3;
    */
@@ -2204,11 +2201,16 @@ export enum ClusterNodeState {
   /**
    * The node is unhealthy.
    *
-   * TODO Do we need this: CLUSTER_NODE_STATE_SUSPENDED = 4;
-   *
    * @generated from enum value: CLUSTER_NODE_STATE_UNHEALTHY = 3;
    */
   UNHEALTHY = 3,
+
+  /**
+   * The node is suspended.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_SUSPENDED = 4;
+   */
+  SUSPENDED = 4,
 }
 
 /**

@@ -499,7 +499,9 @@ const (
 	// The node is healthy.
 	ClusterNodeState_CLUSTER_NODE_STATE_HEALTHY ClusterNodeState = 2
 	// The node is unhealthy.
-	ClusterNodeState_CLUSTER_NODE_STATE_UNHEALTHY ClusterNodeState = 3 // TODO Do we need this: CLUSTER_NODE_STATE_SUSPENDED = 4;
+	ClusterNodeState_CLUSTER_NODE_STATE_UNHEALTHY ClusterNodeState = 3
+	// The node is suspended.
+	ClusterNodeState_CLUSTER_NODE_STATE_SUSPENDED ClusterNodeState = 4
 )
 
 // Enum value maps for ClusterNodeState.
@@ -509,12 +511,14 @@ var (
 		1: "CLUSTER_NODE_STATE_STARTING",
 		2: "CLUSTER_NODE_STATE_HEALTHY",
 		3: "CLUSTER_NODE_STATE_UNHEALTHY",
+		4: "CLUSTER_NODE_STATE_SUSPENDED",
 	}
 	ClusterNodeState_value = map[string]int32{
 		"CLUSTER_NODE_STATE_UNSPECIFIED": 0,
 		"CLUSTER_NODE_STATE_STARTING":    1,
 		"CLUSTER_NODE_STATE_HEALTHY":     2,
 		"CLUSTER_NODE_STATE_UNHEALTHY":   3,
+		"CLUSTER_NODE_STATE_SUSPENDED":   4,
 	}
 )
 
@@ -2578,14 +2582,15 @@ func (x *ClusterState) GetNodes() []*ClusterNodeInfo {
 }
 
 // ClusterNodeInfo represents a node in a cluster.
+// All fields in this message are read-only.
 type ClusterNodeInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name specifies the name of the node.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// StartedAt specifies the time when the node started.
-	StartedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"` // TODO: add validation: [(buf.validate.field).required = true];
+	StartedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	// Version specifies the version of Qdrant running on the node.
-	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"` // TODO: add validation [(buf.validate.field).string.min_len = 1];
+	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	// Endpoint specific to this node.
 	Endpoint *ClusterEndpoint `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// State of the node.
@@ -3432,12 +3437,13 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1bCLUSTER_PHASE_RECOVERY_MODE\x10\x0e\x12$\n" +
 	" CLUSTER_PHASE_MANUAL_MAINTENANCE\x10\x0f\x12 \n" +
 	"\x1cCLUSTER_PHASE_FAILED_TO_SYNC\x10\x10\x12\x1b\n" +
-	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11*\x99\x01\n" +
+	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11*\xbb\x01\n" +
 	"\x10ClusterNodeState\x12\"\n" +
 	"\x1eCLUSTER_NODE_STATE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_NODE_STATE_STARTING\x10\x01\x12\x1e\n" +
 	"\x1aCLUSTER_NODE_STATE_HEALTHY\x10\x02\x12 \n" +
-	"\x1cCLUSTER_NODE_STATE_UNHEALTHY\x10\x03*\x9c\x01\n" +
+	"\x1cCLUSTER_NODE_STATE_UNHEALTHY\x10\x03\x12 \n" +
+	"\x1cCLUSTER_NODE_STATE_SUSPENDED\x10\x04*\x9c\x01\n" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +

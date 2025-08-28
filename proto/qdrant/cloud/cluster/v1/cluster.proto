@@ -748,13 +748,14 @@ message ClusterState {
 }
 
 // ClusterNodeInfo represents a node in a cluster.
+// All fields in this message are read-only.
 message ClusterNodeInfo {
   // Name specifies the name of the node.
   string name = 1 [(buf.validate.field).string.min_len = 1];
   // StartedAt specifies the time when the node started.
-  google.protobuf.Timestamp started_at = 2; // TODO: add validation: [(buf.validate.field).required = true];
+  google.protobuf.Timestamp started_at = 2;
   // Version specifies the version of Qdrant running on the node.
-  string version = 3; // TODO: add validation [(buf.validate.field).string.min_len = 1];
+  string version = 3;
   // Endpoint specific to this node.
   ClusterEndpoint endpoint = 4;
   // State of the node.
@@ -771,7 +772,8 @@ enum ClusterNodeState {
   CLUSTER_NODE_STATE_HEALTHY = 2;
   // The node is unhealthy.
   CLUSTER_NODE_STATE_UNHEALTHY = 3;
-  // TODO Do we need this: CLUSTER_NODE_STATE_SUSPENDED = 4;
+  // The node is suspended.
+  CLUSTER_NODE_STATE_SUSPENDED = 4;
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
