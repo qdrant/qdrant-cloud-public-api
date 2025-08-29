@@ -119,8 +119,6 @@ service IAMService {
   rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {
     // permissions
     option (common.v1.permissions) = "read:roles";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
   }
