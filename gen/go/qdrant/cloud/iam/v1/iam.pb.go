@@ -2269,7 +2269,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xcc\x1a\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xb9\x1a\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
@@ -2285,9 +2285,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\n" +
 	"read:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n" +
 	"\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\xb0\x01\n" +
-	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"Z\x8a\xb5\x18\n" +
-	"read:roles\x92\xb5\x18\x0frole.account_id\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\x8e\x02\n" +
+	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\x9d\x01\n" +
+	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"G\x8a\xb5\x18\n" +
+	"read:roles\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\x8e\x02\n" +
 	"\n" +
 	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xae\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xca\xf3\x18L\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\x96\x02\n" +
 	"\n" +
