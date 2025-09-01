@@ -764,7 +764,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   databaseConfiguration?: DatabaseConfiguration;
 
   /**
-   * The node selector for this cluster in a hybrid cloud.
+   * The node selector for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue node_selector = 8;
@@ -772,7 +772,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   nodeSelector: KeyValue[];
 
   /**
-   * List of tolerations for this cluster in a hybrid cloud.
+   * List of tolerations for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
    * @generated from field: repeated qdrant.cloud.cluster.v1.Toleration tolerations = 9;
@@ -780,7 +780,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   tolerations: Toleration[];
 
   /**
-   * List of annotations for this cluster in a hybrid cloud.
+   * List of annotations for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue annotations = 10;
@@ -795,6 +795,30 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: repeated string allowed_ip_source_ranges = 11;
    */
   allowedIpSourceRanges: string[];
+
+  /**
+   * The type of service to use for this cluster in a hybrid cloud environment.
+   * It is ignored for managed cloud clusters. This is an optional field, default is Cluster IP.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterServiceType service_type = 12;
+   */
+  serviceType?: ClusterServiceType;
+
+  /**
+   * List of annotations applied to the service of this cluster in a hybrid cloud environment.
+   * It is ignored for managed cloud clusters. This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue service_annotations = 13;
+   */
+  serviceAnnotations: KeyValue[];
+
+  /**
+   * List of labels applied to the pods of this cluster in a hybrid cloud environment.
+   * It is ignored for managed cloud clusters. This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue pod_labels = 14;
+   */
+  podLabels: KeyValue[];
 
   /**
    * The percentage of CPU resources reserved for system components
@@ -1782,6 +1806,47 @@ export declare type CreateClusterFromBackupResponseValid = Message<"qdrant.cloud
  * Use `create(CreateClusterFromBackupResponseSchema)` to create a new message.
  */
 export declare const CreateClusterFromBackupResponseSchema: GenMessage<CreateClusterFromBackupResponse, {validType: CreateClusterFromBackupResponseValid}>;
+
+/**
+ * ClusterServiceType defines the type of service to use for the cluster.
+ * See: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterServiceType
+ */
+export enum ClusterServiceType {
+  /**
+   * Service type is unspecified.
+   *
+   * @generated from enum value: CLUSTER_SERVICE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Use a service configured with type ClusterIP.
+   *
+   * @generated from enum value: CLUSTER_SERVICE_TYPE_CLUSTER_IP = 1;
+   */
+  CLUSTER_IP = 1,
+
+  /**
+   * Use a service configured with type NodePort.
+   *
+   * @generated from enum value: CLUSTER_SERVICE_TYPE_NODE_PORT = 2;
+   */
+  NODE_PORT = 2,
+
+  /**
+   * Use a service configured with type LoadBalancer.
+   *
+   * @generated from enum value: CLUSTER_SERVICE_TYPE_LOAD_BALANCER = 3;
+   */
+  LOAD_BALANCER = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterServiceType.
+ */
+export declare const ClusterServiceTypeSchema: GenEnum<ClusterServiceType>;
 
 /**
  * ClusterConfigurationGpuType defines GPU types available for clusters.

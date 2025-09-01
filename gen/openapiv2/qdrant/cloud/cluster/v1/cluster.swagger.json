@@ -669,7 +669,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "The node selector for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+          "title": "The node selector for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "tolerations": {
           "type": "array",
@@ -677,7 +677,7 @@
             "type": "object",
             "$ref": "#/definitions/cloudclusterv1Toleration"
           },
-          "title": "List of tolerations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+          "title": "List of tolerations for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "annotations": {
           "type": "array",
@@ -685,7 +685,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "List of annotations for this cluster in a hybrid cloud.\nIt is ignored for managed cloud clusters. This is an optional field"
+          "title": "List of annotations for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "allowedIpSourceRanges": {
           "type": "array",
@@ -693,6 +693,26 @@
             "type": "string"
           },
           "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. This is an optional field\nThe CIDRs supports IPv4 only."
+        },
+        "serviceType": {
+          "$ref": "#/definitions/v1ClusterServiceType",
+          "description": "The type of service to use for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field, default is Cluster IP."
+        },
+        "serviceAnnotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of annotations applied to the service of this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "podLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels applied to the pods of this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
         },
         "reservedCpuPercentage": {
           "type": "integer",
@@ -907,6 +927,18 @@
       ],
       "default": "CLUSTER_SCALABILITY_STATUS_UNSPECIFIED",
       "description": "ClusterScalabilityStatus defines the scalability states of a cluster.\n\n - CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: Scalability status is unspecified.\n - CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: The cluster is not scalable.\n - CLUSTER_SCALABILITY_STATUS_SCALABLE: The cluster supports scaling operations."
+    },
+    "v1ClusterServiceType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_SERVICE_TYPE_UNSPECIFIED",
+        "CLUSTER_SERVICE_TYPE_CLUSTER_IP",
+        "CLUSTER_SERVICE_TYPE_NODE_PORT",
+        "CLUSTER_SERVICE_TYPE_LOAD_BALANCER"
+      ],
+      "default": "CLUSTER_SERVICE_TYPE_UNSPECIFIED",
+      "description": "- CLUSTER_SERVICE_TYPE_UNSPECIFIED: Service type is unspecified.\n - CLUSTER_SERVICE_TYPE_CLUSTER_IP: Use a service configured with type ClusterIP.\n - CLUSTER_SERVICE_TYPE_NODE_PORT: Use a service configured with type NodePort.\n - CLUSTER_SERVICE_TYPE_LOAD_BALANCER: Use a service configured with type LoadBalancer.",
+      "title": "ClusterServiceType defines the type of service to use for the cluster.\nSee: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec"
     },
     "v1ClusterState": {
       "type": "object",

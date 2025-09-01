@@ -390,6 +390,19 @@ message Cluster {
   ClusterState state = 100;
 }
 
+// ClusterServiceType defines the type of service to use for the cluster.
+// See: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec
+enum ClusterServiceType {
+  // Service type is unspecified.
+  CLUSTER_SERVICE_TYPE_UNSPECIFIED = 0;
+  // Use a service configured with type ClusterIP.
+  CLUSTER_SERVICE_TYPE_CLUSTER_IP = 1;
+  // Use a service configured with type NodePort.
+  CLUSTER_SERVICE_TYPE_NODE_PORT = 2;
+  // Use a service configured with type LoadBalancer.
+  CLUSTER_SERVICE_TYPE_LOAD_BALANCER = 3;
+}
+
 // ClusterConfigurationGpuType defines GPU types available for clusters.
 enum ClusterConfigurationGpuType {
   // No GPU is configured.
@@ -450,13 +463,13 @@ message ClusterConfiguration {
   // Configuration to setup a qdrant database.
   // This is an optional field.
   optional DatabaseConfiguration database_configuration = 7;
-  // The node selector for this cluster in a hybrid cloud.
+  // The node selector for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue node_selector = 8 [(buf.validate.field).repeated = {max_items: 10}];
-  // List of tolerations for this cluster in a hybrid cloud.
+  // List of tolerations for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated Toleration tolerations = 9 [(buf.validate.field).repeated = {max_items: 10}];
-  // List of annotations for this cluster in a hybrid cloud.
+  // List of annotations for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue annotations = 10 [(buf.validate.field).repeated = {max_items: 10}];
   // List of allowed IP source ranges for this cluster.
@@ -468,6 +481,18 @@ message ClusterConfiguration {
       string: {ipv4_prefix: true}
     }
   }];
+  // The type of service to use for this cluster in a hybrid cloud environment.
+  // It is ignored for managed cloud clusters. This is an optional field, default is Cluster IP.
+  optional ClusterServiceType service_type = 12 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // List of annotations applied to the service of this cluster in a hybrid cloud environment.
+  // It is ignored for managed cloud clusters. This is an optional field
+  repeated common.v1.KeyValue service_annotations = 13 [(buf.validate.field).repeated = {max_items: 10}];
+  // List of labels applied to the pods of this cluster in a hybrid cloud environment.
+  // It is ignored for managed cloud clusters. This is an optional field
+  repeated common.v1.KeyValue pod_labels = 14 [(buf.validate.field).repeated = {max_items: 10}];
   // The percentage of CPU resources reserved for system components
   // This is an optional field, default is 0.
   // Number between 0..80
