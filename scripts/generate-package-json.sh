@@ -105,25 +105,62 @@ while read -r dts_file; do
         done
     fi
     
+    # Count files in the same directory to determine if we need specific filenames
+    dir_path=$(dirname "$dts_file")
+    file_count=$(find "$dir_path" -name "*.d.ts" ! -name "*_connectquery.d.ts" | wc -l | tr -d ' ')
+
+    # Extract base filename without _pb suffix for cleaner export names
+    base_filename=$(echo "$filename" | sed 's/_pb$//')
+
     # Generate export key and sort prefix
     if [ -z "$submodules" ]; then
         # Direct service: service/version/file (e.g., auth/v1/auth_pb.d.ts)
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$service/$version/connect-query"
-            sort_prefix="$service-$version-1"
+            if [ "$file_count" -gt 1 ]; then
+                # Multiple files: include service name in connect-query path
+                service_name=$(echo "$filename" | sed 's/-.*_connectquery$//')
+                export_key="$service/$version/$service_name/connect-query"
+                sort_prefix="$service-$version-$service_name-1"
+            else
+                # Single file: keep existing behavior
+                export_key="$service/$version/connect-query"
+                sort_prefix="$service-$version-1"
+            fi
         else
-            export_key="$service/$version"
-            sort_prefix="$service-$version-0"
+            if [ "$file_count" -gt 1 ]; then
+                # Multiple proto files: include filename for disambiguation
+                export_key="$service/$version/$base_filename"
+                sort_prefix="$service-$version-$base_filename-0"
+            else
+                # Single file: keep existing behavior
+                export_key="$service/$version"
+                sort_prefix="$service-$version-0"
+            fi
         fi
     else
         # Has submodules: service/submodule(s)/version/file (e.g., cluster/auth/v1/file.d.ts, serverless/collection/auth/v1/file.d.ts)
         submodules_normalized=$(echo "$submodules" | tr '/' '-')
         if echo "$filename" | grep -q "_connectquery$"; then
-            export_key="$service/$submodules/$version/connect-query"
-            sort_prefix="$service-$version-$submodules_normalized-1"
+            if [ "$file_count" -gt 1 ]; then
+                # Multiple files: include service name in connect-query path
+                service_name=$(echo "$filename" | sed 's/-.*_connectquery$//')
+                export_key="$service/$submodules/$version/$service_name/connect-query"
+                sort_prefix="$service-$version-$submodules_normalized-$service_name-1"
+            else
+                # Single file: keep existing behavior
+                export_key="$service/$submodules/$version/connect-query"
+                sort_prefix="$service-$version-$submodules_normalized-1"
+            fi
         else
-            export_key="$service/$submodules/$version"
-            sort_prefix="$service-$version-$submodules_normalized-0"
+            if [ "$file_count" -gt 1 ]; then
+                # Multiple proto files: include filename for disambiguation
+                export_key="$service/$submodules/$version/$base_filename"
+                sort_prefix="$service-$version-$submodules_normalized-$base_filename-0"
+            else
+                # Single file: keep existing behavior
+                export_key="$service/$submodules/$version"
+                sort_prefix="$service-$version-$submodules_normalized-0"
+            fi
         fi
     fi
     
