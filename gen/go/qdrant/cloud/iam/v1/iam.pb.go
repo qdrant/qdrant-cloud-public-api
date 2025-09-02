@@ -815,8 +815,8 @@ func (x *ListPermissionsRequest) GetAccountId() string {
 // ListPermissionsResponse is the response from the ListPermissions function
 type ListPermissionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The permissions know by the system.
-	Permissions   []string `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// The permissions known by the system.
+	Permissions   []*Permission `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -851,7 +851,7 @@ func (*ListPermissionsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ListPermissionsResponse) GetPermissions() []string {
+func (x *ListPermissionsResponse) GetPermissions() []*Permission {
 	if x != nil {
 		return x.Permissions
 	}
@@ -1383,7 +1383,7 @@ func (x *ListEffectivePermissionsRequest) GetAccountId() string {
 type ListEffectivePermissionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The effective permissions.
-	Permissions   []string `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	Permissions   []*Permission `protobuf:"bytes,1,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1418,7 +1418,7 @@ func (*ListEffectivePermissionsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *ListEffectivePermissionsResponse) GetPermissions() []string {
+func (x *ListEffectivePermissionsResponse) GetPermissions() []*Permission {
 	if x != nil {
 		return x.Permissions
 	}
@@ -1846,6 +1846,61 @@ func (x *User) GetDefaultAccountId() string {
 	return ""
 }
 
+// A Permission represents a permission in the Qdrant cloud.
+type Permission struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The permission value (e.g., "read:clusters").
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	// The category of the permission (e.g., "Cluster", "Account").
+	Category      string `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Permission) Reset() {
+	*x = Permission{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Permission) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Permission) ProtoMessage() {}
+
+func (x *Permission) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Permission.ProtoReflect.Descriptor instead.
+func (*Permission) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *Permission) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *Permission) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
 // A Role represents a role in the Qdrant cloud.
 type Role struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1869,7 +1924,7 @@ type Role struct {
 	// The role type.
 	RoleType RoleType `protobuf:"varint,7,opt,name=role_type,json=roleType,proto3,enum=qdrant.cloud.iam.v1.RoleType" json:"role_type,omitempty"`
 	// The permissions associated with this role.
-	Permissions []string `protobuf:"bytes,8,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	Permissions []*Permission `protobuf:"bytes,8,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// The sub-type of the system role.
 	// This field is set for system role only.
 	SubType       *SystemRoleSubType `protobuf:"varint,9,opt,name=sub_type,json=subType,proto3,enum=qdrant.cloud.iam.v1.SystemRoleSubType,oneof" json:"sub_type,omitempty"`
@@ -1879,7 +1934,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1891,7 +1946,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1904,7 +1959,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{31}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Role) GetId() string {
@@ -1956,7 +2011,7 @@ func (x *Role) GetRoleType() RoleType {
 	return RoleType_ROLE_TYPE_UNSPECIFIED
 }
 
-func (x *Role) GetPermissions() []string {
+func (x *Role) GetPermissions() []*Permission {
 	if x != nil {
 		return x.Permissions
 	}
@@ -1979,7 +2034,7 @@ type LogoutUserRequest struct {
 
 func (x *LogoutUserRequest) Reset() {
 	*x = LogoutUserRequest{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1991,7 +2046,7 @@ func (x *LogoutUserRequest) String() string {
 func (*LogoutUserRequest) ProtoMessage() {}
 
 func (x *LogoutUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2004,7 +2059,7 @@ func (x *LogoutUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutUserRequest.ProtoReflect.Descriptor instead.
 func (*LogoutUserRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{32}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{33}
 }
 
 // LogoutUserResponse is the response from the Logout function
@@ -2016,7 +2071,7 @@ type LogoutUserResponse struct {
 
 func (x *LogoutUserResponse) Reset() {
 	*x = LogoutUserResponse{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[33]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2028,7 +2083,7 @@ func (x *LogoutUserResponse) String() string {
 func (*LogoutUserResponse) ProtoMessage() {}
 
 func (x *LogoutUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[33]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,7 +2096,7 @@ func (x *LogoutUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutUserResponse.ProtoReflect.Descriptor instead.
 func (*LogoutUserResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{33}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{34}
 }
 
 // User Consent represents the consent status of a user for a specific legal document.
@@ -2064,7 +2119,7 @@ type UserConsent struct {
 
 func (x *UserConsent) Reset() {
 	*x = UserConsent{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[34]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2076,7 +2131,7 @@ func (x *UserConsent) String() string {
 func (*UserConsent) ProtoMessage() {}
 
 func (x *UserConsent) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[34]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +2144,7 @@ func (x *UserConsent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserConsent.ProtoReflect.Descriptor instead.
 func (*UserConsent) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{34}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UserConsent) GetDocumentType() LegalDocumentType {
@@ -2150,9 +2205,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x19RecordUserConsentResponse\"A\n" +
 	"\x16ListPermissionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"I\n" +
-	"\x17ListPermissionsResponse\x12.\n" +
-	"\vpermissions\x18\x01 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions\";\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"f\n" +
+	"\x17ListPermissionsResponse\x12K\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x1f.qdrant.cloud.iam.v1.PermissionB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions\";\n" +
 	"\x10ListRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"D\n" +
@@ -2183,9 +2238,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x12DeleteRoleResponse\"J\n" +
 	"\x1fListEffectivePermissionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"R\n" +
-	" ListEffectivePermissionsResponse\x12.\n" +
-	"\vpermissions\x18\x01 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions\"b\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"o\n" +
+	" ListEffectivePermissionsResponse\x12K\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x1f.qdrant.cloud.iam.v1.PermissionB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions\"b\n" +
 	"\x14ListUserRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
@@ -2216,7 +2271,11 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
 	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId:\xdd\x01\xbaH\xd9\x01\x1a\xd6\x01\n" +
-	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\xf9\x06\n" +
+	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"P\n" +
+	"\n" +
+	"Permission\x12\x1d\n" +
+	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12#\n" +
+	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bcategory\"\x96\a\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2227,8 +2286,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12*\n" +
 	"\vdescription\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x02R\vdescription\x12F\n" +
 	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\broleType\x12.\n" +
-	"\vpermissions\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions\x12R\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\broleType\x12K\n" +
+	"\vpermissions\x18\b \x03(\v2\x1f.qdrant.cloud.iam.v1.PermissionB\b\xbaH\x05\x92\x01\x02\b\x01R\vpermissions\x12R\n" +
 	"\bsub_type\x18\t \x01(\x0e2&.qdrant.cloud.iam.v1.SystemRoleSubTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\asubType\x88\x01\x01:\x80\x03\xbaH\xfc\x02\x1a\xa0\x01\n" +
 	"\arole.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xd6\x01\n" +
@@ -2318,7 +2377,7 @@ func file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_iam_v1_iam_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_qdrant_cloud_iam_v1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_qdrant_cloud_iam_v1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_qdrant_cloud_iam_v1_iam_proto_goTypes = []any{
 	(UserStatus)(0),                          // 0: qdrant.cloud.iam.v1.UserStatus
 	(RoleType)(0),                            // 1: qdrant.cloud.iam.v1.RoleType
@@ -2356,11 +2415,12 @@ var file_qdrant_cloud_iam_v1_iam_proto_goTypes = []any{
 	(*AssignUserRolesRequest)(nil),           // 33: qdrant.cloud.iam.v1.AssignUserRolesRequest
 	(*AssignUserRolesResponse)(nil),          // 34: qdrant.cloud.iam.v1.AssignUserRolesResponse
 	(*User)(nil),                             // 35: qdrant.cloud.iam.v1.User
-	(*Role)(nil),                             // 36: qdrant.cloud.iam.v1.Role
-	(*LogoutUserRequest)(nil),                // 37: qdrant.cloud.iam.v1.LogoutUserRequest
-	(*LogoutUserResponse)(nil),               // 38: qdrant.cloud.iam.v1.LogoutUserResponse
-	(*UserConsent)(nil),                      // 39: qdrant.cloud.iam.v1.UserConsent
-	(*timestamppb.Timestamp)(nil),            // 40: google.protobuf.Timestamp
+	(*Permission)(nil),                       // 36: qdrant.cloud.iam.v1.Permission
+	(*Role)(nil),                             // 37: qdrant.cloud.iam.v1.Role
+	(*LogoutUserRequest)(nil),                // 38: qdrant.cloud.iam.v1.LogoutUserRequest
+	(*LogoutUserResponse)(nil),               // 39: qdrant.cloud.iam.v1.LogoutUserResponse
+	(*UserConsent)(nil),                      // 40: qdrant.cloud.iam.v1.UserConsent
+	(*timestamppb.Timestamp)(nil),            // 41: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_iam_v1_iam_proto_depIdxs = []int32{
 	35, // 0: qdrant.cloud.iam.v1.GetAuthenticatedUserResponse.user:type_name -> qdrant.cloud.iam.v1.User
@@ -2368,64 +2428,67 @@ var file_qdrant_cloud_iam_v1_iam_proto_depIdxs = []int32{
 	35, // 2: qdrant.cloud.iam.v1.UpdateUserRequest.user:type_name -> qdrant.cloud.iam.v1.User
 	35, // 3: qdrant.cloud.iam.v1.UpdateUserResponse.user:type_name -> qdrant.cloud.iam.v1.User
 	3,  // 4: qdrant.cloud.iam.v1.GetUserConsentRequest.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
-	39, // 5: qdrant.cloud.iam.v1.GetUserConsentResponse.user_consent:type_name -> qdrant.cloud.iam.v1.UserConsent
+	40, // 5: qdrant.cloud.iam.v1.GetUserConsentResponse.user_consent:type_name -> qdrant.cloud.iam.v1.UserConsent
 	3,  // 6: qdrant.cloud.iam.v1.RecordUserConsentRequest.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
 	4,  // 7: qdrant.cloud.iam.v1.RecordUserConsentRequest.status_update:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
-	36, // 8: qdrant.cloud.iam.v1.ListRolesResponse.items:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 9: qdrant.cloud.iam.v1.GetRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 10: qdrant.cloud.iam.v1.CreateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 11: qdrant.cloud.iam.v1.CreateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 12: qdrant.cloud.iam.v1.UpdateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 13: qdrant.cloud.iam.v1.UpdateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
-	36, // 14: qdrant.cloud.iam.v1.ListUserRolesResponse.roles:type_name -> qdrant.cloud.iam.v1.Role
-	35, // 15: qdrant.cloud.iam.v1.ListRoleUsersResponse.users:type_name -> qdrant.cloud.iam.v1.User
-	40, // 16: qdrant.cloud.iam.v1.User.created_at:type_name -> google.protobuf.Timestamp
-	40, // 17: qdrant.cloud.iam.v1.User.last_modified_at:type_name -> google.protobuf.Timestamp
-	0,  // 18: qdrant.cloud.iam.v1.User.status:type_name -> qdrant.cloud.iam.v1.UserStatus
-	40, // 19: qdrant.cloud.iam.v1.Role.created_at:type_name -> google.protobuf.Timestamp
-	40, // 20: qdrant.cloud.iam.v1.Role.last_modified_at:type_name -> google.protobuf.Timestamp
-	1,  // 21: qdrant.cloud.iam.v1.Role.role_type:type_name -> qdrant.cloud.iam.v1.RoleType
-	2,  // 22: qdrant.cloud.iam.v1.Role.sub_type:type_name -> qdrant.cloud.iam.v1.SystemRoleSubType
-	3,  // 23: qdrant.cloud.iam.v1.UserConsent.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
-	4,  // 24: qdrant.cloud.iam.v1.UserConsent.status:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
-	40, // 25: qdrant.cloud.iam.v1.UserConsent.last_modified_at:type_name -> google.protobuf.Timestamp
-	5,  // 26: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:input_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
-	7,  // 27: qdrant.cloud.iam.v1.IAMService.ListUsers:input_type -> qdrant.cloud.iam.v1.ListUsersRequest
-	9,  // 28: qdrant.cloud.iam.v1.IAMService.UpdateUser:input_type -> qdrant.cloud.iam.v1.UpdateUserRequest
-	11, // 29: qdrant.cloud.iam.v1.IAMService.GetUserConsent:input_type -> qdrant.cloud.iam.v1.GetUserConsentRequest
-	13, // 30: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:input_type -> qdrant.cloud.iam.v1.RecordUserConsentRequest
-	15, // 31: qdrant.cloud.iam.v1.IAMService.ListPermissions:input_type -> qdrant.cloud.iam.v1.ListPermissionsRequest
-	17, // 32: qdrant.cloud.iam.v1.IAMService.ListRoles:input_type -> qdrant.cloud.iam.v1.ListRolesRequest
-	19, // 33: qdrant.cloud.iam.v1.IAMService.GetRole:input_type -> qdrant.cloud.iam.v1.GetRoleRequest
-	21, // 34: qdrant.cloud.iam.v1.IAMService.CreateRole:input_type -> qdrant.cloud.iam.v1.CreateRoleRequest
-	23, // 35: qdrant.cloud.iam.v1.IAMService.UpdateRole:input_type -> qdrant.cloud.iam.v1.UpdateRoleRequest
-	25, // 36: qdrant.cloud.iam.v1.IAMService.DeleteRole:input_type -> qdrant.cloud.iam.v1.DeleteRoleRequest
-	27, // 37: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:input_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsRequest
-	29, // 38: qdrant.cloud.iam.v1.IAMService.ListUserRoles:input_type -> qdrant.cloud.iam.v1.ListUserRolesRequest
-	31, // 39: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:input_type -> qdrant.cloud.iam.v1.ListRoleUsersRequest
-	33, // 40: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:input_type -> qdrant.cloud.iam.v1.AssignUserRolesRequest
-	37, // 41: qdrant.cloud.iam.v1.IAMService.LogoutUser:input_type -> qdrant.cloud.iam.v1.LogoutUserRequest
-	6,  // 42: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:output_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserResponse
-	8,  // 43: qdrant.cloud.iam.v1.IAMService.ListUsers:output_type -> qdrant.cloud.iam.v1.ListUsersResponse
-	10, // 44: qdrant.cloud.iam.v1.IAMService.UpdateUser:output_type -> qdrant.cloud.iam.v1.UpdateUserResponse
-	12, // 45: qdrant.cloud.iam.v1.IAMService.GetUserConsent:output_type -> qdrant.cloud.iam.v1.GetUserConsentResponse
-	14, // 46: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:output_type -> qdrant.cloud.iam.v1.RecordUserConsentResponse
-	16, // 47: qdrant.cloud.iam.v1.IAMService.ListPermissions:output_type -> qdrant.cloud.iam.v1.ListPermissionsResponse
-	18, // 48: qdrant.cloud.iam.v1.IAMService.ListRoles:output_type -> qdrant.cloud.iam.v1.ListRolesResponse
-	20, // 49: qdrant.cloud.iam.v1.IAMService.GetRole:output_type -> qdrant.cloud.iam.v1.GetRoleResponse
-	22, // 50: qdrant.cloud.iam.v1.IAMService.CreateRole:output_type -> qdrant.cloud.iam.v1.CreateRoleResponse
-	24, // 51: qdrant.cloud.iam.v1.IAMService.UpdateRole:output_type -> qdrant.cloud.iam.v1.UpdateRoleResponse
-	26, // 52: qdrant.cloud.iam.v1.IAMService.DeleteRole:output_type -> qdrant.cloud.iam.v1.DeleteRoleResponse
-	28, // 53: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:output_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsResponse
-	30, // 54: qdrant.cloud.iam.v1.IAMService.ListUserRoles:output_type -> qdrant.cloud.iam.v1.ListUserRolesResponse
-	32, // 55: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:output_type -> qdrant.cloud.iam.v1.ListRoleUsersResponse
-	34, // 56: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:output_type -> qdrant.cloud.iam.v1.AssignUserRolesResponse
-	38, // 57: qdrant.cloud.iam.v1.IAMService.LogoutUser:output_type -> qdrant.cloud.iam.v1.LogoutUserResponse
-	42, // [42:58] is the sub-list for method output_type
-	26, // [26:42] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	36, // 8: qdrant.cloud.iam.v1.ListPermissionsResponse.permissions:type_name -> qdrant.cloud.iam.v1.Permission
+	37, // 9: qdrant.cloud.iam.v1.ListRolesResponse.items:type_name -> qdrant.cloud.iam.v1.Role
+	37, // 10: qdrant.cloud.iam.v1.GetRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
+	37, // 11: qdrant.cloud.iam.v1.CreateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
+	37, // 12: qdrant.cloud.iam.v1.CreateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
+	37, // 13: qdrant.cloud.iam.v1.UpdateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
+	37, // 14: qdrant.cloud.iam.v1.UpdateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
+	36, // 15: qdrant.cloud.iam.v1.ListEffectivePermissionsResponse.permissions:type_name -> qdrant.cloud.iam.v1.Permission
+	37, // 16: qdrant.cloud.iam.v1.ListUserRolesResponse.roles:type_name -> qdrant.cloud.iam.v1.Role
+	35, // 17: qdrant.cloud.iam.v1.ListRoleUsersResponse.users:type_name -> qdrant.cloud.iam.v1.User
+	41, // 18: qdrant.cloud.iam.v1.User.created_at:type_name -> google.protobuf.Timestamp
+	41, // 19: qdrant.cloud.iam.v1.User.last_modified_at:type_name -> google.protobuf.Timestamp
+	0,  // 20: qdrant.cloud.iam.v1.User.status:type_name -> qdrant.cloud.iam.v1.UserStatus
+	41, // 21: qdrant.cloud.iam.v1.Role.created_at:type_name -> google.protobuf.Timestamp
+	41, // 22: qdrant.cloud.iam.v1.Role.last_modified_at:type_name -> google.protobuf.Timestamp
+	1,  // 23: qdrant.cloud.iam.v1.Role.role_type:type_name -> qdrant.cloud.iam.v1.RoleType
+	36, // 24: qdrant.cloud.iam.v1.Role.permissions:type_name -> qdrant.cloud.iam.v1.Permission
+	2,  // 25: qdrant.cloud.iam.v1.Role.sub_type:type_name -> qdrant.cloud.iam.v1.SystemRoleSubType
+	3,  // 26: qdrant.cloud.iam.v1.UserConsent.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
+	4,  // 27: qdrant.cloud.iam.v1.UserConsent.status:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
+	41, // 28: qdrant.cloud.iam.v1.UserConsent.last_modified_at:type_name -> google.protobuf.Timestamp
+	5,  // 29: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:input_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
+	7,  // 30: qdrant.cloud.iam.v1.IAMService.ListUsers:input_type -> qdrant.cloud.iam.v1.ListUsersRequest
+	9,  // 31: qdrant.cloud.iam.v1.IAMService.UpdateUser:input_type -> qdrant.cloud.iam.v1.UpdateUserRequest
+	11, // 32: qdrant.cloud.iam.v1.IAMService.GetUserConsent:input_type -> qdrant.cloud.iam.v1.GetUserConsentRequest
+	13, // 33: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:input_type -> qdrant.cloud.iam.v1.RecordUserConsentRequest
+	15, // 34: qdrant.cloud.iam.v1.IAMService.ListPermissions:input_type -> qdrant.cloud.iam.v1.ListPermissionsRequest
+	17, // 35: qdrant.cloud.iam.v1.IAMService.ListRoles:input_type -> qdrant.cloud.iam.v1.ListRolesRequest
+	19, // 36: qdrant.cloud.iam.v1.IAMService.GetRole:input_type -> qdrant.cloud.iam.v1.GetRoleRequest
+	21, // 37: qdrant.cloud.iam.v1.IAMService.CreateRole:input_type -> qdrant.cloud.iam.v1.CreateRoleRequest
+	23, // 38: qdrant.cloud.iam.v1.IAMService.UpdateRole:input_type -> qdrant.cloud.iam.v1.UpdateRoleRequest
+	25, // 39: qdrant.cloud.iam.v1.IAMService.DeleteRole:input_type -> qdrant.cloud.iam.v1.DeleteRoleRequest
+	27, // 40: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:input_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsRequest
+	29, // 41: qdrant.cloud.iam.v1.IAMService.ListUserRoles:input_type -> qdrant.cloud.iam.v1.ListUserRolesRequest
+	31, // 42: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:input_type -> qdrant.cloud.iam.v1.ListRoleUsersRequest
+	33, // 43: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:input_type -> qdrant.cloud.iam.v1.AssignUserRolesRequest
+	38, // 44: qdrant.cloud.iam.v1.IAMService.LogoutUser:input_type -> qdrant.cloud.iam.v1.LogoutUserRequest
+	6,  // 45: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:output_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserResponse
+	8,  // 46: qdrant.cloud.iam.v1.IAMService.ListUsers:output_type -> qdrant.cloud.iam.v1.ListUsersResponse
+	10, // 47: qdrant.cloud.iam.v1.IAMService.UpdateUser:output_type -> qdrant.cloud.iam.v1.UpdateUserResponse
+	12, // 48: qdrant.cloud.iam.v1.IAMService.GetUserConsent:output_type -> qdrant.cloud.iam.v1.GetUserConsentResponse
+	14, // 49: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:output_type -> qdrant.cloud.iam.v1.RecordUserConsentResponse
+	16, // 50: qdrant.cloud.iam.v1.IAMService.ListPermissions:output_type -> qdrant.cloud.iam.v1.ListPermissionsResponse
+	18, // 51: qdrant.cloud.iam.v1.IAMService.ListRoles:output_type -> qdrant.cloud.iam.v1.ListRolesResponse
+	20, // 52: qdrant.cloud.iam.v1.IAMService.GetRole:output_type -> qdrant.cloud.iam.v1.GetRoleResponse
+	22, // 53: qdrant.cloud.iam.v1.IAMService.CreateRole:output_type -> qdrant.cloud.iam.v1.CreateRoleResponse
+	24, // 54: qdrant.cloud.iam.v1.IAMService.UpdateRole:output_type -> qdrant.cloud.iam.v1.UpdateRoleResponse
+	26, // 55: qdrant.cloud.iam.v1.IAMService.DeleteRole:output_type -> qdrant.cloud.iam.v1.DeleteRoleResponse
+	28, // 56: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:output_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsResponse
+	30, // 57: qdrant.cloud.iam.v1.IAMService.ListUserRoles:output_type -> qdrant.cloud.iam.v1.ListUserRolesResponse
+	32, // 58: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:output_type -> qdrant.cloud.iam.v1.ListRoleUsersResponse
+	34, // 59: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:output_type -> qdrant.cloud.iam.v1.AssignUserRolesResponse
+	39, // 60: qdrant.cloud.iam.v1.IAMService.LogoutUser:output_type -> qdrant.cloud.iam.v1.LogoutUserResponse
+	45, // [45:61] is the sub-list for method output_type
+	29, // [29:45] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_iam_v1_iam_proto_init() }
@@ -2433,15 +2496,15 @@ func file_qdrant_cloud_iam_v1_iam_proto_init() {
 	if File_qdrant_cloud_iam_v1_iam_proto != nil {
 		return
 	}
-	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31].OneofWrappers = []any{}
-	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[34].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_iam_v1_iam_proto_rawDesc), len(file_qdrant_cloud_iam_v1_iam_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   35,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

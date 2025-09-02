@@ -356,8 +356,8 @@ message ListPermissionsRequest {
 
 // ListPermissionsResponse is the response from the ListPermissions function
 message ListPermissionsResponse {
-  // The permissions know by the system.
-  repeated string permissions = 1 [(buf.validate.field).repeated.items.string.min_len = 1];
+  // The permissions known by the system.
+  repeated Permission permissions = 1 [(buf.validate.field).repeated.min_items = 1];
 }
 
 // ListRolesRequest is the request for the ListRoles function
@@ -458,7 +458,7 @@ message ListEffectivePermissionsRequest {
 // ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function
 message ListEffectivePermissionsResponse {
   // The effective permissions.
-  repeated string permissions = 1 [(buf.validate.field).repeated.items.string.min_len = 1];
+  repeated Permission permissions = 1 [(buf.validate.field).repeated.min_items = 1];
 }
 
 // ListUserRolesRequest is the request for the ListUserRoles function
@@ -563,6 +563,15 @@ enum UserStatus {
   USER_STATUS_DELETED = 3;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A Permission represents a permission in the Qdrant cloud.
+message Permission {
+  // The permission value (e.g., "read:clusters").
+  string value = 1 [(buf.validate.field).string.min_len = 1];
+  // The category of the permission (e.g., "Cluster", "Account").
+  string category = 2 [(buf.validate.field).string.min_len = 1];
+}
+
 // A Role represents a role in the Qdrant cloud.
 message Role {
   // Unique identifier for the role (in GUID format).
@@ -602,11 +611,7 @@ message Role {
     not_in: [0]
   }];
   // The permissions associated with this role.
-  repeated string permissions = 8 [(buf.validate.field).repeated = {
-    items: {
-      string: {min_len: 1}
-    }
-  }];
+  repeated Permission permissions = 8 [(buf.validate.field).repeated.min_items = 1];
   // The sub-type of the system role.
   // This field is set for system role only.
   optional SystemRoleSubType sub_type = 9 [(buf.validate.field).enum = {
