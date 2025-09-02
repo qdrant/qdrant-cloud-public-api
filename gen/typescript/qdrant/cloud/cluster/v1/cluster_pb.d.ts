@@ -1755,14 +1755,6 @@ export declare type CreateClusterFromBackupRequest = Message<"qdrant.cloud.clust
    * @generated from field: string cluster_name = 3;
    */
   clusterName: string;
-
-  /**
-   * The package identifier to use for the new cluster (optional).
-   * If not specified, the package from backup cluster will be used.
-   *
-   * @generated from field: optional string package_id = 4;
-   */
-  packageId?: string;
 };
 
 export declare type CreateClusterFromBackupRequestValid = CreateClusterFromBackupRequest;
