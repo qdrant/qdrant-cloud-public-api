@@ -644,7 +644,8 @@
             "permissions": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "$ref": "#/definitions/v1Permission"
               },
               "description": "The permissions associated with this role."
             },
@@ -690,7 +691,8 @@
             "permissions": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "$ref": "#/definitions/v1Permission"
               },
               "description": "The permissions associated with this role."
             },
@@ -834,7 +836,8 @@
         "permissions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/v1Permission"
           },
           "description": "The effective permissions."
         }
@@ -847,9 +850,10 @@
         "permissions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/v1Permission"
           },
-          "description": "The permissions know by the system."
+          "description": "The permissions known by the system."
         }
       },
       "title": "ListPermissionsResponse is the response from the ListPermissions function"
@@ -915,6 +919,20 @@
       "description": "Empty",
       "title": "LogoutUserResponse is the response from the Logout function"
     },
+    "v1Permission": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The permission value (e.g., \"read:clusters\")."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the permission (e.g., \"Cluster\", \"Account\")."
+        }
+      },
+      "description": "A Permission represents a permission in the Qdrant cloud."
+    },
     "v1RecordUserConsentRequest": {
       "type": "object",
       "properties": {
@@ -969,7 +987,8 @@
         "permissions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/v1Permission"
           },
           "description": "The permissions associated with this role."
         },
