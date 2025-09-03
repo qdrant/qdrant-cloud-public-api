@@ -3124,10 +3124,7 @@ type CreateClusterFromBackupRequest struct {
 	// This is a required field.
 	BackupId string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Name of the new cluster
-	ClusterName string `protobuf:"bytes,3,opt,name=cluster_name,json=clusterName,proto3" json:"cluster_name,omitempty"`
-	// The package identifier to use for the new cluster (optional).
-	// If not specified, the package from backup cluster will be used.
-	PackageId     *string `protobuf:"bytes,4,opt,name=package_id,json=packageId,proto3,oneof" json:"package_id,omitempty"`
+	ClusterName   string `protobuf:"bytes,3,opt,name=cluster_name,json=clusterName,proto3" json:"cluster_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3179,13 +3176,6 @@ func (x *CreateClusterFromBackupRequest) GetBackupId() string {
 func (x *CreateClusterFromBackupRequest) GetClusterName() string {
 	if x != nil {
 		return x.ClusterName
-	}
-	return ""
-}
-
-func (x *CreateClusterFromBackupRequest) GetPackageId() string {
-	if x != nil && x.PackageId != nil {
-		return *x.PackageId
 	}
 	return ""
 }
@@ -3471,15 +3461,12 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\vunavailable\x18\x06 \x01(\bR\vunavailableB\x14\n" +
 	"\x12_release_notes_urlB\n" +
 	"\n" +
-	"\b_remarks\"\xed\x01\n" +
+	"\b_remarks\"\xb0\x01\n" +
 	"\x1eCreateClusterFromBackupRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12>\n" +
-	"\fcluster_name\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\vclusterName\x12,\n" +
-	"\n" +
-	"package_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tpackageId\x88\x01\x01B\r\n" +
-	"\v_package_id\"e\n" +
+	"\fcluster_name\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\vclusterName\"e\n" +
 	"\x1fCreateClusterFromBackupResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster*\xab\x01\n" +
 	"\x12ClusterServiceType\x12$\n" +
@@ -3726,7 +3713,6 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[29].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[35].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[36].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[37].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
