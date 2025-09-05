@@ -5,6 +5,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  id-token: write
 jobs:
   linting:
     name: Linting & checking uncommitted changes
@@ -48,3 +49,30 @@ jobs:
             make generate
             ```
             Once you've added them, you can dismiss this review.
+
+  publish-packages:
+    name: Publish PR Packages
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    permissions:
+      pull-requests: write
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Publish packages
+        id: publish
+        uses: ./.github/actions/publish-packages
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          version_source: ${{ github.ref }}
+          pr_number: ${{ github.event.pull_request.number }}
+          pr_sha: ${{ github.event.pull_request.head.sha }}

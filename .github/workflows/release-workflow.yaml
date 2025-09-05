@@ -1,4 +1,4 @@
-name: Upload Python and JS Packages to GCP Artifact Registry
+name: Create release and publish packages
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - "releases/v*"
 
 jobs:
-  python-release:
-    name: Python Release
+  publish-packages:
+    name: Publish Release Packages
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,98 +19,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          # Install a specific version of uv.
-          version: "0.7.0"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
-
-      - run: make python/dev-install
-
-      - name: "Shared: Auth + Version Info"
-        uses: ./.github/actions/shared-setup
+      - name: Publish packages
+        uses: ./.github/actions/publish-packages
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
           version_source: ${{ github.ref }}
-          target: python
 
-      - name: Configure gcloud for Python
-        run: |
-          gcloud config set project qdrant-cloud
-          gcloud config set artifacts/location us
-          gcloud config set artifacts/repository python
-
-      - name: Build and upload Python package
-        run: |
-          uv build
-          uv run twine upload \
-            --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
-            --skip-existing \
-            --username oauth2accesstoken \
-            --password "$(gcloud auth print-access-token)" \
-            dist/*
-
-  js-release:
-    name: Node.js Release
-    runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
-      contents: write
-      id-token: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: "Shared: Auth + Version Info"
-        uses: ./.github/actions/shared-setup
-        with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
-          version_source: ${{ github.ref }}
-          target: node
-
-      - name: Move build output to publish root
-        run: |
-          mkdir -p npm_publish
-          cp -r gen/typescript/* npm_publish/
-          cp package.json npm_publish/package.json
-          cp .npmrc npm_publish/
-          cp README.md npm_publish/ || true
-
-      - name: Refresh the access token for connecting to the repository
-        working-directory: npm_publish
-        run: npm run artifactregistry-login
-
-      - name: Publish JS package
-        working-directory: npm_publish
-        run: |
-          PACKAGE_VERSION=$(jq -r .version package.json)
-          if npm view @qdrant/qdrant-cloud-public-api@"$PACKAGE_VERSION"; then
-            echo
-            echo "Package $PACKAGE_VERSION already exists, skipping publish."
-            exit 0
-          fi
-          npm publish
   finalize-release:
     name: Finalize Release
     runs-on: ubuntu-latest
 
     needs:
-      - python-release
-      - js-release
+      - publish-packages
 
     permissions:
       pull-requests: write
