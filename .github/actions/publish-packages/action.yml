@@ -1,0 +1,169 @@
+name: "Publish Packages"
+description: "Publish Python and Node.js packages to GCP Artifact Registry"
+inputs:
+  workload_identity_provider:
+    required: true
+    description: "The Workload Identity Provider to use for authentication"
+  service_account:
+    required: true
+    description: "The Service Account to impersonate"
+  version_source:
+    required: true
+    description: "The source of the version to set, typically the branch name"
+  pr_number:
+    required: false
+    description: "PR number for PR builds"
+  pr_sha:
+    required: false
+    description: "PR head SHA for PR builds"
+outputs:
+  package_version:
+    description: "The generated package version"
+    value: ${{ steps.python-setup.outputs.package_version }}
+runs:
+  using: "composite"
+  steps:
+    # Python Package
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        version: "0.7.0"
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: "pyproject.toml"
+
+    - name: Install Python dependencies
+      shell: bash
+      run: make python/dev-install
+
+    - name: "Python: Auth + Version Info"
+      id: python-version
+      uses: ./.github/actions/shared-setup
+      with:
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+        version_source: ${{ inputs.version_source }}
+        target: python
+        pr_number: ${{ inputs.pr_number }}
+        pr_sha: ${{ inputs.pr_sha }}
+
+    - name: Configure gcloud for Python
+      shell: bash
+      run: |
+        gcloud config set project qdrant-cloud
+        gcloud config set artifacts/location us
+        gcloud config set artifacts/repository python
+
+    - name: Build and upload Python package
+      shell: bash
+      run: |
+        uv build
+        uv run twine upload \
+          --repository-url https://us-python.pkg.dev/qdrant-cloud/python/ \
+          --skip-existing \
+          --username oauth2accesstoken \
+          --password "$(gcloud auth print-access-token)" \
+          dist/*
+
+    # Node.js Package
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+
+    - name: "Node.js: Auth + Version Info"
+      id: node-version
+      uses: ./.github/actions/shared-setup
+      with:
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+        version_source: ${{ inputs.version_source }}
+        target: node
+        pr_number: ${{ inputs.pr_number }}
+        pr_sha: ${{ inputs.pr_sha }}
+
+    - name: Move build output to publish root
+      shell: bash
+      run: |
+        mkdir -p npm_publish
+        cp -r gen/typescript/* npm_publish/
+        cp package.json npm_publish/package.json
+        cp .npmrc npm_publish/
+        cp README.md npm_publish/ || true
+
+    - name: Refresh the access token for connecting to the repository
+      shell: bash
+      working-directory: npm_publish
+      run: npm run artifactregistry-login
+
+    - name: Publish JS package
+      shell: bash
+      working-directory: npm_publish
+      run: |
+        PACKAGE_VERSION=$(jq -r .version package.json)
+        if npm view @qdrant/qdrant-cloud-public-api@"$PACKAGE_VERSION"; then
+          echo
+          echo "Package $PACKAGE_VERSION already exists, skipping publish."
+          exit 0
+        fi
+
+        # Use PR number in tag for PR builds, 'latest' for regular builds
+        if [[ "${{ inputs.pr_number }}" != "" ]]; then
+          npm publish --tag pr-${{ inputs.pr_number }}
+        else
+          npm publish --tag latest
+        fi
+
+    # Comment with packages info (only for PRs)
+    - name: Comment PR with package info
+      if: ${{ inputs.pr_number != '' }}
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const pythonVersion = '${{ steps.python-version.outputs.package_version }}';
+          const nodeVersion = '${{ steps.node-version.outputs.package_version }}';
+
+          const body = `**PR Packages Published**
+
+          **Python Package:**
+          - Version: \`${pythonVersion}\`
+          - Package: \`qdrant-cloud-public-api\`
+          - Registry: \`https://us-python.pkg.dev/qdrant-cloud/python/\`
+          - To update run: \`uv add qdrant-cloud-public-api==${pythonVersion}\`
+
+          **NPM Package:**
+          - Version: \`${nodeVersion}\`
+          - Package: \`@qdrant/qdrant-cloud-public-api\`
+          - Registry: \`https://us-npm.pkg.dev/qdrant-cloud/npm/\`
+          - To update run: \`npm install @qdrant/qdrant-cloud-public-api@${nodeVersion}\``;
+
+          // Find existing comment
+          const comments = await github.rest.issues.listComments({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          });
+
+          const existingComment = comments.data.find(comment =>
+            comment.body.includes('**PR Packages Published**')
+          );
+
+          if (existingComment) {
+            // Update existing comment
+            await github.rest.issues.updateComment({
+              comment_id: existingComment.id,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          } else {
+            // Create new comment
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          }

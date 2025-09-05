@@ -10,9 +10,19 @@ inputs:
   version_source:
     required: true
     description: "The source of the version to set, typically the branch name"
+  pr_number:
+    required: false
+    description: "PR number for PR builds"
+  pr_sha:
+    required: false
+    description: "PR head SHA for PR builds"
   target:
     required: true
     description: "The target language for the versioning, either 'python' or 'node'"
+outputs:
+  package_version:
+    description: "The generated package version"
+    value: ${{ steps.generate-version.outputs.package_version }}
 runs:
   using: "composite"
   steps:
@@ -22,18 +32,39 @@ runs:
         workload_identity_provider: ${{ inputs.workload_identity_provider }}
         service_account: ${{ inputs.service_account }}
 
-    - name: Extract version from branch name
+    - name: Generate version
+      id: generate-version
       shell: bash
       env:
         INPUT_VERSION_SOURCE: ${{ inputs.version_source }}
         INPUT_TARGET: ${{ inputs.target }}
+        INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        INPUT_PR_SHA: ${{ inputs.pr_sha }}
       run: |
-        VERSION="${INPUT_VERSION_SOURCE##*/}"
-        STRIPPED_VERSION="${VERSION#v}"
-    
+        if [ -n "${INPUT_PR_NUMBER}" ]; then
+          LATEST_TAG=$(git tag --sort=-creatordate | head -n1)
+          BASE_VERSION="${LATEST_TAG#v}"
+          SHORT_SHA=$(echo "${INPUT_PR_SHA}" | cut -c1-7)
+
+          if [ "${INPUT_TARGET}" = "python" ]; then
+            DEV_PREFIX=".dev${INPUT_PR_NUMBER}+"
+          elif [ "${INPUT_TARGET}" = "node" ]; then
+            DEV_PREFIX="-dev${INPUT_PR_NUMBER}."
+          fi
+
+          VERSION="${BASE_VERSION}${DEV_PREFIX}${SHORT_SHA}"
+          STRIPPED_VERSION="$VERSION"
+        else
+          VERSION="${INPUT_VERSION_SOURCE##*/}"
+          STRIPPED_VERSION="${VERSION#v}"
+        fi
+
         echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         echo "PACKAGE_VERSION=$STRIPPED_VERSION" >> $GITHUB_ENV
-    
+        echo "package_version=$STRIPPED_VERSION" >> $GITHUB_OUTPUT
+
+        echo "Generated version: $STRIPPED_VERSION"
+
         if [ "${INPUT_TARGET}" = "python" ]; then
           sed -i "s/^version = .*/version = \"$STRIPPED_VERSION\"/" pyproject.toml
         elif [ "${INPUT_TARGET}" = "node" ]; then
