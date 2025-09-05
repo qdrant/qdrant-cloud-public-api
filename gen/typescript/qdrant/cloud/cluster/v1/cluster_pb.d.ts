@@ -2221,6 +2221,13 @@ export enum ClusterPhase {
    * @generated from enum value: CLUSTER_PHASE_NOT_FOUND = 17;
    */
   NOT_FOUND = 17,
+
+  /**
+   * The cluster is being deleted.
+   *
+   * @generated from enum value: CLUSTER_PHASE_DELETING = 18;
+   */
+  DELETING = 18,
 }
 
 /**

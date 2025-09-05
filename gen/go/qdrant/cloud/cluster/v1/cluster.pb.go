@@ -473,6 +473,8 @@ const (
 	ClusterPhase_CLUSTER_PHASE_FAILED_TO_SYNC ClusterPhase = 16
 	// The cluster was expected but not found in the cloud provider region.
 	ClusterPhase_CLUSTER_PHASE_NOT_FOUND ClusterPhase = 17
+	// The cluster is being deleted.
+	ClusterPhase_CLUSTER_PHASE_DELETING ClusterPhase = 18
 )
 
 // Enum value maps for ClusterPhase.
@@ -496,6 +498,7 @@ var (
 		15: "CLUSTER_PHASE_MANUAL_MAINTENANCE",
 		16: "CLUSTER_PHASE_FAILED_TO_SYNC",
 		17: "CLUSTER_PHASE_NOT_FOUND",
+		18: "CLUSTER_PHASE_DELETING",
 	}
 	ClusterPhase_value = map[string]int32{
 		"CLUSTER_PHASE_UNSPECIFIED":        0,
@@ -516,6 +519,7 @@ var (
 		"CLUSTER_PHASE_MANUAL_MAINTENANCE": 15,
 		"CLUSTER_PHASE_FAILED_TO_SYNC":     16,
 		"CLUSTER_PHASE_NOT_FOUND":          17,
+		"CLUSTER_PHASE_DELETING":           18,
 	}
 )
 
@@ -3504,7 +3508,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1dTOLERATION_EFFECT_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dTOLERATION_EFFECT_NO_SCHEDULE\x10\x01\x12(\n" +
 	"$TOLERATION_EFFECT_PREFER_NO_SCHEDULE\x10\x02\x12 \n" +
-	"\x1cTOLERATION_EFFECT_NO_EXECUTE\x10\x03*\xc3\x04\n" +
+	"\x1cTOLERATION_EFFECT_NO_EXECUTE\x10\x03*\xdf\x04\n" +
 	"\fClusterPhase\x12\x1d\n" +
 	"\x19CLUSTER_PHASE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16CLUSTER_PHASE_CREATING\x10\x01\x12\"\n" +
@@ -3524,7 +3528,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1bCLUSTER_PHASE_RECOVERY_MODE\x10\x0e\x12$\n" +
 	" CLUSTER_PHASE_MANUAL_MAINTENANCE\x10\x0f\x12 \n" +
 	"\x1cCLUSTER_PHASE_FAILED_TO_SYNC\x10\x10\x12\x1b\n" +
-	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11*\xbb\x01\n" +
+	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11\x12\x1a\n" +
+	"\x16CLUSTER_PHASE_DELETING\x10\x12*\xbb\x01\n" +
 	"\x10ClusterNodeState\x12\"\n" +
 	"\x1eCLUSTER_NODE_STATE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_NODE_STATE_STARTING\x10\x01\x12\x1e\n" +

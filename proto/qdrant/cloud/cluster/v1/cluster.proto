@@ -746,6 +746,8 @@ enum ClusterPhase {
   CLUSTER_PHASE_FAILED_TO_SYNC = 16;
   // The cluster was expected but not found in the cloud provider region.
   CLUSTER_PHASE_NOT_FOUND = 17;
+  // The cluster is being deleted.
+  CLUSTER_PHASE_DELETING = 18;
 }
 
 // ClusterState represents the current state of a cluster
