@@ -29,6 +29,16 @@ REQUIRES_ALL_PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
 requires_all_permissions: _descriptor.FieldDescriptor
 MAX_MESSAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
 max_message_size: _descriptor.FieldDescriptor
+LOG_FIELDS_FIELD_NUMBER: _ClassVar[int]
+log_fields: _descriptor.FieldDescriptor
+
+class LogField(_message.Message):
+    __slots__ = ("name", "field_expression")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    FIELD_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    field_expression: str
+    def __init__(self, name: _Optional[str] = ..., field_expression: _Optional[str] = ...) -> None: ...
 
 class Version(_message.Message):
     __slots__ = ("major", "minor", "patch")

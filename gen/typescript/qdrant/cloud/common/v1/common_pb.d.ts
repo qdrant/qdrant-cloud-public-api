@@ -12,6 +12,37 @@ import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 export declare const file_qdrant_cloud_common_v1_common: GenFile;
 
 /**
+ * LogField represents a field to log (in case of an error).
+ *
+ * @generated from message qdrant.cloud.common.v1.LogField
+ */
+export declare type LogField = Message<"qdrant.cloud.common.v1.LogField"> & {
+  /**
+   * The name of the field to log (in the logger).
+   * It will automatically prefixed with `request.`
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * The field expression to find the value of the field to log (in the request).
+   * It is allowed to nest fields with a point, like 'cluster.account_id' or 'account.id'
+   *
+   * @generated from field: string field_expression = 2;
+   */
+  fieldExpression: string;
+};
+
+export declare type LogFieldValid = LogField;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.LogField.
+ * Use `create(LogFieldSchema)` to create a new message.
+ */
+export declare const LogFieldSchema: GenMessage<LogField, {validType: LogFieldValid}>;
+
+/**
  * Semantic version number.
  *
  * @generated from message qdrant.cloud.common.v1.Version
@@ -198,4 +229,11 @@ export declare const requires_all_permissions: GenExtension<MethodOptions, boole
  * @generated from extension: int32 max_message_size = 50006;
  */
 export declare const max_message_size: GenExtension<MethodOptions, number>;
+
+/**
+ * The fields to log.
+ *
+ * @generated from extension: repeated qdrant.cloud.common.v1.LogField log_fields = 50007;
+ */
+export declare const log_fields: GenExtension<MethodOptions, LogField[]>;
 
