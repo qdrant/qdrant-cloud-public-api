@@ -18,6 +18,15 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/invoices"};
   }
+  // Lists all discounts for the account identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListDiscounts(ListDiscountsRequest) returns (ListDiscountsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
+  }
 }
 
 // ListInvoicesRequest is the request for the ListInvoices function
@@ -31,6 +40,19 @@ message ListInvoicesRequest {
 message ListInvoicesResponse {
   // The list of invoices.
   repeated Invoice items = 1;
+}
+
+// ListDiscountsRequest is the request for the ListDiscounts function
+message ListDiscountsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListDiscountsResponse is the response from the ListDiscounts function
+message ListDiscountsResponse {
+  // The list of discounts.
+  repeated Discount items = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -55,6 +77,18 @@ message Invoice {
   optional string pdf_url = 6 [(buf.validate.field).string.uri = true];
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// Discount represents a billing discount applied to an account.
+message Discount {
+  // Human-readable name for the discount.
+  optional string name = 1;
+  // The discount value. For percentage discounts, this is the percentage (e.g., 12.5 for 12.5%).
+  // For flat amount discounts, this is the amount as a decimal.
+  string value = 2;
+  // The type of discount.
+  DiscountType discount_type = 3;
+}
+
 // The possible status of an invoice.
 enum InvoiceStatus {
   // Unspecified
@@ -69,4 +103,14 @@ enum InvoiceStatus {
   INVOICE_STATUS_PAID = 4;
   // Uncollectible
   INVOICE_STATUS_UNCOLLECTIBLE = 5;
+}
+
+// The possible types of discount.
+enum DiscountType {
+  // Unspecified
+  DISCOUNT_TYPE_UNSPECIFIED = 0;
+  // Flat amount discount
+  DISCOUNT_TYPE_FLAT = 1;
+  // Percentage discount
+  DISCOUNT_TYPE_PERCENTAGE = 2;
 }
