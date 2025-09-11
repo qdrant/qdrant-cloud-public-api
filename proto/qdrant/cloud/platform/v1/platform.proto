@@ -34,6 +34,11 @@ service PlatformService {
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
   }
   // Lists all cloud provider regions in the account identified by the given ID and cloud provider.
   // Required permissions:
@@ -43,6 +48,11 @@ service PlatformService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
   }
 }
 

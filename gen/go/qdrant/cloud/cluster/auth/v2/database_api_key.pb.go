@@ -841,13 +841,23 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xcb\t\n" +
-	"\x15DatabaseApiKeyService\x12\xe1\x01\n" +
-	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"U\x8a\xb5\x18\rread:api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v2/accounts/{account_id}/database-api-keys\x12\x81\x04\n" +
-	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse\"\xf1\x02\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\xca\xf3\x18\xe3\x01\b\x01\x12\x10database-api-key\"\x18resp.database_api_key.id*\x83\x01/accounts/{req.database_api_key.account_id}/clusters/{req.database_api_key.cluster_id}/database-api-keys/{resp.database_api_key.id}R-\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x90\v\n" +
+	"\x15DatabaseApiKeyService\x12\xfd\x01\n" +
+	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"q\x8a\xb5\x18\rread:api_keys\xba\xb5\x18\x18\n" +
 	"\n" +
-	"cluster_id\x12\x1freq.database_api_key.cluster_id\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys\x12\xc9\x03\n" +
-	"\x14DeleteDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse\"\xb9\x02\x8a\xb5\x18\x0fdelete:api_keys\xca\xf3\x18\xc7\x01\b\x03\x12\x10database-api-key\"\x17req.database_api_key_id*m/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/database-api-keys/{req.database_api_key_id}R)\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v2/accounts/{account_id}/database-api-keys\x12\xe0\x04\n" +
+	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse\"\xd0\x03\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\xba\xb5\x18)\n" +
+	"\n" +
+	"cluster_id\x12\x1bdatabase_api_key.cluster_id\xba\xb5\x18.\n" +
+	"\x15database_api_key_name\x12\x15database_api_key.name\xca\xf3\x18\xe3\x01\b\x01\x12\x10database-api-key\"\x18resp.database_api_key.id*\x83\x01/accounts/{req.database_api_key.account_id}/clusters/{req.database_api_key.cluster_id}/database-api-keys/{resp.database_api_key.id}R-\n" +
+	"\n" +
+	"cluster_id\x12\x1freq.database_api_key.cluster_id\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/auth/v2/accounts/{database_api_key.account_id}/database-api-keys\x12\x93\x04\n" +
+	"\x14DeleteDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse\"\x83\x03\x8a\xb5\x18\x0fdelete:api_keys\xba\xb5\x18\x18\n" +
+	"\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\xba\xb5\x18*\n" +
+	"\x13database_api_key_id\x12\x13database_api_key_id\xca\xf3\x18\xc7\x01\b\x03\x12\x10database-api-key\"\x17req.database_api_key_id*m/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/database-api-keys/{req.database_api_key_id}R)\n" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v2B\x13DatabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v2;authv2\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V2\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V2\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V2\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V2b\x06proto3"

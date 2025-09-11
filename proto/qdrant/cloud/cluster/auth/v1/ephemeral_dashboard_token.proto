@@ -32,6 +32,11 @@ service EphemeralDashboardTokenService {
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
 }
 

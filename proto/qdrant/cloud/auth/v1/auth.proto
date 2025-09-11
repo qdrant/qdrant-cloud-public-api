@@ -55,6 +55,11 @@ service AuthService {
       resource_id_field: "req.management_key_id"
       resource_url_template: "/accounts/{req.account_id}/management-keys/{req.management_key_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "management_key_id"
+      field_expression: "management_key_id"
+    };
   }
 }
 

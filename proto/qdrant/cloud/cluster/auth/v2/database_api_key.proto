@@ -18,6 +18,11 @@ service DatabaseApiKeyService {
     option (common.v1.permissions) = "read:api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/auth/v2/accounts/{account_id}/database-api-keys"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Creates a database api key in the account identified by the given ID.
   // Required permissions:
@@ -43,6 +48,15 @@ service DatabaseApiKeyService {
         value: "req.database_api_key.cluster_id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "database_api_key.cluster_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "database_api_key_name"
+      field_expression: "database_api_key.name"
+    };
   }
   // Deletes a database api key in the account identified by the given ID.
   // Required permissions:
@@ -62,6 +76,15 @@ service DatabaseApiKeyService {
         key: "cluster_id"
         value: "resp-md.qc-event-cluster-id"
       }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "database_api_key_id"
+      field_expression: "database_api_key_id"
     };
   }
 }

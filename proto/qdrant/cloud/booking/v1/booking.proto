@@ -16,6 +16,15 @@ service BookingService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/packages"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_region_id"
+      field_expression: "cloud_provider_region_id"
+    };
   }
   // Gets the package identified by the given ID.
   // Required permissions:
@@ -25,6 +34,11 @@ service BookingService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/packages/{id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "package_id"
+      field_expression: "id"
+    };
   }
   // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Lists all public packages.
@@ -34,6 +48,15 @@ service BookingService {
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/packages"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_region_id"
+      field_expression: "cloud_provider_region_id"
+    };
   }
 }
 

@@ -613,12 +613,14 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"^[A-Z]{2}$\x98\x01\x02H\x00R\x0ecountryIsoCode\x88\x01\x01\x12D\n" +
 	"\x17geographical_sub_region\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15geographicalSubRegion\x88\x01\x01B\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
-	"\x18_geographical_sub_region2\xfd\x06\n" +
+	"\x18_geographical_sub_region2\xd2\a\n" +
 	"\x0fPlatformService\x12\xbf\x01\n" +
 	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\",\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\"\x12 /api/platform/v1/cloud-providers\x12\xc3\x01\n" +
-	"\x12ListCloudProviders\x123.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a4.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/platform/v1/accounts/{account_id}/cloud-providers\x12\xed\x01\n" +
-	"\x1eListGlobalCloudProviderRegions\x12?.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest\x1a@.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse\"H\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/platform/v1/cloud-providers/{cloud_provider_id}/regions\x12\xf1\x01\n" +
-	"\x18ListCloudProviderRegions\x129.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"^\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regionsB\x86\x02\n" +
+	"\x12ListCloudProviders\x123.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a4.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/platform/v1/accounts/{account_id}/cloud-providers\x12\x97\x02\n" +
+	"\x1eListGlobalCloudProviderRegions\x12?.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest\x1a@.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse\"r\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02>\x12</api/platform/v1/cloud-providers/{cloud_provider_id}/regions\x12\x9c\x02\n" +
+	"\x18ListCloudProviderRegions\x129.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"\x88\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regionsB\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3"
 
 var (

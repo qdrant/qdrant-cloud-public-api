@@ -18,6 +18,11 @@ service CollectionApiKeyService {
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_id"
+      field_expression: "collection_id"
+    };
   }
   // CreateCollectionApiKey creates a new API key for a collection
   // Required Permissions:
@@ -43,6 +48,15 @@ service CollectionApiKeyService {
         value: "req.collection_api_key.collection_id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_id"
+      field_expression: "collection_api_key.collection_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "collection_api_key_name"
+      field_expression: "collection_api_key.name"
+    };
   }
   // DeleteCollectionApiKey removes an API key from a collection
   // Required Permissions:
@@ -62,6 +76,15 @@ service CollectionApiKeyService {
         key: "collection_id"
         value: "req.collection_id"
       }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_id"
+      field_expression: "collection_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "collection_api_key_id"
+      field_expression: "collection_api_key_id"
     };
   }
 }

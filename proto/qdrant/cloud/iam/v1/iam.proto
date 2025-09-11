@@ -52,6 +52,11 @@ service IAMService {
       resource_id_field: "req.user.id"
       resource_url_template: "/users/{req.user.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user.id"
+    };
   }
   // Gets the authenticated user's consent status for a specific legal document.
   // Required permissions:
@@ -121,6 +126,11 @@ service IAMService {
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "role_id"
+      field_expression: "role_id"
+    };
   }
   // Creates a role for the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -144,6 +154,11 @@ service IAMService {
       resource_type: "role"
       resource_id_field: "resp.role.id"
       resource_url_template: "/accounts/{req.role.account_id}/roles/{resp.role.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "role_name"
+      field_expression: "role.name"
     };
   }
   // Updates a role in the account identified by the given ID.
@@ -169,6 +184,11 @@ service IAMService {
       resource_id_field: "req.role.id"
       resource_url_template: "/accounts/{req.role.account_id}/roles/{req.role.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "role_id"
+      field_expression: "role.id"
+    };
   }
   // Deletes a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -187,6 +207,11 @@ service IAMService {
       resource_type: "role"
       resource_id_field: "req.role_id"
       resource_url_template: "/accounts/{req.account_id}/roles/{req.role_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "role_id"
+      field_expression: "role_id"
     };
   }
   // Lists the effective permissions for the user in the account identified by the given ID.
@@ -207,6 +232,11 @@ service IAMService {
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user_id"
+    };
   }
 
   // List users for the role identified by the given ID.
@@ -217,6 +247,11 @@ service IAMService {
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles/{role_id}/users"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "role_id"
+      field_expression: "role_id"
+    };
   }
 
   // Assigns the provided roles to the user in the account identified by the given ID.
@@ -239,6 +274,11 @@ service IAMService {
       resource_type: "user"
       resource_id_field: "req.user_id"
       resource_url_template: "/accounts/{req.account_id}/users/{req.user_id}/roles"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user_id"
     };
   }
   // Logs out the authenticated user.
