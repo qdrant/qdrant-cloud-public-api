@@ -147,8 +147,8 @@ A `ListXXX` method supports pagination if its request message includes the field
 and the response message includes:
 
 - `items` — list of resources.
-- `totalSize` — total number of matching resources.
-- `nextPageToken` — token to request the next page (omit if there are no more results).
+- `total_size` — total number of matching resources.
+- `next_page_token` — token to request the next page (omit if there are no more results).
 
 This is an example of using pagination with the `BackupService.ListBackups` method:
 
@@ -173,7 +173,8 @@ grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
       "status": "BACKUP_STATUS_SUCCEEDED",
       "backupDuration": "30s"
     },
-  ...
+    ... 19 more ...
+  ],
   "totalSize": 43,
   "nextPageToken": "WyIyMDI1LTA1LTI4VDA4OjI1OjQzLjkxNDg1NyswMDowMCIsICJjYTc3Mzk3YS1jNTRjLTQ3NGQtOGEzOS0xMzZmMGZlMWI3ODUiXQ=="
 }
@@ -200,7 +201,8 @@ grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
       "status": "BACKUP_STATUS_SUCCEEDED",
       "backupDuration": "1s"
     },
-    ...
+    ... 19 more ...
+  ],
   "totalSize": 43,
   "nextPageToken": "WyIyMDI1LTA2LTI2VDE3OjQ4OjIzLjY2NjQ0MSswMDowMCIsICJhYzc1MDc4MC02N2ViLTRjZmItOTI3ZC0zYmZhZTY4OTk5OGUiXQ=="
 }
