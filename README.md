@@ -135,6 +135,79 @@ We currently provide support for:
 See [below](#using-generated-code) for more details.
 
 
+### Paginated resources
+
+All listing methods (e.g. `ListClusters`) currently return all active resources in a single response. To provide better usability and performance, we are gradually introducing pagination so resources can be retrieved in chunks.
+
+A `ListXXX` method supports pagination if its request message includes the fields:
+
+- `page_size` — maximum number of items per page.
+- `page_token` — token to request the next page.
+
+and the response message includes:
+
+- `items` — list of resources.
+- `total_size` — total number of matching resources.
+- `next_page_token` — token to request the next page (omit if there are no more results).
+
+This is an example of using pagination with the `BackupService.ListBackups` method:
+
+- Request the first 20 backups:
+
+``` sh
+grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
+  -d '{"account_id": "<YOUR_ACCOUNT_ID>", "page_size": 20}' \
+  grpc.cloud.qdrant.io:443 \
+  qdrant.cloud.cluster.backup.v1.BackupService/ListBackups
+```
+
+``` sh
+{
+  "items": [
+    {
+      "id": "f7b60c5e-2f7c-450f-926d-4c43948b71a9",
+      "createdAt": "2025-05-06T07:53:10.290771Z",
+      "accountId": "<REDACTED>",
+      "clusterId": "a71f4794-504e-4d19-b994-32450e10e783",
+      "name": "qdrant-a71f4794-504e-4d19-b994-32450e10e783-snapshot-1746517990",
+      "status": "BACKUP_STATUS_SUCCEEDED",
+      "backupDuration": "30s"
+    },
+    ... 19 more ...
+  ],
+  "totalSize": 43,
+  "nextPageToken": "WyIyMDI1LTA1LTI4VDA4OjI1OjQzLjkxNDg1NyswMDowMCIsICJjYTc3Mzk3YS1jNTRjLTQ3NGQtOGEzOS0xMzZmMGZlMWI3ODUiXQ=="
+}
+```
+
+- Request the next page, passing `page_token`:
+
+``` sh
+grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
+  -d '{"account_id": "<YOUR_ACCOUNT_ID>", "page_size": 20, "page_token":"WyIyMDI1LTA1LTI4VDA4OjI1OjQzLjkxNDg1NyswMDowMCIsICJjYTc3Mzk3YS1jNTRjLTQ3NGQtOGEzOS0xMzZmMGZlMWI3ODUiXQ=="}' \
+  grpc.cloud.qdrant.io:443 \
+  qdrant.cloud.cluster.backup.v1.BackupService/ListBackups
+```
+
+``` sh
+{
+  "items": [
+    {
+      "id": "84deb667-36a0-4d1f-a095-50f9b2a9dec4",
+      "createdAt": "2025-06-12T14:14:22.811915Z",
+      "accountId": "<REDACTED>",
+      "clusterId": "4d9fc7fd-1182-42fd-abce-7c8d4c3f5f32",
+      "name": "qdrant-4d9fc7fd-1182-42fd-abce-7c8d4c3f5f32-snapshot-1749737662",
+      "status": "BACKUP_STATUS_SUCCEEDED",
+      "backupDuration": "1s"
+    },
+    ... 19 more ...
+  ],
+  "totalSize": 43,
+  "nextPageToken": "WyIyMDI1LTA2LTI2VDE3OjQ4OjIzLjY2NjQ0MSswMDowMCIsICJhYzc1MDc4MC02N2ViLTRjZmItOTI3ZC0zYmZhZTY4OTk5OGUiXQ=="
+}
+```
+
 ## Working with Protocol Buffer definitions
 
 We use [Buf](https://buf.build/) to lint the schemas and to generate language bindings. 
