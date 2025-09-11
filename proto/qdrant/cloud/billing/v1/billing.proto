@@ -81,12 +81,26 @@ message Invoice {
 // Discount represents a billing discount applied to an account.
 message Discount {
   // Human-readable name for the discount.
-  optional string name = 1;
-  // The discount value. For percentage discounts, this is the percentage (e.g., 12.5 for 12.5%).
-  // For flat amount discounts, this is the amount as a decimal.
-  string value = 2;
+  string name = 1;
   // The type of discount.
-  DiscountType discount_type = 3;
+  oneof type {
+    DiscountPercentage percentage = 2;
+    DiscountFlat flat = 3;
+  }
+}
+
+// DiscountPercentage represents a percentage-based discount.
+message DiscountPercentage {
+  // The percentage value (e.g., 12.5 for 12.5%).
+  double value = 1;
+}
+
+// DiscountFlat represents a flat amount discount.
+message DiscountFlat {
+  // The discount amount as a decimal.
+  double value = 1;
+  // The currency for the discount amount.
+  Currency currency = 2;
 }
 
 // The possible status of an invoice.
@@ -105,12 +119,13 @@ enum InvoiceStatus {
   INVOICE_STATUS_UNCOLLECTIBLE = 5;
 }
 
-// The possible types of discount.
-enum DiscountType {
+// The supported currencies for discounts.
+enum Currency {
   // Unspecified
-  DISCOUNT_TYPE_UNSPECIFIED = 0;
-  // Flat amount discount
-  DISCOUNT_TYPE_FLAT = 1;
-  // Percentage discount
-  DISCOUNT_TYPE_PERCENTAGE = 2;
+  CURRENCY_UNSPECIFIED = 0;
+  // US Dollar
+  CURRENCY_USD = 1;
+  // Euro
+  CURRENCY_EUR = 2;
 }
+
