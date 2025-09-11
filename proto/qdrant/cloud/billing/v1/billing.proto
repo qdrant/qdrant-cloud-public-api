@@ -81,26 +81,35 @@ message Invoice {
 // Discount represents a billing discount applied to an account.
 message Discount {
   // Human-readable name for the discount.
-  string name = 1;
+  string name = 1 [(buf.validate.field).string.min_len = 1];
   // The type of discount.
   oneof type {
+    option (buf.validate.oneof).required = true;
+    // Percentage-based discount (e.g., 10% off).
     DiscountPercentage percentage = 2;
-    DiscountFlat flat = 3;
+    // Fixed amount discount (e.g., $5 off).
+    DiscountFixed fixed = 3;
   }
 }
 
 // DiscountPercentage represents a percentage-based discount.
 message DiscountPercentage {
-  // The percentage value (e.g., 12.5 for 12.5%).
-  double value = 1;
+  // The percentage value (e.g., 12.5 for 12.5%). Must be between 0 and 100.
+  double value = 1 [(buf.validate.field).double = {
+    gte: 0.0
+    lte: 100.0
+  }];
 }
 
-// DiscountFlat represents a flat amount discount.
-message DiscountFlat {
-  // The discount amount as a decimal.
-  double value = 1;
+// DiscountFixed represents a fixed amount discount.
+message DiscountFixed {
+  // The discount amount as a decimal. Must be positive.
+  double value = 1 [(buf.validate.field).double.gt = 0.0];
   // The currency for the discount amount.
-  Currency currency = 2;
+  Currency currency = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // The possible status of an invoice.
@@ -128,4 +137,3 @@ enum Currency {
   // Euro
   CURRENCY_EUR = 2;
 }
-
