@@ -1,0 +1,2 @@
+# Mark generated files to be collapsed by default in GitHub diffs.
+/gen/** linguist-generated=true
