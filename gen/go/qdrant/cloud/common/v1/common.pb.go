@@ -83,6 +83,63 @@ func (ActorType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
 }
 
+// LogField represents a field to log (in case of an error).
+type LogField struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the field to log (in the logger).
+	// It will automatically prefixed with `request.`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The field expression to find the value of the field to log (in the request).
+	// It is allowed to nest fields with a point, like 'cluster.account_id' or 'account.id'
+	FieldExpression string `protobuf:"bytes,2,opt,name=field_expression,json=fieldExpression,proto3" json:"field_expression,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *LogField) Reset() {
+	*x = LogField{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogField) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogField) ProtoMessage() {}
+
+func (x *LogField) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogField.ProtoReflect.Descriptor instead.
+func (*LogField) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *LogField) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *LogField) GetFieldExpression() string {
+	if x != nil {
+		return x.FieldExpression
+	}
+	return ""
+}
+
 // Semantic version number.
 type Version struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -98,7 +155,7 @@ type Version struct {
 
 func (x *Version) Reset() {
 	*x = Version{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -110,7 +167,7 @@ func (x *Version) String() string {
 func (*Version) ProtoMessage() {}
 
 func (x *Version) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -123,7 +180,7 @@ func (x *Version) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Version.ProtoReflect.Descriptor instead.
 func (*Version) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Version) GetMajor() uint32 {
@@ -162,7 +219,7 @@ type SecretKeyRef struct {
 
 func (x *SecretKeyRef) Reset() {
 	*x = SecretKeyRef{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -174,7 +231,7 @@ func (x *SecretKeyRef) String() string {
 func (*SecretKeyRef) ProtoMessage() {}
 
 func (x *SecretKeyRef) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -187,7 +244,7 @@ func (x *SecretKeyRef) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SecretKeyRef.ProtoReflect.Descriptor instead.
 func (*SecretKeyRef) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SecretKeyRef) GetName() string {
@@ -218,7 +275,7 @@ type KeyValue struct {
 
 func (x *KeyValue) Reset() {
 	*x = KeyValue{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -230,7 +287,7 @@ func (x *KeyValue) String() string {
 func (*KeyValue) ProtoMessage() {}
 
 func (x *KeyValue) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -243,7 +300,7 @@ func (x *KeyValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeyValue.ProtoReflect.Descriptor instead.
 func (*KeyValue) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *KeyValue) GetKey() string {
@@ -309,6 +366,14 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 		Tag:           "varint,50006,opt,name=max_message_size",
 		Filename:      "qdrant/cloud/common/v1/common.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: ([]*LogField)(nil),
+		Field:         50007,
+		Name:          "qdrant.cloud.common.v1.log_fields",
+		Tag:           "bytes,50007,rep,name=log_fields",
+		Filename:      "qdrant/cloud/common/v1/common.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -343,13 +408,20 @@ var (
 	//
 	// optional int32 max_message_size = 50006;
 	E_MaxMessageSize = &file_qdrant_cloud_common_v1_common_proto_extTypes[5]
+	// The fields to log.
+	//
+	// repeated qdrant.cloud.common.v1.LogField log_fields = 50007;
+	E_LogFields = &file_qdrant_cloud_common_v1_common_proto_extTypes[6]
 )
 
 var File_qdrant_cloud_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"K\n" +
+	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x85\x01\n" +
+	"\bLogField\x12-\n" +
+	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x18@2\x0e^[a-z][a-z_]*$R\x04name\x12J\n" +
+	"\x10field_expression\x18\x02 \x01(\tB\x1f\xbaH\x1cr\x1a2\x18^(|[a-z_]+(\\.[a-z_]+)*)$R\x0ffieldExpression\"K\n" +
 	"\aVersion\x12\x14\n" +
 	"\x05major\x18\x01 \x01(\rR\x05major\x12\x14\n" +
 	"\x05minor\x18\x02 \x01(\rR\x05minor\x12\x14\n" +
@@ -372,7 +444,9 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x15supported_actor_types\x12\x1e.google.protobuf.MethodOptions\x18Ԇ\x03 \x03(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\x11\xbaH\f\x92\x01\t\"\a\x82\x01\x04\x10\x01 \x00\x10\x01R\x13supportedActorTypes:Z\n" +
 	"\x18requires_all_permissions\x12\x1e.google.protobuf.MethodOptions\x18Ն\x03 \x01(\bR\x16requiresAllPermissions:V\n" +
 	"\x10max_message_size\x12\x1e.google.protobuf.MethodOptions\x18ֆ\x03 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\x80\b(\x01R\x0emaxMessageSizeB\xf6\x01\n" +
+	"\xbaH\a\x1a\x05\x18\x80\b(\x01R\x0emaxMessageSize:a\n" +
+	"\n" +
+	"log_fields\x12\x1e.google.protobuf.MethodOptions\x18׆\x03 \x03(\v2 .qdrant.cloud.common.v1.LogFieldR\tlogFieldsB\xf6\x01\n" +
 	"\x1acom.qdrant.cloud.common.v1B\vCommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3"
 
 var (
@@ -388,26 +462,29 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),                     // 0: qdrant.cloud.common.v1.ActorType
-	(*Version)(nil),                    // 1: qdrant.cloud.common.v1.Version
-	(*SecretKeyRef)(nil),               // 2: qdrant.cloud.common.v1.SecretKeyRef
-	(*KeyValue)(nil),                   // 3: qdrant.cloud.common.v1.KeyValue
-	(*descriptorpb.MethodOptions)(nil), // 4: google.protobuf.MethodOptions
+	(*LogField)(nil),                   // 1: qdrant.cloud.common.v1.LogField
+	(*Version)(nil),                    // 2: qdrant.cloud.common.v1.Version
+	(*SecretKeyRef)(nil),               // 3: qdrant.cloud.common.v1.SecretKeyRef
+	(*KeyValue)(nil),                   // 4: qdrant.cloud.common.v1.KeyValue
+	(*descriptorpb.MethodOptions)(nil), // 5: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	4, // 0: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	4, // 1: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	4, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	4, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	4, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	4, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	0, // 6: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	6, // [6:7] is the sub-list for extension type_name
-	0, // [0:6] is the sub-list for extension extendee
+	5, // 0: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	5, // 1: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	5, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	5, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	5, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	5, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	5, // 6: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	0, // 7: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	1, // 8: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	7, // [7:9] is the sub-list for extension type_name
+	0, // [0:7] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -422,8 +499,8 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
-			NumExtensions: 6,
+			NumMessages:   4,
+			NumExtensions: 7,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_common_v1_common_proto_goTypes,

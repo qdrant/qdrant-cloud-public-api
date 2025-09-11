@@ -60,6 +60,12 @@ extend google.protobuf.MethodOptions {
   }];
 }
 
+// The extension for logging a specific set of fields.
+extend google.protobuf.MethodOptions {
+  // The fields to log.
+  repeated LogField log_fields = 50007;
+}
+
 // ActorType specifies the type of actor that can call a method.
 enum ActorType {
   // Default, unspecified actor type. Should generally not be used explicitly in options
@@ -73,6 +79,20 @@ enum ActorType {
   // Represents a service account or machine user, often used for M2M communication.
   // This is for internal platform use only.
   ACTOR_TYPE_SERVICE_ACCOUNT = 3;
+}
+
+// LogField represents a field to log (in case of an error).
+message LogField {
+  // The name of the field to log (in the logger).
+  // It will automatically prefixed with `request.`
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 64
+    pattern: "^[a-z][a-z_]*$"
+  }];
+  // The field expression to find the value of the field to log (in the request).
+  // It is allowed to nest fields with a point, like 'cluster.account_id' or 'account.id'
+  string field_expression = 2 [(buf.validate.field).string = {pattern: "^(|[a-z_]+(\\.[a-z_]+)*)$"}];
 }
 
 // Semantic version number.
