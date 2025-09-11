@@ -35,6 +35,11 @@ service HybridCloudService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "hybrid_cloud_environment_id"
+      field_expression: "hybrid_cloud_environment_id"
+    };
   }
   // Creates a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -55,6 +60,11 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "resp.hybrid_cloud_environment.id"
       resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "hybrid_cloud_environment_name"
+      field_expression: "hybrid_cloud_environment.name"
     };
   }
   // Updates a hybrid cloud environment in the account identified by the given ID.
@@ -78,6 +88,11 @@ service HybridCloudService {
       resource_id_field: "req.hybrid_cloud_environment.id"
       resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "hybrid_cloud_environment_id"
+      field_expression: "hybrid_cloud_environment.id"
+    };
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -93,6 +108,11 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "req.hybrid_cloud_environment_id"
       resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "hybrid_cloud_environment_id"
+      field_expression: "hybrid_cloud_environment_id"
     };
   }
   // Gets the commands that should be executed against a kubernetes cluster to
@@ -113,6 +133,11 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "req.hybrid_cloud_environment_id"
       resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "hybrid_cloud_environment_id"
+      field_expression: "hybrid_cloud_environment_id"
     };
   }
 }

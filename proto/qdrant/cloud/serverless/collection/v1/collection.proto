@@ -40,6 +40,11 @@ service CollectionService {
       resource_id_field: "resp.collection.id"
       resource_url_template: "/accounts/{req.collection.account_id}/serverless-collections/{resp.collection.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_name"
+      field_expression: "collection.name"
+    };
   }
   // Upgrade collection: If current user have paid account, this API will lift the limit of the collection
   // Required Permissions:
@@ -59,6 +64,11 @@ service CollectionService {
       resource_id_field: "req.collection_id"
       resource_url_template: "/accounts/{req.account_id}/serverless-collections/{req.collection_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_id"
+      field_expression: "collection_id"
+    };
   }
   // DeleteCollection removes a collection by ID
   // Required Permissions:
@@ -74,6 +84,11 @@ service CollectionService {
       resource_type: "serverless-collection"
       resource_id_field: "req.collection_id"
       resource_url_template: "/accounts/{req.account_id}/serverless-collections/{req.collection_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "collection_id"
+      field_expression: "collection_id"
     };
   }
 }

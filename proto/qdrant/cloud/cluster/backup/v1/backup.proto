@@ -20,6 +20,15 @@ service BackupService {
     option (qdrant.cloud.common.v1.permissions) = "read:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
+    };
   }
   // Gets a backup in the account identified by the given ID.
   // Required permissions:
@@ -29,6 +38,11 @@ service BackupService {
     option (qdrant.cloud.common.v1.permissions) = "read:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
   }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
@@ -54,6 +68,11 @@ service BackupService {
         value: "req.backup.cluster_id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "backup.cluster_id"
+    };
   }
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
@@ -74,6 +93,11 @@ service BackupService {
         value: "resp-md.qc-event-cluster-id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
   }
   // Lists all backup restores in the account identified by the given ID.
   // Required permissions:
@@ -83,6 +107,11 @@ service BackupService {
     option (qdrant.cloud.common.v1.permissions) = "read:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_restores"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Restores a backup in the account identified by the given ID.
   // Required permissions:
@@ -104,6 +133,11 @@ service BackupService {
         value: "resp-md.qc-event-cluster-id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
   }
   // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -113,6 +147,11 @@ service BackupService {
     option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Gets a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -122,6 +161,15 @@ service BackupService {
     option (qdrant.cloud.common.v1.permissions) = "read:backup_schedules";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
+    };
   }
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -146,6 +194,11 @@ service BackupService {
         key: "cluster_id"
         value: "req.backup_schedule.cluster_id"
       }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "backup_schedule.cluster_id"
     };
   }
   // Updates a backup schedule in the account identified by the given ID.
@@ -172,6 +225,15 @@ service BackupService {
         value: "req.backup_schedule.cluster_id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule.id"
+    };
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "backup_schedule.cluster_id"
+    };
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -191,6 +253,11 @@ service BackupService {
         key: "cluster_id"
         value: "resp-md.qc-event-cluster-id"
       }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
     };
   }
 }

@@ -1219,12 +1219,24 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0eAGGREGATOR_SUM\x10\x01\x12\x12\n" +
 	"\x0eAGGREGATOR_AVG\x10\x02\x12\x12\n" +
 	"\x0eAGGREGATOR_MAX\x10\x03\x12\x12\n" +
-	"\x0eAGGREGATOR_MIN\x10\x042\xc1\a\n" +
-	"\x11MonitoringService\x12\xfd\x01\n" +
-	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"f\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02O\x12M/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics\x12\xf5\x01\n" +
-	"\x16GetClusterUsageMetrics\x129.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest\x1a:.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse\"d\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02M\x12K/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics\x12\xd4\x01\n" +
-	"\x0eGetClusterLogs\x121.qdrant.cloud.monitoring.v1.GetClusterLogsRequest\x1a2.qdrant.cloud.monitoring.v1.GetClusterLogsResponse\"[\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02D\x12B/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs\x12\xdc\x01\n" +
-	"\x10GetClusterEvents\x123.qdrant.cloud.monitoring.v1.GetClusterEventsRequest\x1a4.qdrant.cloud.monitoring.v1.GetClusterEventsResponse\"]\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/eventsB\x96\x02\n" +
+	"\x0eAGGREGATOR_MIN\x10\x042\xb3\b\n" +
+	"\x11MonitoringService\x12\x9a\x02\n" +
+	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x82\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02O\x12M/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics\x12\x92\x02\n" +
+	"\x16GetClusterUsageMetrics\x129.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest\x1a:.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse\"\x80\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02M\x12K/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics\x12\xf0\x01\n" +
+	"\x0eGetClusterLogs\x121.qdrant.cloud.monitoring.v1.GetClusterLogsRequest\x1a2.qdrant.cloud.monitoring.v1.GetClusterLogsResponse\"w\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02D\x12B/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs\x12\xf8\x01\n" +
+	"\x10GetClusterEvents\x123.qdrant.cloud.monitoring.v1.GetClusterEventsRequest\x1a4.qdrant.cloud.monitoring.v1.GetClusterEventsResponse\"y\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\n" +
+	"cluster_id\x12\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/eventsB\x96\x02\n" +
 	"\x1ecom.qdrant.cloud.monitoring.v1B\x0fMonitoringProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/monitoring/v1;monitoringv1\xa2\x02\x03QCM\xaa\x02\x1aQdrant.Cloud.Monitoring.V1\xca\x02\x1aQdrant\\Cloud\\Monitoring\\V1\xe2\x02&Qdrant\\Cloud\\Monitoring\\V1\\GPBMetadata\xea\x02\x1dQdrant::Cloud::Monitoring::V1b\x06proto3"
 
 var (

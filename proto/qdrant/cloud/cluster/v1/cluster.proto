@@ -27,6 +27,11 @@ service ClusterService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Creates a cluster in the account identified by the given ID.
   // Required permissions:
@@ -47,6 +52,11 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "resp.cluster.id"
       resource_url_template: "/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_name"
+      field_expression: "cluster.name"
     };
   }
   // Create a new cluster from an existing backup
@@ -71,6 +81,15 @@ service ClusterService {
         value: "req.backup_id"
       }
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "cluster_name"
+      field_expression: "cluster_name"
+    };
   }
 
   // Updates a cluster in the account identified by the given ID.
@@ -93,6 +112,11 @@ service ClusterService {
       resource_id_field: "req.cluster.id"
       resource_url_template: "/accounts/{req.cluster.account_id}/clusters/{req.cluster.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster.id"
+    };
   }
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
@@ -108,6 +132,11 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
     };
   }
   // Restarts a cluster in the account identified by the given ID.
@@ -126,6 +155,11 @@ service ClusterService {
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Suspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -142,6 +176,11 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
     };
   }
   // Suggests a unique and human-friendly name for a new cluster in the specified account.
@@ -163,6 +202,11 @@ service ClusterService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/releases"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
 }
 

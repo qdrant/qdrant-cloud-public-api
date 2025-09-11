@@ -2328,15 +2328,16 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xb9\x1a\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xed\x1b\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
 	"\tListUsers\x12%.qdrant.cloud.iam.v1.ListUsersRequest\x1a&.qdrant.cloud.iam.v1.ListUsersResponse\"=\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xc6\x01\n" +
+	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xdc\x01\n" +
 	"\n" +
-	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"g\x8a\xb5\x18\n" +
-	"write:user\x92\xb5\x18\x00\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
+	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"}\x8a\xb5\x18\n" +
+	"write:user\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
+	"\auser_id\x12\auser.id\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
 	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\xa4\x02\n" +
 	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\"\xaf\x01\x8a\xb5\x18\n" +
 	"write:user\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18m\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x0erecord-consentR\"\n" +
@@ -2344,22 +2345,29 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\n" +
 	"read:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n" +
 	"\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\x9d\x01\n" +
-	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"G\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\x8e\x02\n" +
+	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\xb3\x01\n" +
+	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"]\x8a\xb5\x18\n" +
+	"read:roles\xba\xb5\x18\x12\n" +
+	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xa8\x02\n" +
 	"\n" +
-	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xae\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xca\xf3\x18L\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\x96\x02\n" +
+	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xc8\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
+	"\trole_name\x12\trole.name\xca\xf3\x18L\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\xac\x02\n" +
 	"\n" +
-	"UpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a'.qdrant.cloud.iam.v1.UpdateRoleResponse\"\xb6\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xca\xf3\x18J\b\x02\x12\x04role\"\vreq.role.id*3/accounts/{req.role.account_id}/roles/{req.role.id}\x82\xd3\xe4\x93\x02;:\x01*\x1a6/api/iam/v1/accounts/{role.account_id}/roles/{role.id}\x12\xf7\x01\n" +
+	"UpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a'.qdrant.cloud.iam.v1.UpdateRoleResponse\"\xcc\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
+	"\arole_id\x12\arole.id\xca\xf3\x18J\b\x02\x12\x04role\"\vreq.role.id*3/accounts/{req.role.account_id}/roles/{req.role.id}\x82\xd3\xe4\x93\x02;:\x01*\x1a6/api/iam/v1/accounts/{role.account_id}/roles/{role.id}\x12\x8d\x02\n" +
 	"\n" +
-	"DeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a'.qdrant.cloud.iam.v1.DeleteRoleResponse\"\x97\x01\x8a\xb5\x18\fdelete:roles\xa2\xb5\x18\x01\x01\xca\xf3\x18E\b\x03\x12\x04role\"\vreq.role_id*./accounts/{req.account_id}/roles/{req.role_id}\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xd6\x01\n" +
+	"DeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a'.qdrant.cloud.iam.v1.DeleteRoleResponse\"\xad\x01\x8a\xb5\x18\fdelete:roles\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
+	"\arole_id\x12\arole_id\xca\xf3\x18E\b\x03\x12\x04role\"\vreq.role_id*./accounts/{req.account_id}/roles/{req.role_id}\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xd6\x01\n" +
 	"\x18ListEffectivePermissions\x124.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a5.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"M\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xb5\x01\n" +
-	"\rListUserRoles\x12).qdrant.cloud.iam.v1.ListUserRolesRequest\x1a*.qdrant.cloud.iam.v1.ListUserRolesResponse\"M\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xb5\x01\n" +
-	"\rListRoleUsers\x12).qdrant.cloud.iam.v1.ListRoleUsersRequest\x1a*.qdrant.cloud.iam.v1.ListRoleUsersResponse\"M\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xa2\x02\n" +
-	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xb3\x01\x8a\xb5\x18\vwrite:roles\xa2\xb5\x18\x01\x01\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd4\x01\n" +
+	"read:roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xcb\x01\n" +
+	"\rListUserRoles\x12).qdrant.cloud.iam.v1.ListUserRolesRequest\x1a*.qdrant.cloud.iam.v1.ListUserRolesResponse\"c\x8a\xb5\x18\n" +
+	"read:roles\xba\xb5\x18\x12\n" +
+	"\auser_id\x12\auser_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xcb\x01\n" +
+	"\rListRoleUsers\x12).qdrant.cloud.iam.v1.ListRoleUsersRequest\x1a*.qdrant.cloud.iam.v1.ListRoleUsersResponse\"c\x8a\xb5\x18\n" +
+	"read:roles\xba\xb5\x18\x12\n" +
+	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xb8\x02\n" +
+	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc9\x01\x8a\xb5\x18\vwrite:roles\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
+	"\auser_id\x12\auser_id\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd4\x01\n" +
 	"\n" +
 	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logoutB\xde\x01\n" +
 	"\x17com.qdrant.cloud.iam.v1B\bIamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3"

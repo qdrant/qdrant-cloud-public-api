@@ -27,6 +27,11 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "payment_method_id"
+      field_expression: "payment_method_id"
+    };
   }
   // Creates a new payment method for the account.
   // This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
@@ -48,6 +53,11 @@ service PaymentService {
       resource_type: "payment-method"
       resource_id_field: "resp.payment_method.id"
       resource_url_template: "/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "payment_method_type"
+      field_expression: "payment_method.type"
     };
   }
   // Updates the payment method for the account.
@@ -71,6 +81,11 @@ service PaymentService {
       resource_id_field: "req.payment_method.id"
       resource_url_template: "/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "payment_method_id"
+      field_expression: "payment_method.id"
+    };
   }
   // Delete the payment method identified by the given ID.
   // Required permissions:
@@ -87,6 +102,11 @@ service PaymentService {
       resource_id_field: "req.payment_method_id"
       resource_url_template: "/accounts/{req.account_id}/payment-methods/{req.payment_method_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "payment_method_id"
+      field_expression: "payment_method_id"
+    };
   }
   // Get the Stripe Checkout session by its ID.
   // This method is used to retrieve the session details after it has been created.
@@ -97,6 +117,11 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "session_id"
+      field_expression: "session_id"
+    };
   }
   // Initiates the creation of a Stripe Checkout session for the specified account.
   // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.
@@ -117,6 +142,11 @@ service PaymentService {
       resource_type: "account"
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "redirect_url"
+      field_expression: "redirect_url"
     };
   }
 }

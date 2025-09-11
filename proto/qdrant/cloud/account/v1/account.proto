@@ -51,6 +51,11 @@ service AccountService {
       resource_id_field: "resp.account.id"
       resource_url_template: "/accounts/{resp.account.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "account_name"
+      field_expression: "account.name"
+    };
   }
   // Updates an account identified by the given ID.
   // Required permissions:
@@ -71,6 +76,11 @@ service AccountService {
       resource_type: "account"
       resource_id_field: "req.account.id"
       resource_url_template: "/accounts/{req.account.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "account_name"
+      field_expression: "account.name"
     };
   }
   // Deletes an account identified by the given ID.
@@ -122,6 +132,11 @@ service AccountService {
     option (common.v1.permissions) = "read:invites";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites/{invite_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "invite_id"
+      field_expression: "invite_id"
+    };
   }
   // Creates a new account invite.
   // Required permissions:
@@ -145,6 +160,11 @@ service AccountService {
       resource_id_field: "resp.account_invite.id"
       resource_url_template: "/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_email"
+      field_expression: "account_invite.user_email"
+    };
   }
   // Deletes an account invite.
   // Required permissions:
@@ -160,6 +180,11 @@ service AccountService {
       resource_type: "account-invite"
       resource_id_field: "req.invite_id"
       resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "invite_id"
+      field_expression: "invite_id"
     };
   }
   // Accepts an account invite.
@@ -182,6 +207,11 @@ service AccountService {
       resource_id_field: "req.invite_id"
       resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "invite_id"
+      field_expression: "invite_id"
+    };
   }
   // Rejects an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -203,6 +233,11 @@ service AccountService {
       resource_id_field: "req.invite_id"
       resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
     };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "invite_id"
+      field_expression: "invite_id"
+    };
   }
   // Lists all account members in the account identified by the given account ID.
   // The authenticated actor must be a member of the account identified by the given account ID.
@@ -223,6 +258,11 @@ service AccountService {
     option (common.v1.permissions) = "read:users"; // Not 'read:accounts' for historical reasons
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user_id"
+    };
   }
   // Deletes an account member.
   // The authenticated actor must be a member of the account from which the the member is being removed.
@@ -241,6 +281,11 @@ service AccountService {
       resource_type: "account-member"
       resource_id_field: "req.user_id"
       resource_url_template: "/accounts/{req.account_id}/members/{req.user_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user_id"
     };
   }
 }

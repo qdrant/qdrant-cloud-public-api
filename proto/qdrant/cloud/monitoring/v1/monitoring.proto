@@ -18,6 +18,11 @@ service MonitoringService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -27,6 +32,11 @@ service MonitoringService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Gets the logs of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -36,6 +46,11 @@ service MonitoringService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
   // Gets the events of a cluster in the account identified by the given ID.
   // This method is currently available only for clusters running in hybrid cloud environments.
@@ -46,6 +61,11 @@ service MonitoringService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
   }
 }
 

@@ -757,12 +757,18 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\vPackageTier\x12#\n" +
 	"\x1fPACKAGE_TIER_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_TIER_STANDARD\x10\x01\x12\x18\n" +
-	"\x14PACKAGE_TIER_PREMIUM\x10\x022\x89\x04\n" +
-	"\x0eBookingService\x12\xa7\x01\n" +
-	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\":\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\xa6\x01\n" +
+	"\x14PACKAGE_TIER_PREMIUM\x10\x022\xe3\x05\n" +
+	"\x0eBookingService\x12\x8a\x02\n" +
+	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\xba\x01\n" +
 	"\n" +
-	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"?\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\xa3\x01\n" +
-	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packagesB\xfe\x01\n" +
+	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"S\x8a\xb5\x18\x00\xba\xb5\x18\x10\n" +
+	"\n" +
+	"package_id\x12\x02id\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x86\x02\n" +
+	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packagesB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
 var (
