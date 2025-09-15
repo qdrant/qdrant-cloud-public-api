@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package qdrant.cloud.ui.v1;
+
+import "buf/validate/validate.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/iam/v1/iam.proto";
+
+// UIViewService provides optimized methods for UI components that need aggregated data.
+// This service combines multiple entities to reduce API round trips for common UI patterns.
+service UIViewService {
+  // Lists users in an account with their assigned roles.
+  // This endpoint provides a consolidated view that would otherwise require separate calls
+  // to ListUsers and ListUserRoles for each user.
+  // Required permissions:
+  // - read:users
+  // - read:roles
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+  rpc ListUsersWithRoles(ListUsersWithRolesRequest) returns (ListUsersWithRolesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:users";
+    option (common.v1.permissions) = "read:roles";
+  }
+}
+
+// ListUsersWithRolesRequest is the request for the ListUsersWithRoles function.
+message ListUsersWithRolesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListUsersWithRolesResponse is the response from the ListUsersWithRoles function.
+message ListUsersWithRolesResponse {
+  // The list of users extended with their assigned roles.
+  repeated UserWithRoles items = 1;
+}
+
+// UserWithRoles represents a user along with their assigned roles.
+message UserWithRoles {
+  // The user information.
+  qdrant.cloud.iam.v1.User user = 1 [(buf.validate.field).required = true];
+  // The roles assigned to this user.
+  // If the user has no roles assigned, this list will be empty.
+  repeated qdrant.cloud.iam.v1.Role roles = 2;
+}
