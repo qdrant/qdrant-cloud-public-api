@@ -381,10 +381,10 @@ type Discount struct {
 	//	*Discount_Percentage
 	//	*Discount_Fixed
 	Type isDiscount_Type `protobuf_oneof:"type"`
-	// The timestamp when the discount becomes active.
-	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
-	// The timestamp when the discount expires. Must be after active_from.
-	ActiveTo      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
+	// The timestamp when the discount becomes valid.
+	ValidFrom *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_from,json=validFrom,proto3" json:"valid_from,omitempty"`
+	// The timestamp when the discount expires. Must be after valid_from.
+	ValidUntil    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -451,16 +451,16 @@ func (x *Discount) GetFixed() *DiscountFixed {
 	return nil
 }
 
-func (x *Discount) GetActiveFrom() *timestamppb.Timestamp {
+func (x *Discount) GetValidFrom() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ActiveFrom
+		return x.ValidFrom
 	}
 	return nil
 }
 
-func (x *Discount) GetActiveTo() *timestamppb.Timestamp {
+func (x *Discount) GetValidUntil() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ActiveTo
+		return x.ValidUntil
 	}
 	return nil
 }
@@ -612,17 +612,18 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
-	"\b_pdf_url\"\xb7\x03\n" +
+	"\b_pdf_url\"\xba\x03\n" +
 	"\bDiscount\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12M\n" +
 	"\n" +
 	"percentage\x18\x02 \x01(\v2+.qdrant.cloud.billing.v1.DiscountPercentageH\x00R\n" +
 	"percentage\x12>\n" +
-	"\x05fixed\x18\x03 \x01(\v2&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05fixed\x12C\n" +
-	"\vactive_from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\n" +
-	"activeFrom\x12D\n" +
-	"\tactive_to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\v\xbaH\b\xc8\x01\x01\xb2\x01\x02@\x00R\bactiveTo:e\xbaHb\x1a`\n" +
-	"\x16discount.active_period\x12#active_to must be after active_from\x1a!this.active_to > this.active_fromB\r\n" +
+	"\x05fixed\x18\x03 \x01(\v2&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05fixed\x12A\n" +
+	"\n" +
+	"valid_from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tvalidFrom\x12H\n" +
+	"\vvalid_until\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\v\xbaH\b\xc8\x01\x01\xb2\x01\x02@\x00R\n" +
+	"validUntil:f\xbaHc\x1aa\n" +
+	"\x15discount.valid_period\x12$valid_until must be after valid_from\x1a\"this.valid_until > this.valid_fromB\r\n" +
 	"\x04type\x12\x05\xbaH\x02\b\x01\"C\n" +
 	"\x12DiscountPercentage\x12-\n" +
 	"\x05value\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"d\n" +
@@ -675,8 +676,8 @@ var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
 	7,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
 	8,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	9,  // 6: qdrant.cloud.billing.v1.Discount.active_from:type_name -> google.protobuf.Timestamp
-	9,  // 7: qdrant.cloud.billing.v1.Discount.active_to:type_name -> google.protobuf.Timestamp
+	9,  // 6: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
+	9,  // 7: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
 	1,  // 8: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
 	3,  // 9: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
 	2,  // 10: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse

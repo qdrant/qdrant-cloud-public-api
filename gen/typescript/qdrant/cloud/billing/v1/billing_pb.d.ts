@@ -246,18 +246,18 @@ export declare type Discount = Message<"qdrant.cloud.billing.v1.Discount"> & {
   } | { case: undefined; value?: undefined };
 
   /**
-   * The timestamp when the discount becomes active.
+   * The timestamp when the discount becomes valid.
    *
-   * @generated from field: google.protobuf.Timestamp active_from = 4;
+   * @generated from field: google.protobuf.Timestamp valid_from = 4;
    */
-  activeFrom?: Timestamp;
+  validFrom?: Timestamp;
 
   /**
-   * The timestamp when the discount expires. Must be after active_from.
+   * The timestamp when the discount expires. Must be after valid_from.
    *
-   * @generated from field: google.protobuf.Timestamp active_to = 5;
+   * @generated from field: google.protobuf.Timestamp valid_until = 5;
    */
-  activeTo?: Timestamp;
+  validUntil?: Timestamp;
 };
 
 /**
@@ -297,18 +297,18 @@ export declare type DiscountValid = Message<"qdrant.cloud.billing.v1.Discount"> 
   } | { case: undefined; value?: undefined };
 
   /**
-   * The timestamp when the discount becomes active.
+   * The timestamp when the discount becomes valid.
    *
-   * @generated from field: google.protobuf.Timestamp active_from = 4;
+   * @generated from field: google.protobuf.Timestamp valid_from = 4;
    */
-  activeFrom: Timestamp;
+  validFrom: Timestamp;
 
   /**
-   * The timestamp when the discount expires. Must be after active_from.
+   * The timestamp when the discount expires. Must be after valid_from.
    *
-   * @generated from field: google.protobuf.Timestamp active_to = 5;
+   * @generated from field: google.protobuf.Timestamp valid_until = 5;
    */
-  activeTo: Timestamp;
+  validUntil: Timestamp;
 };
 
 /**

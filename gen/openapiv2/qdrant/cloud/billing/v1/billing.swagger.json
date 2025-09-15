@@ -125,15 +125,15 @@
           "$ref": "#/definitions/v1DiscountFixed",
           "description": "Fixed amount discount (e.g., $5 off)."
         },
-        "activeFrom": {
+        "validFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the discount becomes active."
+          "description": "The timestamp when the discount becomes valid."
         },
-        "activeTo": {
+        "validUntil": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the discount expires. Must be after active_from."
+          "description": "The timestamp when the discount expires. Must be after valid_from."
         }
       },
       "description": "Discount represents a billing discount applied to an account."
