@@ -734,6 +734,13 @@
             "defaultAccountId": {
               "type": "string",
               "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+            },
+            "roleIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The identifiers of the roles assigned to the user."
             }
           },
           "description": "The actual user.",
@@ -1070,6 +1077,13 @@
         "defaultAccountId": {
           "type": "string",
           "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+        },
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the roles assigned to the user."
         }
       },
       "description": "A User represents a user in the Qdrant cloud."

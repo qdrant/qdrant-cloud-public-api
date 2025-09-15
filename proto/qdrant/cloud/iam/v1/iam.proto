@@ -589,6 +589,13 @@ message User {
   // The default account ID of the user (in GUID format).
   // You should be member of the account when updating.
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
+  // The identifiers of the roles assigned to the user.
+  repeated string role_ids = 7 [(buf.validate.field).repeated = {
+    min_items: 1 // Ensure at least one role ID is provided
+    items: {
+      string: {uuid: true}
+    }
+  }];
 }
 
 // UserStatus defines the possible statuses of a user.

@@ -895,6 +895,13 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * @generated from field: string default_account_id = 6;
    */
   defaultAccountId: string;
+
+  /**
+   * The identifiers of the roles assigned to the user.
+   *
+   * @generated from field: repeated string role_ids = 7;
+   */
+  roleIds: string[];
 };
 
 export declare type UserValid = User;
