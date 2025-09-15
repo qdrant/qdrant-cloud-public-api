@@ -631,7 +631,7 @@
             },
             "name": {
               "type": "string",
-              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+              "description": "The name of the role.\nName can only contain letters, numbers, spaces, underscores and dashes."
             },
             "description": {
               "type": "string",
@@ -678,7 +678,7 @@
             },
             "name": {
               "type": "string",
-              "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+              "description": "The name of the role.\nName can only contain letters, numbers, spaces, underscores and dashes."
             },
             "description": {
               "type": "string",
@@ -974,7 +974,7 @@
         },
         "name": {
           "type": "string",
-          "title": "The name of the role.\nName can only contain letters, numbers, underscores and dashes"
+          "description": "The name of the role.\nName can only contain letters, numbers, spaces, underscores and dashes."
         },
         "description": {
           "type": "string",
