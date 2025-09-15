@@ -183,6 +183,99 @@ func (x *ListInvoicesResponse) GetItems() []*Invoice {
 	return nil
 }
 
+// ListDiscountsRequest is the request for the ListDiscounts function
+type ListDiscountsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format).
+	// This is a required field.
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDiscountsRequest) Reset() {
+	*x = ListDiscountsRequest{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDiscountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDiscountsRequest) ProtoMessage() {}
+
+func (x *ListDiscountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDiscountsRequest.ProtoReflect.Descriptor instead.
+func (*ListDiscountsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListDiscountsRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+// ListDiscountsResponse is the response from the ListDiscounts function
+type ListDiscountsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The list of discounts.
+	Items         []*Discount `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDiscountsResponse) Reset() {
+	*x = ListDiscountsResponse{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDiscountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDiscountsResponse) ProtoMessage() {}
+
+func (x *ListDiscountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDiscountsResponse.ProtoReflect.Descriptor instead.
+func (*ListDiscountsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListDiscountsResponse) GetItems() []*Discount {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // Invoice represents a billing invoice issued to an account.
 type Invoice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -206,7 +299,7 @@ type Invoice struct {
 
 func (x *Invoice) Reset() {
 	*x = Invoice{}
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -218,7 +311,7 @@ func (x *Invoice) String() string {
 func (*Invoice) ProtoMessage() {}
 
 func (x *Invoice) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -231,7 +324,7 @@ func (x *Invoice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Invoice.ProtoReflect.Descriptor instead.
 func (*Invoice) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Invoice) GetId() string {
@@ -276,6 +369,223 @@ func (x *Invoice) GetPdfUrl() string {
 	return ""
 }
 
+// Discount represents a billing discount applied to an account.
+type Discount struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Human-readable name for the discount.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The type of discount.
+	//
+	// Types that are valid to be assigned to Type:
+	//
+	//	*Discount_Percentage
+	//	*Discount_Fixed
+	Type isDiscount_Type `protobuf_oneof:"type"`
+	// The timestamp when the discount becomes valid.
+	ValidFrom *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_from,json=validFrom,proto3" json:"valid_from,omitempty"`
+	// The timestamp when the discount expires. Must be after valid_from.
+	ValidUntil    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Discount) Reset() {
+	*x = Discount{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Discount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Discount) ProtoMessage() {}
+
+func (x *Discount) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Discount.ProtoReflect.Descriptor instead.
+func (*Discount) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Discount) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Discount) GetType() isDiscount_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
+func (x *Discount) GetPercentage() *DiscountPercentage {
+	if x != nil {
+		if x, ok := x.Type.(*Discount_Percentage); ok {
+			return x.Percentage
+		}
+	}
+	return nil
+}
+
+func (x *Discount) GetFixed() *DiscountFixed {
+	if x != nil {
+		if x, ok := x.Type.(*Discount_Fixed); ok {
+			return x.Fixed
+		}
+	}
+	return nil
+}
+
+func (x *Discount) GetValidFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ValidFrom
+	}
+	return nil
+}
+
+func (x *Discount) GetValidUntil() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ValidUntil
+	}
+	return nil
+}
+
+type isDiscount_Type interface {
+	isDiscount_Type()
+}
+
+type Discount_Percentage struct {
+	// Percentage-based discount (e.g., 10% off).
+	Percentage *DiscountPercentage `protobuf:"bytes,2,opt,name=percentage,proto3,oneof"`
+}
+
+type Discount_Fixed struct {
+	// Fixed amount discount (e.g., $5 off).
+	Fixed *DiscountFixed `protobuf:"bytes,3,opt,name=fixed,proto3,oneof"`
+}
+
+func (*Discount_Percentage) isDiscount_Type() {}
+
+func (*Discount_Fixed) isDiscount_Type() {}
+
+// DiscountPercentage represents a percentage-based discount.
+type DiscountPercentage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The percentage value (e.g., 12.5 for 12.5%). Must be between 0 and 100.
+	Value         float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DiscountPercentage) Reset() {
+	*x = DiscountPercentage{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DiscountPercentage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DiscountPercentage) ProtoMessage() {}
+
+func (x *DiscountPercentage) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DiscountPercentage.ProtoReflect.Descriptor instead.
+func (*DiscountPercentage) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DiscountPercentage) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+// DiscountFixed represents a fixed amount discount.
+type DiscountFixed struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The discount amount as a decimal. Must be positive.
+	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
+	// The currency for the discount amount.
+	// Specifies the currency in which the prices are denominated.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+	Currency      string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DiscountFixed) Reset() {
+	*x = DiscountFixed{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DiscountFixed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DiscountFixed) ProtoMessage() {}
+
+func (x *DiscountFixed) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DiscountFixed.ProtoReflect.Descriptor instead.
+func (*DiscountFixed) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DiscountFixed) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+func (x *DiscountFixed) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
 var File_qdrant_cloud_billing_v1_billing_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
@@ -285,7 +595,12 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n" +
 	"\x14ListInvoicesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\xc2\x02\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.billing.v1.InvoiceR\x05items\"?\n" +
+	"\x14ListDiscountsRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"P\n" +
+	"\x15ListDiscountsResponse\x127\n" +
+	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc2\x02\n" +
 	"\aInvoice\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12$\n" +
 	"\x06number\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06number\x88\x01\x01\x12*\n" +
@@ -297,16 +612,35 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
-	"\b_pdf_url*\xb6\x01\n" +
+	"\b_pdf_url\"\xba\x03\n" +
+	"\bDiscount\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12M\n" +
+	"\n" +
+	"percentage\x18\x02 \x01(\v2+.qdrant.cloud.billing.v1.DiscountPercentageH\x00R\n" +
+	"percentage\x12>\n" +
+	"\x05fixed\x18\x03 \x01(\v2&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05fixed\x12A\n" +
+	"\n" +
+	"valid_from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tvalidFrom\x12H\n" +
+	"\vvalid_until\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\v\xbaH\b\xc8\x01\x01\xb2\x01\x02@\x00R\n" +
+	"validUntil:f\xbaHc\x1aa\n" +
+	"\x15discount.valid_period\x12$valid_until must be after valid_from\x1a\"this.valid_until > this.valid_fromB\r\n" +
+	"\x04type\x12\x05\xbaH\x02\b\x01\"C\n" +
+	"\x12DiscountPercentage\x12-\n" +
+	"\x05value\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"d\n" +
+	"\rDiscountFixed\x12$\n" +
+	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12-\n" +
+	"\bcurrency\x18\x02 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency*\xb6\x01\n" +
 	"\rInvoiceStatus\x12\x1e\n" +
 	"\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xd2\x01\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\x98\x03\n" +
 	"\x0eBillingService\x12\xbf\x01\n" +
-	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoicesB\xfe\x01\n" +
+	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n" +
+	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discountsB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.billing.v1B\fBillingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3"
 
 var (
@@ -322,25 +656,37 @@ func file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_billing_v1_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(InvoiceStatus)(0),            // 0: qdrant.cloud.billing.v1.InvoiceStatus
 	(*ListInvoicesRequest)(nil),   // 1: qdrant.cloud.billing.v1.ListInvoicesRequest
 	(*ListInvoicesResponse)(nil),  // 2: qdrant.cloud.billing.v1.ListInvoicesResponse
-	(*Invoice)(nil),               // 3: qdrant.cloud.billing.v1.Invoice
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*ListDiscountsRequest)(nil),  // 3: qdrant.cloud.billing.v1.ListDiscountsRequest
+	(*ListDiscountsResponse)(nil), // 4: qdrant.cloud.billing.v1.ListDiscountsResponse
+	(*Invoice)(nil),               // 5: qdrant.cloud.billing.v1.Invoice
+	(*Discount)(nil),              // 6: qdrant.cloud.billing.v1.Discount
+	(*DiscountPercentage)(nil),    // 7: qdrant.cloud.billing.v1.DiscountPercentage
+	(*DiscountFixed)(nil),         // 8: qdrant.cloud.billing.v1.DiscountFixed
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
-	3, // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
-	4, // 1: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
-	0, // 2: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
-	1, // 3: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	2, // 4: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	5,  // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
+	6,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
+	9,  // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
+	7,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
+	8,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
+	9,  // 6: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
+	9,  // 7: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
+	1,  // 8: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	3,  // 9: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	2,  // 10: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	4,  // 11: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	10, // [10:12] is the sub-list for method output_type
+	8,  // [8:10] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }
@@ -348,14 +694,18 @@ func file_qdrant_cloud_billing_v1_billing_proto_init() {
 	if File_qdrant_cloud_billing_v1_billing_proto != nil {
 		return
 	}
-	file_qdrant_cloud_billing_v1_billing_proto_msgTypes[2].OneofWrappers = []any{}
+	file_qdrant_cloud_billing_v1_billing_proto_msgTypes[4].OneofWrappers = []any{}
+	file_qdrant_cloud_billing_v1_billing_proto_msgTypes[5].OneofWrappers = []any{
+		(*Discount_Percentage)(nil),
+		(*Discount_Fixed)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_billing_v1_billing_proto_rawDesc), len(file_qdrant_cloud_billing_v1_billing_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

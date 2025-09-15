@@ -20,6 +20,11 @@ class BillingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesResponse.FromString,
                 _registered_method=True)
+        self.ListDiscounts = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/ListDiscounts',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsResponse.FromString,
+                _registered_method=True)
 
 
 class BillingServiceServicer(object):
@@ -35,6 +40,15 @@ class BillingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListDiscounts(self, request, context):
+        """Lists all discounts for the account identified by the given ID.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BillingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -42,6 +56,11 @@ def add_BillingServiceServicer_to_server(servicer, server):
                     servicer.ListInvoices,
                     request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesResponse.SerializeToString,
+            ),
+            'ListDiscounts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListDiscounts,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -72,6 +91,33 @@ class BillingService(object):
             '/qdrant.cloud.billing.v1.BillingService/ListInvoices',
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesRequest.SerializeToString,
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListInvoicesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListDiscounts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.billing.v1.BillingService/ListDiscounts',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -12,3 +12,12 @@ import { BillingService } from "./billing_pb.js";
  * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListInvoices
  */
 export const listInvoices = BillingService.method.listInvoices;
+
+/**
+ * Lists all discounts for the account identified by the given ID.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListDiscounts
+ */
+export const listDiscounts = BillingService.method.listDiscounts;
