@@ -80,6 +80,11 @@ message Invoice {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // Discount represents a billing discount applied to an account.
 message Discount {
+  option (buf.validate.message).cel = {
+    id: "discount.active_period"
+    message: "active_to must be after active_from"
+    expression: "this.active_to > this.active_from"
+  };
   // Human-readable name for the discount.
   string name = 1 [(buf.validate.field).string.min_len = 1];
   // The type of discount.
@@ -90,6 +95,13 @@ message Discount {
     // Fixed amount discount (e.g., $5 off).
     DiscountFixed fixed = 3;
   }
+  // The timestamp when the discount becomes active.
+  google.protobuf.Timestamp active_from = 4 [(buf.validate.field).required = true];
+  // The timestamp when the discount expires. Must be after active_from.
+  google.protobuf.Timestamp active_to = 5 [(buf.validate.field) = {
+    required: true
+    timestamp: {gt_now: false}
+  }];
 }
 
 // DiscountPercentage represents a percentage-based discount.

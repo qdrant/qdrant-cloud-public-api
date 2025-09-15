@@ -433,7 +433,11 @@ type Discount struct {
 	//
 	//	*Discount_Percentage
 	//	*Discount_Fixed
-	Type          isDiscount_Type `protobuf_oneof:"type"`
+	Type isDiscount_Type `protobuf_oneof:"type"`
+	// The timestamp when the discount becomes active.
+	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
+	// The timestamp when the discount expires. Must be after active_from.
+	ActiveTo      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -496,6 +500,20 @@ func (x *Discount) GetFixed() *DiscountFixed {
 		if x, ok := x.Type.(*Discount_Fixed); ok {
 			return x.Fixed
 		}
+	}
+	return nil
+}
+
+func (x *Discount) GetActiveFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ActiveFrom
+	}
+	return nil
+}
+
+func (x *Discount) GetActiveTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ActiveTo
 	}
 	return nil
 }
@@ -645,13 +663,17 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
-	"\b_pdf_url\"\xc5\x01\n" +
+	"\b_pdf_url\"\xb7\x03\n" +
 	"\bDiscount\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12M\n" +
 	"\n" +
 	"percentage\x18\x02 \x01(\v2+.qdrant.cloud.billing.v1.DiscountPercentageH\x00R\n" +
 	"percentage\x12>\n" +
-	"\x05fixed\x18\x03 \x01(\v2&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05fixedB\r\n" +
+	"\x05fixed\x18\x03 \x01(\v2&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05fixed\x12C\n" +
+	"\vactive_from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"activeFrom\x12D\n" +
+	"\tactive_to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\v\xbaH\b\xc8\x01\x01\xb2\x01\x02@\x00R\bactiveTo:e\xbaHb\x1a`\n" +
+	"\x16discount.active_period\x12#active_to must be after active_from\x1a!this.active_to > this.active_fromB\r\n" +
 	"\x04type\x12\x05\xbaH\x02\b\x01\"C\n" +
 	"\x12DiscountPercentage\x12-\n" +
 	"\x05value\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"\x80\x01\n" +
@@ -709,16 +731,18 @@ var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
 	8,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
 	9,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	1,  // 6: qdrant.cloud.billing.v1.DiscountFixed.currency:type_name -> qdrant.cloud.billing.v1.Currency
-	2,  // 7: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	4,  // 8: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
-	3,  // 9: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	5,  // 10: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	9,  // [9:11] is the sub-list for method output_type
-	7,  // [7:9] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	10, // 6: qdrant.cloud.billing.v1.Discount.active_from:type_name -> google.protobuf.Timestamp
+	10, // 7: qdrant.cloud.billing.v1.Discount.active_to:type_name -> google.protobuf.Timestamp
+	1,  // 8: qdrant.cloud.billing.v1.DiscountFixed.currency:type_name -> qdrant.cloud.billing.v1.Currency
+	2,  // 9: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	4,  // 10: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	3,  // 11: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	5,  // 12: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	11, // [11:13] is the sub-list for method output_type
+	9,  // [9:11] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }

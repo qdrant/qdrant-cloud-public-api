@@ -244,9 +244,72 @@ export declare type Discount = Message<"qdrant.cloud.billing.v1.Discount"> & {
     value: DiscountFixed;
     case: "fixed";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * The timestamp when the discount becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 4;
+   */
+  activeFrom?: Timestamp;
+
+  /**
+   * The timestamp when the discount expires. Must be after active_from.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 5;
+   */
+  activeTo?: Timestamp;
 };
 
-export declare type DiscountValid = Discount;
+/**
+ * Discount represents a billing discount applied to an account.
+ *
+ * @generated from message qdrant.cloud.billing.v1.Discount
+ */
+export declare type DiscountValid = Message<"qdrant.cloud.billing.v1.Discount"> & {
+  /**
+   * Human-readable name for the discount.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * The type of discount.
+   *
+   * @generated from oneof qdrant.cloud.billing.v1.Discount.type
+   */
+  type: {
+    /**
+     * Percentage-based discount (e.g., 10% off).
+     *
+     * @generated from field: qdrant.cloud.billing.v1.DiscountPercentage percentage = 2;
+     */
+    value: DiscountPercentageValid;
+    case: "percentage";
+  } | {
+    /**
+     * Fixed amount discount (e.g., $5 off).
+     *
+     * @generated from field: qdrant.cloud.billing.v1.DiscountFixed fixed = 3;
+     */
+    value: DiscountFixedValid;
+    case: "fixed";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * The timestamp when the discount becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 4;
+   */
+  activeFrom: Timestamp;
+
+  /**
+   * The timestamp when the discount expires. Must be after active_from.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 5;
+   */
+  activeTo: Timestamp;
+};
 
 /**
  * Describes the message qdrant.cloud.billing.v1.Discount.

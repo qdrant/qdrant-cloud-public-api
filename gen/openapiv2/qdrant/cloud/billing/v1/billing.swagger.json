@@ -134,6 +134,16 @@
         "fixed": {
           "$ref": "#/definitions/v1DiscountFixed",
           "description": "Fixed amount discount (e.g., $5 off)."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount becomes active."
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount expires. Must be after active_from."
         }
       },
       "description": "Discount represents a billing discount applied to an account."

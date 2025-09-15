@@ -78,14 +78,18 @@ class Invoice(_message.Message):
     def __init__(self, id: _Optional[str] = ..., number: _Optional[str] = ..., total_amount: _Optional[int] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[InvoiceStatus, str]] = ..., pdf_url: _Optional[str] = ...) -> None: ...
 
 class Discount(_message.Message):
-    __slots__ = ("name", "percentage", "fixed")
+    __slots__ = ("name", "percentage", "fixed", "active_from", "active_to")
     NAME_FIELD_NUMBER: _ClassVar[int]
     PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
     FIXED_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_FROM_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_TO_FIELD_NUMBER: _ClassVar[int]
     name: str
     percentage: DiscountPercentage
     fixed: DiscountFixed
-    def __init__(self, name: _Optional[str] = ..., percentage: _Optional[_Union[DiscountPercentage, _Mapping]] = ..., fixed: _Optional[_Union[DiscountFixed, _Mapping]] = ...) -> None: ...
+    active_from: _timestamp_pb2.Timestamp
+    active_to: _timestamp_pb2.Timestamp
+    def __init__(self, name: _Optional[str] = ..., percentage: _Optional[_Union[DiscountPercentage, _Mapping]] = ..., fixed: _Optional[_Union[DiscountFixed, _Mapping]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class DiscountPercentage(_message.Message):
     __slots__ = ("value",)
