@@ -118,10 +118,9 @@ message DiscountFixed {
   // The discount amount as a decimal. Must be positive.
   double value = 1 [(buf.validate.field).double.gt = 0.0];
   // The currency for the discount amount.
-  Currency currency = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  // Specifies the currency in which the prices are denominated.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 2 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
 }
 
 // The possible status of an invoice.
@@ -138,14 +137,4 @@ enum InvoiceStatus {
   INVOICE_STATUS_PAID = 4;
   // Uncollectible
   INVOICE_STATUS_UNCOLLECTIBLE = 5;
-}
-
-// The supported currencies for discounts.
-enum Currency {
-  // Unspecified
-  CURRENCY_UNSPECIFIED = 0;
-  // US Dollar
-  CURRENCY_USD = 1;
-  // Euro
-  CURRENCY_EUR = 2;
 }

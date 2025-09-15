@@ -110,16 +110,6 @@
       },
       "additionalProperties": {}
     },
-    "v1Currency": {
-      "type": "string",
-      "enum": [
-        "CURRENCY_UNSPECIFIED",
-        "CURRENCY_USD",
-        "CURRENCY_EUR"
-      ],
-      "default": "CURRENCY_UNSPECIFIED",
-      "description": "The supported currencies for discounts.\n\n - CURRENCY_UNSPECIFIED: Unspecified\n - CURRENCY_USD: US Dollar\n - CURRENCY_EUR: Euro"
-    },
     "v1Discount": {
       "type": "object",
       "properties": {
@@ -157,8 +147,8 @@
           "description": "The discount amount as a decimal. Must be positive."
         },
         "currency": {
-          "$ref": "#/definitions/v1Currency",
-          "description": "The currency for the discount amount."
+          "type": "string",
+          "description": "The currency for the discount amount.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         }
       },
       "description": "DiscountFixed represents a fixed amount discount."

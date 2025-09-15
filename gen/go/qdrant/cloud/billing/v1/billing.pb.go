@@ -90,59 +90,6 @@ func (InvoiceStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{0}
 }
 
-// The supported currencies for discounts.
-type Currency int32
-
-const (
-	// Unspecified
-	Currency_CURRENCY_UNSPECIFIED Currency = 0
-	// US Dollar
-	Currency_CURRENCY_USD Currency = 1
-	// Euro
-	Currency_CURRENCY_EUR Currency = 2
-)
-
-// Enum value maps for Currency.
-var (
-	Currency_name = map[int32]string{
-		0: "CURRENCY_UNSPECIFIED",
-		1: "CURRENCY_USD",
-		2: "CURRENCY_EUR",
-	}
-	Currency_value = map[string]int32{
-		"CURRENCY_UNSPECIFIED": 0,
-		"CURRENCY_USD":         1,
-		"CURRENCY_EUR":         2,
-	}
-)
-
-func (x Currency) Enum() *Currency {
-	p := new(Currency)
-	*p = x
-	return p
-}
-
-func (x Currency) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Currency) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_billing_v1_billing_proto_enumTypes[1].Descriptor()
-}
-
-func (Currency) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_billing_v1_billing_proto_enumTypes[1]
-}
-
-func (x Currency) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Currency.Descriptor instead.
-func (Currency) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{1}
-}
-
 // ListInvoicesRequest is the request for the ListInvoices function
 type ListInvoicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -588,7 +535,9 @@ type DiscountFixed struct {
 	// The discount amount as a decimal. Must be positive.
 	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	// The currency for the discount amount.
-	Currency      Currency `protobuf:"varint,2,opt,name=currency,proto3,enum=qdrant.cloud.billing.v1.Currency" json:"currency,omitempty"`
+	// Specifies the currency in which the prices are denominated.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+	Currency      string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -630,11 +579,11 @@ func (x *DiscountFixed) GetValue() float64 {
 	return 0
 }
 
-func (x *DiscountFixed) GetCurrency() Currency {
+func (x *DiscountFixed) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
-	return Currency_CURRENCY_UNSPECIFIED
+	return ""
 }
 
 var File_qdrant_cloud_billing_v1_billing_proto protoreflect.FileDescriptor
@@ -676,22 +625,18 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x16discount.active_period\x12#active_to must be after active_from\x1a!this.active_to > this.active_fromB\r\n" +
 	"\x04type\x12\x05\xbaH\x02\b\x01\"C\n" +
 	"\x12DiscountPercentage\x12-\n" +
-	"\x05value\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"\x80\x01\n" +
+	"\x05value\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"d\n" +
 	"\rDiscountFixed\x12$\n" +
-	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12I\n" +
-	"\bcurrency\x18\x02 \x01(\x0e2!.qdrant.cloud.billing.v1.CurrencyB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\bcurrency*\xb6\x01\n" +
+	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12-\n" +
+	"\bcurrency\x18\x02 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency*\xb6\x01\n" +
 	"\rInvoiceStatus\x12\x1e\n" +
 	"\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x05*H\n" +
-	"\bCurrency\x12\x18\n" +
-	"\x14CURRENCY_UNSPECIFIED\x10\x00\x12\x10\n" +
-	"\fCURRENCY_USD\x10\x01\x12\x10\n" +
-	"\fCURRENCY_EUR\x10\x022\x98\x03\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\x98\x03\n" +
 	"\x0eBillingService\x12\xbf\x01\n" +
 	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n" +
 	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discountsB\xfe\x01\n" +
@@ -709,40 +654,38 @@ func file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescData
 }
 
-var file_qdrant_cloud_billing_v1_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_qdrant_cloud_billing_v1_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(InvoiceStatus)(0),            // 0: qdrant.cloud.billing.v1.InvoiceStatus
-	(Currency)(0),                 // 1: qdrant.cloud.billing.v1.Currency
-	(*ListInvoicesRequest)(nil),   // 2: qdrant.cloud.billing.v1.ListInvoicesRequest
-	(*ListInvoicesResponse)(nil),  // 3: qdrant.cloud.billing.v1.ListInvoicesResponse
-	(*ListDiscountsRequest)(nil),  // 4: qdrant.cloud.billing.v1.ListDiscountsRequest
-	(*ListDiscountsResponse)(nil), // 5: qdrant.cloud.billing.v1.ListDiscountsResponse
-	(*Invoice)(nil),               // 6: qdrant.cloud.billing.v1.Invoice
-	(*Discount)(nil),              // 7: qdrant.cloud.billing.v1.Discount
-	(*DiscountPercentage)(nil),    // 8: qdrant.cloud.billing.v1.DiscountPercentage
-	(*DiscountFixed)(nil),         // 9: qdrant.cloud.billing.v1.DiscountFixed
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
+	(*ListInvoicesRequest)(nil),   // 1: qdrant.cloud.billing.v1.ListInvoicesRequest
+	(*ListInvoicesResponse)(nil),  // 2: qdrant.cloud.billing.v1.ListInvoicesResponse
+	(*ListDiscountsRequest)(nil),  // 3: qdrant.cloud.billing.v1.ListDiscountsRequest
+	(*ListDiscountsResponse)(nil), // 4: qdrant.cloud.billing.v1.ListDiscountsResponse
+	(*Invoice)(nil),               // 5: qdrant.cloud.billing.v1.Invoice
+	(*Discount)(nil),              // 6: qdrant.cloud.billing.v1.Discount
+	(*DiscountPercentage)(nil),    // 7: qdrant.cloud.billing.v1.DiscountPercentage
+	(*DiscountFixed)(nil),         // 8: qdrant.cloud.billing.v1.DiscountFixed
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
-	6,  // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
-	7,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
-	10, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
+	6,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
+	9,  // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
-	8,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
-	9,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	10, // 6: qdrant.cloud.billing.v1.Discount.active_from:type_name -> google.protobuf.Timestamp
-	10, // 7: qdrant.cloud.billing.v1.Discount.active_to:type_name -> google.protobuf.Timestamp
-	1,  // 8: qdrant.cloud.billing.v1.DiscountFixed.currency:type_name -> qdrant.cloud.billing.v1.Currency
-	2,  // 9: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	4,  // 10: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
-	3,  // 11: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	5,  // 12: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	11, // [11:13] is the sub-list for method output_type
-	9,  // [9:11] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	7,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
+	8,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
+	9,  // 6: qdrant.cloud.billing.v1.Discount.active_from:type_name -> google.protobuf.Timestamp
+	9,  // 7: qdrant.cloud.billing.v1.Discount.active_to:type_name -> google.protobuf.Timestamp
+	1,  // 8: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	3,  // 9: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	2,  // 10: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	4,  // 11: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	10, // [10:12] is the sub-list for method output_type
+	8,  // [8:10] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }
@@ -760,7 +703,7 @@ func file_qdrant_cloud_billing_v1_billing_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_billing_v1_billing_proto_rawDesc), len(file_qdrant_cloud_billing_v1_billing_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,

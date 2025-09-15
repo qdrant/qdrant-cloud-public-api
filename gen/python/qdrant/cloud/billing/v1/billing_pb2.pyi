@@ -21,21 +21,12 @@ class InvoiceStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     INVOICE_STATUS_VOID: _ClassVar[InvoiceStatus]
     INVOICE_STATUS_PAID: _ClassVar[InvoiceStatus]
     INVOICE_STATUS_UNCOLLECTIBLE: _ClassVar[InvoiceStatus]
-
-class Currency(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    CURRENCY_UNSPECIFIED: _ClassVar[Currency]
-    CURRENCY_USD: _ClassVar[Currency]
-    CURRENCY_EUR: _ClassVar[Currency]
 INVOICE_STATUS_UNSPECIFIED: InvoiceStatus
 INVOICE_STATUS_DRAFT: InvoiceStatus
 INVOICE_STATUS_OPEN: InvoiceStatus
 INVOICE_STATUS_VOID: InvoiceStatus
 INVOICE_STATUS_PAID: InvoiceStatus
 INVOICE_STATUS_UNCOLLECTIBLE: InvoiceStatus
-CURRENCY_UNSPECIFIED: Currency
-CURRENCY_USD: Currency
-CURRENCY_EUR: Currency
 
 class ListInvoicesRequest(_message.Message):
     __slots__ = ("account_id",)
@@ -102,5 +93,5 @@ class DiscountFixed(_message.Message):
     VALUE_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     value: float
-    currency: Currency
-    def __init__(self, value: _Optional[float] = ..., currency: _Optional[_Union[Currency, str]] = ...) -> None: ...
+    currency: str
+    def __init__(self, value: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...

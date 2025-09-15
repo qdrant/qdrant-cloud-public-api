@@ -354,10 +354,12 @@ export declare type DiscountFixed = Message<"qdrant.cloud.billing.v1.DiscountFix
 
   /**
    * The currency for the discount amount.
+   * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
    *
-   * @generated from field: qdrant.cloud.billing.v1.Currency currency = 2;
+   * @generated from field: string currency = 2;
    */
-  currency: Currency;
+  currency: string;
 };
 
 export declare type DiscountFixedValid = DiscountFixed;
@@ -421,39 +423,6 @@ export enum InvoiceStatus {
  * Describes the enum qdrant.cloud.billing.v1.InvoiceStatus.
  */
 export declare const InvoiceStatusSchema: GenEnum<InvoiceStatus>;
-
-/**
- * The supported currencies for discounts.
- *
- * @generated from enum qdrant.cloud.billing.v1.Currency
- */
-export enum Currency {
-  /**
-   * Unspecified
-   *
-   * @generated from enum value: CURRENCY_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * US Dollar
-   *
-   * @generated from enum value: CURRENCY_USD = 1;
-   */
-  USD = 1,
-
-  /**
-   * Euro
-   *
-   * @generated from enum value: CURRENCY_EUR = 2;
-   */
-  EUR = 2,
-}
-
-/**
- * Describes the enum qdrant.cloud.billing.v1.Currency.
- */
-export declare const CurrencySchema: GenEnum<Currency>;
 
 /**
  * BillingService is the API used to retrieve billing information, such as invoices.
