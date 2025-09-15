@@ -1917,7 +1917,7 @@ type Role struct {
 	// This is a required field.
 	AccountId string `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The name of the role.
-	// Name can only contain letters, numbers, underscores and dashes
+	// Name can only contain letters, numbers, spaces, underscores and dashes.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The human readable description of this role.
 	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
@@ -2275,15 +2275,16 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
 	"Permission\x12\x1d\n" +
 	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12#\n" +
-	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bcategory\"\x96\a\n" +
+	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bcategory\"\x90\a\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12'\n" +
 	"\n" +
-	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
-	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12*\n" +
+	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12)\n" +
+	"\x04name\x18\x05 \x01(\tB\x15\xbaH\x12r\x10\x10\x04\x18@2\n" +
+	"^[\\w\\s-]+$R\x04name\x12*\n" +
 	"\vdescription\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x02R\vdescription\x12F\n" +
 	"\trole_type\x18\a \x01(\x0e2\x1d.qdrant.cloud.iam.v1.RoleTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\broleType\x12K\n" +

@@ -637,11 +637,11 @@ message Role {
   // This is a required field.
   string account_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The name of the role.
-  // Name can only contain letters, numbers, underscores and dashes
+  // Name can only contain letters, numbers, spaces, underscores and dashes.
   string name = 5 [(buf.validate.field).string = {
     max_len: 64
     min_len: 4
-    pattern: "^[a-zA-Z0-9-_]+$"
+    pattern: "^[\\w\\s-]+$"
   }];
   // The human readable description of this role.
   string description = 6 [(buf.validate.field).string = {max_len: 256}];
