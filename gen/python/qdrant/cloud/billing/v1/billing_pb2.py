@@ -28,7 +28,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\">\n\x13ListInvoicesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n\x14ListInvoicesResponse\x12\x36\n\x05items\x18\x01 \x03(\x0b\x32 .qdrant.cloud.billing.v1.InvoiceR\x05items\"\xc2\x02\n\x07Invoice\x12\x17\n\x02id\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x02id\x12$\n\x06number\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x00R\x06number\x88\x01\x01\x12*\n\x0ctotal_amount\x18\x03 \x01(\x03\x42\x07\xbaH\x04\"\x02(\x00R\x0btotalAmount\x12\x41\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12J\n\x06status\x18\x05 \x01(\x0e\x32&.qdrant.cloud.billing.v1.InvoiceStatusB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x06status\x12&\n\x07pdf_url\x18\x06 \x01(\tB\x08\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01\x42\t\n\x07_numberB\n\n\x08_pdf_url*\xb6\x01\n\rInvoiceStatus\x12\x1e\n\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n\x13INVOICE_STATUS_PAID\x10\x04\x12 \n\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x05\x32\xd2\x01\n\x0e\x42illingService\x12\xbf\x01\n\x0cListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02\x30\x12./api/billing/v1/accounts/{account_id}/invoicesB\xfe\x01\n\x1b\x63om.qdrant.cloud.billing.v1B\x0c\x42illingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\">\n\x13ListInvoicesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n\x14ListInvoicesResponse\x12\x36\n\x05items\x18\x01 \x03(\x0b\x32 .qdrant.cloud.billing.v1.InvoiceR\x05items\"?\n\x14ListDiscountsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"P\n\x15ListDiscountsResponse\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc2\x02\n\x07Invoice\x12\x17\n\x02id\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x02id\x12$\n\x06number\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x00R\x06number\x88\x01\x01\x12*\n\x0ctotal_amount\x18\x03 \x01(\x03\x42\x07\xbaH\x04\"\x02(\x00R\x0btotalAmount\x12\x41\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12J\n\x06status\x18\x05 \x01(\x0e\x32&.qdrant.cloud.billing.v1.InvoiceStatusB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x06status\x12&\n\x07pdf_url\x18\x06 \x01(\tB\x08\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01\x42\t\n\x07_numberB\n\n\x08_pdf_url\"\xc5\x01\n\x08\x44iscount\x12\x1b\n\x04name\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x04name\x12M\n\npercentage\x18\x02 \x01(\x0b\x32+.qdrant.cloud.billing.v1.DiscountPercentageH\x00R\npercentage\x12>\n\x05\x66ixed\x18\x03 \x01(\x0b\x32&.qdrant.cloud.billing.v1.DiscountFixedH\x00R\x05\x66ixedB\r\n\x04type\x12\x05\xbaH\x02\x08\x01\"C\n\x12\x44iscountPercentage\x12-\n\x05value\x18\x01 \x01(\x01\x42\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"\x80\x01\n\rDiscountFixed\x12$\n\x05value\x18\x01 \x01(\x01\x42\x0e\xbaH\x0b\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12I\n\x08\x63urrency\x18\x02 \x01(\x0e\x32!.qdrant.cloud.billing.v1.CurrencyB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x08\x63urrency*\xb6\x01\n\rInvoiceStatus\x12\x1e\n\x1aINVOICE_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14INVOICE_STATUS_DRAFT\x10\x01\x12\x17\n\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n\x13INVOICE_STATUS_PAID\x10\x04\x12 \n\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x05*H\n\x08\x43urrency\x12\x18\n\x14\x43URRENCY_UNSPECIFIED\x10\x00\x12\x10\n\x0c\x43URRENCY_USD\x10\x01\x12\x10\n\x0c\x43URRENCY_EUR\x10\x02\x32\x98\x03\n\x0e\x42illingService\x12\xbf\x01\n\x0cListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02\x30\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02\x31\x12//api/billing/v1/accounts/{account_id}/discountsB\xfe\x01\n\x1b\x63om.qdrant.cloud.billing.v1B\x0c\x42illingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,6 +38,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'\n\033com.qdrant.cloud.billing.v1B\014BillingProtoP\001ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\242\002\003QCB\252\002\027Qdrant.Cloud.Billing.V1\312\002\027Qdrant\\Cloud\\Billing\\V1\342\002#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\352\002\032Qdrant::Cloud::Billing::V1'
   _globals['_LISTINVOICESREQUEST'].fields_by_name['account_id']._loaded_options = None
   _globals['_LISTINVOICESREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
+  _globals['_LISTDISCOUNTSREQUEST'].fields_by_name['account_id']._loaded_options = None
+  _globals['_LISTDISCOUNTSREQUEST'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_INVOICE'].fields_by_name['id']._loaded_options = None
   _globals['_INVOICE'].fields_by_name['id']._serialized_options = b'\272H\004r\002\020\001'
   _globals['_INVOICE'].fields_by_name['number']._loaded_options = None
@@ -50,16 +52,40 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_INVOICE'].fields_by_name['status']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
   _globals['_INVOICE'].fields_by_name['pdf_url']._loaded_options = None
   _globals['_INVOICE'].fields_by_name['pdf_url']._serialized_options = b'\272H\005r\003\210\001\001'
+  _globals['_DISCOUNT'].oneofs_by_name['type']._loaded_options = None
+  _globals['_DISCOUNT'].oneofs_by_name['type']._serialized_options = b'\272H\002\010\001'
+  _globals['_DISCOUNT'].fields_by_name['name']._loaded_options = None
+  _globals['_DISCOUNT'].fields_by_name['name']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_DISCOUNTPERCENTAGE'].fields_by_name['value']._loaded_options = None
+  _globals['_DISCOUNTPERCENTAGE'].fields_by_name['value']._serialized_options = b'\272H\024\022\022\031\000\000\000\000\000\000Y@)\000\000\000\000\000\000\000\000'
+  _globals['_DISCOUNTFIXED'].fields_by_name['value']._loaded_options = None
+  _globals['_DISCOUNTFIXED'].fields_by_name['value']._serialized_options = b'\272H\013\022\t!\000\000\000\000\000\000\000\000'
+  _globals['_DISCOUNTFIXED'].fields_by_name['currency']._loaded_options = None
+  _globals['_DISCOUNTFIXED'].fields_by_name['currency']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
   _globals['_BILLINGSERVICE'].methods_by_name['ListInvoices']._loaded_options = None
   _globals['_BILLINGSERVICE'].methods_by_name['ListInvoices']._serialized_options = b'\212\265\030\030read:payment_information\202\323\344\223\0020\022./api/billing/v1/accounts/{account_id}/invoices'
-  _globals['_INVOICESTATUS']._serialized_start=665
-  _globals['_INVOICESTATUS']._serialized_end=847
+  _globals['_BILLINGSERVICE'].methods_by_name['ListDiscounts']._loaded_options = None
+  _globals['_BILLINGSERVICE'].methods_by_name['ListDiscounts']._serialized_options = b'\212\265\030\030read:payment_information\202\323\344\223\0021\022//api/billing/v1/accounts/{account_id}/discounts'
+  _globals['_INVOICESTATUS']._serialized_start=1212
+  _globals['_INVOICESTATUS']._serialized_end=1394
+  _globals['_CURRENCY']._serialized_start=1396
+  _globals['_CURRENCY']._serialized_end=1468
   _globals['_LISTINVOICESREQUEST']._serialized_start=195
   _globals['_LISTINVOICESREQUEST']._serialized_end=257
   _globals['_LISTINVOICESRESPONSE']._serialized_start=259
   _globals['_LISTINVOICESRESPONSE']._serialized_end=337
-  _globals['_INVOICE']._serialized_start=340
-  _globals['_INVOICE']._serialized_end=662
-  _globals['_BILLINGSERVICE']._serialized_start=850
-  _globals['_BILLINGSERVICE']._serialized_end=1060
+  _globals['_LISTDISCOUNTSREQUEST']._serialized_start=339
+  _globals['_LISTDISCOUNTSREQUEST']._serialized_end=402
+  _globals['_LISTDISCOUNTSRESPONSE']._serialized_start=404
+  _globals['_LISTDISCOUNTSRESPONSE']._serialized_end=484
+  _globals['_INVOICE']._serialized_start=487
+  _globals['_INVOICE']._serialized_end=809
+  _globals['_DISCOUNT']._serialized_start=812
+  _globals['_DISCOUNT']._serialized_end=1009
+  _globals['_DISCOUNTPERCENTAGE']._serialized_start=1011
+  _globals['_DISCOUNTPERCENTAGE']._serialized_end=1078
+  _globals['_DISCOUNTFIXED']._serialized_start=1081
+  _globals['_DISCOUNTFIXED']._serialized_end=1209
+  _globals['_BILLINGSERVICE']._serialized_start=1471
+  _globals['_BILLINGSERVICE']._serialized_end=1879
 # @@protoc_insertion_point(module_scope)

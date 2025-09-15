@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BillingService_ListInvoices_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
+	BillingService_ListInvoices_FullMethodName  = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
+	BillingService_ListDiscounts_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -32,6 +33,10 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
+	// Lists all discounts for the account identified by the given ID.
+	// Required permissions:
+	// - read:payment_information
+	ListDiscounts(ctx context.Context, in *ListDiscountsRequest, opts ...grpc.CallOption) (*ListDiscountsResponse, error)
 }
 
 type billingServiceClient struct {
@@ -52,6 +57,16 @@ func (c *billingServiceClient) ListInvoices(ctx context.Context, in *ListInvoice
 	return out, nil
 }
 
+func (c *billingServiceClient) ListDiscounts(ctx context.Context, in *ListDiscountsRequest, opts ...grpc.CallOption) (*ListDiscountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDiscountsResponse)
+	err := c.cc.Invoke(ctx, BillingService_ListDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -62,6 +77,10 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
+	// Lists all discounts for the account identified by the given ID.
+	// Required permissions:
+	// - read:payment_information
+	ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -74,6 +93,9 @@ type UnimplementedBillingServiceServer struct{}
 
 func (UnimplementedBillingServiceServer) ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
+}
+func (UnimplementedBillingServiceServer) ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDiscounts not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -114,6 +136,24 @@ func _BillingService_ListInvoices_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_ListDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ListDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_ListDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ListDiscounts(ctx, req.(*ListDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -124,6 +164,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListInvoices",
 			Handler:    _BillingService_ListInvoices_Handler,
+		},
+		{
+			MethodName: "ListDiscounts",
+			Handler:    _BillingService_ListDiscounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

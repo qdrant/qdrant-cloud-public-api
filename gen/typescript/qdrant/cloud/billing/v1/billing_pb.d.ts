@@ -57,6 +57,51 @@ export declare type ListInvoicesResponseValid = ListInvoicesResponse;
 export declare const ListInvoicesResponseSchema: GenMessage<ListInvoicesResponse, {validType: ListInvoicesResponseValid}>;
 
 /**
+ * ListDiscountsRequest is the request for the ListDiscounts function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListDiscountsRequest
+ */
+export declare type ListDiscountsRequest = Message<"qdrant.cloud.billing.v1.ListDiscountsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListDiscountsRequestValid = ListDiscountsRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListDiscountsRequest.
+ * Use `create(ListDiscountsRequestSchema)` to create a new message.
+ */
+export declare const ListDiscountsRequestSchema: GenMessage<ListDiscountsRequest, {validType: ListDiscountsRequestValid}>;
+
+/**
+ * ListDiscountsResponse is the response from the ListDiscounts function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListDiscountsResponse
+ */
+export declare type ListDiscountsResponse = Message<"qdrant.cloud.billing.v1.ListDiscountsResponse"> & {
+  /**
+   * The list of discounts.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.Discount items = 1;
+   */
+  items: Discount[];
+};
+
+export declare type ListDiscountsResponseValid = ListDiscountsResponse;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListDiscountsResponse.
+ * Use `create(ListDiscountsResponseSchema)` to create a new message.
+ */
+export declare const ListDiscountsResponseSchema: GenMessage<ListDiscountsResponse, {validType: ListDiscountsResponseValid}>;
+
+/**
  * Invoice represents a billing invoice issued to an account.
  *
  * @generated from message qdrant.cloud.billing.v1.Invoice
@@ -165,6 +210,102 @@ export declare type InvoiceValid = Message<"qdrant.cloud.billing.v1.Invoice"> & 
 export declare const InvoiceSchema: GenMessage<Invoice, {validType: InvoiceValid}>;
 
 /**
+ * Discount represents a billing discount applied to an account.
+ *
+ * @generated from message qdrant.cloud.billing.v1.Discount
+ */
+export declare type Discount = Message<"qdrant.cloud.billing.v1.Discount"> & {
+  /**
+   * Human-readable name for the discount.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * The type of discount.
+   *
+   * @generated from oneof qdrant.cloud.billing.v1.Discount.type
+   */
+  type: {
+    /**
+     * Percentage-based discount (e.g., 10% off).
+     *
+     * @generated from field: qdrant.cloud.billing.v1.DiscountPercentage percentage = 2;
+     */
+    value: DiscountPercentage;
+    case: "percentage";
+  } | {
+    /**
+     * Fixed amount discount (e.g., $5 off).
+     *
+     * @generated from field: qdrant.cloud.billing.v1.DiscountFixed fixed = 3;
+     */
+    value: DiscountFixed;
+    case: "fixed";
+  } | { case: undefined; value?: undefined };
+};
+
+export declare type DiscountValid = Discount;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.Discount.
+ * Use `create(DiscountSchema)` to create a new message.
+ */
+export declare const DiscountSchema: GenMessage<Discount, {validType: DiscountValid}>;
+
+/**
+ * DiscountPercentage represents a percentage-based discount.
+ *
+ * @generated from message qdrant.cloud.billing.v1.DiscountPercentage
+ */
+export declare type DiscountPercentage = Message<"qdrant.cloud.billing.v1.DiscountPercentage"> & {
+  /**
+   * The percentage value (e.g., 12.5 for 12.5%). Must be between 0 and 100.
+   *
+   * @generated from field: double value = 1;
+   */
+  value: number;
+};
+
+export declare type DiscountPercentageValid = DiscountPercentage;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.DiscountPercentage.
+ * Use `create(DiscountPercentageSchema)` to create a new message.
+ */
+export declare const DiscountPercentageSchema: GenMessage<DiscountPercentage, {validType: DiscountPercentageValid}>;
+
+/**
+ * DiscountFixed represents a fixed amount discount.
+ *
+ * @generated from message qdrant.cloud.billing.v1.DiscountFixed
+ */
+export declare type DiscountFixed = Message<"qdrant.cloud.billing.v1.DiscountFixed"> & {
+  /**
+   * The discount amount as a decimal. Must be positive.
+   *
+   * @generated from field: double value = 1;
+   */
+  value: number;
+
+  /**
+   * The currency for the discount amount.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.Currency currency = 2;
+   */
+  currency: Currency;
+};
+
+export declare type DiscountFixedValid = DiscountFixed;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.DiscountFixed.
+ * Use `create(DiscountFixedSchema)` to create a new message.
+ */
+export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: DiscountFixedValid}>;
+
+/**
  * The possible status of an invoice.
  *
  * @generated from enum qdrant.cloud.billing.v1.InvoiceStatus
@@ -219,6 +360,39 @@ export enum InvoiceStatus {
 export declare const InvoiceStatusSchema: GenEnum<InvoiceStatus>;
 
 /**
+ * The supported currencies for discounts.
+ *
+ * @generated from enum qdrant.cloud.billing.v1.Currency
+ */
+export enum Currency {
+  /**
+   * Unspecified
+   *
+   * @generated from enum value: CURRENCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * US Dollar
+   *
+   * @generated from enum value: CURRENCY_USD = 1;
+   */
+  USD = 1,
+
+  /**
+   * Euro
+   *
+   * @generated from enum value: CURRENCY_EUR = 2;
+   */
+  EUR = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.billing.v1.Currency.
+ */
+export declare const CurrencySchema: GenEnum<Currency>;
+
+/**
  * BillingService is the API used to retrieve billing information, such as invoices.
  *
  * @generated from service qdrant.cloud.billing.v1.BillingService
@@ -235,6 +409,18 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListInvoicesRequestSchema;
     output: typeof ListInvoicesResponseSchema;
+  },
+  /**
+   * Lists all discounts for the account identified by the given ID.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListDiscounts
+   */
+  listDiscounts: {
+    methodKind: "unary";
+    input: typeof ListDiscountsRequestSchema;
+    output: typeof ListDiscountsResponseSchema;
   },
 }>;
 

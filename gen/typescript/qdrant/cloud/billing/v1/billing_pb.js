@@ -12,7 +12,7 @@ import { file_qdrant_cloud_common_v1_common } from "../../common/v1/common_pb.js
  * Describes the file qdrant/cloud/billing/v1/billing.proto.
  */
 export const file_qdrant_cloud_billing_v1_billing = /*@__PURE__*/
-  fileDesc("CiVxZHJhbnQvY2xvdWQvYmlsbGluZy92MS9iaWxsaW5nLnByb3RvEhdxZHJhbnQuY2xvdWQuYmlsbGluZy52MSIzChNMaXN0SW52b2ljZXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIkcKFExpc3RJbnZvaWNlc1Jlc3BvbnNlEi8KBWl0ZW1zGAEgAygLMiAucWRyYW50LmNsb3VkLmJpbGxpbmcudjEuSW52b2ljZSKOAgoHSW52b2ljZRITCgJpZBgBIAEoCUIHukgEcgIQARIcCgZudW1iZXIYAiABKAlCB7pIBHICEAFIAIgBARIdCgx0b3RhbF9hbW91bnQYAyABKANCB7pIBCICKAASNgoKY3JlYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBARJCCgZzdGF0dXMYBSABKA4yJi5xZHJhbnQuY2xvdWQuYmlsbGluZy52MS5JbnZvaWNlU3RhdHVzQgq6SAeCAQQQASAAEh4KB3BkZl91cmwYBiABKAlCCLpIBXIDiAEBSAGIAQFCCQoHX251bWJlckIKCghfcGRmX3VybCq2AQoNSW52b2ljZVN0YXR1cxIeChpJTlZPSUNFX1NUQVRVU19VTlNQRUNJRklFRBAAEhgKFElOVk9JQ0VfU1RBVFVTX0RSQUZUEAESFwoTSU5WT0lDRV9TVEFUVVNfT1BFThACEhcKE0lOVk9JQ0VfU1RBVFVTX1ZPSUQQAxIXChNJTlZPSUNFX1NUQVRVU19QQUlEEAQSIAocSU5WT0lDRV9TVEFUVVNfVU5DT0xMRUNUSUJMRRAFMtIBCg5CaWxsaW5nU2VydmljZRK/AQoMTGlzdEludm9pY2VzEiwucWRyYW50LmNsb3VkLmJpbGxpbmcudjEuTGlzdEludm9pY2VzUmVxdWVzdBotLnFkcmFudC5jbG91ZC5iaWxsaW5nLnYxLkxpc3RJbnZvaWNlc1Jlc3BvbnNlIlKKtRgYcmVhZDpwYXltZW50X2luZm9ybWF0aW9ugtPkkwIwEi4vYXBpL2JpbGxpbmcvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2ludm9pY2VzQv4BChtjb20ucWRyYW50LmNsb3VkLmJpbGxpbmcudjFCDEJpbGxpbmdQcm90b1ABWlJnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2JpbGxpbmcvdjE7YmlsbGluZ3YxogIDUUNCqgIXUWRyYW50LkNsb3VkLkJpbGxpbmcuVjHKAhdRZHJhbnRcQ2xvdWRcQmlsbGluZ1xWMeICI1FkcmFudFxDbG91ZFxCaWxsaW5nXFYxXEdQQk1ldGFkYXRh6gIaUWRyYW50OjpDbG91ZDo6QmlsbGluZzo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
+  fileDesc("CiVxZHJhbnQvY2xvdWQvYmlsbGluZy92MS9iaWxsaW5nLnByb3RvEhdxZHJhbnQuY2xvdWQuYmlsbGluZy52MSIzChNMaXN0SW52b2ljZXNSZXF1ZXN0EhwKCmFjY291bnRfaWQYASABKAlCCLpIBXIDsAEBIkcKFExpc3RJbnZvaWNlc1Jlc3BvbnNlEi8KBWl0ZW1zGAEgAygLMiAucWRyYW50LmNsb3VkLmJpbGxpbmcudjEuSW52b2ljZSI0ChRMaXN0RGlzY291bnRzUmVxdWVzdBIcCgphY2NvdW50X2lkGAEgASgJQgi6SAVyA7ABASJJChVMaXN0RGlzY291bnRzUmVzcG9uc2USMAoFaXRlbXMYASADKAsyIS5xZHJhbnQuY2xvdWQuYmlsbGluZy52MS5EaXNjb3VudCKOAgoHSW52b2ljZRITCgJpZBgBIAEoCUIHukgEcgIQARIcCgZudW1iZXIYAiABKAlCB7pIBHICEAFIAIgBARIdCgx0b3RhbF9hbW91bnQYAyABKANCB7pIBCICKAASNgoKY3JlYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBARJCCgZzdGF0dXMYBSABKA4yJi5xZHJhbnQuY2xvdWQuYmlsbGluZy52MS5JbnZvaWNlU3RhdHVzQgq6SAeCAQQQASAAEh4KB3BkZl91cmwYBiABKAlCCLpIBXIDiAEBSAGIAQFCCQoHX251bWJlckIKCghfcGRmX3VybCKsAQoIRGlzY291bnQSFQoEbmFtZRgBIAEoCUIHukgEcgIQARJBCgpwZXJjZW50YWdlGAIgASgLMisucWRyYW50LmNsb3VkLmJpbGxpbmcudjEuRGlzY291bnRQZXJjZW50YWdlSAASNwoFZml4ZWQYAyABKAsyJi5xZHJhbnQuY2xvdWQuYmlsbGluZy52MS5EaXNjb3VudEZpeGVkSABCDQoEdHlwZRIFukgCCAEiPAoSRGlzY291bnRQZXJjZW50YWdlEiYKBXZhbHVlGAEgASgBQhe6SBQSEhkAAAAAAABZQCkAAAAAAAAAACJvCg1EaXNjb3VudEZpeGVkEh0KBXZhbHVlGAEgASgBQg66SAsSCSEAAAAAAAAAABI/CghjdXJyZW5jeRgCIAEoDjIhLnFkcmFudC5jbG91ZC5iaWxsaW5nLnYxLkN1cnJlbmN5Qgq6SAeCAQQQASAAKrYBCg1JbnZvaWNlU3RhdHVzEh4KGklOVk9JQ0VfU1RBVFVTX1VOU1BFQ0lGSUVEEAASGAoUSU5WT0lDRV9TVEFUVVNfRFJBRlQQARIXChNJTlZPSUNFX1NUQVRVU19PUEVOEAISFwoTSU5WT0lDRV9TVEFUVVNfVk9JRBADEhcKE0lOVk9JQ0VfU1RBVFVTX1BBSUQQBBIgChxJTlZPSUNFX1NUQVRVU19VTkNPTExFQ1RJQkxFEAUqSAoIQ3VycmVuY3kSGAoUQ1VSUkVOQ1lfVU5TUEVDSUZJRUQQABIQCgxDVVJSRU5DWV9VU0QQARIQCgxDVVJSRU5DWV9FVVIQAjKYAwoOQmlsbGluZ1NlcnZpY2USvwEKDExpc3RJbnZvaWNlcxIsLnFkcmFudC5jbG91ZC5iaWxsaW5nLnYxLkxpc3RJbnZvaWNlc1JlcXVlc3QaLS5xZHJhbnQuY2xvdWQuYmlsbGluZy52MS5MaXN0SW52b2ljZXNSZXNwb25zZSJSirUYGHJlYWQ6cGF5bWVudF9pbmZvcm1hdGlvboLT5JMCMBIuL2FwaS9iaWxsaW5nL3YxL2FjY291bnRzL3thY2NvdW50X2lkfS9pbnZvaWNlcxLDAQoNTGlzdERpc2NvdW50cxItLnFkcmFudC5jbG91ZC5iaWxsaW5nLnYxLkxpc3REaXNjb3VudHNSZXF1ZXN0Gi4ucWRyYW50LmNsb3VkLmJpbGxpbmcudjEuTGlzdERpc2NvdW50c1Jlc3BvbnNlIlOKtRgYcmVhZDpwYXltZW50X2luZm9ybWF0aW9ugtPkkwIxEi8vYXBpL2JpbGxpbmcvdjEvYWNjb3VudHMve2FjY291bnRfaWR9L2Rpc2NvdW50c0L+AQobY29tLnFkcmFudC5jbG91ZC5iaWxsaW5nLnYxQgxCaWxsaW5nUHJvdG9QAVpSZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9iaWxsaW5nL3YxO2JpbGxpbmd2MaICA1FDQqoCF1FkcmFudC5DbG91ZC5CaWxsaW5nLlYxygIXUWRyYW50XENsb3VkXEJpbGxpbmdcVjHiAiNRZHJhbnRcQ2xvdWRcQmlsbGluZ1xWMVxHUEJNZXRhZGF0YeoCGlFkcmFudDo6Q2xvdWQ6OkJpbGxpbmc6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_qdrant_cloud_common_v1_common]);
 
 /**
  * Describes the message qdrant.cloud.billing.v1.ListInvoicesRequest.
@@ -29,11 +29,46 @@ export const ListInvoicesResponseSchema = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_billing_v1_billing, 1);
 
 /**
+ * Describes the message qdrant.cloud.billing.v1.ListDiscountsRequest.
+ * Use `create(ListDiscountsRequestSchema)` to create a new message.
+ */
+export const ListDiscountsRequestSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 2);
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListDiscountsResponse.
+ * Use `create(ListDiscountsResponseSchema)` to create a new message.
+ */
+export const ListDiscountsResponseSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 3);
+
+/**
  * Describes the message qdrant.cloud.billing.v1.Invoice.
  * Use `create(InvoiceSchema)` to create a new message.
  */
 export const InvoiceSchema = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_billing_v1_billing, 2);
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 4);
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.Discount.
+ * Use `create(DiscountSchema)` to create a new message.
+ */
+export const DiscountSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 5);
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.DiscountPercentage.
+ * Use `create(DiscountPercentageSchema)` to create a new message.
+ */
+export const DiscountPercentageSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 6);
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.DiscountFixed.
+ * Use `create(DiscountFixedSchema)` to create a new message.
+ */
+export const DiscountFixedSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_billing_v1_billing, 7);
 
 /**
  * Describes the enum qdrant.cloud.billing.v1.InvoiceStatus.
@@ -48,6 +83,20 @@ export const InvoiceStatusSchema = /*@__PURE__*/
  */
 export const InvoiceStatus = /*@__PURE__*/
   tsEnum(InvoiceStatusSchema);
+
+/**
+ * Describes the enum qdrant.cloud.billing.v1.Currency.
+ */
+export const CurrencySchema = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_billing_v1_billing, 1);
+
+/**
+ * The supported currencies for discounts.
+ *
+ * @generated from enum qdrant.cloud.billing.v1.Currency
+ */
+export const Currency = /*@__PURE__*/
+  tsEnum(CurrencySchema);
 
 /**
  * BillingService is the API used to retrieve billing information, such as invoices.
