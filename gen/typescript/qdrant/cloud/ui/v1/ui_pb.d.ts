@@ -107,12 +107,12 @@ export declare type UserWithRolesValid = Message<"qdrant.cloud.ui.v1.UserWithRol
 export declare const UserWithRolesSchema: GenMessage<UserWithRoles, {validType: UserWithRolesValid}>;
 
 /**
- * UIViewService provides optimized methods for UI components that need aggregated data.
+ * AggregationService provides optimized methods for UI components that need aggregated data.
  * This service combines multiple entities to reduce API round trips for common UI patterns.
  *
- * @generated from service qdrant.cloud.ui.v1.UIViewService
+ * @generated from service qdrant.cloud.ui.v1.AggregationService
  */
-export declare const UIViewService: GenService<{
+export declare const AggregationService: GenService<{
   /**
    * Lists users in an account with their assigned roles.
    * This endpoint provides a consolidated view that would otherwise require separate calls
@@ -121,7 +121,7 @@ export declare const UIViewService: GenService<{
    * - read:users
    * - read:roles
    *
-   * @generated from rpc qdrant.cloud.ui.v1.UIViewService.ListUsersWithRoles
+   * @generated from rpc qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles
    */
   listUsersWithRoles: {
     methodKind: "unary";

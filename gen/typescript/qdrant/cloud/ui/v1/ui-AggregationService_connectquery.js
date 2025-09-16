@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/ui/v1/ui.proto (package qdrant.cloud.ui.v1, syntax proto3)
 /* eslint-disable */
 
-import { UIViewService } from "./ui_pb.js";
+import { AggregationService } from "./ui_pb.js";
 
 /**
  * Lists users in an account with their assigned roles.
@@ -12,6 +12,6 @@ import { UIViewService } from "./ui_pb.js";
  * - read:users
  * - read:roles
  *
- * @generated from rpc qdrant.cloud.ui.v1.UIViewService.ListUsersWithRoles
+ * @generated from rpc qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles
  */
-export const listUsersWithRoles: typeof UIViewService["method"]["listUsersWithRoles"];
+export const listUsersWithRoles = AggregationService.method.listUsersWithRoles;

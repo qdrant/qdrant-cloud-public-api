@@ -185,8 +185,8 @@ const file_qdrant_cloud_ui_v1_ui_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n" +
 	"\rUserWithRoles\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n" +
-	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xa3\x01\n" +
-	"\rUIViewService\x12\x91\x01\n" +
+	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xa8\x01\n" +
+	"\x12AggregationService\x12\x91\x01\n" +
 	"\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"\x1c\x8a\xb5\x18\n" +
 	"read:users\x8a\xb5\x18\n" +
 	"read:rolesB\xd6\x01\n" +
@@ -216,8 +216,8 @@ var file_qdrant_cloud_ui_v1_ui_proto_depIdxs = []int32{
 	2, // 0: qdrant.cloud.ui.v1.ListUsersWithRolesResponse.items:type_name -> qdrant.cloud.ui.v1.UserWithRoles
 	3, // 1: qdrant.cloud.ui.v1.UserWithRoles.user:type_name -> qdrant.cloud.iam.v1.User
 	4, // 2: qdrant.cloud.ui.v1.UserWithRoles.roles:type_name -> qdrant.cloud.iam.v1.Role
-	0, // 3: qdrant.cloud.ui.v1.UIViewService.ListUsersWithRoles:input_type -> qdrant.cloud.ui.v1.ListUsersWithRolesRequest
-	1, // 4: qdrant.cloud.ui.v1.UIViewService.ListUsersWithRoles:output_type -> qdrant.cloud.ui.v1.ListUsersWithRolesResponse
+	0, // 3: qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles:input_type -> qdrant.cloud.ui.v1.ListUsersWithRolesRequest
+	1, // 4: qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles:output_type -> qdrant.cloud.ui.v1.ListUsersWithRolesResponse
 	4, // [4:5] is the sub-list for method output_type
 	3, // [3:4] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

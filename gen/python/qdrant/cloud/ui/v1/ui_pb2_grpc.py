@@ -5,8 +5,8 @@ import grpc
 from qdrant.cloud.ui.v1 import ui_pb2 as qdrant_dot_cloud_dot_ui_dot_v1_dot_ui__pb2
 
 
-class UIViewServiceStub(object):
-    """UIViewService provides optimized methods for UI components that need aggregated data.
+class AggregationServiceStub(object):
+    """AggregationService provides optimized methods for UI components that need aggregated data.
     This service combines multiple entities to reduce API round trips for common UI patterns.
     """
 
@@ -17,14 +17,14 @@ class UIViewServiceStub(object):
             channel: A grpc.Channel.
         """
         self.ListUsersWithRoles = channel.unary_unary(
-                '/qdrant.cloud.ui.v1.UIViewService/ListUsersWithRoles',
+                '/qdrant.cloud.ui.v1.AggregationService/ListUsersWithRoles',
                 request_serializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_ui__pb2.ListUsersWithRolesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_ui__pb2.ListUsersWithRolesResponse.FromString,
                 _registered_method=True)
 
 
-class UIViewServiceServicer(object):
-    """UIViewService provides optimized methods for UI components that need aggregated data.
+class AggregationServiceServicer(object):
+    """AggregationService provides optimized methods for UI components that need aggregated data.
     This service combines multiple entities to reduce API round trips for common UI patterns.
     """
 
@@ -42,7 +42,7 @@ class UIViewServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_UIViewServiceServicer_to_server(servicer, server):
+def add_AggregationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListUsersWithRoles': grpc.unary_unary_rpc_method_handler(
                     servicer.ListUsersWithRoles,
@@ -51,14 +51,14 @@ def add_UIViewServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'qdrant.cloud.ui.v1.UIViewService', rpc_method_handlers)
+            'qdrant.cloud.ui.v1.AggregationService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('qdrant.cloud.ui.v1.UIViewService', rpc_method_handlers)
+    server.add_registered_method_handlers('qdrant.cloud.ui.v1.AggregationService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class UIViewService(object):
-    """UIViewService provides optimized methods for UI components that need aggregated data.
+class AggregationService(object):
+    """AggregationService provides optimized methods for UI components that need aggregated data.
     This service combines multiple entities to reduce API round trips for common UI patterns.
     """
 
@@ -76,7 +76,7 @@ class UIViewService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.ui.v1.UIViewService/ListUsersWithRoles',
+            '/qdrant.cloud.ui.v1.AggregationService/ListUsersWithRoles',
             qdrant_dot_cloud_dot_ui_dot_v1_dot_ui__pb2.ListUsersWithRolesRequest.SerializeToString,
             qdrant_dot_cloud_dot_ui_dot_v1_dot_ui__pb2.ListUsersWithRolesResponse.FromString,
             options,
