@@ -974,7 +974,7 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
 
   /**
    * The name of the role.
-   * Name can only contain letters, numbers, spaces, underscores and dashes.
+   * Name can only contain printable characters.
    *
    * @generated from field: string name = 5;
    */
