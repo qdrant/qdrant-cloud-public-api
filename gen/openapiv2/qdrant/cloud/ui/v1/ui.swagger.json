@@ -96,7 +96,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the role.\nName can only contain letters, numbers, spaces, underscores and dashes."
+          "description": "The name of the role.\nName can only contain printable characters."
         },
         "description": {
           "type": "string",
