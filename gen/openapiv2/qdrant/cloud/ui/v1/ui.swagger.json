@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "UIViewService"
+      "name": "AggregationService"
     }
   ],
   "consumes": [

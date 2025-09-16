@@ -6,9 +6,9 @@ import "buf/validate/validate.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/iam/v1/iam.proto";
 
-// UIViewService provides optimized methods for UI components that need aggregated data.
+// AggregationService provides optimized methods for UI components that need aggregated data.
 // This service combines multiple entities to reduce API round trips for common UI patterns.
-service UIViewService {
+service AggregationService {
   // Lists users in an account with their assigned roles.
   // This endpoint provides a consolidated view that would otherwise require separate calls
   // to ListUsers and ListUserRoles for each user.

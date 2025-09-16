@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UIViewService_ListUsersWithRoles_FullMethodName = "/qdrant.cloud.ui.v1.UIViewService/ListUsersWithRoles"
+	AggregationService_ListUsersWithRoles_FullMethodName = "/qdrant.cloud.ui.v1.AggregationService/ListUsersWithRoles"
 )
 
-// UIViewServiceClient is the client API for UIViewService service.
+// AggregationServiceClient is the client API for AggregationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// UIViewService provides optimized methods for UI components that need aggregated data.
+// AggregationService provides optimized methods for UI components that need aggregated data.
 // This service combines multiple entities to reduce API round trips for common UI patterns.
-type UIViewServiceClient interface {
+type AggregationServiceClient interface {
 	// Lists users in an account with their assigned roles.
 	// This endpoint provides a consolidated view that would otherwise require separate calls
 	// to ListUsers and ListUserRoles for each user.
@@ -38,31 +38,31 @@ type UIViewServiceClient interface {
 	ListUsersWithRoles(ctx context.Context, in *ListUsersWithRolesRequest, opts ...grpc.CallOption) (*ListUsersWithRolesResponse, error)
 }
 
-type uIViewServiceClient struct {
+type aggregationServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUIViewServiceClient(cc grpc.ClientConnInterface) UIViewServiceClient {
-	return &uIViewServiceClient{cc}
+func NewAggregationServiceClient(cc grpc.ClientConnInterface) AggregationServiceClient {
+	return &aggregationServiceClient{cc}
 }
 
-func (c *uIViewServiceClient) ListUsersWithRoles(ctx context.Context, in *ListUsersWithRolesRequest, opts ...grpc.CallOption) (*ListUsersWithRolesResponse, error) {
+func (c *aggregationServiceClient) ListUsersWithRoles(ctx context.Context, in *ListUsersWithRolesRequest, opts ...grpc.CallOption) (*ListUsersWithRolesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersWithRolesResponse)
-	err := c.cc.Invoke(ctx, UIViewService_ListUsersWithRoles_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AggregationService_ListUsersWithRoles_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UIViewServiceServer is the server API for UIViewService service.
-// All implementations must embed UnimplementedUIViewServiceServer
+// AggregationServiceServer is the server API for AggregationService service.
+// All implementations must embed UnimplementedAggregationServiceServer
 // for forward compatibility.
 //
-// UIViewService provides optimized methods for UI components that need aggregated data.
+// AggregationService provides optimized methods for UI components that need aggregated data.
 // This service combines multiple entities to reduce API round trips for common UI patterns.
-type UIViewServiceServer interface {
+type AggregationServiceServer interface {
 	// Lists users in an account with their assigned roles.
 	// This endpoint provides a consolidated view that would otherwise require separate calls
 	// to ListUsers and ListUserRoles for each user.
@@ -70,68 +70,68 @@ type UIViewServiceServer interface {
 	// - read:users
 	// - read:roles
 	ListUsersWithRoles(context.Context, *ListUsersWithRolesRequest) (*ListUsersWithRolesResponse, error)
-	mustEmbedUnimplementedUIViewServiceServer()
+	mustEmbedUnimplementedAggregationServiceServer()
 }
 
-// UnimplementedUIViewServiceServer must be embedded to have
+// UnimplementedAggregationServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedUIViewServiceServer struct{}
+type UnimplementedAggregationServiceServer struct{}
 
-func (UnimplementedUIViewServiceServer) ListUsersWithRoles(context.Context, *ListUsersWithRolesRequest) (*ListUsersWithRolesResponse, error) {
+func (UnimplementedAggregationServiceServer) ListUsersWithRoles(context.Context, *ListUsersWithRolesRequest) (*ListUsersWithRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsersWithRoles not implemented")
 }
-func (UnimplementedUIViewServiceServer) mustEmbedUnimplementedUIViewServiceServer() {}
-func (UnimplementedUIViewServiceServer) testEmbeddedByValue()                       {}
+func (UnimplementedAggregationServiceServer) mustEmbedUnimplementedAggregationServiceServer() {}
+func (UnimplementedAggregationServiceServer) testEmbeddedByValue()                            {}
 
-// UnsafeUIViewServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UIViewServiceServer will
+// UnsafeAggregationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AggregationServiceServer will
 // result in compilation errors.
-type UnsafeUIViewServiceServer interface {
-	mustEmbedUnimplementedUIViewServiceServer()
+type UnsafeAggregationServiceServer interface {
+	mustEmbedUnimplementedAggregationServiceServer()
 }
 
-func RegisterUIViewServiceServer(s grpc.ServiceRegistrar, srv UIViewServiceServer) {
-	// If the following call pancis, it indicates UnimplementedUIViewServiceServer was
+func RegisterAggregationServiceServer(s grpc.ServiceRegistrar, srv AggregationServiceServer) {
+	// If the following call pancis, it indicates UnimplementedAggregationServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&UIViewService_ServiceDesc, srv)
+	s.RegisterService(&AggregationService_ServiceDesc, srv)
 }
 
-func _UIViewService_ListUsersWithRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AggregationService_ListUsersWithRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUsersWithRolesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UIViewServiceServer).ListUsersWithRoles(ctx, in)
+		return srv.(AggregationServiceServer).ListUsersWithRoles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UIViewService_ListUsersWithRoles_FullMethodName,
+		FullMethod: AggregationService_ListUsersWithRoles_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UIViewServiceServer).ListUsersWithRoles(ctx, req.(*ListUsersWithRolesRequest))
+		return srv.(AggregationServiceServer).ListUsersWithRoles(ctx, req.(*ListUsersWithRolesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UIViewService_ServiceDesc is the grpc.ServiceDesc for UIViewService service.
+// AggregationService_ServiceDesc is the grpc.ServiceDesc for AggregationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UIViewService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.ui.v1.UIViewService",
-	HandlerType: (*UIViewServiceServer)(nil),
+var AggregationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "qdrant.cloud.ui.v1.AggregationService",
+	HandlerType: (*AggregationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListUsersWithRoles",
-			Handler:    _UIViewService_ListUsersWithRoles_Handler,
+			Handler:    _AggregationService_ListUsersWithRoles_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
