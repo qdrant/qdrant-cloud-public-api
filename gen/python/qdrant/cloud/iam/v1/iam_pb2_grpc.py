@@ -122,7 +122,7 @@ class IAMServiceServicer(object):
     def UpdateUser(self, request, context):
         """Updates the user identified by the given ID.
         Required permissions:
-        - write:user
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -140,7 +140,7 @@ class IAMServiceServicer(object):
     def RecordUserConsent(self, request, context):
         """Records the authenticated user's consent for a legal document.
         Required permissions:
-        - write:user
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

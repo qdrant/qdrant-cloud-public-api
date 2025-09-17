@@ -34,10 +34,10 @@ service IAMService {
   }
   // Updates the user identified by the given ID.
   // Required permissions:
-  // - write:user
+  // - None (authenticated only)
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     // permissions
-    option (common.v1.permissions) = "write:user";
+    option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // gRPC Gateway REST call
@@ -73,10 +73,10 @@ service IAMService {
   }
   // Records the authenticated user's consent for a legal document.
   // Required permissions:
-  // - write:user
+  // - None (authenticated only)
   rpc RecordUserConsent(RecordUserConsentRequest) returns (RecordUserConsentResponse) {
     // permissions
-    option (common.v1.permissions) = "write:user";
+    option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)

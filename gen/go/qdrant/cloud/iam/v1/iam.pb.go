@@ -2328,19 +2328,17 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xed\x1b\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xd9\x1b\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
 	"\tListUsers\x12%.qdrant.cloud.iam.v1.ListUsersRequest\x1a&.qdrant.cloud.iam.v1.ListUsersResponse\"=\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xdc\x01\n" +
+	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xd2\x01\n" +
 	"\n" +
-	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"}\x8a\xb5\x18\n" +
-	"write:user\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
+	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"s\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser.id\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
-	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\xa4\x02\n" +
-	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\"\xaf\x01\x8a\xb5\x18\n" +
-	"write:user\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18m\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x0erecord-consentR\"\n" +
+	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\x9a\x02\n" +
+	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\"\xa5\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18m\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x0erecord-consentR\"\n" +
 	"\rdocument_type\x12\x11req.document_type\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/iam/v1/users/me/consent\x12\xb1\x01\n" +
 	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\n" +
 	"read:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n" +

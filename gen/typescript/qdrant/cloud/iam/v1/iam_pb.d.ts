@@ -1329,7 +1329,7 @@ export declare const IAMService: GenService<{
   /**
    * Updates the user identified by the given ID.
    * Required permissions:
-   * - write:user
+   * - None (authenticated only)
    *
    * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUser
    */
@@ -1353,7 +1353,7 @@ export declare const IAMService: GenService<{
   /**
    * Records the authenticated user's consent for a legal document.
    * Required permissions:
-   * - write:user
+   * - None (authenticated only)
    *
    * @generated from rpc qdrant.cloud.iam.v1.IAMService.RecordUserConsent
    */
