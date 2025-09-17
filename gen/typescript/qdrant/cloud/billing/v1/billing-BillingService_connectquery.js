@@ -16,7 +16,7 @@ export const listInvoices = BillingService.method.listInvoices;
 /**
  * Lists all discounts for the account identified by the given ID.
  * Required permissions:
- * - read:payment_information
+ * - None (authenticated only)
  *
  * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListDiscounts
  */

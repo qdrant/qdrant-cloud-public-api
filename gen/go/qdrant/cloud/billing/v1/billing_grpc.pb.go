@@ -35,7 +35,7 @@ type BillingServiceClient interface {
 	ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	// Lists all discounts for the account identified by the given ID.
 	// Required permissions:
-	// - read:payment_information
+	// - None (authenticated only)
 	ListDiscounts(ctx context.Context, in *ListDiscountsRequest, opts ...grpc.CallOption) (*ListDiscountsResponse, error)
 }
 
@@ -79,7 +79,7 @@ type BillingServiceServer interface {
 	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	// Lists all discounts for the account identified by the given ID.
 	// Required permissions:
-	// - read:payment_information
+	// - None (authenticated only)
 	ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }

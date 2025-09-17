@@ -43,7 +43,7 @@ class BillingServiceServicer(object):
     def ListDiscounts(self, request, context):
         """Lists all discounts for the account identified by the given ID.
         Required permissions:
-        - read:payment_information
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
