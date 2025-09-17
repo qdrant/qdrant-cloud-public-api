@@ -53,7 +53,7 @@ type IAMServiceClient interface {
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
-	// - write:user
+	// - None (authenticated only)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
@@ -61,7 +61,7 @@ type IAMServiceClient interface {
 	GetUserConsent(ctx context.Context, in *GetUserConsentRequest, opts ...grpc.CallOption) (*GetUserConsentResponse, error)
 	// Records the authenticated user's consent for a legal document.
 	// Required permissions:
-	// - write:user
+	// - None (authenticated only)
 	RecordUserConsent(ctx context.Context, in *RecordUserConsentRequest, opts ...grpc.CallOption) (*RecordUserConsentResponse, error)
 	// Lists all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
@@ -297,7 +297,7 @@ type IAMServiceServer interface {
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
-	// - write:user
+	// - None (authenticated only)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
@@ -305,7 +305,7 @@ type IAMServiceServer interface {
 	GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error)
 	// Records the authenticated user's consent for a legal document.
 	// Required permissions:
-	// - write:user
+	// - None (authenticated only)
 	RecordUserConsent(context.Context, *RecordUserConsentRequest) (*RecordUserConsentResponse, error)
 	// Lists all permissions known in the system for the provided account.
 	// Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.

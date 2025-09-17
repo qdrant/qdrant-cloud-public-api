@@ -492,7 +492,7 @@
         ]
       },
       "post": {
-        "summary": "Records the authenticated user's consent for a legal document.\nRequired permissions:\n- write:user",
+        "summary": "Records the authenticated user's consent for a legal document.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_RecordUserConsent",
         "responses": {
           "200": {
@@ -549,7 +549,7 @@
     },
     "/api/iam/v1/users/{user.id}": {
       "put": {
-        "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- write:user",
+        "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_UpdateUser",
         "responses": {
           "200": {
