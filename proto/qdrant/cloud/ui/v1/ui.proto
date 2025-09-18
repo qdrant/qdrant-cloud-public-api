@@ -3,6 +3,7 @@ syntax = "proto3";
 package qdrant.cloud.ui.v1;
 
 import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/iam/v1/iam.proto";
 
@@ -20,6 +21,8 @@ service AggregationService {
     // permissions
     option (common.v1.permissions) = "read:users";
     option (common.v1.permissions) = "read:roles";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/ui/v1/accounts/{account_id}/users"};
   }
 }
 

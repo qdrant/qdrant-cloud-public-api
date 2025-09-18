@@ -1,4 +1,5 @@
 from buf.validate import validate_pb2 as _validate_pb2
+from google.api import annotations_pb2 as _annotations_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.iam.v1 import iam_pb2 as _iam_pb2
 from google.protobuf.internal import containers as _containers
