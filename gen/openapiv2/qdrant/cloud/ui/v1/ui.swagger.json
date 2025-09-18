@@ -15,7 +15,40 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
+  "paths": {
+    "/api/ui/v1/accounts/{accountId}/users": {
+      "get": {
+        "summary": "Lists users in an account with their assigned roles.\nThis endpoint provides a consolidated view that would otherwise require separate calls\nto ListUsers and ListUserRoles for each user.\nRequired permissions:\n- read:users\n- read:roles\nbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS",
+        "operationId": "AggregationService_ListUsersWithRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUsersWithRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AggregationService"
+        ]
+      }
+    }
+  },
   "definitions": {
     "googlerpcStatus": {
       "type": "object",
