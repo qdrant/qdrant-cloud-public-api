@@ -323,7 +323,7 @@
     },
     "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
       "post": {
-        "summary": "Restores a backup in the account identified by the given ID.\nRequired permissions:\n- admin:backups",
+        "summary": "Restores a backup in the account identified by the given ID.\nRequired permissions:\n- restore:backups",
         "operationId": "BackupService_RestoreBackup",
         "responses": {
           "200": {

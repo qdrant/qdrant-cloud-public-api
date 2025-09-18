@@ -101,7 +101,7 @@ class ClusterServiceServicer(object):
     def CreateClusterFromBackup(self, request, context):
         """Create a new cluster from an existing backup
         Required permissions (both):
-        - admin:backups
+        - restore:backups
         - write:clusters
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
