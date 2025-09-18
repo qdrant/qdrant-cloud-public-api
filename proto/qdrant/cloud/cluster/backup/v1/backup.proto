@@ -115,10 +115,10 @@ service BackupService {
   }
   // Restores a backup in the account identified by the given ID.
   // Required permissions:
-  // - admin:backups
+  // - restore:backups
   rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
     // permissions
-    option (common.v1.permissions) = "admin:backups";
+    option (common.v1.permissions) = "restore:backups";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
     // events

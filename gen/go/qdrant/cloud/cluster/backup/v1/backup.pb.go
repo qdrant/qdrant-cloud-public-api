@@ -1975,7 +1975,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xf1!\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xf3!\n" +
 	"\rBackupService\x12\x8d\x02\n" +
 	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\x94\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -1996,8 +1996,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12ListBackupRestores\x129.qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest\x1a:.qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse\"p\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02>\x12</api/cluster/backup/v1/accounts/{account_id}/backup_restores\x12\xa7\x03\n" +
-	"\rRestoreBackup\x124.qdrant.cloud.cluster.backup.v1.RestoreBackupRequest\x1a5.qdrant.cloud.cluster.backup.v1.RestoreBackupResponse\"\xa8\x02\x8a\xb5\x18\radmin:backups\xba\xb5\x18\x16\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02>\x12</api/cluster/backup/v1/accounts/{account_id}/backup_restores\x12\xa9\x03\n" +
+	"\rRestoreBackup\x124.qdrant.cloud.cluster.backup.v1.RestoreBackupRequest\x1a5.qdrant.cloud.cluster.backup.v1.RestoreBackupResponse\"\xaa\x02\x8a\xb5\x18\x0frestore:backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\xa8\x01\b\x04\x12\x06backup\"\rreq.backup_id*Y/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}2\arestoreR)\n" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02J\"H/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\x8a\x02\n" +

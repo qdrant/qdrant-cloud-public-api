@@ -60,7 +60,7 @@ type BackupServiceClient interface {
 	ListBackupRestores(ctx context.Context, in *ListBackupRestoresRequest, opts ...grpc.CallOption) (*ListBackupRestoresResponse, error)
 	// Restores a backup in the account identified by the given ID.
 	// Required permissions:
-	// - admin:backups
+	// - restore:backups
 	RestoreBackup(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*RestoreBackupResponse, error)
 	// Lists all backup schedules in the account identified by the given ID.
 	// Required permissions:
@@ -230,7 +230,7 @@ type BackupServiceServer interface {
 	ListBackupRestores(context.Context, *ListBackupRestoresRequest) (*ListBackupRestoresResponse, error)
 	// Restores a backup in the account identified by the given ID.
 	// Required permissions:
-	// - admin:backups
+	// - restore:backups
 	RestoreBackup(context.Context, *RestoreBackupRequest) (*RestoreBackupResponse, error)
 	// Lists all backup schedules in the account identified by the given ID.
 	// Required permissions:

@@ -61,12 +61,12 @@ service ClusterService {
   }
   // Create a new cluster from an existing backup
   // Required permissions (both):
-  // - admin:backups
+  // - restore:backups
   // - write:clusters
   rpc CreateClusterFromBackup(CreateClusterFromBackupRequest) returns (CreateClusterFromBackupResponse) {
     // permissions
     option (common.v1.requires_all_permissions) = true;
-    option (common.v1.permissions) = "admin:backups";
+    option (common.v1.permissions) = "restore:backups";
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters"};

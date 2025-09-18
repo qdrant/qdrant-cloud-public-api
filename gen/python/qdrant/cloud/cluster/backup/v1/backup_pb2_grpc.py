@@ -124,7 +124,7 @@ class BackupServiceServicer(object):
     def RestoreBackup(self, request, context):
         """Restores a backup in the account identified by the given ID.
         Required permissions:
-        - admin:backups
+        - restore:backups
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

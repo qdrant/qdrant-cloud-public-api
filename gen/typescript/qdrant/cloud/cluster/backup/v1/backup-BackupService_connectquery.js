@@ -52,7 +52,7 @@ export const listBackupRestores = BackupService.method.listBackupRestores;
 /**
  * Restores a backup in the account identified by the given ID.
  * Required permissions:
- * - admin:backups
+ * - restore:backups
  *
  * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup
  */
