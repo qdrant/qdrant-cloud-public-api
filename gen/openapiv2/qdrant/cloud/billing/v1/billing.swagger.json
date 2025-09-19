@@ -18,7 +18,7 @@
   "paths": {
     "/api/billing/v1/accounts/{accountId}/discounts": {
       "get": {
-        "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "BillingService_ListDiscounts",
         "responses": {
           "200": {

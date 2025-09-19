@@ -20,10 +20,10 @@ service BillingService {
   }
   // Lists all discounts for the account identified by the given ID.
   // Required permissions:
-  // - read:payment_information
+  // - None (authenticated only)
   rpc ListDiscounts(ListDiscountsRequest) returns (ListDiscountsResponse) {
     // permissions
-    option (common.v1.permissions) = "read:payment_information";
+    option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
