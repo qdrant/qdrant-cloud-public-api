@@ -91,7 +91,7 @@ KUBERNETES_DISTRIBUTION_STACKIT: KubernetesDistribution
 KUBERNETES_DISTRIBUTION_VULTR: KubernetesDistribution
 KUBERNETES_DISTRIBUTION_K3S: KubernetesDistribution
 
-class GetBootstrapCommandsRequest(_message.Message):
+class GenerateBootstrapCommandsRequest(_message.Message):
     __slots__ = ("account_id", "hybrid_cloud_environment_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     HYBRID_CLOUD_ENVIRONMENT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -99,7 +99,7 @@ class GetBootstrapCommandsRequest(_message.Message):
     hybrid_cloud_environment_id: str
     def __init__(self, account_id: _Optional[str] = ..., hybrid_cloud_environment_id: _Optional[str] = ...) -> None: ...
 
-class GetBootstrapCommandsResponse(_message.Message):
+class GenerateBootstrapCommandsResponse(_message.Message):
     __slots__ = ("commands",)
     COMMANDS_FIELD_NUMBER: _ClassVar[int]
     commands: _containers.RepeatedScalarFieldContainer[str]

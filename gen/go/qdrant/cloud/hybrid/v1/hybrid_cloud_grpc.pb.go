@@ -24,7 +24,7 @@ const (
 	HybridCloudService_CreateHybridCloudEnvironment_FullMethodName = "/qdrant.cloud.hybrid.v1.HybridCloudService/CreateHybridCloudEnvironment"
 	HybridCloudService_UpdateHybridCloudEnvironment_FullMethodName = "/qdrant.cloud.hybrid.v1.HybridCloudService/UpdateHybridCloudEnvironment"
 	HybridCloudService_DeleteHybridCloudEnvironment_FullMethodName = "/qdrant.cloud.hybrid.v1.HybridCloudService/DeleteHybridCloudEnvironment"
-	HybridCloudService_GetBootstrapCommands_FullMethodName         = "/qdrant.cloud.hybrid.v1.HybridCloudService/GetBootstrapCommands"
+	HybridCloudService_GenerateBootstrapCommands_FullMethodName    = "/qdrant.cloud.hybrid.v1.HybridCloudService/GenerateBootstrapCommands"
 )
 
 // HybridCloudServiceClient is the client API for HybridCloudService service.
@@ -55,13 +55,13 @@ type HybridCloudServiceClient interface {
 	// Required permissions:
 	// - delete:hybrid_cloud_environments
 	DeleteHybridCloudEnvironment(ctx context.Context, in *DeleteHybridCloudEnvironmentRequest, opts ...grpc.CallOption) (*DeleteHybridCloudEnvironmentResponse, error)
-	// Gets the commands that should be executed against a kubernetes cluster to
+	// Generates the commands that should be executed against a kubernetes cluster to
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
-	// Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+	// Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
 	// Required permission:
 	// - write:hybrid_cloud_environments
-	GetBootstrapCommands(ctx context.Context, in *GetBootstrapCommandsRequest, opts ...grpc.CallOption) (*GetBootstrapCommandsResponse, error)
+	GenerateBootstrapCommands(ctx context.Context, in *GenerateBootstrapCommandsRequest, opts ...grpc.CallOption) (*GenerateBootstrapCommandsResponse, error)
 }
 
 type hybridCloudServiceClient struct {
@@ -122,10 +122,10 @@ func (c *hybridCloudServiceClient) DeleteHybridCloudEnvironment(ctx context.Cont
 	return out, nil
 }
 
-func (c *hybridCloudServiceClient) GetBootstrapCommands(ctx context.Context, in *GetBootstrapCommandsRequest, opts ...grpc.CallOption) (*GetBootstrapCommandsResponse, error) {
+func (c *hybridCloudServiceClient) GenerateBootstrapCommands(ctx context.Context, in *GenerateBootstrapCommandsRequest, opts ...grpc.CallOption) (*GenerateBootstrapCommandsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBootstrapCommandsResponse)
-	err := c.cc.Invoke(ctx, HybridCloudService_GetBootstrapCommands_FullMethodName, in, out, cOpts...)
+	out := new(GenerateBootstrapCommandsResponse)
+	err := c.cc.Invoke(ctx, HybridCloudService_GenerateBootstrapCommands_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -160,13 +160,13 @@ type HybridCloudServiceServer interface {
 	// Required permissions:
 	// - delete:hybrid_cloud_environments
 	DeleteHybridCloudEnvironment(context.Context, *DeleteHybridCloudEnvironmentRequest) (*DeleteHybridCloudEnvironmentResponse, error)
-	// Gets the commands that should be executed against a kubernetes cluster to
+	// Generates the commands that should be executed against a kubernetes cluster to
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
-	// Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+	// Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
 	// Required permission:
 	// - write:hybrid_cloud_environments
-	GetBootstrapCommands(context.Context, *GetBootstrapCommandsRequest) (*GetBootstrapCommandsResponse, error)
+	GenerateBootstrapCommands(context.Context, *GenerateBootstrapCommandsRequest) (*GenerateBootstrapCommandsResponse, error)
 	mustEmbedUnimplementedHybridCloudServiceServer()
 }
 
@@ -192,8 +192,8 @@ func (UnimplementedHybridCloudServiceServer) UpdateHybridCloudEnvironment(contex
 func (UnimplementedHybridCloudServiceServer) DeleteHybridCloudEnvironment(context.Context, *DeleteHybridCloudEnvironmentRequest) (*DeleteHybridCloudEnvironmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHybridCloudEnvironment not implemented")
 }
-func (UnimplementedHybridCloudServiceServer) GetBootstrapCommands(context.Context, *GetBootstrapCommandsRequest) (*GetBootstrapCommandsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBootstrapCommands not implemented")
+func (UnimplementedHybridCloudServiceServer) GenerateBootstrapCommands(context.Context, *GenerateBootstrapCommandsRequest) (*GenerateBootstrapCommandsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateBootstrapCommands not implemented")
 }
 func (UnimplementedHybridCloudServiceServer) mustEmbedUnimplementedHybridCloudServiceServer() {}
 func (UnimplementedHybridCloudServiceServer) testEmbeddedByValue()                            {}
@@ -306,20 +306,20 @@ func _HybridCloudService_DeleteHybridCloudEnvironment_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HybridCloudService_GetBootstrapCommands_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBootstrapCommandsRequest)
+func _HybridCloudService_GenerateBootstrapCommands_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateBootstrapCommandsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HybridCloudServiceServer).GetBootstrapCommands(ctx, in)
+		return srv.(HybridCloudServiceServer).GenerateBootstrapCommands(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HybridCloudService_GetBootstrapCommands_FullMethodName,
+		FullMethod: HybridCloudService_GenerateBootstrapCommands_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HybridCloudServiceServer).GetBootstrapCommands(ctx, req.(*GetBootstrapCommandsRequest))
+		return srv.(HybridCloudServiceServer).GenerateBootstrapCommands(ctx, req.(*GenerateBootstrapCommandsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -352,8 +352,8 @@ var HybridCloudService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HybridCloudService_DeleteHybridCloudEnvironment_Handler,
 		},
 		{
-			MethodName: "GetBootstrapCommands",
-			Handler:    _HybridCloudService_GetBootstrapCommands_Handler,
+			MethodName: "GenerateBootstrapCommands",
+			Handler:    _HybridCloudService_GenerateBootstrapCommands_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

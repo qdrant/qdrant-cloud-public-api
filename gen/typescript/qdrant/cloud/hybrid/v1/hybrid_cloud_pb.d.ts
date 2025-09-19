@@ -15,11 +15,11 @@ import type { KeyValue } from "../../common/v1/common_pb.js";
 export declare const file_qdrant_cloud_hybrid_v1_hybrid_cloud: GenFile;
 
 /**
- * GetBootstrapCommandsRequest is the request for GetBootstrapCommands function
+ * GenerateBootstrapCommandsRequest is the request for GenerateBootstrapCommands function
  *
- * @generated from message qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest
+ * @generated from message qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest
  */
-export declare type GetBootstrapCommandsRequest = Message<"qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest"> & {
+export declare type GenerateBootstrapCommandsRequest = Message<"qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -38,20 +38,20 @@ export declare type GetBootstrapCommandsRequest = Message<"qdrant.cloud.hybrid.v
   hybridCloudEnvironmentId: string;
 };
 
-export declare type GetBootstrapCommandsRequestValid = GetBootstrapCommandsRequest;
+export declare type GenerateBootstrapCommandsRequestValid = GenerateBootstrapCommandsRequest;
 
 /**
- * Describes the message qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest.
- * Use `create(GetBootstrapCommandsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest.
+ * Use `create(GenerateBootstrapCommandsRequestSchema)` to create a new message.
  */
-export declare const GetBootstrapCommandsRequestSchema: GenMessage<GetBootstrapCommandsRequest, {validType: GetBootstrapCommandsRequestValid}>;
+export declare const GenerateBootstrapCommandsRequestSchema: GenMessage<GenerateBootstrapCommandsRequest, {validType: GenerateBootstrapCommandsRequestValid}>;
 
 /**
- * GetBootstrapCommandsResponse is the response for GetBootstrapCommands function
+ * GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function
  *
- * @generated from message qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse
+ * @generated from message qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse
  */
-export declare type GetBootstrapCommandsResponse = Message<"qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse"> & {
+export declare type GenerateBootstrapCommandsResponse = Message<"qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse"> & {
   /**
    * Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
    * `kubectl` and `helm` CLIs are required for execution.
@@ -61,13 +61,13 @@ export declare type GetBootstrapCommandsResponse = Message<"qdrant.cloud.hybrid.
   commands: string[];
 };
 
-export declare type GetBootstrapCommandsResponseValid = GetBootstrapCommandsResponse;
+export declare type GenerateBootstrapCommandsResponseValid = GenerateBootstrapCommandsResponse;
 
 /**
- * Describes the message qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse.
- * Use `create(GetBootstrapCommandsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse.
+ * Use `create(GenerateBootstrapCommandsResponseSchema)` to create a new message.
  */
-export declare const GetBootstrapCommandsResponseSchema: GenMessage<GetBootstrapCommandsResponse, {validType: GetBootstrapCommandsResponseValid}>;
+export declare const GenerateBootstrapCommandsResponseSchema: GenMessage<GenerateBootstrapCommandsResponse, {validType: GenerateBootstrapCommandsResponseValid}>;
 
 /**
  * DeleteHybridCloudEnvironmentRequest is the request for DeleteHybridCloudEnvironment function
@@ -1358,19 +1358,19 @@ export declare const HybridCloudService: GenService<{
     output: typeof DeleteHybridCloudEnvironmentResponseSchema;
   },
   /**
-   * Gets the commands that should be executed against a kubernetes cluster to
+   * Generates the commands that should be executed against a kubernetes cluster to
    * bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
    * but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
-   * Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+   * Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
    * Required permission:
    * - write:hybrid_cloud_environments
    *
-   * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GetBootstrapCommands
+   * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands
    */
-  getBootstrapCommands: {
+  generateBootstrapCommands: {
     methodKind: "unary";
-    input: typeof GetBootstrapCommandsRequestSchema;
-    output: typeof GetBootstrapCommandsResponseSchema;
+    input: typeof GenerateBootstrapCommandsRequestSchema;
+    output: typeof GenerateBootstrapCommandsResponseSchema;
   },
 }>;
 
