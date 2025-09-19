@@ -353,8 +353,8 @@ func (KubernetesDistribution) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDescGZIP(), []int{4}
 }
 
-// GetBootstrapCommandsRequest is the request for GetBootstrapCommands function
-type GetBootstrapCommandsRequest struct {
+// GenerateBootstrapCommandsRequest is the request for GenerateBootstrapCommands function
+type GenerateBootstrapCommandsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
@@ -367,20 +367,20 @@ type GetBootstrapCommandsRequest struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *GetBootstrapCommandsRequest) Reset() {
-	*x = GetBootstrapCommandsRequest{}
+func (x *GenerateBootstrapCommandsRequest) Reset() {
+	*x = GenerateBootstrapCommandsRequest{}
 	mi := &file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetBootstrapCommandsRequest) String() string {
+func (x *GenerateBootstrapCommandsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetBootstrapCommandsRequest) ProtoMessage() {}
+func (*GenerateBootstrapCommandsRequest) ProtoMessage() {}
 
-func (x *GetBootstrapCommandsRequest) ProtoReflect() protoreflect.Message {
+func (x *GenerateBootstrapCommandsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -392,27 +392,27 @@ func (x *GetBootstrapCommandsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetBootstrapCommandsRequest.ProtoReflect.Descriptor instead.
-func (*GetBootstrapCommandsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenerateBootstrapCommandsRequest.ProtoReflect.Descriptor instead.
+func (*GenerateBootstrapCommandsRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetBootstrapCommandsRequest) GetAccountId() string {
+func (x *GenerateBootstrapCommandsRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *GetBootstrapCommandsRequest) GetHybridCloudEnvironmentId() string {
+func (x *GenerateBootstrapCommandsRequest) GetHybridCloudEnvironmentId() string {
 	if x != nil {
 		return x.HybridCloudEnvironmentId
 	}
 	return ""
 }
 
-// GetBootstrapCommandsResponse is the response for GetBootstrapCommands function
-type GetBootstrapCommandsResponse struct {
+// GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function
+type GenerateBootstrapCommandsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
 	// `kubectl` and `helm` CLIs are required for execution.
@@ -421,20 +421,20 @@ type GetBootstrapCommandsResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetBootstrapCommandsResponse) Reset() {
-	*x = GetBootstrapCommandsResponse{}
+func (x *GenerateBootstrapCommandsResponse) Reset() {
+	*x = GenerateBootstrapCommandsResponse{}
 	mi := &file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetBootstrapCommandsResponse) String() string {
+func (x *GenerateBootstrapCommandsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetBootstrapCommandsResponse) ProtoMessage() {}
+func (*GenerateBootstrapCommandsResponse) ProtoMessage() {}
 
-func (x *GetBootstrapCommandsResponse) ProtoReflect() protoreflect.Message {
+func (x *GenerateBootstrapCommandsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -446,12 +446,12 @@ func (x *GetBootstrapCommandsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetBootstrapCommandsResponse.ProtoReflect.Descriptor instead.
-func (*GetBootstrapCommandsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenerateBootstrapCommandsResponse.ProtoReflect.Descriptor instead.
+func (*GenerateBootstrapCommandsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetBootstrapCommandsResponse) GetCommands() []string {
+func (x *GenerateBootstrapCommandsResponse) GetCommands() []string {
 	if x != nil {
 		return x.Commands
 	}
@@ -1829,12 +1829,12 @@ var File_qdrant_cloud_hybrid_v1_hybrid_cloud_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
-	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(k8s.io/api/networking/v1/generated.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x8f\x01\n" +
-	"\x1bGetBootstrapCommandsRequest\x12'\n" +
+	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(k8s.io/api/networking/v1/generated.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
+	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
-	"\x1bhybrid_cloud_environment_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x18hybridCloudEnvironmentId\":\n" +
-	"\x1cGetBootstrapCommandsResponse\x12\x1a\n" +
+	"\x1bhybrid_cloud_environment_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x18hybridCloudEnvironmentId\"?\n" +
+	"!GenerateBootstrapCommandsResponse\x12\x1a\n" +
 	"\bcommands\x18\x01 \x03(\tR\bcommands\"\x97\x01\n" +
 	"#DeleteHybridCloudEnvironmentRequest\x12'\n" +
 	"\n" +
@@ -2004,7 +2004,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x12#\n" +
 	"\x1fKUBERNETES_DISTRIBUTION_STACKIT\x10\v\x12!\n" +
 	"\x1dKUBERNETES_DISTRIBUTION_VULTR\x10\f\x12\x1f\n" +
-	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\xe7\x16\n" +
+	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\xe0\x16\n" +
 	"\x12HybridCloudService\x12\x96\x02\n" +
 	"\x1bListHybridCloudEnvironments\x12:.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest\x1a;.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse\"~\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\x82\xd3\xe4\x93\x02@\x12>/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments\x12\xed\x02\n" +
 	"\x19GetHybridCloudEnvironment\x128.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest\x1a9.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse\"\xda\x01\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\xba\xb5\x18:\n" +
@@ -2014,9 +2014,9 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1cUpdateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse\"\xbb\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18:\n" +
 	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment.id\xca\xf3\x18\xae\x01\b\x02\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment.id*o/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}\x82\xd3\xe4\x93\x02z:\x01*\x1au/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{hybrid_cloud_environment.id}\x12\xfc\x03\n" +
 	"\x1cDeleteHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse\"\xe0\x02\x8a\xb5\x18 delete:hybrid_cloud_environments\xba\xb5\x18:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\x95\x01\b\x03\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}\x82\xd3\xe4\x93\x02^*\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xac\x04\n" +
-	"\x14GetBootstrapCommands\x123.qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest\x1a4.qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse\"\xa8\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\xba\xb5\x18:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\xad\x01\b\x04\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}2\x16get-bootstrap-commands\x82\xd3\xe4\x93\x02\x8e\x01\x12\x8b\x01/api/hybrid-cloud-environment/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/initial-installation-commandB\xfb\x01\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\x95\x01\b\x03\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}\x82\xd3\xe4\x93\x02^*\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xa5\x04\n" +
+	"\x19GenerateBootstrapCommands\x128.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest\x1a9.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse\"\x92\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\xba\xb5\x18:\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\xb2\x01\b\x04\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}2\x1bgenerate-bootstrap-commands\x82\xd3\xe4\x93\x02t:\x01*\"o/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/bootstrap-commandsB\xfb\x01\n" +
 	"\x1acom.qdrant.cloud.hybrid.v1B\x10HybridCloudProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/hybrid/v1;hybridv1\xa2\x02\x03QCH\xaa\x02\x16Qdrant.Cloud.Hybrid.V1\xca\x02\x16Qdrant\\Cloud\\Hybrid\\V1\xe2\x02\"Qdrant\\Cloud\\Hybrid\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Hybrid::V1b\x06proto3"
 
 var (
@@ -2039,8 +2039,8 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_goTypes = []any{
 	(HybridCloudEnvironmentStatusPhase)(0),            // 2: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase
 	(HybridCloudEnvironmentComponentStatusPhase)(0),   // 3: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusPhase
 	(KubernetesDistribution)(0),                       // 4: qdrant.cloud.hybrid.v1.KubernetesDistribution
-	(*GetBootstrapCommandsRequest)(nil),               // 5: qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest
-	(*GetBootstrapCommandsResponse)(nil),              // 6: qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse
+	(*GenerateBootstrapCommandsRequest)(nil),          // 5: qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest
+	(*GenerateBootstrapCommandsResponse)(nil),         // 6: qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse
 	(*DeleteHybridCloudEnvironmentRequest)(nil),       // 7: qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest
 	(*DeleteHybridCloudEnvironmentResponse)(nil),      // 8: qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse
 	(*UpdateHybridCloudEnvironmentRequest)(nil),       // 9: qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest
@@ -2100,13 +2100,13 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_depIdxs = []int32{
 	11, // 30: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest
 	9,  // 31: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest
 	7,  // 32: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest
-	5,  // 33: qdrant.cloud.hybrid.v1.HybridCloudService.GetBootstrapCommands:input_type -> qdrant.cloud.hybrid.v1.GetBootstrapCommandsRequest
+	5,  // 33: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:input_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest
 	16, // 34: qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments:output_type -> qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse
 	14, // 35: qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse
 	12, // 36: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse
 	10, // 37: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse
 	8,  // 38: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse
-	6,  // 39: qdrant.cloud.hybrid.v1.HybridCloudService.GetBootstrapCommands:output_type -> qdrant.cloud.hybrid.v1.GetBootstrapCommandsResponse
+	6,  // 39: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:output_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse
 	34, // [34:40] is the sub-list for method output_type
 	28, // [28:34] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name

@@ -52,13 +52,13 @@ export const updateHybridCloudEnvironment = HybridCloudService.method.updateHybr
 export const deleteHybridCloudEnvironment = HybridCloudService.method.deleteHybridCloudEnvironment;
 
 /**
- * Gets the commands that should be executed against a kubernetes cluster to
+ * Generates the commands that should be executed against a kubernetes cluster to
  * bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
  * but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
- * Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+ * Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
  * Required permission:
  * - write:hybrid_cloud_environments
  *
- * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GetBootstrapCommands
+ * @generated from rpc qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands
  */
-export const getBootstrapCommands = HybridCloudService.method.getBootstrapCommands;
+export const generateBootstrapCommands = HybridCloudService.method.generateBootstrapCommands;

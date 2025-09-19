@@ -40,10 +40,10 @@ class HybridCloudServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentResponse.FromString,
                 _registered_method=True)
-        self.GetBootstrapCommands = channel.unary_unary(
-                '/qdrant.cloud.hybrid.v1.HybridCloudService/GetBootstrapCommands',
-                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsResponse.FromString,
+        self.GenerateBootstrapCommands = channel.unary_unary(
+                '/qdrant.cloud.hybrid.v1.HybridCloudService/GenerateBootstrapCommands',
+                request_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsResponse.FromString,
                 _registered_method=True)
 
 
@@ -98,11 +98,11 @@ class HybridCloudServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetBootstrapCommands(self, request, context):
-        """Gets the commands that should be executed against a kubernetes cluster to
+    def GenerateBootstrapCommands(self, request, context):
+        """Generates the commands that should be executed against a kubernetes cluster to
         bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
         but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
-        Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+        Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
         Required permission:
         - write:hybrid_cloud_environments
         """
@@ -138,10 +138,10 @@ def add_HybridCloudServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.DeleteHybridCloudEnvironmentResponse.SerializeToString,
             ),
-            'GetBootstrapCommands': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetBootstrapCommands,
-                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsResponse.SerializeToString,
+            'GenerateBootstrapCommands': grpc.unary_unary_rpc_method_handler(
+                    servicer.GenerateBootstrapCommands,
+                    request_deserializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -291,7 +291,7 @@ class HybridCloudService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetBootstrapCommands(request,
+    def GenerateBootstrapCommands(request,
             target,
             options=(),
             channel_credentials=None,
@@ -304,9 +304,9 @@ class HybridCloudService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.hybrid.v1.HybridCloudService/GetBootstrapCommands',
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GetBootstrapCommandsResponse.FromString,
+            '/qdrant.cloud.hybrid.v1.HybridCloudService/GenerateBootstrapCommands',
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_hybrid_dot_v1_dot_hybrid__cloud__pb2.GenerateBootstrapCommandsResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -16,45 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/hybrid-cloud-environment/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/initial-installation-command": {
-      "get": {
-        "summary": "Gets the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permission:\n- write:hybrid_cloud_environments",
-        "operationId": "HybridCloudService_GetBootstrapCommands",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetBootstrapCommandsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hybridCloudEnvironmentId",
-            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "HybridCloudService"
-        ]
-      }
-    },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments": {
       "get": {
         "summary": "Lists all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
@@ -156,6 +117,53 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/bootstrap-commands": {
+      "post": {
+        "summary": "Generates the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permission:\n- write:hybrid_cloud_environments",
+        "operationId": "HybridCloudService_GenerateBootstrapCommands",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GenerateBootstrapCommandsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceGenerateBootstrapCommandsBody"
+            }
           }
         ],
         "tags": [
@@ -290,6 +298,10 @@
       },
       "title": "CreateHybridCloudEnvironmentRequest is the request for CreateHybridCloudEnvironment function"
     },
+    "HybridCloudServiceGenerateBootstrapCommandsBody": {
+      "type": "object",
+      "title": "GenerateBootstrapCommandsRequest is the request for GenerateBootstrapCommands function"
+    },
     "HybridCloudServiceUpdateHybridCloudEnvironmentBody": {
       "type": "object",
       "properties": {
@@ -412,7 +424,7 @@
       "description": "Empty",
       "title": "DeleteHybridCloudEnvironmentResponse is the response for DeleteHybridCloudEnvironment function"
     },
-    "v1GetBootstrapCommandsResponse": {
+    "v1GenerateBootstrapCommandsResponse": {
       "type": "object",
       "properties": {
         "commands": {
@@ -423,7 +435,7 @@
           "description": "Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
         }
       },
-      "title": "GetBootstrapCommandsResponse is the response for GetBootstrapCommands function"
+      "title": "GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function"
     },
     "v1GetHybridCloudEnvironmentResponse": {
       "type": "object",

@@ -115,21 +115,24 @@ service HybridCloudService {
       field_expression: "hybrid_cloud_environment_id"
     };
   }
-  // Gets the commands that should be executed against a kubernetes cluster to
+  // Generates the commands that should be executed against a kubernetes cluster to
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
   // but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
-  // Thus, it make sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
+  // Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
   // Required permission:
   // - write:hybrid_cloud_environments
-  rpc GetBootstrapCommands(GetBootstrapCommandsRequest) returns (GetBootstrapCommandsResponse) {
+  rpc GenerateBootstrapCommands(GenerateBootstrapCommandsRequest) returns (GenerateBootstrapCommandsResponse) {
     // permissions
     option (common.v1.permissions) = "write:hybrid_cloud_environments";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/hybrid-cloud-environment/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/initial-installation-command"};
+    option (google.api.http) = {
+      post: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/bootstrap-commands"
+      body: "*"
+    };
     // events
     option (qdrant.cloud.event.v1.event_options) = {
       event_type: EVENT_TYPE_ACTION
-      action_type: "get-bootstrap-commands"
+      action_type: "generate-bootstrap-commands"
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "req.hybrid_cloud_environment_id"
       resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
@@ -142,8 +145,8 @@ service HybridCloudService {
   }
 }
 
-// GetBootstrapCommandsRequest is the request for GetBootstrapCommands function
-message GetBootstrapCommandsRequest {
+// GenerateBootstrapCommandsRequest is the request for GenerateBootstrapCommands function
+message GenerateBootstrapCommandsRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
@@ -153,8 +156,8 @@ message GetBootstrapCommandsRequest {
   string hybrid_cloud_environment_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
-// GetBootstrapCommandsResponse is the response for GetBootstrapCommands function
-message GetBootstrapCommandsResponse {
+// GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function
+message GenerateBootstrapCommandsResponse {
   // Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
   // `kubectl` and `helm` CLIs are required for execution.
   repeated string commands = 1;
