@@ -22,9 +22,14 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 
 Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey <YOUR_MANAGEMENT_KEY>`).
 
-## Authorization
+## Authentication & Authorization
 
-The Qdrant Cloud API uses a permission-based authorization system. Each method defines the required permissions that must be satisfied for access to be granted. For detailed information about permissions, multiple permissions, OR behavior, and safe permission migration patterns, see [Authorization Documentation](docs/authorization.md).
+The Qdrant Cloud API implements both authentication and permission-based authorization to secure access to its methods and resources:
+
+- **Authentication**: Verifies the identity of the caller using API keys or user tokens
+- **Authorization**: Controls access to specific operations based on permissions and roles
+
+For detailed information about authentication requirements, actor types, permissions, multiple permissions, and safe permission migration patterns, see [Authentication & Authorization Documentation](docs/auth.md).
 
 ## Available Services
 
