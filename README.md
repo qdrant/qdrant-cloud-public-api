@@ -22,6 +22,10 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 
 Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey <YOUR_MANAGEMENT_KEY>`).
 
+## Authorization
+
+The Qdrant Cloud API uses a permission-based authorization system. Each method defines the required permissions that must be satisfied for access to be granted. For detailed information about permissions, multiple permissions, OR behavior, and safe permission migration patterns, see [Authorization Documentation](docs/authorization.md).
+
 ## Available Services
 
 The Qdrant Cloud API is organized into several gRPC services, each responsible for a specific domain of functionality. Below is a list of the primary services available:
