@@ -1200,7 +1200,7 @@
             "type": "object",
             "$ref": "#/definitions/v1QdrantRelease"
           },
-          "title": "The actual Qdrant releases in this list"
+          "title": "The actual Qdrant releases in this list, ordered by the version field in ascending semantic version order.\nFor example: v1.12.6, v1.13.6, v1.14.1, v1.15.4"
         }
       },
       "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"

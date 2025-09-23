@@ -1516,7 +1516,8 @@ func (x *ListQdrantReleasesRequest) GetClusterId() string {
 // ListQdrantReleasesResponse is the response from the ListQdrantReleases function
 type ListQdrantReleasesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The actual Qdrant releases in this list
+	// The actual Qdrant releases in this list, ordered by the version field in ascending semantic version order.
+	// For example: v1.12.6, v1.13.6, v1.14.1, v1.15.4
 	Items         []*QdrantRelease `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
