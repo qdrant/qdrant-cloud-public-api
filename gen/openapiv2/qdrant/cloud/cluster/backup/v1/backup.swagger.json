@@ -1007,9 +1007,66 @@
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
           "description": "The cluster configuration at the time of backup."
+        },
+        "restorePackageId": {
+          "type": "string",
+          "title": "The identifier of the best package to use for a restore into new cluster\ncould be the same package_id as original, alternative with same cpu,ram,disk or None"
+        },
+        "resources": {
+          "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
+          "title": "Resources of the original cluster"
         }
       },
       "description": "Represents the cluster details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.\nThe configuration field is immutable and represents the values at backup time."
+    },
+    "v1ClusterNodeResources": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number",
+          "format": "double",
+          "description": "Base resources that are part of the standard allocation for the cluster per node.\nThis includes default CPU, memory, storage, etc."
+        },
+        "complimentary": {
+          "type": "number",
+          "format": "double",
+          "description": "Complimentary resources provided to the cluster at no additional cost.\nThis might include complimentary network bandwidth, credits, etc."
+        },
+        "additional": {
+          "type": "number",
+          "format": "double",
+          "description": "Additional resources allocated to the cluster.\nThis could include additional storage, compute power, etc."
+        },
+        "reserved": {
+          "type": "number",
+          "format": "double",
+          "description": "The reserved is the amount used by the system, which cannot be used by the database itself."
+        },
+        "available": {
+          "type": "number",
+          "format": "double",
+          "title": "The available is the total (base+complimentary+additional) - reserved"
+        }
+      },
+      "description": "ClusterNodeResources represents the allocation of various resources for a cluster per node."
+    },
+    "v1ClusterNodeResourcesSummary": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Disk resources"
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Memory resources"
+        },
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "CPU resources"
+        }
+      },
+      "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
     },
     "v1ClusterServiceType": {
       "type": "string",

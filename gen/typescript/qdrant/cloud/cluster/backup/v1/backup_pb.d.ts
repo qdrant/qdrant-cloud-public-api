@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
-import type { ClusterConfiguration, ClusterConfigurationValid } from "../../v1/cluster_pb.js";
+import type { ClusterConfiguration, ClusterConfigurationValid, ClusterNodeResourcesSummary, ClusterNodeResourcesSummaryValid } from "../../v1/cluster_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/backup/v1/backup.proto.
@@ -964,6 +964,21 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
   configuration?: ClusterConfiguration;
+
+  /**
+   * The identifier of the best package to use for a restore into new cluster
+   * could be the same package_id as original, alternative with same cpu,ram,disk or None
+   *
+   * @generated from field: optional string restore_package_id = 5;
+   */
+  restorePackageId?: string;
+
+  /**
+   * Resources of the original cluster
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6;
+   */
+  resources?: ClusterNodeResourcesSummary;
 };
 
 /**
@@ -1004,6 +1019,21 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
   configuration: ClusterConfigurationValid;
+
+  /**
+   * The identifier of the best package to use for a restore into new cluster
+   * could be the same package_id as original, alternative with same cpu,ram,disk or None
+   *
+   * @generated from field: optional string restore_package_id = 5;
+   */
+  restorePackageId?: string;
+
+  /**
+   * Resources of the original cluster
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6;
+   */
+  resources: ClusterNodeResourcesSummaryValid;
 };
 
 /**

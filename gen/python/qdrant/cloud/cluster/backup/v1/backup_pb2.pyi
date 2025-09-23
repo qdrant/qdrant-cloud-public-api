@@ -244,16 +244,20 @@ class Backup(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ..., cluster_info: _Optional[_Union[ClusterInfo, _Mapping]] = ...) -> None: ...
 
 class ClusterInfo(_message.Message):
-    __slots__ = ("name", "cloud_provider_id", "cloud_provider_region_id", "configuration")
+    __slots__ = ("name", "cloud_provider_id", "cloud_provider_region_id", "configuration", "restore_package_id", "resources")
     NAME_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
+    RESTORE_PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    RESOURCES_FIELD_NUMBER: _ClassVar[int]
     name: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     configuration: _cluster_pb2.ClusterConfiguration
-    def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_cluster_pb2.ClusterConfiguration, _Mapping]] = ...) -> None: ...
+    restore_package_id: str
+    resources: _cluster_pb2.ClusterNodeResourcesSummary
+    def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_cluster_pb2.ClusterConfiguration, _Mapping]] = ..., restore_package_id: _Optional[str] = ..., resources: _Optional[_Union[_cluster_pb2.ClusterNodeResourcesSummary, _Mapping]] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "cluster_id", "schedule", "retention_period", "deleted_at", "status")
