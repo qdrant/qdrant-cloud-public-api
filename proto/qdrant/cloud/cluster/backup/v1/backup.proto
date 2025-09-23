@@ -489,6 +489,11 @@ message ClusterInfo {
   };
   // The cluster configuration at the time of backup.
   qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4 [(buf.validate.field).required = true];
+  // The identifier of the best package to use for a restore into new cluster
+  // could be the same package_id as original, alternative with same cpu,ram,disk or None
+  optional string restore_package_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // Resources of the original cluster
+  qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6 [(buf.validate.field).required = true];
 }
 
 // BackupScheduleStatus represents the current status of a backup schedule.
