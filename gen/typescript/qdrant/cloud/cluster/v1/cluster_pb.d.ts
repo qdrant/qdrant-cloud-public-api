@@ -531,7 +531,8 @@ export declare const ListQdrantReleasesRequestSchema: GenMessage<ListQdrantRelea
  */
 export declare type ListQdrantReleasesResponse = Message<"qdrant.cloud.cluster.v1.ListQdrantReleasesResponse"> & {
   /**
-   * The actual Qdrant releases in this list
+   * The actual Qdrant releases in this list, ordered by the version field in ascending semantic version order.
+   * For example: v1.12.6, v1.13.6, v1.14.1, v1.15.4
    *
    * @generated from field: repeated qdrant.cloud.cluster.v1.QdrantRelease items = 1;
    */
