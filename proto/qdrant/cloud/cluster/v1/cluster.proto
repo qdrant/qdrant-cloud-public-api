@@ -947,4 +947,3 @@ message CreateClusterFromBackupResponse {
   // Cluster created from the backup
   Cluster cluster = 1 [(buf.validate.field).required = true];
 }
-

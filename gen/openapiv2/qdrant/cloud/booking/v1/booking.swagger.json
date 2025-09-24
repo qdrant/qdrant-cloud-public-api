@@ -117,6 +117,46 @@
         ]
       }
     },
+    "/api/booking/v1/accounts/{accountId}/quote": {
+      "post": {
+        "summary": "Gets a price quote for a cluster configuration.\nThis endpoint calculates pricing information including hourly and monthly costs,\nand any applicable discounts for the specified cluster configuration.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "BookingService_GetQuote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetQuoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingServiceGetQuoteBody"
+            }
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    },
     "/api/booking/v1/packages": {
       "get": {
         "summary": "Lists all public packages.\nAuthentication not required",
@@ -158,6 +198,34 @@
     }
   },
   "definitions": {
+    "BookingServiceGetQuoteBody": {
+      "type": "object",
+      "properties": {
+        "cloudProviderId": {
+          "type": "string",
+          "description": "The cloud provider where the cluster will be hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "The cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nThis field can be omitted if `cloud_provider_id` is set to `hybrid`."
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of nodes in a cluster.\nThis should be a number 1...20 [both included].\nThis is a required field."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "The package identifier used to configure the resources of the cluster.\nUse `qdrant.cloud.booking.v1.BookingService.ListPackages` to select one.\nThis is a required field."
+        },
+        "additionalDiskGib": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The additional disk storage in GiB on top of the selected package.\nThis is an optional field, if not specified additional disk is 0."
+        }
+      },
+      "title": "GetQuoteRequest is the request for the GetQuote function"
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -206,6 +274,41 @@
         }
       },
       "title": "GetPackageResponse is the response from the GetPackage function"
+    },
+    "v1GetQuoteResponse": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "originalPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The original price per hour in millicents, before any discounts."
+        },
+        "originalPricePerMonth": {
+          "type": "string",
+          "format": "int64",
+          "description": "The original price per month in millicents, before any discounts.\nCalculated as original_price_per_hour * 24 * 30 (720 hours)."
+        },
+        "discountedPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per hour in millicents, after applying discounts.\nIf no discounts are applied, this will be the same as original_price_per_hour."
+        },
+        "discountedPricePerMonth": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per month in millicents, after applying discounts.\nCalculated as discounted_price_per_hour * 24 * 30 (720 hours).\nIf no discounts are applied, this will be the same as original_price_per_month."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage of discount applied (e.g., 10.0 for 10% discount).\nIf no discounts are applied, this will be 0.0."
+        }
+      },
+      "title": "GetQuoteResponse is the response from the GetQuote function"
     },
     "v1ListGlobalPackagesResponse": {
       "type": "object",

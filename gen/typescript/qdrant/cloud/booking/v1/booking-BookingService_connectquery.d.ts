@@ -27,3 +27,13 @@ export const getPackage: typeof BookingService["method"]["getPackage"];
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalPackages
  */
 export const listGlobalPackages: typeof BookingService["method"]["listGlobalPackages"];
+/**
+ * Gets a price quote for a cluster configuration.
+ * This endpoint calculates pricing information including hourly and monthly costs,
+ * and any applicable discounts for the specified cluster configuration.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
+ */
+export const getQuote: typeof BookingService["method"]["getQuote"];
