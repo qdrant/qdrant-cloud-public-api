@@ -208,20 +208,6 @@ service ClusterService {
       field_expression: "cluster_id"
     };
   }
-  // Gets a price quote for a cluster configuration.
-  // This endpoint calculates pricing information including hourly and monthly costs,
-  // and any applicable discounts for the specified cluster configuration.
-  // Required permissions:
-  // - read:clusters
-  rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse) {
-    // permissions
-    option (common.v1.permissions) = "read:clusters";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      post: "/api/cluster/v1/accounts/{account_id}/quote"
-      body: "*"
-    };
-  }
 }
 
 // ListClustersRequest is the request for the ListClusters function
@@ -962,44 +948,3 @@ message CreateClusterFromBackupResponse {
   Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
-// GetQuoteRequest is the request for the GetQuote function
-message GetQuoteRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The cluster configuration to get a quote for.
-  // This should contain the same information as you would use for CreateCluster,
-  // except without readonly fields (id, created_at, deleted_at, state).
-  Cluster cluster = 2 [(buf.validate.field).required = true];
-  option (buf.validate.message).cel = {
-    id: "quote.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, state) must not be set on quote"
-    expression: "this.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)"
-  };
-}
-
-// GetQuoteResponse is the response from the GetQuote function
-message GetQuoteResponse {
-  // The currency of the prices.
-  // Specifies the currency in which the prices are denominated.
-  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
-  string currency = 1 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
-  // The original price per hour in millicents, before any discounts.
-  int64 original_price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
-  // The original price per month in millicents, before any discounts.
-  // Calculated as original_price_per_hour * 24 * 30 (720 hours).
-  int64 original_price_per_month = 3 [(buf.validate.field).int64.gte = 0];
-  // The discounted price per hour in millicents, after applying discounts.
-  // If no discounts are applied, this will be the same as original_price_per_hour.
-  int64 discounted_price_per_hour = 4 [(buf.validate.field).int64.gte = 0];
-  // The discounted price per month in millicents, after applying discounts.
-  // Calculated as discounted_price_per_hour * 24 * 30 (720 hours).
-  // If no discounts are applied, this will be the same as original_price_per_month.
-  int64 discounted_price_per_month = 5 [(buf.validate.field).int64.gte = 0];
-  // The percentage of discount applied (e.g., 10.0 for 10% discount).
-  // If no discounts are applied, this will be 0.0.
-  double discount_percentage = 6 [(buf.validate.field).double = {
-    gte: 0.0
-    lte: 100.0
-  }];
-}
