@@ -176,20 +176,17 @@ message GetClusterEventsRequest {
   // Optional start time for the events query.
   // If omitted, defaults to 7 days ago.
   optional google.protobuf.Timestamp since = 3;
-  // Optional end time for the events query.
-  // If omitted, defaults to current time.
-  optional google.protobuf.Timestamp until = 4;
-  option (buf.validate.message).cel = {
-    id: "get_cluster_events.until_gt_since"
-    message: "until must be after since"
-    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
-  };
+  // Optional limit.
+  // If omitted, defaults to 100.
+  optional google.protobuf.Timestamp limit = 4;
 }
 
 // GetClusterEventsRequest is the response from the GetClusterEvents function
 message GetClusterEventsResponse {
+  // Current status of the cluster.
+  string status = 1;
   // A list of entries representing events that have happened in the cluster.
-  repeated LogEntry items = 1;
+  repeated LogStream result = 2;
 }
 
 // ClusterNodeMetrics contains metric overview for a node.
@@ -267,6 +264,22 @@ message LogEntry {
   google.protobuf.Timestamp timestamp = 1 [(buf.validate.field).required = true];
   // The content of the log message.
   string message = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// LogStream represents the source stream of the log entry.
+message LogStream {
+  // The kind of log stream, e.g., "stdout" or "stderr".
+  string kind = 1;
+  // The name of the namespace
+  string namespace = 2;
+  // the id of the cluster
+  string cluster_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // the id of the account
+  string account_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // the id of the hybrid cloud environment
+  string hybrid_cloud_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // values of the log
+  repeated LogEntry values = 6;
 }
 
 // Aggregator defines how metrics should be aggregated over time.

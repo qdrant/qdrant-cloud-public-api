@@ -301,12 +301,12 @@ export declare type GetClusterEventsRequest = Message<"qdrant.cloud.monitoring.v
   since?: Timestamp;
 
   /**
-   * Optional end time for the events query.
-   * If omitted, defaults to current time.
+   * Optional limit.
+   * If omitted, defaults to 100.
    *
-   * @generated from field: optional google.protobuf.Timestamp until = 4;
+   * @generated from field: optional google.protobuf.Timestamp limit = 4;
    */
-  until?: Timestamp;
+  limit?: Timestamp;
 };
 
 export declare type GetClusterEventsRequestValid = GetClusterEventsRequest;
@@ -324,11 +324,18 @@ export declare const GetClusterEventsRequestSchema: GenMessage<GetClusterEventsR
  */
 export declare type GetClusterEventsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
   /**
+   * Current status of the cluster.
+   *
+   * @generated from field: string status = 1;
+   */
+  status: string;
+
+  /**
    * A list of entries representing events that have happened in the cluster.
    *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogStream result = 2;
    */
-  items: LogEntry[];
+  result: LogStream[];
 };
 
 export declare type GetClusterEventsResponseValid = GetClusterEventsResponse;
@@ -743,6 +750,63 @@ export declare type LogEntryValid = Message<"qdrant.cloud.monitoring.v1.LogEntry
  * Use `create(LogEntrySchema)` to create a new message.
  */
 export declare const LogEntrySchema: GenMessage<LogEntry, {validType: LogEntryValid}>;
+
+/**
+ * LogStream represents the source stream of the log entry.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.LogStream
+ */
+export declare type LogStream = Message<"qdrant.cloud.monitoring.v1.LogStream"> & {
+  /**
+   * The kind of log stream, e.g., "stdout" or "stderr".
+   *
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * The name of the namespace
+   *
+   * @generated from field: string namespace = 2;
+   */
+  namespace: string;
+
+  /**
+   * the id of the cluster
+   *
+   * @generated from field: string cluster_id = 3;
+   */
+  clusterId: string;
+
+  /**
+   * the id of the account
+   *
+   * @generated from field: string account_id = 4;
+   */
+  accountId: string;
+
+  /**
+   * the id of the hybrid cloud environment
+   *
+   * @generated from field: string hybrid_cloud_id = 5;
+   */
+  hybridCloudId: string;
+
+  /**
+   * values of the log
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry values = 6;
+   */
+  values: LogEntry[];
+};
+
+export declare type LogStreamValid = LogStream;
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.LogStream.
+ * Use `create(LogStreamSchema)` to create a new message.
+ */
+export declare const LogStreamSchema: GenMessage<LogStream, {validType: LogStreamValid}>;
 
 /**
  * Aggregator defines how metrics should be aggregated over time.
