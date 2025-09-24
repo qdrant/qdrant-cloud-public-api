@@ -559,7 +559,7 @@ message ClusterInfo {
   // The identifier of the best package to use for a restore into new cluster
   // could be the same package_id as original, alternative with same cpu,ram,disk or None
   optional string restore_package_id = 5 [(buf.validate.field).string = {uuid: true}];
-  // Resources of the original cluster
+  // Original cluster's resources
   qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6 [(buf.validate.field).required = true];
 }
 

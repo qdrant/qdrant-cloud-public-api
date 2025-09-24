@@ -1533,7 +1533,7 @@ type ClusterInfo struct {
 	// The identifier of the best package to use for a restore into new cluster
 	// could be the same package_id as original, alternative with same cpu,ram,disk or None
 	RestorePackageId *string `protobuf:"bytes,5,opt,name=restore_package_id,json=restorePackageId,proto3,oneof" json:"restore_package_id,omitempty"`
-	// Resources of the original cluster
+	// Original cluster's resources
 	Resources     *v1.ClusterNodeResourcesSummary `protobuf:"bytes,6,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

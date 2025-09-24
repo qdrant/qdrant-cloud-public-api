@@ -974,7 +974,7 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
   restorePackageId?: string;
 
   /**
-   * Resources of the original cluster
+   * Original cluster's resources
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6;
    */
@@ -1029,7 +1029,7 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
   restorePackageId?: string;
 
   /**
-   * Resources of the original cluster
+   * Original cluster's resources
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 6;
    */

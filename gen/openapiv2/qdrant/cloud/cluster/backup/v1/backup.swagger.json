@@ -1014,7 +1014,7 @@
         },
         "resources": {
           "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
-          "title": "Resources of the original cluster"
+          "title": "Original cluster's resources"
         }
       },
       "description": "Represents the cluster details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.\nThe configuration field is immutable and represents the values at backup time."
