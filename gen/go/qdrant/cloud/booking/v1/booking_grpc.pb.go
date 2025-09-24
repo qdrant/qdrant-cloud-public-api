@@ -22,6 +22,7 @@ const (
 	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
 	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
 	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
+	BookingService_GetQuote_FullMethodName           = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -41,6 +42,12 @@ type BookingServiceClient interface {
 	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
+	// Gets a price quote for a cluster configuration.
+	// This endpoint calculates pricing information including hourly and monthly costs,
+	// and any applicable discounts for the specified cluster configuration.
+	// Required permissions:
+	// - None (authenticated only)
+	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -81,6 +88,16 @@ func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListG
 	return out, nil
 }
 
+func (c *bookingServiceClient) GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetQuoteResponse)
+	err := c.cc.Invoke(ctx, BookingService_GetQuote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -98,6 +115,12 @@ type BookingServiceServer interface {
 	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
+	// Gets a price quote for a cluster configuration.
+	// This endpoint calculates pricing information including hourly and monthly costs,
+	// and any applicable discounts for the specified cluster configuration.
+	// Required permissions:
+	// - None (authenticated only)
+	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -116,6 +139,9 @@ func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackage
 }
 func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalPackages not implemented")
+}
+func (UnimplementedBookingServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetQuote not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -192,6 +218,24 @@ func _BookingService_ListGlobalPackages_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_GetQuote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).GetQuote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_GetQuote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).GetQuote(ctx, req.(*GetQuoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -210,6 +254,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGlobalPackages",
 			Handler:    _BookingService_ListGlobalPackages_Handler,
+		},
+		{
+			MethodName: "GetQuote",
+			Handler:    _BookingService_GetQuote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
