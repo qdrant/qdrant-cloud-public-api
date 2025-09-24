@@ -213,7 +213,7 @@ service ClusterService {
   // and any applicable discounts for the specified cluster configuration.
   // Required permissions:
   // - read:clusters
-  rpc Quote(QuoteRequest) returns (QuoteResponse) {
+  rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse) {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
@@ -962,8 +962,8 @@ message CreateClusterFromBackupResponse {
   Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
-// QuoteRequest is the request for the Quote function
-message QuoteRequest {
+// GetQuoteRequest is the request for the GetQuote function
+message GetQuoteRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
@@ -978,8 +978,8 @@ message QuoteRequest {
   };
 }
 
-// QuoteResponse is the response from the Quote function
-message QuoteResponse {
+// GetQuoteResponse is the response from the GetQuote function
+message GetQuoteResponse {
   // The currency of the prices.
   // Specifies the currency in which the prices are denominated.
   // Must be a 3-letter ISO 4217 currency code (e.g., "USD").

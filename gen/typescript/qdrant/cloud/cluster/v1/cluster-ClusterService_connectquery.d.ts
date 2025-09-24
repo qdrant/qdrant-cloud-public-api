@@ -87,3 +87,13 @@ export const suggestClusterName: typeof ClusterService["method"]["suggestCluster
  * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases
  */
 export const listQdrantReleases: typeof ClusterService["method"]["listQdrantReleases"];
+/**
+ * Gets a price quote for a cluster configuration.
+ * This endpoint calculates pricing information including hourly and monthly costs,
+ * and any applicable discounts for the specified cluster configuration.
+ * Required permissions:
+ * - read:clusters
+ *
+ * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetQuote
+ */
+export const getQuote: typeof ClusterService["method"]["getQuote"];

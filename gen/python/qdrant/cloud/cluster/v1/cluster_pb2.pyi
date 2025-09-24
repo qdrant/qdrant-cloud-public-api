@@ -537,3 +537,27 @@ class CreateClusterFromBackupResponse(_message.Message):
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
+
+class GetQuoteRequest(_message.Message):
+    __slots__ = ("account_id", "cluster")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster: Cluster
+    def __init__(self, account_id: _Optional[str] = ..., cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
+
+class GetQuoteResponse(_message.Message):
+    __slots__ = ("currency", "original_price_per_hour", "original_price_per_month", "discounted_price_per_hour", "discounted_price_per_month", "discount_percentage")
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_MONTH_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_MONTH_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    original_price_per_hour: int
+    original_price_per_month: int
+    discounted_price_per_hour: int
+    discounted_price_per_month: int
+    discount_percentage: float
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., original_price_per_month: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discounted_price_per_month: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...

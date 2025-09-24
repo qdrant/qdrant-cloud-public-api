@@ -29,6 +29,7 @@ const (
 	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
 	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
 	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
+	ClusterService_GetQuote_FullMethodName                = "/qdrant.cloud.cluster.v1.ClusterService/GetQuote"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -80,6 +81,12 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error)
+	// Gets a price quote for a cluster configuration.
+	// This endpoint calculates pricing information including hourly and monthly costs,
+	// and any applicable discounts for the specified cluster configuration.
+	// Required permissions:
+	// - read:clusters
+	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
 }
 
 type clusterServiceClient struct {
@@ -190,6 +197,16 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 	return out, nil
 }
 
+func (c *clusterServiceClient) GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetQuoteResponse)
+	err := c.cc.Invoke(ctx, ClusterService_GetQuote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations must embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -239,6 +256,12 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error)
+	// Gets a price quote for a cluster configuration.
+	// This endpoint calculates pricing information including hourly and monthly costs,
+	// and any applicable discounts for the specified cluster configuration.
+	// Required permissions:
+	// - read:clusters
+	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
 	mustEmbedUnimplementedClusterServiceServer()
 }
 
@@ -278,6 +301,9 @@ func (UnimplementedClusterServiceServer) SuggestClusterName(context.Context, *Su
 }
 func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQdrantReleases not implemented")
+}
+func (UnimplementedClusterServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetQuote not implemented")
 }
 func (UnimplementedClusterServiceServer) mustEmbedUnimplementedClusterServiceServer() {}
 func (UnimplementedClusterServiceServer) testEmbeddedByValue()                        {}
@@ -480,6 +506,24 @@ func _ClusterService_ListQdrantReleases_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_GetQuote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).GetQuote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_GetQuote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).GetQuote(ctx, req.(*GetQuoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -526,6 +570,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListQdrantReleases",
 			Handler:    _ClusterService_ListQdrantReleases_Handler,
+		},
+		{
+			MethodName: "GetQuote",
+			Handler:    _ClusterService_GetQuote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
