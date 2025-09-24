@@ -65,6 +65,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
                 _registered_method=True)
+        self.GetQuote = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/GetQuote',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteResponse.FromString,
+                _registered_method=True)
 
 
 class ClusterServiceServicer(object):
@@ -164,6 +169,17 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetQuote(self, request, context):
+        """Gets a price quote for a cluster configuration.
+        This endpoint calculates pricing information including hourly and monthly costs,
+        and any applicable discounts for the specified cluster configuration.
+        Required permissions:
+        - read:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ClusterServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -216,6 +232,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.ListQdrantReleases,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.SerializeToString,
+            ),
+            'GetQuote': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetQuote,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -489,6 +510,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetQuote(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/GetQuote',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQuoteResponse.FromString,
             options,
             channel_credentials,
             insecure,
