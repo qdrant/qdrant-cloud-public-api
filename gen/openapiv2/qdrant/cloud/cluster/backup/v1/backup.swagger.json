@@ -529,6 +529,10 @@
               "type": "string",
               "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
             },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+            },
             "clusterInfo": {
               "$ref": "#/definitions/v1ClusterInfo",
               "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
@@ -565,7 +569,7 @@
             },
             "retentionPeriod": {
               "type": "string",
-              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backup will be retained indefinitely."
             },
             "deletedAt": {
               "type": "string",
@@ -604,7 +608,7 @@
             },
             "retentionPeriod": {
               "type": "string",
-              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backup will be retained indefinitely."
             },
             "deletedAt": {
               "type": "string",
@@ -729,6 +733,10 @@
           "type": "string",
           "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
         },
+        "retentionPeriod": {
+          "type": "string",
+          "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+        },
         "clusterInfo": {
           "$ref": "#/definitions/v1ClusterInfo",
           "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
@@ -812,7 +820,7 @@
         },
         "retentionPeriod": {
           "type": "string",
-          "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+          "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backup will be retained indefinitely."
         },
         "deletedAt": {
           "type": "string",

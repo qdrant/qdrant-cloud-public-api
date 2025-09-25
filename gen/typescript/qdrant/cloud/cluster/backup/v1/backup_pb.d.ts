@@ -822,6 +822,15 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
   backupScheduleId?: string;
 
   /**
+   * The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+   * The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+   * If the value is unset, backups will be retained indefinitely.
+   *
+   * @generated from field: optional google.protobuf.Duration retention_period = 10;
+   */
+  retentionPeriod?: Duration;
+
+  /**
    * Cluster details associated with the backup.
    * Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
    * This is a read-only field and will be available after the backup is created.
@@ -909,6 +918,15 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
    * @generated from field: optional string backup_schedule_id = 9;
    */
   backupScheduleId?: string;
+
+  /**
+   * The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+   * The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+   * If the value is unset, backups will be retained indefinitely.
+   *
+   * @generated from field: optional google.protobuf.Duration retention_period = 10;
+   */
+  retentionPeriod?: Duration;
 
   /**
    * Cluster details associated with the backup.
@@ -1062,7 +1080,7 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
   /**
    * The retention period in seconds for the backup. After that period, the backup is deleted from the system.
    * The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
-   * If the value is unset, backups will be retained indefinitely.
+   * If the value is unset, backup will be retained indefinitely.
    *
    * @generated from field: optional google.protobuf.Duration retention_period = 6;
    */
