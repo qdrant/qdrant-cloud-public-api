@@ -58,8 +58,8 @@
             "format": "date-time"
           },
           {
-            "name": "until",
-            "description": "Optional end time for the events query.\nIf omitted, defaults to current time.",
+            "name": "limit",
+            "description": "Optional limit.\nIf omitted, defaults to 100.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -390,11 +390,15 @@
     "v1GetClusterEventsResponse": {
       "type": "object",
       "properties": {
-        "items": {
+        "status": {
+          "type": "string",
+          "description": "Current status of the cluster."
+        },
+        "result": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1LogEntry"
+            "$ref": "#/definitions/v1LogStream"
           },
           "description": "A list of entries representing events that have happened in the cluster."
         }
@@ -536,6 +540,40 @@
         }
       },
       "description": "LogEntry represents a single log line."
+    },
+    "v1LogStream": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of log stream, e.g., \"stdout\" or \"stderr\"."
+        },
+        "namespace": {
+          "type": "string",
+          "title": "The name of the namespace"
+        },
+        "clusterId": {
+          "type": "string",
+          "title": "the id of the cluster"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "the id of the account"
+        },
+        "hybridCloudId": {
+          "type": "string",
+          "title": "the id of the hybrid cloud environment"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1LogEntry"
+          },
+          "title": "values of the log"
+        }
+      },
+      "description": "LogStream represents the source stream of the log entry."
     },
     "v1Metric": {
       "type": "object",

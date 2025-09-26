@@ -96,22 +96,24 @@ class GetClusterLogsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
 
 class GetClusterEventsRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "since", "until")
+    __slots__ = ("account_id", "cluster_id", "since", "limit")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     SINCE_FIELD_NUMBER: _ClassVar[int]
-    UNTIL_FIELD_NUMBER: _ClassVar[int]
+    LIMIT_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     since: _timestamp_pb2.Timestamp
-    until: _timestamp_pb2.Timestamp
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    limit: _timestamp_pb2.Timestamp
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., limit: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class GetClusterEventsResponse(_message.Message):
-    __slots__ = ("items",)
-    ITEMS_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[LogEntry]
-    def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("status", "result")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    RESULT_FIELD_NUMBER: _ClassVar[int]
+    status: str
+    result: _containers.RepeatedCompositeFieldContainer[LogStream]
+    def __init__(self, status: _Optional[str] = ..., result: _Optional[_Iterable[_Union[LogStream, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeMetrics(_message.Message):
     __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk")
@@ -188,3 +190,19 @@ class LogEntry(_message.Message):
     timestamp: _timestamp_pb2.Timestamp
     message: str
     def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...
+
+class LogStream(_message.Message):
+    __slots__ = ("kind", "namespace", "cluster_id", "account_id", "hybrid_cloud_id", "values")
+    KIND_FIELD_NUMBER: _ClassVar[int]
+    NAMESPACE_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    HYBRID_CLOUD_ID_FIELD_NUMBER: _ClassVar[int]
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    kind: str
+    namespace: str
+    cluster_id: str
+    account_id: str
+    hybrid_cloud_id: str
+    values: _containers.RepeatedCompositeFieldContainer[LogEntry]
+    def __init__(self, kind: _Optional[str] = ..., namespace: _Optional[str] = ..., cluster_id: _Optional[str] = ..., account_id: _Optional[str] = ..., hybrid_cloud_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
