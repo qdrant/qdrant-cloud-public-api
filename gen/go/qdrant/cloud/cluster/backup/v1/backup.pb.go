@@ -1739,7 +1739,9 @@ type BackupRestore struct {
 	Status BackupRestoreStatus `protobuf:"varint,6,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupRestoreStatus" json:"status,omitempty"`
 	// The timestamp when the backup restore was deleted (or when deletion started).
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	// If set, backup should be restored into a new cluster.
+	// If true, backup should be restored into a new cluster with provided cluster_id.
+	// If cluster_id does not exist and this is false, restore will fail.
+	// If cluster_id already exists and this is true, restore will fail.
 	CreateNewCluster *bool `protobuf:"varint,8,opt,name=create_new_cluster,json=createNewCluster,proto3,oneof" json:"create_new_cluster,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache

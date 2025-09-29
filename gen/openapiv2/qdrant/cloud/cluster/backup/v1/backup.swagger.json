@@ -779,7 +779,7 @@
         },
         "createNewCluster": {
           "type": "boolean",
-          "description": "If set, backup should be restored into a new cluster."
+          "description": "If true, backup should be restored into a new cluster with provided cluster_id.\nIf cluster_id does not exist and this is false, restore will fail.\nIf cluster_id already exists and this is true, restore will fail."
         }
       },
       "description": "A BackupRestore represents the status of a backup restore.\nAll fields in this message are read-only."

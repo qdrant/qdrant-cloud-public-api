@@ -1167,7 +1167,9 @@ export declare type BackupRestore = Message<"qdrant.cloud.cluster.backup.v1.Back
   deletedAt?: Timestamp;
 
   /**
-   * If set, backup should be restored into a new cluster.
+   * If true, backup should be restored into a new cluster with provided cluster_id.
+   * If cluster_id does not exist and this is false, restore will fail.
+   * If cluster_id already exists and this is true, restore will fail.
    *
    * @generated from field: optional bool create_new_cluster = 8;
    */

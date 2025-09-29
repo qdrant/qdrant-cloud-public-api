@@ -635,7 +635,9 @@ message BackupRestore {
   BackupRestoreStatus status = 6 [(buf.validate.field).enum.defined_only = true];
   // The timestamp when the backup restore was deleted (or when deletion started).
   google.protobuf.Timestamp deleted_at = 7;
-  // If set, backup should be restored into a new cluster.
+  // If true, backup should be restored into a new cluster with provided cluster_id.
+  // If cluster_id does not exist and this is false, restore will fail.
+  // If cluster_id already exists and this is true, restore will fail.
   optional bool create_new_cluster = 8;
 }
 
