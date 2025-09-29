@@ -1738,9 +1738,11 @@ type BackupRestore struct {
 	// The current status of the backup restore.
 	Status BackupRestoreStatus `protobuf:"varint,6,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupRestoreStatus" json:"status,omitempty"`
 	// The timestamp when the backup restore was deleted (or when deletion started).
-	DeletedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	// If set, backup should be restored into a new cluster.
+	CreateNewCluster *bool `protobuf:"varint,8,opt,name=create_new_cluster,json=createNewCluster,proto3,oneof" json:"create_new_cluster,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *BackupRestore) Reset() {
@@ -1820,6 +1822,13 @@ func (x *BackupRestore) GetDeletedAt() *timestamppb.Timestamp {
 		return x.DeletedAt
 	}
 	return nil
+}
+
+func (x *BackupRestore) GetCreateNewCluster() bool {
+	if x != nil && x.CreateNewCluster != nil {
+		return *x.CreateNewCluster
+	}
+	return false
 }
 
 var File_qdrant_cloud_cluster_backup_v1_backup_proto protoreflect.FileDescriptor
@@ -1955,7 +1964,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12V\n" +
 	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
-	"\x11_retention_period\"\xef\x02\n" +
+	"\x11_retention_period\"\xb9\x03\n" +
 	"\rBackupRestore\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -1967,7 +1976,9 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\tbackup_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12U\n" +
 	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt*\xd9\x01\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x121\n" +
+	"\x12create_new_cluster\x18\b \x01(\bH\x00R\x10createNewCluster\x88\x01\x01B\x15\n" +
+	"\x13_create_new_cluster*\xd9\x01\n" +
 	"\fBackupStatus\x12\x1d\n" +
 	"\x19BACKUP_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15BACKUP_STATUS_RUNNING\x10\x01\x12\x19\n" +
@@ -2156,6 +2167,7 @@ func file_qdrant_cloud_cluster_backup_v1_backup_proto_init() {
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

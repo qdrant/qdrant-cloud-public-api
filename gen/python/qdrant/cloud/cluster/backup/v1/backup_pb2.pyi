@@ -278,7 +278,7 @@ class BackupSchedule(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[BackupScheduleStatus, str]] = ...) -> None: ...
 
 class BackupRestore(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "cluster_id", "backup_id", "status", "deleted_at")
+    __slots__ = ("id", "created_at", "account_id", "cluster_id", "backup_id", "status", "deleted_at", "create_new_cluster")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -286,6 +286,7 @@ class BackupRestore(_message.Message):
     BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
+    CREATE_NEW_CLUSTER_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -293,4 +294,5 @@ class BackupRestore(_message.Message):
     backup_id: str
     status: BackupRestoreStatus
     deleted_at: _timestamp_pb2.Timestamp
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    create_new_cluster: bool
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., create_new_cluster: _Optional[bool] = ...) -> None: ...

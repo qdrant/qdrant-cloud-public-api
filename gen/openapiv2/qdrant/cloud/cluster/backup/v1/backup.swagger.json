@@ -776,6 +776,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the backup restore was deleted (or when deletion started)."
+        },
+        "createNewCluster": {
+          "type": "boolean",
+          "description": "If set, backup should be restored into a new cluster."
         }
       },
       "description": "A BackupRestore represents the status of a backup restore.\nAll fields in this message are read-only."

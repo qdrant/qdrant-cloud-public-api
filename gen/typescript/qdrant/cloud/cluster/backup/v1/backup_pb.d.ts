@@ -1165,6 +1165,13 @@ export declare type BackupRestore = Message<"qdrant.cloud.cluster.backup.v1.Back
    * @generated from field: google.protobuf.Timestamp deleted_at = 7;
    */
   deletedAt?: Timestamp;
+
+  /**
+   * If set, backup should be restored into a new cluster.
+   *
+   * @generated from field: optional bool create_new_cluster = 8;
+   */
+  createNewCluster?: boolean;
 };
 
 export declare type BackupRestoreValid = BackupRestore;
