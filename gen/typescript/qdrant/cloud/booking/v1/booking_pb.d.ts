@@ -381,7 +381,7 @@ export declare type GetQuoteRequest = Message<"qdrant.cloud.booking.v1.GetQuoteR
 
   /**
    * The number of nodes in a cluster.
-   * This should be a number 1...20 [both included].
+   * This should be a number 1...100 [both included].
    * This is a required field.
    *
    * @generated from field: uint32 number_of_nodes = 4;
@@ -437,37 +437,22 @@ export declare type GetQuoteResponse = Message<"qdrant.cloud.booking.v1.GetQuote
   originalPricePerHour: bigint;
 
   /**
-   * The original price per month in millicents, before any discounts.
-   * Calculated as original_price_per_hour * 24 * 30 (720 hours).
-   *
-   * @generated from field: int64 original_price_per_month = 3;
-   */
-  originalPricePerMonth: bigint;
-
-  /**
    * The discounted price per hour in millicents, after applying discounts.
    * If no discounts are applied, this will be the same as original_price_per_hour.
+   * This field is only populated if the user has 'read:discounts' permission.
    *
-   * @generated from field: int64 discounted_price_per_hour = 4;
+   * @generated from field: optional int64 discounted_price_per_hour = 3;
    */
-  discountedPricePerHour: bigint;
-
-  /**
-   * The discounted price per month in millicents, after applying discounts.
-   * Calculated as discounted_price_per_hour * 24 * 30 (720 hours).
-   * If no discounts are applied, this will be the same as original_price_per_month.
-   *
-   * @generated from field: int64 discounted_price_per_month = 5;
-   */
-  discountedPricePerMonth: bigint;
+  discountedPricePerHour?: bigint;
 
   /**
    * The percentage of discount applied (e.g., 10.0 for 10% discount).
    * If no discounts are applied, this will be 0.0.
+   * This field is only populated if the user has 'read:discounts' permission.
    *
-   * @generated from field: double discount_percentage = 6;
+   * @generated from field: optional double discount_percentage = 4;
    */
-  discountPercentage: number;
+  discountPercentage?: number;
 };
 
 export declare type GetQuoteResponseValid = GetQuoteResponse;

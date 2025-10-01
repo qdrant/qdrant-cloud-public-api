@@ -716,7 +716,7 @@ type GetQuoteRequest struct {
 	// This field can be omitted if `cloud_provider_id` is set to `hybrid`.
 	CloudProviderRegionId *string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
 	// The number of nodes in a cluster.
-	// This should be a number 1...20 [both included].
+	// This should be a number 1...100 [both included].
 	// This is a required field.
 	NumberOfNodes uint32 `protobuf:"varint,4,opt,name=number_of_nodes,json=numberOfNodes,proto3" json:"number_of_nodes,omitempty"`
 	// The package identifier used to configure the resources of the cluster.
@@ -811,19 +811,14 @@ type GetQuoteResponse struct {
 	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The original price per hour in millicents, before any discounts.
 	OriginalPricePerHour int64 `protobuf:"varint,2,opt,name=original_price_per_hour,json=originalPricePerHour,proto3" json:"original_price_per_hour,omitempty"`
-	// The original price per month in millicents, before any discounts.
-	// Calculated as original_price_per_hour * 24 * 30 (720 hours).
-	OriginalPricePerMonth int64 `protobuf:"varint,3,opt,name=original_price_per_month,json=originalPricePerMonth,proto3" json:"original_price_per_month,omitempty"`
 	// The discounted price per hour in millicents, after applying discounts.
 	// If no discounts are applied, this will be the same as original_price_per_hour.
-	DiscountedPricePerHour int64 `protobuf:"varint,4,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3" json:"discounted_price_per_hour,omitempty"`
-	// The discounted price per month in millicents, after applying discounts.
-	// Calculated as discounted_price_per_hour * 24 * 30 (720 hours).
-	// If no discounts are applied, this will be the same as original_price_per_month.
-	DiscountedPricePerMonth int64 `protobuf:"varint,5,opt,name=discounted_price_per_month,json=discountedPricePerMonth,proto3" json:"discounted_price_per_month,omitempty"`
+	// This field is only populated if the user has 'read:discounts' permission.
+	DiscountedPricePerHour *int64 `protobuf:"varint,3,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3,oneof" json:"discounted_price_per_hour,omitempty"`
 	// The percentage of discount applied (e.g., 10.0 for 10% discount).
 	// If no discounts are applied, this will be 0.0.
-	DiscountPercentage float64 `protobuf:"fixed64,6,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"`
+	// This field is only populated if the user has 'read:discounts' permission.
+	DiscountPercentage *float64 `protobuf:"fixed64,4,opt,name=discount_percentage,json=discountPercentage,proto3,oneof" json:"discount_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -872,30 +867,16 @@ func (x *GetQuoteResponse) GetOriginalPricePerHour() int64 {
 	return 0
 }
 
-func (x *GetQuoteResponse) GetOriginalPricePerMonth() int64 {
-	if x != nil {
-		return x.OriginalPricePerMonth
-	}
-	return 0
-}
-
 func (x *GetQuoteResponse) GetDiscountedPricePerHour() int64 {
-	if x != nil {
-		return x.DiscountedPricePerHour
-	}
-	return 0
-}
-
-func (x *GetQuoteResponse) GetDiscountedPricePerMonth() int64 {
-	if x != nil {
-		return x.DiscountedPricePerMonth
+	if x != nil && x.DiscountedPricePerHour != nil {
+		return *x.DiscountedPricePerHour
 	}
 	return 0
 }
 
 func (x *GetQuoteResponse) GetDiscountPercentage() float64 {
-	if x != nil {
-		return x.DiscountPercentage
+	if x != nil && x.DiscountPercentage != nil {
+		return *x.DiscountPercentage
 	}
 	return 0
 }
@@ -953,20 +934,20 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x121\n" +
-	"\x0fnumber_of_nodes\x18\x04 \x01(\rB\t\xbaH\x06*\x04\x18\x14(\x01R\rnumberOfNodes\x12'\n" +
+	"\x0fnumber_of_nodes\x18\x04 \x01(\rB\t\xbaH\x06*\x04\x18d(\x01R\rnumberOfNodes\x12'\n" +
 	"\n" +
 	"package_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tpackageId\x127\n" +
 	"\x13additional_disk_gib\x18\x06 \x01(\rB\a\xbaH\x04*\x02(\x00R\x11additionalDiskGib:\xca\x01\xbaH\xc6\x01\x1a\xc3\x01\n" +
 	"*get_quote.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
-	"\x19_cloud_provider_region_id\"\x97\x03\n" +
+	"\x19_cloud_provider_region_id\"\xcf\x02\n" +
 	"\x10GetQuoteResponse\x12-\n" +
 	"\bcurrency\x18\x01 \x01(\tB\x11\xbaH\x0er\f2\n" +
 	"^[A-Z]{3}$R\bcurrency\x12>\n" +
-	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12@\n" +
-	"\x18original_price_per_month\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x15originalPricePerMonth\x12B\n" +
-	"\x19discounted_price_per_hour\x18\x04 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12D\n" +
-	"\x1adiscounted_price_per_month\x18\x05 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x17discountedPricePerMonth\x12H\n" +
-	"\x13discount_percentage\x18\x06 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage*j\n" +
+	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12G\n" +
+	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x16discountedPricePerHour\x88\x01\x01\x12M\n" +
+	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x12discountPercentage\x88\x01\x01B\x1c\n" +
+	"\x1a_discounted_price_per_hourB\x16\n" +
+	"\x14_discount_percentage*j\n" +
 	"\rPackageStatus\x12\x1e\n" +
 	"\x1aPACKAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
@@ -1051,6 +1032,7 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[9].OneofWrappers = []any{}
+	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
