@@ -70,10 +70,10 @@ class BookingServiceServicer(object):
 
     def GetQuote(self, request, context):
         """Gets a price quote for a cluster configuration.
-        This endpoint calculates pricing information including hourly and monthly costs,
+        This endpoint calculates pricing information including hourly costs,
         and any applicable discounts for the specified cluster configuration.
         Required permissions:
-        - None (authenticated only)
+        - write:clusters
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -813,12 +813,10 @@ type GetQuoteResponse struct {
 	OriginalPricePerHour int64 `protobuf:"varint,2,opt,name=original_price_per_hour,json=originalPricePerHour,proto3" json:"original_price_per_hour,omitempty"`
 	// The discounted price per hour in millicents, after applying discounts.
 	// If no discounts are applied, this will be the same as original_price_per_hour.
-	// This field is only populated if the user has 'read:discounts' permission.
-	DiscountedPricePerHour *int64 `protobuf:"varint,3,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3,oneof" json:"discounted_price_per_hour,omitempty"`
+	DiscountedPricePerHour int64 `protobuf:"varint,3,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3" json:"discounted_price_per_hour,omitempty"`
 	// The percentage of discount applied (e.g., 10.0 for 10% discount).
 	// If no discounts are applied, this will be 0.0.
-	// This field is only populated if the user has 'read:discounts' permission.
-	DiscountPercentage *float64 `protobuf:"fixed64,4,opt,name=discount_percentage,json=discountPercentage,proto3,oneof" json:"discount_percentage,omitempty"`
+	DiscountPercentage float64 `protobuf:"fixed64,4,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -868,15 +866,15 @@ func (x *GetQuoteResponse) GetOriginalPricePerHour() int64 {
 }
 
 func (x *GetQuoteResponse) GetDiscountedPricePerHour() int64 {
-	if x != nil && x.DiscountedPricePerHour != nil {
-		return *x.DiscountedPricePerHour
+	if x != nil {
+		return x.DiscountedPricePerHour
 	}
 	return 0
 }
 
 func (x *GetQuoteResponse) GetDiscountPercentage() float64 {
-	if x != nil && x.DiscountPercentage != nil {
-		return *x.DiscountPercentage
+	if x != nil {
+		return x.DiscountPercentage
 	}
 	return 0
 }
@@ -939,15 +937,13 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"package_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tpackageId\x127\n" +
 	"\x13additional_disk_gib\x18\x06 \x01(\rB\a\xbaH\x04*\x02(\x00R\x11additionalDiskGib:\xca\x01\xbaH\xc6\x01\x1a\xc3\x01\n" +
 	"*get_quote.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
-	"\x19_cloud_provider_region_id\"\xcf\x02\n" +
+	"\x19_cloud_provider_region_id\"\x8f\x02\n" +
 	"\x10GetQuoteResponse\x12-\n" +
 	"\bcurrency\x18\x01 \x01(\tB\x11\xbaH\x0er\f2\n" +
 	"^[A-Z]{3}$R\bcurrency\x12>\n" +
-	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12G\n" +
-	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x16discountedPricePerHour\x88\x01\x01\x12M\n" +
-	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x12discountPercentage\x88\x01\x01B\x1c\n" +
-	"\x1a_discounted_price_per_hourB\x16\n" +
-	"\x14_discount_percentage*j\n" +
+	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12B\n" +
+	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12H\n" +
+	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage*j\n" +
 	"\rPackageStatus\x12\x1e\n" +
 	"\x1aPACKAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
@@ -955,7 +951,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\vPackageTier\x12#\n" +
 	"\x1fPACKAGE_TIER_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_TIER_STANDARD\x10\x01\x12\x18\n" +
-	"\x14PACKAGE_TIER_PREMIUM\x10\x022\x81\a\n" +
+	"\x14PACKAGE_TIER_PREMIUM\x10\x022\x8f\a\n" +
 	"\x0eBookingService\x12\x8a\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -966,8 +962,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"package_id\x12\x02id\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x86\x02\n" +
 	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
-	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9b\x01\n" +
-	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\":\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quoteB\xfe\x01\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\xa9\x01\n" +
+	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quoteB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
 var (
@@ -1032,7 +1028,6 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[9].OneofWrappers = []any{}
-	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

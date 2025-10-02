@@ -43,10 +43,10 @@ type BookingServiceClient interface {
 	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 	// Gets a price quote for a cluster configuration.
-	// This endpoint calculates pricing information including hourly and monthly costs,
+	// This endpoint calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
 	// Required permissions:
-	// - None (authenticated only)
+	// - write:clusters
 	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
 }
 
@@ -116,10 +116,10 @@ type BookingServiceServer interface {
 	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	// Gets a price quote for a cluster configuration.
-	// This endpoint calculates pricing information including hourly and monthly costs,
+	// This endpoint calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
 	// Required permissions:
-	// - None (authenticated only)
+	// - write:clusters
 	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }

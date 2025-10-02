@@ -32,10 +32,10 @@ export const listGlobalPackages = BookingService.method.listGlobalPackages;
 
 /**
  * Gets a price quote for a cluster configuration.
- * This endpoint calculates pricing information including hourly and monthly costs,
+ * This endpoint calculates pricing information including hourly costs,
  * and any applicable discounts for the specified cluster configuration.
  * Required permissions:
- * - None (authenticated only)
+ * - write:clusters
  *
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
  */

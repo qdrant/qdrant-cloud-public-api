@@ -439,20 +439,18 @@ export declare type GetQuoteResponse = Message<"qdrant.cloud.booking.v1.GetQuote
   /**
    * The discounted price per hour in millicents, after applying discounts.
    * If no discounts are applied, this will be the same as original_price_per_hour.
-   * This field is only populated if the user has 'read:discounts' permission.
    *
-   * @generated from field: optional int64 discounted_price_per_hour = 3;
+   * @generated from field: int64 discounted_price_per_hour = 3;
    */
-  discountedPricePerHour?: bigint;
+  discountedPricePerHour: bigint;
 
   /**
    * The percentage of discount applied (e.g., 10.0 for 10% discount).
    * If no discounts are applied, this will be 0.0.
-   * This field is only populated if the user has 'read:discounts' permission.
    *
-   * @generated from field: optional double discount_percentage = 4;
+   * @generated from field: double discount_percentage = 4;
    */
-  discountPercentage?: number;
+  discountPercentage: number;
 };
 
 export declare type GetQuoteResponseValid = GetQuoteResponse;
@@ -572,10 +570,10 @@ export declare const BookingService: GenService<{
   },
   /**
    * Gets a price quote for a cluster configuration.
-   * This endpoint calculates pricing information including hourly and monthly costs,
+   * This endpoint calculates pricing information including hourly costs,
    * and any applicable discounts for the specified cluster configuration.
    * Required permissions:
-   * - None (authenticated only)
+   * - write:clusters
    *
    * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
    */
