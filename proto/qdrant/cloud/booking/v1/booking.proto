@@ -59,13 +59,13 @@ service BookingService {
     };
   }
   // Gets a price quote for a cluster configuration.
-  // This endpoint calculates pricing information including hourly and monthly costs,
+  // This endpoint calculates pricing information including hourly costs,
   // and any applicable discounts for the specified cluster configuration.
   // Required permissions:
-  // - None (authenticated only)
+  // - write:clusters
   rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse) {
     // permissions
-    option (common.v1.permissions) = "";
+    option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/booking/v1/accounts/{account_id}/quote"
@@ -271,12 +271,10 @@ message GetQuoteResponse {
   int64 original_price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
   // The discounted price per hour in millicents, after applying discounts.
   // If no discounts are applied, this will be the same as original_price_per_hour.
-  // This field is only populated if the user has 'read:discounts' permission.
-  optional int64 discounted_price_per_hour = 3 [(buf.validate.field).int64.gte = 0];
+  int64 discounted_price_per_hour = 3 [(buf.validate.field).int64.gte = 0];
   // The percentage of discount applied (e.g., 10.0 for 10% discount).
   // If no discounts are applied, this will be 0.0.
-  // This field is only populated if the user has 'read:discounts' permission.
-  optional double discount_percentage = 4 [(buf.validate.field).double = {
+  double discount_percentage = 4 [(buf.validate.field).double = {
     gte: 0.0
     lte: 100.0
   }];
