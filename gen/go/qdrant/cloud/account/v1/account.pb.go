@@ -538,8 +538,8 @@ type ListAccountInvitesRequest struct {
 	// The identifier of the account (in GUID format) to list invites for.
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The status of the account invite to filter.
-	// This is an optional field. If value is not set, all statuses are returned.
+	// The statuses of the account invites to filter by.
+	// If empty or not set, invites of all statuses are returned.
 	Statuses      []AccountInviteStatus `protobuf:"varint,2,rep,packed,name=statuses,proto3,enum=qdrant.cloud.account.v1.AccountInviteStatus" json:"statuses,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
