@@ -369,7 +369,6 @@ message ListAccountInvitesRequest {
   // The status of the account invite to filter.
   // This is an optional field. If value is not set, all statuses are returned.
   repeated AccountInviteStatus statuses = 2;
-
 }
 
 // ListAccountInvitesResponse is the response from the ListAccountInvites function.

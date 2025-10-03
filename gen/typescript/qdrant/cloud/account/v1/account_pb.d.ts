@@ -299,6 +299,14 @@ export declare type ListAccountInvitesRequest = Message<"qdrant.cloud.account.v1
    * @generated from field: string account_id = 1;
    */
   accountId: string;
+
+  /**
+   * The status of the account invite to filter.
+   * This is an optional field. If value is not set, all statuses are returned.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.AccountInviteStatus statuses = 2;
+   */
+  statuses: AccountInviteStatus[];
 };
 
 export declare type ListAccountInvitesRequestValid = ListAccountInvitesRequest;

@@ -85,10 +85,12 @@ class DeleteAccountResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ListAccountInvitesRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ("account_id", "statuses")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUSES_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+    statuses: _containers.RepeatedScalarFieldContainer[AccountInviteStatus]
+    def __init__(self, account_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[AccountInviteStatus, str]]] = ...) -> None: ...
 
 class ListAccountInvitesResponse(_message.Message):
     __slots__ = ("items",)
