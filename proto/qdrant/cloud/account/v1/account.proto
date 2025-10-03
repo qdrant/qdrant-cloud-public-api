@@ -366,6 +366,9 @@ message ListAccountInvitesRequest {
   // The identifier of the account (in GUID format) to list invites for.
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The statuses of the account invites to filter by.
+  // If empty or not set, invites of all statuses are returned.
+  repeated AccountInviteStatus statuses = 2;
 }
 
 // ListAccountInvitesResponse is the response from the ListAccountInvites function.

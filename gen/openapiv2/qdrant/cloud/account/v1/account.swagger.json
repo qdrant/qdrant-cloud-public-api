@@ -198,6 +198,24 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "statuses",
+            "description": "The statuses of the account invites to filter by.\nIf empty or not set, invites of all statuses are returned.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
+                "ACCOUNT_INVITE_STATUS_PENDING",
+                "ACCOUNT_INVITE_STATUS_ACCEPTED",
+                "ACCOUNT_INVITE_STATUS_REJECTED",
+                "ACCOUNT_INVITE_STATUS_CANCELED"
+              ]
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
