@@ -2328,7 +2328,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xd9\x1b\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xd4\x1b\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
@@ -2346,9 +2346,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\xb3\x01\n" +
 	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"]\x8a\xb5\x18\n" +
 	"read:roles\xba\xb5\x18\x12\n" +
-	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xa8\x02\n" +
+	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xa3\x02\n" +
 	"\n" +
-	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xc8\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
+	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xc3\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xba\xb5\x18\x16\n" +
 	"\trole_name\x12\trole.name\xca\xf3\x18L\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\xac\x02\n" +
 	"\n" +
 	"UpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a'.qdrant.cloud.iam.v1.UpdateRoleResponse\"\xcc\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
