@@ -126,7 +126,7 @@
     },
     "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/bootstrap-commands": {
       "post": {
-        "summary": "Generates the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permission:\n- write:hybrid_cloud_environments",
+        "summary": "Generates the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permissions:\n- write:hybrid_cloud_environments\n- write:management_keys",
         "operationId": "HybridCloudService_GenerateBootstrapCommands",
         "responses": {
           "200": {

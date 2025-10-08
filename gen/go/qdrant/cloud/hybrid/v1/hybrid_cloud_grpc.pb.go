@@ -59,8 +59,9 @@ type HybridCloudServiceClient interface {
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
 	// Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
-	// Required permission:
+	// Required permissions:
 	// - write:hybrid_cloud_environments
+	// - write:management_keys
 	GenerateBootstrapCommands(ctx context.Context, in *GenerateBootstrapCommandsRequest, opts ...grpc.CallOption) (*GenerateBootstrapCommandsResponse, error)
 }
 
@@ -164,8 +165,9 @@ type HybridCloudServiceServer interface {
 	// bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
 	// but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
 	// Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
-	// Required permission:
+	// Required permissions:
 	// - write:hybrid_cloud_environments
+	// - write:management_keys
 	GenerateBootstrapCommands(context.Context, *GenerateBootstrapCommandsRequest) (*GenerateBootstrapCommandsResponse, error)
 	mustEmbedUnimplementedHybridCloudServiceServer()
 }

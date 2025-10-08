@@ -20,7 +20,11 @@ bootstrap: bootstrap/uv ## Install the required dependencies to use this project
 .PHONY: lint
 lint: buf/deps ## Check protobuf files for linting errors.
 	buf lint
+ifneq ($(ALLOW_BREAKING),true)
 	buf breaking --against https://github.com/qdrant/qdrant-cloud-public-api.git
+else
+	@echo "⚠️  Skipping buf breaking checks..."
+endif
 
 .PHONY: format
 format: buf/deps ## Format protobuf files (in-place) using `buf format`.
