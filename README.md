@@ -245,14 +245,6 @@ After changing a `.proto` file, you should regenerate the different language bin
 ``` sh
 make generate
 ```
-
-> ⚠️ Note:
-If you intentionally want to allow breaking changes (for example, when evolving a major API), you can bypass the 
-> breaking change validation by running:
-```sh
-make generate ALLOW_BREAKING=true
-```
-
 ## Using generated code
 
 ### Go projects
