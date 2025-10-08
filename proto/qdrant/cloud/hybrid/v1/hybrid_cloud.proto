@@ -119,11 +119,14 @@ service HybridCloudService {
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
   // but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.
   // Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.
-  // Required permission:
+  // Required permissions:
   // - write:hybrid_cloud_environments
+  // - write:management_keys
   rpc GenerateBootstrapCommands(GenerateBootstrapCommandsRequest) returns (GenerateBootstrapCommandsResponse) {
     // permissions
+    option (common.v1.requires_all_permissions) = true;
     option (common.v1.permissions) = "write:hybrid_cloud_environments";
+    option (common.v1.permissions) = "write:management_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/bootstrap-commands"

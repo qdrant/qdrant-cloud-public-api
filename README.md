@@ -245,7 +245,6 @@ After changing a `.proto` file, you should regenerate the different language bin
 ``` sh
 make generate
 ```
-
 ## Using generated code
 
 ### Go projects
