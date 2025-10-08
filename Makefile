@@ -19,6 +19,7 @@ bootstrap: bootstrap/uv ## Install the required dependencies to use this project
 
 .PHONY: lint
 lint: buf/deps ## Check protobuf files for linting errors.
+	buf lint
 	@buf breaking --against https://github.com/qdrant/qdrant-cloud-public-api.git || \
 	  echo "⚠️  Warning: Breaking changes detected! These should generally be avoided. Continuing with code generation..."
 
