@@ -348,6 +348,8 @@ export declare const PlatformService: GenService<{
    * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
    * Required permissions:
    * - None (authenticated only)
+   * Conditional permissions:
+   * - read:hybrid_cloud_environments OR read:clusters - required only if request.cloud_provider_id refers to a hybrid provider.
    *
    * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions
    */
