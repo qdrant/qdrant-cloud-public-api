@@ -44,6 +44,8 @@ type PlatformServiceClient interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
+	// Conditional permissions:
+	// - read:hybrid_cloud_environments OR read:clusters - required only if request.cloud_provider_id refers to a hybrid provider.
 	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
 }
 
@@ -114,6 +116,8 @@ type PlatformServiceServer interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
+	// Conditional permissions:
+	// - read:hybrid_cloud_environments OR read:clusters - required only if request.cloud_provider_id refers to a hybrid provider.
 	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
