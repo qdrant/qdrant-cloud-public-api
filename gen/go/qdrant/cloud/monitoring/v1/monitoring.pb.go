@@ -534,9 +534,9 @@ type GetClusterEventsRequest struct {
 	// Optional start time for the events query.
 	// If omitted, defaults to 7 days ago.
 	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3,oneof" json:"since,omitempty"`
-	// Optional end time for the events query.
-	// If omitted, defaults to current time.
-	Until         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
+	// Optional limit.
+	// If omitted, defaults to 100.
+	Limit         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -592,9 +592,9 @@ func (x *GetClusterEventsRequest) GetSince() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetClusterEventsRequest) GetUntil() *timestamppb.Timestamp {
+func (x *GetClusterEventsRequest) GetLimit() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Until
+		return x.Limit
 	}
 	return nil
 }
@@ -602,8 +602,10 @@ func (x *GetClusterEventsRequest) GetUntil() *timestamppb.Timestamp {
 // GetClusterEventsRequest is the response from the GetClusterEvents function
 type GetClusterEventsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Current status of the cluster.
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	// A list of entries representing events that have happened in the cluster.
-	Items         []*LogEntry `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Result        []*LogStream `protobuf:"bytes,2,rep,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -638,9 +640,16 @@ func (*GetClusterEventsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetClusterEventsResponse) GetItems() []*LogEntry {
+func (x *GetClusterEventsResponse) GetStatus() string {
 	if x != nil {
-		return x.Items
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetClusterEventsResponse) GetResult() []*LogStream {
+	if x != nil {
+		return x.Result
 	}
 	return nil
 }
@@ -1121,6 +1130,97 @@ func (x *LogEntry) GetMessage() string {
 	return ""
 }
 
+// LogStream represents the source stream of the log entry.
+type LogStream struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The kind of log stream, e.g., "stdout" or "stderr".
+	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
+	// The name of the namespace
+	Namespace string `protobuf:"bytes,2,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// the id of the cluster
+	ClusterId string `protobuf:"bytes,3,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// the id of the account
+	AccountId string `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// the id of the hybrid cloud environment
+	HybridCloudId string `protobuf:"bytes,5,opt,name=hybrid_cloud_id,json=hybridCloudId,proto3" json:"hybrid_cloud_id,omitempty"`
+	// values of the log
+	Values        []*LogEntry `protobuf:"bytes,6,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogStream) Reset() {
+	*x = LogStream{}
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogStream) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogStream) ProtoMessage() {}
+
+func (x *LogStream) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogStream.ProtoReflect.Descriptor instead.
+func (*LogStream) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *LogStream) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *LogStream) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
+func (x *LogStream) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *LogStream) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *LogStream) GetHybridCloudId() string {
+	if x != nil {
+		return x.HybridCloudId
+	}
+	return ""
+}
+
+func (x *LogStream) GetValues() []*LogEntry {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
 var File_qdrant_cloud_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
@@ -1169,19 +1269,19 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"T\n" +
 	"\x16GetClusterLogsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xf5\x02\n" +
+	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xed\x01\n" +
 	"\x17GetClusterEventsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01:\x85\x01\xbaH\x81\x01\x1a\x7f\n" +
-	"!get_cluster_events.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
+	"\x05limit\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05limit\x88\x01\x01B\b\n" +
 	"\x06_sinceB\b\n" +
-	"\x06_until\"V\n" +
-	"\x18GetClusterEventsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xac\x04\n" +
+	"\x06_limit\"q\n" +
+	"\x18GetClusterEventsResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12=\n" +
+	"\x06result\x18\x02 \x03(\v2%.qdrant.cloud.monitoring.v1.LogStreamR\x06result\"\xac\x04\n" +
 	"\x12ClusterNodeMetrics\x12 \n" +
 	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x12K\n" +
 	"\x03cpu\x18\x02 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\x12K\n" +
@@ -1212,7 +1312,16 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"o\n" +
 	"\bLogEntry\x12@\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12!\n" +
-	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage*x\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage\"\xff\x01\n" +
+	"\tLogStream\x12\x12\n" +
+	"\x04kind\x18\x01 \x01(\tR\x04kind\x12\x1c\n" +
+	"\tnamespace\x18\x02 \x01(\tR\tnamespace\x12'\n" +
+	"\n" +
+	"cluster_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12'\n" +
+	"\n" +
+	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x120\n" +
+	"\x0fhybrid_cloud_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rhybridCloudId\x12<\n" +
+	"\x06values\x18\x06 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x06values*x\n" +
 	"\n" +
 	"Aggregator\x12\x1a\n" +
 	"\x16AGGREGATOR_UNSPECIFIED\x10\x00\x12\x12\n" +
@@ -1252,7 +1361,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_goTypes = []any{
 	(Aggregator)(0),                          // 0: qdrant.cloud.monitoring.v1.Aggregator
 	(*GetClusterSummaryMetricsRequest)(nil),  // 1: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
@@ -1270,13 +1379,14 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_goTypes = []any{
 	(*ClusterNodeUsageMetrics)(nil),          // 13: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
 	(*Metric)(nil),                           // 14: qdrant.cloud.monitoring.v1.Metric
 	(*LogEntry)(nil),                         // 15: qdrant.cloud.monitoring.v1.LogEntry
-	(*timestamppb.Timestamp)(nil),            // 16: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),              // 17: google.protobuf.Duration
+	(*LogStream)(nil),                        // 16: qdrant.cloud.monitoring.v1.LogStream
+	(*timestamppb.Timestamp)(nil),            // 17: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),              // 18: google.protobuf.Duration
 }
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	9,  // 0: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeMetrics
-	16, // 1: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	16, // 2: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	17, // 1: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	17, // 2: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.monitoring.v1.Aggregator
 	14, // 4: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 5: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
@@ -1287,12 +1397,12 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	14, // 10: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.rps:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 11: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.latency:type_name -> qdrant.cloud.monitoring.v1.Metric
 	13, // 12: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
-	16, // 13: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
-	16, // 14: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
+	17, // 13: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
+	17, // 14: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
 	15, // 15: qdrant.cloud.monitoring.v1.GetClusterLogsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
-	16, // 16: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
-	16, // 17: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.until:type_name -> google.protobuf.Timestamp
-	15, // 18: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	17, // 16: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
+	17, // 17: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.limit:type_name -> google.protobuf.Timestamp
+	16, // 18: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.result:type_name -> qdrant.cloud.monitoring.v1.LogStream
 	10, // 19: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
 	10, // 20: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
 	10, // 21: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
@@ -1301,28 +1411,29 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	10, // 24: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
 	11, // 25: qdrant.cloud.monitoring.v1.ClusterMetricOverview.avg:type_name -> qdrant.cloud.monitoring.v1.IntervalAverage
 	12, // 26: qdrant.cloud.monitoring.v1.ClusterMetricOverview.total:type_name -> qdrant.cloud.monitoring.v1.ResourceValue
-	17, // 27: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
+	18, // 27: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
 	14, // 28: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 29: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 30: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 31: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 32: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
 	14, // 33: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
-	16, // 34: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 35: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
-	1,  // 36: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
-	3,  // 37: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
-	5,  // 38: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
-	7,  // 39: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
-	2,  // 40: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
-	4,  // 41: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
-	6,  // 42: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
-	8,  // 43: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
-	40, // [40:44] is the sub-list for method output_type
-	36, // [36:40] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	17, // 34: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	17, // 35: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
+	15, // 36: qdrant.cloud.monitoring.v1.LogStream.values:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	1,  // 37: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
+	3,  // 38: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
+	5,  // 39: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
+	7,  // 40: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
+	2,  // 41: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
+	4,  // 42: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
+	6,  // 43: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
+	8,  // 44: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+	41, // [41:45] is the sub-list for method output_type
+	37, // [37:41] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_monitoring_v1_monitoring_proto_init() }
@@ -1339,7 +1450,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc), len(file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
