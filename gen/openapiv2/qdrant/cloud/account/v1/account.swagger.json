@@ -573,7 +573,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nWhen creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
             },
             "createdAt": {
               "type": "string",
@@ -747,7 +747,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nWhen creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
         },
         "createdAt": {
           "type": "string",
