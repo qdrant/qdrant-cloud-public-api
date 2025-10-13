@@ -979,7 +979,7 @@ export declare type AccountInvite = Message<"qdrant.cloud.account.v1.AccountInvi
 
   /**
    * The identifiers of the roles to be assigned to the user upon accepting the invite.
-   * This field is required when creating an invite, and the list must not be empty.
+   * When creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.
    * Each string in the list must be a valid UUID, to be resolved in the provided account.
    * Please use IAMService.ListRoles to get the possible roles to assign.
    *

@@ -1631,7 +1631,7 @@ type AccountInvite struct {
 	// This field is required when creating an invite.
 	UserEmail string `protobuf:"bytes,4,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
 	// The identifiers of the roles to be assigned to the user upon accepting the invite.
-	// This field is required when creating an invite, and the list must not be empty.
+	// When creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.
 	// Each string in the list must be a valid UUID, to be resolved in the provided account.
 	// Please use IAMService.ListRoles to get the possible roles to assign.
 	UserRoleIds []string `protobuf:"bytes,5,rep,name=user_role_ids,json=userRoleIds,proto3" json:"user_role_ids,omitempty"`
@@ -1905,15 +1905,16 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"privileges:\x86\x03\xbaH\x82\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xd9\x01\n" +
-	"\x18account.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\xf0\t\n" +
+	"\x18account.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"\xee\t\n" +
 	"\rAccountInvite\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\faccount_name\x18\x03 \x01(\tR\vaccountName\x12(\n" +
 	"\n" +
-	"user_email\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01`\x01R\tuserEmail\x123\n" +
-	"\ruser_role_ids\x18\x05 \x03(\tB\x0f\xbaH\f\x92\x01\t\b\x01\"\x05r\x03\xb0\x01\x01R\vuserRoleIds\x129\n" +
+	"user_email\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01`\x01R\tuserEmail\x121\n" +
+	"\ruser_role_ids\x18\x05 \x03(\tB\r\xbaH\n" +
+	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\vuserRoleIds\x129\n" +
 	"\n" +
 	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
 	"\x12created_by_user_id\x18\a \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x126\n" +
