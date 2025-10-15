@@ -2328,7 +2328,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xca\x1b\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xc5\x1b\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
@@ -2363,8 +2363,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\auser_id\x12\auser_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xcb\x01\n" +
 	"\rListRoleUsers\x12).qdrant.cloud.iam.v1.ListRoleUsersRequest\x1a*.qdrant.cloud.iam.v1.ListRoleUsersResponse\"c\x8a\xb5\x18\n" +
 	"read:roles\xba\xb5\x18\x12\n" +
-	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xb8\x02\n" +
-	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc9\x01\x8a\xb5\x18\vwrite:roles\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
+	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xb3\x02\n" +
+	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc4\x01\x8a\xb5\x18\vwrite:roles\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd4\x01\n" +
 	"\n" +
 	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logoutB\xde\x01\n" +
