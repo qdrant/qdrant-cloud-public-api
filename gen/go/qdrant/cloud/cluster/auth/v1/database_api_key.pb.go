@@ -31,7 +31,11 @@ type ListDatabaseApiKeysRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
-	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The identifier of the cluster (in GUID format).
+	// This is an optional field, if provided it returns only the database api
+	// keys that belong to that cluster.
+	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69,6 +73,13 @@ func (*ListDatabaseApiKeysRequest) Descriptor() ([]byte, []int) {
 func (x *ListDatabaseApiKeysRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ListDatabaseApiKeysRequest) GetClusterId() string {
+	if x != nil && x.ClusterId != nil {
+		return *x.ClusterId
 	}
 	return ""
 }
@@ -409,10 +420,13 @@ var File_qdrant_cloud_cluster_auth_v1_database_api_key_proto protoreflect.FileDe
 
 const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
-	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"E\n" +
+	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
 	"\x1aListDatabaseApiKeysRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"a\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
+	"\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01B\r\n" +
+	"\v_cluster_id\"a\n" +
 	"\x1bListDatabaseApiKeysResponse\x12B\n" +
 	"\x05items\x18\x01 \x03(\v2,.qdrant.cloud.cluster.auth.v1.DatabaseApiKeyR\x05items\"\x92\x03\n" +
 	"\x1bCreateDatabaseApiKeyRequest\x12^\n" +
@@ -492,6 +506,7 @@ func file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_init() {
 	if File_qdrant_cloud_cluster_auth_v1_database_api_key_proto != nil {
 		return
 	}
+	file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
