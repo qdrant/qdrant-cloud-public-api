@@ -178,15 +178,7 @@ message GetClusterEventsRequest {
   optional google.protobuf.Timestamp since = 3;
   // Optional limit.
   // If omitted, defaults to 100.
-  optional google.protobuf.Timestamp limit = 4;
-}
-
-// GetClusterEventsRequest is the response from the GetClusterEvents function
-message GetClusterEventsResponse {
-  // Current status of the cluster.
-  string status = 1;
-  // A list of entries representing events that have happened in the cluster.
-  repeated LogStream result = 2;
+  optional google.protobuf.Timestamp until = 4;
 }
 
 // ClusterNodeMetrics contains metric overview for a node.
@@ -267,19 +259,11 @@ message LogEntry {
 }
 
 // LogStream represents the source stream of the log entry.
-message LogStream {
-  // The kind of log stream, e.g., "stdout" or "stderr".
-  string kind = 1;
-  // The name of the namespace
-  string namespace = 2;
-  // the id of the cluster
-  string cluster_id = 3 [(buf.validate.field).string = {uuid: true}];
-  // the id of the account
-  string account_id = 4 [(buf.validate.field).string = {uuid: true}];
+message GetClusterEventsResponse {
   // the id of the hybrid cloud environment
-  string hybrid_cloud_id = 5 [(buf.validate.field).string = {uuid: true}];
+  string hybrid_cloud_id = 1 [(buf.validate.field).string = {uuid: true}];
   // values of the log
-  repeated LogEntry values = 6;
+  repeated LogEntry values = 2;
 }
 
 // Aggregator defines how metrics should be aggregated over time.

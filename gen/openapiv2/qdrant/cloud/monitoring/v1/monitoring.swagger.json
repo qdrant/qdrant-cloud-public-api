@@ -58,7 +58,7 @@
             "format": "date-time"
           },
           {
-            "name": "limit",
+            "name": "until",
             "description": "Optional limit.\nIf omitted, defaults to 100.",
             "in": "query",
             "required": false,
@@ -390,20 +390,20 @@
     "v1GetClusterEventsResponse": {
       "type": "object",
       "properties": {
-        "status": {
+        "hybridCloudId": {
           "type": "string",
-          "description": "Current status of the cluster."
+          "title": "the id of the hybrid cloud environment"
         },
-        "result": {
+        "values": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1LogStream"
+            "$ref": "#/definitions/v1LogEntry"
           },
-          "description": "A list of entries representing events that have happened in the cluster."
+          "title": "values of the log"
         }
       },
-      "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
+      "description": "LogStream represents the source stream of the log entry."
     },
     "v1GetClusterLogsResponse": {
       "type": "object",
@@ -540,40 +540,6 @@
         }
       },
       "description": "LogEntry represents a single log line."
-    },
-    "v1LogStream": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of log stream, e.g., \"stdout\" or \"stderr\"."
-        },
-        "namespace": {
-          "type": "string",
-          "title": "The name of the namespace"
-        },
-        "clusterId": {
-          "type": "string",
-          "title": "the id of the cluster"
-        },
-        "accountId": {
-          "type": "string",
-          "title": "the id of the account"
-        },
-        "hybridCloudId": {
-          "type": "string",
-          "title": "the id of the hybrid cloud environment"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1LogEntry"
-          },
-          "title": "values of the log"
-        }
-      },
-      "description": "LogStream represents the source stream of the log entry."
     },
     "v1Metric": {
       "type": "object",

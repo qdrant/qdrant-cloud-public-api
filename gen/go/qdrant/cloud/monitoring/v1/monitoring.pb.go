@@ -536,7 +536,7 @@ type GetClusterEventsRequest struct {
 	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3,oneof" json:"since,omitempty"`
 	// Optional limit.
 	// If omitted, defaults to 100.
-	Limit         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	Until         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -592,64 +592,9 @@ func (x *GetClusterEventsRequest) GetSince() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetClusterEventsRequest) GetLimit() *timestamppb.Timestamp {
+func (x *GetClusterEventsRequest) GetUntil() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Limit
-	}
-	return nil
-}
-
-// GetClusterEventsRequest is the response from the GetClusterEvents function
-type GetClusterEventsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Current status of the cluster.
-	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	// A list of entries representing events that have happened in the cluster.
-	Result        []*LogStream `protobuf:"bytes,2,rep,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetClusterEventsResponse) Reset() {
-	*x = GetClusterEventsResponse{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetClusterEventsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetClusterEventsResponse) ProtoMessage() {}
-
-func (x *GetClusterEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetClusterEventsResponse.ProtoReflect.Descriptor instead.
-func (*GetClusterEventsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetClusterEventsResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *GetClusterEventsResponse) GetResult() []*LogStream {
-	if x != nil {
-		return x.Result
+		return x.Until
 	}
 	return nil
 }
@@ -677,7 +622,7 @@ type ClusterNodeMetrics struct {
 
 func (x *ClusterNodeMetrics) Reset() {
 	*x = ClusterNodeMetrics{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -689,7 +634,7 @@ func (x *ClusterNodeMetrics) String() string {
 func (*ClusterNodeMetrics) ProtoMessage() {}
 
 func (x *ClusterNodeMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -702,7 +647,7 @@ func (x *ClusterNodeMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterNodeMetrics.ProtoReflect.Descriptor instead.
 func (*ClusterNodeMetrics) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ClusterNodeMetrics) GetNodeId() string {
@@ -768,7 +713,7 @@ type ClusterMetricOverview struct {
 
 func (x *ClusterMetricOverview) Reset() {
 	*x = ClusterMetricOverview{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -780,7 +725,7 @@ func (x *ClusterMetricOverview) String() string {
 func (*ClusterMetricOverview) ProtoMessage() {}
 
 func (x *ClusterMetricOverview) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -793,7 +738,7 @@ func (x *ClusterMetricOverview) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterMetricOverview.ProtoReflect.Descriptor instead.
 func (*ClusterMetricOverview) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ClusterMetricOverview) GetAvg() []*IntervalAverage {
@@ -823,7 +768,7 @@ type IntervalAverage struct {
 
 func (x *IntervalAverage) Reset() {
 	*x = IntervalAverage{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +780,7 @@ func (x *IntervalAverage) String() string {
 func (*IntervalAverage) ProtoMessage() {}
 
 func (x *IntervalAverage) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +793,7 @@ func (x *IntervalAverage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntervalAverage.ProtoReflect.Descriptor instead.
 func (*IntervalAverage) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *IntervalAverage) GetInterval() *durationpb.Duration {
@@ -878,7 +823,7 @@ type ResourceValue struct {
 
 func (x *ResourceValue) Reset() {
 	*x = ResourceValue{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -890,7 +835,7 @@ func (x *ResourceValue) String() string {
 func (*ResourceValue) ProtoMessage() {}
 
 func (x *ResourceValue) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -903,7 +848,7 @@ func (x *ResourceValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceValue.ProtoReflect.Descriptor instead.
 func (*ResourceValue) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ResourceValue) GetValue() float64 {
@@ -943,7 +888,7 @@ type ClusterNodeUsageMetrics struct {
 
 func (x *ClusterNodeUsageMetrics) Reset() {
 	*x = ClusterNodeUsageMetrics{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -955,7 +900,7 @@ func (x *ClusterNodeUsageMetrics) String() string {
 func (*ClusterNodeUsageMetrics) ProtoMessage() {}
 
 func (x *ClusterNodeUsageMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -968,7 +913,7 @@ func (x *ClusterNodeUsageMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterNodeUsageMetrics.ProtoReflect.Descriptor instead.
 func (*ClusterNodeUsageMetrics) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ClusterNodeUsageMetrics) GetNodeId() string {
@@ -1033,7 +978,7 @@ type Metric struct {
 
 func (x *Metric) Reset() {
 	*x = Metric{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +990,7 @@ func (x *Metric) String() string {
 func (*Metric) ProtoMessage() {}
 
 func (x *Metric) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1058,7 +1003,7 @@ func (x *Metric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metric.ProtoReflect.Descriptor instead.
 func (*Metric) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Metric) GetTimestamp() *timestamppb.Timestamp {
@@ -1088,7 +1033,7 @@ type LogEntry struct {
 
 func (x *LogEntry) Reset() {
 	*x = LogEntry{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1100,7 +1045,7 @@ func (x *LogEntry) String() string {
 func (*LogEntry) ProtoMessage() {}
 
 func (x *LogEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1113,7 +1058,7 @@ func (x *LogEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogEntry.ProtoReflect.Descriptor instead.
 func (*LogEntry) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *LogEntry) GetTimestamp() *timestamppb.Timestamp {
@@ -1131,39 +1076,31 @@ func (x *LogEntry) GetMessage() string {
 }
 
 // LogStream represents the source stream of the log entry.
-type LogStream struct {
+type GetClusterEventsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The kind of log stream, e.g., "stdout" or "stderr".
-	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	// The name of the namespace
-	Namespace string `protobuf:"bytes,2,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	// the id of the cluster
-	ClusterId string `protobuf:"bytes,3,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// the id of the account
-	AccountId string `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// the id of the hybrid cloud environment
-	HybridCloudId string `protobuf:"bytes,5,opt,name=hybrid_cloud_id,json=hybridCloudId,proto3" json:"hybrid_cloud_id,omitempty"`
+	HybridCloudId string `protobuf:"bytes,1,opt,name=hybrid_cloud_id,json=hybridCloudId,proto3" json:"hybrid_cloud_id,omitempty"`
 	// values of the log
-	Values        []*LogEntry `protobuf:"bytes,6,rep,name=values,proto3" json:"values,omitempty"`
+	Values        []*LogEntry `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LogStream) Reset() {
-	*x = LogStream{}
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[15]
+func (x *GetClusterEventsResponse) Reset() {
+	*x = GetClusterEventsResponse{}
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LogStream) String() string {
+func (x *GetClusterEventsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LogStream) ProtoMessage() {}
+func (*GetClusterEventsResponse) ProtoMessage() {}
 
-func (x *LogStream) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[15]
+func (x *GetClusterEventsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1174,47 +1111,19 @@ func (x *LogStream) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LogStream.ProtoReflect.Descriptor instead.
-func (*LogStream) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use GetClusterEventsResponse.ProtoReflect.Descriptor instead.
+func (*GetClusterEventsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *LogStream) GetKind() string {
-	if x != nil {
-		return x.Kind
-	}
-	return ""
-}
-
-func (x *LogStream) GetNamespace() string {
-	if x != nil {
-		return x.Namespace
-	}
-	return ""
-}
-
-func (x *LogStream) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *LogStream) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *LogStream) GetHybridCloudId() string {
+func (x *GetClusterEventsResponse) GetHybridCloudId() string {
 	if x != nil {
 		return x.HybridCloudId
 	}
 	return ""
 }
 
-func (x *LogStream) GetValues() []*LogEntry {
+func (x *GetClusterEventsResponse) GetValues() []*LogEntry {
 	if x != nil {
 		return x.Values
 	}
@@ -1276,12 +1185,9 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05limit\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05limit\x88\x01\x01B\b\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01B\b\n" +
 	"\x06_sinceB\b\n" +
-	"\x06_limit\"q\n" +
-	"\x18GetClusterEventsResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x12=\n" +
-	"\x06result\x18\x02 \x03(\v2%.qdrant.cloud.monitoring.v1.LogStreamR\x06result\"\xac\x04\n" +
+	"\x06_until\"\xac\x04\n" +
 	"\x12ClusterNodeMetrics\x12 \n" +
 	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x12K\n" +
 	"\x03cpu\x18\x02 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\x12K\n" +
@@ -1312,16 +1218,10 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"o\n" +
 	"\bLogEntry\x12@\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12!\n" +
-	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage\"\xff\x01\n" +
-	"\tLogStream\x12\x12\n" +
-	"\x04kind\x18\x01 \x01(\tR\x04kind\x12\x1c\n" +
-	"\tnamespace\x18\x02 \x01(\tR\tnamespace\x12'\n" +
-	"\n" +
-	"cluster_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12'\n" +
-	"\n" +
-	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x120\n" +
-	"\x0fhybrid_cloud_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rhybridCloudId\x12<\n" +
-	"\x06values\x18\x06 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x06values*x\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage\"\x8a\x01\n" +
+	"\x18GetClusterEventsResponse\x120\n" +
+	"\x0fhybrid_cloud_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rhybridCloudId\x12<\n" +
+	"\x06values\x18\x02 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x06values*x\n" +
 	"\n" +
 	"Aggregator\x12\x1a\n" +
 	"\x16AGGREGATOR_UNSPECIFIED\x10\x00\x12\x12\n" +
@@ -1361,7 +1261,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_goTypes = []any{
 	(Aggregator)(0),                          // 0: qdrant.cloud.monitoring.v1.Aggregator
 	(*GetClusterSummaryMetricsRequest)(nil),  // 1: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
@@ -1371,69 +1271,67 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_goTypes = []any{
 	(*GetClusterLogsRequest)(nil),            // 5: qdrant.cloud.monitoring.v1.GetClusterLogsRequest
 	(*GetClusterLogsResponse)(nil),           // 6: qdrant.cloud.monitoring.v1.GetClusterLogsResponse
 	(*GetClusterEventsRequest)(nil),          // 7: qdrant.cloud.monitoring.v1.GetClusterEventsRequest
-	(*GetClusterEventsResponse)(nil),         // 8: qdrant.cloud.monitoring.v1.GetClusterEventsResponse
-	(*ClusterNodeMetrics)(nil),               // 9: qdrant.cloud.monitoring.v1.ClusterNodeMetrics
-	(*ClusterMetricOverview)(nil),            // 10: qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	(*IntervalAverage)(nil),                  // 11: qdrant.cloud.monitoring.v1.IntervalAverage
-	(*ResourceValue)(nil),                    // 12: qdrant.cloud.monitoring.v1.ResourceValue
-	(*ClusterNodeUsageMetrics)(nil),          // 13: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
-	(*Metric)(nil),                           // 14: qdrant.cloud.monitoring.v1.Metric
-	(*LogEntry)(nil),                         // 15: qdrant.cloud.monitoring.v1.LogEntry
-	(*LogStream)(nil),                        // 16: qdrant.cloud.monitoring.v1.LogStream
-	(*timestamppb.Timestamp)(nil),            // 17: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),              // 18: google.protobuf.Duration
+	(*ClusterNodeMetrics)(nil),               // 8: qdrant.cloud.monitoring.v1.ClusterNodeMetrics
+	(*ClusterMetricOverview)(nil),            // 9: qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	(*IntervalAverage)(nil),                  // 10: qdrant.cloud.monitoring.v1.IntervalAverage
+	(*ResourceValue)(nil),                    // 11: qdrant.cloud.monitoring.v1.ResourceValue
+	(*ClusterNodeUsageMetrics)(nil),          // 12: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
+	(*Metric)(nil),                           // 13: qdrant.cloud.monitoring.v1.Metric
+	(*LogEntry)(nil),                         // 14: qdrant.cloud.monitoring.v1.LogEntry
+	(*GetClusterEventsResponse)(nil),         // 15: qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+	(*timestamppb.Timestamp)(nil),            // 16: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),              // 17: google.protobuf.Duration
 }
 var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
-	9,  // 0: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeMetrics
-	17, // 1: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	17, // 2: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	8,  // 0: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeMetrics
+	16, // 1: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	16, // 2: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.monitoring.v1.Aggregator
-	14, // 4: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 5: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 6: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 7: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 8: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 9: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 10: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.rps:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 11: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.latency:type_name -> qdrant.cloud.monitoring.v1.Metric
-	13, // 12: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
-	17, // 13: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
-	17, // 14: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
-	15, // 15: qdrant.cloud.monitoring.v1.GetClusterLogsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
-	17, // 16: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
-	17, // 17: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.limit:type_name -> google.protobuf.Timestamp
-	16, // 18: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.result:type_name -> qdrant.cloud.monitoring.v1.LogStream
-	10, // 19: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	10, // 20: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	10, // 21: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	10, // 22: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	10, // 23: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	10, // 24: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	11, // 25: qdrant.cloud.monitoring.v1.ClusterMetricOverview.avg:type_name -> qdrant.cloud.monitoring.v1.IntervalAverage
-	12, // 26: qdrant.cloud.monitoring.v1.ClusterMetricOverview.total:type_name -> qdrant.cloud.monitoring.v1.ResourceValue
-	18, // 27: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
-	14, // 28: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 29: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 30: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 31: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 32: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 33: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
-	17, // 34: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	17, // 35: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
-	15, // 36: qdrant.cloud.monitoring.v1.LogStream.values:type_name -> qdrant.cloud.monitoring.v1.LogEntry
-	1,  // 37: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
-	3,  // 38: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
-	5,  // 39: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
-	7,  // 40: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
-	2,  // 41: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
-	4,  // 42: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
-	6,  // 43: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
-	8,  // 44: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
-	41, // [41:45] is the sub-list for method output_type
-	37, // [37:41] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	13, // 4: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 5: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 6: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 7: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 8: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 9: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 10: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.rps:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 11: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.latency:type_name -> qdrant.cloud.monitoring.v1.Metric
+	12, // 12: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
+	16, // 13: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
+	16, // 14: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
+	14, // 15: qdrant.cloud.monitoring.v1.GetClusterLogsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	16, // 16: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
+	16, // 17: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.until:type_name -> google.protobuf.Timestamp
+	9,  // 18: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	9,  // 19: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	9,  // 20: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	9,  // 21: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	9,  // 22: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	9,  // 23: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	10, // 24: qdrant.cloud.monitoring.v1.ClusterMetricOverview.avg:type_name -> qdrant.cloud.monitoring.v1.IntervalAverage
+	11, // 25: qdrant.cloud.monitoring.v1.ClusterMetricOverview.total:type_name -> qdrant.cloud.monitoring.v1.ResourceValue
+	17, // 26: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
+	13, // 27: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 28: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 29: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 30: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 31: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	13, // 32: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
+	16, // 33: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	16, // 34: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
+	14, // 35: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.values:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	1,  // 36: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
+	3,  // 37: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
+	5,  // 38: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
+	7,  // 39: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
+	2,  // 40: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
+	4,  // 41: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
+	6,  // 42: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
+	15, // 43: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+	40, // [40:44] is the sub-list for method output_type
+	36, // [36:40] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_monitoring_v1_monitoring_proto_init() }
@@ -1450,7 +1348,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc), len(file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
