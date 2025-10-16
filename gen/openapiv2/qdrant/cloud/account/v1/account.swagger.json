@@ -198,6 +198,24 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "statuses",
+            "description": "The statuses of the account invites to filter by.\nIf empty or not set, invites of all statuses are returned.\n\n - ACCOUNT_INVITE_STATUS_UNSPECIFIED: Default, unspecified status.\n - ACCOUNT_INVITE_STATUS_PENDING: The invite is pending and waiting for the user to accept or reject.\n - ACCOUNT_INVITE_STATUS_ACCEPTED: The invite has been accepted by the user.\n - ACCOUNT_INVITE_STATUS_REJECTED: The invite has been rejected by the user.\n - ACCOUNT_INVITE_STATUS_CANCELED: The invite has been canceled (e.g., by an account admin).",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACCOUNT_INVITE_STATUS_UNSPECIFIED",
+                "ACCOUNT_INVITE_STATUS_PENDING",
+                "ACCOUNT_INVITE_STATUS_ACCEPTED",
+                "ACCOUNT_INVITE_STATUS_REJECTED",
+                "ACCOUNT_INVITE_STATUS_CANCELED"
+              ]
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -555,7 +573,7 @@
               "items": {
                 "type": "string"
               },
-              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+              "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nWhen creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
             },
             "createdAt": {
               "type": "string",
@@ -729,7 +747,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nThis field is required when creating an invite, and the list must not be empty.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
+          "description": "The identifiers of the roles to be assigned to the user upon accepting the invite.\nWhen creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.\nEach string in the list must be a valid UUID, to be resolved in the provided account.\nPlease use IAMService.ListRoles to get the possible roles to assign."
         },
         "createdAt": {
           "type": "string",

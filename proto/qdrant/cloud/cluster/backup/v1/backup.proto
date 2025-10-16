@@ -525,6 +525,13 @@ message Backup {
   // The identifier of the backup schedule (in GUID format).
   // This is a read-only field and will be present if the backup was created by a backup schedule.
   optional string backup_schedule_id = 9 [(buf.validate.field).string = {uuid: true}];
+  // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+  // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+  // If the value is unset, backups will be retained indefinitely.
+  optional google.protobuf.Duration retention_period = 10 [(buf.validate.field).duration = {
+    gte: {seconds: 86400}
+    lte: {seconds: 31536000}
+  }];
   // Cluster details associated with the backup.
   // Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
   // This is a read-only field and will be available after the backup is created.
@@ -598,7 +605,7 @@ message BackupSchedule {
   string schedule = 5 [(buf.validate.field).string.pattern = "^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$"];
   // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
   // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
-  // If the value is unset, backups will be retained indefinitely.
+  // If the value is unset, backup will be retained indefinitely.
   optional google.protobuf.Duration retention_period = 6 [(buf.validate.field).duration = {
     gte: {seconds: 86400}
     lte: {seconds: 31536000}

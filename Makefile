@@ -20,6 +20,8 @@ bootstrap: bootstrap/uv ## Install the required dependencies to use this project
 .PHONY: lint
 lint: buf/deps ## Check protobuf files for linting errors.
 	buf lint
+	@buf breaking --against https://github.com/qdrant/qdrant-cloud-public-api.git || \
+	  echo "⚠️  Warning: Breaking changes detected! These should generally be avoided. Continuing with code generation..."
 
 .PHONY: format
 format: buf/deps ## Format protobuf files (in-place) using `buf format`.
@@ -32,7 +34,7 @@ generate: clean format lint ## Generate language bindings.
 	uv run buf generate
 	./scripts/cleanup-gencode-comments.sh
 	rm -rf gen-dummy/
-	
+
 .PHONY: build-go
 build-go:
 	go build ./...
@@ -52,9 +54,9 @@ deps: ## Install the required dependencies to use this project.
 
 .PHONY: buf/plugins
 buf/plugins: ## Install the required buf plugins (those that can't be installed using Buf's deps option).
-	export GOPRIVATE=github.com/qdrant/ && \
 	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-required-fields@latest && \
-	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-method-options@latest
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-method-options@latest && \
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-permissions-breaking@latest
 
 .PHONY: buf/deps
 buf/deps: buf/plugins ## Install the required dependencies to work with the protobuf files.

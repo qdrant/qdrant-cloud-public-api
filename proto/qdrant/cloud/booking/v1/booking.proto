@@ -58,6 +58,20 @@ service BookingService {
       field_expression: "cloud_provider_region_id"
     };
   }
+  // Gets a price quote for a cluster configuration.
+  // This endpoint calculates pricing information including hourly costs,
+  // and any applicable discounts for the specified cluster configuration.
+  // Required permissions:
+  // - write:clusters
+  rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/booking/v1/accounts/{account_id}/quote"
+      body: "*"
+    };
+  }
 }
 
 // ListPackagesRequest is the request for the ListPackages function
@@ -212,4 +226,56 @@ message ResourceConfiguration {
   string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   string disk = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetQuoteRequest is the request for the GetQuote function
+message GetQuoteRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The cloud provider where the cluster will be hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // The cloud region where the cluster will be hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+  optional string cloud_provider_region_id = 3 [(buf.validate.field).string = {min_len: 1}];
+  option (buf.validate.message).cel = {
+    id: "get_quote.cloud_provider_region_id_present"
+    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
+    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
+  };
+  // The number of nodes in a cluster.
+  // This should be a number 1...100 [both included].
+  // This is a required field.
+  uint32 number_of_nodes = 4 [(buf.validate.field).uint32 = {
+    gte: 1
+    lte: 100
+  }];
+  // The package identifier used to configure the resources of the cluster.
+  // Use `qdrant.cloud.booking.v1.BookingService.ListPackages` to select one.
+  // This is a required field.
+  string package_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The additional disk storage in GiB on top of the selected package.
+  // This is an optional field, if not specified additional disk is 0.
+  uint32 additional_disk_gib = 6 [(buf.validate.field).uint32.gte = 0];
+}
+
+// GetQuoteResponse is the response from the GetQuote function
+message GetQuoteResponse {
+  // The currency of the prices.
+  // Specifies the currency in which the prices are denominated.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 1 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+  // The original price per hour in millicents, before any discounts.
+  int64 original_price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
+  // The discounted price per hour in millicents, after applying discounts.
+  // If no discounts are applied, this will be the same as original_price_per_hour.
+  int64 discounted_price_per_hour = 3 [(buf.validate.field).int64.gte = 0];
+  // The percentage of discount applied (e.g., 10.0 for 10% discount).
+  // If no discounts are applied, this will be 0.0.
+  double discount_percentage = 4 [(buf.validate.field).double = {
+    gte: 0.0
+    lte: 100.0
+  }];
 }

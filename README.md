@@ -22,6 +22,15 @@ If you plan to contribute, please review the Protobuf guidelines to ensure our A
 
 Authentication is typically handled via API keys (so called management keys), which are passed in the `Authorization` header as an apikey (e.g., `Authorization: apikey <YOUR_MANAGEMENT_KEY>`).
 
+## Authentication & Authorization
+
+The Qdrant Cloud API implements both authentication and permission-based authorization to secure access to its methods and resources:
+
+- **Authentication**: Verifies the identity of the caller using API keys or user tokens
+- **Authorization**: Controls access to specific operations based on permissions and roles
+
+For detailed information about authentication requirements, actor types, permissions, multiple permissions, and safe permission migration patterns, see [Authentication & Authorization Documentation](docs/auth.md).
+
 ## Available Services
 
 The Qdrant Cloud API is organized into several gRPC services, each responsible for a specific domain of functionality. Below is a list of the primary services available:
@@ -236,7 +245,6 @@ After changing a `.proto` file, you should regenerate the different language bin
 ``` sh
 make generate
 ```
-
 ## Using generated code
 
 ### Go projects

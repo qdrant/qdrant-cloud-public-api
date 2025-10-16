@@ -141,8 +141,6 @@ service IAMService {
     option (common.v1.permissions) = "write:roles";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
-    // custom supported-actor-types expression. (At this moment only users can create roles)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/accounts/{role.account_id}/roles"
@@ -170,8 +168,6 @@ service IAMService {
     option (common.v1.permissions) = "write:roles";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "role.account_id";
-    // custom supported-actor-types expression. (At this moment only users can update roles)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/iam/v1/accounts/{role.account_id}/roles/{role.id}"
@@ -197,8 +193,6 @@ service IAMService {
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
     // permissions
     option (common.v1.permissions) = "delete:roles";
-    // custom supported-actor-types expression. (At this moment only users can delete roles)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/accounts/{account_id}/roles/{role_id}"};
     // events
@@ -260,8 +254,6 @@ service IAMService {
   rpc AssignUserRoles(AssignUserRolesRequest) returns (AssignUserRolesResponse) {
     // permissions
     option (common.v1.permissions) = "write:roles";
-    // custom supported-actor-types expression. (At this moment only users can assign roles)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"

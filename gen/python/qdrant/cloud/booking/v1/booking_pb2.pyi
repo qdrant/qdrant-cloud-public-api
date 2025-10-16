@@ -111,3 +111,31 @@ class ResourceConfiguration(_message.Message):
     cpu: str
     disk: str
     def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ...) -> None: ...
+
+class GetQuoteRequest(_message.Message):
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "number_of_nodes", "package_id", "additional_disk_gib")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_DISK_GIB_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    number_of_nodes: int
+    package_id: str
+    additional_disk_gib: int
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ...) -> None: ...
+
+class GetQuoteResponse(_message.Message):
+    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage")
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    original_price_per_hour: int
+    discounted_price_per_hour: int
+    discount_percentage: float
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...

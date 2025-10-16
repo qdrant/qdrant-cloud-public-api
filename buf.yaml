@@ -17,6 +17,8 @@ lint:
 breaking:
   use:
     - FILE
+    - QDRANT_CLOUD_PERMISSIONS_BREAKING
 plugins:
   - plugin: buf-plugin-method-options
   - plugin: buf-plugin-required-fields
+  - plugin: buf-plugin-permissions-breaking
