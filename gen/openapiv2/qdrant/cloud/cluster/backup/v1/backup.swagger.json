@@ -321,6 +321,45 @@
         ]
       }
     },
+    "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/cluster_resources": {
+      "get": {
+        "summary": "Retrieves the cluster configuration that was active when this backup was created.\nUseful to preview the configuration setup that will be restored.\nRequired permissions:\n- read:backups",
+        "operationId": "BackupService_GetBackupClusterResources",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBackupClusterResourcesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
     "/api/cluster/backup/v1/accounts/{accountId}/backups/{backupId}/restore": {
       "post": {
         "summary": "Restores a backup in the account identified by the given ID.\nRequired permissions:\n- restore:backups",
@@ -1019,6 +1058,55 @@
       },
       "description": "Represents the cluster details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.\nThe configuration field is immutable and represents the values at backup time."
     },
+    "v1ClusterNodeResources": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number",
+          "format": "double",
+          "description": "Base resources that are part of the standard allocation for the cluster per node.\nThis includes default CPU, memory, storage, etc."
+        },
+        "complimentary": {
+          "type": "number",
+          "format": "double",
+          "description": "Complimentary resources provided to the cluster at no additional cost.\nThis might include complimentary network bandwidth, credits, etc."
+        },
+        "additional": {
+          "type": "number",
+          "format": "double",
+          "description": "Additional resources allocated to the cluster.\nThis could include additional storage, compute power, etc."
+        },
+        "reserved": {
+          "type": "number",
+          "format": "double",
+          "description": "The reserved is the amount used by the system, which cannot be used by the database itself."
+        },
+        "available": {
+          "type": "number",
+          "format": "double",
+          "title": "The available is the total (base+complimentary+additional) - reserved"
+        }
+      },
+      "description": "ClusterNodeResources represents the allocation of various resources for a cluster per node."
+    },
+    "v1ClusterNodeResourcesSummary": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Disk resources"
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Memory resources"
+        },
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "CPU resources"
+        }
+      },
+      "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
+    },
     "v1ClusterServiceType": {
       "type": "string",
       "enum": [
@@ -1204,6 +1292,16 @@
     "v1DeleteBackupScheduleResponse": {
       "type": "object",
       "description": "DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.\n\nEmpty"
+    },
+    "v1GetBackupClusterResourcesResponse": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
+          "description": "The cluster resources that were active when the backup was created."
+        }
+      },
+      "description": "GetBackupClusterResourcesResponse is the response from the GetBackupClusterResources function."
     },
     "v1GetBackupResponse": {
       "type": "object",

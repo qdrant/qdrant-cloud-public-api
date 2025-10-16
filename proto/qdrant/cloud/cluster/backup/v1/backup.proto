@@ -260,6 +260,21 @@ service BackupService {
       field_expression: "backup_schedule_id"
     };
   }
+  // Retrieves the cluster configuration that was active when this backup was created.
+  // Useful to preview the configuration setup that will be restored.
+  // Required permissions:
+  // - read:backups
+  rpc GetBackupClusterResources(GetBackupClusterResourcesRequest) returns (GetBackupClusterResourcesResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/cluster_resources"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+  }
 }
 
 // ListBackupsRequest is the request for the ListBackups function
@@ -653,4 +668,20 @@ enum BackupRestoreStatus {
   BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
   // The backup restore is skipped.
   BACKUP_RESTORE_STATUS_SKIPPED = 6;
+}
+
+// GetBackupClusterResourcesRequest is the request for the GetBackupClusterResources function.
+message GetBackupClusterResourcesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBackupClusterResourcesResponse is the response from the GetBackupClusterResources function.
+message GetBackupClusterResourcesResponse {
+  // The cluster resources that were active when the backup was created.
+  qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 1 [(buf.validate.field).required = true];
 }

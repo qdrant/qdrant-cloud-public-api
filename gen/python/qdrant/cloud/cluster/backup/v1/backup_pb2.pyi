@@ -294,3 +294,17 @@ class BackupRestore(_message.Message):
     status: BackupRestoreStatus
     deleted_at: _timestamp_pb2.Timestamp
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+
+class GetBackupClusterResourcesRequest(_message.Message):
+    __slots__ = ("account_id", "backup_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    backup_id: str
+    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ...) -> None: ...
+
+class GetBackupClusterResourcesResponse(_message.Message):
+    __slots__ = ("resources",)
+    RESOURCES_FIELD_NUMBER: _ClassVar[int]
+    resources: _cluster_pb2.ClusterNodeResourcesSummary
+    def __init__(self, resources: _Optional[_Union[_cluster_pb2.ClusterNodeResourcesSummary, _Mapping]] = ...) -> None: ...
