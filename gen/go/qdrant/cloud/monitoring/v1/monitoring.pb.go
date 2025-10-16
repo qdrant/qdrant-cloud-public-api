@@ -534,7 +534,7 @@ type GetClusterEventsRequest struct {
 	// Optional start time for the events query.
 	// If omitted, defaults to 7 days ago.
 	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3,oneof" json:"since,omitempty"`
-	// Optional limit.
+	// Optional end time for events query.
 	// If omitted, defaults to 100.
 	Until         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
 	unknownFields protoimpl.UnknownFields

@@ -393,8 +393,8 @@ export declare type GetClusterEventsRequest = Message<"qdrant.cloud.monitoring.v
   since?: Timestamp;
 
   /**
-   * Optional end time for the events query.
-   * If omitted, defaults to current time.
+   * Optional end time for events query.
+   * If omitted, defaults to 100.
    *
    * @generated from field: optional google.protobuf.Timestamp until = 4;
    */
@@ -408,40 +408,6 @@ export declare type GetClusterEventsRequestValid = GetClusterEventsRequest;
  * Use `create(GetClusterEventsRequestSchema)` to create a new message.
  */
 export declare const GetClusterEventsRequestSchema: GenMessage<GetClusterEventsRequest, {validType: GetClusterEventsRequestValid}>;
-
-/**
- * GetClusterEventsRequest is the response from the GetClusterEvents function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
- */
-export declare type GetClusterEventsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
-  /**
-   * A list of entries representing events that have happened in the cluster.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
-   */
-  items: LogEntry[];
-};
-
-/**
- * GetClusterEventsRequest is the response from the GetClusterEvents function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
- */
-export declare type GetClusterEventsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
-  /**
-   * A list of entries representing events that have happened in the cluster.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
-   */
-  items: LogEntryValid[];
-};
-
-/**
- * Describes the message qdrant.cloud.monitoring.v1.GetClusterEventsResponse.
- * Use `create(GetClusterEventsResponseSchema)` to create a new message.
- */
-export declare const GetClusterEventsResponseSchema: GenMessage<GetClusterEventsResponse, {validType: GetClusterEventsResponseValid}>;
 
 /**
  * ClusterNodeMetrics contains metric overview for a node.
@@ -901,6 +867,54 @@ export declare type LogEntryValid = Message<"qdrant.cloud.monitoring.v1.LogEntry
  * Use `create(LogEntrySchema)` to create a new message.
  */
 export declare const LogEntrySchema: GenMessage<LogEntry, {validType: LogEntryValid}>;
+
+/**
+ * LogStream represents the source stream of the log entry.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+ */
+export declare type GetClusterEventsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
+  /**
+   * the id of the hybrid cloud environment
+   *
+   * @generated from field: string hybrid_cloud_id = 1;
+   */
+  hybridCloudId: string;
+
+  /**
+   * values of the log
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry values = 2;
+   */
+  values: LogEntry[];
+};
+
+/**
+ * LogStream represents the source stream of the log entry.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+ */
+export declare type GetClusterEventsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
+  /**
+   * the id of the hybrid cloud environment
+   *
+   * @generated from field: string hybrid_cloud_id = 1;
+   */
+  hybridCloudId: string;
+
+  /**
+   * values of the log
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry values = 2;
+   */
+  values: LogEntryValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.GetClusterEventsResponse.
+ * Use `create(GetClusterEventsResponseSchema)` to create a new message.
+ */
+export declare const GetClusterEventsResponseSchema: GenMessage<GetClusterEventsResponse, {validType: GetClusterEventsResponseValid}>;
 
 /**
  * Aggregator defines how metrics should be aggregated over time.

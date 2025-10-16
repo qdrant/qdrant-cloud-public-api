@@ -59,7 +59,7 @@
           },
           {
             "name": "until",
-            "description": "Optional limit.\nIf omitted, defaults to 100.",
+            "description": "Optional end time for events query.\nIf omitted, defaults to 100.",
             "in": "query",
             "required": false,
             "type": "string",
