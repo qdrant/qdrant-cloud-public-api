@@ -70,6 +70,11 @@ class BackupServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.FromString,
                 _registered_method=True)
+        self.GetBackupClusterResources = channel.unary_unary(
+                '/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupClusterResources',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesResponse.FromString,
+                _registered_method=True)
 
 
 class BackupServiceServicer(object):
@@ -175,6 +180,16 @@ class BackupServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetBackupClusterResources(self, request, context):
+        """Retrieves the cluster configuration that was active when this backup was created.
+        Useful to preview the configuration setup that will be restored.
+        Required permissions:
+        - read:backups
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BackupServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -232,6 +247,11 @@ def add_BackupServiceServicer_to_server(servicer, server):
                     servicer.DeleteBackupSchedule,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.SerializeToString,
+            ),
+            'GetBackupClusterResources': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBackupClusterResources,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -532,6 +552,33 @@ class BackupService(object):
             '/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackupSchedule',
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupScheduleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBackupClusterResources(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupClusterResources',
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.GetBackupClusterResourcesResponse.FromString,
             options,
             channel_credentials,
             insecure,

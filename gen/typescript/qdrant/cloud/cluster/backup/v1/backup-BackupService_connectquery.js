@@ -102,3 +102,13 @@ export const updateBackupSchedule = BackupService.method.updateBackupSchedule;
  * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule
  */
 export const deleteBackupSchedule = BackupService.method.deleteBackupSchedule;
+
+/**
+ * Retrieves the cluster configuration that was active when this backup was created.
+ * Useful to preview the configuration setup that will be restored.
+ * Required permissions:
+ * - read:backups
+ *
+ * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.GetBackupClusterResources
+ */
+export const getBackupClusterResources = BackupService.method.getBackupClusterResources;

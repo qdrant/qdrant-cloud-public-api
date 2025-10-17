@@ -19,17 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
-	BackupService_GetBackup_FullMethodName            = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup"
-	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
-	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
-	BackupService_ListBackupRestores_FullMethodName   = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores"
-	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup"
-	BackupService_ListBackupSchedules_FullMethodName  = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupSchedules"
-	BackupService_GetBackupSchedule_FullMethodName    = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupSchedule"
-	BackupService_CreateBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackupSchedule"
-	BackupService_UpdateBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackupSchedule"
-	BackupService_DeleteBackupSchedule_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackupSchedule"
+	BackupService_ListBackups_FullMethodName               = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
+	BackupService_GetBackup_FullMethodName                 = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup"
+	BackupService_CreateBackup_FullMethodName              = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
+	BackupService_DeleteBackup_FullMethodName              = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
+	BackupService_ListBackupRestores_FullMethodName        = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores"
+	BackupService_RestoreBackup_FullMethodName             = "/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup"
+	BackupService_ListBackupSchedules_FullMethodName       = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupSchedules"
+	BackupService_GetBackupSchedule_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupSchedule"
+	BackupService_CreateBackupSchedule_FullMethodName      = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackupSchedule"
+	BackupService_UpdateBackupSchedule_FullMethodName      = "/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackupSchedule"
+	BackupService_DeleteBackupSchedule_FullMethodName      = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackupSchedule"
+	BackupService_GetBackupClusterResources_FullMethodName = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupClusterResources"
 )
 
 // BackupServiceClient is the client API for BackupService service.
@@ -82,6 +83,11 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - delete:backup_schedules
 	DeleteBackupSchedule(ctx context.Context, in *DeleteBackupScheduleRequest, opts ...grpc.CallOption) (*DeleteBackupScheduleResponse, error)
+	// Retrieves the cluster configuration that was active when this backup was created.
+	// Useful to preview the configuration setup that will be restored.
+	// Required permissions:
+	// - read:backups
+	GetBackupClusterResources(ctx context.Context, in *GetBackupClusterResourcesRequest, opts ...grpc.CallOption) (*GetBackupClusterResourcesResponse, error)
 }
 
 type backupServiceClient struct {
@@ -202,6 +208,16 @@ func (c *backupServiceClient) DeleteBackupSchedule(ctx context.Context, in *Dele
 	return out, nil
 }
 
+func (c *backupServiceClient) GetBackupClusterResources(ctx context.Context, in *GetBackupClusterResourcesRequest, opts ...grpc.CallOption) (*GetBackupClusterResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackupClusterResourcesResponse)
+	err := c.cc.Invoke(ctx, BackupService_GetBackupClusterResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackupServiceServer is the server API for BackupService service.
 // All implementations must embed UnimplementedBackupServiceServer
 // for forward compatibility.
@@ -252,6 +268,11 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - delete:backup_schedules
 	DeleteBackupSchedule(context.Context, *DeleteBackupScheduleRequest) (*DeleteBackupScheduleResponse, error)
+	// Retrieves the cluster configuration that was active when this backup was created.
+	// Useful to preview the configuration setup that will be restored.
+	// Required permissions:
+	// - read:backups
+	GetBackupClusterResources(context.Context, *GetBackupClusterResourcesRequest) (*GetBackupClusterResourcesResponse, error)
 	mustEmbedUnimplementedBackupServiceServer()
 }
 
@@ -294,6 +315,9 @@ func (UnimplementedBackupServiceServer) UpdateBackupSchedule(context.Context, *U
 }
 func (UnimplementedBackupServiceServer) DeleteBackupSchedule(context.Context, *DeleteBackupScheduleRequest) (*DeleteBackupScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBackupSchedule not implemented")
+}
+func (UnimplementedBackupServiceServer) GetBackupClusterResources(context.Context, *GetBackupClusterResourcesRequest) (*GetBackupClusterResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackupClusterResources not implemented")
 }
 func (UnimplementedBackupServiceServer) mustEmbedUnimplementedBackupServiceServer() {}
 func (UnimplementedBackupServiceServer) testEmbeddedByValue()                       {}
@@ -514,6 +538,24 @@ func _BackupService_DeleteBackupSchedule_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackupService_GetBackupClusterResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackupClusterResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).GetBackupClusterResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_GetBackupClusterResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).GetBackupClusterResources(ctx, req.(*GetBackupClusterResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackupService_ServiceDesc is the grpc.ServiceDesc for BackupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -564,6 +606,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteBackupSchedule",
 			Handler:    _BackupService_DeleteBackupSchedule_Handler,
+		},
+		{
+			MethodName: "GetBackupClusterResources",
+			Handler:    _BackupService_GetBackupClusterResources_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

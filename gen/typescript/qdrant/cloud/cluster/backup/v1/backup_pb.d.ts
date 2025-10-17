@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
-import type { ClusterConfiguration, ClusterConfigurationValid } from "../../v1/cluster_pb.js";
+import type { ClusterConfiguration, ClusterConfigurationValid, ClusterNodeResourcesSummary, ClusterNodeResourcesSummaryValid } from "../../v1/cluster_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/backup/v1/backup.proto.
@@ -1176,6 +1176,71 @@ export declare type BackupRestoreValid = BackupRestore;
 export declare const BackupRestoreSchema: GenMessage<BackupRestore, {validType: BackupRestoreValid}>;
 
 /**
+ * GetBackupClusterResourcesRequest is the request for the GetBackupClusterResources function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesRequest
+ */
+export declare type GetBackupClusterResourcesRequest = Message<"qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the backup (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string backup_id = 2;
+   */
+  backupId: string;
+};
+
+export declare type GetBackupClusterResourcesRequestValid = GetBackupClusterResourcesRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesRequest.
+ * Use `create(GetBackupClusterResourcesRequestSchema)` to create a new message.
+ */
+export declare const GetBackupClusterResourcesRequestSchema: GenMessage<GetBackupClusterResourcesRequest, {validType: GetBackupClusterResourcesRequestValid}>;
+
+/**
+ * GetBackupClusterResourcesResponse is the response from the GetBackupClusterResources function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesResponse
+ */
+export declare type GetBackupClusterResourcesResponse = Message<"qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesResponse"> & {
+  /**
+   * The cluster resources that were active when the backup was created.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 1;
+   */
+  resources?: ClusterNodeResourcesSummary;
+};
+
+/**
+ * GetBackupClusterResourcesResponse is the response from the GetBackupClusterResources function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesResponse
+ */
+export declare type GetBackupClusterResourcesResponseValid = Message<"qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesResponse"> & {
+  /**
+   * The cluster resources that were active when the backup was created.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary resources = 1;
+   */
+  resources: ClusterNodeResourcesSummaryValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.GetBackupClusterResourcesResponse.
+ * Use `create(GetBackupClusterResourcesResponseSchema)` to create a new message.
+ */
+export declare const GetBackupClusterResourcesResponseSchema: GenMessage<GetBackupClusterResourcesResponse, {validType: GetBackupClusterResourcesResponseValid}>;
+
+/**
  * BackupStatus represents the current status of a backup operation.
  *
  * @generated from enum qdrant.cloud.cluster.backup.v1.BackupStatus
@@ -1481,6 +1546,19 @@ export declare const BackupService: GenService<{
     methodKind: "unary";
     input: typeof DeleteBackupScheduleRequestSchema;
     output: typeof DeleteBackupScheduleResponseSchema;
+  },
+  /**
+   * Retrieves the cluster configuration that was active when this backup was created.
+   * Useful to preview the configuration setup that will be restored.
+   * Required permissions:
+   * - read:backups
+   *
+   * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.GetBackupClusterResources
+   */
+  getBackupClusterResources: {
+    methodKind: "unary";
+    input: typeof GetBackupClusterResourcesRequestSchema;
+    output: typeof GetBackupClusterResourcesResponseSchema;
   },
 }>;
 
