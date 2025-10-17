@@ -19,6 +19,7 @@ meterings
 milli
 millicents
 millicore
+millicores
 multivector
 nvidia
 oneof

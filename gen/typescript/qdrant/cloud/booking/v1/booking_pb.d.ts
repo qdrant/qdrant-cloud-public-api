@@ -462,6 +462,101 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
+ * GetRecommendedPackageRequest is the request for the GetRecommendedPackage function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetRecommendedPackageRequest
+ */
+export declare type GetRecommendedPackageRequest = Message<"qdrant.cloud.booking.v1.GetRecommendedPackageRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId?: string;
+
+  /**
+   * The minimum amount of RAM required (expressed in GiB).
+   *
+   * @generated from field: optional uint32 min_ram = 4;
+   */
+  minRam?: number;
+
+  /**
+   * The minimum amount of CPU required (expressed in millicores - 1000m is 1vCPU).
+   *
+   * @generated from field: optional uint32 min_cpu = 5;
+   */
+  minCpu?: number;
+
+  /**
+   * The minimum amount of disk required (expressed in GiB).
+   *
+   * @generated from field: optional uint32 min_disk = 6;
+   */
+  minDisk?: number;
+};
+
+export declare type GetRecommendedPackageRequestValid = GetRecommendedPackageRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetRecommendedPackageRequest.
+ * Use `create(GetRecommendedPackageRequestSchema)` to create a new message.
+ */
+export declare const GetRecommendedPackageRequestSchema: GenMessage<GetRecommendedPackageRequest, {validType: GetRecommendedPackageRequestValid}>;
+
+/**
+ * GetRecommendedPackageResponse is the response from the GetRecommendedPackage function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetRecommendedPackageResponse
+ */
+export declare type GetRecommendedPackageResponse = Message<"qdrant.cloud.booking.v1.GetRecommendedPackageResponse"> & {
+  /**
+   * The primary recommended package.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.Package recommended_package = 1;
+   */
+  recommendedPackage?: Package;
+};
+
+/**
+ * GetRecommendedPackageResponse is the response from the GetRecommendedPackage function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetRecommendedPackageResponse
+ */
+export declare type GetRecommendedPackageResponseValid = Message<"qdrant.cloud.booking.v1.GetRecommendedPackageResponse"> & {
+  /**
+   * The primary recommended package.
+   *
+   * @generated from field: qdrant.cloud.booking.v1.Package recommended_package = 1;
+   */
+  recommendedPackage: PackageValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetRecommendedPackageResponse.
+ * Use `create(GetRecommendedPackageResponseSchema)` to create a new message.
+ */
+export declare const GetRecommendedPackageResponseSchema: GenMessage<GetRecommendedPackageResponse, {validType: GetRecommendedPackageResponseValid}>;
+
+/**
  * PackageStatus defines the valid states a package can be in.
  *
  * @generated from enum qdrant.cloud.booking.v1.PackageStatus
@@ -581,6 +676,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof GetQuoteRequestSchema;
     output: typeof GetQuoteResponseSchema;
+  },
+  /**
+   * Recommends the smallest package that can accommodate the specified resource requirements.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetRecommendedPackage
+   */
+  getRecommendedPackage: {
+    methodKind: "unary";
+    input: typeof GetRecommendedPackageRequestSchema;
+    output: typeof GetRecommendedPackageResponseSchema;
   },
 }>;
 

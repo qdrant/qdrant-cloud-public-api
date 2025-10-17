@@ -40,3 +40,12 @@ export const listGlobalPackages = BookingService.method.listGlobalPackages;
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
  */
 export const getQuote = BookingService.method.getQuote;
+
+/**
+ * Recommends the smallest package that can accommodate the specified resource requirements.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetRecommendedPackage
+ */
+export const getRecommendedPackage = BookingService.method.getRecommendedPackage;
