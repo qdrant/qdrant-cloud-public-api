@@ -601,7 +601,8 @@ message Permission {
   // The permission value (e.g., "read:clusters").
   string value = 1 [(buf.validate.field).string.min_len = 1];
   // The category of the permission (e.g., "Cluster", "Account").
-  string category = 2 [(buf.validate.field).string.min_len = 1];
+  // Optional in requests; server populates it in responses.
+  optional string category = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // A Role represents a role in the Qdrant cloud.

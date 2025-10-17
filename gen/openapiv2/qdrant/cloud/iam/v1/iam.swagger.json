@@ -928,7 +928,7 @@
         },
         "category": {
           "type": "string",
-          "description": "The category of the permission (e.g., \"Cluster\", \"Account\")."
+          "description": "The category of the permission (e.g., \"Cluster\", \"Account\").\nOptional in requests; server populates it in responses."
         }
       },
       "description": "A Permission represents a permission in the Qdrant cloud."

@@ -1852,7 +1852,8 @@ type Permission struct {
 	// The permission value (e.g., "read:clusters").
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	// The category of the permission (e.g., "Cluster", "Account").
-	Category      string `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`
+	// Optional in requests; server populates it in responses.
+	Category      *string `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1895,8 +1896,8 @@ func (x *Permission) GetValue() string {
 }
 
 func (x *Permission) GetCategory() string {
-	if x != nil {
-		return x.Category
+	if x != nil && x.Category != nil {
+		return *x.Category
 	}
 	return ""
 }
@@ -2271,11 +2272,12 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
 	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId:\xdd\x01\xbaH\xd9\x01\x1a\xd6\x01\n" +
-	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"P\n" +
+	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"b\n" +
 	"\n" +
 	"Permission\x12\x1d\n" +
-	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12#\n" +
-	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bcategory\"\x9b\a\n" +
+	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12(\n" +
+	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\bcategory\x88\x01\x01B\v\n" +
+	"\t_category\"\x9b\a\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2502,6 +2504,7 @@ func file_qdrant_cloud_iam_v1_iam_proto_init() {
 	if File_qdrant_cloud_iam_v1_iam_proto != nil {
 		return
 	}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[31].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[32].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35].OneofWrappers = []any{}
 	type x struct{}

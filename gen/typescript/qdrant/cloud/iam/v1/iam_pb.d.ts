@@ -920,10 +920,11 @@ export declare type Permission = Message<"qdrant.cloud.iam.v1.Permission"> & {
 
   /**
    * The category of the permission (e.g., "Cluster", "Account").
+   * Optional in requests; server populates it in responses.
    *
-   * @generated from field: string category = 2;
+   * @generated from field: optional string category = 2;
    */
-  category: string;
+  category?: string;
 };
 
 export declare type PermissionValid = Permission;
