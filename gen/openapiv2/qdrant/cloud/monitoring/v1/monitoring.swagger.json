@@ -59,7 +59,7 @@
           },
           {
             "name": "until",
-            "description": "Optional end time for the events query.\nIf omitted, defaults to current time.",
+            "description": "Optional end time for events query.\nIf omitted, defaults to 100.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -390,16 +390,20 @@
     "v1GetClusterEventsResponse": {
       "type": "object",
       "properties": {
-        "items": {
+        "hybridCloudId": {
+          "type": "string",
+          "title": "the id of the hybrid cloud environment"
+        },
+        "values": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1LogEntry"
           },
-          "description": "A list of entries representing events that have happened in the cluster."
+          "title": "values of the log"
         }
       },
-      "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
+      "description": "LogStream represents the source stream of the log entry."
     },
     "v1GetClusterLogsResponse": {
       "type": "object",
