@@ -184,9 +184,7 @@ class LogEntry(_message.Message):
     def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...
 
 class GetClusterEventsResponse(_message.Message):
-    __slots__ = ("hybrid_cloud_id", "values")
-    HYBRID_CLOUD_ID_FIELD_NUMBER: _ClassVar[int]
-    VALUES_FIELD_NUMBER: _ClassVar[int]
-    hybrid_cloud_id: str
-    values: _containers.RepeatedCompositeFieldContainer[LogEntry]
-    def __init__(self, hybrid_cloud_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[LogEntry]
+    def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...

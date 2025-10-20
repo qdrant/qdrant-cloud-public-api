@@ -390,20 +390,16 @@
     "v1GetClusterEventsResponse": {
       "type": "object",
       "properties": {
-        "hybridCloudId": {
-          "type": "string",
-          "title": "the id of the hybrid cloud environment"
-        },
-        "values": {
+        "items": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1LogEntry"
           },
-          "title": "values of the log"
+          "description": "A list of log entries from the cluster."
         }
       },
-      "description": "LogStream represents the source stream of the log entry."
+      "description": "GetClusterEventsResponse is the response from GetClusterEvents function."
     },
     "v1GetClusterLogsResponse": {
       "type": "object",

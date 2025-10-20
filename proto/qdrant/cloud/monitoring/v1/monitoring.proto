@@ -264,12 +264,10 @@ message LogEntry {
   string message = 2 [(buf.validate.field).string.min_len = 1];
 }
 
-// LogStream represents the source stream of the log entry.
+// GetClusterEventsResponse is the response from GetClusterEvents function.
 message GetClusterEventsResponse {
-  // the id of the hybrid cloud environment
-  string hybrid_cloud_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // values of the log
-  repeated LogEntry values = 2;
+  // A list of log entries from the cluster.
+  repeated LogEntry items = 1;
 }
 
 // Aggregator defines how metrics should be aggregated over time.

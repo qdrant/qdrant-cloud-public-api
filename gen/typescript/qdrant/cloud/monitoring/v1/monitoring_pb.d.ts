@@ -869,45 +869,31 @@ export declare type LogEntryValid = Message<"qdrant.cloud.monitoring.v1.LogEntry
 export declare const LogEntrySchema: GenMessage<LogEntry, {validType: LogEntryValid}>;
 
 /**
- * LogStream represents the source stream of the log entry.
+ * GetClusterEventsResponse is the response from GetClusterEvents function.
  *
  * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
  */
 export declare type GetClusterEventsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
   /**
-   * the id of the hybrid cloud environment
+   * A list of log entries from the cluster.
    *
-   * @generated from field: string hybrid_cloud_id = 1;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
    */
-  hybridCloudId: string;
-
-  /**
-   * values of the log
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry values = 2;
-   */
-  values: LogEntry[];
+  items: LogEntry[];
 };
 
 /**
- * LogStream represents the source stream of the log entry.
+ * GetClusterEventsResponse is the response from GetClusterEvents function.
  *
  * @generated from message qdrant.cloud.monitoring.v1.GetClusterEventsResponse
  */
 export declare type GetClusterEventsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterEventsResponse"> & {
   /**
-   * the id of the hybrid cloud environment
+   * A list of log entries from the cluster.
    *
-   * @generated from field: string hybrid_cloud_id = 1;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry items = 1;
    */
-  hybridCloudId: string;
-
-  /**
-   * values of the log
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.LogEntry values = 2;
-   */
-  values: LogEntryValid[];
+  items: LogEntryValid[];
 };
 
 /**
