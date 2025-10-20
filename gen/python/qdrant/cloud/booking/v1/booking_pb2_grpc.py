@@ -35,11 +35,6 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
                 _registered_method=True)
-        self.GetRecommendedPackage = channel.unary_unary(
-                '/qdrant.cloud.booking.v1.BookingService/GetRecommendedPackage',
-                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageResponse.FromString,
-                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -84,15 +79,6 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetRecommendedPackage(self, request, context):
-        """Recommends the smallest package that can accommodate the specified resource requirements.
-        Required permissions:
-        - None (authenticated only)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -115,11 +101,6 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.GetQuote,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.SerializeToString,
-            ),
-            'GetRecommendedPackage': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetRecommendedPackage,
-                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -231,33 +212,6 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/GetQuote',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetRecommendedPackage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.booking.v1.BookingService/GetRecommendedPackage',
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageRequest.SerializeToString,
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetRecommendedPackageResponse.FromString,
             options,
             channel_credentials,
             insecure,

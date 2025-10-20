@@ -145,9 +145,12 @@ type ListPackagesRequest struct {
 	CloudProviderRegionId *string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
 	// The status of the packages to filter.
 	// This is an optional field. If value is not set, only active packages are returned.
-	Statuses      []PackageStatus `protobuf:"varint,4,rep,packed,name=statuses,proto3,enum=qdrant.cloud.booking.v1.PackageStatus" json:"statuses,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Statuses []PackageStatus `protobuf:"varint,4,rep,packed,name=statuses,proto3,enum=qdrant.cloud.booking.v1.PackageStatus" json:"statuses,omitempty"`
+	// The minimum resource configuration required.
+	// This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+	MinResourceConfiguration *ResourceConfiguration `protobuf:"bytes,5,opt,name=min_resource_configuration,json=minResourceConfiguration,proto3,oneof" json:"min_resource_configuration,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListPackagesRequest) Reset() {
@@ -208,6 +211,13 @@ func (x *ListPackagesRequest) GetStatuses() []PackageStatus {
 	return nil
 }
 
+func (x *ListPackagesRequest) GetMinResourceConfiguration() *ResourceConfiguration {
+	if x != nil {
+		return x.MinResourceConfiguration
+	}
+	return nil
+}
+
 // ListPackagesResponse is the response from the ListPackages function
 type ListPackagesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -264,8 +274,11 @@ type ListGlobalPackagesRequest struct {
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
 	// Field can be omitted, if cloud_provider_id is `hybrid`
 	CloudProviderRegionId *string `protobuf:"bytes,2,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// The minimum resource configuration required.
+	// This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+	MinResourceConfiguration *ResourceConfiguration `protobuf:"bytes,3,opt,name=min_resource_configuration,json=minResourceConfiguration,proto3,oneof" json:"min_resource_configuration,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListGlobalPackagesRequest) Reset() {
@@ -310,6 +323,13 @@ func (x *ListGlobalPackagesRequest) GetCloudProviderRegionId() string {
 		return *x.CloudProviderRegionId
 	}
 	return ""
+}
+
+func (x *ListGlobalPackagesRequest) GetMinResourceConfiguration() *ResourceConfiguration {
+	if x != nil {
+		return x.MinResourceConfiguration
+	}
+	return nil
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -879,167 +899,30 @@ func (x *GetQuoteResponse) GetDiscountPercentage() float64 {
 	return 0
 }
 
-// GetRecommendedPackageRequest is the request for the GetRecommendedPackage function
-type GetRecommendedPackageRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in GUID format).
-	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The cloud provider where the cluster will be hosted.
-	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// The cloud region where the cluster will be hosted.
-	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-	// This field can be omitted if `cloud_provider_id` is set to `hybrid`.
-	CloudProviderRegionId *string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
-	// The minimum amount of RAM required (expressed in GiB).
-	MinRam *uint32 `protobuf:"varint,4,opt,name=min_ram,json=minRam,proto3,oneof" json:"min_ram,omitempty"`
-	// The minimum amount of CPU required (expressed in millicores - 1000m is 1vCPU).
-	MinCpu *uint32 `protobuf:"varint,5,opt,name=min_cpu,json=minCpu,proto3,oneof" json:"min_cpu,omitempty"`
-	// The minimum amount of disk required (expressed in GiB).
-	MinDisk       *uint32 `protobuf:"varint,6,opt,name=min_disk,json=minDisk,proto3,oneof" json:"min_disk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetRecommendedPackageRequest) Reset() {
-	*x = GetRecommendedPackageRequest{}
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetRecommendedPackageRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRecommendedPackageRequest) ProtoMessage() {}
-
-func (x *GetRecommendedPackageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRecommendedPackageRequest.ProtoReflect.Descriptor instead.
-func (*GetRecommendedPackageRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetRecommendedPackageRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *GetRecommendedPackageRequest) GetCloudProviderId() string {
-	if x != nil {
-		return x.CloudProviderId
-	}
-	return ""
-}
-
-func (x *GetRecommendedPackageRequest) GetCloudProviderRegionId() string {
-	if x != nil && x.CloudProviderRegionId != nil {
-		return *x.CloudProviderRegionId
-	}
-	return ""
-}
-
-func (x *GetRecommendedPackageRequest) GetMinRam() uint32 {
-	if x != nil && x.MinRam != nil {
-		return *x.MinRam
-	}
-	return 0
-}
-
-func (x *GetRecommendedPackageRequest) GetMinCpu() uint32 {
-	if x != nil && x.MinCpu != nil {
-		return *x.MinCpu
-	}
-	return 0
-}
-
-func (x *GetRecommendedPackageRequest) GetMinDisk() uint32 {
-	if x != nil && x.MinDisk != nil {
-		return *x.MinDisk
-	}
-	return 0
-}
-
-// GetRecommendedPackageResponse is the response from the GetRecommendedPackage function
-type GetRecommendedPackageResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The primary recommended package.
-	RecommendedPackage *Package `protobuf:"bytes,1,opt,name=recommended_package,json=recommendedPackage,proto3" json:"recommended_package,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *GetRecommendedPackageResponse) Reset() {
-	*x = GetRecommendedPackageResponse{}
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetRecommendedPackageResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRecommendedPackageResponse) ProtoMessage() {}
-
-func (x *GetRecommendedPackageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRecommendedPackageResponse.ProtoReflect.Descriptor instead.
-func (*GetRecommendedPackageResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *GetRecommendedPackageResponse) GetRecommendedPackage() *Package {
-	if x != nil {
-		return x.RecommendedPackage
-	}
-	return nil
-}
-
 var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xec\x03\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xfe\x04\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
-	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses\x12q\n" +
+	"\x1amin_resource_configuration\x18\x05 \x01(\v2..qdrant.cloud.booking.v1.ResourceConfigurationH\x01R\x18minResourceConfiguration\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
-	"\x19_cloud_provider_region_id\"N\n" +
+	"\x19_cloud_provider_region_idB\x1d\n" +
+	"\x1b_min_resource_configuration\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x8c\x03\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x9e\x04\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
 	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
-	"\x18cloud_provider_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
+	"\x18cloud_provider_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12q\n" +
+	"\x1amin_resource_configuration\x18\x03 \x01(\v2..qdrant.cloud.booking.v1.ResourceConfigurationH\x01R\x18minResourceConfiguration\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
 	"5list_global_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
-	"\x19_cloud_provider_region_id\"T\n" +
+	"\x19_cloud_provider_region_idB\x1d\n" +
+	"\x1b_min_resource_configuration\"T\n" +
 	"\x1aListGlobalPackagesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"V\n" +
 	"\x11GetPackageRequest\x12'\n" +
@@ -1084,25 +967,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"^[A-Z]{3}$R\bcurrency\x12>\n" +
 	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12B\n" +
 	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12H\n" +
-	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage\"\x88\x06\n" +
-	"\x1cGetRecommendedPackageRequest\x12'\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
-	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
-	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12%\n" +
-	"\amin_ram\x18\x04 \x01(\rB\a\xbaH\x04*\x02(\x01H\x01R\x06minRam\x88\x01\x01\x12%\n" +
-	"\amin_cpu\x18\x05 \x01(\rB\a\xbaH\x04*\x02(\x01H\x02R\x06minCpu\x88\x01\x01\x12'\n" +
-	"\bmin_disk\x18\x06 \x01(\rB\a\xbaH\x04*\x02(\x01H\x03R\aminDisk\x88\x01\x01:\x89\x03\xbaH\x85\x03\x1a\xd1\x01\n" +
-	"8get_recommended_package.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)\x1a\xae\x01\n" +
-	"-get_recommended_package.at_least_one_resource\x12?At least one of min_ram, min_cpu, or min_disk must be provided.\x1a<has(this.min_ram) || has(this.min_cpu) || has(this.min_disk)B\x1b\n" +
-	"\x19_cloud_provider_region_idB\n" +
-	"\n" +
-	"\b_min_ramB\n" +
-	"\n" +
-	"\b_min_cpuB\v\n" +
-	"\t_min_disk\"z\n" +
-	"\x1dGetRecommendedPackageResponse\x12Y\n" +
-	"\x13recommended_package\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\x12recommendedPackage*j\n" +
+	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage*j\n" +
 	"\rPackageStatus\x12\x1e\n" +
 	"\x1aPACKAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
@@ -1110,7 +975,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\vPackageTier\x12#\n" +
 	"\x1fPACKAGE_TIER_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_TIER_STANDARD\x10\x01\x12\x18\n" +
-	"\x14PACKAGE_TIER_PREMIUM\x10\x022\xe2\b\n" +
+	"\x14PACKAGE_TIER_PREMIUM\x10\x022\x8f\a\n" +
 	"\x0eBookingService\x12\x8a\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -1122,8 +987,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
 	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\xa9\x01\n" +
-	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xd0\x01\n" +
-	"\x15GetRecommendedPackage\x125.qdrant.cloud.booking.v1.GetRecommendedPackageRequest\x1a6.qdrant.cloud.booking.v1.GetRecommendedPackageResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>:\x01*\"9/api/booking/v1/accounts/{account_id}/recommended-packageB\xfe\x01\n" +
+	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quoteB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
 var (
@@ -1139,49 +1003,46 @@ func file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_booking_v1_booking_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_qdrant_cloud_booking_v1_booking_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_qdrant_cloud_booking_v1_booking_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
-	(PackageStatus)(0),                    // 0: qdrant.cloud.booking.v1.PackageStatus
-	(PackageTier)(0),                      // 1: qdrant.cloud.booking.v1.PackageTier
-	(*ListPackagesRequest)(nil),           // 2: qdrant.cloud.booking.v1.ListPackagesRequest
-	(*ListPackagesResponse)(nil),          // 3: qdrant.cloud.booking.v1.ListPackagesResponse
-	(*ListGlobalPackagesRequest)(nil),     // 4: qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	(*ListGlobalPackagesResponse)(nil),    // 5: qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	(*GetPackageRequest)(nil),             // 6: qdrant.cloud.booking.v1.GetPackageRequest
-	(*GetPackageResponse)(nil),            // 7: qdrant.cloud.booking.v1.GetPackageResponse
-	(*Package)(nil),                       // 8: qdrant.cloud.booking.v1.Package
-	(*AvailableAdditionalResources)(nil),  // 9: qdrant.cloud.booking.v1.AvailableAdditionalResources
-	(*ResourceConfiguration)(nil),         // 10: qdrant.cloud.booking.v1.ResourceConfiguration
-	(*GetQuoteRequest)(nil),               // 11: qdrant.cloud.booking.v1.GetQuoteRequest
-	(*GetQuoteResponse)(nil),              // 12: qdrant.cloud.booking.v1.GetQuoteResponse
-	(*GetRecommendedPackageRequest)(nil),  // 13: qdrant.cloud.booking.v1.GetRecommendedPackageRequest
-	(*GetRecommendedPackageResponse)(nil), // 14: qdrant.cloud.booking.v1.GetRecommendedPackageResponse
+	(PackageStatus)(0),                   // 0: qdrant.cloud.booking.v1.PackageStatus
+	(PackageTier)(0),                     // 1: qdrant.cloud.booking.v1.PackageTier
+	(*ListPackagesRequest)(nil),          // 2: qdrant.cloud.booking.v1.ListPackagesRequest
+	(*ListPackagesResponse)(nil),         // 3: qdrant.cloud.booking.v1.ListPackagesResponse
+	(*ListGlobalPackagesRequest)(nil),    // 4: qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+	(*ListGlobalPackagesResponse)(nil),   // 5: qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+	(*GetPackageRequest)(nil),            // 6: qdrant.cloud.booking.v1.GetPackageRequest
+	(*GetPackageResponse)(nil),           // 7: qdrant.cloud.booking.v1.GetPackageResponse
+	(*Package)(nil),                      // 8: qdrant.cloud.booking.v1.Package
+	(*AvailableAdditionalResources)(nil), // 9: qdrant.cloud.booking.v1.AvailableAdditionalResources
+	(*ResourceConfiguration)(nil),        // 10: qdrant.cloud.booking.v1.ResourceConfiguration
+	(*GetQuoteRequest)(nil),              // 11: qdrant.cloud.booking.v1.GetQuoteRequest
+	(*GetQuoteResponse)(nil),             // 12: qdrant.cloud.booking.v1.GetQuoteResponse
 }
 var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	0,  // 0: qdrant.cloud.booking.v1.ListPackagesRequest.statuses:type_name -> qdrant.cloud.booking.v1.PackageStatus
-	8,  // 1: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	8,  // 2: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	8,  // 3: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
-	10, // 4: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
-	0,  // 5: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
-	1,  // 6: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
-	9,  // 7: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
-	8,  // 8: qdrant.cloud.booking.v1.GetRecommendedPackageResponse.recommended_package:type_name -> qdrant.cloud.booking.v1.Package
-	2,  // 9: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
-	6,  // 10: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
-	4,  // 11: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	11, // 12: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
-	13, // 13: qdrant.cloud.booking.v1.BookingService.GetRecommendedPackage:input_type -> qdrant.cloud.booking.v1.GetRecommendedPackageRequest
+	10, // 1: qdrant.cloud.booking.v1.ListPackagesRequest.min_resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
+	8,  // 2: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	10, // 3: qdrant.cloud.booking.v1.ListGlobalPackagesRequest.min_resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
+	8,  // 4: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	8,  // 5: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
+	10, // 6: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
+	0,  // 7: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
+	1,  // 8: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
+	9,  // 9: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
+	2,  // 10: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
+	6,  // 11: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
+	4,  // 12: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+	11, // 13: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
 	3,  // 14: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
 	7,  // 15: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
 	5,  // 16: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
 	12, // 17: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
-	14, // 18: qdrant.cloud.booking.v1.BookingService.GetRecommendedPackage:output_type -> qdrant.cloud.booking.v1.GetRecommendedPackageResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	14, // [14:18] is the sub-list for method output_type
+	10, // [10:14] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_booking_v1_booking_proto_init() }
@@ -1193,14 +1054,13 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[9].OneofWrappers = []any{}
-	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_booking_v1_booking_proto_rawDesc), len(file_qdrant_cloud_booking_v1_booking_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   13,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -71,6 +71,27 @@
               ]
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "minResourceConfiguration.ram",
+            "description": "The amount of RAM (e.g., \"1GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResourceConfiguration.cpu",
+            "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResourceConfiguration.disk",
+            "description": "The amount of disk (e.g., \"100GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -157,46 +178,6 @@
         ]
       }
     },
-    "/api/booking/v1/accounts/{accountId}/recommended-package": {
-      "post": {
-        "summary": "Recommends the smallest package that can accommodate the specified resource requirements.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "BookingService_GetRecommendedPackage",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetRecommendedPackageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BookingServiceGetRecommendedPackageBody"
-            }
-          }
-        ],
-        "tags": [
-          "BookingService"
-        ]
-      }
-    },
     "/api/booking/v1/packages": {
       "get": {
         "summary": "Lists all public packages.\nAuthentication not required",
@@ -226,6 +207,27 @@
           {
             "name": "cloudProviderRegionId",
             "description": "Filter specifying the cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nField can be omitted, if cloud_provider_id is `hybrid`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResourceConfiguration.ram",
+            "description": "The amount of RAM (e.g., \"1GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResourceConfiguration.cpu",
+            "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResourceConfiguration.disk",
+            "description": "The amount of disk (e.g., \"100GiB\")",
             "in": "query",
             "required": false,
             "type": "string"
@@ -265,35 +267,6 @@
         }
       },
       "title": "GetQuoteRequest is the request for the GetQuote function"
-    },
-    "BookingServiceGetRecommendedPackageBody": {
-      "type": "object",
-      "properties": {
-        "cloudProviderId": {
-          "type": "string",
-          "description": "The cloud provider where the cluster will be hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method."
-        },
-        "cloudProviderRegionId": {
-          "type": "string",
-          "description": "The cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nThis field can be omitted if `cloud_provider_id` is set to `hybrid`."
-        },
-        "minRam": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The minimum amount of RAM required (expressed in GiB)."
-        },
-        "minCpu": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The minimum amount of CPU required (expressed in millicores - 1000m is 1vCPU)."
-        },
-        "minDisk": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The minimum amount of disk required (expressed in GiB)."
-        }
-      },
-      "title": "GetRecommendedPackageRequest is the request for the GetRecommendedPackage function"
     },
     "googlerpcStatus": {
       "type": "object",
@@ -368,16 +341,6 @@
         }
       },
       "title": "GetQuoteResponse is the response from the GetQuote function"
-    },
-    "v1GetRecommendedPackageResponse": {
-      "type": "object",
-      "properties": {
-        "recommendedPackage": {
-          "$ref": "#/definitions/v1Package",
-          "description": "The primary recommended package."
-        }
-      },
-      "title": "GetRecommendedPackageResponse is the response from the GetRecommendedPackage function"
     },
     "v1ListGlobalPackagesResponse": {
       "type": "object",

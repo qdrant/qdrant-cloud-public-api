@@ -72,18 +72,6 @@ service BookingService {
       body: "*"
     };
   }
-  // Recommends the smallest package that can accommodate the specified resource requirements.
-  // Required permissions:
-  // - None (authenticated only)
-  rpc GetRecommendedPackage(GetRecommendedPackageRequest) returns (GetRecommendedPackageResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      post: "/api/booking/v1/accounts/{account_id}/recommended-package"
-      body: "*"
-    };
-  }
 }
 
 // ListPackagesRequest is the request for the ListPackages function
@@ -106,6 +94,9 @@ message ListPackagesRequest {
   // The status of the packages to filter.
   // This is an optional field. If value is not set, only active packages are returned.
   repeated PackageStatus statuses = 4;
+  // The minimum resource configuration required.
+  // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+  optional ResourceConfiguration min_resource_configuration = 5;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -129,6 +120,9 @@ message ListGlobalPackagesRequest {
     message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
     expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
   };
+  // The minimum resource configuration required.
+  // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+  optional ResourceConfiguration min_resource_configuration = 3;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -290,40 +284,4 @@ message GetQuoteResponse {
     gte: 0.0
     lte: 100.0
   }];
-}
-
-// GetRecommendedPackageRequest is the request for the GetRecommendedPackage function
-message GetRecommendedPackageRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The cloud provider where the cluster will be hosted.
-  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
-  // The cloud region where the cluster will be hosted.
-  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-  // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
-  optional string cloud_provider_region_id = 3 [(buf.validate.field).string = {min_len: 1}];
-  option (buf.validate.message).cel = {
-    id: "get_recommended_package.cloud_provider_region_id_present"
-    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
-    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
-  };
-  // The minimum amount of RAM required (expressed in GiB).
-  optional uint32 min_ram = 4 [(buf.validate.field).uint32 = {gte: 1}];
-  // The minimum amount of CPU required (expressed in millicores - 1000m is 1vCPU).
-  optional uint32 min_cpu = 5 [(buf.validate.field).uint32 = {gte: 1}];
-  // The minimum amount of disk required (expressed in GiB).
-  optional uint32 min_disk = 6 [(buf.validate.field).uint32 = {gte: 1}];
-  option (buf.validate.message).cel = {
-    id: "get_recommended_package.at_least_one_resource"
-    message: "At least one of min_ram, min_cpu, or min_disk must be provided."
-    expression: "has(this.min_ram) || has(this.min_cpu) || has(this.min_disk)"
-  };
-}
-
-// GetRecommendedPackageResponse is the response from the GetRecommendedPackage function
-message GetRecommendedPackageResponse {
-  // The primary recommended package.
-  Package recommended_package = 1 [(buf.validate.field).required = true];
 }

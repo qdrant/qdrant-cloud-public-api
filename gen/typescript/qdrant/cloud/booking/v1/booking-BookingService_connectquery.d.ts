@@ -37,11 +37,3 @@ export const listGlobalPackages: typeof BookingService["method"]["listGlobalPack
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
  */
 export const getQuote: typeof BookingService["method"]["getQuote"];
-/**
- * Recommends the smallest package that can accommodate the specified resource requirements.
- * Required permissions:
- * - None (authenticated only)
- *
- * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetRecommendedPackage
- */
-export const getRecommendedPackage: typeof BookingService["method"]["getRecommendedPackage"];

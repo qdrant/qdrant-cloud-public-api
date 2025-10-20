@@ -19,11 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName          = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName            = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
-	BookingService_ListGlobalPackages_FullMethodName    = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
-	BookingService_GetQuote_FullMethodName              = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
-	BookingService_GetRecommendedPackage_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/GetRecommendedPackage"
+	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
+	BookingService_GetQuote_FullMethodName           = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -49,10 +48,6 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
-	// Recommends the smallest package that can accommodate the specified resource requirements.
-	// Required permissions:
-	// - None (authenticated only)
-	GetRecommendedPackage(ctx context.Context, in *GetRecommendedPackageRequest, opts ...grpc.CallOption) (*GetRecommendedPackageResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -103,16 +98,6 @@ func (c *bookingServiceClient) GetQuote(ctx context.Context, in *GetQuoteRequest
 	return out, nil
 }
 
-func (c *bookingServiceClient) GetRecommendedPackage(ctx context.Context, in *GetRecommendedPackageRequest, opts ...grpc.CallOption) (*GetRecommendedPackageResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRecommendedPackageResponse)
-	err := c.cc.Invoke(ctx, BookingService_GetRecommendedPackage_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -136,10 +121,6 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
-	// Recommends the smallest package that can accommodate the specified resource requirements.
-	// Required permissions:
-	// - None (authenticated only)
-	GetRecommendedPackage(context.Context, *GetRecommendedPackageRequest) (*GetRecommendedPackageResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -161,9 +142,6 @@ func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *Li
 }
 func (UnimplementedBookingServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQuote not implemented")
-}
-func (UnimplementedBookingServiceServer) GetRecommendedPackage(context.Context, *GetRecommendedPackageRequest) (*GetRecommendedPackageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendedPackage not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -258,24 +236,6 @@ func _BookingService_GetQuote_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BookingService_GetRecommendedPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRecommendedPackageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BookingServiceServer).GetRecommendedPackage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BookingService_GetRecommendedPackage_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookingServiceServer).GetRecommendedPackage(ctx, req.(*GetRecommendedPackageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -298,10 +258,6 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetQuote",
 			Handler:    _BookingService_GetQuote_Handler,
-		},
-		{
-			MethodName: "GetRecommendedPackage",
-			Handler:    _BookingService_GetRecommendedPackage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

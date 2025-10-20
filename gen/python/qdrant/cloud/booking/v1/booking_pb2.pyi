@@ -29,16 +29,18 @@ PACKAGE_TIER_STANDARD: PackageTier
 PACKAGE_TIER_PREMIUM: PackageTier
 
 class ListPackagesRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses")
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses", "min_resource_configuration")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     STATUSES_FIELD_NUMBER: _ClassVar[int]
+    MIN_RESOURCE_CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ...) -> None: ...
+    min_resource_configuration: ResourceConfiguration
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ("items",)
@@ -47,12 +49,14 @@ class ListPackagesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
 
 class ListGlobalPackagesRequest(_message.Message):
-    __slots__ = ("cloud_provider_id", "cloud_provider_region_id")
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "min_resource_configuration")
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    MIN_RESOURCE_CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
     cloud_provider_region_id: str
-    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
+    min_resource_configuration: ResourceConfiguration
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ...) -> None: ...
 
 class ListGlobalPackagesResponse(_message.Message):
     __slots__ = ("items",)
@@ -139,25 +143,3 @@ class GetQuoteResponse(_message.Message):
     discounted_price_per_hour: int
     discount_percentage: float
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
-
-class GetRecommendedPackageRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "min_ram", "min_cpu", "min_disk")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
-    MIN_RAM_FIELD_NUMBER: _ClassVar[int]
-    MIN_CPU_FIELD_NUMBER: _ClassVar[int]
-    MIN_DISK_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    cloud_provider_id: str
-    cloud_provider_region_id: str
-    min_ram: int
-    min_cpu: int
-    min_disk: int
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_ram: _Optional[int] = ..., min_cpu: _Optional[int] = ..., min_disk: _Optional[int] = ...) -> None: ...
-
-class GetRecommendedPackageResponse(_message.Message):
-    __slots__ = ("recommended_package",)
-    RECOMMENDED_PACKAGE_FIELD_NUMBER: _ClassVar[int]
-    recommended_package: Package
-    def __init__(self, recommended_package: _Optional[_Union[Package, _Mapping]] = ...) -> None: ...
