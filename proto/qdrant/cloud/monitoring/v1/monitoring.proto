@@ -177,7 +177,7 @@ message GetClusterEventsRequest {
   // If omitted, defaults to 7 days ago.
   optional google.protobuf.Timestamp since = 3;
   // Optional end time for events query.
-  // If omitted, defaults to 100.
+  // If omitted, defaults to NOW.
   optional google.protobuf.Timestamp until = 4;
 }
 
