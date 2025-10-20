@@ -73,21 +73,21 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "minResourceConfiguration.ram",
+            "name": "minResources.ram",
             "description": "The amount of RAM (e.g., \"1GiB\")",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "minResourceConfiguration.cpu",
+            "name": "minResources.cpu",
             "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "minResourceConfiguration.disk",
+            "name": "minResources.disk",
             "description": "The amount of disk (e.g., \"100GiB\")",
             "in": "query",
             "required": false,
@@ -212,21 +212,21 @@
             "type": "string"
           },
           {
-            "name": "minResourceConfiguration.ram",
+            "name": "minResources.ram",
             "description": "The amount of RAM (e.g., \"1GiB\")",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "minResourceConfiguration.cpu",
+            "name": "minResources.cpu",
             "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "minResourceConfiguration.disk",
+            "name": "minResources.disk",
             "description": "The amount of disk (e.g., \"100GiB\")",
             "in": "query",
             "required": false,

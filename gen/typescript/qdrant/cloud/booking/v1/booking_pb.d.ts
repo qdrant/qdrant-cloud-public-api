@@ -53,9 +53,9 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
    * The minimum resource configuration required.
    * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
    *
-   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfiguration min_resource_configuration = 5;
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfiguration min_resources = 5;
    */
-  minResourceConfiguration?: ResourceConfiguration;
+  minResources?: ResourceConfiguration;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;
@@ -115,9 +115,9 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
    * The minimum resource configuration required.
    * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
    *
-   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfiguration min_resource_configuration = 3;
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfiguration min_resources = 3;
    */
-  minResourceConfiguration?: ResourceConfiguration;
+  minResources?: ResourceConfiguration;
 };
 
 export declare type ListGlobalPackagesRequestValid = ListGlobalPackagesRequest;
