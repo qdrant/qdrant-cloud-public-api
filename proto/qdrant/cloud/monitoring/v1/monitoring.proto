@@ -179,6 +179,12 @@ message GetClusterEventsRequest {
   // Optional end time for events query.
   // If omitted, defaults to NOW.
   optional google.protobuf.Timestamp until = 4;
+
+  option (buf.validate.message).cel = {
+    id: "get_cluster_events.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
 }
 
 // ClusterNodeMetrics contains metric overview for a node.

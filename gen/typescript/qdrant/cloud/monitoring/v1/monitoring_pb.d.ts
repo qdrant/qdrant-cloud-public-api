@@ -394,7 +394,7 @@ export declare type GetClusterEventsRequest = Message<"qdrant.cloud.monitoring.v
 
   /**
    * Optional end time for events query.
-   * If omitted, defaults to 100.
+   * If omitted, defaults to NOW.
    *
    * @generated from field: optional google.protobuf.Timestamp until = 4;
    */

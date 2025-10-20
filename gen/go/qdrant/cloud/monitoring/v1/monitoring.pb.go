@@ -535,7 +535,7 @@ type GetClusterEventsRequest struct {
 	// If omitted, defaults to 7 days ago.
 	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3,oneof" json:"since,omitempty"`
 	// Optional end time for events query.
-	// If omitted, defaults to 100.
+	// If omitted, defaults to NOW.
 	Until         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1178,14 +1178,15 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"T\n" +
 	"\x16GetClusterLogsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xed\x01\n" +
+	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xf5\x02\n" +
 	"\x17GetClusterEventsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01B\b\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01:\x85\x01\xbaH\x81\x01\x1a\x7f\n" +
+	"!get_cluster_events.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"\xac\x04\n" +
 	"\x12ClusterNodeMetrics\x12 \n" +
