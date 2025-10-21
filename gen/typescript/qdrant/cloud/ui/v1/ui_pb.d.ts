@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Role, RoleValid, User, UserValid } from "../../iam/v1/iam_pb.js";
+import type { RoleResponse, RoleResponseValid, User, UserValid } from "../../iam/v1/iam_pb.js";
 
 /**
  * Describes the file qdrant/cloud/ui/v1/ui.proto.
@@ -85,9 +85,9 @@ export declare type UserWithRoles = Message<"qdrant.cloud.ui.v1.UserWithRoles"> 
    * The roles assigned to this user.
    * If the user has no roles assigned, this list will be empty.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Role roles = 2;
+   * @generated from field: repeated qdrant.cloud.iam.v1.RoleResponse roles = 2;
    */
-  roles: Role[];
+  roles: RoleResponse[];
 };
 
 /**
@@ -107,9 +107,9 @@ export declare type UserWithRolesValid = Message<"qdrant.cloud.ui.v1.UserWithRol
    * The roles assigned to this user.
    * If the user has no roles assigned, this list will be empty.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Role roles = 2;
+   * @generated from field: repeated qdrant.cloud.iam.v1.RoleResponse roles = 2;
    */
-  roles: RoleValid[];
+  roles: RoleResponseValid[];
 };
 
 /**

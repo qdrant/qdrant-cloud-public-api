@@ -27,5 +27,5 @@ class UserWithRoles(_message.Message):
     USER_FIELD_NUMBER: _ClassVar[int]
     ROLES_FIELD_NUMBER: _ClassVar[int]
     user: _iam_pb2.User
-    roles: _containers.RepeatedCompositeFieldContainer[_iam_pb2.Role]
-    def __init__(self, user: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., roles: _Optional[_Iterable[_Union[_iam_pb2.Role, _Mapping]]] = ...) -> None: ...
+    roles: _containers.RepeatedCompositeFieldContainer[_iam_pb2.RoleResponse]
+    def __init__(self, user: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., roles: _Optional[_Iterable[_Union[_iam_pb2.RoleResponse, _Mapping]]] = ...) -> None: ...

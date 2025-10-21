@@ -389,7 +389,7 @@ message ListPermissionsRequest {
 // ListPermissionsResponse is the response from the ListPermissions function
 message ListPermissionsResponse {
   // The permissions known by the system.
-  repeated Permission permissions = 1 [(buf.validate.field).repeated.min_items = 1];
+  repeated PermissionResponse permissions = 1 [(buf.validate.field).repeated.min_items = 1];
 }
 
 // ListRolesRequest is the request for the ListRoles function
@@ -402,7 +402,7 @@ message ListRolesRequest {
 // ListRolesResponse is the response from the ListRoles function
 message ListRolesResponse {
   // The actual roles in this list.
-  repeated Role items = 1;
+  repeated RoleResponse items = 1;
 }
 
 // GetRoleRequest is the request for the GetRole function
@@ -418,13 +418,13 @@ message GetRoleRequest {
 // GetRoleResponse is the response from the GetRole function
 message GetRoleResponse {
   // The actual role.
-  Role role = 1 [(buf.validate.field).required = true];
+  RoleResponse role = 1 [(buf.validate.field).required = true];
 }
 
 // CreateRoleRequest is the request for the CreateRole function.
 message CreateRoleRequest {
   // The actual role.
-  Role role = 1 [(buf.validate.field).required = true];
+  RoleRequest role = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_role.role_type"
     message: "role.role_type must be ROLE_TYPE_CUSTOM"
@@ -440,13 +440,13 @@ message CreateRoleRequest {
 // CreateRoleResponse is the response from the CreateRole function.
 message CreateRoleResponse {
   // The actual role.
-  Role role = 1 [(buf.validate.field).required = true];
+  RoleResponse role = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateRoleRequest is the request for the UpdateRole function.
 message UpdateRoleRequest {
   // The actual role.
-  Role role = 1 [(buf.validate.field).required = true];
+  RoleRequest role = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "update_role.id_present"
     message: "role.id is required for an update"
@@ -462,7 +462,7 @@ message UpdateRoleRequest {
 // UpdateRoleResponse is the response from the UpdateRole function.
 message UpdateRoleResponse {
   // The actual role.
-  Role role = 1 [(buf.validate.field).required = true];
+  RoleResponse role = 1 [(buf.validate.field).required = true];
 }
 
 // DeleteRoleRequest is the request for the DeleteRole function.
@@ -490,7 +490,7 @@ message ListEffectivePermissionsRequest {
 // ListEffectivePermissionsResponse is the response from the ListEffectivePermissions function
 message ListEffectivePermissionsResponse {
   // The effective permissions.
-  repeated Permission permissions = 1 [(buf.validate.field).repeated.min_items = 1];
+  repeated PermissionResponse permissions = 1 [(buf.validate.field).repeated.min_items = 1];
 }
 
 // ListUserRolesRequest is the request for the ListUserRoles function
@@ -508,7 +508,7 @@ message ListUserRolesRequest {
 message ListUserRolesResponse {
   // The roles assigned to the user.
   // If the user has no roles, this list will be empty.
-  repeated Role roles = 1;
+  repeated RoleResponse roles = 1;
 }
 
 // ListRoleUsersRequest is the request for the ListRoleUsers function
@@ -595,9 +595,8 @@ enum UserStatus {
   USER_STATUS_DELETED = 3;
 }
 
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // A Permission represents a permission in the Qdrant cloud.
-message Permission {
+message PermissionRequest {
   // The permission value (e.g., "read:clusters").
   string value = 1 [(buf.validate.field).string.min_len = 1];
   // The category of the permission (e.g., "Cluster", "Account").
@@ -605,8 +604,16 @@ message Permission {
   optional string category = 2 [(buf.validate.field).string.min_len = 1];
 }
 
+// A Permission represents a permission in the Qdrant cloud.
+message PermissionResponse {
+  // The permission value (e.g., "read:clusters").
+  string value = 1 [(buf.validate.field).string.min_len = 1];
+  // The category of the permission (e.g., "Cluster", "Account").
+  string category = 2 [(buf.validate.field).string.min_len = 1];
+}
+
 // A Role represents a role in the Qdrant cloud.
-message Role {
+message RoleRequest {
   // Unique identifier for the role (in GUID format).
   // This is a read-only field and will be available after a role is created.
   string id = 1;
@@ -644,7 +651,56 @@ message Role {
     not_in: [0]
   }];
   // The permissions associated with this role.
-  repeated Permission permissions = 8 [(buf.validate.field).repeated.min_items = 1];
+  repeated PermissionRequest permissions = 8 [(buf.validate.field).repeated.min_items = 1];
+  // The sub-type of the system role.
+  // This field is set for system role only.
+  optional SystemRoleSubType sub_type = 9 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// RoleResponse represents a role in the Qdrant cloud for response messages.
+// This message is used in responses where permissions should include the category field.
+message RoleResponse {
+  // Unique identifier for the role (in GUID format).
+  // This is a read-only field and will be available after a role is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "role_response.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the role was created.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The timestamp when the role was last updated.
+  // This is a read-only field and will be available after a role is created.
+  google.protobuf.Timestamp last_modified_at = 3;
+  option (buf.validate.message).cel = {
+    id: "role_response.last_modified_at"
+    message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
+    expression: "!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)"
+  };
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The name of the role.
+  // Name can only contain printable characters.
+  string name = 5 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^([^\\x00-\\x1F\\x7F])*$"
+  }];
+  // The human readable description of this role.
+  string description = 6 [(buf.validate.field).string = {max_len: 256}];
+  // The role type.
+  RoleType role_type = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The permissions associated with this role.
+  repeated PermissionResponse permissions = 8 [(buf.validate.field).repeated.min_items = 1];
   // The sub-type of the system role.
   // This field is set for system role only.
   optional SystemRoleSubType sub_type = 9 [(buf.validate.field).enum = {

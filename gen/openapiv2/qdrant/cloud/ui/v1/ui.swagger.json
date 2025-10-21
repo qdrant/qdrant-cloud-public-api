@@ -92,7 +92,7 @@
       },
       "description": "ListUsersWithRolesResponse is the response from the ListUsersWithRoles function."
     },
-    "v1Permission": {
+    "v1PermissionResponse": {
       "type": "object",
       "properties": {
         "value": {
@@ -101,12 +101,12 @@
         },
         "category": {
           "type": "string",
-          "description": "The category of the permission (e.g., \"Cluster\", \"Account\").\nOptional in requests; server populates it in responses."
+          "description": "The category of the permission (e.g., \"Cluster\", \"Account\")."
         }
       },
       "description": "A Permission represents a permission in the Qdrant cloud."
     },
-    "v1Role": {
+    "v1RoleResponse": {
       "type": "object",
       "properties": {
         "id": {
@@ -143,7 +143,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Permission"
+            "$ref": "#/definitions/v1PermissionResponse"
           },
           "description": "The permissions associated with this role."
         },
@@ -152,7 +152,7 @@
           "description": "The sub-type of the system role.\nThis field is set for system role only."
         }
       },
-      "description": "A Role represents a role in the Qdrant cloud."
+      "description": "RoleResponse represents a role in the Qdrant cloud for response messages.\nThis message is used in responses where permissions should include the category field."
     },
     "v1RoleType": {
       "type": "string",
@@ -231,7 +231,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Role"
+            "$ref": "#/definitions/v1RoleResponse"
           },
           "description": "The roles assigned to this user.\nIf the user has no roles assigned, this list will be empty."
         }

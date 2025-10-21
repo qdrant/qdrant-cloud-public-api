@@ -314,9 +314,9 @@ export declare type ListPermissionsResponse = Message<"qdrant.cloud.iam.v1.ListP
   /**
    * The permissions known by the system.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Permission permissions = 1;
+   * @generated from field: repeated qdrant.cloud.iam.v1.PermissionResponse permissions = 1;
    */
-  permissions: Permission[];
+  permissions: PermissionResponse[];
 };
 
 export declare type ListPermissionsResponseValid = ListPermissionsResponse;
@@ -359,9 +359,9 @@ export declare type ListRolesResponse = Message<"qdrant.cloud.iam.v1.ListRolesRe
   /**
    * The actual roles in this list.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Role items = 1;
+   * @generated from field: repeated qdrant.cloud.iam.v1.RoleResponse items = 1;
    */
-  items: Role[];
+  items: RoleResponse[];
 };
 
 export declare type ListRolesResponseValid = ListRolesResponse;
@@ -412,9 +412,9 @@ export declare type GetRoleResponse = Message<"qdrant.cloud.iam.v1.GetRoleRespon
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role?: Role;
+  role?: RoleResponse;
 };
 
 /**
@@ -426,9 +426,9 @@ export declare type GetRoleResponseValid = Message<"qdrant.cloud.iam.v1.GetRoleR
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role: RoleValid;
+  role: RoleResponseValid;
 };
 
 /**
@@ -446,9 +446,9 @@ export declare type CreateRoleRequest = Message<"qdrant.cloud.iam.v1.CreateRoleR
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleRequest role = 1;
    */
-  role?: Role;
+  role?: RoleRequest;
 };
 
 /**
@@ -460,9 +460,9 @@ export declare type CreateRoleRequestValid = Message<"qdrant.cloud.iam.v1.Create
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleRequest role = 1;
    */
-  role: RoleValid;
+  role: RoleRequestValid;
 };
 
 /**
@@ -480,9 +480,9 @@ export declare type CreateRoleResponse = Message<"qdrant.cloud.iam.v1.CreateRole
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role?: Role;
+  role?: RoleResponse;
 };
 
 /**
@@ -494,9 +494,9 @@ export declare type CreateRoleResponseValid = Message<"qdrant.cloud.iam.v1.Creat
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role: RoleValid;
+  role: RoleResponseValid;
 };
 
 /**
@@ -514,9 +514,9 @@ export declare type UpdateRoleRequest = Message<"qdrant.cloud.iam.v1.UpdateRoleR
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleRequest role = 1;
    */
-  role?: Role;
+  role?: RoleRequest;
 };
 
 /**
@@ -528,9 +528,9 @@ export declare type UpdateRoleRequestValid = Message<"qdrant.cloud.iam.v1.Update
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleRequest role = 1;
    */
-  role: RoleValid;
+  role: RoleRequestValid;
 };
 
 /**
@@ -548,9 +548,9 @@ export declare type UpdateRoleResponse = Message<"qdrant.cloud.iam.v1.UpdateRole
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role?: Role;
+  role?: RoleResponse;
 };
 
 /**
@@ -562,9 +562,9 @@ export declare type UpdateRoleResponseValid = Message<"qdrant.cloud.iam.v1.Updat
   /**
    * The actual role.
    *
-   * @generated from field: qdrant.cloud.iam.v1.Role role = 1;
+   * @generated from field: qdrant.cloud.iam.v1.RoleResponse role = 1;
    */
-  role: RoleValid;
+  role: RoleResponseValid;
 };
 
 /**
@@ -654,9 +654,9 @@ export declare type ListEffectivePermissionsResponse = Message<"qdrant.cloud.iam
   /**
    * The effective permissions.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Permission permissions = 1;
+   * @generated from field: repeated qdrant.cloud.iam.v1.PermissionResponse permissions = 1;
    */
-  permissions: Permission[];
+  permissions: PermissionResponse[];
 };
 
 export declare type ListEffectivePermissionsResponseValid = ListEffectivePermissionsResponse;
@@ -709,9 +709,9 @@ export declare type ListUserRolesResponse = Message<"qdrant.cloud.iam.v1.ListUse
    * The roles assigned to the user.
    * If the user has no roles, this list will be empty.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Role roles = 1;
+   * @generated from field: repeated qdrant.cloud.iam.v1.RoleResponse roles = 1;
    */
-  roles: Role[];
+  roles: RoleResponse[];
 };
 
 export declare type ListUserRolesResponseValid = ListUserRolesResponse;
@@ -908,9 +908,9 @@ export declare const UserSchema: GenMessage<User, {validType: UserValid}>;
 /**
  * A Permission represents a permission in the Qdrant cloud.
  *
- * @generated from message qdrant.cloud.iam.v1.Permission
+ * @generated from message qdrant.cloud.iam.v1.PermissionRequest
  */
-export declare type Permission = Message<"qdrant.cloud.iam.v1.Permission"> & {
+export declare type PermissionRequest = Message<"qdrant.cloud.iam.v1.PermissionRequest"> & {
   /**
    * The permission value (e.g., "read:clusters").
    *
@@ -927,20 +927,49 @@ export declare type Permission = Message<"qdrant.cloud.iam.v1.Permission"> & {
   category?: string;
 };
 
-export declare type PermissionValid = Permission;
+export declare type PermissionRequestValid = PermissionRequest;
 
 /**
- * Describes the message qdrant.cloud.iam.v1.Permission.
- * Use `create(PermissionSchema)` to create a new message.
+ * Describes the message qdrant.cloud.iam.v1.PermissionRequest.
+ * Use `create(PermissionRequestSchema)` to create a new message.
  */
-export declare const PermissionSchema: GenMessage<Permission, {validType: PermissionValid}>;
+export declare const PermissionRequestSchema: GenMessage<PermissionRequest, {validType: PermissionRequestValid}>;
+
+/**
+ * A Permission represents a permission in the Qdrant cloud.
+ *
+ * @generated from message qdrant.cloud.iam.v1.PermissionResponse
+ */
+export declare type PermissionResponse = Message<"qdrant.cloud.iam.v1.PermissionResponse"> & {
+  /**
+   * The permission value (e.g., "read:clusters").
+   *
+   * @generated from field: string value = 1;
+   */
+  value: string;
+
+  /**
+   * The category of the permission (e.g., "Cluster", "Account").
+   *
+   * @generated from field: string category = 2;
+   */
+  category: string;
+};
+
+export declare type PermissionResponseValid = PermissionResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.PermissionResponse.
+ * Use `create(PermissionResponseSchema)` to create a new message.
+ */
+export declare const PermissionResponseSchema: GenMessage<PermissionResponse, {validType: PermissionResponseValid}>;
 
 /**
  * A Role represents a role in the Qdrant cloud.
  *
- * @generated from message qdrant.cloud.iam.v1.Role
+ * @generated from message qdrant.cloud.iam.v1.RoleRequest
  */
-export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
+export declare type RoleRequest = Message<"qdrant.cloud.iam.v1.RoleRequest"> & {
   /**
    * Unique identifier for the role (in GUID format).
    * This is a read-only field and will be available after a role is created.
@@ -998,9 +1027,9 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
   /**
    * The permissions associated with this role.
    *
-   * @generated from field: repeated qdrant.cloud.iam.v1.Permission permissions = 8;
+   * @generated from field: repeated qdrant.cloud.iam.v1.PermissionRequest permissions = 8;
    */
-  permissions: Permission[];
+  permissions: PermissionRequest[];
 
   /**
    * The sub-type of the system role.
@@ -1011,13 +1040,98 @@ export declare type Role = Message<"qdrant.cloud.iam.v1.Role"> & {
   subType?: SystemRoleSubType;
 };
 
-export declare type RoleValid = Role;
+export declare type RoleRequestValid = RoleRequest;
 
 /**
- * Describes the message qdrant.cloud.iam.v1.Role.
- * Use `create(RoleSchema)` to create a new message.
+ * Describes the message qdrant.cloud.iam.v1.RoleRequest.
+ * Use `create(RoleRequestSchema)` to create a new message.
  */
-export declare const RoleSchema: GenMessage<Role, {validType: RoleValid}>;
+export declare const RoleRequestSchema: GenMessage<RoleRequest, {validType: RoleRequestValid}>;
+
+/**
+ * RoleResponse represents a role in the Qdrant cloud for response messages.
+ * This message is used in responses where permissions should include the category field.
+ *
+ * @generated from message qdrant.cloud.iam.v1.RoleResponse
+ */
+export declare type RoleResponse = Message<"qdrant.cloud.iam.v1.RoleResponse"> & {
+  /**
+   * Unique identifier for the role (in GUID format).
+   * This is a read-only field and will be available after a role is created.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The timestamp when the role was created.
+   * This is a read-only field and will be available after a role is created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * The timestamp when the role was last updated.
+   * This is a read-only field and will be available after a role is created.
+   *
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 3;
+   */
+  lastModifiedAt?: Timestamp;
+
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 4;
+   */
+  accountId: string;
+
+  /**
+   * The name of the role.
+   * Name can only contain printable characters.
+   *
+   * @generated from field: string name = 5;
+   */
+  name: string;
+
+  /**
+   * The human readable description of this role.
+   *
+   * @generated from field: string description = 6;
+   */
+  description: string;
+
+  /**
+   * The role type.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.RoleType role_type = 7;
+   */
+  roleType: RoleType;
+
+  /**
+   * The permissions associated with this role.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.PermissionResponse permissions = 8;
+   */
+  permissions: PermissionResponse[];
+
+  /**
+   * The sub-type of the system role.
+   * This field is set for system role only.
+   *
+   * @generated from field: optional qdrant.cloud.iam.v1.SystemRoleSubType sub_type = 9;
+   */
+  subType?: SystemRoleSubType;
+};
+
+export declare type RoleResponseValid = RoleResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.RoleResponse.
+ * Use `create(RoleResponseSchema)` to create a new message.
+ */
+export declare const RoleResponseSchema: GenMessage<RoleResponse, {validType: RoleResponseValid}>;
 
 /**
  * LogoutUserRequest is the request for the Logout function

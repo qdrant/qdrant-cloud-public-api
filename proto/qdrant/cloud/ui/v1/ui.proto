@@ -45,5 +45,5 @@ message UserWithRoles {
   qdrant.cloud.iam.v1.User user = 1 [(buf.validate.field).required = true];
   // The roles assigned to this user.
   // If the user has no roles assigned, this list will be empty.
-  repeated qdrant.cloud.iam.v1.Role roles = 2;
+  repeated qdrant.cloud.iam.v1.RoleResponse roles = 2;
 }

@@ -28,7 +28,7 @@ from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot
 from qdrant.cloud.iam.v1 import iam_pb2 as qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n\x19ListUsersWithRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n\x1aListUsersWithRolesResponse\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n\rUserWithRoles\x12\x35\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n\x05roles\x18\x02 \x03(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xd6\x01\n\x12\x41ggregationService\x12\xbf\x01\n\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"J\x8a\xb5\x18\nread:users\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/usersB\xd6\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x07UiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n\x19ListUsersWithRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n\x1aListUsersWithRolesResponse\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"\x7f\n\rUserWithRoles\x12\x35\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12\x37\n\x05roles\x18\x02 \x03(\x0b\x32!.qdrant.cloud.iam.v1.RoleResponseR\x05roles2\xd6\x01\n\x12\x41ggregationService\x12\xbf\x01\n\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"J\x8a\xb5\x18\nread:users\x8a\xb5\x18\nread:roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/usersB\xd6\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x07UiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -47,7 +47,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_start=248
   _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_end=333
   _globals['_USERWITHROLES']._serialized_start=335
-  _globals['_USERWITHROLES']._serialized_end=454
-  _globals['_AGGREGATIONSERVICE']._serialized_start=457
-  _globals['_AGGREGATIONSERVICE']._serialized_end=671
+  _globals['_USERWITHROLES']._serialized_end=462
+  _globals['_AGGREGATIONSERVICE']._serialized_start=465
+  _globals['_AGGREGATIONSERVICE']._serialized_end=679
 # @@protoc_insertion_point(module_scope)

@@ -125,7 +125,7 @@ type UserWithRoles struct {
 	User *v1.User `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	// The roles assigned to this user.
 	// If the user has no roles assigned, this list will be empty.
-	Roles         []*v1.Role `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`
+	Roles         []*v1.RoleResponse `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -167,7 +167,7 @@ func (x *UserWithRoles) GetUser() *v1.User {
 	return nil
 }
 
-func (x *UserWithRoles) GetRoles() []*v1.Role {
+func (x *UserWithRoles) GetRoles() []*v1.RoleResponse {
 	if x != nil {
 		return x.Roles
 	}
@@ -183,10 +183,10 @@ const file_qdrant_cloud_ui_v1_ui_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n" +
 	"\x1aListUsersWithRolesResponse\x127\n" +
-	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n" +
+	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"\x7f\n" +
 	"\rUserWithRoles\x125\n" +
-	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n" +
-	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xd6\x01\n" +
+	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x127\n" +
+	"\x05roles\x18\x02 \x03(\v2!.qdrant.cloud.iam.v1.RoleResponseR\x05roles2\xd6\x01\n" +
 	"\x12AggregationService\x12\xbf\x01\n" +
 	"\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"J\x8a\xb5\x18\n" +
 	"read:users\x8a\xb5\x18\n" +
@@ -211,12 +211,12 @@ var file_qdrant_cloud_ui_v1_ui_proto_goTypes = []any{
 	(*ListUsersWithRolesResponse)(nil), // 1: qdrant.cloud.ui.v1.ListUsersWithRolesResponse
 	(*UserWithRoles)(nil),              // 2: qdrant.cloud.ui.v1.UserWithRoles
 	(*v1.User)(nil),                    // 3: qdrant.cloud.iam.v1.User
-	(*v1.Role)(nil),                    // 4: qdrant.cloud.iam.v1.Role
+	(*v1.RoleResponse)(nil),            // 4: qdrant.cloud.iam.v1.RoleResponse
 }
 var file_qdrant_cloud_ui_v1_ui_proto_depIdxs = []int32{
 	2, // 0: qdrant.cloud.ui.v1.ListUsersWithRolesResponse.items:type_name -> qdrant.cloud.ui.v1.UserWithRoles
 	3, // 1: qdrant.cloud.ui.v1.UserWithRoles.user:type_name -> qdrant.cloud.iam.v1.User
-	4, // 2: qdrant.cloud.ui.v1.UserWithRoles.roles:type_name -> qdrant.cloud.iam.v1.Role
+	4, // 2: qdrant.cloud.ui.v1.UserWithRoles.roles:type_name -> qdrant.cloud.iam.v1.RoleResponse
 	0, // 3: qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles:input_type -> qdrant.cloud.ui.v1.ListUsersWithRolesRequest
 	1, // 4: qdrant.cloud.ui.v1.AggregationService.ListUsersWithRoles:output_type -> qdrant.cloud.ui.v1.ListUsersWithRolesResponse
 	4, // [4:5] is the sub-list for method output_type
