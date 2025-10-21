@@ -450,6 +450,24 @@
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
+    },
+    "v1ResourceConfigurationFilter": {
+      "type": "object",
+      "properties": {
+        "ram": {
+          "type": "string",
+          "title": "The amount of RAM (e.g., \"1GiB\")"
+        },
+        "cpu": {
+          "type": "string",
+          "title": "The amount of CPU (e.g., \"1000m\" (1 vCPU))"
+        },
+        "disk": {
+          "type": "string",
+          "title": "The amount of disk (e.g., \"100GiB\")"
+        }
+      },
+      "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."
     }
   }
 }

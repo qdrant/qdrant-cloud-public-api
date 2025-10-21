@@ -96,7 +96,7 @@ message ListPackagesRequest {
   repeated PackageStatus statuses = 4;
   // The minimum resource configuration required.
   // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
-  optional ResourceConfiguration min_resources = 5;
+  optional ResourceConfigurationFilter min_resources = 5;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -122,7 +122,7 @@ message ListGlobalPackagesRequest {
   };
   // The minimum resource configuration required.
   // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
-  optional ResourceConfiguration min_resources = 3;
+  optional ResourceConfigurationFilter min_resources = 3;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -232,6 +232,16 @@ message ResourceConfiguration {
   string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   string disk = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+// ResourceConfigurationFilter defines the resource configuration filter for listing packages.
+message ResourceConfigurationFilter {
+  // The amount of RAM (e.g., "1GiB")
+  optional string ram = 1 [(buf.validate.field).string.min_len = 1];
+  // The amount of CPU (e.g., "1000m" (1 vCPU))
+  optional string cpu = 2 [(buf.validate.field).string.min_len = 1];
+  // The amount of disk (e.g., "100GiB")
+  optional string disk = 3 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetQuoteRequest is the request for the GetQuote function

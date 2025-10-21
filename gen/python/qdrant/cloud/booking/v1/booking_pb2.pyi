@@ -39,8 +39,8 @@ class ListPackagesRequest(_message.Message):
     cloud_provider_id: str
     cloud_provider_region_id: str
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
-    min_resources: ResourceConfiguration
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfiguration, _Mapping]] = ...) -> None: ...
+    min_resources: ResourceConfigurationFilter
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ("items",)
@@ -55,8 +55,8 @@ class ListGlobalPackagesRequest(_message.Message):
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
     cloud_provider_region_id: str
-    min_resources: ResourceConfiguration
-    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfiguration, _Mapping]] = ...) -> None: ...
+    min_resources: ResourceConfigurationFilter
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ...) -> None: ...
 
 class ListGlobalPackagesResponse(_message.Message):
     __slots__ = ("items",)
@@ -107,6 +107,16 @@ class AvailableAdditionalResources(_message.Message):
     def __init__(self, disk_price_per_hour: _Optional[int] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
+    __slots__ = ("ram", "cpu", "disk")
+    RAM_FIELD_NUMBER: _ClassVar[int]
+    CPU_FIELD_NUMBER: _ClassVar[int]
+    DISK_FIELD_NUMBER: _ClassVar[int]
+    ram: str
+    cpu: str
+    disk: str
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ...) -> None: ...
+
+class ResourceConfigurationFilter(_message.Message):
     __slots__ = ("ram", "cpu", "disk")
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
