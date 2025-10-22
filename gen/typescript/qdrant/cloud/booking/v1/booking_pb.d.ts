@@ -48,6 +48,14 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
    * @generated from field: repeated qdrant.cloud.booking.v1.PackageStatus statuses = 4;
    */
   statuses: PackageStatus[];
+
+  /**
+   * The minimum resource configuration required.
+   * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 5;
+   */
+  minResources?: ResourceConfigurationFilter;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;
@@ -102,6 +110,14 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
    * @generated from field: optional string cloud_provider_region_id = 2;
    */
   cloudProviderRegionId?: string;
+
+  /**
+   * The minimum resource configuration required.
+   * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 3;
+   */
+  minResources?: ResourceConfigurationFilter;
 };
 
 export declare type ListGlobalPackagesRequestValid = ListGlobalPackagesRequest;
@@ -347,6 +363,42 @@ export declare type ResourceConfigurationValid = ResourceConfiguration;
  * Use `create(ResourceConfigurationSchema)` to create a new message.
  */
 export declare const ResourceConfigurationSchema: GenMessage<ResourceConfiguration, {validType: ResourceConfigurationValid}>;
+
+/**
+ * ResourceConfigurationFilter defines the resource configuration filter for listing packages.
+ *
+ * @generated from message qdrant.cloud.booking.v1.ResourceConfigurationFilter
+ */
+export declare type ResourceConfigurationFilter = Message<"qdrant.cloud.booking.v1.ResourceConfigurationFilter"> & {
+  /**
+   * The amount of RAM (e.g., "1GiB")
+   *
+   * @generated from field: optional string ram = 1;
+   */
+  ram?: string;
+
+  /**
+   * The amount of CPU (e.g., "1000m" (1 vCPU))
+   *
+   * @generated from field: optional string cpu = 2;
+   */
+  cpu?: string;
+
+  /**
+   * The amount of disk (e.g., "100GiB")
+   *
+   * @generated from field: optional string disk = 3;
+   */
+  disk?: string;
+};
+
+export declare type ResourceConfigurationFilterValid = ResourceConfigurationFilter;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ResourceConfigurationFilter.
+ * Use `create(ResourceConfigurationFilterSchema)` to create a new message.
+ */
+export declare const ResourceConfigurationFilterSchema: GenMessage<ResourceConfigurationFilter, {validType: ResourceConfigurationFilterValid}>;
 
 /**
  * GetQuoteRequest is the request for the GetQuote function
