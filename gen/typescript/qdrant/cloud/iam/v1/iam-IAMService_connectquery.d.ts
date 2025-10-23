@@ -97,7 +97,7 @@ export const updateRole: typeof IAMService["method"]["updateRole"];
  */
 export const deleteRole: typeof IAMService["method"]["deleteRole"];
 /**
- * Lists the effective permissions for the user in the account identified by the given ID.
+ * Lists the effective permissions for the authenticated user in the account identified by the given ID.
  * Required permissions:
  * - None (authenticated only)
  *

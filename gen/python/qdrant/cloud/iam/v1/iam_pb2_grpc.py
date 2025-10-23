@@ -205,7 +205,7 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListEffectivePermissions(self, request, context):
-        """Lists the effective permissions for the user in the account identified by the given ID.
+        """Lists the effective permissions for the authenticated user in the account identified by the given ID.
         Required permissions:
         - None (authenticated only)
         """

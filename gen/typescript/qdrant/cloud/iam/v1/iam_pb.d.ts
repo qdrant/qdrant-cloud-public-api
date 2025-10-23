@@ -1440,7 +1440,7 @@ export declare const IAMService: GenService<{
     output: typeof DeleteRoleResponseSchema;
   },
   /**
-   * Lists the effective permissions for the user in the account identified by the given ID.
+   * Lists the effective permissions for the authenticated user in the account identified by the given ID.
    * Required permissions:
    * - None (authenticated only)
    *

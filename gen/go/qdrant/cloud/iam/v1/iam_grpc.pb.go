@@ -91,7 +91,7 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
-	// Lists the effective permissions for the user in the account identified by the given ID.
+	// Lists the effective permissions for the authenticated user in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	ListEffectivePermissions(ctx context.Context, in *ListEffectivePermissionsRequest, opts ...grpc.CallOption) (*ListEffectivePermissionsResponse, error)
@@ -335,7 +335,7 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - delete:roles
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
-	// Lists the effective permissions for the user in the account identified by the given ID.
+	// Lists the effective permissions for the authenticated user in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
 	ListEffectivePermissions(context.Context, *ListEffectivePermissionsRequest) (*ListEffectivePermissionsResponse, error)

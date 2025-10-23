@@ -18,7 +18,7 @@
   "paths": {
     "/api/iam/v1/accounts/{accountId}/effective-permissions": {
       "get": {
-        "summary": "Lists the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists the effective permissions for the authenticated user in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_ListEffectivePermissions",
         "responses": {
           "200": {
