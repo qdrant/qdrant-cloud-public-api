@@ -18,7 +18,7 @@
   "paths": {
     "/api/iam/v1/accounts/{accountId}/effective-permissions": {
       "get": {
-        "summary": "Lists the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- read:roles",
+        "summary": "Lists the effective permissions for the user in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "IAMService_ListEffectivePermissions",
         "responses": {
           "200": {
@@ -50,7 +50,7 @@
     },
     "/api/iam/v1/accounts/{accountId}/permissions": {
       "get": {
-        "summary": "Lists all permissions known in the system for the provided account.\nNote: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.\nRequired permissions:\n- read:roles",
+        "summary": "Lists all permissions known in the system for the provided account.\nNote: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead.\nRequired permissions:\n- read:roles",
         "operationId": "IAMService_ListPermissions",
         "responses": {
           "200": {

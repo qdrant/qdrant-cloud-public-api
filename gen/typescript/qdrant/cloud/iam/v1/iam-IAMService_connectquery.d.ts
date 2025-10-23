@@ -46,7 +46,7 @@ export const getUserConsent: typeof IAMService["method"]["getUserConsent"];
 export const recordUserConsent: typeof IAMService["method"]["recordUserConsent"];
 /**
  * Lists all permissions known in the system for the provided account.
- * Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
+ * Note: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead.
  * Required permissions:
  * - read:roles
  *
@@ -99,7 +99,7 @@ export const deleteRole: typeof IAMService["method"]["deleteRole"];
 /**
  * Lists the effective permissions for the user in the account identified by the given ID.
  * Required permissions:
- * - read:roles
+ * - None (authenticated only)
  *
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions
  */
