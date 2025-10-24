@@ -71,6 +71,27 @@
               ]
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "minResources.ram",
+            "description": "The amount of RAM (e.g., \"1GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.cpu",
+            "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.disk",
+            "description": "The amount of disk (e.g., \"100GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -186,6 +207,27 @@
           {
             "name": "cloudProviderRegionId",
             "description": "Filter specifying the cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nField can be omitted, if cloud_provider_id is `hybrid`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.ram",
+            "description": "The amount of RAM (e.g., \"1GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.cpu",
+            "description": "The amount of CPU (e.g., \"1000m\" (1 vCPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.disk",
+            "description": "The amount of disk (e.g., \"100GiB\")",
             "in": "query",
             "required": false,
             "type": "string"
@@ -408,6 +450,24 @@
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
+    },
+    "v1ResourceConfigurationFilter": {
+      "type": "object",
+      "properties": {
+        "ram": {
+          "type": "string",
+          "title": "The amount of RAM (e.g., \"1GiB\")"
+        },
+        "cpu": {
+          "type": "string",
+          "title": "The amount of CPU (e.g., \"1000m\" (1 vCPU))"
+        },
+        "disk": {
+          "type": "string",
+          "title": "The amount of disk (e.g., \"100GiB\")"
+        }
+      },
+      "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."
     }
   }
 }

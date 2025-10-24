@@ -95,8 +95,9 @@ message ListDatabaseApiKeysRequest {
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the cluster (in GUID format).
-  // This is a required field.
-  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // This is an optional field, if provided it returns only the database api
+  // keys that belong to that cluster.
+  optional string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
 }
 
 // ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function.

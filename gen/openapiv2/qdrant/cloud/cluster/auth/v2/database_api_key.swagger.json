@@ -44,7 +44,7 @@
           },
           {
             "name": "clusterId",
-            "description": "The identifier of the cluster (in GUID format).\nThis is a required field.",
+            "description": "The identifier of the cluster (in GUID format).\nThis is an optional field, if provided it returns only the database api\nkeys that belong to that cluster.",
             "in": "query",
             "required": false,
             "type": "string"

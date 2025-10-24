@@ -94,6 +94,9 @@ message ListPackagesRequest {
   // The status of the packages to filter.
   // This is an optional field. If value is not set, only active packages are returned.
   repeated PackageStatus statuses = 4;
+  // The minimum resource configuration required.
+  // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+  optional ResourceConfigurationFilter min_resources = 5;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -117,6 +120,9 @@ message ListGlobalPackagesRequest {
     message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
     expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
   };
+  // The minimum resource configuration required.
+  // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+  optional ResourceConfigurationFilter min_resources = 3;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -226,6 +232,16 @@ message ResourceConfiguration {
   string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   string disk = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+// ResourceConfigurationFilter defines the resource configuration filter for listing packages.
+message ResourceConfigurationFilter {
+  // The amount of RAM (e.g., "1GiB")
+  optional string ram = 1 [(buf.validate.field).string.min_len = 1];
+  // The amount of CPU (e.g., "1000m" (1 vCPU))
+  optional string cpu = 2 [(buf.validate.field).string.min_len = 1];
+  // The amount of disk (e.g., "100GiB")
+  optional string disk = 3 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetQuoteRequest is the request for the GetQuote function

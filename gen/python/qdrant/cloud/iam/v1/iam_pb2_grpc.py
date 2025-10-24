@@ -148,7 +148,7 @@ class IAMServiceServicer(object):
 
     def ListPermissions(self, request, context):
         """Lists all permissions known in the system for the provided account.
-        Note: If you want to get a list of permissions available for you, please use GetEffectivePermissions instead.
+        Note: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead.
         Required permissions:
         - read:roles
         """
@@ -205,9 +205,9 @@ class IAMServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListEffectivePermissions(self, request, context):
-        """Lists the effective permissions for the user in the account identified by the given ID.
+        """Lists the effective permissions for the authenticated user in the account identified by the given ID.
         Required permissions:
-        - read:roles
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
