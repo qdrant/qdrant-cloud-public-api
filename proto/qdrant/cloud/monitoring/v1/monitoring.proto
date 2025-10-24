@@ -176,20 +176,15 @@ message GetClusterEventsRequest {
   // Optional start time for the events query.
   // If omitted, defaults to 7 days ago.
   optional google.protobuf.Timestamp since = 3;
-  // Optional end time for the events query.
-  // If omitted, defaults to current time.
+  // Optional end time for events query.
+  // If omitted, defaults to NOW.
   optional google.protobuf.Timestamp until = 4;
+
   option (buf.validate.message).cel = {
     id: "get_cluster_events.until_gt_since"
     message: "until must be after since"
     expression: "!has(this.since) || !has(this.until) || this.until > this.since"
   };
-}
-
-// GetClusterEventsRequest is the response from the GetClusterEvents function
-message GetClusterEventsResponse {
-  // A list of entries representing events that have happened in the cluster.
-  repeated LogEntry items = 1;
 }
 
 // ClusterNodeMetrics contains metric overview for a node.
@@ -267,6 +262,12 @@ message LogEntry {
   google.protobuf.Timestamp timestamp = 1 [(buf.validate.field).required = true];
   // The content of the log message.
   string message = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetClusterEventsResponse is the response from GetClusterEvents function.
+message GetClusterEventsResponse {
+  // A list of log entries from the cluster.
+  repeated LogEntry items = 1;
 }
 
 // Aggregator defines how metrics should be aggregated over time.

@@ -59,7 +59,7 @@
           },
           {
             "name": "until",
-            "description": "Optional end time for the events query.\nIf omitted, defaults to current time.",
+            "description": "Optional end time for events query.\nIf omitted, defaults to NOW.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -396,10 +396,10 @@
             "type": "object",
             "$ref": "#/definitions/v1LogEntry"
           },
-          "description": "A list of entries representing events that have happened in the cluster."
+          "description": "A list of log entries from the cluster."
         }
       },
-      "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
+      "description": "GetClusterEventsResponse is the response from GetClusterEvents function."
     },
     "v1GetClusterLogsResponse": {
       "type": "object",
