@@ -52,12 +52,14 @@ plugins:
     out: gen/openapiv2
 
   # Generate base types and services for Typescript
-  - remote: buf.build/bufbuild/es:v2.9.0
+  - local:
+      - scripts/protoc-gen-es.sh
     include_imports: true
     opt:
       - target=js+dts
       - import_extension=js
       - valid_types=protovalidate_required
+      - buf_validate=true
     out: gen/typescript
 
   - remote: buf.build/connectrpc/query-es:v2.2.0
