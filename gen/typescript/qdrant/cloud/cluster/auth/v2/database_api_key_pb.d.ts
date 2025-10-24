@@ -51,11 +51,12 @@ export declare type ListDatabaseApiKeysRequestValid = Message<"qdrant.cloud.clus
 
   /**
    * The identifier of the cluster (in GUID format).
-   * This is a required field.
+   * This is an optional field, if provided it returns only the database api
+   * keys that belong to that cluster.
    *
-   * @generated from field: string cluster_id = 2;
+   * @generated from field: optional string cluster_id = 2;
    */
-  clusterId: string;
+  clusterId?: string;
 };
 
 /**

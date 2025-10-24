@@ -96,6 +96,14 @@ export declare type ListPackagesRequestValid = Message<"qdrant.cloud.booking.v1.
    * @generated from field: repeated qdrant.cloud.booking.v1.PackageStatus statuses = 4;
    */
   statuses: PackageStatus[];
+
+  /**
+   * The minimum resource configuration required.
+   * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 5;
+   */
+  minResources?: ResourceConfigurationFilterValid;
 };
 
 /**
@@ -192,6 +200,14 @@ export declare type ListGlobalPackagesRequestValid = Message<"qdrant.cloud.booki
    * @generated from field: optional string cloud_provider_region_id = 2;
    */
   cloudProviderRegionId?: string;
+
+  /**
+   * The minimum resource configuration required.
+   * This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 3;
+   */
+  minResources?: ResourceConfigurationFilterValid;
 };
 
 /**
@@ -616,7 +632,33 @@ export declare type ResourceConfigurationFilter = Message<"qdrant.cloud.booking.
   disk?: string;
 };
 
-export declare type ResourceConfigurationFilterValid = ResourceConfigurationFilter;
+/**
+ * ResourceConfigurationFilter defines the resource configuration filter for listing packages.
+ *
+ * @generated from message qdrant.cloud.booking.v1.ResourceConfigurationFilter
+ */
+export declare type ResourceConfigurationFilterValid = Message<"qdrant.cloud.booking.v1.ResourceConfigurationFilter"> & {
+  /**
+   * The amount of RAM (e.g., "1GiB")
+   *
+   * @generated from field: optional string ram = 1;
+   */
+  ram?: string;
+
+  /**
+   * The amount of CPU (e.g., "1000m" (1 vCPU))
+   *
+   * @generated from field: optional string cpu = 2;
+   */
+  cpu?: string;
+
+  /**
+   * The amount of disk (e.g., "100GiB")
+   *
+   * @generated from field: optional string disk = 3;
+   */
+  disk?: string;
+};
 
 /**
  * Describes the message qdrant.cloud.booking.v1.ResourceConfigurationFilter.
