@@ -1890,7 +1890,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"\x1d\n" +
-	"\x1bDeleteAccountMemberResponse\"\xd8\a\n" +
+	"\x1bDeleteAccountMemberResponse\"\xcf\x06\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -1902,11 +1902,11 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"ownerEmail\x12,\n" +
 	"\n" +
 	"privileges\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
-	"privileges:\x80\x05\xbaH\xfc\x04\x1a\xa3\x01\n" +
+	"privileges:\xf7\x03\xbaH\xf3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"account.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xd9\x01\n" +
-	"\x18account.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\x1a\xf7\x01\n" +
-	"\x13account.owner_email\x12#value must be a valid email address\x1a\xba\x01this.owner_email.matches('^[a-zA-Z0-9.!#$%&\\'*/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$') || !has(this.created_at)\"\xee\t\n" +
+	"\x18account.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\x1ao\n" +
+	"\x13account.owner_email\x12#value must be a valid email address\x1a3this.owner_email.isEmail() || !has(this.created_at)\"\xee\t\n" +
 	"\rAccountInvite\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
