@@ -552,7 +552,12 @@ message Account {
   string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
   // This is a read-only field and is derived from the owner user.
-  string owner_email = 7 [(buf.validate.field).string = {email: true}];
+  string owner_email = 7;
+  option (buf.validate.message).cel = {
+    id: "account.owner_email"
+    message: "value must be a valid email address"
+    expression: "this.owner_email.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$') || !has(this.created_at)"
+  };
   // The privileges of the account, if any.
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
