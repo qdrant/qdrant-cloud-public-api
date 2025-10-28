@@ -556,7 +556,7 @@ message Account {
   option (buf.validate.message).cel = {
     id: "account.owner_email"
     message: "value must be a valid email address"
-    expression: "this.owner_email.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$') || !has(this.created_at)"
+    expression: "this.owner_email.matches('^[a-zA-Z0-9.!#$%&\\'*/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$') || !has(this.created_at)"
   };
   // The privileges of the account, if any.
   // This is a read-only field.
