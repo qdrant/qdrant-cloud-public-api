@@ -377,6 +377,38 @@
         ]
       }
     },
+    "/api/account/v1/accounts/{accountId}/leave": {
+      "post": {
+        "summary": "Allows the authenticated user to leave an account they are a member of.\nOwners must transfer ownership to another user before leaving the account.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_LeaveAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LeaveAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
     "/api/account/v1/accounts/{accountId}/members": {
       "get": {
         "summary": "Lists all account members in the account identified by the given account ID.\nThe authenticated actor must be a member of the account identified by the given account ID.\nRequired permissions:\n- read:users",
@@ -871,6 +903,10 @@
         }
       },
       "title": "GetAccountResponse is the response from the GetAccount function"
+    },
+    "v1LeaveAccountResponse": {
+      "type": "object",
+      "description": "LeaveAccountResponse is the response from the LeaveAccount function.\n\nEmpty"
     },
     "v1ListAccountInvitesResponse": {
       "type": "object",

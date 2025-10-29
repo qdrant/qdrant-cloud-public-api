@@ -84,6 +84,16 @@ class DeleteAccountResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class LeaveAccountRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class LeaveAccountResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class ListAccountInvitesRequest(_message.Message):
     __slots__ = ("account_id", "statuses")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

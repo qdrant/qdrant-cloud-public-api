@@ -101,6 +101,26 @@ service AccountService {
       resource_url_template: "/accounts/{req.account_id}"
     };
   }
+  // Allows the authenticated user to leave an account they are a member of.
+  // Owners must transfer ownership to another user before leaving the account.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc LeaveAccount(LeaveAccountRequest) returns (LeaveAccountResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom supported-actor-types expression. (Only users can leave an account)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/leave"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "leave"
+      resource_type: "account"
+      resource_id_field: "req.account_id"
+      resource_url_template: "/accounts/{req.account_id}"
+    };
+  }
   // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
   // - read:invites
@@ -358,6 +378,18 @@ message DeleteAccountRequest {
 
 // DeleteAccountResponse is the response from the DeleteAccount function.
 message DeleteAccountResponse {
+  // Empty
+}
+
+// LeaveAccountRequest is the request for the LeaveAccount function.
+message LeaveAccountRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// LeaveAccountResponse is the response from the LeaveAccount function.
+message LeaveAccountResponse {
   // Empty
 }
 
