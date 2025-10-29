@@ -287,6 +287,47 @@ export declare type DeleteAccountResponseValid = DeleteAccountResponse;
 export declare const DeleteAccountResponseSchema: GenMessage<DeleteAccountResponse, {validType: DeleteAccountResponseValid}>;
 
 /**
+ * LeaveAccountRequest is the request for the LeaveAccount function.
+ *
+ * @generated from message qdrant.cloud.account.v1.LeaveAccountRequest
+ */
+export declare type LeaveAccountRequest = Message<"qdrant.cloud.account.v1.LeaveAccountRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type LeaveAccountRequestValid = LeaveAccountRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.LeaveAccountRequest.
+ * Use `create(LeaveAccountRequestSchema)` to create a new message.
+ */
+export declare const LeaveAccountRequestSchema: GenMessage<LeaveAccountRequest, {validType: LeaveAccountRequestValid}>;
+
+/**
+ * LeaveAccountResponse is the response from the LeaveAccount function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.account.v1.LeaveAccountResponse
+ */
+export declare type LeaveAccountResponse = Message<"qdrant.cloud.account.v1.LeaveAccountResponse"> & {
+};
+
+export declare type LeaveAccountResponseValid = LeaveAccountResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.LeaveAccountResponse.
+ * Use `create(LeaveAccountResponseSchema)` to create a new message.
+ */
+export declare const LeaveAccountResponseSchema: GenMessage<LeaveAccountResponse, {validType: LeaveAccountResponseValid}>;
+
+/**
  * ListAccountInvitesRequest is the request for the ListAccountInvites function.
  *
  * @generated from message qdrant.cloud.account.v1.ListAccountInvitesRequest
@@ -1200,6 +1241,19 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountRequestSchema;
     output: typeof DeleteAccountResponseSchema;
+  },
+  /**
+   * Allows the authenticated user to leave an account they are a member of.
+   * Owners must transfer ownership to another user before leaving the account.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.LeaveAccount
+   */
+  leaveAccount: {
+    methodKind: "unary";
+    input: typeof LeaveAccountRequestSchema;
+    output: typeof LeaveAccountResponseSchema;
   },
   /**
    * Lists all account invites in the account identified by the given account ID.

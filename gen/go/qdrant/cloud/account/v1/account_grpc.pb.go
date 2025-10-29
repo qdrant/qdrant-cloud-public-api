@@ -24,6 +24,7 @@ const (
 	AccountService_CreateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/CreateAccount"
 	AccountService_UpdateAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/UpdateAccount"
 	AccountService_DeleteAccount_FullMethodName              = "/qdrant.cloud.account.v1.AccountService/DeleteAccount"
+	AccountService_LeaveAccount_FullMethodName               = "/qdrant.cloud.account.v1.AccountService/LeaveAccount"
 	AccountService_ListAccountInvites_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/ListAccountInvites"
 	AccountService_ListReceivedAccountInvites_FullMethodName = "/qdrant.cloud.account.v1.AccountService/ListReceivedAccountInvites"
 	AccountService_GetAccountInvite_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountInvite"
@@ -62,6 +63,11 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	// Allows the authenticated user to leave an account they are a member of.
+	// Owners must transfer ownership to another user before leaving the account.
+	// Required permissions:
+	// - None (authenticated only)
+	LeaveAccount(ctx context.Context, in *LeaveAccountRequest, opts ...grpc.CallOption) (*LeaveAccountResponse, error)
 	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
@@ -164,6 +170,16 @@ func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAcco
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAccountResponse)
 	err := c.cc.Invoke(ctx, AccountService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) LeaveAccount(ctx context.Context, in *LeaveAccountRequest, opts ...grpc.CallOption) (*LeaveAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LeaveAccountResponse)
+	err := c.cc.Invoke(ctx, AccountService_LeaveAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -296,6 +312,11 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	// Allows the authenticated user to leave an account they are a member of.
+	// Owners must transfer ownership to another user before leaving the account.
+	// Required permissions:
+	// - None (authenticated only)
+	LeaveAccount(context.Context, *LeaveAccountRequest) (*LeaveAccountResponse, error)
 	// Lists all account invites in the account identified by the given account ID.
 	// Required permissions:
 	// - read:invites
@@ -368,6 +389,9 @@ func (UnimplementedAccountServiceServer) UpdateAccount(context.Context, *UpdateA
 }
 func (UnimplementedAccountServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) LeaveAccount(context.Context, *LeaveAccountRequest) (*LeaveAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LeaveAccount not implemented")
 }
 func (UnimplementedAccountServiceServer) ListAccountInvites(context.Context, *ListAccountInvitesRequest) (*ListAccountInvitesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccountInvites not implemented")
@@ -506,6 +530,24 @@ func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_LeaveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LeaveAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).LeaveAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_LeaveAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).LeaveAccount(ctx, req.(*LeaveAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -716,6 +758,10 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccount",
 			Handler:    _AccountService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "LeaveAccount",
+			Handler:    _AccountService_LeaveAccount_Handler,
 		},
 		{
 			MethodName: "ListAccountInvites",

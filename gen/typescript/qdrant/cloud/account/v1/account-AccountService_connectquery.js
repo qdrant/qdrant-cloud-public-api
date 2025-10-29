@@ -50,6 +50,16 @@ export const updateAccount = AccountService.method.updateAccount;
 export const deleteAccount = AccountService.method.deleteAccount;
 
 /**
+ * Allows the authenticated user to leave an account they are a member of.
+ * Owners must transfer ownership to another user before leaving the account.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.LeaveAccount
+ */
+export const leaveAccount = AccountService.method.leaveAccount;
+
+/**
  * Lists all account invites in the account identified by the given account ID.
  * Required permissions:
  * - read:invites
