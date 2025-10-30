@@ -24,7 +24,7 @@ COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY: CollectionApiKeyAccessType
 COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE: CollectionApiKeyAccessType
 
 class ListCollectionApiKeysRequest(_message.Message):
-    __slots__ = ("account_id", "collection_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -32,25 +32,25 @@ class ListCollectionApiKeysRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., collection_id: _Optional[str] = ...) -> None: ...
 
 class ListCollectionApiKeysResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[CollectionApiKey]
     def __init__(self, items: _Optional[_Iterable[_Union[CollectionApiKey, _Mapping]]] = ...) -> None: ...
 
 class CreateCollectionApiKeyRequest(_message.Message):
-    __slots__ = ("collection_api_key",)
+    __slots__ = ()
     COLLECTION_API_KEY_FIELD_NUMBER: _ClassVar[int]
     collection_api_key: CollectionApiKey
     def __init__(self, collection_api_key: _Optional[_Union[CollectionApiKey, _Mapping]] = ...) -> None: ...
 
 class CreateCollectionApiKeyResponse(_message.Message):
-    __slots__ = ("collection_api_key",)
+    __slots__ = ()
     COLLECTION_API_KEY_FIELD_NUMBER: _ClassVar[int]
     collection_api_key: CollectionApiKey
     def __init__(self, collection_api_key: _Optional[_Union[CollectionApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteCollectionApiKeyRequest(_message.Message):
-    __slots__ = ("account_id", "collection_id", "collection_api_key_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
@@ -64,7 +64,7 @@ class DeleteCollectionApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class CollectionApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "collection_id", "name", "expires_at", "access_type", "created_by_email", "postfix", "key")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]

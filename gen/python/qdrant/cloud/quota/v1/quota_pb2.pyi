@@ -12,19 +12,19 @@ class GetAuthenticatedUserQuotasRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class GetAuthenticatedUserQuotasResponse(_message.Message):
-    __slots__ = ("max_owned_accounts",)
+    __slots__ = ()
     MAX_OWNED_ACCOUNTS_FIELD_NUMBER: _ClassVar[int]
     max_owned_accounts: int
     def __init__(self, max_owned_accounts: _Optional[int] = ...) -> None: ...
 
 class GetAccountQuotasRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class GetAccountQuotasResponse(_message.Message):
-    __slots__ = ("account_id", "max_clusters", "max_cluster_nodes", "max_cluster_database_api_keys", "max_free_tier_clusters")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MAX_CLUSTERS_FIELD_NUMBER: _ClassVar[int]
     MAX_CLUSTER_NODES_FIELD_NUMBER: _ClassVar[int]

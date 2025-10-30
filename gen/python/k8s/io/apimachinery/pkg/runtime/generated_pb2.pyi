@@ -6,13 +6,13 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class RawExtension(_message.Message):
-    __slots__ = ("raw",)
+    __slots__ = ()
     RAW_FIELD_NUMBER: _ClassVar[int]
     raw: bytes
     def __init__(self, raw: _Optional[bytes] = ...) -> None: ...
 
 class TypeMeta(_message.Message):
-    __slots__ = ("apiVersion", "kind")
+    __slots__ = ()
     APIVERSION_FIELD_NUMBER: _ClassVar[int]
     KIND_FIELD_NUMBER: _ClassVar[int]
     apiVersion: str
@@ -20,7 +20,7 @@ class TypeMeta(_message.Message):
     def __init__(self, apiVersion: _Optional[str] = ..., kind: _Optional[str] = ...) -> None: ...
 
 class Unknown(_message.Message):
-    __slots__ = ("typeMeta", "raw", "contentEncoding", "contentType")
+    __slots__ = ()
     TYPEMETA_FIELD_NUMBER: _ClassVar[int]
     RAW_FIELD_NUMBER: _ClassVar[int]
     CONTENTENCODING_FIELD_NUMBER: _ClassVar[int]

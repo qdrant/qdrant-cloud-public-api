@@ -29,9 +29,9 @@ EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
 class EventOptions(_message.Message):
-    __slots__ = ("event_type", "resource_type", "status_only", "resource_id_field", "resource_url_template", "action_type", "additional_context_fields")
+    __slots__ = ()
     class AdditionalContextFieldsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -54,9 +54,9 @@ class EventOptions(_message.Message):
     def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class Event(_message.Message):
-    __slots__ = ("id", "created_at", "actor_id", "actor_type", "account_id", "source_rpc", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
+    __slots__ = ()
     class AdditionalContextEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str

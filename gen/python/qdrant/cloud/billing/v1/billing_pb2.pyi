@@ -29,31 +29,31 @@ INVOICE_STATUS_PAID: InvoiceStatus
 INVOICE_STATUS_UNCOLLECTIBLE: InvoiceStatus
 
 class ListInvoicesRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListInvoicesResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Invoice]
     def __init__(self, items: _Optional[_Iterable[_Union[Invoice, _Mapping]]] = ...) -> None: ...
 
 class ListDiscountsRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListDiscountsResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Discount]
     def __init__(self, items: _Optional[_Iterable[_Union[Discount, _Mapping]]] = ...) -> None: ...
 
 class Invoice(_message.Message):
-    __slots__ = ("id", "number", "total_amount", "created_at", "status", "pdf_url")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     NUMBER_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
@@ -69,7 +69,7 @@ class Invoice(_message.Message):
     def __init__(self, id: _Optional[str] = ..., number: _Optional[str] = ..., total_amount: _Optional[int] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[InvoiceStatus, str]] = ..., pdf_url: _Optional[str] = ...) -> None: ...
 
 class Discount(_message.Message):
-    __slots__ = ("name", "percentage", "fixed", "valid_from", "valid_until")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
     FIXED_FIELD_NUMBER: _ClassVar[int]
@@ -83,13 +83,13 @@ class Discount(_message.Message):
     def __init__(self, name: _Optional[str] = ..., percentage: _Optional[_Union[DiscountPercentage, _Mapping]] = ..., fixed: _Optional[_Union[DiscountFixed, _Mapping]] = ..., valid_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., valid_until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class DiscountPercentage(_message.Message):
-    __slots__ = ("value",)
+    __slots__ = ()
     VALUE_FIELD_NUMBER: _ClassVar[int]
     value: float
     def __init__(self, value: _Optional[float] = ...) -> None: ...
 
 class DiscountFixed(_message.Message):
-    __slots__ = ("value", "currency")
+    __slots__ = ()
     VALUE_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     value: float

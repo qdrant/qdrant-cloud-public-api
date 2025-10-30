@@ -157,7 +157,7 @@ CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
 
 class ListClustersRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -167,13 +167,13 @@ class ListClustersRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class ListClustersResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Cluster]
     def __init__(self, items: _Optional[_Iterable[_Union[Cluster, _Mapping]]] = ...) -> None: ...
 
 class GetClusterRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -181,37 +181,37 @@ class GetClusterRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class GetClusterResponse(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class CreateClusterRequest(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class CreateClusterResponse(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class UpdateClusterRequest(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class UpdateClusterResponse(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class DeleteClusterRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "delete_backups")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     DELETE_BACKUPS_FIELD_NUMBER: _ClassVar[int]
@@ -225,7 +225,7 @@ class DeleteClusterResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class RestartClusterRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -237,7 +237,7 @@ class RestartClusterResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class SuspendClusterRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -249,19 +249,19 @@ class SuspendClusterResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class SuggestClusterNameRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class SuggestClusterNameResponse(_message.Message):
-    __slots__ = ("name",)
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     name: str
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class ListQdrantReleasesRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -269,13 +269,13 @@ class ListQdrantReleasesRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class ListQdrantReleasesResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[QdrantRelease]
     def __init__(self, items: _Optional[_Iterable[_Union[QdrantRelease, _Mapping]]] = ...) -> None: ...
 
 class Cluster(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "configuration", "state")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -297,7 +297,7 @@ class Cluster(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[ClusterConfiguration, _Mapping]] = ..., state: _Optional[_Union[ClusterState, _Mapping]] = ...) -> None: ...
 
 class ClusterConfiguration(_message.Message):
-    __slots__ = ("last_modified_at", "number_of_nodes", "version", "package_id", "additional_resources", "database_configuration", "node_selector", "tolerations", "annotations", "allowed_ip_source_ranges", "service_type", "service_annotations", "pod_labels", "reserved_cpu_percentage", "reserved_memory_percentage", "gpu_type", "restart_policy", "rebalance_strategy")
+    __slots__ = ()
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -337,7 +337,7 @@ class ClusterConfiguration(_message.Message):
     def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., service_type: _Optional[_Union[ClusterServiceType, str]] = ..., service_annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., pod_labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[_Union[ClusterConfigurationGpuType, str]] = ..., restart_policy: _Optional[_Union[ClusterConfigurationRestartPolicy, str]] = ..., rebalance_strategy: _Optional[_Union[ClusterConfigurationRebalanceStrategy, str]] = ...) -> None: ...
 
 class DatabaseConfiguration(_message.Message):
-    __slots__ = ("collection", "storage", "service", "log_level", "tls", "inference")
+    __slots__ = ()
     COLLECTION_FIELD_NUMBER: _ClassVar[int]
     STORAGE_FIELD_NUMBER: _ClassVar[int]
     SERVICE_FIELD_NUMBER: _ClassVar[int]
@@ -353,7 +353,7 @@ class DatabaseConfiguration(_message.Message):
     def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollection(_message.Message):
-    __slots__ = ("replication_factor", "write_consistency_factor", "vectors")
+    __slots__ = ()
     REPLICATION_FACTOR_FIELD_NUMBER: _ClassVar[int]
     WRITE_CONSISTENCY_FACTOR_FIELD_NUMBER: _ClassVar[int]
     VECTORS_FIELD_NUMBER: _ClassVar[int]
@@ -363,19 +363,19 @@ class DatabaseConfigurationCollection(_message.Message):
     def __init__(self, replication_factor: _Optional[int] = ..., write_consistency_factor: _Optional[int] = ..., vectors: _Optional[_Union[DatabaseConfigurationCollectionVectors, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollectionVectors(_message.Message):
-    __slots__ = ("on_disk",)
+    __slots__ = ()
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
     def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationStorage(_message.Message):
-    __slots__ = ("performance",)
+    __slots__ = ()
     PERFORMANCE_FIELD_NUMBER: _ClassVar[int]
     performance: DatabaseConfigurationStoragePerformance
     def __init__(self, performance: _Optional[_Union[DatabaseConfigurationStoragePerformance, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationStoragePerformance(_message.Message):
-    __slots__ = ("optimizer_cpu_budget", "async_scorer")
+    __slots__ = ()
     OPTIMIZER_CPU_BUDGET_FIELD_NUMBER: _ClassVar[int]
     ASYNC_SCORER_FIELD_NUMBER: _ClassVar[int]
     optimizer_cpu_budget: int
@@ -383,7 +383,7 @@ class DatabaseConfigurationStoragePerformance(_message.Message):
     def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationService(_message.Message):
-    __slots__ = ("api_key", "read_only_api_key", "jwt_rbac", "enable_tls")
+    __slots__ = ()
     API_KEY_FIELD_NUMBER: _ClassVar[int]
     READ_ONLY_API_KEY_FIELD_NUMBER: _ClassVar[int]
     JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
@@ -395,7 +395,7 @@ class DatabaseConfigurationService(_message.Message):
     def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: _Optional[bool] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationTls(_message.Message):
-    __slots__ = ("cert", "key")
+    __slots__ = ()
     CERT_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     cert: _common_pb2.SecretKeyRef
@@ -403,19 +403,19 @@ class DatabaseConfigurationTls(_message.Message):
     def __init__(self, cert: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationInference(_message.Message):
-    __slots__ = ("enabled",)
+    __slots__ = ()
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
     def __init__(self, enabled: _Optional[bool] = ...) -> None: ...
 
 class AdditionalResources(_message.Message):
-    __slots__ = ("disk",)
+    __slots__ = ()
     DISK_FIELD_NUMBER: _ClassVar[int]
     disk: int
     def __init__(self, disk: _Optional[int] = ...) -> None: ...
 
 class Toleration(_message.Message):
-    __slots__ = ("key", "operator", "value", "effect", "toleration_seconds")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPERATOR_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -429,7 +429,7 @@ class Toleration(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[_Union[TolerationOperator, str]] = ..., value: _Optional[str] = ..., effect: _Optional[_Union[TolerationEffect, str]] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
 
 class ClusterState(_message.Message):
-    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info", "nodes")
+    __slots__ = ()
     VERSION_FIELD_NUMBER: _ClassVar[int]
     NODES_UP_FIELD_NUMBER: _ClassVar[int]
     RESTARTED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -451,7 +451,7 @@ class ClusterState(_message.Message):
     def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeInfo(_message.Message):
-    __slots__ = ("name", "started_at", "version", "endpoint", "state")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     STARTED_AT_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -465,7 +465,7 @@ class ClusterNodeInfo(_message.Message):
     def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
-    __slots__ = ("url", "rest_port", "grpc_port")
+    __slots__ = ()
     URL_FIELD_NUMBER: _ClassVar[int]
     REST_PORT_FIELD_NUMBER: _ClassVar[int]
     GRPC_PORT_FIELD_NUMBER: _ClassVar[int]
@@ -475,7 +475,7 @@ class ClusterEndpoint(_message.Message):
     def __init__(self, url: _Optional[str] = ..., rest_port: _Optional[int] = ..., grpc_port: _Optional[int] = ...) -> None: ...
 
 class ClusterNodeResourcesSummary(_message.Message):
-    __slots__ = ("disk", "ram", "cpu")
+    __slots__ = ()
     DISK_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
@@ -485,7 +485,7 @@ class ClusterNodeResourcesSummary(_message.Message):
     def __init__(self, disk: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., ram: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., cpu: _Optional[_Union[ClusterNodeResources, _Mapping]] = ...) -> None: ...
 
 class ClusterNodeResources(_message.Message):
-    __slots__ = ("base", "complimentary", "additional", "reserved", "available")
+    __slots__ = ()
     BASE_FIELD_NUMBER: _ClassVar[int]
     COMPLIMENTARY_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_FIELD_NUMBER: _ClassVar[int]
@@ -499,7 +499,7 @@ class ClusterNodeResources(_message.Message):
     def __init__(self, base: _Optional[float] = ..., complimentary: _Optional[float] = ..., additional: _Optional[float] = ..., reserved: _Optional[float] = ..., available: _Optional[float] = ...) -> None: ...
 
 class ClusterScalabilityInfo(_message.Message):
-    __slots__ = ("status", "reason")
+    __slots__ = ()
     STATUS_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
     status: ClusterScalabilityStatus
@@ -507,7 +507,7 @@ class ClusterScalabilityInfo(_message.Message):
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
-    __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")
+    __slots__ = ()
     VERSION_FIELD_NUMBER: _ClassVar[int]
     DEFAULT_FIELD_NUMBER: _ClassVar[int]
     RELEASE_NOTES_URL_FIELD_NUMBER: _ClassVar[int]
@@ -523,7 +523,7 @@ class QdrantRelease(_message.Message):
     def __init__(self, version: _Optional[str] = ..., default: _Optional[bool] = ..., release_notes_url: _Optional[str] = ..., remarks: _Optional[str] = ..., end_of_life: _Optional[bool] = ..., unavailable: _Optional[bool] = ...) -> None: ...
 
 class CreateClusterFromBackupRequest(_message.Message):
-    __slots__ = ("account_id", "backup_id", "cluster_name")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -533,7 +533,7 @@ class CreateClusterFromBackupRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., cluster_name: _Optional[str] = ...) -> None: ...
 
 class CreateClusterFromBackupResponse(_message.Message):
-    __slots__ = ("cluster",)
+    __slots__ = ()
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
