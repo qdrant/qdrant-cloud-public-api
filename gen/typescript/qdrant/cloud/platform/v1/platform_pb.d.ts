@@ -139,6 +139,59 @@ export declare type ListGlobalCloudProviderRegionsResponseValid = ListGlobalClou
 export declare const ListGlobalCloudProviderRegionsResponseSchema: GenMessage<ListGlobalCloudProviderRegionsResponse, {validType: ListGlobalCloudProviderRegionsResponseValid}>;
 
 /**
+ * GetGlobalCloudProviderRegionRequest is the request for the GetGlobalCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest
+ */
+export declare type GetGlobalCloudProviderRegionRequest = Message<"qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest"> & {
+  /**
+   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * This is a required field.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The identifier for the cloud provider region.
+   * This is a required field.
+   *
+   * @generated from field: string region_id = 2;
+   */
+  regionId: string;
+};
+
+export declare type GetGlobalCloudProviderRegionRequestValid = GetGlobalCloudProviderRegionRequest;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest.
+ * Use `create(GetGlobalCloudProviderRegionRequestSchema)` to create a new message.
+ */
+export declare const GetGlobalCloudProviderRegionRequestSchema: GenMessage<GetGlobalCloudProviderRegionRequest, {validType: GetGlobalCloudProviderRegionRequestValid}>;
+
+/**
+ * GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse
+ */
+export declare type GetGlobalCloudProviderRegionResponse = Message<"qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse"> & {
+  /**
+   * The cloud provider region.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegion region = 1;
+   */
+  region?: CloudProviderRegion;
+};
+
+export declare type GetGlobalCloudProviderRegionResponseValid = GetGlobalCloudProviderRegionResponse;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse.
+ * Use `create(GetGlobalCloudProviderRegionResponseSchema)` to create a new message.
+ */
+export declare const GetGlobalCloudProviderRegionResponseSchema: GenMessage<GetGlobalCloudProviderRegionResponse, {validType: GetGlobalCloudProviderRegionResponseValid}>;
+
+/**
  * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
  *
  * @generated from message qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
@@ -190,6 +243,67 @@ export declare type ListCloudProviderRegionsResponseValid = ListCloudProviderReg
  * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
  */
 export declare const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse, {validType: ListCloudProviderRegionsResponseValid}>;
+
+/**
+ * GetCloudProviderRegionRequest is the request for the GetCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetCloudProviderRegionRequest
+ */
+export declare type GetCloudProviderRegionRequest = Message<"qdrant.cloud.platform.v1.GetCloudProviderRegionRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * This is a required field.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The identifier for the cloud provider region.
+   * This is a required field.
+   *
+   * @generated from field: string region_id = 3;
+   */
+  regionId: string;
+};
+
+export declare type GetCloudProviderRegionRequestValid = GetCloudProviderRegionRequest;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetCloudProviderRegionRequest.
+ * Use `create(GetCloudProviderRegionRequestSchema)` to create a new message.
+ */
+export declare const GetCloudProviderRegionRequestSchema: GenMessage<GetCloudProviderRegionRequest, {validType: GetCloudProviderRegionRequestValid}>;
+
+/**
+ * GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetCloudProviderRegionResponse
+ */
+export declare type GetCloudProviderRegionResponse = Message<"qdrant.cloud.platform.v1.GetCloudProviderRegionResponse"> & {
+  /**
+   * The cloud provider region.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegion region = 1;
+   */
+  region?: CloudProviderRegion;
+};
+
+export declare type GetCloudProviderRegionResponseValid = GetCloudProviderRegionResponse;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetCloudProviderRegionResponse.
+ * Use `create(GetCloudProviderRegionResponseSchema)` to create a new message.
+ */
+export declare const GetCloudProviderRegionResponseSchema: GenMessage<GetCloudProviderRegionResponse, {validType: GetCloudProviderRegionResponseValid}>;
 
 /**
  * CloudProvider represents a cloud provider identifier and name.
@@ -294,6 +408,20 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
    * @generated from field: optional string geographical_sub_region = 7;
    */
   geographicalSubRegion?: string;
+
+  /**
+   * Kubernetes namespace where the components for the environment are deployed (for hybrid cloud regions).
+   *
+   * @generated from field: optional string namespace = 8;
+   */
+  namespace?: string;
+
+  /**
+   * Storage capabilities available in this region.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegionCapabilities capabilities = 9;
+   */
+  capabilities?: CloudProviderRegionCapabilities;
 };
 
 export declare type CloudProviderRegionValid = CloudProviderRegion;
@@ -303,6 +431,35 @@ export declare type CloudProviderRegionValid = CloudProviderRegion;
  * Use `create(CloudProviderRegionSchema)` to create a new message.
  */
 export declare const CloudProviderRegionSchema: GenMessage<CloudProviderRegion, {validType: CloudProviderRegionValid}>;
+
+/**
+ * CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
+ *
+ * @generated from message qdrant.cloud.platform.v1.CloudProviderRegionCapabilities
+ */
+export declare type CloudProviderRegionCapabilities = Message<"qdrant.cloud.platform.v1.CloudProviderRegionCapabilities"> & {
+  /**
+   * Whether volume snapshots are supported.
+   *
+   * @generated from field: bool volume_snapshot = 1;
+   */
+  volumeSnapshot: boolean;
+
+  /**
+   * Whether volume expansion is supported.
+   *
+   * @generated from field: bool volume_expansion = 2;
+   */
+  volumeExpansion: boolean;
+};
+
+export declare type CloudProviderRegionCapabilitiesValid = CloudProviderRegionCapabilities;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.CloudProviderRegionCapabilities.
+ * Use `create(CloudProviderRegionCapabilitiesSchema)` to create a new message.
+ */
+export declare const CloudProviderRegionCapabilitiesSchema: GenMessage<CloudProviderRegionCapabilities, {validType: CloudProviderRegionCapabilitiesValid}>;
 
 /**
  * PlatformService is the API used to query for cloud provider & regional information.
@@ -345,11 +502,23 @@ export declare const PlatformService: GenService<{
     output: typeof ListGlobalCloudProviderRegionsResponseSchema;
   },
   /**
+   * Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
+   * Authentication is not required.
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.GetGlobalCloudProviderRegion
+   */
+  getGlobalCloudProviderRegion: {
+    methodKind: "unary";
+    input: typeof GetGlobalCloudProviderRegionRequestSchema;
+    output: typeof GetGlobalCloudProviderRegionResponseSchema;
+  },
+  /**
    * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
    * Required permissions:
    * - None (authenticated only)
    * Conditional permissions:
-   * - read:hybrid_cloud_environments OR read:clusters - required only if request.cloud_provider_id refers to a hybrid provider.
+   * - read:hybrid_cloud_environments OR read:clusters
+   *   One of these permissions is required when the specified cloud_provider_id is "hybrid".
    *
    * @generated from rpc qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions
    */
@@ -357,6 +526,21 @@ export declare const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof ListCloudProviderRegionsRequestSchema;
     output: typeof ListCloudProviderRegionsResponseSchema;
+  },
+  /**
+   * Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
+   * Required permissions:
+   * - None (authenticated only)
+   * Conditional permissions:
+   * - read:hybrid_cloud_environments OR read:clusters
+   *   One of these permissions is required when the specified cloud_provider_id is "hybrid".
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion
+   */
+  getCloudProviderRegion: {
+    methodKind: "unary";
+    input: typeof GetCloudProviderRegionRequestSchema;
+    output: typeof GetCloudProviderRegionResponseSchema;
   },
 }>;
 
