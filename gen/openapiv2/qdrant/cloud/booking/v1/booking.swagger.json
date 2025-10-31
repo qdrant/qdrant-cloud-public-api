@@ -419,6 +419,15 @@
           "type": "string",
           "description": "The vendor/provider of the model (e.g., \"OpenAI\", \"Cohere\")."
         },
+        "unitIntPrice": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The price per 1 million tokens processed by the model, in millicents.\nSome models may be free to use and have a price of 0."
+        },
+        "isExternal": {
+          "type": "boolean",
+          "description": "Indicates whether this is an external model (requiring external API keys)."
+        },
         "dimensionality": {
           "type": "integer",
           "format": "int64",
@@ -428,19 +437,6 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum number of tokens that can be processed per request.\nOptional field, as some models may not have a fixed limit."
-        },
-        "providerRegionMappingId": {
-          "type": "string",
-          "description": "The identifier for the provider region mapping."
-        },
-        "unitIntPrice": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The unit price in millicents."
-        },
-        "isExternal": {
-          "type": "boolean",
-          "description": "Indicates whether this is an external model (requiring external API keys)."
         },
         "externalDocsUrl": {
           "type": "string",

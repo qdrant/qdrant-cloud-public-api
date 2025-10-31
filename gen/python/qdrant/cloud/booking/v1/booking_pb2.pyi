@@ -189,7 +189,7 @@ class ListInferenceModelsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[InferenceModel, _Mapping]]] = ...) -> None: ...
 
 class InferenceModel(_message.Message):
-    __slots__ = ("id", "name", "title", "description", "vector_type", "modality", "vendor", "dimensionality", "max_tokens_per_request", "provider_region_mapping_id", "unit_int_price", "is_external", "external_docs_url")
+    __slots__ = ("id", "name", "title", "description", "vector_type", "modality", "vendor", "unit_int_price", "is_external", "dimensionality", "max_tokens_per_request", "external_docs_url")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
@@ -197,11 +197,10 @@ class InferenceModel(_message.Message):
     VECTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
     MODALITY_FIELD_NUMBER: _ClassVar[int]
     VENDOR_FIELD_NUMBER: _ClassVar[int]
-    DIMENSIONALITY_FIELD_NUMBER: _ClassVar[int]
-    MAX_TOKENS_PER_REQUEST_FIELD_NUMBER: _ClassVar[int]
-    PROVIDER_REGION_MAPPING_ID_FIELD_NUMBER: _ClassVar[int]
     UNIT_INT_PRICE_FIELD_NUMBER: _ClassVar[int]
     IS_EXTERNAL_FIELD_NUMBER: _ClassVar[int]
+    DIMENSIONALITY_FIELD_NUMBER: _ClassVar[int]
+    MAX_TOKENS_PER_REQUEST_FIELD_NUMBER: _ClassVar[int]
     EXTERNAL_DOCS_URL_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
@@ -210,10 +209,9 @@ class InferenceModel(_message.Message):
     vector_type: VectorType
     modality: ModelModality
     vendor: str
-    dimensionality: int
-    max_tokens_per_request: int
-    provider_region_mapping_id: str
     unit_int_price: int
     is_external: bool
+    dimensionality: int
+    max_tokens_per_request: int
     external_docs_url: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., vector_type: _Optional[_Union[VectorType, str]] = ..., modality: _Optional[_Union[ModelModality, str]] = ..., vendor: _Optional[str] = ..., dimensionality: _Optional[int] = ..., max_tokens_per_request: _Optional[int] = ..., provider_region_mapping_id: _Optional[str] = ..., unit_int_price: _Optional[int] = ..., is_external: _Optional[bool] = ..., external_docs_url: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., vector_type: _Optional[_Union[VectorType, str]] = ..., modality: _Optional[_Union[ModelModality, str]] = ..., vendor: _Optional[str] = ..., unit_int_price: _Optional[int] = ..., is_external: _Optional[bool] = ..., dimensionality: _Optional[int] = ..., max_tokens_per_request: _Optional[int] = ..., external_docs_url: _Optional[str] = ...) -> None: ...

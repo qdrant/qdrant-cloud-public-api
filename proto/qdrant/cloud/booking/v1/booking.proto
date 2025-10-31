@@ -369,19 +369,18 @@ message InferenceModel {
   }];
   // The vendor/provider of the model (e.g., "OpenAI", "Cohere").
   string vendor = 7 [(buf.validate.field).string = {min_len: 1}];
+  // The price per 1 million tokens processed by the model, in millicents.
+  // Some models may be free to use and have a price of 0.
+  uint32 unit_int_price = 8;
+  // Indicates whether this is an external model (requiring external API keys).
+  bool is_external = 9;
   // The dimensionality of the output vectors.
   // Optional field, as some models may not have a fixed dimensionality.
-  optional uint32 dimensionality = 8;
+  optional uint32 dimensionality = 10;
   // The maximum number of tokens that can be processed per request.
   // Optional field, as some models may not have a fixed limit.
-  optional uint32 max_tokens_per_request = 9;
-  // The identifier for the provider region mapping.
-  string provider_region_mapping_id = 10 [(buf.validate.field).string = {uuid: true}];
-  // The unit price in millicents.
-  uint32 unit_int_price = 11;
-  // Indicates whether this is an external model (requiring external API keys).
-  bool is_external = 12;
+  optional uint32 max_tokens_per_request = 11;
   // Optional URL to external documentation for the model.
   // Only present for external models.
-  optional string external_docs_url = 13 [(buf.validate.field).string = {uri: true}];
+  optional string external_docs_url = 12 [(buf.validate.field).string = {uri: true}];
 }

@@ -631,10 +631,25 @@ export declare type InferenceModel = Message<"qdrant.cloud.booking.v1.InferenceM
   vendor: string;
 
   /**
+   * The price per 1 million tokens processed by the model, in millicents.
+   * Some models may be free to use and have a price of 0.
+   *
+   * @generated from field: uint32 unit_int_price = 8;
+   */
+  unitIntPrice: number;
+
+  /**
+   * Indicates whether this is an external model (requiring external API keys).
+   *
+   * @generated from field: bool is_external = 9;
+   */
+  isExternal: boolean;
+
+  /**
    * The dimensionality of the output vectors.
    * Optional field, as some models may not have a fixed dimensionality.
    *
-   * @generated from field: optional uint32 dimensionality = 8;
+   * @generated from field: optional uint32 dimensionality = 10;
    */
   dimensionality?: number;
 
@@ -642,36 +657,15 @@ export declare type InferenceModel = Message<"qdrant.cloud.booking.v1.InferenceM
    * The maximum number of tokens that can be processed per request.
    * Optional field, as some models may not have a fixed limit.
    *
-   * @generated from field: optional uint32 max_tokens_per_request = 9;
+   * @generated from field: optional uint32 max_tokens_per_request = 11;
    */
   maxTokensPerRequest?: number;
-
-  /**
-   * The identifier for the provider region mapping.
-   *
-   * @generated from field: string provider_region_mapping_id = 10;
-   */
-  providerRegionMappingId: string;
-
-  /**
-   * The unit price in millicents.
-   *
-   * @generated from field: uint32 unit_int_price = 11;
-   */
-  unitIntPrice: number;
-
-  /**
-   * Indicates whether this is an external model (requiring external API keys).
-   *
-   * @generated from field: bool is_external = 12;
-   */
-  isExternal: boolean;
 
   /**
    * Optional URL to external documentation for the model.
    * Only present for external models.
    *
-   * @generated from field: optional string external_docs_url = 13;
+   * @generated from field: optional string external_docs_url = 12;
    */
   externalDocsUrl?: string;
 };

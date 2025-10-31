@@ -1200,21 +1200,20 @@ type InferenceModel struct {
 	Modality ModelModality `protobuf:"varint,6,opt,name=modality,proto3,enum=qdrant.cloud.booking.v1.ModelModality" json:"modality,omitempty"`
 	// The vendor/provider of the model (e.g., "OpenAI", "Cohere").
 	Vendor string `protobuf:"bytes,7,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	// The price per 1 million tokens processed by the model, in millicents.
+	// Some models may be free to use and have a price of 0.
+	UnitIntPrice uint32 `protobuf:"varint,8,opt,name=unit_int_price,json=unitIntPrice,proto3" json:"unit_int_price,omitempty"`
+	// Indicates whether this is an external model (requiring external API keys).
+	IsExternal bool `protobuf:"varint,9,opt,name=is_external,json=isExternal,proto3" json:"is_external,omitempty"`
 	// The dimensionality of the output vectors.
 	// Optional field, as some models may not have a fixed dimensionality.
-	Dimensionality *uint32 `protobuf:"varint,8,opt,name=dimensionality,proto3,oneof" json:"dimensionality,omitempty"`
+	Dimensionality *uint32 `protobuf:"varint,10,opt,name=dimensionality,proto3,oneof" json:"dimensionality,omitempty"`
 	// The maximum number of tokens that can be processed per request.
 	// Optional field, as some models may not have a fixed limit.
-	MaxTokensPerRequest *uint32 `protobuf:"varint,9,opt,name=max_tokens_per_request,json=maxTokensPerRequest,proto3,oneof" json:"max_tokens_per_request,omitempty"`
-	// The identifier for the provider region mapping.
-	ProviderRegionMappingId string `protobuf:"bytes,10,opt,name=provider_region_mapping_id,json=providerRegionMappingId,proto3" json:"provider_region_mapping_id,omitempty"`
-	// The unit price in millicents.
-	UnitIntPrice uint32 `protobuf:"varint,11,opt,name=unit_int_price,json=unitIntPrice,proto3" json:"unit_int_price,omitempty"`
-	// Indicates whether this is an external model (requiring external API keys).
-	IsExternal bool `protobuf:"varint,12,opt,name=is_external,json=isExternal,proto3" json:"is_external,omitempty"`
+	MaxTokensPerRequest *uint32 `protobuf:"varint,11,opt,name=max_tokens_per_request,json=maxTokensPerRequest,proto3,oneof" json:"max_tokens_per_request,omitempty"`
 	// Optional URL to external documentation for the model.
 	// Only present for external models.
-	ExternalDocsUrl *string `protobuf:"bytes,13,opt,name=external_docs_url,json=externalDocsUrl,proto3,oneof" json:"external_docs_url,omitempty"`
+	ExternalDocsUrl *string `protobuf:"bytes,12,opt,name=external_docs_url,json=externalDocsUrl,proto3,oneof" json:"external_docs_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1298,27 +1297,6 @@ func (x *InferenceModel) GetVendor() string {
 	return ""
 }
 
-func (x *InferenceModel) GetDimensionality() uint32 {
-	if x != nil && x.Dimensionality != nil {
-		return *x.Dimensionality
-	}
-	return 0
-}
-
-func (x *InferenceModel) GetMaxTokensPerRequest() uint32 {
-	if x != nil && x.MaxTokensPerRequest != nil {
-		return *x.MaxTokensPerRequest
-	}
-	return 0
-}
-
-func (x *InferenceModel) GetProviderRegionMappingId() string {
-	if x != nil {
-		return x.ProviderRegionMappingId
-	}
-	return ""
-}
-
 func (x *InferenceModel) GetUnitIntPrice() uint32 {
 	if x != nil {
 		return x.UnitIntPrice
@@ -1331,6 +1309,20 @@ func (x *InferenceModel) GetIsExternal() bool {
 		return x.IsExternal
 	}
 	return false
+}
+
+func (x *InferenceModel) GetDimensionality() uint32 {
+	if x != nil && x.Dimensionality != nil {
+		return *x.Dimensionality
+	}
+	return 0
+}
+
+func (x *InferenceModel) GetMaxTokensPerRequest() uint32 {
+	if x != nil && x.MaxTokensPerRequest != nil {
+		return *x.MaxTokensPerRequest
+	}
+	return 0
 }
 
 func (x *InferenceModel) GetExternalDocsUrl() string {
@@ -1422,7 +1414,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\"\\\n" +
 	"\x1bListInferenceModelsResponse\x12=\n" +
-	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.booking.v1.InferenceModelR\x05items\"\xc8\x05\n" +
+	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.booking.v1.InferenceModelR\x05items\"\x81\x05\n" +
 	"\x0eInferenceModel\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
@@ -1433,15 +1425,14 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"vectorType\x12N\n" +
 	"\bmodality\x18\x06 \x01(\x0e2&.qdrant.cloud.booking.v1.ModelModalityB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\bmodality\x12\x1f\n" +
-	"\x06vendor\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06vendor\x12+\n" +
-	"\x0edimensionality\x18\b \x01(\rH\x00R\x0edimensionality\x88\x01\x01\x128\n" +
-	"\x16max_tokens_per_request\x18\t \x01(\rH\x01R\x13maxTokensPerRequest\x88\x01\x01\x12E\n" +
-	"\x1aprovider_region_mapping_id\x18\n" +
-	" \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x17providerRegionMappingId\x12$\n" +
-	"\x0eunit_int_price\x18\v \x01(\rR\funitIntPrice\x12\x1f\n" +
-	"\vis_external\x18\f \x01(\bR\n" +
-	"isExternal\x129\n" +
-	"\x11external_docs_url\x18\r \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x02R\x0fexternalDocsUrl\x88\x01\x01B\x11\n" +
+	"\x06vendor\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06vendor\x12$\n" +
+	"\x0eunit_int_price\x18\b \x01(\rR\funitIntPrice\x12\x1f\n" +
+	"\vis_external\x18\t \x01(\bR\n" +
+	"isExternal\x12+\n" +
+	"\x0edimensionality\x18\n" +
+	" \x01(\rH\x00R\x0edimensionality\x88\x01\x01\x128\n" +
+	"\x16max_tokens_per_request\x18\v \x01(\rH\x01R\x13maxTokensPerRequest\x88\x01\x01\x129\n" +
+	"\x11external_docs_url\x18\f \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x02R\x0fexternalDocsUrl\x88\x01\x01B\x11\n" +
 	"\x0f_dimensionalityB\x19\n" +
 	"\x17_max_tokens_per_requestB\x14\n" +
 	"\x12_external_docs_url*j\n" +
