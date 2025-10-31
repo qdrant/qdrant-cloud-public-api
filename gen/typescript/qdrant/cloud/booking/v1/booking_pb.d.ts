@@ -514,6 +514,171 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
+ * ListInferenceModelsRequest is the request for the ListInferenceModels function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListInferenceModelsRequest
+ */
+export declare type ListInferenceModelsRequest = Message<"qdrant.cloud.booking.v1.ListInferenceModelsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * Required field specifying the cloud provider where the inference model is available.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   * This field cannot be set to `hybrid`.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the inference model is available.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   *
+   * @generated from field: string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId: string;
+};
+
+export declare type ListInferenceModelsRequestValid = ListInferenceModelsRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListInferenceModelsRequest.
+ * Use `create(ListInferenceModelsRequestSchema)` to create a new message.
+ */
+export declare const ListInferenceModelsRequestSchema: GenMessage<ListInferenceModelsRequest, {validType: ListInferenceModelsRequestValid}>;
+
+/**
+ * ListInferenceModelsResponse is the response from the ListInferenceModels function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListInferenceModelsResponse
+ */
+export declare type ListInferenceModelsResponse = Message<"qdrant.cloud.booking.v1.ListInferenceModelsResponse"> & {
+  /**
+   * The actual inference models in this list
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.InferenceModel items = 1;
+   */
+  items: InferenceModel[];
+};
+
+export declare type ListInferenceModelsResponseValid = ListInferenceModelsResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListInferenceModelsResponse.
+ * Use `create(ListInferenceModelsResponseSchema)` to create a new message.
+ */
+export declare const ListInferenceModelsResponseSchema: GenMessage<ListInferenceModelsResponse, {validType: ListInferenceModelsResponseValid}>;
+
+/**
+ * InferenceModel represents a single inference model available for use.
+ *
+ * @generated from message qdrant.cloud.booking.v1.InferenceModel
+ */
+export declare type InferenceModel = Message<"qdrant.cloud.booking.v1.InferenceModel"> & {
+  /**
+   * The unique identifier of the inference model.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The name/identifier of the model (e.g., "cohere/*").
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * The human-readable title of the model.
+   *
+   * @generated from field: string title = 3;
+   */
+  title: string;
+
+  /**
+   * A description of the model's capabilities and use cases.
+   *
+   * @generated from field: string description = 4;
+   */
+  description: string;
+
+  /**
+   * The type of vector representation (dense or sparse).
+   *
+   * @generated from field: qdrant.cloud.booking.v1.VectorType vector_type = 5;
+   */
+  vectorType: VectorType;
+
+  /**
+   * The type of data the model processes (text or image).
+   *
+   * @generated from field: qdrant.cloud.booking.v1.ModelModality modality = 6;
+   */
+  modality: ModelModality;
+
+  /**
+   * The vendor/provider of the model (e.g., "OpenAI", "Cohere").
+   *
+   * @generated from field: string vendor = 7;
+   */
+  vendor: string;
+
+  /**
+   * The price per 1 million tokens processed by the model, in millicents.
+   * Some models may be free to use and have a price of 0.
+   *
+   * @generated from field: uint32 unit_int_price = 8;
+   */
+  unitIntPrice: number;
+
+  /**
+   * Indicates whether this is an external model (requiring external API keys).
+   *
+   * @generated from field: bool is_external = 9;
+   */
+  isExternal: boolean;
+
+  /**
+   * The dimensionality of the output vectors.
+   * Optional field, as some models may not have a fixed dimensionality.
+   *
+   * @generated from field: optional uint32 dimensionality = 10;
+   */
+  dimensionality?: number;
+
+  /**
+   * The maximum number of tokens that can be processed per request.
+   * Optional field, as some models may not have a fixed limit.
+   *
+   * @generated from field: optional uint32 max_tokens_per_request = 11;
+   */
+  maxTokensPerRequest?: number;
+
+  /**
+   * Optional URL to external documentation for the model.
+   * Only present for external models.
+   *
+   * @generated from field: optional string external_docs_url = 12;
+   */
+  externalDocsUrl?: string;
+};
+
+export declare type InferenceModelValid = InferenceModel;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.InferenceModel.
+ * Use `create(InferenceModelSchema)` to create a new message.
+ */
+export declare const InferenceModelSchema: GenMessage<InferenceModel, {validType: InferenceModelValid}>;
+
+/**
  * PackageStatus defines the valid states a package can be in.
  *
  * @generated from enum qdrant.cloud.booking.v1.PackageStatus
@@ -580,6 +745,72 @@ export enum PackageTier {
 export declare const PackageTierSchema: GenEnum<PackageTier>;
 
 /**
+ * VectorType defines the type of vector representation.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.VectorType
+ */
+export enum VectorType {
+  /**
+   * Unspecified vector type.
+   *
+   * @generated from enum value: VECTOR_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Dense vector representation.
+   *
+   * @generated from enum value: VECTOR_TYPE_DENSE = 1;
+   */
+  DENSE = 1,
+
+  /**
+   * Sparse vector representation.
+   *
+   * @generated from enum value: VECTOR_TYPE_SPARSE = 2;
+   */
+  SPARSE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.VectorType.
+ */
+export declare const VectorTypeSchema: GenEnum<VectorType>;
+
+/**
+ * ModelModality defines the type of data the model processes.
+ *
+ * @generated from enum qdrant.cloud.booking.v1.ModelModality
+ */
+export enum ModelModality {
+  /**
+   * Unspecified ModelModality.
+   *
+   * @generated from enum value: MODEL_MODALITY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Text data.
+   *
+   * @generated from enum value: MODEL_MODALITY_TEXT = 1;
+   */
+  TEXT = 1,
+
+  /**
+   * Image data.
+   *
+   * @generated from enum value: MODEL_MODALITY_IMAGE = 2;
+   */
+  IMAGE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.booking.v1.ModelModality.
+ */
+export declare const ModelModalitySchema: GenEnum<ModelModality>;
+
+/**
  * BookingService is the API used to configure the booking settings (like packages objects).
  *
  * @generated from service qdrant.cloud.booking.v1.BookingService
@@ -633,6 +864,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof GetQuoteRequestSchema;
     output: typeof GetQuoteResponseSchema;
+  },
+  /**
+   * Gets the list of available inference models.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
+   */
+  listInferenceModels: {
+    methodKind: "unary";
+    input: typeof ListInferenceModelsRequestSchema;
+    output: typeof ListInferenceModelsResponseSchema;
   },
 }>;
 

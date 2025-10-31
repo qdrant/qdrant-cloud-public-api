@@ -35,6 +35,11 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
                 _registered_method=True)
+        self.ListInferenceModels = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/ListInferenceModels',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.FromString,
+                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -79,6 +84,15 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListInferenceModels(self, request, context):
+        """Gets the list of available inference models.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -101,6 +115,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.GetQuote,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.SerializeToString,
+            ),
+            'ListInferenceModels': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListInferenceModels,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -212,6 +231,33 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/GetQuote',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListInferenceModels(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.booking.v1.BookingService/ListInferenceModels',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.FromString,
             options,
             channel_credentials,
             insecure,
