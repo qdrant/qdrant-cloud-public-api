@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
-	BookingService_ListGlobalPackages_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
-	BookingService_GetQuote_FullMethodName           = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
+	BookingService_ListPackages_FullMethodName        = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName          = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
+	BookingService_GetQuote_FullMethodName            = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
+	BookingService_ListInferenceModels_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListInferenceModels"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -48,6 +49,10 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
+	// Gets the list of available inference models.
+	// Required permissions:
+	// - None (authenticated only)
+	ListInferenceModels(ctx context.Context, in *ListInferenceModelsRequest, opts ...grpc.CallOption) (*ListInferenceModelsResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -98,6 +103,16 @@ func (c *bookingServiceClient) GetQuote(ctx context.Context, in *GetQuoteRequest
 	return out, nil
 }
 
+func (c *bookingServiceClient) ListInferenceModels(ctx context.Context, in *ListInferenceModelsRequest, opts ...grpc.CallOption) (*ListInferenceModelsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListInferenceModelsResponse)
+	err := c.cc.Invoke(ctx, BookingService_ListInferenceModels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -121,6 +136,10 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
+	// Gets the list of available inference models.
+	// Required permissions:
+	// - None (authenticated only)
+	ListInferenceModels(context.Context, *ListInferenceModelsRequest) (*ListInferenceModelsResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -142,6 +161,9 @@ func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *Li
 }
 func (UnimplementedBookingServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQuote not implemented")
+}
+func (UnimplementedBookingServiceServer) ListInferenceModels(context.Context, *ListInferenceModelsRequest) (*ListInferenceModelsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInferenceModels not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -236,6 +258,24 @@ func _BookingService_GetQuote_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_ListInferenceModels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListInferenceModelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).ListInferenceModels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_ListInferenceModels_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).ListInferenceModels(ctx, req.(*ListInferenceModelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +298,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetQuote",
 			Handler:    _BookingService_GetQuote_Handler,
+		},
+		{
+			MethodName: "ListInferenceModels",
+			Handler:    _BookingService_ListInferenceModels_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

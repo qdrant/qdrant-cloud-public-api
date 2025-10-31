@@ -40,3 +40,12 @@ export const listGlobalPackages = BookingService.method.listGlobalPackages;
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
  */
 export const getQuote = BookingService.method.getQuote;
+
+/**
+ * Gets the list of available inference models.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
+ */
+export const listInferenceModels = BookingService.method.listInferenceModels;

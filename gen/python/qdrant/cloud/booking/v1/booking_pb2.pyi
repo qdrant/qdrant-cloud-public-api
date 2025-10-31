@@ -21,12 +21,30 @@ class PackageTier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     PACKAGE_TIER_STATUS_UNSPECIFIED: _ClassVar[PackageTier]
     PACKAGE_TIER_STANDARD: _ClassVar[PackageTier]
     PACKAGE_TIER_PREMIUM: _ClassVar[PackageTier]
+
+class VectorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    VECTOR_TYPE_UNSPECIFIED: _ClassVar[VectorType]
+    VECTOR_TYPE_DENSE: _ClassVar[VectorType]
+    VECTOR_TYPE_SPARSE: _ClassVar[VectorType]
+
+class ModelModality(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    MODEL_MODALITY_UNSPECIFIED: _ClassVar[ModelModality]
+    MODEL_MODALITY_TEXT: _ClassVar[ModelModality]
+    MODEL_MODALITY_IMAGE: _ClassVar[ModelModality]
 PACKAGE_STATUS_UNSPECIFIED: PackageStatus
 PACKAGE_STATUS_ACTIVE: PackageStatus
 PACKAGE_STATUS_DEACTIVATED: PackageStatus
 PACKAGE_TIER_STATUS_UNSPECIFIED: PackageTier
 PACKAGE_TIER_STANDARD: PackageTier
 PACKAGE_TIER_PREMIUM: PackageTier
+VECTOR_TYPE_UNSPECIFIED: VectorType
+VECTOR_TYPE_DENSE: VectorType
+VECTOR_TYPE_SPARSE: VectorType
+MODEL_MODALITY_UNSPECIFIED: ModelModality
+MODEL_MODALITY_TEXT: ModelModality
+MODEL_MODALITY_IMAGE: ModelModality
 
 class ListPackagesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses", "min_resources")
@@ -153,3 +171,49 @@ class GetQuoteResponse(_message.Message):
     discounted_price_per_hour: int
     discount_percentage: float
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
+
+class ListInferenceModelsRequest(_message.Message):
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
+
+class ListInferenceModelsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[InferenceModel]
+    def __init__(self, items: _Optional[_Iterable[_Union[InferenceModel, _Mapping]]] = ...) -> None: ...
+
+class InferenceModel(_message.Message):
+    __slots__ = ("id", "name", "title", "description", "vector_type", "modality", "vendor", "dimensionality", "max_tokens_per_request", "provider_region_mapping_id", "unit_int_price", "is_external", "external_docs_url")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    VECTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
+    MODALITY_FIELD_NUMBER: _ClassVar[int]
+    VENDOR_FIELD_NUMBER: _ClassVar[int]
+    DIMENSIONALITY_FIELD_NUMBER: _ClassVar[int]
+    MAX_TOKENS_PER_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PROVIDER_REGION_MAPPING_ID_FIELD_NUMBER: _ClassVar[int]
+    UNIT_INT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    IS_EXTERNAL_FIELD_NUMBER: _ClassVar[int]
+    EXTERNAL_DOCS_URL_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    title: str
+    description: str
+    vector_type: VectorType
+    modality: ModelModality
+    vendor: str
+    dimensionality: int
+    max_tokens_per_request: int
+    provider_region_mapping_id: str
+    unit_int_price: int
+    is_external: bool
+    external_docs_url: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., vector_type: _Optional[_Union[VectorType, str]] = ..., modality: _Optional[_Union[ModelModality, str]] = ..., vendor: _Optional[str] = ..., dimensionality: _Optional[int] = ..., max_tokens_per_request: _Optional[int] = ..., provider_region_mapping_id: _Optional[str] = ..., unit_int_price: _Optional[int] = ..., is_external: _Optional[bool] = ..., external_docs_url: _Optional[str] = ...) -> None: ...

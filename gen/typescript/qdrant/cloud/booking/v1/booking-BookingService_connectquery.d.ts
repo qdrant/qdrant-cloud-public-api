@@ -37,3 +37,11 @@ export const listGlobalPackages: typeof BookingService["method"]["listGlobalPack
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetQuote
  */
 export const getQuote: typeof BookingService["method"]["getQuote"];
+/**
+ * Gets the list of available inference models.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
+ */
+export const listInferenceModels: typeof BookingService["method"]["listInferenceModels"];
