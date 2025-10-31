@@ -11,19 +11,19 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListUsersWithRolesRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListUsersWithRolesResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[UserWithRoles]
     def __init__(self, items: _Optional[_Iterable[_Union[UserWithRoles, _Mapping]]] = ...) -> None: ...
 
 class UserWithRoles(_message.Message):
-    __slots__ = ("user", "roles")
+    __slots__ = ()
     USER_FIELD_NUMBER: _ClassVar[int]
     ROLES_FIELD_NUMBER: _ClassVar[int]
     user: _iam_pb2.User

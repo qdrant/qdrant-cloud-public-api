@@ -33,7 +33,7 @@ LOG_FIELDS_FIELD_NUMBER: _ClassVar[int]
 log_fields: _descriptor.FieldDescriptor
 
 class LogField(_message.Message):
-    __slots__ = ("name", "field_expression")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     FIELD_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -41,7 +41,7 @@ class LogField(_message.Message):
     def __init__(self, name: _Optional[str] = ..., field_expression: _Optional[str] = ...) -> None: ...
 
 class Version(_message.Message):
-    __slots__ = ("major", "minor", "patch")
+    __slots__ = ()
     MAJOR_FIELD_NUMBER: _ClassVar[int]
     MINOR_FIELD_NUMBER: _ClassVar[int]
     PATCH_FIELD_NUMBER: _ClassVar[int]
@@ -51,7 +51,7 @@ class Version(_message.Message):
     def __init__(self, major: _Optional[int] = ..., minor: _Optional[int] = ..., patch: _Optional[int] = ...) -> None: ...
 
 class SecretKeyRef(_message.Message):
-    __slots__ = ("name", "key")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -59,7 +59,7 @@ class SecretKeyRef(_message.Message):
     def __init__(self, name: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
 
 class KeyValue(_message.Message):
-    __slots__ = ("key", "value")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     key: str

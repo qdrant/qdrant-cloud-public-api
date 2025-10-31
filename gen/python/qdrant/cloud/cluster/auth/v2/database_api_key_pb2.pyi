@@ -33,7 +33,7 @@ COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: CollectionAccessRuleAccessType
 COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: CollectionAccessRuleAccessType
 
 class ListDatabaseApiKeysRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -41,25 +41,25 @@ class ListDatabaseApiKeysRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class ListDatabaseApiKeysResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[DatabaseApiKey]
     def __init__(self, items: _Optional[_Iterable[_Union[DatabaseApiKey, _Mapping]]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ("database_api_key",)
+    __slots__ = ()
     DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
     database_api_key: DatabaseApiKey
     def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyResponse(_message.Message):
-    __slots__ = ("database_api_key",)
+    __slots__ = ()
     DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
     database_api_key: DatabaseApiKey
     def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "database_api_key_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     DATABASE_API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
@@ -73,7 +73,7 @@ class DeleteDatabaseApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -97,7 +97,7 @@ class DatabaseApiKey(_message.Message):
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
 
 class AccessRule(_message.Message):
-    __slots__ = ("global_access", "collection_access")
+    __slots__ = ()
     GLOBAL_ACCESS_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_ACCESS_FIELD_NUMBER: _ClassVar[int]
     global_access: GlobalAccessRule
@@ -105,13 +105,13 @@ class AccessRule(_message.Message):
     def __init__(self, global_access: _Optional[_Union[GlobalAccessRule, _Mapping]] = ..., collection_access: _Optional[_Union[CollectionAccessRule, _Mapping]] = ...) -> None: ...
 
 class GlobalAccessRule(_message.Message):
-    __slots__ = ("access_type",)
+    __slots__ = ()
     ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
     access_type: GlobalAccessRuleAccessType
     def __init__(self, access_type: _Optional[_Union[GlobalAccessRuleAccessType, str]] = ...) -> None: ...
 
 class CollectionAccessRule(_message.Message):
-    __slots__ = ("collection_name", "access_type")
+    __slots__ = ()
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     ACCESS_TYPE_FIELD_NUMBER: _ClassVar[int]
     collection_name: str

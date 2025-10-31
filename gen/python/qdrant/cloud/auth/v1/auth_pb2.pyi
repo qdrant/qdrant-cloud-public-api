@@ -14,31 +14,31 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListManagementKeysRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListManagementKeysResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[ManagementKey]
     def __init__(self, items: _Optional[_Iterable[_Union[ManagementKey, _Mapping]]] = ...) -> None: ...
 
 class CreateManagementKeyRequest(_message.Message):
-    __slots__ = ("management_key",)
+    __slots__ = ()
     MANAGEMENT_KEY_FIELD_NUMBER: _ClassVar[int]
     management_key: ManagementKey
     def __init__(self, management_key: _Optional[_Union[ManagementKey, _Mapping]] = ...) -> None: ...
 
 class CreateManagementKeyResponse(_message.Message):
-    __slots__ = ("management_key",)
+    __slots__ = ()
     MANAGEMENT_KEY_FIELD_NUMBER: _ClassVar[int]
     management_key: ManagementKey
     def __init__(self, management_key: _Optional[_Union[ManagementKey, _Mapping]] = ...) -> None: ...
 
 class DeleteManagementKeyRequest(_message.Message):
-    __slots__ = ("account_id", "management_key_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MANAGEMENT_KEY_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -50,7 +50,7 @@ class DeleteManagementKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ManagementKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "prefix", "key")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]

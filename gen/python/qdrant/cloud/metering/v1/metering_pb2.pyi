@@ -13,19 +13,19 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListMonthlyMeteringsRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListMonthlyMeteringsResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[MonthlyMeteringSummary]
     def __init__(self, items: _Optional[_Iterable[_Union[MonthlyMeteringSummary, _Mapping]]] = ...) -> None: ...
 
 class ListMeteringsRequest(_message.Message):
-    __slots__ = ("account_id", "year", "month")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     YEAR_FIELD_NUMBER: _ClassVar[int]
     MONTH_FIELD_NUMBER: _ClassVar[int]
@@ -35,13 +35,13 @@ class ListMeteringsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., year: _Optional[int] = ..., month: _Optional[int] = ...) -> None: ...
 
 class ListMeteringsResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[MeteringItem]
     def __init__(self, items: _Optional[_Iterable[_Union[MeteringItem, _Mapping]]] = ...) -> None: ...
 
 class MonthlyMeteringSummary(_message.Message):
-    __slots__ = ("year", "month", "amount_millicents", "currency")
+    __slots__ = ()
     YEAR_FIELD_NUMBER: _ClassVar[int]
     MONTH_FIELD_NUMBER: _ClassVar[int]
     AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
@@ -53,7 +53,7 @@ class MonthlyMeteringSummary(_message.Message):
     def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class MeteringItem(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "cluster_name", "start_time", "end_time", "billable_entity_id", "billable_entity_type", "price_per_hour", "usage_hours", "amount_millicents", "discount_amount_millicents", "discount_amount_percent", "currency")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]

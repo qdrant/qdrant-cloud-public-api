@@ -66,23 +66,23 @@ TOKENIZER_WORD: Tokenizer
 TOKENIZER_MULTILINGUAL: Tokenizer
 
 class CollectionConfiguration(_message.Message):
-    __slots__ = ("tenant_key", "dense_vectors", "sparse_vectors", "payload_schema")
+    __slots__ = ()
     class DenseVectorsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: DenseVectorConfiguration
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[DenseVectorConfiguration, _Mapping]] = ...) -> None: ...
     class SparseVectorsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: SparseVectorConfiguration
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[SparseVectorConfiguration, _Mapping]] = ...) -> None: ...
     class PayloadSchemaEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -99,7 +99,7 @@ class CollectionConfiguration(_message.Message):
     def __init__(self, tenant_key: _Optional[str] = ..., dense_vectors: _Optional[_Mapping[str, DenseVectorConfiguration]] = ..., sparse_vectors: _Optional[_Mapping[str, SparseVectorConfiguration]] = ..., payload_schema: _Optional[_Mapping[str, PayloadFieldSchema]] = ...) -> None: ...
 
 class DenseVectorConfiguration(_message.Message):
-    __slots__ = ("dimension", "distance", "multivector", "rescoring", "storage_tier", "precision_tier")
+    __slots__ = ()
     DIMENSION_FIELD_NUMBER: _ClassVar[int]
     DISTANCE_FIELD_NUMBER: _ClassVar[int]
     MULTIVECTOR_FIELD_NUMBER: _ClassVar[int]
@@ -115,7 +115,7 @@ class DenseVectorConfiguration(_message.Message):
     def __init__(self, dimension: _Optional[int] = ..., distance: _Optional[_Union[DistanceMetric, str]] = ..., multivector: _Optional[bool] = ..., rescoring: _Optional[bool] = ..., storage_tier: _Optional[_Union[StorageTier, str]] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
 
 class SparseVectorConfiguration(_message.Message):
-    __slots__ = ("precision_tier", "modifier")
+    __slots__ = ()
     PRECISION_TIER_FIELD_NUMBER: _ClassVar[int]
     MODIFIER_FIELD_NUMBER: _ClassVar[int]
     precision_tier: PrecisionTier
@@ -123,7 +123,7 @@ class SparseVectorConfiguration(_message.Message):
     def __init__(self, precision_tier: _Optional[_Union[PrecisionTier, str]] = ..., modifier: _Optional[_Union[VectorModifier, str]] = ...) -> None: ...
 
 class KeywordIndexParams(_message.Message):
-    __slots__ = ("is_tenant", "on_disk")
+    __slots__ = ()
     IS_TENANT_FIELD_NUMBER: _ClassVar[int]
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_tenant: bool
@@ -131,7 +131,7 @@ class KeywordIndexParams(_message.Message):
     def __init__(self, is_tenant: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class IntegerIndexParams(_message.Message):
-    __slots__ = ("lookup", "range", "is_principal", "on_disk")
+    __slots__ = ()
     LOOKUP_FIELD_NUMBER: _ClassVar[int]
     RANGE_FIELD_NUMBER: _ClassVar[int]
     IS_PRINCIPAL_FIELD_NUMBER: _ClassVar[int]
@@ -143,7 +143,7 @@ class IntegerIndexParams(_message.Message):
     def __init__(self, lookup: _Optional[bool] = ..., range: _Optional[bool] = ..., is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class FloatIndexParams(_message.Message):
-    __slots__ = ("is_principal", "on_disk")
+    __slots__ = ()
     IS_PRINCIPAL_FIELD_NUMBER: _ClassVar[int]
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_principal: bool
@@ -151,13 +151,13 @@ class FloatIndexParams(_message.Message):
     def __init__(self, is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class GeoIndexParams(_message.Message):
-    __slots__ = ("on_disk",)
+    __slots__ = ()
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
     def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class TextIndexParams(_message.Message):
-    __slots__ = ("tokenizer", "min_token_len", "max_token_len", "lowercase", "on_disk")
+    __slots__ = ()
     TOKENIZER_FIELD_NUMBER: _ClassVar[int]
     MIN_TOKEN_LEN_FIELD_NUMBER: _ClassVar[int]
     MAX_TOKEN_LEN_FIELD_NUMBER: _ClassVar[int]
@@ -171,13 +171,13 @@ class TextIndexParams(_message.Message):
     def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., lowercase: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class BoolIndexParams(_message.Message):
-    __slots__ = ("on_disk",)
+    __slots__ = ()
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     on_disk: bool
     def __init__(self, on_disk: _Optional[bool] = ...) -> None: ...
 
 class DatetimeIndexParams(_message.Message):
-    __slots__ = ("is_principal", "on_disk")
+    __slots__ = ()
     IS_PRINCIPAL_FIELD_NUMBER: _ClassVar[int]
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_principal: bool
@@ -185,7 +185,7 @@ class DatetimeIndexParams(_message.Message):
     def __init__(self, is_principal: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class UuidIndexParams(_message.Message):
-    __slots__ = ("is_tenant", "on_disk")
+    __slots__ = ()
     IS_TENANT_FIELD_NUMBER: _ClassVar[int]
     ON_DISK_FIELD_NUMBER: _ClassVar[int]
     is_tenant: bool
@@ -193,7 +193,7 @@ class UuidIndexParams(_message.Message):
     def __init__(self, is_tenant: _Optional[bool] = ..., on_disk: _Optional[bool] = ...) -> None: ...
 
 class PayloadFieldSchema(_message.Message):
-    __slots__ = ("keyword", "integer", "float", "geo", "text", "bool", "datetime", "uuid")
+    __slots__ = ()
     KEYWORD_FIELD_NUMBER: _ClassVar[int]
     INTEGER_FIELD_NUMBER: _ClassVar[int]
     FLOAT_FIELD_NUMBER: _ClassVar[int]

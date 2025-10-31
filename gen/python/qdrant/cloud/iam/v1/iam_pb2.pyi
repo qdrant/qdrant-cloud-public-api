@@ -72,49 +72,49 @@ class GetAuthenticatedUserRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class GetAuthenticatedUserResponse(_message.Message):
-    __slots__ = ("user",)
+    __slots__ = ()
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
 class ListUsersRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListUsersResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[User]
     def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
 class UpdateUserRequest(_message.Message):
-    __slots__ = ("user",)
+    __slots__ = ()
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
 class UpdateUserResponse(_message.Message):
-    __slots__ = ("user",)
+    __slots__ = ()
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
 class GetUserConsentRequest(_message.Message):
-    __slots__ = ("document_type",)
+    __slots__ = ()
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
     document_type: LegalDocumentType
     def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ...) -> None: ...
 
 class GetUserConsentResponse(_message.Message):
-    __slots__ = ("user_consent",)
+    __slots__ = ()
     USER_CONSENT_FIELD_NUMBER: _ClassVar[int]
     user_consent: UserConsent
     def __init__(self, user_consent: _Optional[_Union[UserConsent, _Mapping]] = ...) -> None: ...
 
 class RecordUserConsentRequest(_message.Message):
-    __slots__ = ("document_type", "status_update")
+    __slots__ = ()
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_UPDATE_FIELD_NUMBER: _ClassVar[int]
     document_type: LegalDocumentType
@@ -126,31 +126,31 @@ class RecordUserConsentResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ListPermissionsRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListPermissionsResponse(_message.Message):
-    __slots__ = ("permissions",)
+    __slots__ = ()
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
     permissions: _containers.RepeatedCompositeFieldContainer[Permission]
     def __init__(self, permissions: _Optional[_Iterable[_Union[Permission, _Mapping]]] = ...) -> None: ...
 
 class ListRolesRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListRolesResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Role]
     def __init__(self, items: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
 
 class GetRoleRequest(_message.Message):
-    __slots__ = ("account_id", "role_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ROLE_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -158,37 +158,37 @@ class GetRoleRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
 
 class GetRoleResponse(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ()
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class CreateRoleRequest(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ()
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class CreateRoleResponse(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ()
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class UpdateRoleRequest(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ()
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class UpdateRoleResponse(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ()
     ROLE_FIELD_NUMBER: _ClassVar[int]
     role: Role
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class DeleteRoleRequest(_message.Message):
-    __slots__ = ("account_id", "role_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ROLE_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -200,19 +200,19 @@ class DeleteRoleResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class ListEffectivePermissionsRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListEffectivePermissionsResponse(_message.Message):
-    __slots__ = ("permissions",)
+    __slots__ = ()
     PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
     permissions: _containers.RepeatedCompositeFieldContainer[Permission]
     def __init__(self, permissions: _Optional[_Iterable[_Union[Permission, _Mapping]]] = ...) -> None: ...
 
 class ListUserRolesRequest(_message.Message):
-    __slots__ = ("account_id", "user_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -220,13 +220,13 @@ class ListUserRolesRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
 
 class ListUserRolesResponse(_message.Message):
-    __slots__ = ("roles",)
+    __slots__ = ()
     ROLES_FIELD_NUMBER: _ClassVar[int]
     roles: _containers.RepeatedCompositeFieldContainer[Role]
     def __init__(self, roles: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
 
 class ListRoleUsersRequest(_message.Message):
-    __slots__ = ("account_id", "role_id")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ROLE_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -234,13 +234,13 @@ class ListRoleUsersRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
 
 class ListRoleUsersResponse(_message.Message):
-    __slots__ = ("users",)
+    __slots__ = ()
     USERS_FIELD_NUMBER: _ClassVar[int]
     users: _containers.RepeatedCompositeFieldContainer[User]
     def __init__(self, users: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
 class AssignUserRolesRequest(_message.Message):
-    __slots__ = ("account_id", "user_id", "role_ids_to_add", "role_ids_to_delete")
+    __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     ROLE_IDS_TO_ADD_FIELD_NUMBER: _ClassVar[int]
@@ -256,7 +256,7 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -272,7 +272,7 @@ class User(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ...) -> None: ...
 
 class Permission(_message.Message):
-    __slots__ = ("value", "category")
+    __slots__ = ()
     VALUE_FIELD_NUMBER: _ClassVar[int]
     CATEGORY_FIELD_NUMBER: _ClassVar[int]
     value: str
@@ -280,7 +280,7 @@ class Permission(_message.Message):
     def __init__(self, value: _Optional[str] = ..., category: _Optional[str] = ...) -> None: ...
 
 class Role(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions", "sub_type")
+    __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -310,7 +310,7 @@ class LogoutUserResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class UserConsent(_message.Message):
-    __slots__ = ("document_type", "status", "last_modified_at", "is_accepted")
+    __slots__ = ()
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]

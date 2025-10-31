@@ -11,7 +11,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class AWSElasticBlockStoreVolumeSource(_message.Message):
-    __slots__ = ("volumeID", "fsType", "partition", "readOnly")
+    __slots__ = ()
     VOLUMEID_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     PARTITION_FIELD_NUMBER: _ClassVar[int]
@@ -23,7 +23,7 @@ class AWSElasticBlockStoreVolumeSource(_message.Message):
     def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Affinity(_message.Message):
-    __slots__ = ("nodeAffinity", "podAffinity", "podAntiAffinity")
+    __slots__ = ()
     NODEAFFINITY_FIELD_NUMBER: _ClassVar[int]
     PODAFFINITY_FIELD_NUMBER: _ClassVar[int]
     PODANTIAFFINITY_FIELD_NUMBER: _ClassVar[int]
@@ -33,7 +33,7 @@ class Affinity(_message.Message):
     def __init__(self, nodeAffinity: _Optional[_Union[NodeAffinity, _Mapping]] = ..., podAffinity: _Optional[_Union[PodAffinity, _Mapping]] = ..., podAntiAffinity: _Optional[_Union[PodAntiAffinity, _Mapping]] = ...) -> None: ...
 
 class AttachedVolume(_message.Message):
-    __slots__ = ("name", "devicePath")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     DEVICEPATH_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -41,13 +41,13 @@ class AttachedVolume(_message.Message):
     def __init__(self, name: _Optional[str] = ..., devicePath: _Optional[str] = ...) -> None: ...
 
 class AvoidPods(_message.Message):
-    __slots__ = ("preferAvoidPods",)
+    __slots__ = ()
     PREFERAVOIDPODS_FIELD_NUMBER: _ClassVar[int]
     preferAvoidPods: _containers.RepeatedCompositeFieldContainer[PreferAvoidPodsEntry]
     def __init__(self, preferAvoidPods: _Optional[_Iterable[_Union[PreferAvoidPodsEntry, _Mapping]]] = ...) -> None: ...
 
 class AzureDiskVolumeSource(_message.Message):
-    __slots__ = ("diskName", "diskURI", "cachingMode", "fsType", "readOnly", "kind")
+    __slots__ = ()
     DISKNAME_FIELD_NUMBER: _ClassVar[int]
     DISKURI_FIELD_NUMBER: _ClassVar[int]
     CACHINGMODE_FIELD_NUMBER: _ClassVar[int]
@@ -63,7 +63,7 @@ class AzureDiskVolumeSource(_message.Message):
     def __init__(self, diskName: _Optional[str] = ..., diskURI: _Optional[str] = ..., cachingMode: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., kind: _Optional[str] = ...) -> None: ...
 
 class AzureFilePersistentVolumeSource(_message.Message):
-    __slots__ = ("secretName", "shareName", "readOnly", "secretNamespace")
+    __slots__ = ()
     SECRETNAME_FIELD_NUMBER: _ClassVar[int]
     SHARENAME_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -75,7 +75,7 @@ class AzureFilePersistentVolumeSource(_message.Message):
     def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretNamespace: _Optional[str] = ...) -> None: ...
 
 class AzureFileVolumeSource(_message.Message):
-    __slots__ = ("secretName", "shareName", "readOnly")
+    __slots__ = ()
     SECRETNAME_FIELD_NUMBER: _ClassVar[int]
     SHARENAME_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -85,7 +85,7 @@ class AzureFileVolumeSource(_message.Message):
     def __init__(self, secretName: _Optional[str] = ..., shareName: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Binding(_message.Message):
-    __slots__ = ("metadata", "target")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     TARGET_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -93,9 +93,9 @@ class Binding(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., target: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
 
 class CSIPersistentVolumeSource(_message.Message):
-    __slots__ = ("driver", "volumeHandle", "readOnly", "fsType", "volumeAttributes", "controllerPublishSecretRef", "nodeStageSecretRef", "nodePublishSecretRef", "controllerExpandSecretRef")
+    __slots__ = ()
     class VolumeAttributesEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -122,9 +122,9 @@ class CSIPersistentVolumeSource(_message.Message):
     def __init__(self, driver: _Optional[str] = ..., volumeHandle: _Optional[str] = ..., readOnly: _Optional[bool] = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., controllerPublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodeStageSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., nodePublishSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., controllerExpandSecretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
 
 class CSIVolumeSource(_message.Message):
-    __slots__ = ("driver", "readOnly", "fsType", "volumeAttributes", "nodePublishSecretRef")
+    __slots__ = ()
     class VolumeAttributesEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -143,7 +143,7 @@ class CSIVolumeSource(_message.Message):
     def __init__(self, driver: _Optional[str] = ..., readOnly: _Optional[bool] = ..., fsType: _Optional[str] = ..., volumeAttributes: _Optional[_Mapping[str, str]] = ..., nodePublishSecretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class Capabilities(_message.Message):
-    __slots__ = ("add", "drop")
+    __slots__ = ()
     ADD_FIELD_NUMBER: _ClassVar[int]
     DROP_FIELD_NUMBER: _ClassVar[int]
     add: _containers.RepeatedScalarFieldContainer[str]
@@ -151,7 +151,7 @@ class Capabilities(_message.Message):
     def __init__(self, add: _Optional[_Iterable[str]] = ..., drop: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class CephFSPersistentVolumeSource(_message.Message):
-    __slots__ = ("monitors", "path", "user", "secretFile", "secretRef", "readOnly")
+    __slots__ = ()
     MONITORS_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     USER_FIELD_NUMBER: _ClassVar[int]
@@ -167,7 +167,7 @@ class CephFSPersistentVolumeSource(_message.Message):
     def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class CephFSVolumeSource(_message.Message):
-    __slots__ = ("monitors", "path", "user", "secretFile", "secretRef", "readOnly")
+    __slots__ = ()
     MONITORS_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     USER_FIELD_NUMBER: _ClassVar[int]
@@ -183,7 +183,7 @@ class CephFSVolumeSource(_message.Message):
     def __init__(self, monitors: _Optional[_Iterable[str]] = ..., path: _Optional[str] = ..., user: _Optional[str] = ..., secretFile: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class CinderPersistentVolumeSource(_message.Message):
-    __slots__ = ("volumeID", "fsType", "readOnly", "secretRef")
+    __slots__ = ()
     VOLUMEID_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -195,7 +195,7 @@ class CinderPersistentVolumeSource(_message.Message):
     def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ...) -> None: ...
 
 class CinderVolumeSource(_message.Message):
-    __slots__ = ("volumeID", "fsType", "readOnly", "secretRef")
+    __slots__ = ()
     VOLUMEID_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -207,13 +207,13 @@ class CinderVolumeSource(_message.Message):
     def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class ClientIPConfig(_message.Message):
-    __slots__ = ("timeoutSeconds",)
+    __slots__ = ()
     TIMEOUTSECONDS_FIELD_NUMBER: _ClassVar[int]
     timeoutSeconds: int
     def __init__(self, timeoutSeconds: _Optional[int] = ...) -> None: ...
 
 class ComponentCondition(_message.Message):
-    __slots__ = ("type", "status", "message", "error")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
@@ -225,7 +225,7 @@ class ComponentCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., message: _Optional[str] = ..., error: _Optional[str] = ...) -> None: ...
 
 class ComponentStatus(_message.Message):
-    __slots__ = ("metadata", "conditions")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     CONDITIONS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -233,7 +233,7 @@ class ComponentStatus(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., conditions: _Optional[_Iterable[_Union[ComponentCondition, _Mapping]]] = ...) -> None: ...
 
 class ComponentStatusList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -241,16 +241,16 @@ class ComponentStatusList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[ComponentStatus, _Mapping]]] = ...) -> None: ...
 
 class ConfigMap(_message.Message):
-    __slots__ = ("metadata", "immutable", "data", "binaryData")
+    __slots__ = ()
     class DataEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: str
         def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     class BinaryDataEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -267,7 +267,7 @@ class ConfigMap(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: _Optional[bool] = ..., data: _Optional[_Mapping[str, str]] = ..., binaryData: _Optional[_Mapping[str, bytes]] = ...) -> None: ...
 
 class ConfigMapEnvSource(_message.Message):
-    __slots__ = ("localObjectReference", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
     localObjectReference: LocalObjectReference
@@ -275,7 +275,7 @@ class ConfigMapEnvSource(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapKeySelector(_message.Message):
-    __slots__ = ("localObjectReference", "key", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
@@ -285,7 +285,7 @@ class ConfigMapKeySelector(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -293,7 +293,7 @@ class ConfigMapList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[ConfigMap, _Mapping]]] = ...) -> None: ...
 
 class ConfigMapNodeConfigSource(_message.Message):
-    __slots__ = ("namespace", "name", "uid", "resourceVersion", "kubeletConfigKey")
+    __slots__ = ()
     NAMESPACE_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     UID_FIELD_NUMBER: _ClassVar[int]
@@ -307,7 +307,7 @@ class ConfigMapNodeConfigSource(_message.Message):
     def __init__(self, namespace: _Optional[str] = ..., name: _Optional[str] = ..., uid: _Optional[str] = ..., resourceVersion: _Optional[str] = ..., kubeletConfigKey: _Optional[str] = ...) -> None: ...
 
 class ConfigMapProjection(_message.Message):
-    __slots__ = ("localObjectReference", "items", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
@@ -317,7 +317,7 @@ class ConfigMapProjection(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class ConfigMapVolumeSource(_message.Message):
-    __slots__ = ("localObjectReference", "items", "defaultMode", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     DEFAULTMODE_FIELD_NUMBER: _ClassVar[int]
@@ -329,7 +329,7 @@ class ConfigMapVolumeSource(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class Container(_message.Message):
-    __slots__ = ("name", "image", "command", "args", "workingDir", "ports", "envFrom", "env", "resources", "volumeMounts", "volumeDevices", "livenessProbe", "readinessProbe", "startupProbe", "lifecycle", "terminationMessagePath", "terminationMessagePolicy", "imagePullPolicy", "securityContext", "stdin", "stdinOnce", "tty")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     IMAGE_FIELD_NUMBER: _ClassVar[int]
     COMMAND_FIELD_NUMBER: _ClassVar[int]
@@ -377,7 +377,7 @@ class Container(_message.Message):
     def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: _Optional[bool] = ..., stdinOnce: _Optional[bool] = ..., tty: _Optional[bool] = ...) -> None: ...
 
 class ContainerImage(_message.Message):
-    __slots__ = ("names", "sizeBytes")
+    __slots__ = ()
     NAMES_FIELD_NUMBER: _ClassVar[int]
     SIZEBYTES_FIELD_NUMBER: _ClassVar[int]
     names: _containers.RepeatedScalarFieldContainer[str]
@@ -385,7 +385,7 @@ class ContainerImage(_message.Message):
     def __init__(self, names: _Optional[_Iterable[str]] = ..., sizeBytes: _Optional[int] = ...) -> None: ...
 
 class ContainerPort(_message.Message):
-    __slots__ = ("name", "hostPort", "containerPort", "protocol", "hostIP")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     HOSTPORT_FIELD_NUMBER: _ClassVar[int]
     CONTAINERPORT_FIELD_NUMBER: _ClassVar[int]
@@ -399,7 +399,7 @@ class ContainerPort(_message.Message):
     def __init__(self, name: _Optional[str] = ..., hostPort: _Optional[int] = ..., containerPort: _Optional[int] = ..., protocol: _Optional[str] = ..., hostIP: _Optional[str] = ...) -> None: ...
 
 class ContainerState(_message.Message):
-    __slots__ = ("waiting", "running", "terminated")
+    __slots__ = ()
     WAITING_FIELD_NUMBER: _ClassVar[int]
     RUNNING_FIELD_NUMBER: _ClassVar[int]
     TERMINATED_FIELD_NUMBER: _ClassVar[int]
@@ -409,13 +409,13 @@ class ContainerState(_message.Message):
     def __init__(self, waiting: _Optional[_Union[ContainerStateWaiting, _Mapping]] = ..., running: _Optional[_Union[ContainerStateRunning, _Mapping]] = ..., terminated: _Optional[_Union[ContainerStateTerminated, _Mapping]] = ...) -> None: ...
 
 class ContainerStateRunning(_message.Message):
-    __slots__ = ("startedAt",)
+    __slots__ = ()
     STARTEDAT_FIELD_NUMBER: _ClassVar[int]
     startedAt: _generated_pb2_1.Time
     def __init__(self, startedAt: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ...) -> None: ...
 
 class ContainerStateTerminated(_message.Message):
-    __slots__ = ("exitCode", "signal", "reason", "message", "startedAt", "finishedAt", "containerID")
+    __slots__ = ()
     EXITCODE_FIELD_NUMBER: _ClassVar[int]
     SIGNAL_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
@@ -433,7 +433,7 @@ class ContainerStateTerminated(_message.Message):
     def __init__(self, exitCode: _Optional[int] = ..., signal: _Optional[int] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ..., startedAt: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., finishedAt: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., containerID: _Optional[str] = ...) -> None: ...
 
 class ContainerStateWaiting(_message.Message):
-    __slots__ = ("reason", "message")
+    __slots__ = ()
     REASON_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     reason: str
@@ -441,7 +441,7 @@ class ContainerStateWaiting(_message.Message):
     def __init__(self, reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class ContainerStatus(_message.Message):
-    __slots__ = ("name", "state", "lastState", "ready", "restartCount", "image", "imageID", "containerID", "started")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     LASTSTATE_FIELD_NUMBER: _ClassVar[int]
@@ -463,19 +463,19 @@ class ContainerStatus(_message.Message):
     def __init__(self, name: _Optional[str] = ..., state: _Optional[_Union[ContainerState, _Mapping]] = ..., lastState: _Optional[_Union[ContainerState, _Mapping]] = ..., ready: _Optional[bool] = ..., restartCount: _Optional[int] = ..., image: _Optional[str] = ..., imageID: _Optional[str] = ..., containerID: _Optional[str] = ..., started: _Optional[bool] = ...) -> None: ...
 
 class DaemonEndpoint(_message.Message):
-    __slots__ = ("Port",)
+    __slots__ = ()
     PORT_FIELD_NUMBER: _ClassVar[int]
     Port: int
     def __init__(self, Port: _Optional[int] = ...) -> None: ...
 
 class DownwardAPIProjection(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[DownwardAPIVolumeFile]
     def __init__(self, items: _Optional[_Iterable[_Union[DownwardAPIVolumeFile, _Mapping]]] = ...) -> None: ...
 
 class DownwardAPIVolumeFile(_message.Message):
-    __slots__ = ("path", "fieldRef", "resourceFieldRef", "mode")
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     FIELDREF_FIELD_NUMBER: _ClassVar[int]
     RESOURCEFIELDREF_FIELD_NUMBER: _ClassVar[int]
@@ -487,7 +487,7 @@ class DownwardAPIVolumeFile(_message.Message):
     def __init__(self, path: _Optional[str] = ..., fieldRef: _Optional[_Union[ObjectFieldSelector, _Mapping]] = ..., resourceFieldRef: _Optional[_Union[ResourceFieldSelector, _Mapping]] = ..., mode: _Optional[int] = ...) -> None: ...
 
 class DownwardAPIVolumeSource(_message.Message):
-    __slots__ = ("items", "defaultMode")
+    __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     DEFAULTMODE_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[DownwardAPIVolumeFile]
@@ -495,7 +495,7 @@ class DownwardAPIVolumeSource(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[DownwardAPIVolumeFile, _Mapping]]] = ..., defaultMode: _Optional[int] = ...) -> None: ...
 
 class EmptyDirVolumeSource(_message.Message):
-    __slots__ = ("medium", "sizeLimit")
+    __slots__ = ()
     MEDIUM_FIELD_NUMBER: _ClassVar[int]
     SIZELIMIT_FIELD_NUMBER: _ClassVar[int]
     medium: str
@@ -503,7 +503,7 @@ class EmptyDirVolumeSource(_message.Message):
     def __init__(self, medium: _Optional[str] = ..., sizeLimit: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
 
 class EndpointAddress(_message.Message):
-    __slots__ = ("ip", "hostname", "nodeName", "targetRef")
+    __slots__ = ()
     IP_FIELD_NUMBER: _ClassVar[int]
     HOSTNAME_FIELD_NUMBER: _ClassVar[int]
     NODENAME_FIELD_NUMBER: _ClassVar[int]
@@ -515,7 +515,7 @@ class EndpointAddress(_message.Message):
     def __init__(self, ip: _Optional[str] = ..., hostname: _Optional[str] = ..., nodeName: _Optional[str] = ..., targetRef: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
 
 class EndpointPort(_message.Message):
-    __slots__ = ("name", "port", "protocol", "appProtocol")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     PORT_FIELD_NUMBER: _ClassVar[int]
     PROTOCOL_FIELD_NUMBER: _ClassVar[int]
@@ -527,7 +527,7 @@ class EndpointPort(_message.Message):
     def __init__(self, name: _Optional[str] = ..., port: _Optional[int] = ..., protocol: _Optional[str] = ..., appProtocol: _Optional[str] = ...) -> None: ...
 
 class EndpointSubset(_message.Message):
-    __slots__ = ("addresses", "notReadyAddresses", "ports")
+    __slots__ = ()
     ADDRESSES_FIELD_NUMBER: _ClassVar[int]
     NOTREADYADDRESSES_FIELD_NUMBER: _ClassVar[int]
     PORTS_FIELD_NUMBER: _ClassVar[int]
@@ -537,7 +537,7 @@ class EndpointSubset(_message.Message):
     def __init__(self, addresses: _Optional[_Iterable[_Union[EndpointAddress, _Mapping]]] = ..., notReadyAddresses: _Optional[_Iterable[_Union[EndpointAddress, _Mapping]]] = ..., ports: _Optional[_Iterable[_Union[EndpointPort, _Mapping]]] = ...) -> None: ...
 
 class Endpoints(_message.Message):
-    __slots__ = ("metadata", "subsets")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SUBSETS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -545,7 +545,7 @@ class Endpoints(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., subsets: _Optional[_Iterable[_Union[EndpointSubset, _Mapping]]] = ...) -> None: ...
 
 class EndpointsList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -553,7 +553,7 @@ class EndpointsList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Endpoints, _Mapping]]] = ...) -> None: ...
 
 class EnvFromSource(_message.Message):
-    __slots__ = ("prefix", "configMapRef", "secretRef")
+    __slots__ = ()
     PREFIX_FIELD_NUMBER: _ClassVar[int]
     CONFIGMAPREF_FIELD_NUMBER: _ClassVar[int]
     SECRETREF_FIELD_NUMBER: _ClassVar[int]
@@ -563,7 +563,7 @@ class EnvFromSource(_message.Message):
     def __init__(self, prefix: _Optional[str] = ..., configMapRef: _Optional[_Union[ConfigMapEnvSource, _Mapping]] = ..., secretRef: _Optional[_Union[SecretEnvSource, _Mapping]] = ...) -> None: ...
 
 class EnvVar(_message.Message):
-    __slots__ = ("name", "value", "valueFrom")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     VALUEFROM_FIELD_NUMBER: _ClassVar[int]
@@ -573,7 +573,7 @@ class EnvVar(_message.Message):
     def __init__(self, name: _Optional[str] = ..., value: _Optional[str] = ..., valueFrom: _Optional[_Union[EnvVarSource, _Mapping]] = ...) -> None: ...
 
 class EnvVarSource(_message.Message):
-    __slots__ = ("fieldRef", "resourceFieldRef", "configMapKeyRef", "secretKeyRef")
+    __slots__ = ()
     FIELDREF_FIELD_NUMBER: _ClassVar[int]
     RESOURCEFIELDREF_FIELD_NUMBER: _ClassVar[int]
     CONFIGMAPKEYREF_FIELD_NUMBER: _ClassVar[int]
@@ -585,7 +585,7 @@ class EnvVarSource(_message.Message):
     def __init__(self, fieldRef: _Optional[_Union[ObjectFieldSelector, _Mapping]] = ..., resourceFieldRef: _Optional[_Union[ResourceFieldSelector, _Mapping]] = ..., configMapKeyRef: _Optional[_Union[ConfigMapKeySelector, _Mapping]] = ..., secretKeyRef: _Optional[_Union[SecretKeySelector, _Mapping]] = ...) -> None: ...
 
 class EphemeralContainer(_message.Message):
-    __slots__ = ("ephemeralContainerCommon", "targetContainerName")
+    __slots__ = ()
     EPHEMERALCONTAINERCOMMON_FIELD_NUMBER: _ClassVar[int]
     TARGETCONTAINERNAME_FIELD_NUMBER: _ClassVar[int]
     ephemeralContainerCommon: EphemeralContainerCommon
@@ -593,7 +593,7 @@ class EphemeralContainer(_message.Message):
     def __init__(self, ephemeralContainerCommon: _Optional[_Union[EphemeralContainerCommon, _Mapping]] = ..., targetContainerName: _Optional[str] = ...) -> None: ...
 
 class EphemeralContainerCommon(_message.Message):
-    __slots__ = ("name", "image", "command", "args", "workingDir", "ports", "envFrom", "env", "resources", "volumeMounts", "volumeDevices", "livenessProbe", "readinessProbe", "startupProbe", "lifecycle", "terminationMessagePath", "terminationMessagePolicy", "imagePullPolicy", "securityContext", "stdin", "stdinOnce", "tty")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     IMAGE_FIELD_NUMBER: _ClassVar[int]
     COMMAND_FIELD_NUMBER: _ClassVar[int]
@@ -641,13 +641,13 @@ class EphemeralContainerCommon(_message.Message):
     def __init__(self, name: _Optional[str] = ..., image: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ..., args: _Optional[_Iterable[str]] = ..., workingDir: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[ContainerPort, _Mapping]]] = ..., envFrom: _Optional[_Iterable[_Union[EnvFromSource, _Mapping]]] = ..., env: _Optional[_Iterable[_Union[EnvVar, _Mapping]]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeMounts: _Optional[_Iterable[_Union[VolumeMount, _Mapping]]] = ..., volumeDevices: _Optional[_Iterable[_Union[VolumeDevice, _Mapping]]] = ..., livenessProbe: _Optional[_Union[Probe, _Mapping]] = ..., readinessProbe: _Optional[_Union[Probe, _Mapping]] = ..., startupProbe: _Optional[_Union[Probe, _Mapping]] = ..., lifecycle: _Optional[_Union[Lifecycle, _Mapping]] = ..., terminationMessagePath: _Optional[str] = ..., terminationMessagePolicy: _Optional[str] = ..., imagePullPolicy: _Optional[str] = ..., securityContext: _Optional[_Union[SecurityContext, _Mapping]] = ..., stdin: _Optional[bool] = ..., stdinOnce: _Optional[bool] = ..., tty: _Optional[bool] = ...) -> None: ...
 
 class EphemeralVolumeSource(_message.Message):
-    __slots__ = ("volumeClaimTemplate",)
+    __slots__ = ()
     VOLUMECLAIMTEMPLATE_FIELD_NUMBER: _ClassVar[int]
     volumeClaimTemplate: PersistentVolumeClaimTemplate
     def __init__(self, volumeClaimTemplate: _Optional[_Union[PersistentVolumeClaimTemplate, _Mapping]] = ...) -> None: ...
 
 class Event(_message.Message):
-    __slots__ = ("metadata", "involvedObject", "reason", "message", "source", "firstTimestamp", "lastTimestamp", "count", "type", "eventTime", "series", "action", "related", "reportingComponent", "reportingInstance")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     INVOLVEDOBJECT_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
@@ -681,7 +681,7 @@ class Event(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., involvedObject: _Optional[_Union[ObjectReference, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ..., source: _Optional[_Union[EventSource, _Mapping]] = ..., firstTimestamp: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., lastTimestamp: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., count: _Optional[int] = ..., type: _Optional[str] = ..., eventTime: _Optional[_Union[_generated_pb2_1.MicroTime, _Mapping]] = ..., series: _Optional[_Union[EventSeries, _Mapping]] = ..., action: _Optional[str] = ..., related: _Optional[_Union[ObjectReference, _Mapping]] = ..., reportingComponent: _Optional[str] = ..., reportingInstance: _Optional[str] = ...) -> None: ...
 
 class EventList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -689,7 +689,7 @@ class EventList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Event, _Mapping]]] = ...) -> None: ...
 
 class EventSeries(_message.Message):
-    __slots__ = ("count", "lastObservedTime")
+    __slots__ = ()
     COUNT_FIELD_NUMBER: _ClassVar[int]
     LASTOBSERVEDTIME_FIELD_NUMBER: _ClassVar[int]
     count: int
@@ -697,7 +697,7 @@ class EventSeries(_message.Message):
     def __init__(self, count: _Optional[int] = ..., lastObservedTime: _Optional[_Union[_generated_pb2_1.MicroTime, _Mapping]] = ...) -> None: ...
 
 class EventSource(_message.Message):
-    __slots__ = ("component", "host")
+    __slots__ = ()
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     HOST_FIELD_NUMBER: _ClassVar[int]
     component: str
@@ -705,13 +705,13 @@ class EventSource(_message.Message):
     def __init__(self, component: _Optional[str] = ..., host: _Optional[str] = ...) -> None: ...
 
 class ExecAction(_message.Message):
-    __slots__ = ("command",)
+    __slots__ = ()
     COMMAND_FIELD_NUMBER: _ClassVar[int]
     command: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, command: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class FCVolumeSource(_message.Message):
-    __slots__ = ("targetWWNs", "lun", "fsType", "readOnly", "wwids")
+    __slots__ = ()
     TARGETWWNS_FIELD_NUMBER: _ClassVar[int]
     LUN_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
@@ -725,9 +725,9 @@ class FCVolumeSource(_message.Message):
     def __init__(self, targetWWNs: _Optional[_Iterable[str]] = ..., lun: _Optional[int] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., wwids: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class FlexPersistentVolumeSource(_message.Message):
-    __slots__ = ("driver", "fsType", "secretRef", "readOnly", "options")
+    __slots__ = ()
     class OptionsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -746,9 +746,9 @@ class FlexPersistentVolumeSource(_message.Message):
     def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class FlexVolumeSource(_message.Message):
-    __slots__ = ("driver", "fsType", "secretRef", "readOnly", "options")
+    __slots__ = ()
     class OptionsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -767,7 +767,7 @@ class FlexVolumeSource(_message.Message):
     def __init__(self, driver: _Optional[str] = ..., fsType: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ..., options: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class FlockerVolumeSource(_message.Message):
-    __slots__ = ("datasetName", "datasetUUID")
+    __slots__ = ()
     DATASETNAME_FIELD_NUMBER: _ClassVar[int]
     DATASETUUID_FIELD_NUMBER: _ClassVar[int]
     datasetName: str
@@ -775,7 +775,7 @@ class FlockerVolumeSource(_message.Message):
     def __init__(self, datasetName: _Optional[str] = ..., datasetUUID: _Optional[str] = ...) -> None: ...
 
 class GCEPersistentDiskVolumeSource(_message.Message):
-    __slots__ = ("pdName", "fsType", "partition", "readOnly")
+    __slots__ = ()
     PDNAME_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     PARTITION_FIELD_NUMBER: _ClassVar[int]
@@ -787,7 +787,7 @@ class GCEPersistentDiskVolumeSource(_message.Message):
     def __init__(self, pdName: _Optional[str] = ..., fsType: _Optional[str] = ..., partition: _Optional[int] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class GRPCAction(_message.Message):
-    __slots__ = ("port", "service")
+    __slots__ = ()
     PORT_FIELD_NUMBER: _ClassVar[int]
     SERVICE_FIELD_NUMBER: _ClassVar[int]
     port: int
@@ -795,7 +795,7 @@ class GRPCAction(_message.Message):
     def __init__(self, port: _Optional[int] = ..., service: _Optional[str] = ...) -> None: ...
 
 class GitRepoVolumeSource(_message.Message):
-    __slots__ = ("repository", "revision", "directory")
+    __slots__ = ()
     REPOSITORY_FIELD_NUMBER: _ClassVar[int]
     REVISION_FIELD_NUMBER: _ClassVar[int]
     DIRECTORY_FIELD_NUMBER: _ClassVar[int]
@@ -805,7 +805,7 @@ class GitRepoVolumeSource(_message.Message):
     def __init__(self, repository: _Optional[str] = ..., revision: _Optional[str] = ..., directory: _Optional[str] = ...) -> None: ...
 
 class GlusterfsPersistentVolumeSource(_message.Message):
-    __slots__ = ("endpoints", "path", "readOnly", "endpointsNamespace")
+    __slots__ = ()
     ENDPOINTS_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -817,7 +817,7 @@ class GlusterfsPersistentVolumeSource(_message.Message):
     def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ..., endpointsNamespace: _Optional[str] = ...) -> None: ...
 
 class GlusterfsVolumeSource(_message.Message):
-    __slots__ = ("endpoints", "path", "readOnly")
+    __slots__ = ()
     ENDPOINTS_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -827,7 +827,7 @@ class GlusterfsVolumeSource(_message.Message):
     def __init__(self, endpoints: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class HTTPGetAction(_message.Message):
-    __slots__ = ("path", "port", "host", "scheme", "httpHeaders")
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     PORT_FIELD_NUMBER: _ClassVar[int]
     HOST_FIELD_NUMBER: _ClassVar[int]
@@ -841,7 +841,7 @@ class HTTPGetAction(_message.Message):
     def __init__(self, path: _Optional[str] = ..., port: _Optional[_Union[_generated_pb2_1_1_1.IntOrString, _Mapping]] = ..., host: _Optional[str] = ..., scheme: _Optional[str] = ..., httpHeaders: _Optional[_Iterable[_Union[HTTPHeader, _Mapping]]] = ...) -> None: ...
 
 class HTTPHeader(_message.Message):
-    __slots__ = ("name", "value")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -849,7 +849,7 @@ class HTTPHeader(_message.Message):
     def __init__(self, name: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
 
 class HostAlias(_message.Message):
-    __slots__ = ("ip", "hostnames")
+    __slots__ = ()
     IP_FIELD_NUMBER: _ClassVar[int]
     HOSTNAMES_FIELD_NUMBER: _ClassVar[int]
     ip: str
@@ -857,7 +857,7 @@ class HostAlias(_message.Message):
     def __init__(self, ip: _Optional[str] = ..., hostnames: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class HostPathVolumeSource(_message.Message):
-    __slots__ = ("path", "type")
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
     path: str
@@ -865,7 +865,7 @@ class HostPathVolumeSource(_message.Message):
     def __init__(self, path: _Optional[str] = ..., type: _Optional[str] = ...) -> None: ...
 
 class ISCSIPersistentVolumeSource(_message.Message):
-    __slots__ = ("targetPortal", "iqn", "lun", "iscsiInterface", "fsType", "readOnly", "portals", "chapAuthDiscovery", "chapAuthSession", "secretRef", "initiatorName")
+    __slots__ = ()
     TARGETPORTAL_FIELD_NUMBER: _ClassVar[int]
     IQN_FIELD_NUMBER: _ClassVar[int]
     LUN_FIELD_NUMBER: _ClassVar[int]
@@ -891,7 +891,7 @@ class ISCSIPersistentVolumeSource(_message.Message):
     def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: _Optional[bool] = ..., chapAuthSession: _Optional[bool] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
 
 class ISCSIVolumeSource(_message.Message):
-    __slots__ = ("targetPortal", "iqn", "lun", "iscsiInterface", "fsType", "readOnly", "portals", "chapAuthDiscovery", "chapAuthSession", "secretRef", "initiatorName")
+    __slots__ = ()
     TARGETPORTAL_FIELD_NUMBER: _ClassVar[int]
     IQN_FIELD_NUMBER: _ClassVar[int]
     LUN_FIELD_NUMBER: _ClassVar[int]
@@ -917,7 +917,7 @@ class ISCSIVolumeSource(_message.Message):
     def __init__(self, targetPortal: _Optional[str] = ..., iqn: _Optional[str] = ..., lun: _Optional[int] = ..., iscsiInterface: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., portals: _Optional[_Iterable[str]] = ..., chapAuthDiscovery: _Optional[bool] = ..., chapAuthSession: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., initiatorName: _Optional[str] = ...) -> None: ...
 
 class KeyToPath(_message.Message):
-    __slots__ = ("key", "path", "mode")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     MODE_FIELD_NUMBER: _ClassVar[int]
@@ -927,7 +927,7 @@ class KeyToPath(_message.Message):
     def __init__(self, key: _Optional[str] = ..., path: _Optional[str] = ..., mode: _Optional[int] = ...) -> None: ...
 
 class Lifecycle(_message.Message):
-    __slots__ = ("postStart", "preStop")
+    __slots__ = ()
     POSTSTART_FIELD_NUMBER: _ClassVar[int]
     PRESTOP_FIELD_NUMBER: _ClassVar[int]
     postStart: LifecycleHandler
@@ -935,7 +935,7 @@ class Lifecycle(_message.Message):
     def __init__(self, postStart: _Optional[_Union[LifecycleHandler, _Mapping]] = ..., preStop: _Optional[_Union[LifecycleHandler, _Mapping]] = ...) -> None: ...
 
 class LifecycleHandler(_message.Message):
-    __slots__ = ("exec", "httpGet", "tcpSocket")
+    __slots__ = ()
     EXEC_FIELD_NUMBER: _ClassVar[int]
     HTTPGET_FIELD_NUMBER: _ClassVar[int]
     TCPSOCKET_FIELD_NUMBER: _ClassVar[int]
@@ -945,7 +945,7 @@ class LifecycleHandler(_message.Message):
     def __init__(self, exec: _Optional[_Union[ExecAction, _Mapping]] = ..., httpGet: _Optional[_Union[HTTPGetAction, _Mapping]] = ..., tcpSocket: _Optional[_Union[TCPSocketAction, _Mapping]] = ...) -> None: ...
 
 class LimitRange(_message.Message):
-    __slots__ = ("metadata", "spec")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -953,37 +953,37 @@ class LimitRange(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[LimitRangeSpec, _Mapping]] = ...) -> None: ...
 
 class LimitRangeItem(_message.Message):
-    __slots__ = ("type", "max", "min", "default", "defaultRequest", "maxLimitRequestRatio")
+    __slots__ = ()
     class MaxEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class MinEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class DefaultEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class DefaultRequestEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class MaxLimitRequestRatioEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1004,7 +1004,7 @@ class LimitRangeItem(_message.Message):
     def __init__(self, type: _Optional[str] = ..., max: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., min: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., default: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., defaultRequest: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., maxLimitRequestRatio: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ...) -> None: ...
 
 class LimitRangeList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1012,13 +1012,13 @@ class LimitRangeList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[LimitRange, _Mapping]]] = ...) -> None: ...
 
 class LimitRangeSpec(_message.Message):
-    __slots__ = ("limits",)
+    __slots__ = ()
     LIMITS_FIELD_NUMBER: _ClassVar[int]
     limits: _containers.RepeatedCompositeFieldContainer[LimitRangeItem]
     def __init__(self, limits: _Optional[_Iterable[_Union[LimitRangeItem, _Mapping]]] = ...) -> None: ...
 
 class List(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1026,7 +1026,7 @@ class List(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[_generated_pb2_1_1.RawExtension, _Mapping]]] = ...) -> None: ...
 
 class LoadBalancerIngress(_message.Message):
-    __slots__ = ("ip", "hostname", "ports")
+    __slots__ = ()
     IP_FIELD_NUMBER: _ClassVar[int]
     HOSTNAME_FIELD_NUMBER: _ClassVar[int]
     PORTS_FIELD_NUMBER: _ClassVar[int]
@@ -1036,19 +1036,19 @@ class LoadBalancerIngress(_message.Message):
     def __init__(self, ip: _Optional[str] = ..., hostname: _Optional[str] = ..., ports: _Optional[_Iterable[_Union[PortStatus, _Mapping]]] = ...) -> None: ...
 
 class LoadBalancerStatus(_message.Message):
-    __slots__ = ("ingress",)
+    __slots__ = ()
     INGRESS_FIELD_NUMBER: _ClassVar[int]
     ingress: _containers.RepeatedCompositeFieldContainer[LoadBalancerIngress]
     def __init__(self, ingress: _Optional[_Iterable[_Union[LoadBalancerIngress, _Mapping]]] = ...) -> None: ...
 
 class LocalObjectReference(_message.Message):
-    __slots__ = ("name",)
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     name: str
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class LocalVolumeSource(_message.Message):
-    __slots__ = ("path", "fsType")
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     path: str
@@ -1056,7 +1056,7 @@ class LocalVolumeSource(_message.Message):
     def __init__(self, path: _Optional[str] = ..., fsType: _Optional[str] = ...) -> None: ...
 
 class NFSVolumeSource(_message.Message):
-    __slots__ = ("server", "path", "readOnly")
+    __slots__ = ()
     SERVER_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -1066,7 +1066,7 @@ class NFSVolumeSource(_message.Message):
     def __init__(self, server: _Optional[str] = ..., path: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Namespace(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -1076,7 +1076,7 @@ class Namespace(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[NamespaceSpec, _Mapping]] = ..., status: _Optional[_Union[NamespaceStatus, _Mapping]] = ...) -> None: ...
 
 class NamespaceCondition(_message.Message):
-    __slots__ = ("type", "status", "lastTransitionTime", "reason", "message")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LASTTRANSITIONTIME_FIELD_NUMBER: _ClassVar[int]
@@ -1090,7 +1090,7 @@ class NamespaceCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., lastTransitionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class NamespaceList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1098,13 +1098,13 @@ class NamespaceList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Namespace, _Mapping]]] = ...) -> None: ...
 
 class NamespaceSpec(_message.Message):
-    __slots__ = ("finalizers",)
+    __slots__ = ()
     FINALIZERS_FIELD_NUMBER: _ClassVar[int]
     finalizers: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, finalizers: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class NamespaceStatus(_message.Message):
-    __slots__ = ("phase", "conditions")
+    __slots__ = ()
     PHASE_FIELD_NUMBER: _ClassVar[int]
     CONDITIONS_FIELD_NUMBER: _ClassVar[int]
     phase: str
@@ -1112,7 +1112,7 @@ class NamespaceStatus(_message.Message):
     def __init__(self, phase: _Optional[str] = ..., conditions: _Optional[_Iterable[_Union[NamespaceCondition, _Mapping]]] = ...) -> None: ...
 
 class Node(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -1122,7 +1122,7 @@ class Node(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[NodeSpec, _Mapping]] = ..., status: _Optional[_Union[NodeStatus, _Mapping]] = ...) -> None: ...
 
 class NodeAddress(_message.Message):
-    __slots__ = ("type", "address")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     ADDRESS_FIELD_NUMBER: _ClassVar[int]
     type: str
@@ -1130,7 +1130,7 @@ class NodeAddress(_message.Message):
     def __init__(self, type: _Optional[str] = ..., address: _Optional[str] = ...) -> None: ...
 
 class NodeAffinity(_message.Message):
-    __slots__ = ("requiredDuringSchedulingIgnoredDuringExecution", "preferredDuringSchedulingIgnoredDuringExecution")
+    __slots__ = ()
     REQUIREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     PREFERREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     requiredDuringSchedulingIgnoredDuringExecution: NodeSelector
@@ -1138,7 +1138,7 @@ class NodeAffinity(_message.Message):
     def __init__(self, requiredDuringSchedulingIgnoredDuringExecution: _Optional[_Union[NodeSelector, _Mapping]] = ..., preferredDuringSchedulingIgnoredDuringExecution: _Optional[_Iterable[_Union[PreferredSchedulingTerm, _Mapping]]] = ...) -> None: ...
 
 class NodeCondition(_message.Message):
-    __slots__ = ("type", "status", "lastHeartbeatTime", "lastTransitionTime", "reason", "message")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LASTHEARTBEATTIME_FIELD_NUMBER: _ClassVar[int]
@@ -1154,13 +1154,13 @@ class NodeCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., lastHeartbeatTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., lastTransitionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class NodeConfigSource(_message.Message):
-    __slots__ = ("configMap",)
+    __slots__ = ()
     CONFIGMAP_FIELD_NUMBER: _ClassVar[int]
     configMap: ConfigMapNodeConfigSource
     def __init__(self, configMap: _Optional[_Union[ConfigMapNodeConfigSource, _Mapping]] = ...) -> None: ...
 
 class NodeConfigStatus(_message.Message):
-    __slots__ = ("assigned", "active", "lastKnownGood", "error")
+    __slots__ = ()
     ASSIGNED_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_FIELD_NUMBER: _ClassVar[int]
     LASTKNOWNGOOD_FIELD_NUMBER: _ClassVar[int]
@@ -1172,13 +1172,13 @@ class NodeConfigStatus(_message.Message):
     def __init__(self, assigned: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., active: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., lastKnownGood: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., error: _Optional[str] = ...) -> None: ...
 
 class NodeDaemonEndpoints(_message.Message):
-    __slots__ = ("kubeletEndpoint",)
+    __slots__ = ()
     KUBELETENDPOINT_FIELD_NUMBER: _ClassVar[int]
     kubeletEndpoint: DaemonEndpoint
     def __init__(self, kubeletEndpoint: _Optional[_Union[DaemonEndpoint, _Mapping]] = ...) -> None: ...
 
 class NodeList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1186,15 +1186,15 @@ class NodeList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Node, _Mapping]]] = ...) -> None: ...
 
 class NodeProxyOptions(_message.Message):
-    __slots__ = ("path",)
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     path: str
     def __init__(self, path: _Optional[str] = ...) -> None: ...
 
 class NodeResources(_message.Message):
-    __slots__ = ("capacity",)
+    __slots__ = ()
     class CapacityEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1205,13 +1205,13 @@ class NodeResources(_message.Message):
     def __init__(self, capacity: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ...) -> None: ...
 
 class NodeSelector(_message.Message):
-    __slots__ = ("nodeSelectorTerms",)
+    __slots__ = ()
     NODESELECTORTERMS_FIELD_NUMBER: _ClassVar[int]
     nodeSelectorTerms: _containers.RepeatedCompositeFieldContainer[NodeSelectorTerm]
     def __init__(self, nodeSelectorTerms: _Optional[_Iterable[_Union[NodeSelectorTerm, _Mapping]]] = ...) -> None: ...
 
 class NodeSelectorRequirement(_message.Message):
-    __slots__ = ("key", "operator", "values")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPERATOR_FIELD_NUMBER: _ClassVar[int]
     VALUES_FIELD_NUMBER: _ClassVar[int]
@@ -1221,7 +1221,7 @@ class NodeSelectorRequirement(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[str] = ..., values: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class NodeSelectorTerm(_message.Message):
-    __slots__ = ("matchExpressions", "matchFields")
+    __slots__ = ()
     MATCHEXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
     MATCHFIELDS_FIELD_NUMBER: _ClassVar[int]
     matchExpressions: _containers.RepeatedCompositeFieldContainer[NodeSelectorRequirement]
@@ -1229,7 +1229,7 @@ class NodeSelectorTerm(_message.Message):
     def __init__(self, matchExpressions: _Optional[_Iterable[_Union[NodeSelectorRequirement, _Mapping]]] = ..., matchFields: _Optional[_Iterable[_Union[NodeSelectorRequirement, _Mapping]]] = ...) -> None: ...
 
 class NodeSpec(_message.Message):
-    __slots__ = ("podCIDR", "podCIDRs", "providerID", "unschedulable", "taints", "configSource", "externalID")
+    __slots__ = ()
     PODCIDR_FIELD_NUMBER: _ClassVar[int]
     PODCIDRS_FIELD_NUMBER: _ClassVar[int]
     PROVIDERID_FIELD_NUMBER: _ClassVar[int]
@@ -1247,16 +1247,16 @@ class NodeSpec(_message.Message):
     def __init__(self, podCIDR: _Optional[str] = ..., podCIDRs: _Optional[_Iterable[str]] = ..., providerID: _Optional[str] = ..., unschedulable: _Optional[bool] = ..., taints: _Optional[_Iterable[_Union[Taint, _Mapping]]] = ..., configSource: _Optional[_Union[NodeConfigSource, _Mapping]] = ..., externalID: _Optional[str] = ...) -> None: ...
 
 class NodeStatus(_message.Message):
-    __slots__ = ("capacity", "allocatable", "phase", "conditions", "addresses", "daemonEndpoints", "nodeInfo", "images", "volumesInUse", "volumesAttached", "config")
+    __slots__ = ()
     class CapacityEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class AllocatableEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1287,7 +1287,7 @@ class NodeStatus(_message.Message):
     def __init__(self, capacity: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., allocatable: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., phase: _Optional[str] = ..., conditions: _Optional[_Iterable[_Union[NodeCondition, _Mapping]]] = ..., addresses: _Optional[_Iterable[_Union[NodeAddress, _Mapping]]] = ..., daemonEndpoints: _Optional[_Union[NodeDaemonEndpoints, _Mapping]] = ..., nodeInfo: _Optional[_Union[NodeSystemInfo, _Mapping]] = ..., images: _Optional[_Iterable[_Union[ContainerImage, _Mapping]]] = ..., volumesInUse: _Optional[_Iterable[str]] = ..., volumesAttached: _Optional[_Iterable[_Union[AttachedVolume, _Mapping]]] = ..., config: _Optional[_Union[NodeConfigStatus, _Mapping]] = ...) -> None: ...
 
 class NodeSystemInfo(_message.Message):
-    __slots__ = ("machineID", "systemUUID", "bootID", "kernelVersion", "osImage", "containerRuntimeVersion", "kubeletVersion", "kubeProxyVersion", "operatingSystem", "architecture")
+    __slots__ = ()
     MACHINEID_FIELD_NUMBER: _ClassVar[int]
     SYSTEMUUID_FIELD_NUMBER: _ClassVar[int]
     BOOTID_FIELD_NUMBER: _ClassVar[int]
@@ -1311,7 +1311,7 @@ class NodeSystemInfo(_message.Message):
     def __init__(self, machineID: _Optional[str] = ..., systemUUID: _Optional[str] = ..., bootID: _Optional[str] = ..., kernelVersion: _Optional[str] = ..., osImage: _Optional[str] = ..., containerRuntimeVersion: _Optional[str] = ..., kubeletVersion: _Optional[str] = ..., kubeProxyVersion: _Optional[str] = ..., operatingSystem: _Optional[str] = ..., architecture: _Optional[str] = ...) -> None: ...
 
 class ObjectFieldSelector(_message.Message):
-    __slots__ = ("apiVersion", "fieldPath")
+    __slots__ = ()
     APIVERSION_FIELD_NUMBER: _ClassVar[int]
     FIELDPATH_FIELD_NUMBER: _ClassVar[int]
     apiVersion: str
@@ -1319,7 +1319,7 @@ class ObjectFieldSelector(_message.Message):
     def __init__(self, apiVersion: _Optional[str] = ..., fieldPath: _Optional[str] = ...) -> None: ...
 
 class ObjectReference(_message.Message):
-    __slots__ = ("kind", "namespace", "name", "uid", "apiVersion", "resourceVersion", "fieldPath")
+    __slots__ = ()
     KIND_FIELD_NUMBER: _ClassVar[int]
     NAMESPACE_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
@@ -1337,7 +1337,7 @@ class ObjectReference(_message.Message):
     def __init__(self, kind: _Optional[str] = ..., namespace: _Optional[str] = ..., name: _Optional[str] = ..., uid: _Optional[str] = ..., apiVersion: _Optional[str] = ..., resourceVersion: _Optional[str] = ..., fieldPath: _Optional[str] = ...) -> None: ...
 
 class PersistentVolume(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -1347,7 +1347,7 @@ class PersistentVolume(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[PersistentVolumeSpec, _Mapping]] = ..., status: _Optional[_Union[PersistentVolumeStatus, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeClaim(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -1357,7 +1357,7 @@ class PersistentVolumeClaim(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[PersistentVolumeClaimSpec, _Mapping]] = ..., status: _Optional[_Union[PersistentVolumeClaimStatus, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeClaimCondition(_message.Message):
-    __slots__ = ("type", "status", "lastProbeTime", "lastTransitionTime", "reason", "message")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LASTPROBETIME_FIELD_NUMBER: _ClassVar[int]
@@ -1373,7 +1373,7 @@ class PersistentVolumeClaimCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., lastProbeTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., lastTransitionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class PersistentVolumeClaimList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1381,7 +1381,7 @@ class PersistentVolumeClaimList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[PersistentVolumeClaim, _Mapping]]] = ...) -> None: ...
 
 class PersistentVolumeClaimSpec(_message.Message):
-    __slots__ = ("accessModes", "selector", "resources", "volumeName", "storageClassName", "volumeMode", "dataSource", "dataSourceRef")
+    __slots__ = ()
     ACCESSMODES_FIELD_NUMBER: _ClassVar[int]
     SELECTOR_FIELD_NUMBER: _ClassVar[int]
     RESOURCES_FIELD_NUMBER: _ClassVar[int]
@@ -1401,16 +1401,16 @@ class PersistentVolumeClaimSpec(_message.Message):
     def __init__(self, accessModes: _Optional[_Iterable[str]] = ..., selector: _Optional[_Union[_generated_pb2_1.LabelSelector, _Mapping]] = ..., resources: _Optional[_Union[ResourceRequirements, _Mapping]] = ..., volumeName: _Optional[str] = ..., storageClassName: _Optional[str] = ..., volumeMode: _Optional[str] = ..., dataSource: _Optional[_Union[TypedLocalObjectReference, _Mapping]] = ..., dataSourceRef: _Optional[_Union[TypedLocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeClaimStatus(_message.Message):
-    __slots__ = ("phase", "accessModes", "capacity", "conditions", "allocatedResources", "resizeStatus")
+    __slots__ = ()
     class CapacityEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class AllocatedResourcesEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1431,7 +1431,7 @@ class PersistentVolumeClaimStatus(_message.Message):
     def __init__(self, phase: _Optional[str] = ..., accessModes: _Optional[_Iterable[str]] = ..., capacity: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., conditions: _Optional[_Iterable[_Union[PersistentVolumeClaimCondition, _Mapping]]] = ..., allocatedResources: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., resizeStatus: _Optional[str] = ...) -> None: ...
 
 class PersistentVolumeClaimTemplate(_message.Message):
-    __slots__ = ("metadata", "spec")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -1439,7 +1439,7 @@ class PersistentVolumeClaimTemplate(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[PersistentVolumeClaimSpec, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeClaimVolumeSource(_message.Message):
-    __slots__ = ("claimName", "readOnly")
+    __slots__ = ()
     CLAIMNAME_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
     claimName: str
@@ -1447,7 +1447,7 @@ class PersistentVolumeClaimVolumeSource(_message.Message):
     def __init__(self, claimName: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class PersistentVolumeList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1455,7 +1455,7 @@ class PersistentVolumeList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[PersistentVolume, _Mapping]]] = ...) -> None: ...
 
 class PersistentVolumeSource(_message.Message):
-    __slots__ = ("gcePersistentDisk", "awsElasticBlockStore", "hostPath", "glusterfs", "nfs", "rbd", "iscsi", "cinder", "cephfs", "fc", "flocker", "flexVolume", "azureFile", "vsphereVolume", "quobyte", "azureDisk", "photonPersistentDisk", "portworxVolume", "scaleIO", "local", "storageos", "csi")
+    __slots__ = ()
     GCEPERSISTENTDISK_FIELD_NUMBER: _ClassVar[int]
     AWSELASTICBLOCKSTORE_FIELD_NUMBER: _ClassVar[int]
     HOSTPATH_FIELD_NUMBER: _ClassVar[int]
@@ -1503,9 +1503,9 @@ class PersistentVolumeSource(_message.Message):
     def __init__(self, gcePersistentDisk: _Optional[_Union[GCEPersistentDiskVolumeSource, _Mapping]] = ..., awsElasticBlockStore: _Optional[_Union[AWSElasticBlockStoreVolumeSource, _Mapping]] = ..., hostPath: _Optional[_Union[HostPathVolumeSource, _Mapping]] = ..., glusterfs: _Optional[_Union[GlusterfsPersistentVolumeSource, _Mapping]] = ..., nfs: _Optional[_Union[NFSVolumeSource, _Mapping]] = ..., rbd: _Optional[_Union[RBDPersistentVolumeSource, _Mapping]] = ..., iscsi: _Optional[_Union[ISCSIPersistentVolumeSource, _Mapping]] = ..., cinder: _Optional[_Union[CinderPersistentVolumeSource, _Mapping]] = ..., cephfs: _Optional[_Union[CephFSPersistentVolumeSource, _Mapping]] = ..., fc: _Optional[_Union[FCVolumeSource, _Mapping]] = ..., flocker: _Optional[_Union[FlockerVolumeSource, _Mapping]] = ..., flexVolume: _Optional[_Union[FlexPersistentVolumeSource, _Mapping]] = ..., azureFile: _Optional[_Union[AzureFilePersistentVolumeSource, _Mapping]] = ..., vsphereVolume: _Optional[_Union[VsphereVirtualDiskVolumeSource, _Mapping]] = ..., quobyte: _Optional[_Union[QuobyteVolumeSource, _Mapping]] = ..., azureDisk: _Optional[_Union[AzureDiskVolumeSource, _Mapping]] = ..., photonPersistentDisk: _Optional[_Union[PhotonPersistentDiskVolumeSource, _Mapping]] = ..., portworxVolume: _Optional[_Union[PortworxVolumeSource, _Mapping]] = ..., scaleIO: _Optional[_Union[ScaleIOPersistentVolumeSource, _Mapping]] = ..., local: _Optional[_Union[LocalVolumeSource, _Mapping]] = ..., storageos: _Optional[_Union[StorageOSPersistentVolumeSource, _Mapping]] = ..., csi: _Optional[_Union[CSIPersistentVolumeSource, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeSpec(_message.Message):
-    __slots__ = ("capacity", "persistentVolumeSource", "accessModes", "claimRef", "persistentVolumeReclaimPolicy", "storageClassName", "mountOptions", "volumeMode", "nodeAffinity")
+    __slots__ = ()
     class CapacityEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1532,7 +1532,7 @@ class PersistentVolumeSpec(_message.Message):
     def __init__(self, capacity: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., persistentVolumeSource: _Optional[_Union[PersistentVolumeSource, _Mapping]] = ..., accessModes: _Optional[_Iterable[str]] = ..., claimRef: _Optional[_Union[ObjectReference, _Mapping]] = ..., persistentVolumeReclaimPolicy: _Optional[str] = ..., storageClassName: _Optional[str] = ..., mountOptions: _Optional[_Iterable[str]] = ..., volumeMode: _Optional[str] = ..., nodeAffinity: _Optional[_Union[VolumeNodeAffinity, _Mapping]] = ...) -> None: ...
 
 class PersistentVolumeStatus(_message.Message):
-    __slots__ = ("phase", "message", "reason")
+    __slots__ = ()
     PHASE_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
@@ -1542,7 +1542,7 @@ class PersistentVolumeStatus(_message.Message):
     def __init__(self, phase: _Optional[str] = ..., message: _Optional[str] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class PhotonPersistentDiskVolumeSource(_message.Message):
-    __slots__ = ("pdID", "fsType")
+    __slots__ = ()
     PDID_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     pdID: str
@@ -1550,7 +1550,7 @@ class PhotonPersistentDiskVolumeSource(_message.Message):
     def __init__(self, pdID: _Optional[str] = ..., fsType: _Optional[str] = ...) -> None: ...
 
 class Pod(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -1560,7 +1560,7 @@ class Pod(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[PodSpec, _Mapping]] = ..., status: _Optional[_Union[PodStatus, _Mapping]] = ...) -> None: ...
 
 class PodAffinity(_message.Message):
-    __slots__ = ("requiredDuringSchedulingIgnoredDuringExecution", "preferredDuringSchedulingIgnoredDuringExecution")
+    __slots__ = ()
     REQUIREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     PREFERREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     requiredDuringSchedulingIgnoredDuringExecution: _containers.RepeatedCompositeFieldContainer[PodAffinityTerm]
@@ -1568,7 +1568,7 @@ class PodAffinity(_message.Message):
     def __init__(self, requiredDuringSchedulingIgnoredDuringExecution: _Optional[_Iterable[_Union[PodAffinityTerm, _Mapping]]] = ..., preferredDuringSchedulingIgnoredDuringExecution: _Optional[_Iterable[_Union[WeightedPodAffinityTerm, _Mapping]]] = ...) -> None: ...
 
 class PodAffinityTerm(_message.Message):
-    __slots__ = ("labelSelector", "namespaces", "topologyKey", "namespaceSelector")
+    __slots__ = ()
     LABELSELECTOR_FIELD_NUMBER: _ClassVar[int]
     NAMESPACES_FIELD_NUMBER: _ClassVar[int]
     TOPOLOGYKEY_FIELD_NUMBER: _ClassVar[int]
@@ -1580,7 +1580,7 @@ class PodAffinityTerm(_message.Message):
     def __init__(self, labelSelector: _Optional[_Union[_generated_pb2_1.LabelSelector, _Mapping]] = ..., namespaces: _Optional[_Iterable[str]] = ..., topologyKey: _Optional[str] = ..., namespaceSelector: _Optional[_Union[_generated_pb2_1.LabelSelector, _Mapping]] = ...) -> None: ...
 
 class PodAntiAffinity(_message.Message):
-    __slots__ = ("requiredDuringSchedulingIgnoredDuringExecution", "preferredDuringSchedulingIgnoredDuringExecution")
+    __slots__ = ()
     REQUIREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     PREFERREDDURINGSCHEDULINGIGNOREDDURINGEXECUTION_FIELD_NUMBER: _ClassVar[int]
     requiredDuringSchedulingIgnoredDuringExecution: _containers.RepeatedCompositeFieldContainer[PodAffinityTerm]
@@ -1588,7 +1588,7 @@ class PodAntiAffinity(_message.Message):
     def __init__(self, requiredDuringSchedulingIgnoredDuringExecution: _Optional[_Iterable[_Union[PodAffinityTerm, _Mapping]]] = ..., preferredDuringSchedulingIgnoredDuringExecution: _Optional[_Iterable[_Union[WeightedPodAffinityTerm, _Mapping]]] = ...) -> None: ...
 
 class PodAttachOptions(_message.Message):
-    __slots__ = ("stdin", "stdout", "stderr", "tty", "container")
+    __slots__ = ()
     STDIN_FIELD_NUMBER: _ClassVar[int]
     STDOUT_FIELD_NUMBER: _ClassVar[int]
     STDERR_FIELD_NUMBER: _ClassVar[int]
@@ -1602,7 +1602,7 @@ class PodAttachOptions(_message.Message):
     def __init__(self, stdin: _Optional[bool] = ..., stdout: _Optional[bool] = ..., stderr: _Optional[bool] = ..., tty: _Optional[bool] = ..., container: _Optional[str] = ...) -> None: ...
 
 class PodCondition(_message.Message):
-    __slots__ = ("type", "status", "lastProbeTime", "lastTransitionTime", "reason", "message")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LASTPROBETIME_FIELD_NUMBER: _ClassVar[int]
@@ -1618,7 +1618,7 @@ class PodCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., lastProbeTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., lastTransitionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class PodDNSConfig(_message.Message):
-    __slots__ = ("nameservers", "searches", "options")
+    __slots__ = ()
     NAMESERVERS_FIELD_NUMBER: _ClassVar[int]
     SEARCHES_FIELD_NUMBER: _ClassVar[int]
     OPTIONS_FIELD_NUMBER: _ClassVar[int]
@@ -1628,7 +1628,7 @@ class PodDNSConfig(_message.Message):
     def __init__(self, nameservers: _Optional[_Iterable[str]] = ..., searches: _Optional[_Iterable[str]] = ..., options: _Optional[_Iterable[_Union[PodDNSConfigOption, _Mapping]]] = ...) -> None: ...
 
 class PodDNSConfigOption(_message.Message):
-    __slots__ = ("name", "value")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -1636,7 +1636,7 @@ class PodDNSConfigOption(_message.Message):
     def __init__(self, name: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
 
 class PodExecOptions(_message.Message):
-    __slots__ = ("stdin", "stdout", "stderr", "tty", "container", "command")
+    __slots__ = ()
     STDIN_FIELD_NUMBER: _ClassVar[int]
     STDOUT_FIELD_NUMBER: _ClassVar[int]
     STDERR_FIELD_NUMBER: _ClassVar[int]
@@ -1652,13 +1652,13 @@ class PodExecOptions(_message.Message):
     def __init__(self, stdin: _Optional[bool] = ..., stdout: _Optional[bool] = ..., stderr: _Optional[bool] = ..., tty: _Optional[bool] = ..., container: _Optional[str] = ..., command: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class PodIP(_message.Message):
-    __slots__ = ("ip",)
+    __slots__ = ()
     IP_FIELD_NUMBER: _ClassVar[int]
     ip: str
     def __init__(self, ip: _Optional[str] = ...) -> None: ...
 
 class PodList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1666,7 +1666,7 @@ class PodList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Pod, _Mapping]]] = ...) -> None: ...
 
 class PodLogOptions(_message.Message):
-    __slots__ = ("container", "follow", "previous", "sinceSeconds", "sinceTime", "timestamps", "tailLines", "limitBytes", "insecureSkipTLSVerifyBackend")
+    __slots__ = ()
     CONTAINER_FIELD_NUMBER: _ClassVar[int]
     FOLLOW_FIELD_NUMBER: _ClassVar[int]
     PREVIOUS_FIELD_NUMBER: _ClassVar[int]
@@ -1688,31 +1688,31 @@ class PodLogOptions(_message.Message):
     def __init__(self, container: _Optional[str] = ..., follow: _Optional[bool] = ..., previous: _Optional[bool] = ..., sinceSeconds: _Optional[int] = ..., sinceTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., timestamps: _Optional[bool] = ..., tailLines: _Optional[int] = ..., limitBytes: _Optional[int] = ..., insecureSkipTLSVerifyBackend: _Optional[bool] = ...) -> None: ...
 
 class PodOS(_message.Message):
-    __slots__ = ("name",)
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     name: str
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class PodPortForwardOptions(_message.Message):
-    __slots__ = ("ports",)
+    __slots__ = ()
     PORTS_FIELD_NUMBER: _ClassVar[int]
     ports: _containers.RepeatedScalarFieldContainer[int]
     def __init__(self, ports: _Optional[_Iterable[int]] = ...) -> None: ...
 
 class PodProxyOptions(_message.Message):
-    __slots__ = ("path",)
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     path: str
     def __init__(self, path: _Optional[str] = ...) -> None: ...
 
 class PodReadinessGate(_message.Message):
-    __slots__ = ("conditionType",)
+    __slots__ = ()
     CONDITIONTYPE_FIELD_NUMBER: _ClassVar[int]
     conditionType: str
     def __init__(self, conditionType: _Optional[str] = ...) -> None: ...
 
 class PodSecurityContext(_message.Message):
-    __slots__ = ("seLinuxOptions", "windowsOptions", "runAsUser", "runAsGroup", "runAsNonRoot", "supplementalGroups", "fsGroup", "sysctls", "fsGroupChangePolicy", "seccompProfile")
+    __slots__ = ()
     SELINUXOPTIONS_FIELD_NUMBER: _ClassVar[int]
     WINDOWSOPTIONS_FIELD_NUMBER: _ClassVar[int]
     RUNASUSER_FIELD_NUMBER: _ClassVar[int]
@@ -1736,22 +1736,22 @@ class PodSecurityContext(_message.Message):
     def __init__(self, seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: _Optional[bool] = ..., supplementalGroups: _Optional[_Iterable[int]] = ..., fsGroup: _Optional[int] = ..., sysctls: _Optional[_Iterable[_Union[Sysctl, _Mapping]]] = ..., fsGroupChangePolicy: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
 
 class PodSignature(_message.Message):
-    __slots__ = ("podController",)
+    __slots__ = ()
     PODCONTROLLER_FIELD_NUMBER: _ClassVar[int]
     podController: _generated_pb2_1.OwnerReference
     def __init__(self, podController: _Optional[_Union[_generated_pb2_1.OwnerReference, _Mapping]] = ...) -> None: ...
 
 class PodSpec(_message.Message):
-    __slots__ = ("volumes", "initContainers", "containers", "ephemeralContainers", "restartPolicy", "terminationGracePeriodSeconds", "activeDeadlineSeconds", "dnsPolicy", "nodeSelector", "serviceAccountName", "serviceAccount", "automountServiceAccountToken", "nodeName", "hostNetwork", "hostPID", "hostIPC", "shareProcessNamespace", "securityContext", "imagePullSecrets", "hostname", "subdomain", "affinity", "schedulerName", "tolerations", "hostAliases", "priorityClassName", "priority", "dnsConfig", "readinessGates", "runtimeClassName", "enableServiceLinks", "preemptionPolicy", "overhead", "topologySpreadConstraints", "setHostnameAsFQDN", "os")
+    __slots__ = ()
     class NodeSelectorEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: str
         def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     class OverheadEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -1832,7 +1832,7 @@ class PodSpec(_message.Message):
     def __init__(self, volumes: _Optional[_Iterable[_Union[Volume, _Mapping]]] = ..., initContainers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., containers: _Optional[_Iterable[_Union[Container, _Mapping]]] = ..., ephemeralContainers: _Optional[_Iterable[_Union[EphemeralContainer, _Mapping]]] = ..., restartPolicy: _Optional[str] = ..., terminationGracePeriodSeconds: _Optional[int] = ..., activeDeadlineSeconds: _Optional[int] = ..., dnsPolicy: _Optional[str] = ..., nodeSelector: _Optional[_Mapping[str, str]] = ..., serviceAccountName: _Optional[str] = ..., serviceAccount: _Optional[str] = ..., automountServiceAccountToken: _Optional[bool] = ..., nodeName: _Optional[str] = ..., hostNetwork: _Optional[bool] = ..., hostPID: _Optional[bool] = ..., hostIPC: _Optional[bool] = ..., shareProcessNamespace: _Optional[bool] = ..., securityContext: _Optional[_Union[PodSecurityContext, _Mapping]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., hostname: _Optional[str] = ..., subdomain: _Optional[str] = ..., affinity: _Optional[_Union[Affinity, _Mapping]] = ..., schedulerName: _Optional[str] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., hostAliases: _Optional[_Iterable[_Union[HostAlias, _Mapping]]] = ..., priorityClassName: _Optional[str] = ..., priority: _Optional[int] = ..., dnsConfig: _Optional[_Union[PodDNSConfig, _Mapping]] = ..., readinessGates: _Optional[_Iterable[_Union[PodReadinessGate, _Mapping]]] = ..., runtimeClassName: _Optional[str] = ..., enableServiceLinks: _Optional[bool] = ..., preemptionPolicy: _Optional[str] = ..., overhead: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., topologySpreadConstraints: _Optional[_Iterable[_Union[TopologySpreadConstraint, _Mapping]]] = ..., setHostnameAsFQDN: _Optional[bool] = ..., os: _Optional[_Union[PodOS, _Mapping]] = ...) -> None: ...
 
 class PodStatus(_message.Message):
-    __slots__ = ("phase", "conditions", "message", "reason", "nominatedNodeName", "hostIP", "podIP", "podIPs", "startTime", "initContainerStatuses", "containerStatuses", "qosClass", "ephemeralContainerStatuses")
+    __slots__ = ()
     PHASE_FIELD_NUMBER: _ClassVar[int]
     CONDITIONS_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
@@ -1862,7 +1862,7 @@ class PodStatus(_message.Message):
     def __init__(self, phase: _Optional[str] = ..., conditions: _Optional[_Iterable[_Union[PodCondition, _Mapping]]] = ..., message: _Optional[str] = ..., reason: _Optional[str] = ..., nominatedNodeName: _Optional[str] = ..., hostIP: _Optional[str] = ..., podIP: _Optional[str] = ..., podIPs: _Optional[_Iterable[_Union[PodIP, _Mapping]]] = ..., startTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., initContainerStatuses: _Optional[_Iterable[_Union[ContainerStatus, _Mapping]]] = ..., containerStatuses: _Optional[_Iterable[_Union[ContainerStatus, _Mapping]]] = ..., qosClass: _Optional[str] = ..., ephemeralContainerStatuses: _Optional[_Iterable[_Union[ContainerStatus, _Mapping]]] = ...) -> None: ...
 
 class PodStatusResult(_message.Message):
-    __slots__ = ("metadata", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -1870,7 +1870,7 @@ class PodStatusResult(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., status: _Optional[_Union[PodStatus, _Mapping]] = ...) -> None: ...
 
 class PodTemplate(_message.Message):
-    __slots__ = ("metadata", "template")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     TEMPLATE_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -1878,7 +1878,7 @@ class PodTemplate(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., template: _Optional[_Union[PodTemplateSpec, _Mapping]] = ...) -> None: ...
 
 class PodTemplateList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -1886,7 +1886,7 @@ class PodTemplateList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[PodTemplate, _Mapping]]] = ...) -> None: ...
 
 class PodTemplateSpec(_message.Message):
-    __slots__ = ("metadata", "spec")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ObjectMeta
@@ -1894,7 +1894,7 @@ class PodTemplateSpec(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[PodSpec, _Mapping]] = ...) -> None: ...
 
 class PortStatus(_message.Message):
-    __slots__ = ("port", "protocol", "error")
+    __slots__ = ()
     PORT_FIELD_NUMBER: _ClassVar[int]
     PROTOCOL_FIELD_NUMBER: _ClassVar[int]
     ERROR_FIELD_NUMBER: _ClassVar[int]
@@ -1904,7 +1904,7 @@ class PortStatus(_message.Message):
     def __init__(self, port: _Optional[int] = ..., protocol: _Optional[str] = ..., error: _Optional[str] = ...) -> None: ...
 
 class PortworxVolumeSource(_message.Message):
-    __slots__ = ("volumeID", "fsType", "readOnly")
+    __slots__ = ()
     VOLUMEID_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -1914,13 +1914,13 @@ class PortworxVolumeSource(_message.Message):
     def __init__(self, volumeID: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class Preconditions(_message.Message):
-    __slots__ = ("uid",)
+    __slots__ = ()
     UID_FIELD_NUMBER: _ClassVar[int]
     uid: str
     def __init__(self, uid: _Optional[str] = ...) -> None: ...
 
 class PreferAvoidPodsEntry(_message.Message):
-    __slots__ = ("podSignature", "evictionTime", "reason", "message")
+    __slots__ = ()
     PODSIGNATURE_FIELD_NUMBER: _ClassVar[int]
     EVICTIONTIME_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
@@ -1932,7 +1932,7 @@ class PreferAvoidPodsEntry(_message.Message):
     def __init__(self, podSignature: _Optional[_Union[PodSignature, _Mapping]] = ..., evictionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class PreferredSchedulingTerm(_message.Message):
-    __slots__ = ("weight", "preference")
+    __slots__ = ()
     WEIGHT_FIELD_NUMBER: _ClassVar[int]
     PREFERENCE_FIELD_NUMBER: _ClassVar[int]
     weight: int
@@ -1940,7 +1940,7 @@ class PreferredSchedulingTerm(_message.Message):
     def __init__(self, weight: _Optional[int] = ..., preference: _Optional[_Union[NodeSelectorTerm, _Mapping]] = ...) -> None: ...
 
 class Probe(_message.Message):
-    __slots__ = ("handler", "initialDelaySeconds", "timeoutSeconds", "periodSeconds", "successThreshold", "failureThreshold", "terminationGracePeriodSeconds")
+    __slots__ = ()
     HANDLER_FIELD_NUMBER: _ClassVar[int]
     INITIALDELAYSECONDS_FIELD_NUMBER: _ClassVar[int]
     TIMEOUTSECONDS_FIELD_NUMBER: _ClassVar[int]
@@ -1958,7 +1958,7 @@ class Probe(_message.Message):
     def __init__(self, handler: _Optional[_Union[ProbeHandler, _Mapping]] = ..., initialDelaySeconds: _Optional[int] = ..., timeoutSeconds: _Optional[int] = ..., periodSeconds: _Optional[int] = ..., successThreshold: _Optional[int] = ..., failureThreshold: _Optional[int] = ..., terminationGracePeriodSeconds: _Optional[int] = ...) -> None: ...
 
 class ProbeHandler(_message.Message):
-    __slots__ = ("exec", "httpGet", "tcpSocket", "grpc")
+    __slots__ = ()
     EXEC_FIELD_NUMBER: _ClassVar[int]
     HTTPGET_FIELD_NUMBER: _ClassVar[int]
     TCPSOCKET_FIELD_NUMBER: _ClassVar[int]
@@ -1970,7 +1970,7 @@ class ProbeHandler(_message.Message):
     def __init__(self, exec: _Optional[_Union[ExecAction, _Mapping]] = ..., httpGet: _Optional[_Union[HTTPGetAction, _Mapping]] = ..., tcpSocket: _Optional[_Union[TCPSocketAction, _Mapping]] = ..., grpc: _Optional[_Union[GRPCAction, _Mapping]] = ...) -> None: ...
 
 class ProjectedVolumeSource(_message.Message):
-    __slots__ = ("sources", "defaultMode")
+    __slots__ = ()
     SOURCES_FIELD_NUMBER: _ClassVar[int]
     DEFAULTMODE_FIELD_NUMBER: _ClassVar[int]
     sources: _containers.RepeatedCompositeFieldContainer[VolumeProjection]
@@ -1978,7 +1978,7 @@ class ProjectedVolumeSource(_message.Message):
     def __init__(self, sources: _Optional[_Iterable[_Union[VolumeProjection, _Mapping]]] = ..., defaultMode: _Optional[int] = ...) -> None: ...
 
 class QuobyteVolumeSource(_message.Message):
-    __slots__ = ("registry", "volume", "readOnly", "user", "group", "tenant")
+    __slots__ = ()
     REGISTRY_FIELD_NUMBER: _ClassVar[int]
     VOLUME_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
@@ -1994,7 +1994,7 @@ class QuobyteVolumeSource(_message.Message):
     def __init__(self, registry: _Optional[str] = ..., volume: _Optional[str] = ..., readOnly: _Optional[bool] = ..., user: _Optional[str] = ..., group: _Optional[str] = ..., tenant: _Optional[str] = ...) -> None: ...
 
 class RBDPersistentVolumeSource(_message.Message):
-    __slots__ = ("monitors", "image", "fsType", "pool", "user", "keyring", "secretRef", "readOnly")
+    __slots__ = ()
     MONITORS_FIELD_NUMBER: _ClassVar[int]
     IMAGE_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
@@ -2014,7 +2014,7 @@ class RBDPersistentVolumeSource(_message.Message):
     def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class RBDVolumeSource(_message.Message):
-    __slots__ = ("monitors", "image", "fsType", "pool", "user", "keyring", "secretRef", "readOnly")
+    __slots__ = ()
     MONITORS_FIELD_NUMBER: _ClassVar[int]
     IMAGE_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
@@ -2034,7 +2034,7 @@ class RBDVolumeSource(_message.Message):
     def __init__(self, monitors: _Optional[_Iterable[str]] = ..., image: _Optional[str] = ..., fsType: _Optional[str] = ..., pool: _Optional[str] = ..., user: _Optional[str] = ..., keyring: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class RangeAllocation(_message.Message):
-    __slots__ = ("metadata", "range", "data")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     RANGE_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
@@ -2044,7 +2044,7 @@ class RangeAllocation(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., range: _Optional[str] = ..., data: _Optional[bytes] = ...) -> None: ...
 
 class ReplicationController(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -2054,7 +2054,7 @@ class ReplicationController(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[ReplicationControllerSpec, _Mapping]] = ..., status: _Optional[_Union[ReplicationControllerStatus, _Mapping]] = ...) -> None: ...
 
 class ReplicationControllerCondition(_message.Message):
-    __slots__ = ("type", "status", "lastTransitionTime", "reason", "message")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     LASTTRANSITIONTIME_FIELD_NUMBER: _ClassVar[int]
@@ -2068,7 +2068,7 @@ class ReplicationControllerCondition(_message.Message):
     def __init__(self, type: _Optional[str] = ..., status: _Optional[str] = ..., lastTransitionTime: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ..., reason: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
 
 class ReplicationControllerList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -2076,9 +2076,9 @@ class ReplicationControllerList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[ReplicationController, _Mapping]]] = ...) -> None: ...
 
 class ReplicationControllerSpec(_message.Message):
-    __slots__ = ("replicas", "minReadySeconds", "selector", "template")
+    __slots__ = ()
     class SelectorEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2095,7 +2095,7 @@ class ReplicationControllerSpec(_message.Message):
     def __init__(self, replicas: _Optional[int] = ..., minReadySeconds: _Optional[int] = ..., selector: _Optional[_Mapping[str, str]] = ..., template: _Optional[_Union[PodTemplateSpec, _Mapping]] = ...) -> None: ...
 
 class ReplicationControllerStatus(_message.Message):
-    __slots__ = ("replicas", "fullyLabeledReplicas", "readyReplicas", "availableReplicas", "observedGeneration", "conditions")
+    __slots__ = ()
     REPLICAS_FIELD_NUMBER: _ClassVar[int]
     FULLYLABELEDREPLICAS_FIELD_NUMBER: _ClassVar[int]
     READYREPLICAS_FIELD_NUMBER: _ClassVar[int]
@@ -2111,7 +2111,7 @@ class ReplicationControllerStatus(_message.Message):
     def __init__(self, replicas: _Optional[int] = ..., fullyLabeledReplicas: _Optional[int] = ..., readyReplicas: _Optional[int] = ..., availableReplicas: _Optional[int] = ..., observedGeneration: _Optional[int] = ..., conditions: _Optional[_Iterable[_Union[ReplicationControllerCondition, _Mapping]]] = ...) -> None: ...
 
 class ResourceFieldSelector(_message.Message):
-    __slots__ = ("containerName", "resource", "divisor")
+    __slots__ = ()
     CONTAINERNAME_FIELD_NUMBER: _ClassVar[int]
     RESOURCE_FIELD_NUMBER: _ClassVar[int]
     DIVISOR_FIELD_NUMBER: _ClassVar[int]
@@ -2121,7 +2121,7 @@ class ResourceFieldSelector(_message.Message):
     def __init__(self, containerName: _Optional[str] = ..., resource: _Optional[str] = ..., divisor: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
 
 class ResourceQuota(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -2131,7 +2131,7 @@ class ResourceQuota(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[ResourceQuotaSpec, _Mapping]] = ..., status: _Optional[_Union[ResourceQuotaStatus, _Mapping]] = ...) -> None: ...
 
 class ResourceQuotaList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -2139,9 +2139,9 @@ class ResourceQuotaList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[ResourceQuota, _Mapping]]] = ...) -> None: ...
 
 class ResourceQuotaSpec(_message.Message):
-    __slots__ = ("hard", "scopes", "scopeSelector")
+    __slots__ = ()
     class HardEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2156,16 +2156,16 @@ class ResourceQuotaSpec(_message.Message):
     def __init__(self, hard: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., scopes: _Optional[_Iterable[str]] = ..., scopeSelector: _Optional[_Union[ScopeSelector, _Mapping]] = ...) -> None: ...
 
 class ResourceQuotaStatus(_message.Message):
-    __slots__ = ("hard", "used")
+    __slots__ = ()
     class HardEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class UsedEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2178,16 +2178,16 @@ class ResourceQuotaStatus(_message.Message):
     def __init__(self, hard: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., used: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ...) -> None: ...
 
 class ResourceRequirements(_message.Message):
-    __slots__ = ("limits", "requests")
+    __slots__ = ()
     class LimitsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: _generated_pb2.Quantity
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_generated_pb2.Quantity, _Mapping]] = ...) -> None: ...
     class RequestsEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2200,7 +2200,7 @@ class ResourceRequirements(_message.Message):
     def __init__(self, limits: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ..., requests: _Optional[_Mapping[str, _generated_pb2.Quantity]] = ...) -> None: ...
 
 class SELinuxOptions(_message.Message):
-    __slots__ = ("user", "role", "type", "level")
+    __slots__ = ()
     USER_FIELD_NUMBER: _ClassVar[int]
     ROLE_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -2212,7 +2212,7 @@ class SELinuxOptions(_message.Message):
     def __init__(self, user: _Optional[str] = ..., role: _Optional[str] = ..., type: _Optional[str] = ..., level: _Optional[str] = ...) -> None: ...
 
 class ScaleIOPersistentVolumeSource(_message.Message):
-    __slots__ = ("gateway", "system", "secretRef", "sslEnabled", "protectionDomain", "storagePool", "storageMode", "volumeName", "fsType", "readOnly")
+    __slots__ = ()
     GATEWAY_FIELD_NUMBER: _ClassVar[int]
     SYSTEM_FIELD_NUMBER: _ClassVar[int]
     SECRETREF_FIELD_NUMBER: _ClassVar[int]
@@ -2236,7 +2236,7 @@ class ScaleIOPersistentVolumeSource(_message.Message):
     def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[SecretReference, _Mapping]] = ..., sslEnabled: _Optional[bool] = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class ScaleIOVolumeSource(_message.Message):
-    __slots__ = ("gateway", "system", "secretRef", "sslEnabled", "protectionDomain", "storagePool", "storageMode", "volumeName", "fsType", "readOnly")
+    __slots__ = ()
     GATEWAY_FIELD_NUMBER: _ClassVar[int]
     SYSTEM_FIELD_NUMBER: _ClassVar[int]
     SECRETREF_FIELD_NUMBER: _ClassVar[int]
@@ -2260,13 +2260,13 @@ class ScaleIOVolumeSource(_message.Message):
     def __init__(self, gateway: _Optional[str] = ..., system: _Optional[str] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., sslEnabled: _Optional[bool] = ..., protectionDomain: _Optional[str] = ..., storagePool: _Optional[str] = ..., storageMode: _Optional[str] = ..., volumeName: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ...) -> None: ...
 
 class ScopeSelector(_message.Message):
-    __slots__ = ("matchExpressions",)
+    __slots__ = ()
     MATCHEXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
     matchExpressions: _containers.RepeatedCompositeFieldContainer[ScopedResourceSelectorRequirement]
     def __init__(self, matchExpressions: _Optional[_Iterable[_Union[ScopedResourceSelectorRequirement, _Mapping]]] = ...) -> None: ...
 
 class ScopedResourceSelectorRequirement(_message.Message):
-    __slots__ = ("scopeName", "operator", "values")
+    __slots__ = ()
     SCOPENAME_FIELD_NUMBER: _ClassVar[int]
     OPERATOR_FIELD_NUMBER: _ClassVar[int]
     VALUES_FIELD_NUMBER: _ClassVar[int]
@@ -2276,7 +2276,7 @@ class ScopedResourceSelectorRequirement(_message.Message):
     def __init__(self, scopeName: _Optional[str] = ..., operator: _Optional[str] = ..., values: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class SeccompProfile(_message.Message):
-    __slots__ = ("type", "localhostProfile")
+    __slots__ = ()
     TYPE_FIELD_NUMBER: _ClassVar[int]
     LOCALHOSTPROFILE_FIELD_NUMBER: _ClassVar[int]
     type: str
@@ -2284,16 +2284,16 @@ class SeccompProfile(_message.Message):
     def __init__(self, type: _Optional[str] = ..., localhostProfile: _Optional[str] = ...) -> None: ...
 
 class Secret(_message.Message):
-    __slots__ = ("metadata", "immutable", "data", "stringData", "type")
+    __slots__ = ()
     class DataEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: bytes
         def __init__(self, key: _Optional[str] = ..., value: _Optional[bytes] = ...) -> None: ...
     class StringDataEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2312,7 +2312,7 @@ class Secret(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., immutable: _Optional[bool] = ..., data: _Optional[_Mapping[str, bytes]] = ..., stringData: _Optional[_Mapping[str, str]] = ..., type: _Optional[str] = ...) -> None: ...
 
 class SecretEnvSource(_message.Message):
-    __slots__ = ("localObjectReference", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
     localObjectReference: LocalObjectReference
@@ -2320,7 +2320,7 @@ class SecretEnvSource(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretKeySelector(_message.Message):
-    __slots__ = ("localObjectReference", "key", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
@@ -2330,7 +2330,7 @@ class SecretKeySelector(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., key: _Optional[str] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -2338,7 +2338,7 @@ class SecretList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Secret, _Mapping]]] = ...) -> None: ...
 
 class SecretProjection(_message.Message):
-    __slots__ = ("localObjectReference", "items", "optional")
+    __slots__ = ()
     LOCALOBJECTREFERENCE_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     OPTIONAL_FIELD_NUMBER: _ClassVar[int]
@@ -2348,7 +2348,7 @@ class SecretProjection(_message.Message):
     def __init__(self, localObjectReference: _Optional[_Union[LocalObjectReference, _Mapping]] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecretReference(_message.Message):
-    __slots__ = ("name", "namespace")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     NAMESPACE_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -2356,7 +2356,7 @@ class SecretReference(_message.Message):
     def __init__(self, name: _Optional[str] = ..., namespace: _Optional[str] = ...) -> None: ...
 
 class SecretVolumeSource(_message.Message):
-    __slots__ = ("secretName", "items", "defaultMode", "optional")
+    __slots__ = ()
     SECRETNAME_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     DEFAULTMODE_FIELD_NUMBER: _ClassVar[int]
@@ -2368,7 +2368,7 @@ class SecretVolumeSource(_message.Message):
     def __init__(self, secretName: _Optional[str] = ..., items: _Optional[_Iterable[_Union[KeyToPath, _Mapping]]] = ..., defaultMode: _Optional[int] = ..., optional: _Optional[bool] = ...) -> None: ...
 
 class SecurityContext(_message.Message):
-    __slots__ = ("capabilities", "privileged", "seLinuxOptions", "windowsOptions", "runAsUser", "runAsGroup", "runAsNonRoot", "readOnlyRootFilesystem", "allowPrivilegeEscalation", "procMount", "seccompProfile")
+    __slots__ = ()
     CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
     PRIVILEGED_FIELD_NUMBER: _ClassVar[int]
     SELINUXOPTIONS_FIELD_NUMBER: _ClassVar[int]
@@ -2394,13 +2394,13 @@ class SecurityContext(_message.Message):
     def __init__(self, capabilities: _Optional[_Union[Capabilities, _Mapping]] = ..., privileged: _Optional[bool] = ..., seLinuxOptions: _Optional[_Union[SELinuxOptions, _Mapping]] = ..., windowsOptions: _Optional[_Union[WindowsSecurityContextOptions, _Mapping]] = ..., runAsUser: _Optional[int] = ..., runAsGroup: _Optional[int] = ..., runAsNonRoot: _Optional[bool] = ..., readOnlyRootFilesystem: _Optional[bool] = ..., allowPrivilegeEscalation: _Optional[bool] = ..., procMount: _Optional[str] = ..., seccompProfile: _Optional[_Union[SeccompProfile, _Mapping]] = ...) -> None: ...
 
 class SerializedReference(_message.Message):
-    __slots__ = ("reference",)
+    __slots__ = ()
     REFERENCE_FIELD_NUMBER: _ClassVar[int]
     reference: ObjectReference
     def __init__(self, reference: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
 
 class Service(_message.Message):
-    __slots__ = ("metadata", "spec", "status")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SPEC_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -2410,7 +2410,7 @@ class Service(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., spec: _Optional[_Union[ServiceSpec, _Mapping]] = ..., status: _Optional[_Union[ServiceStatus, _Mapping]] = ...) -> None: ...
 
 class ServiceAccount(_message.Message):
-    __slots__ = ("metadata", "secrets", "imagePullSecrets", "automountServiceAccountToken")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     SECRETS_FIELD_NUMBER: _ClassVar[int]
     IMAGEPULLSECRETS_FIELD_NUMBER: _ClassVar[int]
@@ -2422,7 +2422,7 @@ class ServiceAccount(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ObjectMeta, _Mapping]] = ..., secrets: _Optional[_Iterable[_Union[ObjectReference, _Mapping]]] = ..., imagePullSecrets: _Optional[_Iterable[_Union[LocalObjectReference, _Mapping]]] = ..., automountServiceAccountToken: _Optional[bool] = ...) -> None: ...
 
 class ServiceAccountList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -2430,7 +2430,7 @@ class ServiceAccountList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[ServiceAccount, _Mapping]]] = ...) -> None: ...
 
 class ServiceAccountTokenProjection(_message.Message):
-    __slots__ = ("audience", "expirationSeconds", "path")
+    __slots__ = ()
     AUDIENCE_FIELD_NUMBER: _ClassVar[int]
     EXPIRATIONSECONDS_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
@@ -2440,7 +2440,7 @@ class ServiceAccountTokenProjection(_message.Message):
     def __init__(self, audience: _Optional[str] = ..., expirationSeconds: _Optional[int] = ..., path: _Optional[str] = ...) -> None: ...
 
 class ServiceList(_message.Message):
-    __slots__ = ("metadata", "items")
+    __slots__ = ()
     METADATA_FIELD_NUMBER: _ClassVar[int]
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     metadata: _generated_pb2_1.ListMeta
@@ -2448,7 +2448,7 @@ class ServiceList(_message.Message):
     def __init__(self, metadata: _Optional[_Union[_generated_pb2_1.ListMeta, _Mapping]] = ..., items: _Optional[_Iterable[_Union[Service, _Mapping]]] = ...) -> None: ...
 
 class ServicePort(_message.Message):
-    __slots__ = ("name", "protocol", "appProtocol", "port", "targetPort", "nodePort")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     PROTOCOL_FIELD_NUMBER: _ClassVar[int]
     APPPROTOCOL_FIELD_NUMBER: _ClassVar[int]
@@ -2464,15 +2464,15 @@ class ServicePort(_message.Message):
     def __init__(self, name: _Optional[str] = ..., protocol: _Optional[str] = ..., appProtocol: _Optional[str] = ..., port: _Optional[int] = ..., targetPort: _Optional[_Union[_generated_pb2_1_1_1.IntOrString, _Mapping]] = ..., nodePort: _Optional[int] = ...) -> None: ...
 
 class ServiceProxyOptions(_message.Message):
-    __slots__ = ("path",)
+    __slots__ = ()
     PATH_FIELD_NUMBER: _ClassVar[int]
     path: str
     def __init__(self, path: _Optional[str] = ...) -> None: ...
 
 class ServiceSpec(_message.Message):
-    __slots__ = ("ports", "selector", "clusterIP", "clusterIPs", "type", "externalIPs", "sessionAffinity", "loadBalancerIP", "loadBalancerSourceRanges", "externalName", "externalTrafficPolicy", "healthCheckNodePort", "publishNotReadyAddresses", "sessionAffinityConfig", "ipFamilies", "ipFamilyPolicy", "allocateLoadBalancerNodePorts", "loadBalancerClass", "internalTrafficPolicy")
+    __slots__ = ()
     class SelectorEntry(_message.Message):
-        __slots__ = ("key", "value")
+        __slots__ = ()
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
@@ -2519,7 +2519,7 @@ class ServiceSpec(_message.Message):
     def __init__(self, ports: _Optional[_Iterable[_Union[ServicePort, _Mapping]]] = ..., selector: _Optional[_Mapping[str, str]] = ..., clusterIP: _Optional[str] = ..., clusterIPs: _Optional[_Iterable[str]] = ..., type: _Optional[str] = ..., externalIPs: _Optional[_Iterable[str]] = ..., sessionAffinity: _Optional[str] = ..., loadBalancerIP: _Optional[str] = ..., loadBalancerSourceRanges: _Optional[_Iterable[str]] = ..., externalName: _Optional[str] = ..., externalTrafficPolicy: _Optional[str] = ..., healthCheckNodePort: _Optional[int] = ..., publishNotReadyAddresses: _Optional[bool] = ..., sessionAffinityConfig: _Optional[_Union[SessionAffinityConfig, _Mapping]] = ..., ipFamilies: _Optional[_Iterable[str]] = ..., ipFamilyPolicy: _Optional[str] = ..., allocateLoadBalancerNodePorts: _Optional[bool] = ..., loadBalancerClass: _Optional[str] = ..., internalTrafficPolicy: _Optional[str] = ...) -> None: ...
 
 class ServiceStatus(_message.Message):
-    __slots__ = ("loadBalancer", "conditions")
+    __slots__ = ()
     LOADBALANCER_FIELD_NUMBER: _ClassVar[int]
     CONDITIONS_FIELD_NUMBER: _ClassVar[int]
     loadBalancer: LoadBalancerStatus
@@ -2527,13 +2527,13 @@ class ServiceStatus(_message.Message):
     def __init__(self, loadBalancer: _Optional[_Union[LoadBalancerStatus, _Mapping]] = ..., conditions: _Optional[_Iterable[_Union[_generated_pb2_1.Condition, _Mapping]]] = ...) -> None: ...
 
 class SessionAffinityConfig(_message.Message):
-    __slots__ = ("clientIP",)
+    __slots__ = ()
     CLIENTIP_FIELD_NUMBER: _ClassVar[int]
     clientIP: ClientIPConfig
     def __init__(self, clientIP: _Optional[_Union[ClientIPConfig, _Mapping]] = ...) -> None: ...
 
 class StorageOSPersistentVolumeSource(_message.Message):
-    __slots__ = ("volumeName", "volumeNamespace", "fsType", "readOnly", "secretRef")
+    __slots__ = ()
     VOLUMENAME_FIELD_NUMBER: _ClassVar[int]
     VOLUMENAMESPACE_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
@@ -2547,7 +2547,7 @@ class StorageOSPersistentVolumeSource(_message.Message):
     def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[ObjectReference, _Mapping]] = ...) -> None: ...
 
 class StorageOSVolumeSource(_message.Message):
-    __slots__ = ("volumeName", "volumeNamespace", "fsType", "readOnly", "secretRef")
+    __slots__ = ()
     VOLUMENAME_FIELD_NUMBER: _ClassVar[int]
     VOLUMENAMESPACE_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
@@ -2561,7 +2561,7 @@ class StorageOSVolumeSource(_message.Message):
     def __init__(self, volumeName: _Optional[str] = ..., volumeNamespace: _Optional[str] = ..., fsType: _Optional[str] = ..., readOnly: _Optional[bool] = ..., secretRef: _Optional[_Union[LocalObjectReference, _Mapping]] = ...) -> None: ...
 
 class Sysctl(_message.Message):
-    __slots__ = ("name", "value")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -2569,7 +2569,7 @@ class Sysctl(_message.Message):
     def __init__(self, name: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
 
 class TCPSocketAction(_message.Message):
-    __slots__ = ("port", "host")
+    __slots__ = ()
     PORT_FIELD_NUMBER: _ClassVar[int]
     HOST_FIELD_NUMBER: _ClassVar[int]
     port: _generated_pb2_1_1_1.IntOrString
@@ -2577,7 +2577,7 @@ class TCPSocketAction(_message.Message):
     def __init__(self, port: _Optional[_Union[_generated_pb2_1_1_1.IntOrString, _Mapping]] = ..., host: _Optional[str] = ...) -> None: ...
 
 class Taint(_message.Message):
-    __slots__ = ("key", "value", "effect", "timeAdded")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     EFFECT_FIELD_NUMBER: _ClassVar[int]
@@ -2589,7 +2589,7 @@ class Taint(_message.Message):
     def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ..., effect: _Optional[str] = ..., timeAdded: _Optional[_Union[_generated_pb2_1.Time, _Mapping]] = ...) -> None: ...
 
 class Toleration(_message.Message):
-    __slots__ = ("key", "operator", "value", "effect", "tolerationSeconds")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPERATOR_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -2603,7 +2603,7 @@ class Toleration(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[str] = ..., value: _Optional[str] = ..., effect: _Optional[str] = ..., tolerationSeconds: _Optional[int] = ...) -> None: ...
 
 class TopologySelectorLabelRequirement(_message.Message):
-    __slots__ = ("key", "values")
+    __slots__ = ()
     KEY_FIELD_NUMBER: _ClassVar[int]
     VALUES_FIELD_NUMBER: _ClassVar[int]
     key: str
@@ -2611,13 +2611,13 @@ class TopologySelectorLabelRequirement(_message.Message):
     def __init__(self, key: _Optional[str] = ..., values: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class TopologySelectorTerm(_message.Message):
-    __slots__ = ("matchLabelExpressions",)
+    __slots__ = ()
     MATCHLABELEXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
     matchLabelExpressions: _containers.RepeatedCompositeFieldContainer[TopologySelectorLabelRequirement]
     def __init__(self, matchLabelExpressions: _Optional[_Iterable[_Union[TopologySelectorLabelRequirement, _Mapping]]] = ...) -> None: ...
 
 class TopologySpreadConstraint(_message.Message):
-    __slots__ = ("maxSkew", "topologyKey", "whenUnsatisfiable", "labelSelector")
+    __slots__ = ()
     MAXSKEW_FIELD_NUMBER: _ClassVar[int]
     TOPOLOGYKEY_FIELD_NUMBER: _ClassVar[int]
     WHENUNSATISFIABLE_FIELD_NUMBER: _ClassVar[int]
@@ -2629,7 +2629,7 @@ class TopologySpreadConstraint(_message.Message):
     def __init__(self, maxSkew: _Optional[int] = ..., topologyKey: _Optional[str] = ..., whenUnsatisfiable: _Optional[str] = ..., labelSelector: _Optional[_Union[_generated_pb2_1.LabelSelector, _Mapping]] = ...) -> None: ...
 
 class TypedLocalObjectReference(_message.Message):
-    __slots__ = ("apiGroup", "kind", "name")
+    __slots__ = ()
     APIGROUP_FIELD_NUMBER: _ClassVar[int]
     KIND_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
@@ -2639,7 +2639,7 @@ class TypedLocalObjectReference(_message.Message):
     def __init__(self, apiGroup: _Optional[str] = ..., kind: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class Volume(_message.Message):
-    __slots__ = ("name", "volumeSource")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     VOLUMESOURCE_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -2647,7 +2647,7 @@ class Volume(_message.Message):
     def __init__(self, name: _Optional[str] = ..., volumeSource: _Optional[_Union[VolumeSource, _Mapping]] = ...) -> None: ...
 
 class VolumeDevice(_message.Message):
-    __slots__ = ("name", "devicePath")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     DEVICEPATH_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -2655,7 +2655,7 @@ class VolumeDevice(_message.Message):
     def __init__(self, name: _Optional[str] = ..., devicePath: _Optional[str] = ...) -> None: ...
 
 class VolumeMount(_message.Message):
-    __slots__ = ("name", "readOnly", "mountPath", "subPath", "mountPropagation", "subPathExpr")
+    __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     READONLY_FIELD_NUMBER: _ClassVar[int]
     MOUNTPATH_FIELD_NUMBER: _ClassVar[int]
@@ -2671,13 +2671,13 @@ class VolumeMount(_message.Message):
     def __init__(self, name: _Optional[str] = ..., readOnly: _Optional[bool] = ..., mountPath: _Optional[str] = ..., subPath: _Optional[str] = ..., mountPropagation: _Optional[str] = ..., subPathExpr: _Optional[str] = ...) -> None: ...
 
 class VolumeNodeAffinity(_message.Message):
-    __slots__ = ("required",)
+    __slots__ = ()
     REQUIRED_FIELD_NUMBER: _ClassVar[int]
     required: NodeSelector
     def __init__(self, required: _Optional[_Union[NodeSelector, _Mapping]] = ...) -> None: ...
 
 class VolumeProjection(_message.Message):
-    __slots__ = ("secret", "downwardAPI", "configMap", "serviceAccountToken")
+    __slots__ = ()
     SECRET_FIELD_NUMBER: _ClassVar[int]
     DOWNWARDAPI_FIELD_NUMBER: _ClassVar[int]
     CONFIGMAP_FIELD_NUMBER: _ClassVar[int]
@@ -2689,7 +2689,7 @@ class VolumeProjection(_message.Message):
     def __init__(self, secret: _Optional[_Union[SecretProjection, _Mapping]] = ..., downwardAPI: _Optional[_Union[DownwardAPIProjection, _Mapping]] = ..., configMap: _Optional[_Union[ConfigMapProjection, _Mapping]] = ..., serviceAccountToken: _Optional[_Union[ServiceAccountTokenProjection, _Mapping]] = ...) -> None: ...
 
 class VolumeSource(_message.Message):
-    __slots__ = ("hostPath", "emptyDir", "gcePersistentDisk", "awsElasticBlockStore", "gitRepo", "secret", "nfs", "iscsi", "glusterfs", "persistentVolumeClaim", "rbd", "flexVolume", "cinder", "cephfs", "flocker", "downwardAPI", "fc", "azureFile", "configMap", "vsphereVolume", "quobyte", "azureDisk", "photonPersistentDisk", "projected", "portworxVolume", "scaleIO", "storageos", "csi", "ephemeral")
+    __slots__ = ()
     HOSTPATH_FIELD_NUMBER: _ClassVar[int]
     EMPTYDIR_FIELD_NUMBER: _ClassVar[int]
     GCEPERSISTENTDISK_FIELD_NUMBER: _ClassVar[int]
@@ -2751,7 +2751,7 @@ class VolumeSource(_message.Message):
     def __init__(self, hostPath: _Optional[_Union[HostPathVolumeSource, _Mapping]] = ..., emptyDir: _Optional[_Union[EmptyDirVolumeSource, _Mapping]] = ..., gcePersistentDisk: _Optional[_Union[GCEPersistentDiskVolumeSource, _Mapping]] = ..., awsElasticBlockStore: _Optional[_Union[AWSElasticBlockStoreVolumeSource, _Mapping]] = ..., gitRepo: _Optional[_Union[GitRepoVolumeSource, _Mapping]] = ..., secret: _Optional[_Union[SecretVolumeSource, _Mapping]] = ..., nfs: _Optional[_Union[NFSVolumeSource, _Mapping]] = ..., iscsi: _Optional[_Union[ISCSIVolumeSource, _Mapping]] = ..., glusterfs: _Optional[_Union[GlusterfsVolumeSource, _Mapping]] = ..., persistentVolumeClaim: _Optional[_Union[PersistentVolumeClaimVolumeSource, _Mapping]] = ..., rbd: _Optional[_Union[RBDVolumeSource, _Mapping]] = ..., flexVolume: _Optional[_Union[FlexVolumeSource, _Mapping]] = ..., cinder: _Optional[_Union[CinderVolumeSource, _Mapping]] = ..., cephfs: _Optional[_Union[CephFSVolumeSource, _Mapping]] = ..., flocker: _Optional[_Union[FlockerVolumeSource, _Mapping]] = ..., downwardAPI: _Optional[_Union[DownwardAPIVolumeSource, _Mapping]] = ..., fc: _Optional[_Union[FCVolumeSource, _Mapping]] = ..., azureFile: _Optional[_Union[AzureFileVolumeSource, _Mapping]] = ..., configMap: _Optional[_Union[ConfigMapVolumeSource, _Mapping]] = ..., vsphereVolume: _Optional[_Union[VsphereVirtualDiskVolumeSource, _Mapping]] = ..., quobyte: _Optional[_Union[QuobyteVolumeSource, _Mapping]] = ..., azureDisk: _Optional[_Union[AzureDiskVolumeSource, _Mapping]] = ..., photonPersistentDisk: _Optional[_Union[PhotonPersistentDiskVolumeSource, _Mapping]] = ..., projected: _Optional[_Union[ProjectedVolumeSource, _Mapping]] = ..., portworxVolume: _Optional[_Union[PortworxVolumeSource, _Mapping]] = ..., scaleIO: _Optional[_Union[ScaleIOVolumeSource, _Mapping]] = ..., storageos: _Optional[_Union[StorageOSVolumeSource, _Mapping]] = ..., csi: _Optional[_Union[CSIVolumeSource, _Mapping]] = ..., ephemeral: _Optional[_Union[EphemeralVolumeSource, _Mapping]] = ...) -> None: ...
 
 class VsphereVirtualDiskVolumeSource(_message.Message):
-    __slots__ = ("volumePath", "fsType", "storagePolicyName", "storagePolicyID")
+    __slots__ = ()
     VOLUMEPATH_FIELD_NUMBER: _ClassVar[int]
     FSTYPE_FIELD_NUMBER: _ClassVar[int]
     STORAGEPOLICYNAME_FIELD_NUMBER: _ClassVar[int]
@@ -2763,7 +2763,7 @@ class VsphereVirtualDiskVolumeSource(_message.Message):
     def __init__(self, volumePath: _Optional[str] = ..., fsType: _Optional[str] = ..., storagePolicyName: _Optional[str] = ..., storagePolicyID: _Optional[str] = ...) -> None: ...
 
 class WeightedPodAffinityTerm(_message.Message):
-    __slots__ = ("weight", "podAffinityTerm")
+    __slots__ = ()
     WEIGHT_FIELD_NUMBER: _ClassVar[int]
     PODAFFINITYTERM_FIELD_NUMBER: _ClassVar[int]
     weight: int
@@ -2771,7 +2771,7 @@ class WeightedPodAffinityTerm(_message.Message):
     def __init__(self, weight: _Optional[int] = ..., podAffinityTerm: _Optional[_Union[PodAffinityTerm, _Mapping]] = ...) -> None: ...
 
 class WindowsSecurityContextOptions(_message.Message):
-    __slots__ = ("gmsaCredentialSpecName", "gmsaCredentialSpec", "runAsUserName", "hostProcess")
+    __slots__ = ()
     GMSACREDENTIALSPECNAME_FIELD_NUMBER: _ClassVar[int]
     GMSACREDENTIALSPEC_FIELD_NUMBER: _ClassVar[int]
     RUNASUSERNAME_FIELD_NUMBER: _ClassVar[int]
