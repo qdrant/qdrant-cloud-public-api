@@ -8,7 +8,6 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // PlatformService is the API used to query for cloud provider & regional information.
 service PlatformService {
-  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Lists all available cloud providers globally (not account-specific).
   // Authentication is not required.
   rpc ListGlobalCloudProviders(ListGlobalCloudProvidersRequest) returns (ListGlobalCloudProvidersResponse) {
@@ -26,7 +25,6 @@ service PlatformService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers"};
   }
-  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
   // Authentication is not required.
   rpc ListGlobalCloudProviderRegions(ListGlobalCloudProviderRegionsRequest) returns (ListGlobalCloudProviderRegionsResponse) {
@@ -40,11 +38,29 @@ service PlatformService {
       field_expression: "cloud_provider_id"
     };
   }
+  // Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
+  // Authentication is not required.
+  rpc GetGlobalCloudProviderRegion(GetGlobalCloudProviderRegionRequest) returns (GetGlobalCloudProviderRegionResponse) {
+    // authentication not required
+    option (qdrant.cloud.common.v1.requires_authentication) = false;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "region_id"
+      field_expression: "region_id"
+    };
+  }
   // Lists all cloud provider regions in the account identified by the given ID and cloud provider.
   // Required permissions:
   // - None (authenticated only)
   // Conditional permissions:
-  // - read:hybrid_cloud_environments OR read:clusters - required only if request.cloud_provider_id refers to a hybrid provider.
+  // - read:hybrid_cloud_environments OR read:clusters
+  //   One of these permissions is required when the specified cloud_provider_id is "hybrid".
   rpc ListCloudProviderRegions(ListCloudProviderRegionsRequest) returns (ListCloudProviderRegionsResponse) {
     // permissions
     option (common.v1.permissions) = "";
@@ -54,6 +70,27 @@ service PlatformService {
     option (common.v1.log_fields) = {
       name: "cloud_provider_id"
       field_expression: "cloud_provider_id"
+    };
+  }
+  // Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
+  // Required permissions:
+  // - None (authenticated only)
+  // Conditional permissions:
+  // - read:hybrid_cloud_environments OR read:clusters
+  //   One of these permissions is required when the specified cloud_provider_id is "hybrid".
+  rpc GetCloudProviderRegion(GetCloudProviderRegionRequest) returns (GetCloudProviderRegionResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cloud_provider_id"
+      field_expression: "cloud_provider_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "region_id"
+      field_expression: "region_id"
     };
   }
 }
@@ -95,6 +132,23 @@ message ListGlobalCloudProviderRegionsResponse {
   repeated CloudProviderRegion items = 1;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetGlobalCloudProviderRegionRequest is the request for the GetGlobalCloudProviderRegion function.
+message GetGlobalCloudProviderRegionRequest {
+  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+  // This is a required field.
+  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
+  // The identifier for the cloud provider region.
+  // This is a required field.
+  string region_id = 2 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function.
+message GetGlobalCloudProviderRegionResponse {
+  // The cloud provider region.
+  CloudProviderRegion region = 1;
+}
+
 // ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
 message ListCloudProviderRegionsRequest {
   // The identifier of the account (in GUID format).
@@ -109,6 +163,25 @@ message ListCloudProviderRegionsRequest {
 message ListCloudProviderRegionsResponse {
   // The cloud provider regions.
   repeated CloudProviderRegion items = 1;
+}
+
+// GetCloudProviderRegionRequest is the request for the GetCloudProviderRegion function.
+message GetCloudProviderRegionRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+  // This is a required field.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // The identifier for the cloud provider region.
+  // This is a required field.
+  string region_id = 3 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function.
+message GetCloudProviderRegionResponse {
+  // The cloud provider region.
+  CloudProviderRegion region = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -150,4 +223,16 @@ message CloudProviderRegion {
   // Geographic location grouping of the region.
   // e.g. "Europe", "Asia", "North America", etc.
   optional string geographical_sub_region = 7 [(buf.validate.field).string.min_len = 1];
+  // Kubernetes namespace where the components for the environment are deployed (for hybrid cloud regions).
+  optional string namespace = 8 [(buf.validate.field).string.min_len = 1];
+  // Storage capabilities available in this region.
+  CloudProviderRegionCapabilities capabilities = 9;
+}
+
+// CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
+message CloudProviderRegionCapabilities {
+  // Whether volume snapshots are supported.
+  bool volume_snapshot = 1;
+  // Whether volume expansion is supported.
+  bool volume_expansion = 2;
 }
