@@ -9,6 +9,12 @@ authors = [
     { name = "Cloud Unit Platform", email = "cloud-unit-platform@qdrant.com" },
 ]
 
+dependencies = [
+    # Due to `buf.build/protocolbuffers/python:v33.0`, we need at least protobuf 6.33.0
+    # as runtime dependency. Runtime must never be lower than generator version.
+    "protobuf>=6.33.0"
+]
+
 [project.urls]
 Homepage = "https://github.com/qdrant/qdrant-cloud-public-api"
 Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
