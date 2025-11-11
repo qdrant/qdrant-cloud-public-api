@@ -12,7 +12,7 @@ managed:
 
 plugins:
   # Generate base types for Go
-  - remote: buf.build/protocolbuffers/go:v1.36.9
+  - remote: buf.build/protocolbuffers/go:v1.36.10
     out: gen/go
     opt:
       - paths=source_relative
@@ -24,31 +24,31 @@ plugins:
       - paths=source_relative
 
   # Generate Python client and server stubs
-  - remote: buf.build/grpc/python:v1.75.0
+  - remote: buf.build/grpc/python:v1.76.0
     include_imports: true
     out: gen/python
 
   # Generate base types for Python(message and enum).
-  - remote: buf.build/protocolbuffers/python:v32.1
+  - remote: buf.build/protocolbuffers/python:v33.0
     include_imports: true
     out: gen/python
 
   # Generate Python type hints
-  - remote: buf.build/protocolbuffers/pyi:v32.1
+  - remote: buf.build/protocolbuffers/pyi:v33.0
     include_imports: true
     out: gen/python
 
   # Generate bindings for gRPC-Gateway
   # We don't need the output (the api-gateway is building this dynamically), however
   # we still want to run the validation logic inside this plugin
-  - remote: buf.build/grpc-ecosystem/gateway:v2.27.2
+  - remote: buf.build/grpc-ecosystem/gateway:v2.27.3
     out: gen-dummy/go
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
 
   # Generate OpenAPI definitions for Protobuf services
-  - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.2
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.3
     out: gen/openapiv2
 
   # Generate base types and services for Typescript
@@ -60,6 +60,22 @@ plugins:
       - import_extension=js
       - valid_types=protovalidate_required
       - buf_validate=true
+    out: gen/typescript_strict
+
+  - remote: buf.build/connectrpc/query-es:v2.2.0
+    include_imports: true
+    opt:
+      - target=js+dts
+      - import_extension=js
+    out: gen/typescript_strict
+
+  # Generate base types and services for Typescript
+  - remote: buf.build/bufbuild/es:v2.10.0
+    include_imports: true
+    opt:
+      - target=js+dts
+      - import_extension=js
+      - valid_types=protovalidate_required
     out: gen/typescript
 
   - remote: buf.build/connectrpc/query-es:v2.2.0
