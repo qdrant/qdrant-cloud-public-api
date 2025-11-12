@@ -29,6 +29,7 @@ const (
 	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
 	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
 	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
+	ClusterService_GetQdrantRelease_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -75,11 +76,15 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestClusterName(ctx context.Context, in *SuggestClusterNameRequest, opts ...grpc.CallOption) (*SuggestClusterNameResponse, error)
-	// Lists all qdrant releases in the account identified by the given ID.
-	// Optional a cluster ID can be provided, the list will return the options to update to only.
+	// Lists all Qdrant releases in the account identified by the given ID.
+	// Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(ctx context.Context, in *ListQdrantReleasesRequest, opts ...grpc.CallOption) (*ListQdrantReleasesResponse, error)
+	// Gets a Qdrant release by version in the account identified by the given ID.
+	// Required permissions:
+	// - read:clusters
+	GetQdrantRelease(ctx context.Context, in *GetQdrantReleaseRequest, opts ...grpc.CallOption) (*GetQdrantReleaseResponse, error)
 }
 
 type clusterServiceClient struct {
@@ -190,6 +195,16 @@ func (c *clusterServiceClient) ListQdrantReleases(ctx context.Context, in *ListQ
 	return out, nil
 }
 
+func (c *clusterServiceClient) GetQdrantRelease(ctx context.Context, in *GetQdrantReleaseRequest, opts ...grpc.CallOption) (*GetQdrantReleaseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetQdrantReleaseResponse)
+	err := c.cc.Invoke(ctx, ClusterService_GetQdrantRelease_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations must embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -234,11 +249,15 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestClusterName(context.Context, *SuggestClusterNameRequest) (*SuggestClusterNameResponse, error)
-	// Lists all qdrant releases in the account identified by the given ID.
-	// Optional a cluster ID can be provided, the list will return the options to update to only.
+	// Lists all Qdrant releases in the account identified by the given ID.
+	// Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
 	// Required permissions:
 	// - read:clusters
 	ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error)
+	// Gets a Qdrant release by version in the account identified by the given ID.
+	// Required permissions:
+	// - read:clusters
+	GetQdrantRelease(context.Context, *GetQdrantReleaseRequest) (*GetQdrantReleaseResponse, error)
 	mustEmbedUnimplementedClusterServiceServer()
 }
 
@@ -278,6 +297,9 @@ func (UnimplementedClusterServiceServer) SuggestClusterName(context.Context, *Su
 }
 func (UnimplementedClusterServiceServer) ListQdrantReleases(context.Context, *ListQdrantReleasesRequest) (*ListQdrantReleasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQdrantReleases not implemented")
+}
+func (UnimplementedClusterServiceServer) GetQdrantRelease(context.Context, *GetQdrantReleaseRequest) (*GetQdrantReleaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetQdrantRelease not implemented")
 }
 func (UnimplementedClusterServiceServer) mustEmbedUnimplementedClusterServiceServer() {}
 func (UnimplementedClusterServiceServer) testEmbeddedByValue()                        {}
@@ -480,6 +502,24 @@ func _ClusterService_ListQdrantReleases_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_GetQdrantRelease_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQdrantReleaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).GetQdrantRelease(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_GetQdrantRelease_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).GetQdrantRelease(ctx, req.(*GetQdrantReleaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -526,6 +566,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListQdrantReleases",
 			Handler:    _ClusterService_ListQdrantReleases_Handler,
+		},
+		{
+			MethodName: "GetQdrantRelease",
+			Handler:    _ClusterService_GetQdrantRelease_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
