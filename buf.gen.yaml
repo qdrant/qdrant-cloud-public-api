@@ -51,21 +51,39 @@ plugins:
   - remote: buf.build/grpc-ecosystem/openapiv2:v2.27.3
     out: gen/openapiv2
 
-  # Generate base types and services for Typescript
-  - remote: buf.build/bufbuild/es:v2.10.0
+  # Generate base types and services for Typescript STRICT
+  - local:
+      - scripts/protoc-gen-es.sh
     include_imports: true
     opt:
       - target=js+dts
       - import_extension=js
       - valid_types=protovalidate_required
-    out: gen/typescript
+      - buf_validate=true
+    out: gen/typescript/strict
 
   - remote: buf.build/connectrpc/query-es:v2.2.0
     include_imports: true
     opt:
       - target=js+dts
       - import_extension=js
-    out: gen/typescript
+    out: gen/typescript/strict
+
+  # Generate base types and services for Typescript LEGACY
+  - remote: buf.build/bufbuild/es:v2.10.0
+    include_imports: true
+    opt:
+      - target=js+dts
+      - import_extension=js
+      - valid_types=protovalidate_required
+    out: gen/typescript/legacy
+
+  - remote: buf.build/connectrpc/query-es:v2.2.0
+    include_imports: true
+    opt:
+      - target=js+dts
+      - import_extension=js
+    out: gen/typescript/legacy
 
 inputs:
   - directory: proto
