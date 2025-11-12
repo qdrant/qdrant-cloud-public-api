@@ -6,7 +6,8 @@ from qdrant.cloud.cluster.auth.v1 import database_api_key_pb2 as qdrant_dot_clou
 
 
 class DatabaseApiKeyServiceStub(object):
-    """DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+    """Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
+    DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
     """
 
     def __init__(self, channel):
@@ -33,7 +34,8 @@ class DatabaseApiKeyServiceStub(object):
 
 
 class DatabaseApiKeyServiceServicer(object):
-    """DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+    """Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
+    DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
     """
 
     def ListDatabaseApiKeys(self, request, context):
@@ -90,7 +92,8 @@ def add_DatabaseApiKeyServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class DatabaseApiKeyService(object):
-    """DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+    """Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
+    DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
     """
 
     @staticmethod

@@ -28,7 +28,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
+// Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+//
+// Deprecated: Do not use.
 type DatabaseApiKeyServiceClient interface {
 	// Lists all database api keys in the account identified by the given ID.
 	// Required permissions:
@@ -48,6 +51,7 @@ type databaseApiKeyServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
+// Deprecated: Do not use.
 func NewDatabaseApiKeyServiceClient(cc grpc.ClientConnInterface) DatabaseApiKeyServiceClient {
 	return &databaseApiKeyServiceClient{cc}
 }
@@ -86,7 +90,10 @@ func (c *databaseApiKeyServiceClient) DeleteDatabaseApiKey(ctx context.Context, 
 // All implementations must embed UnimplementedDatabaseApiKeyServiceServer
 // for forward compatibility.
 //
+// Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
+//
+// Deprecated: Do not use.
 type DatabaseApiKeyServiceServer interface {
 	// Lists all database api keys in the account identified by the given ID.
 	// Required permissions:
@@ -129,6 +136,7 @@ type UnsafeDatabaseApiKeyServiceServer interface {
 	mustEmbedUnimplementedDatabaseApiKeyServiceServer()
 }
 
+// Deprecated: Do not use.
 func RegisterDatabaseApiKeyServiceServer(s grpc.ServiceRegistrar, srv DatabaseApiKeyServiceServer) {
 	// If the following call pancis, it indicates UnimplementedDatabaseApiKeyServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an

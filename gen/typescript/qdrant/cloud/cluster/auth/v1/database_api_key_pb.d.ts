@@ -249,9 +249,11 @@ export declare type DatabaseApiKeyValid = DatabaseApiKey;
 export declare const DatabaseApiKeySchema: GenMessage<DatabaseApiKey, {validType: DatabaseApiKeyValid}>;
 
 /**
+ * Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
  * DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
  *
  * @generated from service qdrant.cloud.cluster.auth.v1.DatabaseApiKeyService
+ * @deprecated
  */
 export declare const DatabaseApiKeyService: GenService<{
   /**
