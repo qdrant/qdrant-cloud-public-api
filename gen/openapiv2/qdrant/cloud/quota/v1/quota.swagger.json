@@ -1,0 +1,146 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/quota/v1/quota.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "QuotaService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/quota/v1/accounts/{accountId}/quotas": {
+      "get": {
+        "summary": "Get quotas for the account identified by the given account ID.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "QuotaService_GetAccountQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format) to list quotas for.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "QuotaService"
+        ]
+      }
+    },
+    "/api/quota/v1/users/me/quotas": {
+      "get": {
+        "summary": "Get quotas for the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "QuotaService_GetAuthenticatedUserQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAuthenticatedUserQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "QuotaService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1GetAccountQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "title": "ID of the account this quota applies to"
+        },
+        "maxClusters": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of clusters this account is allowed to create (at least 1).\nTo get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`."
+        },
+        "maxClusterNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of nodes clusters can be scaled to (at least 1).\nTo get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`."
+        },
+        "maxClusterDatabaseApiKeys": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of Database API keys this account can create (for each cluster)(at least 1).\nTo get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`."
+        },
+        "maxFreeTierClusters": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of free-tier clusters this account can create (at least 1)."
+        }
+      },
+      "description": "GetAccountQuotasResponse is the response from the GetAccountQuotas function."
+    },
+    "v1GetAuthenticatedUserQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "maxOwnedAccounts": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Maximum number of accounts this user can be the owner of (at least 1).\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`"
+        }
+      },
+      "title": "GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function"
+    }
+  }
+}

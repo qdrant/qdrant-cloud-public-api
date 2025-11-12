@@ -1,0 +1,242 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/ui/v1/ui.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AggregationService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/ui/v1/accounts/{accountId}/users": {
+      "get": {
+        "summary": "Lists users in an account with their assigned roles.\nThis endpoint provides a consolidated view that would otherwise require separate calls\nto ListUsers and ListUserRoles for each user.\nRequired permissions:\n- read:users\n- read:roles\nbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS",
+        "operationId": "AggregationService_ListUsersWithRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUsersWithRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AggregationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1ListUsersWithRolesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserWithRoles"
+          },
+          "description": "The list of users extended with their assigned roles."
+        }
+      },
+      "description": "ListUsersWithRolesResponse is the response from the ListUsersWithRoles function."
+    },
+    "v1Permission": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The permission value (e.g., \"read:clusters\")."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the permission (e.g., \"Cluster\", \"Account\").\nOptional in requests; server populates it in responses."
+        }
+      },
+      "description": "A Permission represents a permission in the Qdrant cloud."
+    },
+    "v1Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the role.\nName can only contain printable characters."
+        },
+        "description": {
+          "type": "string",
+          "description": "The human readable description of this role."
+        },
+        "roleType": {
+          "$ref": "#/definitions/v1RoleType",
+          "description": "The role type."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Permission"
+          },
+          "description": "The permissions associated with this role."
+        },
+        "subType": {
+          "$ref": "#/definitions/v1SystemRoleSubType",
+          "description": "The sub-type of the system role.\nThis field is set for system role only."
+        }
+      },
+      "description": "A Role represents a role in the Qdrant cloud."
+    },
+    "v1RoleType": {
+      "type": "string",
+      "enum": [
+        "ROLE_TYPE_UNSPECIFIED",
+        "ROLE_TYPE_SYSTEM",
+        "ROLE_TYPE_CUSTOM"
+      ],
+      "default": "ROLE_TYPE_UNSPECIFIED",
+      "description": "- ROLE_TYPE_UNSPECIFIED: The role type is unspecified.\n - ROLE_TYPE_SYSTEM: The role type is system.\nNote: system roles cannot be changed (create/update/delete).\n - ROLE_TYPE_CUSTOM: The role type is custom defined.",
+      "title": "RoleType specified the type of the role"
+    },
+    "v1SystemRoleSubType": {
+      "type": "string",
+      "enum": [
+        "SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED",
+        "SYSTEM_ROLE_SUB_TYPE_OWNER",
+        "SYSTEM_ROLE_SUB_TYPE_ADMIN",
+        "SYSTEM_ROLE_SUB_TYPE_BASE"
+      ],
+      "default": "SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED",
+      "description": "- SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: The system role sub-type is unspecified.\n - SYSTEM_ROLE_SUB_TYPE_OWNER: The system role sub-type is owner.\n - SYSTEM_ROLE_SUB_TYPE_ADMIN: The system role sub-type is admin.\n - SYSTEM_ROLE_SUB_TYPE_BASE: The system role sub-type is base.",
+      "title": "SystemRoleSubType specified the sub-type of the system role"
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user.\nThis is a read-only field."
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserStatus",
+          "description": "The status of the user.\nThis is a read-only field."
+        },
+        "defaultAccountId": {
+          "type": "string",
+          "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+        }
+      },
+      "description": "A User represents a user in the Qdrant cloud."
+    },
+    "v1UserStatus": {
+      "type": "string",
+      "enum": [
+        "USER_STATUS_UNSPECIFIED",
+        "USER_STATUS_ACTIVE",
+        "USER_STATUS_BLOCKED",
+        "USER_STATUS_DELETED"
+      ],
+      "default": "USER_STATUS_UNSPECIFIED",
+      "description": "UserStatus defines the possible statuses of a user.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted."
+    },
+    "v1UserWithRoles": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "description": "The user information."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Role"
+          },
+          "description": "The roles assigned to this user.\nIf the user has no roles assigned, this list will be empty."
+        }
+      },
+      "description": "UserWithRoles represents a user along with their assigned roles."
+    }
+  }
+}

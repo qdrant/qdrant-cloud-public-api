@@ -81,7 +81,7 @@ grpcurl grpc.cloud.qdrant.io:443 describe qdrant.cloud.cluster.v1.ClusterService
 grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   -d '{"account_id": "<YOUR_ACCOUNT_ID>"}' \
   grpc.cloud.qdrant.io:443 \
-  qdrant.cloud.cluster.v1.ClusterService/ListClusters   
+  qdrant.cloud.cluster.v1.ClusterService/ListClusters
 ```
 
 *Note: Replace `<YOUR_MANAGEMENT_KEY>` with your actual management key and `<YOUR_ACCOUNT_ID>` with your account ID. The specific service and method names can be found in the `.proto` files under the `proto/` directory or by using `grpcurl list` and `grpcurl describe`.*
@@ -91,7 +91,7 @@ Assuming you have exported your management key in the environment variable `MANA
 ```sh
 grpcurl -H "Authorization: apikey ${MANAGEMENT_KEY}" \
 ...
-``` 
+```
 
 ### Using `curl` (for REST/JSON)
 
@@ -143,7 +143,6 @@ We currently provide support for:
 
 See [below](#using-generated-code) for more details.
 
-
 ### Paginated resources
 
 All listing methods (e.g. `ListClusters`) currently return all active resources in a single response. To provide better usability and performance, we are gradually introducing pagination so resources can be retrieved in chunks.
@@ -163,14 +162,14 @@ This is an example of using pagination with the `BackupService.ListBackups` meth
 
 - Request the first 20 backups:
 
-``` sh
+```sh
 grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   -d '{"account_id": "<YOUR_ACCOUNT_ID>", "page_size": 20}' \
   grpc.cloud.qdrant.io:443 \
   qdrant.cloud.cluster.backup.v1.BackupService/ListBackups
 ```
 
-``` sh
+```sh
 {
   "items": [
     {
@@ -191,14 +190,14 @@ grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
 
 - Request the next page, passing `page_token`:
 
-``` sh
+```sh
 grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
   -d '{"account_id": "<YOUR_ACCOUNT_ID>", "page_size": 20, "page_token":"WyIyMDI1LTA1LTI4VDA4OjI1OjQzLjkxNDg1NyswMDowMCIsICJjYTc3Mzk3YS1jNTRjLTQ3NGQtOGEzOS0xMzZmMGZlMWI3ODUiXQ=="}' \
   grpc.cloud.qdrant.io:443 \
   qdrant.cloud.cluster.backup.v1.BackupService/ListBackups
 ```
 
-``` sh
+```sh
 {
   "items": [
     {
@@ -219,13 +218,13 @@ grpcurl -H "Authorization: apikey <YOUR_MANAGEMENT_KEY>" \
 
 ## Working with Protocol Buffer definitions
 
-We use [Buf](https://buf.build/) to lint the schemas and to generate language bindings. 
+We use [Buf](https://buf.build/) to lint the schemas and to generate language bindings.
 
 Additionally, there are [these guidelines](CONTRIBUTING.md#protobuf-guidelines) to ensure our API remains consistent and user-friendly. Please follow them when contributing.
 
 This project leverages Make to automate common tasks. To view all available commands, you can run:
 
-``` sh
+```sh
 make help
 ```
 
@@ -233,7 +232,7 @@ make help
 
 The API schema definitions are located under the `proto/` directory. Whenever you add or modify a `.proto` file, make sure that you format and lint it accordingly. You can do that running:
 
-``` sh
+```sh
 make format
 make lint
 ```
@@ -242,16 +241,17 @@ make lint
 
 After changing a `.proto` file, you should regenerate the different language bindings:
 
-``` sh
+```sh
 make generate
 ```
+
 ## Using generated code
 
 ### Go projects
 
 You can import this project and use it in your go project. Ex:
 
-``` go
+```go
 import (
     ...
     qdrantauthv1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1"
@@ -265,70 +265,75 @@ import (
 
 - Install the package:
 
-    ``` sh
-    # install auth tool
-    uv tool install keyring --with keyrings.google-artifactregistry-auth --force
-    # install
-    uv add qdrant-cloud-public-api --keyring-provider subprocess  --index https://oauth2accesstoken@us-python.pkg.dev/qdrant-cloud/python/simple
-    ```
-
+  ```sh
+  # install auth tool
+  uv tool install keyring --with keyrings.google-artifactregistry-auth --force
+  # install
+  uv add qdrant-cloud-public-api --keyring-provider subprocess  --index https://oauth2accesstoken@us-python.pkg.dev/qdrant-cloud/python/simple
+  ```
 
 - Now you can import the generated code in your python project. Ex:
 
-    ```python
-    from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
-    from qdrant.cloud.booking.v2.booking_pb2 import ListPackagesRequest
-    
-    
-    def main():
-        print(BookingServiceServicer)
-        print(ListPackagesRequest)
-    
-    
-    if __name__ == "__main__":
-        main()
-    ```
+  ```python
+  from qdrant.cloud.booking.v2.booking_pb2_grpc import BookingServiceServicer
+  from qdrant.cloud.booking.v2.booking_pb2 import ListPackagesRequest
 
+
+  def main():
+      print(BookingServiceServicer)
+      print(ListPackagesRequest)
+
+
+  if __name__ == "__main__":
+      main()
+  ```
 
 ### Typescript projects
 
 - Make sure you are authorised to gcloud. `gcloud auth application-default login`
 - Create `.npmrc` file in the root of your project with the following content:
 
-    ```text
-    @qdrant:registry=https://us-npm.pkg.dev/qdrant-cloud/npm/
-    //us-npm.pkg.dev/qdrant-cloud/npm/:always-auth=true
-    ```
+  ```text
+  @qdrant:registry=https://us-npm.pkg.dev/qdrant-cloud/npm/
+  //us-npm.pkg.dev/qdrant-cloud/npm/:always-auth=true
+  ```
 
 - Add auth script to your package.json file:
 
-    ```json
-      "scripts": {
-        ...
-        "artifactregistry-login": "npx --registry=https://registry.npmjs.org google-artifactregistry-auth"
-        ...
-      },
-    ```
+  ```json
+    "scripts": {
+      ...
+      "artifactregistry-login": "npx --registry=https://registry.npmjs.org google-artifactregistry-auth"
+      ...
+    },
+  ```
 
 - Run the auth script:
 
-    ```shell
-    npm run artifactregistry-login
-    ```
+  ```shell
+  npm run artifactregistry-login
+  ```
 
 - Install the package:
-    ``` sh
-    npm  install @qdrant/qdrant-cloud-public-api
-    ```
+
+  ```sh
+  npm  install @qdrant/qdrant-cloud-public-api
+  ```
 
 - Now you can import the generated code in your typescript project. Ex:
 
   ```typescript
-  import * as grpc from '@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/v1/cluster_pb.js';
-  import { DatabaseApiKeyService } from "@qdrant/qdrant-cloud-public-api/qdrant/cloud/cluster/auth/v1/database_api_key_pb.js";
-  
-  console.log('Loaded service definition keys:', Object.keys(grpc));
-  console.log(DatabaseApiKeyService);
+  // Legacy API (backward compatible)
+  import { AccountService } from "@qdrant/cloud/account/v1";
+  import { ClusterService } from "@qdrant/cloud/cluster/v1";
+
+  // Strict API (enhanced validation)
+  import { AccountService } from "@qdrant/cloud/account/v1/strict";
+  import { ClusterService } from "@qdrant/cloud/cluster/v1/strict";
+
+  // Connect-Query variants available for both
+  import { AccountService } from "@qdrant/cloud/account/v1/connect-query";
+  import { AccountService } from "@qdrant/cloud/account/v1/connect-query/strict";
   ```
 
 ## [Release Process](docs/release.md)

@@ -1,0 +1,415 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/platform/v1/platform.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PlatformService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/platform/v1/accounts/{accountId}/cloud-providers": {
+      "get": {
+        "summary": "Lists all cloud providers in the account identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "PlatformService_ListCloudProviders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudProvidersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
+      "get": {
+        "summary": "Lists all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)\nConditional permissions:\n- read:hybrid_cloud_environments OR read:clusters\n  One of these permissions is required when the specified cloud_provider_id is \"hybrid\".",
+        "operationId": "PlatformService_ListCloudProviderRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCloudProviderRegionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions/{regionId}": {
+      "get": {
+        "summary": "Gets a specific cloud provider region in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)\nConditional permissions:\n- read:hybrid_cloud_environments OR read:clusters\n  One of these permissions is required when the specified cloud_provider_id is \"hybrid\".",
+        "operationId": "PlatformService_GetCloudProviderRegion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetCloudProviderRegionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "regionId",
+            "description": "The identifier for the cloud provider region.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/cloud-providers": {
+      "get": {
+        "summary": "Lists all available cloud providers globally (not account-specific).\nAuthentication is not required.",
+        "operationId": "PlatformService_ListGlobalCloudProviders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListGlobalCloudProvidersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/cloud-providers/{cloudProviderId}/regions": {
+      "get": {
+        "summary": "Lists all cloud provider regions (not account-specific) identified by cloud provider ID.\nAuthentication is not required.",
+        "operationId": "PlatformService_ListGlobalCloudProviderRegions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListGlobalCloudProviderRegionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
+    "/api/platform/v1/cloud-providers/{cloudProviderId}/regions/{regionId}": {
+      "get": {
+        "summary": "Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.\nAuthentication is not required.",
+        "operationId": "PlatformService_GetGlobalCloudProviderRegion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetGlobalCloudProviderRegionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "regionId",
+            "description": "The identifier for the cloud provider region.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1CloudProvider": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier for the cloud provider.\ne.g. \"aws\", \"gcp\", \"azure\", \"hybrid\"."
+        },
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the cloud provider.\ne.g. \"Amazon Web Services\", \"Google Cloud\", \"Microsoft Azure\", \"Hybrid Cloud\"."
+        },
+        "freeTier": {
+          "type": "boolean",
+          "description": "Whether the cloud provider is part of the free-tier offering."
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Indicates whether the cloud provider is available for the use case."
+        }
+      },
+      "description": "CloudProvider represents a cloud provider identifier and name."
+    },
+    "v1CloudProviderRegion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier for the cloud provider region.\ne.g. \"us-west-1\", \"europe-west1\", \"eastus\", \"{UUID in case of hybrid cloud}\"."
+        },
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the cloud provider region.\ne.g. \"Frankfurt\", \"Tokyo\", etc."
+        },
+        "freeTier": {
+          "type": "boolean",
+          "description": "Whether the cloud region is part of the free-tier offering."
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Indicates whether the cloud region is available or the hybrid cloud region is ready for clusters."
+        },
+        "provider": {
+          "type": "string",
+          "description": "The identifier for the cloud provider.\ne.g. \"aws\", \"gcp\", \"azure\", \"openshift\", \"linode\", \"unknown\"."
+        },
+        "countryIsoCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country codes for different countries to display for each region."
+        },
+        "geographicalSubRegion": {
+          "type": "string",
+          "description": "Geographic location grouping of the region.\ne.g. \"Europe\", \"Asia\", \"North America\", etc."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace where the components for the environment are deployed (for hybrid cloud regions)."
+        },
+        "capabilities": {
+          "$ref": "#/definitions/v1CloudProviderRegionCapabilities",
+          "description": "Storage capabilities available in this region."
+        }
+      },
+      "description": "CloudProviderRegion represents a cloud provider region."
+    },
+    "v1CloudProviderRegionCapabilities": {
+      "type": "object",
+      "properties": {
+        "volumeSnapshot": {
+          "type": "boolean",
+          "description": "Whether volume snapshots are supported."
+        },
+        "volumeExpansion": {
+          "type": "boolean",
+          "description": "Whether volume expansion is supported."
+        }
+      },
+      "description": "CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region."
+    },
+    "v1GetCloudProviderRegionResponse": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/definitions/v1CloudProviderRegion",
+          "description": "The cloud provider region."
+        }
+      },
+      "description": "GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function."
+    },
+    "v1GetGlobalCloudProviderRegionResponse": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/definitions/v1CloudProviderRegion",
+          "description": "The cloud provider region."
+        }
+      },
+      "description": "GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function."
+    },
+    "v1ListCloudProviderRegionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProviderRegion"
+          },
+          "description": "The cloud provider regions."
+        }
+      },
+      "description": "ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function."
+    },
+    "v1ListCloudProvidersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProvider"
+          },
+          "title": "The cloud providers"
+        }
+      },
+      "description": "ListCloudProvidersResponse is the response from the ListCloudProviders function."
+    },
+    "v1ListGlobalCloudProviderRegionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProviderRegion"
+          },
+          "description": "The cloud provider regions."
+        }
+      },
+      "description": "ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function."
+    },
+    "v1ListGlobalCloudProvidersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloudProvider"
+          },
+          "title": "The cloud providers"
+        }
+      },
+      "description": "ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function."
+    }
+  }
+}

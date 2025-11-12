@@ -1,0 +1,679 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/collection/v1/collection.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CollectionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/collections": {
+      "get": {
+        "summary": "ListCollections returns all collections for the authenticated user\nRequired Permissions:\n- read:serverless",
+        "operationId": "CollectionService_ListCollections",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCollectionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CollectionService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/collections/{collectionId}": {
+      "delete": {
+        "summary": "DeleteCollection removes a collection by ID\nRequired Permissions:\n- delete:serverless",
+        "operationId": "CollectionService_DeleteCollection",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionId",
+            "description": "ID of the collection to delete (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CollectionService"
+        ]
+      },
+      "put": {
+        "summary": "Upgrade collection: If current user have paid account, this API will lift the limit of the collection\nRequired Permissions:\n- write:serverless",
+        "operationId": "CollectionService_UpgradeCollection",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpgradeCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionId",
+            "description": "ID of the collection to upgrade (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionServiceUpgradeCollectionBody"
+            }
+          }
+        ],
+        "tags": [
+          "CollectionService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{collection.accountId}/collections": {
+      "post": {
+        "summary": "CreateCollection creates a new collection with the specified configuration\nRequired Permissions:\n- write:serverless",
+        "operationId": "CollectionService_CreateCollection",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "collection.accountId",
+            "description": "Identifier of the account associated with the collection (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionServiceCreateCollectionBody"
+            }
+          }
+        ],
+        "tags": [
+          "CollectionService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CollectionServiceCreateCollectionBody": {
+      "type": "object",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the collection (in GUID format).\nThis is a read-only field and will be available after a collection is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the collection was created.\nThis is a read-only field and will be available after a collection is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the collection.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the collection is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the collection is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1CollectionConfiguration",
+              "title": "Configuration parameters"
+            },
+            "state": {
+              "$ref": "#/definitions/v1CollectionState",
+              "description": "Status of the collection\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "Collection represents a vector search collection in the Qdrant serverless environment"
+        }
+      },
+      "title": "CreateCollectionRequest defines parameters for creating a new collection"
+    },
+    "CollectionServiceUpgradeCollectionBody": {
+      "type": "object",
+      "title": "Upgrade limits of the specified collection"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1BoolIndexParams": {
+      "type": "object",
+      "properties": {
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "BoolIndexParams defines parameters for boolean indexing"
+    },
+    "v1Collection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the collection (in GUID format).\nThis is a read-only field and will be available after a collection is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the collection was created.\nThis is a read-only field and will be available after a collection is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the collection (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the collection.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the collection was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCollection is called."
+        },
+        "cloudProviderId": {
+          "type": "string",
+          "description": "Cloud provider where the collection is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "Cloud provider region where the collection is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1CollectionConfiguration",
+          "title": "Configuration parameters"
+        },
+        "state": {
+          "$ref": "#/definitions/v1CollectionState",
+          "description": "Status of the collection\nAll fields inside `state` are read-only."
+        }
+      },
+      "title": "Collection represents a vector search collection in the Qdrant serverless environment"
+    },
+    "v1CollectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "tenantKey": {
+          "type": "string",
+          "title": "Field name used for tenant isolation"
+        },
+        "denseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1DenseVectorConfiguration"
+          },
+          "title": "Map of dense vector configurations with field name as key"
+        },
+        "sparseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1SparseVectorConfiguration"
+          },
+          "title": "Map of sparse vector configurations with field name as key"
+        },
+        "payloadSchema": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1PayloadFieldSchema"
+          },
+          "title": "Schema definition for payload fields"
+        }
+      },
+      "title": "CollectionConfiguration defines the structure and settings for a collection"
+    },
+    "v1CollectionEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant collection (aka serverless database) without port"
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant collection (aka serverless database).\nAll fields in this message are a read-only field."
+    },
+    "v1CollectionState": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/definitions/v1CollectionStatePhase",
+          "description": "The current operational status of the collection."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Descriptive message explaining any errors or issues with the collection.\nEmpty when the collection is operating normally."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1CollectionEndpoint",
+          "description": "The URL endpoint where clients can connect to and interact with the collection.\nNot set if the collection is not yet ready or is disabled."
+        }
+      },
+      "description": "CollectionState represents the operational state of a collection in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."
+    },
+    "v1CollectionStatePhase": {
+      "type": "string",
+      "enum": [
+        "COLLECTION_STATE_PHASE_UNSPECIFIED",
+        "COLLECTION_STATE_PHASE_READY",
+        "COLLECTION_STATE_PHASE_PROCESSING",
+        "COLLECTION_STATE_PHASE_DISABLED"
+      ],
+      "default": "COLLECTION_STATE_PHASE_UNSPECIFIED",
+      "description": "CollectionStatePhase defines the operational phases of a Qdrant collection.\n\n - COLLECTION_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - COLLECTION_STATE_PHASE_READY: The Collection is fully operational and available for use.\n - COLLECTION_STATE_PHASE_PROCESSING: The Collection is being created, updated, or undergoing maintenance.\n - COLLECTION_STATE_PHASE_DISABLED: The Collection has been temporarily or permanently disabled."
+    },
+    "v1CreateCollectionResponse": {
+      "type": "object",
+      "properties": {
+        "collection": {
+          "$ref": "#/definitions/v1Collection",
+          "title": "Collection represents a vector search collection in the Qdrant serverless environment"
+        }
+      },
+      "title": "CollectionResponse provides details about a created collection"
+    },
+    "v1DatetimeIndexParams": {
+      "type": "object",
+      "properties": {
+        "isPrincipal": {
+          "type": "boolean",
+          "title": "Whether this is a principal field"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "DatetimeIndexParams defines parameters for datetime indexing"
+    },
+    "v1DeleteCollectionResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteCollectionResponse is an empty response for deletion confirmation"
+    },
+    "v1DenseVectorConfiguration": {
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The dimensionality of the vector space"
+        },
+        "distance": {
+          "$ref": "#/definitions/v1DistanceMetric",
+          "title": "The distance metric used for vector similarity calculations"
+        },
+        "multivector": {
+          "type": "boolean",
+          "title": "Whether to use multi-vector storage for this configuration"
+        },
+        "rescoring": {
+          "type": "boolean",
+          "title": "Whether to enable rescoring for search results"
+        },
+        "storageTier": {
+          "$ref": "#/definitions/v1StorageTier",
+          "description": "The storage performance tier to use."
+        },
+        "precisionTier": {
+          "$ref": "#/definitions/v1PrecisionTier",
+          "description": "The precision level for vector operations."
+        }
+      },
+      "title": "DenseVectorConfiguration defines the settings for dense vector fields"
+    },
+    "v1DistanceMetric": {
+      "type": "string",
+      "enum": [
+        "DISTANCE_METRIC_UNSPECIFIED",
+        "DISTANCE_METRIC_COSINE",
+        "DISTANCE_METRIC_EUCLID",
+        "DISTANCE_METRIC_DOT",
+        "DISTANCE_METRIC_MANHATTAN"
+      ],
+      "default": "DISTANCE_METRIC_UNSPECIFIED",
+      "description": "DistanceMetric defines the possible distance metrics used in DenseVectorConfiguration.\n\n - DISTANCE_METRIC_UNSPECIFIED: Unspecified distance metric.\n - DISTANCE_METRIC_COSINE: Cosine similarity.\n - DISTANCE_METRIC_EUCLID: Euclidean distance.\n - DISTANCE_METRIC_DOT: Dot product.\n - DISTANCE_METRIC_MANHATTAN: Manhattan distance."
+    },
+    "v1FloatIndexParams": {
+      "type": "object",
+      "properties": {
+        "isPrincipal": {
+          "type": "boolean",
+          "title": "Whether this is a principal field"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "FloatIndexParams defines parameters for float indexing"
+    },
+    "v1GeoIndexParams": {
+      "type": "object",
+      "properties": {
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "GeoIndexParams defines parameters for geographical indexing"
+    },
+    "v1IntegerIndexParams": {
+      "type": "object",
+      "properties": {
+        "lookup": {
+          "type": "boolean",
+          "title": "Enable lookup operations"
+        },
+        "range": {
+          "type": "boolean",
+          "title": "Enable range queries"
+        },
+        "isPrincipal": {
+          "type": "boolean",
+          "title": "Whether this is a principal field"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "IntegerIndexParams defines parameters for integer indexing"
+    },
+    "v1KeywordIndexParams": {
+      "type": "object",
+      "properties": {
+        "isTenant": {
+          "type": "boolean",
+          "title": "Whether this field is used as tenant identifier"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "KeywordIndexParams defines parameters for keyword indexing"
+    },
+    "v1ListCollectionsResponse": {
+      "type": "object",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Collection"
+          },
+          "title": "List of collections with their details"
+        }
+      },
+      "title": "ListCollectionsResponse contains the list of collections"
+    },
+    "v1PayloadFieldSchema": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "$ref": "#/definitions/v1KeywordIndexParams",
+          "title": "Keyword index parameters"
+        },
+        "integer": {
+          "$ref": "#/definitions/v1IntegerIndexParams",
+          "title": "Integer index parameters"
+        },
+        "float": {
+          "$ref": "#/definitions/v1FloatIndexParams",
+          "title": "Float index parameters"
+        },
+        "geo": {
+          "$ref": "#/definitions/v1GeoIndexParams",
+          "title": "Geo Index parameters"
+        },
+        "text": {
+          "$ref": "#/definitions/v1TextIndexParams",
+          "title": "Text index parameters"
+        },
+        "bool": {
+          "$ref": "#/definitions/v1BoolIndexParams",
+          "title": "Boolean index parameters"
+        },
+        "datetime": {
+          "$ref": "#/definitions/v1DatetimeIndexParams",
+          "title": "Datetime index parameters"
+        },
+        "uuid": {
+          "$ref": "#/definitions/v1UuidIndexParams",
+          "title": "UUID index parameters"
+        }
+      },
+      "title": "Describes the schema for a payload field"
+    },
+    "v1PrecisionTier": {
+      "type": "string",
+      "enum": [
+        "PRECISION_TIER_UNSPECIFIED",
+        "PRECISION_TIER_LOW",
+        "PRECISION_TIER_MEDIUM",
+        "PRECISION_TIER_HIGH"
+      ],
+      "default": "PRECISION_TIER_UNSPECIFIED",
+      "description": "PrecisionTier defines the level of precision for vector operations.\n\n - PRECISION_TIER_UNSPECIFIED: Unspecified precision level.\n - PRECISION_TIER_LOW: Low precision.\n - PRECISION_TIER_MEDIUM: Medium precision.\n - PRECISION_TIER_HIGH: High precision."
+    },
+    "v1SparseVectorConfiguration": {
+      "type": "object",
+      "properties": {
+        "precisionTier": {
+          "$ref": "#/definitions/v1PrecisionTier",
+          "description": "The precision level for vector operations."
+        },
+        "modifier": {
+          "$ref": "#/definitions/v1VectorModifier",
+          "title": "Vector value modification approach"
+        }
+      },
+      "title": "SparseVectorConfiguration defines the settings for sparse vector fields"
+    },
+    "v1StorageTier": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_UNSPECIFIED",
+        "STORAGE_TIER_STORAGE",
+        "STORAGE_TIER_BALANCED",
+        "STORAGE_TIER_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_UNSPECIFIED",
+      "description": "StorageTier defines the possible storage performance tiers used in DenseVectorConfiguration.\n\n - STORAGE_TIER_UNSPECIFIED: Unspecified storage tier.\n - STORAGE_TIER_STORAGE: Storage tier.\n - STORAGE_TIER_BALANCED: Balanced tier.\n - STORAGE_TIER_PERFORMANCE: Performance tier."
+    },
+    "v1TextIndexParams": {
+      "type": "object",
+      "properties": {
+        "tokenizer": {
+          "$ref": "#/definitions/v1Tokenizer",
+          "title": "Tokenization strategy"
+        },
+        "minTokenLen": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minimum token length to index"
+        },
+        "maxTokenLen": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum token length to index"
+        },
+        "lowercase": {
+          "type": "boolean",
+          "title": "Whether to lowercase text before indexing"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "TextIndexParams defines parameters for text indexing"
+    },
+    "v1Tokenizer": {
+      "type": "string",
+      "enum": [
+        "TOKENIZER_UNSPECIFIED",
+        "TOKENIZER_PREFIX",
+        "TOKENIZER_WHITESPACE",
+        "TOKENIZER_WORD",
+        "TOKENIZER_MULTILINGUAL"
+      ],
+      "default": "TOKENIZER_UNSPECIFIED",
+      "description": "Tokenizer defines the strategies for tokenizing text during indexing.\n\n - TOKENIZER_UNSPECIFIED: Unspecified tokenizer.\n - TOKENIZER_PREFIX: Prefix tokenizer.\n - TOKENIZER_WHITESPACE: Whitespace tokenizer.\n - TOKENIZER_WORD: Word tokenizer.\n - TOKENIZER_MULTILINGUAL: Multilingual tokenizer."
+    },
+    "v1UpgradeCollectionResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "Response for upgrading collection"
+    },
+    "v1UuidIndexParams": {
+      "type": "object",
+      "properties": {
+        "isTenant": {
+          "type": "boolean",
+          "title": "Whether this field is used as tenant identifier"
+        },
+        "onDisk": {
+          "type": "boolean",
+          "title": "Whether to store index on disk vs memory"
+        }
+      },
+      "title": "UuidIndexParams defines parameters for UUID indexing"
+    },
+    "v1VectorModifier": {
+      "type": "string",
+      "enum": [
+        "VECTOR_MODIFIER_UNSPECIFIED",
+        "VECTOR_MODIFIER_NONE",
+        "VECTOR_MODIFIER_IDF"
+      ],
+      "default": "VECTOR_MODIFIER_UNSPECIFIED",
+      "description": "VectorModifier defines the transformations to apply to vectors.\n\n - VECTOR_MODIFIER_UNSPECIFIED: Unspecified modifier.\n - VECTOR_MODIFIER_NONE: No modifications.\n - VECTOR_MODIFIER_IDF: Inverse Document Frequency (IDF)."
+    }
+  }
+}

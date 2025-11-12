@@ -1,0 +1,241 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/billing/v1/billing.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BillingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/billing/v1/accounts/{accountId}/discounts": {
+      "get": {
+        "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListDiscounts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDiscountsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/invoices": {
+      "get": {
+        "summary": "Lists all invoices for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListInvoices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1Discount": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the discount."
+        },
+        "percentage": {
+          "$ref": "#/definitions/v1DiscountPercentage",
+          "description": "Percentage-based discount (e.g., 10% off)."
+        },
+        "fixed": {
+          "$ref": "#/definitions/v1DiscountFixed",
+          "description": "Fixed amount discount (e.g., $5 off)."
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount becomes valid."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount expires. Must be after valid_from."
+        }
+      },
+      "description": "Discount represents a billing discount applied to an account."
+    },
+    "v1DiscountFixed": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The discount amount as a decimal. Must be positive."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency for the discount amount.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        }
+      },
+      "description": "DiscountFixed represents a fixed amount discount."
+    },
+    "v1DiscountPercentage": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage value (e.g., 12.5 for 12.5%). Must be between 0 and 100."
+        }
+      },
+      "description": "DiscountPercentage represents a percentage-based discount."
+    },
+    "v1Invoice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the invoice."
+        },
+        "number": {
+          "type": "string",
+          "description": "Optional invoice unique identifier. It appears on emails sent to the\ncustomer for this invoice."
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total invoice amount."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invoice was created."
+        },
+        "status": {
+          "$ref": "#/definitions/v1InvoiceStatus",
+          "description": "The current status of the invoice."
+        },
+        "pdfUrl": {
+          "type": "string",
+          "description": "The URL to download the PDF for the invoice.\nIf the invoice has not been finalized yet, this field will not be set."
+        }
+      },
+      "description": "Invoice represents a billing invoice issued to an account."
+    },
+    "v1InvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_UNSPECIFIED",
+        "INVOICE_STATUS_DRAFT",
+        "INVOICE_STATUS_OPEN",
+        "INVOICE_STATUS_VOID",
+        "INVOICE_STATUS_PAID",
+        "INVOICE_STATUS_UNCOLLECTIBLE"
+      ],
+      "default": "INVOICE_STATUS_UNSPECIFIED",
+      "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListDiscountsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Discount"
+          },
+          "description": "The list of discounts."
+        }
+      },
+      "title": "ListDiscountsResponse is the response from the ListDiscounts function"
+    },
+    "v1ListInvoicesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Invoice"
+          },
+          "description": "The list of invoices."
+        }
+      },
+      "title": "ListInvoicesResponse is the response from the ListInvoices function"
+    }
+  }
+}
