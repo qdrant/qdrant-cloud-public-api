@@ -274,6 +274,20 @@ class ListQdrantReleasesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[QdrantRelease]
     def __init__(self, items: _Optional[_Iterable[_Union[QdrantRelease, _Mapping]]] = ...) -> None: ...
 
+class GetQdrantReleaseRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    VERSION_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    version: str
+    def __init__(self, account_id: _Optional[str] = ..., version: _Optional[str] = ...) -> None: ...
+
+class GetQdrantReleaseResponse(_message.Message):
+    __slots__ = ()
+    RELEASE_FIELD_NUMBER: _ClassVar[int]
+    release: QdrantRelease
+    def __init__(self, release: _Optional[_Union[QdrantRelease, _Mapping]] = ...) -> None: ...
+
 class Cluster(_message.Message):
     __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]

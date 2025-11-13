@@ -79,11 +79,19 @@ export const suspendCluster: typeof ClusterService["method"]["suspendCluster"];
  */
 export const suggestClusterName: typeof ClusterService["method"]["suggestClusterName"];
 /**
- * Lists all qdrant releases in the account identified by the given ID.
- * Optional a cluster ID can be provided, the list will return the options to update to only.
+ * Lists all Qdrant releases in the account identified by the given ID.
+ * Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
  * Required permissions:
  * - read:clusters
  *
  * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases
  */
 export const listQdrantReleases: typeof ClusterService["method"]["listQdrantReleases"];
+/**
+ * Gets a Qdrant release by version in the account identified by the given ID.
+ * Required permissions:
+ * - read:clusters
+ *
+ * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease
+ */
+export const getQdrantRelease: typeof ClusterService["method"]["getQdrantRelease"];

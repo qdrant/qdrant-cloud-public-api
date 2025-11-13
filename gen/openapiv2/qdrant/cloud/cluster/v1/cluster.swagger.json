@@ -303,7 +303,7 @@
     },
     "/api/cluster/v1/accounts/{accountId}/releases": {
       "get": {
-        "summary": "Lists all qdrant releases in the account identified by the given ID.\nOptional a cluster ID can be provided, the list will return the options to update to only.\nRequired permissions:\n- read:clusters",
+        "summary": "Lists all Qdrant releases in the account identified by the given ID.\nOptionally a cluster ID can be provided, the list will return the update options for that cluster only.\nRequired permissions:\n- read:clusters",
         "operationId": "ClusterService_ListQdrantReleases",
         "responses": {
           "200": {
@@ -332,6 +332,45 @@
             "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
             "in": "query",
             "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/releases/{version}": {
+      "get": {
+        "summary": "Gets a Qdrant release by version in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetQdrantRelease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetQdrantReleaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "description": "The version of the Qdrant release.\nThis is a required field.",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1162,6 +1201,16 @@
         }
       },
       "title": "GetClusterResponse is the response from the GetCluster function"
+    },
+    "v1GetQdrantReleaseResponse": {
+      "type": "object",
+      "properties": {
+        "release": {
+          "$ref": "#/definitions/v1QdrantRelease",
+          "title": "The actual Qdrant release"
+        }
+      },
+      "title": "GetQdrantReleaseResponse is the response from the GetQdrantRelease function"
     },
     "v1KeyValue": {
       "type": "object",

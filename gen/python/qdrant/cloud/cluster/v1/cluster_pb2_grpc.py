@@ -65,6 +65,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
                 _registered_method=True)
+        self.GetQdrantRelease = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseResponse.FromString,
+                _registered_method=True)
 
 
 class ClusterServiceServicer(object):
@@ -155,8 +160,17 @@ class ClusterServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListQdrantReleases(self, request, context):
-        """Lists all qdrant releases in the account identified by the given ID.
-        Optional a cluster ID can be provided, the list will return the options to update to only.
+        """Lists all Qdrant releases in the account identified by the given ID.
+        Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
+        Required permissions:
+        - read:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetQdrantRelease(self, request, context):
+        """Gets a Qdrant release by version in the account identified by the given ID.
         Required permissions:
         - read:clusters
         """
@@ -216,6 +230,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.ListQdrantReleases,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.SerializeToString,
+            ),
+            'GetQdrantRelease': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetQdrantRelease,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -489,6 +508,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.ListQdrantReleasesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetQdrantRelease(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetQdrantReleaseResponse.FromString,
             options,
             channel_credentials,
             insecure,

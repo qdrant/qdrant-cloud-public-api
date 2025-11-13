@@ -548,6 +548,71 @@ export declare type ListQdrantReleasesResponseValid = ListQdrantReleasesResponse
 export declare const ListQdrantReleasesResponseSchema: GenMessage<ListQdrantReleasesResponse, {validType: ListQdrantReleasesResponseValid}>;
 
 /**
+ * GetQdrantReleaseRequest is the request for the GetQdrantRelease function
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetQdrantReleaseRequest
+ */
+export declare type GetQdrantReleaseRequest = Message<"qdrant.cloud.cluster.v1.GetQdrantReleaseRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The version of the Qdrant release.
+   * This is a required field.
+   *
+   * @generated from field: string version = 2;
+   */
+  version: string;
+};
+
+export declare type GetQdrantReleaseRequestValid = GetQdrantReleaseRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.GetQdrantReleaseRequest.
+ * Use `create(GetQdrantReleaseRequestSchema)` to create a new message.
+ */
+export declare const GetQdrantReleaseRequestSchema: GenMessage<GetQdrantReleaseRequest, {validType: GetQdrantReleaseRequestValid}>;
+
+/**
+ * GetQdrantReleaseResponse is the response from the GetQdrantRelease function
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
+ */
+export declare type GetQdrantReleaseResponse = Message<"qdrant.cloud.cluster.v1.GetQdrantReleaseResponse"> & {
+  /**
+   * The actual Qdrant release
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.QdrantRelease release = 1;
+   */
+  release?: QdrantRelease;
+};
+
+/**
+ * GetQdrantReleaseResponse is the response from the GetQdrantRelease function
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
+ */
+export declare type GetQdrantReleaseResponseValid = Message<"qdrant.cloud.cluster.v1.GetQdrantReleaseResponse"> & {
+  /**
+   * The actual Qdrant release
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.QdrantRelease release = 1;
+   */
+  release: QdrantReleaseValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.GetQdrantReleaseResponse.
+ * Use `create(GetQdrantReleaseResponseSchema)` to create a new message.
+ */
+export declare const GetQdrantReleaseResponseSchema: GenMessage<GetQdrantReleaseResponse, {validType: GetQdrantReleaseResponseValid}>;
+
+/**
  * A Cluster represents one cluster of a Qdrant database.
  *
  * @generated from message qdrant.cloud.cluster.v1.Cluster
@@ -2661,8 +2726,8 @@ export declare const ClusterService: GenService<{
     output: typeof SuggestClusterNameResponseSchema;
   },
   /**
-   * Lists all qdrant releases in the account identified by the given ID.
-   * Optional a cluster ID can be provided, the list will return the options to update to only.
+   * Lists all Qdrant releases in the account identified by the given ID.
+   * Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
    * Required permissions:
    * - read:clusters
    *
@@ -2672,6 +2737,18 @@ export declare const ClusterService: GenService<{
     methodKind: "unary";
     input: typeof ListQdrantReleasesRequestSchema;
     output: typeof ListQdrantReleasesResponseSchema;
+  },
+  /**
+   * Gets a Qdrant release by version in the account identified by the given ID.
+   * Required permissions:
+   * - read:clusters
+   *
+   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease
+   */
+  getQdrantRelease: {
+    methodKind: "unary";
+    input: typeof GetQdrantReleaseRequestSchema;
+    output: typeof GetQdrantReleaseResponseSchema;
   },
 }>;
 

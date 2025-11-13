@@ -193,8 +193,8 @@ service ClusterService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/suggest-name"};
   }
-  // Lists all qdrant releases in the account identified by the given ID.
-  // Optional a cluster ID can be provided, the list will return the options to update to only.
+  // Lists all Qdrant releases in the account identified by the given ID.
+  // Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
   // Required permissions:
   // - read:clusters
   rpc ListQdrantReleases(ListQdrantReleasesRequest) returns (ListQdrantReleasesResponse) {
@@ -206,6 +206,20 @@ service ClusterService {
     option (common.v1.log_fields) = {
       name: "cluster_id"
       field_expression: "cluster_id"
+    };
+  }
+  // Gets a Qdrant release by version in the account identified by the given ID.
+  // Required permissions:
+  // - read:clusters
+  rpc GetQdrantRelease(GetQdrantReleaseRequest) returns (GetQdrantReleaseResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/releases/{version}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "version"
+      field_expression: "version"
     };
   }
 }
@@ -383,6 +397,22 @@ message ListQdrantReleasesResponse {
   // The actual Qdrant releases in this list, ordered by the version field in ascending semantic version order.
   // For example: v1.12.6, v1.13.6, v1.14.1, v1.15.4
   repeated QdrantRelease items = 1;
+}
+
+// GetQdrantReleaseRequest is the request for the GetQdrantRelease function
+message GetQdrantReleaseRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The version of the Qdrant release.
+  // This is a required field.
+  string version = 2 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// GetQdrantReleaseResponse is the response from the GetQdrantRelease function
+message GetQdrantReleaseResponse {
+  // The actual Qdrant release
+  QdrantRelease release = 1 [(buf.validate.field).required = true];
 }
 
 // A Cluster represents one cluster of a Qdrant database.
