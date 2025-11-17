@@ -409,6 +409,14 @@
       },
       "additionalProperties": {}
     },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
     "v1CreateHybridCloudEnvironmentResponse": {
       "type": "object",
       "properties": {
@@ -625,6 +633,10 @@
             "$ref": "#/definitions/v1KeyValue"
           },
           "title": "Node selector for Qdrant nodes in this hybrid cloud environment"
+        },
+        "advancedOperatorSettings": {
+          "type": "object",
+          "description": "Advanced operator settings as a JSON object.\nThis field is to specify fields that don't have a strongly-typed field.\nThe strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set."
         }
       },
       "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"

@@ -4,6 +4,7 @@ package qdrant.cloud.hybrid.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "k8s.io/api/networking/v1/generated.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
@@ -340,6 +341,10 @@ message HybridCloudEnvironmentConfiguration {
   repeated qdrant.cloud.cluster.v1.Toleration tolerations = 22;
   // Node selector for Qdrant nodes in this hybrid cloud environment
   repeated common.v1.KeyValue node_selector = 23 [(buf.validate.field).repeated = {max_items: 10}];
+  // Advanced operator settings as a JSON object.
+  // This field is to specify fields that don't have a strongly-typed field.
+  // The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
+  optional google.protobuf.Struct advanced_operator_settings = 24;
 }
 
 // HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components

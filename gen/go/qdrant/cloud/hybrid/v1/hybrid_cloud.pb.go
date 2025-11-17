@@ -14,6 +14,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	v1 "k8s.io/api/networking/v1"
 	reflect "reflect"
@@ -1079,9 +1080,13 @@ type HybridCloudEnvironmentConfiguration struct {
 	// List of tolerations for clusters in this hybrid cloud environment
 	Tolerations []*v11.Toleration `protobuf:"bytes,22,rep,name=tolerations,proto3" json:"tolerations,omitempty"`
 	// Node selector for Qdrant nodes in this hybrid cloud environment
-	NodeSelector  []*v12.KeyValue `protobuf:"bytes,23,rep,name=node_selector,json=nodeSelector,proto3" json:"node_selector,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	NodeSelector []*v12.KeyValue `protobuf:"bytes,23,rep,name=node_selector,json=nodeSelector,proto3" json:"node_selector,omitempty"`
+	// Advanced operator settings as a JSON object.
+	// This field is to specify fields that don't have a strongly-typed field.
+	// The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
+	AdvancedOperatorSettings *structpb.Struct `protobuf:"bytes,24,opt,name=advanced_operator_settings,json=advancedOperatorSettings,proto3,oneof" json:"advanced_operator_settings,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HybridCloudEnvironmentConfiguration) Reset() {
@@ -1229,6 +1234,13 @@ func (x *HybridCloudEnvironmentConfiguration) GetTolerations() []*v11.Toleration
 func (x *HybridCloudEnvironmentConfiguration) GetNodeSelector() []*v12.KeyValue {
 	if x != nil {
 		return x.NodeSelector
+	}
+	return nil
+}
+
+func (x *HybridCloudEnvironmentConfiguration) GetAdvancedOperatorSettings() *structpb.Struct {
+	if x != nil {
+		return x.AdvancedOperatorSettings
 	}
 	return nil
 }
@@ -1829,7 +1841,7 @@ var File_qdrant_cloud_hybrid_v1_hybrid_cloud_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
-	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(k8s.io/api/networking/v1/generated.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
+	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(k8s.io/api/networking/v1/generated.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
 	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
@@ -1877,7 +1889,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
 	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\x92\v\n" +
+	"\a_status\"\x8d\f\n" +
 	"#HybridCloudEnvironmentConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x129\n" +
 	"\tnamespace\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18\xfd\x012\x0f^[a-zA-Z0-9-]+$R\tnamespace\x123\n" +
@@ -1898,7 +1910,9 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\tR\blogLevel\x88\x01\x01\x12E\n" +
 	"\vtolerations\x18\x16 \x03(\v2#.qdrant.cloud.cluster.v1.TolerationR\vtolerations\x12O\n" +
 	"\rnode_selector\x18\x17 \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\fnodeSelectorB\x11\n" +
+	"R\fnodeSelector\x12Z\n" +
+	"\x1aadvanced_operator_settings\x18\x18 \x01(\v2\x17.google.protobuf.StructH\n" +
+	"R\x18advancedOperatorSettings\x88\x01\x01B\x11\n" +
 	"\x0f_http_proxy_urlB\x12\n" +
 	"\x10_https_proxy_urlB\x19\n" +
 	"\x17_container_registry_urlB\x17\n" +
@@ -1909,7 +1923,8 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x17_snapshot_storage_classB \n" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
-	"_log_level\"\x93\b\n" +
+	"_log_levelB\x1d\n" +
+	"\x1b_advanced_operator_settings\"\x93\b\n" +
 	"\x1cHybridCloudEnvironmentStatus\x12L\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12Y\n" +
 	"\x05phase\x18\x03 \x01(\x0e29.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x126\n" +
@@ -2065,6 +2080,7 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_goTypes = []any{
 	(*v1.NetworkPolicyEgressRule)(nil),                // 28: k8s.io.api.networking.v1.NetworkPolicyEgressRule
 	(*v11.Toleration)(nil),                            // 29: qdrant.cloud.cluster.v1.Toleration
 	(*v12.KeyValue)(nil),                              // 30: qdrant.cloud.common.v1.KeyValue
+	(*structpb.Struct)(nil),                           // 31: google.protobuf.Struct
 }
 var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_depIdxs = []int32{
 	17, // 0: qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest.hybrid_cloud_environment:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironment
@@ -2083,35 +2099,36 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_depIdxs = []int32{
 	0,  // 13: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.log_level:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevel
 	29, // 14: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.tolerations:type_name -> qdrant.cloud.cluster.v1.Toleration
 	30, // 15: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.node_selector:type_name -> qdrant.cloud.common.v1.KeyValue
-	26, // 16: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.last_modified_at:type_name -> google.protobuf.Timestamp
-	2,  // 17: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.phase:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase
-	4,  // 18: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.kubernetes_distribution:type_name -> qdrant.cloud.hybrid.v1.KubernetesDistribution
-	20, // 19: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.capabilities:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentCapabilities
-	21, // 20: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.component_statuses:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus
-	1,  // 21: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.cluster_creation_readiness:type_name -> qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus
-	22, // 22: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.storage_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
-	23, // 23: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.volume_snapshot_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
-	3,  // 24: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus.phase:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusPhase
-	30, // 25: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass.parameters:type_name -> qdrant.cloud.common.v1.KeyValue
-	25, // 26: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo.capacity:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeResourceInfo
-	25, // 27: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo.allocatable:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeResourceInfo
-	15, // 28: qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments:input_type -> qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest
-	13, // 29: qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest
-	11, // 30: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest
-	9,  // 31: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest
-	7,  // 32: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest
-	5,  // 33: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:input_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest
-	16, // 34: qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments:output_type -> qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse
-	14, // 35: qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse
-	12, // 36: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse
-	10, // 37: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse
-	8,  // 38: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse
-	6,  // 39: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:output_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse
-	34, // [34:40] is the sub-list for method output_type
-	28, // [28:34] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	31, // 16: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.advanced_operator_settings:type_name -> google.protobuf.Struct
+	26, // 17: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.last_modified_at:type_name -> google.protobuf.Timestamp
+	2,  // 18: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.phase:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase
+	4,  // 19: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.kubernetes_distribution:type_name -> qdrant.cloud.hybrid.v1.KubernetesDistribution
+	20, // 20: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.capabilities:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentCapabilities
+	21, // 21: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.component_statuses:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus
+	1,  // 22: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.cluster_creation_readiness:type_name -> qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus
+	22, // 23: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.storage_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
+	23, // 24: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus.volume_snapshot_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
+	3,  // 25: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatus.phase:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusPhase
+	30, // 26: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass.parameters:type_name -> qdrant.cloud.common.v1.KeyValue
+	25, // 27: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo.capacity:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeResourceInfo
+	25, // 28: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo.allocatable:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeResourceInfo
+	15, // 29: qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments:input_type -> qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest
+	13, // 30: qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest
+	11, // 31: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest
+	9,  // 32: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest
+	7,  // 33: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:input_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest
+	5,  // 34: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:input_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest
+	16, // 35: qdrant.cloud.hybrid.v1.HybridCloudService.ListHybridCloudEnvironments:output_type -> qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse
+	14, // 36: qdrant.cloud.hybrid.v1.HybridCloudService.GetHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse
+	12, // 37: qdrant.cloud.hybrid.v1.HybridCloudService.CreateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse
+	10, // 38: qdrant.cloud.hybrid.v1.HybridCloudService.UpdateHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse
+	8,  // 39: qdrant.cloud.hybrid.v1.HybridCloudService.DeleteHybridCloudEnvironment:output_type -> qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse
+	6,  // 40: qdrant.cloud.hybrid.v1.HybridCloudService.GenerateBootstrapCommands:output_type -> qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse
+	35, // [35:41] is the sub-list for method output_type
+	29, // [29:35] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_init() }
