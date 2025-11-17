@@ -637,8 +637,8 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
 
   /**
    * Advanced operator settings as a JSON object.
-   * This field is to specify fields that doesn't have a strong typed field.
-   * The strong typed fields in HybridCloudEnvironmentConfiguration takes presidence in case they are both set.
+   * This field is to specify fields that don't have a strongly-typed field.
+   * The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
    *
    * @generated from field: optional google.protobuf.Struct advanced_operator_settings = 24;
    */

@@ -1082,8 +1082,8 @@ type HybridCloudEnvironmentConfiguration struct {
 	// Node selector for Qdrant nodes in this hybrid cloud environment
 	NodeSelector []*v12.KeyValue `protobuf:"bytes,23,rep,name=node_selector,json=nodeSelector,proto3" json:"node_selector,omitempty"`
 	// Advanced operator settings as a JSON object.
-	// This field is to specify fields that doesn't have a strong typed field.
-	// The strong typed fields in HybridCloudEnvironmentConfiguration takes presidence in case they are both set.
+	// This field is to specify fields that don't have a strongly-typed field.
+	// The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
 	AdvancedOperatorSettings *structpb.Struct `protobuf:"bytes,24,opt,name=advanced_operator_settings,json=advancedOperatorSettings,proto3,oneof" json:"advanced_operator_settings,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache

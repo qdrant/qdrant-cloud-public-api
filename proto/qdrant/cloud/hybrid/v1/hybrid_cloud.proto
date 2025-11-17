@@ -342,8 +342,8 @@ message HybridCloudEnvironmentConfiguration {
   // Node selector for Qdrant nodes in this hybrid cloud environment
   repeated common.v1.KeyValue node_selector = 23 [(buf.validate.field).repeated = {max_items: 10}];
   // Advanced operator settings as a JSON object.
-  // This field is to specify fields that doesn't have a strong typed field.
-  // The strong typed fields in HybridCloudEnvironmentConfiguration takes presidence in case they are both set.
+  // This field is to specify fields that don't have a strongly-typed field.
+  // The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
   optional google.protobuf.Struct advanced_operator_settings = 24;
 }
 
