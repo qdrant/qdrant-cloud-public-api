@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
-import type { Message } from "@bufbuild/protobuf";
+import type { JsonObject, Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { NetworkPolicyEgressRule, NetworkPolicyIngressRule } from "../../../../k8s.io/api/networking/v1/generated_pb.js";
 import type { Toleration } from "../../cluster/v1/cluster_pb.js";
@@ -634,6 +634,15 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue node_selector = 23;
    */
   nodeSelector: KeyValue[];
+
+  /**
+   * Advanced operator settings as a JSON object.
+   * This field is to specify fields that doesn't have a strong typed field.
+   * The strong typed fields in HybridCloudEnvironmentConfiguration takes presidence in case they are both set.
+   *
+   * @generated from field: optional google.protobuf.Struct advanced_operator_settings = 24;
+   */
+  advancedOperatorSettings?: JsonObject;
 };
 
 export declare type HybridCloudEnvironmentConfigurationValid = HybridCloudEnvironmentConfiguration;
