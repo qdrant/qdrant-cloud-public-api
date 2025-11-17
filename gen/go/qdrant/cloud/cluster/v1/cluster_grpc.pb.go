@@ -27,6 +27,7 @@ const (
 	ClusterService_DeleteCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
 	ClusterService_RestartCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
 	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
+	ClusterService_UnsuspendCluster_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster"
 	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
 	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
 	ClusterService_GetQdrantRelease_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease"
@@ -71,6 +72,10 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	SuspendCluster(ctx context.Context, in *SuspendClusterRequest, opts ...grpc.CallOption) (*SuspendClusterResponse, error)
+	// Unsuspends a cluster in the account identified by the given ID.
+	// Required permissions:
+	// - write:clusters
+	UnsuspendCluster(ctx context.Context, in *UnsuspendClusterRequest, opts ...grpc.CallOption) (*UnsuspendClusterResponse, error)
 	// Suggests a unique and human-friendly name for a new cluster in the specified account.
 	// This can be used by clients to pre-fill the name field when creating a new cluster.
 	// Required permissions:
@@ -175,6 +180,16 @@ func (c *clusterServiceClient) SuspendCluster(ctx context.Context, in *SuspendCl
 	return out, nil
 }
 
+func (c *clusterServiceClient) UnsuspendCluster(ctx context.Context, in *UnsuspendClusterRequest, opts ...grpc.CallOption) (*UnsuspendClusterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnsuspendClusterResponse)
+	err := c.cc.Invoke(ctx, ClusterService_UnsuspendCluster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) SuggestClusterName(ctx context.Context, in *SuggestClusterNameRequest, opts ...grpc.CallOption) (*SuggestClusterNameResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SuggestClusterNameResponse)
@@ -244,6 +259,10 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	SuspendCluster(context.Context, *SuspendClusterRequest) (*SuspendClusterResponse, error)
+	// Unsuspends a cluster in the account identified by the given ID.
+	// Required permissions:
+	// - write:clusters
+	UnsuspendCluster(context.Context, *UnsuspendClusterRequest) (*UnsuspendClusterResponse, error)
 	// Suggests a unique and human-friendly name for a new cluster in the specified account.
 	// This can be used by clients to pre-fill the name field when creating a new cluster.
 	// Required permissions:
@@ -291,6 +310,9 @@ func (UnimplementedClusterServiceServer) RestartCluster(context.Context, *Restar
 }
 func (UnimplementedClusterServiceServer) SuspendCluster(context.Context, *SuspendClusterRequest) (*SuspendClusterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuspendCluster not implemented")
+}
+func (UnimplementedClusterServiceServer) UnsuspendCluster(context.Context, *UnsuspendClusterRequest) (*UnsuspendClusterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnsuspendCluster not implemented")
 }
 func (UnimplementedClusterServiceServer) SuggestClusterName(context.Context, *SuggestClusterNameRequest) (*SuggestClusterNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuggestClusterName not implemented")
@@ -466,6 +488,24 @@ func _ClusterService_SuspendCluster_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_UnsuspendCluster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnsuspendClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).UnsuspendCluster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_UnsuspendCluster_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).UnsuspendCluster(ctx, req.(*UnsuspendClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_SuggestClusterName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuggestClusterNameRequest)
 	if err := dec(in); err != nil {
@@ -558,6 +598,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SuspendCluster",
 			Handler:    _ClusterService_SuspendCluster_Handler,
+		},
+		{
+			MethodName: "UnsuspendCluster",
+			Handler:    _ClusterService_UnsuspendCluster_Handler,
 		},
 		{
 			MethodName: "SuggestClusterName",

@@ -248,6 +248,18 @@ class SuspendClusterResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class UnsuspendClusterRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+
+class UnsuspendClusterResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class SuggestClusterNameRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

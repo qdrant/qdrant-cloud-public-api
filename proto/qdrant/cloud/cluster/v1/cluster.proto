@@ -183,6 +183,28 @@ service ClusterService {
       field_expression: "cluster_id"
     };
   }
+  // Unsuspends a cluster in the account identified by the given ID.
+  // Required permissions:
+  // - write:clusters
+  rpc UnsuspendCluster(UnsuspendClusterRequest) returns (UnsuspendClusterResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "unsuspend"
+      resource_type: "cluster"
+      resource_id_field: "req.cluster_id"
+      resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+  }
   // Suggests a unique and human-friendly name for a new cluster in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new cluster.
   // Required permissions:
@@ -365,6 +387,22 @@ message SuspendClusterRequest {
 
 // SuspendClusterResponse is the response from the SuspendCluster function
 message SuspendClusterResponse {
+  // Empty
+}
+
+// UnsuspendClusterRequest is the request for the UnsuspendCluster function
+message UnsuspendClusterRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// UnsuspendClusterResponse is the response from the UnsuspendCluster function
+message UnsuspendClusterResponse {
   // Empty
 }
 

@@ -301,6 +301,45 @@
         ]
       }
     },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/unsuspend": {
+      "post": {
+        "summary": "Unsuspends a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_UnsuspendCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UnsuspendClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/releases": {
       "get": {
         "summary": "Lists all Qdrant releases in the account identified by the given ID.\nOptionally a cluster ID can be provided, the list will return the update options for that cluster only.\nRequired permissions:\n- read:clusters",
@@ -1340,6 +1379,11 @@
       "default": "TOLERATION_OPERATOR_UNSPECIFIED",
       "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
       "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1UnsuspendClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "UnsuspendClusterResponse is the response from the UnsuspendCluster function"
     },
     "v1UpdateClusterResponse": {
       "type": "object",

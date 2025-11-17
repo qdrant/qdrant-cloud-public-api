@@ -448,6 +448,56 @@ export declare type SuspendClusterResponseValid = SuspendClusterResponse;
 export declare const SuspendClusterResponseSchema: GenMessage<SuspendClusterResponse, {validType: SuspendClusterResponseValid}>;
 
 /**
+ * UnsuspendClusterRequest is the request for the UnsuspendCluster function
+ *
+ * @generated from message qdrant.cloud.cluster.v1.UnsuspendClusterRequest
+ */
+export declare type UnsuspendClusterRequest = Message<"qdrant.cloud.cluster.v1.UnsuspendClusterRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cluster (in GUID format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+};
+
+export declare type UnsuspendClusterRequestValid = UnsuspendClusterRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.UnsuspendClusterRequest.
+ * Use `create(UnsuspendClusterRequestSchema)` to create a new message.
+ */
+export declare const UnsuspendClusterRequestSchema: GenMessage<UnsuspendClusterRequest, {validType: UnsuspendClusterRequestValid}>;
+
+/**
+ * UnsuspendClusterResponse is the response from the UnsuspendCluster function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.cluster.v1.UnsuspendClusterResponse
+ */
+export declare type UnsuspendClusterResponse = Message<"qdrant.cloud.cluster.v1.UnsuspendClusterResponse"> & {
+};
+
+export declare type UnsuspendClusterResponseValid = UnsuspendClusterResponse;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.UnsuspendClusterResponse.
+ * Use `create(UnsuspendClusterResponseSchema)` to create a new message.
+ */
+export declare const UnsuspendClusterResponseSchema: GenMessage<UnsuspendClusterResponse, {validType: UnsuspendClusterResponseValid}>;
+
+/**
  * SuggestClusterNameRequest is the request for the SuggestClusterName function
  *
  * @generated from message qdrant.cloud.cluster.v1.SuggestClusterNameRequest
@@ -2711,6 +2761,18 @@ export declare const ClusterService: GenService<{
     methodKind: "unary";
     input: typeof SuspendClusterRequestSchema;
     output: typeof SuspendClusterResponseSchema;
+  },
+  /**
+   * Unsuspends a cluster in the account identified by the given ID.
+   * Required permissions:
+   * - write:clusters
+   *
+   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster
+   */
+  unsuspendCluster: {
+    methodKind: "unary";
+    input: typeof UnsuspendClusterRequestSchema;
+    output: typeof UnsuspendClusterResponseSchema;
   },
   /**
    * Suggests a unique and human-friendly name for a new cluster in the specified account.

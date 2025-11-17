@@ -78,6 +78,15 @@ export const restartCluster = ClusterService.method.restartCluster;
 export const suspendCluster = ClusterService.method.suspendCluster;
 
 /**
+ * Unsuspends a cluster in the account identified by the given ID.
+ * Required permissions:
+ * - write:clusters
+ *
+ * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster
+ */
+export const unsuspendCluster = ClusterService.method.unsuspendCluster;
+
+/**
  * Suggests a unique and human-friendly name for a new cluster in the specified account.
  * This can be used by clients to pre-fill the name field when creating a new cluster.
  * Required permissions:
