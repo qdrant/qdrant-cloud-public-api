@@ -55,6 +55,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
                 _registered_method=True)
+        self.UnsuspendCluster = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.FromString,
+                _registered_method=True)
         self.SuggestClusterName = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameRequest.SerializeToString,
@@ -149,6 +154,15 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def UnsuspendCluster(self, request, context):
+        """Unsuspends a cluster in the account identified by the given ID.
+        Required permissions:
+        - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SuggestClusterName(self, request, context):
         """Suggests a unique and human-friendly name for a new cluster in the specified account.
         This can be used by clients to pre-fill the name field when creating a new cluster.
@@ -220,6 +234,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.SuspendCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.SerializeToString,
+            ),
+            'UnsuspendCluster': grpc.unary_unary_rpc_method_handler(
+                    servicer.UnsuspendCluster,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.SerializeToString,
             ),
             'SuggestClusterName': grpc.unary_unary_rpc_method_handler(
                     servicer.SuggestClusterName,
@@ -454,6 +473,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuspendClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UnsuspendCluster(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.FromString,
             options,
             channel_credentials,
             insecure,
