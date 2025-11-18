@@ -425,6 +425,15 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
   name: string;
 
   /**
+   * The email of the user who created the hybrid cloud environment.
+   * This is a read-only field and will be available after it is created.
+   * If the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+   *
+   * @generated from field: string created_by_email = 6;
+   */
+  createdByEmail: string;
+
+  /**
    * Configuration of the environment
    *
    * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration configuration = 20;
@@ -484,6 +493,15 @@ export declare type HybridCloudEnvironmentValid = Message<"qdrant.cloud.hybrid.v
    * @generated from field: string name = 5;
    */
   name: string;
+
+  /**
+   * The email of the user who created the hybrid cloud environment.
+   * This is a read-only field and will be available after it is created.
+   * If the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+   *
+   * @generated from field: string created_by_email = 6;
+   */
+  createdByEmail: string;
 
   /**
    * Configuration of the environment
@@ -667,6 +685,14 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   lastModifiedAt?: Timestamp;
 
   /**
+   * Set if the generate bootstrap commands has been called at least once.
+   * See HybridCloudService.GenerateBootstrapCommands for details.
+   *
+   * @generated from field: bool bootstrap_commands_generated = 2;
+   */
+  bootstrapCommandsGenerated: boolean;
+
+  /**
    * Phase
    *
    * @generated from field: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase phase = 3;
@@ -749,6 +775,14 @@ export declare type HybridCloudEnvironmentStatusValid = Message<"qdrant.cloud.hy
    * @generated from field: google.protobuf.Timestamp last_modified_at = 1;
    */
   lastModifiedAt: Timestamp;
+
+  /**
+   * Set if the generate bootstrap commands has been called at least once.
+   * See HybridCloudService.GenerateBootstrapCommands for details.
+   *
+   * @generated from field: bool bootstrap_commands_generated = 2;
+   */
+  bootstrapCommandsGenerated: boolean;
 
   /**
    * Phase

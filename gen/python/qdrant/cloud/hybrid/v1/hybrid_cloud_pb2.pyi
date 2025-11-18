@@ -175,6 +175,7 @@ class HybridCloudEnvironment(_message.Message):
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -182,9 +183,10 @@ class HybridCloudEnvironment(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     name: str
+    created_by_email: str
     configuration: HybridCloudEnvironmentConfiguration
     status: HybridCloudEnvironmentStatus
-    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., created_by_email: _Optional[str] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
 
 class HybridCloudEnvironmentConfiguration(_message.Message):
     __slots__ = ()
@@ -229,6 +231,7 @@ class HybridCloudEnvironmentConfiguration(_message.Message):
 class HybridCloudEnvironmentStatus(_message.Message):
     __slots__ = ()
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    BOOTSTRAP_COMMANDS_GENERATED_FIELD_NUMBER: _ClassVar[int]
     PHASE_FIELD_NUMBER: _ClassVar[int]
     KUBERNETES_VERSION_FIELD_NUMBER: _ClassVar[int]
     KUBERNETES_DISTRIBUTION_FIELD_NUMBER: _ClassVar[int]
@@ -240,6 +243,7 @@ class HybridCloudEnvironmentStatus(_message.Message):
     STORAGE_CLASSES_FIELD_NUMBER: _ClassVar[int]
     VOLUME_SNAPSHOT_CLASSES_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
+    bootstrap_commands_generated: bool
     phase: HybridCloudEnvironmentStatusPhase
     kubernetes_version: str
     kubernetes_distribution: KubernetesDistribution
@@ -250,7 +254,7 @@ class HybridCloudEnvironmentStatus(_message.Message):
     message: str
     storage_classes: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentStorageClass]
     volume_snapshot_classes: _containers.RepeatedCompositeFieldContainer[HybridCloudEnvironmentVolumeSnapshotClass]
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[HybridCloudEnvironmentStatusPhase, str]] = ..., kubernetes_version: _Optional[str] = ..., kubernetes_distribution: _Optional[_Union[KubernetesDistribution, str]] = ..., number_of_nodes: _Optional[int] = ..., capabilities: _Optional[_Union[HybridCloudEnvironmentCapabilities, _Mapping]] = ..., component_statuses: _Optional[_Iterable[_Union[HybridCloudEnvironmentComponentStatus, _Mapping]]] = ..., cluster_creation_readiness: _Optional[_Union[QdrantClusterCreationStatus, str]] = ..., message: _Optional[str] = ..., storage_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., bootstrap_commands_generated: _Optional[bool] = ..., phase: _Optional[_Union[HybridCloudEnvironmentStatusPhase, str]] = ..., kubernetes_version: _Optional[str] = ..., kubernetes_distribution: _Optional[_Union[KubernetesDistribution, str]] = ..., number_of_nodes: _Optional[int] = ..., capabilities: _Optional[_Union[HybridCloudEnvironmentCapabilities, _Mapping]] = ..., component_statuses: _Optional[_Iterable[_Union[HybridCloudEnvironmentComponentStatus, _Mapping]]] = ..., cluster_creation_readiness: _Optional[_Union[QdrantClusterCreationStatus, str]] = ..., message: _Optional[str] = ..., storage_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironmentCapabilities(_message.Message):
     __slots__ = ()

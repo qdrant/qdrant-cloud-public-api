@@ -953,6 +953,10 @@ type HybridCloudEnvironment struct {
 	// This is a required field.
 	// Name can only contain letters, numbers, underscores and dashes
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	// The email of the user who created the hybrid cloud environment.
+	// This is a read-only field and will be available after it is created.
+	// If the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+	CreatedByEmail string `protobuf:"bytes,6,opt,name=created_by_email,json=createdByEmail,proto3" json:"created_by_email,omitempty"`
 	// Configuration of the environment
 	Configuration *HybridCloudEnvironmentConfiguration `protobuf:"bytes,20,opt,name=configuration,proto3,oneof" json:"configuration,omitempty"`
 	// Status of the environment, readonly
@@ -1022,6 +1026,13 @@ func (x *HybridCloudEnvironment) GetLastModifiedAt() *timestamppb.Timestamp {
 func (x *HybridCloudEnvironment) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *HybridCloudEnvironment) GetCreatedByEmail() string {
+	if x != nil {
+		return x.CreatedByEmail
 	}
 	return ""
 }
@@ -1250,6 +1261,9 @@ type HybridCloudEnvironmentStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Timestamp when the hybrid cloud environment status was modified the last time.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
+	// Set if the generate bootstrap commands has been called at least once.
+	// See HybridCloudService.GenerateBootstrapCommands for details.
+	BootstrapCommandsGenerated bool `protobuf:"varint,2,opt,name=bootstrap_commands_generated,json=bootstrapCommandsGenerated,proto3" json:"bootstrap_commands_generated,omitempty"`
 	// Phase
 	Phase HybridCloudEnvironmentStatusPhase `protobuf:"varint,3,opt,name=phase,proto3,enum=qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase" json:"phase,omitempty"`
 	// Kubernetes version
@@ -1309,6 +1323,13 @@ func (x *HybridCloudEnvironmentStatus) GetLastModifiedAt() *timestamppb.Timestam
 		return x.LastModifiedAt
 	}
 	return nil
+}
+
+func (x *HybridCloudEnvironmentStatus) GetBootstrapCommandsGenerated() bool {
+	if x != nil {
+		return x.BootstrapCommandsGenerated
+	}
+	return false
 }
 
 func (x *HybridCloudEnvironmentStatus) GetPhase() HybridCloudEnvironmentStatusPhase {
@@ -1873,7 +1894,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"k\n" +
 	"#ListHybridCloudEnvironmentsResponse\x12D\n" +
-	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\x88\f\n" +
+	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\xc5\r\n" +
 	"\x16HybridCloudEnvironment\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x0e\n" +
@@ -1881,7 +1902,9 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
-	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12f\n" +
+	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12\xba\x01\n" +
+	"\x10created_by_email\x18\x06 \x01(\tB\x8f\x01\xbaH\x8b\x01\xba\x01\x87\x01\n" +
+	")hybrid_cloud_environment.created_by_email\x126if set, created_by_email must be a valid email address\x1a\"this.size() == 0 || this.isEmail()R\x0ecreatedByEmail\x12f\n" +
 	"\rconfiguration\x18\x14 \x01(\v2;.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationH\x00R\rconfiguration\x88\x01\x01\x12Q\n" +
 	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusH\x01R\x06status\x88\x01\x01:\xaa\b\xbaH\xa6\b\x1a\xb4\x01\n" +
 	"\x1bhybrid_cloud_environment.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xea\x01\n" +
@@ -1924,9 +1947,10 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
 	"_log_levelB\x1d\n" +
-	"\x1b_advanced_operator_settings\"\x93\b\n" +
+	"\x1b_advanced_operator_settings\"\xd5\b\n" +
 	"\x1cHybridCloudEnvironmentStatus\x12L\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12Y\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12@\n" +
+	"\x1cbootstrap_commands_generated\x18\x02 \x01(\bR\x1abootstrapCommandsGenerated\x12Y\n" +
 	"\x05phase\x18\x03 \x01(\x0e29.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x126\n" +
 	"\x12kubernetes_version\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11kubernetesVersion\x12x\n" +
 	"\x17kubernetes_distribution\x18\n" +
