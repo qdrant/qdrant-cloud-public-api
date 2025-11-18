@@ -288,13 +288,17 @@
               "type": "string",
               "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
             },
+            "bootstrapCommandsGenerated": {
+              "type": "boolean",
+              "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+            },
             "configuration": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
               "title": "Configuration of the environment"
             },
             "status": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-              "title": "Status of the environment, readonly"
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
             }
           },
           "title": "The actual hybrid cloud environment"
@@ -330,13 +334,17 @@
               "type": "string",
               "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
             },
+            "bootstrapCommandsGenerated": {
+              "type": "boolean",
+              "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+            },
             "configuration": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
               "title": "Configuration of the environment"
             },
             "status": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-              "title": "Status of the environment, readonly"
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
             }
           },
           "title": "The actual hybrid cloud environment"
@@ -492,13 +500,17 @@
           "type": "string",
           "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
         },
+        "bootstrapCommandsGenerated": {
+          "type": "boolean",
+          "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+        },
         "configuration": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
           "title": "Configuration of the environment"
         },
         "status": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-          "title": "Status of the environment, readonly"
+          "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
         }
       },
       "title": "HybridCloudEnvironment represents a hybrid cloud environment"
@@ -673,10 +685,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the hybrid cloud environment status was modified the last time."
-        },
-        "bootstrapCommandsGenerated": {
-          "type": "boolean",
-          "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
         },
         "phase": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentStatusPhase",

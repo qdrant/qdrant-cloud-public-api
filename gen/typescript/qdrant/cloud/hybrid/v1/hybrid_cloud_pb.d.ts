@@ -434,6 +434,14 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
   createdByEmail: string;
 
   /**
+   * Set if the generate bootstrap commands has been called at least once.
+   * See HybridCloudService.GenerateBootstrapCommands for details.
+   *
+   * @generated from field: bool bootstrap_commands_generated = 19;
+   */
+  bootstrapCommandsGenerated: boolean;
+
+  /**
    * Configuration of the environment
    *
    * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration configuration = 20;
@@ -441,7 +449,8 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
   configuration?: HybridCloudEnvironmentConfiguration;
 
   /**
-   * Status of the environment, readonly
+   * Status of the environment.
+   * This is a read-only field and will be available after the environment has been communicated with the server.
    *
    * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus status = 21;
    */
@@ -504,6 +513,14 @@ export declare type HybridCloudEnvironmentValid = Message<"qdrant.cloud.hybrid.v
   createdByEmail: string;
 
   /**
+   * Set if the generate bootstrap commands has been called at least once.
+   * See HybridCloudService.GenerateBootstrapCommands for details.
+   *
+   * @generated from field: bool bootstrap_commands_generated = 19;
+   */
+  bootstrapCommandsGenerated: boolean;
+
+  /**
    * Configuration of the environment
    *
    * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration configuration = 20;
@@ -511,7 +528,8 @@ export declare type HybridCloudEnvironmentValid = Message<"qdrant.cloud.hybrid.v
   configuration?: HybridCloudEnvironmentConfigurationValid;
 
   /**
-   * Status of the environment, readonly
+   * Status of the environment.
+   * This is a read-only field and will be available after the environment has been communicated with the server.
    *
    * @generated from field: optional qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus status = 21;
    */
@@ -685,14 +703,6 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
   lastModifiedAt?: Timestamp;
 
   /**
-   * Set if the generate bootstrap commands has been called at least once.
-   * See HybridCloudService.GenerateBootstrapCommands for details.
-   *
-   * @generated from field: bool bootstrap_commands_generated = 2;
-   */
-  bootstrapCommandsGenerated: boolean;
-
-  /**
    * Phase
    *
    * @generated from field: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhase phase = 3;
@@ -775,14 +785,6 @@ export declare type HybridCloudEnvironmentStatusValid = Message<"qdrant.cloud.hy
    * @generated from field: google.protobuf.Timestamp last_modified_at = 1;
    */
   lastModifiedAt: Timestamp;
-
-  /**
-   * Set if the generate bootstrap commands has been called at least once.
-   * See HybridCloudService.GenerateBootstrapCommands for details.
-   *
-   * @generated from field: bool bootstrap_commands_generated = 2;
-   */
-  bootstrapCommandsGenerated: boolean;
 
   /**
    * Phase

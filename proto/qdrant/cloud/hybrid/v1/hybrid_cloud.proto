@@ -296,9 +296,13 @@ message HybridCloudEnvironment {
     message: "if set, created_by_email must be a valid email address"
     expression: "this.size() == 0 || this.isEmail()"
   }];
+  // Set if the generate bootstrap commands has been called at least once.
+  // See HybridCloudService.GenerateBootstrapCommands for details.
+  bool bootstrap_commands_generated = 19;
   // Configuration of the environment
   optional HybridCloudEnvironmentConfiguration configuration = 20;
-  // Status of the environment, readonly
+  // Status of the environment.
+  // This is a read-only field and will be available after the environment has been communicated with the server.
   optional HybridCloudEnvironmentStatus status = 21;
 }
 
@@ -373,9 +377,6 @@ enum HybridCloudEnvironmentConfigurationLogLevel {
 message HybridCloudEnvironmentStatus {
   // Timestamp when the hybrid cloud environment status was modified the last time.
   google.protobuf.Timestamp last_modified_at = 1 [(buf.validate.field).required = true];
-  // Set if the generate bootstrap commands has been called at least once.
-  // See HybridCloudService.GenerateBootstrapCommands for details.
-  bool bootstrap_commands_generated = 2;
   // Phase
   HybridCloudEnvironmentStatusPhase phase = 3 [(buf.validate.field).enum.defined_only = true];
   // Kubernetes version
