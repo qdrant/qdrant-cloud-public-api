@@ -175,6 +175,8 @@ class HybridCloudEnvironment(_message.Message):
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    BOOTSTRAP_COMMANDS_GENERATED_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -182,9 +184,11 @@ class HybridCloudEnvironment(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     name: str
+    created_by_email: str
+    bootstrap_commands_generated: bool
     configuration: HybridCloudEnvironmentConfiguration
     status: HybridCloudEnvironmentStatus
-    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., created_by_email: _Optional[str] = ..., bootstrap_commands_generated: _Optional[bool] = ..., configuration: _Optional[_Union[HybridCloudEnvironmentConfiguration, _Mapping]] = ..., status: _Optional[_Union[HybridCloudEnvironmentStatus, _Mapping]] = ...) -> None: ...
 
 class HybridCloudEnvironmentConfiguration(_message.Message):
     __slots__ = ()

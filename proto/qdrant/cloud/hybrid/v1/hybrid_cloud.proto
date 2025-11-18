@@ -288,9 +288,21 @@ message HybridCloudEnvironment {
     min_len: 4
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
+  // The email of the user who created the hybrid cloud environment.
+  // This is a read-only field and will be available after it is created.
+  // If the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+  string created_by_email = 6 [(buf.validate.field).cel = {
+    id: "hybrid_cloud_environment.created_by_email"
+    message: "if set, created_by_email must be a valid email address"
+    expression: "this.size() == 0 || this.isEmail()"
+  }];
+  // Set if the generate bootstrap commands has been called at least once.
+  // See HybridCloudService.GenerateBootstrapCommands for details.
+  bool bootstrap_commands_generated = 19;
   // Configuration of the environment
   optional HybridCloudEnvironmentConfiguration configuration = 20;
-  // Status of the environment, readonly
+  // Status of the environment.
+  // This is a read-only field and will be available after the environment has been communicated with the server.
   optional HybridCloudEnvironmentStatus status = 21;
 }
 
