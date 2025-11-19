@@ -1195,7 +1195,9 @@ func (x *RecordCloudMarketplaceEntitlementRequest) GetEntitlementId() string {
 
 // RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
 type RecordCloudMarketplaceEntitlementResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The actual payment method.
+	PaymentMethod *PaymentMethod `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1228,6 +1230,13 @@ func (x *RecordCloudMarketplaceEntitlementResponse) ProtoReflect() protoreflect.
 // Deprecated: Use RecordCloudMarketplaceEntitlementResponse.ProtoReflect.Descriptor instead.
 func (*RecordCloudMarketplaceEntitlementResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_payment_v1_payment_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *RecordCloudMarketplaceEntitlementResponse) GetPaymentMethod() *PaymentMethod {
+	if x != nil {
+		return x.PaymentMethod
+	}
+	return nil
 }
 
 // Represents a billing address for a payment method.
@@ -1568,8 +1577,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"(RecordCloudMarketplaceEntitlementRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12.\n" +
-	"\x0eentitlement_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rentitlementId\"+\n" +
-	")RecordCloudMarketplaceEntitlementResponse\"\xb4\x03\n" +
+	"\x0eentitlement_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rentitlementId\"\x82\x01\n" +
+	")RecordCloudMarketplaceEntitlementResponse\x12U\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xb4\x03\n" +
 	"\x0eBillingAddress\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05line1\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05line1\x12\"\n" +
@@ -1613,7 +1623,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xef\x16\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xeb\x16\n" +
 	"\x0ePaymentService\x12\xd8\x01\n" +
 	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\x91\x02\n" +
 	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\x97\x01\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
@@ -1629,9 +1639,9 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"session_id\x12\n" +
 	"session_id\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf2\x02\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"\xd7\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x1c\n" +
-	"\fredirect_url\x12\fredirect_url\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xc5\x03\n" +
-	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\x98\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x180\n" +
-	"\x1amarketplace_entitlement_id\x12\x12req.entitlement_id\xca\xf3\x18z\b\x01\x12\x18marketplace-entitlements\"\x12req.entitlement_id*H/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}\x82\xd3\xe4\x93\x02C:\x01*\">/api/payment/v1/accounts/{account_id}/marketplace-entitlementsB\xfe\x01\n" +
+	"\fredirect_url\x12\fredirect_url\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xc1\x03\n" +
+	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\x94\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18,\n" +
+	"\x1amarketplace_entitlement_id\x12\x0eentitlement_id\xca\xf3\x18z\b\x01\x12\x18marketplace-entitlements\"\x12req.entitlement_id*H/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}\x82\xd3\xe4\x93\x02C:\x01*\">/api/payment/v1/accounts/{account_id}/marketplace-entitlementsB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.payment.v1B\fPaymentProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/payment/v1;paymentv1\xa2\x02\x03QCP\xaa\x02\x17Qdrant.Cloud.Payment.V1\xca\x02\x17Qdrant\\Cloud\\Payment\\V1\xe2\x02#Qdrant\\Cloud\\Payment\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Payment::V1b\x06proto3"
 
 var (
@@ -1691,28 +1701,29 @@ var file_qdrant_cloud_payment_v1_payment_proto_depIdxs = []int32{
 	24, // 12: qdrant.cloud.payment.v1.PaymentMethod.created_at:type_name -> google.protobuf.Timestamp
 	24, // 13: qdrant.cloud.payment.v1.PaymentMethod.last_modified_at:type_name -> google.protobuf.Timestamp
 	1,  // 14: qdrant.cloud.payment.v1.PaymentMethod.status:type_name -> qdrant.cloud.payment.v1.PaymentMethodStatus
-	23, // 15: qdrant.cloud.payment.v1.PaymentMethodDetails.card:type_name -> qdrant.cloud.payment.v1.Card
-	3,  // 16: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:input_type -> qdrant.cloud.payment.v1.ListPaymentMethodsRequest
-	5,  // 17: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:input_type -> qdrant.cloud.payment.v1.GetPaymentMethodRequest
-	7,  // 18: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:input_type -> qdrant.cloud.payment.v1.CreatePaymentMethodRequest
-	9,  // 19: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:input_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodRequest
-	11, // 20: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:input_type -> qdrant.cloud.payment.v1.DeletePaymentMethodRequest
-	13, // 21: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
-	15, // 22: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
-	19, // 23: qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement:input_type -> qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest
-	4,  // 24: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:output_type -> qdrant.cloud.payment.v1.ListPaymentMethodsResponse
-	6,  // 25: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:output_type -> qdrant.cloud.payment.v1.GetPaymentMethodResponse
-	8,  // 26: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:output_type -> qdrant.cloud.payment.v1.CreatePaymentMethodResponse
-	10, // 27: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:output_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodResponse
-	12, // 28: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:output_type -> qdrant.cloud.payment.v1.DeletePaymentMethodResponse
-	14, // 29: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
-	16, // 30: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
-	20, // 31: qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement:output_type -> qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse
-	24, // [24:32] is the sub-list for method output_type
-	16, // [16:24] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	18, // 15: qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse.payment_method:type_name -> qdrant.cloud.payment.v1.PaymentMethod
+	23, // 16: qdrant.cloud.payment.v1.PaymentMethodDetails.card:type_name -> qdrant.cloud.payment.v1.Card
+	3,  // 17: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:input_type -> qdrant.cloud.payment.v1.ListPaymentMethodsRequest
+	5,  // 18: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:input_type -> qdrant.cloud.payment.v1.GetPaymentMethodRequest
+	7,  // 19: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:input_type -> qdrant.cloud.payment.v1.CreatePaymentMethodRequest
+	9,  // 20: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:input_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodRequest
+	11, // 21: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:input_type -> qdrant.cloud.payment.v1.DeletePaymentMethodRequest
+	13, // 22: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest
+	15, // 23: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:input_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest
+	19, // 24: qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement:input_type -> qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest
+	4,  // 25: qdrant.cloud.payment.v1.PaymentService.ListPaymentMethods:output_type -> qdrant.cloud.payment.v1.ListPaymentMethodsResponse
+	6,  // 26: qdrant.cloud.payment.v1.PaymentService.GetPaymentMethod:output_type -> qdrant.cloud.payment.v1.GetPaymentMethodResponse
+	8,  // 27: qdrant.cloud.payment.v1.PaymentService.CreatePaymentMethod:output_type -> qdrant.cloud.payment.v1.CreatePaymentMethodResponse
+	10, // 28: qdrant.cloud.payment.v1.PaymentService.UpdatePaymentMethod:output_type -> qdrant.cloud.payment.v1.UpdatePaymentMethodResponse
+	12, // 29: qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod:output_type -> qdrant.cloud.payment.v1.DeletePaymentMethodResponse
+	14, // 30: qdrant.cloud.payment.v1.PaymentService.GetStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse
+	16, // 31: qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession:output_type -> qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse
+	20, // 32: qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement:output_type -> qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_payment_v1_payment_proto_init() }

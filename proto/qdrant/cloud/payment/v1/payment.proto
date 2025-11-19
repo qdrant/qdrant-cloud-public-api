@@ -172,7 +172,7 @@ service PaymentService {
     // log fields
     option (common.v1.log_fields) = {
       name: "marketplace_entitlement_id"
-      field_expression: "req.entitlement_id"
+      field_expression: "entitlement_id"
     };
   }
 }
@@ -374,7 +374,8 @@ message RecordCloudMarketplaceEntitlementRequest {
 
 // RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
 message RecordCloudMarketplaceEntitlementResponse {
-  // Empty
+  // The actual payment method.
+  PaymentMethod payment_method = 1 [(buf.validate.field).required = true];
 }
 
 // PaymentProviderType defines the type of payment method.
@@ -403,6 +404,24 @@ enum PaymentMethodStatus {
   PAYMENT_METHOD_STATUS_INACTIVE = 2;
   // The payment method is pending verification or setup.
   PAYMENT_METHOD_STATUS_PENDING = 3;
+}
+
+// Represents the status of a SetupIntent in Stripe.
+enum StripeSetupIntentStatus {
+  // Default unspecified value.
+  STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED = 0;
+  // A payment method is required to proceed.
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
+  // The SetupIntent is ready to be confirmed.
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
+  // The SetupIntent requires further action (e.g., 3D Secure).
+  STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
+  // The SetupIntent is being processed.
+  STRIPE_SETUP_INTENT_STATUS_PROCESSING = 4;
+  // The SetupIntent has been canceled.
+  STRIPE_SETUP_INTENT_STATUS_CANCELED = 5;
+  // The SetupIntent has succeeded.
+  STRIPE_SETUP_INTENT_STATUS_SUCCEEDED = 6;
 }
 
 // Represents a billing address for a payment method.
@@ -456,22 +475,4 @@ message Card {
   }];
   // The expiration year of the card.
   int32 expiration_year = 4 [(buf.validate.field).int32.gte = 2000];
-}
-
-// Represents the status of a SetupIntent in Stripe.
-enum StripeSetupIntentStatus {
-  // Default unspecified value.
-  STRIPE_SETUP_INTENT_STATUS_UNSPECIFIED = 0;
-  // A payment method is required to proceed.
-  STRIPE_SETUP_INTENT_STATUS_REQUIRES_PAYMENT_METHOD = 1;
-  // The SetupIntent is ready to be confirmed.
-  STRIPE_SETUP_INTENT_STATUS_REQUIRES_CONFIRMATION = 2;
-  // The SetupIntent requires further action (e.g., 3D Secure).
-  STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION = 3;
-  // The SetupIntent is being processed.
-  STRIPE_SETUP_INTENT_STATUS_PROCESSING = 4;
-  // The SetupIntent has been canceled.
-  STRIPE_SETUP_INTENT_STATUS_CANCELED = 5;
-  // The SetupIntent has succeeded.
-  STRIPE_SETUP_INTENT_STATUS_SUCCEEDED = 6;
 }
