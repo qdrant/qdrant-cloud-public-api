@@ -64,3 +64,13 @@ export const getStripeCheckoutSession: typeof PaymentService["method"]["getStrip
  * @generated from rpc qdrant.cloud.payment.v1.PaymentService.CreateStripeCheckoutSession
  */
 export const createStripeCheckoutSession: typeof PaymentService["method"]["createStripeCheckoutSession"];
+/**
+ * Records a cloud marketplace entitlement for the specified account.
+ * This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+ * and the entitlement needs to be recorded in the payment system.
+ * Required permissions:
+ * - write:payment_information
+ *
+ * @generated from rpc qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement
+ */
+export const recordCloudMarketplaceEntitlement: typeof PaymentService["method"]["recordCloudMarketplaceEntitlement"];

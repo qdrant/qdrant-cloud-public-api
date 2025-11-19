@@ -149,6 +149,33 @@ service PaymentService {
       field_expression: "redirect_url"
     };
   }
+
+  // Records a cloud marketplace entitlement for the specified account.
+  // This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+  // and the entitlement needs to be recorded in the payment system.
+  // Required permissions:
+  // - write:payment_information
+  rpc RecordCloudMarketplaceEntitlement(RecordCloudMarketplaceEntitlementRequest) returns (RecordCloudMarketplaceEntitlementResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/payment/v1/accounts/{account_id}/marketplace-entitlements"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "marketplace-entitlements"
+      resource_id_field: "req.entitlement_id"
+      resource_url_template: "/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "marketplace_entitlement_id"
+      field_expression: "req.entitlement_id"
+    };
+  }
 }
 
 // Request to list payment methods for a specific account.
@@ -334,6 +361,21 @@ message PaymentMethod {
     defined_only: true
     not_in: [0]
   }];
+}
+
+// RecordCloudMarketplaceEntitlementRequest is the request for the RecordCloudMarketplaceEntitlement function.
+message RecordCloudMarketplaceEntitlementRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the marketplace entitlement.
+  // This is a required field.
+  string entitlement_id = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
+message RecordCloudMarketplaceEntitlementResponse {
+  // Empty
 }
 
 // PaymentProviderType defines the type of payment method.

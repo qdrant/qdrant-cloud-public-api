@@ -189,6 +189,18 @@ class PaymentMethod(_message.Message):
     status: PaymentMethodStatus
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
 
+class RecordCloudMarketplaceEntitlementRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ENTITLEMENT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    entitlement_id: str
+    def __init__(self, account_id: _Optional[str] = ..., entitlement_id: _Optional[str] = ...) -> None: ...
+
+class RecordCloudMarketplaceEntitlementResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class BillingAddress(_message.Message):
     __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]

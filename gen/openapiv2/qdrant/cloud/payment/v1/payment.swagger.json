@@ -16,6 +16,46 @@
     "application/json"
   ],
   "paths": {
+    "/api/payment/v1/accounts/{accountId}/marketplace-entitlements": {
+      "post": {
+        "summary": "Records a cloud marketplace entitlement for the specified account.\nThis is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)\nand the entitlement needs to be recorded in the payment system.\nRequired permissions:\n- write:payment_information",
+        "operationId": "PaymentService_RecordCloudMarketplaceEntitlement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecordCloudMarketplaceEntitlementResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentServiceRecordCloudMarketplaceEntitlementBody"
+            }
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
     "/api/payment/v1/accounts/{accountId}/payment-methods": {
       "get": {
         "summary": "Lists all payment methods known by the system for the provided account.\nRequired permissions:\n- read:payment_information",
@@ -357,6 +397,16 @@
       },
       "title": "CreateStripeCheckoutSessionRequest is the request for the CreateStripeCheckoutSession function"
     },
+    "PaymentServiceRecordCloudMarketplaceEntitlementBody": {
+      "type": "object",
+      "properties": {
+        "entitlementId": {
+          "type": "string",
+          "description": "The identifier of the marketplace entitlement.\nThis is a required field."
+        }
+      },
+      "description": "RecordCloudMarketplaceEntitlementRequest is the request for the RecordCloudMarketplaceEntitlement function."
+    },
     "PaymentServiceUpdatePaymentMethodBody": {
       "type": "object",
       "properties": {
@@ -654,6 +704,10 @@
       ],
       "default": "PAYMENT_PROVIDER_TYPE_UNSPECIFIED",
       "description": "PaymentProviderType defines the type of payment method.\n\n - PAYMENT_PROVIDER_TYPE_UNSPECIFIED: Unspecified type, should not be used.\n - PAYMENT_PROVIDER_TYPE_STRIPE: Stripe payment method.\n - PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: AWS marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_GCP_MARKETPLACE: Google Cloud Platform marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_AZURE_MARKETPLACE: Azure marketplace payment method.\n - PAYMENT_PROVIDER_TYPE_CUSTOM: Custom payment method. This is used for custom payment methods that do not fit into the predefined categories."
+    },
+    "v1RecordCloudMarketplaceEntitlementResponse": {
+      "type": "object",
+      "description": "RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.\n\nEmpty"
     },
     "v1StripeCheckoutSession": {
       "type": "object",

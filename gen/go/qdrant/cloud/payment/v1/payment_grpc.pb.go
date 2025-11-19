@@ -19,13 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_ListPaymentMethods_FullMethodName          = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods"
-	PaymentService_GetPaymentMethod_FullMethodName            = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
-	PaymentService_CreatePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod"
-	PaymentService_UpdatePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod"
-	PaymentService_DeletePaymentMethod_FullMethodName         = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod"
-	PaymentService_GetStripeCheckoutSession_FullMethodName    = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
-	PaymentService_CreateStripeCheckoutSession_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
+	PaymentService_ListPaymentMethods_FullMethodName                = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods"
+	PaymentService_GetPaymentMethod_FullMethodName                  = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
+	PaymentService_CreatePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod"
+	PaymentService_UpdatePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod"
+	PaymentService_DeletePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod"
+	PaymentService_GetStripeCheckoutSession_FullMethodName          = "/qdrant.cloud.payment.v1.PaymentService/GetStripeCheckoutSession"
+	PaymentService_CreateStripeCheckoutSession_FullMethodName       = "/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession"
+	PaymentService_RecordCloudMarketplaceEntitlement_FullMethodName = "/qdrant.cloud.payment.v1.PaymentService/RecordCloudMarketplaceEntitlement"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
@@ -66,6 +67,12 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - write:payment_information
 	CreateStripeCheckoutSession(ctx context.Context, in *CreateStripeCheckoutSessionRequest, opts ...grpc.CallOption) (*CreateStripeCheckoutSessionResponse, error)
+	// Records a cloud marketplace entitlement for the specified account.
+	// This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+	// and the entitlement needs to be recorded in the payment system.
+	// Required permissions:
+	// - write:payment_information
+	RecordCloudMarketplaceEntitlement(ctx context.Context, in *RecordCloudMarketplaceEntitlementRequest, opts ...grpc.CallOption) (*RecordCloudMarketplaceEntitlementResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -146,6 +153,16 @@ func (c *paymentServiceClient) CreateStripeCheckoutSession(ctx context.Context, 
 	return out, nil
 }
 
+func (c *paymentServiceClient) RecordCloudMarketplaceEntitlement(ctx context.Context, in *RecordCloudMarketplaceEntitlementRequest, opts ...grpc.CallOption) (*RecordCloudMarketplaceEntitlementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RecordCloudMarketplaceEntitlementResponse)
+	err := c.cc.Invoke(ctx, PaymentService_RecordCloudMarketplaceEntitlement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServiceServer is the server API for PaymentService service.
 // All implementations must embed UnimplementedPaymentServiceServer
 // for forward compatibility.
@@ -184,6 +201,12 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - write:payment_information
 	CreateStripeCheckoutSession(context.Context, *CreateStripeCheckoutSessionRequest) (*CreateStripeCheckoutSessionResponse, error)
+	// Records a cloud marketplace entitlement for the specified account.
+	// This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+	// and the entitlement needs to be recorded in the payment system.
+	// Required permissions:
+	// - write:payment_information
+	RecordCloudMarketplaceEntitlement(context.Context, *RecordCloudMarketplaceEntitlementRequest) (*RecordCloudMarketplaceEntitlementResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }
 
@@ -214,6 +237,9 @@ func (UnimplementedPaymentServiceServer) GetStripeCheckoutSession(context.Contex
 }
 func (UnimplementedPaymentServiceServer) CreateStripeCheckoutSession(context.Context, *CreateStripeCheckoutSessionRequest) (*CreateStripeCheckoutSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStripeCheckoutSession not implemented")
+}
+func (UnimplementedPaymentServiceServer) RecordCloudMarketplaceEntitlement(context.Context, *RecordCloudMarketplaceEntitlementRequest) (*RecordCloudMarketplaceEntitlementResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecordCloudMarketplaceEntitlement not implemented")
 }
 func (UnimplementedPaymentServiceServer) mustEmbedUnimplementedPaymentServiceServer() {}
 func (UnimplementedPaymentServiceServer) testEmbeddedByValue()                        {}
@@ -362,6 +388,24 @@ func _PaymentService_CreateStripeCheckoutSession_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentService_RecordCloudMarketplaceEntitlement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecordCloudMarketplaceEntitlementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).RecordCloudMarketplaceEntitlement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_RecordCloudMarketplaceEntitlement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).RecordCloudMarketplaceEntitlement(ctx, req.(*RecordCloudMarketplaceEntitlementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PaymentService_ServiceDesc is the grpc.ServiceDesc for PaymentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -396,6 +440,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateStripeCheckoutSession",
 			Handler:    _PaymentService_CreateStripeCheckoutSession_Handler,
+		},
+		{
+			MethodName: "RecordCloudMarketplaceEntitlement",
+			Handler:    _PaymentService_RecordCloudMarketplaceEntitlement_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
