@@ -149,7 +149,6 @@ service PaymentService {
       field_expression: "redirect_url"
     };
   }
-
   // Records a cloud marketplace entitlement for the specified account.
   // This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
   // and the entitlement needs to be recorded in the payment system.

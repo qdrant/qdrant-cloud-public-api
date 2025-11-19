@@ -37,3 +37,4 @@ Mastercard
 Visa
 unsuspend
 unsuspends
+entitlements
