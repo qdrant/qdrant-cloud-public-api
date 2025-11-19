@@ -704,6 +704,55 @@ export declare type PaymentMethodValid = Message<"qdrant.cloud.payment.v1.Paymen
 export declare const PaymentMethodSchema: GenMessage<PaymentMethod, {validType: PaymentMethodValid}>;
 
 /**
+ * RecordCloudMarketplaceEntitlementRequest is the request for the RecordCloudMarketplaceEntitlement function.
+ *
+ * @generated from message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest
+ */
+export declare type RecordCloudMarketplaceEntitlementRequest = Message<"qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the marketplace entitlement.
+   * This is a required field.
+   *
+   * @generated from field: string entitlement_id = 2;
+   */
+  entitlementId: string;
+};
+
+export declare type RecordCloudMarketplaceEntitlementRequestValid = RecordCloudMarketplaceEntitlementRequest;
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest.
+ * Use `create(RecordCloudMarketplaceEntitlementRequestSchema)` to create a new message.
+ */
+export declare const RecordCloudMarketplaceEntitlementRequestSchema: GenMessage<RecordCloudMarketplaceEntitlementRequest, {validType: RecordCloudMarketplaceEntitlementRequestValid}>;
+
+/**
+ * RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse
+ */
+export declare type RecordCloudMarketplaceEntitlementResponse = Message<"qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse"> & {
+};
+
+export declare type RecordCloudMarketplaceEntitlementResponseValid = RecordCloudMarketplaceEntitlementResponse;
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse.
+ * Use `create(RecordCloudMarketplaceEntitlementResponseSchema)` to create a new message.
+ */
+export declare const RecordCloudMarketplaceEntitlementResponseSchema: GenMessage<RecordCloudMarketplaceEntitlementResponse, {validType: RecordCloudMarketplaceEntitlementResponseValid}>;
+
+/**
  * Represents a billing address for a payment method.
  *
  * @generated from message qdrant.cloud.payment.v1.BillingAddress
@@ -1129,6 +1178,20 @@ export declare const PaymentService: GenService<{
     methodKind: "unary";
     input: typeof CreateStripeCheckoutSessionRequestSchema;
     output: typeof CreateStripeCheckoutSessionResponseSchema;
+  },
+  /**
+   * Records a cloud marketplace entitlement for the specified account.
+   * This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+   * and the entitlement needs to be recorded in the payment system.
+   * Required permissions:
+   * - write:payment_information
+   *
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.RecordCloudMarketplaceEntitlement
+   */
+  recordCloudMarketplaceEntitlement: {
+    methodKind: "unary";
+    input: typeof RecordCloudMarketplaceEntitlementRequestSchema;
+    output: typeof RecordCloudMarketplaceEntitlementResponseSchema;
   },
 }>;
 

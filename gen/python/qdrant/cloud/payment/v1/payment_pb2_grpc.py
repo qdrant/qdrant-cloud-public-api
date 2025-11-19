@@ -50,6 +50,11 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
                 _registered_method=True)
+        self.RecordCloudMarketplaceEntitlement = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/RecordCloudMarketplaceEntitlement',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementResponse.FromString,
+                _registered_method=True)
 
 
 class PaymentServiceServicer(object):
@@ -123,6 +128,17 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RecordCloudMarketplaceEntitlement(self, request, context):
+        """Records a cloud marketplace entitlement for the specified account.
+        This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
+        and the entitlement needs to be recorded in the payment system.
+        Required permissions:
+        - write:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PaymentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -160,6 +176,11 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     servicer.CreateStripeCheckoutSession,
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.SerializeToString,
+            ),
+            'RecordCloudMarketplaceEntitlement': grpc.unary_unary_rpc_method_handler(
+                    servicer.RecordCloudMarketplaceEntitlement,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -352,6 +373,33 @@ class PaymentService(object):
             '/qdrant.cloud.payment.v1.PaymentService/CreateStripeCheckoutSession',
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionRequest.SerializeToString,
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreateStripeCheckoutSessionResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RecordCloudMarketplaceEntitlement(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.payment.v1.PaymentService/RecordCloudMarketplaceEntitlement',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.RecordCloudMarketplaceEntitlementResponse.FromString,
             options,
             channel_credentials,
             insecure,
