@@ -199,7 +199,9 @@ class RecordCloudMarketplaceEntitlementRequest(_message.Message):
 
 class RecordCloudMarketplaceEntitlementResponse(_message.Message):
     __slots__ = ()
-    def __init__(self) -> None: ...
+    PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
+    payment_method: PaymentMethod
+    def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class BillingAddress(_message.Message):
     __slots__ = ()

@@ -707,7 +707,13 @@
     },
     "v1RecordCloudMarketplaceEntitlementResponse": {
       "type": "object",
-      "description": "RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.\n\nEmpty"
+      "properties": {
+        "paymentMethod": {
+          "$ref": "#/definitions/v1PaymentMethod",
+          "description": "The actual payment method."
+        }
+      },
+      "description": "RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function."
     },
     "v1StripeCheckoutSession": {
       "type": "object",

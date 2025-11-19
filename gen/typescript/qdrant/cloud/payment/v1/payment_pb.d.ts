@@ -737,14 +737,30 @@ export declare const RecordCloudMarketplaceEntitlementRequestSchema: GenMessage<
 /**
  * RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
  *
- * Empty
- *
  * @generated from message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse
  */
 export declare type RecordCloudMarketplaceEntitlementResponse = Message<"qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse"> & {
+  /**
+   * The actual payment method.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
+   */
+  paymentMethod?: PaymentMethod;
 };
 
-export declare type RecordCloudMarketplaceEntitlementResponseValid = RecordCloudMarketplaceEntitlementResponse;
+/**
+ * RecordCloudMarketplaceEntitlementResponse is the response from the RecordCloudMarketplaceEntitlement function.
+ *
+ * @generated from message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse
+ */
+export declare type RecordCloudMarketplaceEntitlementResponseValid = Message<"qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse"> & {
+  /**
+   * The actual payment method.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 1;
+   */
+  paymentMethod: PaymentMethodValid;
+};
 
 /**
  * Describes the message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse.
