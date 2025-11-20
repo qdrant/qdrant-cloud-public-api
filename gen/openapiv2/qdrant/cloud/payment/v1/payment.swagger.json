@@ -58,7 +58,7 @@
     },
     "/api/payment/v1/accounts/{accountId}/payment-method-availability": {
       "get": {
-        "summary": "Gets the payment method availability status for the account.\nThis method can be used to determine if the account is ready to make payments.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Gets the payment method availability status for the account.\nThis method can be used to determine if the account is ready to make payments.\nThe authenticated user must be a member of the account.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "PaymentService_GetPaymentMethodAvailability",
         "responses": {
           "200": {

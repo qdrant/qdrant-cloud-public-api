@@ -46,6 +46,7 @@ type PaymentServiceClient interface {
 	GetPaymentMethod(ctx context.Context, in *GetPaymentMethodRequest, opts ...grpc.CallOption) (*GetPaymentMethodResponse, error)
 	// Gets the payment method availability status for the account.
 	// This method can be used to determine if the account is ready to make payments.
+	// The authenticated user must be a member of the account.
 	// Required permissions:
 	// - None (authenticated only)
 	GetPaymentMethodAvailability(ctx context.Context, in *GetPaymentMethodAvailabilityRequest, opts ...grpc.CallOption) (*GetPaymentMethodAvailabilityResponse, error)
@@ -195,6 +196,7 @@ type PaymentServiceServer interface {
 	GetPaymentMethod(context.Context, *GetPaymentMethodRequest) (*GetPaymentMethodResponse, error)
 	// Gets the payment method availability status for the account.
 	// This method can be used to determine if the account is ready to make payments.
+	// The authenticated user must be a member of the account.
 	// Required permissions:
 	// - None (authenticated only)
 	GetPaymentMethodAvailability(context.Context, *GetPaymentMethodAvailabilityRequest) (*GetPaymentMethodAvailabilityResponse, error)
