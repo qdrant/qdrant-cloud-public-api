@@ -134,6 +134,63 @@ export declare type GetPaymentMethodResponseValid = Message<"qdrant.cloud.paymen
 export declare const GetPaymentMethodResponseSchema: GenMessage<GetPaymentMethodResponse, {validType: GetPaymentMethodResponseValid}>;
 
 /**
+ * GetPaymentMethodAvailabilityRequest is the request for the GetPaymentMethodAvailability function.
+ *
+ * @generated from message qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest
+ */
+export declare type GetPaymentMethodAvailabilityRequest = Message<"qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type GetPaymentMethodAvailabilityRequestValid = GetPaymentMethodAvailabilityRequest;
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest.
+ * Use `create(GetPaymentMethodAvailabilityRequestSchema)` to create a new message.
+ */
+export declare const GetPaymentMethodAvailabilityRequestSchema: GenMessage<GetPaymentMethodAvailabilityRequest, {validType: GetPaymentMethodAvailabilityRequestValid}>;
+
+/**
+ * GetPaymentMethodAvailabilityResponse is the response from the GetPaymentMethodAvailability function.
+ *
+ * @generated from message qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse
+ */
+export declare type GetPaymentMethodAvailabilityResponse = Message<"qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse"> & {
+  /**
+   * The payment method availability status for the account.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethodAvailability availability = 1;
+   */
+  availability?: PaymentMethodAvailability;
+};
+
+/**
+ * GetPaymentMethodAvailabilityResponse is the response from the GetPaymentMethodAvailability function.
+ *
+ * @generated from message qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse
+ */
+export declare type GetPaymentMethodAvailabilityResponseValid = Message<"qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse"> & {
+  /**
+   * The payment method availability status for the account.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethodAvailability availability = 1;
+   */
+  availability: PaymentMethodAvailabilityValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse.
+ * Use `create(GetPaymentMethodAvailabilityResponseSchema)` to create a new message.
+ */
+export declare const GetPaymentMethodAvailabilityResponseSchema: GenMessage<GetPaymentMethodAvailabilityResponse, {validType: GetPaymentMethodAvailabilityResponseValid}>;
+
+/**
  * CreatePaymentMethodRequest is the request for the CreatePaymentMethod function
  *
  * @generated from message qdrant.cloud.payment.v1.CreatePaymentMethodRequest
@@ -704,6 +761,28 @@ export declare type PaymentMethodValid = Message<"qdrant.cloud.payment.v1.Paymen
 export declare const PaymentMethodSchema: GenMessage<PaymentMethod, {validType: PaymentMethodValid}>;
 
 /**
+ * Represents the payment method availability status for an account.
+ *
+ * @generated from message qdrant.cloud.payment.v1.PaymentMethodAvailability
+ */
+export declare type PaymentMethodAvailability = Message<"qdrant.cloud.payment.v1.PaymentMethodAvailability"> & {
+  /**
+   * The availability status of the payment method.
+   *
+   * @generated from field: qdrant.cloud.payment.v1.PaymentMethodAvailabilityStatus status = 1;
+   */
+  status: PaymentMethodAvailabilityStatus;
+};
+
+export declare type PaymentMethodAvailabilityValid = PaymentMethodAvailability;
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.PaymentMethodAvailability.
+ * Use `create(PaymentMethodAvailabilitySchema)` to create a new message.
+ */
+export declare const PaymentMethodAvailabilitySchema: GenMessage<PaymentMethodAvailability, {validType: PaymentMethodAvailabilityValid}>;
+
+/**
  * RecordCloudMarketplaceEntitlementRequest is the request for the RecordCloudMarketplaceEntitlement function.
  *
  * @generated from message qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest
@@ -947,6 +1026,39 @@ export declare type CardValid = Card;
 export declare const CardSchema: GenMessage<Card, {validType: CardValid}>;
 
 /**
+ * PaymentMethodAvailabilityStatus defines the availability status of a payment method for an account.
+ *
+ * @generated from enum qdrant.cloud.payment.v1.PaymentMethodAvailabilityStatus
+ */
+export enum PaymentMethodAvailabilityStatus {
+  /**
+   * Unspecified status, should not be used.
+   *
+   * @generated from enum value: PAYMENT_METHOD_AVAILABILITY_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * A payment method is available and active.
+   *
+   * @generated from enum value: PAYMENT_METHOD_AVAILABILITY_STATUS_AVAILABLE = 1;
+   */
+  AVAILABLE = 1,
+
+  /**
+   * No payment method is configured for this account.
+   *
+   * @generated from enum value: PAYMENT_METHOD_AVAILABILITY_STATUS_NOT_CONFIGURED = 2;
+   */
+  NOT_CONFIGURED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.payment.v1.PaymentMethodAvailabilityStatus.
+ */
+export declare const PaymentMethodAvailabilityStatusSchema: GenEnum<PaymentMethodAvailabilityStatus>;
+
+/**
  * PaymentProviderType defines the type of payment method.
  *
  * @generated from enum qdrant.cloud.payment.v1.PaymentProviderType
@@ -1130,6 +1242,19 @@ export declare const PaymentService: GenService<{
     methodKind: "unary";
     input: typeof GetPaymentMethodRequestSchema;
     output: typeof GetPaymentMethodResponseSchema;
+  },
+  /**
+   * Gets the payment method availability status for the account.
+   * This method can be used to determine if the account is ready to make payments.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetPaymentMethodAvailability
+   */
+  getPaymentMethodAvailability: {
+    methodKind: "unary";
+    input: typeof GetPaymentMethodAvailabilityRequestSchema;
+    output: typeof GetPaymentMethodAvailabilityResponseSchema;
   },
   /**
    * Creates a new payment method for the account.
