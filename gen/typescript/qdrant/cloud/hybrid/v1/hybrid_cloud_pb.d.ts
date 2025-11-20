@@ -59,6 +59,30 @@ export declare type GenerateBootstrapCommandsResponse = Message<"qdrant.cloud.hy
    * @generated from field: repeated string commands = 1;
    */
   commands: string[];
+
+  /**
+   * The access key for the Qdrant cloud.
+   * This is a sensitive field and should be handled as a secret.
+   *
+   * @generated from field: string access_key = 2;
+   */
+  accessKey: string;
+
+  /**
+   * The username for the container/helm registry (registry.cloud.qdrant.io).
+   * This is a sensitive field and should be handled as a secret.
+   *
+   * @generated from field: string registry_username = 3;
+   */
+  registryUsername: string;
+
+  /**
+   * The password for the container/helm registry (registry.cloud.qdrant.io).
+   * This is a sensitive field and should be handled as a secret.
+   *
+   * @generated from field: string registry_password = 4;
+   */
+  registryPassword: string;
 };
 
 export declare type GenerateBootstrapCommandsResponseValid = GenerateBootstrapCommandsResponse;

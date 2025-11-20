@@ -103,8 +103,14 @@ class GenerateBootstrapCommandsRequest(_message.Message):
 class GenerateBootstrapCommandsResponse(_message.Message):
     __slots__ = ()
     COMMANDS_FIELD_NUMBER: _ClassVar[int]
+    ACCESS_KEY_FIELD_NUMBER: _ClassVar[int]
+    REGISTRY_USERNAME_FIELD_NUMBER: _ClassVar[int]
+    REGISTRY_PASSWORD_FIELD_NUMBER: _ClassVar[int]
     commands: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, commands: _Optional[_Iterable[str]] = ...) -> None: ...
+    access_key: str
+    registry_username: str
+    registry_password: str
+    def __init__(self, commands: _Optional[_Iterable[str]] = ..., access_key: _Optional[str] = ..., registry_username: _Optional[str] = ..., registry_password: _Optional[str] = ...) -> None: ...
 
 class DeleteHybridCloudEnvironmentRequest(_message.Message):
     __slots__ = ()

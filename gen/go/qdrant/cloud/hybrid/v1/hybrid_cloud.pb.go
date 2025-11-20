@@ -417,9 +417,18 @@ type GenerateBootstrapCommandsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
 	// `kubectl` and `helm` CLIs are required for execution.
-	Commands      []string `protobuf:"bytes,1,rep,name=commands,proto3" json:"commands,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Commands []string `protobuf:"bytes,1,rep,name=commands,proto3" json:"commands,omitempty"`
+	// The access key for the Qdrant cloud.
+	// This is a sensitive field and should be handled as a secret.
+	AccessKey string `protobuf:"bytes,2,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
+	// The username for the container/helm registry (registry.cloud.qdrant.io).
+	// This is a sensitive field and should be handled as a secret.
+	RegistryUsername string `protobuf:"bytes,3,opt,name=registry_username,json=registryUsername,proto3" json:"registry_username,omitempty"`
+	// The password for the container/helm registry (registry.cloud.qdrant.io).
+	// This is a sensitive field and should be handled as a secret.
+	RegistryPassword string `protobuf:"bytes,4,opt,name=registry_password,json=registryPassword,proto3" json:"registry_password,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GenerateBootstrapCommandsResponse) Reset() {
@@ -457,6 +466,27 @@ func (x *GenerateBootstrapCommandsResponse) GetCommands() []string {
 		return x.Commands
 	}
 	return nil
+}
+
+func (x *GenerateBootstrapCommandsResponse) GetAccessKey() string {
+	if x != nil {
+		return x.AccessKey
+	}
+	return ""
+}
+
+func (x *GenerateBootstrapCommandsResponse) GetRegistryUsername() string {
+	if x != nil {
+		return x.RegistryUsername
+	}
+	return ""
+}
+
+func (x *GenerateBootstrapCommandsResponse) GetRegistryPassword() string {
+	if x != nil {
+		return x.RegistryPassword
+	}
+	return ""
 }
 
 // DeleteHybridCloudEnvironmentRequest is the request for DeleteHybridCloudEnvironment function
@@ -1867,9 +1897,13 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
-	"\x1bhybrid_cloud_environment_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x18hybridCloudEnvironmentId\"?\n" +
+	"\x1bhybrid_cloud_environment_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x18hybridCloudEnvironmentId\"\xb8\x01\n" +
 	"!GenerateBootstrapCommandsResponse\x12\x1a\n" +
-	"\bcommands\x18\x01 \x03(\tR\bcommands\"\x97\x01\n" +
+	"\bcommands\x18\x01 \x03(\tR\bcommands\x12\x1d\n" +
+	"\n" +
+	"access_key\x18\x02 \x01(\tR\taccessKey\x12+\n" +
+	"\x11registry_username\x18\x03 \x01(\tR\x10registryUsername\x12+\n" +
+	"\x11registry_password\x18\x04 \x01(\tR\x10registryPassword\"\x97\x01\n" +
 	"#DeleteHybridCloudEnvironmentRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
