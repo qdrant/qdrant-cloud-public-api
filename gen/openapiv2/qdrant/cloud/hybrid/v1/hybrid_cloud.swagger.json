@@ -457,6 +457,18 @@
             "type": "string"
           },
           "description": "Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "The access key for the Qdrant cloud.\nThis is a sensitive field and should be handled as a secret."
+        },
+        "registryUsername": {
+          "type": "string",
+          "description": "The username for the container/helm registry (registry.cloud.qdrant.io).\nThis is a sensitive field and should be handled as a secret."
+        },
+        "registryPassword": {
+          "type": "string",
+          "description": "The password for the container/helm registry (registry.cloud.qdrant.io).\nThis is a sensitive field and should be handled as a secret."
         }
       },
       "title": "GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function"

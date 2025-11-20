@@ -165,6 +165,15 @@ message GenerateBootstrapCommandsResponse {
   // Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment
   // `kubectl` and `helm` CLIs are required for execution.
   repeated string commands = 1;
+  // The access key for the Qdrant cloud.
+  // This is a sensitive field and should be handled as a secret.
+  string access_key = 2;
+  // The username for the container/helm registry (registry.cloud.qdrant.io).
+  // This is a sensitive field and should be handled as a secret.
+  string registry_username = 3;
+  // The password for the container/helm registry (registry.cloud.qdrant.io).
+  // This is a sensitive field and should be handled as a secret.
+  string registry_password = 4;
 }
 
 // DeleteHybridCloudEnvironmentRequest is the request for DeleteHybridCloudEnvironment function
