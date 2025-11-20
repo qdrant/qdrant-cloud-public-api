@@ -25,6 +25,11 @@ class PaymentServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.FromString,
                 _registered_method=True)
+        self.GetPaymentMethodAvailability = channel.unary_unary(
+                '/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethodAvailability',
+                request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityResponse.FromString,
+                _registered_method=True)
         self.CreatePaymentMethod = channel.unary_unary(
                 '/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod',
                 request_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.CreatePaymentMethodRequest.SerializeToString,
@@ -74,6 +79,17 @@ class PaymentServiceServicer(object):
         """Gets the payment method identified by the given ID.
         Required permissions:
         - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPaymentMethodAvailability(self, request, context):
+        """Gets the payment method availability status for the account.
+        This method can be used to determine if the account is ready to make payments.
+        The authenticated user must be a member of the account.
+        Required permissions:
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -151,6 +167,11 @@ def add_PaymentServiceServicer_to_server(servicer, server):
                     servicer.GetPaymentMethod,
                     request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.SerializeToString,
+            ),
+            'GetPaymentMethodAvailability': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPaymentMethodAvailability,
+                    request_deserializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityResponse.SerializeToString,
             ),
             'CreatePaymentMethod': grpc.unary_unary_rpc_method_handler(
                     servicer.CreatePaymentMethod,
@@ -238,6 +259,33 @@ class PaymentService(object):
             '/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod',
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodRequest.SerializeToString,
             qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPaymentMethodAvailability(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethodAvailability',
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityRequest.SerializeToString,
+            qdrant_dot_cloud_dot_payment_dot_v1_dot_payment__pb2.GetPaymentMethodAvailabilityResponse.FromString,
             options,
             channel_credentials,
             insecure,

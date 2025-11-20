@@ -21,6 +21,16 @@ export const listPaymentMethods: typeof PaymentService["method"]["listPaymentMet
  */
 export const getPaymentMethod: typeof PaymentService["method"]["getPaymentMethod"];
 /**
+ * Gets the payment method availability status for the account.
+ * This method can be used to determine if the account is ready to make payments.
+ * The authenticated user must be a member of the account.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.payment.v1.PaymentService.GetPaymentMethodAvailability
+ */
+export const getPaymentMethodAvailability: typeof PaymentService["method"]["getPaymentMethodAvailability"];
+/**
  * Creates a new payment method for the account.
  * This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
  * Required permissions:

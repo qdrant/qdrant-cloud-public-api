@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	PaymentService_ListPaymentMethods_FullMethodName                = "/qdrant.cloud.payment.v1.PaymentService/ListPaymentMethods"
 	PaymentService_GetPaymentMethod_FullMethodName                  = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
+	PaymentService_GetPaymentMethodAvailability_FullMethodName      = "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethodAvailability"
 	PaymentService_CreatePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/CreatePaymentMethod"
 	PaymentService_UpdatePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/UpdatePaymentMethod"
 	PaymentService_DeletePaymentMethod_FullMethodName               = "/qdrant.cloud.payment.v1.PaymentService/DeletePaymentMethod"
@@ -43,6 +44,12 @@ type PaymentServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentMethod(ctx context.Context, in *GetPaymentMethodRequest, opts ...grpc.CallOption) (*GetPaymentMethodResponse, error)
+	// Gets the payment method availability status for the account.
+	// This method can be used to determine if the account is ready to make payments.
+	// The authenticated user must be a member of the account.
+	// Required permissions:
+	// - None (authenticated only)
+	GetPaymentMethodAvailability(ctx context.Context, in *GetPaymentMethodAvailabilityRequest, opts ...grpc.CallOption) (*GetPaymentMethodAvailabilityResponse, error)
 	// Creates a new payment method for the account.
 	// This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
 	// Required permissions:
@@ -97,6 +104,16 @@ func (c *paymentServiceClient) GetPaymentMethod(ctx context.Context, in *GetPaym
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPaymentMethodResponse)
 	err := c.cc.Invoke(ctx, PaymentService_GetPaymentMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) GetPaymentMethodAvailability(ctx context.Context, in *GetPaymentMethodAvailabilityRequest, opts ...grpc.CallOption) (*GetPaymentMethodAvailabilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentMethodAvailabilityResponse)
+	err := c.cc.Invoke(ctx, PaymentService_GetPaymentMethodAvailability_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -177,6 +194,12 @@ type PaymentServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	GetPaymentMethod(context.Context, *GetPaymentMethodRequest) (*GetPaymentMethodResponse, error)
+	// Gets the payment method availability status for the account.
+	// This method can be used to determine if the account is ready to make payments.
+	// The authenticated user must be a member of the account.
+	// Required permissions:
+	// - None (authenticated only)
+	GetPaymentMethodAvailability(context.Context, *GetPaymentMethodAvailabilityRequest) (*GetPaymentMethodAvailabilityResponse, error)
 	// Creates a new payment method for the account.
 	// This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
 	// Required permissions:
@@ -222,6 +245,9 @@ func (UnimplementedPaymentServiceServer) ListPaymentMethods(context.Context, *Li
 }
 func (UnimplementedPaymentServiceServer) GetPaymentMethod(context.Context, *GetPaymentMethodRequest) (*GetPaymentMethodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethod not implemented")
+}
+func (UnimplementedPaymentServiceServer) GetPaymentMethodAvailability(context.Context, *GetPaymentMethodAvailabilityRequest) (*GetPaymentMethodAvailabilityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethodAvailability not implemented")
 }
 func (UnimplementedPaymentServiceServer) CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*CreatePaymentMethodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentMethod not implemented")
@@ -294,6 +320,24 @@ func _PaymentService_GetPaymentMethod_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).GetPaymentMethod(ctx, req.(*GetPaymentMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_GetPaymentMethodAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentMethodAvailabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).GetPaymentMethodAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_GetPaymentMethodAvailability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).GetPaymentMethodAvailability(ctx, req.(*GetPaymentMethodAvailabilityRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -420,6 +464,10 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentMethod",
 			Handler:    _PaymentService_GetPaymentMethod_Handler,
+		},
+		{
+			MethodName: "GetPaymentMethodAvailability",
+			Handler:    _PaymentService_GetPaymentMethodAvailability_Handler,
 		},
 		{
 			MethodName: "CreatePaymentMethod",

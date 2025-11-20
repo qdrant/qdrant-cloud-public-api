@@ -14,6 +14,12 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class PaymentMethodAvailabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PAYMENT_METHOD_AVAILABILITY_STATUS_UNSPECIFIED: _ClassVar[PaymentMethodAvailabilityStatus]
+    PAYMENT_METHOD_AVAILABILITY_STATUS_AVAILABLE: _ClassVar[PaymentMethodAvailabilityStatus]
+    PAYMENT_METHOD_AVAILABILITY_STATUS_NOT_CONFIGURED: _ClassVar[PaymentMethodAvailabilityStatus]
+
 class PaymentProviderType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     PAYMENT_PROVIDER_TYPE_UNSPECIFIED: _ClassVar[PaymentProviderType]
@@ -39,6 +45,9 @@ class StripeSetupIntentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper)
     STRIPE_SETUP_INTENT_STATUS_PROCESSING: _ClassVar[StripeSetupIntentStatus]
     STRIPE_SETUP_INTENT_STATUS_CANCELED: _ClassVar[StripeSetupIntentStatus]
     STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: _ClassVar[StripeSetupIntentStatus]
+PAYMENT_METHOD_AVAILABILITY_STATUS_UNSPECIFIED: PaymentMethodAvailabilityStatus
+PAYMENT_METHOD_AVAILABILITY_STATUS_AVAILABLE: PaymentMethodAvailabilityStatus
+PAYMENT_METHOD_AVAILABILITY_STATUS_NOT_CONFIGURED: PaymentMethodAvailabilityStatus
 PAYMENT_PROVIDER_TYPE_UNSPECIFIED: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_STRIPE: PaymentProviderType
 PAYMENT_PROVIDER_TYPE_AWS_MARKETPLACE: PaymentProviderType
@@ -82,6 +91,18 @@ class GetPaymentMethodResponse(_message.Message):
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
+
+class GetPaymentMethodAvailabilityRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class GetPaymentMethodAvailabilityResponse(_message.Message):
+    __slots__ = ()
+    AVAILABILITY_FIELD_NUMBER: _ClassVar[int]
+    availability: PaymentMethodAvailability
+    def __init__(self, availability: _Optional[_Union[PaymentMethodAvailability, _Mapping]] = ...) -> None: ...
 
 class CreatePaymentMethodRequest(_message.Message):
     __slots__ = ()
@@ -188,6 +209,12 @@ class PaymentMethod(_message.Message):
     is_default: bool
     status: PaymentMethodStatus
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
+
+class PaymentMethodAvailability(_message.Message):
+    __slots__ = ()
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    status: PaymentMethodAvailabilityStatus
+    def __init__(self, status: _Optional[_Union[PaymentMethodAvailabilityStatus, str]] = ...) -> None: ...
 
 class RecordCloudMarketplaceEntitlementRequest(_message.Message):
     __slots__ = ()
