@@ -740,9 +740,11 @@ message DatabaseConfigurationService {
   optional common.v1.SecretKeyRef read_only_api_key = 2;
   // Enable JWT Role Based Access Control (RBAC).
   // This setting is for both managed and hybrid cloud clusters.
+  // For managed cloud clusters, this defaults to enabled and cannot be explicitly disabled.
+  // For hybrid cloud clusters, the value is applied as provided.
   // If enabled, you can generate JWT tokens with fine-grained rules for access control.
   // Use generated token instead of API key.
-  bool jwt_rbac = 3;
+  optional bool jwt_rbac = 3;
   // Enable HTTPS for the REST and gRPC API
   // This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
   bool enable_tls = 4;
