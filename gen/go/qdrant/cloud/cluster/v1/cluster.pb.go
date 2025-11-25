@@ -2453,9 +2453,11 @@ type DatabaseConfigurationService struct {
 	ReadOnlyApiKey *v1.SecretKeyRef `protobuf:"bytes,2,opt,name=read_only_api_key,json=readOnlyApiKey,proto3,oneof" json:"read_only_api_key,omitempty"`
 	// Enable JWT Role Based Access Control (RBAC).
 	// This setting is for both managed and hybrid cloud clusters.
+	// For managed cloud clusters, this defaults to enabled and cannot be explicitly disabled.
+	// For hybrid cloud clusters, the value is applied as provided.
 	// If enabled, you can generate JWT tokens with fine-grained rules for access control.
 	// Use generated token instead of API key.
-	JwtRbac bool `protobuf:"varint,3,opt,name=jwt_rbac,json=jwtRbac,proto3" json:"jwt_rbac,omitempty"`
+	JwtRbac *bool `protobuf:"varint,3,opt,name=jwt_rbac,json=jwtRbac,proto3,oneof" json:"jwt_rbac,omitempty"`
 	// Enable HTTPS for the REST and gRPC API
 	// This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
 	EnableTls     bool `protobuf:"varint,4,opt,name=enable_tls,json=enableTls,proto3" json:"enable_tls,omitempty"`
@@ -2508,8 +2510,8 @@ func (x *DatabaseConfigurationService) GetReadOnlyApiKey() *v1.SecretKeyRef {
 }
 
 func (x *DatabaseConfigurationService) GetJwtRbac() bool {
-	if x != nil {
-		return x.JwtRbac
+	if x != nil && x.JwtRbac != nil {
+		return *x.JwtRbac
 	}
 	return false
 }
@@ -3599,16 +3601,17 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\vperformance\x18\x01 \x01(\v2@.qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformanceR\vperformance\"~\n" +
 	"'DatabaseConfigurationStoragePerformance\x120\n" +
 	"\x14optimizer_cpu_budget\x18\x01 \x01(\x05R\x12optimizerCpuBudget\x12!\n" +
-	"\fasync_scorer\x18\x02 \x01(\bR\vasyncScorer\"\x94\x02\n" +
+	"\fasync_scorer\x18\x02 \x01(\bR\vasyncScorer\"\xa6\x02\n" +
 	"\x1cDatabaseConfigurationService\x12B\n" +
 	"\aapi_key\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefH\x00R\x06apiKey\x88\x01\x01\x12T\n" +
-	"\x11read_only_api_key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefH\x01R\x0ereadOnlyApiKey\x88\x01\x01\x12\x19\n" +
-	"\bjwt_rbac\x18\x03 \x01(\bR\ajwtRbac\x12\x1d\n" +
+	"\x11read_only_api_key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefH\x01R\x0ereadOnlyApiKey\x88\x01\x01\x12\x1e\n" +
+	"\bjwt_rbac\x18\x03 \x01(\bH\x02R\ajwtRbac\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"enable_tls\x18\x04 \x01(\bR\tenableTlsB\n" +
 	"\n" +
 	"\b_api_keyB\x14\n" +
-	"\x12_read_only_api_key\"\x9c\x01\n" +
+	"\x12_read_only_api_keyB\v\n" +
+	"\t_jwt_rbac\"\x9c\x01\n" +
 	"\x18DatabaseConfigurationTls\x12@\n" +
 	"\x04cert\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefB\x06\xbaH\x03\xc8\x01\x01R\x04cert\x12>\n" +
 	"\x03key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefB\x06\xbaH\x03\xc8\x01\x01R\x03key\":\n" +
