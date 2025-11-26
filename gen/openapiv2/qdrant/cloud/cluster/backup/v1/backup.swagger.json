@@ -1015,9 +1015,35 @@
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
           "description": "The cluster configuration at the time of backup."
+        },
+        "resourcesSummary": {
+          "$ref": "#/definitions/v1ClusterResourcesSummary",
+          "description": "Summary of the resources that were provisioned when the backup was taken."
+        },
+        "restorePackageId": {
+          "type": "string",
+          "description": "Identifier of the package that best matches the recorded resources for restoration."
         }
       },
       "description": "Represents the cluster details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.\nThe configuration field is immutable and represents the values at backup time."
+    },
+    "v1ClusterResourcesSummary": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "$ref": "#/definitions/v1ResourceQuantity",
+          "description": "CPU resources expressed in millicores."
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ResourceQuantity",
+          "description": "RAM resources expressed in binary units (e.g. Gi)."
+        },
+        "disk": {
+          "$ref": "#/definitions/v1ResourceQuantity",
+          "description": "Disk resources expressed in binary units (e.g. Gi)."
+        }
+      },
+      "description": "Describes the compute resources captured by a backup."
     },
     "v1ClusterServiceType": {
       "type": "string",
@@ -1289,6 +1315,21 @@
         }
       },
       "title": "ListBackupsResponse is the response from the ListBackups function"
+    },
+    "v1ResourceQuantity": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Numeric value of the resource (e.g. 500 for 500m CPU)."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that qualifies the amount (e.g. m, Gi)."
+        }
+      },
+      "description": "Represents a scalar resource quantity with a unit."
     },
     "v1RestoreBackupResponse": {
       "type": "object",

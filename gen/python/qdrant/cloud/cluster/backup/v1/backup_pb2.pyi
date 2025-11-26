@@ -251,11 +251,33 @@ class ClusterInfo(_message.Message):
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
+    RESOURCES_SUMMARY_FIELD_NUMBER: _ClassVar[int]
+    RESTORE_PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     name: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     configuration: _cluster_pb2.ClusterConfiguration
-    def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_cluster_pb2.ClusterConfiguration, _Mapping]] = ...) -> None: ...
+    resources_summary: ClusterResourcesSummary
+    restore_package_id: str
+    def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_cluster_pb2.ClusterConfiguration, _Mapping]] = ..., resources_summary: _Optional[_Union[ClusterResourcesSummary, _Mapping]] = ..., restore_package_id: _Optional[str] = ...) -> None: ...
+
+class ClusterResourcesSummary(_message.Message):
+    __slots__ = ()
+    CPU_FIELD_NUMBER: _ClassVar[int]
+    RAM_FIELD_NUMBER: _ClassVar[int]
+    DISK_FIELD_NUMBER: _ClassVar[int]
+    cpu: ResourceQuantity
+    ram: ResourceQuantity
+    disk: ResourceQuantity
+    def __init__(self, cpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., ram: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., disk: _Optional[_Union[ResourceQuantity, _Mapping]] = ...) -> None: ...
+
+class ResourceQuantity(_message.Message):
+    __slots__ = ()
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    UNIT_FIELD_NUMBER: _ClassVar[int]
+    amount: int
+    unit: str
+    def __init__(self, amount: _Optional[int] = ..., unit: _Optional[str] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ()
