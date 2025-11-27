@@ -610,6 +610,7 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
 
   /**
    * Container registry URL
+   * Like: your-registry.example.com/qdrant (this will for example result in your-registry.example.com/qdrant/qdrant-cloud-agent)
    *
    * @generated from field: optional string container_registry_url = 8;
    */
@@ -617,6 +618,7 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
 
   /**
    * Chart registry URL
+   * Like: oci://your-registry.example.com/qdrant-charts (this will for example result in oci://your-registry.example.com/qdrant-charts/qdrant-cloud-agent)
    *
    * @generated from field: optional string chart_repository_url = 9;
    */
