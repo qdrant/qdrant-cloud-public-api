@@ -608,11 +608,11 @@
         },
         "containerRegistryUrl": {
           "type": "string",
-          "title": "Container registry URL"
+          "title": "Container registry URL\nLike: your-registry.example.com/qdrant (this will for example result in your-registry.example.com/qdrant/qdrant-cloud-agent)"
         },
         "chartRepositoryUrl": {
           "type": "string",
-          "title": "Chart registry URL"
+          "title": "Chart registry URL\nLike: oci://your-registry.example.com/qdrant-charts (this will for example result in oci://your-registry.example.com/qdrant-charts/qdrant-cloud-agent)"
         },
         "registrySecretName": {
           "type": "string",
