@@ -563,6 +563,28 @@ message ClusterInfo {
   };
   // The cluster configuration at the time of backup.
   qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4 [(buf.validate.field).required = true];
+  // Summary of the resources that were provisioned when the backup was taken.
+  ClusterResourcesSummary resources_summary = 5;
+  // Identifier of the package that best matches the recorded resources for restoration.
+  optional string restore_package_id = 6 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Describes the compute resources captured by a backup.
+message ClusterResourcesSummary {
+  // CPU resources expressed in millicores.
+  ResourceQuantity cpu = 1;
+  // RAM resources expressed in binary units (e.g. Gi).
+  ResourceQuantity ram = 2;
+  // Disk resources expressed in binary units (e.g. Gi).
+  ResourceQuantity disk = 3;
+}
+
+// Represents a scalar resource quantity with a unit.
+message ResourceQuantity {
+  // Numeric value of the resource (e.g. 500 for 500m CPU).
+  int32 amount = 1;
+  // Unit that qualifies the amount (e.g. m, Gi).
+  string unit = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // BackupScheduleStatus represents the current status of a backup schedule.

@@ -982,6 +982,20 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
   configuration?: ClusterConfiguration;
+
+  /**
+   * Summary of the resources that were provisioned when the backup was taken.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary resources_summary = 5;
+   */
+  resourcesSummary?: ClusterResourcesSummary;
+
+  /**
+   * Identifier of the package that best matches the recorded resources for restoration.
+   *
+   * @generated from field: optional string restore_package_id = 6;
+   */
+  restorePackageId?: string;
 };
 
 /**
@@ -1022,6 +1036,20 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
   configuration: ClusterConfigurationValid;
+
+  /**
+   * Summary of the resources that were provisioned when the backup was taken.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary resources_summary = 5;
+   */
+  resourcesSummary?: ClusterResourcesSummaryValid;
+
+  /**
+   * Identifier of the package that best matches the recorded resources for restoration.
+   *
+   * @generated from field: optional string restore_package_id = 6;
+   */
+  restorePackageId?: string;
 };
 
 /**
@@ -1029,6 +1057,71 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
  * Use `create(ClusterInfoSchema)` to create a new message.
  */
 export declare const ClusterInfoSchema: GenMessage<ClusterInfo, {validType: ClusterInfoValid}>;
+
+/**
+ * Describes the compute resources captured by a backup.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
+ */
+export declare type ClusterResourcesSummary = Message<"qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary"> & {
+  /**
+   * CPU resources expressed in millicores.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ResourceQuantity cpu = 1;
+   */
+  cpu?: ResourceQuantity;
+
+  /**
+   * RAM resources expressed in binary units (e.g. Gi).
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ResourceQuantity ram = 2;
+   */
+  ram?: ResourceQuantity;
+
+  /**
+   * Disk resources expressed in binary units (e.g. Gi).
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.ResourceQuantity disk = 3;
+   */
+  disk?: ResourceQuantity;
+};
+
+export declare type ClusterResourcesSummaryValid = ClusterResourcesSummary;
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.
+ * Use `create(ClusterResourcesSummarySchema)` to create a new message.
+ */
+export declare const ClusterResourcesSummarySchema: GenMessage<ClusterResourcesSummary, {validType: ClusterResourcesSummaryValid}>;
+
+/**
+ * Represents a scalar resource quantity with a unit.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.ResourceQuantity
+ */
+export declare type ResourceQuantity = Message<"qdrant.cloud.cluster.backup.v1.ResourceQuantity"> & {
+  /**
+   * Numeric value of the resource (e.g. 500 for 500m CPU).
+   *
+   * @generated from field: int32 amount = 1;
+   */
+  amount: number;
+
+  /**
+   * Unit that qualifies the amount (e.g. m, Gi).
+   *
+   * @generated from field: string unit = 2;
+   */
+  unit: string;
+};
+
+export declare type ResourceQuantityValid = ResourceQuantity;
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.ResourceQuantity.
+ * Use `create(ResourceQuantitySchema)` to create a new message.
+ */
+export declare const ResourceQuantitySchema: GenMessage<ResourceQuantity, {validType: ResourceQuantityValid}>;
 
 /**
  * A BackupSchedule represents a recurring schedule for creating backups.
