@@ -335,13 +335,13 @@ message HybridCloudEnvironmentConfiguration {
   // Container registry URL
   // Like: your-registry.example.com/qdrant (this will for example result in your-registry.example.com/qdrant/qdrant-cloud-agent)
   optional string container_registry_url = 8 [(buf.validate.field).string = {
-    pattern: "^([a-zA-Z0-9.-]+(:\\d+)?)(/[a-zA-Z0-9_./-]+)*$"
+    pattern: "^([a-zA-Z0-9.-]+(:[0-9]+)?)(/[a-zA-Z0-9_./-]+)*$"
     max_len: 2048
   }];
   // Chart registry URL
   // Like: oci://your-registry.example.com/qdrant-charts (this will for example result in oci://your-registry.example.com/qdrant-charts/qdrant-cloud-agent)
   optional string chart_repository_url = 9 [(buf.validate.field).string = {
-    pattern: "^[a-zA-Z][a-zA-Z0-9+.-]*://.+"
+    pattern: "^[a-zA-Z][a-zA-Z0-9+.-]*://([a-zA-Z0-9.-]+(:[0-9]+)?)(/[a-zA-Z0-9_./-]+)*$"
     max_len: 2048
   }];
   // k8s secret name containing registry credentials for accessing container and helm repositories
