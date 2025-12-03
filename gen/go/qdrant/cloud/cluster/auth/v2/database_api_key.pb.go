@@ -830,9 +830,9 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x10GlobalAccessRule\x12e\n" +
 	"\vaccess_type\x18\x01 \x01(\x0e28.qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
-	"accessType\"\xc7\x01\n" +
-	"\x14CollectionAccessRule\x12D\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12i\n" +
+	"accessType\"\xc8\x01\n" +
+	"\x14CollectionAccessRule\x12E\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tB\x1c\xbaH\x19r\x17\x10\x01\x18\xff\x012\x10^[a-zA-Z0-9-_]+$R\x0ecollectionName\x12i\n" +
 	"\vaccess_type\x18\x02 \x01(\x0e2<.qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
 	"accessType*\xa5\x01\n" +
