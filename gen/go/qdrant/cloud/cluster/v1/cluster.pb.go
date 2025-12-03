@@ -2225,8 +2225,9 @@ type DatabaseConfigurationCollection struct {
 	ReplicationFactor *uint32 `protobuf:"varint,1,opt,name=replication_factor,json=replicationFactor,proto3,oneof" json:"replication_factor,omitempty"`
 	// How many replicas should apply the operation for us to consider it successful
 	// This is an optional, the default is 1
-	WriteConsistencyFactor int32 `protobuf:"varint,2,opt,name=write_consistency_factor,json=writeConsistencyFactor,proto3" json:"write_consistency_factor,omitempty"`
+	WriteConsistencyFactor *int32 `protobuf:"varint,2,opt,name=write_consistency_factor,json=writeConsistencyFactor,proto3,oneof" json:"write_consistency_factor,omitempty"`
 	// The default parameters for vectors.
+	// This is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults.
 	Vectors       *DatabaseConfigurationCollectionVectors `protobuf:"bytes,3,opt,name=vectors,proto3" json:"vectors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2270,8 +2271,8 @@ func (x *DatabaseConfigurationCollection) GetReplicationFactor() uint32 {
 }
 
 func (x *DatabaseConfigurationCollection) GetWriteConsistencyFactor() int32 {
-	if x != nil {
-		return x.WriteConsistencyFactor
+	if x != nil && x.WriteConsistencyFactor != nil {
+		return *x.WriteConsistencyFactor
 	}
 	return 0
 }
@@ -3587,12 +3588,13 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"_log_levelB\x06\n" +
 	"\x04_tlsB\f\n" +
 	"\n" +
-	"_inference\"\x9b\x02\n" +
+	"_inference\"\xb5\x02\n" +
 	"\x1fDatabaseConfigurationCollection\x12;\n" +
-	"\x12replication_factor\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x01H\x00R\x11replicationFactor\x88\x01\x01\x12A\n" +
-	"\x18write_consistency_factor\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x01R\x16writeConsistencyFactor\x12a\n" +
-	"\avectors\x18\x03 \x01(\v2?.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectorsB\x06\xbaH\x03\xc8\x01\x01R\avectorsB\x15\n" +
-	"\x13_replication_factor\"R\n" +
+	"\x12replication_factor\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x01H\x00R\x11replicationFactor\x88\x01\x01\x12F\n" +
+	"\x18write_consistency_factor\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x01H\x01R\x16writeConsistencyFactor\x88\x01\x01\x12Y\n" +
+	"\avectors\x18\x03 \x01(\v2?.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectorsR\avectorsB\x15\n" +
+	"\x13_replication_factorB\x1b\n" +
+	"\x19_write_consistency_factor\"R\n" +
 	"&DatabaseConfigurationCollectionVectors\x12\x1c\n" +
 	"\aon_disk\x18\x01 \x01(\bH\x00R\x06onDisk\x88\x01\x01B\n" +
 	"\n" +

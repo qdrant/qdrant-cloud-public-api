@@ -1122,7 +1122,7 @@
         },
         "vectors": {
           "$ref": "#/definitions/v1DatabaseConfigurationCollectionVectors",
-          "description": "The default parameters for vectors."
+          "description": "The default parameters for vectors.\nThis is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults."
         }
       },
       "title": "The default Qdrant database collection configuration"

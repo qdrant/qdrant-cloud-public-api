@@ -1304,47 +1304,20 @@ export declare type DatabaseConfigurationCollection = Message<"qdrant.cloud.clus
    * How many replicas should apply the operation for us to consider it successful
    * This is an optional, the default is 1
    *
-   * @generated from field: int32 write_consistency_factor = 2;
+   * @generated from field: optional int32 write_consistency_factor = 2;
    */
-  writeConsistencyFactor: number;
+  writeConsistencyFactor?: number;
 
   /**
    * The default parameters for vectors.
+   * This is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults.
    *
    * @generated from field: qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors vectors = 3;
    */
   vectors?: DatabaseConfigurationCollectionVectors;
 };
 
-/**
- * The default Qdrant database collection configuration
- *
- * @generated from message qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
- */
-export declare type DatabaseConfigurationCollectionValid = Message<"qdrant.cloud.cluster.v1.DatabaseConfigurationCollection"> & {
-  /**
-   * Number of replicas of each shard that network tries to maintain
-   * This is an optional, the default is 1
-   *
-   * @generated from field: optional uint32 replication_factor = 1;
-   */
-  replicationFactor?: number;
-
-  /**
-   * How many replicas should apply the operation for us to consider it successful
-   * This is an optional, the default is 1
-   *
-   * @generated from field: int32 write_consistency_factor = 2;
-   */
-  writeConsistencyFactor: number;
-
-  /**
-   * The default parameters for vectors.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors vectors = 3;
-   */
-  vectors: DatabaseConfigurationCollectionVectorsValid;
-};
+export declare type DatabaseConfigurationCollectionValid = DatabaseConfigurationCollection;
 
 /**
  * Describes the message qdrant.cloud.cluster.v1.DatabaseConfigurationCollection.
