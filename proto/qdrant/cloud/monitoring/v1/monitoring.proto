@@ -67,6 +67,34 @@ service MonitoringService {
       field_expression: "cluster_id"
     };
   }
+  // Gets the inference token usage metrics aggregated per inference model for a cluster.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterInferenceMetrics(GetClusterInferenceMetricsRequest) returns (GetClusterInferenceMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+  }
+  // Gets the inference token usage metrics for a specific inference model in a cluster.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterInferenceModelMetrics(GetClusterInferenceModelMetricsRequest) returns (GetClusterInferenceModelMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference/{inference_model_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+  }
 }
 
 // GetClusterSummaryMetricsRequest is the request for the GetClusterSummaryMetrics function
@@ -192,6 +220,79 @@ message GetClusterEventsResponse {
   repeated LogEntry items = 1;
 }
 
+// GetClusterInferenceMetricsRequest is the request for the GetClusterInferenceMetrics function
+message GetClusterInferenceMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Start time for the inference metrics query.
+  google.protobuf.Timestamp since = 3 [(buf.validate.field).required = true];
+  // End time for the inference metrics query.
+  google.protobuf.Timestamp until = 4 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "get_cluster_inference_metrics.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
+  // Optional aggregation interval for histogram buckets.
+  optional InferenceMetricsInterval interval = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function
+message GetClusterInferenceMetricsResponse {
+  // Per-model inference token usage metrics for the cluster.
+  repeated ClusterInferenceModelMetrics models = 1;
+}
+
+// ClusterInferenceModelMetrics groups histogram data for a single inference model.
+message ClusterInferenceModelMetrics {
+  // Identifier of the inference model.
+  string inference_model_id = 1 [(buf.validate.field).string.min_len = 1];
+  // Aggregated histogram values for the inference model.
+  repeated Metric values = 2;
+}
+
+// GetClusterInferenceModelMetricsRequest is the request for the GetClusterInferenceModelMetrics function
+message GetClusterInferenceModelMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the inference model.
+  // This is a required field.
+  string inference_model_id = 3 [(buf.validate.field).string.min_len = 1];
+  // Start time for the inference metrics query.
+  google.protobuf.Timestamp since = 4 [(buf.validate.field).required = true];
+  // End time for the inference metrics query.
+  google.protobuf.Timestamp until = 5 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "get_cluster_inference_model_metrics.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
+  // Optional aggregation interval for histogram buckets.
+  optional InferenceMetricsInterval interval = 6 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function
+message GetClusterInferenceModelMetricsResponse {
+  // Aggregated histogram values for the requested inference model.
+  repeated Metric values = 1;
+}
+
 // ClusterNodeMetrics contains metric overview for a node.
 message ClusterNodeMetrics {
   // Unique identifier of the node.
@@ -281,4 +382,16 @@ enum Aggregator {
   AGGREGATOR_MAX = 3;
   // MIN aggregation function.
   AGGREGATOR_MIN = 4;
+}
+
+// InferenceMetricsInterval defines the histogram bucket size for inference metrics.
+enum InferenceMetricsInterval {
+  // Interval is unspecified; defaults to DAY.
+  INFERENCE_METRICS_INTERVAL_UNSPECIFIED = 0;
+  // Buckets are aggregated per day.
+  INFERENCE_METRICS_INTERVAL_DAY = 1;
+  // Buckets are aggregated per week.
+  INFERENCE_METRICS_INTERVAL_WEEK = 2;
+  // Buckets are aggregated per month.
+  INFERENCE_METRICS_INTERVAL_MONTH = 3;
 }

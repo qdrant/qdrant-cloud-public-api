@@ -126,6 +126,151 @@
         ]
       }
     },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/metrics/inference": {
+      "get": {
+        "summary": "Gets the inference token usage metrics aggregated per inference model for a cluster.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterInferenceMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterInferenceMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Start time for the inference metrics query.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "End time for the inference metrics query.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "interval",
+            "description": "Optional aggregation interval for histogram buckets.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+              "INFERENCE_METRICS_INTERVAL_DAY",
+              "INFERENCE_METRICS_INTERVAL_WEEK",
+              "INFERENCE_METRICS_INTERVAL_MONTH"
+            ],
+            "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/metrics/inference/{inferenceModelId}": {
+      "get": {
+        "summary": "Gets the inference token usage metrics for a specific inference model in a cluster.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterInferenceModelMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterInferenceModelMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inferenceModelId",
+            "description": "The identifier for the inference model.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Start time for the inference metrics query.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "End time for the inference metrics query.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "interval",
+            "description": "Optional aggregation interval for histogram buckets.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+              "INFERENCE_METRICS_INTERVAL_DAY",
+              "INFERENCE_METRICS_INTERVAL_WEEK",
+              "INFERENCE_METRICS_INTERVAL_MONTH"
+            ],
+            "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/summary-metrics": {
       "get": {
         "summary": "Gets the summary metrics of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
@@ -277,6 +422,24 @@
       "default": "AGGREGATOR_UNSPECIFIED",
       "description": "Aggregator defines how metrics should be aggregated over time.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function."
     },
+    "v1ClusterInferenceModelMetrics": {
+      "type": "object",
+      "properties": {
+        "inferenceModelId": {
+          "type": "string",
+          "description": "Identifier of the inference model."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Aggregated histogram values for the inference model."
+        }
+      },
+      "description": "ClusterInferenceModelMetrics groups histogram data for a single inference model."
+    },
     "v1ClusterMetricOverview": {
       "type": "object",
       "properties": {
@@ -401,6 +564,34 @@
       },
       "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
     },
+    "v1GetClusterInferenceMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterInferenceModelMetrics"
+          },
+          "description": "Per-model inference token usage metrics for the cluster."
+        }
+      },
+      "title": "GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function"
+    },
+    "v1GetClusterInferenceModelMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Aggregated histogram values for the requested inference model."
+        }
+      },
+      "title": "GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function"
+    },
     "v1GetClusterLogsResponse": {
       "type": "object",
       "properties": {
@@ -506,6 +697,17 @@
         }
       },
       "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"
+    },
+    "v1InferenceMetricsInterval": {
+      "type": "string",
+      "enum": [
+        "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+        "INFERENCE_METRICS_INTERVAL_DAY",
+        "INFERENCE_METRICS_INTERVAL_WEEK",
+        "INFERENCE_METRICS_INTERVAL_MONTH"
+      ],
+      "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+      "description": "InferenceMetricsInterval defines the histogram bucket size for inference metrics.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month."
     },
     "v1IntervalAverage": {
       "type": "object",

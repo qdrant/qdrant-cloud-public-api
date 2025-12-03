@@ -40,3 +40,21 @@ export const getClusterLogs = MonitoringService.method.getClusterLogs;
  * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents
  */
 export const getClusterEvents = MonitoringService.method.getClusterEvents;
+
+/**
+ * Gets the inference token usage metrics aggregated per inference model for a cluster.
+ * Required permissions:
+ * - read:clusters
+ *
+ * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics
+ */
+export const getClusterInferenceMetrics = MonitoringService.method.getClusterInferenceMetrics;
+
+/**
+ * Gets the inference token usage metrics for a specific inference model in a cluster.
+ * Required permissions:
+ * - read:clusters
+ *
+ * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceModelMetrics
+ */
+export const getClusterInferenceModelMetrics = MonitoringService.method.getClusterInferenceModelMetrics;

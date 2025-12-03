@@ -21,11 +21,22 @@ class Aggregator(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     AGGREGATOR_AVG: _ClassVar[Aggregator]
     AGGREGATOR_MAX: _ClassVar[Aggregator]
     AGGREGATOR_MIN: _ClassVar[Aggregator]
+
+class InferenceMetricsInterval(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    INFERENCE_METRICS_INTERVAL_UNSPECIFIED: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_DAY: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_WEEK: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_MONTH: _ClassVar[InferenceMetricsInterval]
 AGGREGATOR_UNSPECIFIED: Aggregator
 AGGREGATOR_SUM: Aggregator
 AGGREGATOR_AVG: Aggregator
 AGGREGATOR_MAX: Aggregator
 AGGREGATOR_MIN: Aggregator
+INFERENCE_METRICS_INTERVAL_UNSPECIFIED: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_DAY: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_WEEK: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_MONTH: InferenceMetricsInterval
 
 class GetClusterSummaryMetricsRequest(_message.Message):
     __slots__ = ()
@@ -112,6 +123,56 @@ class GetClusterEventsResponse(_message.Message):
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[LogEntry]
     def __init__(self, items: _Optional[_Iterable[_Union[LogEntry, _Mapping]]] = ...) -> None: ...
+
+class GetClusterInferenceMetricsRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    SINCE_FIELD_NUMBER: _ClassVar[int]
+    UNTIL_FIELD_NUMBER: _ClassVar[int]
+    INTERVAL_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    since: _timestamp_pb2.Timestamp
+    until: _timestamp_pb2.Timestamp
+    interval: InferenceMetricsInterval
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ...) -> None: ...
+
+class GetClusterInferenceMetricsResponse(_message.Message):
+    __slots__ = ()
+    MODELS_FIELD_NUMBER: _ClassVar[int]
+    models: _containers.RepeatedCompositeFieldContainer[ClusterInferenceModelMetrics]
+    def __init__(self, models: _Optional[_Iterable[_Union[ClusterInferenceModelMetrics, _Mapping]]] = ...) -> None: ...
+
+class ClusterInferenceModelMetrics(_message.Message):
+    __slots__ = ()
+    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    inference_model_id: str
+    values: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+
+class GetClusterInferenceModelMetricsRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+    SINCE_FIELD_NUMBER: _ClassVar[int]
+    UNTIL_FIELD_NUMBER: _ClassVar[int]
+    INTERVAL_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    inference_model_id: str
+    since: _timestamp_pb2.Timestamp
+    until: _timestamp_pb2.Timestamp
+    interval: InferenceMetricsInterval
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., inference_model_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ...) -> None: ...
+
+class GetClusterInferenceModelMetricsResponse(_message.Message):
+    __slots__ = ()
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    values: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeMetrics(_message.Message):
     __slots__ = ()
