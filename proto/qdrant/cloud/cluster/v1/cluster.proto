@@ -693,9 +693,10 @@ message DatabaseConfigurationCollection {
   optional uint32 replication_factor = 1 [(buf.validate.field).uint32.gte = 1];
   // How many replicas should apply the operation for us to consider it successful
   // This is an optional, the default is 1
-  int32 write_consistency_factor = 2 [(buf.validate.field).int32.gte = 1];
+  optional int32 write_consistency_factor = 2 [(buf.validate.field).int32.gte = 1];
   // The default parameters for vectors.
-  DatabaseConfigurationCollectionVectors vectors = 3 [(buf.validate.field).required = true];
+  // This is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults.
+  DatabaseConfigurationCollectionVectors vectors = 3;
 }
 
 // The default Qdrant database collection vectors configuration
