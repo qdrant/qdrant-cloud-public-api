@@ -67,28 +67,18 @@ service MonitoringService {
       field_expression: "cluster_id"
     };
   }
-  // Gets the inference token usage metrics aggregated per inference model for a cluster.
+  // Gets the inference token usage metrics for a cluster.
+  // Provide `inference_model_id` to limit the response to a single model.
   // Required permissions:
   // - read:clusters
   rpc GetClusterInferenceMetrics(GetClusterInferenceMetricsRequest) returns (GetClusterInferenceMetricsResponse) {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference"};
-    // log fields
-    option (common.v1.log_fields) = {
-      name: "cluster_id"
-      field_expression: "cluster_id"
+    option (google.api.http) = {
+      get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference"
+      additional_bindings: {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference/{inference_model_id}"}
     };
-  }
-  // Gets the inference token usage metrics for a specific inference model in a cluster.
-  // Required permissions:
-  // - read:clusters
-  rpc GetClusterInferenceModelMetrics(GetClusterInferenceModelMetricsRequest) returns (GetClusterInferenceModelMetricsResponse) {
-    // permissions
-    option (common.v1.permissions) = "read:clusters";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference/{inference_model_id}"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cluster_id"
@@ -243,6 +233,11 @@ message GetClusterInferenceMetricsRequest {
     defined_only: true
     not_in: [0]
   }];
+  // Optional model filter; unset returns metrics for all models.
+  oneof model_filter {
+    // Identifier for a specific inference model to filter metrics by.
+    string inference_model_id = 6 [(buf.validate.field).string.min_len = 1];
+  }
 }
 
 // GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function
@@ -257,40 +252,6 @@ message ClusterInferenceModelMetrics {
   string inference_model_id = 1 [(buf.validate.field).string.min_len = 1];
   // Aggregated histogram values for the inference model.
   repeated Metric values = 2;
-}
-
-// GetClusterInferenceModelMetricsRequest is the request for the GetClusterInferenceModelMetrics function
-message GetClusterInferenceModelMetricsRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cluster (in GUID format).
-  // This cluster should be part of the provided account.
-  // This is a required field.
-  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the inference model.
-  // This is a required field.
-  string inference_model_id = 3 [(buf.validate.field).string.min_len = 1];
-  // Start time for the inference metrics query.
-  google.protobuf.Timestamp since = 4 [(buf.validate.field).required = true];
-  // End time for the inference metrics query.
-  google.protobuf.Timestamp until = 5 [(buf.validate.field).required = true];
-  option (buf.validate.message).cel = {
-    id: "get_cluster_inference_model_metrics.until_gt_since"
-    message: "until must be after since"
-    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
-  };
-  // Optional aggregation interval for histogram buckets.
-  optional InferenceMetricsInterval interval = 6 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
-}
-
-// GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function
-message GetClusterInferenceModelMetricsResponse {
-  // Aggregated histogram values for the requested inference model.
-  repeated Metric values = 1;
 }
 
 // ClusterNodeMetrics contains metric overview for a node.

@@ -131,12 +131,14 @@ class GetClusterInferenceMetricsRequest(_message.Message):
     SINCE_FIELD_NUMBER: _ClassVar[int]
     UNTIL_FIELD_NUMBER: _ClassVar[int]
     INTERVAL_FIELD_NUMBER: _ClassVar[int]
+    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
     interval: InferenceMetricsInterval
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ...) -> None: ...
+    inference_model_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ..., inference_model_id: _Optional[str] = ...) -> None: ...
 
 class GetClusterInferenceMetricsResponse(_message.Message):
     __slots__ = ()
@@ -151,28 +153,6 @@ class ClusterInferenceModelMetrics(_message.Message):
     inference_model_id: str
     values: _containers.RepeatedCompositeFieldContainer[Metric]
     def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
-
-class GetClusterInferenceModelMetricsRequest(_message.Message):
-    __slots__ = ()
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
-    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
-    SINCE_FIELD_NUMBER: _ClassVar[int]
-    UNTIL_FIELD_NUMBER: _ClassVar[int]
-    INTERVAL_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    cluster_id: str
-    inference_model_id: str
-    since: _timestamp_pb2.Timestamp
-    until: _timestamp_pb2.Timestamp
-    interval: InferenceMetricsInterval
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., inference_model_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ...) -> None: ...
-
-class GetClusterInferenceModelMetricsResponse(_message.Message):
-    __slots__ = ()
-    VALUES_FIELD_NUMBER: _ClassVar[int]
-    values: _containers.RepeatedCompositeFieldContainer[Metric]
-    def __init__(self, values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeMetrics(_message.Message):
     __slots__ = ()

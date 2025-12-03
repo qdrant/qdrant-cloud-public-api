@@ -128,7 +128,7 @@
     },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/metrics/inference": {
       "get": {
-        "summary": "Gets the inference token usage metrics aggregated per inference model for a cluster.\nRequired permissions:\n- read:clusters",
+        "summary": "Gets the inference token usage metrics for a cluster.\nProvide `inference_model_id` to limit the response to a single model.\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_GetClusterInferenceMetrics",
         "responses": {
           "200": {
@@ -188,6 +188,13 @@
               "INFERENCE_METRICS_INTERVAL_MONTH"
             ],
             "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED"
+          },
+          {
+            "name": "inferenceModelId",
+            "description": "Identifier for a specific inference model to filter metrics by.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -197,13 +204,13 @@
     },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/metrics/inference/{inferenceModelId}": {
       "get": {
-        "summary": "Gets the inference token usage metrics for a specific inference model in a cluster.\nRequired permissions:\n- read:clusters",
-        "operationId": "MonitoringService_GetClusterInferenceModelMetrics",
+        "summary": "Gets the inference token usage metrics for a cluster.\nProvide `inference_model_id` to limit the response to a single model.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterInferenceMetrics2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetClusterInferenceModelMetricsResponse"
+              "$ref": "#/definitions/v1GetClusterInferenceMetricsResponse"
             }
           },
           "default": {
@@ -230,7 +237,7 @@
           },
           {
             "name": "inferenceModelId",
-            "description": "The identifier for the inference model.\nThis is a required field.",
+            "description": "Identifier for a specific inference model to filter metrics by.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -577,20 +584,6 @@
         }
       },
       "title": "GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function"
-    },
-    "v1GetClusterInferenceModelMetricsResponse": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1Metric"
-          },
-          "description": "Aggregated histogram values for the requested inference model."
-        }
-      },
-      "title": "GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function"
     },
     "v1GetClusterLogsResponse": {
       "type": "object",

@@ -486,6 +486,21 @@ export declare type GetClusterInferenceMetricsRequest = Message<"qdrant.cloud.mo
    * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 5;
    */
   interval?: InferenceMetricsInterval;
+
+  /**
+   * Optional model filter; unset returns metrics for all models.
+   *
+   * @generated from oneof qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.model_filter
+   */
+  modelFilter: {
+    /**
+     * Identifier for a specific inference model to filter metrics by.
+     *
+     * @generated from field: string inference_model_id = 6;
+     */
+    value: string;
+    case: "inferenceModelId";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -531,6 +546,21 @@ export declare type GetClusterInferenceMetricsRequestValid = Message<"qdrant.clo
    * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 5;
    */
   interval?: InferenceMetricsInterval;
+
+  /**
+   * Optional model filter; unset returns metrics for all models.
+   *
+   * @generated from oneof qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.model_filter
+   */
+  modelFilter: {
+    /**
+     * Identifier for a specific inference model to filter metrics by.
+     *
+     * @generated from field: string inference_model_id = 6;
+     */
+    value: string;
+    case: "inferenceModelId";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -620,152 +650,6 @@ export declare type ClusterInferenceModelMetricsValid = Message<"qdrant.cloud.mo
  * Use `create(ClusterInferenceModelMetricsSchema)` to create a new message.
  */
 export declare const ClusterInferenceModelMetricsSchema: GenMessage<ClusterInferenceModelMetrics, {validType: ClusterInferenceModelMetricsValid}>;
-
-/**
- * GetClusterInferenceModelMetricsRequest is the request for the GetClusterInferenceModelMetrics function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsRequest
- */
-export declare type GetClusterInferenceModelMetricsRequest = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the cluster (in GUID format).
-   * This cluster should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string cluster_id = 2;
-   */
-  clusterId: string;
-
-  /**
-   * The identifier for the inference model.
-   * This is a required field.
-   *
-   * @generated from field: string inference_model_id = 3;
-   */
-  inferenceModelId: string;
-
-  /**
-   * Start time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp since = 4;
-   */
-  since?: Timestamp;
-
-  /**
-   * End time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp until = 5;
-   */
-  until?: Timestamp;
-
-  /**
-   * Optional aggregation interval for histogram buckets.
-   *
-   * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 6;
-   */
-  interval?: InferenceMetricsInterval;
-};
-
-/**
- * GetClusterInferenceModelMetricsRequest is the request for the GetClusterInferenceModelMetrics function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsRequest
- */
-export declare type GetClusterInferenceModelMetricsRequestValid = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the cluster (in GUID format).
-   * This cluster should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string cluster_id = 2;
-   */
-  clusterId: string;
-
-  /**
-   * The identifier for the inference model.
-   * This is a required field.
-   *
-   * @generated from field: string inference_model_id = 3;
-   */
-  inferenceModelId: string;
-
-  /**
-   * Start time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp since = 4;
-   */
-  since: Timestamp;
-
-  /**
-   * End time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp until = 5;
-   */
-  until: Timestamp;
-
-  /**
-   * Optional aggregation interval for histogram buckets.
-   *
-   * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 6;
-   */
-  interval?: InferenceMetricsInterval;
-};
-
-/**
- * Describes the message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsRequest.
- * Use `create(GetClusterInferenceModelMetricsRequestSchema)` to create a new message.
- */
-export declare const GetClusterInferenceModelMetricsRequestSchema: GenMessage<GetClusterInferenceModelMetricsRequest, {validType: GetClusterInferenceModelMetricsRequestValid}>;
-
-/**
- * GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsResponse
- */
-export declare type GetClusterInferenceModelMetricsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsResponse"> & {
-  /**
-   * Aggregated histogram values for the requested inference model.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 1;
-   */
-  values: Metric[];
-};
-
-/**
- * GetClusterInferenceModelMetricsResponse is the response from the GetClusterInferenceModelMetrics function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsResponse
- */
-export declare type GetClusterInferenceModelMetricsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsResponse"> & {
-  /**
-   * Aggregated histogram values for the requested inference model.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 1;
-   */
-  values: MetricValid[];
-};
-
-/**
- * Describes the message qdrant.cloud.monitoring.v1.GetClusterInferenceModelMetricsResponse.
- * Use `create(GetClusterInferenceModelMetricsResponseSchema)` to create a new message.
- */
-export declare const GetClusterInferenceModelMetricsResponseSchema: GenMessage<GetClusterInferenceModelMetricsResponse, {validType: GetClusterInferenceModelMetricsResponseValid}>;
 
 /**
  * ClusterNodeMetrics contains metric overview for a node.
@@ -1369,7 +1253,8 @@ export declare const MonitoringService: GenService<{
     output: typeof GetClusterEventsResponseSchema;
   },
   /**
-   * Gets the inference token usage metrics aggregated per inference model for a cluster.
+   * Gets the inference token usage metrics for a cluster.
+   * Provide `inference_model_id` to limit the response to a single model.
    * Required permissions:
    * - read:clusters
    *
@@ -1379,18 +1264,6 @@ export declare const MonitoringService: GenService<{
     methodKind: "unary";
     input: typeof GetClusterInferenceMetricsRequestSchema;
     output: typeof GetClusterInferenceMetricsResponseSchema;
-  },
-  /**
-   * Gets the inference token usage metrics for a specific inference model in a cluster.
-   * Required permissions:
-   * - read:clusters
-   *
-   * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceModelMetrics
-   */
-  getClusterInferenceModelMetrics: {
-    methodKind: "unary";
-    input: typeof GetClusterInferenceModelMetricsRequestSchema;
-    output: typeof GetClusterInferenceModelMetricsResponseSchema;
   },
 }>;
 

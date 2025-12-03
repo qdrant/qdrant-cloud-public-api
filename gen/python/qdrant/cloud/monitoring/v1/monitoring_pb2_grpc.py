@@ -40,11 +40,6 @@ class MonitoringServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.FromString,
                 _registered_method=True)
-        self.GetClusterInferenceModelMetrics = channel.unary_unary(
-                '/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterInferenceModelMetrics',
-                request_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsResponse.FromString,
-                _registered_method=True)
 
 
 class MonitoringServiceServicer(object):
@@ -89,16 +84,8 @@ class MonitoringServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetClusterInferenceMetrics(self, request, context):
-        """Gets the inference token usage metrics aggregated per inference model for a cluster.
-        Required permissions:
-        - read:clusters
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetClusterInferenceModelMetrics(self, request, context):
-        """Gets the inference token usage metrics for a specific inference model in a cluster.
+        """Gets the inference token usage metrics for a cluster.
+        Provide `inference_model_id` to limit the response to a single model.
         Required permissions:
         - read:clusters
         """
@@ -133,11 +120,6 @@ def add_MonitoringServiceServicer_to_server(servicer, server):
                     servicer.GetClusterInferenceMetrics,
                     request_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.SerializeToString,
-            ),
-            'GetClusterInferenceModelMetrics': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetClusterInferenceModelMetrics,
-                    request_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -276,33 +258,6 @@ class MonitoringService(object):
             '/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterInferenceMetrics',
             qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.SerializeToString,
             qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetClusterInferenceModelMetrics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterInferenceModelMetrics',
-            qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceModelMetricsResponse.FromString,
             options,
             channel_credentials,
             insecure,

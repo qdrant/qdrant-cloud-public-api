@@ -38,18 +38,11 @@ export const getClusterLogs: typeof MonitoringService["method"]["getClusterLogs"
  */
 export const getClusterEvents: typeof MonitoringService["method"]["getClusterEvents"];
 /**
- * Gets the inference token usage metrics aggregated per inference model for a cluster.
+ * Gets the inference token usage metrics for a cluster.
+ * Provide `inference_model_id` to limit the response to a single model.
  * Required permissions:
  * - read:clusters
  *
  * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics
  */
 export const getClusterInferenceMetrics: typeof MonitoringService["method"]["getClusterInferenceMetrics"];
-/**
- * Gets the inference token usage metrics for a specific inference model in a cluster.
- * Required permissions:
- * - read:clusters
- *
- * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceModelMetrics
- */
-export const getClusterInferenceModelMetrics: typeof MonitoringService["method"]["getClusterInferenceModelMetrics"];
