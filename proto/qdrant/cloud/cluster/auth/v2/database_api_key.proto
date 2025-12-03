@@ -266,8 +266,8 @@ message CollectionAccessRule {
   // The name of the collection.
   // This is a required field.
   string collection_name = 1 [(buf.validate.field).string = {
-    min_len: 4
-    max_len: 64
+    min_len: 1
+    max_len: 255
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The type of access granted for the collection.
