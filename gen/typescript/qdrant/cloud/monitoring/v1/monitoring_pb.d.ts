@@ -467,16 +467,18 @@ export declare type GetClusterInferenceMetricsRequest = Message<"qdrant.cloud.mo
   clusterId: string;
 
   /**
-   * Start time for the inference metrics query.
+   * Optional start time for the inference metrics query.
+   * If omitted, defaults to 7 days ago.
    *
-   * @generated from field: google.protobuf.Timestamp since = 3;
+   * @generated from field: optional google.protobuf.Timestamp since = 3;
    */
   since?: Timestamp;
 
   /**
-   * End time for the inference metrics query.
+   * Optional end time for the inference metrics query.
+   * If omitted, defaults to current time.
    *
-   * @generated from field: google.protobuf.Timestamp until = 4;
+   * @generated from field: optional google.protobuf.Timestamp until = 4;
    */
   until?: Timestamp;
 
@@ -488,80 +490,14 @@ export declare type GetClusterInferenceMetricsRequest = Message<"qdrant.cloud.mo
   interval?: InferenceMetricsInterval;
 
   /**
-   * Optional model filter; unset returns metrics for all models.
+   * Optional identifier for a specific inference model to filter metrics by.
    *
-   * @generated from oneof qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.model_filter
+   * @generated from field: optional string inference_model_id = 6;
    */
-  modelFilter: {
-    /**
-     * Identifier for a specific inference model to filter metrics by.
-     *
-     * @generated from field: string inference_model_id = 6;
-     */
-    value: string;
-    case: "inferenceModelId";
-  } | { case: undefined; value?: undefined };
+  inferenceModelId?: string;
 };
 
-/**
- * GetClusterInferenceMetricsRequest is the request for the GetClusterInferenceMetrics function
- *
- * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest
- */
-export declare type GetClusterInferenceMetricsRequestValid = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the cluster (in GUID format).
-   * This cluster should be part of the provided account.
-   * This is a required field.
-   *
-   * @generated from field: string cluster_id = 2;
-   */
-  clusterId: string;
-
-  /**
-   * Start time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp since = 3;
-   */
-  since: Timestamp;
-
-  /**
-   * End time for the inference metrics query.
-   *
-   * @generated from field: google.protobuf.Timestamp until = 4;
-   */
-  until: Timestamp;
-
-  /**
-   * Optional aggregation interval for histogram buckets.
-   *
-   * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 5;
-   */
-  interval?: InferenceMetricsInterval;
-
-  /**
-   * Optional model filter; unset returns metrics for all models.
-   *
-   * @generated from oneof qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.model_filter
-   */
-  modelFilter: {
-    /**
-     * Identifier for a specific inference model to filter metrics by.
-     *
-     * @generated from field: string inference_model_id = 6;
-     */
-    value: string;
-    case: "inferenceModelId";
-  } | { case: undefined; value?: undefined };
-};
+export declare type GetClusterInferenceMetricsRequestValid = GetClusterInferenceMetricsRequest;
 
 /**
  * Describes the message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.

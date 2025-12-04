@@ -75,10 +75,7 @@ service MonitoringService {
     // permissions
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
-    option (google.api.http) = {
-      get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference"
-      additional_bindings: {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference/{inference_model_id}"}
-    };
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cluster_id"
@@ -219,10 +216,12 @@ message GetClusterInferenceMetricsRequest {
   // This cluster should be part of the provided account.
   // This is a required field.
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // Start time for the inference metrics query.
-  google.protobuf.Timestamp since = 3 [(buf.validate.field).required = true];
-  // End time for the inference metrics query.
-  google.protobuf.Timestamp until = 4 [(buf.validate.field).required = true];
+  // Optional start time for the inference metrics query.
+  // If omitted, defaults to 7 days ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the inference metrics query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
   option (buf.validate.message).cel = {
     id: "get_cluster_inference_metrics.until_gt_since"
     message: "until must be after since"
@@ -233,11 +232,8 @@ message GetClusterInferenceMetricsRequest {
     defined_only: true
     not_in: [0]
   }];
-  // Optional model filter; unset returns metrics for all models.
-  oneof model_filter {
-    // Identifier for a specific inference model to filter metrics by.
-    string inference_model_id = 6 [(buf.validate.field).string.min_len = 1];
-  }
+  // Optional identifier for a specific inference model to filter metrics by.
+  optional string inference_model_id = 6 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function

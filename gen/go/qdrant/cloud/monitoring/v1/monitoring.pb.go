@@ -712,20 +712,18 @@ type GetClusterInferenceMetricsRequest struct {
 	// This cluster should be part of the provided account.
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Start time for the inference metrics query.
-	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3" json:"since,omitempty"`
-	// End time for the inference metrics query.
-	Until *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3" json:"until,omitempty"`
+	// Optional start time for the inference metrics query.
+	// If omitted, defaults to 7 days ago.
+	Since *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=since,proto3,oneof" json:"since,omitempty"`
+	// Optional end time for the inference metrics query.
+	// If omitted, defaults to current time.
+	Until *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
 	// Optional aggregation interval for histogram buckets.
 	Interval *InferenceMetricsInterval `protobuf:"varint,5,opt,name=interval,proto3,enum=qdrant.cloud.monitoring.v1.InferenceMetricsInterval,oneof" json:"interval,omitempty"`
-	// Optional model filter; unset returns metrics for all models.
-	//
-	// Types that are valid to be assigned to ModelFilter:
-	//
-	//	*GetClusterInferenceMetricsRequest_InferenceModelId
-	ModelFilter   isGetClusterInferenceMetricsRequest_ModelFilter `protobuf_oneof:"model_filter"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Optional identifier for a specific inference model to filter metrics by.
+	InferenceModelId *string `protobuf:"bytes,6,opt,name=inference_model_id,json=inferenceModelId,proto3,oneof" json:"inference_model_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GetClusterInferenceMetricsRequest) Reset() {
@@ -793,32 +791,11 @@ func (x *GetClusterInferenceMetricsRequest) GetInterval() InferenceMetricsInterv
 	return InferenceMetricsInterval_INFERENCE_METRICS_INTERVAL_UNSPECIFIED
 }
 
-func (x *GetClusterInferenceMetricsRequest) GetModelFilter() isGetClusterInferenceMetricsRequest_ModelFilter {
-	if x != nil {
-		return x.ModelFilter
-	}
-	return nil
-}
-
 func (x *GetClusterInferenceMetricsRequest) GetInferenceModelId() string {
-	if x != nil {
-		if x, ok := x.ModelFilter.(*GetClusterInferenceMetricsRequest_InferenceModelId); ok {
-			return x.InferenceModelId
-		}
+	if x != nil && x.InferenceModelId != nil {
+		return *x.InferenceModelId
 	}
 	return ""
-}
-
-type isGetClusterInferenceMetricsRequest_ModelFilter interface {
-	isGetClusterInferenceMetricsRequest_ModelFilter()
-}
-
-type GetClusterInferenceMetricsRequest_InferenceModelId struct {
-	// Identifier for a specific inference model to filter metrics by.
-	InferenceModelId string `protobuf:"bytes,6,opt,name=inference_model_id,json=inferenceModelId,proto3,oneof"`
-}
-
-func (*GetClusterInferenceMetricsRequest_InferenceModelId) isGetClusterInferenceMetricsRequest_ModelFilter() {
 }
 
 // GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function
@@ -1458,20 +1435,22 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x06_sinceB\b\n" +
 	"\x06_until\"V\n" +
 	"\x18GetClusterEventsResponse\x12:\n" +
-	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xb6\x04\n" +
+	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xce\x04\n" +
 	"!GetClusterInferenceMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x128\n" +
-	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05since\x128\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05until\x12a\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
+	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12a\n" +
 	"\binterval\x18\x05 \x01(\x0e24.qdrant.cloud.monitoring.v1.InferenceMetricsIntervalB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\binterval\x88\x01\x01\x127\n" +
-	"\x12inference_model_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x10inferenceModelId:\x91\x01\xbaH\x8d\x01\x1a\x8a\x01\n" +
-	",get_cluster_inference_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x0e\n" +
-	"\fmodel_filterB\v\n" +
-	"\t_interval\"v\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\binterval\x88\x01\x01\x12:\n" +
+	"\x12inference_model_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x10inferenceModelId\x88\x01\x01:\x91\x01\xbaH\x8d\x01\x1a\x8a\x01\n" +
+	",get_cluster_inference_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
+	"\x06_sinceB\b\n" +
+	"\x06_untilB\v\n" +
+	"\t_intervalB\x15\n" +
+	"\x13_inference_model_id\"v\n" +
 	"\"GetClusterInferenceMetricsResponse\x12P\n" +
 	"\x06models\x18\x01 \x03(\v28.qdrant.cloud.monitoring.v1.ClusterInferenceModelMetricsR\x06models\"\x91\x01\n" +
 	"\x1cClusterInferenceModelMetrics\x125\n" +
@@ -1519,7 +1498,8 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"&INFERENCE_METRICS_INTERVAL_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eINFERENCE_METRICS_INTERVAL_DAY\x10\x01\x12#\n" +
 	"\x1fINFERENCE_METRICS_INTERVAL_WEEK\x10\x02\x12$\n" +
-	" INFERENCE_METRICS_INTERVAL_MONTH\x10\x032\xc1\v\n" +
+	" INFERENCE_METRICS_INTERVAL_MONTH\x10\x032\xd8\n" +
+	"\n" +
 	"\x11MonitoringService\x12\x9a\x02\n" +
 	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x82\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -1536,11 +1516,11 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x10GetClusterEvents\x123.qdrant.cloud.monitoring.v1.GetClusterEventsRequest\x1a4.qdrant.cloud.monitoring.v1.GetClusterEventsResponse\"y\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events\x12\x8b\x03\n" +
-	"\x1aGetClusterInferenceMetrics\x12=.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest\x1a>.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse\"\xed\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events\x12\xa2\x02\n" +
+	"\x1aGetClusterInferenceMetrics\x12=.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest\x1a>.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse\"\x84\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02\xb9\x01Zf\x12d/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference/{inference_model_id}\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inferenceB\x96\x02\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02Q\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inferenceB\x96\x02\n" +
 	"\x1ecom.qdrant.cloud.monitoring.v1B\x0fMonitoringProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/monitoring/v1;monitoringv1\xa2\x02\x03QCM\xaa\x02\x1aQdrant.Cloud.Monitoring.V1\xca\x02\x1aQdrant\\Cloud\\Monitoring\\V1\xe2\x02&Qdrant\\Cloud\\Monitoring\\V1\\GPBMetadata\xea\x02\x1dQdrant::Cloud::Monitoring::V1b\x06proto3"
 
 var (
@@ -1648,9 +1628,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_init() {
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[4].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[6].OneofWrappers = []any{}
-	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8].OneofWrappers = []any{
-		(*GetClusterInferenceMetricsRequest_InferenceModelId)(nil),
-	}
+	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
