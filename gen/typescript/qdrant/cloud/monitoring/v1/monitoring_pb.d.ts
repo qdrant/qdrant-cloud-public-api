@@ -444,6 +444,150 @@ export declare type GetClusterEventsResponseValid = Message<"qdrant.cloud.monito
 export declare const GetClusterEventsResponseSchema: GenMessage<GetClusterEventsResponse, {validType: GetClusterEventsResponseValid}>;
 
 /**
+ * GetClusterInferenceMetricsRequest is the request for the GetClusterInferenceMetrics function
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest
+ */
+export declare type GetClusterInferenceMetricsRequest = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cluster (in GUID format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+
+  /**
+   * Optional start time for the inference metrics query.
+   * If omitted, defaults to 7 days ago.
+   *
+   * @generated from field: optional google.protobuf.Timestamp since = 3;
+   */
+  since?: Timestamp;
+
+  /**
+   * Optional end time for the inference metrics query.
+   * If omitted, defaults to current time.
+   *
+   * @generated from field: optional google.protobuf.Timestamp until = 4;
+   */
+  until?: Timestamp;
+
+  /**
+   * Optional aggregation interval for histogram buckets.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.InferenceMetricsInterval interval = 5;
+   */
+  interval?: InferenceMetricsInterval;
+
+  /**
+   * Optional identifier for a specific inference model to filter metrics by.
+   *
+   * @generated from field: optional string inference_model_id = 6;
+   */
+  inferenceModelId?: string;
+};
+
+export declare type GetClusterInferenceMetricsRequestValid = GetClusterInferenceMetricsRequest;
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.
+ * Use `create(GetClusterInferenceMetricsRequestSchema)` to create a new message.
+ */
+export declare const GetClusterInferenceMetricsRequestSchema: GenMessage<GetClusterInferenceMetricsRequest, {validType: GetClusterInferenceMetricsRequestValid}>;
+
+/**
+ * GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse
+ */
+export declare type GetClusterInferenceMetricsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse"> & {
+  /**
+   * Per-model inference token usage metrics for the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics models = 1;
+   */
+  models: ClusterInferenceModelMetrics[];
+};
+
+/**
+ * GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse
+ */
+export declare type GetClusterInferenceMetricsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse"> & {
+  /**
+   * Per-model inference token usage metrics for the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics models = 1;
+   */
+  models: ClusterInferenceModelMetricsValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse.
+ * Use `create(GetClusterInferenceMetricsResponseSchema)` to create a new message.
+ */
+export declare const GetClusterInferenceMetricsResponseSchema: GenMessage<GetClusterInferenceMetricsResponse, {validType: GetClusterInferenceMetricsResponseValid}>;
+
+/**
+ * ClusterInferenceModelMetrics groups histogram data for a single inference model.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics
+ */
+export declare type ClusterInferenceModelMetrics = Message<"qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics"> & {
+  /**
+   * Identifier of the inference model.
+   *
+   * @generated from field: string inference_model_id = 1;
+   */
+  inferenceModelId: string;
+
+  /**
+   * Aggregated histogram values for the inference model.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 2;
+   */
+  values: Metric[];
+};
+
+/**
+ * ClusterInferenceModelMetrics groups histogram data for a single inference model.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics
+ */
+export declare type ClusterInferenceModelMetricsValid = Message<"qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics"> & {
+  /**
+   * Identifier of the inference model.
+   *
+   * @generated from field: string inference_model_id = 1;
+   */
+  inferenceModelId: string;
+
+  /**
+   * Aggregated histogram values for the inference model.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 2;
+   */
+  values: MetricValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics.
+ * Use `create(ClusterInferenceModelMetricsSchema)` to create a new message.
+ */
+export declare const ClusterInferenceModelMetricsSchema: GenMessage<ClusterInferenceModelMetrics, {validType: ClusterInferenceModelMetricsValid}>;
+
+/**
  * ClusterNodeMetrics contains metric overview for a node.
  *
  * @generated from message qdrant.cloud.monitoring.v1.ClusterNodeMetrics
@@ -950,6 +1094,46 @@ export enum Aggregator {
 export declare const AggregatorSchema: GenEnum<Aggregator>;
 
 /**
+ * InferenceMetricsInterval defines the histogram bucket size for inference metrics.
+ *
+ * @generated from enum qdrant.cloud.monitoring.v1.InferenceMetricsInterval
+ */
+export enum InferenceMetricsInterval {
+  /**
+   * Interval is unspecified; defaults to DAY.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Buckets are aggregated per day.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_DAY = 1;
+   */
+  DAY = 1,
+
+  /**
+   * Buckets are aggregated per week.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_WEEK = 2;
+   */
+  WEEK = 2,
+
+  /**
+   * Buckets are aggregated per month.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_MONTH = 3;
+   */
+  MONTH = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.monitoring.v1.InferenceMetricsInterval.
+ */
+export declare const InferenceMetricsIntervalSchema: GenEnum<InferenceMetricsInterval>;
+
+/**
  * MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
  *
  * @generated from service qdrant.cloud.monitoring.v1.MonitoringService
@@ -1003,6 +1187,19 @@ export declare const MonitoringService: GenService<{
     methodKind: "unary";
     input: typeof GetClusterEventsRequestSchema;
     output: typeof GetClusterEventsResponseSchema;
+  },
+  /**
+   * Gets the inference token usage metrics for a cluster.
+   * Provide `inference_model_id` to limit the response to a single model.
+   * Required permissions:
+   * - read:clusters
+   *
+   * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics
+   */
+  getClusterInferenceMetrics: {
+    methodKind: "unary";
+    input: typeof GetClusterInferenceMetricsRequestSchema;
+    output: typeof GetClusterInferenceMetricsResponseSchema;
   },
 }>;
 

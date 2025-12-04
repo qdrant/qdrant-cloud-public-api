@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MonitoringService_GetClusterSummaryMetrics_FullMethodName = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterSummaryMetrics"
-	MonitoringService_GetClusterUsageMetrics_FullMethodName   = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterUsageMetrics"
-	MonitoringService_GetClusterLogs_FullMethodName           = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterLogs"
-	MonitoringService_GetClusterEvents_FullMethodName         = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterEvents"
+	MonitoringService_GetClusterSummaryMetrics_FullMethodName   = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterSummaryMetrics"
+	MonitoringService_GetClusterUsageMetrics_FullMethodName     = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterUsageMetrics"
+	MonitoringService_GetClusterLogs_FullMethodName             = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterLogs"
+	MonitoringService_GetClusterEvents_FullMethodName           = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterEvents"
+	MonitoringService_GetClusterInferenceMetrics_FullMethodName = "/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterInferenceMetrics"
 )
 
 // MonitoringServiceClient is the client API for MonitoringService service.
@@ -48,6 +49,11 @@ type MonitoringServiceClient interface {
 	// Required permissions:
 	// - read:clusters
 	GetClusterEvents(ctx context.Context, in *GetClusterEventsRequest, opts ...grpc.CallOption) (*GetClusterEventsResponse, error)
+	// Gets the inference token usage metrics for a cluster.
+	// Provide `inference_model_id` to limit the response to a single model.
+	// Required permissions:
+	// - read:clusters
+	GetClusterInferenceMetrics(ctx context.Context, in *GetClusterInferenceMetricsRequest, opts ...grpc.CallOption) (*GetClusterInferenceMetricsResponse, error)
 }
 
 type monitoringServiceClient struct {
@@ -98,6 +104,16 @@ func (c *monitoringServiceClient) GetClusterEvents(ctx context.Context, in *GetC
 	return out, nil
 }
 
+func (c *monitoringServiceClient) GetClusterInferenceMetrics(ctx context.Context, in *GetClusterInferenceMetricsRequest, opts ...grpc.CallOption) (*GetClusterInferenceMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetClusterInferenceMetricsResponse)
+	err := c.cc.Invoke(ctx, MonitoringService_GetClusterInferenceMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MonitoringServiceServer is the server API for MonitoringService service.
 // All implementations must embed UnimplementedMonitoringServiceServer
 // for forward compatibility.
@@ -121,6 +137,11 @@ type MonitoringServiceServer interface {
 	// Required permissions:
 	// - read:clusters
 	GetClusterEvents(context.Context, *GetClusterEventsRequest) (*GetClusterEventsResponse, error)
+	// Gets the inference token usage metrics for a cluster.
+	// Provide `inference_model_id` to limit the response to a single model.
+	// Required permissions:
+	// - read:clusters
+	GetClusterInferenceMetrics(context.Context, *GetClusterInferenceMetricsRequest) (*GetClusterInferenceMetricsResponse, error)
 	mustEmbedUnimplementedMonitoringServiceServer()
 }
 
@@ -142,6 +163,9 @@ func (UnimplementedMonitoringServiceServer) GetClusterLogs(context.Context, *Get
 }
 func (UnimplementedMonitoringServiceServer) GetClusterEvents(context.Context, *GetClusterEventsRequest) (*GetClusterEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClusterEvents not implemented")
+}
+func (UnimplementedMonitoringServiceServer) GetClusterInferenceMetrics(context.Context, *GetClusterInferenceMetricsRequest) (*GetClusterInferenceMetricsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClusterInferenceMetrics not implemented")
 }
 func (UnimplementedMonitoringServiceServer) mustEmbedUnimplementedMonitoringServiceServer() {}
 func (UnimplementedMonitoringServiceServer) testEmbeddedByValue()                           {}
@@ -236,6 +260,24 @@ func _MonitoringService_GetClusterEvents_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MonitoringService_GetClusterInferenceMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClusterInferenceMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MonitoringServiceServer).GetClusterInferenceMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MonitoringService_GetClusterInferenceMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MonitoringServiceServer).GetClusterInferenceMetrics(ctx, req.(*GetClusterInferenceMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MonitoringService_ServiceDesc is the grpc.ServiceDesc for MonitoringService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +300,10 @@ var MonitoringService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClusterEvents",
 			Handler:    _MonitoringService_GetClusterEvents_Handler,
+		},
+		{
+			MethodName: "GetClusterInferenceMetrics",
+			Handler:    _MonitoringService_GetClusterInferenceMetrics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
