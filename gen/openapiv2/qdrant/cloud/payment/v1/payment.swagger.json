@@ -539,27 +539,27 @@
         },
         "city": {
           "type": "string",
-          "description": "The city of the billing address."
+          "description": "The city of the billing address.\nThis is an optional field."
         },
         "state": {
           "type": "string",
-          "description": "The state or province of the billing address."
+          "description": "The state or province of the billing address.\nThis is an optional field."
         },
         "country": {
           "type": "string",
-          "description": "The country of the billing address."
+          "description": "The country of the billing address.\nThe format should be a two-letter country code ISO 3166-1 alpha-2\nsee https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2."
         },
         "countryFormatted": {
           "type": "string",
-          "description": "The formatted country name."
+          "description": "The formatted country name.\nThis is an read-only field, and filled out by the system."
         },
         "stateFormatted": {
           "type": "string",
-          "description": "The formatted state or province name."
+          "description": "The formatted state or province name.\nThis is an read-only field, and filled out by the system."
         },
         "taxSupportedCountry": {
           "type": "boolean",
-          "description": "Indicates if the country supports tax."
+          "description": "Indicates if the country supports tax.\nThis is an read-only field, and filled out by the system."
         }
       },
       "description": "Represents a billing address for a payment method."
