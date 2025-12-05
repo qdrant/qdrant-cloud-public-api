@@ -2594,6 +2594,13 @@ export enum ClusterNodeState {
    * @generated from enum value: CLUSTER_NODE_STATE_SUSPENDED = 4;
    */
   SUSPENDED = 4,
+
+  /**
+   * The node is started but still needs to do some operations to recover.
+   *
+   * @generated from enum value: CLUSTER_NODE_STATE_RECOVERING = 5;
+   */
+  RECOVERING = 5,
 }
 
 /**

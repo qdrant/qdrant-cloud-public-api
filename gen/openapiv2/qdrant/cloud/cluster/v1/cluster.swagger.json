@@ -945,10 +945,11 @@
         "CLUSTER_NODE_STATE_STARTING",
         "CLUSTER_NODE_STATE_HEALTHY",
         "CLUSTER_NODE_STATE_UNHEALTHY",
-        "CLUSTER_NODE_STATE_SUSPENDED"
+        "CLUSTER_NODE_STATE_SUSPENDED",
+        "CLUSTER_NODE_STATE_RECOVERING"
       ],
       "default": "CLUSTER_NODE_STATE_UNSPECIFIED",
-      "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended."
+      "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended.\n - CLUSTER_NODE_STATE_RECOVERING: The node is started but still needs to do some operations to recover."
     },
     "v1ClusterPhase": {
       "type": "string",

@@ -93,6 +93,7 @@ class ClusterNodeState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_NODE_STATE_HEALTHY: _ClassVar[ClusterNodeState]
     CLUSTER_NODE_STATE_UNHEALTHY: _ClassVar[ClusterNodeState]
     CLUSTER_NODE_STATE_SUSPENDED: _ClassVar[ClusterNodeState]
+    CLUSTER_NODE_STATE_RECOVERING: _ClassVar[ClusterNodeState]
 
 class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -152,6 +153,7 @@ CLUSTER_NODE_STATE_STARTING: ClusterNodeState
 CLUSTER_NODE_STATE_HEALTHY: ClusterNodeState
 CLUSTER_NODE_STATE_UNHEALTHY: ClusterNodeState
 CLUSTER_NODE_STATE_SUSPENDED: ClusterNodeState
+CLUSTER_NODE_STATE_RECOVERING: ClusterNodeState
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus

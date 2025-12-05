@@ -917,6 +917,8 @@ enum ClusterNodeState {
   CLUSTER_NODE_STATE_UNHEALTHY = 3;
   // The node is suspended.
   CLUSTER_NODE_STATE_SUSPENDED = 4;
+  // The node is started but still needs to do some operations to recover.
+  CLUSTER_NODE_STATE_RECOVERING = 5;
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
