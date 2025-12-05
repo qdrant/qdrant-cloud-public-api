@@ -1185,7 +1185,7 @@ export declare const AccountService: GenService<{
   /**
    * Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
    * Required permissions:
-   * - read:accounts
+   * - None (authenticated only)
    *
    * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccounts
    */
