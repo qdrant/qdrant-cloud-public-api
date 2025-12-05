@@ -11,12 +11,12 @@ import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
 service AccountService {
-  // Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+  // Lists all accounts associated with the authenticated actor.
   // Required permissions:
-  // - read:accounts
+  // - None (authenticated only)
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
     // permissions
-    option (common.v1.permissions) = ""; // check must be performed in the implementation
+    option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call

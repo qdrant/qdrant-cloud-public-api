@@ -102,9 +102,9 @@ class AccountServiceServicer(object):
     """
 
     def ListAccounts(self, request, context):
-        """Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+        """Lists all accounts associated with the authenticated actor.
         Required permissions:
-        - read:accounts
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

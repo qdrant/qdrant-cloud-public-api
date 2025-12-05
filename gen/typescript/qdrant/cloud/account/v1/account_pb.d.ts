@@ -1183,9 +1183,9 @@ export declare const AccountInviteStatusSchema: GenEnum<AccountInviteStatus>;
  */
 export declare const AccountService: GenService<{
   /**
-   * Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+   * Lists all accounts associated with the authenticated actor.
    * Required permissions:
-   * - read:accounts
+   * - None (authenticated only)
    *
    * @generated from rpc qdrant.cloud.account.v1.AccountService.ListAccounts
    */
