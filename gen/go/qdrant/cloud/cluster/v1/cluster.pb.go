@@ -564,6 +564,8 @@ const (
 	ClusterNodeState_CLUSTER_NODE_STATE_UNHEALTHY ClusterNodeState = 3
 	// The node is suspended.
 	ClusterNodeState_CLUSTER_NODE_STATE_SUSPENDED ClusterNodeState = 4
+	// The node is started but still needs to do some operations to recover.
+	ClusterNodeState_CLUSTER_NODE_STATE_RECOVERING ClusterNodeState = 5
 )
 
 // Enum value maps for ClusterNodeState.
@@ -574,6 +576,7 @@ var (
 		2: "CLUSTER_NODE_STATE_HEALTHY",
 		3: "CLUSTER_NODE_STATE_UNHEALTHY",
 		4: "CLUSTER_NODE_STATE_SUSPENDED",
+		5: "CLUSTER_NODE_STATE_RECOVERING",
 	}
 	ClusterNodeState_value = map[string]int32{
 		"CLUSTER_NODE_STATE_UNSPECIFIED": 0,
@@ -581,6 +584,7 @@ var (
 		"CLUSTER_NODE_STATE_HEALTHY":     2,
 		"CLUSTER_NODE_STATE_UNHEALTHY":   3,
 		"CLUSTER_NODE_STATE_SUSPENDED":   4,
+		"CLUSTER_NODE_STATE_RECOVERING":  5,
 	}
 )
 
@@ -3745,13 +3749,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	" CLUSTER_PHASE_MANUAL_MAINTENANCE\x10\x0f\x12 \n" +
 	"\x1cCLUSTER_PHASE_FAILED_TO_SYNC\x10\x10\x12\x1b\n" +
 	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11\x12\x1a\n" +
-	"\x16CLUSTER_PHASE_DELETING\x10\x12*\xbb\x01\n" +
+	"\x16CLUSTER_PHASE_DELETING\x10\x12*\xde\x01\n" +
 	"\x10ClusterNodeState\x12\"\n" +
 	"\x1eCLUSTER_NODE_STATE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_NODE_STATE_STARTING\x10\x01\x12\x1e\n" +
 	"\x1aCLUSTER_NODE_STATE_HEALTHY\x10\x02\x12 \n" +
 	"\x1cCLUSTER_NODE_STATE_UNHEALTHY\x10\x03\x12 \n" +
-	"\x1cCLUSTER_NODE_STATE_SUSPENDED\x10\x04*\x9c\x01\n" +
+	"\x1cCLUSTER_NODE_STATE_SUSPENDED\x10\x04\x12!\n" +
+	"\x1dCLUSTER_NODE_STATE_RECOVERING\x10\x05*\x9c\x01\n" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
