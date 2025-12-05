@@ -730,6 +730,14 @@ export declare type Cluster = Message<"qdrant.cloud.cluster.v1.Cluster"> & {
   cloudProviderRegionId: string;
 
   /**
+   * List of labels for a cluster. These labels are used in the cloud ui and billing reports.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 12;
+   */
+  labels: KeyValue[];
+
+  /**
    * Current configuration details of the cluster.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 20;
@@ -811,6 +819,14 @@ export declare type ClusterValid = Message<"qdrant.cloud.cluster.v1.Cluster"> & 
    * @generated from field: string cloud_provider_region_id = 11;
    */
   cloudProviderRegionId: string;
+
+  /**
+   * List of labels for a cluster. These labels are used in the cloud ui and billing reports.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 12;
+   */
+  labels: KeyValueValid[];
 
   /**
    * Current configuration details of the cluster.

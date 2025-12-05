@@ -496,6 +496,9 @@ message Cluster {
     message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
     expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
   };
+  // List of labels for a cluster. These labels are used in the cloud ui and billing reports.
+  // This is an optional field
+  repeated common.v1.KeyValue labels = 12 [(buf.validate.field).repeated = {max_items: 10}];
   // Current configuration details of the cluster.
   ClusterConfiguration configuration = 20 [(buf.validate.field).required = true];
   // Current state of the cluster (available after the cluster has been created).
