@@ -43,7 +43,7 @@ const (
 //
 // AccountService is the API used to configure Accounts.
 type AccountServiceClient interface {
-	// Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+	// Lists all accounts associated with the authenticated actor.
 	// Required permissions:
 	// - None (authenticated only)
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
@@ -292,7 +292,7 @@ func (c *accountServiceClient) DeleteAccountMember(ctx context.Context, in *Dele
 //
 // AccountService is the API used to configure Accounts.
 type AccountServiceServer interface {
-	// Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+	// Lists all accounts associated with the authenticated actor.
 	// Required permissions:
 	// - None (authenticated only)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)

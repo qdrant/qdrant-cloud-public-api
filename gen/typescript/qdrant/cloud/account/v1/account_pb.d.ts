@@ -1183,7 +1183,7 @@ export declare const AccountInviteStatusSchema: GenEnum<AccountInviteStatus>;
  */
 export declare const AccountService: GenService<{
   /**
-   * Lists all accounts associated with the authenticated actor, where the actor has the specified permission.
+   * Lists all accounts associated with the authenticated actor.
    * Required permissions:
    * - None (authenticated only)
    *

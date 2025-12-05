@@ -18,7 +18,7 @@
   "paths": {
     "/api/account/v1/accounts": {
       "get": {
-        "summary": "Lists all accounts associated with the authenticated actor, where the actor has the specified permission.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Lists all accounts associated with the authenticated actor.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "AccountService_ListAccounts",
         "responses": {
           "200": {
