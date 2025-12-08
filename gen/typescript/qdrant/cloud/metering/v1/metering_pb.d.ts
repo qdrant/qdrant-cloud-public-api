@@ -221,11 +221,25 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
   billableEntityId: string;
 
   /**
-   * The type of the billable entity (e.g., "ClusterBooking").
+   * A reference name of the billable entity (e.g. "sentence-transformers/all-minilm-l6-v2", "my-cluster-foobar").
+   *
+   * @generated from field: optional string billable_entity_reference_name = 14;
+   */
+  billableEntityReferenceName?: string;
+
+  /**
+   * The type of the billable entity  (e.g., "cluster_booking", "resource_option", "backup", "inference_model").
    *
    * @generated from field: string billable_entity_type = 7;
    */
   billableEntityType: string;
+
+  /**
+   * A description of the billable entity (e.g., "Standard Cluster Booking", "Extra Storage", "Model Inference").
+   *
+   * @generated from field: string billable_entity_description = 15;
+   */
+  billableEntityDescription: string;
 
   /**
    * The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
@@ -320,11 +334,25 @@ export declare type MeteringItemValid = Message<"qdrant.cloud.metering.v1.Meteri
   billableEntityId: string;
 
   /**
-   * The type of the billable entity (e.g., "ClusterBooking").
+   * A reference name of the billable entity (e.g. "sentence-transformers/all-minilm-l6-v2", "my-cluster-foobar").
+   *
+   * @generated from field: optional string billable_entity_reference_name = 14;
+   */
+  billableEntityReferenceName?: string;
+
+  /**
+   * The type of the billable entity  (e.g., "cluster_booking", "resource_option", "backup", "inference_model").
    *
    * @generated from field: string billable_entity_type = 7;
    */
   billableEntityType: string;
+
+  /**
+   * A description of the billable entity (e.g., "Standard Cluster Booking", "Extra Storage", "Model Inference").
+   *
+   * @generated from field: string billable_entity_description = 15;
+   */
+  billableEntityDescription: string;
 
   /**
    * The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
