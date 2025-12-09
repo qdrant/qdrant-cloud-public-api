@@ -319,7 +319,7 @@ type MeteringItem struct {
 	// The identifier of the billable entity (in GUID format), such as a cluster
 	// booking or another billable resource.
 	BillableEntityId string `protobuf:"bytes,6,opt,name=billable_entity_id,json=billableEntityId,proto3" json:"billable_entity_id,omitempty"`
-	// The type of the billable entity (e.g., "ClusterBooking").
+	// The type of the billable entity (e.g., "cluster_booking", "inference_model", etc).
 	BillableEntityType string `protobuf:"bytes,7,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
 	// The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
 	PricePerHour int32 `protobuf:"varint,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
@@ -332,9 +332,11 @@ type MeteringItem struct {
 	// The Discount applied as a percentage (e.g., 12.5).
 	DiscountAmountPercent *float64 `protobuf:"fixed64,12,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
 	// Currency of the different amount values, in ISO 4217 format (e.g., "USD").
-	Currency      string `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Currency string `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The reference name of the billable entity (e.g.: the name for the related inference model).
+	BillableEntityReferenceName *string `protobuf:"bytes,14,opt,name=billable_entity_reference_name,json=billableEntityReferenceName,proto3,oneof" json:"billable_entity_reference_name,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *MeteringItem) Reset() {
@@ -458,6 +460,13 @@ func (x *MeteringItem) GetCurrency() string {
 	return ""
 }
 
+func (x *MeteringItem) GetBillableEntityReferenceName() string {
+	if x != nil && x.BillableEntityReferenceName != nil {
+		return *x.BillableEntityReferenceName
+	}
+	return ""
+}
+
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
@@ -480,7 +489,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x124\n" +
 	"\x11amount_millicents\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x97\a\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x8d\b\n" +
 	"\fMeteringItem\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -500,10 +509,12 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x1adiscount_amount_millicents\x18\v \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
 	"\x17discount_amount_percent\x18\f \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x15discountAmountPercent\x88\x01\x01\x120\n" +
 	"\bcurrency\x18\r \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency:o\xbaHl\x1aj\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\x12Q\n" +
+	"\x1ebillable_entity_reference_name\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x1bbillableEntityReferenceName\x88\x01\x01:o\xbaHl\x1aj\n" +
 	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
-	"\x18_discount_amount_percent2\xc7\x03\n" +
+	"\x18_discount_amount_percentB!\n" +
+	"\x1f_billable_entity_reference_name2\xc7\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
 	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
 	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}B\x86\x02\n" +

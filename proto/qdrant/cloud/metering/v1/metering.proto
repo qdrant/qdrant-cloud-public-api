@@ -109,7 +109,7 @@ message MeteringItem {
   // The identifier of the billable entity (in GUID format), such as a cluster
   // booking or another billable resource.
   string billable_entity_id = 6 [(buf.validate.field).string = {uuid: true}];
-  // The type of the billable entity (e.g., "ClusterBooking").
+  // The type of the billable entity (e.g., "cluster_booking", "inference_model", etc).
   string billable_entity_type = 7 [(buf.validate.field).string.min_len = 1];
   // The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
   int32 price_per_hour = 8 [(buf.validate.field).int32.gte = 0];
@@ -129,4 +129,6 @@ message MeteringItem {
     len: 3
     pattern: "^[A-Z]{3}$"
   }];
+  // The reference name of the billable entity (e.g.: the name for the related inference model).
+  optional string billable_entity_reference_name = 14 [(buf.validate.field).string.min_len = 1];
 }

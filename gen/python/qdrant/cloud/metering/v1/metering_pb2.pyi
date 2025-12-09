@@ -67,6 +67,7 @@ class MeteringItem(_message.Message):
     DISCOUNT_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
     DISCOUNT_AMOUNT_PERCENT_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    BILLABLE_ENTITY_REFERENCE_NAME_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     cluster_name: str
@@ -80,4 +81,5 @@ class MeteringItem(_message.Message):
     discount_amount_millicents: int
     discount_amount_percent: float
     currency: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
+    billable_entity_reference_name: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ..., billable_entity_reference_name: _Optional[str] = ...) -> None: ...

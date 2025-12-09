@@ -185,7 +185,7 @@
         },
         "billableEntityType": {
           "type": "string",
-          "description": "The type of the billable entity (e.g., \"ClusterBooking\")."
+          "description": "The type of the billable entity (e.g., \"cluster_booking\", \"inference_model\", etc)."
         },
         "pricePerHour": {
           "type": "integer",
@@ -215,6 +215,10 @@
         "currency": {
           "type": "string",
           "description": "Currency of the different amount values, in ISO 4217 format (e.g., \"USD\")."
+        },
+        "billableEntityReferenceName": {
+          "type": "string",
+          "description": "The reference name of the billable entity (e.g.: the name for the related inference model)."
         }
       },
       "description": "Metering represents a detailed metering item."

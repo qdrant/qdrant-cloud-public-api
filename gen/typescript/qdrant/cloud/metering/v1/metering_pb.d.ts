@@ -221,7 +221,7 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
   billableEntityId: string;
 
   /**
-   * The type of the billable entity (e.g., "ClusterBooking").
+   * The type of the billable entity (e.g., "cluster_booking", "inference_model", etc).
    *
    * @generated from field: string billable_entity_type = 7;
    */
@@ -268,6 +268,13 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
    * @generated from field: string currency = 13;
    */
   currency: string;
+
+  /**
+   * The reference name of the billable entity (e.g.: the name for the related inference model).
+   *
+   * @generated from field: optional string billable_entity_reference_name = 14;
+   */
+  billableEntityReferenceName?: string;
 };
 
 /**
@@ -320,7 +327,7 @@ export declare type MeteringItemValid = Message<"qdrant.cloud.metering.v1.Meteri
   billableEntityId: string;
 
   /**
-   * The type of the billable entity (e.g., "ClusterBooking").
+   * The type of the billable entity (e.g., "cluster_booking", "inference_model", etc).
    *
    * @generated from field: string billable_entity_type = 7;
    */
@@ -367,6 +374,13 @@ export declare type MeteringItemValid = Message<"qdrant.cloud.metering.v1.Meteri
    * @generated from field: string currency = 13;
    */
   currency: string;
+
+  /**
+   * The reference name of the billable entity (e.g.: the name for the related inference model).
+   *
+   * @generated from field: optional string billable_entity_reference_name = 14;
+   */
+  billableEntityReferenceName?: string;
 };
 
 /**
