@@ -1450,19 +1450,19 @@ type BillingAddress struct {
 	// The state or province of the billing address.
 	// This is an optional field.
 	State *string `protobuf:"bytes,6,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	// The formatted state or province name.
+	// This is an read-only field, and filled out by the system.
+	StateFormatted *string `protobuf:"bytes,9,opt,name=state_formatted,json=stateFormatted,proto3,oneof" json:"state_formatted,omitempty"`
 	// The country of the billing address.
 	// The format should be a two-letter country code ISO 3166-1 alpha-2
 	// see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2.
 	Country string `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	// The formatted country name.
 	// This is an read-only field, and filled out by the system.
-	CountryFormatted string `protobuf:"bytes,8,opt,name=country_formatted,json=countryFormatted,proto3" json:"country_formatted,omitempty"`
-	// The formatted state or province name.
-	// This is an read-only field, and filled out by the system.
-	StateFormatted *string `protobuf:"bytes,9,opt,name=state_formatted,json=stateFormatted,proto3,oneof" json:"state_formatted,omitempty"`
+	CountryFormatted *string `protobuf:"bytes,8,opt,name=country_formatted,json=countryFormatted,proto3,oneof" json:"country_formatted,omitempty"`
 	// Indicates if the country supports tax.
 	// This is an read-only field, and filled out by the system.
-	TaxSupportedCountry bool `protobuf:"varint,10,opt,name=tax_supported_country,json=taxSupportedCountry,proto3" json:"tax_supported_country,omitempty"`
+	TaxSupportedCountry *bool `protobuf:"varint,10,opt,name=tax_supported_country,json=taxSupportedCountry,proto3,oneof" json:"tax_supported_country,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1539,6 +1539,13 @@ func (x *BillingAddress) GetState() string {
 	return ""
 }
 
+func (x *BillingAddress) GetStateFormatted() string {
+	if x != nil && x.StateFormatted != nil {
+		return *x.StateFormatted
+	}
+	return ""
+}
+
 func (x *BillingAddress) GetCountry() string {
 	if x != nil {
 		return x.Country
@@ -1547,22 +1554,15 @@ func (x *BillingAddress) GetCountry() string {
 }
 
 func (x *BillingAddress) GetCountryFormatted() string {
-	if x != nil {
-		return x.CountryFormatted
-	}
-	return ""
-}
-
-func (x *BillingAddress) GetStateFormatted() string {
-	if x != nil && x.StateFormatted != nil {
-		return *x.StateFormatted
+	if x != nil && x.CountryFormatted != nil {
+		return *x.CountryFormatted
 	}
 	return ""
 }
 
 func (x *BillingAddress) GetTaxSupportedCountry() bool {
-	if x != nil {
-		return x.TaxSupportedCountry
+	if x != nil && x.TaxSupportedCountry != nil {
+		return *x.TaxSupportedCountry
 	}
 	return false
 }
@@ -1786,7 +1786,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12.\n" +
 	"\x0eentitlement_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rentitlementId\"\x82\x01\n" +
 	")RecordCloudMarketplaceEntitlementResponse\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xf4\x03\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xae\x04\n" +
 	"\x0eBillingAddress\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05line1\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05line1\x12\"\n" +
@@ -1794,18 +1794,20 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\vpostal_code\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\n" +
 	"postalCode\x88\x01\x01\x12 \n" +
 	"\x04city\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04city\x88\x01\x01\x12\"\n" +
-	"\x05state\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05state\x88\x01\x01\x12+\n" +
+	"\x05state\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05state\x88\x01\x01\x125\n" +
+	"\x0fstate_formatted\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x0estateFormatted\x88\x01\x01\x12+\n" +
 	"\acountry\x18\a \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{2}$R\acountry\x124\n" +
-	"\x11country_formatted\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x10countryFormatted\x125\n" +
-	"\x0fstate_formatted\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x0estateFormatted\x88\x01\x01\x122\n" +
+	"^[A-Z]{2}$R\acountry\x129\n" +
+	"\x11country_formatted\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\x10countryFormatted\x88\x01\x01\x127\n" +
 	"\x15tax_supported_country\x18\n" +
-	" \x01(\bR\x13taxSupportedCountryB\b\n" +
+	" \x01(\bH\x06R\x13taxSupportedCountry\x88\x01\x01B\b\n" +
 	"\x06_line2B\x0e\n" +
 	"\f_postal_codeB\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x12\n" +
-	"\x10_state_formatted\"j\n" +
+	"\x10_state_formattedB\x14\n" +
+	"\x12_country_formattedB\x18\n" +
+	"\x16_tax_supported_country\"j\n" +
 	"\x14PaymentMethodDetails\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x129\n" +
 	"\x04card\x18\x02 \x01(\v2\x1d.qdrant.cloud.payment.v1.CardB\x06\xbaH\x03\xc8\x01\x01R\x04card\"\xba\x01\n" +

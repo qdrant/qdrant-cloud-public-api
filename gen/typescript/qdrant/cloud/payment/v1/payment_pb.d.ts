@@ -900,6 +900,14 @@ export declare type BillingAddress = Message<"qdrant.cloud.payment.v1.BillingAdd
   state?: string;
 
   /**
+   * The formatted state or province name.
+   * This is an read-only field, and filled out by the system.
+   *
+   * @generated from field: optional string state_formatted = 9;
+   */
+  stateFormatted?: string;
+
+  /**
    * The country of the billing address.
    * The format should be a two-letter country code ISO 3166-1 alpha-2
    * see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2.
@@ -912,25 +920,17 @@ export declare type BillingAddress = Message<"qdrant.cloud.payment.v1.BillingAdd
    * The formatted country name.
    * This is an read-only field, and filled out by the system.
    *
-   * @generated from field: string country_formatted = 8;
+   * @generated from field: optional string country_formatted = 8;
    */
-  countryFormatted: string;
-
-  /**
-   * The formatted state or province name.
-   * This is an read-only field, and filled out by the system.
-   *
-   * @generated from field: optional string state_formatted = 9;
-   */
-  stateFormatted?: string;
+  countryFormatted?: string;
 
   /**
    * Indicates if the country supports tax.
    * This is an read-only field, and filled out by the system.
    *
-   * @generated from field: bool tax_supported_country = 10;
+   * @generated from field: optional bool tax_supported_country = 10;
    */
-  taxSupportedCountry: boolean;
+  taxSupportedCountry?: boolean;
 };
 
 export declare type BillingAddressValid = BillingAddress;

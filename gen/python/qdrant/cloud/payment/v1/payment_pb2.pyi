@@ -238,9 +238,9 @@ class BillingAddress(_message.Message):
     POSTAL_CODE_FIELD_NUMBER: _ClassVar[int]
     CITY_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    STATE_FORMATTED_FIELD_NUMBER: _ClassVar[int]
     COUNTRY_FIELD_NUMBER: _ClassVar[int]
     COUNTRY_FORMATTED_FIELD_NUMBER: _ClassVar[int]
-    STATE_FORMATTED_FIELD_NUMBER: _ClassVar[int]
     TAX_SUPPORTED_COUNTRY_FIELD_NUMBER: _ClassVar[int]
     name: str
     line1: str
@@ -248,11 +248,11 @@ class BillingAddress(_message.Message):
     postal_code: str
     city: str
     state: str
+    state_formatted: str
     country: str
     country_formatted: str
-    state_formatted: str
     tax_supported_country: bool
-    def __init__(self, name: _Optional[str] = ..., line1: _Optional[str] = ..., line2: _Optional[str] = ..., postal_code: _Optional[str] = ..., city: _Optional[str] = ..., state: _Optional[str] = ..., country: _Optional[str] = ..., country_formatted: _Optional[str] = ..., state_formatted: _Optional[str] = ..., tax_supported_country: _Optional[bool] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., line1: _Optional[str] = ..., line2: _Optional[str] = ..., postal_code: _Optional[str] = ..., city: _Optional[str] = ..., state: _Optional[str] = ..., state_formatted: _Optional[str] = ..., country: _Optional[str] = ..., country_formatted: _Optional[str] = ..., tax_supported_country: _Optional[bool] = ...) -> None: ...
 
 class PaymentMethodDetails(_message.Message):
     __slots__ = ()

@@ -486,19 +486,19 @@ message BillingAddress {
   // The state or province of the billing address.
   // This is an optional field.
   optional string state = 6 [(buf.validate.field).string = {min_len: 1}];
+  // The formatted state or province name.
+  // This is an read-only field, and filled out by the system.
+  optional string state_formatted = 9 [(buf.validate.field).string = {min_len: 1}];
   // The country of the billing address.
   // The format should be a two-letter country code ISO 3166-1 alpha-2
   // see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2.
   string country = 7 [(buf.validate.field).string = {pattern: "^[A-Z]{2}$"}];
   // The formatted country name.
   // This is an read-only field, and filled out by the system.
-  string country_formatted = 8 [(buf.validate.field).string = {min_len: 1}];
-  // The formatted state or province name.
-  // This is an read-only field, and filled out by the system.
-  optional string state_formatted = 9 [(buf.validate.field).string = {min_len: 1}];
+  optional string country_formatted = 8 [(buf.validate.field).string = {min_len: 1}];
   // Indicates if the country supports tax.
   // This is an read-only field, and filled out by the system.
-  bool tax_supported_country = 10;
+  optional bool tax_supported_country = 10;
 }
 
 // Represents payment method
