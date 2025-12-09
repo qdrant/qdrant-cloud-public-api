@@ -191,10 +191,6 @@
           "type": "string",
           "description": "The type of the billable entity  (e.g., \"cluster_booking\", \"resource_option\", \"backup\", \"inference_model\")."
         },
-        "billableEntityDescription": {
-          "type": "string",
-          "description": "A description of the billable entity (e.g., \"Standard Cluster Booking\", \"Extra Storage\", \"Model Inference\")."
-        },
         "pricePerHour": {
           "type": "integer",
           "format": "int32",

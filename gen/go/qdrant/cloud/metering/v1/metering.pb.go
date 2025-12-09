@@ -323,8 +323,6 @@ type MeteringItem struct {
 	BillableEntityReferenceName *string `protobuf:"bytes,14,opt,name=billable_entity_reference_name,json=billableEntityReferenceName,proto3,oneof" json:"billable_entity_reference_name,omitempty"`
 	// The type of the billable entity  (e.g., "cluster_booking", "resource_option", "backup", "inference_model").
 	BillableEntityType string `protobuf:"bytes,7,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
-	// A description of the billable entity (e.g., "Standard Cluster Booking", "Extra Storage", "Model Inference").
-	BillableEntityDescription string `protobuf:"bytes,15,opt,name=billable_entity_description,json=billableEntityDescription,proto3" json:"billable_entity_description,omitempty"`
 	// The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
 	PricePerHour int32 `protobuf:"varint,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	// Usage duration in decimal hours. (e.g., 2.5 = 2 hours and 30 minutes).
@@ -427,13 +425,6 @@ func (x *MeteringItem) GetBillableEntityType() string {
 	return ""
 }
 
-func (x *MeteringItem) GetBillableEntityDescription() string {
-	if x != nil {
-		return x.BillableEntityDescription
-	}
-	return ""
-}
-
 func (x *MeteringItem) GetPricePerHour() int32 {
 	if x != nil {
 		return x.PricePerHour
@@ -498,7 +489,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x124\n" +
 	"\x11amount_millicents\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\xd6\b\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x8d\b\n" +
 	"\fMeteringItem\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -510,8 +501,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\aendTime\x126\n" +
 	"\x12billable_entity_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10billableEntityId\x12Q\n" +
 	"\x1ebillable_entity_reference_name\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x1bbillableEntityReferenceName\x88\x01\x01\x129\n" +
-	"\x14billable_entity_type\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12G\n" +
-	"\x1bbillable_entity_description\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x19billableEntityDescription\x12-\n" +
+	"\x14billable_entity_type\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12-\n" +
 	"\x0eprice_per_hour\x18\b \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\fpricePerHour\x12/\n" +
 	"\vusage_hours\x18\t \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
 	"usageHours\x124\n" +
