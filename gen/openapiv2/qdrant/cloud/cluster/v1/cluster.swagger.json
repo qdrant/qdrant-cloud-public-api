@@ -539,6 +539,14 @@
               "type": "string",
               "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
             },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
               "description": "Current configuration details of the cluster."
@@ -580,6 +588,14 @@
             "cloudProviderRegionId": {
               "type": "string",
               "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
             },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
@@ -693,6 +709,14 @@
         "cloudProviderRegionId": {
           "type": "string",
           "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
