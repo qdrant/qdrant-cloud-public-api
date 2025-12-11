@@ -183,9 +183,13 @@
           "type": "string",
           "description": "The identifier of the billable entity (in GUID format), such as a cluster\nbooking or another billable resource."
         },
+        "billableEntityReferenceName": {
+          "type": "string",
+          "description": "A reference name of the billable entity (e.g. \"sentence-transformers/all-minilm-l6-v2\", \"my-cluster-foobar\")."
+        },
         "billableEntityType": {
           "type": "string",
-          "description": "The type of the billable entity (e.g., \"ClusterBooking\")."
+          "description": "The type of the billable entity  (e.g., \"cluster_booking\", \"resource_option\", \"backup\", \"inference_model\")."
         },
         "pricePerHour": {
           "type": "integer",

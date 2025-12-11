@@ -319,7 +319,9 @@ type MeteringItem struct {
 	// The identifier of the billable entity (in GUID format), such as a cluster
 	// booking or another billable resource.
 	BillableEntityId string `protobuf:"bytes,6,opt,name=billable_entity_id,json=billableEntityId,proto3" json:"billable_entity_id,omitempty"`
-	// The type of the billable entity (e.g., "ClusterBooking").
+	// A reference name of the billable entity (e.g. "sentence-transformers/all-minilm-l6-v2", "my-cluster-foobar").
+	BillableEntityReferenceName *string `protobuf:"bytes,14,opt,name=billable_entity_reference_name,json=billableEntityReferenceName,proto3,oneof" json:"billable_entity_reference_name,omitempty"`
+	// The type of the billable entity  (e.g., "cluster_booking", "resource_option", "backup", "inference_model").
 	BillableEntityType string `protobuf:"bytes,7,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
 	// The unit price in millicents per hour (e.g., 4112 = $0.04112/hour).
 	PricePerHour int32 `protobuf:"varint,8,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
@@ -409,6 +411,13 @@ func (x *MeteringItem) GetBillableEntityId() string {
 	return ""
 }
 
+func (x *MeteringItem) GetBillableEntityReferenceName() string {
+	if x != nil && x.BillableEntityReferenceName != nil {
+		return *x.BillableEntityReferenceName
+	}
+	return ""
+}
+
 func (x *MeteringItem) GetBillableEntityType() string {
 	if x != nil {
 		return x.BillableEntityType
@@ -480,7 +489,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x124\n" +
 	"\x11amount_millicents\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x97\a\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x8d\b\n" +
 	"\fMeteringItem\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -490,18 +499,20 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tstartTime\x12=\n" +
 	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\aendTime\x126\n" +
-	"\x12billable_entity_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10billableEntityId\x129\n" +
+	"\x12billable_entity_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10billableEntityId\x12Q\n" +
+	"\x1ebillable_entity_reference_name\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x1bbillableEntityReferenceName\x88\x01\x01\x129\n" +
 	"\x14billable_entity_type\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12-\n" +
 	"\x0eprice_per_hour\x18\b \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\fpricePerHour\x12/\n" +
 	"\vusage_hours\x18\t \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
 	"usageHours\x124\n" +
 	"\x11amount_millicents\x18\n" +
 	" \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x12J\n" +
-	"\x1adiscount_amount_millicents\x18\v \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
-	"\x17discount_amount_percent\x18\f \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x15discountAmountPercent\x88\x01\x01\x120\n" +
+	"\x1adiscount_amount_millicents\x18\v \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x01R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
+	"\x17discount_amount_percent\x18\f \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x02R\x15discountAmountPercent\x88\x01\x01\x120\n" +
 	"\bcurrency\x18\r \x01(\tB\x14\xbaH\x11r\x0f2\n" +
 	"^[A-Z]{3}$\x98\x01\x03R\bcurrency:o\xbaHl\x1aj\n" +
-	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\x1d\n" +
+	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB!\n" +
+	"\x1f_billable_entity_reference_nameB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xc7\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +

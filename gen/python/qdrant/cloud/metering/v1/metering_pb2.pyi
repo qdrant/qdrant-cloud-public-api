@@ -60,6 +60,7 @@ class MeteringItem(_message.Message):
     START_TIME_FIELD_NUMBER: _ClassVar[int]
     END_TIME_FIELD_NUMBER: _ClassVar[int]
     BILLABLE_ENTITY_ID_FIELD_NUMBER: _ClassVar[int]
+    BILLABLE_ENTITY_REFERENCE_NAME_FIELD_NUMBER: _ClassVar[int]
     BILLABLE_ENTITY_TYPE_FIELD_NUMBER: _ClassVar[int]
     PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     USAGE_HOURS_FIELD_NUMBER: _ClassVar[int]
@@ -73,6 +74,7 @@ class MeteringItem(_message.Message):
     start_time: _timestamp_pb2.Timestamp
     end_time: _timestamp_pb2.Timestamp
     billable_entity_id: str
+    billable_entity_reference_name: str
     billable_entity_type: str
     price_per_hour: int
     usage_hours: float
@@ -80,4 +82,4 @@ class MeteringItem(_message.Message):
     discount_amount_millicents: int
     discount_amount_percent: float
     currency: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_reference_name: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
