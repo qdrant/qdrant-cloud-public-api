@@ -12,7 +12,7 @@ authors = [
 dependencies = [
     # Due to `buf.build/protocolbuffers/python:v33.0`, we need at least protobuf 6.33.0
     # as runtime dependency. Runtime must never be lower than generator version.
-    "protobuf>=6.33.0"
+    "protobuf>=6.33.2"
 ]
 
 [project.urls]
