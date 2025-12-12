@@ -5,6 +5,7 @@ package qdrant.cloud.cluster.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "k8s.io/api/core/v1/generated.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
 
@@ -635,6 +636,9 @@ message ClusterConfiguration {
     defined_only: true
     not_in: [0]
   }];
+  // List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.
+  // It is ignored for managed cloud clusters. This is an optional field
+  repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_contraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
