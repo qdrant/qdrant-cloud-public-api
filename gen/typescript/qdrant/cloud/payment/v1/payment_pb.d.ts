@@ -1293,7 +1293,7 @@ export declare const PaymentService: GenService<{
   /**
    * Delete the payment method identified by the given ID.
    * Required permissions:
-   * - delete:payment_information
+   * - write:payment_information
    *
    * @generated from rpc qdrant.cloud.payment.v1.PaymentService.DeletePaymentMethod
    */

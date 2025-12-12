@@ -100,10 +100,10 @@ service PaymentService {
   }
   // Delete the payment method identified by the given ID.
   // Required permissions:
-  // - delete:payment_information
+  // - write:payment_information
   rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (DeletePaymentMethodResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "delete:payment_information";
+    option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
     // events

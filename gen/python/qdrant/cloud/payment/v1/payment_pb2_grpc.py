@@ -118,7 +118,7 @@ class PaymentServiceServicer(object):
     def DeletePaymentMethod(self, request, context):
         """Delete the payment method identified by the given ID.
         Required permissions:
-        - delete:payment_information
+        - write:payment_information
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

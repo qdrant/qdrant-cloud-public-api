@@ -62,7 +62,7 @@ type PaymentServiceClient interface {
 	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*UpdatePaymentMethodResponse, error)
 	// Delete the payment method identified by the given ID.
 	// Required permissions:
-	// - delete:payment_information
+	// - write:payment_information
 	DeletePaymentMethod(ctx context.Context, in *DeletePaymentMethodRequest, opts ...grpc.CallOption) (*DeletePaymentMethodResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
@@ -212,7 +212,7 @@ type PaymentServiceServer interface {
 	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*UpdatePaymentMethodResponse, error)
 	// Delete the payment method identified by the given ID.
 	// Required permissions:
-	// - delete:payment_information
+	// - write:payment_information
 	DeletePaymentMethod(context.Context, *DeletePaymentMethodRequest) (*DeletePaymentMethodResponse, error)
 	// Get the Stripe Checkout session by its ID.
 	// This method is used to retrieve the session details after it has been created.
