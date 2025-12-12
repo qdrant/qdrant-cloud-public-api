@@ -1840,7 +1840,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xd8\x18\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xd7\x18\n" +
 	"\x0ePaymentService\x12\xd8\x01\n" +
 	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\x91\x02\n" +
 	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\x97\x01\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
@@ -1849,8 +1849,8 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\xb9\x02\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18*\n" +
 	"\x13payment_method_type\x12\x13payment_method.type\xca\xf3\x18~\b\x01\x12\x0epayment-method\"\x16resp.payment_method.id*R/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}\x82\xd3\xe4\x93\x02I:\x01*\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xca\x03\n" +
 	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\xc7\x02\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18&\n" +
-	"\x11payment_method_id\x12\x11payment_method.id\xca\xf3\x18|\b\x02\x12\x0epayment-method\"\x15req.payment_method.id*Q/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\x8d\x03\n" +
-	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"\x8a\x02\x8a\xb5\x18\x1adelete:payment_information\xba\xb5\x18&\n" +
+	"\x11payment_method_id\x12\x11payment_method.id\xca\xf3\x18|\b\x02\x12\x0epayment-method\"\x15req.payment_method.id*Q/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\x8c\x03\n" +
+	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"\x89\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18&\n" +
 	"\x11payment_method_id\x12\x11payment_method_id\xca\xf3\x18m\b\x03\x12\x0epayment-method\"\x15req.payment_method_id*B/accounts/{req.account_id}/payment-methods/{req.payment_method_id}\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\x94\x02\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"\x82\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x18\n" +
 	"\n" +

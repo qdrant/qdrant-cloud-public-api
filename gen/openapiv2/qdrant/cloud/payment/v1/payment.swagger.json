@@ -159,7 +159,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete the payment method identified by the given ID.\nRequired permissions:\n- delete:payment_information",
+        "summary": "Delete the payment method identified by the given ID.\nRequired permissions:\n- write:payment_information",
         "operationId": "PaymentService_DeletePaymentMethod",
         "responses": {
           "200": {
