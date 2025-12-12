@@ -429,9 +429,9 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\fSecretKeyRef\x12?\n" +
 	"\x04name\x18\x01 \x01(\tB+\xbaH(r&\x10\x01\x18\xfd\x012\x1f^[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\x04name\x12\x1c\n" +
 	"\x03key\x18\x02 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xaa\x01\n" +
-	"\bKeyValue\x12~\n" +
-	"\x03key\x18\x01 \x01(\tBl\xbaHirg\x18\xfd\x012b^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\x03key\x12\x1e\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xcd\x01\n" +
+	"\bKeyValue\x12\xa0\x01\n" +
+	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$R\x03key\x12\x1e\n" +
 	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value*{\n" +
 	"\tActorType\x12\x1a\n" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
