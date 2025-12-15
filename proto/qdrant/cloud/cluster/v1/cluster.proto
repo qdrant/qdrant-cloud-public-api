@@ -636,9 +636,9 @@ message ClusterConfiguration {
     defined_only: true
     not_in: [0]
   }];
-  // List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.
+  // List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
-  repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_contraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
+  repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the

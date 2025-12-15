@@ -1008,12 +1008,12 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   rebalanceStrategy?: ClusterConfigurationRebalanceStrategy;
 
   /**
-   * List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.
+   * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_contraints = 25;
+   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
-  topologySpreadContraints: TopologySpreadConstraint[];
+  topologySpreadConstraints: TopologySpreadConstraint[];
 };
 
 /**
@@ -1173,12 +1173,12 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
   rebalanceStrategy?: ClusterConfigurationRebalanceStrategy;
 
   /**
-   * List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.
+   * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_contraints = 25;
+   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
-  topologySpreadContraints: TopologySpreadConstraintValid[];
+  topologySpreadConstraints: TopologySpreadConstraintValid[];
 };
 
 /**

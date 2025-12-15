@@ -831,13 +831,13 @@
           "$ref": "#/definitions/v1ClusterConfigurationRebalanceStrategy",
           "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none"
         },
-        "topologySpreadContraints": {
+        "topologySpreadConstraints": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1TopologySpreadConstraint"
           },
-          "title": "List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+          "title": "List of topologySpreadConstraints for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."

@@ -1967,11 +1967,11 @@ type ClusterConfiguration struct {
 	// The automatic shard rebalancing strategy for the database
 	// This is an optional field, default is none
 	RebalanceStrategy *ClusterConfigurationRebalanceStrategy `protobuf:"varint,24,opt,name=rebalance_strategy,json=rebalanceStrategy,proto3,enum=qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy,oneof" json:"rebalance_strategy,omitempty"`
-	// List of toplogySpreadConstraints for this cluster in a hybrid cloud environment.
+	// List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
 	// It is ignored for managed cloud clusters. This is an optional field
-	TopologySpreadContraints []*v11.TopologySpreadConstraint `protobuf:"bytes,25,rep,name=topology_spread_contraints,json=topologySpreadContraints,proto3" json:"topology_spread_contraints,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	TopologySpreadConstraints []*v11.TopologySpreadConstraint `protobuf:"bytes,25,rep,name=topology_spread_constraints,json=topologySpreadConstraints,proto3" json:"topology_spread_constraints,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ClusterConfiguration) Reset() {
@@ -2130,9 +2130,9 @@ func (x *ClusterConfiguration) GetRebalanceStrategy() ClusterConfigurationRebala
 	return ClusterConfigurationRebalanceStrategy_CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED
 }
 
-func (x *ClusterConfiguration) GetTopologySpreadContraints() []*v11.TopologySpreadConstraint {
+func (x *ClusterConfiguration) GetTopologySpreadConstraints() []*v11.TopologySpreadConstraint {
 	if x != nil {
-		return x.TopologySpreadContraints
+		return x.TopologySpreadConstraints
 	}
 	return nil
 }
@@ -3556,7 +3556,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xf0\r\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xf2\r\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
 	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\t\xbaH\x06*\x04\x18\x14(\x01R\rnumberOfNodes\x12E\n" +
@@ -3587,9 +3587,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\rrestartPolicy\x88\x01\x01\x12~\n" +
 	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x06R\x11rebalanceStrategy\x88\x01\x01\x12t\n" +
-	"\x1atopology_spread_contraints\x18\x19 \x03(\v2,.k8s.io.api.core.v1.TopologySpreadConstraintB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\x18topologySpreadContraintsB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x06R\x11rebalanceStrategy\x88\x01\x01\x12v\n" +
+	"\x1btopology_spread_constraints\x18\x19 \x03(\v2,.k8s.io.api.core.v1.TopologySpreadConstraintB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"R\x19topologySpreadConstraintsB\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
@@ -3927,7 +3927,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	1,  // 22: qdrant.cloud.cluster.v1.ClusterConfiguration.gpu_type:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationGpuType
 	2,  // 23: qdrant.cloud.cluster.v1.ClusterConfiguration.restart_policy:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy
 	3,  // 24: qdrant.cloud.cluster.v1.ClusterConfiguration.rebalance_strategy:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy
-	55, // 25: qdrant.cloud.cluster.v1.ClusterConfiguration.topology_spread_contraints:type_name -> k8s.io.api.core.v1.TopologySpreadConstraint
+	55, // 25: qdrant.cloud.cluster.v1.ClusterConfiguration.topology_spread_constraints:type_name -> k8s.io.api.core.v1.TopologySpreadConstraint
 	35, // 26: qdrant.cloud.cluster.v1.DatabaseConfiguration.collection:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
 	37, // 27: qdrant.cloud.cluster.v1.DatabaseConfiguration.storage:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStorage
 	39, // 28: qdrant.cloud.cluster.v1.DatabaseConfiguration.service:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationService
