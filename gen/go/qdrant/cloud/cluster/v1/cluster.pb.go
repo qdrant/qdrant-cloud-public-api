@@ -1951,13 +1951,13 @@ type ClusterConfiguration struct {
 	// It is ignored for managed cloud clusters. This is an optional field
 	PodLabels []*v1.KeyValue `protobuf:"bytes,14,rep,name=pod_labels,json=podLabels,proto3" json:"pod_labels,omitempty"`
 	// The percentage of CPU resources reserved for system components
-	// This is an optional field, default is 0.
-	// Number between 0..80
-	ReservedCpuPercentage uint32 `protobuf:"varint,20,opt,name=reserved_cpu_percentage,json=reservedCpuPercentage,proto3" json:"reserved_cpu_percentage,omitempty"`
+	// This is an optional field, default is 20%.
+	// Number between 1..80 (both included)
+	ReservedCpuPercentage *uint32 `protobuf:"varint,20,opt,name=reserved_cpu_percentage,json=reservedCpuPercentage,proto3,oneof" json:"reserved_cpu_percentage,omitempty"`
 	// The percentage of RAM resources reserved for system components
-	// This is an optional field, default is 0.
-	// Number between 0..80
-	ReservedMemoryPercentage uint32 `protobuf:"varint,21,opt,name=reserved_memory_percentage,json=reservedMemoryPercentage,proto3" json:"reserved_memory_percentage,omitempty"`
+	// This is an optional field, default is 20%.
+	// Number between 1..80 (both included)
+	ReservedMemoryPercentage *uint32 `protobuf:"varint,21,opt,name=reserved_memory_percentage,json=reservedMemoryPercentage,proto3,oneof" json:"reserved_memory_percentage,omitempty"`
 	// The gpu type that should be used for the database
 	// This is an optional field, default is No configured GPU
 	GpuType *ClusterConfigurationGpuType `protobuf:"varint,22,opt,name=gpu_type,json=gpuType,proto3,enum=qdrant.cloud.cluster.v1.ClusterConfigurationGpuType,oneof" json:"gpu_type,omitempty"`
@@ -2096,15 +2096,15 @@ func (x *ClusterConfiguration) GetPodLabels() []*v1.KeyValue {
 }
 
 func (x *ClusterConfiguration) GetReservedCpuPercentage() uint32 {
-	if x != nil {
-		return x.ReservedCpuPercentage
+	if x != nil && x.ReservedCpuPercentage != nil {
+		return *x.ReservedCpuPercentage
 	}
 	return 0
 }
 
 func (x *ClusterConfiguration) GetReservedMemoryPercentage() uint32 {
-	if x != nil {
-		return x.ReservedMemoryPercentage
+	if x != nil && x.ReservedMemoryPercentage != nil {
+		return *x.ReservedMemoryPercentage
 	}
 	return 0
 }
@@ -3556,7 +3556,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xf2\r\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xbb\x0e\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
 	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\t\xbaH\x06*\x04\x18\x14(\x01R\rnumberOfNodes\x12E\n" +
@@ -3579,22 +3579,24 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"R\x12serviceAnnotations\x12I\n" +
 	"\n" +
 	"pod_labels\x18\x0e \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\tpodLabels\x12?\n" +
-	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\a\xbaH\x04*\x02\x18PR\x15reservedCpuPercentage\x12E\n" +
-	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\a\xbaH\x04*\x02\x18PR\x18reservedMemoryPercentage\x12`\n" +
+	"R\tpodLabels\x12F\n" +
+	"\x17reserved_cpu_percentage\x18\x14 \x01(\rB\t\xbaH\x06*\x04\x18P(\x01H\x04R\x15reservedCpuPercentage\x88\x01\x01\x12L\n" +
+	"\x1areserved_memory_percentage\x18\x15 \x01(\rB\t\xbaH\x06*\x04\x18P(\x01H\x05R\x18reservedMemoryPercentage\x88\x01\x01\x12`\n" +
 	"\bgpu_type\x18\x16 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterConfigurationGpuTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\agpuType\x88\x01\x01\x12r\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x06R\agpuType\x88\x01\x01\x12r\n" +
 	"\x0erestart_policy\x18\x17 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicyB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\rrestartPolicy\x88\x01\x01\x12~\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\aR\rrestartPolicy\x88\x01\x01\x12~\n" +
 	"\x12rebalance_strategy\x18\x18 \x01(\x0e2>.qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategyB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x06R\x11rebalanceStrategy\x88\x01\x01\x12v\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\bR\x11rebalanceStrategy\x88\x01\x01\x12v\n" +
 	"\x1btopology_spread_constraints\x18\x19 \x03(\v2,.k8s.io.api.core.v1.TopologySpreadConstraintB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x19topologySpreadConstraintsB\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
 	"\x17_database_configurationB\x0f\n" +
-	"\r_service_typeB\v\n" +
+	"\r_service_typeB\x1a\n" +
+	"\x18_reserved_cpu_percentageB\x1d\n" +
+	"\x1b_reserved_memory_percentageB\v\n" +
 	"\t_gpu_typeB\x11\n" +
 	"\x0f_restart_policyB\x15\n" +
 	"\x13_rebalance_strategy\"\xf9\x04\n" +

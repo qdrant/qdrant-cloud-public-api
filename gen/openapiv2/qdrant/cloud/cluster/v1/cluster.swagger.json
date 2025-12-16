@@ -812,12 +812,12 @@
         "reservedCpuPercentage": {
           "type": "integer",
           "format": "int64",
-          "title": "The percentage of CPU resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+          "title": "The percentage of CPU resources reserved for system components\nThis is an optional field, default is 20%.\nNumber between 1..80 (both included)"
         },
         "reservedMemoryPercentage": {
           "type": "integer",
           "format": "int64",
-          "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 0.\nNumber between 0..80"
+          "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 20%.\nNumber between 1..80 (both included)"
         },
         "gpuType": {
           "$ref": "#/definitions/v1ClusterConfigurationGpuType",

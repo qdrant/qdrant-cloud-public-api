@@ -611,13 +611,19 @@ message ClusterConfiguration {
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue pod_labels = 14 [(buf.validate.field).repeated = {max_items: 10}];
   // The percentage of CPU resources reserved for system components
-  // This is an optional field, default is 0.
-  // Number between 0..80
-  uint32 reserved_cpu_percentage = 20 [(buf.validate.field).uint32 = {lte: 80}];
+  // This is an optional field, default is 20%.
+  // Number between 1..80 (both included)
+  optional uint32 reserved_cpu_percentage = 20 [(buf.validate.field).uint32 = {
+    gte: 1
+    lte: 80
+  }];
   // The percentage of RAM resources reserved for system components
-  // This is an optional field, default is 0.
-  // Number between 0..80
-  uint32 reserved_memory_percentage = 21 [(buf.validate.field).uint32 = {lte: 80}];
+  // This is an optional field, default is 20%.
+  // Number between 1..80 (both included)
+  optional uint32 reserved_memory_percentage = 21 [(buf.validate.field).uint32 = {
+    gte: 1
+    lte: 80
+  }];
   // The gpu type that should be used for the database
   // This is an optional field, default is No configured GPU
   optional ClusterConfigurationGpuType gpu_type = 22 [(buf.validate.field).enum = {
