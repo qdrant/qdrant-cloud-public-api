@@ -967,21 +967,21 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
 
   /**
    * The percentage of CPU resources reserved for system components
-   * This is an optional field, default is 0.
-   * Number between 0..80
+   * This is an optional field, default is 20%.
+   * Number between 1..80 (both included)
    *
-   * @generated from field: uint32 reserved_cpu_percentage = 20;
+   * @generated from field: optional uint32 reserved_cpu_percentage = 20;
    */
-  reservedCpuPercentage: number;
+  reservedCpuPercentage?: number;
 
   /**
    * The percentage of RAM resources reserved for system components
-   * This is an optional field, default is 0.
-   * Number between 0..80
+   * This is an optional field, default is 20%.
+   * Number between 1..80 (both included)
    *
-   * @generated from field: uint32 reserved_memory_percentage = 21;
+   * @generated from field: optional uint32 reserved_memory_percentage = 21;
    */
-  reservedMemoryPercentage: number;
+  reservedMemoryPercentage?: number;
 
   /**
    * The gpu type that should be used for the database
@@ -1132,21 +1132,21 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
 
   /**
    * The percentage of CPU resources reserved for system components
-   * This is an optional field, default is 0.
-   * Number between 0..80
+   * This is an optional field, default is 20%.
+   * Number between 1..80 (both included)
    *
-   * @generated from field: uint32 reserved_cpu_percentage = 20;
+   * @generated from field: optional uint32 reserved_cpu_percentage = 20;
    */
-  reservedCpuPercentage: number;
+  reservedCpuPercentage?: number;
 
   /**
    * The percentage of RAM resources reserved for system components
-   * This is an optional field, default is 0.
-   * Number between 0..80
+   * This is an optional field, default is 20%.
+   * Number between 1..80 (both included)
    *
-   * @generated from field: uint32 reserved_memory_percentage = 21;
+   * @generated from field: optional uint32 reserved_memory_percentage = 21;
    */
-  reservedMemoryPercentage: number;
+  reservedMemoryPercentage?: number;
 
   /**
    * The gpu type that should be used for the database
