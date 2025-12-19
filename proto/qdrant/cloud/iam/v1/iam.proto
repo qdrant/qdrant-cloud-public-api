@@ -5,6 +5,10 @@ package qdrant.cloud.iam.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+// google/rpc/error_details is used implicitly, but we need this import to
+// generate the code.
+// buf:lint:ignore IMPORT_USED
+import "google/rpc/error_details.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
 

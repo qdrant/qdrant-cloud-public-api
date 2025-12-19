@@ -11,6 +11,7 @@ import (
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/genproto/googleapis/rpc/errdetails"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -2180,7 +2181,7 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x1d\n" +
+	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x1d\n" +
 	"\x1bGetAuthenticatedUserRequest\"U\n" +
 	"\x1cGetAuthenticatedUserResponse\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\";\n" +
