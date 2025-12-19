@@ -48,6 +48,11 @@
       "optional": true
     }
   },
-  "exports": {},
+  "exports": {
+    "./google/rpc/error_details": {
+      "import": "./google/rpc/error_details_pb.js",
+      "types": "./google/rpc/error_details_pb.d.ts"
+    }
+  },
   "sideEffects": false
 }
