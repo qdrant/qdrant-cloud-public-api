@@ -1140,7 +1140,7 @@ type HybridCloudEnvironmentConfiguration struct {
 	// The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
 	AdvancedOperatorSettings *structpb.Struct `protobuf:"bytes,24,opt,name=advanced_operator_settings,json=advancedOperatorSettings,proto3,oneof" json:"advanced_operator_settings,omitempty"`
 	// List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
-	// his is an optional field
+	// This is an optional field
 	ControlPlaneLabels []*v12.KeyValue `protobuf:"bytes,25,rep,name=control_plane_labels,json=controlPlaneLabels,proto3" json:"control_plane_labels,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache

@@ -708,7 +708,7 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
 
   /**
    * List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
-   * his is an optional field
+   * This is an optional field
    *
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue control_plane_labels = 25;
    */

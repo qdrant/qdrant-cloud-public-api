@@ -680,7 +680,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.\nhis is an optional field"
+          "title": "List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.\nThis is an optional field"
         }
       },
       "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"
