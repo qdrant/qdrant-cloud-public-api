@@ -375,7 +375,7 @@ message HybridCloudEnvironmentConfiguration {
   // The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
   optional google.protobuf.Struct advanced_operator_settings = 24;
   // List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
-  // his is an optional field
+  // This is an optional field
   repeated common.v1.KeyValue control_plane_labels = 25 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
