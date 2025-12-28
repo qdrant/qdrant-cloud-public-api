@@ -838,6 +838,10 @@
             "$ref": "#/definitions/v1TopologySpreadConstraint"
           },
           "title": "List of topologySpreadConstraints for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "clusterStorageConfiguration": {
+          "$ref": "#/definitions/v1ClusterStorageConfiguration",
+          "title": "Storage IOPS and Throughput configuration, defaults to BASE storage configuration"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
@@ -1092,6 +1096,39 @@
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
+    },
+    "v1ClusterStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "storageTierType": {
+          "$ref": "#/definitions/v1ClusterStorageConfigurationStorageTierType",
+          "title": "Type of storage tier"
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "title": "max iops value"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "title": "max MB/s throughput value"
+        }
+      },
+      "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"
+    },
+    "v1ClusterStorageConfigurationStorageTierType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE",
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED",
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE",
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM"
+      ],
+      "default": "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
+      "description": "- CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as BASE\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE: Base pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM: IOPS and Throughput values are to be configured by user",
+      "title": "ClusterStorageTierConfigurationStorageTierType defines type of storage tier"
     },
     "v1CreateClusterFromBackupResponse": {
       "type": "object",
