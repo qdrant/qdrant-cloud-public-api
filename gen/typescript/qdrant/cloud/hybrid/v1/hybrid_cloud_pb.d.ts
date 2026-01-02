@@ -705,6 +705,14 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
    * @generated from field: optional google.protobuf.Struct advanced_operator_settings = 24;
    */
   advancedOperatorSettings?: JsonObject;
+
+  /**
+   * List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue control_plane_labels = 25;
+   */
+  controlPlaneLabels: KeyValue[];
 };
 
 export declare type HybridCloudEnvironmentConfigurationValid = HybridCloudEnvironmentConfiguration;
