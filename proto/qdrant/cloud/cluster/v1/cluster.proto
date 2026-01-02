@@ -554,6 +554,20 @@ enum ClusterConfigurationRebalanceStrategy {
   CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE = 3;
 }
 
+// ClusterStorageTierConfigurationStorageTierType defines type of storage tier
+enum ClusterStorageConfigurationStorageTierType {
+  // No storage tier type is configured, same as BASE
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED = 0;
+  // Base pre-configured type
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE = 1;
+  // Mid tier pre-configured type
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED = 2;
+  // Most performant pre-configured type
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
+  // IOPS and Throughput values are to be configured by user
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM = 4;
+}
+
 // A ClusterConfiguration represents the configuration of a cluster.
 message ClusterConfiguration {
   // Timestamp when the cluster configuration was last updated.
@@ -645,6 +659,8 @@ message ClusterConfiguration {
   // List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
+  // Storage IOPS and Throughput configuration, defaults to BASE storage configuration
+  optional ClusterStorageConfiguration cluster_storage_configuration = 26;
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
@@ -835,6 +851,16 @@ message Toleration {
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)
   }];
+}
+
+// ClusterStorageConfiguration defines Storage IOPS and Throughput configuration
+message ClusterStorageConfiguration {
+  // Type of storage tier
+  ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
+  // max iops value
+  optional int32 iops = 2;
+  // max MB/s throughput value
+  optional int32 throughput = 3;
 }
 
 // Defines the operational or transitional state of the Qdrant cluster.
