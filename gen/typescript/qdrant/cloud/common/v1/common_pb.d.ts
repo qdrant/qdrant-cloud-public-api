@@ -140,6 +140,81 @@ export declare type KeyValueValid = KeyValue;
 export declare const KeyValueSchema: GenMessage<KeyValue, {validType: KeyValueValid}>;
 
 /**
+ * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
+ *
+ * @generated from message qdrant.cloud.common.v1.TopologySpreadConstraint
+ */
+export declare type TopologySpreadConstraint = Message<"qdrant.cloud.common.v1.TopologySpreadConstraint"> & {
+  /**
+   * max_skew describes the degree to which pods may be unevenly distributed.
+   * When `whenUnsatisfiable=DoNotSchedule`, it is the maximum permitted difference
+   * between the number of matching pods in the target topology and the global minimum.
+   * For example, in a 3-zone cluster, max_skew is set to 1, and pods with the same
+   * labelSelector spread as 1/1/0:
+   * +-------+-------+-------+
+   * | zone1 | zone2 | zone3 |
+   * +-------+-------+-------+
+   * |   P   |   P   |       |
+   * +-------+-------+-------+
+   * - if max_skew is 1, incoming pod can only be scheduled to zone3 to become 1/1/1;
+   * scheduling it onto zone1(zone2) would make the ActualSkew(2-0) on zone1(zone2)
+   * violate MaxSkew(1).
+   * - if max_skew is 2, incoming pod can be scheduled onto any zone.
+   * When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
+   * to topologies that satisfy it.
+   * Default value is 1 and 0 is not allowed.
+   *
+   * @generated from field: optional int32 max_skew = 1;
+   */
+  maxSkew?: number;
+
+  /**
+   * topology_key is the key of node labels. Nodes that have a label with this key
+   * and identical values are considered to be in the same topology.
+   * We consider each <key, value> as a "bucket", and try to put balanced number
+   * of pods into each bucket.
+   * It's a required field.
+   *
+   * @generated from field: string topology_key = 2;
+   */
+  topologyKey: string;
+
+  /**
+   * when_unsatisfiable indicates how to deal with a pod if it doesn't satisfy
+   * the spread constraint.
+   * - DoNotSchedule (default) tells the scheduler not to schedule it.
+   * - ScheduleAnyway tells the scheduler to schedule the pod in any location,
+   *   but giving higher precedence to topologies that would help reduce the
+   *   skew.
+   * A constraint is considered "Unsatisfiable" for an incoming pod
+   * if and only if every possible node assignment for that pod would violate
+   * "max_skew" on some topology.
+   * For example, in a 3-zone cluster, max_skew is set to 1, and pods with the same
+   * labelSelector spread as 3/1/1:
+   * +-------+-------+-------+
+   * | zone1 | zone2 | zone3 |
+   * +-------+-------+-------+
+   * | P P P |   P   |   P   |
+   * +-------+-------+-------+
+   * If when_unsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled
+   * to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
+   * max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
+   * won't make it *more* imbalanced.
+   *
+   * @generated from field: optional string when_unsatisfiable = 3;
+   */
+  whenUnsatisfiable?: string;
+};
+
+export declare type TopologySpreadConstraintValid = TopologySpreadConstraint;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.TopologySpreadConstraint.
+ * Use `create(TopologySpreadConstraintSchema)` to create a new message.
+ */
+export declare const TopologySpreadConstraintSchema: GenMessage<TopologySpreadConstraint, {validType: TopologySpreadConstraintValid}>;
+
+/**
  * ActorType specifies the type of actor that can call a method.
  *
  * @generated from enum qdrant.cloud.common.v1.ActorType
