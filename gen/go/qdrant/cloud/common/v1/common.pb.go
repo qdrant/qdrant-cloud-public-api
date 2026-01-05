@@ -317,6 +317,110 @@ func (x *KeyValue) GetValue() string {
 	return ""
 }
 
+// TopologySpreadConstraint specifies how to spread matching pods among the given topology.
+type TopologySpreadConstraint struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// max_skew describes the degree to which pods may be unevenly distributed.
+	// When `whenUnsatisfiable=DoNotSchedule`, it is the maximum permitted difference
+	// between the number of matching pods in the target topology and the global minimum.
+	// For example, in a 3-zone cluster, max_skew is set to 1, and pods with the same
+	// labelSelector spread as 1/1/0:
+	// +-------+-------+-------+
+	// | zone1 | zone2 | zone3 |
+	// +-------+-------+-------+
+	// |   P   |   P   |       |
+	// +-------+-------+-------+
+	// - if max_skew is 1, incoming pod can only be scheduled to zone3 to become 1/1/1;
+	// scheduling it onto zone1(zone2) would make the ActualSkew(2-0) on zone1(zone2)
+	// violate MaxSkew(1).
+	// - if max_skew is 2, incoming pod can be scheduled onto any zone.
+	// When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
+	// to topologies that satisfy it.
+	// Default value is 1 and 0 is not allowed.
+	MaxSkew *int32 `protobuf:"varint,1,opt,name=max_skew,json=maxSkew,proto3,oneof" json:"max_skew,omitempty"`
+	// topology_key is the key of node labels. Nodes that have a label with this key
+	// and identical values are considered to be in the same topology.
+	// We consider each <key, value> as a "bucket", and try to put balanced number
+	// of pods into each bucket.
+	// It's a required field.
+	TopologyKey string `protobuf:"bytes,2,opt,name=topology_key,json=topologyKey,proto3" json:"topology_key,omitempty"`
+	// when_unsatisfiable indicates how to deal with a pod if it doesn't satisfy
+	// the spread constraint.
+	//   - DoNotSchedule (default) tells the scheduler not to schedule it.
+	//   - ScheduleAnyway tells the scheduler to schedule the pod in any location,
+	//     but giving higher precedence to topologies that would help reduce the
+	//     skew.
+	//
+	// A constraint is considered "Unsatisfiable" for an incoming pod
+	// if and only if every possible node assignment for that pod would violate
+	// "max_skew" on some topology.
+	// For example, in a 3-zone cluster, max_skew is set to 1, and pods with the same
+	// labelSelector spread as 3/1/1:
+	// +-------+-------+-------+
+	// | zone1 | zone2 | zone3 |
+	// +-------+-------+-------+
+	// | P P P |   P   |   P   |
+	// +-------+-------+-------+
+	// If when_unsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled
+	// to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
+	// max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
+	// won't make it *more* imbalanced.
+	WhenUnsatisfiable *string `protobuf:"bytes,3,opt,name=when_unsatisfiable,json=whenUnsatisfiable,proto3,oneof" json:"when_unsatisfiable,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *TopologySpreadConstraint) Reset() {
+	*x = TopologySpreadConstraint{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopologySpreadConstraint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopologySpreadConstraint) ProtoMessage() {}
+
+func (x *TopologySpreadConstraint) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopologySpreadConstraint.ProtoReflect.Descriptor instead.
+func (*TopologySpreadConstraint) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TopologySpreadConstraint) GetMaxSkew() int32 {
+	if x != nil && x.MaxSkew != nil {
+		return *x.MaxSkew
+	}
+	return 0
+}
+
+func (x *TopologySpreadConstraint) GetTopologyKey() string {
+	if x != nil {
+		return x.TopologyKey
+	}
+	return ""
+}
+
+func (x *TopologySpreadConstraint) GetWhenUnsatisfiable() string {
+	if x != nil && x.WhenUnsatisfiable != nil {
+		return *x.WhenUnsatisfiable
+	}
+	return ""
+}
+
 var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -432,7 +536,13 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xcd\x01\n" +
 	"\bKeyValue\x12\xa0\x01\n" +
 	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$R\x03key\x12\x1e\n" +
-	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value*{\n" +
+	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\xed\x01\n" +
+	"\x18TopologySpreadConstraint\x12'\n" +
+	"\bmax_skew\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x00R\amaxSkew\x88\x01\x01\x12*\n" +
+	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12X\n" +
+	"\x12when_unsatisfiable\x18\x03 \x01(\tB$\xbaH!r\x1fR\rDoNotScheduleR\x0eScheduleAnywayH\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
+	"\t_max_skewB\x15\n" +
+	"\x13_when_unsatisfiable*{\n" +
 	"\tActorType\x12\x1a\n" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fACTOR_TYPE_USER\x10\x01\x12\x1d\n" +
@@ -462,23 +572,24 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),                     // 0: qdrant.cloud.common.v1.ActorType
 	(*LogField)(nil),                   // 1: qdrant.cloud.common.v1.LogField
 	(*Version)(nil),                    // 2: qdrant.cloud.common.v1.Version
 	(*SecretKeyRef)(nil),               // 3: qdrant.cloud.common.v1.SecretKeyRef
 	(*KeyValue)(nil),                   // 4: qdrant.cloud.common.v1.KeyValue
-	(*descriptorpb.MethodOptions)(nil), // 5: google.protobuf.MethodOptions
+	(*TopologySpreadConstraint)(nil),   // 5: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*descriptorpb.MethodOptions)(nil), // 6: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	5, // 0: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	5, // 1: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	5, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	5, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	5, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	5, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	5, // 6: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	6, // 0: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	6, // 1: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	6, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	6, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	6, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	6, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	6, // 6: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
 	0, // 7: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
 	1, // 8: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
 	9, // [9:9] is the sub-list for method output_type
@@ -493,13 +604,14 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 	if File_qdrant_cloud_common_v1_common_proto != nil {
 		return
 	}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 7,
 			NumServices:   0,
 		},

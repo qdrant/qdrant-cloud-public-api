@@ -5,8 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid } from "../../common/v1/common_pb.js";
-import type { TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../../../k8s.io/api/core/v1/generated_pb.js";
+import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/v1/cluster.proto.
@@ -1011,7 +1010,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
+   * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraint[];
 };
@@ -1176,7 +1175,7 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
+   * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraintValid[];
 };
