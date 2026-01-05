@@ -65,3 +65,13 @@ class KeyValue(_message.Message):
     key: str
     value: str
     def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+
+class TopologySpreadConstraint(_message.Message):
+    __slots__ = ()
+    MAX_SKEW_FIELD_NUMBER: _ClassVar[int]
+    TOPOLOGY_KEY_FIELD_NUMBER: _ClassVar[int]
+    WHEN_UNSATISFIABLE_FIELD_NUMBER: _ClassVar[int]
+    max_skew: int
+    topology_key: str
+    when_unsatisfiable: str
+    def __init__(self, max_skew: _Optional[int] = ..., topology_key: _Optional[str] = ..., when_unsatisfiable: _Optional[str] = ...) -> None: ...
