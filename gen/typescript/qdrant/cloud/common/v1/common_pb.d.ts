@@ -175,9 +175,9 @@ export declare type TopologySpreadConstraint = Message<"qdrant.cloud.common.v1.T
    * of pods into each bucket.
    * It's a required field.
    *
-   * @generated from field: optional string topology_key = 2;
+   * @generated from field: string topology_key = 2;
    */
-  topologyKey?: string;
+  topologyKey: string;
 
   /**
    * when_unsatisfiable indicates how to deal with a pod if it doesn't satisfy
@@ -200,7 +200,6 @@ export declare type TopologySpreadConstraint = Message<"qdrant.cloud.common.v1.T
    * to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
    * max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
    * won't make it *more* imbalanced.
-   * It's a required field.
    *
    * @generated from field: optional string when_unsatisfiable = 3;
    */

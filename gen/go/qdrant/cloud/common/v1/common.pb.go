@@ -343,7 +343,7 @@ type TopologySpreadConstraint struct {
 	// We consider each <key, value> as a "bucket", and try to put balanced number
 	// of pods into each bucket.
 	// It's a required field.
-	TopologyKey *string `protobuf:"bytes,2,opt,name=topology_key,json=topologyKey,proto3,oneof" json:"topology_key,omitempty"`
+	TopologyKey string `protobuf:"bytes,2,opt,name=topology_key,json=topologyKey,proto3" json:"topology_key,omitempty"`
 	// when_unsatisfiable indicates how to deal with a pod if it doesn't satisfy
 	// the spread constraint.
 	//   - DoNotSchedule (default) tells the scheduler not to schedule it.
@@ -365,7 +365,6 @@ type TopologySpreadConstraint struct {
 	// to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
 	// max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
 	// won't make it *more* imbalanced.
-	// It's a required field.
 	WhenUnsatisfiable *string `protobuf:"bytes,3,opt,name=when_unsatisfiable,json=whenUnsatisfiable,proto3,oneof" json:"when_unsatisfiable,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -409,8 +408,8 @@ func (x *TopologySpreadConstraint) GetMaxSkew() int32 {
 }
 
 func (x *TopologySpreadConstraint) GetTopologyKey() string {
-	if x != nil && x.TopologyKey != nil {
-		return *x.TopologyKey
+	if x != nil {
+		return x.TopologyKey
 	}
 	return ""
 }
@@ -537,13 +536,12 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xcd\x01\n" +
 	"\bKeyValue\x12\xa0\x01\n" +
 	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$R\x03key\x12\x1e\n" +
-	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\xcb\x01\n" +
-	"\x18TopologySpreadConstraint\x12\x1e\n" +
-	"\bmax_skew\x18\x01 \x01(\x05H\x00R\amaxSkew\x88\x01\x01\x12&\n" +
-	"\ftopology_key\x18\x02 \x01(\tH\x01R\vtopologyKey\x88\x01\x01\x122\n" +
-	"\x12when_unsatisfiable\x18\x03 \x01(\tH\x02R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
-	"\t_max_skewB\x0f\n" +
-	"\r_topology_keyB\x15\n" +
+	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\xed\x01\n" +
+	"\x18TopologySpreadConstraint\x12'\n" +
+	"\bmax_skew\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x00R\amaxSkew\x88\x01\x01\x12*\n" +
+	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12X\n" +
+	"\x12when_unsatisfiable\x18\x03 \x01(\tB$\xbaH!r\x1fR\rDoNotScheduleR\x0eScheduleAnywayH\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
+	"\t_max_skewB\x15\n" +
 	"\x13_when_unsatisfiable*{\n" +
 	"\tActorType\x12\x1a\n" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
