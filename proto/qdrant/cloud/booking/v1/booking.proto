@@ -350,10 +350,19 @@ message GetBackupQuoteResponse {
   // Specifies the currency in which the prices are denominated.
   // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
   string currency = 1 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
-  // The price per hour in millicents.
+  // The original price per hour in millicents, before any discounts.
   // Represents the cost per hour for storing the backup of the requested size.
   // You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
-  int64 price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
+  int64 original_price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
+  // The discounted price per hour in millicents, after applying discounts.
+  // If no discounts are applied, this will be the same as original_price_per_hour.
+  int64 discounted_price_per_hour = 3 [(buf.validate.field).int64.gte = 0];
+  // The percentage of discount applied (e.g., 10.0 for 10% discount).
+  // If no discounts are applied, this will be 0.0.
+  double discount_percentage = 4 [(buf.validate.field).double = {
+    gte: 0.0
+    lte: 100.0
+  }];
 }
 
 // ListInferenceModelsRequest is the request for the ListInferenceModels function

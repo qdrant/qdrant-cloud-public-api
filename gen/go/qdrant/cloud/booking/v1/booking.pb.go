@@ -1155,12 +1155,18 @@ type GetBackupQuoteResponse struct {
 	// Specifies the currency in which the prices are denominated.
 	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
 	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	// The price per hour in millicents.
+	// The original price per hour in millicents, before any discounts.
 	// Represents the cost per hour for storing the backup of the requested size.
 	// You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
-	PricePerHour  int64 `protobuf:"varint,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	OriginalPricePerHour int64 `protobuf:"varint,2,opt,name=original_price_per_hour,json=originalPricePerHour,proto3" json:"original_price_per_hour,omitempty"`
+	// The discounted price per hour in millicents, after applying discounts.
+	// If no discounts are applied, this will be the same as original_price_per_hour.
+	DiscountedPricePerHour int64 `protobuf:"varint,3,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3" json:"discounted_price_per_hour,omitempty"`
+	// The percentage of discount applied (e.g., 10.0 for 10% discount).
+	// If no discounts are applied, this will be 0.0.
+	DiscountPercentage float64 `protobuf:"fixed64,4,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetBackupQuoteResponse) Reset() {
@@ -1200,9 +1206,23 @@ func (x *GetBackupQuoteResponse) GetCurrency() string {
 	return ""
 }
 
-func (x *GetBackupQuoteResponse) GetPricePerHour() int64 {
+func (x *GetBackupQuoteResponse) GetOriginalPricePerHour() int64 {
 	if x != nil {
-		return x.PricePerHour
+		return x.OriginalPricePerHour
+	}
+	return 0
+}
+
+func (x *GetBackupQuoteResponse) GetDiscountedPricePerHour() int64 {
+	if x != nil {
+		return x.DiscountedPricePerHour
+	}
+	return 0
+}
+
+func (x *GetBackupQuoteResponse) GetDiscountPercentage() float64 {
+	if x != nil {
+		return x.DiscountPercentage
 	}
 	return 0
 }
@@ -1554,11 +1574,13 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x0fbackup_size_gib\x18\x05 \x01(\rB\a\xbaH\x04*\x02 \x00H\x01R\rbackupSizeGib\x88\x01\x01:\xd1\x01\xbaH\xcd\x01\x1a\xca\x01\n" +
 	"1get_backup_quote.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x12\n" +
-	"\x10_backup_size_gib\"v\n" +
+	"\x10_backup_size_gib\"\x95\x02\n" +
 	"\x16GetBackupQuoteResponse\x12-\n" +
 	"\bcurrency\x18\x01 \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{3}$R\bcurrency\x12-\n" +
-	"\x0eprice_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\fpricePerHour\"\xbc\x01\n" +
+	"^[A-Z]{3}$R\bcurrency\x12>\n" +
+	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12B\n" +
+	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12H\n" +
+	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage\"\xbc\x01\n" +
 	"\x1aListInferenceModelsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +

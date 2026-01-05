@@ -419,10 +419,20 @@
           "type": "string",
           "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         },
-        "pricePerHour": {
+        "originalPricePerHour": {
           "type": "string",
           "format": "int64",
-          "description": "The price per hour in millicents.\nRepresents the cost per hour for storing the backup of the requested size.\nYou will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours."
+          "description": "The original price per hour in millicents, before any discounts.\nRepresents the cost per hour for storing the backup of the requested size.\nYou will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours."
+        },
+        "discountedPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per hour in millicents, after applying discounts.\nIf no discounts are applied, this will be the same as original_price_per_hour."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage of discount applied (e.g., 10.0 for 10% discount).\nIf no discounts are applied, this will be 0.0."
         }
       },
       "title": "GetBackupQuoteResponse is the response from the GetBackupQuote function"

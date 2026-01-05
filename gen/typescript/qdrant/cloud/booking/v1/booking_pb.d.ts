@@ -578,13 +578,29 @@ export declare type GetBackupQuoteResponse = Message<"qdrant.cloud.booking.v1.Ge
   currency: string;
 
   /**
-   * The price per hour in millicents.
+   * The original price per hour in millicents, before any discounts.
    * Represents the cost per hour for storing the backup of the requested size.
    * You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
    *
-   * @generated from field: int64 price_per_hour = 2;
+   * @generated from field: int64 original_price_per_hour = 2;
    */
-  pricePerHour: bigint;
+  originalPricePerHour: bigint;
+
+  /**
+   * The discounted price per hour in millicents, after applying discounts.
+   * If no discounts are applied, this will be the same as original_price_per_hour.
+   *
+   * @generated from field: int64 discounted_price_per_hour = 3;
+   */
+  discountedPricePerHour: bigint;
+
+  /**
+   * The percentage of discount applied (e.g., 10.0 for 10% discount).
+   * If no discounts are applied, this will be 0.0.
+   *
+   * @generated from field: double discount_percentage = 4;
+   */
+  discountPercentage: number;
 };
 
 export declare type GetBackupQuoteResponseValid = GetBackupQuoteResponse;

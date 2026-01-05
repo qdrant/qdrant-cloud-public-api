@@ -187,10 +187,14 @@ class GetBackupQuoteRequest(_message.Message):
 class GetBackupQuoteResponse(_message.Message):
     __slots__ = ()
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
-    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
     currency: str
-    price_per_hour: int
-    def __init__(self, currency: _Optional[str] = ..., price_per_hour: _Optional[int] = ...) -> None: ...
+    original_price_per_hour: int
+    discounted_price_per_hour: int
+    discount_percentage: float
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
 class ListInferenceModelsRequest(_message.Message):
     __slots__ = ()
