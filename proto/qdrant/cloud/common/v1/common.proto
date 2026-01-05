@@ -152,7 +152,7 @@ message TopologySpreadConstraint {
   // - if max_skew is 2, incoming pod can be scheduled onto any zone.
   // When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
   // to topologies that satisfy it.
-  // It's a required field. Default value is 1 and 0 is not allowed.
+  // Default value is 1 and 0 is not allowed.
   optional int32 max_skew = 1 [(buf.validate.field).int32.gt = 0];
 
   // topology_key is the key of node labels. Nodes that have a label with this key

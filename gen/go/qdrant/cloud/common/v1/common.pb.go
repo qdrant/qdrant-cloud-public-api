@@ -336,7 +336,7 @@ type TopologySpreadConstraint struct {
 	// - if max_skew is 2, incoming pod can be scheduled onto any zone.
 	// When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
 	// to topologies that satisfy it.
-	// It's a required field. Default value is 1 and 0 is not allowed.
+	// Default value is 1 and 0 is not allowed.
 	MaxSkew *int32 `protobuf:"varint,1,opt,name=max_skew,json=maxSkew,proto3,oneof" json:"max_skew,omitempty"`
 	// topology_key is the key of node labels. Nodes that have a label with this key
 	// and identical values are considered to be in the same topology.

@@ -162,7 +162,7 @@ export declare type TopologySpreadConstraint = Message<"qdrant.cloud.common.v1.T
    * - if max_skew is 2, incoming pod can be scheduled onto any zone.
    * When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
    * to topologies that satisfy it.
-   * It's a required field. Default value is 1 and 0 is not allowed.
+   * Default value is 1 and 0 is not allowed.
    *
    * @generated from field: optional int32 max_skew = 1;
    */
