@@ -1069,6 +1069,144 @@ func (x *GetQuoteResponse) GetDiscountPercentage() float64 {
 	return 0
 }
 
+// GetBackupQuoteRequest is the request for the GetBackupQuote function
+type GetBackupQuoteRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format).
+	// This is a required field.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The cloud provider where the backup will be stored.
+	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
+	// The cloud region where the backup will be stored.
+	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+	// This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+	CloudProviderRegionId *string `protobuf:"bytes,4,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
+	// The size of the backup in GiB.
+	// This is an optional field. If not set, defaults to 1 GiB.
+	// The response will include the total price per hour for the specified (or default) backup size.
+	BackupSizeGib *uint32 `protobuf:"varint,5,opt,name=backup_size_gib,json=backupSizeGib,proto3,oneof" json:"backup_size_gib,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBackupQuoteRequest) Reset() {
+	*x = GetBackupQuoteRequest{}
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBackupQuoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBackupQuoteRequest) ProtoMessage() {}
+
+func (x *GetBackupQuoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBackupQuoteRequest.ProtoReflect.Descriptor instead.
+func (*GetBackupQuoteRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetBackupQuoteRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *GetBackupQuoteRequest) GetCloudProviderId() string {
+	if x != nil {
+		return x.CloudProviderId
+	}
+	return ""
+}
+
+func (x *GetBackupQuoteRequest) GetCloudProviderRegionId() string {
+	if x != nil && x.CloudProviderRegionId != nil {
+		return *x.CloudProviderRegionId
+	}
+	return ""
+}
+
+func (x *GetBackupQuoteRequest) GetBackupSizeGib() uint32 {
+	if x != nil && x.BackupSizeGib != nil {
+		return *x.BackupSizeGib
+	}
+	return 0
+}
+
+// GetBackupQuoteResponse is the response from the GetBackupQuote function
+type GetBackupQuoteResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The currency of the prices.
+	// Specifies the currency in which the prices are denominated.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The price per hour in millicents.
+	// Represents the cost per hour for storing the backup of the requested size.
+	// You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
+	PricePerHour  int64 `protobuf:"varint,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBackupQuoteResponse) Reset() {
+	*x = GetBackupQuoteResponse{}
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBackupQuoteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBackupQuoteResponse) ProtoMessage() {}
+
+func (x *GetBackupQuoteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBackupQuoteResponse.ProtoReflect.Descriptor instead.
+func (*GetBackupQuoteResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetBackupQuoteResponse) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetBackupQuoteResponse) GetPricePerHour() int64 {
+	if x != nil {
+		return x.PricePerHour
+	}
+	return 0
+}
+
 // ListInferenceModelsRequest is the request for the ListInferenceModels function
 type ListInferenceModelsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1088,7 +1226,7 @@ type ListInferenceModelsRequest struct {
 
 func (x *ListInferenceModelsRequest) Reset() {
 	*x = ListInferenceModelsRequest{}
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1100,7 +1238,7 @@ func (x *ListInferenceModelsRequest) String() string {
 func (*ListInferenceModelsRequest) ProtoMessage() {}
 
 func (x *ListInferenceModelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1113,7 +1251,7 @@ func (x *ListInferenceModelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInferenceModelsRequest.ProtoReflect.Descriptor instead.
 func (*ListInferenceModelsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListInferenceModelsRequest) GetAccountId() string {
@@ -1148,7 +1286,7 @@ type ListInferenceModelsResponse struct {
 
 func (x *ListInferenceModelsResponse) Reset() {
 	*x = ListInferenceModelsResponse{}
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1160,7 +1298,7 @@ func (x *ListInferenceModelsResponse) String() string {
 func (*ListInferenceModelsResponse) ProtoMessage() {}
 
 func (x *ListInferenceModelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1173,7 +1311,7 @@ func (x *ListInferenceModelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInferenceModelsResponse.ProtoReflect.Descriptor instead.
 func (*ListInferenceModelsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListInferenceModelsResponse) GetItems() []*InferenceModel {
@@ -1220,7 +1358,7 @@ type InferenceModel struct {
 
 func (x *InferenceModel) Reset() {
 	*x = InferenceModel{}
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1232,7 +1370,7 @@ func (x *InferenceModel) String() string {
 func (*InferenceModel) ProtoMessage() {}
 
 func (x *InferenceModel) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1245,7 +1383,7 @@ func (x *InferenceModel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InferenceModel.ProtoReflect.Descriptor instead.
 func (*InferenceModel) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *InferenceModel) GetId() string {
@@ -1407,7 +1545,20 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"^[A-Z]{3}$R\bcurrency\x12>\n" +
 	"\x17original_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12B\n" +
 	"\x19discounted_price_per_hour\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12H\n" +
-	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage\"\xbc\x01\n" +
+	"\x13discount_percentage\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage\"\xf7\x03\n" +
+	"\x15GetBackupQuoteRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
+	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
+	"\x18cloud_provider_region_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x124\n" +
+	"\x0fbackup_size_gib\x18\x05 \x01(\rB\a\xbaH\x04*\x02 \x00H\x01R\rbackupSizeGib\x88\x01\x01:\xd1\x01\xbaH\xcd\x01\x1a\xca\x01\n" +
+	"1get_backup_quote.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
+	"\x19_cloud_provider_region_idB\x12\n" +
+	"\x10_backup_size_gib\"v\n" +
+	"\x16GetBackupQuoteResponse\x12-\n" +
+	"\bcurrency\x18\x01 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency\x12-\n" +
+	"\x0eprice_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\fpricePerHour\"\xbc\x01\n" +
 	"\x1aListInferenceModelsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -1452,7 +1603,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\xd6\b\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\x9a\n" +
+	"\n" +
 	"\x0eBookingService\x12\x8a\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -1464,7 +1616,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
 	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\xa9\x01\n" +
-	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc4\x01\n" +
+	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc1\x01\n" +
+	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"N\x8a\xb5\x18\rwrite:backups\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xc4\x01\n" +
 	"\x13ListInferenceModels\x123.qdrant.cloud.booking.v1.ListInferenceModelsRequest\x1a4.qdrant.cloud.booking.v1.ListInferenceModelsResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/booking/v1/accounts/{account_id}/inference-modelsB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
@@ -1481,7 +1634,7 @@ func file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_booking_v1_booking_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_qdrant_cloud_booking_v1_booking_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_qdrant_cloud_booking_v1_booking_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
 	(PackageStatus)(0),                   // 0: qdrant.cloud.booking.v1.PackageStatus
 	(PackageTier)(0),                     // 1: qdrant.cloud.booking.v1.PackageTier
@@ -1499,9 +1652,11 @@ var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
 	(*ResourceConfigurationFilter)(nil),  // 13: qdrant.cloud.booking.v1.ResourceConfigurationFilter
 	(*GetQuoteRequest)(nil),              // 14: qdrant.cloud.booking.v1.GetQuoteRequest
 	(*GetQuoteResponse)(nil),             // 15: qdrant.cloud.booking.v1.GetQuoteResponse
-	(*ListInferenceModelsRequest)(nil),   // 16: qdrant.cloud.booking.v1.ListInferenceModelsRequest
-	(*ListInferenceModelsResponse)(nil),  // 17: qdrant.cloud.booking.v1.ListInferenceModelsResponse
-	(*InferenceModel)(nil),               // 18: qdrant.cloud.booking.v1.InferenceModel
+	(*GetBackupQuoteRequest)(nil),        // 16: qdrant.cloud.booking.v1.GetBackupQuoteRequest
+	(*GetBackupQuoteResponse)(nil),       // 17: qdrant.cloud.booking.v1.GetBackupQuoteResponse
+	(*ListInferenceModelsRequest)(nil),   // 18: qdrant.cloud.booking.v1.ListInferenceModelsRequest
+	(*ListInferenceModelsResponse)(nil),  // 19: qdrant.cloud.booking.v1.ListInferenceModelsResponse
+	(*InferenceModel)(nil),               // 20: qdrant.cloud.booking.v1.InferenceModel
 }
 var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	0,  // 0: qdrant.cloud.booking.v1.ListPackagesRequest.statuses:type_name -> qdrant.cloud.booking.v1.PackageStatus
@@ -1514,21 +1669,23 @@ var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	0,  // 7: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
 	1,  // 8: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
 	11, // 9: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
-	18, // 10: qdrant.cloud.booking.v1.ListInferenceModelsResponse.items:type_name -> qdrant.cloud.booking.v1.InferenceModel
+	20, // 10: qdrant.cloud.booking.v1.ListInferenceModelsResponse.items:type_name -> qdrant.cloud.booking.v1.InferenceModel
 	2,  // 11: qdrant.cloud.booking.v1.InferenceModel.vector_type:type_name -> qdrant.cloud.booking.v1.VectorType
 	3,  // 12: qdrant.cloud.booking.v1.InferenceModel.modality:type_name -> qdrant.cloud.booking.v1.ModelModality
 	4,  // 13: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
 	8,  // 14: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
 	6,  // 15: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
 	14, // 16: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
-	16, // 17: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:input_type -> qdrant.cloud.booking.v1.ListInferenceModelsRequest
-	5,  // 18: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
-	9,  // 19: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
-	7,  // 20: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	15, // 21: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
-	17, // 22: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:output_type -> qdrant.cloud.booking.v1.ListInferenceModelsResponse
-	18, // [18:23] is the sub-list for method output_type
-	13, // [13:18] is the sub-list for method input_type
+	16, // 17: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:input_type -> qdrant.cloud.booking.v1.GetBackupQuoteRequest
+	18, // 18: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:input_type -> qdrant.cloud.booking.v1.ListInferenceModelsRequest
+	5,  // 19: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
+	9,  // 20: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
+	7,  // 21: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+	15, // 22: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
+	17, // 23: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:output_type -> qdrant.cloud.booking.v1.GetBackupQuoteResponse
+	19, // 24: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:output_type -> qdrant.cloud.booking.v1.ListInferenceModelsResponse
+	19, // [19:25] is the sub-list for method output_type
+	13, // [13:19] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1544,14 +1701,15 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[9].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[10].OneofWrappers = []any{}
-	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14].OneofWrappers = []any{}
+	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[12].OneofWrappers = []any{}
+	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_booking_v1_booking_proto_rawDesc), len(file_qdrant_cloud_booking_v1_booking_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   15,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

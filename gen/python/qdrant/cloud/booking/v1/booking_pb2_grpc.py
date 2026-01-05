@@ -35,6 +35,11 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
                 _registered_method=True)
+        self.GetBackupQuote = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/GetBackupQuote',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteResponse.FromString,
+                _registered_method=True)
         self.ListInferenceModels = channel.unary_unary(
                 '/qdrant.cloud.booking.v1.BookingService/ListInferenceModels',
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.SerializeToString,
@@ -75,10 +80,21 @@ class BookingServiceServicer(object):
 
     def GetQuote(self, request, context):
         """Gets a price quote for a cluster configuration.
-        This endpoint calculates pricing information including hourly costs,
+        Calculates pricing information including hourly costs,
         and any applicable discounts for the specified cluster configuration.
         Required permissions:
         - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBackupQuote(self, request, context):
+        """Gets a price quote for a backup configuration.
+        Calculates pricing information for storing a backup,
+        based on the specified cloud provider, region, and backup size.
+        Required permissions:
+        - write:backups
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -115,6 +131,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.GetQuote,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.SerializeToString,
+            ),
+            'GetBackupQuote': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBackupQuote,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteResponse.SerializeToString,
             ),
             'ListInferenceModels': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInferenceModels,
@@ -231,6 +252,33 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/GetQuote',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBackupQuote(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.booking.v1.BookingService/GetBackupQuote',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetBackupQuoteResponse.FromString,
             options,
             channel_credentials,
             insecure,

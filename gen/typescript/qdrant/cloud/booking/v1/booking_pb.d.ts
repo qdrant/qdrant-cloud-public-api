@@ -514,6 +514,88 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
+ * GetBackupQuoteRequest is the request for the GetBackupQuote function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetBackupQuoteRequest
+ */
+export declare type GetBackupQuoteRequest = Message<"qdrant.cloud.booking.v1.GetBackupQuoteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The cloud provider where the backup will be stored.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The cloud region where the backup will be stored.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 4;
+   */
+  cloudProviderRegionId?: string;
+
+  /**
+   * The size of the backup in GiB.
+   * This is an optional field. If not set, defaults to 1 GiB.
+   * The response will include the total price per hour for the specified (or default) backup size.
+   *
+   * @generated from field: optional uint32 backup_size_gib = 5;
+   */
+  backupSizeGib?: number;
+};
+
+export declare type GetBackupQuoteRequestValid = GetBackupQuoteRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetBackupQuoteRequest.
+ * Use `create(GetBackupQuoteRequestSchema)` to create a new message.
+ */
+export declare const GetBackupQuoteRequestSchema: GenMessage<GetBackupQuoteRequest, {validType: GetBackupQuoteRequestValid}>;
+
+/**
+ * GetBackupQuoteResponse is the response from the GetBackupQuote function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetBackupQuoteResponse
+ */
+export declare type GetBackupQuoteResponse = Message<"qdrant.cloud.booking.v1.GetBackupQuoteResponse"> & {
+  /**
+   * The currency of the prices.
+   * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 1;
+   */
+  currency: string;
+
+  /**
+   * The price per hour in millicents.
+   * Represents the cost per hour for storing the backup of the requested size.
+   * You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
+   *
+   * @generated from field: int64 price_per_hour = 2;
+   */
+  pricePerHour: bigint;
+};
+
+export declare type GetBackupQuoteResponseValid = GetBackupQuoteResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetBackupQuoteResponse.
+ * Use `create(GetBackupQuoteResponseSchema)` to create a new message.
+ */
+export declare const GetBackupQuoteResponseSchema: GenMessage<GetBackupQuoteResponse, {validType: GetBackupQuoteResponseValid}>;
+
+/**
  * ListInferenceModelsRequest is the request for the ListInferenceModels function
  *
  * @generated from message qdrant.cloud.booking.v1.ListInferenceModelsRequest
@@ -853,7 +935,7 @@ export declare const BookingService: GenService<{
   },
   /**
    * Gets a price quote for a cluster configuration.
-   * This endpoint calculates pricing information including hourly costs,
+   * Calculates pricing information including hourly costs,
    * and any applicable discounts for the specified cluster configuration.
    * Required permissions:
    * - write:clusters
@@ -864,6 +946,20 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof GetQuoteRequestSchema;
     output: typeof GetQuoteResponseSchema;
+  },
+  /**
+   * Gets a price quote for a backup configuration.
+   * Calculates pricing information for storing a backup,
+   * based on the specified cloud provider, region, and backup size.
+   * Required permissions:
+   * - write:backups
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetBackupQuote
+   */
+  getBackupQuote: {
+    methodKind: "unary";
+    input: typeof GetBackupQuoteRequestSchema;
+    output: typeof GetBackupQuoteResponseSchema;
   },
   /**
    * Gets the list of available inference models.
