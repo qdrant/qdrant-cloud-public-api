@@ -2698,13 +2698,16 @@ func (x *AdditionalResources) GetDisk() uint32 {
 // The Toleration message represents a toleration object for Kubernetes.
 type Toleration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The key to match against the key of a node label.
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// The key of the taint that the toleration applies to.
+	// An empty key with operator `Exists` matches all keys, values and effects.
+	// The key must be a valid Kubernetes qualified name.
+	Key *string `protobuf:"bytes,1,opt,name=key,proto3,oneof" json:"key,omitempty"`
 	// The operator represents a key's relationship to the value.
 	// The default is TOLERATION_OPERATOR_EXISTS.
 	Operator *TolerationOperator `protobuf:"varint,2,opt,name=operator,proto3,enum=qdrant.cloud.cluster.v1.TolerationOperator,oneof" json:"operator,omitempty"`
-	// The value to match against the value of a node label.
-	Value string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	// The value is the taint value the toleration matches to.
+	// If the operator is `Exists`, the value should be empty, otherwise just a regular string.
+	Value *string `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
 	// The effect indicates the taint effect to match.
 	// The default is TOLERATION_EFFECT_NO_SCHEDULE.
 	Effect *TolerationEffect `protobuf:"varint,4,opt,name=effect,proto3,enum=qdrant.cloud.cluster.v1.TolerationEffect,oneof" json:"effect,omitempty"`
@@ -2745,8 +2748,8 @@ func (*Toleration) Descriptor() ([]byte, []int) {
 }
 
 func (x *Toleration) GetKey() string {
-	if x != nil {
-		return x.Key
+	if x != nil && x.Key != nil {
+		return *x.Key
 	}
 	return ""
 }
@@ -2759,8 +2762,8 @@ func (x *Toleration) GetOperator() TolerationOperator {
 }
 
 func (x *Toleration) GetValue() string {
-	if x != nil {
-		return x.Value
+	if x != nil && x.Value != nil {
+		return *x.Value
 	}
 	return ""
 }
@@ -3650,17 +3653,21 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1eDatabaseConfigurationInference\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\")\n" +
 	"\x13AdditionalResources\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\rR\x04disk\"\x86\x03\n" +
+	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xaa\x06\n" +
 	"\n" +
-	"Toleration\x12H\n" +
-	"\x03key\x18\x01 \x01(\tB6\xbaH3r1\x18?2-^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$R\x03key\x12X\n" +
+	"Toleration\x12\xa5\x01\n" +
+	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xbd\x022\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x03key\x88\x01\x01\x12X\n" +
 	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\boperator\x88\x01\x01\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\tR\x05value\x12R\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\boperator\x88\x01\x01\x12\x19\n" +
+	"\x05value\x18\x03 \x01(\tH\x02R\x05value\x88\x01\x01\x12R\n" +
 	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\x06effect\x88\x01\x01\x12;\n" +
-	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x02R\x11tolerationSeconds\x88\x01\x01B\v\n" +
-	"\t_operatorB\t\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\x06effect\x88\x01\x01\x12;\n" +
+	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x11tolerationSeconds\x88\x01\x01:\xac\x02\xbaH\xa8\x02\x1a\xb6\x01\n" +
+	"\x1btoleration.value_for_exists\x12Wvalue must not be set when operator is Exists (or is not set, which defaults to Exists)\x1a>(has(this.operator) && this.operator != 1) || !has(this.value)\x1am\n" +
+	"\x1atoleration.value_for_equal\x12(value must be set when operator is Equal\x1a%this.operator != 2 || has(this.value)B\x06\n" +
+	"\x04_keyB\v\n" +
+	"\t_operatorB\b\n" +
+	"\x06_valueB\t\n" +
 	"\a_effectB\x15\n" +
 	"\x13_toleration_seconds\"\xb8\x04\n" +
 	"\fClusterState\x12!\n" +

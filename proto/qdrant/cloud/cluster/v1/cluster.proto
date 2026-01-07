@@ -809,12 +809,14 @@ enum TolerationEffect {
 
 // The Toleration message represents a toleration object for Kubernetes.
 message Toleration {
-  // The key to match against the key of a node label.
-  string key = 1 [(buf.validate.field).string = {
-    // Must be 63 characters or less (excluding the prefix).
-    max_len: 63
-    // Must be a valid DNS label as per RFC 1123.
-    pattern: "^([a-zA-Z0-9]([-a-zA-Z0-9_.]*[a-zA-Z0-9])?)?$"
+  // The key of the taint that the toleration applies to.
+  // An empty key with operator `Exists` matches all keys, values and effects.
+  // The key must be a valid Kubernetes qualified name.
+  optional string key = 1 [(buf.validate.field).string = {
+    // A key can be up to 317 characters long (253 for prefix, 1 for '/', 63 for name).
+    max_len: 317
+    // Basic pattern, however we do not cover the length constraints here.
+    pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
   }];
   // The operator represents a key's relationship to the value.
   // The default is TOLERATION_OPERATOR_EXISTS.
@@ -822,8 +824,21 @@ message Toleration {
     defined_only: true
     not_in: [0]
   }];
-  // The value to match against the value of a node label.
-  string value = 3;
+  // The value is the taint value the toleration matches to.
+  // If the operator is `Exists`, the value should be empty, otherwise just a regular string.
+  optional string value = 3;
+  option (buf.validate.message).cel = {
+    id: "toleration.value_for_exists"
+    message: "value must not be set when operator is Exists (or is not set, which defaults to Exists)"
+    // If operator is Exists (1) or not set (defaults to Exists), value must not be present.
+    expression: "(has(this.operator) && this.operator != 1) || !has(this.value)"
+  };
+  option (buf.validate.message).cel = {
+    id: "toleration.value_for_equal"
+    message: "value must be set when operator is Equal"
+    // If operator is Equal (2), value must be present.
+    expression: "this.operator != 2 || has(this.value)"
+  };
   // The effect indicates the taint effect to match.
   // The default is TOLERATION_EFFECT_NO_SCHEDULE.
   optional TolerationEffect effect = 4 [(buf.validate.field).enum = {

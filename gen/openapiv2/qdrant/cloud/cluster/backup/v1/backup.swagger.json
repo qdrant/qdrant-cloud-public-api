@@ -631,7 +631,7 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key to match against the key of a node label."
+          "description": "The key of the taint that the toleration applies to.\nAn empty key with operator `Exists` matches all keys, values and effects.\nThe key must be a valid Kubernetes qualified name."
         },
         "operator": {
           "$ref": "#/definitions/v1TolerationOperator",
@@ -639,7 +639,7 @@
         },
         "value": {
           "type": "string",
-          "description": "The value to match against the value of a node label."
+          "description": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should be empty, otherwise just a regular string."
         },
         "effect": {
           "$ref": "#/definitions/v1TolerationEffect",
