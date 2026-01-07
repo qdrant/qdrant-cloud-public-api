@@ -28,6 +28,7 @@ const (
 	ClusterService_RestartCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
 	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
 	ClusterService_UnsuspendCluster_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster"
+	ClusterService_EnableClusterJwtRbac_FullMethodName    = "/qdrant.cloud.cluster.v1.ClusterService/EnableClusterJwtRbac"
 	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
 	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
 	ClusterService_GetQdrantRelease_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease"
@@ -76,6 +77,12 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - write:clusters
 	UnsuspendCluster(ctx context.Context, in *UnsuspendClusterRequest, opts ...grpc.CallOption) (*UnsuspendClusterResponse, error)
+	// Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+	// This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
+	// If enabled, you can generate JWT tokens with fine-grained rules for access control.
+	// Required permissions:
+	// - write:clusters
+	EnableClusterJwtRbac(ctx context.Context, in *EnableClusterJwtRbacRequest, opts ...grpc.CallOption) (*EnableClusterJwtRbacResponse, error)
 	// Suggests a unique and human-friendly name for a new cluster in the specified account.
 	// This can be used by clients to pre-fill the name field when creating a new cluster.
 	// Required permissions:
@@ -190,6 +197,16 @@ func (c *clusterServiceClient) UnsuspendCluster(ctx context.Context, in *Unsuspe
 	return out, nil
 }
 
+func (c *clusterServiceClient) EnableClusterJwtRbac(ctx context.Context, in *EnableClusterJwtRbacRequest, opts ...grpc.CallOption) (*EnableClusterJwtRbacResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnableClusterJwtRbacResponse)
+	err := c.cc.Invoke(ctx, ClusterService_EnableClusterJwtRbac_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) SuggestClusterName(ctx context.Context, in *SuggestClusterNameRequest, opts ...grpc.CallOption) (*SuggestClusterNameResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SuggestClusterNameResponse)
@@ -263,6 +280,12 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - write:clusters
 	UnsuspendCluster(context.Context, *UnsuspendClusterRequest) (*UnsuspendClusterResponse, error)
+	// Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+	// This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
+	// If enabled, you can generate JWT tokens with fine-grained rules for access control.
+	// Required permissions:
+	// - write:clusters
+	EnableClusterJwtRbac(context.Context, *EnableClusterJwtRbacRequest) (*EnableClusterJwtRbacResponse, error)
 	// Suggests a unique and human-friendly name for a new cluster in the specified account.
 	// This can be used by clients to pre-fill the name field when creating a new cluster.
 	// Required permissions:
@@ -313,6 +336,9 @@ func (UnimplementedClusterServiceServer) SuspendCluster(context.Context, *Suspen
 }
 func (UnimplementedClusterServiceServer) UnsuspendCluster(context.Context, *UnsuspendClusterRequest) (*UnsuspendClusterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnsuspendCluster not implemented")
+}
+func (UnimplementedClusterServiceServer) EnableClusterJwtRbac(context.Context, *EnableClusterJwtRbacRequest) (*EnableClusterJwtRbacResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnableClusterJwtRbac not implemented")
 }
 func (UnimplementedClusterServiceServer) SuggestClusterName(context.Context, *SuggestClusterNameRequest) (*SuggestClusterNameResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SuggestClusterName not implemented")
@@ -506,6 +532,24 @@ func _ClusterService_UnsuspendCluster_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_EnableClusterJwtRbac_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableClusterJwtRbacRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).EnableClusterJwtRbac(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_EnableClusterJwtRbac_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).EnableClusterJwtRbac(ctx, req.(*EnableClusterJwtRbacRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_SuggestClusterName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuggestClusterNameRequest)
 	if err := dec(in); err != nil {
@@ -602,6 +646,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnsuspendCluster",
 			Handler:    _ClusterService_UnsuspendCluster_Handler,
+		},
+		{
+			MethodName: "EnableClusterJwtRbac",
+			Handler:    _ClusterService_EnableClusterJwtRbac_Handler,
 		},
 		{
 			MethodName: "SuggestClusterName",

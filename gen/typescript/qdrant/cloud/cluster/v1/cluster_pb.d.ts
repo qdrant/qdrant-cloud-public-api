@@ -498,6 +498,56 @@ export declare type UnsuspendClusterResponseValid = UnsuspendClusterResponse;
 export declare const UnsuspendClusterResponseSchema: GenMessage<UnsuspendClusterResponse, {validType: UnsuspendClusterResponseValid}>;
 
 /**
+ * EnableClusterJwtRbacRequest is the request for the EnableClusterJwtRbac function
+ *
+ * @generated from message qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest
+ */
+export declare type EnableClusterJwtRbacRequest = Message<"qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cluster (in GUID format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+};
+
+export declare type EnableClusterJwtRbacRequestValid = EnableClusterJwtRbacRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest.
+ * Use `create(EnableClusterJwtRbacRequestSchema)` to create a new message.
+ */
+export declare const EnableClusterJwtRbacRequestSchema: GenMessage<EnableClusterJwtRbacRequest, {validType: EnableClusterJwtRbacRequestValid}>;
+
+/**
+ * EnableClusterJwtRbacResponse is the response from the EnableClusterJwtRbac function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse
+ */
+export declare type EnableClusterJwtRbacResponse = Message<"qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse"> & {
+};
+
+export declare type EnableClusterJwtRbacResponseValid = EnableClusterJwtRbacResponse;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse.
+ * Use `create(EnableClusterJwtRbacResponseSchema)` to create a new message.
+ */
+export declare const EnableClusterJwtRbacResponseSchema: GenMessage<EnableClusterJwtRbacResponse, {validType: EnableClusterJwtRbacResponseValid}>;
+
+/**
  * SuggestClusterNameRequest is the request for the SuggestClusterName function
  *
  * @generated from message qdrant.cloud.cluster.v1.SuggestClusterNameRequest
@@ -1342,9 +1392,9 @@ export declare type DatabaseConfigurationCollection = Message<"qdrant.cloud.clus
 
   /**
    * The default parameters for vectors.
-   * This is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults.
+   * This is an optional field, see DatabaseConfigurationCollectionVectors for defaults.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors vectors = 3;
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors vectors = 3;
    */
   vectors?: DatabaseConfigurationCollectionVectors;
 };
@@ -1390,8 +1440,9 @@ export declare const DatabaseConfigurationCollectionVectorsSchema: GenMessage<Da
 export declare type DatabaseConfigurationStorage = Message<"qdrant.cloud.cluster.v1.DatabaseConfigurationStorage"> & {
   /**
    * The performance related Qdrant database storage configuration
+   * This is an optional field, see DatabaseConfigurationStoragePerformance for defaults.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance performance = 1;
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance performance = 1;
    */
   performance?: DatabaseConfigurationStoragePerformance;
 };
@@ -1412,22 +1463,22 @@ export declare const DatabaseConfigurationStorageSchema: GenMessage<DatabaseConf
 export declare type DatabaseConfigurationStoragePerformance = Message<"qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance"> & {
   /**
    * CPU budget, how many CPUs (threads) to allocate for an optimization job.
-   * If 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size
+   * If not set or set to 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size
    * If negative - subtract this number of CPUs from the available CPUs.
    * If positive - use this exact number of CPUs.
    *
-   * @generated from field: int32 optimizer_cpu_budget = 1;
+   * @generated from field: optional int32 optimizer_cpu_budget = 1;
    */
-  optimizerCpuBudget: number;
+  optimizerCpuBudget?: number;
 
   /**
    * Enable async scorer which uses io_uring when rescoring.
    * Only supported on Linux, must be enabled in your kernel.
    * See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
    *
-   * @generated from field: bool async_scorer = 2;
+   * @generated from field: optional bool async_scorer = 2;
    */
-  asyncScorer: boolean;
+  asyncScorer?: boolean;
 };
 
 export declare type DatabaseConfigurationStoragePerformanceValid = DatabaseConfigurationStoragePerformance;
@@ -1465,24 +1516,12 @@ export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster
   readOnlyApiKey?: SecretKeyRef;
 
   /**
-   * Enable JWT Role Based Access Control (RBAC).
-   * This setting is for both managed and hybrid cloud clusters.
-   * For managed cloud clusters, this defaults to enabled and cannot be explicitly disabled.
-   * For hybrid cloud clusters, the value is applied as provided.
-   * If enabled, you can generate JWT tokens with fine-grained rules for access control.
-   * Use generated token instead of API key.
-   *
-   * @generated from field: optional bool jwt_rbac = 3;
-   */
-  jwtRbac?: boolean;
-
-  /**
    * Enable HTTPS for the REST and gRPC API
    * This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
    *
-   * @generated from field: bool enable_tls = 4;
+   * @generated from field: optional bool enable_tls = 4;
    */
-  enableTls: boolean;
+  enableTls?: boolean;
 };
 
 export declare type DatabaseConfigurationServiceValid = DatabaseConfigurationService;
@@ -1711,6 +1750,17 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
    * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeInfo nodes = 9;
    */
   nodes: ClusterNodeInfo[];
+
+  /**
+   * Wether or not JWT Role Based Access Control (RBAC) is enabled.
+   * On hybrid-cloud this is inferred from the fact a database secret is provided.
+   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.
+   *                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
+   * If enabled, you can generate JWT tokens with fine-grained rules for access control.
+   *
+   * @generated from field: bool jwt_rbac = 10;
+   */
+  jwtRbac: boolean;
 };
 
 /**
@@ -1783,6 +1833,17 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
    * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeInfo nodes = 9;
    */
   nodes: ClusterNodeInfoValid[];
+
+  /**
+   * Wether or not JWT Role Based Access Control (RBAC) is enabled.
+   * On hybrid-cloud this is inferred from the fact a database secret is provided.
+   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.
+   *                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
+   * If enabled, you can generate JWT tokens with fine-grained rules for access control.
+   *
+   * @generated from field: bool jwt_rbac = 10;
+   */
+  jwtRbac: boolean;
 };
 
 /**
@@ -2791,6 +2852,20 @@ export declare const ClusterService: GenService<{
     methodKind: "unary";
     input: typeof UnsuspendClusterRequestSchema;
     output: typeof UnsuspendClusterResponseSchema;
+  },
+  /**
+   * Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+   * This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
+   * If enabled, you can generate JWT tokens with fine-grained rules for access control.
+   * Required permissions:
+   * - write:clusters
+   *
+   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac
+   */
+  enableClusterJwtRbac: {
+    methodKind: "unary";
+    input: typeof EnableClusterJwtRbacRequestSchema;
+    output: typeof EnableClusterJwtRbacResponseSchema;
   },
   /**
    * Suggests a unique and human-friendly name for a new cluster in the specified account.

@@ -1149,7 +1149,7 @@
         },
         "vectors": {
           "$ref": "#/definitions/v1DatabaseConfigurationCollectionVectors",
-          "description": "The default parameters for vectors.\nThis is an implicit optional field, see DatabaseConfigurationCollectionVectors for defaults."
+          "description": "The default parameters for vectors.\nThis is an optional field, see DatabaseConfigurationCollectionVectors for defaults."
         }
       },
       "title": "The default Qdrant database collection configuration"
@@ -1200,10 +1200,6 @@
           "$ref": "#/definitions/v1SecretKeyRef",
           "title": "Set an api-key for read-only operations.\nThis setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
         },
-        "jwtRbac": {
-          "type": "boolean",
-          "description": "Enable JWT Role Based Access Control (RBAC).\nThis setting is for both managed and hybrid cloud clusters.\nFor managed cloud clusters, this defaults to enabled and cannot be explicitly disabled.\nFor hybrid cloud clusters, the value is applied as provided.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nUse generated token instead of API key."
-        },
         "enableTls": {
           "type": "boolean",
           "description": "Enable HTTPS for the REST and gRPC API\nThis setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection)."
@@ -1216,7 +1212,7 @@
       "properties": {
         "performance": {
           "$ref": "#/definitions/v1DatabaseConfigurationStoragePerformance",
-          "title": "The performance related Qdrant database storage configuration"
+          "description": "The performance related Qdrant database storage configuration\nThis is an optional field, see DatabaseConfigurationStoragePerformance for defaults."
         }
       },
       "title": "The Qdrant storage configuration"
@@ -1227,7 +1223,7 @@
         "optimizerCpuBudget": {
           "type": "integer",
           "format": "int32",
-          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
+          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf not set or set to 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
         },
         "asyncScorer": {
           "type": "boolean",

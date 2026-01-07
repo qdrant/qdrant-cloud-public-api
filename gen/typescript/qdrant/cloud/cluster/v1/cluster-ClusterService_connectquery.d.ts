@@ -78,6 +78,16 @@ export const suspendCluster: typeof ClusterService["method"]["suspendCluster"];
  */
 export const unsuspendCluster: typeof ClusterService["method"]["unsuspendCluster"];
 /**
+ * Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+ * This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
+ * If enabled, you can generate JWT tokens with fine-grained rules for access control.
+ * Required permissions:
+ * - write:clusters
+ *
+ * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac
+ */
+export const enableClusterJwtRbac: typeof ClusterService["method"]["enableClusterJwtRbac"];
+/**
  * Suggests a unique and human-friendly name for a new cluster in the specified account.
  * This can be used by clients to pre-fill the name field when creating a new cluster.
  * Required permissions:

@@ -60,6 +60,11 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.FromString,
                 _registered_method=True)
+        self.EnableClusterJwtRbac = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/EnableClusterJwtRbac',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacResponse.FromString,
+                _registered_method=True)
         self.SuggestClusterName = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.SuggestClusterNameRequest.SerializeToString,
@@ -163,6 +168,17 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def EnableClusterJwtRbac(self, request, context):
+        """Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+        This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
+        If enabled, you can generate JWT tokens with fine-grained rules for access control.
+        Required permissions:
+        - write:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SuggestClusterName(self, request, context):
         """Suggests a unique and human-friendly name for a new cluster in the specified account.
         This can be used by clients to pre-fill the name field when creating a new cluster.
@@ -239,6 +255,11 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     servicer.UnsuspendCluster,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.SerializeToString,
+            ),
+            'EnableClusterJwtRbac': grpc.unary_unary_rpc_method_handler(
+                    servicer.EnableClusterJwtRbac,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacResponse.SerializeToString,
             ),
             'SuggestClusterName': grpc.unary_unary_rpc_method_handler(
                     servicer.SuggestClusterName,
@@ -500,6 +521,33 @@ class ClusterService(object):
             '/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster',
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.UnsuspendClusterResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def EnableClusterJwtRbac(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.v1.ClusterService/EnableClusterJwtRbac',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.EnableClusterJwtRbacResponse.FromString,
             options,
             channel_credentials,
             insecure,
