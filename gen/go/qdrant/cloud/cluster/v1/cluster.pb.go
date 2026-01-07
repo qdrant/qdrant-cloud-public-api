@@ -2699,14 +2699,14 @@ func (x *AdditionalResources) GetDisk() uint32 {
 type Toleration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The key of the taint that the toleration applies to.
-	// An empty key with operator `Exists` matches all keys, values and effects.
+	// If key is not set together with operator `Exists` matches all keys, values and effects.
 	// The key must be a valid Kubernetes qualified name.
 	Key *string `protobuf:"bytes,1,opt,name=key,proto3,oneof" json:"key,omitempty"`
 	// The operator represents a key's relationship to the value.
 	// The default is TOLERATION_OPERATOR_EXISTS.
 	Operator *TolerationOperator `protobuf:"varint,2,opt,name=operator,proto3,enum=qdrant.cloud.cluster.v1.TolerationOperator,oneof" json:"operator,omitempty"`
 	// The value is the taint value the toleration matches to.
-	// If the operator is `Exists`, the value should be empty, otherwise just a regular string.
+	// If the operator is `Exists`, the value should not be set, otherwise just a regular string.
 	Value *string `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
 	// The effect indicates the taint effect to match.
 	// The default is TOLERATION_EFFECT_NO_SCHEDULE.

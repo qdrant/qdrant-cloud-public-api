@@ -810,7 +810,7 @@ enum TolerationEffect {
 // The Toleration message represents a toleration object for Kubernetes.
 message Toleration {
   // The key of the taint that the toleration applies to.
-  // An empty key with operator `Exists` matches all keys, values and effects.
+  // If key is not set together with operator `Exists` matches all keys, values and effects.
   // The key must be a valid Kubernetes qualified name.
   optional string key = 1 [(buf.validate.field).string = {
     // A key can be up to 317 characters long (253 for prefix, 1 for '/', 63 for name).
@@ -825,7 +825,7 @@ message Toleration {
     not_in: [0]
   }];
   // The value is the taint value the toleration matches to.
-  // If the operator is `Exists`, the value should be empty, otherwise just a regular string.
+  // If the operator is `Exists`, the value should not be set, otherwise just a regular string.
   optional string value = 3;
   option (buf.validate.message).cel = {
     id: "toleration.value_for_exists"
