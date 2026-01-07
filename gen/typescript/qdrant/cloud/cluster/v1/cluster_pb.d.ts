@@ -1754,7 +1754,7 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
   /**
    * Wether or not JWT Role Based Access Control (RBAC) is enabled.
    * On hybrid-cloud this is inferred from the fact a database secret is provided.
-   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.
+   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabled after an upgrade.
    *                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
    * If enabled, you can generate JWT tokens with fine-grained rules for access control.
    *
@@ -1837,7 +1837,7 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
   /**
    * Wether or not JWT Role Based Access Control (RBAC) is enabled.
    * On hybrid-cloud this is inferred from the fact a database secret is provided.
-   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.
+   * On managed-cloud this depends on the version of the cluster and wether or not this feature is enabled after an upgrade.
    *                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
    * If enabled, you can generate JWT tokens with fine-grained rules for access control.
    *
@@ -2854,7 +2854,8 @@ export declare const ClusterService: GenService<{
     output: typeof UnsuspendClusterResponseSchema;
   },
   /**
-   * Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+   * Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments
+   * in the account identified by the given ID.
    * This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
    * If enabled, you can generate JWT tokens with fine-grained rules for access control.
    * Required permissions:

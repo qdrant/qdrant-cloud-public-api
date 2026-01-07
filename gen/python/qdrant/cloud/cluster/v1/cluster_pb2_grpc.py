@@ -169,7 +169,8 @@ class ClusterServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def EnableClusterJwtRbac(self, request, context):
-        """Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.
+        """Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments
+        in the account identified by the given ID.
         This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.
         If enabled, you can generate JWT tokens with fine-grained rules for access control.
         Required permissions:

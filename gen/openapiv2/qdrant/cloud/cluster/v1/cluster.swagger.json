@@ -225,7 +225,7 @@
     },
     "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/enable-jwt": {
       "post": {
-        "summary": "Enables JWT Role Based Access Control (RBAC) for a cluster in the managed cloud environments in the account identified by the given ID.\nThis can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nRequired permissions:\n- write:clusters",
+        "summary": "Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments\nin the account identified by the given ID.\nThis can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nRequired permissions:\n- write:clusters",
         "operationId": "ClusterService_EnableClusterJwtRbac",
         "responses": {
           "200": {
@@ -1150,7 +1150,7 @@
         },
         "jwtRbac": {
           "type": "boolean",
-          "description": "Wether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
+          "description": "Wether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and wether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."

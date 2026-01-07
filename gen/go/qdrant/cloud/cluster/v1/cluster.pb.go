@@ -2890,7 +2890,7 @@ type ClusterState struct {
 	Nodes []*ClusterNodeInfo `protobuf:"bytes,9,rep,name=nodes,proto3" json:"nodes,omitempty"`
 	// Wether or not JWT Role Based Access Control (RBAC) is enabled.
 	// On hybrid-cloud this is inferred from the fact a database secret is provided.
-	// On managed-cloud this depends on the version of the cluster and wether or not this feature is enabed after an upgrade.
+	// On managed-cloud this depends on the version of the cluster and wether or not this feature is enabled after an upgrade.
 	//
 	//	When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
 	//
