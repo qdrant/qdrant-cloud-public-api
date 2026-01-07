@@ -1592,26 +1592,30 @@ export declare const AdditionalResourcesSchema: GenMessage<AdditionalResources, 
  */
 export declare type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> & {
   /**
-   * The key to match against the key of a node label.
+   * The key of the taint that the toleration applies to.
+   * If key is not set (or empty) together with operator `Exists` matches all keys, values and effects.
+   * The key must be a valid Kubernetes qualified name.
    *
-   * @generated from field: string key = 1;
+   * @generated from field: optional string key = 1;
    */
-  key: string;
+  key?: string;
 
   /**
    * The operator represents a key's relationship to the value.
-   * The default is TOLERATION_OPERATOR_EXISTS.
+   * The default is TOLERATION_OPERATOR_EQUAL.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.TolerationOperator operator = 2;
    */
   operator?: TolerationOperator;
 
   /**
-   * The value to match against the value of a node label.
+   * The value is the taint value the toleration matches to.
+   * If the operator is `Exists`, the value should not be set.
+   * If the operator is `Equal` (the default), the value is required.
    *
-   * @generated from field: string value = 3;
+   * @generated from field: optional string value = 3;
    */
-  value: string;
+  value?: string;
 
   /**
    * The effect indicates the taint effect to match.
