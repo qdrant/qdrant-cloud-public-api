@@ -3654,10 +3654,10 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1eDatabaseConfigurationInference\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\")\n" +
 	"\x13AdditionalResources\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xaf\x06\n" +
+	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xb6\a\n" +
 	"\n" +
-	"Toleration\x12\x1f\n" +
-	"\x03key\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x18\xbd\x02H\x00R\x03key\x88\x01\x01\x12X\n" +
+	"Toleration\x12\xa5\x01\n" +
+	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xbd\x022\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x03key\x88\x01\x01\x12X\n" +
 	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\boperator\x88\x01\x01\x12\x19\n" +
 	"\x05value\x18\x03 \x01(\tH\x02R\x05value\x88\x01\x01\x12R\n" +

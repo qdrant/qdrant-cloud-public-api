@@ -815,6 +815,8 @@ message Toleration {
   optional string key = 1 [(buf.validate.field).string = {
     // A key can be up to 317 characters long (253 for prefix, 1 for '/', 63 for name).
     max_len: 317
+    // Basic pattern, however we do not cover the length constraints here.
+    pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
   }];
   // The operator represents a key's relationship to the value.
   // The default is TOLERATION_OPERATOR_EQUAL.
