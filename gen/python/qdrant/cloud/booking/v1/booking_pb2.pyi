@@ -172,6 +172,30 @@ class GetQuoteResponse(_message.Message):
     discount_percentage: float
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
+class GetBackupQuoteRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_SIZE_GIB_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    backup_size_gib: int
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., backup_size_gib: _Optional[int] = ...) -> None: ...
+
+class GetBackupQuoteResponse(_message.Message):
+    __slots__ = ()
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    original_price_per_hour: int
+    discounted_price_per_hour: int
+    discount_percentage: float
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
+
 class ListInferenceModelsRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

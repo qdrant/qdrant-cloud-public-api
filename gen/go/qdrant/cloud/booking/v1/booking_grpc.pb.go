@@ -23,6 +23,7 @@ const (
 	BookingService_GetPackage_FullMethodName          = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
 	BookingService_ListGlobalPackages_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
 	BookingService_GetQuote_FullMethodName            = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
+	BookingService_GetBackupQuote_FullMethodName      = "/qdrant.cloud.booking.v1.BookingService/GetBackupQuote"
 	BookingService_ListInferenceModels_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListInferenceModels"
 )
 
@@ -44,11 +45,17 @@ type BookingServiceClient interface {
 	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
 	// Gets a price quote for a cluster configuration.
-	// This endpoint calculates pricing information including hourly costs,
+	// Calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
 	// Required permissions:
 	// - write:clusters
 	GetQuote(ctx context.Context, in *GetQuoteRequest, opts ...grpc.CallOption) (*GetQuoteResponse, error)
+	// Gets a price quote for a backup configuration.
+	// Calculates pricing information for storing a backup,
+	// based on the specified cloud provider, region, and backup size.
+	// Required permissions:
+	// - write:backups
+	GetBackupQuote(ctx context.Context, in *GetBackupQuoteRequest, opts ...grpc.CallOption) (*GetBackupQuoteResponse, error)
 	// Gets the list of available inference models.
 	// Required permissions:
 	// - None (authenticated only)
@@ -103,6 +110,16 @@ func (c *bookingServiceClient) GetQuote(ctx context.Context, in *GetQuoteRequest
 	return out, nil
 }
 
+func (c *bookingServiceClient) GetBackupQuote(ctx context.Context, in *GetBackupQuoteRequest, opts ...grpc.CallOption) (*GetBackupQuoteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackupQuoteResponse)
+	err := c.cc.Invoke(ctx, BookingService_GetBackupQuote_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *bookingServiceClient) ListInferenceModels(ctx context.Context, in *ListInferenceModelsRequest, opts ...grpc.CallOption) (*ListInferenceModelsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListInferenceModelsResponse)
@@ -131,11 +148,17 @@ type BookingServiceServer interface {
 	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
 	// Gets a price quote for a cluster configuration.
-	// This endpoint calculates pricing information including hourly costs,
+	// Calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
 	// Required permissions:
 	// - write:clusters
 	GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error)
+	// Gets a price quote for a backup configuration.
+	// Calculates pricing information for storing a backup,
+	// based on the specified cloud provider, region, and backup size.
+	// Required permissions:
+	// - write:backups
+	GetBackupQuote(context.Context, *GetBackupQuoteRequest) (*GetBackupQuoteResponse, error)
 	// Gets the list of available inference models.
 	// Required permissions:
 	// - None (authenticated only)
@@ -161,6 +184,9 @@ func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *Li
 }
 func (UnimplementedBookingServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetQuote not implemented")
+}
+func (UnimplementedBookingServiceServer) GetBackupQuote(context.Context, *GetBackupQuoteRequest) (*GetBackupQuoteResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBackupQuote not implemented")
 }
 func (UnimplementedBookingServiceServer) ListInferenceModels(context.Context, *ListInferenceModelsRequest) (*ListInferenceModelsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListInferenceModels not implemented")
@@ -258,6 +284,24 @@ func _BookingService_GetQuote_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_GetBackupQuote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackupQuoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).GetBackupQuote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_GetBackupQuote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).GetBackupQuote(ctx, req.(*GetBackupQuoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BookingService_ListInferenceModels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListInferenceModelsRequest)
 	if err := dec(in); err != nil {
@@ -298,6 +342,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetQuote",
 			Handler:    _BookingService_GetQuote_Handler,
+		},
+		{
+			MethodName: "GetBackupQuote",
+			Handler:    _BookingService_GetBackupQuote_Handler,
 		},
 		{
 			MethodName: "ListInferenceModels",
