@@ -5,7 +5,6 @@ managed:
     - file_option: go_package_prefix
       module: buf.build/bufbuild/protovalidate
     - module: buf.build/googleapis/googleapis
-    - module: buf.build/common/protos
   override:
     - file_option: go_package_prefix
       value: github.com/qdrant/qdrant-cloud-public-api/gen/go

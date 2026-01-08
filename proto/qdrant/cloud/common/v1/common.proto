@@ -211,12 +211,12 @@ message LabelSelectorRequirement {
   // If the operator is Exists or DoesNotExist, the values array must be empty.
   repeated string values = 3;
   option (buf.validate.message).cel = {
-    id: "label_selector_requirement.values_for_in_notin"
+    id: "label_selector_requirement.values_for_in_not-in"
     message: "values must be non-empty when operator is In or NotIn"
     expression: "!(this.operator == 'In' || this.operator == 'NotIn') || this.values.size() > 0"
   };
   option (buf.validate.message).cel = {
-    id: "label_selector_requirement.values_for_exists_notexists"
+    id: "label_selector_requirement.values_for_exists_not-exists"
     message: "values must be empty when operator is Exists or DoesNotExist"
     expression: "!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0"
   };

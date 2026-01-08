@@ -1118,13 +1118,13 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12X\n" +
 	"\x12when_unsatisfiable\x18\x03 \x01(\tB$\xbaH!r\x1fR\rDoNotScheduleR\x0eScheduleAnywayH\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
 	"\t_max_skewB\x15\n" +
-	"\x13_when_unsatisfiable\"\xa7\x04\n" +
+	"\x13_when_unsatisfiable\"\xa9\x04\n" +
 	"\x18LabelSelectorRequirement\x12\x19\n" +
 	"\x03key\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03key\x12B\n" +
 	"\boperator\x18\x02 \x01(\tB&\xbaH#r!R\x02InR\x05NotInR\x06ExistsR\fDoesNotExistR\boperator\x12\x16\n" +
-	"\x06values\x18\x03 \x03(\tR\x06values:\x93\x03\xbaH\x8f\x03\x1a\xb7\x01\n" +
-	".label_selector_requirement.values_for_in_notin\x125values must be non-empty when operator is In or NotIn\x1aN!(this.operator == 'In' || this.operator == 'NotIn') || this.values.size() > 0\x1a\xd2\x01\n" +
-	"6label_selector_requirement.values_for_exists_notexists\x12<values must be empty when operator is Exists or DoesNotExist\x1aZ!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0\"\x89\x02\n" +
+	"\x06values\x18\x03 \x03(\tR\x06values:\x95\x03\xbaH\x91\x03\x1a\xb8\x01\n" +
+	"/label_selector_requirement.values_for_in_not-in\x125values must be non-empty when operator is In or NotIn\x1aN!(this.operator == 'In' || this.operator == 'NotIn') || this.values.size() > 0\x1a\xd3\x01\n" +
+	"7label_selector_requirement.values_for_exists_not-exists\x12<values must be empty when operator is Exists or DoesNotExist\x1aZ!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0\"\x89\x02\n" +
 	"\rLabelSelector\x12Y\n" +
 	"\fmatch_labels\x18\x01 \x03(\v26.qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntryR\vmatchLabels\x12]\n" +
 	"\x11match_expressions\x18\x02 \x03(\v20.qdrant.cloud.common.v1.LabelSelectorRequirementR\x10matchExpressions\x1a>\n" +
