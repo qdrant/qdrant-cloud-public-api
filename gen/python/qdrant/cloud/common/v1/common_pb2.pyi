@@ -90,18 +90,11 @@ class LabelSelectorRequirement(_message.Message):
 
 class LabelSelector(_message.Message):
     __slots__ = ()
-    class MatchLabelsEntry(_message.Message):
-        __slots__ = ()
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: str
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     MATCH_LABELS_FIELD_NUMBER: _ClassVar[int]
     MATCH_EXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
-    match_labels: _containers.ScalarMap[str, str]
+    match_labels: _containers.RepeatedCompositeFieldContainer[KeyValue]
     match_expressions: _containers.RepeatedCompositeFieldContainer[LabelSelectorRequirement]
-    def __init__(self, match_labels: _Optional[_Mapping[str, str]] = ..., match_expressions: _Optional[_Iterable[_Union[LabelSelectorRequirement, _Mapping]]] = ...) -> None: ...
+    def __init__(self, match_labels: _Optional[_Iterable[_Union[KeyValue, _Mapping]]] = ..., match_expressions: _Optional[_Iterable[_Union[LabelSelectorRequirement, _Mapping]]] = ...) -> None: ...
 
 class IPBlock(_message.Message):
     __slots__ = ()

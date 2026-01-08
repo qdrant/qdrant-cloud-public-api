@@ -834,9 +834,10 @@
       "type": "object",
       "properties": {
         "matchLabels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
           },
           "description": "match_labels is a map of {key,value} pairs."
         },

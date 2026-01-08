@@ -266,9 +266,9 @@ export declare type LabelSelector = Message<"qdrant.cloud.common.v1.LabelSelecto
   /**
    * match_labels is a map of {key,value} pairs.
    *
-   * @generated from field: map<string, string> match_labels = 1;
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue match_labels = 1;
    */
-  matchLabels: { [key: string]: string };
+  matchLabels: KeyValue[];
 
   /**
    * match_expressions is a list of label selector requirements. The requirements are AND-ed.

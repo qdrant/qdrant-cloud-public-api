@@ -496,7 +496,7 @@ func (x *LabelSelectorRequirement) GetValues() []string {
 type LabelSelector struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// match_labels is a map of {key,value} pairs.
-	MatchLabels map[string]string `protobuf:"bytes,1,rep,name=match_labels,json=matchLabels,proto3" json:"match_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MatchLabels []*KeyValue `protobuf:"bytes,1,rep,name=match_labels,json=matchLabels,proto3" json:"match_labels,omitempty"`
 	// match_expressions is a list of label selector requirements. The requirements are AND-ed.
 	MatchExpressions []*LabelSelectorRequirement `protobuf:"bytes,2,rep,name=match_expressions,json=matchExpressions,proto3" json:"match_expressions,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -533,7 +533,7 @@ func (*LabelSelector) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *LabelSelector) GetMatchLabels() map[string]string {
+func (x *LabelSelector) GetMatchLabels() []*KeyValue {
 	if x != nil {
 		return x.MatchLabels
 	}
@@ -1124,13 +1124,12 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\boperator\x18\x02 \x01(\tB&\xbaH#r!R\x02InR\x05NotInR\x06ExistsR\fDoesNotExistR\boperator\x12\x16\n" +
 	"\x06values\x18\x03 \x03(\tR\x06values:\x95\x03\xbaH\x91\x03\x1a\xb8\x01\n" +
 	"/label_selector_requirement.values_for_in_not-in\x125values must be non-empty when operator is In or NotIn\x1aN!(this.operator == 'In' || this.operator == 'NotIn') || this.values.size() > 0\x1a\xd3\x01\n" +
-	"7label_selector_requirement.values_for_exists_not-exists\x12<values must be empty when operator is Exists or DoesNotExist\x1aZ!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0\"\x89\x02\n" +
-	"\rLabelSelector\x12Y\n" +
-	"\fmatch_labels\x18\x01 \x03(\v26.qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntryR\vmatchLabels\x12]\n" +
-	"\x11match_expressions\x18\x02 \x03(\v20.qdrant.cloud.common.v1.LabelSelectorRequirementR\x10matchExpressions\x1a>\n" +
-	"\x10MatchLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"N\n" +
+	"7label_selector_requirement.values_for_exists_not-exists\x12<values must be empty when operator is Exists or DoesNotExist\x1aZ!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0\"\xc7\x01\n" +
+	"\rLabelSelector\x12M\n" +
+	"\fmatch_labels\x18\x01 \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"R\vmatchLabels\x12g\n" +
+	"\x11match_expressions\x18\x02 \x03(\v20.qdrant.cloud.common.v1.LabelSelectorRequirementB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"R\x10matchExpressions\"N\n" +
 	"\aIPBlock\x12\x1c\n" +
 	"\x04cidr\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xe8\x01\x01R\x04cidr\x12%\n" +
 	"\x06except\x18\x02 \x03(\tB\r\xbaH\n" +
@@ -1190,7 +1189,7 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),                     // 0: qdrant.cloud.common.v1.ActorType
 	(*LogField)(nil),                   // 1: qdrant.cloud.common.v1.LogField
@@ -1206,11 +1205,10 @@ var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(*NetworkPolicyPort)(nil),          // 11: qdrant.cloud.common.v1.NetworkPolicyPort
 	(*NetworkPolicyIngressRule)(nil),   // 12: qdrant.cloud.common.v1.NetworkPolicyIngressRule
 	(*NetworkPolicyEgressRule)(nil),    // 13: qdrant.cloud.common.v1.NetworkPolicyEgressRule
-	nil,                                // 14: qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntry
-	(*descriptorpb.MethodOptions)(nil), // 15: google.protobuf.MethodOptions
+	(*descriptorpb.MethodOptions)(nil), // 14: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	14, // 0: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntry
+	4,  // 0: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
 	6,  // 1: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
 	7,  // 2: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
 	7,  // 3: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
@@ -1220,13 +1218,13 @@ var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
 	10, // 7: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
 	11, // 8: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
 	10, // 9: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	15, // 10: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	15, // 11: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	15, // 12: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	15, // 13: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	15, // 14: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	15, // 15: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	15, // 16: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	14, // 10: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	14, // 11: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	14, // 12: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	14, // 13: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	14, // 14: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	14, // 15: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	14, // 16: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
 	0,  // 17: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
 	1,  // 18: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
 	19, // [19:19] is the sub-list for method output_type
@@ -1257,7 +1255,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   14,
+			NumMessages:   13,
 			NumExtensions: 7,
 			NumServices:   0,
 		},
