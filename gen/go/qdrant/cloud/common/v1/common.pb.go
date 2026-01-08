@@ -421,6 +421,582 @@ func (x *TopologySpreadConstraint) GetWhenUnsatisfiable() string {
 	return ""
 }
 
+// A label selector requirement is a selector that contains values, a key, and an operator that
+// relates the key and values.
+// This is a gRPC-native equivalent of the Kubernetes LabelSelectorRequirement.
+type LabelSelectorRequirement struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// key is the label key that the selector applies to.
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// operator represents a key's relationship to a set of values.
+	// Valid operators are In, NotIn, Exists and DoesNotExist.
+	Operator string `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	// values is an array of string values.
+	// If the operator is In or NotIn, the values array must be non-empty.
+	// If the operator is Exists or DoesNotExist, the values array must be empty.
+	Values        []string `protobuf:"bytes,3,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LabelSelectorRequirement) Reset() {
+	*x = LabelSelectorRequirement{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LabelSelectorRequirement) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LabelSelectorRequirement) ProtoMessage() {}
+
+func (x *LabelSelectorRequirement) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LabelSelectorRequirement.ProtoReflect.Descriptor instead.
+func (*LabelSelectorRequirement) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *LabelSelectorRequirement) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *LabelSelectorRequirement) GetOperator() string {
+	if x != nil {
+		return x.Operator
+	}
+	return ""
+}
+
+func (x *LabelSelectorRequirement) GetValues() []string {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
+// A label selector is a label query over a set of resources. The result of match_labels and
+// match_expressions are ANDed. An empty label selector matches all objects.
+// This is a gRPC-native equivalent of the Kubernetes LabelSelector.
+type LabelSelector struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// match_labels is a map of {key,value} pairs.
+	MatchLabels map[string]string `protobuf:"bytes,1,rep,name=match_labels,json=matchLabels,proto3" json:"match_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// match_expressions is a list of label selector requirements. The requirements are ANDed.
+	MatchExpressions []*LabelSelectorRequirement `protobuf:"bytes,2,rep,name=match_expressions,json=matchExpressions,proto3" json:"match_expressions,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *LabelSelector) Reset() {
+	*x = LabelSelector{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LabelSelector) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LabelSelector) ProtoMessage() {}
+
+func (x *LabelSelector) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LabelSelector.ProtoReflect.Descriptor instead.
+func (*LabelSelector) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *LabelSelector) GetMatchLabels() map[string]string {
+	if x != nil {
+		return x.MatchLabels
+	}
+	return nil
+}
+
+func (x *LabelSelector) GetMatchExpressions() []*LabelSelectorRequirement {
+	if x != nil {
+		return x.MatchExpressions
+	}
+	return nil
+}
+
+// IPBlock describes a particular CIDR (e.g. "192.168.1.1/24") that is allowed
+// to the pods.
+// This is a gRPC-native equivalent of the Kubernetes IPBlock.
+type IPBlock struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// CIDR is a string representing the IP Block.
+	// Valid examples are "192.168.1.1/24" or "2001:db9::/64".
+	Cidr string `protobuf:"bytes,1,opt,name=cidr,proto3" json:"cidr,omitempty"`
+	// Except is a slice of CIDRs that should not be included within an IP Block.
+	// Except values will be rejected if they are outside the CIDR range.
+	Except        []string `protobuf:"bytes,2,rep,name=except,proto3" json:"except,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IPBlock) Reset() {
+	*x = IPBlock{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IPBlock) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IPBlock) ProtoMessage() {}
+
+func (x *IPBlock) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IPBlock.ProtoReflect.Descriptor instead.
+func (*IPBlock) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *IPBlock) GetCidr() string {
+	if x != nil {
+		return x.Cidr
+	}
+	return ""
+}
+
+func (x *IPBlock) GetExcept() []string {
+	if x != nil {
+		return x.Except
+	}
+	return nil
+}
+
+// PeerSelector selects pods and/or namespaces.
+type PeerSelector struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// This is a label selector which selects Pods.
+	// If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects
+	// the Pods matching PodSelector in the Namespaces selected by NamespaceSelector.
+	// Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
+	PodSelector *LabelSelector `protobuf:"bytes,1,opt,name=pod_selector,json=podSelector,proto3,oneof" json:"pod_selector,omitempty"`
+	// Selects Namespaces using cluster-scoped labels.
+	// If PodSelector is also set, then the NetworkPolicyPeer as a whole selects
+	// the Pods matching PodSelector in the Namespaces selected by NamespaceSelector.
+	// Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
+	NamespaceSelector *LabelSelector `protobuf:"bytes,2,opt,name=namespace_selector,json=namespaceSelector,proto3,oneof" json:"namespace_selector,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *PeerSelector) Reset() {
+	*x = PeerSelector{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PeerSelector) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PeerSelector) ProtoMessage() {}
+
+func (x *PeerSelector) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PeerSelector.ProtoReflect.Descriptor instead.
+func (*PeerSelector) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PeerSelector) GetPodSelector() *LabelSelector {
+	if x != nil {
+		return x.PodSelector
+	}
+	return nil
+}
+
+func (x *PeerSelector) GetNamespaceSelector() *LabelSelector {
+	if x != nil {
+		return x.NamespaceSelector
+	}
+	return nil
+}
+
+// NetworkPolicyPeer describes a peer to allow traffic to/from.
+// This is a gRPC-native equivalent of the Kubernetes NetworkPolicyPeer.
+type NetworkPolicyPeer struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the type of peer. Only one of the following fields may be set.
+	//
+	// Types that are valid to be assigned to PeerType:
+	//
+	//	*NetworkPolicyPeer_Selector
+	//	*NetworkPolicyPeer_IpBlock
+	PeerType      isNetworkPolicyPeer_PeerType `protobuf_oneof:"peer_type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPolicyPeer) Reset() {
+	*x = NetworkPolicyPeer{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPolicyPeer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPolicyPeer) ProtoMessage() {}
+
+func (x *NetworkPolicyPeer) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPolicyPeer.ProtoReflect.Descriptor instead.
+func (*NetworkPolicyPeer) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *NetworkPolicyPeer) GetPeerType() isNetworkPolicyPeer_PeerType {
+	if x != nil {
+		return x.PeerType
+	}
+	return nil
+}
+
+func (x *NetworkPolicyPeer) GetSelector() *PeerSelector {
+	if x != nil {
+		if x, ok := x.PeerType.(*NetworkPolicyPeer_Selector); ok {
+			return x.Selector
+		}
+	}
+	return nil
+}
+
+func (x *NetworkPolicyPeer) GetIpBlock() *IPBlock {
+	if x != nil {
+		if x, ok := x.PeerType.(*NetworkPolicyPeer_IpBlock); ok {
+			return x.IpBlock
+		}
+	}
+	return nil
+}
+
+type isNetworkPolicyPeer_PeerType interface {
+	isNetworkPolicyPeer_PeerType()
+}
+
+type NetworkPolicyPeer_Selector struct {
+	// Selects pods and/or namespaces.
+	Selector *PeerSelector `protobuf:"bytes,1,opt,name=selector,proto3,oneof"`
+}
+
+type NetworkPolicyPeer_IpBlock struct {
+	// Defines policy on a particular IPBlock.
+	IpBlock *IPBlock `protobuf:"bytes,2,opt,name=ip_block,json=ipBlock,proto3,oneof"`
+}
+
+func (*NetworkPolicyPeer_Selector) isNetworkPolicyPeer_PeerType() {}
+
+func (*NetworkPolicyPeer_IpBlock) isNetworkPolicyPeer_PeerType() {}
+
+// NetworkPolicyPort describes a port to allow traffic on.
+// This is a gRPC-native equivalent of the Kubernetes NetworkPolicyPort.
+type NetworkPolicyPort struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this
+	// field defaults to TCP.
+	Protocol *string `protobuf:"bytes,1,opt,name=protocol,proto3,oneof" json:"protocol,omitempty"`
+	// The port on the given protocol. This can either be a numerical or named
+	// port on a pod. If this field is not provided, this matches all port names and
+	// numbers.
+	//
+	// Types that are valid to be assigned to PortSpec:
+	//
+	//	*NetworkPolicyPort_PortNumber
+	//	*NetworkPolicyPort_PortName
+	PortSpec isNetworkPolicyPort_PortSpec `protobuf_oneof:"port_spec"`
+	// If set, indicates that the range of ports from port to end_port, inclusive,
+	// should be allowed by the policy. This field cannot be defined if the port field
+	// is defined as a named (string) port.
+	// The end_port must be equal to or greater than port.
+	EndPort       *int32 `protobuf:"varint,4,opt,name=end_port,json=endPort,proto3,oneof" json:"end_port,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPolicyPort) Reset() {
+	*x = NetworkPolicyPort{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPolicyPort) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPolicyPort) ProtoMessage() {}
+
+func (x *NetworkPolicyPort) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPolicyPort.ProtoReflect.Descriptor instead.
+func (*NetworkPolicyPort) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *NetworkPolicyPort) GetProtocol() string {
+	if x != nil && x.Protocol != nil {
+		return *x.Protocol
+	}
+	return ""
+}
+
+func (x *NetworkPolicyPort) GetPortSpec() isNetworkPolicyPort_PortSpec {
+	if x != nil {
+		return x.PortSpec
+	}
+	return nil
+}
+
+func (x *NetworkPolicyPort) GetPortNumber() int32 {
+	if x != nil {
+		if x, ok := x.PortSpec.(*NetworkPolicyPort_PortNumber); ok {
+			return x.PortNumber
+		}
+	}
+	return 0
+}
+
+func (x *NetworkPolicyPort) GetPortName() string {
+	if x != nil {
+		if x, ok := x.PortSpec.(*NetworkPolicyPort_PortName); ok {
+			return x.PortName
+		}
+	}
+	return ""
+}
+
+func (x *NetworkPolicyPort) GetEndPort() int32 {
+	if x != nil && x.EndPort != nil {
+		return *x.EndPort
+	}
+	return 0
+}
+
+type isNetworkPolicyPort_PortSpec interface {
+	isNetworkPolicyPort_PortSpec()
+}
+
+type NetworkPolicyPort_PortNumber struct {
+	// A numerical port number.
+	PortNumber int32 `protobuf:"varint,2,opt,name=port_number,json=portNumber,proto3,oneof"`
+}
+
+type NetworkPolicyPort_PortName struct {
+	// A named port on a pod.
+	PortName string `protobuf:"bytes,3,opt,name=port_name,json=portName,proto3,oneof"`
+}
+
+func (*NetworkPolicyPort_PortNumber) isNetworkPolicyPort_PortSpec() {}
+
+func (*NetworkPolicyPort_PortName) isNetworkPolicyPort_PortSpec() {}
+
+// NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods
+// matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.
+// This is a gRPC-native equivalent of the Kubernetes NetworkPolicyIngressRule.
+type NetworkPolicyIngressRule struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of ports which should be made accessible on the pods selected for this
+	// rule. Each item in this list is combined using a logical OR. If this field is
+	// empty or missing, this rule matches all ports (traffic not restricted by port).
+	// If this field is present and contains at least one item, then this rule allows
+	// traffic only if the traffic matches at least one port in the list.
+	Ports []*NetworkPolicyPort `protobuf:"bytes,1,rep,name=ports,proto3" json:"ports,omitempty"`
+	// List of sources which should be able to access the pods selected for this rule.
+	// Items in this list are combined using a logical OR operation. If this field is
+	// empty or missing, this rule matches all sources (traffic not restricted by
+	// source). If this field is present and contains at least one item, this rule
+	// allows traffic only if the traffic matches at least one item in the from list.
+	From          []*NetworkPolicyPeer `protobuf:"bytes,2,rep,name=from,proto3" json:"from,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPolicyIngressRule) Reset() {
+	*x = NetworkPolicyIngressRule{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPolicyIngressRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPolicyIngressRule) ProtoMessage() {}
+
+func (x *NetworkPolicyIngressRule) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPolicyIngressRule.ProtoReflect.Descriptor instead.
+func (*NetworkPolicyIngressRule) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *NetworkPolicyIngressRule) GetPorts() []*NetworkPolicyPort {
+	if x != nil {
+		return x.Ports
+	}
+	return nil
+}
+
+func (x *NetworkPolicyIngressRule) GetFrom() []*NetworkPolicyPeer {
+	if x != nil {
+		return x.From
+	}
+	return nil
+}
+
+// NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods
+// matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.
+// This is a gRPC-native equivalent of the Kubernetes NetworkPolicyEgressRule.
+type NetworkPolicyEgressRule struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of destination ports for outgoing traffic.
+	// Each item in this list is combined using a logical OR. If this field is
+	// empty or missing, this rule matches all ports (traffic not restricted by port).
+	// If this field is present and contains at least one item, then this rule allows
+	// traffic only if the traffic matches at least one port in the list.
+	Ports []*NetworkPolicyPort `protobuf:"bytes,1,rep,name=ports,proto3" json:"ports,omitempty"`
+	// List of destinations for outgoing traffic of pods selected for this rule.
+	// Items in this list are combined using a logical OR operation. If this field is
+	// empty or missing, this rule matches all destinations (traffic not restricted by
+	// destination). If this field is present and contains at least one item, this rule
+	// allows traffic only if the traffic matches at least one item in the to list.
+	To            []*NetworkPolicyPeer `protobuf:"bytes,2,rep,name=to,proto3" json:"to,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NetworkPolicyEgressRule) Reset() {
+	*x = NetworkPolicyEgressRule{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NetworkPolicyEgressRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NetworkPolicyEgressRule) ProtoMessage() {}
+
+func (x *NetworkPolicyEgressRule) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NetworkPolicyEgressRule.ProtoReflect.Descriptor instead.
+func (*NetworkPolicyEgressRule) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *NetworkPolicyEgressRule) GetPorts() []*NetworkPolicyPort {
+	if x != nil {
+		return x.Ports
+	}
+	return nil
+}
+
+func (x *NetworkPolicyEgressRule) GetTo() []*NetworkPolicyPeer {
+	if x != nil {
+		return x.To
+	}
+	return nil
+}
+
 var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -542,7 +1118,49 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12X\n" +
 	"\x12when_unsatisfiable\x18\x03 \x01(\tB$\xbaH!r\x1fR\rDoNotScheduleR\x0eScheduleAnywayH\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
 	"\t_max_skewB\x15\n" +
-	"\x13_when_unsatisfiable*{\n" +
+	"\x13_when_unsatisfiable\"\xa7\x04\n" +
+	"\x18LabelSelectorRequirement\x12\x19\n" +
+	"\x03key\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03key\x12B\n" +
+	"\boperator\x18\x02 \x01(\tB&\xbaH#r!R\x02InR\x05NotInR\x06ExistsR\fDoesNotExistR\boperator\x12\x16\n" +
+	"\x06values\x18\x03 \x03(\tR\x06values:\x93\x03\xbaH\x8f\x03\x1a\xb7\x01\n" +
+	".label_selector_requirement.values_for_in_notin\x125values must be non-empty when operator is In or NotIn\x1aN!(this.operator == 'In' || this.operator == 'NotIn') || this.values.size() > 0\x1a\xd2\x01\n" +
+	"6label_selector_requirement.values_for_exists_notexists\x12<values must be empty when operator is Exists or DoesNotExist\x1aZ!(this.operator == 'Exists' || this.operator == 'DoesNotExist') || this.values.size() == 0\"\x89\x02\n" +
+	"\rLabelSelector\x12Y\n" +
+	"\fmatch_labels\x18\x01 \x03(\v26.qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntryR\vmatchLabels\x12]\n" +
+	"\x11match_expressions\x18\x02 \x03(\v20.qdrant.cloud.common.v1.LabelSelectorRequirementR\x10matchExpressions\x1a>\n" +
+	"\x10MatchLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"N\n" +
+	"\aIPBlock\x12\x1c\n" +
+	"\x04cidr\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xe8\x01\x01R\x04cidr\x12%\n" +
+	"\x06except\x18\x02 \x03(\tB\r\xbaH\n" +
+	"\x92\x01\a\"\x05r\x03\xe8\x01\x01R\x06except\"\xe0\x01\n" +
+	"\fPeerSelector\x12M\n" +
+	"\fpod_selector\x18\x01 \x01(\v2%.qdrant.cloud.common.v1.LabelSelectorH\x00R\vpodSelector\x88\x01\x01\x12Y\n" +
+	"\x12namespace_selector\x18\x02 \x01(\v2%.qdrant.cloud.common.v1.LabelSelectorH\x01R\x11namespaceSelector\x88\x01\x01B\x0f\n" +
+	"\r_pod_selectorB\x15\n" +
+	"\x13_namespace_selector\"\xa2\x01\n" +
+	"\x11NetworkPolicyPeer\x12B\n" +
+	"\bselector\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.PeerSelectorH\x00R\bselector\x12<\n" +
+	"\bip_block\x18\x02 \x01(\v2\x1f.qdrant.cloud.common.v1.IPBlockH\x00R\aipBlockB\v\n" +
+	"\tpeer_type\"\xbd\x04\n" +
+	"\x11NetworkPolicyPort\x126\n" +
+	"\bprotocol\x18\x01 \x01(\tB\x15\xbaH\x12r\x10R\x03TCPR\x03UDPR\x04SCTPH\x01R\bprotocol\x88\x01\x01\x12*\n" +
+	"\vport_number\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x00R\n" +
+	"portNumber\x12&\n" +
+	"\tport_name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\bportName\x12'\n" +
+	"\bend_port\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x02R\aendPort\x88\x01\x01:\xcb\x02\xbaH\xc7\x02\x1a\x89\x01\n" +
+	"+network_policy_port.end_port_with_port_name\x12-end_port cannot be set when port_name is used\x1a+!has(this.port_name) || !has(this.end_port)\x1a\xb8\x01\n" +
+	"+network_policy_port.end_port_ge_port_number\x125end_port must be greater than or equal to port_number\x1aR!has(this.end_port) || !has(this.port_number) || this.end_port >= this.port_numberB\v\n" +
+	"\tport_specB\v\n" +
+	"\t_protocolB\v\n" +
+	"\t_end_port\"\x9a\x01\n" +
+	"\x18NetworkPolicyIngressRule\x12?\n" +
+	"\x05ports\x18\x01 \x03(\v2).qdrant.cloud.common.v1.NetworkPolicyPortR\x05ports\x12=\n" +
+	"\x04from\x18\x02 \x03(\v2).qdrant.cloud.common.v1.NetworkPolicyPeerR\x04from\"\x95\x01\n" +
+	"\x17NetworkPolicyEgressRule\x12?\n" +
+	"\x05ports\x18\x01 \x03(\v2).qdrant.cloud.common.v1.NetworkPolicyPortR\x05ports\x129\n" +
+	"\x02to\x18\x02 \x03(\v2).qdrant.cloud.common.v1.NetworkPolicyPeerR\x02to*{\n" +
 	"\tActorType\x12\x1a\n" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fACTOR_TYPE_USER\x10\x01\x12\x1d\n" +
@@ -572,7 +1190,7 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),                     // 0: qdrant.cloud.common.v1.ActorType
 	(*LogField)(nil),                   // 1: qdrant.cloud.common.v1.LogField
@@ -580,23 +1198,42 @@ var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(*SecretKeyRef)(nil),               // 3: qdrant.cloud.common.v1.SecretKeyRef
 	(*KeyValue)(nil),                   // 4: qdrant.cloud.common.v1.KeyValue
 	(*TopologySpreadConstraint)(nil),   // 5: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*descriptorpb.MethodOptions)(nil), // 6: google.protobuf.MethodOptions
+	(*LabelSelectorRequirement)(nil),   // 6: qdrant.cloud.common.v1.LabelSelectorRequirement
+	(*LabelSelector)(nil),              // 7: qdrant.cloud.common.v1.LabelSelector
+	(*IPBlock)(nil),                    // 8: qdrant.cloud.common.v1.IPBlock
+	(*PeerSelector)(nil),               // 9: qdrant.cloud.common.v1.PeerSelector
+	(*NetworkPolicyPeer)(nil),          // 10: qdrant.cloud.common.v1.NetworkPolicyPeer
+	(*NetworkPolicyPort)(nil),          // 11: qdrant.cloud.common.v1.NetworkPolicyPort
+	(*NetworkPolicyIngressRule)(nil),   // 12: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*NetworkPolicyEgressRule)(nil),    // 13: qdrant.cloud.common.v1.NetworkPolicyEgressRule
+	nil,                                // 14: qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntry
+	(*descriptorpb.MethodOptions)(nil), // 15: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	6, // 0: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	6, // 1: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	6, // 2: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	6, // 3: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	6, // 4: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	6, // 5: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	6, // 6: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
-	0, // 7: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	1, // 8: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	7, // [7:9] is the sub-list for extension type_name
-	0, // [0:7] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	14, // 0: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.LabelSelector.MatchLabelsEntry
+	6,  // 1: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
+	7,  // 2: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	7,  // 3: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	9,  // 4: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
+	8,  // 5: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
+	11, // 6: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	10, // 7: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	11, // 8: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	10, // 9: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	15, // 10: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	15, // 11: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	15, // 12: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	15, // 13: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	15, // 14: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	15, // 15: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	15, // 16: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	0,  // 17: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	1,  // 18: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	17, // [17:19] is the sub-list for extension type_name
+	10, // [10:17] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_common_v1_common_proto_init() }
@@ -605,13 +1242,22 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 		return
 	}
 	file_qdrant_cloud_common_v1_common_proto_msgTypes[4].OneofWrappers = []any{}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[8].OneofWrappers = []any{}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[9].OneofWrappers = []any{
+		(*NetworkPolicyPeer_Selector)(nil),
+		(*NetworkPolicyPeer_IpBlock)(nil),
+	}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[10].OneofWrappers = []any{
+		(*NetworkPolicyPort_PortNumber)(nil),
+		(*NetworkPolicyPort_PortName)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   14,
 			NumExtensions: 7,
 			NumServices:   0,
 		},
