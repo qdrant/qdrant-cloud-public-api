@@ -846,10 +846,10 @@
             "type": "object",
             "$ref": "#/definitions/v1LabelSelectorRequirement"
           },
-          "description": "match_expressions is a list of label selector requirements. The requirements are ANDed."
+          "description": "match_expressions is a list of label selector requirements. The requirements are AND-ed."
         }
       },
-      "description": "A label selector is a label query over a set of resources. The result of match_labels and\nmatch_expressions are ANDed. An empty label selector matches all objects.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelector."
+      "description": "A label selector is a label query over a set of resources. The result of match_labels and\nmatch_expressions are AND-ed. An empty label selector matches all objects.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelector."
     },
     "v1LabelSelectorRequirement": {
       "type": "object",

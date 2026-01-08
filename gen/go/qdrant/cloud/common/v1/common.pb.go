@@ -491,13 +491,13 @@ func (x *LabelSelectorRequirement) GetValues() []string {
 }
 
 // A label selector is a label query over a set of resources. The result of match_labels and
-// match_expressions are ANDed. An empty label selector matches all objects.
+// match_expressions are AND-ed. An empty label selector matches all objects.
 // This is a gRPC-native equivalent of the Kubernetes LabelSelector.
 type LabelSelector struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// match_labels is a map of {key,value} pairs.
 	MatchLabels map[string]string `protobuf:"bytes,1,rep,name=match_labels,json=matchLabels,proto3" json:"match_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// match_expressions is a list of label selector requirements. The requirements are ANDed.
+	// match_expressions is a list of label selector requirements. The requirements are AND-ed.
 	MatchExpressions []*LabelSelectorRequirement `protobuf:"bytes,2,rep,name=match_expressions,json=matchExpressions,proto3" json:"match_expressions,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache

@@ -223,12 +223,12 @@ message LabelSelectorRequirement {
 }
 
 // A label selector is a label query over a set of resources. The result of match_labels and
-// match_expressions are ANDed. An empty label selector matches all objects.
+// match_expressions are AND-ed. An empty label selector matches all objects.
 // This is a gRPC-native equivalent of the Kubernetes LabelSelector.
 message LabelSelector {
   // match_labels is a map of {key,value} pairs.
   map<string, string> match_labels = 1;
-  // match_expressions is a list of label selector requirements. The requirements are ANDed.
+  // match_expressions is a list of label selector requirements. The requirements are AND-ed.
   repeated LabelSelectorRequirement match_expressions = 2;
 }
 

@@ -257,7 +257,7 @@ export declare const LabelSelectorRequirementSchema: GenMessage<LabelSelectorReq
 
 /**
  * A label selector is a label query over a set of resources. The result of match_labels and
- * match_expressions are ANDed. An empty label selector matches all objects.
+ * match_expressions are AND-ed. An empty label selector matches all objects.
  * This is a gRPC-native equivalent of the Kubernetes LabelSelector.
  *
  * @generated from message qdrant.cloud.common.v1.LabelSelector
@@ -271,7 +271,7 @@ export declare type LabelSelector = Message<"qdrant.cloud.common.v1.LabelSelecto
   matchLabels: { [key: string]: string };
 
   /**
-   * match_expressions is a list of label selector requirements. The requirements are ANDed.
+   * match_expressions is a list of label selector requirements. The requirements are AND-ed.
    *
    * @generated from field: repeated qdrant.cloud.common.v1.LabelSelectorRequirement match_expressions = 2;
    */
