@@ -215,6 +215,323 @@ export declare type TopologySpreadConstraintValid = TopologySpreadConstraint;
 export declare const TopologySpreadConstraintSchema: GenMessage<TopologySpreadConstraint, {validType: TopologySpreadConstraintValid}>;
 
 /**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ * This is a gRPC-native equivalent of the Kubernetes LabelSelectorRequirement.
+ *
+ * @generated from message qdrant.cloud.common.v1.LabelSelectorRequirement
+ */
+export declare type LabelSelectorRequirement = Message<"qdrant.cloud.common.v1.LabelSelectorRequirement"> & {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @generated from field: string operator = 2;
+   */
+  operator: string;
+
+  /**
+   * values is an array of string values.
+   * If the operator is In or NotIn, the values array must be non-empty.
+   * If the operator is Exists or DoesNotExist, the values array must be empty.
+   *
+   * @generated from field: repeated string values = 3;
+   */
+  values: string[];
+};
+
+export declare type LabelSelectorRequirementValid = LabelSelectorRequirement;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.LabelSelectorRequirement.
+ * Use `create(LabelSelectorRequirementSchema)` to create a new message.
+ */
+export declare const LabelSelectorRequirementSchema: GenMessage<LabelSelectorRequirement, {validType: LabelSelectorRequirementValid}>;
+
+/**
+ * A label selector is a label query over a set of resources. The result of match_labels and
+ * match_expressions are AND-ed. An empty label selector matches all objects.
+ * This is a gRPC-native equivalent of the Kubernetes LabelSelector.
+ *
+ * @generated from message qdrant.cloud.common.v1.LabelSelector
+ */
+export declare type LabelSelector = Message<"qdrant.cloud.common.v1.LabelSelector"> & {
+  /**
+   * match_labels is a map of {key,value} pairs.
+   * match_labels is a list of KeyValue objects.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue match_labels = 1;
+   */
+  matchLabels: KeyValue[];
+
+  /**
+   * match_expressions is a list of label selector requirements. The requirements are AND-ed.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.LabelSelectorRequirement match_expressions = 2;
+   */
+  matchExpressions: LabelSelectorRequirement[];
+};
+
+export declare type LabelSelectorValid = LabelSelector;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.LabelSelector.
+ * Use `create(LabelSelectorSchema)` to create a new message.
+ */
+export declare const LabelSelectorSchema: GenMessage<LabelSelector, {validType: LabelSelectorValid}>;
+
+/**
+ * IPBlock describes a particular CIDR (e.g. "192.168.1.1/24") that is allowed
+ * to the pods.
+ * This is a gRPC-native equivalent of the Kubernetes IPBlock.
+ *
+ * @generated from message qdrant.cloud.common.v1.IPBlock
+ */
+export declare type IPBlock = Message<"qdrant.cloud.common.v1.IPBlock"> & {
+  /**
+   * CIDR is a string representing the IP Block.
+   * Valid examples are "192.168.1.1/24" or "2001:db9::/64".
+   *
+   * @generated from field: string cidr = 1;
+   */
+  cidr: string;
+
+  /**
+   * Except is a slice of CIDRs that should not be included within an IP Block.
+   * Except values will be rejected if they are outside the CIDR range.
+   *
+   * @generated from field: repeated string except = 2;
+   */
+  except: string[];
+};
+
+export declare type IPBlockValid = IPBlock;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.IPBlock.
+ * Use `create(IPBlockSchema)` to create a new message.
+ */
+export declare const IPBlockSchema: GenMessage<IPBlock, {validType: IPBlockValid}>;
+
+/**
+ * PeerSelector selects pods and/or namespaces.
+ *
+ * @generated from message qdrant.cloud.common.v1.PeerSelector
+ */
+export declare type PeerSelector = Message<"qdrant.cloud.common.v1.PeerSelector"> & {
+  /**
+   * This is a label selector which selects Pods.
+   * If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects
+   * the Pods matching PodSelector in the Namespaces selected by NamespaceSelector.
+   * Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.LabelSelector pod_selector = 1;
+   */
+  podSelector?: LabelSelector;
+
+  /**
+   * Selects Namespaces using cluster-scoped labels.
+   * If PodSelector is also set, then the NetworkPolicyPeer as a whole selects
+   * the Pods matching PodSelector in the Namespaces selected by NamespaceSelector.
+   * Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.LabelSelector namespace_selector = 2;
+   */
+  namespaceSelector?: LabelSelector;
+};
+
+export declare type PeerSelectorValid = PeerSelector;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.PeerSelector.
+ * Use `create(PeerSelectorSchema)` to create a new message.
+ */
+export declare const PeerSelectorSchema: GenMessage<PeerSelector, {validType: PeerSelectorValid}>;
+
+/**
+ * NetworkPolicyPeer describes a peer to allow traffic to/from.
+ * This is a gRPC-native equivalent of the Kubernetes NetworkPolicyPeer.
+ *
+ * @generated from message qdrant.cloud.common.v1.NetworkPolicyPeer
+ */
+export declare type NetworkPolicyPeer = Message<"qdrant.cloud.common.v1.NetworkPolicyPeer"> & {
+  /**
+   * Specifies the type of peer. Only one of the following fields may be set.
+   *
+   * @generated from oneof qdrant.cloud.common.v1.NetworkPolicyPeer.peer_type
+   */
+  peerType: {
+    /**
+     * Selects pods and/or namespaces.
+     *
+     * @generated from field: qdrant.cloud.common.v1.PeerSelector selector = 1;
+     */
+    value: PeerSelector;
+    case: "selector";
+  } | {
+    /**
+     * Defines policy on a particular IPBlock.
+     *
+     * @generated from field: qdrant.cloud.common.v1.IPBlock ip_block = 2;
+     */
+    value: IPBlock;
+    case: "ipBlock";
+  } | { case: undefined; value?: undefined };
+};
+
+export declare type NetworkPolicyPeerValid = NetworkPolicyPeer;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.NetworkPolicyPeer.
+ * Use `create(NetworkPolicyPeerSchema)` to create a new message.
+ */
+export declare const NetworkPolicyPeerSchema: GenMessage<NetworkPolicyPeer, {validType: NetworkPolicyPeerValid}>;
+
+/**
+ * NetworkPolicyPort describes a port to allow traffic on.
+ * This is a gRPC-native equivalent of the Kubernetes NetworkPolicyPort.
+ *
+ * @generated from message qdrant.cloud.common.v1.NetworkPolicyPort
+ */
+export declare type NetworkPolicyPort = Message<"qdrant.cloud.common.v1.NetworkPolicyPort"> & {
+  /**
+   * The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this
+   * field defaults to TCP.
+   *
+   * @generated from field: optional string protocol = 1;
+   */
+  protocol?: string;
+
+  /**
+   * The port on the given protocol. This can either be a numerical or named
+   * port on a pod. If this field is not provided, this matches all port names and
+   * numbers.
+   *
+   * @generated from oneof qdrant.cloud.common.v1.NetworkPolicyPort.port_spec
+   */
+  portSpec: {
+    /**
+     * A numerical port number.
+     *
+     * @generated from field: int32 port_number = 2;
+     */
+    value: number;
+    case: "portNumber";
+  } | {
+    /**
+     * A named port on a pod.
+     *
+     * @generated from field: string port_name = 3;
+     */
+    value: string;
+    case: "portName";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * If set, indicates that the range of ports from port to end_port, inclusive,
+   * should be allowed by the policy. This field cannot be defined if the port field
+   * is defined as a named (string) port.
+   * The end_port must be equal to or greater than port.
+   *
+   * @generated from field: optional int32 end_port = 4;
+   */
+  endPort?: number;
+};
+
+export declare type NetworkPolicyPortValid = NetworkPolicyPort;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.NetworkPolicyPort.
+ * Use `create(NetworkPolicyPortSchema)` to create a new message.
+ */
+export declare const NetworkPolicyPortSchema: GenMessage<NetworkPolicyPort, {validType: NetworkPolicyPortValid}>;
+
+/**
+ * NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods
+ * matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.
+ * This is a gRPC-native equivalent of the Kubernetes NetworkPolicyIngressRule.
+ *
+ * @generated from message qdrant.cloud.common.v1.NetworkPolicyIngressRule
+ */
+export declare type NetworkPolicyIngressRule = Message<"qdrant.cloud.common.v1.NetworkPolicyIngressRule"> & {
+  /**
+   * List of ports which should be made accessible on the pods selected for this
+   * rule. Each item in this list is combined using a logical OR. If this field is
+   * empty or missing, this rule matches all ports (traffic not restricted by port).
+   * If this field is present and contains at least one item, then this rule allows
+   * traffic only if the traffic matches at least one port in the list.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyPort ports = 1;
+   */
+  ports: NetworkPolicyPort[];
+
+  /**
+   * List of sources which should be able to access the pods selected for this rule.
+   * Items in this list are combined using a logical OR operation. If this field is
+   * empty or missing, this rule matches all sources (traffic not restricted by
+   * source). If this field is present and contains at least one item, this rule
+   * allows traffic only if the traffic matches at least one item in the from list.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyPeer from = 2;
+   */
+  from: NetworkPolicyPeer[];
+};
+
+export declare type NetworkPolicyIngressRuleValid = NetworkPolicyIngressRule;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.NetworkPolicyIngressRule.
+ * Use `create(NetworkPolicyIngressRuleSchema)` to create a new message.
+ */
+export declare const NetworkPolicyIngressRuleSchema: GenMessage<NetworkPolicyIngressRule, {validType: NetworkPolicyIngressRuleValid}>;
+
+/**
+ * NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods
+ * matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.
+ * This is a gRPC-native equivalent of the Kubernetes NetworkPolicyEgressRule.
+ *
+ * @generated from message qdrant.cloud.common.v1.NetworkPolicyEgressRule
+ */
+export declare type NetworkPolicyEgressRule = Message<"qdrant.cloud.common.v1.NetworkPolicyEgressRule"> & {
+  /**
+   * List of destination ports for outgoing traffic.
+   * Each item in this list is combined using a logical OR. If this field is
+   * empty or missing, this rule matches all ports (traffic not restricted by port).
+   * If this field is present and contains at least one item, then this rule allows
+   * traffic only if the traffic matches at least one port in the list.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyPort ports = 1;
+   */
+  ports: NetworkPolicyPort[];
+
+  /**
+   * List of destinations for outgoing traffic of pods selected for this rule.
+   * Items in this list are combined using a logical OR operation. If this field is
+   * empty or missing, this rule matches all destinations (traffic not restricted by
+   * destination). If this field is present and contains at least one item, this rule
+   * allows traffic only if the traffic matches at least one item in the to list.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyPeer to = 2;
+   */
+  to: NetworkPolicyPeer[];
+};
+
+export declare type NetworkPolicyEgressRuleValid = NetworkPolicyEgressRule;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.NetworkPolicyEgressRule.
+ * Use `create(NetworkPolicyEgressRuleSchema)` to create a new message.
+ */
+export declare const NetworkPolicyEgressRuleSchema: GenMessage<NetworkPolicyEgressRule, {validType: NetworkPolicyEgressRuleValid}>;
+
+/**
  * ActorType specifies the type of actor that can call a method.
  *
  * @generated from enum qdrant.cloud.common.v1.ActorType
