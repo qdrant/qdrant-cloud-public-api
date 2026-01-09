@@ -178,7 +178,7 @@
         "totalAmount": {
           "type": "string",
           "format": "int64",
-          "description": "Total invoice amount."
+          "description": "Total invoice amount in millicents."
         },
         "createdAt": {
           "type": "string",
