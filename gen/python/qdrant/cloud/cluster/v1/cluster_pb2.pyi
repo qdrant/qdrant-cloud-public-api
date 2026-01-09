@@ -262,6 +262,18 @@ class UnsuspendClusterResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class EnableClusterJwtRbacRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+
+class EnableClusterJwtRbacResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class SuggestClusterNameRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -418,13 +430,11 @@ class DatabaseConfigurationService(_message.Message):
     __slots__ = ()
     API_KEY_FIELD_NUMBER: _ClassVar[int]
     READ_ONLY_API_KEY_FIELD_NUMBER: _ClassVar[int]
-    JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
     ENABLE_TLS_FIELD_NUMBER: _ClassVar[int]
     api_key: _common_pb2.SecretKeyRef
     read_only_api_key: _common_pb2.SecretKeyRef
-    jwt_rbac: bool
     enable_tls: bool
-    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: _Optional[bool] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
+    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationTls(_message.Message):
     __slots__ = ()
@@ -471,6 +481,7 @@ class ClusterState(_message.Message):
     RESOURCES_FIELD_NUMBER: _ClassVar[int]
     SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
     NODES_FIELD_NUMBER: _ClassVar[int]
+    JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
     version: str
     nodes_up: int
     restarted_at: _timestamp_pb2.Timestamp
@@ -480,7 +491,8 @@ class ClusterState(_message.Message):
     resources: ClusterNodeResourcesSummary
     scalability_info: ClusterScalabilityInfo
     nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeInfo]
-    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ...) -> None: ...
+    jwt_rbac: bool
+    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ..., jwt_rbac: _Optional[bool] = ...) -> None: ...
 
 class ClusterNodeInfo(_message.Message):
     __slots__ = ()
