@@ -44,9 +44,9 @@ export declare type ListCollectionsResponse = Message<"qdrant.cloud.serverless.c
   /**
    * List of collections with their details
    *
-   * @generated from field: repeated qdrant.cloud.serverless.collection.v1.Collection collections = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.collection.v1.Collection items = 1;
    */
-  collections: Collection[];
+  items: Collection[];
 };
 
 export declare type ListCollectionsResponseValid = ListCollectionsResponse;

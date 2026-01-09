@@ -103,7 +103,7 @@ message ListCollectionsRequest {
 // ListCollectionsResponse contains the list of collections
 message ListCollectionsResponse {
   // List of collections with their details
-  repeated Collection collections = 1;
+  repeated Collection items = 1;
 }
 
 // CreateCollectionRequest defines parameters for creating a new collection
