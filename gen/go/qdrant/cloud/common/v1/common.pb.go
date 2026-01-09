@@ -496,6 +496,7 @@ func (x *LabelSelectorRequirement) GetValues() []string {
 type LabelSelector struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// match_labels is a map of {key,value} pairs.
+	// match_labels is a list of KeyValue objects.
 	MatchLabels []*KeyValue `protobuf:"bytes,1,rep,name=match_labels,json=matchLabels,proto3" json:"match_labels,omitempty"`
 	// match_expressions is a list of label selector requirements. The requirements are AND-ed.
 	MatchExpressions []*LabelSelectorRequirement `protobuf:"bytes,2,rep,name=match_expressions,json=matchExpressions,proto3" json:"match_expressions,omitempty"`

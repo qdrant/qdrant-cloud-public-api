@@ -265,6 +265,7 @@ export declare const LabelSelectorRequirementSchema: GenMessage<LabelSelectorReq
 export declare type LabelSelector = Message<"qdrant.cloud.common.v1.LabelSelector"> & {
   /**
    * match_labels is a map of {key,value} pairs.
+   * match_labels is a list of KeyValue objects.
    *
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue match_labels = 1;
    */

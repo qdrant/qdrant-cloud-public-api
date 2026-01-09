@@ -227,6 +227,7 @@ message LabelSelectorRequirement {
 // This is a gRPC-native equivalent of the Kubernetes LabelSelector.
 message LabelSelector {
   // match_labels is a map of {key,value} pairs.
+  // match_labels is a list of KeyValue objects.
   repeated KeyValue match_labels = 1 [(buf.validate.field).repeated = {max_items: 10}];
   // match_expressions is a list of label selector requirements. The requirements are AND-ed.
   repeated LabelSelectorRequirement match_expressions = 2 [(buf.validate.field).repeated = {max_items: 10}];

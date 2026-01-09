@@ -839,7 +839,7 @@
             "type": "object",
             "$ref": "#/definitions/v1KeyValue"
           },
-          "description": "match_labels is a map of {key,value} pairs."
+          "description": "match_labels is a map of {key,value} pairs.\nmatch_labels is a list of KeyValue objects."
         },
         "matchExpressions": {
           "type": "array",
