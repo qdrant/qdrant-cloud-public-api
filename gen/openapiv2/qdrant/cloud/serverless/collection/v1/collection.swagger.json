@@ -521,7 +521,7 @@
     "v1ListCollectionsResponse": {
       "type": "object",
       "properties": {
-        "collections": {
+        "items": {
           "type": "array",
           "items": {
             "type": "object",

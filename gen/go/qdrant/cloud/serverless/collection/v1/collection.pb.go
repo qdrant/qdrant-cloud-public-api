@@ -134,7 +134,7 @@ func (x *ListCollectionsRequest) GetAccountId() string {
 type ListCollectionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of collections with their details
-	Collections   []*Collection `protobuf:"bytes,1,rep,name=collections,proto3" json:"collections,omitempty"`
+	Items         []*Collection `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -169,9 +169,9 @@ func (*ListCollectionsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListCollectionsResponse) GetCollections() []*Collection {
+func (x *ListCollectionsResponse) GetItems() []*Collection {
 	if x != nil {
-		return x.Collections
+		return x.Items
 	}
 	return nil
 }
@@ -725,9 +725,9 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"6qdrant/cloud/serverless/collection/v1/collection.proto\x12%qdrant.cloud.serverless.collection.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a=qdrant/cloud/serverless/collection/v1/collection_config.proto\"A\n" +
 	"\x16ListCollectionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"n\n" +
-	"\x17ListCollectionsResponse\x12S\n" +
-	"\vcollections\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\vcollections\"\xf6\x02\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"b\n" +
+	"\x17ListCollectionsResponse\x12G\n" +
+	"\x05items\x18\x01 \x03(\v21.qdrant.cloud.serverless.collection.v1.CollectionR\x05items\"\xf6\x02\n" +
 	"\x17CreateCollectionRequest\x12Y\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v21.qdrant.cloud.serverless.collection.v1.CollectionB\x06\xbaH\x03\xc8\x01\x01R\n" +
@@ -818,7 +818,7 @@ var file_qdrant_cloud_serverless_collection_v1_collection_proto_goTypes = []any{
 	(*CollectionConfiguration)(nil),   // 13: qdrant.cloud.serverless.collection.v1.CollectionConfiguration
 }
 var file_qdrant_cloud_serverless_collection_v1_collection_proto_depIdxs = []int32{
-	9,  // 0: qdrant.cloud.serverless.collection.v1.ListCollectionsResponse.collections:type_name -> qdrant.cloud.serverless.collection.v1.Collection
+	9,  // 0: qdrant.cloud.serverless.collection.v1.ListCollectionsResponse.items:type_name -> qdrant.cloud.serverless.collection.v1.Collection
 	9,  // 1: qdrant.cloud.serverless.collection.v1.CreateCollectionRequest.collection:type_name -> qdrant.cloud.serverless.collection.v1.Collection
 	9,  // 2: qdrant.cloud.serverless.collection.v1.CreateCollectionResponse.collection:type_name -> qdrant.cloud.serverless.collection.v1.Collection
 	12, // 3: qdrant.cloud.serverless.collection.v1.Collection.created_at:type_name -> google.protobuf.Timestamp
