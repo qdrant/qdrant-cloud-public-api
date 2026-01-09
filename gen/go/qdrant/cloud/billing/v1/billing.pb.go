@@ -284,7 +284,7 @@ type Invoice struct {
 	// Optional invoice unique identifier. It appears on emails sent to the
 	// customer for this invoice.
 	Number *string `protobuf:"bytes,2,opt,name=number,proto3,oneof" json:"number,omitempty"`
-	// Total invoice amount.
+	// Total invoice amount in millicents.
 	TotalAmount int64 `protobuf:"varint,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	// The timestamp when the invoice was created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`

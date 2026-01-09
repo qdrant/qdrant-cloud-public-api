@@ -147,7 +147,7 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
   number?: string;
 
   /**
-   * Total invoice amount.
+   * Total invoice amount in millicents.
    *
    * @generated from field: int64 total_amount = 3;
    */
@@ -198,7 +198,7 @@ export declare type InvoiceValid = Message<"qdrant.cloud.billing.v1.Invoice"> & 
   number?: string;
 
   /**
-   * Total invoice amount.
+   * Total invoice amount in millicents.
    *
    * @generated from field: int64 total_amount = 3;
    */

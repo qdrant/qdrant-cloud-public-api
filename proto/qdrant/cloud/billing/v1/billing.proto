@@ -63,7 +63,7 @@ message Invoice {
   // Optional invoice unique identifier. It appears on emails sent to the
   // customer for this invoice.
   optional string number = 2 [(buf.validate.field).string.min_len = 1];
-  // Total invoice amount.
+  // Total invoice amount in millicents.
   int64 total_amount = 3 [(buf.validate.field).int64.gte = 0];
   // The timestamp when the invoice was created.
   google.protobuf.Timestamp created_at = 4 [(buf.validate.field).required = true];
