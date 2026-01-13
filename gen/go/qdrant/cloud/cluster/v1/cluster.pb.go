@@ -2776,7 +2776,7 @@ type Toleration struct {
 	// If the operator is `Equal` (the default), the value is required.
 	Value *string `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
 	// The effect indicates the taint effect to match.
-	// The default is TOLERATION_EFFECT_NO_SCHEDULE.
+	// If not set, matches all taint effects.
 	Effect *TolerationEffect `protobuf:"varint,4,opt,name=effect,proto3,enum=qdrant.cloud.cluster.v1.TolerationEffect,oneof" json:"effect,omitempty"`
 	// The toleration seconds indicates the duration to tolerate the taint.
 	TolerationSeconds *uint64 `protobuf:"varint,5,opt,name=toleration_seconds,json=tolerationSeconds,proto3,oneof" json:"toleration_seconds,omitempty"`
@@ -3768,19 +3768,21 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1eDatabaseConfigurationInference\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\")\n" +
 	"\x13AdditionalResources\x12\x12\n" +
-	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xb6\a\n" +
+	"\x04disk\x18\x03 \x01(\rR\x04disk\"\xf0\t\n" +
 	"\n" +
-	"Toleration\x12\xa5\x01\n" +
-	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xbd\x022\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x03key\x88\x01\x01\x12X\n" +
+	"Toleration\x12\x1f\n" +
+	"\x03key\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x18\xbd\x02H\x00R\x03key\x88\x01\x01\x12X\n" +
 	"\boperator\x18\x02 \x01(\x0e2+.qdrant.cloud.cluster.v1.TolerationOperatorB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\boperator\x88\x01\x01\x12\x19\n" +
 	"\x05value\x18\x03 \x01(\tH\x02R\x05value\x88\x01\x01\x12R\n" +
 	"\x06effect\x18\x04 \x01(\x0e2).qdrant.cloud.cluster.v1.TolerationEffectB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\x06effect\x88\x01\x01\x12;\n" +
-	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x11tolerationSeconds\x88\x01\x01:\xb8\x03\xbaH\xb4\x03\x1at\n" +
+	"\x12toleration_seconds\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00H\x04R\x11tolerationSeconds\x88\x01\x01:\xf9\x06\xbaH\xf5\x06\x1at\n" +
 	"\x1btoleration.value_for_exists\x12-value must not be set when operator is Exists\x1a&this.operator != 1 || !has(this.value)\x1a\xae\x01\n" +
-	"\x1atoleration.value_for_equal\x12Qvalue must be set when operator is Equal (or is not set, which defaults to Equal)\x1a=(has(this.operator) && this.operator != 2) || has(this.value)\x1a\x8a\x01\n" +
-	"$toleration.key_empty_requires_exists\x12)operator must be 'Exists' if key is empty\x1a7(has(this.key) && this.key != '') || this.operator == 1B\x06\n" +
+	"\x1atoleration.value_for_equal\x12Qvalue must be set when operator is Equal (or is not set, which defaults to Equal)\x1a=(has(this.operator) && this.operator != 2) || has(this.value)\x1a\xa7\x02\n" +
+	"\"toleration.key_format_when_present\x12Dkey must be a valid Kubernetes qualified name when set and non-empty\x1a\xba\x01!has(this.key) || this.key == '' || this.key.matches('^([A-Za-z0-9]([-A-Za-z0-9]*[A-Za-z0-9])?(\\\\.[A-Za-z0-9]([-A-Za-z0-9]*[A-Za-z0-9])?)*\\\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$')\x1a\x8a\x01\n" +
+	"$toleration.key_empty_requires_exists\x12)operator must be 'Exists' if key is empty\x1a7(has(this.key) && this.key != '') || this.operator == 1\x1a\x94\x01\n" +
+	"%toleration.seconds_only_for_noexecute\x128tolerationSeconds is only valid when effect is NoExecute\x1a1!has(this.toleration_seconds) || this.effect == 3B\x06\n" +
 	"\x04_keyB\v\n" +
 	"\t_operatorB\b\n" +
 	"\x06_valueB\t\n" +
