@@ -1013,6 +1013,13 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraint[];
+
+  /**
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
+   */
+  clusterStorageConfiguration?: ClusterStorageConfiguration;
 };
 
 /**
@@ -1178,6 +1185,13 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraintValid[];
+
+  /**
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
+   */
+  clusterStorageConfiguration?: ClusterStorageConfigurationValid;
 };
 
 /**
@@ -1640,6 +1654,31 @@ export declare type TolerationValid = Toleration;
  * Use `create(TolerationSchema)` to create a new message.
  */
 export declare const TolerationSchema: GenMessage<Toleration, {validType: TolerationValid}>;
+
+/**
+ * ClusterStorageConfiguration defines Storage IOPS and Throughput configuration
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterStorageConfiguration
+ */
+export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.v1.ClusterStorageConfiguration"> & {
+  /**
+   * Type of storage tier
+   *
+   * We might allow custom IOPS and Throughput values configuration in the future,
+   * that's why ClusterStorageConfiguration is a separate message and not just a field
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
+   */
+  storageTierType: ClusterStorageConfigurationStorageTierType;
+};
+
+export declare type ClusterStorageConfigurationValid = ClusterStorageConfiguration;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterStorageConfiguration.
+ * Use `create(ClusterStorageConfigurationSchema)` to create a new message.
+ */
+export declare const ClusterStorageConfigurationSchema: GenMessage<ClusterStorageConfiguration, {validType: ClusterStorageConfigurationValid}>;
 
 /**
  * ClusterState represents the current state of a cluster
@@ -2307,6 +2346,46 @@ export enum ClusterConfigurationRebalanceStrategy {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy.
  */
 export declare const ClusterConfigurationRebalanceStrategySchema: GenEnum<ClusterConfigurationRebalanceStrategy>;
+
+/**
+ * ClusterStorageTierConfigurationStorageTierType defines type of storage tier
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType
+ */
+export enum ClusterStorageConfigurationStorageTierType {
+  /**
+   * No storage tier type is configured, same as BASE
+   *
+   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Base pre-configured type
+   *
+   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
+   */
+  COST_OPTIMISED = 1,
+
+  /**
+   * Mid tier pre-configured type
+   *
+   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED = 2;
+   */
+  BALANCED = 2,
+
+  /**
+   * Most performant pre-configured type
+   *
+   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
+   */
+  PERFORMANCE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType.
+ */
+export declare const ClusterStorageConfigurationStorageTierTypeSchema: GenEnum<ClusterStorageConfigurationStorageTierType>;
 
 /**
  * DatabaseConfigurationLogLevel defines the supported logging levels for the
