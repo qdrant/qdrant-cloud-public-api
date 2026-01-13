@@ -1608,7 +1608,7 @@ func (x *InferenceModel) GetExternalDocsUrl() string {
 type StorageTiers struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The type of the storage tier
-	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"` // More information may be added in future. For example, IOPS and throughput amount, requirments etc.
+	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"` // More information may be added in future. For example, IOPS and throughput amount, requirements etc.
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }

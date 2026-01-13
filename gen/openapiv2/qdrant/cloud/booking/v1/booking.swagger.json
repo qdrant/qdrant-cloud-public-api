@@ -757,7 +757,7 @@
       "properties": {
         "storageTierType": {
           "$ref": "#/definitions/v1StorageTierType",
-          "description": "More information may be added in future. For example, IOPS and throughput amount, requirments etc.",
+          "description": "More information may be added in future. For example, IOPS and throughput amount, requirements etc.",
           "title": "The type of the storage tier"
         }
       },

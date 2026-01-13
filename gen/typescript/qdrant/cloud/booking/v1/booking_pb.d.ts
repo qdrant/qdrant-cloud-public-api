@@ -848,7 +848,7 @@ export declare type StorageTiers = Message<"qdrant.cloud.booking.v1.StorageTiers
   /**
    * The type of the storage tier
    *
-   * More information may be added in future. For example, IOPS and throughput amount, requirments etc.
+   * More information may be added in future. For example, IOPS and throughput amount, requirements etc.
    *
    * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
    */
