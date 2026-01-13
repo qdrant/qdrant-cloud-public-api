@@ -1015,7 +1015,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
   topologySpreadConstraints: TopologySpreadConstraint[];
 
   /**
-   * Storage IOPS and Throughput configuration, defaults to BASE storage configuration
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */
@@ -1187,7 +1187,7 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
   topologySpreadConstraints: TopologySpreadConstraintValid[];
 
   /**
-   * Storage IOPS and Throughput configuration, defaults to BASE storage configuration
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */

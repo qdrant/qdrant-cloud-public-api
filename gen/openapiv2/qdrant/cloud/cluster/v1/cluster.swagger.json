@@ -814,7 +814,7 @@
         },
         "clusterStorageConfiguration": {
           "$ref": "#/definitions/v1ClusterStorageConfiguration",
-          "title": "Storage IOPS and Throughput configuration, defaults to BASE storage configuration"
+          "title": "Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration"
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."

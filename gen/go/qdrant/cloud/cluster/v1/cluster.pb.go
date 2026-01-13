@@ -2026,7 +2026,7 @@ type ClusterConfiguration struct {
 	// List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
 	// It is ignored for managed cloud clusters. This is an optional field
 	TopologySpreadConstraints []*v1.TopologySpreadConstraint `protobuf:"bytes,25,rep,name=topology_spread_constraints,json=topologySpreadConstraints,proto3" json:"topology_spread_constraints,omitempty"`
-	// Storage IOPS and Throughput configuration, defaults to BASE storage configuration
+	// Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
 	ClusterStorageConfiguration *ClusterStorageConfiguration `protobuf:"bytes,26,opt,name=cluster_storage_configuration,json=clusterStorageConfiguration,proto3,oneof" json:"cluster_storage_configuration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache

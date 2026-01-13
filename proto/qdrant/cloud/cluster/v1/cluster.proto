@@ -656,7 +656,7 @@ message ClusterConfiguration {
   // List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
-  // Storage IOPS and Throughput configuration, defaults to BASE storage configuration
+  // Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
   optional ClusterStorageConfiguration cluster_storage_configuration = 26;
 }
 
