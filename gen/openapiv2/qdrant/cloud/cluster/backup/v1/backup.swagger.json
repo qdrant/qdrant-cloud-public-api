@@ -1047,17 +1047,8 @@
       "properties": {
         "storageTierType": {
           "$ref": "#/definitions/v1ClusterStorageConfigurationStorageTierType",
+          "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate class",
           "title": "Type of storage tier"
-        },
-        "iops": {
-          "type": "integer",
-          "format": "int32",
-          "title": "max iops value"
-        },
-        "throughput": {
-          "type": "integer",
-          "format": "int32",
-          "title": "max MB/s throughput value"
         }
       },
       "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"
@@ -1066,13 +1057,12 @@
       "type": "string",
       "enum": [
         "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE",
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED",
         "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM"
+        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE"
       ],
       "default": "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
-      "description": "- CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as BASE\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE: Base pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM: IOPS and Throughput values are to be configured by user",
+      "description": "- CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as BASE\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
       "title": "ClusterStorageTierConfigurationStorageTierType defines type of storage tier"
     },
     "v1CreateBackupResponse": {

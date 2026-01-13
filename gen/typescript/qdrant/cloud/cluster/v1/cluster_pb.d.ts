@@ -1664,23 +1664,12 @@ export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.
   /**
    * Type of storage tier
    *
+   * We might allow custom IOPS and Throughput values configuration in the future,
+   * that's why ClusterStorageConfiguration is a separate class
+   *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
    */
   storageTierType: ClusterStorageConfigurationStorageTierType;
-
-  /**
-   * max iops value
-   *
-   * @generated from field: optional int32 iops = 2;
-   */
-  iops?: number;
-
-  /**
-   * max MB/s throughput value
-   *
-   * @generated from field: optional int32 throughput = 3;
-   */
-  throughput?: number;
 };
 
 export declare type ClusterStorageConfigurationValid = ClusterStorageConfiguration;
@@ -2374,9 +2363,9 @@ export enum ClusterStorageConfigurationStorageTierType {
   /**
    * Base pre-configured type
    *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE = 1;
+   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
    */
-  BASE = 1,
+  COST_OPTIMISED = 1,
 
   /**
    * Mid tier pre-configured type
@@ -2391,13 +2380,6 @@ export enum ClusterStorageConfigurationStorageTierType {
    * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
    */
   PERFORMANCE = 3,
-
-  /**
-   * IOPS and Throughput values are to be configured by user
-   *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM = 4;
-   */
-  CUSTOM = 4,
 }
 
 /**
