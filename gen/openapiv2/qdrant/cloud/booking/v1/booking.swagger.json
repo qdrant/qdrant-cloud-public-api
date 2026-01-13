@@ -264,6 +264,52 @@
         ]
       }
     },
+    "/api/booking/v1/accounts/{accountId}/storage-tiers": {
+      "get": {
+        "summary": "Gets the list of available storage tiers for a particular region\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "BookingService_ListStorageTierTypes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListStorageTierTypesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "Required field specifying the cloud provider where the inference model is available.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nThis field cannot be set to `hybrid`.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderRegionId",
+            "description": "Filter specifying the cloud region where the inference model is available.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    },
     "/api/booking/v1/packages": {
       "get": {
         "summary": "Lists all public packages.\nAuthentication not required",
@@ -571,6 +617,20 @@
       },
       "title": "ListPackagesResponse is the response from the ListPackages function"
     },
+    "v1ListStorageTierTypesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1StorageTiers"
+          },
+          "description": "A list of storage tiers. We are using list of object instead of list of the string to make it extensible for future."
+        }
+      },
+      "title": "ListStorageTierTypesResponse is the response from the ListStorageTierTypes function"
+    },
     "v1ModelModality": {
       "type": "string",
       "enum": [
@@ -679,6 +739,29 @@
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."
+    },
+    "v1StorageTierType": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_TYPE_UNSPECIFIED",
+        "STORAGE_TIER_TYPE_COST_OPTIMISED",
+        "STORAGE_TIER_TYPE_BALANCED",
+        "STORAGE_TIER_TYPE_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_TYPE_UNSPECIFIED",
+      "description": "- STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as COST_OPTIMIZED\n - STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
+      "title": "StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount"
+    },
+    "v1StorageTiers": {
+      "type": "object",
+      "properties": {
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "More information may be added in future. For example, IOPS and throughput amount, requirments etc.",
+          "title": "The type of the storage tier"
+        }
+      },
+      "title": "StorageTiers holds information related to a particular storage tier"
     },
     "v1VectorType": {
       "type": "string",

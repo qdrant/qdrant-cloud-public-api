@@ -97,6 +97,16 @@ service BookingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/inference-models"};
   }
+
+  // Gets the list of available storage tiers for a particular region
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListStorageTierTypes(ListStorageTierTypesRequest) returns (ListStorageTierTypesResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // grpc Gateway REST call
+    option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/storage-tiers"};
+  }
 }
 
 // ListPackagesRequest is the request for the ListPackages function
@@ -385,6 +395,26 @@ message ListInferenceModelsResponse {
   repeated InferenceModel items = 1;
 }
 
+// ListStorageTierTypesRequest is the request for the ListStorageTierTypes function
+message ListStorageTierTypesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Required field specifying the cloud provider where the inference model is available.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  // This field cannot be set to `hybrid`.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // Filter specifying the cloud region where the inference model is available.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  string cloud_provider_region_id = 3 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// ListStorageTierTypesResponse is the response from the ListStorageTierTypes function
+message ListStorageTierTypesResponse {
+  // A list of storage tiers. We are using list of object instead of list of the string to make it extensible for future.
+  repeated StorageTiers items = 1;
+}
+
 // VectorType defines the type of vector representation.
 enum VectorType {
   // Unspecified vector type.
@@ -442,4 +472,11 @@ message InferenceModel {
   // Optional URL to external documentation for the model.
   // Only present for external models.
   optional string external_docs_url = 12 [(buf.validate.field).string = {uri: true}];
+}
+
+// StorageTiers holds information related to a particular storage tier
+message StorageTiers {
+  // The type of the storage tier
+  qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+  // More information may be added in future. For example, IOPS and throughput amount, requirments etc.
 }

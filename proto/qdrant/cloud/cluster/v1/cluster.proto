@@ -553,18 +553,6 @@ enum ClusterConfigurationRebalanceStrategy {
   CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE = 3;
 }
 
-// ClusterStorageTierConfigurationStorageTierType defines type of storage tier
-enum ClusterStorageConfigurationStorageTierType {
-  // No storage tier type is configured, same as BASE
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED = 0;
-  // Base pre-configured type
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
-  // Mid tier pre-configured type
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED = 2;
-  // Most performant pre-configured type
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
-}
-
 // A ClusterConfiguration represents the configuration of a cluster.
 message ClusterConfiguration {
   // Timestamp when the cluster configuration was last updated.
@@ -875,7 +863,7 @@ message Toleration {
 // ClusterStorageConfiguration defines Storage IOPS and Throughput configuration
 message ClusterStorageConfiguration {
   // Type of storage tier
-  ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
+  qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
   // We might allow custom IOPS and Throughput values configuration in the future,
   // that's why ClusterStorageConfiguration is a separate message and not just a field
 }

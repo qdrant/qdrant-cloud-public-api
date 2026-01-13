@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
+import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, StorageTierType, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/v1/cluster.proto.
@@ -1667,9 +1667,9 @@ export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.
    * We might allow custom IOPS and Throughput values configuration in the future,
    * that's why ClusterStorageConfiguration is a separate message and not just a field
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
+   * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
    */
-  storageTierType: ClusterStorageConfigurationStorageTierType;
+  storageTierType: StorageTierType;
 };
 
 export declare type ClusterStorageConfigurationValid = ClusterStorageConfiguration;
@@ -2346,46 +2346,6 @@ export enum ClusterConfigurationRebalanceStrategy {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy.
  */
 export declare const ClusterConfigurationRebalanceStrategySchema: GenEnum<ClusterConfigurationRebalanceStrategy>;
-
-/**
- * ClusterStorageTierConfigurationStorageTierType defines type of storage tier
- *
- * @generated from enum qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType
- */
-export enum ClusterStorageConfigurationStorageTierType {
-  /**
-   * No storage tier type is configured, same as BASE
-   *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * Base pre-configured type
-   *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
-   */
-  COST_OPTIMISED = 1,
-
-  /**
-   * Mid tier pre-configured type
-   *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED = 2;
-   */
-  BALANCED = 2,
-
-  /**
-   * Most performant pre-configured type
-   *
-   * @generated from enum value: CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
-   */
-  PERFORMANCE = 3,
-}
-
-/**
- * Describes the enum qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType.
- */
-export declare const ClusterStorageConfigurationStorageTierTypeSchema: GenEnum<ClusterStorageConfigurationStorageTierType>;
 
 /**
  * DatabaseConfigurationLogLevel defines the supported logging levels for the

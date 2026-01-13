@@ -45,6 +45,11 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.FromString,
                 _registered_method=True)
+        self.ListStorageTierTypes = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/ListStorageTierTypes',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesResponse.FromString,
+                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -109,6 +114,15 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListStorageTierTypes(self, request, context):
+        """Gets the list of available storage tiers for a particular region
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -141,6 +155,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.ListInferenceModels,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.SerializeToString,
+            ),
+            'ListStorageTierTypes': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListStorageTierTypes,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -306,6 +325,33 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/ListInferenceModels',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListInferenceModelsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListStorageTierTypes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.booking.v1.BookingService/ListStorageTierTypes',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListStorageTierTypesResponse.FromString,
             options,
             channel_credentials,
             insecure,
