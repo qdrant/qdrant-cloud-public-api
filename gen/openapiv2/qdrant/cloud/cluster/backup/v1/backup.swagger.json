@@ -1047,7 +1047,7 @@
       "properties": {
         "storageTierType": {
           "$ref": "#/definitions/v1ClusterStorageConfigurationStorageTierType",
-          "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate class",
+          "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate message and not just a field",
           "title": "Type of storage tier"
         }
       },

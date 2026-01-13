@@ -1665,7 +1665,7 @@ export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.
    * Type of storage tier
    *
    * We might allow custom IOPS and Throughput values configuration in the future,
-   * that's why ClusterStorageConfiguration is a separate class
+   * that's why ClusterStorageConfiguration is a separate message and not just a field
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
    */

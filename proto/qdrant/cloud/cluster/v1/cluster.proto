@@ -877,7 +877,7 @@ message ClusterStorageConfiguration {
   // Type of storage tier
   ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
   // We might allow custom IOPS and Throughput values configuration in the future,
-  // that's why ClusterStorageConfiguration is a separate class
+  // that's why ClusterStorageConfiguration is a separate message and not just a field
 }
 
 // Defines the operational or transitional state of the Qdrant cluster.
