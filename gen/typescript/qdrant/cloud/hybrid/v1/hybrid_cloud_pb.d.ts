@@ -5,9 +5,8 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { NetworkPolicyEgressRule, NetworkPolicyIngressRule } from "../../../../k8s.io/api/networking/v1/generated_pb.js";
+import type { KeyValue, NetworkPolicyEgressRule, NetworkPolicyIngressRule } from "../../common/v1/common_pb.js";
 import type { Toleration } from "../../cluster/v1/cluster_pb.js";
-import type { KeyValue } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/hybrid/v1/hybrid_cloud.proto.
@@ -665,14 +664,14 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
   /**
    * Optional Ingress rules for Qdrant databases
    *
-   * @generated from field: repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 15;
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyIngressRule ingress = 15;
    */
   ingress: NetworkPolicyIngressRule[];
 
   /**
    * Optional Egress rules for Qdrant databases
    *
-   * @generated from field: repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
+   * @generated from field: repeated qdrant.cloud.common.v1.NetworkPolicyEgressRule egress = 16;
    */
   egress: NetworkPolicyEgressRule[];
 
@@ -705,6 +704,14 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
    * @generated from field: optional google.protobuf.Struct advanced_operator_settings = 24;
    */
   advancedOperatorSettings?: JsonObject;
+
+  /**
+   * List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue control_plane_labels = 25;
+   */
+  controlPlaneLabels: KeyValue[];
 };
 
 export declare type HybridCloudEnvironmentConfigurationValid = HybridCloudEnvironmentConfiguration;

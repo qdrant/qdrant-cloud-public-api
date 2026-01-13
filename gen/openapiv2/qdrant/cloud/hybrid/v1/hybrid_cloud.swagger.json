@@ -30,7 +30,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -62,7 +62,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -99,7 +99,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -138,7 +138,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -185,7 +185,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -225,7 +225,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -352,34 +352,24 @@
       },
       "title": "UpdateHybridCloudEnvironmentRequest is the request for UpdateHybridCloudEnvironment function"
     },
-    "cloudclusterv1Toleration": {
+    "protobufAny": {
       "type": "object",
       "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key to match against the key of a node label."
-        },
-        "operator": {
-          "$ref": "#/definitions/v1TolerationOperator",
-          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EXISTS."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value to match against the value of a node label."
-        },
-        "effect": {
-          "$ref": "#/definitions/v1TolerationEffect",
-          "description": "The effect indicates the taint effect to match.\nThe default is TOLERATION_EFFECT_NO_SCHEDULE."
-        },
-        "tolerationSeconds": {
-          "type": "string",
-          "format": "uint64",
-          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        "@type": {
+          "type": "string"
         }
       },
-      "description": "The Toleration message represents a toleration object for Kubernetes."
+      "additionalProperties": {}
     },
-    "googlerpcStatus": {
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
       "type": "object",
       "properties": {
         "code": {
@@ -397,41 +387,6 @@
           }
         }
       }
-    },
-    "intstrIntOrString": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "format": "int64"
-        },
-        "intVal": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "strVal": {
-          "type": "string"
-        }
-      },
-      "description": "+protobuf=true\n+protobuf.options.(gogoproto.goproto_stringer)=false\n+k8s:openapi-gen=true",
-      "title": "IntOrString is a type that can hold an int32 or a string.  When used in\nJSON or YAML marshalling and unmarshalling, it produces or consumes the\ninner type.  This allows you to have, for example, a JSON field that can\naccept a name or number.\nTODO: Rename to Int32OrString"
-    },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "protobufNullValue": {
-      "type": "string",
-      "enum": [
-        "NULL_VALUE"
-      ],
-      "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "v1CreateHybridCloudEnvironmentResponse": {
       "type": "object",
@@ -658,7 +613,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/cloudclusterv1Toleration"
+            "$ref": "#/definitions/v1Toleration"
           },
           "title": "List of tolerations for clusters in this hybrid cloud environment"
         },
@@ -673,6 +628,14 @@
         "advancedOperatorSettings": {
           "type": "object",
           "description": "Advanced operator settings as a JSON object.\nThis field is to specify fields that don't have a strongly-typed field.\nThe strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set."
+        },
+        "controlPlaneLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.\nThis is an optional field"
         }
       },
       "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"
@@ -819,17 +782,17 @@
       "properties": {
         "cidr": {
           "type": "string",
-          "title": "CIDR is a string representing the IP Block\nValid examples are \"192.168.1.1/24\" or \"2001:db9::/64\""
+          "description": "CIDR is a string representing the IP Block.\nValid examples are \"192.168.1.1/24\" or \"2001:db9::/64\"."
         },
         "except": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "title": "Except is a slice of CIDRs that should not be included within an IP Block\nValid examples are \"192.168.1.1/24\" or \"2001:db9::/64\"\nExcept values will be rejected if they are outside the CIDR range\n+optional"
+          "description": "Except is a slice of CIDRs that should not be included within an IP Block.\nExcept values will be rejected if they are outside the CIDR range."
         }
       },
-      "description": "IPBlock describes a particular CIDR (Ex. \"192.168.1.1/24\",\"2001:db9::/64\") that is allowed\nto the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs\nthat should not be included within this rule."
+      "description": "IPBlock describes a particular CIDR (e.g. \"192.168.1.1/24\") that is allowed\nto the pods.\nThis is a gRPC-native equivalent of the Kubernetes IPBlock."
     },
     "v1KeyValue": {
       "type": "object",
@@ -871,11 +834,12 @@
       "type": "object",
       "properties": {
         "matchLabels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
           },
-          "title": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.\n+optional"
+          "description": "match_labels is a map of {key,value} pairs.\nmatch_labels is a list of KeyValue objects."
         },
         "matchExpressions": {
           "type": "array",
@@ -883,17 +847,17 @@
             "type": "object",
             "$ref": "#/definitions/v1LabelSelectorRequirement"
           },
-          "title": "matchExpressions is a list of label selector requirements. The requirements are ANDed.\n+optional"
+          "description": "match_expressions is a list of label selector requirements. The requirements are AND-ed."
         }
       },
-      "title": "A label selector is a label query over a set of resources. The result of matchLabels and\nmatchExpressions are ANDed. An empty label selector matches all objects. A null\nlabel selector matches no objects.\n+structType=atomic"
+      "description": "A label selector is a label query over a set of resources. The result of match_labels and\nmatch_expressions are AND-ed. An empty label selector matches all objects.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelector."
     },
     "v1LabelSelectorRequirement": {
       "type": "object",
       "properties": {
         "key": {
           "type": "string",
-          "title": "key is the label key that the selector applies to.\n+patchMergeKey=key\n+patchStrategy=merge"
+          "description": "key is the label key that the selector applies to."
         },
         "operator": {
           "type": "string",
@@ -904,10 +868,10 @@
           "items": {
             "type": "string"
           },
-          "title": "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.\n+optional"
+          "description": "values is an array of string values.\nIf the operator is In or NotIn, the values array must be non-empty.\nIf the operator is Exists or DoesNotExist, the values array must be empty."
         }
       },
-      "description": "A label selector requirement is a selector that contains values, a key, and an operator that\nrelates the key and values."
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that\nrelates the key and values.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelectorRequirement."
     },
     "v1ListHybridCloudEnvironmentsResponse": {
       "type": "object",
@@ -932,7 +896,7 @@
             "type": "object",
             "$ref": "#/definitions/v1NetworkPolicyPort"
           },
-          "title": "List of destination ports for outgoing traffic.\nEach item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list.\n+optional"
+          "description": "List of destination ports for outgoing traffic.\nEach item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list."
         },
         "to": {
           "type": "array",
@@ -940,10 +904,10 @@
             "type": "object",
             "$ref": "#/definitions/v1NetworkPolicyPeer"
           },
-          "title": "List of destinations for outgoing traffic of pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all destinations (traffic not restricted by\ndestination). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the to list.\n+optional"
+          "description": "List of destinations for outgoing traffic of pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all destinations (traffic not restricted by\ndestination). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the to list."
         }
       },
-      "title": "NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.\nThis type is beta-level in 1.8"
+      "description": "NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyEgressRule."
     },
     "v1NetworkPolicyIngressRule": {
       "type": "object",
@@ -954,7 +918,7 @@
             "type": "object",
             "$ref": "#/definitions/v1NetworkPolicyPort"
           },
-          "title": "List of ports which should be made accessible on the pods selected for this\nrule. Each item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list.\n+optional"
+          "description": "List of ports which should be made accessible on the pods selected for this\nrule. Each item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list."
         },
         "from": {
           "type": "array",
@@ -962,47 +926,62 @@
             "type": "object",
             "$ref": "#/definitions/v1NetworkPolicyPeer"
           },
-          "title": "List of sources which should be able to access the pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all sources (traffic not restricted by\nsource). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the from list.\n+optional"
+          "description": "List of sources which should be able to access the pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all sources (traffic not restricted by\nsource). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the from list."
         }
       },
-      "description": "NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from."
+      "description": "NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyIngressRule."
     },
     "v1NetworkPolicyPeer": {
       "type": "object",
       "properties": {
-        "podSelector": {
-          "$ref": "#/definitions/v1LabelSelector",
-          "description": "This is a label selector which selects Pods. This field follows standard label\nselector semantics; if present but empty, it selects all pods.\n\nIf NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects the Pods matching PodSelector in the policy's own Namespace.\n+optional"
-        },
-        "namespaceSelector": {
-          "$ref": "#/definitions/v1LabelSelector",
-          "description": "Selects Namespaces using cluster-scoped labels. This field follows standard label\nselector semantics; if present but empty, it selects all namespaces.\n\nIf PodSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects all Pods in the Namespaces selected by NamespaceSelector.\n+optional"
+        "selector": {
+          "$ref": "#/definitions/v1PeerSelector",
+          "description": "Selects pods and/or namespaces."
         },
         "ipBlock": {
           "$ref": "#/definitions/v1IPBlock",
-          "title": "IPBlock defines policy on a particular IPBlock. If this field is set then\nneither of the other fields can be.\n+optional"
+          "description": "Defines policy on a particular IPBlock."
         }
       },
-      "title": "NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of\nfields are allowed"
+      "description": "NetworkPolicyPeer describes a peer to allow traffic to/from.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyPeer."
     },
     "v1NetworkPolicyPort": {
       "type": "object",
       "properties": {
         "protocol": {
           "type": "string",
-          "title": "The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this\nfield defaults to TCP.\n+optional"
+          "description": "The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this\nfield defaults to TCP."
         },
-        "port": {
-          "$ref": "#/definitions/intstrIntOrString",
-          "title": "The port on the given protocol. This can either be a numerical or named\nport on a pod. If this field is not provided, this matches all port names and\nnumbers.\nIf present, only traffic on the specified protocol AND port will be matched.\n+optional"
+        "portNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A numerical port number."
+        },
+        "portName": {
+          "type": "string",
+          "description": "A named port on a pod."
         },
         "endPort": {
           "type": "integer",
           "format": "int32",
-          "title": "If set, indicates that the range of ports from port to endPort, inclusive,\nshould be allowed by the policy. This field cannot be defined if the port field\nis not defined or if the port field is defined as a named (string) port.\nThe endPort must be equal or greater than port.\nThis feature is in Beta state and is enabled by default.\nIt can be disabled using the Feature Gate \"NetworkPolicyEndPort\".\n+optional"
+          "description": "If set, indicates that the range of ports from port to end_port, inclusive,\nshould be allowed by the policy. This field cannot be defined if the port field\nis defined as a named (string) port.\nThe end_port must be equal to or greater than port."
         }
       },
-      "title": "NetworkPolicyPort describes a port to allow traffic on"
+      "description": "NetworkPolicyPort describes a port to allow traffic on.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyPort."
+    },
+    "v1PeerSelector": {
+      "type": "object",
+      "properties": {
+        "podSelector": {
+          "$ref": "#/definitions/v1LabelSelector",
+          "description": "This is a label selector which selects Pods.\nIf NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects the Pods matching PodSelector in the policy's own Namespace."
+        },
+        "namespaceSelector": {
+          "$ref": "#/definitions/v1LabelSelector",
+          "description": "Selects Namespaces using cluster-scoped labels.\nIf PodSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects all Pods in the Namespaces selected by NamespaceSelector."
+        }
+      },
+      "description": "PeerSelector selects pods and/or namespaces."
     },
     "v1QdrantClusterCreationStatus": {
       "type": "string",
@@ -1014,6 +993,33 @@
       "default": "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
       "description": "- QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: Unspecified\n - QDRANT_CLUSTER_CREATION_STATUS_READY: Clusters can be created\n - QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: Clusters cannot be created",
       "title": "QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment"
+    },
+    "v1Toleration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the taint that the toleration applies to.\nIf key is not set (or empty) together with operator `Exists` matches all keys, values and effects.\nThe key must be a valid Kubernetes qualified name."
+        },
+        "operator": {
+          "$ref": "#/definitions/v1TolerationOperator",
+          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EQUAL."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should not be set.\nIf the operator is `Equal` (the default), the value is required."
+        },
+        "effect": {
+          "$ref": "#/definitions/v1TolerationEffect",
+          "description": "The effect indicates the taint effect to match.\nThe default is TOLERATION_EFFECT_NO_SCHEDULE."
+        },
+        "tolerationSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        }
+      },
+      "description": "The Toleration message represents a toleration object for Kubernetes."
     },
     "v1TolerationEffect": {
       "type": "string",

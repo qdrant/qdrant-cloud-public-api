@@ -6,7 +6,6 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "k8s.io/api/networking/v1/generated.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -358,9 +357,9 @@ message HybridCloudEnvironmentConfiguration {
   // csi-snapclass is used
   optional string volume_snapshot_storage_class = 14 [(buf.validate.field).string.min_len = 1];
   // Optional Ingress rules for Qdrant databases
-  repeated k8s.io.api.networking.v1.NetworkPolicyIngressRule ingress = 15;
+  repeated common.v1.NetworkPolicyIngressRule ingress = 15;
   // Optional Egress rules for Qdrant databases
-  repeated k8s.io.api.networking.v1.NetworkPolicyEgressRule egress = 16;
+  repeated common.v1.NetworkPolicyEgressRule egress = 16;
   // Log level for deployed components
   optional HybridCloudEnvironmentConfigurationLogLevel log_level = 21 [(buf.validate.field).enum = {
     defined_only: true
@@ -374,6 +373,9 @@ message HybridCloudEnvironmentConfiguration {
   // This field is to specify fields that don't have a strongly-typed field.
   // The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
   optional google.protobuf.Struct advanced_operator_settings = 24;
+  // List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
+  // This is an optional field
+  repeated common.v1.KeyValue control_plane_labels = 25 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
 // HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components

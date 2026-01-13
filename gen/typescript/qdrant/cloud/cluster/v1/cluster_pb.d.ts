@@ -5,8 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid } from "../../common/v1/common_pb.js";
-import type { TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../../../k8s.io/api/core/v1/generated_pb.js";
+import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/v1/cluster.proto.
@@ -1011,7 +1010,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
+   * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraint[];
 
@@ -1183,7 +1182,7 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
    * It is ignored for managed cloud clusters. This is an optional field
    *
-   * @generated from field: repeated k8s.io.api.core.v1.TopologySpreadConstraint topology_spread_constraints = 25;
+   * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraintValid[];
 
@@ -1607,26 +1606,30 @@ export declare const AdditionalResourcesSchema: GenMessage<AdditionalResources, 
  */
 export declare type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> & {
   /**
-   * The key to match against the key of a node label.
+   * The key of the taint that the toleration applies to.
+   * If key is not set (or empty) together with operator `Exists` matches all keys, values and effects.
+   * The key must be a valid Kubernetes qualified name.
    *
-   * @generated from field: string key = 1;
+   * @generated from field: optional string key = 1;
    */
-  key: string;
+  key?: string;
 
   /**
    * The operator represents a key's relationship to the value.
-   * The default is TOLERATION_OPERATOR_EXISTS.
+   * The default is TOLERATION_OPERATOR_EQUAL.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.TolerationOperator operator = 2;
    */
   operator?: TolerationOperator;
 
   /**
-   * The value to match against the value of a node label.
+   * The value is the taint value the toleration matches to.
+   * If the operator is `Exists`, the value should not be set.
+   * If the operator is `Equal` (the default), the value is required.
    *
-   * @generated from field: string value = 3;
+   * @generated from field: optional string value = 3;
    */
-  value: string;
+  value?: string;
 
   /**
    * The effect indicates the taint effect to match.
