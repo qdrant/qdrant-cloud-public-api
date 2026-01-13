@@ -559,13 +559,11 @@ enum ClusterStorageConfigurationStorageTierType {
   // No storage tier type is configured, same as BASE
   CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED = 0;
   // Base pre-configured type
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BASE = 1;
+  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
   // Mid tier pre-configured type
   CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED = 2;
   // Most performant pre-configured type
   CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE = 3;
-  // IOPS and Throughput values are to be configured by user
-  CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_CUSTOM = 4;
 }
 
 // A ClusterConfiguration represents the configuration of a cluster.
@@ -857,10 +855,8 @@ message Toleration {
 message ClusterStorageConfiguration {
   // Type of storage tier
   ClusterStorageConfigurationStorageTierType storage_tier_type = 1;
-  // max iops value
-  optional int32 iops = 2;
-  // max MB/s throughput value
-  optional int32 throughput = 3;
+  // We might allow custom IOPS and Throughput values configuration in the future,
+  // that's why ClusterStorageConfiguration is a separate class
 }
 
 // Defines the operational or transitional state of the Qdrant cluster.
