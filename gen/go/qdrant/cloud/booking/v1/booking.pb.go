@@ -1349,7 +1349,6 @@ type ListStorageTierTypesRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Required field specifying the cloud provider where the storage tiers are available.
 	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-	// This field cannot be set to `hybrid`.
 	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
 	// Filter specifying the cloud region where the storage tiers are available.
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.

@@ -691,7 +691,6 @@ export declare type ListStorageTierTypesRequest = Message<"qdrant.cloud.booking.
   /**
    * Required field specifying the cloud provider where the storage tiers are available.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-   * This field cannot be set to `hybrid`.
    *
    * @generated from field: string cloud_provider_id = 2;
    */

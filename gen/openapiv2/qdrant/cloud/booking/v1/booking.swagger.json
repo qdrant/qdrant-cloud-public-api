@@ -292,7 +292,7 @@
           },
           {
             "name": "cloudProviderId",
-            "description": "Required field specifying the cloud provider where the storage tiers are available.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nThis field cannot be set to `hybrid`.",
+            "description": "Required field specifying the cloud provider where the storage tiers are available.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.",
             "in": "query",
             "required": false,
             "type": "string"
