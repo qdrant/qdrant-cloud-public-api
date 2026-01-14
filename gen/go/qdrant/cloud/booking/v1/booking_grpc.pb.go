@@ -19,12 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BookingService_ListPackages_FullMethodName        = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
-	BookingService_GetPackage_FullMethodName          = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
-	BookingService_ListGlobalPackages_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
-	BookingService_GetQuote_FullMethodName            = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
-	BookingService_GetBackupQuote_FullMethodName      = "/qdrant.cloud.booking.v1.BookingService/GetBackupQuote"
-	BookingService_ListInferenceModels_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListInferenceModels"
+	BookingService_ListPackages_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
+	BookingService_GetPackage_FullMethodName           = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
+	BookingService_ListGlobalPackages_FullMethodName   = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
+	BookingService_GetQuote_FullMethodName             = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
+	BookingService_GetBackupQuote_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/GetBackupQuote"
+	BookingService_ListInferenceModels_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListInferenceModels"
+	BookingService_ListStorageTierTypes_FullMethodName = "/qdrant.cloud.booking.v1.BookingService/ListStorageTierTypes"
 )
 
 // BookingServiceClient is the client API for BookingService service.
@@ -60,6 +61,10 @@ type BookingServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListInferenceModels(ctx context.Context, in *ListInferenceModelsRequest, opts ...grpc.CallOption) (*ListInferenceModelsResponse, error)
+	// Gets the list of available storage tiers for a particular region
+	// Required permissions:
+	// - None (authenticated only)
+	ListStorageTierTypes(ctx context.Context, in *ListStorageTierTypesRequest, opts ...grpc.CallOption) (*ListStorageTierTypesResponse, error)
 }
 
 type bookingServiceClient struct {
@@ -130,6 +135,16 @@ func (c *bookingServiceClient) ListInferenceModels(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *bookingServiceClient) ListStorageTierTypes(ctx context.Context, in *ListStorageTierTypesRequest, opts ...grpc.CallOption) (*ListStorageTierTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListStorageTierTypesResponse)
+	err := c.cc.Invoke(ctx, BookingService_ListStorageTierTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookingServiceServer is the server API for BookingService service.
 // All implementations must embed UnimplementedBookingServiceServer
 // for forward compatibility.
@@ -163,6 +178,10 @@ type BookingServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	ListInferenceModels(context.Context, *ListInferenceModelsRequest) (*ListInferenceModelsResponse, error)
+	// Gets the list of available storage tiers for a particular region
+	// Required permissions:
+	// - None (authenticated only)
+	ListStorageTierTypes(context.Context, *ListStorageTierTypesRequest) (*ListStorageTierTypesResponse, error)
 	mustEmbedUnimplementedBookingServiceServer()
 }
 
@@ -190,6 +209,9 @@ func (UnimplementedBookingServiceServer) GetBackupQuote(context.Context, *GetBac
 }
 func (UnimplementedBookingServiceServer) ListInferenceModels(context.Context, *ListInferenceModelsRequest) (*ListInferenceModelsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListInferenceModels not implemented")
+}
+func (UnimplementedBookingServiceServer) ListStorageTierTypes(context.Context, *ListStorageTierTypesRequest) (*ListStorageTierTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListStorageTierTypes not implemented")
 }
 func (UnimplementedBookingServiceServer) mustEmbedUnimplementedBookingServiceServer() {}
 func (UnimplementedBookingServiceServer) testEmbeddedByValue()                        {}
@@ -320,6 +342,24 @@ func _BookingService_ListInferenceModels_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookingService_ListStorageTierTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStorageTierTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).ListStorageTierTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_ListStorageTierTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).ListStorageTierTypes(ctx, req.(*ListStorageTierTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookingService_ServiceDesc is the grpc.ServiceDesc for BookingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +390,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListInferenceModels",
 			Handler:    _BookingService_ListInferenceModels_Handler,
+		},
+		{
+			MethodName: "ListStorageTierTypes",
+			Handler:    _BookingService_ListStorageTierTypes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

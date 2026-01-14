@@ -41,13 +41,6 @@ class ClusterConfigurationRebalanceStrategy(int, metaclass=_enum_type_wrapper.En
     CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: _ClassVar[ClusterConfigurationRebalanceStrategy]
     CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: _ClassVar[ClusterConfigurationRebalanceStrategy]
 
-class ClusterStorageConfigurationStorageTierType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: _ClassVar[ClusterStorageConfigurationStorageTierType]
-    CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED: _ClassVar[ClusterStorageConfigurationStorageTierType]
-    CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: _ClassVar[ClusterStorageConfigurationStorageTierType]
-    CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: _ClassVar[ClusterStorageConfigurationStorageTierType]
-
 class DatabaseConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: _ClassVar[DatabaseConfigurationLogLevel]
@@ -122,10 +115,6 @@ CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: ClusterConfigurationRebala
 CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: ClusterConfigurationRebalanceStrategy
 CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: ClusterConfigurationRebalanceStrategy
 CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: ClusterConfigurationRebalanceStrategy
-CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: ClusterStorageConfigurationStorageTierType
-CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED: ClusterStorageConfigurationStorageTierType
-CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: ClusterStorageConfigurationStorageTierType
-CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: ClusterStorageConfigurationStorageTierType
 DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: DatabaseConfigurationLogLevel
@@ -476,8 +465,8 @@ class Toleration(_message.Message):
 class ClusterStorageConfiguration(_message.Message):
     __slots__ = ()
     STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
-    storage_tier_type: ClusterStorageConfigurationStorageTierType
-    def __init__(self, storage_tier_type: _Optional[_Union[ClusterStorageConfigurationStorageTierType, str]] = ...) -> None: ...
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class ClusterState(_message.Message):
     __slots__ = ()

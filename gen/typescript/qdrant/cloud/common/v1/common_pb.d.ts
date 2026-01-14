@@ -575,6 +575,46 @@ export enum ActorType {
 export declare const ActorTypeSchema: GenEnum<ActorType>;
 
 /**
+ * StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount
+ *
+ * @generated from enum qdrant.cloud.common.v1.StorageTierType
+ */
+export enum StorageTierType {
+  /**
+   * No storage tier type is configured, same as COST_OPTIMIZED
+   *
+   * @generated from enum value: STORAGE_TIER_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Base pre-configured type
+   *
+   * @generated from enum value: STORAGE_TIER_TYPE_COST_OPTIMISED = 1;
+   */
+  COST_OPTIMISED = 1,
+
+  /**
+   * Mid tier pre-configured type
+   *
+   * @generated from enum value: STORAGE_TIER_TYPE_BALANCED = 2;
+   */
+  BALANCED = 2,
+
+  /**
+   * Most performant pre-configured type
+   *
+   * @generated from enum value: STORAGE_TIER_TYPE_PERFORMANCE = 3;
+   */
+  PERFORMANCE = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.StorageTierType.
+ */
+export declare const StorageTierTypeSchema: GenEnum<StorageTierType>;
+
+/**
  * A list of permissions which need to be met by the current user.
  * If `requires_all_permissions` is true (or missing): ALL of the permissions should be met (and)
  * If `requires_all_permissions` is false: ANY-OF the permissions should be met (or)

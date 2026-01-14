@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { StorageTierType } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/booking/v1/booking.proto.
@@ -674,6 +675,67 @@ export declare type ListInferenceModelsResponseValid = ListInferenceModelsRespon
 export declare const ListInferenceModelsResponseSchema: GenMessage<ListInferenceModelsResponse, {validType: ListInferenceModelsResponseValid}>;
 
 /**
+ * ListStorageTierTypesRequest is the request for the ListStorageTierTypes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListStorageTierTypesRequest
+ */
+export declare type ListStorageTierTypesRequest = Message<"qdrant.cloud.booking.v1.ListStorageTierTypesRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * Required field specifying the cloud provider where the storage tiers are available.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the storage tiers are available.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   *
+   * @generated from field: string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId: string;
+};
+
+export declare type ListStorageTierTypesRequestValid = ListStorageTierTypesRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListStorageTierTypesRequest.
+ * Use `create(ListStorageTierTypesRequestSchema)` to create a new message.
+ */
+export declare const ListStorageTierTypesRequestSchema: GenMessage<ListStorageTierTypesRequest, {validType: ListStorageTierTypesRequestValid}>;
+
+/**
+ * ListStorageTierTypesResponse is the response from the ListStorageTierTypes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListStorageTierTypesResponse
+ */
+export declare type ListStorageTierTypesResponse = Message<"qdrant.cloud.booking.v1.ListStorageTierTypesResponse"> & {
+  /**
+   * A list of storage tiers. We are using list of object instead of list of the string to make it extensible for future.
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.StorageTiers items = 1;
+   */
+  items: StorageTiers[];
+};
+
+export declare type ListStorageTierTypesResponseValid = ListStorageTierTypesResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListStorageTierTypesResponse.
+ * Use `create(ListStorageTierTypesResponseSchema)` to create a new message.
+ */
+export declare const ListStorageTierTypesResponseSchema: GenMessage<ListStorageTierTypesResponse, {validType: ListStorageTierTypesResponseValid}>;
+
+/**
  * InferenceModel represents a single inference model available for use.
  *
  * @generated from message qdrant.cloud.booking.v1.InferenceModel
@@ -775,6 +837,30 @@ export declare type InferenceModelValid = InferenceModel;
  * Use `create(InferenceModelSchema)` to create a new message.
  */
 export declare const InferenceModelSchema: GenMessage<InferenceModel, {validType: InferenceModelValid}>;
+
+/**
+ * StorageTiers holds information related to a particular storage tier
+ *
+ * @generated from message qdrant.cloud.booking.v1.StorageTiers
+ */
+export declare type StorageTiers = Message<"qdrant.cloud.booking.v1.StorageTiers"> & {
+  /**
+   * The type of the storage tier
+   *
+   * More information may be added in future. For example, IOPS and throughput amount, requirements etc.
+   *
+   * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+   */
+  storageTierType: StorageTierType;
+};
+
+export declare type StorageTiersValid = StorageTiers;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.StorageTiers.
+ * Use `create(StorageTiersSchema)` to create a new message.
+ */
+export declare const StorageTiersSchema: GenMessage<StorageTiers, {validType: StorageTiersValid}>;
 
 /**
  * PackageStatus defines the valid states a package can be in.
@@ -988,6 +1074,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof ListInferenceModelsRequestSchema;
     output: typeof ListInferenceModelsResponseSchema;
+  },
+  /**
+   * Gets the list of available storage tiers for a particular region
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes
+   */
+  listStorageTierTypes: {
+    methodKind: "unary";
+    input: typeof ListStorageTierTypesRequestSchema;
+    output: typeof ListStorageTierTypesResponseSchema;
   },
 }>;
 
