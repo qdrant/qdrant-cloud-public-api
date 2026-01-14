@@ -689,7 +689,7 @@ export declare type ListStorageTierTypesRequest = Message<"qdrant.cloud.booking.
   accountId: string;
 
   /**
-   * Required field specifying the cloud provider where the inference model is available.
+   * Required field specifying the cloud provider where the storage tiers are available.
    * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
    * This field cannot be set to `hybrid`.
    *
@@ -698,7 +698,7 @@ export declare type ListStorageTierTypesRequest = Message<"qdrant.cloud.booking.
   cloudProviderId: string;
 
   /**
-   * Filter specifying the cloud region where the inference model is available.
+   * Filter specifying the cloud region where the storage tiers are available.
    * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
    *
    * @generated from field: string cloud_provider_region_id = 3;

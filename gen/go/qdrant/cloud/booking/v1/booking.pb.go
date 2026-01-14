@@ -1347,11 +1347,11 @@ type ListStorageTierTypesRequest struct {
 	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Required field specifying the cloud provider where the inference model is available.
+	// Required field specifying the cloud provider where the storage tiers are available.
 	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
 	// This field cannot be set to `hybrid`.
 	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// Filter specifying the cloud region where the inference model is available.
+	// Filter specifying the cloud region where the storage tiers are available.
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
 	CloudProviderRegionId string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
