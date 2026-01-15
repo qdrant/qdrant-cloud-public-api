@@ -1844,7 +1844,7 @@ type AccountMember struct {
 	// The user associated with this membership record.
 	// This is a read-only field.
 	AccountMember *v1.User `protobuf:"bytes,1,opt,name=account_member,json=accountMember,proto3" json:"account_member,omitempty"`
-	// Wether or not this user is the owner of the account.
+	// Whether or not this user is the owner of the account.
 	// This is a read-only field.
 	IsOwner       bool `protobuf:"varint,2,opt,name=is_owner,json=isOwner,proto3" json:"is_owner,omitempty"`
 	unknownFields protoimpl.UnknownFields

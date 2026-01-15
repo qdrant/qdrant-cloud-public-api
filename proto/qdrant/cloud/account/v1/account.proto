@@ -681,7 +681,7 @@ message AccountMember {
   // The user associated with this membership record.
   // This is a read-only field.
   iam.v1.User account_member = 1 [(buf.validate.field).required = true];
-  // Wether or not this user is the owner of the account.
+  // Whether or not this user is the owner of the account.
   // This is a read-only field.
   bool is_owner = 2;
 }

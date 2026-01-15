@@ -1092,7 +1092,7 @@ export declare type AccountMember = Message<"qdrant.cloud.account.v1.AccountMemb
   accountMember?: User;
 
   /**
-   * Wether or not this user is the owner of the account.
+   * Whether or not this user is the owner of the account.
    * This is a read-only field.
    *
    * @generated from field: bool is_owner = 2;
@@ -1115,7 +1115,7 @@ export declare type AccountMemberValid = Message<"qdrant.cloud.account.v1.Accoun
   accountMember: UserValid;
 
   /**
-   * Wether or not this user is the owner of the account.
+   * Whether or not this user is the owner of the account.
    * This is a read-only field.
    *
    * @generated from field: bool is_owner = 2;
