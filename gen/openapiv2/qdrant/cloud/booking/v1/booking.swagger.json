@@ -16,6 +16,46 @@
     "application/json"
   ],
   "paths": {
+    "/api/booking/v1/accounts/{accountId}/backup-quote": {
+      "post": {
+        "summary": "Gets a price quote for a backup configuration.\nCalculates pricing information for storing a backup,\nbased on the specified cloud provider, region, and backup size.\nRequired permissions:\n- write:backups",
+        "operationId": "BookingService_GetBackupQuote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBackupQuoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingServiceGetBackupQuoteBody"
+            }
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    },
     "/api/booking/v1/accounts/{accountId}/inference-models": {
       "get": {
         "summary": "Gets the list of available inference models.\nRequired permissions:\n- None (authenticated only)",
@@ -30,7 +70,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -76,7 +116,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -159,7 +199,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -186,7 +226,7 @@
     },
     "/api/booking/v1/accounts/{accountId}/quote": {
       "post": {
-        "summary": "Gets a price quote for a cluster configuration.\nThis endpoint calculates pricing information including hourly costs,\nand any applicable discounts for the specified cluster configuration.\nRequired permissions:\n- write:clusters",
+        "summary": "Gets a price quote for a cluster configuration.\nCalculates pricing information including hourly costs,\nand any applicable discounts for the specified cluster configuration.\nRequired permissions:\n- write:clusters",
         "operationId": "BookingService_GetQuote",
         "responses": {
           "200": {
@@ -198,7 +238,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -224,6 +264,52 @@
         ]
       }
     },
+    "/api/booking/v1/accounts/{accountId}/storage-tiers": {
+      "get": {
+        "summary": "Gets the list of available storage tiers for a particular region\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "BookingService_ListStorageTierTypes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListStorageTierTypesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "Required field specifying the cloud provider where the storage tiers are available.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderRegionId",
+            "description": "Filter specifying the cloud region where the storage tiers are available.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
+    },
     "/api/booking/v1/packages": {
       "get": {
         "summary": "Lists all public packages.\nAuthentication not required",
@@ -238,7 +324,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -286,6 +372,25 @@
     }
   },
   "definitions": {
+    "BookingServiceGetBackupQuoteBody": {
+      "type": "object",
+      "properties": {
+        "cloudProviderId": {
+          "type": "string",
+          "description": "The cloud provider where the backup will be stored.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "The cloud region where the backup will be stored.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nThis field can be omitted if `cloud_provider_id` is set to `hybrid`."
+        },
+        "backupSizeGib": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the backup in GiB.\nThis is an optional field. If not set, defaults to 1 GiB.\nThe response will include the total price per hour for the specified (or default) backup size."
+        }
+      },
+      "title": "GetBackupQuoteRequest is the request for the GetBackupQuote function"
+    },
     "BookingServiceGetQuoteBody": {
       "type": "object",
       "properties": {
@@ -314,7 +419,16 @@
       },
       "title": "GetQuoteRequest is the request for the GetQuote function"
     },
-    "googlerpcStatus": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
       "type": "object",
       "properties": {
         "code": {
@@ -333,15 +447,6 @@
         }
       }
     },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
     "v1AvailableAdditionalResources": {
       "type": "object",
       "properties": {
@@ -352,6 +457,31 @@
         }
       },
       "description": "AvailableAdditionalResources represents additional resources that can be added to the cluster."
+    },
+    "v1GetBackupQuoteResponse": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "originalPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The original price per hour in millicents, before any discounts.\nRepresents the cost per hour for storing the backup of the requested size.\nYou will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours."
+        },
+        "discountedPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per hour in millicents, after applying discounts.\nIf no discounts are applied, this will be the same as original_price_per_hour."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage of discount applied (e.g., 10.0 for 10% discount).\nIf no discounts are applied, this will be 0.0."
+        }
+      },
+      "title": "GetBackupQuoteResponse is the response from the GetBackupQuote function"
     },
     "v1GetPackageResponse": {
       "type": "object",
@@ -487,6 +617,20 @@
       },
       "title": "ListPackagesResponse is the response from the ListPackages function"
     },
+    "v1ListStorageTierTypesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1StorageTiers"
+          },
+          "description": "A list of storage tiers. We are using list of object instead of list of the string to make it extensible for future."
+        }
+      },
+      "title": "ListStorageTierTypesResponse is the response from the ListStorageTierTypes function"
+    },
     "v1ModelModality": {
       "type": "string",
       "enum": [
@@ -595,6 +739,29 @@
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."
+    },
+    "v1StorageTierType": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_TYPE_UNSPECIFIED",
+        "STORAGE_TIER_TYPE_COST_OPTIMISED",
+        "STORAGE_TIER_TYPE_BALANCED",
+        "STORAGE_TIER_TYPE_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_TYPE_UNSPECIFIED",
+      "description": "- STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as COST_OPTIMIZED\n - STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
+      "title": "StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount"
+    },
+    "v1StorageTiers": {
+      "type": "object",
+      "properties": {
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "More information may be added in future. For example, IOPS and throughput amount, requirements etc.",
+          "title": "The type of the storage tier"
+        }
+      },
+      "title": "StorageTiers holds information related to a particular storage tier"
     },
     "v1VectorType": {
       "type": "string",

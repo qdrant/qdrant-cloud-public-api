@@ -9,14 +9,13 @@ package hybridv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v11 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1"
-	v12 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	v1 "k8s.io/api/networking/v1"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -1134,14 +1133,14 @@ type HybridCloudEnvironmentConfiguration struct {
 	// List of tolerations for clusters in this hybrid cloud environment
 	Tolerations []*v11.Toleration `protobuf:"bytes,22,rep,name=tolerations,proto3" json:"tolerations,omitempty"`
 	// Node selector for Qdrant nodes in this hybrid cloud environment
-	NodeSelector []*v12.KeyValue `protobuf:"bytes,23,rep,name=node_selector,json=nodeSelector,proto3" json:"node_selector,omitempty"`
+	NodeSelector []*v1.KeyValue `protobuf:"bytes,23,rep,name=node_selector,json=nodeSelector,proto3" json:"node_selector,omitempty"`
 	// Advanced operator settings as a JSON object.
 	// This field is to specify fields that don't have a strongly-typed field.
 	// The strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set.
 	AdvancedOperatorSettings *structpb.Struct `protobuf:"bytes,24,opt,name=advanced_operator_settings,json=advancedOperatorSettings,proto3,oneof" json:"advanced_operator_settings,omitempty"`
 	// List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
 	// This is an optional field
-	ControlPlaneLabels []*v12.KeyValue `protobuf:"bytes,25,rep,name=control_plane_labels,json=controlPlaneLabels,proto3" json:"control_plane_labels,omitempty"`
+	ControlPlaneLabels []*v1.KeyValue `protobuf:"bytes,25,rep,name=control_plane_labels,json=controlPlaneLabels,proto3" json:"control_plane_labels,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1288,7 +1287,7 @@ func (x *HybridCloudEnvironmentConfiguration) GetTolerations() []*v11.Toleration
 	return nil
 }
 
-func (x *HybridCloudEnvironmentConfiguration) GetNodeSelector() []*v12.KeyValue {
+func (x *HybridCloudEnvironmentConfiguration) GetNodeSelector() []*v1.KeyValue {
 	if x != nil {
 		return x.NodeSelector
 	}
@@ -1302,7 +1301,7 @@ func (x *HybridCloudEnvironmentConfiguration) GetAdvancedOperatorSettings() *str
 	return nil
 }
 
-func (x *HybridCloudEnvironmentConfiguration) GetControlPlaneLabels() []*v12.KeyValue {
+func (x *HybridCloudEnvironmentConfiguration) GetControlPlaneLabels() []*v1.KeyValue {
 	if x != nil {
 		return x.ControlPlaneLabels
 	}
@@ -1596,7 +1595,7 @@ type HybridCloudEnvironmentStorageClass struct {
 	// Specifies the reclaim policy of the storage class
 	ReclaimPolicy string `protobuf:"bytes,5,opt,name=reclaim_policy,json=reclaimPolicy,proto3" json:"reclaim_policy,omitempty"`
 	// parameters of the storage class
-	Parameters    []*v12.KeyValue `protobuf:"bytes,6,rep,name=parameters,proto3" json:"parameters,omitempty"`
+	Parameters    []*v1.KeyValue `protobuf:"bytes,6,rep,name=parameters,proto3" json:"parameters,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1666,7 +1665,7 @@ func (x *HybridCloudEnvironmentStorageClass) GetReclaimPolicy() string {
 	return ""
 }
 
-func (x *HybridCloudEnvironmentStorageClass) GetParameters() []*v12.KeyValue {
+func (x *HybridCloudEnvironmentStorageClass) GetParameters() []*v1.KeyValue {
 	if x != nil {
 		return x.Parameters
 	}
@@ -1905,7 +1904,7 @@ var File_qdrant_cloud_hybrid_v1_hybrid_cloud_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
-	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(k8s.io/api/networking/v1/generated.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
+	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
 	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
@@ -1960,7 +1959,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
 	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\xea\r\n" +
+	"\a_status\"\xe6\r\n" +
 	"#HybridCloudEnvironmentConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x129\n" +
 	"\tnamespace\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18\xfd\x012\x0f^[a-zA-Z0-9-]+$R\tnamespace\x123\n" +
@@ -1974,9 +1973,9 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x0fca_certificates\x18\v \x01(\tH\x05R\x0ecaCertificates\x88\x01\x01\x12B\n" +
 	"\x16database_storage_class\x18\f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\x14databaseStorageClass\x88\x01\x01\x12B\n" +
 	"\x16snapshot_storage_class\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\x14snapshotStorageClass\x88\x01\x01\x12O\n" +
-	"\x1dvolume_snapshot_storage_class\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\x1avolumeSnapshotStorageClass\x88\x01\x01\x12L\n" +
-	"\aingress\x18\x0f \x03(\v22.k8s.io.api.networking.v1.NetworkPolicyIngressRuleR\aingress\x12I\n" +
-	"\x06egress\x18\x10 \x03(\v21.k8s.io.api.networking.v1.NetworkPolicyEgressRuleR\x06egress\x12q\n" +
+	"\x1dvolume_snapshot_storage_class\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\x1avolumeSnapshotStorageClass\x88\x01\x01\x12J\n" +
+	"\aingress\x18\x0f \x03(\v20.qdrant.cloud.common.v1.NetworkPolicyIngressRuleR\aingress\x12G\n" +
+	"\x06egress\x18\x10 \x03(\v2/.qdrant.cloud.common.v1.NetworkPolicyEgressRuleR\x06egress\x12q\n" +
 	"\tlog_level\x18\x15 \x01(\x0e2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevelB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\tR\blogLevel\x88\x01\x01\x12E\n" +
 	"\vtolerations\x18\x16 \x03(\v2#.qdrant.cloud.cluster.v1.TolerationR\vtolerations\x12O\n" +
@@ -2149,10 +2148,10 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_goTypes = []any{
 	(*HybridCloudEnvironmentNodeInfo)(nil),            // 24: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeInfo
 	(*HybridCloudEnvironmentNodeResourceInfo)(nil),    // 25: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentNodeResourceInfo
 	(*timestamppb.Timestamp)(nil),                     // 26: google.protobuf.Timestamp
-	(*v1.NetworkPolicyIngressRule)(nil),               // 27: k8s.io.api.networking.v1.NetworkPolicyIngressRule
-	(*v1.NetworkPolicyEgressRule)(nil),                // 28: k8s.io.api.networking.v1.NetworkPolicyEgressRule
+	(*v1.NetworkPolicyIngressRule)(nil),               // 27: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*v1.NetworkPolicyEgressRule)(nil),                // 28: qdrant.cloud.common.v1.NetworkPolicyEgressRule
 	(*v11.Toleration)(nil),                            // 29: qdrant.cloud.cluster.v1.Toleration
-	(*v12.KeyValue)(nil),                              // 30: qdrant.cloud.common.v1.KeyValue
+	(*v1.KeyValue)(nil),                               // 30: qdrant.cloud.common.v1.KeyValue
 	(*structpb.Struct)(nil),                           // 31: google.protobuf.Struct
 }
 var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_depIdxs = []int32{
@@ -2167,8 +2166,8 @@ var file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_depIdxs = []int32{
 	18, // 8: qdrant.cloud.hybrid.v1.HybridCloudEnvironment.configuration:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration
 	19, // 9: qdrant.cloud.hybrid.v1.HybridCloudEnvironment.status:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatus
 	26, // 10: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
-	27, // 11: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.ingress:type_name -> k8s.io.api.networking.v1.NetworkPolicyIngressRule
-	28, // 12: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.egress:type_name -> k8s.io.api.networking.v1.NetworkPolicyEgressRule
+	27, // 11: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.ingress:type_name -> qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	28, // 12: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.egress:type_name -> qdrant.cloud.common.v1.NetworkPolicyEgressRule
 	0,  // 13: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.log_level:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationLogLevel
 	29, // 14: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.tolerations:type_name -> qdrant.cloud.cluster.v1.Toleration
 	30, // 15: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfiguration.node_selector:type_name -> qdrant.cloud.common.v1.KeyValue

@@ -359,6 +359,7 @@ class ClusterConfiguration(_message.Message):
     RESTART_POLICY_FIELD_NUMBER: _ClassVar[int]
     REBALANCE_STRATEGY_FIELD_NUMBER: _ClassVar[int]
     TOPOLOGY_SPREAD_CONSTRAINTS_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_STORAGE_CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
     number_of_nodes: int
     version: str
@@ -378,7 +379,8 @@ class ClusterConfiguration(_message.Message):
     restart_policy: ClusterConfigurationRestartPolicy
     rebalance_strategy: ClusterConfigurationRebalanceStrategy
     topology_spread_constraints: _containers.RepeatedCompositeFieldContainer[_common_pb2.TopologySpreadConstraint]
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., service_type: _Optional[_Union[ClusterServiceType, str]] = ..., service_annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., pod_labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[_Union[ClusterConfigurationGpuType, str]] = ..., restart_policy: _Optional[_Union[ClusterConfigurationRestartPolicy, str]] = ..., rebalance_strategy: _Optional[_Union[ClusterConfigurationRebalanceStrategy, str]] = ..., topology_spread_constraints: _Optional[_Iterable[_Union[_common_pb2.TopologySpreadConstraint, _Mapping]]] = ...) -> None: ...
+    cluster_storage_configuration: ClusterStorageConfiguration
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., number_of_nodes: _Optional[int] = ..., version: _Optional[str] = ..., package_id: _Optional[str] = ..., additional_resources: _Optional[_Union[AdditionalResources, _Mapping]] = ..., database_configuration: _Optional[_Union[DatabaseConfiguration, _Mapping]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., tolerations: _Optional[_Iterable[_Union[Toleration, _Mapping]]] = ..., annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., service_type: _Optional[_Union[ClusterServiceType, str]] = ..., service_annotations: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., pod_labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., reserved_cpu_percentage: _Optional[int] = ..., reserved_memory_percentage: _Optional[int] = ..., gpu_type: _Optional[_Union[ClusterConfigurationGpuType, str]] = ..., restart_policy: _Optional[_Union[ClusterConfigurationRestartPolicy, str]] = ..., rebalance_strategy: _Optional[_Union[ClusterConfigurationRebalanceStrategy, str]] = ..., topology_spread_constraints: _Optional[_Iterable[_Union[_common_pb2.TopologySpreadConstraint, _Mapping]]] = ..., cluster_storage_configuration: _Optional[_Union[ClusterStorageConfiguration, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfiguration(_message.Message):
     __slots__ = ()
@@ -469,6 +471,12 @@ class Toleration(_message.Message):
     effect: TolerationEffect
     toleration_seconds: int
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[_Union[TolerationOperator, str]] = ..., value: _Optional[str] = ..., effect: _Optional[_Union[TolerationEffect, str]] = ..., toleration_seconds: _Optional[int] = ...) -> None: ...
+
+class ClusterStorageConfiguration(_message.Message):
+    __slots__ = ()
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class ClusterState(_message.Message):
     __slots__ = ()

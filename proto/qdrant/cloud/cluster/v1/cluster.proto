@@ -685,6 +685,8 @@ message ClusterConfiguration {
   // List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
+  // Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
+  optional ClusterStorageConfiguration cluster_storage_configuration = 26;
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
@@ -893,6 +895,14 @@ message Toleration {
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)
   }];
+}
+
+// ClusterStorageConfiguration defines Storage IOPS and Throughput configuration
+message ClusterStorageConfiguration {
+  // Type of storage tier
+  qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+  // We might allow custom IOPS and Throughput values configuration in the future,
+  // that's why ClusterStorageConfiguration is a separate message and not just a field
 }
 
 // Defines the operational or transitional state of the Qdrant cluster.

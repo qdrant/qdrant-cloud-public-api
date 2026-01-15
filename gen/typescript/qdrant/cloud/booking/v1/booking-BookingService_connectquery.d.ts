@@ -29,7 +29,7 @@ export const getPackage: typeof BookingService["method"]["getPackage"];
 export const listGlobalPackages: typeof BookingService["method"]["listGlobalPackages"];
 /**
  * Gets a price quote for a cluster configuration.
- * This endpoint calculates pricing information including hourly costs,
+ * Calculates pricing information including hourly costs,
  * and any applicable discounts for the specified cluster configuration.
  * Required permissions:
  * - write:clusters
@@ -38,6 +38,16 @@ export const listGlobalPackages: typeof BookingService["method"]["listGlobalPack
  */
 export const getQuote: typeof BookingService["method"]["getQuote"];
 /**
+ * Gets a price quote for a backup configuration.
+ * Calculates pricing information for storing a backup,
+ * based on the specified cloud provider, region, and backup size.
+ * Required permissions:
+ * - write:backups
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetBackupQuote
+ */
+export const getBackupQuote: typeof BookingService["method"]["getBackupQuote"];
+/**
  * Gets the list of available inference models.
  * Required permissions:
  * - None (authenticated only)
@@ -45,3 +55,11 @@ export const getQuote: typeof BookingService["method"]["getQuote"];
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
  */
 export const listInferenceModels: typeof BookingService["method"]["listInferenceModels"];
+/**
+ * Gets the list of available storage tiers for a particular region
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes
+ */
+export const listStorageTierTypes: typeof BookingService["method"]["listStorageTierTypes"];

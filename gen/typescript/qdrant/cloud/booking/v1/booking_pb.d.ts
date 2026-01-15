@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { StorageTierType } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/booking/v1/booking.proto.
@@ -514,6 +515,104 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
+ * GetBackupQuoteRequest is the request for the GetBackupQuote function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetBackupQuoteRequest
+ */
+export declare type GetBackupQuoteRequest = Message<"qdrant.cloud.booking.v1.GetBackupQuoteRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The cloud provider where the backup will be stored.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The cloud region where the backup will be stored.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 4;
+   */
+  cloudProviderRegionId?: string;
+
+  /**
+   * The size of the backup in GiB.
+   * This is an optional field. If not set, defaults to 1 GiB.
+   * The response will include the total price per hour for the specified (or default) backup size.
+   *
+   * @generated from field: optional uint32 backup_size_gib = 5;
+   */
+  backupSizeGib?: number;
+};
+
+export declare type GetBackupQuoteRequestValid = GetBackupQuoteRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetBackupQuoteRequest.
+ * Use `create(GetBackupQuoteRequestSchema)` to create a new message.
+ */
+export declare const GetBackupQuoteRequestSchema: GenMessage<GetBackupQuoteRequest, {validType: GetBackupQuoteRequestValid}>;
+
+/**
+ * GetBackupQuoteResponse is the response from the GetBackupQuote function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetBackupQuoteResponse
+ */
+export declare type GetBackupQuoteResponse = Message<"qdrant.cloud.booking.v1.GetBackupQuoteResponse"> & {
+  /**
+   * The currency of the prices.
+   * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 1;
+   */
+  currency: string;
+
+  /**
+   * The original price per hour in millicents, before any discounts.
+   * Represents the cost per hour for storing the backup of the requested size.
+   * You will be billed hourly for the backup storage you use. Partial hours are rounded up and billed as full hours.
+   *
+   * @generated from field: int64 original_price_per_hour = 2;
+   */
+  originalPricePerHour: bigint;
+
+  /**
+   * The discounted price per hour in millicents, after applying discounts.
+   * If no discounts are applied, this will be the same as original_price_per_hour.
+   *
+   * @generated from field: int64 discounted_price_per_hour = 3;
+   */
+  discountedPricePerHour: bigint;
+
+  /**
+   * The percentage of discount applied (e.g., 10.0 for 10% discount).
+   * If no discounts are applied, this will be 0.0.
+   *
+   * @generated from field: double discount_percentage = 4;
+   */
+  discountPercentage: number;
+};
+
+export declare type GetBackupQuoteResponseValid = GetBackupQuoteResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetBackupQuoteResponse.
+ * Use `create(GetBackupQuoteResponseSchema)` to create a new message.
+ */
+export declare const GetBackupQuoteResponseSchema: GenMessage<GetBackupQuoteResponse, {validType: GetBackupQuoteResponseValid}>;
+
+/**
  * ListInferenceModelsRequest is the request for the ListInferenceModels function
  *
  * @generated from message qdrant.cloud.booking.v1.ListInferenceModelsRequest
@@ -574,6 +673,67 @@ export declare type ListInferenceModelsResponseValid = ListInferenceModelsRespon
  * Use `create(ListInferenceModelsResponseSchema)` to create a new message.
  */
 export declare const ListInferenceModelsResponseSchema: GenMessage<ListInferenceModelsResponse, {validType: ListInferenceModelsResponseValid}>;
+
+/**
+ * ListStorageTierTypesRequest is the request for the ListStorageTierTypes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListStorageTierTypesRequest
+ */
+export declare type ListStorageTierTypesRequest = Message<"qdrant.cloud.booking.v1.ListStorageTierTypesRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * Required field specifying the cloud provider where the storage tiers are available.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the storage tiers are available.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   *
+   * @generated from field: string cloud_provider_region_id = 3;
+   */
+  cloudProviderRegionId: string;
+};
+
+export declare type ListStorageTierTypesRequestValid = ListStorageTierTypesRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListStorageTierTypesRequest.
+ * Use `create(ListStorageTierTypesRequestSchema)` to create a new message.
+ */
+export declare const ListStorageTierTypesRequestSchema: GenMessage<ListStorageTierTypesRequest, {validType: ListStorageTierTypesRequestValid}>;
+
+/**
+ * ListStorageTierTypesResponse is the response from the ListStorageTierTypes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListStorageTierTypesResponse
+ */
+export declare type ListStorageTierTypesResponse = Message<"qdrant.cloud.booking.v1.ListStorageTierTypesResponse"> & {
+  /**
+   * A list of storage tiers. We are using list of object instead of list of the string to make it extensible for future.
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.StorageTiers items = 1;
+   */
+  items: StorageTiers[];
+};
+
+export declare type ListStorageTierTypesResponseValid = ListStorageTierTypesResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListStorageTierTypesResponse.
+ * Use `create(ListStorageTierTypesResponseSchema)` to create a new message.
+ */
+export declare const ListStorageTierTypesResponseSchema: GenMessage<ListStorageTierTypesResponse, {validType: ListStorageTierTypesResponseValid}>;
 
 /**
  * InferenceModel represents a single inference model available for use.
@@ -677,6 +837,30 @@ export declare type InferenceModelValid = InferenceModel;
  * Use `create(InferenceModelSchema)` to create a new message.
  */
 export declare const InferenceModelSchema: GenMessage<InferenceModel, {validType: InferenceModelValid}>;
+
+/**
+ * StorageTiers holds information related to a particular storage tier
+ *
+ * @generated from message qdrant.cloud.booking.v1.StorageTiers
+ */
+export declare type StorageTiers = Message<"qdrant.cloud.booking.v1.StorageTiers"> & {
+  /**
+   * The type of the storage tier
+   *
+   * More information may be added in future. For example, IOPS and throughput amount, requirements etc.
+   *
+   * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+   */
+  storageTierType: StorageTierType;
+};
+
+export declare type StorageTiersValid = StorageTiers;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.StorageTiers.
+ * Use `create(StorageTiersSchema)` to create a new message.
+ */
+export declare const StorageTiersSchema: GenMessage<StorageTiers, {validType: StorageTiersValid}>;
 
 /**
  * PackageStatus defines the valid states a package can be in.
@@ -853,7 +1037,7 @@ export declare const BookingService: GenService<{
   },
   /**
    * Gets a price quote for a cluster configuration.
-   * This endpoint calculates pricing information including hourly costs,
+   * Calculates pricing information including hourly costs,
    * and any applicable discounts for the specified cluster configuration.
    * Required permissions:
    * - write:clusters
@@ -866,6 +1050,20 @@ export declare const BookingService: GenService<{
     output: typeof GetQuoteResponseSchema;
   },
   /**
+   * Gets a price quote for a backup configuration.
+   * Calculates pricing information for storing a backup,
+   * based on the specified cloud provider, region, and backup size.
+   * Required permissions:
+   * - write:backups
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetBackupQuote
+   */
+  getBackupQuote: {
+    methodKind: "unary";
+    input: typeof GetBackupQuoteRequestSchema;
+    output: typeof GetBackupQuoteResponseSchema;
+  },
+  /**
    * Gets the list of available inference models.
    * Required permissions:
    * - None (authenticated only)
@@ -876,6 +1074,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof ListInferenceModelsRequestSchema;
     output: typeof ListInferenceModelsResponseSchema;
+  },
+  /**
+   * Gets the list of available storage tiers for a particular region
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes
+   */
+  listStorageTierTypes: {
+    methodKind: "unary";
+    input: typeof ListStorageTierTypesRequestSchema;
+    output: typeof ListStorageTierTypesResponseSchema;
   },
 }>;
 

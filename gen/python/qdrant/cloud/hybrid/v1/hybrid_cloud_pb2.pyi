@@ -4,7 +4,6 @@ from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import struct_pb2 as _struct_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
-from k8s.io.api.networking.v1 import generated_pb2 as _generated_pb2
 from qdrant.cloud.cluster.v1 import cluster_pb2 as _cluster_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
@@ -229,14 +228,14 @@ class HybridCloudEnvironmentConfiguration(_message.Message):
     database_storage_class: str
     snapshot_storage_class: str
     volume_snapshot_storage_class: str
-    ingress: _containers.RepeatedCompositeFieldContainer[_generated_pb2.NetworkPolicyIngressRule]
-    egress: _containers.RepeatedCompositeFieldContainer[_generated_pb2.NetworkPolicyEgressRule]
+    ingress: _containers.RepeatedCompositeFieldContainer[_common_pb2.NetworkPolicyIngressRule]
+    egress: _containers.RepeatedCompositeFieldContainer[_common_pb2.NetworkPolicyEgressRule]
     log_level: HybridCloudEnvironmentConfigurationLogLevel
     tolerations: _containers.RepeatedCompositeFieldContainer[_cluster_pb2.Toleration]
     node_selector: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
     advanced_operator_settings: _struct_pb2.Struct
     control_plane_labels: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., namespace: _Optional[str] = ..., http_proxy_url: _Optional[str] = ..., https_proxy_url: _Optional[str] = ..., no_proxy_configs: _Optional[_Iterable[str]] = ..., container_registry_url: _Optional[str] = ..., chart_repository_url: _Optional[str] = ..., registry_secret_name: _Optional[str] = ..., ca_certificates: _Optional[str] = ..., database_storage_class: _Optional[str] = ..., snapshot_storage_class: _Optional[str] = ..., volume_snapshot_storage_class: _Optional[str] = ..., ingress: _Optional[_Iterable[_Union[_generated_pb2.NetworkPolicyIngressRule, _Mapping]]] = ..., egress: _Optional[_Iterable[_Union[_generated_pb2.NetworkPolicyEgressRule, _Mapping]]] = ..., log_level: _Optional[_Union[HybridCloudEnvironmentConfigurationLogLevel, str]] = ..., tolerations: _Optional[_Iterable[_Union[_cluster_pb2.Toleration, _Mapping]]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., advanced_operator_settings: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ..., control_plane_labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., namespace: _Optional[str] = ..., http_proxy_url: _Optional[str] = ..., https_proxy_url: _Optional[str] = ..., no_proxy_configs: _Optional[_Iterable[str]] = ..., container_registry_url: _Optional[str] = ..., chart_repository_url: _Optional[str] = ..., registry_secret_name: _Optional[str] = ..., ca_certificates: _Optional[str] = ..., database_storage_class: _Optional[str] = ..., snapshot_storage_class: _Optional[str] = ..., volume_snapshot_storage_class: _Optional[str] = ..., ingress: _Optional[_Iterable[_Union[_common_pb2.NetworkPolicyIngressRule, _Mapping]]] = ..., egress: _Optional[_Iterable[_Union[_common_pb2.NetworkPolicyEgressRule, _Mapping]]] = ..., log_level: _Optional[_Union[HybridCloudEnvironmentConfigurationLogLevel, str]] = ..., tolerations: _Optional[_Iterable[_Union[_cluster_pb2.Toleration, _Mapping]]] = ..., node_selector: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., advanced_operator_settings: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ..., control_plane_labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ...) -> None: ...
 
 class HybridCloudEnvironmentStatus(_message.Message):
     __slots__ = ()

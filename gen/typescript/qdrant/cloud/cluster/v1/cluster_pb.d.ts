@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
+import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, StorageTierType, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/v1/cluster.proto.
@@ -1063,6 +1063,13 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraint[];
+
+  /**
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
+   */
+  clusterStorageConfiguration?: ClusterStorageConfiguration;
 };
 
 /**
@@ -1228,6 +1235,13 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: repeated qdrant.cloud.common.v1.TopologySpreadConstraint topology_spread_constraints = 25;
    */
   topologySpreadConstraints: TopologySpreadConstraintValid[];
+
+  /**
+   * Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
+   */
+  clusterStorageConfiguration?: ClusterStorageConfigurationValid;
 };
 
 /**
@@ -1679,6 +1693,31 @@ export declare type TolerationValid = Toleration;
  * Use `create(TolerationSchema)` to create a new message.
  */
 export declare const TolerationSchema: GenMessage<Toleration, {validType: TolerationValid}>;
+
+/**
+ * ClusterStorageConfiguration defines Storage IOPS and Throughput configuration
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterStorageConfiguration
+ */
+export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.v1.ClusterStorageConfiguration"> & {
+  /**
+   * Type of storage tier
+   *
+   * We might allow custom IOPS and Throughput values configuration in the future,
+   * that's why ClusterStorageConfiguration is a separate message and not just a field
+   *
+   * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+   */
+  storageTierType: StorageTierType;
+};
+
+export declare type ClusterStorageConfigurationValid = ClusterStorageConfiguration;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterStorageConfiguration.
+ * Use `create(ClusterStorageConfigurationSchema)` to create a new message.
+ */
+export declare const ClusterStorageConfigurationSchema: GenMessage<ClusterStorageConfiguration, {validType: ClusterStorageConfigurationValid}>;
 
 /**
  * ClusterState represents the current state of a cluster

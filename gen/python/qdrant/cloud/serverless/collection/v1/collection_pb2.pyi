@@ -34,9 +34,9 @@ class ListCollectionsRequest(_message.Message):
 
 class ListCollectionsResponse(_message.Message):
     __slots__ = ()
-    COLLECTIONS_FIELD_NUMBER: _ClassVar[int]
-    collections: _containers.RepeatedCompositeFieldContainer[Collection]
-    def __init__(self, collections: _Optional[_Iterable[_Union[Collection, _Mapping]]] = ...) -> None: ...
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Collection]
+    def __init__(self, items: _Optional[_Iterable[_Union[Collection, _Mapping]]] = ...) -> None: ...
 
 class CreateCollectionRequest(_message.Message):
     __slots__ = ()
