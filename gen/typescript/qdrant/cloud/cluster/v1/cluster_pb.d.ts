@@ -1686,7 +1686,7 @@ export declare type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> &
 
   /**
    * The effect indicates the taint effect to match.
-   * The default is TOLERATION_EFFECT_NO_SCHEDULE.
+   * If not set, matches all taint effects.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.TolerationEffect effect = 4;
    */
