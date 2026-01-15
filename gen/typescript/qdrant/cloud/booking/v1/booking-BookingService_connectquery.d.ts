@@ -55,3 +55,11 @@ export const getBackupQuote: typeof BookingService["method"]["getBackupQuote"];
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
  */
 export const listInferenceModels: typeof BookingService["method"]["listInferenceModels"];
+/**
+ * Gets the list of available storage tiers for a particular region
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes
+ */
+export const listStorageTierTypes: typeof BookingService["method"]["listStorageTierTypes"];

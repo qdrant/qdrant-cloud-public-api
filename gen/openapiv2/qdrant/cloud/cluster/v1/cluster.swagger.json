@@ -1074,24 +1074,12 @@
       "type": "object",
       "properties": {
         "storageTierType": {
-          "$ref": "#/definitions/v1ClusterStorageConfigurationStorageTierType",
+          "$ref": "#/definitions/v1StorageTierType",
           "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate message and not just a field",
           "title": "Type of storage tier"
         }
       },
       "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"
-    },
-    "v1ClusterStorageConfigurationStorageTierType": {
-      "type": "string",
-      "enum": [
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED",
-        "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE"
-      ],
-      "default": "CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED",
-      "description": "- CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as BASE\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - CLUSTER_STORAGE_CONFIGURATION_STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
-      "title": "ClusterStorageTierConfigurationStorageTierType defines type of storage tier"
     },
     "v1CreateClusterFromBackupResponse": {
       "type": "object",
@@ -1374,6 +1362,18 @@
         }
       },
       "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
+    "v1StorageTierType": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_TYPE_UNSPECIFIED",
+        "STORAGE_TIER_TYPE_COST_OPTIMISED",
+        "STORAGE_TIER_TYPE_BALANCED",
+        "STORAGE_TIER_TYPE_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_TYPE_UNSPECIFIED",
+      "description": "- STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as COST_OPTIMIZED\n - STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
+      "title": "StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount"
     },
     "v1SuggestClusterNameResponse": {
       "type": "object",

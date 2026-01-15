@@ -60,3 +60,12 @@ export const getBackupQuote = BookingService.method.getBackupQuote;
  * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListInferenceModels
  */
 export const listInferenceModels = BookingService.method.listInferenceModels;
+
+/**
+ * Gets the list of available storage tiers for a particular region
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes
+ */
+export const listStorageTierTypes = BookingService.method.listStorageTierTypes;
