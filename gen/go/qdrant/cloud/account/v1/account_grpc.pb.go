@@ -35,6 +35,8 @@ const (
 	AccountService_ListAccountMembers_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/ListAccountMembers"
 	AccountService_GetAccountMember_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountMember"
 	AccountService_DeleteAccountMember_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/DeleteAccountMember"
+	AccountService_UpdateAccountCompany_FullMethodName       = "/qdrant.cloud.account.v1.AccountService/UpdateAccountCompany"
+	AccountService_SuggestCompany_FullMethodName             = "/qdrant.cloud.account.v1.AccountService/SuggestCompany"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -116,6 +118,14 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - delete:users
 	DeleteAccountMember(ctx context.Context, in *DeleteAccountMemberRequest, opts ...grpc.CallOption) (*DeleteAccountMemberResponse, error)
+	// Updates the company information associated with the account.
+	// Required permissions:
+	// - write:account
+	UpdateAccountCompany(ctx context.Context, in *UpdateAccountCompanyRequest, opts ...grpc.CallOption) (*UpdateAccountCompanyResponse, error)
+	// Suggest a company based on partial name or email.
+	// Required permissions:
+	// - None (authenticated only)
+	SuggestCompany(ctx context.Context, in *SuggestCompanyRequest, opts ...grpc.CallOption) (*SuggestCompanyResponse, error)
 }
 
 type accountServiceClient struct {
@@ -286,6 +296,26 @@ func (c *accountServiceClient) DeleteAccountMember(ctx context.Context, in *Dele
 	return out, nil
 }
 
+func (c *accountServiceClient) UpdateAccountCompany(ctx context.Context, in *UpdateAccountCompanyRequest, opts ...grpc.CallOption) (*UpdateAccountCompanyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAccountCompanyResponse)
+	err := c.cc.Invoke(ctx, AccountService_UpdateAccountCompany_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) SuggestCompany(ctx context.Context, in *SuggestCompanyRequest, opts ...grpc.CallOption) (*SuggestCompanyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SuggestCompanyResponse)
+	err := c.cc.Invoke(ctx, AccountService_SuggestCompany_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServiceServer is the server API for AccountService service.
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility.
@@ -365,6 +395,14 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - delete:users
 	DeleteAccountMember(context.Context, *DeleteAccountMemberRequest) (*DeleteAccountMemberResponse, error)
+	// Updates the company information associated with the account.
+	// Required permissions:
+	// - write:account
+	UpdateAccountCompany(context.Context, *UpdateAccountCompanyRequest) (*UpdateAccountCompanyResponse, error)
+	// Suggest a company based on partial name or email.
+	// Required permissions:
+	// - None (authenticated only)
+	SuggestCompany(context.Context, *SuggestCompanyRequest) (*SuggestCompanyResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -422,6 +460,12 @@ func (UnimplementedAccountServiceServer) GetAccountMember(context.Context, *GetA
 }
 func (UnimplementedAccountServiceServer) DeleteAccountMember(context.Context, *DeleteAccountMemberRequest) (*DeleteAccountMemberResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAccountMember not implemented")
+}
+func (UnimplementedAccountServiceServer) UpdateAccountCompany(context.Context, *UpdateAccountCompanyRequest) (*UpdateAccountCompanyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAccountCompany not implemented")
+}
+func (UnimplementedAccountServiceServer) SuggestCompany(context.Context, *SuggestCompanyRequest) (*SuggestCompanyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestCompany not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 func (UnimplementedAccountServiceServer) testEmbeddedByValue()                        {}
@@ -732,6 +776,42 @@ func _AccountService_DeleteAccountMember_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountService_UpdateAccountCompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountCompanyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).UpdateAccountCompany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_UpdateAccountCompany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).UpdateAccountCompany(ctx, req.(*UpdateAccountCompanyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_SuggestCompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestCompanyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).SuggestCompany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_SuggestCompany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).SuggestCompany(ctx, req.(*SuggestCompanyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -802,6 +882,14 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountMember",
 			Handler:    _AccountService_DeleteAccountMember_Handler,
+		},
+		{
+			MethodName: "UpdateAccountCompany",
+			Handler:    _AccountService_UpdateAccountCompany_Handler,
+		},
+		{
+			MethodName: "SuggestCompany",
+			Handler:    _AccountService_SuggestCompany_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

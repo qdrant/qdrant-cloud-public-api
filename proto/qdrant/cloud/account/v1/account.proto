@@ -310,6 +310,54 @@ service AccountService {
       field_expression: "user_id"
     };
   }
+  // Updates the company information associated with the account.
+  // Required permissions:
+  // - write:account
+  rpc UpdateAccountCompany(UpdateAccountCompanyRequest) returns (UpdateAccountCompanyResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/account/v1/accounts/{account_id}/company"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "account-company"
+      resource_id_field: "req.account_id"
+      resource_url_template: "/accounts/{req.account_id}/company"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "company_domain"
+      field_expression: "company.domain"
+    };
+    option (common.v1.log_fields) = {
+      name: "company_name"
+      field_expression: "company.name"
+    };
+  }
+  // Suggest a company based on partial name or email.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc SuggestCompany(SuggestCompanyRequest) returns (SuggestCompanyResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/suggest-company"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "company_email"
+      field_expression: "email"
+    };
+  }
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
@@ -553,6 +601,40 @@ message DeleteAccountMemberResponse {
   // Empty
 }
 
+// UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
+message UpdateAccountCompanyRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The company information to update.
+  Company company = 2 [(buf.validate.field).required = true];
+}
+
+// UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
+message UpdateAccountCompanyResponse {
+  // The actual account.
+  Account account = 1 [(buf.validate.field).required = true];
+}
+
+// SuggestCompanyRequest is the request from the SuggestCompany function.
+message SuggestCompanyRequest {
+  // The name of the company to suggest (can be partial).
+  optional string name = 1 [(buf.validate.field).string.min_len = 1];
+  // The email address associated with the company to suggest.
+  optional string email = 2 [(buf.validate.field).string.email = true];
+  option (buf.validate.message).cel = {
+    id: "exclusive_field_selection"
+    message: "Either name or email must be set, but not both"
+    expression: "(has(this.name) || has(this.email)) && !(has(this.name) && has(this.email))"
+  };
+}
+
+// SuggestCompanyResponse is the response from the SuggestCompany function.
+message SuggestCompanyResponse {
+  // The suggested companies.
+  repeated Company items = 1;
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An Account represents an account in the Qdrant cloud.
 message Account {
@@ -595,6 +677,9 @@ message Account {
   // The privileges of the account, if any.
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
+  // The name of the company associated with the account.
+  // This is a read-only field once set.
+  optional string company_name = 9 [(buf.validate.field).string.min_len = 1];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -684,4 +769,12 @@ message AccountMember {
   // Whether or not this user is the owner of the account.
   // This is a read-only field.
   bool is_owner = 2;
+}
+
+// Company represents information about an existing company
+message Company {
+  // The name of the domain (including Top-Level Domain), serving as unique identifier.
+  optional string domain = 1 [(buf.validate.field).string.pattern = "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"];
+  // The name of the company.
+  string name = 2 [(buf.validate.field).string.min_len = 1];
 }

@@ -156,3 +156,21 @@ export const getAccountMember = AccountService.method.getAccountMember;
  * @generated from rpc qdrant.cloud.account.v1.AccountService.DeleteAccountMember
  */
 export const deleteAccountMember = AccountService.method.deleteAccountMember;
+
+/**
+ * Updates the company information associated with the account.
+ * Required permissions:
+ * - write:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountCompany
+ */
+export const updateAccountCompany = AccountService.method.updateAccountCompany;
+
+/**
+ * Suggest a company based on partial name or email.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+ */
+export const suggestCompany = AccountService.method.suggestCompany;

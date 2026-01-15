@@ -911,6 +911,141 @@ export declare type DeleteAccountMemberResponseValid = DeleteAccountMemberRespon
 export declare const DeleteAccountMemberResponseSchema: GenMessage<DeleteAccountMemberResponse, {validType: DeleteAccountMemberResponseValid}>;
 
 /**
+ * UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyRequest
+ */
+export declare type UpdateAccountCompanyRequest = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The company information to update.
+   *
+   * @generated from field: qdrant.cloud.account.v1.Company company = 2;
+   */
+  company?: Company;
+};
+
+/**
+ * UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyRequest
+ */
+export declare type UpdateAccountCompanyRequestValid = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The company information to update.
+   *
+   * @generated from field: qdrant.cloud.account.v1.Company company = 2;
+   */
+  company: CompanyValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.UpdateAccountCompanyRequest.
+ * Use `create(UpdateAccountCompanyRequestSchema)` to create a new message.
+ */
+export declare const UpdateAccountCompanyRequestSchema: GenMessage<UpdateAccountCompanyRequest, {validType: UpdateAccountCompanyRequestValid}>;
+
+/**
+ * UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyResponse
+ */
+export declare type UpdateAccountCompanyResponse = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyResponse"> & {
+  /**
+   * The actual account.
+   *
+   * @generated from field: qdrant.cloud.account.v1.Account account = 1;
+   */
+  account?: Account;
+};
+
+/**
+ * UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyResponse
+ */
+export declare type UpdateAccountCompanyResponseValid = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyResponse"> & {
+  /**
+   * The actual account.
+   *
+   * @generated from field: qdrant.cloud.account.v1.Account account = 1;
+   */
+  account: AccountValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.account.v1.UpdateAccountCompanyResponse.
+ * Use `create(UpdateAccountCompanyResponseSchema)` to create a new message.
+ */
+export declare const UpdateAccountCompanyResponseSchema: GenMessage<UpdateAccountCompanyResponse, {validType: UpdateAccountCompanyResponseValid}>;
+
+/**
+ * SuggestCompanyRequest is the request from the SuggestCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.SuggestCompanyRequest
+ */
+export declare type SuggestCompanyRequest = Message<"qdrant.cloud.account.v1.SuggestCompanyRequest"> & {
+  /**
+   * The name of the company to suggest (can be partial).
+   *
+   * @generated from field: optional string name = 1;
+   */
+  name?: string;
+
+  /**
+   * The email address associated with the company to suggest.
+   *
+   * @generated from field: optional string email = 2;
+   */
+  email?: string;
+};
+
+export declare type SuggestCompanyRequestValid = SuggestCompanyRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.SuggestCompanyRequest.
+ * Use `create(SuggestCompanyRequestSchema)` to create a new message.
+ */
+export declare const SuggestCompanyRequestSchema: GenMessage<SuggestCompanyRequest, {validType: SuggestCompanyRequestValid}>;
+
+/**
+ * SuggestCompanyResponse is the response from the SuggestCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.SuggestCompanyResponse
+ */
+export declare type SuggestCompanyResponse = Message<"qdrant.cloud.account.v1.SuggestCompanyResponse"> & {
+  /**
+   * The suggested companies.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.Company items = 1;
+   */
+  items: Company[];
+};
+
+export declare type SuggestCompanyResponseValid = SuggestCompanyResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.SuggestCompanyResponse.
+ * Use `create(SuggestCompanyResponseSchema)` to create a new message.
+ */
+export declare const SuggestCompanyResponseSchema: GenMessage<SuggestCompanyResponse, {validType: SuggestCompanyResponseValid}>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -970,6 +1105,14 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
    * @generated from field: repeated string privileges = 8;
    */
   privileges: string[];
+
+  /**
+   * The name of the company associated with the account.
+   * This is a read-only field once set.
+   *
+   * @generated from field: optional string company_name = 9;
+   */
+  companyName?: string;
 };
 
 export declare type AccountValid = Account;
@@ -1128,6 +1271,35 @@ export declare type AccountMemberValid = Message<"qdrant.cloud.account.v1.Accoun
  * Use `create(AccountMemberSchema)` to create a new message.
  */
 export declare const AccountMemberSchema: GenMessage<AccountMember, {validType: AccountMemberValid}>;
+
+/**
+ * Company represents information about an existing company
+ *
+ * @generated from message qdrant.cloud.account.v1.Company
+ */
+export declare type Company = Message<"qdrant.cloud.account.v1.Company"> & {
+  /**
+   * The name of the domain (including Top-Level Domain), serving as unique identifier.
+   *
+   * @generated from field: optional string domain = 1;
+   */
+  domain?: string;
+
+  /**
+   * The name of the company.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+export declare type CompanyValid = Company;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.Company.
+ * Use `create(CompanySchema)` to create a new message.
+ */
+export declare const CompanySchema: GenMessage<Company, {validType: CompanyValid}>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.
@@ -1382,6 +1554,30 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountMemberRequestSchema;
     output: typeof DeleteAccountMemberResponseSchema;
+  },
+  /**
+   * Updates the company information associated with the account.
+   * Required permissions:
+   * - write:account
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountCompany
+   */
+  updateAccountCompany: {
+    methodKind: "unary";
+    input: typeof UpdateAccountCompanyRequestSchema;
+    output: typeof UpdateAccountCompanyResponseSchema;
+  },
+  /**
+   * Suggest a company based on partial name or email.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+   */
+  suggestCompany: {
+    methodKind: "unary";
+    input: typeof SuggestCompanyRequestSchema;
+    output: typeof SuggestCompanyResponseSchema;
   },
 }>;
 

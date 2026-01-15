@@ -173,6 +173,46 @@
         ]
       }
     },
+    "/api/account/v1/accounts/{accountId}/company": {
+      "put": {
+        "summary": "Updates the company information associated with the account.\nRequired permissions:\n- write:account",
+        "operationId": "AccountService_UpdateAccountCompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAccountCompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServiceUpdateAccountCompanyBody"
+            }
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
     "/api/account/v1/accounts/{accountId}/invites": {
       "get": {
         "summary": "Lists all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
@@ -579,6 +619,45 @@
           "AccountService"
         ]
       }
+    },
+    "/api/account/v1/suggest-company": {
+      "get": {
+        "summary": "Suggest a company based on partial name or email.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_SuggestCompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuggestCompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "The name of the company to suggest (can be partial).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "The email address associated with the company to suggest.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -670,6 +749,10 @@
                 "type": "string"
               },
               "description": "The privileges of the account, if any.\nThis is a read-only field."
+            },
+            "companyName": {
+              "type": "string",
+              "description": "The name of the company associated with the account.\nThis is a read-only field once set."
             }
           },
           "description": "The actual account.",
@@ -677,6 +760,16 @@
         }
       },
       "description": "UpdateAccountRequest is the request for the UpdateAccount function."
+    },
+    "AccountServiceUpdateAccountCompanyBody": {
+      "type": "object",
+      "properties": {
+        "company": {
+          "$ref": "#/definitions/v1Company",
+          "description": "The company information to update."
+        }
+      },
+      "description": "UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function."
     },
     "protobufAny": {
       "type": "object",
@@ -751,6 +844,10 @@
             "type": "string"
           },
           "description": "The privileges of the account, if any.\nThis is a read-only field."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The name of the company associated with the account.\nThis is a read-only field once set."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -831,6 +928,20 @@
         }
       },
       "description": "An AccountMember represents a user who is a member of an account."
+    },
+    "v1Company": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The name of the domain (including Top-Level Domain), serving as unique identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the company."
+        }
+      },
+      "title": "Company represents information about an existing company"
     },
     "v1CreateAccountInviteResponse": {
       "type": "object",
@@ -973,6 +1084,30 @@
         }
       },
       "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
+    },
+    "v1SuggestCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Company"
+          },
+          "description": "The suggested companies."
+        }
+      },
+      "description": "SuggestCompanyResponse is the response from the SuggestCompany function."
+    },
+    "v1UpdateAccountCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v1Account",
+          "description": "The actual account."
+        }
+      },
+      "description": "UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

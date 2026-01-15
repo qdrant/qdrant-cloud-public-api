@@ -222,6 +222,34 @@ class DeleteAccountMemberResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class UpdateAccountCompanyRequest(_message.Message):
+    __slots__ = ()
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    COMPANY_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    company: Company
+    def __init__(self, account_id: _Optional[str] = ..., company: _Optional[_Union[Company, _Mapping]] = ...) -> None: ...
+
+class UpdateAccountCompanyResponse(_message.Message):
+    __slots__ = ()
+    ACCOUNT_FIELD_NUMBER: _ClassVar[int]
+    account: Account
+    def __init__(self, account: _Optional[_Union[Account, _Mapping]] = ...) -> None: ...
+
+class SuggestCompanyRequest(_message.Message):
+    __slots__ = ()
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    EMAIL_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    email: str
+    def __init__(self, name: _Optional[str] = ..., email: _Optional[str] = ...) -> None: ...
+
+class SuggestCompanyResponse(_message.Message):
+    __slots__ = ()
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Company]
+    def __init__(self, items: _Optional[_Iterable[_Union[Company, _Mapping]]] = ...) -> None: ...
+
 class Account(_message.Message):
     __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -231,6 +259,7 @@ class Account(_message.Message):
     EXTERNAL_OWNER_ID_FIELD_NUMBER: _ClassVar[int]
     OWNER_EMAIL_FIELD_NUMBER: _ClassVar[int]
     PRIVILEGES_FIELD_NUMBER: _ClassVar[int]
+    COMPANY_NAME_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
@@ -238,7 +267,8 @@ class Account(_message.Message):
     external_owner_id: str
     owner_email: str
     privileges: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ...) -> None: ...
+    company_name: str
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company_name: _Optional[str] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ()
@@ -271,3 +301,11 @@ class AccountMember(_message.Message):
     account_member: _iam_pb2.User
     is_owner: bool
     def __init__(self, account_member: _Optional[_Union[_iam_pb2.User, _Mapping]] = ..., is_owner: _Optional[bool] = ...) -> None: ...
+
+class Company(_message.Message):
+    __slots__ = ()
+    DOMAIN_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    domain: str
+    name: str
+    def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
