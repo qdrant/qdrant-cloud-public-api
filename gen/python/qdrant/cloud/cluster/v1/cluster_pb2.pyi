@@ -432,11 +432,13 @@ class DatabaseConfigurationService(_message.Message):
     __slots__ = ()
     API_KEY_FIELD_NUMBER: _ClassVar[int]
     READ_ONLY_API_KEY_FIELD_NUMBER: _ClassVar[int]
+    JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
     ENABLE_TLS_FIELD_NUMBER: _ClassVar[int]
     api_key: _common_pb2.SecretKeyRef
     read_only_api_key: _common_pb2.SecretKeyRef
+    jwt_rbac: bool
     enable_tls: bool
-    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
+    def __init__(self, api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., read_only_api_key: _Optional[_Union[_common_pb2.SecretKeyRef, _Mapping]] = ..., jwt_rbac: _Optional[bool] = ..., enable_tls: _Optional[bool] = ...) -> None: ...
 
 class DatabaseConfigurationTls(_message.Message):
     __slots__ = ()

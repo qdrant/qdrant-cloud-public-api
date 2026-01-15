@@ -1530,6 +1530,20 @@ export declare type DatabaseConfigurationService = Message<"qdrant.cloud.cluster
   readOnlyApiKey?: SecretKeyRef;
 
   /**
+   * Enable JWT Role Based Access Control (RBAC).
+   * This setting is for both managed and hybrid cloud clusters.
+   * For managed cloud clusters, this defaults to enabled and cannot be explicitly disabled.
+   * For hybrid cloud clusters, the value is applied as provided.
+   * If enabled, you can generate JWT tokens with fine-grained rules for access control.
+   * Use generated token instead of API key.
+   * Deprecated: use cluster.status.jwt_rbac instead to read and ClusterService.EnableClusterJwtRbac to change the state.
+   *
+   * @generated from field: optional bool jwt_rbac = 3 [deprecated = true];
+   * @deprecated
+   */
+  jwtRbac?: boolean;
+
+  /**
    * Enable HTTPS for the REST and gRPC API
    * This setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection).
    *
