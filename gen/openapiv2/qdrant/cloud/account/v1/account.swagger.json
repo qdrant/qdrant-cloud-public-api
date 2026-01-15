@@ -939,9 +939,33 @@
         "name": {
           "type": "string",
           "description": "The name of the company."
+        },
+        "logo": {
+          "$ref": "#/definitions/v1CompanyLogo",
+          "description": "The logo of the company."
         }
       },
       "title": "Company represents information about an existing company"
+    },
+    "v1CompanyLogo": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "The URL of the company logo."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The width of the logo in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The height of the logo in pixels."
+        }
+      },
+      "description": "CompanyLogo represents a company logo with its source URL and dimensions."
     },
     "v1CreateAccountInviteResponse": {
       "type": "object",

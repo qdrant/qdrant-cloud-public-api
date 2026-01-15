@@ -306,6 +306,18 @@ class Company(_message.Message):
     __slots__ = ()
     DOMAIN_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    LOGO_FIELD_NUMBER: _ClassVar[int]
     domain: str
     name: str
-    def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+    logo: CompanyLogo
+    def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ..., logo: _Optional[_Union[CompanyLogo, _Mapping]] = ...) -> None: ...
+
+class CompanyLogo(_message.Message):
+    __slots__ = ()
+    SRC_FIELD_NUMBER: _ClassVar[int]
+    WIDTH_FIELD_NUMBER: _ClassVar[int]
+    HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    src: str
+    width: int
+    height: int
+    def __init__(self, src: _Optional[str] = ..., width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...

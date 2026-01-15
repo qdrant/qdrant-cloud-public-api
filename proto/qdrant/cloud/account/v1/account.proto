@@ -777,4 +777,16 @@ message Company {
   optional string domain = 1 [(buf.validate.field).string.pattern = "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"];
   // The name of the company.
   string name = 2 [(buf.validate.field).string.min_len = 1];
+  // The logo of the company.
+  optional CompanyLogo logo = 3;
+}
+
+// CompanyLogo represents a company logo with its source URL and dimensions.
+message CompanyLogo {
+  // The URL of the company logo.
+  string src = 1 [(buf.validate.field).string.uri = true];
+  // The width of the logo in pixels.
+  uint32 width = 2;
+  // The height of the logo in pixels.
+  uint32 height = 3;
 }
