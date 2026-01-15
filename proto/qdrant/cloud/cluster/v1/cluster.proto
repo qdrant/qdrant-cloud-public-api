@@ -817,8 +817,6 @@ message Toleration {
   optional string key = 1 [(buf.validate.field).string = {
     // A key can be up to 317 characters long (253 for prefix, 1 for '/', 63 for name).
     max_len: 317
-    // Basic pattern, however we do not cover the length constraints here.
-    pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
   }];
   // The operator represents a key's relationship to the value.
   // The default is TOLERATION_OPERATOR_EQUAL.
@@ -843,13 +841,18 @@ message Toleration {
     expression: "(has(this.operator) && this.operator != 2) || has(this.value)"
   };
   option (buf.validate.message).cel = {
+    id: "toleration.key_format_when_present"
+    message: "key must be a valid Kubernetes qualified name when set and non-empty"
+    expression: "!has(this.key) || this.key == '' || this.key.matches('^([A-Za-z0-9]([-A-Za-z0-9]*[A-Za-z0-9])?(\\\\.[A-Za-z0-9]([-A-Za-z0-9]*[A-Za-z0-9])?)*\\\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$')"
+  };
+  option (buf.validate.message).cel = {
     id: "toleration.key_empty_requires_exists"
     message: "operator must be 'Exists' if key is empty"
     // If key is not set or empty, operator must be Exists (1).
     expression: "(has(this.key) && this.key != '') || this.operator == 1"
   };
   // The effect indicates the taint effect to match.
-  // The default is TOLERATION_EFFECT_NO_SCHEDULE.
+  // If not set, matches all taint effects.
   optional TolerationEffect effect = 4 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
@@ -858,6 +861,11 @@ message Toleration {
   optional uint64 toleration_seconds = 5 [(buf.validate.field).uint64 = {
     gte: 0 // Ensure the value is non-negative (technically redundant for uint64)
   }];
+  option (buf.validate.message).cel = {
+    id: "toleration.seconds_only_for_noexecute"
+    message: "tolerationSeconds is only valid when effect is NoExecute"
+    expression: "!has(this.toleration_seconds) || this.effect == 3"
+  };
 }
 
 // ClusterStorageConfiguration defines Storage IOPS and Throughput configuration

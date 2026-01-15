@@ -1374,7 +1374,7 @@
         },
         "effect": {
           "$ref": "#/definitions/v1TolerationEffect",
-          "description": "The effect indicates the taint effect to match.\nThe default is TOLERATION_EFFECT_NO_SCHEDULE."
+          "description": "The effect indicates the taint effect to match.\nIf not set, matches all taint effects."
         },
         "tolerationSeconds": {
           "type": "string",
