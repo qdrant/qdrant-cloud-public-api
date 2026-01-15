@@ -22,6 +22,8 @@ const (
 	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
 	IAMService_ListUsers_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListUsers"
 	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
+	IAMService_GetUserProfile_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
+	IAMService_UpdateUserProfile_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile"
 	IAMService_GetUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
 	IAMService_RecordUserConsent_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
 	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
@@ -55,6 +57,14 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	// Gets the profile of the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	// Updates the profile of the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error)
 	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
@@ -145,6 +155,26 @@ func (c *iAMServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, IAMService_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserProfileResponse)
+	err := c.cc.Invoke(ctx, IAMService_GetUserProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserProfileResponse)
+	err := c.cc.Invoke(ctx, IAMService_UpdateUserProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -299,6 +329,14 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	// Gets the profile of the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	// Updates the profile of the authenticated user.
+	// Required permissions:
+	// - None (authenticated only)
+	UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error)
 	// Gets the authenticated user's consent status for a specific legal document.
 	// Required permissions:
 	// - None (authenticated only)
@@ -373,6 +411,12 @@ func (UnimplementedIAMServiceServer) ListUsers(context.Context, *ListUsersReques
 }
 func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedIAMServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedIAMServiceServer) UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateUserProfile not implemented")
 }
 func (UnimplementedIAMServiceServer) GetUserConsent(context.Context, *GetUserConsentRequest) (*GetUserConsentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserConsent not implemented")
@@ -484,6 +528,42 @@ func _IAMService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).GetUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_GetUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_UpdateUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).UpdateUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_UpdateUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).UpdateUserProfile(ctx, req.(*UpdateUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -740,6 +820,14 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _IAMService_UpdateUser_Handler,
+		},
+		{
+			MethodName: "GetUserProfile",
+			Handler:    _IAMService_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "UpdateUserProfile",
+			Handler:    _IAMService_UpdateUserProfile_Handler,
 		},
 		{
 			MethodName: "GetUserConsent",

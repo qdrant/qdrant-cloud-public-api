@@ -30,6 +30,16 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
                 _registered_method=True)
+        self.GetUserProfile = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/GetUserProfile',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileResponse.FromString,
+                _registered_method=True)
+        self.UpdateUserProfile = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileResponse.FromString,
+                _registered_method=True)
         self.GetUserConsent = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/GetUserConsent',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserConsentRequest.SerializeToString,
@@ -121,6 +131,24 @@ class IAMServiceServicer(object):
 
     def UpdateUser(self, request, context):
         """Updates the user identified by the given ID.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserProfile(self, request, context):
+        """Gets the profile of the authenticated user.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateUserProfile(self, request, context):
+        """Updates the profile of the authenticated user.
         Required permissions:
         - None (authenticated only)
         """
@@ -266,6 +294,16 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.UpdateUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.SerializeToString,
+            ),
+            'GetUserProfile': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserProfile,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileResponse.SerializeToString,
+            ),
+            'UpdateUserProfile': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateUserProfile,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileResponse.SerializeToString,
             ),
             'GetUserConsent': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserConsent,
@@ -415,6 +453,60 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUserProfile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/GetUserProfile',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateUserProfile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserProfileResponse.FromString,
             options,
             channel_credentials,
             insecure,

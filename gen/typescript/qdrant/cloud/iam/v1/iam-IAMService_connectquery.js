@@ -32,6 +32,24 @@ export const listUsers = IAMService.method.listUsers;
 export const updateUser = IAMService.method.updateUser;
 
 /**
+ * Gets the profile of the authenticated user.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUserProfile
+ */
+export const getUserProfile = IAMService.method.getUserProfile;
+
+/**
+ * Updates the profile of the authenticated user.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserProfile
+ */
+export const updateUserProfile = IAMService.method.updateUserProfile;
+
+/**
  * Gets the authenticated user's consent status for a specific legal document.
  * Required permissions:
  * - None (authenticated only)

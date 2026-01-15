@@ -114,6 +114,28 @@ class GetUserConsentResponse(_message.Message):
     user_consent: UserConsent
     def __init__(self, user_consent: _Optional[_Union[UserConsent, _Mapping]] = ...) -> None: ...
 
+class GetUserProfileRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetUserProfileResponse(_message.Message):
+    __slots__ = ()
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+
+class UpdateUserProfileRequest(_message.Message):
+    __slots__ = ()
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+
+class UpdateUserProfileResponse(_message.Message):
+    __slots__ = ()
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+
 class RecordUserConsentRequest(_message.Message):
     __slots__ = ()
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -309,6 +331,26 @@ class LogoutUserRequest(_message.Message):
 class LogoutUserResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
+
+class UserProfile(_message.Message):
+    __slots__ = ()
+    GIVEN_NAME_FIELD_NUMBER: _ClassVar[int]
+    FAMILY_NAME_FIELD_NUMBER: _ClassVar[int]
+    METADATA_FIELD_NUMBER: _ClassVar[int]
+    given_name: str
+    family_name: str
+    metadata: UserDemographics
+    def __init__(self, given_name: _Optional[str] = ..., family_name: _Optional[str] = ..., metadata: _Optional[_Union[UserDemographics, _Mapping]] = ...) -> None: ...
+
+class UserDemographics(_message.Message):
+    __slots__ = ()
+    ROLE_IN_COMPANY_FIELD_NUMBER: _ClassVar[int]
+    USAGE_TAGS_FIELD_NUMBER: _ClassVar[int]
+    USE_CASE_FIELD_NUMBER: _ClassVar[int]
+    role_in_company: str
+    usage_tags: _containers.RepeatedScalarFieldContainer[str]
+    use_case: str
+    def __init__(self, role_in_company: _Optional[str] = ..., usage_tags: _Optional[_Iterable[str]] = ..., use_case: _Optional[str] = ...) -> None: ...
 
 class UserConsent(_message.Message):
     __slots__ = ()

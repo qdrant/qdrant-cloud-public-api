@@ -29,6 +29,22 @@ export const listUsers: typeof IAMService["method"]["listUsers"];
  */
 export const updateUser: typeof IAMService["method"]["updateUser"];
 /**
+ * Gets the profile of the authenticated user.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUserProfile
+ */
+export const getUserProfile: typeof IAMService["method"]["getUserProfile"];
+/**
+ * Updates the profile of the authenticated user.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserProfile
+ */
+export const updateUserProfile: typeof IAMService["method"]["updateUserProfile"];
+/**
  * Gets the authenticated user's consent status for a specific legal document.
  * Required permissions:
  * - None (authenticated only)

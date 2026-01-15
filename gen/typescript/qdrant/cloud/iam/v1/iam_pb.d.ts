@@ -234,6 +234,126 @@ export declare type GetUserConsentResponseValid = Message<"qdrant.cloud.iam.v1.G
 export declare const GetUserConsentResponseSchema: GenMessage<GetUserConsentResponse, {validType: GetUserConsentResponseValid}>;
 
 /**
+ * GetUserProfileRequest is the request for the GetUserProfile function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserProfileRequest
+ */
+export declare type GetUserProfileRequest = Message<"qdrant.cloud.iam.v1.GetUserProfileRequest"> & {
+};
+
+export declare type GetUserProfileRequestValid = GetUserProfileRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserProfileRequest.
+ * Use `create(GetUserProfileRequestSchema)` to create a new message.
+ */
+export declare const GetUserProfileRequestSchema: GenMessage<GetUserProfileRequest, {validType: GetUserProfileRequestValid}>;
+
+/**
+ * GetUserProfileResponse is the response from the GetUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserProfileResponse
+ */
+export declare type GetUserProfileResponse = Message<"qdrant.cloud.iam.v1.GetUserProfileResponse"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile?: UserProfile;
+};
+
+/**
+ * GetUserProfileResponse is the response from the GetUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserProfileResponse
+ */
+export declare type GetUserProfileResponseValid = Message<"qdrant.cloud.iam.v1.GetUserProfileResponse"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile: UserProfileValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserProfileResponse.
+ * Use `create(GetUserProfileResponseSchema)` to create a new message.
+ */
+export declare const GetUserProfileResponseSchema: GenMessage<GetUserProfileResponse, {validType: GetUserProfileResponseValid}>;
+
+/**
+ * UpdateUserProfileRequest is the request for the UpdateUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserProfileRequest
+ */
+export declare type UpdateUserProfileRequest = Message<"qdrant.cloud.iam.v1.UpdateUserProfileRequest"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile?: UserProfile;
+};
+
+/**
+ * UpdateUserProfileRequest is the request for the UpdateUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserProfileRequest
+ */
+export declare type UpdateUserProfileRequestValid = Message<"qdrant.cloud.iam.v1.UpdateUserProfileRequest"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile: UserProfileValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserProfileRequest.
+ * Use `create(UpdateUserProfileRequestSchema)` to create a new message.
+ */
+export declare const UpdateUserProfileRequestSchema: GenMessage<UpdateUserProfileRequest, {validType: UpdateUserProfileRequestValid}>;
+
+/**
+ * UpdateUserProfileResponse is the response from the UpdateUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserProfileResponse
+ */
+export declare type UpdateUserProfileResponse = Message<"qdrant.cloud.iam.v1.UpdateUserProfileResponse"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile?: UserProfile;
+};
+
+/**
+ * UpdateUserProfileResponse is the response from the UpdateUserProfile function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserProfileResponse
+ */
+export declare type UpdateUserProfileResponseValid = Message<"qdrant.cloud.iam.v1.UpdateUserProfileResponse"> & {
+  /**
+   * The actual user profile.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
+   */
+  userProfile: UserProfileValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserProfileResponse.
+ * Use `create(UpdateUserProfileResponseSchema)` to create a new message.
+ */
+export declare const UpdateUserProfileResponseSchema: GenMessage<UpdateUserProfileResponse, {validType: UpdateUserProfileResponseValid}>;
+
+/**
  * RecordUserConsentRequest is the request for the RecordUserConsent function.
  *
  * @generated from message qdrant.cloud.iam.v1.RecordUserConsentRequest
@@ -1056,6 +1176,78 @@ export declare type LogoutUserResponseValid = LogoutUserResponse;
 export declare const LogoutUserResponseSchema: GenMessage<LogoutUserResponse, {validType: LogoutUserResponseValid}>;
 
 /**
+ * User Profile represents profile information about a user.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UserProfile
+ */
+export declare type UserProfile = Message<"qdrant.cloud.iam.v1.UserProfile"> & {
+  /**
+   * The given name of the user.
+   *
+   * @generated from field: optional string given_name = 3;
+   */
+  givenName?: string;
+
+  /**
+   * The family name of the user.
+   *
+   * @generated from field: optional string family_name = 4;
+   */
+  familyName?: string;
+
+  /**
+   * Additional demographic information about the user.
+   *
+   * @generated from field: optional qdrant.cloud.iam.v1.UserDemographics metadata = 5;
+   */
+  metadata?: UserDemographics;
+};
+
+export declare type UserProfileValid = UserProfile;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UserProfile.
+ * Use `create(UserProfileSchema)` to create a new message.
+ */
+export declare const UserProfileSchema: GenMessage<UserProfile, {validType: UserProfileValid}>;
+
+/**
+ * User Demographics represents demographic information about a user.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UserDemographics
+ */
+export declare type UserDemographics = Message<"qdrant.cloud.iam.v1.UserDemographics"> & {
+  /**
+   * The role of the user in their company.
+   *
+   * @generated from field: optional string role_in_company = 1;
+   */
+  roleInCompany?: string;
+
+  /**
+   * Tags representing what the user uses Qdrant for.
+   *
+   * @generated from field: repeated string usage_tags = 2;
+   */
+  usageTags: string[];
+
+  /**
+   * The use case description for using Qdrant.
+   *
+   * @generated from field: optional string use_case = 3;
+   */
+  useCase?: string;
+};
+
+export declare type UserDemographicsValid = UserDemographics;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UserDemographics.
+ * Use `create(UserDemographicsSchema)` to create a new message.
+ */
+export declare const UserDemographicsSchema: GenMessage<UserDemographics, {validType: UserDemographicsValid}>;
+
+/**
  * User Consent represents the consent status of a user for a specific legal document.
  *
  * @generated from message qdrant.cloud.iam.v1.UserConsent
@@ -1338,6 +1530,30 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof UpdateUserRequestSchema;
     output: typeof UpdateUserResponseSchema;
+  },
+  /**
+   * Gets the profile of the authenticated user.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUserProfile
+   */
+  getUserProfile: {
+    methodKind: "unary";
+    input: typeof GetUserProfileRequestSchema;
+    output: typeof GetUserProfileResponseSchema;
+  },
+  /**
+   * Updates the profile of the authenticated user.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserProfile
+   */
+  updateUserProfile: {
+    methodKind: "unary";
+    input: typeof UpdateUserProfileRequestSchema;
+    output: typeof UpdateUserProfileResponseSchema;
   },
   /**
    * Gets the authenticated user's consent status for a specific legal document.
