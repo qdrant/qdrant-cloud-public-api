@@ -827,7 +827,7 @@
         },
         "isOwner": {
           "type": "boolean",
-          "description": "Wether or not this user is the owner of the account.\nThis is a read-only field."
+          "description": "Whether or not this user is the owner of the account.\nThis is a read-only field."
         }
       },
       "description": "An AccountMember represents a user who is a member of an account."

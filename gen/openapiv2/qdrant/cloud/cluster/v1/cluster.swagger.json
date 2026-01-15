@@ -1108,7 +1108,7 @@
         },
         "jwtRbac": {
           "type": "boolean",
-          "description": "Wether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and wether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
+          "description": "Whether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
