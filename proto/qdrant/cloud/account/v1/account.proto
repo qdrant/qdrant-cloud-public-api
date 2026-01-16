@@ -583,32 +583,16 @@ message DeleteAccountMemberResponse {
   // Empty
 }
 
-// UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
-message UpdateAccountCompanyRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The company information to update.
-  Company company = 2 [(buf.validate.field).required = true];
-}
-
-// UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
-message UpdateAccountCompanyResponse {
-  // The actual account.
-  Account account = 1 [(buf.validate.field).required = true];
-}
-
 // SuggestCompanyRequest is the request from the SuggestCompany function.
 message SuggestCompanyRequest {
-  // The name of the company to suggest (can be partial).
-  optional string name = 1 [(buf.validate.field).string.min_len = 1];
-  // The email address associated with the company to suggest.
-  optional string email = 2 [(buf.validate.field).string.email = true];
-  option (buf.validate.message).cel = {
-    id: "exclusive_field_selection"
-    message: "Either name or email must be set, but not both"
-    expression: "(has(this.name) || has(this.email)) && !(has(this.name) && has(this.email))"
-  };
+  // Either name or email must be set, but not both
+  oneof criteria {
+    option (buf.validate.oneof).required = true;
+    // The name of the company to suggest (can be partial).
+    string name = 1 [(buf.validate.field).string.min_len = 1];
+    // The email address associated with the company to suggest.
+    string email = 2 [(buf.validate.field).string.email = true];
+  }
 }
 
 // SuggestCompanyResponse is the response from the SuggestCompany function.

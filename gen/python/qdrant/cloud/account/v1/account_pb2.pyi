@@ -222,20 +222,6 @@ class DeleteAccountMemberResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class UpdateAccountCompanyRequest(_message.Message):
-    __slots__ = ()
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    COMPANY_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    company: Company
-    def __init__(self, account_id: _Optional[str] = ..., company: _Optional[_Union[Company, _Mapping]] = ...) -> None: ...
-
-class UpdateAccountCompanyResponse(_message.Message):
-    __slots__ = ()
-    ACCOUNT_FIELD_NUMBER: _ClassVar[int]
-    account: Account
-    def __init__(self, account: _Optional[_Union[Account, _Mapping]] = ...) -> None: ...
-
 class SuggestCompanyRequest(_message.Message):
     __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]

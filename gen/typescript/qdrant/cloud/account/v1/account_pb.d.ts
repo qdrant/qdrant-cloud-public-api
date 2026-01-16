@@ -911,108 +911,33 @@ export declare type DeleteAccountMemberResponseValid = DeleteAccountMemberRespon
 export declare const DeleteAccountMemberResponseSchema: GenMessage<DeleteAccountMemberResponse, {validType: DeleteAccountMemberResponseValid}>;
 
 /**
- * UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
- *
- * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyRequest
- */
-export declare type UpdateAccountCompanyRequest = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The company information to update.
-   *
-   * @generated from field: qdrant.cloud.account.v1.Company company = 2;
-   */
-  company?: Company;
-};
-
-/**
- * UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function.
- *
- * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyRequest
- */
-export declare type UpdateAccountCompanyRequestValid = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The company information to update.
-   *
-   * @generated from field: qdrant.cloud.account.v1.Company company = 2;
-   */
-  company: CompanyValid;
-};
-
-/**
- * Describes the message qdrant.cloud.account.v1.UpdateAccountCompanyRequest.
- * Use `create(UpdateAccountCompanyRequestSchema)` to create a new message.
- */
-export declare const UpdateAccountCompanyRequestSchema: GenMessage<UpdateAccountCompanyRequest, {validType: UpdateAccountCompanyRequestValid}>;
-
-/**
- * UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
- *
- * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyResponse
- */
-export declare type UpdateAccountCompanyResponse = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyResponse"> & {
-  /**
-   * The actual account.
-   *
-   * @generated from field: qdrant.cloud.account.v1.Account account = 1;
-   */
-  account?: Account;
-};
-
-/**
- * UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function.
- *
- * @generated from message qdrant.cloud.account.v1.UpdateAccountCompanyResponse
- */
-export declare type UpdateAccountCompanyResponseValid = Message<"qdrant.cloud.account.v1.UpdateAccountCompanyResponse"> & {
-  /**
-   * The actual account.
-   *
-   * @generated from field: qdrant.cloud.account.v1.Account account = 1;
-   */
-  account: AccountValid;
-};
-
-/**
- * Describes the message qdrant.cloud.account.v1.UpdateAccountCompanyResponse.
- * Use `create(UpdateAccountCompanyResponseSchema)` to create a new message.
- */
-export declare const UpdateAccountCompanyResponseSchema: GenMessage<UpdateAccountCompanyResponse, {validType: UpdateAccountCompanyResponseValid}>;
-
-/**
  * SuggestCompanyRequest is the request from the SuggestCompany function.
  *
  * @generated from message qdrant.cloud.account.v1.SuggestCompanyRequest
  */
 export declare type SuggestCompanyRequest = Message<"qdrant.cloud.account.v1.SuggestCompanyRequest"> & {
   /**
-   * The name of the company to suggest (can be partial).
+   * Either name or email must be set, but not both
    *
-   * @generated from field: optional string name = 1;
+   * @generated from oneof qdrant.cloud.account.v1.SuggestCompanyRequest.criteria
    */
-  name?: string;
-
-  /**
-   * The email address associated with the company to suggest.
-   *
-   * @generated from field: optional string email = 2;
-   */
-  email?: string;
+  criteria: {
+    /**
+     * The name of the company to suggest (can be partial).
+     *
+     * @generated from field: string name = 1;
+     */
+    value: string;
+    case: "name";
+  } | {
+    /**
+     * The email address associated with the company to suggest.
+     *
+     * @generated from field: string email = 2;
+     */
+    value: string;
+    case: "email";
+  } | { case: undefined; value?: undefined };
 };
 
 export declare type SuggestCompanyRequestValid = SuggestCompanyRequest;
