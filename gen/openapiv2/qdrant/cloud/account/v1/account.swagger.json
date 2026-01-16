@@ -579,6 +579,45 @@
           "AccountService"
         ]
       }
+    },
+    "/api/account/v1/suggest-company": {
+      "get": {
+        "summary": "Suggest a company based on partial name or email.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_SuggestCompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuggestCompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "The name of the company to suggest (can be partial).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "The email address associated with the company to suggest.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -670,6 +709,10 @@
                 "type": "string"
               },
               "description": "The privileges of the account, if any.\nThis is a read-only field."
+            },
+            "company": {
+              "$ref": "#/definitions/v1Company",
+              "description": "The name of the company associated with the account."
             }
           },
           "description": "The actual account.",
@@ -751,6 +794,10 @@
             "type": "string"
           },
           "description": "The privileges of the account, if any.\nThis is a read-only field."
+        },
+        "company": {
+          "$ref": "#/definitions/v1Company",
+          "description": "The name of the company associated with the account."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -831,6 +878,20 @@
         }
       },
       "description": "An AccountMember represents a user who is a member of an account."
+    },
+    "v1Company": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The name of the domain (including Top-Level Domain), serving as unique identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the company."
+        }
+      },
+      "title": "Company represents information about an existing company"
     },
     "v1CreateAccountInviteResponse": {
       "type": "object",
@@ -973,6 +1034,20 @@
         }
       },
       "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
+    },
+    "v1SuggestCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Company"
+          },
+          "description": "The suggested companies."
+        }
+      },
+      "description": "SuggestCompanyResponse is the response from the SuggestCompany function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

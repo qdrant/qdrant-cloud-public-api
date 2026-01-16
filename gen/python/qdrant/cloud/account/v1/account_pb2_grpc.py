@@ -95,6 +95,11 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.FromString,
                 _registered_method=True)
+        self.SuggestCompany = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/SuggestCompany',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.FromString,
+                _registered_method=True)
 
 
 class AccountServiceServicer(object):
@@ -254,6 +259,15 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SuggestCompany(self, request, context):
+        """Suggest a company based on partial name or email.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AccountServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -336,6 +350,11 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     servicer.DeleteAccountMember,
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.SerializeToString,
+            ),
+            'SuggestCompany': grpc.unary_unary_rpc_method_handler(
+                    servicer.SuggestCompany,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -771,6 +790,33 @@ class AccountService(object):
             '/qdrant.cloud.account.v1.AccountService/DeleteAccountMember',
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.SerializeToString,
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SuggestCompany(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/SuggestCompany',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.FromString,
             options,
             channel_credentials,
             insecure,

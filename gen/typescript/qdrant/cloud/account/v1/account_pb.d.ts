@@ -911,6 +911,66 @@ export declare type DeleteAccountMemberResponseValid = DeleteAccountMemberRespon
 export declare const DeleteAccountMemberResponseSchema: GenMessage<DeleteAccountMemberResponse, {validType: DeleteAccountMemberResponseValid}>;
 
 /**
+ * SuggestCompanyRequest is the request from the SuggestCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.SuggestCompanyRequest
+ */
+export declare type SuggestCompanyRequest = Message<"qdrant.cloud.account.v1.SuggestCompanyRequest"> & {
+  /**
+   * Either name or email must be set, but not both
+   *
+   * @generated from oneof qdrant.cloud.account.v1.SuggestCompanyRequest.criteria
+   */
+  criteria: {
+    /**
+     * The name of the company to suggest (can be partial).
+     *
+     * @generated from field: string name = 1;
+     */
+    value: string;
+    case: "name";
+  } | {
+    /**
+     * The email address associated with the company to suggest.
+     *
+     * @generated from field: string email = 2;
+     */
+    value: string;
+    case: "email";
+  } | { case: undefined; value?: undefined };
+};
+
+export declare type SuggestCompanyRequestValid = SuggestCompanyRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.SuggestCompanyRequest.
+ * Use `create(SuggestCompanyRequestSchema)` to create a new message.
+ */
+export declare const SuggestCompanyRequestSchema: GenMessage<SuggestCompanyRequest, {validType: SuggestCompanyRequestValid}>;
+
+/**
+ * SuggestCompanyResponse is the response from the SuggestCompany function.
+ *
+ * @generated from message qdrant.cloud.account.v1.SuggestCompanyResponse
+ */
+export declare type SuggestCompanyResponse = Message<"qdrant.cloud.account.v1.SuggestCompanyResponse"> & {
+  /**
+   * The suggested companies.
+   *
+   * @generated from field: repeated qdrant.cloud.account.v1.Company items = 1;
+   */
+  items: Company[];
+};
+
+export declare type SuggestCompanyResponseValid = SuggestCompanyResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.SuggestCompanyResponse.
+ * Use `create(SuggestCompanyResponseSchema)` to create a new message.
+ */
+export declare const SuggestCompanyResponseSchema: GenMessage<SuggestCompanyResponse, {validType: SuggestCompanyResponseValid}>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -970,6 +1030,13 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
    * @generated from field: repeated string privileges = 8;
    */
   privileges: string[];
+
+  /**
+   * The name of the company associated with the account.
+   *
+   * @generated from field: optional qdrant.cloud.account.v1.Company company = 9;
+   */
+  company?: Company;
 };
 
 export declare type AccountValid = Account;
@@ -1128,6 +1195,35 @@ export declare type AccountMemberValid = Message<"qdrant.cloud.account.v1.Accoun
  * Use `create(AccountMemberSchema)` to create a new message.
  */
 export declare const AccountMemberSchema: GenMessage<AccountMember, {validType: AccountMemberValid}>;
+
+/**
+ * Company represents information about an existing company
+ *
+ * @generated from message qdrant.cloud.account.v1.Company
+ */
+export declare type Company = Message<"qdrant.cloud.account.v1.Company"> & {
+  /**
+   * The name of the domain (including Top-Level Domain), serving as unique identifier.
+   *
+   * @generated from field: optional string domain = 1;
+   */
+  domain?: string;
+
+  /**
+   * The name of the company.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+export declare type CompanyValid = Company;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.Company.
+ * Use `create(CompanySchema)` to create a new message.
+ */
+export declare const CompanySchema: GenMessage<Company, {validType: CompanyValid}>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.
@@ -1382,6 +1478,18 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountMemberRequestSchema;
     output: typeof DeleteAccountMemberResponseSchema;
+  },
+  /**
+   * Suggest a company based on partial name or email.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+   */
+  suggestCompany: {
+    methodKind: "unary";
+    input: typeof SuggestCompanyRequestSchema;
+    output: typeof SuggestCompanyResponseSchema;
   },
 }>;
 
