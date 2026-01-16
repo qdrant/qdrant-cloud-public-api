@@ -326,8 +326,6 @@ service AccountService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
-    // custom supported-actor-types expression. (Requires to be authenticated as a user)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/suggest-company"};
     // log fields

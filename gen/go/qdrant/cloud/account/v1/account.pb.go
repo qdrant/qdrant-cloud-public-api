@@ -2235,7 +2235,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xf5\"\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xf0\"\n" +
 	"\x0eAccountService\x12\x95\x01\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xa4\x01\n" +
 	"\n" +
@@ -2268,8 +2268,8 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"read:users\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xc2\x02\n" +
 	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"\xbf\x01\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd9\x01\n" +
-	"\x0eSuggestCompany\x12..qdrant.cloud.account.v1.SuggestCompanyRequest\x1a/.qdrant.cloud.account.v1.SuggestCompanyResponse\"f\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
+	"\auser_id\x12\auser_id\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd4\x01\n" +
+	"\x0eSuggestCompany\x12..qdrant.cloud.account.v1.SuggestCompanyRequest\x1a/.qdrant.cloud.account.v1.SuggestCompanyResponse\"a\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x16\n" +
 	"\rcompany_email\x12\x05email\xba\xb5\x18\x14\n" +
 	"\fcompany_name\x12\x04name\x82\xd3\xe4\x93\x02!\x12\x1f/api/account/v1/suggest-companyB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
