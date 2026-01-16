@@ -1108,11 +1108,10 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 
   /**
    * The name of the company associated with the account.
-   * This is a read-only field once set.
    *
-   * @generated from field: optional string company_name = 9;
+   * @generated from field: optional qdrant.cloud.account.v1.Company company = 9;
    */
-  companyName?: string;
+  company?: Company;
 };
 
 export declare type AccountValid = Account;
@@ -1291,13 +1290,6 @@ export declare type Company = Message<"qdrant.cloud.account.v1.Company"> & {
    * @generated from field: string name = 2;
    */
   name: string;
-
-  /**
-   * The logo of the company.
-   *
-   * @generated from field: optional qdrant.cloud.account.v1.CompanyLogo logo = 3;
-   */
-  logo?: CompanyLogo;
 };
 
 export declare type CompanyValid = Company;
@@ -1307,42 +1299,6 @@ export declare type CompanyValid = Company;
  * Use `create(CompanySchema)` to create a new message.
  */
 export declare const CompanySchema: GenMessage<Company, {validType: CompanyValid}>;
-
-/**
- * CompanyLogo represents a company logo with its source URL and dimensions.
- *
- * @generated from message qdrant.cloud.account.v1.CompanyLogo
- */
-export declare type CompanyLogo = Message<"qdrant.cloud.account.v1.CompanyLogo"> & {
-  /**
-   * The URL of the company logo.
-   *
-   * @generated from field: string src = 1;
-   */
-  src: string;
-
-  /**
-   * The width of the logo in pixels.
-   *
-   * @generated from field: uint32 width = 2;
-   */
-  width: number;
-
-  /**
-   * The height of the logo in pixels.
-   *
-   * @generated from field: uint32 height = 3;
-   */
-  height: number;
-};
-
-export declare type CompanyLogoValid = CompanyLogo;
-
-/**
- * Describes the message qdrant.cloud.account.v1.CompanyLogo.
- * Use `create(CompanyLogoSchema)` to create a new message.
- */
-export declare const CompanyLogoSchema: GenMessage<CompanyLogo, {validType: CompanyLogoValid}>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.
@@ -1597,18 +1553,6 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof DeleteAccountMemberRequestSchema;
     output: typeof DeleteAccountMemberResponseSchema;
-  },
-  /**
-   * Updates the company information associated with the account.
-   * Required permissions:
-   * - write:account
-   *
-   * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountCompany
-   */
-  updateAccountCompany: {
-    methodKind: "unary";
-    input: typeof UpdateAccountCompanyRequestSchema;
-    output: typeof UpdateAccountCompanyResponseSchema;
   },
   /**
    * Suggest a company based on partial name or email.

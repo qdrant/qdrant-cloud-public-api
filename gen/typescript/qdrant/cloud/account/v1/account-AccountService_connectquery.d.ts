@@ -142,14 +142,6 @@ export const getAccountMember: typeof AccountService["method"]["getAccountMember
  */
 export const deleteAccountMember: typeof AccountService["method"]["deleteAccountMember"];
 /**
- * Updates the company information associated with the account.
- * Required permissions:
- * - write:account
- *
- * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountCompany
- */
-export const updateAccountCompany: typeof AccountService["method"]["updateAccountCompany"];
-/**
  * Suggest a company based on partial name or email.
  * Required permissions:
  * - None (authenticated only)

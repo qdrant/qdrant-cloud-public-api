@@ -173,46 +173,6 @@
         ]
       }
     },
-    "/api/account/v1/accounts/{accountId}/company": {
-      "put": {
-        "summary": "Updates the company information associated with the account.\nRequired permissions:\n- write:account",
-        "operationId": "AccountService_UpdateAccountCompany",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UpdateAccountCompanyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccountServiceUpdateAccountCompanyBody"
-            }
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
     "/api/account/v1/accounts/{accountId}/invites": {
       "get": {
         "summary": "Lists all account invites in the account identified by the given account ID.\nRequired permissions:\n- read:invites",
@@ -750,9 +710,9 @@
               },
               "description": "The privileges of the account, if any.\nThis is a read-only field."
             },
-            "companyName": {
-              "type": "string",
-              "description": "The name of the company associated with the account.\nThis is a read-only field once set."
+            "company": {
+              "$ref": "#/definitions/v1Company",
+              "description": "The name of the company associated with the account."
             }
           },
           "description": "The actual account.",
@@ -760,16 +720,6 @@
         }
       },
       "description": "UpdateAccountRequest is the request for the UpdateAccount function."
-    },
-    "AccountServiceUpdateAccountCompanyBody": {
-      "type": "object",
-      "properties": {
-        "company": {
-          "$ref": "#/definitions/v1Company",
-          "description": "The company information to update."
-        }
-      },
-      "description": "UpdateAccountCompanyRequest is the request from the UpdateAccountCompany function."
     },
     "protobufAny": {
       "type": "object",
@@ -845,9 +795,9 @@
           },
           "description": "The privileges of the account, if any.\nThis is a read-only field."
         },
-        "companyName": {
-          "type": "string",
-          "description": "The name of the company associated with the account.\nThis is a read-only field once set."
+        "company": {
+          "$ref": "#/definitions/v1Company",
+          "description": "The name of the company associated with the account."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -939,33 +889,9 @@
         "name": {
           "type": "string",
           "description": "The name of the company."
-        },
-        "logo": {
-          "$ref": "#/definitions/v1CompanyLogo",
-          "description": "The logo of the company."
         }
       },
       "title": "Company represents information about an existing company"
-    },
-    "v1CompanyLogo": {
-      "type": "object",
-      "properties": {
-        "src": {
-          "type": "string",
-          "description": "The URL of the company logo."
-        },
-        "width": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The width of the logo in pixels."
-        },
-        "height": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The height of the logo in pixels."
-        }
-      },
-      "description": "CompanyLogo represents a company logo with its source URL and dimensions."
     },
     "v1CreateAccountInviteResponse": {
       "type": "object",
@@ -1122,16 +1048,6 @@
         }
       },
       "description": "SuggestCompanyResponse is the response from the SuggestCompany function."
-    },
-    "v1UpdateAccountCompanyResponse": {
-      "type": "object",
-      "properties": {
-        "account": {
-          "$ref": "#/definitions/v1Account",
-          "description": "The actual account."
-        }
-      },
-      "description": "UpdateAccountCompanyResponse is the response from the UpdateAccountCompany function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

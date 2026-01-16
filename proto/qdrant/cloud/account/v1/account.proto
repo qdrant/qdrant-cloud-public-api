@@ -84,6 +84,14 @@ service AccountService {
       name: "account_name"
       field_expression: "account.name"
     };
+    option (common.v1.log_fields) = {
+      name: "company_domain"
+      field_expression: "account.company.domain"
+    };
+    option (common.v1.log_fields) = {
+      name: "company_name"
+      field_expression: "account.company.name"
+    };
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
@@ -310,36 +318,6 @@ service AccountService {
       field_expression: "user_id"
     };
   }
-  // Updates the company information associated with the account.
-  // Required permissions:
-  // - write:account
-  rpc UpdateAccountCompany(UpdateAccountCompanyRequest) returns (UpdateAccountCompanyResponse) {
-    // permissions
-    option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
-    // gRPC Gateway REST call
-    option (google.api.http) = {
-      put: "/api/account/v1/accounts/{account_id}/company"
-      body: "*"
-    };
-    // events
-    option (qdrant.cloud.event.v1.event_options) = {
-      event_type: EVENT_TYPE_UPDATED
-      resource_type: "account-company"
-      resource_id_field: "req.account_id"
-      resource_url_template: "/accounts/{req.account_id}/company"
-    };
-    // log fields
-    option (common.v1.log_fields) = {
-      name: "company_domain"
-      field_expression: "company.domain"
-    };
-    option (common.v1.log_fields) = {
-      name: "company_name"
-      field_expression: "company.name"
-    };
-  }
   // Suggest a company based on partial name or email.
   // Required permissions:
   // - None (authenticated only)
@@ -356,6 +334,10 @@ service AccountService {
     option (common.v1.log_fields) = {
       name: "company_email"
       field_expression: "email"
+    };
+    option (common.v1.log_fields) = {
+      name: "company_name"
+      field_expression: "name"
     };
   }
 }
@@ -678,8 +660,7 @@ message Account {
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
   // The name of the company associated with the account.
-  // This is a read-only field once set.
-  optional string company_name = 9 [(buf.validate.field).string.min_len = 1];
+  optional Company company = 9;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -777,16 +758,4 @@ message Company {
   optional string domain = 1 [(buf.validate.field).string.pattern = "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"];
   // The name of the company.
   string name = 2 [(buf.validate.field).string.min_len = 1];
-  // The logo of the company.
-  optional CompanyLogo logo = 3;
-}
-
-// CompanyLogo represents a company logo with its source URL and dimensions.
-message CompanyLogo {
-  // The URL of the company logo.
-  string src = 1 [(buf.validate.field).string.uri = true];
-  // The width of the logo in pixels.
-  uint32 width = 2;
-  // The height of the logo in pixels.
-  uint32 height = 3;
 }

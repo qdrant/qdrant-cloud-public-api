@@ -259,7 +259,7 @@ class Account(_message.Message):
     EXTERNAL_OWNER_ID_FIELD_NUMBER: _ClassVar[int]
     OWNER_EMAIL_FIELD_NUMBER: _ClassVar[int]
     PRIVILEGES_FIELD_NUMBER: _ClassVar[int]
-    COMPANY_NAME_FIELD_NUMBER: _ClassVar[int]
+    COMPANY_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
@@ -267,8 +267,8 @@ class Account(_message.Message):
     external_owner_id: str
     owner_email: str
     privileges: _containers.RepeatedScalarFieldContainer[str]
-    company_name: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company_name: _Optional[str] = ...) -> None: ...
+    company: Company
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company: _Optional[_Union[Company, _Mapping]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ()
@@ -306,18 +306,6 @@ class Company(_message.Message):
     __slots__ = ()
     DOMAIN_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    LOGO_FIELD_NUMBER: _ClassVar[int]
     domain: str
     name: str
-    logo: CompanyLogo
-    def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ..., logo: _Optional[_Union[CompanyLogo, _Mapping]] = ...) -> None: ...
-
-class CompanyLogo(_message.Message):
-    __slots__ = ()
-    SRC_FIELD_NUMBER: _ClassVar[int]
-    WIDTH_FIELD_NUMBER: _ClassVar[int]
-    HEIGHT_FIELD_NUMBER: _ClassVar[int]
-    src: str
-    width: int
-    height: int
-    def __init__(self, src: _Optional[str] = ..., width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
+    def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
