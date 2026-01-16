@@ -547,6 +547,61 @@
         ]
       }
     },
+    "/api/iam/v1/users/me/profile": {
+      "get": {
+        "summary": "Gets the profile of the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_GetUserProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "IAMService"
+        ]
+      },
+      "put": {
+        "summary": "Updates the profile of the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_UpdateUserProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "UpdateUserProfileRequest is the request for the UpdateUserProfile function.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/users/{user.id}": {
       "put": {
         "summary": "Updates the user identified by the given ID.\nRequired permissions:\n- None (authenticated only)",
@@ -819,6 +874,16 @@
       },
       "description": "GetUserConsentResponse is the response from the GetUserConsent function."
     },
+    "v1GetUserProfileResponse": {
+      "type": "object",
+      "properties": {
+        "userProfile": {
+          "$ref": "#/definitions/v1UserProfile",
+          "description": "The actual user profile."
+        }
+      },
+      "description": "GetUserProfileResponse is the response from the GetUserProfile function."
+    },
     "v1LegalDocumentType": {
       "type": "string",
       "enum": [
@@ -1032,6 +1097,26 @@
       },
       "description": "UpdateRoleResponse is the response from the UpdateRole function."
     },
+    "v1UpdateUserProfileRequest": {
+      "type": "object",
+      "properties": {
+        "userProfile": {
+          "$ref": "#/definitions/v1UserProfile",
+          "description": "The actual user profile."
+        }
+      },
+      "description": "UpdateUserProfileRequest is the request for the UpdateUserProfile function."
+    },
+    "v1UpdateUserProfileResponse": {
+      "type": "object",
+      "properties": {
+        "userProfile": {
+          "$ref": "#/definitions/v1UserProfile",
+          "description": "The actual user profile."
+        }
+      },
+      "description": "UpdateUserProfileResponse is the response from the UpdateUserProfile function."
+    },
     "v1UpdateUserResponse": {
       "type": "object",
       "properties": {
@@ -1107,6 +1192,45 @@
       ],
       "default": "USER_CONSENT_STATUS_UNSPECIFIED",
       "description": "UserConsentStatus specifies the status from an user for a consent.\n\n - USER_CONSENT_STATUS_UNSPECIFIED: Unspecified consent status.\n - USER_CONSENT_STATUS_ACCEPTED: The user accepted the consent.\n - USER_CONSENT_STATUS_REVOKED: The user revoked the consent.\n - USER_CONSENT_STATUS_PENDING: The consent is pending action from the user.\nPending consent means that the user got notified about the new version of the document. After a certain\nperiod of time, we auto accept pending consents depending on the document type."
+    },
+    "v1UserDemographics": {
+      "type": "object",
+      "properties": {
+        "roleInCompany": {
+          "type": "string",
+          "description": "The role of the user in their company."
+        },
+        "usageTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags representing what the user uses Qdrant for."
+        },
+        "useCase": {
+          "type": "string",
+          "description": "The use case description for using Qdrant."
+        }
+      },
+      "description": "User Demographics represents demographic information about a user."
+    },
+    "v1UserProfile": {
+      "type": "object",
+      "properties": {
+        "givenName": {
+          "type": "string",
+          "description": "The given name of the user."
+        },
+        "familyName": {
+          "type": "string",
+          "description": "The family name of the user."
+        },
+        "metadata": {
+          "$ref": "#/definitions/v1UserDemographics",
+          "description": "Additional demographic information about the user."
+        }
+      },
+      "description": "User Profile represents profile information about a user."
     },
     "v1UserStatus": {
       "type": "string",

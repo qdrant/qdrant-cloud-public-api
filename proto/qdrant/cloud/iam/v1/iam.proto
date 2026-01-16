@@ -62,6 +62,42 @@ service IAMService {
       field_expression: "user.id"
     };
   }
+  // Gets the profile of the authenticated user.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/users/me/profile"};
+  }
+  // Updates the profile of the authenticated user.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UpdateUserProfileResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/iam/v1/users/me/profile"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "user-profile"
+      resource_id_field: "req-md.qc-actor-id"
+      resource_url_template: "/users/{req-md.qc-actor-id}"
+    };
+  }
   // Gets the authenticated user's consent status for a specific legal document.
   // Required permissions:
   // - None (authenticated only)
@@ -357,6 +393,37 @@ message GetUserConsentRequest {
 message GetUserConsentResponse {
   // The user consent for the requested document type.
   UserConsent user_consent = 1 [(buf.validate.field).required = true];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetUserProfileRequest is the request for the GetUserProfile function.
+message GetUserProfileRequest {
+  // Empty
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetUserProfileResponse is the response from the GetUserProfile function.
+message GetUserProfileResponse {
+  // The actual user profile.
+  UserProfile user_profile = 1 [(buf.validate.field).required = true];
+}
+
+// UpdateUserProfileRequest is the request for the UpdateUserProfile function.
+message UpdateUserProfileRequest {
+  // The actual user profile.
+  UserProfile user_profile = 1 [(buf.validate.field).required = true];
+
+  option (buf.validate.message).cel = {
+    id: "update_user_profile.exclusive_name_field_selection"
+    message: "One of user_profile.given_name or user_profile.family_name must be set"
+    expression: "has(this.user_profile.given_name) || has(this.user_profile.family_name)"
+  };
+}
+
+// UpdateUserProfileResponse is the response from the UpdateUserProfile function.
+message UpdateUserProfileResponse {
+  // The actual user profile.
+  UserProfile user_profile = 1 [(buf.validate.field).required = true];
 }
 
 // RecordUserConsentRequest is the request for the RecordUserConsent function.
@@ -689,6 +756,27 @@ message LogoutUserRequest {
 // LogoutUserResponse is the response from the Logout function
 message LogoutUserResponse {
   // Empty
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// User Profile represents profile information about a user.
+message UserProfile {
+  // The given name of the user.
+  optional string given_name = 3 [(buf.validate.field).string.min_len = 1];
+  // The family name of the user.
+  optional string family_name = 4 [(buf.validate.field).string.min_len = 1];
+  // Additional demographic information about the user.
+  optional UserDemographics metadata = 5;
+}
+
+// User Demographics represents demographic information about a user.
+message UserDemographics {
+  // The role of the user in their company.
+  optional string role_in_company = 1;
+  // Tags representing what the user uses Qdrant for.
+  repeated string usage_tags = 2;
+  // The use case description for using Qdrant.
+  optional string use_case = 3;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
