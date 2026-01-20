@@ -318,10 +318,10 @@ service AccountService {
       field_expression: "user_id"
     };
   }
-  // Suggest a company based on partial name or email.
+  // Suggest a list of companies based on partial name or email.
   // Required permissions:
   // - None (authenticated only)
-  rpc SuggestCompany(SuggestCompanyRequest) returns (SuggestCompanyResponse) {
+  rpc SuggestCompanies(SuggestCompaniesRequest) returns (SuggestCompaniesResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // custom account-id expression
@@ -581,8 +581,8 @@ message DeleteAccountMemberResponse {
   // Empty
 }
 
-// SuggestCompanyRequest is the request from the SuggestCompany function.
-message SuggestCompanyRequest {
+// SuggestCompaniesRequest is the request from the SuggestCompanies function.
+message SuggestCompaniesRequest {
   // Either name or email must be set, but not both
   oneof criteria {
     option (buf.validate.oneof).required = true;
@@ -593,8 +593,8 @@ message SuggestCompanyRequest {
   }
 }
 
-// SuggestCompanyResponse is the response from the SuggestCompany function.
-message SuggestCompanyResponse {
+// SuggestCompaniesResponse is the response from the SuggestCompanies function.
+message SuggestCompaniesResponse {
   // The suggested companies.
   repeated Company items = 1;
 }

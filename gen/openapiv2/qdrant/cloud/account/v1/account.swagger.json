@@ -582,13 +582,13 @@
     },
     "/api/account/v1/suggest-company": {
       "get": {
-        "summary": "Suggest a company based on partial name or email.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "AccountService_SuggestCompany",
+        "summary": "Suggest a list of companies based on partial name or email.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "AccountService_SuggestCompanies",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1SuggestCompanyResponse"
+              "$ref": "#/definitions/v1SuggestCompaniesResponse"
             }
           },
           "default": {
@@ -1035,7 +1035,7 @@
       },
       "description": "RejectAccountInviteResponse is the response from the RejectAccountInvite function."
     },
-    "v1SuggestCompanyResponse": {
+    "v1SuggestCompaniesResponse": {
       "type": "object",
       "properties": {
         "items": {
@@ -1047,7 +1047,7 @@
           "description": "The suggested companies."
         }
       },
-      "description": "SuggestCompanyResponse is the response from the SuggestCompany function."
+      "description": "SuggestCompaniesResponse is the response from the SuggestCompanies function."
     },
     "v1UpdateAccountResponse": {
       "type": "object",
