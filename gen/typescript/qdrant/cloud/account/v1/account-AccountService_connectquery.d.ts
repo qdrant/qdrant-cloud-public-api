@@ -142,10 +142,10 @@ export const getAccountMember: typeof AccountService["method"]["getAccountMember
  */
 export const deleteAccountMember: typeof AccountService["method"]["deleteAccountMember"];
 /**
- * Suggest a company based on partial name or email.
+ * Suggest a list of companies based on partial name or email.
  * Required permissions:
  * - None (authenticated only)
  *
- * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
  */
-export const suggestCompany: typeof AccountService["method"]["suggestCompany"];
+export const suggestCompanies: typeof AccountService["method"]["suggestCompanies"];

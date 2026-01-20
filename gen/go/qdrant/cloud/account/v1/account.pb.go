@@ -1593,34 +1593,34 @@ func (*DeleteAccountMemberResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{31}
 }
 
-// SuggestCompanyRequest is the request from the SuggestCompany function.
-type SuggestCompanyRequest struct {
+// SuggestCompaniesRequest is the request from the SuggestCompanies function.
+type SuggestCompaniesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Either name or email must be set, but not both
 	//
 	// Types that are valid to be assigned to Criteria:
 	//
-	//	*SuggestCompanyRequest_Name
-	//	*SuggestCompanyRequest_Email
-	Criteria      isSuggestCompanyRequest_Criteria `protobuf_oneof:"criteria"`
+	//	*SuggestCompaniesRequest_Name
+	//	*SuggestCompaniesRequest_Email
+	Criteria      isSuggestCompaniesRequest_Criteria `protobuf_oneof:"criteria"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SuggestCompanyRequest) Reset() {
-	*x = SuggestCompanyRequest{}
+func (x *SuggestCompaniesRequest) Reset() {
+	*x = SuggestCompaniesRequest{}
 	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SuggestCompanyRequest) String() string {
+func (x *SuggestCompaniesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SuggestCompanyRequest) ProtoMessage() {}
+func (*SuggestCompaniesRequest) ProtoMessage() {}
 
-func (x *SuggestCompanyRequest) ProtoReflect() protoreflect.Message {
+func (x *SuggestCompaniesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1632,56 +1632,56 @@ func (x *SuggestCompanyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SuggestCompanyRequest.ProtoReflect.Descriptor instead.
-func (*SuggestCompanyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SuggestCompaniesRequest.ProtoReflect.Descriptor instead.
+func (*SuggestCompaniesRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *SuggestCompanyRequest) GetCriteria() isSuggestCompanyRequest_Criteria {
+func (x *SuggestCompaniesRequest) GetCriteria() isSuggestCompaniesRequest_Criteria {
 	if x != nil {
 		return x.Criteria
 	}
 	return nil
 }
 
-func (x *SuggestCompanyRequest) GetName() string {
+func (x *SuggestCompaniesRequest) GetName() string {
 	if x != nil {
-		if x, ok := x.Criteria.(*SuggestCompanyRequest_Name); ok {
+		if x, ok := x.Criteria.(*SuggestCompaniesRequest_Name); ok {
 			return x.Name
 		}
 	}
 	return ""
 }
 
-func (x *SuggestCompanyRequest) GetEmail() string {
+func (x *SuggestCompaniesRequest) GetEmail() string {
 	if x != nil {
-		if x, ok := x.Criteria.(*SuggestCompanyRequest_Email); ok {
+		if x, ok := x.Criteria.(*SuggestCompaniesRequest_Email); ok {
 			return x.Email
 		}
 	}
 	return ""
 }
 
-type isSuggestCompanyRequest_Criteria interface {
-	isSuggestCompanyRequest_Criteria()
+type isSuggestCompaniesRequest_Criteria interface {
+	isSuggestCompaniesRequest_Criteria()
 }
 
-type SuggestCompanyRequest_Name struct {
+type SuggestCompaniesRequest_Name struct {
 	// The name of the company to suggest (can be partial).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3,oneof"`
 }
 
-type SuggestCompanyRequest_Email struct {
+type SuggestCompaniesRequest_Email struct {
 	// The email address associated with the company to suggest.
 	Email string `protobuf:"bytes,2,opt,name=email,proto3,oneof"`
 }
 
-func (*SuggestCompanyRequest_Name) isSuggestCompanyRequest_Criteria() {}
+func (*SuggestCompaniesRequest_Name) isSuggestCompaniesRequest_Criteria() {}
 
-func (*SuggestCompanyRequest_Email) isSuggestCompanyRequest_Criteria() {}
+func (*SuggestCompaniesRequest_Email) isSuggestCompaniesRequest_Criteria() {}
 
-// SuggestCompanyResponse is the response from the SuggestCompany function.
-type SuggestCompanyResponse struct {
+// SuggestCompaniesResponse is the response from the SuggestCompanies function.
+type SuggestCompaniesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The suggested companies.
 	Items         []*Company `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -1689,20 +1689,20 @@ type SuggestCompanyResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SuggestCompanyResponse) Reset() {
-	*x = SuggestCompanyResponse{}
+func (x *SuggestCompaniesResponse) Reset() {
+	*x = SuggestCompaniesResponse{}
 	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SuggestCompanyResponse) String() string {
+func (x *SuggestCompaniesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SuggestCompanyResponse) ProtoMessage() {}
+func (*SuggestCompaniesResponse) ProtoMessage() {}
 
-func (x *SuggestCompanyResponse) ProtoReflect() protoreflect.Message {
+func (x *SuggestCompaniesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1714,12 +1714,12 @@ func (x *SuggestCompanyResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SuggestCompanyResponse.ProtoReflect.Descriptor instead.
-func (*SuggestCompanyResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SuggestCompaniesResponse.ProtoReflect.Descriptor instead.
+func (*SuggestCompaniesResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *SuggestCompanyResponse) GetItems() []*Company {
+func (x *SuggestCompaniesResponse) GetItems() []*Company {
 	if x != nil {
 		return x.Items
 	}
@@ -2175,12 +2175,12 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\"\x1d\n" +
-	"\x1bDeleteAccountMemberResponse\"j\n" +
-	"\x15SuggestCompanyRequest\x12\x1d\n" +
+	"\x1bDeleteAccountMemberResponse\"l\n" +
+	"\x17SuggestCompaniesRequest\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x04name\x12\x1f\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05emailB\x11\n" +
-	"\bcriteria\x12\x05\xbaH\x02\b\x01\"P\n" +
-	"\x16SuggestCompanyResponse\x126\n" +
+	"\bcriteria\x12\x05\xbaH\x02\b\x01\"R\n" +
+	"\x18SuggestCompaniesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.CompanyR\x05items\"\x9c\a\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
@@ -2235,7 +2235,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xf0\"\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xf6\"\n" +
 	"\x0eAccountService\x12\x95\x01\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xa4\x01\n" +
 	"\n" +
@@ -2268,8 +2268,8 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"read:users\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xc2\x02\n" +
 	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"\xbf\x01\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xd4\x01\n" +
-	"\x0eSuggestCompany\x12..qdrant.cloud.account.v1.SuggestCompanyRequest\x1a/.qdrant.cloud.account.v1.SuggestCompanyResponse\"a\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x16\n" +
+	"\auser_id\x12\auser_id\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xda\x01\n" +
+	"\x10SuggestCompanies\x120.qdrant.cloud.account.v1.SuggestCompaniesRequest\x1a1.qdrant.cloud.account.v1.SuggestCompaniesResponse\"a\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x16\n" +
 	"\rcompany_email\x12\x05email\xba\xb5\x18\x14\n" +
 	"\fcompany_name\x12\x04name\x82\xd3\xe4\x93\x02!\x12\x1f/api/account/v1/suggest-companyB\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
@@ -2322,8 +2322,8 @@ var file_qdrant_cloud_account_v1_account_proto_goTypes = []any{
 	(*GetAccountMemberResponse)(nil),           // 30: qdrant.cloud.account.v1.GetAccountMemberResponse
 	(*DeleteAccountMemberRequest)(nil),         // 31: qdrant.cloud.account.v1.DeleteAccountMemberRequest
 	(*DeleteAccountMemberResponse)(nil),        // 32: qdrant.cloud.account.v1.DeleteAccountMemberResponse
-	(*SuggestCompanyRequest)(nil),              // 33: qdrant.cloud.account.v1.SuggestCompanyRequest
-	(*SuggestCompanyResponse)(nil),             // 34: qdrant.cloud.account.v1.SuggestCompanyResponse
+	(*SuggestCompaniesRequest)(nil),            // 33: qdrant.cloud.account.v1.SuggestCompaniesRequest
+	(*SuggestCompaniesResponse)(nil),           // 34: qdrant.cloud.account.v1.SuggestCompaniesResponse
 	(*Account)(nil),                            // 35: qdrant.cloud.account.v1.Account
 	(*AccountInvite)(nil),                      // 36: qdrant.cloud.account.v1.AccountInvite
 	(*AccountMember)(nil),                      // 37: qdrant.cloud.account.v1.AccountMember
@@ -2348,7 +2348,7 @@ var file_qdrant_cloud_account_v1_account_proto_depIdxs = []int32{
 	36, // 13: qdrant.cloud.account.v1.RejectAccountInviteResponse.invite:type_name -> qdrant.cloud.account.v1.AccountInvite
 	37, // 14: qdrant.cloud.account.v1.ListAccountMembersResponse.items:type_name -> qdrant.cloud.account.v1.AccountMember
 	37, // 15: qdrant.cloud.account.v1.GetAccountMemberResponse.account_member:type_name -> qdrant.cloud.account.v1.AccountMember
-	38, // 16: qdrant.cloud.account.v1.SuggestCompanyResponse.items:type_name -> qdrant.cloud.account.v1.Company
+	38, // 16: qdrant.cloud.account.v1.SuggestCompaniesResponse.items:type_name -> qdrant.cloud.account.v1.Company
 	39, // 17: qdrant.cloud.account.v1.Account.created_at:type_name -> google.protobuf.Timestamp
 	39, // 18: qdrant.cloud.account.v1.Account.last_modified_at:type_name -> google.protobuf.Timestamp
 	38, // 19: qdrant.cloud.account.v1.Account.company:type_name -> qdrant.cloud.account.v1.Company
@@ -2372,7 +2372,7 @@ var file_qdrant_cloud_account_v1_account_proto_depIdxs = []int32{
 	27, // 37: qdrant.cloud.account.v1.AccountService.ListAccountMembers:input_type -> qdrant.cloud.account.v1.ListAccountMembersRequest
 	29, // 38: qdrant.cloud.account.v1.AccountService.GetAccountMember:input_type -> qdrant.cloud.account.v1.GetAccountMemberRequest
 	31, // 39: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:input_type -> qdrant.cloud.account.v1.DeleteAccountMemberRequest
-	33, // 40: qdrant.cloud.account.v1.AccountService.SuggestCompany:input_type -> qdrant.cloud.account.v1.SuggestCompanyRequest
+	33, // 40: qdrant.cloud.account.v1.AccountService.SuggestCompanies:input_type -> qdrant.cloud.account.v1.SuggestCompaniesRequest
 	2,  // 41: qdrant.cloud.account.v1.AccountService.ListAccounts:output_type -> qdrant.cloud.account.v1.ListAccountsResponse
 	4,  // 42: qdrant.cloud.account.v1.AccountService.GetAccount:output_type -> qdrant.cloud.account.v1.GetAccountResponse
 	6,  // 43: qdrant.cloud.account.v1.AccountService.CreateAccount:output_type -> qdrant.cloud.account.v1.CreateAccountResponse
@@ -2389,7 +2389,7 @@ var file_qdrant_cloud_account_v1_account_proto_depIdxs = []int32{
 	28, // 54: qdrant.cloud.account.v1.AccountService.ListAccountMembers:output_type -> qdrant.cloud.account.v1.ListAccountMembersResponse
 	30, // 55: qdrant.cloud.account.v1.AccountService.GetAccountMember:output_type -> qdrant.cloud.account.v1.GetAccountMemberResponse
 	32, // 56: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:output_type -> qdrant.cloud.account.v1.DeleteAccountMemberResponse
-	34, // 57: qdrant.cloud.account.v1.AccountService.SuggestCompany:output_type -> qdrant.cloud.account.v1.SuggestCompanyResponse
+	34, // 57: qdrant.cloud.account.v1.AccountService.SuggestCompanies:output_type -> qdrant.cloud.account.v1.SuggestCompaniesResponse
 	41, // [41:58] is the sub-list for method output_type
 	24, // [24:41] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
@@ -2403,8 +2403,8 @@ func file_qdrant_cloud_account_v1_account_proto_init() {
 		return
 	}
 	file_qdrant_cloud_account_v1_account_proto_msgTypes[32].OneofWrappers = []any{
-		(*SuggestCompanyRequest_Name)(nil),
-		(*SuggestCompanyRequest_Email)(nil),
+		(*SuggestCompaniesRequest_Name)(nil),
+		(*SuggestCompaniesRequest_Email)(nil),
 	}
 	file_qdrant_cloud_account_v1_account_proto_msgTypes[34].OneofWrappers = []any{}
 	file_qdrant_cloud_account_v1_account_proto_msgTypes[35].OneofWrappers = []any{}

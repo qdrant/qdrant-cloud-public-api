@@ -911,15 +911,15 @@ export declare type DeleteAccountMemberResponseValid = DeleteAccountMemberRespon
 export declare const DeleteAccountMemberResponseSchema: GenMessage<DeleteAccountMemberResponse, {validType: DeleteAccountMemberResponseValid}>;
 
 /**
- * SuggestCompanyRequest is the request from the SuggestCompany function.
+ * SuggestCompaniesRequest is the request from the SuggestCompanies function.
  *
- * @generated from message qdrant.cloud.account.v1.SuggestCompanyRequest
+ * @generated from message qdrant.cloud.account.v1.SuggestCompaniesRequest
  */
-export declare type SuggestCompanyRequest = Message<"qdrant.cloud.account.v1.SuggestCompanyRequest"> & {
+export declare type SuggestCompaniesRequest = Message<"qdrant.cloud.account.v1.SuggestCompaniesRequest"> & {
   /**
    * Either name or email must be set, but not both
    *
-   * @generated from oneof qdrant.cloud.account.v1.SuggestCompanyRequest.criteria
+   * @generated from oneof qdrant.cloud.account.v1.SuggestCompaniesRequest.criteria
    */
   criteria: {
     /**
@@ -940,20 +940,20 @@ export declare type SuggestCompanyRequest = Message<"qdrant.cloud.account.v1.Sug
   } | { case: undefined; value?: undefined };
 };
 
-export declare type SuggestCompanyRequestValid = SuggestCompanyRequest;
+export declare type SuggestCompaniesRequestValid = SuggestCompaniesRequest;
 
 /**
- * Describes the message qdrant.cloud.account.v1.SuggestCompanyRequest.
- * Use `create(SuggestCompanyRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.SuggestCompaniesRequest.
+ * Use `create(SuggestCompaniesRequestSchema)` to create a new message.
  */
-export declare const SuggestCompanyRequestSchema: GenMessage<SuggestCompanyRequest, {validType: SuggestCompanyRequestValid}>;
+export declare const SuggestCompaniesRequestSchema: GenMessage<SuggestCompaniesRequest, {validType: SuggestCompaniesRequestValid}>;
 
 /**
- * SuggestCompanyResponse is the response from the SuggestCompany function.
+ * SuggestCompaniesResponse is the response from the SuggestCompanies function.
  *
- * @generated from message qdrant.cloud.account.v1.SuggestCompanyResponse
+ * @generated from message qdrant.cloud.account.v1.SuggestCompaniesResponse
  */
-export declare type SuggestCompanyResponse = Message<"qdrant.cloud.account.v1.SuggestCompanyResponse"> & {
+export declare type SuggestCompaniesResponse = Message<"qdrant.cloud.account.v1.SuggestCompaniesResponse"> & {
   /**
    * The suggested companies.
    *
@@ -962,13 +962,13 @@ export declare type SuggestCompanyResponse = Message<"qdrant.cloud.account.v1.Su
   items: Company[];
 };
 
-export declare type SuggestCompanyResponseValid = SuggestCompanyResponse;
+export declare type SuggestCompaniesResponseValid = SuggestCompaniesResponse;
 
 /**
- * Describes the message qdrant.cloud.account.v1.SuggestCompanyResponse.
- * Use `create(SuggestCompanyResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.account.v1.SuggestCompaniesResponse.
+ * Use `create(SuggestCompaniesResponseSchema)` to create a new message.
  */
-export declare const SuggestCompanyResponseSchema: GenMessage<SuggestCompanyResponse, {validType: SuggestCompanyResponseValid}>;
+export declare const SuggestCompaniesResponseSchema: GenMessage<SuggestCompaniesResponse, {validType: SuggestCompaniesResponseValid}>;
 
 /**
  * An Account represents an account in the Qdrant cloud.
@@ -1480,16 +1480,16 @@ export declare const AccountService: GenService<{
     output: typeof DeleteAccountMemberResponseSchema;
   },
   /**
-   * Suggest a company based on partial name or email.
+   * Suggest a list of companies based on partial name or email.
    * Required permissions:
    * - None (authenticated only)
    *
-   * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
    */
-  suggestCompany: {
+  suggestCompanies: {
     methodKind: "unary";
-    input: typeof SuggestCompanyRequestSchema;
-    output: typeof SuggestCompanyResponseSchema;
+    input: typeof SuggestCompaniesRequestSchema;
+    output: typeof SuggestCompaniesResponseSchema;
   },
 }>;
 

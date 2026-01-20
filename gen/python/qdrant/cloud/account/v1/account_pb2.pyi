@@ -222,7 +222,7 @@ class DeleteAccountMemberResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
-class SuggestCompanyRequest(_message.Message):
+class SuggestCompaniesRequest(_message.Message):
     __slots__ = ()
     NAME_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
@@ -230,7 +230,7 @@ class SuggestCompanyRequest(_message.Message):
     email: str
     def __init__(self, name: _Optional[str] = ..., email: _Optional[str] = ...) -> None: ...
 
-class SuggestCompanyResponse(_message.Message):
+class SuggestCompaniesResponse(_message.Message):
     __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Company]

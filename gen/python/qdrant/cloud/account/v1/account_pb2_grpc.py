@@ -95,10 +95,10 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.FromString,
                 _registered_method=True)
-        self.SuggestCompany = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/SuggestCompany',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.FromString,
+        self.SuggestCompanies = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/SuggestCompanies',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
                 _registered_method=True)
 
 
@@ -259,8 +259,8 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SuggestCompany(self, request, context):
-        """Suggest a company based on partial name or email.
+    def SuggestCompanies(self, request, context):
+        """Suggest a list of companies based on partial name or email.
         Required permissions:
         - None (authenticated only)
         """
@@ -351,10 +351,10 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.DeleteAccountMemberResponse.SerializeToString,
             ),
-            'SuggestCompany': grpc.unary_unary_rpc_method_handler(
-                    servicer.SuggestCompany,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.SerializeToString,
+            'SuggestCompanies': grpc.unary_unary_rpc_method_handler(
+                    servicer.SuggestCompanies,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -801,7 +801,7 @@ class AccountService(object):
             _registered_method=True)
 
     @staticmethod
-    def SuggestCompany(request,
+    def SuggestCompanies(request,
             target,
             options=(),
             channel_credentials=None,
@@ -814,9 +814,9 @@ class AccountService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.account.v1.AccountService/SuggestCompany',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompanyResponse.FromString,
+            '/qdrant.cloud.account.v1.AccountService/SuggestCompanies',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
             options,
             channel_credentials,
             insecure,

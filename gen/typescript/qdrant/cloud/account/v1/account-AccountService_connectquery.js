@@ -158,10 +158,10 @@ export const getAccountMember = AccountService.method.getAccountMember;
 export const deleteAccountMember = AccountService.method.deleteAccountMember;
 
 /**
- * Suggest a company based on partial name or email.
+ * Suggest a list of companies based on partial name or email.
  * Required permissions:
  * - None (authenticated only)
  *
- * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompany
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
  */
-export const suggestCompany = AccountService.method.suggestCompany;
+export const suggestCompanies = AccountService.method.suggestCompanies;
