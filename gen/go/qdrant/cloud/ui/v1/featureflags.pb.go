@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        (unknown)
-// source: qdrant/cloud/ui/v1beta1/featureflags.proto
+// source: qdrant/cloud/ui/v1/featureflags.proto
 
-package uiv1beta1
+package uiv1
 
 import (
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
@@ -32,7 +32,7 @@ type GetFeatureFlagsRequest struct {
 
 func (x *GetFeatureFlagsRequest) Reset() {
 	*x = GetFeatureFlagsRequest{}
-	mi := &file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *GetFeatureFlagsRequest) String() string {
 func (*GetFeatureFlagsRequest) ProtoMessage() {}
 
 func (x *GetFeatureFlagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *GetFeatureFlagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFeatureFlagsRequest.ProtoReflect.Descriptor instead.
 func (*GetFeatureFlagsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_cloud_ui_v1_featureflags_proto_rawDescGZIP(), []int{0}
 }
 
 // GetFeatureFlagsResponse is the response from the GetFeatureFlags function.
@@ -79,7 +79,7 @@ type GetFeatureFlagsResponse struct {
 
 func (x *GetFeatureFlagsResponse) Reset() {
 	*x = GetFeatureFlagsResponse{}
-	mi := &file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -91,7 +91,7 @@ func (x *GetFeatureFlagsResponse) String() string {
 func (*GetFeatureFlagsResponse) ProtoMessage() {}
 
 func (x *GetFeatureFlagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +104,7 @@ func (x *GetFeatureFlagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFeatureFlagsResponse.ProtoReflect.Descriptor instead.
 func (*GetFeatureFlagsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_ui_v1_featureflags_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetFeatureFlagsResponse) GetClusterCreationEnabled() bool {
@@ -142,42 +142,42 @@ func (x *GetFeatureFlagsResponse) GetQdrantClustersQueryingEnabled() bool {
 	return false
 }
 
-var File_qdrant_cloud_ui_v1beta1_featureflags_proto protoreflect.FileDescriptor
+var File_qdrant_cloud_ui_v1_featureflags_proto protoreflect.FileDescriptor
 
-const file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDesc = "" +
+const file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc = "" +
 	"\n" +
-	"*qdrant/cloud/ui/v1beta1/featureflags.proto\x12\x17qdrant.cloud.ui.v1beta1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n" +
+	"%qdrant/cloud/ui/v1/featureflags.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n" +
 	"\x16GetFeatureFlagsRequest\"\xdc\x02\n" +
 	"\x17GetFeatureFlagsResponse\x128\n" +
 	"\x18cluster_creation_enabled\x18\x01 \x01(\bR\x16clusterCreationEnabled\x12A\n" +
 	"\x1dcluster_creation_page_enabled\x18\x02 \x01(\bR\x1aclusterCreationPageEnabled\x124\n" +
 	"\x16billing_cycles_enabled\x18\x03 \x01(\bR\x14billingCyclesEnabled\x12E\n" +
 	"\x1fentitlement_cancel_flow_enabled\x18\x04 \x01(\bR\x1centitlementCancelFlowEnabled\x12G\n" +
-	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled2\xb7\x01\n" +
-	"\x13FeatureFlagsService\x12\x9f\x01\n" +
-	"\x0fGetFeatureFlags\x12/.qdrant.cloud.ui.v1beta1.GetFeatureFlagsRequest\x1a0.qdrant.cloud.ui.v1beta1.GetFeatureFlagsResponse\")\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/ui/v1beta1/feature-flagsB\x83\x02\n" +
-	"\x1bcom.qdrant.cloud.ui.v1beta1B\x11FeatureflagsProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1beta1;uiv1beta1\xa2\x02\x03QCU\xaa\x02\x17Qdrant.Cloud.Ui.V1beta1\xca\x02\x17Qdrant\\Cloud\\Ui\\V1beta1\xe2\x02#Qdrant\\Cloud\\Ui\\V1beta1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Ui::V1beta1b\x06proto3"
+	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled2\xa8\x01\n" +
+	"\x13FeatureFlagsService\x12\x90\x01\n" +
+	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"$\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
+	"\x16com.qdrant.cloud.ui.v1B\x11FeatureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (
-	file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescOnce sync.Once
-	file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescData []byte
+	file_qdrant_cloud_ui_v1_featureflags_proto_rawDescOnce sync.Once
+	file_qdrant_cloud_ui_v1_featureflags_proto_rawDescData []byte
 )
 
-func file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescGZIP() []byte {
-	file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescOnce.Do(func() {
-		file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDesc), len(file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDesc)))
+func file_qdrant_cloud_ui_v1_featureflags_proto_rawDescGZIP() []byte {
+	file_qdrant_cloud_ui_v1_featureflags_proto_rawDescOnce.Do(func() {
+		file_qdrant_cloud_ui_v1_featureflags_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc), len(file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc)))
 	})
-	return file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDescData
+	return file_qdrant_cloud_ui_v1_featureflags_proto_rawDescData
 }
 
-var file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_qdrant_cloud_ui_v1beta1_featureflags_proto_goTypes = []any{
-	(*GetFeatureFlagsRequest)(nil),  // 0: qdrant.cloud.ui.v1beta1.GetFeatureFlagsRequest
-	(*GetFeatureFlagsResponse)(nil), // 1: qdrant.cloud.ui.v1beta1.GetFeatureFlagsResponse
+var file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_qdrant_cloud_ui_v1_featureflags_proto_goTypes = []any{
+	(*GetFeatureFlagsRequest)(nil),  // 0: qdrant.cloud.ui.v1.GetFeatureFlagsRequest
+	(*GetFeatureFlagsResponse)(nil), // 1: qdrant.cloud.ui.v1.GetFeatureFlagsResponse
 }
-var file_qdrant_cloud_ui_v1beta1_featureflags_proto_depIdxs = []int32{
-	0, // 0: qdrant.cloud.ui.v1beta1.FeatureFlagsService.GetFeatureFlags:input_type -> qdrant.cloud.ui.v1beta1.GetFeatureFlagsRequest
-	1, // 1: qdrant.cloud.ui.v1beta1.FeatureFlagsService.GetFeatureFlags:output_type -> qdrant.cloud.ui.v1beta1.GetFeatureFlagsResponse
+var file_qdrant_cloud_ui_v1_featureflags_proto_depIdxs = []int32{
+	0, // 0: qdrant.cloud.ui.v1.FeatureFlagsService.GetFeatureFlags:input_type -> qdrant.cloud.ui.v1.GetFeatureFlagsRequest
+	1, // 1: qdrant.cloud.ui.v1.FeatureFlagsService.GetFeatureFlags:output_type -> qdrant.cloud.ui.v1.GetFeatureFlagsResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -185,26 +185,26 @@ var file_qdrant_cloud_ui_v1beta1_featureflags_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_qdrant_cloud_ui_v1beta1_featureflags_proto_init() }
-func file_qdrant_cloud_ui_v1beta1_featureflags_proto_init() {
-	if File_qdrant_cloud_ui_v1beta1_featureflags_proto != nil {
+func init() { file_qdrant_cloud_ui_v1_featureflags_proto_init() }
+func file_qdrant_cloud_ui_v1_featureflags_proto_init() {
+	if File_qdrant_cloud_ui_v1_featureflags_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDesc), len(file_qdrant_cloud_ui_v1beta1_featureflags_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc), len(file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_qdrant_cloud_ui_v1beta1_featureflags_proto_goTypes,
-		DependencyIndexes: file_qdrant_cloud_ui_v1beta1_featureflags_proto_depIdxs,
-		MessageInfos:      file_qdrant_cloud_ui_v1beta1_featureflags_proto_msgTypes,
+		GoTypes:           file_qdrant_cloud_ui_v1_featureflags_proto_goTypes,
+		DependencyIndexes: file_qdrant_cloud_ui_v1_featureflags_proto_depIdxs,
+		MessageInfos:      file_qdrant_cloud_ui_v1_featureflags_proto_msgTypes,
 	}.Build()
-	File_qdrant_cloud_ui_v1beta1_featureflags_proto = out.File
-	file_qdrant_cloud_ui_v1beta1_featureflags_proto_goTypes = nil
-	file_qdrant_cloud_ui_v1beta1_featureflags_proto_depIdxs = nil
+	File_qdrant_cloud_ui_v1_featureflags_proto = out.File
+	file_qdrant_cloud_ui_v1_featureflags_proto_goTypes = nil
+	file_qdrant_cloud_ui_v1_featureflags_proto_depIdxs = nil
 }

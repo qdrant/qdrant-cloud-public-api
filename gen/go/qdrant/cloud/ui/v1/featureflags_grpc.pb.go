@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             (unknown)
-// source: qdrant/cloud/ui/v1beta1/featureflags.proto
+// source: qdrant/cloud/ui/v1/featureflags.proto
 
-package uiv1beta1
+package uiv1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FeatureFlagsService_GetFeatureFlags_FullMethodName = "/qdrant.cloud.ui.v1beta1.FeatureFlagsService/GetFeatureFlags"
+	FeatureFlagsService_GetFeatureFlags_FullMethodName = "/qdrant.cloud.ui.v1.FeatureFlagsService/GetFeatureFlags"
 )
 
 // FeatureFlagsServiceClient is the client API for FeatureFlagsService service.
@@ -118,7 +118,7 @@ func _FeatureFlagsService_GetFeatureFlags_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FeatureFlagsService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.ui.v1beta1.FeatureFlagsService",
+	ServiceName: "qdrant.cloud.ui.v1.FeatureFlagsService",
 	HandlerType: (*FeatureFlagsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -127,5 +127,5 @@ var FeatureFlagsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/ui/v1beta1/featureflags.proto",
+	Metadata: "qdrant/cloud/ui/v1/featureflags.proto",
 }

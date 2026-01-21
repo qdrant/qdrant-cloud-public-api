@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package qdrant.cloud.ui.v1beta1;
+package qdrant.cloud.ui.v1;
 
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
@@ -14,7 +14,7 @@ service FeatureFlagsService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/ui/v1beta1/feature-flags"};
+    option (google.api.http) = {get: "/api/ui/v1/feature-flags"};
   }
 }
 

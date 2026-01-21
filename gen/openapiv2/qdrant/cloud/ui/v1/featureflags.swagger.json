@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/ui/v1beta1/featureflags.proto",
+    "title": "qdrant/cloud/ui/v1/featureflags.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/ui/v1beta1/feature-flags": {
+    "/api/ui/v1/feature-flags": {
       "get": {
         "summary": "Gets the feature flags for the UI.\nRequired permissions:\n- authenticated only",
         "operationId": "FeatureFlagsService_GetFeatureFlags",
@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1beta1GetFeatureFlagsResponse"
+              "$ref": "#/definitions/v1GetFeatureFlagsResponse"
             }
           },
           "default": {
@@ -69,7 +69,7 @@
         }
       }
     },
-    "v1beta1GetFeatureFlagsResponse": {
+    "v1GetFeatureFlagsResponse": {
       "type": "object",
       "properties": {
         "clusterCreationEnabled": {

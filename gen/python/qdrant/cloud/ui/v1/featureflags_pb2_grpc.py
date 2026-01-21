@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from qdrant.cloud.ui.v1beta1 import featureflags_pb2 as qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2
+from qdrant.cloud.ui.v1 import featureflags_pb2 as qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2
 
 
 class FeatureFlagsServiceStub(object):
@@ -16,9 +16,9 @@ class FeatureFlagsServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetFeatureFlags = channel.unary_unary(
-                '/qdrant.cloud.ui.v1beta1.FeatureFlagsService/GetFeatureFlags',
-                request_serializer=qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsResponse.FromString,
+                '/qdrant.cloud.ui.v1.FeatureFlagsService/GetFeatureFlags',
+                request_serializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsResponse.FromString,
                 _registered_method=True)
 
 
@@ -40,14 +40,14 @@ def add_FeatureFlagsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetFeatureFlags': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFeatureFlags,
-                    request_deserializer=qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'qdrant.cloud.ui.v1beta1.FeatureFlagsService', rpc_method_handlers)
+            'qdrant.cloud.ui.v1.FeatureFlagsService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('qdrant.cloud.ui.v1beta1.FeatureFlagsService', rpc_method_handlers)
+    server.add_registered_method_handlers('qdrant.cloud.ui.v1.FeatureFlagsService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -69,9 +69,9 @@ class FeatureFlagsService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.ui.v1beta1.FeatureFlagsService/GetFeatureFlags',
-            qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_ui_dot_v1beta1_dot_featureflags__pb2.GetFeatureFlagsResponse.FromString,
+            '/qdrant.cloud.ui.v1.FeatureFlagsService/GetFeatureFlags',
+            qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_ui_dot_v1_dot_featureflags__pb2.GetFeatureFlagsResponse.FromString,
             options,
             channel_credentials,
             insecure,
