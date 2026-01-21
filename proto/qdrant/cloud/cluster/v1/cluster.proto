@@ -864,7 +864,7 @@ message Toleration {
   // The value is the taint value the toleration matches to.
   // If the operator is `Exists`, the value should not be set.
   // If the operator is `Equal` (the default), the value is required.
-  optional string value = 3;
+  optional string value = 3 [(buf.validate.field).string.pattern = "(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?"];
   option (buf.validate.message).cel = {
     id: "toleration.value_for_exists"
     message: "value must not be set when operator is Exists"
