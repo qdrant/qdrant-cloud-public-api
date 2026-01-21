@@ -336,11 +336,11 @@ class UserProfile(_message.Message):
     __slots__ = ()
     GIVEN_NAME_FIELD_NUMBER: _ClassVar[int]
     FAMILY_NAME_FIELD_NUMBER: _ClassVar[int]
-    METADATA_FIELD_NUMBER: _ClassVar[int]
+    DEMOGRAPHICS_FIELD_NUMBER: _ClassVar[int]
     given_name: str
     family_name: str
-    metadata: UserDemographics
-    def __init__(self, given_name: _Optional[str] = ..., family_name: _Optional[str] = ..., metadata: _Optional[_Union[UserDemographics, _Mapping]] = ...) -> None: ...
+    demographics: UserDemographics
+    def __init__(self, given_name: _Optional[str] = ..., family_name: _Optional[str] = ..., demographics: _Optional[_Union[UserDemographics, _Mapping]] = ...) -> None: ...
 
 class UserDemographics(_message.Message):
     __slots__ = ()

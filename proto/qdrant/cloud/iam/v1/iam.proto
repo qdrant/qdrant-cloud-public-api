@@ -766,7 +766,7 @@ message UserProfile {
   // The family name of the user.
   optional string family_name = 4 [(buf.validate.field).string.min_len = 1];
   // Additional demographic information about the user.
-  optional UserDemographics metadata = 5;
+  optional UserDemographics demographics = 5;
 }
 
 // User Demographics represents demographic information about a user.
