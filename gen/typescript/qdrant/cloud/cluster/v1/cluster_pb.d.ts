@@ -1665,6 +1665,7 @@ export declare type Toleration = Message<"qdrant.cloud.cluster.v1.Toleration"> &
    * The value is the taint value the toleration matches to.
    * If the operator is `Exists`, the value should not be set.
    * If the operator is `Equal` (the default), the value is required.
+   * 'value' must be a valid identifier (alphanumeric start/end, allows -_. in between)
    *
    * @generated from field: optional string value = 3;
    */

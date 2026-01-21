@@ -1447,7 +1447,7 @@
         },
         "value": {
           "type": "string",
-          "description": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should not be set.\nIf the operator is `Equal` (the default), the value is required."
+          "title": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should not be set.\nIf the operator is `Equal` (the default), the value is required.\n'value' must be a valid identifier (alphanumeric start/end, allows -_. in between)"
         },
         "effect": {
           "$ref": "#/definitions/v1TolerationEffect",
