@@ -2799,6 +2799,7 @@ type Toleration struct {
 	// The value is the taint value the toleration matches to.
 	// If the operator is `Exists`, the value should not be set.
 	// If the operator is `Equal` (the default), the value is required.
+	// 'value' must be a valid identifier (alphanumeric start/end, allows -_. in between)
 	Value *string `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
 	// The effect indicates the taint effect to match.
 	// If not set, matches all taint effects.
