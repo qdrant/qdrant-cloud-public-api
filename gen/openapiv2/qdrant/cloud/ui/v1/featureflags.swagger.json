@@ -1,0 +1,99 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/ui/v1/featureflags.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FeatureFlagsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/ui/v1/feature-flags": {
+      "get": {
+        "summary": "Gets the feature flags for the UI.\nRequired permissions:\n- authenticated only",
+        "operationId": "FeatureFlagsService_GetFeatureFlags",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetFeatureFlagsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "FeatureFlagsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1GetFeatureFlagsResponse": {
+      "type": "object",
+      "properties": {
+        "clusterCreationEnabled": {
+          "type": "boolean",
+          "description": "Whether cluster creation is enabled."
+        },
+        "clusterCreationPageEnabled": {
+          "type": "boolean",
+          "description": "Whether the cluster creation page is enabled."
+        },
+        "billingCyclesEnabled": {
+          "type": "boolean",
+          "description": "Whether billing cycles are enabled."
+        },
+        "entitlementCancelFlowEnabled": {
+          "type": "boolean",
+          "description": "Whether the entitlement cancellation flow is enabled."
+        },
+        "qdrantClustersQueryingEnabled": {
+          "type": "boolean",
+          "description": "Whether querying Qdrant clusters is enabled."
+        }
+      },
+      "description": "GetFeatureFlagsResponse is the response from the GetFeatureFlags function."
+    }
+  }
+}
