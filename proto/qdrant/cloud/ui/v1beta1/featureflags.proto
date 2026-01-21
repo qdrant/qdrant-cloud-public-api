@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package qdrant.cloud.ui.v1beta1;
+
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// FeatureFlagsService provides feature flags for UI components, this is considered a beta feature.
+service FeatureFlagsService {
+  // Gets the feature flags for the UI.
+  // Required permissions:
+  // - authenticated only
+  rpc GetFeatureFlags(GetFeatureFlagsRequest) returns (GetFeatureFlagsResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/ui/v1beta1/feature-flags"};
+  }
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetFeatureFlagsRequest is the request for the GetFeatureFlags function.
+message GetFeatureFlagsRequest {
+  // Empty
+}
+
+// GetFeatureFlagsResponse is the response from the GetFeatureFlags function.
+message GetFeatureFlagsResponse {
+  // Whether cluster creation is enabled.
+  bool cluster_creation_enabled = 1;
+  // Whether the cluster creation page is enabled.
+  bool cluster_creation_page_enabled = 2;
+  // Whether billing cycles are enabled.
+  bool billing_cycles_enabled = 3;
+  // Whether the entitlement cancellation flow is enabled.
+  bool entitlement_cancel_flow_enabled = 4;
+  // Whether querying Qdrant clusters is enabled.
+  bool qdrant_clusters_querying_enabled = 5;
+}
