@@ -2284,7 +2284,7 @@ type UserProfile struct {
 	// The family name of the user.
 	FamilyName *string `protobuf:"bytes,4,opt,name=family_name,json=familyName,proto3,oneof" json:"family_name,omitempty"`
 	// Additional demographic information about the user.
-	Metadata      *UserDemographics `protobuf:"bytes,5,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
+	Demographics  *UserDemographics `protobuf:"bytes,5,opt,name=demographics,proto3,oneof" json:"demographics,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2333,9 +2333,9 @@ func (x *UserProfile) GetFamilyName() string {
 	return ""
 }
 
-func (x *UserProfile) GetMetadata() *UserDemographics {
+func (x *UserProfile) GetDemographics() *UserDemographics {
 	if x != nil {
-		return x.Metadata
+		return x.Demographics
 	}
 	return nil
 }
@@ -2608,16 +2608,16 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x15role.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\v\n" +
 	"\t_sub_type\"\x13\n" +
 	"\x11LogoutUserRequest\"\x14\n" +
-	"\x12LogoutUserResponse\"\xdd\x01\n" +
+	"\x12LogoutUserResponse\"\xe9\x01\n" +
 	"\vUserProfile\x12+\n" +
 	"\n" +
 	"given_name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tgivenName\x88\x01\x01\x12-\n" +
 	"\vfamily_name\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\n" +
-	"familyName\x88\x01\x01\x12F\n" +
-	"\bmetadata\x18\x05 \x01(\v2%.qdrant.cloud.iam.v1.UserDemographicsH\x02R\bmetadata\x88\x01\x01B\r\n" +
+	"familyName\x88\x01\x01\x12N\n" +
+	"\fdemographics\x18\x05 \x01(\v2%.qdrant.cloud.iam.v1.UserDemographicsH\x02R\fdemographics\x88\x01\x01B\r\n" +
 	"\v_given_nameB\x0e\n" +
-	"\f_family_nameB\v\n" +
-	"\t_metadata\"\x9f\x01\n" +
+	"\f_family_nameB\x0f\n" +
+	"\r_demographics\"\x9f\x01\n" +
 	"\x10UserDemographics\x12+\n" +
 	"\x0frole_in_company\x18\x01 \x01(\tH\x00R\rroleInCompany\x88\x01\x01\x12\x1d\n" +
 	"\n" +
@@ -2795,7 +2795,7 @@ var file_qdrant_cloud_iam_v1_iam_proto_depIdxs = []int32{
 	1,  // 26: qdrant.cloud.iam.v1.Role.role_type:type_name -> qdrant.cloud.iam.v1.RoleType
 	40, // 27: qdrant.cloud.iam.v1.Role.permissions:type_name -> qdrant.cloud.iam.v1.Permission
 	2,  // 28: qdrant.cloud.iam.v1.Role.sub_type:type_name -> qdrant.cloud.iam.v1.SystemRoleSubType
-	45, // 29: qdrant.cloud.iam.v1.UserProfile.metadata:type_name -> qdrant.cloud.iam.v1.UserDemographics
+	45, // 29: qdrant.cloud.iam.v1.UserProfile.demographics:type_name -> qdrant.cloud.iam.v1.UserDemographics
 	3,  // 30: qdrant.cloud.iam.v1.UserConsent.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
 	4,  // 31: qdrant.cloud.iam.v1.UserConsent.status:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
 	47, // 32: qdrant.cloud.iam.v1.UserConsent.last_modified_at:type_name -> google.protobuf.Timestamp

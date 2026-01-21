@@ -1198,9 +1198,9 @@ export declare type UserProfile = Message<"qdrant.cloud.iam.v1.UserProfile"> & {
   /**
    * Additional demographic information about the user.
    *
-   * @generated from field: optional qdrant.cloud.iam.v1.UserDemographics metadata = 5;
+   * @generated from field: optional qdrant.cloud.iam.v1.UserDemographics demographics = 5;
    */
-  metadata?: UserDemographics;
+  demographics?: UserDemographics;
 };
 
 export declare type UserProfileValid = UserProfile;
