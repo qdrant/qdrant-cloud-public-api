@@ -1948,7 +1948,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
-	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12\xba\x01\n" +
+	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12\xba\x01\n" +
 	"\x10created_by_email\x18\x06 \x01(\tB\x8f\x01\xbaH\x8b\x01\xba\x01\x87\x01\n" +
 	")hybrid_cloud_environment.created_by_email\x126if set, created_by_email must be a valid email address\x1a\"this.size() == 0 || this.isEmail()R\x0ecreatedByEmail\x12@\n" +
 	"\x1cbootstrap_commands_generated\x18\x13 \x01(\bR\x1abootstrapCommandsGenerated\x12f\n" +

@@ -293,7 +293,7 @@ message HybridCloudEnvironment {
   // Name can only contain letters, numbers, underscores and dashes
   string name = 5 [(buf.validate.field).string = {
     max_len: 64
-    min_len: 4
+    min_len: 1
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // The email of the user who created the hybrid cloud environment.
