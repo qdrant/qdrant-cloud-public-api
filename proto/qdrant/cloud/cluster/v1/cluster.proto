@@ -515,7 +515,7 @@ message Cluster {
   // Name can only contain letters, numbers, underscores and dashes
   string name = 4 [(buf.validate.field).string = {
     max_len: 64
-    min_len: 4
+    min_len: 2
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
   // Timestamp when the cluster was deleted (or is started to be deleting).
