@@ -323,7 +323,7 @@ message HybridCloudEnvironmentConfiguration {
   string namespace = 4 [(buf.validate.field).string = {
     max_len: 253
     min_len: 1
-    pattern: "^[a-zA-Z0-9-]+$"
+    pattern: "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
   }];
   // optional HTTP proxy URL
   optional string http_proxy_url = 5 [(buf.validate.field).string.uri = true];

@@ -1959,10 +1959,10 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
 	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\xe6\r\n" +
+	"\a_status\"\xf6\r\n" +
 	"#HybridCloudEnvironmentConfiguration\x12D\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x129\n" +
-	"\tnamespace\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18\xfd\x012\x0f^[a-zA-Z0-9-]+$R\tnamespace\x123\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12I\n" +
+	"\tnamespace\x18\x04 \x01(\tB+\xbaH(r&\x10\x01\x18\xfd\x012\x1f^[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\tnamespace\x123\n" +
 	"\x0ehttp_proxy_url\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\fhttpProxyUrl\x88\x01\x01\x125\n" +
 	"\x0fhttps_proxy_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\rhttpsProxyUrl\x88\x01\x01\x12(\n" +
 	"\x10no_proxy_configs\x18\a \x03(\tR\x0enoProxyConfigs\x12u\n" +
