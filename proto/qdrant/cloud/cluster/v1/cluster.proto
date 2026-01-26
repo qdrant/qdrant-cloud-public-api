@@ -602,10 +602,7 @@ message ClusterConfiguration {
   // The number of nodes in a cluster.
   // This should be a number 1...20 [both included].
   // This is a required field.
-  uint32 number_of_nodes = 2 [(buf.validate.field).uint32 = {
-    gte: 1
-    lte: 20
-  }];
+  uint32 number_of_nodes = 2 [(buf.validate.field).uint32 = {gte: 1}];
   // Version of the cluster software.
   // If omitted the latest version will be used and filled out during create.
   // Use ListReleases() to determine which versions are allowed to be used.
