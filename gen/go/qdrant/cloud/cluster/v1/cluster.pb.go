@@ -2059,7 +2059,7 @@ type ClusterConfiguration struct {
 	// This is an optional field, default is Automatic
 	RestartPolicy *ClusterConfigurationRestartPolicy `protobuf:"varint,23,opt,name=restart_policy,json=restartPolicy,proto3,enum=qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy,oneof" json:"restart_policy,omitempty"`
 	// The automatic shard rebalancing strategy for the database
-	// This is an optional field, default is none
+	// This is an optional field, default is By Count and Size
 	RebalanceStrategy *ClusterConfigurationRebalanceStrategy `protobuf:"varint,24,opt,name=rebalance_strategy,json=rebalanceStrategy,proto3,enum=qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy,oneof" json:"rebalance_strategy,omitempty"`
 	// List of topologySpreadConstraints for this cluster in a hybrid cloud environment.
 	// It is ignored for managed cloud clusters. This is an optional field

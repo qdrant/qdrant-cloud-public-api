@@ -841,7 +841,7 @@
         },
         "rebalanceStrategy": {
           "$ref": "#/definitions/v1ClusterConfigurationRebalanceStrategy",
-          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is none"
+          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is By Count and Size"
         },
         "topologySpreadConstraints": {
           "type": "array",
