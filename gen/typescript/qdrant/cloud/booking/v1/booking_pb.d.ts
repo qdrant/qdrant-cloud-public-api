@@ -434,7 +434,7 @@ export declare type GetQuoteRequest = Message<"qdrant.cloud.booking.v1.GetQuoteR
 
   /**
    * The number of nodes in a cluster.
-   * This should be a number 1...100 [both included].
+   * This should be a number >= 1.
    * This is a required field.
    *
    * @generated from field: uint32 number_of_nodes = 4;

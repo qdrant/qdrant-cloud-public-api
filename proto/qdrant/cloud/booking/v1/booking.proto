@@ -297,12 +297,9 @@ message GetQuoteRequest {
     expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
   };
   // The number of nodes in a cluster.
-  // This should be a number 1...100 [both included].
+  // This should be a number >= 1.
   // This is a required field.
-  uint32 number_of_nodes = 4 [(buf.validate.field).uint32 = {
-    gte: 1
-    lte: 100
-  }];
+  uint32 number_of_nodes = 4 [(buf.validate.field).uint32 = {gte: 1}];
   // The package identifier used to configure the resources of the cluster.
   // Use `qdrant.cloud.booking.v1.BookingService.ListPackages` to select one.
   // This is a required field.

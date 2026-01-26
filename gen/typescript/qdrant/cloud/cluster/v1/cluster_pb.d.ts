@@ -916,7 +916,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
 
   /**
    * The number of nodes in a cluster.
-   * This should be a number 1...20 [both included].
+   * This should be a number >= 1.
    * This is a required field.
    *
    * @generated from field: uint32 number_of_nodes = 2;
@@ -1088,7 +1088,7 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
 
   /**
    * The number of nodes in a cluster.
-   * This should be a number 1...20 [both included].
+   * This should be a number >= 1.
    * This is a required field.
    *
    * @generated from field: uint32 number_of_nodes = 2;

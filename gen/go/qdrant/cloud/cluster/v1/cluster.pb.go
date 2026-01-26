@@ -2005,7 +2005,7 @@ type ClusterConfiguration struct {
 	// This is a read-only field and will be available after a cluster is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// The number of nodes in a cluster.
-	// This should be a number 1...20 [both included].
+	// This should be a number >= 1.
 	// This is a required field.
 	NumberOfNodes uint32 `protobuf:"varint,2,opt,name=number_of_nodes,json=numberOfNodes,proto3" json:"number_of_nodes,omitempty"`
 	// Version of the cluster software.
@@ -3718,10 +3718,10 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xe0\x0f\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xde\x0f\n" +
 	"\x14ClusterConfiguration\x12D\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x121\n" +
-	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\t\xbaH\x06*\x04\x18\x14(\x01R\rnumberOfNodes\x12E\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
+	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x01R\rnumberOfNodes\x12E\n" +
 	"\aversion\x18\x03 \x01(\tB&\xbaH#r!2\x1f^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$H\x00R\aversion\x88\x01\x01\x12'\n" +
 	"\n" +
 	"package_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tpackageId\x12d\n" +
