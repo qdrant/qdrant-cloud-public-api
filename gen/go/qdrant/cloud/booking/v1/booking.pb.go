@@ -906,7 +906,7 @@ type GetQuoteRequest struct {
 	// This field can be omitted if `cloud_provider_id` is set to `hybrid`.
 	CloudProviderRegionId *string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
 	// The number of nodes in a cluster.
-	// This should be a number 1...100 [both included].
+	// This should be a number >= 1.
 	// This is a required field.
 	NumberOfNodes uint32 `protobuf:"varint,4,opt,name=number_of_nodes,json=numberOfNodes,proto3" json:"number_of_nodes,omitempty"`
 	// The package identifier used to configure the resources of the cluster.

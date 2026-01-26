@@ -844,7 +844,7 @@
         "numberOfNodes": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of nodes in a cluster.\nThis should be a number 1...20 [both included].\nThis is a required field."
+          "description": "The number of nodes in a cluster.\nThis should be a number \u003e= 1.\nThis is a required field."
         },
         "version": {
           "type": "string",

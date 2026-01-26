@@ -2005,7 +2005,7 @@ type ClusterConfiguration struct {
 	// This is a read-only field and will be available after a cluster is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// The number of nodes in a cluster.
-	// This should be a number 1...20 [both included].
+	// This should be a number >= 1.
 	// This is a required field.
 	NumberOfNodes uint32 `protobuf:"varint,2,opt,name=number_of_nodes,json=numberOfNodes,proto3" json:"number_of_nodes,omitempty"`
 	// Version of the cluster software.
