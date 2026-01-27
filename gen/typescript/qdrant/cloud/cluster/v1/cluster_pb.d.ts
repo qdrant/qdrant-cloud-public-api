@@ -1050,7 +1050,7 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
 
   /**
    * The automatic shard rebalancing strategy for the database
-   * This is an optional field, default is none
+   * This is an optional field, default is By Count and Size
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy rebalance_strategy = 24;
    */
@@ -1222,7 +1222,7 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
 
   /**
    * The automatic shard rebalancing strategy for the database
-   * This is an optional field, default is none
+   * This is an optional field, default is By Count and Size
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy rebalance_strategy = 24;
    */

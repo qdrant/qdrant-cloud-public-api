@@ -674,7 +674,7 @@ message ClusterConfiguration {
     not_in: [0]
   }];
   // The automatic shard rebalancing strategy for the database
-  // This is an optional field, default is none
+  // This is an optional field, default is By Count and Size
   optional ClusterConfigurationRebalanceStrategy rebalance_strategy = 24 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
