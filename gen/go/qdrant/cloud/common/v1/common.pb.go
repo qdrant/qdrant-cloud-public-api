@@ -140,6 +140,60 @@ func (StorageTierType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
+// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
+// See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
+type TopologySpreadConstraintWhenUnsatisfiable int32
+
+const (
+	// Unspecified.
+	TopologySpreadConstraintWhenUnsatisfiable_TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED TopologySpreadConstraintWhenUnsatisfiable = 0
+	// DoNotSchedule (default) tells the scheduler not to schedule it.
+	TopologySpreadConstraintWhenUnsatisfiable_TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE TopologySpreadConstraintWhenUnsatisfiable = 1
+	// ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.
+	TopologySpreadConstraintWhenUnsatisfiable_TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY TopologySpreadConstraintWhenUnsatisfiable = 2
+)
+
+// Enum value maps for TopologySpreadConstraintWhenUnsatisfiable.
+var (
+	TopologySpreadConstraintWhenUnsatisfiable_name = map[int32]string{
+		0: "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED",
+		1: "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE",
+		2: "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY",
+	}
+	TopologySpreadConstraintWhenUnsatisfiable_value = map[string]int32{
+		"TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED":     0,
+		"TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE": 1,
+		"TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY": 2,
+	}
+)
+
+func (x TopologySpreadConstraintWhenUnsatisfiable) Enum() *TopologySpreadConstraintWhenUnsatisfiable {
+	p := new(TopologySpreadConstraintWhenUnsatisfiable)
+	*p = x
+	return p
+}
+
+func (x TopologySpreadConstraintWhenUnsatisfiable) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TopologySpreadConstraintWhenUnsatisfiable) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_common_v1_common_proto_enumTypes[2].Descriptor()
+}
+
+func (TopologySpreadConstraintWhenUnsatisfiable) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[2]
+}
+
+func (x TopologySpreadConstraintWhenUnsatisfiable) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TopologySpreadConstraintWhenUnsatisfiable.Descriptor instead.
+func (TopologySpreadConstraintWhenUnsatisfiable) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
+}
+
 // LogField represents a field to log (in case of an error).
 type LogField struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -422,7 +476,7 @@ type TopologySpreadConstraint struct {
 	// to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
 	// max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
 	// won't make it *more* imbalanced.
-	WhenUnsatisfiable *string `protobuf:"bytes,3,opt,name=when_unsatisfiable,json=whenUnsatisfiable,proto3,oneof" json:"when_unsatisfiable,omitempty"`
+	WhenUnsatisfiable *TopologySpreadConstraintWhenUnsatisfiable `protobuf:"varint,3,opt,name=when_unsatisfiable,json=whenUnsatisfiable,proto3,enum=qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable,oneof" json:"when_unsatisfiable,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -471,11 +525,11 @@ func (x *TopologySpreadConstraint) GetTopologyKey() string {
 	return ""
 }
 
-func (x *TopologySpreadConstraint) GetWhenUnsatisfiable() string {
+func (x *TopologySpreadConstraint) GetWhenUnsatisfiable() TopologySpreadConstraintWhenUnsatisfiable {
 	if x != nil && x.WhenUnsatisfiable != nil {
 		return *x.WhenUnsatisfiable
 	}
-	return ""
+	return TopologySpreadConstraintWhenUnsatisfiable_TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED
 }
 
 // A label selector requirement is a selector that contains values, a key, and an operator that
@@ -1170,11 +1224,12 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xcd\x01\n" +
 	"\bKeyValue\x12\xa0\x01\n" +
 	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$R\x03key\x12\x1e\n" +
-	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\xed\x01\n" +
+	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\x97\x02\n" +
 	"\x18TopologySpreadConstraint\x12'\n" +
 	"\bmax_skew\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x00R\amaxSkew\x88\x01\x01\x12*\n" +
-	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12X\n" +
-	"\x12when_unsatisfiable\x18\x03 \x01(\tB$\xbaH!r\x1fR\rDoNotScheduleR\x0eScheduleAnywayH\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
+	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12\x81\x01\n" +
+	"\x12when_unsatisfiable\x18\x03 \x01(\x0e2A.qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiableB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
 	"\t_max_skewB\x15\n" +
 	"\x13_when_unsatisfiable\"\xa9\x04\n" +
 	"\x18LabelSelectorRequirement\x12\x19\n" +
@@ -1227,7 +1282,11 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x1dSTORAGE_TIER_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" STORAGE_TIER_TYPE_COST_OPTIMISED\x10\x01\x12\x1e\n" +
 	"\x1aSTORAGE_TIER_TYPE_BALANCED\x10\x02\x12!\n" +
-	"\x1dSTORAGE_TIER_TYPE_PERFORMANCE\x10\x03:P\n" +
+	"\x1dSTORAGE_TIER_TYPE_PERFORMANCE\x10\x03*\xf0\x01\n" +
+	")TopologySpreadConstraintWhenUnsatisfiable\x12=\n" +
+	"9TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED\x10\x00\x12A\n" +
+	"=TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE\x10\x01\x12A\n" +
+	"=TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY\x10\x02:P\n" +
 	"\vpermissions\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\vpermissions:u\n" +
 	"\x15account_id_expression\x12\x1e.google.protobuf.MethodOptions\x18҆\x03 \x01(\tB\x1f\xbaH\x1cr\x1a2\x18^(|[a-z_]+(\\.[a-z_]+)*)$R\x13accountIdExpression:Y\n" +
 	"\x17requires_authentication\x12\x1e.google.protobuf.MethodOptions\x18ӆ\x03 \x01(\bR\x16requiresAuthentication:\x8a\x01\n" +
@@ -1251,51 +1310,53 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescData
 }
 
-var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
-	(ActorType)(0),                     // 0: qdrant.cloud.common.v1.ActorType
-	(StorageTierType)(0),               // 1: qdrant.cloud.common.v1.StorageTierType
-	(*LogField)(nil),                   // 2: qdrant.cloud.common.v1.LogField
-	(*Version)(nil),                    // 3: qdrant.cloud.common.v1.Version
-	(*SecretKeyRef)(nil),               // 4: qdrant.cloud.common.v1.SecretKeyRef
-	(*KeyValue)(nil),                   // 5: qdrant.cloud.common.v1.KeyValue
-	(*TopologySpreadConstraint)(nil),   // 6: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*LabelSelectorRequirement)(nil),   // 7: qdrant.cloud.common.v1.LabelSelectorRequirement
-	(*LabelSelector)(nil),              // 8: qdrant.cloud.common.v1.LabelSelector
-	(*IPBlock)(nil),                    // 9: qdrant.cloud.common.v1.IPBlock
-	(*PeerSelector)(nil),               // 10: qdrant.cloud.common.v1.PeerSelector
-	(*NetworkPolicyPeer)(nil),          // 11: qdrant.cloud.common.v1.NetworkPolicyPeer
-	(*NetworkPolicyPort)(nil),          // 12: qdrant.cloud.common.v1.NetworkPolicyPort
-	(*NetworkPolicyIngressRule)(nil),   // 13: qdrant.cloud.common.v1.NetworkPolicyIngressRule
-	(*NetworkPolicyEgressRule)(nil),    // 14: qdrant.cloud.common.v1.NetworkPolicyEgressRule
-	(*descriptorpb.MethodOptions)(nil), // 15: google.protobuf.MethodOptions
+	(ActorType)(0),       // 0: qdrant.cloud.common.v1.ActorType
+	(StorageTierType)(0), // 1: qdrant.cloud.common.v1.StorageTierType
+	(TopologySpreadConstraintWhenUnsatisfiable)(0), // 2: qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+	(*LogField)(nil),                   // 3: qdrant.cloud.common.v1.LogField
+	(*Version)(nil),                    // 4: qdrant.cloud.common.v1.Version
+	(*SecretKeyRef)(nil),               // 5: qdrant.cloud.common.v1.SecretKeyRef
+	(*KeyValue)(nil),                   // 6: qdrant.cloud.common.v1.KeyValue
+	(*TopologySpreadConstraint)(nil),   // 7: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*LabelSelectorRequirement)(nil),   // 8: qdrant.cloud.common.v1.LabelSelectorRequirement
+	(*LabelSelector)(nil),              // 9: qdrant.cloud.common.v1.LabelSelector
+	(*IPBlock)(nil),                    // 10: qdrant.cloud.common.v1.IPBlock
+	(*PeerSelector)(nil),               // 11: qdrant.cloud.common.v1.PeerSelector
+	(*NetworkPolicyPeer)(nil),          // 12: qdrant.cloud.common.v1.NetworkPolicyPeer
+	(*NetworkPolicyPort)(nil),          // 13: qdrant.cloud.common.v1.NetworkPolicyPort
+	(*NetworkPolicyIngressRule)(nil),   // 14: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*NetworkPolicyEgressRule)(nil),    // 15: qdrant.cloud.common.v1.NetworkPolicyEgressRule
+	(*descriptorpb.MethodOptions)(nil), // 16: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	5,  // 0: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	7,  // 1: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
-	8,  // 2: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	8,  // 3: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	10, // 4: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
-	9,  // 5: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
-	12, // 6: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	11, // 7: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	12, // 8: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	11, // 9: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	15, // 10: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	15, // 11: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	15, // 12: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	15, // 13: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	15, // 14: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	15, // 15: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	15, // 16: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
-	0,  // 17: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	2,  // 18: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	17, // [17:19] is the sub-list for extension type_name
-	10, // [10:17] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	2,  // 0: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+	6,  // 1: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	8,  // 2: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
+	9,  // 3: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	9,  // 4: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	11, // 5: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
+	10, // 6: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
+	13, // 7: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	12, // 8: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	13, // 9: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	12, // 10: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	16, // 11: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	16, // 12: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	16, // 13: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	16, // 14: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	16, // 15: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	16, // 16: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	16, // 17: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	0,  // 18: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	3,  // 19: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	18, // [18:20] is the sub-list for extension type_name
+	11, // [11:18] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_common_v1_common_proto_init() }
@@ -1318,7 +1379,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   13,
 			NumExtensions: 7,
 			NumServices:   0,

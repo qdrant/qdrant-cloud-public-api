@@ -182,11 +182,9 @@ message TopologySpreadConstraint {
   // to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies
   // max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
   // won't make it *more* imbalanced.
-  optional string when_unsatisfiable = 3 [(buf.validate.field).string = {
-    in: [
-      "DoNotSchedule",
-      "ScheduleAnyway"
-    ]
+  optional TopologySpreadConstraintWhenUnsatisfiable when_unsatisfiable = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
   }];
 }
 
@@ -355,4 +353,15 @@ enum StorageTierType {
   STORAGE_TIER_TYPE_BALANCED = 2;
   // Most performant pre-configured type
   STORAGE_TIER_TYPE_PERFORMANCE = 3;
+}
+
+// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
+// See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
+enum TopologySpreadConstraintWhenUnsatisfiable {
+  // Unspecified.
+  TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED = 0;
+  // DoNotSchedule (default) tells the scheduler not to schedule it.
+  TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE = 1;
+  // ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.
+  TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY = 2;
 }

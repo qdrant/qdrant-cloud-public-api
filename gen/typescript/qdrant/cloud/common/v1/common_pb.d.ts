@@ -201,9 +201,9 @@ export declare type TopologySpreadConstraint = Message<"qdrant.cloud.common.v1.T
    * max_skew(1). In other words, the cluster can still be imbalanced, but scheduler
    * won't make it *more* imbalanced.
    *
-   * @generated from field: optional string when_unsatisfiable = 3;
+   * @generated from field: optional qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable when_unsatisfiable = 3;
    */
-  whenUnsatisfiable?: string;
+  whenUnsatisfiable?: TopologySpreadConstraintWhenUnsatisfiable;
 };
 
 export declare type TopologySpreadConstraintValid = TopologySpreadConstraint;
@@ -613,6 +613,40 @@ export enum StorageTierType {
  * Describes the enum qdrant.cloud.common.v1.StorageTierType.
  */
 export declare const StorageTierTypeSchema: GenEnum<StorageTierType>;
+
+/**
+ * TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
+ * See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
+ *
+ * @generated from enum qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+ */
+export enum TopologySpreadConstraintWhenUnsatisfiable {
+  /**
+   * Unspecified.
+   *
+   * @generated from enum value: TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * DoNotSchedule (default) tells the scheduler not to schedule it.
+   *
+   * @generated from enum value: TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE = 1;
+   */
+  DO_NOT_SCHEDULE = 1,
+
+  /**
+   * ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.
+   *
+   * @generated from enum value: TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY = 2;
+   */
+  SCHEDULE_ANYWAY = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable.
+ */
+export declare const TopologySpreadConstraintWhenUnsatisfiableSchema: GenEnum<TopologySpreadConstraintWhenUnsatisfiable>;
 
 /**
  * A list of permissions which need to be met by the current user.
