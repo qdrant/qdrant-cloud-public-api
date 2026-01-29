@@ -352,7 +352,7 @@ export declare type AvailableStoragePerformanceTierConfigurations = Message<"qdr
   storageTierType: StorageTierType;
 
   /**
-   * Represents additional cost  per hour in millicents for given region/provider and pricing tier.
+   * Represents additional cost per hour in millicents for given region/provider and pricing tier.
    *
    * @generated from field: uint32 price_per_hour = 2;
    */

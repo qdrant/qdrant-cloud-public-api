@@ -780,7 +780,7 @@ type AvailableStoragePerformanceTierConfigurations struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Represents performance tier type.
 	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"`
-	// Represents additional cost  per hour in millicents for given region/provider and pricing tier.
+	// Represents additional cost per hour in millicents for given region/provider and pricing tier.
 	PricePerHour  uint32 `protobuf:"varint,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

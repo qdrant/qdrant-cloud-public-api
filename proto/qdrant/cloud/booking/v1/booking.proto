@@ -267,7 +267,7 @@ message AvailableAdditionalResources {
 message AvailableStoragePerformanceTierConfigurations {
   // Represents performance tier type.
   qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
-  // Represents additional cost  per hour in millicents for given region/provider and pricing tier.
+  // Represents additional cost per hour in millicents for given region/provider and pricing tier.
   uint32 price_per_hour = 2;
 }
 

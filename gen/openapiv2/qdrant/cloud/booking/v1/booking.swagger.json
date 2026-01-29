@@ -468,7 +468,7 @@
         "pricePerHour": {
           "type": "integer",
           "format": "int64",
-          "description": "Represents additional cost  per hour in millicents for given region/provider and pricing tier."
+          "description": "Represents additional cost per hour in millicents for given region/provider and pricing tier."
         }
       },
       "description": "AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package\nregion and provider."
