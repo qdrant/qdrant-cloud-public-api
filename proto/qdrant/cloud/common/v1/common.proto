@@ -355,7 +355,7 @@ enum StorageTierType {
   STORAGE_TIER_TYPE_PERFORMANCE = 3;
 }
 
-// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologoySpreadConstraints.
+// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
 // See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
 enum TopologySpreadConstraintWhenUnsatisfiable {
   // Unspecified.
