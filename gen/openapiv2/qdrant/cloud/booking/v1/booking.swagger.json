@@ -463,12 +463,12 @@
       "properties": {
         "storageTierType": {
           "$ref": "#/definitions/v1StorageTierType",
-          "description": "represents performance tier type."
+          "description": "Represents performance tier type."
         },
         "pricePerHour": {
           "type": "integer",
           "format": "int64",
-          "description": "represents price per hour in millicents for given region/provider and pricing tier."
+          "description": "Represents additional cost  per hour in millicents for given region/provider and pricing tier."
         }
       },
       "description": "AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package\nregion and provider."
@@ -702,7 +702,7 @@
             "type": "object",
             "$ref": "#/definitions/v1AvailableStoragePerformanceTierConfigurations"
           },
-          "description": "available storage tier configurations and prices."
+          "title": "Available storage tier configurations and prices.\nAlways includes at least COST_OPTIMISED storage tier configuration"
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."

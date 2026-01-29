@@ -619,7 +619,8 @@ type Package struct {
 	// if not set, additional resources are not available for this package.
 	// Currently, only `DISK` is supported.
 	AvailableAdditionalResources *AvailableAdditionalResources `protobuf:"bytes,8,opt,name=available_additional_resources,json=availableAdditionalResources,proto3,oneof" json:"available_additional_resources,omitempty"`
-	// available storage tier configurations and prices.
+	// Available storage tier configurations and prices.
+	// Always includes at least COST_OPTIMISED storage tier configuration
 	AvailableStorageTierConfigurations []*AvailableStoragePerformanceTierConfigurations `protobuf:"bytes,10,rep,name=available_storage_tier_configurations,json=availableStorageTierConfigurations,proto3" json:"available_storage_tier_configurations,omitempty"`
 	unknownFields                      protoimpl.UnknownFields
 	sizeCache                          protoimpl.SizeCache
@@ -777,9 +778,9 @@ func (x *AvailableAdditionalResources) GetDiskPricePerHour() uint32 {
 // region and provider.
 type AvailableStoragePerformanceTierConfigurations struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// represents performance tier type.
+	// Represents performance tier type.
 	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"`
-	// represents price per hour in millicents for given region/provider and pricing tier.
+	// Represents additional cost  per hour in millicents for given region/provider and pricing tier.
 	PricePerHour  uint32 `protobuf:"varint,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

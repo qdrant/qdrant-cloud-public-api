@@ -297,7 +297,8 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   availableAdditionalResources?: AvailableAdditionalResources;
 
   /**
-   * available storage tier configurations and prices.
+   * Available storage tier configurations and prices.
+   * Always includes at least COST_OPTIMISED storage tier configuration
    *
    * @generated from field: repeated qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
    */
@@ -344,14 +345,14 @@ export declare const AvailableAdditionalResourcesSchema: GenMessage<AvailableAdd
  */
 export declare type AvailableStoragePerformanceTierConfigurations = Message<"qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations"> & {
   /**
-   * represents performance tier type.
+   * Represents performance tier type.
    *
    * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
    */
   storageTierType: StorageTierType;
 
   /**
-   * represents price per hour in millicents for given region/provider and pricing tier.
+   * Represents additional cost  per hour in millicents for given region/provider and pricing tier.
    *
    * @generated from field: uint32 price_per_hour = 2;
    */
