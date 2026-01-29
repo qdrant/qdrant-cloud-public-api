@@ -22,6 +22,12 @@ class StorageTierType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     STORAGE_TIER_TYPE_COST_OPTIMISED: _ClassVar[StorageTierType]
     STORAGE_TIER_TYPE_BALANCED: _ClassVar[StorageTierType]
     STORAGE_TIER_TYPE_PERFORMANCE: _ClassVar[StorageTierType]
+
+class TopologySpreadConstraintWhenUnsatisfiable(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
 ACTOR_TYPE_UNSPECIFIED: ActorType
 ACTOR_TYPE_USER: ActorType
 ACTOR_TYPE_MANAGEMENT_KEY: ActorType
@@ -30,6 +36,9 @@ STORAGE_TIER_TYPE_UNSPECIFIED: StorageTierType
 STORAGE_TIER_TYPE_COST_OPTIMISED: StorageTierType
 STORAGE_TIER_TYPE_BALANCED: StorageTierType
 STORAGE_TIER_TYPE_PERFORMANCE: StorageTierType
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: TopologySpreadConstraintWhenUnsatisfiable
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: TopologySpreadConstraintWhenUnsatisfiable
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: TopologySpreadConstraintWhenUnsatisfiable
 PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
 permissions: _descriptor.FieldDescriptor
 ACCOUNT_ID_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
@@ -86,8 +95,8 @@ class TopologySpreadConstraint(_message.Message):
     WHEN_UNSATISFIABLE_FIELD_NUMBER: _ClassVar[int]
     max_skew: int
     topology_key: str
-    when_unsatisfiable: str
-    def __init__(self, max_skew: _Optional[int] = ..., topology_key: _Optional[str] = ..., when_unsatisfiable: _Optional[str] = ...) -> None: ...
+    when_unsatisfiable: TopologySpreadConstraintWhenUnsatisfiable
+    def __init__(self, max_skew: _Optional[int] = ..., topology_key: _Optional[str] = ..., when_unsatisfiable: _Optional[_Union[TopologySpreadConstraintWhenUnsatisfiable, str]] = ...) -> None: ...
 
 class LabelSelectorRequirement(_message.Message):
     __slots__ = ()
