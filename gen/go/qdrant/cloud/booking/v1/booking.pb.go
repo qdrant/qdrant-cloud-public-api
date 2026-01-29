@@ -619,8 +619,8 @@ type Package struct {
 	// if not set, additional resources are not available for this package.
 	// Currently, only `DISK` is supported.
 	AvailableAdditionalResources *AvailableAdditionalResources `protobuf:"bytes,8,opt,name=available_additional_resources,json=availableAdditionalResources,proto3,oneof" json:"available_additional_resources,omitempty"`
-	// available storage tier configurations and prices
-	AvailableStorageTierConfigurations *AvailableStoragePerformanceTierConfigurations `protobuf:"bytes,10,opt,name=available_storage_tier_configurations,json=availableStorageTierConfigurations,proto3" json:"available_storage_tier_configurations,omitempty"`
+	// available storage tier configurations and prices.
+	AvailableStorageTierConfigurations []*AvailableStoragePerformanceTierConfigurations `protobuf:"bytes,10,rep,name=available_storage_tier_configurations,json=availableStorageTierConfigurations,proto3" json:"available_storage_tier_configurations,omitempty"`
 	unknownFields                      protoimpl.UnknownFields
 	sizeCache                          protoimpl.SizeCache
 }
@@ -718,7 +718,7 @@ func (x *Package) GetAvailableAdditionalResources() *AvailableAdditionalResource
 	return nil
 }
 
-func (x *Package) GetAvailableStorageTierConfigurations() *AvailableStoragePerformanceTierConfigurations {
+func (x *Package) GetAvailableStorageTierConfigurations() []*AvailableStoragePerformanceTierConfigurations {
 	if x != nil {
 		return x.AvailableStorageTierConfigurations
 	}
@@ -774,12 +774,12 @@ func (x *AvailableAdditionalResources) GetDiskPricePerHour() uint32 {
 }
 
 // AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package
-// region and provider
+// region and provider.
 type AvailableStoragePerformanceTierConfigurations struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// represents performance tier type
+	// represents performance tier type.
 	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"`
-	// represents price per hour for given region/provider and pricing tier
+	// represents price per hour in millicents for given region/provider and pricing tier.
 	PricePerHour  uint32 `protobuf:"varint,2,opt,name=price_per_hour,json=pricePerHour,proto3" json:"price_per_hour,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1745,7 +1745,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x18\n" +
 	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"X\n" +
 	"\x12GetPackageResponse\x12B\n" +
-	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xa4\x06\n" +
+	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xae\x06\n" +
 	"\aPackage\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
 	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
@@ -1758,9 +1758,9 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12D\n" +
 	"\x04tier\x18\t \x01(\x0e2$.qdrant.cloud.booking.v1.PackageTierB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04tier\x12\x80\x01\n" +
-	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01\x12\x99\x01\n" +
+	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01\x12\xa3\x01\n" +
 	"%available_storage_tier_configurations\x18\n" +
-	" \x01(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsR\"availableStorageTierConfigurationsB!\n" +
+	" \x03(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsB\b\xbaH\x05\x92\x01\x02\b\x01R\"availableStorageTierConfigurationsB!\n" +
 	"\x1f_available_additional_resources\"M\n" +
 	"\x1cAvailableAdditionalResources\x12-\n" +
 	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"\xaa\x01\n" +

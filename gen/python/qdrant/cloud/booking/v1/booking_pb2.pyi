@@ -117,8 +117,8 @@ class Package(_message.Message):
     status: PackageStatus
     tier: PackageTier
     available_additional_resources: AvailableAdditionalResources
-    available_storage_tier_configurations: AvailableStoragePerformanceTierConfigurations
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]] = ...) -> None: ...
+    available_storage_tier_configurations: _containers.RepeatedCompositeFieldContainer[AvailableStoragePerformanceTierConfigurations]
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Iterable[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]]] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
     __slots__ = ()

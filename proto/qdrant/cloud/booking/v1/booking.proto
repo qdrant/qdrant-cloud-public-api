@@ -249,8 +249,8 @@ message Package {
   // if not set, additional resources are not available for this package.
   // Currently, only `DISK` is supported.
   optional AvailableAdditionalResources available_additional_resources = 8;
-  // available storage tier configurations and prices
-  AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
+  // available storage tier configurations and prices.
+  repeated AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10 [(buf.validate.field).repeated = {min_items: 1}];
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.
@@ -262,11 +262,11 @@ message AvailableAdditionalResources {
 }
 
 // AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package
-// region and provider
+// region and provider.
 message AvailableStoragePerformanceTierConfigurations {
-  // represents performance tier type
+  // represents performance tier type.
   qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
-  // represents price per hour for given region/provider and pricing tier
+  // represents price per hour in millicents for given region/provider and pricing tier.
   uint32 price_per_hour = 2;
 }
 

@@ -297,11 +297,11 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
   availableAdditionalResources?: AvailableAdditionalResources;
 
   /**
-   * available storage tier configurations and prices
+   * available storage tier configurations and prices.
    *
-   * @generated from field: qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
+   * @generated from field: repeated qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
    */
-  availableStorageTierConfigurations?: AvailableStoragePerformanceTierConfigurations;
+  availableStorageTierConfigurations: AvailableStoragePerformanceTierConfigurations[];
 };
 
 export declare type PackageValid = Package;
@@ -338,20 +338,20 @@ export declare const AvailableAdditionalResourcesSchema: GenMessage<AvailableAdd
 
 /**
  * AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package
- * region and provider
+ * region and provider.
  *
  * @generated from message qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations
  */
 export declare type AvailableStoragePerformanceTierConfigurations = Message<"qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations"> & {
   /**
-   * represents performance tier type
+   * represents performance tier type.
    *
    * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
    */
   storageTierType: StorageTierType;
 
   /**
-   * represents price per hour for given region/provider and pricing tier
+   * represents price per hour in millicents for given region/provider and pricing tier.
    *
    * @generated from field: uint32 price_per_hour = 2;
    */
