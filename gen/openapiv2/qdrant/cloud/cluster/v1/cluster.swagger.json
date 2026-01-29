@@ -1512,7 +1512,7 @@
       ],
       "default": "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED",
       "description": "- TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: Unspecified.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: DoNotSchedule (default) tells the scheduler not to schedule it.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.",
-      "title": "TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologoySpreadConstraints.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/"
+      "title": "TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/"
     },
     "v1UnsuspendClusterResponse": {
       "type": "object",

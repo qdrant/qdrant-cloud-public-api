@@ -140,7 +140,7 @@ func (StorageTierType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
-// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologoySpreadConstraints.
+// TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
 // See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
 type TopologySpreadConstraintWhenUnsatisfiable int32
 

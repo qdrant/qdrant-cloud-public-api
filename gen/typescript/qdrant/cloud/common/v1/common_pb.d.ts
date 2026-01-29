@@ -615,7 +615,7 @@ export enum StorageTierType {
 export declare const StorageTierTypeSchema: GenEnum<StorageTierType>;
 
 /**
- * TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologoySpreadConstraints.
+ * TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
  * See: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
  *
  * @generated from enum qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
