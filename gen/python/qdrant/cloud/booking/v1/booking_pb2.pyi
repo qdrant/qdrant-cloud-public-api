@@ -107,6 +107,7 @@ class Package(_message.Message):
     STATUS_FIELD_NUMBER: _ClassVar[int]
     TIER_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_ADDITIONAL_RESOURCES_FIELD_NUMBER: _ClassVar[int]
+    AVAILABLE_STORAGE_TIER_CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     type: str
@@ -116,13 +117,22 @@ class Package(_message.Message):
     status: PackageStatus
     tier: PackageTier
     available_additional_resources: AvailableAdditionalResources
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ...) -> None: ...
+    available_storage_tier_configurations: _containers.RepeatedCompositeFieldContainer[AvailableStoragePerformanceTierConfigurations]
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Iterable[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]]] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
     __slots__ = ()
     DISK_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     disk_price_per_hour: int
     def __init__(self, disk_price_per_hour: _Optional[int] = ...) -> None: ...
+
+class AvailableStoragePerformanceTierConfigurations(_message.Message):
+    __slots__ = ()
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    storage_tier_type: _common_pb2.StorageTierType
+    price_per_hour: int
+    def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ..., price_per_hour: _Optional[int] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
     __slots__ = ()

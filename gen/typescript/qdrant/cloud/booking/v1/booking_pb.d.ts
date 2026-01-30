@@ -295,6 +295,14 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
    * @generated from field: optional qdrant.cloud.booking.v1.AvailableAdditionalResources available_additional_resources = 8;
    */
   availableAdditionalResources?: AvailableAdditionalResources;
+
+  /**
+   * Available storage tier configurations and prices.
+   * Always includes at least COST_OPTIMISED storage tier configuration
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
+   */
+  availableStorageTierConfigurations: AvailableStoragePerformanceTierConfigurations[];
 };
 
 export declare type PackageValid = Package;
@@ -328,6 +336,36 @@ export declare type AvailableAdditionalResourcesValid = AvailableAdditionalResou
  * Use `create(AvailableAdditionalResourcesSchema)` to create a new message.
  */
 export declare const AvailableAdditionalResourcesSchema: GenMessage<AvailableAdditionalResources, {validType: AvailableAdditionalResourcesValid}>;
+
+/**
+ * AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package
+ * region and provider.
+ *
+ * @generated from message qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations
+ */
+export declare type AvailableStoragePerformanceTierConfigurations = Message<"qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations"> & {
+  /**
+   * Represents performance tier type.
+   *
+   * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+   */
+  storageTierType: StorageTierType;
+
+  /**
+   * Represents additional cost per hour in millicents for given region/provider and pricing tier.
+   *
+   * @generated from field: uint32 price_per_hour = 2;
+   */
+  pricePerHour: number;
+};
+
+export declare type AvailableStoragePerformanceTierConfigurationsValid = AvailableStoragePerformanceTierConfigurations;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations.
+ * Use `create(AvailableStoragePerformanceTierConfigurationsSchema)` to create a new message.
+ */
+export declare const AvailableStoragePerformanceTierConfigurationsSchema: GenMessage<AvailableStoragePerformanceTierConfigurations, {validType: AvailableStoragePerformanceTierConfigurationsValid}>;
 
 /**
  * ResourceConfiguration defines the resource configuration for a package.

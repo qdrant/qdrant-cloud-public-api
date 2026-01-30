@@ -458,6 +458,21 @@
       },
       "description": "AvailableAdditionalResources represents additional resources that can be added to the cluster."
     },
+    "v1AvailableStoragePerformanceTierConfigurations": {
+      "type": "object",
+      "properties": {
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "Represents performance tier type."
+        },
+        "pricePerHour": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Represents additional cost per hour in millicents for given region/provider and pricing tier."
+        }
+      },
+      "description": "AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package\nregion and provider."
+    },
     "v1GetBackupQuoteResponse": {
       "type": "object",
       "properties": {
@@ -680,6 +695,14 @@
         "availableAdditionalResources": {
           "$ref": "#/definitions/v1AvailableAdditionalResources",
           "description": "Optional additional resources that can be added to the cluster.\nif not set, additional resources are not available for this package.\nCurrently, only `DISK` is supported."
+        },
+        "availableStorageTierConfigurations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AvailableStoragePerformanceTierConfigurations"
+          },
+          "title": "Available storage tier configurations and prices.\nAlways includes at least COST_OPTIMISED storage tier configuration"
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."

@@ -249,6 +249,9 @@ message Package {
   // if not set, additional resources are not available for this package.
   // Currently, only `DISK` is supported.
   optional AvailableAdditionalResources available_additional_resources = 8;
+  // Available storage tier configurations and prices.
+  // Always includes at least COST_OPTIMISED storage tier configuration
+  repeated AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10 [(buf.validate.field).repeated = {min_items: 1}];
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.
@@ -257,6 +260,15 @@ message AvailableAdditionalResources {
   // Represents the cost per hour for a single unit(GiB) of the resource.
   // You will be billed hourly for the resources you use. Partial hours are rounded up and billed as full hours.
   uint32 disk_price_per_hour = 1;
+}
+
+// AvailableStoragePerformanceTierConfigurations represents available storage tier configurations for given package
+// region and provider.
+message AvailableStoragePerformanceTierConfigurations {
+  // Represents performance tier type.
+  qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
+  // Represents additional cost per hour in millicents for given region/provider and pricing tier.
+  uint32 price_per_hour = 2;
 }
 
 // ResourceConfiguration defines the resource configuration for a package.
