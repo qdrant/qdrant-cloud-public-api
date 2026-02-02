@@ -319,6 +319,9 @@ message GetQuoteRequest {
   // The additional disk storage in GiB on top of the selected package.
   // This is an optional field, if not specified additional disk is 0.
   uint32 additional_disk_gib = 6 [(buf.validate.field).uint32.gte = 0];
+  // The storage tier for the cluster.
+  // This is an optional field, if not specified it defaults to Cost Optimised.
+  optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 7;
 }
 
 // GetQuoteResponse is the response from the GetQuote function

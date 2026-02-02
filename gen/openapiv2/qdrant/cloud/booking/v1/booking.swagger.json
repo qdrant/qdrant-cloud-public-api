@@ -415,6 +415,10 @@
           "type": "integer",
           "format": "int64",
           "description": "The additional disk storage in GiB on top of the selected package.\nThis is an optional field, if not specified additional disk is 0."
+        },
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "The storage tier for the cluster.\nThis is an optional field, if not specified it defaults to Cost Optimised."
         }
       },
       "title": "GetQuoteRequest is the request for the GetQuote function"
