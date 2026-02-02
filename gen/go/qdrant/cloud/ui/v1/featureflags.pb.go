@@ -153,9 +153,9 @@ const file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc = "" +
 	"\x1dcluster_creation_page_enabled\x18\x02 \x01(\bR\x1aclusterCreationPageEnabled\x124\n" +
 	"\x16billing_cycles_enabled\x18\x03 \x01(\bR\x14billingCyclesEnabled\x12E\n" +
 	"\x1fentitlement_cancel_flow_enabled\x18\x04 \x01(\bR\x1centitlementCancelFlowEnabled\x12G\n" +
-	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled2\xa8\x01\n" +
-	"\x13FeatureFlagsService\x12\x90\x01\n" +
-	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"$\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
+	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled2\xac\x01\n" +
+	"\x13FeatureFlagsService\x12\x94\x01\n" +
+	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\x11FeatureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (

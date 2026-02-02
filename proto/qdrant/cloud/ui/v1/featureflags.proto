@@ -13,6 +13,8 @@ service FeatureFlagsService {
   rpc GetFeatureFlags(GetFeatureFlagsRequest) returns (GetFeatureFlagsResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/ui/v1/feature-flags"};
   }
