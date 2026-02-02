@@ -495,6 +495,13 @@ export declare type GetQuoteRequest = Message<"qdrant.cloud.booking.v1.GetQuoteR
    * @generated from field: uint32 additional_disk_gib = 6;
    */
   additionalDiskGib: number;
+
+  /**
+   * Cluster storage performance tier, if not set defaults to STORAGE_TIER_TYPE_COST_OPTIMISED
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 7;
+   */
+  storageTierType?: StorageTierType;
 };
 
 export declare type GetQuoteRequestValid = GetQuoteRequest;

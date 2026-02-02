@@ -162,13 +162,15 @@ class GetQuoteRequest(_message.Message):
     NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
     PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_DISK_GIB_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     number_of_nodes: int
     package_id: str
     additional_disk_gib: int
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ...) -> None: ...
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class GetQuoteResponse(_message.Message):
     __slots__ = ()
