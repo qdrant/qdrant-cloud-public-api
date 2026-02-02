@@ -418,7 +418,7 @@
         },
         "storageTierType": {
           "$ref": "#/definitions/v1StorageTierType",
-          "title": "Cluster storage performance tier, if not set defaults to STORAGE_TIER_TYPE_COST_OPTIMISED"
+          "description": "The storage tier for the cluster.\nThis is an optional field, if not specified it defaults to Cost Optimised."
         }
       },
       "title": "GetQuoteRequest is the request for the GetQuote function"

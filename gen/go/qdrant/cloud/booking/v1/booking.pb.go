@@ -982,7 +982,8 @@ type GetQuoteRequest struct {
 	// The additional disk storage in GiB on top of the selected package.
 	// This is an optional field, if not specified additional disk is 0.
 	AdditionalDiskGib uint32 `protobuf:"varint,6,opt,name=additional_disk_gib,json=additionalDiskGib,proto3" json:"additional_disk_gib,omitempty"`
-	// Cluster storage performance tier, if not set defaults to STORAGE_TIER_TYPE_COST_OPTIMISED
+	// The storage tier for the cluster.
+	// This is an optional field, if not specified it defaults to Cost Optimised.
 	StorageTierType *v1.StorageTierType `protobuf:"varint,7,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType,oneof" json:"storage_tier_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
