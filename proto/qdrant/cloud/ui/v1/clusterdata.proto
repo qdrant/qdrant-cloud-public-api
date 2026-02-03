@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package qdrant.cloud.ui.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// ClusterDataService provides cluster data for UI components, this is considered a beta feature.
+service ClusterDataService {
+  // List the collections for the provided cluster
+  // Required permissions:
+  // - read:clusters
+  rpc ListCollections(ListCollectionsRequest) returns (ListCollectionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections"};
+  }
+}
+
+// ListCollectionsRequest is the request for the ListCollections function.
+message ListCollectionsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster (in GUID format).
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCollectionsResponse is the response from the ListCollections function.
+message ListCollectionsResponse {
+  // The collection infos
+  repeated CollectionInfo items = 1;
+}
+
+// Information about a collection
+message CollectionInfo {
+  // The name of the collection
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+}
