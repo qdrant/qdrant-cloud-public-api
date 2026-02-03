@@ -172,6 +172,23 @@ export declare type GetPackageRequest = Message<"qdrant.cloud.booking.v1.GetPack
    * @generated from field: string id = 2;
    */
   id: string;
+
+  /**
+   * Required field specifying the cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 3;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 4;
+   */
+  cloudProviderRegionId?: string;
 };
 
 export declare type GetPackageRequestValid = GetPackageRequest;

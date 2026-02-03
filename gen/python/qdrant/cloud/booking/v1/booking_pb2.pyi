@@ -86,9 +86,13 @@ class GetPackageRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     id: str
-    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ...) -> None: ...
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class GetPackageResponse(_message.Message):
     __slots__ = ()
