@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListCollectionsResponse"
+              "$ref": "#/definitions/serverlesscollectionv1ListCollectionsResponse"
             }
           },
           "default": {
@@ -251,6 +251,20 @@
           }
         }
       }
+    },
+    "serverlesscollectionv1ListCollectionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Collection"
+          },
+          "title": "List of collections with their details"
+        }
+      },
+      "title": "ListCollectionsResponse contains the list of collections"
     },
     "v1BoolIndexParams": {
       "type": "object",
@@ -517,20 +531,6 @@
         }
       },
       "title": "KeywordIndexParams defines parameters for keyword indexing"
-    },
-    "v1ListCollectionsResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1Collection"
-          },
-          "title": "List of collections with their details"
-        }
-      },
-      "title": "ListCollectionsResponse contains the list of collections"
     },
     "v1PayloadFieldSchema": {
       "type": "object",
