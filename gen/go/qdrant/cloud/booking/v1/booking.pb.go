@@ -492,9 +492,16 @@ type GetPackageRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The unique identifier of the package.
 	// A unique string ID assigned to each package.
-	Id            string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// Required field specifying the cloud provider where the cluster will be hosted.
+	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+	CloudProviderId string `protobuf:"bytes,3,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
+	// Filter specifying the cloud region where the cluster will be hosted.
+	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+	// This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+	CloudProviderRegionId *string `protobuf:"bytes,4,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetPackageRequest) Reset() {
@@ -537,6 +544,20 @@ func (x *GetPackageRequest) GetAccountId() string {
 func (x *GetPackageRequest) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *GetPackageRequest) GetCloudProviderId() string {
+	if x != nil {
+		return x.CloudProviderId
+	}
+	return ""
+}
+
+func (x *GetPackageRequest) GetCloudProviderRegionId() string {
+	if x != nil && x.CloudProviderRegionId != nil {
+		return *x.CloudProviderRegionId
 	}
 	return ""
 }
@@ -1750,11 +1771,15 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x19_cloud_provider_region_idB\x10\n" +
 	"\x0e_min_resources\"T\n" +
 	"\x1aListGlobalPackagesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"V\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\xc0\x03\n" +
 	"\x11GetPackageRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x18\n" +
-	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"X\n" +
+	"\x02id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x123\n" +
+	"\x11cloud_provider_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
+	"\x18cloud_provider_region_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
+	"\x19_cloud_provider_region_id\"X\n" +
 	"\x12GetPackageResponse\x12B\n" +
 	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xae\x06\n" +
 	"\aPackage\x12\x18\n" +
@@ -1983,6 +2008,7 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[2].OneofWrappers = []any{}
+	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[4].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[10].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[11].OneofWrappers = []any{}

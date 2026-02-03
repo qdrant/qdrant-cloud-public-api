@@ -174,6 +174,18 @@ message GetPackageRequest {
   // The unique identifier of the package.
   // A unique string ID assigned to each package.
   string id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Required field specifying the cloud provider where the cluster will be hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  string cloud_provider_id = 3 [(buf.validate.field).string = {min_len: 3}];
+  // Filter specifying the cloud region where the cluster will be hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+  optional string cloud_provider_region_id = 4 [(buf.validate.field).string = {min_len: 1}];
+  option (buf.validate.message).cel = {
+    id: "list_packages.cloud_provider_region_id_present"
+    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
+    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
+  };
 }
 
 // GetPackageResponse is the response from the GetPackage function
