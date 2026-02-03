@@ -27,7 +27,7 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$qdrant/cloud/ui/v1/clusterdata.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"j\n\x16ListCollectionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\'\n\ncluster_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"S\n\x17ListCollectionsResponse\x12\x38\n\x05items\x18\x01 \x03(\x0b\x32\".qdrant.cloud.ui.v1.CollectionInfoR\x05items\"-\n\x0e\x43ollectionInfo\x12\x1b\n\x04name\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x04name2\xde\x01\n\x12\x43lusterDataService\x12\xc7\x01\n\x0fListCollections\x12*.qdrant.cloud.ui.v1.ListCollectionsRequest\x1a+.qdrant.cloud.ui.v1.ListCollectionsResponse\"[\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x02\x44\x12\x42/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collectionsB\xdf\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x10\x43lusterdataProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$qdrant/cloud/ui/v1/clusterdata.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"j\n\x16ListCollectionsRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\'\n\ncluster_id\x18\x02 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\"S\n\x17ListCollectionsResponse\x12\x38\n\x05items\x18\x01 \x03(\x0b\x32\".qdrant.cloud.ui.v1.CollectionInfoR\x05items\"-\n\x0e\x43ollectionInfo\x12\x1b\n\x04name\x18\x01 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x04name2\xe3\x01\n\x12\x43lusterDataService\x12\xcc\x01\n\x0fListCollections\x12*.qdrant.cloud.ui.v1.ListCollectionsRequest\x1a+.qdrant.cloud.ui.v1.ListCollectionsResponse\"`\x8a\xb5\x18\rread:clusters\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x44\x12\x42/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collectionsB\xdf\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x10\x43lusterdataProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -42,7 +42,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_COLLECTIONINFO'].fields_by_name['name']._loaded_options = None
   _globals['_COLLECTIONINFO'].fields_by_name['name']._serialized_options = b'\272H\004r\002\020\001'
   _globals['_CLUSTERDATASERVICE'].methods_by_name['ListCollections']._loaded_options = None
-  _globals['_CLUSTERDATASERVICE'].methods_by_name['ListCollections']._serialized_options = b'\212\265\030\rread:clusters\202\323\344\223\002D\022B/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections'
+  _globals['_CLUSTERDATASERVICE'].methods_by_name['ListCollections']._serialized_options = b'\212\265\030\rread:clusters\242\265\030\001\001\202\323\344\223\002D\022B/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections'
   _globals['_LISTCOLLECTIONSREQUEST']._serialized_start=156
   _globals['_LISTCOLLECTIONSREQUEST']._serialized_end=262
   _globals['_LISTCOLLECTIONSRESPONSE']._serialized_start=264
@@ -50,5 +50,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_COLLECTIONINFO']._serialized_start=349
   _globals['_COLLECTIONINFO']._serialized_end=394
   _globals['_CLUSTERDATASERVICE']._serialized_start=397
-  _globals['_CLUSTERDATASERVICE']._serialized_end=619
+  _globals['_CLUSTERDATASERVICE']._serialized_end=624
 # @@protoc_insertion_point(module_scope)
