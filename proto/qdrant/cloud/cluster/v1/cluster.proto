@@ -643,7 +643,7 @@ message ClusterConfiguration {
   }];
   // List of annotations applied to the service of this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
-  repeated common.v1.KeyValue service_annotations = 13 [(buf.validate.field).repeated = {max_items: 10}];
+  repeated common.v1.KeyValue service_annotations = 13 [(buf.validate.field).repeated = {max_items: 64}];
   // List of labels applied to the pods of this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue pod_labels = 14 [(buf.validate.field).repeated = {max_items: 10}];
