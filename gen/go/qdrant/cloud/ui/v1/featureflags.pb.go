@@ -73,8 +73,10 @@ type GetFeatureFlagsResponse struct {
 	EntitlementCancelFlowEnabled bool `protobuf:"varint,4,opt,name=entitlement_cancel_flow_enabled,json=entitlementCancelFlowEnabled,proto3" json:"entitlement_cancel_flow_enabled,omitempty"`
 	// Whether querying Qdrant clusters is enabled.
 	QdrantClustersQueryingEnabled bool `protobuf:"varint,5,opt,name=qdrant_clusters_querying_enabled,json=qdrantClustersQueryingEnabled,proto3" json:"qdrant_clusters_querying_enabled,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	// Whether cluster storage tier configuration is enabled.
+	ClusterStorageTierConfigurationEnabled bool `protobuf:"varint,6,opt,name=cluster_storage_tier_configuration_enabled,json=clusterStorageTierConfigurationEnabled,proto3" json:"cluster_storage_tier_configuration_enabled,omitempty"`
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *GetFeatureFlagsResponse) Reset() {
@@ -142,18 +144,26 @@ func (x *GetFeatureFlagsResponse) GetQdrantClustersQueryingEnabled() bool {
 	return false
 }
 
+func (x *GetFeatureFlagsResponse) GetClusterStorageTierConfigurationEnabled() bool {
+	if x != nil {
+		return x.ClusterStorageTierConfigurationEnabled
+	}
+	return false
+}
+
 var File_qdrant_cloud_ui_v1_featureflags_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc = "" +
 	"\n" +
 	"%qdrant/cloud/ui/v1/featureflags.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n" +
-	"\x16GetFeatureFlagsRequest\"\xdc\x02\n" +
+	"\x16GetFeatureFlagsRequest\"\xb8\x03\n" +
 	"\x17GetFeatureFlagsResponse\x128\n" +
 	"\x18cluster_creation_enabled\x18\x01 \x01(\bR\x16clusterCreationEnabled\x12A\n" +
 	"\x1dcluster_creation_page_enabled\x18\x02 \x01(\bR\x1aclusterCreationPageEnabled\x124\n" +
 	"\x16billing_cycles_enabled\x18\x03 \x01(\bR\x14billingCyclesEnabled\x12E\n" +
 	"\x1fentitlement_cancel_flow_enabled\x18\x04 \x01(\bR\x1centitlementCancelFlowEnabled\x12G\n" +
-	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled2\xac\x01\n" +
+	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled\x12Z\n" +
+	"*cluster_storage_tier_configuration_enabled\x18\x06 \x01(\bR&clusterStorageTierConfigurationEnabled2\xac\x01\n" +
 	"\x13FeatureFlagsService\x12\x94\x01\n" +
 	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\x11FeatureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"

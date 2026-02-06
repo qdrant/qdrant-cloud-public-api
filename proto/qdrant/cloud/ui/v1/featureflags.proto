@@ -38,4 +38,6 @@ message GetFeatureFlagsResponse {
   bool entitlement_cancel_flow_enabled = 4;
   // Whether querying Qdrant clusters is enabled.
   bool qdrant_clusters_querying_enabled = 5;
+  // Whether cluster storage tier configuration is enabled.
+  bool cluster_storage_tier_configuration_enabled = 6;
 }
