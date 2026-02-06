@@ -68,6 +68,13 @@ export declare type GetFeatureFlagsResponse = Message<"qdrant.cloud.ui.v1.GetFea
    * @generated from field: bool qdrant_clusters_querying_enabled = 5;
    */
   qdrantClustersQueryingEnabled: boolean;
+
+  /**
+   * Whether cluster storage tier configuration is enabled.
+   *
+   * @generated from field: bool cluster_storage_tier_configuration_enabled = 6;
+   */
+  clusterStorageTierConfigurationEnabled: boolean;
 };
 
 export declare type GetFeatureFlagsResponseValid = GetFeatureFlagsResponse;

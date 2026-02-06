@@ -91,6 +91,10 @@
         "qdrantClustersQueryingEnabled": {
           "type": "boolean",
           "description": "Whether querying Qdrant clusters is enabled."
+        },
+        "clusterStorageTierConfigurationEnabled": {
+          "type": "boolean",
+          "description": "Whether cluster storage tier configuration is enabled."
         }
       },
       "description": "GetFeatureFlagsResponse is the response from the GetFeatureFlags function."
