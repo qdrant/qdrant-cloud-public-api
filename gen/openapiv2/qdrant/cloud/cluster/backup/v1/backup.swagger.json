@@ -48,6 +48,21 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -84,6 +99,21 @@
           {
             "name": "clusterId",
             "description": "The identifier of the cluster (in GUID format).\nWhen this field is set, only backup schedules that belong to the cluster are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1267,6 +1297,15 @@
             "$ref": "#/definitions/v1BackupRestore"
           },
           "description": "The actual backup restores in this list."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "description": "ListBackupRestoresResponse is the response from the ListBackupRestores function."
@@ -1281,6 +1320,15 @@
             "$ref": "#/definitions/v1BackupSchedule"
           },
           "description": "The actual backup schedules in this list."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "description": "ListBackupsResponse is the response from the ListBackups function."

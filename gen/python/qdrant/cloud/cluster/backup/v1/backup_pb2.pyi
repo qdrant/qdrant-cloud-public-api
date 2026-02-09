@@ -129,15 +129,23 @@ class ListBackupRestoresRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListBackupRestoresResponse(_message.Message):
     __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[BackupRestore]
-    def __init__(self, items: _Optional[_Iterable[_Union[BackupRestore, _Mapping]]] = ...) -> None: ...
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[BackupRestore, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class RestoreBackupRequest(_message.Message):
     __slots__ = ()
@@ -155,15 +163,23 @@ class ListBackupSchedulesRequest(_message.Message):
     __slots__ = ()
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListBackupSchedulesResponse(_message.Message):
     __slots__ = ()
     ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[BackupSchedule]
-    def __init__(self, items: _Optional[_Iterable[_Union[BackupSchedule, _Mapping]]] = ...) -> None: ...
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[BackupSchedule, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetBackupScheduleRequest(_message.Message):
     __slots__ = ()

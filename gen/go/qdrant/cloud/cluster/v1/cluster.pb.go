@@ -683,8 +683,16 @@ type ListClustersRequest struct {
 	// If this field is set, the `cloud_provider_id` is required to set as well (and it should match).
 	// For hybrid this should be the hybrid cloud environment ID.
 	CloudProviderRegionId *string `protobuf:"bytes,11,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Maximum number of items to return.
+	// If not specified, all items are returned.
+	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	// When paginating, all other parameters provided to the request must match
+	// the call that provided the page token.
+	PageToken     *string `protobuf:"bytes,21,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListClustersRequest) Reset() {
@@ -738,11 +746,31 @@ func (x *ListClustersRequest) GetCloudProviderRegionId() string {
 	return ""
 }
 
+func (x *ListClustersRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListClustersRequest) GetPageToken() string {
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
+	}
+	return ""
+}
+
 // ListClustersResponse is the response from the ListClusters function
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual clusters in this list
-	Items         []*Cluster `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*Cluster `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The total number of items available (useful in relation with pagination).
+	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -782,6 +810,20 @@ func (x *ListClustersResponse) GetItems() []*Cluster {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *ListClustersResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
+	}
+	return 0
+}
+
+func (x *ListClustersResponse) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
 }
 
 // GetClusterRequest is the request for the GetCluster function
@@ -3617,19 +3659,32 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xba\x05\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xb2\x06\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
 	"\x11cloud_provider_id\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x03H\x00R\x0fcloudProviderId\x88\x01\x01\x12E\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15cloudProviderRegionId\x88\x01\x01:\xc5\x03\xbaH\xc1\x03\x1a\xb1\x01\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15cloudProviderRegionId\x88\x01\x01\x12,\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x02R\bpageSize\x88\x01\x01\x12+\n" +
+	"\n" +
+	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\tpageToken\x88\x01\x01:\xc5\x03\xbaH\xc1\x03\x1a\xb1\x01\n" +
 	"'list_clusters.cloud_provider_id_present\x12Bcloud_provider_id is required when cloud_provider_region_id is set\x1aB!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'B\x14\n" +
 	"\x12_cloud_provider_idB\x1b\n" +
-	"\x19_cloud_provider_region_id\"N\n" +
+	"\x19_cloud_provider_region_idB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_page_token\"\xd4\x01\n" +
 	"\x14ListClustersResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.cluster.v1.ClusterR\x05items\"e\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.cluster.v1.ClusterR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
+	"\x10_next_page_token\"e\n" +
 	"\x11GetClusterRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -4186,6 +4241,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 		return
 	}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[0].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[8].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[20].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[25].OneofWrappers = []any{}

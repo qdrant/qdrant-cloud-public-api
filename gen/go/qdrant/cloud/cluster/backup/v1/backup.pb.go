@@ -680,7 +680,15 @@ type ListBackupRestoresRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier of the cluster (in GUID format).
 	// When this field is set, only backup restores that belong to the cluster are returned.
-	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
+	ClusterId *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
+	// Maximum number of items to return.
+	// If not specified, all items are returned.
+	PageSize *int32 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	// When paginating, all other parameters provided to the request must match
+	// the call that provided the page token.
+	PageToken     *string `protobuf:"bytes,11,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -729,11 +737,31 @@ func (x *ListBackupRestoresRequest) GetClusterId() string {
 	return ""
 }
 
+func (x *ListBackupRestoresRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListBackupRestoresRequest) GetPageToken() string {
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
+	}
+	return ""
+}
+
 // ListBackupRestoresResponse is the response from the ListBackupRestores function.
 type ListBackupRestoresResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup restores in this list.
-	Items         []*BackupRestore `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*BackupRestore `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The total number of items available (useful in relation with pagination).
+	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -773,6 +801,20 @@ func (x *ListBackupRestoresResponse) GetItems() []*BackupRestore {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *ListBackupRestoresResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
+	}
+	return 0
+}
+
+func (x *ListBackupRestoresResponse) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
 }
 
 // RestoreBackupRequest is the request for the RestoreBackup function.
@@ -877,7 +919,15 @@ type ListBackupSchedulesRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier of the cluster (in GUID format).
 	// When this field is set, only backup schedules that belong to the cluster are returned.
-	ClusterId     *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
+	ClusterId *string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3,oneof" json:"cluster_id,omitempty"`
+	// Maximum number of items to return.
+	// If not specified, all items are returned.
+	PageSize *int32 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	// When paginating, all other parameters provided to the request must match
+	// the call that provided the page token.
+	PageToken     *string `protobuf:"bytes,11,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -926,11 +976,31 @@ func (x *ListBackupSchedulesRequest) GetClusterId() string {
 	return ""
 }
 
+func (x *ListBackupSchedulesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListBackupSchedulesRequest) GetPageToken() string {
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
+	}
+	return ""
+}
+
 // ListBackupsResponse is the response from the ListBackups function.
 type ListBackupSchedulesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup schedules in this list.
-	Items         []*BackupSchedule `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*BackupSchedule `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The total number of items available (useful in relation with pagination).
+	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -970,6 +1040,20 @@ func (x *ListBackupSchedulesResponse) GetItems() []*BackupSchedule {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *ListBackupSchedulesResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
+	}
+	return 0
+}
+
+func (x *ListBackupSchedulesResponse) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
 }
 
 // GetBackupScheduleRequest is the request for the GetBackupSchedule function.
@@ -2003,28 +2087,56 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"\x16\n" +
-	"\x14DeleteBackupResponse\"\x81\x01\n" +
+	"\x14DeleteBackupResponse\"\xf9\x01\n" +
 	"\x19ListBackupRestoresRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01B\r\n" +
-	"\v_cluster_id\"a\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01\x12,\n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\n" +
+	"page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\r\n" +
+	"\v_cluster_idB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_page_token\"\xe7\x01\n" +
 	"\x1aListBackupRestoresResponse\x12C\n" +
-	"\x05items\x18\x01 \x03(\v2-.qdrant.cloud.cluster.backup.v1.BackupRestoreR\x05items\"f\n" +
+	"\x05items\x18\x01 \x03(\v2-.qdrant.cloud.cluster.backup.v1.BackupRestoreR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
+	"\x10_next_page_token\"f\n" +
 	"\x14RestoreBackupRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"\x17\n" +
-	"\x15RestoreBackupResponse\"\x82\x01\n" +
+	"\x15RestoreBackupResponse\"\xfa\x01\n" +
 	"\x1aListBackupSchedulesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01B\r\n" +
-	"\v_cluster_id\"c\n" +
+	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tclusterId\x88\x01\x01\x12,\n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\n" +
+	"page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\r\n" +
+	"\v_cluster_idB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_page_token\"\xe9\x01\n" +
 	"\x1bListBackupSchedulesResponse\x12D\n" +
-	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x05items\"\xa4\x01\n" +
+	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
+	"\x10_next_page_token\"\xa4\x01\n" +
 	"\x18GetBackupScheduleRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -2305,7 +2417,9 @@ func file_qdrant_cloud_cluster_backup_v1_backup_proto_init() {
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23].OneofWrappers = []any{}
