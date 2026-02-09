@@ -296,12 +296,29 @@ message ListClustersRequest {
     message: "cloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'"
     expression: "this.cloud_provider_region_id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || this.cloud_provider_id!= 'hybrid'"
   };
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // ListClustersResponse is the response from the ListClusters function
 message ListClustersResponse {
   // The actual clusters in this list
   repeated Cluster items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetClusterRequest is the request for the GetCluster function

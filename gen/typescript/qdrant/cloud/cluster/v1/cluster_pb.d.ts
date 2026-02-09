@@ -44,6 +44,24 @@ export declare type ListClustersRequest = Message<"qdrant.cloud.cluster.v1.ListC
    * @generated from field: optional string cloud_provider_region_id = 11;
    */
   cloudProviderRegionId?: string;
+
+  /**
+   * Maximum number of items to return.
+   * If not specified, all items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string;
 };
 
 export declare type ListClustersRequestValid = ListClustersRequest;
@@ -66,6 +84,22 @@ export declare type ListClustersResponse = Message<"qdrant.cloud.cluster.v1.List
    * @generated from field: repeated qdrant.cloud.cluster.v1.Cluster items = 1;
    */
   items: Cluster[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string;
 };
 
 /**
@@ -80,6 +114,22 @@ export declare type ListClustersResponseValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: repeated qdrant.cloud.cluster.v1.Cluster items = 1;
    */
   items: ClusterValid[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string;
 };
 
 /**
