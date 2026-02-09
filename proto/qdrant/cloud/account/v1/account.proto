@@ -11,6 +11,12 @@ import "qdrant/cloud/iam/v1/iam.proto";
 
 // AccountService is the API used to configure Accounts.
 service AccountService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all accounts associated with the authenticated actor.
   // Required permissions:
   // - None (authenticated only)

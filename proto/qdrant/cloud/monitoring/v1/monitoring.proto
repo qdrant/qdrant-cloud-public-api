@@ -10,6 +10,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
 service MonitoringService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Gets the summary metrics of a cluster in the account identified by the given ID.
   // Required permissions:
   // - read:clusters

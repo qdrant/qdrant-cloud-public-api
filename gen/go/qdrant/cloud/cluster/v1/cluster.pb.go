@@ -4021,7 +4021,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
-	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\xc3\x1e\n" +
+	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x022\xcb\x1e\n" +
 	"\x0eClusterService\x12\xb4\x01\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xd7\x01\n" +
 	"\n" +
@@ -4065,7 +4065,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"cluster_id\x12\n" +
 	"cluster_id\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releases\x12\xe0\x01\n" +
 	"\x10GetQdrantRelease\x120.qdrant.cloud.cluster.v1.GetQdrantReleaseRequest\x1a1.qdrant.cloud.cluster.v1.GetQdrantReleaseResponse\"g\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x12\n" +
-	"\aversion\x12\aversion\x82\xd3\xe4\x93\x02:\x128/api/cluster/v1/accounts/{account_id}/releases/{version}B\xfe\x01\n" +
+	"\aversion\x12\aversion\x82\xd3\xe4\x93\x02:\x128/api/cluster/v1/accounts/{account_id}/releases/{version}\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.cluster.v1B\fClusterProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1;clusterv1\xa2\x02\x03QCC\xaa\x02\x17Qdrant.Cloud.Cluster.V1\xca\x02\x17Qdrant\\Cloud\\Cluster\\V1\xe2\x02#Qdrant\\Cloud\\Cluster\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Cluster::V1b\x06proto3"
 
 var (

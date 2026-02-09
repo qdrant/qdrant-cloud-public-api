@@ -12,6 +12,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // BackupService is the API used to configure backup objects.
 service BackupService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all backups in the account identified by the given ID.
   // Required permissions:
   // - read:backups

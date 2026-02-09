@@ -10,6 +10,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // PaymentService is the API used to manage payment settings.
 service PaymentService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all payment methods known by the system for the provided account.
   // Required permissions:
   // - read:payment_information

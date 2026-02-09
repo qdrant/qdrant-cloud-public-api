@@ -186,11 +186,11 @@ const file_qdrant_cloud_ui_v1_ui_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n" +
 	"\rUserWithRoles\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n" +
-	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xd6\x01\n" +
+	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xde\x01\n" +
 	"\x12AggregationService\x12\xbf\x01\n" +
 	"\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"J\x8a\xb5\x18\n" +
 	"read:users\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/usersB\xd6\x01\n" +
+	"read:roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/users\x1a\x06µ\x18\x02\b\x01B\xd6\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\aUiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (

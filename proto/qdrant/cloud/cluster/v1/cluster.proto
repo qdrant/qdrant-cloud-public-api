@@ -10,6 +10,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all clusters in the account identified by the given ID.
   // Required permissions:
   // - read:clusters

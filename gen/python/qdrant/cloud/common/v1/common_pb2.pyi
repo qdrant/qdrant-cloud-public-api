@@ -53,6 +53,8 @@ MAX_MESSAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
 max_message_size: _descriptor.FieldDescriptor
 LOG_FIELDS_FIELD_NUMBER: _ClassVar[int]
 log_fields: _descriptor.FieldDescriptor
+API_VERSION_FIELD_NUMBER: _ClassVar[int]
+api_version: _descriptor.FieldDescriptor
 
 class LogField(_message.Message):
     __slots__ = ()

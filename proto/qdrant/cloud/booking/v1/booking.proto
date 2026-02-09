@@ -8,6 +8,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BookingService is the API used to configure the booking settings (like packages objects).
 service BookingService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all packages known by the system, optional filtered.
   // Required permissions:
   // - None (authenticated only)

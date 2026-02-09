@@ -921,7 +921,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"_namespace\"u\n" +
 	"\x1fCloudProviderRegionCapabilities\x12'\n" +
 	"\x0fvolume_snapshot\x18\x01 \x01(\bR\x0evolumeSnapshot\x12)\n" +
-	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xcc\f\n" +
+	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xd4\f\n" +
 	"\x0fPlatformService\x12\xbf\x01\n" +
 	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\",\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\"\x12 /api/platform/v1/cloud-providers\x12\xc3\x01\n" +
 	"\x12ListCloudProviders\x123.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a4.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/platform/v1/accounts/{account_id}/cloud-providers\x12\x97\x02\n" +
@@ -934,7 +934,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions\x12\xbc\x02\n" +
 	"\x16GetCloudProviderRegion\x127.qdrant.cloud.platform.v1.GetCloudProviderRegionRequest\x1a8.qdrant.cloud.platform.v1.GetCloudProviderRegionResponse\"\xae\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
-	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}B\x86\x02\n" +
+	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3"
 
 var (

@@ -11,6 +11,13 @@ import "qdrant/cloud/event/v1/events.proto";
 // Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead.
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 service DatabaseApiKeyService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // Deprecated: This version of the API is deprecated.
   option deprecated = true;
   // Lists all database api keys in the account identified by the given ID.
   // Required permissions:

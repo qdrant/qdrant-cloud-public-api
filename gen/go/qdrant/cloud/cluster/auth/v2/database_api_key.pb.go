@@ -843,7 +843,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x90\v\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x98\v\n" +
 	"\x15DatabaseApiKeyService\x12\xfd\x01\n" +
 	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"q\x8a\xb5\x18\rread:api_keys\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -861,7 +861,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"cluster_id\xba\xb5\x18*\n" +
 	"\x13database_api_key_id\x12\x13database_api_key_id\xca\xf3\x18\xc7\x01\b\x03\x12\x10database-api-key\"\x17req.database_api_key_id*m/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/database-api-keys/{req.database_api_key_id}R)\n" +
 	"\n" +
-	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}B\xa2\x02\n" +
+	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}\x1a\x06µ\x18\x02\b\x01B\xa2\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v2B\x13DatabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v2;authv2\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V2\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V2\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V2\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V2b\x06proto3"
 
 var (

@@ -2658,7 +2658,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xca\x1e\n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xd2\x1e\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
@@ -2698,7 +2698,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc4\x01\x8a\xb5\x18\vwrite:roles\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd4\x01\n" +
 	"\n" +
-	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logoutB\xde\x01\n" +
+	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x1a\x06µ\x18\x02\b\x01B\xde\x01\n" +
 	"\x17com.qdrant.cloud.iam.v1B\bIamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3"
 
 var (

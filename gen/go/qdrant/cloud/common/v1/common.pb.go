@@ -1166,6 +1166,14 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 		Tag:           "bytes,50007,rep,name=log_fields",
 		Filename:      "qdrant/cloud/common/v1/common.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
+		ExtensionType: (*Version)(nil),
+		Field:         50008,
+		Name:          "qdrant.cloud.common.v1.api_version",
+		Tag:           "bytes,50008,opt,name=api_version",
+		Filename:      "qdrant/cloud/common/v1/common.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -1204,6 +1212,15 @@ var (
 	//
 	// repeated qdrant.cloud.common.v1.LogField log_fields = 50007;
 	E_LogFields = &file_qdrant_cloud_common_v1_common_proto_extTypes[6]
+)
+
+// Extension fields to descriptorpb.ServiceOptions.
+var (
+	// The version of the API, which should follow semantic versioning.
+	// This can be used by API gateways to detect the version of a specific API.
+	//
+	// optional qdrant.cloud.common.v1.Version api_version = 50008;
+	E_ApiVersion = &file_qdrant_cloud_common_v1_common_proto_extTypes[7]
 )
 
 var File_qdrant_cloud_common_v1_common_proto protoreflect.FileDescriptor
@@ -1295,7 +1312,9 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x10max_message_size\x12\x1e.google.protobuf.MethodOptions\x18ֆ\x03 \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x18\x80\b(\x01R\x0emaxMessageSize:a\n" +
 	"\n" +
-	"log_fields\x12\x1e.google.protobuf.MethodOptions\x18׆\x03 \x03(\v2 .qdrant.cloud.common.v1.LogFieldR\tlogFieldsB\xf6\x01\n" +
+	"log_fields\x12\x1e.google.protobuf.MethodOptions\x18׆\x03 \x03(\v2 .qdrant.cloud.common.v1.LogFieldR\tlogFields:f\n" +
+	"\vapi_version\x12\x1f.google.protobuf.ServiceOptions\x18؆\x03 \x01(\v2\x1f.qdrant.cloud.common.v1.VersionR\n" +
+	"apiVersion\x88\x01\x01B\xf6\x01\n" +
 	"\x1acom.qdrant.cloud.common.v1B\vCommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3"
 
 var (
@@ -1316,20 +1335,21 @@ var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),       // 0: qdrant.cloud.common.v1.ActorType
 	(StorageTierType)(0), // 1: qdrant.cloud.common.v1.StorageTierType
 	(TopologySpreadConstraintWhenUnsatisfiable)(0), // 2: qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
-	(*LogField)(nil),                   // 3: qdrant.cloud.common.v1.LogField
-	(*Version)(nil),                    // 4: qdrant.cloud.common.v1.Version
-	(*SecretKeyRef)(nil),               // 5: qdrant.cloud.common.v1.SecretKeyRef
-	(*KeyValue)(nil),                   // 6: qdrant.cloud.common.v1.KeyValue
-	(*TopologySpreadConstraint)(nil),   // 7: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*LabelSelectorRequirement)(nil),   // 8: qdrant.cloud.common.v1.LabelSelectorRequirement
-	(*LabelSelector)(nil),              // 9: qdrant.cloud.common.v1.LabelSelector
-	(*IPBlock)(nil),                    // 10: qdrant.cloud.common.v1.IPBlock
-	(*PeerSelector)(nil),               // 11: qdrant.cloud.common.v1.PeerSelector
-	(*NetworkPolicyPeer)(nil),          // 12: qdrant.cloud.common.v1.NetworkPolicyPeer
-	(*NetworkPolicyPort)(nil),          // 13: qdrant.cloud.common.v1.NetworkPolicyPort
-	(*NetworkPolicyIngressRule)(nil),   // 14: qdrant.cloud.common.v1.NetworkPolicyIngressRule
-	(*NetworkPolicyEgressRule)(nil),    // 15: qdrant.cloud.common.v1.NetworkPolicyEgressRule
-	(*descriptorpb.MethodOptions)(nil), // 16: google.protobuf.MethodOptions
+	(*LogField)(nil),                    // 3: qdrant.cloud.common.v1.LogField
+	(*Version)(nil),                     // 4: qdrant.cloud.common.v1.Version
+	(*SecretKeyRef)(nil),                // 5: qdrant.cloud.common.v1.SecretKeyRef
+	(*KeyValue)(nil),                    // 6: qdrant.cloud.common.v1.KeyValue
+	(*TopologySpreadConstraint)(nil),    // 7: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*LabelSelectorRequirement)(nil),    // 8: qdrant.cloud.common.v1.LabelSelectorRequirement
+	(*LabelSelector)(nil),               // 9: qdrant.cloud.common.v1.LabelSelector
+	(*IPBlock)(nil),                     // 10: qdrant.cloud.common.v1.IPBlock
+	(*PeerSelector)(nil),                // 11: qdrant.cloud.common.v1.PeerSelector
+	(*NetworkPolicyPeer)(nil),           // 12: qdrant.cloud.common.v1.NetworkPolicyPeer
+	(*NetworkPolicyPort)(nil),           // 13: qdrant.cloud.common.v1.NetworkPolicyPort
+	(*NetworkPolicyIngressRule)(nil),    // 14: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*NetworkPolicyEgressRule)(nil),     // 15: qdrant.cloud.common.v1.NetworkPolicyEgressRule
+	(*descriptorpb.MethodOptions)(nil),  // 16: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil), // 17: google.protobuf.ServiceOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
 	2,  // 0: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
@@ -1350,12 +1370,14 @@ var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
 	16, // 15: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
 	16, // 16: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
 	16, // 17: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
-	0,  // 18: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	3,  // 19: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	18, // [18:20] is the sub-list for extension type_name
-	11, // [11:18] is the sub-list for extension extendee
+	17, // 18: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
+	0,  // 19: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	3,  // 20: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	4,  // 21: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	19, // [19:22] is the sub-list for extension type_name
+	11, // [11:19] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
 }
 
@@ -1381,7 +1403,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      3,
 			NumMessages:   13,
-			NumExtensions: 7,
+			NumExtensions: 8,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_common_v1_common_proto_goTypes,

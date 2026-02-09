@@ -4,6 +4,40 @@ The layout and style of our `.proto` files follow Buf's [style guide](https://do
 
 Below there are some additional guidelines to follow for contributing to the Qdrant Cloud API:
 
+## API versioning
+
+Our API versioning strategy operates on two levels: package-level versioning for major, breaking changes, and a service-level semantic version for more granular tracking and metadata.
+
+### Package Versioning
+
+Package versions (e.g., `v1`, `v2` in `qdrant.cloud.account.v1`) denote major API generations. They are used for significant, backward-incompatible changes that affect the API on a large, architectural scale. 
+When such a change is needed, a new package version is created (e.g., `qdrant.cloud.account.v2`), and the old version is eventually deprecated.
+
+### Service Versioning (Semantic Versioning)
+
+In addition to the package version, each service must specify a semantic version using the `api_version` custom option. This provides more detailed versioning for API gateways and other tools.
+
+The version should follow the [Semantic Versioning 2.0.0 specification](https://semver.org/) (`major.minor.patch`)
+
+- **MAJOR** version: Incremented for incompatible API changes specific to a service. This allows for breaking changes to be introduced within a package version. For example, a service within the `v1` package could evolve from version `2.1.0` to `3.0.0`.
+- **MINOR** version: Incremented when new, backward-compatible functionality is added to the service.
+- **PATCH** version: Incremented for backward-compatible bug fixes.
+
+Here is an example of how to apply the service version:
+
+```proto
+service AccountService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1,
+    minor: 0,
+    patch: 0
+  };
+
+  // ... RPC methods
+}
+```
+
 ## Protobuf guidelines
 
 Review the existing API and services. Do you need a new service, or can you extend an existing one?

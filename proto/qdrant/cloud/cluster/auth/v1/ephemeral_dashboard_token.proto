@@ -9,6 +9,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard, used by the Qdrant Cloud UI
 service EphemeralDashboardTokenService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Creates an ephemeral dashboard token in the account identified by the given ID.
   // Required permissions:
   // - read:clusters
