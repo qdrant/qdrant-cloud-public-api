@@ -11,6 +11,12 @@ import "qdrant/cloud/serverless/collection/v1/collection_config.proto";
 
 // CollectionService provides operations for managing collections
 service CollectionService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // ListCollections returns all collections for the authenticated user
   // Required Permissions:
   // - read:serverless

@@ -1498,7 +1498,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"&INFERENCE_METRICS_INTERVAL_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eINFERENCE_METRICS_INTERVAL_DAY\x10\x01\x12#\n" +
 	"\x1fINFERENCE_METRICS_INTERVAL_WEEK\x10\x02\x12$\n" +
-	" INFERENCE_METRICS_INTERVAL_MONTH\x10\x032\xd8\n" +
+	" INFERENCE_METRICS_INTERVAL_MONTH\x10\x032\xe0\n" +
 	"\n" +
 	"\x11MonitoringService\x12\x9a\x02\n" +
 	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x82\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
@@ -1520,7 +1520,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x1aGetClusterInferenceMetrics\x12=.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest\x1a>.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse\"\x84\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02Q\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inferenceB\x96\x02\n" +
+	"cluster_id\x82\xd3\xe4\x93\x02Q\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference\x1a\x06µ\x18\x02\b\x01B\x96\x02\n" +
 	"\x1ecom.qdrant.cloud.monitoring.v1B\x0fMonitoringProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/monitoring/v1;monitoringv1\xa2\x02\x03QCM\xaa\x02\x1aQdrant.Cloud.Monitoring.V1\xca\x02\x1aQdrant\\Cloud\\Monitoring\\V1\xe2\x02&Qdrant\\Cloud\\Monitoring\\V1\\GPBMetadata\xea\x02\x1dQdrant::Cloud::Monitoring::V1b\x06proto3"
 
 var (

@@ -10,6 +10,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
 service DatabaseApiKeyService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all database api keys in the account identified by the given ID.
   // Required permissions:
   // - read:api_keys
