@@ -13,8 +13,6 @@ service FeatureFlagsService {
   rpc GetFeatureFlags(GetFeatureFlagsRequest) returns (GetFeatureFlagsResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/ui/v1/feature-flags"};
   }
