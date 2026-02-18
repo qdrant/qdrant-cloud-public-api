@@ -18,7 +18,7 @@
   "paths": {
     "/api/ui/v1/feature-flags": {
       "get": {
-        "summary": "Gets the feature flags for the UI.\nRequired permissions:\n- authenticated only",
+        "summary": "Gets the feature flags for the UI.\nRequired permissions:\n- None: no authentication required",
         "operationId": "FeatureFlagsService_GetFeatureFlags",
         "responses": {
           "200": {

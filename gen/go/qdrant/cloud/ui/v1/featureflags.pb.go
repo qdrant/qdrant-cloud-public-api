@@ -165,7 +165,7 @@ const file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc = "" +
 	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled\x12Z\n" +
 	"*cluster_storage_tier_configuration_enabled\x18\x06 \x01(\bR&clusterStorageTierConfigurationEnabled2\xac\x01\n" +
 	"\x13FeatureFlagsService\x12\x94\x01\n" +
-	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
+	"\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"(\x92\xb5\x18\x00\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flagsB\xe0\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\x11FeatureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (
