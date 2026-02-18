@@ -29,7 +29,7 @@ class FeatureFlagsServiceServicer(object):
     def GetFeatureFlags(self, request, context):
         """Gets the feature flags for the UI.
         Required permissions:
-        - authenticated only
+        - None: no authentication required
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -30,7 +30,7 @@ const (
 type FeatureFlagsServiceClient interface {
 	// Gets the feature flags for the UI.
 	// Required permissions:
-	// - authenticated only
+	// - None: no authentication required
 	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*GetFeatureFlagsResponse, error)
 }
 
@@ -60,7 +60,7 @@ func (c *featureFlagsServiceClient) GetFeatureFlags(ctx context.Context, in *Get
 type FeatureFlagsServiceServer interface {
 	// Gets the feature flags for the UI.
 	// Required permissions:
-	// - authenticated only
+	// - None: no authentication required
 	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*GetFeatureFlagsResponse, error)
 	mustEmbedUnimplementedFeatureFlagsServiceServer()
 }
