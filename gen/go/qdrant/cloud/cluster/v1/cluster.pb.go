@@ -2108,8 +2108,15 @@ type ClusterConfiguration struct {
 	TopologySpreadConstraints []*v1.TopologySpreadConstraint `protobuf:"bytes,25,rep,name=topology_spread_constraints,json=topologySpreadConstraints,proto3" json:"topology_spread_constraints,omitempty"`
 	// Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
 	ClusterStorageConfiguration *ClusterStorageConfiguration `protobuf:"bytes,26,opt,name=cluster_storage_configuration,json=clusterStorageConfiguration,proto3,oneof" json:"cluster_storage_configuration,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// Whether the cluster should be deployed across multiple availability zones.
+	// When enabled, nodes are spread across 3 zones for high availability.
+	// This is only available for Premium tier clusters.
+	// When multi_az is enabled, number_of_nodes must be a multiple of 3.
+	// After creation, this field cannot be changed.
+	// This is an optional field, default is false (single-AZ).
+	MultiAz       *bool `protobuf:"varint,27,opt,name=multi_az,json=multiAz,proto3,oneof" json:"multi_az,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfiguration) Reset() {
@@ -2280,6 +2287,13 @@ func (x *ClusterConfiguration) GetClusterStorageConfiguration() *ClusterStorageC
 		return x.ClusterStorageConfiguration
 	}
 	return nil
+}
+
+func (x *ClusterConfiguration) GetMultiAz() bool {
+	if x != nil && x.MultiAz != nil {
+		return *x.MultiAz
+	}
+	return false
 }
 
 // Configuration to setup a Qdrant database.
@@ -3111,9 +3125,13 @@ type ClusterNodeInfo struct {
 	// Endpoint specific to this node.
 	Endpoint *ClusterEndpoint `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// State of the node.
-	State         ClusterNodeState `protobuf:"varint,10,opt,name=state,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeState" json:"state,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	State ClusterNodeState `protobuf:"varint,10,opt,name=state,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeState" json:"state,omitempty"`
+	// The availability zone where this node is running (e.g., "us-east-1a").
+	// This is a read-only field provided by the system.
+	// Only set for Multi-AZ clusters.
+	AvailabilityZone *string `protobuf:"bytes,11,opt,name=availability_zone,json=availabilityZone,proto3,oneof" json:"availability_zone,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ClusterNodeInfo) Reset() {
@@ -3179,6 +3197,13 @@ func (x *ClusterNodeInfo) GetState() ClusterNodeState {
 		return x.State
 	}
 	return ClusterNodeState_CLUSTER_NODE_STATE_UNSPECIFIED
+}
+
+func (x *ClusterNodeInfo) GetAvailabilityZone() string {
+	if x != nil && x.AvailabilityZone != nil {
+		return *x.AvailabilityZone
+	}
+	return ""
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
@@ -3773,7 +3798,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xde\x0f\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\x8b\x10\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
 	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x01R\rnumberOfNodes\x12E\n" +
@@ -3806,7 +3831,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\bR\x11rebalanceStrategy\x88\x01\x01\x12z\n" +
 	"\x1btopology_spread_constraints\x18\x19 \x03(\v20.qdrant.cloud.common.v1.TopologySpreadConstraintB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x19topologySpreadConstraints\x12}\n" +
-	"\x1dcluster_storage_configuration\x18\x1a \x01(\v24.qdrant.cloud.cluster.v1.ClusterStorageConfigurationH\tR\x1bclusterStorageConfiguration\x88\x01\x01B\n" +
+	"\x1dcluster_storage_configuration\x18\x1a \x01(\v24.qdrant.cloud.cluster.v1.ClusterStorageConfigurationH\tR\x1bclusterStorageConfiguration\x88\x01\x01\x12\x1e\n" +
+	"\bmulti_az\x18\x1b \x01(\bH\n" +
+	"R\amultiAz\x88\x01\x01B\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
@@ -3817,7 +3844,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\t_gpu_typeB\x11\n" +
 	"\x0f_restart_policyB\x15\n" +
 	"\x13_rebalance_strategyB \n" +
-	"\x1e_cluster_storage_configuration\"\xf9\x04\n" +
+	"\x1e_cluster_storage_configurationB\v\n" +
+	"\t_multi_az\"\xf9\x04\n" +
 	"\x15DatabaseConfiguration\x12]\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionH\x00R\n" +
@@ -3907,7 +3935,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\x06\xbaH\x03\xc8\x01\x01R\x0fscalabilityInfo\x12>\n" +
 	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoR\x05nodes\x12\x19\n" +
 	"\bjwt_rbac\x18\n" +
-	" \x01(\bR\ajwtRbac\"\x94\x02\n" +
+	" \x01(\bR\ajwtRbac\"\xdc\x02\n" +
 	"\x0fClusterNodeInfo\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x129\n" +
 	"\n" +
@@ -3915,7 +3943,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12D\n" +
 	"\bendpoint\x18\x04 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointR\bendpoint\x12I\n" +
 	"\x05state\x18\n" +
-	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05state\"y\n" +
+	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05state\x120\n" +
+	"\x11availability_zone\x18\v \x01(\tH\x00R\x10availabilityZone\x88\x01\x01B\x14\n" +
+	"\x12_availability_zone\"y\n" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
 	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
 	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
@@ -4252,6 +4282,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[30].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[31].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[35].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[38].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[42].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[43].OneofWrappers = []any{}
 	type x struct{}

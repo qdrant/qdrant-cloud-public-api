@@ -701,6 +701,13 @@ message ClusterConfiguration {
   repeated common.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
   // Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
   optional ClusterStorageConfiguration cluster_storage_configuration = 26;
+  // Whether the cluster should be deployed across multiple availability zones.
+  // When enabled, nodes are spread across 3 zones for high availability.
+  // This is only available for Premium tier clusters.
+  // When multi_az is enabled, number_of_nodes must be a multiple of 3.
+  // After creation, this field cannot be changed.
+  // This is an optional field, default is false (single-AZ).
+  optional bool multi_az = 27;
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
@@ -1013,6 +1020,10 @@ message ClusterNodeInfo {
   ClusterEndpoint endpoint = 4;
   // State of the node.
   ClusterNodeState state = 10 [(buf.validate.field).enum.defined_only = true];
+  // The availability zone where this node is running (e.g., "us-east-1a").
+  // This is a read-only field provided by the system.
+  // Only set for Multi-AZ clusters.
+  optional string availability_zone = 11;
 }
 
 // ClusterNodeState represents the state of a cluster node.
