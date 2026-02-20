@@ -178,6 +178,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "minResources.gpu",
+            "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -374,6 +381,13 @@
           {
             "name": "minResources.disk",
             "description": "The amount of disk (e.g., \"100GiB\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.gpu",
+            "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))",
             "in": "query",
             "required": false,
             "type": "string"
@@ -759,6 +773,10 @@
         "disk": {
           "type": "string",
           "title": "The amount of disk (e.g., \"100GiB\")"
+        },
+        "gpu": {
+          "type": "string",
+          "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
@@ -777,6 +795,10 @@
         "disk": {
           "type": "string",
           "title": "The amount of disk (e.g., \"100GiB\")"
+        },
+        "gpu": {
+          "type": "string",
+          "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."

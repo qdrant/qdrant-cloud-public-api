@@ -143,20 +143,24 @@ class ResourceConfiguration(_message.Message):
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
+    GPU_FIELD_NUMBER: _ClassVar[int]
     ram: str
     cpu: str
     disk: str
-    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ...) -> None: ...
+    gpu: str
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
 
 class ResourceConfigurationFilter(_message.Message):
     __slots__ = ()
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
+    GPU_FIELD_NUMBER: _ClassVar[int]
     ram: str
     cpu: str
     disk: str
-    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ...) -> None: ...
+    gpu: str
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
 
 class GetQuoteRequest(_message.Message):
     __slots__ = ()
