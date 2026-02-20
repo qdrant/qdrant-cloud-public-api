@@ -291,6 +291,8 @@ message ResourceConfiguration {
   string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   string disk = 3 [(buf.validate.field).string.min_len = 1];
+  // The amount of GPU (e.g., "1000m" (1 vGPU))
+  optional string gpu = 4 [(buf.validate.field).string.min_len = 1];
 }
 
 // ResourceConfigurationFilter defines the resource configuration filter for listing packages.
@@ -301,6 +303,8 @@ message ResourceConfigurationFilter {
   optional string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   optional string disk = 3 [(buf.validate.field).string.min_len = 1];
+  // The amount of GPU (e.g., "1000m" (1 vGPU))
+  optional string gpu = 4 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetQuoteRequest is the request for the GetQuote function

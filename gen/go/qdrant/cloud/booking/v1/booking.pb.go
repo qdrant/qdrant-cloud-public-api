@@ -859,7 +859,9 @@ type ResourceConfiguration struct {
 	// The amount of CPU (e.g., "1000m" (1 vCPU))
 	Cpu string `protobuf:"bytes,2,opt,name=cpu,proto3" json:"cpu,omitempty"`
 	// The amount of disk (e.g., "100GiB")
-	Disk          string `protobuf:"bytes,3,opt,name=disk,proto3" json:"disk,omitempty"`
+	Disk string `protobuf:"bytes,3,opt,name=disk,proto3" json:"disk,omitempty"`
+	// The amount of GPU (e.g., "1000m" (1 vGPU))
+	Gpu           *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -915,6 +917,13 @@ func (x *ResourceConfiguration) GetDisk() string {
 	return ""
 }
 
+func (x *ResourceConfiguration) GetGpu() string {
+	if x != nil && x.Gpu != nil {
+		return *x.Gpu
+	}
+	return ""
+}
+
 // ResourceConfigurationFilter defines the resource configuration filter for listing packages.
 type ResourceConfigurationFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -923,7 +932,9 @@ type ResourceConfigurationFilter struct {
 	// The amount of CPU (e.g., "1000m" (1 vCPU))
 	Cpu *string `protobuf:"bytes,2,opt,name=cpu,proto3,oneof" json:"cpu,omitempty"`
 	// The amount of disk (e.g., "100GiB")
-	Disk          *string `protobuf:"bytes,3,opt,name=disk,proto3,oneof" json:"disk,omitempty"`
+	Disk *string `protobuf:"bytes,3,opt,name=disk,proto3,oneof" json:"disk,omitempty"`
+	// The amount of GPU (e.g., "1000m" (1 vGPU))
+	Gpu           *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -975,6 +986,13 @@ func (x *ResourceConfigurationFilter) GetCpu() string {
 func (x *ResourceConfigurationFilter) GetDisk() string {
 	if x != nil && x.Disk != nil {
 		return *x.Disk
+	}
+	return ""
+}
+
+func (x *ResourceConfigurationFilter) GetGpu() string {
+	if x != nil && x.Gpu != nil {
+		return *x.Gpu
 	}
 	return ""
 }
@@ -1802,18 +1820,22 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"\xaa\x01\n" +
 	"-AvailableStoragePerformanceTierConfigurations\x12S\n" +
 	"\x11storage_tier_type\x18\x01 \x01(\x0e2'.qdrant.cloud.common.v1.StorageTierTypeR\x0fstorageTierType\x12$\n" +
-	"\x0eprice_per_hour\x18\x02 \x01(\rR\fpricePerHour\"j\n" +
+	"\x0eprice_per_hour\x18\x02 \x01(\rR\fpricePerHour\"\x92\x01\n" +
 	"\x15ResourceConfiguration\x12\x19\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03ram\x12\x19\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03cpu\x12\x1b\n" +
-	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04disk\"\x98\x01\n" +
+	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04disk\x12\x1e\n" +
+	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03gpu\x88\x01\x01B\x06\n" +
+	"\x04_gpu\"\xc0\x01\n" +
 	"\x1bResourceConfigurationFilter\x12\x1e\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03ram\x88\x01\x01\x12\x1e\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x03cpu\x88\x01\x01\x12 \n" +
-	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04disk\x88\x01\x01B\x06\n" +
+	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04disk\x88\x01\x01\x12\x1e\n" +
+	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x03gpu\x88\x01\x01B\x06\n" +
 	"\x04_ramB\x06\n" +
 	"\x04_cpuB\a\n" +
-	"\x05_disk\"\xa3\x05\n" +
+	"\x05_diskB\x06\n" +
+	"\x04_gpu\"\xa3\x05\n" +
 	"\x0fGetQuoteRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -2010,6 +2032,7 @@ func file_qdrant_cloud_booking_v1_booking_proto_init() {
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[4].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[6].OneofWrappers = []any{}
+	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[9].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[10].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[11].OneofWrappers = []any{}
 	file_qdrant_cloud_booking_v1_booking_proto_msgTypes[13].OneofWrappers = []any{}
