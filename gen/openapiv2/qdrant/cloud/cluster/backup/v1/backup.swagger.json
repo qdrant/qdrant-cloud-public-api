@@ -976,6 +976,10 @@
         "clusterStorageConfiguration": {
           "$ref": "#/definitions/v1ClusterStorageConfiguration",
           "title": "Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration"
+        },
+        "multiAz": {
+          "type": "boolean",
+          "description": "Whether the cluster should be deployed across multiple availability zones.\nWhen enabled, nodes are spread across 3 zones for high availability.\nThis is only available for Premium tier clusters.\nWhen multi_az is enabled, number_of_nodes must be a multiple of 3.\nAfter creation, this field cannot be changed.\nThis is an optional field, default is false (single-AZ)."
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
