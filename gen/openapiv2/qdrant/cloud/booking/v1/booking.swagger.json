@@ -185,6 +185,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "minResources.excludeGpu",
+            "description": "When set no packages with GPU support will be returned.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -391,6 +398,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "minResources.excludeGpu",
+            "description": "When set no packages with GPU support will be returned.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -776,7 +790,7 @@
         },
         "gpu": {
           "type": "string",
-          "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
+          "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))\nThis is an optional field, if it is not set no GPU is provided."
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
@@ -799,6 +813,10 @@
         "gpu": {
           "type": "string",
           "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
+        },
+        "excludeGpu": {
+          "type": "boolean",
+          "description": "When set no packages with GPU support will be returned."
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."

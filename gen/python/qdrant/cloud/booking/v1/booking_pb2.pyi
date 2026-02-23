@@ -156,11 +156,13 @@ class ResourceConfigurationFilter(_message.Message):
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    EXCLUDE_GPU_FIELD_NUMBER: _ClassVar[int]
     ram: str
     cpu: str
     disk: str
     gpu: str
-    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
+    exclude_gpu: bool
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ..., exclude_gpu: _Optional[bool] = ...) -> None: ...
 
 class GetQuoteRequest(_message.Message):
     __slots__ = ()

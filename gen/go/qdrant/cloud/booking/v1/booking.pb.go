@@ -861,6 +861,7 @@ type ResourceConfiguration struct {
 	// The amount of disk (e.g., "100GiB")
 	Disk string `protobuf:"bytes,3,opt,name=disk,proto3" json:"disk,omitempty"`
 	// The amount of GPU (e.g., "1000m" (1 vGPU))
+	// This is an optional field, if it is not set no GPU is provided.
 	Gpu           *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -934,7 +935,9 @@ type ResourceConfigurationFilter struct {
 	// The amount of disk (e.g., "100GiB")
 	Disk *string `protobuf:"bytes,3,opt,name=disk,proto3,oneof" json:"disk,omitempty"`
 	// The amount of GPU (e.g., "1000m" (1 vGPU))
-	Gpu           *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	Gpu *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	// When set no packages with GPU support will be returned.
+	ExcludeGpu    bool `protobuf:"varint,5,opt,name=exclude_gpu,json=excludeGpu,proto3" json:"exclude_gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -995,6 +998,13 @@ func (x *ResourceConfigurationFilter) GetGpu() string {
 		return *x.Gpu
 	}
 	return ""
+}
+
+func (x *ResourceConfigurationFilter) GetExcludeGpu() bool {
+	if x != nil {
+		return x.ExcludeGpu
+	}
+	return false
 }
 
 // GetQuoteRequest is the request for the GetQuote function
@@ -1826,12 +1836,14 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03cpu\x12\x1b\n" +
 	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04disk\x12\x1e\n" +
 	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03gpu\x88\x01\x01B\x06\n" +
-	"\x04_gpu\"\xc0\x01\n" +
+	"\x04_gpu\"\xe1\x01\n" +
 	"\x1bResourceConfigurationFilter\x12\x1e\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03ram\x88\x01\x01\x12\x1e\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x03cpu\x88\x01\x01\x12 \n" +
 	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04disk\x88\x01\x01\x12\x1e\n" +
-	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x03gpu\x88\x01\x01B\x06\n" +
+	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x03gpu\x88\x01\x01\x12\x1f\n" +
+	"\vexclude_gpu\x18\x05 \x01(\bR\n" +
+	"excludeGpuB\x06\n" +
 	"\x04_ramB\x06\n" +
 	"\x04_cpuB\a\n" +
 	"\x05_diskB\x06\n" +
