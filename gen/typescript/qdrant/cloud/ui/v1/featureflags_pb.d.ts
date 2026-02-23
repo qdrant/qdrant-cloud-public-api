@@ -94,7 +94,7 @@ export declare const FeatureFlagsService: GenService<{
   /**
    * Gets the feature flags for the UI.
    * Required permissions:
-   * - authenticated only
+   * - None: no authentication required
    *
    * @generated from rpc qdrant.cloud.ui.v1.FeatureFlagsService.GetFeatureFlags
    */

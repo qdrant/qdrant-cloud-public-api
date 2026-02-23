@@ -15,12 +15,10 @@ service FeatureFlagsService {
   };
   // Gets the feature flags for the UI.
   // Required permissions:
-  // - authenticated only
+  // - None: no authentication required
   rpc GetFeatureFlags(GetFeatureFlagsRequest) returns (GetFeatureFlagsResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
+    // authentication not required
+    option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/ui/v1/feature-flags"};
   }
