@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { MethodOptions } from "@bufbuild/protobuf/wkt";
+import type { MethodOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file qdrant/cloud/common/v1/common.proto.
@@ -702,4 +702,12 @@ export declare const max_message_size: GenExtension<MethodOptions, number>;
  * @generated from extension: repeated qdrant.cloud.common.v1.LogField log_fields = 50007;
  */
 export declare const log_fields: GenExtension<MethodOptions, LogField[]>;
+
+/**
+ * The version of the API, which should follow semantic versioning.
+ * This can be used by API gateways to detect the version of a specific API.
+ *
+ * @generated from extension: optional qdrant.cloud.common.v1.Version api_version = 50008;
+ */
+export declare const api_version: GenExtension<ServiceOptions, Version>;
 

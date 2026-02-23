@@ -422,12 +422,12 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n" +
 	"\x03key\x18\x05 \x01(\tR\x03key:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
 	"\x11management_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ab\n" +
-	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xe2\a\n" +
+	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xea\a\n" +
 	"\vAuthService\x12\xcb\x01\n" +
 	"\x12ListManagementKeys\x12/.qdrant.cloud.auth.v1.ListManagementKeysRequest\x1a0.qdrant.cloud.auth.v1.ListManagementKeysResponse\"R\x8a\xb5\x18\x14read:management_keys\x82\xd3\xe4\x93\x024\x122/api/auth/v1/accounts/{account_id}/management-keys\x12\x81\x03\n" +
 	"\x13CreateManagementKey\x120.qdrant.cloud.auth.v1.CreateManagementKeyRequest\x1a1.qdrant.cloud.auth.v1.CreateManagementKeyResponse\"\x84\x02\x8a\xb5\x18\x15write:management_keys\x92\xb5\x18\x19management_key.account_id\xca\xf3\x18~\b\x01\x12\x0emanagement-key\"\x16resp.management_key.id*R/accounts/{req.management_key.account_id}/management-keys/{resp.management_key.id}\x82\xd3\xe4\x93\x02F:\x01*\"A/api/auth/v1/accounts/{management_key.account_id}/management-keys\x12\x80\x03\n" +
 	"\x13DeleteManagementKey\x120.qdrant.cloud.auth.v1.DeleteManagementKeyRequest\x1a1.qdrant.cloud.auth.v1.DeleteManagementKeyResponse\"\x83\x02\x8a\xb5\x18\x16delete:management_keys\xba\xb5\x18&\n" +
-	"\x11management_key_id\x12\x11management_key_id\xca\xf3\x18m\b\x03\x12\x0emanagement-key\"\x15req.management_key_id*B/accounts/{req.account_id}/management-keys/{req.management_key_id}\x82\xd3\xe4\x93\x02H*F/api/auth/v1/accounts/{account_id}/management-keys/{management_key_id}B\xe6\x01\n" +
+	"\x11management_key_id\x12\x11management_key_id\xca\xf3\x18m\b\x03\x12\x0emanagement-key\"\x15req.management_key_id*B/accounts/{req.account_id}/management-keys/{req.management_key_id}\x82\xd3\xe4\x93\x02H*F/api/auth/v1/accounts/{account_id}/management-keys/{management_key_id}\x1a\x06µ\x18\x02\b\x01B\xe6\x01\n" +
 	"\x18com.qdrant.cloud.auth.v1B\tAuthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1;authv1\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V1\xca\x02\x14Qdrant\\Cloud\\Auth\\V1\xe2\x02 Qdrant\\Cloud\\Auth\\V1\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V1b\x06proto3"
 
 var (

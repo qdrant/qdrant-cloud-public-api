@@ -12,6 +12,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 service HybridCloudService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all hybrid cloud environments in the account identified by the given ID.
   // Required permissions (any-of):
   // - read:hybrid_cloud_environments

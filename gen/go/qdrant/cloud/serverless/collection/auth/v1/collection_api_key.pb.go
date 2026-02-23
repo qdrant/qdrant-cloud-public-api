@@ -569,7 +569,7 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"\x1aCollectionApiKeyAccessType\x12.\n" +
 	"*COLLECTION_API_KEY_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +
 	"(COLLECTION_API_KEY_ACCESS_TYPE_READ_ONLY\x10\x01\x12-\n" +
-	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xa5\r\n" +
+	")COLLECTION_API_KEY_ACCESS_TYPE_READ_WRITE\x10\x022\xad\r\n" +
 	"\x17CollectionApiKeyService\x12\xc7\x02\n" +
 	"\x15ListCollectionApiKeys\x12H.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysRequest\x1aI.qdrant.cloud.serverless.collection.auth.v1.ListCollectionApiKeysResponse\"\x98\x01\x8a\xb5\x18\x18read:serverless_api_keys\xba\xb5\x18\x1e\n" +
 	"\rcollection_id\x12\rcollection_id\x82\xd3\xe4\x93\x02T\x12R/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys\x12\xe0\x05\n" +
@@ -580,7 +580,7 @@ const file_qdrant_cloud_serverless_collection_auth_v1_collection_api_key_proto_r
 	"\x16DeleteCollectionApiKey\x12I.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyRequest\x1aJ.qdrant.cloud.serverless.collection.auth.v1.DeleteCollectionApiKeyResponse\"\xaa\x03\x8a\xb5\x18\x1adelete:serverless_api_keys\xba\xb5\x18\x1e\n" +
 	"\rcollection_id\x12\rcollection_id\xba\xb5\x18.\n" +
 	"\x15collection_api_key_id\x12\x15collection_api_key_id\xca\xf3\x18\xc1\x01\b\x03\x12\x12serverless-api-key\"\x19req.collection_api_key_id*j/accounts/{req.account_id}/serverless-collections/{req.collection_id}/api-keys/{req.collection_api_key_id}R\"\n" +
-	"\rcollection_id\x12\x11req.collection_id\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}B\xfa\x02\n" +
+	"\rcollection_id\x12\x11req.collection_id\x82\xd3\xe4\x93\x02l*j/api/serverless/auth/v1/accounts/{account_id}/collections/{collection_id}/api-keys/{collection_api_key_id}\x1a\x06µ\x18\x02\b\x01B\xfa\x02\n" +
 	".com.qdrant.cloud.serverless.collection.auth.v1B\x15CollectionApiKeyProtoP\x01Zbgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/auth/v1;authv1\xa2\x02\x05QCSCA\xaa\x02*Qdrant.Cloud.Serverless.Collection.Auth.V1\xca\x02*Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\xe2\x026Qdrant\\Cloud\\Serverless\\Collection\\Auth\\V1\\GPBMetadata\xea\x02/Qdrant::Cloud::Serverless::Collection::Auth::V1b\x06proto3"
 
 var (

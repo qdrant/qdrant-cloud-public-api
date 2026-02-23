@@ -9,6 +9,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // MeteringService is the API to retrieve usage data used for billing purposes.
 service MeteringService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists aggregated monthly meterings for the account identified by the given ID.
   // Each summary represents the total metering amount for one month.
   // Required permissions:
