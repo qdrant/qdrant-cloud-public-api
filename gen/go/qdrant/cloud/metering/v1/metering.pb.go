@@ -514,10 +514,10 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB!\n" +
 	"\x1f_billable_entity_reference_nameB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
-	"\x18_discount_amount_percent2\xc7\x03\n" +
+	"\x18_discount_amount_percent2\xcf\x03\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
 	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
-	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}B\x86\x02\n" +
+	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.metering.v1B\rMeteringProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/metering/v1;meteringv1\xa2\x02\x03QCM\xaa\x02\x18Qdrant.Cloud.Metering.V1\xca\x02\x18Qdrant\\Cloud\\Metering\\V1\xe2\x02$Qdrant\\Cloud\\Metering\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Metering::V1b\x06proto3"
 
 var (

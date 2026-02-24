@@ -66,6 +66,13 @@ extend google.protobuf.MethodOptions {
   repeated LogField log_fields = 50007;
 }
 
+// The extension for adding an API version to a service.
+extend google.protobuf.ServiceOptions {
+  // The version of the API, which should follow semantic versioning.
+  // This can be used by API gateways to detect the version of a specific API.
+  optional Version api_version = 50008;
+}
+
 // ActorType specifies the type of actor that can call a method.
 enum ActorType {
   // Default, unspecified actor type. Should generally not be used explicitly in options

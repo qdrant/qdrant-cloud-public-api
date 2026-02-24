@@ -8,6 +8,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // QuotaService is the API used to configure Quotas.
 service QuotaService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Get quotas for the authenticated user.
   // Required permissions:
   // - None (authenticated only)

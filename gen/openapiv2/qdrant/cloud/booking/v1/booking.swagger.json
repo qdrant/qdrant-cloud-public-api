@@ -178,6 +178,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "minResources.gpu",
+            "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.excludeGpu",
+            "description": "When set no packages with GPU support will be returned.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -377,6 +391,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "minResources.gpu",
+            "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minResources.excludeGpu",
+            "description": "When set no packages with GPU support will be returned.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -759,6 +787,10 @@
         "disk": {
           "type": "string",
           "title": "The amount of disk (e.g., \"100GiB\")"
+        },
+        "gpu": {
+          "type": "string",
+          "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))\nThis is an optional field, if it is not set no GPU is provided."
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
@@ -777,6 +809,14 @@
         "disk": {
           "type": "string",
           "title": "The amount of disk (e.g., \"100GiB\")"
+        },
+        "gpu": {
+          "type": "string",
+          "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
+        },
+        "excludeGpu": {
+          "type": "boolean",
+          "description": "When set no packages with GPU support will be returned."
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."

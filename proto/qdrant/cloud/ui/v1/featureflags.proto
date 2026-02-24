@@ -7,6 +7,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // FeatureFlagsService provides feature flags for UI components, this is considered a beta feature.
 service FeatureFlagsService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Gets the feature flags for the UI.
   // Required permissions:
   // - None: no authentication required

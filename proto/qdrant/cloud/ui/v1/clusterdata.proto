@@ -8,6 +8,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // ClusterDataService provides cluster data for UI components, this is considered a beta feature.
 service ClusterDataService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // List the collections for the provided cluster
   // Required permissions:
   // - read:clusters

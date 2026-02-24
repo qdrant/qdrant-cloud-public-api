@@ -410,6 +410,14 @@ export declare type ResourceConfiguration = Message<"qdrant.cloud.booking.v1.Res
    * @generated from field: string disk = 3;
    */
   disk: string;
+
+  /**
+   * The amount of GPU (e.g., "1000m" (1 vGPU))
+   * This is an optional field, if it is not set no GPU is provided.
+   *
+   * @generated from field: optional string gpu = 4;
+   */
+  gpu?: string;
 };
 
 export declare type ResourceConfigurationValid = ResourceConfiguration;
@@ -446,6 +454,20 @@ export declare type ResourceConfigurationFilter = Message<"qdrant.cloud.booking.
    * @generated from field: optional string disk = 3;
    */
   disk?: string;
+
+  /**
+   * The amount of GPU (e.g., "1000m" (1 vGPU))
+   *
+   * @generated from field: optional string gpu = 4;
+   */
+  gpu?: string;
+
+  /**
+   * When set no packages with GPU support will be returned.
+   *
+   * @generated from field: bool exclude_gpu = 5;
+   */
+  excludeGpu: boolean;
 };
 
 export declare type ResourceConfigurationFilterValid = ResourceConfigurationFilter;

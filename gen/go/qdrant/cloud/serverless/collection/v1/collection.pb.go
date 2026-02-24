@@ -776,7 +776,7 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\"COLLECTION_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cCOLLECTION_STATE_PHASE_READY\x10\x01\x12%\n" +
 	"!COLLECTION_STATE_PHASE_PROCESSING\x10\x02\x12#\n" +
-	"\x1fCOLLECTION_STATE_PHASE_DISABLED\x10\x032\xdd\v\n" +
+	"\x1fCOLLECTION_STATE_PHASE_DISABLED\x10\x032\xe5\v\n" +
 	"\x11CollectionService\x12\xe1\x01\n" +
 	"\x0fListCollections\x12=.qdrant.cloud.serverless.collection.v1.ListCollectionsRequest\x1a>.qdrant.cloud.serverless.collection.v1.ListCollectionsResponse\"O\x8a\xb5\x18\x0fread:serverless\x82\xd3\xe4\x93\x026\x124/api/serverless/v1/accounts/{account_id}/collections\x12\xb8\x03\n" +
 	"\x10CreateCollection\x12>.qdrant.cloud.serverless.collection.v1.CreateCollectionRequest\x1a?.qdrant.cloud.serverless.collection.v1.CreateCollectionResponse\"\xa2\x02\x8a\xb5\x18\x10write:serverless\x92\xb5\x18\x15collection.account_id\xba\xb5\x18\"\n" +
@@ -784,7 +784,7 @@ const file_qdrant_cloud_serverless_collection_v1_collection_proto_rawDesc = "" +
 	"\x11UpgradeCollection\x12?.qdrant.cloud.serverless.collection.v1.UpgradeCollectionRequest\x1a@.qdrant.cloud.serverless.collection.v1.UpgradeCollectionResponse\"\xfc\x01\x8a\xb5\x18\x10write:serverless\xba\xb5\x18\x1e\n" +
 	"\rcollection_id\x12\rcollection_id\xca\xf3\x18s\b\x02\x12\x15serverless-collection\"\x11req.collection_id*E/accounts/{req.account_id}/serverless-collections/{req.collection_id}\x82\xd3\xe4\x93\x02I:\x01*\x1aD/api/serverless/v1/accounts/{account_id}/collections/{collection_id}\x12\x90\x03\n" +
 	"\x10DeleteCollection\x12>.qdrant.cloud.serverless.collection.v1.DeleteCollectionRequest\x1a?.qdrant.cloud.serverless.collection.v1.DeleteCollectionResponse\"\xfa\x01\x8a\xb5\x18\x11delete:serverless\xba\xb5\x18\x1e\n" +
-	"\rcollection_id\x12\rcollection_id\xca\xf3\x18s\b\x03\x12\x15serverless-collection\"\x11req.collection_id*E/accounts/{req.account_id}/serverless-collections/{req.collection_id}\x82\xd3\xe4\x93\x02F*D/api/serverless/v1/accounts/{account_id}/collections/{collection_id}B\xda\x02\n" +
+	"\rcollection_id\x12\rcollection_id\xca\xf3\x18s\b\x03\x12\x15serverless-collection\"\x11req.collection_id*E/accounts/{req.account_id}/serverless-collections/{req.collection_id}\x82\xd3\xe4\x93\x02F*D/api/serverless/v1/accounts/{account_id}/collections/{collection_id}\x1a\x06µ\x18\x02\b\x01B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.collection.v1B\x0fCollectionProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/collection/v1;collectionv1\xa2\x02\x04QCSC\xaa\x02%Qdrant.Cloud.Serverless.Collection.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Collection\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Collection\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Collection::V1b\x06proto3"
 
 var (

@@ -10,6 +10,12 @@ import "qdrant/cloud/event/v1/events.proto";
 
 // Service for managing API keys for a serverless collection
 service CollectionApiKeyService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // ListCollectionApiKeys returns all API keys for a collection
   // Required Permissions:
   // - read:serverless_api_keys

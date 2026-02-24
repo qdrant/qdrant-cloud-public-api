@@ -8,6 +8,12 @@ import "qdrant/cloud/common/v1/common.proto";
 
 // BookingService is the API used to configure the booking settings (like packages objects).
 service BookingService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
   // Lists all packages known by the system, optional filtered.
   // Required permissions:
   // - None (authenticated only)
@@ -291,6 +297,9 @@ message ResourceConfiguration {
   string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   string disk = 3 [(buf.validate.field).string.min_len = 1];
+  // The amount of GPU (e.g., "1000m" (1 vGPU))
+  // This is an optional field, if it is not set no GPU is provided.
+  optional string gpu = 4 [(buf.validate.field).string.min_len = 1];
 }
 
 // ResourceConfigurationFilter defines the resource configuration filter for listing packages.
@@ -301,6 +310,10 @@ message ResourceConfigurationFilter {
   optional string cpu = 2 [(buf.validate.field).string.min_len = 1];
   // The amount of disk (e.g., "100GiB")
   optional string disk = 3 [(buf.validate.field).string.min_len = 1];
+  // The amount of GPU (e.g., "1000m" (1 vGPU))
+  optional string gpu = 4 [(buf.validate.field).string.min_len = 1];
+  // When set no packages with GPU support will be returned.
+  bool exclude_gpu = 5;
 }
 
 // GetQuoteRequest is the request for the GetQuote function
