@@ -53,12 +53,14 @@ class ListPackagesRequest(_message.Message):
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     STATUSES_FIELD_NUMBER: _ClassVar[int]
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
+    MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
     min_resources: ResourceConfigurationFilter
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ...) -> None: ...
+    multi_az: bool
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ()

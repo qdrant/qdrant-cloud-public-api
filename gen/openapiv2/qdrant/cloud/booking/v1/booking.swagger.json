@@ -192,6 +192,13 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "multiAz",
+            "description": "Filter packages by multi-AZ support.\nWhen true, only multi-AZ packages are returned.\nWhen false, all packages are returned except multi-AZ.\nWhen not set, all packages are returned.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [

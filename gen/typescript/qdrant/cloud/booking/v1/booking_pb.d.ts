@@ -57,6 +57,16 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
    * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 5;
    */
   minResources?: ResourceConfigurationFilter;
+
+  /**
+   * Filter packages by multi-AZ support.
+   * When true, only multi-AZ packages are returned.
+   * When false, all packages are returned except multi-AZ.
+   * When not set, all packages are returned.
+   *
+   * @generated from field: optional bool multi_az = 6;
+   */
+  multiAz?: boolean;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;
