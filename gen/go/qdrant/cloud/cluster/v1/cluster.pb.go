@@ -3111,9 +3111,13 @@ type ClusterNodeInfo struct {
 	// Endpoint specific to this node.
 	Endpoint *ClusterEndpoint `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// State of the node.
-	State         ClusterNodeState `protobuf:"varint,10,opt,name=state,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeState" json:"state,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	State ClusterNodeState `protobuf:"varint,10,opt,name=state,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeState" json:"state,omitempty"`
+	// The availability zone where this node is running (e.g., "us-east-1a").
+	// This is a read-only field provided by the system.
+	// Only set for Multi-AZ clusters.
+	AvailabilityZone *string `protobuf:"bytes,11,opt,name=availability_zone,json=availabilityZone,proto3,oneof" json:"availability_zone,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ClusterNodeInfo) Reset() {
@@ -3179,6 +3183,13 @@ func (x *ClusterNodeInfo) GetState() ClusterNodeState {
 		return x.State
 	}
 	return ClusterNodeState_CLUSTER_NODE_STATE_UNSPECIFIED
+}
+
+func (x *ClusterNodeInfo) GetAvailabilityZone() string {
+	if x != nil && x.AvailabilityZone != nil {
+		return *x.AvailabilityZone
+	}
+	return ""
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
@@ -3907,7 +3918,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\x06\xbaH\x03\xc8\x01\x01R\x0fscalabilityInfo\x12>\n" +
 	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoR\x05nodes\x12\x19\n" +
 	"\bjwt_rbac\x18\n" +
-	" \x01(\bR\ajwtRbac\"\x94\x02\n" +
+	" \x01(\bR\ajwtRbac\"\xdc\x02\n" +
 	"\x0fClusterNodeInfo\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x129\n" +
 	"\n" +
@@ -3915,7 +3926,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12D\n" +
 	"\bendpoint\x18\x04 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointR\bendpoint\x12I\n" +
 	"\x05state\x18\n" +
-	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05state\"y\n" +
+	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05state\x120\n" +
+	"\x11availability_zone\x18\v \x01(\tH\x00R\x10availabilityZone\x88\x01\x01B\x14\n" +
+	"\x12_availability_zone\"y\n" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
 	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
 	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
@@ -4252,6 +4265,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[30].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[31].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[35].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[38].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[42].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[43].OneofWrappers = []any{}
 	type x struct{}

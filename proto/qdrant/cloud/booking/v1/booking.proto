@@ -138,6 +138,11 @@ message ListPackagesRequest {
   // The minimum resource configuration required.
   // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
   optional ResourceConfigurationFilter min_resources = 5;
+  // Filter packages by multi-AZ support.
+  // When true, only multi-AZ packages are returned.
+  // When false, all packages are returned except multi-AZ.
+  // When not set, all packages are returned.
+  optional bool multi_az = 6;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -270,6 +275,9 @@ message Package {
   // Available storage tier configurations and prices.
   // Always includes at least COST_OPTIMISED storage tier configuration
   repeated AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10 [(buf.validate.field).repeated = {min_items: 1}];
+  // Whether this package supports multi-availability zone deployment.
+  // When a cluster uses this package, nodes are spread across 3 zones for high availability.
+  bool multi_az = 11;
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.

@@ -517,12 +517,14 @@ class ClusterNodeInfo(_message.Message):
     VERSION_FIELD_NUMBER: _ClassVar[int]
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    AVAILABILITY_ZONE_FIELD_NUMBER: _ClassVar[int]
     name: str
     started_at: _timestamp_pb2.Timestamp
     version: str
     endpoint: ClusterEndpoint
     state: ClusterNodeState
-    def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ...) -> None: ...
+    availability_zone: str
+    def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ..., availability_zone: _Optional[str] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ()

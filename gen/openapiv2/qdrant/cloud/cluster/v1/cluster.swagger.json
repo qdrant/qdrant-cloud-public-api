@@ -948,6 +948,10 @@
         "state": {
           "$ref": "#/definitions/v1ClusterNodeState",
           "description": "State of the node."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone where this node is running (e.g., \"us-east-1a\").\nThis is a read-only field provided by the system.\nOnly set for Multi-AZ clusters."
         }
       },
       "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."

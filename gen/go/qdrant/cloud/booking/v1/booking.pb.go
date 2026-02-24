@@ -254,7 +254,12 @@ type ListPackagesRequest struct {
 	Statuses []PackageStatus `protobuf:"varint,4,rep,packed,name=statuses,proto3,enum=qdrant.cloud.booking.v1.PackageStatus" json:"statuses,omitempty"`
 	// The minimum resource configuration required.
 	// This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
-	MinResources  *ResourceConfigurationFilter `protobuf:"bytes,5,opt,name=min_resources,json=minResources,proto3,oneof" json:"min_resources,omitempty"`
+	MinResources *ResourceConfigurationFilter `protobuf:"bytes,5,opt,name=min_resources,json=minResources,proto3,oneof" json:"min_resources,omitempty"`
+	// Filter packages by multi-AZ support.
+	// When true, only multi-AZ packages are returned.
+	// When false, all packages are returned except multi-AZ.
+	// When not set, all packages are returned.
+	MultiAz       *bool `protobuf:"varint,6,opt,name=multi_az,json=multiAz,proto3,oneof" json:"multi_az,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -322,6 +327,13 @@ func (x *ListPackagesRequest) GetMinResources() *ResourceConfigurationFilter {
 		return x.MinResources
 	}
 	return nil
+}
+
+func (x *ListPackagesRequest) GetMultiAz() bool {
+	if x != nil && x.MultiAz != nil {
+		return *x.MultiAz
+	}
+	return false
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -643,8 +655,11 @@ type Package struct {
 	// Available storage tier configurations and prices.
 	// Always includes at least COST_OPTIMISED storage tier configuration
 	AvailableStorageTierConfigurations []*AvailableStoragePerformanceTierConfigurations `protobuf:"bytes,10,rep,name=available_storage_tier_configurations,json=availableStorageTierConfigurations,proto3" json:"available_storage_tier_configurations,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// Whether this package supports multi-availability zone deployment.
+	// When a cluster uses this package, nodes are spread across 3 zones for high availability.
+	MultiAz       bool `protobuf:"varint,11,opt,name=multi_az,json=multiAz,proto3" json:"multi_az,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Package) Reset() {
@@ -745,6 +760,13 @@ func (x *Package) GetAvailableStorageTierConfigurations() []*AvailableStoragePer
 		return x.AvailableStorageTierConfigurations
 	}
 	return nil
+}
+
+func (x *Package) GetMultiAz() bool {
+	if x != nil {
+		return x.MultiAz
+	}
+	return false
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.
@@ -1778,17 +1800,19 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xde\x04\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x8b\x05\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
 	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses\x12^\n" +
-	"\rmin_resources\x18\x05 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	"\rmin_resources\x18\x05 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01\x12\x1e\n" +
+	"\bmulti_az\x18\x06 \x01(\bH\x02R\amultiAz\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x10\n" +
-	"\x0e_min_resources\"N\n" +
+	"\x0e_min_resourcesB\v\n" +
+	"\t_multi_az\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\xfe\x03\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
@@ -1809,7 +1833,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"X\n" +
 	"\x12GetPackageResponse\x12B\n" +
-	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xae\x06\n" +
+	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xc9\x06\n" +
 	"\aPackage\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
 	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
@@ -1824,7 +1848,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04tier\x12\x80\x01\n" +
 	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01\x12\xa3\x01\n" +
 	"%available_storage_tier_configurations\x18\n" +
-	" \x03(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsB\b\xbaH\x05\x92\x01\x02\b\x01R\"availableStorageTierConfigurationsB!\n" +
+	" \x03(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsB\b\xbaH\x05\x92\x01\x02\b\x01R\"availableStorageTierConfigurations\x12\x19\n" +
+	"\bmulti_az\x18\v \x01(\bR\amultiAzB!\n" +
 	"\x1f_available_additional_resources\"M\n" +
 	"\x1cAvailableAdditionalResources\x12-\n" +
 	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"\xaa\x01\n" +

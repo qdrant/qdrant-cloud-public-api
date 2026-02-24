@@ -1019,6 +1019,10 @@ message ClusterNodeInfo {
   ClusterEndpoint endpoint = 4;
   // State of the node.
   ClusterNodeState state = 10 [(buf.validate.field).enum.defined_only = true];
+  // The availability zone where this node is running (e.g., "us-east-1a").
+  // This is a read-only field provided by the system.
+  // Only set for Multi-AZ clusters.
+  optional string availability_zone = 11;
 }
 
 // ClusterNodeState represents the state of a cluster node.

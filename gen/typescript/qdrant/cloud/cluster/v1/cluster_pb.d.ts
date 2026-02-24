@@ -1983,6 +1983,15 @@ export declare type ClusterNodeInfo = Message<"qdrant.cloud.cluster.v1.ClusterNo
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeState state = 10;
    */
   state: ClusterNodeState;
+
+  /**
+   * The availability zone where this node is running (e.g., "us-east-1a").
+   * This is a read-only field provided by the system.
+   * Only set for Multi-AZ clusters.
+   *
+   * @generated from field: optional string availability_zone = 11;
+   */
+  availabilityZone?: string;
 };
 
 export declare type ClusterNodeInfoValid = ClusterNodeInfo;
