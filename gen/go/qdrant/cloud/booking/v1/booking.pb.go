@@ -643,8 +643,11 @@ type Package struct {
 	// Available storage tier configurations and prices.
 	// Always includes at least COST_OPTIMISED storage tier configuration
 	AvailableStorageTierConfigurations []*AvailableStoragePerformanceTierConfigurations `protobuf:"bytes,10,rep,name=available_storage_tier_configurations,json=availableStorageTierConfigurations,proto3" json:"available_storage_tier_configurations,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// Whether this package supports multi-availability zone deployment.
+	// When a cluster uses this package, nodes are spread across 3 zones for high availability.
+	MultiAz       bool `protobuf:"varint,11,opt,name=multi_az,json=multiAz,proto3" json:"multi_az,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Package) Reset() {
@@ -745,6 +748,13 @@ func (x *Package) GetAvailableStorageTierConfigurations() []*AvailableStoragePer
 		return x.AvailableStorageTierConfigurations
 	}
 	return nil
+}
+
+func (x *Package) GetMultiAz() bool {
+	if x != nil {
+		return x.MultiAz
+	}
+	return false
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.
@@ -1809,7 +1819,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_id\"X\n" +
 	"\x12GetPackageResponse\x12B\n" +
-	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xae\x06\n" +
+	"\apackage\x18\x01 \x01(\v2 .qdrant.cloud.booking.v1.PackageB\x06\xbaH\x03\xc8\x01\x01R\apackage\"\xc9\x06\n" +
 	"\aPackage\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12/\n" +
 	"\x04name\x18\x02 \x01(\tB\x1b\xbaH\x18r\x16\x10\x03\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12%\n" +
@@ -1824,7 +1834,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04tier\x12\x80\x01\n" +
 	"\x1eavailable_additional_resources\x18\b \x01(\v25.qdrant.cloud.booking.v1.AvailableAdditionalResourcesH\x00R\x1cavailableAdditionalResources\x88\x01\x01\x12\xa3\x01\n" +
 	"%available_storage_tier_configurations\x18\n" +
-	" \x03(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsB\b\xbaH\x05\x92\x01\x02\b\x01R\"availableStorageTierConfigurationsB!\n" +
+	" \x03(\v2F.qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurationsB\b\xbaH\x05\x92\x01\x02\b\x01R\"availableStorageTierConfigurations\x12\x19\n" +
+	"\bmulti_az\x18\v \x01(\bR\amultiAzB!\n" +
 	"\x1f_available_additional_resources\"M\n" +
 	"\x1cAvailableAdditionalResources\x12-\n" +
 	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"\xaa\x01\n" +

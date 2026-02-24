@@ -270,6 +270,9 @@ message Package {
   // Available storage tier configurations and prices.
   // Always includes at least COST_OPTIMISED storage tier configuration
   repeated AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10 [(buf.validate.field).repeated = {min_items: 1}];
+  // Whether this package supports multi-availability zone deployment.
+  // When a cluster uses this package, nodes are spread across 3 zones for high availability.
+  bool multi_az = 11;
 }
 
 // AvailableAdditionalResources represents additional resources that can be added to the cluster.

@@ -1120,18 +1120,6 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */
   clusterStorageConfiguration?: ClusterStorageConfiguration;
-
-  /**
-   * Whether the cluster should be deployed across multiple availability zones.
-   * When enabled, nodes are spread across 3 zones for high availability.
-   * This is only available for Premium tier clusters.
-   * When multi_az is enabled, number_of_nodes must be a multiple of 3.
-   * After creation, this field cannot be changed.
-   * This is an optional field, default is false (single-AZ).
-   *
-   * @generated from field: optional bool multi_az = 27;
-   */
-  multiAz?: boolean;
 };
 
 /**
@@ -1304,18 +1292,6 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */
   clusterStorageConfiguration?: ClusterStorageConfigurationValid;
-
-  /**
-   * Whether the cluster should be deployed across multiple availability zones.
-   * When enabled, nodes are spread across 3 zones for high availability.
-   * This is only available for Premium tier clusters.
-   * When multi_az is enabled, number_of_nodes must be a multiple of 3.
-   * After creation, this field cannot be changed.
-   * This is an optional field, default is false (single-AZ).
-   *
-   * @generated from field: optional bool multi_az = 27;
-   */
-  multiAz?: boolean;
 };
 
 /**

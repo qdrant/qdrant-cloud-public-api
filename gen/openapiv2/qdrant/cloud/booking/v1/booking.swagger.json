@@ -749,6 +749,10 @@
             "$ref": "#/definitions/v1AvailableStoragePerformanceTierConfigurations"
           },
           "title": "Available storage tier configurations and prices.\nAlways includes at least COST_OPTIMISED storage tier configuration"
+        },
+        "multiAz": {
+          "type": "boolean",
+          "description": "Whether this package supports multi-availability zone deployment.\nWhen a cluster uses this package, nodes are spread across 3 zones for high availability."
         }
       },
       "description": "Package represents a single package.\nA package is a configuration (CPU/Memory/Disk size) for a cluster with a price."

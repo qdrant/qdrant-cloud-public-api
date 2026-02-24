@@ -2108,15 +2108,8 @@ type ClusterConfiguration struct {
 	TopologySpreadConstraints []*v1.TopologySpreadConstraint `protobuf:"bytes,25,rep,name=topology_spread_constraints,json=topologySpreadConstraints,proto3" json:"topology_spread_constraints,omitempty"`
 	// Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
 	ClusterStorageConfiguration *ClusterStorageConfiguration `protobuf:"bytes,26,opt,name=cluster_storage_configuration,json=clusterStorageConfiguration,proto3,oneof" json:"cluster_storage_configuration,omitempty"`
-	// Whether the cluster should be deployed across multiple availability zones.
-	// When enabled, nodes are spread across 3 zones for high availability.
-	// This is only available for Premium tier clusters.
-	// When multi_az is enabled, number_of_nodes must be a multiple of 3.
-	// After creation, this field cannot be changed.
-	// This is an optional field, default is false (single-AZ).
-	MultiAz       *bool `protobuf:"varint,27,opt,name=multi_az,json=multiAz,proto3,oneof" json:"multi_az,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ClusterConfiguration) Reset() {
@@ -2287,13 +2280,6 @@ func (x *ClusterConfiguration) GetClusterStorageConfiguration() *ClusterStorageC
 		return x.ClusterStorageConfiguration
 	}
 	return nil
-}
-
-func (x *ClusterConfiguration) GetMultiAz() bool {
-	if x != nil && x.MultiAz != nil {
-		return *x.MultiAz
-	}
-	return false
 }
 
 // Configuration to setup a Qdrant database.
@@ -3798,7 +3784,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
-	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\x8b\x10\n" +
+	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'\"\xde\x0f\n" +
 	"\x14ClusterConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
 	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x01R\rnumberOfNodes\x12E\n" +
@@ -3831,9 +3817,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\bR\x11rebalanceStrategy\x88\x01\x01\x12z\n" +
 	"\x1btopology_spread_constraints\x18\x19 \x03(\v20.qdrant.cloud.common.v1.TopologySpreadConstraintB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x19topologySpreadConstraints\x12}\n" +
-	"\x1dcluster_storage_configuration\x18\x1a \x01(\v24.qdrant.cloud.cluster.v1.ClusterStorageConfigurationH\tR\x1bclusterStorageConfiguration\x88\x01\x01\x12\x1e\n" +
-	"\bmulti_az\x18\x1b \x01(\bH\n" +
-	"R\amultiAz\x88\x01\x01B\n" +
+	"\x1dcluster_storage_configuration\x18\x1a \x01(\v24.qdrant.cloud.cluster.v1.ClusterStorageConfigurationH\tR\x1bclusterStorageConfiguration\x88\x01\x01B\n" +
 	"\n" +
 	"\b_versionB\x17\n" +
 	"\x15_additional_resourcesB\x19\n" +
@@ -3844,8 +3828,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\t_gpu_typeB\x11\n" +
 	"\x0f_restart_policyB\x15\n" +
 	"\x13_rebalance_strategyB \n" +
-	"\x1e_cluster_storage_configurationB\v\n" +
-	"\t_multi_az\"\xf9\x04\n" +
+	"\x1e_cluster_storage_configuration\"\xf9\x04\n" +
 	"\x15DatabaseConfiguration\x12]\n" +
 	"\n" +
 	"collection\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionH\x00R\n" +

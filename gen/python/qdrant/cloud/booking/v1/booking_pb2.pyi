@@ -112,6 +112,7 @@ class Package(_message.Message):
     TIER_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_ADDITIONAL_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_STORAGE_TIER_CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
+    MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     type: str
@@ -122,7 +123,8 @@ class Package(_message.Message):
     tier: PackageTier
     available_additional_resources: AvailableAdditionalResources
     available_storage_tier_configurations: _containers.RepeatedCompositeFieldContainer[AvailableStoragePerformanceTierConfigurations]
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Iterable[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]]] = ...) -> None: ...
+    multi_az: bool
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Iterable[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]]] = ..., multi_az: _Optional[bool] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
     __slots__ = ()

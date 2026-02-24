@@ -320,6 +320,14 @@ export declare type Package = Message<"qdrant.cloud.booking.v1.Package"> & {
    * @generated from field: repeated qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations available_storage_tier_configurations = 10;
    */
   availableStorageTierConfigurations: AvailableStoragePerformanceTierConfigurations[];
+
+  /**
+   * Whether this package supports multi-availability zone deployment.
+   * When a cluster uses this package, nodes are spread across 3 zones for high availability.
+   *
+   * @generated from field: bool multi_az = 11;
+   */
+  multiAz: boolean;
 };
 
 export declare type PackageValid = Package;
