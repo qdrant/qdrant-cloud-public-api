@@ -1001,6 +1001,10 @@
         "cpu": {
           "$ref": "#/definitions/v1ClusterNodeResources",
           "title": "CPU resources"
+        },
+        "gpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "GPU resources, empty if cluster has no GPU"
         }
       },
       "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."

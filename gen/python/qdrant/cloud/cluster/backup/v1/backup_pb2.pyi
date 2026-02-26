@@ -282,10 +282,12 @@ class ClusterResourcesSummary(_message.Message):
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
+    GPU_FIELD_NUMBER: _ClassVar[int]
     cpu: ResourceQuantity
     ram: ResourceQuantity
     disk: ResourceQuantity
-    def __init__(self, cpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., ram: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., disk: _Optional[_Union[ResourceQuantity, _Mapping]] = ...) -> None: ...
+    gpu: ResourceQuantity
+    def __init__(self, cpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., ram: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., disk: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., gpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ...) -> None: ...
 
 class ResourceQuantity(_message.Message):
     __slots__ = ()

@@ -2065,6 +2065,13 @@ export declare type ClusterNodeResourcesSummary = Message<"qdrant.cloud.cluster.
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResources cpu = 3;
    */
   cpu?: ClusterNodeResources;
+
+  /**
+   * GPU resources, empty if cluster has no GPU
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeResources gpu = 4;
+   */
+  gpu?: ClusterNodeResources;
 };
 
 /**
@@ -2093,6 +2100,13 @@ export declare type ClusterNodeResourcesSummaryValid = Message<"qdrant.cloud.clu
    * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeResources cpu = 3;
    */
   cpu: ClusterNodeResourcesValid;
+
+  /**
+   * GPU resources, empty if cluster has no GPU
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeResources gpu = 4;
+   */
+  gpu?: ClusterNodeResourcesValid;
 };
 
 /**

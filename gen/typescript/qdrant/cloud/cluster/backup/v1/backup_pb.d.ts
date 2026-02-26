@@ -1152,6 +1152,13 @@ export declare type ClusterResourcesSummary = Message<"qdrant.cloud.cluster.back
    * @generated from field: qdrant.cloud.cluster.backup.v1.ResourceQuantity disk = 3;
    */
   disk?: ResourceQuantity;
+
+  /**
+   * GPU resources expressed in millicores, empty if cluster has no GPU
+   *
+   * @generated from field: optional qdrant.cloud.cluster.backup.v1.ResourceQuantity gpu = 4;
+   */
+  gpu?: ResourceQuantity;
 };
 
 export declare type ClusterResourcesSummaryValid = ClusterResourcesSummary;

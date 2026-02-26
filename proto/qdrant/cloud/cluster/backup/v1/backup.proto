@@ -617,6 +617,8 @@ message ClusterResourcesSummary {
   ResourceQuantity ram = 2;
   // Disk resources expressed in binary units (e.g. Gi).
   ResourceQuantity disk = 3;
+  // GPU resources expressed in millicores, empty if cluster has no GPU
+  optional ResourceQuantity gpu = 4;
 }
 
 // Represents a scalar resource quantity with a unit.
