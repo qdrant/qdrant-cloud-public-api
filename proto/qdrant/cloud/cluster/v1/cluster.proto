@@ -1060,6 +1060,8 @@ message ClusterNodeResourcesSummary {
   ClusterNodeResources ram = 2 [(buf.validate.field).required = true];
   // CPU resources
   ClusterNodeResources cpu = 3 [(buf.validate.field).required = true];
+  // GPU resources, empty if cluster has no GPU
+  optional ClusterNodeResources gpu = 4;
 }
 
 // ClusterNodeResources represents the allocation of various resources for a cluster per node.
