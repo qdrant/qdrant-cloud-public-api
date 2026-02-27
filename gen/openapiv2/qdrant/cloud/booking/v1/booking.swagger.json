@@ -187,15 +187,15 @@
             "type": "string"
           },
           {
-            "name": "minResources.excludeGpu",
-            "description": "When set no packages with GPU support will be returned.",
+            "name": "multiAz",
+            "description": "Filter packages by multi-AZ support.\nWhen true, only multi-AZ packages are returned.\nWhen false, all packages are returned except multi-AZ.\nWhen not set, all packages are returned.",
             "in": "query",
             "required": false,
             "type": "boolean"
           },
           {
-            "name": "multiAz",
-            "description": "Filter packages by multi-AZ support.\nWhen true, only multi-AZ packages are returned.\nWhen false, all packages are returned except multi-AZ.\nWhen not set, all packages are returned.",
+            "name": "excludeGpu",
+            "description": "Filter packages by GPU support.\nWhen true,no packages with GPU are returned.\nWhen false, all packages are returned.\nWhen not set, default value is False ( all packages are returned).",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -407,8 +407,8 @@
             "type": "string"
           },
           {
-            "name": "minResources.excludeGpu",
-            "description": "When set no packages with GPU support will be returned.",
+            "name": "excludeGpu",
+            "description": "Filter packages by GPU support.\nWhen true,no packages with GPU are returned.\nWhen false, all packages are returned.\nWhen not set, default value is False ( all packages are returned).",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -824,10 +824,6 @@
         "gpu": {
           "type": "string",
           "title": "The amount of GPU (e.g., \"1000m\" (1 vGPU))"
-        },
-        "excludeGpu": {
-          "type": "boolean",
-          "description": "When set no packages with GPU support will be returned."
         }
       },
       "description": "ResourceConfigurationFilter defines the resource configuration filter for listing packages."
