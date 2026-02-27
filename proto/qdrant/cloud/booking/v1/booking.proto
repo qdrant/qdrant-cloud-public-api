@@ -143,6 +143,11 @@ message ListPackagesRequest {
   // When false, all packages are returned except multi-AZ.
   // When not set, all packages are returned.
   optional bool multi_az = 6;
+  // Filter packages by GPU support.
+  // When true,no packages with GPU are returned.
+  // When false, all packages are returned.
+  // When not set, default value is False ( all packages are returned).
+  optional bool exclude_gpu = 7;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -169,6 +174,11 @@ message ListGlobalPackagesRequest {
   // The minimum resource configuration required.
   // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
   optional ResourceConfigurationFilter min_resources = 3;
+  // Filter packages by GPU support.
+  // When true,no packages with GPU are returned.
+  // When false, all packages are returned.
+  // When not set, default value is False ( all packages are returned).
+  optional bool exclude_gpu = 4;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -320,8 +330,6 @@ message ResourceConfigurationFilter {
   optional string disk = 3 [(buf.validate.field).string.min_len = 1];
   // The amount of GPU (e.g., "1000m" (1 vGPU))
   optional string gpu = 4 [(buf.validate.field).string.min_len = 1];
-  // When set no packages with GPU support will be returned.
-  bool exclude_gpu = 5;
 }
 
 // GetQuoteRequest is the request for the GetQuote function

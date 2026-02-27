@@ -67,6 +67,16 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
    * @generated from field: optional bool multi_az = 6;
    */
   multiAz?: boolean;
+
+  /**
+   * Filter packages by GPU support.
+   * When true,no packages with GPU are returned.
+   * When false, all packages are returned.
+   * When not set, default value is False ( all packages are returned).
+   *
+   * @generated from field: optional bool exclude_gpu = 7;
+   */
+  excludeGpu?: boolean;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;
@@ -129,6 +139,16 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
    * @generated from field: optional qdrant.cloud.booking.v1.ResourceConfigurationFilter min_resources = 3;
    */
   minResources?: ResourceConfigurationFilter;
+
+  /**
+   * Filter packages by GPU support.
+   * When true,no packages with GPU are returned.
+   * When false, all packages are returned.
+   * When not set, default value is False ( all packages are returned).
+   *
+   * @generated from field: optional bool exclude_gpu = 4;
+   */
+  excludeGpu?: boolean;
 };
 
 export declare type ListGlobalPackagesRequestValid = ListGlobalPackagesRequest;
@@ -479,13 +499,6 @@ export declare type ResourceConfigurationFilter = Message<"qdrant.cloud.booking.
    * @generated from field: optional string gpu = 4;
    */
   gpu?: string;
-
-  /**
-   * When set no packages with GPU support will be returned.
-   *
-   * @generated from field: bool exclude_gpu = 5;
-   */
-  excludeGpu: boolean;
 };
 
 export declare type ResourceConfigurationFilterValid = ResourceConfigurationFilter;

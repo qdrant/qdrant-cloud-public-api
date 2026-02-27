@@ -54,13 +54,15 @@ class ListPackagesRequest(_message.Message):
     STATUSES_FIELD_NUMBER: _ClassVar[int]
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
+    EXCLUDE_GPU_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
     cloud_provider_region_id: str
     statuses: _containers.RepeatedScalarFieldContainer[PackageStatus]
     min_resources: ResourceConfigurationFilter
     multi_az: bool
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ...) -> None: ...
+    exclude_gpu: bool
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ..., exclude_gpu: _Optional[bool] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ()
@@ -73,10 +75,12 @@ class ListGlobalPackagesRequest(_message.Message):
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
+    EXCLUDE_GPU_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
     cloud_provider_region_id: str
     min_resources: ResourceConfigurationFilter
-    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ...) -> None: ...
+    exclude_gpu: bool
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., exclude_gpu: _Optional[bool] = ...) -> None: ...
 
 class ListGlobalPackagesResponse(_message.Message):
     __slots__ = ()
@@ -160,13 +164,11 @@ class ResourceConfigurationFilter(_message.Message):
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
-    EXCLUDE_GPU_FIELD_NUMBER: _ClassVar[int]
     ram: str
     cpu: str
     disk: str
     gpu: str
-    exclude_gpu: bool
-    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ..., exclude_gpu: _Optional[bool] = ...) -> None: ...
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
 
 class GetQuoteRequest(_message.Message):
     __slots__ = ()
