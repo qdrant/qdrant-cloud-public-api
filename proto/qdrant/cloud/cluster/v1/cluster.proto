@@ -759,10 +759,10 @@ message DatabaseConfiguration {
   // This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
   // This is an optional field, if unset, the database is not configured for cloud inferencing
   optional DatabaseConfigurationInference inference = 6;
-  // The Augit logging configuration.
+  // The Audit logging configuration.
   // This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
   // This is an optional field.
-  optional DatabaseConfigurationAuditLogging augit_logging = 7;
+  optional DatabaseConfigurationAuditLogging audit_logging = 7;
 }
 
 // The default Qdrant database collection configuration

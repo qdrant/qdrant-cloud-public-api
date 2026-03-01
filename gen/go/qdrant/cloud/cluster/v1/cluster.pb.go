@@ -2364,10 +2364,10 @@ type DatabaseConfiguration struct {
 	// This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
 	// This is an optional field, if unset, the database is not configured for cloud inferencing
 	Inference *DatabaseConfigurationInference `protobuf:"bytes,6,opt,name=inference,proto3,oneof" json:"inference,omitempty"`
-	// The Augit logging configuration.
+	// The Audit logging configuration.
 	// This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
 	// This is an optional field.
-	AugitLogging  *DatabaseConfigurationAuditLogging `protobuf:"bytes,7,opt,name=augit_logging,json=augitLogging,proto3,oneof" json:"augit_logging,omitempty"`
+	AuditLogging  *DatabaseConfigurationAuditLogging `protobuf:"bytes,7,opt,name=audit_logging,json=auditLogging,proto3,oneof" json:"audit_logging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2444,9 +2444,9 @@ func (x *DatabaseConfiguration) GetInference() *DatabaseConfigurationInference {
 	return nil
 }
 
-func (x *DatabaseConfiguration) GetAugitLogging() *DatabaseConfigurationAuditLogging {
+func (x *DatabaseConfiguration) GetAuditLogging() *DatabaseConfigurationAuditLogging {
 	if x != nil {
-		return x.AugitLogging
+		return x.AuditLogging
 	}
 	return nil
 }
@@ -3992,7 +3992,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\blogLevel\x88\x01\x01\x12H\n" +
 	"\x03tls\x18\x05 \x01(\v21.qdrant.cloud.cluster.v1.DatabaseConfigurationTlsH\x04R\x03tls\x88\x01\x01\x12Z\n" +
 	"\tinference\x18\x06 \x01(\v27.qdrant.cloud.cluster.v1.DatabaseConfigurationInferenceH\x05R\tinference\x88\x01\x01\x12d\n" +
-	"\raugit_logging\x18\a \x01(\v2:.qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLoggingH\x06R\faugitLogging\x88\x01\x01B\r\n" +
+	"\raudit_logging\x18\a \x01(\v2:.qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLoggingH\x06R\fauditLogging\x88\x01\x01B\r\n" +
 	"\v_collectionB\n" +
 	"\n" +
 	"\b_storageB\n" +
@@ -4003,7 +4003,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x04_tlsB\f\n" +
 	"\n" +
 	"_inferenceB\x10\n" +
-	"\x0e_augit_logging\"\xc6\x02\n" +
+	"\x0e_audit_logging\"\xc6\x02\n" +
 	"\x1fDatabaseConfigurationCollection\x12;\n" +
 	"\x12replication_factor\x18\x01 \x01(\rB\a\xbaH\x04*\x02(\x01H\x00R\x11replicationFactor\x88\x01\x01\x12F\n" +
 	"\x18write_consistency_factor\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x01H\x01R\x16writeConsistencyFactor\x88\x01\x01\x12^\n" +
@@ -4364,7 +4364,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	4,  // 30: qdrant.cloud.cluster.v1.DatabaseConfiguration.log_level:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel
 	43, // 31: qdrant.cloud.cluster.v1.DatabaseConfiguration.tls:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationTls
 	44, // 32: qdrant.cloud.cluster.v1.DatabaseConfiguration.inference:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationInference
-	46, // 33: qdrant.cloud.cluster.v1.DatabaseConfiguration.augit_logging:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
+	46, // 33: qdrant.cloud.cluster.v1.DatabaseConfiguration.audit_logging:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
 	39, // 34: qdrant.cloud.cluster.v1.DatabaseConfigurationCollection.vectors:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors
 	41, // 35: qdrant.cloud.cluster.v1.DatabaseConfigurationStorage.performance:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance
 	61, // 36: qdrant.cloud.cluster.v1.DatabaseConfigurationService.api_key:type_name -> qdrant.cloud.common.v1.SecretKeyRef

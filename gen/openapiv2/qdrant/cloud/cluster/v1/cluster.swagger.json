@@ -1204,9 +1204,9 @@
           "$ref": "#/definitions/v1DatabaseConfigurationInference",
           "title": "The Qdrant database inference configuration.\nThis setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
         },
-        "augitLogging": {
+        "auditLogging": {
           "$ref": "#/definitions/v1DatabaseConfigurationAuditLogging",
-          "description": "The Augit logging configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
+          "description": "The Audit logging configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
         }
       },
       "description": "Configuration to setup a Qdrant database.\nThe settings apply to managed and/or hybrid cloud, see documentation on each message for more details."

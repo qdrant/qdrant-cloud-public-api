@@ -1363,13 +1363,13 @@ export declare type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.Dat
   inference?: DatabaseConfigurationInference;
 
   /**
-   * The Augit logging configuration.
+   * The Audit logging configuration.
    * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
    * This is an optional field.
    *
-   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging augit_logging = 7;
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging audit_logging = 7;
    */
-  augitLogging?: DatabaseConfigurationAuditLogging;
+  auditLogging?: DatabaseConfigurationAuditLogging;
 };
 
 /**
@@ -1435,13 +1435,13 @@ export declare type DatabaseConfigurationValid = Message<"qdrant.cloud.cluster.v
   inference?: DatabaseConfigurationInferenceValid;
 
   /**
-   * The Augit logging configuration.
+   * The Audit logging configuration.
    * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
    * This is an optional field.
    *
-   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging augit_logging = 7;
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging audit_logging = 7;
    */
-  augitLogging?: DatabaseConfigurationAuditLoggingValid;
+  auditLogging?: DatabaseConfigurationAuditLoggingValid;
 };
 
 /**

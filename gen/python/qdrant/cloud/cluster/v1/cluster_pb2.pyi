@@ -407,15 +407,15 @@ class DatabaseConfiguration(_message.Message):
     LOG_LEVEL_FIELD_NUMBER: _ClassVar[int]
     TLS_FIELD_NUMBER: _ClassVar[int]
     INFERENCE_FIELD_NUMBER: _ClassVar[int]
-    AUGIT_LOGGING_FIELD_NUMBER: _ClassVar[int]
+    AUDIT_LOGGING_FIELD_NUMBER: _ClassVar[int]
     collection: DatabaseConfigurationCollection
     storage: DatabaseConfigurationStorage
     service: DatabaseConfigurationService
     log_level: DatabaseConfigurationLogLevel
     tls: DatabaseConfigurationTls
     inference: DatabaseConfigurationInference
-    augit_logging: DatabaseConfigurationAuditLogging
-    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ..., augit_logging: _Optional[_Union[DatabaseConfigurationAuditLogging, _Mapping]] = ...) -> None: ...
+    audit_logging: DatabaseConfigurationAuditLogging
+    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ..., audit_logging: _Optional[_Union[DatabaseConfigurationAuditLogging, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollection(_message.Message):
     __slots__ = ()
