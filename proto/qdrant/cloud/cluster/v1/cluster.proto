@@ -759,6 +759,10 @@ message DatabaseConfiguration {
   // This setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.
   // This is an optional field, if unset, the database is not configured for cloud inferencing
   optional DatabaseConfigurationInference inference = 6;
+  // The Augit logging configuration.
+  // This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
+  // This is an optional field.
+  optional AugitLogging augit_logging = 7;
 }
 
 // The default Qdrant database collection configuration
@@ -840,6 +844,34 @@ message DatabaseConfigurationInference {
 message AdditionalResources {
   // Additional Disk (expressed in Gib)
   uint32 disk = 3;
+}
+
+// Configuration for Augit logging for qdrant cluster.
+message AugitLogging {
+  // If true, the cluster is configured to use Augit for logging
+  bool enabled = 1;
+  // Rotation specifies the rotation interval: Daily (default) or Hourly.
+  // Rotation interval is how long a single audit log file is used before service starts writing to a new file.
+  // For example, with daily rotation, a new audit log file will be created each day and the previous 
+  // day's log file will be closed and kept for future reference according to the max_log_files setting.
+  optional AuditLogRotation rotation = 2;
+  // MaxLogFiles specifies the maximum number of rotated audit log files to keep.
+  optional uint32 max_log_files = 3 [(buf.validate.field).uint32 = {gte: 1, lte: 1000}];
+  // TrustForwardedHeaders specifies whether to use X-Forwarded-For header to
+	// determine the client address recorded in audit log entries.
+  // For managed cloud clusters, this is always true and the field is ignored. 
+  // For hybrid cloud clusters, this is an optional field, default is false.
+  optional bool trust_forwarded_headers = 4;
+}
+
+// AuditLogRotation defines the rotation interval for audit logs.
+enum AuditLogRotation {
+  // Unspecified rotation.
+  AUDIT_LOG_ROTATION_UNSPECIFIED = 0;
+  // Daily rotation.
+  AUDIT_LOG_ROTATION_DAILY = 1;
+  // Hourly rotation.
+  AUDIT_LOG_ROTATION_HOURLY = 2;
 }
 
 // TolerationOperator defines the valid operators for tolerations.
