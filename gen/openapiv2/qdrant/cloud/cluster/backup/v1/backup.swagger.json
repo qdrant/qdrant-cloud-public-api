@@ -695,6 +695,16 @@
       },
       "title": "AdditionalResources contains the information about additional resources"
     },
+    "v1AuditLogRotation": {
+      "type": "string",
+      "enum": [
+        "AUDIT_LOG_ROTATION_UNSPECIFIED",
+        "AUDIT_LOG_ROTATION_DAILY",
+        "AUDIT_LOG_ROTATION_HOURLY"
+      ],
+      "default": "AUDIT_LOG_ROTATION_UNSPECIFIED",
+      "description": "AuditLogRotation defines the rotation interval for audit logs.\n\n - AUDIT_LOG_ROTATION_UNSPECIFIED: Unspecified rotation.\n - AUDIT_LOG_ROTATION_DAILY: Daily rotation.\n - AUDIT_LOG_ROTATION_HOURLY: Hourly rotation."
+    },
     "v1Backup": {
       "type": "object",
       "properties": {
@@ -1133,9 +1143,36 @@
         "inference": {
           "$ref": "#/definitions/v1DatabaseConfigurationInference",
           "title": "The Qdrant database inference configuration.\nThis setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
+        },
+        "augitLogging": {
+          "$ref": "#/definitions/v1DatabaseConfigurationAuditLogging",
+          "description": "The Augit logging configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
         }
       },
       "description": "Configuration to setup a Qdrant database.\nThe settings apply to managed and/or hybrid cloud, see documentation on each message for more details."
+    },
+    "v1DatabaseConfigurationAuditLogging": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "If true, the cluster is configured to use Audit for logging"
+        },
+        "rotation": {
+          "$ref": "#/definitions/v1AuditLogRotation",
+          "description": "Rotation specifies the rotation interval: Daily (default) or Hourly.\nRotation interval is how long a single audit log file is used before service starts writing to a new file.\nFor example, with daily rotation, a new audit log file will be created each day and the previous\nday's log file will be closed and kept for future reference according to the max_log_files setting."
+        },
+        "maxLogFiles": {
+          "type": "integer",
+          "format": "int64",
+          "description": "MaxLogFiles specifies the maximum number of rotated audit log files to keep.\nDefault is 7."
+        },
+        "trustForwardedHeaders": {
+          "type": "boolean",
+          "description": "TrustForwardedHeaders specifies whether to use X-Forwarded-For header to\ndetermine the client address recorded in audit log entries.\nFor managed cloud clusters, this is always true and the field is ignored.\nFor hybrid cloud clusters, this is an optional field, default is false."
+        }
+      },
+      "description": "Configuration for Audit logging for qdrant cluster."
     },
     "v1DatabaseConfigurationCollection": {
       "type": "object",
