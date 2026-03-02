@@ -475,6 +475,8 @@ enum VectorType {
   VECTOR_TYPE_DENSE = 1;
   // Sparse vector representation.
   VECTOR_TYPE_SPARSE = 2;
+  // Multi vector representation.
+  VECTOR_TYPE_MULTI = 3;
 }
 
 // ModelModality defines the type of data the model processes.

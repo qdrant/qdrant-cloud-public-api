@@ -27,6 +27,7 @@ class VectorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     VECTOR_TYPE_UNSPECIFIED: _ClassVar[VectorType]
     VECTOR_TYPE_DENSE: _ClassVar[VectorType]
     VECTOR_TYPE_SPARSE: _ClassVar[VectorType]
+    VECTOR_TYPE_MULTI: _ClassVar[VectorType]
 
 class ModelModality(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -42,6 +43,7 @@ PACKAGE_TIER_PREMIUM: PackageTier
 VECTOR_TYPE_UNSPECIFIED: VectorType
 VECTOR_TYPE_DENSE: VectorType
 VECTOR_TYPE_SPARSE: VectorType
+VECTOR_TYPE_MULTI: VectorType
 MODEL_MODALITY_UNSPECIFIED: ModelModality
 MODEL_MODALITY_TEXT: ModelModality
 MODEL_MODALITY_IMAGE: ModelModality

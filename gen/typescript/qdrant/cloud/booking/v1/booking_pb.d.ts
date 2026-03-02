@@ -1070,6 +1070,13 @@ export enum VectorType {
    * @generated from enum value: VECTOR_TYPE_SPARSE = 2;
    */
   SPARSE = 2,
+
+  /**
+   * Multi vector representation.
+   *
+   * @generated from enum value: VECTOR_TYPE_MULTI = 3;
+   */
+  MULTI = 3,
 }
 
 /**
