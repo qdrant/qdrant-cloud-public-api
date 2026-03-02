@@ -51,6 +51,12 @@ class DatabaseConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWr
     DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: _ClassVar[DatabaseConfigurationLogLevel]
     DATABASE_CONFIGURATION_LOG_LEVEL_OFF: _ClassVar[DatabaseConfigurationLogLevel]
 
+class AuditLogRotation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    AUDIT_LOG_ROTATION_UNSPECIFIED: _ClassVar[AuditLogRotation]
+    AUDIT_LOG_ROTATION_DAILY: _ClassVar[AuditLogRotation]
+    AUDIT_LOG_ROTATION_HOURLY: _ClassVar[AuditLogRotation]
+
 class TolerationOperator(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     TOLERATION_OPERATOR_UNSPECIFIED: _ClassVar[TolerationOperator]
@@ -122,6 +128,9 @@ DATABASE_CONFIGURATION_LOG_LEVEL_INFO: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_WARN: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_OFF: DatabaseConfigurationLogLevel
+AUDIT_LOG_ROTATION_UNSPECIFIED: AuditLogRotation
+AUDIT_LOG_ROTATION_DAILY: AuditLogRotation
+AUDIT_LOG_ROTATION_HOURLY: AuditLogRotation
 TOLERATION_OPERATOR_UNSPECIFIED: TolerationOperator
 TOLERATION_OPERATOR_EXISTS: TolerationOperator
 TOLERATION_OPERATOR_EQUAL: TolerationOperator
@@ -398,13 +407,15 @@ class DatabaseConfiguration(_message.Message):
     LOG_LEVEL_FIELD_NUMBER: _ClassVar[int]
     TLS_FIELD_NUMBER: _ClassVar[int]
     INFERENCE_FIELD_NUMBER: _ClassVar[int]
+    AUDIT_LOGGING_FIELD_NUMBER: _ClassVar[int]
     collection: DatabaseConfigurationCollection
     storage: DatabaseConfigurationStorage
     service: DatabaseConfigurationService
     log_level: DatabaseConfigurationLogLevel
     tls: DatabaseConfigurationTls
     inference: DatabaseConfigurationInference
-    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ...) -> None: ...
+    audit_logging: DatabaseConfigurationAuditLogging
+    def __init__(self, collection: _Optional[_Union[DatabaseConfigurationCollection, _Mapping]] = ..., storage: _Optional[_Union[DatabaseConfigurationStorage, _Mapping]] = ..., service: _Optional[_Union[DatabaseConfigurationService, _Mapping]] = ..., log_level: _Optional[_Union[DatabaseConfigurationLogLevel, str]] = ..., tls: _Optional[_Union[DatabaseConfigurationTls, _Mapping]] = ..., inference: _Optional[_Union[DatabaseConfigurationInference, _Mapping]] = ..., audit_logging: _Optional[_Union[DatabaseConfigurationAuditLogging, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationCollection(_message.Message):
     __slots__ = ()
@@ -465,6 +476,18 @@ class AdditionalResources(_message.Message):
     DISK_FIELD_NUMBER: _ClassVar[int]
     disk: int
     def __init__(self, disk: _Optional[int] = ...) -> None: ...
+
+class DatabaseConfigurationAuditLogging(_message.Message):
+    __slots__ = ()
+    ENABLED_FIELD_NUMBER: _ClassVar[int]
+    ROTATION_FIELD_NUMBER: _ClassVar[int]
+    MAX_LOG_FILES_FIELD_NUMBER: _ClassVar[int]
+    TRUST_FORWARDED_HEADERS_FIELD_NUMBER: _ClassVar[int]
+    enabled: bool
+    rotation: AuditLogRotation
+    max_log_files: int
+    trust_forwarded_headers: bool
+    def __init__(self, enabled: _Optional[bool] = ..., rotation: _Optional[_Union[AuditLogRotation, str]] = ..., max_log_files: _Optional[int] = ..., trust_forwarded_headers: _Optional[bool] = ...) -> None: ...
 
 class Toleration(_message.Message):
     __slots__ = ()

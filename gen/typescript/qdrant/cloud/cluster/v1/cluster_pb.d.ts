@@ -1361,6 +1361,15 @@ export declare type DatabaseConfiguration = Message<"qdrant.cloud.cluster.v1.Dat
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationInference inference = 6;
    */
   inference?: DatabaseConfigurationInference;
+
+  /**
+   * The Audit logging configuration.
+   * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
+   * This is an optional field.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging audit_logging = 7;
+   */
+  auditLogging?: DatabaseConfigurationAuditLogging;
 };
 
 /**
@@ -1424,6 +1433,15 @@ export declare type DatabaseConfigurationValid = Message<"qdrant.cloud.cluster.v
    * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationInference inference = 6;
    */
   inference?: DatabaseConfigurationInferenceValid;
+
+  /**
+   * The Audit logging configuration.
+   * This setting is for both managed and hybrid cloud clusters, see sub-messages for more details.
+   * This is an optional field.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging audit_logging = 7;
+   */
+  auditLogging?: DatabaseConfigurationAuditLoggingValid;
 };
 
 /**
@@ -1687,6 +1705,56 @@ export declare type AdditionalResourcesValid = AdditionalResources;
  * Use `create(AdditionalResourcesSchema)` to create a new message.
  */
 export declare const AdditionalResourcesSchema: GenMessage<AdditionalResources, {validType: AdditionalResourcesValid}>;
+
+/**
+ * Configuration for Audit logging for qdrant cluster.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
+ */
+export declare type DatabaseConfigurationAuditLogging = Message<"qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging"> & {
+  /**
+   * If true, the cluster is configured to use Audit for logging
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * Rotation specifies the rotation interval: Daily (default) or Hourly.
+   * Rotation interval is how long a single audit log file is used before service starts writing to a new file.
+   * For example, with daily rotation, a new audit log file will be created each day and the previous
+   * day's log file will be closed and kept for future reference according to the max_log_files setting.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.AuditLogRotation rotation = 2;
+   */
+  rotation?: AuditLogRotation;
+
+  /**
+   * MaxLogFiles specifies the maximum number of rotated audit log files to keep.
+   * Default is 7.
+   *
+   * @generated from field: optional uint32 max_log_files = 3;
+   */
+  maxLogFiles?: number;
+
+  /**
+   * TrustForwardedHeaders specifies whether to use X-Forwarded-For header to
+   * determine the client address recorded in audit log entries.
+   * For managed cloud clusters, this is always true and the field is ignored.
+   * For hybrid cloud clusters, this is an optional field, default is false.
+   *
+   * @generated from field: optional bool trust_forwarded_headers = 4;
+   */
+  trustForwardedHeaders?: boolean;
+};
+
+export declare type DatabaseConfigurationAuditLoggingValid = DatabaseConfigurationAuditLogging;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging.
+ * Use `create(DatabaseConfigurationAuditLoggingSchema)` to create a new message.
+ */
+export declare const DatabaseConfigurationAuditLoggingSchema: GenMessage<DatabaseConfigurationAuditLogging, {validType: DatabaseConfigurationAuditLoggingValid}>;
 
 /**
  * The Toleration message represents a toleration object for Kubernetes.
@@ -2543,6 +2611,39 @@ export enum DatabaseConfigurationLogLevel {
  * Describes the enum qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel.
  */
 export declare const DatabaseConfigurationLogLevelSchema: GenEnum<DatabaseConfigurationLogLevel>;
+
+/**
+ * AuditLogRotation defines the rotation interval for audit logs.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.AuditLogRotation
+ */
+export enum AuditLogRotation {
+  /**
+   * Unspecified rotation.
+   *
+   * @generated from enum value: AUDIT_LOG_ROTATION_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Daily rotation.
+   *
+   * @generated from enum value: AUDIT_LOG_ROTATION_DAILY = 1;
+   */
+  DAILY = 1,
+
+  /**
+   * Hourly rotation.
+   *
+   * @generated from enum value: AUDIT_LOG_ROTATION_HOURLY = 2;
+   */
+  HOURLY = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.AuditLogRotation.
+ */
+export declare const AuditLogRotationSchema: GenEnum<AuditLogRotation>;
 
 /**
  * TolerationOperator defines the valid operators for tolerations.
