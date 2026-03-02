@@ -140,6 +140,8 @@ const (
 	VectorType_VECTOR_TYPE_DENSE VectorType = 1
 	// Sparse vector representation.
 	VectorType_VECTOR_TYPE_SPARSE VectorType = 2
+	// Multi vector representation.
+	VectorType_VECTOR_TYPE_MULTI VectorType = 3
 )
 
 // Enum value maps for VectorType.
@@ -148,11 +150,13 @@ var (
 		0: "VECTOR_TYPE_UNSPECIFIED",
 		1: "VECTOR_TYPE_DENSE",
 		2: "VECTOR_TYPE_SPARSE",
+		3: "VECTOR_TYPE_MULTI",
 	}
 	VectorType_value = map[string]int32{
 		"VECTOR_TYPE_UNSPECIFIED": 0,
 		"VECTOR_TYPE_DENSE":       1,
 		"VECTOR_TYPE_SPARSE":      2,
+		"VECTOR_TYPE_MULTI":       3,
 	}
 )
 
@@ -1970,12 +1974,13 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\vPackageTier\x12#\n" +
 	"\x1fPACKAGE_TIER_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15PACKAGE_TIER_STANDARD\x10\x01\x12\x18\n" +
-	"\x14PACKAGE_TIER_PREMIUM\x10\x02*X\n" +
+	"\x14PACKAGE_TIER_PREMIUM\x10\x02*o\n" +
 	"\n" +
 	"VectorType\x12\x1b\n" +
 	"\x17VECTOR_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11VECTOR_TYPE_DENSE\x10\x01\x12\x16\n" +
-	"\x12VECTOR_TYPE_SPARSE\x10\x02*b\n" +
+	"\x12VECTOR_TYPE_SPARSE\x10\x02\x12\x15\n" +
+	"\x11VECTOR_TYPE_MULTI\x10\x03*b\n" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +

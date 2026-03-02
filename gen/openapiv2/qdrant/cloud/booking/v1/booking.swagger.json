@@ -856,10 +856,11 @@
       "enum": [
         "VECTOR_TYPE_UNSPECIFIED",
         "VECTOR_TYPE_DENSE",
-        "VECTOR_TYPE_SPARSE"
+        "VECTOR_TYPE_SPARSE",
+        "VECTOR_TYPE_MULTI"
       ],
       "default": "VECTOR_TYPE_UNSPECIFIED",
-      "description": "VectorType defines the type of vector representation.\n\n - VECTOR_TYPE_UNSPECIFIED: Unspecified vector type.\n - VECTOR_TYPE_DENSE: Dense vector representation.\n - VECTOR_TYPE_SPARSE: Sparse vector representation."
+      "description": "VectorType defines the type of vector representation.\n\n - VECTOR_TYPE_UNSPECIFIED: Unspecified vector type.\n - VECTOR_TYPE_DENSE: Dense vector representation.\n - VECTOR_TYPE_SPARSE: Sparse vector representation.\n - VECTOR_TYPE_MULTI: Multi vector representation."
     }
   }
 }
