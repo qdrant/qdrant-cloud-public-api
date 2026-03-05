@@ -563,6 +563,12 @@ message Cluster {
   // List of labels for a cluster. These labels are used in the cloud ui and billing reports.
   // This is an optional field
   repeated common.v1.KeyValue labels = 12 [(buf.validate.field).repeated = {max_items: 10}];
+  // When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering
+  // usage data as additional meta data to be used for cost allocation in the billing reports.
+  optional string cost_allocation_label = 13 [(buf.validate.field).string = {
+    max_len: 253
+    pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
+  }];
   // Current configuration details of the cluster.
   ClusterConfiguration configuration = 20 [(buf.validate.field).required = true];
   // Current state of the cluster (available after the cluster has been created).

@@ -601,6 +601,10 @@
               },
               "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
             },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
               "description": "Current configuration details of the cluster."
@@ -650,6 +654,10 @@
                 "$ref": "#/definitions/v1KeyValue"
               },
               "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
             },
             "configuration": {
               "$ref": "#/definitions/v1ClusterConfiguration",
@@ -754,6 +762,10 @@
             "$ref": "#/definitions/v1KeyValue"
           },
           "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+        },
+        "costAllocationLabel": {
+          "type": "string",
+          "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",

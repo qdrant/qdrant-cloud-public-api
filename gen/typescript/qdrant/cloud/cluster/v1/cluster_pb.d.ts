@@ -838,6 +838,14 @@ export declare type Cluster = Message<"qdrant.cloud.cluster.v1.Cluster"> & {
   labels: KeyValue[];
 
   /**
+   * When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering
+   * usage data as additional meta data to be used for cost allocation in the billing reports.
+   *
+   * @generated from field: optional string cost_allocation_label = 13;
+   */
+  costAllocationLabel?: string;
+
+  /**
    * Current configuration details of the cluster.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 20;
@@ -927,6 +935,14 @@ export declare type ClusterValid = Message<"qdrant.cloud.cluster.v1.Cluster"> & 
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 12;
    */
   labels: KeyValueValid[];
+
+  /**
+   * When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering
+   * usage data as additional meta data to be used for cost allocation in the billing reports.
+   *
+   * @generated from field: optional string cost_allocation_label = 13;
+   */
+  costAllocationLabel?: string;
 
   /**
    * Current configuration details of the cluster.
