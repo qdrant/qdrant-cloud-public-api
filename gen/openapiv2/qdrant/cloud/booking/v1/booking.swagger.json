@@ -194,8 +194,8 @@
             "type": "boolean"
           },
           {
-            "name": "excludeGpu",
-            "description": "Filter packages by GPU support.\nWhen true,no packages with GPU are returned.\nWhen false, all packages are returned.\nWhen not set, default value is False ( all packages are returned).",
+            "name": "gpu",
+            "description": "Filter packages by GPU support.\nWhen true, only GPU packages are returned.\nWhen false, all packages are returned except GPU.\nWhen not set, all packages are returned.",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -407,8 +407,8 @@
             "type": "string"
           },
           {
-            "name": "excludeGpu",
-            "description": "Filter packages by GPU support.\nWhen true,no packages with GPU are returned.\nWhen false, all packages are returned.\nWhen not set, default value is False ( all packages are returned).",
+            "name": "gpu",
+            "description": "Filter packages by GPU support.\nWhen true, only GPU packages are returned.\nWhen false, all packages are returned except GPU.\nWhen not set, all packages are returned.",
             "in": "query",
             "required": false,
             "type": "boolean"

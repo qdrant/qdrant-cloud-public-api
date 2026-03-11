@@ -70,13 +70,13 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
 
   /**
    * Filter packages by GPU support.
-   * When true,no packages with GPU are returned.
-   * When false, all packages are returned.
-   * When not set, default value is False ( all packages are returned).
+   * When true, only GPU packages are returned.
+   * When false, all packages are returned except GPU.
+   * When not set, all packages are returned.
    *
-   * @generated from field: optional bool exclude_gpu = 7;
+   * @generated from field: optional bool gpu = 7;
    */
-  excludeGpu?: boolean;
+  gpu?: boolean;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;
@@ -142,13 +142,13 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
 
   /**
    * Filter packages by GPU support.
-   * When true,no packages with GPU are returned.
-   * When false, all packages are returned.
-   * When not set, default value is False ( all packages are returned).
+   * When true, only GPU packages are returned.
+   * When false, all packages are returned except GPU.
+   * When not set, all packages are returned.
    *
-   * @generated from field: optional bool exclude_gpu = 4;
+   * @generated from field: optional bool gpu = 4;
    */
-  excludeGpu?: boolean;
+  gpu?: boolean;
 };
 
 export declare type ListGlobalPackagesRequestValid = ListGlobalPackagesRequest;
