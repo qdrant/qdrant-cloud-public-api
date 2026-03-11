@@ -144,10 +144,10 @@ message ListPackagesRequest {
   // When not set, all packages are returned.
   optional bool multi_az = 6;
   // Filter packages by GPU support.
-  // When true,no packages with GPU are returned.
-  // When false, all packages are returned.
-  // When not set, default value is False ( all packages are returned).
-  optional bool exclude_gpu = 7;
+  // When true, only GPU packages are returned.
+  // When false, all packages are returned except GPU.
+  // When not set, all packages are returned.
+  optional bool gpu = 7;
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -175,10 +175,10 @@ message ListGlobalPackagesRequest {
   // This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
   optional ResourceConfigurationFilter min_resources = 3;
   // Filter packages by GPU support.
-  // When true,no packages with GPU are returned.
-  // When false, all packages are returned.
-  // When not set, default value is False ( all packages are returned).
-  optional bool exclude_gpu = 4;
+  // When true, only GPU packages are returned.
+  // When false, all packages are returned except GPU.
+  // When not set, all packages are returned.
+  optional bool gpu = 4;
 }
 
 // ListPackagesResponse is the response from the ListPackages function

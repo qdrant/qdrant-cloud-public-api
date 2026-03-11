@@ -265,10 +265,10 @@ type ListPackagesRequest struct {
 	// When not set, all packages are returned.
 	MultiAz *bool `protobuf:"varint,6,opt,name=multi_az,json=multiAz,proto3,oneof" json:"multi_az,omitempty"`
 	// Filter packages by GPU support.
-	// When true,no packages with GPU are returned.
-	// When false, all packages are returned.
-	// When not set, default value is False ( all packages are returned).
-	ExcludeGpu    *bool `protobuf:"varint,7,opt,name=exclude_gpu,json=excludeGpu,proto3,oneof" json:"exclude_gpu,omitempty"`
+	// When true, only GPU packages are returned.
+	// When false, all packages are returned except GPU.
+	// When not set, all packages are returned.
+	Gpu           *bool `protobuf:"varint,7,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -345,9 +345,9 @@ func (x *ListPackagesRequest) GetMultiAz() bool {
 	return false
 }
 
-func (x *ListPackagesRequest) GetExcludeGpu() bool {
-	if x != nil && x.ExcludeGpu != nil {
-		return *x.ExcludeGpu
+func (x *ListPackagesRequest) GetGpu() bool {
+	if x != nil && x.Gpu != nil {
+		return *x.Gpu
 	}
 	return false
 }
@@ -412,10 +412,10 @@ type ListGlobalPackagesRequest struct {
 	// This is an optional field. If set, only packages that meet or exceed the specified resource configuration are returned.
 	MinResources *ResourceConfigurationFilter `protobuf:"bytes,3,opt,name=min_resources,json=minResources,proto3,oneof" json:"min_resources,omitempty"`
 	// Filter packages by GPU support.
-	// When true,no packages with GPU are returned.
-	// When false, all packages are returned.
-	// When not set, default value is False ( all packages are returned).
-	ExcludeGpu    *bool `protobuf:"varint,4,opt,name=exclude_gpu,json=excludeGpu,proto3,oneof" json:"exclude_gpu,omitempty"`
+	// When true, only GPU packages are returned.
+	// When false, all packages are returned except GPU.
+	// When not set, all packages are returned.
+	Gpu           *bool `protobuf:"varint,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -471,9 +471,9 @@ func (x *ListGlobalPackagesRequest) GetMinResources() *ResourceConfigurationFilt
 	return nil
 }
 
-func (x *ListGlobalPackagesRequest) GetExcludeGpu() bool {
-	if x != nil && x.ExcludeGpu != nil {
-		return *x.ExcludeGpu
+func (x *ListGlobalPackagesRequest) GetGpu() bool {
+	if x != nil && x.Gpu != nil {
+		return *x.Gpu
 	}
 	return false
 }
@@ -1819,7 +1819,7 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xc1\x05\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xaa\x05\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -1827,26 +1827,24 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12B\n" +
 	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses\x12^\n" +
 	"\rmin_resources\x18\x05 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01\x12\x1e\n" +
-	"\bmulti_az\x18\x06 \x01(\bH\x02R\amultiAz\x88\x01\x01\x12$\n" +
-	"\vexclude_gpu\x18\a \x01(\bH\x03R\n" +
-	"excludeGpu\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	"\bmulti_az\x18\x06 \x01(\bH\x02R\amultiAz\x88\x01\x01\x12\x15\n" +
+	"\x03gpu\x18\a \x01(\bH\x03R\x03gpu\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x10\n" +
 	"\x0e_min_resourcesB\v\n" +
-	"\t_multi_azB\x0e\n" +
-	"\f_exclude_gpu\"N\n" +
+	"\t_multi_azB\x06\n" +
+	"\x04_gpu\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\xb4\x04\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x9d\x04\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
 	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12E\n" +
 	"\x18cloud_provider_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x15cloudProviderRegionId\x88\x01\x01\x12^\n" +
-	"\rmin_resources\x18\x03 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01\x12$\n" +
-	"\vexclude_gpu\x18\x04 \x01(\bH\x02R\n" +
-	"excludeGpu\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
+	"\rmin_resources\x18\x03 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01\x12\x15\n" +
+	"\x03gpu\x18\x04 \x01(\bH\x02R\x03gpu\x88\x01\x01:\xd5\x01\xbaH\xd1\x01\x1a\xce\x01\n" +
 	"5list_global_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x10\n" +
-	"\x0e_min_resourcesB\x0e\n" +
-	"\f_exclude_gpu\"T\n" +
+	"\x0e_min_resourcesB\x06\n" +
+	"\x04_gpu\"T\n" +
 	"\x1aListGlobalPackagesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\xc0\x03\n" +
 	"\x11GetPackageRequest\x12'\n" +
