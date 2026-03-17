@@ -34,8 +34,6 @@ message GetFeatureFlagsRequest {
 message GetFeatureFlagsResponse {
   // Whether cluster creation is enabled.
   bool cluster_creation_enabled = 1;
-  // Whether the cluster creation page is enabled.
-  bool cluster_creation_page_enabled = 2;
   // Whether billing cycles are enabled.
   bool billing_cycles_enabled = 3;
   // Whether the entitlement cancellation flow is enabled.

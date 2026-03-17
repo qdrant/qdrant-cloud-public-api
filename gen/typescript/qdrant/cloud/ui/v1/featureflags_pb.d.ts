@@ -42,13 +42,6 @@ export declare type GetFeatureFlagsResponse = Message<"qdrant.cloud.ui.v1.GetFea
   clusterCreationEnabled: boolean;
 
   /**
-   * Whether the cluster creation page is enabled.
-   *
-   * @generated from field: bool cluster_creation_page_enabled = 2;
-   */
-  clusterCreationPageEnabled: boolean;
-
-  /**
    * Whether billing cycles are enabled.
    *
    * @generated from field: bool billing_cycles_enabled = 3;

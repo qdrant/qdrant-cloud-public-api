@@ -65,8 +65,6 @@ type GetFeatureFlagsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether cluster creation is enabled.
 	ClusterCreationEnabled bool `protobuf:"varint,1,opt,name=cluster_creation_enabled,json=clusterCreationEnabled,proto3" json:"cluster_creation_enabled,omitempty"`
-	// Whether the cluster creation page is enabled.
-	ClusterCreationPageEnabled bool `protobuf:"varint,2,opt,name=cluster_creation_page_enabled,json=clusterCreationPageEnabled,proto3" json:"cluster_creation_page_enabled,omitempty"`
 	// Whether billing cycles are enabled.
 	BillingCyclesEnabled bool `protobuf:"varint,3,opt,name=billing_cycles_enabled,json=billingCyclesEnabled,proto3" json:"billing_cycles_enabled,omitempty"`
 	// Whether the entitlement cancellation flow is enabled.
@@ -116,13 +114,6 @@ func (x *GetFeatureFlagsResponse) GetClusterCreationEnabled() bool {
 	return false
 }
 
-func (x *GetFeatureFlagsResponse) GetClusterCreationPageEnabled() bool {
-	if x != nil {
-		return x.ClusterCreationPageEnabled
-	}
-	return false
-}
-
 func (x *GetFeatureFlagsResponse) GetBillingCyclesEnabled() bool {
 	if x != nil {
 		return x.BillingCyclesEnabled
@@ -156,10 +147,9 @@ var File_qdrant_cloud_ui_v1_featureflags_proto protoreflect.FileDescriptor
 const file_qdrant_cloud_ui_v1_featureflags_proto_rawDesc = "" +
 	"\n" +
 	"%qdrant/cloud/ui/v1/featureflags.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n" +
-	"\x16GetFeatureFlagsRequest\"\xb8\x03\n" +
+	"\x16GetFeatureFlagsRequest\"\xf5\x02\n" +
 	"\x17GetFeatureFlagsResponse\x128\n" +
-	"\x18cluster_creation_enabled\x18\x01 \x01(\bR\x16clusterCreationEnabled\x12A\n" +
-	"\x1dcluster_creation_page_enabled\x18\x02 \x01(\bR\x1aclusterCreationPageEnabled\x124\n" +
+	"\x18cluster_creation_enabled\x18\x01 \x01(\bR\x16clusterCreationEnabled\x124\n" +
 	"\x16billing_cycles_enabled\x18\x03 \x01(\bR\x14billingCyclesEnabled\x12E\n" +
 	"\x1fentitlement_cancel_flow_enabled\x18\x04 \x01(\bR\x1centitlementCancelFlowEnabled\x12G\n" +
 	" qdrant_clusters_querying_enabled\x18\x05 \x01(\bR\x1dqdrantClustersQueryingEnabled\x12Z\n" +

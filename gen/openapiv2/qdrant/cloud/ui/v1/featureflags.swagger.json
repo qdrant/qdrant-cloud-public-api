@@ -76,10 +76,6 @@
           "type": "boolean",
           "description": "Whether cluster creation is enabled."
         },
-        "clusterCreationPageEnabled": {
-          "type": "boolean",
-          "description": "Whether the cluster creation page is enabled."
-        },
         "billingCyclesEnabled": {
           "type": "boolean",
           "description": "Whether billing cycles are enabled."
