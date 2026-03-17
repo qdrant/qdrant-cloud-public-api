@@ -425,6 +425,8 @@ message HybridCloudEnvironmentStatus {
   repeated HybridCloudEnvironmentStorageClass storage_classes = 12;
   // Volume snapshot classes available in the hybrid cloud environment
   repeated HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
+  // Volume attributes classes available in the hybrid cloud environment
+  repeated HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
 }
 
 // QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment
@@ -537,6 +539,16 @@ message HybridCloudEnvironmentVolumeSnapshotClass {
   string name = 1 [(buf.validate.field).string.min_len = 1];
   // Driver of the volume snapshot class
   string driver = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// Volume attributes class available in the hybrid cloud environment
+message HybridCloudEnvironmentVolumeAttributesClass {
+  // Name of the volume attributes class
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+  // Driver of the volume attributes class
+  string driver = 2 [(buf.validate.field).string.min_len = 1];
+  // Parameters of the volume attributes class
+  repeated common.v1.KeyValue parameters = 3;
 }
 
 // Info about a node of a hybrid cloud environment

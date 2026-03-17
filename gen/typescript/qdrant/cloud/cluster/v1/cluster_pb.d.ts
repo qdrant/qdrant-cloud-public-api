@@ -1844,6 +1844,38 @@ export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.
    * @generated from field: qdrant.cloud.common.v1.StorageTierType storage_tier_type = 1;
    */
   storageTierType: StorageTierType;
+
+  /**
+   * The storage class to use for the database storage, if different from the environment default.
+   * This is relevant for hybrid cloud clusters only.
+   *
+   * @generated from field: optional string database_storage_class = 2;
+   */
+  databaseStorageClass?: string;
+
+  /**
+   * The storage class to use for the snapshot storage, if different from the the environment default.
+   * This is relevant for hybrid cloud clusters only.
+   *
+   * @generated from field: optional string snapshot_storage_class = 3;
+   */
+  snapshotStorageClass?: string;
+
+  /**
+   * The volume snapshot class to use for the database storage, if different from the the environment default.
+   * This is relevant for hybrid cloud clusters only.
+   *
+   * @generated from field: optional string volume_snapshot_class = 4;
+   */
+  volumeSnapshotClass?: string;
+
+  /**
+   * The volume attributes class to use for the database storage, if different from the the environment default.
+   * This is relevant for hybrid cloud clusters only.
+   *
+   * @generated from field: optional string volume_attributes_class = 5;
+   */
+  volumeAttributesClass?: string;
 };
 
 export declare type ClusterStorageConfigurationValid = ClusterStorageConfiguration;
