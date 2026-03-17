@@ -1176,7 +1176,7 @@
         },
         "volumeSnapshotClass": {
           "type": "string",
-          "description": "The volume snapshot closs to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+          "description": "The volume snapshot class to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
         },
         "volumeAttributesClass": {
           "type": "string",

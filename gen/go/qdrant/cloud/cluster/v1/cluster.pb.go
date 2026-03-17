@@ -3082,7 +3082,7 @@ type ClusterStorageConfiguration struct {
 	// The storage class to use for the snapshot storage, if different from the the environment default.
 	// This is relevant for hybrid cloud clusters only.
 	SnapshotStorageClass *string `protobuf:"bytes,3,opt,name=snapshot_storage_class,json=snapshotStorageClass,proto3,oneof" json:"snapshot_storage_class,omitempty"`
-	// The volume snapshot closs to use for the database storage, if different from the the environment default.
+	// The volume snapshot class to use for the database storage, if different from the the environment default.
 	// This is relevant for hybrid cloud clusters only.
 	VolumeSnapshotClass *string `protobuf:"bytes,4,opt,name=volume_snapshot_class,json=volumeSnapshotClass,proto3,oneof" json:"volume_snapshot_class,omitempty"`
 	// The volume attributes class to use for the database storage, if different from the the environment default.

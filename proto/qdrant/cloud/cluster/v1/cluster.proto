@@ -981,7 +981,7 @@ message ClusterStorageConfiguration {
   // The storage class to use for the snapshot storage, if different from the the environment default.
   // This is relevant for hybrid cloud clusters only.
   optional string snapshot_storage_class = 3 [(buf.validate.field).string.min_len = 1];
-  // The volume snapshot closs to use for the database storage, if different from the the environment default.
+  // The volume snapshot class to use for the database storage, if different from the the environment default.
   // This is relevant for hybrid cloud clusters only.
   optional string volume_snapshot_class = 4 [(buf.validate.field).string.min_len = 1];
   // The volume attributes class to use for the database storage, if different from the the environment default.

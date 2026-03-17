@@ -1862,7 +1862,7 @@ export declare type ClusterStorageConfiguration = Message<"qdrant.cloud.cluster.
   snapshotStorageClass?: string;
 
   /**
-   * The volume snapshot closs to use for the database storage, if different from the the environment default.
+   * The volume snapshot class to use for the database storage, if different from the the environment default.
    * This is relevant for hybrid cloud clusters only.
    *
    * @generated from field: optional string volume_snapshot_class = 4;
