@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Publish packages
         uses: ./.github/actions/publish-packages
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Tag Release
         run: |
@@ -50,7 +50,7 @@ jobs:
           git push origin tag "$VERSION"
 
       - name: Publish Release Notes
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@v7
         with:
           disable-autolabeler: true
           commitish: ${{ github.ref }}
