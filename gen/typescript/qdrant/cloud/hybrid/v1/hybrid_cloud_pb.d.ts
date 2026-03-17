@@ -804,6 +804,13 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
    */
   volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClass[];
+
+  /**
+   * Volume attributes classes available in the hybrid cloud environment
+   *
+   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
+   */
+  volumeAttributesClasses: HybridCloudEnvironmentVolumeAttributesClass[];
 };
 
 /**
@@ -888,6 +895,13 @@ export declare type HybridCloudEnvironmentStatusValid = Message<"qdrant.cloud.hy
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
    */
   volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClassValid[];
+
+  /**
+   * Volume attributes classes available in the hybrid cloud environment
+   *
+   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
+   */
+  volumeAttributesClasses: HybridCloudEnvironmentVolumeAttributesClassValid[];
 };
 
 /**
@@ -1060,6 +1074,42 @@ export declare type HybridCloudEnvironmentVolumeSnapshotClassValid = HybridCloud
  * Use `create(HybridCloudEnvironmentVolumeSnapshotClassSchema)` to create a new message.
  */
 export declare const HybridCloudEnvironmentVolumeSnapshotClassSchema: GenMessage<HybridCloudEnvironmentVolumeSnapshotClass, {validType: HybridCloudEnvironmentVolumeSnapshotClassValid}>;
+
+/**
+ * Volume attributes class available in the hybrid cloud environment
+ *
+ * @generated from message qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass
+ */
+export declare type HybridCloudEnvironmentVolumeAttributesClass = Message<"qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass"> & {
+  /**
+   * Name of the volume attributes class
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Driver of the volume attributes class
+   *
+   * @generated from field: string driver = 2;
+   */
+  driver: string;
+
+  /**
+   * Parameters of the volume attributes class
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue parameters = 3;
+   */
+  parameters: KeyValue[];
+};
+
+export declare type HybridCloudEnvironmentVolumeAttributesClassValid = HybridCloudEnvironmentVolumeAttributesClass;
+
+/**
+ * Describes the message qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass.
+ * Use `create(HybridCloudEnvironmentVolumeAttributesClassSchema)` to create a new message.
+ */
+export declare const HybridCloudEnvironmentVolumeAttributesClassSchema: GenMessage<HybridCloudEnvironmentVolumeAttributesClass, {validType: HybridCloudEnvironmentVolumeAttributesClassValid}>;
 
 /**
  * Info about a node of a hybrid cloud environment

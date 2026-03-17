@@ -713,6 +713,14 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
           "title": "Volume snapshot classes available in the hybrid cloud environment"
+        },
+        "volumeAttributesClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeAttributesClass"
+          },
+          "title": "Volume attributes classes available in the hybrid cloud environment"
         }
       },
       "title": "Status of a hybrid cloud environment, read only"
@@ -762,6 +770,28 @@
         }
       },
       "title": "A storage class available in hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentVolumeAttributesClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name of the volume attributes class"
+        },
+        "driver": {
+          "type": "string",
+          "title": "Driver of the volume attributes class"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "Parameters of the volume attributes class"
+        }
+      },
+      "title": "Volume attributes class available in the hybrid cloud environment"
     },
     "v1HybridCloudEnvironmentVolumeSnapshotClass": {
       "type": "object",
