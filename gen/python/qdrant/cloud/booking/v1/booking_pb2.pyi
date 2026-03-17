@@ -49,7 +49,7 @@ MODEL_MODALITY_TEXT: ModelModality
 MODEL_MODALITY_IMAGE: ModelModality
 
 class ListPackagesRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses", "min_resources", "multi_az", "gpu")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -67,13 +67,13 @@ class ListPackagesRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ..., gpu: _Optional[bool] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Package]
     def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
 
 class ListGlobalPackagesRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "min_resources", "gpu")
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
@@ -85,13 +85,13 @@ class ListGlobalPackagesRequest(_message.Message):
     def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., gpu: _Optional[bool] = ...) -> None: ...
 
 class ListGlobalPackagesResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Package]
     def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
 
 class GetPackageRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "id", "cloud_provider_id", "cloud_provider_region_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
@@ -103,13 +103,13 @@ class GetPackageRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class GetPackageResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("package",)
     PACKAGE_FIELD_NUMBER: _ClassVar[int]
     package: Package
     def __init__(self, package: _Optional[_Union[Package, _Mapping]] = ...) -> None: ...
 
 class Package(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "name", "type", "resource_configuration", "currency", "unit_int_price_per_hour", "status", "tier", "available_additional_resources", "available_storage_tier_configurations", "multi_az")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -135,13 +135,13 @@ class Package(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[str] = ..., resource_configuration: _Optional[_Union[ResourceConfiguration, _Mapping]] = ..., currency: _Optional[str] = ..., unit_int_price_per_hour: _Optional[int] = ..., status: _Optional[_Union[PackageStatus, str]] = ..., tier: _Optional[_Union[PackageTier, str]] = ..., available_additional_resources: _Optional[_Union[AvailableAdditionalResources, _Mapping]] = ..., available_storage_tier_configurations: _Optional[_Iterable[_Union[AvailableStoragePerformanceTierConfigurations, _Mapping]]] = ..., multi_az: _Optional[bool] = ...) -> None: ...
 
 class AvailableAdditionalResources(_message.Message):
-    __slots__ = ()
+    __slots__ = ("disk_price_per_hour",)
     DISK_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     disk_price_per_hour: int
     def __init__(self, disk_price_per_hour: _Optional[int] = ...) -> None: ...
 
 class AvailableStoragePerformanceTierConfigurations(_message.Message):
-    __slots__ = ()
+    __slots__ = ("storage_tier_type", "price_per_hour")
     STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
     PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     storage_tier_type: _common_pb2.StorageTierType
@@ -149,7 +149,7 @@ class AvailableStoragePerformanceTierConfigurations(_message.Message):
     def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ..., price_per_hour: _Optional[int] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
-    __slots__ = ()
+    __slots__ = ("ram", "cpu", "disk", "gpu")
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
@@ -161,7 +161,7 @@ class ResourceConfiguration(_message.Message):
     def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
 
 class ResourceConfigurationFilter(_message.Message):
-    __slots__ = ()
+    __slots__ = ("ram", "cpu", "disk", "gpu")
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
@@ -173,7 +173,7 @@ class ResourceConfigurationFilter(_message.Message):
     def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
 
 class GetQuoteRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "number_of_nodes", "package_id", "additional_disk_gib", "storage_tier_type")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -191,7 +191,7 @@ class GetQuoteRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class GetQuoteResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage")
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
@@ -203,7 +203,7 @@ class GetQuoteResponse(_message.Message):
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
 class GetBackupQuoteRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "backup_size_gib")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -215,7 +215,7 @@ class GetBackupQuoteRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., backup_size_gib: _Optional[int] = ...) -> None: ...
 
 class GetBackupQuoteResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage")
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
@@ -227,7 +227,7 @@ class GetBackupQuoteResponse(_message.Message):
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
 class ListInferenceModelsRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -237,13 +237,13 @@ class ListInferenceModelsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class ListInferenceModelsResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[InferenceModel]
     def __init__(self, items: _Optional[_Iterable[_Union[InferenceModel, _Mapping]]] = ...) -> None: ...
 
 class ListStorageTierTypesRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -253,13 +253,13 @@ class ListStorageTierTypesRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
 
 class ListStorageTierTypesResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[StorageTiers]
     def __init__(self, items: _Optional[_Iterable[_Union[StorageTiers, _Mapping]]] = ...) -> None: ...
 
 class InferenceModel(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "name", "title", "description", "vector_type", "modality", "vendor", "unit_int_price", "is_external", "dimensionality", "max_tokens_per_request", "external_docs_url")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
@@ -287,7 +287,7 @@ class InferenceModel(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., vector_type: _Optional[_Union[VectorType, str]] = ..., modality: _Optional[_Union[ModelModality, str]] = ..., vendor: _Optional[str] = ..., unit_int_price: _Optional[int] = ..., is_external: _Optional[bool] = ..., dimensionality: _Optional[int] = ..., max_tokens_per_request: _Optional[int] = ..., external_docs_url: _Optional[str] = ...) -> None: ...
 
 class StorageTiers(_message.Message):
-    __slots__ = ()
+    __slots__ = ("storage_tier_type",)
     STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
     storage_tier_type: _common_pb2.StorageTierType
     def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...

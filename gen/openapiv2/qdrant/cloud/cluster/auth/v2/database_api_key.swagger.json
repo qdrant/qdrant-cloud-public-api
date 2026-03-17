@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2ListDatabaseApiKeysResponse"
+              "$ref": "#/definitions/v2ListDatabaseApiKeysResponse"
             }
           },
           "default": {
@@ -63,7 +63,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2DeleteDatabaseApiKeyResponse"
+              "$ref": "#/definitions/v2DeleteDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -109,7 +109,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/authv2CreateDatabaseApiKeyResponse"
+              "$ref": "#/definitions/v2CreateDatabaseApiKeyResponse"
             }
           },
           "default": {
@@ -132,7 +132,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/authv2DatabaseApiKeyServiceCreateDatabaseApiKeyBody"
+              "$ref": "#/definitions/DatabaseApiKeyServiceCreateDatabaseApiKeyBody"
             }
           }
         ],
@@ -143,69 +143,7 @@
     }
   },
   "definitions": {
-    "authv2CreateDatabaseApiKeyResponse": {
-      "type": "object",
-      "properties": {
-        "databaseApiKey": {
-          "$ref": "#/definitions/authv2DatabaseApiKey",
-          "description": "The actual database api key."
-        }
-      },
-      "description": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function."
-    },
-    "authv2DatabaseApiKey": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
-        },
-        "accountId": {
-          "type": "string",
-          "description": "The identifier of the account (in GUID format).\nThis is a required field."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
-        },
-        "clusterId": {
-          "type": "string",
-          "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
-        },
-        "accessRules": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2AccessRule"
-          },
-          "description": "A list of rules to grant access to the Qdrant database or to specific\ncollections. If no access rules are provided, global access to the database\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
-        },
-        "createdByEmail": {
-          "type": "string",
-          "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
-        },
-        "postfix": {
-          "type": "string",
-          "description": "Postfix for the database api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
-        },
-        "key": {
-          "type": "string",
-          "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
-        }
-      },
-      "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
-    },
-    "authv2DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
+    "DatabaseApiKeyServiceCreateDatabaseApiKeyBody": {
       "type": "object",
       "properties": {
         "databaseApiKey": {
@@ -259,24 +197,6 @@
         }
       },
       "description": "CreateDatabaseApiKeyRequest is the request for the CreateDatabaseApiKey function."
-    },
-    "authv2DeleteDatabaseApiKeyResponse": {
-      "type": "object",
-      "description": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.\n\nEmpty"
-    },
-    "authv2ListDatabaseApiKeysResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/authv2DatabaseApiKey"
-          },
-          "description": "The actual database api keys in this list."
-        }
-      },
-      "description": "ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function."
     },
     "protobufAny": {
       "type": "object",
@@ -345,6 +265,72 @@
       "description": "- COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform collection-related actions that only read data (like `get collection info`).\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: Grants access to perform collection-related actions that read or write data (like `upsert points`).",
       "title": "CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
     },
+    "v2CreateDatabaseApiKeyResponse": {
+      "type": "object",
+      "properties": {
+        "databaseApiKey": {
+          "$ref": "#/definitions/v2DatabaseApiKey",
+          "description": "The actual database api key."
+        }
+      },
+      "description": "CreateDatabaseApiKeyResponse is the response from the CreateDatabaseApiKey function."
+    },
+    "v2DatabaseApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the database api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration time of the database api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2AccessRule"
+          },
+          "description": "A list of rules to grant access to the Qdrant database or to specific\ncollections. If no access rules are provided, global access to the database\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
+        },
+        "createdByEmail": {
+          "type": "string",
+          "description": "The email of the user who created the database api key.\nThis is an optional read-only field and will be available after a database api key is created.\nIf the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+        },
+        "postfix": {
+          "type": "string",
+          "description": "Postfix for the database api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
+        },
+        "key": {
+          "type": "string",
+          "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
+        }
+      },
+      "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."
+    },
+    "v2DeleteDatabaseApiKeyResponse": {
+      "type": "object",
+      "description": "DeleteDatabaseApiKeyResponse is the response from the DeleteDatabaseApiKey function.\n\nEmpty"
+    },
     "v2GlobalAccessRule": {
       "type": "object",
       "properties": {
@@ -365,6 +351,20 @@
       "default": "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
       "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the database (e.g., update aliases).",
       "title": "GlobalAccessRuleAccessType defines the possible access levels for global access rules.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
+    },
+    "v2ListDatabaseApiKeysResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2DatabaseApiKey"
+          },
+          "description": "The actual database api keys in this list."
+        }
+      },
+      "description": "ListDatabaseApiKeysResponse is the response from the ListDatabaseApiKeys function."
     }
   }
 }

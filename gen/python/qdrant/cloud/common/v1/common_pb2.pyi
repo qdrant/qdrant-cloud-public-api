@@ -57,7 +57,7 @@ API_VERSION_FIELD_NUMBER: _ClassVar[int]
 api_version: _descriptor.FieldDescriptor
 
 class LogField(_message.Message):
-    __slots__ = ()
+    __slots__ = ("name", "field_expression")
     NAME_FIELD_NUMBER: _ClassVar[int]
     FIELD_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -65,7 +65,7 @@ class LogField(_message.Message):
     def __init__(self, name: _Optional[str] = ..., field_expression: _Optional[str] = ...) -> None: ...
 
 class Version(_message.Message):
-    __slots__ = ()
+    __slots__ = ("major", "minor", "patch")
     MAJOR_FIELD_NUMBER: _ClassVar[int]
     MINOR_FIELD_NUMBER: _ClassVar[int]
     PATCH_FIELD_NUMBER: _ClassVar[int]
@@ -75,7 +75,7 @@ class Version(_message.Message):
     def __init__(self, major: _Optional[int] = ..., minor: _Optional[int] = ..., patch: _Optional[int] = ...) -> None: ...
 
 class SecretKeyRef(_message.Message):
-    __slots__ = ()
+    __slots__ = ("name", "key")
     NAME_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     name: str
@@ -83,7 +83,7 @@ class SecretKeyRef(_message.Message):
     def __init__(self, name: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
 
 class KeyValue(_message.Message):
-    __slots__ = ()
+    __slots__ = ("key", "value")
     KEY_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     key: str
@@ -91,7 +91,7 @@ class KeyValue(_message.Message):
     def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
 
 class TopologySpreadConstraint(_message.Message):
-    __slots__ = ()
+    __slots__ = ("max_skew", "topology_key", "when_unsatisfiable")
     MAX_SKEW_FIELD_NUMBER: _ClassVar[int]
     TOPOLOGY_KEY_FIELD_NUMBER: _ClassVar[int]
     WHEN_UNSATISFIABLE_FIELD_NUMBER: _ClassVar[int]
@@ -101,7 +101,7 @@ class TopologySpreadConstraint(_message.Message):
     def __init__(self, max_skew: _Optional[int] = ..., topology_key: _Optional[str] = ..., when_unsatisfiable: _Optional[_Union[TopologySpreadConstraintWhenUnsatisfiable, str]] = ...) -> None: ...
 
 class LabelSelectorRequirement(_message.Message):
-    __slots__ = ()
+    __slots__ = ("key", "operator", "values")
     KEY_FIELD_NUMBER: _ClassVar[int]
     OPERATOR_FIELD_NUMBER: _ClassVar[int]
     VALUES_FIELD_NUMBER: _ClassVar[int]
@@ -111,7 +111,7 @@ class LabelSelectorRequirement(_message.Message):
     def __init__(self, key: _Optional[str] = ..., operator: _Optional[str] = ..., values: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class LabelSelector(_message.Message):
-    __slots__ = ()
+    __slots__ = ("match_labels", "match_expressions")
     MATCH_LABELS_FIELD_NUMBER: _ClassVar[int]
     MATCH_EXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
     match_labels: _containers.RepeatedCompositeFieldContainer[KeyValue]
@@ -119,14 +119,14 @@ class LabelSelector(_message.Message):
     def __init__(self, match_labels: _Optional[_Iterable[_Union[KeyValue, _Mapping]]] = ..., match_expressions: _Optional[_Iterable[_Union[LabelSelectorRequirement, _Mapping]]] = ...) -> None: ...
 
 class IPBlock(_message.Message):
-    __slots__ = ()
+    __slots__ = ("cidr",)
     CIDR_FIELD_NUMBER: _ClassVar[int]
     EXCEPT_FIELD_NUMBER: _ClassVar[int]
     cidr: str
     def __init__(self, cidr: _Optional[str] = ..., **kwargs) -> None: ...
 
 class PeerSelector(_message.Message):
-    __slots__ = ()
+    __slots__ = ("pod_selector", "namespace_selector")
     POD_SELECTOR_FIELD_NUMBER: _ClassVar[int]
     NAMESPACE_SELECTOR_FIELD_NUMBER: _ClassVar[int]
     pod_selector: LabelSelector
@@ -134,7 +134,7 @@ class PeerSelector(_message.Message):
     def __init__(self, pod_selector: _Optional[_Union[LabelSelector, _Mapping]] = ..., namespace_selector: _Optional[_Union[LabelSelector, _Mapping]] = ...) -> None: ...
 
 class NetworkPolicyPeer(_message.Message):
-    __slots__ = ()
+    __slots__ = ("selector", "ip_block")
     SELECTOR_FIELD_NUMBER: _ClassVar[int]
     IP_BLOCK_FIELD_NUMBER: _ClassVar[int]
     selector: PeerSelector
@@ -142,7 +142,7 @@ class NetworkPolicyPeer(_message.Message):
     def __init__(self, selector: _Optional[_Union[PeerSelector, _Mapping]] = ..., ip_block: _Optional[_Union[IPBlock, _Mapping]] = ...) -> None: ...
 
 class NetworkPolicyPort(_message.Message):
-    __slots__ = ()
+    __slots__ = ("protocol", "port_number", "port_name", "end_port")
     PROTOCOL_FIELD_NUMBER: _ClassVar[int]
     PORT_NUMBER_FIELD_NUMBER: _ClassVar[int]
     PORT_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -154,14 +154,14 @@ class NetworkPolicyPort(_message.Message):
     def __init__(self, protocol: _Optional[str] = ..., port_number: _Optional[int] = ..., port_name: _Optional[str] = ..., end_port: _Optional[int] = ...) -> None: ...
 
 class NetworkPolicyIngressRule(_message.Message):
-    __slots__ = ()
+    __slots__ = ("ports",)
     PORTS_FIELD_NUMBER: _ClassVar[int]
     FROM_FIELD_NUMBER: _ClassVar[int]
     ports: _containers.RepeatedCompositeFieldContainer[NetworkPolicyPort]
     def __init__(self, ports: _Optional[_Iterable[_Union[NetworkPolicyPort, _Mapping]]] = ..., **kwargs) -> None: ...
 
 class NetworkPolicyEgressRule(_message.Message):
-    __slots__ = ()
+    __slots__ = ("ports", "to")
     PORTS_FIELD_NUMBER: _ClassVar[int]
     TO_FIELD_NUMBER: _ClassVar[int]
     ports: _containers.RepeatedCompositeFieldContainer[NetworkPolicyPort]

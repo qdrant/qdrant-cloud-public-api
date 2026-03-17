@@ -669,8 +669,7 @@
               "description": "The status of the invite.\nThis is a read-only field."
             }
           },
-          "description": "The details of the invite to create.\nThis is a required field.",
-          "title": "The details of the invite to create.\nThis is a required field."
+          "description": "The details of the invite to create.\nThis is a required field."
         }
       },
       "description": "CreateAccountInviteRequest is the request for the CreateAccountInvite function."

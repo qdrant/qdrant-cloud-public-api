@@ -67,19 +67,19 @@ STRIPE_SETUP_INTENT_STATUS_CANCELED: StripeSetupIntentStatus
 STRIPE_SETUP_INTENT_STATUS_SUCCEEDED: StripeSetupIntentStatus
 
 class ListPaymentMethodsRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListPaymentMethodsResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[PaymentMethod]
     def __init__(self, items: _Optional[_Iterable[_Union[PaymentMethod, _Mapping]]] = ...) -> None: ...
 
 class GetPaymentMethodRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "payment_method_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     PAYMENT_METHOD_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -87,49 +87,49 @@ class GetPaymentMethodRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., payment_method_id: _Optional[str] = ...) -> None: ...
 
 class GetPaymentMethodResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class GetPaymentMethodAvailabilityRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class GetPaymentMethodAvailabilityResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("availability",)
     AVAILABILITY_FIELD_NUMBER: _ClassVar[int]
     availability: PaymentMethodAvailability
     def __init__(self, availability: _Optional[_Union[PaymentMethodAvailability, _Mapping]] = ...) -> None: ...
 
 class CreatePaymentMethodRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class CreatePaymentMethodResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class UpdatePaymentMethodRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class UpdatePaymentMethodResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class DeletePaymentMethodRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "payment_method_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     PAYMENT_METHOD_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -141,7 +141,7 @@ class DeletePaymentMethodResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class GetStripeCheckoutSessionRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "session_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -149,13 +149,13 @@ class GetStripeCheckoutSessionRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., session_id: _Optional[str] = ...) -> None: ...
 
 class GetStripeCheckoutSessionResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("stripe_session",)
     STRIPE_SESSION_FIELD_NUMBER: _ClassVar[int]
     stripe_session: StripeCheckoutSession
     def __init__(self, stripe_session: _Optional[_Union[StripeCheckoutSession, _Mapping]] = ...) -> None: ...
 
 class CreateStripeCheckoutSessionRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "redirect_url")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     REDIRECT_URL_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -163,13 +163,13 @@ class CreateStripeCheckoutSessionRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., redirect_url: _Optional[str] = ...) -> None: ...
 
 class CreateStripeCheckoutSessionResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("stripe_session",)
     STRIPE_SESSION_FIELD_NUMBER: _ClassVar[int]
     stripe_session: StripeCheckoutSession
     def __init__(self, stripe_session: _Optional[_Union[StripeCheckoutSession, _Mapping]] = ...) -> None: ...
 
 class StripeCheckoutSession(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "url", "customer", "setup_intent_id", "setup_intent_status", "setup_intent_payment_method")
     ID_FIELD_NUMBER: _ClassVar[int]
     URL_FIELD_NUMBER: _ClassVar[int]
     CUSTOMER_FIELD_NUMBER: _ClassVar[int]
@@ -185,7 +185,7 @@ class StripeCheckoutSession(_message.Message):
     def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[StripeSetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
 
 class PaymentMethod(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method_details", "billing_address", "created_at", "last_modified_at", "tax_id", "is_default", "status")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -211,13 +211,13 @@ class PaymentMethod(_message.Message):
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
 
 class PaymentMethodAvailability(_message.Message):
-    __slots__ = ()
+    __slots__ = ("status",)
     STATUS_FIELD_NUMBER: _ClassVar[int]
     status: PaymentMethodAvailabilityStatus
     def __init__(self, status: _Optional[_Union[PaymentMethodAvailabilityStatus, str]] = ...) -> None: ...
 
 class RecordCloudMarketplaceEntitlementRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "entitlement_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ENTITLEMENT_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -225,13 +225,13 @@ class RecordCloudMarketplaceEntitlementRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., entitlement_id: _Optional[str] = ...) -> None: ...
 
 class RecordCloudMarketplaceEntitlementResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("payment_method",)
     PAYMENT_METHOD_FIELD_NUMBER: _ClassVar[int]
     payment_method: PaymentMethod
     def __init__(self, payment_method: _Optional[_Union[PaymentMethod, _Mapping]] = ...) -> None: ...
 
 class BillingAddress(_message.Message):
-    __slots__ = ()
+    __slots__ = ("name", "line1", "line2", "postal_code", "city", "state", "state_formatted", "country", "country_formatted", "tax_supported_country")
     NAME_FIELD_NUMBER: _ClassVar[int]
     LINE1_FIELD_NUMBER: _ClassVar[int]
     LINE2_FIELD_NUMBER: _ClassVar[int]
@@ -255,7 +255,7 @@ class BillingAddress(_message.Message):
     def __init__(self, name: _Optional[str] = ..., line1: _Optional[str] = ..., line2: _Optional[str] = ..., postal_code: _Optional[str] = ..., city: _Optional[str] = ..., state: _Optional[str] = ..., state_formatted: _Optional[str] = ..., country: _Optional[str] = ..., country_formatted: _Optional[str] = ..., tax_supported_country: _Optional[bool] = ...) -> None: ...
 
 class PaymentMethodDetails(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "card")
     ID_FIELD_NUMBER: _ClassVar[int]
     CARD_FIELD_NUMBER: _ClassVar[int]
     id: str
@@ -263,7 +263,7 @@ class PaymentMethodDetails(_message.Message):
     def __init__(self, id: _Optional[str] = ..., card: _Optional[_Union[Card, _Mapping]] = ...) -> None: ...
 
 class Card(_message.Message):
-    __slots__ = ()
+    __slots__ = ("brand", "last4", "expiration_month", "expiration_year")
     BRAND_FIELD_NUMBER: _ClassVar[int]
     LAST4_FIELD_NUMBER: _ClassVar[int]
     EXPIRATION_MONTH_FIELD_NUMBER: _ClassVar[int]
