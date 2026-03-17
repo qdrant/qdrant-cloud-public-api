@@ -3076,8 +3076,20 @@ type ClusterStorageConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Type of storage tier
 	StorageTierType v1.StorageTierType `protobuf:"varint,1,opt,name=storage_tier_type,json=storageTierType,proto3,enum=qdrant.cloud.common.v1.StorageTierType" json:"storage_tier_type,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The storage class to use for the database storage, if different from the environment default.
+	// This is relevant for hybrid cloud clusters only.
+	DatabaseStorageClass *string `protobuf:"bytes,2,opt,name=database_storage_class,json=databaseStorageClass,proto3,oneof" json:"database_storage_class,omitempty"`
+	// The storage class to use for the snapshot storage, if different from the the environment default.
+	// This is relevant for hybrid cloud clusters only.
+	SnapshotStorageClass *string `protobuf:"bytes,3,opt,name=snapshot_storage_class,json=snapshotStorageClass,proto3,oneof" json:"snapshot_storage_class,omitempty"`
+	// The volume snapshot closs to use for the database storage, if different from the the environment default.
+	// This is relevant for hybrid cloud clusters only.
+	VolumeSnapshotClass *string `protobuf:"bytes,4,opt,name=volume_snapshot_class,json=volumeSnapshotClass,proto3,oneof" json:"volume_snapshot_class,omitempty"`
+	// The volume attributes class to use for the database storage, if different from the the environment default.
+	// This is relevant for hybrid cloud clusters only.
+	VolumeAttributesClass *string `protobuf:"bytes,5,opt,name=volume_attributes_class,json=volumeAttributesClass,proto3,oneof" json:"volume_attributes_class,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ClusterStorageConfiguration) Reset() {
@@ -3115,6 +3127,34 @@ func (x *ClusterStorageConfiguration) GetStorageTierType() v1.StorageTierType {
 		return x.StorageTierType
 	}
 	return v1.StorageTierType(0)
+}
+
+func (x *ClusterStorageConfiguration) GetDatabaseStorageClass() string {
+	if x != nil && x.DatabaseStorageClass != nil {
+		return *x.DatabaseStorageClass
+	}
+	return ""
+}
+
+func (x *ClusterStorageConfiguration) GetSnapshotStorageClass() string {
+	if x != nil && x.SnapshotStorageClass != nil {
+		return *x.SnapshotStorageClass
+	}
+	return ""
+}
+
+func (x *ClusterStorageConfiguration) GetVolumeSnapshotClass() string {
+	if x != nil && x.VolumeSnapshotClass != nil {
+		return *x.VolumeSnapshotClass
+	}
+	return ""
+}
+
+func (x *ClusterStorageConfiguration) GetVolumeAttributesClass() string {
+	if x != nil && x.VolumeAttributesClass != nil {
+		return *x.VolumeAttributesClass
+	}
+	return ""
 }
 
 // ClusterState represents the current state of a cluster
@@ -4080,9 +4120,17 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\t_operatorB\b\n" +
 	"\x06_valueB\t\n" +
 	"\a_effectB\x15\n" +
-	"\x13_toleration_seconds\"r\n" +
+	"\x13_toleration_seconds\"\xee\x03\n" +
 	"\x1bClusterStorageConfiguration\x12S\n" +
-	"\x11storage_tier_type\x18\x01 \x01(\x0e2'.qdrant.cloud.common.v1.StorageTierTypeR\x0fstorageTierType\"\xd3\x04\n" +
+	"\x11storage_tier_type\x18\x01 \x01(\x0e2'.qdrant.cloud.common.v1.StorageTierTypeR\x0fstorageTierType\x12B\n" +
+	"\x16database_storage_class\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x14databaseStorageClass\x88\x01\x01\x12B\n" +
+	"\x16snapshot_storage_class\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x14snapshotStorageClass\x88\x01\x01\x12@\n" +
+	"\x15volume_snapshot_class\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x13volumeSnapshotClass\x88\x01\x01\x12D\n" +
+	"\x17volume_attributes_class\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x15volumeAttributesClass\x88\x01\x01B\x19\n" +
+	"\x17_database_storage_classB\x19\n" +
+	"\x17_snapshot_storage_classB\x18\n" +
+	"\x16_volume_snapshot_classB\x1a\n" +
+	"\x18_volume_attributes_class\"\xd3\x04\n" +
 	"\fClusterState\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x19\n" +
 	"\bnodes_up\x18\x02 \x01(\rR\anodesUp\x12=\n" +
@@ -4454,6 +4502,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[31].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[35].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[36].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[37].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[39].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[41].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[43].OneofWrappers = []any{}

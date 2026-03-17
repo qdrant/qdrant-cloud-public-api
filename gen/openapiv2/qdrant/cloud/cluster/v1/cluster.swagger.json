@@ -1165,6 +1165,22 @@
           "$ref": "#/definitions/v1StorageTierType",
           "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate message and not just a field",
           "title": "Type of storage tier"
+        },
+        "databaseStorageClass": {
+          "type": "string",
+          "description": "The storage class to use for the database storage, if different from the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "snapshotStorageClass": {
+          "type": "string",
+          "description": "The storage class to use for the snapshot storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "volumeSnapshotClass": {
+          "type": "string",
+          "description": "The volume snapshot closs to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "volumeAttributesClass": {
+          "type": "string",
+          "description": "The volume attributes class to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
         }
       },
       "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"

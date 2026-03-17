@@ -508,8 +508,16 @@ class Toleration(_message.Message):
 class ClusterStorageConfiguration(_message.Message):
     __slots__ = ()
     STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    DATABASE_STORAGE_CLASS_FIELD_NUMBER: _ClassVar[int]
+    SNAPSHOT_STORAGE_CLASS_FIELD_NUMBER: _ClassVar[int]
+    VOLUME_SNAPSHOT_CLASS_FIELD_NUMBER: _ClassVar[int]
+    VOLUME_ATTRIBUTES_CLASS_FIELD_NUMBER: _ClassVar[int]
     storage_tier_type: _common_pb2.StorageTierType
-    def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
+    database_storage_class: str
+    snapshot_storage_class: str
+    volume_snapshot_class: str
+    volume_attributes_class: str
+    def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ..., database_storage_class: _Optional[str] = ..., snapshot_storage_class: _Optional[str] = ..., volume_snapshot_class: _Optional[str] = ..., volume_attributes_class: _Optional[str] = ...) -> None: ...
 
 class ClusterState(_message.Message):
     __slots__ = ()
