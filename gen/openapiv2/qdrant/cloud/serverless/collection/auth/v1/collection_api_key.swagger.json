@@ -191,8 +191,7 @@
               "description": "The key for the collection api key.\nThis is a read-only field and will be available only once in the response of CreateCollectionApiKey.\nYou should securely store this key and it should be handled as a secret."
             }
           },
-          "description": "The API key to create.\nThis is a required field.",
-          "title": "The API key to create.\nThis is a required field."
+          "description": "The API key to create.\nThis is a required field."
         }
       },
       "title": "CreateCollectionApiKeyRequest defines parameters for creating a new collection API key"

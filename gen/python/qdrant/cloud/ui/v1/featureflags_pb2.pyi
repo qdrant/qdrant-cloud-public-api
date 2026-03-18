@@ -11,7 +11,7 @@ class GetFeatureFlagsRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class GetFeatureFlagsResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("cluster_creation_enabled", "billing_cycles_enabled", "entitlement_cancel_flow_enabled", "qdrant_clusters_querying_enabled", "cluster_storage_tier_configuration_enabled")
     CLUSTER_CREATION_ENABLED_FIELD_NUMBER: _ClassVar[int]
     BILLING_CYCLES_ENABLED_FIELD_NUMBER: _ClassVar[int]
     ENTITLEMENT_CANCEL_FLOW_ENABLED_FIELD_NUMBER: _ClassVar[int]

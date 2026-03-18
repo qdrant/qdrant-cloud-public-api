@@ -14,7 +14,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ListDatabaseApiKeysRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "cluster_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -22,25 +22,25 @@ class ListDatabaseApiKeysRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ...) -> None: ...
 
 class ListDatabaseApiKeysResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[DatabaseApiKey]
     def __init__(self, items: _Optional[_Iterable[_Union[DatabaseApiKey, _Mapping]]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("database_api_key",)
     DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
     database_api_key: DatabaseApiKey
     def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class CreateDatabaseApiKeyResponse(_message.Message):
-    __slots__ = ()
+    __slots__ = ("database_api_key",)
     DATABASE_API_KEY_FIELD_NUMBER: _ClassVar[int]
     database_api_key: DatabaseApiKey
     def __init__(self, database_api_key: _Optional[_Union[DatabaseApiKey, _Mapping]] = ...) -> None: ...
 
 class DeleteDatabaseApiKeyRequest(_message.Message):
-    __slots__ = ()
+    __slots__ = ("account_id", "database_api_key_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     DATABASE_API_KEY_ID_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -52,7 +52,7 @@ class DeleteDatabaseApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ()
+    __slots__ = ("id", "account_id", "created_at", "cluster_ids", "prefix", "key")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
