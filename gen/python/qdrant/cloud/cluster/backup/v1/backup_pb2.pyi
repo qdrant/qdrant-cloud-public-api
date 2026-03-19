@@ -278,16 +278,18 @@ class ClusterInfo(_message.Message):
     def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_cluster_pb2.ClusterConfiguration, _Mapping]] = ..., resources_summary: _Optional[_Union[ClusterResourcesSummary, _Mapping]] = ..., restore_package_id: _Optional[str] = ...) -> None: ...
 
 class ClusterResourcesSummary(_message.Message):
-    __slots__ = ("cpu", "ram", "disk", "gpu")
+    __slots__ = ("cpu", "ram", "disk", "gpu", "storage_tier_type")
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
     cpu: ResourceQuantity
     ram: ResourceQuantity
     disk: ResourceQuantity
     gpu: ResourceQuantity
-    def __init__(self, cpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., ram: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., disk: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., gpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ...) -> None: ...
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, cpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., ram: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., disk: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., gpu: _Optional[_Union[ResourceQuantity, _Mapping]] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class ResourceQuantity(_message.Message):
     __slots__ = ("amount", "unit")

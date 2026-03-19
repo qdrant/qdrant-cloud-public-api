@@ -6,6 +6,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Message } from "@bufbuild/protobuf";
 import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { ClusterConfiguration, ClusterConfigurationValid } from "../../v1/cluster_pb.js";
+import type { StorageTierType } from "../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/backup/v1/backup.proto.
@@ -1159,6 +1160,13 @@ export declare type ClusterResourcesSummary = Message<"qdrant.cloud.cluster.back
    * @generated from field: optional qdrant.cloud.cluster.backup.v1.ResourceQuantity gpu = 4;
    */
   gpu?: ResourceQuantity;
+
+  /**
+   * Type of storage tier
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 5;
+   */
+  storageTierType?: StorageTierType;
 };
 
 export declare type ClusterResourcesSummaryValid = ClusterResourcesSummary;

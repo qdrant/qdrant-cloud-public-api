@@ -1070,6 +1070,10 @@
         "gpu": {
           "$ref": "#/definitions/v1ResourceQuantity",
           "title": "GPU resources expressed in millicores, empty if cluster has no GPU"
+        },
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "title": "Type of storage tier"
         }
       },
       "description": "Describes the compute resources captured by a backup."
