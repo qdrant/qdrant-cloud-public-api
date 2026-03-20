@@ -26,7 +26,7 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/ui/v1/featureflags.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n\x16GetFeatureFlagsRequest\"\xf5\x02\n\x17GetFeatureFlagsResponse\x12\x38\n\x18\x63luster_creation_enabled\x18\x01 \x01(\x08R\x16\x63lusterCreationEnabled\x12\x34\n\x16\x62illing_cycles_enabled\x18\x03 \x01(\x08R\x14\x62illingCyclesEnabled\x12\x45\n\x1f\x65ntitlement_cancel_flow_enabled\x18\x04 \x01(\x08R\x1c\x65ntitlementCancelFlowEnabled\x12G\n qdrant_clusters_querying_enabled\x18\x05 \x01(\x08R\x1dqdrantClustersQueryingEnabled\x12Z\n*cluster_storage_tier_configuration_enabled\x18\x06 \x01(\x08R&clusterStorageTierConfigurationEnabled2\xb0\x01\n\x13\x46\x65\x61tureFlagsService\x12\x90\x01\n\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flags\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xe0\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x11\x46\x65\x61tureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%qdrant/cloud/ui/v1/featureflags.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x18\n\x16GetFeatureFlagsRequest\"\x99\x02\n\x17GetFeatureFlagsResponse\x12\x38\n\x18\x63luster_creation_enabled\x18\x01 \x01(\x08R\x16\x63lusterCreationEnabled\x12\x34\n\x16\x62illing_cycles_enabled\x18\x03 \x01(\x08R\x14\x62illingCyclesEnabled\x12\x45\n\x1f\x65ntitlement_cancel_flow_enabled\x18\x04 \x01(\x08R\x1c\x65ntitlementCancelFlowEnabled\x12G\n qdrant_clusters_querying_enabled\x18\x05 \x01(\x08R\x1dqdrantClustersQueryingEnabled2\xb0\x01\n\x13\x46\x65\x61tureFlagsService\x12\x90\x01\n\x0fGetFeatureFlags\x12*.qdrant.cloud.ui.v1.GetFeatureFlagsRequest\x1a+.qdrant.cloud.ui.v1.GetFeatureFlagsResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/ui/v1/feature-flags\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xe0\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x11\x46\x65\x61tureflagsProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -41,7 +41,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_GETFEATUREFLAGSREQUEST']._serialized_start=128
   _globals['_GETFEATUREFLAGSREQUEST']._serialized_end=152
   _globals['_GETFEATUREFLAGSRESPONSE']._serialized_start=155
-  _globals['_GETFEATUREFLAGSRESPONSE']._serialized_end=528
-  _globals['_FEATUREFLAGSSERVICE']._serialized_start=531
-  _globals['_FEATUREFLAGSSERVICE']._serialized_end=707
+  _globals['_GETFEATUREFLAGSRESPONSE']._serialized_end=436
+  _globals['_FEATUREFLAGSSERVICE']._serialized_start=439
+  _globals['_FEATUREFLAGSSERVICE']._serialized_end=615
 # @@protoc_insertion_point(module_scope)
