@@ -659,7 +659,7 @@ message ClusterConfiguration {
   // Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
-    max_items: 20
+    max_items: 40
     items: {
       string: {ipv4_prefix: true}
     }
