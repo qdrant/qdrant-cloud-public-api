@@ -4005,7 +4005,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\vannotations\x18\n" +
 	" \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\vannotations\x12H\n" +
-	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10\x14\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12_\n" +
+	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12_\n" +
 	"\fservice_type\x18\f \x01(\x0e2+.qdrant.cloud.cluster.v1.ClusterServiceTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\vserviceType\x88\x01\x01\x12[\n" +
 	"\x13service_annotations\x18\r \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10@R\x12serviceAnnotations\x12I\n" +
