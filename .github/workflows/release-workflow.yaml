@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Publish packages
         uses: ./.github/actions/publish-packages
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Tag Release
         run: |
@@ -50,7 +50,7 @@ jobs:
           git push origin tag "$VERSION"
 
       - name: Publish Release Notes
-        uses: release-drafter/release-drafter@v7
+        uses: release-drafter/release-drafter@139054aeaa9adc52ab36ddf67437541f039b88e2 # v7.1.1
         with:
           disable-autolabeler: true
           commitish: ${{ github.ref }}
