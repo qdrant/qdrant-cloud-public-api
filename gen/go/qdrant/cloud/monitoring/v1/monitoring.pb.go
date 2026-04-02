@@ -355,8 +355,12 @@ type GetClusterUsageMetricsResponse struct {
 	Rps []*Metric `protobuf:"bytes,7,rep,name=rps,proto3" json:"rps,omitempty"`
 	// Timeseries of request latency across the cluster.
 	Latency []*Metric `protobuf:"bytes,8,rep,name=latency,proto3" json:"latency,omitempty"`
+	// Timeseries of overall GPU usage across the cluster.
+	Gpu []*Metric `protobuf:"bytes,9,rep,name=gpu,proto3" json:"gpu,omitempty"`
+	// Timeseries of overall GPU memory usage across the cluster.
+	GpuMemory []*Metric `protobuf:"bytes,10,rep,name=gpu_memory,json=gpuMemory,proto3" json:"gpu_memory,omitempty"`
 	// Per-node metrics.
-	Nodes         []*ClusterNodeUsageMetrics `protobuf:"bytes,9,rep,name=nodes,proto3" json:"nodes,omitempty"`
+	Nodes         []*ClusterNodeUsageMetrics `protobuf:"bytes,11,rep,name=nodes,proto3" json:"nodes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -443,6 +447,20 @@ func (x *GetClusterUsageMetricsResponse) GetRps() []*Metric {
 func (x *GetClusterUsageMetricsResponse) GetLatency() []*Metric {
 	if x != nil {
 		return x.Latency
+	}
+	return nil
+}
+
+func (x *GetClusterUsageMetricsResponse) GetGpu() []*Metric {
+	if x != nil {
+		return x.Gpu
+	}
+	return nil
+}
+
+func (x *GetClusterUsageMetricsResponse) GetGpuMemory() []*Metric {
+	if x != nil {
+		return x.GpuMemory
 	}
 	return nil
 }
@@ -915,7 +933,11 @@ type ClusterNodeMetrics struct {
 	// Overview of RSS memory usage by the Qdrant database.
 	RamQdrantRss *ClusterMetricOverview `protobuf:"bytes,6,opt,name=ram_qdrant_rss,json=ramQdrantRss,proto3" json:"ram_qdrant_rss,omitempty"`
 	// Overview of disk usage.
-	Disk          *ClusterMetricOverview `protobuf:"bytes,7,opt,name=disk,proto3" json:"disk,omitempty"`
+	Disk *ClusterMetricOverview `protobuf:"bytes,7,opt,name=disk,proto3" json:"disk,omitempty"`
+	// optional Overview of GPU usage.
+	Gpu *ClusterMetricOverview `protobuf:"bytes,8,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	// Overview of GPU memory usage.
+	GpuMemory     *ClusterMetricOverview `protobuf:"bytes,9,opt,name=gpu_memory,json=gpuMemory,proto3,oneof" json:"gpu_memory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -995,6 +1017,20 @@ func (x *ClusterNodeMetrics) GetRamQdrantRss() *ClusterMetricOverview {
 func (x *ClusterNodeMetrics) GetDisk() *ClusterMetricOverview {
 	if x != nil {
 		return x.Disk
+	}
+	return nil
+}
+
+func (x *ClusterNodeMetrics) GetGpu() *ClusterMetricOverview {
+	if x != nil {
+		return x.Gpu
+	}
+	return nil
+}
+
+func (x *ClusterNodeMetrics) GetGpuMemory() *ClusterMetricOverview {
+	if x != nil {
+		return x.GpuMemory
 	}
 	return nil
 }
@@ -1181,7 +1217,11 @@ type ClusterNodeUsageMetrics struct {
 	// Timeseries of RSS memory usage by the Qdrant database for the node.
 	RamQdrantRss []*Metric `protobuf:"bytes,6,rep,name=ram_qdrant_rss,json=ramQdrantRss,proto3" json:"ram_qdrant_rss,omitempty"`
 	// Timeseries of disk usage for the node.
-	Disk          []*Metric `protobuf:"bytes,7,rep,name=disk,proto3" json:"disk,omitempty"`
+	Disk []*Metric `protobuf:"bytes,7,rep,name=disk,proto3" json:"disk,omitempty"`
+	// Timeseries of gpu usage for the node.
+	Gpu []*Metric `protobuf:"bytes,8,rep,name=gpu,proto3" json:"gpu,omitempty"`
+	// Timeseries of gpu memory usage for the node.
+	GpuMemory     []*Metric `protobuf:"bytes,9,rep,name=gpu_memory,json=gpuMemory,proto3" json:"gpu_memory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1261,6 +1301,20 @@ func (x *ClusterNodeUsageMetrics) GetRamQdrantRss() []*Metric {
 func (x *ClusterNodeUsageMetrics) GetDisk() []*Metric {
 	if x != nil {
 		return x.Disk
+	}
+	return nil
+}
+
+func (x *ClusterNodeUsageMetrics) GetGpu() []*Metric {
+	if x != nil {
+		return x.Gpu
+	}
+	return nil
+}
+
+func (x *ClusterNodeUsageMetrics) GetGpuMemory() []*Metric {
+	if x != nil {
+		return x.GpuMemory
 	}
 	return nil
 }
@@ -1401,7 +1455,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"(get_cluster_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_untilB\r\n" +
-	"\v_aggregator\"\xcb\x04\n" +
+	"\v_aggregator\"\xc4\x05\n" +
 	"\x1eGetClusterUsageMetricsResponse\x124\n" +
 	"\x03cpu\x18\x01 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03cpu\x124\n" +
 	"\x03ram\x18\x02 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03ram\x12?\n" +
@@ -1410,8 +1464,12 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0eram_qdrant_rss\x18\x05 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\framQdrantRss\x126\n" +
 	"\x04disk\x18\x06 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\x124\n" +
 	"\x03rps\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03rps\x12<\n" +
-	"\alatency\x18\b \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\alatency\x12I\n" +
-	"\x05nodes\x18\t \x03(\v23.qdrant.cloud.monitoring.v1.ClusterNodeUsageMetricsR\x05nodes\"\xf0\x02\n" +
+	"\alatency\x18\b \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\alatency\x124\n" +
+	"\x03gpu\x18\t \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03gpu\x12A\n" +
+	"\n" +
+	"gpu_memory\x18\n" +
+	" \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\tgpuMemory\x12I\n" +
+	"\x05nodes\x18\v \x03(\v23.qdrant.cloud.monitoring.v1.ClusterNodeUsageMetricsR\x05nodes\"\xf0\x02\n" +
 	"\x15GetClusterLogsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -1455,7 +1513,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x06models\x18\x01 \x03(\v28.qdrant.cloud.monitoring.v1.ClusterInferenceModelMetricsR\x06models\"\x91\x01\n" +
 	"\x1cClusterInferenceModelMetrics\x125\n" +
 	"\x12inference_model_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x10inferenceModelId\x12:\n" +
-	"\x06values\x18\x02 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06values\"\xac\x04\n" +
+	"\x06values\x18\x02 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06values\"\xf4\x05\n" +
 	"\x12ClusterNodeMetrics\x12 \n" +
 	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x12K\n" +
 	"\x03cpu\x18\x02 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\x12K\n" +
@@ -1463,7 +1521,12 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\tram_cache\x18\x04 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\bramCache\x12R\n" +
 	"\aram_rss\x18\x05 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x06ramRss\x12_\n" +
 	"\x0eram_qdrant_rss\x18\x06 \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\framQdrantRss\x12M\n" +
-	"\x04disk\x18\a \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x04disk\"\x9f\x01\n" +
+	"\x04disk\x18\a \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x04disk\x12P\n" +
+	"\x03gpu\x18\b \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x00H\x00R\x03gpu\x88\x01\x01\x12]\n" +
+	"\n" +
+	"gpu_memory\x18\t \x01(\v21.qdrant.cloud.monitoring.v1.ClusterMetricOverviewB\x06\xbaH\x03\xc8\x01\x00H\x01R\tgpuMemory\x88\x01\x01B\x06\n" +
+	"\x04_gpuB\r\n" +
+	"\v_gpu_memory\"\x9f\x01\n" +
 	"\x15ClusterMetricOverview\x12=\n" +
 	"\x03avg\x18\x01 \x03(\v2+.qdrant.cloud.monitoring.v1.IntervalAverageR\x03avg\x12G\n" +
 	"\x05total\x18\x02 \x01(\v2).qdrant.cloud.monitoring.v1.ResourceValueB\x06\xbaH\x03\xc8\x01\x01R\x05total\"v\n" +
@@ -1472,7 +1535,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"R\n" +
 	"\rResourceValue\x12$\n" +
 	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12\x1b\n" +
-	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xa7\x03\n" +
+	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xa0\x04\n" +
 	"\x17ClusterNodeUsageMetrics\x12 \n" +
 	"\anode_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06nodeId\x124\n" +
 	"\x03cpu\x18\x02 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03cpu\x124\n" +
@@ -1480,7 +1543,10 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\tram_cache\x18\x04 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\bramCache\x12;\n" +
 	"\aram_rss\x18\x05 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06ramRss\x12H\n" +
 	"\x0eram_qdrant_rss\x18\x06 \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\framQdrantRss\x126\n" +
-	"\x04disk\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\"p\n" +
+	"\x04disk\x18\a \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x04disk\x124\n" +
+	"\x03gpu\x18\b \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03gpu\x12A\n" +
+	"\n" +
+	"gpu_memory\x18\t \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\tgpuMemory\"p\n" +
 	"\x06Metric\x12@\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12$\n" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"o\n" +
@@ -1574,50 +1640,56 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	18, // 9: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
 	18, // 10: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.rps:type_name -> qdrant.cloud.monitoring.v1.Metric
 	18, // 11: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.latency:type_name -> qdrant.cloud.monitoring.v1.Metric
-	17, // 12: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
-	20, // 13: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
-	20, // 14: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
-	19, // 15: qdrant.cloud.monitoring.v1.GetClusterLogsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
-	20, // 16: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
-	20, // 17: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.until:type_name -> google.protobuf.Timestamp
-	19, // 18: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
-	20, // 19: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	20, // 20: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
-	1,  // 21: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.interval:type_name -> qdrant.cloud.monitoring.v1.InferenceMetricsInterval
-	12, // 22: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse.models:type_name -> qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics
-	18, // 23: qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics.values:type_name -> qdrant.cloud.monitoring.v1.Metric
-	14, // 24: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	14, // 25: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	14, // 26: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	14, // 27: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	14, // 28: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	14, // 29: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
-	15, // 30: qdrant.cloud.monitoring.v1.ClusterMetricOverview.avg:type_name -> qdrant.cloud.monitoring.v1.IntervalAverage
-	16, // 31: qdrant.cloud.monitoring.v1.ClusterMetricOverview.total:type_name -> qdrant.cloud.monitoring.v1.ResourceValue
-	21, // 32: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
-	18, // 33: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
-	18, // 34: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
-	18, // 35: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
-	18, // 36: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	18, // 37: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
-	18, // 38: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
-	20, // 39: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	20, // 40: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
-	2,  // 41: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
-	4,  // 42: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
-	6,  // 43: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
-	8,  // 44: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
-	10, // 45: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest
-	3,  // 46: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
-	5,  // 47: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
-	7,  // 48: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
-	9,  // 49: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
-	11, // 50: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse
-	46, // [46:51] is the sub-list for method output_type
-	41, // [41:46] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	18, // 12: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.gpu:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 13: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.gpu_memory:type_name -> qdrant.cloud.monitoring.v1.Metric
+	17, // 14: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse.nodes:type_name -> qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics
+	20, // 15: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.since:type_name -> google.protobuf.Timestamp
+	20, // 16: qdrant.cloud.monitoring.v1.GetClusterLogsRequest.until:type_name -> google.protobuf.Timestamp
+	19, // 17: qdrant.cloud.monitoring.v1.GetClusterLogsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	20, // 18: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.since:type_name -> google.protobuf.Timestamp
+	20, // 19: qdrant.cloud.monitoring.v1.GetClusterEventsRequest.until:type_name -> google.protobuf.Timestamp
+	19, // 20: qdrant.cloud.monitoring.v1.GetClusterEventsResponse.items:type_name -> qdrant.cloud.monitoring.v1.LogEntry
+	20, // 21: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	20, // 22: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	1,  // 23: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest.interval:type_name -> qdrant.cloud.monitoring.v1.InferenceMetricsInterval
+	12, // 24: qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse.models:type_name -> qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics
+	18, // 25: qdrant.cloud.monitoring.v1.ClusterInferenceModelMetrics.values:type_name -> qdrant.cloud.monitoring.v1.Metric
+	14, // 26: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 27: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 28: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 29: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 30: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 31: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 32: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.gpu:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	14, // 33: qdrant.cloud.monitoring.v1.ClusterNodeMetrics.gpu_memory:type_name -> qdrant.cloud.monitoring.v1.ClusterMetricOverview
+	15, // 34: qdrant.cloud.monitoring.v1.ClusterMetricOverview.avg:type_name -> qdrant.cloud.monitoring.v1.IntervalAverage
+	16, // 35: qdrant.cloud.monitoring.v1.ClusterMetricOverview.total:type_name -> qdrant.cloud.monitoring.v1.ResourceValue
+	21, // 36: qdrant.cloud.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
+	18, // 37: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.cpu:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 38: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 39: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_cache:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 40: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 41: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.ram_qdrant_rss:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 42: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.disk:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 43: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.gpu:type_name -> qdrant.cloud.monitoring.v1.Metric
+	18, // 44: qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics.gpu_memory:type_name -> qdrant.cloud.monitoring.v1.Metric
+	20, // 45: qdrant.cloud.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	20, // 46: qdrant.cloud.monitoring.v1.LogEntry.timestamp:type_name -> google.protobuf.Timestamp
+	2,  // 47: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
+	4,  // 48: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
+	6,  // 49: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:input_type -> qdrant.cloud.monitoring.v1.GetClusterLogsRequest
+	8,  // 50: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:input_type -> qdrant.cloud.monitoring.v1.GetClusterEventsRequest
+	10, // 51: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest
+	3,  // 52: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
+	5,  // 53: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterUsageMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse
+	7,  // 54: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterLogs:output_type -> qdrant.cloud.monitoring.v1.GetClusterLogsResponse
+	9,  // 55: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterEvents:output_type -> qdrant.cloud.monitoring.v1.GetClusterEventsResponse
+	11, // 56: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics:output_type -> qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse
+	52, // [52:57] is the sub-list for method output_type
+	47, // [47:52] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_monitoring_v1_monitoring_proto_init() }
@@ -1629,6 +1701,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_init() {
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[4].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8].OneofWrappers = []any{}
+	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

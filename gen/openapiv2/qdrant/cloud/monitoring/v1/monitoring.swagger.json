@@ -419,6 +419,14 @@
         "disk": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
           "description": "Overview of disk usage."
+        },
+        "gpu": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "optional Overview of GPU usage."
+        },
+        "gpuMemory": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of GPU memory usage."
         }
       },
       "description": "ClusterNodeMetrics contains metric overview for a node."
@@ -477,6 +485,22 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of disk usage for the node."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of gpu usage for the node."
+        },
+        "gpuMemory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of gpu memory usage for the node."
         }
       },
       "description": "ClusterNodeUsageMetrics defines per-node usage metrics."
@@ -603,6 +627,22 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of request latency across the cluster."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU usage across the cluster."
+        },
+        "gpuMemory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU memory usage across the cluster."
         },
         "nodes": {
           "type": "array",
