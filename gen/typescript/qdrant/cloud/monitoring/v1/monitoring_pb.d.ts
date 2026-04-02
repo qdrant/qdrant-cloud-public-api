@@ -196,25 +196,25 @@ export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monit
   latency: Metric[];
 
   /**
+   * Per-node metrics.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 9;
+   */
+  nodes: ClusterNodeUsageMetrics[];
+
+  /**
    * Timeseries of overall GPU usage across the cluster.
    *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 9;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
    */
   gpu: Metric[];
 
   /**
    * Timeseries of overall GPU memory usage across the cluster.
    *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_memory = 10;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_memory = 11;
    */
   gpuMemory: Metric[];
-
-  /**
-   * Per-node metrics.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 11;
-   */
-  nodes: ClusterNodeUsageMetrics[];
 };
 
 /**
@@ -280,25 +280,25 @@ export declare type GetClusterUsageMetricsResponseValid = Message<"qdrant.cloud.
   latency: MetricValid[];
 
   /**
+   * Per-node metrics.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 9;
+   */
+  nodes: ClusterNodeUsageMetricsValid[];
+
+  /**
    * Timeseries of overall GPU usage across the cluster.
    *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 9;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
    */
   gpu: MetricValid[];
 
   /**
    * Timeseries of overall GPU memory usage across the cluster.
    *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_memory = 10;
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_memory = 11;
    */
   gpuMemory: MetricValid[];
-
-  /**
-   * Per-node metrics.
-   *
-   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 11;
-   */
-  nodes: ClusterNodeUsageMetricsValid[];
 };
 
 /**

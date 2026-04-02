@@ -628,6 +628,14 @@
           },
           "description": "Timeseries of request latency across the cluster."
         },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeUsageMetrics"
+          },
+          "description": "Per-node metrics."
+        },
         "gpu": {
           "type": "array",
           "items": {
@@ -643,14 +651,6 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of overall GPU memory usage across the cluster."
-        },
-        "nodes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1ClusterNodeUsageMetrics"
-          },
-          "description": "Per-node metrics."
         }
       },
       "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"

@@ -153,12 +153,12 @@ message GetClusterUsageMetricsResponse {
   repeated Metric rps = 7;
   // Timeseries of request latency across the cluster.
   repeated Metric latency = 8;
-  // Timeseries of overall GPU usage across the cluster.
-  repeated Metric gpu = 9;
-  // Timeseries of overall GPU memory usage across the cluster.
-  repeated Metric gpu_memory = 10;
   // Per-node metrics.
-  repeated ClusterNodeUsageMetrics nodes = 11;
+  repeated ClusterNodeUsageMetrics nodes = 9;
+  // Timeseries of overall GPU usage across the cluster.
+  repeated Metric gpu = 10;
+  // Timeseries of overall GPU memory usage across the cluster.
+  repeated Metric gpu_memory = 11;
 }
 
 // GetClusterLogsRequest is the request for the GetClusterLogs function

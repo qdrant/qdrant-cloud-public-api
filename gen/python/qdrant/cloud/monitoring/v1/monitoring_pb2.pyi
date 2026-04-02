@@ -67,7 +67,7 @@ class GetClusterUsageMetricsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ...) -> None: ...
 
 class GetClusterUsageMetricsResponse(_message.Message):
-    __slots__ = ("cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "rps", "latency", "gpu", "gpu_memory", "nodes")
+    __slots__ = ("cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "rps", "latency", "nodes", "gpu", "gpu_memory")
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     RAM_CACHE_FIELD_NUMBER: _ClassVar[int]
@@ -76,9 +76,9 @@ class GetClusterUsageMetricsResponse(_message.Message):
     DISK_FIELD_NUMBER: _ClassVar[int]
     RPS_FIELD_NUMBER: _ClassVar[int]
     LATENCY_FIELD_NUMBER: _ClassVar[int]
+    NODES_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
     GPU_MEMORY_FIELD_NUMBER: _ClassVar[int]
-    NODES_FIELD_NUMBER: _ClassVar[int]
     cpu: _containers.RepeatedCompositeFieldContainer[Metric]
     ram: _containers.RepeatedCompositeFieldContainer[Metric]
     ram_cache: _containers.RepeatedCompositeFieldContainer[Metric]
@@ -87,10 +87,10 @@ class GetClusterUsageMetricsResponse(_message.Message):
     disk: _containers.RepeatedCompositeFieldContainer[Metric]
     rps: _containers.RepeatedCompositeFieldContainer[Metric]
     latency: _containers.RepeatedCompositeFieldContainer[Metric]
+    nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeUsageMetrics]
     gpu: _containers.RepeatedCompositeFieldContainer[Metric]
     gpu_memory: _containers.RepeatedCompositeFieldContainer[Metric]
-    nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeUsageMetrics]
-    def __init__(self, cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., rps: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_memory: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeUsageMetrics, _Mapping]]] = ...) -> None: ...
+    def __init__(self, cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., rps: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeUsageMetrics, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_memory: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class GetClusterLogsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id", "since", "until")
