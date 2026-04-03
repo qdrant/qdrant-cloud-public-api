@@ -158,7 +158,7 @@ message GetClusterUsageMetricsResponse {
   // Timeseries of overall GPU usage across the cluster.
   repeated Metric gpu = 10;
   // Timeseries of overall GPU memory usage across the cluster.
-  repeated Metric gpu_memory = 11;
+  repeated Metric vram = 11;
 }
 
 // GetClusterLogsRequest is the request for the GetClusterLogs function
@@ -279,7 +279,7 @@ message ClusterNodeMetrics {
   // optional Overview of GPU usage.
   optional ClusterMetricOverview gpu = 8 [(buf.validate.field).required = false];
   // Overview of GPU memory usage.
-  optional ClusterMetricOverview gpu_memory = 9 [(buf.validate.field).required = false];
+  optional ClusterMetricOverview vram = 9 [(buf.validate.field).required = false];
 }
 
 // ClusterMetricOverview contains both the average values of a metric over
@@ -326,7 +326,7 @@ message ClusterNodeUsageMetrics {
   // Timeseries of gpu usage for the node.
   repeated Metric gpu = 8;
   // Timeseries of gpu memory usage for the node.
-  repeated Metric gpu_memory = 9;
+  repeated Metric vram = 9;
 }
 
 // A single metric data point.
