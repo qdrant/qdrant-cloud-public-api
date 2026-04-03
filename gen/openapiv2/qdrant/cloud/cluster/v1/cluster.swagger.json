@@ -1028,9 +1028,9 @@
           "$ref": "#/definitions/v1ClusterNodeResources",
           "title": "GPU resources, empty if cluster has no GPU"
         },
-        "vram": {
+        "gpuMemory": {
           "$ref": "#/definitions/v1ClusterNodeResources",
-          "title": "GPU VRAM, empty if cluster has not GPU"
+          "title": "GPU memory, empty if cluster has not GPU"
         }
       },
       "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."

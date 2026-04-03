@@ -424,7 +424,7 @@
           "$ref": "#/definitions/v1ClusterMetricOverview",
           "description": "optional Overview of GPU usage."
         },
-        "vram": {
+        "gpuMemory": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
           "description": "Overview of GPU memory usage."
         }
@@ -494,7 +494,7 @@
           },
           "description": "Timeseries of gpu usage for the node."
         },
-        "vram": {
+        "gpuMemory": {
           "type": "array",
           "items": {
             "type": "object",
@@ -644,7 +644,7 @@
           },
           "description": "Timeseries of overall GPU usage across the cluster."
         },
-        "vram": {
+        "gpuMemory": {
           "type": "array",
           "items": {
             "type": "object",
