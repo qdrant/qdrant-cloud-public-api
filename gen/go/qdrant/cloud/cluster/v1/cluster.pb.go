@@ -3462,8 +3462,8 @@ type ClusterNodeResourcesSummary struct {
 	Cpu *ClusterNodeResources `protobuf:"bytes,3,opt,name=cpu,proto3" json:"cpu,omitempty"`
 	// GPU resources, empty if cluster has no GPU
 	Gpu *ClusterNodeResources `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
-	// GPU memory, empty if cluster has not GPU
-	GpuMemory     *ClusterNodeResources `protobuf:"bytes,5,opt,name=gpu_memory,json=gpuMemory,proto3,oneof" json:"gpu_memory,omitempty"`
+	// GPU RAM, empty if cluster has not GPU.
+	GpuRam        *ClusterNodeResources `protobuf:"bytes,5,opt,name=gpu_ram,json=gpuRam,proto3,oneof" json:"gpu_ram,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3526,9 +3526,9 @@ func (x *ClusterNodeResourcesSummary) GetGpu() *ClusterNodeResources {
 	return nil
 }
 
-func (x *ClusterNodeResourcesSummary) GetGpuMemory() *ClusterNodeResources {
+func (x *ClusterNodeResourcesSummary) GetGpuRam() *ClusterNodeResources {
 	if x != nil {
-		return x.GpuMemory
+		return x.GpuRam
 	}
 	return nil
 }
@@ -4165,16 +4165,16 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
 	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
 	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xaa\x03\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xa1\x03\n" +
 	"\x1bClusterNodeResourcesSummary\x12I\n" +
 	"\x04disk\x18\x01 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x04disk\x12G\n" +
 	"\x03ram\x18\x02 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x03ram\x12G\n" +
 	"\x03cpu\x18\x03 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x03cpu\x12D\n" +
-	"\x03gpu\x18\x04 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesH\x00R\x03gpu\x88\x01\x01\x12Q\n" +
+	"\x03gpu\x18\x04 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesH\x00R\x03gpu\x88\x01\x01\x12K\n" +
+	"\agpu_ram\x18\x05 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesH\x01R\x06gpuRam\x88\x01\x01B\x06\n" +
+	"\x04_gpuB\n" +
 	"\n" +
-	"gpu_memory\x18\x05 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesH\x01R\tgpuMemory\x88\x01\x01B\x06\n" +
-	"\x04_gpuB\r\n" +
-	"\v_gpu_memory\"\xfa\x01\n" +
+	"\b_gpu_ram\"\xfa\x01\n" +
 	"\x14ClusterNodeResources\x12\"\n" +
 	"\x04base\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x04base\x124\n" +
 	"\rcomplimentary\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\rcomplimentary\x12.\n" +
@@ -4460,7 +4460,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	53, // 54: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	53, // 55: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	53, // 56: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	53, // 57: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_memory:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	53, // 57: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	10, // 58: qdrant.cloud.cluster.v1.ClusterScalabilityInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityStatus
 	35, // 59: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
 	11, // 60: qdrant.cloud.cluster.v1.ClusterService.ListClusters:input_type -> qdrant.cloud.cluster.v1.ListClustersRequest

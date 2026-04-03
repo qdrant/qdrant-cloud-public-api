@@ -1117,8 +1117,8 @@ message ClusterNodeResourcesSummary {
   ClusterNodeResources cpu = 3 [(buf.validate.field).required = true];
   // GPU resources, empty if cluster has no GPU
   optional ClusterNodeResources gpu = 4;
-  // GPU memory, empty if cluster has not GPU
-  optional ClusterNodeResources gpu_memory = 5;
+  // GPU RAM, empty if cluster has not GPU.
+  optional ClusterNodeResources gpu_ram = 5;
 }
 
 // ClusterNodeResources represents the allocation of various resources for a cluster per node.

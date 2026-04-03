@@ -424,9 +424,9 @@
           "$ref": "#/definitions/v1ClusterMetricOverview",
           "description": "optional Overview of GPU usage."
         },
-        "gpuMemory": {
+        "gpuRam": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of GPU memory usage."
+          "description": "Overview of GPU RAM usage."
         }
       },
       "description": "ClusterNodeMetrics contains metric overview for a node."
@@ -494,13 +494,13 @@
           },
           "description": "Timeseries of gpu usage for the node."
         },
-        "gpuMemory": {
+        "gpuRam": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of gpu memory usage for the node."
+          "description": "Timeseries of GPU RAM usage for the node."
         }
       },
       "description": "ClusterNodeUsageMetrics defines per-node usage metrics."
@@ -644,13 +644,13 @@
           },
           "description": "Timeseries of overall GPU usage across the cluster."
         },
-        "gpuMemory": {
+        "gpuRam": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of overall GPU memory usage across the cluster."
+          "description": "Timeseries of overall GPU RAM usage across the cluster."
         }
       },
       "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"

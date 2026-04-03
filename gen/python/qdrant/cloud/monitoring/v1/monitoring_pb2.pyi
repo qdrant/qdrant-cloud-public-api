@@ -67,7 +67,7 @@ class GetClusterUsageMetricsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ...) -> None: ...
 
 class GetClusterUsageMetricsResponse(_message.Message):
-    __slots__ = ("cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "rps", "latency", "nodes", "gpu", "gpu_memory")
+    __slots__ = ("cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "rps", "latency", "nodes", "gpu", "gpu_ram")
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     RAM_CACHE_FIELD_NUMBER: _ClassVar[int]
@@ -78,7 +78,7 @@ class GetClusterUsageMetricsResponse(_message.Message):
     LATENCY_FIELD_NUMBER: _ClassVar[int]
     NODES_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
-    GPU_MEMORY_FIELD_NUMBER: _ClassVar[int]
+    GPU_RAM_FIELD_NUMBER: _ClassVar[int]
     cpu: _containers.RepeatedCompositeFieldContainer[Metric]
     ram: _containers.RepeatedCompositeFieldContainer[Metric]
     ram_cache: _containers.RepeatedCompositeFieldContainer[Metric]
@@ -89,8 +89,8 @@ class GetClusterUsageMetricsResponse(_message.Message):
     latency: _containers.RepeatedCompositeFieldContainer[Metric]
     nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeUsageMetrics]
     gpu: _containers.RepeatedCompositeFieldContainer[Metric]
-    gpu_memory: _containers.RepeatedCompositeFieldContainer[Metric]
-    def __init__(self, cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., rps: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeUsageMetrics, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_memory: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+    gpu_ram: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., rps: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeUsageMetrics, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class GetClusterLogsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id", "since", "until")
@@ -159,7 +159,7 @@ class ClusterInferenceModelMetrics(_message.Message):
     def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class ClusterNodeMetrics(_message.Message):
-    __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "gpu", "gpu_memory")
+    __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "gpu", "gpu_ram")
     NODE_ID_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
@@ -168,7 +168,7 @@ class ClusterNodeMetrics(_message.Message):
     RAM_QDRANT_RSS_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
-    GPU_MEMORY_FIELD_NUMBER: _ClassVar[int]
+    GPU_RAM_FIELD_NUMBER: _ClassVar[int]
     node_id: str
     cpu: ClusterMetricOverview
     ram: ClusterMetricOverview
@@ -177,8 +177,8 @@ class ClusterNodeMetrics(_message.Message):
     ram_qdrant_rss: ClusterMetricOverview
     disk: ClusterMetricOverview
     gpu: ClusterMetricOverview
-    gpu_memory: ClusterMetricOverview
-    def __init__(self, node_id: _Optional[str] = ..., cpu: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_cache: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_rss: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_qdrant_rss: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., disk: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., gpu: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., gpu_memory: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ...) -> None: ...
+    gpu_ram: ClusterMetricOverview
+    def __init__(self, node_id: _Optional[str] = ..., cpu: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_cache: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_rss: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., ram_qdrant_rss: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., disk: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., gpu: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ..., gpu_ram: _Optional[_Union[ClusterMetricOverview, _Mapping]] = ...) -> None: ...
 
 class ClusterMetricOverview(_message.Message):
     __slots__ = ("avg", "total")
@@ -205,7 +205,7 @@ class ResourceValue(_message.Message):
     def __init__(self, value: _Optional[float] = ..., unit: _Optional[str] = ...) -> None: ...
 
 class ClusterNodeUsageMetrics(_message.Message):
-    __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "gpu", "gpu_memory")
+    __slots__ = ("node_id", "cpu", "ram", "ram_cache", "ram_rss", "ram_qdrant_rss", "disk", "gpu", "gpu_ram")
     NODE_ID_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
@@ -214,7 +214,7 @@ class ClusterNodeUsageMetrics(_message.Message):
     RAM_QDRANT_RSS_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
-    GPU_MEMORY_FIELD_NUMBER: _ClassVar[int]
+    GPU_RAM_FIELD_NUMBER: _ClassVar[int]
     node_id: str
     cpu: _containers.RepeatedCompositeFieldContainer[Metric]
     ram: _containers.RepeatedCompositeFieldContainer[Metric]
@@ -223,8 +223,8 @@ class ClusterNodeUsageMetrics(_message.Message):
     ram_qdrant_rss: _containers.RepeatedCompositeFieldContainer[Metric]
     disk: _containers.RepeatedCompositeFieldContainer[Metric]
     gpu: _containers.RepeatedCompositeFieldContainer[Metric]
-    gpu_memory: _containers.RepeatedCompositeFieldContainer[Metric]
-    def __init__(self, node_id: _Optional[str] = ..., cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_memory: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+    gpu_ram: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, node_id: _Optional[str] = ..., cpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_cache: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., ram_qdrant_rss: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., disk: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., gpu_ram: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class Metric(_message.Message):
     __slots__ = ("timestamp", "value")
