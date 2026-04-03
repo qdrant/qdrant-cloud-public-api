@@ -149,16 +149,18 @@ class AvailableStoragePerformanceTierConfigurations(_message.Message):
     def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ..., price_per_hour: _Optional[int] = ...) -> None: ...
 
 class ResourceConfiguration(_message.Message):
-    __slots__ = ("ram", "cpu", "disk", "gpu")
+    __slots__ = ("ram", "cpu", "disk", "gpu", "vram")
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     DISK_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    VRAM_FIELD_NUMBER: _ClassVar[int]
     ram: str
     cpu: str
     disk: str
     gpu: str
-    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ...) -> None: ...
+    vram: str
+    def __init__(self, ram: _Optional[str] = ..., cpu: _Optional[str] = ..., disk: _Optional[str] = ..., gpu: _Optional[str] = ..., vram: _Optional[str] = ...) -> None: ...
 
 class ResourceConfigurationFilter(_message.Message):
     __slots__ = ("ram", "cpu", "disk", "gpu")
