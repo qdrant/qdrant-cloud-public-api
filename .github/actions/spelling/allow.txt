@@ -41,6 +41,5 @@ entitlements
 oci
 minilm
 imbalanced
-featureflags
 clusterdata
 versioning
