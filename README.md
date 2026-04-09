@@ -35,19 +35,27 @@ For detailed information about authentication requirements, actor types, permiss
 
 The Qdrant Cloud API is organized into several gRPC services, each responsible for a specific domain of functionality. Below is a list of the primary services available:
 
-| Service Name            | Description   |
-|-------------------------|---------------|
-| [`AccountService`](/proto//qdrant/cloud/account/v1/account.proto) | Manages user accounts and their configurations. |
-| [`AuthService`](/proto//qdrant/cloud/auth/v1/auth.proto) | Handles authentication and authorization for accessing cloud resources. |
-| [`BackupService`](/proto//qdrant/cloud/cluster/backup/v1/backup.proto) | Manages backup and restore operations for Qdrant clusters. |
-| [`BookingService`](/proto//qdrant/cloud/booking/v1/booking.proto) | Service for price listings-related information (called packages). |
-| [`ClusterService`](/proto/qdrant/cloud/cluster/v1/cluster.proto) | Provides operations for creating, configuring, and managing Qdrant clusters. |
-| [`DatabaseApiKeyService v1`](/proto/qdrant/cloud/cluster/auth/v1/database_api_key.proto) | Deprecated: Manages API keys for accessing data within Qdrant clusters. |
-| [`DatabaseApiKeyService v2`](/proto/qdrant/cloud/cluster/auth/v2/database_api_key.proto) | Manages API keys for accessing data within Qdrant clusters. |
-| [`HybridCloudService`](/proto/qdrant/cloud/hybrid/v1/hybrid_cloud.proto) | Service for for configuring hybrid cloud environments. |
-| [`IAMService`](/proto/qdrant/cloud/iam/v1/iam.proto) | Service to configure IAM (identity and access management) objects. |
-| [`MonitoringService`](proto/qdrant/cloud/monitoring/v1/monitoring.proto) | Provides access to monitoring data such as cluster metrics, logs, and events. |
-| [`PlatformService`](/proto//qdrant/cloud/platform/v1/platform.proto) | Service to query for cloud provider & regional information. |
+| Service Name | Version | Description |
+| --- | --- | --- |
+| [AccountService](proto/qdrant/cloud/account/v1/account.proto) | **v1** | AccountService is the API used to configure Accounts. |
+| [AggregationService](proto/qdrant/cloud/ui/v1/ui.proto) | **v1** | AggregationService provides optimized methods for UI components that need aggregated data. This service combines multiple entities to reduce API round trips for common UI patterns. |
+| [AuthService](proto/qdrant/cloud/auth/v1/auth.proto) | **v1** | AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud. |
+| [BackupService](proto/qdrant/cloud/cluster/backup/v1/backup.proto) | **v1** | BackupService is the API used to configure backup objects. |
+| [BillingService](proto/qdrant/cloud/billing/v1/billing.proto) | **v1** | BillingService is the API used to retrieve billing information, such as invoices. |
+| [BookingService](proto/qdrant/cloud/booking/v1/booking.proto) | **v1** | BookingService is the API used to configure the booking settings (like packages objects). |
+| [ClusterDataService](proto/qdrant/cloud/ui/v1/clusterdata.proto) | **v1** | ClusterDataService provides cluster data for UI components, this is considered a beta feature. |
+| [ClusterService](proto/qdrant/cloud/cluster/v1/cluster.proto) | **v1** | ClusterService is the API used to configure cluster objects. |
+| [DatabaseApiKeyService](proto/qdrant/cloud/cluster/auth/v1/database_api_key.proto) | **v1** | Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead. DatabaseApiKeyService is the API used to manage keys that give access to a cluster database. |
+| [DatabaseApiKeyService](proto/qdrant/cloud/cluster/auth/v2/database_api_key.proto) | **v2** | DatabaseApiKeyService is the API used to manage keys that give access to a cluster database. |
+| [EphemeralDashboardTokenService](proto/qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto) | **v1** | EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard, used by the Qdrant Cloud UI |
+| [FeatureFlagsService](proto/qdrant/cloud/ui/v1/featureflags.proto) | **v1** | FeatureFlagsService provides feature flags for UI components, this is considered a beta feature. |
+| [HybridCloudService](proto/qdrant/cloud/hybrid/v1/hybrid_cloud.proto) | **v1** | HybridCloudService is the API used for configuring hybrid cloud environments. |
+| [IAMService](proto/qdrant/cloud/iam/v1/iam.proto) | **v1** | IAMService is the API used to configure IAM (identity and access management) objects. |
+| [MeteringService](proto/qdrant/cloud/metering/v1/metering.proto) | **v1** | MeteringService is the API to retrieve usage data used for billing purposes. |
+| [MonitoringService](proto/qdrant/cloud/monitoring/v1/monitoring.proto) | **v1** | MonitoringService provides access to monitoring data such as cluster metrics, logs, and events. |
+| [PaymentService](proto/qdrant/cloud/payment/v1/payment.proto) | **v1** | PaymentService is the API used to manage payment settings. |
+| [PlatformService](proto/qdrant/cloud/platform/v1/platform.proto) | **v1** | PlatformService is the API used to query for cloud provider & regional information. |
+| [QuotaService](proto/qdrant/cloud/quota/v1/quota.proto) | **v1** | QuotaService is the API used to configure Quotas. |
 
 *Note: The `Service Name` links point to the respective Protocol Buffer file where that service is formally defined.
 You can explore these files for detailed information on methods, request/response messages, and field validations.*
