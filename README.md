@@ -48,7 +48,6 @@ The Qdrant Cloud API is organized into several gRPC services, each responsible f
 | [DatabaseApiKeyService](proto/qdrant/cloud/cluster/auth/v1/database_api_key.proto) | **v1** | Deprecated: This version of the API is deprecated. Use qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService instead. DatabaseApiKeyService is the API used to manage keys that give access to a cluster database. |
 | [DatabaseApiKeyService](proto/qdrant/cloud/cluster/auth/v2/database_api_key.proto) | **v2** | DatabaseApiKeyService is the API used to manage keys that give access to a cluster database. |
 | [EphemeralDashboardTokenService](proto/qdrant/cloud/cluster/auth/v1/ephemeral_dashboard_token.proto) | **v1** | EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard, used by the Qdrant Cloud UI |
-| [FeatureFlagsService](proto/qdrant/cloud/ui/v1/featureflags.proto) | **v1** | FeatureFlagsService provides feature flags for UI components, this is considered a beta feature. |
 | [HybridCloudService](proto/qdrant/cloud/hybrid/v1/hybrid_cloud.proto) | **v1** | HybridCloudService is the API used for configuring hybrid cloud environments. |
 | [IAMService](proto/qdrant/cloud/iam/v1/iam.proto) | **v1** | IAMService is the API used to configure IAM (identity and access management) objects. |
 | [MeteringService](proto/qdrant/cloud/metering/v1/metering.proto) | **v1** | MeteringService is the API to retrieve usage data used for billing purposes. |
