@@ -811,6 +811,13 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
    */
   volumeAttributesClasses: HybridCloudEnvironmentVolumeAttributesClass[];
+
+  /**
+   * Expresses the storage configuration state of the hybrid cloud environment.
+   *
+   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15;
+   */
+  storageConfigurationReadiness: StorageConfigurationReadiness;
 };
 
 /**
@@ -902,6 +909,13 @@ export declare type HybridCloudEnvironmentStatusValid = Message<"qdrant.cloud.hy
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
    */
   volumeAttributesClasses: HybridCloudEnvironmentVolumeAttributesClassValid[];
+
+  /**
+   * Expresses the storage configuration state of the hybrid cloud environment.
+   *
+   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15;
+   */
+  storageConfigurationReadiness: StorageConfigurationReadiness;
 };
 
 /**
@@ -1297,6 +1311,46 @@ export enum QdrantClusterCreationStatus {
  * Describes the enum qdrant.cloud.hybrid.v1.QdrantClusterCreationStatus.
  */
 export declare const QdrantClusterCreationStatusSchema: GenEnum<QdrantClusterCreationStatus>;
+
+/**
+ * StorageConfigurationReadiness expresses the storage configuration state of the hybrid cloud environment.
+ *
+ * @generated from enum qdrant.cloud.hybrid.v1.StorageConfigurationReadiness
+ */
+export enum StorageConfigurationReadiness {
+  /**
+   * Default/unknown, safe fallback
+   *
+   * @generated from enum value: STORAGE_CONFIGURATION_READINESS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Storage config explicitly set
+   *
+   * @generated from enum value: STORAGE_CONFIGURATION_READINESS_READY = 1;
+   */
+  READY = 1,
+
+  /**
+   * Storage config absent
+   *
+   * @generated from enum value: STORAGE_CONFIGURATION_READINESS_NOT_READY = 2;
+   */
+  NOT_READY = 2,
+
+  /**
+   * Config present but invalid
+   *
+   * @generated from enum value: STORAGE_CONFIGURATION_READINESS_INVALID = 3;
+   */
+  INVALID = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.hybrid.v1.StorageConfigurationReadiness.
+ */
+export declare const StorageConfigurationReadinessSchema: GenEnum<StorageConfigurationReadiness>;
 
 /**
  * Status phase of hybrid cloud environment

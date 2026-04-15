@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/platform/v1/platform.proto (package qdrant.cloud.platform.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -422,6 +422,13 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
    * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegionCapabilities capabilities = 9;
    */
   capabilities?: CloudProviderRegionCapabilities;
+
+  /**
+   * Surfaces the specific reason cluster creation should be blocked for this region.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
+   */
+  clusterCreationBlockingReason: ClusterCreationBlockingReason;
 };
 
 export declare type CloudProviderRegionValid = CloudProviderRegion;
@@ -460,6 +467,47 @@ export declare type CloudProviderRegionCapabilitiesValid = CloudProviderRegionCa
  * Use `create(CloudProviderRegionCapabilitiesSchema)` to create a new message.
  */
 export declare const CloudProviderRegionCapabilitiesSchema: GenMessage<CloudProviderRegionCapabilities, {validType: CloudProviderRegionCapabilitiesValid}>;
+
+/**
+ * ClusterCreationBlockingReason surfaces the specific reason cluster creation should be blocked.
+ * It is informational and does not change the semantics of available.
+ *
+ * @generated from enum qdrant.cloud.platform.v1.ClusterCreationBlockingReason
+ */
+export enum ClusterCreationBlockingReason {
+  /**
+   * No blocking reason / N/A (used for non-hybrid regions)
+   *
+   * @generated from enum value: CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * No blocker, creation allowed
+   *
+   * @generated from enum value: CLUSTER_CREATION_BLOCKING_REASON_NONE = 1;
+   */
+  NONE = 1,
+
+  /**
+   * Operator/agent not yet ready
+   *
+   * @generated from enum value: CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY = 2;
+   */
+  ENVIRONMENT_NOT_READY = 2,
+
+  /**
+   * Storage config not set
+   *
+   * @generated from enum value: CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY = 3;
+   */
+  STORAGE_CONFIGURATION_NOT_READY = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.platform.v1.ClusterCreationBlockingReason.
+ */
+export declare const ClusterCreationBlockingReasonSchema: GenEnum<ClusterCreationBlockingReason>;
 
 /**
  * PlatformService is the API used to query for cloud provider & regional information.
