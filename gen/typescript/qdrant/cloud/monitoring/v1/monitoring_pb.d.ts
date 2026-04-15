@@ -201,6 +201,20 @@ export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monit
    * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 9;
    */
   nodes: ClusterNodeUsageMetrics[];
+
+  /**
+   * Timeseries of overall GPU usage across the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
+   */
+  gpu: Metric[];
+
+  /**
+   * Timeseries of overall GPU RAM usage across the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 11;
+   */
+  gpuRam: Metric[];
 };
 
 /**
@@ -271,6 +285,20 @@ export declare type GetClusterUsageMetricsResponseValid = Message<"qdrant.cloud.
    * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterNodeUsageMetrics nodes = 9;
    */
   nodes: ClusterNodeUsageMetricsValid[];
+
+  /**
+   * Timeseries of overall GPU usage across the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
+   */
+  gpu: MetricValid[];
+
+  /**
+   * Timeseries of overall GPU RAM usage across the cluster.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 11;
+   */
+  gpuRam: MetricValid[];
 };
 
 /**
@@ -641,6 +669,20 @@ export declare type ClusterNodeMetrics = Message<"qdrant.cloud.monitoring.v1.Clu
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview disk = 7;
    */
   disk?: ClusterMetricOverview;
+
+  /**
+   * optional Overview of GPU usage.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu = 8;
+   */
+  gpu?: ClusterMetricOverview;
+
+  /**
+   * Overview of GPU RAM usage.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu_ram = 9;
+   */
+  gpuRam?: ClusterMetricOverview;
 };
 
 /**
@@ -697,6 +739,20 @@ export declare type ClusterNodeMetricsValid = Message<"qdrant.cloud.monitoring.v
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview disk = 7;
    */
   disk: ClusterMetricOverviewValid;
+
+  /**
+   * optional Overview of GPU usage.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu = 8;
+   */
+  gpu?: ClusterMetricOverviewValid;
+
+  /**
+   * Overview of GPU RAM usage.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu_ram = 9;
+   */
+  gpuRam?: ClusterMetricOverviewValid;
 };
 
 /**
@@ -886,6 +942,20 @@ export declare type ClusterNodeUsageMetrics = Message<"qdrant.cloud.monitoring.v
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 7;
    */
   disk: Metric[];
+
+  /**
+   * Timeseries of gpu usage for the node.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 8;
+   */
+  gpu: Metric[];
+
+  /**
+   * Timeseries of GPU RAM usage for the node.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 9;
+   */
+  gpuRam: Metric[];
 };
 
 /**
@@ -942,6 +1012,20 @@ export declare type ClusterNodeUsageMetricsValid = Message<"qdrant.cloud.monitor
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 7;
    */
   disk: MetricValid[];
+
+  /**
+   * Timeseries of gpu usage for the node.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 8;
+   */
+  gpu: MetricValid[];
+
+  /**
+   * Timeseries of GPU RAM usage for the node.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 9;
+   */
+  gpuRam: MetricValid[];
 };
 
 /**

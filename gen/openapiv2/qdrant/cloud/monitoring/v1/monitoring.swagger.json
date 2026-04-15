@@ -419,6 +419,14 @@
         "disk": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
           "description": "Overview of disk usage."
+        },
+        "gpu": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "optional Overview of GPU usage."
+        },
+        "gpuRam": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of GPU RAM usage."
         }
       },
       "description": "ClusterNodeMetrics contains metric overview for a node."
@@ -477,6 +485,22 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of disk usage for the node."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of gpu usage for the node."
+        },
+        "gpuRam": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of GPU RAM usage for the node."
         }
       },
       "description": "ClusterNodeUsageMetrics defines per-node usage metrics."
@@ -611,6 +635,22 @@
             "$ref": "#/definitions/v1ClusterNodeUsageMetrics"
           },
           "description": "Per-node metrics."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU usage across the cluster."
+        },
+        "gpuRam": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU RAM usage across the cluster."
         }
       },
       "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"

@@ -570,16 +570,18 @@ class ClusterEndpoint(_message.Message):
     def __init__(self, url: _Optional[str] = ..., rest_port: _Optional[int] = ..., grpc_port: _Optional[int] = ...) -> None: ...
 
 class ClusterNodeResourcesSummary(_message.Message):
-    __slots__ = ("disk", "ram", "cpu", "gpu")
+    __slots__ = ("disk", "ram", "cpu", "gpu", "gpu_ram")
     DISK_FIELD_NUMBER: _ClassVar[int]
     RAM_FIELD_NUMBER: _ClassVar[int]
     CPU_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    GPU_RAM_FIELD_NUMBER: _ClassVar[int]
     disk: ClusterNodeResources
     ram: ClusterNodeResources
     cpu: ClusterNodeResources
     gpu: ClusterNodeResources
-    def __init__(self, disk: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., ram: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., cpu: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., gpu: _Optional[_Union[ClusterNodeResources, _Mapping]] = ...) -> None: ...
+    gpu_ram: ClusterNodeResources
+    def __init__(self, disk: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., ram: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., cpu: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., gpu: _Optional[_Union[ClusterNodeResources, _Mapping]] = ..., gpu_ram: _Optional[_Union[ClusterNodeResources, _Mapping]] = ...) -> None: ...
 
 class ClusterNodeResources(_message.Message):
     __slots__ = ("base", "complimentary", "additional", "reserved", "available")

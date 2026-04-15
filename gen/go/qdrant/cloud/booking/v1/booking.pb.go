@@ -912,7 +912,10 @@ type ResourceConfiguration struct {
 	Disk string `protobuf:"bytes,3,opt,name=disk,proto3" json:"disk,omitempty"`
 	// The amount of GPU (e.g., "1000m" (1 vGPU))
 	// This is an optional field, if it is not set no GPU is provided.
-	Gpu           *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	Gpu *string `protobuf:"bytes,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	// The amount of GPU RAM (e.g., "1GiB")
+	// This is an optional field, if it is not set no GPU is provided.
+	GpuRam        *string `protobuf:"bytes,5,opt,name=gpu_ram,json=gpuRam,proto3,oneof" json:"gpu_ram,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -971,6 +974,13 @@ func (x *ResourceConfiguration) GetDisk() string {
 func (x *ResourceConfiguration) GetGpu() string {
 	if x != nil && x.Gpu != nil {
 		return *x.Gpu
+	}
+	return ""
+}
+
+func (x *ResourceConfiguration) GetGpuRam() string {
+	if x != nil && x.GpuRam != nil {
+		return *x.GpuRam
 	}
 	return ""
 }
@@ -1878,13 +1888,16 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x13disk_price_per_hour\x18\x01 \x01(\rR\x10diskPricePerHour\"\xaa\x01\n" +
 	"-AvailableStoragePerformanceTierConfigurations\x12S\n" +
 	"\x11storage_tier_type\x18\x01 \x01(\x0e2'.qdrant.cloud.common.v1.StorageTierTypeR\x0fstorageTierType\x12$\n" +
-	"\x0eprice_per_hour\x18\x02 \x01(\rR\fpricePerHour\"\x92\x01\n" +
+	"\x0eprice_per_hour\x18\x02 \x01(\rR\fpricePerHour\"\xc5\x01\n" +
 	"\x15ResourceConfiguration\x12\x19\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03ram\x12\x19\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x03cpu\x12\x1b\n" +
 	"\x04disk\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04disk\x12\x1e\n" +
-	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03gpu\x88\x01\x01B\x06\n" +
-	"\x04_gpu\"\xc0\x01\n" +
+	"\x03gpu\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03gpu\x88\x01\x01\x12%\n" +
+	"\agpu_ram\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x06gpuRam\x88\x01\x01B\x06\n" +
+	"\x04_gpuB\n" +
+	"\n" +
+	"\b_gpu_ram\"\xc0\x01\n" +
 	"\x1bResourceConfigurationFilter\x12\x1e\n" +
 	"\x03ram\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x03ram\x88\x01\x01\x12\x1e\n" +
 	"\x03cpu\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x03cpu\x88\x01\x01\x12 \n" +

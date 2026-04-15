@@ -155,6 +155,10 @@ message GetClusterUsageMetricsResponse {
   repeated Metric latency = 8;
   // Per-node metrics.
   repeated ClusterNodeUsageMetrics nodes = 9;
+  // Timeseries of overall GPU usage across the cluster.
+  repeated Metric gpu = 10;
+  // Timeseries of overall GPU RAM usage across the cluster.
+  repeated Metric gpu_ram = 11;
 }
 
 // GetClusterLogsRequest is the request for the GetClusterLogs function
@@ -272,6 +276,10 @@ message ClusterNodeMetrics {
   ClusterMetricOverview ram_qdrant_rss = 6 [(buf.validate.field).required = true];
   // Overview of disk usage.
   ClusterMetricOverview disk = 7 [(buf.validate.field).required = true];
+  // optional Overview of GPU usage.
+  optional ClusterMetricOverview gpu = 8 [(buf.validate.field).required = false];
+  // Overview of GPU RAM usage.
+  optional ClusterMetricOverview gpu_ram = 9 [(buf.validate.field).required = false];
 }
 
 // ClusterMetricOverview contains both the average values of a metric over
@@ -315,6 +323,10 @@ message ClusterNodeUsageMetrics {
   repeated Metric ram_qdrant_rss = 6;
   // Timeseries of disk usage for the node.
   repeated Metric disk = 7;
+  // Timeseries of gpu usage for the node.
+  repeated Metric gpu = 8;
+  // Timeseries of GPU RAM usage for the node.
+  repeated Metric gpu_ram = 9;
 }
 
 // A single metric data point.

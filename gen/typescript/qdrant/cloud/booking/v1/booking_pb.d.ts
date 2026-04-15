@@ -456,6 +456,14 @@ export declare type ResourceConfiguration = Message<"qdrant.cloud.booking.v1.Res
    * @generated from field: optional string gpu = 4;
    */
   gpu?: string;
+
+  /**
+   * The amount of GPU RAM (e.g., "1GiB")
+   * This is an optional field, if it is not set no GPU is provided.
+   *
+   * @generated from field: optional string gpu_ram = 5;
+   */
+  gpuRam?: string;
 };
 
 export declare type ResourceConfigurationValid = ResourceConfiguration;

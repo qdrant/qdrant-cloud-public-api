@@ -802,6 +802,10 @@
         "gpu": {
           "type": "string",
           "description": "The amount of GPU (e.g., \"1000m\" (1 vGPU))\nThis is an optional field, if it is not set no GPU is provided."
+        },
+        "gpuRam": {
+          "type": "string",
+          "description": "The amount of GPU RAM (e.g., \"1GiB\")\nThis is an optional field, if it is not set no GPU is provided."
         }
       },
       "description": "ResourceConfiguration defines the resource configuration for a package."
