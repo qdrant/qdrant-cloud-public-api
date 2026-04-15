@@ -427,6 +427,8 @@ message HybridCloudEnvironmentStatus {
   repeated HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 13;
   // Volume attributes classes available in the hybrid cloud environment
   repeated HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
+  // Expresses the storage configuration state of the hybrid cloud environment.
+  StorageConfigurationReadiness storage_configuration_readiness = 15;
 }
 
 // QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment
@@ -437,6 +439,18 @@ enum QdrantClusterCreationStatus {
   QDRANT_CLUSTER_CREATION_STATUS_READY = 1;
   // Clusters cannot be created
   QDRANT_CLUSTER_CREATION_STATUS_NOT_READY = 2;
+}
+
+// StorageConfigurationReadiness expresses the storage configuration state of the hybrid cloud environment.
+enum StorageConfigurationReadiness {
+  // Default/unknown, safe fallback
+  STORAGE_CONFIGURATION_READINESS_UNSPECIFIED = 0;
+  // Storage config explicitly set
+  STORAGE_CONFIGURATION_READINESS_READY = 1;
+  // Storage config absent
+  STORAGE_CONFIGURATION_READINESS_NOT_READY = 2;
+  // Config present but invalid
+  STORAGE_CONFIGURATION_READINESS_INVALID = 3;
 }
 
 // Status phase of hybrid cloud environment

@@ -233,6 +233,8 @@ message CloudProviderRegion {
   optional string namespace = 8 [(buf.validate.field).string.min_len = 1];
   // Storage capabilities available in this region.
   CloudProviderRegionCapabilities capabilities = 9;
+  // Surfaces the specific reason cluster creation should be blocked for this region.
+  ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
@@ -241,4 +243,17 @@ message CloudProviderRegionCapabilities {
   bool volume_snapshot = 1;
   // Whether volume expansion is supported.
   bool volume_expansion = 2;
+}
+
+// ClusterCreationBlockingReason surfaces the specific reason cluster creation should be blocked.
+// It is informational and does not change the semantics of available.
+enum ClusterCreationBlockingReason {
+  // No blocking reason / N/A (used for non-hybrid regions)
+  CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED = 0;
+  // No blocker, creation allowed
+  CLUSTER_CREATION_BLOCKING_REASON_NONE = 1;
+  // Operator/agent not yet ready
+  CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY = 2;
+  // Storage config not set
+  CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY = 3;
 }

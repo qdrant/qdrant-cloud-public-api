@@ -721,6 +721,10 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeAttributesClass"
           },
           "title": "Volume attributes classes available in the hybrid cloud environment"
+        },
+        "storageConfigurationReadiness": {
+          "$ref": "#/definitions/v1StorageConfigurationReadiness",
+          "description": "Expresses the storage configuration state of the hybrid cloud environment."
         }
       },
       "title": "Status of a hybrid cloud environment, read only"
@@ -1023,6 +1027,17 @@
       "default": "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
       "description": "- QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: Unspecified\n - QDRANT_CLUSTER_CREATION_STATUS_READY: Clusters can be created\n - QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: Clusters cannot be created",
       "title": "QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment"
+    },
+    "v1StorageConfigurationReadiness": {
+      "type": "string",
+      "enum": [
+        "STORAGE_CONFIGURATION_READINESS_UNSPECIFIED",
+        "STORAGE_CONFIGURATION_READINESS_READY",
+        "STORAGE_CONFIGURATION_READINESS_NOT_READY",
+        "STORAGE_CONFIGURATION_READINESS_INVALID"
+      ],
+      "default": "STORAGE_CONFIGURATION_READINESS_UNSPECIFIED",
+      "description": "StorageConfigurationReadiness expresses the storage configuration state of the hybrid cloud environment.\n\n - STORAGE_CONFIGURATION_READINESS_UNSPECIFIED: Default/unknown, safe fallback\n - STORAGE_CONFIGURATION_READINESS_READY: Storage config explicitly set\n - STORAGE_CONFIGURATION_READINESS_NOT_READY: Storage config absent\n - STORAGE_CONFIGURATION_READINESS_INVALID: Config present but invalid"
     },
     "v1Toleration": {
       "type": "object",

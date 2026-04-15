@@ -317,6 +317,10 @@
         "capabilities": {
           "$ref": "#/definitions/v1CloudProviderRegionCapabilities",
           "description": "Storage capabilities available in this region."
+        },
+        "clusterCreationBlockingReason": {
+          "$ref": "#/definitions/v1ClusterCreationBlockingReason",
+          "description": "Surfaces the specific reason cluster creation should be blocked for this region."
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."
@@ -334,6 +338,17 @@
         }
       },
       "description": "CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region."
+    },
+    "v1ClusterCreationBlockingReason": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED",
+        "CLUSTER_CREATION_BLOCKING_REASON_NONE",
+        "CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY",
+        "CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY"
+      ],
+      "default": "CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED",
+      "description": "ClusterCreationBlockingReason surfaces the specific reason cluster creation should be blocked.\nIt is informational and does not change the semantics of available.\n\n - CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED: No blocking reason / N/A (used for non-hybrid regions)\n - CLUSTER_CREATION_BLOCKING_REASON_NONE: No blocker, creation allowed\n - CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY: Operator/agent not yet ready\n - CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY: Storage config not set"
     },
     "v1GetCloudProviderRegionResponse": {
       "type": "object",
