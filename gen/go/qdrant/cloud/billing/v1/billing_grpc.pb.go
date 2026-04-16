@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BillingService_ListInvoices_FullMethodName  = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
-	BillingService_ListDiscounts_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
-	BillingService_ListCredits_FullMethodName   = "/qdrant.cloud.billing.v1.BillingService/ListCredits"
+	BillingService_ListInvoices_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
+	BillingService_ListDiscounts_FullMethodName       = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
+	BillingService_ListCreditContracts_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -38,10 +38,10 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListDiscounts(ctx context.Context, in *ListDiscountsRequest, opts ...grpc.CallOption) (*ListDiscountsResponse, error)
-	// Lists all credits for the organization identified by the given ID.
+	// Lists all credit contracts for the organization identified by the given ID.
 	// Required permissions:
 	// - read:payment_information
-	ListCredits(ctx context.Context, in *ListCreditsRequest, opts ...grpc.CallOption) (*ListCreditsResponse, error)
+	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
 }
 
 type billingServiceClient struct {
@@ -72,10 +72,10 @@ func (c *billingServiceClient) ListDiscounts(ctx context.Context, in *ListDiscou
 	return out, nil
 }
 
-func (c *billingServiceClient) ListCredits(ctx context.Context, in *ListCreditsRequest, opts ...grpc.CallOption) (*ListCreditsResponse, error) {
+func (c *billingServiceClient) ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCreditsResponse)
-	err := c.cc.Invoke(ctx, BillingService_ListCredits_FullMethodName, in, out, cOpts...)
+	out := new(ListCreditContractsResponse)
+	err := c.cc.Invoke(ctx, BillingService_ListCreditContracts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,10 +96,10 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error)
-	// Lists all credits for the organization identified by the given ID.
+	// Lists all credit contracts for the organization identified by the given ID.
 	// Required permissions:
 	// - read:payment_information
-	ListCredits(context.Context, *ListCreditsRequest) (*ListCreditsResponse, error)
+	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -116,8 +116,8 @@ func (UnimplementedBillingServiceServer) ListInvoices(context.Context, *ListInvo
 func (UnimplementedBillingServiceServer) ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListDiscounts not implemented")
 }
-func (UnimplementedBillingServiceServer) ListCredits(context.Context, *ListCreditsRequest) (*ListCreditsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListCredits not implemented")
+func (UnimplementedBillingServiceServer) ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCreditContracts not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -176,20 +176,20 @@ func _BillingService_ListDiscounts_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BillingService_ListCredits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCreditsRequest)
+func _BillingService_ListCreditContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCreditContractsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServiceServer).ListCredits(ctx, in)
+		return srv.(BillingServiceServer).ListCreditContracts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BillingService_ListCredits_FullMethodName,
+		FullMethod: BillingService_ListCreditContracts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServiceServer).ListCredits(ctx, req.(*ListCreditsRequest))
+		return srv.(BillingServiceServer).ListCreditContracts(ctx, req.(*ListCreditContractsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -210,8 +210,8 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BillingService_ListDiscounts_Handler,
 		},
 		{
-			MethodName: "ListCredits",
-			Handler:    _BillingService_ListCredits_Handler,
+			MethodName: "ListCreditContracts",
+			Handler:    _BillingService_ListCreditContracts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

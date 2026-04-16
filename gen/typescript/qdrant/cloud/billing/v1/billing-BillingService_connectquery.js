@@ -23,10 +23,10 @@ export const listInvoices = BillingService.method.listInvoices;
 export const listDiscounts = BillingService.method.listDiscounts;
 
 /**
- * Lists all credits for the organization identified by the given ID.
+ * Lists all credit contracts for the organization identified by the given ID.
  * Required permissions:
  * - read:payment_information
  *
- * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCredits
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContracts
  */
-export const listCredits = BillingService.method.listCredits;
+export const listCreditContracts = BillingService.method.listCreditContracts;

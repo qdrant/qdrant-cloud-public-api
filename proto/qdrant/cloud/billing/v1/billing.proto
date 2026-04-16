@@ -33,15 +33,15 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
-  // Lists all credits for the organization identified by the given ID.
+  // Lists all credit contracts for the organization identified by the given ID.
   // Required permissions:
   // - read:payment_information
-  rpc ListCredits(ListCreditsRequest) returns (ListCreditsResponse) {
+  rpc ListCreditContracts(ListCreditContractsRequest) returns (ListCreditContractsResponse) {
     // permissions
     option (common.v1.permissions) = "read:payment_information";
     option (common.v1.account_id_expression) = "organization_id";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/credits"};
+    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/credit-contracts"};
   }
 }
 
@@ -140,25 +140,25 @@ message DiscountFixed {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// ListCreditsRequest is the request for the ListCredits function
-message ListCreditsRequest {
+// ListCreditContractsRequest is the request for the ListCreditContracts function
+message ListCreditContractsRequest {
   // The identifier of the organization (in GUID format).
   // This is a required field.
   string organization_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// ListCreditsResponse is the response from the ListCredits function
-message ListCreditsResponse {
-  // The list of credits.
-  repeated Credit items = 1;
+// ListCreditContractsResponse is the response from the ListCreditContracts function
+message ListCreditContractsResponse {
+  // The list of credit contracts.
+  repeated CreditContract items = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// Credit represents a prepaid credit contract for an organization.
-message Credit {
-  // Unique identifier for the credit record.
+// CreditContract represents a prepaid credit contract for an organization.
+message CreditContract {
+  // Unique identifier for the credit contract record.
   string id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the organization this credit belongs to.
+  // The identifier of the organization this credit contract belongs to.
   string organization_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Total contract value in USD.
   double total_amount_usd = 3 [(buf.validate.field).double.gt = 0.0];

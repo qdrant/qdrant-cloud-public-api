@@ -25,10 +25,10 @@ class BillingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsResponse.FromString,
                 _registered_method=True)
-        self.ListCredits = channel.unary_unary(
-                '/qdrant.cloud.billing.v1.BillingService/ListCredits',
-                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsResponse.FromString,
+        self.ListCreditContracts = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/ListCreditContracts',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.FromString,
                 _registered_method=True)
 
 
@@ -54,8 +54,8 @@ class BillingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListCredits(self, request, context):
-        """Lists all credits for the organization identified by the given ID.
+    def ListCreditContracts(self, request, context):
+        """Lists all credit contracts for the organization identified by the given ID.
         Required permissions:
         - read:payment_information
         """
@@ -76,10 +76,10 @@ def add_BillingServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListDiscountsResponse.SerializeToString,
             ),
-            'ListCredits': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListCredits,
-                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsResponse.SerializeToString,
+            'ListCreditContracts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCreditContracts,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -148,7 +148,7 @@ class BillingService(object):
             _registered_method=True)
 
     @staticmethod
-    def ListCredits(request,
+    def ListCreditContracts(request,
             target,
             options=(),
             channel_credentials=None,
@@ -161,9 +161,9 @@ class BillingService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.billing.v1.BillingService/ListCredits',
-            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditsResponse.FromString,
+            '/qdrant.cloud.billing.v1.BillingService/ListCreditContracts',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.FromString,
             options,
             channel_credentials,
             insecure,

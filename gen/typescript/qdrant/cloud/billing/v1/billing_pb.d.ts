@@ -395,11 +395,11 @@ export declare type DiscountFixedValid = DiscountFixed;
 export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: DiscountFixedValid}>;
 
 /**
- * ListCreditsRequest is the request for the ListCredits function
+ * ListCreditContractsRequest is the request for the ListCreditContracts function
  *
- * @generated from message qdrant.cloud.billing.v1.ListCreditsRequest
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsRequest
  */
-export declare type ListCreditsRequest = Message<"qdrant.cloud.billing.v1.ListCreditsRequest"> & {
+export declare type ListCreditContractsRequest = Message<"qdrant.cloud.billing.v1.ListCreditContractsRequest"> & {
   /**
    * The identifier of the organization (in GUID format).
    * This is a required field.
@@ -409,63 +409,63 @@ export declare type ListCreditsRequest = Message<"qdrant.cloud.billing.v1.ListCr
   organizationId: string;
 };
 
-export declare type ListCreditsRequestValid = ListCreditsRequest;
+export declare type ListCreditContractsRequestValid = ListCreditContractsRequest;
 
 /**
- * Describes the message qdrant.cloud.billing.v1.ListCreditsRequest.
- * Use `create(ListCreditsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractsRequest.
+ * Use `create(ListCreditContractsRequestSchema)` to create a new message.
  */
-export declare const ListCreditsRequestSchema: GenMessage<ListCreditsRequest, {validType: ListCreditsRequestValid}>;
+export declare const ListCreditContractsRequestSchema: GenMessage<ListCreditContractsRequest, {validType: ListCreditContractsRequestValid}>;
 
 /**
- * ListCreditsResponse is the response from the ListCredits function
+ * ListCreditContractsResponse is the response from the ListCreditContracts function
  *
- * @generated from message qdrant.cloud.billing.v1.ListCreditsResponse
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsResponse
  */
-export declare type ListCreditsResponse = Message<"qdrant.cloud.billing.v1.ListCreditsResponse"> & {
+export declare type ListCreditContractsResponse = Message<"qdrant.cloud.billing.v1.ListCreditContractsResponse"> & {
   /**
-   * The list of credits.
+   * The list of credit contracts.
    *
-   * @generated from field: repeated qdrant.cloud.billing.v1.Credit items = 1;
+   * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
    */
-  items: Credit[];
+  items: CreditContract[];
 };
 
 /**
- * ListCreditsResponse is the response from the ListCredits function
+ * ListCreditContractsResponse is the response from the ListCreditContracts function
  *
- * @generated from message qdrant.cloud.billing.v1.ListCreditsResponse
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsResponse
  */
-export declare type ListCreditsResponseValid = Message<"qdrant.cloud.billing.v1.ListCreditsResponse"> & {
+export declare type ListCreditContractsResponseValid = Message<"qdrant.cloud.billing.v1.ListCreditContractsResponse"> & {
   /**
-   * The list of credits.
+   * The list of credit contracts.
    *
-   * @generated from field: repeated qdrant.cloud.billing.v1.Credit items = 1;
+   * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
    */
-  items: CreditValid[];
+  items: CreditContractValid[];
 };
 
 /**
- * Describes the message qdrant.cloud.billing.v1.ListCreditsResponse.
- * Use `create(ListCreditsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractsResponse.
+ * Use `create(ListCreditContractsResponseSchema)` to create a new message.
  */
-export declare const ListCreditsResponseSchema: GenMessage<ListCreditsResponse, {validType: ListCreditsResponseValid}>;
+export declare const ListCreditContractsResponseSchema: GenMessage<ListCreditContractsResponse, {validType: ListCreditContractsResponseValid}>;
 
 /**
- * Credit represents a prepaid credit contract for an organization.
+ * CreditContract represents a prepaid credit contract for an organization.
  *
- * @generated from message qdrant.cloud.billing.v1.Credit
+ * @generated from message qdrant.cloud.billing.v1.CreditContract
  */
-export declare type Credit = Message<"qdrant.cloud.billing.v1.Credit"> & {
+export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditContract"> & {
   /**
-   * Unique identifier for the credit record.
+   * Unique identifier for the credit contract record.
    *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
-   * The identifier of the organization this credit belongs to.
+   * The identifier of the organization this credit contract belongs to.
    *
    * @generated from field: string organization_id = 2;
    */
@@ -508,20 +508,20 @@ export declare type Credit = Message<"qdrant.cloud.billing.v1.Credit"> & {
 };
 
 /**
- * Credit represents a prepaid credit contract for an organization.
+ * CreditContract represents a prepaid credit contract for an organization.
  *
- * @generated from message qdrant.cloud.billing.v1.Credit
+ * @generated from message qdrant.cloud.billing.v1.CreditContract
  */
-export declare type CreditValid = Message<"qdrant.cloud.billing.v1.Credit"> & {
+export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.CreditContract"> & {
   /**
-   * Unique identifier for the credit record.
+   * Unique identifier for the credit contract record.
    *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
-   * The identifier of the organization this credit belongs to.
+   * The identifier of the organization this credit contract belongs to.
    *
    * @generated from field: string organization_id = 2;
    */
@@ -564,10 +564,10 @@ export declare type CreditValid = Message<"qdrant.cloud.billing.v1.Credit"> & {
 };
 
 /**
- * Describes the message qdrant.cloud.billing.v1.Credit.
- * Use `create(CreditSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.CreditContract.
+ * Use `create(CreditContractSchema)` to create a new message.
  */
-export declare const CreditSchema: GenMessage<Credit, {validType: CreditValid}>;
+export declare const CreditContractSchema: GenMessage<CreditContract, {validType: CreditContractValid}>;
 
 /**
  * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
@@ -701,16 +701,16 @@ export declare const BillingService: GenService<{
     output: typeof ListDiscountsResponseSchema;
   },
   /**
-   * Lists all credits for the organization identified by the given ID.
+   * Lists all credit contracts for the organization identified by the given ID.
    * Required permissions:
    * - read:payment_information
    *
-   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCredits
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContracts
    */
-  listCredits: {
+  listCreditContracts: {
     methodKind: "unary";
-    input: typeof ListCreditsRequestSchema;
-    output: typeof ListCreditsResponseSchema;
+    input: typeof ListCreditContractsRequestSchema;
+    output: typeof ListCreditContractsResponseSchema;
   },
 }>;
 
