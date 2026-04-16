@@ -325,32 +325,12 @@
           "format": "date-time",
           "description": "The timestamp when the contract expires."
         },
-        "status": {
-          "$ref": "#/definitions/v1PrepaidCreditStatus",
-          "description": "The derived status of the contract based on dates and cancellation."
-        },
-        "orbCreditBlockId": {
-          "type": "string",
-          "description": "The Orb credit block ID, populated once the block has been created in Orb."
-        },
         "notes": {
           "type": "string",
           "description": "Optional internal notes about this contract."
         }
       },
       "description": "PrepaidCredit represents a prepaid credit contract for an organization."
-    },
-    "v1PrepaidCreditStatus": {
-      "type": "string",
-      "enum": [
-        "PREPAID_CREDIT_STATUS_UNSPECIFIED",
-        "PREPAID_CREDIT_STATUS_UPCOMING",
-        "PREPAID_CREDIT_STATUS_ACTIVE",
-        "PREPAID_CREDIT_STATUS_EXPIRED",
-        "PREPAID_CREDIT_STATUS_CANCELLED"
-      ],
-      "default": "PREPAID_CREDIT_STATUS_UNSPECIFIED",
-      "description": "PrepaidCreditStatus represents the derived status of a prepaid credit contract.\n\n - PREPAID_CREDIT_STATUS_UNSPECIFIED: Unspecified\n - PREPAID_CREDIT_STATUS_UPCOMING: The contract is not yet active (active_from is in the future).\n - PREPAID_CREDIT_STATUS_ACTIVE: The contract is currently active.\n - PREPAID_CREDIT_STATUS_EXPIRED: The contract has expired (active_to is in the past).\n - PREPAID_CREDIT_STATUS_CANCELLED: The contract has been cancelled (deleted_at is set)."
     }
   }
 }

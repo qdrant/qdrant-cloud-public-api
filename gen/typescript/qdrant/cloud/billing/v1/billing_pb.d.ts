@@ -500,23 +500,9 @@ export declare type PrepaidCredit = Message<"qdrant.cloud.billing.v1.PrepaidCred
   activeTo?: Timestamp;
 
   /**
-   * The derived status of the contract based on dates and cancellation.
-   *
-   * @generated from field: qdrant.cloud.billing.v1.PrepaidCreditStatus status = 7;
-   */
-  status: PrepaidCreditStatus;
-
-  /**
-   * The Orb credit block ID, populated once the block has been created in Orb.
-   *
-   * @generated from field: optional string orb_credit_block_id = 8;
-   */
-  orbCreditBlockId?: string;
-
-  /**
    * Optional internal notes about this contract.
    *
-   * @generated from field: optional string notes = 9;
+   * @generated from field: optional string notes = 7;
    */
   notes?: string;
 };
@@ -570,23 +556,9 @@ export declare type PrepaidCreditValid = Message<"qdrant.cloud.billing.v1.Prepai
   activeTo: Timestamp;
 
   /**
-   * The derived status of the contract based on dates and cancellation.
-   *
-   * @generated from field: qdrant.cloud.billing.v1.PrepaidCreditStatus status = 7;
-   */
-  status: PrepaidCreditStatus;
-
-  /**
-   * The Orb credit block ID, populated once the block has been created in Orb.
-   *
-   * @generated from field: optional string orb_credit_block_id = 8;
-   */
-  orbCreditBlockId?: string;
-
-  /**
    * Optional internal notes about this contract.
    *
-   * @generated from field: optional string notes = 9;
+   * @generated from field: optional string notes = 7;
    */
   notes?: string;
 };
@@ -643,53 +615,6 @@ export enum BillingFrequency {
  * Describes the enum qdrant.cloud.billing.v1.BillingFrequency.
  */
 export declare const BillingFrequencySchema: GenEnum<BillingFrequency>;
-
-/**
- * PrepaidCreditStatus represents the derived status of a prepaid credit contract.
- *
- * @generated from enum qdrant.cloud.billing.v1.PrepaidCreditStatus
- */
-export enum PrepaidCreditStatus {
-  /**
-   * Unspecified
-   *
-   * @generated from enum value: PREPAID_CREDIT_STATUS_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * The contract is not yet active (active_from is in the future).
-   *
-   * @generated from enum value: PREPAID_CREDIT_STATUS_UPCOMING = 1;
-   */
-  UPCOMING = 1,
-
-  /**
-   * The contract is currently active.
-   *
-   * @generated from enum value: PREPAID_CREDIT_STATUS_ACTIVE = 2;
-   */
-  ACTIVE = 2,
-
-  /**
-   * The contract has expired (active_to is in the past).
-   *
-   * @generated from enum value: PREPAID_CREDIT_STATUS_EXPIRED = 3;
-   */
-  EXPIRED = 3,
-
-  /**
-   * The contract has been cancelled (deleted_at is set).
-   *
-   * @generated from enum value: PREPAID_CREDIT_STATUS_CANCELLED = 4;
-   */
-  CANCELLED = 4,
-}
-
-/**
- * Describes the enum qdrant.cloud.billing.v1.PrepaidCreditStatus.
- */
-export declare const PrepaidCreditStatusSchema: GenEnum<PrepaidCreditStatus>;
 
 /**
  * The possible status of an invoice.

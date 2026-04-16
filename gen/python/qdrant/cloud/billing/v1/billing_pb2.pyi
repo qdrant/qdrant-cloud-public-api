@@ -21,14 +21,6 @@ class BillingFrequency(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BILLING_FREQUENCY_SEMI_ANNUAL: _ClassVar[BillingFrequency]
     BILLING_FREQUENCY_ANNUAL: _ClassVar[BillingFrequency]
 
-class PrepaidCreditStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    PREPAID_CREDIT_STATUS_UNSPECIFIED: _ClassVar[PrepaidCreditStatus]
-    PREPAID_CREDIT_STATUS_UPCOMING: _ClassVar[PrepaidCreditStatus]
-    PREPAID_CREDIT_STATUS_ACTIVE: _ClassVar[PrepaidCreditStatus]
-    PREPAID_CREDIT_STATUS_EXPIRED: _ClassVar[PrepaidCreditStatus]
-    PREPAID_CREDIT_STATUS_CANCELLED: _ClassVar[PrepaidCreditStatus]
-
 class InvoiceStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     INVOICE_STATUS_UNSPECIFIED: _ClassVar[InvoiceStatus]
@@ -42,11 +34,6 @@ BILLING_FREQUENCY_MONTHLY: BillingFrequency
 BILLING_FREQUENCY_QUARTERLY: BillingFrequency
 BILLING_FREQUENCY_SEMI_ANNUAL: BillingFrequency
 BILLING_FREQUENCY_ANNUAL: BillingFrequency
-PREPAID_CREDIT_STATUS_UNSPECIFIED: PrepaidCreditStatus
-PREPAID_CREDIT_STATUS_UPCOMING: PrepaidCreditStatus
-PREPAID_CREDIT_STATUS_ACTIVE: PrepaidCreditStatus
-PREPAID_CREDIT_STATUS_EXPIRED: PrepaidCreditStatus
-PREPAID_CREDIT_STATUS_CANCELLED: PrepaidCreditStatus
 INVOICE_STATUS_UNSPECIFIED: InvoiceStatus
 INVOICE_STATUS_DRAFT: InvoiceStatus
 INVOICE_STATUS_OPEN: InvoiceStatus
@@ -135,15 +122,13 @@ class ListPrepaidCreditsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[PrepaidCredit, _Mapping]]] = ...) -> None: ...
 
 class PrepaidCredit(_message.Message):
-    __slots__ = ("id", "organization_id", "total_amount_usd", "billing_frequency", "active_from", "active_to", "status", "orb_credit_block_id", "notes")
+    __slots__ = ("id", "organization_id", "total_amount_usd", "billing_frequency", "active_from", "active_to", "notes")
     ID_FIELD_NUMBER: _ClassVar[int]
     ORGANIZATION_ID_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_USD_FIELD_NUMBER: _ClassVar[int]
     BILLING_FREQUENCY_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_FROM_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_TO_FIELD_NUMBER: _ClassVar[int]
-    STATUS_FIELD_NUMBER: _ClassVar[int]
-    ORB_CREDIT_BLOCK_ID_FIELD_NUMBER: _ClassVar[int]
     NOTES_FIELD_NUMBER: _ClassVar[int]
     id: str
     organization_id: str
@@ -151,7 +136,5 @@ class PrepaidCredit(_message.Message):
     billing_frequency: BillingFrequency
     active_from: _timestamp_pb2.Timestamp
     active_to: _timestamp_pb2.Timestamp
-    status: PrepaidCreditStatus
-    orb_credit_block_id: str
     notes: str
-    def __init__(self, id: _Optional[str] = ..., organization_id: _Optional[str] = ..., total_amount_usd: _Optional[float] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[PrepaidCreditStatus, str]] = ..., orb_credit_block_id: _Optional[str] = ..., notes: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., organization_id: _Optional[str] = ..., total_amount_usd: _Optional[float] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ...) -> None: ...
