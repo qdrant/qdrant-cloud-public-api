@@ -39,9 +39,6 @@ type BillingServiceClient interface {
 	// - read:payment_information
 	ListDiscounts(ctx context.Context, in *ListDiscountsRequest, opts ...grpc.CallOption) (*ListDiscountsResponse, error)
 	// Lists all credit contracts for the account identified by the given ID.
-	// This must be the parent (billing anchor) account ID of the organization,
-	// as credit contracts are managed at the organization level and shared
-	// across all accounts within it.
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
@@ -100,9 +97,6 @@ type BillingServiceServer interface {
 	// - read:payment_information
 	ListDiscounts(context.Context, *ListDiscountsRequest) (*ListDiscountsResponse, error)
 	// Lists all credit contracts for the account identified by the given ID.
-	// This must be the parent (billing anchor) account ID of the organization,
-	// as credit contracts are managed at the organization level and shared
-	// across all accounts within it.
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)

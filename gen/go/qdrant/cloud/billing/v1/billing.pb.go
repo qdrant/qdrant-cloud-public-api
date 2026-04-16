@@ -650,9 +650,7 @@ func (x *DiscountFixed) GetCurrency() string {
 // ListCreditContractsRequest is the request for the ListCreditContracts function
 type ListCreditContractsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the parent (billing anchor) account (in GUID format).
-	// Credit contracts are scoped to the organization level and shared across
-	// all accounts within it. This must be the parent account ID.
+	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -747,7 +745,7 @@ type CreditContract struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the credit contract record.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The identifier of the parent (billing anchor) account this credit contract belongs to.
+	// The identifier of the account this credit contract belongs to.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Total contract value.
 	TotalAmount float64 `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`

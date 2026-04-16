@@ -401,9 +401,7 @@ export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: 
  */
 export declare type ListCreditContractsRequest = Message<"qdrant.cloud.billing.v1.ListCreditContractsRequest"> & {
   /**
-   * The identifier of the parent (billing anchor) account (in GUID format).
-   * Credit contracts are scoped to the organization level and shared across
-   * all accounts within it. This must be the parent account ID.
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
    * @generated from field: string account_id = 1;
@@ -467,7 +465,7 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
   id: string;
 
   /**
-   * The identifier of the parent (billing anchor) account this credit contract belongs to.
+   * The identifier of the account this credit contract belongs to.
    *
    * @generated from field: string account_id = 2;
    */
@@ -531,7 +529,7 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
   id: string;
 
   /**
-   * The identifier of the parent (billing anchor) account this credit contract belongs to.
+   * The identifier of the account this credit contract belongs to.
    *
    * @generated from field: string account_id = 2;
    */
@@ -720,9 +718,6 @@ export declare const BillingService: GenService<{
   },
   /**
    * Lists all credit contracts for the account identified by the given ID.
-   * This must be the parent (billing anchor) account ID of the organization,
-   * as credit contracts are managed at the organization level and shared
-   * across all accounts within it.
    * Required permissions:
    * - read:payment_information
    *

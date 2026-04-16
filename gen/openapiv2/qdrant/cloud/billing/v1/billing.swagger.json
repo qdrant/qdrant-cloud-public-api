@@ -18,7 +18,7 @@
   "paths": {
     "/api/billing/v1/accounts/{accountId}/credit-contracts": {
       "get": {
-        "summary": "Lists all credit contracts for the account identified by the given ID.\nThis must be the parent (billing anchor) account ID of the organization,\nas credit contracts are managed at the organization level and shared\nacross all accounts within it.\nRequired permissions:\n- read:payment_information",
+        "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
         "operationId": "BillingService_ListCreditContracts",
         "responses": {
           "200": {
@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "The identifier of the parent (billing anchor) account (in GUID format).\nCredit contracts are scoped to the organization level and shared across\nall accounts within it. This must be the parent account ID.\nThis is a required field.",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -163,7 +163,7 @@
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the parent (billing anchor) account this credit contract belongs to."
+          "description": "The identifier of the account this credit contract belongs to."
         },
         "totalAmount": {
           "type": "number",
