@@ -34,9 +34,6 @@ service BillingService {
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
   // Lists all credit contracts for the account identified by the given ID.
-  // This must be the parent (billing anchor) account ID of the organization,
-  // as credit contracts are managed at the organization level and shared
-  // across all accounts within it.
   // Required permissions:
   // - read:payment_information
   rpc ListCreditContracts(ListCreditContractsRequest) returns (ListCreditContractsResponse) {
@@ -143,9 +140,7 @@ message DiscountFixed {
 
 // ListCreditContractsRequest is the request for the ListCreditContracts function
 message ListCreditContractsRequest {
-  // The identifier of the parent (billing anchor) account (in GUID format).
-  // Credit contracts are scoped to the organization level and shared across
-  // all accounts within it. This must be the parent account ID.
+  // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
@@ -161,7 +156,7 @@ message ListCreditContractsResponse {
 message CreditContract {
   // Unique identifier for the credit contract record.
   string id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the parent (billing anchor) account this credit contract belongs to.
+  // The identifier of the account this credit contract belongs to.
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Total contract value.
   double total_amount = 3 [(buf.validate.field).double.gt = 0.0];
