@@ -160,19 +160,22 @@ message CreditContract {
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the organization this credit contract belongs to.
   string organization_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // Total contract value in USD.
-  double total_amount_usd = 3 [(buf.validate.field).double.gt = 0.0];
+  // Total contract value.
+  double total_amount = 3 [(buf.validate.field).double.gt = 0.0];
+  // The currency of the contract amount.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 4 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
   // How often the credit is invoiced.
-  BillingFrequency billing_frequency = 4 [(buf.validate.field).enum = {
+  BillingFrequency billing_frequency = 5 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
   // The timestamp when the contract becomes active.
-  google.protobuf.Timestamp active_from = 5 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp active_from = 6 [(buf.validate.field).required = true];
   // The timestamp when the contract expires.
-  google.protobuf.Timestamp active_to = 6 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp active_to = 7 [(buf.validate.field).required = true];
   // Optional internal notes about this contract.
-  optional string notes = 7 [(buf.validate.field).string.min_len = 1];
+  optional string notes = 8 [(buf.validate.field).string.min_len = 1];
 }
 
 // BillingFrequency represents the invoicing cadence for a prepaid credit contract.

@@ -472,37 +472,45 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
   organizationId: string;
 
   /**
-   * Total contract value in USD.
+   * Total contract value.
    *
-   * @generated from field: double total_amount_usd = 3;
+   * @generated from field: double total_amount = 3;
    */
-  totalAmountUsd: number;
+  totalAmount: number;
+
+  /**
+   * The currency of the contract amount.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
 
   /**
    * How often the credit is invoiced.
    *
-   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 4;
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 5;
    */
   billingFrequency: BillingFrequency;
 
   /**
    * The timestamp when the contract becomes active.
    *
-   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   * @generated from field: google.protobuf.Timestamp active_from = 6;
    */
   activeFrom?: Timestamp;
 
   /**
    * The timestamp when the contract expires.
    *
-   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   * @generated from field: google.protobuf.Timestamp active_to = 7;
    */
   activeTo?: Timestamp;
 
   /**
    * Optional internal notes about this contract.
    *
-   * @generated from field: optional string notes = 7;
+   * @generated from field: optional string notes = 8;
    */
   notes?: string;
 };
@@ -528,37 +536,45 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
   organizationId: string;
 
   /**
-   * Total contract value in USD.
+   * Total contract value.
    *
-   * @generated from field: double total_amount_usd = 3;
+   * @generated from field: double total_amount = 3;
    */
-  totalAmountUsd: number;
+  totalAmount: number;
+
+  /**
+   * The currency of the contract amount.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
 
   /**
    * How often the credit is invoiced.
    *
-   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 4;
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 5;
    */
   billingFrequency: BillingFrequency;
 
   /**
    * The timestamp when the contract becomes active.
    *
-   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   * @generated from field: google.protobuf.Timestamp active_from = 6;
    */
   activeFrom: Timestamp;
 
   /**
    * The timestamp when the contract expires.
    *
-   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   * @generated from field: google.protobuf.Timestamp active_to = 7;
    */
   activeTo: Timestamp;
 
   /**
    * Optional internal notes about this contract.
    *
-   * @generated from field: optional string notes = 7;
+   * @generated from field: optional string notes = 8;
    */
   notes?: string;
 };

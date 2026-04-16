@@ -747,16 +747,19 @@ type CreditContract struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The identifier of the organization this credit contract belongs to.
 	OrganizationId string `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Total contract value in USD.
-	TotalAmountUsd float64 `protobuf:"fixed64,3,opt,name=total_amount_usd,json=totalAmountUsd,proto3" json:"total_amount_usd,omitempty"`
+	// Total contract value.
+	TotalAmount float64 `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	// The currency of the contract amount.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// How often the credit is invoiced.
-	BillingFrequency BillingFrequency `protobuf:"varint,4,opt,name=billing_frequency,json=billingFrequency,proto3,enum=qdrant.cloud.billing.v1.BillingFrequency" json:"billing_frequency,omitempty"`
+	BillingFrequency BillingFrequency `protobuf:"varint,5,opt,name=billing_frequency,json=billingFrequency,proto3,enum=qdrant.cloud.billing.v1.BillingFrequency" json:"billing_frequency,omitempty"`
 	// The timestamp when the contract becomes active.
-	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
+	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
 	// The timestamp when the contract expires.
-	ActiveTo *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
+	ActiveTo *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
 	// Optional internal notes about this contract.
-	Notes         *string `protobuf:"bytes,7,opt,name=notes,proto3,oneof" json:"notes,omitempty"`
+	Notes         *string `protobuf:"bytes,8,opt,name=notes,proto3,oneof" json:"notes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -805,11 +808,18 @@ func (x *CreditContract) GetOrganizationId() string {
 	return ""
 }
 
-func (x *CreditContract) GetTotalAmountUsd() float64 {
+func (x *CreditContract) GetTotalAmount() float64 {
 	if x != nil {
-		return x.TotalAmountUsd
+		return x.TotalAmount
 	}
 	return 0
+}
+
+func (x *CreditContract) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 func (x *CreditContract) GetBillingFrequency() BillingFrequency {
@@ -888,17 +898,19 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x1aListCreditContractsRequest\x121\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0eorganizationId\"\\\n" +
 	"\x1bListCreditContractsResponse\x12=\n" +
-	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.billing.v1.CreditContractR\x05items\"\xaf\x03\n" +
+	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.billing.v1.CreditContractR\x05items\"\xd7\x03\n" +
 	"\x0eCreditContract\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x121\n" +
-	"\x0forganization_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0eorganizationId\x128\n" +
-	"\x10total_amount_usd\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x0etotalAmountUsd\x12b\n" +
-	"\x11billing_frequency\x18\x04 \x01(\x0e2).qdrant.cloud.billing.v1.BillingFrequencyB\n" +
+	"\x0forganization_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0eorganizationId\x121\n" +
+	"\ftotal_amount\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vtotalAmount\x12-\n" +
+	"\bcurrency\x18\x04 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency\x12b\n" +
+	"\x11billing_frequency\x18\x05 \x01(\x0e2).qdrant.cloud.billing.v1.BillingFrequencyB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x10billingFrequency\x12C\n" +
-	"\vactive_from\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"\vactive_from\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"activeFrom\x12?\n" +
-	"\tactive_to\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\bactiveTo\x12\"\n" +
-	"\x05notes\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x05notes\x88\x01\x01B\b\n" +
+	"\tactive_to\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\bactiveTo\x12\"\n" +
+	"\x05notes\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x05notes\x88\x01\x01B\b\n" +
 	"\x06_notes*\xb6\x01\n" +
 	"\x10BillingFrequency\x12!\n" +
 	"\x1dBILLING_FREQUENCY_UNSPECIFIED\x10\x00\x12\x1d\n" +

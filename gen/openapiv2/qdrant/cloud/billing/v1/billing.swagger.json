@@ -165,10 +165,14 @@
           "type": "string",
           "description": "The identifier of the organization this credit contract belongs to."
         },
-        "totalAmountUsd": {
+        "totalAmount": {
           "type": "number",
           "format": "double",
-          "description": "Total contract value in USD."
+          "description": "Total contract value."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the contract amount.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         },
         "billingFrequency": {
           "$ref": "#/definitions/v1BillingFrequency",
