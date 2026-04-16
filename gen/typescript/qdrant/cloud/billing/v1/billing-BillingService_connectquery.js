@@ -30,3 +30,13 @@ export const listDiscounts = BillingService.method.listDiscounts;
  * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContracts
  */
 export const listCreditContracts = BillingService.method.listCreditContracts;
+
+/**
+ * Lists consumption data for all credit contracts for the account identified by the given ID.
+ * Consumption data includes the total, used, and remaining amounts sourced from Orb.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions
+ */
+export const listCreditContractConsumptions = BillingService.method.listCreditContractConsumptions;

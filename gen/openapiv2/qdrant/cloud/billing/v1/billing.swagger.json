@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/billing/v1/accounts/{accountId}/credit-contract-consumptions": {
+      "get": {
+        "summary": "Lists consumption data for all credit contracts for the account identified by the given ID.\nConsumption data includes the total, used, and remaining amounts sourced from Orb.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListCreditContractConsumptions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCreditContractConsumptionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/billing/v1/accounts/{accountId}/credit-contracts": {
       "get": {
         "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -195,6 +227,35 @@
       },
       "description": "CreditContract represents a prepaid credit contract for an organization."
     },
+    "v1CreditContractConsumption": {
+      "type": "object",
+      "properties": {
+        "creditContractId": {
+          "type": "string",
+          "description": "The identifier of the credit contract this consumption belongs to."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Total contract value."
+        },
+        "usedAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount consumed so far."
+        },
+        "remainingAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount remaining."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the amounts.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        }
+      },
+      "description": "CreditContractConsumption represents the consumption data for a credit contract,\nsourced from Orb ledger entries."
+    },
     "v1Discount": {
       "type": "object",
       "properties": {
@@ -293,6 +354,20 @@
       ],
       "default": "INVOICE_STATUS_UNSPECIFIED",
       "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListCreditContractConsumptionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CreditContractConsumption"
+          },
+          "description": "The list of credit contract consumptions."
+        }
+      },
+      "title": "ListCreditContractConsumptionsResponse is the response from the ListCreditContractConsumptions function"
     },
     "v1ListCreditContractsResponse": {
       "type": "object",

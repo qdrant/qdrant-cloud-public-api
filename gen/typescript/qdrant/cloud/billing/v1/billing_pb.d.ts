@@ -452,6 +452,103 @@ export declare type ListCreditContractsResponseValid = Message<"qdrant.cloud.bil
 export declare const ListCreditContractsResponseSchema: GenMessage<ListCreditContractsResponse, {validType: ListCreditContractsResponseValid}>;
 
 /**
+ * ListCreditContractConsumptionsRequest is the request for the ListCreditContractConsumptions function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractConsumptionsRequest
+ */
+export declare type ListCreditContractConsumptionsRequest = Message<"qdrant.cloud.billing.v1.ListCreditContractConsumptionsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListCreditContractConsumptionsRequestValid = ListCreditContractConsumptionsRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractConsumptionsRequest.
+ * Use `create(ListCreditContractConsumptionsRequestSchema)` to create a new message.
+ */
+export declare const ListCreditContractConsumptionsRequestSchema: GenMessage<ListCreditContractConsumptionsRequest, {validType: ListCreditContractConsumptionsRequestValid}>;
+
+/**
+ * ListCreditContractConsumptionsResponse is the response from the ListCreditContractConsumptions function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse
+ */
+export declare type ListCreditContractConsumptionsResponse = Message<"qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse"> & {
+  /**
+   * The list of credit contract consumptions.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.CreditContractConsumption items = 1;
+   */
+  items: CreditContractConsumption[];
+};
+
+export declare type ListCreditContractConsumptionsResponseValid = ListCreditContractConsumptionsResponse;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse.
+ * Use `create(ListCreditContractConsumptionsResponseSchema)` to create a new message.
+ */
+export declare const ListCreditContractConsumptionsResponseSchema: GenMessage<ListCreditContractConsumptionsResponse, {validType: ListCreditContractConsumptionsResponseValid}>;
+
+/**
+ * CreditContractConsumption represents the consumption data for a credit contract,
+ * sourced from Orb ledger entries.
+ *
+ * @generated from message qdrant.cloud.billing.v1.CreditContractConsumption
+ */
+export declare type CreditContractConsumption = Message<"qdrant.cloud.billing.v1.CreditContractConsumption"> & {
+  /**
+   * The identifier of the credit contract this consumption belongs to.
+   *
+   * @generated from field: string credit_contract_id = 1;
+   */
+  creditContractId: string;
+
+  /**
+   * Total contract value.
+   *
+   * @generated from field: double total_amount = 2;
+   */
+  totalAmount: number;
+
+  /**
+   * Amount consumed so far.
+   *
+   * @generated from field: double used_amount = 3;
+   */
+  usedAmount: number;
+
+  /**
+   * Amount remaining.
+   *
+   * @generated from field: double remaining_amount = 4;
+   */
+  remainingAmount: number;
+
+  /**
+   * The currency of the amounts.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 5;
+   */
+  currency: string;
+};
+
+export declare type CreditContractConsumptionValid = CreditContractConsumption;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.CreditContractConsumption.
+ * Use `create(CreditContractConsumptionSchema)` to create a new message.
+ */
+export declare const CreditContractConsumptionSchema: GenMessage<CreditContractConsumption, {validType: CreditContractConsumptionValid}>;
+
+/**
  * CreditContract represents a prepaid credit contract for an organization.
  *
  * @generated from message qdrant.cloud.billing.v1.CreditContract
@@ -727,6 +824,19 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListCreditContractsRequestSchema;
     output: typeof ListCreditContractsResponseSchema;
+  },
+  /**
+   * Lists consumption data for all credit contracts for the account identified by the given ID.
+   * Consumption data includes the total, used, and remaining amounts sourced from Orb.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions
+   */
+  listCreditContractConsumptions: {
+    methodKind: "unary";
+    input: typeof ListCreditContractConsumptionsRequestSchema;
+    output: typeof ListCreditContractConsumptionsResponseSchema;
   },
 }>;
 

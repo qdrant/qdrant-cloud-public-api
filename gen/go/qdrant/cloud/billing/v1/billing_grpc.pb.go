@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BillingService_ListInvoices_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
-	BillingService_ListDiscounts_FullMethodName       = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
-	BillingService_ListCreditContracts_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
+	BillingService_ListInvoices_FullMethodName                   = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
+	BillingService_ListDiscounts_FullMethodName                  = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
+	BillingService_ListCreditContracts_FullMethodName            = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
+	BillingService_ListCreditContractConsumptions_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListCreditContractConsumptions"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -42,6 +43,11 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
+	// Lists consumption data for all credit contracts for the account identified by the given ID.
+	// Consumption data includes the total, used, and remaining amounts sourced from Orb.
+	// Required permissions:
+	// - read:payment_information
+	ListCreditContractConsumptions(ctx context.Context, in *ListCreditContractConsumptionsRequest, opts ...grpc.CallOption) (*ListCreditContractConsumptionsResponse, error)
 }
 
 type billingServiceClient struct {
@@ -82,6 +88,16 @@ func (c *billingServiceClient) ListCreditContracts(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *billingServiceClient) ListCreditContractConsumptions(ctx context.Context, in *ListCreditContractConsumptionsRequest, opts ...grpc.CallOption) (*ListCreditContractConsumptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCreditContractConsumptionsResponse)
+	err := c.cc.Invoke(ctx, BillingService_ListCreditContractConsumptions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -100,6 +116,11 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)
+	// Lists consumption data for all credit contracts for the account identified by the given ID.
+	// Consumption data includes the total, used, and remaining amounts sourced from Orb.
+	// Required permissions:
+	// - read:payment_information
+	ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -118,6 +139,9 @@ func (UnimplementedBillingServiceServer) ListDiscounts(context.Context, *ListDis
 }
 func (UnimplementedBillingServiceServer) ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCreditContracts not implemented")
+}
+func (UnimplementedBillingServiceServer) ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCreditContractConsumptions not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -194,6 +218,24 @@ func _BillingService_ListCreditContracts_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_ListCreditContractConsumptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCreditContractConsumptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ListCreditContractConsumptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_ListCreditContractConsumptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ListCreditContractConsumptions(ctx, req.(*ListCreditContractConsumptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -212,6 +254,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCreditContracts",
 			Handler:    _BillingService_ListCreditContracts_Handler,
+		},
+		{
+			MethodName: "ListCreditContractConsumptions",
+			Handler:    _BillingService_ListCreditContractConsumptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
