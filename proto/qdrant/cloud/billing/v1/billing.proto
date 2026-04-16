@@ -42,6 +42,16 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
   }
+  // Lists consumption data for all credit contracts for the account identified by the given ID.
+  // Consumption data includes the total, used, and remaining amounts sourced from Orb.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListCreditContractConsumptions(ListCreditContractConsumptionsRequest) returns (ListCreditContractConsumptionsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contract-consumptions"};
+  }
 }
 
 // ListInvoicesRequest is the request for the ListInvoices function
@@ -149,6 +159,35 @@ message ListCreditContractsRequest {
 message ListCreditContractsResponse {
   // The list of credit contracts.
   repeated CreditContract items = 1;
+}
+
+// ListCreditContractConsumptionsRequest is the request for the ListCreditContractConsumptions function
+message ListCreditContractConsumptionsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCreditContractConsumptionsResponse is the response from the ListCreditContractConsumptions function
+message ListCreditContractConsumptionsResponse {
+  // The list of credit contract consumptions.
+  repeated CreditContractConsumption items = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// CreditContractConsumption represents the consumption data for a credit contract.
+message CreditContractConsumption {
+  // The identifier of the credit contract this consumption belongs to.
+  string credit_contract_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Total contract value.
+  double total_amount = 2 [(buf.validate.field).double.gt = 0.0];
+  // Amount consumed so far.
+  double used_amount = 3 [(buf.validate.field).double.gte = 0.0];
+  // Amount remaining.
+  double remaining_amount = 4 [(buf.validate.field).double.gte = 0.0];
+  // The currency of the amounts.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 5 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
