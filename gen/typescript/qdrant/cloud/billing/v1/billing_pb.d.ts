@@ -395,11 +395,11 @@ export declare type DiscountFixedValid = DiscountFixed;
 export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: DiscountFixedValid}>;
 
 /**
- * ListPrepaidCreditsRequest is the request for the ListPrepaidCredits function
+ * ListCreditsRequest is the request for the ListCredits function
  *
- * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsRequest
+ * @generated from message qdrant.cloud.billing.v1.ListCreditsRequest
  */
-export declare type ListPrepaidCreditsRequest = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsRequest"> & {
+export declare type ListCreditsRequest = Message<"qdrant.cloud.billing.v1.ListCreditsRequest"> & {
   /**
    * The identifier of the organization (in GUID format).
    * This is a required field.
@@ -409,56 +409,56 @@ export declare type ListPrepaidCreditsRequest = Message<"qdrant.cloud.billing.v1
   organizationId: string;
 };
 
-export declare type ListPrepaidCreditsRequestValid = ListPrepaidCreditsRequest;
+export declare type ListCreditsRequestValid = ListCreditsRequest;
 
 /**
- * Describes the message qdrant.cloud.billing.v1.ListPrepaidCreditsRequest.
- * Use `create(ListPrepaidCreditsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.ListCreditsRequest.
+ * Use `create(ListCreditsRequestSchema)` to create a new message.
  */
-export declare const ListPrepaidCreditsRequestSchema: GenMessage<ListPrepaidCreditsRequest, {validType: ListPrepaidCreditsRequestValid}>;
+export declare const ListCreditsRequestSchema: GenMessage<ListCreditsRequest, {validType: ListCreditsRequestValid}>;
 
 /**
- * ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
+ * ListCreditsResponse is the response from the ListCredits function
  *
- * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse
+ * @generated from message qdrant.cloud.billing.v1.ListCreditsResponse
  */
-export declare type ListPrepaidCreditsResponse = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsResponse"> & {
+export declare type ListCreditsResponse = Message<"qdrant.cloud.billing.v1.ListCreditsResponse"> & {
   /**
-   * The list of prepaid credits.
+   * The list of credits.
    *
-   * @generated from field: repeated qdrant.cloud.billing.v1.PrepaidCredit items = 1;
+   * @generated from field: repeated qdrant.cloud.billing.v1.Credit items = 1;
    */
-  items: PrepaidCredit[];
+  items: Credit[];
 };
 
 /**
- * ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
+ * ListCreditsResponse is the response from the ListCredits function
  *
- * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse
+ * @generated from message qdrant.cloud.billing.v1.ListCreditsResponse
  */
-export declare type ListPrepaidCreditsResponseValid = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsResponse"> & {
+export declare type ListCreditsResponseValid = Message<"qdrant.cloud.billing.v1.ListCreditsResponse"> & {
   /**
-   * The list of prepaid credits.
+   * The list of credits.
    *
-   * @generated from field: repeated qdrant.cloud.billing.v1.PrepaidCredit items = 1;
+   * @generated from field: repeated qdrant.cloud.billing.v1.Credit items = 1;
    */
-  items: PrepaidCreditValid[];
+  items: CreditValid[];
 };
 
 /**
- * Describes the message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse.
- * Use `create(ListPrepaidCreditsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.ListCreditsResponse.
+ * Use `create(ListCreditsResponseSchema)` to create a new message.
  */
-export declare const ListPrepaidCreditsResponseSchema: GenMessage<ListPrepaidCreditsResponse, {validType: ListPrepaidCreditsResponseValid}>;
+export declare const ListCreditsResponseSchema: GenMessage<ListCreditsResponse, {validType: ListCreditsResponseValid}>;
 
 /**
- * PrepaidCredit represents a prepaid credit contract for an organization.
+ * Credit represents a prepaid credit contract for an organization.
  *
- * @generated from message qdrant.cloud.billing.v1.PrepaidCredit
+ * @generated from message qdrant.cloud.billing.v1.Credit
  */
-export declare type PrepaidCredit = Message<"qdrant.cloud.billing.v1.PrepaidCredit"> & {
+export declare type Credit = Message<"qdrant.cloud.billing.v1.Credit"> & {
   /**
-   * Unique identifier for the prepaid credit record.
+   * Unique identifier for the credit record.
    *
    * @generated from field: string id = 1;
    */
@@ -508,13 +508,13 @@ export declare type PrepaidCredit = Message<"qdrant.cloud.billing.v1.PrepaidCred
 };
 
 /**
- * PrepaidCredit represents a prepaid credit contract for an organization.
+ * Credit represents a prepaid credit contract for an organization.
  *
- * @generated from message qdrant.cloud.billing.v1.PrepaidCredit
+ * @generated from message qdrant.cloud.billing.v1.Credit
  */
-export declare type PrepaidCreditValid = Message<"qdrant.cloud.billing.v1.PrepaidCredit"> & {
+export declare type CreditValid = Message<"qdrant.cloud.billing.v1.Credit"> & {
   /**
-   * Unique identifier for the prepaid credit record.
+   * Unique identifier for the credit record.
    *
    * @generated from field: string id = 1;
    */
@@ -564,10 +564,10 @@ export declare type PrepaidCreditValid = Message<"qdrant.cloud.billing.v1.Prepai
 };
 
 /**
- * Describes the message qdrant.cloud.billing.v1.PrepaidCredit.
- * Use `create(PrepaidCreditSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.Credit.
+ * Use `create(CreditSchema)` to create a new message.
  */
-export declare const PrepaidCreditSchema: GenMessage<PrepaidCredit, {validType: PrepaidCreditValid}>;
+export declare const CreditSchema: GenMessage<Credit, {validType: CreditValid}>;
 
 /**
  * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
@@ -701,16 +701,16 @@ export declare const BillingService: GenService<{
     output: typeof ListDiscountsResponseSchema;
   },
   /**
-   * Lists all prepaid credits for the organization identified by the given ID.
+   * Lists all credits for the organization identified by the given ID.
    * Required permissions:
    * - read:payment_information
    *
-   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListPrepaidCredits
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCredits
    */
-  listPrepaidCredits: {
+  listCredits: {
     methodKind: "unary";
-    input: typeof ListPrepaidCreditsRequestSchema;
-    output: typeof ListPrepaidCreditsResponseSchema;
+    input: typeof ListCreditsRequestSchema;
+    output: typeof ListCreditsResponseSchema;
   },
 }>;
 

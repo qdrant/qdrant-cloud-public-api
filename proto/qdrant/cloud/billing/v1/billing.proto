@@ -33,15 +33,15 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
-  // Lists all prepaid credits for the organization identified by the given ID.
+  // Lists all credits for the organization identified by the given ID.
   // Required permissions:
   // - read:payment_information
-  rpc ListPrepaidCredits(ListPrepaidCreditsRequest) returns (ListPrepaidCreditsResponse) {
+  rpc ListCredits(ListCreditsRequest) returns (ListCreditsResponse) {
     // permissions
     option (common.v1.permissions) = "read:payment_information";
     option (common.v1.account_id_expression) = "organization_id";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/prepaid-credits"};
+    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/credits"};
   }
 }
 
@@ -140,23 +140,23 @@ message DiscountFixed {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// ListPrepaidCreditsRequest is the request for the ListPrepaidCredits function
-message ListPrepaidCreditsRequest {
+// ListCreditsRequest is the request for the ListCredits function
+message ListCreditsRequest {
   // The identifier of the organization (in GUID format).
   // This is a required field.
   string organization_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
-// ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
-message ListPrepaidCreditsResponse {
-  // The list of prepaid credits.
-  repeated PrepaidCredit items = 1;
+// ListCreditsResponse is the response from the ListCredits function
+message ListCreditsResponse {
+  // The list of credits.
+  repeated Credit items = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// PrepaidCredit represents a prepaid credit contract for an organization.
-message PrepaidCredit {
-  // Unique identifier for the prepaid credit record.
+// Credit represents a prepaid credit contract for an organization.
+message Credit {
+  // Unique identifier for the credit record.
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // The identifier of the organization this credit belongs to.
   string organization_id = 2 [(buf.validate.field).string = {uuid: true}];

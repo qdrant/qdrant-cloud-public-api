@@ -23,10 +23,10 @@ export const listInvoices = BillingService.method.listInvoices;
 export const listDiscounts = BillingService.method.listDiscounts;
 
 /**
- * Lists all prepaid credits for the organization identified by the given ID.
+ * Lists all credits for the organization identified by the given ID.
  * Required permissions:
  * - read:payment_information
  *
- * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListPrepaidCredits
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCredits
  */
-export const listPrepaidCredits = BillingService.method.listPrepaidCredits;
+export const listCredits = BillingService.method.listCredits;

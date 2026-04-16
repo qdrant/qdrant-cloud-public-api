@@ -109,19 +109,19 @@ class DiscountFixed(_message.Message):
     currency: str
     def __init__(self, value: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
 
-class ListPrepaidCreditsRequest(_message.Message):
+class ListCreditsRequest(_message.Message):
     __slots__ = ("organization_id",)
     ORGANIZATION_ID_FIELD_NUMBER: _ClassVar[int]
     organization_id: str
     def __init__(self, organization_id: _Optional[str] = ...) -> None: ...
 
-class ListPrepaidCreditsResponse(_message.Message):
+class ListCreditsResponse(_message.Message):
     __slots__ = ("items",)
     ITEMS_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[PrepaidCredit]
-    def __init__(self, items: _Optional[_Iterable[_Union[PrepaidCredit, _Mapping]]] = ...) -> None: ...
+    items: _containers.RepeatedCompositeFieldContainer[Credit]
+    def __init__(self, items: _Optional[_Iterable[_Union[Credit, _Mapping]]] = ...) -> None: ...
 
-class PrepaidCredit(_message.Message):
+class Credit(_message.Message):
     __slots__ = ("id", "organization_id", "total_amount_usd", "billing_frequency", "active_from", "active_to", "notes")
     ID_FIELD_NUMBER: _ClassVar[int]
     ORGANIZATION_ID_FIELD_NUMBER: _ClassVar[int]
