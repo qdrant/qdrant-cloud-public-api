@@ -395,6 +395,244 @@ export declare type DiscountFixedValid = DiscountFixed;
 export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: DiscountFixedValid}>;
 
 /**
+ * ListCreditContractsRequest is the request for the ListCreditContracts function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsRequest
+ */
+export declare type ListCreditContractsRequest = Message<"qdrant.cloud.billing.v1.ListCreditContractsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListCreditContractsRequestValid = ListCreditContractsRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractsRequest.
+ * Use `create(ListCreditContractsRequestSchema)` to create a new message.
+ */
+export declare const ListCreditContractsRequestSchema: GenMessage<ListCreditContractsRequest, {validType: ListCreditContractsRequestValid}>;
+
+/**
+ * ListCreditContractsResponse is the response from the ListCreditContracts function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsResponse
+ */
+export declare type ListCreditContractsResponse = Message<"qdrant.cloud.billing.v1.ListCreditContractsResponse"> & {
+  /**
+   * The list of credit contracts.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
+   */
+  items: CreditContract[];
+};
+
+/**
+ * ListCreditContractsResponse is the response from the ListCreditContracts function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCreditContractsResponse
+ */
+export declare type ListCreditContractsResponseValid = Message<"qdrant.cloud.billing.v1.ListCreditContractsResponse"> & {
+  /**
+   * The list of credit contracts.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
+   */
+  items: CreditContractValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCreditContractsResponse.
+ * Use `create(ListCreditContractsResponseSchema)` to create a new message.
+ */
+export declare const ListCreditContractsResponseSchema: GenMessage<ListCreditContractsResponse, {validType: ListCreditContractsResponseValid}>;
+
+/**
+ * CreditContract represents a prepaid credit contract for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.CreditContract
+ */
+export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditContract"> & {
+  /**
+   * Unique identifier for the credit contract record.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the account this credit contract belongs to.
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * Total contract value.
+   *
+   * @generated from field: double total_amount = 3;
+   */
+  totalAmount: number;
+
+  /**
+   * The currency of the contract amount.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+
+  /**
+   * How often the credit is invoiced.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 5;
+   */
+  billingFrequency: BillingFrequency;
+
+  /**
+   * The timestamp when the contract becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 6;
+   */
+  activeFrom?: Timestamp;
+
+  /**
+   * The timestamp when the contract expires.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 7;
+   */
+  activeTo?: Timestamp;
+
+  /**
+   * Optional internal notes about this contract.
+   *
+   * @generated from field: optional string notes = 8;
+   */
+  notes?: string;
+};
+
+/**
+ * CreditContract represents a prepaid credit contract for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.CreditContract
+ */
+export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.CreditContract"> & {
+  /**
+   * Unique identifier for the credit contract record.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the account this credit contract belongs to.
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * Total contract value.
+   *
+   * @generated from field: double total_amount = 3;
+   */
+  totalAmount: number;
+
+  /**
+   * The currency of the contract amount.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+
+  /**
+   * How often the credit is invoiced.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 5;
+   */
+  billingFrequency: BillingFrequency;
+
+  /**
+   * The timestamp when the contract becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 6;
+   */
+  activeFrom: Timestamp;
+
+  /**
+   * The timestamp when the contract expires.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 7;
+   */
+  activeTo: Timestamp;
+
+  /**
+   * Optional internal notes about this contract.
+   *
+   * @generated from field: optional string notes = 8;
+   */
+  notes?: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.CreditContract.
+ * Use `create(CreditContractSchema)` to create a new message.
+ */
+export declare const CreditContractSchema: GenMessage<CreditContract, {validType: CreditContractValid}>;
+
+/**
+ * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
+ *
+ * @generated from enum qdrant.cloud.billing.v1.BillingFrequency
+ */
+export enum BillingFrequency {
+  /**
+   * Unspecified
+   *
+   * @generated from enum value: BILLING_FREQUENCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Monthly
+   *
+   * @generated from enum value: BILLING_FREQUENCY_MONTHLY = 1;
+   */
+  MONTHLY = 1,
+
+  /**
+   * Quarterly
+   *
+   * @generated from enum value: BILLING_FREQUENCY_QUARTERLY = 2;
+   */
+  QUARTERLY = 2,
+
+  /**
+   * Semi-annual
+   *
+   * @generated from enum value: BILLING_FREQUENCY_SEMI_ANNUAL = 3;
+   */
+  SEMI_ANNUAL = 3,
+
+  /**
+   * Annual
+   *
+   * @generated from enum value: BILLING_FREQUENCY_ANNUAL = 4;
+   */
+  ANNUAL = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.billing.v1.BillingFrequency.
+ */
+export declare const BillingFrequencySchema: GenEnum<BillingFrequency>;
+
+/**
  * The possible status of an invoice.
  *
  * @generated from enum qdrant.cloud.billing.v1.InvoiceStatus
@@ -477,6 +715,18 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListDiscountsRequestSchema;
     output: typeof ListDiscountsResponseSchema;
+  },
+  /**
+   * Lists all credit contracts for the account identified by the given ID.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContracts
+   */
+  listCreditContracts: {
+    methodKind: "unary";
+    input: typeof ListCreditContractsRequestSchema;
+    output: typeof ListCreditContractsResponseSchema;
   },
 }>;
 

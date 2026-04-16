@@ -20,3 +20,11 @@ export const listInvoices: typeof BillingService["method"]["listInvoices"];
  * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListDiscounts
  */
 export const listDiscounts: typeof BillingService["method"]["listDiscounts"];
+/**
+ * Lists all credit contracts for the account identified by the given ID.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContracts
+ */
+export const listCreditContracts: typeof BillingService["method"]["listCreditContracts"];

@@ -33,6 +33,15 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
+  // Lists all credit contracts for the account identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListCreditContracts(ListCreditContractsRequest) returns (ListCreditContractsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
+  }
 }
 
 // ListInvoicesRequest is the request for the ListInvoices function
@@ -127,6 +136,58 @@ message DiscountFixed {
   // Specifies the currency in which the prices are denominated.
   // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
   string currency = 2 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+}
+
+// ListCreditContractsRequest is the request for the ListCreditContracts function
+message ListCreditContractsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCreditContractsResponse is the response from the ListCreditContracts function
+message ListCreditContractsResponse {
+  // The list of credit contracts.
+  repeated CreditContract items = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// CreditContract represents a prepaid credit contract for an organization.
+message CreditContract {
+  // Unique identifier for the credit contract record.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the account this credit contract belongs to.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Total contract value.
+  double total_amount = 3 [(buf.validate.field).double.gt = 0.0];
+  // The currency of the contract amount.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 4 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+  // How often the credit is invoiced.
+  BillingFrequency billing_frequency = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The timestamp when the contract becomes active.
+  google.protobuf.Timestamp active_from = 6 [(buf.validate.field).required = true];
+  // The timestamp when the contract expires.
+  google.protobuf.Timestamp active_to = 7 [(buf.validate.field).required = true];
+  // Optional internal notes about this contract.
+  optional string notes = 8 [(buf.validate.field).string.min_len = 1];
+}
+
+// BillingFrequency represents the invoicing cadence for a prepaid credit contract.
+enum BillingFrequency {
+  // Unspecified
+  BILLING_FREQUENCY_UNSPECIFIED = 0;
+  // Monthly
+  BILLING_FREQUENCY_MONTHLY = 1;
+  // Quarterly
+  BILLING_FREQUENCY_QUARTERLY = 2;
+  // Semi-annual
+  BILLING_FREQUENCY_SEMI_ANNUAL = 3;
+  // Annual
+  BILLING_FREQUENCY_ANNUAL = 4;
 }
 
 // The possible status of an invoice.

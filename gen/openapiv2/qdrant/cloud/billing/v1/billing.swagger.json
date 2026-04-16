@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/billing/v1/accounts/{accountId}/credit-contracts": {
+      "get": {
+        "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListCreditContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCreditContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/billing/v1/accounts/{accountId}/discounts": {
       "get": {
         "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -109,6 +141,59 @@
           }
         }
       }
+    },
+    "v1BillingFrequency": {
+      "type": "string",
+      "enum": [
+        "BILLING_FREQUENCY_UNSPECIFIED",
+        "BILLING_FREQUENCY_MONTHLY",
+        "BILLING_FREQUENCY_QUARTERLY",
+        "BILLING_FREQUENCY_SEMI_ANNUAL",
+        "BILLING_FREQUENCY_ANNUAL"
+      ],
+      "default": "BILLING_FREQUENCY_UNSPECIFIED",
+      "description": "BillingFrequency represents the invoicing cadence for a prepaid credit contract.\n\n - BILLING_FREQUENCY_UNSPECIFIED: Unspecified\n - BILLING_FREQUENCY_MONTHLY: Monthly\n - BILLING_FREQUENCY_QUARTERLY: Quarterly\n - BILLING_FREQUENCY_SEMI_ANNUAL: Semi-annual\n - BILLING_FREQUENCY_ANNUAL: Annual"
+    },
+    "v1CreditContract": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the credit contract record."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account this credit contract belongs to."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Total contract value."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the contract amount.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "billingFrequency": {
+          "$ref": "#/definitions/v1BillingFrequency",
+          "description": "How often the credit is invoiced."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract becomes active."
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract expires."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional internal notes about this contract."
+        }
+      },
+      "description": "CreditContract represents a prepaid credit contract for an organization."
     },
     "v1Discount": {
       "type": "object",
@@ -208,6 +293,20 @@
       ],
       "default": "INVOICE_STATUS_UNSPECIFIED",
       "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListCreditContractsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CreditContract"
+          },
+          "description": "The list of credit contracts."
+        }
+      },
+      "title": "ListCreditContractsResponse is the response from the ListCreditContracts function"
     },
     "v1ListDiscountsResponse": {
       "type": "object",
