@@ -254,7 +254,7 @@
           "description": "The currency of the amounts.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         }
       },
-      "description": "CreditContractConsumption represents the consumption data for a credit contract,\nsourced from Orb ledger entries."
+      "description": "CreditContractConsumption represents the consumption data for a credit contract."
     },
     "v1Discount": {
       "type": "object",

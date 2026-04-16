@@ -833,8 +833,7 @@ func (x *ListCreditContractConsumptionsResponse) GetItems() []*CreditContractCon
 	return nil
 }
 
-// CreditContractConsumption represents the consumption data for a credit contract,
-// sourced from Orb ledger entries.
+// CreditContractConsumption represents the consumption data for a credit contract.
 type CreditContractConsumption struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the credit contract this consumption belongs to.

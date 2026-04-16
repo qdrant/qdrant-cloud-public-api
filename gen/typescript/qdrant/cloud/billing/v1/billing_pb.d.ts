@@ -497,8 +497,7 @@ export declare type ListCreditContractConsumptionsResponseValid = ListCreditCont
 export declare const ListCreditContractConsumptionsResponseSchema: GenMessage<ListCreditContractConsumptionsResponse, {validType: ListCreditContractConsumptionsResponseValid}>;
 
 /**
- * CreditContractConsumption represents the consumption data for a credit contract,
- * sourced from Orb ledger entries.
+ * CreditContractConsumption represents the consumption data for a credit contract.
  *
  * @generated from message qdrant.cloud.billing.v1.CreditContractConsumption
  */
