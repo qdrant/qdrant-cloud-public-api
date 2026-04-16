@@ -33,6 +33,16 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
+  // Lists all prepaid credits for the organization identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListPrepaidCredits(ListPrepaidCreditsRequest) returns (ListPrepaidCreditsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    option (common.v1.account_id_expression) = "organization_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/prepaid-credits"};
+  }
 }
 
 // ListInvoicesRequest is the request for the ListInvoices function
@@ -127,6 +137,77 @@ message DiscountFixed {
   // Specifies the currency in which the prices are denominated.
   // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
   string currency = 2 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// ListPrepaidCreditsRequest is the request for the ListPrepaidCredits function
+message ListPrepaidCreditsRequest {
+  // The identifier of the organization (in GUID format).
+  // This is a required field.
+  string organization_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
+message ListPrepaidCreditsResponse {
+  // The list of prepaid credits.
+  repeated PrepaidCredit items = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// PrepaidCredit represents a prepaid credit contract for an organization.
+message PrepaidCredit {
+  // Unique identifier for the prepaid credit record.
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the organization this credit belongs to.
+  string organization_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Total contract value in USD.
+  double total_amount_usd = 3 [(buf.validate.field).double.gt = 0.0];
+  // How often the credit is invoiced.
+  BillingFrequency billing_frequency = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The timestamp when the contract becomes active.
+  google.protobuf.Timestamp active_from = 5 [(buf.validate.field).required = true];
+  // The timestamp when the contract expires.
+  google.protobuf.Timestamp active_to = 6 [(buf.validate.field).required = true];
+  // The derived status of the contract based on dates and cancellation.
+  PrepaidCreditStatus status = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // The Orb credit block ID, populated once the block has been created in Orb.
+  optional string orb_credit_block_id = 8 [(buf.validate.field).string.min_len = 1];
+  // Optional internal notes about this contract.
+  optional string notes = 9 [(buf.validate.field).string.min_len = 1];
+}
+
+// BillingFrequency represents the invoicing cadence for a prepaid credit contract.
+enum BillingFrequency {
+  // Unspecified
+  BILLING_FREQUENCY_UNSPECIFIED = 0;
+  // Monthly
+  BILLING_FREQUENCY_MONTHLY = 1;
+  // Quarterly
+  BILLING_FREQUENCY_QUARTERLY = 2;
+  // Semi-annual
+  BILLING_FREQUENCY_SEMI_ANNUAL = 3;
+  // Annual
+  BILLING_FREQUENCY_ANNUAL = 4;
+}
+
+// PrepaidCreditStatus represents the derived status of a prepaid credit contract.
+enum PrepaidCreditStatus {
+  // Unspecified
+  PREPAID_CREDIT_STATUS_UNSPECIFIED = 0;
+  // The contract is not yet active (active_from is in the future).
+  PREPAID_CREDIT_STATUS_UPCOMING = 1;
+  // The contract is currently active.
+  PREPAID_CREDIT_STATUS_ACTIVE = 2;
+  // The contract has expired (active_to is in the past).
+  PREPAID_CREDIT_STATUS_EXPIRED = 3;
+  // The contract has been cancelled (deleted_at is set).
+  PREPAID_CREDIT_STATUS_CANCELLED = 4;
 }
 
 // The possible status of an invoice.

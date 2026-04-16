@@ -395,6 +395,303 @@ export declare type DiscountFixedValid = DiscountFixed;
 export declare const DiscountFixedSchema: GenMessage<DiscountFixed, {validType: DiscountFixedValid}>;
 
 /**
+ * ListPrepaidCreditsRequest is the request for the ListPrepaidCredits function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsRequest
+ */
+export declare type ListPrepaidCreditsRequest = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsRequest"> & {
+  /**
+   * The identifier of the organization (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string organization_id = 1;
+   */
+  organizationId: string;
+};
+
+export declare type ListPrepaidCreditsRequestValid = ListPrepaidCreditsRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListPrepaidCreditsRequest.
+ * Use `create(ListPrepaidCreditsRequestSchema)` to create a new message.
+ */
+export declare const ListPrepaidCreditsRequestSchema: GenMessage<ListPrepaidCreditsRequest, {validType: ListPrepaidCreditsRequestValid}>;
+
+/**
+ * ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse
+ */
+export declare type ListPrepaidCreditsResponse = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsResponse"> & {
+  /**
+   * The list of prepaid credits.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.PrepaidCredit items = 1;
+   */
+  items: PrepaidCredit[];
+};
+
+/**
+ * ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse
+ */
+export declare type ListPrepaidCreditsResponseValid = Message<"qdrant.cloud.billing.v1.ListPrepaidCreditsResponse"> & {
+  /**
+   * The list of prepaid credits.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.PrepaidCredit items = 1;
+   */
+  items: PrepaidCreditValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListPrepaidCreditsResponse.
+ * Use `create(ListPrepaidCreditsResponseSchema)` to create a new message.
+ */
+export declare const ListPrepaidCreditsResponseSchema: GenMessage<ListPrepaidCreditsResponse, {validType: ListPrepaidCreditsResponseValid}>;
+
+/**
+ * PrepaidCredit represents a prepaid credit contract for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.PrepaidCredit
+ */
+export declare type PrepaidCredit = Message<"qdrant.cloud.billing.v1.PrepaidCredit"> & {
+  /**
+   * Unique identifier for the prepaid credit record.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the organization this credit belongs to.
+   *
+   * @generated from field: string organization_id = 2;
+   */
+  organizationId: string;
+
+  /**
+   * Total contract value in USD.
+   *
+   * @generated from field: double total_amount_usd = 3;
+   */
+  totalAmountUsd: number;
+
+  /**
+   * How often the credit is invoiced.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 4;
+   */
+  billingFrequency: BillingFrequency;
+
+  /**
+   * The timestamp when the contract becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   */
+  activeFrom?: Timestamp;
+
+  /**
+   * The timestamp when the contract expires.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   */
+  activeTo?: Timestamp;
+
+  /**
+   * The derived status of the contract based on dates and cancellation.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.PrepaidCreditStatus status = 7;
+   */
+  status: PrepaidCreditStatus;
+
+  /**
+   * The Orb credit block ID, populated once the block has been created in Orb.
+   *
+   * @generated from field: optional string orb_credit_block_id = 8;
+   */
+  orbCreditBlockId?: string;
+
+  /**
+   * Optional internal notes about this contract.
+   *
+   * @generated from field: optional string notes = 9;
+   */
+  notes?: string;
+};
+
+/**
+ * PrepaidCredit represents a prepaid credit contract for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.PrepaidCredit
+ */
+export declare type PrepaidCreditValid = Message<"qdrant.cloud.billing.v1.PrepaidCredit"> & {
+  /**
+   * Unique identifier for the prepaid credit record.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the organization this credit belongs to.
+   *
+   * @generated from field: string organization_id = 2;
+   */
+  organizationId: string;
+
+  /**
+   * Total contract value in USD.
+   *
+   * @generated from field: double total_amount_usd = 3;
+   */
+  totalAmountUsd: number;
+
+  /**
+   * How often the credit is invoiced.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.BillingFrequency billing_frequency = 4;
+   */
+  billingFrequency: BillingFrequency;
+
+  /**
+   * The timestamp when the contract becomes active.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   */
+  activeFrom: Timestamp;
+
+  /**
+   * The timestamp when the contract expires.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   */
+  activeTo: Timestamp;
+
+  /**
+   * The derived status of the contract based on dates and cancellation.
+   *
+   * @generated from field: qdrant.cloud.billing.v1.PrepaidCreditStatus status = 7;
+   */
+  status: PrepaidCreditStatus;
+
+  /**
+   * The Orb credit block ID, populated once the block has been created in Orb.
+   *
+   * @generated from field: optional string orb_credit_block_id = 8;
+   */
+  orbCreditBlockId?: string;
+
+  /**
+   * Optional internal notes about this contract.
+   *
+   * @generated from field: optional string notes = 9;
+   */
+  notes?: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.PrepaidCredit.
+ * Use `create(PrepaidCreditSchema)` to create a new message.
+ */
+export declare const PrepaidCreditSchema: GenMessage<PrepaidCredit, {validType: PrepaidCreditValid}>;
+
+/**
+ * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
+ *
+ * @generated from enum qdrant.cloud.billing.v1.BillingFrequency
+ */
+export enum BillingFrequency {
+  /**
+   * Unspecified
+   *
+   * @generated from enum value: BILLING_FREQUENCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Monthly
+   *
+   * @generated from enum value: BILLING_FREQUENCY_MONTHLY = 1;
+   */
+  MONTHLY = 1,
+
+  /**
+   * Quarterly
+   *
+   * @generated from enum value: BILLING_FREQUENCY_QUARTERLY = 2;
+   */
+  QUARTERLY = 2,
+
+  /**
+   * Semi-annual
+   *
+   * @generated from enum value: BILLING_FREQUENCY_SEMI_ANNUAL = 3;
+   */
+  SEMI_ANNUAL = 3,
+
+  /**
+   * Annual
+   *
+   * @generated from enum value: BILLING_FREQUENCY_ANNUAL = 4;
+   */
+  ANNUAL = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.billing.v1.BillingFrequency.
+ */
+export declare const BillingFrequencySchema: GenEnum<BillingFrequency>;
+
+/**
+ * PrepaidCreditStatus represents the derived status of a prepaid credit contract.
+ *
+ * @generated from enum qdrant.cloud.billing.v1.PrepaidCreditStatus
+ */
+export enum PrepaidCreditStatus {
+  /**
+   * Unspecified
+   *
+   * @generated from enum value: PREPAID_CREDIT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The contract is not yet active (active_from is in the future).
+   *
+   * @generated from enum value: PREPAID_CREDIT_STATUS_UPCOMING = 1;
+   */
+  UPCOMING = 1,
+
+  /**
+   * The contract is currently active.
+   *
+   * @generated from enum value: PREPAID_CREDIT_STATUS_ACTIVE = 2;
+   */
+  ACTIVE = 2,
+
+  /**
+   * The contract has expired (active_to is in the past).
+   *
+   * @generated from enum value: PREPAID_CREDIT_STATUS_EXPIRED = 3;
+   */
+  EXPIRED = 3,
+
+  /**
+   * The contract has been cancelled (deleted_at is set).
+   *
+   * @generated from enum value: PREPAID_CREDIT_STATUS_CANCELLED = 4;
+   */
+  CANCELLED = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.billing.v1.PrepaidCreditStatus.
+ */
+export declare const PrepaidCreditStatusSchema: GenEnum<PrepaidCreditStatus>;
+
+/**
  * The possible status of an invoice.
  *
  * @generated from enum qdrant.cloud.billing.v1.InvoiceStatus
@@ -477,6 +774,18 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListDiscountsRequestSchema;
     output: typeof ListDiscountsResponseSchema;
+  },
+  /**
+   * Lists all prepaid credits for the organization identified by the given ID.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListPrepaidCredits
+   */
+  listPrepaidCredits: {
+    methodKind: "unary";
+    input: typeof ListPrepaidCreditsRequestSchema;
+    output: typeof ListPrepaidCreditsResponseSchema;
   },
 }>;
 

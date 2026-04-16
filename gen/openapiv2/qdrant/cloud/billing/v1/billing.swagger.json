@@ -79,6 +79,38 @@
           "BillingService"
         ]
       }
+    },
+    "/api/billing/v1/organizations/{organizationId}/prepaid-credits": {
+      "get": {
+        "summary": "Lists all prepaid credits for the organization identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListPrepaidCredits",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPrepaidCreditsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organizationId",
+            "description": "The identifier of the organization (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -109,6 +141,18 @@
           }
         }
       }
+    },
+    "v1BillingFrequency": {
+      "type": "string",
+      "enum": [
+        "BILLING_FREQUENCY_UNSPECIFIED",
+        "BILLING_FREQUENCY_MONTHLY",
+        "BILLING_FREQUENCY_QUARTERLY",
+        "BILLING_FREQUENCY_SEMI_ANNUAL",
+        "BILLING_FREQUENCY_ANNUAL"
+      ],
+      "default": "BILLING_FREQUENCY_UNSPECIFIED",
+      "description": "BillingFrequency represents the invoicing cadence for a prepaid credit contract.\n\n - BILLING_FREQUENCY_UNSPECIFIED: Unspecified\n - BILLING_FREQUENCY_MONTHLY: Monthly\n - BILLING_FREQUENCY_QUARTERLY: Quarterly\n - BILLING_FREQUENCY_SEMI_ANNUAL: Semi-annual\n - BILLING_FREQUENCY_ANNUAL: Annual"
     },
     "v1Discount": {
       "type": "object",
@@ -236,6 +280,77 @@
         }
       },
       "title": "ListInvoicesResponse is the response from the ListInvoices function"
+    },
+    "v1ListPrepaidCreditsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1PrepaidCredit"
+          },
+          "description": "The list of prepaid credits."
+        }
+      },
+      "title": "ListPrepaidCreditsResponse is the response from the ListPrepaidCredits function"
+    },
+    "v1PrepaidCredit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the prepaid credit record."
+        },
+        "organizationId": {
+          "type": "string",
+          "description": "The identifier of the organization this credit belongs to."
+        },
+        "totalAmountUsd": {
+          "type": "number",
+          "format": "double",
+          "description": "Total contract value in USD."
+        },
+        "billingFrequency": {
+          "$ref": "#/definitions/v1BillingFrequency",
+          "description": "How often the credit is invoiced."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract becomes active."
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract expires."
+        },
+        "status": {
+          "$ref": "#/definitions/v1PrepaidCreditStatus",
+          "description": "The derived status of the contract based on dates and cancellation."
+        },
+        "orbCreditBlockId": {
+          "type": "string",
+          "description": "The Orb credit block ID, populated once the block has been created in Orb."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional internal notes about this contract."
+        }
+      },
+      "description": "PrepaidCredit represents a prepaid credit contract for an organization."
+    },
+    "v1PrepaidCreditStatus": {
+      "type": "string",
+      "enum": [
+        "PREPAID_CREDIT_STATUS_UNSPECIFIED",
+        "PREPAID_CREDIT_STATUS_UPCOMING",
+        "PREPAID_CREDIT_STATUS_ACTIVE",
+        "PREPAID_CREDIT_STATUS_EXPIRED",
+        "PREPAID_CREDIT_STATUS_CANCELLED"
+      ],
+      "default": "PREPAID_CREDIT_STATUS_UNSPECIFIED",
+      "description": "PrepaidCreditStatus represents the derived status of a prepaid credit contract.\n\n - PREPAID_CREDIT_STATUS_UNSPECIFIED: Unspecified\n - PREPAID_CREDIT_STATUS_UPCOMING: The contract is not yet active (active_from is in the future).\n - PREPAID_CREDIT_STATUS_ACTIVE: The contract is currently active.\n - PREPAID_CREDIT_STATUS_EXPIRED: The contract has expired (active_to is in the past).\n - PREPAID_CREDIT_STATUS_CANCELLED: The contract has been cancelled (deleted_at is set)."
     }
   }
 }
