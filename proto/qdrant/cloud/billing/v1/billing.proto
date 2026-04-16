@@ -33,15 +33,17 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
   }
-  // Lists all credit contracts for the organization identified by the given ID.
+  // Lists all credit contracts for the account identified by the given ID.
+  // This must be the parent (billing anchor) account ID of the organization,
+  // as credit contracts are managed at the organization level and shared
+  // across all accounts within it.
   // Required permissions:
   // - read:payment_information
   rpc ListCreditContracts(ListCreditContractsRequest) returns (ListCreditContractsResponse) {
     // permissions
     option (common.v1.permissions) = "read:payment_information";
-    option (common.v1.account_id_expression) = "organization_id";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/billing/v1/organizations/{organization_id}/credit-contracts"};
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
   }
 }
 
@@ -139,12 +141,13 @@ message DiscountFixed {
   string currency = 2 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
 }
 
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // ListCreditContractsRequest is the request for the ListCreditContracts function
 message ListCreditContractsRequest {
-  // The identifier of the organization (in GUID format).
+  // The identifier of the parent (billing anchor) account (in GUID format).
+  // Credit contracts are scoped to the organization level and shared across
+  // all accounts within it. This must be the parent account ID.
   // This is a required field.
-  string organization_id = 1 [(buf.validate.field).string = {uuid: true}];
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // ListCreditContractsResponse is the response from the ListCreditContracts function
@@ -158,8 +161,8 @@ message ListCreditContractsResponse {
 message CreditContract {
   // Unique identifier for the credit contract record.
   string id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier of the organization this credit contract belongs to.
-  string organization_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the parent (billing anchor) account this credit contract belongs to.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Total contract value.
   double total_amount = 3 [(buf.validate.field).double.gt = 0.0];
   // The currency of the contract amount.

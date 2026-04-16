@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/billing/v1/accounts/{accountId}/credit-contracts": {
+      "get": {
+        "summary": "Lists all credit contracts for the account identified by the given ID.\nThis must be the parent (billing anchor) account ID of the organization,\nas credit contracts are managed at the organization level and shared\nacross all accounts within it.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListCreditContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCreditContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the parent (billing anchor) account (in GUID format).\nCredit contracts are scoped to the organization level and shared across\nall accounts within it. This must be the parent account ID.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/billing/v1/accounts/{accountId}/discounts": {
       "get": {
         "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -79,38 +111,6 @@
           "BillingService"
         ]
       }
-    },
-    "/api/billing/v1/organizations/{organizationId}/credit-contracts": {
-      "get": {
-        "summary": "Lists all credit contracts for the organization identified by the given ID.\nRequired permissions:\n- read:payment_information",
-        "operationId": "BillingService_ListCreditContracts",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListCreditContractsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "organizationId",
-            "description": "The identifier of the organization (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "BillingService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -161,9 +161,9 @@
           "type": "string",
           "description": "Unique identifier for the credit contract record."
         },
-        "organizationId": {
+        "accountId": {
           "type": "string",
-          "description": "The identifier of the organization this credit contract belongs to."
+          "description": "The identifier of the parent (billing anchor) account this credit contract belongs to."
         },
         "totalAmount": {
           "type": "number",

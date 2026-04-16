@@ -650,11 +650,13 @@ func (x *DiscountFixed) GetCurrency() string {
 // ListCreditContractsRequest is the request for the ListCreditContracts function
 type ListCreditContractsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the organization (in GUID format).
+	// The identifier of the parent (billing anchor) account (in GUID format).
+	// Credit contracts are scoped to the organization level and shared across
+	// all accounts within it. This must be the parent account ID.
 	// This is a required field.
-	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCreditContractsRequest) Reset() {
@@ -687,9 +689,9 @@ func (*ListCreditContractsRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ListCreditContractsRequest) GetOrganizationId() string {
+func (x *ListCreditContractsRequest) GetAccountId() string {
 	if x != nil {
-		return x.OrganizationId
+		return x.AccountId
 	}
 	return ""
 }
@@ -745,8 +747,8 @@ type CreditContract struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the credit contract record.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The identifier of the organization this credit contract belongs to.
-	OrganizationId string `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// The identifier of the parent (billing anchor) account this credit contract belongs to.
+	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Total contract value.
 	TotalAmount float64 `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	// The currency of the contract amount.
@@ -801,9 +803,9 @@ func (x *CreditContract) GetId() string {
 	return ""
 }
 
-func (x *CreditContract) GetOrganizationId() string {
+func (x *CreditContract) GetAccountId() string {
 	if x != nil {
-		return x.OrganizationId
+		return x.AccountId
 	}
 	return ""
 }
@@ -894,14 +896,16 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\rDiscountFixed\x12$\n" +
 	"\x05value\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\x12-\n" +
 	"\bcurrency\x18\x02 \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{3}$R\bcurrency\"O\n" +
-	"\x1aListCreditContractsRequest\x121\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0eorganizationId\"\\\n" +
+	"^[A-Z]{3}$R\bcurrency\"E\n" +
+	"\x1aListCreditContractsRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\\\n" +
 	"\x1bListCreditContractsResponse\x12=\n" +
-	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.billing.v1.CreditContractR\x05items\"\xd7\x03\n" +
+	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.billing.v1.CreditContractR\x05items\"\xcd\x03\n" +
 	"\x0eCreditContract\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x121\n" +
-	"\x0forganization_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0eorganizationId\x121\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12'\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x121\n" +
 	"\ftotal_amount\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vtotalAmount\x12-\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x11\xbaH\x0er\f2\n" +
 	"^[A-Z]{3}$R\bcurrency\x12b\n" +
@@ -924,11 +928,11 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\x9c\x05\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xff\x04\n" +
 	"\x0eBillingService\x12\xbf\x01\n" +
 	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n" +
-	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xf9\x01\n" +
-	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"w\x8a\xb5\x18\x18read:payment_information\x92\xb5\x18\x0forganization_id\x82\xd3\xe4\x93\x02B\x12@/api/billing/v1/organizations/{organization_id}/credit-contracts\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdc\x01\n" +
+	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"Z\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.billing.v1B\fBillingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3"
 
 var (

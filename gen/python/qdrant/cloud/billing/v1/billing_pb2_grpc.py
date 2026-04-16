@@ -55,7 +55,10 @@ class BillingServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListCreditContracts(self, request, context):
-        """Lists all credit contracts for the organization identified by the given ID.
+        """Lists all credit contracts for the account identified by the given ID.
+        This must be the parent (billing anchor) account ID of the organization,
+        as credit contracts are managed at the organization level and shared
+        across all accounts within it.
         Required permissions:
         - read:payment_information
         """

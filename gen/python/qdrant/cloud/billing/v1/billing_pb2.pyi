@@ -110,10 +110,10 @@ class DiscountFixed(_message.Message):
     def __init__(self, value: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class ListCreditContractsRequest(_message.Message):
-    __slots__ = ("organization_id",)
-    ORGANIZATION_ID_FIELD_NUMBER: _ClassVar[int]
-    organization_id: str
-    def __init__(self, organization_id: _Optional[str] = ...) -> None: ...
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListCreditContractsResponse(_message.Message):
     __slots__ = ("items",)
@@ -122,9 +122,9 @@ class ListCreditContractsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[CreditContract, _Mapping]]] = ...) -> None: ...
 
 class CreditContract(_message.Message):
-    __slots__ = ("id", "organization_id", "total_amount", "currency", "billing_frequency", "active_from", "active_to", "notes")
+    __slots__ = ("id", "account_id", "total_amount", "currency", "billing_frequency", "active_from", "active_to", "notes")
     ID_FIELD_NUMBER: _ClassVar[int]
-    ORGANIZATION_ID_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     BILLING_FREQUENCY_FIELD_NUMBER: _ClassVar[int]
@@ -132,11 +132,11 @@ class CreditContract(_message.Message):
     ACTIVE_TO_FIELD_NUMBER: _ClassVar[int]
     NOTES_FIELD_NUMBER: _ClassVar[int]
     id: str
-    organization_id: str
+    account_id: str
     total_amount: float
     currency: str
     billing_frequency: BillingFrequency
     active_from: _timestamp_pb2.Timestamp
     active_to: _timestamp_pb2.Timestamp
     notes: str
-    def __init__(self, id: _Optional[str] = ..., organization_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ...) -> None: ...
