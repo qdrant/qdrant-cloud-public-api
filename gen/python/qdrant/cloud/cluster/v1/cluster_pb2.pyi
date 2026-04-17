@@ -106,6 +106,18 @@ class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: _ClassVar[ClusterScalabilityStatus]
     CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: _ClassVar[ClusterScalabilityStatus]
     CLUSTER_SCALABILITY_STATUS_SCALABLE: _ClassVar[ClusterScalabilityStatus]
+
+class ClusterVolumeExpansionSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: _ClassVar[ClusterVolumeExpansionSupportStatus]
+    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED: _ClassVar[ClusterVolumeExpansionSupportStatus]
+    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: _ClassVar[ClusterVolumeExpansionSupportStatus]
+
+class ClusterBackupSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED: _ClassVar[ClusterBackupSupportStatus]
+    CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED: _ClassVar[ClusterBackupSupportStatus]
+    CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED: _ClassVar[ClusterBackupSupportStatus]
 CLUSTER_SERVICE_TYPE_UNSPECIFIED: ClusterServiceType
 CLUSTER_SERVICE_TYPE_CLUSTER_IP: ClusterServiceType
 CLUSTER_SERVICE_TYPE_NODE_PORT: ClusterServiceType
@@ -166,6 +178,12 @@ CLUSTER_NODE_STATE_RECOVERING: ClusterNodeState
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
+CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: ClusterVolumeExpansionSupportStatus
+CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED: ClusterVolumeExpansionSupportStatus
+CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: ClusterVolumeExpansionSupportStatus
+CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED: ClusterBackupSupportStatus
+CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED: ClusterBackupSupportStatus
+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED: ClusterBackupSupportStatus
 
 class ListClustersRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "page_size", "page_token")
@@ -520,7 +538,7 @@ class ClusterStorageConfiguration(_message.Message):
     def __init__(self, storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ..., database_storage_class: _Optional[str] = ..., snapshot_storage_class: _Optional[str] = ..., volume_snapshot_class: _Optional[str] = ..., volume_attributes_class: _Optional[str] = ...) -> None: ...
 
 class ClusterState(_message.Message):
-    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info", "nodes", "jwt_rbac")
+    __slots__ = ("version", "nodes_up", "restarted_at", "phase", "reason", "endpoint", "resources", "scalability_info", "nodes", "jwt_rbac", "capabilities")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     NODES_UP_FIELD_NUMBER: _ClassVar[int]
     RESTARTED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -531,6 +549,7 @@ class ClusterState(_message.Message):
     SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
     NODES_FIELD_NUMBER: _ClassVar[int]
     JWT_RBAC_FIELD_NUMBER: _ClassVar[int]
+    CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
     version: str
     nodes_up: int
     restarted_at: _timestamp_pb2.Timestamp
@@ -541,7 +560,8 @@ class ClusterState(_message.Message):
     scalability_info: ClusterScalabilityInfo
     nodes: _containers.RepeatedCompositeFieldContainer[ClusterNodeInfo]
     jwt_rbac: bool
-    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ..., jwt_rbac: _Optional[bool] = ...) -> None: ...
+    capabilities: ClusterCapabilities
+    def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ..., jwt_rbac: _Optional[bool] = ..., capabilities: _Optional[_Union[ClusterCapabilities, _Mapping]] = ...) -> None: ...
 
 class ClusterNodeInfo(_message.Message):
     __slots__ = ("name", "started_at", "version", "endpoint", "state", "availability_zone")
@@ -604,6 +624,16 @@ class ClusterScalabilityInfo(_message.Message):
     status: ClusterScalabilityStatus
     reason: str
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
+
+class ClusterCapabilities(_message.Message):
+    __slots__ = ("volume_expansion", "backup", "scalability_info")
+    VOLUME_EXPANSION_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_FIELD_NUMBER: _ClassVar[int]
+    SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
+    volume_expansion: ClusterVolumeExpansionSupportStatus
+    backup: ClusterBackupSupportStatus
+    scalability_info: ClusterScalabilityInfo
+    def __init__(self, volume_expansion: _Optional[_Union[ClusterVolumeExpansionSupportStatus, str]] = ..., backup: _Optional[_Union[ClusterBackupSupportStatus, str]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
     __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")
