@@ -39,7 +39,7 @@
 //
 // These rules are enforced at runtime by language-specific libraries.
 // See the [developer quickstart](https://protovalidate.com/quickstart/) to get started, or go directly to the runtime library for your language:
-// [Go](https://github.com/bufbuild/protovalidate-go)
+// [Go](https://github.com/bufbuild/protovalidate-go),
 // [JavaScript/TypeScript](https://github.com/bufbuild/protovalidate-es),
 // [Java](https://github.com/bufbuild/protovalidate-java),
 // [Python](https://github.com/bufbuild/protovalidate-python),
@@ -153,7 +153,7 @@ export declare type MessageRules = Message<"buf.validate.MessageRules"> & {
    *   // The field `foo` must be greater than 42.
    *   option (buf.validate.message).cel = {
    *     id: "my_message.value",
-   *     message: "value must be greater than 42",
+   *     message: "must be greater than 42",
    *     expression: "this.foo > 42",
    *   };
    *   optional int32 foo = 1;
@@ -318,7 +318,7 @@ export declare type FieldRules = Message<"buf.validate.FieldRules"> & {
    *   // The field `value` must be greater than 42.
    *   optional int32 value = 1 [(buf.validate.field).cel = {
    *     id: "my_message.value",
-   *     message: "value must be greater than 42",
+   *     message: "must be greater than 42",
    *     expression: "this > 42",
    *   }];
    * }
@@ -577,7 +577,7 @@ export declare type PredefinedRules = Message<"buf.validate.PredefinedRules"> & 
    *   // The field `value` must be greater than 42.
    *   optional int32 value = 1 [(buf.validate.predefined).cel = {
    *     id: "my_message.value",
-   *     message: "value must be greater than 42",
+   *     message: "must be greater than 42",
    *     expression: "this > 42",
    *   }];
    * }
@@ -629,7 +629,7 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
      *
      * ```proto
      * message MyFloat {
-     *   // value must be less than 10.0
+     *   // must be less than 10.0
      *   float value = 1 [(buf.validate.field).float.lt = 10.0];
      * }
      * ```
@@ -646,7 +646,7 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
      *
      * ```proto
      * message MyFloat {
-     *   // value must be less than or equal to 10.0
+     *   // must be less than or equal to 10.0
      *   float value = 1 [(buf.validate.field).float.lte = 10.0];
      * }
      * ```
@@ -670,13 +670,13 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
      *
      * ```proto
      * message MyFloat {
-     *   // value must be greater than 5.0 [float.gt]
+     *   // must be greater than 5.0 [float.gt]
      *   float value = 1 [(buf.validate.field).float.gt = 5.0];
      *
-     *   // value must be greater than 5 and less than 10.0 [float.gt_lt]
+     *   // must be greater than 5 and less than 10.0 [float.gt_lt]
      *   float other_value = 2 [(buf.validate.field).float = { gt: 5.0, lt: 10.0 }];
      *
-     *   // value must be greater than 10 or less than 5.0 [float.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5.0 [float.gt_lt_exclusive]
      *   float another_value = 3 [(buf.validate.field).float = { gt: 10.0, lt: 5.0 }];
      * }
      * ```
@@ -695,13 +695,13 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
      *
      * ```proto
      * message MyFloat {
-     *   // value must be greater than or equal to 5.0 [float.gte]
+     *   // must be greater than or equal to 5.0 [float.gte]
      *   float value = 1 [(buf.validate.field).float.gte = 5.0];
      *
-     *   // value must be greater than or equal to 5.0 and less than 10.0 [float.gte_lt]
+     *   // must be greater than or equal to 5.0 and less than 10.0 [float.gte_lt]
      *   float other_value = 2 [(buf.validate.field).float = { gte: 5.0, lt: 10.0 }];
      *
-     *   // value must be greater than or equal to 10.0 or less than 5.0 [float.gte_lt_exclusive]
+     *   // must be greater than or equal to 10.0 or less than 5.0 [float.gte_lt_exclusive]
      *   float another_value = 3 [(buf.validate.field).float = { gte: 10.0, lt: 5.0 }];
      * }
      * ```
@@ -719,7 +719,7 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
    *
    * ```proto
    * message MyFloat {
-   *   // value must be in list [1.0, 2.0, 3.0]
+   *   // must be in list [1.0, 2.0, 3.0]
    *   float value = 1 [(buf.validate.field).float = { in: [1.0, 2.0, 3.0] }];
    * }
    * ```
@@ -729,7 +729,7 @@ export declare type FloatRules = Message<"buf.validate.FloatRules"> & {
   in: number[];
 
   /**
-   * `in` requires the field value to not be equal to any of the specified
+   * `not_in` requires the field value to not be equal to any of the specified
    * values. If the field value is one of the specified values, an error
    * message is generated.
    *
@@ -812,7 +812,7 @@ export declare type DoubleRules = Message<"buf.validate.DoubleRules"> & {
      *
      * ```proto
      * message MyDouble {
-     *   // value must be less than 10.0
+     *   // must be less than 10.0
      *   double value = 1 [(buf.validate.field).double.lt = 10.0];
      * }
      * ```
@@ -829,7 +829,7 @@ export declare type DoubleRules = Message<"buf.validate.DoubleRules"> & {
      *
      * ```proto
      * message MyDouble {
-     *   // value must be less than or equal to 10.0
+     *   // must be less than or equal to 10.0
      *   double value = 1 [(buf.validate.field).double.lte = 10.0];
      * }
      * ```
@@ -853,13 +853,13 @@ export declare type DoubleRules = Message<"buf.validate.DoubleRules"> & {
      *
      * ```proto
      * message MyDouble {
-     *   // value must be greater than 5.0 [double.gt]
+     *   // must be greater than 5.0 [double.gt]
      *   double value = 1 [(buf.validate.field).double.gt = 5.0];
      *
-     *   // value must be greater than 5 and less than 10.0 [double.gt_lt]
+     *   // must be greater than 5 and less than 10.0 [double.gt_lt]
      *   double other_value = 2 [(buf.validate.field).double = { gt: 5.0, lt: 10.0 }];
      *
-     *   // value must be greater than 10 or less than 5.0 [double.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5.0 [double.gt_lt_exclusive]
      *   double another_value = 3 [(buf.validate.field).double = { gt: 10.0, lt: 5.0 }];
      * }
      * ```
@@ -878,13 +878,13 @@ export declare type DoubleRules = Message<"buf.validate.DoubleRules"> & {
      *
      * ```proto
      * message MyDouble {
-     *   // value must be greater than or equal to 5.0 [double.gte]
+     *   // must be greater than or equal to 5.0 [double.gte]
      *   double value = 1 [(buf.validate.field).double.gte = 5.0];
      *
-     *   // value must be greater than or equal to 5.0 and less than 10.0 [double.gte_lt]
+     *   // must be greater than or equal to 5.0 and less than 10.0 [double.gte_lt]
      *   double other_value = 2 [(buf.validate.field).double = { gte: 5.0, lt: 10.0 }];
      *
-     *   // value must be greater than or equal to 10.0 or less than 5.0 [double.gte_lt_exclusive]
+     *   // must be greater than or equal to 10.0 or less than 5.0 [double.gte_lt_exclusive]
      *   double another_value = 3 [(buf.validate.field).double = { gte: 10.0, lt: 5.0 }];
      * }
      * ```
@@ -902,7 +902,7 @@ export declare type DoubleRules = Message<"buf.validate.DoubleRules"> & {
    *
    * ```proto
    * message MyDouble {
-   *   // value must be in list [1.0, 2.0, 3.0]
+   *   // must be in list [1.0, 2.0, 3.0]
    *   double value = 1 [(buf.validate.field).double = { in: [1.0, 2.0, 3.0] }];
    * }
    * ```
@@ -995,7 +995,7 @@ export declare type Int32Rules = Message<"buf.validate.Int32Rules"> & {
      *
      * ```proto
      * message MyInt32 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   int32 value = 1 [(buf.validate.field).int32.lt = 10];
      * }
      * ```
@@ -1012,7 +1012,7 @@ export declare type Int32Rules = Message<"buf.validate.Int32Rules"> & {
      *
      * ```proto
      * message MyInt32 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   int32 value = 1 [(buf.validate.field).int32.lte = 10];
      * }
      * ```
@@ -1036,13 +1036,13 @@ export declare type Int32Rules = Message<"buf.validate.Int32Rules"> & {
      *
      * ```proto
      * message MyInt32 {
-     *   // value must be greater than 5 [int32.gt]
+     *   // must be greater than 5 [int32.gt]
      *   int32 value = 1 [(buf.validate.field).int32.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [int32.gt_lt]
+     *   // must be greater than 5 and less than 10 [int32.gt_lt]
      *   int32 other_value = 2 [(buf.validate.field).int32 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [int32.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [int32.gt_lt_exclusive]
      *   int32 another_value = 3 [(buf.validate.field).int32 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1061,13 +1061,13 @@ export declare type Int32Rules = Message<"buf.validate.Int32Rules"> & {
      *
      * ```proto
      * message MyInt32 {
-     *   // value must be greater than or equal to 5 [int32.gte]
+     *   // must be greater than or equal to 5 [int32.gte]
      *   int32 value = 1 [(buf.validate.field).int32.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [int32.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [int32.gte_lt]
      *   int32 other_value = 2 [(buf.validate.field).int32 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [int32.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [int32.gte_lt_exclusive]
      *   int32 another_value = 3 [(buf.validate.field).int32 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1085,7 +1085,7 @@ export declare type Int32Rules = Message<"buf.validate.Int32Rules"> & {
    *
    * ```proto
    * message MyInt32 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   int32 value = 1 [(buf.validate.field).int32 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -1170,7 +1170,7 @@ export declare type Int64Rules = Message<"buf.validate.Int64Rules"> & {
      *
      * ```proto
      * message MyInt64 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   int64 value = 1 [(buf.validate.field).int64.lt = 10];
      * }
      * ```
@@ -1187,7 +1187,7 @@ export declare type Int64Rules = Message<"buf.validate.Int64Rules"> & {
      *
      * ```proto
      * message MyInt64 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   int64 value = 1 [(buf.validate.field).int64.lte = 10];
      * }
      * ```
@@ -1211,13 +1211,13 @@ export declare type Int64Rules = Message<"buf.validate.Int64Rules"> & {
      *
      * ```proto
      * message MyInt64 {
-     *   // value must be greater than 5 [int64.gt]
+     *   // must be greater than 5 [int64.gt]
      *   int64 value = 1 [(buf.validate.field).int64.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [int64.gt_lt]
+     *   // must be greater than 5 and less than 10 [int64.gt_lt]
      *   int64 other_value = 2 [(buf.validate.field).int64 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [int64.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [int64.gt_lt_exclusive]
      *   int64 another_value = 3 [(buf.validate.field).int64 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1236,13 +1236,13 @@ export declare type Int64Rules = Message<"buf.validate.Int64Rules"> & {
      *
      * ```proto
      * message MyInt64 {
-     *   // value must be greater than or equal to 5 [int64.gte]
+     *   // must be greater than or equal to 5 [int64.gte]
      *   int64 value = 1 [(buf.validate.field).int64.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [int64.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [int64.gte_lt]
      *   int64 other_value = 2 [(buf.validate.field).int64 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [int64.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [int64.gte_lt_exclusive]
      *   int64 another_value = 3 [(buf.validate.field).int64 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1260,7 +1260,7 @@ export declare type Int64Rules = Message<"buf.validate.Int64Rules"> & {
    *
    * ```proto
    * message MyInt64 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   int64 value = 1 [(buf.validate.field).int64 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -1345,7 +1345,7 @@ export declare type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
      *
      * ```proto
      * message MyUInt32 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   uint32 value = 1 [(buf.validate.field).uint32.lt = 10];
      * }
      * ```
@@ -1362,7 +1362,7 @@ export declare type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
      *
      * ```proto
      * message MyUInt32 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   uint32 value = 1 [(buf.validate.field).uint32.lte = 10];
      * }
      * ```
@@ -1386,13 +1386,13 @@ export declare type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
      *
      * ```proto
      * message MyUInt32 {
-     *   // value must be greater than 5 [uint32.gt]
+     *   // must be greater than 5 [uint32.gt]
      *   uint32 value = 1 [(buf.validate.field).uint32.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [uint32.gt_lt]
+     *   // must be greater than 5 and less than 10 [uint32.gt_lt]
      *   uint32 other_value = 2 [(buf.validate.field).uint32 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [uint32.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [uint32.gt_lt_exclusive]
      *   uint32 another_value = 3 [(buf.validate.field).uint32 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1411,13 +1411,13 @@ export declare type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
      *
      * ```proto
      * message MyUInt32 {
-     *   // value must be greater than or equal to 5 [uint32.gte]
+     *   // must be greater than or equal to 5 [uint32.gte]
      *   uint32 value = 1 [(buf.validate.field).uint32.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [uint32.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [uint32.gte_lt]
      *   uint32 other_value = 2 [(buf.validate.field).uint32 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [uint32.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [uint32.gte_lt_exclusive]
      *   uint32 another_value = 3 [(buf.validate.field).uint32 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1435,7 +1435,7 @@ export declare type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
    *
    * ```proto
    * message MyUInt32 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   uint32 value = 1 [(buf.validate.field).uint32 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -1520,7 +1520,7 @@ export declare type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
      *
      * ```proto
      * message MyUInt64 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   uint64 value = 1 [(buf.validate.field).uint64.lt = 10];
      * }
      * ```
@@ -1537,7 +1537,7 @@ export declare type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
      *
      * ```proto
      * message MyUInt64 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   uint64 value = 1 [(buf.validate.field).uint64.lte = 10];
      * }
      * ```
@@ -1561,13 +1561,13 @@ export declare type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
      *
      * ```proto
      * message MyUInt64 {
-     *   // value must be greater than 5 [uint64.gt]
+     *   // must be greater than 5 [uint64.gt]
      *   uint64 value = 1 [(buf.validate.field).uint64.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [uint64.gt_lt]
+     *   // must be greater than 5 and less than 10 [uint64.gt_lt]
      *   uint64 other_value = 2 [(buf.validate.field).uint64 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [uint64.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [uint64.gt_lt_exclusive]
      *   uint64 another_value = 3 [(buf.validate.field).uint64 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1586,13 +1586,13 @@ export declare type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
      *
      * ```proto
      * message MyUInt64 {
-     *   // value must be greater than or equal to 5 [uint64.gte]
+     *   // must be greater than or equal to 5 [uint64.gte]
      *   uint64 value = 1 [(buf.validate.field).uint64.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [uint64.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [uint64.gte_lt]
      *   uint64 other_value = 2 [(buf.validate.field).uint64 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [uint64.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [uint64.gte_lt_exclusive]
      *   uint64 another_value = 3 [(buf.validate.field).uint64 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1610,7 +1610,7 @@ export declare type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
    *
    * ```proto
    * message MyUInt64 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   uint64 value = 1 [(buf.validate.field).uint64 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -1694,7 +1694,7 @@ export declare type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
      *
      * ```proto
      * message MySInt32 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   sint32 value = 1 [(buf.validate.field).sint32.lt = 10];
      * }
      * ```
@@ -1711,7 +1711,7 @@ export declare type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
      *
      * ```proto
      * message MySInt32 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   sint32 value = 1 [(buf.validate.field).sint32.lte = 10];
      * }
      * ```
@@ -1735,13 +1735,13 @@ export declare type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
      *
      * ```proto
      * message MySInt32 {
-     *   // value must be greater than 5 [sint32.gt]
+     *   // must be greater than 5 [sint32.gt]
      *   sint32 value = 1 [(buf.validate.field).sint32.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [sint32.gt_lt]
+     *   // must be greater than 5 and less than 10 [sint32.gt_lt]
      *   sint32 other_value = 2 [(buf.validate.field).sint32 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [sint32.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [sint32.gt_lt_exclusive]
      *   sint32 another_value = 3 [(buf.validate.field).sint32 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1760,13 +1760,13 @@ export declare type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
      *
      * ```proto
      * message MySInt32 {
-     *  // value must be greater than or equal to 5 [sint32.gte]
+     *  // must be greater than or equal to 5 [sint32.gte]
      *  sint32 value = 1 [(buf.validate.field).sint32.gte = 5];
      *
-     *  // value must be greater than or equal to 5 and less than 10 [sint32.gte_lt]
+     *  // must be greater than or equal to 5 and less than 10 [sint32.gte_lt]
      *  sint32 other_value = 2 [(buf.validate.field).sint32 = { gte: 5, lt: 10 }];
      *
-     *  // value must be greater than or equal to 10 or less than 5 [sint32.gte_lt_exclusive]
+     *  // must be greater than or equal to 10 or less than 5 [sint32.gte_lt_exclusive]
      *  sint32 another_value = 3 [(buf.validate.field).sint32 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1784,7 +1784,7 @@ export declare type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
    *
    * ```proto
    * message MySInt32 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   sint32 value = 1 [(buf.validate.field).sint32 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -1868,7 +1868,7 @@ export declare type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
      *
      * ```proto
      * message MySInt64 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   sint64 value = 1 [(buf.validate.field).sint64.lt = 10];
      * }
      * ```
@@ -1885,7 +1885,7 @@ export declare type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
      *
      * ```proto
      * message MySInt64 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   sint64 value = 1 [(buf.validate.field).sint64.lte = 10];
      * }
      * ```
@@ -1909,13 +1909,13 @@ export declare type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
      *
      * ```proto
      * message MySInt64 {
-     *   // value must be greater than 5 [sint64.gt]
+     *   // must be greater than 5 [sint64.gt]
      *   sint64 value = 1 [(buf.validate.field).sint64.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [sint64.gt_lt]
+     *   // must be greater than 5 and less than 10 [sint64.gt_lt]
      *   sint64 other_value = 2 [(buf.validate.field).sint64 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [sint64.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [sint64.gt_lt_exclusive]
      *   sint64 another_value = 3 [(buf.validate.field).sint64 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -1934,13 +1934,13 @@ export declare type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
      *
      * ```proto
      * message MySInt64 {
-     *   // value must be greater than or equal to 5 [sint64.gte]
+     *   // must be greater than or equal to 5 [sint64.gte]
      *   sint64 value = 1 [(buf.validate.field).sint64.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [sint64.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [sint64.gte_lt]
      *   sint64 other_value = 2 [(buf.validate.field).sint64 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [sint64.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [sint64.gte_lt_exclusive]
      *   sint64 another_value = 3 [(buf.validate.field).sint64 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -1958,7 +1958,7 @@ export declare type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
    *
    * ```proto
    * message MySInt64 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   sint64 value = 1 [(buf.validate.field).sint64 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -2042,7 +2042,7 @@ export declare type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
      *
      * ```proto
      * message MyFixed32 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   fixed32 value = 1 [(buf.validate.field).fixed32.lt = 10];
      * }
      * ```
@@ -2059,7 +2059,7 @@ export declare type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
      *
      * ```proto
      * message MyFixed32 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   fixed32 value = 1 [(buf.validate.field).fixed32.lte = 10];
      * }
      * ```
@@ -2083,13 +2083,13 @@ export declare type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
      *
      * ```proto
      * message MyFixed32 {
-     *   // value must be greater than 5 [fixed32.gt]
+     *   // must be greater than 5 [fixed32.gt]
      *   fixed32 value = 1 [(buf.validate.field).fixed32.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [fixed32.gt_lt]
+     *   // must be greater than 5 and less than 10 [fixed32.gt_lt]
      *   fixed32 other_value = 2 [(buf.validate.field).fixed32 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [fixed32.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [fixed32.gt_lt_exclusive]
      *   fixed32 another_value = 3 [(buf.validate.field).fixed32 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -2108,13 +2108,13 @@ export declare type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
      *
      * ```proto
      * message MyFixed32 {
-     *   // value must be greater than or equal to 5 [fixed32.gte]
+     *   // must be greater than or equal to 5 [fixed32.gte]
      *   fixed32 value = 1 [(buf.validate.field).fixed32.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [fixed32.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [fixed32.gte_lt]
      *   fixed32 other_value = 2 [(buf.validate.field).fixed32 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [fixed32.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [fixed32.gte_lt_exclusive]
      *   fixed32 another_value = 3 [(buf.validate.field).fixed32 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -2132,7 +2132,7 @@ export declare type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
    *
    * ```proto
    * message MyFixed32 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   fixed32 value = 1 [(buf.validate.field).fixed32 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -2216,7 +2216,7 @@ export declare type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
      *
      * ```proto
      * message MyFixed64 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   fixed64 value = 1 [(buf.validate.field).fixed64.lt = 10];
      * }
      * ```
@@ -2233,7 +2233,7 @@ export declare type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
      *
      * ```proto
      * message MyFixed64 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   fixed64 value = 1 [(buf.validate.field).fixed64.lte = 10];
      * }
      * ```
@@ -2257,13 +2257,13 @@ export declare type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
      *
      * ```proto
      * message MyFixed64 {
-     *   // value must be greater than 5 [fixed64.gt]
+     *   // must be greater than 5 [fixed64.gt]
      *   fixed64 value = 1 [(buf.validate.field).fixed64.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [fixed64.gt_lt]
+     *   // must be greater than 5 and less than 10 [fixed64.gt_lt]
      *   fixed64 other_value = 2 [(buf.validate.field).fixed64 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [fixed64.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [fixed64.gt_lt_exclusive]
      *   fixed64 another_value = 3 [(buf.validate.field).fixed64 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -2282,13 +2282,13 @@ export declare type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
      *
      * ```proto
      * message MyFixed64 {
-     *   // value must be greater than or equal to 5 [fixed64.gte]
+     *   // must be greater than or equal to 5 [fixed64.gte]
      *   fixed64 value = 1 [(buf.validate.field).fixed64.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [fixed64.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [fixed64.gte_lt]
      *   fixed64 other_value = 2 [(buf.validate.field).fixed64 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [fixed64.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [fixed64.gte_lt_exclusive]
      *   fixed64 another_value = 3 [(buf.validate.field).fixed64 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -2306,7 +2306,7 @@ export declare type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
    *
    * ```proto
    * message MyFixed64 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   fixed64 value = 1 [(buf.validate.field).fixed64 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -2390,7 +2390,7 @@ export declare type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
      *
      * ```proto
      * message MySFixed32 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   sfixed32 value = 1 [(buf.validate.field).sfixed32.lt = 10];
      * }
      * ```
@@ -2407,7 +2407,7 @@ export declare type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
      *
      * ```proto
      * message MySFixed32 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   sfixed32 value = 1 [(buf.validate.field).sfixed32.lte = 10];
      * }
      * ```
@@ -2431,13 +2431,13 @@ export declare type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
      *
      * ```proto
      * message MySFixed32 {
-     *   // value must be greater than 5 [sfixed32.gt]
+     *   // must be greater than 5 [sfixed32.gt]
      *   sfixed32 value = 1 [(buf.validate.field).sfixed32.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [sfixed32.gt_lt]
+     *   // must be greater than 5 and less than 10 [sfixed32.gt_lt]
      *   sfixed32 other_value = 2 [(buf.validate.field).sfixed32 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [sfixed32.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [sfixed32.gt_lt_exclusive]
      *   sfixed32 another_value = 3 [(buf.validate.field).sfixed32 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -2456,13 +2456,13 @@ export declare type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
      *
      * ```proto
      * message MySFixed32 {
-     *   // value must be greater than or equal to 5 [sfixed32.gte]
+     *   // must be greater than or equal to 5 [sfixed32.gte]
      *   sfixed32 value = 1 [(buf.validate.field).sfixed32.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [sfixed32.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [sfixed32.gte_lt]
      *   sfixed32 other_value = 2 [(buf.validate.field).sfixed32 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [sfixed32.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [sfixed32.gte_lt_exclusive]
      *   sfixed32 another_value = 3 [(buf.validate.field).sfixed32 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -2480,7 +2480,7 @@ export declare type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
    *
    * ```proto
    * message MySFixed32 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   sfixed32 value = 1 [(buf.validate.field).sfixed32 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -2564,7 +2564,7 @@ export declare type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
      *
      * ```proto
      * message MySFixed64 {
-     *   // value must be less than 10
+     *   // must be less than 10
      *   sfixed64 value = 1 [(buf.validate.field).sfixed64.lt = 10];
      * }
      * ```
@@ -2581,7 +2581,7 @@ export declare type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
      *
      * ```proto
      * message MySFixed64 {
-     *   // value must be less than or equal to 10
+     *   // must be less than or equal to 10
      *   sfixed64 value = 1 [(buf.validate.field).sfixed64.lte = 10];
      * }
      * ```
@@ -2605,13 +2605,13 @@ export declare type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
      *
      * ```proto
      * message MySFixed64 {
-     *   // value must be greater than 5 [sfixed64.gt]
+     *   // must be greater than 5 [sfixed64.gt]
      *   sfixed64 value = 1 [(buf.validate.field).sfixed64.gt = 5];
      *
-     *   // value must be greater than 5 and less than 10 [sfixed64.gt_lt]
+     *   // must be greater than 5 and less than 10 [sfixed64.gt_lt]
      *   sfixed64 other_value = 2 [(buf.validate.field).sfixed64 = { gt: 5, lt: 10 }];
      *
-     *   // value must be greater than 10 or less than 5 [sfixed64.gt_lt_exclusive]
+     *   // must be greater than 10 or less than 5 [sfixed64.gt_lt_exclusive]
      *   sfixed64 another_value = 3 [(buf.validate.field).sfixed64 = { gt: 10, lt: 5 }];
      * }
      * ```
@@ -2630,13 +2630,13 @@ export declare type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
      *
      * ```proto
      * message MySFixed64 {
-     *   // value must be greater than or equal to 5 [sfixed64.gte]
+     *   // must be greater than or equal to 5 [sfixed64.gte]
      *   sfixed64 value = 1 [(buf.validate.field).sfixed64.gte = 5];
      *
-     *   // value must be greater than or equal to 5 and less than 10 [sfixed64.gte_lt]
+     *   // must be greater than or equal to 5 and less than 10 [sfixed64.gte_lt]
      *   sfixed64 other_value = 2 [(buf.validate.field).sfixed64 = { gte: 5, lt: 10 }];
      *
-     *   // value must be greater than or equal to 10 or less than 5 [sfixed64.gte_lt_exclusive]
+     *   // must be greater than or equal to 10 or less than 5 [sfixed64.gte_lt_exclusive]
      *   sfixed64 another_value = 3 [(buf.validate.field).sfixed64 = { gte: 10, lt: 5 }];
      * }
      * ```
@@ -2654,7 +2654,7 @@ export declare type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
    *
    * ```proto
    * message MySFixed64 {
-   *   // value must be in list [1, 2, 3]
+   *   // must be in list [1, 2, 3]
    *   sfixed64 value = 1 [(buf.validate.field).sfixed64 = { in: [1, 2, 3] }];
    * }
    * ```
@@ -2966,7 +2966,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
    *
    * ```proto
    * message MyString {
-   *   // value must be in list ["apple", "banana"]
+   *   // must be in list ["apple", "banana"]
    *   string value = 1 [(buf.validate.field).string.in = "apple", (buf.validate.field).string.in = "banana"];
    * }
    * ```
@@ -3010,7 +3010,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid email address
+     *   // must be a valid email address
      *   string value = 1 [(buf.validate.field).string.email = true];
      * }
      * ```
@@ -3036,7 +3036,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid hostname
+     *   // must be a valid hostname
      *   string value = 1 [(buf.validate.field).string.hostname = true];
      * }
      * ```
@@ -3061,7 +3061,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IP address
+     *   // must be a valid IP address
      *   string value = 1 [(buf.validate.field).string.ip = true];
      * }
      * ```
@@ -3078,7 +3078,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv4 address
+     *   // must be a valid IPv4 address
      *   string value = 1 [(buf.validate.field).string.ipv4 = true];
      * }
      * ```
@@ -3095,7 +3095,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv6 address
+     *   // must be a valid IPv6 address
      *   string value = 1 [(buf.validate.field).string.ipv6 = true];
      * }
      * ```
@@ -3116,7 +3116,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid URI
+     *   // must be a valid URI
      *   string value = 1 [(buf.validate.field).string.uri = true];
      * }
      * ```
@@ -3140,7 +3140,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid URI Reference
+     *   // must be a valid URI Reference
      *   string value = 1 [(buf.validate.field).string.uri_ref = true];
      * }
      * ```
@@ -3158,7 +3158,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid hostname, or ip address
+     *   // must be a valid hostname, or ip address
      *   string value = 1 [(buf.validate.field).string.address = true];
      * }
      * ```
@@ -3175,7 +3175,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid UUID
+     *   // must be a valid UUID
      *   string value = 1 [(buf.validate.field).string.uuid = true];
      * }
      * ```
@@ -3193,7 +3193,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid trimmed UUID
+     *   // must be a valid trimmed UUID
      *   string value = 1 [(buf.validate.field).string.tuuid = true];
      * }
      * ```
@@ -3211,7 +3211,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IP with prefix length
+     *   // must be a valid IP with prefix length
      *    string value = 1 [(buf.validate.field).string.ip_with_prefixlen = true];
      * }
      * ```
@@ -3229,7 +3229,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv4 address with prefix length
+     *   // must be a valid IPv4 address with prefix length
      *    string value = 1 [(buf.validate.field).string.ipv4_with_prefixlen = true];
      * }
      * ```
@@ -3247,7 +3247,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv6 address prefix length
+     *   // must be a valid IPv6 address prefix length
      *    string value = 1 [(buf.validate.field).string.ipv6_with_prefixlen = true];
      * }
      * ```
@@ -3270,7 +3270,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IP prefix
+     *   // must be a valid IP prefix
      *    string value = 1 [(buf.validate.field).string.ip_prefix = true];
      * }
      * ```
@@ -3293,7 +3293,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv4 prefix
+     *   // must be a valid IPv4 prefix
      *    string value = 1 [(buf.validate.field).string.ipv4_prefix = true];
      * }
      * ```
@@ -3316,7 +3316,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid IPv6 prefix
+     *   // must be a valid IPv6 prefix
      *    string value = 1 [(buf.validate.field).string.ipv6_prefix = true];
      * }
      * ```
@@ -3327,7 +3327,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
     case: "ipv6Prefix";
   } | {
     /**
-     * `host_and_port` specifies that the field value must be valid host/port
+     * `host_and_port` specifies that the field value must be a valid host/port
      * pair—for example, "example.com:8080".
      *
      * The host can be one of:
@@ -3350,7 +3350,7 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid ULID
+     *   // must be a valid ULID
      *   string value = 1 [(buf.validate.field).string.ulid = true];
      * }
      * ```
@@ -3361,13 +3361,75 @@ export declare type StringRules = Message<"buf.validate.StringRules"> & {
     case: "ulid";
   } | {
     /**
+     * `protobuf_fqn` specifies that the field value must be a valid fully-qualified
+     * Protobuf name as defined by the [Protobuf Language Specification](https://protobuf.com/docs/language-spec).
+     *
+     * A fully-qualified Protobuf name is a dot-separated list of Protobuf identifiers,
+     * where each identifier starts with a letter or underscore and is followed by zero or
+     * more letters, underscores, or digits.
+     *
+     * Examples: "buf.validate", "google.protobuf.Timestamp", "my_package.MyMessage".
+     *
+     * Note: historically, fully-qualified Protobuf names were represented with a leading
+     * dot (for example, ".buf.validate.StringRules"). Modern Protobuf does not use the
+     * leading dot, and most fully-qualified names are represented without it. Use
+     * `protobuf_dot_fqn` if a leading dot is required.
+     *
+     * If the field value isn't a valid fully-qualified Protobuf name, an error message
+     * will be generated.
+     *
+     * ```proto
+     * message MyString {
+     *   // value must be a valid fully-qualified Protobuf name
+     *   string value = 1 [(buf.validate.field).string.protobuf_fqn = true];
+     * }
+     * ```
+     *
+     * @generated from field: bool protobuf_fqn = 37;
+     */
+    value: boolean;
+    case: "protobufFqn";
+  } | {
+    /**
+     * `protobuf_dot_fqn` specifies that the field value must be a valid fully-qualified
+     * Protobuf name with a leading dot, as defined by the
+     * [Protobuf Language Specification](https://protobuf.com/docs/language-spec).
+     *
+     * A fully-qualified Protobuf name with a leading dot is a dot followed by a
+     * dot-separated list of Protobuf identifiers, where each identifier starts with a
+     * letter or underscore and is followed by zero or more letters, underscores, or
+     * digits.
+     *
+     * Examples: ".buf.validate", ".google.protobuf.Timestamp", ".my_package.MyMessage".
+     *
+     * Note: this is the historical representation of fully-qualified Protobuf names,
+     * where a leading dot denotes an absolute reference. Modern Protobuf does not use
+     * the leading dot, and most fully-qualified names are represented without it. Most
+     * users will want to use `protobuf_fqn` instead.
+     *
+     * If the field value isn't a valid fully-qualified Protobuf name with a leading dot,
+     * an error message will be generated.
+     *
+     * ```proto
+     * message MyString {
+     *   // value must be a valid fully-qualified Protobuf name with a leading dot
+     *   string value = 1 [(buf.validate.field).string.protobuf_dot_fqn = true];
+     * }
+     * ```
+     *
+     * @generated from field: bool protobuf_dot_fqn = 38;
+     */
+    value: boolean;
+    case: "protobufDotFqn";
+  } | {
+    /**
      * `well_known_regex` specifies a common well-known pattern
      * defined as a regex. If the field value doesn't match the well-known
      * regex, an error message will be generated.
      *
      * ```proto
      * message MyString {
-     *   // value must be a valid HTTP header value
+     *   // must be a valid HTTP header value
      *   string value = 1 [(buf.validate.field).string.well_known_regex = KNOWN_REGEX_HTTP_HEADER_VALUE];
      * }
      * ```
@@ -3446,7 +3508,7 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
    *
    * ```proto
    * message MyBytes {
-   *   // value must be "\x01\x02\x03\x04"
+   *   // must be "\x01\x02\x03\x04"
    *   bytes value = 1 [(buf.validate.field).bytes.const = "\x01\x02\x03\x04"];
    * }
    * ```
@@ -3493,7 +3555,7 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
    *
    * ```proto
    * message MyBytes {
-   *   // value must be at most 6 bytes.
+   *   // must be at most 6 bytes.
    *   optional bytes value = 1 [(buf.validate.field).bytes.max_len = 6];
    * }
    * ```
@@ -3614,7 +3676,7 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
      *
      * ```proto
      * message MyBytes {
-     *   // value must be a valid IP address
+     *   // must be a valid IP address
      *   optional bytes value = 1 [(buf.validate.field).bytes.ip = true];
      * }
      * ```
@@ -3630,7 +3692,7 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
      *
      * ```proto
      * message MyBytes {
-     *   // value must be a valid IPv4 address
+     *   // must be a valid IPv4 address
      *   optional bytes value = 1 [(buf.validate.field).bytes.ipv4 = true];
      * }
      * ```
@@ -3645,7 +3707,7 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
      * If the field value doesn't meet this rule, an error message is generated.
      * ```proto
      * message MyBytes {
-     *   // value must be a valid IPv6 address
+     *   // must be a valid IPv6 address
      *   optional bytes value = 1 [(buf.validate.field).bytes.ipv6 = true];
      * }
      * ```
@@ -3656,15 +3718,14 @@ export declare type BytesRules = Message<"buf.validate.BytesRules"> & {
     case: "ipv6";
   } | {
     /**
-     * `uuid` ensures that the field `value` encodes the 128-bit UUID data as
-     * defined by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2).
-     * The field must contain exactly 16 bytes
-     * representing the UUID. If the field value isn't a valid UUID, an error
-     * message will be generated.
+     * `uuid` ensures that the field value encodes 128-bit UUID data as defined
+     * by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2).
+     * The field must contain exactly 16 bytes representing the UUID. If the
+     * field value isn't a valid UUID, an error message will be generated.
      *
      * ```proto
      * message MyBytes {
-     *   // value must be a valid UUID
+     *   // must be a valid UUID
      *   optional bytes value = 1 [(buf.validate.field).bytes.uuid = true];
      * }
      * ```
@@ -4027,7 +4088,7 @@ export declare type AnyRules = Message<"buf.validate.AnyRules"> & {
   in: string[];
 
   /**
-   * requires the field's type_url to be not equal to any of the specified values. If it matches any of the specified values, an error message is generated.
+   * `not_in` requires the field's type_url to be not equal to any of the specified values. If it matches any of the specified values, an error message is generated.
    *
    * ```proto
    * message MyAny {
@@ -4084,7 +4145,7 @@ export declare type DurationRules = Message<"buf.validate.DurationRules"> & {
      *
      * ```proto
      * message MyDuration {
-     *   // value must be less than 5s
+     *   // must be less than 5s
      *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lt = "5s"];
      * }
      * ```
@@ -4101,7 +4162,7 @@ export declare type DurationRules = Message<"buf.validate.DurationRules"> & {
      *
      * ```proto
      * message MyDuration {
-     *   // value must be less than or equal to 10s
+     *   // must be less than or equal to 10s
      *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lte = "10s"];
      * }
      * ```
@@ -4174,7 +4235,7 @@ export declare type DurationRules = Message<"buf.validate.DurationRules"> & {
    *
    * ```proto
    * message MyDuration {
-   *   // value must be in list [1s, 2s, 3s]
+   *   // must be in list [1s, 2s, 3s]
    *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.in = ["1s", "2s", "3s"]];
    * }
    * ```
@@ -4343,12 +4404,12 @@ export declare type TimestampRules = Message<"buf.validate.TimestampRules"> & {
    */
   lessThan: {
     /**
-     * requires the duration field value to be less than the specified value (field < value). If the field value doesn't meet the required conditions, an error message is generated.
+     * `lt` requires the timestamp field value to be less than the specified value (field < value). If the field value doesn't meet the required conditions, an error message is generated.
      *
      * ```proto
-     * message MyDuration {
-     *   // duration must be less than 'P3D' [duration.lt]
-     *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lt = { seconds: 259200 }];
+     * message MyTimestamp {
+     *   // timestamp must be less than '2023-01-01T00:00:00Z' [timestamp.lt]
+     *   google.protobuf.Timestamp value = 1 [(buf.validate.field).timestamp.lt = { seconds: 1672444800 }];
      * }
      * ```
      *
@@ -4358,7 +4419,7 @@ export declare type TimestampRules = Message<"buf.validate.TimestampRules"> & {
     case: "lt";
   } | {
     /**
-     * requires the timestamp field value to be less than or equal to the specified value (field <= value). If the field value doesn't meet the required conditions, an error message is generated.
+     * `lte` requires the timestamp field value to be less than or equal to the specified value (field <= value). If the field value doesn't meet the required conditions, an error message is generated.
      *
      * ```proto
      * message MyTimestamp {
@@ -4377,7 +4438,7 @@ export declare type TimestampRules = Message<"buf.validate.TimestampRules"> & {
      *
      * ```proto
      * message MyTimestamp {
-     *  // value must be less than now
+     *  // must be less than now
      *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.lt_now = true];
      * }
      * ```
@@ -4447,7 +4508,7 @@ export declare type TimestampRules = Message<"buf.validate.TimestampRules"> & {
      *
      * ```proto
      * message MyTimestamp {
-     *   // value must be greater than now
+     *   // must be greater than now
      *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.gt_now = true];
      * }
      * ```
@@ -4463,7 +4524,7 @@ export declare type TimestampRules = Message<"buf.validate.TimestampRules"> & {
    *
    * ```proto
    * message MyTimestamp {
-   *   // value must be within 1 hour of now
+   *   // must be within 1 hour of now
    *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.within = {seconds: 3600}];
    * }
    * ```
@@ -4974,7 +5035,7 @@ export declare const field: GenExtension<FieldOptions, FieldRules>;
  * extend buf.validate.Int32Rules {
  *   bool is_zero [(buf.validate.predefined).cel = {
  *     id: "int32.is_zero",
- *     message: "value must be zero",
+ *     message: "must be zero",
  *     expression: "!rule || this == 0",
  *   }];
  * }
