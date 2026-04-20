@@ -1176,6 +1176,18 @@ enum ClusterDiskExpansionSupportStatus {
   CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
 }
 
+// ClusterDiskExpansionSupportInfo provides information about disk expansion support
+message ClusterDiskExpansionSupportInfo {
+  // The current disk expansion support status
+  ClusterDiskExpansionSupportStatus status = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Optional human-readable reason providing more context about the disk expansion status.
+  // When a cluster does not support disk expansion, this explain why.
+  optional string reason = 2 [(buf.validate.field).string.min_len = 1];
+}
+
 // ClusterBackupSupportStatus defines the backup support states of a cluster.
 enum ClusterBackupSupportStatus {
   // Backup support is unspecified.
@@ -1186,14 +1198,26 @@ enum ClusterBackupSupportStatus {
   CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED = 2;
 }
 
+// ClusterBackupSupportInfo provides information about backup support
+message ClusterBackupSupportInfo {
+  // The current backup support status
+  ClusterBackupSupportStatus status = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Optional human-readable reason providing more context about the backup support status.
+  // When a cluster does not support backup, this explain why.
+  optional string reason = 2 [(buf.validate.field).string.min_len = 1];
+}
+
 // ClusterCapabilities specifies whether some actions are supported by the cluster or not.
 message ClusterCapabilities {
   // Whether the StorageClass used by the cluster supports disk expansion or not.
   // Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
-  ClusterDiskExpansionSupportStatus disk_expansion = 1;
+  ClusterDiskExpansionSupportInfo disk_expansion = 1 [(buf.validate.field).required = true];
   // Whether it is possible to take a backup for the cluster or not.
   // Backup tab will be shown or hidden based on this for hybrid cloud clusters.
-  ClusterBackupSupportStatus backup = 2;
+  ClusterBackupSupportInfo backup = 2 [(buf.validate.field).required = true];
   // Whether the cluster can be scaled up or down.
   ClusterScalabilityInfo scalability_info = 3 [(buf.validate.field).required = true];
 }

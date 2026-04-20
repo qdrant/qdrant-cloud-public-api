@@ -625,15 +625,31 @@ class ClusterScalabilityInfo(_message.Message):
     reason: str
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
+class ClusterDiskExpansionSupportInfo(_message.Message):
+    __slots__ = ("status", "reason")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    REASON_FIELD_NUMBER: _ClassVar[int]
+    status: ClusterDiskExpansionSupportStatus
+    reason: str
+    def __init__(self, status: _Optional[_Union[ClusterDiskExpansionSupportStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
+
+class ClusterBackupSupportInfo(_message.Message):
+    __slots__ = ("status", "reason")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    REASON_FIELD_NUMBER: _ClassVar[int]
+    status: ClusterBackupSupportStatus
+    reason: str
+    def __init__(self, status: _Optional[_Union[ClusterBackupSupportStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
+
 class ClusterCapabilities(_message.Message):
     __slots__ = ("disk_expansion", "backup", "scalability_info")
     DISK_EXPANSION_FIELD_NUMBER: _ClassVar[int]
     BACKUP_FIELD_NUMBER: _ClassVar[int]
     SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
-    disk_expansion: ClusterDiskExpansionSupportStatus
-    backup: ClusterBackupSupportStatus
+    disk_expansion: ClusterDiskExpansionSupportInfo
+    backup: ClusterBackupSupportInfo
     scalability_info: ClusterScalabilityInfo
-    def __init__(self, disk_expansion: _Optional[_Union[ClusterDiskExpansionSupportStatus, str]] = ..., backup: _Optional[_Union[ClusterBackupSupportStatus, str]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
+    def __init__(self, disk_expansion: _Optional[_Union[ClusterDiskExpansionSupportInfo, _Mapping]] = ..., backup: _Optional[_Union[ClusterBackupSupportInfo, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
     __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")

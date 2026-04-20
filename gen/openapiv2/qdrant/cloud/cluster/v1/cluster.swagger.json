@@ -778,6 +778,20 @@
       },
       "description": "A Cluster represents one cluster of a Qdrant database."
     },
+    "v1ClusterBackupSupportInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterBackupSupportStatus",
+          "title": "The current backup support status"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional human-readable reason providing more context about the backup support status.\nWhen a cluster does not support backup, this explain why."
+        }
+      },
+      "title": "ClusterBackupSupportInfo provides information about backup support"
+    },
     "v1ClusterBackupSupportStatus": {
       "type": "string",
       "enum": [
@@ -792,11 +806,11 @@
       "type": "object",
       "properties": {
         "diskExpansion": {
-          "$ref": "#/definitions/v1ClusterDiskExpansionSupportStatus",
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportInfo",
           "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
         },
         "backup": {
-          "$ref": "#/definitions/v1ClusterBackupSupportStatus",
+          "$ref": "#/definitions/v1ClusterBackupSupportInfo",
           "description": "Whether it is possible to take a backup for the cluster or not.\nBackup tab will be shown or hidden based on this for hybrid cloud clusters."
         },
         "scalabilityInfo": {
@@ -954,6 +968,20 @@
       ],
       "default": "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
       "description": "ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.\n\n - CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: Restart policy is unspecified.\n - CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: Rolling restart policy (one by one).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: Parallel restart policy (restart all at once).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: Automatic restart policy."
+    },
+    "v1ClusterDiskExpansionSupportInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportStatus",
+          "title": "The current disk expansion support status"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional human-readable reason providing more context about the disk expansion status.\nWhen a cluster does not support disk expansion, this explain why."
+        }
+      },
+      "title": "ClusterDiskExpansionSupportInfo provides information about disk expansion support"
     },
     "v1ClusterDiskExpansionSupportStatus": {
       "type": "string",

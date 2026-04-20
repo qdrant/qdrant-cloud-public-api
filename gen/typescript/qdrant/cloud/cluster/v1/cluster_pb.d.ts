@@ -2347,6 +2347,66 @@ export declare type ClusterScalabilityInfoValid = ClusterScalabilityInfo;
 export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalabilityInfo, {validType: ClusterScalabilityInfoValid}>;
 
 /**
+ * ClusterDiskExpansionSupportInfo provides information about disk expansion support
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
+ */
+export declare type ClusterDiskExpansionSupportInfo = Message<"qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo"> & {
+  /**
+   * The current disk expansion support status
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus status = 1;
+   */
+  status: ClusterDiskExpansionSupportStatus;
+
+  /**
+   * Optional human-readable reason providing more context about the disk expansion status.
+   * When a cluster does not support disk expansion, this explain why.
+   *
+   * @generated from field: optional string reason = 2;
+   */
+  reason?: string;
+};
+
+export declare type ClusterDiskExpansionSupportInfoValid = ClusterDiskExpansionSupportInfo;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo.
+ * Use `create(ClusterDiskExpansionSupportInfoSchema)` to create a new message.
+ */
+export declare const ClusterDiskExpansionSupportInfoSchema: GenMessage<ClusterDiskExpansionSupportInfo, {validType: ClusterDiskExpansionSupportInfoValid}>;
+
+/**
+ * ClusterBackupSupportInfo provides information about backup support
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
+ */
+export declare type ClusterBackupSupportInfo = Message<"qdrant.cloud.cluster.v1.ClusterBackupSupportInfo"> & {
+  /**
+   * The current backup support status
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus status = 1;
+   */
+  status: ClusterBackupSupportStatus;
+
+  /**
+   * Optional human-readable reason providing more context about the backup support status.
+   * When a cluster does not support backup, this explain why.
+   *
+   * @generated from field: optional string reason = 2;
+   */
+  reason?: string;
+};
+
+export declare type ClusterBackupSupportInfoValid = ClusterBackupSupportInfo;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterBackupSupportInfo.
+ * Use `create(ClusterBackupSupportInfoSchema)` to create a new message.
+ */
+export declare const ClusterBackupSupportInfoSchema: GenMessage<ClusterBackupSupportInfo, {validType: ClusterBackupSupportInfoValid}>;
+
+/**
  * ClusterCapabilities specifies whether some actions are supported by the cluster or not.
  *
  * @generated from message qdrant.cloud.cluster.v1.ClusterCapabilities
@@ -2356,17 +2416,17 @@ export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.Clust
    * Whether the StorageClass used by the cluster supports disk expansion or not.
    * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo disk_expansion = 1;
    */
-  diskExpansion: ClusterDiskExpansionSupportStatus;
+  diskExpansion?: ClusterDiskExpansionSupportInfo;
 
   /**
    * Whether it is possible to take a backup for the cluster or not.
    * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus backup = 2;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo backup = 2;
    */
-  backup: ClusterBackupSupportStatus;
+  backup?: ClusterBackupSupportInfo;
 
   /**
    * Whether the cluster can be scaled up or down.
@@ -2386,17 +2446,17 @@ export declare type ClusterCapabilitiesValid = Message<"qdrant.cloud.cluster.v1.
    * Whether the StorageClass used by the cluster supports disk expansion or not.
    * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo disk_expansion = 1;
    */
-  diskExpansion: ClusterDiskExpansionSupportStatus;
+  diskExpansion: ClusterDiskExpansionSupportInfoValid;
 
   /**
    * Whether it is possible to take a backup for the cluster or not.
    * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus backup = 2;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo backup = 2;
    */
-  backup: ClusterBackupSupportStatus;
+  backup: ClusterBackupSupportInfoValid;
 
   /**
    * Whether the cluster can be scaled up or down.
