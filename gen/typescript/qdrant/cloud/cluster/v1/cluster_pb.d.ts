@@ -1945,8 +1945,10 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
 
   /**
    * Whether the cluster can be scaled up or down.
+   * Deprecated: Use capabilities.scalability_info instead
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8 [deprecated = true];
+   * @deprecated
    */
   scalabilityInfo?: ClusterScalabilityInfo;
 
@@ -1967,6 +1969,13 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
    * @generated from field: bool jwt_rbac = 10;
    */
   jwtRbac: boolean;
+
+  /**
+   * Specifies whether some operations are supported by cluster or not.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterCapabilities capabilities = 11;
+   */
+  capabilities?: ClusterCapabilities;
 };
 
 /**
@@ -2028,8 +2037,10 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
 
   /**
    * Whether the cluster can be scaled up or down.
+   * Deprecated: Use capabilities.scalability_info instead
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 8 [deprecated = true];
+   * @deprecated
    */
   scalabilityInfo: ClusterScalabilityInfoValid;
 
@@ -2050,6 +2061,13 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
    * @generated from field: bool jwt_rbac = 10;
    */
   jwtRbac: boolean;
+
+  /**
+   * Specifies whether some operations are supported by cluster or not.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterCapabilities capabilities = 11;
+   */
+  capabilities: ClusterCapabilitiesValid;
 };
 
 /**
@@ -2327,6 +2345,72 @@ export declare type ClusterScalabilityInfoValid = ClusterScalabilityInfo;
  * Use `create(ClusterScalabilityInfoSchema)` to create a new message.
  */
 export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalabilityInfo, {validType: ClusterScalabilityInfoValid}>;
+
+/**
+ * ClusterCapabilities specifies whether some actions are supported by the cluster or not.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterCapabilities
+ */
+export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.ClusterCapabilities"> & {
+  /**
+   * Whether the StorageClass used by the cluster supports disk expansion or not.
+   * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
+   */
+  diskExpansion: ClusterDiskExpansionSupportStatus;
+
+  /**
+   * Whether it is possible to take a backup for the cluster or not.
+   * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus backup = 2;
+   */
+  backup: ClusterBackupSupportStatus;
+
+  /**
+   * Whether the cluster can be scaled up or down.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 3;
+   */
+  scalabilityInfo?: ClusterScalabilityInfo;
+};
+
+/**
+ * ClusterCapabilities specifies whether some actions are supported by the cluster or not.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterCapabilities
+ */
+export declare type ClusterCapabilitiesValid = Message<"qdrant.cloud.cluster.v1.ClusterCapabilities"> & {
+  /**
+   * Whether the StorageClass used by the cluster supports disk expansion or not.
+   * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
+   */
+  diskExpansion: ClusterDiskExpansionSupportStatus;
+
+  /**
+   * Whether it is possible to take a backup for the cluster or not.
+   * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus backup = 2;
+   */
+  backup: ClusterBackupSupportStatus;
+
+  /**
+   * Whether the cluster can be scaled up or down.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 3;
+   */
+  scalabilityInfo: ClusterScalabilityInfoValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterCapabilities.
+ * Use `create(ClusterCapabilitiesSchema)` to create a new message.
+ */
+export declare const ClusterCapabilitiesSchema: GenMessage<ClusterCapabilities, {validType: ClusterCapabilitiesValid}>;
 
 /**
  * QdrantRelease represent a single Qdrant release
@@ -3013,6 +3097,72 @@ export enum ClusterScalabilityStatus {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterScalabilityStatus.
  */
 export declare const ClusterScalabilityStatusSchema: GenEnum<ClusterScalabilityStatus>;
+
+/**
+ * ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
+ */
+export enum ClusterDiskExpansionSupportStatus {
+  /**
+   * Disk expansion support is unspecified.
+   *
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Cluster supports disk expansion.
+   *
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
+   */
+  SUPPORTED = 1,
+
+  /**
+   * Cluster does not support disk expansion.
+   *
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+   */
+  NOT_SUPPORTED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus.
+ */
+export declare const ClusterDiskExpansionSupportStatusSchema: GenEnum<ClusterDiskExpansionSupportStatus>;
+
+/**
+ * ClusterBackupSupportStatus defines the backup support states of a cluster.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
+ */
+export enum ClusterBackupSupportStatus {
+  /**
+   * Backup support is unspecified.
+   *
+   * @generated from enum value: CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Cluster supports backup.
+   *
+   * @generated from enum value: CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED = 1;
+   */
+  SUPPORTED = 1,
+
+  /**
+   * Cluster does not support backup.
+   *
+   * @generated from enum value: CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+   */
+  NOT_SUPPORTED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterBackupSupportStatus.
+ */
+export declare const ClusterBackupSupportStatusSchema: GenEnum<ClusterBackupSupportStatus>;
 
 /**
  * ClusterService is the API used to configure cluster objects.

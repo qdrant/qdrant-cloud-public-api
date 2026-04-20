@@ -778,6 +778,34 @@
       },
       "description": "A Cluster represents one cluster of a Qdrant database."
     },
+    "v1ClusterBackupSupportStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED",
+        "CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED",
+        "CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED"
+      ],
+      "default": "CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED",
+      "description": "ClusterBackupSupportStatus defines the backup support states of a cluster.\n\n - CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED: Backup support is unspecified.\n - CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED: Cluster supports backup.\n - CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support backup."
+    },
+    "v1ClusterCapabilities": {
+      "type": "object",
+      "properties": {
+        "diskExpansion": {
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportStatus",
+          "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
+        },
+        "backup": {
+          "$ref": "#/definitions/v1ClusterBackupSupportStatus",
+          "description": "Whether it is possible to take a backup for the cluster or not.\nBackup tab will be shown or hidden based on this for hybrid cloud clusters."
+        },
+        "scalabilityInfo": {
+          "$ref": "#/definitions/v1ClusterScalabilityInfo",
+          "description": "Whether the cluster can be scaled up or down."
+        }
+      },
+      "description": "ClusterCapabilities specifies whether some actions are supported by the cluster or not."
+    },
     "v1ClusterConfiguration": {
       "type": "object",
       "properties": {
@@ -926,6 +954,16 @@
       ],
       "default": "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
       "description": "ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.\n\n - CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: Restart policy is unspecified.\n - CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: Rolling restart policy (one by one).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: Parallel restart policy (restart all at once).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: Automatic restart policy."
+    },
+    "v1ClusterDiskExpansionSupportStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED"
+      ],
+      "default": "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+      "description": "ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.\n\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: Disk expansion support is unspecified.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: Cluster supports disk expansion.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support disk expansion."
     },
     "v1ClusterEndpoint": {
       "type": "object",
@@ -1145,7 +1183,7 @@
         },
         "scalabilityInfo": {
           "$ref": "#/definitions/v1ClusterScalabilityInfo",
-          "description": "Whether the cluster can be scaled up or down."
+          "title": "Whether the cluster can be scaled up or down.\nDeprecated: Use capabilities.scalability_info instead"
         },
         "nodes": {
           "type": "array",
@@ -1158,6 +1196,10 @@
         "jwtRbac": {
           "type": "boolean",
           "description": "Whether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
+        },
+        "capabilities": {
+          "$ref": "#/definitions/v1ClusterCapabilities",
+          "description": "Specifies whether some operations are supported by cluster or not."
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."

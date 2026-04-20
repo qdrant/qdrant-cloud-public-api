@@ -1050,7 +1050,11 @@ message ClusterState {
   // For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
   ClusterNodeResourcesSummary resources = 7 [(buf.validate.field).required = true];
   // Whether the cluster can be scaled up or down.
-  ClusterScalabilityInfo scalability_info = 8 [(buf.validate.field).required = true];
+  // Deprecated: Use capabilities.scalability_info instead
+  ClusterScalabilityInfo scalability_info = 8 [
+    deprecated = true,
+    (buf.validate.field).required = true
+  ];
   // List of nodes in the cluster.
   repeated ClusterNodeInfo nodes = 9;
   // Whether or not JWT Role Based Access Control (RBAC) is enabled.
@@ -1059,6 +1063,8 @@ message ClusterState {
   //                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
   // If enabled, you can generate JWT tokens with fine-grained rules for access control.
   bool jwt_rbac = 10;
+  // Specifies whether some operations are supported by cluster or not.
+  ClusterCapabilities capabilities = 11 [(buf.validate.field).required = true];
 }
 
 // ClusterNodeInfo represents a node in a cluster.
@@ -1158,6 +1164,38 @@ message ClusterScalabilityInfo {
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
   optional string reason = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
+enum ClusterDiskExpansionSupportStatus {
+  // Disk expansion support is unspecified.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
+  // Cluster supports disk expansion.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
+  // Cluster does not support disk expansion.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+}
+
+// ClusterBackupSupportStatus defines the backup support states of a cluster.
+enum ClusterBackupSupportStatus {
+  // Backup support is unspecified.
+  CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED = 0;
+  // Cluster supports backup.
+  CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED = 1;
+  // Cluster does not support backup.
+  CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+}
+
+// ClusterCapabilities specifies whether some actions are supported by the cluster or not.
+message ClusterCapabilities {
+  // Whether the StorageClass used by the cluster supports disk expansion or not.
+  // Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
+  ClusterDiskExpansionSupportStatus disk_expansion = 1;
+  // Whether it is possible to take a backup for the cluster or not.
+  // Backup tab will be shown or hidden based on this for hybrid cloud clusters.
+  ClusterBackupSupportStatus backup = 2;
+  // Whether the cluster can be scaled up or down.
+  ClusterScalabilityInfo scalability_info = 3 [(buf.validate.field).required = true];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
