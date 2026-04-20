@@ -4324,7 +4324,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x17_database_storage_classB\x19\n" +
 	"\x17_snapshot_storage_classB\x18\n" +
 	"\x16_volume_snapshot_classB\x1a\n" +
-	"\x18_volume_attributes_class\"\xa7\x05\n" +
+	"\x18_volume_attributes_class\"\xaf\x05\n" +
 	"\fClusterState\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x19\n" +
 	"\bnodes_up\x18\x02 \x01(\rR\anodesUp\x12=\n" +
@@ -4336,8 +4336,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\b\xbaH\x03\xc8\x01\x01\x18\x01R\x0fscalabilityInfo\x12>\n" +
 	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoR\x05nodes\x12\x19\n" +
 	"\bjwt_rbac\x18\n" +
-	" \x01(\bR\ajwtRbac\x12P\n" +
-	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesR\fcapabilities\"\xdc\x02\n" +
+	" \x01(\bR\ajwtRbac\x12X\n" +
+	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesB\x06\xbaH\x03\xc8\x01\x01R\fcapabilities\"\xdc\x02\n" +
 	"\x0fClusterNodeInfo\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x129\n" +
 	"\n" +

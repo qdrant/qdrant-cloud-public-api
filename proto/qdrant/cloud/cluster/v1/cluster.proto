@@ -1064,7 +1064,7 @@ message ClusterState {
   // If enabled, you can generate JWT tokens with fine-grained rules for access control.
   bool jwt_rbac = 10;
   // Specifies whether some operations are supported by cluster or not.
-  ClusterCapabilities capabilities = 11;
+  ClusterCapabilities capabilities = 11 [(buf.validate.field).required = true];
 }
 
 // ClusterNodeInfo represents a node in a cluster.

@@ -2067,7 +2067,7 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterCapabilities capabilities = 11;
    */
-  capabilities?: ClusterCapabilitiesValid;
+  capabilities: ClusterCapabilitiesValid;
 };
 
 /**
