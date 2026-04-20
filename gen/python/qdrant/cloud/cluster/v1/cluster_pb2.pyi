@@ -107,11 +107,11 @@ class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: _ClassVar[ClusterScalabilityStatus]
     CLUSTER_SCALABILITY_STATUS_SCALABLE: _ClassVar[ClusterScalabilityStatus]
 
-class ClusterVolumeExpansionSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class ClusterDiskExpansionSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: _ClassVar[ClusterVolumeExpansionSupportStatus]
-    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED: _ClassVar[ClusterVolumeExpansionSupportStatus]
-    CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: _ClassVar[ClusterVolumeExpansionSupportStatus]
+    CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: _ClassVar[ClusterDiskExpansionSupportStatus]
+    CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: _ClassVar[ClusterDiskExpansionSupportStatus]
+    CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: _ClassVar[ClusterDiskExpansionSupportStatus]
 
 class ClusterBackupSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -178,9 +178,9 @@ CLUSTER_NODE_STATE_RECOVERING: ClusterNodeState
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
-CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: ClusterVolumeExpansionSupportStatus
-CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED: ClusterVolumeExpansionSupportStatus
-CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: ClusterVolumeExpansionSupportStatus
+CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: ClusterDiskExpansionSupportStatus
+CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: ClusterDiskExpansionSupportStatus
+CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: ClusterDiskExpansionSupportStatus
 CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED: ClusterBackupSupportStatus
 CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED: ClusterBackupSupportStatus
 CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED: ClusterBackupSupportStatus
@@ -626,14 +626,14 @@ class ClusterScalabilityInfo(_message.Message):
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class ClusterCapabilities(_message.Message):
-    __slots__ = ("volume_expansion", "backup", "scalability_info")
-    VOLUME_EXPANSION_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("disk_expansion", "backup", "scalability_info")
+    DISK_EXPANSION_FIELD_NUMBER: _ClassVar[int]
     BACKUP_FIELD_NUMBER: _ClassVar[int]
     SCALABILITY_INFO_FIELD_NUMBER: _ClassVar[int]
-    volume_expansion: ClusterVolumeExpansionSupportStatus
+    disk_expansion: ClusterDiskExpansionSupportStatus
     backup: ClusterBackupSupportStatus
     scalability_info: ClusterScalabilityInfo
-    def __init__(self, volume_expansion: _Optional[_Union[ClusterVolumeExpansionSupportStatus, str]] = ..., backup: _Optional[_Union[ClusterBackupSupportStatus, str]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
+    def __init__(self, disk_expansion: _Optional[_Union[ClusterDiskExpansionSupportStatus, str]] = ..., backup: _Optional[_Union[ClusterBackupSupportStatus, str]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ...) -> None: ...
 
 class QdrantRelease(_message.Message):
     __slots__ = ("version", "default", "release_notes_url", "remarks", "end_of_life", "unavailable")

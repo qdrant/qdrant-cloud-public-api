@@ -1166,14 +1166,14 @@ message ClusterScalabilityInfo {
   optional string reason = 2 [(buf.validate.field).string.min_len = 1];
 }
 
-// ClusterVolumeExpansionSupportStatus defines the volume expansion support states of a cluster.
-enum ClusterVolumeExpansionSupportStatus {
-  // Volume expansion support is unspecified.
-  CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
-  // Cluster supports volume expansion.
-  CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
-  // Cluster does not support volume expansion.
-  CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+// ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
+enum ClusterDiskExpansionSupportStatus {
+  // Disk expansion support is unspecified.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
+  // Cluster supports disk expansion.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
+  // Cluster does not support disk expansion.
+  CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
 }
 
 // ClusterBackupSupportStatus defines the backup support states of a cluster.
@@ -1188,9 +1188,9 @@ enum ClusterBackupSupportStatus {
 
 // ClusterCapabilities specifies whether some actions are supported by the cluster or not.
 message ClusterCapabilities {
-  // Whether the StorageClass used by the cluster supports volume expansion or not.
+  // Whether the StorageClass used by the cluster supports disk expansion or not.
   // Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
-  ClusterVolumeExpansionSupportStatus volume_expansion = 1;
+  ClusterDiskExpansionSupportStatus disk_expansion = 1;
   // Whether it is possible to take a backup for the cluster or not.
   // Backup tab will be shown or hidden based on this for hybrid cloud clusters.
   ClusterBackupSupportStatus backup = 2;

@@ -721,56 +721,56 @@ func (ClusterScalabilityStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
-// ClusterVolumeExpansionSupportStatus defines the volume expansion support states of a cluster.
-type ClusterVolumeExpansionSupportStatus int32
+// ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
+type ClusterDiskExpansionSupportStatus int32
 
 const (
-	// Volume expansion support is unspecified.
-	ClusterVolumeExpansionSupportStatus_CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED ClusterVolumeExpansionSupportStatus = 0
-	// Cluster supports volume expansion.
-	ClusterVolumeExpansionSupportStatus_CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED ClusterVolumeExpansionSupportStatus = 1
-	// Cluster does not support volume expansion.
-	ClusterVolumeExpansionSupportStatus_CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED ClusterVolumeExpansionSupportStatus = 2
+	// Disk expansion support is unspecified.
+	ClusterDiskExpansionSupportStatus_CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED ClusterDiskExpansionSupportStatus = 0
+	// Cluster supports disk expansion.
+	ClusterDiskExpansionSupportStatus_CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED ClusterDiskExpansionSupportStatus = 1
+	// Cluster does not support disk expansion.
+	ClusterDiskExpansionSupportStatus_CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED ClusterDiskExpansionSupportStatus = 2
 )
 
-// Enum value maps for ClusterVolumeExpansionSupportStatus.
+// Enum value maps for ClusterDiskExpansionSupportStatus.
 var (
-	ClusterVolumeExpansionSupportStatus_name = map[int32]string{
-		0: "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
-		1: "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED",
-		2: "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED",
+	ClusterDiskExpansionSupportStatus_name = map[int32]string{
+		0: "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+		1: "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED",
+		2: "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED",
 	}
-	ClusterVolumeExpansionSupportStatus_value = map[string]int32{
-		"CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED":   0,
-		"CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED":     1,
-		"CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED": 2,
+	ClusterDiskExpansionSupportStatus_value = map[string]int32{
+		"CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED":   0,
+		"CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED":     1,
+		"CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED": 2,
 	}
 )
 
-func (x ClusterVolumeExpansionSupportStatus) Enum() *ClusterVolumeExpansionSupportStatus {
-	p := new(ClusterVolumeExpansionSupportStatus)
+func (x ClusterDiskExpansionSupportStatus) Enum() *ClusterDiskExpansionSupportStatus {
+	p := new(ClusterDiskExpansionSupportStatus)
 	*p = x
 	return p
 }
 
-func (x ClusterVolumeExpansionSupportStatus) String() string {
+func (x ClusterDiskExpansionSupportStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ClusterVolumeExpansionSupportStatus) Descriptor() protoreflect.EnumDescriptor {
+func (ClusterDiskExpansionSupportStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11].Descriptor()
 }
 
-func (ClusterVolumeExpansionSupportStatus) Type() protoreflect.EnumType {
+func (ClusterDiskExpansionSupportStatus) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11]
 }
 
-func (x ClusterVolumeExpansionSupportStatus) Number() protoreflect.EnumNumber {
+func (x ClusterDiskExpansionSupportStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ClusterVolumeExpansionSupportStatus.Descriptor instead.
-func (ClusterVolumeExpansionSupportStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ClusterDiskExpansionSupportStatus.Descriptor instead.
+func (ClusterDiskExpansionSupportStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
@@ -3796,9 +3796,9 @@ func (x *ClusterScalabilityInfo) GetReason() string {
 // ClusterCapabilities specifies whether some actions are supported by the cluster or not.
 type ClusterCapabilities struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Whether the StorageClass used by the cluster supports volume expansion or not.
+	// Whether the StorageClass used by the cluster supports disk expansion or not.
 	// Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
-	VolumeExpansion ClusterVolumeExpansionSupportStatus `protobuf:"varint,1,opt,name=volume_expansion,json=volumeExpansion,proto3,enum=qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus" json:"volume_expansion,omitempty"`
+	DiskExpansion ClusterDiskExpansionSupportStatus `protobuf:"varint,1,opt,name=disk_expansion,json=diskExpansion,proto3,enum=qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus" json:"disk_expansion,omitempty"`
 	// Whether it is possible to take a backup for the cluster or not.
 	// Backup tab will be shown or hidden based on this for hybrid cloud clusters.
 	Backup ClusterBackupSupportStatus `protobuf:"varint,2,opt,name=backup,proto3,enum=qdrant.cloud.cluster.v1.ClusterBackupSupportStatus" json:"backup,omitempty"`
@@ -3838,11 +3838,11 @@ func (*ClusterCapabilities) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *ClusterCapabilities) GetVolumeExpansion() ClusterVolumeExpansionSupportStatus {
+func (x *ClusterCapabilities) GetDiskExpansion() ClusterDiskExpansionSupportStatus {
 	if x != nil {
-		return x.VolumeExpansion
+		return x.DiskExpansion
 	}
-	return ClusterVolumeExpansionSupportStatus_CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED
+	return ClusterDiskExpansionSupportStatus_CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED
 }
 
 func (x *ClusterCapabilities) GetBackup() ClusterBackupSupportStatus {
@@ -4373,9 +4373,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12$\n" +
 	"\x06reason\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\xaf\x02\n" +
-	"\x13ClusterCapabilities\x12g\n" +
-	"\x10volume_expansion\x18\x01 \x01(\x0e2<.qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatusR\x0fvolumeExpansion\x12K\n" +
+	"\a_reason\"\xa9\x02\n" +
+	"\x13ClusterCapabilities\x12a\n" +
+	"\x0edisk_expansion\x18\x01 \x01(\x0e2:.qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatusR\rdiskExpansion\x12K\n" +
 	"\x06backup\x18\x02 \x01(\x0e23.qdrant.cloud.cluster.v1.ClusterBackupSupportStatusR\x06backup\x12b\n" +
 	"\x10scalability_info\x18\x03 \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\x06\xbaH\x03\xc8\x01\x01R\x0fscalabilityInfo\"\x93\x02\n" +
 	"\rQdrantRelease\x12!\n" +
@@ -4466,11 +4466,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
-	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x02*\xd0\x01\n" +
-	"#ClusterVolumeExpansionSupportStatus\x127\n" +
-	"3CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x125\n" +
-	"1CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED\x10\x01\x129\n" +
-	"5CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED\x10\x02*\xa9\x01\n" +
+	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x02*\xc8\x01\n" +
+	"!ClusterDiskExpansionSupportStatus\x125\n" +
+	"1CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x123\n" +
+	"/CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED\x10\x01\x127\n" +
+	"3CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED\x10\x02*\xa9\x01\n" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
@@ -4547,7 +4547,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(ClusterPhase)(0),                               // 8: qdrant.cloud.cluster.v1.ClusterPhase
 	(ClusterNodeState)(0),                           // 9: qdrant.cloud.cluster.v1.ClusterNodeState
 	(ClusterScalabilityStatus)(0),                   // 10: qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	(ClusterVolumeExpansionSupportStatus)(0),        // 11: qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus
+	(ClusterDiskExpansionSupportStatus)(0),          // 11: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
 	(ClusterBackupSupportStatus)(0),                 // 12: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
 	(*ListClustersRequest)(nil),                     // 13: qdrant.cloud.cluster.v1.ListClustersRequest
 	(*ListClustersResponse)(nil),                    // 14: qdrant.cloud.cluster.v1.ListClustersResponse
@@ -4664,7 +4664,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	55, // 57: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	55, // 58: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	10, // 59: qdrant.cloud.cluster.v1.ClusterScalabilityInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	11, // 60: qdrant.cloud.cluster.v1.ClusterCapabilities.volume_expansion:type_name -> qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus
+	11, // 60: qdrant.cloud.cluster.v1.ClusterCapabilities.disk_expansion:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
 	12, // 61: qdrant.cloud.cluster.v1.ClusterCapabilities.backup:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
 	56, // 62: qdrant.cloud.cluster.v1.ClusterCapabilities.scalability_info:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityInfo
 	37, // 63: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster

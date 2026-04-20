@@ -791,9 +791,9 @@
     "v1ClusterCapabilities": {
       "type": "object",
       "properties": {
-        "volumeExpansion": {
-          "$ref": "#/definitions/v1ClusterVolumeExpansionSupportStatus",
-          "description": "Whether the StorageClass used by the cluster supports volume expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
+        "diskExpansion": {
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportStatus",
+          "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
         },
         "backup": {
           "$ref": "#/definitions/v1ClusterBackupSupportStatus",
@@ -954,6 +954,16 @@
       ],
       "default": "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
       "description": "ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.\n\n - CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: Restart policy is unspecified.\n - CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: Rolling restart policy (one by one).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: Parallel restart policy (restart all at once).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: Automatic restart policy."
+    },
+    "v1ClusterDiskExpansionSupportStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED"
+      ],
+      "default": "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+      "description": "ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.\n\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: Disk expansion support is unspecified.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: Cluster supports disk expansion.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support disk expansion."
     },
     "v1ClusterEndpoint": {
       "type": "object",
@@ -1220,16 +1230,6 @@
         }
       },
       "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"
-    },
-    "v1ClusterVolumeExpansionSupportStatus": {
-      "type": "string",
-      "enum": [
-        "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
-        "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED",
-        "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED"
-      ],
-      "default": "CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
-      "description": "ClusterVolumeExpansionSupportStatus defines the volume expansion support states of a cluster.\n\n - CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: Volume expansion support is unspecified.\n - CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED: Cluster supports volume expansion.\n - CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support volume expansion."
     },
     "v1CreateClusterFromBackupResponse": {
       "type": "object",

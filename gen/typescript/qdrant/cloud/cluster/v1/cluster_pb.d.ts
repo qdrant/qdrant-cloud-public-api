@@ -2353,12 +2353,12 @@ export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalability
  */
 export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.ClusterCapabilities"> & {
   /**
-   * Whether the StorageClass used by the cluster supports volume expansion or not.
+   * Whether the StorageClass used by the cluster supports disk expansion or not.
    * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus volume_expansion = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
    */
-  volumeExpansion: ClusterVolumeExpansionSupportStatus;
+  diskExpansion: ClusterDiskExpansionSupportStatus;
 
   /**
    * Whether it is possible to take a backup for the cluster or not.
@@ -2383,12 +2383,12 @@ export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.Clust
  */
 export declare type ClusterCapabilitiesValid = Message<"qdrant.cloud.cluster.v1.ClusterCapabilities"> & {
   /**
-   * Whether the StorageClass used by the cluster supports volume expansion or not.
+   * Whether the StorageClass used by the cluster supports disk expansion or not.
    * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus volume_expansion = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus disk_expansion = 1;
    */
-  volumeExpansion: ClusterVolumeExpansionSupportStatus;
+  diskExpansion: ClusterDiskExpansionSupportStatus;
 
   /**
    * Whether it is possible to take a backup for the cluster or not.
@@ -3099,37 +3099,37 @@ export enum ClusterScalabilityStatus {
 export declare const ClusterScalabilityStatusSchema: GenEnum<ClusterScalabilityStatus>;
 
 /**
- * ClusterVolumeExpansionSupportStatus defines the volume expansion support states of a cluster.
+ * ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
  *
- * @generated from enum qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
  */
-export enum ClusterVolumeExpansionSupportStatus {
+export enum ClusterDiskExpansionSupportStatus {
   /**
-   * Volume expansion support is unspecified.
+   * Disk expansion support is unspecified.
    *
-   * @generated from enum value: CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * Cluster supports volume expansion.
+   * Cluster supports disk expansion.
    *
-   * @generated from enum value: CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED = 1;
    */
   SUPPORTED = 1,
 
   /**
-   * Cluster does not support volume expansion.
+   * Cluster does not support disk expansion.
    *
-   * @generated from enum value: CLUSTER_VOLUME_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
+   * @generated from enum value: CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED = 2;
    */
   NOT_SUPPORTED = 2,
 }
 
 /**
- * Describes the enum qdrant.cloud.cluster.v1.ClusterVolumeExpansionSupportStatus.
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus.
  */
-export declare const ClusterVolumeExpansionSupportStatusSchema: GenEnum<ClusterVolumeExpansionSupportStatus>;
+export declare const ClusterDiskExpansionSupportStatusSchema: GenEnum<ClusterDiskExpansionSupportStatus>;
 
 /**
  * ClusterBackupSupportStatus defines the backup support states of a cluster.
