@@ -35,6 +35,11 @@ class BillingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.FromString,
                 _registered_method=True)
+        self.GetBillingAccountStatus = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/GetBillingAccountStatus',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusResponse.FromString,
+                _registered_method=True)
 
 
 class BillingServiceServicer(object):
@@ -70,7 +75,15 @@ class BillingServiceServicer(object):
 
     def ListCreditContractConsumptions(self, request, context):
         """Lists consumption data for all credit contracts for the account identified by the given ID.
-        Consumption data includes the total, used, and remaining amounts sourced from Orb.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBillingAccountStatus(self, request, context):
+        """Returns the billing hierarchy status for the account identified by the given ID.
         Required permissions:
         - read:payment_information
         """
@@ -100,6 +113,11 @@ def add_BillingServiceServicer_to_server(servicer, server):
                     servicer.ListCreditContractConsumptions,
                     request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.SerializeToString,
+            ),
+            'GetBillingAccountStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBillingAccountStatus,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -211,6 +229,33 @@ class BillingService(object):
             '/qdrant.cloud.billing.v1.BillingService/ListCreditContractConsumptions',
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.SerializeToString,
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBillingAccountStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.billing.v1.BillingService/GetBillingAccountStatus',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountStatusResponse.FromString,
             options,
             channel_credentials,
             insecure,

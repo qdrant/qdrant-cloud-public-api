@@ -23,6 +23,7 @@ const (
 	BillingService_ListDiscounts_FullMethodName                  = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
 	BillingService_ListCreditContracts_FullMethodName            = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
 	BillingService_ListCreditContractConsumptions_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListCreditContractConsumptions"
+	BillingService_GetBillingAccountStatus_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/GetBillingAccountStatus"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -44,10 +45,13 @@ type BillingServiceClient interface {
 	// - read:payment_information
 	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
 	// Lists consumption data for all credit contracts for the account identified by the given ID.
-	// Consumption data includes the total, used, and remaining amounts sourced from Orb.
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContractConsumptions(ctx context.Context, in *ListCreditContractConsumptionsRequest, opts ...grpc.CallOption) (*ListCreditContractConsumptionsResponse, error)
+	// Returns the billing hierarchy status for the account identified by the given ID.
+	// Required permissions:
+	// - read:payment_information
+	GetBillingAccountStatus(ctx context.Context, in *GetBillingAccountStatusRequest, opts ...grpc.CallOption) (*GetBillingAccountStatusResponse, error)
 }
 
 type billingServiceClient struct {
@@ -98,6 +102,16 @@ func (c *billingServiceClient) ListCreditContractConsumptions(ctx context.Contex
 	return out, nil
 }
 
+func (c *billingServiceClient) GetBillingAccountStatus(ctx context.Context, in *GetBillingAccountStatusRequest, opts ...grpc.CallOption) (*GetBillingAccountStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBillingAccountStatusResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetBillingAccountStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -117,10 +131,13 @@ type BillingServiceServer interface {
 	// - read:payment_information
 	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)
 	// Lists consumption data for all credit contracts for the account identified by the given ID.
-	// Consumption data includes the total, used, and remaining amounts sourced from Orb.
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error)
+	// Returns the billing hierarchy status for the account identified by the given ID.
+	// Required permissions:
+	// - read:payment_information
+	GetBillingAccountStatus(context.Context, *GetBillingAccountStatusRequest) (*GetBillingAccountStatusResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -142,6 +159,9 @@ func (UnimplementedBillingServiceServer) ListCreditContracts(context.Context, *L
 }
 func (UnimplementedBillingServiceServer) ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCreditContractConsumptions not implemented")
+}
+func (UnimplementedBillingServiceServer) GetBillingAccountStatus(context.Context, *GetBillingAccountStatusRequest) (*GetBillingAccountStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBillingAccountStatus not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -236,6 +256,24 @@ func _BillingService_ListCreditContractConsumptions_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_GetBillingAccountStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingAccountStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetBillingAccountStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetBillingAccountStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetBillingAccountStatus(ctx, req.(*GetBillingAccountStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +296,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCreditContractConsumptions",
 			Handler:    _BillingService_ListCreditContractConsumptions_Handler,
+		},
+		{
+			MethodName: "GetBillingAccountStatus",
+			Handler:    _BillingService_GetBillingAccountStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

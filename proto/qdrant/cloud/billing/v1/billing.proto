@@ -43,7 +43,6 @@ service BillingService {
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
   }
   // Lists consumption data for all credit contracts for the account identified by the given ID.
-  // Consumption data includes the total, used, and remaining amounts sourced from Orb.
   // Required permissions:
   // - read:payment_information
   rpc ListCreditContractConsumptions(ListCreditContractConsumptionsRequest) returns (ListCreditContractConsumptionsResponse) {
@@ -51,6 +50,15 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contract-consumptions"};
+  }
+  // Returns the billing hierarchy status for the account identified by the given ID.
+  // Required permissions:
+  // - read:payment_information
+  rpc GetBillingAccountStatus(GetBillingAccountStatusRequest) returns (GetBillingAccountStatusResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/status"};
   }
 }
 
@@ -227,6 +235,24 @@ enum BillingFrequency {
   BILLING_FREQUENCY_SEMI_ANNUAL = 3;
   // Annual
   BILLING_FREQUENCY_ANNUAL = 4;
+}
+
+// GetBillingAccountStatusRequest is the request for the GetBillingAccountStatus RPC.
+message GetBillingAccountStatusRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// GetBillingAccountStatusResponse describes the account's position in the billing hierarchy.
+message GetBillingAccountStatusResponse {
+  // Whether this account consolidates billing for child accounts.
+  bool is_billing_anchor = 1;
+  // The identifier of the parent billing anchor account, if this account has one.
+  optional string parent_account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Whether this account is a member of an organization.
+  bool is_org_member = 3;
 }
 
 // The possible status of an invoice.

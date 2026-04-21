@@ -682,6 +682,65 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
 export declare const CreditContractSchema: GenMessage<CreditContract, {validType: CreditContractValid}>;
 
 /**
+ * GetBillingAccountStatusRequest is the request for the GetBillingAccountStatus RPC.
+ *
+ * @generated from message qdrant.cloud.billing.v1.GetBillingAccountStatusRequest
+ */
+export declare type GetBillingAccountStatusRequest = Message<"qdrant.cloud.billing.v1.GetBillingAccountStatusRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type GetBillingAccountStatusRequestValid = GetBillingAccountStatusRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.GetBillingAccountStatusRequest.
+ * Use `create(GetBillingAccountStatusRequestSchema)` to create a new message.
+ */
+export declare const GetBillingAccountStatusRequestSchema: GenMessage<GetBillingAccountStatusRequest, {validType: GetBillingAccountStatusRequestValid}>;
+
+/**
+ * GetBillingAccountStatusResponse describes the account's position in the billing hierarchy.
+ *
+ * @generated from message qdrant.cloud.billing.v1.GetBillingAccountStatusResponse
+ */
+export declare type GetBillingAccountStatusResponse = Message<"qdrant.cloud.billing.v1.GetBillingAccountStatusResponse"> & {
+  /**
+   * Whether this account consolidates billing for child accounts.
+   *
+   * @generated from field: bool is_billing_anchor = 1;
+   */
+  isBillingAnchor: boolean;
+
+  /**
+   * The identifier of the parent billing anchor account, if this account has one.
+   *
+   * @generated from field: optional string parent_account_id = 2;
+   */
+  parentAccountId?: string;
+
+  /**
+   * Whether this account is a member of an organization.
+   *
+   * @generated from field: bool is_org_member = 3;
+   */
+  isOrgMember: boolean;
+};
+
+export declare type GetBillingAccountStatusResponseValid = GetBillingAccountStatusResponse;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.GetBillingAccountStatusResponse.
+ * Use `create(GetBillingAccountStatusResponseSchema)` to create a new message.
+ */
+export declare const GetBillingAccountStatusResponseSchema: GenMessage<GetBillingAccountStatusResponse, {validType: GetBillingAccountStatusResponseValid}>;
+
+/**
  * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
  *
  * @generated from enum qdrant.cloud.billing.v1.BillingFrequency
@@ -826,7 +885,6 @@ export declare const BillingService: GenService<{
   },
   /**
    * Lists consumption data for all credit contracts for the account identified by the given ID.
-   * Consumption data includes the total, used, and remaining amounts sourced from Orb.
    * Required permissions:
    * - read:payment_information
    *
@@ -836,6 +894,18 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListCreditContractConsumptionsRequestSchema;
     output: typeof ListCreditContractConsumptionsResponseSchema;
+  },
+  /**
+   * Returns the billing hierarchy status for the account identified by the given ID.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountStatus
+   */
+  getBillingAccountStatus: {
+    methodKind: "unary";
+    input: typeof GetBillingAccountStatusRequestSchema;
+    output: typeof GetBillingAccountStatusResponseSchema;
   },
 }>;
 
