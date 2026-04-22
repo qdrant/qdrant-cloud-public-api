@@ -23,7 +23,8 @@ const (
 	BillingService_ListDiscounts_FullMethodName                  = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
 	BillingService_ListCreditContracts_FullMethodName            = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
 	BillingService_ListCreditContractConsumptions_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListCreditContractConsumptions"
-	BillingService_GetBillingAccountStatus_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/GetBillingAccountStatus"
+	BillingService_GetBillingAccountParent_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/GetBillingAccountParent"
+	BillingService_ListBillingAccountChildren_FullMethodName     = "/qdrant.cloud.billing.v1.BillingService/ListBillingAccountChildren"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -48,10 +49,16 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContractConsumptions(ctx context.Context, in *ListCreditContractConsumptionsRequest, opts ...grpc.CallOption) (*ListCreditContractConsumptionsResponse, error)
-	// Returns the billing hierarchy status for the account identified by the given ID.
+	// Returns the parent billing account for the account identified by the given ID.
+	// Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
 	// Required permissions:
 	// - read:payment_information
-	GetBillingAccountStatus(ctx context.Context, in *GetBillingAccountStatusRequest, opts ...grpc.CallOption) (*GetBillingAccountStatusResponse, error)
+	GetBillingAccountParent(ctx context.Context, in *GetBillingAccountParentRequest, opts ...grpc.CallOption) (*GetBillingAccountParentResponse, error)
+	// Lists all child accounts for the billing parent account identified by the given ID.
+	// Returns an empty list if the account has no children.
+	// Required permissions:
+	// - read:payment_information
+	ListBillingAccountChildren(ctx context.Context, in *ListBillingAccountChildrenRequest, opts ...grpc.CallOption) (*ListBillingAccountChildrenResponse, error)
 }
 
 type billingServiceClient struct {
@@ -102,10 +109,20 @@ func (c *billingServiceClient) ListCreditContractConsumptions(ctx context.Contex
 	return out, nil
 }
 
-func (c *billingServiceClient) GetBillingAccountStatus(ctx context.Context, in *GetBillingAccountStatusRequest, opts ...grpc.CallOption) (*GetBillingAccountStatusResponse, error) {
+func (c *billingServiceClient) GetBillingAccountParent(ctx context.Context, in *GetBillingAccountParentRequest, opts ...grpc.CallOption) (*GetBillingAccountParentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBillingAccountStatusResponse)
-	err := c.cc.Invoke(ctx, BillingService_GetBillingAccountStatus_FullMethodName, in, out, cOpts...)
+	out := new(GetBillingAccountParentResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetBillingAccountParent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) ListBillingAccountChildren(ctx context.Context, in *ListBillingAccountChildrenRequest, opts ...grpc.CallOption) (*ListBillingAccountChildrenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingAccountChildrenResponse)
+	err := c.cc.Invoke(ctx, BillingService_ListBillingAccountChildren_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -134,10 +151,16 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error)
-	// Returns the billing hierarchy status for the account identified by the given ID.
+	// Returns the parent billing account for the account identified by the given ID.
+	// Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
 	// Required permissions:
 	// - read:payment_information
-	GetBillingAccountStatus(context.Context, *GetBillingAccountStatusRequest) (*GetBillingAccountStatusResponse, error)
+	GetBillingAccountParent(context.Context, *GetBillingAccountParentRequest) (*GetBillingAccountParentResponse, error)
+	// Lists all child accounts for the billing parent account identified by the given ID.
+	// Returns an empty list if the account has no children.
+	// Required permissions:
+	// - read:payment_information
+	ListBillingAccountChildren(context.Context, *ListBillingAccountChildrenRequest) (*ListBillingAccountChildrenResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -160,8 +183,11 @@ func (UnimplementedBillingServiceServer) ListCreditContracts(context.Context, *L
 func (UnimplementedBillingServiceServer) ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCreditContractConsumptions not implemented")
 }
-func (UnimplementedBillingServiceServer) GetBillingAccountStatus(context.Context, *GetBillingAccountStatusRequest) (*GetBillingAccountStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetBillingAccountStatus not implemented")
+func (UnimplementedBillingServiceServer) GetBillingAccountParent(context.Context, *GetBillingAccountParentRequest) (*GetBillingAccountParentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBillingAccountParent not implemented")
+}
+func (UnimplementedBillingServiceServer) ListBillingAccountChildren(context.Context, *ListBillingAccountChildrenRequest) (*ListBillingAccountChildrenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBillingAccountChildren not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -256,20 +282,38 @@ func _BillingService_ListCreditContractConsumptions_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BillingService_GetBillingAccountStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBillingAccountStatusRequest)
+func _BillingService_GetBillingAccountParent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingAccountParentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServiceServer).GetBillingAccountStatus(ctx, in)
+		return srv.(BillingServiceServer).GetBillingAccountParent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BillingService_GetBillingAccountStatus_FullMethodName,
+		FullMethod: BillingService_GetBillingAccountParent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServiceServer).GetBillingAccountStatus(ctx, req.(*GetBillingAccountStatusRequest))
+		return srv.(BillingServiceServer).GetBillingAccountParent(ctx, req.(*GetBillingAccountParentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_ListBillingAccountChildren_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingAccountChildrenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ListBillingAccountChildren(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_ListBillingAccountChildren_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ListBillingAccountChildren(ctx, req.(*ListBillingAccountChildrenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -298,8 +342,12 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BillingService_ListCreditContractConsumptions_Handler,
 		},
 		{
-			MethodName: "GetBillingAccountStatus",
-			Handler:    _BillingService_GetBillingAccountStatus_Handler,
+			MethodName: "GetBillingAccountParent",
+			Handler:    _BillingService_GetBillingAccountParent_Handler,
+		},
+		{
+			MethodName: "ListBillingAccountChildren",
+			Handler:    _BillingService_ListBillingAccountChildren_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

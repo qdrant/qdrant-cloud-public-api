@@ -682,11 +682,11 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
 export declare const CreditContractSchema: GenMessage<CreditContract, {validType: CreditContractValid}>;
 
 /**
- * GetBillingAccountStatusRequest is the request for the GetBillingAccountStatus RPC.
+ * GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
  *
- * @generated from message qdrant.cloud.billing.v1.GetBillingAccountStatusRequest
+ * @generated from message qdrant.cloud.billing.v1.GetBillingAccountParentRequest
  */
-export declare type GetBillingAccountStatusRequest = Message<"qdrant.cloud.billing.v1.GetBillingAccountStatusRequest"> & {
+export declare type GetBillingAccountParentRequest = Message<"qdrant.cloud.billing.v1.GetBillingAccountParentRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -696,49 +696,80 @@ export declare type GetBillingAccountStatusRequest = Message<"qdrant.cloud.billi
   accountId: string;
 };
 
-export declare type GetBillingAccountStatusRequestValid = GetBillingAccountStatusRequest;
+export declare type GetBillingAccountParentRequestValid = GetBillingAccountParentRequest;
 
 /**
- * Describes the message qdrant.cloud.billing.v1.GetBillingAccountStatusRequest.
- * Use `create(GetBillingAccountStatusRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.GetBillingAccountParentRequest.
+ * Use `create(GetBillingAccountParentRequestSchema)` to create a new message.
  */
-export declare const GetBillingAccountStatusRequestSchema: GenMessage<GetBillingAccountStatusRequest, {validType: GetBillingAccountStatusRequestValid}>;
+export declare const GetBillingAccountParentRequestSchema: GenMessage<GetBillingAccountParentRequest, {validType: GetBillingAccountParentRequestValid}>;
 
 /**
- * GetBillingAccountStatusResponse describes the account's position in the billing hierarchy.
+ * GetBillingAccountParentResponse contains the parent account for the requested account.
  *
- * @generated from message qdrant.cloud.billing.v1.GetBillingAccountStatusResponse
+ * @generated from message qdrant.cloud.billing.v1.GetBillingAccountParentResponse
  */
-export declare type GetBillingAccountStatusResponse = Message<"qdrant.cloud.billing.v1.GetBillingAccountStatusResponse"> & {
+export declare type GetBillingAccountParentResponse = Message<"qdrant.cloud.billing.v1.GetBillingAccountParentResponse"> & {
   /**
-   * Whether this account consolidates billing for child accounts.
+   * The identifier of the parent billing account.
    *
-   * @generated from field: bool is_billing_anchor = 1;
+   * @generated from field: string parent_account_id = 1;
    */
-  isBillingAnchor: boolean;
-
-  /**
-   * The identifier of the parent billing anchor account, if this account has one.
-   *
-   * @generated from field: optional string parent_account_id = 2;
-   */
-  parentAccountId?: string;
-
-  /**
-   * Whether this account is a member of an organization.
-   *
-   * @generated from field: bool is_org_member = 3;
-   */
-  isOrgMember: boolean;
+  parentAccountId: string;
 };
 
-export declare type GetBillingAccountStatusResponseValid = GetBillingAccountStatusResponse;
+export declare type GetBillingAccountParentResponseValid = GetBillingAccountParentResponse;
 
 /**
- * Describes the message qdrant.cloud.billing.v1.GetBillingAccountStatusResponse.
- * Use `create(GetBillingAccountStatusResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.billing.v1.GetBillingAccountParentResponse.
+ * Use `create(GetBillingAccountParentResponseSchema)` to create a new message.
  */
-export declare const GetBillingAccountStatusResponseSchema: GenMessage<GetBillingAccountStatusResponse, {validType: GetBillingAccountStatusResponseValid}>;
+export declare const GetBillingAccountParentResponseSchema: GenMessage<GetBillingAccountParentResponse, {validType: GetBillingAccountParentResponseValid}>;
+
+/**
+ * ListBillingAccountChildrenRequest is the request for the ListBillingAccountChildren RPC.
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+ */
+export declare type ListBillingAccountChildrenRequest = Message<"qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListBillingAccountChildrenRequestValid = ListBillingAccountChildrenRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest.
+ * Use `create(ListBillingAccountChildrenRequestSchema)` to create a new message.
+ */
+export declare const ListBillingAccountChildrenRequestSchema: GenMessage<ListBillingAccountChildrenRequest, {validType: ListBillingAccountChildrenRequestValid}>;
+
+/**
+ * ListBillingAccountChildrenResponse contains the child accounts for the requested account.
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+ */
+export declare type ListBillingAccountChildrenResponse = Message<"qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse"> & {
+  /**
+   * The identifiers of the child billing accounts.
+   *
+   * @generated from field: repeated string child_account_ids = 1;
+   */
+  childAccountIds: string[];
+};
+
+export declare type ListBillingAccountChildrenResponseValid = ListBillingAccountChildrenResponse;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse.
+ * Use `create(ListBillingAccountChildrenResponseSchema)` to create a new message.
+ */
+export declare const ListBillingAccountChildrenResponseSchema: GenMessage<ListBillingAccountChildrenResponse, {validType: ListBillingAccountChildrenResponseValid}>;
 
 /**
  * BillingFrequency represents the invoicing cadence for a prepaid credit contract.
@@ -896,16 +927,30 @@ export declare const BillingService: GenService<{
     output: typeof ListCreditContractConsumptionsResponseSchema;
   },
   /**
-   * Returns the billing hierarchy status for the account identified by the given ID.
+   * Returns the parent billing account for the account identified by the given ID.
+   * Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
    * Required permissions:
    * - read:payment_information
    *
-   * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountStatus
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent
    */
-  getBillingAccountStatus: {
+  getBillingAccountParent: {
     methodKind: "unary";
-    input: typeof GetBillingAccountStatusRequestSchema;
-    output: typeof GetBillingAccountStatusResponseSchema;
+    input: typeof GetBillingAccountParentRequestSchema;
+    output: typeof GetBillingAccountParentResponseSchema;
+  },
+  /**
+   * Lists all child accounts for the billing parent account identified by the given ID.
+   * Returns an empty list if the account has no children.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren
+   */
+  listBillingAccountChildren: {
+    methodKind: "unary";
+    input: typeof ListBillingAccountChildrenRequestSchema;
+    output: typeof ListBillingAccountChildrenResponseSchema;
   },
 }>;
 

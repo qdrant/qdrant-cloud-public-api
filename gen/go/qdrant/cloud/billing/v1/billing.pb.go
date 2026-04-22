@@ -1026,8 +1026,8 @@ func (x *CreditContract) GetNotes() string {
 	return ""
 }
 
-// GetBillingAccountStatusRequest is the request for the GetBillingAccountStatus RPC.
-type GetBillingAccountStatusRequest struct {
+// GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
+type GetBillingAccountParentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
@@ -1036,20 +1036,20 @@ type GetBillingAccountStatusRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetBillingAccountStatusRequest) Reset() {
-	*x = GetBillingAccountStatusRequest{}
+func (x *GetBillingAccountParentRequest) Reset() {
+	*x = GetBillingAccountParentRequest{}
 	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetBillingAccountStatusRequest) String() string {
+func (x *GetBillingAccountParentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetBillingAccountStatusRequest) ProtoMessage() {}
+func (*GetBillingAccountParentRequest) ProtoMessage() {}
 
-func (x *GetBillingAccountStatusRequest) ProtoReflect() protoreflect.Message {
+func (x *GetBillingAccountParentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1061,45 +1061,41 @@ func (x *GetBillingAccountStatusRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetBillingAccountStatusRequest.ProtoReflect.Descriptor instead.
-func (*GetBillingAccountStatusRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetBillingAccountParentRequest.ProtoReflect.Descriptor instead.
+func (*GetBillingAccountParentRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *GetBillingAccountStatusRequest) GetAccountId() string {
+func (x *GetBillingAccountParentRequest) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-// GetBillingAccountStatusResponse describes the account's position in the billing hierarchy.
-type GetBillingAccountStatusResponse struct {
+// GetBillingAccountParentResponse contains the parent account for the requested account.
+type GetBillingAccountParentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Whether this account consolidates billing for child accounts.
-	IsBillingAnchor bool `protobuf:"varint,1,opt,name=is_billing_anchor,json=isBillingAnchor,proto3" json:"is_billing_anchor,omitempty"`
-	// The identifier of the parent billing anchor account, if this account has one.
-	ParentAccountId *string `protobuf:"bytes,2,opt,name=parent_account_id,json=parentAccountId,proto3,oneof" json:"parent_account_id,omitempty"`
-	// Whether this account is a member of an organization.
-	IsOrgMember   bool `protobuf:"varint,3,opt,name=is_org_member,json=isOrgMember,proto3" json:"is_org_member,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// The identifier of the parent billing account.
+	ParentAccountId string `protobuf:"bytes,1,opt,name=parent_account_id,json=parentAccountId,proto3" json:"parent_account_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetBillingAccountStatusResponse) Reset() {
-	*x = GetBillingAccountStatusResponse{}
+func (x *GetBillingAccountParentResponse) Reset() {
+	*x = GetBillingAccountParentResponse{}
 	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetBillingAccountStatusResponse) String() string {
+func (x *GetBillingAccountParentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetBillingAccountStatusResponse) ProtoMessage() {}
+func (*GetBillingAccountParentResponse) ProtoMessage() {}
 
-func (x *GetBillingAccountStatusResponse) ProtoReflect() protoreflect.Message {
+func (x *GetBillingAccountParentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1111,30 +1107,109 @@ func (x *GetBillingAccountStatusResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetBillingAccountStatusResponse.ProtoReflect.Descriptor instead.
-func (*GetBillingAccountStatusResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetBillingAccountParentResponse.ProtoReflect.Descriptor instead.
+func (*GetBillingAccountParentResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *GetBillingAccountStatusResponse) GetIsBillingAnchor() bool {
+func (x *GetBillingAccountParentResponse) GetParentAccountId() string {
 	if x != nil {
-		return x.IsBillingAnchor
-	}
-	return false
-}
-
-func (x *GetBillingAccountStatusResponse) GetParentAccountId() string {
-	if x != nil && x.ParentAccountId != nil {
-		return *x.ParentAccountId
+		return x.ParentAccountId
 	}
 	return ""
 }
 
-func (x *GetBillingAccountStatusResponse) GetIsOrgMember() bool {
+// ListBillingAccountChildrenRequest is the request for the ListBillingAccountChildren RPC.
+type ListBillingAccountChildrenRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format).
+	// This is a required field.
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBillingAccountChildrenRequest) Reset() {
+	*x = ListBillingAccountChildrenRequest{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBillingAccountChildrenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBillingAccountChildrenRequest) ProtoMessage() {}
+
+func (x *ListBillingAccountChildrenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[16]
 	if x != nil {
-		return x.IsOrgMember
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return false
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBillingAccountChildrenRequest.ProtoReflect.Descriptor instead.
+func (*ListBillingAccountChildrenRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListBillingAccountChildrenRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+// ListBillingAccountChildrenResponse contains the child accounts for the requested account.
+type ListBillingAccountChildrenResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifiers of the child billing accounts.
+	ChildAccountIds []string `protobuf:"bytes,1,rep,name=child_account_ids,json=childAccountIds,proto3" json:"child_account_ids,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListBillingAccountChildrenResponse) Reset() {
+	*x = ListBillingAccountChildrenResponse{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBillingAccountChildrenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBillingAccountChildrenResponse) ProtoMessage() {}
+
+func (x *ListBillingAccountChildrenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBillingAccountChildrenResponse.ProtoReflect.Descriptor instead.
+func (*ListBillingAccountChildrenResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListBillingAccountChildrenResponse) GetChildAccountIds() []string {
+	if x != nil {
+		return x.ChildAccountIds
+	}
+	return nil
 }
 
 var File_qdrant_cloud_billing_v1_billing_proto protoreflect.FileDescriptor
@@ -1214,14 +1289,17 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\tactive_to\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\bactiveTo\x12\"\n" +
 	"\x05notes\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x05notes\x88\x01\x01B\b\n" +
 	"\x06_notes\"I\n" +
-	"\x1eGetBillingAccountStatusRequest\x12'\n" +
+	"\x1eGetBillingAccountParentRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xc2\x01\n" +
-	"\x1fGetBillingAccountStatusResponse\x12*\n" +
-	"\x11is_billing_anchor\x18\x01 \x01(\bR\x0fisBillingAnchor\x129\n" +
-	"\x11parent_account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fparentAccountId\x88\x01\x01\x12\"\n" +
-	"\ris_org_member\x18\x03 \x01(\bR\visOrgMemberB\x14\n" +
-	"\x12_parent_account_id*\xb6\x01\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n" +
+	"\x1fGetBillingAccountParentResponse\x124\n" +
+	"\x11parent_account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fparentAccountId\"L\n" +
+	"!ListBillingAccountChildrenRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"_\n" +
+	"\"ListBillingAccountChildrenResponse\x129\n" +
+	"\x11child_account_ids\x18\x01 \x03(\tB\r\xbaH\n" +
+	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\x0fchildAccountIds*\xb6\x01\n" +
 	"\x10BillingFrequency\x12!\n" +
 	"\x1dBILLING_FREQUENCY_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19BILLING_FREQUENCY_MONTHLY\x10\x01\x12\x1f\n" +
@@ -1234,13 +1312,15 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xec\b\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xd8\n" +
+	"\n" +
 	"\x0eBillingService\x12\xbf\x01\n" +
 	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n" +
 	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdc\x01\n" +
 	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"Z\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\x89\x02\n" +
 	"\x1eListCreditContractConsumptions\x12>.qdrant.cloud.billing.v1.ListCreditContractConsumptionsRequest\x1a?.qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse\"f\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02D\x12B/api/billing/v1/accounts/{account_id}/credit-contract-consumptions\x12\xde\x01\n" +
-	"\x17GetBillingAccountStatus\x127.qdrant.cloud.billing.v1.GetBillingAccountStatusRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountStatusResponse\"P\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02.\x12,/api/billing/v1/accounts/{account_id}/status\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"\x17GetBillingAccountParent\x127.qdrant.cloud.billing.v1.GetBillingAccountParentRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountParentResponse\"P\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02.\x12,/api/billing/v1/accounts/{account_id}/parent\x12\xe9\x01\n" +
+	"\x1aListBillingAccountChildren\x12:.qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest\x1a;.qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/children\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.billing.v1B\fBillingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3"
 
 var (
@@ -1256,7 +1336,7 @@ func file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_billing_v1_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(BillingFrequency)(0),                          // 0: qdrant.cloud.billing.v1.BillingFrequency
 	(InvoiceStatus)(0),                             // 1: qdrant.cloud.billing.v1.InvoiceStatus
@@ -1274,36 +1354,40 @@ var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(*ListCreditContractConsumptionsResponse)(nil), // 13: qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse
 	(*CreditContractConsumption)(nil),              // 14: qdrant.cloud.billing.v1.CreditContractConsumption
 	(*CreditContract)(nil),                         // 15: qdrant.cloud.billing.v1.CreditContract
-	(*GetBillingAccountStatusRequest)(nil),         // 16: qdrant.cloud.billing.v1.GetBillingAccountStatusRequest
-	(*GetBillingAccountStatusResponse)(nil),        // 17: qdrant.cloud.billing.v1.GetBillingAccountStatusResponse
-	(*timestamppb.Timestamp)(nil),                  // 18: google.protobuf.Timestamp
+	(*GetBillingAccountParentRequest)(nil),         // 16: qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	(*GetBillingAccountParentResponse)(nil),        // 17: qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	(*ListBillingAccountChildrenRequest)(nil),      // 18: qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	(*ListBillingAccountChildrenResponse)(nil),     // 19: qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	(*timestamppb.Timestamp)(nil),                  // 20: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	6,  // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
 	7,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
-	18, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
+	20, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
 	1,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
 	8,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
 	9,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	18, // 6: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
-	18, // 7: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
+	20, // 6: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
+	20, // 7: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
 	15, // 8: qdrant.cloud.billing.v1.ListCreditContractsResponse.items:type_name -> qdrant.cloud.billing.v1.CreditContract
 	14, // 9: qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse.items:type_name -> qdrant.cloud.billing.v1.CreditContractConsumption
 	0,  // 10: qdrant.cloud.billing.v1.CreditContract.billing_frequency:type_name -> qdrant.cloud.billing.v1.BillingFrequency
-	18, // 11: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
-	18, // 12: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
+	20, // 11: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
+	20, // 12: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
 	2,  // 13: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
 	4,  // 14: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
 	10, // 15: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
 	12, // 16: qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions:input_type -> qdrant.cloud.billing.v1.ListCreditContractConsumptionsRequest
-	16, // 17: qdrant.cloud.billing.v1.BillingService.GetBillingAccountStatus:input_type -> qdrant.cloud.billing.v1.GetBillingAccountStatusRequest
-	3,  // 18: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	5,  // 19: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	11, // 20: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
-	13, // 21: qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions:output_type -> qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse
-	17, // 22: qdrant.cloud.billing.v1.BillingService.GetBillingAccountStatus:output_type -> qdrant.cloud.billing.v1.GetBillingAccountStatusResponse
-	18, // [18:23] is the sub-list for method output_type
-	13, // [13:18] is the sub-list for method input_type
+	16, // 17: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	18, // 18: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	3,  // 19: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	5,  // 20: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	11, // 21: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
+	13, // 22: qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions:output_type -> qdrant.cloud.billing.v1.ListCreditContractConsumptionsResponse
+	17, // 23: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	19, // 24: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	19, // [19:25] is the sub-list for method output_type
+	13, // [13:19] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1320,14 +1404,13 @@ func file_qdrant_cloud_billing_v1_billing_proto_init() {
 		(*Discount_Fixed)(nil),
 	}
 	file_qdrant_cloud_billing_v1_billing_proto_msgTypes[13].OneofWrappers = []any{}
-	file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_billing_v1_billing_proto_rawDesc), len(file_qdrant_cloud_billing_v1_billing_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

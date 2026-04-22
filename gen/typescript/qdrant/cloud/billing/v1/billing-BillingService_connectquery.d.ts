@@ -37,10 +37,20 @@ export const listCreditContracts: typeof BillingService["method"]["listCreditCon
  */
 export const listCreditContractConsumptions: typeof BillingService["method"]["listCreditContractConsumptions"];
 /**
- * Returns the billing hierarchy status for the account identified by the given ID.
+ * Returns the parent billing account for the account identified by the given ID.
+ * Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
  * Required permissions:
  * - read:payment_information
  *
- * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountStatus
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent
  */
-export const getBillingAccountStatus: typeof BillingService["method"]["getBillingAccountStatus"];
+export const getBillingAccountParent: typeof BillingService["method"]["getBillingAccountParent"];
+/**
+ * Lists all child accounts for the billing parent account identified by the given ID.
+ * Returns an empty list if the account has no children.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren
+ */
+export const listBillingAccountChildren: typeof BillingService["method"]["listBillingAccountChildren"];

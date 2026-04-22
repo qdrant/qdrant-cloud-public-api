@@ -51,14 +51,25 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contract-consumptions"};
   }
-  // Returns the billing hierarchy status for the account identified by the given ID.
+  // Returns the parent billing account for the account identified by the given ID.
+  // Returns NOT_FOUND if the account has no parent.
   // Required permissions:
   // - read:payment_information
-  rpc GetBillingAccountStatus(GetBillingAccountStatusRequest) returns (GetBillingAccountStatusResponse) {
+  rpc GetBillingAccountParent(GetBillingAccountParentRequest) returns (GetBillingAccountParentResponse) {
     // permissions
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/status"};
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/parent"};
+  }
+  // Lists all child accounts for the billing parent account identified by the given ID.
+  // Returns an empty list if the account has no children.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListBillingAccountChildren(ListBillingAccountChildrenRequest) returns (ListBillingAccountChildrenResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/children"};
   }
 }
 
@@ -237,22 +248,32 @@ enum BillingFrequency {
   BILLING_FREQUENCY_ANNUAL = 4;
 }
 
-// GetBillingAccountStatusRequest is the request for the GetBillingAccountStatus RPC.
-message GetBillingAccountStatusRequest {
+// GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
+message GetBillingAccountParentRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// GetBillingAccountStatusResponse describes the account's position in the billing hierarchy.
-message GetBillingAccountStatusResponse {
-  // Whether this account consolidates billing for child accounts.
-  bool is_billing_anchor = 1;
-  // The identifier of the parent billing anchor account, if this account has one.
-  optional string parent_account_id = 2 [(buf.validate.field).string = {uuid: true}];
-  // Whether this account is a member of an organization.
-  bool is_org_member = 3;
+// GetBillingAccountParentResponse contains the parent account for the requested account.
+message GetBillingAccountParentResponse {
+  // The identifier of the parent billing account.
+  string parent_account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListBillingAccountChildrenRequest is the request for the ListBillingAccountChildren RPC.
+message ListBillingAccountChildrenRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// ListBillingAccountChildrenResponse contains the child accounts for the requested account.
+message ListBillingAccountChildrenResponse {
+  // The identifiers of the child billing accounts.
+  repeated string child_account_ids = 1 [(buf.validate.field).repeated.items.string = {uuid: true}];
 }
 
 // The possible status of an invoice.
