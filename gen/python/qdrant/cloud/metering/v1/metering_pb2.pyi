@@ -53,7 +53,14 @@ class MonthlyMeteringSummary(_message.Message):
     def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class MeteringItem(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "cluster_name", "start_time", "end_time", "billable_entity_id", "billable_entity_reference_name", "billable_entity_type", "price_per_hour", "usage_hours", "amount_millicents", "discount_amount_millicents", "discount_amount_percent", "currency")
+    __slots__ = ("account_id", "cluster_id", "cluster_name", "start_time", "end_time", "billable_entity_id", "billable_entity_reference_name", "billable_entity_type", "price_per_hour", "usage_hours", "amount_millicents", "discount_amount_millicents", "discount_amount_percent", "currency", "cluster_labels")
+    class ClusterLabelsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -68,6 +75,7 @@ class MeteringItem(_message.Message):
     DISCOUNT_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
     DISCOUNT_AMOUNT_PERCENT_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_LABELS_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     cluster_name: str
@@ -82,4 +90,5 @@ class MeteringItem(_message.Message):
     discount_amount_millicents: int
     discount_amount_percent: float
     currency: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_reference_name: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
+    cluster_labels: _containers.ScalarMap[str, str]
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_reference_name: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ...) -> None: ...

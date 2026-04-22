@@ -334,7 +334,9 @@ type MeteringItem struct {
 	// The Discount applied as a percentage (e.g., 12.5).
 	DiscountAmountPercent *float64 `protobuf:"fixed64,12,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
 	// Currency of the different amount values, in ISO 4217 format (e.g., "USD").
-	Currency      string `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Labels associated with the cluster at the time of metering.
+	ClusterLabels map[string]string `protobuf:"bytes,15,rep,name=cluster_labels,json=clusterLabels,proto3" json:"cluster_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -467,6 +469,13 @@ func (x *MeteringItem) GetCurrency() string {
 	return ""
 }
 
+func (x *MeteringItem) GetClusterLabels() map[string]string {
+	if x != nil {
+		return x.ClusterLabels
+	}
+	return nil
+}
+
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
@@ -489,7 +498,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x124\n" +
 	"\x11amount_millicents\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\x8d\b\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\"\xb1\t\n" +
 	"\fMeteringItem\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -510,7 +519,11 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x1adiscount_amount_millicents\x18\v \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x01R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
 	"\x17discount_amount_percent\x18\f \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x02R\x15discountAmountPercent\x88\x01\x01\x120\n" +
 	"\bcurrency\x18\r \x01(\tB\x14\xbaH\x11r\x0f2\n" +
-	"^[A-Z]{3}$\x98\x01\x03R\bcurrency:o\xbaHl\x1aj\n" +
+	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\x12`\n" +
+	"\x0ecluster_labels\x18\x0f \x03(\v29.qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntryR\rclusterLabels\x1a@\n" +
+	"\x12ClusterLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:o\xbaHl\x1aj\n" +
 	"$metering_item.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB!\n" +
 	"\x1f_billable_entity_reference_nameB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
@@ -532,7 +545,7 @@ func file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_metering_v1_metering_proto_rawDescData
 }
 
-var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*ListMonthlyMeteringsRequest)(nil),  // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
 	(*ListMonthlyMeteringsResponse)(nil), // 1: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
@@ -540,22 +553,24 @@ var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*ListMeteringsResponse)(nil),        // 3: qdrant.cloud.metering.v1.ListMeteringsResponse
 	(*MonthlyMeteringSummary)(nil),       // 4: qdrant.cloud.metering.v1.MonthlyMeteringSummary
 	(*MeteringItem)(nil),                 // 5: qdrant.cloud.metering.v1.MeteringItem
-	(*timestamppb.Timestamp)(nil),        // 6: google.protobuf.Timestamp
+	nil,                                  // 6: qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	(*timestamppb.Timestamp)(nil),        // 7: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_metering_v1_metering_proto_depIdxs = []int32{
 	4, // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MonthlyMeteringSummary
 	5, // 1: qdrant.cloud.metering.v1.ListMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MeteringItem
-	6, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
-	6, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
-	0, // 4: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
-	2, // 5: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
-	1, // 6: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
-	3, // 7: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	7, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
+	7, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
+	6, // 4: qdrant.cloud.metering.v1.MeteringItem.cluster_labels:type_name -> qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	0, // 5: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
+	2, // 6: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
+	1, // 7: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
+	3, // 8: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_metering_v1_metering_proto_init() }
@@ -570,7 +585,7 @@ func file_qdrant_cloud_metering_v1_metering_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_metering_v1_metering_proto_rawDesc), len(file_qdrant_cloud_metering_v1_metering_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

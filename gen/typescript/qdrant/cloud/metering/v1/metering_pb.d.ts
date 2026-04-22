@@ -275,6 +275,13 @@ export declare type MeteringItem = Message<"qdrant.cloud.metering.v1.MeteringIte
    * @generated from field: string currency = 13;
    */
   currency: string;
+
+  /**
+   * Labels associated with the cluster at the time of metering.
+   *
+   * @generated from field: map<string, string> cluster_labels = 15;
+   */
+  clusterLabels: { [key: string]: string };
 };
 
 /**
@@ -381,6 +388,13 @@ export declare type MeteringItemValid = Message<"qdrant.cloud.metering.v1.Meteri
    * @generated from field: string currency = 13;
    */
   currency: string;
+
+  /**
+   * Labels associated with the cluster at the time of metering.
+   *
+   * @generated from field: map<string, string> cluster_labels = 15;
+   */
+  clusterLabels: { [key: string]: string };
 };
 
 /**
