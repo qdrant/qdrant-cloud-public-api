@@ -16,9 +16,41 @@
     "application/json"
   ],
   "paths": {
+    "/api/billing/v1/accounts/{accountId}/children": {
+      "get": {
+        "summary": "Lists all child accounts for the billing parent account identified by the given ID.\nReturns an empty list if the account has no children.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListBillingAccountChildren",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBillingAccountChildrenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/billing/v1/accounts/{accountId}/credit-contract-consumptions": {
       "get": {
-        "summary": "Lists consumption data for all credit contracts for the account identified by the given ID.\nConsumption data includes the total, used, and remaining amounts sourced from Orb.\nRequired permissions:\n- read:payment_information",
+        "summary": "Lists consumption data for all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
         "operationId": "BillingService_ListCreditContractConsumptions",
         "responses": {
           "200": {
@@ -121,6 +153,38 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v1ListInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/parent": {
+      "get": {
+        "summary": "Returns the parent billing account for the account identified by the given ID.\nReturns NOT_FOUND if the account has no parent.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_GetBillingAccountParent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBillingAccountParentResponse"
             }
           },
           "default": {
@@ -310,6 +374,16 @@
       },
       "description": "DiscountPercentage represents a percentage-based discount."
     },
+    "v1GetBillingAccountParentResponse": {
+      "type": "object",
+      "properties": {
+        "parentAccountId": {
+          "type": "string",
+          "description": "The identifier of the parent billing account."
+        }
+      },
+      "description": "GetBillingAccountParentResponse contains the parent account for the requested account."
+    },
     "v1Invoice": {
       "type": "object",
       "properties": {
@@ -354,6 +428,19 @@
       ],
       "default": "INVOICE_STATUS_UNSPECIFIED",
       "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListBillingAccountChildrenResponse": {
+      "type": "object",
+      "properties": {
+        "childAccountIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the child billing accounts."
+        }
+      },
+      "description": "ListBillingAccountChildrenResponse contains the child accounts for the requested account."
     },
     "v1ListCreditContractConsumptionsResponse": {
       "type": "object",

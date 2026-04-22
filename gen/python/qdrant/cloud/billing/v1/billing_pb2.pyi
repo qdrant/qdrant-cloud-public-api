@@ -166,3 +166,27 @@ class CreditContract(_message.Message):
     active_to: _timestamp_pb2.Timestamp
     notes: str
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ...) -> None: ...
+
+class GetBillingAccountParentRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class GetBillingAccountParentResponse(_message.Message):
+    __slots__ = ("parent_account_id",)
+    PARENT_ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    parent_account_id: str
+    def __init__(self, parent_account_id: _Optional[str] = ...) -> None: ...
+
+class ListBillingAccountChildrenRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListBillingAccountChildrenResponse(_message.Message):
+    __slots__ = ("child_account_ids",)
+    CHILD_ACCOUNT_IDS_FIELD_NUMBER: _ClassVar[int]
+    child_account_ids: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, child_account_ids: _Optional[_Iterable[str]] = ...) -> None: ...

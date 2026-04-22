@@ -35,6 +35,16 @@ class BillingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.FromString,
                 _registered_method=True)
+        self.GetBillingAccountParent = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/GetBillingAccountParent',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentResponse.FromString,
+                _registered_method=True)
+        self.ListBillingAccountChildren = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/ListBillingAccountChildren',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenResponse.FromString,
+                _registered_method=True)
 
 
 class BillingServiceServicer(object):
@@ -70,7 +80,26 @@ class BillingServiceServicer(object):
 
     def ListCreditContractConsumptions(self, request, context):
         """Lists consumption data for all credit contracts for the account identified by the given ID.
-        Consumption data includes the total, used, and remaining amounts sourced from Orb.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBillingAccountParent(self, request, context):
+        """Returns the parent billing account for the account identified by the given ID.
+        Returns NOT_FOUND if the account has no parent.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListBillingAccountChildren(self, request, context):
+        """Lists all child accounts for the billing parent account identified by the given ID.
+        Returns an empty list if the account has no children.
         Required permissions:
         - read:payment_information
         """
@@ -100,6 +129,16 @@ def add_BillingServiceServicer_to_server(servicer, server):
                     servicer.ListCreditContractConsumptions,
                     request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.SerializeToString,
+            ),
+            'GetBillingAccountParent': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBillingAccountParent,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentResponse.SerializeToString,
+            ),
+            'ListBillingAccountChildren': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListBillingAccountChildren,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -211,6 +250,60 @@ class BillingService(object):
             '/qdrant.cloud.billing.v1.BillingService/ListCreditContractConsumptions',
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsRequest.SerializeToString,
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractConsumptionsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBillingAccountParent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.billing.v1.BillingService/GetBillingAccountParent',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListBillingAccountChildren(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.billing.v1.BillingService/ListBillingAccountChildren',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListBillingAccountChildrenResponse.FromString,
             options,
             channel_credentials,
             insecure,

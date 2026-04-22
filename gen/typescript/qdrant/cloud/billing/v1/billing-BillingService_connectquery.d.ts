@@ -30,10 +30,27 @@ export const listDiscounts: typeof BillingService["method"]["listDiscounts"];
 export const listCreditContracts: typeof BillingService["method"]["listCreditContracts"];
 /**
  * Lists consumption data for all credit contracts for the account identified by the given ID.
- * Consumption data includes the total, used, and remaining amounts sourced from Orb.
  * Required permissions:
  * - read:payment_information
  *
  * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions
  */
 export const listCreditContractConsumptions: typeof BillingService["method"]["listCreditContractConsumptions"];
+/**
+ * Returns the parent billing account for the account identified by the given ID.
+ * Returns NOT_FOUND if the account has no parent.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent
+ */
+export const getBillingAccountParent: typeof BillingService["method"]["getBillingAccountParent"];
+/**
+ * Lists all child accounts for the billing parent account identified by the given ID.
+ * Returns an empty list if the account has no children.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren
+ */
+export const listBillingAccountChildren: typeof BillingService["method"]["listBillingAccountChildren"];
