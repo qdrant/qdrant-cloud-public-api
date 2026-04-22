@@ -219,6 +219,13 @@
         "currency": {
           "type": "string",
           "description": "Currency of the different amount values, in ISO 4217 format (e.g., \"USD\")."
+        },
+        "clusterLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Labels associated with the cluster at the time of metering."
         }
       },
       "description": "Metering represents a detailed metering item."

@@ -137,4 +137,6 @@ message MeteringItem {
     len: 3
     pattern: "^[A-Z]{3}$"
   }];
+  // Labels associated with the cluster at the time of metering.
+  map<string, string> cluster_labels = 15;
 }
