@@ -50,7 +50,7 @@ type BillingServiceClient interface {
 	// - read:payment_information
 	ListCreditContractConsumptions(ctx context.Context, in *ListCreditContractConsumptionsRequest, opts ...grpc.CallOption) (*ListCreditContractConsumptionsResponse, error)
 	// Returns the parent billing account for the account identified by the given ID.
-	// Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
+	// Returns NOT_FOUND if the account has no parent.
 	// Required permissions:
 	// - read:payment_information
 	GetBillingAccountParent(ctx context.Context, in *GetBillingAccountParentRequest, opts ...grpc.CallOption) (*GetBillingAccountParentResponse, error)
@@ -152,7 +152,7 @@ type BillingServiceServer interface {
 	// - read:payment_information
 	ListCreditContractConsumptions(context.Context, *ListCreditContractConsumptionsRequest) (*ListCreditContractConsumptionsResponse, error)
 	// Returns the parent billing account for the account identified by the given ID.
-	// Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
+	// Returns NOT_FOUND if the account has no parent.
 	// Required permissions:
 	// - read:payment_information
 	GetBillingAccountParent(context.Context, *GetBillingAccountParentRequest) (*GetBillingAccountParentResponse, error)

@@ -928,7 +928,7 @@ export declare const BillingService: GenService<{
   },
   /**
    * Returns the parent billing account for the account identified by the given ID.
-   * Returns NOT_FOUND if the account has no parent (i.e. it is itself a billing parent).
+   * Returns NOT_FOUND if the account has no parent.
    * Required permissions:
    * - read:payment_information
    *
