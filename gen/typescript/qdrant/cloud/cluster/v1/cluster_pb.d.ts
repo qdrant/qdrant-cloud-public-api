@@ -1972,6 +1972,7 @@ export declare type ClusterState = Message<"qdrant.cloud.cluster.v1.ClusterState
 
   /**
    * Specifies whether some operations are supported by cluster or not.
+   * Optional during rollout; will become required once all producers populate it.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterCapabilities capabilities = 11;
    */
@@ -2064,10 +2065,11 @@ export declare type ClusterStateValid = Message<"qdrant.cloud.cluster.v1.Cluster
 
   /**
    * Specifies whether some operations are supported by cluster or not.
+   * Optional during rollout; will become required once all producers populate it.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterCapabilities capabilities = 11;
    */
-  capabilities: ClusterCapabilitiesValid;
+  capabilities?: ClusterCapabilitiesValid;
 };
 
 /**
@@ -2415,6 +2417,7 @@ export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.Clust
   /**
    * Whether the StorageClass used by the cluster supports disk expansion or not.
    * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
+   * Optional during rollout; will become required once all producers populate it.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo disk_expansion = 1;
    */
@@ -2423,6 +2426,7 @@ export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.Clust
   /**
    * Whether it is possible to take a backup for the cluster or not.
    * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
+   * Optional during rollout; will become required once all producers populate it.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo backup = 2;
    */
@@ -2430,41 +2434,14 @@ export declare type ClusterCapabilities = Message<"qdrant.cloud.cluster.v1.Clust
 
   /**
    * Whether the cluster can be scaled up or down.
+   * Optional during rollout; will become required once all producers populate it.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 3;
    */
   scalabilityInfo?: ClusterScalabilityInfo;
 };
 
-/**
- * ClusterCapabilities specifies whether some actions are supported by the cluster or not.
- *
- * @generated from message qdrant.cloud.cluster.v1.ClusterCapabilities
- */
-export declare type ClusterCapabilitiesValid = Message<"qdrant.cloud.cluster.v1.ClusterCapabilities"> & {
-  /**
-   * Whether the StorageClass used by the cluster supports disk expansion or not.
-   * Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo disk_expansion = 1;
-   */
-  diskExpansion: ClusterDiskExpansionSupportInfoValid;
-
-  /**
-   * Whether it is possible to take a backup for the cluster or not.
-   * Backup tab will be shown or hidden based on this for hybrid cloud clusters.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo backup = 2;
-   */
-  backup: ClusterBackupSupportInfoValid;
-
-  /**
-   * Whether the cluster can be scaled up or down.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterScalabilityInfo scalability_info = 3;
-   */
-  scalabilityInfo: ClusterScalabilityInfoValid;
-};
+export declare type ClusterCapabilitiesValid = ClusterCapabilities;
 
 /**
  * Describes the message qdrant.cloud.cluster.v1.ClusterCapabilities.

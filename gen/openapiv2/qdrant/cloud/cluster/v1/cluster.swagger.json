@@ -807,15 +807,15 @@
       "properties": {
         "diskExpansion": {
           "$ref": "#/definitions/v1ClusterDiskExpansionSupportInfo",
-          "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
+          "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters.\nOptional during rollout; will become required once all producers populate it."
         },
         "backup": {
           "$ref": "#/definitions/v1ClusterBackupSupportInfo",
-          "description": "Whether it is possible to take a backup for the cluster or not.\nBackup tab will be shown or hidden based on this for hybrid cloud clusters."
+          "description": "Whether it is possible to take a backup for the cluster or not.\nBackup tab will be shown or hidden based on this for hybrid cloud clusters.\nOptional during rollout; will become required once all producers populate it."
         },
         "scalabilityInfo": {
           "$ref": "#/definitions/v1ClusterScalabilityInfo",
-          "description": "Whether the cluster can be scaled up or down."
+          "description": "Whether the cluster can be scaled up or down.\nOptional during rollout; will become required once all producers populate it."
         }
       },
       "description": "ClusterCapabilities specifies whether some actions are supported by the cluster or not."
@@ -1227,7 +1227,7 @@
         },
         "capabilities": {
           "$ref": "#/definitions/v1ClusterCapabilities",
-          "description": "Specifies whether some operations are supported by cluster or not."
+          "description": "Specifies whether some operations are supported by cluster or not.\nOptional during rollout; will become required once all producers populate it."
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
