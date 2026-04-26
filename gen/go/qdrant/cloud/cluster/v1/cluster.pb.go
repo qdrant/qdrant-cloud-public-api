@@ -3298,6 +3298,7 @@ type ClusterState struct {
 	// If enabled, you can generate JWT tokens with fine-grained rules for access control.
 	JwtRbac bool `protobuf:"varint,10,opt,name=jwt_rbac,json=jwtRbac,proto3" json:"jwt_rbac,omitempty"`
 	// Specifies whether some operations are supported by cluster or not.
+	// Optional during rollout; will become required once all producers populate it.
 	Capabilities  *ClusterCapabilities `protobuf:"bytes,11,opt,name=capabilities,proto3" json:"capabilities,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3910,11 +3911,14 @@ type ClusterCapabilities struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether the StorageClass used by the cluster supports disk expansion or not.
 	// Disk scaling will be enabled or disabled based on this for hybrid cloud clusters.
+	// Optional during rollout; will become required once all producers populate it.
 	DiskExpansion *ClusterDiskExpansionSupportInfo `protobuf:"bytes,1,opt,name=disk_expansion,json=diskExpansion,proto3" json:"disk_expansion,omitempty"`
 	// Whether it is possible to take a backup for the cluster or not.
 	// Backup tab will be shown or hidden based on this for hybrid cloud clusters.
+	// Optional during rollout; will become required once all producers populate it.
 	Backup *ClusterBackupSupportInfo `protobuf:"bytes,2,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Whether the cluster can be scaled up or down.
+	// Optional during rollout; will become required once all producers populate it.
 	ScalabilityInfo *ClusterScalabilityInfo `protobuf:"bytes,3,opt,name=scalability_info,json=scalabilityInfo,proto3" json:"scalability_info,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -4436,7 +4440,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x17_database_storage_classB\x19\n" +
 	"\x17_snapshot_storage_classB\x18\n" +
 	"\x16_volume_snapshot_classB\x1a\n" +
-	"\x18_volume_attributes_class\"\xaf\x05\n" +
+	"\x18_volume_attributes_class\"\xa7\x05\n" +
 	"\fClusterState\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x19\n" +
 	"\bnodes_up\x18\x02 \x01(\rR\anodesUp\x12=\n" +
@@ -4448,8 +4452,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\b\xbaH\x03\xc8\x01\x01\x18\x01R\x0fscalabilityInfo\x12>\n" +
 	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoR\x05nodes\x12\x19\n" +
 	"\bjwt_rbac\x18\n" +
-	" \x01(\bR\ajwtRbac\x12X\n" +
-	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesB\x06\xbaH\x03\xc8\x01\x01R\fcapabilities\"\xdc\x02\n" +
+	" \x01(\bR\ajwtRbac\x12P\n" +
+	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesR\fcapabilities\"\xdc\x02\n" +
 	"\x0fClusterNodeInfo\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x129\n" +
 	"\n" +
@@ -4495,11 +4499,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\x0e23.qdrant.cloud.cluster.v1.ClusterBackupSupportStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12$\n" +
 	"\x06reason\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\xb5\x02\n" +
-	"\x13ClusterCapabilities\x12g\n" +
-	"\x0edisk_expansion\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfoB\x06\xbaH\x03\xc8\x01\x01R\rdiskExpansion\x12Q\n" +
-	"\x06backup\x18\x02 \x01(\v21.qdrant.cloud.cluster.v1.ClusterBackupSupportInfoB\x06\xbaH\x03\xc8\x01\x01R\x06backup\x12b\n" +
-	"\x10scalability_info\x18\x03 \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\x06\xbaH\x03\xc8\x01\x01R\x0fscalabilityInfo\"\x93\x02\n" +
+	"\a_reason\"\x9d\x02\n" +
+	"\x13ClusterCapabilities\x12_\n" +
+	"\x0edisk_expansion\x18\x01 \x01(\v28.qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfoR\rdiskExpansion\x12I\n" +
+	"\x06backup\x18\x02 \x01(\v21.qdrant.cloud.cluster.v1.ClusterBackupSupportInfoR\x06backup\x12Z\n" +
+	"\x10scalability_info\x18\x03 \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoR\x0fscalabilityInfo\"\x93\x02\n" +
 	"\rQdrantRelease\x12!\n" +
 	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x18\n" +
 	"\adefault\x18\x02 \x01(\bR\adefault\x129\n" +
