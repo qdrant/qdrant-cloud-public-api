@@ -48,38 +48,6 @@
         ]
       }
     },
-    "/api/billing/v1/accounts/{accountId}/credit-contract-consumptions": {
-      "get": {
-        "summary": "Lists consumption data for all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
-        "operationId": "BillingService_ListCreditContractConsumptions",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListCreditContractConsumptionsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "BillingService"
-        ]
-      }
-    },
     "/api/billing/v1/accounts/{accountId}/credit-contracts": {
       "get": {
         "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -238,18 +206,6 @@
         }
       }
     },
-    "v1BillingFrequency": {
-      "type": "string",
-      "enum": [
-        "BILLING_FREQUENCY_UNSPECIFIED",
-        "BILLING_FREQUENCY_MONTHLY",
-        "BILLING_FREQUENCY_QUARTERLY",
-        "BILLING_FREQUENCY_SEMI_ANNUAL",
-        "BILLING_FREQUENCY_ANNUAL"
-      ],
-      "default": "BILLING_FREQUENCY_UNSPECIFIED",
-      "description": "BillingFrequency represents the invoicing cadence for a prepaid credit contract.\n\n - BILLING_FREQUENCY_UNSPECIFIED: Unspecified\n - BILLING_FREQUENCY_MONTHLY: Monthly\n - BILLING_FREQUENCY_QUARTERLY: Quarterly\n - BILLING_FREQUENCY_SEMI_ANNUAL: Semi-annual\n - BILLING_FREQUENCY_ANNUAL: Annual"
-    },
     "v1CreditContract": {
       "type": "object",
       "properties": {
@@ -270,10 +226,6 @@
           "type": "string",
           "description": "The currency of the contract amount.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         },
-        "billingFrequency": {
-          "$ref": "#/definitions/v1BillingFrequency",
-          "description": "How often the credit is invoiced."
-        },
         "activeFrom": {
           "type": "string",
           "format": "date-time",
@@ -287,21 +239,6 @@
         "notes": {
           "type": "string",
           "description": "Optional internal notes about this contract."
-        }
-      },
-      "description": "CreditContract represents a prepaid credit contract for an organization."
-    },
-    "v1CreditContractConsumption": {
-      "type": "object",
-      "properties": {
-        "creditContractId": {
-          "type": "string",
-          "description": "The identifier of the credit contract this consumption belongs to."
-        },
-        "totalAmount": {
-          "type": "number",
-          "format": "double",
-          "description": "Total contract value."
         },
         "usedAmount": {
           "type": "number",
@@ -312,13 +249,9 @@
           "type": "number",
           "format": "double",
           "description": "Amount remaining."
-        },
-        "currency": {
-          "type": "string",
-          "description": "The currency of the amounts.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
         }
       },
-      "description": "CreditContractConsumption represents the consumption data for a credit contract."
+      "description": "CreditContract represents a prepaid credit contract for an organization."
     },
     "v1Discount": {
       "type": "object",
@@ -441,20 +374,6 @@
         }
       },
       "description": "ListBillingAccountChildrenResponse contains the child accounts for the requested account."
-    },
-    "v1ListCreditContractConsumptionsResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1CreditContractConsumption"
-          },
-          "description": "The list of credit contract consumptions."
-        }
-      },
-      "title": "ListCreditContractConsumptionsResponse is the response from the ListCreditContractConsumptions function"
     },
     "v1ListCreditContractsResponse": {
       "type": "object",

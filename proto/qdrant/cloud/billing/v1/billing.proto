@@ -42,15 +42,6 @@ service BillingService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
   }
-  // Lists consumption data for all credit contracts for the account identified by the given ID.
-  // Required permissions:
-  // - read:payment_information
-  rpc ListCreditContractConsumptions(ListCreditContractConsumptionsRequest) returns (ListCreditContractConsumptionsResponse) {
-    // permissions
-    option (common.v1.permissions) = "read:payment_information";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contract-consumptions"};
-  }
   // Returns the parent billing account for the account identified by the given ID.
   // Returns NOT_FOUND if the account has no parent.
   // Required permissions:
@@ -180,35 +171,6 @@ message ListCreditContractsResponse {
   repeated CreditContract items = 1;
 }
 
-// ListCreditContractConsumptionsRequest is the request for the ListCreditContractConsumptions function
-message ListCreditContractConsumptionsRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-}
-
-// ListCreditContractConsumptionsResponse is the response from the ListCreditContractConsumptions function
-message ListCreditContractConsumptionsResponse {
-  // The list of credit contract consumptions.
-  repeated CreditContractConsumption items = 1;
-}
-
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// CreditContractConsumption represents the consumption data for a credit contract.
-message CreditContractConsumption {
-  // The identifier of the credit contract this consumption belongs to.
-  string credit_contract_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Total contract value.
-  double total_amount = 2 [(buf.validate.field).double.gt = 0.0];
-  // Amount consumed so far.
-  double used_amount = 3 [(buf.validate.field).double.gte = 0.0];
-  // Amount remaining.
-  double remaining_amount = 4 [(buf.validate.field).double.gte = 0.0];
-  // The currency of the amounts.
-  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
-  string currency = 5 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
-}
-
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // CreditContract represents a prepaid credit contract for an organization.
 message CreditContract {
@@ -221,31 +183,16 @@ message CreditContract {
   // The currency of the contract amount.
   // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
   string currency = 4 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
-  // How often the credit is invoiced.
-  BillingFrequency billing_frequency = 5 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
   // The timestamp when the contract becomes active.
   google.protobuf.Timestamp active_from = 6 [(buf.validate.field).required = true];
   // The timestamp when the contract expires.
   google.protobuf.Timestamp active_to = 7 [(buf.validate.field).required = true];
   // Optional internal notes about this contract.
   optional string notes = 8 [(buf.validate.field).string.min_len = 1];
-}
-
-// BillingFrequency represents the invoicing cadence for a prepaid credit contract.
-enum BillingFrequency {
-  // Unspecified
-  BILLING_FREQUENCY_UNSPECIFIED = 0;
-  // Monthly
-  BILLING_FREQUENCY_MONTHLY = 1;
-  // Quarterly
-  BILLING_FREQUENCY_QUARTERLY = 2;
-  // Semi-annual
-  BILLING_FREQUENCY_SEMI_ANNUAL = 3;
-  // Annual
-  BILLING_FREQUENCY_ANNUAL = 4;
+  // Amount consumed so far.
+  double used_amount = 9 [(buf.validate.field).double.gte = 0.0];
+  // Amount remaining.
+  double remaining_amount = 10 [(buf.validate.field).double.gte = 0.0];
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
