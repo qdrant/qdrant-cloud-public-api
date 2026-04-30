@@ -32,15 +32,6 @@ export const listDiscounts = BillingService.method.listDiscounts;
 export const listCreditContracts = BillingService.method.listCreditContracts;
 
 /**
- * Lists consumption data for all credit contracts for the account identified by the given ID.
- * Required permissions:
- * - read:payment_information
- *
- * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCreditContractConsumptions
- */
-export const listCreditContractConsumptions = BillingService.method.listCreditContractConsumptions;
-
-/**
  * Returns the parent billing account for the account identified by the given ID.
  * Returns NOT_FOUND if the account has no parent.
  * Required permissions:

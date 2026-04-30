@@ -13,14 +13,6 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class BillingFrequency(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    BILLING_FREQUENCY_UNSPECIFIED: _ClassVar[BillingFrequency]
-    BILLING_FREQUENCY_MONTHLY: _ClassVar[BillingFrequency]
-    BILLING_FREQUENCY_QUARTERLY: _ClassVar[BillingFrequency]
-    BILLING_FREQUENCY_SEMI_ANNUAL: _ClassVar[BillingFrequency]
-    BILLING_FREQUENCY_ANNUAL: _ClassVar[BillingFrequency]
-
 class InvoiceStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     INVOICE_STATUS_UNSPECIFIED: _ClassVar[InvoiceStatus]
@@ -29,11 +21,6 @@ class InvoiceStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     INVOICE_STATUS_VOID: _ClassVar[InvoiceStatus]
     INVOICE_STATUS_PAID: _ClassVar[InvoiceStatus]
     INVOICE_STATUS_UNCOLLECTIBLE: _ClassVar[InvoiceStatus]
-BILLING_FREQUENCY_UNSPECIFIED: BillingFrequency
-BILLING_FREQUENCY_MONTHLY: BillingFrequency
-BILLING_FREQUENCY_QUARTERLY: BillingFrequency
-BILLING_FREQUENCY_SEMI_ANNUAL: BillingFrequency
-BILLING_FREQUENCY_ANNUAL: BillingFrequency
 INVOICE_STATUS_UNSPECIFIED: InvoiceStatus
 INVOICE_STATUS_DRAFT: InvoiceStatus
 INVOICE_STATUS_OPEN: InvoiceStatus
@@ -121,51 +108,27 @@ class ListCreditContractsResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[CreditContract]
     def __init__(self, items: _Optional[_Iterable[_Union[CreditContract, _Mapping]]] = ...) -> None: ...
 
-class ListCreditContractConsumptionsRequest(_message.Message):
-    __slots__ = ("account_id",)
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
-
-class ListCreditContractConsumptionsResponse(_message.Message):
-    __slots__ = ("items",)
-    ITEMS_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[CreditContractConsumption]
-    def __init__(self, items: _Optional[_Iterable[_Union[CreditContractConsumption, _Mapping]]] = ...) -> None: ...
-
-class CreditContractConsumption(_message.Message):
-    __slots__ = ("credit_contract_id", "total_amount", "used_amount", "remaining_amount", "currency")
-    CREDIT_CONTRACT_ID_FIELD_NUMBER: _ClassVar[int]
-    TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
-    USED_AMOUNT_FIELD_NUMBER: _ClassVar[int]
-    REMAINING_AMOUNT_FIELD_NUMBER: _ClassVar[int]
-    CURRENCY_FIELD_NUMBER: _ClassVar[int]
-    credit_contract_id: str
-    total_amount: float
-    used_amount: float
-    remaining_amount: float
-    currency: str
-    def __init__(self, credit_contract_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
-
 class CreditContract(_message.Message):
-    __slots__ = ("id", "account_id", "total_amount", "currency", "billing_frequency", "active_from", "active_to", "notes")
+    __slots__ = ("id", "account_id", "total_amount", "currency", "active_from", "active_to", "notes", "used_amount", "remaining_amount")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
-    BILLING_FREQUENCY_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_FROM_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_TO_FIELD_NUMBER: _ClassVar[int]
     NOTES_FIELD_NUMBER: _ClassVar[int]
+    USED_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    REMAINING_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     total_amount: float
     currency: str
-    billing_frequency: BillingFrequency
     active_from: _timestamp_pb2.Timestamp
     active_to: _timestamp_pb2.Timestamp
     notes: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., billing_frequency: _Optional[_Union[BillingFrequency, str]] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ...) -> None: ...
+    used_amount: float
+    remaining_amount: float
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ...) -> None: ...
 
 class GetBillingAccountParentRequest(_message.Message):
     __slots__ = ("account_id",)
