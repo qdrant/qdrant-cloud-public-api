@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/project/auth/v1/project_api_key.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ProjectApiKeyService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/auth/v1/accounts/{accountId}/projects/{projectId}/api-keys": {
+      "get": {
+        "summary": "ListProjectApiKeys returns all API keys for a project\nRequired Permissions:\n- read:serverless_api_keys",
+        "operationId": "ProjectApiKeyService_ListProjectApiKeys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProjectApiKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "description": "Project the API keys belong to (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProjectApiKeyService"
+        ]
+      }
+    },
+    "/api/serverless/auth/v1/accounts/{accountId}/projects/{projectId}/api-keys/{projectApiKeyId}": {
+      "delete": {
+        "summary": "DeleteProjectApiKey removes an API key from a project\nRequired Permissions:\n- delete:serverless_api_keys",
+        "operationId": "ProjectApiKeyService_DeleteProjectApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProjectApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "description": "Project the key belongs to (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectApiKeyId",
+            "description": "ID of the key to delete (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProjectApiKeyService"
+        ]
+      }
+    },
+    "/api/serverless/auth/v1/accounts/{projectApiKey.accountId}/projects/{projectApiKey.projectId}/api-keys": {
+      "post": {
+        "summary": "CreateProjectApiKey creates a new API key for a project\nRequired Permissions:\n- write:serverless_api_keys",
+        "operationId": "ProjectApiKeyService_CreateProjectApiKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateProjectApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectApiKey.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectApiKey.projectId",
+            "description": "The identifier of the project (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectApiKeyServiceCreateProjectApiKeyBody"
+            }
+          }
+        ],
+        "tags": [
+          "ProjectApiKeyService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ProjectApiKeyServiceCreateProjectApiKeyBody": {
+      "type": "object",
+      "properties": {
+        "projectApiKey": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the project api key (in GUID format).\nThis is a read-only field and will be available after a project api key is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the project api key was created.\nThis is a read-only field and will be available after a project api key is created."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the project api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The expiration time of the project api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+            },
+            "accessRules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1AccessRule"
+              },
+              "description": "A list of rules to grant access to the Qdrant serverless project or to specific\ncollections in that project. If no access rules are provided, global access to the project\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user who created the project api key.\nThis is an optional read-only field and will be available after a project api key is created.\nIf the ProjectApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+            },
+            "postfix": {
+              "type": "string",
+              "description": "Postfix for the project api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a project api key is created."
+            },
+            "key": {
+              "type": "string",
+              "description": "The key for the project api key.\nThis is a read-only field and will be available only once in the response of CreateProjectApiKey.\nYou should securely store this key and it should be handled as a secret."
+            }
+          },
+          "description": "The API key to create.\nThis is a required field."
+        }
+      },
+      "title": "CreateProjectApiKeyRequest defines parameters for creating a new project API key"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AccessRule": {
+      "type": "object",
+      "properties": {
+        "globalAccess": {
+          "$ref": "#/definitions/v1GlobalAccessRule",
+          "description": "A rule granting global access to the entire project."
+        },
+        "collectionAccess": {
+          "$ref": "#/definitions/v1CollectionAccessRule",
+          "description": "A rule granting access to a specific collection in the project."
+        }
+      },
+      "description": "Represents an access rule. An access rule can either define global access to\nthe project or access to a specific collection."
+    },
+    "v1CollectionAccessRule": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the collection.\nThis is a required field."
+        },
+        "accessType": {
+          "$ref": "#/definitions/v1CollectionAccessRuleAccessType",
+          "description": "The type of access granted for the collection.\nThis is a required field."
+        }
+      },
+      "description": "Represents an access rule for a specific collection in the project."
+    },
+    "v1CollectionAccessRuleAccessType": {
+      "type": "string",
+      "enum": [
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
+        "COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE"
+      ],
+      "default": "COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+      "description": "- COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform collection-related actions that only read data (like `get collection info`).\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: Grants access to perform collection-related actions that read or write data (like `upsert points`).",
+      "title": "CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
+    },
+    "v1CreateProjectApiKeyResponse": {
+      "type": "object",
+      "properties": {
+        "projectApiKey": {
+          "$ref": "#/definitions/v1ProjectApiKey",
+          "title": "The newly created API key value"
+        }
+      },
+      "title": "CreateProjectApiKeyResponse provides the API key after creation"
+    },
+    "v1DeleteProjectApiKeyResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteProjectApiKeyResponse is an empty response for deletion confirmation"
+    },
+    "v1GlobalAccessRule": {
+      "type": "object",
+      "properties": {
+        "accessType": {
+          "$ref": "#/definitions/v1GlobalAccessRuleAccessType",
+          "description": "The type of access granted at the global level.\nThis is a required field."
+        }
+      },
+      "description": "Represents a global access rule that grants access to the entire project."
+    },
+    "v1GlobalAccessRuleAccessType": {
+      "type": "string",
+      "enum": [
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
+        "GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE"
+      ],
+      "default": "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
+      "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the project (e.g., update aliases).",
+      "title": "GlobalAccessRuleAccessType defines the possible access levels for global access rules.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
+    },
+    "v1ListProjectApiKeysResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ProjectApiKey"
+          },
+          "title": "List of API keys for the project"
+        }
+      },
+      "title": "Response containing all API keys associated with a project"
+    },
+    "v1ProjectApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the project api key (in GUID format).\nThis is a read-only field and will be available after a project api key is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).\nThis is a required field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the project api key was created.\nThis is a read-only field and will be available after a project api key is created."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The identifier of the project (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the project api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration time of the project api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccessRule"
+          },
+          "description": "A list of rules to grant access to the Qdrant serverless project or to specific\ncollections in that project. If no access rules are provided, global access to the project\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
+        },
+        "createdByEmail": {
+          "type": "string",
+          "description": "The email of the user who created the project api key.\nThis is an optional read-only field and will be available after a project api key is created.\nIf the ProjectApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+        },
+        "postfix": {
+          "type": "string",
+          "description": "Postfix for the project api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a project api key is created."
+        },
+        "key": {
+          "type": "string",
+          "description": "The key for the project api key.\nThis is a read-only field and will be available only once in the response of CreateProjectApiKey.\nYou should securely store this key and it should be handled as a secret."
+        }
+      },
+      "description": "A ProjectApiKey represents one project api key of a Qdrant cloud account.\nThis project key can grant access to a Qdrant cloud serverless project."
+    }
+  }
+}

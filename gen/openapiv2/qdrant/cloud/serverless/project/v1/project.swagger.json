@@ -1,0 +1,433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/project/v1/project.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ProjectService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/projects": {
+      "get": {
+        "summary": "ListProjects returns all projects for the authenticated user\nRequired Permissions:\n- read:serverless",
+        "operationId": "ProjectService_ListProjects",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProjectsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProjectService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/projects/{projectId}": {
+      "delete": {
+        "summary": "DeleteProject removes a project by ID\nRequired Permissions:\n- delete:serverless",
+        "operationId": "ProjectService_DeleteProject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "description": "ID of the project to delete (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProjectService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{project.accountId}/projects": {
+      "post": {
+        "summary": "CreateProject creates a new project with the specified configuration\nRequired Permissions:\n- write:serverless",
+        "operationId": "ProjectService_CreateProject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateProjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project.accountId",
+            "description": "Identifier of the account associated with the project (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectServiceCreateProjectBody"
+            }
+          }
+        ],
+        "tags": [
+          "ProjectService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{project.accountId}/projects/{project.id}": {
+      "put": {
+        "summary": "Updates a project in the account identified by the given ID.\nRequired Permissions:\n- write:serverless",
+        "operationId": "ProjectService_UpdateProject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateProjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project.accountId",
+            "description": "Identifier of the account associated with the project (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project.id",
+            "description": "Unique identifier for the project (in GUID format).\nThis is a read-only field and will be available after a project is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectServiceUpdateProjectBody"
+            }
+          }
+        ],
+        "tags": [
+          "ProjectService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ProjectServiceCreateProjectBody": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the project (in GUID format).\nThis is a read-only field and will be available after a project is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the project was created.\nThis is a read-only field and will be available after a project is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the project.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the project was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteProject is called."
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the project is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ProjectConfiguration",
+              "title": "Configuration parameters"
+            },
+            "state": {
+              "$ref": "#/definitions/v1ProjectState",
+              "description": "Status of the project\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "Project represents a vector search project in the Qdrant serverless environment"
+        }
+      },
+      "title": "CreateProjectRequest defines parameters for creating a new project"
+    },
+    "ProjectServiceUpdateProjectBody": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the project was created.\nThis is a read-only field and will be available after a project is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the project.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the project was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteProject is called."
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the project is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ProjectConfiguration",
+              "title": "Configuration parameters"
+            },
+            "state": {
+              "$ref": "#/definitions/v1ProjectState",
+              "description": "Status of the project\nAll fields inside `state` are read-only."
+            }
+          },
+          "description": "The actual project\nThis is a required field.",
+          "title": "Project represents a vector search project in the Qdrant serverless environment"
+        }
+      },
+      "title": "UpdateProjectRequest is the request for the UpdateProject function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateProjectResponse": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/v1Project",
+          "title": "Project represents a vector search project in the Qdrant serverless environment"
+        }
+      },
+      "title": "CreateProjectResponse provides details about a created project"
+    },
+    "v1DeleteProjectResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteProjectResponse is an empty response for deletion confirmation"
+    },
+    "v1ListProjectsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Project"
+          },
+          "title": "List of projects with their details"
+        }
+      },
+      "title": "ListProjectsResponse contains the list of projects"
+    },
+    "v1Project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the project (in GUID format).\nThis is a read-only field and will be available after a project is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the project was created.\nThis is a read-only field and will be available after a project is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the project (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the project.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the project was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteProject is called."
+        },
+        "cloudProviderId": {
+          "type": "string",
+          "description": "Cloud provider where the project is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1ProjectConfiguration",
+          "title": "Configuration parameters"
+        },
+        "state": {
+          "$ref": "#/definitions/v1ProjectState",
+          "description": "Status of the project\nAll fields inside `state` are read-only."
+        }
+      },
+      "title": "Project represents a vector search project in the Qdrant serverless environment"
+    },
+    "v1ProjectConfiguration": {
+      "type": "object",
+      "description": "TODO: remove?\nProjectConfiguration represents the configuration of a project.\n\nEmpty"
+    },
+    "v1ProjectEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant project (aka serverless database) without port"
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant project (aka serverless database).\nAll fields in this message are a read-only field."
+    },
+    "v1ProjectState": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/definitions/v1ProjectStatePhase",
+          "description": "The current operational status of the project."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Descriptive message explaining any errors or issues with the project.\nEmpty when the project is operating normally."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1ProjectEndpoint",
+          "description": "The URL endpoint where clients can connect to and interact with the project.\nNot set if the project is not yet ready or is disabled."
+        }
+      },
+      "description": "ProjectState represents the operational state of a project in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."
+    },
+    "v1ProjectStatePhase": {
+      "type": "string",
+      "enum": [
+        "PROJECT_STATE_PHASE_UNSPECIFIED",
+        "PROJECT_STATE_PHASE_READY",
+        "PROJECT_STATE_PHASE_PROCESSING",
+        "PROJECT_STATE_PHASE_DISABLED"
+      ],
+      "default": "PROJECT_STATE_PHASE_UNSPECIFIED",
+      "description": "ProjectStatePhase defines the operational phases of a Qdrant project.\n\n - PROJECT_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - PROJECT_STATE_PHASE_READY: The Project is fully operational and available for use.\n - PROJECT_STATE_PHASE_PROCESSING: The Project is being created, updated, or undergoing maintenance.\n - PROJECT_STATE_PHASE_DISABLED: The Project has been temporarily or permanently disabled."
+    },
+    "v1UpdateProjectResponse": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/v1Project",
+          "title": "The actual project"
+        }
+      },
+      "title": "UpdateProjectResponse is the response from the UpdateProject function"
+    }
+  }
+}
