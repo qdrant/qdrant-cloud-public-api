@@ -95,6 +95,54 @@
           "MeteringService"
         ]
       }
+    },
+    "/api/metering/v1/accounts/{accountId}/usage-breakdown": {
+      "get": {
+        "summary": "Returns the usage breakdown for the account identified by the given ID, within the requested time range.\nFor parent billing accounts, the response aggregates usage across all child accounts.\nRequired permissions:\n- read:payment_information",
+        "operationId": "MeteringService_GetUsageBreakdown",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUsageBreakdownResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "description": "The inclusive start of the time range to return usage for.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "description": "The exclusive end of the time range to return usage for. Must be after start_time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "MeteringService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -125,6 +173,20 @@
           }
         }
       }
+    },
+    "v1GetUsageBreakdownResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UsageBreakdownMonth"
+          },
+          "description": "The list of months that had usage in the requested time range."
+        }
+      },
+      "title": "GetUsageBreakdownResponse is the response from the GetUsageBreakdown function"
     },
     "v1ListMeteringsResponse": {
       "type": "object",
@@ -254,6 +316,96 @@
         }
       },
       "description": "MonthlyMeteringSummary represents a single month's metering summary."
+    },
+    "v1UsageBreakdownAccount": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format)."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The display name of the account."
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UsageBreakdownCluster"
+          },
+          "description": "The clusters that had usage in this month for this account."
+        }
+      },
+      "description": "UsageBreakdownAccount groups per-cluster usage for a single account in a given month."
+    },
+    "v1UsageBreakdownCluster": {
+      "type": "object",
+      "properties": {
+        "clusterId": {
+          "type": "string",
+          "description": "The identifier of the cluster (in GUID format)."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "The name of the cluster."
+        },
+        "clusterLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Labels associated with the cluster at the time of metering."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the metering window (UTC)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the metering window (UTC)."
+        },
+        "amountMillicents": {
+          "type": "string",
+          "format": "int64",
+          "description": "The total charge for this entry, in millicents."
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency of the amount, in ISO 4217 format (e.g., \"USD\")."
+        },
+        "billableEntityType": {
+          "type": "string",
+          "description": "The type of the billable entity (e.g., \"cluster_booking\", \"backup\", \"inference_model\")."
+        }
+      },
+      "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."
+    },
+    "v1UsageBreakdownMonth": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The year this entry represents (e.g., 2025)."
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The month this entry represents (1 = January, 12 = December)."
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UsageBreakdownAccount"
+          },
+          "description": "The accounts that had usage in this month."
+        }
+      },
+      "description": "UsageBreakdownMonth groups usage for a single calendar month."
     }
   }
 }

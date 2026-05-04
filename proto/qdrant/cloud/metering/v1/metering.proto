@@ -34,6 +34,16 @@ service MeteringService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}"};
   }
+  // Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+  // For parent billing accounts, the response aggregates usage across all child accounts.
+  // Required permissions:
+  // - read:payment_information
+  rpc GetUsageBreakdown(GetUsageBreakdownRequest) returns (GetUsageBreakdownResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/usage-breakdown"};
+  }
 }
 
 // ListMonthlyMeteringsRequest is the request for the ListMonthlyMeterings function
@@ -139,4 +149,82 @@ message MeteringItem {
   }];
   // Labels associated with the cluster at the time of metering.
   map<string, string> cluster_labels = 15;
+}
+
+// GetUsageBreakdownRequest is the request for the GetUsageBreakdown function
+message GetUsageBreakdownRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The inclusive start of the time range to return usage for.
+  google.protobuf.Timestamp start_time = 2 [(buf.validate.field).required = true];
+  // The exclusive end of the time range to return usage for. Must be after start_time.
+  google.protobuf.Timestamp end_time = 3 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "get_usage_breakdown_request.end_time_gt_start_time"
+    message: "end_time must be after start_time"
+    expression: "this.end_time > this.start_time"
+  };
+}
+
+// GetUsageBreakdownResponse is the response from the GetUsageBreakdown function
+message GetUsageBreakdownResponse {
+  // The list of months that had usage in the requested time range.
+  repeated UsageBreakdownMonth items = 1;
+}
+
+// UsageBreakdownMonth groups usage for a single calendar month.
+message UsageBreakdownMonth {
+  // The year this entry represents (e.g., 2025).
+  int32 year = 1 [(buf.validate.field).int32 = {
+    gte: 2000
+    lte: 3000
+  }];
+  // The month this entry represents (1 = January, 12 = December).
+  int32 month = 2 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 12
+  }];
+  // The accounts that had usage in this month.
+  repeated UsageBreakdownAccount accounts = 3;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// UsageBreakdownAccount groups per-cluster usage for a single account in a given month.
+message UsageBreakdownAccount {
+  // The identifier of the account (in GUID format).
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The display name of the account.
+  string account_name = 2 [(buf.validate.field).string.min_len = 1];
+  // The clusters that had usage in this month for this account.
+  repeated UsageBreakdownCluster clusters = 3;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// UsageBreakdownCluster represents the usage for a single cluster within a month.
+message UsageBreakdownCluster {
+  // The identifier of the cluster (in GUID format).
+  string cluster_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The name of the cluster.
+  string cluster_name = 2 [(buf.validate.field).string.min_len = 1];
+  // Labels associated with the cluster at the time of metering.
+  map<string, string> cluster_labels = 3;
+  // The start time of the metering window (UTC).
+  google.protobuf.Timestamp start_time = 4 [(buf.validate.field).required = true];
+  // The end time of the metering window (UTC).
+  google.protobuf.Timestamp end_time = 5 [(buf.validate.field).required = true];
+  // The total charge for this entry, in millicents.
+  int64 amount_millicents = 6 [(buf.validate.field).int64.gte = 0];
+  // Currency of the amount, in ISO 4217 format (e.g., "USD").
+  string currency = 7 [(buf.validate.field).string = {
+    len: 3
+    pattern: "^[A-Z]{3}$"
+  }];
+  // The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
+  string billable_entity_type = 8 [(buf.validate.field).string.min_len = 1];
+  option (buf.validate.message).cel = {
+    id: "usage_breakdown_cluster.end_time_gt_start_time"
+    message: "end_time must be after start_time"
+    expression: "this.end_time > this.start_time"
+  };
 }

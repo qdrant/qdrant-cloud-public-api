@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	MeteringService_ListMonthlyMeterings_FullMethodName = "/qdrant.cloud.metering.v1.MeteringService/ListMonthlyMeterings"
 	MeteringService_ListMeterings_FullMethodName        = "/qdrant.cloud.metering.v1.MeteringService/ListMeterings"
+	MeteringService_GetUsageBreakdown_FullMethodName    = "/qdrant.cloud.metering.v1.MeteringService/GetUsageBreakdown"
 )
 
 // MeteringServiceClient is the client API for MeteringService service.
@@ -38,6 +39,11 @@ type MeteringServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListMeterings(ctx context.Context, in *ListMeteringsRequest, opts ...grpc.CallOption) (*ListMeteringsResponse, error)
+	// Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+	// For parent billing accounts, the response aggregates usage across all child accounts.
+	// Required permissions:
+	// - read:payment_information
+	GetUsageBreakdown(ctx context.Context, in *GetUsageBreakdownRequest, opts ...grpc.CallOption) (*GetUsageBreakdownResponse, error)
 }
 
 type meteringServiceClient struct {
@@ -68,6 +74,16 @@ func (c *meteringServiceClient) ListMeterings(ctx context.Context, in *ListMeter
 	return out, nil
 }
 
+func (c *meteringServiceClient) GetUsageBreakdown(ctx context.Context, in *GetUsageBreakdownRequest, opts ...grpc.CallOption) (*GetUsageBreakdownResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUsageBreakdownResponse)
+	err := c.cc.Invoke(ctx, MeteringService_GetUsageBreakdown_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MeteringServiceServer is the server API for MeteringService service.
 // All implementations must embed UnimplementedMeteringServiceServer
 // for forward compatibility.
@@ -83,6 +99,11 @@ type MeteringServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListMeterings(context.Context, *ListMeteringsRequest) (*ListMeteringsResponse, error)
+	// Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+	// For parent billing accounts, the response aggregates usage across all child accounts.
+	// Required permissions:
+	// - read:payment_information
+	GetUsageBreakdown(context.Context, *GetUsageBreakdownRequest) (*GetUsageBreakdownResponse, error)
 	mustEmbedUnimplementedMeteringServiceServer()
 }
 
@@ -98,6 +119,9 @@ func (UnimplementedMeteringServiceServer) ListMonthlyMeterings(context.Context, 
 }
 func (UnimplementedMeteringServiceServer) ListMeterings(context.Context, *ListMeteringsRequest) (*ListMeteringsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListMeterings not implemented")
+}
+func (UnimplementedMeteringServiceServer) GetUsageBreakdown(context.Context, *GetUsageBreakdownRequest) (*GetUsageBreakdownResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUsageBreakdown not implemented")
 }
 func (UnimplementedMeteringServiceServer) mustEmbedUnimplementedMeteringServiceServer() {}
 func (UnimplementedMeteringServiceServer) testEmbeddedByValue()                         {}
@@ -156,6 +180,24 @@ func _MeteringService_ListMeterings_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MeteringService_GetUsageBreakdown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUsageBreakdownRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MeteringServiceServer).GetUsageBreakdown(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MeteringService_GetUsageBreakdown_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MeteringServiceServer).GetUsageBreakdown(ctx, req.(*GetUsageBreakdownRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MeteringService_ServiceDesc is the grpc.ServiceDesc for MeteringService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +212,10 @@ var MeteringService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMeterings",
 			Handler:    _MeteringService_ListMeterings_Handler,
+		},
+		{
+			MethodName: "GetUsageBreakdown",
+			Handler:    _MeteringService_GetUsageBreakdown_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

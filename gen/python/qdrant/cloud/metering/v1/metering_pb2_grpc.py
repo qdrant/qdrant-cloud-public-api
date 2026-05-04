@@ -25,6 +25,11 @@ class MeteringServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsResponse.FromString,
                 _registered_method=True)
+        self.GetUsageBreakdown = channel.unary_unary(
+                '/qdrant.cloud.metering.v1.MeteringService/GetUsageBreakdown',
+                request_serializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownResponse.FromString,
+                _registered_method=True)
 
 
 class MeteringServiceServicer(object):
@@ -50,6 +55,16 @@ class MeteringServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUsageBreakdown(self, request, context):
+        """Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+        For parent billing accounts, the response aggregates usage across all child accounts.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MeteringServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -62,6 +77,11 @@ def add_MeteringServiceServicer_to_server(servicer, server):
                     servicer.ListMeterings,
                     request_deserializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsResponse.SerializeToString,
+            ),
+            'GetUsageBreakdown': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUsageBreakdown,
+                    request_deserializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -119,6 +139,33 @@ class MeteringService(object):
             '/qdrant.cloud.metering.v1.MeteringService/ListMeterings',
             qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsRequest.SerializeToString,
             qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.ListMeteringsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUsageBreakdown(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.metering.v1.MeteringService/GetUsageBreakdown',
+            qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownRequest.SerializeToString,
+            qdrant_dot_cloud_dot_metering_dot_v1_dot_metering__pb2.GetUsageBreakdownResponse.FromString,
             options,
             channel_credentials,
             insecure,
