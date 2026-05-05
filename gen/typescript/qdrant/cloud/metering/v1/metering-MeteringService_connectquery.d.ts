@@ -21,3 +21,12 @@ export const listMonthlyMeterings: typeof MeteringService["method"]["listMonthly
  * @generated from rpc qdrant.cloud.metering.v1.MeteringService.ListMeterings
  */
 export const listMeterings: typeof MeteringService["method"]["listMeterings"];
+/**
+ * Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+ * For parent billing accounts, the response aggregates usage across all child accounts.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown
+ */
+export const getUsageBreakdown: typeof MeteringService["method"]["getUsageBreakdown"];
