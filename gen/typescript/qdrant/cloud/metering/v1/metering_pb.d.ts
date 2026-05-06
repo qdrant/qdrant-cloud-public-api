@@ -404,6 +404,360 @@ export declare type MeteringItemValid = Message<"qdrant.cloud.metering.v1.Meteri
 export declare const MeteringItemSchema: GenMessage<MeteringItem, {validType: MeteringItemValid}>;
 
 /**
+ * GetUsageBreakdownRequest is the request for the GetUsageBreakdown function
+ *
+ * @generated from message qdrant.cloud.metering.v1.GetUsageBreakdownRequest
+ */
+export declare type GetUsageBreakdownRequest = Message<"qdrant.cloud.metering.v1.GetUsageBreakdownRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The inclusive start of the time range to return usage for.
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 2;
+   */
+  startTime?: Timestamp | undefined;
+
+  /**
+   * The exclusive end of the time range to return usage for. Must be after start_time.
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 3;
+   */
+  endTime?: Timestamp | undefined;
+};
+
+/**
+ * GetUsageBreakdownRequest is the request for the GetUsageBreakdown function
+ *
+ * @generated from message qdrant.cloud.metering.v1.GetUsageBreakdownRequest
+ */
+export declare type GetUsageBreakdownRequestValid = Message<"qdrant.cloud.metering.v1.GetUsageBreakdownRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The inclusive start of the time range to return usage for.
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 2;
+   */
+  startTime: Timestamp;
+
+  /**
+   * The exclusive end of the time range to return usage for. Must be after start_time.
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 3;
+   */
+  endTime: Timestamp;
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.GetUsageBreakdownRequest.
+ * Use `create(GetUsageBreakdownRequestSchema)` to create a new message.
+ */
+export declare const GetUsageBreakdownRequestSchema: GenMessage<GetUsageBreakdownRequest, {validType: GetUsageBreakdownRequestValid}>;
+
+/**
+ * GetUsageBreakdownResponse is the response from the GetUsageBreakdown function
+ *
+ * @generated from message qdrant.cloud.metering.v1.GetUsageBreakdownResponse
+ */
+export declare type GetUsageBreakdownResponse = Message<"qdrant.cloud.metering.v1.GetUsageBreakdownResponse"> & {
+  /**
+   * The list of months that had usage in the requested time range.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownMonth items = 1;
+   */
+  items: UsageBreakdownMonth[];
+};
+
+/**
+ * GetUsageBreakdownResponse is the response from the GetUsageBreakdown function
+ *
+ * @generated from message qdrant.cloud.metering.v1.GetUsageBreakdownResponse
+ */
+export declare type GetUsageBreakdownResponseValid = Message<"qdrant.cloud.metering.v1.GetUsageBreakdownResponse"> & {
+  /**
+   * The list of months that had usage in the requested time range.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownMonth items = 1;
+   */
+  items: UsageBreakdownMonthValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.GetUsageBreakdownResponse.
+ * Use `create(GetUsageBreakdownResponseSchema)` to create a new message.
+ */
+export declare const GetUsageBreakdownResponseSchema: GenMessage<GetUsageBreakdownResponse, {validType: GetUsageBreakdownResponseValid}>;
+
+/**
+ * UsageBreakdownMonth groups usage for a single calendar month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownMonth
+ */
+export declare type UsageBreakdownMonth = Message<"qdrant.cloud.metering.v1.UsageBreakdownMonth"> & {
+  /**
+   * The year this entry represents (e.g., 2025).
+   *
+   * @generated from field: int32 year = 1;
+   */
+  year: number;
+
+  /**
+   * The month this entry represents (1 = January, 12 = December).
+   *
+   * @generated from field: int32 month = 2;
+   */
+  month: number;
+
+  /**
+   * The accounts that had usage in this month.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownAccount accounts = 3;
+   */
+  accounts: UsageBreakdownAccount[];
+};
+
+/**
+ * UsageBreakdownMonth groups usage for a single calendar month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownMonth
+ */
+export declare type UsageBreakdownMonthValid = Message<"qdrant.cloud.metering.v1.UsageBreakdownMonth"> & {
+  /**
+   * The year this entry represents (e.g., 2025).
+   *
+   * @generated from field: int32 year = 1;
+   */
+  year: number;
+
+  /**
+   * The month this entry represents (1 = January, 12 = December).
+   *
+   * @generated from field: int32 month = 2;
+   */
+  month: number;
+
+  /**
+   * The accounts that had usage in this month.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownAccount accounts = 3;
+   */
+  accounts: UsageBreakdownAccountValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.UsageBreakdownMonth.
+ * Use `create(UsageBreakdownMonthSchema)` to create a new message.
+ */
+export declare const UsageBreakdownMonthSchema: GenMessage<UsageBreakdownMonth, {validType: UsageBreakdownMonthValid}>;
+
+/**
+ * UsageBreakdownAccount groups per-cluster usage for a single account in a given month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownAccount
+ */
+export declare type UsageBreakdownAccount = Message<"qdrant.cloud.metering.v1.UsageBreakdownAccount"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The display name of the account.
+   *
+   * @generated from field: string account_name = 2;
+   */
+  accountName: string;
+
+  /**
+   * The clusters that had usage in this month for this account.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownCluster clusters = 3;
+   */
+  clusters: UsageBreakdownCluster[];
+};
+
+/**
+ * UsageBreakdownAccount groups per-cluster usage for a single account in a given month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownAccount
+ */
+export declare type UsageBreakdownAccountValid = Message<"qdrant.cloud.metering.v1.UsageBreakdownAccount"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The display name of the account.
+   *
+   * @generated from field: string account_name = 2;
+   */
+  accountName: string;
+
+  /**
+   * The clusters that had usage in this month for this account.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownCluster clusters = 3;
+   */
+  clusters: UsageBreakdownClusterValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.UsageBreakdownAccount.
+ * Use `create(UsageBreakdownAccountSchema)` to create a new message.
+ */
+export declare const UsageBreakdownAccountSchema: GenMessage<UsageBreakdownAccount, {validType: UsageBreakdownAccountValid}>;
+
+/**
+ * UsageBreakdownCluster represents the usage for a single cluster within a month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownCluster
+ */
+export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.UsageBreakdownCluster"> & {
+  /**
+   * The identifier of the cluster (in GUID format).
+   *
+   * @generated from field: string cluster_id = 1;
+   */
+  clusterId: string;
+
+  /**
+   * The name of the cluster.
+   *
+   * @generated from field: string cluster_name = 2;
+   */
+  clusterName: string;
+
+  /**
+   * Labels associated with the cluster at the time of metering.
+   *
+   * @generated from field: map<string, string> cluster_labels = 3;
+   */
+  clusterLabels: { [key: string]: string };
+
+  /**
+   * The start time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 4;
+   */
+  startTime?: Timestamp | undefined;
+
+  /**
+   * The end time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 5;
+   */
+  endTime?: Timestamp | undefined;
+
+  /**
+   * The total charge for this entry, in millicents.
+   *
+   * @generated from field: int64 amount_millicents = 6;
+   */
+  amountMillicents: bigint;
+
+  /**
+   * Currency of the amount, in ISO 4217 format (e.g., "USD").
+   *
+   * @generated from field: string currency = 7;
+   */
+  currency: string;
+
+  /**
+   * The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
+   *
+   * @generated from field: string billable_entity_type = 8;
+   */
+  billableEntityType: string;
+};
+
+/**
+ * UsageBreakdownCluster represents the usage for a single cluster within a month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownCluster
+ */
+export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.v1.UsageBreakdownCluster"> & {
+  /**
+   * The identifier of the cluster (in GUID format).
+   *
+   * @generated from field: string cluster_id = 1;
+   */
+  clusterId: string;
+
+  /**
+   * The name of the cluster.
+   *
+   * @generated from field: string cluster_name = 2;
+   */
+  clusterName: string;
+
+  /**
+   * Labels associated with the cluster at the time of metering.
+   *
+   * @generated from field: map<string, string> cluster_labels = 3;
+   */
+  clusterLabels: { [key: string]: string };
+
+  /**
+   * The start time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 4;
+   */
+  startTime: Timestamp;
+
+  /**
+   * The end time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 5;
+   */
+  endTime: Timestamp;
+
+  /**
+   * The total charge for this entry, in millicents.
+   *
+   * @generated from field: int64 amount_millicents = 6;
+   */
+  amountMillicents: bigint;
+
+  /**
+   * Currency of the amount, in ISO 4217 format (e.g., "USD").
+   *
+   * @generated from field: string currency = 7;
+   */
+  currency: string;
+
+  /**
+   * The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
+   *
+   * @generated from field: string billable_entity_type = 8;
+   */
+  billableEntityType: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.UsageBreakdownCluster.
+ * Use `create(UsageBreakdownClusterSchema)` to create a new message.
+ */
+export declare const UsageBreakdownClusterSchema: GenMessage<UsageBreakdownCluster, {validType: UsageBreakdownClusterValid}>;
+
+/**
  * MeteringService is the API to retrieve usage data used for billing purposes.
  *
  * @generated from service qdrant.cloud.metering.v1.MeteringService
@@ -433,6 +787,19 @@ export declare const MeteringService: GenService<{
     methodKind: "unary";
     input: typeof ListMeteringsRequestSchema;
     output: typeof ListMeteringsResponseSchema;
+  },
+  /**
+   * Returns the usage breakdown for the account identified by the given ID, within the requested time range.
+   * For parent billing accounts, the response aggregates usage across all child accounts.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown
+   */
+  getUsageBreakdown: {
+    methodKind: "unary";
+    input: typeof GetUsageBreakdownRequestSchema;
+    output: typeof GetUsageBreakdownResponseSchema;
   },
 }>;
 

@@ -92,3 +92,66 @@ class MeteringItem(_message.Message):
     currency: str
     cluster_labels: _containers.ScalarMap[str, str]
     def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., billable_entity_id: _Optional[str] = ..., billable_entity_reference_name: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., usage_hours: _Optional[float] = ..., amount_millicents: _Optional[int] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ..., currency: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ...) -> None: ...
+
+class GetUsageBreakdownRequest(_message.Message):
+    __slots__ = ("account_id", "start_time", "end_time")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    START_TIME_FIELD_NUMBER: _ClassVar[int]
+    END_TIME_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    start_time: _timestamp_pb2.Timestamp
+    end_time: _timestamp_pb2.Timestamp
+    def __init__(self, account_id: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+
+class GetUsageBreakdownResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[UsageBreakdownMonth]
+    def __init__(self, items: _Optional[_Iterable[_Union[UsageBreakdownMonth, _Mapping]]] = ...) -> None: ...
+
+class UsageBreakdownMonth(_message.Message):
+    __slots__ = ("year", "month", "accounts")
+    YEAR_FIELD_NUMBER: _ClassVar[int]
+    MONTH_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNTS_FIELD_NUMBER: _ClassVar[int]
+    year: int
+    month: int
+    accounts: _containers.RepeatedCompositeFieldContainer[UsageBreakdownAccount]
+    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., accounts: _Optional[_Iterable[_Union[UsageBreakdownAccount, _Mapping]]] = ...) -> None: ...
+
+class UsageBreakdownAccount(_message.Message):
+    __slots__ = ("account_id", "account_name", "clusters")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_NAME_FIELD_NUMBER: _ClassVar[int]
+    CLUSTERS_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    account_name: str
+    clusters: _containers.RepeatedCompositeFieldContainer[UsageBreakdownCluster]
+    def __init__(self, account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., clusters: _Optional[_Iterable[_Union[UsageBreakdownCluster, _Mapping]]] = ...) -> None: ...
+
+class UsageBreakdownCluster(_message.Message):
+    __slots__ = ("cluster_id", "cluster_name", "cluster_labels", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type")
+    class ClusterLabelsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_NAME_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_LABELS_FIELD_NUMBER: _ClassVar[int]
+    START_TIME_FIELD_NUMBER: _ClassVar[int]
+    END_TIME_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    BILLABLE_ENTITY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    cluster_id: str
+    cluster_name: str
+    cluster_labels: _containers.ScalarMap[str, str]
+    start_time: _timestamp_pb2.Timestamp
+    end_time: _timestamp_pb2.Timestamp
+    amount_millicents: int
+    currency: str
+    billable_entity_type: str
+    def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ...) -> None: ...
