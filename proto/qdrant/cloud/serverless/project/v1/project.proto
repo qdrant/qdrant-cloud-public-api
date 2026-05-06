@@ -202,17 +202,9 @@ message Project {
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // After creation, this field cannot be changed.
   string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
-  // Configuration parameters
-  ProjectConfiguration configuration = 20;
   // Status of the project
   // All fields inside `state` are read-only.
   ProjectState state = 100;
-}
-
-// TODO: remove?
-// ProjectConfiguration represents the configuration of a project.
-message ProjectConfiguration {
-  // Empty
 }
 
 // ProjectStatePhase defines the operational phases of a Qdrant project.

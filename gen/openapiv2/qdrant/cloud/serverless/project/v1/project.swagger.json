@@ -208,10 +208,6 @@
               "type": "string",
               "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
             },
-            "configuration": {
-              "$ref": "#/definitions/v1ProjectConfiguration",
-              "title": "Configuration parameters"
-            },
             "state": {
               "$ref": "#/definitions/v1ProjectState",
               "description": "Status of the project\nAll fields inside `state` are read-only."
@@ -249,10 +245,6 @@
             "cloudProviderRegionId": {
               "type": "string",
               "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
-            },
-            "configuration": {
-              "$ref": "#/definitions/v1ProjectConfiguration",
-              "title": "Configuration parameters"
             },
             "state": {
               "$ref": "#/definitions/v1ProjectState",
@@ -355,20 +347,12 @@
           "type": "string",
           "description": "Cloud provider region where the project is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
         },
-        "configuration": {
-          "$ref": "#/definitions/v1ProjectConfiguration",
-          "title": "Configuration parameters"
-        },
         "state": {
           "$ref": "#/definitions/v1ProjectState",
           "description": "Status of the project\nAll fields inside `state` are read-only."
         }
       },
       "title": "Project represents a vector search project in the Qdrant serverless environment"
-    },
-    "v1ProjectConfiguration": {
-      "type": "object",
-      "description": "TODO: remove?\nProjectConfiguration represents the configuration of a project.\n\nEmpty"
     },
     "v1ProjectEndpoint": {
       "type": "object",

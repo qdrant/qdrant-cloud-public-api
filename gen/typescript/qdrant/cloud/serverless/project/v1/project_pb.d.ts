@@ -310,13 +310,6 @@ export declare type Project = Message<"qdrant.cloud.serverless.project.v1.Projec
   cloudProviderRegionId: string;
 
   /**
-   * Configuration parameters
-   *
-   * @generated from field: qdrant.cloud.serverless.project.v1.ProjectConfiguration configuration = 20;
-   */
-  configuration?: ProjectConfiguration | undefined;
-
-  /**
    * Status of the project
    * All fields inside `state` are read-only.
    *
@@ -332,25 +325,6 @@ export declare type ProjectValid = Project;
  * Use `create(ProjectSchema)` to create a new message.
  */
 export declare const ProjectSchema: GenMessage<Project, {validType: ProjectValid}>;
-
-/**
- * TODO: remove?
- * ProjectConfiguration represents the configuration of a project.
- *
- * Empty
- *
- * @generated from message qdrant.cloud.serverless.project.v1.ProjectConfiguration
- */
-export declare type ProjectConfiguration = Message<"qdrant.cloud.serverless.project.v1.ProjectConfiguration"> & {
-};
-
-export declare type ProjectConfigurationValid = ProjectConfiguration;
-
-/**
- * Describes the message qdrant.cloud.serverless.project.v1.ProjectConfiguration.
- * Use `create(ProjectConfigurationSchema)` to create a new message.
- */
-export declare const ProjectConfigurationSchema: GenMessage<ProjectConfiguration, {validType: ProjectConfigurationValid}>;
 
 /**
  * ProjectState represents the operational state of a project in the Qdrant serverless environment.

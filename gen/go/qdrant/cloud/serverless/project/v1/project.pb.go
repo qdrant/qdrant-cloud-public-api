@@ -483,8 +483,6 @@ type Project struct {
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
 	// After creation, this field cannot be changed.
 	CloudProviderRegionId string `protobuf:"bytes,11,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
-	// Configuration parameters
-	Configuration *ProjectConfiguration `protobuf:"bytes,20,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	// Status of the project
 	// All fields inside `state` are read-only.
 	State         *ProjectState `protobuf:"bytes,100,opt,name=state,proto3" json:"state,omitempty"`
@@ -571,56 +569,11 @@ func (x *Project) GetCloudProviderRegionId() string {
 	return ""
 }
 
-func (x *Project) GetConfiguration() *ProjectConfiguration {
-	if x != nil {
-		return x.Configuration
-	}
-	return nil
-}
-
 func (x *Project) GetState() *ProjectState {
 	if x != nil {
 		return x.State
 	}
 	return nil
-}
-
-// TODO: remove?
-// ProjectConfiguration represents the configuration of a project.
-type ProjectConfiguration struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ProjectConfiguration) Reset() {
-	*x = ProjectConfiguration{}
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProjectConfiguration) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProjectConfiguration) ProtoMessage() {}
-
-func (x *ProjectConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProjectConfiguration.ProtoReflect.Descriptor instead.
-func (*ProjectConfiguration) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP(), []int{9}
 }
 
 // ProjectState represents the operational state of a project in the Qdrant serverless environment.
@@ -641,7 +594,7 @@ type ProjectState struct {
 
 func (x *ProjectState) Reset() {
 	*x = ProjectState{}
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -653,7 +606,7 @@ func (x *ProjectState) String() string {
 func (*ProjectState) ProtoMessage() {}
 
 func (x *ProjectState) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +619,7 @@ func (x *ProjectState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProjectState.ProtoReflect.Descriptor instead.
 func (*ProjectState) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ProjectState) GetPhase() ProjectStatePhase {
@@ -706,7 +659,7 @@ type ProjectEndpoint struct {
 
 func (x *ProjectEndpoint) Reset() {
 	*x = ProjectEndpoint{}
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -718,7 +671,7 @@ func (x *ProjectEndpoint) String() string {
 func (*ProjectEndpoint) ProtoMessage() {}
 
 func (x *ProjectEndpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -731,7 +684,7 @@ func (x *ProjectEndpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProjectEndpoint.ProtoReflect.Descriptor instead.
 func (*ProjectEndpoint) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProjectEndpoint) GetUrl() string {
@@ -781,7 +734,7 @@ const file_qdrant_cloud_serverless_project_v1_project_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"project_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tprojectId\"\x17\n" +
-	"\x15DeleteProjectResponse\"\xb5\x05\n" +
+	"\x15DeleteProjectResponse\"\xd5\x04\n" +
 	"\aProject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -793,12 +746,10 @@ const file_qdrant_cloud_serverless_project_v1_project_proto_rawDesc = "" +
 	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x123\n" +
 	"\x11cloud_provider_id\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12^\n" +
-	"\rconfiguration\x18\x14 \x01(\v28.qdrant.cloud.serverless.project.v1.ProjectConfigurationR\rconfiguration\x12F\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12F\n" +
 	"\x05state\x18d \x01(\v20.qdrant.cloud.serverless.project.v1.ProjectStateR\x05state:\xaa\x01\xbaH\xa6\x01\x1a\xa3\x01\n" +
 	"\n" +
-	"project.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\x16\n" +
-	"\x14ProjectConfiguration\"\xe0\x01\n" +
+	"project.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\"\xe0\x01\n" +
 	"\fProjectState\x12U\n" +
 	"\x05phase\x18\x01 \x01(\x0e25.qdrant.cloud.serverless.project.v1.ProjectStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12T\n" +
@@ -841,7 +792,7 @@ func file_qdrant_cloud_serverless_project_v1_project_proto_rawDescGZIP() []byte 
 }
 
 var file_qdrant_cloud_serverless_project_v1_project_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_qdrant_cloud_serverless_project_v1_project_proto_goTypes = []any{
 	(ProjectStatePhase)(0),        // 0: qdrant.cloud.serverless.project.v1.ProjectStatePhase
 	(*ListProjectsRequest)(nil),   // 1: qdrant.cloud.serverless.project.v1.ListProjectsRequest
@@ -853,10 +804,9 @@ var file_qdrant_cloud_serverless_project_v1_project_proto_goTypes = []any{
 	(*DeleteProjectRequest)(nil),  // 7: qdrant.cloud.serverless.project.v1.DeleteProjectRequest
 	(*DeleteProjectResponse)(nil), // 8: qdrant.cloud.serverless.project.v1.DeleteProjectResponse
 	(*Project)(nil),               // 9: qdrant.cloud.serverless.project.v1.Project
-	(*ProjectConfiguration)(nil),  // 10: qdrant.cloud.serverless.project.v1.ProjectConfiguration
-	(*ProjectState)(nil),          // 11: qdrant.cloud.serverless.project.v1.ProjectState
-	(*ProjectEndpoint)(nil),       // 12: qdrant.cloud.serverless.project.v1.ProjectEndpoint
-	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(*ProjectState)(nil),          // 10: qdrant.cloud.serverless.project.v1.ProjectState
+	(*ProjectEndpoint)(nil),       // 11: qdrant.cloud.serverless.project.v1.ProjectEndpoint
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_serverless_project_v1_project_proto_depIdxs = []int32{
 	9,  // 0: qdrant.cloud.serverless.project.v1.ListProjectsResponse.items:type_name -> qdrant.cloud.serverless.project.v1.Project
@@ -864,25 +814,24 @@ var file_qdrant_cloud_serverless_project_v1_project_proto_depIdxs = []int32{
 	9,  // 2: qdrant.cloud.serverless.project.v1.CreateProjectResponse.project:type_name -> qdrant.cloud.serverless.project.v1.Project
 	9,  // 3: qdrant.cloud.serverless.project.v1.UpdateProjectRequest.project:type_name -> qdrant.cloud.serverless.project.v1.Project
 	9,  // 4: qdrant.cloud.serverless.project.v1.UpdateProjectResponse.project:type_name -> qdrant.cloud.serverless.project.v1.Project
-	13, // 5: qdrant.cloud.serverless.project.v1.Project.created_at:type_name -> google.protobuf.Timestamp
-	13, // 6: qdrant.cloud.serverless.project.v1.Project.deleted_at:type_name -> google.protobuf.Timestamp
-	10, // 7: qdrant.cloud.serverless.project.v1.Project.configuration:type_name -> qdrant.cloud.serverless.project.v1.ProjectConfiguration
-	11, // 8: qdrant.cloud.serverless.project.v1.Project.state:type_name -> qdrant.cloud.serverless.project.v1.ProjectState
-	0,  // 9: qdrant.cloud.serverless.project.v1.ProjectState.phase:type_name -> qdrant.cloud.serverless.project.v1.ProjectStatePhase
-	12, // 10: qdrant.cloud.serverless.project.v1.ProjectState.endpoint:type_name -> qdrant.cloud.serverless.project.v1.ProjectEndpoint
-	1,  // 11: qdrant.cloud.serverless.project.v1.ProjectService.ListProjects:input_type -> qdrant.cloud.serverless.project.v1.ListProjectsRequest
-	3,  // 12: qdrant.cloud.serverless.project.v1.ProjectService.CreateProject:input_type -> qdrant.cloud.serverless.project.v1.CreateProjectRequest
-	5,  // 13: qdrant.cloud.serverless.project.v1.ProjectService.UpdateProject:input_type -> qdrant.cloud.serverless.project.v1.UpdateProjectRequest
-	7,  // 14: qdrant.cloud.serverless.project.v1.ProjectService.DeleteProject:input_type -> qdrant.cloud.serverless.project.v1.DeleteProjectRequest
-	2,  // 15: qdrant.cloud.serverless.project.v1.ProjectService.ListProjects:output_type -> qdrant.cloud.serverless.project.v1.ListProjectsResponse
-	4,  // 16: qdrant.cloud.serverless.project.v1.ProjectService.CreateProject:output_type -> qdrant.cloud.serverless.project.v1.CreateProjectResponse
-	6,  // 17: qdrant.cloud.serverless.project.v1.ProjectService.UpdateProject:output_type -> qdrant.cloud.serverless.project.v1.UpdateProjectResponse
-	8,  // 18: qdrant.cloud.serverless.project.v1.ProjectService.DeleteProject:output_type -> qdrant.cloud.serverless.project.v1.DeleteProjectResponse
-	15, // [15:19] is the sub-list for method output_type
-	11, // [11:15] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	12, // 5: qdrant.cloud.serverless.project.v1.Project.created_at:type_name -> google.protobuf.Timestamp
+	12, // 6: qdrant.cloud.serverless.project.v1.Project.deleted_at:type_name -> google.protobuf.Timestamp
+	10, // 7: qdrant.cloud.serverless.project.v1.Project.state:type_name -> qdrant.cloud.serverless.project.v1.ProjectState
+	0,  // 8: qdrant.cloud.serverless.project.v1.ProjectState.phase:type_name -> qdrant.cloud.serverless.project.v1.ProjectStatePhase
+	11, // 9: qdrant.cloud.serverless.project.v1.ProjectState.endpoint:type_name -> qdrant.cloud.serverless.project.v1.ProjectEndpoint
+	1,  // 10: qdrant.cloud.serverless.project.v1.ProjectService.ListProjects:input_type -> qdrant.cloud.serverless.project.v1.ListProjectsRequest
+	3,  // 11: qdrant.cloud.serverless.project.v1.ProjectService.CreateProject:input_type -> qdrant.cloud.serverless.project.v1.CreateProjectRequest
+	5,  // 12: qdrant.cloud.serverless.project.v1.ProjectService.UpdateProject:input_type -> qdrant.cloud.serverless.project.v1.UpdateProjectRequest
+	7,  // 13: qdrant.cloud.serverless.project.v1.ProjectService.DeleteProject:input_type -> qdrant.cloud.serverless.project.v1.DeleteProjectRequest
+	2,  // 14: qdrant.cloud.serverless.project.v1.ProjectService.ListProjects:output_type -> qdrant.cloud.serverless.project.v1.ListProjectsResponse
+	4,  // 15: qdrant.cloud.serverless.project.v1.ProjectService.CreateProject:output_type -> qdrant.cloud.serverless.project.v1.CreateProjectResponse
+	6,  // 16: qdrant.cloud.serverless.project.v1.ProjectService.UpdateProject:output_type -> qdrant.cloud.serverless.project.v1.UpdateProjectResponse
+	8,  // 17: qdrant.cloud.serverless.project.v1.ProjectService.DeleteProject:output_type -> qdrant.cloud.serverless.project.v1.DeleteProjectResponse
+	14, // [14:18] is the sub-list for method output_type
+	10, // [10:14] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_project_v1_project_proto_init() }
@@ -890,14 +839,14 @@ func file_qdrant_cloud_serverless_project_v1_project_proto_init() {
 	if File_qdrant_cloud_serverless_project_v1_project_proto != nil {
 		return
 	}
-	file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[10].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_project_v1_project_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_project_v1_project_proto_rawDesc), len(file_qdrant_cloud_serverless_project_v1_project_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   12,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

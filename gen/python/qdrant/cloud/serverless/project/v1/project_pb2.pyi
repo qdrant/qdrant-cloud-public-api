@@ -74,7 +74,7 @@ class DeleteProjectResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Project(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "configuration", "state")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -82,7 +82,6 @@ class Project(_message.Message):
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
-    CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
@@ -91,13 +90,8 @@ class Project(_message.Message):
     deleted_at: _timestamp_pb2.Timestamp
     cloud_provider_id: str
     cloud_provider_region_id: str
-    configuration: ProjectConfiguration
     state: ProjectState
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[ProjectConfiguration, _Mapping]] = ..., state: _Optional[_Union[ProjectState, _Mapping]] = ...) -> None: ...
-
-class ProjectConfiguration(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., state: _Optional[_Union[ProjectState, _Mapping]] = ...) -> None: ...
 
 class ProjectState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")
