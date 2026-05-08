@@ -174,6 +174,51 @@
         }
       }
     },
+    "v1ClusterConfig": {
+      "type": "object",
+      "properties": {
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider (e.g., \"aws\", \"gcp\", \"azure\", \"hybrid\")."
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region (e.g., \"eu-central-1\")."
+        },
+        "cpuVcpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of vCPUs per node."
+        },
+        "ramGib": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Amount of RAM per node, in GiB."
+        },
+        "diskGib": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk size per node, in GiB."
+        },
+        "multiAz": {
+          "type": "boolean",
+          "description": "Whether the cluster is configured for multi-AZ."
+        },
+        "gpuEnabled": {
+          "type": "boolean",
+          "description": "Whether the cluster has GPU enabled."
+        },
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        },
+        "storageTier": {
+          "type": "string",
+          "description": "Storage tier (e.g., \"performance\", \"balanced\")."
+        }
+      },
+      "description": "ClusterConfig describes the resource shape and placement of a cluster\nat the time of metering."
+    },
     "v1GetUsageBreakdownResponse": {
       "type": "object",
       "properties": {
@@ -379,6 +424,10 @@
         "billableEntityType": {
           "type": "string",
           "description": "The type of the billable entity (e.g., \"cluster_booking\", \"backup\", \"inference_model\")."
+        },
+        "config": {
+          "$ref": "#/definitions/v1ClusterConfig",
+          "description": "Resource configuration of the cluster at the time of metering."
         }
       },
       "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."

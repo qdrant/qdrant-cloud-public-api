@@ -626,6 +626,85 @@ export declare type UsageBreakdownAccountValid = Message<"qdrant.cloud.metering.
 export declare const UsageBreakdownAccountSchema: GenMessage<UsageBreakdownAccount, {validType: UsageBreakdownAccountValid}>;
 
 /**
+ * ClusterConfig describes the resource shape and placement of a cluster
+ * at the time of metering.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterConfig
+ */
+export declare type ClusterConfig = Message<"qdrant.cloud.metering.v1.ClusterConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Number of vCPUs per node.
+   *
+   * @generated from field: int32 cpu_vcpu = 3;
+   */
+  cpuVcpu: number;
+
+  /**
+   * Amount of RAM per node, in GiB.
+   *
+   * @generated from field: int32 ram_gib = 4;
+   */
+  ramGib: number;
+
+  /**
+   * Disk size per node, in GiB.
+   *
+   * @generated from field: int32 disk_gib = 5;
+   */
+  diskGib: number;
+
+  /**
+   * Whether the cluster is configured for multi-AZ.
+   *
+   * @generated from field: bool multi_az = 6;
+   */
+  multiAz: boolean;
+
+  /**
+   * Whether the cluster has GPU enabled.
+   *
+   * @generated from field: bool gpu_enabled = 7;
+   */
+  gpuEnabled: boolean;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 8;
+   */
+  pricingTier: string;
+
+  /**
+   * Storage tier (e.g., "performance", "balanced").
+   *
+   * @generated from field: string storage_tier = 9;
+   */
+  storageTier: string;
+};
+
+export declare type ClusterConfigValid = ClusterConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterConfig.
+ * Use `create(ClusterConfigSchema)` to create a new message.
+ */
+export declare const ClusterConfigSchema: GenMessage<ClusterConfig, {validType: ClusterConfigValid}>;
+
+/**
  * UsageBreakdownCluster represents the usage for a single cluster within a month.
  *
  * @generated from message qdrant.cloud.metering.v1.UsageBreakdownCluster
@@ -686,6 +765,13 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
    * @generated from field: string billable_entity_type = 8;
    */
   billableEntityType: string;
+
+  /**
+   * Resource configuration of the cluster at the time of metering.
+   *
+   * @generated from field: qdrant.cloud.metering.v1.ClusterConfig config = 9;
+   */
+  config?: ClusterConfig | undefined;
 };
 
 /**
@@ -749,6 +835,13 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
    * @generated from field: string billable_entity_type = 8;
    */
   billableEntityType: string;
+
+  /**
+   * Resource configuration of the cluster at the time of metering.
+   *
+   * @generated from field: qdrant.cloud.metering.v1.ClusterConfig config = 9;
+   */
+  config?: ClusterConfigValid | undefined;
 };
 
 /**

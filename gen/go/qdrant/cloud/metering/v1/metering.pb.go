@@ -715,6 +715,125 @@ func (x *UsageBreakdownAccount) GetClusters() []*UsageBreakdownCluster {
 	return nil
 }
 
+// ClusterConfig describes the resource shape and placement of a cluster
+// at the time of metering.
+type ClusterConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Number of vCPUs per node.
+	CpuVcpu int32 `protobuf:"varint,3,opt,name=cpu_vcpu,json=cpuVcpu,proto3" json:"cpu_vcpu,omitempty"`
+	// Amount of RAM per node, in GiB.
+	RamGib int32 `protobuf:"varint,4,opt,name=ram_gib,json=ramGib,proto3" json:"ram_gib,omitempty"`
+	// Disk size per node, in GiB.
+	DiskGib int32 `protobuf:"varint,5,opt,name=disk_gib,json=diskGib,proto3" json:"disk_gib,omitempty"`
+	// Whether the cluster is configured for multi-AZ.
+	MultiAz bool `protobuf:"varint,6,opt,name=multi_az,json=multiAz,proto3" json:"multi_az,omitempty"`
+	// Whether the cluster has GPU enabled.
+	GpuEnabled bool `protobuf:"varint,7,opt,name=gpu_enabled,json=gpuEnabled,proto3" json:"gpu_enabled,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier string `protobuf:"bytes,8,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	// Storage tier (e.g., "performance", "balanced").
+	StorageTier   string `protobuf:"bytes,9,opt,name=storage_tier,json=storageTier,proto3" json:"storage_tier,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterConfig) Reset() {
+	*x = ClusterConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterConfig) ProtoMessage() {}
+
+func (x *ClusterConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterConfig.ProtoReflect.Descriptor instead.
+func (*ClusterConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ClusterConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *ClusterConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *ClusterConfig) GetCpuVcpu() int32 {
+	if x != nil {
+		return x.CpuVcpu
+	}
+	return 0
+}
+
+func (x *ClusterConfig) GetRamGib() int32 {
+	if x != nil {
+		return x.RamGib
+	}
+	return 0
+}
+
+func (x *ClusterConfig) GetDiskGib() int32 {
+	if x != nil {
+		return x.DiskGib
+	}
+	return 0
+}
+
+func (x *ClusterConfig) GetMultiAz() bool {
+	if x != nil {
+		return x.MultiAz
+	}
+	return false
+}
+
+func (x *ClusterConfig) GetGpuEnabled() bool {
+	if x != nil {
+		return x.GpuEnabled
+	}
+	return false
+}
+
+func (x *ClusterConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
+func (x *ClusterConfig) GetStorageTier() string {
+	if x != nil {
+		return x.StorageTier
+	}
+	return ""
+}
+
 // UsageBreakdownCluster represents the usage for a single cluster within a month.
 type UsageBreakdownCluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -734,13 +853,15 @@ type UsageBreakdownCluster struct {
 	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
 	BillableEntityType string `protobuf:"bytes,8,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Resource configuration of the cluster at the time of metering.
+	Config        *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UsageBreakdownCluster) Reset() {
 	*x = UsageBreakdownCluster{}
-	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -752,7 +873,7 @@ func (x *UsageBreakdownCluster) String() string {
 func (*UsageBreakdownCluster) ProtoMessage() {}
 
 func (x *UsageBreakdownCluster) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -765,7 +886,7 @@ func (x *UsageBreakdownCluster) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageBreakdownCluster.ProtoReflect.Descriptor instead.
 func (*UsageBreakdownCluster) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UsageBreakdownCluster) GetClusterId() string {
@@ -822,6 +943,13 @@ func (x *UsageBreakdownCluster) GetBillableEntityType() string {
 		return x.BillableEntityType
 	}
 	return ""
+}
+
+func (x *UsageBreakdownCluster) GetConfig() *ClusterConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
 }
 
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
@@ -893,7 +1021,18 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\faccount_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vaccountName\x12K\n" +
-	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\xb9\x05\n" +
+	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\xba\x02\n" +
+	"\rClusterConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12\"\n" +
+	"\bcpu_vcpu\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\acpuVcpu\x12 \n" +
+	"\aram_gib\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x06ramGib\x12\"\n" +
+	"\bdisk_gib\x18\x05 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\adiskGib\x12\x19\n" +
+	"\bmulti_az\x18\x06 \x01(\bR\amultiAz\x12\x1f\n" +
+	"\vgpu_enabled\x18\a \x01(\bR\n" +
+	"gpuEnabled\x12!\n" +
+	"\fpricing_tier\x18\b \x01(\tR\vpricingTier\x12!\n" +
+	"\fstorage_tier\x18\t \x01(\tR\vstorageTier\"\xfa\x05\n" +
 	"\x15UsageBreakdownCluster\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
@@ -905,7 +1044,8 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x11amount_millicents\x18\x06 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\a \x01(\tB\x14\xbaH\x11r\x0f2\n" +
 	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\x129\n" +
-	"\x14billable_entity_type\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x1a@\n" +
+	"\x14billable_entity_type\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12?\n" +
+	"\x06config\x18\t \x01(\v2'.qdrant.cloud.metering.v1.ClusterConfigR\x06config\x1a@\n" +
 	"\x12ClusterLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:y\xbaHv\x1at\n" +
@@ -928,7 +1068,7 @@ func file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_metering_v1_metering_proto_rawDescData
 }
 
-var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*ListMonthlyMeteringsRequest)(nil),  // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
 	(*ListMonthlyMeteringsResponse)(nil), // 1: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
@@ -940,36 +1080,38 @@ var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*GetUsageBreakdownResponse)(nil),    // 7: qdrant.cloud.metering.v1.GetUsageBreakdownResponse
 	(*UsageBreakdownMonth)(nil),          // 8: qdrant.cloud.metering.v1.UsageBreakdownMonth
 	(*UsageBreakdownAccount)(nil),        // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount
-	(*UsageBreakdownCluster)(nil),        // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster
-	nil,                                  // 11: qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
-	nil,                                  // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
-	(*timestamppb.Timestamp)(nil),        // 13: google.protobuf.Timestamp
+	(*ClusterConfig)(nil),                // 10: qdrant.cloud.metering.v1.ClusterConfig
+	(*UsageBreakdownCluster)(nil),        // 11: qdrant.cloud.metering.v1.UsageBreakdownCluster
+	nil,                                  // 12: qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	nil,                                  // 13: qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
+	(*timestamppb.Timestamp)(nil),        // 14: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_metering_v1_metering_proto_depIdxs = []int32{
 	4,  // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MonthlyMeteringSummary
 	5,  // 1: qdrant.cloud.metering.v1.ListMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MeteringItem
-	13, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
-	13, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
-	11, // 4: qdrant.cloud.metering.v1.MeteringItem.cluster_labels:type_name -> qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
-	13, // 5: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.start_time:type_name -> google.protobuf.Timestamp
-	13, // 6: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.end_time:type_name -> google.protobuf.Timestamp
+	14, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
+	14, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
+	12, // 4: qdrant.cloud.metering.v1.MeteringItem.cluster_labels:type_name -> qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	14, // 5: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.start_time:type_name -> google.protobuf.Timestamp
+	14, // 6: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.end_time:type_name -> google.protobuf.Timestamp
 	8,  // 7: qdrant.cloud.metering.v1.GetUsageBreakdownResponse.items:type_name -> qdrant.cloud.metering.v1.UsageBreakdownMonth
 	9,  // 8: qdrant.cloud.metering.v1.UsageBreakdownMonth.accounts:type_name -> qdrant.cloud.metering.v1.UsageBreakdownAccount
-	10, // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount.clusters:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster
-	12, // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_labels:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
-	13, // 11: qdrant.cloud.metering.v1.UsageBreakdownCluster.start_time:type_name -> google.protobuf.Timestamp
-	13, // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 13: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
-	2,  // 14: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
-	6,  // 15: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:input_type -> qdrant.cloud.metering.v1.GetUsageBreakdownRequest
-	1,  // 16: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
-	3,  // 17: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
-	7,  // 18: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:output_type -> qdrant.cloud.metering.v1.GetUsageBreakdownResponse
-	16, // [16:19] is the sub-list for method output_type
-	13, // [13:16] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	11, // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount.clusters:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster
+	13, // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_labels:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
+	14, // 11: qdrant.cloud.metering.v1.UsageBreakdownCluster.start_time:type_name -> google.protobuf.Timestamp
+	14, // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.end_time:type_name -> google.protobuf.Timestamp
+	10, // 13: qdrant.cloud.metering.v1.UsageBreakdownCluster.config:type_name -> qdrant.cloud.metering.v1.ClusterConfig
+	0,  // 14: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
+	2,  // 15: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
+	6,  // 16: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:input_type -> qdrant.cloud.metering.v1.GetUsageBreakdownRequest
+	1,  // 17: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
+	3,  // 18: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
+	7,  // 19: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:output_type -> qdrant.cloud.metering.v1.GetUsageBreakdownResponse
+	17, // [17:20] is the sub-list for method output_type
+	14, // [14:17] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_metering_v1_metering_proto_init() }
@@ -984,7 +1126,7 @@ func file_qdrant_cloud_metering_v1_metering_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_metering_v1_metering_proto_rawDesc), len(file_qdrant_cloud_metering_v1_metering_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
