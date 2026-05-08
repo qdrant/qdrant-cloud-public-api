@@ -129,8 +129,30 @@ class UsageBreakdownAccount(_message.Message):
     clusters: _containers.RepeatedCompositeFieldContainer[UsageBreakdownCluster]
     def __init__(self, account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., clusters: _Optional[_Iterable[_Union[UsageBreakdownCluster, _Mapping]]] = ...) -> None: ...
 
+class ClusterConfig(_message.Message):
+    __slots__ = ("cloud_provider", "region", "cpu_vcpu", "ram_gib", "disk_gib", "multi_az", "gpu_enabled", "pricing_tier", "storage_tier")
+    CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
+    REGION_FIELD_NUMBER: _ClassVar[int]
+    CPU_VCPU_FIELD_NUMBER: _ClassVar[int]
+    RAM_GIB_FIELD_NUMBER: _ClassVar[int]
+    DISK_GIB_FIELD_NUMBER: _ClassVar[int]
+    MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
+    GPU_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    PRICING_TIER_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_TIER_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider: str
+    region: str
+    cpu_vcpu: int
+    ram_gib: int
+    disk_gib: int
+    multi_az: bool
+    gpu_enabled: bool
+    pricing_tier: str
+    storage_tier: str
+    def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., cpu_vcpu: _Optional[int] = ..., ram_gib: _Optional[int] = ..., disk_gib: _Optional[int] = ..., multi_az: _Optional[bool] = ..., gpu_enabled: _Optional[bool] = ..., pricing_tier: _Optional[str] = ..., storage_tier: _Optional[str] = ...) -> None: ...
+
 class UsageBreakdownCluster(_message.Message):
-    __slots__ = ("cluster_id", "cluster_name", "cluster_labels", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type")
+    __slots__ = ("cluster_id", "cluster_name", "cluster_labels", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type", "config")
     class ClusterLabelsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -146,6 +168,7 @@ class UsageBreakdownCluster(_message.Message):
     AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     BILLABLE_ENTITY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_FIELD_NUMBER: _ClassVar[int]
     cluster_id: str
     cluster_name: str
     cluster_labels: _containers.ScalarMap[str, str]
@@ -154,4 +177,5 @@ class UsageBreakdownCluster(_message.Message):
     amount_millicents: int
     currency: str
     billable_entity_type: str
-    def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ...) -> None: ...
+    config: ClusterConfig
+    def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., config: _Optional[_Union[ClusterConfig, _Mapping]] = ...) -> None: ...
