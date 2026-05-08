@@ -201,9 +201,9 @@ message UsageBreakdownAccount {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// ClusterConfig describes the resource shape and placement of a cluster
-// at the time of metering.
-message ClusterConfig {
+// ClusterUsageConfig describes the shape and placement of a cluster
+// for the cluster-usage billable metric.
+message ClusterUsageConfig {
   // Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
   string cloud_provider = 1;
   // Cloud provider region (e.g., "eu-central-1").
@@ -220,8 +220,58 @@ message ClusterConfig {
   bool gpu_enabled = 7;
   // Pricing tier the cluster was billed under (e.g., "standard", "premium").
   string pricing_tier = 8;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// ClusterExtraDiskConfig describes placement and tier for the
+// cluster-extra-disk billable metric.
+message ClusterExtraDiskConfig {
+  // Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+  string cloud_provider = 1;
+  // Cloud provider region (e.g., "eu-central-1").
+  string region = 2;
+  // Pricing tier the cluster was billed under (e.g., "standard", "premium").
+  string pricing_tier = 3;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// ClusterStorageTierConfig describes placement and storage tier for
+// the cluster-storage-tier billable metric.
+message ClusterStorageTierConfig {
+  // Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+  string cloud_provider = 1;
+  // Cloud provider region (e.g., "eu-central-1").
+  string region = 2;
   // Storage tier (e.g., "performance", "balanced").
-  string storage_tier = 9;
+  string storage_tier = 3;
+  // Pricing tier the cluster was billed under (e.g., "standard", "premium").
+  string pricing_tier = 4;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// BackupStorageConfig describes placement and tier for the
+// backup-storage billable metric.
+message BackupStorageConfig {
+  // Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+  string cloud_provider = 1;
+  // Cloud provider region (e.g., "eu-central-1").
+  string region = 2;
+  // Pricing tier the cluster was billed under (e.g., "standard", "premium").
+  string pricing_tier = 3;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// InferenceConfig describes placement, model and tier for the
+// inference-tokens billable metric.
+message InferenceConfig {
+  // Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+  string cloud_provider = 1;
+  // Cloud provider region (e.g., "eu-central-1").
+  string region = 2;
+  // Model identifier (e.g., "qdrant/clip-vit-b-32-vision").
+  string model_name = 3;
+  // Pricing tier the cluster was billed under (e.g., "standard", "premium").
+  string pricing_tier = 4;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -246,8 +296,20 @@ message UsageBreakdownCluster {
   }];
   // The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
   string billable_entity_type = 8 [(buf.validate.field).string.min_len = 1];
-  // Resource configuration of the cluster at the time of metering.
-  ClusterConfig config = 9;
+  // Per-metric configuration of the entity at the time of metering. Exactly
+  // one variant is set, matching the billable entity type.
+  oneof config {
+    // Set when billable_entity_type is "Cluster".
+    ClusterUsageConfig cluster_usage_config = 9;
+    // Set when billable_entity_type is "Cluster Extra Disk".
+    ClusterExtraDiskConfig cluster_extra_disk_config = 10;
+    // Set when billable_entity_type is "Cluster Storage Tier".
+    ClusterStorageTierConfig cluster_storage_tier_config = 11;
+    // Set when billable_entity_type is "Backup".
+    BackupStorageConfig backup_storage_config = 12;
+    // Set when billable_entity_type is "Inference Tokens".
+    InferenceConfig inference_config = 13;
+  }
   option (buf.validate.message).cel = {
     id: "usage_breakdown_cluster.end_time_gt_start_time"
     message: "end_time must be after start_time"
