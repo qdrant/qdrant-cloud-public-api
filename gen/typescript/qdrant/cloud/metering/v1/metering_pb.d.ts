@@ -837,7 +837,7 @@ export declare type InferenceConfig = Message<"qdrant.cloud.metering.v1.Inferenc
   region: string;
 
   /**
-   * Model identifier (e.g., "qdrant/clip-vit-b-32-vision").
+   * Model identifier (e.g., "qdrant/text-embedder-v1").
    *
    * @generated from field: string model_name = 3;
    */

@@ -300,7 +300,7 @@
         },
         "modelName": {
           "type": "string",
-          "description": "Model identifier (e.g., \"qdrant/clip-vit-b-32-vision\")."
+          "description": "Model identifier (e.g., \"qdrant/text-embedder-v1\")."
         },
         "pricingTier": {
           "type": "string",

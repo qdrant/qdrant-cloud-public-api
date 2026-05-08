@@ -1037,7 +1037,7 @@ type InferenceConfig struct {
 	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
 	// Cloud provider region (e.g., "eu-central-1").
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
-	// Model identifier (e.g., "qdrant/clip-vit-b-32-vision").
+	// Model identifier (e.g., "qdrant/text-embedder-v1").
 	ModelName string `protobuf:"bytes,3,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
 	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
 	PricingTier   string `protobuf:"bytes,4,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`

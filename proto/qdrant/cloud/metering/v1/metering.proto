@@ -268,7 +268,7 @@ message InferenceConfig {
   string cloud_provider = 1;
   // Cloud provider region (e.g., "eu-central-1").
   string region = 2;
-  // Model identifier (e.g., "qdrant/clip-vit-b-32-vision").
+  // Model identifier (e.g., "qdrant/text-embedder-v1").
   string model_name = 3;
   // Pricing tier the cluster was billed under (e.g., "standard", "premium").
   string pricing_tier = 4;
