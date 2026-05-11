@@ -174,7 +174,65 @@
         }
       }
     },
-    "v1ClusterConfig": {
+    "v1BackupStorageConfig": {
+      "type": "object",
+      "properties": {
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider (e.g., \"aws\", \"gcp\", \"azure\", \"hybrid\")."
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region (e.g., \"eu-central-1\")."
+        },
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        }
+      },
+      "description": "BackupStorageConfig describes placement and tier for the\nbackup-storage billable metric."
+    },
+    "v1ClusterExtraDiskConfig": {
+      "type": "object",
+      "properties": {
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider (e.g., \"aws\", \"gcp\", \"azure\", \"hybrid\")."
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region (e.g., \"eu-central-1\")."
+        },
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        }
+      },
+      "description": "ClusterExtraDiskConfig describes placement and tier for the\ncluster-extra-disk billable metric."
+    },
+    "v1ClusterStorageTierConfig": {
+      "type": "object",
+      "properties": {
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider (e.g., \"aws\", \"gcp\", \"azure\", \"hybrid\")."
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region (e.g., \"eu-central-1\")."
+        },
+        "storageTier": {
+          "type": "string",
+          "description": "Storage tier (e.g., \"performance\", \"balanced\")."
+        },
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        }
+      },
+      "description": "ClusterStorageTierConfig describes placement and storage tier for\nthe cluster-storage-tier billable metric."
+    },
+    "v1ClusterUsageConfig": {
       "type": "object",
       "properties": {
         "cloudProvider": {
@@ -211,13 +269,9 @@
         "pricingTier": {
           "type": "string",
           "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
-        },
-        "storageTier": {
-          "type": "string",
-          "description": "Storage tier (e.g., \"performance\", \"balanced\")."
         }
       },
-      "description": "ClusterConfig describes the resource shape and placement of a cluster\nat the time of metering."
+      "description": "ClusterUsageConfig describes the shape and placement of a cluster\nfor the cluster-usage billable metric."
     },
     "v1GetUsageBreakdownResponse": {
       "type": "object",
@@ -232,6 +286,28 @@
         }
       },
       "title": "GetUsageBreakdownResponse is the response from the GetUsageBreakdown function"
+    },
+    "v1InferenceConfig": {
+      "type": "object",
+      "properties": {
+        "cloudProvider": {
+          "type": "string",
+          "description": "Cloud provider (e.g., \"aws\", \"gcp\", \"azure\", \"hybrid\")."
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region (e.g., \"eu-central-1\")."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Model identifier (e.g., \"qdrant/text-embedder-v1\")."
+        },
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        }
+      },
+      "description": "InferenceConfig describes placement, model and tier for the\ninference-tokens billable metric."
     },
     "v1ListMeteringsResponse": {
       "type": "object",
@@ -425,9 +501,25 @@
           "type": "string",
           "description": "The type of the billable entity (e.g., \"cluster_booking\", \"backup\", \"inference_model\")."
         },
-        "config": {
-          "$ref": "#/definitions/v1ClusterConfig",
-          "description": "Resource configuration of the cluster at the time of metering."
+        "clusterUsageConfig": {
+          "$ref": "#/definitions/v1ClusterUsageConfig",
+          "description": "Set when billable_entity_type is \"Cluster\"."
+        },
+        "clusterExtraDiskConfig": {
+          "$ref": "#/definitions/v1ClusterExtraDiskConfig",
+          "description": "Set when billable_entity_type is \"Cluster Extra Disk\"."
+        },
+        "clusterStorageTierConfig": {
+          "$ref": "#/definitions/v1ClusterStorageTierConfig",
+          "description": "Set when billable_entity_type is \"Cluster Storage Tier\"."
+        },
+        "backupStorageConfig": {
+          "$ref": "#/definitions/v1BackupStorageConfig",
+          "description": "Set when billable_entity_type is \"Backup\"."
+        },
+        "inferenceConfig": {
+          "$ref": "#/definitions/v1InferenceConfig",
+          "description": "Set when billable_entity_type is \"Inference Tokens\"."
         }
       },
       "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."

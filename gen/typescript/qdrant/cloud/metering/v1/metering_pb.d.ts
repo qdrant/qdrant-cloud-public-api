@@ -626,12 +626,12 @@ export declare type UsageBreakdownAccountValid = Message<"qdrant.cloud.metering.
 export declare const UsageBreakdownAccountSchema: GenMessage<UsageBreakdownAccount, {validType: UsageBreakdownAccountValid}>;
 
 /**
- * ClusterConfig describes the resource shape and placement of a cluster
- * at the time of metering.
+ * ClusterUsageConfig describes the shape and placement of a cluster
+ * for the cluster-usage billable metric.
  *
- * @generated from message qdrant.cloud.metering.v1.ClusterConfig
+ * @generated from message qdrant.cloud.metering.v1.ClusterUsageConfig
  */
-export declare type ClusterConfig = Message<"qdrant.cloud.metering.v1.ClusterConfig"> & {
+export declare type ClusterUsageConfig = Message<"qdrant.cloud.metering.v1.ClusterUsageConfig"> & {
   /**
    * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
    *
@@ -687,22 +687,177 @@ export declare type ClusterConfig = Message<"qdrant.cloud.metering.v1.ClusterCon
    * @generated from field: string pricing_tier = 8;
    */
   pricingTier: string;
+};
+
+export declare type ClusterUsageConfigValid = ClusterUsageConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterUsageConfig.
+ * Use `create(ClusterUsageConfigSchema)` to create a new message.
+ */
+export declare const ClusterUsageConfigSchema: GenMessage<ClusterUsageConfig, {validType: ClusterUsageConfigValid}>;
+
+/**
+ * ClusterExtraDiskConfig describes placement and tier for the
+ * cluster-extra-disk billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterExtraDiskConfig
+ */
+export declare type ClusterExtraDiskConfig = Message<"qdrant.cloud.metering.v1.ClusterExtraDiskConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 3;
+   */
+  pricingTier: string;
+};
+
+export declare type ClusterExtraDiskConfigValid = ClusterExtraDiskConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterExtraDiskConfig.
+ * Use `create(ClusterExtraDiskConfigSchema)` to create a new message.
+ */
+export declare const ClusterExtraDiskConfigSchema: GenMessage<ClusterExtraDiskConfig, {validType: ClusterExtraDiskConfigValid}>;
+
+/**
+ * ClusterStorageTierConfig describes placement and storage tier for
+ * the cluster-storage-tier billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterStorageTierConfig
+ */
+export declare type ClusterStorageTierConfig = Message<"qdrant.cloud.metering.v1.ClusterStorageTierConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
 
   /**
    * Storage tier (e.g., "performance", "balanced").
    *
-   * @generated from field: string storage_tier = 9;
+   * @generated from field: string storage_tier = 3;
    */
   storageTier: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 4;
+   */
+  pricingTier: string;
 };
 
-export declare type ClusterConfigValid = ClusterConfig;
+export declare type ClusterStorageTierConfigValid = ClusterStorageTierConfig;
 
 /**
- * Describes the message qdrant.cloud.metering.v1.ClusterConfig.
- * Use `create(ClusterConfigSchema)` to create a new message.
+ * Describes the message qdrant.cloud.metering.v1.ClusterStorageTierConfig.
+ * Use `create(ClusterStorageTierConfigSchema)` to create a new message.
  */
-export declare const ClusterConfigSchema: GenMessage<ClusterConfig, {validType: ClusterConfigValid}>;
+export declare const ClusterStorageTierConfigSchema: GenMessage<ClusterStorageTierConfig, {validType: ClusterStorageTierConfigValid}>;
+
+/**
+ * BackupStorageConfig describes placement and tier for the
+ * backup-storage billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.BackupStorageConfig
+ */
+export declare type BackupStorageConfig = Message<"qdrant.cloud.metering.v1.BackupStorageConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 3;
+   */
+  pricingTier: string;
+};
+
+export declare type BackupStorageConfigValid = BackupStorageConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.BackupStorageConfig.
+ * Use `create(BackupStorageConfigSchema)` to create a new message.
+ */
+export declare const BackupStorageConfigSchema: GenMessage<BackupStorageConfig, {validType: BackupStorageConfigValid}>;
+
+/**
+ * InferenceConfig describes placement, model and tier for the
+ * inference-tokens billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.InferenceConfig
+ */
+export declare type InferenceConfig = Message<"qdrant.cloud.metering.v1.InferenceConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Model identifier (e.g., "qdrant/text-embedder-v1").
+   *
+   * @generated from field: string model_name = 3;
+   */
+  modelName: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 4;
+   */
+  pricingTier: string;
+};
+
+export declare type InferenceConfigValid = InferenceConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.InferenceConfig.
+ * Use `create(InferenceConfigSchema)` to create a new message.
+ */
+export declare const InferenceConfigSchema: GenMessage<InferenceConfig, {validType: InferenceConfigValid}>;
 
 /**
  * UsageBreakdownCluster represents the usage for a single cluster within a month.
@@ -767,11 +922,52 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
   billableEntityType: string;
 
   /**
-   * Resource configuration of the cluster at the time of metering.
+   * Per-metric configuration of the entity at the time of metering. Exactly
+   * one variant is set, matching the billable entity type.
    *
-   * @generated from field: qdrant.cloud.metering.v1.ClusterConfig config = 9;
+   * @generated from oneof qdrant.cloud.metering.v1.UsageBreakdownCluster.config
    */
-  config?: ClusterConfig | undefined;
+  config: {
+    /**
+     * Set when billable_entity_type is "Cluster".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterUsageConfig cluster_usage_config = 9;
+     */
+    value: ClusterUsageConfig;
+    case: "clusterUsageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Extra Disk".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterExtraDiskConfig cluster_extra_disk_config = 10;
+     */
+    value: ClusterExtraDiskConfig;
+    case: "clusterExtraDiskConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Storage Tier".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterStorageTierConfig cluster_storage_tier_config = 11;
+     */
+    value: ClusterStorageTierConfig;
+    case: "clusterStorageTierConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Backup".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.BackupStorageConfig backup_storage_config = 12;
+     */
+    value: BackupStorageConfig;
+    case: "backupStorageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Inference Tokens".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.InferenceConfig inference_config = 13;
+     */
+    value: InferenceConfig;
+    case: "inferenceConfig";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -837,11 +1033,52 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
   billableEntityType: string;
 
   /**
-   * Resource configuration of the cluster at the time of metering.
+   * Per-metric configuration of the entity at the time of metering. Exactly
+   * one variant is set, matching the billable entity type.
    *
-   * @generated from field: qdrant.cloud.metering.v1.ClusterConfig config = 9;
+   * @generated from oneof qdrant.cloud.metering.v1.UsageBreakdownCluster.config
    */
-  config?: ClusterConfigValid | undefined;
+  config: {
+    /**
+     * Set when billable_entity_type is "Cluster".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterUsageConfig cluster_usage_config = 9;
+     */
+    value: ClusterUsageConfigValid;
+    case: "clusterUsageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Extra Disk".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterExtraDiskConfig cluster_extra_disk_config = 10;
+     */
+    value: ClusterExtraDiskConfigValid;
+    case: "clusterExtraDiskConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Storage Tier".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterStorageTierConfig cluster_storage_tier_config = 11;
+     */
+    value: ClusterStorageTierConfigValid;
+    case: "clusterStorageTierConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Backup".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.BackupStorageConfig backup_storage_config = 12;
+     */
+    value: BackupStorageConfigValid;
+    case: "backupStorageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Inference Tokens".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.InferenceConfig inference_config = 13;
+     */
+    value: InferenceConfigValid;
+    case: "inferenceConfig";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
