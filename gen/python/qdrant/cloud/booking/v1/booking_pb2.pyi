@@ -192,17 +192,33 @@ class GetQuoteRequest(_message.Message):
     storage_tier_type: _common_pb2.StorageTierType
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
+class PriceBreakdown(_message.Message):
+    __slots__ = ("original_price", "discounted_price", "discount_percentage")
+    ORIGINAL_PRICE_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    original_price: int
+    discounted_price: int
+    discount_percentage: float
+    def __init__(self, original_price: _Optional[int] = ..., discounted_price: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
+
 class GetQuoteResponse(_message.Message):
-    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage")
+    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage", "package", "extra_disk", "disk_speed")
     CURRENCY_FIELD_NUMBER: _ClassVar[int]
     ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_FIELD_NUMBER: _ClassVar[int]
+    EXTRA_DISK_FIELD_NUMBER: _ClassVar[int]
+    DISK_SPEED_FIELD_NUMBER: _ClassVar[int]
     currency: str
     original_price_per_hour: int
     discounted_price_per_hour: int
     discount_percentage: float
-    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
+    package: PriceBreakdown
+    extra_disk: PriceBreakdown
+    disk_speed: PriceBreakdown
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ..., package: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[PriceBreakdown, _Mapping]] = ...) -> None: ...
 
 class GetBackupQuoteRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "backup_size_gib")

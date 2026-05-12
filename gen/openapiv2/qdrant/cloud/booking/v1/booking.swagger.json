@@ -582,6 +582,18 @@
           "type": "number",
           "format": "double",
           "description": "The percentage of discount applied (e.g., 10.0 for 10% discount).\nIf no discounts are applied, this will be 0.0."
+        },
+        "package": {
+          "$ref": "#/definitions/v1PriceBreakdown",
+          "description": "Hourly price breakdown for the selected package (base cluster resources).\nPopulated for all paid clusters; omitted for free-tier quotes."
+        },
+        "extraDisk": {
+          "$ref": "#/definitions/v1PriceBreakdown",
+          "description": "Hourly price breakdown for additional disk beyond the package default.\nPopulated only when GetQuoteRequest.additional_disk_gib is greater than zero."
+        },
+        "diskSpeed": {
+          "$ref": "#/definitions/v1PriceBreakdown",
+          "description": "Hourly price breakdown for the selected storage performance tier (disk speed).\nPopulated only when the quote uses a tier other than cost-optimised\n(`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.)."
         }
       },
       "title": "GetQuoteResponse is the response from the GetQuote function"
@@ -783,6 +795,27 @@
       ],
       "default": "PACKAGE_TIER_STATUS_UNSPECIFIED",
       "description": "PackageTier defines the valid tiers a package can be in.\n\n - PACKAGE_TIER_STATUS_UNSPECIFIED: Unspecified package tier.\n - PACKAGE_TIER_STANDARD: Standard tier.\n - PACKAGE_TIER_PREMIUM: Premium tier."
+    },
+    "v1PriceBreakdown": {
+      "type": "object",
+      "properties": {
+        "originalPrice": {
+          "type": "string",
+          "format": "int64",
+          "description": "Pre-discount hourly total for this component, in millicents per hour across all cluster nodes."
+        },
+        "discountedPrice": {
+          "type": "string",
+          "format": "int64",
+          "description": "Post-discount hourly total for this component, in millicents per hour across all cluster nodes.\nIf no discount applies to this component, this equals original_price."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Independent discount rate for this component (e.g., 10.0 for 10%).\n0.0 when no discount applies to this component."
+        }
+      },
+      "description": "PriceBreakdown represents the price breakdown for one component of a quote.\nAmounts are in the same currency as the enclosing GetQuoteResponse."
     },
     "v1ResourceConfiguration": {
       "type": "object",

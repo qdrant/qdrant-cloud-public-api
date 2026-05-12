@@ -368,6 +368,22 @@ message GetQuoteRequest {
   optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 7;
 }
 
+// PriceBreakdown represents the price breakdown for one component of a quote.
+// Amounts are in the same currency as the enclosing GetQuoteResponse.
+message PriceBreakdown {
+  // Pre-discount hourly total for this component, in millicents per hour across all cluster nodes.
+  int64 original_price = 1 [(buf.validate.field).int64.gte = 0];
+  // Post-discount hourly total for this component, in millicents per hour across all cluster nodes.
+  // If no discount applies to this component, this equals original_price.
+  int64 discounted_price = 2 [(buf.validate.field).int64.gte = 0];
+  // Independent discount rate for this component (e.g., 10.0 for 10%).
+  // 0.0 when no discount applies to this component.
+  double discount_percentage = 3 [(buf.validate.field).double = {
+    gte: 0.0
+    lte: 100.0
+  }];
+}
+
 // GetQuoteResponse is the response from the GetQuote function
 message GetQuoteResponse {
   // The currency of the prices.
@@ -385,6 +401,16 @@ message GetQuoteResponse {
     gte: 0.0
     lte: 100.0
   }];
+  // Hourly price breakdown for the selected package (base cluster resources).
+  // Populated for all paid clusters; omitted for free-tier quotes.
+  optional PriceBreakdown package = 5;
+  // Hourly price breakdown for additional disk beyond the package default.
+  // Populated only when GetQuoteRequest.additional_disk_gib is greater than zero.
+  optional PriceBreakdown extra_disk = 6;
+  // Hourly price breakdown for the selected storage performance tier (disk speed).
+  // Populated only when the quote uses a tier other than cost-optimised
+  // (`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.).
+  optional PriceBreakdown disk_speed = 7;
 }
 
 // GetBackupQuoteRequest is the request for the GetBackupQuote function
