@@ -520,6 +520,11 @@
         "inferenceConfig": {
           "$ref": "#/definitions/v1InferenceConfig",
           "description": "Set when billable_entity_type is \"Inference Tokens\"."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double",
+          "title": "Quantity of the metric consumed during the period (cluster-wide,\nintegrated over the period). Per-metric meaning:\n  - Cluster: node-hours\n  - Cluster Extra Disk: GiB-hours\n  - Cluster Storage Tier: node-hours\n  - Backup: GiB-hours\n  - Inference Tokens: tokens"
         }
       },
       "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."

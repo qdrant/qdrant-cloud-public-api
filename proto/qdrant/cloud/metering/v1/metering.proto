@@ -310,6 +310,14 @@ message UsageBreakdownCluster {
     // Set when billable_entity_type is "Inference Tokens".
     InferenceConfig inference_config = 13;
   }
+  // Quantity of the metric consumed during the period (cluster-wide,
+  // integrated over the period). Per-metric meaning:
+  //   - Cluster: node-hours
+  //   - Cluster Extra Disk: GiB-hours
+  //   - Cluster Storage Tier: node-hours
+  //   - Backup: GiB-hours
+  //   - Inference Tokens: tokens
+  double quantity = 14 [(buf.validate.field).double.gte = 0];
   option (buf.validate.message).cel = {
     id: "usage_breakdown_cluster.end_time_gt_start_time"
     message: "end_time must be after start_time"
