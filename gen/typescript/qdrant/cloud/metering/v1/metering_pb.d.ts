@@ -968,6 +968,19 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
     value: InferenceConfig;
     case: "inferenceConfig";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * Quantity of the metric consumed during the period (cluster-wide,
+   * integrated over the period). Per-metric meaning:
+   *   - Cluster: node-hours
+   *   - Cluster Extra Disk: GiB-hours
+   *   - Cluster Storage Tier: node-hours
+   *   - Backup: GiB-hours
+   *   - Inference Tokens: tokens
+   *
+   * @generated from field: double quantity = 14;
+   */
+  quantity: number;
 };
 
 /**
@@ -1079,6 +1092,19 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
     value: InferenceConfigValid;
     case: "inferenceConfig";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * Quantity of the metric consumed during the period (cluster-wide,
+   * integrated over the period). Per-metric meaning:
+   *   - Cluster: node-hours
+   *   - Cluster Extra Disk: GiB-hours
+   *   - Cluster Storage Tier: node-hours
+   *   - Backup: GiB-hours
+   *   - Inference Tokens: tokens
+   *
+   * @generated from field: double quantity = 14;
+   */
+  quantity: number;
 };
 
 /**

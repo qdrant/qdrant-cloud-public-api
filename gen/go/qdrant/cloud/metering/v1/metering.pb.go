@@ -1132,7 +1132,15 @@ type UsageBreakdownCluster struct {
 	//	*UsageBreakdownCluster_ClusterStorageTierConfig
 	//	*UsageBreakdownCluster_BackupStorageConfig
 	//	*UsageBreakdownCluster_InferenceConfig
-	Config        isUsageBreakdownCluster_Config `protobuf_oneof:"config"`
+	Config isUsageBreakdownCluster_Config `protobuf_oneof:"config"`
+	// Quantity of the metric consumed during the period (cluster-wide,
+	// integrated over the period). Per-metric meaning:
+	//   - Cluster: node-hours
+	//   - Cluster Extra Disk: GiB-hours
+	//   - Cluster Storage Tier: node-hours
+	//   - Backup: GiB-hours
+	//   - Inference Tokens: tokens
+	Quantity      float64 `protobuf:"fixed64,14,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1275,6 +1283,13 @@ func (x *UsageBreakdownCluster) GetInferenceConfig() *InferenceConfig {
 	return nil
 }
 
+func (x *UsageBreakdownCluster) GetQuantity() float64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
 type isUsageBreakdownCluster_Config interface {
 	isUsageBreakdownCluster_Config()
 }
@@ -1412,7 +1427,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12\x1d\n" +
 	"\n" +
 	"model_name\x18\x03 \x01(\tR\tmodelName\x12!\n" +
-	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xc6\t\n" +
+	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xf2\t\n" +
 	"\x15UsageBreakdownCluster\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
@@ -1430,7 +1445,8 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	" \x01(\v20.qdrant.cloud.metering.v1.ClusterExtraDiskConfigH\x00R\x16clusterExtraDiskConfig\x12s\n" +
 	"\x1bcluster_storage_tier_config\x18\v \x01(\v22.qdrant.cloud.metering.v1.ClusterStorageTierConfigH\x00R\x18clusterStorageTierConfig\x12c\n" +
 	"\x15backup_storage_config\x18\f \x01(\v2-.qdrant.cloud.metering.v1.BackupStorageConfigH\x00R\x13backupStorageConfig\x12V\n" +
-	"\x10inference_config\x18\r \x01(\v2).qdrant.cloud.metering.v1.InferenceConfigH\x00R\x0finferenceConfig\x1a@\n" +
+	"\x10inference_config\x18\r \x01(\v2).qdrant.cloud.metering.v1.InferenceConfigH\x00R\x0finferenceConfig\x12*\n" +
+	"\bquantity\x18\x0e \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\bquantity\x1a@\n" +
 	"\x12ClusterLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:y\xbaHv\x1at\n" +
