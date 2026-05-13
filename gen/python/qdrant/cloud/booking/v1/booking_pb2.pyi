@@ -193,14 +193,14 @@ class GetQuoteRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
 class PriceBreakdown(_message.Message):
-    __slots__ = ("original_price", "discounted_price", "discount_percentage")
-    ORIGINAL_PRICE_FIELD_NUMBER: _ClassVar[int]
-    DISCOUNTED_PRICE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("original_price_per_hour", "discounted_price_per_hour", "discount_percentage")
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
     DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
-    original_price: int
-    discounted_price: int
+    original_price_per_hour: int
+    discounted_price_per_hour: int
     discount_percentage: float
-    def __init__(self, original_price: _Optional[int] = ..., discounted_price: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
+    def __init__(self, original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
 class GetQuoteResponse(_message.Message):
     __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "discount_percentage", "package", "extra_disk", "disk_speed")

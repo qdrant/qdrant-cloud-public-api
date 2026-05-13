@@ -799,12 +799,12 @@
     "v1PriceBreakdown": {
       "type": "object",
       "properties": {
-        "originalPrice": {
+        "originalPricePerHour": {
           "type": "string",
           "format": "int64",
           "description": "Pre-discount hourly total for this component, in millicents per hour across all cluster nodes."
         },
-        "discountedPrice": {
+        "discountedPricePerHour": {
           "type": "string",
           "format": "int64",
           "description": "Post-discount hourly total for this component, in millicents per hour across all cluster nodes.\nIf no discount applies to this component, this equals original_price."

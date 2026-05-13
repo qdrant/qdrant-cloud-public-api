@@ -601,17 +601,17 @@ export declare type PriceBreakdown = Message<"qdrant.cloud.booking.v1.PriceBreak
   /**
    * Pre-discount hourly total for this component, in millicents per hour across all cluster nodes.
    *
-   * @generated from field: int64 original_price = 1;
+   * @generated from field: int64 original_price_per_hour = 1;
    */
-  originalPrice: bigint;
+  originalPricePerHour: bigint;
 
   /**
    * Post-discount hourly total for this component, in millicents per hour across all cluster nodes.
    * If no discount applies to this component, this equals original_price.
    *
-   * @generated from field: int64 discounted_price = 2;
+   * @generated from field: int64 discounted_price_per_hour = 2;
    */
-  discountedPrice: bigint;
+  discountedPricePerHour: bigint;
 
   /**
    * Independent discount rate for this component (e.g., 10.0 for 10%).

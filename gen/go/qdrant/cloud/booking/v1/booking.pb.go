@@ -1173,10 +1173,10 @@ func (x *GetQuoteRequest) GetStorageTierType() v1.StorageTierType {
 type PriceBreakdown struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Pre-discount hourly total for this component, in millicents per hour across all cluster nodes.
-	OriginalPrice int64 `protobuf:"varint,1,opt,name=original_price,json=originalPrice,proto3" json:"original_price,omitempty"`
+	OriginalPricePerHour int64 `protobuf:"varint,1,opt,name=original_price_per_hour,json=originalPricePerHour,proto3" json:"original_price_per_hour,omitempty"`
 	// Post-discount hourly total for this component, in millicents per hour across all cluster nodes.
 	// If no discount applies to this component, this equals original_price.
-	DiscountedPrice int64 `protobuf:"varint,2,opt,name=discounted_price,json=discountedPrice,proto3" json:"discounted_price,omitempty"`
+	DiscountedPricePerHour int64 `protobuf:"varint,2,opt,name=discounted_price_per_hour,json=discountedPricePerHour,proto3" json:"discounted_price_per_hour,omitempty"`
 	// Independent discount rate for this component (e.g., 10.0 for 10%).
 	// 0.0 when no discount applies to this component.
 	DiscountPercentage float64 `protobuf:"fixed64,3,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"`
@@ -1214,16 +1214,16 @@ func (*PriceBreakdown) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *PriceBreakdown) GetOriginalPrice() int64 {
+func (x *PriceBreakdown) GetOriginalPricePerHour() int64 {
 	if x != nil {
-		return x.OriginalPrice
+		return x.OriginalPricePerHour
 	}
 	return 0
 }
 
-func (x *PriceBreakdown) GetDiscountedPrice() int64 {
+func (x *PriceBreakdown) GetDiscountedPricePerHour() int64 {
 	if x != nil {
-		return x.DiscountedPrice
+		return x.DiscountedPricePerHour
 	}
 	return 0
 }
@@ -2017,10 +2017,10 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x11storage_tier_type\x18\a \x01(\x0e2'.qdrant.cloud.common.v1.StorageTierTypeH\x01R\x0fstorageTierType\x88\x01\x01:\xca\x01\xbaH\xc6\x01\x1a\xc3\x01\n" +
 	"*get_quote.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x14\n" +
-	"\x12_storage_tier_type\"\xbe\x01\n" +
-	"\x0ePriceBreakdown\x12.\n" +
-	"\x0eoriginal_price\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\roriginalPrice\x122\n" +
-	"\x10discounted_price\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x0fdiscountedPrice\x12H\n" +
+	"\x12_storage_tier_type\"\xde\x01\n" +
+	"\x0ePriceBreakdown\x12>\n" +
+	"\x17original_price_per_hour\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x14originalPricePerHour\x12B\n" +
+	"\x19discounted_price_per_hour\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x16discountedPricePerHour\x12H\n" +
 	"\x13discount_percentage\x18\x03 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00R\x12discountPercentage\"\x9b\x04\n" +
 	"\x10GetQuoteResponse\x12-\n" +
 	"\bcurrency\x18\x01 \x01(\tB\x11\xbaH\x0er\f2\n" +
