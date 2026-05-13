@@ -152,14 +152,16 @@ class ClusterUsageConfig(_message.Message):
     def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., cpu_vcpu: _Optional[int] = ..., ram_gib: _Optional[int] = ..., disk_gib: _Optional[int] = ..., multi_az: _Optional[bool] = ..., gpu_enabled: _Optional[bool] = ..., pricing_tier: _Optional[str] = ..., node_count: _Optional[int] = ...) -> None: ...
 
 class ClusterExtraDiskConfig(_message.Message):
-    __slots__ = ("cloud_provider", "region", "pricing_tier")
+    __slots__ = ("cloud_provider", "region", "pricing_tier", "extra_disk_gib")
     CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
     REGION_FIELD_NUMBER: _ClassVar[int]
     PRICING_TIER_FIELD_NUMBER: _ClassVar[int]
+    EXTRA_DISK_GIB_FIELD_NUMBER: _ClassVar[int]
     cloud_provider: str
     region: str
     pricing_tier: str
-    def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., pricing_tier: _Optional[str] = ...) -> None: ...
+    extra_disk_gib: int
+    def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., pricing_tier: _Optional[str] = ..., extra_disk_gib: _Optional[int] = ...) -> None: ...
 
 class ClusterStorageTierConfig(_message.Message):
     __slots__ = ("cloud_provider", "region", "storage_tier", "pricing_tier")
