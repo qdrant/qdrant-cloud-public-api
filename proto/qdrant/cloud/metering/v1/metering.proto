@@ -220,6 +220,8 @@ message ClusterUsageConfig {
   bool gpu_enabled = 7;
   // Pricing tier the cluster was billed under (e.g., "standard", "premium").
   string pricing_tier = 8;
+  // Number of nodes in the cluster's active booking at the time of metering.
+  int32 node_count = 9 [(buf.validate.field).int32.gte = 0];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

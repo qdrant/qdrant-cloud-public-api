@@ -130,7 +130,7 @@ class UsageBreakdownAccount(_message.Message):
     def __init__(self, account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., clusters: _Optional[_Iterable[_Union[UsageBreakdownCluster, _Mapping]]] = ...) -> None: ...
 
 class ClusterUsageConfig(_message.Message):
-    __slots__ = ("cloud_provider", "region", "cpu_vcpu", "ram_gib", "disk_gib", "multi_az", "gpu_enabled", "pricing_tier")
+    __slots__ = ("cloud_provider", "region", "cpu_vcpu", "ram_gib", "disk_gib", "multi_az", "gpu_enabled", "pricing_tier", "node_count")
     CLOUD_PROVIDER_FIELD_NUMBER: _ClassVar[int]
     REGION_FIELD_NUMBER: _ClassVar[int]
     CPU_VCPU_FIELD_NUMBER: _ClassVar[int]
@@ -139,6 +139,7 @@ class ClusterUsageConfig(_message.Message):
     MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
     GPU_ENABLED_FIELD_NUMBER: _ClassVar[int]
     PRICING_TIER_FIELD_NUMBER: _ClassVar[int]
+    NODE_COUNT_FIELD_NUMBER: _ClassVar[int]
     cloud_provider: str
     region: str
     cpu_vcpu: int
@@ -147,7 +148,8 @@ class ClusterUsageConfig(_message.Message):
     multi_az: bool
     gpu_enabled: bool
     pricing_tier: str
-    def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., cpu_vcpu: _Optional[int] = ..., ram_gib: _Optional[int] = ..., disk_gib: _Optional[int] = ..., multi_az: _Optional[bool] = ..., gpu_enabled: _Optional[bool] = ..., pricing_tier: _Optional[str] = ...) -> None: ...
+    node_count: int
+    def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., cpu_vcpu: _Optional[int] = ..., ram_gib: _Optional[int] = ..., disk_gib: _Optional[int] = ..., multi_az: _Optional[bool] = ..., gpu_enabled: _Optional[bool] = ..., pricing_tier: _Optional[str] = ..., node_count: _Optional[int] = ...) -> None: ...
 
 class ClusterExtraDiskConfig(_message.Message):
     __slots__ = ("cloud_provider", "region", "pricing_tier")

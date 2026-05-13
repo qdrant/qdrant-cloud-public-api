@@ -734,7 +734,9 @@ type ClusterUsageConfig struct {
 	// Whether the cluster has GPU enabled.
 	GpuEnabled bool `protobuf:"varint,7,opt,name=gpu_enabled,json=gpuEnabled,proto3" json:"gpu_enabled,omitempty"`
 	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
-	PricingTier   string `protobuf:"bytes,8,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	PricingTier string `protobuf:"bytes,8,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	// Number of nodes in the cluster's active booking at the time of metering.
+	NodeCount     int32 `protobuf:"varint,9,opt,name=node_count,json=nodeCount,proto3" json:"node_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -823,6 +825,13 @@ func (x *ClusterUsageConfig) GetPricingTier() string {
 		return x.PricingTier
 	}
 	return ""
+}
+
+func (x *ClusterUsageConfig) GetNodeCount() int32 {
+	if x != nil {
+		return x.NodeCount
+	}
+	return 0
 }
 
 // ClusterExtraDiskConfig describes placement and tier for the
@@ -1398,7 +1407,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\faccount_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vaccountName\x12K\n" +
-	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\x9c\x02\n" +
+	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\xc4\x02\n" +
 	"\x12ClusterUsageConfig\x12%\n" +
 	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12\"\n" +
@@ -1408,7 +1417,9 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\bmulti_az\x18\x06 \x01(\bR\amultiAz\x12\x1f\n" +
 	"\vgpu_enabled\x18\a \x01(\bR\n" +
 	"gpuEnabled\x12!\n" +
-	"\fpricing_tier\x18\b \x01(\tR\vpricingTier\"z\n" +
+	"\fpricing_tier\x18\b \x01(\tR\vpricingTier\x12&\n" +
+	"\n" +
+	"node_count\x18\t \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\tnodeCount\"z\n" +
 	"\x16ClusterExtraDiskConfig\x12%\n" +
 	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +
