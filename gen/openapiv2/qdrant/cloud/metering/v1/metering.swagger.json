@@ -269,6 +269,11 @@
         "pricingTier": {
           "type": "string",
           "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes in the cluster's active booking at the time of metering."
         }
       },
       "description": "ClusterUsageConfig describes the shape and placement of a cluster\nfor the cluster-usage billable metric."

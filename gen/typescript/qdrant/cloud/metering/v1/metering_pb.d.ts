@@ -687,6 +687,13 @@ export declare type ClusterUsageConfig = Message<"qdrant.cloud.metering.v1.Clust
    * @generated from field: string pricing_tier = 8;
    */
   pricingTier: string;
+
+  /**
+   * Number of nodes in the cluster's active booking at the time of metering.
+   *
+   * @generated from field: int32 node_count = 9;
+   */
+  nodeCount: number;
 };
 
 export declare type ClusterUsageConfigValid = ClusterUsageConfig;
