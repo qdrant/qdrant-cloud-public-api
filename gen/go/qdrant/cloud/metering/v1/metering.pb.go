@@ -843,7 +843,9 @@ type ClusterExtraDiskConfig struct {
 	// Cloud provider region (e.g., "eu-central-1").
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
 	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
-	PricingTier   string `protobuf:"bytes,3,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	PricingTier string `protobuf:"bytes,3,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	// Extra disk attached to the cluster's active booking at the time of metering, in GiB.
+	ExtraDiskGib  int32 `protobuf:"varint,4,opt,name=extra_disk_gib,json=extraDiskGib,proto3" json:"extra_disk_gib,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -897,6 +899,13 @@ func (x *ClusterExtraDiskConfig) GetPricingTier() string {
 		return x.PricingTier
 	}
 	return ""
+}
+
+func (x *ClusterExtraDiskConfig) GetExtraDiskGib() int32 {
+	if x != nil {
+		return x.ExtraDiskGib
+	}
+	return 0
 }
 
 // ClusterStorageTierConfig describes placement and storage tier for
@@ -1419,11 +1428,12 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"gpuEnabled\x12!\n" +
 	"\fpricing_tier\x18\b \x01(\tR\vpricingTier\x12&\n" +
 	"\n" +
-	"node_count\x18\t \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\tnodeCount\"z\n" +
+	"node_count\x18\t \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\tnodeCount\"\xa9\x01\n" +
 	"\x16ClusterExtraDiskConfig\x12%\n" +
 	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +
-	"\fpricing_tier\x18\x03 \x01(\tR\vpricingTier\"\x9f\x01\n" +
+	"\fpricing_tier\x18\x03 \x01(\tR\vpricingTier\x12-\n" +
+	"\x0eextra_disk_gib\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\fextraDiskGib\"\x9f\x01\n" +
 	"\x18ClusterStorageTierConfig\x12%\n" +
 	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +

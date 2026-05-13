@@ -731,6 +731,13 @@ export declare type ClusterExtraDiskConfig = Message<"qdrant.cloud.metering.v1.C
    * @generated from field: string pricing_tier = 3;
    */
   pricingTier: string;
+
+  /**
+   * Extra disk attached to the cluster's active booking at the time of metering, in GiB.
+   *
+   * @generated from field: int32 extra_disk_gib = 4;
+   */
+  extraDiskGib: number;
 };
 
 export declare type ClusterExtraDiskConfigValid = ClusterExtraDiskConfig;

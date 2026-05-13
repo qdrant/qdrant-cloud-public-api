@@ -206,6 +206,11 @@
         "pricingTier": {
           "type": "string",
           "description": "Pricing tier the cluster was billed under (e.g., \"standard\", \"premium\")."
+        },
+        "extraDiskGib": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Extra disk attached to the cluster's active booking at the time of metering, in GiB."
         }
       },
       "description": "ClusterExtraDiskConfig describes placement and tier for the\ncluster-extra-disk billable metric."
