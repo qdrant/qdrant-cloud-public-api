@@ -322,6 +322,14 @@ message UsageBreakdownCluster {
   //   - Backup: GiB-hours
   //   - Inference Tokens: tokens
   double quantity = 14 [(buf.validate.field).double.gte = 0];
+  // The total discount applied to this entry, in millicents.
+  // Net charge = amount_millicents - discount_amount_millicents.
+  optional int64 discount_amount_millicents = 15 [(buf.validate.field).int64.gte = 0];
+  // The discount applied as a percentage (e.g., 12.5).
+  optional double discount_amount_percent = 16 [(buf.validate.field).double = {
+    gte: 0
+    lte: 100
+  }];
   option (buf.validate.message).cel = {
     id: "usage_breakdown_cluster.end_time_gt_start_time"
     message: "end_time must be after start_time"

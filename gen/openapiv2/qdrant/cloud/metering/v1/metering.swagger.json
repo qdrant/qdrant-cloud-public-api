@@ -535,6 +535,16 @@
           "type": "number",
           "format": "double",
           "title": "Quantity of the metric consumed during the period (cluster-wide,\nintegrated over the period). Per-metric meaning:\n  - Cluster: node-hours\n  - Cluster Extra Disk: GiB-hours\n  - Cluster Storage Tier: node-hours\n  - Backup: GiB-hours\n  - Inference Tokens: tokens"
+        },
+        "discountAmountMillicents": {
+          "type": "string",
+          "format": "int64",
+          "description": "The total discount applied to this entry, in millicents.\nNet charge = amount_millicents - discount_amount_millicents."
+        },
+        "discountAmountPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "The discount applied as a percentage (e.g., 12.5)."
         }
       },
       "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."

@@ -1158,9 +1158,14 @@ type UsageBreakdownCluster struct {
 	//   - Cluster Storage Tier: node-hours
 	//   - Backup: GiB-hours
 	//   - Inference Tokens: tokens
-	Quantity      float64 `protobuf:"fixed64,14,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Quantity float64 `protobuf:"fixed64,14,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	// The total discount applied to this entry, in millicents.
+	// Net charge = amount_millicents - discount_amount_millicents.
+	DiscountAmountMillicents *int64 `protobuf:"varint,15,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
+	// The discount applied as a percentage (e.g., 12.5).
+	DiscountAmountPercent *float64 `protobuf:"fixed64,16,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UsageBreakdownCluster) Reset() {
@@ -1308,6 +1313,20 @@ func (x *UsageBreakdownCluster) GetQuantity() float64 {
 	return 0
 }
 
+func (x *UsageBreakdownCluster) GetDiscountAmountMillicents() int64 {
+	if x != nil && x.DiscountAmountMillicents != nil {
+		return *x.DiscountAmountMillicents
+	}
+	return 0
+}
+
+func (x *UsageBreakdownCluster) GetDiscountAmountPercent() float64 {
+	if x != nil && x.DiscountAmountPercent != nil {
+		return *x.DiscountAmountPercent
+	}
+	return 0
+}
+
 type isUsageBreakdownCluster_Config interface {
 	isUsageBreakdownCluster_Config()
 }
@@ -1448,7 +1467,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12\x1d\n" +
 	"\n" +
 	"model_name\x18\x03 \x01(\tR\tmodelName\x12!\n" +
-	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xf2\t\n" +
+	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xcf\v\n" +
 	"\x15UsageBreakdownCluster\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
@@ -1467,12 +1486,16 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x1bcluster_storage_tier_config\x18\v \x01(\v22.qdrant.cloud.metering.v1.ClusterStorageTierConfigH\x00R\x18clusterStorageTierConfig\x12c\n" +
 	"\x15backup_storage_config\x18\f \x01(\v2-.qdrant.cloud.metering.v1.BackupStorageConfigH\x00R\x13backupStorageConfig\x12V\n" +
 	"\x10inference_config\x18\r \x01(\v2).qdrant.cloud.metering.v1.InferenceConfigH\x00R\x0finferenceConfig\x12*\n" +
-	"\bquantity\x18\x0e \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\bquantity\x1a@\n" +
+	"\bquantity\x18\x0e \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\bquantity\x12J\n" +
+	"\x1adiscount_amount_millicents\x18\x0f \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x01R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
+	"\x17discount_amount_percent\x18\x10 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x02R\x15discountAmountPercent\x88\x01\x01\x1a@\n" +
 	"\x12ClusterLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:y\xbaHv\x1at\n" +
 	".usage_breakdown_cluster.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\b\n" +
-	"\x06config2\xaa\x05\n" +
+	"\x06configB\x1d\n" +
+	"\x1b_discount_amount_millicentsB\x1a\n" +
+	"\x18_discount_amount_percent2\xaa\x05\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
 	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
 	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}\x12\xd8\x01\n" +

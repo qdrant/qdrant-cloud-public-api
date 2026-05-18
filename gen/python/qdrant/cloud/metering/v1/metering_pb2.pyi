@@ -198,7 +198,7 @@ class InferenceConfig(_message.Message):
     def __init__(self, cloud_provider: _Optional[str] = ..., region: _Optional[str] = ..., model_name: _Optional[str] = ..., pricing_tier: _Optional[str] = ...) -> None: ...
 
 class UsageBreakdownCluster(_message.Message):
-    __slots__ = ("cluster_id", "cluster_name", "cluster_labels", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type", "cluster_usage_config", "cluster_extra_disk_config", "cluster_storage_tier_config", "backup_storage_config", "inference_config", "quantity")
+    __slots__ = ("cluster_id", "cluster_name", "cluster_labels", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type", "cluster_usage_config", "cluster_extra_disk_config", "cluster_storage_tier_config", "backup_storage_config", "inference_config", "quantity", "discount_amount_millicents", "discount_amount_percent")
     class ClusterLabelsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -220,6 +220,8 @@ class UsageBreakdownCluster(_message.Message):
     BACKUP_STORAGE_CONFIG_FIELD_NUMBER: _ClassVar[int]
     INFERENCE_CONFIG_FIELD_NUMBER: _ClassVar[int]
     QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_AMOUNT_PERCENT_FIELD_NUMBER: _ClassVar[int]
     cluster_id: str
     cluster_name: str
     cluster_labels: _containers.ScalarMap[str, str]
@@ -234,4 +236,6 @@ class UsageBreakdownCluster(_message.Message):
     backup_storage_config: BackupStorageConfig
     inference_config: InferenceConfig
     quantity: float
-    def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., cluster_usage_config: _Optional[_Union[ClusterUsageConfig, _Mapping]] = ..., cluster_extra_disk_config: _Optional[_Union[ClusterExtraDiskConfig, _Mapping]] = ..., cluster_storage_tier_config: _Optional[_Union[ClusterStorageTierConfig, _Mapping]] = ..., backup_storage_config: _Optional[_Union[BackupStorageConfig, _Mapping]] = ..., inference_config: _Optional[_Union[InferenceConfig, _Mapping]] = ..., quantity: _Optional[float] = ...) -> None: ...
+    discount_amount_millicents: int
+    discount_amount_percent: float
+    def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., cluster_usage_config: _Optional[_Union[ClusterUsageConfig, _Mapping]] = ..., cluster_extra_disk_config: _Optional[_Union[ClusterExtraDiskConfig, _Mapping]] = ..., cluster_storage_tier_config: _Optional[_Union[ClusterStorageTierConfig, _Mapping]] = ..., backup_storage_config: _Optional[_Union[BackupStorageConfig, _Mapping]] = ..., inference_config: _Optional[_Union[InferenceConfig, _Mapping]] = ..., quantity: _Optional[float] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ...) -> None: ...

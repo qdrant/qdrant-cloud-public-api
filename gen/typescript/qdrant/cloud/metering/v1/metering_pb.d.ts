@@ -995,6 +995,21 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
    * @generated from field: double quantity = 14;
    */
   quantity: number;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 15;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 16;
+   */
+  discountAmountPercent?: number | undefined;
 };
 
 /**
@@ -1119,6 +1134,21 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
    * @generated from field: double quantity = 14;
    */
   quantity: number;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 15;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 16;
+   */
+  discountAmountPercent?: number | undefined;
 };
 
 /**
