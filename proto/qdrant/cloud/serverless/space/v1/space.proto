@@ -1,0 +1,245 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.space.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
+
+// SpaceService provides operations for managing spaces.
+service SpaceService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // ListSpaces returns all spaces for the authenticated user
+  // Required Permissions:
+  // - read:serverless
+  rpc ListSpaces(ListSpacesRequest) returns (ListSpacesResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces"};
+  }
+  // CreateSpace creates a new space with the specified configuration
+  // Required Permissions:
+  // - write:serverless
+  rpc CreateSpace(CreateSpaceRequest) returns (CreateSpaceResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "space.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{space.account_id}/spaces"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-space"
+      resource_id_field: "resp.space.id"
+      resource_url_template: "/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_name"
+      field_expression: "space.name"
+    };
+  }
+  // Updates a space in the account identified by the given ID.
+  // Required Permissions:
+  // - write:serverless
+  rpc UpdateSpace(UpdateSpaceRequest) returns (UpdateSpaceResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "serverless-space"
+      resource_id_field: "req.space.id"
+      resource_url_template: "/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space.id"
+    };
+  }
+  // DeleteSpace removes a space by ID
+  // Required Permissions:
+  // - delete:serverless
+  rpc DeleteSpace(DeleteSpaceRequest) returns (DeleteSpaceResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "delete:serverless";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-space"
+      resource_id_field: "req.space_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{req.space_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+}
+
+// ListSpacesRequest is an empty request to list spaces
+message ListSpacesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListSpacesResponse contains the list of spaces
+message ListSpacesResponse {
+  // List of spaces with their details
+  repeated Space items = 1;
+}
+
+// CreateSpaceRequest defines parameters for creating a new space
+message CreateSpaceRequest {
+  // Space represents a vector search space in the Qdrant serverless environment
+  Space space = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_space.no_read_only_fields"
+    message: "read-only fields (id, created_at, deleted_at, state) must not be set on create"
+    expression: "this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)"
+  };
+}
+
+// CreateSpaceResponse provides details about a created space
+message CreateSpaceResponse {
+  // Space represents a vector search space in the Qdrant serverless environment
+  Space space = 1 [(buf.validate.field).required = true];
+}
+
+// UpdateSpaceRequest is the request for the UpdateSpace function
+message UpdateSpaceRequest {
+  // The actual space
+  // This is a required field.
+  Space space = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_space.id_present"
+    message: "space.id is required for an update"
+    expression: "this.space.id != ''"
+  };
+}
+
+// UpdateSpaceResponse is the response from the UpdateSpace function
+message UpdateSpaceResponse {
+  // The actual space
+  Space space = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_space.state_present"
+    message: "state is required for an existing space"
+    expression: "has(this.space.state)"
+  };
+}
+
+// DeleteSpaceRequest identifies the space to delete
+message DeleteSpaceRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // ID of the space to delete (in GUID format).
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteSpaceResponse is an empty response for deletion confirmation
+message DeleteSpaceResponse {
+  // Empty
+}
+
+// Space represents a vector search space in the Qdrant serverless environment
+message Space {
+  // Unique identifier for the space (in GUID format).
+  // This is a read-only field and will be available after a space is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "space.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // Timestamp when the space was created.
+  // This is a read-only field and will be available after a space is created.
+  google.protobuf.Timestamp created_at = 2;
+  // Identifier of the account associated with the space (in GUID format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // Name of the space.
+  // This is a required field.
+  // Name can only contain letters, numbers, underscores and dashes
+  string name = 4 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // Timestamp when the space was deleted (or is started to be deleting).
+  // This is a read-only field and will be set after DeleteSpace is called.
+  google.protobuf.Timestamp deleted_at = 5;
+  // Cloud provider where the space is hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  // In this case, `hybrid` isn't supported.
+  // After creation, this field cannot be changed.
+  string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  // Cloud provider region where the space is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  // After creation, this field cannot be changed.
+  string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  // Status of the space
+  // All fields inside `state` are read-only.
+  SpaceState state = 100;
+}
+
+// SpaceStatePhase defines the operational phases of a Qdrant space.
+enum SpaceStatePhase {
+  // Unspecified phase.
+  SPACE_STATE_PHASE_UNSPECIFIED = 0;
+  // The Space is fully operational and available for use.
+  SPACE_STATE_PHASE_READY = 1;
+  // The Space is being created, updated, or undergoing maintenance.
+  SPACE_STATE_PHASE_PROCESSING = 2;
+  // The Space has been temporarily or permanently disabled.
+  SPACE_STATE_PHASE_DISABLED = 3;
+}
+
+// SpaceState represents the operational state of a space in the Qdrant serverless environment.
+// It provides status information, error details (if any), and endpoint access information.
+message SpaceState {
+  // The current operational status of the space.
+  SpaceStatePhase phase = 1 [(buf.validate.field).enum.defined_only = true];
+  // Descriptive message explaining any errors or issues with the space.
+  // Empty when the space is operating normally.
+  string reason = 2;
+  // The URL endpoint where clients can connect to and interact with the space.
+  // Not set if the space is not yet ready or is disabled.
+  optional SpaceEndpoint endpoint = 7;
+}
+
+// Endpoint information to access the qdrant space (aka serverless database).
+// All fields in this message are a read-only field.
+message SpaceEndpoint {
+  // URL to access the qdrant space (aka serverless database) without port
+  string url = 1 [(buf.validate.field).string = {uri: true}];
+  // The port to use for HTTP REST calls (6333)
+  // TODO: We only support gRPC, so this isn't needed
+  // int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+  // The port to use for gRPC calls (6334)
+  int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
+}

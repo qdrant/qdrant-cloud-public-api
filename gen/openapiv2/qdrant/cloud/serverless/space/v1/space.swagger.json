@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/space/v1/space.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "SpaceService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/spaces": {
+      "get": {
+        "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:serverless",
+        "operationId": "SpaceService_ListSpaces",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSpacesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}": {
+      "delete": {
+        "summary": "DeleteSpace removes a space by ID\nRequired Permissions:\n- delete:serverless",
+        "operationId": "SpaceService_DeleteSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteSpaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "ID of the space to delete (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{space.accountId}/spaces": {
+      "post": {
+        "summary": "CreateSpace creates a new space with the specified configuration\nRequired Permissions:\n- write:serverless",
+        "operationId": "SpaceService_CreateSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSpaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "space.accountId",
+            "description": "Identifier of the account associated with the space (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceServiceCreateSpaceBody"
+            }
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{space.accountId}/spaces/{space.id}": {
+      "put": {
+        "summary": "Updates a space in the account identified by the given ID.\nRequired Permissions:\n- write:serverless",
+        "operationId": "SpaceService_UpdateSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateSpaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "space.accountId",
+            "description": "Identifier of the account associated with the space (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "space.id",
+            "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceServiceUpdateSpaceBody"
+            }
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SpaceServiceCreateSpaceBody": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+            },
+            "state": {
+              "$ref": "#/definitions/v1SpaceState",
+              "description": "Status of the space\nAll fields inside `state` are read-only."
+            }
+          },
+          "title": "Space represents a vector search space in the Qdrant serverless environment"
+        }
+      },
+      "title": "CreateSpaceRequest defines parameters for creating a new space"
+    },
+    "SpaceServiceUpdateSpaceBody": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+            },
+            "state": {
+              "$ref": "#/definitions/v1SpaceState",
+              "description": "Status of the space\nAll fields inside `state` are read-only."
+            }
+          },
+          "description": "The actual space\nThis is a required field.",
+          "title": "Space represents a vector search space in the Qdrant serverless environment"
+        }
+      },
+      "title": "UpdateSpaceRequest is the request for the UpdateSpace function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateSpaceResponse": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "$ref": "#/definitions/v1Space",
+          "title": "Space represents a vector search space in the Qdrant serverless environment"
+        }
+      },
+      "title": "CreateSpaceResponse provides details about a created space"
+    },
+    "v1DeleteSpaceResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteSpaceResponse is an empty response for deletion confirmation"
+    },
+    "v1ListSpacesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Space"
+          },
+          "title": "List of spaces with their details"
+        }
+      },
+      "title": "ListSpacesResponse contains the list of spaces"
+    },
+    "v1Space": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the space (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+        },
+        "cloudProviderId": {
+          "type": "string",
+          "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+        },
+        "state": {
+          "$ref": "#/definitions/v1SpaceState",
+          "description": "Status of the space\nAll fields inside `state` are read-only."
+        }
+      },
+      "title": "Space represents a vector search space in the Qdrant serverless environment"
+    },
+    "v1SpaceEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant space (aka serverless database) without port"
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)\nTODO: We only support gRPC, so this isn't needed\nint32 rest_port = 2 [(buf.validate.field).int32.gt = 0];\nThe port to use for gRPC calls (6334)"
+        }
+      },
+      "description": "Endpoint information to access the qdrant space (aka serverless database).\nAll fields in this message are a read-only field."
+    },
+    "v1SpaceState": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/definitions/v1SpaceStatePhase",
+          "description": "The current operational status of the space."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Descriptive message explaining any errors or issues with the space.\nEmpty when the space is operating normally."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1SpaceEndpoint",
+          "description": "The URL endpoint where clients can connect to and interact with the space.\nNot set if the space is not yet ready or is disabled."
+        }
+      },
+      "description": "SpaceState represents the operational state of a space in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."
+    },
+    "v1SpaceStatePhase": {
+      "type": "string",
+      "enum": [
+        "SPACE_STATE_PHASE_UNSPECIFIED",
+        "SPACE_STATE_PHASE_READY",
+        "SPACE_STATE_PHASE_PROCESSING",
+        "SPACE_STATE_PHASE_DISABLED"
+      ],
+      "default": "SPACE_STATE_PHASE_UNSPECIFIED",
+      "description": "SpaceStatePhase defines the operational phases of a Qdrant space.\n\n - SPACE_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_STATE_PHASE_READY: The Space is fully operational and available for use.\n - SPACE_STATE_PHASE_PROCESSING: The Space is being created, updated, or undergoing maintenance.\n - SPACE_STATE_PHASE_DISABLED: The Space has been temporarily or permanently disabled."
+    },
+    "v1UpdateSpaceResponse": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "$ref": "#/definitions/v1Space",
+          "title": "The actual space"
+        }
+      },
+      "title": "UpdateSpaceResponse is the response from the UpdateSpace function"
+    }
+  }
+}
