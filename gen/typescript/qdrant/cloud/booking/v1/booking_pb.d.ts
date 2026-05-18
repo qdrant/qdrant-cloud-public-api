@@ -592,6 +592,45 @@ export declare type GetQuoteRequestValid = GetQuoteRequest;
 export declare const GetQuoteRequestSchema: GenMessage<GetQuoteRequest, {validType: GetQuoteRequestValid}>;
 
 /**
+ * PriceBreakdown represents the price breakdown for one component of a quote.
+ * Amounts are in the same currency as the enclosing GetQuoteResponse.
+ *
+ * @generated from message qdrant.cloud.booking.v1.PriceBreakdown
+ */
+export declare type PriceBreakdown = Message<"qdrant.cloud.booking.v1.PriceBreakdown"> & {
+  /**
+   * Pre-discount hourly total for this component, in millicents per hour across all cluster nodes.
+   *
+   * @generated from field: int64 original_price_per_hour = 1;
+   */
+  originalPricePerHour: bigint;
+
+  /**
+   * Post-discount hourly total for this component, in millicents per hour across all cluster nodes.
+   * If no discount applies to this component, this equals original_price.
+   *
+   * @generated from field: int64 discounted_price_per_hour = 2;
+   */
+  discountedPricePerHour: bigint;
+
+  /**
+   * Independent discount rate for this component (e.g., 10.0 for 10%).
+   * 0.0 when no discount applies to this component.
+   *
+   * @generated from field: double discount_percentage = 3;
+   */
+  discountPercentage: number;
+};
+
+export declare type PriceBreakdownValid = PriceBreakdown;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.PriceBreakdown.
+ * Use `create(PriceBreakdownSchema)` to create a new message.
+ */
+export declare const PriceBreakdownSchema: GenMessage<PriceBreakdown, {validType: PriceBreakdownValid}>;
+
+/**
  * GetQuoteResponse is the response from the GetQuote function
  *
  * @generated from message qdrant.cloud.booking.v1.GetQuoteResponse
@@ -628,6 +667,31 @@ export declare type GetQuoteResponse = Message<"qdrant.cloud.booking.v1.GetQuote
    * @generated from field: double discount_percentage = 4;
    */
   discountPercentage: number;
+
+  /**
+   * Hourly price breakdown for the selected package (base cluster resources).
+   * Populated for all paid clusters; omitted for free-tier quotes.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.PriceBreakdown package = 5;
+   */
+  package?: PriceBreakdown | undefined;
+
+  /**
+   * Hourly price breakdown for additional disk beyond the package default.
+   * Populated only when GetQuoteRequest.additional_disk_gib is greater than zero.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.PriceBreakdown extra_disk = 6;
+   */
+  extraDisk?: PriceBreakdown | undefined;
+
+  /**
+   * Hourly price breakdown for the selected storage performance tier (disk speed).
+   * Populated only when the quote uses a tier other than cost-optimised
+   * (`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.).
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.PriceBreakdown disk_speed = 7;
+   */
+  diskSpeed?: PriceBreakdown | undefined;
 };
 
 export declare type GetQuoteResponseValid = GetQuoteResponse;

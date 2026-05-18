@@ -715,6 +715,412 @@ func (x *UsageBreakdownAccount) GetClusters() []*UsageBreakdownCluster {
 	return nil
 }
 
+// ClusterUsageConfig describes the shape and placement of a cluster
+// for the cluster-usage billable metric.
+type ClusterUsageConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Number of vCPUs per node.
+	CpuVcpu int32 `protobuf:"varint,3,opt,name=cpu_vcpu,json=cpuVcpu,proto3" json:"cpu_vcpu,omitempty"`
+	// Amount of RAM per node, in GiB.
+	RamGib int32 `protobuf:"varint,4,opt,name=ram_gib,json=ramGib,proto3" json:"ram_gib,omitempty"`
+	// Disk size per node, in GiB.
+	DiskGib int32 `protobuf:"varint,5,opt,name=disk_gib,json=diskGib,proto3" json:"disk_gib,omitempty"`
+	// Whether the cluster is configured for multi-AZ.
+	MultiAz bool `protobuf:"varint,6,opt,name=multi_az,json=multiAz,proto3" json:"multi_az,omitempty"`
+	// Whether the cluster has GPU enabled.
+	GpuEnabled bool `protobuf:"varint,7,opt,name=gpu_enabled,json=gpuEnabled,proto3" json:"gpu_enabled,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier string `protobuf:"bytes,8,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	// Number of nodes in the cluster's active booking at the time of metering.
+	NodeCount     int32 `protobuf:"varint,9,opt,name=node_count,json=nodeCount,proto3" json:"node_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterUsageConfig) Reset() {
+	*x = ClusterUsageConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterUsageConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterUsageConfig) ProtoMessage() {}
+
+func (x *ClusterUsageConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterUsageConfig.ProtoReflect.Descriptor instead.
+func (*ClusterUsageConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ClusterUsageConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *ClusterUsageConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *ClusterUsageConfig) GetCpuVcpu() int32 {
+	if x != nil {
+		return x.CpuVcpu
+	}
+	return 0
+}
+
+func (x *ClusterUsageConfig) GetRamGib() int32 {
+	if x != nil {
+		return x.RamGib
+	}
+	return 0
+}
+
+func (x *ClusterUsageConfig) GetDiskGib() int32 {
+	if x != nil {
+		return x.DiskGib
+	}
+	return 0
+}
+
+func (x *ClusterUsageConfig) GetMultiAz() bool {
+	if x != nil {
+		return x.MultiAz
+	}
+	return false
+}
+
+func (x *ClusterUsageConfig) GetGpuEnabled() bool {
+	if x != nil {
+		return x.GpuEnabled
+	}
+	return false
+}
+
+func (x *ClusterUsageConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
+func (x *ClusterUsageConfig) GetNodeCount() int32 {
+	if x != nil {
+		return x.NodeCount
+	}
+	return 0
+}
+
+// ClusterExtraDiskConfig describes placement and tier for the
+// cluster-extra-disk billable metric.
+type ClusterExtraDiskConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier string `protobuf:"bytes,3,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	// Extra disk attached to the cluster's active booking at the time of metering, in GiB.
+	ExtraDiskGib  int32 `protobuf:"varint,4,opt,name=extra_disk_gib,json=extraDiskGib,proto3" json:"extra_disk_gib,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterExtraDiskConfig) Reset() {
+	*x = ClusterExtraDiskConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterExtraDiskConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterExtraDiskConfig) ProtoMessage() {}
+
+func (x *ClusterExtraDiskConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterExtraDiskConfig.ProtoReflect.Descriptor instead.
+func (*ClusterExtraDiskConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ClusterExtraDiskConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *ClusterExtraDiskConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *ClusterExtraDiskConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
+func (x *ClusterExtraDiskConfig) GetExtraDiskGib() int32 {
+	if x != nil {
+		return x.ExtraDiskGib
+	}
+	return 0
+}
+
+// ClusterStorageTierConfig describes placement and storage tier for
+// the cluster-storage-tier billable metric.
+type ClusterStorageTierConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Storage tier (e.g., "performance", "balanced").
+	StorageTier string `protobuf:"bytes,3,opt,name=storage_tier,json=storageTier,proto3" json:"storage_tier,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier   string `protobuf:"bytes,4,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterStorageTierConfig) Reset() {
+	*x = ClusterStorageTierConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterStorageTierConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterStorageTierConfig) ProtoMessage() {}
+
+func (x *ClusterStorageTierConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterStorageTierConfig.ProtoReflect.Descriptor instead.
+func (*ClusterStorageTierConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ClusterStorageTierConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *ClusterStorageTierConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *ClusterStorageTierConfig) GetStorageTier() string {
+	if x != nil {
+		return x.StorageTier
+	}
+	return ""
+}
+
+func (x *ClusterStorageTierConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
+// BackupStorageConfig describes placement and tier for the
+// backup-storage billable metric.
+type BackupStorageConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier   string `protobuf:"bytes,3,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupStorageConfig) Reset() {
+	*x = BackupStorageConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupStorageConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupStorageConfig) ProtoMessage() {}
+
+func (x *BackupStorageConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupStorageConfig.ProtoReflect.Descriptor instead.
+func (*BackupStorageConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *BackupStorageConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *BackupStorageConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *BackupStorageConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
+// InferenceConfig describes placement, model and tier for the
+// inference-tokens billable metric.
+type InferenceConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+	CloudProvider string `protobuf:"bytes,1,opt,name=cloud_provider,json=cloudProvider,proto3" json:"cloud_provider,omitempty"`
+	// Cloud provider region (e.g., "eu-central-1").
+	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	// Model identifier (e.g., "qdrant/text-embedder-v1").
+	ModelName string `protobuf:"bytes,3,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
+	// Pricing tier the cluster was billed under (e.g., "standard", "premium").
+	PricingTier   string `protobuf:"bytes,4,opt,name=pricing_tier,json=pricingTier,proto3" json:"pricing_tier,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InferenceConfig) Reset() {
+	*x = InferenceConfig{}
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InferenceConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InferenceConfig) ProtoMessage() {}
+
+func (x *InferenceConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InferenceConfig.ProtoReflect.Descriptor instead.
+func (*InferenceConfig) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *InferenceConfig) GetCloudProvider() string {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return ""
+}
+
+func (x *InferenceConfig) GetRegion() string {
+	if x != nil {
+		return x.Region
+	}
+	return ""
+}
+
+func (x *InferenceConfig) GetModelName() string {
+	if x != nil {
+		return x.ModelName
+	}
+	return ""
+}
+
+func (x *InferenceConfig) GetPricingTier() string {
+	if x != nil {
+		return x.PricingTier
+	}
+	return ""
+}
+
 // UsageBreakdownCluster represents the usage for a single cluster within a month.
 type UsageBreakdownCluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -734,13 +1140,37 @@ type UsageBreakdownCluster struct {
 	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The type of the billable entity (e.g., "cluster_booking", "backup", "inference_model").
 	BillableEntityType string `protobuf:"bytes,8,opt,name=billable_entity_type,json=billableEntityType,proto3" json:"billable_entity_type,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Per-metric configuration of the entity at the time of metering. Exactly
+	// one variant is set, matching the billable entity type.
+	//
+	// Types that are valid to be assigned to Config:
+	//
+	//	*UsageBreakdownCluster_ClusterUsageConfig
+	//	*UsageBreakdownCluster_ClusterExtraDiskConfig
+	//	*UsageBreakdownCluster_ClusterStorageTierConfig
+	//	*UsageBreakdownCluster_BackupStorageConfig
+	//	*UsageBreakdownCluster_InferenceConfig
+	Config isUsageBreakdownCluster_Config `protobuf_oneof:"config"`
+	// Quantity of the metric consumed during the period (cluster-wide,
+	// integrated over the period). Per-metric meaning:
+	//   - Cluster: node-hours
+	//   - Cluster Extra Disk: GiB-hours
+	//   - Cluster Storage Tier: node-hours
+	//   - Backup: GiB-hours
+	//   - Inference Tokens: tokens
+	Quantity float64 `protobuf:"fixed64,14,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	// The total discount applied to this entry, in millicents.
+	// Net charge = amount_millicents - discount_amount_millicents.
+	DiscountAmountMillicents *int64 `protobuf:"varint,15,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
+	// The discount applied as a percentage (e.g., 12.5).
+	DiscountAmountPercent *float64 `protobuf:"fixed64,16,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UsageBreakdownCluster) Reset() {
 	*x = UsageBreakdownCluster{}
-	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -752,7 +1182,7 @@ func (x *UsageBreakdownCluster) String() string {
 func (*UsageBreakdownCluster) ProtoMessage() {}
 
 func (x *UsageBreakdownCluster) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_metering_v1_metering_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -765,7 +1195,7 @@ func (x *UsageBreakdownCluster) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageBreakdownCluster.ProtoReflect.Descriptor instead.
 func (*UsageBreakdownCluster) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UsageBreakdownCluster) GetClusterId() string {
@@ -823,6 +1253,118 @@ func (x *UsageBreakdownCluster) GetBillableEntityType() string {
 	}
 	return ""
 }
+
+func (x *UsageBreakdownCluster) GetConfig() isUsageBreakdownCluster_Config {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetClusterUsageConfig() *ClusterUsageConfig {
+	if x != nil {
+		if x, ok := x.Config.(*UsageBreakdownCluster_ClusterUsageConfig); ok {
+			return x.ClusterUsageConfig
+		}
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetClusterExtraDiskConfig() *ClusterExtraDiskConfig {
+	if x != nil {
+		if x, ok := x.Config.(*UsageBreakdownCluster_ClusterExtraDiskConfig); ok {
+			return x.ClusterExtraDiskConfig
+		}
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetClusterStorageTierConfig() *ClusterStorageTierConfig {
+	if x != nil {
+		if x, ok := x.Config.(*UsageBreakdownCluster_ClusterStorageTierConfig); ok {
+			return x.ClusterStorageTierConfig
+		}
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetBackupStorageConfig() *BackupStorageConfig {
+	if x != nil {
+		if x, ok := x.Config.(*UsageBreakdownCluster_BackupStorageConfig); ok {
+			return x.BackupStorageConfig
+		}
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetInferenceConfig() *InferenceConfig {
+	if x != nil {
+		if x, ok := x.Config.(*UsageBreakdownCluster_InferenceConfig); ok {
+			return x.InferenceConfig
+		}
+	}
+	return nil
+}
+
+func (x *UsageBreakdownCluster) GetQuantity() float64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+func (x *UsageBreakdownCluster) GetDiscountAmountMillicents() int64 {
+	if x != nil && x.DiscountAmountMillicents != nil {
+		return *x.DiscountAmountMillicents
+	}
+	return 0
+}
+
+func (x *UsageBreakdownCluster) GetDiscountAmountPercent() float64 {
+	if x != nil && x.DiscountAmountPercent != nil {
+		return *x.DiscountAmountPercent
+	}
+	return 0
+}
+
+type isUsageBreakdownCluster_Config interface {
+	isUsageBreakdownCluster_Config()
+}
+
+type UsageBreakdownCluster_ClusterUsageConfig struct {
+	// Set when billable_entity_type is "Cluster".
+	ClusterUsageConfig *ClusterUsageConfig `protobuf:"bytes,9,opt,name=cluster_usage_config,json=clusterUsageConfig,proto3,oneof"`
+}
+
+type UsageBreakdownCluster_ClusterExtraDiskConfig struct {
+	// Set when billable_entity_type is "Cluster Extra Disk".
+	ClusterExtraDiskConfig *ClusterExtraDiskConfig `protobuf:"bytes,10,opt,name=cluster_extra_disk_config,json=clusterExtraDiskConfig,proto3,oneof"`
+}
+
+type UsageBreakdownCluster_ClusterStorageTierConfig struct {
+	// Set when billable_entity_type is "Cluster Storage Tier".
+	ClusterStorageTierConfig *ClusterStorageTierConfig `protobuf:"bytes,11,opt,name=cluster_storage_tier_config,json=clusterStorageTierConfig,proto3,oneof"`
+}
+
+type UsageBreakdownCluster_BackupStorageConfig struct {
+	// Set when billable_entity_type is "Backup".
+	BackupStorageConfig *BackupStorageConfig `protobuf:"bytes,12,opt,name=backup_storage_config,json=backupStorageConfig,proto3,oneof"`
+}
+
+type UsageBreakdownCluster_InferenceConfig struct {
+	// Set when billable_entity_type is "Inference Tokens".
+	InferenceConfig *InferenceConfig `protobuf:"bytes,13,opt,name=inference_config,json=inferenceConfig,proto3,oneof"`
+}
+
+func (*UsageBreakdownCluster_ClusterUsageConfig) isUsageBreakdownCluster_Config() {}
+
+func (*UsageBreakdownCluster_ClusterExtraDiskConfig) isUsageBreakdownCluster_Config() {}
+
+func (*UsageBreakdownCluster_ClusterStorageTierConfig) isUsageBreakdownCluster_Config() {}
+
+func (*UsageBreakdownCluster_BackupStorageConfig) isUsageBreakdownCluster_Config() {}
+
+func (*UsageBreakdownCluster_InferenceConfig) isUsageBreakdownCluster_Config() {}
 
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
 
@@ -893,7 +1435,39 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\faccount_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vaccountName\x12K\n" +
-	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\xb9\x05\n" +
+	"\bclusters\x18\x03 \x03(\v2/.qdrant.cloud.metering.v1.UsageBreakdownClusterR\bclusters\"\xc4\x02\n" +
+	"\x12ClusterUsageConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12\"\n" +
+	"\bcpu_vcpu\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\acpuVcpu\x12 \n" +
+	"\aram_gib\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\x06ramGib\x12\"\n" +
+	"\bdisk_gib\x18\x05 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\adiskGib\x12\x19\n" +
+	"\bmulti_az\x18\x06 \x01(\bR\amultiAz\x12\x1f\n" +
+	"\vgpu_enabled\x18\a \x01(\bR\n" +
+	"gpuEnabled\x12!\n" +
+	"\fpricing_tier\x18\b \x01(\tR\vpricingTier\x12&\n" +
+	"\n" +
+	"node_count\x18\t \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\tnodeCount\"\xa9\x01\n" +
+	"\x16ClusterExtraDiskConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +
+	"\fpricing_tier\x18\x03 \x01(\tR\vpricingTier\x12-\n" +
+	"\x0eextra_disk_gib\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\fextraDiskGib\"\x9f\x01\n" +
+	"\x18ClusterStorageTierConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +
+	"\fstorage_tier\x18\x03 \x01(\tR\vstorageTier\x12!\n" +
+	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"w\n" +
+	"\x13BackupStorageConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12!\n" +
+	"\fpricing_tier\x18\x03 \x01(\tR\vpricingTier\"\x92\x01\n" +
+	"\x0fInferenceConfig\x12%\n" +
+	"\x0ecloud_provider\x18\x01 \x01(\tR\rcloudProvider\x12\x16\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\x12\x1d\n" +
+	"\n" +
+	"model_name\x18\x03 \x01(\tR\tmodelName\x12!\n" +
+	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xcf\v\n" +
 	"\x15UsageBreakdownCluster\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
@@ -905,11 +1479,23 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x11amount_millicents\x18\x06 \x01(\x03B\a\xbaH\x04\"\x02(\x00R\x10amountMillicents\x120\n" +
 	"\bcurrency\x18\a \x01(\tB\x14\xbaH\x11r\x0f2\n" +
 	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\x129\n" +
-	"\x14billable_entity_type\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x1a@\n" +
+	"\x14billable_entity_type\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x12billableEntityType\x12`\n" +
+	"\x14cluster_usage_config\x18\t \x01(\v2,.qdrant.cloud.metering.v1.ClusterUsageConfigH\x00R\x12clusterUsageConfig\x12m\n" +
+	"\x19cluster_extra_disk_config\x18\n" +
+	" \x01(\v20.qdrant.cloud.metering.v1.ClusterExtraDiskConfigH\x00R\x16clusterExtraDiskConfig\x12s\n" +
+	"\x1bcluster_storage_tier_config\x18\v \x01(\v22.qdrant.cloud.metering.v1.ClusterStorageTierConfigH\x00R\x18clusterStorageTierConfig\x12c\n" +
+	"\x15backup_storage_config\x18\f \x01(\v2-.qdrant.cloud.metering.v1.BackupStorageConfigH\x00R\x13backupStorageConfig\x12V\n" +
+	"\x10inference_config\x18\r \x01(\v2).qdrant.cloud.metering.v1.InferenceConfigH\x00R\x0finferenceConfig\x12*\n" +
+	"\bquantity\x18\x0e \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\bquantity\x12J\n" +
+	"\x1adiscount_amount_millicents\x18\x0f \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x01R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
+	"\x17discount_amount_percent\x18\x10 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x02R\x15discountAmountPercent\x88\x01\x01\x1a@\n" +
 	"\x12ClusterLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:y\xbaHv\x1at\n" +
-	".usage_breakdown_cluster.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_time2\xaa\x05\n" +
+	".usage_breakdown_cluster.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\b\n" +
+	"\x06configB\x1d\n" +
+	"\x1b_discount_amount_millicentsB\x1a\n" +
+	"\x18_discount_amount_percent2\xaa\x05\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
 	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
 	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}\x12\xd8\x01\n" +
@@ -928,7 +1514,7 @@ func file_qdrant_cloud_metering_v1_metering_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_metering_v1_metering_proto_rawDescData
 }
 
-var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_qdrant_cloud_metering_v1_metering_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*ListMonthlyMeteringsRequest)(nil),  // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
 	(*ListMonthlyMeteringsResponse)(nil), // 1: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
@@ -940,36 +1526,46 @@ var file_qdrant_cloud_metering_v1_metering_proto_goTypes = []any{
 	(*GetUsageBreakdownResponse)(nil),    // 7: qdrant.cloud.metering.v1.GetUsageBreakdownResponse
 	(*UsageBreakdownMonth)(nil),          // 8: qdrant.cloud.metering.v1.UsageBreakdownMonth
 	(*UsageBreakdownAccount)(nil),        // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount
-	(*UsageBreakdownCluster)(nil),        // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster
-	nil,                                  // 11: qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
-	nil,                                  // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
-	(*timestamppb.Timestamp)(nil),        // 13: google.protobuf.Timestamp
+	(*ClusterUsageConfig)(nil),           // 10: qdrant.cloud.metering.v1.ClusterUsageConfig
+	(*ClusterExtraDiskConfig)(nil),       // 11: qdrant.cloud.metering.v1.ClusterExtraDiskConfig
+	(*ClusterStorageTierConfig)(nil),     // 12: qdrant.cloud.metering.v1.ClusterStorageTierConfig
+	(*BackupStorageConfig)(nil),          // 13: qdrant.cloud.metering.v1.BackupStorageConfig
+	(*InferenceConfig)(nil),              // 14: qdrant.cloud.metering.v1.InferenceConfig
+	(*UsageBreakdownCluster)(nil),        // 15: qdrant.cloud.metering.v1.UsageBreakdownCluster
+	nil,                                  // 16: qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	nil,                                  // 17: qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
+	(*timestamppb.Timestamp)(nil),        // 18: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_metering_v1_metering_proto_depIdxs = []int32{
 	4,  // 0: qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MonthlyMeteringSummary
 	5,  // 1: qdrant.cloud.metering.v1.ListMeteringsResponse.items:type_name -> qdrant.cloud.metering.v1.MeteringItem
-	13, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
-	13, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
-	11, // 4: qdrant.cloud.metering.v1.MeteringItem.cluster_labels:type_name -> qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
-	13, // 5: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.start_time:type_name -> google.protobuf.Timestamp
-	13, // 6: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.end_time:type_name -> google.protobuf.Timestamp
+	18, // 2: qdrant.cloud.metering.v1.MeteringItem.start_time:type_name -> google.protobuf.Timestamp
+	18, // 3: qdrant.cloud.metering.v1.MeteringItem.end_time:type_name -> google.protobuf.Timestamp
+	16, // 4: qdrant.cloud.metering.v1.MeteringItem.cluster_labels:type_name -> qdrant.cloud.metering.v1.MeteringItem.ClusterLabelsEntry
+	18, // 5: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.start_time:type_name -> google.protobuf.Timestamp
+	18, // 6: qdrant.cloud.metering.v1.GetUsageBreakdownRequest.end_time:type_name -> google.protobuf.Timestamp
 	8,  // 7: qdrant.cloud.metering.v1.GetUsageBreakdownResponse.items:type_name -> qdrant.cloud.metering.v1.UsageBreakdownMonth
 	9,  // 8: qdrant.cloud.metering.v1.UsageBreakdownMonth.accounts:type_name -> qdrant.cloud.metering.v1.UsageBreakdownAccount
-	10, // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount.clusters:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster
-	12, // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_labels:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
-	13, // 11: qdrant.cloud.metering.v1.UsageBreakdownCluster.start_time:type_name -> google.protobuf.Timestamp
-	13, // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 13: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
-	2,  // 14: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
-	6,  // 15: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:input_type -> qdrant.cloud.metering.v1.GetUsageBreakdownRequest
-	1,  // 16: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
-	3,  // 17: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
-	7,  // 18: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:output_type -> qdrant.cloud.metering.v1.GetUsageBreakdownResponse
-	16, // [16:19] is the sub-list for method output_type
-	13, // [13:16] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	15, // 9: qdrant.cloud.metering.v1.UsageBreakdownAccount.clusters:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster
+	17, // 10: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_labels:type_name -> qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntry
+	18, // 11: qdrant.cloud.metering.v1.UsageBreakdownCluster.start_time:type_name -> google.protobuf.Timestamp
+	18, // 12: qdrant.cloud.metering.v1.UsageBreakdownCluster.end_time:type_name -> google.protobuf.Timestamp
+	10, // 13: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_usage_config:type_name -> qdrant.cloud.metering.v1.ClusterUsageConfig
+	11, // 14: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_extra_disk_config:type_name -> qdrant.cloud.metering.v1.ClusterExtraDiskConfig
+	12, // 15: qdrant.cloud.metering.v1.UsageBreakdownCluster.cluster_storage_tier_config:type_name -> qdrant.cloud.metering.v1.ClusterStorageTierConfig
+	13, // 16: qdrant.cloud.metering.v1.UsageBreakdownCluster.backup_storage_config:type_name -> qdrant.cloud.metering.v1.BackupStorageConfig
+	14, // 17: qdrant.cloud.metering.v1.UsageBreakdownCluster.inference_config:type_name -> qdrant.cloud.metering.v1.InferenceConfig
+	0,  // 18: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:input_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest
+	2,  // 19: qdrant.cloud.metering.v1.MeteringService.ListMeterings:input_type -> qdrant.cloud.metering.v1.ListMeteringsRequest
+	6,  // 20: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:input_type -> qdrant.cloud.metering.v1.GetUsageBreakdownRequest
+	1,  // 21: qdrant.cloud.metering.v1.MeteringService.ListMonthlyMeterings:output_type -> qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse
+	3,  // 22: qdrant.cloud.metering.v1.MeteringService.ListMeterings:output_type -> qdrant.cloud.metering.v1.ListMeteringsResponse
+	7,  // 23: qdrant.cloud.metering.v1.MeteringService.GetUsageBreakdown:output_type -> qdrant.cloud.metering.v1.GetUsageBreakdownResponse
+	21, // [21:24] is the sub-list for method output_type
+	18, // [18:21] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_metering_v1_metering_proto_init() }
@@ -978,13 +1574,20 @@ func file_qdrant_cloud_metering_v1_metering_proto_init() {
 		return
 	}
 	file_qdrant_cloud_metering_v1_metering_proto_msgTypes[5].OneofWrappers = []any{}
+	file_qdrant_cloud_metering_v1_metering_proto_msgTypes[15].OneofWrappers = []any{
+		(*UsageBreakdownCluster_ClusterUsageConfig)(nil),
+		(*UsageBreakdownCluster_ClusterExtraDiskConfig)(nil),
+		(*UsageBreakdownCluster_ClusterStorageTierConfig)(nil),
+		(*UsageBreakdownCluster_BackupStorageConfig)(nil),
+		(*UsageBreakdownCluster_InferenceConfig)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_metering_v1_metering_proto_rawDesc), len(file_qdrant_cloud_metering_v1_metering_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

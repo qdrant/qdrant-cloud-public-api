@@ -626,6 +626,254 @@ export declare type UsageBreakdownAccountValid = Message<"qdrant.cloud.metering.
 export declare const UsageBreakdownAccountSchema: GenMessage<UsageBreakdownAccount, {validType: UsageBreakdownAccountValid}>;
 
 /**
+ * ClusterUsageConfig describes the shape and placement of a cluster
+ * for the cluster-usage billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterUsageConfig
+ */
+export declare type ClusterUsageConfig = Message<"qdrant.cloud.metering.v1.ClusterUsageConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Number of vCPUs per node.
+   *
+   * @generated from field: int32 cpu_vcpu = 3;
+   */
+  cpuVcpu: number;
+
+  /**
+   * Amount of RAM per node, in GiB.
+   *
+   * @generated from field: int32 ram_gib = 4;
+   */
+  ramGib: number;
+
+  /**
+   * Disk size per node, in GiB.
+   *
+   * @generated from field: int32 disk_gib = 5;
+   */
+  diskGib: number;
+
+  /**
+   * Whether the cluster is configured for multi-AZ.
+   *
+   * @generated from field: bool multi_az = 6;
+   */
+  multiAz: boolean;
+
+  /**
+   * Whether the cluster has GPU enabled.
+   *
+   * @generated from field: bool gpu_enabled = 7;
+   */
+  gpuEnabled: boolean;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 8;
+   */
+  pricingTier: string;
+
+  /**
+   * Number of nodes in the cluster's active booking at the time of metering.
+   *
+   * @generated from field: int32 node_count = 9;
+   */
+  nodeCount: number;
+};
+
+export declare type ClusterUsageConfigValid = ClusterUsageConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterUsageConfig.
+ * Use `create(ClusterUsageConfigSchema)` to create a new message.
+ */
+export declare const ClusterUsageConfigSchema: GenMessage<ClusterUsageConfig, {validType: ClusterUsageConfigValid}>;
+
+/**
+ * ClusterExtraDiskConfig describes placement and tier for the
+ * cluster-extra-disk billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterExtraDiskConfig
+ */
+export declare type ClusterExtraDiskConfig = Message<"qdrant.cloud.metering.v1.ClusterExtraDiskConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 3;
+   */
+  pricingTier: string;
+
+  /**
+   * Extra disk attached to the cluster's active booking at the time of metering, in GiB.
+   *
+   * @generated from field: int32 extra_disk_gib = 4;
+   */
+  extraDiskGib: number;
+};
+
+export declare type ClusterExtraDiskConfigValid = ClusterExtraDiskConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterExtraDiskConfig.
+ * Use `create(ClusterExtraDiskConfigSchema)` to create a new message.
+ */
+export declare const ClusterExtraDiskConfigSchema: GenMessage<ClusterExtraDiskConfig, {validType: ClusterExtraDiskConfigValid}>;
+
+/**
+ * ClusterStorageTierConfig describes placement and storage tier for
+ * the cluster-storage-tier billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.ClusterStorageTierConfig
+ */
+export declare type ClusterStorageTierConfig = Message<"qdrant.cloud.metering.v1.ClusterStorageTierConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Storage tier (e.g., "performance", "balanced").
+   *
+   * @generated from field: string storage_tier = 3;
+   */
+  storageTier: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 4;
+   */
+  pricingTier: string;
+};
+
+export declare type ClusterStorageTierConfigValid = ClusterStorageTierConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.ClusterStorageTierConfig.
+ * Use `create(ClusterStorageTierConfigSchema)` to create a new message.
+ */
+export declare const ClusterStorageTierConfigSchema: GenMessage<ClusterStorageTierConfig, {validType: ClusterStorageTierConfigValid}>;
+
+/**
+ * BackupStorageConfig describes placement and tier for the
+ * backup-storage billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.BackupStorageConfig
+ */
+export declare type BackupStorageConfig = Message<"qdrant.cloud.metering.v1.BackupStorageConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 3;
+   */
+  pricingTier: string;
+};
+
+export declare type BackupStorageConfigValid = BackupStorageConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.BackupStorageConfig.
+ * Use `create(BackupStorageConfigSchema)` to create a new message.
+ */
+export declare const BackupStorageConfigSchema: GenMessage<BackupStorageConfig, {validType: BackupStorageConfigValid}>;
+
+/**
+ * InferenceConfig describes placement, model and tier for the
+ * inference-tokens billable metric.
+ *
+ * @generated from message qdrant.cloud.metering.v1.InferenceConfig
+ */
+export declare type InferenceConfig = Message<"qdrant.cloud.metering.v1.InferenceConfig"> & {
+  /**
+   * Cloud provider (e.g., "aws", "gcp", "azure", "hybrid").
+   *
+   * @generated from field: string cloud_provider = 1;
+   */
+  cloudProvider: string;
+
+  /**
+   * Cloud provider region (e.g., "eu-central-1").
+   *
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * Model identifier (e.g., "qdrant/text-embedder-v1").
+   *
+   * @generated from field: string model_name = 3;
+   */
+  modelName: string;
+
+  /**
+   * Pricing tier the cluster was billed under (e.g., "standard", "premium").
+   *
+   * @generated from field: string pricing_tier = 4;
+   */
+  pricingTier: string;
+};
+
+export declare type InferenceConfigValid = InferenceConfig;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.InferenceConfig.
+ * Use `create(InferenceConfigSchema)` to create a new message.
+ */
+export declare const InferenceConfigSchema: GenMessage<InferenceConfig, {validType: InferenceConfigValid}>;
+
+/**
  * UsageBreakdownCluster represents the usage for a single cluster within a month.
  *
  * @generated from message qdrant.cloud.metering.v1.UsageBreakdownCluster
@@ -686,6 +934,82 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
    * @generated from field: string billable_entity_type = 8;
    */
   billableEntityType: string;
+
+  /**
+   * Per-metric configuration of the entity at the time of metering. Exactly
+   * one variant is set, matching the billable entity type.
+   *
+   * @generated from oneof qdrant.cloud.metering.v1.UsageBreakdownCluster.config
+   */
+  config: {
+    /**
+     * Set when billable_entity_type is "Cluster".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterUsageConfig cluster_usage_config = 9;
+     */
+    value: ClusterUsageConfig;
+    case: "clusterUsageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Extra Disk".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterExtraDiskConfig cluster_extra_disk_config = 10;
+     */
+    value: ClusterExtraDiskConfig;
+    case: "clusterExtraDiskConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Storage Tier".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterStorageTierConfig cluster_storage_tier_config = 11;
+     */
+    value: ClusterStorageTierConfig;
+    case: "clusterStorageTierConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Backup".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.BackupStorageConfig backup_storage_config = 12;
+     */
+    value: BackupStorageConfig;
+    case: "backupStorageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Inference Tokens".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.InferenceConfig inference_config = 13;
+     */
+    value: InferenceConfig;
+    case: "inferenceConfig";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Quantity of the metric consumed during the period (cluster-wide,
+   * integrated over the period). Per-metric meaning:
+   *   - Cluster: node-hours
+   *   - Cluster Extra Disk: GiB-hours
+   *   - Cluster Storage Tier: node-hours
+   *   - Backup: GiB-hours
+   *   - Inference Tokens: tokens
+   *
+   * @generated from field: double quantity = 14;
+   */
+  quantity: number;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 15;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 16;
+   */
+  discountAmountPercent?: number | undefined;
 };
 
 /**
@@ -749,6 +1073,82 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
    * @generated from field: string billable_entity_type = 8;
    */
   billableEntityType: string;
+
+  /**
+   * Per-metric configuration of the entity at the time of metering. Exactly
+   * one variant is set, matching the billable entity type.
+   *
+   * @generated from oneof qdrant.cloud.metering.v1.UsageBreakdownCluster.config
+   */
+  config: {
+    /**
+     * Set when billable_entity_type is "Cluster".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterUsageConfig cluster_usage_config = 9;
+     */
+    value: ClusterUsageConfigValid;
+    case: "clusterUsageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Extra Disk".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterExtraDiskConfig cluster_extra_disk_config = 10;
+     */
+    value: ClusterExtraDiskConfigValid;
+    case: "clusterExtraDiskConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Cluster Storage Tier".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.ClusterStorageTierConfig cluster_storage_tier_config = 11;
+     */
+    value: ClusterStorageTierConfigValid;
+    case: "clusterStorageTierConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Backup".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.BackupStorageConfig backup_storage_config = 12;
+     */
+    value: BackupStorageConfigValid;
+    case: "backupStorageConfig";
+  } | {
+    /**
+     * Set when billable_entity_type is "Inference Tokens".
+     *
+     * @generated from field: qdrant.cloud.metering.v1.InferenceConfig inference_config = 13;
+     */
+    value: InferenceConfigValid;
+    case: "inferenceConfig";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Quantity of the metric consumed during the period (cluster-wide,
+   * integrated over the period). Per-metric meaning:
+   *   - Cluster: node-hours
+   *   - Cluster Extra Disk: GiB-hours
+   *   - Cluster Storage Tier: node-hours
+   *   - Backup: GiB-hours
+   *   - Inference Tokens: tokens
+   *
+   * @generated from field: double quantity = 14;
+   */
+  quantity: number;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 15;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 16;
+   */
+  discountAmountPercent?: number | undefined;
 };
 
 /**
