@@ -18,19 +18,19 @@ service SpaceService {
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
-  // - read:serverless
+  // - read:spaces
   rpc ListSpaces(ListSpacesRequest) returns (ListSpacesResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "read:spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces"};
   }
   // CreateSpace creates a new space with the specified configuration
   // Required Permissions:
-  // - write:serverless
+  // - write:spaces
   rpc CreateSpace(CreateSpaceRequest) returns (CreateSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "write:spaces";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "space.account_id";
     // gRPC Gateway REST call
@@ -53,10 +53,10 @@ service SpaceService {
   }
   // Updates a space in the account identified by the given ID.
   // Required Permissions:
-  // - write:serverless
+  // - write:spaces
   rpc UpdateSpace(UpdateSpaceRequest) returns (UpdateSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "write:spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}"
@@ -77,10 +77,10 @@ service SpaceService {
   }
   // DeleteSpace removes a space by ID
   // Required Permissions:
-  // - delete:serverless
+  // - delete:spaces
   rpc DeleteSpace(DeleteSpaceRequest) returns (DeleteSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "delete:serverless";
+    option (qdrant.cloud.common.v1.permissions) = "delete:spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}"};
     // events

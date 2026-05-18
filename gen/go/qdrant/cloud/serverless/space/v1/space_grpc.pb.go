@@ -33,19 +33,19 @@ const (
 type SpaceServiceClient interface {
 	// ListSpaces returns all spaces for the authenticated user
 	// Required Permissions:
-	// - read:serverless
+	// - read:spaces
 	ListSpaces(ctx context.Context, in *ListSpacesRequest, opts ...grpc.CallOption) (*ListSpacesResponse, error)
 	// CreateSpace creates a new space with the specified configuration
 	// Required Permissions:
-	// - write:serverless
+	// - write:spaces
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*CreateSpaceResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
-	// - write:serverless
+	// - write:spaces
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*UpdateSpaceResponse, error)
 	// DeleteSpace removes a space by ID
 	// Required Permissions:
-	// - delete:serverless
+	// - delete:spaces
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*DeleteSpaceResponse, error)
 }
 
@@ -105,19 +105,19 @@ func (c *spaceServiceClient) DeleteSpace(ctx context.Context, in *DeleteSpaceReq
 type SpaceServiceServer interface {
 	// ListSpaces returns all spaces for the authenticated user
 	// Required Permissions:
-	// - read:serverless
+	// - read:spaces
 	ListSpaces(context.Context, *ListSpacesRequest) (*ListSpacesResponse, error)
 	// CreateSpace creates a new space with the specified configuration
 	// Required Permissions:
-	// - write:serverless
+	// - write:spaces
 	CreateSpace(context.Context, *CreateSpaceRequest) (*CreateSpaceResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
-	// - write:serverless
+	// - write:spaces
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*UpdateSpaceResponse, error)
 	// DeleteSpace removes a space by ID
 	// Required Permissions:
-	// - delete:serverless
+	// - delete:spaces
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*DeleteSpaceResponse, error)
 	mustEmbedUnimplementedSpaceServiceServer()
 }

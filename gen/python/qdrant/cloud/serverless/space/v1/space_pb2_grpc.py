@@ -44,7 +44,7 @@ class SpaceServiceServicer(object):
     def ListSpaces(self, request, context):
         """ListSpaces returns all spaces for the authenticated user
         Required Permissions:
-        - read:serverless
+        - read:spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -53,7 +53,7 @@ class SpaceServiceServicer(object):
     def CreateSpace(self, request, context):
         """CreateSpace creates a new space with the specified configuration
         Required Permissions:
-        - write:serverless
+        - write:spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -62,7 +62,7 @@ class SpaceServiceServicer(object):
     def UpdateSpace(self, request, context):
         """Updates a space in the account identified by the given ID.
         Required Permissions:
-        - write:serverless
+        - write:spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -71,7 +71,7 @@ class SpaceServiceServicer(object):
     def DeleteSpace(self, request, context):
         """DeleteSpace removes a space by ID
         Required Permissions:
-        - delete:serverless
+        - delete:spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -18,7 +18,7 @@
   "paths": {
     "/api/serverless/v1/accounts/{accountId}/spaces": {
       "get": {
-        "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:serverless",
+        "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:spaces",
         "operationId": "SpaceService_ListSpaces",
         "responses": {
           "200": {
@@ -50,7 +50,7 @@
     },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}": {
       "delete": {
-        "summary": "DeleteSpace removes a space by ID\nRequired Permissions:\n- delete:serverless",
+        "summary": "DeleteSpace removes a space by ID\nRequired Permissions:\n- delete:spaces",
         "operationId": "SpaceService_DeleteSpace",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/serverless/v1/accounts/{space.accountId}/spaces": {
       "post": {
-        "summary": "CreateSpace creates a new space with the specified configuration\nRequired Permissions:\n- write:serverless",
+        "summary": "CreateSpace creates a new space with the specified configuration\nRequired Permissions:\n- write:spaces",
         "operationId": "SpaceService_CreateSpace",
         "responses": {
           "200": {
@@ -129,7 +129,7 @@
     },
     "/api/serverless/v1/accounts/{space.accountId}/spaces/{space.id}": {
       "put": {
-        "summary": "Updates a space in the account identified by the given ID.\nRequired Permissions:\n- write:serverless",
+        "summary": "Updates a space in the account identified by the given ID.\nRequired Permissions:\n- write:spaces",
         "operationId": "SpaceService_UpdateSpace",
         "responses": {
           "200": {
