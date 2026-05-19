@@ -41,7 +41,7 @@ service PlatformService {
     option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
+      name            : "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
   }
@@ -54,11 +54,11 @@ service PlatformService {
     option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
+      name            : "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
     option (common.v1.log_fields) = {
-      name: "region_id"
+      name            : "region_id"
       field_expression: "region_id"
     };
   }
@@ -75,7 +75,7 @@ service PlatformService {
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
+      name            : "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
   }
@@ -92,11 +92,11 @@ service PlatformService {
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
+      name            : "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
     option (common.v1.log_fields) = {
-      name: "region_id"
+      name            : "region_id"
       field_expression: "region_id"
     };
   }
@@ -224,7 +224,7 @@ message CloudProviderRegion {
   string provider = 5 [(buf.validate.field).string.min_len = 1];
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
   optional string country_iso_code = 6 [(buf.validate.field).string = {
-    len: 2
+    len    : 2
     pattern: "^[A-Z]{2}$"
   }];
   // Geographic location grouping of the region.
@@ -236,9 +236,9 @@ message CloudProviderRegion {
   CloudProviderRegionCapabilities capabilities = 9;
   // Surfaces the specific reason cluster creation should be blocked for this region.
   ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
-  // Storage classes available in this region.
+  // Storage classes available in this region. This will be set in case of Hybrid cloud only.
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
-  // Volume snapshot classes available in this region.
+  // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
 }
 
