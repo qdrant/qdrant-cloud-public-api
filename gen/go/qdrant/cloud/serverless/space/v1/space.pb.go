@@ -179,7 +179,7 @@ func (x *ListSpacesResponse) GetItems() []*Space {
 // CreateSpaceRequest defines parameters for creating a new space
 type CreateSpaceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Space represents a vector search space in the Qdrant serverless environment
+	// Space represents a space in the Qdrant serverless environment
 	Space         *Space `protobuf:"bytes,1,opt,name=space,proto3" json:"space,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -225,7 +225,7 @@ func (x *CreateSpaceRequest) GetSpace() *Space {
 // CreateSpaceResponse provides details about a created space
 type CreateSpaceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Space represents a vector search space in the Qdrant serverless environment
+	// Space represents a space in the Qdrant serverless environment
 	Space         *Space `protobuf:"bytes,1,opt,name=space,proto3" json:"space,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -455,7 +455,8 @@ func (*DeleteSpaceResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{7}
 }
 
-// Space represents a vector search space in the Qdrant serverless environment
+// Space represents a space in the Qdrant serverless environment.
+// It can be used to store collections which can hold points.
 type Space struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the space (in GUID format).

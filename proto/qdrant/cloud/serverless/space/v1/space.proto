@@ -113,7 +113,7 @@ message ListSpacesResponse {
 
 // CreateSpaceRequest defines parameters for creating a new space
 message CreateSpaceRequest {
-  // Space represents a vector search space in the Qdrant serverless environment
+  // Space represents a space in the Qdrant serverless environment
   Space space = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space.no_read_only_fields"
@@ -124,7 +124,7 @@ message CreateSpaceRequest {
 
 // CreateSpaceResponse provides details about a created space
 message CreateSpaceResponse {
-  // Space represents a vector search space in the Qdrant serverless environment
+  // Space represents a space in the Qdrant serverless environment
   Space space = 1 [(buf.validate.field).required = true];
 }
 
@@ -166,7 +166,8 @@ message DeleteSpaceResponse {
   // Empty
 }
 
-// Space represents a vector search space in the Qdrant serverless environment
+// Space represents a space in the Qdrant serverless environment.
+// It can be used to store collections which can hold points.
 message Space {
   // Unique identifier for the space (in GUID format).
   // This is a read-only field and will be available after a space is created.

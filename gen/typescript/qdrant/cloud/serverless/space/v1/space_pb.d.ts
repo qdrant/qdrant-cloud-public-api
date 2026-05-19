@@ -63,7 +63,7 @@ export declare const ListSpacesResponseSchema: GenMessage<ListSpacesResponse, {v
  */
 export declare type CreateSpaceRequest = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceRequest"> & {
   /**
-   * Space represents a vector search space in the Qdrant serverless environment
+   * Space represents a space in the Qdrant serverless environment
    *
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
@@ -77,7 +77,7 @@ export declare type CreateSpaceRequest = Message<"qdrant.cloud.serverless.space.
  */
 export declare type CreateSpaceRequestValid = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceRequest"> & {
   /**
-   * Space represents a vector search space in the Qdrant serverless environment
+   * Space represents a space in the Qdrant serverless environment
    *
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
@@ -97,7 +97,7 @@ export declare const CreateSpaceRequestSchema: GenMessage<CreateSpaceRequest, {v
  */
 export declare type CreateSpaceResponse = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceResponse"> & {
   /**
-   * Space represents a vector search space in the Qdrant serverless environment
+   * Space represents a space in the Qdrant serverless environment
    *
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
@@ -111,7 +111,7 @@ export declare type CreateSpaceResponse = Message<"qdrant.cloud.serverless.space
  */
 export declare type CreateSpaceResponseValid = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceResponse"> & {
   /**
-   * Space represents a vector search space in the Qdrant serverless environment
+   * Space represents a space in the Qdrant serverless environment
    *
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
@@ -244,7 +244,8 @@ export declare type DeleteSpaceResponseValid = DeleteSpaceResponse;
 export declare const DeleteSpaceResponseSchema: GenMessage<DeleteSpaceResponse, {validType: DeleteSpaceResponseValid}>;
 
 /**
- * Space represents a vector search space in the Qdrant serverless environment
+ * Space represents a space in the Qdrant serverless environment.
+ * It can be used to store collections which can hold points.
  *
  * @generated from message qdrant.cloud.serverless.space.v1.Space
  */

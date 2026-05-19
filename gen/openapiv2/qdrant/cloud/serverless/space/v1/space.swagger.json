@@ -213,7 +213,7 @@
               "description": "Status of the space\nAll fields inside `state` are read-only."
             }
           },
-          "title": "Space represents a vector search space in the Qdrant serverless environment"
+          "title": "Space represents a space in the Qdrant serverless environment"
         }
       },
       "title": "CreateSpaceRequest defines parameters for creating a new space"
@@ -251,8 +251,7 @@
               "description": "Status of the space\nAll fields inside `state` are read-only."
             }
           },
-          "description": "The actual space\nThis is a required field.",
-          "title": "Space represents a vector search space in the Qdrant serverless environment"
+          "description": "The actual space\nThis is a required field."
         }
       },
       "title": "UpdateSpaceRequest is the request for the UpdateSpace function"
@@ -290,7 +289,7 @@
       "properties": {
         "space": {
           "$ref": "#/definitions/v1Space",
-          "title": "Space represents a vector search space in the Qdrant serverless environment"
+          "title": "Space represents a space in the Qdrant serverless environment"
         }
       },
       "title": "CreateSpaceResponse provides details about a created space"
@@ -352,7 +351,7 @@
           "description": "Status of the space\nAll fields inside `state` are read-only."
         }
       },
-      "title": "Space represents a vector search space in the Qdrant serverless environment"
+      "description": "Space represents a space in the Qdrant serverless environment.\nIt can be used to store collections which can hold points."
     },
     "v1SpaceEndpoint": {
       "type": "object",
