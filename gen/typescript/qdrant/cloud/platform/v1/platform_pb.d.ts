@@ -426,20 +426,22 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
 
   /**
    * Surfaces the specific reason cluster creation should be blocked for this region.
+   * Deprecated: because the cluster creation blocking reason is no longer determined at the region level
    *
-   * @generated from field: qdrant.cloud.platform.v1.ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
+   * @generated from field: qdrant.cloud.platform.v1.ClusterCreationBlockingReason cluster_creation_blocking_reason = 10 [deprecated = true];
+   * @deprecated
    */
   clusterCreationBlockingReason: ClusterCreationBlockingReason;
 
   /**
-   * Storage classes available in this region.
+   * Storage classes available in this region. This will be set in case of Hybrid cloud only.
    *
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
    */
   storageClasses: HybridCloudEnvironmentStorageClass[];
 
   /**
-   * Volume snapshot classes available in this region.
+   * Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
    *
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
    */
