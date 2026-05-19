@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { HybridCloudEnvironmentStorageClass, HybridCloudEnvironmentVolumeSnapshotClass } from "../../hybrid/v1/hybrid_cloud_pb.js";
 
 /**
  * Describes the file qdrant/cloud/platform/v1/platform.proto.
@@ -431,6 +432,20 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
    * @deprecated
    */
   clusterCreationBlockingReason: ClusterCreationBlockingReason;
+
+  /**
+   * Storage classes available in this region. This will be set in case of Hybrid cloud only.
+   *
+   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
+   */
+  storageClasses: HybridCloudEnvironmentStorageClass[];
+
+  /**
+   * Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
+   *
+   * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
+   */
+  volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClass[];
 };
 
 export declare type CloudProviderRegionValid = CloudProviderRegion;
