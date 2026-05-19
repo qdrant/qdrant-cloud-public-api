@@ -202,11 +202,11 @@
             },
             "cloudProviderId": {
               "type": "string",
-              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
             },
             "cloudProviderRegionId": {
               "type": "string",
-              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
@@ -240,11 +240,11 @@
             },
             "cloudProviderId": {
               "type": "string",
-              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
             },
             "cloudProviderRegionId": {
               "type": "string",
-              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+              "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
@@ -340,11 +340,11 @@
         },
         "cloudProviderId": {
           "type": "string",
-          "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.\nIn this case, `hybrid` isn't supported.\nAfter creation, this field cannot be changed."
         },
         "cloudProviderRegionId": {
           "type": "string",
-          "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nAfter creation, this field cannot be changed."
+          "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
         },
         "state": {
           "$ref": "#/definitions/v1SpaceState",

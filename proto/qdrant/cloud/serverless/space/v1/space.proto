@@ -195,12 +195,12 @@ message Space {
   // This is a read-only field and will be set after DeleteSpace is called.
   google.protobuf.Timestamp deleted_at = 5;
   // Cloud provider where the space is hosted.
-  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
   // In this case, `hybrid` isn't supported.
   // After creation, this field cannot be changed.
   string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
   // Cloud provider region where the space is hosted.
-  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
   // After creation, this field cannot be changed.
   string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
   // Status of the space

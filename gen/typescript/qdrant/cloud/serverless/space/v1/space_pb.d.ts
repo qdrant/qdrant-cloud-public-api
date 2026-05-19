@@ -293,7 +293,7 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
 
   /**
    * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
    * In this case, `hybrid` isn't supported.
    * After creation, this field cannot be changed.
    *
@@ -303,7 +303,7 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
 
   /**
    * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
    * After creation, this field cannot be changed.
    *
    * @generated from field: string cloud_provider_region_id = 11;
