@@ -1393,6 +1393,9 @@ type HybridCloudEnvironmentStatus struct {
 	// Volume attributes classes available in the hybrid cloud environment
 	VolumeAttributesClasses []*HybridCloudEnvironmentVolumeAttributesClass `protobuf:"bytes,14,rep,name=volume_attributes_classes,json=volumeAttributesClasses,proto3" json:"volume_attributes_classes,omitempty"`
 	// Expresses the storage configuration state of the hybrid cloud environment.
+	// Deprecated: because the storage configuration state is not a requirement for cluster creation
+	//
+	// Deprecated: Marked as deprecated in qdrant/cloud/hybrid/v1/hybrid_cloud.proto.
 	StorageConfigurationReadiness StorageConfigurationReadiness `protobuf:"varint,15,opt,name=storage_configuration_readiness,json=storageConfigurationReadiness,proto3,enum=qdrant.cloud.hybrid.v1.StorageConfigurationReadiness" json:"storage_configuration_readiness,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
@@ -1512,6 +1515,7 @@ func (x *HybridCloudEnvironmentStatus) GetVolumeAttributesClasses() []*HybridClo
 	return nil
 }
 
+// Deprecated: Marked as deprecated in qdrant/cloud/hybrid/v1/hybrid_cloud.proto.
 func (x *HybridCloudEnvironmentStatus) GetStorageConfigurationReadiness() StorageConfigurationReadiness {
 	if x != nil {
 		return x.StorageConfigurationReadiness
@@ -2135,7 +2139,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
 	"_log_levelB\x1d\n" +
-	"\x1b_advanced_operator_settings\"\x93\n" +
+	"\x1b_advanced_operator_settings\"\x98\n" +
 	"\n" +
 	"\x1cHybridCloudEnvironmentStatus\x12L\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12Y\n" +
@@ -2151,8 +2155,8 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\amessage\x18\v \x01(\tH\x01R\amessage\x88\x01\x01\x12c\n" +
 	"\x0fstorage_classes\x18\f \x03(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClassR\x0estorageClasses\x12y\n" +
 	"\x17volume_snapshot_classes\x18\r \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClasses\x12\x7f\n" +
-	"\x19volume_attributes_classes\x18\x0e \x03(\v2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClassR\x17volumeAttributesClasses\x12}\n" +
-	"\x1fstorage_configuration_readiness\x18\x0f \x01(\x0e25.qdrant.cloud.hybrid.v1.StorageConfigurationReadinessR\x1dstorageConfigurationReadinessB\x1a\n" +
+	"\x19volume_attributes_classes\x18\x0e \x03(\v2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClassR\x17volumeAttributesClasses\x12\x81\x01\n" +
+	"\x1fstorage_configuration_readiness\x18\x0f \x01(\x0e25.qdrant.cloud.hybrid.v1.StorageConfigurationReadinessB\x02\x18\x01R\x1dstorageConfigurationReadinessB\x1a\n" +
 	"\x18_kubernetes_distributionB\n" +
 	"\n" +
 	"\b_message\"x\n" +

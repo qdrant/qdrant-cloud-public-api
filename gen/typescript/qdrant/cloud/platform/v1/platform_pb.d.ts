@@ -425,8 +425,10 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
 
   /**
    * Surfaces the specific reason cluster creation should be blocked for this region.
+   * Deprecated: because the cluster creation blocking reason is no longer determined at the region level
    *
-   * @generated from field: qdrant.cloud.platform.v1.ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
+   * @generated from field: qdrant.cloud.platform.v1.ClusterCreationBlockingReason cluster_creation_blocking_reason = 10 [deprecated = true];
+   * @deprecated
    */
   clusterCreationBlockingReason: ClusterCreationBlockingReason;
 };

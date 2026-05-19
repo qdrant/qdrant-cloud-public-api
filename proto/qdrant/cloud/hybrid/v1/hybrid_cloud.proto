@@ -428,7 +428,8 @@ message HybridCloudEnvironmentStatus {
   // Volume attributes classes available in the hybrid cloud environment
   repeated HybridCloudEnvironmentVolumeAttributesClass volume_attributes_classes = 14;
   // Expresses the storage configuration state of the hybrid cloud environment.
-  StorageConfigurationReadiness storage_configuration_readiness = 15;
+  // Deprecated: because the storage configuration state is not a requirement for cluster creation
+  StorageConfigurationReadiness storage_configuration_readiness = 15 [deprecated = true];
 }
 
 // QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment
