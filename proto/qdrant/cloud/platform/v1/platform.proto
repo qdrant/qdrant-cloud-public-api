@@ -5,6 +5,7 @@ package qdrant.cloud.platform.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/hybrid/v1/hybrid_cloud.proto";
 
 // PlatformService is the API used to query for cloud provider & regional information.
 service PlatformService {
@@ -234,7 +235,12 @@ message CloudProviderRegion {
   // Storage capabilities available in this region.
   CloudProviderRegionCapabilities capabilities = 9;
   // Surfaces the specific reason cluster creation should be blocked for this region.
-  ClusterCreationBlockingReason cluster_creation_blocking_reason = 10;
+  // Deprecated: because the cluster creation blocking reason is no longer determined at the region level
+  ClusterCreationBlockingReason cluster_creation_blocking_reason = 10 [deprecated = true];
+  // Storage classes available in this region. This will be set in case of Hybrid cloud only.
+  repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
+  // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
+  repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.

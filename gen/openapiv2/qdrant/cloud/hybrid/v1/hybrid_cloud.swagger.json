@@ -724,7 +724,7 @@
         },
         "storageConfigurationReadiness": {
           "$ref": "#/definitions/v1StorageConfigurationReadiness",
-          "description": "Expresses the storage configuration state of the hybrid cloud environment."
+          "title": "Expresses the storage configuration state of the hybrid cloud environment.\nDeprecated: because the storage configuration state is not a requirement for cluster creation"
         }
       },
       "title": "Status of a hybrid cloud environment, read only"

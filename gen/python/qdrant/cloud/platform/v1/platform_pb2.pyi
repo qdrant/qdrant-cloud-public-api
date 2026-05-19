@@ -1,6 +1,7 @@
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
+from qdrant.cloud.hybrid.v1 import hybrid_cloud_pb2 as _hybrid_cloud_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -112,7 +113,7 @@ class CloudProvider(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ...) -> None: ...
 
 class CloudProviderRegion(_message.Message):
-    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "cluster_creation_blocking_reason")
+    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "cluster_creation_blocking_reason", "storage_classes", "volume_snapshot_classes")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     FREE_TIER_FIELD_NUMBER: _ClassVar[int]
@@ -123,6 +124,8 @@ class CloudProviderRegion(_message.Message):
     NAMESPACE_FIELD_NUMBER: _ClassVar[int]
     CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_CREATION_BLOCKING_REASON_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_CLASSES_FIELD_NUMBER: _ClassVar[int]
+    VOLUME_SNAPSHOT_CLASSES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     free_tier: bool
@@ -133,7 +136,9 @@ class CloudProviderRegion(_message.Message):
     namespace: str
     capabilities: CloudProviderRegionCapabilities
     cluster_creation_blocking_reason: ClusterCreationBlockingReason
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., cluster_creation_blocking_reason: _Optional[_Union[ClusterCreationBlockingReason, str]] = ...) -> None: ...
+    storage_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass]
+    volume_snapshot_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass]
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., cluster_creation_blocking_reason: _Optional[_Union[ClusterCreationBlockingReason, str]] = ..., storage_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
 
 class CloudProviderRegionCapabilities(_message.Message):
     __slots__ = ("volume_snapshot", "volume_expansion")
