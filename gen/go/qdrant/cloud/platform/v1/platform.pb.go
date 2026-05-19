@@ -771,6 +771,9 @@ type CloudProviderRegion struct {
 	// Storage capabilities available in this region.
 	Capabilities *CloudProviderRegionCapabilities `protobuf:"bytes,9,opt,name=capabilities,proto3" json:"capabilities,omitempty"`
 	// Surfaces the specific reason cluster creation should be blocked for this region.
+	// Deprecated: because the cluster creation blocking reason is no longer determined at the region level
+	//
+	// Deprecated: Marked as deprecated in qdrant/cloud/platform/v1/platform.proto.
 	ClusterCreationBlockingReason ClusterCreationBlockingReason `protobuf:"varint,10,opt,name=cluster_creation_blocking_reason,json=clusterCreationBlockingReason,proto3,enum=qdrant.cloud.platform.v1.ClusterCreationBlockingReason" json:"cluster_creation_blocking_reason,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
@@ -869,6 +872,7 @@ func (x *CloudProviderRegion) GetCapabilities() *CloudProviderRegionCapabilities
 	return nil
 }
 
+// Deprecated: Marked as deprecated in qdrant/cloud/platform/v1/platform.proto.
 func (x *CloudProviderRegion) GetClusterCreationBlockingReason() ClusterCreationBlockingReason {
 	if x != nil {
 		return x.ClusterCreationBlockingReason
@@ -970,7 +974,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\tfree_tier\x18\x03 \x01(\bR\bfreeTier\x12\x1c\n" +
-	"\tavailable\x18\x04 \x01(\bR\tavailable\"\x83\x05\n" +
+	"\tavailable\x18\x04 \x01(\bR\tavailable\"\x87\x05\n" +
 	"\x13CloudProviderRegion\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
@@ -981,9 +985,9 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"^[A-Z]{2}$\x98\x01\x02H\x00R\x0ecountryIsoCode\x88\x01\x01\x12D\n" +
 	"\x17geographical_sub_region\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15geographicalSubRegion\x88\x01\x01\x12*\n" +
 	"\tnamespace\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tnamespace\x88\x01\x01\x12]\n" +
-	"\fcapabilities\x18\t \x01(\v29.qdrant.cloud.platform.v1.CloudProviderRegionCapabilitiesR\fcapabilities\x12\x80\x01\n" +
+	"\fcapabilities\x18\t \x01(\v29.qdrant.cloud.platform.v1.CloudProviderRegionCapabilitiesR\fcapabilities\x12\x84\x01\n" +
 	" cluster_creation_blocking_reason\x18\n" +
-	" \x01(\x0e27.qdrant.cloud.platform.v1.ClusterCreationBlockingReasonR\x1dclusterCreationBlockingReasonB\x13\n" +
+	" \x01(\x0e27.qdrant.cloud.platform.v1.ClusterCreationBlockingReasonB\x02\x18\x01R\x1dclusterCreationBlockingReasonB\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
 	"\x18_geographical_sub_regionB\f\n" +
 	"\n" +

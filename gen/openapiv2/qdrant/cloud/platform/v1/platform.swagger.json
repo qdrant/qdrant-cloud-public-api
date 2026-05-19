@@ -320,7 +320,7 @@
         },
         "clusterCreationBlockingReason": {
           "$ref": "#/definitions/v1ClusterCreationBlockingReason",
-          "description": "Surfaces the specific reason cluster creation should be blocked for this region."
+          "title": "Surfaces the specific reason cluster creation should be blocked for this region.\nDeprecated: because the cluster creation blocking reason is no longer determined at the region level"
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."

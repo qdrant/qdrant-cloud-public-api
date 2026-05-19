@@ -814,8 +814,10 @@ export declare type HybridCloudEnvironmentStatus = Message<"qdrant.cloud.hybrid.
 
   /**
    * Expresses the storage configuration state of the hybrid cloud environment.
+   * Deprecated: because the storage configuration state is not a requirement for cluster creation
    *
-   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15;
+   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15 [deprecated = true];
+   * @deprecated
    */
   storageConfigurationReadiness: StorageConfigurationReadiness;
 };
@@ -912,8 +914,10 @@ export declare type HybridCloudEnvironmentStatusValid = Message<"qdrant.cloud.hy
 
   /**
    * Expresses the storage configuration state of the hybrid cloud environment.
+   * Deprecated: because the storage configuration state is not a requirement for cluster creation
    *
-   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15;
+   * @generated from field: qdrant.cloud.hybrid.v1.StorageConfigurationReadiness storage_configuration_readiness = 15 [deprecated = true];
+   * @deprecated
    */
   storageConfigurationReadiness: StorageConfigurationReadiness;
 };
