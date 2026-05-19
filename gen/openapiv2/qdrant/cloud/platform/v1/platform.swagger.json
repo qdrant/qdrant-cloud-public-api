@@ -321,6 +321,22 @@
         "clusterCreationBlockingReason": {
           "$ref": "#/definitions/v1ClusterCreationBlockingReason",
           "description": "Surfaces the specific reason cluster creation should be blocked for this region."
+        },
+        "storageClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentStorageClass"
+          },
+          "description": "Storage classes available in this region."
+        },
+        "volumeSnapshotClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
+          },
+          "description": "Volume snapshot classes available in this region."
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."
@@ -369,6 +385,68 @@
         }
       },
       "description": "GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function."
+    },
+    "v1HybridCloudEnvironmentStorageClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name specifies the name of the storage class"
+        },
+        "default": {
+          "type": "boolean",
+          "title": "Default specifies whether the storage class is the default storage class"
+        },
+        "provisioner": {
+          "type": "string",
+          "title": "Provisioner specifies the provisioner of the storage class"
+        },
+        "allowVolumeExpansion": {
+          "type": "boolean",
+          "title": "It specifies whether the storage class allows volume expansion"
+        },
+        "reclaimPolicy": {
+          "type": "string",
+          "title": "Specifies the reclaim policy of the storage class"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "parameters of the storage class"
+        }
+      },
+      "title": "A storage class available in hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentVolumeSnapshotClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name of the volume snapshot class"
+        },
+        "driver": {
+          "type": "string",
+          "title": "Driver of the volume snapshot class"
+        }
+      },
+      "title": "Volume snapshot class available in the hybrid cloud environment"
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
     },
     "v1ListCloudProviderRegionsResponse": {
       "type": "object",
