@@ -1,0 +1,284 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.space.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
+
+// Service for managing API keys for a serverless space
+service SpaceApiKeyService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // ListSpaceApiKeys returns all API keys for a space
+  // Required Permissions:
+  // - read:serverless_api_keys
+  rpc ListSpaceApiKeys(ListSpaceApiKeysRequest) returns (ListSpaceApiKeysResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // CreateSpaceApiKey creates a new API key for a space
+  // Required Permissions:
+  // - write:serverless_api_keys
+  rpc CreateSpaceApiKey(CreateSpaceApiKeyRequest) returns (CreateSpaceApiKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "space_api_key.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/auth/v1/accounts/{space_api_key.account_id}/spaces/{space_api_key.space_id}/api-keys"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-space-api-key"
+      resource_id_field: "resp.space_api_key.id"
+      resource_url_template: "/accounts/{req.space_api_key.account_id}/serverless-spaces/{req.space_api_key.space_id}/api-keys/{resp.space_api_key.id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.space_api_key.space_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_api_key.space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "space_api_key_name"
+      field_expression: "space_api_key.name"
+    };
+  }
+  // DeleteSpaceApiKey removes an API key from a space
+  // Required Permissions:
+  // - delete:serverless_api_keys
+  rpc DeleteSpaceApiKey(DeleteSpaceApiKeyRequest) returns (DeleteSpaceApiKeyResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "delete:serverless_api_keys";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys/{space_api_key_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-space-api-key"
+      resource_id_field: "req.space_api_key_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{req.space_id}/api-keys/{req.space_api_key_id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.space_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "space_api_key_id"
+      field_expression: "space_api_key_id"
+    };
+  }
+}
+
+// Request all API keys associated with a space
+message ListSpaceApiKeysRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Space the API keys belong to (in GUID format).
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// Response containing all API keys associated with a space
+message ListSpaceApiKeysResponse {
+  // List of API keys for the space
+  repeated SpaceApiKey items = 1;
+}
+
+// CreateSpaceApiKeyRequest defines parameters for creating a new space API key
+message CreateSpaceApiKeyRequest {
+  // The API key to create.
+  // This is a required field.
+  SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_space_api_key.no_read_only_fields"
+    message: "read-only fields (id, created_at, created_by_email, postfix, key) must not be set on create"
+    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.created_by_email == '' && this.space_api_key.postfix == '' && this.space_api_key.key == ''"
+  };
+}
+
+// CreateSpaceApiKeyResponse provides the API key after creation
+message CreateSpaceApiKeyResponse {
+  // The newly created API key value
+  SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
+}
+
+// DeleteSpaceApiKeyRequest identifies the API key to delete
+message DeleteSpaceApiKeyRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Space the key belongs to (in GUID format).
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // ID of the key to delete (in GUID format).
+  // This is a required field.
+  string space_api_key_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteSpaceApiKeyResponse is an empty response for deletion confirmation
+message DeleteSpaceApiKeyResponse {
+  // Empty
+}
+
+// A SpaceApiKey represents one space api key of a Qdrant cloud account.
+// This space key can grant access to a Qdrant cloud serverless space.
+message SpaceApiKey {
+  // Unique identifier for the space api key (in GUID format).
+  // This is a read-only field and will be available after a space api key is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "space_api_key.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Timestamp when the space api key was created.
+  // This is a read-only field and will be available after a space api key is created.
+  google.protobuf.Timestamp created_at = 3;
+  // The identifier of the space (in GUID format).
+  // This is a required field.
+  string space_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // Name of the space api key.
+  // This is a required field.
+  // Name can only contain letters, numbers, spaces, underscores and dashes.
+  string name = 5 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+    pattern: "^[\\w\\s-]+$"
+  }];
+  // The expiration time of the space api key. The key will be invalid after this time.
+  // This field is optional, and if not provided, the key does not expire.
+  optional google.protobuf.Timestamp expires_at = 6;
+  // A list of rules to grant access to the Qdrant serverless space or to specific
+  // collections in that space. If no access rules are provided, global access to the space
+  // with manage permissions is assumed. The list can contain a maximum of 20
+  // access rules.
+  repeated AccessRule access_rules = 7 [(buf.validate.field).repeated = {max_items: 20}];
+  // A validation rule to ensure that if any rule specifies global access,
+  // there should be no collection access rules present in the same configuration.
+  option (buf.validate.message).cel = {
+    id: "space_api_key.no_mixed_global_and_collection"
+    message: "There can't be global and collection access rules in the same space api key."
+    expression: "!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))"
+  };
+  // Validation rule to ensure that there is only one global access rule in the configuration.
+  option (buf.validate.message).cel = {
+    id: "space_api_key.only_one_global_access"
+    expression: "size(this.access_rules.filter(r, has(r.global_access))) <= 1"
+    message: "There can't be more than one global access rule in the configuration."
+  };
+  // The email of the user who created the space api key.
+  // This is an optional read-only field and will be available after a space api key is created.
+  // If the SpaceApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+  string created_by_email = 8 [(buf.validate.field).cel = {
+    id: "space_api_key.created_by_email_format"
+    message: "if set, created_by_email must be a valid email address"
+    expression: "this.size() == 0 || this.isEmail()"
+  }];
+  // Postfix for the space api key, this represents the last bytes of the key.
+  // This is a read-only field and will be available after a space api key is created.
+  string postfix = 9;
+  option (buf.validate.message).cel = {
+    id: "space_api_key.postfix"
+    message: "postfix must not be empty"
+    expression: "this.postfix.size() > 0 || !has(this.created_at)"
+  };
+  // The key for the space api key.
+  // This is a read-only field and will be available only once in the response of CreateSpaceApiKey.
+  // You should securely store this key and it should be handled as a secret.
+  string key = 10;
+}
+
+// Represents an access rule. An access rule can either define global access to
+// the space or access to a specific collection.
+message AccessRule {
+  // Defines the scope of the access rule, determining whether it applies globally
+  // to the entire space or is restricted to a specific collection.
+  oneof scope {
+    option (buf.validate.oneof).required = true;
+    // A rule granting global access to the entire space.
+    GlobalAccessRule global_access = 1;
+    // A rule granting access to a specific collection in the space.
+    CollectionAccessRule collection_access = 2;
+  }
+}
+
+// GlobalAccessRuleAccessType defines the possible access levels for global access rules.
+// For a detailed list of actions allowed for each access type, see:
+// https://qdrant.tech/documentation/guides/security/#table-of-access
+enum GlobalAccessRuleAccessType {
+  // Unspecified access type.
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+  // Grants access to perform actions that only read data (e.g., list collections).
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform all actions available in the space (e.g., update aliases).
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 2;
+}
+
+// Represents a global access rule that grants access to the entire space.
+message GlobalAccessRule {
+  // The type of access granted at the global level.
+  // This is a required field.
+  GlobalAccessRuleAccessType access_type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.
+// For a detailed list of actions allowed for each access type, see:
+// https://qdrant.tech/documentation/guides/security/#table-of-access
+enum CollectionAccessRuleAccessType {
+  // Unspecified access type.
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
+  // Grants access to perform collection-related actions that only read data (like `get collection info`).
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform collection-related actions that read or write data (like `upsert points`).
+  COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE = 2;
+}
+
+// Represents an access rule for a specific collection in the space.
+message CollectionAccessRule {
+  // The name of the collection.
+  // This is a required field.
+  string collection_name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+  // The type of access granted for the collection.
+  // This is a required field.
+  CollectionAccessRuleAccessType access_type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
