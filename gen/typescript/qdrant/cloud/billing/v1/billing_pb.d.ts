@@ -429,6 +429,13 @@ export declare type ListCreditContractsResponse = Message<"qdrant.cloud.billing.
    * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
    */
   items: CreditContract[];
+
+  /**
+   * History of credit consumption.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.MonthlyCreditConsumption consumption_history = 2;
+   */
+  consumptionHistory: MonthlyCreditConsumption[];
 };
 
 /**
@@ -443,6 +450,13 @@ export declare type ListCreditContractsResponseValid = Message<"qdrant.cloud.bil
    * @generated from field: repeated qdrant.cloud.billing.v1.CreditContract items = 1;
    */
   items: CreditContractValid[];
+
+  /**
+   * History of credit consumption.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.MonthlyCreditConsumption consumption_history = 2;
+   */
+  consumptionHistory: MonthlyCreditConsumptionValid[];
 };
 
 /**
@@ -450,6 +464,49 @@ export declare type ListCreditContractsResponseValid = Message<"qdrant.cloud.bil
  * Use `create(ListCreditContractsResponseSchema)` to create a new message.
  */
 export declare const ListCreditContractsResponseSchema: GenMessage<ListCreditContractsResponse, {validType: ListCreditContractsResponseValid}>;
+
+/**
+ * MonthlyCreditConsumption represents a month's consumed credits.
+ *
+ * @generated from message qdrant.cloud.billing.v1.MonthlyCreditConsumption
+ */
+export declare type MonthlyCreditConsumption = Message<"qdrant.cloud.billing.v1.MonthlyCreditConsumption"> & {
+  /**
+   * The year this entry represents (e.g. 2026).
+   *
+   * @generated from field: int32 year = 1;
+   */
+  year: number;
+
+  /**
+   * The month this entry represents (1 = January, 12 = December).
+   *
+   * @generated from field: int32 month = 2;
+   */
+  month: number;
+
+  /**
+   * The amount of credits consumed in the month.
+   *
+   * @generated from field: double amount = 3;
+   */
+  amount: number;
+
+  /**
+   * The currency of the consumed credits.
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+};
+
+export declare type MonthlyCreditConsumptionValid = MonthlyCreditConsumption;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.MonthlyCreditConsumption.
+ * Use `create(MonthlyCreditConsumptionSchema)` to create a new message.
+ */
+export declare const MonthlyCreditConsumptionSchema: GenMessage<MonthlyCreditConsumption, {validType: MonthlyCreditConsumptionValid}>;
 
 /**
  * CreditContract represents a prepaid credit contract for an organization.
