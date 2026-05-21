@@ -385,6 +385,14 @@
             "$ref": "#/definitions/v1CreditContract"
           },
           "description": "The list of credit contracts."
+        },
+        "consumptionHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1MonthlyCreditConsumption"
+          },
+          "description": "History of credit consumption."
         }
       },
       "title": "ListCreditContractsResponse is the response from the ListCreditContracts function"
@@ -416,6 +424,31 @@
         }
       },
       "title": "ListInvoicesResponse is the response from the ListInvoices function"
+    },
+    "v1MonthlyCreditConsumption": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The year this entry represents (e.g. 2026)."
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The month this entry represents (1 = January, 12 = December)."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The amount of credits consumed in the month."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the consumed credits."
+        }
+      },
+      "description": "MonthlyCreditConsumption represents a month's consumed credits."
     }
   }
 }

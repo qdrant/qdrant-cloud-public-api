@@ -169,6 +169,26 @@ message ListCreditContractsRequest {
 message ListCreditContractsResponse {
   // The list of credit contracts.
   repeated CreditContract items = 1;
+  // History of credit consumption.
+  repeated MonthlyCreditConsumption consumption_history = 2;
+}
+
+// MonthlyCreditConsumption represents a month's consumed credits.
+message MonthlyCreditConsumption {
+  // The year this entry represents (e.g. 2026).
+  int32 year = 1 [(buf.validate.field).int32 = {
+    gte: 2000
+    lte: 3000
+  }];
+  // The month this entry represents (1 = January, 12 = December).
+  int32 month = 2 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 12
+  }];
+  // The amount of credits consumed in the month.
+  double amount = 3 [(buf.validate.field).double.gte = 0.0];
+  // The currency of the consumed credits.
+  string currency = 4 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

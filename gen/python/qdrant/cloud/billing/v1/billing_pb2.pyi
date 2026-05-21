@@ -103,10 +103,24 @@ class ListCreditContractsRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class ListCreditContractsResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ("items", "consumption_history")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
+    CONSUMPTION_HISTORY_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[CreditContract]
-    def __init__(self, items: _Optional[_Iterable[_Union[CreditContract, _Mapping]]] = ...) -> None: ...
+    consumption_history: _containers.RepeatedCompositeFieldContainer[MonthlyCreditConsumption]
+    def __init__(self, items: _Optional[_Iterable[_Union[CreditContract, _Mapping]]] = ..., consumption_history: _Optional[_Iterable[_Union[MonthlyCreditConsumption, _Mapping]]] = ...) -> None: ...
+
+class MonthlyCreditConsumption(_message.Message):
+    __slots__ = ("year", "month", "amount", "currency")
+    YEAR_FIELD_NUMBER: _ClassVar[int]
+    MONTH_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    year: int
+    month: int
+    amount: float
+    currency: str
+    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class CreditContract(_message.Message):
     __slots__ = ("id", "account_id", "total_amount", "currency", "active_from", "active_to", "notes", "used_amount", "remaining_amount")
