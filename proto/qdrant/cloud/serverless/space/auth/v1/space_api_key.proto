@@ -234,14 +234,16 @@ message AccessRule {
 
 // GlobalAccessRuleAccessType defines the possible access levels for global access rules.
 // For a detailed list of actions allowed for each access type, see:
-// https://qdrant.tech/documentation/guides/security/#table-of-access
+// TODO: serverless list like https://qdrant.tech/documentation/guides/security/#table-of-access
 enum GlobalAccessRuleAccessType {
   // Unspecified access type.
   GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
-  // Grants access to perform actions that only read data (e.g., list collections).
-  GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+  // Grants access to perform to read the metrics (it cannot acces any data, only metadata)
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY = 1;
+  // Grants access to perform actions that only read data (e.g., list collections, including metrics).
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 2;
   // Grants access to perform all actions available in the space (e.g., update aliases).
-  GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 2;
+  GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 3;
 }
 
 // Represents a global access rule that grants access to the entire space.

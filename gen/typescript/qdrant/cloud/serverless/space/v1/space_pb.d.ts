@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue } from "../../../common/v1/common_pb.js";
+import type { KeyValue, KeyValueValid } from "../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/serverless/space/v1/space.proto.
@@ -100,7 +100,35 @@ export declare type ListSpacesResponse = Message<"qdrant.cloud.serverless.space.
   nextPageToken?: string | undefined;
 };
 
-export declare type ListSpacesResponseValid = ListSpacesResponse;
+/**
+ * ListSpacesResponse contains the list of spaces
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.ListSpacesResponse
+ */
+export declare type ListSpacesResponseValid = Message<"qdrant.cloud.serverless.space.v1.ListSpacesResponse"> & {
+  /**
+   * List of spaces with their details
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.space.v1.Space items = 1;
+   */
+  items: SpaceValid[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
+};
 
 /**
  * Describes the message qdrant.cloud.serverless.space.v1.ListSpacesResponse.
@@ -394,7 +422,7 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
 
   /**
    * Name of the space.
-   * This is a required field.
+   * This is a required field and should be unique within the account.
    * Name can only contain letters, numbers, underscores and dashes
    *
    * @generated from field: string name = 4;
@@ -445,6 +473,14 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
   costAllocationLabel?: string | undefined;
 
   /**
+   * Current configuration details of the space.
+   * This is a required field.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpaceConfiguration configuration = 20;
+   */
+  configuration?: SpaceConfiguration | undefined;
+
+  /**
    * Status of the space
    * All fields inside `state` are read-only.
    *
@@ -453,13 +489,143 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
   state?: SpaceState | undefined;
 };
 
-export declare type SpaceValid = Space;
+/**
+ * Space represents a space in the Qdrant serverless environment.
+ * It can be used to store collections which can hold points.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.Space
+ */
+export declare type SpaceValid = Message<"qdrant.cloud.serverless.space.v1.Space"> & {
+  /**
+   * Unique identifier for the space (in GUID format).
+   * This is a read-only field and will be available after a space is created.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * Timestamp when the space was created.
+   * This is a read-only field and will be available after a space is created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   */
+  createdAt?: Timestamp | undefined;
+
+  /**
+   * Identifier of the account associated with the space (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 3;
+   */
+  accountId: string;
+
+  /**
+   * Name of the space.
+   * This is a required field and should be unique within the account.
+   * Name can only contain letters, numbers, underscores and dashes
+   *
+   * @generated from field: string name = 4;
+   */
+  name: string;
+
+  /**
+   * Timestamp when the space was deleted (or is started to be deleting).
+   * This is a read-only field and will be set after DeleteSpace is called.
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 5;
+   */
+  deletedAt?: Timestamp | undefined;
+
+  /**
+   * Cloud provider where the space is hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
+   * In this case, `hybrid` isn't supported.
+   * After creation, this field cannot be changed.
+   *
+   * @generated from field: string cloud_provider_id = 10;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Cloud provider region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
+   * After creation, this field cannot be changed.
+   *
+   * @generated from field: string cloud_provider_region_id = 11;
+   */
+  cloudProviderRegionId: string;
+
+  /**
+   * List of labels for a space. These labels are used in the cloud ui and billing reports.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 12;
+   */
+  labels: KeyValueValid[];
+
+  /**
+   * When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering
+   * usage data as additional meta data to be used for cost allocation in the billing reports.
+   *
+   * @generated from field: optional string cost_allocation_label = 13;
+   */
+  costAllocationLabel?: string | undefined;
+
+  /**
+   * Current configuration details of the space.
+   * This is a required field.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpaceConfiguration configuration = 20;
+   */
+  configuration: SpaceConfigurationValid;
+
+  /**
+   * Status of the space
+   * All fields inside `state` are read-only.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpaceState state = 100;
+   */
+  state?: SpaceStateValid | undefined;
+};
 
 /**
  * Describes the message qdrant.cloud.serverless.space.v1.Space.
  * Use `create(SpaceSchema)` to create a new message.
  */
 export declare const SpaceSchema: GenMessage<Space, {validType: SpaceValid}>;
+
+/**
+ * A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SpaceConfiguration
+ */
+export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.v1.SpaceConfiguration"> & {
+  /**
+   * Timestamp when the space configuration was last updated.
+   * This is a read-only field and will be available after a space is created.
+   *
+   * @generated from field: google.protobuf.Timestamp last_modified_at = 1;
+   */
+  lastModifiedAt?: Timestamp | undefined;
+
+  /**
+   * List of allowed IP source ranges for this space.
+   * This is an optional field.
+   * The CIDRs supports IPv4 only.
+   *
+   * @generated from field: repeated string allowed_ip_source_ranges = 11;
+   */
+  allowedIpSourceRanges: string[];
+};
+
+export declare type SpaceConfigurationValid = SpaceConfiguration;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SpaceConfiguration.
+ * Use `create(SpaceConfigurationSchema)` to create a new message.
+ */
+export declare const SpaceConfigurationSchema: GenMessage<SpaceConfiguration, {validType: SpaceConfigurationValid}>;
 
 /**
  * SpaceState represents the operational state of a space in the Qdrant serverless environment.

@@ -640,7 +640,7 @@ type Space struct {
 	// This is a required field.
 	AccountId string `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Name of the space.
-	// This is a required field.
+	// This is a required field and should be unique within the account.
 	// Name can only contain letters, numbers, underscores and dashes
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Timestamp when the space was deleted (or is started to be deleting).
@@ -661,6 +661,9 @@ type Space struct {
 	// When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering
 	// usage data as additional meta data to be used for cost allocation in the billing reports.
 	CostAllocationLabel *string `protobuf:"bytes,13,opt,name=cost_allocation_label,json=costAllocationLabel,proto3,oneof" json:"cost_allocation_label,omitempty"`
+	// Current configuration details of the space.
+	// This is a required field.
+	Configuration *SpaceConfiguration `protobuf:"bytes,20,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	// Status of the space
 	// All fields inside `state` are read-only.
 	State         *SpaceState `protobuf:"bytes,100,opt,name=state,proto3" json:"state,omitempty"`
@@ -761,9 +764,74 @@ func (x *Space) GetCostAllocationLabel() string {
 	return ""
 }
 
+func (x *Space) GetConfiguration() *SpaceConfiguration {
+	if x != nil {
+		return x.Configuration
+	}
+	return nil
+}
+
 func (x *Space) GetState() *SpaceState {
 	if x != nil {
 		return x.State
+	}
+	return nil
+}
+
+// A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment.
+type SpaceConfiguration struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Timestamp when the space configuration was last updated.
+	// This is a read-only field and will be available after a space is created.
+	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
+	// List of allowed IP source ranges for this space.
+	// This is an optional field.
+	// The CIDRs supports IPv4 only.
+	AllowedIpSourceRanges []string `protobuf:"bytes,11,rep,name=allowed_ip_source_ranges,json=allowedIpSourceRanges,proto3" json:"allowed_ip_source_ranges,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *SpaceConfiguration) Reset() {
+	*x = SpaceConfiguration{}
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpaceConfiguration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpaceConfiguration) ProtoMessage() {}
+
+func (x *SpaceConfiguration) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpaceConfiguration.ProtoReflect.Descriptor instead.
+func (*SpaceConfiguration) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SpaceConfiguration) GetLastModifiedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastModifiedAt
+	}
+	return nil
+}
+
+func (x *SpaceConfiguration) GetAllowedIpSourceRanges() []string {
+	if x != nil {
+		return x.AllowedIpSourceRanges
 	}
 	return nil
 }
@@ -786,7 +854,7 @@ type SpaceState struct {
 
 func (x *SpaceState) Reset() {
 	*x = SpaceState{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +866,7 @@ func (x *SpaceState) String() string {
 func (*SpaceState) ProtoMessage() {}
 
 func (x *SpaceState) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -811,7 +879,7 @@ func (x *SpaceState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceState.ProtoReflect.Descriptor instead.
 func (*SpaceState) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SpaceState) GetPhase() SpaceStatePhase {
@@ -852,7 +920,7 @@ type SpaceEndpoint struct {
 
 func (x *SpaceEndpoint) Reset() {
 	*x = SpaceEndpoint{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -864,7 +932,7 @@ func (x *SpaceEndpoint) String() string {
 func (*SpaceEndpoint) ProtoMessage() {}
 
 func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,7 +945,7 @@ func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceEndpoint.ProtoReflect.Descriptor instead.
 func (*SpaceEndpoint) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SpaceEndpoint) GetUrl() string {
@@ -944,7 +1012,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\"\x15\n" +
-	"\x13DeleteSpaceResponse\"\xf5\x06\n" +
+	"\x13DeleteSpaceResponse\"\xd9\a\n" +
 	"\x05Space\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -959,10 +1027,14 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12B\n" +
 	"\x06labels\x18\f \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x06labels\x12\xc7\x01\n" +
-	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12B\n" +
+	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12b\n" +
+	"\rconfiguration\x18\x14 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12B\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateR\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\xd6\x01\n" +
+	"\x16_cost_allocation_label\"\xa4\x01\n" +
+	"\x12SpaceConfiguration\x12D\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12H\n" +
+	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\"\xd6\x01\n" +
 	"\n" +
 	"SpaceState\x12Q\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
@@ -1007,7 +1079,7 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_serverless_space_v1_space_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
 	(SpaceStatePhase)(0),          // 0: qdrant.cloud.serverless.space.v1.SpaceStatePhase
 	(*ListSpacesRequest)(nil),     // 1: qdrant.cloud.serverless.space.v1.ListSpacesRequest
@@ -1021,10 +1093,11 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
 	(*DeleteSpaceRequest)(nil),    // 9: qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
 	(*DeleteSpaceResponse)(nil),   // 10: qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
 	(*Space)(nil),                 // 11: qdrant.cloud.serverless.space.v1.Space
-	(*SpaceState)(nil),            // 12: qdrant.cloud.serverless.space.v1.SpaceState
-	(*SpaceEndpoint)(nil),         // 13: qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
-	(*v1.KeyValue)(nil),           // 15: qdrant.cloud.common.v1.KeyValue
+	(*SpaceConfiguration)(nil),    // 12: qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	(*SpaceState)(nil),            // 13: qdrant.cloud.serverless.space.v1.SpaceState
+	(*SpaceEndpoint)(nil),         // 14: qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*v1.KeyValue)(nil),           // 16: qdrant.cloud.common.v1.KeyValue
 }
 var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	11, // 0: qdrant.cloud.serverless.space.v1.ListSpacesResponse.items:type_name -> qdrant.cloud.serverless.space.v1.Space
@@ -1033,27 +1106,29 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	11, // 3: qdrant.cloud.serverless.space.v1.CreateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	11, // 4: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	11, // 5: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	14, // 6: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
-	14, // 7: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
-	15, // 8: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	12, // 9: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
-	0,  // 10: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
-	13, // 11: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	1,  // 12: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
-	3,  // 13: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
-	5,  // 14: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
-	7,  // 15: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
-	9,  // 16: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
-	2,  // 17: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
-	4,  // 18: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
-	6,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
-	8,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
-	10, // 21: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
-	17, // [17:22] is the sub-list for method output_type
-	12, // [12:17] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	15, // 6: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
+	15, // 7: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
+	16, // 8: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	12, // 9: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	13, // 10: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
+	15, // 11: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
+	0,  // 12: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
+	14, // 13: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	1,  // 14: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
+	3,  // 15: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
+	5,  // 16: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
+	7,  // 17: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
+	9,  // 18: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
+	2,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
+	4,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
+	6,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
+	8,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
+	10, // 23: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
+	19, // [19:24] is the sub-list for method output_type
+	14, // [14:19] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_v1_space_proto_init() }
@@ -1064,14 +1139,14 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_init() {
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10].OneofWrappers = []any{}
-	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc), len(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -17,6 +17,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class GlobalAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: _ClassVar[GlobalAccessRuleAccessType]
+    GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: _ClassVar[GlobalAccessRuleAccessType]
     GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: _ClassVar[GlobalAccessRuleAccessType]
     GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: _ClassVar[GlobalAccessRuleAccessType]
 
@@ -26,6 +27,7 @@ class CollectionAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeW
     COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: _ClassVar[CollectionAccessRuleAccessType]
     COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: _ClassVar[CollectionAccessRuleAccessType]
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: GlobalAccessRuleAccessType
+GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: GlobalAccessRuleAccessType
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: GlobalAccessRuleAccessType
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: GlobalAccessRuleAccessType
 COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: CollectionAccessRuleAccessType

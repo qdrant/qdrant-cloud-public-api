@@ -244,7 +244,7 @@ message Space {
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
   // Name of the space.
-  // This is a required field.
+  // This is a required field and should be unique within the account.
   // Name can only contain letters, numbers, underscores and dashes
   string name = 4 [(buf.validate.field).string = {
     max_len: 64
@@ -272,9 +272,28 @@ message Space {
     max_len: 253
     pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
   }];
+  // Current configuration details of the space.
+  // This is a required field.
+  SpaceConfiguration configuration = 20 [(buf.validate.field).required = true];
   // Status of the space
   // All fields inside `state` are read-only.
   SpaceState state = 100;
+}
+
+// A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment.
+message SpaceConfiguration {
+  // Timestamp when the space configuration was last updated.
+  // This is a read-only field and will be available after a space is created.
+  google.protobuf.Timestamp last_modified_at = 1;
+  // List of allowed IP source ranges for this space.
+  // This is an optional field.
+  // The CIDRs supports IPv4 only.
+  repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
+    max_items: 40
+    items: {
+      string: {ipv4_prefix: true}
+    }
+  }];
 }
 
 // SpaceStatePhase defines the operational phases of a Qdrant serverless space.

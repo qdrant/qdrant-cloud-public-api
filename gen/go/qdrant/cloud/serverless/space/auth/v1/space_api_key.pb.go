@@ -28,29 +28,33 @@ const (
 
 // GlobalAccessRuleAccessType defines the possible access levels for global access rules.
 // For a detailed list of actions allowed for each access type, see:
-// https://qdrant.tech/documentation/guides/security/#table-of-access
+// TODO: serverless list like https://qdrant.tech/documentation/guides/security/#table-of-access
 type GlobalAccessRuleAccessType int32
 
 const (
 	// Unspecified access type.
 	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED GlobalAccessRuleAccessType = 0
-	// Grants access to perform actions that only read data (e.g., list collections).
-	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY GlobalAccessRuleAccessType = 1
+	// Grants access to perform to read the metrics (it cannot acces any data, only metadata)
+	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY GlobalAccessRuleAccessType = 1
+	// Grants access to perform actions that only read data (e.g., list collections, including metrics).
+	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY GlobalAccessRuleAccessType = 2
 	// Grants access to perform all actions available in the space (e.g., update aliases).
-	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE GlobalAccessRuleAccessType = 2
+	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE GlobalAccessRuleAccessType = 3
 )
 
 // Enum value maps for GlobalAccessRuleAccessType.
 var (
 	GlobalAccessRuleAccessType_name = map[int32]string{
 		0: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
-		1: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
-		2: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE",
+		1: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY",
+		2: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY",
+		3: "GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE",
 	}
 	GlobalAccessRuleAccessType_value = map[string]int32{
-		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED": 0,
-		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY":   1,
-		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE":      2,
+		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED":       0,
+		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY": 1,
+		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY":         2,
+		"GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE":            3,
 	}
 )
 
@@ -830,11 +834,12 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\x12r\n" +
 	"\vaccess_type\x18\x02 \x01(\x0e2E.qdrant.cloud.serverless.space.auth.v1.CollectionAccessRuleAccessTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\n" +
-	"accessType*\xa5\x01\n" +
+	"accessType*\xdb\x01\n" +
 	"\x1aGlobalAccessRuleAccessType\x12.\n" +
-	"*GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x12,\n" +
-	"(GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x12)\n" +
-	"%GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE\x10\x02*\xb9\x01\n" +
+	"*GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x124\n" +
+	"0GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY\x10\x01\x12,\n" +
+	"(GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x02\x12)\n" +
+	"%GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE\x10\x03*\xb9\x01\n" +
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +

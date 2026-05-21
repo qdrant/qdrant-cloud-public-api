@@ -259,7 +259,7 @@
             },
             "name": {
               "type": "string",
-              "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+              "title": "Name of the space.\nThis is a required field and should be unique within the account.\nName can only contain letters, numbers, underscores and dashes"
             },
             "deletedAt": {
               "type": "string",
@@ -285,6 +285,10 @@
             "costAllocationLabel": {
               "type": "string",
               "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1SpaceConfiguration",
+              "description": "Current configuration details of the space.\nThis is a required field."
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
@@ -309,7 +313,7 @@
             },
             "name": {
               "type": "string",
-              "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+              "title": "Name of the space.\nThis is a required field and should be unique within the account.\nName can only contain letters, numbers, underscores and dashes"
             },
             "deletedAt": {
               "type": "string",
@@ -335,6 +339,10 @@
             "costAllocationLabel": {
               "type": "string",
               "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1SpaceConfiguration",
+              "description": "Current configuration details of the space.\nThis is a required field."
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
@@ -454,7 +462,7 @@
         },
         "name": {
           "type": "string",
-          "title": "Name of the space.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+          "title": "Name of the space.\nThis is a required field and should be unique within the account.\nName can only contain letters, numbers, underscores and dashes"
         },
         "deletedAt": {
           "type": "string",
@@ -481,12 +489,34 @@
           "type": "string",
           "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
         },
+        "configuration": {
+          "$ref": "#/definitions/v1SpaceConfiguration",
+          "description": "Current configuration details of the space.\nThis is a required field."
+        },
         "state": {
           "$ref": "#/definitions/v1SpaceState",
           "description": "Status of the space\nAll fields inside `state` are read-only."
         }
       },
       "description": "Space represents a space in the Qdrant serverless environment.\nIt can be used to store collections which can hold points."
+    },
+    "v1SpaceConfiguration": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the space configuration was last updated.\nThis is a read-only field and will be available after a space is created."
+        },
+        "allowedIpSourceRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed IP source ranges for this space.\nThis is an optional field.\nThe CIDRs supports IPv4 only."
+        }
+      },
+      "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."
     },
     "v1SpaceEndpoint": {
       "type": "object",

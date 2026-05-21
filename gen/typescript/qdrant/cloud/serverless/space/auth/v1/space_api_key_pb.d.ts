@@ -389,7 +389,7 @@ export declare const CollectionAccessRuleSchema: GenMessage<CollectionAccessRule
 /**
  * GlobalAccessRuleAccessType defines the possible access levels for global access rules.
  * For a detailed list of actions allowed for each access type, see:
- * https://qdrant.tech/documentation/guides/security/#table-of-access
+ * TODO: serverless list like https://qdrant.tech/documentation/guides/security/#table-of-access
  *
  * @generated from enum qdrant.cloud.serverless.space.auth.v1.GlobalAccessRuleAccessType
  */
@@ -402,18 +402,25 @@ export enum GlobalAccessRuleAccessType {
   UNSPECIFIED = 0,
 
   /**
-   * Grants access to perform actions that only read data (e.g., list collections).
+   * Grants access to perform to read the metrics (it cannot acces any data, only metadata)
    *
-   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 1;
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY = 1;
    */
-  READ_ONLY = 1,
+  METRICS_READ_ONLY = 1,
+
+  /**
+   * Grants access to perform actions that only read data (e.g., list collections, including metrics).
+   *
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 2;
+   */
+  READ_ONLY = 2,
 
   /**
    * Grants access to perform all actions available in the space (e.g., update aliases).
    *
-   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 2;
+   * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE = 3;
    */
-  MANAGE = 2,
+  MANAGE = 3,
 }
 
 /**
