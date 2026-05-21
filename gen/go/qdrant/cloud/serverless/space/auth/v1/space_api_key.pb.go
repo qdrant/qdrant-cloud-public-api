@@ -34,7 +34,7 @@ type GlobalAccessRuleAccessType int32
 const (
 	// Unspecified access type.
 	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED GlobalAccessRuleAccessType = 0
-	// Grants access to perform to read the metrics (it cannot acces any data, only metadata)
+	// Grants access to perform to read the metrics (it cannot access any data, only metadata)
 	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY GlobalAccessRuleAccessType = 1
 	// Grants access to perform actions that only read data (e.g., list collections, including metrics).
 	GlobalAccessRuleAccessType_GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY GlobalAccessRuleAccessType = 2

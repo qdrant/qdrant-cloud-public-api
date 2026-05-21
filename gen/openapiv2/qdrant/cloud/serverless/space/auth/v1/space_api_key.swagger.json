@@ -301,7 +301,7 @@
         "GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE"
       ],
       "default": "GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED",
-      "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: Grants access to perform to read the metrics (it cannot acces any data, only metadata)\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections, including metrics).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the space (e.g., update aliases).",
+      "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: Grants access to perform to read the metrics (it cannot access any data, only metadata)\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections, including metrics).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the space (e.g., update aliases).",
       "title": "GlobalAccessRuleAccessType defines the possible access levels for global access rules.\nFor a detailed list of actions allowed for each access type, see:\nTODO: serverless list like https://qdrant.tech/documentation/guides/security/#table-of-access"
     },
     "v1ListSpaceApiKeysResponse": {

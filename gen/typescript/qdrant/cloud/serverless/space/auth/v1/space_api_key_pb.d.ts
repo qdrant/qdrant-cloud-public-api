@@ -402,7 +402,7 @@ export enum GlobalAccessRuleAccessType {
   UNSPECIFIED = 0,
 
   /**
-   * Grants access to perform to read the metrics (it cannot acces any data, only metadata)
+   * Grants access to perform to read the metrics (it cannot access any data, only metadata)
    *
    * @generated from enum value: GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY = 1;
    */

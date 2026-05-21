@@ -238,7 +238,7 @@ message AccessRule {
 enum GlobalAccessRuleAccessType {
   // Unspecified access type.
   GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED = 0;
-  // Grants access to perform to read the metrics (it cannot acces any data, only metadata)
+  // Grants access to perform to read the metrics (it cannot access any data, only metadata)
   GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY = 1;
   // Grants access to perform actions that only read data (e.g., list collections, including metrics).
   GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY = 2;
