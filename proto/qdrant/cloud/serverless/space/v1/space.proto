@@ -18,19 +18,33 @@ service SpaceService {
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
-  // - read:spaces
+  // - read:serverless_spaces
   rpc ListSpaces(ListSpacesRequest) returns (ListSpacesResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "read:spaces";
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces"};
   }
+  // Gets a space in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc GetSpace(GetSpaceRequest) returns (GetSpaceResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
   // CreateSpace creates a new space with the specified configuration
   // Required Permissions:
-  // - write:spaces
+  // - write:serverless_spaces
   rpc CreateSpace(CreateSpaceRequest) returns (CreateSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:spaces";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_spaces";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "space.account_id";
     // gRPC Gateway REST call
@@ -53,10 +67,10 @@ service SpaceService {
   }
   // Updates a space in the account identified by the given ID.
   // Required Permissions:
-  // - write:spaces
+  // - write:serverless_spaces
   rpc UpdateSpace(UpdateSpaceRequest) returns (UpdateSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "write:spaces";
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}"
@@ -77,10 +91,10 @@ service SpaceService {
   }
   // DeleteSpace removes a space by ID
   // Required Permissions:
-  // - delete:spaces
+  // - delete:serverless_spaces
   rpc DeleteSpace(DeleteSpaceRequest) returns (DeleteSpaceResponse) {
     // permissions
-    option (qdrant.cloud.common.v1.permissions) = "delete:spaces";
+    option (qdrant.cloud.common.v1.permissions) = "delete:serverless_spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}"};
     // events
@@ -103,12 +117,58 @@ message ListSpacesRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Cloud provider where the space is hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
+  // In this case, `hybrid` isn't supported.
+  optional string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  option (buf.validate.message).cel = {
+    id: "list_spaces.cloud_provider_id_present"
+    message: "cloud_provider_id is required when cloud_provider_region_id is set"
+    expression: "!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)"
+  };
+  // Cloud provider region where the space is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
+  optional string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // ListSpacesResponse contains the list of spaces
 message ListSpacesResponse {
   // List of spaces with their details
   repeated Space items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetSpaceRequest is the request for the GetSpace function
+message GetSpaceRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetSpaceResponse is the response from the GetSpace function
+message GetSpaceResponse {
+  // The actual space
+  Space space = 1 [(buf.validate.field).required = true];
 }
 
 // CreateSpaceRequest defines parameters for creating a new space
@@ -203,21 +263,32 @@ message Space {
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
   // After creation, this field cannot be changed.
   string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  // List of labels for a space. These labels are used in the cloud ui and billing reports.
+  // This is an optional field
+  repeated common.v1.KeyValue labels = 12 [(buf.validate.field).repeated = {max_items: 10}];
+  // When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering
+  // usage data as additional meta data to be used for cost allocation in the billing reports.
+  optional string cost_allocation_label = 13 [(buf.validate.field).string = {
+    max_len: 253
+    pattern: "^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$"
+  }];
   // Status of the space
   // All fields inside `state` are read-only.
   SpaceState state = 100;
 }
 
-// SpaceStatePhase defines the operational phases of a Qdrant space.
+// SpaceStatePhase defines the operational phases of a Qdrant serverless space.
 enum SpaceStatePhase {
   // Unspecified phase.
   SPACE_STATE_PHASE_UNSPECIFIED = 0;
-  // The Space is fully operational and available for use.
-  SPACE_STATE_PHASE_READY = 1;
   // The Space is being created, updated, or undergoing maintenance.
-  SPACE_STATE_PHASE_PROCESSING = 2;
+  SPACE_STATE_PHASE_PROCESSING = 1;
+  // The Space is fully operational and available for use.
+  SPACE_STATE_PHASE_READY = 2;
   // The Space has been temporarily or permanently disabled.
   SPACE_STATE_PHASE_DISABLED = 3;
+  // The Space is being deleted.
+  SPACE_STATE_PHASE_DELETING = 4;
 }
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.

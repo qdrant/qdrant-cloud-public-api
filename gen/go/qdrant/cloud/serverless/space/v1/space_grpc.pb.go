@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	SpaceService_ListSpaces_FullMethodName  = "/qdrant.cloud.serverless.space.v1.SpaceService/ListSpaces"
+	SpaceService_GetSpace_FullMethodName    = "/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace"
 	SpaceService_CreateSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpace"
 	SpaceService_UpdateSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/UpdateSpace"
 	SpaceService_DeleteSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/DeleteSpace"
@@ -33,19 +34,23 @@ const (
 type SpaceServiceClient interface {
 	// ListSpaces returns all spaces for the authenticated user
 	// Required Permissions:
-	// - read:spaces
+	// - read:serverless_spaces
 	ListSpaces(ctx context.Context, in *ListSpacesRequest, opts ...grpc.CallOption) (*ListSpacesResponse, error)
+	// Gets a space in the account identified by the given ID.
+	// Required permissions:
+	// - read:serverless_spaces
+	GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*GetSpaceResponse, error)
 	// CreateSpace creates a new space with the specified configuration
 	// Required Permissions:
-	// - write:spaces
+	// - write:serverless_spaces
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*CreateSpaceResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
-	// - write:spaces
+	// - write:serverless_spaces
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*UpdateSpaceResponse, error)
 	// DeleteSpace removes a space by ID
 	// Required Permissions:
-	// - delete:spaces
+	// - delete:serverless_spaces
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*DeleteSpaceResponse, error)
 }
 
@@ -61,6 +66,16 @@ func (c *spaceServiceClient) ListSpaces(ctx context.Context, in *ListSpacesReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSpacesResponse)
 	err := c.cc.Invoke(ctx, SpaceService_ListSpaces_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *spaceServiceClient) GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*GetSpaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSpaceResponse)
+	err := c.cc.Invoke(ctx, SpaceService_GetSpace_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -105,19 +120,23 @@ func (c *spaceServiceClient) DeleteSpace(ctx context.Context, in *DeleteSpaceReq
 type SpaceServiceServer interface {
 	// ListSpaces returns all spaces for the authenticated user
 	// Required Permissions:
-	// - read:spaces
+	// - read:serverless_spaces
 	ListSpaces(context.Context, *ListSpacesRequest) (*ListSpacesResponse, error)
+	// Gets a space in the account identified by the given ID.
+	// Required permissions:
+	// - read:serverless_spaces
+	GetSpace(context.Context, *GetSpaceRequest) (*GetSpaceResponse, error)
 	// CreateSpace creates a new space with the specified configuration
 	// Required Permissions:
-	// - write:spaces
+	// - write:serverless_spaces
 	CreateSpace(context.Context, *CreateSpaceRequest) (*CreateSpaceResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
-	// - write:spaces
+	// - write:serverless_spaces
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*UpdateSpaceResponse, error)
 	// DeleteSpace removes a space by ID
 	// Required Permissions:
-	// - delete:spaces
+	// - delete:serverless_spaces
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*DeleteSpaceResponse, error)
 	mustEmbedUnimplementedSpaceServiceServer()
 }
@@ -131,6 +150,9 @@ type UnimplementedSpaceServiceServer struct{}
 
 func (UnimplementedSpaceServiceServer) ListSpaces(context.Context, *ListSpacesRequest) (*ListSpacesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListSpaces not implemented")
+}
+func (UnimplementedSpaceServiceServer) GetSpace(context.Context, *GetSpaceRequest) (*GetSpaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSpace not implemented")
 }
 func (UnimplementedSpaceServiceServer) CreateSpace(context.Context, *CreateSpaceRequest) (*CreateSpaceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSpace not implemented")
@@ -176,6 +198,24 @@ func _SpaceService_ListSpaces_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SpaceServiceServer).ListSpaces(ctx, req.(*ListSpacesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SpaceService_GetSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SpaceServiceServer).GetSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SpaceService_GetSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SpaceServiceServer).GetSpace(ctx, req.(*GetSpaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -244,6 +284,10 @@ var SpaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSpaces",
 			Handler:    _SpaceService_ListSpaces_Handler,
+		},
+		{
+			MethodName: "GetSpace",
+			Handler:    _SpaceService_GetSpace_Handler,
 		},
 		{
 			MethodName: "CreateSpace",

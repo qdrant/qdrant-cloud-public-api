@@ -7,15 +7,23 @@ import { SpaceService } from "./space_pb.js";
 /**
  * ListSpaces returns all spaces for the authenticated user
  * Required Permissions:
- * - read:spaces
+ * - read:serverless_spaces
  *
  * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces
  */
 export const listSpaces: typeof SpaceService["method"]["listSpaces"];
 /**
+ * Gets a space in the account identified by the given ID.
+ * Required permissions:
+ * - read:serverless_spaces
+ *
+ * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.GetSpace
+ */
+export const getSpace: typeof SpaceService["method"]["getSpace"];
+/**
  * CreateSpace creates a new space with the specified configuration
  * Required Permissions:
- * - write:spaces
+ * - write:serverless_spaces
  *
  * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace
  */
@@ -23,7 +31,7 @@ export const createSpace: typeof SpaceService["method"]["createSpace"];
 /**
  * Updates a space in the account identified by the given ID.
  * Required Permissions:
- * - write:spaces
+ * - write:serverless_spaces
  *
  * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace
  */
@@ -31,7 +39,7 @@ export const updateSpace: typeof SpaceService["method"]["updateSpace"];
 /**
  * DeleteSpace removes a space by ID
  * Required Permissions:
- * - delete:spaces
+ * - delete:serverless_spaces
  *
  * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace
  */

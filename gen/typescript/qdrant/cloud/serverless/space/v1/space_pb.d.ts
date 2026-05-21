@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { KeyValue } from "../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/serverless/space/v1/space.proto.
@@ -24,6 +25,41 @@ export declare type ListSpacesRequest = Message<"qdrant.cloud.serverless.space.v
    * @generated from field: string account_id = 1;
    */
   accountId: string;
+
+  /**
+   * Cloud provider where the space is hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
+   * In this case, `hybrid` isn't supported.
+   *
+   * @generated from field: optional string cloud_provider_id = 10;
+   */
+  cloudProviderId?: string | undefined;
+
+  /**
+   * Cloud provider region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 11;
+   */
+  cloudProviderRegionId?: string | undefined;
+
+  /**
+   * Maximum number of items to return.
+   * If not specified, all items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number | undefined;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string | undefined;
 };
 
 export declare type ListSpacesRequestValid = ListSpacesRequest;
@@ -46,6 +82,22 @@ export declare type ListSpacesResponse = Message<"qdrant.cloud.serverless.space.
    * @generated from field: repeated qdrant.cloud.serverless.space.v1.Space items = 1;
    */
   items: Space[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 export declare type ListSpacesResponseValid = ListSpacesResponse;
@@ -55,6 +107,72 @@ export declare type ListSpacesResponseValid = ListSpacesResponse;
  * Use `create(ListSpacesResponseSchema)` to create a new message.
  */
 export declare const ListSpacesResponseSchema: GenMessage<ListSpacesResponse, {validType: ListSpacesResponseValid}>;
+
+/**
+ * GetSpaceRequest is the request for the GetSpace function
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.GetSpaceRequest
+ */
+export declare type GetSpaceRequest = Message<"qdrant.cloud.serverless.space.v1.GetSpaceRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the space (in GUID format).
+   * This space should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string space_id = 2;
+   */
+  spaceId: string;
+};
+
+export declare type GetSpaceRequestValid = GetSpaceRequest;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.GetSpaceRequest.
+ * Use `create(GetSpaceRequestSchema)` to create a new message.
+ */
+export declare const GetSpaceRequestSchema: GenMessage<GetSpaceRequest, {validType: GetSpaceRequestValid}>;
+
+/**
+ * GetSpaceResponse is the response from the GetSpace function
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.GetSpaceResponse
+ */
+export declare type GetSpaceResponse = Message<"qdrant.cloud.serverless.space.v1.GetSpaceResponse"> & {
+  /**
+   * The actual space
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
+   */
+  space?: Space | undefined;
+};
+
+/**
+ * GetSpaceResponse is the response from the GetSpace function
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.GetSpaceResponse
+ */
+export declare type GetSpaceResponseValid = Message<"qdrant.cloud.serverless.space.v1.GetSpaceResponse"> & {
+  /**
+   * The actual space
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
+   */
+  space: SpaceValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.GetSpaceResponse.
+ * Use `create(GetSpaceResponseSchema)` to create a new message.
+ */
+export declare const GetSpaceResponseSchema: GenMessage<GetSpaceResponse, {validType: GetSpaceResponseValid}>;
 
 /**
  * CreateSpaceRequest defines parameters for creating a new space
@@ -311,6 +429,22 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
   cloudProviderRegionId: string;
 
   /**
+   * List of labels for a space. These labels are used in the cloud ui and billing reports.
+   * This is an optional field
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 12;
+   */
+  labels: KeyValue[];
+
+  /**
+   * When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering
+   * usage data as additional meta data to be used for cost allocation in the billing reports.
+   *
+   * @generated from field: optional string cost_allocation_label = 13;
+   */
+  costAllocationLabel?: string | undefined;
+
+  /**
    * Status of the space
    * All fields inside `state` are read-only.
    *
@@ -400,7 +534,7 @@ export declare type SpaceEndpointValid = SpaceEndpoint;
 export declare const SpaceEndpointSchema: GenMessage<SpaceEndpoint, {validType: SpaceEndpointValid}>;
 
 /**
- * SpaceStatePhase defines the operational phases of a Qdrant space.
+ * SpaceStatePhase defines the operational phases of a Qdrant serverless space.
  *
  * @generated from enum qdrant.cloud.serverless.space.v1.SpaceStatePhase
  */
@@ -413,18 +547,18 @@ export enum SpaceStatePhase {
   UNSPECIFIED = 0,
 
   /**
-   * The Space is fully operational and available for use.
-   *
-   * @generated from enum value: SPACE_STATE_PHASE_READY = 1;
-   */
-  READY = 1,
-
-  /**
    * The Space is being created, updated, or undergoing maintenance.
    *
-   * @generated from enum value: SPACE_STATE_PHASE_PROCESSING = 2;
+   * @generated from enum value: SPACE_STATE_PHASE_PROCESSING = 1;
    */
-  PROCESSING = 2,
+  PROCESSING = 1,
+
+  /**
+   * The Space is fully operational and available for use.
+   *
+   * @generated from enum value: SPACE_STATE_PHASE_READY = 2;
+   */
+  READY = 2,
 
   /**
    * The Space has been temporarily or permanently disabled.
@@ -432,6 +566,13 @@ export enum SpaceStatePhase {
    * @generated from enum value: SPACE_STATE_PHASE_DISABLED = 3;
    */
   DISABLED = 3,
+
+  /**
+   * The Space is being deleted.
+   *
+   * @generated from enum value: SPACE_STATE_PHASE_DELETING = 4;
+   */
+  DELETING = 4,
 }
 
 /**
@@ -448,7 +589,7 @@ export declare const SpaceService: GenService<{
   /**
    * ListSpaces returns all spaces for the authenticated user
    * Required Permissions:
-   * - read:spaces
+   * - read:serverless_spaces
    *
    * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces
    */
@@ -458,9 +599,21 @@ export declare const SpaceService: GenService<{
     output: typeof ListSpacesResponseSchema;
   },
   /**
+   * Gets a space in the account identified by the given ID.
+   * Required permissions:
+   * - read:serverless_spaces
+   *
+   * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.GetSpace
+   */
+  getSpace: {
+    methodKind: "unary";
+    input: typeof GetSpaceRequestSchema;
+    output: typeof GetSpaceResponseSchema;
+  },
+  /**
    * CreateSpace creates a new space with the specified configuration
    * Required Permissions:
-   * - write:spaces
+   * - write:serverless_spaces
    *
    * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace
    */
@@ -472,7 +625,7 @@ export declare const SpaceService: GenService<{
   /**
    * Updates a space in the account identified by the given ID.
    * Required Permissions:
-   * - write:spaces
+   * - write:serverless_spaces
    *
    * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace
    */
@@ -484,7 +637,7 @@ export declare const SpaceService: GenService<{
   /**
    * DeleteSpace removes a space by ID
    * Required Permissions:
-   * - delete:spaces
+   * - delete:serverless_spaces
    *
    * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace
    */

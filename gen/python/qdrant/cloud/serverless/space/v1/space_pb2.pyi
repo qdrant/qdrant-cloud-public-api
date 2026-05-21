@@ -17,25 +17,53 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class SpaceStatePhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     SPACE_STATE_PHASE_UNSPECIFIED: _ClassVar[SpaceStatePhase]
-    SPACE_STATE_PHASE_READY: _ClassVar[SpaceStatePhase]
     SPACE_STATE_PHASE_PROCESSING: _ClassVar[SpaceStatePhase]
+    SPACE_STATE_PHASE_READY: _ClassVar[SpaceStatePhase]
     SPACE_STATE_PHASE_DISABLED: _ClassVar[SpaceStatePhase]
+    SPACE_STATE_PHASE_DELETING: _ClassVar[SpaceStatePhase]
 SPACE_STATE_PHASE_UNSPECIFIED: SpaceStatePhase
-SPACE_STATE_PHASE_READY: SpaceStatePhase
 SPACE_STATE_PHASE_PROCESSING: SpaceStatePhase
+SPACE_STATE_PHASE_READY: SpaceStatePhase
 SPACE_STATE_PHASE_DISABLED: SpaceStatePhase
+SPACE_STATE_PHASE_DELETING: SpaceStatePhase
 
 class ListSpacesRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListSpacesResponse(_message.Message):
-    __slots__ = ("items",)
+    __slots__ = ("items", "total_size", "next_page_token")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[Space]
-    def __init__(self, items: _Optional[_Iterable[_Union[Space, _Mapping]]] = ...) -> None: ...
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[Space, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+
+class GetSpaceRequest(_message.Message):
+    __slots__ = ("account_id", "space_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    SPACE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    space_id: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ...) -> None: ...
+
+class GetSpaceResponse(_message.Message):
+    __slots__ = ("space",)
+    SPACE_FIELD_NUMBER: _ClassVar[int]
+    space: Space
+    def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
 
 class CreateSpaceRequest(_message.Message):
     __slots__ = ("space",)
@@ -74,7 +102,7 @@ class DeleteSpaceResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Space(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "state")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "labels", "cost_allocation_label", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -82,6 +110,8 @@ class Space(_message.Message):
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    LABELS_FIELD_NUMBER: _ClassVar[int]
+    COST_ALLOCATION_LABEL_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
@@ -90,8 +120,10 @@ class Space(_message.Message):
     deleted_at: _timestamp_pb2.Timestamp
     cloud_provider_id: str
     cloud_provider_region_id: str
+    labels: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
+    cost_allocation_label: str
     state: SpaceState
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
 
 class SpaceState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")

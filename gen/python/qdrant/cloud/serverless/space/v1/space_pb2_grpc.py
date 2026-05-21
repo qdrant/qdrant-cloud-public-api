@@ -20,6 +20,11 @@ class SpaceServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesResponse.FromString,
                 _registered_method=True)
+        self.GetSpace = channel.unary_unary(
+                '/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceResponse.FromString,
+                _registered_method=True)
         self.CreateSpace = channel.unary_unary(
                 '/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpace',
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceRequest.SerializeToString,
@@ -44,7 +49,16 @@ class SpaceServiceServicer(object):
     def ListSpaces(self, request, context):
         """ListSpaces returns all spaces for the authenticated user
         Required Permissions:
-        - read:spaces
+        - read:serverless_spaces
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSpace(self, request, context):
+        """Gets a space in the account identified by the given ID.
+        Required permissions:
+        - read:serverless_spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -53,7 +67,7 @@ class SpaceServiceServicer(object):
     def CreateSpace(self, request, context):
         """CreateSpace creates a new space with the specified configuration
         Required Permissions:
-        - write:spaces
+        - write:serverless_spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -62,7 +76,7 @@ class SpaceServiceServicer(object):
     def UpdateSpace(self, request, context):
         """Updates a space in the account identified by the given ID.
         Required Permissions:
-        - write:spaces
+        - write:serverless_spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -71,7 +85,7 @@ class SpaceServiceServicer(object):
     def DeleteSpace(self, request, context):
         """DeleteSpace removes a space by ID
         Required Permissions:
-        - delete:spaces
+        - delete:serverless_spaces
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -84,6 +98,11 @@ def add_SpaceServiceServicer_to_server(servicer, server):
                     servicer.ListSpaces,
                     request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesResponse.SerializeToString,
+            ),
+            'GetSpace': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSpace,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceResponse.SerializeToString,
             ),
             'CreateSpace': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateSpace,
@@ -129,6 +148,33 @@ class SpaceService(object):
             '/qdrant.cloud.serverless.space.v1.SpaceService/ListSpaces',
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesRequest.SerializeToString,
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.ListSpacesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetSpace(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace',
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.GetSpaceResponse.FromString,
             options,
             channel_credentials,
             insecure,

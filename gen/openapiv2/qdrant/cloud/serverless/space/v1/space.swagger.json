@@ -18,7 +18,7 @@
   "paths": {
     "/api/serverless/v1/accounts/{accountId}/spaces": {
       "get": {
-        "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:spaces",
+        "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:serverless_spaces",
         "operationId": "SpaceService_ListSpaces",
         "responses": {
           "200": {
@@ -41,6 +41,35 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.\nIn this case, `hybrid` isn't supported.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderRegionId",
+            "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -49,8 +78,45 @@
       }
     },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}": {
+      "get": {
+        "summary": "Gets a space in the account identified by the given ID.\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "SpaceService_GetSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSpaceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      },
       "delete": {
-        "summary": "DeleteSpace removes a space by ID\nRequired Permissions:\n- delete:spaces",
+        "summary": "DeleteSpace removes a space by ID\nRequired Permissions:\n- delete:serverless_spaces",
         "operationId": "SpaceService_DeleteSpace",
         "responses": {
           "200": {
@@ -89,7 +155,7 @@
     },
     "/api/serverless/v1/accounts/{space.accountId}/spaces": {
       "post": {
-        "summary": "CreateSpace creates a new space with the specified configuration\nRequired Permissions:\n- write:spaces",
+        "summary": "CreateSpace creates a new space with the specified configuration\nRequired Permissions:\n- write:serverless_spaces",
         "operationId": "SpaceService_CreateSpace",
         "responses": {
           "200": {
@@ -129,7 +195,7 @@
     },
     "/api/serverless/v1/accounts/{space.accountId}/spaces/{space.id}": {
       "put": {
-        "summary": "Updates a space in the account identified by the given ID.\nRequired Permissions:\n- write:spaces",
+        "summary": "Updates a space in the account identified by the given ID.\nRequired Permissions:\n- write:serverless_spaces",
         "operationId": "SpaceService_UpdateSpace",
         "responses": {
           "200": {
@@ -208,6 +274,18 @@
               "type": "string",
               "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
             },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a space. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
               "description": "Status of the space\nAll fields inside `state` are read-only."
@@ -245,6 +323,18 @@
             "cloudProviderRegionId": {
               "type": "string",
               "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a space. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
@@ -299,6 +389,30 @@
       "description": "Empty",
       "title": "DeleteSpaceResponse is an empty response for deletion confirmation"
     },
+    "v1GetSpaceResponse": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "$ref": "#/definitions/v1Space",
+          "title": "The actual space"
+        }
+      },
+      "title": "GetSpaceResponse is the response from the GetSpace function"
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
     "v1ListSpacesResponse": {
       "type": "object",
       "properties": {
@@ -309,6 +423,15 @@
             "$ref": "#/definitions/v1Space"
           },
           "title": "List of spaces with their details"
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "title": "ListSpacesResponse contains the list of spaces"
@@ -345,6 +468,18 @@
         "cloudProviderRegionId": {
           "type": "string",
           "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.\nAfter creation, this field cannot be changed."
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels for a space. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+        },
+        "costAllocationLabel": {
+          "type": "string",
+          "description": "When using cloud provider marketplaces for billing, the space label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
         },
         "state": {
           "$ref": "#/definitions/v1SpaceState",
@@ -390,12 +525,13 @@
       "type": "string",
       "enum": [
         "SPACE_STATE_PHASE_UNSPECIFIED",
-        "SPACE_STATE_PHASE_READY",
         "SPACE_STATE_PHASE_PROCESSING",
-        "SPACE_STATE_PHASE_DISABLED"
+        "SPACE_STATE_PHASE_READY",
+        "SPACE_STATE_PHASE_DISABLED",
+        "SPACE_STATE_PHASE_DELETING"
       ],
       "default": "SPACE_STATE_PHASE_UNSPECIFIED",
-      "description": "SpaceStatePhase defines the operational phases of a Qdrant space.\n\n - SPACE_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_STATE_PHASE_READY: The Space is fully operational and available for use.\n - SPACE_STATE_PHASE_PROCESSING: The Space is being created, updated, or undergoing maintenance.\n - SPACE_STATE_PHASE_DISABLED: The Space has been temporarily or permanently disabled."
+      "description": "SpaceStatePhase defines the operational phases of a Qdrant serverless space.\n\n - SPACE_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_STATE_PHASE_PROCESSING: The Space is being created, updated, or undergoing maintenance.\n - SPACE_STATE_PHASE_READY: The Space is fully operational and available for use.\n - SPACE_STATE_PHASE_DISABLED: The Space has been temporarily or permanently disabled.\n - SPACE_STATE_PHASE_DELETING: The Space is being deleted."
     },
     "v1UpdateSpaceResponse": {
       "type": "object",
