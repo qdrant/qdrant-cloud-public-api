@@ -1241,12 +1241,13 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x03key\"\xcd\x01\n" +
 	"\bKeyValue\x12\xa0\x01\n" +
 	"\x03key\x18\x01 \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$R\x03key\x12\x1e\n" +
-	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\x97\x02\n" +
-	"\x18TopologySpreadConstraint\x12'\n" +
-	"\bmax_skew\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00H\x00R\amaxSkew\x88\x01\x01\x12*\n" +
-	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12\x81\x01\n" +
-	"\x12when_unsatisfiable\x18\x03 \x01(\x0e2A.qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiableB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
+	"\x05value\x18\x02 \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x05value\"\x9d\x02\n" +
+	"\x18TopologySpreadConstraint\x12*\n" +
+	"\bmax_skew\x18\x01 \x01(\x05B\n" +
+	"\xbaH\a\xc8\x01\x01\x1a\x02 \x00H\x00R\amaxSkew\x88\x01\x01\x12*\n" +
+	"\ftopology_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vtopologyKey\x12\x84\x01\n" +
+	"\x12when_unsatisfiable\x18\x03 \x01(\x0e2A.qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiableB\r\xbaH\n" +
+	"\xc8\x01\x01\x82\x01\x04\x10\x01 \x00H\x01R\x11whenUnsatisfiable\x88\x01\x01B\v\n" +
 	"\t_max_skewB\x15\n" +
 	"\x13_when_unsatisfiable\"\xa9\x04\n" +
 	"\x18LabelSelectorRequirement\x12\x19\n" +
