@@ -77,6 +77,22 @@ class CreateSpaceResponse(_message.Message):
     space: Space
     def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
 
+class CreateSpaceFromBackupRequest(_message.Message):
+    __slots__ = ("account_id", "backup_id", "space_name")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
+    SPACE_NAME_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    backup_id: str
+    space_name: str
+    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., space_name: _Optional[str] = ...) -> None: ...
+
+class CreateSpaceFromBackupResponse(_message.Message):
+    __slots__ = ("space",)
+    SPACE_FIELD_NUMBER: _ClassVar[int]
+    space: Space
+    def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
+
 class UpdateSpaceRequest(_message.Message):
     __slots__ = ("space",)
     SPACE_FIELD_NUMBER: _ClassVar[int]

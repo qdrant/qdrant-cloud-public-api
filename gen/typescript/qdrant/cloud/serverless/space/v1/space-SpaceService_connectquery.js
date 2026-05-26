@@ -32,6 +32,16 @@ export const getSpace = SpaceService.method.getSpace;
 export const createSpace = SpaceService.method.createSpace;
 
 /**
+ * Create a new space from an existing backup
+ * Required permissions (both):
+ * - restore:serverless_backups
+ * - write:serverless_spaces
+ *
+ * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup
+ */
+export const createSpaceFromBackup = SpaceService.method.createSpaceFromBackup;
+
+/**
  * Updates a space in the account identified by the given ID.
  * Required Permissions:
  * - write:serverless_spaces

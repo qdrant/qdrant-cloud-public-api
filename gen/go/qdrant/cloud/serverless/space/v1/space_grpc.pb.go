@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SpaceService_ListSpaces_FullMethodName  = "/qdrant.cloud.serverless.space.v1.SpaceService/ListSpaces"
-	SpaceService_GetSpace_FullMethodName    = "/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace"
-	SpaceService_CreateSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpace"
-	SpaceService_UpdateSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/UpdateSpace"
-	SpaceService_DeleteSpace_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/DeleteSpace"
+	SpaceService_ListSpaces_FullMethodName            = "/qdrant.cloud.serverless.space.v1.SpaceService/ListSpaces"
+	SpaceService_GetSpace_FullMethodName              = "/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace"
+	SpaceService_CreateSpace_FullMethodName           = "/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpace"
+	SpaceService_CreateSpaceFromBackup_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpaceFromBackup"
+	SpaceService_UpdateSpace_FullMethodName           = "/qdrant.cloud.serverless.space.v1.SpaceService/UpdateSpace"
+	SpaceService_DeleteSpace_FullMethodName           = "/qdrant.cloud.serverless.space.v1.SpaceService/DeleteSpace"
 )
 
 // SpaceServiceClient is the client API for SpaceService service.
@@ -44,6 +45,11 @@ type SpaceServiceClient interface {
 	// Required Permissions:
 	// - write:serverless_spaces
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*CreateSpaceResponse, error)
+	// Create a new space from an existing backup
+	// Required permissions (both):
+	// - restore:serverless_backups
+	// - write:serverless_spaces
+	CreateSpaceFromBackup(ctx context.Context, in *CreateSpaceFromBackupRequest, opts ...grpc.CallOption) (*CreateSpaceFromBackupResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
 	// - write:serverless_spaces
@@ -92,6 +98,16 @@ func (c *spaceServiceClient) CreateSpace(ctx context.Context, in *CreateSpaceReq
 	return out, nil
 }
 
+func (c *spaceServiceClient) CreateSpaceFromBackup(ctx context.Context, in *CreateSpaceFromBackupRequest, opts ...grpc.CallOption) (*CreateSpaceFromBackupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSpaceFromBackupResponse)
+	err := c.cc.Invoke(ctx, SpaceService_CreateSpaceFromBackup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *spaceServiceClient) UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*UpdateSpaceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateSpaceResponse)
@@ -130,6 +146,11 @@ type SpaceServiceServer interface {
 	// Required Permissions:
 	// - write:serverless_spaces
 	CreateSpace(context.Context, *CreateSpaceRequest) (*CreateSpaceResponse, error)
+	// Create a new space from an existing backup
+	// Required permissions (both):
+	// - restore:serverless_backups
+	// - write:serverless_spaces
+	CreateSpaceFromBackup(context.Context, *CreateSpaceFromBackupRequest) (*CreateSpaceFromBackupResponse, error)
 	// Updates a space in the account identified by the given ID.
 	// Required Permissions:
 	// - write:serverless_spaces
@@ -156,6 +177,9 @@ func (UnimplementedSpaceServiceServer) GetSpace(context.Context, *GetSpaceReques
 }
 func (UnimplementedSpaceServiceServer) CreateSpace(context.Context, *CreateSpaceRequest) (*CreateSpaceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSpace not implemented")
+}
+func (UnimplementedSpaceServiceServer) CreateSpaceFromBackup(context.Context, *CreateSpaceFromBackupRequest) (*CreateSpaceFromBackupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSpaceFromBackup not implemented")
 }
 func (UnimplementedSpaceServiceServer) UpdateSpace(context.Context, *UpdateSpaceRequest) (*UpdateSpaceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateSpace not implemented")
@@ -238,6 +262,24 @@ func _SpaceService_CreateSpace_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SpaceService_CreateSpaceFromBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSpaceFromBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SpaceServiceServer).CreateSpaceFromBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SpaceService_CreateSpaceFromBackup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SpaceServiceServer).CreateSpaceFromBackup(ctx, req.(*CreateSpaceFromBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SpaceService_UpdateSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateSpaceRequest)
 	if err := dec(in); err != nil {
@@ -292,6 +334,10 @@ var SpaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSpace",
 			Handler:    _SpaceService_CreateSpace_Handler,
+		},
+		{
+			MethodName: "CreateSpaceFromBackup",
+			Handler:    _SpaceService_CreateSpaceFromBackup_Handler,
 		},
 		{
 			MethodName: "UpdateSpace",

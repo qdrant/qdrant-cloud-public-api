@@ -271,6 +271,78 @@ export declare type CreateSpaceResponseValid = Message<"qdrant.cloud.serverless.
 export declare const CreateSpaceResponseSchema: GenMessage<CreateSpaceResponse, {validType: CreateSpaceResponseValid}>;
 
 /**
+ * CreateSpaceFromBackupRequest is the request for the CreateSpaceFromBackup function.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
+ */
+export declare type CreateSpaceFromBackupRequest = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the backup (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string backup_id = 2;
+   */
+  backupId: string;
+
+  /**
+   * Name of the new space
+   *
+   * @generated from field: string space_name = 3;
+   */
+  spaceName: string;
+};
+
+export declare type CreateSpaceFromBackupRequestValid = CreateSpaceFromBackupRequest;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest.
+ * Use `create(CreateSpaceFromBackupRequestSchema)` to create a new message.
+ */
+export declare const CreateSpaceFromBackupRequestSchema: GenMessage<CreateSpaceFromBackupRequest, {validType: CreateSpaceFromBackupRequestValid}>;
+
+/**
+ * CreateSpaceFromBackupResponse is the response for the CreateSpaceFromBackup function.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+ */
+export declare type CreateSpaceFromBackupResponse = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse"> & {
+  /**
+   * Space created from the backup
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
+   */
+  space?: Space | undefined;
+};
+
+/**
+ * CreateSpaceFromBackupResponse is the response for the CreateSpaceFromBackup function.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+ */
+export declare type CreateSpaceFromBackupResponseValid = Message<"qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse"> & {
+  /**
+   * Space created from the backup
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
+   */
+  space: SpaceValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse.
+ * Use `create(CreateSpaceFromBackupResponseSchema)` to create a new message.
+ */
+export declare const CreateSpaceFromBackupResponseSchema: GenMessage<CreateSpaceFromBackupResponse, {validType: CreateSpaceFromBackupResponseValid}>;
+
+/**
  * UpdateSpaceRequest is the request for the UpdateSpace function
  *
  * @generated from message qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
@@ -787,6 +859,19 @@ export declare const SpaceService: GenService<{
     methodKind: "unary";
     input: typeof CreateSpaceRequestSchema;
     output: typeof CreateSpaceResponseSchema;
+  },
+  /**
+   * Create a new space from an existing backup
+   * Required permissions (both):
+   * - restore:serverless_backups
+   * - write:serverless_spaces
+   *
+   * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup
+   */
+  createSpaceFromBackup: {
+    methodKind: "unary";
+    input: typeof CreateSpaceFromBackupRequestSchema;
+    output: typeof CreateSpaceFromBackupResponseSchema;
   },
   /**
    * Updates a space in the account identified by the given ID.
