@@ -652,7 +652,9 @@ type DeleteSpaceRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// ID of the space to delete (in GUID format).
 	// This is a required field.
-	SpaceId       string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	SpaceId string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	// If set, the backups of this space will be deleted as well.
+	DeleteBackups *bool `protobuf:"varint,3,opt,name=delete_backups,json=deleteBackups,proto3,oneof" json:"delete_backups,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -699,6 +701,13 @@ func (x *DeleteSpaceRequest) GetSpaceId() string {
 		return x.SpaceId
 	}
 	return ""
+}
+
+func (x *DeleteSpaceRequest) GetDeleteBackups() bool {
+	if x != nil && x.DeleteBackups != nil {
+		return *x.DeleteBackups
+	}
+	return false
 }
 
 // DeleteSpaceResponse is an empty response for deletion confirmation
@@ -1129,11 +1138,13 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x17update_space.id_present\x12\"space.id is required for an update\x1a\x13this.space.id != ''\"\xbf\x01\n" +
 	"\x13UpdateSpaceResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
-	"\x1aupdate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"b\n" +
+	"\x1aupdate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xa1\x01\n" +
 	"\x12DeleteSpaceRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
-	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\"\x15\n" +
+	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12*\n" +
+	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
+	"\x0f_delete_backups\"\x15\n" +
 	"\x13DeleteSpaceResponse\"\xd9\a\n" +
 	"\x05Space\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
@@ -1271,6 +1282,7 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_init() {
 	}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[1].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}

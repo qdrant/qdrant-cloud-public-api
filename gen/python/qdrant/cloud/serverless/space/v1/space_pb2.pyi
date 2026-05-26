@@ -106,12 +106,14 @@ class UpdateSpaceResponse(_message.Message):
     def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
 
 class DeleteSpaceRequest(_message.Message):
-    __slots__ = ("account_id", "space_id")
+    __slots__ = ("account_id", "space_id", "delete_backups")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
+    DELETE_BACKUPS_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ...) -> None: ...
+    delete_backups: bool
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., delete_backups: _Optional[bool] = ...) -> None: ...
 
 class DeleteSpaceResponse(_message.Message):
     __slots__ = ()

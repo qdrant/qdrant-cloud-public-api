@@ -433,6 +433,13 @@ export declare type DeleteSpaceRequest = Message<"qdrant.cloud.serverless.space.
    * @generated from field: string space_id = 2;
    */
   spaceId: string;
+
+  /**
+   * If set, the backups of this space will be deleted as well.
+   *
+   * @generated from field: optional bool delete_backups = 3;
+   */
+  deleteBackups?: boolean | undefined;
 };
 
 export declare type DeleteSpaceRequestValid = DeleteSpaceRequest;

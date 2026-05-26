@@ -286,6 +286,8 @@ message DeleteSpaceRequest {
   // ID of the space to delete (in GUID format).
   // This is a required field.
   string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // If set, the backups of this space will be deleted as well.
+  optional bool delete_backups = 3;
 }
 
 // DeleteSpaceResponse is an empty response for deletion confirmation

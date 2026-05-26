@@ -193,6 +193,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "deleteBackups",
+            "description": "If set, the backups of this space will be deleted as well.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
