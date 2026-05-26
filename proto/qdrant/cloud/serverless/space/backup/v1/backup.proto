@@ -1,0 +1,689 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.space.backup.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/serverless/space/v1/space.proto";
+
+// BackupService is the API used to configure backup objects.
+service BackupService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // Lists all backups in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_backups
+  rpc ListBackups(ListBackupsRequest) returns (ListBackupsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/backup/v1/accounts/{account_id}/backups"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
+    };
+  }
+  // Gets a backup in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_backups
+  rpc GetBackup(GetBackupRequest) returns (GetBackupResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+  }
+  // Creates a backup for the cluster identified by the given ID.
+  // Required permissions:
+  // - write:serverless_backups
+  rpc CreateBackup(CreateBackupRequest) returns (CreateBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:serverless_backups";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/backup/v1/accounts/{backup.account_id}/backups"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-backup"
+      resource_id_field: "resp.backup.id"
+      resource_url_template: "/accounts/{req.backup.account_id}/serverless-spaces/{req.backup.space_id}/backups/{resp.backup.id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.backup.space_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "backup.space_id"
+    };
+  }
+  // Deletes a backup in the account identified by the given ID.
+  // Required permissions:
+  // - delete:serverless_backups
+  rpc DeleteBackup(DeleteBackupRequest) returns (DeleteBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:serverless_backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-backup"
+      resource_id_field: "req.backup_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backups/{req.backup_id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "resp-md.qc-event-space-id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+  }
+  // Lists all backup restores for spaces in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_backups
+  rpc ListBackupRestores(ListBackupRestoresRequest) returns (ListBackupRestoresResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/backup/v1/accounts/{account_id}/backup_restores"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // Restores a backup to its original space.
+  // Required permissions:
+  // - restore:serverless_backups
+  rpc RestoreBackup(RestoreBackupRequest) returns (RestoreBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "restore:serverless_backups";
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}/restore"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "restore"
+      resource_type: "serverless-backup"
+      resource_id_field: "req.backup_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backups/{req.backup_id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "resp-md.qc-event-space-id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+  }
+  // Lists all backup schedules in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_backup_schedules
+  rpc ListBackupSchedules(ListBackupSchedulesRequest) returns (ListBackupSchedulesResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/backup/v1/accounts/{account_id}/backup_schedules"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // Gets a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_backup_schedules
+  rpc GetBackupSchedule(GetBackupScheduleRequest) returns (GetBackupScheduleResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
+    };
+  }
+  // Creates a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - write:serverless_backup_schedules
+  rpc CreateBackupSchedule(CreateBackupScheduleRequest) returns (CreateBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:serverless_backup_schedules";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-backup-schedule"
+      resource_id_field: "resp.backup_schedule.id"
+      resource_url_template: "/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{resp.backup_schedule.id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.backup_schedule.space_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "backup_schedule.space_id"
+    };
+  }
+  // Updates a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - write:serverless_backup_schedules
+  rpc UpdateBackupSchedule(UpdateBackupScheduleRequest) returns (UpdateBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:serverless_backup_schedules";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup_schedule.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "serverless-backup-schedule"
+      resource_id_field: "req.backup_schedule.id"
+      resource_url_template: "/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{req.backup_schedule.id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.backup_schedule.space_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule.id"
+    };
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "backup_schedule.space_id"
+    };
+  }
+  // Deletes a backup schedule in the account identified by the given ID.
+  // Required permissions:
+  // - delete:serverless_backup_schedules
+  rpc DeleteBackupSchedule(DeleteBackupScheduleRequest) returns (DeleteBackupScheduleResponse) {
+    // permissions
+    option (common.v1.permissions) = "delete:serverless_backup_schedules";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "serverless-backup-schedule"
+      resource_id_field: "req.backup_schedule_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}"
+      additional_context_fields: {
+        key: "space_id"
+        value: "resp-md.qc-event-space-id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_schedule_id"
+      field_expression: "backup_schedule_id"
+    };
+  }
+}
+
+// ListBackupsRequest is the request for the ListBackups function
+message ListBackupsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // When this field is set, only backups that belong to the space are returned.
+  optional string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the schedule (in GUID format).
+  // When this field is set, only backups triggered by the backup schedule are returned.
+  optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 10 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// ListBackupsResponse is the response from the ListBackups function
+message ListBackupsResponse {
+  // The actual backups in this list.
+  // When pagination is used it contains a single page only, not all items.
+  repeated Backup items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetBackupRequest is the request for the GetBackup function.
+message GetBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBackupResponse is the response from the GetBackup function.
+message GetBackupResponse {
+  // The actual backup.
+  Backup backup = 1 [(buf.validate.field).required = true];
+}
+
+// CreateBackupRequest is the request for the CreateBackup function.
+message CreateBackupRequest {
+  // The actual backup.
+  Backup backup = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_backup.no_read_only_fields"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info)"
+  };
+}
+
+// CreateBackupResponse is the response from the CreateBackup function.
+message CreateBackupResponse {
+  // The actual backup.
+  Backup backup = 1 [(buf.validate.field).required = true];
+}
+
+// DeleteBackupRequest is the request for the DeleteBackup function.
+message DeleteBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// DeleteBackupResponse is the response from the DeleteBackup function.
+message DeleteBackupResponse {
+  // Empty
+}
+
+// ListBackupRestoresRequest is the request for the ListBackupRestores function.
+message ListBackupRestoresRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // When this field is set, only backup restores that belong to the space are returned.
+  optional string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 10 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// ListBackupRestoresResponse is the response from the ListBackupRestores function.
+message ListBackupRestoresResponse {
+  // The actual backup restores in this list.
+  repeated BackupRestore items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// RestoreBackupRequest is the request for the RestoreBackup function.
+message RestoreBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// RestoreBackupResponse is the response from the RestoreBackup function.
+message RestoreBackupResponse {
+  // Empty
+}
+
+// ListBackupSchedulesRequest is the request for the ListBackupSchedules function
+message ListBackupSchedulesRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // When this field is set, only backup schedules that belong to the space are returned.
+  optional string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 10 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// ListBackupsResponse is the response from the ListBackups function.
+message ListBackupSchedulesResponse {
+  // The actual backup schedules in this list.
+  repeated BackupSchedule items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetBackupScheduleRequest is the request for the GetBackupSchedule function.
+message GetBackupScheduleRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the backup schedule (in GUID format).
+  // This backup schedule should be part of the provided cluster and account.
+  // This is a required field.
+  string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetBackupScheduleResponse is the response from the GetBackupSchedule function.
+message GetBackupScheduleResponse {
+  // The actual backup schedule
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+}
+
+// CreateBackupScheduleRequest is the request for the CreateBackupSchedule function.
+message CreateBackupScheduleRequest {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_backup_schedule.no_read_only_fields"
+    message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
+    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
+  };
+}
+
+// CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
+message CreateBackupScheduleResponse {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+}
+
+// UpdateBackupScheduleRequest is the request for the UpdateBackupSchedule function.
+message UpdateBackupScheduleRequest {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_backup_schedule.id_present"
+    message: "backup_schedule.id is required for an update"
+    expression: "this.backup_schedule.id != ''"
+  };
+}
+
+// UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
+message UpdateBackupScheduleResponse {
+  // The actual backup schedule.
+  BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+}
+
+// DeleteBackupScheduleRequest is the request for the DeleteBackupSchedule function
+message DeleteBackupScheduleRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the backup schedule (in GUID format).
+  // This backup schedule should be part of the provided account.
+  // This is a required field.
+  string backup_schedule_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // If set, the backups generated by this backup schedule will be deleted as well.
+  optional bool delete_backups = 3;
+}
+
+// DeleteBackupScheduleResponse is the response from the DeleteBackupSchedule function.
+message DeleteBackupScheduleResponse {
+  // Empty
+}
+
+// BackupStatus represents the current status of a backup operation.
+enum BackupStatus {
+  // The status is unknown or not specified. This is the default value.
+  BACKUP_STATUS_UNSPECIFIED = 0;
+  // The backup is currently in progress.
+  BACKUP_STATUS_RUNNING = 1;
+  // The backup was skipped or was not started because it has no suitable target.
+  BACKUP_STATUS_SKIPPED = 2;
+  // The backup failed to complete successfully.
+  BACKUP_STATUS_FAILED = 3;
+  // The backup completed successfully.
+  BACKUP_STATUS_SUCCEEDED = 4;
+  // There was an error syncing the backup in the cluster's region.
+  BACKUP_STATUS_FAILED_TO_SYNC = 5;
+  // The backup was expected but not found in the cluster's region.
+  BACKUP_STATUS_NOT_FOUND = 6;
+}
+
+// A Backup represents a backup of a Qdrant serverless space.
+message Backup {
+  // Unique identifier for the backup (in GUID format).
+  // This is a read-only field and will be available after a backup is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "backup.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the backup was created.
+  // This is a read-only field and will be available after a backup is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This is a required field.
+  string space_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The name of the backup.
+  // This is a read-only field and will be available after a backup is created.
+  string name = 5;
+  option (buf.validate.message).cel = {
+    id: "backup.name"
+    message: "name must not be empty"
+    expression: "this.name.size() > 0 || !has(this.created_at)"
+  };
+  // The current status of the backup.
+  // This is a read-only field and will be set after CreateBackup is called.
+  BackupStatus status = 6 [(buf.validate.field).enum.defined_only = true];
+  // The timestamp when the backup was deleted (or when deletion started).
+  // This is a read-only field and will be set after DeleteBackup is called.
+  google.protobuf.Timestamp deleted_at = 7;
+  // The total time taken to generate the backup. This is a read-only field and
+  // will be available after the backup process is completed, regardless of
+  // whether it succeeded or failed.
+  google.protobuf.Duration backup_duration = 8;
+  // The identifier of the backup schedule (in GUID format).
+  // This is a read-only field and will be present if the backup was created by a backup schedule.
+  optional string backup_schedule_id = 9 [(buf.validate.field).string = {uuid: true}];
+  // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+  // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+  // If the value is unset, backups will be retained indefinitely.
+  optional google.protobuf.Duration retention_period = 10 [(buf.validate.field).duration = {
+    gte: {seconds: 86400}
+    lte: {seconds: 31536000}
+  }];
+  // Space details associated with the backup.
+  // Identity fields reflect the latest space state; configuration reflects the state at backup time.
+  // This is a read-only field and will be available after the backup is created.
+  SpaceInfo space_info = 12;
+}
+
+// Represents the space details associated with a backup.
+// The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
+// The configuration field is immutable and represents the values at backup time.
+message SpaceInfo {
+  // The latest name of the space that this backup was taken from.
+  string name = 1 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+  // Cloud provider where the space is hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // Cloud provider region where the space is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+  string cloud_provider_region_id = 3 [(buf.validate.field).string.min_len = 1];
+  // The space configuration at the time of backup.
+  qdrant.cloud.serverless.space.v1.SpaceConfiguration configuration = 4 [(buf.validate.field).required = true];
+}
+
+// BackupScheduleStatus represents the current status of a backup schedule.
+enum BackupScheduleStatus {
+  // The status is unknown or not specified. This is the default value.
+  BACKUP_SCHEDULE_STATUS_UNSPECIFIED = 0;
+  // The backup schedule is active and functioning correctly.
+  BACKUP_SCHEDULE_STATUS_ACTIVE = 1;
+  // There was an error syncing the backup schedule in the cluster's region.
+  BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC = 2;
+  // The backup schedule is missing in the cluster's region.
+  BACKUP_SCHEDULE_STATUS_NOT_FOUND = 3;
+  // The backup schedule is disabled.
+  BACKUP_SCHEDULE_STATUS_DISABLED = 4;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A BackupSchedule represents a recurring schedule for creating backups.
+message BackupSchedule {
+  // Unique identifier for the backup schedule (in GUID format).
+  // This is a read-only field and will be available after a backup schedule is created.
+  string id = 1;
+  option (buf.validate.message).cel = {
+    id: "backup_schedule.id"
+    message: "value must be a valid UUID"
+    expression: "this.id.matches(\'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\') || !has(this.created_at)"
+  };
+  // The timestamp when the backup schedule was created.
+  // This is a read-only field and will be available after a backup schedule is created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This is a required field.
+  string space_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The schedule that determines when the backup will be created.
+  // This field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview
+  // This is a required field.
+  string schedule = 5 [(buf.validate.field).string.pattern = "^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$"];
+  // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
+  // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
+  // If the value is unset, backup will be retained indefinitely.
+  optional google.protobuf.Duration retention_period = 6 [(buf.validate.field).duration = {
+    gte: {seconds: 86400}
+    lte: {seconds: 31536000}
+  }];
+  // The timestamp when the backup schedule was deleted (or when deletion started).
+  // This is a read-only field and will be set after DeleteBackupSchedule is called.
+  google.protobuf.Timestamp deleted_at = 7;
+  // The current status of the backup schedule.
+  BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A BackupRestore represents the status of an in-place backup restore for a space.
+// All fields in this message are read-only.
+message BackupRestore {
+  // Unique identifier for the backup restore (in GUID format).
+  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The timestamp when the backup restore was created.
+  google.protobuf.Timestamp created_at = 2;
+  // The identifier of the account (in GUID format).
+  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  string space_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The Identifier of the backup (in GUID format).
+  string backup_id = 5 [(buf.validate.field).string = {uuid: true}];
+  // The current status of the backup restore.
+  BackupRestoreStatus status = 6 [(buf.validate.field).enum.defined_only = true];
+  // The timestamp when the backup restore was deleted (or when deletion started).
+  google.protobuf.Timestamp deleted_at = 7;
+}
+
+// BackupRestoreStatus represents the current status of a backup restore.
+enum BackupRestoreStatus {
+  // The status is unknown or not specified. This is the default value.
+  BACKUP_RESTORE_STATUS_UNSPECIFIED = 0;
+  // The backup restore is running.
+  BACKUP_RESTORE_STATUS_RUNNING = 1;
+  // The backup restore failed to complete successfully.
+  BACKUP_RESTORE_STATUS_FAILED = 2;
+  // The backup restore completed successfully.
+  BACKUP_RESTORE_STATUS_SUCCEEDED = 3;
+  // There was an error syncing the backup restore in the cluster's region.
+  BACKUP_RESTORE_STATUS_FAILED_TO_SYNC = 4;
+  // The backup restore is missing in the cluster's region.
+  BACKUP_RESTORE_STATUS_NOT_FOUND = 5;
+  // The backup restore is skipped.
+  BACKUP_RESTORE_STATUS_SKIPPED = 6;
+}

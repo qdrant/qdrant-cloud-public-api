@@ -30,6 +30,11 @@ class SpaceServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceResponse.FromString,
                 _registered_method=True)
+        self.CreateSpaceFromBackup = channel.unary_unary(
+                '/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpaceFromBackup',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupResponse.FromString,
+                _registered_method=True)
         self.UpdateSpace = channel.unary_unary(
                 '/qdrant.cloud.serverless.space.v1.SpaceService/UpdateSpace',
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.UpdateSpaceRequest.SerializeToString,
@@ -73,6 +78,16 @@ class SpaceServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateSpaceFromBackup(self, request, context):
+        """Create a new space from an existing backup
+        Required permissions (both):
+        - restore:serverless_backups
+        - write:serverless_spaces
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def UpdateSpace(self, request, context):
         """Updates a space in the account identified by the given ID.
         Required Permissions:
@@ -108,6 +123,11 @@ def add_SpaceServiceServicer_to_server(servicer, server):
                     servicer.CreateSpace,
                     request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceResponse.SerializeToString,
+            ),
+            'CreateSpaceFromBackup': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSpaceFromBackup,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupResponse.SerializeToString,
             ),
             'UpdateSpace': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateSpace,
@@ -202,6 +222,33 @@ class SpaceService(object):
             '/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpace',
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceRequest.SerializeToString,
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateSpaceFromBackup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpaceFromBackup',
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.CreateSpaceFromBackupResponse.FromString,
             options,
             channel_credentials,
             insecure,

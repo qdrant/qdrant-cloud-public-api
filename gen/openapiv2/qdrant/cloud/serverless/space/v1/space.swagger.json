@@ -16,6 +16,53 @@
     "application/json"
   ],
   "paths": {
+    "/api/serverless/v1/accounts/{accountId}/backups/{backupId}/spaces": {
+      "post": {
+        "summary": "Create a new space from an existing backup\nRequired permissions (both):\n- restore:serverless_backups\n- write:serverless_spaces",
+        "operationId": "SpaceService_CreateSpaceFromBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSpaceFromBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceServiceCreateSpaceFromBackupBody"
+            }
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    },
     "/api/serverless/v1/accounts/{accountId}/spaces": {
       "get": {
         "summary": "ListSpaces returns all spaces for the authenticated user\nRequired Permissions:\n- read:serverless_spaces",
@@ -146,6 +193,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "deleteBackups",
+            "description": "If set, the backups of this space will be deleted as well.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -300,6 +354,16 @@
       },
       "title": "CreateSpaceRequest defines parameters for creating a new space"
     },
+    "SpaceServiceCreateSpaceFromBackupBody": {
+      "type": "object",
+      "properties": {
+        "spaceName": {
+          "type": "string",
+          "title": "Name of the new space"
+        }
+      },
+      "description": "CreateSpaceFromBackupRequest is the request for the CreateSpaceFromBackup function."
+    },
     "SpaceServiceUpdateSpaceBody": {
       "type": "object",
       "properties": {
@@ -381,6 +445,16 @@
           }
         }
       }
+    },
+    "v1CreateSpaceFromBackupResponse": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "$ref": "#/definitions/v1Space",
+          "title": "Space created from the backup"
+        }
+      },
+      "description": "CreateSpaceFromBackupResponse is the response for the CreateSpaceFromBackup function."
     },
     "v1CreateSpaceResponse": {
       "type": "object",

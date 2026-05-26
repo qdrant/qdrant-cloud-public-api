@@ -439,6 +439,118 @@ func (x *CreateSpaceResponse) GetSpace() *Space {
 	return nil
 }
 
+// CreateSpaceFromBackupRequest is the request for the CreateSpaceFromBackup function.
+type CreateSpaceFromBackupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format).
+	// This is a required field.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The identifier of the backup (in GUID format).
+	// This is a required field.
+	BackupId string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	// Name of the new space
+	SpaceName     string `protobuf:"bytes,3,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpaceFromBackupRequest) Reset() {
+	*x = CreateSpaceFromBackupRequest{}
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpaceFromBackupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpaceFromBackupRequest) ProtoMessage() {}
+
+func (x *CreateSpaceFromBackupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpaceFromBackupRequest.ProtoReflect.Descriptor instead.
+func (*CreateSpaceFromBackupRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateSpaceFromBackupRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *CreateSpaceFromBackupRequest) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+func (x *CreateSpaceFromBackupRequest) GetSpaceName() string {
+	if x != nil {
+		return x.SpaceName
+	}
+	return ""
+}
+
+// CreateSpaceFromBackupResponse is the response for the CreateSpaceFromBackup function.
+type CreateSpaceFromBackupResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Space created from the backup
+	Space         *Space `protobuf:"bytes,1,opt,name=space,proto3" json:"space,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpaceFromBackupResponse) Reset() {
+	*x = CreateSpaceFromBackupResponse{}
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpaceFromBackupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpaceFromBackupResponse) ProtoMessage() {}
+
+func (x *CreateSpaceFromBackupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpaceFromBackupResponse.ProtoReflect.Descriptor instead.
+func (*CreateSpaceFromBackupResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateSpaceFromBackupResponse) GetSpace() *Space {
+	if x != nil {
+		return x.Space
+	}
+	return nil
+}
+
 // UpdateSpaceRequest is the request for the UpdateSpace function
 type UpdateSpaceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -451,7 +563,7 @@ type UpdateSpaceRequest struct {
 
 func (x *UpdateSpaceRequest) Reset() {
 	*x = UpdateSpaceRequest{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +575,7 @@ func (x *UpdateSpaceRequest) String() string {
 func (*UpdateSpaceRequest) ProtoMessage() {}
 
 func (x *UpdateSpaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +588,7 @@ func (x *UpdateSpaceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSpaceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSpaceRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateSpaceRequest) GetSpace() *Space {
@@ -497,7 +609,7 @@ type UpdateSpaceResponse struct {
 
 func (x *UpdateSpaceResponse) Reset() {
 	*x = UpdateSpaceResponse{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -509,7 +621,7 @@ func (x *UpdateSpaceResponse) String() string {
 func (*UpdateSpaceResponse) ProtoMessage() {}
 
 func (x *UpdateSpaceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +634,7 @@ func (x *UpdateSpaceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSpaceResponse.ProtoReflect.Descriptor instead.
 func (*UpdateSpaceResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateSpaceResponse) GetSpace() *Space {
@@ -540,14 +652,16 @@ type DeleteSpaceRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// ID of the space to delete (in GUID format).
 	// This is a required field.
-	SpaceId       string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	SpaceId string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	// If set, the backups of this space will be deleted as well.
+	DeleteBackups *bool `protobuf:"varint,3,opt,name=delete_backups,json=deleteBackups,proto3,oneof" json:"delete_backups,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteSpaceRequest) Reset() {
 	*x = DeleteSpaceRequest{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -559,7 +673,7 @@ func (x *DeleteSpaceRequest) String() string {
 func (*DeleteSpaceRequest) ProtoMessage() {}
 
 func (x *DeleteSpaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -572,7 +686,7 @@ func (x *DeleteSpaceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSpaceRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSpaceRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteSpaceRequest) GetAccountId() string {
@@ -589,6 +703,13 @@ func (x *DeleteSpaceRequest) GetSpaceId() string {
 	return ""
 }
 
+func (x *DeleteSpaceRequest) GetDeleteBackups() bool {
+	if x != nil && x.DeleteBackups != nil {
+		return *x.DeleteBackups
+	}
+	return false
+}
+
 // DeleteSpaceResponse is an empty response for deletion confirmation
 type DeleteSpaceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -598,7 +719,7 @@ type DeleteSpaceResponse struct {
 
 func (x *DeleteSpaceResponse) Reset() {
 	*x = DeleteSpaceResponse{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -610,7 +731,7 @@ func (x *DeleteSpaceResponse) String() string {
 func (*DeleteSpaceResponse) ProtoMessage() {}
 
 func (x *DeleteSpaceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -623,7 +744,7 @@ func (x *DeleteSpaceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSpaceResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSpaceResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{11}
 }
 
 // Space represents a space in the Qdrant serverless environment.
@@ -673,7 +794,7 @@ type Space struct {
 
 func (x *Space) Reset() {
 	*x = Space{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -685,7 +806,7 @@ func (x *Space) String() string {
 func (*Space) ProtoMessage() {}
 
 func (x *Space) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -698,7 +819,7 @@ func (x *Space) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Space.ProtoReflect.Descriptor instead.
 func (*Space) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Space) GetId() string {
@@ -794,7 +915,7 @@ type SpaceConfiguration struct {
 
 func (x *SpaceConfiguration) Reset() {
 	*x = SpaceConfiguration{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -806,7 +927,7 @@ func (x *SpaceConfiguration) String() string {
 func (*SpaceConfiguration) ProtoMessage() {}
 
 func (x *SpaceConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -819,7 +940,7 @@ func (x *SpaceConfiguration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceConfiguration.ProtoReflect.Descriptor instead.
 func (*SpaceConfiguration) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SpaceConfiguration) GetLastModifiedAt() *timestamppb.Timestamp {
@@ -854,7 +975,7 @@ type SpaceState struct {
 
 func (x *SpaceState) Reset() {
 	*x = SpaceState{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -866,7 +987,7 @@ func (x *SpaceState) String() string {
 func (*SpaceState) ProtoMessage() {}
 
 func (x *SpaceState) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -879,7 +1000,7 @@ func (x *SpaceState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceState.ProtoReflect.Descriptor instead.
 func (*SpaceState) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SpaceState) GetPhase() SpaceStatePhase {
@@ -920,7 +1041,7 @@ type SpaceEndpoint struct {
 
 func (x *SpaceEndpoint) Reset() {
 	*x = SpaceEndpoint{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -932,7 +1053,7 @@ func (x *SpaceEndpoint) String() string {
 func (*SpaceEndpoint) ProtoMessage() {}
 
 func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +1066,7 @@ func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceEndpoint.ProtoReflect.Descriptor instead.
 func (*SpaceEndpoint) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SpaceEndpoint) GetUrl() string {
@@ -999,19 +1120,31 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space\"\xc4\x02\n" +
 	"\x12CreateSpaceRequest\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:\xe6\x01\xbaH\xe2\x01\x1a\xdf\x01\n" +
-	" create_space.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1akthis.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)\"\\\n" +
+	" create_space.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1akthis.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)\"\xbf\x01\n" +
 	"\x13CreateSpaceResponse\x12E\n" +
-	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space\"\xb4\x01\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
+	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xaa\x01\n" +
+	"\x1cCreateSpaceFromBackupRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
+	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12:\n" +
+	"\n" +
+	"space_name\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\tspaceName\"\xc9\x01\n" +
+	"\x1dCreateSpaceFromBackupResponse\x12E\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
+	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xb4\x01\n" +
 	"\x12UpdateSpaceRequest\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:W\xbaHT\x1aR\n" +
 	"\x17update_space.id_present\x12\"space.id is required for an update\x1a\x13this.space.id != ''\"\xbf\x01\n" +
 	"\x13UpdateSpaceResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
-	"\x1aupdate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"b\n" +
+	"\x1aupdate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xa1\x01\n" +
 	"\x12DeleteSpaceRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
-	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\"\x15\n" +
+	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12*\n" +
+	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
+	"\x0f_delete_backups\"\x15\n" +
 	"\x13DeleteSpaceResponse\"\xd9\a\n" +
 	"\x05Space\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
@@ -1049,7 +1182,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\x83\f\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xe9\x0f\n" +
 	"\fSpaceService\x12\xca\x01\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"Q\x8a\xb5\x18\x16read:serverless_spaces\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xe7\x01\n" +
@@ -1058,7 +1191,13 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\vCreateSpace\x124.qdrant.cloud.serverless.space.v1.CreateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.CreateSpaceResponse\"\xf6\x01\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"space_name\x12\n" +
-	"space.name\xca\xf3\x18g\b\x01\x12\x10serverless-space\"\rresp.space.id*B/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\xe4\x02\n" +
+	"space.name\xca\xf3\x18g\b\x01\x12\x10serverless-space\"\rresp.space.id*B/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\xe3\x03\n" +
+	"\x15CreateSpaceFromBackup\x12>.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest\x1a?.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse\"\xc8\x02\x8a\xb5\x18\x1arestore:serverless_backups\x8a\xb5\x18\x17write:serverless_spaces\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
+	"\tbackup_id\x12\tbackup_id\xba\xb5\x18\x18\n" +
+	"\n" +
+	"space_name\x12\n" +
+	"space_name\xca\xf3\x18\x82\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R\x1f\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xe4\x02\n" +
 	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xe7\x01\x8a\xb5\x18\x17write:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace.id\xca\xf3\x18e\b\x02\x12\x10serverless-space\"\freq.space.id*A/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xd6\x02\n" +
 	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\xd9\x01\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
@@ -1079,56 +1218,61 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_serverless_space_v1_space_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
-	(SpaceStatePhase)(0),          // 0: qdrant.cloud.serverless.space.v1.SpaceStatePhase
-	(*ListSpacesRequest)(nil),     // 1: qdrant.cloud.serverless.space.v1.ListSpacesRequest
-	(*ListSpacesResponse)(nil),    // 2: qdrant.cloud.serverless.space.v1.ListSpacesResponse
-	(*GetSpaceRequest)(nil),       // 3: qdrant.cloud.serverless.space.v1.GetSpaceRequest
-	(*GetSpaceResponse)(nil),      // 4: qdrant.cloud.serverless.space.v1.GetSpaceResponse
-	(*CreateSpaceRequest)(nil),    // 5: qdrant.cloud.serverless.space.v1.CreateSpaceRequest
-	(*CreateSpaceResponse)(nil),   // 6: qdrant.cloud.serverless.space.v1.CreateSpaceResponse
-	(*UpdateSpaceRequest)(nil),    // 7: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
-	(*UpdateSpaceResponse)(nil),   // 8: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
-	(*DeleteSpaceRequest)(nil),    // 9: qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
-	(*DeleteSpaceResponse)(nil),   // 10: qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
-	(*Space)(nil),                 // 11: qdrant.cloud.serverless.space.v1.Space
-	(*SpaceConfiguration)(nil),    // 12: qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	(*SpaceState)(nil),            // 13: qdrant.cloud.serverless.space.v1.SpaceState
-	(*SpaceEndpoint)(nil),         // 14: qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
-	(*v1.KeyValue)(nil),           // 16: qdrant.cloud.common.v1.KeyValue
+	(SpaceStatePhase)(0),                  // 0: qdrant.cloud.serverless.space.v1.SpaceStatePhase
+	(*ListSpacesRequest)(nil),             // 1: qdrant.cloud.serverless.space.v1.ListSpacesRequest
+	(*ListSpacesResponse)(nil),            // 2: qdrant.cloud.serverless.space.v1.ListSpacesResponse
+	(*GetSpaceRequest)(nil),               // 3: qdrant.cloud.serverless.space.v1.GetSpaceRequest
+	(*GetSpaceResponse)(nil),              // 4: qdrant.cloud.serverless.space.v1.GetSpaceResponse
+	(*CreateSpaceRequest)(nil),            // 5: qdrant.cloud.serverless.space.v1.CreateSpaceRequest
+	(*CreateSpaceResponse)(nil),           // 6: qdrant.cloud.serverless.space.v1.CreateSpaceResponse
+	(*CreateSpaceFromBackupRequest)(nil),  // 7: qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
+	(*CreateSpaceFromBackupResponse)(nil), // 8: qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+	(*UpdateSpaceRequest)(nil),            // 9: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
+	(*UpdateSpaceResponse)(nil),           // 10: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
+	(*DeleteSpaceRequest)(nil),            // 11: qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
+	(*DeleteSpaceResponse)(nil),           // 12: qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
+	(*Space)(nil),                         // 13: qdrant.cloud.serverless.space.v1.Space
+	(*SpaceConfiguration)(nil),            // 14: qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	(*SpaceState)(nil),                    // 15: qdrant.cloud.serverless.space.v1.SpaceState
+	(*SpaceEndpoint)(nil),                 // 16: qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	(*timestamppb.Timestamp)(nil),         // 17: google.protobuf.Timestamp
+	(*v1.KeyValue)(nil),                   // 18: qdrant.cloud.common.v1.KeyValue
 }
 var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
-	11, // 0: qdrant.cloud.serverless.space.v1.ListSpacesResponse.items:type_name -> qdrant.cloud.serverless.space.v1.Space
-	11, // 1: qdrant.cloud.serverless.space.v1.GetSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	11, // 2: qdrant.cloud.serverless.space.v1.CreateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	11, // 3: qdrant.cloud.serverless.space.v1.CreateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	11, // 4: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	11, // 5: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	15, // 6: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
-	15, // 7: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
-	16, // 8: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	12, // 9: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	13, // 10: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
-	15, // 11: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
-	0,  // 12: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
-	14, // 13: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	1,  // 14: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
-	3,  // 15: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
-	5,  // 16: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
-	7,  // 17: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
-	9,  // 18: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
-	2,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
-	4,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
-	6,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
-	8,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
-	10, // 23: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
-	19, // [19:24] is the sub-list for method output_type
-	14, // [14:19] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	13, // 0: qdrant.cloud.serverless.space.v1.ListSpacesResponse.items:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 1: qdrant.cloud.serverless.space.v1.GetSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 2: qdrant.cloud.serverless.space.v1.CreateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 3: qdrant.cloud.serverless.space.v1.CreateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 4: qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 5: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	13, // 6: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	17, // 7: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
+	17, // 8: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
+	18, // 9: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	14, // 10: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	15, // 11: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
+	17, // 12: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
+	0,  // 13: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
+	16, // 14: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	1,  // 15: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
+	3,  // 16: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
+	5,  // 17: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
+	7,  // 18: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
+	9,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
+	11, // 20: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
+	2,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
+	4,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
+	6,  // 23: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
+	8,  // 24: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+	10, // 25: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
+	12, // 26: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
+	21, // [21:27] is the sub-list for method output_type
+	15, // [15:21] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_v1_space_proto_init() }
@@ -1140,13 +1284,14 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_init() {
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[12].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc), len(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

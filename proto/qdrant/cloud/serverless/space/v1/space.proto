@@ -65,6 +65,41 @@ service SpaceService {
       field_expression: "space.name"
     };
   }
+  // Create a new space from an existing backup
+  // Required permissions (both):
+  // - restore:serverless_backups
+  // - write:serverless_spaces
+  rpc CreateSpaceFromBackup(CreateSpaceFromBackupRequest) returns (CreateSpaceFromBackupResponse) {
+    // permissions
+    option (common.v1.requires_all_permissions) = true;
+    option (common.v1.permissions) = "restore:serverless_backups";
+    option (common.v1.permissions) = "write:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "serverless-space"
+      resource_id_field: "resp.space.id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{resp.space.id}"
+      additional_context_fields: {
+        key: "from_backup_id"
+        value: "req.backup_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "space_name"
+      field_expression: "space_name"
+    };
+  }
   // Updates a space in the account identified by the given ID.
   // Required Permissions:
   // - write:serverless_spaces
@@ -186,6 +221,38 @@ message CreateSpaceRequest {
 message CreateSpaceResponse {
   // Space represents a space in the Qdrant serverless environment
   Space space = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_space.state_present"
+    message: "state is required for an existing space"
+    expression: "has(this.space.state)"
+  };
+}
+
+// CreateSpaceFromBackupRequest is the request for the CreateSpaceFromBackup function.
+message CreateSpaceFromBackupRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the backup (in GUID format).
+  // This is a required field.
+  string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Name of the new space
+  string space_name = 3 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
+}
+
+// CreateSpaceFromBackupResponse is the response for the CreateSpaceFromBackup function.
+message CreateSpaceFromBackupResponse {
+  // Space created from the backup
+  Space space = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_space.state_present"
+    message: "state is required for an existing space"
+    expression: "has(this.space.state)"
+  };
 }
 
 // UpdateSpaceRequest is the request for the UpdateSpace function
@@ -219,6 +286,8 @@ message DeleteSpaceRequest {
   // ID of the space to delete (in GUID format).
   // This is a required field.
   string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // If set, the backups of this space will be deleted as well.
+  optional bool delete_backups = 3;
 }
 
 // DeleteSpaceResponse is an empty response for deletion confirmation
