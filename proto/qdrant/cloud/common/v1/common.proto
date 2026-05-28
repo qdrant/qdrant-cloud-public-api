@@ -73,6 +73,65 @@ extend google.protobuf.ServiceOptions {
   optional Version api_version = 50008;
 }
 
+// The extension for describing how to construct a Get request from an Update
+// request, enabling the API gateway to fetch the current resource for partial
+// (FieldMask-based) updates.
+// When this option is set on an Update RPC and the incoming request specifies
+// a non-empty `update_mask`, the API gateway will:
+//   1. Build a Get request using the `field_mapping` to copy identifiers from
+//      the Update request into the Get request.
+//   2. Call the `get_method` RPC on the backend to fetch the current resource.
+//   3. Merge the fields listed in the `update_mask` from the client's request
+//      into the fetched resource.
+//   4. Forward the merged full resource (without the mask) to the backend.
+// Backend services remain unmodified and continue to receive full-resource
+// replacement requests.
+extend google.protobuf.MethodOptions {
+  // Describes how to construct a Get request from an Update request,
+  // enabling the gateway to fetch the current resource for partial updates.
+  optional PatchSource patch_source = 50009;
+}
+
+// PatchSource describes how to construct a Get request from an Update request,
+// enabling the API gateway to fetch the current resource for partial
+// (FieldMask-based) updates.
+message PatchSource {
+  // The full RPC method name to call to fetch the current resource.
+  // e.g. "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
+  string get_method = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^/[A-Za-z_][A-Za-z0-9_.]*/[A-Za-z_][A-Za-z0-9_]*$"
+  }];
+
+  // Maps fields from the Update request to the Get request.
+  // Key: field path in the Get request message (e.g. "account_id")
+  // Value: field path in the Update request message (e.g. "cluster.account_id")
+  // Field paths may be nested using a dot separator.
+  map<string, string> field_mapping = 2 [(buf.validate.field).map = {
+    min_pairs: 1
+    keys: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
+    values: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
+  }];
+
+  // The field path in the Get response message that contains the resource.
+  // e.g. "cluster"
+  string response_resource_field = 3 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
+  }];
+
+  // The field path in the Update request message that contains the resource.
+  // e.g. "cluster"
+  string request_resource_field = 4 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
+  }];
+}
+
 // ActorType specifies the type of actor that can call a method.
 enum ActorType {
   // Default, unspecified actor type. Should generally not be used explicitly in options

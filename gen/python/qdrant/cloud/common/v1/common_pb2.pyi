@@ -55,6 +55,27 @@ LOG_FIELDS_FIELD_NUMBER: _ClassVar[int]
 log_fields: _descriptor.FieldDescriptor
 API_VERSION_FIELD_NUMBER: _ClassVar[int]
 api_version: _descriptor.FieldDescriptor
+PATCH_SOURCE_FIELD_NUMBER: _ClassVar[int]
+patch_source: _descriptor.FieldDescriptor
+
+class PatchSource(_message.Message):
+    __slots__ = ("get_method", "field_mapping", "response_resource_field", "request_resource_field")
+    class FieldMappingEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    GET_METHOD_FIELD_NUMBER: _ClassVar[int]
+    FIELD_MAPPING_FIELD_NUMBER: _ClassVar[int]
+    RESPONSE_RESOURCE_FIELD_FIELD_NUMBER: _ClassVar[int]
+    REQUEST_RESOURCE_FIELD_FIELD_NUMBER: _ClassVar[int]
+    get_method: str
+    field_mapping: _containers.ScalarMap[str, str]
+    response_resource_field: str
+    request_resource_field: str
+    def __init__(self, get_method: _Optional[str] = ..., field_mapping: _Optional[_Mapping[str, str]] = ..., response_resource_field: _Optional[str] = ..., request_resource_field: _Optional[str] = ...) -> None: ...
 
 class LogField(_message.Message):
     __slots__ = ("name", "field_expression")
