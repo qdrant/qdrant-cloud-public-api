@@ -104,8 +104,8 @@ message PatchSource {
   }];
 
   // Maps fields from the Update request to the Get request.
-  // Key: field path in the GetXRequest (e.g. "account_id")
-  // Value: field path in the UpdateXRequest (e.g. "cluster.account_id")
+  // Key: field path in the Get request message (e.g. "account_id")
+  // Value: field path in the Update request message (e.g. "cluster.account_id")
   // Field paths may be nested using a dot separator.
   map<string, string> field_mapping = 2 [(buf.validate.field).map = {
     min_pairs: 1
@@ -117,14 +117,14 @@ message PatchSource {
     }
   }];
 
-  // The field path in the GetXResponse that contains the resource.
+  // The field path in the Get response message that contains the resource.
   // e.g. "cluster"
   string response_resource_field = 3 [(buf.validate.field).string = {
     min_len: 1
     pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
   }];
 
-  // The field path in the UpdateXRequest that contains the resource.
+  // The field path in the Update request message that contains the resource.
   // e.g. "cluster"
   string request_resource_field = 4 [(buf.validate.field).string = {
     min_len: 1

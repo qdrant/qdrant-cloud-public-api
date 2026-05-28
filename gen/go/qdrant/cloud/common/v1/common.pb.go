@@ -203,14 +203,14 @@ type PatchSource struct {
 	// e.g. "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
 	GetMethod string `protobuf:"bytes,1,opt,name=get_method,json=getMethod,proto3" json:"get_method,omitempty"`
 	// Maps fields from the Update request to the Get request.
-	// Key: field path in the GetXRequest (e.g. "account_id")
-	// Value: field path in the UpdateXRequest (e.g. "cluster.account_id")
+	// Key: field path in the Get request message (e.g. "account_id")
+	// Value: field path in the Update request message (e.g. "cluster.account_id")
 	// Field paths may be nested using a dot separator.
 	FieldMapping map[string]string `protobuf:"bytes,2,rep,name=field_mapping,json=fieldMapping,proto3" json:"field_mapping,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// The field path in the GetXResponse that contains the resource.
+	// The field path in the Get response message that contains the resource.
 	// e.g. "cluster"
 	ResponseResourceField string `protobuf:"bytes,3,opt,name=response_resource_field,json=responseResourceField,proto3" json:"response_resource_field,omitempty"`
-	// The field path in the UpdateXRequest that contains the resource.
+	// The field path in the Update request message that contains the resource.
 	// e.g. "cluster"
 	RequestResourceField string `protobuf:"bytes,4,opt,name=request_resource_field,json=requestResourceField,proto3" json:"request_resource_field,omitempty"`
 	unknownFields        protoimpl.UnknownFields

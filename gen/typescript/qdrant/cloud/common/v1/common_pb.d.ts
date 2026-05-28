@@ -29,8 +29,8 @@ export declare type PatchSource = Message<"qdrant.cloud.common.v1.PatchSource"> 
 
   /**
    * Maps fields from the Update request to the Get request.
-   * Key: field path in the GetXRequest (e.g. "account_id")
-   * Value: field path in the UpdateXRequest (e.g. "cluster.account_id")
+   * Key: field path in the Get request message (e.g. "account_id")
+   * Value: field path in the Update request message (e.g. "cluster.account_id")
    * Field paths may be nested using a dot separator.
    *
    * @generated from field: map<string, string> field_mapping = 2;
@@ -38,7 +38,7 @@ export declare type PatchSource = Message<"qdrant.cloud.common.v1.PatchSource"> 
   fieldMapping: { [key: string]: string };
 
   /**
-   * The field path in the GetXResponse that contains the resource.
+   * The field path in the Get response message that contains the resource.
    * e.g. "cluster"
    *
    * @generated from field: string response_resource_field = 3;
@@ -46,7 +46,7 @@ export declare type PatchSource = Message<"qdrant.cloud.common.v1.PatchSource"> 
   responseResourceField: string;
 
   /**
-   * The field path in the UpdateXRequest that contains the resource.
+   * The field path in the Update request message that contains the resource.
    * e.g. "cluster"
    *
    * @generated from field: string request_resource_field = 4;
