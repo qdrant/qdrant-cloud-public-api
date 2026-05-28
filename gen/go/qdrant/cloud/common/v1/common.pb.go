@@ -194,6 +194,87 @@ func (TopologySpreadConstraintWhenUnsatisfiable) EnumDescriptor() ([]byte, []int
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
+// PatchSource describes how to construct a Get request from an Update request,
+// enabling the API gateway to fetch the current resource for partial
+// (FieldMask-based) updates.
+type PatchSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The full RPC method name to call to fetch the current resource.
+	// e.g. "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
+	GetMethod string `protobuf:"bytes,1,opt,name=get_method,json=getMethod,proto3" json:"get_method,omitempty"`
+	// Maps fields from the Update request to the Get request.
+	// Key: field path in the GetXRequest (e.g. "account_id")
+	// Value: field path in the UpdateXRequest (e.g. "cluster.account_id")
+	// Field paths may be nested using a dot separator.
+	FieldMapping map[string]string `protobuf:"bytes,2,rep,name=field_mapping,json=fieldMapping,proto3" json:"field_mapping,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// The field path in the GetXResponse that contains the resource.
+	// e.g. "cluster"
+	ResponseResourceField string `protobuf:"bytes,3,opt,name=response_resource_field,json=responseResourceField,proto3" json:"response_resource_field,omitempty"`
+	// The field path in the UpdateXRequest that contains the resource.
+	// e.g. "cluster"
+	RequestResourceField string `protobuf:"bytes,4,opt,name=request_resource_field,json=requestResourceField,proto3" json:"request_resource_field,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *PatchSource) Reset() {
+	*x = PatchSource{}
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PatchSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PatchSource) ProtoMessage() {}
+
+func (x *PatchSource) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PatchSource.ProtoReflect.Descriptor instead.
+func (*PatchSource) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PatchSource) GetGetMethod() string {
+	if x != nil {
+		return x.GetMethod
+	}
+	return ""
+}
+
+func (x *PatchSource) GetFieldMapping() map[string]string {
+	if x != nil {
+		return x.FieldMapping
+	}
+	return nil
+}
+
+func (x *PatchSource) GetResponseResourceField() string {
+	if x != nil {
+		return x.ResponseResourceField
+	}
+	return ""
+}
+
+func (x *PatchSource) GetRequestResourceField() string {
+	if x != nil {
+		return x.RequestResourceField
+	}
+	return ""
+}
+
 // LogField represents a field to log (in case of an error).
 type LogField struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -209,7 +290,7 @@ type LogField struct {
 
 func (x *LogField) Reset() {
 	*x = LogField{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -221,7 +302,7 @@ func (x *LogField) String() string {
 func (*LogField) ProtoMessage() {}
 
 func (x *LogField) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[0]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +315,7 @@ func (x *LogField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogField.ProtoReflect.Descriptor instead.
 func (*LogField) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *LogField) GetName() string {
@@ -266,7 +347,7 @@ type Version struct {
 
 func (x *Version) Reset() {
 	*x = Version{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +359,7 @@ func (x *Version) String() string {
 func (*Version) ProtoMessage() {}
 
 func (x *Version) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +372,7 @@ func (x *Version) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Version.ProtoReflect.Descriptor instead.
 func (*Version) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Version) GetMajor() uint32 {
@@ -330,7 +411,7 @@ type SecretKeyRef struct {
 
 func (x *SecretKeyRef) Reset() {
 	*x = SecretKeyRef{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -342,7 +423,7 @@ func (x *SecretKeyRef) String() string {
 func (*SecretKeyRef) ProtoMessage() {}
 
 func (x *SecretKeyRef) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,7 +436,7 @@ func (x *SecretKeyRef) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SecretKeyRef.ProtoReflect.Descriptor instead.
 func (*SecretKeyRef) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SecretKeyRef) GetName() string {
@@ -386,7 +467,7 @@ type KeyValue struct {
 
 func (x *KeyValue) Reset() {
 	*x = KeyValue{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -398,7 +479,7 @@ func (x *KeyValue) String() string {
 func (*KeyValue) ProtoMessage() {}
 
 func (x *KeyValue) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[3]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -411,7 +492,7 @@ func (x *KeyValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeyValue.ProtoReflect.Descriptor instead.
 func (*KeyValue) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{3}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *KeyValue) GetKey() string {
@@ -483,7 +564,7 @@ type TopologySpreadConstraint struct {
 
 func (x *TopologySpreadConstraint) Reset() {
 	*x = TopologySpreadConstraint{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -495,7 +576,7 @@ func (x *TopologySpreadConstraint) String() string {
 func (*TopologySpreadConstraint) ProtoMessage() {}
 
 func (x *TopologySpreadConstraint) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -508,7 +589,7 @@ func (x *TopologySpreadConstraint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopologySpreadConstraint.ProtoReflect.Descriptor instead.
 func (*TopologySpreadConstraint) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TopologySpreadConstraint) GetMaxSkew() int32 {
@@ -552,7 +633,7 @@ type LabelSelectorRequirement struct {
 
 func (x *LabelSelectorRequirement) Reset() {
 	*x = LabelSelectorRequirement{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +645,7 @@ func (x *LabelSelectorRequirement) String() string {
 func (*LabelSelectorRequirement) ProtoMessage() {}
 
 func (x *LabelSelectorRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +658,7 @@ func (x *LabelSelectorRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LabelSelectorRequirement.ProtoReflect.Descriptor instead.
 func (*LabelSelectorRequirement) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *LabelSelectorRequirement) GetKey() string {
@@ -617,7 +698,7 @@ type LabelSelector struct {
 
 func (x *LabelSelector) Reset() {
 	*x = LabelSelector{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -629,7 +710,7 @@ func (x *LabelSelector) String() string {
 func (*LabelSelector) ProtoMessage() {}
 
 func (x *LabelSelector) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -642,7 +723,7 @@ func (x *LabelSelector) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LabelSelector.ProtoReflect.Descriptor instead.
 func (*LabelSelector) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *LabelSelector) GetMatchLabels() []*KeyValue {
@@ -676,7 +757,7 @@ type IPBlock struct {
 
 func (x *IPBlock) Reset() {
 	*x = IPBlock{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -688,7 +769,7 @@ func (x *IPBlock) String() string {
 func (*IPBlock) ProtoMessage() {}
 
 func (x *IPBlock) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -701,7 +782,7 @@ func (x *IPBlock) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IPBlock.ProtoReflect.Descriptor instead.
 func (*IPBlock) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *IPBlock) GetCidr() string {
@@ -737,7 +818,7 @@ type PeerSelector struct {
 
 func (x *PeerSelector) Reset() {
 	*x = PeerSelector{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -749,7 +830,7 @@ func (x *PeerSelector) String() string {
 func (*PeerSelector) ProtoMessage() {}
 
 func (x *PeerSelector) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +843,7 @@ func (x *PeerSelector) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PeerSelector.ProtoReflect.Descriptor instead.
 func (*PeerSelector) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PeerSelector) GetPodSelector() *LabelSelector {
@@ -796,7 +877,7 @@ type NetworkPolicyPeer struct {
 
 func (x *NetworkPolicyPeer) Reset() {
 	*x = NetworkPolicyPeer{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +889,7 @@ func (x *NetworkPolicyPeer) String() string {
 func (*NetworkPolicyPeer) ProtoMessage() {}
 
 func (x *NetworkPolicyPeer) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +902,7 @@ func (x *NetworkPolicyPeer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkPolicyPeer.ProtoReflect.Descriptor instead.
 func (*NetworkPolicyPeer) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *NetworkPolicyPeer) GetPeerType() isNetworkPolicyPeer_PeerType {
@@ -894,7 +975,7 @@ type NetworkPolicyPort struct {
 
 func (x *NetworkPolicyPort) Reset() {
 	*x = NetworkPolicyPort{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -906,7 +987,7 @@ func (x *NetworkPolicyPort) String() string {
 func (*NetworkPolicyPort) ProtoMessage() {}
 
 func (x *NetworkPolicyPort) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -919,7 +1000,7 @@ func (x *NetworkPolicyPort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkPolicyPort.ProtoReflect.Descriptor instead.
 func (*NetworkPolicyPort) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *NetworkPolicyPort) GetProtocol() string {
@@ -1002,7 +1083,7 @@ type NetworkPolicyIngressRule struct {
 
 func (x *NetworkPolicyIngressRule) Reset() {
 	*x = NetworkPolicyIngressRule{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1014,7 +1095,7 @@ func (x *NetworkPolicyIngressRule) String() string {
 func (*NetworkPolicyIngressRule) ProtoMessage() {}
 
 func (x *NetworkPolicyIngressRule) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1027,7 +1108,7 @@ func (x *NetworkPolicyIngressRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkPolicyIngressRule.ProtoReflect.Descriptor instead.
 func (*NetworkPolicyIngressRule) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *NetworkPolicyIngressRule) GetPorts() []*NetworkPolicyPort {
@@ -1067,7 +1148,7 @@ type NetworkPolicyEgressRule struct {
 
 func (x *NetworkPolicyEgressRule) Reset() {
 	*x = NetworkPolicyEgressRule{}
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1079,7 +1160,7 @@ func (x *NetworkPolicyEgressRule) String() string {
 func (*NetworkPolicyEgressRule) ProtoMessage() {}
 
 func (x *NetworkPolicyEgressRule) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_common_v1_common_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1092,7 +1173,7 @@ func (x *NetworkPolicyEgressRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkPolicyEgressRule.ProtoReflect.Descriptor instead.
 func (*NetworkPolicyEgressRule) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *NetworkPolicyEgressRule) GetPorts() []*NetworkPolicyPort {
@@ -1174,6 +1255,14 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 		Tag:           "bytes,50008,opt,name=api_version",
 		Filename:      "qdrant/cloud/common/v1/common.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: (*PatchSource)(nil),
+		Field:         50009,
+		Name:          "qdrant.cloud.common.v1.patch_source",
+		Tag:           "bytes,50009,opt,name=patch_source",
+		Filename:      "qdrant/cloud/common/v1/common.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -1212,6 +1301,11 @@ var (
 	//
 	// repeated qdrant.cloud.common.v1.LogField log_fields = 50007;
 	E_LogFields = &file_qdrant_cloud_common_v1_common_proto_extTypes[6]
+	// Describes how to construct a Get request from an Update request,
+	// enabling the gateway to fetch the current resource for partial updates.
+	//
+	// optional qdrant.cloud.common.v1.PatchSource patch_source = 50009;
+	E_PatchSource = &file_qdrant_cloud_common_v1_common_proto_extTypes[8]
 )
 
 // Extension fields to descriptorpb.ServiceOptions.
@@ -1227,7 +1321,16 @@ var File_qdrant_cloud_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x85\x01\n" +
+	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xbc\x04\n" +
+	"\vPatchSource\x12Y\n" +
+	"\n" +
+	"get_method\x18\x01 \x01(\tB:\xbaH7r5\x10\x0121^/[A-Za-z_][A-Za-z0-9_.]*/[A-Za-z_][A-Za-z0-9_]*$R\tgetMethod\x12\xbe\x01\n" +
+	"\rfield_mapping\x18\x02 \x03(\v25.qdrant.cloud.common.v1.PatchSource.FieldMappingEntryBb\xbaH_\x9a\x01\\\b\x01\"+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$*+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\ffieldMapping\x12h\n" +
+	"\x17response_resource_field\x18\x03 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\x15responseResourceField\x12f\n" +
+	"\x16request_resource_field\x18\x04 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\x14requestResourceField\x1a?\n" +
+	"\x11FieldMappingEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x85\x01\n" +
 	"\bLogField\x12-\n" +
 	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x18@2\x0e^[a-z][a-z_]*$R\x04name\x12J\n" +
 	"\x10field_expression\x18\x02 \x01(\tB\x1f\xbaH\x1cr\x1a2\x18^(|[a-z_]+(\\.[a-z_]+)*)$R\x0ffieldExpression\"K\n" +
@@ -1314,7 +1417,8 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\n" +
 	"log_fields\x12\x1e.google.protobuf.MethodOptions\x18׆\x03 \x03(\v2 .qdrant.cloud.common.v1.LogFieldR\tlogFields:f\n" +
 	"\vapi_version\x12\x1f.google.protobuf.ServiceOptions\x18؆\x03 \x01(\v2\x1f.qdrant.cloud.common.v1.VersionR\n" +
-	"apiVersion\x88\x01\x01B\xf6\x01\n" +
+	"apiVersion\x88\x01\x01:k\n" +
+	"\fpatch_source\x12\x1e.google.protobuf.MethodOptions\x18ن\x03 \x01(\v2#.qdrant.cloud.common.v1.PatchSourceR\vpatchSource\x88\x01\x01B\xf6\x01\n" +
 	"\x1acom.qdrant.cloud.common.v1B\vCommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3"
 
 var (
@@ -1330,55 +1434,60 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),       // 0: qdrant.cloud.common.v1.ActorType
 	(StorageTierType)(0), // 1: qdrant.cloud.common.v1.StorageTierType
 	(TopologySpreadConstraintWhenUnsatisfiable)(0), // 2: qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
-	(*LogField)(nil),                    // 3: qdrant.cloud.common.v1.LogField
-	(*Version)(nil),                     // 4: qdrant.cloud.common.v1.Version
-	(*SecretKeyRef)(nil),                // 5: qdrant.cloud.common.v1.SecretKeyRef
-	(*KeyValue)(nil),                    // 6: qdrant.cloud.common.v1.KeyValue
-	(*TopologySpreadConstraint)(nil),    // 7: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*LabelSelectorRequirement)(nil),    // 8: qdrant.cloud.common.v1.LabelSelectorRequirement
-	(*LabelSelector)(nil),               // 9: qdrant.cloud.common.v1.LabelSelector
-	(*IPBlock)(nil),                     // 10: qdrant.cloud.common.v1.IPBlock
-	(*PeerSelector)(nil),                // 11: qdrant.cloud.common.v1.PeerSelector
-	(*NetworkPolicyPeer)(nil),           // 12: qdrant.cloud.common.v1.NetworkPolicyPeer
-	(*NetworkPolicyPort)(nil),           // 13: qdrant.cloud.common.v1.NetworkPolicyPort
-	(*NetworkPolicyIngressRule)(nil),    // 14: qdrant.cloud.common.v1.NetworkPolicyIngressRule
-	(*NetworkPolicyEgressRule)(nil),     // 15: qdrant.cloud.common.v1.NetworkPolicyEgressRule
-	(*descriptorpb.MethodOptions)(nil),  // 16: google.protobuf.MethodOptions
-	(*descriptorpb.ServiceOptions)(nil), // 17: google.protobuf.ServiceOptions
+	(*PatchSource)(nil),                            // 3: qdrant.cloud.common.v1.PatchSource
+	(*LogField)(nil),                               // 4: qdrant.cloud.common.v1.LogField
+	(*Version)(nil),                                // 5: qdrant.cloud.common.v1.Version
+	(*SecretKeyRef)(nil),                           // 6: qdrant.cloud.common.v1.SecretKeyRef
+	(*KeyValue)(nil),                               // 7: qdrant.cloud.common.v1.KeyValue
+	(*TopologySpreadConstraint)(nil),               // 8: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*LabelSelectorRequirement)(nil),               // 9: qdrant.cloud.common.v1.LabelSelectorRequirement
+	(*LabelSelector)(nil),                          // 10: qdrant.cloud.common.v1.LabelSelector
+	(*IPBlock)(nil),                                // 11: qdrant.cloud.common.v1.IPBlock
+	(*PeerSelector)(nil),                           // 12: qdrant.cloud.common.v1.PeerSelector
+	(*NetworkPolicyPeer)(nil),                      // 13: qdrant.cloud.common.v1.NetworkPolicyPeer
+	(*NetworkPolicyPort)(nil),                      // 14: qdrant.cloud.common.v1.NetworkPolicyPort
+	(*NetworkPolicyIngressRule)(nil),               // 15: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*NetworkPolicyEgressRule)(nil),                // 16: qdrant.cloud.common.v1.NetworkPolicyEgressRule
+	nil,                                            // 17: qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
+	(*descriptorpb.MethodOptions)(nil),             // 18: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil),            // 19: google.protobuf.ServiceOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	2,  // 0: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
-	6,  // 1: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	8,  // 2: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
-	9,  // 3: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	9,  // 4: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	11, // 5: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
-	10, // 6: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
-	13, // 7: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	12, // 8: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	13, // 9: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	12, // 10: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	16, // 11: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	16, // 12: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	16, // 13: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	16, // 14: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	16, // 15: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	16, // 16: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	16, // 17: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
-	17, // 18: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
-	0,  // 19: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	3,  // 20: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	4,  // 21: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	19, // [19:22] is the sub-list for extension type_name
-	11, // [11:19] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	17, // 0: qdrant.cloud.common.v1.PatchSource.field_mapping:type_name -> qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
+	2,  // 1: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+	7,  // 2: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	9,  // 3: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
+	10, // 4: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	10, // 5: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	12, // 6: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
+	11, // 7: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
+	14, // 8: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	13, // 9: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	14, // 10: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	13, // 11: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	18, // 12: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	18, // 13: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	18, // 14: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	18, // 15: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	18, // 16: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	18, // 17: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	18, // 18: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	19, // 19: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
+	18, // 20: qdrant.cloud.common.v1.patch_source:extendee -> google.protobuf.MethodOptions
+	0,  // 21: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	4,  // 22: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	5,  // 23: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
+	3,  // 24: qdrant.cloud.common.v1.patch_source:type_name -> qdrant.cloud.common.v1.PatchSource
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	21, // [21:25] is the sub-list for extension type_name
+	12, // [12:21] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_common_v1_common_proto_init() }
@@ -1386,13 +1495,13 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 	if File_qdrant_cloud_common_v1_common_proto != nil {
 		return
 	}
-	file_qdrant_cloud_common_v1_common_proto_msgTypes[4].OneofWrappers = []any{}
-	file_qdrant_cloud_common_v1_common_proto_msgTypes[8].OneofWrappers = []any{}
-	file_qdrant_cloud_common_v1_common_proto_msgTypes[9].OneofWrappers = []any{
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[5].OneofWrappers = []any{}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[9].OneofWrappers = []any{}
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[10].OneofWrappers = []any{
 		(*NetworkPolicyPeer_Selector)(nil),
 		(*NetworkPolicyPeer_IpBlock)(nil),
 	}
-	file_qdrant_cloud_common_v1_common_proto_msgTypes[10].OneofWrappers = []any{
+	file_qdrant_cloud_common_v1_common_proto_msgTypes[11].OneofWrappers = []any{
 		(*NetworkPolicyPort_PortNumber)(nil),
 		(*NetworkPolicyPort_PortName)(nil),
 	}
@@ -1402,8 +1511,8 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   13,
-			NumExtensions: 8,
+			NumMessages:   15,
+			NumExtensions: 9,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_common_v1_common_proto_goTypes,

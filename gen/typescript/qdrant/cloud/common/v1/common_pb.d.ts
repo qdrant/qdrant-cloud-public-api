@@ -12,6 +12,57 @@ import type { MethodOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
 export declare const file_qdrant_cloud_common_v1_common: GenFile;
 
 /**
+ * PatchSource describes how to construct a Get request from an Update request,
+ * enabling the API gateway to fetch the current resource for partial
+ * (FieldMask-based) updates.
+ *
+ * @generated from message qdrant.cloud.common.v1.PatchSource
+ */
+export declare type PatchSource = Message<"qdrant.cloud.common.v1.PatchSource"> & {
+  /**
+   * The full RPC method name to call to fetch the current resource.
+   * e.g. "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
+   *
+   * @generated from field: string get_method = 1;
+   */
+  getMethod: string;
+
+  /**
+   * Maps fields from the Update request to the Get request.
+   * Key: field path in the GetXRequest (e.g. "account_id")
+   * Value: field path in the UpdateXRequest (e.g. "cluster.account_id")
+   * Field paths may be nested using a dot separator.
+   *
+   * @generated from field: map<string, string> field_mapping = 2;
+   */
+  fieldMapping: { [key: string]: string };
+
+  /**
+   * The field path in the GetXResponse that contains the resource.
+   * e.g. "cluster"
+   *
+   * @generated from field: string response_resource_field = 3;
+   */
+  responseResourceField: string;
+
+  /**
+   * The field path in the UpdateXRequest that contains the resource.
+   * e.g. "cluster"
+   *
+   * @generated from field: string request_resource_field = 4;
+   */
+  requestResourceField: string;
+};
+
+export declare type PatchSourceValid = PatchSource;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.PatchSource.
+ * Use `create(PatchSourceSchema)` to create a new message.
+ */
+export declare const PatchSourceSchema: GenMessage<PatchSource, {validType: PatchSourceValid}>;
+
+/**
  * LogField represents a field to log (in case of an error).
  *
  * @generated from message qdrant.cloud.common.v1.LogField
@@ -710,4 +761,12 @@ export declare const log_fields: GenExtension<MethodOptions, LogField[]>;
  * @generated from extension: optional qdrant.cloud.common.v1.Version api_version = 50008;
  */
 export declare const api_version: GenExtension<ServiceOptions, Version>;
+
+/**
+ * Describes how to construct a Get request from an Update request,
+ * enabling the gateway to fetch the current resource for partial updates.
+ *
+ * @generated from extension: optional qdrant.cloud.common.v1.PatchSource patch_source = 50009;
+ */
+export declare const patch_source: GenExtension<MethodOptions, PatchSource>;
 
