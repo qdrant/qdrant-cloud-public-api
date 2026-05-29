@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file qdrant/cloud/payment/v1/payment.proto.
@@ -272,6 +272,18 @@ export declare type UpdatePaymentMethodRequest = Message<"qdrant.cloud.payment.v
    * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 2;
    */
   paymentMethod?: PaymentMethod | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (PaymentMethod)
+   * message, not the request envelope.
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 3;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -286,6 +298,18 @@ export declare type UpdatePaymentMethodRequestValid = Message<"qdrant.cloud.paym
    * @generated from field: qdrant.cloud.payment.v1.PaymentMethod payment_method = 2;
    */
   paymentMethod: PaymentMethodValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (PaymentMethod)
+   * message, not the request envelope.
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 3;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**

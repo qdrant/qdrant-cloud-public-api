@@ -4,6 +4,7 @@ package qdrant.cloud.iam.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 // google/rpc/error_details is used implicitly, but we need this import to
 // generate the code.
@@ -371,6 +372,13 @@ message ListUsersResponse {
 message UpdateUserRequest {
   // The actual user.
   User user = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (User) message, not
+  // the request envelope.
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_user.id_present"
     message: "user.id is required for an update"
@@ -418,6 +426,13 @@ message GetUserProfileResponse {
 message UpdateUserProfileRequest {
   // The actual user profile.
   UserProfile user_profile = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (UserProfile)
+  // message, not the request envelope (e.g. "given_name").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
 
   option (buf.validate.message).cel = {
     id: "update_user_profile.exclusive_name_field_selection"
@@ -524,6 +539,13 @@ message CreateRoleResponse {
 message UpdateRoleRequest {
   // The actual role.
   Role role = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (Role) message, not
+  // the request envelope (e.g. "name", "permissions").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_role.id_present"
     message: "role.id is required for an update"

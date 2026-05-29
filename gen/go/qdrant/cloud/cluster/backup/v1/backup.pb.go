@@ -15,6 +15,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -1268,8 +1269,15 @@ type UpdateBackupScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup schedule.
 	BackupSchedule *BackupSchedule `protobuf:"bytes,1,opt,name=backup_schedule,json=backupSchedule,proto3" json:"backup_schedule,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Optional mask of fields to update. When set, only the fields listed in
+	// the mask will be updated; all other fields retain their current values
+	// on the server. Field paths reference the resource (BackupSchedule)
+	// message, not the request envelope (e.g. "schedule").
+	// When unset or empty, the request is treated as a full-resource
+	// replacement (the existing behavior).
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateBackupScheduleRequest) Reset() {
@@ -1305,6 +1313,13 @@ func (*UpdateBackupScheduleRequest) Descriptor() ([]byte, []int) {
 func (x *UpdateBackupScheduleRequest) GetBackupSchedule() *BackupSchedule {
 	if x != nil {
 		return x.BackupSchedule
+	}
+	return nil
+}
+
+func (x *UpdateBackupScheduleRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
 	}
 	return nil
 }
@@ -2056,7 +2071,7 @@ var File_qdrant_cloud_cluster_backup_v1_backup_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xc6\x02\n" +
+	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xc6\x02\n" +
 	"\x12ListBackupsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -2158,9 +2173,11 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x9a\x02\xbaH\x96\x02\x1a\x93\x02\n" +
 	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x7f\n" +
 	"\x1cCreateBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xf5\x01\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xb2\x02\n" +
 	"\x1bUpdateBackupScheduleRequest\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:u\xbaHr\x1ap\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask:u\xbaHr\x1ap\n" +
 	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\"\x7f\n" +
 	"\x1cUpdateBackupScheduleResponse\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
@@ -2357,9 +2374,10 @@ var file_qdrant_cloud_cluster_backup_v1_backup_proto_goTypes = []any{
 	(*ResourceQuantity)(nil),             // 28: qdrant.cloud.cluster.backup.v1.ResourceQuantity
 	(*BackupSchedule)(nil),               // 29: qdrant.cloud.cluster.backup.v1.BackupSchedule
 	(*BackupRestore)(nil),                // 30: qdrant.cloud.cluster.backup.v1.BackupRestore
-	(*timestamppb.Timestamp)(nil),        // 31: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),          // 32: google.protobuf.Duration
-	(*v1.ClusterConfiguration)(nil),      // 33: qdrant.cloud.cluster.v1.ClusterConfiguration
+	(*fieldmaskpb.FieldMask)(nil),        // 31: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),        // 32: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),          // 33: google.protobuf.Duration
+	(*v1.ClusterConfiguration)(nil),      // 34: qdrant.cloud.cluster.v1.ClusterConfiguration
 }
 var file_qdrant_cloud_cluster_backup_v1_backup_proto_depIdxs = []int32{
 	25, // 0: qdrant.cloud.cluster.backup.v1.ListBackupsResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.Backup
@@ -2372,53 +2390,54 @@ var file_qdrant_cloud_cluster_backup_v1_backup_proto_depIdxs = []int32{
 	29, // 7: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
 	29, // 8: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
 	29, // 9: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	29, // 10: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	31, // 11: qdrant.cloud.cluster.backup.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 12: qdrant.cloud.cluster.backup.v1.Backup.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupStatus
-	31, // 13: qdrant.cloud.cluster.backup.v1.Backup.deleted_at:type_name -> google.protobuf.Timestamp
-	32, // 14: qdrant.cloud.cluster.backup.v1.Backup.backup_duration:type_name -> google.protobuf.Duration
-	32, // 15: qdrant.cloud.cluster.backup.v1.Backup.retention_period:type_name -> google.protobuf.Duration
-	26, // 16: qdrant.cloud.cluster.backup.v1.Backup.cluster_info:type_name -> qdrant.cloud.cluster.backup.v1.ClusterInfo
-	33, // 17: qdrant.cloud.cluster.backup.v1.ClusterInfo.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
-	27, // 18: qdrant.cloud.cluster.backup.v1.ClusterInfo.resources_summary:type_name -> qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
-	28, // 19: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 20: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.ram:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 21: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.disk:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 22: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	31, // 23: qdrant.cloud.cluster.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
-	32, // 24: qdrant.cloud.cluster.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
-	31, // 25: qdrant.cloud.cluster.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
-	1,  // 26: qdrant.cloud.cluster.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupScheduleStatus
-	31, // 27: qdrant.cloud.cluster.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 28: qdrant.cloud.cluster.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestoreStatus
-	31, // 29: qdrant.cloud.cluster.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
-	3,  // 30: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupsRequest
-	5,  // 31: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupRequest
-	7,  // 32: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupRequest
-	9,  // 33: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
-	11, // 34: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
-	13, // 35: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
-	15, // 36: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
-	17, // 37: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
-	19, // 38: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
-	21, // 39: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
-	23, // 40: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
-	4,  // 41: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupsResponse
-	6,  // 42: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupResponse
-	8,  // 43: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupResponse
-	10, // 44: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
-	12, // 45: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
-	14, // 46: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
-	16, // 47: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
-	18, // 48: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
-	20, // 49: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
-	22, // 50: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
-	24, // 51: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
-	41, // [41:52] is the sub-list for method output_type
-	30, // [30:41] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	31, // 10: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.update_mask:type_name -> google.protobuf.FieldMask
+	29, // 11: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	32, // 12: qdrant.cloud.cluster.backup.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 13: qdrant.cloud.cluster.backup.v1.Backup.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupStatus
+	32, // 14: qdrant.cloud.cluster.backup.v1.Backup.deleted_at:type_name -> google.protobuf.Timestamp
+	33, // 15: qdrant.cloud.cluster.backup.v1.Backup.backup_duration:type_name -> google.protobuf.Duration
+	33, // 16: qdrant.cloud.cluster.backup.v1.Backup.retention_period:type_name -> google.protobuf.Duration
+	26, // 17: qdrant.cloud.cluster.backup.v1.Backup.cluster_info:type_name -> qdrant.cloud.cluster.backup.v1.ClusterInfo
+	34, // 18: qdrant.cloud.cluster.backup.v1.ClusterInfo.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
+	27, // 19: qdrant.cloud.cluster.backup.v1.ClusterInfo.resources_summary:type_name -> qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
+	28, // 20: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	28, // 21: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.ram:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	28, // 22: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.disk:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	28, // 23: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	32, // 24: qdrant.cloud.cluster.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
+	33, // 25: qdrant.cloud.cluster.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
+	32, // 26: qdrant.cloud.cluster.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
+	1,  // 27: qdrant.cloud.cluster.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupScheduleStatus
+	32, // 28: qdrant.cloud.cluster.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 29: qdrant.cloud.cluster.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestoreStatus
+	32, // 30: qdrant.cloud.cluster.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
+	3,  // 31: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupsRequest
+	5,  // 32: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupRequest
+	7,  // 33: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupRequest
+	9,  // 34: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
+	11, // 35: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
+	13, // 36: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
+	15, // 37: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
+	17, // 38: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
+	19, // 39: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
+	21, // 40: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
+	23, // 41: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
+	4,  // 42: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupsResponse
+	6,  // 43: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupResponse
+	8,  // 44: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupResponse
+	10, // 45: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
+	12, // 46: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
+	14, // 47: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
+	16, // 48: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
+	18, // 49: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
+	20, // 50: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
+	22, // 51: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
+	24, // 52: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
+	42, // [42:53] is the sub-list for method output_type
+	31, // [31:42] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_cluster_backup_v1_backup_proto_init() }

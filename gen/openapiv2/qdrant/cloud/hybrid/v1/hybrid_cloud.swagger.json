@@ -348,6 +348,10 @@
             }
           },
           "title": "The actual hybrid cloud environment"
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource\n(HybridCloudEnvironment) message, not the request envelope\n(e.g. \"name\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "title": "UpdateHybridCloudEnvironmentRequest is the request for UpdateHybridCloudEnvironment function"

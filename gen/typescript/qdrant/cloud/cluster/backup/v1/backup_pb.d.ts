@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Duration, FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { ClusterConfiguration, ClusterConfigurationValid } from "../../v1/cluster_pb.js";
 
 /**
@@ -697,6 +697,18 @@ export declare type UpdateBackupScheduleRequest = Message<"qdrant.cloud.cluster.
    * @generated from field: qdrant.cloud.cluster.backup.v1.BackupSchedule backup_schedule = 1;
    */
   backupSchedule?: BackupSchedule | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (BackupSchedule)
+   * message, not the request envelope (e.g. "schedule").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -711,6 +723,18 @@ export declare type UpdateBackupScheduleRequestValid = Message<"qdrant.cloud.clu
    * @generated from field: qdrant.cloud.cluster.backup.v1.BackupSchedule backup_schedule = 1;
    */
   backupSchedule: BackupScheduleValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (BackupSchedule)
+   * message, not the request envelope (e.g. "schedule").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
