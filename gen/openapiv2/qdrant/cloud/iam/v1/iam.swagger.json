@@ -641,6 +641,38 @@
           "IAMService"
         ]
       }
+    },
+    "/api/iam/v1/users/{userId}": {
+      "get": {
+        "summary": "Gets the user identified by the given ID. Intended primarily as the\nGet counterpart of UpdateUser so the API gateway can fetch the current\nresource for FieldMask-based partial updates. Direct callers should\ngenerally prefer GetAuthenticatedUser (self) or ListUsers (per-account).\nRequired permissions:\n- None (authenticated only). Mirrors UpdateUser, which is also\n  authenticated-only - the patch interceptor invokes this on behalf of\n  the same caller that issued the partial UpdateUser.",
+        "operationId": "IAMService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -797,6 +829,10 @@
           },
           "description": "The actual user.",
           "title": "The actual user."
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (User) message, not\nthe request envelope (e.g. \"default_account_id\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "description": "UpdateUserRequest is the request for the UpdateUser function."
@@ -887,6 +923,16 @@
         }
       },
       "description": "GetUserProfileResponse is the response from the GetUserProfile function."
+    },
+    "v1GetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "description": "The actual user."
+        }
+      },
+      "description": "GetUserResponse is the response from the GetUser function."
     },
     "v1LegalDocumentType": {
       "type": "string",
@@ -1107,6 +1153,10 @@
         "userProfile": {
           "$ref": "#/definitions/v1UserProfile",
           "description": "The actual user profile."
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (UserProfile)\nmessage, not the request envelope (e.g. \"given_name\", \"family_name\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "description": "UpdateUserProfileRequest is the request for the UpdateUserProfile function."

@@ -109,6 +109,65 @@ export declare type ListUsersResponseValid = ListUsersResponse;
 export declare const ListUsersResponseSchema: GenMessage<ListUsersResponse, {validType: ListUsersResponseValid}>;
 
 /**
+ * GetUserRequest is the request for the GetUser function.
+ * Note: no account_id field; like UpdateUser, this RPC operates on a user
+ * across accounts and is authenticated-only.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserRequest
+ */
+export declare type GetUserRequest = Message<"qdrant.cloud.iam.v1.GetUserRequest"> & {
+  /**
+   * The identifier of the user (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
+
+export declare type GetUserRequestValid = GetUserRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserRequest.
+ * Use `create(GetUserRequestSchema)` to create a new message.
+ */
+export declare const GetUserRequestSchema: GenMessage<GetUserRequest, {validType: GetUserRequestValid}>;
+
+/**
+ * GetUserResponse is the response from the GetUser function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserResponse
+ */
+export declare type GetUserResponse = Message<"qdrant.cloud.iam.v1.GetUserResponse"> & {
+  /**
+   * The actual user.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user?: User | undefined;
+};
+
+/**
+ * GetUserResponse is the response from the GetUser function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.GetUserResponse
+ */
+export declare type GetUserResponseValid = Message<"qdrant.cloud.iam.v1.GetUserResponse"> & {
+  /**
+   * The actual user.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   */
+  user: UserValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GetUserResponse.
+ * Use `create(GetUserResponseSchema)` to create a new message.
+ */
+export declare const GetUserResponseSchema: GenMessage<GetUserResponse, {validType: GetUserResponseValid}>;
+
+/**
  * UpdateUserRequest is the request for the UpdateUser function.
  *
  * @generated from message qdrant.cloud.iam.v1.UpdateUserRequest
@@ -120,6 +179,18 @@ export declare type UpdateUserRequest = Message<"qdrant.cloud.iam.v1.UpdateUserR
    * @generated from field: qdrant.cloud.iam.v1.User user = 1;
    */
   user?: User | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (User) message, not
+   * the request envelope (e.g. "default_account_id").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -134,6 +205,18 @@ export declare type UpdateUserRequestValid = Message<"qdrant.cloud.iam.v1.Update
    * @generated from field: qdrant.cloud.iam.v1.User user = 1;
    */
   user: UserValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (User) message, not
+   * the request envelope (e.g. "default_account_id").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -297,6 +380,18 @@ export declare type UpdateUserProfileRequest = Message<"qdrant.cloud.iam.v1.Upda
    * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
    */
   userProfile?: UserProfile | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (UserProfile)
+   * message, not the request envelope (e.g. "given_name", "family_name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -311,6 +406,18 @@ export declare type UpdateUserProfileRequestValid = Message<"qdrant.cloud.iam.v1
    * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
    */
   userProfile: UserProfileValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (UserProfile)
+   * message, not the request envelope (e.g. "given_name", "family_name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -1542,6 +1649,23 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof ListUsersRequestSchema;
     output: typeof ListUsersResponseSchema;
+  },
+  /**
+   * Gets the user identified by the given ID. Intended primarily as the
+   * Get counterpart of UpdateUser so the API gateway can fetch the current
+   * resource for FieldMask-based partial updates. Direct callers should
+   * generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
+   * Required permissions:
+   * - None (authenticated only). Mirrors UpdateUser, which is also
+   *   authenticated-only - the patch interceptor invokes this on behalf of
+   *   the same caller that issued the partial UpdateUser.
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUser
+   */
+  getUser: {
+    methodKind: "unary";
+    input: typeof GetUserRequestSchema;
+    output: typeof GetUserResponseSchema;
   },
   /**
    * Updates the user identified by the given ID.

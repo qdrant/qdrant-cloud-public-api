@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
 	IAMService_ListUsers_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListUsers"
+	IAMService_GetUser_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetUser"
 	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
 	IAMService_GetUserProfile_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
 	IAMService_UpdateUserProfile_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile"
@@ -53,6 +54,15 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - read:users
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	// Gets the user identified by the given ID. Intended primarily as the
+	// Get counterpart of UpdateUser so the API gateway can fetch the current
+	// resource for FieldMask-based partial updates. Direct callers should
+	// generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
+	// Required permissions:
+	//   - None (authenticated only). Mirrors UpdateUser, which is also
+	//     authenticated-only - the patch interceptor invokes this on behalf of
+	//     the same caller that issued the partial UpdateUser.
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
@@ -145,6 +155,16 @@ func (c *iAMServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, IAMService_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, IAMService_GetUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -325,6 +345,15 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - read:users
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	// Gets the user identified by the given ID. Intended primarily as the
+	// Get counterpart of UpdateUser so the API gateway can fetch the current
+	// resource for FieldMask-based partial updates. Direct callers should
+	// generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
+	// Required permissions:
+	//   - None (authenticated only). Mirrors UpdateUser, which is also
+	//     authenticated-only - the patch interceptor invokes this on behalf of
+	//     the same caller that issued the partial UpdateUser.
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// Updates the user identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
@@ -408,6 +437,9 @@ func (UnimplementedIAMServiceServer) GetAuthenticatedUser(context.Context, *GetA
 }
 func (UnimplementedIAMServiceServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedIAMServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateUser not implemented")
@@ -510,6 +542,24 @@ func _IAMService_ListUsers_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_GetUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).GetUser(ctx, req.(*GetUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -816,6 +866,10 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUsers",
 			Handler:    _IAMService_ListUsers_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _IAMService_GetUser_Handler,
 		},
 		{
 			MethodName: "UpdateUser",

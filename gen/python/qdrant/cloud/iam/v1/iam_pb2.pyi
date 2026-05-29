@@ -91,11 +91,25 @@ class ListUsersResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[User]
     def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
-class UpdateUserRequest(_message.Message):
+class GetUserRequest(_message.Message):
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
+
+class GetUserResponse(_message.Message):
     __slots__ = ("user",)
     USER_FIELD_NUMBER: _ClassVar[int]
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class UpdateUserRequest(_message.Message):
+    __slots__ = ("user", "update_mask")
+    USER_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateUserResponse(_message.Message):
     __slots__ = ("user",)
@@ -126,10 +140,12 @@ class GetUserProfileResponse(_message.Message):
     def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
 
 class UpdateUserProfileRequest(_message.Message):
-    __slots__ = ("user_profile",)
+    __slots__ = ("user_profile", "update_mask")
     USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
     user_profile: UserProfile
-    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateUserProfileResponse(_message.Message):
     __slots__ = ("user_profile",)

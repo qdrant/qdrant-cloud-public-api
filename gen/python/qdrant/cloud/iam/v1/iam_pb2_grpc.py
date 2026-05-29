@@ -25,6 +25,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.FromString,
                 _registered_method=True)
+        self.GetUser = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/GetUser',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserResponse.FromString,
+                _registered_method=True)
         self.UpdateUser = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
@@ -124,6 +129,20 @@ class IAMServiceServicer(object):
         """List users in the account identified by the given ID.
         Required permissions:
         - read:users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUser(self, request, context):
+        """Gets the user identified by the given ID. Intended primarily as the
+        Get counterpart of UpdateUser so the API gateway can fetch the current
+        resource for FieldMask-based partial updates. Direct callers should
+        generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
+        Required permissions:
+        - None (authenticated only). Mirrors UpdateUser, which is also
+        authenticated-only - the patch interceptor invokes this on behalf of
+        the same caller that issued the partial UpdateUser.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -290,6 +309,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.SerializeToString,
             ),
+            'GetUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUser,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserResponse.SerializeToString,
+            ),
             'UpdateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
@@ -426,6 +450,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/ListUsers',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUsersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/GetUser',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserResponse.FromString,
             options,
             channel_credentials,
             insecure,

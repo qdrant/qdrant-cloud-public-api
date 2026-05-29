@@ -33,6 +33,11 @@ export declare type PatchSource = Message<"qdrant.cloud.common.v1.PatchSource"> 
    * Value: field path in the Update request message (e.g. "cluster.account_id")
    * Field paths may be nested using a dot separator.
    *
+   * The map may be empty when the Get RPC is identifier-less (i.e. it
+   * operates on the authenticated caller, like GetAuthenticatedUser or
+   * GetUserProfile). In that case the gateway invokes the Get with an
+   * empty request and the caller's auth context.
+   *
    * @generated from field: map<string, string> field_mapping = 2;
    */
   fieldMapping: { [key: string]: string };
