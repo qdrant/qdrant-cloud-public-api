@@ -486,6 +486,10 @@
           },
           "description": "The payment method to update.",
           "title": "The payment method to update."
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (PaymentMethod)\nmessage, not the request envelope.\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "title": "UpdatePaymentMethodRequest is the request for the UpdatePaymentMethod function"

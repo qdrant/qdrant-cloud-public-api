@@ -4,6 +4,7 @@ package qdrant.cloud.iam.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 // google/rpc/error_details is used implicitly, but we need this import to
 // generate the code.
@@ -230,6 +231,23 @@ service IAMService {
     option (common.v1.log_fields) = {
       name: "role_id"
       field_expression: "role.id"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current role via
+    // GetRole and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.iam.v1.IAMService/GetRole"
+      field_mapping: {
+        key: "account_id"
+        value: "role.account_id"
+      }
+      field_mapping: {
+        key: "role_id"
+        value: "role.id"
+      }
+      response_resource_field: "role"
+      request_resource_field: "role"
     };
   }
   // Deletes a role in the account identified by the given ID.
@@ -524,6 +542,13 @@ message CreateRoleResponse {
 message UpdateRoleRequest {
   // The actual role.
   Role role = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (Role) message, not
+  // the request envelope (e.g. "name", "permissions").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_role.id_present"
     message: "role.id is required for an update"
