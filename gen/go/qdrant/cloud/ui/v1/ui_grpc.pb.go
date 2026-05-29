@@ -32,7 +32,7 @@ type AggregationServiceClient interface {
 	// Lists users in an account with their assigned roles.
 	// This endpoint provides a consolidated view that would otherwise require separate calls
 	// to ListUsers and ListUserRoles for each user.
-	// Required permissions:
+	// Required permissions (both):
 	// - read:users
 	// - read:roles
 	ListUsersWithRoles(ctx context.Context, in *ListUsersWithRolesRequest, opts ...grpc.CallOption) (*ListUsersWithRolesResponse, error)
@@ -66,7 +66,7 @@ type AggregationServiceServer interface {
 	// Lists users in an account with their assigned roles.
 	// This endpoint provides a consolidated view that would otherwise require separate calls
 	// to ListUsers and ListUserRoles for each user.
-	// Required permissions:
+	// Required permissions (both):
 	// - read:users
 	// - read:roles
 	ListUsersWithRoles(context.Context, *ListUsersWithRolesRequest) (*ListUsersWithRolesResponse, error)
