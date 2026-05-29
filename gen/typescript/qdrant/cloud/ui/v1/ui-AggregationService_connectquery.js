@@ -8,7 +8,7 @@ import { AggregationService } from "./ui_pb.js";
  * Lists users in an account with their assigned roles.
  * This endpoint provides a consolidated view that would otherwise require separate calls
  * to ListUsers and ListUserRoles for each user.
- * Required permissions:
+ * Required permissions (both):
  * - read:users
  * - read:roles
  *
