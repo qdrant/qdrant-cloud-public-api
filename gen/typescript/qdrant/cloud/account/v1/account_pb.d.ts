@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { User, UserValid } from "../../iam/v1/iam_pb.js";
 
 /**
@@ -189,6 +189,18 @@ export declare type UpdateAccountRequest = Message<"qdrant.cloud.account.v1.Upda
    * @generated from field: qdrant.cloud.account.v1.Account account = 1;
    */
   account?: Account | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Account) message,
+   * not the request envelope (e.g. "name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -203,6 +215,18 @@ export declare type UpdateAccountRequestValid = Message<"qdrant.cloud.account.v1
    * @generated from field: qdrant.cloud.account.v1.Account account = 1;
    */
   account: AccountValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Account) message,
+   * not the request envelope (e.g. "name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**

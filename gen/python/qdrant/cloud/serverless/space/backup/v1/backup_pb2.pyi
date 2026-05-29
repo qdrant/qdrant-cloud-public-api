@@ -3,6 +3,7 @@ import datetime
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import duration_pb2 as _duration_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
@@ -210,10 +211,12 @@ class CreateBackupScheduleResponse(_message.Message):
     def __init__(self, backup_schedule: _Optional[_Union[BackupSchedule, _Mapping]] = ...) -> None: ...
 
 class UpdateBackupScheduleRequest(_message.Message):
-    __slots__ = ("backup_schedule",)
+    __slots__ = ("backup_schedule", "update_mask")
     BACKUP_SCHEDULE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
     backup_schedule: BackupSchedule
-    def __init__(self, backup_schedule: _Optional[_Union[BackupSchedule, _Mapping]] = ...) -> None: ...
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, backup_schedule: _Optional[_Union[BackupSchedule, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateBackupScheduleResponse(_message.Message):
     __slots__ = ("backup_schedule",)

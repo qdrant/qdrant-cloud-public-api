@@ -5,6 +5,7 @@ package qdrant.cloud.cluster.backup.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
@@ -239,6 +240,27 @@ service BackupService {
     option (common.v1.log_fields) = {
       name: "cluster_id"
       field_expression: "backup_schedule.cluster_id"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current backup
+    // schedule via GetBackupSchedule and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackupSchedule"
+      field_mapping: {
+        key: "account_id"
+        value: "backup_schedule.account_id"
+      }
+      field_mapping: {
+        key: "cluster_id"
+        value: "backup_schedule.cluster_id"
+      }
+      field_mapping: {
+        key: "backup_schedule_id"
+        value: "backup_schedule.id"
+      }
+      response_resource_field: "backup_schedule"
+      request_resource_field: "backup_schedule"
     };
   }
   // Deletes a backup schedule in the account identified by the given ID.
@@ -476,6 +498,13 @@ message CreateBackupScheduleResponse {
 message UpdateBackupScheduleRequest {
   // The actual backup schedule.
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (BackupSchedule)
+  // message, not the request envelope (e.g. "schedule").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_backup_schedule.id_present"
     message: "backup_schedule.id is required for an update"

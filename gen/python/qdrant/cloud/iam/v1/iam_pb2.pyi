@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.rpc import error_details_pb2 as _error_details_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
@@ -199,10 +200,12 @@ class CreateRoleResponse(_message.Message):
     def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
 
 class UpdateRoleRequest(_message.Message):
-    __slots__ = ("role",)
+    __slots__ = ("role", "update_mask")
     ROLE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
     role: Role
-    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateRoleResponse(_message.Message):
     __slots__ = ("role",)

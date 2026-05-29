@@ -4,6 +4,7 @@ package qdrant.cloud.payment.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -102,6 +103,23 @@ service PaymentService {
     option (common.v1.log_fields) = {
       name: "payment_method_id"
       field_expression: "payment_method.id"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current payment
+    // method via GetPaymentMethod and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
+      field_mapping: {
+        key: "account_id"
+        value: "payment_method.account_id"
+      }
+      field_mapping: {
+        key: "payment_method_id"
+        value: "payment_method.id"
+      }
+      response_resource_field: "payment_method"
+      request_resource_field: "payment_method"
     };
   }
   // Delete the payment method identified by the given ID.
@@ -258,6 +276,13 @@ message CreatePaymentMethodResponse {
 message UpdatePaymentMethodRequest {
   // The payment method to update.
   PaymentMethod payment_method = 2 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (PaymentMethod)
+  // message, not the request envelope.
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 3;
   option (buf.validate.message).cel = {
     id: "update_payment_method.id_present"
     message: "payment_method.id is required for an update"

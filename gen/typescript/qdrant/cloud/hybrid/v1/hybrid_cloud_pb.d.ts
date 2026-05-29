@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { KeyValue, NetworkPolicyEgressRule, NetworkPolicyIngressRule } from "../../common/v1/common_pb.js";
 import type { Toleration } from "../../cluster/v1/cluster_pb.js";
 
@@ -154,6 +154,19 @@ export declare type UpdateHybridCloudEnvironmentRequest = Message<"qdrant.cloud.
    * @generated from field: qdrant.cloud.hybrid.v1.HybridCloudEnvironment hybrid_cloud_environment = 1;
    */
   hybridCloudEnvironment?: HybridCloudEnvironment | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource
+   * (HybridCloudEnvironment) message, not the request envelope
+   * (e.g. "name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -168,6 +181,19 @@ export declare type UpdateHybridCloudEnvironmentRequestValid = Message<"qdrant.c
    * @generated from field: qdrant.cloud.hybrid.v1.HybridCloudEnvironment hybrid_cloud_environment = 1;
    */
   hybridCloudEnvironment: HybridCloudEnvironmentValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource
+   * (HybridCloudEnvironment) message, not the request envelope
+   * (e.g. "name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**

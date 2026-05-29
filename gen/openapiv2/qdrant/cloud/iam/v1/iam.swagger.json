@@ -758,6 +758,10 @@
           },
           "description": "The actual role.",
           "title": "The actual role."
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (Role) message, not\nthe request envelope (e.g. \"name\", \"permissions\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "description": "UpdateRoleRequest is the request for the UpdateRole function."

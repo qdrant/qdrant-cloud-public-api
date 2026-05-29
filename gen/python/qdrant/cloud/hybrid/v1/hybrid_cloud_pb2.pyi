@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import struct_pb2 as _struct_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.cluster.v1 import cluster_pb2 as _cluster_pb2
@@ -135,10 +136,12 @@ class DeleteHybridCloudEnvironmentResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class UpdateHybridCloudEnvironmentRequest(_message.Message):
-    __slots__ = ("hybrid_cloud_environment",)
+    __slots__ = ("hybrid_cloud_environment", "update_mask")
     HYBRID_CLOUD_ENVIRONMENT_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
     hybrid_cloud_environment: HybridCloudEnvironment
-    def __init__(self, hybrid_cloud_environment: _Optional[_Union[HybridCloudEnvironment, _Mapping]] = ...) -> None: ...
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, hybrid_cloud_environment: _Optional[_Union[HybridCloudEnvironment, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateHybridCloudEnvironmentResponse(_message.Message):
     __slots__ = ("hybrid_cloud_environment",)

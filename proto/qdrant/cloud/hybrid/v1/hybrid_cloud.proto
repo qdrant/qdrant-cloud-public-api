@@ -4,6 +4,7 @@ package qdrant.cloud.hybrid.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
@@ -98,6 +99,23 @@ service HybridCloudService {
     option (common.v1.log_fields) = {
       name: "hybrid_cloud_environment_id"
       field_expression: "hybrid_cloud_environment.id"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current environment
+    // via GetHybridCloudEnvironment and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment"
+      field_mapping: {
+        key: "account_id"
+        value: "hybrid_cloud_environment.account_id"
+      }
+      field_mapping: {
+        key: "hybrid_cloud_environment_id"
+        value: "hybrid_cloud_environment.id"
+      }
+      response_resource_field: "hybrid_cloud_environment"
+      request_resource_field: "hybrid_cloud_environment"
     };
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
@@ -201,6 +219,14 @@ message DeleteHybridCloudEnvironmentResponse {
 message UpdateHybridCloudEnvironmentRequest {
   // The actual hybrid cloud environment
   HybridCloudEnvironment hybrid_cloud_environment = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource
+  // (HybridCloudEnvironment) message, not the request envelope
+  // (e.g. "name").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_hybrid_cloud_environment.id_present"
     message: "hybrid_cloud_environment.id is required for an update"
