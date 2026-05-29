@@ -669,6 +669,10 @@
             }
           },
           "title": "The actual cluster"
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (Cluster) message,\nnot the request envelope (e.g. \"name\", \"configuration.num_nodes\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
         }
       },
       "title": "UpdateClusterRequest is the request for the UpdateCluster function"
