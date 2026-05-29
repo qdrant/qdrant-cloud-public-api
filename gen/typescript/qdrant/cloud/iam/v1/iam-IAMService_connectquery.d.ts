@@ -21,19 +21,6 @@ export const getAuthenticatedUser: typeof IAMService["method"]["getAuthenticated
  */
 export const listUsers: typeof IAMService["method"]["listUsers"];
 /**
- * Gets the user identified by the given ID. Intended primarily as the
- * Get counterpart of UpdateUser so the API gateway can fetch the current
- * resource for FieldMask-based partial updates. Direct callers should
- * generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
- * Required permissions:
- * - None (authenticated only). Mirrors UpdateUser, which is also
- *   authenticated-only - the patch interceptor invokes this on behalf of
- *   the same caller that issued the partial UpdateUser.
- *
- * @generated from rpc qdrant.cloud.iam.v1.IAMService.GetUser
- */
-export const getUser: typeof IAMService["method"]["getUser"];
-/**
  * Updates the user identified by the given ID.
  * Required permissions:
  * - None (authenticated only)

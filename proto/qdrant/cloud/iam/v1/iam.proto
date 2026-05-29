@@ -43,27 +43,6 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users"};
   }
-  // Gets the user identified by the given ID. Intended primarily as the
-  // Get counterpart of UpdateUser so the API gateway can fetch the current
-  // resource for FieldMask-based partial updates. Direct callers should
-  // generally prefer GetAuthenticatedUser (self) or ListUsers (per-account).
-  // Required permissions:
-  // - None (authenticated only). Mirrors UpdateUser, which is also
-  //   authenticated-only - the patch interceptor invokes this on behalf of
-  //   the same caller that issued the partial UpdateUser.
-  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // custom account-id expression
-    option (qdrant.cloud.common.v1.account_id_expression) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/iam/v1/users/{user_id}"};
-    // log fields
-    option (common.v1.log_fields) = {
-      name: "user_id"
-      field_expression: "user_id"
-    };
-  }
   // Updates the user identified by the given ID.
   // Required permissions:
   // - None (authenticated only)
@@ -91,14 +70,14 @@ service IAMService {
     };
     // FieldMask-based partial updates. When the request has a non-empty
     // update_mask the API gateway transparently rewrites the partial update
-    // into a full-resource replacement by fetching the current user via
-    // GetUser and merging the masked fields on top.
+    // into a full-resource replacement by fetching the caller's current user
+    // via GetAuthenticatedUser and merging the masked fields on top.
+    // GetAuthenticatedUser is identifier-less (acts on the authenticated
+    // caller), so field_mapping is left empty. UpdateUser only permits
+    // self-updates server-side, so using the authenticated-caller Get is
+    // equivalent and avoids exposing a cross-user lookup RPC.
     option (qdrant.cloud.common.v1.patch_source) = {
-      get_method: "/qdrant.cloud.iam.v1.IAMService/GetUser"
-      field_mapping: {
-        key: "user_id"
-        value: "user.id"
-      }
+      get_method: "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
       response_resource_field: "user"
       request_resource_field: "user"
     };
@@ -428,22 +407,6 @@ message ListUsersRequest {
 message ListUsersResponse {
   // The actual users in this list.
   repeated User items = 1;
-}
-
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// GetUserRequest is the request for the GetUser function.
-// Note: no account_id field; like UpdateUser, this RPC operates on a user
-// across accounts and is authenticated-only.
-message GetUserRequest {
-  // The identifier of the user (in GUID format).
-  // This is a required field.
-  string user_id = 1 [(buf.validate.field).string = {uuid: true}];
-}
-
-// GetUserResponse is the response from the GetUser function.
-message GetUserResponse {
-  // The actual user.
-  User user = 1 [(buf.validate.field).required = true];
 }
 
 // UpdateUserRequest is the request for the UpdateUser function.

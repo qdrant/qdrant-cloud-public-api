@@ -91,18 +91,6 @@ class ListUsersResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[User]
     def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
-class GetUserRequest(_message.Message):
-    __slots__ = ("user_id",)
-    USER_ID_FIELD_NUMBER: _ClassVar[int]
-    user_id: str
-    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
-
-class GetUserResponse(_message.Message):
-    __slots__ = ("user",)
-    USER_FIELD_NUMBER: _ClassVar[int]
-    user: User
-    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
-
 class UpdateUserRequest(_message.Message):
     __slots__ = ("user", "update_mask")
     USER_FIELD_NUMBER: _ClassVar[int]
