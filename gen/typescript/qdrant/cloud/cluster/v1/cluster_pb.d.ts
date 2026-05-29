@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { KeyValue, KeyValueValid, SecretKeyRef, SecretKeyRefValid, StorageTierType, TopologySpreadConstraint, TopologySpreadConstraintValid } from "../../common/v1/common_pb.js";
 
 /**
@@ -284,6 +284,18 @@ export declare type UpdateClusterRequest = Message<"qdrant.cloud.cluster.v1.Upda
    * @generated from field: qdrant.cloud.cluster.v1.Cluster cluster = 1;
    */
   cluster?: Cluster | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Cluster) message,
+   * not the request envelope (e.g. "name", "configuration.num_nodes").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -298,6 +310,18 @@ export declare type UpdateClusterRequestValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: qdrant.cloud.cluster.v1.Cluster cluster = 1;
    */
   cluster: ClusterValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Cluster) message,
+   * not the request envelope (e.g. "name", "configuration.num_nodes").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
