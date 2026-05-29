@@ -2109,7 +2109,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x97%\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x82'\n" +
 	"\rBackupService\x12\xa9\x02\n" +
 	"\vListBackups\x12;.qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest\x1a<.qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse\"\x9e\x01\x8a\xb5\x18\x17read:serverless_backups\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18(\n" +
@@ -2134,10 +2134,15 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\x82\xd3\xe4\x93\x02W\x12U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x12\xdb\x04\n" +
 	"\x14CreateBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleResponse\"\xb5\x03\x8a\xb5\x18!write:serverless_backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18$\n" +
 	"\bspace_id\x12\x18backup_schedule.space_id\xca\xf3\x18\xea\x01\b\x01\x12\x1aserverless-backup-schedule\"\x17resp.backup_schedule.id*\x86\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{resp.backup_schedule.id}R(\n" +
-	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02U:\x01*\"P/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\x9a\x05\n" +
-	"\x14UpdateBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse\"\xf4\x03\x8a\xb5\x18!write:serverless_backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
+	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02U:\x01*\"P/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\x85\a\n" +
+	"\x14UpdateBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse\"\xdf\x05\x8a\xb5\x18!write:serverless_backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule.id\xba\xb5\x18$\n" +
-	"\bspace_id\x12\x18backup_schedule.space_id\xca\xf3\x18\xe8\x01\b\x02\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule.id*\x85\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{req.backup_schedule.id}R(\n" +
+	"\bspace_id\x12\x18backup_schedule.space_idʵ\x18\xe6\x01\n" +
+	"H/qdrant.cloud.serverless.space.backup.v1.BackupService/GetBackupSchedule\x12(\n" +
+	"\n" +
+	"account_id\x12\x1abackup_schedule.account_id\x12(\n" +
+	"\x12backup_schedule_id\x12\x12backup_schedule.id\x12$\n" +
+	"\bspace_id\x12\x18backup_schedule.space_id\x1a\x0fbackup_schedule\"\x0fbackup_schedule\xca\xf3\x18\xe8\x01\b\x02\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule.id*\x85\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{req.backup_schedule.id}R(\n" +
 	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xab\x04\n" +
 	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\x85\x03\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xd1\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R%\n" +

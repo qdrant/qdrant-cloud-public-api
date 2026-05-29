@@ -68,6 +68,12 @@ service IAMService {
       name: "user_id"
       field_expression: "user.id"
     };
+    // NOTE: No (qdrant.cloud.common.v1.patch_source) annotation here.
+    // There is no GetUser(user_id) RPC on this service to fetch the
+    // current resource (only GetAuthenticatedUser, which is identifier-less),
+    // and PatchSource.field_mapping requires at least one entry. Setting
+    // update_mask on this RPC therefore falls through to the regular
+    // full-resource replacement path until a self-Get pattern is supported.
   }
   // Gets the profile of the authenticated user.
   // Required permissions:
@@ -104,6 +110,11 @@ service IAMService {
       resource_id_field: "req-md.qc-actor-id"
       resource_url_template: "/users/{req-md.qc-actor-id}"
     };
+    // NOTE: No (qdrant.cloud.common.v1.patch_source) annotation here.
+    // GetUserProfile is identifier-less (acts on the authenticated caller)
+    // and PatchSource.field_mapping requires at least one entry. Setting
+    // update_mask on this RPC therefore falls through to the regular
+    // full-resource replacement path until a self-Get pattern is supported.
   }
   // Gets the authenticated user's consent status for a specific legal document.
   // Required permissions:
@@ -231,6 +242,23 @@ service IAMService {
     option (common.v1.log_fields) = {
       name: "role_id"
       field_expression: "role.id"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current role via
+    // GetRole and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.iam.v1.IAMService/GetRole"
+      field_mapping: {
+        key: "account_id"
+        value: "role.account_id"
+      }
+      field_mapping: {
+        key: "role_id"
+        value: "role.id"
+      }
+      response_resource_field: "role"
+      request_resource_field: "role"
     };
   }
   // Deletes a role in the account identified by the given ID.

@@ -104,6 +104,23 @@ service PaymentService {
       name: "payment_method_id"
       field_expression: "payment_method.id"
     };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current payment
+    // method via GetPaymentMethod and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod"
+      field_mapping: {
+        key: "account_id"
+        value: "payment_method.account_id"
+      }
+      field_mapping: {
+        key: "payment_method_id"
+        value: "payment_method.id"
+      }
+      response_resource_field: "payment_method"
+      request_resource_field: "payment_method"
+    };
   }
   // Delete the payment method identified by the given ID.
   // Required permissions:

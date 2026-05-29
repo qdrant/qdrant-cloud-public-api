@@ -241,6 +241,27 @@ service BackupService {
       name: "space_id"
       field_expression: "backup_schedule.space_id"
     };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current backup
+    // schedule via GetBackupSchedule and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.serverless.space.backup.v1.BackupService/GetBackupSchedule"
+      field_mapping: {
+        key: "account_id"
+        value: "backup_schedule.account_id"
+      }
+      field_mapping: {
+        key: "space_id"
+        value: "backup_schedule.space_id"
+      }
+      field_mapping: {
+        key: "backup_schedule_id"
+        value: "backup_schedule.id"
+      }
+      response_resource_field: "backup_schedule"
+      request_resource_field: "backup_schedule"
+    };
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:

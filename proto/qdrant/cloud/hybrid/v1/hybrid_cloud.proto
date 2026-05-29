@@ -100,6 +100,23 @@ service HybridCloudService {
       name: "hybrid_cloud_environment_id"
       field_expression: "hybrid_cloud_environment.id"
     };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current environment
+    // via GetHybridCloudEnvironment and merging the masked fields on top.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment"
+      field_mapping: {
+        key: "account_id"
+        value: "hybrid_cloud_environment.account_id"
+      }
+      field_mapping: {
+        key: "hybrid_cloud_environment_id"
+        value: "hybrid_cloud_environment.id"
+      }
+      response_resource_field: "hybrid_cloud_environment"
+      request_resource_field: "hybrid_cloud_environment"
+    };
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:

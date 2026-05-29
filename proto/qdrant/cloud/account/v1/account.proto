@@ -99,6 +99,19 @@ service AccountService {
       name: "company_name"
       field_expression: "account.company.name"
     };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the current account via
+    // GetAccount and merging the masked fields on top of it.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.account.v1.AccountService/GetAccount"
+      field_mapping: {
+        key: "account_id"
+        value: "account.id"
+      }
+      response_resource_field: "account"
+      request_resource_field: "account"
+    };
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
