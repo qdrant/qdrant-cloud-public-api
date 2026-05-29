@@ -41,6 +41,19 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "supportedMode",
+            "description": "An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).\nIf not specified, all supported platform modes will be returned.\nThis is an optional field.\n\n - PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PLATFORM_MODE_UNSPECIFIED",
+              "PLATFORM_MODE_DEDICATED_CLUSTERS",
+              "PLATFORM_MODE_SERVERLESS_SPACES"
+            ],
+            "default": "PLATFORM_MODE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -80,6 +93,19 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "supportedMode",
+            "description": "An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).\nIf not specified, all supported platform modes will be returned.\nThis is an optional field.\n\n - PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PLATFORM_MODE_UNSPECIFIED",
+              "PLATFORM_MODE_DEDICATED_CLUSTERS",
+              "PLATFORM_MODE_SERVERLESS_SPACES"
+            ],
+            "default": "PLATFORM_MODE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -151,6 +177,21 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "supportedMode",
+            "description": "An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).\nIf not specified, all supported platform modes will be returned.\nThis is an optional field.\n\n - PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PLATFORM_MODE_UNSPECIFIED",
+              "PLATFORM_MODE_DEDICATED_CLUSTERS",
+              "PLATFORM_MODE_SERVERLESS_SPACES"
+            ],
+            "default": "PLATFORM_MODE_UNSPECIFIED"
+          }
+        ],
         "tags": [
           "PlatformService"
         ]
@@ -181,6 +222,19 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "supportedMode",
+            "description": "An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).\nIf not specified, all supported platform modes will be returned.\nThis is an optional field.\n\n - PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PLATFORM_MODE_UNSPECIFIED",
+              "PLATFORM_MODE_DEDICATED_CLUSTERS",
+              "PLATFORM_MODE_SERVERLESS_SPACES"
+            ],
+            "default": "PLATFORM_MODE_UNSPECIFIED"
           }
         ],
         "tags": [
@@ -275,6 +329,13 @@
         "available": {
           "type": "boolean",
           "description": "Indicates whether the cloud provider is available for the use case."
+        },
+        "supportedModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PlatformMode"
+          },
+          "description": "The supported platform modes of the cloud provider (dedicated clusters and/or serverless spaces).\nIf a certain mode is supported at least 1 region for this provider supports it."
         }
       },
       "description": "CloudProvider represents a cloud provider identifier and name."
@@ -337,6 +398,13 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
           "description": "Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only."
+        },
+        "supportedModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PlatformMode"
+          },
+          "description": "The supported platform modes of the cloud provider region (dedicated clusters and/or serverless spaces)."
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."
@@ -503,6 +571,17 @@
         }
       },
       "description": "ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function."
+    },
+    "v1PlatformMode": {
+      "type": "string",
+      "enum": [
+        "PLATFORM_MODE_UNSPECIFIED",
+        "PLATFORM_MODE_DEDICATED_CLUSTERS",
+        "PLATFORM_MODE_SERVERLESS_SPACES"
+      ],
+      "default": "PLATFORM_MODE_UNSPECIFIED",
+      "description": "- PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+      "title": "PlatformMode Enums"
     }
   }
 }

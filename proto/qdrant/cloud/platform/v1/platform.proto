@@ -107,6 +107,13 @@ message ListCloudProvidersRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
+  // If not specified, all supported platform modes will be returned.
+  // This is an optional field.
+  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // ListCloudProvidersResponse is the response from the ListCloudProviders function.
@@ -117,7 +124,15 @@ message ListCloudProvidersResponse {
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
-message ListGlobalCloudProvidersRequest {}
+message ListGlobalCloudProvidersRequest {
+  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
+  // If not specified, all supported platform modes will be returned.
+  // This is an optional field.
+  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
 
 // ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
 message ListGlobalCloudProvidersResponse {
@@ -131,6 +146,13 @@ message ListGlobalCloudProviderRegionsRequest {
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
   // This is a required field.
   string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
+  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
+  // If not specified, all supported platform modes will be returned.
+  // This is an optional field.
+  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
@@ -164,6 +186,13 @@ message ListCloudProviderRegionsRequest {
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
   // This is a required field.
   string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
+  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
+  // If not specified, all supported platform modes will be returned.
+  // This is an optional field.
+  optional PlatformMode supported_mode = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
@@ -204,6 +233,16 @@ message CloudProvider {
   bool free_tier = 3;
   // Indicates whether the cloud provider is available for the use case.
   bool available = 4;
+  // The supported platform modes of the cloud provider (dedicated clusters and/or serverless spaces).
+  // If a certain mode is supported at least 1 region for this provider supports it.
+  repeated PlatformMode supported_modes = 5 [(buf.validate.field).repeated = {
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -241,6 +280,15 @@ message CloudProviderRegion {
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
   // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
+  // The supported platform modes of the cloud provider region (dedicated clusters and/or serverless spaces).
+  repeated PlatformMode supported_modes = 13 [(buf.validate.field).repeated = {
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
@@ -262,4 +310,16 @@ enum ClusterCreationBlockingReason {
   CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY = 2;
   // Storage config not set
   CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY = 3;
+}
+
+// PlatformMode Enums
+enum PlatformMode {
+  // Platform mode mode unspecified
+  PLATFORM_MODE_UNSPECIFIED = 0;
+  // Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.
+  // See qdrant.cloud.cluster.v1.ClusterService for more information.
+  PLATFORM_MODE_DEDICATED_CLUSTERS = 1;
+  // Platform mode serverless; the Qdrant serverless spaces infrastructure is available.
+  // See qdrant.cloud.serverless.space.v1.SpaceService for more information.
+  PLATFORM_MODE_SERVERLESS_SPACES = 2;
 }

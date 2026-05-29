@@ -17,16 +17,27 @@ class ClusterCreationBlockingReason(int, metaclass=_enum_type_wrapper.EnumTypeWr
     CLUSTER_CREATION_BLOCKING_REASON_NONE: _ClassVar[ClusterCreationBlockingReason]
     CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY: _ClassVar[ClusterCreationBlockingReason]
     CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY: _ClassVar[ClusterCreationBlockingReason]
+
+class PlatformMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PLATFORM_MODE_UNSPECIFIED: _ClassVar[PlatformMode]
+    PLATFORM_MODE_DEDICATED_CLUSTERS: _ClassVar[PlatformMode]
+    PLATFORM_MODE_SERVERLESS_SPACES: _ClassVar[PlatformMode]
 CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED: ClusterCreationBlockingReason
 CLUSTER_CREATION_BLOCKING_REASON_NONE: ClusterCreationBlockingReason
 CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY: ClusterCreationBlockingReason
 CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY: ClusterCreationBlockingReason
+PLATFORM_MODE_UNSPECIFIED: PlatformMode
+PLATFORM_MODE_DEDICATED_CLUSTERS: PlatformMode
+PLATFORM_MODE_SERVERLESS_SPACES: PlatformMode
 
 class ListCloudProvidersRequest(_message.Message):
-    __slots__ = ("account_id",)
+    __slots__ = ("account_id", "supported_mode")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+    supported_mode: PlatformMode
+    def __init__(self, account_id: _Optional[str] = ..., supported_mode: _Optional[_Union[PlatformMode, str]] = ...) -> None: ...
 
 class ListCloudProvidersResponse(_message.Message):
     __slots__ = ("items",)
@@ -35,8 +46,10 @@ class ListCloudProvidersResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProvider, _Mapping]]] = ...) -> None: ...
 
 class ListGlobalCloudProvidersRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("supported_mode",)
+    SUPPORTED_MODE_FIELD_NUMBER: _ClassVar[int]
+    supported_mode: PlatformMode
+    def __init__(self, supported_mode: _Optional[_Union[PlatformMode, str]] = ...) -> None: ...
 
 class ListGlobalCloudProvidersResponse(_message.Message):
     __slots__ = ("items",)
@@ -45,10 +58,12 @@ class ListGlobalCloudProvidersResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[CloudProvider, _Mapping]]] = ...) -> None: ...
 
 class ListGlobalCloudProviderRegionsRequest(_message.Message):
-    __slots__ = ("cloud_provider_id",)
+    __slots__ = ("cloud_provider_id", "supported_mode")
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODE_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
-    def __init__(self, cloud_provider_id: _Optional[str] = ...) -> None: ...
+    supported_mode: PlatformMode
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., supported_mode: _Optional[_Union[PlatformMode, str]] = ...) -> None: ...
 
 class ListGlobalCloudProviderRegionsResponse(_message.Message):
     __slots__ = ("items",)
@@ -71,12 +86,14 @@ class GetGlobalCloudProviderRegionResponse(_message.Message):
     def __init__(self, region: _Optional[_Union[CloudProviderRegion, _Mapping]] = ...) -> None: ...
 
 class ListCloudProviderRegionsRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id")
+    __slots__ = ("account_id", "cloud_provider_id", "supported_mode")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ...) -> None: ...
+    supported_mode: PlatformMode
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., supported_mode: _Optional[_Union[PlatformMode, str]] = ...) -> None: ...
 
 class ListCloudProviderRegionsResponse(_message.Message):
     __slots__ = ("items",)
@@ -101,19 +118,21 @@ class GetCloudProviderRegionResponse(_message.Message):
     def __init__(self, region: _Optional[_Union[CloudProviderRegion, _Mapping]] = ...) -> None: ...
 
 class CloudProvider(_message.Message):
-    __slots__ = ("id", "name", "free_tier", "available")
+    __slots__ = ("id", "name", "free_tier", "available", "supported_modes")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     FREE_TIER_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     free_tier: bool
     available: bool
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ...) -> None: ...
+    supported_modes: _containers.RepeatedScalarFieldContainer[PlatformMode]
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., supported_modes: _Optional[_Iterable[_Union[PlatformMode, str]]] = ...) -> None: ...
 
 class CloudProviderRegion(_message.Message):
-    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "cluster_creation_blocking_reason", "storage_classes", "volume_snapshot_classes")
+    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "cluster_creation_blocking_reason", "storage_classes", "volume_snapshot_classes", "supported_modes")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     FREE_TIER_FIELD_NUMBER: _ClassVar[int]
@@ -126,6 +145,7 @@ class CloudProviderRegion(_message.Message):
     CLUSTER_CREATION_BLOCKING_REASON_FIELD_NUMBER: _ClassVar[int]
     STORAGE_CLASSES_FIELD_NUMBER: _ClassVar[int]
     VOLUME_SNAPSHOT_CLASSES_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODES_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     free_tier: bool
@@ -138,7 +158,8 @@ class CloudProviderRegion(_message.Message):
     cluster_creation_blocking_reason: ClusterCreationBlockingReason
     storage_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass]
     volume_snapshot_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass]
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., cluster_creation_blocking_reason: _Optional[_Union[ClusterCreationBlockingReason, str]] = ..., storage_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
+    supported_modes: _containers.RepeatedScalarFieldContainer[PlatformMode]
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., cluster_creation_blocking_reason: _Optional[_Union[ClusterCreationBlockingReason, str]] = ..., storage_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ..., supported_modes: _Optional[_Iterable[_Union[PlatformMode, str]]] = ...) -> None: ...
 
 class CloudProviderRegionCapabilities(_message.Message):
     __slots__ = ("volume_snapshot", "volume_expansion")
