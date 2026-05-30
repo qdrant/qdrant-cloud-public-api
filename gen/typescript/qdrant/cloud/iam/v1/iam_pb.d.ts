@@ -31,9 +31,9 @@ export declare type GetAuthenticatedUserRequest = Message<"qdrant.cloud.iam.v1.G
    *
    * When unset, the RPC returns the authenticated user as before.
    *
-   * @generated from field: string user_id = 1;
+   * @generated from field: optional string user_id = 1;
    */
-  userId: string;
+  userId?: string | undefined;
 };
 
 export declare type GetAuthenticatedUserRequestValid = GetAuthenticatedUserRequest;

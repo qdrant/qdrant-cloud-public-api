@@ -404,10 +404,7 @@ message GetAuthenticatedUserRequest {
   // (defence in depth on top of the existing server-side self check).
   //
   // When unset, the RPC returns the authenticated user as before.
-  string user_id = 1 [
-    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
-    (buf.validate.field).string = {uuid: true}
-  ];
+  optional string user_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function

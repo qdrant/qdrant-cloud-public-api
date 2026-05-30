@@ -327,7 +327,7 @@ type GetAuthenticatedUserRequest struct {
 	// (defence in depth on top of the existing server-side self check).
 	//
 	// When unset, the RPC returns the authenticated user as before.
-	UserId        string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        *string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -363,8 +363,8 @@ func (*GetAuthenticatedUserRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GetAuthenticatedUserRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return ""
 }
@@ -2547,9 +2547,11 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"C\n" +
-	"\x1bGetAuthenticatedUserRequest\x12$\n" +
-	"\auser_id\x18\x01 \x01(\tB\v\xbaH\b\xd8\x01\x01r\x03\xb0\x01\x01R\x06userId\"U\n" +
+	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"Q\n" +
+	"\x1bGetAuthenticatedUserRequest\x12&\n" +
+	"\auser_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x06userId\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_id\"U\n" +
 	"\x1cGetAuthenticatedUserResponse\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\";\n" +
 	"\x10ListUsersRequest\x12'\n" +
@@ -2928,6 +2930,7 @@ func file_qdrant_cloud_iam_v1_iam_proto_init() {
 	if File_qdrant_cloud_iam_v1_iam_proto != nil {
 		return
 	}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[36].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39].OneofWrappers = []any{}
