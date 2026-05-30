@@ -68,6 +68,19 @@ service IAMService {
       name: "user_id"
       field_expression: "user.id"
     };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the caller's current user
+    // via GetAuthenticatedUser and merging the masked fields on top.
+    // GetAuthenticatedUser is identifier-less (acts on the authenticated
+    // caller), so field_mapping is left empty. UpdateUser only permits
+    // self-updates server-side, so using the authenticated-caller Get is
+    // equivalent and avoids exposing a cross-user lookup RPC.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
+      response_resource_field: "user"
+      request_resource_field: "user"
+    };
   }
   // Gets the profile of the authenticated user.
   // Required permissions:
@@ -103,6 +116,17 @@ service IAMService {
       resource_type: "user-profile"
       resource_id_field: "req-md.qc-actor-id"
       resource_url_template: "/users/{req-md.qc-actor-id}"
+    };
+    // FieldMask-based partial updates. When the request has a non-empty
+    // update_mask the API gateway transparently rewrites the partial update
+    // into a full-resource replacement by fetching the caller's current
+    // profile via GetUserProfile and merging the masked fields on top.
+    // GetUserProfile is identifier-less (acts on the authenticated caller),
+    // so field_mapping is left empty.
+    option (qdrant.cloud.common.v1.patch_source) = {
+      get_method: "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
+      response_resource_field: "user_profile"
+      request_resource_field: "user_profile"
     };
   }
   // Gets the authenticated user's consent status for a specific legal document.
@@ -389,6 +413,13 @@ message ListUsersResponse {
 message UpdateUserRequest {
   // The actual user.
   User user = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (User) message, not
+  // the request envelope (e.g. "default_account_id").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
   option (buf.validate.message).cel = {
     id: "update_user.id_present"
     message: "user.id is required for an update"
@@ -436,6 +467,13 @@ message GetUserProfileResponse {
 message UpdateUserProfileRequest {
   // The actual user profile.
   UserProfile user_profile = 1 [(buf.validate.field).required = true];
+  // Optional mask of fields to update. When set, only the fields listed in
+  // the mask will be updated; all other fields retain their current values
+  // on the server. Field paths reference the resource (UserProfile)
+  // message, not the request envelope (e.g. "given_name", "family_name").
+  // When unset or empty, the request is treated as a full-resource
+  // replacement (the existing behavior).
+  google.protobuf.FieldMask update_mask = 2;
 
   option (buf.validate.message).cel = {
     id: "update_user_profile.exclusive_name_field_selection"

@@ -206,6 +206,11 @@ type PatchSource struct {
 	// Key: field path in the Get request message (e.g. "account_id")
 	// Value: field path in the Update request message (e.g. "cluster.account_id")
 	// Field paths may be nested using a dot separator.
+	//
+	// The map may be empty when the Get RPC is identifier-less (i.e. it
+	// operates on the authenticated caller, like GetAuthenticatedUser or
+	// GetUserProfile). In that case the gateway invokes the Get with an
+	// empty request and the caller's auth context.
 	FieldMapping map[string]string `protobuf:"bytes,2,rep,name=field_mapping,json=fieldMapping,proto3" json:"field_mapping,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// The field path in the Get response message that contains the resource.
 	// e.g. "cluster"
@@ -1321,11 +1326,11 @@ var File_qdrant_cloud_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xbc\x04\n" +
+	"#qdrant/cloud/common/v1/common.proto\x12\x16qdrant.cloud.common.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xba\x04\n" +
 	"\vPatchSource\x12Y\n" +
 	"\n" +
-	"get_method\x18\x01 \x01(\tB:\xbaH7r5\x10\x0121^/[A-Za-z_][A-Za-z0-9_.]*/[A-Za-z_][A-Za-z0-9_]*$R\tgetMethod\x12\xbe\x01\n" +
-	"\rfield_mapping\x18\x02 \x03(\v25.qdrant.cloud.common.v1.PatchSource.FieldMappingEntryBb\xbaH_\x9a\x01\\\b\x01\"+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$*+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\ffieldMapping\x12h\n" +
+	"get_method\x18\x01 \x01(\tB:\xbaH7r5\x10\x0121^/[A-Za-z_][A-Za-z0-9_.]*/[A-Za-z_][A-Za-z0-9_]*$R\tgetMethod\x12\xbc\x01\n" +
+	"\rfield_mapping\x18\x02 \x03(\v25.qdrant.cloud.common.v1.PatchSource.FieldMappingEntryB`\xbaH]\x9a\x01Z\"+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$*+r)2'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\ffieldMapping\x12h\n" +
 	"\x17response_resource_field\x18\x03 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\x15responseResourceField\x12f\n" +
 	"\x16request_resource_field\x18\x04 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\x14requestResourceField\x1a?\n" +
 	"\x11FieldMappingEntry\x12\x10\n" +

@@ -120,6 +120,18 @@ export declare type UpdateUserRequest = Message<"qdrant.cloud.iam.v1.UpdateUserR
    * @generated from field: qdrant.cloud.iam.v1.User user = 1;
    */
   user?: User | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (User) message, not
+   * the request envelope (e.g. "default_account_id").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -134,6 +146,18 @@ export declare type UpdateUserRequestValid = Message<"qdrant.cloud.iam.v1.Update
    * @generated from field: qdrant.cloud.iam.v1.User user = 1;
    */
   user: UserValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (User) message, not
+   * the request envelope (e.g. "default_account_id").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -297,6 +321,18 @@ export declare type UpdateUserProfileRequest = Message<"qdrant.cloud.iam.v1.Upda
    * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
    */
   userProfile?: UserProfile | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (UserProfile)
+   * message, not the request envelope (e.g. "given_name", "family_name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -311,6 +347,18 @@ export declare type UpdateUserProfileRequestValid = Message<"qdrant.cloud.iam.v1
    * @generated from field: qdrant.cloud.iam.v1.UserProfile user_profile = 1;
    */
   userProfile: UserProfileValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (UserProfile)
+   * message, not the request envelope (e.g. "given_name", "family_name").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
