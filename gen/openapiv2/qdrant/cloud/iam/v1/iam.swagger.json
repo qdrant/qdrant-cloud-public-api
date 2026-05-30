@@ -448,6 +448,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "Optional identifier of the user (in GUID format) that the caller\nexpects to be authenticated as. When provided, the server MUST verify\nthat this value matches the authenticated user's id and reject the\nrequest with PermissionDenied otherwise.\n\nThis guard exists primarily for the API gateway's FieldMask partial-\nupdate flow: UpdateUser uses GetAuthenticatedUser as its patch source\nand forwards `user.id` here, so the IAM service can refuse a partial\nUpdateUser that targets a different user than the authenticated one\n(defence in depth on top of the existing server-side self check).\n\nWhen unset, the RPC returns the authenticated user as before.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "tags": [
           "IAMService"
         ]

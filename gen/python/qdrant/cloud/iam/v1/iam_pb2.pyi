@@ -70,8 +70,10 @@ USER_CONSENT_STATUS_REVOKED: UserConsentStatus
 USER_CONSENT_STATUS_PENDING: UserConsentStatus
 
 class GetAuthenticatedUserRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
 
 class GetAuthenticatedUserResponse(_message.Message):
     __slots__ = ("user",)
