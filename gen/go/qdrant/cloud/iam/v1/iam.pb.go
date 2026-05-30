@@ -314,7 +314,20 @@ func (UserConsentStatus) EnumDescriptor() ([]byte, []int) {
 
 // GetAuthenticatedUserRequest is the request for the GetAuthenticatedUser function
 type GetAuthenticatedUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Optional identifier of the user (in GUID format) that the caller
+	// expects to be authenticated as. When provided, the server MUST verify
+	// that this value matches the authenticated user's id and reject the
+	// request with PermissionDenied otherwise.
+	//
+	// This guard exists primarily for the API gateway's FieldMask partial-
+	// update flow: UpdateUser uses GetAuthenticatedUser as its patch source
+	// and forwards `user.id` here, so the IAM service can refuse a partial
+	// UpdateUser that targets a different user than the authenticated one
+	// (defence in depth on top of the existing server-side self check).
+	//
+	// When unset, the RPC returns the authenticated user as before.
+	UserId        string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -347,6 +360,13 @@ func (x *GetAuthenticatedUserRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetAuthenticatedUserRequest.ProtoReflect.Descriptor instead.
 func (*GetAuthenticatedUserRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetAuthenticatedUserRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
 }
 
 // GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function
@@ -2527,8 +2547,9 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x1d\n" +
-	"\x1bGetAuthenticatedUserRequest\"U\n" +
+	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"C\n" +
+	"\x1bGetAuthenticatedUserRequest\x12$\n" +
+	"\auser_id\x18\x01 \x01(\tB\v\xbaH\b\xd8\x01\x01r\x03\xb0\x01\x01R\x06userId\"U\n" +
 	"\x1cGetAuthenticatedUserResponse\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\";\n" +
 	"\x10ListUsersRequest\x12'\n" +
@@ -2707,16 +2728,17 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xd6 \n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xea \n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
 	"\tListUsers\x12%.qdrant.cloud.iam.v1.ListUsersRequest\x1a&.qdrant.cloud.iam.v1.ListUsersResponse\"=\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\x99\x02\n" +
+	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xad\x02\n" +
 	"\n" +
-	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"\xb9\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser.idʵ\x18B\n" +
-	"4/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser\x1a\x04user\"\x04user\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
+	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"\xcd\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
+	"\auser_id\x12\auser.idʵ\x18V\n" +
+	"4/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser\x12\x12\n" +
+	"\auser_id\x12\auser.id\x1a\x04user\"\x04user\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\x9c\x01\n" +
 	"\x0eGetUserProfile\x12*.qdrant.cloud.iam.v1.GetUserProfileRequest\x1a+.qdrant.cloud.iam.v1.GetUserProfileResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/profile\x12\xbe\x02\n" +
 	"\x11UpdateUserProfile\x12-.qdrant.cloud.iam.v1.UpdateUserProfileRequest\x1a..qdrant.cloud.iam.v1.UpdateUserProfileResponse\"\xc9\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01ʵ\x18L\n" +
 	"./qdrant.cloud.iam.v1.IAMService/GetUserProfile\x1a\fuser_profile\"\fuser_profile\xca\xf3\x18A\b\x02\x12\fuser-profile\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}\x82\xd3\xe4\x93\x02!:\x01*\x1a\x1c/api/iam/v1/users/me/profile\x12\x9c\x01\n" +

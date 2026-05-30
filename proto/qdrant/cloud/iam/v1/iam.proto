@@ -72,12 +72,17 @@ service IAMService {
     // update_mask the API gateway transparently rewrites the partial update
     // into a full-resource replacement by fetching the caller's current user
     // via GetAuthenticatedUser and merging the masked fields on top.
-    // GetAuthenticatedUser is identifier-less (acts on the authenticated
-    // caller), so field_mapping is left empty. UpdateUser only permits
-    // self-updates server-side, so using the authenticated-caller Get is
-    // equivalent and avoids exposing a cross-user lookup RPC.
+    // UpdateUser only permits self-updates server-side, so the
+    // authenticated-caller Get is equivalent and avoids exposing a
+    // cross-user lookup RPC. The gateway forwards `user.id` as
+    // GetAuthenticatedUserRequest.user_id so the IAM service can detect
+    // and reject an attempt to patch another user (defence in depth).
     option (qdrant.cloud.common.v1.patch_source) = {
       get_method: "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
+      field_mapping: {
+        key: "user_id"
+        value: "user.id"
+      }
       response_resource_field: "user"
       request_resource_field: "user"
     };
@@ -387,7 +392,22 @@ service IAMService {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // GetAuthenticatedUserRequest is the request for the GetAuthenticatedUser function
 message GetAuthenticatedUserRequest {
-  // Empty
+  // Optional identifier of the user (in GUID format) that the caller
+  // expects to be authenticated as. When provided, the server MUST verify
+  // that this value matches the authenticated user's id and reject the
+  // request with PermissionDenied otherwise.
+  //
+  // This guard exists primarily for the API gateway's FieldMask partial-
+  // update flow: UpdateUser uses GetAuthenticatedUser as its patch source
+  // and forwards `user.id` here, so the IAM service can refuse a partial
+  // UpdateUser that targets a different user than the authenticated one
+  // (defence in depth on top of the existing server-side self check).
+  //
+  // When unset, the RPC returns the authenticated user as before.
+  string user_id = 1 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string = {uuid: true}
+  ];
 }
 
 // GetAuthenticatedUserResponse is the response from the GetAuthenticatedUser function

@@ -14,11 +14,26 @@ export declare const file_qdrant_cloud_iam_v1_iam: GenFile;
 /**
  * GetAuthenticatedUserRequest is the request for the GetAuthenticatedUser function
  *
- * Empty
- *
  * @generated from message qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
  */
 export declare type GetAuthenticatedUserRequest = Message<"qdrant.cloud.iam.v1.GetAuthenticatedUserRequest"> & {
+  /**
+   * Optional identifier of the user (in GUID format) that the caller
+   * expects to be authenticated as. When provided, the server MUST verify
+   * that this value matches the authenticated user's id and reject the
+   * request with PermissionDenied otherwise.
+   *
+   * This guard exists primarily for the API gateway's FieldMask partial-
+   * update flow: UpdateUser uses GetAuthenticatedUser as its patch source
+   * and forwards `user.id` here, so the IAM service can refuse a partial
+   * UpdateUser that targets a different user than the authenticated one
+   * (defence in depth on top of the existing server-side self check).
+   *
+   * When unset, the RPC returns the authenticated user as before.
+   *
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 };
 
 export declare type GetAuthenticatedUserRequestValid = GetAuthenticatedUserRequest;
