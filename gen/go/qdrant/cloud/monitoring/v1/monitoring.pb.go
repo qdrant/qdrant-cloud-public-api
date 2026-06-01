@@ -295,62 +295,62 @@ func (ClusterAlertType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
 }
 
-// Severity is the tier used by the UI to render badge color and announce severity to
+// ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to
 // assistive tech. Color alone never conveys severity - clients must render the label.
-type Severity int32
+type ClusterAlertSeverity int32
 
 const (
 	// Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
 	// there is intentionally no separate UNKNOWN value.
-	Severity_SEVERITY_UNSPECIFIED Severity = 0
+	ClusterAlertSeverity_CLUSTER_ALERT_SEVERITY_UNSPECIFIED ClusterAlertSeverity = 0
 	// Informational severity.
-	Severity_SEVERITY_INFO Severity = 1
+	ClusterAlertSeverity_CLUSTER_ALERT_SEVERITY_INFO ClusterAlertSeverity = 1
 	// Warning severity.
-	Severity_SEVERITY_WARNING Severity = 2
+	ClusterAlertSeverity_CLUSTER_ALERT_SEVERITY_WARNING ClusterAlertSeverity = 2
 	// Critical severity.
-	Severity_SEVERITY_CRITICAL Severity = 3
+	ClusterAlertSeverity_CLUSTER_ALERT_SEVERITY_CRITICAL ClusterAlertSeverity = 3
 )
 
-// Enum value maps for Severity.
+// Enum value maps for ClusterAlertSeverity.
 var (
-	Severity_name = map[int32]string{
-		0: "SEVERITY_UNSPECIFIED",
-		1: "SEVERITY_INFO",
-		2: "SEVERITY_WARNING",
-		3: "SEVERITY_CRITICAL",
+	ClusterAlertSeverity_name = map[int32]string{
+		0: "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+		1: "CLUSTER_ALERT_SEVERITY_INFO",
+		2: "CLUSTER_ALERT_SEVERITY_WARNING",
+		3: "CLUSTER_ALERT_SEVERITY_CRITICAL",
 	}
-	Severity_value = map[string]int32{
-		"SEVERITY_UNSPECIFIED": 0,
-		"SEVERITY_INFO":        1,
-		"SEVERITY_WARNING":     2,
-		"SEVERITY_CRITICAL":    3,
+	ClusterAlertSeverity_value = map[string]int32{
+		"CLUSTER_ALERT_SEVERITY_UNSPECIFIED": 0,
+		"CLUSTER_ALERT_SEVERITY_INFO":        1,
+		"CLUSTER_ALERT_SEVERITY_WARNING":     2,
+		"CLUSTER_ALERT_SEVERITY_CRITICAL":    3,
 	}
 )
 
-func (x Severity) Enum() *Severity {
-	p := new(Severity)
+func (x ClusterAlertSeverity) Enum() *ClusterAlertSeverity {
+	p := new(ClusterAlertSeverity)
 	*p = x
 	return p
 }
 
-func (x Severity) String() string {
+func (x ClusterAlertSeverity) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (Severity) Descriptor() protoreflect.EnumDescriptor {
+func (ClusterAlertSeverity) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_monitoring_v1_monitoring_proto_enumTypes[4].Descriptor()
 }
 
-func (Severity) Type() protoreflect.EnumType {
+func (ClusterAlertSeverity) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_monitoring_v1_monitoring_proto_enumTypes[4]
 }
 
-func (x Severity) Number() protoreflect.EnumNumber {
+func (x ClusterAlertSeverity) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Severity.Descriptor instead.
-func (Severity) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ClusterAlertSeverity.Descriptor instead.
+func (ClusterAlertSeverity) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{4}
 }
 
@@ -1762,7 +1762,7 @@ type ClusterAlert struct {
 	// The category of alert.
 	Type ClusterAlertType `protobuf:"varint,2,opt,name=type,proto3,enum=qdrant.cloud.monitoring.v1.ClusterAlertType" json:"type,omitempty"`
 	// Severity tier, derived server-side from the alert type.
-	Severity Severity `protobuf:"varint,3,opt,name=severity,proto3,enum=qdrant.cloud.monitoring.v1.Severity" json:"severity,omitempty"`
+	Severity ClusterAlertSeverity `protobuf:"varint,3,opt,name=severity,proto3,enum=qdrant.cloud.monitoring.v1.ClusterAlertSeverity" json:"severity,omitempty"`
 	// Human-readable title (English, at most 80 characters).
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	// Human-readable description (English, at most 300 characters).
@@ -1820,11 +1820,11 @@ func (x *ClusterAlert) GetType() ClusterAlertType {
 	return ClusterAlertType_CLUSTER_ALERT_TYPE_UNSPECIFIED
 }
 
-func (x *ClusterAlert) GetSeverity() Severity {
+func (x *ClusterAlert) GetSeverity() ClusterAlertSeverity {
 	if x != nil {
 		return x.Severity
 	}
-	return Severity_SEVERITY_UNSPECIFIED
+	return ClusterAlertSeverity_CLUSTER_ALERT_SEVERITY_UNSPECIFIED
 }
 
 func (x *ClusterAlert) GetTitle() string {
@@ -1985,11 +1985,11 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05state\x18\x03 \x01(\x0e2-.qdrant.cloud.monitoring.v1.ClusterAlertStateH\x00R\x05state\x88\x01\x01B\b\n" +
 	"\x06_state\"]\n" +
 	"\x19ListClusterAlertsResponse\x12@\n" +
-	"\x06alerts\x18\x01 \x03(\v2(.qdrant.cloud.monitoring.v1.ClusterAlertR\x06alerts\"\xe1\x02\n" +
+	"\x06alerts\x18\x01 \x03(\v2(.qdrant.cloud.monitoring.v1.ClusterAlertR\x06alerts\"\xed\x02\n" +
 	"\fClusterAlert\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12@\n" +
-	"\x04type\x18\x02 \x01(\x0e2,.qdrant.cloud.monitoring.v1.ClusterAlertTypeR\x04type\x12@\n" +
-	"\bseverity\x18\x03 \x01(\x0e2$.qdrant.cloud.monitoring.v1.SeverityR\bseverity\x12\x14\n" +
+	"\x04type\x18\x02 \x01(\x0e2,.qdrant.cloud.monitoring.v1.ClusterAlertTypeR\x04type\x12L\n" +
+	"\bseverity\x18\x03 \x01(\x0e20.qdrant.cloud.monitoring.v1.ClusterAlertSeverityR\bseverity\x12\x14\n" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12@\n" +
 	"\x0elast_firing_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\flastFiringAt\x12C\n" +
@@ -2025,12 +2025,12 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x12+\n" +
 	"'CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT\x10\v\x12-\n" +
 	")CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT\x10\f\x12*\n" +
-	"&CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT\x10\r*d\n" +
-	"\bSeverity\x12\x18\n" +
-	"\x14SEVERITY_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rSEVERITY_INFO\x10\x01\x12\x14\n" +
-	"\x10SEVERITY_WARNING\x10\x02\x12\x15\n" +
-	"\x11SEVERITY_CRITICAL\x10\x032\xde\f\n" +
+	"&CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT\x10\r*\xa8\x01\n" +
+	"\x14ClusterAlertSeverity\x12&\n" +
+	"\"CLUSTER_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bCLUSTER_ALERT_SEVERITY_INFO\x10\x01\x12\"\n" +
+	"\x1eCLUSTER_ALERT_SEVERITY_WARNING\x10\x02\x12#\n" +
+	"\x1fCLUSTER_ALERT_SEVERITY_CRITICAL\x10\x032\xde\f\n" +
 	"\x11MonitoringService\x12\x9a\x02\n" +
 	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x82\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -2077,7 +2077,7 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_goTypes = []any{
 	(InferenceMetricsInterval)(0),              // 1: qdrant.cloud.monitoring.v1.InferenceMetricsInterval
 	(ClusterAlertState)(0),                     // 2: qdrant.cloud.monitoring.v1.ClusterAlertState
 	(ClusterAlertType)(0),                      // 3: qdrant.cloud.monitoring.v1.ClusterAlertType
-	(Severity)(0),                              // 4: qdrant.cloud.monitoring.v1.Severity
+	(ClusterAlertSeverity)(0),                  // 4: qdrant.cloud.monitoring.v1.ClusterAlertSeverity
 	(*GetClusterSummaryMetricsRequest)(nil),    // 5: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest
 	(*GetClusterSummaryMetricsResponse)(nil),   // 6: qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse
 	(*GetClusterUsageMetricsRequest)(nil),      // 7: qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest
@@ -2153,7 +2153,7 @@ var file_qdrant_cloud_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	2,  // 47: qdrant.cloud.monitoring.v1.ListClusterAlertsRequest.state:type_name -> qdrant.cloud.monitoring.v1.ClusterAlertState
 	25, // 48: qdrant.cloud.monitoring.v1.ListClusterAlertsResponse.alerts:type_name -> qdrant.cloud.monitoring.v1.ClusterAlert
 	3,  // 49: qdrant.cloud.monitoring.v1.ClusterAlert.type:type_name -> qdrant.cloud.monitoring.v1.ClusterAlertType
-	4,  // 50: qdrant.cloud.monitoring.v1.ClusterAlert.severity:type_name -> qdrant.cloud.monitoring.v1.Severity
+	4,  // 50: qdrant.cloud.monitoring.v1.ClusterAlert.severity:type_name -> qdrant.cloud.monitoring.v1.ClusterAlertSeverity
 	26, // 51: qdrant.cloud.monitoring.v1.ClusterAlert.last_firing_at:type_name -> google.protobuf.Timestamp
 	2,  // 52: qdrant.cloud.monitoring.v1.ClusterAlert.state:type_name -> qdrant.cloud.monitoring.v1.ClusterAlertState
 	5,  // 53: qdrant.cloud.monitoring.v1.MonitoringService.GetClusterSummaryMetrics:input_type -> qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest

@@ -1216,9 +1216,9 @@ export declare type ClusterAlert = Message<"qdrant.cloud.monitoring.v1.ClusterAl
   /**
    * Severity tier, derived server-side from the alert type.
    *
-   * @generated from field: qdrant.cloud.monitoring.v1.Severity severity = 3;
+   * @generated from field: qdrant.cloud.monitoring.v1.ClusterAlertSeverity severity = 3;
    */
-  severity: Severity;
+  severity: ClusterAlertSeverity;
 
   /**
    * Human-readable title (English, at most 80 characters).
@@ -1490,46 +1490,46 @@ export enum ClusterAlertType {
 export declare const ClusterAlertTypeSchema: GenEnum<ClusterAlertType>;
 
 /**
- * Severity is the tier used by the UI to render badge color and announce severity to
+ * ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to
  * assistive tech. Color alone never conveys severity - clients must render the label.
  *
- * @generated from enum qdrant.cloud.monitoring.v1.Severity
+ * @generated from enum qdrant.cloud.monitoring.v1.ClusterAlertSeverity
  */
-export enum Severity {
+export enum ClusterAlertSeverity {
   /**
    * Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
    * there is intentionally no separate UNKNOWN value.
    *
-   * @generated from enum value: SEVERITY_UNSPECIFIED = 0;
+   * @generated from enum value: CLUSTER_ALERT_SEVERITY_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
    * Informational severity.
    *
-   * @generated from enum value: SEVERITY_INFO = 1;
+   * @generated from enum value: CLUSTER_ALERT_SEVERITY_INFO = 1;
    */
   INFO = 1,
 
   /**
    * Warning severity.
    *
-   * @generated from enum value: SEVERITY_WARNING = 2;
+   * @generated from enum value: CLUSTER_ALERT_SEVERITY_WARNING = 2;
    */
   WARNING = 2,
 
   /**
    * Critical severity.
    *
-   * @generated from enum value: SEVERITY_CRITICAL = 3;
+   * @generated from enum value: CLUSTER_ALERT_SEVERITY_CRITICAL = 3;
    */
   CRITICAL = 3,
 }
 
 /**
- * Describes the enum qdrant.cloud.monitoring.v1.Severity.
+ * Describes the enum qdrant.cloud.monitoring.v1.ClusterAlertSeverity.
  */
-export declare const SeveritySchema: GenEnum<Severity>;
+export declare const ClusterAlertSeveritySchema: GenEnum<ClusterAlertSeverity>;
 
 /**
  * MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
@@ -1601,8 +1601,7 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Lists the alerts for a cluster in the account identified by the given ID.
-   * The optional state filter, when omitted, returns alerts in all states; each
-   * returned alert carries its own state. Sorted by last_firing_at (most recent first).
+   * Sorted by last_firing_at (most recent first).
    * Required permissions:
    * - read:clusters
    *

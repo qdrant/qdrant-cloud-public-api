@@ -18,7 +18,7 @@
   "paths": {
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/alerts": {
       "get": {
-        "summary": "Lists the alerts for a cluster in the account identified by the given ID.\nThe optional state filter, when omitted, returns alerts in all states; each\nreturned alert carries its own state. Sorted by last_firing_at (most recent first).\nRequired permissions:\n- read:clusters",
+        "summary": "Lists the alerts for a cluster in the account identified by the given ID.\nSorted by last_firing_at (most recent first).\nRequired permissions:\n- read:clusters",
         "operationId": "MonitoringService_ListClusterAlerts",
         "responses": {
           "200": {
@@ -417,7 +417,7 @@
           "description": "The category of alert."
         },
         "severity": {
-          "$ref": "#/definitions/v1Severity",
+          "$ref": "#/definitions/v1ClusterAlertSeverity",
           "description": "Severity tier, derived server-side from the alert type."
         },
         "title": {
@@ -439,6 +439,17 @@
         }
       },
       "description": "ClusterAlert is a single alert instance for a cluster."
+    },
+    "v1ClusterAlertSeverity": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+        "CLUSTER_ALERT_SEVERITY_INFO",
+        "CLUSTER_ALERT_SEVERITY_WARNING",
+        "CLUSTER_ALERT_SEVERITY_CRITICAL"
+      ],
+      "default": "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+      "description": "ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to\nassistive tech. Color alone never conveys severity - clients must render the label.\n\n - CLUSTER_ALERT_SEVERITY_UNSPECIFIED: Default / fallback tier. Also what an alert type that is not yet mapped resolves to;\nthere is intentionally no separate UNKNOWN value.\n - CLUSTER_ALERT_SEVERITY_INFO: Informational severity.\n - CLUSTER_ALERT_SEVERITY_WARNING: Warning severity.\n - CLUSTER_ALERT_SEVERITY_CRITICAL: Critical severity."
     },
     "v1ClusterAlertState": {
       "type": "string",
@@ -858,17 +869,6 @@
         }
       },
       "description": "ResourceValue represents the total value of a resource along with its unit."
-    },
-    "v1Severity": {
-      "type": "string",
-      "enum": [
-        "SEVERITY_UNSPECIFIED",
-        "SEVERITY_INFO",
-        "SEVERITY_WARNING",
-        "SEVERITY_CRITICAL"
-      ],
-      "default": "SEVERITY_UNSPECIFIED",
-      "description": "Severity is the tier used by the UI to render badge color and announce severity to\nassistive tech. Color alone never conveys severity - clients must render the label.\n\n - SEVERITY_UNSPECIFIED: Default / fallback tier. Also what an alert type that is not yet mapped resolves to;\nthere is intentionally no separate UNKNOWN value.\n - SEVERITY_INFO: Informational severity.\n - SEVERITY_WARNING: Warning severity.\n - SEVERITY_CRITICAL: Critical severity."
     }
   }
 }

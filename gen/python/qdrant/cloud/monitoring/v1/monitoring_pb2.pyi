@@ -52,12 +52,12 @@ class ClusterAlertType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: _ClassVar[ClusterAlertType]
     CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: _ClassVar[ClusterAlertType]
 
-class Severity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class ClusterAlertSeverity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    SEVERITY_UNSPECIFIED: _ClassVar[Severity]
-    SEVERITY_INFO: _ClassVar[Severity]
-    SEVERITY_WARNING: _ClassVar[Severity]
-    SEVERITY_CRITICAL: _ClassVar[Severity]
+    CLUSTER_ALERT_SEVERITY_UNSPECIFIED: _ClassVar[ClusterAlertSeverity]
+    CLUSTER_ALERT_SEVERITY_INFO: _ClassVar[ClusterAlertSeverity]
+    CLUSTER_ALERT_SEVERITY_WARNING: _ClassVar[ClusterAlertSeverity]
+    CLUSTER_ALERT_SEVERITY_CRITICAL: _ClassVar[ClusterAlertSeverity]
 AGGREGATOR_UNSPECIFIED: Aggregator
 AGGREGATOR_SUM: Aggregator
 AGGREGATOR_AVG: Aggregator
@@ -84,10 +84,10 @@ CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: ClusterAlertType
-SEVERITY_UNSPECIFIED: Severity
-SEVERITY_INFO: Severity
-SEVERITY_WARNING: Severity
-SEVERITY_CRITICAL: Severity
+CLUSTER_ALERT_SEVERITY_UNSPECIFIED: ClusterAlertSeverity
+CLUSTER_ALERT_SEVERITY_INFO: ClusterAlertSeverity
+CLUSTER_ALERT_SEVERITY_WARNING: ClusterAlertSeverity
+CLUSTER_ALERT_SEVERITY_CRITICAL: ClusterAlertSeverity
 
 class GetClusterSummaryMetricsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id")
@@ -320,9 +320,9 @@ class ClusterAlert(_message.Message):
     STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
     type: ClusterAlertType
-    severity: Severity
+    severity: ClusterAlertSeverity
     title: str
     description: str
     last_firing_at: _timestamp_pb2.Timestamp
     state: ClusterAlertState
-    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[ClusterAlertType, str]] = ..., severity: _Optional[_Union[Severity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[ClusterAlertType, str]] = ..., severity: _Optional[_Union[ClusterAlertSeverity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ...) -> None: ...

@@ -89,8 +89,7 @@ service MonitoringService {
     };
   }
   // Lists the alerts for a cluster in the account identified by the given ID.
-  // The optional state filter, when omitted, returns alerts in all states; each
-  // returned alert carries its own state. Sorted by last_firing_at (most recent first).
+  // Sorted by last_firing_at (most recent first).
   // Required permissions:
   // - read:clusters
   rpc ListClusterAlerts(ListClusterAlertsRequest) returns (ListClusterAlertsResponse) {
@@ -390,7 +389,7 @@ message ClusterAlert {
   // The category of alert.
   ClusterAlertType type = 2;
   // Severity tier, derived server-side from the alert type.
-  Severity severity = 3;
+  ClusterAlertSeverity severity = 3;
   // Human-readable title (English, at most 80 characters).
   string title = 4;
   // Human-readable description (English, at most 300 characters).
@@ -471,16 +470,16 @@ enum ClusterAlertType {
   CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT = 13;
 }
 
-// Severity is the tier used by the UI to render badge color and announce severity to
+// ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to
 // assistive tech. Color alone never conveys severity - clients must render the label.
-enum Severity {
+enum ClusterAlertSeverity {
   // Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
   // there is intentionally no separate UNKNOWN value.
-  SEVERITY_UNSPECIFIED = 0;
+  CLUSTER_ALERT_SEVERITY_UNSPECIFIED = 0;
   // Informational severity.
-  SEVERITY_INFO = 1;
+  CLUSTER_ALERT_SEVERITY_INFO = 1;
   // Warning severity.
-  SEVERITY_WARNING = 2;
+  CLUSTER_ALERT_SEVERITY_WARNING = 2;
   // Critical severity.
-  SEVERITY_CRITICAL = 3;
+  CLUSTER_ALERT_SEVERITY_CRITICAL = 3;
 }
