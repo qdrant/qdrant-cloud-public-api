@@ -1,2 +1,5 @@
 eastus
 sourced
+hotspot
+OOD
+OOM
