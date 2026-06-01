@@ -1131,6 +1131,134 @@ export declare type LogEntryValid = Message<"qdrant.cloud.monitoring.v1.LogEntry
 export declare const LogEntrySchema: GenMessage<LogEntry, {validType: LogEntryValid}>;
 
 /**
+ * ListClusterAlertsRequest is the request for the ListClusterAlerts function
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.ListClusterAlertsRequest
+ */
+export declare type ListClusterAlertsRequest = Message<"qdrant.cloud.monitoring.v1.ListClusterAlertsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cluster (in GUID format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+
+  /**
+   * Optional alert-state filter. If omitted (empty), alerts in ALL states are
+   * returned; if set, only alerts in that state are returned.
+   *
+   * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterAlertState state = 3;
+   */
+  state?: ClusterAlertState | undefined;
+};
+
+export declare type ListClusterAlertsRequestValid = ListClusterAlertsRequest;
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.ListClusterAlertsRequest.
+ * Use `create(ListClusterAlertsRequestSchema)` to create a new message.
+ */
+export declare const ListClusterAlertsRequestSchema: GenMessage<ListClusterAlertsRequest, {validType: ListClusterAlertsRequestValid}>;
+
+/**
+ * ListClusterAlertsResponse is the response from the ListClusterAlerts function
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.ListClusterAlertsResponse
+ */
+export declare type ListClusterAlertsResponse = Message<"qdrant.cloud.monitoring.v1.ListClusterAlertsResponse"> & {
+  /**
+   * The alerts for the cluster, sorted by last_firing_at (descending) - most recent first.
+   *
+   * @generated from field: repeated qdrant.cloud.monitoring.v1.ClusterAlert alerts = 1;
+   */
+  alerts: ClusterAlert[];
+};
+
+export declare type ListClusterAlertsResponseValid = ListClusterAlertsResponse;
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.ListClusterAlertsResponse.
+ * Use `create(ListClusterAlertsResponseSchema)` to create a new message.
+ */
+export declare const ListClusterAlertsResponseSchema: GenMessage<ListClusterAlertsResponse, {validType: ListClusterAlertsResponseValid}>;
+
+/**
+ * ClusterAlert is a single alert instance for a cluster.
+ *
+ * @generated from message qdrant.cloud.monitoring.v1.ClusterAlert
+ */
+export declare type ClusterAlert = Message<"qdrant.cloud.monitoring.v1.ClusterAlert"> & {
+  /**
+   * Stable identifier for this firing instance (in GUID format).
+   * Re-firing a previously-resolved alert produces a new ID.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The category of alert.
+   *
+   * @generated from field: qdrant.cloud.monitoring.v1.ClusterAlertType type = 2;
+   */
+  type: ClusterAlertType;
+
+  /**
+   * Severity tier, derived server-side from the alert type.
+   *
+   * @generated from field: qdrant.cloud.monitoring.v1.Severity severity = 3;
+   */
+  severity: Severity;
+
+  /**
+   * Human-readable title (English, at most 80 characters).
+   *
+   * @generated from field: string title = 4;
+   */
+  title: string;
+
+  /**
+   * Human-readable description (English, at most 300 characters).
+   *
+   * @generated from field: string description = 5;
+   */
+  description: string;
+
+  /**
+   * UTC timestamp of the most recent firing observation for this instance.
+   *
+   * @generated from field: google.protobuf.Timestamp last_firing_at = 6;
+   */
+  lastFiringAt?: Timestamp | undefined;
+
+  /**
+   * The state of this alert. Always populated so callers can tell each row's
+   * state apart when the request applies no state filter.
+   *
+   * @generated from field: qdrant.cloud.monitoring.v1.ClusterAlertState state = 7;
+   */
+  state: ClusterAlertState;
+};
+
+export declare type ClusterAlertValid = ClusterAlert;
+
+/**
+ * Describes the message qdrant.cloud.monitoring.v1.ClusterAlert.
+ * Use `create(ClusterAlertSchema)` to create a new message.
+ */
+export declare const ClusterAlertSchema: GenMessage<ClusterAlert, {validType: ClusterAlertValid}>;
+
+/**
  * Aggregator defines how metrics should be aggregated over time.
  *
  * @generated from enum qdrant.cloud.monitoring.v1.Aggregator
@@ -1218,6 +1346,192 @@ export enum InferenceMetricsInterval {
 export declare const InferenceMetricsIntervalSchema: GenEnum<InferenceMetricsInterval>;
 
 /**
+ * ClusterAlertState mirrors the backend state of a cluster alert. It is used both as
+ * the optional request-side filter AND echoed per row on the ClusterAlert response.
+ *
+ * @generated from enum qdrant.cloud.monitoring.v1.ClusterAlertState
+ */
+export enum ClusterAlertState {
+  /**
+   * The alert state is unspecified.
+   *
+   * @generated from enum value: CLUSTER_ALERT_STATE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The alert is currently firing.
+   *
+   * @generated from enum value: CLUSTER_ALERT_STATE_FIRING = 1;
+   */
+  FIRING = 1,
+
+  /**
+   * The alert has been resolved by the backend.
+   *
+   * @generated from enum value: CLUSTER_ALERT_STATE_RESOLVED = 2;
+   */
+  RESOLVED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.monitoring.v1.ClusterAlertState.
+ */
+export declare const ClusterAlertStateSchema: GenEnum<ClusterAlertState>;
+
+/**
+ * ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.
+ *
+ * @generated from enum qdrant.cloud.monitoring.v1.ClusterAlertType
+ */
+export enum ClusterAlertType {
+  /**
+   * The alert type is unspecified.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Disk usage is over the configured utilization threshold.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED = 1;
+   */
+  DISK_OVERUTILIZED = 1,
+
+  /**
+   * Memory usage is over the configured utilization threshold.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED = 2;
+   */
+  MEMORY_OVERUTILIZED = 2,
+
+  /**
+   * The cluster is out of disk.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_OOD = 3;
+   */
+  OOD = 3,
+
+  /**
+   * The cluster is out of memory.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_OOM = 4;
+   */
+  OOM = 4,
+
+  /**
+   * One or more nodes are in recovery mode.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_RECOVERY_MODE = 5;
+   */
+  RECOVERY_MODE = 5,
+
+  /**
+   * The Qdrant cluster is unhealthy.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY = 6;
+   */
+  QDRANT_CLUSTER_UNHEALTHY = 6,
+
+  /**
+   * The cluster has too many collections.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS = 7;
+   */
+  TOO_MANY_COLLECTIONS = 7,
+
+  /**
+   * The Qdrant cluster is being CPU throttled.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED = 8;
+   */
+  QDRANT_CLUSTER_CPU_THROTTLED = 8,
+
+  /**
+   * A Qdrant JWT API key is about to expire.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE = 9;
+   */
+  QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE = 9,
+
+  /**
+   * The cluster version is not covered by the SLA.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA = 10;
+   */
+  CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA = 10,
+
+  /**
+   * The cluster has a disk hotspot.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT = 11;
+   */
+  CLUSTER_DISK_HOTSPOT = 11,
+
+  /**
+   * The cluster has a memory hotspot.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT = 12;
+   */
+  CLUSTER_MEMORY_HOTSPOT = 12,
+
+  /**
+   * The cluster has a CPU hotspot.
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT = 13;
+   */
+  CLUSTER_CPU_HOTSPOT = 13,
+}
+
+/**
+ * Describes the enum qdrant.cloud.monitoring.v1.ClusterAlertType.
+ */
+export declare const ClusterAlertTypeSchema: GenEnum<ClusterAlertType>;
+
+/**
+ * Severity is the tier used by the UI to render badge color and announce severity to
+ * assistive tech. Color alone never conveys severity - clients must render the label.
+ *
+ * @generated from enum qdrant.cloud.monitoring.v1.Severity
+ */
+export enum Severity {
+  /**
+   * Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
+   * there is intentionally no separate UNKNOWN value.
+   *
+   * @generated from enum value: SEVERITY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Informational severity.
+   *
+   * @generated from enum value: SEVERITY_INFO = 1;
+   */
+  INFO = 1,
+
+  /**
+   * Warning severity.
+   *
+   * @generated from enum value: SEVERITY_WARNING = 2;
+   */
+  WARNING = 2,
+
+  /**
+   * Critical severity.
+   *
+   * @generated from enum value: SEVERITY_CRITICAL = 3;
+   */
+  CRITICAL = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.monitoring.v1.Severity.
+ */
+export declare const SeveritySchema: GenEnum<Severity>;
+
+/**
  * MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
  *
  * @generated from service qdrant.cloud.monitoring.v1.MonitoringService
@@ -1284,6 +1598,20 @@ export declare const MonitoringService: GenService<{
     methodKind: "unary";
     input: typeof GetClusterInferenceMetricsRequestSchema;
     output: typeof GetClusterInferenceMetricsResponseSchema;
+  },
+  /**
+   * Lists the alerts for a cluster in the account identified by the given ID.
+   * The optional state filter, when omitted, returns alerts in all states; each
+   * returned alert carries its own state. Sorted by last_firing_at (most recent first).
+   * Required permissions:
+   * - read:clusters
+   *
+   * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.ListClusterAlerts
+   */
+  listClusterAlerts: {
+    methodKind: "unary";
+    input: typeof ListClusterAlertsRequestSchema;
+    output: typeof ListClusterAlertsResponseSchema;
   },
 }>;
 

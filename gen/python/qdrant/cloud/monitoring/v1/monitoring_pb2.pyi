@@ -28,6 +28,36 @@ class InferenceMetricsInterval(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     INFERENCE_METRICS_INTERVAL_DAY: _ClassVar[InferenceMetricsInterval]
     INFERENCE_METRICS_INTERVAL_WEEK: _ClassVar[InferenceMetricsInterval]
     INFERENCE_METRICS_INTERVAL_MONTH: _ClassVar[InferenceMetricsInterval]
+
+class ClusterAlertState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_ALERT_STATE_UNSPECIFIED: _ClassVar[ClusterAlertState]
+    CLUSTER_ALERT_STATE_FIRING: _ClassVar[ClusterAlertState]
+    CLUSTER_ALERT_STATE_RESOLVED: _ClassVar[ClusterAlertState]
+
+class ClusterAlertType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_ALERT_TYPE_UNSPECIFIED: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_OOD: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_OOM: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_RECOVERY_MODE: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: _ClassVar[ClusterAlertType]
+
+class Severity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SEVERITY_UNSPECIFIED: _ClassVar[Severity]
+    SEVERITY_INFO: _ClassVar[Severity]
+    SEVERITY_WARNING: _ClassVar[Severity]
+    SEVERITY_CRITICAL: _ClassVar[Severity]
 AGGREGATOR_UNSPECIFIED: Aggregator
 AGGREGATOR_SUM: Aggregator
 AGGREGATOR_AVG: Aggregator
@@ -37,6 +67,27 @@ INFERENCE_METRICS_INTERVAL_UNSPECIFIED: InferenceMetricsInterval
 INFERENCE_METRICS_INTERVAL_DAY: InferenceMetricsInterval
 INFERENCE_METRICS_INTERVAL_WEEK: InferenceMetricsInterval
 INFERENCE_METRICS_INTERVAL_MONTH: InferenceMetricsInterval
+CLUSTER_ALERT_STATE_UNSPECIFIED: ClusterAlertState
+CLUSTER_ALERT_STATE_FIRING: ClusterAlertState
+CLUSTER_ALERT_STATE_RESOLVED: ClusterAlertState
+CLUSTER_ALERT_TYPE_UNSPECIFIED: ClusterAlertType
+CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: ClusterAlertType
+CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: ClusterAlertType
+CLUSTER_ALERT_TYPE_OOD: ClusterAlertType
+CLUSTER_ALERT_TYPE_OOM: ClusterAlertType
+CLUSTER_ALERT_TYPE_RECOVERY_MODE: ClusterAlertType
+CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: ClusterAlertType
+CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: ClusterAlertType
+CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: ClusterAlertType
+CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: ClusterAlertType
+CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: ClusterAlertType
+CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: ClusterAlertType
+CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: ClusterAlertType
+CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: ClusterAlertType
+SEVERITY_UNSPECIFIED: Severity
+SEVERITY_INFO: Severity
+SEVERITY_WARNING: Severity
+SEVERITY_CRITICAL: Severity
 
 class GetClusterSummaryMetricsRequest(_message.Message):
     __slots__ = ("account_id", "cluster_id")
@@ -241,3 +292,37 @@ class LogEntry(_message.Message):
     timestamp: _timestamp_pb2.Timestamp
     message: str
     def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., message: _Optional[str] = ...) -> None: ...
+
+class ListClusterAlertsRequest(_message.Message):
+    __slots__ = ("account_id", "cluster_id", "state")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    state: ClusterAlertState
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ...) -> None: ...
+
+class ListClusterAlertsResponse(_message.Message):
+    __slots__ = ("alerts",)
+    ALERTS_FIELD_NUMBER: _ClassVar[int]
+    alerts: _containers.RepeatedCompositeFieldContainer[ClusterAlert]
+    def __init__(self, alerts: _Optional[_Iterable[_Union[ClusterAlert, _Mapping]]] = ...) -> None: ...
+
+class ClusterAlert(_message.Message):
+    __slots__ = ("id", "type", "severity", "title", "description", "last_firing_at", "state")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    SEVERITY_FIELD_NUMBER: _ClassVar[int]
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    LAST_FIRING_AT_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    type: ClusterAlertType
+    severity: Severity
+    title: str
+    description: str
+    last_firing_at: _timestamp_pb2.Timestamp
+    state: ClusterAlertState
+    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[ClusterAlertType, str]] = ..., severity: _Optional[_Union[Severity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ...) -> None: ...

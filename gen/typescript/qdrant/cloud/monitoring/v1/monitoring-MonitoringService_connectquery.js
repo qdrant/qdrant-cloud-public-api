@@ -50,3 +50,14 @@ export const getClusterEvents = MonitoringService.method.getClusterEvents;
  * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.GetClusterInferenceMetrics
  */
 export const getClusterInferenceMetrics = MonitoringService.method.getClusterInferenceMetrics;
+
+/**
+ * Lists the alerts for a cluster in the account identified by the given ID.
+ * The optional state filter, when omitted, returns alerts in all states; each
+ * returned alert carries its own state. Sorted by last_firing_at (most recent first).
+ * Required permissions:
+ * - read:clusters
+ *
+ * @generated from rpc qdrant.cloud.monitoring.v1.MonitoringService.ListClusterAlerts
+ */
+export const listClusterAlerts = MonitoringService.method.listClusterAlerts;
