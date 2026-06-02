@@ -40,6 +40,11 @@ class MonitoringServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.FromString,
                 _registered_method=True)
+        self.ListClusterAlerts = channel.unary_unary(
+                '/qdrant.cloud.monitoring.v1.MonitoringService/ListClusterAlerts',
+                request_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsResponse.FromString,
+                _registered_method=True)
 
 
 class MonitoringServiceServicer(object):
@@ -93,6 +98,16 @@ class MonitoringServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListClusterAlerts(self, request, context):
+        """Lists the alerts for a cluster in the account identified by the given ID.
+        Sorted by last_firing_at (most recent first).
+        Required permissions:
+        - read:clusters
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MonitoringServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -120,6 +135,11 @@ def add_MonitoringServiceServicer_to_server(servicer, server):
                     servicer.GetClusterInferenceMetrics,
                     request_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.SerializeToString,
+            ),
+            'ListClusterAlerts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListClusterAlerts,
+                    request_deserializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -258,6 +278,33 @@ class MonitoringService(object):
             '/qdrant.cloud.monitoring.v1.MonitoringService/GetClusterInferenceMetrics',
             qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsRequest.SerializeToString,
             qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.GetClusterInferenceMetricsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListClusterAlerts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.monitoring.v1.MonitoringService/ListClusterAlerts',
+            qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_monitoring_dot_v1_dot_monitoring__pb2.ListClusterAlertsResponse.FromString,
             options,
             channel_credentials,
             insecure,

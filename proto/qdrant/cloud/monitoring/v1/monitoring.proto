@@ -88,6 +88,21 @@ service MonitoringService {
       field_expression: "cluster_id"
     };
   }
+  // Lists the alerts for a cluster in the account identified by the given ID.
+  // Sorted by last_firing_at (most recent first).
+  // Required permissions:
+  // - read:clusters
+  rpc ListClusterAlerts(ListClusterAlertsRequest) returns (ListClusterAlertsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/alerts"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+  }
 }
 
 // GetClusterSummaryMetricsRequest is the request for the GetClusterSummaryMetrics function
@@ -345,6 +360,47 @@ message LogEntry {
   string message = 2 [(buf.validate.field).string.min_len = 1];
 }
 
+// ListClusterAlertsRequest is the request for the ListClusterAlerts function
+message ListClusterAlertsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the cluster (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional alert-state filter. If omitted (empty), alerts in ALL states are
+  // returned; if set, only alerts in that state are returned.
+  optional ClusterAlertState state = 3;
+}
+
+// ListClusterAlertsResponse is the response from the ListClusterAlerts function
+message ListClusterAlertsResponse {
+  // The alerts for the cluster, sorted by last_firing_at (descending) - most recent first.
+  repeated ClusterAlert alerts = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// ClusterAlert is a single alert instance for a cluster.
+message ClusterAlert {
+  // Stable identifier for this firing instance (in GUID format).
+  // Re-firing a previously-resolved alert produces a new ID.
+  string id = 1;
+  // The category of alert.
+  ClusterAlertType type = 2;
+  // Severity tier, derived server-side from the alert type.
+  ClusterAlertSeverity severity = 3;
+  // Human-readable title (English, at most 80 characters).
+  string title = 4;
+  // Human-readable description (English, at most 300 characters).
+  string description = 5;
+  // UTC timestamp of the most recent firing observation for this instance.
+  google.protobuf.Timestamp last_firing_at = 6;
+  // The state of this alert. Always populated so callers can tell each row's
+  // state apart when the request applies no state filter.
+  ClusterAlertState state = 7;
+}
+
 // Aggregator defines how metrics should be aggregated over time.
 enum Aggregator {
   // Unspecified aggregation function.
@@ -369,4 +425,61 @@ enum InferenceMetricsInterval {
   INFERENCE_METRICS_INTERVAL_WEEK = 2;
   // Buckets are aggregated per month.
   INFERENCE_METRICS_INTERVAL_MONTH = 3;
+}
+
+// ClusterAlertState mirrors the backend state of a cluster alert. It is used both as
+// the optional request-side filter AND echoed per row on the ClusterAlert response.
+enum ClusterAlertState {
+  // The alert state is unspecified.
+  CLUSTER_ALERT_STATE_UNSPECIFIED = 0;
+  // The alert is currently firing.
+  CLUSTER_ALERT_STATE_FIRING = 1;
+  // The alert has been resolved by the backend.
+  CLUSTER_ALERT_STATE_RESOLVED = 2;
+}
+
+// ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.
+enum ClusterAlertType {
+  // The alert type is unspecified.
+  CLUSTER_ALERT_TYPE_UNSPECIFIED = 0;
+  // Disk usage is over the configured utilization threshold.
+  CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED = 1;
+  // Memory usage is over the configured utilization threshold.
+  CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED = 2;
+  // The cluster is out of disk.
+  CLUSTER_ALERT_TYPE_OOD = 3;
+  // The cluster is out of memory.
+  CLUSTER_ALERT_TYPE_OOM = 4;
+  // One or more nodes are in recovery mode.
+  CLUSTER_ALERT_TYPE_RECOVERY_MODE = 5;
+  // The Qdrant cluster is unhealthy.
+  CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY = 6;
+  // The cluster has too many collections.
+  CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS = 7;
+  // The Qdrant cluster is being CPU throttled.
+  CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED = 8;
+  // A Qdrant JWT API key is about to expire.
+  CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE = 9;
+  // The cluster version is not covered by the SLA.
+  CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA = 10;
+  // The cluster has a disk hotspot.
+  CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT = 11;
+  // The cluster has a memory hotspot.
+  CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT = 12;
+  // The cluster has a CPU hotspot.
+  CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT = 13;
+}
+
+// ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to
+// assistive tech. Color alone never conveys severity - clients must render the label.
+enum ClusterAlertSeverity {
+  // Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
+  // there is intentionally no separate UNKNOWN value.
+  CLUSTER_ALERT_SEVERITY_UNSPECIFIED = 0;
+  // Informational severity.
+  CLUSTER_ALERT_SEVERITY_INFO = 1;
+  // Warning severity.
+  CLUSTER_ALERT_SEVERITY_WARNING = 2;
+  // Critical severity.
+  CLUSTER_ALERT_SEVERITY_CRITICAL = 3;
 }

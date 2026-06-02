@@ -16,6 +16,58 @@
     "application/json"
   ],
   "paths": {
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/alerts": {
+      "get": {
+        "summary": "Lists the alerts for a cluster in the account identified by the given ID.\nSorted by last_firing_at (most recent first).\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_ListClusterAlerts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListClusterAlertsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "description": "Optional alert-state filter. If omitted (empty), alerts in ALL states are\nreturned; if set, only alerts in that state are returned.\n\n - CLUSTER_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - CLUSTER_ALERT_STATE_FIRING: The alert is currently firing.\n - CLUSTER_ALERT_STATE_RESOLVED: The alert has been resolved by the backend.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLUSTER_ALERT_STATE_UNSPECIFIED",
+              "CLUSTER_ALERT_STATE_FIRING",
+              "CLUSTER_ALERT_STATE_RESOLVED"
+            ],
+            "default": "CLUSTER_ALERT_STATE_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
     "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/events": {
       "get": {
         "summary": "Gets the events of a cluster in the account identified by the given ID.\nThis method is currently available only for clusters running in hybrid cloud environments.\nRequired permissions:\n- read:clusters",
@@ -353,6 +405,83 @@
       "default": "AGGREGATOR_UNSPECIFIED",
       "description": "Aggregator defines how metrics should be aggregated over time.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function."
     },
+    "v1ClusterAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier for this firing instance (in GUID format).\nRe-firing a previously-resolved alert produces a new ID."
+        },
+        "type": {
+          "$ref": "#/definitions/v1ClusterAlertType",
+          "description": "The category of alert."
+        },
+        "severity": {
+          "$ref": "#/definitions/v1ClusterAlertSeverity",
+          "description": "Severity tier, derived server-side from the alert type."
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable title (English, at most 80 characters)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description (English, at most 300 characters)."
+        },
+        "lastFiringAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the most recent firing observation for this instance."
+        },
+        "state": {
+          "$ref": "#/definitions/v1ClusterAlertState",
+          "description": "The state of this alert. Always populated so callers can tell each row's\nstate apart when the request applies no state filter."
+        }
+      },
+      "description": "ClusterAlert is a single alert instance for a cluster."
+    },
+    "v1ClusterAlertSeverity": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+        "CLUSTER_ALERT_SEVERITY_INFO",
+        "CLUSTER_ALERT_SEVERITY_WARNING",
+        "CLUSTER_ALERT_SEVERITY_CRITICAL"
+      ],
+      "default": "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+      "description": "ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to\nassistive tech. Color alone never conveys severity - clients must render the label.\n\n - CLUSTER_ALERT_SEVERITY_UNSPECIFIED: Default / fallback tier. Also what an alert type that is not yet mapped resolves to;\nthere is intentionally no separate UNKNOWN value.\n - CLUSTER_ALERT_SEVERITY_INFO: Informational severity.\n - CLUSTER_ALERT_SEVERITY_WARNING: Warning severity.\n - CLUSTER_ALERT_SEVERITY_CRITICAL: Critical severity."
+    },
+    "v1ClusterAlertState": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_STATE_UNSPECIFIED",
+        "CLUSTER_ALERT_STATE_FIRING",
+        "CLUSTER_ALERT_STATE_RESOLVED"
+      ],
+      "default": "CLUSTER_ALERT_STATE_UNSPECIFIED",
+      "description": "ClusterAlertState mirrors the backend state of a cluster alert. It is used both as\nthe optional request-side filter AND echoed per row on the ClusterAlert response.\n\n - CLUSTER_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - CLUSTER_ALERT_STATE_FIRING: The alert is currently firing.\n - CLUSTER_ALERT_STATE_RESOLVED: The alert has been resolved by the backend."
+    },
+    "v1ClusterAlertType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_TYPE_UNSPECIFIED",
+        "CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED",
+        "CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED",
+        "CLUSTER_ALERT_TYPE_OOD",
+        "CLUSTER_ALERT_TYPE_OOM",
+        "CLUSTER_ALERT_TYPE_RECOVERY_MODE",
+        "CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY",
+        "CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS",
+        "CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED",
+        "CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE",
+        "CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA",
+        "CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT",
+        "CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT",
+        "CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT"
+      ],
+      "default": "CLUSTER_ALERT_TYPE_UNSPECIFIED",
+      "description": "ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.\n\n - CLUSTER_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: Disk usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: Memory usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_OOD: The cluster is out of disk.\n - CLUSTER_ALERT_TYPE_OOM: The cluster is out of memory.\n - CLUSTER_ALERT_TYPE_RECOVERY_MODE: One or more nodes are in recovery mode.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: The Qdrant cluster is unhealthy.\n - CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: The cluster has too many collections.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: The Qdrant cluster is being CPU throttled.\n - CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: A Qdrant JWT API key is about to expire.\n - CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: The cluster version is not covered by the SLA.\n - CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: The cluster has a disk hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: The cluster has a memory hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: The cluster has a CPU hotspot."
+    },
     "v1ClusterInferenceModelMetrics": {
       "type": "object",
       "properties": {
@@ -680,6 +809,20 @@
         }
       },
       "description": "IntervalAverage represents the average value of a metric over a specific time interval."
+    },
+    "v1ListClusterAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterAlert"
+          },
+          "description": "The alerts for the cluster, sorted by last_firing_at (descending) - most recent first."
+        }
+      },
+      "title": "ListClusterAlertsResponse is the response from the ListClusterAlerts function"
     },
     "v1LogEntry": {
       "type": "object",
