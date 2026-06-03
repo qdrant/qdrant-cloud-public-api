@@ -739,6 +739,7 @@ message User {
   // You should be member of the account when updating.
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
   // The onboarding status of the user on the platform.
+  // This is a read-only field.
   OnboardingStatus onboarding_status = 7 [(buf.validate.field).enum.defined_only = true];
 }
 

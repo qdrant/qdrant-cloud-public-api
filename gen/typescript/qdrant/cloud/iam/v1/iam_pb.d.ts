@@ -1105,6 +1105,7 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
 
   /**
    * The onboarding status of the user on the platform.
+   * This is a read-only field.
    *
    * @generated from field: qdrant.cloud.iam.v1.OnboardingStatus onboarding_status = 7;
    */

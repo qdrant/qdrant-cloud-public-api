@@ -2063,6 +2063,7 @@ type User struct {
 	// You should be member of the account when updating.
 	DefaultAccountId string `protobuf:"bytes,6,opt,name=default_account_id,json=defaultAccountId,proto3" json:"default_account_id,omitempty"`
 	// The onboarding status of the user on the platform.
+	// This is a read-only field.
 	OnboardingStatus OnboardingStatus `protobuf:"varint,7,opt,name=onboarding_status,json=onboardingStatus,proto3,enum=qdrant.cloud.iam.v1.OnboardingStatus" json:"onboarding_status,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache

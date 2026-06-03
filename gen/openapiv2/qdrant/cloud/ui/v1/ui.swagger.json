@@ -218,7 +218,7 @@
         },
         "onboardingStatus": {
           "$ref": "#/definitions/v1OnboardingStatus",
-          "description": "The onboarding status of the user on the platform."
+          "description": "The onboarding status of the user on the platform.\nThis is a read-only field."
         }
       },
       "description": "A User represents a user in the Qdrant cloud."
