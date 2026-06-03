@@ -738,6 +738,8 @@ message User {
   // The default account ID of the user (in GUID format).
   // You should be member of the account when updating.
   string default_account_id = 6 [(buf.validate.field).string = {uuid: true}];
+  // The onboarding status of the user on the platform.
+  OnboardingStatus onboarding_status = 7 [(buf.validate.field).enum.defined_only = true];
 }
 
 // UserStatus defines the possible statuses of a user.
@@ -750,6 +752,16 @@ enum UserStatus {
   USER_STATUS_BLOCKED = 2;
   // The user account has been marked for deletion or is deleted.
   USER_STATUS_DELETED = 3;
+}
+
+// OnboardingStatus defines the possible onboarding statuses of a user on the platform.
+enum OnboardingStatus {
+  // Default, unspecified status.
+  ONBOARDING_STATUS_UNSPECIFIED = 0;
+  // The user has not completed onboarding on the platform.
+  ONBOARDING_STATUS_PENDING = 1;
+  // The user has completed onboarding on the platform.
+  ONBOARDING_STATUS_COMPLETED = 2;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

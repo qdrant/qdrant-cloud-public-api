@@ -23,6 +23,12 @@ class UserStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     USER_STATUS_BLOCKED: _ClassVar[UserStatus]
     USER_STATUS_DELETED: _ClassVar[UserStatus]
 
+class OnboardingStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ONBOARDING_STATUS_UNSPECIFIED: _ClassVar[OnboardingStatus]
+    ONBOARDING_STATUS_PENDING: _ClassVar[OnboardingStatus]
+    ONBOARDING_STATUS_COMPLETED: _ClassVar[OnboardingStatus]
+
 class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ROLE_TYPE_UNSPECIFIED: _ClassVar[RoleType]
@@ -53,6 +59,9 @@ USER_STATUS_UNSPECIFIED: UserStatus
 USER_STATUS_ACTIVE: UserStatus
 USER_STATUS_BLOCKED: UserStatus
 USER_STATUS_DELETED: UserStatus
+ONBOARDING_STATUS_UNSPECIFIED: OnboardingStatus
+ONBOARDING_STATUS_PENDING: OnboardingStatus
+ONBOARDING_STATUS_COMPLETED: OnboardingStatus
 ROLE_TYPE_UNSPECIFIED: RoleType
 ROLE_TYPE_SYSTEM: RoleType
 ROLE_TYPE_CUSTOM: RoleType
@@ -288,20 +297,22 @@ class AssignUserRolesResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id")
+    __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id", "onboarding_status")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DEFAULT_ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ONBOARDING_STATUS_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
     email: str
     status: UserStatus
     default_account_id: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ...) -> None: ...
+    onboarding_status: OnboardingStatus
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ..., onboarding_status: _Optional[_Union[OnboardingStatus, str]] = ...) -> None: ...
 
 class Permission(_message.Message):
     __slots__ = ("value", "category")

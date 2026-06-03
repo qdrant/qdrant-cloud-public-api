@@ -1102,6 +1102,13 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * @generated from field: string default_account_id = 6;
    */
   defaultAccountId: string;
+
+  /**
+   * The onboarding status of the user on the platform.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.OnboardingStatus onboarding_status = 7;
+   */
+  onboardingStatus: OnboardingStatus;
 };
 
 export declare type UserValid = User;
@@ -1419,6 +1426,39 @@ export enum UserStatus {
  * Describes the enum qdrant.cloud.iam.v1.UserStatus.
  */
 export declare const UserStatusSchema: GenEnum<UserStatus>;
+
+/**
+ * OnboardingStatus defines the possible onboarding statuses of a user on the platform.
+ *
+ * @generated from enum qdrant.cloud.iam.v1.OnboardingStatus
+ */
+export enum OnboardingStatus {
+  /**
+   * Default, unspecified status.
+   *
+   * @generated from enum value: ONBOARDING_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The user has not completed onboarding on the platform.
+   *
+   * @generated from enum value: ONBOARDING_STATUS_PENDING = 1;
+   */
+  PENDING = 1,
+
+  /**
+   * The user has completed onboarding on the platform.
+   *
+   * @generated from enum value: ONBOARDING_STATUS_COMPLETED = 2;
+   */
+  COMPLETED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.OnboardingStatus.
+ */
+export declare const OnboardingStatusSchema: GenEnum<OnboardingStatus>;
 
 /**
  * RoleType specified the type of the role
