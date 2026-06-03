@@ -1028,6 +1028,16 @@
       },
       "description": "ListReceivedAccountInvitesResponse is the response from the ListReceivedAccountInvites function."
     },
+    "v1OnboardingStatus": {
+      "type": "string",
+      "enum": [
+        "ONBOARDING_STATUS_UNSPECIFIED",
+        "ONBOARDING_STATUS_PENDING",
+        "ONBOARDING_STATUS_COMPLETED"
+      ],
+      "default": "ONBOARDING_STATUS_UNSPECIFIED",
+      "description": "OnboardingStatus defines the possible onboarding statuses of a user on the platform.\n\n - ONBOARDING_STATUS_UNSPECIFIED: Default, unspecified status.\n - ONBOARDING_STATUS_PENDING: The user has not completed onboarding on the platform.\n - ONBOARDING_STATUS_COMPLETED: The user has completed onboarding on the platform."
+    },
     "v1RejectAccountInviteResponse": {
       "type": "object",
       "properties": {
@@ -1090,6 +1100,10 @@
         "defaultAccountId": {
           "type": "string",
           "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating."
+        },
+        "onboardingStatus": {
+          "$ref": "#/definitions/v1OnboardingStatus",
+          "description": "The onboarding status of the user on the platform.\nThis is a read-only field."
         }
       },
       "description": "A User represents a user in the Qdrant cloud."
