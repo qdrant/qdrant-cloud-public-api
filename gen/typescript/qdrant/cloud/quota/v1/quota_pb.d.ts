@@ -88,7 +88,8 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   accountId: string;
 
   /**
-   * Maximum number of clusters this account is allowed to create (at least 1).
+   * Maximum number of clusters this account is allowed to create.
+   * Returns 0 if the actor is missing the `write:clusters` permission.
    * To get the actual list invoke: `qdrant.cloud.cluster.v1.ClusterService.ListClusters`.
    *
    * @generated from field: uint32 max_clusters = 2;
@@ -96,7 +97,8 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   maxClusters: number;
 
   /**
-   * Maximum number of nodes clusters can be scaled to (at least 1).
+   * Maximum number of nodes clusters can be scaled to.
+   * Returns 0 if the actor is missing the `write:clusters` permission.
    * To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.number_of_nodes`.
    *
    * @generated from field: uint32 max_cluster_nodes = 3;
@@ -104,7 +106,8 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   maxClusterNodes: number;
 
   /**
-   * Maximum number of Database API keys this account can create (for each cluster)(at least 1).
+   * Maximum number of Database API keys this account can create (for each cluster).
+   * Returns 0 if the actor is missing the `read:api_keys` permission.
    * To get the actual list invoke: `qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys`.
    *
    * @generated from field: uint32 max_cluster_database_api_keys = 4;
@@ -112,7 +115,8 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
   maxClusterDatabaseApiKeys: number;
 
   /**
-   * Maximum number of free-tier clusters this account can create (at least 1).
+   * Maximum number of free-tier clusters this account can create.
+   * Returns 0 if the actor is missing the `write:clusters` permission.
    *
    * @generated from field: uint32 max_free_tier_clusters = 5;
    */
