@@ -51,6 +51,12 @@ class ClusterAlertType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: _ClassVar[ClusterAlertType]
     CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: _ClassVar[ClusterAlertType]
     CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE: _ClassVar[ClusterAlertType]
+    CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE: _ClassVar[ClusterAlertType]
 
 class ClusterAlertSeverity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -84,6 +90,12 @@ CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: ClusterAlertType
 CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE: ClusterAlertType
+CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE: ClusterAlertType
 CLUSTER_ALERT_SEVERITY_UNSPECIFIED: ClusterAlertSeverity
 CLUSTER_ALERT_SEVERITY_INFO: ClusterAlertSeverity
 CLUSTER_ALERT_SEVERITY_WARNING: ClusterAlertSeverity
@@ -310,7 +322,7 @@ class ListClusterAlertsResponse(_message.Message):
     def __init__(self, alerts: _Optional[_Iterable[_Union[ClusterAlert, _Mapping]]] = ...) -> None: ...
 
 class ClusterAlert(_message.Message):
-    __slots__ = ("id", "type", "severity", "title", "description", "last_firing_at", "state")
+    __slots__ = ("id", "type", "severity", "title", "description", "last_firing_at", "state", "node_name", "raw_message")
     ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
     SEVERITY_FIELD_NUMBER: _ClassVar[int]
@@ -318,6 +330,8 @@ class ClusterAlert(_message.Message):
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     LAST_FIRING_AT_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    NODE_NAME_FIELD_NUMBER: _ClassVar[int]
+    RAW_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     id: str
     type: ClusterAlertType
     severity: ClusterAlertSeverity
@@ -325,4 +339,6 @@ class ClusterAlert(_message.Message):
     description: str
     last_firing_at: _timestamp_pb2.Timestamp
     state: ClusterAlertState
-    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[ClusterAlertType, str]] = ..., severity: _Optional[_Union[ClusterAlertSeverity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ...) -> None: ...
+    node_name: str
+    raw_message: str
+    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[ClusterAlertType, str]] = ..., severity: _Optional[_Union[ClusterAlertSeverity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[ClusterAlertState, str]] = ..., node_name: _Optional[str] = ..., raw_message: _Optional[str] = ...) -> None: ...

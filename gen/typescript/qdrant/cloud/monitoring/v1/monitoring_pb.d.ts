@@ -1248,6 +1248,22 @@ export declare type ClusterAlert = Message<"qdrant.cloud.monitoring.v1.ClusterAl
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterAlertState state = 7;
    */
   state: ClusterAlertState;
+
+  /**
+   * The name of the node this alert is attributed to (matches ClusterNodeInfo.name).
+   * Absent for cluster-level alerts; at most one node per alert.
+   *
+   * @generated from field: optional string node_name = 8;
+   */
+  nodeName?: string | undefined;
+
+  /**
+   * The raw infrastructure message behind this alert (at most 4096 characters).
+   * Only populated for CLUSTER_ALERT_TYPE_NODE_* alerts.
+   *
+   * @generated from field: optional string raw_message = 9;
+   */
+  rawMessage?: string | undefined;
 };
 
 export declare type ClusterAlertValid = ClusterAlert;
@@ -1482,6 +1498,48 @@ export enum ClusterAlertType {
    * @generated from enum value: CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT = 13;
    */
   CLUSTER_CPU_HOTSPOT = 13,
+
+  /**
+   * A node cannot be scheduled due to insufficient CPU or memory (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES = 14;
+   */
+  NODE_INSUFFICIENT_RESOURCES = 14,
+
+  /**
+   * A node's storage volume cannot be provisioned, attached or mounted (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE = 15;
+   */
+  NODE_STORAGE_UNAVAILABLE = 15,
+
+  /**
+   * A node references a missing secret or credential (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET = 16;
+   */
+  NODE_MISSING_SECRET = 16,
+
+  /**
+   * A node cannot be scheduled due to selector/toleration/affinity config (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH = 17;
+   */
+  NODE_SCHEDULING_CONFIG_MISMATCH = 17,
+
+  /**
+   * A node's container image cannot be pulled (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE = 18;
+   */
+  NODE_IMAGE_PULL_FAILURE = 18,
+
+  /**
+   * A node scheduling failure with no more specific category; see raw_message (Hybrid Cloud).
+   *
+   * @generated from enum value: CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE = 19;
+   */
+  NODE_SCHEDULING_FAILURE = 19,
 }
 
 /**
