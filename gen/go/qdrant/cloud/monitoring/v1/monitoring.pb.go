@@ -230,6 +230,18 @@ const (
 	ClusterAlertType_CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT ClusterAlertType = 12
 	// The cluster has a CPU hotspot.
 	ClusterAlertType_CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT ClusterAlertType = 13
+	// A node cannot be scheduled due to insufficient CPU or memory (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES ClusterAlertType = 14
+	// A node's storage volume cannot be provisioned, attached or mounted (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE ClusterAlertType = 15
+	// A node references a missing secret or credential (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET ClusterAlertType = 16
+	// A node cannot be scheduled due to selector/toleration/affinity config (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH ClusterAlertType = 17
+	// A node's container image cannot be pulled (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE ClusterAlertType = 18
+	// A node scheduling failure with no more specific category; see raw_message (Hybrid Cloud).
+	ClusterAlertType_CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE ClusterAlertType = 19
 )
 
 // Enum value maps for ClusterAlertType.
@@ -249,6 +261,12 @@ var (
 		11: "CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT",
 		12: "CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT",
 		13: "CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT",
+		14: "CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES",
+		15: "CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE",
+		16: "CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET",
+		17: "CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH",
+		18: "CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE",
+		19: "CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE",
 	}
 	ClusterAlertType_value = map[string]int32{
 		"CLUSTER_ALERT_TYPE_UNSPECIFIED":                           0,
@@ -265,6 +283,12 @@ var (
 		"CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT":                  11,
 		"CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT":                12,
 		"CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT":                   13,
+		"CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES":           14,
+		"CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE":              15,
+		"CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET":                   16,
+		"CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH":       17,
+		"CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE":               18,
+		"CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE":               19,
 	}
 )
 
@@ -1771,7 +1795,13 @@ type ClusterAlert struct {
 	LastFiringAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_firing_at,json=lastFiringAt,proto3" json:"last_firing_at,omitempty"`
 	// The state of this alert. Always populated so callers can tell each row's
 	// state apart when the request applies no state filter.
-	State         ClusterAlertState `protobuf:"varint,7,opt,name=state,proto3,enum=qdrant.cloud.monitoring.v1.ClusterAlertState" json:"state,omitempty"`
+	State ClusterAlertState `protobuf:"varint,7,opt,name=state,proto3,enum=qdrant.cloud.monitoring.v1.ClusterAlertState" json:"state,omitempty"`
+	// The name of the node this alert is attributed to (matches ClusterNodeInfo.name).
+	// Absent for cluster-level alerts; at most one node per alert.
+	NodeName *string `protobuf:"bytes,8,opt,name=node_name,json=nodeName,proto3,oneof" json:"node_name,omitempty"`
+	// The raw infrastructure message behind this alert (at most 4096 characters).
+	// Only populated for CLUSTER_ALERT_TYPE_NODE_* alerts.
+	RawMessage    *string `protobuf:"bytes,9,opt,name=raw_message,json=rawMessage,proto3,oneof" json:"raw_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1853,6 +1883,20 @@ func (x *ClusterAlert) GetState() ClusterAlertState {
 		return x.State
 	}
 	return ClusterAlertState_CLUSTER_ALERT_STATE_UNSPECIFIED
+}
+
+func (x *ClusterAlert) GetNodeName() string {
+	if x != nil && x.NodeName != nil {
+		return *x.NodeName
+	}
+	return ""
+}
+
+func (x *ClusterAlert) GetRawMessage() string {
+	if x != nil && x.RawMessage != nil {
+		return *x.RawMessage
+	}
+	return ""
 }
 
 var File_qdrant_cloud_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
@@ -1985,7 +2029,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05state\x18\x03 \x01(\x0e2-.qdrant.cloud.monitoring.v1.ClusterAlertStateH\x00R\x05state\x88\x01\x01B\b\n" +
 	"\x06_state\"]\n" +
 	"\x19ListClusterAlertsResponse\x12@\n" +
-	"\x06alerts\x18\x01 \x03(\v2(.qdrant.cloud.monitoring.v1.ClusterAlertR\x06alerts\"\xed\x02\n" +
+	"\x06alerts\x18\x01 \x03(\v2(.qdrant.cloud.monitoring.v1.ClusterAlertR\x06alerts\"\xd3\x03\n" +
 	"\fClusterAlert\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12@\n" +
 	"\x04type\x18\x02 \x01(\x0e2,.qdrant.cloud.monitoring.v1.ClusterAlertTypeR\x04type\x12L\n" +
@@ -1993,7 +2037,13 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12@\n" +
 	"\x0elast_firing_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\flastFiringAt\x12C\n" +
-	"\x05state\x18\a \x01(\x0e2-.qdrant.cloud.monitoring.v1.ClusterAlertStateR\x05state*x\n" +
+	"\x05state\x18\a \x01(\x0e2-.qdrant.cloud.monitoring.v1.ClusterAlertStateR\x05state\x12 \n" +
+	"\tnode_name\x18\b \x01(\tH\x00R\bnodeName\x88\x01\x01\x12$\n" +
+	"\vraw_message\x18\t \x01(\tH\x01R\n" +
+	"rawMessage\x88\x01\x01B\f\n" +
+	"\n" +
+	"_node_nameB\x0e\n" +
+	"\f_raw_message*x\n" +
 	"\n" +
 	"Aggregator\x12\x1a\n" +
 	"\x16AGGREGATOR_UNSPECIFIED\x10\x00\x12\x12\n" +
@@ -2009,7 +2059,7 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x11ClusterAlertState\x12#\n" +
 	"\x1fCLUSTER_ALERT_STATE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aCLUSTER_ALERT_STATE_FIRING\x10\x01\x12 \n" +
-	"\x1cCLUSTER_ALERT_STATE_RESOLVED\x10\x02*\xfe\x04\n" +
+	"\x1cCLUSTER_ALERT_STATE_RESOLVED\x10\x02*\xa7\a\n" +
 	"\x10ClusterAlertType\x12\"\n" +
 	"\x1eCLUSTER_ALERT_TYPE_UNSPECIFIED\x10\x00\x12(\n" +
 	"$CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED\x10\x01\x12*\n" +
@@ -2025,7 +2075,13 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x12+\n" +
 	"'CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT\x10\v\x12-\n" +
 	")CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT\x10\f\x12*\n" +
-	"&CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT\x10\r*\xa8\x01\n" +
+	"&CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT\x10\r\x122\n" +
+	".CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES\x10\x0e\x12/\n" +
+	"+CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE\x10\x0f\x12*\n" +
+	"&CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET\x10\x10\x126\n" +
+	"2CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH\x10\x11\x12.\n" +
+	"*CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE\x10\x12\x12.\n" +
+	"*CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE\x10\x13*\xa8\x01\n" +
 	"\x14ClusterAlertSeverity\x12&\n" +
 	"\"CLUSTER_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_ALERT_SEVERITY_INFO\x10\x01\x12\"\n" +
@@ -2186,6 +2242,7 @@ func file_qdrant_cloud_monitoring_v1_monitoring_proto_init() {
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[8].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[11].OneofWrappers = []any{}
 	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[18].OneofWrappers = []any{}
+	file_qdrant_cloud_monitoring_v1_monitoring_proto_msgTypes[20].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
