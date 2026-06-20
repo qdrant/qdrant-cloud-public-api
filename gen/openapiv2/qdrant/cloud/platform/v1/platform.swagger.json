@@ -61,6 +61,65 @@
         ]
       }
     },
+    "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/eligible-region": {
+      "get": {
+        "summary": "Gets an eligible cloud provider region for deploying a workload in the account\nidentified by the given ID, for the given cloud provider (and optional region hint).\nUsed to resolve where a workload (e.g. a serverless space) can be placed when the\ncaller does not pin an exact region.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "PlatformService_GetEligibleCloudProviderRegion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetEligibleCloudProviderRegionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "regionId",
+            "description": "An optional region hint. When set, an eligible region is resolved within the given\nregion; when empty, an eligible region is selected for the provider.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "supportedMode",
+            "description": "An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).\nIf not specified, the default supported mode is used.\nThis is an optional field.\n\n - PLATFORM_MODE_UNSPECIFIED: Platform mode mode unspecified\n - PLATFORM_MODE_DEDICATED_CLUSTERS: Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.\nSee qdrant.cloud.cluster.v1.ClusterService for more information.\n - PLATFORM_MODE_SERVERLESS_SPACES: Platform mode serverless; the Qdrant serverless spaces infrastructure is available.\nSee qdrant.cloud.serverless.space.v1.SpaceService for more information.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PLATFORM_MODE_UNSPECIFIED",
+              "PLATFORM_MODE_DEDICATED_CLUSTERS",
+              "PLATFORM_MODE_SERVERLESS_SPACES"
+            ],
+            "default": "PLATFORM_MODE_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "PlatformService"
+        ]
+      }
+    },
     "/api/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
       "get": {
         "summary": "Lists all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)\nConditional permissions:\n- read:hybrid_cloud_environments OR read:clusters\n  One of these permissions is required when the specified cloud_provider_id is \"hybrid\".",
@@ -443,6 +502,16 @@
         }
       },
       "description": "GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function."
+    },
+    "v1GetEligibleCloudProviderRegionResponse": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/definitions/v1CloudProviderRegion",
+          "description": "The eligible cloud provider region."
+        }
+      },
+      "description": "GetEligibleCloudProviderRegionResponse is the response from the GetEligibleCloudProviderRegion function."
     },
     "v1GetGlobalCloudProviderRegionResponse": {
       "type": "object",

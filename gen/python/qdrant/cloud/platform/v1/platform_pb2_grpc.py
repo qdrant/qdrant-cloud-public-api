@@ -45,6 +45,11 @@ class PlatformServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
                 _registered_method=True)
+        self.GetEligibleCloudProviderRegion = channel.unary_unary(
+                '/qdrant.cloud.platform.v1.PlatformService/GetEligibleCloudProviderRegion',
+                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionResponse.FromString,
+                _registered_method=True)
 
 
 class PlatformServiceServicer(object):
@@ -108,6 +113,18 @@ class PlatformServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetEligibleCloudProviderRegion(self, request, context):
+        """Gets an eligible cloud provider region for deploying a workload in the account
+        identified by the given ID, for the given cloud provider (and optional region hint).
+        Used to resolve where a workload (e.g. a serverless space) can be placed when the
+        caller does not pin an exact region.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PlatformServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -140,6 +157,11 @@ def add_PlatformServiceServicer_to_server(servicer, server):
                     servicer.GetCloudProviderRegion,
                     request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.SerializeToString,
+            ),
+            'GetEligibleCloudProviderRegion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetEligibleCloudProviderRegion,
+                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -305,6 +327,33 @@ class PlatformService(object):
             '/qdrant.cloud.platform.v1.PlatformService/GetCloudProviderRegion',
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
             qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetEligibleCloudProviderRegion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.platform.v1.PlatformService/GetEligibleCloudProviderRegion',
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionRequest.SerializeToString,
+            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetEligibleCloudProviderRegionResponse.FromString,
             options,
             channel_credentials,
             insecure,

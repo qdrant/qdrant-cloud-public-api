@@ -25,6 +25,7 @@ const (
 	PlatformService_GetGlobalCloudProviderRegion_FullMethodName   = "/qdrant.cloud.platform.v1.PlatformService/GetGlobalCloudProviderRegion"
 	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
 	PlatformService_GetCloudProviderRegion_FullMethodName         = "/qdrant.cloud.platform.v1.PlatformService/GetCloudProviderRegion"
+	PlatformService_GetEligibleCloudProviderRegion_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/GetEligibleCloudProviderRegion"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
@@ -60,6 +61,13 @@ type PlatformServiceClient interface {
 	//   - read:hybrid_cloud_environments OR read:clusters
 	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(ctx context.Context, in *GetCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetCloudProviderRegionResponse, error)
+	// Gets an eligible cloud provider region for deploying a workload in the account
+	// identified by the given ID, for the given cloud provider (and optional region hint).
+	// Used to resolve where a workload (e.g. a serverless space) can be placed when the
+	// caller does not pin an exact region.
+	// Required permissions:
+	// - None (authenticated only)
+	GetEligibleCloudProviderRegion(ctx context.Context, in *GetEligibleCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetEligibleCloudProviderRegionResponse, error)
 }
 
 type platformServiceClient struct {
@@ -130,6 +138,16 @@ func (c *platformServiceClient) GetCloudProviderRegion(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *platformServiceClient) GetEligibleCloudProviderRegion(ctx context.Context, in *GetEligibleCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetEligibleCloudProviderRegionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetEligibleCloudProviderRegionResponse)
+	err := c.cc.Invoke(ctx, PlatformService_GetEligibleCloudProviderRegion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlatformServiceServer is the server API for PlatformService service.
 // All implementations must embed UnimplementedPlatformServiceServer
 // for forward compatibility.
@@ -163,6 +181,13 @@ type PlatformServiceServer interface {
 	//   - read:hybrid_cloud_environments OR read:clusters
 	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error)
+	// Gets an eligible cloud provider region for deploying a workload in the account
+	// identified by the given ID, for the given cloud provider (and optional region hint).
+	// Used to resolve where a workload (e.g. a serverless space) can be placed when the
+	// caller does not pin an exact region.
+	// Required permissions:
+	// - None (authenticated only)
+	GetEligibleCloudProviderRegion(context.Context, *GetEligibleCloudProviderRegionRequest) (*GetEligibleCloudProviderRegionResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
 
@@ -190,6 +215,9 @@ func (UnimplementedPlatformServiceServer) ListCloudProviderRegions(context.Conte
 }
 func (UnimplementedPlatformServiceServer) GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCloudProviderRegion not implemented")
+}
+func (UnimplementedPlatformServiceServer) GetEligibleCloudProviderRegion(context.Context, *GetEligibleCloudProviderRegionRequest) (*GetEligibleCloudProviderRegionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetEligibleCloudProviderRegion not implemented")
 }
 func (UnimplementedPlatformServiceServer) mustEmbedUnimplementedPlatformServiceServer() {}
 func (UnimplementedPlatformServiceServer) testEmbeddedByValue()                         {}
@@ -320,6 +348,24 @@ func _PlatformService_GetCloudProviderRegion_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlatformService_GetEligibleCloudProviderRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEligibleCloudProviderRegionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformServiceServer).GetEligibleCloudProviderRegion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformService_GetEligibleCloudProviderRegion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformServiceServer).GetEligibleCloudProviderRegion(ctx, req.(*GetEligibleCloudProviderRegionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PlatformService_ServiceDesc is the grpc.ServiceDesc for PlatformService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +396,10 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCloudProviderRegion",
 			Handler:    _PlatformService_GetCloudProviderRegion_Handler,
+		},
+		{
+			MethodName: "GetEligibleCloudProviderRegion",
+			Handler:    _PlatformService_GetEligibleCloudProviderRegion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

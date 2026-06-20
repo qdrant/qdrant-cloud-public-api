@@ -55,3 +55,14 @@ export const listCloudProviderRegions: typeof PlatformService["method"]["listClo
  * @generated from rpc qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion
  */
 export const getCloudProviderRegion: typeof PlatformService["method"]["getCloudProviderRegion"];
+/**
+ * Gets an eligible cloud provider region for deploying a workload in the account
+ * identified by the given ID, for the given cloud provider (and optional region hint).
+ * Used to resolve where a workload (e.g. a serverless space) can be placed when the
+ * caller does not pin an exact region.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.platform.v1.PlatformService.GetEligibleCloudProviderRegion
+ */
+export const getEligibleCloudProviderRegion: typeof PlatformService["method"]["getEligibleCloudProviderRegion"];

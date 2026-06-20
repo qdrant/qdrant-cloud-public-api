@@ -342,6 +342,77 @@ export declare type GetCloudProviderRegionResponseValid = GetCloudProviderRegion
 export declare const GetCloudProviderRegionResponseSchema: GenMessage<GetCloudProviderRegionResponse, {validType: GetCloudProviderRegionResponseValid}>;
 
 /**
+ * GetEligibleCloudProviderRegionRequest is the request for the GetEligibleCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionRequest
+ */
+export declare type GetEligibleCloudProviderRegionRequest = Message<"qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * This is a required field.
+   *
+   * @generated from field: string cloud_provider_id = 2;
+   */
+  cloudProviderId: string;
+
+  /**
+   * An optional region hint. When set, an eligible region is resolved within the given
+   * region; when empty, an eligible region is selected for the provider.
+   * This is an optional field.
+   *
+   * @generated from field: optional string region_id = 3;
+   */
+  regionId?: string | undefined;
+
+  /**
+   * An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
+   * If not specified, the default supported mode is used.
+   * This is an optional field.
+   *
+   * @generated from field: optional qdrant.cloud.platform.v1.PlatformMode supported_mode = 4;
+   */
+  supportedMode?: PlatformMode | undefined;
+};
+
+export declare type GetEligibleCloudProviderRegionRequestValid = GetEligibleCloudProviderRegionRequest;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionRequest.
+ * Use `create(GetEligibleCloudProviderRegionRequestSchema)` to create a new message.
+ */
+export declare const GetEligibleCloudProviderRegionRequestSchema: GenMessage<GetEligibleCloudProviderRegionRequest, {validType: GetEligibleCloudProviderRegionRequestValid}>;
+
+/**
+ * GetEligibleCloudProviderRegionResponse is the response from the GetEligibleCloudProviderRegion function.
+ *
+ * @generated from message qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionResponse
+ */
+export declare type GetEligibleCloudProviderRegionResponse = Message<"qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionResponse"> & {
+  /**
+   * The eligible cloud provider region.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegion region = 1;
+   */
+  region?: CloudProviderRegion | undefined;
+};
+
+export declare type GetEligibleCloudProviderRegionResponseValid = GetEligibleCloudProviderRegionResponse;
+
+/**
+ * Describes the message qdrant.cloud.platform.v1.GetEligibleCloudProviderRegionResponse.
+ * Use `create(GetEligibleCloudProviderRegionResponseSchema)` to create a new message.
+ */
+export declare const GetEligibleCloudProviderRegionResponseSchema: GenMessage<GetEligibleCloudProviderRegionResponse, {validType: GetEligibleCloudProviderRegionResponseValid}>;
+
+/**
  * CloudProvider represents a cloud provider identifier and name.
  *
  * @generated from message qdrant.cloud.platform.v1.CloudProvider
@@ -691,6 +762,21 @@ export declare const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof GetCloudProviderRegionRequestSchema;
     output: typeof GetCloudProviderRegionResponseSchema;
+  },
+  /**
+   * Gets an eligible cloud provider region for deploying a workload in the account
+   * identified by the given ID, for the given cloud provider (and optional region hint).
+   * Used to resolve where a workload (e.g. a serverless space) can be placed when the
+   * caller does not pin an exact region.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.platform.v1.PlatformService.GetEligibleCloudProviderRegion
+   */
+  getEligibleCloudProviderRegion: {
+    methodKind: "unary";
+    input: typeof GetEligibleCloudProviderRegionRequestSchema;
+    output: typeof GetEligibleCloudProviderRegionResponseSchema;
   },
 }>;
 

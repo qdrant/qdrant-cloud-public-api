@@ -117,6 +117,24 @@ class GetCloudProviderRegionResponse(_message.Message):
     region: CloudProviderRegion
     def __init__(self, region: _Optional[_Union[CloudProviderRegion, _Mapping]] = ...) -> None: ...
 
+class GetEligibleCloudProviderRegionRequest(_message.Message):
+    __slots__ = ("account_id", "cloud_provider_id", "region_id", "supported_mode")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    SUPPORTED_MODE_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cloud_provider_id: str
+    region_id: str
+    supported_mode: PlatformMode
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., region_id: _Optional[str] = ..., supported_mode: _Optional[_Union[PlatformMode, str]] = ...) -> None: ...
+
+class GetEligibleCloudProviderRegionResponse(_message.Message):
+    __slots__ = ("region",)
+    REGION_FIELD_NUMBER: _ClassVar[int]
+    region: CloudProviderRegion
+    def __init__(self, region: _Optional[_Union[CloudProviderRegion, _Mapping]] = ...) -> None: ...
+
 class CloudProvider(_message.Message):
     __slots__ = ("id", "name", "free_tier", "available", "supported_modes")
     ID_FIELD_NUMBER: _ClassVar[int]
