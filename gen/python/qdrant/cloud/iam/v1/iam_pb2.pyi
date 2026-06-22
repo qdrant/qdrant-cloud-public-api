@@ -352,6 +352,38 @@ class LogoutUserResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class ListUserMfaMethodsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ListUserMfaMethodsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[UserMfaMethod]
+    def __init__(self, items: _Optional[_Iterable[_Union[UserMfaMethod, _Mapping]]] = ...) -> None: ...
+
+class UpdateUserMfaMethodRequest(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class UpdateUserMfaMethodResponse(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class DeleteUserMfaMethodRequest(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class DeleteUserMfaMethodResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class UserProfile(_message.Message):
     __slots__ = ("given_name", "family_name", "demographics")
     GIVEN_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -383,3 +415,19 @@ class UserConsent(_message.Message):
     last_modified_at: _timestamp_pb2.Timestamp
     is_accepted: bool
     def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status: _Optional[_Union[UserConsentStatus, str]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., is_accepted: _Optional[bool] = ...) -> None: ...
+
+class UserMfaMethod(_message.Message):
+    __slots__ = ("external_id", "type", "created_at", "last_authenticated_at", "last_modified_at", "name")
+    EXTERNAL_ID_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_AUTHENTICATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    external_id: str
+    type: str
+    created_at: _timestamp_pb2.Timestamp
+    last_authenticated_at: _timestamp_pb2.Timestamp
+    last_modified_at: _timestamp_pb2.Timestamp
+    name: str
+    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...

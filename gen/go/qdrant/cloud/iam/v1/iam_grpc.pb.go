@@ -37,6 +37,9 @@ const (
 	IAMService_ListRoleUsers_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/ListRoleUsers"
 	IAMService_AssignUserRoles_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
 	IAMService_LogoutUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/LogoutUser"
+	IAMService_ListUserMfaMethods_FullMethodName       = "/qdrant.cloud.iam.v1.IAMService/ListUserMfaMethods"
+	IAMService_UpdateUserMfaMethod_FullMethodName      = "/qdrant.cloud.iam.v1.IAMService/UpdateUserMfaMethod"
+	IAMService_DeleteUserMfaMethod_FullMethodName      = "/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -121,6 +124,18 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	LogoutUser(ctx context.Context, in *LogoutUserRequest, opts ...grpc.CallOption) (*LogoutUserResponse, error)
+	// Lists the user's multi-factor authentication (MFA) methods.
+	// Required permissions:
+	// - None (authenticated only)
+	ListUserMfaMethods(ctx context.Context, in *ListUserMfaMethodsRequest, opts ...grpc.CallOption) (*ListUserMfaMethodsResponse, error)
+	// Updates a user's multi-factor authentication (MFA) method.
+	// Required permissions:
+	// - None (authenticated only)
+	UpdateUserMfaMethod(ctx context.Context, in *UpdateUserMfaMethodRequest, opts ...grpc.CallOption) (*UpdateUserMfaMethodResponse, error)
+	// Deletes the user's multi-factor authentication (MFA) methods.
+	// Required permissions:
+	// - None (authenticated only)
+	DeleteUserMfaMethod(ctx context.Context, in *DeleteUserMfaMethodRequest, opts ...grpc.CallOption) (*DeleteUserMfaMethodResponse, error)
 }
 
 type iAMServiceClient struct {
@@ -311,6 +326,36 @@ func (c *iAMServiceClient) LogoutUser(ctx context.Context, in *LogoutUserRequest
 	return out, nil
 }
 
+func (c *iAMServiceClient) ListUserMfaMethods(ctx context.Context, in *ListUserMfaMethodsRequest, opts ...grpc.CallOption) (*ListUserMfaMethodsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserMfaMethodsResponse)
+	err := c.cc.Invoke(ctx, IAMService_ListUserMfaMethods_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) UpdateUserMfaMethod(ctx context.Context, in *UpdateUserMfaMethodRequest, opts ...grpc.CallOption) (*UpdateUserMfaMethodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserMfaMethodResponse)
+	err := c.cc.Invoke(ctx, IAMService_UpdateUserMfaMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) DeleteUserMfaMethod(ctx context.Context, in *DeleteUserMfaMethodRequest, opts ...grpc.CallOption) (*DeleteUserMfaMethodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserMfaMethodResponse)
+	err := c.cc.Invoke(ctx, IAMService_DeleteUserMfaMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IAMServiceServer is the server API for IAMService service.
 // All implementations must embed UnimplementedIAMServiceServer
 // for forward compatibility.
@@ -393,6 +438,18 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error)
+	// Lists the user's multi-factor authentication (MFA) methods.
+	// Required permissions:
+	// - None (authenticated only)
+	ListUserMfaMethods(context.Context, *ListUserMfaMethodsRequest) (*ListUserMfaMethodsResponse, error)
+	// Updates a user's multi-factor authentication (MFA) method.
+	// Required permissions:
+	// - None (authenticated only)
+	UpdateUserMfaMethod(context.Context, *UpdateUserMfaMethodRequest) (*UpdateUserMfaMethodResponse, error)
+	// Deletes the user's multi-factor authentication (MFA) methods.
+	// Required permissions:
+	// - None (authenticated only)
+	DeleteUserMfaMethod(context.Context, *DeleteUserMfaMethodRequest) (*DeleteUserMfaMethodResponse, error)
 	mustEmbedUnimplementedIAMServiceServer()
 }
 
@@ -456,6 +513,15 @@ func (UnimplementedIAMServiceServer) AssignUserRoles(context.Context, *AssignUse
 }
 func (UnimplementedIAMServiceServer) LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LogoutUser not implemented")
+}
+func (UnimplementedIAMServiceServer) ListUserMfaMethods(context.Context, *ListUserMfaMethodsRequest) (*ListUserMfaMethodsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserMfaMethods not implemented")
+}
+func (UnimplementedIAMServiceServer) UpdateUserMfaMethod(context.Context, *UpdateUserMfaMethodRequest) (*UpdateUserMfaMethodResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateUserMfaMethod not implemented")
+}
+func (UnimplementedIAMServiceServer) DeleteUserMfaMethod(context.Context, *DeleteUserMfaMethodRequest) (*DeleteUserMfaMethodResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteUserMfaMethod not implemented")
 }
 func (UnimplementedIAMServiceServer) mustEmbedUnimplementedIAMServiceServer() {}
 func (UnimplementedIAMServiceServer) testEmbeddedByValue()                    {}
@@ -802,6 +868,60 @@ func _IAMService_LogoutUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IAMService_ListUserMfaMethods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserMfaMethodsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).ListUserMfaMethods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_ListUserMfaMethods_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).ListUserMfaMethods(ctx, req.(*ListUserMfaMethodsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_UpdateUserMfaMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserMfaMethodRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).UpdateUserMfaMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_UpdateUserMfaMethod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).UpdateUserMfaMethod(ctx, req.(*UpdateUserMfaMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_DeleteUserMfaMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserMfaMethodRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).DeleteUserMfaMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_DeleteUserMfaMethod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).DeleteUserMfaMethod(ctx, req.(*DeleteUserMfaMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IAMService_ServiceDesc is the grpc.ServiceDesc for IAMService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -880,6 +1000,18 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LogoutUser",
 			Handler:    _IAMService_LogoutUser_Handler,
+		},
+		{
+			MethodName: "ListUserMfaMethods",
+			Handler:    _IAMService_ListUserMfaMethods_Handler,
+		},
+		{
+			MethodName: "UpdateUserMfaMethod",
+			Handler:    _IAMService_UpdateUserMfaMethod_Handler,
+		},
+		{
+			MethodName: "DeleteUserMfaMethod",
+			Handler:    _IAMService_DeleteUserMfaMethod_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

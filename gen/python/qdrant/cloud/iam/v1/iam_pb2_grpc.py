@@ -105,6 +105,21 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.FromString,
                 _registered_method=True)
+        self.ListUserMfaMethods = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/ListUserMfaMethods',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsResponse.FromString,
+                _registered_method=True)
+        self.UpdateUserMfaMethod = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/UpdateUserMfaMethod',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodResponse.FromString,
+                _registered_method=True)
+        self.DeleteUserMfaMethod = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.FromString,
+                _registered_method=True)
 
 
 class IAMServiceServicer(object):
@@ -277,6 +292,33 @@ class IAMServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListUserMfaMethods(self, request, context):
+        """Lists the user's multi-factor authentication (MFA) methods.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateUserMfaMethod(self, request, context):
+        """Updates a user's multi-factor authentication (MFA) method.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUserMfaMethod(self, request, context):
+        """Deletes the user's multi-factor authentication (MFA) methods.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IAMServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -369,6 +411,21 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.LogoutUser,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.SerializeToString,
+            ),
+            'ListUserMfaMethods': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUserMfaMethods,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsResponse.SerializeToString,
+            ),
+            'UpdateUserMfaMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateUserMfaMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodResponse.SerializeToString,
+            ),
+            'DeleteUserMfaMethod': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUserMfaMethod,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -858,6 +915,87 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/LogoutUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.LogoutUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListUserMfaMethods(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/ListUserMfaMethods',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.ListUserMfaMethodsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateUserMfaMethod(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/UpdateUserMfaMethod',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserMfaMethodResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteUserMfaMethod(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.FromString,
             options,
             channel_credentials,
             insecure,

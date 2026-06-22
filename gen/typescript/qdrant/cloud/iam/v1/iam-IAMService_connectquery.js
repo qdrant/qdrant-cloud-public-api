@@ -169,3 +169,30 @@ export const assignUserRoles = IAMService.method.assignUserRoles;
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.LogoutUser
  */
 export const logoutUser = IAMService.method.logoutUser;
+
+/**
+ * Lists the user's multi-factor authentication (MFA) methods.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUserMfaMethods
+ */
+export const listUserMfaMethods = IAMService.method.listUserMfaMethods;
+
+/**
+ * Updates a user's multi-factor authentication (MFA) method.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserMfaMethod
+ */
+export const updateUserMfaMethod = IAMService.method.updateUserMfaMethod;
+
+/**
+ * Deletes the user's multi-factor authentication (MFA) methods.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod
+ */
+export const deleteUserMfaMethod = IAMService.method.deleteUserMfaMethod;

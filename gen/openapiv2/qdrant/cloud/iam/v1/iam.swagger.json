@@ -556,6 +556,167 @@
         ]
       }
     },
+    "/api/iam/v1/users/me/mfa-methods": {
+      "get": {
+        "summary": "Lists the user's multi-factor authentication (MFA) methods.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_ListUserMfaMethods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUserMfaMethodsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/users/me/mfa-methods/{mfaMethod.externalId}": {
+      "delete": {
+        "summary": "Deletes the user's multi-factor authentication (MFA) methods.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_DeleteUserMfaMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserMfaMethodResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mfaMethod.externalId",
+            "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mfaMethod.type",
+            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mfaMethod.createdAt",
+            "description": "The timestamp when the user enrolled in MFA.\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.lastAuthenticatedAt",
+            "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.lastModifiedAt",
+            "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.name",
+            "description": "A human-readable label to identify the authentication method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      },
+      "put": {
+        "summary": "Updates a user's multi-factor authentication (MFA) method.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_UpdateUserMfaMethod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserMfaMethodResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mfaMethod.externalId",
+            "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mfaMethod.type",
+            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mfaMethod.createdAt",
+            "description": "The timestamp when the user enrolled in MFA.\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.lastAuthenticatedAt",
+            "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.lastModifiedAt",
+            "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "mfaMethod.name",
+            "description": "A human-readable label to identify the authentication method.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
     "/api/iam/v1/users/me/profile": {
       "get": {
         "summary": "Gets the profile of the authenticated user.\nRequired permissions:\n- None (authenticated only)",
@@ -865,6 +1026,11 @@
       "type": "object",
       "description": "DeleteRoleResponse is the response from the DeleteRole function.\n\nEmpty"
     },
+    "v1DeleteUserMfaMethodResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function"
+    },
     "v1GetAuthenticatedUserResponse": {
       "type": "object",
       "properties": {
@@ -971,6 +1137,20 @@
         }
       },
       "title": "ListRolesResponse is the response from the ListRoles function"
+    },
+    "v1ListUserMfaMethodsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserMfaMethod"
+          },
+          "description": "The actual user multi-factor authentication methods in this list."
+        }
+      },
+      "title": "ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function"
     },
     "v1ListUserRolesResponse": {
       "type": "object",
@@ -1128,6 +1308,16 @@
       },
       "description": "UpdateRoleResponse is the response from the UpdateRole function."
     },
+    "v1UpdateUserMfaMethodResponse": {
+      "type": "object",
+      "properties": {
+        "mfaMethod": {
+          "$ref": "#/definitions/v1UserMfaMethod",
+          "description": "The updated user multi-factor authentication method."
+        }
+      },
+      "title": "UpdateUserMfaMethodResponse is the response from the UpdateUserMfaMethod function"
+    },
     "v1UpdateUserProfileRequest": {
       "type": "object",
       "properties": {
@@ -1252,6 +1442,39 @@
         }
       },
       "description": "User Demographics represents demographic information about a user."
+    },
+    "v1UserMfaMethod": {
+      "type": "object",
+      "properties": {
+        "externalId": {
+          "type": "string",
+          "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user enrolled in MFA.\nThis is a read-only field."
+        },
+        "lastAuthenticatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field."
+        },
+        "name": {
+          "type": "string",
+          "description": "A human-readable label to identify the authentication method."
+        }
+      },
+      "description": "User MFA Method represents the enrollment for a multi-factor authentication method."
     },
     "v1UserProfile": {
       "type": "object",
