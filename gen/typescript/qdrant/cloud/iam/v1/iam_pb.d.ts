@@ -1271,6 +1271,178 @@ export declare type LogoutUserResponseValid = LogoutUserResponse;
 export declare const LogoutUserResponseSchema: GenMessage<LogoutUserResponse, {validType: LogoutUserResponseValid}>;
 
 /**
+ * ListUserMfaMethodsRequest is the request for the ListUserMfaMethods function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUserMfaMethodsRequest
+ */
+export declare type ListUserMfaMethodsRequest = Message<"qdrant.cloud.iam.v1.ListUserMfaMethodsRequest"> & {
+};
+
+export declare type ListUserMfaMethodsRequestValid = ListUserMfaMethodsRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUserMfaMethodsRequest.
+ * Use `create(ListUserMfaMethodsRequestSchema)` to create a new message.
+ */
+export declare const ListUserMfaMethodsRequestSchema: GenMessage<ListUserMfaMethodsRequest, {validType: ListUserMfaMethodsRequestValid}>;
+
+/**
+ * ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUserMfaMethodsResponse
+ */
+export declare type ListUserMfaMethodsResponse = Message<"qdrant.cloud.iam.v1.ListUserMfaMethodsResponse"> & {
+  /**
+   * The actual user multi-factor authentication methods in this list.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.UserMfaMethod items = 1;
+   */
+  items: UserMfaMethod[];
+};
+
+/**
+ * ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function
+ *
+ * @generated from message qdrant.cloud.iam.v1.ListUserMfaMethodsResponse
+ */
+export declare type ListUserMfaMethodsResponseValid = Message<"qdrant.cloud.iam.v1.ListUserMfaMethodsResponse"> & {
+  /**
+   * The actual user multi-factor authentication methods in this list.
+   *
+   * @generated from field: repeated qdrant.cloud.iam.v1.UserMfaMethod items = 1;
+   */
+  items: UserMfaMethodValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.ListUserMfaMethodsResponse.
+ * Use `create(ListUserMfaMethodsResponseSchema)` to create a new message.
+ */
+export declare const ListUserMfaMethodsResponseSchema: GenMessage<ListUserMfaMethodsResponse, {validType: ListUserMfaMethodsResponseValid}>;
+
+/**
+ * UpdateUserMfaMethodRequest is the request for the UpdateUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest
+ */
+export declare type UpdateUserMfaMethodRequest = Message<"qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest"> & {
+  /**
+   * The user multi-factor authentication method to be updated.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod?: UserMfaMethod | undefined;
+};
+
+/**
+ * UpdateUserMfaMethodRequest is the request for the UpdateUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest
+ */
+export declare type UpdateUserMfaMethodRequestValid = Message<"qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest"> & {
+  /**
+   * The user multi-factor authentication method to be updated.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod: UserMfaMethodValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest.
+ * Use `create(UpdateUserMfaMethodRequestSchema)` to create a new message.
+ */
+export declare const UpdateUserMfaMethodRequestSchema: GenMessage<UpdateUserMfaMethodRequest, {validType: UpdateUserMfaMethodRequestValid}>;
+
+/**
+ * UpdateUserMfaMethodResponse is the response from the UpdateUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse
+ */
+export declare type UpdateUserMfaMethodResponse = Message<"qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse"> & {
+  /**
+   * The updated user multi-factor authentication method.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod?: UserMfaMethod | undefined;
+};
+
+/**
+ * UpdateUserMfaMethodResponse is the response from the UpdateUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse
+ */
+export declare type UpdateUserMfaMethodResponseValid = Message<"qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse"> & {
+  /**
+   * The updated user multi-factor authentication method.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod: UserMfaMethodValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse.
+ * Use `create(UpdateUserMfaMethodResponseSchema)` to create a new message.
+ */
+export declare const UpdateUserMfaMethodResponseSchema: GenMessage<UpdateUserMfaMethodResponse, {validType: UpdateUserMfaMethodResponseValid}>;
+
+/**
+ * DeleteUserMfaMethodRequest is the request for the DeleteUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest
+ */
+export declare type DeleteUserMfaMethodRequest = Message<"qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest"> & {
+  /**
+   * The user multi-factor authentication method to be deleted.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod?: UserMfaMethod | undefined;
+};
+
+/**
+ * DeleteUserMfaMethodRequest is the request for the DeleteUserMfaMethod function
+ *
+ * @generated from message qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest
+ */
+export declare type DeleteUserMfaMethodRequestValid = Message<"qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest"> & {
+  /**
+   * The user multi-factor authentication method to be deleted.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethod mfa_method = 1;
+   */
+  mfaMethod: UserMfaMethodValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest.
+ * Use `create(DeleteUserMfaMethodRequestSchema)` to create a new message.
+ */
+export declare const DeleteUserMfaMethodRequestSchema: GenMessage<DeleteUserMfaMethodRequest, {validType: DeleteUserMfaMethodRequestValid}>;
+
+/**
+ * DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse
+ */
+export declare type DeleteUserMfaMethodResponse = Message<"qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse"> & {
+};
+
+export declare type DeleteUserMfaMethodResponseValid = DeleteUserMfaMethodResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse.
+ * Use `create(DeleteUserMfaMethodResponseSchema)` to create a new message.
+ */
+export declare const DeleteUserMfaMethodResponseSchema: GenMessage<DeleteUserMfaMethodResponse, {validType: DeleteUserMfaMethodResponseValid}>;
+
+/**
  * User Profile represents profile information about a user.
  *
  * @generated from message qdrant.cloud.iam.v1.UserProfile
@@ -1387,6 +1559,124 @@ export declare type UserConsentValid = UserConsent;
  * Use `create(UserConsentSchema)` to create a new message.
  */
 export declare const UserConsentSchema: GenMessage<UserConsent, {validType: UserConsentValid}>;
+
+/**
+ * User MFA Method represents the enrollment for a multi-factor authentication method.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UserMfaMethod
+ */
+export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod"> & {
+  /**
+   * Authentication method identifier for the MFA information (in GUID format).
+   * This is a read-only field.
+   *
+   * @generated from field: string external_id = 1;
+   */
+  externalId: string;
+
+  /**
+   * Specifies the type of MFA the user enrolled in.
+   * Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+   * This is a read-only field.
+   *
+   * @generated from field: string type = 2;
+   */
+  type: string;
+
+  /**
+   * The timestamp when the user enrolled in MFA.
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   */
+  createdAt?: Timestamp | undefined;
+
+  /**
+   * The timestamp when the user was last authenticated with MFA.
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp last_authenticated_at = 4;
+   */
+  lastAuthenticatedAt?: Timestamp | undefined;
+
+  /**
+   * The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
+   * This is a read-only field.
+   *
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 5;
+   */
+  lastModifiedAt?: Timestamp | undefined;
+
+  /**
+   * A human-readable label to identify the authentication method.
+   * Can only be set for webauthn-based MFA methods.
+   *
+   * @generated from field: optional string name = 6;
+   */
+  name?: string | undefined;
+};
+
+/**
+ * User MFA Method represents the enrollment for a multi-factor authentication method.
+ *
+ * @generated from message qdrant.cloud.iam.v1.UserMfaMethod
+ */
+export declare type UserMfaMethodValid = Message<"qdrant.cloud.iam.v1.UserMfaMethod"> & {
+  /**
+   * Authentication method identifier for the MFA information (in GUID format).
+   * This is a read-only field.
+   *
+   * @generated from field: string external_id = 1;
+   */
+  externalId: string;
+
+  /**
+   * Specifies the type of MFA the user enrolled in.
+   * Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+   * This is a read-only field.
+   *
+   * @generated from field: string type = 2;
+   */
+  type: string;
+
+  /**
+   * The timestamp when the user enrolled in MFA.
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   */
+  createdAt: Timestamp;
+
+  /**
+   * The timestamp when the user was last authenticated with MFA.
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp last_authenticated_at = 4;
+   */
+  lastAuthenticatedAt: Timestamp;
+
+  /**
+   * The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
+   * This is a read-only field.
+   *
+   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 5;
+   */
+  lastModifiedAt?: Timestamp | undefined;
+
+  /**
+   * A human-readable label to identify the authentication method.
+   * Can only be set for webauthn-based MFA methods.
+   *
+   * @generated from field: optional string name = 6;
+   */
+  name?: string | undefined;
+};
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.UserMfaMethod.
+ * Use `create(UserMfaMethodSchema)` to create a new message.
+ */
+export declare const UserMfaMethodSchema: GenMessage<UserMfaMethod, {validType: UserMfaMethodValid}>;
 
 /**
  * UserStatus defines the possible statuses of a user.
@@ -1842,6 +2132,42 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof LogoutUserRequestSchema;
     output: typeof LogoutUserResponseSchema;
+  },
+  /**
+   * Lists the user's multi-factor authentication (MFA) methods.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUserMfaMethods
+   */
+  listUserMfaMethods: {
+    methodKind: "unary";
+    input: typeof ListUserMfaMethodsRequestSchema;
+    output: typeof ListUserMfaMethodsResponseSchema;
+  },
+  /**
+   * Updates a user's multi-factor authentication (MFA) method.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserMfaMethod
+   */
+  updateUserMfaMethod: {
+    methodKind: "unary";
+    input: typeof UpdateUserMfaMethodRequestSchema;
+    output: typeof UpdateUserMfaMethodResponseSchema;
+  },
+  /**
+   * Deletes the user's multi-factor authentication (MFA) methods.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod
+   */
+  deleteUserMfaMethod: {
+    methodKind: "unary";
+    input: typeof DeleteUserMfaMethodRequestSchema;
+    output: typeof DeleteUserMfaMethodResponseSchema;
   },
 }>;
 

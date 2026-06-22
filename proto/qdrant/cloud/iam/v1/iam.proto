@@ -310,7 +310,6 @@ service IAMService {
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/effective-permissions"};
   }
-
   // List roles of the user identified by the given ID.
   // Required permissions:
   // - read:roles
@@ -325,7 +324,6 @@ service IAMService {
       field_expression: "user_id"
     };
   }
-
   // List users for the role identified by the given ID.
   // Required permissions:
   // - read:roles
@@ -340,7 +338,6 @@ service IAMService {
       field_expression: "role_id"
     };
   }
-
   // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:
   // - write:roles
@@ -385,6 +382,77 @@ service IAMService {
       resource_type: "user"
       resource_id_field: "req-md.qc-actor-id"
       resource_url_template: "/users/{req-md.qc-actor-id}"
+    };
+  }
+  // Lists the user's multi-factor authentication (MFA) methods.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc ListUserMfaMethods(ListUserMfaMethodsRequest) returns (ListUserMfaMethodsResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/iam/v1/users/me/mfa-methods"};
+  }
+  // Updates a user's multi-factor authentication (MFA) method.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc UpdateUserMfaMethod(UpdateUserMfaMethodRequest) returns (UpdateUserMfaMethodResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {put: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "mfa-method"
+      resource_id_field: "req.mfa_method.external_id"
+      resource_url_template: "/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}"
+      additional_context_fields: {
+        key: "actor_id"
+        value: "req-md.qc-actor-id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "external_id"
+      field_expression: "mfa_method.external_id"
+    };
+  }
+  // Deletes the user's multi-factor authentication (MFA) methods.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc DeleteUserMfaMethod(DeleteUserMfaMethodRequest) returns (DeleteUserMfaMethodResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "mfa-method"
+      resource_id_field: "req.mfa_method.external_id"
+      resource_url_template: "/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}"
+      additional_context_fields: {
+        key: "actor_id"
+        value: "req-md.qc-actor-id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "external_id"
+      field_expression: "mfa_method.external_id"
     };
   }
 }
@@ -857,6 +925,42 @@ message LogoutUserResponse {
   // Empty
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// ListUserMfaMethodsRequest is the request for the ListUserMfaMethods function
+message ListUserMfaMethodsRequest {
+  // Empty
+}
+
+// ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function
+message ListUserMfaMethodsResponse {
+  // The actual user multi-factor authentication methods in this list.
+  repeated UserMfaMethod items = 1;
+}
+
+// UpdateUserMfaMethodRequest is the request for the UpdateUserMfaMethod function
+message UpdateUserMfaMethodRequest {
+  // The user multi-factor authentication method to be updated.
+  UserMfaMethod mfa_method = 1 [(buf.validate.field).required = true];
+}
+
+// UpdateUserMfaMethodResponse is the response from the UpdateUserMfaMethod function
+message UpdateUserMfaMethodResponse {
+  // The updated user multi-factor authentication method.
+  UserMfaMethod mfa_method = 1 [(buf.validate.field).required = true];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// DeleteUserMfaMethodRequest is the request for the DeleteUserMfaMethod function
+message DeleteUserMfaMethodRequest {
+  // The user multi-factor authentication method to be deleted.
+  UserMfaMethod mfa_method = 1 [(buf.validate.field).required = true];
+}
+
+// DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function
+message DeleteUserMfaMethodResponse {
+  // Empty
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // User Profile represents profile information about a user.
 message UserProfile {
@@ -924,4 +1028,39 @@ enum UserConsentStatus {
   // Pending consent means that the user got notified about the new version of the document. After a certain
   // period of time, we auto accept pending consents depending on the document type.
   USER_CONSENT_STATUS_PENDING = 3;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// User MFA Method represents the enrollment for a multi-factor authentication method.
+message UserMfaMethod {
+  // Authentication method identifier for the MFA information (in GUID format).
+  // This is a read-only field.
+  string external_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Specifies the type of MFA the user enrolled in.
+  // Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+  // This is a read-only field.
+  string type = 2 [(buf.validate.field).string = {
+    in: [
+      "totp",
+      "webauthn-platform",
+      "webauthn-roaming"
+    ]
+  }];
+  // The timestamp when the user enrolled in MFA.
+  // This is a read-only field.
+  google.protobuf.Timestamp created_at = 3 [(buf.validate.field).required = true];
+  // The timestamp when the user was last authenticated with MFA.
+  // This is a read-only field.
+  google.protobuf.Timestamp last_authenticated_at = 4 [(buf.validate.field).required = true];
+  // The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
+  // This is a read-only field.
+  optional google.protobuf.Timestamp last_modified_at = 5;
+  // A human-readable label to identify the authentication method.
+  // Can only be set for webauthn-based MFA methods.
+  optional string name = 6 [(buf.validate.field).string = {min_len: 1}];
+  option (buf.validate.message).cel = {
+    id: "user_mfa_method.name_only_for_webauthn"
+    message: "name can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)"
+    expression: "!has(this.name) || this.type.startsWith('webauthn-')"
+  };
 }

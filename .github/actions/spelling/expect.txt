@@ -2,3 +2,5 @@ eastus
 hotspot
 OOD
 OOM
+totp
+webauthn

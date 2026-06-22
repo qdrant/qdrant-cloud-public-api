@@ -152,3 +152,27 @@ export const assignUserRoles: typeof IAMService["method"]["assignUserRoles"];
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.LogoutUser
  */
 export const logoutUser: typeof IAMService["method"]["logoutUser"];
+/**
+ * Lists the user's multi-factor authentication (MFA) methods.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.ListUserMfaMethods
+ */
+export const listUserMfaMethods: typeof IAMService["method"]["listUserMfaMethods"];
+/**
+ * Updates a user's multi-factor authentication (MFA) method.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.UpdateUserMfaMethod
+ */
+export const updateUserMfaMethod: typeof IAMService["method"]["updateUserMfaMethod"];
+/**
+ * Deletes the user's multi-factor authentication (MFA) methods.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod
+ */
+export const deleteUserMfaMethod: typeof IAMService["method"]["deleteUserMfaMethod"];
