@@ -436,14 +436,6 @@
         "state": {
           "$ref": "#/definitions/v1ClusterAlertState",
           "description": "The state of this alert. Always populated so callers can tell each row's\nstate apart when the request applies no state filter."
-        },
-        "nodeName": {
-          "type": "string",
-          "description": "The name of the node this alert is attributed to (matches ClusterNodeInfo.name).\nAbsent for cluster-level alerts; at most one node per alert."
-        },
-        "rawMessage": {
-          "type": "string",
-          "description": "The raw infrastructure message behind this alert (at most 4096 characters).\nOnly populated for CLUSTER_ALERT_TYPE_NODE_* alerts."
         }
       },
       "description": "ClusterAlert is a single alert instance for a cluster."
@@ -485,16 +477,10 @@
         "CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA",
         "CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT",
         "CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT",
-        "CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT",
-        "CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES",
-        "CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE",
-        "CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET",
-        "CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH",
-        "CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE",
-        "CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE"
+        "CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT"
       ],
       "default": "CLUSTER_ALERT_TYPE_UNSPECIFIED",
-      "description": "ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.\n\n - CLUSTER_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: Disk usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: Memory usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_OOD: The cluster is out of disk.\n - CLUSTER_ALERT_TYPE_OOM: The cluster is out of memory.\n - CLUSTER_ALERT_TYPE_RECOVERY_MODE: One or more nodes are in recovery mode.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: The Qdrant cluster is unhealthy.\n - CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: The cluster has too many collections.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: The Qdrant cluster is being CPU throttled.\n - CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: A Qdrant JWT API key is about to expire.\n - CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: The cluster version is not covered by the SLA.\n - CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: The cluster has a disk hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: The cluster has a memory hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: The cluster has a CPU hotspot.\n - CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES: A node cannot be scheduled due to insufficient CPU or memory (Hybrid Cloud).\n - CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE: A node's storage volume cannot be provisioned, attached or mounted (Hybrid Cloud).\n - CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET: A node references a missing secret or credential (Hybrid Cloud).\n - CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH: A node cannot be scheduled due to selector/toleration/affinity config (Hybrid Cloud).\n - CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE: A node's container image cannot be pulled (Hybrid Cloud).\n - CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE: A node scheduling failure with no more specific category; see raw_message (Hybrid Cloud)."
+      "description": "ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.\n\n - CLUSTER_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: Disk usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: Memory usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_OOD: The cluster is out of disk.\n - CLUSTER_ALERT_TYPE_OOM: The cluster is out of memory.\n - CLUSTER_ALERT_TYPE_RECOVERY_MODE: One or more nodes are in recovery mode.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: The Qdrant cluster is unhealthy.\n - CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: The cluster has too many collections.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: The Qdrant cluster is being CPU throttled.\n - CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: A Qdrant JWT API key is about to expire.\n - CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: The cluster version is not covered by the SLA.\n - CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: The cluster has a disk hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: The cluster has a memory hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: The cluster has a CPU hotspot."
     },
     "v1ClusterInferenceModelMetrics": {
       "type": "object",

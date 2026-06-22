@@ -399,12 +399,6 @@ message ClusterAlert {
   // The state of this alert. Always populated so callers can tell each row's
   // state apart when the request applies no state filter.
   ClusterAlertState state = 7;
-  // The name of the node this alert is attributed to (matches ClusterNodeInfo.name).
-  // Absent for cluster-level alerts; at most one node per alert.
-  optional string node_name = 8;
-  // The raw infrastructure message behind this alert (at most 4096 characters).
-  // Only populated for CLUSTER_ALERT_TYPE_NODE_* alerts.
-  optional string raw_message = 9;
 }
 
 // Aggregator defines how metrics should be aggregated over time.
@@ -474,18 +468,6 @@ enum ClusterAlertType {
   CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT = 12;
   // The cluster has a CPU hotspot.
   CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT = 13;
-  // A node cannot be scheduled due to insufficient CPU or memory (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_INSUFFICIENT_RESOURCES = 14;
-  // A node's storage volume cannot be provisioned, attached or mounted (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_STORAGE_UNAVAILABLE = 15;
-  // A node references a missing secret or credential (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_MISSING_SECRET = 16;
-  // A node cannot be scheduled due to selector/toleration/affinity config (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_SCHEDULING_CONFIG_MISMATCH = 17;
-  // A node's container image cannot be pulled (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_IMAGE_PULL_FAILURE = 18;
-  // A node scheduling failure with no more specific category; see raw_message (Hybrid Cloud).
-  CLUSTER_ALERT_TYPE_NODE_SCHEDULING_FAILURE = 19;
 }
 
 // ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to
