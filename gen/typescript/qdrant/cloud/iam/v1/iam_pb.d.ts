@@ -1302,19 +1302,7 @@ export declare type ListUserMfaMethodsResponse = Message<"qdrant.cloud.iam.v1.Li
   items: UserMfaMethod[];
 };
 
-/**
- * ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function
- *
- * @generated from message qdrant.cloud.iam.v1.ListUserMfaMethodsResponse
- */
-export declare type ListUserMfaMethodsResponseValid = Message<"qdrant.cloud.iam.v1.ListUserMfaMethodsResponse"> & {
-  /**
-   * The actual user multi-factor authentication methods in this list.
-   *
-   * @generated from field: repeated qdrant.cloud.iam.v1.UserMfaMethod items = 1;
-   */
-  items: UserMfaMethodValid[];
-};
+export declare type ListUserMfaMethodsResponseValid = ListUserMfaMethodsResponse;
 
 /**
  * Describes the message qdrant.cloud.iam.v1.ListUserMfaMethodsResponse.
@@ -1608,7 +1596,7 @@ export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod">
   lastModifiedAt?: Timestamp | undefined;
 
   /**
-   * A human-readable label to identify the authentication method.
+   * A human-readable label to differentiate this authentication method from other methods.
    * Can only be set for webauthn-based MFA methods.
    *
    * @generated from field: optional string name = 6;
@@ -1616,61 +1604,7 @@ export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod">
   name?: string | undefined;
 };
 
-/**
- * User MFA Method represents the enrollment for a multi-factor authentication method.
- *
- * @generated from message qdrant.cloud.iam.v1.UserMfaMethod
- */
-export declare type UserMfaMethodValid = Message<"qdrant.cloud.iam.v1.UserMfaMethod"> & {
-  /**
-   * Authentication method identifier for the MFA information (in GUID format).
-   * This is a read-only field.
-   *
-   * @generated from field: string external_id = 1;
-   */
-  externalId: string;
-
-  /**
-   * Specifies the type of MFA the user enrolled in.
-   * Must be either "totp", "webauthn-platform", or "webauthn-roaming".
-   * This is a read-only field.
-   *
-   * @generated from field: string type = 2;
-   */
-  type: string;
-
-  /**
-   * The timestamp when the user enrolled in MFA.
-   * This is a read-only field.
-   *
-   * @generated from field: google.protobuf.Timestamp created_at = 3;
-   */
-  createdAt: Timestamp;
-
-  /**
-   * The timestamp when the user was last authenticated with MFA.
-   * This is a read-only field.
-   *
-   * @generated from field: google.protobuf.Timestamp last_authenticated_at = 4;
-   */
-  lastAuthenticatedAt: Timestamp;
-
-  /**
-   * The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
-   * This is a read-only field.
-   *
-   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 5;
-   */
-  lastModifiedAt?: Timestamp | undefined;
-
-  /**
-   * A human-readable label to identify the authentication method.
-   * Can only be set for webauthn-based MFA methods.
-   *
-   * @generated from field: optional string name = 6;
-   */
-  name?: string | undefined;
-};
+export declare type UserMfaMethodValid = UserMfaMethod;
 
 /**
  * Describes the message qdrant.cloud.iam.v1.UserMfaMethod.

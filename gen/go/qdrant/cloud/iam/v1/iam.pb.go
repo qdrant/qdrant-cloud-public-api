@@ -2883,7 +2883,7 @@ type UserMfaMethod struct {
 	// The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
 	// This is a read-only field.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_modified_at,json=lastModifiedAt,proto3,oneof" json:"last_modified_at,omitempty"`
-	// A human-readable label to identify the authentication method.
+	// A human-readable label to differentiate this authentication method from other methods.
 	// Can only be set for webauthn-based MFA methods.
 	Name          *string `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3138,14 +3138,14 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at\"\xe5\x04\n" +
+	"\x11_last_modified_at\"\xd5\x04\n" +
 	"\rUserMfaMethod\x12)\n" +
 	"\vexternal_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"externalId\x12D\n" +
-	"\x04type\x18\x02 \x01(\tB0\xbaH-r+R\x04totpR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x12A\n" +
+	"\x04type\x18\x02 \x01(\tB0\xbaH-r+R\x04totpR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12V\n" +
-	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x13lastAuthenticatedAt\x12I\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12N\n" +
+	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12I\n" +
 	"\x10last_modified_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12 \n" +
 	"\x04name\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04name\x88\x01\x01:\xbc\x01\xbaH\xb8\x01\x1a\xb5\x01\n" +
 	"&user_mfa_method.name_only_for_webauthn\x12Uname can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)\x1a4!has(this.name) || this.type.startsWith('webauthn-')B\x13\n" +

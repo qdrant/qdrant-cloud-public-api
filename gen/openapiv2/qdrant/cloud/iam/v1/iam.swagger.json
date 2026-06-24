@@ -638,7 +638,7 @@
           },
           {
             "name": "mfaMethod.name",
-            "description": "A human-readable label to identify the authentication method.\nCan only be set for webauthn-based MFA methods.",
+            "description": "A human-readable label to differentiate this authentication method from other methods.\nCan only be set for webauthn-based MFA methods.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -706,7 +706,7 @@
           },
           {
             "name": "mfaMethod.name",
-            "description": "A human-readable label to identify the authentication method.\nCan only be set for webauthn-based MFA methods.",
+            "description": "A human-readable label to differentiate this authentication method from other methods.\nCan only be set for webauthn-based MFA methods.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1471,7 +1471,7 @@
         },
         "name": {
           "type": "string",
-          "description": "A human-readable label to identify the authentication method.\nCan only be set for webauthn-based MFA methods."
+          "description": "A human-readable label to differentiate this authentication method from other methods.\nCan only be set for webauthn-based MFA methods."
         }
       },
       "description": "User MFA Method represents the enrollment for a multi-factor authentication method."
