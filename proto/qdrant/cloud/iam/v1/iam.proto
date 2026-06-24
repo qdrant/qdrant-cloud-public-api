@@ -1061,6 +1061,6 @@ message UserMfaMethod {
   option (buf.validate.message).cel = {
     id: "user_mfa_method.name_only_for_webauthn"
     message: "name can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)"
-    expression: "!has(this.name) || this.type.startsWith('webauthn-')"
+    expression: "!has(this.name) || this.type == 'webauthn-platform' || this.type == 'webauthn-roaming'"
   };
 }

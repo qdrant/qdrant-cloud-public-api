@@ -3138,7 +3138,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at\"\xd5\x04\n" +
+	"\x11_last_modified_at\"\xf7\x04\n" +
 	"\rUserMfaMethod\x12)\n" +
 	"\vexternal_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"externalId\x12D\n" +
@@ -3147,8 +3147,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12N\n" +
 	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12I\n" +
 	"\x10last_modified_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12 \n" +
-	"\x04name\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04name\x88\x01\x01:\xbc\x01\xbaH\xb8\x01\x1a\xb5\x01\n" +
-	"&user_mfa_method.name_only_for_webauthn\x12Uname can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)\x1a4!has(this.name) || this.type.startsWith('webauthn-')B\x13\n" +
+	"\x04name\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04name\x88\x01\x01:\xde\x01\xbaH\xda\x01\x1a\xd7\x01\n" +
+	"&user_mfa_method.name_only_for_webauthn\x12Uname can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)\x1aV!has(this.name) || this.type == 'webauthn-platform' || this.type == 'webauthn-roaming'B\x13\n" +
 	"\x11_last_modified_atB\a\n" +
 	"\x05_name*s\n" +
 	"\n" +
