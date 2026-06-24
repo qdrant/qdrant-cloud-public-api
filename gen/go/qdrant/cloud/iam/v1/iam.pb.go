@@ -2402,6 +2402,264 @@ func (*LogoutUserResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{38}
 }
 
+// ListUserMfaMethodsRequest is the request for the ListUserMfaMethods function
+type ListUserMfaMethodsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserMfaMethodsRequest) Reset() {
+	*x = ListUserMfaMethodsRequest{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserMfaMethodsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserMfaMethodsRequest) ProtoMessage() {}
+
+func (x *ListUserMfaMethodsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserMfaMethodsRequest.ProtoReflect.Descriptor instead.
+func (*ListUserMfaMethodsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{39}
+}
+
+// ListUserMfaMethodsResponse is the response from the ListUserMfaMethods function
+type ListUserMfaMethodsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The actual user multi-factor authentication methods in this list.
+	Items         []*UserMfaMethod `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserMfaMethodsResponse) Reset() {
+	*x = ListUserMfaMethodsResponse{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserMfaMethodsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserMfaMethodsResponse) ProtoMessage() {}
+
+func (x *ListUserMfaMethodsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserMfaMethodsResponse.ProtoReflect.Descriptor instead.
+func (*ListUserMfaMethodsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *ListUserMfaMethodsResponse) GetItems() []*UserMfaMethod {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+// UpdateUserMfaMethodRequest is the request for the UpdateUserMfaMethod function
+type UpdateUserMfaMethodRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The user multi-factor authentication method to be updated.
+	MfaMethod     *UserMfaMethod `protobuf:"bytes,1,opt,name=mfa_method,json=mfaMethod,proto3" json:"mfa_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserMfaMethodRequest) Reset() {
+	*x = UpdateUserMfaMethodRequest{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserMfaMethodRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserMfaMethodRequest) ProtoMessage() {}
+
+func (x *UpdateUserMfaMethodRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserMfaMethodRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserMfaMethodRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *UpdateUserMfaMethodRequest) GetMfaMethod() *UserMfaMethod {
+	if x != nil {
+		return x.MfaMethod
+	}
+	return nil
+}
+
+// UpdateUserMfaMethodResponse is the response from the UpdateUserMfaMethod function
+type UpdateUserMfaMethodResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The updated user multi-factor authentication method.
+	MfaMethod     *UserMfaMethod `protobuf:"bytes,1,opt,name=mfa_method,json=mfaMethod,proto3" json:"mfa_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserMfaMethodResponse) Reset() {
+	*x = UpdateUserMfaMethodResponse{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserMfaMethodResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserMfaMethodResponse) ProtoMessage() {}
+
+func (x *UpdateUserMfaMethodResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserMfaMethodResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserMfaMethodResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *UpdateUserMfaMethodResponse) GetMfaMethod() *UserMfaMethod {
+	if x != nil {
+		return x.MfaMethod
+	}
+	return nil
+}
+
+// DeleteUserMfaMethodRequest is the request for the DeleteUserMfaMethod function
+type DeleteUserMfaMethodRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The user multi-factor authentication method to be deleted.
+	MfaMethod     *UserMfaMethod `protobuf:"bytes,1,opt,name=mfa_method,json=mfaMethod,proto3" json:"mfa_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserMfaMethodRequest) Reset() {
+	*x = DeleteUserMfaMethodRequest{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserMfaMethodRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserMfaMethodRequest) ProtoMessage() {}
+
+func (x *DeleteUserMfaMethodRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserMfaMethodRequest.ProtoReflect.Descriptor instead.
+func (*DeleteUserMfaMethodRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *DeleteUserMfaMethodRequest) GetMfaMethod() *UserMfaMethod {
+	if x != nil {
+		return x.MfaMethod
+	}
+	return nil
+}
+
+// DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function
+type DeleteUserMfaMethodResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserMfaMethodResponse) Reset() {
+	*x = DeleteUserMfaMethodResponse{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserMfaMethodResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserMfaMethodResponse) ProtoMessage() {}
+
+func (x *DeleteUserMfaMethodResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserMfaMethodResponse.ProtoReflect.Descriptor instead.
+func (*DeleteUserMfaMethodResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{44}
+}
+
 // User Profile represents profile information about a user.
 type UserProfile struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2417,7 +2675,7 @@ type UserProfile struct {
 
 func (x *UserProfile) Reset() {
 	*x = UserProfile{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2429,7 +2687,7 @@ func (x *UserProfile) String() string {
 func (*UserProfile) ProtoMessage() {}
 
 func (x *UserProfile) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2442,7 +2700,7 @@ func (x *UserProfile) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfile.ProtoReflect.Descriptor instead.
 func (*UserProfile) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{39}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *UserProfile) GetGivenName() string {
@@ -2481,7 +2739,7 @@ type UserDemographics struct {
 
 func (x *UserDemographics) Reset() {
 	*x = UserDemographics{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[40]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2493,7 +2751,7 @@ func (x *UserDemographics) String() string {
 func (*UserDemographics) ProtoMessage() {}
 
 func (x *UserDemographics) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[40]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2506,7 +2764,7 @@ func (x *UserDemographics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDemographics.ProtoReflect.Descriptor instead.
 func (*UserDemographics) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{40}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *UserDemographics) GetRoleInCompany() string {
@@ -2550,7 +2808,7 @@ type UserConsent struct {
 
 func (x *UserConsent) Reset() {
 	*x = UserConsent{}
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[41]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2562,7 +2820,7 @@ func (x *UserConsent) String() string {
 func (*UserConsent) ProtoMessage() {}
 
 func (x *UserConsent) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[41]
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2575,7 +2833,7 @@ func (x *UserConsent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserConsent.ProtoReflect.Descriptor instead.
 func (*UserConsent) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{41}
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *UserConsent) GetDocumentType() LegalDocumentType {
@@ -2604,6 +2862,104 @@ func (x *UserConsent) GetIsAccepted() bool {
 		return x.IsAccepted
 	}
 	return false
+}
+
+// User MFA Method represents the enrollment for a multi-factor authentication method.
+type UserMfaMethod struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Authentication method identifier for the MFA information (in GUID format).
+	// This is a read-only field.
+	ExternalId string `protobuf:"bytes,1,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	// Specifies the type of MFA the user enrolled in.
+	// Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+	// This is a read-only field.
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// The timestamp when the user enrolled in MFA.
+	// This is a read-only field.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// The timestamp when the user was last authenticated with MFA.
+	// This is a read-only field.
+	LastAuthenticatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_authenticated_at,json=lastAuthenticatedAt,proto3" json:"last_authenticated_at,omitempty"`
+	// The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
+	// This is a read-only field.
+	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_modified_at,json=lastModifiedAt,proto3,oneof" json:"last_modified_at,omitempty"`
+	// A human-readable label to differentiate this authentication method from other methods.
+	// Can only be set for webauthn-based MFA methods.
+	Name          *string `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserMfaMethod) Reset() {
+	*x = UserMfaMethod{}
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserMfaMethod) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserMfaMethod) ProtoMessage() {}
+
+func (x *UserMfaMethod) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_iam_v1_iam_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserMfaMethod.ProtoReflect.Descriptor instead.
+func (*UserMfaMethod) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *UserMfaMethod) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
+}
+
+func (x *UserMfaMethod) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *UserMfaMethod) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *UserMfaMethod) GetLastAuthenticatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastAuthenticatedAt
+	}
+	return nil
+}
+
+func (x *UserMfaMethod) GetLastModifiedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastModifiedAt
+	}
+	return nil
+}
+
+func (x *UserMfaMethod) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
 }
 
 var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
@@ -2744,7 +3100,20 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x15role.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\v\n" +
 	"\t_sub_type\"\x13\n" +
 	"\x11LogoutUserRequest\"\x14\n" +
-	"\x12LogoutUserResponse\"\xe9\x01\n" +
+	"\x12LogoutUserResponse\"\x1b\n" +
+	"\x19ListUserMfaMethodsRequest\"V\n" +
+	"\x1aListUserMfaMethodsResponse\x128\n" +
+	"\x05items\x18\x01 \x03(\v2\".qdrant.cloud.iam.v1.UserMfaMethodR\x05items\"g\n" +
+	"\x1aUpdateUserMfaMethodRequest\x12I\n" +
+	"\n" +
+	"mfa_method\x18\x01 \x01(\v2\".qdrant.cloud.iam.v1.UserMfaMethodB\x06\xbaH\x03\xc8\x01\x01R\tmfaMethod\"h\n" +
+	"\x1bUpdateUserMfaMethodResponse\x12I\n" +
+	"\n" +
+	"mfa_method\x18\x01 \x01(\v2\".qdrant.cloud.iam.v1.UserMfaMethodB\x06\xbaH\x03\xc8\x01\x01R\tmfaMethod\"g\n" +
+	"\x1aDeleteUserMfaMethodRequest\x12I\n" +
+	"\n" +
+	"mfa_method\x18\x01 \x01(\v2\".qdrant.cloud.iam.v1.UserMfaMethodB\x06\xbaH\x03\xc8\x01\x01R\tmfaMethod\"\x1d\n" +
+	"\x1bDeleteUserMfaMethodResponse\"\xe9\x01\n" +
 	"\vUserProfile\x12+\n" +
 	"\n" +
 	"given_name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tgivenName\x88\x01\x01\x12-\n" +
@@ -2769,7 +3138,19 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at*s\n" +
+	"\x11_last_modified_at\"\xf7\x04\n" +
+	"\rUserMfaMethod\x12)\n" +
+	"\vexternal_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
+	"externalId\x12D\n" +
+	"\x04type\x18\x02 \x01(\tB0\xbaH-r+R\x04totpR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x129\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12N\n" +
+	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12I\n" +
+	"\x10last_modified_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12 \n" +
+	"\x04name\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04name\x88\x01\x01:\xde\x01\xbaH\xda\x01\x1a\xd7\x01\n" +
+	"&user_mfa_method.name_only_for_webauthn\x12Uname can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)\x1aV!has(this.name) || this.type == 'webauthn-platform' || this.type == 'webauthn-roaming'B\x13\n" +
+	"\x11_last_modified_atB\a\n" +
+	"\x05_name*s\n" +
 	"\n" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
@@ -2798,7 +3179,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x1fUSER_CONSENT_STATUS_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cUSER_CONSENT_STATUS_ACCEPTED\x10\x01\x12\x1f\n" +
 	"\x1bUSER_CONSENT_STATUS_REVOKED\x10\x02\x12\x1f\n" +
-	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xea \n" +
+	"\x1bUSER_CONSENT_STATUS_PENDING\x10\x032\xad(\n" +
 	"\n" +
 	"IAMService\x12\xa6\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
@@ -2845,7 +3226,16 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc4\x01\x8a\xb5\x18\vwrite:roles\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd4\x01\n" +
 	"\n" +
-	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x1a\x06µ\x18\x02\b\x01B\xde\x01\n" +
+	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"u\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x12\xac\x01\n" +
+	"\x12ListUserMfaMethods\x12..qdrant.cloud.iam.v1.ListUserMfaMethodsRequest\x1a/.qdrant.cloud.iam.v1.ListUserMfaMethodsResponse\"5\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\"\x12 /api/iam/v1/users/me/mfa-methods\x12\x87\x03\n" +
+	"\x13UpdateUserMfaMethod\x12/.qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest\x1a0.qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse\"\x8c\x02\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18%\n" +
+	"\vexternal_id\x12\x16mfa_method.external_id\xca\xf3\x18\x90\x01\b\x02\x12\n" +
+	"mfa-method\"\x1areq.mfa_method.external_id*D/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}R\x1e\n" +
+	"\bactor_id\x12\x12req-md.qc-actor-id\x82\xd3\xe4\x93\x02;\x1a9/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}\x12\x87\x03\n" +
+	"\x13DeleteUserMfaMethod\x12/.qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest\x1a0.qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse\"\x8c\x02\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18%\n" +
+	"\vexternal_id\x12\x16mfa_method.external_id\xca\xf3\x18\x90\x01\b\x03\x12\n" +
+	"mfa-method\"\x1areq.mfa_method.external_id*D/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}R\x1e\n" +
+	"\bactor_id\x12\x12req-md.qc-actor-id\x82\xd3\xe4\x93\x02;*9/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}\x1a\x06µ\x18\x02\b\x01B\xde\x01\n" +
 	"\x17com.qdrant.cloud.iam.v1B\bIamProtoP\x01ZJgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1;iamv1\xa2\x02\x03QCI\xaa\x02\x13Qdrant.Cloud.Iam.V1\xca\x02\x13Qdrant\\Cloud\\Iam\\V1\xe2\x02\x1fQdrant\\Cloud\\Iam\\V1\\GPBMetadata\xea\x02\x16Qdrant::Cloud::Iam::V1b\x06proto3"
 
 var (
@@ -2861,7 +3251,7 @@ func file_qdrant_cloud_iam_v1_iam_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_iam_v1_iam_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_qdrant_cloud_iam_v1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_qdrant_cloud_iam_v1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
 var file_qdrant_cloud_iam_v1_iam_proto_goTypes = []any{
 	(UserStatus)(0),                          // 0: qdrant.cloud.iam.v1.UserStatus
 	(OnboardingStatus)(0),                    // 1: qdrant.cloud.iam.v1.OnboardingStatus
@@ -2908,24 +3298,31 @@ var file_qdrant_cloud_iam_v1_iam_proto_goTypes = []any{
 	(*Role)(nil),                             // 42: qdrant.cloud.iam.v1.Role
 	(*LogoutUserRequest)(nil),                // 43: qdrant.cloud.iam.v1.LogoutUserRequest
 	(*LogoutUserResponse)(nil),               // 44: qdrant.cloud.iam.v1.LogoutUserResponse
-	(*UserProfile)(nil),                      // 45: qdrant.cloud.iam.v1.UserProfile
-	(*UserDemographics)(nil),                 // 46: qdrant.cloud.iam.v1.UserDemographics
-	(*UserConsent)(nil),                      // 47: qdrant.cloud.iam.v1.UserConsent
-	(*fieldmaskpb.FieldMask)(nil),            // 48: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),            // 49: google.protobuf.Timestamp
+	(*ListUserMfaMethodsRequest)(nil),        // 45: qdrant.cloud.iam.v1.ListUserMfaMethodsRequest
+	(*ListUserMfaMethodsResponse)(nil),       // 46: qdrant.cloud.iam.v1.ListUserMfaMethodsResponse
+	(*UpdateUserMfaMethodRequest)(nil),       // 47: qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest
+	(*UpdateUserMfaMethodResponse)(nil),      // 48: qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse
+	(*DeleteUserMfaMethodRequest)(nil),       // 49: qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest
+	(*DeleteUserMfaMethodResponse)(nil),      // 50: qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse
+	(*UserProfile)(nil),                      // 51: qdrant.cloud.iam.v1.UserProfile
+	(*UserDemographics)(nil),                 // 52: qdrant.cloud.iam.v1.UserDemographics
+	(*UserConsent)(nil),                      // 53: qdrant.cloud.iam.v1.UserConsent
+	(*UserMfaMethod)(nil),                    // 54: qdrant.cloud.iam.v1.UserMfaMethod
+	(*fieldmaskpb.FieldMask)(nil),            // 55: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),            // 56: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_iam_v1_iam_proto_depIdxs = []int32{
 	40, // 0: qdrant.cloud.iam.v1.GetAuthenticatedUserResponse.user:type_name -> qdrant.cloud.iam.v1.User
 	40, // 1: qdrant.cloud.iam.v1.ListUsersResponse.items:type_name -> qdrant.cloud.iam.v1.User
 	40, // 2: qdrant.cloud.iam.v1.UpdateUserRequest.user:type_name -> qdrant.cloud.iam.v1.User
-	48, // 3: qdrant.cloud.iam.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	55, // 3: qdrant.cloud.iam.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
 	40, // 4: qdrant.cloud.iam.v1.UpdateUserResponse.user:type_name -> qdrant.cloud.iam.v1.User
 	4,  // 5: qdrant.cloud.iam.v1.GetUserConsentRequest.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
-	47, // 6: qdrant.cloud.iam.v1.GetUserConsentResponse.user_consent:type_name -> qdrant.cloud.iam.v1.UserConsent
-	45, // 7: qdrant.cloud.iam.v1.GetUserProfileResponse.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
-	45, // 8: qdrant.cloud.iam.v1.UpdateUserProfileRequest.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
-	48, // 9: qdrant.cloud.iam.v1.UpdateUserProfileRequest.update_mask:type_name -> google.protobuf.FieldMask
-	45, // 10: qdrant.cloud.iam.v1.UpdateUserProfileResponse.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
+	53, // 6: qdrant.cloud.iam.v1.GetUserConsentResponse.user_consent:type_name -> qdrant.cloud.iam.v1.UserConsent
+	51, // 7: qdrant.cloud.iam.v1.GetUserProfileResponse.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
+	51, // 8: qdrant.cloud.iam.v1.UpdateUserProfileRequest.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
+	55, // 9: qdrant.cloud.iam.v1.UpdateUserProfileRequest.update_mask:type_name -> google.protobuf.FieldMask
+	51, // 10: qdrant.cloud.iam.v1.UpdateUserProfileResponse.user_profile:type_name -> qdrant.cloud.iam.v1.UserProfile
 	4,  // 11: qdrant.cloud.iam.v1.RecordUserConsentRequest.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
 	5,  // 12: qdrant.cloud.iam.v1.RecordUserConsentRequest.status_update:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
 	41, // 13: qdrant.cloud.iam.v1.ListPermissionsResponse.permissions:type_name -> qdrant.cloud.iam.v1.Permission
@@ -2934,65 +3331,78 @@ var file_qdrant_cloud_iam_v1_iam_proto_depIdxs = []int32{
 	42, // 16: qdrant.cloud.iam.v1.CreateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
 	42, // 17: qdrant.cloud.iam.v1.CreateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
 	42, // 18: qdrant.cloud.iam.v1.UpdateRoleRequest.role:type_name -> qdrant.cloud.iam.v1.Role
-	48, // 19: qdrant.cloud.iam.v1.UpdateRoleRequest.update_mask:type_name -> google.protobuf.FieldMask
+	55, // 19: qdrant.cloud.iam.v1.UpdateRoleRequest.update_mask:type_name -> google.protobuf.FieldMask
 	42, // 20: qdrant.cloud.iam.v1.UpdateRoleResponse.role:type_name -> qdrant.cloud.iam.v1.Role
 	41, // 21: qdrant.cloud.iam.v1.ListEffectivePermissionsResponse.permissions:type_name -> qdrant.cloud.iam.v1.Permission
 	42, // 22: qdrant.cloud.iam.v1.ListUserRolesResponse.roles:type_name -> qdrant.cloud.iam.v1.Role
 	40, // 23: qdrant.cloud.iam.v1.ListRoleUsersResponse.users:type_name -> qdrant.cloud.iam.v1.User
-	49, // 24: qdrant.cloud.iam.v1.User.created_at:type_name -> google.protobuf.Timestamp
-	49, // 25: qdrant.cloud.iam.v1.User.last_modified_at:type_name -> google.protobuf.Timestamp
+	56, // 24: qdrant.cloud.iam.v1.User.created_at:type_name -> google.protobuf.Timestamp
+	56, // 25: qdrant.cloud.iam.v1.User.last_modified_at:type_name -> google.protobuf.Timestamp
 	0,  // 26: qdrant.cloud.iam.v1.User.status:type_name -> qdrant.cloud.iam.v1.UserStatus
 	1,  // 27: qdrant.cloud.iam.v1.User.onboarding_status:type_name -> qdrant.cloud.iam.v1.OnboardingStatus
-	49, // 28: qdrant.cloud.iam.v1.Role.created_at:type_name -> google.protobuf.Timestamp
-	49, // 29: qdrant.cloud.iam.v1.Role.last_modified_at:type_name -> google.protobuf.Timestamp
+	56, // 28: qdrant.cloud.iam.v1.Role.created_at:type_name -> google.protobuf.Timestamp
+	56, // 29: qdrant.cloud.iam.v1.Role.last_modified_at:type_name -> google.protobuf.Timestamp
 	2,  // 30: qdrant.cloud.iam.v1.Role.role_type:type_name -> qdrant.cloud.iam.v1.RoleType
 	41, // 31: qdrant.cloud.iam.v1.Role.permissions:type_name -> qdrant.cloud.iam.v1.Permission
 	3,  // 32: qdrant.cloud.iam.v1.Role.sub_type:type_name -> qdrant.cloud.iam.v1.SystemRoleSubType
-	46, // 33: qdrant.cloud.iam.v1.UserProfile.demographics:type_name -> qdrant.cloud.iam.v1.UserDemographics
-	4,  // 34: qdrant.cloud.iam.v1.UserConsent.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
-	5,  // 35: qdrant.cloud.iam.v1.UserConsent.status:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
-	49, // 36: qdrant.cloud.iam.v1.UserConsent.last_modified_at:type_name -> google.protobuf.Timestamp
-	6,  // 37: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:input_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
-	8,  // 38: qdrant.cloud.iam.v1.IAMService.ListUsers:input_type -> qdrant.cloud.iam.v1.ListUsersRequest
-	10, // 39: qdrant.cloud.iam.v1.IAMService.UpdateUser:input_type -> qdrant.cloud.iam.v1.UpdateUserRequest
-	14, // 40: qdrant.cloud.iam.v1.IAMService.GetUserProfile:input_type -> qdrant.cloud.iam.v1.GetUserProfileRequest
-	16, // 41: qdrant.cloud.iam.v1.IAMService.UpdateUserProfile:input_type -> qdrant.cloud.iam.v1.UpdateUserProfileRequest
-	12, // 42: qdrant.cloud.iam.v1.IAMService.GetUserConsent:input_type -> qdrant.cloud.iam.v1.GetUserConsentRequest
-	18, // 43: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:input_type -> qdrant.cloud.iam.v1.RecordUserConsentRequest
-	20, // 44: qdrant.cloud.iam.v1.IAMService.ListPermissions:input_type -> qdrant.cloud.iam.v1.ListPermissionsRequest
-	22, // 45: qdrant.cloud.iam.v1.IAMService.ListRoles:input_type -> qdrant.cloud.iam.v1.ListRolesRequest
-	24, // 46: qdrant.cloud.iam.v1.IAMService.GetRole:input_type -> qdrant.cloud.iam.v1.GetRoleRequest
-	26, // 47: qdrant.cloud.iam.v1.IAMService.CreateRole:input_type -> qdrant.cloud.iam.v1.CreateRoleRequest
-	28, // 48: qdrant.cloud.iam.v1.IAMService.UpdateRole:input_type -> qdrant.cloud.iam.v1.UpdateRoleRequest
-	30, // 49: qdrant.cloud.iam.v1.IAMService.DeleteRole:input_type -> qdrant.cloud.iam.v1.DeleteRoleRequest
-	32, // 50: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:input_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsRequest
-	34, // 51: qdrant.cloud.iam.v1.IAMService.ListUserRoles:input_type -> qdrant.cloud.iam.v1.ListUserRolesRequest
-	36, // 52: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:input_type -> qdrant.cloud.iam.v1.ListRoleUsersRequest
-	38, // 53: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:input_type -> qdrant.cloud.iam.v1.AssignUserRolesRequest
-	43, // 54: qdrant.cloud.iam.v1.IAMService.LogoutUser:input_type -> qdrant.cloud.iam.v1.LogoutUserRequest
-	7,  // 55: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:output_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserResponse
-	9,  // 56: qdrant.cloud.iam.v1.IAMService.ListUsers:output_type -> qdrant.cloud.iam.v1.ListUsersResponse
-	11, // 57: qdrant.cloud.iam.v1.IAMService.UpdateUser:output_type -> qdrant.cloud.iam.v1.UpdateUserResponse
-	15, // 58: qdrant.cloud.iam.v1.IAMService.GetUserProfile:output_type -> qdrant.cloud.iam.v1.GetUserProfileResponse
-	17, // 59: qdrant.cloud.iam.v1.IAMService.UpdateUserProfile:output_type -> qdrant.cloud.iam.v1.UpdateUserProfileResponse
-	13, // 60: qdrant.cloud.iam.v1.IAMService.GetUserConsent:output_type -> qdrant.cloud.iam.v1.GetUserConsentResponse
-	19, // 61: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:output_type -> qdrant.cloud.iam.v1.RecordUserConsentResponse
-	21, // 62: qdrant.cloud.iam.v1.IAMService.ListPermissions:output_type -> qdrant.cloud.iam.v1.ListPermissionsResponse
-	23, // 63: qdrant.cloud.iam.v1.IAMService.ListRoles:output_type -> qdrant.cloud.iam.v1.ListRolesResponse
-	25, // 64: qdrant.cloud.iam.v1.IAMService.GetRole:output_type -> qdrant.cloud.iam.v1.GetRoleResponse
-	27, // 65: qdrant.cloud.iam.v1.IAMService.CreateRole:output_type -> qdrant.cloud.iam.v1.CreateRoleResponse
-	29, // 66: qdrant.cloud.iam.v1.IAMService.UpdateRole:output_type -> qdrant.cloud.iam.v1.UpdateRoleResponse
-	31, // 67: qdrant.cloud.iam.v1.IAMService.DeleteRole:output_type -> qdrant.cloud.iam.v1.DeleteRoleResponse
-	33, // 68: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:output_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsResponse
-	35, // 69: qdrant.cloud.iam.v1.IAMService.ListUserRoles:output_type -> qdrant.cloud.iam.v1.ListUserRolesResponse
-	37, // 70: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:output_type -> qdrant.cloud.iam.v1.ListRoleUsersResponse
-	39, // 71: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:output_type -> qdrant.cloud.iam.v1.AssignUserRolesResponse
-	44, // 72: qdrant.cloud.iam.v1.IAMService.LogoutUser:output_type -> qdrant.cloud.iam.v1.LogoutUserResponse
-	55, // [55:73] is the sub-list for method output_type
-	37, // [37:55] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	54, // 33: qdrant.cloud.iam.v1.ListUserMfaMethodsResponse.items:type_name -> qdrant.cloud.iam.v1.UserMfaMethod
+	54, // 34: qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest.mfa_method:type_name -> qdrant.cloud.iam.v1.UserMfaMethod
+	54, // 35: qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse.mfa_method:type_name -> qdrant.cloud.iam.v1.UserMfaMethod
+	54, // 36: qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest.mfa_method:type_name -> qdrant.cloud.iam.v1.UserMfaMethod
+	52, // 37: qdrant.cloud.iam.v1.UserProfile.demographics:type_name -> qdrant.cloud.iam.v1.UserDemographics
+	4,  // 38: qdrant.cloud.iam.v1.UserConsent.document_type:type_name -> qdrant.cloud.iam.v1.LegalDocumentType
+	5,  // 39: qdrant.cloud.iam.v1.UserConsent.status:type_name -> qdrant.cloud.iam.v1.UserConsentStatus
+	56, // 40: qdrant.cloud.iam.v1.UserConsent.last_modified_at:type_name -> google.protobuf.Timestamp
+	56, // 41: qdrant.cloud.iam.v1.UserMfaMethod.created_at:type_name -> google.protobuf.Timestamp
+	56, // 42: qdrant.cloud.iam.v1.UserMfaMethod.last_authenticated_at:type_name -> google.protobuf.Timestamp
+	56, // 43: qdrant.cloud.iam.v1.UserMfaMethod.last_modified_at:type_name -> google.protobuf.Timestamp
+	6,  // 44: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:input_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserRequest
+	8,  // 45: qdrant.cloud.iam.v1.IAMService.ListUsers:input_type -> qdrant.cloud.iam.v1.ListUsersRequest
+	10, // 46: qdrant.cloud.iam.v1.IAMService.UpdateUser:input_type -> qdrant.cloud.iam.v1.UpdateUserRequest
+	14, // 47: qdrant.cloud.iam.v1.IAMService.GetUserProfile:input_type -> qdrant.cloud.iam.v1.GetUserProfileRequest
+	16, // 48: qdrant.cloud.iam.v1.IAMService.UpdateUserProfile:input_type -> qdrant.cloud.iam.v1.UpdateUserProfileRequest
+	12, // 49: qdrant.cloud.iam.v1.IAMService.GetUserConsent:input_type -> qdrant.cloud.iam.v1.GetUserConsentRequest
+	18, // 50: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:input_type -> qdrant.cloud.iam.v1.RecordUserConsentRequest
+	20, // 51: qdrant.cloud.iam.v1.IAMService.ListPermissions:input_type -> qdrant.cloud.iam.v1.ListPermissionsRequest
+	22, // 52: qdrant.cloud.iam.v1.IAMService.ListRoles:input_type -> qdrant.cloud.iam.v1.ListRolesRequest
+	24, // 53: qdrant.cloud.iam.v1.IAMService.GetRole:input_type -> qdrant.cloud.iam.v1.GetRoleRequest
+	26, // 54: qdrant.cloud.iam.v1.IAMService.CreateRole:input_type -> qdrant.cloud.iam.v1.CreateRoleRequest
+	28, // 55: qdrant.cloud.iam.v1.IAMService.UpdateRole:input_type -> qdrant.cloud.iam.v1.UpdateRoleRequest
+	30, // 56: qdrant.cloud.iam.v1.IAMService.DeleteRole:input_type -> qdrant.cloud.iam.v1.DeleteRoleRequest
+	32, // 57: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:input_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsRequest
+	34, // 58: qdrant.cloud.iam.v1.IAMService.ListUserRoles:input_type -> qdrant.cloud.iam.v1.ListUserRolesRequest
+	36, // 59: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:input_type -> qdrant.cloud.iam.v1.ListRoleUsersRequest
+	38, // 60: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:input_type -> qdrant.cloud.iam.v1.AssignUserRolesRequest
+	43, // 61: qdrant.cloud.iam.v1.IAMService.LogoutUser:input_type -> qdrant.cloud.iam.v1.LogoutUserRequest
+	45, // 62: qdrant.cloud.iam.v1.IAMService.ListUserMfaMethods:input_type -> qdrant.cloud.iam.v1.ListUserMfaMethodsRequest
+	47, // 63: qdrant.cloud.iam.v1.IAMService.UpdateUserMfaMethod:input_type -> qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest
+	49, // 64: qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod:input_type -> qdrant.cloud.iam.v1.DeleteUserMfaMethodRequest
+	7,  // 65: qdrant.cloud.iam.v1.IAMService.GetAuthenticatedUser:output_type -> qdrant.cloud.iam.v1.GetAuthenticatedUserResponse
+	9,  // 66: qdrant.cloud.iam.v1.IAMService.ListUsers:output_type -> qdrant.cloud.iam.v1.ListUsersResponse
+	11, // 67: qdrant.cloud.iam.v1.IAMService.UpdateUser:output_type -> qdrant.cloud.iam.v1.UpdateUserResponse
+	15, // 68: qdrant.cloud.iam.v1.IAMService.GetUserProfile:output_type -> qdrant.cloud.iam.v1.GetUserProfileResponse
+	17, // 69: qdrant.cloud.iam.v1.IAMService.UpdateUserProfile:output_type -> qdrant.cloud.iam.v1.UpdateUserProfileResponse
+	13, // 70: qdrant.cloud.iam.v1.IAMService.GetUserConsent:output_type -> qdrant.cloud.iam.v1.GetUserConsentResponse
+	19, // 71: qdrant.cloud.iam.v1.IAMService.RecordUserConsent:output_type -> qdrant.cloud.iam.v1.RecordUserConsentResponse
+	21, // 72: qdrant.cloud.iam.v1.IAMService.ListPermissions:output_type -> qdrant.cloud.iam.v1.ListPermissionsResponse
+	23, // 73: qdrant.cloud.iam.v1.IAMService.ListRoles:output_type -> qdrant.cloud.iam.v1.ListRolesResponse
+	25, // 74: qdrant.cloud.iam.v1.IAMService.GetRole:output_type -> qdrant.cloud.iam.v1.GetRoleResponse
+	27, // 75: qdrant.cloud.iam.v1.IAMService.CreateRole:output_type -> qdrant.cloud.iam.v1.CreateRoleResponse
+	29, // 76: qdrant.cloud.iam.v1.IAMService.UpdateRole:output_type -> qdrant.cloud.iam.v1.UpdateRoleResponse
+	31, // 77: qdrant.cloud.iam.v1.IAMService.DeleteRole:output_type -> qdrant.cloud.iam.v1.DeleteRoleResponse
+	33, // 78: qdrant.cloud.iam.v1.IAMService.ListEffectivePermissions:output_type -> qdrant.cloud.iam.v1.ListEffectivePermissionsResponse
+	35, // 79: qdrant.cloud.iam.v1.IAMService.ListUserRoles:output_type -> qdrant.cloud.iam.v1.ListUserRolesResponse
+	37, // 80: qdrant.cloud.iam.v1.IAMService.ListRoleUsers:output_type -> qdrant.cloud.iam.v1.ListRoleUsersResponse
+	39, // 81: qdrant.cloud.iam.v1.IAMService.AssignUserRoles:output_type -> qdrant.cloud.iam.v1.AssignUserRolesResponse
+	44, // 82: qdrant.cloud.iam.v1.IAMService.LogoutUser:output_type -> qdrant.cloud.iam.v1.LogoutUserResponse
+	46, // 83: qdrant.cloud.iam.v1.IAMService.ListUserMfaMethods:output_type -> qdrant.cloud.iam.v1.ListUserMfaMethodsResponse
+	48, // 84: qdrant.cloud.iam.v1.IAMService.UpdateUserMfaMethod:output_type -> qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse
+	50, // 85: qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod:output_type -> qdrant.cloud.iam.v1.DeleteUserMfaMethodResponse
+	65, // [65:86] is the sub-list for method output_type
+	44, // [44:65] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_iam_v1_iam_proto_init() }
@@ -3003,16 +3413,17 @@ func file_qdrant_cloud_iam_v1_iam_proto_init() {
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[35].OneofWrappers = []any{}
 	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[36].OneofWrappers = []any{}
-	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[39].OneofWrappers = []any{}
-	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[40].OneofWrappers = []any{}
-	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[41].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[45].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[46].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[47].OneofWrappers = []any{}
+	file_qdrant_cloud_iam_v1_iam_proto_msgTypes[48].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_iam_v1_iam_proto_rawDesc), len(file_qdrant_cloud_iam_v1_iam_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   42,
+			NumMessages:   49,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

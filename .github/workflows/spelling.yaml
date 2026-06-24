@@ -113,6 +113,7 @@ jobs:
           cspell:node/dict/node.txt
           cspell:golang/dict/go.txt
           cspell:k8s/dict/k8s.txt
+          cspell:aws/aws.txt
 
   comment-push:
     name: Report (Push)
