@@ -417,17 +417,15 @@ class UserConsent(_message.Message):
     def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status: _Optional[_Union[UserConsentStatus, str]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., is_accepted: _Optional[bool] = ...) -> None: ...
 
 class UserMfaMethod(_message.Message):
-    __slots__ = ("external_id", "type", "created_at", "last_authenticated_at", "last_modified_at", "name")
+    __slots__ = ("external_id", "type", "created_at", "last_authenticated_at", "name")
     EXTERNAL_ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_AUTHENTICATED_AT_FIELD_NUMBER: _ClassVar[int]
-    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     external_id: str
     type: str
     created_at: _timestamp_pb2.Timestamp
     last_authenticated_at: _timestamp_pb2.Timestamp
-    last_modified_at: _timestamp_pb2.Timestamp
     name: str
-    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...
+    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...

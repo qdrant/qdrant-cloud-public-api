@@ -629,14 +629,6 @@
             "format": "date-time"
           },
           {
-            "name": "mfaMethod.lastModifiedAt",
-            "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
             "name": "mfaMethod.name",
             "description": "A human-readable label to differentiate this authentication method from other methods.\nCan only be set for webauthn-based MFA methods.",
             "in": "query",
@@ -691,14 +683,6 @@
           {
             "name": "mfaMethod.lastAuthenticatedAt",
             "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "mfaMethod.lastModifiedAt",
-            "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1463,11 +1447,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the user last updated their MFA information (e.g., renamed MFA device).\nThis is a read-only field."
         },
         "name": {
           "type": "string",

@@ -1052,12 +1052,9 @@ message UserMfaMethod {
   // The timestamp when the user was last authenticated with MFA.
   // This is a read-only field.
   google.protobuf.Timestamp last_authenticated_at = 4;
-  // The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
-  // This is a read-only field.
-  optional google.protobuf.Timestamp last_modified_at = 5;
   // A human-readable label to differentiate this authentication method from other methods.
   // Can only be set for webauthn-based MFA methods.
-  optional string name = 6 [(buf.validate.field).string = {min_len: 1}];
+  optional string name = 5 [(buf.validate.field).string = {min_len: 1}];
   option (buf.validate.message).cel = {
     id: "user_mfa_method.name_only_for_webauthn"
     message: "name can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)"

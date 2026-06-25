@@ -1588,18 +1588,10 @@ export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod">
   lastAuthenticatedAt?: Timestamp | undefined;
 
   /**
-   * The timestamp when the user last updated their MFA information (e.g., renamed MFA device).
-   * This is a read-only field.
-   *
-   * @generated from field: optional google.protobuf.Timestamp last_modified_at = 5;
-   */
-  lastModifiedAt?: Timestamp | undefined;
-
-  /**
    * A human-readable label to differentiate this authentication method from other methods.
    * Can only be set for webauthn-based MFA methods.
    *
-   * @generated from field: optional string name = 6;
+   * @generated from field: optional string name = 5;
    */
   name?: string | undefined;
 };
