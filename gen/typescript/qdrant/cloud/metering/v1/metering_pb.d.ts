@@ -901,6 +901,14 @@ export declare type UsageBreakdownCluster = Message<"qdrant.cloud.metering.v1.Us
   clusterLabels: { [key: string]: string };
 
   /**
+   * The label key designated as the cluster's cost allocation label, if set.
+   * Always one of the keys in cluster_labels.
+   *
+   * @generated from field: optional string cost_allocation_label = 17;
+   */
+  costAllocationLabel?: string | undefined;
+
+  /**
    * The start time of the metering window (UTC).
    *
    * @generated from field: google.protobuf.Timestamp start_time = 4;
@@ -1038,6 +1046,14 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
    * @generated from field: map<string, string> cluster_labels = 3;
    */
   clusterLabels: { [key: string]: string };
+
+  /**
+   * The label key designated as the cluster's cost allocation label, if set.
+   * Always one of the keys in cluster_labels.
+   *
+   * @generated from field: optional string cost_allocation_label = 17;
+   */
+  costAllocationLabel?: string | undefined;
 
   /**
    * The start time of the metering window (UTC).

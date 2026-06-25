@@ -488,6 +488,10 @@
           },
           "description": "Labels associated with the cluster at the time of metering."
         },
+        "costAllocationLabel": {
+          "type": "string",
+          "description": "The label key designated as the cluster's cost allocation label, if set.\nAlways one of the keys in cluster_labels."
+        },
         "startTime": {
           "type": "string",
           "format": "date-time",
