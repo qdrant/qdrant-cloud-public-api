@@ -287,6 +287,9 @@ message UsageBreakdownCluster {
   string cluster_name = 2 [(buf.validate.field).string.min_len = 1];
   // Labels associated with the cluster at the time of metering.
   map<string, string> cluster_labels = 3;
+  // The label key designated as the cluster's cost allocation label, if set.
+  // Always one of the keys in cluster_labels.
+  optional string cost_allocation_label = 17;
   // The start time of the metering window (UTC).
   google.protobuf.Timestamp start_time = 4 [(buf.validate.field).required = true];
   // The end time of the metering window (UTC).

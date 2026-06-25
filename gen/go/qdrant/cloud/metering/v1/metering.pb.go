@@ -1130,6 +1130,9 @@ type UsageBreakdownCluster struct {
 	ClusterName string `protobuf:"bytes,2,opt,name=cluster_name,json=clusterName,proto3" json:"cluster_name,omitempty"`
 	// Labels associated with the cluster at the time of metering.
 	ClusterLabels map[string]string `protobuf:"bytes,3,rep,name=cluster_labels,json=clusterLabels,proto3" json:"cluster_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// The label key designated as the cluster's cost allocation label, if set.
+	// Always one of the keys in cluster_labels.
+	CostAllocationLabel *string `protobuf:"bytes,17,opt,name=cost_allocation_label,json=costAllocationLabel,proto3,oneof" json:"cost_allocation_label,omitempty"`
 	// The start time of the metering window (UTC).
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// The end time of the metering window (UTC).
@@ -1217,6 +1220,13 @@ func (x *UsageBreakdownCluster) GetClusterLabels() map[string]string {
 		return x.ClusterLabels
 	}
 	return nil
+}
+
+func (x *UsageBreakdownCluster) GetCostAllocationLabel() string {
+	if x != nil && x.CostAllocationLabel != nil {
+		return *x.CostAllocationLabel
+	}
+	return ""
 }
 
 func (x *UsageBreakdownCluster) GetStartTime() *timestamppb.Timestamp {
@@ -1467,12 +1477,13 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12\x1d\n" +
 	"\n" +
 	"model_name\x18\x03 \x01(\tR\tmodelName\x12!\n" +
-	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xcf\v\n" +
+	"\fpricing_tier\x18\x04 \x01(\tR\vpricingTier\"\xa2\f\n" +
 	"\x15UsageBreakdownCluster\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
 	"\fcluster_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vclusterName\x12i\n" +
-	"\x0ecluster_labels\x18\x03 \x03(\v2B.qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntryR\rclusterLabels\x12A\n" +
+	"\x0ecluster_labels\x18\x03 \x03(\v2B.qdrant.cloud.metering.v1.UsageBreakdownCluster.ClusterLabelsEntryR\rclusterLabels\x127\n" +
+	"\x15cost_allocation_label\x18\x11 \x01(\tH\x01R\x13costAllocationLabel\x88\x01\x01\x12A\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tstartTime\x12=\n" +
 	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\aendTime\x124\n" +
@@ -1487,13 +1498,14 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x15backup_storage_config\x18\f \x01(\v2-.qdrant.cloud.metering.v1.BackupStorageConfigH\x00R\x13backupStorageConfig\x12V\n" +
 	"\x10inference_config\x18\r \x01(\v2).qdrant.cloud.metering.v1.InferenceConfigH\x00R\x0finferenceConfig\x12*\n" +
 	"\bquantity\x18\x0e \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\bquantity\x12J\n" +
-	"\x1adiscount_amount_millicents\x18\x0f \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x01R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
-	"\x17discount_amount_percent\x18\x10 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x02R\x15discountAmountPercent\x88\x01\x01\x1a@\n" +
+	"\x1adiscount_amount_millicents\x18\x0f \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x02R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
+	"\x17discount_amount_percent\x18\x10 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x03R\x15discountAmountPercent\x88\x01\x01\x1a@\n" +
 	"\x12ClusterLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:y\xbaHv\x1at\n" +
 	".usage_breakdown_cluster.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\b\n" +
-	"\x06configB\x1d\n" +
+	"\x06configB\x18\n" +
+	"\x16_cost_allocation_labelB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xaa\x05\n" +
 	"\x0fMeteringService\x12\xdb\x01\n" +
