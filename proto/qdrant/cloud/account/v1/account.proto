@@ -245,6 +245,8 @@ service AccountService {
   rpc AcceptAccountInvite(AcceptAccountInviteRequest) returns (AcceptAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // pre-membership: auth must not be account-scoped (user is not yet a member of the account)
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
@@ -271,6 +273,8 @@ service AccountService {
   rpc RejectAccountInvite(RejectAccountInviteRequest) returns (RejectAccountInviteResponse) {
     // permissions
     option (common.v1.permissions) = "";
+    // pre-membership: auth must not be account-scoped (user is not yet a member of the account)
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
