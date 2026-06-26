@@ -359,7 +359,9 @@ message SpaceConfiguration {
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
-    items: {string: {ipv4_prefix: true}}
+    items: {
+      string: {ipv4_prefix: true}
+    }
   }];
 }
 

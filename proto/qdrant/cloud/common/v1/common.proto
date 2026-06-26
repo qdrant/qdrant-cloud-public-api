@@ -113,8 +113,12 @@ message PatchSource {
   // GetUserProfile). In that case the gateway invokes the Get with an
   // empty request and the caller's auth context.
   map<string, string> field_mapping = 2 [(buf.validate.field).map = {
-    keys: {string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}}
-    values: {string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}}
+    keys: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
+    values: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
   }];
 
   // The field path in the Get response message that contains the resource.
