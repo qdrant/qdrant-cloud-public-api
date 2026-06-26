@@ -685,9 +685,7 @@ message ClusterConfiguration {
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
-    items: {
-      string: {ipv4_prefix: true}
-    }
+    items: {string: {ipv4_prefix: true}}
   }];
   // The type of service to use for this cluster in a hybrid cloud environment.
   // It is ignored for managed cloud clusters. This is an optional field, default is Cluster IP.

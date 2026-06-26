@@ -708,11 +708,7 @@ message AccountInvite {
   // When creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.
   // Each string in the list must be a valid UUID, to be resolved in the provided account.
   // Please use IAMService.ListRoles to get the possible roles to assign.
-  repeated string user_role_ids = 5 [(buf.validate.field).repeated = {
-    items: {
-      string: {uuid: true}
-    }
-  }];
+  repeated string user_role_ids = 5 [(buf.validate.field).repeated = {items: {string: {uuid: true}}}];
   // The timestamp when the invite was created.
   // This is a read-only field.
   google.protobuf.Timestamp created_at = 6;
