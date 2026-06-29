@@ -990,9 +990,51 @@
         "clusterStorageConfiguration": {
           "$ref": "#/definitions/v1ClusterStorageConfiguration",
           "title": "Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration"
+        },
+        "gpuConfiguration": {
+          "$ref": "#/definitions/v1ClusterConfigurationGpuConfiguration",
+          "description": "The advanced gpu configuration for the database.\nThis is for hybrid cloud clusters only. It is ignored for managed cloud clusters."
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."
+    },
+    "v1ClusterConfigurationGpuConfiguration": {
+      "type": "object",
+      "properties": {
+        "forceHalfPrecision": {
+          "type": "boolean",
+          "description": "Force half precision (`f16`) for `f32` values while indexing.\nConversion happens only in GPU memory and does not affect storage type.\nThis is an optional field, default is false."
+        },
+        "deviceFilter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Filter GPU devices by hardware name (case-insensitive).\nList of substrings to match against the GPU device name.\nIf not specified, all devices are accepted."
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of explicit GPU device indexes to use.\nIf `device_filter` is set, indexes are applied after filtering.\nIf not specified, all devices are accepted."
+        },
+        "parallelIndexes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of parallel indexes to run on the GPU.\nThis is an optional field, default is 1."
+        },
+        "groupsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Amount of used Vulkan groups on the GPU.\nIn other words, how many parallel points can be indexed by GPU.\nDo not change this value unless you know what you are doing."
+        },
+        "allowIntegrated": {
+          "type": "boolean",
+          "description": "Allow integrated GPUs to be used.\nThis is an optional field, default is false."
+        }
+      },
+      "description": "ClusterConfigurationGpuConfiguration defines advanced GPU configuration for clusters.\nThis is relevant for hybrid cloud clusters only."
     },
     "v1ClusterConfigurationGpuType": {
       "type": "string",

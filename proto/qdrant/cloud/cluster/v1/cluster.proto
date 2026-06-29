@@ -624,6 +624,33 @@ enum ClusterConfigurationGpuType {
   CLUSTER_CONFIGURATION_GPU_TYPE_AMD = 2;
 }
 
+// ClusterConfigurationGpuConfiguration defines advanced GPU configuration for clusters.
+// This is relevant for hybrid cloud clusters only.
+message ClusterConfigurationGpuConfiguration {
+  // Force half precision (`f16`) for `f32` values while indexing.
+  // Conversion happens only in GPU memory and does not affect storage type.
+  // This is an optional field, default is false.
+  optional bool force_half_precision = 1;
+  // Filter GPU devices by hardware name (case-insensitive).
+  // List of substrings to match against the GPU device name.
+  // If not specified, all devices are accepted.
+  repeated string device_filter = 2 [(buf.validate.field).repeated.max_items = 10];
+  // List of explicit GPU device indexes to use.
+  // If `device_filter` is set, indexes are applied after filtering.
+  // If not specified, all devices are accepted.
+  repeated string devices = 3 [(buf.validate.field).repeated.max_items = 10];
+  // Number of parallel indexes to run on the GPU.
+  // This is an optional field, default is 1.
+  optional uint32 parallel_indexes = 4 [(buf.validate.field).uint32.gte = 1];
+  // Amount of used Vulkan groups on the GPU.
+  // In other words, how many parallel points can be indexed by GPU.
+  // Do not change this value unless you know what you are doing.
+  optional uint32 groups_count = 5 [(buf.validate.field).uint32.gte = 1];
+  // Allow integrated GPUs to be used.
+  // This is an optional field, default is false.
+  optional bool allow_integrated = 6;
+}
+
 // ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.
 enum ClusterConfigurationRestartPolicy {
   // Restart policy is unspecified.
@@ -737,6 +764,9 @@ message ClusterConfiguration {
   repeated common.v1.TopologySpreadConstraint topology_spread_constraints = 25 [(buf.validate.field).repeated = {max_items: 10}];
   // Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration
   optional ClusterStorageConfiguration cluster_storage_configuration = 26;
+  // The advanced gpu configuration for the database.
+  // This is for hybrid cloud clusters only. It is ignored for managed cloud clusters.
+  optional ClusterConfigurationGpuConfiguration gpu_configuration = 27;
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
