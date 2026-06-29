@@ -84,6 +84,7 @@ func (ClusterCreationBlockingReason) EnumDescriptor() ([]byte, []int) {
 }
 
 // PlatformMode Enums
+// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 type PlatformMode int32
 
 const (
@@ -147,6 +148,7 @@ type ListCloudProvidersRequest struct {
 	// An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
 	// If not specified, all supported platform modes will be returned.
 	// This is an optional field.
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedMode *PlatformMode `protobuf:"varint,2,opt,name=supported_mode,json=supportedMode,proto3,enum=qdrant.cloud.platform.v1.PlatformMode,oneof" json:"supported_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -248,6 +250,7 @@ type ListGlobalCloudProvidersRequest struct {
 	// An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
 	// If not specified, all supported platform modes will be returned.
 	// This is an optional field.
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedMode *PlatformMode `protobuf:"varint,2,opt,name=supported_mode,json=supportedMode,proto3,enum=qdrant.cloud.platform.v1.PlatformMode,oneof" json:"supported_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -345,6 +348,7 @@ type ListGlobalCloudProviderRegionsRequest struct {
 	// An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
 	// If not specified, all supported platform modes will be returned.
 	// This is an optional field.
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedMode *PlatformMode `protobuf:"varint,2,opt,name=supported_mode,json=supportedMode,proto3,enum=qdrant.cloud.platform.v1.PlatformMode,oneof" json:"supported_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -555,6 +559,7 @@ type ListCloudProviderRegionsRequest struct {
 	// An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
 	// If not specified, all supported platform modes will be returned.
 	// This is an optional field.
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedMode *PlatformMode `protobuf:"varint,3,opt,name=supported_mode,json=supportedMode,proto3,enum=qdrant.cloud.platform.v1.PlatformMode,oneof" json:"supported_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -785,6 +790,7 @@ type CloudProvider struct {
 	Available bool `protobuf:"varint,4,opt,name=available,proto3" json:"available,omitempty"`
 	// The supported platform modes of the cloud provider (dedicated clusters and/or serverless spaces).
 	// If a certain mode is supported at least 1 region for this provider supports it.
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedModes []PlatformMode `protobuf:"varint,5,rep,packed,name=supported_modes,json=supportedModes,proto3,enum=qdrant.cloud.platform.v1.PlatformMode" json:"supported_modes,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -890,6 +896,7 @@ type CloudProviderRegion struct {
 	// Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
 	VolumeSnapshotClasses []*v1.HybridCloudEnvironmentVolumeSnapshotClass `protobuf:"bytes,12,rep,name=volume_snapshot_classes,json=volumeSnapshotClasses,proto3" json:"volume_snapshot_classes,omitempty"`
 	// The supported platform modes of the cloud provider region (dedicated clusters and/or serverless spaces).
+	// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
 	SupportedModes []PlatformMode `protobuf:"varint,13,rep,packed,name=supported_modes,json=supportedModes,proto3,enum=qdrant.cloud.platform.v1.PlatformMode" json:"supported_modes,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

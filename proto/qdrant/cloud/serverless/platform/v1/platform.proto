@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package qdrant.cloud.platform.v1;
+package qdrant.cloud.serverless.platform.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/hybrid/v1/hybrid_cloud.proto";
 
-// PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
 service PlatformService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
@@ -21,7 +21,7 @@ service PlatformService {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/cloud-providers"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers"};
   }
   // Lists all cloud providers in the account identified by the given ID.
   // Required permissions:
@@ -30,7 +30,7 @@ service PlatformService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers"};
   }
   // Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
   // Authentication is not required.
@@ -38,7 +38,7 @@ service PlatformService {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cloud_provider_id"
@@ -51,7 +51,7 @@ service PlatformService {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cloud_provider_id"
@@ -72,7 +72,7 @@ service PlatformService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cloud_provider_id"
@@ -89,7 +89,7 @@ service PlatformService {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
     // log fields
     option (common.v1.log_fields) = {
       name: "cloud_provider_id"
@@ -107,14 +107,6 @@ message ListCloudProvidersRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
-  // If not specified, all supported platform modes will be returned.
-  // This is an optional field.
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
 }
 
 // ListCloudProvidersResponse is the response from the ListCloudProviders function.
@@ -126,14 +118,7 @@ message ListCloudProvidersResponse {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
 message ListGlobalCloudProvidersRequest {
-  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
-  // If not specified, all supported platform modes will be returned.
-  // This is an optional field.
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  // Empty
 }
 
 // ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
@@ -148,14 +133,6 @@ message ListGlobalCloudProviderRegionsRequest {
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
   // This is a required field.
   string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
-  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
-  // If not specified, all supported platform modes will be returned.
-  // This is an optional field.
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  optional PlatformMode supported_mode = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
 }
 
 // ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
@@ -189,14 +166,6 @@ message ListCloudProviderRegionsRequest {
   // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
   // This is a required field.
   string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
-  // An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
-  // If not specified, all supported platform modes will be returned.
-  // This is an optional field.
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  optional PlatformMode supported_mode = 3 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
 }
 
 // ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
@@ -228,105 +197,35 @@ message GetCloudProviderRegionResponse {
 // CloudProvider represents a cloud provider identifier and name.
 message CloudProvider {
   // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure", "hybrid".
+  // e.g. "aws", "gcp", "azure".
   string id = 1 [(buf.validate.field).string.min_len = 3];
   // The human-readable name of the cloud provider.
-  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure", "Hybrid Cloud".
+  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure".
   string name = 2 [(buf.validate.field).string.min_len = 1];
-  // Whether the cloud provider is part of the free-tier offering.
-  bool free_tier = 3;
-  // Indicates whether the cloud provider is available for the use case.
-  bool available = 4;
-  // The supported platform modes of the cloud provider (dedicated clusters and/or serverless spaces).
-  // If a certain mode is supported at least 1 region for this provider supports it.
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  repeated PlatformMode supported_modes = 5 [(buf.validate.field).repeated = {
-    items: {
-      enum: {
-        defined_only: true
-        not_in: [0]
-      }
-    }
-  }];
+  // Indicates whether the cloud provider is available at the moment.
+  bool available = 3;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // CloudProviderRegion represents a cloud provider region.
 message CloudProviderRegion {
   // The identifier for the cloud provider region.
-  // e.g. "us-west-1", "europe-west1", "eastus", "{UUID in case of hybrid cloud}".
+  // e.g. "us-west-1", "europe-west1", "eastus".
   string id = 1 [(buf.validate.field).string.min_len = 1];
   // The human-readable name of the cloud provider region.
   // e.g. "Frankfurt", "Tokyo", etc.
   string name = 2 [(buf.validate.field).string.min_len = 1];
-  // Whether the cloud region is part of the free-tier offering.
-  bool free_tier = 3;
-  // Indicates whether the cloud region is available or the hybrid cloud region is ready for clusters.
-  bool available = 4;
+  // Indicates whether the cloud region is available.
+  bool available = 3;
   // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure", "openshift", "linode", "unknown".
-  string provider = 5 [(buf.validate.field).string.min_len = 1];
+  // e.g. "aws", "gcp", "azure".
+  string provider = 4 [(buf.validate.field).string.min_len = 1];
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
-  optional string country_iso_code = 6 [(buf.validate.field).string = {
+  optional string country_iso_code = 5 [(buf.validate.field).string = {
     len: 2
     pattern: "^[A-Z]{2}$"
   }];
   // Geographic location grouping of the region.
   // e.g. "Europe", "Asia", "North America", etc.
-  optional string geographical_sub_region = 7 [(buf.validate.field).string.min_len = 1];
-  // Kubernetes namespace where the components for the environment are deployed (for hybrid cloud regions).
-  optional string namespace = 8 [(buf.validate.field).string.min_len = 1];
-  // Storage capabilities available in this region.
-  CloudProviderRegionCapabilities capabilities = 9;
-  // Surfaces the specific reason cluster creation should be blocked for this region.
-  // Deprecated: because the cluster creation blocking reason is no longer determined at the region level
-  ClusterCreationBlockingReason cluster_creation_blocking_reason = 10 [deprecated = true];
-  // Storage classes available in this region. This will be set in case of Hybrid cloud only.
-  repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
-  // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
-  repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
-  // The supported platform modes of the cloud provider region (dedicated clusters and/or serverless spaces).
-  // [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-  repeated PlatformMode supported_modes = 13 [(buf.validate.field).repeated = {
-    items: {
-      enum: {
-        defined_only: true
-        not_in: [0]
-      }
-    }
-  }];
-}
-
-// CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
-message CloudProviderRegionCapabilities {
-  // Whether volume snapshots are supported.
-  bool volume_snapshot = 1;
-  // Whether volume expansion is supported.
-  bool volume_expansion = 2;
-}
-
-// ClusterCreationBlockingReason surfaces the specific reason cluster creation should be blocked.
-// It is informational and does not change the semantics of available.
-enum ClusterCreationBlockingReason {
-  // No blocking reason / N/A (used for non-hybrid regions)
-  CLUSTER_CREATION_BLOCKING_REASON_UNSPECIFIED = 0;
-  // No blocker, creation allowed
-  CLUSTER_CREATION_BLOCKING_REASON_NONE = 1;
-  // Operator/agent not yet ready
-  CLUSTER_CREATION_BLOCKING_REASON_ENVIRONMENT_NOT_READY = 2;
-  // Storage config not set
-  CLUSTER_CREATION_BLOCKING_REASON_STORAGE_CONFIGURATION_NOT_READY = 3;
-}
-
-// PlatformMode Enums
-// [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
-enum PlatformMode {
-  // Platform mode mode unspecified
-  PLATFORM_MODE_UNSPECIFIED = 0;
-  // Platform mode dedicated clusters; the Qdrant dedicated clusters infrastructure is available.
-  // See qdrant.cloud.cluster.v1.ClusterService for more information.
-  PLATFORM_MODE_DEDICATED_CLUSTERS = 1;
-  // Platform mode serverless; the Qdrant serverless spaces infrastructure is available.
-  // See qdrant.cloud.serverless.space.v1.SpaceService for more information.
-  PLATFORM_MODE_SERVERLESS_SPACES = 2;
+  optional string geographical_sub_region = 6 [(buf.validate.field).string.min_len = 1];
 }
