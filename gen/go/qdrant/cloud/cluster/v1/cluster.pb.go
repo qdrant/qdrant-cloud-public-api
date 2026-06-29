@@ -2258,7 +2258,8 @@ type ClusterConfiguration struct {
 	// It is ignored for managed cloud clusters. This is an optional field
 	Annotations []*v1.KeyValue `protobuf:"bytes,10,rep,name=annotations,proto3" json:"annotations,omitempty"`
 	// List of allowed IP source ranges for this cluster.
-	// Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
+	// Field is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will
+	// configure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field
 	// The CIDRs supports IPv4 only.
 	AllowedIpSourceRanges []string `protobuf:"bytes,11,rep,name=allowed_ip_source_ranges,json=allowedIpSourceRanges,proto3" json:"allowed_ip_source_ranges,omitempty"`
 	// The type of service to use for this cluster in a hybrid cloud environment.

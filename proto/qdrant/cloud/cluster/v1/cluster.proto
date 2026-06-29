@@ -681,7 +681,8 @@ message ClusterConfiguration {
   // It is ignored for managed cloud clusters. This is an optional field
   repeated common.v1.KeyValue annotations = 10 [(buf.validate.field).repeated = {max_items: 10}];
   // List of allowed IP source ranges for this cluster.
-  // Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
+  // Field is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will
+  // configure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
