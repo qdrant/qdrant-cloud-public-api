@@ -3,4 +3,5 @@ hotspot
 OOD
 OOM
 totp
+Vulkan
 webauthn
