@@ -239,6 +239,32 @@ class SuggestCompaniesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Company]
     def __init__(self, items: _Optional[_Iterable[_Union[Company, _Mapping]]] = ...) -> None: ...
 
+class GetAccountSettingsRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class GetAccountSettingsResponse(_message.Message):
+    __slots__ = ("settings",)
+    SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    settings: AccountSettings
+    def __init__(self, settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
+
+class UpdateAccountSettingsRequest(_message.Message):
+    __slots__ = ("account_id", "settings")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    settings: AccountSettings
+    def __init__(self, account_id: _Optional[str] = ..., settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
+
+class UpdateAccountSettingsResponse(_message.Message):
+    __slots__ = ("settings",)
+    SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    settings: AccountSettings
+    def __init__(self, settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
+
 class Account(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -298,3 +324,9 @@ class Company(_message.Message):
     domain: str
     name: str
     def __init__(self, domain: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
+class AccountSettings(_message.Message):
+    __slots__ = ("mfa_required",)
+    MFA_REQUIRED_FIELD_NUMBER: _ClassVar[int]
+    mfa_required: bool
+    def __init__(self, mfa_required: _Optional[bool] = ...) -> None: ...

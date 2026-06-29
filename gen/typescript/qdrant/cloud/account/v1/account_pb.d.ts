@@ -995,6 +995,103 @@ export declare type SuggestCompaniesResponseValid = SuggestCompaniesResponse;
 export declare const SuggestCompaniesResponseSchema: GenMessage<SuggestCompaniesResponse, {validType: SuggestCompaniesResponseValid}>;
 
 /**
+ * GetAccountSettingsRequest is the request from the GetAccountSettings function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountSettingsRequest
+ */
+export declare type GetAccountSettingsRequest = Message<"qdrant.cloud.account.v1.GetAccountSettingsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the member belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type GetAccountSettingsRequestValid = GetAccountSettingsRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountSettingsRequest.
+ * Use `create(GetAccountSettingsRequestSchema)` to create a new message.
+ */
+export declare const GetAccountSettingsRequestSchema: GenMessage<GetAccountSettingsRequest, {validType: GetAccountSettingsRequestValid}>;
+
+/**
+ * GetAccountSettingsResponse is the response from the GetAccountSettings function.
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountSettingsResponse
+ */
+export declare type GetAccountSettingsResponse = Message<"qdrant.cloud.account.v1.GetAccountSettingsResponse"> & {
+  /**
+   * The account settings.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountSettings settings = 1;
+   */
+  settings?: AccountSettings | undefined;
+};
+
+export declare type GetAccountSettingsResponseValid = GetAccountSettingsResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountSettingsResponse.
+ * Use `create(GetAccountSettingsResponseSchema)` to create a new message.
+ */
+export declare const GetAccountSettingsResponseSchema: GenMessage<GetAccountSettingsResponse, {validType: GetAccountSettingsResponseValid}>;
+
+/**
+ * UpdateAccountSettingsRequest is the request from the UpdateAccountSettings function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountSettingsRequest
+ */
+export declare type UpdateAccountSettingsRequest = Message<"qdrant.cloud.account.v1.UpdateAccountSettingsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format) the member belongs to.
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The account settings to update.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountSettings settings = 2;
+   */
+  settings?: AccountSettings | undefined;
+};
+
+export declare type UpdateAccountSettingsRequestValid = UpdateAccountSettingsRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.UpdateAccountSettingsRequest.
+ * Use `create(UpdateAccountSettingsRequestSchema)` to create a new message.
+ */
+export declare const UpdateAccountSettingsRequestSchema: GenMessage<UpdateAccountSettingsRequest, {validType: UpdateAccountSettingsRequestValid}>;
+
+/**
+ * UpdateAccountSettingsResponse is the response from the UpdateAccountSettings function.
+ *
+ * @generated from message qdrant.cloud.account.v1.UpdateAccountSettingsResponse
+ */
+export declare type UpdateAccountSettingsResponse = Message<"qdrant.cloud.account.v1.UpdateAccountSettingsResponse"> & {
+  /**
+   * The updated account settings.
+   *
+   * @generated from field: qdrant.cloud.account.v1.AccountSettings settings = 1;
+   */
+  settings?: AccountSettings | undefined;
+};
+
+export declare type UpdateAccountSettingsResponseValid = UpdateAccountSettingsResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.UpdateAccountSettingsResponse.
+ * Use `create(UpdateAccountSettingsResponseSchema)` to create a new message.
+ */
+export declare const UpdateAccountSettingsResponseSchema: GenMessage<UpdateAccountSettingsResponse, {validType: UpdateAccountSettingsResponseValid}>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -1056,7 +1153,7 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
   privileges: string[];
 
   /**
-   * The name of the company associated with the account.
+   * The company associated with the account.
    *
    * @generated from field: optional qdrant.cloud.account.v1.Company company = 9;
    */
@@ -1248,6 +1345,28 @@ export declare type CompanyValid = Company;
  * Use `create(CompanySchema)` to create a new message.
  */
 export declare const CompanySchema: GenMessage<Company, {validType: CompanyValid}>;
+
+/**
+ * AccountSettings represents the settings for a particular account
+ *
+ * @generated from message qdrant.cloud.account.v1.AccountSettings
+ */
+export declare type AccountSettings = Message<"qdrant.cloud.account.v1.AccountSettings"> & {
+  /**
+   * Whether MFA is required to interact with the account's resources.
+   *
+   * @generated from field: bool mfa_required = 2;
+   */
+  mfaRequired: boolean;
+};
+
+export declare type AccountSettingsValid = AccountSettings;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AccountSettings.
+ * Use `create(AccountSettingsSchema)` to create a new message.
+ */
+export declare const AccountSettingsSchema: GenMessage<AccountSettings, {validType: AccountSettingsValid}>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.
@@ -1514,6 +1633,30 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof SuggestCompaniesRequestSchema;
     output: typeof SuggestCompaniesResponseSchema;
+  },
+  /**
+   * Gets an account's settings.
+   * Required permissions:
+   * - read:account
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountSettings
+   */
+  getAccountSettings: {
+    methodKind: "unary";
+    input: typeof GetAccountSettingsRequestSchema;
+    output: typeof GetAccountSettingsResponseSchema;
+  },
+  /**
+   * Updates an account's settings.
+   * Required permissions:
+   * - write:account
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountSettings
+   */
+  updateAccountSettings: {
+    methodKind: "unary";
+    input: typeof UpdateAccountSettingsRequestSchema;
+    output: typeof UpdateAccountSettingsResponseSchema;
   },
 }>;
 

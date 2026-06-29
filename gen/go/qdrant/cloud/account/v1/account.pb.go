@@ -1741,6 +1741,201 @@ func (x *SuggestCompaniesResponse) GetItems() []*Company {
 	return nil
 }
 
+// GetAccountSettingsRequest is the request from the GetAccountSettings function.
+type GetAccountSettingsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format) the member belongs to.
+	// This is a required field.
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountSettingsRequest) Reset() {
+	*x = GetAccountSettingsRequest{}
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountSettingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountSettingsRequest) ProtoMessage() {}
+
+func (x *GetAccountSettingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountSettingsRequest.ProtoReflect.Descriptor instead.
+func (*GetAccountSettingsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetAccountSettingsRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+// GetAccountSettingsResponse is the response from the GetAccountSettings function.
+type GetAccountSettingsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The account settings.
+	Settings      *AccountSettings `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountSettingsResponse) Reset() {
+	*x = GetAccountSettingsResponse{}
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountSettingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountSettingsResponse) ProtoMessage() {}
+
+func (x *GetAccountSettingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountSettingsResponse.ProtoReflect.Descriptor instead.
+func (*GetAccountSettingsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetAccountSettingsResponse) GetSettings() *AccountSettings {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+// UpdateAccountSettingsRequest is the request from the UpdateAccountSettings function.
+type UpdateAccountSettingsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the account (in GUID format) the member belongs to.
+	// This is a required field.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The account settings to update.
+	Settings      *AccountSettings `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAccountSettingsRequest) Reset() {
+	*x = UpdateAccountSettingsRequest{}
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAccountSettingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAccountSettingsRequest) ProtoMessage() {}
+
+func (x *UpdateAccountSettingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAccountSettingsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAccountSettingsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *UpdateAccountSettingsRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *UpdateAccountSettingsRequest) GetSettings() *AccountSettings {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+// UpdateAccountSettingsResponse is the response from the UpdateAccountSettings function.
+type UpdateAccountSettingsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The updated account settings.
+	Settings      *AccountSettings `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAccountSettingsResponse) Reset() {
+	*x = UpdateAccountSettingsResponse{}
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAccountSettingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAccountSettingsResponse) ProtoMessage() {}
+
+func (x *UpdateAccountSettingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAccountSettingsResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAccountSettingsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *UpdateAccountSettingsResponse) GetSettings() *AccountSettings {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
 // An Account represents an account in the Qdrant cloud.
 type Account struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1764,7 +1959,7 @@ type Account struct {
 	// The privileges of the account, if any.
 	// This is a read-only field.
 	Privileges []string `protobuf:"bytes,8,rep,name=privileges,proto3" json:"privileges,omitempty"`
-	// The name of the company associated with the account.
+	// The company associated with the account.
 	Company       *Company `protobuf:"bytes,9,opt,name=company,proto3,oneof" json:"company,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1772,7 +1967,7 @@ type Account struct {
 
 func (x *Account) Reset() {
 	*x = Account{}
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[34]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1784,7 +1979,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[34]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1797,7 +1992,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{34}
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Account) GetId() string {
@@ -1897,7 +2092,7 @@ type AccountInvite struct {
 
 func (x *AccountInvite) Reset() {
 	*x = AccountInvite{}
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[35]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1909,7 +2104,7 @@ func (x *AccountInvite) String() string {
 func (*AccountInvite) ProtoMessage() {}
 
 func (x *AccountInvite) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[35]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1922,7 +2117,7 @@ func (x *AccountInvite) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountInvite.ProtoReflect.Descriptor instead.
 func (*AccountInvite) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{35}
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *AccountInvite) GetId() string {
@@ -2010,7 +2205,7 @@ type AccountMember struct {
 
 func (x *AccountMember) Reset() {
 	*x = AccountMember{}
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[36]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2022,7 +2217,7 @@ func (x *AccountMember) String() string {
 func (*AccountMember) ProtoMessage() {}
 
 func (x *AccountMember) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[36]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2035,7 +2230,7 @@ func (x *AccountMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountMember.ProtoReflect.Descriptor instead.
 func (*AccountMember) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{36}
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *AccountMember) GetAccountMember() *v1.User {
@@ -2065,7 +2260,7 @@ type Company struct {
 
 func (x *Company) Reset() {
 	*x = Company{}
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[37]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2077,7 +2272,7 @@ func (x *Company) String() string {
 func (*Company) ProtoMessage() {}
 
 func (x *Company) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[37]
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2090,7 +2285,7 @@ func (x *Company) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Company.ProtoReflect.Descriptor instead.
 func (*Company) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{37}
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *Company) GetDomain() string {
@@ -2105,6 +2300,52 @@ func (x *Company) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+// AccountSettings represents the settings for a particular account
+type AccountSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether MFA is required to interact with the account's resources.
+	MfaRequired   bool `protobuf:"varint,2,opt,name=mfa_required,json=mfaRequired,proto3" json:"mfa_required,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountSettings) Reset() {
+	*x = AccountSettings{}
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountSettings) ProtoMessage() {}
+
+func (x *AccountSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_account_v1_account_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountSettings.ProtoReflect.Descriptor instead.
+func (*AccountSettings) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_account_v1_account_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *AccountSettings) GetMfaRequired() bool {
+	if x != nil {
+		return x.MfaRequired
+	}
+	return false
 }
 
 var File_qdrant_cloud_account_v1_account_proto protoreflect.FileDescriptor
@@ -2198,7 +2439,18 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05emailB\x11\n" +
 	"\bcriteria\x12\x05\xbaH\x02\b\x01\"R\n" +
 	"\x18SuggestCompaniesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.CompanyR\x05items\"\x9c\a\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.CompanyR\x05items\"D\n" +
+	"\x19GetAccountSettingsRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"b\n" +
+	"\x1aGetAccountSettingsResponse\x12D\n" +
+	"\bsettings\x18\x01 \x01(\v2(.qdrant.cloud.account.v1.AccountSettingsR\bsettings\"\x8d\x01\n" +
+	"\x1cUpdateAccountSettingsRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12D\n" +
+	"\bsettings\x18\x02 \x01(\v2(.qdrant.cloud.account.v1.AccountSettingsR\bsettings\"e\n" +
+	"\x1dUpdateAccountSettingsResponse\x12D\n" +
+	"\bsettings\x18\x01 \x01(\v2(.qdrant.cloud.account.v1.AccountSettingsR\bsettings\"\x9c\a\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2246,13 +2498,15 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\aCompany\x12p\n" +
 	"\x06domain\x18\x01 \x01(\tBS\xbaHPrN2L^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$H\x00R\x06domain\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04nameB\t\n" +
-	"\a_domain*\xcb\x01\n" +
+	"\a_domain\"4\n" +
+	"\x0fAccountSettings\x12!\n" +
+	"\fmfa_required\x18\x02 \x01(\bR\vmfaRequired*\xcb\x01\n" +
 	"\x13AccountInviteStatus\x12%\n" +
 	"!ACCOUNT_INVITE_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xea#\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xd5'\n" +
 	"\x0eAccountService\x12\x95\x01\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"(\x8a\xb5\x18\x00\x92\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xa4\x01\n" +
 	"\n" +
@@ -2292,7 +2546,9 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\auser_id\x12\auser_id\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xda\x01\n" +
 	"\x10SuggestCompanies\x120.qdrant.cloud.account.v1.SuggestCompaniesRequest\x1a1.qdrant.cloud.account.v1.SuggestCompaniesResponse\"a\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x16\n" +
 	"\rcompany_email\x12\x05email\xba\xb5\x18\x14\n" +
-	"\fcompany_name\x12\x04name\x82\xd3\xe4\x93\x02!\x12\x1f/api/account/v1/suggest-company\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"\fcompany_name\x12\x04name\x82\xd3\xe4\x93\x02!\x12\x1f/api/account/v1/suggest-company\x12\xc5\x01\n" +
+	"\x12GetAccountSettings\x122.qdrant.cloud.account.v1.GetAccountSettingsRequest\x1a3.qdrant.cloud.account.v1.GetAccountSettingsResponse\"F\x8a\xb5\x18\fread:account\x82\xd3\xe4\x93\x020\x12./api/account/v1/accounts/{account_id}/settings\x12\xa0\x02\n" +
+	"\x15UpdateAccountSettings\x125.qdrant.cloud.account.v1.UpdateAccountSettingsRequest\x1a6.qdrant.cloud.account.v1.UpdateAccountSettingsResponse\"\x97\x01\x8a\xb5\x18\rwrite:account\xca\xf3\x18I\b\x02\x12\x10account-settings\"\x0ereq.account.id*#/accounts/{req.account.id}/settings\x82\xd3\xe4\x93\x023:\x01*\x1a./api/account/v1/accounts/{account_id}/settings\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
 
 var (
@@ -2308,7 +2564,7 @@ func file_qdrant_cloud_account_v1_account_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_account_v1_account_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_account_v1_account_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_qdrant_cloud_account_v1_account_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
 var file_qdrant_cloud_account_v1_account_proto_goTypes = []any{
 	(AccountInviteStatus)(0),                   // 0: qdrant.cloud.account.v1.AccountInviteStatus
 	(*ListAccountsRequest)(nil),                // 1: qdrant.cloud.account.v1.ListAccountsRequest
@@ -2345,79 +2601,91 @@ var file_qdrant_cloud_account_v1_account_proto_goTypes = []any{
 	(*DeleteAccountMemberResponse)(nil),        // 32: qdrant.cloud.account.v1.DeleteAccountMemberResponse
 	(*SuggestCompaniesRequest)(nil),            // 33: qdrant.cloud.account.v1.SuggestCompaniesRequest
 	(*SuggestCompaniesResponse)(nil),           // 34: qdrant.cloud.account.v1.SuggestCompaniesResponse
-	(*Account)(nil),                            // 35: qdrant.cloud.account.v1.Account
-	(*AccountInvite)(nil),                      // 36: qdrant.cloud.account.v1.AccountInvite
-	(*AccountMember)(nil),                      // 37: qdrant.cloud.account.v1.AccountMember
-	(*Company)(nil),                            // 38: qdrant.cloud.account.v1.Company
-	(*fieldmaskpb.FieldMask)(nil),              // 39: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),              // 40: google.protobuf.Timestamp
-	(*v1.User)(nil),                            // 41: qdrant.cloud.iam.v1.User
+	(*GetAccountSettingsRequest)(nil),          // 35: qdrant.cloud.account.v1.GetAccountSettingsRequest
+	(*GetAccountSettingsResponse)(nil),         // 36: qdrant.cloud.account.v1.GetAccountSettingsResponse
+	(*UpdateAccountSettingsRequest)(nil),       // 37: qdrant.cloud.account.v1.UpdateAccountSettingsRequest
+	(*UpdateAccountSettingsResponse)(nil),      // 38: qdrant.cloud.account.v1.UpdateAccountSettingsResponse
+	(*Account)(nil),                            // 39: qdrant.cloud.account.v1.Account
+	(*AccountInvite)(nil),                      // 40: qdrant.cloud.account.v1.AccountInvite
+	(*AccountMember)(nil),                      // 41: qdrant.cloud.account.v1.AccountMember
+	(*Company)(nil),                            // 42: qdrant.cloud.account.v1.Company
+	(*AccountSettings)(nil),                    // 43: qdrant.cloud.account.v1.AccountSettings
+	(*fieldmaskpb.FieldMask)(nil),              // 44: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),              // 45: google.protobuf.Timestamp
+	(*v1.User)(nil),                            // 46: qdrant.cloud.iam.v1.User
 }
 var file_qdrant_cloud_account_v1_account_proto_depIdxs = []int32{
-	35, // 0: qdrant.cloud.account.v1.ListAccountsResponse.items:type_name -> qdrant.cloud.account.v1.Account
-	35, // 1: qdrant.cloud.account.v1.GetAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
-	35, // 2: qdrant.cloud.account.v1.CreateAccountRequest.account:type_name -> qdrant.cloud.account.v1.Account
-	35, // 3: qdrant.cloud.account.v1.CreateAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
-	35, // 4: qdrant.cloud.account.v1.UpdateAccountRequest.account:type_name -> qdrant.cloud.account.v1.Account
-	39, // 5: qdrant.cloud.account.v1.UpdateAccountRequest.update_mask:type_name -> google.protobuf.FieldMask
-	35, // 6: qdrant.cloud.account.v1.UpdateAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
+	39, // 0: qdrant.cloud.account.v1.ListAccountsResponse.items:type_name -> qdrant.cloud.account.v1.Account
+	39, // 1: qdrant.cloud.account.v1.GetAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
+	39, // 2: qdrant.cloud.account.v1.CreateAccountRequest.account:type_name -> qdrant.cloud.account.v1.Account
+	39, // 3: qdrant.cloud.account.v1.CreateAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
+	39, // 4: qdrant.cloud.account.v1.UpdateAccountRequest.account:type_name -> qdrant.cloud.account.v1.Account
+	44, // 5: qdrant.cloud.account.v1.UpdateAccountRequest.update_mask:type_name -> google.protobuf.FieldMask
+	39, // 6: qdrant.cloud.account.v1.UpdateAccountResponse.account:type_name -> qdrant.cloud.account.v1.Account
 	0,  // 7: qdrant.cloud.account.v1.ListAccountInvitesRequest.statuses:type_name -> qdrant.cloud.account.v1.AccountInviteStatus
-	36, // 8: qdrant.cloud.account.v1.ListAccountInvitesResponse.items:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 9: qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse.items:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 10: qdrant.cloud.account.v1.GetAccountInviteResponse.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 11: qdrant.cloud.account.v1.CreateAccountInviteRequest.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 12: qdrant.cloud.account.v1.CreateAccountInviteResponse.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 13: qdrant.cloud.account.v1.AcceptAccountInviteResponse.invite:type_name -> qdrant.cloud.account.v1.AccountInvite
-	36, // 14: qdrant.cloud.account.v1.RejectAccountInviteResponse.invite:type_name -> qdrant.cloud.account.v1.AccountInvite
-	37, // 15: qdrant.cloud.account.v1.ListAccountMembersResponse.items:type_name -> qdrant.cloud.account.v1.AccountMember
-	37, // 16: qdrant.cloud.account.v1.GetAccountMemberResponse.account_member:type_name -> qdrant.cloud.account.v1.AccountMember
-	38, // 17: qdrant.cloud.account.v1.SuggestCompaniesResponse.items:type_name -> qdrant.cloud.account.v1.Company
-	40, // 18: qdrant.cloud.account.v1.Account.created_at:type_name -> google.protobuf.Timestamp
-	40, // 19: qdrant.cloud.account.v1.Account.last_modified_at:type_name -> google.protobuf.Timestamp
-	38, // 20: qdrant.cloud.account.v1.Account.company:type_name -> qdrant.cloud.account.v1.Company
-	40, // 21: qdrant.cloud.account.v1.AccountInvite.created_at:type_name -> google.protobuf.Timestamp
-	40, // 22: qdrant.cloud.account.v1.AccountInvite.last_modified_at:type_name -> google.protobuf.Timestamp
-	0,  // 23: qdrant.cloud.account.v1.AccountInvite.status:type_name -> qdrant.cloud.account.v1.AccountInviteStatus
-	41, // 24: qdrant.cloud.account.v1.AccountMember.account_member:type_name -> qdrant.cloud.iam.v1.User
-	1,  // 25: qdrant.cloud.account.v1.AccountService.ListAccounts:input_type -> qdrant.cloud.account.v1.ListAccountsRequest
-	3,  // 26: qdrant.cloud.account.v1.AccountService.GetAccount:input_type -> qdrant.cloud.account.v1.GetAccountRequest
-	5,  // 27: qdrant.cloud.account.v1.AccountService.CreateAccount:input_type -> qdrant.cloud.account.v1.CreateAccountRequest
-	7,  // 28: qdrant.cloud.account.v1.AccountService.UpdateAccount:input_type -> qdrant.cloud.account.v1.UpdateAccountRequest
-	9,  // 29: qdrant.cloud.account.v1.AccountService.DeleteAccount:input_type -> qdrant.cloud.account.v1.DeleteAccountRequest
-	11, // 30: qdrant.cloud.account.v1.AccountService.LeaveAccount:input_type -> qdrant.cloud.account.v1.LeaveAccountRequest
-	13, // 31: qdrant.cloud.account.v1.AccountService.ListAccountInvites:input_type -> qdrant.cloud.account.v1.ListAccountInvitesRequest
-	15, // 32: qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites:input_type -> qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest
-	17, // 33: qdrant.cloud.account.v1.AccountService.GetAccountInvite:input_type -> qdrant.cloud.account.v1.GetAccountInviteRequest
-	19, // 34: qdrant.cloud.account.v1.AccountService.CreateAccountInvite:input_type -> qdrant.cloud.account.v1.CreateAccountInviteRequest
-	21, // 35: qdrant.cloud.account.v1.AccountService.DeleteAccountInvite:input_type -> qdrant.cloud.account.v1.DeleteAccountInviteRequest
-	23, // 36: qdrant.cloud.account.v1.AccountService.AcceptAccountInvite:input_type -> qdrant.cloud.account.v1.AcceptAccountInviteRequest
-	25, // 37: qdrant.cloud.account.v1.AccountService.RejectAccountInvite:input_type -> qdrant.cloud.account.v1.RejectAccountInviteRequest
-	27, // 38: qdrant.cloud.account.v1.AccountService.ListAccountMembers:input_type -> qdrant.cloud.account.v1.ListAccountMembersRequest
-	29, // 39: qdrant.cloud.account.v1.AccountService.GetAccountMember:input_type -> qdrant.cloud.account.v1.GetAccountMemberRequest
-	31, // 40: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:input_type -> qdrant.cloud.account.v1.DeleteAccountMemberRequest
-	33, // 41: qdrant.cloud.account.v1.AccountService.SuggestCompanies:input_type -> qdrant.cloud.account.v1.SuggestCompaniesRequest
-	2,  // 42: qdrant.cloud.account.v1.AccountService.ListAccounts:output_type -> qdrant.cloud.account.v1.ListAccountsResponse
-	4,  // 43: qdrant.cloud.account.v1.AccountService.GetAccount:output_type -> qdrant.cloud.account.v1.GetAccountResponse
-	6,  // 44: qdrant.cloud.account.v1.AccountService.CreateAccount:output_type -> qdrant.cloud.account.v1.CreateAccountResponse
-	8,  // 45: qdrant.cloud.account.v1.AccountService.UpdateAccount:output_type -> qdrant.cloud.account.v1.UpdateAccountResponse
-	10, // 46: qdrant.cloud.account.v1.AccountService.DeleteAccount:output_type -> qdrant.cloud.account.v1.DeleteAccountResponse
-	12, // 47: qdrant.cloud.account.v1.AccountService.LeaveAccount:output_type -> qdrant.cloud.account.v1.LeaveAccountResponse
-	14, // 48: qdrant.cloud.account.v1.AccountService.ListAccountInvites:output_type -> qdrant.cloud.account.v1.ListAccountInvitesResponse
-	16, // 49: qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites:output_type -> qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse
-	18, // 50: qdrant.cloud.account.v1.AccountService.GetAccountInvite:output_type -> qdrant.cloud.account.v1.GetAccountInviteResponse
-	20, // 51: qdrant.cloud.account.v1.AccountService.CreateAccountInvite:output_type -> qdrant.cloud.account.v1.CreateAccountInviteResponse
-	22, // 52: qdrant.cloud.account.v1.AccountService.DeleteAccountInvite:output_type -> qdrant.cloud.account.v1.DeleteAccountInviteResponse
-	24, // 53: qdrant.cloud.account.v1.AccountService.AcceptAccountInvite:output_type -> qdrant.cloud.account.v1.AcceptAccountInviteResponse
-	26, // 54: qdrant.cloud.account.v1.AccountService.RejectAccountInvite:output_type -> qdrant.cloud.account.v1.RejectAccountInviteResponse
-	28, // 55: qdrant.cloud.account.v1.AccountService.ListAccountMembers:output_type -> qdrant.cloud.account.v1.ListAccountMembersResponse
-	30, // 56: qdrant.cloud.account.v1.AccountService.GetAccountMember:output_type -> qdrant.cloud.account.v1.GetAccountMemberResponse
-	32, // 57: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:output_type -> qdrant.cloud.account.v1.DeleteAccountMemberResponse
-	34, // 58: qdrant.cloud.account.v1.AccountService.SuggestCompanies:output_type -> qdrant.cloud.account.v1.SuggestCompaniesResponse
-	42, // [42:59] is the sub-list for method output_type
-	25, // [25:42] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	40, // 8: qdrant.cloud.account.v1.ListAccountInvitesResponse.items:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 9: qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse.items:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 10: qdrant.cloud.account.v1.GetAccountInviteResponse.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 11: qdrant.cloud.account.v1.CreateAccountInviteRequest.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 12: qdrant.cloud.account.v1.CreateAccountInviteResponse.account_invite:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 13: qdrant.cloud.account.v1.AcceptAccountInviteResponse.invite:type_name -> qdrant.cloud.account.v1.AccountInvite
+	40, // 14: qdrant.cloud.account.v1.RejectAccountInviteResponse.invite:type_name -> qdrant.cloud.account.v1.AccountInvite
+	41, // 15: qdrant.cloud.account.v1.ListAccountMembersResponse.items:type_name -> qdrant.cloud.account.v1.AccountMember
+	41, // 16: qdrant.cloud.account.v1.GetAccountMemberResponse.account_member:type_name -> qdrant.cloud.account.v1.AccountMember
+	42, // 17: qdrant.cloud.account.v1.SuggestCompaniesResponse.items:type_name -> qdrant.cloud.account.v1.Company
+	43, // 18: qdrant.cloud.account.v1.GetAccountSettingsResponse.settings:type_name -> qdrant.cloud.account.v1.AccountSettings
+	43, // 19: qdrant.cloud.account.v1.UpdateAccountSettingsRequest.settings:type_name -> qdrant.cloud.account.v1.AccountSettings
+	43, // 20: qdrant.cloud.account.v1.UpdateAccountSettingsResponse.settings:type_name -> qdrant.cloud.account.v1.AccountSettings
+	45, // 21: qdrant.cloud.account.v1.Account.created_at:type_name -> google.protobuf.Timestamp
+	45, // 22: qdrant.cloud.account.v1.Account.last_modified_at:type_name -> google.protobuf.Timestamp
+	42, // 23: qdrant.cloud.account.v1.Account.company:type_name -> qdrant.cloud.account.v1.Company
+	45, // 24: qdrant.cloud.account.v1.AccountInvite.created_at:type_name -> google.protobuf.Timestamp
+	45, // 25: qdrant.cloud.account.v1.AccountInvite.last_modified_at:type_name -> google.protobuf.Timestamp
+	0,  // 26: qdrant.cloud.account.v1.AccountInvite.status:type_name -> qdrant.cloud.account.v1.AccountInviteStatus
+	46, // 27: qdrant.cloud.account.v1.AccountMember.account_member:type_name -> qdrant.cloud.iam.v1.User
+	1,  // 28: qdrant.cloud.account.v1.AccountService.ListAccounts:input_type -> qdrant.cloud.account.v1.ListAccountsRequest
+	3,  // 29: qdrant.cloud.account.v1.AccountService.GetAccount:input_type -> qdrant.cloud.account.v1.GetAccountRequest
+	5,  // 30: qdrant.cloud.account.v1.AccountService.CreateAccount:input_type -> qdrant.cloud.account.v1.CreateAccountRequest
+	7,  // 31: qdrant.cloud.account.v1.AccountService.UpdateAccount:input_type -> qdrant.cloud.account.v1.UpdateAccountRequest
+	9,  // 32: qdrant.cloud.account.v1.AccountService.DeleteAccount:input_type -> qdrant.cloud.account.v1.DeleteAccountRequest
+	11, // 33: qdrant.cloud.account.v1.AccountService.LeaveAccount:input_type -> qdrant.cloud.account.v1.LeaveAccountRequest
+	13, // 34: qdrant.cloud.account.v1.AccountService.ListAccountInvites:input_type -> qdrant.cloud.account.v1.ListAccountInvitesRequest
+	15, // 35: qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites:input_type -> qdrant.cloud.account.v1.ListReceivedAccountInvitesRequest
+	17, // 36: qdrant.cloud.account.v1.AccountService.GetAccountInvite:input_type -> qdrant.cloud.account.v1.GetAccountInviteRequest
+	19, // 37: qdrant.cloud.account.v1.AccountService.CreateAccountInvite:input_type -> qdrant.cloud.account.v1.CreateAccountInviteRequest
+	21, // 38: qdrant.cloud.account.v1.AccountService.DeleteAccountInvite:input_type -> qdrant.cloud.account.v1.DeleteAccountInviteRequest
+	23, // 39: qdrant.cloud.account.v1.AccountService.AcceptAccountInvite:input_type -> qdrant.cloud.account.v1.AcceptAccountInviteRequest
+	25, // 40: qdrant.cloud.account.v1.AccountService.RejectAccountInvite:input_type -> qdrant.cloud.account.v1.RejectAccountInviteRequest
+	27, // 41: qdrant.cloud.account.v1.AccountService.ListAccountMembers:input_type -> qdrant.cloud.account.v1.ListAccountMembersRequest
+	29, // 42: qdrant.cloud.account.v1.AccountService.GetAccountMember:input_type -> qdrant.cloud.account.v1.GetAccountMemberRequest
+	31, // 43: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:input_type -> qdrant.cloud.account.v1.DeleteAccountMemberRequest
+	33, // 44: qdrant.cloud.account.v1.AccountService.SuggestCompanies:input_type -> qdrant.cloud.account.v1.SuggestCompaniesRequest
+	35, // 45: qdrant.cloud.account.v1.AccountService.GetAccountSettings:input_type -> qdrant.cloud.account.v1.GetAccountSettingsRequest
+	37, // 46: qdrant.cloud.account.v1.AccountService.UpdateAccountSettings:input_type -> qdrant.cloud.account.v1.UpdateAccountSettingsRequest
+	2,  // 47: qdrant.cloud.account.v1.AccountService.ListAccounts:output_type -> qdrant.cloud.account.v1.ListAccountsResponse
+	4,  // 48: qdrant.cloud.account.v1.AccountService.GetAccount:output_type -> qdrant.cloud.account.v1.GetAccountResponse
+	6,  // 49: qdrant.cloud.account.v1.AccountService.CreateAccount:output_type -> qdrant.cloud.account.v1.CreateAccountResponse
+	8,  // 50: qdrant.cloud.account.v1.AccountService.UpdateAccount:output_type -> qdrant.cloud.account.v1.UpdateAccountResponse
+	10, // 51: qdrant.cloud.account.v1.AccountService.DeleteAccount:output_type -> qdrant.cloud.account.v1.DeleteAccountResponse
+	12, // 52: qdrant.cloud.account.v1.AccountService.LeaveAccount:output_type -> qdrant.cloud.account.v1.LeaveAccountResponse
+	14, // 53: qdrant.cloud.account.v1.AccountService.ListAccountInvites:output_type -> qdrant.cloud.account.v1.ListAccountInvitesResponse
+	16, // 54: qdrant.cloud.account.v1.AccountService.ListReceivedAccountInvites:output_type -> qdrant.cloud.account.v1.ListReceivedAccountInvitesResponse
+	18, // 55: qdrant.cloud.account.v1.AccountService.GetAccountInvite:output_type -> qdrant.cloud.account.v1.GetAccountInviteResponse
+	20, // 56: qdrant.cloud.account.v1.AccountService.CreateAccountInvite:output_type -> qdrant.cloud.account.v1.CreateAccountInviteResponse
+	22, // 57: qdrant.cloud.account.v1.AccountService.DeleteAccountInvite:output_type -> qdrant.cloud.account.v1.DeleteAccountInviteResponse
+	24, // 58: qdrant.cloud.account.v1.AccountService.AcceptAccountInvite:output_type -> qdrant.cloud.account.v1.AcceptAccountInviteResponse
+	26, // 59: qdrant.cloud.account.v1.AccountService.RejectAccountInvite:output_type -> qdrant.cloud.account.v1.RejectAccountInviteResponse
+	28, // 60: qdrant.cloud.account.v1.AccountService.ListAccountMembers:output_type -> qdrant.cloud.account.v1.ListAccountMembersResponse
+	30, // 61: qdrant.cloud.account.v1.AccountService.GetAccountMember:output_type -> qdrant.cloud.account.v1.GetAccountMemberResponse
+	32, // 62: qdrant.cloud.account.v1.AccountService.DeleteAccountMember:output_type -> qdrant.cloud.account.v1.DeleteAccountMemberResponse
+	34, // 63: qdrant.cloud.account.v1.AccountService.SuggestCompanies:output_type -> qdrant.cloud.account.v1.SuggestCompaniesResponse
+	36, // 64: qdrant.cloud.account.v1.AccountService.GetAccountSettings:output_type -> qdrant.cloud.account.v1.GetAccountSettingsResponse
+	38, // 65: qdrant.cloud.account.v1.AccountService.UpdateAccountSettings:output_type -> qdrant.cloud.account.v1.UpdateAccountSettingsResponse
+	47, // [47:66] is the sub-list for method output_type
+	28, // [28:47] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_account_v1_account_proto_init() }
@@ -2429,16 +2697,16 @@ func file_qdrant_cloud_account_v1_account_proto_init() {
 		(*SuggestCompaniesRequest_Name)(nil),
 		(*SuggestCompaniesRequest_Email)(nil),
 	}
-	file_qdrant_cloud_account_v1_account_proto_msgTypes[34].OneofWrappers = []any{}
-	file_qdrant_cloud_account_v1_account_proto_msgTypes[35].OneofWrappers = []any{}
-	file_qdrant_cloud_account_v1_account_proto_msgTypes[37].OneofWrappers = []any{}
+	file_qdrant_cloud_account_v1_account_proto_msgTypes[38].OneofWrappers = []any{}
+	file_qdrant_cloud_account_v1_account_proto_msgTypes[39].OneofWrappers = []any{}
+	file_qdrant_cloud_account_v1_account_proto_msgTypes[41].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_account_v1_account_proto_rawDesc), len(file_qdrant_cloud_account_v1_account_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   38,
+			NumMessages:   43,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

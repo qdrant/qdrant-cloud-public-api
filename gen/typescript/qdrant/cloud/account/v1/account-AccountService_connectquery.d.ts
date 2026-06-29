@@ -149,3 +149,19 @@ export const deleteAccountMember: typeof AccountService["method"]["deleteAccount
  * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
  */
 export const suggestCompanies: typeof AccountService["method"]["suggestCompanies"];
+/**
+ * Gets an account's settings.
+ * Required permissions:
+ * - read:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountSettings
+ */
+export const getAccountSettings: typeof AccountService["method"]["getAccountSettings"];
+/**
+ * Updates an account's settings.
+ * Required permissions:
+ * - write:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountSettings
+ */
+export const updateAccountSettings: typeof AccountService["method"]["updateAccountSettings"];

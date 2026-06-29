@@ -362,6 +362,34 @@ service AccountService {
       field_expression: "name"
     };
   }
+  // Gets an account's settings.
+  // Required permissions:
+  // - read:account
+  rpc GetAccountSettings(GetAccountSettingsRequest) returns (GetAccountSettingsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/settings"};
+  }
+  // Updates an account's settings.
+  // Required permissions:
+  // - write:account
+  rpc UpdateAccountSettings(UpdateAccountSettingsRequest) returns (UpdateAccountSettingsResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:account";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      put: "/api/account/v1/accounts/{account_id}/settings"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "account-settings"
+      resource_id_field: "req.account.id"
+      resource_url_template: "/accounts/{req.account.id}/settings"
+    };
+  }
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
@@ -630,6 +658,34 @@ message SuggestCompaniesResponse {
   repeated Company items = 1;
 }
 
+// GetAccountSettingsRequest is the request from the GetAccountSettings function.
+message GetAccountSettingsRequest {
+  // The identifier of the account (in GUID format) the member belongs to.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetAccountSettingsResponse is the response from the GetAccountSettings function.
+message GetAccountSettingsResponse {
+  // The account settings.
+  AccountSettings settings = 1;
+}
+
+// UpdateAccountSettingsRequest is the request from the UpdateAccountSettings function.
+message UpdateAccountSettingsRequest {
+  // The identifier of the account (in GUID format) the member belongs to.
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The account settings to update.
+  AccountSettings settings = 2;
+}
+
+// UpdateAccountSettingsResponse is the response from the UpdateAccountSettings function.
+message UpdateAccountSettingsResponse {
+  // The updated account settings.
+  AccountSettings settings = 1;
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An Account represents an account in the Qdrant cloud.
 message Account {
@@ -672,7 +728,7 @@ message Account {
   // The privileges of the account, if any.
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
-  // The name of the company associated with the account.
+  // The company associated with the account.
   optional Company company = 9;
 }
 
@@ -767,4 +823,10 @@ message Company {
   optional string domain = 1 [(buf.validate.field).string.pattern = "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"];
   // The name of the company.
   string name = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// AccountSettings represents the settings for a particular account
+message AccountSettings {
+  // Whether MFA is required to interact with the account's resources.
+  bool mfa_required = 2;
 }

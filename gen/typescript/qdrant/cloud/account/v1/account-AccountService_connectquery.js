@@ -165,3 +165,21 @@ export const deleteAccountMember = AccountService.method.deleteAccountMember;
  * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
  */
 export const suggestCompanies = AccountService.method.suggestCompanies;
+
+/**
+ * Gets an account's settings.
+ * Required permissions:
+ * - read:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountSettings
+ */
+export const getAccountSettings = AccountService.method.getAccountSettings;
+
+/**
+ * Updates an account's settings.
+ * Required permissions:
+ * - write:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.UpdateAccountSettings
+ */
+export const updateAccountSettings = AccountService.method.updateAccountSettings;
