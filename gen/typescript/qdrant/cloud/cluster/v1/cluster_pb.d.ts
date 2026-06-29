@@ -991,6 +991,74 @@ export declare type ClusterValid = Message<"qdrant.cloud.cluster.v1.Cluster"> & 
 export declare const ClusterSchema: GenMessage<Cluster, {validType: ClusterValid}>;
 
 /**
+ * ClusterConfigurationGpuConfiguration defines advanced GPU configuration for clusters.
+ * This is relevant for hybrid cloud clusters only.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration
+ */
+export declare type ClusterConfigurationGpuConfiguration = Message<"qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration"> & {
+  /**
+   * Force half precision (`f16`) for `f32` values while indexing.
+   * Conversion happens only in GPU memory and does not affect storage type.
+   * This is an optional field, default is false.
+   *
+   * @generated from field: optional bool force_half_precision = 1;
+   */
+  forceHalfPrecision?: boolean | undefined;
+
+  /**
+   * Filter GPU devices by hardware name (case-insensitive).
+   * List of substrings to match against the GPU device name.
+   * If not specified, all devices are accepted.
+   *
+   * @generated from field: repeated string device_filter = 2;
+   */
+  deviceFilter: string[];
+
+  /**
+   * List of explicit GPU device indexes to use.
+   * If `device_filter` is set, indexes are applied after filtering.
+   * If not specified, all devices are accepted.
+   *
+   * @generated from field: repeated string devices = 3;
+   */
+  devices: string[];
+
+  /**
+   * Number of parallel indexes to run on the GPU.
+   * This is an optional field, default is 1.
+   *
+   * @generated from field: optional uint32 parallel_indexes = 4;
+   */
+  parallelIndexes?: number | undefined;
+
+  /**
+   * Amount of used Vulkan groups on the GPU.
+   * In other words, how many parallel points can be indexed by GPU.
+   * Do not change this value unless you know what you are doing.
+   *
+   * @generated from field: optional uint32 groups_count = 5;
+   */
+  groupsCount?: number | undefined;
+
+  /**
+   * Allow integrated GPUs to be used.
+   * This is an optional field, default is false.
+   *
+   * @generated from field: optional bool allow_integrated = 6;
+   */
+  allowIntegrated?: boolean | undefined;
+};
+
+export declare type ClusterConfigurationGpuConfigurationValid = ClusterConfigurationGpuConfiguration;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration.
+ * Use `create(ClusterConfigurationGpuConfigurationSchema)` to create a new message.
+ */
+export declare const ClusterConfigurationGpuConfigurationSchema: GenMessage<ClusterConfigurationGpuConfiguration, {validType: ClusterConfigurationGpuConfigurationValid}>;
+
+/**
  * A ClusterConfiguration represents the configuration of a cluster.
  *
  * @generated from message qdrant.cloud.cluster.v1.ClusterConfiguration
@@ -1161,6 +1229,14 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */
   clusterStorageConfiguration?: ClusterStorageConfiguration | undefined;
+
+  /**
+   * The advanced gpu configuration for the database.
+   * This is for hybrid cloud clusters only. It is ignored for managed cloud clusters.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration gpu_configuration = 27;
+   */
+  gpuConfiguration?: ClusterConfigurationGpuConfiguration | undefined;
 };
 
 /**
@@ -1334,6 +1410,14 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterStorageConfiguration cluster_storage_configuration = 26;
    */
   clusterStorageConfiguration?: ClusterStorageConfigurationValid | undefined;
+
+  /**
+   * The advanced gpu configuration for the database.
+   * This is for hybrid cloud clusters only. It is ignored for managed cloud clusters.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration gpu_configuration = 27;
+   */
+  gpuConfiguration?: ClusterConfigurationGpuConfigurationValid | undefined;
 };
 
 /**
