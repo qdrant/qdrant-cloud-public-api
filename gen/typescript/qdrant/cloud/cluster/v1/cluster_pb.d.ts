@@ -1073,7 +1073,8 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
 
   /**
    * List of allowed IP source ranges for this cluster.
-   * Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
+   * Field is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will
+   * configure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field
    * The CIDRs supports IPv4 only.
    *
    * @generated from field: repeated string allowed_ip_source_ranges = 11;
@@ -1245,7 +1246,8 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
 
   /**
    * List of allowed IP source ranges for this cluster.
-   * Field is used for both managed cloud and hybrid cloud and clusters. This is an optional field
+   * Field is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will
+   * configure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field
    * The CIDRs supports IPv4 only.
    *
    * @generated from field: repeated string allowed_ip_source_ranges = 11;

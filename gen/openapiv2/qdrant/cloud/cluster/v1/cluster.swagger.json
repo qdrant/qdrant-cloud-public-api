@@ -882,7 +882,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. This is an optional field\nThe CIDRs supports IPv4 only."
+          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will\nconfigure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field\nThe CIDRs supports IPv4 only."
         },
         "serviceType": {
           "$ref": "#/definitions/v1ClusterServiceType",
