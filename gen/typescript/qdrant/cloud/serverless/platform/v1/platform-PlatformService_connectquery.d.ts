@@ -37,9 +37,6 @@ export const getGlobalCloudProviderRegion: typeof PlatformService["method"]["get
  * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
  * Required permissions:
  * - None (authenticated only)
- * Conditional permissions:
- * - read:hybrid_cloud_environments OR read:clusters
- *   One of these permissions is required when the specified cloud_provider_id is "hybrid".
  *
  * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviderRegions
  */
@@ -48,9 +45,6 @@ export const listCloudProviderRegions: typeof PlatformService["method"]["listClo
  * Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
  * Required permissions:
  * - None (authenticated only)
- * Conditional permissions:
- * - read:hybrid_cloud_environments OR read:clusters
- *   One of these permissions is required when the specified cloud_provider_id is "hybrid".
  *
  * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudProviderRegion
  */

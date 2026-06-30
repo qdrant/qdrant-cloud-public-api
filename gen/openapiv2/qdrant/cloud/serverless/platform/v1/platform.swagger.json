@@ -50,7 +50,7 @@
     },
     "/api/serverless/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions": {
       "get": {
-        "summary": "Lists all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)\nConditional permissions:\n- read:hybrid_cloud_environments OR read:clusters\n  One of these permissions is required when the specified cloud_provider_id is \"hybrid\".",
+        "summary": "Lists all cloud provider regions in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "PlatformService_ListCloudProviderRegions",
         "responses": {
           "200": {
@@ -89,7 +89,7 @@
     },
     "/api/serverless/platform/v1/accounts/{accountId}/cloud-providers/{cloudProviderId}/regions/{regionId}": {
       "get": {
-        "summary": "Gets a specific cloud provider region in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)\nConditional permissions:\n- read:hybrid_cloud_environments OR read:clusters\n  One of these permissions is required when the specified cloud_provider_id is \"hybrid\".",
+        "summary": "Gets a specific cloud provider region in the account identified by the given ID and cloud provider.\nRequired permissions:\n- None (authenticated only)",
         "operationId": "PlatformService_GetCloudProviderRegion",
         "responses": {
           "200": {

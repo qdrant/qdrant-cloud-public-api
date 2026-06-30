@@ -49,16 +49,10 @@ type PlatformServiceClient interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
 	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(ctx context.Context, in *GetCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetCloudProviderRegionResponse, error)
 }
 
@@ -152,16 +146,10 @@ type PlatformServiceServer interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
 	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }

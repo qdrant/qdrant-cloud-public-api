@@ -88,9 +88,6 @@ class PlatformServiceServicer(object):
         """Lists all cloud provider regions in the account identified by the given ID and cloud provider.
         Required permissions:
         - None (authenticated only)
-        Conditional permissions:
-        - read:hybrid_cloud_environments OR read:clusters
-        One of these permissions is required when the specified cloud_provider_id is "hybrid".
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -100,9 +97,6 @@ class PlatformServiceServicer(object):
         """Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
         Required permissions:
         - None (authenticated only)
-        Conditional permissions:
-        - read:hybrid_cloud_environments OR read:clusters
-        One of these permissions is required when the specified cloud_provider_id is "hybrid".
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
