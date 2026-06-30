@@ -106,6 +106,8 @@ service SpaceService {
   rpc UpdateSpace(UpdateSpaceRequest) returns (UpdateSpaceResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:serverless_spaces";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "space.account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}"
@@ -359,7 +361,9 @@ message SpaceConfiguration {
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
-    items: {string: {ipv4_prefix: true}}
+    items: {
+      string: {ipv4_prefix: true}
+    }
   }];
 }
 
