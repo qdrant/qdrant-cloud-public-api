@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             (unknown)
-// source: qdrant/cloud/platform/v1/platform.proto
+// source: qdrant/cloud/serverless/platform/v1/platform.proto
 
 package platformv1
 
@@ -19,19 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlatformService_ListGlobalCloudProviders_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders"
-	PlatformService_ListCloudProviders_FullMethodName             = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders"
-	PlatformService_ListGlobalCloudProviderRegions_FullMethodName = "/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions"
-	PlatformService_GetGlobalCloudProviderRegion_FullMethodName   = "/qdrant.cloud.platform.v1.PlatformService/GetGlobalCloudProviderRegion"
-	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions"
-	PlatformService_GetCloudProviderRegion_FullMethodName         = "/qdrant.cloud.platform.v1.PlatformService/GetCloudProviderRegion"
+	PlatformService_ListGlobalCloudProviders_FullMethodName       = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviders"
+	PlatformService_ListCloudProviders_FullMethodName             = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviders"
+	PlatformService_ListGlobalCloudProviderRegions_FullMethodName = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviderRegions"
+	PlatformService_GetGlobalCloudProviderRegion_FullMethodName   = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetGlobalCloudProviderRegion"
+	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviderRegions"
+	PlatformService_GetCloudProviderRegion_FullMethodName         = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetCloudProviderRegion"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
 type PlatformServiceClient interface {
 	// Lists all available cloud providers globally (not account-specific).
 	// Authentication is not required.
@@ -49,16 +49,10 @@ type PlatformServiceClient interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
 	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(ctx context.Context, in *GetCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetCloudProviderRegionResponse, error)
 }
 
@@ -134,7 +128,7 @@ func (c *platformServiceClient) GetCloudProviderRegion(ctx context.Context, in *
 // All implementations must embed UnimplementedPlatformServiceServer
 // for forward compatibility.
 //
-// PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
 type PlatformServiceServer interface {
 	// Lists all available cloud providers globally (not account-specific).
 	// Authentication is not required.
@@ -152,16 +146,10 @@ type PlatformServiceServer interface {
 	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
 	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
 	// Required permissions:
 	// - None (authenticated only)
-	// Conditional permissions:
-	//   - read:hybrid_cloud_environments OR read:clusters
-	//     One of these permissions is required when the specified cloud_provider_id is "hybrid".
 	GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
@@ -324,7 +312,7 @@ func _PlatformService_GetCloudProviderRegion_Handler(srv interface{}, ctx contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PlatformService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "qdrant.cloud.platform.v1.PlatformService",
+	ServiceName: "qdrant.cloud.serverless.platform.v1.PlatformService",
 	HandlerType: (*PlatformServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -353,5 +341,5 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/cloud/platform/v1/platform.proto",
+	Metadata: "qdrant/cloud/serverless/platform/v1/platform.proto",
 }

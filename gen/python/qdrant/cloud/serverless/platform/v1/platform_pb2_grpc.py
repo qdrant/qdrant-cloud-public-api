@@ -2,11 +2,11 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from qdrant.cloud.platform.v1 import platform_pb2 as qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2
+from qdrant.cloud.serverless.platform.v1 import platform_pb2 as qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2
 
 
 class PlatformServiceStub(object):
-    """PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+    """PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
     """
 
     def __init__(self, channel):
@@ -16,39 +16,39 @@ class PlatformServiceStub(object):
             channel: A grpc.Channel.
         """
         self.ListGlobalCloudProviders = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviders',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
                 _registered_method=True)
         self.ListCloudProviders = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviders',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
                 _registered_method=True)
         self.ListGlobalCloudProviderRegions = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
                 _registered_method=True)
         self.GetGlobalCloudProviderRegion = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/GetGlobalCloudProviderRegion',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/GetGlobalCloudProviderRegion',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.FromString,
                 _registered_method=True)
         self.ListCloudProviderRegions = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviderRegions',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
                 _registered_method=True)
         self.GetCloudProviderRegion = channel.unary_unary(
-                '/qdrant.cloud.platform.v1.PlatformService/GetCloudProviderRegion',
-                request_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
+                '/qdrant.cloud.serverless.platform.v1.PlatformService/GetCloudProviderRegion',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
                 _registered_method=True)
 
 
 class PlatformServiceServicer(object):
-    """PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+    """PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
     """
 
     def ListGlobalCloudProviders(self, request, context):
@@ -88,9 +88,6 @@ class PlatformServiceServicer(object):
         """Lists all cloud provider regions in the account identified by the given ID and cloud provider.
         Required permissions:
         - None (authenticated only)
-        Conditional permissions:
-        - read:hybrid_cloud_environments OR read:clusters
-        One of these permissions is required when the specified cloud_provider_id is "hybrid".
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -100,9 +97,6 @@ class PlatformServiceServicer(object):
         """Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
         Required permissions:
         - None (authenticated only)
-        Conditional permissions:
-        - read:hybrid_cloud_environments OR read:clusters
-        One of these permissions is required when the specified cloud_provider_id is "hybrid".
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -113,44 +107,44 @@ def add_PlatformServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListGlobalCloudProviders': grpc.unary_unary_rpc_method_handler(
                     servicer.ListGlobalCloudProviders,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.SerializeToString,
             ),
             'ListCloudProviders': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCloudProviders,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.SerializeToString,
             ),
             'ListGlobalCloudProviderRegions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListGlobalCloudProviderRegions,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.SerializeToString,
             ),
             'GetGlobalCloudProviderRegion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGlobalCloudProviderRegion,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.SerializeToString,
             ),
             'ListCloudProviderRegions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCloudProviderRegions,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.SerializeToString,
             ),
             'GetCloudProviderRegion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCloudProviderRegion,
-                    request_deserializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'qdrant.cloud.platform.v1.PlatformService', rpc_method_handlers)
+            'qdrant.cloud.serverless.platform.v1.PlatformService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('qdrant.cloud.platform.v1.PlatformService', rpc_method_handlers)
+    server.add_registered_method_handlers('qdrant.cloud.serverless.platform.v1.PlatformService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
 class PlatformService(object):
-    """PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
+    """PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
     """
 
     @staticmethod
@@ -167,9 +161,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviders',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviders',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProvidersResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -194,9 +188,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviders',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviders',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProvidersResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -221,9 +215,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviderRegions',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListGlobalCloudProviderRegionsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -248,9 +242,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/GetGlobalCloudProviderRegion',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/GetGlobalCloudProviderRegion',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetGlobalCloudProviderRegionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -275,9 +269,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/ListCloudProviderRegions',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviderRegions',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.ListCloudProviderRegionsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -302,9 +296,9 @@ class PlatformService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.platform.v1.PlatformService/GetCloudProviderRegion',
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
-            qdrant_dot_cloud_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
+            '/qdrant.cloud.serverless.platform.v1.PlatformService/GetCloudProviderRegion',
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_platform_dot_v1_dot_platform__pb2.GetCloudProviderRegionResponse.FromString,
             options,
             channel_credentials,
             insecure,

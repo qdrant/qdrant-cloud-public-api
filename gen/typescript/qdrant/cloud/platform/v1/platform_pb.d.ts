@@ -29,6 +29,7 @@ export declare type ListCloudProvidersRequest = Message<"qdrant.cloud.platform.v
    * An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
    * If not specified, all supported platform modes will be returned.
    * This is an optional field.
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: optional qdrant.cloud.platform.v1.PlatformMode supported_mode = 2;
    */
@@ -75,6 +76,7 @@ export declare type ListGlobalCloudProvidersRequest = Message<"qdrant.cloud.plat
    * An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
    * If not specified, all supported platform modes will be returned.
    * This is an optional field.
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: optional qdrant.cloud.platform.v1.PlatformMode supported_mode = 2;
    */
@@ -129,6 +131,7 @@ export declare type ListGlobalCloudProviderRegionsRequest = Message<"qdrant.clou
    * An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
    * If not specified, all supported platform modes will be returned.
    * This is an optional field.
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: optional qdrant.cloud.platform.v1.PlatformMode supported_mode = 2;
    */
@@ -244,6 +247,7 @@ export declare type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.plat
    * An optional filter for a specific supported platform mode (dedicated clusters or serverless spaces).
    * If not specified, all supported platform modes will be returned.
    * This is an optional field.
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: optional qdrant.cloud.platform.v1.PlatformMode supported_mode = 3;
    */
@@ -380,6 +384,7 @@ export declare type CloudProvider = Message<"qdrant.cloud.platform.v1.CloudProvi
   /**
    * The supported platform modes of the cloud provider (dedicated clusters and/or serverless spaces).
    * If a certain mode is supported at least 1 region for this provider supports it.
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: repeated qdrant.cloud.platform.v1.PlatformMode supported_modes = 5;
    */
@@ -492,6 +497,7 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
 
   /**
    * The supported platform modes of the cloud provider region (dedicated clusters and/or serverless spaces).
+   * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
    *
    * @generated from field: repeated qdrant.cloud.platform.v1.PlatformMode supported_modes = 13;
    */
@@ -578,6 +584,7 @@ export declare const ClusterCreationBlockingReasonSchema: GenEnum<ClusterCreatio
 
 /**
  * PlatformMode Enums
+ * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
  *
  * @generated from enum qdrant.cloud.platform.v1.PlatformMode
  */
@@ -612,7 +619,7 @@ export enum PlatformMode {
 export declare const PlatformModeSchema: GenEnum<PlatformMode>;
 
 /**
- * PlatformService is the API used to query for cloud provider & regional information.
+ * PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
  *
  * @generated from service qdrant.cloud.platform.v1.PlatformService
  */

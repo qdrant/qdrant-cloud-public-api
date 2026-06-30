@@ -142,6 +142,7 @@ export const PlatformModeSchema = /*@__PURE__*/
 
 /**
  * PlatformMode Enums
+ * [deprecated] use qdrant.cloud.serverless.platform.v1.PlatformService for serverless info.
  *
  * @generated from enum qdrant.cloud.platform.v1.PlatformMode
  */
@@ -149,7 +150,7 @@ export const PlatformMode = /*@__PURE__*/
   tsEnum(PlatformModeSchema);
 
 /**
- * PlatformService is the API used to query for cloud provider & regional information.
+ * PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
  *
  * @generated from service qdrant.cloud.platform.v1.PlatformService
  */
