@@ -421,8 +421,7 @@ message SpaceEndpoint {
   // URL to access the qdrant space (aka serverless database) without port
   string url = 1 [(buf.validate.field).string = {uri: true}];
   // The port to use for HTTP REST calls (6333)
-  // TODO: We only support gRPC, so this isn't needed
-  // int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+  int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
   // The port to use for gRPC calls (6334)
   int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
 }
