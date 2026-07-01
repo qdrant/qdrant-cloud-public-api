@@ -147,6 +147,16 @@ service SpaceService {
       field_expression: "space_id"
     };
   }
+  // Suggests a unique and human-friendly name for a new space in the specified account.
+  // This can be used by clients to pre-fill the name field when creating a new space.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc SuggestSpaceName(SuggestSpaceNameRequest) returns (SuggestSpaceNameResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/suggest-name"};
+  }
 }
 
 // ListSpacesRequest is an empty request to list spaces
@@ -295,6 +305,19 @@ message DeleteSpaceRequest {
 // DeleteSpaceResponse is an empty response for deletion confirmation
 message DeleteSpaceResponse {
   // Empty
+}
+
+// SuggestSpaceNameRequest is the request for the SuggestSpaceName function
+message SuggestSpaceNameRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// SuggestSpaceNameResponse is the response from the SuggestSpaceName function
+message SuggestSpaceNameResponse {
+  // The suggested name for a new space.
+  string name = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 // Space represents a space in the Qdrant serverless environment.

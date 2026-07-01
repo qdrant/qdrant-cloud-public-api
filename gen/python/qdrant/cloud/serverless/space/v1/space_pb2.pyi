@@ -119,6 +119,18 @@ class DeleteSpaceResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class SuggestSpaceNameRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class SuggestSpaceNameResponse(_message.Message):
+    __slots__ = ("name",)
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    def __init__(self, name: _Optional[str] = ...) -> None: ...
+
 class Space(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "labels", "cost_allocation_label", "configuration", "state")
     ID_FIELD_NUMBER: _ClassVar[int]

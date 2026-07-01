@@ -25,6 +25,7 @@ const (
 	SpaceService_CreateSpaceFromBackup_FullMethodName = "/qdrant.cloud.serverless.space.v1.SpaceService/CreateSpaceFromBackup"
 	SpaceService_UpdateSpace_FullMethodName           = "/qdrant.cloud.serverless.space.v1.SpaceService/UpdateSpace"
 	SpaceService_DeleteSpace_FullMethodName           = "/qdrant.cloud.serverless.space.v1.SpaceService/DeleteSpace"
+	SpaceService_SuggestSpaceName_FullMethodName      = "/qdrant.cloud.serverless.space.v1.SpaceService/SuggestSpaceName"
 )
 
 // SpaceServiceClient is the client API for SpaceService service.
@@ -58,6 +59,11 @@ type SpaceServiceClient interface {
 	// Required Permissions:
 	// - delete:serverless_spaces
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*DeleteSpaceResponse, error)
+	// Suggests a unique and human-friendly name for a new space in the specified account.
+	// This can be used by clients to pre-fill the name field when creating a new space.
+	// Required permissions:
+	// - None (authenticated only)
+	SuggestSpaceName(ctx context.Context, in *SuggestSpaceNameRequest, opts ...grpc.CallOption) (*SuggestSpaceNameResponse, error)
 }
 
 type spaceServiceClient struct {
@@ -128,6 +134,16 @@ func (c *spaceServiceClient) DeleteSpace(ctx context.Context, in *DeleteSpaceReq
 	return out, nil
 }
 
+func (c *spaceServiceClient) SuggestSpaceName(ctx context.Context, in *SuggestSpaceNameRequest, opts ...grpc.CallOption) (*SuggestSpaceNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SuggestSpaceNameResponse)
+	err := c.cc.Invoke(ctx, SpaceService_SuggestSpaceName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SpaceServiceServer is the server API for SpaceService service.
 // All implementations must embed UnimplementedSpaceServiceServer
 // for forward compatibility.
@@ -159,6 +175,11 @@ type SpaceServiceServer interface {
 	// Required Permissions:
 	// - delete:serverless_spaces
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*DeleteSpaceResponse, error)
+	// Suggests a unique and human-friendly name for a new space in the specified account.
+	// This can be used by clients to pre-fill the name field when creating a new space.
+	// Required permissions:
+	// - None (authenticated only)
+	SuggestSpaceName(context.Context, *SuggestSpaceNameRequest) (*SuggestSpaceNameResponse, error)
 	mustEmbedUnimplementedSpaceServiceServer()
 }
 
@@ -186,6 +207,9 @@ func (UnimplementedSpaceServiceServer) UpdateSpace(context.Context, *UpdateSpace
 }
 func (UnimplementedSpaceServiceServer) DeleteSpace(context.Context, *DeleteSpaceRequest) (*DeleteSpaceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSpace not implemented")
+}
+func (UnimplementedSpaceServiceServer) SuggestSpaceName(context.Context, *SuggestSpaceNameRequest) (*SuggestSpaceNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuggestSpaceName not implemented")
 }
 func (UnimplementedSpaceServiceServer) mustEmbedUnimplementedSpaceServiceServer() {}
 func (UnimplementedSpaceServiceServer) testEmbeddedByValue()                      {}
@@ -316,6 +340,24 @@ func _SpaceService_DeleteSpace_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SpaceService_SuggestSpaceName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestSpaceNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SpaceServiceServer).SuggestSpaceName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SpaceService_SuggestSpaceName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SpaceServiceServer).SuggestSpaceName(ctx, req.(*SuggestSpaceNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SpaceService_ServiceDesc is the grpc.ServiceDesc for SpaceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -346,6 +388,10 @@ var SpaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSpace",
 			Handler:    _SpaceService_DeleteSpace_Handler,
+		},
+		{
+			MethodName: "SuggestSpaceName",
+			Handler:    _SpaceService_SuggestSpaceName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -58,3 +58,13 @@ export const updateSpace = SpaceService.method.updateSpace;
  * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace
  */
 export const deleteSpace = SpaceService.method.deleteSpace;
+
+/**
+ * Suggests a unique and human-friendly name for a new space in the specified account.
+ * This can be used by clients to pre-fill the name field when creating a new space.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName
+ */
+export const suggestSpaceName = SpaceService.method.suggestSpaceName;

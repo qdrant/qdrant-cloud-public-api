@@ -469,6 +469,51 @@ export declare type DeleteSpaceResponseValid = DeleteSpaceResponse;
 export declare const DeleteSpaceResponseSchema: GenMessage<DeleteSpaceResponse, {validType: DeleteSpaceResponseValid}>;
 
 /**
+ * SuggestSpaceNameRequest is the request for the SuggestSpaceName function
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest
+ */
+export declare type SuggestSpaceNameRequest = Message<"qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type SuggestSpaceNameRequestValid = SuggestSpaceNameRequest;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest.
+ * Use `create(SuggestSpaceNameRequestSchema)` to create a new message.
+ */
+export declare const SuggestSpaceNameRequestSchema: GenMessage<SuggestSpaceNameRequest, {validType: SuggestSpaceNameRequestValid}>;
+
+/**
+ * SuggestSpaceNameResponse is the response from the SuggestSpaceName function
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
+ */
+export declare type SuggestSpaceNameResponse = Message<"qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse"> & {
+  /**
+   * The suggested name for a new space.
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+};
+
+export declare type SuggestSpaceNameResponseValid = SuggestSpaceNameResponse;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse.
+ * Use `create(SuggestSpaceNameResponseSchema)` to create a new message.
+ */
+export declare const SuggestSpaceNameResponseSchema: GenMessage<SuggestSpaceNameResponse, {validType: SuggestSpaceNameResponseValid}>;
+
+/**
  * Space represents a space in the Qdrant serverless environment.
  * It can be used to store collections which can hold points.
  *
@@ -903,6 +948,19 @@ export declare const SpaceService: GenService<{
     methodKind: "unary";
     input: typeof DeleteSpaceRequestSchema;
     output: typeof DeleteSpaceResponseSchema;
+  },
+  /**
+   * Suggests a unique and human-friendly name for a new space in the specified account.
+   * This can be used by clients to pre-fill the name field when creating a new space.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName
+   */
+  suggestSpaceName: {
+    methodKind: "unary";
+    input: typeof SuggestSpaceNameRequestSchema;
+    output: typeof SuggestSpaceNameResponseSchema;
   },
 }>;
 

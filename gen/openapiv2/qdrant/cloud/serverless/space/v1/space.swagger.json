@@ -124,6 +124,38 @@
         ]
       }
     },
+    "/api/serverless/v1/accounts/{accountId}/spaces/suggest-name": {
+      "get": {
+        "summary": "Suggests a unique and human-friendly name for a new space in the specified account.\nThis can be used by clients to pre-fill the name field when creating a new space.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "SpaceService_SuggestSpaceName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuggestSpaceNameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpaceService"
+        ]
+      }
+    },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}": {
       "get": {
         "summary": "Gets a space in the account identified by the given ID.\nRequired permissions:\n- read:serverless_spaces",
@@ -636,6 +668,16 @@
       ],
       "default": "SPACE_STATE_PHASE_UNSPECIFIED",
       "description": "SpaceStatePhase defines the operational phases of a Qdrant serverless space.\n\n - SPACE_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_STATE_PHASE_PROCESSING: The Space is being created, updated, or undergoing maintenance.\n - SPACE_STATE_PHASE_READY: The Space is fully operational and available for use.\n - SPACE_STATE_PHASE_DISABLED: The Space has been temporarily or permanently disabled.\n - SPACE_STATE_PHASE_DELETING: The Space is being deleted."
+    },
+    "v1SuggestSpaceNameResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The suggested name for a new space."
+        }
+      },
+      "title": "SuggestSpaceNameResponse is the response from the SuggestSpaceName function"
     },
     "v1UpdateSpaceResponse": {
       "type": "object",
