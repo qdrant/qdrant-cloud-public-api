@@ -239,34 +239,8 @@ class SuggestCompaniesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Company]
     def __init__(self, items: _Optional[_Iterable[_Union[Company, _Mapping]]] = ...) -> None: ...
 
-class GetAccountSettingsRequest(_message.Message):
-    __slots__ = ("account_id",)
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
-
-class GetAccountSettingsResponse(_message.Message):
-    __slots__ = ("settings",)
-    SETTINGS_FIELD_NUMBER: _ClassVar[int]
-    settings: AccountSettings
-    def __init__(self, settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
-
-class UpdateAccountSettingsRequest(_message.Message):
-    __slots__ = ("account_id", "settings")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    SETTINGS_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    settings: AccountSettings
-    def __init__(self, account_id: _Optional[str] = ..., settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
-
-class UpdateAccountSettingsResponse(_message.Message):
-    __slots__ = ("settings",)
-    SETTINGS_FIELD_NUMBER: _ClassVar[int]
-    settings: AccountSettings
-    def __init__(self, settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
-
 class Account(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company")
+    __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company", "settings")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -275,6 +249,7 @@ class Account(_message.Message):
     OWNER_EMAIL_FIELD_NUMBER: _ClassVar[int]
     PRIVILEGES_FIELD_NUMBER: _ClassVar[int]
     COMPANY_FIELD_NUMBER: _ClassVar[int]
+    SETTINGS_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
@@ -283,7 +258,8 @@ class Account(_message.Message):
     owner_email: str
     privileges: _containers.RepeatedScalarFieldContainer[str]
     company: Company
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company: _Optional[_Union[Company, _Mapping]] = ...) -> None: ...
+    settings: AccountSettings
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company: _Optional[_Union[Company, _Mapping]] = ..., settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_email", "last_modified_at", "status")

@@ -36,8 +36,6 @@ const (
 	AccountService_GetAccountMember_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountMember"
 	AccountService_DeleteAccountMember_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/DeleteAccountMember"
 	AccountService_SuggestCompanies_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/SuggestCompanies"
-	AccountService_GetAccountSettings_FullMethodName         = "/qdrant.cloud.account.v1.AccountService/GetAccountSettings"
-	AccountService_UpdateAccountSettings_FullMethodName      = "/qdrant.cloud.account.v1.AccountService/UpdateAccountSettings"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -123,14 +121,6 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestCompanies(ctx context.Context, in *SuggestCompaniesRequest, opts ...grpc.CallOption) (*SuggestCompaniesResponse, error)
-	// Gets an account's settings.
-	// Required permissions:
-	// - read:account
-	GetAccountSettings(ctx context.Context, in *GetAccountSettingsRequest, opts ...grpc.CallOption) (*GetAccountSettingsResponse, error)
-	// Updates an account's settings.
-	// Required permissions:
-	// - write:account
-	UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error)
 }
 
 type accountServiceClient struct {
@@ -311,26 +301,6 @@ func (c *accountServiceClient) SuggestCompanies(ctx context.Context, in *Suggest
 	return out, nil
 }
 
-func (c *accountServiceClient) GetAccountSettings(ctx context.Context, in *GetAccountSettingsRequest, opts ...grpc.CallOption) (*GetAccountSettingsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccountSettingsResponse)
-	err := c.cc.Invoke(ctx, AccountService_GetAccountSettings_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountServiceClient) UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateAccountSettingsResponse)
-	err := c.cc.Invoke(ctx, AccountService_UpdateAccountSettings_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AccountServiceServer is the server API for AccountService service.
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility.
@@ -414,14 +384,6 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestCompanies(context.Context, *SuggestCompaniesRequest) (*SuggestCompaniesResponse, error)
-	// Gets an account's settings.
-	// Required permissions:
-	// - read:account
-	GetAccountSettings(context.Context, *GetAccountSettingsRequest) (*GetAccountSettingsResponse, error)
-	// Updates an account's settings.
-	// Required permissions:
-	// - write:account
-	UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -482,12 +444,6 @@ func (UnimplementedAccountServiceServer) DeleteAccountMember(context.Context, *D
 }
 func (UnimplementedAccountServiceServer) SuggestCompanies(context.Context, *SuggestCompaniesRequest) (*SuggestCompaniesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SuggestCompanies not implemented")
-}
-func (UnimplementedAccountServiceServer) GetAccountSettings(context.Context, *GetAccountSettingsRequest) (*GetAccountSettingsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAccountSettings not implemented")
-}
-func (UnimplementedAccountServiceServer) UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateAccountSettings not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 func (UnimplementedAccountServiceServer) testEmbeddedByValue()                        {}
@@ -816,42 +772,6 @@ func _AccountService_SuggestCompanies_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_GetAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).GetAccountSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountService_GetAccountSettings_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).GetAccountSettings(ctx, req.(*GetAccountSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AccountService_UpdateAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateAccountSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountServiceServer).UpdateAccountSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AccountService_UpdateAccountSettings_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).UpdateAccountSettings(ctx, req.(*UpdateAccountSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -926,14 +846,6 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SuggestCompanies",
 			Handler:    _AccountService_SuggestCompanies_Handler,
-		},
-		{
-			MethodName: "GetAccountSettings",
-			Handler:    _AccountService_GetAccountSettings_Handler,
-		},
-		{
-			MethodName: "UpdateAccountSettings",
-			Handler:    _AccountService_UpdateAccountSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -100,16 +100,6 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
                 _registered_method=True)
-        self.GetAccountSettings = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/GetAccountSettings',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsResponse.FromString,
-                _registered_method=True)
-        self.UpdateAccountSettings = channel.unary_unary(
-                '/qdrant.cloud.account.v1.AccountService/UpdateAccountSettings',
-                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsResponse.FromString,
-                _registered_method=True)
 
 
 class AccountServiceServicer(object):
@@ -278,24 +268,6 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAccountSettings(self, request, context):
-        """Gets an account's settings.
-        Required permissions:
-        - read:account
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateAccountSettings(self, request, context):
-        """Updates an account's settings.
-        Required permissions:
-        - write:account
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AccountServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -383,16 +355,6 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     servicer.SuggestCompanies,
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.SerializeToString,
-            ),
-            'GetAccountSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAccountSettings,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsResponse.SerializeToString,
-            ),
-            'UpdateAccountSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateAccountSettings,
-                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -855,60 +817,6 @@ class AccountService(object):
             '/qdrant.cloud.account.v1.AccountService/SuggestCompanies',
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetAccountSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.account.v1.AccountService/GetAccountSettings',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSettingsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def UpdateAccountSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/qdrant.cloud.account.v1.AccountService/UpdateAccountSettings',
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsRequest.SerializeToString,
-            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.UpdateAccountSettingsResponse.FromString,
             options,
             channel_credentials,
             insecure,

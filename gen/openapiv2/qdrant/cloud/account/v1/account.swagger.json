@@ -517,76 +517,6 @@
         ]
       }
     },
-    "/api/account/v1/accounts/{accountId}/settings": {
-      "get": {
-        "summary": "Gets an account's settings.\nRequired permissions:\n- read:account",
-        "operationId": "AccountService_GetAccountSettings",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetAccountSettingsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format) the member belongs to.\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      },
-      "put": {
-        "summary": "Updates an account's settings.\nRequired permissions:\n- write:account",
-        "operationId": "AccountService_UpdateAccountSettings",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UpdateAccountSettingsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "description": "The identifier of the account (in GUID format) the member belongs to.\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccountServiceUpdateAccountSettingsBody"
-            }
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
     "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
       "post": {
         "summary": "Creates a new account invite.\nRequired permissions:\n- write:invites",
@@ -782,6 +712,10 @@
             "company": {
               "$ref": "#/definitions/v1Company",
               "description": "The company associated with the account."
+            },
+            "settings": {
+              "$ref": "#/definitions/v1AccountSettings",
+              "description": "The settings of the account.\nThis is an optional field, available to account owners only."
             }
           },
           "description": "The actual account.",
@@ -793,16 +727,6 @@
         }
       },
       "description": "UpdateAccountRequest is the request for the UpdateAccount function."
-    },
-    "AccountServiceUpdateAccountSettingsBody": {
-      "type": "object",
-      "properties": {
-        "settings": {
-          "$ref": "#/definitions/v1AccountSettings",
-          "description": "The account settings to update."
-        }
-      },
-      "description": "UpdateAccountSettingsRequest is the request from the UpdateAccountSettings function."
     },
     "protobufAny": {
       "type": "object",
@@ -881,6 +805,10 @@
         "company": {
           "$ref": "#/definitions/v1Company",
           "description": "The company associated with the account."
+        },
+        "settings": {
+          "$ref": "#/definitions/v1AccountSettings",
+          "description": "The settings of the account.\nThis is an optional field, available to account owners only."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -1058,16 +986,6 @@
       },
       "title": "GetAccountResponse is the response from the GetAccount function"
     },
-    "v1GetAccountSettingsResponse": {
-      "type": "object",
-      "properties": {
-        "settings": {
-          "$ref": "#/definitions/v1AccountSettings",
-          "description": "The account settings."
-        }
-      },
-      "description": "GetAccountSettingsResponse is the response from the GetAccountSettings function."
-    },
     "v1LeaveAccountResponse": {
       "type": "object",
       "description": "LeaveAccountResponse is the response from the LeaveAccount function.\n\nEmpty"
@@ -1171,16 +1089,6 @@
         }
       },
       "description": "UpdateAccountResponse is the response from the UpdateAccount function."
-    },
-    "v1UpdateAccountSettingsResponse": {
-      "type": "object",
-      "properties": {
-        "settings": {
-          "$ref": "#/definitions/v1AccountSettings",
-          "description": "The updated account settings."
-        }
-      },
-      "description": "UpdateAccountSettingsResponse is the response from the UpdateAccountSettings function."
     },
     "v1User": {
       "type": "object",
