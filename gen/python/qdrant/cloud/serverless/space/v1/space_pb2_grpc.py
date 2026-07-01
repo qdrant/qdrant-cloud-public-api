@@ -45,6 +45,11 @@ class SpaceServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceResponse.FromString,
                 _registered_method=True)
+        self.SuggestSpaceName = channel.unary_unary(
+                '/qdrant.cloud.serverless.space.v1.SpaceService/SuggestSpaceName',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameResponse.FromString,
+                _registered_method=True)
 
 
 class SpaceServiceServicer(object):
@@ -106,6 +111,16 @@ class SpaceServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SuggestSpaceName(self, request, context):
+        """Suggests a unique and human-friendly name for a new space in the specified account.
+        This can be used by clients to pre-fill the name field when creating a new space.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SpaceServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -138,6 +153,11 @@ def add_SpaceServiceServicer_to_server(servicer, server):
                     servicer.DeleteSpace,
                     request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceResponse.SerializeToString,
+            ),
+            'SuggestSpaceName': grpc.unary_unary_rpc_method_handler(
+                    servicer.SuggestSpaceName,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -303,6 +323,33 @@ class SpaceService(object):
             '/qdrant.cloud.serverless.space.v1.SpaceService/DeleteSpace',
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceRequest.SerializeToString,
             qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.DeleteSpaceResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SuggestSpaceName(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.serverless.space.v1.SpaceService/SuggestSpaceName',
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_space_dot_v1_dot_space__pb2.SuggestSpaceNameResponse.FromString,
             options,
             channel_credentials,
             insecure,
