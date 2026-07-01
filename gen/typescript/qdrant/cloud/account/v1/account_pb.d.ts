@@ -1056,11 +1056,19 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
   privileges: string[];
 
   /**
-   * The name of the company associated with the account.
+   * The company associated with the account.
    *
    * @generated from field: optional qdrant.cloud.account.v1.Company company = 9;
    */
   company?: Company | undefined;
+
+  /**
+   * The settings of the account.
+   * This is an optional field, available to account owners only.
+   *
+   * @generated from field: optional qdrant.cloud.account.v1.AccountSettings settings = 10;
+   */
+  settings?: AccountSettings | undefined;
 };
 
 export declare type AccountValid = Account;
@@ -1248,6 +1256,28 @@ export declare type CompanyValid = Company;
  * Use `create(CompanySchema)` to create a new message.
  */
 export declare const CompanySchema: GenMessage<Company, {validType: CompanyValid}>;
+
+/**
+ * AccountSettings represents the settings for a particular account
+ *
+ * @generated from message qdrant.cloud.account.v1.AccountSettings
+ */
+export declare type AccountSettings = Message<"qdrant.cloud.account.v1.AccountSettings"> & {
+  /**
+   * Whether MFA is required to interact with the account's resources.
+   *
+   * @generated from field: bool mfa_required = 1;
+   */
+  mfaRequired: boolean;
+};
+
+export declare type AccountSettingsValid = AccountSettings;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.AccountSettings.
+ * Use `create(AccountSettingsSchema)` to create a new message.
+ */
+export declare const AccountSettingsSchema: GenMessage<AccountSettings, {validType: AccountSettingsValid}>;
 
 /**
  * AccountInviteStatus defines the possible statuses of an account invitation.

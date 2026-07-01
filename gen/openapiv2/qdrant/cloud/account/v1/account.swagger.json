@@ -711,7 +711,11 @@
             },
             "company": {
               "$ref": "#/definitions/v1Company",
-              "description": "The name of the company associated with the account."
+              "description": "The company associated with the account."
+            },
+            "settings": {
+              "$ref": "#/definitions/v1AccountSettings",
+              "description": "The settings of the account.\nThis is an optional field, available to account owners only."
             }
           },
           "description": "The actual account.",
@@ -800,7 +804,11 @@
         },
         "company": {
           "$ref": "#/definitions/v1Company",
-          "description": "The name of the company associated with the account."
+          "description": "The company associated with the account."
+        },
+        "settings": {
+          "$ref": "#/definitions/v1AccountSettings",
+          "description": "The settings of the account.\nThis is an optional field, available to account owners only."
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -881,6 +889,16 @@
         }
       },
       "description": "An AccountMember represents a user who is a member of an account."
+    },
+    "v1AccountSettings": {
+      "type": "object",
+      "properties": {
+        "mfaRequired": {
+          "type": "boolean",
+          "description": "Whether MFA is required to interact with the account's resources."
+        }
+      },
+      "title": "AccountSettings represents the settings for a particular account"
     },
     "v1Company": {
       "type": "object",

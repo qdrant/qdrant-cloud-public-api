@@ -672,8 +672,11 @@ message Account {
   // The privileges of the account, if any.
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
-  // The name of the company associated with the account.
+  // The company associated with the account.
   optional Company company = 9;
+  // The settings of the account.
+  // This is an optional field, available to account owners only.
+  optional AccountSettings settings = 10;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
@@ -767,4 +770,10 @@ message Company {
   optional string domain = 1 [(buf.validate.field).string.pattern = "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"];
   // The name of the company.
   string name = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// AccountSettings represents the settings for a particular account
+message AccountSettings {
+  // Whether MFA is required to interact with the account's resources.
+  bool mfa_required = 1;
 }
