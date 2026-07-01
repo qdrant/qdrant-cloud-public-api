@@ -1124,8 +1124,7 @@ type SpaceEndpoint struct {
 	// URL to access the qdrant space (aka serverless database) without port
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	// The port to use for HTTP REST calls (6333)
-	// TODO: We only support gRPC, so this isn't needed
-	// int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+	RestPort int32 `protobuf:"varint,2,opt,name=rest_port,json=restPort,proto3" json:"rest_port,omitempty"`
 	// The port to use for gRPC calls (6334)
 	GrpcPort      int32 `protobuf:"varint,3,opt,name=grpc_port,json=grpcPort,proto3" json:"grpc_port,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1167,6 +1166,13 @@ func (x *SpaceEndpoint) GetUrl() string {
 		return x.Url
 	}
 	return ""
+}
+
+func (x *SpaceEndpoint) GetRestPort() int32 {
+	if x != nil {
+		return x.RestPort
+	}
+	return 0
 }
 
 func (x *SpaceEndpoint) GetGrpcPort() int32 {
@@ -1271,9 +1277,10 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12P\n" +
 	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointH\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\"Q\n" +
+	"\t_endpoint\"w\n" +
 	"\rSpaceEndpoint\x12\x1a\n" +
 	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
+	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
 	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xb3\x01\n" +
 	"\x0fSpaceStatePhase\x12!\n" +
 	"\x1dSPACE_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +

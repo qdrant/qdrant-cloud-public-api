@@ -806,8 +806,12 @@ export declare type SpaceEndpoint = Message<"qdrant.cloud.serverless.space.v1.Sp
 
   /**
    * The port to use for HTTP REST calls (6333)
-   * TODO: We only support gRPC, so this isn't needed
-   * int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+   *
+   * @generated from field: int32 rest_port = 2;
+   */
+  restPort: number;
+
+  /**
    * The port to use for gRPC calls (6334)
    *
    * @generated from field: int32 grpc_port = 3;
