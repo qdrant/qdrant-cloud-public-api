@@ -282,6 +282,14 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
    * @generated from field: string key = 10;
    */
   key: string;
+
+  /**
+   * Status of the space api key.
+   * All fields inside `state` are read-only.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState state = 100;
+   */
+  state?: SpaceApiKeyState | undefined;
 };
 
 export declare type SpaceApiKeyValid = SpaceApiKey;
@@ -291,6 +299,38 @@ export declare type SpaceApiKeyValid = SpaceApiKey;
  * Use `create(SpaceApiKeySchema)` to create a new message.
  */
 export declare const SpaceApiKeySchema: GenMessage<SpaceApiKey, {validType: SpaceApiKeyValid}>;
+
+/**
+ * SpaceApiKeyState represents the operational state of a space API key in the
+ * Qdrant serverless environment. It provides status information and error
+ * details (if any).
+ *
+ * @generated from message qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState
+ */
+export declare type SpaceApiKeyState = Message<"qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState"> & {
+  /**
+   * The current operational status of the space api key.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhase phase = 1;
+   */
+  phase: SpaceApiKeyStatePhase;
+
+  /**
+   * Descriptive message explaining any errors or issues with the space api key.
+   * Empty when the API key is operating normally.
+   *
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+};
+
+export declare type SpaceApiKeyStateValid = SpaceApiKeyState;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState.
+ * Use `create(SpaceApiKeyStateSchema)` to create a new message.
+ */
+export declare const SpaceApiKeyStateSchema: GenMessage<SpaceApiKeyState, {validType: SpaceApiKeyStateValid}>;
 
 /**
  * Represents an access rule. An access rule can either define global access to
@@ -385,6 +425,53 @@ export declare type CollectionAccessRuleValid = CollectionAccessRule;
  * Use `create(CollectionAccessRuleSchema)` to create a new message.
  */
 export declare const CollectionAccessRuleSchema: GenMessage<CollectionAccessRule, {validType: CollectionAccessRuleValid}>;
+
+/**
+ * SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.
+ *
+ * @generated from enum qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhase
+ */
+export enum SpaceApiKeyStatePhase {
+  /**
+   * Unspecified phase.
+   *
+   * @generated from enum value: SPACE_API_KEY_STATE_PHASE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The API key is being created or synced to the regional data plane.
+   *
+   * @generated from enum value: SPACE_API_KEY_STATE_PHASE_PROCESSING = 1;
+   */
+  PROCESSING = 1,
+
+  /**
+   * The API key is installed in the regional data plane and fully operational.
+   *
+   * @generated from enum value: SPACE_API_KEY_STATE_PHASE_READY = 2;
+   */
+  READY = 2,
+
+  /**
+   * The API key has been temporarily or permanently disabled.
+   *
+   * @generated from enum value: SPACE_API_KEY_STATE_PHASE_DISABLED = 3;
+   */
+  DISABLED = 3,
+
+  /**
+   * The API key is being deleted from the regional data plane.
+   *
+   * @generated from enum value: SPACE_API_KEY_STATE_PHASE_DELETING = 4;
+   */
+  DELETING = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhase.
+ */
+export declare const SpaceApiKeyStatePhaseSchema: GenEnum<SpaceApiKeyStatePhase>;
 
 /**
  * GlobalAccessRuleAccessType defines the possible access levels for global access rules.

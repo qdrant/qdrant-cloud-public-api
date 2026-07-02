@@ -118,8 +118,8 @@ message CreateSpaceApiKeyRequest {
   SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space_api_key.no_read_only_fields"
-    message: "read-only fields (id, created_at, created_by_email, postfix, key) must not be set on create"
-    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.created_by_email == '' && this.space_api_key.postfix == '' && this.space_api_key.key == ''"
+    message: "read-only fields (id, created_at, created_by_email, postfix, key, state) must not be set on create"
+    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.created_by_email == '' && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
   };
 }
 
@@ -127,6 +127,11 @@ message CreateSpaceApiKeyRequest {
 message CreateSpaceApiKeyResponse {
   // The newly created API key value
   SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "create_space_api_key.state_present"
+    message: "state is required for an existing space api key"
+    expression: "has(this.space_api_key.state)"
+  };
 }
 
 // DeleteSpaceApiKeyRequest identifies the API key to delete
@@ -216,6 +221,34 @@ message SpaceApiKey {
   // This is a read-only field and will be available only once in the response of CreateSpaceApiKey.
   // You should securely store this key and it should be handled as a secret.
   string key = 10;
+  // Status of the space api key.
+  // All fields inside `state` are read-only.
+  SpaceApiKeyState state = 100;
+}
+
+// SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.
+enum SpaceApiKeyStatePhase {
+  // Unspecified phase.
+  SPACE_API_KEY_STATE_PHASE_UNSPECIFIED = 0;
+  // The API key is being created or synced to the regional data plane.
+  SPACE_API_KEY_STATE_PHASE_PROCESSING = 1;
+  // The API key is installed in the regional data plane and fully operational.
+  SPACE_API_KEY_STATE_PHASE_READY = 2;
+  // The API key has been temporarily or permanently disabled.
+  SPACE_API_KEY_STATE_PHASE_DISABLED = 3;
+  // The API key is being deleted from the regional data plane.
+  SPACE_API_KEY_STATE_PHASE_DELETING = 4;
+}
+
+// SpaceApiKeyState represents the operational state of a space API key in the
+// Qdrant serverless environment. It provides status information and error
+// details (if any).
+message SpaceApiKeyState {
+  // The current operational status of the space api key.
+  SpaceApiKeyStatePhase phase = 1 [(buf.validate.field).enum.defined_only = true];
+  // Descriptive message explaining any errors or issues with the space api key.
+  // Empty when the API key is operating normally.
+  string reason = 2;
 }
 
 // Represents an access rule. An access rule can either define global access to
