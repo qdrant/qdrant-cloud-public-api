@@ -74,6 +74,8 @@ service AccountService {
     option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account.id";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/account/v1/accounts/{account.id}"
