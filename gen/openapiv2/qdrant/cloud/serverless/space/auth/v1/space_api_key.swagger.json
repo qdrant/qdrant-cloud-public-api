@@ -193,6 +193,10 @@
             "key": {
               "type": "string",
               "description": "The key for the space api key.\nThis is a read-only field and will be available only once in the response of CreateSpaceApiKey.\nYou should securely store this key and it should be handled as a secret."
+            },
+            "state": {
+              "$ref": "#/definitions/v1SpaceApiKeyState",
+              "description": "Status of the space api key.\nAll fields inside `state` are read-only."
             }
           },
           "description": "The API key to create.\nThis is a required field."
@@ -366,9 +370,39 @@
         "key": {
           "type": "string",
           "description": "The key for the space api key.\nThis is a read-only field and will be available only once in the response of CreateSpaceApiKey.\nYou should securely store this key and it should be handled as a secret."
+        },
+        "state": {
+          "$ref": "#/definitions/v1SpaceApiKeyState",
+          "description": "Status of the space api key.\nAll fields inside `state` are read-only."
         }
       },
       "description": "A SpaceApiKey represents one space api key of a Qdrant cloud account.\nThis space key can grant access to a Qdrant cloud serverless space."
+    },
+    "v1SpaceApiKeyState": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/definitions/v1SpaceApiKeyStatePhase",
+          "description": "The current operational status of the space api key."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Descriptive message explaining any errors or issues with the space api key.\nEmpty when the API key is operating normally."
+        }
+      },
+      "description": "SpaceApiKeyState represents the operational state of a space API key in the\nQdrant serverless environment. It provides status information and error\ndetails (if any)."
+    },
+    "v1SpaceApiKeyStatePhase": {
+      "type": "string",
+      "enum": [
+        "SPACE_API_KEY_STATE_PHASE_UNSPECIFIED",
+        "SPACE_API_KEY_STATE_PHASE_PROCESSING",
+        "SPACE_API_KEY_STATE_PHASE_READY",
+        "SPACE_API_KEY_STATE_PHASE_DISABLED",
+        "SPACE_API_KEY_STATE_PHASE_DELETING"
+      ],
+      "default": "SPACE_API_KEY_STATE_PHASE_UNSPECIFIED",
+      "description": "SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.\n\n - SPACE_API_KEY_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_API_KEY_STATE_PHASE_PROCESSING: The API key is being created or synced to the regional data plane.\n - SPACE_API_KEY_STATE_PHASE_READY: The API key is installed in the regional data plane and fully operational.\n - SPACE_API_KEY_STATE_PHASE_DISABLED: The API key has been temporarily or permanently disabled.\n - SPACE_API_KEY_STATE_PHASE_DELETING: The API key is being deleted from the regional data plane."
     }
   }
 }

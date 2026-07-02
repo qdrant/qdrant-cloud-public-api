@@ -14,6 +14,14 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class SpaceApiKeyStatePhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_API_KEY_STATE_PHASE_UNSPECIFIED: _ClassVar[SpaceApiKeyStatePhase]
+    SPACE_API_KEY_STATE_PHASE_PROCESSING: _ClassVar[SpaceApiKeyStatePhase]
+    SPACE_API_KEY_STATE_PHASE_READY: _ClassVar[SpaceApiKeyStatePhase]
+    SPACE_API_KEY_STATE_PHASE_DISABLED: _ClassVar[SpaceApiKeyStatePhase]
+    SPACE_API_KEY_STATE_PHASE_DELETING: _ClassVar[SpaceApiKeyStatePhase]
+
 class GlobalAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: _ClassVar[GlobalAccessRuleAccessType]
@@ -26,6 +34,11 @@ class CollectionAccessRuleAccessType(int, metaclass=_enum_type_wrapper.EnumTypeW
     COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: _ClassVar[CollectionAccessRuleAccessType]
     COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: _ClassVar[CollectionAccessRuleAccessType]
     COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: _ClassVar[CollectionAccessRuleAccessType]
+SPACE_API_KEY_STATE_PHASE_UNSPECIFIED: SpaceApiKeyStatePhase
+SPACE_API_KEY_STATE_PHASE_PROCESSING: SpaceApiKeyStatePhase
+SPACE_API_KEY_STATE_PHASE_READY: SpaceApiKeyStatePhase
+SPACE_API_KEY_STATE_PHASE_DISABLED: SpaceApiKeyStatePhase
+SPACE_API_KEY_STATE_PHASE_DELETING: SpaceApiKeyStatePhase
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: GlobalAccessRuleAccessType
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: GlobalAccessRuleAccessType
 GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: GlobalAccessRuleAccessType
@@ -75,7 +88,7 @@ class DeleteSpaceApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class SpaceApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "space_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key")
+    __slots__ = ("id", "account_id", "created_at", "space_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -86,6 +99,7 @@ class SpaceApiKey(_message.Message):
     CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
     POSTFIX_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     created_at: _timestamp_pb2.Timestamp
@@ -96,7 +110,16 @@ class SpaceApiKey(_message.Message):
     created_by_email: str
     postfix: str
     key: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+    state: SpaceApiKeyState
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ..., state: _Optional[_Union[SpaceApiKeyState, _Mapping]] = ...) -> None: ...
+
+class SpaceApiKeyState(_message.Message):
+    __slots__ = ("phase", "reason")
+    PHASE_FIELD_NUMBER: _ClassVar[int]
+    REASON_FIELD_NUMBER: _ClassVar[int]
+    phase: SpaceApiKeyStatePhase
+    reason: str
+    def __init__(self, phase: _Optional[_Union[SpaceApiKeyStatePhase, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class AccessRule(_message.Message):
     __slots__ = ("global_access", "collection_access")
