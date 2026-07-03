@@ -12,8 +12,8 @@ import "qdrant/cloud/event/v1/events.proto";
 service SpaceApiKeyService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
-    major: 1
-    minor: 0
+    major: 2
+    minor: 1
     patch: 0
   };
   // ListSpaceApiKeys returns all API keys for a space
@@ -118,8 +118,8 @@ message CreateSpaceApiKeyRequest {
   SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space_api_key.no_read_only_fields"
-    message: "read-only fields (id, created_at, created_by_email, postfix, key, state) must not be set on create"
-    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.created_by_email == '' && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
+    message: "read-only fields (id, created_at, postfix, key, state) must not be set on create"
+    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
   };
 }
 
@@ -201,14 +201,14 @@ message SpaceApiKey {
     expression: "size(this.access_rules.filter(r, has(r.global_access))) <= 1"
     message: "There can't be more than one global access rule in the configuration."
   };
-  // The email of the user who created the space api key.
-  // This is an optional read-only field and will be available after a space api key is created.
-  // If the SpaceApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
-  string created_by_email = 8 [(buf.validate.field).cel = {
-    id: "space_api_key.created_by_email_format"
-    message: "if set, created_by_email must be a valid email address"
-    expression: "this.size() == 0 || this.isEmail()"
-  }];
+  reserved 8;
+  reserved "created_by_email";
+  // The caller who created the space api key.
+  // This is a read-only field and will be available after a space api key is created.
+  common.v1.Caller created_by = 11;
+  // The caller who deleted the space api key.
+  // This is a read-only field and will be available after deletion starts.
+  common.v1.Caller deleted_by = 12;
   // Postfix for the space api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a space api key is created.
   string postfix = 9;

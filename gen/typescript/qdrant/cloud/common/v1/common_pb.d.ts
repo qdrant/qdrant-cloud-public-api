@@ -68,6 +68,43 @@ export declare type PatchSourceValid = PatchSource;
 export declare const PatchSourceSchema: GenMessage<PatchSource, {validType: PatchSourceValid}>;
 
 /**
+ * Caller identifies the authenticated actor that performed an action on a resource.
+ *
+ * @generated from message qdrant.cloud.common.v1.Caller
+ */
+export declare type Caller = Message<"qdrant.cloud.common.v1.Caller"> & {
+  /**
+   * Unique identifier of the actor (user UUID, management-key id, service-account id, …).
+   *
+   * @generated from field: string actor_id = 1;
+   */
+  actorId: string;
+
+  /**
+   * Type of the actor.
+   *
+   * @generated from field: qdrant.cloud.common.v1.ActorType actor_type = 2;
+   */
+  actorType: ActorType;
+
+  /**
+   * HTTP User-Agent of the client that initiated the request, when available.
+   * Omitted for internal/service-initiated actions without a client User-Agent.
+   *
+   * @generated from field: optional string user_agent = 3;
+   */
+  userAgent?: string | undefined;
+};
+
+export declare type CallerValid = Caller;
+
+/**
+ * Describes the message qdrant.cloud.common.v1.Caller.
+ * Use `create(CallerSchema)` to create a new message.
+ */
+export declare const CallerSchema: GenMessage<Caller, {validType: CallerValid}>;
+
+/**
  * LogField represents a field to log (in case of an error).
  *
  * @generated from message qdrant.cloud.common.v1.LogField

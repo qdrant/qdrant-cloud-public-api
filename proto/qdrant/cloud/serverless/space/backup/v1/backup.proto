@@ -16,7 +16,7 @@ service BackupService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all backups in the account identified by the given ID.
@@ -605,6 +605,15 @@ message Backup {
   // Identity fields reflect the latest space state; configuration reflects the state at backup time.
   // This is a read-only field and will be available after the backup is created.
   SpaceInfo space_info = 12;
+  // The caller who created the backup.
+  // This is a read-only field and will be available after a backup is created.
+  common.v1.Caller created_by = 13;
+  // The caller who last updated the backup.
+  // This is a read-only field and will be set when backup metadata is updated.
+  common.v1.Caller last_updated_by = 14;
+  // The caller who initiated deletion of the backup.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 15;
 }
 
 // Represents the space details associated with a backup.
@@ -677,6 +686,15 @@ message BackupSchedule {
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
   BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
+  // The caller who created the backup schedule.
+  // This is a read-only field and will be available after a backup schedule is created.
+  common.v1.Caller created_by = 9;
+  // The caller who last updated the backup schedule.
+  // This is a read-only field and will be set after UpdateBackupSchedule is called.
+  common.v1.Caller last_updated_by = 10;
+  // The caller who initiated deletion of the backup schedule.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 11;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

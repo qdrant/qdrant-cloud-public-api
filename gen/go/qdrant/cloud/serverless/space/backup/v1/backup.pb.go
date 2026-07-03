@@ -8,9 +8,9 @@ package backupv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
-	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1"
+	v11 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1512,7 +1512,16 @@ type Backup struct {
 	// Space details associated with the backup.
 	// Identity fields reflect the latest space state; configuration reflects the state at backup time.
 	// This is a read-only field and will be available after the backup is created.
-	SpaceInfo     *SpaceInfo `protobuf:"bytes,12,opt,name=space_info,json=spaceInfo,proto3" json:"space_info,omitempty"`
+	SpaceInfo *SpaceInfo `protobuf:"bytes,12,opt,name=space_info,json=spaceInfo,proto3" json:"space_info,omitempty"`
+	// The caller who created the backup.
+	// This is a read-only field and will be available after a backup is created.
+	CreatedBy *v1.Caller `protobuf:"bytes,13,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// The caller who last updated the backup.
+	// This is a read-only field and will be set when backup metadata is updated.
+	LastUpdatedBy *v1.Caller `protobuf:"bytes,14,opt,name=last_updated_by,json=lastUpdatedBy,proto3" json:"last_updated_by,omitempty"`
+	// The caller who initiated deletion of the backup.
+	// This is a read-only field and will be set when deleted_at is set.
+	DeletedBy     *v1.Caller `protobuf:"bytes,15,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1624,6 +1633,27 @@ func (x *Backup) GetSpaceInfo() *SpaceInfo {
 	return nil
 }
 
+func (x *Backup) GetCreatedBy() *v1.Caller {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return nil
+}
+
+func (x *Backup) GetLastUpdatedBy() *v1.Caller {
+	if x != nil {
+		return x.LastUpdatedBy
+	}
+	return nil
+}
+
+func (x *Backup) GetDeletedBy() *v1.Caller {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return nil
+}
+
 // Represents the space details associated with a backup.
 // The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
 // The configuration field is immutable and represents the values at backup time.
@@ -1638,7 +1668,7 @@ type SpaceInfo struct {
 	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
 	CloudProviderRegionId string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
 	// The space configuration at the time of backup.
-	Configuration *v1.SpaceConfiguration `protobuf:"bytes,4,opt,name=configuration,proto3" json:"configuration,omitempty"`
+	Configuration *v11.SpaceConfiguration `protobuf:"bytes,4,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1694,7 +1724,7 @@ func (x *SpaceInfo) GetCloudProviderRegionId() string {
 	return ""
 }
 
-func (x *SpaceInfo) GetConfiguration() *v1.SpaceConfiguration {
+func (x *SpaceInfo) GetConfiguration() *v11.SpaceConfiguration {
 	if x != nil {
 		return x.Configuration
 	}
@@ -1728,7 +1758,16 @@ type BackupSchedule struct {
 	// This is a read-only field and will be set after DeleteBackupSchedule is called.
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	// The current status of the backup schedule.
-	Status        BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
+	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
+	// The caller who created the backup schedule.
+	// This is a read-only field and will be available after a backup schedule is created.
+	CreatedBy *v1.Caller `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// The caller who last updated the backup schedule.
+	// This is a read-only field and will be set after UpdateBackupSchedule is called.
+	LastUpdatedBy *v1.Caller `protobuf:"bytes,10,opt,name=last_updated_by,json=lastUpdatedBy,proto3" json:"last_updated_by,omitempty"`
+	// The caller who initiated deletion of the backup schedule.
+	// This is a read-only field and will be set when deleted_at is set.
+	DeletedBy     *v1.Caller `protobuf:"bytes,11,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1817,6 +1856,27 @@ func (x *BackupSchedule) GetStatus() BackupScheduleStatus {
 		return x.Status
 	}
 	return BackupScheduleStatus_BACKUP_SCHEDULE_STATUS_UNSPECIFIED
+}
+
+func (x *BackupSchedule) GetCreatedBy() *v1.Caller {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return nil
+}
+
+func (x *BackupSchedule) GetLastUpdatedBy() *v1.Caller {
+	if x != nil {
+		return x.LastUpdatedBy
+	}
+	return nil
+}
+
+func (x *BackupSchedule) GetDeletedBy() *v1.Caller {
+	if x != nil {
+		return x.DeletedBy
+	}
+	return nil
 }
 
 // A BackupRestore represents the status of an in-place backup restore for a space.
@@ -2036,7 +2096,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xab\a\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xf1\b\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2053,7 +2113,12 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x10retention_period\x18\n" +
 	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12Q\n" +
 	"\n" +
-	"space_info\x18\f \x01(\v22.qdrant.cloud.serverless.space.backup.v1.SpaceInfoR\tspaceInfo:\xff\x01\xbaH\xfb\x01\x1a\xa2\x01\n" +
+	"space_info\x18\f \x01(\v22.qdrant.cloud.serverless.space.backup.v1.SpaceInfoR\tspaceInfo\x12=\n" +
+	"\n" +
+	"created_by\x18\r \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tcreatedBy\x12F\n" +
+	"\x0flast_updated_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\rlastUpdatedBy\x12=\n" +
+	"\n" +
+	"deleted_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy:\xff\x01\xbaH\xfb\x01\x1a\xa2\x01\n" +
 	"\tbackup.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
 	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
@@ -2062,7 +2127,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12b\n" +
-	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xa8\x06\n" +
+	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xee\a\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2074,7 +2139,13 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12_\n" +
-	"\x06status\x18\b \x01(\x0e2=.qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
+	"\x06status\x18\b \x01(\x0e2=.qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12=\n" +
+	"\n" +
+	"created_by\x18\t \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tcreatedBy\x12F\n" +
+	"\x0flast_updated_by\x18\n" +
+	" \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\rlastUpdatedBy\x12=\n" +
+	"\n" +
+	"deleted_by\x18\v \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
 	"\x11_retention_period\"\xf4\x02\n" +
 	"\rBackupRestore\x12\x18\n" +
@@ -2109,7 +2180,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x82'\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x84'\n" +
 	"\rBackupService\x12\xa9\x02\n" +
 	"\vListBackups\x12;.qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest\x1a<.qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse\"\x9e\x01\x8a\xb5\x18\x17read:serverless_backups\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18(\n" +
@@ -2146,7 +2217,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xab\x04\n" +
 	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\x85\x03\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xd1\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R%\n" +
-	"\bspace_id\x12\x19resp-md.qc-event-space-id\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x01B\xe0\x02\n" +
+	"\bspace_id\x12\x19resp-md.qc-event-space-id\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\bµ\x18\x04\b\x01\x10\x01B\xe0\x02\n" +
 	"+com.qdrant.cloud.serverless.space.backup.v1B\vBackupProtoP\x01Zagithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/backup/v1;backupv1\xa2\x02\x05QCSSB\xaa\x02'Qdrant.Cloud.Serverless.Space.Backup.V1\xca\x02'Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\xe2\x023Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\\GPBMetadata\xea\x02,Qdrant::Cloud::Serverless::Space::Backup::V1b\x06proto3"
 
 var (
@@ -2196,7 +2267,8 @@ var file_qdrant_cloud_serverless_space_backup_v1_backup_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil),        // 29: google.protobuf.FieldMask
 	(*timestamppb.Timestamp)(nil),        // 30: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),          // 31: google.protobuf.Duration
-	(*v1.SpaceConfiguration)(nil),        // 32: qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	(*v1.Caller)(nil),                    // 32: qdrant.cloud.common.v1.Caller
+	(*v11.SpaceConfiguration)(nil),       // 33: qdrant.cloud.serverless.space.v1.SpaceConfiguration
 }
 var file_qdrant_cloud_serverless_space_backup_v1_backup_proto_depIdxs = []int32{
 	25, // 0: qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse.items:type_name -> qdrant.cloud.serverless.space.backup.v1.Backup
@@ -2217,41 +2289,47 @@ var file_qdrant_cloud_serverless_space_backup_v1_backup_proto_depIdxs = []int32{
 	31, // 15: qdrant.cloud.serverless.space.backup.v1.Backup.backup_duration:type_name -> google.protobuf.Duration
 	31, // 16: qdrant.cloud.serverless.space.backup.v1.Backup.retention_period:type_name -> google.protobuf.Duration
 	26, // 17: qdrant.cloud.serverless.space.backup.v1.Backup.space_info:type_name -> qdrant.cloud.serverless.space.backup.v1.SpaceInfo
-	32, // 18: qdrant.cloud.serverless.space.backup.v1.SpaceInfo.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	30, // 19: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
-	31, // 20: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
-	30, // 21: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
-	1,  // 22: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus
-	30, // 23: qdrant.cloud.serverless.space.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 24: qdrant.cloud.serverless.space.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.serverless.space.backup.v1.BackupRestoreStatus
-	30, // 25: qdrant.cloud.serverless.space.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
-	3,  // 26: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest
-	5,  // 27: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupRequest
-	7,  // 28: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupRequest
-	9,  // 29: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupRequest
-	11, // 30: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresRequest
-	13, // 31: qdrant.cloud.serverless.space.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.RestoreBackupRequest
-	15, // 32: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesRequest
-	17, // 33: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupScheduleRequest
-	19, // 34: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleRequest
-	21, // 35: qdrant.cloud.serverless.space.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest
-	23, // 36: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest
-	4,  // 37: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse
-	6,  // 38: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupResponse
-	8,  // 39: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupResponse
-	10, // 40: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupResponse
-	12, // 41: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresResponse
-	14, // 42: qdrant.cloud.serverless.space.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.RestoreBackupResponse
-	16, // 43: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesResponse
-	18, // 44: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupScheduleResponse
-	20, // 45: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleResponse
-	22, // 46: qdrant.cloud.serverless.space.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse
-	24, // 47: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse
-	37, // [37:48] is the sub-list for method output_type
-	26, // [26:37] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	32, // 18: qdrant.cloud.serverless.space.backup.v1.Backup.created_by:type_name -> qdrant.cloud.common.v1.Caller
+	32, // 19: qdrant.cloud.serverless.space.backup.v1.Backup.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
+	32, // 20: qdrant.cloud.serverless.space.backup.v1.Backup.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
+	33, // 21: qdrant.cloud.serverless.space.backup.v1.SpaceInfo.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	30, // 22: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
+	31, // 23: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
+	30, // 24: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
+	1,  // 25: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus
+	32, // 26: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.created_by:type_name -> qdrant.cloud.common.v1.Caller
+	32, // 27: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
+	32, // 28: qdrant.cloud.serverless.space.backup.v1.BackupSchedule.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
+	30, // 29: qdrant.cloud.serverless.space.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 30: qdrant.cloud.serverless.space.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.serverless.space.backup.v1.BackupRestoreStatus
+	30, // 31: qdrant.cloud.serverless.space.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
+	3,  // 32: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest
+	5,  // 33: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupRequest
+	7,  // 34: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupRequest
+	9,  // 35: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupRequest
+	11, // 36: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresRequest
+	13, // 37: qdrant.cloud.serverless.space.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.serverless.space.backup.v1.RestoreBackupRequest
+	15, // 38: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesRequest
+	17, // 39: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupScheduleRequest
+	19, // 40: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleRequest
+	21, // 41: qdrant.cloud.serverless.space.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest
+	23, // 42: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest
+	4,  // 43: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse
+	6,  // 44: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupResponse
+	8,  // 45: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupResponse
+	10, // 46: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupResponse
+	12, // 47: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresResponse
+	14, // 48: qdrant.cloud.serverless.space.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.serverless.space.backup.v1.RestoreBackupResponse
+	16, // 49: qdrant.cloud.serverless.space.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesResponse
+	18, // 50: qdrant.cloud.serverless.space.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.GetBackupScheduleResponse
+	20, // 51: qdrant.cloud.serverless.space.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.CreateBackupScheduleResponse
+	22, // 52: qdrant.cloud.serverless.space.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse
+	24, // 53: qdrant.cloud.serverless.space.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse
+	43, // [43:54] is the sub-list for method output_type
+	32, // [32:43] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_backup_v1_backup_proto_init() }

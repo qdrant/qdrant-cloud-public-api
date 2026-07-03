@@ -5,7 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { KeyValue, KeyValueValid } from "../../../common/v1/common_pb.js";
+import type { Caller, CallerValid, KeyValue, KeyValueValid } from "../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/serverless/space/v1/space.proto.
@@ -605,6 +605,30 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
   configuration?: SpaceConfiguration | undefined;
 
   /**
+   * The caller who created the space.
+   * This is a read-only field and will be available after a space is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 14;
+   */
+  createdBy?: Caller | undefined;
+
+  /**
+   * The caller who last updated the space.
+   * This is a read-only field and will be set after UpdateSpace is called.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 15;
+   */
+  lastUpdatedBy?: Caller | undefined;
+
+  /**
+   * The caller who initiated deletion of the space.
+   * This is a read-only field and will be set when deleted_at is set.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 16;
+   */
+  deletedBy?: Caller | undefined;
+
+  /**
    * Status of the space
    * All fields inside `state` are read-only.
    *
@@ -703,6 +727,30 @@ export declare type SpaceValid = Message<"qdrant.cloud.serverless.space.v1.Space
    * @generated from field: qdrant.cloud.serverless.space.v1.SpaceConfiguration configuration = 20;
    */
   configuration: SpaceConfigurationValid;
+
+  /**
+   * The caller who created the space.
+   * This is a read-only field and will be available after a space is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 14;
+   */
+  createdBy?: CallerValid | undefined;
+
+  /**
+   * The caller who last updated the space.
+   * This is a read-only field and will be set after UpdateSpace is called.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 15;
+   */
+  lastUpdatedBy?: CallerValid | undefined;
+
+  /**
+   * The caller who initiated deletion of the space.
+   * This is a read-only field and will be set when deleted_at is set.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 16;
+   */
+  deletedBy?: CallerValid | undefined;
 
   /**
    * Status of the space

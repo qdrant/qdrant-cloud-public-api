@@ -13,7 +13,7 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -369,6 +369,15 @@ message Space {
   // Current configuration details of the space.
   // This is a required field.
   SpaceConfiguration configuration = 20 [(buf.validate.field).required = true];
+  // The caller who created the space.
+  // This is a read-only field and will be available after a space is created.
+  common.v1.Caller created_by = 14;
+  // The caller who last updated the space.
+  // This is a read-only field and will be set after UpdateSpace is called.
+  common.v1.Caller last_updated_by = 15;
+  // The caller who initiated deletion of the space.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 16;
   // Status of the space
   // All fields inside `state` are read-only.
   SpaceState state = 100;

@@ -77,6 +77,16 @@ class PatchSource(_message.Message):
     request_resource_field: str
     def __init__(self, get_method: _Optional[str] = ..., field_mapping: _Optional[_Mapping[str, str]] = ..., response_resource_field: _Optional[str] = ..., request_resource_field: _Optional[str] = ...) -> None: ...
 
+class Caller(_message.Message):
+    __slots__ = ("actor_id", "actor_type", "user_agent")
+    ACTOR_ID_FIELD_NUMBER: _ClassVar[int]
+    ACTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
+    USER_AGENT_FIELD_NUMBER: _ClassVar[int]
+    actor_id: str
+    actor_type: ActorType
+    user_agent: str
+    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ...) -> None: ...
+
 class LogField(_message.Message):
     __slots__ = ("name", "field_expression")
     NAME_FIELD_NUMBER: _ClassVar[int]

@@ -147,6 +147,20 @@ enum ActorType {
   ACTOR_TYPE_SERVICE_ACCOUNT = 3;
 }
 
+// Caller identifies the authenticated actor that performed an action on a resource.
+message Caller {
+  // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
+  string actor_id = 1 [(buf.validate.field).string.min_len = 1];
+  // Type of the actor.
+  ActorType actor_type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // HTTP User-Agent of the client that initiated the request, when available.
+  // Omitted for internal/service-initiated actions without a client User-Agent.
+  optional string user_agent = 3 [(buf.validate.field).string.max_len = 512];
+}
+
 // LogField represents a field to log (in case of an error).
 message LogField {
   // The name of the field to log (in the logger).

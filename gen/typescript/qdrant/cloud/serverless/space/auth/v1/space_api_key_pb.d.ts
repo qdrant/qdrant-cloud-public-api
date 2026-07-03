@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Caller } from "../../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/serverless/space/auth/v1/space_api_key.proto.
@@ -258,13 +259,20 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
   accessRules: AccessRule[];
 
   /**
-   * The email of the user who created the space api key.
-   * This is an optional read-only field and will be available after a space api key is created.
-   * If the SpaceApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
+   * The caller who created the space api key.
+   * This is a read-only field and will be available after a space api key is created.
    *
-   * @generated from field: string created_by_email = 8;
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 11;
    */
-  createdByEmail: string;
+  createdBy?: Caller | undefined;
+
+  /**
+   * The caller who deleted the space api key.
+   * This is a read-only field and will be available after deletion starts.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 12;
+   */
+  deletedBy?: Caller | undefined;
 
   /**
    * Postfix for the space api key, this represents the last bytes of the key.
