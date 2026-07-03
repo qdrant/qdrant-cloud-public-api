@@ -2082,13 +2082,12 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x9a\x02\xbaH\x96\x02\x1a\x93\x02\n" +
 	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x88\x01\n" +
 	"\x1cCreateBackupScheduleResponse\x12h\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xad\x04\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbb\x02\n" +
 	"\x1bUpdateBackupScheduleRequest\x12h\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask:\xe6\x02\xbaH\xe2\x02\x1ap\n" +
-	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\x1a\xed\x01\n" +
-	"*update_backup_schedule.no_read_only_fields\x12Kread-only fields (created_at, deleted_at, status) must not be set on update\x1ar!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x88\x01\n" +
+	"updateMask:u\xbaHr\x1ap\n" +
+	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\"\x88\x01\n" +
 	"\x1cUpdateBackupScheduleResponse\x12h\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
 	"\x1bDeleteBackupScheduleRequest\x12'\n" +

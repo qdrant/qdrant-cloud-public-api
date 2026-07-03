@@ -277,11 +277,6 @@ message UpdateSpaceRequest {
     message: "space.id is required for an update"
     expression: "this.space.id != ''"
   };
-  option (buf.validate.message).cel = {
-    id: "update_space.no_read_only_fields"
-    message: "read-only fields (created_at, deleted_at, state) must not be set on update"
-    expression: "!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)"
-  };
 }
 
 // UpdateSpaceResponse is the response from the UpdateSpace function

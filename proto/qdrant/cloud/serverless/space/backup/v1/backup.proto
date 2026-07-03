@@ -510,11 +510,6 @@ message UpdateBackupScheduleRequest {
     message: "backup_schedule.id is required for an update"
     expression: "this.backup_schedule.id != ''"
   };
-  option (buf.validate.message).cel = {
-    id: "update_backup_schedule.no_read_only_fields"
-    message: "read-only fields (created_at, deleted_at, status) must not be set on update"
-    expression: "!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
-  };
 }
 
 // UpdateBackupScheduleResponse is the response from the UpdateBackupSchedule function.
