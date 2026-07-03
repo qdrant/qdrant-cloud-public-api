@@ -186,6 +186,10 @@
               "$ref": "#/definitions/v1Caller",
               "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
             },
+            "deletedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who deleted the space api key.\nThis is a read-only field and will be available after deletion starts."
+            },
             "postfix": {
               "type": "string",
               "description": "Postfix for the space api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a space api key is created."
@@ -391,6 +395,10 @@
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
           "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
+        },
+        "deletedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who deleted the space api key.\nThis is a read-only field and will be available after deletion starts."
         },
         "postfix": {
           "type": "string",

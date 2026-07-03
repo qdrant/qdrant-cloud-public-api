@@ -267,6 +267,14 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
   createdBy?: Caller | undefined;
 
   /**
+   * The caller who deleted the space api key.
+   * This is a read-only field and will be available after deletion starts.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 12;
+   */
+  deletedBy?: Caller | undefined;
+
+  /**
    * Postfix for the space api key, this represents the last bytes of the key.
    * This is a read-only field and will be available after a space api key is created.
    *

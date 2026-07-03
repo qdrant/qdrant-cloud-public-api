@@ -13,7 +13,7 @@ service SpaceApiKeyService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 0
+    minor: 1
     patch: 0
   };
   // ListSpaceApiKeys returns all API keys for a space
@@ -206,6 +206,9 @@ message SpaceApiKey {
   // The caller who created the space api key.
   // This is a read-only field and will be available after a space api key is created.
   common.v1.Caller created_by = 11;
+  // The caller who deleted the space api key.
+  // This is a read-only field and will be available after deletion starts.
+  common.v1.Caller deleted_by = 12;
   // Postfix for the space api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a space api key is created.
   string postfix = 9;
