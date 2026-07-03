@@ -224,8 +224,8 @@ message CreateSpaceRequest {
   Space space = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on create"
-    expression: "this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)"
+    message: "read-only fields (id, created_at, deleted_at, state) must not be set on create"
+    expression: "this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)"
   };
 }
 
@@ -279,8 +279,8 @@ message UpdateSpaceRequest {
   };
   option (buf.validate.message).cel = {
     id: "update_space.no_read_only_fields"
-    message: "read-only fields (created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on update"
-    expression: "!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)"
+    message: "read-only fields (created_at, deleted_at, state) must not be set on update"
+    expression: "!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)"
   };
 }
 

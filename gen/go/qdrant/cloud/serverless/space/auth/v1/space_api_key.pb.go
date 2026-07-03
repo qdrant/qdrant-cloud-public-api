@@ -914,10 +914,10 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\"d\n" +
 	"\x18ListSpaceApiKeysResponse\x12H\n" +
-	"\x05items\x18\x01 \x03(\v22.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyR\x05items\"\xde\x03\n" +
+	"\x05items\x18\x01 \x03(\v22.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyR\x05items\"\xab\x03\n" +
 	"\x18CreateSpaceApiKeyRequest\x12^\n" +
-	"\rspace_api_key\x18\x01 \x01(\v22.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyB\x06\xbaH\x03\xc8\x01\x01R\vspaceApiKey:\xe1\x02\xbaH\xdd\x02\x1a\xda\x02\n" +
-	"(create_space_api_key.no_read_only_fields\x12\\read-only fields (id, created_at, created_by, postfix, key, state) must not be set on create\x1a\xcf\x01this.space_api_key.id == '' && !has(this.space_api_key.created_at) && !has(this.space_api_key.created_by) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)\"\xf6\x01\n" +
+	"\rspace_api_key\x18\x01 \x01(\v22.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyB\x06\xbaH\x03\xc8\x01\x01R\vspaceApiKey:\xae\x02\xbaH\xaa\x02\x1a\xa7\x02\n" +
+	"(create_space_api_key.no_read_only_fields\x12Pread-only fields (id, created_at, postfix, key, state) must not be set on create\x1a\xa8\x01this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)\"\xf6\x01\n" +
 	"\x19CreateSpaceApiKeyResponse\x12^\n" +
 	"\rspace_api_key\x18\x01 \x01(\v22.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyB\x06\xbaH\x03\xc8\x01\x01R\vspaceApiKey:y\xbaHv\x1at\n" +
 	"\"create_space_api_key.state_present\x12/state is required for an existing space api key\x1a\x1dhas(this.space_api_key.state)\"\x9b\x01\n" +

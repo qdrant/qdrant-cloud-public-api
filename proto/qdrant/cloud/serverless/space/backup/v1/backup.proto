@@ -349,8 +349,8 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info, created_by, last_updated_by, deleted_by) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.created_by) && !has(this.backup.last_updated_by) && !has(this.backup.deleted_by)"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info)"
   };
 }
 
@@ -483,8 +483,8 @@ message CreateBackupScheduleRequest {
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup_schedule.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on create"
-    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)"
+    message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
+    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
   };
 }
 
@@ -512,8 +512,8 @@ message UpdateBackupScheduleRequest {
   };
   option (buf.validate.message).cel = {
     id: "update_backup_schedule.no_read_only_fields"
-    message: "read-only fields (created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on update"
-    expression: "!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)"
+    message: "read-only fields (created_at, deleted_at, status) must not be set on update"
+    expression: "!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
   };
 }
 

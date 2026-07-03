@@ -118,8 +118,8 @@ message CreateSpaceApiKeyRequest {
   SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space_api_key.no_read_only_fields"
-    message: "read-only fields (id, created_at, created_by, postfix, key, state) must not be set on create"
-    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && !has(this.space_api_key.created_by) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
+    message: "read-only fields (id, created_at, postfix, key, state) must not be set on create"
+    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
   };
 }
 

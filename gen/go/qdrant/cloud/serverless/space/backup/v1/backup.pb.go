@@ -2013,10 +2013,10 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"d\n" +
 	"\x11GetBackupResponse\x12O\n" +
-	"\x06backup\x18\x01 \x01(\v2/.qdrant.cloud.serverless.space.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xa3\x05\n" +
+	"\x06backup\x18\x01 \x01(\v2/.qdrant.cloud.serverless.space.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x95\x04\n" +
 	"\x13CreateBackupRequest\x12O\n" +
-	"\x06backup\x18\x01 \x01(\v2/.qdrant.cloud.serverless.space.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xba\x04\xbaH\xb6\x04\x1a\xb3\x04\n" +
-	"!create_backup.no_read_only_fields\x12\xaf\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info, created_by, last_updated_by, deleted_by) must not be set on create\x1a\xdb\x02this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.created_by) && !has(this.backup.last_updated_by) && !has(this.backup.deleted_by)\"g\n" +
+	"\x06backup\x18\x01 \x01(\v2/.qdrant.cloud.serverless.space.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xac\x03\xbaH\xa8\x03\x1a\xa5\x03\n" +
+	"!create_backup.no_read_only_fields\x12\x86\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info) must not be set on create\x1a\xf6\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info)\"g\n" +
 	"\x14CreateBackupResponse\x12O\n" +
 	"\x06backup\x18\x01 \x01(\v2/.qdrant.cloud.serverless.space.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"e\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
@@ -2077,18 +2077,18 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x126\n" +
 	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"\x85\x01\n" +
 	"\x19GetBackupScheduleResponse\x12h\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xcd\x04\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xa4\x03\n" +
 	"\x1bCreateBackupScheduleRequest\x12h\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\xc3\x03\xbaH\xbf\x03\x1a\xbc\x03\n" +
-	"*create_backup_schedule.no_read_only_fields\x12xread-only fields (id, created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on create\x1a\x93\x02this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)\"\x88\x01\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x9a\x02\xbaH\x96\x02\x1a\x93\x02\n" +
+	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x88\x01\n" +
 	"\x1cCreateBackupScheduleResponse\x12h\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xd7\x05\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xad\x04\n" +
 	"\x1bUpdateBackupScheduleRequest\x12h\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask:\x90\x04\xbaH\x8c\x04\x1ap\n" +
-	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\x1a\x97\x03\n" +
-	"*update_backup_schedule.no_read_only_fields\x12tread-only fields (created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on update\x1a\xf2\x01!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)\"\x88\x01\n" +
+	"updateMask:\xe6\x02\xbaH\xe2\x02\x1ap\n" +
+	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\x1a\xed\x01\n" +
+	"*update_backup_schedule.no_read_only_fields\x12Kread-only fields (created_at, deleted_at, status) must not be set on update\x1ar!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\"\x88\x01\n" +
 	"\x1cUpdateBackupScheduleResponse\x12h\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
 	"\x1bDeleteBackupScheduleRequest\x12'\n" +

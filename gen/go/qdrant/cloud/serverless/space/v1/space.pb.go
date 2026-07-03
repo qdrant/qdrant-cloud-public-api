@@ -1246,10 +1246,10 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\"Y\n" +
 	"\x10GetSpaceResponse\x12E\n" +
-	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space\"\xd0\x03\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space\"\xc4\x02\n" +
 	"\x12CreateSpaceRequest\x12E\n" +
-	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:\xf2\x02\xbaH\xee\x02\x1a\xeb\x02\n" +
-	" create_space.no_read_only_fields\x12wread-only fields (id, created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on create\x1a\xcd\x01this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)\"\xbf\x01\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:\xe6\x01\xbaH\xe2\x01\x1a\xdf\x01\n" +
+	" create_space.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1akthis.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)\"\xbf\x01\n" +
 	"\x13CreateSpaceResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
 	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xaa\x01\n" +
@@ -1261,11 +1261,11 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"space_name\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\tspaceName\"\xc9\x01\n" +
 	"\x1dCreateSpaceFromBackupResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
-	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\x89\x04\n" +
+	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xfd\x02\n" +
 	"\x12UpdateSpaceRequest\x12E\n" +
-	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:\xab\x03\xbaH\xa7\x03\x1aR\n" +
-	"\x17update_space.id_present\x12\"space.id is required for an update\x1a\x13this.space.id != ''\x1a\xd0\x02\n" +
-	" update_space.no_read_only_fields\x12sread-only fields (created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on update\x1a\xb6\x01!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)\"\xbf\x01\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:\x9f\x02\xbaH\x9b\x02\x1aR\n" +
+	"\x17update_space.id_present\x12\"space.id is required for an update\x1a\x13this.space.id != ''\x1a\xc4\x01\n" +
+	" update_space.no_read_only_fields\x12Jread-only fields (created_at, deleted_at, state) must not be set on update\x1aT!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)\"\xbf\x01\n" +
 	"\x13UpdateSpaceResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
 	"\x1aupdate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xa1\x01\n" +
