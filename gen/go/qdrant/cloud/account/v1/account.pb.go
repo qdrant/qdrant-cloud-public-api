@@ -1757,8 +1757,8 @@ type Account struct {
 	// Name can only contain printable characters.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The external identifier of the owner of the account.
-	// Updating this field (transferring ownership) requires to be authenticated as a user,
-	// it is not allowed for other actor types (e.g. a management key).
+	// Updating this field (transferring ownership) can only be done by the current
+	// account owner, which requires to be authenticated as a user.
 	ExternalOwnerId string `protobuf:"bytes,6,opt,name=external_owner_id,json=externalOwnerId,proto3" json:"external_owner_id,omitempty"`
 	// The email address of the owner of the account.
 	// This is a read-only field and is derived from the owner user.
@@ -1767,6 +1767,7 @@ type Account struct {
 	// This is a read-only field.
 	Privileges []string `protobuf:"bytes,8,rep,name=privileges,proto3" json:"privileges,omitempty"`
 	// The company associated with the account.
+	// Updating or removing the company can only be done by the account owner.
 	Company *Company `protobuf:"bytes,9,opt,name=company,proto3,oneof" json:"company,omitempty"`
 	// The settings of the account.
 	// This is an optional field, available to account owners only.

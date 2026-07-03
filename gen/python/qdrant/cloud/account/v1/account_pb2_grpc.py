@@ -135,8 +135,8 @@ class AccountServiceServicer(object):
 
     def UpdateAccount(self, request, context):
         """Updates an account identified by the given ID.
-        This method is available to all actor types, except for updating the account owner
-        (transferring ownership), which requires to be authenticated as a user.
+        Some fields can only be updated by specific actors, see the field
+        documentation in the Account message for details.
         Required permissions:
         - write:account
         """
