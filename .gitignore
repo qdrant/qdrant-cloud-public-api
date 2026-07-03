@@ -5,6 +5,7 @@
 tmp/
 __pycache__/
 *.pyc
+/bin
 /gen-dummy
 node_modules/
 var/
