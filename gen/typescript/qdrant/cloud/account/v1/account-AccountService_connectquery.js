@@ -33,6 +33,8 @@ export const createAccount = AccountService.method.createAccount;
 
 /**
  * Updates an account identified by the given ID.
+ * This method is available to all actor types, except for updating the account owner
+ * (transferring ownership), which requires to be authenticated as a user.
  * Required permissions:
  * - write:account
  *

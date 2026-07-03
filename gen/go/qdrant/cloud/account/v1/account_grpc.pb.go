@@ -57,6 +57,8 @@ type AccountServiceClient interface {
 	// - None (authenticated only)
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	// Updates an account identified by the given ID.
+	// This method is available to all actor types, except for updating the account owner
+	// (transferring ownership), which requires to be authenticated as a user.
 	// Required permissions:
 	// - write:account
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
@@ -320,6 +322,8 @@ type AccountServiceServer interface {
 	// - None (authenticated only)
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	// Updates an account identified by the given ID.
+	// This method is available to all actor types, except for updating the account owner
+	// (transferring ownership), which requires to be authenticated as a user.
 	// Required permissions:
 	// - write:account
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)

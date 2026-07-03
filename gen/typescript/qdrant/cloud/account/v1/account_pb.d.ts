@@ -1034,6 +1034,8 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
 
   /**
    * The external identifier of the owner of the account.
+   * Updating this field (transferring ownership) requires to be authenticated as a user,
+   * it is not allowed for other actor types (e.g. a management key).
    *
    * @generated from field: string external_owner_id = 6;
    */
@@ -1370,6 +1372,8 @@ export declare const AccountService: GenService<{
   },
   /**
    * Updates an account identified by the given ID.
+   * This method is available to all actor types, except for updating the account owner
+   * (transferring ownership), which requires to be authenticated as a user.
    * Required permissions:
    * - write:account
    *

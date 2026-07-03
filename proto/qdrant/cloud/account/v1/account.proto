@@ -67,6 +67,8 @@ service AccountService {
     };
   }
   // Updates an account identified by the given ID.
+  // This method is available to all actor types, except for updating the account owner
+  // (transferring ownership), which requires to be authenticated as a user.
   // Required permissions:
   // - write:account
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
@@ -74,8 +76,6 @@ service AccountService {
     option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account.id";
-    // custom supported-actor-types expression. (Requires to be authenticated as a user)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/account/v1/accounts/{account.id}"
@@ -662,6 +662,8 @@ message Account {
     pattern: "^([^\\x00-\\x1F\\x7F])*$"
   }];
   // The external identifier of the owner of the account.
+  // Updating this field (transferring ownership) requires to be authenticated as a user,
+  // it is not allowed for other actor types (e.g. a management key).
   string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
   // This is a read-only field and is derived from the owner user.
@@ -713,7 +715,11 @@ message AccountInvite {
   // When creating an invite, this field can be an empty list. A Base role is automatically assigned to all new users in the system.
   // Each string in the list must be a valid UUID, to be resolved in the provided account.
   // Please use IAMService.ListRoles to get the possible roles to assign.
-  repeated string user_role_ids = 5 [(buf.validate.field).repeated = {items: {string: {uuid: true}}}];
+  repeated string user_role_ids = 5 [(buf.validate.field).repeated = {
+    items: {
+      string: {uuid: true}
+    }
+  }];
   // The timestamp when the invite was created.
   // This is a read-only field.
   google.protobuf.Timestamp created_at = 6;
