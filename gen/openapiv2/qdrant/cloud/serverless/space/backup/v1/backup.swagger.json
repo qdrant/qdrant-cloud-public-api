@@ -566,6 +566,18 @@
             "spaceInfo": {
               "$ref": "#/definitions/v1SpaceInfo",
               "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+            },
+            "createdBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created."
+            },
+            "lastUpdatedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated."
+            },
+            "deletedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
             }
           },
           "description": "The actual backup.",
@@ -609,6 +621,18 @@
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
+            },
+            "createdBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+            },
+            "lastUpdatedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+            },
+            "deletedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
             }
           },
           "description": "The actual backup schedule.",
@@ -648,6 +672,18 @@
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
+            },
+            "createdBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+            },
+            "lastUpdatedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+            },
+            "deletedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
             }
           },
           "description": "The actual backup schedule.",
@@ -687,6 +723,17 @@
           }
         }
       }
+    },
+    "v1ActorType": {
+      "type": "string",
+      "enum": [
+        "ACTOR_TYPE_UNSPECIFIED",
+        "ACTOR_TYPE_USER",
+        "ACTOR_TYPE_MANAGEMENT_KEY",
+        "ACTOR_TYPE_SERVICE_ACCOUNT"
+      ],
+      "default": "ACTOR_TYPE_UNSPECIFIED",
+      "description": "ActorType specifies the type of actor that can call a method.\n\n - ACTOR_TYPE_UNSPECIFIED: Default, unspecified actor type. Should generally not be used explicitly in options\nunless to signify an error or uninitialized state.\n - ACTOR_TYPE_USER: Represents a human user, typically authenticated via an identity provider (Auth0).\n - ACTOR_TYPE_MANAGEMENT_KEY: Represents a programmatic access key, also called management key,\nthat is not be tied to a specific user or service account identity, but rather an account.\n - ACTOR_TYPE_SERVICE_ACCOUNT: Represents a service account or machine user, often used for M2M communication.\nThis is for internal platform use only."
     },
     "v1Backup": {
       "type": "object",
@@ -736,6 +783,18 @@
         "spaceInfo": {
           "$ref": "#/definitions/v1SpaceInfo",
           "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created."
+        },
+        "lastUpdatedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated."
+        },
+        "deletedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
         }
       },
       "description": "A Backup represents a backup of a Qdrant serverless space."
@@ -826,6 +885,18 @@
         "status": {
           "$ref": "#/definitions/v1BackupScheduleStatus",
           "description": "The current status of the backup schedule."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+        },
+        "lastUpdatedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+        },
+        "deletedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
@@ -855,6 +926,24 @@
       ],
       "default": "BACKUP_STATUS_UNSPECIFIED",
       "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped or was not started because it has no suitable target.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region."
+    },
+    "v1Caller": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "description": "Unique identifier of the actor (user UUID, management-key id, service-account id, …)."
+        },
+        "actorType": {
+          "$ref": "#/definitions/v1ActorType",
+          "description": "Type of the actor."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "HTTP User-Agent of the client that initiated the request, when available.\nOmitted for internal/service-initiated actions without a client User-Agent."
+        }
+      },
+      "description": "Caller identifies the authenticated actor that performed an action on a resource."
     },
     "v1CreateBackupResponse": {
       "type": "object",

@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Duration, FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Caller, CallerValid } from "../../../../common/v1/common_pb.js";
 import type { SpaceConfiguration, SpaceConfigurationValid } from "../../v1/space_pb.js";
 
 /**
@@ -930,6 +931,30 @@ export declare type Backup = Message<"qdrant.cloud.serverless.space.backup.v1.Ba
    * @generated from field: qdrant.cloud.serverless.space.backup.v1.SpaceInfo space_info = 12;
    */
   spaceInfo?: SpaceInfo | undefined;
+
+  /**
+   * The caller who created the backup.
+   * This is a read-only field and will be available after a backup is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 13;
+   */
+  createdBy?: Caller | undefined;
+
+  /**
+   * The caller who last updated the backup.
+   * This is a read-only field and will be set when backup metadata is updated.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 14;
+   */
+  lastUpdatedBy?: Caller | undefined;
+
+  /**
+   * The caller who initiated deletion of the backup.
+   * This is a read-only field and will be set when deleted_at is set.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 15;
+   */
+  deletedBy?: Caller | undefined;
 };
 
 /**
@@ -1028,6 +1053,30 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
    * @generated from field: qdrant.cloud.serverless.space.backup.v1.SpaceInfo space_info = 12;
    */
   spaceInfo?: SpaceInfoValid | undefined;
+
+  /**
+   * The caller who created the backup.
+   * This is a read-only field and will be available after a backup is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 13;
+   */
+  createdBy?: CallerValid | undefined;
+
+  /**
+   * The caller who last updated the backup.
+   * This is a read-only field and will be set when backup metadata is updated.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 14;
+   */
+  lastUpdatedBy?: CallerValid | undefined;
+
+  /**
+   * The caller who initiated deletion of the backup.
+   * This is a read-only field and will be set when deleted_at is set.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 15;
+   */
+  deletedBy?: CallerValid | undefined;
 };
 
 /**
@@ -1190,6 +1239,30 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
    * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus status = 8;
    */
   status: BackupScheduleStatus;
+
+  /**
+   * The caller who created the backup schedule.
+   * This is a read-only field and will be available after a backup schedule is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 9;
+   */
+  createdBy?: Caller | undefined;
+
+  /**
+   * The caller who last updated the backup schedule.
+   * This is a read-only field and will be set after UpdateBackupSchedule is called.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 10;
+   */
+  lastUpdatedBy?: Caller | undefined;
+
+  /**
+   * The caller who initiated deletion of the backup schedule.
+   * This is a read-only field and will be set when deleted_at is set.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 11;
+   */
+  deletedBy?: Caller | undefined;
 };
 
 export declare type BackupScheduleValid = BackupSchedule;

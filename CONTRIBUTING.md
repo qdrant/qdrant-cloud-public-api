@@ -148,3 +148,31 @@ message ClusterConfiguration {
 
 }
 ```
+
+## Resource audit fields (`Caller`)
+
+Mutable platform entities expose read-only attribution using `qdrant.cloud.common.v1.Caller` and three standard field names:
+
+| Field | Set when |
+| --- | --- |
+| `created_by` | Resource is created |
+| `last_updated_by` | Resource is updated (spec or metadata change) |
+| `deleted_by` | Soft-delete starts (`deleted_at` is set) |
+
+Example:
+
+```proto
+// qdrant.cloud.serverless.space.v1.Space
+common.v1.Caller created_by = 14;
+common.v1.Caller last_updated_by = 15;
+common.v1.Caller deleted_by = 16;
+```
+
+Guidelines:
+
+- All three fields are **read-only** — clients must not set them on create or update. Enforce this in `buf.validate` CEL rules on request messages (same pattern as `created_at`, `id`, …).
+- Populate `Caller.actor_id` and `Caller.actor_type` from gateway auth metadata (`qc-actor-id`, `qc-actor-type`). Populate `Caller.user_agent` from `qc-user-agent` when available.
+- Do **not** add ad-hoc attribution fields such as `created_by_email` or `created_by_user_id` on new APIs — use `Caller` instead.
+- Legacy `created_by_email` fields outside serverless remain unchanged until a dedicated migration; new serverless work must use `Caller` only.
+
+See [cloud-architectural-guild — Caller audit fields](https://github.com/qdrant/cloud-architectural-guild/blob/design/common-caller-entity-audit-fields/platform/caller-entity-audit-fields/doc/design-doc.md) for the full platform convention.

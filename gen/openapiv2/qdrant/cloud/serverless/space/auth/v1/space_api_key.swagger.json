@@ -182,9 +182,9 @@
               },
               "description": "A list of rules to grant access to the Qdrant serverless space or to specific\ncollections in that space. If no access rules are provided, global access to the space\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
             },
-            "createdByEmail": {
-              "type": "string",
-              "description": "The email of the user who created the space api key.\nThis is an optional read-only field and will be available after a space api key is created.\nIf the SpaceApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+            "createdBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
             },
             "postfix": {
               "type": "string",
@@ -245,6 +245,35 @@
         }
       },
       "description": "Represents an access rule. An access rule can either define global access to\nthe space or access to a specific collection."
+    },
+    "v1ActorType": {
+      "type": "string",
+      "enum": [
+        "ACTOR_TYPE_UNSPECIFIED",
+        "ACTOR_TYPE_USER",
+        "ACTOR_TYPE_MANAGEMENT_KEY",
+        "ACTOR_TYPE_SERVICE_ACCOUNT"
+      ],
+      "default": "ACTOR_TYPE_UNSPECIFIED",
+      "description": "ActorType specifies the type of actor that can call a method.\n\n - ACTOR_TYPE_UNSPECIFIED: Default, unspecified actor type. Should generally not be used explicitly in options\nunless to signify an error or uninitialized state.\n - ACTOR_TYPE_USER: Represents a human user, typically authenticated via an identity provider (Auth0).\n - ACTOR_TYPE_MANAGEMENT_KEY: Represents a programmatic access key, also called management key,\nthat is not be tied to a specific user or service account identity, but rather an account.\n - ACTOR_TYPE_SERVICE_ACCOUNT: Represents a service account or machine user, often used for M2M communication.\nThis is for internal platform use only."
+    },
+    "v1Caller": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "description": "Unique identifier of the actor (user UUID, management-key id, service-account id, …)."
+        },
+        "actorType": {
+          "$ref": "#/definitions/v1ActorType",
+          "description": "Type of the actor."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "HTTP User-Agent of the client that initiated the request, when available.\nOmitted for internal/service-initiated actions without a client User-Agent."
+        }
+      },
+      "description": "Caller identifies the authenticated actor that performed an action on a resource."
     },
     "v1CollectionAccessRule": {
       "type": "object",
@@ -359,9 +388,9 @@
           },
           "description": "A list of rules to grant access to the Qdrant serverless space or to specific\ncollections in that space. If no access rules are provided, global access to the space\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
         },
-        "createdByEmail": {
-          "type": "string",
-          "description": "The email of the user who created the space api key.\nThis is an optional read-only field and will be available after a space api key is created.\nIf the SpaceApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+        "createdBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
         },
         "postfix": {
           "type": "string",

@@ -13,7 +13,7 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -224,8 +224,8 @@ message CreateSpaceRequest {
   Space space = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, state) must not be set on create"
-    expression: "this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.state)"
+    message: "read-only fields (id, created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on create"
+    expression: "this.space.id == '' && !has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)"
   };
 }
 
@@ -276,6 +276,11 @@ message UpdateSpaceRequest {
     id: "update_space.id_present"
     message: "space.id is required for an update"
     expression: "this.space.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_space.no_read_only_fields"
+    message: "read-only fields (created_at, deleted_at, created_by, last_updated_by, deleted_by, state) must not be set on update"
+    expression: "!has(this.space.created_at) && !has(this.space.deleted_at) && !has(this.space.created_by) && !has(this.space.last_updated_by) && !has(this.space.deleted_by) && !has(this.space.state)"
   };
 }
 
@@ -369,6 +374,15 @@ message Space {
   // Current configuration details of the space.
   // This is a required field.
   SpaceConfiguration configuration = 20 [(buf.validate.field).required = true];
+  // The caller who created the space.
+  // This is a read-only field and will be available after a space is created.
+  common.v1.Caller created_by = 14;
+  // The caller who last updated the space.
+  // This is a read-only field and will be set after UpdateSpace is called.
+  common.v1.Caller last_updated_by = 15;
+  // The caller who initiated deletion of the space.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 16;
   // Status of the space
   // All fields inside `state` are read-only.
   SpaceState state = 100;
@@ -384,7 +398,9 @@ message SpaceConfiguration {
   // The CIDRs supports IPv4 only.
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
-    items: {string: {ipv4_prefix: true}}
+    items: {
+      string: {ipv4_prefix: true}
+    }
   }];
 }
 

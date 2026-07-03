@@ -16,7 +16,7 @@ service BackupService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all backups in the account identified by the given ID.
@@ -349,8 +349,8 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info)"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info, created_by, last_updated_by, deleted_by) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.created_by) && !has(this.backup.last_updated_by) && !has(this.backup.deleted_by)"
   };
 }
 
@@ -483,8 +483,8 @@ message CreateBackupScheduleRequest {
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup_schedule.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
-    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
+    message: "read-only fields (id, created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on create"
+    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)"
   };
 }
 
@@ -509,6 +509,11 @@ message UpdateBackupScheduleRequest {
     id: "update_backup_schedule.id_present"
     message: "backup_schedule.id is required for an update"
     expression: "this.backup_schedule.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_backup_schedule.no_read_only_fields"
+    message: "read-only fields (created_at, deleted_at, status, created_by, last_updated_by, deleted_by) must not be set on update"
+    expression: "!has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.created_by) && !has(this.backup_schedule.last_updated_by) && !has(this.backup_schedule.deleted_by)"
   };
 }
 
@@ -605,6 +610,15 @@ message Backup {
   // Identity fields reflect the latest space state; configuration reflects the state at backup time.
   // This is a read-only field and will be available after the backup is created.
   SpaceInfo space_info = 12;
+  // The caller who created the backup.
+  // This is a read-only field and will be available after a backup is created.
+  common.v1.Caller created_by = 13;
+  // The caller who last updated the backup.
+  // This is a read-only field and will be set when backup metadata is updated.
+  common.v1.Caller last_updated_by = 14;
+  // The caller who initiated deletion of the backup.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 15;
 }
 
 // Represents the space details associated with a backup.
@@ -677,6 +691,15 @@ message BackupSchedule {
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
   BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
+  // The caller who created the backup schedule.
+  // This is a read-only field and will be available after a backup schedule is created.
+  common.v1.Caller created_by = 9;
+  // The caller who last updated the backup schedule.
+  // This is a read-only field and will be set after UpdateBackupSchedule is called.
+  common.v1.Caller last_updated_by = 10;
+  // The caller who initiated deletion of the backup schedule.
+  // This is a read-only field and will be set when deleted_at is set.
+  common.v1.Caller deleted_by = 11;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

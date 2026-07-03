@@ -113,8 +113,12 @@ message PatchSource {
   // GetUserProfile). In that case the gateway invokes the Get with an
   // empty request and the caller's auth context.
   map<string, string> field_mapping = 2 [(buf.validate.field).map = {
-    keys: {string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}}
-    values: {string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}}
+    keys: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
+    values: {
+      string: {pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"}
+    }
   }];
 
   // The field path in the Get response message that contains the resource.
@@ -145,6 +149,20 @@ enum ActorType {
   // Represents a service account or machine user, often used for M2M communication.
   // This is for internal platform use only.
   ACTOR_TYPE_SERVICE_ACCOUNT = 3;
+}
+
+// Caller identifies the authenticated actor that performed an action on a resource.
+message Caller {
+  // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
+  string actor_id = 1 [(buf.validate.field).string.min_len = 1];
+  // Type of the actor.
+  ActorType actor_type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // HTTP User-Agent of the client that initiated the request, when available.
+  // Omitted for internal/service-initiated actions without a client User-Agent.
+  optional string user_agent = 3 [(buf.validate.field).string.max_len = 512];
 }
 
 // LogField represents a field to log (in case of an error).
