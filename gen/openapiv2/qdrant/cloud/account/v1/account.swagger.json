@@ -73,7 +73,7 @@
     },
     "/api/account/v1/accounts/{account.id}": {
       "put": {
-        "summary": "Updates an account identified by the given ID.\nRequired permissions:\n- write:account",
+        "summary": "Updates an account identified by the given ID.\nSome fields can only be updated by specific actors, see the field\ndocumentation in the Account message for details.\nRequired permissions:\n- write:account",
         "operationId": "AccountService_UpdateAccount",
         "responses": {
           "200": {
@@ -696,7 +696,7 @@
             },
             "externalOwnerId": {
               "type": "string",
-              "description": "The external identifier of the owner of the account."
+              "description": "The external identifier of the owner of the account.\nUpdating this field (transferring ownership) can only be done by the current\naccount owner, which requires to be authenticated as a user."
             },
             "ownerEmail": {
               "type": "string",
@@ -711,7 +711,7 @@
             },
             "company": {
               "$ref": "#/definitions/v1Company",
-              "description": "The company associated with the account."
+              "description": "The company associated with the account.\nUpdating or removing the company can only be done by the account owner."
             },
             "settings": {
               "$ref": "#/definitions/v1AccountSettings",
@@ -789,7 +789,7 @@
         },
         "externalOwnerId": {
           "type": "string",
-          "description": "The external identifier of the owner of the account."
+          "description": "The external identifier of the owner of the account.\nUpdating this field (transferring ownership) can only be done by the current\naccount owner, which requires to be authenticated as a user."
         },
         "ownerEmail": {
           "type": "string",
@@ -804,7 +804,7 @@
         },
         "company": {
           "$ref": "#/definitions/v1Company",
-          "description": "The company associated with the account."
+          "description": "The company associated with the account.\nUpdating or removing the company can only be done by the account owner."
         },
         "settings": {
           "$ref": "#/definitions/v1AccountSettings",

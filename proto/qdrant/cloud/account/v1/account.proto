@@ -67,6 +67,8 @@ service AccountService {
     };
   }
   // Updates an account identified by the given ID.
+  // Some fields can only be updated by specific actors, see the field
+  // documentation in the Account message for details.
   // Required permissions:
   // - write:account
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
@@ -74,8 +76,6 @@ service AccountService {
     option (common.v1.permissions) = "write:account"; // not 'write:accounts' for historical reasons
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "account.id";
-    // custom supported-actor-types expression. (Requires to be authenticated as a user)
-    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/account/v1/accounts/{account.id}"
@@ -662,6 +662,8 @@ message Account {
     pattern: "^([^\\x00-\\x1F\\x7F])*$"
   }];
   // The external identifier of the owner of the account.
+  // Updating this field (transferring ownership) can only be done by the current
+  // account owner, which requires to be authenticated as a user.
   string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
   // This is a read-only field and is derived from the owner user.
@@ -675,6 +677,7 @@ message Account {
   // This is a read-only field.
   repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
   // The company associated with the account.
+  // Updating or removing the company can only be done by the account owner.
   optional Company company = 9;
   // The settings of the account.
   // This is an optional field, available to account owners only.

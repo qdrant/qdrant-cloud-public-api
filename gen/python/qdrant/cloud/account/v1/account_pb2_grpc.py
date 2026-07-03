@@ -135,6 +135,8 @@ class AccountServiceServicer(object):
 
     def UpdateAccount(self, request, context):
         """Updates an account identified by the given ID.
+        Some fields can only be updated by specific actors, see the field
+        documentation in the Account message for details.
         Required permissions:
         - write:account
         """
