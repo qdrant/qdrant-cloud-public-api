@@ -19,13 +19,13 @@ bootstrap: bootstrap/uv ## Install the required dependencies to use this project
 
 .PHONY: lint
 lint: buf/deps ## Check protobuf files for linting errors.
-	buf lint
-	@buf breaking --against https://github.com/qdrant/qdrant-cloud-public-api.git || \
+	$(BUF) lint
+	@$(BUF) breaking --against https://github.com/qdrant/qdrant-cloud-public-api.git || \
 	  echo "⚠️  Warning: Breaking changes detected! These should generally be avoided. Continuing with code generation..."
 
 .PHONY: format
 format: buf/deps ## Format protobuf files (in-place) using `buf format`.
-	buf format -w
+	$(BUF) format -w
 
 ##@ Generating code
 
@@ -46,11 +46,35 @@ clean: ## Clean the directory with the generated language bindings.
 
 ##@ Dependencies
 
+LOCALBIN ?= $(shell pwd)/bin
+$(LOCALBIN):
+	mkdir -p $(LOCALBIN)
+
+BUF = $(LOCALBIN)/buf
+BUF_VERSION ?= 1.71.0
+
 .PHONY: deps
-deps: ## Install the required dependencies to use this project.
-	HOMEBREW_NO_AUTO_UPDATE=1 brew install \
-		bufbuild/buf/buf uv
+deps: install/buf bootstrap/uv ## Install the required dependencies to use this project.
 	uv sync
+
+.PHONY: install/buf
+install/buf: $(BUF) ## Download buf locally if necessary.
+
+$(BUF): $(LOCALBIN)
+	@[ -f "$(BUF)-$(BUF_VERSION)" ] || { \
+	  set -e; \
+	  os=$$(uname -s | tr '[:upper:]' '[:lower:]'); \
+	  arch=$$(uname -m); \
+	  case "$$arch" in \
+	    x86_64) arch=x86_64 ;; \
+	    aarch64|arm64) arch=aarch64 ;; \
+	    *) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	  esac; \
+	  echo "Downloading buf $(BUF_VERSION) for $$os-$$arch"; \
+	  curl -sSL "https://github.com/bufbuild/buf/releases/download/v$(BUF_VERSION)/buf-$$os-$$arch" -o "$(BUF)-$(BUF_VERSION)"; \
+	  chmod +x "$(BUF)-$(BUF_VERSION)"; \
+	}; \
+	ln -sf "buf-$(BUF_VERSION)" "$(BUF)"
 
 .PHONY: buf/plugins
 buf/plugins: ## Install the required buf plugins (those that can't be installed using Buf's deps option).
@@ -59,8 +83,8 @@ buf/plugins: ## Install the required buf plugins (those that can't be installed 
 	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-permissions-breaking@latest
 
 .PHONY: buf/deps
-buf/deps: buf/plugins ## Install the required dependencies to work with the protobuf files.
-	buf dep update
+buf/deps: buf/plugins install/buf ## Install the required dependencies to work with the protobuf files.
+	$(BUF) dep update
 
 .PHONY: python/dev-install
 python/dev-install: ## Install the required Python dependencies to work with the project.
