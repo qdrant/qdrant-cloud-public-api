@@ -30,6 +30,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
                 _registered_method=True)
+        self.DeleteUser = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/DeleteUser',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserResponse.FromString,
+                _registered_method=True)
         self.GetUserProfile = channel.unary_unary(
                 '/qdrant.cloud.iam.v1.IAMService/GetUserProfile',
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileRequest.SerializeToString,
@@ -146,6 +151,16 @@ class IAMServiceServicer(object):
 
     def UpdateUser(self, request, context):
         """Updates the user identified by the given ID.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUser(self, request, context):
+        """Deletes the user identified by the given ID.
+        If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
         Required permissions:
         - None (authenticated only)
         """
@@ -337,6 +352,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.SerializeToString,
             ),
+            'DeleteUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUser,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserResponse.SerializeToString,
+            ),
             'GetUserProfile': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserProfile,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GetUserProfileRequest.FromString,
@@ -510,6 +530,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/UpdateUser',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.UpdateUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/DeleteUser',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserResponse.FromString,
             options,
             channel_credentials,
             insecure,

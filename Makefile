@@ -67,7 +67,8 @@ $(BUF): $(LOCALBIN)
 	  arch=$$(uname -m); \
 	  case "$$arch" in \
 	    x86_64) arch=x86_64 ;; \
-	    aarch64|arm64) arch=aarch64 ;; \
+	    arm64) arch=arm64 ;; \
+		aarch64) arch=aarch64 ;; \
 	    *) echo "Unsupported architecture: $$arch"; exit 1 ;; \
 	  esac; \
 	  echo "Downloading buf $(BUF_VERSION) for $$os-$$arch"; \

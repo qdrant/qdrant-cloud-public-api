@@ -116,6 +116,16 @@ class UpdateUserResponse(_message.Message):
     user: User
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
+class DeleteUserRequest(_message.Message):
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
+
+class DeleteUserResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class GetUserConsentRequest(_message.Message):
     __slots__ = ("document_type",)
     DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]

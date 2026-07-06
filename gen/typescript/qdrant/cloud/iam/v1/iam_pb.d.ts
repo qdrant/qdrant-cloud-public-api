@@ -216,6 +216,46 @@ export declare type UpdateUserResponseValid = Message<"qdrant.cloud.iam.v1.Updat
 export declare const UpdateUserResponseSchema: GenMessage<UpdateUserResponse, {validType: UpdateUserResponseValid}>;
 
 /**
+ * DeleteUserRequest is the request for the DeleteUser function.
+ *
+ * @generated from message qdrant.cloud.iam.v1.DeleteUserRequest
+ */
+export declare type DeleteUserRequest = Message<"qdrant.cloud.iam.v1.DeleteUserRequest"> & {
+  /**
+   * The identifier of the user (in GUID format).
+   *
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
+
+export declare type DeleteUserRequestValid = DeleteUserRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.DeleteUserRequest.
+ * Use `create(DeleteUserRequestSchema)` to create a new message.
+ */
+export declare const DeleteUserRequestSchema: GenMessage<DeleteUserRequest, {validType: DeleteUserRequestValid}>;
+
+/**
+ * DeleteUserResponse is the response from the DeleteUser function.
+ *
+ * Empty
+ *
+ * @generated from message qdrant.cloud.iam.v1.DeleteUserResponse
+ */
+export declare type DeleteUserResponse = Message<"qdrant.cloud.iam.v1.DeleteUserResponse"> & {
+};
+
+export declare type DeleteUserResponseValid = DeleteUserResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.DeleteUserResponse.
+ * Use `create(DeleteUserResponseSchema)` to create a new message.
+ */
+export declare const DeleteUserResponseSchema: GenMessage<DeleteUserResponse, {validType: DeleteUserResponseValid}>;
+
+/**
  * GetUserConsentRequest is the request for the GetUserConsent function.
  *
  * @generated from message qdrant.cloud.iam.v1.GetUserConsentRequest
@@ -1874,6 +1914,19 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof UpdateUserRequestSchema;
     output: typeof UpdateUserResponseSchema;
+  },
+  /**
+   * Deletes the user identified by the given ID.
+   * If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUser
+   */
+  deleteUser: {
+    methodKind: "unary";
+    input: typeof DeleteUserRequestSchema;
+    output: typeof DeleteUserResponseSchema;
   },
   /**
    * Gets the profile of the authenticated user.

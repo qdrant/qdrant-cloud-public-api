@@ -22,6 +22,7 @@ const (
 	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
 	IAMService_ListUsers_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListUsers"
 	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
+	IAMService_DeleteUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/DeleteUser"
 	IAMService_GetUserProfile_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
 	IAMService_UpdateUserProfile_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile"
 	IAMService_GetUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
@@ -60,6 +61,11 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	// Deletes the user identified by the given ID.
+	// If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
+	// Required permissions:
+	// - None (authenticated only)
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	// Gets the profile of the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
@@ -170,6 +176,16 @@ func (c *iAMServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, IAMService_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserResponse)
+	err := c.cc.Invoke(ctx, IAMService_DeleteUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,6 +390,11 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	// Deletes the user identified by the given ID.
+	// If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
+	// Required permissions:
+	// - None (authenticated only)
+	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	// Gets the profile of the authenticated user.
 	// Required permissions:
 	// - None (authenticated only)
@@ -468,6 +489,9 @@ func (UnimplementedIAMServiceServer) ListUsers(context.Context, *ListUsersReques
 }
 func (UnimplementedIAMServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedIAMServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteUser not implemented")
 }
 func (UnimplementedIAMServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
@@ -594,6 +618,24 @@ func _IAMService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_DeleteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).DeleteUser(ctx, req.(*DeleteUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -940,6 +982,10 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _IAMService_UpdateUser_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _IAMService_DeleteUser_Handler,
 		},
 		{
 			MethodName: "GetUserProfile",

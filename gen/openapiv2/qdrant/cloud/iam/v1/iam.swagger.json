@@ -795,6 +795,38 @@
           "IAMService"
         ]
       }
+    },
+    "/api/iam/v1/users/{userId}": {
+      "delete": {
+        "summary": "Deletes the user identified by the given ID.\nIf the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1014,6 +1046,10 @@
       "type": "object",
       "description": "Empty",
       "title": "DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function"
+    },
+    "v1DeleteUserResponse": {
+      "type": "object",
+      "description": "DeleteUserResponse is the response from the DeleteUser function.\n\nEmpty"
     },
     "v1GetAuthenticatedUserResponse": {
       "type": "object",
