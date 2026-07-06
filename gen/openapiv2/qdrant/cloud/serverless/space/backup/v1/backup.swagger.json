@@ -605,6 +605,10 @@
               "type": "string",
               "description": "The identifier of the space (in GUID format).\nThis is a required field."
             },
+            "name": {
+              "type": "string",
+              "description": "Name of the backup schedule.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
+            },
             "schedule": {
               "type": "string",
               "description": "The schedule that determines when the backup will be created.\nThis field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview\nThis is a required field."
@@ -655,6 +659,10 @@
             "spaceId": {
               "type": "string",
               "description": "The identifier of the space (in GUID format).\nThis is a required field."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the backup schedule.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
             },
             "schedule": {
               "type": "string",
@@ -868,6 +876,10 @@
         "spaceId": {
           "type": "string",
           "description": "The identifier of the space (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the backup schedule.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
         },
         "schedule": {
           "type": "string",
