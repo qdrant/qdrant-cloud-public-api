@@ -1746,6 +1746,10 @@ type BackupSchedule struct {
 	// The identifier of the space (in GUID format).
 	// This is a required field.
 	SpaceId string `protobuf:"bytes,4,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	// Name of the backup schedule.
+	// This is a required field.
+	// Name can only contain letters, numbers, spaces, underscores and dashes.
+	Name string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
 	// The schedule that determines when the backup will be created.
 	// This field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview
 	// This is a required field.
@@ -1826,6 +1830,13 @@ func (x *BackupSchedule) GetAccountId() string {
 func (x *BackupSchedule) GetSpaceId() string {
 	if x != nil {
 		return x.SpaceId
+	}
+	return ""
+}
+
+func (x *BackupSchedule) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -2127,14 +2138,16 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12b\n" +
-	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xee\a\n" +
+	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\x9a\b\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
-	"\bspace_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12\xb6\x01\n" +
+	"\bspace_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12*\n" +
+	"\x04name\x18\f \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x012\n" +
+	"^[\\w\\s-]+$R\x04name\x12\xb6\x01\n" +
 	"\bschedule\x18\x05 \x01(\tB\x99\x01\xbaH\x95\x01r\x92\x012\x8f\x01^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$R\bschedule\x12^\n" +
 	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
 	"\n" +

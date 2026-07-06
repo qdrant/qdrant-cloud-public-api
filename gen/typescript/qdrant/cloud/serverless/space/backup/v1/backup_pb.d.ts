@@ -1208,6 +1208,15 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
   spaceId: string;
 
   /**
+   * Name of the backup schedule.
+   * This is a required field.
+   * Name can only contain letters, numbers, spaces, underscores and dashes.
+   *
+   * @generated from field: string name = 12;
+   */
+  name: string;
+
+  /**
    * The schedule that determines when the backup will be created.
    * This field follows the standard crontab format: https://en.wikipedia.org/wiki/Cron#Overview
    * This is a required field.
