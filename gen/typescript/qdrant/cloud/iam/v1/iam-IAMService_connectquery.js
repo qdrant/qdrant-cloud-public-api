@@ -32,6 +32,16 @@ export const listUsers = IAMService.method.listUsers;
 export const updateUser = IAMService.method.updateUser;
 
 /**
+ * Deletes the user identified by the given ID.
+ * If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUser
+ */
+export const deleteUser = IAMService.method.deleteUser;
+
+/**
  * Gets the profile of the authenticated user.
  * Required permissions:
  * - None (authenticated only)

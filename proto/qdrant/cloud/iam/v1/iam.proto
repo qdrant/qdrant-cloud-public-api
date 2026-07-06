@@ -87,6 +87,30 @@ service IAMService {
       request_resource_field: "user"
     };
   }
+  // Deletes the user identified by the given ID.
+  // If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // gRPC Gateway REST call
+    option (google.api.http) = {delete: "/api/iam/v1/users/me"};
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_DELETED
+      resource_type: "user"
+      resource_id_field: "req-md.qc-actor-id"
+      resource_url_template: "/users/{req-md.qc-actor-id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "user_id"
+      field_expression: "user.id"
+    };
+  }
   // Gets the profile of the authenticated user.
   // Required permissions:
   // - None (authenticated only)
@@ -516,6 +540,18 @@ message UpdateUserRequest {
 message UpdateUserResponse {
   // The actual user.
   User user = 1 [(buf.validate.field).required = true];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// DeleteUserRequest is the request for the DeleteUser function.
+message DeleteUserRequest {
+  // The actual user.
+  User user = 1 [(buf.validate.field).required = true];
+}
+
+// DeleteUserResponse is the response from the DeleteUser function.
+message DeleteUserResponse {
+  // Empty
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
