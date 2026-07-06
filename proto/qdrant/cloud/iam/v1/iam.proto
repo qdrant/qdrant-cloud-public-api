@@ -102,8 +102,8 @@ service IAMService {
     option (qdrant.cloud.event.v1.event_options) = {
       event_type: EVENT_TYPE_DELETED
       resource_type: "user"
-      resource_id_field: "req.user.id"
-      resource_url_template: "/users/{req.user.id}"
+      resource_id_field: "req.user_id"
+      resource_url_template: "/users/{req.user_id}"
     };
     // log fields
     option (common.v1.log_fields) = {

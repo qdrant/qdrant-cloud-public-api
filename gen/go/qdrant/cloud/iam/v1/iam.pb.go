@@ -3266,7 +3266,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\auser_id\x12\auser.id\x1a\x04user\"\x04user\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\xcf\x01\n" +
 	"\n" +
 	"DeleteUser\x12&.qdrant.cloud.iam.v1.DeleteUserRequest\x1a'.qdrant.cloud.iam.v1.DeleteUserResponse\"p\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\xca\xf3\x18+\b\x03\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02\x1d*\x1b/api/iam/v1/users/{user_id}\x12\x9c\x01\n" +
+	"\auser_id\x12\auser_id\xca\xf3\x18+\b\x03\x12\x04user\"\vreq.user_id*\x14/users/{req.user_id}\x82\xd3\xe4\x93\x02\x1d*\x1b/api/iam/v1/users/{user_id}\x12\x9c\x01\n" +
 	"\x0eGetUserProfile\x12*.qdrant.cloud.iam.v1.GetUserProfileRequest\x1a+.qdrant.cloud.iam.v1.GetUserProfileResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/profile\x12\xbe\x02\n" +
 	"\x11UpdateUserProfile\x12-.qdrant.cloud.iam.v1.UpdateUserProfileRequest\x1a..qdrant.cloud.iam.v1.UpdateUserProfileResponse\"\xc9\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01ʵ\x18L\n" +
 	"./qdrant.cloud.iam.v1.IAMService/GetUserProfile\x1a\fuser_profile\"\fuser_profile\xca\xf3\x18A\b\x02\x12\fuser-profile\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}\x82\xd3\xe4\x93\x02!:\x01*\x1a\x1c/api/iam/v1/users/me/profile\x12\x9c\x01\n" +
