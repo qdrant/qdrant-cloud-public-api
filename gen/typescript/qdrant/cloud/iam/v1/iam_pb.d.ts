@@ -222,26 +222,14 @@ export declare const UpdateUserResponseSchema: GenMessage<UpdateUserResponse, {v
  */
 export declare type DeleteUserRequest = Message<"qdrant.cloud.iam.v1.DeleteUserRequest"> & {
   /**
-   * The actual user.
+   * The identifier of the user (in GUID format).
    *
-   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
+   * @generated from field: string user_id = 1;
    */
-  user?: User | undefined;
+  userId: string;
 };
 
-/**
- * DeleteUserRequest is the request for the DeleteUser function.
- *
- * @generated from message qdrant.cloud.iam.v1.DeleteUserRequest
- */
-export declare type DeleteUserRequestValid = Message<"qdrant.cloud.iam.v1.DeleteUserRequest"> & {
-  /**
-   * The actual user.
-   *
-   * @generated from field: qdrant.cloud.iam.v1.User user = 1;
-   */
-  user: UserValid;
-};
+export declare type DeleteUserRequestValid = DeleteUserRequest;
 
 /**
  * Describes the message qdrant.cloud.iam.v1.DeleteUserRequest.

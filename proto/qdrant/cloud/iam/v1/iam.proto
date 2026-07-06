@@ -97,18 +97,18 @@ service IAMService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {delete: "/api/iam/v1/users/me"};
+    option (google.api.http) = {delete: "/api/iam/v1/users/{user_id}"};
     // events
     option (qdrant.cloud.event.v1.event_options) = {
       event_type: EVENT_TYPE_DELETED
       resource_type: "user"
-      resource_id_field: "req-md.qc-actor-id"
-      resource_url_template: "/users/{req-md.qc-actor-id}"
+      resource_id_field: "req.user.id"
+      resource_url_template: "/users/{req.user.id}"
     };
     // log fields
     option (common.v1.log_fields) = {
       name: "user_id"
-      field_expression: "user.id"
+      field_expression: "user_id"
     };
   }
   // Gets the profile of the authenticated user.
@@ -545,8 +545,8 @@ message UpdateUserResponse {
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
 // DeleteUserRequest is the request for the DeleteUser function.
 message DeleteUserRequest {
-  // The actual user.
-  User user = 1 [(buf.validate.field).required = true];
+  // The identifier of the user (in GUID format).
+  string user_id = 1 [(buf.validate.field).string = {uuid: true}];
 }
 
 // DeleteUserResponse is the response from the DeleteUser function.

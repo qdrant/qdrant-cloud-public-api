@@ -117,10 +117,10 @@ class UpdateUserResponse(_message.Message):
     def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
 
 class DeleteUserRequest(_message.Message):
-    __slots__ = ("user",)
-    USER_FIELD_NUMBER: _ClassVar[int]
-    user: User
-    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
 
 class DeleteUserResponse(_message.Message):
     __slots__ = ()

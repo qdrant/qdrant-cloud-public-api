@@ -460,93 +460,6 @@
         "tags": [
           "IAMService"
         ]
-      },
-      "delete": {
-        "summary": "Deletes the user identified by the given ID.\nIf the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.\nRequired permissions:\n- None (authenticated only)",
-        "operationId": "IAMService_DeleteUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1DeleteUserResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "user.id",
-            "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "user.createdAt",
-            "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "user.lastModifiedAt",
-            "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "user.email",
-            "description": "The email address of the user.\nThis is a read-only field.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "user.status",
-            "description": "The status of the user.\nThis is a read-only field.\n\n - USER_STATUS_UNSPECIFIED: Default, unspecified status.\n - USER_STATUS_ACTIVE: The user account is active and can be used.\n - USER_STATUS_BLOCKED: The user account is blocked and cannot be used.\n - USER_STATUS_DELETED: The user account has been marked for deletion or is deleted.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "USER_STATUS_UNSPECIFIED",
-              "USER_STATUS_ACTIVE",
-              "USER_STATUS_BLOCKED",
-              "USER_STATUS_DELETED"
-            ],
-            "default": "USER_STATUS_UNSPECIFIED"
-          },
-          {
-            "name": "user.defaultAccountId",
-            "description": "The default account ID of the user (in GUID format).\nYou should be member of the account when updating.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "user.onboardingStatus",
-            "description": "The onboarding status of the user on the platform.\nThis is a read-only field.\n\n - ONBOARDING_STATUS_UNSPECIFIED: Default, unspecified status.\n - ONBOARDING_STATUS_PENDING: The user has not completed onboarding on the platform.\n - ONBOARDING_STATUS_COMPLETED: The user has completed onboarding on the platform.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ONBOARDING_STATUS_UNSPECIFIED",
-              "ONBOARDING_STATUS_PENDING",
-              "ONBOARDING_STATUS_COMPLETED"
-            ],
-            "default": "ONBOARDING_STATUS_UNSPECIFIED"
-          }
-        ],
-        "tags": [
-          "IAMService"
-        ]
       }
     },
     "/api/iam/v1/users/me/consent": {
@@ -876,6 +789,38 @@
             "schema": {
               "$ref": "#/definitions/IAMServiceUpdateUserBody"
             }
+          }
+        ],
+        "tags": [
+          "IAMService"
+        ]
+      }
+    },
+    "/api/iam/v1/users/{userId}": {
+      "delete": {
+        "summary": "Deletes the user identified by the given ID.\nIf the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "IAMService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "The identifier of the user (in GUID format).",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
