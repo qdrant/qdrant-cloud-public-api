@@ -1758,8 +1758,10 @@ type BackupSchedule struct {
 	// The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
 	// If the value is unset, backup will be retained indefinitely.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,6,opt,name=retention_period,json=retentionPeriod,proto3,oneof" json:"retention_period,omitempty"`
-	// The timestamp when this backup schedule was paused.
-	// While paused, the schedule will not create any new backups, but it is not deleted.
+	// The timestamp at which this backup schedule is paused.
+	// The schedule stops creating new backups once this timestamp is reached; a
+	// timestamp in the future schedules the pause for that moment, and backups
+	// keep being created until then. The schedule is not deleted while paused.
 	// Unsetting this field resumes the creation of backups.
 	PausedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=paused_at,json=pausedAt,proto3,oneof" json:"paused_at,omitempty"`
 	// The timestamp when the backup schedule was deleted (or when deletion started).
