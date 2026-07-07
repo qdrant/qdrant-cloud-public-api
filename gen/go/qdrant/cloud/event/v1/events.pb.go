@@ -209,10 +209,8 @@ type Event struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The time at which the event occurred.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The unique identifier of the authenticated actor.
-	ActorId string `protobuf:"bytes,3,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
-	// The type of the authenticated actor.
-	ActorType v1.ActorType `protobuf:"varint,4,opt,name=actor_type,json=actorType,proto3,enum=qdrant.cloud.common.v1.ActorType" json:"actor_type,omitempty"`
+	// The authenticated actor that performed the action which triggered this event.
+	Caller *v1.Caller `protobuf:"bytes,3,opt,name=caller,proto3" json:"caller,omitempty"`
 	// The account ID associated with this event (if applicable, UUID).
 	// This field will be set if the event is bound to a specific account.
 	AccountId *string `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
@@ -288,18 +286,11 @@ func (x *Event) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Event) GetActorId() string {
+func (x *Event) GetCaller() *v1.Caller {
 	if x != nil {
-		return x.ActorId
+		return x.Caller
 	}
-	return ""
-}
-
-func (x *Event) GetActorType() v1.ActorType {
-	if x != nil {
-		return x.ActorType
-	}
-	return v1.ActorType(0)
+	return nil
 }
 
 func (x *Event) GetAccountId() string {
@@ -405,15 +396,12 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x1cAdditionalContextFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_action_type\"\xa3\x06\n" +
+	"\f_action_type\"\xf1\x05\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\"\n" +
-	"\bactor_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aactorId\x12L\n" +
-	"\n" +
-	"actor_type\x18\x04 \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\tactorType\x12,\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
+	"\x06caller\x18\x03 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06caller\x12,\n" +
 	"\n" +
 	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\taccountId\x88\x01\x01\x12&\n" +
 	"\n" +
@@ -467,14 +455,14 @@ var file_qdrant_cloud_event_v1_events_proto_goTypes = []any{
 	nil,                                // 3: qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
 	nil,                                // 4: qdrant.cloud.event.v1.Event.AdditionalContextEntry
 	(*timestamppb.Timestamp)(nil),      // 5: google.protobuf.Timestamp
-	(v1.ActorType)(0),                  // 6: qdrant.cloud.common.v1.ActorType
+	(*v1.Caller)(nil),                  // 6: qdrant.cloud.common.v1.Caller
 	(*descriptorpb.MethodOptions)(nil), // 7: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_event_v1_events_proto_depIdxs = []int32{
 	0, // 0: qdrant.cloud.event.v1.EventOptions.event_type:type_name -> qdrant.cloud.event.v1.EventType
 	3, // 1: qdrant.cloud.event.v1.EventOptions.additional_context_fields:type_name -> qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
 	5, // 2: qdrant.cloud.event.v1.Event.created_at:type_name -> google.protobuf.Timestamp
-	6, // 3: qdrant.cloud.event.v1.Event.actor_type:type_name -> qdrant.cloud.common.v1.ActorType
+	6, // 3: qdrant.cloud.event.v1.Event.caller:type_name -> qdrant.cloud.common.v1.Caller
 	0, // 4: qdrant.cloud.event.v1.Event.event_type:type_name -> qdrant.cloud.event.v1.EventType
 	4, // 5: qdrant.cloud.event.v1.Event.additional_context:type_name -> qdrant.cloud.event.v1.Event.AdditionalContextEntry
 	7, // 6: qdrant.cloud.event.v1.event_options:extendee -> google.protobuf.MethodOptions

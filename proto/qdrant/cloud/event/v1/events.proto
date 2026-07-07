@@ -85,13 +85,8 @@ message Event {
   string id = 1 [(buf.validate.field).string = {uuid: true}];
   // The time at which the event occurred.
   google.protobuf.Timestamp created_at = 2;
-  // The unique identifier of the authenticated actor.
-  string actor_id = 3 [(buf.validate.field).string.min_len = 1];
-  // The type of the authenticated actor.
-  qdrant.cloud.common.v1.ActorType actor_type = 4 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  // The authenticated actor that performed the action which triggered this event.
+  qdrant.cloud.common.v1.Caller caller = 3 [(buf.validate.field).required = true];
   // The account ID associated with this event (if applicable, UUID).
   // This field will be set if the event is bound to a specific account.
   optional string account_id = 5 [(buf.validate.field).string = {uuid: true}];
