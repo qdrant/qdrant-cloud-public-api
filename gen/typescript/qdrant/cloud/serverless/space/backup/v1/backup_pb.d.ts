@@ -1235,9 +1235,9 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
   retentionPeriod?: Duration | undefined;
 
   /**
-   * Pause this backup schedule.
-   * If a backup schedule is paused, the backup schedule will not result in new backups.
-   * The backup schedule isn't deleted, unsetting this field will resume the creation of backups again.
+   * Whether this backup schedule is paused.
+   * While paused, the schedule will not create any new backups, but it is not deleted.
+   * Unsetting this field resumes the creation of backups.
    *
    * @generated from field: optional bool paused = 13;
    */

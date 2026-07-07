@@ -619,7 +619,7 @@
             },
             "paused": {
               "type": "boolean",
-              "description": "Pause this backup schedule.\nIf a backup schedule is paused, the backup schedule will not result in new backups.\nThe backup schedule isn't deleted, unsetting this field will resume the creation of backups again."
+              "description": "Whether this backup schedule is paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
             },
             "deletedAt": {
               "type": "string",
@@ -678,7 +678,7 @@
             },
             "paused": {
               "type": "boolean",
-              "description": "Pause this backup schedule.\nIf a backup schedule is paused, the backup schedule will not result in new backups.\nThe backup schedule isn't deleted, unsetting this field will resume the creation of backups again."
+              "description": "Whether this backup schedule is paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
             },
             "deletedAt": {
               "type": "string",
@@ -899,7 +899,7 @@
         },
         "paused": {
           "type": "boolean",
-          "description": "Pause this backup schedule.\nIf a backup schedule is paused, the backup schedule will not result in new backups.\nThe backup schedule isn't deleted, unsetting this field will resume the creation of backups again."
+          "description": "Whether this backup schedule is paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
         },
         "deletedAt": {
           "type": "string",
