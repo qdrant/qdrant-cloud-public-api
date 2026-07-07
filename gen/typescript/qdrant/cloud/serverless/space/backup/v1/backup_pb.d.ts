@@ -1235,8 +1235,10 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
   retentionPeriod?: Duration | undefined;
 
   /**
-   * The timestamp when this backup schedule was paused.
-   * While paused, the schedule will not create any new backups, but it is not deleted.
+   * The timestamp at which this backup schedule is paused.
+   * The schedule stops creating new backups once this timestamp is reached; a
+   * timestamp in the future schedules the pause for that moment, and backups
+   * keep being created until then. The schedule is not deleted while paused.
    * Unsetting this field resumes the creation of backups.
    *
    * @generated from field: optional google.protobuf.Timestamp paused_at = 13;

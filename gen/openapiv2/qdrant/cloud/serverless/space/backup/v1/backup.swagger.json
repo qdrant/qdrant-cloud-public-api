@@ -620,7 +620,7 @@
             "pausedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when this backup schedule was paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
+              "description": "The timestamp at which this backup schedule is paused.\nThe schedule stops creating new backups once this timestamp is reached; a\ntimestamp in the future schedules the pause for that moment, and backups\nkeep being created until then. The schedule is not deleted while paused.\nUnsetting this field resumes the creation of backups."
             },
             "deletedAt": {
               "type": "string",
@@ -680,7 +680,7 @@
             "pausedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when this backup schedule was paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
+              "description": "The timestamp at which this backup schedule is paused.\nThe schedule stops creating new backups once this timestamp is reached; a\ntimestamp in the future schedules the pause for that moment, and backups\nkeep being created until then. The schedule is not deleted while paused.\nUnsetting this field resumes the creation of backups."
             },
             "deletedAt": {
               "type": "string",
@@ -902,7 +902,7 @@
         "pausedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when this backup schedule was paused.\nWhile paused, the schedule will not create any new backups, but it is not deleted.\nUnsetting this field resumes the creation of backups."
+          "description": "The timestamp at which this backup schedule is paused.\nThe schedule stops creating new backups once this timestamp is reached; a\ntimestamp in the future schedules the pause for that moment, and backups\nkeep being created until then. The schedule is not deleted while paused.\nUnsetting this field resumes the creation of backups."
         },
         "deletedAt": {
           "type": "string",
