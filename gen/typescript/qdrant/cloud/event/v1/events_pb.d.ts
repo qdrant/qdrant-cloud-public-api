@@ -5,7 +5,7 @@
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { MethodOptions, Timestamp } from "@bufbuild/protobuf/wkt";
-import type { ActorType } from "../../common/v1/common_pb.js";
+import type { Caller, CallerValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/event/v1/events.proto.
@@ -113,18 +113,11 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   createdAt?: Timestamp | undefined;
 
   /**
-   * The unique identifier of the authenticated actor.
+   * The authenticated actor that performed the action which triggered this event.
    *
-   * @generated from field: string actor_id = 3;
+   * @generated from field: qdrant.cloud.common.v1.Caller caller = 3;
    */
-  actorId: string;
-
-  /**
-   * The type of the authenticated actor.
-   *
-   * @generated from field: qdrant.cloud.common.v1.ActorType actor_type = 4;
-   */
-  actorType: ActorType;
+  caller?: Caller | undefined;
 
   /**
    * The account ID associated with this event (if applicable, UUID).
@@ -199,7 +192,106 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   additionalContext: { [key: string]: string };
 };
 
-export declare type EventValid = Event;
+/**
+ * Event represents a significant occurrence in the system, like a resource
+ * being created, updated, or deleted.
+ *
+ * @generated from message qdrant.cloud.event.v1.Event
+ */
+export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
+  /**
+   * A unique identifier for the event, in the form of a UUID.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The time at which the event occurred.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   */
+  createdAt?: Timestamp | undefined;
+
+  /**
+   * The authenticated actor that performed the action which triggered this event.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller caller = 3;
+   */
+  caller: CallerValid;
+
+  /**
+   * The account ID associated with this event (if applicable, UUID).
+   * This field will be set if the event is bound to a specific account.
+   *
+   * @generated from field: optional string account_id = 5;
+   */
+  accountId?: string | undefined;
+
+  /**
+   * The fullname of the RPC which was invoked.
+   * E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
+   *
+   * @generated from field: string source_rpc = 6;
+   */
+  sourceRpc: string;
+
+  /**
+   * The type of the event.
+   *
+   * @generated from field: qdrant.cloud.event.v1.EventType event_type = 10;
+   */
+  eventType: EventType;
+
+  /**
+   * The type of the resource that this event is about (e.g., "cluster", "backup").
+   *
+   * @generated from field: string resource_type = 11;
+   */
+  resourceType: string;
+
+  /**
+   * Whether or not this event is a status only event.
+   * Applicable when event_type is EVENT_TYPE_UPDATED.
+   * For example, this can be used to distinguish between a spec update and a status update.
+   *
+   * @generated from field: bool status_only = 12;
+   */
+  statusOnly: boolean;
+
+  /**
+   * The unique identifier of the resource.
+   * This field will be set if the event is bound to a specific resource.
+   * In most cases this is in the form of a UUID.
+   *
+   * @generated from field: optional string resource_id = 13;
+   */
+  resourceId?: string | undefined;
+
+  /**
+   * The URL associated with the resource for this event.
+   *
+   * @generated from field: string resource_url = 14;
+   */
+  resourceUrl: string;
+
+  /**
+   * The action type.
+   * This field is set when the event_type is EVENT_TYPE_ACTION.
+   * E.g. 'restore' in case of a backup restore.
+   *
+   * @generated from field: optional string action_type = 15;
+   */
+  actionType?: string | undefined;
+
+  /**
+   * Additional key-value context about the event.
+   * For example, for a backup event, this could include the "cluster_id".
+   *
+   * @generated from field: map<string, string> additional_context = 20;
+   */
+  additionalContext: { [key: string]: string };
+};
 
 /**
  * Describes the message qdrant.cloud.event.v1.Event.
