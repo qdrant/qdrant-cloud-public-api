@@ -1758,6 +1758,10 @@ type BackupSchedule struct {
 	// The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
 	// If the value is unset, backup will be retained indefinitely.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,6,opt,name=retention_period,json=retentionPeriod,proto3,oneof" json:"retention_period,omitempty"`
+	// Pause this backup schedule.
+	// If a backup schedule is paused, the backup schedule will not result in new backups.
+	// The backup schedule isn't deleted, unsetting this field will resume the creation of backups again.
+	Paused *bool `protobuf:"varint,13,opt,name=paused,proto3,oneof" json:"paused,omitempty"`
 	// The timestamp when the backup schedule was deleted (or when deletion started).
 	// This is a read-only field and will be set after DeleteBackupSchedule is called.
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
@@ -1853,6 +1857,13 @@ func (x *BackupSchedule) GetRetentionPeriod() *durationpb.Duration {
 		return x.RetentionPeriod
 	}
 	return nil
+}
+
+func (x *BackupSchedule) GetPaused() bool {
+	if x != nil && x.Paused != nil {
+		return *x.Paused
+	}
+	return false
 }
 
 func (x *BackupSchedule) GetDeletedAt() *timestamppb.Timestamp {
@@ -2138,7 +2149,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12b\n" +
-	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\x9a\b\n" +
+	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xc2\b\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2149,7 +2160,8 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x04name\x18\f \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x012\n" +
 	"^[\\w\\s-]+$R\x04name\x12\xb6\x01\n" +
 	"\bschedule\x18\x05 \x01(\tB\x99\x01\xbaH\x95\x01r\x92\x012\x8f\x01^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$R\bschedule\x12^\n" +
-	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
+	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x12\x1b\n" +
+	"\x06paused\x18\r \x01(\bH\x01R\x06paused\x88\x01\x01\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12_\n" +
 	"\x06status\x18\b \x01(\x0e2=.qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12=\n" +
@@ -2160,7 +2172,8 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"deleted_by\x18\v \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
-	"\x11_retention_period\"\xf4\x02\n" +
+	"\x11_retention_periodB\t\n" +
+	"\a_paused\"\xf4\x02\n" +
 	"\rBackupRestore\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
