@@ -118,8 +118,8 @@ message CreateSpaceApiKeyRequest {
   SpaceApiKey space_api_key = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_space_api_key.no_read_only_fields"
-    message: "read-only fields (id, created_at, postfix, key, state) must not be set on create"
-    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
+    message: "read-only fields (id, created_at, deleted_at, postfix, key, state) must not be set on create"
+    expression: "this.space_api_key.id == '' && !has(this.space_api_key.created_at) && !has(this.space_api_key.deleted_at) && this.space_api_key.postfix == '' && this.space_api_key.key == '' && !has(this.space_api_key.state)"
   };
 }
 
@@ -209,6 +209,9 @@ message SpaceApiKey {
   // The caller who deleted the space api key.
   // This is a read-only field and will be available after deletion starts.
   common.v1.Caller deleted_by = 12;
+  // Timestamp when the space api key was deleted (or is started to be deleting).
+  // This is a read-only field and will be set after DeleteSpaceApiKey is called.
+  google.protobuf.Timestamp deleted_at = 13;
   // Postfix for the space api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a space api key is created.
   string postfix = 9;

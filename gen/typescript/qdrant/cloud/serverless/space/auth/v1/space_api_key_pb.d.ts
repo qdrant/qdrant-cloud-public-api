@@ -275,6 +275,14 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
   deletedBy?: Caller | undefined;
 
   /**
+   * Timestamp when the space api key was deleted (or is started to be deleting).
+   * This is a read-only field and will be set after DeleteSpaceApiKey is called.
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 13;
+   */
+  deletedAt?: Timestamp | undefined;
+
+  /**
    * Postfix for the space api key, this represents the last bytes of the key.
    * This is a read-only field and will be available after a space api key is created.
    *
