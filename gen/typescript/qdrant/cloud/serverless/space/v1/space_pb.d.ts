@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Caller, CallerValid, KeyValue, KeyValueValid } from "../../../common/v1/common_pb.js";
 
 /**
@@ -355,6 +355,18 @@ export declare type UpdateSpaceRequest = Message<"qdrant.cloud.serverless.space.
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
   space?: Space | undefined;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Space) message,
+   * not the request envelope (e.g. "name", "configuration.allowed_ip_source_ranges").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**
@@ -370,6 +382,18 @@ export declare type UpdateSpaceRequestValid = Message<"qdrant.cloud.serverless.s
    * @generated from field: qdrant.cloud.serverless.space.v1.Space space = 1;
    */
   space: SpaceValid;
+
+  /**
+   * Optional mask of fields to update. When set, only the fields listed in
+   * the mask will be updated; all other fields retain their current values
+   * on the server. Field paths reference the resource (Space) message,
+   * not the request envelope (e.g. "name", "configuration.allowed_ip_source_ranges").
+   * When unset or empty, the request is treated as a full-resource
+   * replacement (the existing behavior).
+   *
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask | undefined;
 };
 
 /**

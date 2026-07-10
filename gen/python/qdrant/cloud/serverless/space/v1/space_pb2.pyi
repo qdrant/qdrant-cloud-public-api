@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
@@ -94,10 +95,12 @@ class CreateSpaceFromBackupResponse(_message.Message):
     def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
 
 class UpdateSpaceRequest(_message.Message):
-    __slots__ = ("space",)
+    __slots__ = ("space", "update_mask")
     SPACE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
     space: Space
-    def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ...) -> None: ...
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, space: _Optional[_Union[Space, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
 
 class UpdateSpaceResponse(_message.Message):
     __slots__ = ("space",)

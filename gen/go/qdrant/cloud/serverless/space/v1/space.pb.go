@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -556,7 +557,14 @@ type UpdateSpaceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual space
 	// This is a required field.
-	Space         *Space `protobuf:"bytes,1,opt,name=space,proto3" json:"space,omitempty"`
+	Space *Space `protobuf:"bytes,1,opt,name=space,proto3" json:"space,omitempty"`
+	// Optional mask of fields to update. When set, only the fields listed in
+	// the mask will be updated; all other fields retain their current values
+	// on the server. Field paths reference the resource (Space) message,
+	// not the request envelope (e.g. "name", "configuration.allowed_ip_source_ranges").
+	// When unset or empty, the request is treated as a full-resource
+	// replacement (the existing behavior).
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -594,6 +602,13 @@ func (*UpdateSpaceRequest) Descriptor() ([]byte, []int) {
 func (x *UpdateSpaceRequest) GetSpace() *Space {
 	if x != nil {
 		return x.Space
+	}
+	return nil
+}
+
+func (x *UpdateSpaceRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
 	}
 	return nil
 }
@@ -1216,7 +1231,7 @@ var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
+	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
 	"\x11ListSpacesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -1261,9 +1276,11 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"space_name\x18\x03 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\tspaceName\"\xc9\x01\n" +
 	"\x1dCreateSpaceFromBackupResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
-	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xb4\x01\n" +
+	"\x1acreate_space.state_present\x12'state is required for an existing space\x1a\x15has(this.space.state)\"\xf1\x01\n" +
 	"\x12UpdateSpaceRequest\x12E\n" +
-	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:W\xbaHT\x1aR\n" +
+	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask:W\xbaHT\x1aR\n" +
 	"\x17update_space.id_present\x12\"space.id is required for an update\x1a\x13this.space.id != ''\"\xbf\x01\n" +
 	"\x13UpdateSpaceResponse\x12E\n" +
 	"\x05space\x18\x01 \x01(\v2'.qdrant.cloud.serverless.space.v1.SpaceB\x06\xbaH\x03\xc8\x01\x01R\x05space:a\xbaH^\x1a\\\n" +
@@ -1322,7 +1339,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xd5\x11\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xd6\x12\n" +
 	"\fSpaceService\x12\xca\x01\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"Q\x8a\xb5\x18\x16read:serverless_spaces\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xe7\x01\n" +
@@ -1337,9 +1354,13 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"space_name\x12\n" +
 	"space_name\xca\xf3\x18\x82\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R\x1f\n" +
-	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xf8\x02\n" +
-	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xfb\x01\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace.id\xca\xf3\x18e\b\x02\x12\x10serverless-space\"\freq.space.id*A/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xd6\x02\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xf9\x03\n" +
+	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xfc\x02\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace.idʵ\x18}\n" +
+	"7/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace\x12\x1e\n" +
+	"\n" +
+	"account_id\x12\x10space.account_id\x12\x14\n" +
+	"\bspace_id\x12\bspace.id\x1a\x05space\"\x05space\xca\xf3\x18e\b\x02\x12\x10serverless-space\"\freq.space.id*A/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xd6\x02\n" +
 	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\xd9\x01\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18_\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xd3\x01\n" +
 	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x01B\xb2\x02\n" +
@@ -1380,9 +1401,10 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
 	(*SpaceConfiguration)(nil),            // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration
 	(*SpaceState)(nil),                    // 17: qdrant.cloud.serverless.space.v1.SpaceState
 	(*SpaceEndpoint)(nil),                 // 18: qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	(*timestamppb.Timestamp)(nil),         // 19: google.protobuf.Timestamp
-	(*v1.KeyValue)(nil),                   // 20: qdrant.cloud.common.v1.KeyValue
-	(*v1.Caller)(nil),                     // 21: qdrant.cloud.common.v1.Caller
+	(*fieldmaskpb.FieldMask)(nil),         // 19: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),         // 20: google.protobuf.Timestamp
+	(*v1.KeyValue)(nil),                   // 21: qdrant.cloud.common.v1.KeyValue
+	(*v1.Caller)(nil),                     // 22: qdrant.cloud.common.v1.Caller
 }
 var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	15, // 0: qdrant.cloud.serverless.space.v1.ListSpacesResponse.items:type_name -> qdrant.cloud.serverless.space.v1.Space
@@ -1391,37 +1413,38 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	15, // 3: qdrant.cloud.serverless.space.v1.CreateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	15, // 4: qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	15, // 5: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	15, // 6: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	19, // 7: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
-	19, // 8: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
-	20, // 9: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	16, // 10: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	21, // 11: qdrant.cloud.serverless.space.v1.Space.created_by:type_name -> qdrant.cloud.common.v1.Caller
-	21, // 12: qdrant.cloud.serverless.space.v1.Space.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
-	21, // 13: qdrant.cloud.serverless.space.v1.Space.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
-	17, // 14: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
-	19, // 15: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
-	0,  // 16: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
-	18, // 17: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	1,  // 18: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
-	3,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
-	5,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
-	7,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
-	9,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
-	11, // 23: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
-	13, // 24: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:input_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest
-	2,  // 25: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
-	4,  // 26: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
-	6,  // 27: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
-	8,  // 28: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
-	10, // 29: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
-	12, // 30: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
-	14, // 31: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:output_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
-	25, // [25:32] is the sub-list for method output_type
-	18, // [18:25] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	19, // 6: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	15, // 7: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
+	20, // 8: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
+	20, // 9: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
+	21, // 10: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	16, // 11: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
+	22, // 12: qdrant.cloud.serverless.space.v1.Space.created_by:type_name -> qdrant.cloud.common.v1.Caller
+	22, // 13: qdrant.cloud.serverless.space.v1.Space.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
+	22, // 14: qdrant.cloud.serverless.space.v1.Space.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
+	17, // 15: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
+	20, // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
+	0,  // 17: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
+	18, // 18: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	1,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
+	3,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
+	5,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
+	7,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
+	9,  // 23: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
+	11, // 24: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
+	13, // 25: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:input_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest
+	2,  // 26: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
+	4,  // 27: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
+	6,  // 28: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
+	8,  // 29: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+	10, // 30: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
+	12, // 31: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
+	14, // 32: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:output_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
+	26, // [26:33] is the sub-list for method output_type
+	19, // [19:26] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_v1_space_proto_init() }
