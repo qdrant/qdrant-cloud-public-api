@@ -340,7 +340,7 @@ export const field = /*@__PURE__*/
  *
  * ```proto
  * extend buf.validate.Int32Rules {
- *   bool is_zero [(buf.validate.predefined).cel = {
+ *   bool is_zero = 1001 [(buf.validate.predefined).cel = {
  *     id: "int32.is_zero",
  *     message: "must be zero",
  *     expression: "!rule || this == 0",

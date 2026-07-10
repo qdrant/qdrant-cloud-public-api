@@ -88,7 +88,7 @@ class DeleteSpaceApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class SpaceApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "space_id", "name", "expires_at", "access_rules", "created_by", "deleted_by", "postfix", "key", "state")
+    __slots__ = ("id", "account_id", "created_at", "space_id", "name", "expires_at", "access_rules", "created_by", "deleted_by", "deleted_at", "postfix", "key", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -98,6 +98,7 @@ class SpaceApiKey(_message.Message):
     ACCESS_RULES_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_FIELD_NUMBER: _ClassVar[int]
     DELETED_BY_FIELD_NUMBER: _ClassVar[int]
+    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     POSTFIX_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
@@ -110,10 +111,11 @@ class SpaceApiKey(_message.Message):
     access_rules: _containers.RepeatedCompositeFieldContainer[AccessRule]
     created_by: _common_pb2.Caller
     deleted_by: _common_pb2.Caller
+    deleted_at: _timestamp_pb2.Timestamp
     postfix: str
     key: str
     state: SpaceApiKeyState
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ..., state: _Optional[_Union[SpaceApiKeyState, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ..., state: _Optional[_Union[SpaceApiKeyState, _Mapping]] = ...) -> None: ...
 
 class SpaceApiKeyState(_message.Message):
     __slots__ = ("phase", "reason")
