@@ -1348,6 +1348,14 @@ export declare type BackupRestore = Message<"qdrant.cloud.serverless.space.backu
    * @generated from field: google.protobuf.Timestamp deleted_at = 7;
    */
   deletedAt?: Timestamp | undefined;
+
+  /**
+   * The caller who initiated the backup restore.
+   * This is a read-only field and will be available after a backup restore is created.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller created_by = 8;
+   */
+  createdBy?: Caller | undefined;
 };
 
 export declare type BackupRestoreValid = BackupRestore;

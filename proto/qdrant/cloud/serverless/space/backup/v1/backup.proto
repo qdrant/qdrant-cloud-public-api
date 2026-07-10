@@ -728,6 +728,9 @@ message BackupRestore {
   BackupRestoreStatus status = 6 [(buf.validate.field).enum.defined_only = true];
   // The timestamp when the backup restore was deleted (or when deletion started).
   google.protobuf.Timestamp deleted_at = 7;
+  // The caller who initiated the backup restore.
+  // This is a read-only field and will be available after a backup restore is created.
+  common.v1.Caller created_by = 8;
 }
 
 // BackupRestoreStatus represents the current status of a backup restore.

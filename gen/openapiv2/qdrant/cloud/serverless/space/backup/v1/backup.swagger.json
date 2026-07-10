@@ -849,6 +849,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the backup restore was deleted (or when deletion started)."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who initiated the backup restore.\nThis is a read-only field and will be available after a backup restore is created."
         }
       },
       "description": "A BackupRestore represents the status of an in-place backup restore for a space.\nAll fields in this message are read-only."
