@@ -1283,6 +1283,14 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
    * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 11;
    */
   deletedBy?: Caller | undefined;
+
+  /**
+   * The timestamp when this backup schedule last created a backup.
+   * This is a read-only field and will be set after the schedule fires for the first time.
+   *
+   * @generated from field: optional google.protobuf.Timestamp last_fired_at = 14;
+   */
+  lastFiredAt?: Timestamp | undefined;
 };
 
 export declare type BackupScheduleValid = BackupSchedule;
