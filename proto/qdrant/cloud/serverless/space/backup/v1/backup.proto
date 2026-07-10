@@ -483,8 +483,8 @@ message CreateBackupScheduleRequest {
   BackupSchedule backup_schedule = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup_schedule.no_read_only_fields"
-    message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
-    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
+    message: "read-only fields (id, created_at, deleted_at, status, last_fired_at) must not be set on create"
+    expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0 && !has(this.backup_schedule.last_fired_at)"
   };
 }
 
@@ -708,6 +708,9 @@ message BackupSchedule {
   // The caller who initiated deletion of the backup schedule.
   // This is a read-only field and will be set when deleted_at is set.
   common.v1.Caller deleted_by = 11;
+  // The timestamp when this backup schedule last created a backup.
+  // This is a read-only field and will be set after the schedule fires for the first time.
+  optional google.protobuf.Timestamp last_fired_at = 14;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

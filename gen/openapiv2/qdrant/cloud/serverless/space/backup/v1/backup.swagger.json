@@ -642,6 +642,11 @@
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
               "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+            },
+            "lastFiredAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
             }
           },
           "description": "The actual backup schedule.",
@@ -702,6 +707,11 @@
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
               "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+            },
+            "lastFiredAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
             }
           },
           "description": "The actual backup schedule.",
@@ -928,6 +938,11 @@
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
           "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+        },
+        "lastFiredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
