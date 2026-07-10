@@ -1356,14 +1356,6 @@ export declare type BackupRestore = Message<"qdrant.cloud.serverless.space.backu
    * @generated from field: qdrant.cloud.common.v1.Caller created_by = 8;
    */
   createdBy?: Caller | undefined;
-
-  /**
-   * The caller who last updated the backup restore.
-   * This is a read-only field and will be set when backup restore metadata is updated.
-   *
-   * @generated from field: qdrant.cloud.common.v1.Caller last_updated_by = 9;
-   */
-  lastUpdatedBy?: Caller | undefined;
 };
 
 export declare type BackupRestoreValid = BackupRestore;

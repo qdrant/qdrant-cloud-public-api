@@ -313,7 +313,7 @@ class BackupSchedule(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., paused_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[BackupScheduleStatus, str]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ...) -> None: ...
 
 class BackupRestore(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "space_id", "backup_id", "status", "deleted_at", "created_by", "last_updated_by")
+    __slots__ = ("id", "created_at", "account_id", "space_id", "backup_id", "status", "deleted_at", "created_by")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -322,7 +322,6 @@ class BackupRestore(_message.Message):
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_FIELD_NUMBER: _ClassVar[int]
-    LAST_UPDATED_BY_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -331,5 +330,4 @@ class BackupRestore(_message.Message):
     status: BackupRestoreStatus
     deleted_at: _timestamp_pb2.Timestamp
     created_by: _common_pb2.Caller
-    last_updated_by: _common_pb2.Caller
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ...) -> None: ...

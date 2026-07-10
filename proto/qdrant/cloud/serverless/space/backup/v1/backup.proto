@@ -731,9 +731,6 @@ message BackupRestore {
   // The caller who initiated the backup restore.
   // This is a read-only field and will be available after a backup restore is created.
   common.v1.Caller created_by = 8;
-  // The caller who last updated the backup restore.
-  // This is a read-only field and will be set when backup restore metadata is updated.
-  common.v1.Caller last_updated_by = 9;
 }
 
 // BackupRestoreStatus represents the current status of a backup restore.
