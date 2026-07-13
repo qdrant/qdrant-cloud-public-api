@@ -1300,6 +1300,12 @@ type DeleteClusterRequest struct {
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// If set, the backups of this cluster will be deleted as well.
 	DeleteBackups *bool `protobuf:"varint,3,opt,name=delete_backups,json=deleteBackups,proto3,oneof" json:"delete_backups,omitempty"`
+	// If set to true, the cluster is removed from our records without waiting
+	// for the cloud-agent to confirm the deletion of the underlying resources.
+	// This is independent of delete_backups: backups are still governed by that
+	// flag regardless of this value.
+	// Defaults to false.
+	Force         *bool `protobuf:"varint,4,opt,name=force,proto3,oneof" json:"force,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1351,6 +1357,13 @@ func (x *DeleteClusterRequest) GetClusterId() string {
 func (x *DeleteClusterRequest) GetDeleteBackups() bool {
 	if x != nil && x.DeleteBackups != nil {
 		return *x.DeleteBackups
+	}
+	return false
+}
+
+func (x *DeleteClusterRequest) GetForce() bool {
+	if x != nil && x.Force != nil {
+		return *x.Force
 	}
 	return false
 }
@@ -4353,14 +4366,16 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\"\xc4\x01\n" +
 	"\x15UpdateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
-	"\x1cupdate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xa7\x01\n" +
+	"\x1cupdate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xcc\x01\n" +
 	"\x14DeleteClusterRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
-	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
-	"\x0f_delete_backups\"\x17\n" +
+	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01\x12\x19\n" +
+	"\x05force\x18\x04 \x01(\bH\x01R\x05force\x88\x01\x01B\x11\n" +
+	"\x0f_delete_backupsB\b\n" +
+	"\x06_force\"\x17\n" +
 	"\x15DeleteClusterResponse\"i\n" +
 	"\x15RestartClusterRequest\x12'\n" +
 	"\n" +

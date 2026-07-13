@@ -251,14 +251,16 @@ class UpdateClusterResponse(_message.Message):
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class DeleteClusterRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "delete_backups")
+    __slots__ = ("account_id", "cluster_id", "delete_backups", "force")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
     DELETE_BACKUPS_FIELD_NUMBER: _ClassVar[int]
+    FORCE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cluster_id: str
     delete_backups: bool
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., delete_backups: _Optional[bool] = ...) -> None: ...
+    force: bool
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., delete_backups: _Optional[bool] = ..., force: _Optional[bool] = ...) -> None: ...
 
 class DeleteClusterResponse(_message.Message):
     __slots__ = ()

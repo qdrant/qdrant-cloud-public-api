@@ -424,6 +424,12 @@ message DeleteClusterRequest {
   string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
   // If set, the backups of this cluster will be deleted as well.
   optional bool delete_backups = 3;
+  // If set to true, the cluster is removed from our records without waiting
+  // for the cloud-agent to confirm the deletion of the underlying resources.
+  // This is independent of delete_backups: backups are still governed by that
+  // flag regardless of this value.
+  // Defaults to false.
+  optional bool force = 4;
 }
 
 // DeleteClusterResponse is the response from the DeleteCluster function
