@@ -600,7 +600,7 @@
         "parameters": [
           {
             "name": "mfaMethod.externalId",
-            "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field.",
+            "description": "Authentication method identifier for the MFA information.\nThis is a read-only field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -660,7 +660,7 @@
         "parameters": [
           {
             "name": "mfaMethod.externalId",
-            "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field.",
+            "description": "Authentication method identifier for the MFA information.\nThis is a read-only field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1468,7 +1468,7 @@
       "properties": {
         "externalId": {
           "type": "string",
-          "description": "Authentication method identifier for the MFA information (in GUID format).\nThis is a read-only field."
+          "description": "Authentication method identifier for the MFA information.\nThis is a read-only field."
         },
         "type": {
           "type": "string",

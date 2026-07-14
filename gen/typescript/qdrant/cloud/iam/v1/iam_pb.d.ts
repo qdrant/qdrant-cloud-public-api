@@ -1595,7 +1595,7 @@ export declare const UserConsentSchema: GenMessage<UserConsent, {validType: User
  */
 export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod"> & {
   /**
-   * Authentication method identifier for the MFA information (in GUID format).
+   * Authentication method identifier for the MFA information.
    * This is a read-only field.
    *
    * @generated from field: string external_id = 1;

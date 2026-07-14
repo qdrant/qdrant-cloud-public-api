@@ -2950,7 +2950,7 @@ func (x *UserConsent) GetIsAccepted() bool {
 // User MFA Method represents the enrollment for a multi-factor authentication method.
 type UserMfaMethod struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Authentication method identifier for the MFA information (in GUID format).
+	// Authentication method identifier for the MFA information.
 	// This is a read-only field.
 	ExternalId string `protobuf:"bytes,1,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
 	// Specifies the type of MFA the user enrolled in.
@@ -3157,9 +3157,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"Permission\x12\x1d\n" +
 	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12(\n" +
 	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\bcategory\x88\x01\x01B\v\n" +
-	"\t_category\"\x9b\a\n" +
-	"\x04Role\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\t_category\"\xa5\a\n" +
+	"\x04Role\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12'\n" +
@@ -3214,9 +3214,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at\"\x97\x04\n" +
-	"\rUserMfaMethod\x12)\n" +
-	"\vexternal_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
+	"\x11_last_modified_at\"\x96\x04\n" +
+	"\rUserMfaMethod\x12(\n" +
+	"\vexternal_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"externalId\x12D\n" +
 	"\x04type\x18\x02 \x01(\tB0\xbaH-r+R\x04totpR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x129\n" +
 	"\n" +
