@@ -231,6 +231,13 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "force",
+            "description": "If set to true, the cluster is removed from our records without waiting\nfor the cloud-agent to confirm the deletion of the underlying resources.\nThis is independent of delete_backups: backups are still governed by that\nflag regardless of this value.\nThis is supported for hybrid cloud clusters only and is ignored for managed\ncloud clusters. Because the deletion is not confirmed by the cloud-agent,\nany leftover resources in the Kubernetes cluster must be cleaned up manually.\nDefaults to false.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
