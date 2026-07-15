@@ -240,6 +240,8 @@ type ListBackupsRequest struct {
 	// The identifier of the schedule (in GUID format).
 	// When this field is set, only backups triggered by the backup schedule are returned.
 	BackupScheduleId *string `protobuf:"bytes,3,opt,name=backup_schedule_id,json=backupScheduleId,proto3,oneof" json:"backup_schedule_id,omitempty"`
+	// When this field is set, only backups for the given collection are returned.
+	CollectionName *string `protobuf:"bytes,12,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
 	// Maximum number of items to return.
 	// If not specified, all items are returned.
 	PageSize *int32 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -299,6 +301,13 @@ func (x *ListBackupsRequest) GetSpaceId() string {
 func (x *ListBackupsRequest) GetBackupScheduleId() string {
 	if x != nil && x.BackupScheduleId != nil {
 		return *x.BackupScheduleId
+	}
+	return ""
+}
+
+func (x *ListBackupsRequest) GetCollectionName() string {
+	if x != nil && x.CollectionName != nil {
+		return *x.CollectionName
 	}
 	return ""
 }
@@ -1521,9 +1530,13 @@ type Backup struct {
 	LastUpdatedBy *v1.Caller `protobuf:"bytes,14,opt,name=last_updated_by,json=lastUpdatedBy,proto3" json:"last_updated_by,omitempty"`
 	// The caller who initiated deletion of the backup.
 	// This is a read-only field and will be set when deleted_at is set.
-	DeletedBy     *v1.Caller `protobuf:"bytes,15,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	DeletedBy *v1.Caller `protobuf:"bytes,15,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
+	// The name of the collection to back up.
+	// When unset, the entire space is backed up.
+	// When set, only the specified collection is backed up.
+	CollectionName *string `protobuf:"bytes,16,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *Backup) Reset() {
@@ -1654,6 +1667,13 @@ func (x *Backup) GetDeletedBy() *v1.Caller {
 	return nil
 }
 
+func (x *Backup) GetCollectionName() string {
+	if x != nil && x.CollectionName != nil {
+		return *x.CollectionName
+	}
+	return ""
+}
+
 // Represents the space details associated with a backup.
 // The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
 // The configuration field is immutable and represents the values at backup time.
@@ -1780,9 +1800,13 @@ type BackupSchedule struct {
 	DeletedBy *v1.Caller `protobuf:"bytes,11,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	// The timestamp when this backup schedule last created a backup.
 	// This is a read-only field and will be set after the schedule fires for the first time.
-	LastFiredAt   *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=last_fired_at,json=lastFiredAt,proto3,oneof" json:"last_fired_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LastFiredAt *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=last_fired_at,json=lastFiredAt,proto3,oneof" json:"last_fired_at,omitempty"`
+	// The name of the collection to back up.
+	// When unset, the entire space is backed up.
+	// When set, only the specified collection is backed up.
+	CollectionName *string `protobuf:"bytes,15,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *BackupSchedule) Reset() {
@@ -1913,6 +1937,13 @@ func (x *BackupSchedule) GetLastFiredAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *BackupSchedule) GetCollectionName() string {
+	if x != nil && x.CollectionName != nil {
+		return *x.CollectionName
+	}
+	return ""
+}
+
 // A BackupRestore represents the status of an in-place backup restore for a space.
 // All fields in this message are read-only.
 type BackupRestore struct {
@@ -2028,19 +2059,22 @@ var File_qdrant_cloud_serverless_space_backup_v1_backup_proto protoreflect.FileD
 
 const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"4qdrant/cloud/serverless/space/backup/v1/backup.proto\x12'qdrant.cloud.serverless.space.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/serverless/space/v1/space.proto\"\xc0\x02\n" +
+	"4qdrant/cloud/serverless/space/backup/v1/backup.proto\x12'qdrant.cloud.serverless.space.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/serverless/space/v1/space.proto\"\xad\x05\n" +
 	"\x12ListBackupsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12(\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\aspaceId\x88\x01\x01\x12;\n" +
 	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x01R\x10backupScheduleId\x88\x01\x01\x12,\n" +
+	"\x0fcollection_name\x18\f \x01(\tH\x02R\x0ecollectionName\x88\x01\x01\x12,\n" +
 	"\tpage_size\x18\n" +
 	" \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x02R\bpageSize\x88\x01\x01\x12+\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x03R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
-	"page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\tpageToken\x88\x01\x01B\v\n" +
+	"page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\tpageToken\x88\x01\x01:\xa8\x02\xbaH\xa4\x02\x1a\xa1\x02\n" +
+	"\x1clist_backups.collection_name\x12ccollection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)\x1a\x9b\x01!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))B\v\n" +
 	"\t_space_idB\x15\n" +
-	"\x13_backup_schedule_idB\f\n" +
+	"\x13_backup_schedule_idB\x12\n" +
+	"\x10_collection_nameB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
 	"\v_page_token\"\xe2\x01\n" +
@@ -2140,7 +2174,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xf1\b\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xd1\v\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2162,16 +2196,19 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"created_by\x18\r \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tcreatedBy\x12F\n" +
 	"\x0flast_updated_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\rlastUpdatedBy\x12=\n" +
 	"\n" +
-	"deleted_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy:\xff\x01\xbaH\xfb\x01\x1a\xa2\x01\n" +
+	"deleted_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12,\n" +
+	"\x0fcollection_name\x18\x10 \x01(\tH\x02R\x0ecollectionName\x88\x01\x01:\x9d\x04\xbaH\x99\x04\x1a\xa2\x01\n" +
 	"\tbackup.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
-	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)B\x15\n" +
+	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)\x1a\x9b\x02\n" +
+	"\x16backup.collection_name\x12ccollection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)\x1a\x9b\x01!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
-	"\x11_retention_period\"\x97\x02\n" +
+	"\x11_retention_periodB\x12\n" +
+	"\x10_collection_name\"\x97\x02\n" +
 	"\tSpaceInfo\x12/\n" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12b\n" +
-	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xbd\t\n" +
+	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xa6\f\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2193,12 +2230,15 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	" \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\rlastUpdatedBy\x12=\n" +
 	"\n" +
 	"deleted_by\x18\v \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12C\n" +
-	"\rlast_fired_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampH\x02R\vlastFiredAt\x88\x01\x01:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
-	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
+	"\rlast_fired_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampH\x02R\vlastFiredAt\x88\x01\x01\x12,\n" +
+	"\x0fcollection_name\x18\x0f \x01(\tH\x03R\x0ecollectionName\x88\x01\x01:\xd9\x03\xbaH\xd5\x03\x1a\xab\x01\n" +
+	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xa4\x02\n" +
+	"\x1fbackup_schedule.collection_name\x12ccollection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)\x1a\x9b\x01!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))B\x13\n" +
 	"\x11_retention_periodB\f\n" +
 	"\n" +
 	"_paused_atB\x10\n" +
-	"\x0e_last_fired_at\"\xb3\x03\n" +
+	"\x0e_last_fired_atB\x12\n" +
+	"\x10_collection_name\"\xb3\x03\n" +
 	"\rBackupRestore\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
