@@ -1304,6 +1304,9 @@ type DeleteClusterRequest struct {
 	// for the cloud-agent to confirm the deletion of the underlying resources.
 	// This is independent of delete_backups: backups are still governed by that
 	// flag regardless of this value.
+	// This is supported for hybrid cloud clusters only and is ignored for managed
+	// cloud clusters. Because the deletion is not confirmed by the cloud-agent,
+	// any leftover resources in the Kubernetes cluster must be cleaned up manually.
 	// Defaults to false.
 	Force         *bool `protobuf:"varint,4,opt,name=force,proto3,oneof" json:"force,omitempty"`
 	unknownFields protoimpl.UnknownFields

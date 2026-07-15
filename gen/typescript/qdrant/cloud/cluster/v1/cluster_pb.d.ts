@@ -399,6 +399,9 @@ export declare type DeleteClusterRequest = Message<"qdrant.cloud.cluster.v1.Dele
    * for the cloud-agent to confirm the deletion of the underlying resources.
    * This is independent of delete_backups: backups are still governed by that
    * flag regardless of this value.
+   * This is supported for hybrid cloud clusters only and is ignored for managed
+   * cloud clusters. Because the deletion is not confirmed by the cloud-agent,
+   * any leftover resources in the Kubernetes cluster must be cleaned up manually.
    * Defaults to false.
    *
    * @generated from field: optional bool force = 4;
