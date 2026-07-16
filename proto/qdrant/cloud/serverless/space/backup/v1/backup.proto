@@ -301,6 +301,13 @@ message ListBackupsRequest {
   // The identifier of the schedule (in GUID format).
   // When this field is set, only backups triggered by the backup schedule are returned.
   optional string backup_schedule_id = 3 [(buf.validate.field).string = {uuid: true}];
+  // When this field is set, only backups for the given collection are returned.
+  optional string collection_name = 12;
+  option (buf.validate.message).cel = {
+    id: "list_backups.collection_name"
+    message: "collection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)"
+    expression: "!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))"
+  };
   // Maximum number of items to return.
   // If not specified, all items are returned.
   optional int32 page_size = 10 [(buf.validate.field).int32 = {
@@ -614,6 +621,15 @@ message Backup {
   // The caller who initiated deletion of the backup.
   // This is a read-only field and will be set when deleted_at is set.
   common.v1.Caller deleted_by = 15;
+  // The name of the collection to back up.
+  // When unset, the entire space is backed up.
+  // When set, only the specified collection is backed up.
+  optional string collection_name = 16;
+  option (buf.validate.message).cel = {
+    id: "backup.collection_name"
+    message: "collection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)"
+    expression: "!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))"
+  };
 }
 
 // Represents the space details associated with a backup.
@@ -711,6 +727,15 @@ message BackupSchedule {
   // The timestamp when this backup schedule last created a backup.
   // This is a read-only field and will be set after the schedule fires for the first time.
   optional google.protobuf.Timestamp last_fired_at = 14;
+  // The name of the collection to back up.
+  // When unset, the entire space is backed up.
+  // When set, only the specified collection is backed up.
+  optional string collection_name = 15;
+  option (buf.validate.message).cel = {
+    id: "backup_schedule.collection_name"
+    message: "collection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)"
+    expression: "!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))"
+  };
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

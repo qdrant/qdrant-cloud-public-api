@@ -255,6 +255,13 @@
             "type": "string"
           },
           {
+            "name": "collectionName",
+            "description": "When this field is set, only backups for the given collection are returned.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "pageSize",
             "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
             "in": "query",
@@ -578,6 +585,10 @@
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
               "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
             }
           },
           "description": "The actual backup.",
@@ -647,6 +658,10 @@
               "type": "string",
               "format": "date-time",
               "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
             }
           },
           "description": "The actual backup schedule.",
@@ -712,6 +727,10 @@
               "type": "string",
               "format": "date-time",
               "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
             }
           },
           "description": "The actual backup schedule.",
@@ -823,6 +842,10 @@
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
           "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
         }
       },
       "description": "A Backup represents a backup of a Qdrant serverless space."
@@ -943,6 +966,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."

@@ -44,6 +44,13 @@ export declare type ListBackupsRequest = Message<"qdrant.cloud.serverless.space.
   backupScheduleId?: string | undefined;
 
   /**
+   * When this field is set, only backups for the given collection are returned.
+   *
+   * @generated from field: optional string collection_name = 12;
+   */
+  collectionName?: string | undefined;
+
+  /**
    * Maximum number of items to return.
    * If not specified, all items are returned.
    *
@@ -955,6 +962,15 @@ export declare type Backup = Message<"qdrant.cloud.serverless.space.backup.v1.Ba
    * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 15;
    */
   deletedBy?: Caller | undefined;
+
+  /**
+   * The name of the collection to back up.
+   * When unset, the entire space is backed up.
+   * When set, only the specified collection is backed up.
+   *
+   * @generated from field: optional string collection_name = 16;
+   */
+  collectionName?: string | undefined;
 };
 
 /**
@@ -1077,6 +1093,15 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
    * @generated from field: qdrant.cloud.common.v1.Caller deleted_by = 15;
    */
   deletedBy?: CallerValid | undefined;
+
+  /**
+   * The name of the collection to back up.
+   * When unset, the entire space is backed up.
+   * When set, only the specified collection is backed up.
+   *
+   * @generated from field: optional string collection_name = 16;
+   */
+  collectionName?: string | undefined;
 };
 
 /**
@@ -1291,6 +1316,15 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
    * @generated from field: optional google.protobuf.Timestamp last_fired_at = 14;
    */
   lastFiredAt?: Timestamp | undefined;
+
+  /**
+   * The name of the collection to back up.
+   * When unset, the entire space is backed up.
+   * When set, only the specified collection is backed up.
+   *
+   * @generated from field: optional string collection_name = 15;
+   */
+  collectionName?: string | undefined;
 };
 
 export declare type BackupScheduleValid = BackupSchedule;
