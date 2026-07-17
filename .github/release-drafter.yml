@@ -1,23 +1,22 @@
-name-template: 'v$RESOLVED_VERSION'
-tag-template: 'v$RESOLVED_VERSION'
-version-resolver:
-  default: minor
 categories:
-  - title: '🚀 Features'
-    labels:
-      - 'feature'
-      - 'feat'
-      - 'enhancement'
-  - title: '🐛 Bug Fixes'
-    labels:
-      - 'fix'
-      - 'bugfix'
-      - 'bug'
-  - title: '🧰 Maintenance'
-    labels:
-      - 'chore'
-      - 'dependencies'
+  - title: "🚀 Features"
+    when:
+      labels:
+        - "feature"
+        - "feat"
+        - "enhancement"
+  - title: "🐛 Bug Fixes"
+    when:
+      labels:
+        - "fix"
+        - "bugfix"
+        - "bug"
+  - title: "🧰 Maintenance"
+    when:
+      labels:
+        - "chore"
+        - "dependencies"
 template: |
-  # What’s Changed
+  # What's Changed
 
   $CHANGES
