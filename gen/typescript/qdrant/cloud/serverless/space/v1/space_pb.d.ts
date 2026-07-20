@@ -813,6 +813,24 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
    * @generated from field: repeated string allowed_ip_source_ranges = 11;
    */
   allowedIpSourceRanges: string[];
+
+  /**
+   * Custom origins (scheme + host, e.g. "https://app.example.com") from which
+   * browser-based clients are allowed to call the space, via CORS.
+   *
+   * Optional. Leave empty if the space will only be accessed server-to-server
+   * (e.g. via SDK) rather than from a browser — no Origin header means CORS
+   * does not apply and this list is not used.
+   *
+   * Each entry must be a valid HTTP(S) origin: scheme + host + optional port,
+   * with no path, query, or trailing slash (e.g. "https://foo.com", not
+   * "https://foo.com/" or "https://foo.com/app").
+   *
+   * Max 10 origins per space. Duplicates are not allowed.
+   *
+   * @generated from field: repeated string allowed_origins = 12;
+   */
+  allowedOrigins: string[];
 };
 
 export declare type SpaceConfigurationValid = SpaceConfiguration;
