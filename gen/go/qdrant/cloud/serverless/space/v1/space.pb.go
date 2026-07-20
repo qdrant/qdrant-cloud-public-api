@@ -1047,8 +1047,21 @@ type SpaceConfiguration struct {
 	// This is an optional field.
 	// The CIDRs supports IPv4 only.
 	AllowedIpSourceRanges []string `protobuf:"bytes,11,rep,name=allowed_ip_source_ranges,json=allowedIpSourceRanges,proto3" json:"allowed_ip_source_ranges,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Custom origins (scheme + host, e.g. "https://app.example.com") from which
+	// browser-based clients are allowed to call the space, via CORS.
+	//
+	// Optional. Leave empty if the space will only be accessed server-to-server
+	// (e.g. via SDK) rather than from a browser — no Origin header means CORS
+	// does not apply and this list is not used.
+	//
+	// Each entry must be a valid HTTP(S) origin: scheme + host + optional port,
+	// with no path, query, or trailing slash (e.g. "https://foo.com", not
+	// "https://foo.com/" or "https://foo.com/app").
+	//
+	// Max 10 origins per space. Duplicates are not allowed.
+	AllowedOrigins []string `protobuf:"bytes,12,rep,name=allowed_origins,json=allowedOrigins,proto3" json:"allowed_origins,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SpaceConfiguration) Reset() {
@@ -1091,6 +1104,13 @@ func (x *SpaceConfiguration) GetLastModifiedAt() *timestamppb.Timestamp {
 func (x *SpaceConfiguration) GetAllowedIpSourceRanges() []string {
 	if x != nil {
 		return x.AllowedIpSourceRanges
+	}
+	return nil
+}
+
+func (x *SpaceConfiguration) GetAllowedOrigins() []string {
+	if x != nil {
+		return x.AllowedOrigins
 	}
 	return nil
 }
@@ -1320,10 +1340,12 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12B\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateR\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\xa4\x01\n" +
+	"\x16_cost_allocation_label\"\xb8\x02\n" +
 	"\x12SpaceConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12H\n" +
-	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\"\xd6\x01\n" +
+	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
+	"\x0fallowed_origins\x18\f \x03(\tBh\xbaHe\x92\x01b\x10\n" +
+	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\"\xd6\x01\n" +
 	"\n" +
 	"SpaceState\x12Q\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
@@ -1363,7 +1385,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\bspace_id\x12\bspace.id\x1a\x05space\"\x05space\xca\xf3\x18e\b\x02\x12\x10serverless-space\"\freq.space.id*A/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xd6\x02\n" +
 	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\xd9\x01\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18_\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xd3\x01\n" +
-	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x01B\xb2\x02\n" +
+	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x02B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 

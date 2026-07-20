@@ -14,7 +14,7 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 1
+    minor: 2
     patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -419,6 +419,29 @@ message SpaceConfiguration {
   repeated string allowed_ip_source_ranges = 11 [(buf.validate.field).repeated = {
     max_items: 40
     items: {string: {ipv4_prefix: true}}
+  }];
+  // Custom origins (scheme + host, e.g. "https://app.example.com") from which
+  // browser-based clients are allowed to call the space, via CORS.
+  //
+  // Optional. Leave empty if the space will only be accessed server-to-server
+  // (e.g. via SDK) rather than from a browser — no Origin header means CORS
+  // does not apply and this list is not used.
+  //
+  // Each entry must be a valid HTTP(S) origin: scheme + host + optional port,
+  // with no path, query, or trailing slash (e.g. "https://foo.com", not
+  // "https://foo.com/" or "https://foo.com/app").
+  //
+  // Max 10 origins per space. Duplicates are not allowed.
+  repeated string allowed_origins = 12 [(buf.validate.field).repeated = {
+    max_items: 10
+    unique: true
+    items: {
+      string: {
+        min_len: 1
+        max_len: 253
+        pattern: "^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$"
+      }
+    }
   }];
 }
 
