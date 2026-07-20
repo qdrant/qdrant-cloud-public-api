@@ -3157,9 +3157,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"Permission\x12\x1d\n" +
 	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12(\n" +
 	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\bcategory\x88\x01\x01B\v\n" +
-	"\t_category\"\xa5\a\n" +
-	"\x04Role\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
+	"\t_category\"\x9b\a\n" +
+	"\x04Role\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12'\n" +
