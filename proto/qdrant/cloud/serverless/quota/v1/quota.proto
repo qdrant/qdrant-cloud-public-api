@@ -41,7 +41,6 @@ message AccountQuota {
   uint64 max_collections_per_space = 3 [(buf.validate.field).uint64.gte = 0];
   // Platform default storage ceiling applied to each new space. 0 = unlimited.
   uint64 platform_max_storage_bytes_per_space = 4 [(buf.validate.field).uint64.gte = 0];
-  // Aggregated usage across all spaces in the account.
   // Number of serverless spaces currently used.
   uint64 used_spaces = 5 [(buf.validate.field).uint64.gte = 0];
   // Total storage used across all spaces, in bytes.

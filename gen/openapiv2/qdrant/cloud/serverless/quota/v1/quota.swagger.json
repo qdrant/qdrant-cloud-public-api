@@ -103,7 +103,7 @@
         "usedSpaces": {
           "type": "string",
           "format": "uint64",
-          "description": "Aggregated usage across all spaces in the account.\nNumber of serverless spaces currently used."
+          "description": "Number of serverless spaces currently used."
         },
         "usedStorageBytes": {
           "type": "string",

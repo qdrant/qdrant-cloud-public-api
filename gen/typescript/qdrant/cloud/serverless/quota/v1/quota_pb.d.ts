@@ -68,7 +68,6 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   platformMaxStorageBytesPerSpace: bigint;
 
   /**
-   * Aggregated usage across all spaces in the account.
    * Number of serverless spaces currently used.
    *
    * @generated from field: uint64 used_spaces = 5;

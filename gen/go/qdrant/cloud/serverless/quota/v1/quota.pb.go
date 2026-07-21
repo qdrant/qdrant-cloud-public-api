@@ -82,7 +82,6 @@ type AccountQuota struct {
 	MaxCollectionsPerSpace uint64 `protobuf:"varint,3,opt,name=max_collections_per_space,json=maxCollectionsPerSpace,proto3" json:"max_collections_per_space,omitempty"`
 	// Platform default storage ceiling applied to each new space. 0 = unlimited.
 	PlatformMaxStorageBytesPerSpace uint64 `protobuf:"varint,4,opt,name=platform_max_storage_bytes_per_space,json=platformMaxStorageBytesPerSpace,proto3" json:"platform_max_storage_bytes_per_space,omitempty"`
-	// Aggregated usage across all spaces in the account.
 	// Number of serverless spaces currently used.
 	UsedSpaces uint64 `protobuf:"varint,5,opt,name=used_spaces,json=usedSpaces,proto3" json:"used_spaces,omitempty"`
 	// Total storage used across all spaces, in bytes.
