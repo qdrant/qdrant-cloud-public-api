@@ -443,6 +443,19 @@ message SpaceConfiguration {
       }
     }
   }];
+
+  // Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
+  // This is a read-only field. A value of 0 means unlimited.
+  uint64 platform_max_storage_bytes = 13 [(buf.validate.field).uint64.gte = 0];
+
+  // Optional customer-defined storage cap, used for cost control.
+  // When set, it must not exceed `platform_max_storage_bytes`.
+  // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+  optional uint64 max_storage_bytes = 14 [(buf.validate.field).uint64.gte = 0];
+
+  // Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
+  // This is a read-only field. A value of 0 means unlimited.
+  uint64 max_collections_per_space = 15 [(buf.validate.field).uint64.gte = 0];
 }
 
 // SpaceStatePhase defines the operational phases of a Qdrant serverless space.

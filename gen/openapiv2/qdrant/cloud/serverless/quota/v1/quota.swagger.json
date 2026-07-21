@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/quota/v1/quota.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "QuotaService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/quotas": {
+      "get": {
+        "summary": "Returns account platform limits and aggregated usage across spaces.\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "QuotaService_GetQuotas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetQuotasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "QuotaService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AccountQuota": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format)."
+        },
+        "maxSpaces": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform limit: maximum serverless spaces. 0 = unlimited."
+        },
+        "maxCollectionsPerSpace": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform limit: maximum collections per space (copied into each Space.configuration)."
+        },
+        "platformMaxStorageBytesPerSpace": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform default storage ceiling applied to each new space. 0 = unlimited."
+        },
+        "usedSpaces": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Aggregated usage across all spaces in the account.\nNumber of serverless spaces currently used."
+        },
+        "usedStorageBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Total storage used across all spaces, in bytes."
+        }
+      },
+      "description": "AccountQuota represents the serverless platform limits and aggregated usage for an account."
+    },
+    "v1GetQuotasResponse": {
+      "type": "object",
+      "properties": {
+        "quota": {
+          "$ref": "#/definitions/v1AccountQuota",
+          "description": "The account's platform limits and aggregated usage."
+        }
+      },
+      "description": "GetQuotasResponse is the response message for the GetQuotas method."
+    }
+  }
+}

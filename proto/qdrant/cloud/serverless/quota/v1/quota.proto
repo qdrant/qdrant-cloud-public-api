@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.quota.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
+// Per-space storage caps live on Space.configuration (UpdateSpace).
+service QuotaService {
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+
+  // Returns account platform limits and aggregated usage across spaces.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc GetQuotas(GetQuotasRequest) returns (GetQuotasResponse) {
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_spaces";
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/quotas"};
+  }
+}
+
+// GetQuotasRequest is the request message for the GetQuotas method.
+message GetQuotasRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// AccountQuota represents the serverless platform limits and aggregated usage for an account.
+message AccountQuota {
+  // The identifier of the account (in GUID format).
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // Platform limit: maximum serverless spaces. 0 = unlimited.
+  uint64 max_spaces = 2 [(buf.validate.field).uint64.gte = 0];
+  // Platform limit: maximum collections per space (copied into each Space.configuration).
+  uint64 max_collections_per_space = 3 [(buf.validate.field).uint64.gte = 0];
+  // Platform default storage ceiling applied to each new space. 0 = unlimited.
+  uint64 platform_max_storage_bytes_per_space = 4 [(buf.validate.field).uint64.gte = 0];
+  // Aggregated usage across all spaces in the account.
+  // Number of serverless spaces currently used.
+  uint64 used_spaces = 5 [(buf.validate.field).uint64.gte = 0];
+  // Total storage used across all spaces, in bytes.
+  uint64 used_storage_bytes = 6 [(buf.validate.field).uint64.gte = 0];
+}
+
+// GetQuotasResponse is the response message for the GetQuotas method.
+message GetQuotasResponse {
+  // The account's platform limits and aggregated usage.
+  AccountQuota quota = 1;
+}

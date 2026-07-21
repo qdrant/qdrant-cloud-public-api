@@ -1160,6 +1160,21 @@
             "type": "string"
           },
           "description": "Custom origins (scheme + host, e.g. \"https://app.example.com\") from which\nbrowser-based clients are allowed to call the space, via CORS.\n\nOptional. Leave empty if the space will only be accessed server-to-server\n(e.g. via SDK) rather than from a browser — no Origin header means CORS\ndoes not apply and this list is not used.\n\nEach entry must be a valid HTTP(S) origin: scheme + host + optional port,\nwith no path, query, or trailing slash (e.g. \"https://foo.com\", not\n\"https://foo.com/\" or \"https://foo.com/app\").\n\nMax 10 origins per space. Duplicates are not allowed."
+        },
+        "platformMaxStorageBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+        },
+        "maxStorageBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional customer-defined storage cap, used for cost control.\nWhen set, it must not exceed `platform_max_storage_bytes`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
+        },
+        "maxCollectionsPerSpace": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."

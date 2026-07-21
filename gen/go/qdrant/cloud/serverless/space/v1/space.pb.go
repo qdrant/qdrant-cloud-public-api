@@ -1060,8 +1060,18 @@ type SpaceConfiguration struct {
 	//
 	// Max 10 origins per space. Duplicates are not allowed.
 	AllowedOrigins []string `protobuf:"bytes,12,rep,name=allowed_origins,json=allowedOrigins,proto3" json:"allowed_origins,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	PlatformMaxStorageBytes uint64 `protobuf:"varint,13,opt,name=platform_max_storage_bytes,json=platformMaxStorageBytes,proto3" json:"platform_max_storage_bytes,omitempty"`
+	// Optional customer-defined storage cap, used for cost control.
+	// When set, it must not exceed `platform_max_storage_bytes`.
+	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+	MaxStorageBytes *uint64 `protobuf:"varint,14,opt,name=max_storage_bytes,json=maxStorageBytes,proto3,oneof" json:"max_storage_bytes,omitempty"`
+	// Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	MaxCollectionsPerSpace uint64 `protobuf:"varint,15,opt,name=max_collections_per_space,json=maxCollectionsPerSpace,proto3" json:"max_collections_per_space,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *SpaceConfiguration) Reset() {
@@ -1113,6 +1123,27 @@ func (x *SpaceConfiguration) GetAllowedOrigins() []string {
 		return x.AllowedOrigins
 	}
 	return nil
+}
+
+func (x *SpaceConfiguration) GetPlatformMaxStorageBytes() uint64 {
+	if x != nil {
+		return x.PlatformMaxStorageBytes
+	}
+	return 0
+}
+
+func (x *SpaceConfiguration) GetMaxStorageBytes() uint64 {
+	if x != nil && x.MaxStorageBytes != nil {
+		return *x.MaxStorageBytes
+	}
+	return 0
+}
+
+func (x *SpaceConfiguration) GetMaxCollectionsPerSpace() uint64 {
+	if x != nil {
+		return x.MaxCollectionsPerSpace
+	}
+	return 0
 }
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.
@@ -1340,12 +1371,16 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12B\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateR\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\xb8\x02\n" +
+	"\x16_cost_allocation_label\"\x92\x04\n" +
 	"\x12SpaceConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
 	"\x0fallowed_origins\x18\f \x03(\tBh\xbaHe\x92\x01b\x10\n" +
-	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\"\xd6\x01\n" +
+	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12D\n" +
+	"\x1aplatform_max_storage_bytes\x18\r \x01(\x04B\a\xbaH\x042\x02(\x00R\x17platformMaxStorageBytes\x128\n" +
+	"\x11max_storage_bytes\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\x0fmaxStorageBytes\x88\x01\x01\x12B\n" +
+	"\x19max_collections_per_space\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpaceB\x14\n" +
+	"\x12_max_storage_bytes\"\xd6\x01\n" +
 	"\n" +
 	"SpaceState\x12Q\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
@@ -1478,6 +1513,7 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_init() {
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[10].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[15].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
