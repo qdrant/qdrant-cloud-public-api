@@ -587,7 +587,17 @@ type DeleteBackupRequest struct {
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// The identifier of the backup (in GUID format).
 	// This is a required field.
-	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	BackupId string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	// If set to true, the backup is removed from our records without waiting
+	// for the cloud-agent to confirm the deletion of the underlying resources.
+	// This is useful to clear leftover or stranded backups that can no longer be
+	// deleted through the normal flow. Because the deletion is not confirmed by
+	// the cloud-agent, any leftover resources in the object storage must be
+	// cleaned up manually.
+	// This is supported for hybrid cloud clusters only and is ignored for managed
+	// cloud clusters.
+	// Defaults to false.
+	Force         *bool `protobuf:"varint,3,opt,name=force,proto3,oneof" json:"force,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -634,6 +644,13 @@ func (x *DeleteBackupRequest) GetBackupId() string {
 		return x.BackupId
 	}
 	return ""
+}
+
+func (x *DeleteBackupRequest) GetForce() bool {
+	if x != nil && x.Force != nil {
+		return *x.Force
+	}
+	return false
 }
 
 // DeleteBackupResponse is the response from the DeleteBackup function.
@@ -2106,11 +2123,13 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xb0\x03\xbaH\xac\x03\x1a\xa9\x03\n" +
 	"!create_backup.no_read_only_fields\x12\x88\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xf8\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"e\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x8a\x01\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
-	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"\x16\n" +
+	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12\x19\n" +
+	"\x05force\x18\x03 \x01(\bH\x00R\x05force\x88\x01\x01B\b\n" +
+	"\x06_force\"\x16\n" +
 	"\x14DeleteBackupResponse\"\xf9\x01\n" +
 	"\x19ListBackupRestoresRequest\x12'\n" +
 	"\n" +
@@ -2453,6 +2472,7 @@ func file_qdrant_cloud_cluster_backup_v1_backup_proto_init() {
 	}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[1].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12].OneofWrappers = []any{}

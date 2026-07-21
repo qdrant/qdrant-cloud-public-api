@@ -291,6 +291,21 @@ export declare type DeleteBackupRequest = Message<"qdrant.cloud.cluster.backup.v
    * @generated from field: string backup_id = 2;
    */
   backupId: string;
+
+  /**
+   * If set to true, the backup is removed from our records without waiting
+   * for the cloud-agent to confirm the deletion of the underlying resources.
+   * This is useful to clear leftover or stranded backups that can no longer be
+   * deleted through the normal flow. Because the deletion is not confirmed by
+   * the cloud-agent, any leftover resources in the object storage must be
+   * cleaned up manually.
+   * This is supported for hybrid cloud clusters only and is ignored for managed
+   * cloud clusters.
+   * Defaults to false.
+   *
+   * @generated from field: optional bool force = 3;
+   */
+  force?: boolean | undefined;
 };
 
 export declare type DeleteBackupRequestValid = DeleteBackupRequest;

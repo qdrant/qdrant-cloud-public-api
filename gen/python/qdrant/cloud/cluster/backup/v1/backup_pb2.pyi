@@ -115,12 +115,14 @@ class CreateBackupResponse(_message.Message):
     def __init__(self, backup: _Optional[_Union[Backup, _Mapping]] = ...) -> None: ...
 
 class DeleteBackupRequest(_message.Message):
-    __slots__ = ("account_id", "backup_id")
+    __slots__ = ("account_id", "backup_id", "force")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     BACKUP_ID_FIELD_NUMBER: _ClassVar[int]
+    FORCE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     backup_id: str
-    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ...) -> None: ...
+    force: bool
+    def __init__(self, account_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., force: _Optional[bool] = ...) -> None: ...
 
 class DeleteBackupResponse(_message.Message):
     __slots__ = ()
