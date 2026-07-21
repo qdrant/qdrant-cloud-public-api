@@ -1436,6 +1436,19 @@ export enum BackupStatus {
    * @generated from enum value: BACKUP_STATUS_NOT_FOUND = 6;
    */
   NOT_FOUND = 6,
+
+  /**
+   * The agent has not reported the backup's status for longer than the
+   * staleness window (~5 min), so its real state cannot be trusted. The
+   * region is effectively unreachable. Distinct from
+   * BACKUP_STATUS_UNSPECIFIED, which means the status is simply not set.
+   * Consumers gate actions such as force-delete on this value.
+   * This is only surfaced for hybrid cloud clusters; managed cloud backups
+   * never report this status.
+   *
+   * @generated from enum value: BACKUP_STATUS_UNKNOWN = 7;
+   */
+  UNKNOWN = 7,
 }
 
 /**

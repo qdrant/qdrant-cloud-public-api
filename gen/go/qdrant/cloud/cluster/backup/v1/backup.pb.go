@@ -47,6 +47,14 @@ const (
 	BackupStatus_BACKUP_STATUS_FAILED_TO_SYNC BackupStatus = 5
 	// The backup was expected but not found in the cluster's region.
 	BackupStatus_BACKUP_STATUS_NOT_FOUND BackupStatus = 6
+	// The agent has not reported the backup's status for longer than the
+	// staleness window (~5 min), so its real state cannot be trusted. The
+	// region is effectively unreachable. Distinct from
+	// BACKUP_STATUS_UNSPECIFIED, which means the status is simply not set.
+	// Consumers gate actions such as force-delete on this value.
+	// This is only surfaced for hybrid cloud clusters; managed cloud backups
+	// never report this status.
+	BackupStatus_BACKUP_STATUS_UNKNOWN BackupStatus = 7
 )
 
 // Enum value maps for BackupStatus.
@@ -59,6 +67,7 @@ var (
 		4: "BACKUP_STATUS_SUCCEEDED",
 		5: "BACKUP_STATUS_FAILED_TO_SYNC",
 		6: "BACKUP_STATUS_NOT_FOUND",
+		7: "BACKUP_STATUS_UNKNOWN",
 	}
 	BackupStatus_value = map[string]int32{
 		"BACKUP_STATUS_UNSPECIFIED":    0,
@@ -68,6 +77,7 @@ var (
 		"BACKUP_STATUS_SUCCEEDED":      4,
 		"BACKUP_STATUS_FAILED_TO_SYNC": 5,
 		"BACKUP_STATUS_NOT_FOUND":      6,
+		"BACKUP_STATUS_UNKNOWN":        7,
 	}
 )
 
@@ -2273,7 +2283,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\tbackup_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12U\n" +
 	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt*\xd9\x01\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt*\xf4\x01\n" +
 	"\fBackupStatus\x12\x1d\n" +
 	"\x19BACKUP_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15BACKUP_STATUS_RUNNING\x10\x01\x12\x19\n" +
@@ -2281,7 +2291,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x14BACKUP_STATUS_FAILED\x10\x03\x12\x1b\n" +
 	"\x17BACKUP_STATUS_SUCCEEDED\x10\x04\x12 \n" +
 	"\x1cBACKUP_STATUS_FAILED_TO_SYNC\x10\x05\x12\x1b\n" +
-	"\x17BACKUP_STATUS_NOT_FOUND\x10\x06*\xd7\x01\n" +
+	"\x17BACKUP_STATUS_NOT_FOUND\x10\x06\x12\x19\n" +
+	"\x15BACKUP_STATUS_UNKNOWN\x10\a*\xd7\x01\n" +
 	"\x14BackupScheduleStatus\x12&\n" +
 	"\"BACKUP_SCHEDULE_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dBACKUP_SCHEDULE_STATUS_ACTIVE\x10\x01\x12)\n" +

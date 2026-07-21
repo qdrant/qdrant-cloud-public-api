@@ -26,6 +26,7 @@ class BackupStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BACKUP_STATUS_SUCCEEDED: _ClassVar[BackupStatus]
     BACKUP_STATUS_FAILED_TO_SYNC: _ClassVar[BackupStatus]
     BACKUP_STATUS_NOT_FOUND: _ClassVar[BackupStatus]
+    BACKUP_STATUS_UNKNOWN: _ClassVar[BackupStatus]
 
 class BackupScheduleStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -51,6 +52,7 @@ BACKUP_STATUS_FAILED: BackupStatus
 BACKUP_STATUS_SUCCEEDED: BackupStatus
 BACKUP_STATUS_FAILED_TO_SYNC: BackupStatus
 BACKUP_STATUS_NOT_FOUND: BackupStatus
+BACKUP_STATUS_UNKNOWN: BackupStatus
 BACKUP_SCHEDULE_STATUS_UNSPECIFIED: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_ACTIVE: BackupScheduleStatus
 BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: BackupScheduleStatus
