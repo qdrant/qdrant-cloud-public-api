@@ -368,6 +368,16 @@ message DeleteBackupRequest {
   // The identifier of the backup (in GUID format).
   // This is a required field.
   string backup_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // If set to true, the backup is removed from our records without waiting
+  // for the cloud-agent to confirm the deletion of the underlying resources.
+  // This is useful to clear leftover or stranded backups that can no longer be
+  // deleted through the normal flow. Because the deletion is not confirmed by
+  // the cloud-agent, any leftover resources in the object storage must be
+  // cleaned up manually.
+  // This is supported for hybrid cloud clusters only and is ignored for managed
+  // cloud clusters.
+  // Defaults to false.
+  optional bool force = 3;
 }
 
 // DeleteBackupResponse is the response from the DeleteBackup function.
@@ -552,6 +562,14 @@ enum BackupStatus {
   BACKUP_STATUS_FAILED_TO_SYNC = 5;
   // The backup was expected but not found in the cluster's region.
   BACKUP_STATUS_NOT_FOUND = 6;
+  // The agent has not reported the backup's status for longer than the
+  // staleness window (~5 min), so its real state cannot be trusted. The
+  // region is effectively unreachable. Distinct from
+  // BACKUP_STATUS_UNSPECIFIED, which means the status is simply not set.
+  // Consumers gate actions such as force-delete on this value.
+  // This is only surfaced for hybrid cloud clusters; managed cloud backups
+  // never report this status.
+  BACKUP_STATUS_UNKNOWN = 7;
 }
 
 // A Backup represents a backup of a Qdrant database.

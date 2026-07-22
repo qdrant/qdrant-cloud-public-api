@@ -344,6 +344,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "force",
+            "description": "If set to true, the backup is removed from our records without waiting\nfor the cloud-agent to confirm the deletion of the underlying resources.\nThis is useful to clear leftover or stranded backups that can no longer be\ndeleted through the normal flow. Because the deletion is not confirmed by\nthe cloud-agent, any leftover resources in the object storage must be\ncleaned up manually.\nThis is supported for hybrid cloud clusters only and is ignored for managed\ncloud clusters.\nDefaults to false.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -872,10 +879,11 @@
         "BACKUP_STATUS_FAILED",
         "BACKUP_STATUS_SUCCEEDED",
         "BACKUP_STATUS_FAILED_TO_SYNC",
-        "BACKUP_STATUS_NOT_FOUND"
+        "BACKUP_STATUS_NOT_FOUND",
+        "BACKUP_STATUS_UNKNOWN"
       ],
       "default": "BACKUP_STATUS_UNSPECIFIED",
-      "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped or was not started because it has no suitable target.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region."
+      "description": "BackupStatus represents the current status of a backup operation.\n\n - BACKUP_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_STATUS_RUNNING: The backup is currently in progress.\n - BACKUP_STATUS_SKIPPED: The backup was skipped or was not started because it has no suitable target.\n - BACKUP_STATUS_FAILED: The backup failed to complete successfully.\n - BACKUP_STATUS_SUCCEEDED: The backup completed successfully.\n - BACKUP_STATUS_FAILED_TO_SYNC: There was an error syncing the backup in the cluster's region.\n - BACKUP_STATUS_NOT_FOUND: The backup was expected but not found in the cluster's region.\n - BACKUP_STATUS_UNKNOWN: The agent has not reported the backup's status for longer than the\nstaleness window (~5 min), so its real state cannot be trusted. The\nregion is effectively unreachable. Distinct from\nBACKUP_STATUS_UNSPECIFIED, which means the status is simply not set.\nConsumers gate actions such as force-delete on this value.\nThis is only surfaced for hybrid cloud clusters; managed cloud backups\nnever report this status."
     },
     "v1ClusterConfiguration": {
       "type": "object",
