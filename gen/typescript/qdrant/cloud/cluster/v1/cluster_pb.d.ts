@@ -3188,6 +3188,19 @@ export enum ClusterPhase {
    * @generated from enum value: CLUSTER_PHASE_DELETING = 18;
    */
   DELETING = 18,
+
+  /**
+   * The agent has not reported the cluster's status for longer than the
+   * staleness window (~5 min), so its real phase cannot be trusted. The
+   * region is effectively unreachable. Distinct from
+   * CLUSTER_PHASE_UNSPECIFIED, which means the phase is simply not set.
+   * Consumers gate actions such as force-delete on this value.
+   * This is only surfaced for hybrid cloud clusters; managed cloud clusters
+   * never report this phase.
+   *
+   * @generated from enum value: CLUSTER_PHASE_UNKNOWN = 19;
+   */
+  UNKNOWN = 19,
 }
 
 /**

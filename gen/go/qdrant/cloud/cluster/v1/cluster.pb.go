@@ -529,6 +529,14 @@ const (
 	ClusterPhase_CLUSTER_PHASE_NOT_FOUND ClusterPhase = 17
 	// The cluster is being deleted.
 	ClusterPhase_CLUSTER_PHASE_DELETING ClusterPhase = 18
+	// The agent has not reported the cluster's status for longer than the
+	// staleness window (~5 min), so its real phase cannot be trusted. The
+	// region is effectively unreachable. Distinct from
+	// CLUSTER_PHASE_UNSPECIFIED, which means the phase is simply not set.
+	// Consumers gate actions such as force-delete on this value.
+	// This is only surfaced for hybrid cloud clusters; managed cloud clusters
+	// never report this phase.
+	ClusterPhase_CLUSTER_PHASE_UNKNOWN ClusterPhase = 19
 )
 
 // Enum value maps for ClusterPhase.
@@ -553,6 +561,7 @@ var (
 		16: "CLUSTER_PHASE_FAILED_TO_SYNC",
 		17: "CLUSTER_PHASE_NOT_FOUND",
 		18: "CLUSTER_PHASE_DELETING",
+		19: "CLUSTER_PHASE_UNKNOWN",
 	}
 	ClusterPhase_value = map[string]int32{
 		"CLUSTER_PHASE_UNSPECIFIED":        0,
@@ -574,6 +583,7 @@ var (
 		"CLUSTER_PHASE_FAILED_TO_SYNC":     16,
 		"CLUSTER_PHASE_NOT_FOUND":          17,
 		"CLUSTER_PHASE_DELETING":           18,
+		"CLUSTER_PHASE_UNKNOWN":            19,
 	}
 )
 
@@ -4720,7 +4730,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1dTOLERATION_EFFECT_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dTOLERATION_EFFECT_NO_SCHEDULE\x10\x01\x12(\n" +
 	"$TOLERATION_EFFECT_PREFER_NO_SCHEDULE\x10\x02\x12 \n" +
-	"\x1cTOLERATION_EFFECT_NO_EXECUTE\x10\x03*\xdf\x04\n" +
+	"\x1cTOLERATION_EFFECT_NO_EXECUTE\x10\x03*\xfa\x04\n" +
 	"\fClusterPhase\x12\x1d\n" +
 	"\x19CLUSTER_PHASE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16CLUSTER_PHASE_CREATING\x10\x01\x12\"\n" +
@@ -4741,7 +4751,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	" CLUSTER_PHASE_MANUAL_MAINTENANCE\x10\x0f\x12 \n" +
 	"\x1cCLUSTER_PHASE_FAILED_TO_SYNC\x10\x10\x12\x1b\n" +
 	"\x17CLUSTER_PHASE_NOT_FOUND\x10\x11\x12\x1a\n" +
-	"\x16CLUSTER_PHASE_DELETING\x10\x12*\xde\x01\n" +
+	"\x16CLUSTER_PHASE_DELETING\x10\x12\x12\x19\n" +
+	"\x15CLUSTER_PHASE_UNKNOWN\x10\x13*\xde\x01\n" +
 	"\x10ClusterNodeState\x12\"\n" +
 	"\x1eCLUSTER_NODE_STATE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_NODE_STATE_STARTING\x10\x01\x12\x1e\n" +
