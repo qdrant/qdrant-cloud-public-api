@@ -92,6 +92,7 @@ class ClusterPhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_PHASE_FAILED_TO_SYNC: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_NOT_FOUND: _ClassVar[ClusterPhase]
     CLUSTER_PHASE_DELETING: _ClassVar[ClusterPhase]
+    CLUSTER_PHASE_UNKNOWN: _ClassVar[ClusterPhase]
 
 class ClusterNodeState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -170,6 +171,7 @@ CLUSTER_PHASE_MANUAL_MAINTENANCE: ClusterPhase
 CLUSTER_PHASE_FAILED_TO_SYNC: ClusterPhase
 CLUSTER_PHASE_NOT_FOUND: ClusterPhase
 CLUSTER_PHASE_DELETING: ClusterPhase
+CLUSTER_PHASE_UNKNOWN: ClusterPhase
 CLUSTER_NODE_STATE_UNSPECIFIED: ClusterNodeState
 CLUSTER_NODE_STATE_STARTING: ClusterNodeState
 CLUSTER_NODE_STATE_HEALTHY: ClusterNodeState
