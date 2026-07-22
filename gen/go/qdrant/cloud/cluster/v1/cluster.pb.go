@@ -534,8 +534,6 @@ const (
 	// region is effectively unreachable. Distinct from
 	// CLUSTER_PHASE_UNSPECIFIED, which means the phase is simply not set.
 	// Consumers gate actions such as force-delete on this value.
-	// This is only surfaced for hybrid cloud clusters; managed cloud clusters
-	// never report this phase.
 	ClusterPhase_CLUSTER_PHASE_UNKNOWN ClusterPhase = 19
 )
 
