@@ -273,7 +273,7 @@
           "title": "token is used as cookie value\nExample: local:v1:string"
         }
       },
-      "description": "An EphemeralDashboardToken represents the encrypted cookie to access one Qdrant serverless space."
+      "description": "An EphemeralDashboardToken represents the signed cookie to access one Qdrant serverless space."
     },
     "v1GlobalAccessRule": {
       "type": "object",

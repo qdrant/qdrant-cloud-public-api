@@ -180,7 +180,7 @@ export declare type RevokeEphemeralDashboardTokenResponseValid = RevokeEphemeral
 export declare const RevokeEphemeralDashboardTokenResponseSchema: GenMessage<RevokeEphemeralDashboardTokenResponse, {validType: RevokeEphemeralDashboardTokenResponseValid}>;
 
 /**
- * An EphemeralDashboardToken represents the encrypted cookie to access one Qdrant serverless space.
+ * An EphemeralDashboardToken represents the signed cookie to access one Qdrant serverless space.
  *
  * @generated from message qdrant.cloud.serverless.space.auth.v1.EphemeralDashboardToken
  */
