@@ -550,7 +550,10 @@ type SpaceApiKey struct {
 	State *SpaceApiKeyState `protobuf:"bytes,100,opt,name=state,proto3" json:"state,omitempty"`
 	// Timestamp when the space api key was revoked.
 	// This is a read-only field and will be set after the space api key is revoked.
-	RevokedAt     *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=revoked_at,json=revokedAt,proto3" json:"revoked_at,omitempty"`
+	RevokedAt *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=revoked_at,json=revokedAt,proto3" json:"revoked_at,omitempty"`
+	// The caller who revoked the space api key.
+	// This is a read-only field and will be available after the key is revoked.
+	RevokedBy     *v1.Caller `protobuf:"bytes,15,opt,name=revoked_by,json=revokedBy,proto3" json:"revoked_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -679,6 +682,13 @@ func (x *SpaceApiKey) GetState() *SpaceApiKeyState {
 func (x *SpaceApiKey) GetRevokedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RevokedAt
+	}
+	return nil
+}
+
+func (x *SpaceApiKey) GetRevokedBy() *v1.Caller {
+	if x != nil {
+		return x.RevokedBy
 	}
 	return nil
 }
@@ -956,7 +966,7 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x121\n" +
 	"\x10space_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rspaceApiKeyId\"\x1b\n" +
-	"\x19DeleteSpaceApiKeyResponse\"\xbd\v\n" +
+	"\x19DeleteSpaceApiKeyResponse\"\xfc\v\n" +
 	"\vSpaceApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -980,7 +990,9 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	" \x01(\tR\x03key\x12M\n" +
 	"\x05state\x18d \x01(\v27.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStateR\x05state\x129\n" +
 	"\n" +
-	"revoked_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\trevokedAt:\xb2\x05\xbaH\xae\x05\x1a\xa9\x01\n" +
+	"revoked_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\trevokedAt\x12=\n" +
+	"\n" +
+	"revoked_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\trevokedBy:\xb2\x05\xbaH\xae\x05\x1a\xa9\x01\n" +
 	"\x10space_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xeb\x01\n" +
 	",space_api_key.no_mixed_global_and_collection\x12LThere can't be global and collection access rules in the same space api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\xab\x01\n" +
 	"$space_api_key.only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1ad\n" +
@@ -1075,22 +1087,23 @@ var file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_depIdxs = []i
 	14, // 8: qdrant.cloud.serverless.space.auth.v1.SpaceApiKey.deleted_at:type_name -> google.protobuf.Timestamp
 	10, // 9: qdrant.cloud.serverless.space.auth.v1.SpaceApiKey.state:type_name -> qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState
 	14, // 10: qdrant.cloud.serverless.space.auth.v1.SpaceApiKey.revoked_at:type_name -> google.protobuf.Timestamp
-	0,  // 11: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState.phase:type_name -> qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhase
-	12, // 12: qdrant.cloud.serverless.space.auth.v1.AccessRule.global_access:type_name -> qdrant.cloud.serverless.space.auth.v1.GlobalAccessRule
-	13, // 13: qdrant.cloud.serverless.space.auth.v1.AccessRule.collection_access:type_name -> qdrant.cloud.serverless.space.auth.v1.CollectionAccessRule
-	1,  // 14: qdrant.cloud.serverless.space.auth.v1.GlobalAccessRule.access_type:type_name -> qdrant.cloud.serverless.space.auth.v1.GlobalAccessRuleAccessType
-	2,  // 15: qdrant.cloud.serverless.space.auth.v1.CollectionAccessRule.access_type:type_name -> qdrant.cloud.serverless.space.auth.v1.CollectionAccessRuleAccessType
-	3,  // 16: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.ListSpaceApiKeys:input_type -> qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysRequest
-	5,  // 17: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.CreateSpaceApiKey:input_type -> qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyRequest
-	7,  // 18: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.DeleteSpaceApiKey:input_type -> qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyRequest
-	4,  // 19: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.ListSpaceApiKeys:output_type -> qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysResponse
-	6,  // 20: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.CreateSpaceApiKey:output_type -> qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyResponse
-	8,  // 21: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.DeleteSpaceApiKey:output_type -> qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyResponse
-	19, // [19:22] is the sub-list for method output_type
-	16, // [16:19] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	15, // 11: qdrant.cloud.serverless.space.auth.v1.SpaceApiKey.revoked_by:type_name -> qdrant.cloud.common.v1.Caller
+	0,  // 12: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState.phase:type_name -> qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhase
+	12, // 13: qdrant.cloud.serverless.space.auth.v1.AccessRule.global_access:type_name -> qdrant.cloud.serverless.space.auth.v1.GlobalAccessRule
+	13, // 14: qdrant.cloud.serverless.space.auth.v1.AccessRule.collection_access:type_name -> qdrant.cloud.serverless.space.auth.v1.CollectionAccessRule
+	1,  // 15: qdrant.cloud.serverless.space.auth.v1.GlobalAccessRule.access_type:type_name -> qdrant.cloud.serverless.space.auth.v1.GlobalAccessRuleAccessType
+	2,  // 16: qdrant.cloud.serverless.space.auth.v1.CollectionAccessRule.access_type:type_name -> qdrant.cloud.serverless.space.auth.v1.CollectionAccessRuleAccessType
+	3,  // 17: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.ListSpaceApiKeys:input_type -> qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysRequest
+	5,  // 18: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.CreateSpaceApiKey:input_type -> qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyRequest
+	7,  // 19: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.DeleteSpaceApiKey:input_type -> qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyRequest
+	4,  // 20: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.ListSpaceApiKeys:output_type -> qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysResponse
+	6,  // 21: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.CreateSpaceApiKey:output_type -> qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyResponse
+	8,  // 22: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyService.DeleteSpaceApiKey:output_type -> qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyResponse
+	20, // [20:23] is the sub-list for method output_type
+	17, // [17:20] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_init() }
