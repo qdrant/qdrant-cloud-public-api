@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/serverless/space/auth/v1/space_api_key.proto",
+    "title": "qdrant/cloud/serverless/space/auth/v1/ephemeral_dashboard_token.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "SpaceApiKeyService"
+      "name": "EphemeralDashboardTokenService"
     }
   ],
   "consumes": [
@@ -16,15 +16,15 @@
     "application/json"
   ],
   "paths": {
-    "/api/serverless/auth/v1/accounts/{accountId}/spaces/{spaceId}/api-keys": {
+    "/api/serverless/auth/v1/accounts/{accountId}/ephemeral-dashboard-tokens": {
       "get": {
-        "summary": "ListSpaceApiKeys returns all API keys for a space\nRequired Permissions:\n- read:serverless_api_keys",
-        "operationId": "SpaceApiKeyService_ListSpaceApiKeys",
+        "summary": "ListEphemeralDashboardTokens returns the ephemeral dashboard tokens for the account identified by the given ID.\nOptionally filtered by space.\nRequired permissions:\n- read:serverless_api_keys",
+        "operationId": "EphemeralDashboardTokenService_ListEphemeralDashboardTokens",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListSpaceApiKeysResponse"
+              "$ref": "#/definitions/v1ListEphemeralDashboardTokensResponse"
             }
           },
           "default": {
@@ -44,26 +44,26 @@
           },
           {
             "name": "spaceId",
-            "description": "Space the API keys belong to (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
+            "description": "The identifier of the space (in GUID format).\nWhen this field is set, only ephemeral dashboard tokens that belong to the space are returned.",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "SpaceApiKeyService"
+          "EphemeralDashboardTokenService"
         ]
       }
     },
-    "/api/serverless/auth/v1/accounts/{accountId}/spaces/{spaceId}/api-keys/{spaceApiKeyId}": {
-      "delete": {
-        "summary": "DeleteSpaceApiKey removes an API key from a space\nRequired Permissions:\n- delete:serverless_api_keys",
-        "operationId": "SpaceApiKeyService_DeleteSpaceApiKey",
+    "/api/serverless/auth/v1/accounts/{accountId}/ephemeral-dashboard-tokens/{spaceApiKeyId}/revoke": {
+      "post": {
+        "summary": "RevokeEphemeralDashboardToken revokes an ephemeral dashboard token in the account identified by the given ID.\nRequired permissions:\n- write:serverless_api_keys",
+        "operationId": "EphemeralDashboardTokenService_RevokeEphemeralDashboardToken",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1DeleteSpaceApiKeyResponse"
+              "$ref": "#/definitions/v1RevokeEphemeralDashboardTokenResponse"
             }
           },
           "default": {
@@ -77,59 +77,13 @@
           {
             "name": "accountId",
             "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "spaceId",
-            "description": "Space the key belongs to (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "spaceApiKeyId",
-            "description": "ID of the key to delete (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "SpaceApiKeyService"
-        ]
-      }
-    },
-    "/api/serverless/auth/v1/accounts/{spaceApiKey.accountId}/spaces/{spaceApiKey.spaceId}/api-keys": {
-      "post": {
-        "summary": "CreateSpaceApiKey creates a new API key for a space\nRequired Permissions:\n- write:serverless_api_keys",
-        "operationId": "SpaceApiKeyService_CreateSpaceApiKey",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateSpaceApiKeyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "spaceApiKey.accountId",
-            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "spaceApiKey.spaceId",
-            "description": "The identifier of the space (in GUID format).\nThis is a required field.",
+            "description": "The identifier of the ephemeral dashboard token (SpaceApiKey) to revoke (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -139,84 +93,71 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SpaceApiKeyServiceCreateSpaceApiKeyBody"
+              "$ref": "#/definitions/EphemeralDashboardTokenServiceRevokeEphemeralDashboardTokenBody"
             }
           }
         ],
         "tags": [
-          "SpaceApiKeyService"
+          "EphemeralDashboardTokenService"
+        ]
+      }
+    },
+    "/api/serverless/auth/v1/accounts/{accountId}/spaces/{spaceId}/ephemeral-dashboard-tokens": {
+      "post": {
+        "summary": "Creates an ephemeral dashboard token in the account identified by the given ID.\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "EphemeralDashboardTokenService_CreateEphemeralDashboardToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateEphemeralDashboardTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EphemeralDashboardTokenServiceCreateEphemeralDashboardTokenBody"
+            }
+          }
+        ],
+        "tags": [
+          "EphemeralDashboardTokenService"
         ]
       }
     }
   },
   "definitions": {
-    "SpaceApiKeyServiceCreateSpaceApiKeyBody": {
+    "EphemeralDashboardTokenServiceCreateEphemeralDashboardTokenBody": {
       "type": "object",
-      "properties": {
-        "spaceApiKey": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Unique identifier for the space api key (in GUID format).\nThis is a read-only field and will be available after a space api key is created."
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Timestamp when the space api key was created.\nThis is a read-only field and will be available after a space api key is created."
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of the space api key.\nThis is a required field.\nName can only contain letters, numbers, spaces, underscores and dashes."
-            },
-            "expiresAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The expiration time of the space api key. The key will be invalid after this time.\nThis field is optional, and if not provided, the key does not expire."
-            },
-            "accessRules": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "$ref": "#/definitions/v1AccessRule"
-              },
-              "description": "A list of rules to grant access to the Qdrant serverless space or to specific\ncollections in that space. If no access rules are provided, global access to the space\nwith manage permissions is assumed. The list can contain a maximum of 20\naccess rules."
-            },
-            "createdBy": {
-              "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
-            },
-            "deletedBy": {
-              "$ref": "#/definitions/v1Caller",
-              "description": "The caller who deleted the space api key.\nThis is a read-only field and will be available after deletion starts."
-            },
-            "deletedAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Timestamp when the space api key was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpaceApiKey is called."
-            },
-            "postfix": {
-              "type": "string",
-              "description": "Postfix for the space api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a space api key is created."
-            },
-            "key": {
-              "type": "string",
-              "description": "The key for the space api key.\nThis is a read-only field and will be available only once in the response of CreateSpaceApiKey.\nYou should securely store this key and it should be handled as a secret."
-            },
-            "state": {
-              "$ref": "#/definitions/v1SpaceApiKeyState",
-              "description": "Status of the space api key.\nAll fields inside `state` are read-only."
-            },
-            "revokedAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Timestamp when the space api key was revoked.\nThis is a read-only field and will be set after the space api key is revoked."
-            }
-          },
-          "description": "The API key to create.\nThis is a required field."
-        }
-      },
-      "title": "CreateSpaceApiKeyRequest defines parameters for creating a new space API key"
+      "description": "CreateEphemeralDashboardTokenRequest is the request for the CreateEphemeralDashboardToken function."
+    },
+    "EphemeralDashboardTokenServiceRevokeEphemeralDashboardTokenBody": {
+      "type": "object",
+      "description": "RevokeEphemeralDashboardTokenRequest is the request for the RevokeEphemeralDashboardToken function."
     },
     "protobufAny": {
       "type": "object",
@@ -314,20 +255,25 @@
       "description": "- COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform collection-related actions that only read data (like `get collection info`).\n - COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE: Grants access to perform collection-related actions that read or write data (like `upsert points`).",
       "title": "CollectionAccessRuleAccessType defines the types of access allowed on a specific collection.\nFor a detailed list of actions allowed for each access type, see:\nhttps://qdrant.tech/documentation/guides/security/#table-of-access"
     },
-    "v1CreateSpaceApiKeyResponse": {
+    "v1CreateEphemeralDashboardTokenResponse": {
       "type": "object",
       "properties": {
-        "spaceApiKey": {
-          "$ref": "#/definitions/v1SpaceApiKey",
-          "title": "The newly created API key value"
+        "ephemeralDashboardToken": {
+          "$ref": "#/definitions/v1EphemeralDashboardToken",
+          "description": "The actual ephemeral dashboard token."
         }
       },
-      "title": "CreateSpaceApiKeyResponse provides the API key after creation"
+      "description": "CreateEphemeralDashboardTokenResponse is the response from the CreateEphemeralDashboardToken function."
     },
-    "v1DeleteSpaceApiKeyResponse": {
+    "v1EphemeralDashboardToken": {
       "type": "object",
-      "description": "Empty",
-      "title": "DeleteSpaceApiKeyResponse is an empty response for deletion confirmation"
+      "properties": {
+        "token": {
+          "type": "string",
+          "title": "token is used as cookie value\nExample: local:v1:string"
+        }
+      },
+      "description": "An EphemeralDashboardToken represents the signed cookie to access one Qdrant serverless space."
     },
     "v1GlobalAccessRule": {
       "type": "object",
@@ -351,7 +297,7 @@
       "description": "- GLOBAL_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED: Unspecified access type.\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_METRICS_READ_ONLY: Grants access to perform to read the metrics (it cannot access any data, only metadata)\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_READ_ONLY: Grants access to perform actions that only read data (e.g., list collections, including metrics).\n - GLOBAL_ACCESS_RULE_ACCESS_TYPE_MANAGE: Grants access to perform all actions available in the space (e.g., update aliases).",
       "title": "GlobalAccessRuleAccessType defines the possible access levels for global access rules.\nFor a detailed list of actions allowed for each access type, see:\nTODO: serverless list like https://qdrant.tech/documentation/guides/security/#table-of-access"
     },
-    "v1ListSpaceApiKeysResponse": {
+    "v1ListEphemeralDashboardTokensResponse": {
       "type": "object",
       "properties": {
         "items": {
@@ -360,10 +306,14 @@
             "type": "object",
             "$ref": "#/definitions/v1SpaceApiKey"
           },
-          "title": "List of API keys for the space"
+          "description": "List of ephemeral dashboard tokens."
         }
       },
-      "title": "Response containing all API keys associated with a space"
+      "description": "ListEphemeralDashboardTokensResponse is the response from the ListEphemeralDashboardTokens function."
+    },
+    "v1RevokeEphemeralDashboardTokenResponse": {
+      "type": "object",
+      "description": "RevokeEphemeralDashboardTokenResponse is the response from the RevokeEphemeralDashboardToken function.\n\nEmpty"
     },
     "v1SpaceApiKey": {
       "type": "object",

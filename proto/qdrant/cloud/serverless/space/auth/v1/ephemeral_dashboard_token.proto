@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.space.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/serverless/space/auth/v1/space_api_key.proto";
+
+// EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard of a serverless space, used by the Qdrant Cloud UI
+service EphemeralDashboardTokenService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // Creates an ephemeral dashboard token in the account identified by the given ID.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc CreateEphemeralDashboardToken(CreateEphemeralDashboardTokenRequest) returns (CreateEphemeralDashboardTokenResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // custom supported-actor-types expression
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/ephemeral-dashboard-tokens"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "create-ephemeral-dashboard-token"
+      resource_type: "serverless-space"
+      resource_id_field: "req.space_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{req.space_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // ListEphemeralDashboardTokens returns the ephemeral dashboard tokens for the account identified by the given ID.
+  // Optionally filtered by space.
+  // Required permissions:
+  // - read:serverless_api_keys
+  rpc ListEphemeralDashboardTokens(ListEphemeralDashboardTokensRequest) returns (ListEphemeralDashboardTokensResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens"};
+  }
+  // RevokeEphemeralDashboardToken revokes an ephemeral dashboard token in the account identified by the given ID.
+  // Required permissions:
+  // - write:serverless_api_keys
+  rpc RevokeEphemeralDashboardToken(RevokeEphemeralDashboardTokenRequest) returns (RevokeEphemeralDashboardTokenResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:serverless_api_keys";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens/{space_api_key_id}/revoke"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "revoke-ephemeral-dashboard-token"
+      resource_type: "serverless-space-api-key"
+      resource_id_field: "req.space_api_key_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/api-keys/{req.space_api_key_id}"
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_api_key_id"
+      field_expression: "space_api_key_id"
+    };
+  }
+}
+
+// CreateEphemeralDashboardTokenRequest is the request for the CreateEphemeralDashboardToken function.
+message CreateEphemeralDashboardTokenRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// CreateEphemeralDashboardTokenResponse is the response from the CreateEphemeralDashboardToken function.
+message CreateEphemeralDashboardTokenResponse {
+  // The actual ephemeral dashboard token.
+  EphemeralDashboardToken ephemeral_dashboard_token = 1 [(buf.validate.field).required = true];
+}
+
+// ListEphemeralDashboardTokensRequest is the request for the ListEphemeralDashboardTokens function.
+message ListEphemeralDashboardTokensRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // When this field is set, only ephemeral dashboard tokens that belong to the space are returned.
+  optional string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListEphemeralDashboardTokensResponse is the response from the ListEphemeralDashboardTokens function.
+message ListEphemeralDashboardTokensResponse {
+  // List of ephemeral dashboard tokens.
+  repeated SpaceApiKey items = 1;
+}
+
+// RevokeEphemeralDashboardTokenRequest is the request for the RevokeEphemeralDashboardToken function.
+message RevokeEphemeralDashboardTokenRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the ephemeral dashboard token (SpaceApiKey) to revoke (in GUID format).
+  // This is a required field.
+  string space_api_key_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// RevokeEphemeralDashboardTokenResponse is the response from the RevokeEphemeralDashboardToken function.
+message RevokeEphemeralDashboardTokenResponse {
+  // Empty
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An EphemeralDashboardToken represents the signed cookie to access one Qdrant serverless space.
+message EphemeralDashboardToken {
+  // token is used as cookie value
+  // Example: local:v1:string
+  string token = 1 [(buf.validate.field).string.pattern = "^(local|vault):v([1-9][0-9]{0,4}):.*$"];
+}
