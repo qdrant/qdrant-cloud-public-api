@@ -306,6 +306,14 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
    * @generated from field: qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState state = 100;
    */
   state?: SpaceApiKeyState | undefined;
+
+  /**
+   * Timestamp when the space api key was revoked.
+   * This is a read-only field and will be set after the space api key is revoked.
+   *
+   * @generated from field: google.protobuf.Timestamp revoked_at = 14;
+   */
+  revokedAt?: Timestamp | undefined;
 };
 
 export declare type SpaceApiKeyValid = SpaceApiKey;
@@ -470,7 +478,7 @@ export enum SpaceApiKeyStatePhase {
   READY = 2,
 
   /**
-   * The API key has been temporarily or permanently disabled.
+   * The API key has been temporarily or permanently disabled/revoked.
    *
    * @generated from enum value: SPACE_API_KEY_STATE_PHASE_DISABLED = 3;
    */

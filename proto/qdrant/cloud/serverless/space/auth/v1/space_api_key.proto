@@ -227,6 +227,9 @@ message SpaceApiKey {
   // Status of the space api key.
   // All fields inside `state` are read-only.
   SpaceApiKeyState state = 100;
+  // Timestamp when the space api key was revoked.
+  // This is a read-only field and will be set after the space api key is revoked.
+  google.protobuf.Timestamp revoked_at = 14;
 }
 
 // SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.
@@ -237,7 +240,7 @@ enum SpaceApiKeyStatePhase {
   SPACE_API_KEY_STATE_PHASE_PROCESSING = 1;
   // The API key is installed in the regional data plane and fully operational.
   SPACE_API_KEY_STATE_PHASE_READY = 2;
-  // The API key has been temporarily or permanently disabled.
+  // The API key has been temporarily or permanently disabled/revoked.
   SPACE_API_KEY_STATE_PHASE_DISABLED = 3;
   // The API key is being deleted from the regional data plane.
   SPACE_API_KEY_STATE_PHASE_DELETING = 4;
