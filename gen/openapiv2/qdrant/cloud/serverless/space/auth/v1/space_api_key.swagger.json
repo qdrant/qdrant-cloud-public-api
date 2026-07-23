@@ -211,6 +211,10 @@
               "type": "string",
               "format": "date-time",
               "description": "Timestamp when the space api key was revoked.\nThis is a read-only field and will be set after the space api key is revoked."
+            },
+            "revokedBy": {
+              "$ref": "#/definitions/v1Caller",
+              "description": "The caller who revoked the space api key.\nThis is a read-only field and will be available after the key is revoked."
             }
           },
           "description": "The API key to create.\nThis is a required field."
@@ -431,6 +435,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the space api key was revoked.\nThis is a read-only field and will be set after the space api key is revoked."
+        },
+        "revokedBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who revoked the space api key.\nThis is a read-only field and will be available after the key is revoked."
         }
       },
       "description": "A SpaceApiKey represents one space api key of a Qdrant cloud account.\nThis space key can grant access to a Qdrant cloud serverless space."

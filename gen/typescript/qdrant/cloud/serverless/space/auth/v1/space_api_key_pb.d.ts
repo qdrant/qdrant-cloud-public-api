@@ -314,6 +314,14 @@ export declare type SpaceApiKey = Message<"qdrant.cloud.serverless.space.auth.v1
    * @generated from field: google.protobuf.Timestamp revoked_at = 14;
    */
   revokedAt?: Timestamp | undefined;
+
+  /**
+   * The caller who revoked the space api key.
+   * This is a read-only field and will be available after the key is revoked.
+   *
+   * @generated from field: qdrant.cloud.common.v1.Caller revoked_by = 15;
+   */
+  revokedBy?: Caller | undefined;
 };
 
 export declare type SpaceApiKeyValid = SpaceApiKey;

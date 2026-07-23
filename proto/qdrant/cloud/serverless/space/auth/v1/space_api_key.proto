@@ -230,6 +230,9 @@ message SpaceApiKey {
   // Timestamp when the space api key was revoked.
   // This is a read-only field and will be set after the space api key is revoked.
   google.protobuf.Timestamp revoked_at = 14;
+  // The caller who revoked the space api key.
+  // This is a read-only field and will be available after the key is revoked.
+  common.v1.Caller revoked_by = 15;
 }
 
 // SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.
