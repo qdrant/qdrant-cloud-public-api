@@ -1094,9 +1094,83 @@
         "availabilityZone": {
           "type": "string",
           "description": "The availability zone where this node is running (e.g., \"us-east-1a\").\nThis is a read-only field provided by the system.\nOnly set for Multi-AZ clusters."
+        },
+        "notReadyInfo": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyInfo",
+          "description": "Structured explanation of why the node is not ready.\nOnly set while the node is not ready, which today means alongside\nCLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node\nrecovers."
         }
       },
       "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeLink": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/v1ClusterNodeLinkKind",
+          "description": "What this link points at."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the link, for example \"Scale your cluster\"."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to open. Not set for kinds the consumer is expected to resolve\nitself, such as CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY, for which the\nconsumer already has the account and cluster identifiers it needs."
+        }
+      },
+      "description": "ClusterNodeLink points a user at something that helps resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeLinkKind": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_LINK_KIND_UNSPECIFIED",
+        "CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY",
+        "CLUSTER_NODE_LINK_KIND_DOCUMENTATION"
+      ],
+      "default": "CLUSTER_NODE_LINK_KIND_UNSPECIFIED",
+      "description": "ClusterNodeLinkKind describes what a ClusterNodeLink points at.\n\n - CLUSTER_NODE_LINK_KIND_UNSPECIFIED: The link kind is unspecified.\n - CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY: Scaling the cluster's resources per node is the remedy.\n - CLUSTER_NODE_LINK_KIND_DOCUMENTATION: Documentation explaining the condition and how to resolve it."
+    },
+    "v1ClusterNodeNotReadyCondition": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
+        "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
+        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
+        "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
+        "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN"
+      ],
+      "default": "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
+      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container cannot stay up and is being restarted.\nClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
+    },
+    "v1ClusterNodeNotReadyInfo": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyCondition",
+          "description": "The reason the node is not ready right now."
+        },
+        "conditionMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the condition,\nfor example \"Your container is restarting\"."
+        },
+        "event": {
+          "$ref": "#/definitions/v1ClusterNodeTerminationEvent",
+          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING."
+        },
+        "eventMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set."
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeLink"
+          },
+          "description": "Links that help resolve the condition."
+        }
+      },
+      "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and event values.\nAll fields in this message are read-only."
     },
     "v1ClusterNodeResources": {
       "type": "object",
@@ -1167,6 +1241,16 @@
       ],
       "default": "CLUSTER_NODE_STATE_UNSPECIFIED",
       "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended.\n - CLUSTER_NODE_STATE_RECOVERING: The node is started but still needs to do some operations to recover."
+    },
+    "v1ClusterNodeTerminationEvent": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
+        "CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY",
+        "CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED"
+      ],
+      "default": "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
+      "description": "ClusterNodeTerminationEvent describes what terminated a node's container the\nlast time it went down. Unlike a condition, this is a historical fact and is\nonly reported as supporting evidence for a node that is currently not ready.\n\n - CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: The event is unspecified.\n - CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: The container was terminated because it reached its memory limit.\n - CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: The container's process exited unexpectedly with a non-zero exit code."
     },
     "v1ClusterPhase": {
       "type": "string",

@@ -2250,6 +2250,16 @@ export declare type ClusterNodeInfo = Message<"qdrant.cloud.cluster.v1.ClusterNo
    * @generated from field: optional string availability_zone = 11;
    */
   availabilityZone?: string | undefined;
+
+  /**
+   * Structured explanation of why the node is not ready.
+   * Only set while the node is not ready, which today means alongside
+   * CLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node
+   * recovers.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo not_ready_info = 12;
+   */
+  notReadyInfo?: ClusterNodeNotReadyInfo | undefined;
 };
 
 export declare type ClusterNodeInfoValid = ClusterNodeInfo;
@@ -2259,6 +2269,105 @@ export declare type ClusterNodeInfoValid = ClusterNodeInfo;
  * Use `create(ClusterNodeInfoSchema)` to create a new message.
  */
 export declare const ClusterNodeInfoSchema: GenMessage<ClusterNodeInfo, {validType: ClusterNodeInfoValid}>;
+
+/**
+ * ClusterNodeLink points a user at something that helps resolve a node's
+ * not-ready condition.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterNodeLink
+ */
+export declare type ClusterNodeLink = Message<"qdrant.cloud.cluster.v1.ClusterNodeLink"> & {
+  /**
+   * What this link points at.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeLinkKind kind = 1;
+   */
+  kind: ClusterNodeLinkKind;
+
+  /**
+   * Short description of the link, for example "Scale your cluster".
+   *
+   * @generated from field: string description = 2;
+   */
+  description: string;
+
+  /**
+   * The URL to open. Not set for kinds the consumer is expected to resolve
+   * itself, such as CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY, for which the
+   * consumer already has the account and cluster identifiers it needs.
+   *
+   * @generated from field: optional string url = 3;
+   */
+  url?: string | undefined;
+};
+
+export declare type ClusterNodeLinkValid = ClusterNodeLink;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterNodeLink.
+ * Use `create(ClusterNodeLinkSchema)` to create a new message.
+ */
+export declare const ClusterNodeLinkSchema: GenMessage<ClusterNodeLink, {validType: ClusterNodeLinkValid}>;
+
+/**
+ * ClusterNodeNotReadyInfo explains why a cluster node is not ready.
+ * The messages are short technical sentences intended for consumers without a
+ * user interface of their own. Consumers are free to ignore them and render
+ * their own copy based on the condition and event values.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
+ */
+export declare type ClusterNodeNotReadyInfo = Message<"qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo"> & {
+  /**
+   * The reason the node is not ready right now.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition condition = 1;
+   */
+  condition: ClusterNodeNotReadyCondition;
+
+  /**
+   * Human-readable explanation of the condition,
+   * for example "Your container is restarting".
+   *
+   * @generated from field: string condition_message = 2;
+   */
+  conditionMessage: string;
+
+  /**
+   * What terminated the node's container the last time it went down.
+   * Only set together with
+   * CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent event = 3;
+   */
+  event?: ClusterNodeTerminationEvent | undefined;
+
+  /**
+   * Human-readable explanation of the event,
+   * for example "Your node has reached its memory limit".
+   * Only set when event is set.
+   *
+   * @generated from field: optional string event_message = 4;
+   */
+  eventMessage?: string | undefined;
+
+  /**
+   * Links that help resolve the condition.
+   *
+   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeLink links = 5;
+   */
+  links: ClusterNodeLink[];
+};
+
+export declare type ClusterNodeNotReadyInfoValid = ClusterNodeNotReadyInfo;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.
+ * Use `create(ClusterNodeNotReadyInfoSchema)` to create a new message.
+ */
+export declare const ClusterNodeNotReadyInfoSchema: GenMessage<ClusterNodeNotReadyInfo, {validType: ClusterNodeNotReadyInfoValid}>;
 
 /**
  * Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
@@ -3266,6 +3375,128 @@ export enum ClusterNodeState {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeState.
  */
 export declare const ClusterNodeStateSchema: GenEnum<ClusterNodeState>;
+
+/**
+ * ClusterNodeNotReadyCondition describes why a node is not ready right now.
+ * It is derived from the current node status, so it clears on its own once the
+ * node recovers.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
+ */
+export enum ClusterNodeNotReadyCondition {
+  /**
+   * The condition is unspecified.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The node's pod could not be scheduled, for example because the
+   * Kubernetes cluster has insufficient capacity.
+   * Only reported for hybrid cloud clusters, where the user owns the
+   * infrastructure.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR = 1;
+   */
+  POD_SCHEDULING_ERROR = 1,
+
+  /**
+   * The node's container cannot stay up and is being restarted.
+   * ClusterNodeNotReadyInfo.event may explain what terminated it.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 2;
+   */
+  CONTAINER_RESTARTING = 2,
+
+  /**
+   * The node's container is running, but its readiness check is failing.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING = 3;
+   */
+  READINESS_FAILING = 3,
+
+  /**
+   * The node is not ready for a reason that cannot be determined from the
+   * reported node status.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN = 4;
+   */
+  UNKNOWN = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition.
+ */
+export declare const ClusterNodeNotReadyConditionSchema: GenEnum<ClusterNodeNotReadyCondition>;
+
+/**
+ * ClusterNodeTerminationEvent describes what terminated a node's container the
+ * last time it went down. Unlike a condition, this is a historical fact and is
+ * only reported as supporting evidence for a node that is currently not ready.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
+ */
+export enum ClusterNodeTerminationEvent {
+  /**
+   * The event is unspecified.
+   *
+   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The container was terminated because it reached its memory limit.
+   *
+   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY = 1;
+   */
+  OUT_OF_MEMORY = 1,
+
+  /**
+   * The container's process exited unexpectedly with a non-zero exit code.
+   *
+   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED = 2;
+   */
+  PROCESS_EXITED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent.
+ */
+export declare const ClusterNodeTerminationEventSchema: GenEnum<ClusterNodeTerminationEvent>;
+
+/**
+ * ClusterNodeLinkKind describes what a ClusterNodeLink points at.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeLinkKind
+ */
+export enum ClusterNodeLinkKind {
+  /**
+   * The link kind is unspecified.
+   *
+   * @generated from enum value: CLUSTER_NODE_LINK_KIND_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Scaling the cluster's resources per node is the remedy.
+   *
+   * @generated from enum value: CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY = 1;
+   */
+  SCALE_VERTICALLY = 1,
+
+  /**
+   * Documentation explaining the condition and how to resolve it.
+   *
+   * @generated from enum value: CLUSTER_NODE_LINK_KIND_DOCUMENTATION = 2;
+   */
+  DOCUMENTATION = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeLinkKind.
+ */
+export declare const ClusterNodeLinkKindSchema: GenEnum<ClusterNodeLinkKind>;
 
 /**
  * ClusterScalabilityStatus defines the scalability states of a cluster.

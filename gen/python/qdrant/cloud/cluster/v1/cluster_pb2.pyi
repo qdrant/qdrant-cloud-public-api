@@ -104,6 +104,26 @@ class ClusterNodeState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_NODE_STATE_SUSPENDED: _ClassVar[ClusterNodeState]
     CLUSTER_NODE_STATE_RECOVERING: _ClassVar[ClusterNodeState]
 
+class ClusterNodeNotReadyCondition(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: _ClassVar[ClusterNodeNotReadyCondition]
+    CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: _ClassVar[ClusterNodeNotReadyCondition]
+    CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: _ClassVar[ClusterNodeNotReadyCondition]
+    CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: _ClassVar[ClusterNodeNotReadyCondition]
+    CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: _ClassVar[ClusterNodeNotReadyCondition]
+
+class ClusterNodeTerminationEvent(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: _ClassVar[ClusterNodeTerminationEvent]
+    CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: _ClassVar[ClusterNodeTerminationEvent]
+    CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: _ClassVar[ClusterNodeTerminationEvent]
+
+class ClusterNodeLinkKind(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_NODE_LINK_KIND_UNSPECIFIED: _ClassVar[ClusterNodeLinkKind]
+    CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY: _ClassVar[ClusterNodeLinkKind]
+    CLUSTER_NODE_LINK_KIND_DOCUMENTATION: _ClassVar[ClusterNodeLinkKind]
+
 class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: _ClassVar[ClusterScalabilityStatus]
@@ -180,6 +200,17 @@ CLUSTER_NODE_STATE_HEALTHY: ClusterNodeState
 CLUSTER_NODE_STATE_UNHEALTHY: ClusterNodeState
 CLUSTER_NODE_STATE_SUSPENDED: ClusterNodeState
 CLUSTER_NODE_STATE_RECOVERING: ClusterNodeState
+CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: ClusterNodeNotReadyCondition
+CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: ClusterNodeNotReadyCondition
+CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: ClusterNodeNotReadyCondition
+CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: ClusterNodeNotReadyCondition
+CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: ClusterNodeNotReadyCondition
+CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: ClusterNodeTerminationEvent
+CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: ClusterNodeTerminationEvent
+CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: ClusterNodeTerminationEvent
+CLUSTER_NODE_LINK_KIND_UNSPECIFIED: ClusterNodeLinkKind
+CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY: ClusterNodeLinkKind
+CLUSTER_NODE_LINK_KIND_DOCUMENTATION: ClusterNodeLinkKind
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
@@ -591,20 +622,46 @@ class ClusterState(_message.Message):
     def __init__(self, version: _Optional[str] = ..., nodes_up: _Optional[int] = ..., restarted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., phase: _Optional[_Union[ClusterPhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., resources: _Optional[_Union[ClusterNodeResourcesSummary, _Mapping]] = ..., scalability_info: _Optional[_Union[ClusterScalabilityInfo, _Mapping]] = ..., nodes: _Optional[_Iterable[_Union[ClusterNodeInfo, _Mapping]]] = ..., jwt_rbac: _Optional[bool] = ..., capabilities: _Optional[_Union[ClusterCapabilities, _Mapping]] = ...) -> None: ...
 
 class ClusterNodeInfo(_message.Message):
-    __slots__ = ("name", "started_at", "version", "endpoint", "state", "availability_zone")
+    __slots__ = ("name", "started_at", "version", "endpoint", "state", "availability_zone", "not_ready_info")
     NAME_FIELD_NUMBER: _ClassVar[int]
     STARTED_AT_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     AVAILABILITY_ZONE_FIELD_NUMBER: _ClassVar[int]
+    NOT_READY_INFO_FIELD_NUMBER: _ClassVar[int]
     name: str
     started_at: _timestamp_pb2.Timestamp
     version: str
     endpoint: ClusterEndpoint
     state: ClusterNodeState
     availability_zone: str
-    def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ..., availability_zone: _Optional[str] = ...) -> None: ...
+    not_ready_info: ClusterNodeNotReadyInfo
+    def __init__(self, name: _Optional[str] = ..., started_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., version: _Optional[str] = ..., endpoint: _Optional[_Union[ClusterEndpoint, _Mapping]] = ..., state: _Optional[_Union[ClusterNodeState, str]] = ..., availability_zone: _Optional[str] = ..., not_ready_info: _Optional[_Union[ClusterNodeNotReadyInfo, _Mapping]] = ...) -> None: ...
+
+class ClusterNodeLink(_message.Message):
+    __slots__ = ("kind", "description", "url")
+    KIND_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    URL_FIELD_NUMBER: _ClassVar[int]
+    kind: ClusterNodeLinkKind
+    description: str
+    url: str
+    def __init__(self, kind: _Optional[_Union[ClusterNodeLinkKind, str]] = ..., description: _Optional[str] = ..., url: _Optional[str] = ...) -> None: ...
+
+class ClusterNodeNotReadyInfo(_message.Message):
+    __slots__ = ("condition", "condition_message", "event", "event_message", "links")
+    CONDITION_FIELD_NUMBER: _ClassVar[int]
+    CONDITION_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    EVENT_FIELD_NUMBER: _ClassVar[int]
+    EVENT_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    LINKS_FIELD_NUMBER: _ClassVar[int]
+    condition: ClusterNodeNotReadyCondition
+    condition_message: str
+    event: ClusterNodeTerminationEvent
+    event_message: str
+    links: _containers.RepeatedCompositeFieldContainer[ClusterNodeLink]
+    def __init__(self, condition: _Optional[_Union[ClusterNodeNotReadyCondition, str]] = ..., condition_message: _Optional[str] = ..., event: _Optional[_Union[ClusterNodeTerminationEvent, str]] = ..., event_message: _Optional[str] = ..., links: _Optional[_Iterable[_Union[ClusterNodeLink, _Mapping]]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")
