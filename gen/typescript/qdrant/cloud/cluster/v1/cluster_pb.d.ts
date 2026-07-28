@@ -2271,44 +2271,45 @@ export declare type ClusterNodeInfoValid = ClusterNodeInfo;
 export declare const ClusterNodeInfoSchema: GenMessage<ClusterNodeInfo, {validType: ClusterNodeInfoValid}>;
 
 /**
- * ClusterNodeLink points a user at something that helps resolve a node's
+ * ClusterNodeAction describes something the user can do to resolve a node's
  * not-ready condition.
  * All fields in this message are read-only.
  *
- * @generated from message qdrant.cloud.cluster.v1.ClusterNodeLink
+ * @generated from message qdrant.cloud.cluster.v1.ClusterNodeAction
  */
-export declare type ClusterNodeLink = Message<"qdrant.cloud.cluster.v1.ClusterNodeLink"> & {
+export declare type ClusterNodeAction = Message<"qdrant.cloud.cluster.v1.ClusterNodeAction"> & {
   /**
-   * What this link points at.
+   * What the user is asked to do.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeLinkKind kind = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterNodeActionKind kind = 1;
    */
-  kind: ClusterNodeLinkKind;
+  kind: ClusterNodeActionKind;
 
   /**
-   * Short description of the link, for example "Scale your cluster".
+   * Short description of the action, for example "Scale your cluster".
    *
    * @generated from field: string description = 2;
    */
   description: string;
 
   /**
-   * The URL to open. Not set for kinds the consumer is expected to resolve
-   * itself, such as CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY, for which the
-   * consumer already has the account and cluster identifiers it needs.
+   * The URL to open, for actions that are a navigation.
+   * Not set for actions the consumer carries out itself, such as
+   * CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already
+   * has the account and cluster identifiers it needs.
    *
    * @generated from field: optional string url = 3;
    */
   url?: string | undefined;
 };
 
-export declare type ClusterNodeLinkValid = ClusterNodeLink;
+export declare type ClusterNodeActionValid = ClusterNodeAction;
 
 /**
- * Describes the message qdrant.cloud.cluster.v1.ClusterNodeLink.
- * Use `create(ClusterNodeLinkSchema)` to create a new message.
+ * Describes the message qdrant.cloud.cluster.v1.ClusterNodeAction.
+ * Use `create(ClusterNodeActionSchema)` to create a new message.
  */
-export declare const ClusterNodeLinkSchema: GenMessage<ClusterNodeLink, {validType: ClusterNodeLinkValid}>;
+export declare const ClusterNodeActionSchema: GenMessage<ClusterNodeAction, {validType: ClusterNodeActionValid}>;
 
 /**
  * ClusterNodeNotReadyInfo explains why a cluster node is not ready.
@@ -2354,11 +2355,11 @@ export declare type ClusterNodeNotReadyInfo = Message<"qdrant.cloud.cluster.v1.C
   eventMessage?: string | undefined;
 
   /**
-   * Links that help resolve the condition.
+   * Actions the user can take to resolve the condition.
    *
-   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeLink links = 5;
+   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterNodeAction actions = 5;
    */
-  links: ClusterNodeLink[];
+  actions: ClusterNodeAction[];
 };
 
 export declare type ClusterNodeNotReadyInfoValid = ClusterNodeNotReadyInfo;
@@ -3466,37 +3467,37 @@ export enum ClusterNodeTerminationEvent {
 export declare const ClusterNodeTerminationEventSchema: GenEnum<ClusterNodeTerminationEvent>;
 
 /**
- * ClusterNodeLinkKind describes what a ClusterNodeLink points at.
+ * ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
  *
- * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeLinkKind
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeActionKind
  */
-export enum ClusterNodeLinkKind {
+export enum ClusterNodeActionKind {
   /**
-   * The link kind is unspecified.
+   * The action kind is unspecified.
    *
-   * @generated from enum value: CLUSTER_NODE_LINK_KIND_UNSPECIFIED = 0;
+   * @generated from enum value: CLUSTER_NODE_ACTION_KIND_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * Scaling the cluster's resources per node is the remedy.
+   * Scale the cluster's resources per node.
    *
-   * @generated from enum value: CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY = 1;
+   * @generated from enum value: CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY = 1;
    */
   SCALE_VERTICALLY = 1,
 
   /**
-   * Documentation explaining the condition and how to resolve it.
+   * Read the documentation explaining the condition and how to resolve it.
    *
-   * @generated from enum value: CLUSTER_NODE_LINK_KIND_DOCUMENTATION = 2;
+   * @generated from enum value: CLUSTER_NODE_ACTION_KIND_DOCUMENTATION = 2;
    */
   DOCUMENTATION = 2,
 }
 
 /**
- * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeLinkKind.
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeActionKind.
  */
-export declare const ClusterNodeLinkKindSchema: GenEnum<ClusterNodeLinkKind>;
+export declare const ClusterNodeActionKindSchema: GenEnum<ClusterNodeActionKind>;
 
 /**
  * ClusterScalabilityStatus defines the scalability states of a cluster.

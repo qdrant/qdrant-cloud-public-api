@@ -1067,6 +1067,34 @@
       },
       "description": "Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.\nAll fields in this message are a read-only field."
     },
+    "v1ClusterNodeAction": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/v1ClusterNodeActionKind",
+          "description": "What the user is asked to do."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the action, for example \"Scale your cluster\"."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already\nhas the account and cluster identifiers it needs."
+        }
+      },
+      "description": "ClusterNodeAction describes something the user can do to resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeActionKind": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
+        "CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY",
+        "CLUSTER_NODE_ACTION_KIND_DOCUMENTATION"
+      ],
+      "default": "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
+      "description": "ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.\n\n - CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: The action kind is unspecified.\n - CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: Scale the cluster's resources per node.\n - CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: Read the documentation explaining the condition and how to resolve it."
+    },
     "v1ClusterNodeInfo": {
       "type": "object",
       "properties": {
@@ -1102,34 +1130,6 @@
       },
       "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."
     },
-    "v1ClusterNodeLink": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/v1ClusterNodeLinkKind",
-          "description": "What this link points at."
-        },
-        "description": {
-          "type": "string",
-          "description": "Short description of the link, for example \"Scale your cluster\"."
-        },
-        "url": {
-          "type": "string",
-          "description": "The URL to open. Not set for kinds the consumer is expected to resolve\nitself, such as CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY, for which the\nconsumer already has the account and cluster identifiers it needs."
-        }
-      },
-      "description": "ClusterNodeLink points a user at something that helps resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
-    },
-    "v1ClusterNodeLinkKind": {
-      "type": "string",
-      "enum": [
-        "CLUSTER_NODE_LINK_KIND_UNSPECIFIED",
-        "CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY",
-        "CLUSTER_NODE_LINK_KIND_DOCUMENTATION"
-      ],
-      "default": "CLUSTER_NODE_LINK_KIND_UNSPECIFIED",
-      "description": "ClusterNodeLinkKind describes what a ClusterNodeLink points at.\n\n - CLUSTER_NODE_LINK_KIND_UNSPECIFIED: The link kind is unspecified.\n - CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY: Scaling the cluster's resources per node is the remedy.\n - CLUSTER_NODE_LINK_KIND_DOCUMENTATION: Documentation explaining the condition and how to resolve it."
-    },
     "v1ClusterNodeNotReadyCondition": {
       "type": "string",
       "enum": [
@@ -1161,13 +1161,13 @@
           "type": "string",
           "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set."
         },
-        "links": {
+        "actions": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1ClusterNodeLink"
+            "$ref": "#/definitions/v1ClusterNodeAction"
           },
-          "description": "Links that help resolve the condition."
+          "description": "Actions the user can take to resolve the condition."
         }
       },
       "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and event values.\nAll fields in this message are read-only."

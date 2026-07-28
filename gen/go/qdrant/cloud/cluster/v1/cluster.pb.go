@@ -804,56 +804,56 @@ func (ClusterNodeTerminationEvent) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
-// ClusterNodeLinkKind describes what a ClusterNodeLink points at.
-type ClusterNodeLinkKind int32
+// ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
+type ClusterNodeActionKind int32
 
 const (
-	// The link kind is unspecified.
-	ClusterNodeLinkKind_CLUSTER_NODE_LINK_KIND_UNSPECIFIED ClusterNodeLinkKind = 0
-	// Scaling the cluster's resources per node is the remedy.
-	ClusterNodeLinkKind_CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY ClusterNodeLinkKind = 1
-	// Documentation explaining the condition and how to resolve it.
-	ClusterNodeLinkKind_CLUSTER_NODE_LINK_KIND_DOCUMENTATION ClusterNodeLinkKind = 2
+	// The action kind is unspecified.
+	ClusterNodeActionKind_CLUSTER_NODE_ACTION_KIND_UNSPECIFIED ClusterNodeActionKind = 0
+	// Scale the cluster's resources per node.
+	ClusterNodeActionKind_CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY ClusterNodeActionKind = 1
+	// Read the documentation explaining the condition and how to resolve it.
+	ClusterNodeActionKind_CLUSTER_NODE_ACTION_KIND_DOCUMENTATION ClusterNodeActionKind = 2
 )
 
-// Enum value maps for ClusterNodeLinkKind.
+// Enum value maps for ClusterNodeActionKind.
 var (
-	ClusterNodeLinkKind_name = map[int32]string{
-		0: "CLUSTER_NODE_LINK_KIND_UNSPECIFIED",
-		1: "CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY",
-		2: "CLUSTER_NODE_LINK_KIND_DOCUMENTATION",
+	ClusterNodeActionKind_name = map[int32]string{
+		0: "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
+		1: "CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY",
+		2: "CLUSTER_NODE_ACTION_KIND_DOCUMENTATION",
 	}
-	ClusterNodeLinkKind_value = map[string]int32{
-		"CLUSTER_NODE_LINK_KIND_UNSPECIFIED":      0,
-		"CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY": 1,
-		"CLUSTER_NODE_LINK_KIND_DOCUMENTATION":    2,
+	ClusterNodeActionKind_value = map[string]int32{
+		"CLUSTER_NODE_ACTION_KIND_UNSPECIFIED":      0,
+		"CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY": 1,
+		"CLUSTER_NODE_ACTION_KIND_DOCUMENTATION":    2,
 	}
 )
 
-func (x ClusterNodeLinkKind) Enum() *ClusterNodeLinkKind {
-	p := new(ClusterNodeLinkKind)
+func (x ClusterNodeActionKind) Enum() *ClusterNodeActionKind {
+	p := new(ClusterNodeActionKind)
 	*p = x
 	return p
 }
 
-func (x ClusterNodeLinkKind) String() string {
+func (x ClusterNodeActionKind) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ClusterNodeLinkKind) Descriptor() protoreflect.EnumDescriptor {
+func (ClusterNodeActionKind) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12].Descriptor()
 }
 
-func (ClusterNodeLinkKind) Type() protoreflect.EnumType {
+func (ClusterNodeActionKind) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12]
 }
 
-func (x ClusterNodeLinkKind) Number() protoreflect.EnumNumber {
+func (x ClusterNodeActionKind) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ClusterNodeLinkKind.Descriptor instead.
-func (ClusterNodeLinkKind) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ClusterNodeActionKind.Descriptor instead.
+func (ClusterNodeActionKind) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
@@ -3849,37 +3849,38 @@ func (x *ClusterNodeInfo) GetNotReadyInfo() *ClusterNodeNotReadyInfo {
 	return nil
 }
 
-// ClusterNodeLink points a user at something that helps resolve a node's
+// ClusterNodeAction describes something the user can do to resolve a node's
 // not-ready condition.
 // All fields in this message are read-only.
-type ClusterNodeLink struct {
+type ClusterNodeAction struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// What this link points at.
-	Kind ClusterNodeLinkKind `protobuf:"varint,1,opt,name=kind,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeLinkKind" json:"kind,omitempty"`
-	// Short description of the link, for example "Scale your cluster".
+	// What the user is asked to do.
+	Kind ClusterNodeActionKind `protobuf:"varint,1,opt,name=kind,proto3,enum=qdrant.cloud.cluster.v1.ClusterNodeActionKind" json:"kind,omitempty"`
+	// Short description of the action, for example "Scale your cluster".
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// The URL to open. Not set for kinds the consumer is expected to resolve
-	// itself, such as CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY, for which the
-	// consumer already has the account and cluster identifiers it needs.
+	// The URL to open, for actions that are a navigation.
+	// Not set for actions the consumer carries out itself, such as
+	// CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already
+	// has the account and cluster identifiers it needs.
 	Url           *string `protobuf:"bytes,3,opt,name=url,proto3,oneof" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClusterNodeLink) Reset() {
-	*x = ClusterNodeLink{}
+func (x *ClusterNodeAction) Reset() {
+	*x = ClusterNodeAction{}
 	mi := &file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClusterNodeLink) String() string {
+func (x *ClusterNodeAction) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClusterNodeLink) ProtoMessage() {}
+func (*ClusterNodeAction) ProtoMessage() {}
 
-func (x *ClusterNodeLink) ProtoReflect() protoreflect.Message {
+func (x *ClusterNodeAction) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3891,26 +3892,26 @@ func (x *ClusterNodeLink) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClusterNodeLink.ProtoReflect.Descriptor instead.
-func (*ClusterNodeLink) Descriptor() ([]byte, []int) {
+// Deprecated: Use ClusterNodeAction.ProtoReflect.Descriptor instead.
+func (*ClusterNodeAction) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{41}
 }
 
-func (x *ClusterNodeLink) GetKind() ClusterNodeLinkKind {
+func (x *ClusterNodeAction) GetKind() ClusterNodeActionKind {
 	if x != nil {
 		return x.Kind
 	}
-	return ClusterNodeLinkKind_CLUSTER_NODE_LINK_KIND_UNSPECIFIED
+	return ClusterNodeActionKind_CLUSTER_NODE_ACTION_KIND_UNSPECIFIED
 }
 
-func (x *ClusterNodeLink) GetDescription() string {
+func (x *ClusterNodeAction) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
 }
 
-func (x *ClusterNodeLink) GetUrl() string {
+func (x *ClusterNodeAction) GetUrl() string {
 	if x != nil && x.Url != nil {
 		return *x.Url
 	}
@@ -3937,8 +3938,8 @@ type ClusterNodeNotReadyInfo struct {
 	// for example "Your node has reached its memory limit".
 	// Only set when event is set.
 	EventMessage *string `protobuf:"bytes,4,opt,name=event_message,json=eventMessage,proto3,oneof" json:"event_message,omitempty"`
-	// Links that help resolve the condition.
-	Links         []*ClusterNodeLink `protobuf:"bytes,5,rep,name=links,proto3" json:"links,omitempty"`
+	// Actions the user can take to resolve the condition.
+	Actions       []*ClusterNodeAction `protobuf:"bytes,5,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4001,9 +4002,9 @@ func (x *ClusterNodeNotReadyInfo) GetEventMessage() string {
 	return ""
 }
 
-func (x *ClusterNodeNotReadyInfo) GetLinks() []*ClusterNodeLink {
+func (x *ClusterNodeNotReadyInfo) GetActions() []*ClusterNodeAction {
 	if x != nil {
-		return x.Links
+		return x.Actions
 	}
 	return nil
 }
@@ -4984,22 +4985,22 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x11availability_zone\x18\v \x01(\tH\x00R\x10availabilityZone\x88\x01\x01\x12[\n" +
 	"\x0enot_ready_info\x18\f \x01(\v20.qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfoH\x01R\fnotReadyInfo\x88\x01\x01B\x14\n" +
 	"\x12_availability_zoneB\x11\n" +
-	"\x0f_not_ready_info\"\xb3\x01\n" +
-	"\x0fClusterNodeLink\x12L\n" +
-	"\x04kind\x18\x01 \x01(\x0e2,.qdrant.cloud.cluster.v1.ClusterNodeLinkKindB\n" +
+	"\x0f_not_ready_info\"\xb7\x01\n" +
+	"\x11ClusterNodeAction\x12N\n" +
+	"\x04kind\x18\x01 \x01(\x0e2..qdrant.cloud.cluster.v1.ClusterNodeActionKindB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04kind\x12)\n" +
 	"\vdescription\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12\x1f\n" +
 	"\x03url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x03url\x88\x01\x01B\x06\n" +
-	"\x04_url\"\xa6\x03\n" +
+	"\x04_url\"\xac\x03\n" +
 	"\x17ClusterNodeNotReadyInfo\x12_\n" +
 	"\tcondition\x18\x01 \x01(\x0e25.qdrant.cloud.cluster.v1.ClusterNodeNotReadyConditionB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\tcondition\x124\n" +
 	"\x11condition_message\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x10conditionMessage\x12[\n" +
 	"\x05event\x18\x03 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterNodeTerminationEventB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x05event\x88\x01\x01\x121\n" +
-	"\revent_message\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\feventMessage\x88\x01\x01\x12H\n" +
-	"\x05links\x18\x05 \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeLinkB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\x05linksB\b\n" +
+	"\revent_message\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\feventMessage\x88\x01\x01\x12N\n" +
+	"\aactions\x18\x05 \x03(\v2*.qdrant.cloud.cluster.v1.ClusterNodeActionB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"R\aactionsB\b\n" +
 	"\x06_eventB\x10\n" +
 	"\x0e_event_message\"y\n" +
 	"\x0fClusterEndpoint\x12\x1a\n" +
@@ -5138,11 +5139,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1bClusterNodeTerminationEvent\x12.\n" +
 	"*CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED\x10\x00\x120\n" +
 	",CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY\x10\x01\x121\n" +
-	"-CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED\x10\x02*\x94\x01\n" +
-	"\x13ClusterNodeLinkKind\x12&\n" +
-	"\"CLUSTER_NODE_LINK_KIND_UNSPECIFIED\x10\x00\x12+\n" +
-	"'CLUSTER_NODE_LINK_KIND_SCALE_VERTICALLY\x10\x01\x12(\n" +
-	"$CLUSTER_NODE_LINK_KIND_DOCUMENTATION\x10\x02*\x9c\x01\n" +
+	"-CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED\x10\x02*\x9c\x01\n" +
+	"\x15ClusterNodeActionKind\x12(\n" +
+	"$CLUSTER_NODE_ACTION_KIND_UNSPECIFIED\x10\x00\x12-\n" +
+	")CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY\x10\x01\x12*\n" +
+	"&CLUSTER_NODE_ACTION_KIND_DOCUMENTATION\x10\x02*\x9c\x01\n" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
@@ -5234,7 +5235,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(ClusterNodeState)(0),                           // 9: qdrant.cloud.cluster.v1.ClusterNodeState
 	(ClusterNodeNotReadyCondition)(0),               // 10: qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
 	(ClusterNodeTerminationEvent)(0),                // 11: qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
-	(ClusterNodeLinkKind)(0),                        // 12: qdrant.cloud.cluster.v1.ClusterNodeLinkKind
+	(ClusterNodeActionKind)(0),                      // 12: qdrant.cloud.cluster.v1.ClusterNodeActionKind
 	(ClusterScalabilityStatus)(0),                   // 13: qdrant.cloud.cluster.v1.ClusterScalabilityStatus
 	(ClusterDiskExpansionSupportStatus)(0),          // 14: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
 	(ClusterBackupSupportStatus)(0),                 // 15: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
@@ -5279,7 +5280,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(*ClusterStorageConfiguration)(nil),             // 54: qdrant.cloud.cluster.v1.ClusterStorageConfiguration
 	(*ClusterState)(nil),                            // 55: qdrant.cloud.cluster.v1.ClusterState
 	(*ClusterNodeInfo)(nil),                         // 56: qdrant.cloud.cluster.v1.ClusterNodeInfo
-	(*ClusterNodeLink)(nil),                         // 57: qdrant.cloud.cluster.v1.ClusterNodeLink
+	(*ClusterNodeAction)(nil),                       // 57: qdrant.cloud.cluster.v1.ClusterNodeAction
 	(*ClusterNodeNotReadyInfo)(nil),                 // 58: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
 	(*ClusterEndpoint)(nil),                         // 59: qdrant.cloud.cluster.v1.ClusterEndpoint
 	(*ClusterNodeResourcesSummary)(nil),             // 60: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
@@ -5356,10 +5357,10 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	59, // 54: qdrant.cloud.cluster.v1.ClusterNodeInfo.endpoint:type_name -> qdrant.cloud.cluster.v1.ClusterEndpoint
 	9,  // 55: qdrant.cloud.cluster.v1.ClusterNodeInfo.state:type_name -> qdrant.cloud.cluster.v1.ClusterNodeState
 	58, // 56: qdrant.cloud.cluster.v1.ClusterNodeInfo.not_ready_info:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
-	12, // 57: qdrant.cloud.cluster.v1.ClusterNodeLink.kind:type_name -> qdrant.cloud.cluster.v1.ClusterNodeLinkKind
+	12, // 57: qdrant.cloud.cluster.v1.ClusterNodeAction.kind:type_name -> qdrant.cloud.cluster.v1.ClusterNodeActionKind
 	10, // 58: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.condition:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
 	11, // 59: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.event:type_name -> qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
-	57, // 60: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.links:type_name -> qdrant.cloud.cluster.v1.ClusterNodeLink
+	57, // 60: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.actions:type_name -> qdrant.cloud.cluster.v1.ClusterNodeAction
 	61, // 61: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.disk:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	61, // 62: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	61, // 63: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
