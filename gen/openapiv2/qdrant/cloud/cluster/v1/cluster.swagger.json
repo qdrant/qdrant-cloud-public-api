@@ -1125,7 +1125,7 @@
         },
         "notReadyInfo": {
           "$ref": "#/definitions/v1ClusterNodeNotReadyInfo",
-          "description": "Structured explanation of why the node is not ready.\nOnly set while the node is not ready, which today means alongside\nCLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node\nrecovers."
+          "description": "Structured explanation of why the node is not ready.\nSet alongside CLUSTER_NODE_STATE_STARTING as well as\nCLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports\nas starting, because it shares a pod-condition signature with ordinary\nstartup. Not set when the cluster's status is stale\n(CLUSTER_PHASE_UNKNOWN), where no current reason can be determined.\nIt clears automatically once the node recovers."
         }
       },
       "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."

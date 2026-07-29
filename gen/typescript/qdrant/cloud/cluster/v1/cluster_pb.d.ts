@@ -2253,9 +2253,12 @@ export declare type ClusterNodeInfo = Message<"qdrant.cloud.cluster.v1.ClusterNo
 
   /**
    * Structured explanation of why the node is not ready.
-   * Only set while the node is not ready, which today means alongside
-   * CLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node
-   * recovers.
+   * Set alongside CLUSTER_NODE_STATE_STARTING as well as
+   * CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
+   * as starting, because it shares a pod-condition signature with ordinary
+   * startup. Not set when the cluster's status is stale
+   * (CLUSTER_PHASE_UNKNOWN), where no current reason can be determined.
+   * It clears automatically once the node recovers.
    *
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo not_ready_info = 12;
    */

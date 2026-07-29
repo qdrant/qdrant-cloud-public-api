@@ -1156,9 +1156,12 @@ message ClusterNodeInfo {
   // Only set for Multi-AZ clusters.
   optional string availability_zone = 11;
   // Structured explanation of why the node is not ready.
-  // Only set while the node is not ready, which today means alongside
-  // CLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node
-  // recovers.
+  // Set alongside CLUSTER_NODE_STATE_STARTING as well as
+  // CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
+  // as starting, because it shares a pod-condition signature with ordinary
+  // startup. Not set when the cluster's status is stale
+  // (CLUSTER_PHASE_UNKNOWN), where no current reason can be determined.
+  // It clears automatically once the node recovers.
   optional ClusterNodeNotReadyInfo not_ready_info = 12;
 }
 

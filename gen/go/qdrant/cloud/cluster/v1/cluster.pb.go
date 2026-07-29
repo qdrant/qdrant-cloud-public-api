@@ -3762,9 +3762,12 @@ type ClusterNodeInfo struct {
 	// Only set for Multi-AZ clusters.
 	AvailabilityZone *string `protobuf:"bytes,11,opt,name=availability_zone,json=availabilityZone,proto3,oneof" json:"availability_zone,omitempty"`
 	// Structured explanation of why the node is not ready.
-	// Only set while the node is not ready, which today means alongside
-	// CLUSTER_NODE_STATE_UNHEALTHY. It clears automatically once the node
-	// recovers.
+	// Set alongside CLUSTER_NODE_STATE_STARTING as well as
+	// CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
+	// as starting, because it shares a pod-condition signature with ordinary
+	// startup. Not set when the cluster's status is stale
+	// (CLUSTER_PHASE_UNKNOWN), where no current reason can be determined.
+	// It clears automatically once the node recovers.
 	NotReadyInfo  *ClusterNodeNotReadyInfo `protobuf:"bytes,12,opt,name=not_ready_info,json=notReadyInfo,proto3,oneof" json:"not_ready_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
