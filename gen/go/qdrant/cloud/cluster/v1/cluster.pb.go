@@ -3765,8 +3765,10 @@ type ClusterNodeInfo struct {
 	// Set alongside CLUSTER_NODE_STATE_STARTING as well as
 	// CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
 	// as starting, because it shares a pod-condition signature with ordinary
-	// startup. Not set when the cluster's status is stale
-	// (CLUSTER_PHASE_UNKNOWN), where no current reason can be determined.
+	// startup. Not always set: a node that is not ready may carry no explanation,
+	// for example while the cluster's status is stale (CLUSTER_PHASE_UNKNOWN) and
+	// no current reason can be determined. Consumers should not assume this field
+	// is present whenever a node is not ready.
 	// It clears automatically once the node recovers.
 	NotReadyInfo  *ClusterNodeNotReadyInfo `protobuf:"bytes,12,opt,name=not_ready_info,json=notReadyInfo,proto3,oneof" json:"not_ready_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
