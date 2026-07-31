@@ -2873,6 +2873,13 @@ export enum ClusterConfigurationRebalanceStrategy {
    * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE = 3;
    */
   BY_COUNT_AND_SIZE = 3,
+
+  /**
+   * Automatic rebalancing is explicitly disabled for this cluster.
+   *
+   * @generated from enum value: CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_DISABLED = 4;
+   */
+  DISABLED = 4,
 }
 
 /**

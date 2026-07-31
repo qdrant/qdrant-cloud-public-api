@@ -1006,10 +1006,11 @@
         "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
         "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT",
         "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE",
-        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE"
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_DISABLED"
       ],
       "default": "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
-      "description": "ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.\n\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: No rebalancing strategy is configured.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: Rebalance shards by count.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: Rebalance shards by size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: Rebalance shards by both count and size."
+      "description": "ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.\n\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: No rebalancing strategy is configured.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: Rebalance shards by count.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: Rebalance shards by size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: Rebalance shards by both count and size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_DISABLED: Automatic rebalancing is explicitly disabled for this cluster."
     },
     "v1ClusterConfigurationRestartPolicy": {
       "type": "string",
