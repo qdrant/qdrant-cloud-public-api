@@ -137,7 +137,12 @@
         "maxOwnedAccounts": {
           "type": "integer",
           "format": "int64",
-          "title": "Maximum number of accounts this user can be the owner of (at least 1).\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`"
+          "description": "Maximum number of accounts this user can be the owner of (at least 1).\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`."
+        },
+        "maxMemberAccounts": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of accounts this user can be a member of (at least 1).\nTo get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`."
         }
       },
       "title": "GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function"

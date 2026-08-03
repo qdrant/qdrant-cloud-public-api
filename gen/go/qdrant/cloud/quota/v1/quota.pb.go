@@ -65,10 +65,13 @@ func (*GetAuthenticatedUserQuotasRequest) Descriptor() ([]byte, []int) {
 type GetAuthenticatedUserQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum number of accounts this user can be the owner of (at least 1).
-	// To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
+	// To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
 	MaxOwnedAccounts uint32 `protobuf:"varint,1,opt,name=max_owned_accounts,json=maxOwnedAccounts,proto3" json:"max_owned_accounts,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Maximum number of accounts this user can be a member of (at least 1).
+	// To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
+	MaxMemberAccounts uint32 `protobuf:"varint,2,opt,name=max_member_accounts,json=maxMemberAccounts,proto3" json:"max_member_accounts,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GetAuthenticatedUserQuotasResponse) Reset() {
@@ -104,6 +107,13 @@ func (*GetAuthenticatedUserQuotasResponse) Descriptor() ([]byte, []int) {
 func (x *GetAuthenticatedUserQuotasResponse) GetMaxOwnedAccounts() uint32 {
 	if x != nil {
 		return x.MaxOwnedAccounts
+	}
+	return 0
+}
+
+func (x *GetAuthenticatedUserQuotasResponse) GetMaxMemberAccounts() uint32 {
+	if x != nil {
+		return x.MaxMemberAccounts
 	}
 	return 0
 }
@@ -249,9 +259,10 @@ var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
 	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"#\n" +
-	"!GetAuthenticatedUserQuotasRequest\"[\n" +
+	"!GetAuthenticatedUserQuotasRequest\"\x94\x01\n" +
 	"\"GetAuthenticatedUserQuotasResponse\x125\n" +
-	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\"B\n" +
+	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\x127\n" +
+	"\x13max_member_accounts\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\x11maxMemberAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xad\x02\n" +
