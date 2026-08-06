@@ -3408,27 +3408,38 @@ export enum ClusterNodeNotReadyCondition {
   POD_SCHEDULING_ERROR = 1,
 
   /**
-   * The node's container cannot stay up and is being restarted.
-   * ClusterNodeNotReadyInfo.event may explain what terminated it.
+   * The node's container cannot start at all, for example because its image
+   * cannot be pulled or its configuration is rejected.
+   * Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
+   * process has never run, so no ClusterNodeNotReadyInfo.event accompanies
+   * this condition.
    *
-   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 2;
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING = 2;
    */
-  CONTAINER_RESTARTING = 2,
+  CONTAINER_START_FAILING = 2,
+
+  /**
+   * The node's container has run before but cannot stay up, and is being
+   * restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
+   *
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 3;
+   */
+  CONTAINER_RESTARTING = 3,
 
   /**
    * The node's container is running, but its readiness check is failing.
    *
-   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING = 3;
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING = 4;
    */
-  READINESS_FAILING = 3,
+  READINESS_FAILING = 4,
 
   /**
    * The node is not ready for a reason that cannot be determined from the
    * reported node status.
    *
-   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN = 4;
+   * @generated from enum value: CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN = 5;
    */
-  UNKNOWN = 4,
+  UNKNOWN = 5,
 }
 
 /**

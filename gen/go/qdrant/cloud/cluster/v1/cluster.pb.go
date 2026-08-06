@@ -694,14 +694,20 @@ const (
 	// Only reported for hybrid cloud clusters, where the user owns the
 	// infrastructure.
 	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR ClusterNodeNotReadyCondition = 1
-	// The node's container cannot stay up and is being restarted.
-	// ClusterNodeNotReadyInfo.event may explain what terminated it.
-	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING ClusterNodeNotReadyCondition = 2
+	// The node's container cannot start at all, for example because its image
+	// cannot be pulled or its configuration is rejected.
+	// Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
+	// process has never run, so no ClusterNodeNotReadyInfo.event accompanies
+	// this condition.
+	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING ClusterNodeNotReadyCondition = 2
+	// The node's container has run before but cannot stay up, and is being
+	// restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
+	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING ClusterNodeNotReadyCondition = 3
 	// The node's container is running, but its readiness check is failing.
-	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING ClusterNodeNotReadyCondition = 3
+	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING ClusterNodeNotReadyCondition = 4
 	// The node is not ready for a reason that cannot be determined from the
 	// reported node status.
-	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN ClusterNodeNotReadyCondition = 4
+	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN ClusterNodeNotReadyCondition = 5
 )
 
 // Enum value maps for ClusterNodeNotReadyCondition.
@@ -709,16 +715,18 @@ var (
 	ClusterNodeNotReadyCondition_name = map[int32]string{
 		0: "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
 		1: "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
-		2: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
-		3: "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
-		4: "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN",
+		2: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING",
+		3: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
+		4: "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
+		5: "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN",
 	}
 	ClusterNodeNotReadyCondition_value = map[string]int32{
-		"CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED":          0,
-		"CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR": 1,
-		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING": 2,
-		"CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING":    3,
-		"CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN":              4,
+		"CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED":             0,
+		"CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR":    1,
+		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING": 2,
+		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING":    3,
+		"CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING":       4,
+		"CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN":                 5,
 	}
 )
 
@@ -5134,13 +5142,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aCLUSTER_NODE_STATE_HEALTHY\x10\x02\x12 \n" +
 	"\x1cCLUSTER_NODE_STATE_UNHEALTHY\x10\x03\x12 \n" +
 	"\x1cCLUSTER_NODE_STATE_SUSPENDED\x10\x04\x12!\n" +
-	"\x1dCLUSTER_NODE_STATE_RECOVERING\x10\x05*\xac\x02\n" +
+	"\x1dCLUSTER_NODE_STATE_RECOVERING\x10\x05*\xea\x02\n" +
 	"\x1cClusterNodeNotReadyCondition\x120\n" +
 	",CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED\x10\x00\x129\n" +
-	"5CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR\x10\x01\x129\n" +
-	"5CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING\x10\x02\x126\n" +
-	"2CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING\x10\x03\x12,\n" +
-	"(CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN\x10\x04*\xb2\x01\n" +
+	"5CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR\x10\x01\x12<\n" +
+	"8CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING\x10\x02\x129\n" +
+	"5CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING\x10\x03\x126\n" +
+	"2CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING\x10\x04\x12,\n" +
+	"(CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN\x10\x05*\xb2\x01\n" +
 	"\x1bClusterNodeTerminationEvent\x12.\n" +
 	"*CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED\x10\x00\x120\n" +
 	",CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY\x10\x01\x121\n" +

@@ -1135,12 +1135,13 @@
       "enum": [
         "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
         "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
+        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING",
         "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
         "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
         "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN"
       ],
       "default": "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
-      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container cannot stay up and is being restarted.\nClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
+      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING: The node's container cannot start at all, for example because its image\ncannot be pulled or its configuration is rejected.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run, so no ClusterNodeNotReadyInfo.event accompanies\nthis condition.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
     },
     "v1ClusterNodeNotReadyInfo": {
       "type": "object",
