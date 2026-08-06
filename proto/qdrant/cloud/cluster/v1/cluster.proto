@@ -40,6 +40,27 @@ service ClusterService {
       field_expression: "cluster_id"
     };
   }
+  // Gets the memory risk of moving the cluster identified by the given ID to the
+  // candidate package identified by the given ID.
+  // The call does not modify the cluster and is evaluated against a freshly read
+  // measurement, so repeated calls track the cluster's current state.
+  // Required permissions:
+  // - read:clusters
+  rpc GetClusterMemoryDownscaleRisk(GetClusterMemoryDownscaleRiskRequest) returns (GetClusterMemoryDownscaleRiskResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:clusters";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/memory-downscale-risk"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "cluster_id"
+      field_expression: "cluster_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "package_id"
+      field_expression: "package_id"
+    };
+  }
   // Creates a cluster in the account identified by the given ID.
   // Required permissions:
   // - write:clusters
@@ -1234,6 +1255,51 @@ message ClusterScalabilityInfo {
   }];
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
+  optional string reason = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+// Request message for GetClusterMemoryDownscaleRisk.
+message GetClusterMemoryDownscaleRiskRequest {
+  // Identifier of the account that owns the cluster.
+  string account_id = 1 [(buf.validate.field).string.min_len = 1];
+  // Identifier of the cluster to assess.
+  string cluster_id = 2 [(buf.validate.field).string.min_len = 1];
+  // Identifier of the candidate package the cluster would be moved to.
+  string package_id = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+// Response message for GetClusterMemoryDownscaleRisk.
+message GetClusterMemoryDownscaleRiskResponse {
+  // The memory risk of moving the cluster to the candidate package.
+  MemoryDownscaleRiskInfo memory_downscale_risk = 1 [(buf.validate.field).required = true];
+}
+
+// MemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
+// to a package that provides less RAM than the cluster currently has.
+enum MemoryDownscaleRiskStatus {
+  // Memory downscale risk is unspecified.
+  MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED = 0;
+  // Moving the cluster to the candidate package carries no memory risk, either
+  // because the candidate does not reduce RAM, or because the cluster's observed
+  // RAM usage fits within it.
+  MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK = 1;
+  // The cluster's observed RAM usage does not fit within the candidate package.
+  MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET = 2;
+  // The cluster's RAM usage could not be determined, so the risk is unknown.
+  MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN = 3;
+}
+
+// MemoryDownscaleRiskInfo provides information about the memory risk of moving a
+// cluster to a candidate package.
+message MemoryDownscaleRiskInfo {
+  // The memory downscale risk status for the assessed cluster and package.
+  MemoryDownscaleRiskStatus status = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Human-readable explanation of the status, so that clients without their own
+  // copy for each status can report what is happening. Clients that have their
+  // own copy select it from `status` and ignore this field.
   optional string reason = 2 [(buf.validate.field).string.min_len = 1];
 }
 

@@ -284,6 +284,52 @@
         ]
       }
     },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/memory-downscale-risk": {
+      "get": {
+        "summary": "Gets the memory risk of moving the cluster identified by the given ID to the\ncandidate package identified by the given ID.\nThe call does not modify the cluster and is evaluated against a freshly read\nmeasurement, so repeated calls track the cluster's current state.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetClusterMemoryDownscaleRisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterMemoryDownscaleRiskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "Identifier of the account that owns the cluster.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "Identifier of the cluster to assess.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageId",
+            "description": "Identifier of the candidate package the cluster would be moved to.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/restart": {
       "post": {
         "summary": "Restarts a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
@@ -1513,6 +1559,16 @@
       "description": "Empty",
       "title": "EnableClusterJwtRbacResponse is the response from the EnableClusterJwtRbac function"
     },
+    "v1GetClusterMemoryDownscaleRiskResponse": {
+      "type": "object",
+      "properties": {
+        "memoryDownscaleRisk": {
+          "$ref": "#/definitions/v1MemoryDownscaleRiskInfo",
+          "description": "The memory risk of moving the cluster to the candidate package."
+        }
+      },
+      "description": "Response message for GetClusterMemoryDownscaleRisk."
+    },
     "v1GetClusterResponse": {
       "type": "object",
       "properties": {
@@ -1583,6 +1639,31 @@
         }
       },
       "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"
+    },
+    "v1MemoryDownscaleRiskInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1MemoryDownscaleRiskStatus",
+          "description": "The memory downscale risk status for the assessed cluster and package."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable explanation of the status, so that clients without their own\ncopy for each status can report what is happening. Clients that have their\nown copy select it from `status` and ignore this field."
+        }
+      },
+      "description": "MemoryDownscaleRiskInfo provides information about the memory risk of moving a\ncluster to a candidate package."
+    },
+    "v1MemoryDownscaleRiskStatus": {
+      "type": "string",
+      "enum": [
+        "MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+        "MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK",
+        "MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET",
+        "MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN"
+      ],
+      "default": "MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+      "description": "MemoryDownscaleRiskStatus defines the memory risk states of moving a cluster\nto a package that provides less RAM than the cluster currently has.\n\n - MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: Memory downscale risk is unspecified.\n - MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: Moving the cluster to the candidate package carries no memory risk, either\nbecause the candidate does not reduce RAM, or because the cluster's observed\nRAM usage fits within it.\n - MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: The cluster's observed RAM usage does not fit within the candidate package.\n - MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: The cluster's RAM usage could not be determined, so the risk is unknown."
     },
     "v1QdrantRelease": {
       "type": "object",
