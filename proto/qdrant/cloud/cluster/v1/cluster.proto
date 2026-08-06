@@ -1194,12 +1194,12 @@ enum ClusterNodeNotReadyCondition {
   // Only reported for hybrid cloud clusters, where the user owns the
   // infrastructure.
   CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR = 1;
-  // The node's container cannot start at all, for example because its image
-  // cannot be pulled or its configuration is rejected.
+  // Something is preventing the node's container from starting, for example an
+  // image that cannot be pulled or configuration that cannot be resolved.
   // Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
   // process has never run, so no ClusterNodeNotReadyInfo.event accompanies
   // this condition.
-  CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING = 2;
+  CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED = 2;
   // The node's container has run before but cannot stay up, and is being
   // restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
   CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 3;

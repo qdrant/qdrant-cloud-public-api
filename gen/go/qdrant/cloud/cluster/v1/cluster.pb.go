@@ -694,12 +694,12 @@ const (
 	// Only reported for hybrid cloud clusters, where the user owns the
 	// infrastructure.
 	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR ClusterNodeNotReadyCondition = 1
-	// The node's container cannot start at all, for example because its image
-	// cannot be pulled or its configuration is rejected.
+	// Something is preventing the node's container from starting, for example an
+	// image that cannot be pulled or configuration that cannot be resolved.
 	// Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
 	// process has never run, so no ClusterNodeNotReadyInfo.event accompanies
 	// this condition.
-	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING ClusterNodeNotReadyCondition = 2
+	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED ClusterNodeNotReadyCondition = 2
 	// The node's container has run before but cannot stay up, and is being
 	// restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
 	ClusterNodeNotReadyCondition_CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING ClusterNodeNotReadyCondition = 3
@@ -715,7 +715,7 @@ var (
 	ClusterNodeNotReadyCondition_name = map[int32]string{
 		0: "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
 		1: "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
-		2: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING",
+		2: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED",
 		3: "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
 		4: "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
 		5: "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN",
@@ -723,7 +723,7 @@ var (
 	ClusterNodeNotReadyCondition_value = map[string]int32{
 		"CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED":             0,
 		"CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR":    1,
-		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING": 2,
+		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED": 2,
 		"CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING":    3,
 		"CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING":       4,
 		"CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN":                 5,
@@ -5146,7 +5146,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1cClusterNodeNotReadyCondition\x120\n" +
 	",CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED\x10\x00\x129\n" +
 	"5CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR\x10\x01\x12<\n" +
-	"8CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING\x10\x02\x129\n" +
+	"8CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED\x10\x02\x129\n" +
 	"5CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING\x10\x03\x126\n" +
 	"2CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING\x10\x04\x12,\n" +
 	"(CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN\x10\x05*\xb2\x01\n" +
