@@ -400,7 +400,7 @@ message GetClusterMemoryDownscaleRiskRequest {
 // GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
 message GetClusterMemoryDownscaleRiskResponse {
   // The memory risk of moving the cluster to the candidate package.
-  MemoryDownscaleRiskInfo memory_downscale_risk = 1 [(buf.validate.field).required = true];
+  ClusterMemoryDownscaleRiskInfo memory_downscale_risk = 1 [(buf.validate.field).required = true];
 }
 
 // CreateClusterRequest is the request for the CreateCluster function
@@ -1278,26 +1278,26 @@ message ClusterScalabilityInfo {
   optional string reason = 2 [(buf.validate.field).string.min_len = 1];
 }
 
-// MemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
+// ClusterMemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
 // to a package that provides less RAM than the cluster currently has.
-enum MemoryDownscaleRiskStatus {
+enum ClusterMemoryDownscaleRiskStatus {
   // Memory downscale risk is unspecified.
-  MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED = 0;
+  CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED = 0;
   // Moving the cluster to the candidate package carries no memory risk, either
   // because the candidate does not reduce RAM, or because the cluster's observed
   // RAM usage fits within it.
-  MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK = 1;
+  CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK = 1;
   // The cluster's observed RAM usage does not fit within the candidate package.
-  MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET = 2;
+  CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET = 2;
   // The cluster's RAM usage could not be determined, so the risk is unknown.
-  MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN = 3;
+  CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN = 3;
 }
 
-// MemoryDownscaleRiskInfo provides information about the memory risk of moving a
+// ClusterMemoryDownscaleRiskInfo provides information about the memory risk of moving a
 // cluster to a candidate package.
-message MemoryDownscaleRiskInfo {
+message ClusterMemoryDownscaleRiskInfo {
   // The memory downscale risk status for the assessed cluster and package.
-  MemoryDownscaleRiskStatus status = 1 [(buf.validate.field).enum = {
+  ClusterMemoryDownscaleRiskStatus status = 1 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];

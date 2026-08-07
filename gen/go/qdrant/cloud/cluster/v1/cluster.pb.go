@@ -734,63 +734,63 @@ func (ClusterScalabilityStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
-// MemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
+// ClusterMemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
 // to a package that provides less RAM than the cluster currently has.
-type MemoryDownscaleRiskStatus int32
+type ClusterMemoryDownscaleRiskStatus int32
 
 const (
 	// Memory downscale risk is unspecified.
-	MemoryDownscaleRiskStatus_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED MemoryDownscaleRiskStatus = 0
+	ClusterMemoryDownscaleRiskStatus_CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED ClusterMemoryDownscaleRiskStatus = 0
 	// Moving the cluster to the candidate package carries no memory risk, either
 	// because the candidate does not reduce RAM, or because the cluster's observed
 	// RAM usage fits within it.
-	MemoryDownscaleRiskStatus_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK MemoryDownscaleRiskStatus = 1
+	ClusterMemoryDownscaleRiskStatus_CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK ClusterMemoryDownscaleRiskStatus = 1
 	// The cluster's observed RAM usage does not fit within the candidate package.
-	MemoryDownscaleRiskStatus_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET MemoryDownscaleRiskStatus = 2
+	ClusterMemoryDownscaleRiskStatus_CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET ClusterMemoryDownscaleRiskStatus = 2
 	// The cluster's RAM usage could not be determined, so the risk is unknown.
-	MemoryDownscaleRiskStatus_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN MemoryDownscaleRiskStatus = 3
+	ClusterMemoryDownscaleRiskStatus_CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN ClusterMemoryDownscaleRiskStatus = 3
 )
 
-// Enum value maps for MemoryDownscaleRiskStatus.
+// Enum value maps for ClusterMemoryDownscaleRiskStatus.
 var (
-	MemoryDownscaleRiskStatus_name = map[int32]string{
-		0: "MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
-		1: "MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK",
-		2: "MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET",
-		3: "MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN",
+	ClusterMemoryDownscaleRiskStatus_name = map[int32]string{
+		0: "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+		1: "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK",
+		2: "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET",
+		3: "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN",
 	}
-	MemoryDownscaleRiskStatus_value = map[string]int32{
-		"MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED":          0,
-		"MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK":              1,
-		"MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET": 2,
-		"MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN":        3,
+	ClusterMemoryDownscaleRiskStatus_value = map[string]int32{
+		"CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED":          0,
+		"CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK":              1,
+		"CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET": 2,
+		"CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN":        3,
 	}
 )
 
-func (x MemoryDownscaleRiskStatus) Enum() *MemoryDownscaleRiskStatus {
-	p := new(MemoryDownscaleRiskStatus)
+func (x ClusterMemoryDownscaleRiskStatus) Enum() *ClusterMemoryDownscaleRiskStatus {
+	p := new(ClusterMemoryDownscaleRiskStatus)
 	*p = x
 	return p
 }
 
-func (x MemoryDownscaleRiskStatus) String() string {
+func (x ClusterMemoryDownscaleRiskStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (MemoryDownscaleRiskStatus) Descriptor() protoreflect.EnumDescriptor {
+func (ClusterMemoryDownscaleRiskStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11].Descriptor()
 }
 
-func (MemoryDownscaleRiskStatus) Type() protoreflect.EnumType {
+func (ClusterMemoryDownscaleRiskStatus) Type() protoreflect.EnumType {
 	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11]
 }
 
-func (x MemoryDownscaleRiskStatus) Number() protoreflect.EnumNumber {
+func (x ClusterMemoryDownscaleRiskStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use MemoryDownscaleRiskStatus.Descriptor instead.
-func (MemoryDownscaleRiskStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ClusterMemoryDownscaleRiskStatus.Descriptor instead.
+func (ClusterMemoryDownscaleRiskStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
@@ -1234,7 +1234,7 @@ func (x *GetClusterMemoryDownscaleRiskRequest) GetPackageId() string {
 type GetClusterMemoryDownscaleRiskResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The memory risk of moving the cluster to the candidate package.
-	MemoryDownscaleRisk *MemoryDownscaleRiskInfo `protobuf:"bytes,1,opt,name=memory_downscale_risk,json=memoryDownscaleRisk,proto3" json:"memory_downscale_risk,omitempty"`
+	MemoryDownscaleRisk *ClusterMemoryDownscaleRiskInfo `protobuf:"bytes,1,opt,name=memory_downscale_risk,json=memoryDownscaleRisk,proto3" json:"memory_downscale_risk,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1269,7 +1269,7 @@ func (*GetClusterMemoryDownscaleRiskResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetClusterMemoryDownscaleRiskResponse) GetMemoryDownscaleRisk() *MemoryDownscaleRiskInfo {
+func (x *GetClusterMemoryDownscaleRiskResponse) GetMemoryDownscaleRisk() *ClusterMemoryDownscaleRiskInfo {
 	if x != nil {
 		return x.MemoryDownscaleRisk
 	}
@@ -4123,12 +4123,12 @@ func (x *ClusterScalabilityInfo) GetReason() string {
 	return ""
 }
 
-// MemoryDownscaleRiskInfo provides information about the memory risk of moving a
+// ClusterMemoryDownscaleRiskInfo provides information about the memory risk of moving a
 // cluster to a candidate package.
-type MemoryDownscaleRiskInfo struct {
+type ClusterMemoryDownscaleRiskInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The memory downscale risk status for the assessed cluster and package.
-	Status MemoryDownscaleRiskStatus `protobuf:"varint,1,opt,name=status,proto3,enum=qdrant.cloud.cluster.v1.MemoryDownscaleRiskStatus" json:"status,omitempty"`
+	Status ClusterMemoryDownscaleRiskStatus `protobuf:"varint,1,opt,name=status,proto3,enum=qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus" json:"status,omitempty"`
 	// Human-readable explanation of the status, so that clients without their own
 	// copy for each status can report what is happening. Clients that have their
 	// own copy select it from `status` and ignore this field.
@@ -4137,20 +4137,20 @@ type MemoryDownscaleRiskInfo struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MemoryDownscaleRiskInfo) Reset() {
-	*x = MemoryDownscaleRiskInfo{}
+func (x *ClusterMemoryDownscaleRiskInfo) Reset() {
+	*x = ClusterMemoryDownscaleRiskInfo{}
 	mi := &file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MemoryDownscaleRiskInfo) String() string {
+func (x *ClusterMemoryDownscaleRiskInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MemoryDownscaleRiskInfo) ProtoMessage() {}
+func (*ClusterMemoryDownscaleRiskInfo) ProtoMessage() {}
 
-func (x *MemoryDownscaleRiskInfo) ProtoReflect() protoreflect.Message {
+func (x *ClusterMemoryDownscaleRiskInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4162,19 +4162,19 @@ func (x *MemoryDownscaleRiskInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MemoryDownscaleRiskInfo.ProtoReflect.Descriptor instead.
-func (*MemoryDownscaleRiskInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use ClusterMemoryDownscaleRiskInfo.ProtoReflect.Descriptor instead.
+func (*ClusterMemoryDownscaleRiskInfo) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{47}
 }
 
-func (x *MemoryDownscaleRiskInfo) GetStatus() MemoryDownscaleRiskStatus {
+func (x *ClusterMemoryDownscaleRiskInfo) GetStatus() ClusterMemoryDownscaleRiskStatus {
 	if x != nil {
 		return x.Status
 	}
-	return MemoryDownscaleRiskStatus_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED
+	return ClusterMemoryDownscaleRiskStatus_CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED
 }
 
-func (x *MemoryDownscaleRiskInfo) GetReason() string {
+func (x *ClusterMemoryDownscaleRiskInfo) GetReason() string {
 	if x != nil && x.Reason != nil {
 		return *x.Reason
 	}
@@ -4606,9 +4606,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12'\n" +
 	"\n" +
-	"package_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tpackageId\"\x95\x01\n" +
-	"%GetClusterMemoryDownscaleRiskResponse\x12l\n" +
-	"\x15memory_downscale_risk\x18\x01 \x01(\v20.qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfoB\x06\xbaH\x03\xc8\x01\x01R\x13memoryDownscaleRisk\"\xcd\x02\n" +
+	"package_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tpackageId\"\x9c\x01\n" +
+	"%GetClusterMemoryDownscaleRiskResponse\x12s\n" +
+	"\x15memory_downscale_risk\x18\x01 \x01(\v27.qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfoB\x06\xbaH\x03\xc8\x01\x01R\x13memoryDownscaleRisk\"\xcd\x02\n" +
 	"\x14CreateClusterRequest\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:\xf0\x01\xbaH\xec\x01\x1a\xe9\x01\n" +
 	"\"create_cluster.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1asthis.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)\"\xc4\x01\n" +
@@ -4902,9 +4902,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\x0e21.qdrant.cloud.cluster.v1.ClusterScalabilityStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12$\n" +
 	"\x06reason\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06reason\x88\x01\x01B\t\n" +
-	"\a_reason\"\xa2\x01\n" +
-	"\x17MemoryDownscaleRiskInfo\x12V\n" +
-	"\x06status\x18\x01 \x01(\x0e22.qdrant.cloud.cluster.v1.MemoryDownscaleRiskStatusB\n" +
+	"\a_reason\"\xb0\x01\n" +
+	"\x1eClusterMemoryDownscaleRiskInfo\x12]\n" +
+	"\x06status\x18\x01 \x01(\x0e29.qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12$\n" +
 	"\x06reason\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06reason\x88\x01\x01B\t\n" +
 	"\a_reason\"\xb2\x01\n" +
@@ -5012,12 +5012,12 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x18ClusterScalabilityStatus\x12*\n" +
 	"&CLUSTER_SCALABILITY_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE\x10\x01\x12'\n" +
-	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x02*\xda\x01\n" +
-	"\x19MemoryDownscaleRiskStatus\x12,\n" +
-	"(MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED\x10\x00\x12(\n" +
-	"$MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK\x10\x01\x125\n" +
-	"1MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET\x10\x02\x12.\n" +
-	"*MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN\x10\x03*\xc8\x01\n" +
+	"#CLUSTER_SCALABILITY_STATUS_SCALABLE\x10\x02*\x81\x02\n" +
+	" ClusterMemoryDownscaleRiskStatus\x124\n" +
+	"0CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED\x10\x00\x120\n" +
+	",CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK\x10\x01\x12=\n" +
+	"9CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET\x10\x02\x126\n" +
+	"2CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN\x10\x03*\xc8\x01\n" +
 	"!ClusterDiskExpansionSupportStatus\x125\n" +
 	"1CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x123\n" +
 	"/CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED\x10\x01\x127\n" +
@@ -5111,7 +5111,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(ClusterPhase)(0),                               // 8: qdrant.cloud.cluster.v1.ClusterPhase
 	(ClusterNodeState)(0),                           // 9: qdrant.cloud.cluster.v1.ClusterNodeState
 	(ClusterScalabilityStatus)(0),                   // 10: qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	(MemoryDownscaleRiskStatus)(0),                  // 11: qdrant.cloud.cluster.v1.MemoryDownscaleRiskStatus
+	(ClusterMemoryDownscaleRiskStatus)(0),           // 11: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus
 	(ClusterDiskExpansionSupportStatus)(0),          // 12: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
 	(ClusterBackupSupportStatus)(0),                 // 13: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
 	(*ListClustersRequest)(nil),                     // 14: qdrant.cloud.cluster.v1.ListClustersRequest
@@ -5161,7 +5161,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(*ClusterNodeResourcesSummary)(nil),             // 58: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
 	(*ClusterNodeResources)(nil),                    // 59: qdrant.cloud.cluster.v1.ClusterNodeResources
 	(*ClusterScalabilityInfo)(nil),                  // 60: qdrant.cloud.cluster.v1.ClusterScalabilityInfo
-	(*MemoryDownscaleRiskInfo)(nil),                 // 61: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo
+	(*ClusterMemoryDownscaleRiskInfo)(nil),          // 61: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo
 	(*ClusterDiskExpansionSupportInfo)(nil),         // 62: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
 	(*ClusterBackupSupportInfo)(nil),                // 63: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
 	(*ClusterCapabilities)(nil),                     // 64: qdrant.cloud.cluster.v1.ClusterCapabilities
@@ -5178,7 +5178,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	40, // 0: qdrant.cloud.cluster.v1.ListClustersResponse.items:type_name -> qdrant.cloud.cluster.v1.Cluster
 	40, // 1: qdrant.cloud.cluster.v1.GetClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	61, // 2: qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse.memory_downscale_risk:type_name -> qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo
+	61, // 2: qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse.memory_downscale_risk:type_name -> qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo
 	40, // 3: qdrant.cloud.cluster.v1.CreateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
 	40, // 4: qdrant.cloud.cluster.v1.CreateClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
 	40, // 5: qdrant.cloud.cluster.v1.UpdateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
@@ -5239,7 +5239,7 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
 	59, // 60: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	59, // 61: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
 	10, // 62: qdrant.cloud.cluster.v1.ClusterScalabilityInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	11, // 63: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo.status:type_name -> qdrant.cloud.cluster.v1.MemoryDownscaleRiskStatus
+	11, // 63: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus
 	12, // 64: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
 	13, // 65: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
 	62, // 66: qdrant.cloud.cluster.v1.ClusterCapabilities.disk_expansion:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo

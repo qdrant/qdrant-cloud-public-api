@@ -110,12 +110,12 @@ class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: _ClassVar[ClusterScalabilityStatus]
     CLUSTER_SCALABILITY_STATUS_SCALABLE: _ClassVar[ClusterScalabilityStatus]
 
-class MemoryDownscaleRiskStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class ClusterMemoryDownscaleRiskStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: _ClassVar[MemoryDownscaleRiskStatus]
-    MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: _ClassVar[MemoryDownscaleRiskStatus]
-    MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: _ClassVar[MemoryDownscaleRiskStatus]
-    MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: _ClassVar[MemoryDownscaleRiskStatus]
+    CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: _ClassVar[ClusterMemoryDownscaleRiskStatus]
+    CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: _ClassVar[ClusterMemoryDownscaleRiskStatus]
+    CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: _ClassVar[ClusterMemoryDownscaleRiskStatus]
+    CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: _ClassVar[ClusterMemoryDownscaleRiskStatus]
 
 class ClusterDiskExpansionSupportStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -190,10 +190,10 @@ CLUSTER_NODE_STATE_RECOVERING: ClusterNodeState
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
-MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: MemoryDownscaleRiskStatus
-MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: MemoryDownscaleRiskStatus
-MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: MemoryDownscaleRiskStatus
-MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: MemoryDownscaleRiskStatus
+CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: ClusterMemoryDownscaleRiskStatus
+CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: ClusterMemoryDownscaleRiskStatus
+CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: ClusterMemoryDownscaleRiskStatus
+CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: ClusterMemoryDownscaleRiskStatus
 CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: ClusterDiskExpansionSupportStatus
 CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: ClusterDiskExpansionSupportStatus
 CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: ClusterDiskExpansionSupportStatus
@@ -252,8 +252,8 @@ class GetClusterMemoryDownscaleRiskRequest(_message.Message):
 class GetClusterMemoryDownscaleRiskResponse(_message.Message):
     __slots__ = ("memory_downscale_risk",)
     MEMORY_DOWNSCALE_RISK_FIELD_NUMBER: _ClassVar[int]
-    memory_downscale_risk: MemoryDownscaleRiskInfo
-    def __init__(self, memory_downscale_risk: _Optional[_Union[MemoryDownscaleRiskInfo, _Mapping]] = ...) -> None: ...
+    memory_downscale_risk: ClusterMemoryDownscaleRiskInfo
+    def __init__(self, memory_downscale_risk: _Optional[_Union[ClusterMemoryDownscaleRiskInfo, _Mapping]] = ...) -> None: ...
 
 class CreateClusterRequest(_message.Message):
     __slots__ = ("cluster",)
@@ -679,13 +679,13 @@ class ClusterScalabilityInfo(_message.Message):
     reason: str
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
-class MemoryDownscaleRiskInfo(_message.Message):
+class ClusterMemoryDownscaleRiskInfo(_message.Message):
     __slots__ = ("status", "reason")
     STATUS_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
-    status: MemoryDownscaleRiskStatus
+    status: ClusterMemoryDownscaleRiskStatus
     reason: str
-    def __init__(self, status: _Optional[_Union[MemoryDownscaleRiskStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
+    def __init__(self, status: _Optional[_Union[ClusterMemoryDownscaleRiskStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
 
 class ClusterDiskExpansionSupportInfo(_message.Message):
     __slots__ = ("status", "reason")
