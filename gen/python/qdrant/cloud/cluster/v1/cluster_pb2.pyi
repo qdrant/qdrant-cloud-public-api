@@ -239,6 +239,22 @@ class GetClusterResponse(_message.Message):
     cluster: Cluster
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
+class GetClusterMemoryDownscaleRiskRequest(_message.Message):
+    __slots__ = ("account_id", "cluster_id", "package_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    cluster_id: str
+    package_id: str
+    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., package_id: _Optional[str] = ...) -> None: ...
+
+class GetClusterMemoryDownscaleRiskResponse(_message.Message):
+    __slots__ = ("memory_downscale_risk",)
+    MEMORY_DOWNSCALE_RISK_FIELD_NUMBER: _ClassVar[int]
+    memory_downscale_risk: MemoryDownscaleRiskInfo
+    def __init__(self, memory_downscale_risk: _Optional[_Union[MemoryDownscaleRiskInfo, _Mapping]] = ...) -> None: ...
+
 class CreateClusterRequest(_message.Message):
     __slots__ = ("cluster",)
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
@@ -662,22 +678,6 @@ class ClusterScalabilityInfo(_message.Message):
     status: ClusterScalabilityStatus
     reason: str
     def __init__(self, status: _Optional[_Union[ClusterScalabilityStatus, str]] = ..., reason: _Optional[str] = ...) -> None: ...
-
-class GetClusterMemoryDownscaleRiskRequest(_message.Message):
-    __slots__ = ("account_id", "cluster_id", "package_id")
-    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLUSTER_ID_FIELD_NUMBER: _ClassVar[int]
-    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
-    account_id: str
-    cluster_id: str
-    package_id: str
-    def __init__(self, account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., package_id: _Optional[str] = ...) -> None: ...
-
-class GetClusterMemoryDownscaleRiskResponse(_message.Message):
-    __slots__ = ("memory_downscale_risk",)
-    MEMORY_DOWNSCALE_RISK_FIELD_NUMBER: _ClassVar[int]
-    memory_downscale_risk: MemoryDownscaleRiskInfo
-    def __init__(self, memory_downscale_risk: _Optional[_Union[MemoryDownscaleRiskInfo, _Mapping]] = ...) -> None: ...
 
 class MemoryDownscaleRiskInfo(_message.Message):
     __slots__ = ("status", "reason")

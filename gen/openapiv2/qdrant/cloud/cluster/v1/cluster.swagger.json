@@ -305,21 +305,21 @@
         "parameters": [
           {
             "name": "accountId",
-            "description": "Identifier of the account that owns the cluster.",
+            "description": "The identifier of the account that owns the cluster (in GUID format).\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "clusterId",
-            "description": "Identifier of the cluster to assess.",
+            "description": "The identifier of the cluster to assess (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "packageId",
-            "description": "Identifier of the candidate package the cluster would be moved to.",
+            "description": "The identifier of the candidate package the cluster would be moved to (in GUID format).\nThis is a required field.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1567,7 +1567,7 @@
           "description": "The memory risk of moving the cluster to the candidate package."
         }
       },
-      "description": "Response message for GetClusterMemoryDownscaleRisk."
+      "description": "GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function."
     },
     "v1GetClusterResponse": {
       "type": "object",

@@ -383,6 +383,26 @@ message GetClusterResponse {
   Cluster cluster = 1 [(buf.validate.field).required = true];
 }
 
+// GetClusterMemoryDownscaleRiskRequest is the request for the GetClusterMemoryDownscaleRisk function.
+message GetClusterMemoryDownscaleRiskRequest {
+  // The identifier of the account that owns the cluster (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the cluster to assess (in GUID format).
+  // This cluster should be part of the provided account.
+  // This is a required field.
+  string cluster_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the candidate package the cluster would be moved to (in GUID format).
+  // This is a required field.
+  string package_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
+message GetClusterMemoryDownscaleRiskResponse {
+  // The memory risk of moving the cluster to the candidate package.
+  MemoryDownscaleRiskInfo memory_downscale_risk = 1 [(buf.validate.field).required = true];
+}
+
 // CreateClusterRequest is the request for the CreateCluster function
 message CreateClusterRequest {
   // The actual cluster
@@ -1256,22 +1276,6 @@ message ClusterScalabilityInfo {
   // Optional human-readable reason providing more context about the scalability status.
   // When a cluster is not scalable, this field explains why.
   optional string reason = 2 [(buf.validate.field).string.min_len = 1];
-}
-
-// Request message for GetClusterMemoryDownscaleRisk.
-message GetClusterMemoryDownscaleRiskRequest {
-  // Identifier of the account that owns the cluster.
-  string account_id = 1 [(buf.validate.field).string.min_len = 1];
-  // Identifier of the cluster to assess.
-  string cluster_id = 2 [(buf.validate.field).string.min_len = 1];
-  // Identifier of the candidate package the cluster would be moved to.
-  string package_id = 3 [(buf.validate.field).string.min_len = 1];
-}
-
-// Response message for GetClusterMemoryDownscaleRisk.
-message GetClusterMemoryDownscaleRiskResponse {
-  // The memory risk of moving the cluster to the candidate package.
-  MemoryDownscaleRiskInfo memory_downscale_risk = 1 [(buf.validate.field).required = true];
 }
 
 // MemoryDownscaleRiskStatus defines the memory risk states of moving a cluster

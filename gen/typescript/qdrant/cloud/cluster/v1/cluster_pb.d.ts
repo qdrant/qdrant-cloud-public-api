@@ -205,6 +205,80 @@ export declare type GetClusterResponseValid = Message<"qdrant.cloud.cluster.v1.G
 export declare const GetClusterResponseSchema: GenMessage<GetClusterResponse, {validType: GetClusterResponseValid}>;
 
 /**
+ * GetClusterMemoryDownscaleRiskRequest is the request for the GetClusterMemoryDownscaleRisk function.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest
+ */
+export declare type GetClusterMemoryDownscaleRiskRequest = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest"> & {
+  /**
+   * The identifier of the account that owns the cluster (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier of the cluster to assess (in GUID format).
+   * This cluster should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string cluster_id = 2;
+   */
+  clusterId: string;
+
+  /**
+   * The identifier of the candidate package the cluster would be moved to (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string package_id = 3;
+   */
+  packageId: string;
+};
+
+export declare type GetClusterMemoryDownscaleRiskRequestValid = GetClusterMemoryDownscaleRiskRequest;
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest.
+ * Use `create(GetClusterMemoryDownscaleRiskRequestSchema)` to create a new message.
+ */
+export declare const GetClusterMemoryDownscaleRiskRequestSchema: GenMessage<GetClusterMemoryDownscaleRiskRequest, {validType: GetClusterMemoryDownscaleRiskRequestValid}>;
+
+/**
+ * GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
+ */
+export declare type GetClusterMemoryDownscaleRiskResponse = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
+  /**
+   * The memory risk of moving the cluster to the candidate package.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo memory_downscale_risk = 1;
+   */
+  memoryDownscaleRisk?: MemoryDownscaleRiskInfo | undefined;
+};
+
+/**
+ * GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
+ *
+ * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
+ */
+export declare type GetClusterMemoryDownscaleRiskResponseValid = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
+  /**
+   * The memory risk of moving the cluster to the candidate package.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo memory_downscale_risk = 1;
+   */
+  memoryDownscaleRisk: MemoryDownscaleRiskInfoValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse.
+ * Use `create(GetClusterMemoryDownscaleRiskResponseSchema)` to create a new message.
+ */
+export declare const GetClusterMemoryDownscaleRiskResponseSchema: GenMessage<GetClusterMemoryDownscaleRiskResponse, {validType: GetClusterMemoryDownscaleRiskResponseValid}>;
+
+/**
  * CreateClusterRequest is the request for the CreateCluster function
  *
  * @generated from message qdrant.cloud.cluster.v1.CreateClusterRequest
@@ -2469,76 +2543,6 @@ export declare type ClusterScalabilityInfoValid = ClusterScalabilityInfo;
  * Use `create(ClusterScalabilityInfoSchema)` to create a new message.
  */
 export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalabilityInfo, {validType: ClusterScalabilityInfoValid}>;
-
-/**
- * Request message for GetClusterMemoryDownscaleRisk.
- *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest
- */
-export declare type GetClusterMemoryDownscaleRiskRequest = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest"> & {
-  /**
-   * Identifier of the account that owns the cluster.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * Identifier of the cluster to assess.
-   *
-   * @generated from field: string cluster_id = 2;
-   */
-  clusterId: string;
-
-  /**
-   * Identifier of the candidate package the cluster would be moved to.
-   *
-   * @generated from field: string package_id = 3;
-   */
-  packageId: string;
-};
-
-export declare type GetClusterMemoryDownscaleRiskRequestValid = GetClusterMemoryDownscaleRiskRequest;
-
-/**
- * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest.
- * Use `create(GetClusterMemoryDownscaleRiskRequestSchema)` to create a new message.
- */
-export declare const GetClusterMemoryDownscaleRiskRequestSchema: GenMessage<GetClusterMemoryDownscaleRiskRequest, {validType: GetClusterMemoryDownscaleRiskRequestValid}>;
-
-/**
- * Response message for GetClusterMemoryDownscaleRisk.
- *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
- */
-export declare type GetClusterMemoryDownscaleRiskResponse = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
-  /**
-   * The memory risk of moving the cluster to the candidate package.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo memory_downscale_risk = 1;
-   */
-  memoryDownscaleRisk?: MemoryDownscaleRiskInfo | undefined;
-};
-
-/**
- * Response message for GetClusterMemoryDownscaleRisk.
- *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
- */
-export declare type GetClusterMemoryDownscaleRiskResponseValid = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
-  /**
-   * The memory risk of moving the cluster to the candidate package.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.MemoryDownscaleRiskInfo memory_downscale_risk = 1;
-   */
-  memoryDownscaleRisk: MemoryDownscaleRiskInfoValid;
-};
-
-/**
- * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse.
- * Use `create(GetClusterMemoryDownscaleRiskResponseSchema)` to create a new message.
- */
-export declare const GetClusterMemoryDownscaleRiskResponseSchema: GenMessage<GetClusterMemoryDownscaleRiskResponse, {validType: GetClusterMemoryDownscaleRiskResponseValid}>;
 
 /**
  * MemoryDownscaleRiskInfo provides information about the memory risk of moving a
