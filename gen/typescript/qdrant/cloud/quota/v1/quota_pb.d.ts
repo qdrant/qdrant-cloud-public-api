@@ -36,11 +36,19 @@ export declare const GetAuthenticatedUserQuotasRequestSchema: GenMessage<GetAuth
 export declare type GetAuthenticatedUserQuotasResponse = Message<"qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse"> & {
   /**
    * Maximum number of accounts this user can be the owner of (at least 1).
-   * To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
+   * To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
    *
    * @generated from field: uint32 max_owned_accounts = 1;
    */
   maxOwnedAccounts: number;
+
+  /**
+   * Maximum number of accounts this user can be a member of (at least 1).
+   * To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
+   *
+   * @generated from field: uint32 max_member_accounts = 2;
+   */
+  maxMemberAccounts: number;
 };
 
 export declare type GetAuthenticatedUserQuotasResponseValid = GetAuthenticatedUserQuotasResponse;

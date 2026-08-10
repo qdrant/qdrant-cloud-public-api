@@ -284,6 +284,52 @@
         ]
       }
     },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/memory-downscale-risk": {
+      "get": {
+        "summary": "Gets the memory risk of moving the cluster identified by the given ID to the\ncandidate package identified by the given ID.\nThe call does not modify the cluster and is evaluated against a freshly read\nmeasurement, so repeated calls track the cluster's current state.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetClusterMemoryDownscaleRisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterMemoryDownscaleRiskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account that owns the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster to assess (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageId",
+            "description": "The identifier of the candidate package the cluster would be moved to (in GUID format).\nThis is a required field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
     "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/restart": {
       "post": {
         "summary": "Restarts a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
@@ -1067,6 +1113,31 @@
       },
       "description": "Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.\nAll fields in this message are a read-only field."
     },
+    "v1ClusterMemoryDownscaleRiskInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterMemoryDownscaleRiskStatus",
+          "description": "The memory downscale risk status for the assessed cluster and package."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable explanation of the status, so that clients without their own\ncopy for each status can report what is happening. Clients that have their\nown copy select it from `status` and ignore this field."
+        }
+      },
+      "description": "ClusterMemoryDownscaleRiskInfo provides information about the memory risk of moving a\ncluster to a candidate package."
+    },
+    "v1ClusterMemoryDownscaleRiskStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+        "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK",
+        "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET",
+        "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN"
+      ],
+      "default": "CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+      "description": "ClusterMemoryDownscaleRiskStatus defines the memory risk states of moving a cluster\nto a package that provides less RAM than the cluster currently has.\n\n - CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED: Memory downscale risk is unspecified.\n - CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK: Moving the cluster to the candidate package carries no memory risk, either\nbecause the candidate does not reduce RAM, or because the cluster's observed\nRAM usage fits within it.\n - CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: The cluster's observed RAM usage does not fit within the candidate package.\n - CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: The cluster's RAM usage could not be determined, so the risk is unknown."
+    },
     "v1ClusterNodeAction": {
       "type": "object",
       "properties": {
@@ -1135,13 +1206,13 @@
       "enum": [
         "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
         "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
-        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING",
+        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED",
         "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
         "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
         "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN"
       ],
       "default": "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
-      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_FAILING: The node's container cannot start at all, for example because its image\ncannot be pulled or its configuration is rejected.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run, so no ClusterNodeNotReadyInfo.event accompanies\nthis condition.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
+      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED: Something is preventing the node's container from starting, for example an\nimage that cannot be pulled or configuration that cannot be resolved.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run, so no ClusterNodeNotReadyInfo.event accompanies\nthis condition.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
     },
     "v1ClusterNodeNotReadyInfo": {
       "type": "object",
@@ -1597,6 +1668,16 @@
       "type": "object",
       "description": "Empty",
       "title": "EnableClusterJwtRbacResponse is the response from the EnableClusterJwtRbac function"
+    },
+    "v1GetClusterMemoryDownscaleRiskResponse": {
+      "type": "object",
+      "properties": {
+        "memoryDownscaleRisk": {
+          "$ref": "#/definitions/v1ClusterMemoryDownscaleRiskInfo",
+          "description": "The memory risk of moving the cluster to the candidate package."
+        }
+      },
+      "description": "GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function."
     },
     "v1GetClusterResponse": {
       "type": "object",

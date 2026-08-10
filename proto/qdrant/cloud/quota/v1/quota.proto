@@ -47,8 +47,11 @@ message GetAuthenticatedUserQuotasRequest {
 // GetAuthenticatedUserQuotasResponse is the response from the GetAuthenticatedUserQuotas function
 message GetAuthenticatedUserQuotasResponse {
   // Maximum number of accounts this user can be the owner of (at least 1).
-  // To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`
+  // To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
   uint32 max_owned_accounts = 1 [(buf.validate.field).uint32.gt = 0];
+  // Maximum number of accounts this user can be a member of (at least 1).
+  // To get the actual list invoke: `qdrant.cloud.account.v1.AccountService.ListAccounts`.
+  uint32 max_member_accounts = 2 [(buf.validate.field).uint32.gt = 0];
 }
 
 // GetAccountQuotasRequest is the request for the GetAccountQuotas function.
