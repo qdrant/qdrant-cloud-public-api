@@ -21,12 +21,16 @@ Repository = "https://github.com/qdrant/qdrant-cloud-public-api"
 
 
 # Consider this as *happens in the time of `sdist` creation* i.e. at the time of packaging.
+# Keep Metadata-Version 2.4 until twine/packaging used for upload accept 2.5
+# (hatchling >=1.30 defaults to 2.5 which twine 6.1 rejects).
 [tool.hatch.build.targets.sdist]
 include = ["gen/python/qdrant", "gen/python/google", "gen/python/buf", "gen/python/k8s", "gen/python/k8s.io"]
+core-metadata-version = "2.4"
 
 [tool.hatch.build.targets.wheel]
 # Remove prefix from the generated sources, installed package will have the structure `qdrant/cloud`
 packages = ["gen/python/qdrant", "gen/python/google", "gen/python/buf", "gen/python/k8s", "gen/python/k8s.io"]
+core-metadata-version = "2.4"
 
 
 [build-system]
