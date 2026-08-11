@@ -1196,6 +1196,16 @@ message ClusterNodeInfo {
   // This is a read-only field provided by the system.
   // Only set for Multi-AZ clusters.
   optional string availability_zone = 11;
+  // Structured explanation of why the node is not ready.
+  // Set alongside CLUSTER_NODE_STATE_STARTING as well as
+  // CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
+  // as starting, because it shares a pod-condition signature with ordinary
+  // startup. Not always set: a node that is not ready may carry no explanation,
+  // for example while the cluster's status is stale (CLUSTER_PHASE_UNKNOWN) and
+  // no current reason can be determined. Consumers should not assume this field
+  // is present whenever a node is not ready.
+  // It clears automatically once the node recovers.
+  optional ClusterNodeNotReadyInfo not_ready_info = 12;
 }
 
 // ClusterNodeState represents the state of a cluster node.
@@ -1212,6 +1222,102 @@ enum ClusterNodeState {
   CLUSTER_NODE_STATE_SUSPENDED = 4;
   // The node is started but still needs to do some operations to recover.
   CLUSTER_NODE_STATE_RECOVERING = 5;
+}
+
+// ClusterNodeNotReadyCondition describes why a node is not ready right now.
+// It is derived from the current node status, so it clears on its own once the
+// node recovers.
+enum ClusterNodeNotReadyCondition {
+  // The condition is unspecified.
+  CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED = 0;
+  // The node's pod could not be scheduled, for example because the
+  // Kubernetes cluster has insufficient capacity.
+  // Only reported for hybrid cloud clusters, where the user owns the
+  // infrastructure.
+  CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR = 1;
+  // Something is preventing the node's container from starting, for example an
+  // image that cannot be pulled or configuration that cannot be resolved.
+  // Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
+  // process has never run, so no ClusterNodeNotReadyInfo.event accompanies
+  // this condition.
+  CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED = 2;
+  // The node's container has run before but cannot stay up, and is being
+  // restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
+  CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 3;
+  // The node's container is running, but its readiness check is failing.
+  CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING = 4;
+  // The node is not ready for a reason that cannot be determined from the
+  // reported node status.
+  CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN = 5;
+}
+
+// ClusterNodeTerminationEvent describes what terminated a node's container the
+// last time it went down. Unlike a condition, this is a historical fact and is
+// only reported as supporting evidence for a node that is currently not ready.
+enum ClusterNodeTerminationEvent {
+  // The event is unspecified.
+  CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED = 0;
+  // The container was terminated because it reached its memory limit.
+  CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY = 1;
+  // The container's process exited unexpectedly with a non-zero exit code.
+  CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED = 2;
+}
+
+// ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
+enum ClusterNodeActionKind {
+  // The action kind is unspecified.
+  CLUSTER_NODE_ACTION_KIND_UNSPECIFIED = 0;
+  // Scale the cluster's resources per node.
+  CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY = 1;
+  // Read the documentation explaining the condition and how to resolve it.
+  CLUSTER_NODE_ACTION_KIND_DOCUMENTATION = 2;
+}
+
+// ClusterNodeAction describes something the user can do to resolve a node's
+// not-ready condition.
+// All fields in this message are read-only.
+message ClusterNodeAction {
+  // What the user is asked to do.
+  ClusterNodeActionKind kind = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Short description of the action, for example "Scale your cluster".
+  string description = 2 [(buf.validate.field).string.min_len = 1];
+  // The URL to open, for actions that are a navigation.
+  // Not set for actions the consumer carries out itself, such as
+  // CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already
+  // has the account and cluster identifiers it needs.
+  optional string url = 3 [(buf.validate.field).string.uri = true];
+}
+
+// ClusterNodeNotReadyInfo explains why a cluster node is not ready.
+// The messages are short technical sentences intended for consumers without a
+// user interface of their own. Consumers are free to ignore them and render
+// their own copy based on the condition and event values.
+// All fields in this message are read-only.
+message ClusterNodeNotReadyInfo {
+  // The reason the node is not ready right now.
+  ClusterNodeNotReadyCondition condition = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Human-readable explanation of the condition,
+  // for example "Your container is restarting".
+  string condition_message = 2 [(buf.validate.field).string.min_len = 1];
+  // What terminated the node's container the last time it went down.
+  // Only set together with
+  // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
+  optional ClusterNodeTerminationEvent event = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Human-readable explanation of the event,
+  // for example "Your node has reached its memory limit".
+  // Only set when event is set.
+  optional string event_message = 4 [(buf.validate.field).string.min_len = 1];
+  // Actions the user can take to resolve the condition.
+  repeated ClusterNodeAction actions = 5 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
