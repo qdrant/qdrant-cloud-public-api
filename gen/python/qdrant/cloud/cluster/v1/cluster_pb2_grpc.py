@@ -25,10 +25,10 @@ class ClusterServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterResponse.FromString,
                 _registered_method=True)
-        self.GetClusterMemoryDownscaleRisk = channel.unary_unary(
-                '/qdrant.cloud.cluster.v1.ClusterService/GetClusterMemoryDownscaleRisk',
-                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskResponse.FromString,
+        self.GetClusterDownscaleRisk = channel.unary_unary(
+                '/qdrant.cloud.cluster.v1.ClusterService/GetClusterDownscaleRisk',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskResponse.FromString,
                 _registered_method=True)
         self.CreateCluster = channel.unary_unary(
                 '/qdrant.cloud.cluster.v1.ClusterService/CreateCluster',
@@ -109,11 +109,11 @@ class ClusterServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetClusterMemoryDownscaleRisk(self, request, context):
-        """Gets the memory risk of moving the cluster identified by the given ID to the
-        candidate package identified by the given ID.
-        The call does not modify the cluster and is evaluated against a freshly read
-        measurement, so repeated calls track the cluster's current state.
+    def GetClusterDownscaleRisk(self, request, context):
+        """Gets the downscale risks of applying the properties provided in the request to the
+        cluster identified by the given ID, one entry per assessed resource.
+        The call does not modify the cluster and is evaluated against freshly read
+        measurements, so repeated calls track the cluster's current state.
         Required permissions:
         - read:clusters
         """
@@ -239,10 +239,10 @@ def add_ClusterServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterResponse.SerializeToString,
             ),
-            'GetClusterMemoryDownscaleRisk': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetClusterMemoryDownscaleRisk,
-                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskResponse.SerializeToString,
+            'GetClusterDownscaleRisk': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetClusterDownscaleRisk,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskResponse.SerializeToString,
             ),
             'CreateCluster': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateCluster,
@@ -366,7 +366,7 @@ class ClusterService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetClusterMemoryDownscaleRisk(request,
+    def GetClusterDownscaleRisk(request,
             target,
             options=(),
             channel_credentials=None,
@@ -379,9 +379,9 @@ class ClusterService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.cluster.v1.ClusterService/GetClusterMemoryDownscaleRisk',
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskRequest.SerializeToString,
-            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterMemoryDownscaleRiskResponse.FromString,
+            '/qdrant.cloud.cluster.v1.ClusterService/GetClusterDownscaleRisk',
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_v1_dot_cluster__pb2.GetClusterDownscaleRiskResponse.FromString,
             options,
             channel_credentials,
             insecure,
