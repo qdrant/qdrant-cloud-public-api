@@ -2954,7 +2954,7 @@ type UserMfaMethod struct {
 	// This is a read-only field.
 	ExternalId string `protobuf:"bytes,1,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
 	// Specifies the type of MFA the user enrolled in.
-	// Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+	// Must be either "totp", "recovery-code", "webauthn-platform", or "webauthn-roaming".
 	// This is a read-only field.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// The timestamp when the user enrolled in MFA.
@@ -3214,11 +3214,11 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at\"\x96\x04\n" +
+	"\x11_last_modified_at\"\xa5\x04\n" +
 	"\rUserMfaMethod\x12(\n" +
 	"\vexternal_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"externalId\x12D\n" +
-	"\x04type\x18\x02 \x01(\tB0\xbaH-r+R\x04totpR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x129\n" +
+	"externalId\x12S\n" +
+	"\x04type\x18\x02 \x01(\tB?\xbaH<r:R\x04totpR\rrecovery-codeR\x11webauthn-platformR\x10webauthn-roamingR\x04type\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12N\n" +
 	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12 \n" +

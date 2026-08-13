@@ -607,7 +607,7 @@
           },
           {
             "name": "mfaMethod.type",
-            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -667,7 +667,7 @@
           },
           {
             "name": "mfaMethod.type",
-            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1472,7 +1472,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field."
+          "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field."
         },
         "createdAt": {
           "type": "string",

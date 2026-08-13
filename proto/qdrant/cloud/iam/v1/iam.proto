@@ -1073,11 +1073,12 @@ message UserMfaMethod {
   // This is a read-only field.
   string external_id = 1 [(buf.validate.field).string = {min_len: 1}];
   // Specifies the type of MFA the user enrolled in.
-  // Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+  // Must be either "totp", "recovery-code", "webauthn-platform", or "webauthn-roaming".
   // This is a read-only field.
   string type = 2 [(buf.validate.field).string = {
     in: [
       "totp",
+      "recovery-code",
       "webauthn-platform",
       "webauthn-roaming"
     ]
