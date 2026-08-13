@@ -1604,7 +1604,7 @@ export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod">
 
   /**
    * Specifies the type of MFA the user enrolled in.
-   * Must be either "totp", "webauthn-platform", or "webauthn-roaming".
+   * Must be either "totp", "recovery-code", "webauthn-platform", or "webauthn-roaming".
    * This is a read-only field.
    *
    * @generated from field: string type = 2;
