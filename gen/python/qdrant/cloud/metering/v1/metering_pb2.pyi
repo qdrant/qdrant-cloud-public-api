@@ -110,14 +110,30 @@ class GetUsageBreakdownResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[UsageBreakdownMonth, _Mapping]]] = ...) -> None: ...
 
 class UsageBreakdownMonth(_message.Message):
-    __slots__ = ("year", "month", "accounts")
+    __slots__ = ("year", "month", "accounts", "funding")
     YEAR_FIELD_NUMBER: _ClassVar[int]
     MONTH_FIELD_NUMBER: _ClassVar[int]
     ACCOUNTS_FIELD_NUMBER: _ClassVar[int]
+    FUNDING_FIELD_NUMBER: _ClassVar[int]
     year: int
     month: int
     accounts: _containers.RepeatedCompositeFieldContainer[UsageBreakdownAccount]
-    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., accounts: _Optional[_Iterable[_Union[UsageBreakdownAccount, _Mapping]]] = ...) -> None: ...
+    funding: UsageBreakdownFunding
+    def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., accounts: _Optional[_Iterable[_Union[UsageBreakdownAccount, _Mapping]]] = ..., funding: _Optional[_Union[UsageBreakdownFunding, _Mapping]] = ...) -> None: ...
+
+class UsageBreakdownFunding(_message.Message):
+    __slots__ = ("credits_drawn",)
+    CREDITS_DRAWN_FIELD_NUMBER: _ClassVar[int]
+    credits_drawn: _containers.RepeatedCompositeFieldContainer[CreditDrawdown]
+    def __init__(self, credits_drawn: _Optional[_Iterable[_Union[CreditDrawdown, _Mapping]]] = ...) -> None: ...
+
+class CreditDrawdown(_message.Message):
+    __slots__ = ("credit_contract_id", "amount_millicents")
+    CREDIT_CONTRACT_ID_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    credit_contract_id: str
+    amount_millicents: int
+    def __init__(self, credit_contract_id: _Optional[str] = ..., amount_millicents: _Optional[int] = ...) -> None: ...
 
 class UsageBreakdownAccount(_message.Message):
     __slots__ = ("account_id", "account_name", "clusters")

@@ -283,6 +283,21 @@
       },
       "description": "ClusterUsageConfig describes the shape and placement of a cluster\nfor the cluster-usage billable metric."
     },
+    "v1CreditDrawdown": {
+      "type": "object",
+      "properties": {
+        "creditContractId": {
+          "type": "string",
+          "description": "The identifier of the credit contract."
+        },
+        "amountMillicents": {
+          "type": "string",
+          "format": "int64",
+          "description": "The amount drawn from it, in millicents."
+        }
+      },
+      "description": "CreditDrawdown is the amount one credit contract paid towards a usage period."
+    },
     "v1GetUsageBreakdownResponse": {
       "type": "object",
       "properties": {
@@ -553,6 +568,20 @@
       },
       "description": "UsageBreakdownCluster represents the usage for a single cluster within a month."
     },
+    "v1UsageBreakdownFunding": {
+      "type": "object",
+      "properties": {
+        "creditsDrawn": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CreditDrawdown"
+          },
+          "description": "The credits drawn in this period, per contract. Empty means all pay-as-you-go."
+        }
+      },
+      "description": "UsageBreakdownFunding states how much of a period's usage prepaid credits paid for."
+    },
     "v1UsageBreakdownMonth": {
       "type": "object",
       "properties": {
@@ -573,6 +602,10 @@
             "$ref": "#/definitions/v1UsageBreakdownAccount"
           },
           "description": "The accounts that had usage in this month."
+        },
+        "funding": {
+          "$ref": "#/definitions/v1UsageBreakdownFunding",
+          "description": "How this period's usage was paid for. Absent when the server did not resolve it."
         }
       },
       "description": "UsageBreakdownMonth groups usage for a single calendar month."

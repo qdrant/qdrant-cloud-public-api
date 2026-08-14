@@ -577,6 +577,14 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
    * @generated from field: double remaining_amount = 10;
    */
   remainingAmount: number;
+
+  /**
+   * The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+   * a balance zeroed at expiry rather than spent.
+   *
+   * @generated from field: google.protobuf.Timestamp exhausted_at = 11;
+   */
+  exhaustedAt?: Timestamp | undefined;
 };
 
 /**
@@ -648,6 +656,14 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
    * @generated from field: double remaining_amount = 10;
    */
   remainingAmount: number;
+
+  /**
+   * The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+   * a balance zeroed at expiry rather than spent.
+   *
+   * @generated from field: google.protobuf.Timestamp exhausted_at = 11;
+   */
+  exhaustedAt?: Timestamp | undefined;
 };
 
 /**

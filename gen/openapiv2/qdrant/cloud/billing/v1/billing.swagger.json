@@ -249,6 +249,11 @@
           "type": "number",
           "format": "double",
           "description": "Amount remaining."
+        },
+        "exhaustedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the balance was spent down to nothing. Absent while credits remain, and for\na balance zeroed at expiry rather than spent."
         }
       },
       "description": "CreditContract represents a prepaid credit contract for an organization."

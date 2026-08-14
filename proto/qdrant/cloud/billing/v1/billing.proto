@@ -213,6 +213,9 @@ message CreditContract {
   double used_amount = 9 [(buf.validate.field).double.gte = 0.0];
   // Amount remaining.
   double remaining_amount = 10 [(buf.validate.field).double.gte = 0.0];
+  // The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+  // a balance zeroed at expiry rather than spent.
+  google.protobuf.Timestamp exhausted_at = 11;
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.

@@ -187,6 +187,24 @@ message UsageBreakdownMonth {
   }];
   // The accounts that had usage in this month.
   repeated UsageBreakdownAccount accounts = 3;
+  // How this period's usage was paid for. Absent when the server did not resolve it.
+  UsageBreakdownFunding funding = 4;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.
+message UsageBreakdownFunding {
+  // The credits drawn in this period, per contract. Empty means all pay-as-you-go.
+  repeated CreditDrawdown credits_drawn = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// CreditDrawdown is the amount one credit contract paid towards a usage period.
+message CreditDrawdown {
+  // The identifier of the credit contract.
+  string credit_contract_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The amount drawn from it, in millicents.
+  int64 amount_millicents = 2 [(buf.validate.field).int64.gte = 0];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

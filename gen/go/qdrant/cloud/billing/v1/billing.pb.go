@@ -783,8 +783,11 @@ type CreditContract struct {
 	UsedAmount float64 `protobuf:"fixed64,9,opt,name=used_amount,json=usedAmount,proto3" json:"used_amount,omitempty"`
 	// Amount remaining.
 	RemainingAmount float64 `protobuf:"fixed64,10,opt,name=remaining_amount,json=remainingAmount,proto3" json:"remaining_amount,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+	// a balance zeroed at expiry rather than spent.
+	ExhaustedAt   *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=exhausted_at,json=exhaustedAt,proto3" json:"exhausted_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreditContract) Reset() {
@@ -878,6 +881,13 @@ func (x *CreditContract) GetRemainingAmount() float64 {
 		return x.RemainingAmount
 	}
 	return 0
+}
+
+func (x *CreditContract) GetExhaustedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExhaustedAt
+	}
+	return nil
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
@@ -1122,7 +1132,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x12&\n" +
 	"\x06amount\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12-\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{3}$R\bcurrency\"\xd5\x03\n" +
+	"^[A-Z]{3}$R\bcurrency\"\x94\x04\n" +
 	"\x0eCreditContract\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12'\n" +
 	"\n" +
@@ -1137,7 +1147,8 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\vused_amount\x18\t \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
 	"usedAmount\x129\n" +
 	"\x10remaining_amount\x18\n" +
-	" \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fremainingAmountB\b\n" +
+	" \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fremainingAmount\x12=\n" +
+	"\fexhausted_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\vexhaustedAtB\b\n" +
 	"\x06_notes\"I\n" +
 	"\x1eGetBillingAccountParentRequest\x12'\n" +
 	"\n" +
@@ -1212,21 +1223,22 @@ var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	11, // 9: qdrant.cloud.billing.v1.ListCreditContractsResponse.consumption_history:type_name -> qdrant.cloud.billing.v1.MonthlyCreditConsumption
 	17, // 10: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
 	17, // 11: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
-	1,  // 12: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	3,  // 13: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
-	9,  // 14: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
-	13, // 15: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
-	15, // 16: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
-	2,  // 17: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	4,  // 18: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	10, // 19: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
-	14, // 20: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
-	16, // 21: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
-	17, // [17:22] is the sub-list for method output_type
-	12, // [12:17] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	17, // 12: qdrant.cloud.billing.v1.CreditContract.exhausted_at:type_name -> google.protobuf.Timestamp
+	1,  // 13: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	3,  // 14: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	9,  // 15: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
+	13, // 16: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	15, // 17: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	2,  // 18: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	4,  // 19: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	10, // 20: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
+	14, // 21: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	16, // 22: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	18, // [18:23] is the sub-list for method output_type
+	13, // [13:18] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }
