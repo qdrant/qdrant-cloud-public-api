@@ -527,6 +527,15 @@ export declare type UsageBreakdownMonth = Message<"qdrant.cloud.metering.v1.Usag
    * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownAccount accounts = 3;
    */
   accounts: UsageBreakdownAccount[];
+
+  /**
+   * How this period's usage was paid for.
+   * Absent when the server could not resolve it, which is not the same as no credits having
+   * funded the period: that is reported as a present but empty breakdown.
+   *
+   * @generated from field: qdrant.cloud.metering.v1.UsageBreakdownFunding funding = 4;
+   */
+  funding?: UsageBreakdownFunding | undefined;
 };
 
 /**
@@ -555,6 +564,15 @@ export declare type UsageBreakdownMonthValid = Message<"qdrant.cloud.metering.v1
    * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownAccount accounts = 3;
    */
   accounts: UsageBreakdownAccountValid[];
+
+  /**
+   * How this period's usage was paid for.
+   * Absent when the server could not resolve it, which is not the same as no credits having
+   * funded the period: that is reported as a present but empty breakdown.
+   *
+   * @generated from field: qdrant.cloud.metering.v1.UsageBreakdownFunding funding = 4;
+   */
+  funding?: UsageBreakdownFundingValid | undefined;
 };
 
 /**
@@ -562,6 +580,59 @@ export declare type UsageBreakdownMonthValid = Message<"qdrant.cloud.metering.v1
  * Use `create(UsageBreakdownMonthSchema)` to create a new message.
  */
 export declare const UsageBreakdownMonthSchema: GenMessage<UsageBreakdownMonth, {validType: UsageBreakdownMonthValid}>;
+
+/**
+ * UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.
+ * Whatever the credits did not cover was billed as pay-as-you-go.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownFunding
+ */
+export declare type UsageBreakdownFunding = Message<"qdrant.cloud.metering.v1.UsageBreakdownFunding"> & {
+  /**
+   * The credits drawn down over this period, one entry per contract they came from.
+   * Empty when no credits funded it, so all of the usage was pay-as-you-go.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.CreditDrawdown credits_drawn = 1;
+   */
+  creditsDrawn: CreditDrawdown[];
+};
+
+export declare type UsageBreakdownFundingValid = UsageBreakdownFunding;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.UsageBreakdownFunding.
+ * Use `create(UsageBreakdownFundingSchema)` to create a new message.
+ */
+export declare const UsageBreakdownFundingSchema: GenMessage<UsageBreakdownFunding, {validType: UsageBreakdownFundingValid}>;
+
+/**
+ * CreditDrawdown is the amount a single credit contract paid towards one usage period.
+ *
+ * @generated from message qdrant.cloud.metering.v1.CreditDrawdown
+ */
+export declare type CreditDrawdown = Message<"qdrant.cloud.metering.v1.CreditDrawdown"> & {
+  /**
+   * The identifier of the credit contract the credits were drawn from.
+   *
+   * @generated from field: string credit_contract_id = 1;
+   */
+  creditContractId: string;
+
+  /**
+   * The amount drawn from that contract, in millicents.
+   *
+   * @generated from field: int64 amount_millicents = 2;
+   */
+  amountMillicents: bigint;
+};
+
+export declare type CreditDrawdownValid = CreditDrawdown;
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.CreditDrawdown.
+ * Use `create(CreditDrawdownSchema)` to create a new message.
+ */
+export declare const CreditDrawdownSchema: GenMessage<CreditDrawdown, {validType: CreditDrawdownValid}>;
 
 /**
  * UsageBreakdownAccount groups per-cluster usage for a single account in a given month.
