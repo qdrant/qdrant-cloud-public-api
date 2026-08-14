@@ -579,9 +579,8 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
   remainingAmount: number;
 
   /**
-   * The timestamp the balance was drawn down to nothing, if it has been.
-   * Absent while credits remain, and absent for a contract whose balance was zeroed at expiry
-   * with credits left unused: that is not the same as having spent them.
+   * The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+   * a balance zeroed at expiry rather than spent.
    *
    * @generated from field: optional google.protobuf.Timestamp exhausted_at = 11;
    */
@@ -659,9 +658,8 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
   remainingAmount: number;
 
   /**
-   * The timestamp the balance was drawn down to nothing, if it has been.
-   * Absent while credits remain, and absent for a contract whose balance was zeroed at expiry
-   * with credits left unused: that is not the same as having spent them.
+   * The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+   * a balance zeroed at expiry rather than spent.
    *
    * @generated from field: optional google.protobuf.Timestamp exhausted_at = 11;
    */

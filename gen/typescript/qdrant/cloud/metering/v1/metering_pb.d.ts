@@ -529,9 +529,7 @@ export declare type UsageBreakdownMonth = Message<"qdrant.cloud.metering.v1.Usag
   accounts: UsageBreakdownAccount[];
 
   /**
-   * How this period's usage was paid for.
-   * Absent when the server could not resolve it, which is not the same as no credits having
-   * funded the period: that is reported as a present but empty breakdown.
+   * How this period's usage was paid for. Absent when the server did not resolve it.
    *
    * @generated from field: qdrant.cloud.metering.v1.UsageBreakdownFunding funding = 4;
    */
@@ -566,9 +564,7 @@ export declare type UsageBreakdownMonthValid = Message<"qdrant.cloud.metering.v1
   accounts: UsageBreakdownAccountValid[];
 
   /**
-   * How this period's usage was paid for.
-   * Absent when the server could not resolve it, which is not the same as no credits having
-   * funded the period: that is reported as a present but empty breakdown.
+   * How this period's usage was paid for. Absent when the server did not resolve it.
    *
    * @generated from field: qdrant.cloud.metering.v1.UsageBreakdownFunding funding = 4;
    */
@@ -583,14 +579,12 @@ export declare const UsageBreakdownMonthSchema: GenMessage<UsageBreakdownMonth, 
 
 /**
  * UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.
- * Whatever the credits did not cover was billed as pay-as-you-go.
  *
  * @generated from message qdrant.cloud.metering.v1.UsageBreakdownFunding
  */
 export declare type UsageBreakdownFunding = Message<"qdrant.cloud.metering.v1.UsageBreakdownFunding"> & {
   /**
-   * The credits drawn down over this period, one entry per contract they came from.
-   * Empty when no credits funded it, so all of the usage was pay-as-you-go.
+   * The credits drawn in this period, per contract. Empty means all pay-as-you-go.
    *
    * @generated from field: repeated qdrant.cloud.metering.v1.CreditDrawdown credits_drawn = 1;
    */
@@ -606,20 +600,20 @@ export declare type UsageBreakdownFundingValid = UsageBreakdownFunding;
 export declare const UsageBreakdownFundingSchema: GenMessage<UsageBreakdownFunding, {validType: UsageBreakdownFundingValid}>;
 
 /**
- * CreditDrawdown is the amount a single credit contract paid towards one usage period.
+ * CreditDrawdown is the amount one credit contract paid towards a usage period.
  *
  * @generated from message qdrant.cloud.metering.v1.CreditDrawdown
  */
 export declare type CreditDrawdown = Message<"qdrant.cloud.metering.v1.CreditDrawdown"> & {
   /**
-   * The identifier of the credit contract the credits were drawn from.
+   * The identifier of the credit contract.
    *
    * @generated from field: string credit_contract_id = 1;
    */
   creditContractId: string;
 
   /**
-   * The amount drawn from that contract, in millicents.
+   * The amount drawn from it, in millicents.
    *
    * @generated from field: int64 amount_millicents = 2;
    */

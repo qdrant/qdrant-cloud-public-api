@@ -253,7 +253,7 @@
         "exhaustedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp the balance was drawn down to nothing, if it has been.\nAbsent while credits remain, and absent for a contract whose balance was zeroed at expiry\nwith credits left unused: that is not the same as having spent them."
+          "description": "The timestamp the balance was spent down to nothing. Absent while credits remain, and for\na balance zeroed at expiry rather than spent."
         }
       },
       "description": "CreditContract represents a prepaid credit contract for an organization."

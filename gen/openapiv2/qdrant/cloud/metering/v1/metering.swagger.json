@@ -288,15 +288,15 @@
       "properties": {
         "creditContractId": {
           "type": "string",
-          "description": "The identifier of the credit contract the credits were drawn from."
+          "description": "The identifier of the credit contract."
         },
         "amountMillicents": {
           "type": "string",
           "format": "int64",
-          "description": "The amount drawn from that contract, in millicents."
+          "description": "The amount drawn from it, in millicents."
         }
       },
-      "description": "CreditDrawdown is the amount a single credit contract paid towards one usage period."
+      "description": "CreditDrawdown is the amount one credit contract paid towards a usage period."
     },
     "v1GetUsageBreakdownResponse": {
       "type": "object",
@@ -577,10 +577,10 @@
             "type": "object",
             "$ref": "#/definitions/v1CreditDrawdown"
           },
-          "description": "The credits drawn down over this period, one entry per contract they came from.\nEmpty when no credits funded it, so all of the usage was pay-as-you-go."
+          "description": "The credits drawn in this period, per contract. Empty means all pay-as-you-go."
         }
       },
-      "description": "UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.\nWhatever the credits did not cover was billed as pay-as-you-go."
+      "description": "UsageBreakdownFunding states how much of a period's usage prepaid credits paid for."
     },
     "v1UsageBreakdownMonth": {
       "type": "object",
@@ -605,7 +605,7 @@
         },
         "funding": {
           "$ref": "#/definitions/v1UsageBreakdownFunding",
-          "description": "How this period's usage was paid for.\nAbsent when the server could not resolve it, which is not the same as no credits having\nfunded the period: that is reported as a present but empty breakdown."
+          "description": "How this period's usage was paid for. Absent when the server did not resolve it."
         }
       },
       "description": "UsageBreakdownMonth groups usage for a single calendar month."

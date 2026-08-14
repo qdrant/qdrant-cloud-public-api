@@ -187,27 +187,23 @@ message UsageBreakdownMonth {
   }];
   // The accounts that had usage in this month.
   repeated UsageBreakdownAccount accounts = 3;
-  // How this period's usage was paid for.
-  // Absent when the server could not resolve it, which is not the same as no credits having
-  // funded the period: that is reported as a present but empty breakdown.
+  // How this period's usage was paid for. Absent when the server did not resolve it.
   UsageBreakdownFunding funding = 4;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.
-// Whatever the credits did not cover was billed as pay-as-you-go.
 message UsageBreakdownFunding {
-  // The credits drawn down over this period, one entry per contract they came from.
-  // Empty when no credits funded it, so all of the usage was pay-as-you-go.
+  // The credits drawn in this period, per contract. Empty means all pay-as-you-go.
   repeated CreditDrawdown credits_drawn = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// CreditDrawdown is the amount a single credit contract paid towards one usage period.
+// CreditDrawdown is the amount one credit contract paid towards a usage period.
 message CreditDrawdown {
-  // The identifier of the credit contract the credits were drawn from.
+  // The identifier of the credit contract.
   string credit_contract_id = 1 [(buf.validate.field).string.min_len = 1];
-  // The amount drawn from that contract, in millicents.
+  // The amount drawn from it, in millicents.
   int64 amount_millicents = 2 [(buf.validate.field).int64.gte = 0];
 }
 

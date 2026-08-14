@@ -783,9 +783,8 @@ type CreditContract struct {
 	UsedAmount float64 `protobuf:"fixed64,9,opt,name=used_amount,json=usedAmount,proto3" json:"used_amount,omitempty"`
 	// Amount remaining.
 	RemainingAmount float64 `protobuf:"fixed64,10,opt,name=remaining_amount,json=remainingAmount,proto3" json:"remaining_amount,omitempty"`
-	// The timestamp the balance was drawn down to nothing, if it has been.
-	// Absent while credits remain, and absent for a contract whose balance was zeroed at expiry
-	// with credits left unused: that is not the same as having spent them.
+	// The timestamp the balance was spent down to nothing. Absent while credits remain, and for
+	// a balance zeroed at expiry rather than spent.
 	ExhaustedAt   *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=exhausted_at,json=exhaustedAt,proto3,oneof" json:"exhausted_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -596,9 +596,7 @@ type UsageBreakdownMonth struct {
 	Month int32 `protobuf:"varint,2,opt,name=month,proto3" json:"month,omitempty"`
 	// The accounts that had usage in this month.
 	Accounts []*UsageBreakdownAccount `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
-	// How this period's usage was paid for.
-	// Absent when the server could not resolve it, which is not the same as no credits having
-	// funded the period: that is reported as a present but empty breakdown.
+	// How this period's usage was paid for. Absent when the server did not resolve it.
 	Funding       *UsageBreakdownFunding `protobuf:"bytes,4,opt,name=funding,proto3" json:"funding,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -663,11 +661,9 @@ func (x *UsageBreakdownMonth) GetFunding() *UsageBreakdownFunding {
 }
 
 // UsageBreakdownFunding states how much of a period's usage prepaid credits paid for.
-// Whatever the credits did not cover was billed as pay-as-you-go.
 type UsageBreakdownFunding struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The credits drawn down over this period, one entry per contract they came from.
-	// Empty when no credits funded it, so all of the usage was pay-as-you-go.
+	// The credits drawn in this period, per contract. Empty means all pay-as-you-go.
 	CreditsDrawn  []*CreditDrawdown `protobuf:"bytes,1,rep,name=credits_drawn,json=creditsDrawn,proto3" json:"credits_drawn,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -710,12 +706,12 @@ func (x *UsageBreakdownFunding) GetCreditsDrawn() []*CreditDrawdown {
 	return nil
 }
 
-// CreditDrawdown is the amount a single credit contract paid towards one usage period.
+// CreditDrawdown is the amount one credit contract paid towards a usage period.
 type CreditDrawdown struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the credit contract the credits were drawn from.
+	// The identifier of the credit contract.
 	CreditContractId string `protobuf:"bytes,1,opt,name=credit_contract_id,json=creditContractId,proto3" json:"credit_contract_id,omitempty"`
-	// The amount drawn from that contract, in millicents.
+	// The amount drawn from it, in millicents.
 	AmountMillicents int64 `protobuf:"varint,2,opt,name=amount_millicents,json=amountMillicents,proto3" json:"amount_millicents,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
