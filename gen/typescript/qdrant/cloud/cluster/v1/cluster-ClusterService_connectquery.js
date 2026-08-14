@@ -23,16 +23,16 @@ export const listClusters = ClusterService.method.listClusters;
 export const getCluster = ClusterService.method.getCluster;
 
 /**
- * Gets the memory risk of moving the cluster identified by the given ID to the
- * candidate package identified by the given ID.
- * The call does not modify the cluster and is evaluated against a freshly read
- * measurement, so repeated calls track the cluster's current state.
+ * Gets the downscale risks of applying the properties provided in the request to the
+ * cluster identified by the given ID, one entry per assessed resource.
+ * The call does not modify the cluster and is evaluated against freshly read
+ * measurements, so repeated calls track the cluster's current state.
  * Required permissions:
  * - read:clusters
  *
- * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetClusterMemoryDownscaleRisk
+ * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk
  */
-export const getClusterMemoryDownscaleRisk = ClusterService.method.getClusterMemoryDownscaleRisk;
+export const getClusterDownscaleRisk = ClusterService.method.getClusterDownscaleRisk;
 
 /**
  * Creates a cluster in the account identified by the given ID.

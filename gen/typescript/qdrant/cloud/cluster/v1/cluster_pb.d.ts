@@ -205,11 +205,11 @@ export declare type GetClusterResponseValid = Message<"qdrant.cloud.cluster.v1.G
 export declare const GetClusterResponseSchema: GenMessage<GetClusterResponse, {validType: GetClusterResponseValid}>;
 
 /**
- * GetClusterMemoryDownscaleRiskRequest is the request for the GetClusterMemoryDownscaleRisk function.
+ * GetClusterDownscaleRiskRequest is the request for the GetClusterDownscaleRisk function.
  *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest
+ * @generated from message qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest
  */
-export declare type GetClusterMemoryDownscaleRiskRequest = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest"> & {
+export declare type GetClusterDownscaleRiskRequest = Message<"qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest"> & {
   /**
    * The identifier of the account that owns the cluster (in GUID format).
    * This is a required field.
@@ -229,6 +229,7 @@ export declare type GetClusterMemoryDownscaleRiskRequest = Message<"qdrant.cloud
 
   /**
    * The identifier of the candidate package the cluster would be moved to (in GUID format).
+   * This is the only property assessed for now; further properties may be added later.
    * This is a required field.
    *
    * @generated from field: string package_id = 3;
@@ -236,47 +237,38 @@ export declare type GetClusterMemoryDownscaleRiskRequest = Message<"qdrant.cloud
   packageId: string;
 };
 
-export declare type GetClusterMemoryDownscaleRiskRequestValid = GetClusterMemoryDownscaleRiskRequest;
+export declare type GetClusterDownscaleRiskRequestValid = GetClusterDownscaleRiskRequest;
 
 /**
- * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskRequest.
- * Use `create(GetClusterMemoryDownscaleRiskRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest.
+ * Use `create(GetClusterDownscaleRiskRequestSchema)` to create a new message.
  */
-export declare const GetClusterMemoryDownscaleRiskRequestSchema: GenMessage<GetClusterMemoryDownscaleRiskRequest, {validType: GetClusterMemoryDownscaleRiskRequestValid}>;
+export declare const GetClusterDownscaleRiskRequestSchema: GenMessage<GetClusterDownscaleRiskRequest, {validType: GetClusterDownscaleRiskRequestValid}>;
 
 /**
- * GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
+ * GetClusterDownscaleRiskResponse is the response from the GetClusterDownscaleRisk function.
  *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
+ * @generated from message qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse
  */
-export declare type GetClusterMemoryDownscaleRiskResponse = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
+export declare type GetClusterDownscaleRiskResponse = Message<"qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse"> & {
   /**
-   * The memory risk of moving the cluster to the candidate package.
+   * The risks of applying the requested properties to the cluster, one entry per assessed
+   * resource and at most one entry per resource. Resources that carry no risk are
+   * reported too, with status `CLUSTER_DOWNSCALE_RISK_STATUS_NO_RISK`, so applying the
+   * properties is safe only when every entry has that status.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo memory_downscale_risk = 1;
+   * @generated from field: repeated qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo downscale_risks = 1;
    */
-  memoryDownscaleRisk?: ClusterMemoryDownscaleRiskInfo | undefined;
+  downscaleRisks: ClusterDownscaleRiskInfo[];
 };
 
-/**
- * GetClusterMemoryDownscaleRiskResponse is the response from the GetClusterMemoryDownscaleRisk function.
- *
- * @generated from message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse
- */
-export declare type GetClusterMemoryDownscaleRiskResponseValid = Message<"qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse"> & {
-  /**
-   * The memory risk of moving the cluster to the candidate package.
-   *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo memory_downscale_risk = 1;
-   */
-  memoryDownscaleRisk: ClusterMemoryDownscaleRiskInfoValid;
-};
+export declare type GetClusterDownscaleRiskResponseValid = GetClusterDownscaleRiskResponse;
 
 /**
- * Describes the message qdrant.cloud.cluster.v1.GetClusterMemoryDownscaleRiskResponse.
- * Use `create(GetClusterMemoryDownscaleRiskResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse.
+ * Use `create(GetClusterDownscaleRiskResponseSchema)` to create a new message.
  */
-export declare const GetClusterMemoryDownscaleRiskResponseSchema: GenMessage<GetClusterMemoryDownscaleRiskResponse, {validType: GetClusterMemoryDownscaleRiskResponseValid}>;
+export declare const GetClusterDownscaleRiskResponseSchema: GenMessage<GetClusterDownscaleRiskResponse, {validType: GetClusterDownscaleRiskResponseValid}>;
 
 /**
  * CreateClusterRequest is the request for the CreateCluster function
@@ -2660,36 +2652,43 @@ export declare type ClusterScalabilityInfoValid = ClusterScalabilityInfo;
 export declare const ClusterScalabilityInfoSchema: GenMessage<ClusterScalabilityInfo, {validType: ClusterScalabilityInfoValid}>;
 
 /**
- * ClusterMemoryDownscaleRiskInfo provides information about the memory risk of moving a
- * cluster to a candidate package.
+ * ClusterDownscaleRiskInfo provides information about the risk of applying the requested
+ * properties to a cluster, for a single resource.
  *
- * @generated from message qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo
+ * @generated from message qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo
  */
-export declare type ClusterMemoryDownscaleRiskInfo = Message<"qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo"> & {
+export declare type ClusterDownscaleRiskInfo = Message<"qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo"> & {
   /**
-   * The memory downscale risk status for the assessed cluster and package.
+   * The resource the risk is assessed for.
    *
-   * @generated from field: qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus status = 1;
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource resource = 1;
    */
-  status: ClusterMemoryDownscaleRiskStatus;
+  resource: ClusterDownscaleRiskResource;
+
+  /**
+   * The downscale risk status for the assessed cluster, resource and requested properties.
+   *
+   * @generated from field: qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus status = 2;
+   */
+  status: ClusterDownscaleRiskStatus;
 
   /**
    * Human-readable explanation of the status, so that clients without their own
    * copy for each status can report what is happening. Clients that have their
    * own copy select it from `status` and ignore this field.
    *
-   * @generated from field: optional string reason = 2;
+   * @generated from field: optional string reason = 3;
    */
   reason?: string | undefined;
 };
 
-export declare type ClusterMemoryDownscaleRiskInfoValid = ClusterMemoryDownscaleRiskInfo;
+export declare type ClusterDownscaleRiskInfoValid = ClusterDownscaleRiskInfo;
 
 /**
- * Describes the message qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskInfo.
- * Use `create(ClusterMemoryDownscaleRiskInfoSchema)` to create a new message.
+ * Describes the message qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo.
+ * Use `create(ClusterDownscaleRiskInfoSchema)` to create a new message.
  */
-export declare const ClusterMemoryDownscaleRiskInfoSchema: GenMessage<ClusterMemoryDownscaleRiskInfo, {validType: ClusterMemoryDownscaleRiskInfoValid}>;
+export declare const ClusterDownscaleRiskInfoSchema: GenMessage<ClusterDownscaleRiskInfo, {validType: ClusterDownscaleRiskInfoValid}>;
 
 /**
  * ClusterDiskExpansionSupportInfo provides information about disk expansion support
@@ -3655,47 +3654,73 @@ export enum ClusterScalabilityStatus {
 export declare const ClusterScalabilityStatusSchema: GenEnum<ClusterScalabilityStatus>;
 
 /**
- * ClusterMemoryDownscaleRiskStatus defines the memory risk states of moving a cluster
- * to a package that provides less RAM than the cluster currently has.
+ * ClusterDownscaleRiskResource defines the cluster resources a downscale risk is assessed for.
  *
- * @generated from enum qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource
  */
-export enum ClusterMemoryDownscaleRiskStatus {
+export enum ClusterDownscaleRiskResource {
   /**
-   * Memory downscale risk is unspecified.
+   * Downscale risk resource is unspecified.
    *
-   * @generated from enum value: CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_UNSPECIFIED = 0;
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_RESOURCE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * Moving the cluster to the candidate package carries no memory risk, either
-   * because the candidate does not reduce RAM, or because the cluster's observed
-   * RAM usage fits within it.
+   * The risk is about the RAM the cluster would have with the requested properties.
    *
-   * @generated from enum value: CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_NO_RISK = 1;
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_RESOURCE_MEMORY = 1;
+   */
+  MEMORY = 1,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource.
+ */
+export declare const ClusterDownscaleRiskResourceSchema: GenEnum<ClusterDownscaleRiskResource>;
+
+/**
+ * ClusterDownscaleRiskStatus defines the risk states of applying properties that leave a
+ * cluster with less of a given resource than it currently has.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus
+ */
+export enum ClusterDownscaleRiskStatus {
+  /**
+   * Downscale risk is unspecified.
+   *
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Applying the requested properties carries no risk for the resource, either because
+   * they do not reduce it, or because the cluster's observed usage fits within it.
+   *
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_STATUS_NO_RISK = 1;
    */
   NO_RISK = 1,
 
   /**
-   * The cluster's observed RAM usage does not fit within the candidate package.
+   * The cluster's observed usage of the resource does not fit within what the requested
+   * properties provide.
    *
-   * @generated from enum value: CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET = 2;
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET = 2;
    */
   USAGE_EXCEEDS_TARGET = 2,
 
   /**
-   * The cluster's RAM usage could not be determined, so the risk is unknown.
+   * The cluster's usage of the resource could not be determined, so the risk is unknown.
    *
-   * @generated from enum value: CLUSTER_MEMORY_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN = 3;
+   * @generated from enum value: CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN = 3;
    */
   USAGE_UNKNOWN = 3,
 }
 
 /**
- * Describes the enum qdrant.cloud.cluster.v1.ClusterMemoryDownscaleRiskStatus.
+ * Describes the enum qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus.
  */
-export declare const ClusterMemoryDownscaleRiskStatusSchema: GenEnum<ClusterMemoryDownscaleRiskStatus>;
+export declare const ClusterDownscaleRiskStatusSchema: GenEnum<ClusterDownscaleRiskStatus>;
 
 /**
  * ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
@@ -3794,19 +3819,19 @@ export declare const ClusterService: GenService<{
     output: typeof GetClusterResponseSchema;
   },
   /**
-   * Gets the memory risk of moving the cluster identified by the given ID to the
-   * candidate package identified by the given ID.
-   * The call does not modify the cluster and is evaluated against a freshly read
-   * measurement, so repeated calls track the cluster's current state.
+   * Gets the downscale risks of applying the properties provided in the request to the
+   * cluster identified by the given ID, one entry per assessed resource.
+   * The call does not modify the cluster and is evaluated against freshly read
+   * measurements, so repeated calls track the cluster's current state.
    * Required permissions:
    * - read:clusters
    *
-   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetClusterMemoryDownscaleRisk
+   * @generated from rpc qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk
    */
-  getClusterMemoryDownscaleRisk: {
+  getClusterDownscaleRisk: {
     methodKind: "unary";
-    input: typeof GetClusterMemoryDownscaleRiskRequestSchema;
-    output: typeof GetClusterMemoryDownscaleRiskResponseSchema;
+    input: typeof GetClusterDownscaleRiskRequestSchema;
+    output: typeof GetClusterDownscaleRiskResponseSchema;
   },
   /**
    * Creates a cluster in the account identified by the given ID.

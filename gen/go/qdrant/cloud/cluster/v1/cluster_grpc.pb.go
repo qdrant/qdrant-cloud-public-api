@@ -19,20 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_ListClusters_FullMethodName                  = "/qdrant.cloud.cluster.v1.ClusterService/ListClusters"
-	ClusterService_GetCluster_FullMethodName                    = "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
-	ClusterService_GetClusterMemoryDownscaleRisk_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/GetClusterMemoryDownscaleRisk"
-	ClusterService_CreateCluster_FullMethodName                 = "/qdrant.cloud.cluster.v1.ClusterService/CreateCluster"
-	ClusterService_CreateClusterFromBackup_FullMethodName       = "/qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup"
-	ClusterService_UpdateCluster_FullMethodName                 = "/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster"
-	ClusterService_DeleteCluster_FullMethodName                 = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
-	ClusterService_RestartCluster_FullMethodName                = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
-	ClusterService_SuspendCluster_FullMethodName                = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
-	ClusterService_UnsuspendCluster_FullMethodName              = "/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster"
-	ClusterService_EnableClusterJwtRbac_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/EnableClusterJwtRbac"
-	ClusterService_SuggestClusterName_FullMethodName            = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
-	ClusterService_ListQdrantReleases_FullMethodName            = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
-	ClusterService_GetQdrantRelease_FullMethodName              = "/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease"
+	ClusterService_ListClusters_FullMethodName            = "/qdrant.cloud.cluster.v1.ClusterService/ListClusters"
+	ClusterService_GetCluster_FullMethodName              = "/qdrant.cloud.cluster.v1.ClusterService/GetCluster"
+	ClusterService_GetClusterDownscaleRisk_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/GetClusterDownscaleRisk"
+	ClusterService_CreateCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/CreateCluster"
+	ClusterService_CreateClusterFromBackup_FullMethodName = "/qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup"
+	ClusterService_UpdateCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/UpdateCluster"
+	ClusterService_DeleteCluster_FullMethodName           = "/qdrant.cloud.cluster.v1.ClusterService/DeleteCluster"
+	ClusterService_RestartCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/RestartCluster"
+	ClusterService_SuspendCluster_FullMethodName          = "/qdrant.cloud.cluster.v1.ClusterService/SuspendCluster"
+	ClusterService_UnsuspendCluster_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/UnsuspendCluster"
+	ClusterService_EnableClusterJwtRbac_FullMethodName    = "/qdrant.cloud.cluster.v1.ClusterService/EnableClusterJwtRbac"
+	ClusterService_SuggestClusterName_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/SuggestClusterName"
+	ClusterService_ListQdrantReleases_FullMethodName      = "/qdrant.cloud.cluster.v1.ClusterService/ListQdrantReleases"
+	ClusterService_GetQdrantRelease_FullMethodName        = "/qdrant.cloud.cluster.v1.ClusterService/GetQdrantRelease"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -49,13 +49,13 @@ type ClusterServiceClient interface {
 	// Required permissions:
 	// - read:clusters
 	GetCluster(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*GetClusterResponse, error)
-	// Gets the memory risk of moving the cluster identified by the given ID to the
-	// candidate package identified by the given ID.
-	// The call does not modify the cluster and is evaluated against a freshly read
-	// measurement, so repeated calls track the cluster's current state.
+	// Gets the downscale risks of applying the properties provided in the request to the
+	// cluster identified by the given ID, one entry per assessed resource.
+	// The call does not modify the cluster and is evaluated against freshly read
+	// measurements, so repeated calls track the cluster's current state.
 	// Required permissions:
 	// - read:clusters
-	GetClusterMemoryDownscaleRisk(ctx context.Context, in *GetClusterMemoryDownscaleRiskRequest, opts ...grpc.CallOption) (*GetClusterMemoryDownscaleRiskResponse, error)
+	GetClusterDownscaleRisk(ctx context.Context, in *GetClusterDownscaleRiskRequest, opts ...grpc.CallOption) (*GetClusterDownscaleRiskResponse, error)
 	// Creates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
@@ -136,10 +136,10 @@ func (c *clusterServiceClient) GetCluster(ctx context.Context, in *GetClusterReq
 	return out, nil
 }
 
-func (c *clusterServiceClient) GetClusterMemoryDownscaleRisk(ctx context.Context, in *GetClusterMemoryDownscaleRiskRequest, opts ...grpc.CallOption) (*GetClusterMemoryDownscaleRiskResponse, error) {
+func (c *clusterServiceClient) GetClusterDownscaleRisk(ctx context.Context, in *GetClusterDownscaleRiskRequest, opts ...grpc.CallOption) (*GetClusterDownscaleRiskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetClusterMemoryDownscaleRiskResponse)
-	err := c.cc.Invoke(ctx, ClusterService_GetClusterMemoryDownscaleRisk_FullMethodName, in, out, cOpts...)
+	out := new(GetClusterDownscaleRiskResponse)
+	err := c.cc.Invoke(ctx, ClusterService_GetClusterDownscaleRisk_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -270,13 +270,13 @@ type ClusterServiceServer interface {
 	// Required permissions:
 	// - read:clusters
 	GetCluster(context.Context, *GetClusterRequest) (*GetClusterResponse, error)
-	// Gets the memory risk of moving the cluster identified by the given ID to the
-	// candidate package identified by the given ID.
-	// The call does not modify the cluster and is evaluated against a freshly read
-	// measurement, so repeated calls track the cluster's current state.
+	// Gets the downscale risks of applying the properties provided in the request to the
+	// cluster identified by the given ID, one entry per assessed resource.
+	// The call does not modify the cluster and is evaluated against freshly read
+	// measurements, so repeated calls track the cluster's current state.
 	// Required permissions:
 	// - read:clusters
-	GetClusterMemoryDownscaleRisk(context.Context, *GetClusterMemoryDownscaleRiskRequest) (*GetClusterMemoryDownscaleRiskResponse, error)
+	GetClusterDownscaleRisk(context.Context, *GetClusterDownscaleRiskRequest) (*GetClusterDownscaleRiskResponse, error)
 	// Creates a cluster in the account identified by the given ID.
 	// Required permissions:
 	// - write:clusters
@@ -343,8 +343,8 @@ func (UnimplementedClusterServiceServer) ListClusters(context.Context, *ListClus
 func (UnimplementedClusterServiceServer) GetCluster(context.Context, *GetClusterRequest) (*GetClusterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCluster not implemented")
 }
-func (UnimplementedClusterServiceServer) GetClusterMemoryDownscaleRisk(context.Context, *GetClusterMemoryDownscaleRiskRequest) (*GetClusterMemoryDownscaleRiskResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetClusterMemoryDownscaleRisk not implemented")
+func (UnimplementedClusterServiceServer) GetClusterDownscaleRisk(context.Context, *GetClusterDownscaleRiskRequest) (*GetClusterDownscaleRiskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetClusterDownscaleRisk not implemented")
 }
 func (UnimplementedClusterServiceServer) CreateCluster(context.Context, *CreateClusterRequest) (*CreateClusterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateCluster not implemented")
@@ -436,20 +436,20 @@ func _ClusterService_GetCluster_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_GetClusterMemoryDownscaleRisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetClusterMemoryDownscaleRiskRequest)
+func _ClusterService_GetClusterDownscaleRisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClusterDownscaleRiskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClusterServiceServer).GetClusterMemoryDownscaleRisk(ctx, in)
+		return srv.(ClusterServiceServer).GetClusterDownscaleRisk(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClusterService_GetClusterMemoryDownscaleRisk_FullMethodName,
+		FullMethod: ClusterService_GetClusterDownscaleRisk_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).GetClusterMemoryDownscaleRisk(ctx, req.(*GetClusterMemoryDownscaleRiskRequest))
+		return srv.(ClusterServiceServer).GetClusterDownscaleRisk(ctx, req.(*GetClusterDownscaleRiskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -668,8 +668,8 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_GetCluster_Handler,
 		},
 		{
-			MethodName: "GetClusterMemoryDownscaleRisk",
-			Handler:    _ClusterService_GetClusterMemoryDownscaleRisk_Handler,
+			MethodName: "GetClusterDownscaleRisk",
+			Handler:    _ClusterService_GetClusterDownscaleRisk_Handler,
 		},
 		{
 			MethodName: "CreateCluster",
