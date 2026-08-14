@@ -49,7 +49,7 @@ MODEL_MODALITY_TEXT: ModelModality
 MODEL_MODALITY_IMAGE: ModelModality
 
 class ListPackagesRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses", "min_resources", "multi_az", "gpu")
+    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "statuses", "min_resources", "multi_az", "gpu", "tier")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -57,6 +57,7 @@ class ListPackagesRequest(_message.Message):
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     MULTI_AZ_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    TIER_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     cloud_provider_id: str
     cloud_provider_region_id: str
@@ -64,7 +65,8 @@ class ListPackagesRequest(_message.Message):
     min_resources: ResourceConfigurationFilter
     multi_az: bool
     gpu: bool
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ..., gpu: _Optional[bool] = ...) -> None: ...
+    tier: PackageTier
+    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., statuses: _Optional[_Iterable[_Union[PackageStatus, str]]] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., multi_az: _Optional[bool] = ..., gpu: _Optional[bool] = ..., tier: _Optional[_Union[PackageTier, str]] = ...) -> None: ...
 
 class ListPackagesResponse(_message.Message):
     __slots__ = ("items",)

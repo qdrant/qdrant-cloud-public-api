@@ -77,6 +77,15 @@ export declare type ListPackagesRequest = Message<"qdrant.cloud.booking.v1.ListP
    * @generated from field: optional bool gpu = 7;
    */
   gpu?: boolean | undefined;
+
+  /**
+   * Filter packages by tier.
+   * This is an optional field. If set, packages of the specified tier are returned.
+   * If not set, packages of the tier of the current account are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.PackageTier tier = 8;
+   */
+  tier?: PackageTier | undefined;
 };
 
 export declare type ListPackagesRequestValid = ListPackagesRequest;

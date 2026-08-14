@@ -268,7 +268,11 @@ type ListPackagesRequest struct {
 	// When true, only GPU packages are returned.
 	// When false, all packages are returned except GPU.
 	// When not set, all packages are returned.
-	Gpu           *bool `protobuf:"varint,7,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	Gpu *bool `protobuf:"varint,7,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
+	// Filter packages by tier.
+	// This is an optional field. If set, packages of the specified tier are returned.
+	// If not set, packages of the tier of the current account are returned.
+	Tier          *PackageTier `protobuf:"varint,8,opt,name=tier,proto3,enum=qdrant.cloud.booking.v1.PackageTier,oneof" json:"tier,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -350,6 +354,13 @@ func (x *ListPackagesRequest) GetGpu() bool {
 		return *x.Gpu
 	}
 	return false
+}
+
+func (x *ListPackagesRequest) GetTier() PackageTier {
+	if x != nil && x.Tier != nil {
+		return *x.Tier
+	}
+	return PackageTier_PACKAGE_TIER_STATUS_UNSPECIFIED
 }
 
 // ListPackagesResponse is the response from the ListPackages function
@@ -1927,7 +1938,7 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xaa\x05\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xfe\x05\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -1936,12 +1947,15 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\bstatuses\x18\x04 \x03(\x0e2&.qdrant.cloud.booking.v1.PackageStatusR\bstatuses\x12^\n" +
 	"\rmin_resources\x18\x05 \x01(\v24.qdrant.cloud.booking.v1.ResourceConfigurationFilterH\x01R\fminResources\x88\x01\x01\x12\x1e\n" +
 	"\bmulti_az\x18\x06 \x01(\bH\x02R\amultiAz\x88\x01\x01\x12\x15\n" +
-	"\x03gpu\x18\a \x01(\bH\x03R\x03gpu\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
+	"\x03gpu\x18\a \x01(\bH\x03R\x03gpu\x88\x01\x01\x12I\n" +
+	"\x04tier\x18\b \x01(\x0e2$.qdrant.cloud.booking.v1.PackageTierB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x04tier\x88\x01\x01:\xce\x01\xbaH\xca\x01\x1a\xc7\x01\n" +
 	".list_packages.cloud_provider_region_id_present\x12Kcloud_provider_region_id is required when cloud_provider_id is not 'hybrid'\x1aHthis.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)B\x1b\n" +
 	"\x19_cloud_provider_region_idB\x10\n" +
 	"\x0e_min_resourcesB\v\n" +
 	"\t_multi_azB\x06\n" +
-	"\x04_gpu\"N\n" +
+	"\x04_gpuB\a\n" +
+	"\x05_tier\"N\n" +
 	"\x14ListPackagesResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.booking.v1.PackageR\x05items\"\x9d\x04\n" +
 	"\x19ListGlobalPackagesRequest\x123\n" +
@@ -2170,44 +2184,45 @@ var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
 var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	0,  // 0: qdrant.cloud.booking.v1.ListPackagesRequest.statuses:type_name -> qdrant.cloud.booking.v1.PackageStatus
 	14, // 1: qdrant.cloud.booking.v1.ListPackagesRequest.min_resources:type_name -> qdrant.cloud.booking.v1.ResourceConfigurationFilter
-	10, // 2: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	14, // 3: qdrant.cloud.booking.v1.ListGlobalPackagesRequest.min_resources:type_name -> qdrant.cloud.booking.v1.ResourceConfigurationFilter
-	10, // 4: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
-	10, // 5: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
-	13, // 6: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
-	0,  // 7: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
-	1,  // 8: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
-	11, // 9: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
-	12, // 10: qdrant.cloud.booking.v1.Package.available_storage_tier_configurations:type_name -> qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations
-	26, // 11: qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
-	26, // 12: qdrant.cloud.booking.v1.GetQuoteRequest.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
-	16, // 13: qdrant.cloud.booking.v1.GetQuoteResponse.package:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
-	16, // 14: qdrant.cloud.booking.v1.GetQuoteResponse.extra_disk:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
-	16, // 15: qdrant.cloud.booking.v1.GetQuoteResponse.disk_speed:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
-	24, // 16: qdrant.cloud.booking.v1.ListInferenceModelsResponse.items:type_name -> qdrant.cloud.booking.v1.InferenceModel
-	25, // 17: qdrant.cloud.booking.v1.ListStorageTierTypesResponse.items:type_name -> qdrant.cloud.booking.v1.StorageTiers
-	2,  // 18: qdrant.cloud.booking.v1.InferenceModel.vector_type:type_name -> qdrant.cloud.booking.v1.VectorType
-	3,  // 19: qdrant.cloud.booking.v1.InferenceModel.modality:type_name -> qdrant.cloud.booking.v1.ModelModality
-	26, // 20: qdrant.cloud.booking.v1.StorageTiers.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
-	4,  // 21: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
-	8,  // 22: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
-	6,  // 23: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	15, // 24: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
-	18, // 25: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:input_type -> qdrant.cloud.booking.v1.GetBackupQuoteRequest
-	20, // 26: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:input_type -> qdrant.cloud.booking.v1.ListInferenceModelsRequest
-	22, // 27: qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes:input_type -> qdrant.cloud.booking.v1.ListStorageTierTypesRequest
-	5,  // 28: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
-	9,  // 29: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
-	7,  // 30: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	17, // 31: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
-	19, // 32: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:output_type -> qdrant.cloud.booking.v1.GetBackupQuoteResponse
-	21, // 33: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:output_type -> qdrant.cloud.booking.v1.ListInferenceModelsResponse
-	23, // 34: qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes:output_type -> qdrant.cloud.booking.v1.ListStorageTierTypesResponse
-	28, // [28:35] is the sub-list for method output_type
-	21, // [21:28] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	1,  // 2: qdrant.cloud.booking.v1.ListPackagesRequest.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
+	10, // 3: qdrant.cloud.booking.v1.ListPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	14, // 4: qdrant.cloud.booking.v1.ListGlobalPackagesRequest.min_resources:type_name -> qdrant.cloud.booking.v1.ResourceConfigurationFilter
+	10, // 5: qdrant.cloud.booking.v1.ListGlobalPackagesResponse.items:type_name -> qdrant.cloud.booking.v1.Package
+	10, // 6: qdrant.cloud.booking.v1.GetPackageResponse.package:type_name -> qdrant.cloud.booking.v1.Package
+	13, // 7: qdrant.cloud.booking.v1.Package.resource_configuration:type_name -> qdrant.cloud.booking.v1.ResourceConfiguration
+	0,  // 8: qdrant.cloud.booking.v1.Package.status:type_name -> qdrant.cloud.booking.v1.PackageStatus
+	1,  // 9: qdrant.cloud.booking.v1.Package.tier:type_name -> qdrant.cloud.booking.v1.PackageTier
+	11, // 10: qdrant.cloud.booking.v1.Package.available_additional_resources:type_name -> qdrant.cloud.booking.v1.AvailableAdditionalResources
+	12, // 11: qdrant.cloud.booking.v1.Package.available_storage_tier_configurations:type_name -> qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations
+	26, // 12: qdrant.cloud.booking.v1.AvailableStoragePerformanceTierConfigurations.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
+	26, // 13: qdrant.cloud.booking.v1.GetQuoteRequest.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
+	16, // 14: qdrant.cloud.booking.v1.GetQuoteResponse.package:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
+	16, // 15: qdrant.cloud.booking.v1.GetQuoteResponse.extra_disk:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
+	16, // 16: qdrant.cloud.booking.v1.GetQuoteResponse.disk_speed:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
+	24, // 17: qdrant.cloud.booking.v1.ListInferenceModelsResponse.items:type_name -> qdrant.cloud.booking.v1.InferenceModel
+	25, // 18: qdrant.cloud.booking.v1.ListStorageTierTypesResponse.items:type_name -> qdrant.cloud.booking.v1.StorageTiers
+	2,  // 19: qdrant.cloud.booking.v1.InferenceModel.vector_type:type_name -> qdrant.cloud.booking.v1.VectorType
+	3,  // 20: qdrant.cloud.booking.v1.InferenceModel.modality:type_name -> qdrant.cloud.booking.v1.ModelModality
+	26, // 21: qdrant.cloud.booking.v1.StorageTiers.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
+	4,  // 22: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
+	8,  // 23: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
+	6,  // 24: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
+	15, // 25: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
+	18, // 26: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:input_type -> qdrant.cloud.booking.v1.GetBackupQuoteRequest
+	20, // 27: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:input_type -> qdrant.cloud.booking.v1.ListInferenceModelsRequest
+	22, // 28: qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes:input_type -> qdrant.cloud.booking.v1.ListStorageTierTypesRequest
+	5,  // 29: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
+	9,  // 30: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
+	7,  // 31: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
+	17, // 32: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
+	19, // 33: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:output_type -> qdrant.cloud.booking.v1.GetBackupQuoteResponse
+	21, // 34: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:output_type -> qdrant.cloud.booking.v1.ListInferenceModelsResponse
+	23, // 35: qdrant.cloud.booking.v1.BookingService.ListStorageTierTypes:output_type -> qdrant.cloud.booking.v1.ListStorageTierTypesResponse
+	29, // [29:36] is the sub-list for method output_type
+	22, // [22:29] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_booking_v1_booking_proto_init() }
