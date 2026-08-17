@@ -1073,15 +1073,10 @@ message UserMfaMethod {
   // This is a read-only field.
   string external_id = 1 [(buf.validate.field).string = {min_len: 1}];
   // Specifies the type of MFA the user enrolled in.
-  // Must be either "totp", "recovery-code", "webauthn-platform", or "webauthn-roaming".
   // This is a read-only field.
-  string type = 2 [(buf.validate.field).string = {
-    in: [
-      "totp",
-      "recovery-code",
-      "webauthn-platform",
-      "webauthn-roaming"
-    ]
+  UserMfaMethodType type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
   }];
   // The timestamp when the user enrolled in MFA.
   // This is a read-only field.
@@ -1094,7 +1089,21 @@ message UserMfaMethod {
   optional string name = 5 [(buf.validate.field).string = {min_len: 1}];
   option (buf.validate.message).cel = {
     id: "user_mfa_method.name_only_for_webauthn"
-    message: "name can only be set for webauthn MFA methods (webauthn-platform or webauthn-roaming)"
-    expression: "!has(this.name) || this.type == 'webauthn-platform' || this.type == 'webauthn-roaming'"
+    message: "name can only be set for MFA methods of type WebAuthn (webauthn-platform or webauthn-roaming)"
+    expression: "!has(this.name) || this.type == 3 || this.type == 4"
   };
+}
+
+// UserMfaMethodType represents the type of a user MFA method.
+enum UserMfaMethodType {
+  // The MFA method type is unknown or not specified. This is the default value.
+  USER_MFA_METHOD_TYPE_UNSPECIFIED = 0;
+  // The MFA method type is totp.
+  USER_MFA_METHOD_TYPE_TOTP = 1;
+  // The MFA method type is recovery-code.
+  USER_MFA_METHOD_TYPE_RECOVERY_CODE = 2;
+  // The MFA method type is webauthn-platform.
+  USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM = 3;
+  // The MFA method type is webauthn-roaming.
+  USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING = 4;
 }
