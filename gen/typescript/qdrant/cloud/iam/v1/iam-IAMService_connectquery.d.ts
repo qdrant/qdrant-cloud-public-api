@@ -185,3 +185,11 @@ export const updateUserMfaMethod: typeof IAMService["method"]["updateUserMfaMeth
  * @generated from rpc qdrant.cloud.iam.v1.IAMService.DeleteUserMfaMethod
  */
 export const deleteUserMfaMethod: typeof IAMService["method"]["deleteUserMfaMethod"];
+/**
+ * Generates a multi-factor authentication (MFA) enrollment.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.iam.v1.IAMService.GenerateUserMfaEnrollment
+ */
+export const generateUserMfaEnrollment: typeof IAMService["method"]["generateUserMfaEnrollment"];

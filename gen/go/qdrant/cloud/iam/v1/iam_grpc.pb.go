@@ -19,28 +19,29 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IAMService_GetAuthenticatedUser_FullMethodName     = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
-	IAMService_ListUsers_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListUsers"
-	IAMService_UpdateUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
-	IAMService_DeleteUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/DeleteUser"
-	IAMService_GetUserProfile_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
-	IAMService_UpdateUserProfile_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile"
-	IAMService_GetUserConsent_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
-	IAMService_RecordUserConsent_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
-	IAMService_ListPermissions_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
-	IAMService_ListRoles_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
-	IAMService_GetRole_FullMethodName                  = "/qdrant.cloud.iam.v1.IAMService/GetRole"
-	IAMService_CreateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
-	IAMService_UpdateRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
-	IAMService_DeleteRole_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
-	IAMService_ListEffectivePermissions_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
-	IAMService_ListUserRoles_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/ListUserRoles"
-	IAMService_ListRoleUsers_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/ListRoleUsers"
-	IAMService_AssignUserRoles_FullMethodName          = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
-	IAMService_LogoutUser_FullMethodName               = "/qdrant.cloud.iam.v1.IAMService/LogoutUser"
-	IAMService_ListUserMfaMethods_FullMethodName       = "/qdrant.cloud.iam.v1.IAMService/ListUserMfaMethods"
-	IAMService_UpdateUserMfaMethod_FullMethodName      = "/qdrant.cloud.iam.v1.IAMService/UpdateUserMfaMethod"
-	IAMService_DeleteUserMfaMethod_FullMethodName      = "/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod"
+	IAMService_GetAuthenticatedUser_FullMethodName      = "/qdrant.cloud.iam.v1.IAMService/GetAuthenticatedUser"
+	IAMService_ListUsers_FullMethodName                 = "/qdrant.cloud.iam.v1.IAMService/ListUsers"
+	IAMService_UpdateUser_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/UpdateUser"
+	IAMService_DeleteUser_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/DeleteUser"
+	IAMService_GetUserProfile_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/GetUserProfile"
+	IAMService_UpdateUserProfile_FullMethodName         = "/qdrant.cloud.iam.v1.IAMService/UpdateUserProfile"
+	IAMService_GetUserConsent_FullMethodName            = "/qdrant.cloud.iam.v1.IAMService/GetUserConsent"
+	IAMService_RecordUserConsent_FullMethodName         = "/qdrant.cloud.iam.v1.IAMService/RecordUserConsent"
+	IAMService_ListPermissions_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/ListPermissions"
+	IAMService_ListRoles_FullMethodName                 = "/qdrant.cloud.iam.v1.IAMService/ListRoles"
+	IAMService_GetRole_FullMethodName                   = "/qdrant.cloud.iam.v1.IAMService/GetRole"
+	IAMService_CreateRole_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/CreateRole"
+	IAMService_UpdateRole_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/UpdateRole"
+	IAMService_DeleteRole_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/DeleteRole"
+	IAMService_ListEffectivePermissions_FullMethodName  = "/qdrant.cloud.iam.v1.IAMService/ListEffectivePermissions"
+	IAMService_ListUserRoles_FullMethodName             = "/qdrant.cloud.iam.v1.IAMService/ListUserRoles"
+	IAMService_ListRoleUsers_FullMethodName             = "/qdrant.cloud.iam.v1.IAMService/ListRoleUsers"
+	IAMService_AssignUserRoles_FullMethodName           = "/qdrant.cloud.iam.v1.IAMService/AssignUserRoles"
+	IAMService_LogoutUser_FullMethodName                = "/qdrant.cloud.iam.v1.IAMService/LogoutUser"
+	IAMService_ListUserMfaMethods_FullMethodName        = "/qdrant.cloud.iam.v1.IAMService/ListUserMfaMethods"
+	IAMService_UpdateUserMfaMethod_FullMethodName       = "/qdrant.cloud.iam.v1.IAMService/UpdateUserMfaMethod"
+	IAMService_DeleteUserMfaMethod_FullMethodName       = "/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod"
+	IAMService_GenerateUserMfaEnrollment_FullMethodName = "/qdrant.cloud.iam.v1.IAMService/GenerateUserMfaEnrollment"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -142,6 +143,10 @@ type IAMServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	DeleteUserMfaMethod(ctx context.Context, in *DeleteUserMfaMethodRequest, opts ...grpc.CallOption) (*DeleteUserMfaMethodResponse, error)
+	// Generates a multi-factor authentication (MFA) enrollment.
+	// Required permissions:
+	// - None (authenticated only)
+	GenerateUserMfaEnrollment(ctx context.Context, in *GenerateUserMfaEnrollmentRequest, opts ...grpc.CallOption) (*GenerateUserMfaEnrollmentResponse, error)
 }
 
 type iAMServiceClient struct {
@@ -372,6 +377,16 @@ func (c *iAMServiceClient) DeleteUserMfaMethod(ctx context.Context, in *DeleteUs
 	return out, nil
 }
 
+func (c *iAMServiceClient) GenerateUserMfaEnrollment(ctx context.Context, in *GenerateUserMfaEnrollmentRequest, opts ...grpc.CallOption) (*GenerateUserMfaEnrollmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenerateUserMfaEnrollmentResponse)
+	err := c.cc.Invoke(ctx, IAMService_GenerateUserMfaEnrollment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IAMServiceServer is the server API for IAMService service.
 // All implementations must embed UnimplementedIAMServiceServer
 // for forward compatibility.
@@ -471,6 +486,10 @@ type IAMServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	DeleteUserMfaMethod(context.Context, *DeleteUserMfaMethodRequest) (*DeleteUserMfaMethodResponse, error)
+	// Generates a multi-factor authentication (MFA) enrollment.
+	// Required permissions:
+	// - None (authenticated only)
+	GenerateUserMfaEnrollment(context.Context, *GenerateUserMfaEnrollmentRequest) (*GenerateUserMfaEnrollmentResponse, error)
 	mustEmbedUnimplementedIAMServiceServer()
 }
 
@@ -546,6 +565,9 @@ func (UnimplementedIAMServiceServer) UpdateUserMfaMethod(context.Context, *Updat
 }
 func (UnimplementedIAMServiceServer) DeleteUserMfaMethod(context.Context, *DeleteUserMfaMethodRequest) (*DeleteUserMfaMethodResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteUserMfaMethod not implemented")
+}
+func (UnimplementedIAMServiceServer) GenerateUserMfaEnrollment(context.Context, *GenerateUserMfaEnrollmentRequest) (*GenerateUserMfaEnrollmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GenerateUserMfaEnrollment not implemented")
 }
 func (UnimplementedIAMServiceServer) mustEmbedUnimplementedIAMServiceServer() {}
 func (UnimplementedIAMServiceServer) testEmbeddedByValue()                    {}
@@ -964,6 +986,24 @@ func _IAMService_DeleteUserMfaMethod_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IAMService_GenerateUserMfaEnrollment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateUserMfaEnrollmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).GenerateUserMfaEnrollment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_GenerateUserMfaEnrollment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).GenerateUserMfaEnrollment(ctx, req.(*GenerateUserMfaEnrollmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IAMService_ServiceDesc is the grpc.ServiceDesc for IAMService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1058,6 +1098,10 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUserMfaMethod",
 			Handler:    _IAMService_DeleteUserMfaMethod_Handler,
+		},
+		{
+			MethodName: "GenerateUserMfaEnrollment",
+			Handler:    _IAMService_GenerateUserMfaEnrollment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

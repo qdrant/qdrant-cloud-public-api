@@ -1471,6 +1471,67 @@ export declare type DeleteUserMfaMethodResponseValid = DeleteUserMfaMethodRespon
 export declare const DeleteUserMfaMethodResponseSchema: GenMessage<DeleteUserMfaMethodResponse, {validType: DeleteUserMfaMethodResponseValid}>;
 
 /**
+ * GenerateUserMfaEnrollmentRequest is the request for the GenerateUserMfaEnrollment function
+ *
+ * @generated from message qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentRequest
+ */
+export declare type GenerateUserMfaEnrollmentRequest = Message<"qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentRequest"> & {
+  /**
+   * Specifies the type of MFA to create an user enrollment for.
+   *
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethodType type = 1;
+   */
+  type: UserMfaMethodType;
+};
+
+export declare type GenerateUserMfaEnrollmentRequestValid = GenerateUserMfaEnrollmentRequest;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentRequest.
+ * Use `create(GenerateUserMfaEnrollmentRequestSchema)` to create a new message.
+ */
+export declare const GenerateUserMfaEnrollmentRequestSchema: GenMessage<GenerateUserMfaEnrollmentRequest, {validType: GenerateUserMfaEnrollmentRequestValid}>;
+
+/**
+ * GenerateUserMfaEnrollmentResponse is the response for the GenerateUserMfaEnrollment function
+ *
+ * @generated from message qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentResponse
+ */
+export declare type GenerateUserMfaEnrollmentResponse = Message<"qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentResponse"> & {
+  /**
+   * The MFA method enrollment result. This can be either a recovery code for an
+   * enrolled TOTP MFA method or a ticket ID for a new enrollment in a WebAuthn-type MFA method.
+   *
+   * @generated from oneof qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentResponse.enrollment_spec
+   */
+  enrollmentSpec: {
+    /**
+     * A regenerated recovery code as backup mechanism for an enrolled totp method type.
+     *
+     * @generated from field: string recovery_code = 1;
+     */
+    value: string;
+    case: "recoveryCode";
+  } | {
+    /**
+     * A one-time ticket ID for completing the MFA method type's enrollment.
+     *
+     * @generated from field: string ticket_id = 2;
+     */
+    value: string;
+    case: "ticketId";
+  } | { case: undefined; value?: undefined };
+};
+
+export declare type GenerateUserMfaEnrollmentResponseValid = GenerateUserMfaEnrollmentResponse;
+
+/**
+ * Describes the message qdrant.cloud.iam.v1.GenerateUserMfaEnrollmentResponse.
+ * Use `create(GenerateUserMfaEnrollmentResponseSchema)` to create a new message.
+ */
+export declare const GenerateUserMfaEnrollmentResponseSchema: GenMessage<GenerateUserMfaEnrollmentResponse, {validType: GenerateUserMfaEnrollmentResponseValid}>;
+
+/**
  * User Profile represents profile information about a user.
  *
  * @generated from message qdrant.cloud.iam.v1.UserProfile
@@ -2193,6 +2254,18 @@ export declare const IAMService: GenService<{
     methodKind: "unary";
     input: typeof DeleteUserMfaMethodRequestSchema;
     output: typeof DeleteUserMfaMethodResponseSchema;
+  },
+  /**
+   * Generates a multi-factor authentication (MFA) enrollment.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.iam.v1.IAMService.GenerateUserMfaEnrollment
+   */
+  generateUserMfaEnrollment: {
+    methodKind: "unary";
+    input: typeof GenerateUserMfaEnrollmentRequestSchema;
+    output: typeof GenerateUserMfaEnrollmentResponseSchema;
   },
 }>;
 

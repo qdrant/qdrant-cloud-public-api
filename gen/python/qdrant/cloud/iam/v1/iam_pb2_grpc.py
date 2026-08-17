@@ -125,6 +125,11 @@ class IAMServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.FromString,
                 _registered_method=True)
+        self.GenerateUserMfaEnrollment = channel.unary_unary(
+                '/qdrant.cloud.iam.v1.IAMService/GenerateUserMfaEnrollment',
+                request_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentResponse.FromString,
+                _registered_method=True)
 
 
 class IAMServiceServicer(object):
@@ -334,6 +339,15 @@ class IAMServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GenerateUserMfaEnrollment(self, request, context):
+        """Generates a multi-factor authentication (MFA) enrollment.
+        Required permissions:
+        - None (authenticated only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IAMServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -446,6 +460,11 @@ def add_IAMServiceServicer_to_server(servicer, server):
                     servicer.DeleteUserMfaMethod,
                     request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.SerializeToString,
+            ),
+            'GenerateUserMfaEnrollment': grpc.unary_unary_rpc_method_handler(
+                    servicer.GenerateUserMfaEnrollment,
+                    request_deserializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1043,6 +1062,33 @@ class IAMService(object):
             '/qdrant.cloud.iam.v1.IAMService/DeleteUserMfaMethod',
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodRequest.SerializeToString,
             qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.DeleteUserMfaMethodResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GenerateUserMfaEnrollment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.iam.v1.IAMService/GenerateUserMfaEnrollment',
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentRequest.SerializeToString,
+            qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2.GenerateUserMfaEnrollmentResponse.FromString,
             options,
             channel_credentials,
             insecure,

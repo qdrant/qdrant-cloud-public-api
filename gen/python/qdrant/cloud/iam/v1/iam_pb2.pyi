@@ -407,6 +407,20 @@ class DeleteUserMfaMethodResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class GenerateUserMfaEnrollmentRequest(_message.Message):
+    __slots__ = ("type",)
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    type: UserMfaMethodType
+    def __init__(self, type: _Optional[_Union[UserMfaMethodType, str]] = ...) -> None: ...
+
+class GenerateUserMfaEnrollmentResponse(_message.Message):
+    __slots__ = ("recovery_code", "ticket_id")
+    RECOVERY_CODE_FIELD_NUMBER: _ClassVar[int]
+    TICKET_ID_FIELD_NUMBER: _ClassVar[int]
+    recovery_code: str
+    ticket_id: str
+    def __init__(self, recovery_code: _Optional[str] = ..., ticket_id: _Optional[str] = ...) -> None: ...
+
 class UserProfile(_message.Message):
     __slots__ = ("given_name", "family_name", "demographics")
     GIVEN_NAME_FIELD_NUMBER: _ClassVar[int]

@@ -479,6 +479,24 @@ service IAMService {
       field_expression: "mfa_method.external_id"
     };
   }
+  // Generates a multi-factor authentication (MFA) enrollment.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GenerateUserMfaEnrollment(GenerateUserMfaEnrollmentRequest) returns (GenerateUserMfaEnrollmentResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // gRPC Gateway REST call
+    option (google.api.http) = {post: "/api/iam/v1/users/me/mfa-methods/generate"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "type"
+      field_expression: "type"
+    };
+  }
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
@@ -995,6 +1013,31 @@ message DeleteUserMfaMethodRequest {
 // DeleteUserMfaMethodResponse is the response from the DeleteUserMfaMethod function
 message DeleteUserMfaMethodResponse {
   // Empty
+}
+
+// GenerateUserMfaEnrollmentRequest is the request for the GenerateUserMfaEnrollment function
+message GenerateUserMfaEnrollmentRequest {
+  // Specifies the type of MFA to create an user enrollment for.
+  UserMfaMethodType type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [
+      0,
+      1
+    ]
+  }];
+}
+
+// GenerateUserMfaEnrollmentResponse is the response for the GenerateUserMfaEnrollment function
+message GenerateUserMfaEnrollmentResponse {
+  // The MFA method enrollment result. This can be either a recovery code for an
+  // enrolled TOTP MFA method or a ticket ID for a new enrollment in a WebAuthn-type MFA method.
+  oneof enrollment_spec {
+    option (buf.validate.oneof).required = true;
+    // A regenerated recovery code as backup mechanism for an enrolled totp method type.
+    string recovery_code = 1 [(buf.validate.field).string = {min_len: 1}];
+    // A one-time ticket ID for completing the MFA method type's enrollment.
+    string ticket_id = 2 [(buf.validate.field).string = {min_len: 1}];
+  }
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
