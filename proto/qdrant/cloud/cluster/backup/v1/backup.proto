@@ -81,6 +81,37 @@ service BackupService {
       field_expression: "backup.cluster_id"
     };
   }
+  // Updates a backup in the account identified by the given ID.
+  // Only the name can be changed; every other field is read-only and is ignored.
+  // Required permissions:
+  // - write:backups
+  rpc UpdateBackup(UpdateBackupRequest) returns (UpdateBackupResponse) {
+    // permissions
+    option (common.v1.permissions) = "write:backups";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "backup.account_id";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      patch: "/api/cluster/backup/v1/accounts/{backup.account_id}/backups/{backup.id}"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_UPDATED
+      resource_type: "backup"
+      resource_id_field: "req.backup.id"
+      resource_url_template: "/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{req.backup.id}"
+      additional_context_fields: {
+        key: "cluster_id"
+        value: "req.backup.cluster_id"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "backup_id"
+      field_expression: "backup.id"
+    };
+  }
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
   // - delete:backups
@@ -349,13 +380,44 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)"
+    message: "read-only fields (id, created_at, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)"
+  };
+  // The rule binds the request rather than `Backup.name`: the names the platform generates
+  // for scheduled backups are longer than this rule allows, and every existing backup carries one.
+  // A name is required; nothing is generated on the caller's behalf.
+  option (buf.validate.message).cel = {
+    id: "create_backup.name_rule"
+    message: "name is required and must be 4-64 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup.name.matches('^[a-zA-Z0-9-_]{4,64}$')"
   };
 }
 
 // CreateBackupResponse is the response from the CreateBackup function.
 message CreateBackupResponse {
+  // The actual backup.
+  Backup backup = 1 [(buf.validate.field).required = true];
+}
+
+// UpdateBackupRequest is the request for the UpdateBackup function.
+message UpdateBackupRequest {
+  // The actual backup.
+  // Only `name` is applied; every other field is ignored.
+  Backup backup = 1 [(buf.validate.field).required = true];
+  option (buf.validate.message).cel = {
+    id: "update_backup.id_present"
+    message: "backup.id is required for an update"
+    expression: "this.backup.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_backup.name_rule"
+    message: "name must be 4-64 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup.name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+  };
+}
+
+// UpdateBackupResponse is the response from the UpdateBackup function.
+message UpdateBackupResponse {
   // The actual backup.
   Backup backup = 1 [(buf.validate.field).required = true];
 }
@@ -592,12 +654,15 @@ message Backup {
   // This is a required field.
   string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The name of the backup.
-  // This is a read-only field and will be available after a backup is created.
+  // Required on create, or stamped from the backup schedule that produced it, and can be
+  // changed later with UpdateBackup. Never empty: every backup carries a name, and one
+  // created before names existed reports its generated identifier.
+  // Names are labels, not identifiers: they are not unique.
   string name = 5;
   option (buf.validate.message).cel = {
     id: "backup.name"
     message: "name must not be empty"
-    expression: "this.name.size() > 0 || !has(this.created_at)"
+    expression: "this.name.size() > 0"
   };
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
@@ -654,6 +719,9 @@ message ClusterInfo {
   ClusterResourcesSummary resources_summary = 5;
   // Identifier of the package that best matches the recorded resources for restoration.
   optional string restore_package_id = 6 [(buf.validate.field).string = {uuid: true}];
+  // The creation date of the cluster this backup was taken from, preserved after the
+  // cluster is deleted.
+  google.protobuf.Timestamp created_at = 7;
 }
 
 // Describes the compute resources captured by a backup.
@@ -726,6 +794,14 @@ message BackupSchedule {
   google.protobuf.Timestamp deleted_at = 7;
   // The current status of the backup schedule.
   BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
+  // The name of the backup schedule, stamped onto every backup it produces from now on.
+  // Absent on a schedule created before names existed; supplying one on edit is allowed.
+  // Renaming affects future backups only.
+  optional string name = 9 [(buf.validate.field).string = {
+    max_len: 64
+    min_len: 4
+    pattern: "^[a-zA-Z0-9-_]+$"
+  }];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

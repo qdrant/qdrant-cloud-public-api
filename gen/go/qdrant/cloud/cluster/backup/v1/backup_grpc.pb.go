@@ -22,6 +22,7 @@ const (
 	BackupService_ListBackups_FullMethodName          = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackups"
 	BackupService_GetBackup_FullMethodName            = "/qdrant.cloud.cluster.backup.v1.BackupService/GetBackup"
 	BackupService_CreateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup"
+	BackupService_UpdateBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackup"
 	BackupService_DeleteBackup_FullMethodName         = "/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup"
 	BackupService_ListBackupRestores_FullMethodName   = "/qdrant.cloud.cluster.backup.v1.BackupService/ListBackupRestores"
 	BackupService_RestoreBackup_FullMethodName        = "/qdrant.cloud.cluster.backup.v1.BackupService/RestoreBackup"
@@ -50,6 +51,11 @@ type BackupServiceClient interface {
 	// Required permissions:
 	// - write:backups
 	CreateBackup(ctx context.Context, in *CreateBackupRequest, opts ...grpc.CallOption) (*CreateBackupResponse, error)
+	// Updates a backup in the account identified by the given ID.
+	// Only the name can be changed; every other field is read-only and is ignored.
+	// Required permissions:
+	// - write:backups
+	UpdateBackup(ctx context.Context, in *UpdateBackupRequest, opts ...grpc.CallOption) (*UpdateBackupResponse, error)
 	// Deletes a backup in the account identified by the given ID.
 	// Required permissions:
 	// - delete:backups
@@ -116,6 +122,16 @@ func (c *backupServiceClient) CreateBackup(ctx context.Context, in *CreateBackup
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateBackupResponse)
 	err := c.cc.Invoke(ctx, BackupService_CreateBackup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) UpdateBackup(ctx context.Context, in *UpdateBackupRequest, opts ...grpc.CallOption) (*UpdateBackupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBackupResponse)
+	err := c.cc.Invoke(ctx, BackupService_UpdateBackup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -220,6 +236,11 @@ type BackupServiceServer interface {
 	// Required permissions:
 	// - write:backups
 	CreateBackup(context.Context, *CreateBackupRequest) (*CreateBackupResponse, error)
+	// Updates a backup in the account identified by the given ID.
+	// Only the name can be changed; every other field is read-only and is ignored.
+	// Required permissions:
+	// - write:backups
+	UpdateBackup(context.Context, *UpdateBackupRequest) (*UpdateBackupResponse, error)
 	// Deletes a backup in the account identified by the given ID.
 	// Required permissions:
 	// - delete:backups
@@ -270,6 +291,9 @@ func (UnimplementedBackupServiceServer) GetBackup(context.Context, *GetBackupReq
 }
 func (UnimplementedBackupServiceServer) CreateBackup(context.Context, *CreateBackupRequest) (*CreateBackupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateBackup not implemented")
+}
+func (UnimplementedBackupServiceServer) UpdateBackup(context.Context, *UpdateBackupRequest) (*UpdateBackupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateBackup not implemented")
 }
 func (UnimplementedBackupServiceServer) DeleteBackup(context.Context, *DeleteBackupRequest) (*DeleteBackupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteBackup not implemented")
@@ -366,6 +390,24 @@ func _BackupService_CreateBackup_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackupServiceServer).CreateBackup(ctx, req.(*CreateBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_UpdateBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).UpdateBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_UpdateBackup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).UpdateBackup(ctx, req.(*UpdateBackupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -532,6 +574,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateBackup",
 			Handler:    _BackupService_CreateBackup_Handler,
+		},
+		{
+			MethodName: "UpdateBackup",
+			Handler:    _BackupService_UpdateBackup_Handler,
 		},
 		{
 			MethodName: "DeleteBackup",

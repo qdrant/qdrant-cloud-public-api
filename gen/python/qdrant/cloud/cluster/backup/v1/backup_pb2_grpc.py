@@ -30,6 +30,11 @@ class BackupServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupResponse.FromString,
                 _registered_method=True)
+        self.UpdateBackup = channel.unary_unary(
+                '/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackup',
+                request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupResponse.FromString,
+                _registered_method=True)
         self.DeleteBackup = channel.unary_unary(
                 '/qdrant.cloud.cluster.backup.v1.BackupService/DeleteBackup',
                 request_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.DeleteBackupRequest.SerializeToString,
@@ -96,6 +101,16 @@ class BackupServiceServicer(object):
 
     def CreateBackup(self, request, context):
         """Creates a backup for the cluster identified by the given ID.
+        Required permissions:
+        - write:backups
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateBackup(self, request, context):
+        """Updates a backup in the account identified by the given ID.
+        Only the name can be changed; every other field is read-only and is ignored.
         Required permissions:
         - write:backups
         """
@@ -192,6 +207,11 @@ def add_BackupServiceServicer_to_server(servicer, server):
                     servicer.CreateBackup,
                     request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupResponse.SerializeToString,
+            ),
+            'UpdateBackup': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateBackup,
+                    request_deserializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupResponse.SerializeToString,
             ),
             'DeleteBackup': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteBackup,
@@ -316,6 +336,33 @@ class BackupService(object):
             '/qdrant.cloud.cluster.backup.v1.BackupService/CreateBackup',
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupRequest.SerializeToString,
             qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.CreateBackupResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateBackup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.cluster.backup.v1.BackupService/UpdateBackup',
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupRequest.SerializeToString,
+            qdrant_dot_cloud_dot_cluster_dot_backup_dot_v1_dot_backup__pb2.UpdateBackupResponse.FromString,
             options,
             channel_credentials,
             insecure,

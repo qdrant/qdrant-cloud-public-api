@@ -437,6 +437,53 @@
         ]
       }
     },
+    "/api/cluster/backup/v1/accounts/{backup.accountId}/backups/{backup.id}": {
+      "patch": {
+        "summary": "Updates a backup in the account identified by the given ID.\nOnly the name can be changed; every other field is read-only and is ignored.\nRequired permissions:\n- write:backups",
+        "operationId": "BackupService_UpdateBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "backup.accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backup.id",
+            "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupServiceUpdateBackupBody"
+            }
+          }
+        ],
+        "tags": [
+          "BackupService"
+        ]
+      }
+    },
     "/api/cluster/backup/v1/accounts/{backupSchedule.accountId}/backup_schedules": {
       "post": {
         "summary": "Creates a backup schedule in the account identified by the given ID.\nRequired permissions:\n- write:backup_schedules",
@@ -547,7 +594,7 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
@@ -616,6 +663,10 @@
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
             }
           },
           "description": "The actual backup schedule.",
@@ -623,6 +674,56 @@
         }
       },
       "description": "CreateBackupScheduleRequest is the request for the CreateBackupSchedule function."
+    },
+    "BackupServiceUpdateBackupBody": {
+      "type": "object",
+      "properties": {
+        "backup": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+            },
+            "clusterId": {
+              "type": "string",
+              "description": "The identifier of the cluster (in GUID format).\nThis is a required field."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
+            },
+            "status": {
+              "$ref": "#/definitions/v1BackupStatus",
+              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+            },
+            "backupDuration": {
+              "type": "string",
+              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+            },
+            "backupScheduleId": {
+              "type": "string",
+              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "The retention period in seconds for the backup. After that period, the backup is deleted from the system.\nThe value should be between 1 day (\u003e= 86400 seconds) and 365 days (\u003c= 31536000 seconds).\nIf the value is unset, backups will be retained indefinitely."
+            },
+            "clusterInfo": {
+              "$ref": "#/definitions/v1ClusterInfo",
+              "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+            }
+          },
+          "description": "The actual backup.\nOnly `name` is applied; every other field is ignored."
+        }
+      },
+      "description": "UpdateBackupRequest is the request for the UpdateBackup function."
     },
     "BackupServiceUpdateBackupScheduleBody": {
       "type": "object",
@@ -655,6 +756,10 @@
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
             }
           },
           "description": "The actual backup schedule.",
@@ -738,7 +843,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+          "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
         },
         "status": {
           "$ref": "#/definitions/v1BackupStatus",
@@ -854,6 +959,10 @@
         "status": {
           "$ref": "#/definitions/v1BackupScheduleStatus",
           "description": "The current status of the backup schedule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
@@ -1094,7 +1203,7 @@
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
-          "description": "The cluster configuration at the time of backup."
+          "description": "The cluster configuration at the time of backup.\nAbsent when the backup stored no configuration; the identity fields above are always present."
         },
         "resourcesSummary": {
           "$ref": "#/definitions/v1ClusterResourcesSummary",
@@ -1103,6 +1212,11 @@
         "restorePackageId": {
           "type": "string",
           "description": "Identifier of the package that best matches the recorded resources for restoration."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the cluster this backup was taken from, preserved after the\ncluster is deleted."
         }
       },
       "description": "Represents the cluster details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.\nThe configuration field is immutable and represents the values at backup time."
@@ -1592,6 +1706,16 @@
       "default": "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED",
       "description": "- TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: Unspecified.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: DoNotSchedule (default) tells the scheduler not to schedule it.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.",
       "title": "TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/"
+    },
+    "v1UpdateBackupResponse": {
+      "type": "object",
+      "properties": {
+        "backup": {
+          "$ref": "#/definitions/v1Backup",
+          "description": "The actual backup."
+        }
+      },
+      "description": "UpdateBackupResponse is the response from the UpdateBackup function."
     },
     "v1UpdateBackupScheduleResponse": {
       "type": "object",
