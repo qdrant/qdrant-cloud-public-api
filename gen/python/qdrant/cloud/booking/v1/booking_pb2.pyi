@@ -75,16 +75,18 @@ class ListPackagesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Package, _Mapping]]] = ...) -> None: ...
 
 class ListGlobalPackagesRequest(_message.Message):
-    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "min_resources", "gpu")
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "min_resources", "gpu", "tier")
     CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
     CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     MIN_RESOURCES_FIELD_NUMBER: _ClassVar[int]
     GPU_FIELD_NUMBER: _ClassVar[int]
+    TIER_FIELD_NUMBER: _ClassVar[int]
     cloud_provider_id: str
     cloud_provider_region_id: str
     min_resources: ResourceConfigurationFilter
     gpu: bool
-    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., gpu: _Optional[bool] = ...) -> None: ...
+    tier: PackageTier
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., min_resources: _Optional[_Union[ResourceConfigurationFilter, _Mapping]] = ..., gpu: _Optional[bool] = ..., tier: _Optional[_Union[PackageTier, str]] = ...) -> None: ...
 
 class ListGlobalPackagesResponse(_message.Message):
     __slots__ = ("items",)
