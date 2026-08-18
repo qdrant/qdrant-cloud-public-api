@@ -1762,7 +1762,6 @@ type ClusterInfo struct {
 	// For hybrid this should be the hybrid cloud environment ID.
 	CloudProviderRegionId string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
 	// The cluster configuration at the time of backup.
-	// Absent when the backup stored no configuration; the identity fields above are always present.
 	Configuration *v1.ClusterConfiguration `protobuf:"bytes,4,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	// Summary of the resources that were provisioned when the backup was taken.
 	ResourcesSummary *ClusterResourcesSummary `protobuf:"bytes,5,opt,name=resources_summary,json=resourcesSummary,proto3" json:"resources_summary,omitempty"`
@@ -2363,12 +2362,12 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a;\n" +
 	"\vbackup.name\x12\x16name must not be empty\x1a\x14this.name.size() > 0B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
-	"\x11_retention_period\"\x93\x06\n" +
+	"\x11_retention_period\"\x9b\x06\n" +
 	"\vClusterInfo\x12/\n" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
-	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12S\n" +
-	"\rconfiguration\x18\x04 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationR\rconfiguration\x12d\n" +
+	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12[\n" +
+	"\rconfiguration\x18\x04 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12d\n" +
 	"\x11resources_summary\x18\x05 \x01(\v27.qdrant.cloud.cluster.backup.v1.ClusterResourcesSummaryR\x10resourcesSummary\x12;\n" +
 	"\x12restore_package_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10restorePackageId\x88\x01\x01\x129\n" +
 	"\n" +

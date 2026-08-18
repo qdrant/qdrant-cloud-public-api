@@ -1161,7 +1161,6 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
 
   /**
    * The cluster configuration at the time of backup.
-   * Absent when the backup stored no configuration; the identity fields above are always present.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
@@ -1224,11 +1223,10 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
 
   /**
    * The cluster configuration at the time of backup.
-   * Absent when the backup stored no configuration; the identity fields above are always present.
    *
    * @generated from field: qdrant.cloud.cluster.v1.ClusterConfiguration configuration = 4;
    */
-  configuration?: ClusterConfigurationValid | undefined;
+  configuration: ClusterConfigurationValid;
 
   /**
    * Summary of the resources that were provisioned when the backup was taken.

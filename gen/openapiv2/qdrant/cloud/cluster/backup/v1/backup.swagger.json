@@ -1203,7 +1203,7 @@
         },
         "configuration": {
           "$ref": "#/definitions/v1ClusterConfiguration",
-          "description": "The cluster configuration at the time of backup.\nAbsent when the backup stored no configuration; the identity fields above are always present."
+          "description": "The cluster configuration at the time of backup."
         },
         "resourcesSummary": {
           "$ref": "#/definitions/v1ClusterResourcesSummary",
