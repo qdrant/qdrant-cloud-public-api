@@ -1604,12 +1604,11 @@ export declare type UserMfaMethod = Message<"qdrant.cloud.iam.v1.UserMfaMethod">
 
   /**
    * Specifies the type of MFA the user enrolled in.
-   * Must be either "totp", "recovery-code", "webauthn-platform", or "webauthn-roaming".
    * This is a read-only field.
    *
-   * @generated from field: string type = 2;
+   * @generated from field: qdrant.cloud.iam.v1.UserMfaMethodType type = 2;
    */
-  type: string;
+  type: UserMfaMethodType;
 
   /**
    * The timestamp when the user enrolled in MFA.
@@ -1872,6 +1871,53 @@ export enum UserConsentStatus {
  * Describes the enum qdrant.cloud.iam.v1.UserConsentStatus.
  */
 export declare const UserConsentStatusSchema: GenEnum<UserConsentStatus>;
+
+/**
+ * UserMfaMethodType represents the type of a user MFA method.
+ *
+ * @generated from enum qdrant.cloud.iam.v1.UserMfaMethodType
+ */
+export enum UserMfaMethodType {
+  /**
+   * The MFA method type is unknown or not specified. This is the default value.
+   *
+   * @generated from enum value: USER_MFA_METHOD_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The MFA method type is totp.
+   *
+   * @generated from enum value: USER_MFA_METHOD_TYPE_TOTP = 1;
+   */
+  TOTP = 1,
+
+  /**
+   * The MFA method type is recovery-code.
+   *
+   * @generated from enum value: USER_MFA_METHOD_TYPE_RECOVERY_CODE = 2;
+   */
+  RECOVERY_CODE = 2,
+
+  /**
+   * The MFA method type is webauthn-platform.
+   *
+   * @generated from enum value: USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM = 3;
+   */
+  WEBAUTHN_PLATFORM = 3,
+
+  /**
+   * The MFA method type is webauthn-roaming.
+   *
+   * @generated from enum value: USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING = 4;
+   */
+  WEBAUTHN_ROAMING = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.iam.v1.UserMfaMethodType.
+ */
+export declare const UserMfaMethodTypeSchema: GenEnum<UserMfaMethodType>;
 
 /**
  * IAMService is the API used to configure IAM (identity and access management) objects.

@@ -55,6 +55,14 @@ class UserConsentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     USER_CONSENT_STATUS_ACCEPTED: _ClassVar[UserConsentStatus]
     USER_CONSENT_STATUS_REVOKED: _ClassVar[UserConsentStatus]
     USER_CONSENT_STATUS_PENDING: _ClassVar[UserConsentStatus]
+
+class UserMfaMethodType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_MFA_METHOD_TYPE_UNSPECIFIED: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_TOTP: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_RECOVERY_CODE: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: _ClassVar[UserMfaMethodType]
 USER_STATUS_UNSPECIFIED: UserStatus
 USER_STATUS_ACTIVE: UserStatus
 USER_STATUS_BLOCKED: UserStatus
@@ -77,6 +85,11 @@ USER_CONSENT_STATUS_UNSPECIFIED: UserConsentStatus
 USER_CONSENT_STATUS_ACCEPTED: UserConsentStatus
 USER_CONSENT_STATUS_REVOKED: UserConsentStatus
 USER_CONSENT_STATUS_PENDING: UserConsentStatus
+USER_MFA_METHOD_TYPE_UNSPECIFIED: UserMfaMethodType
+USER_MFA_METHOD_TYPE_TOTP: UserMfaMethodType
+USER_MFA_METHOD_TYPE_RECOVERY_CODE: UserMfaMethodType
+USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: UserMfaMethodType
+USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: UserMfaMethodType
 
 class GetAuthenticatedUserRequest(_message.Message):
     __slots__ = ("user_id",)
@@ -434,8 +447,8 @@ class UserMfaMethod(_message.Message):
     LAST_AUTHENTICATED_AT_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     external_id: str
-    type: str
+    type: UserMfaMethodType
     created_at: _timestamp_pb2.Timestamp
     last_authenticated_at: _timestamp_pb2.Timestamp
     name: str
-    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...
+    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[_Union[UserMfaMethodType, str]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...

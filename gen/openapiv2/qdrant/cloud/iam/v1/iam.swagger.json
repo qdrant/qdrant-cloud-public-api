@@ -607,10 +607,18 @@
           },
           {
             "name": "mfaMethod.type",
-            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "description": "Specifies the type of MFA the user enrolled in.\nThis is a read-only field.\n\n - USER_MFA_METHOD_TYPE_UNSPECIFIED: The MFA method type is unknown or not specified. This is the default value.\n - USER_MFA_METHOD_TYPE_TOTP: The MFA method type is totp.\n - USER_MFA_METHOD_TYPE_RECOVERY_CODE: The MFA method type is recovery-code.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: The MFA method type is webauthn-platform.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: The MFA method type is webauthn-roaming.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "USER_MFA_METHOD_TYPE_UNSPECIFIED",
+              "USER_MFA_METHOD_TYPE_TOTP",
+              "USER_MFA_METHOD_TYPE_RECOVERY_CODE",
+              "USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM",
+              "USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING"
+            ],
+            "default": "USER_MFA_METHOD_TYPE_UNSPECIFIED"
           },
           {
             "name": "mfaMethod.createdAt",
@@ -667,10 +675,18 @@
           },
           {
             "name": "mfaMethod.type",
-            "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field.",
+            "description": "Specifies the type of MFA the user enrolled in.\nThis is a read-only field.\n\n - USER_MFA_METHOD_TYPE_UNSPECIFIED: The MFA method type is unknown or not specified. This is the default value.\n - USER_MFA_METHOD_TYPE_TOTP: The MFA method type is totp.\n - USER_MFA_METHOD_TYPE_RECOVERY_CODE: The MFA method type is recovery-code.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: The MFA method type is webauthn-platform.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: The MFA method type is webauthn-roaming.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "USER_MFA_METHOD_TYPE_UNSPECIFIED",
+              "USER_MFA_METHOD_TYPE_TOTP",
+              "USER_MFA_METHOD_TYPE_RECOVERY_CODE",
+              "USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM",
+              "USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING"
+            ],
+            "default": "USER_MFA_METHOD_TYPE_UNSPECIFIED"
           },
           {
             "name": "mfaMethod.createdAt",
@@ -1471,8 +1487,8 @@
           "description": "Authentication method identifier for the MFA information.\nThis is a read-only field."
         },
         "type": {
-          "type": "string",
-          "description": "Specifies the type of MFA the user enrolled in.\nMust be either \"totp\", \"recovery-code\", \"webauthn-platform\", or \"webauthn-roaming\".\nThis is a read-only field."
+          "$ref": "#/definitions/v1UserMfaMethodType",
+          "description": "Specifies the type of MFA the user enrolled in.\nThis is a read-only field."
         },
         "createdAt": {
           "type": "string",
@@ -1490,6 +1506,18 @@
         }
       },
       "description": "User MFA Method represents the enrollment for a multi-factor authentication method."
+    },
+    "v1UserMfaMethodType": {
+      "type": "string",
+      "enum": [
+        "USER_MFA_METHOD_TYPE_UNSPECIFIED",
+        "USER_MFA_METHOD_TYPE_TOTP",
+        "USER_MFA_METHOD_TYPE_RECOVERY_CODE",
+        "USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM",
+        "USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING"
+      ],
+      "default": "USER_MFA_METHOD_TYPE_UNSPECIFIED",
+      "description": "UserMfaMethodType represents the type of a user MFA method.\n\n - USER_MFA_METHOD_TYPE_UNSPECIFIED: The MFA method type is unknown or not specified. This is the default value.\n - USER_MFA_METHOD_TYPE_TOTP: The MFA method type is totp.\n - USER_MFA_METHOD_TYPE_RECOVERY_CODE: The MFA method type is recovery-code.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: The MFA method type is webauthn-platform.\n - USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: The MFA method type is webauthn-roaming."
     },
     "v1UserProfile": {
       "type": "object",
