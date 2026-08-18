@@ -668,7 +668,7 @@
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
             },
-            "name": {
+            "displayName": {
               "type": "string",
               "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
             }
@@ -765,7 +765,7 @@
               "$ref": "#/definitions/v1BackupScheduleStatus",
               "description": "The current status of the backup schedule."
             },
-            "name": {
+            "displayName": {
               "type": "string",
               "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
             }
@@ -972,7 +972,7 @@
           "$ref": "#/definitions/v1BackupScheduleStatus",
           "description": "The current status of the backup schedule."
         },
-        "name": {
+        "displayName": {
           "type": "string",
           "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
         }

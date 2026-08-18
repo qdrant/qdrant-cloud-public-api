@@ -807,7 +807,7 @@ message BackupSchedule {
   // The name of the backup schedule, stamped onto every backup it produces from now on.
   // Absent on a schedule created before names existed; supplying one on edit is allowed.
   // Renaming affects future backups only.
-  optional string name = 9 [(buf.validate.field).string = {
+  optional string display_name = 9 [(buf.validate.field).string = {
     max_len: 64
     min_len: 4
     pattern: "^[a-zA-Z0-9-_]+$"

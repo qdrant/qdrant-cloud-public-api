@@ -1425,9 +1425,9 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
    * Absent on a schedule created before names existed; supplying one on edit is allowed.
    * Renaming affects future backups only.
    *
-   * @generated from field: optional string name = 9;
+   * @generated from field: optional string display_name = 9;
    */
-  name?: string | undefined;
+  displayName?: string | undefined;
 };
 
 export declare type BackupScheduleValid = BackupSchedule;
