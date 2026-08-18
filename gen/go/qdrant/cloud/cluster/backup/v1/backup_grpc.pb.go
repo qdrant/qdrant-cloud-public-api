@@ -52,7 +52,7 @@ type BackupServiceClient interface {
 	// - write:backups
 	CreateBackup(ctx context.Context, in *CreateBackupRequest, opts ...grpc.CallOption) (*CreateBackupResponse, error)
 	// Updates a backup in the account identified by the given ID.
-	// Only the name can be changed; every other field is read-only and is ignored.
+	// Only the display name can be changed; every other field is read-only and is ignored.
 	// Required permissions:
 	// - write:backups
 	UpdateBackup(ctx context.Context, in *UpdateBackupRequest, opts ...grpc.CallOption) (*UpdateBackupResponse, error)
@@ -237,7 +237,7 @@ type BackupServiceServer interface {
 	// - write:backups
 	CreateBackup(context.Context, *CreateBackupRequest) (*CreateBackupResponse, error)
 	// Updates a backup in the account identified by the given ID.
-	// Only the name can be changed; every other field is read-only and is ignored.
+	// Only the display name can be changed; every other field is read-only and is ignored.
 	// Required permissions:
 	// - write:backups
 	UpdateBackup(context.Context, *UpdateBackupRequest) (*UpdateBackupResponse, error)

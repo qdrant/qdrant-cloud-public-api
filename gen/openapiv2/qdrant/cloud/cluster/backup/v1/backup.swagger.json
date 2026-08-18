@@ -439,7 +439,7 @@
     },
     "/api/cluster/backup/v1/accounts/{backup.accountId}/backups/{backup.id}": {
       "patch": {
-        "summary": "Updates a backup in the account identified by the given ID.\nOnly the name can be changed; every other field is read-only and is ignored.\nRequired permissions:\n- write:backups",
+        "summary": "Updates a backup in the account identified by the given ID.\nOnly the display name can be changed; every other field is read-only and is ignored.\nRequired permissions:\n- write:backups",
         "operationId": "BackupService_UpdateBackup",
         "responses": {
           "200": {
@@ -594,7 +594,7 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
@@ -620,6 +620,10 @@
             "clusterInfo": {
               "$ref": "#/definitions/v1ClusterInfo",
               "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+            },
+            "displayName": {
+              "type": "string",
+              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             }
           },
           "description": "The actual backup.",
@@ -692,7 +696,7 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
@@ -718,9 +722,13 @@
             "clusterInfo": {
               "$ref": "#/definitions/v1ClusterInfo",
               "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+            },
+            "displayName": {
+              "type": "string",
+              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             }
           },
-          "description": "The actual backup.\nOnly `name` is applied; every other field is ignored."
+          "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored."
         }
       },
       "description": "UpdateBackupRequest is the request for the UpdateBackup function."
@@ -843,7 +851,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty: every backup carries a name, and one\ncreated before names existed reports its generated identifier.\nNames are labels, not identifiers: they are not unique."
+          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
         },
         "status": {
           "$ref": "#/definitions/v1BackupStatus",
@@ -869,6 +877,10 @@
         "clusterInfo": {
           "$ref": "#/definitions/v1ClusterInfo",
           "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
         }
       },
       "description": "A Backup represents a backup of a Qdrant database."

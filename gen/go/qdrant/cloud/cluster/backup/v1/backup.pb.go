@@ -593,7 +593,7 @@ func (x *CreateBackupResponse) GetBackup() *Backup {
 type UpdateBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup.
-	// Only `name` is applied; every other field is ignored.
+	// Only `display_name` is applied; every other field is ignored.
 	Backup        *Backup `protobuf:"bytes,1,opt,name=backup,proto3" json:"backup,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1610,10 +1610,9 @@ type Backup struct {
 	// This is a required field.
 	ClusterId string `protobuf:"bytes,4,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The name of the backup.
-	// Required on create, or stamped from the backup schedule that produced it, and can be
-	// changed later with UpdateBackup. Never empty: every backup carries a name, and one
-	// created before names existed reports its generated identifier.
-	// Names are labels, not identifiers: they are not unique.
+	// This is a read-only field and will be available after a backup is created.
+	// It is the generated identifier the platform stores the backup under; it never changes.
+	// For a name meant to be read by a person, use `display_name`.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The current status of the backup.
 	// This is a read-only field and will be set after CreateBackup is called.
@@ -1635,7 +1634,13 @@ type Backup struct {
 	// Cluster details associated with the backup.
 	// Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
 	// This is a read-only field and will be available after the backup is created.
-	ClusterInfo   *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
+	ClusterInfo *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
+	// The human-readable name of the backup.
+	// Required on create, or stamped from the backup schedule that produced it, and can be
+	// changed later with UpdateBackup. Never empty on a response: a backup created before
+	// display names existed reports its generated `name`.
+	// Display names are labels, not identifiers: they are not unique.
+	DisplayName   string `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1745,6 +1750,13 @@ func (x *Backup) GetClusterInfo() *ClusterInfo {
 		return x.ClusterInfo
 	}
 	return nil
+}
+
+func (x *Backup) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
 }
 
 // Represents the cluster details associated with a backup.
@@ -2245,17 +2257,17 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"[\n" +
 	"\x11GetBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x99\x05\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xd1\x05\n" +
 	"\x13CreateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xb9\x04\xbaH\xb5\x04\x1a\x89\x03\n" +
-	"!create_backup.no_read_only_fields\x12\x82\x01read-only fields (id, created_at, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xde\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\x1a\xa6\x01\n" +
-	"\x17create_backup.name_rule\x12Xname is required and must be 4-64 characters of letters, digits, hyphens and underscores\x1a1this.backup.name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xf1\x04\xbaH\xed\x04\x1a\xa9\x03\n" +
+	"!create_backup.no_read_only_fields\x12\x88\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xf8\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\x1a\xbe\x01\n" +
+	"\x1fcreate_backup.display_name_rule\x12`display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xd4\x02\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xec\x02\n" +
 	"\x13UpdateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xf4\x01\xbaH\xf0\x01\x1aU\n" +
-	"\x18update_backup.id_present\x12#backup.id is required for an update\x1a\x14this.backup.id != ''\x1a\x96\x01\n" +
-	"\x17update_backup.name_rule\x12Hname must be 4-64 characters of letters, digits, hyphens and underscores\x1a1this.backup.name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\x8c\x02\xbaH\x88\x02\x1aU\n" +
+	"\x18update_backup.id_present\x12#backup.id is required for an update\x1a\x14this.backup.id != ''\x1a\xae\x01\n" +
+	"\x1fupdate_backup.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
 	"\x14UpdateBackupResponse\x12F\n" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x8a\x01\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
@@ -2340,7 +2352,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\x8b\a\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xb5\b\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2357,10 +2369,12 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\t \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01\x12^\n" +
 	"\x10retention_period\x18\n" +
 	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12N\n" +
-	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoR\vclusterInfo:\xe7\x01\xbaH\xe3\x01\x1a\xa3\x01\n" +
+	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoR\vclusterInfo\x12!\n" +
+	"\fdisplay_name\x18\v \x01(\tR\vdisplayName:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
 	"\n" +
-	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a;\n" +
-	"\vbackup.name\x12\x16name must not be empty\x1a\x14this.name.size() > 0B\x15\n" +
+	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
+	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)\x1al\n" +
+	"\x13backup.display_name\x12\x1edisplay_name must not be empty\x1a5this.display_name.size() > 0 || !has(this.created_at)B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
 	"\x11_retention_period\"\x9b\x06\n" +
 	"\vClusterInfo\x12/\n" +

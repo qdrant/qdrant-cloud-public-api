@@ -33,7 +33,7 @@ export const createBackup = BackupService.method.createBackup;
 
 /**
  * Updates a backup in the account identified by the given ID.
- * Only the name can be changed; every other field is read-only and is ignored.
+ * Only the display name can be changed; every other field is read-only and is ignored.
  * Required permissions:
  * - write:backups
  *

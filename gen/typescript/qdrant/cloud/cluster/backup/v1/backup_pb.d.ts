@@ -278,7 +278,7 @@ export declare const CreateBackupResponseSchema: GenMessage<CreateBackupResponse
 export declare type UpdateBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupRequest"> & {
   /**
    * The actual backup.
-   * Only `name` is applied; every other field is ignored.
+   * Only `display_name` is applied; every other field is ignored.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
@@ -293,7 +293,7 @@ export declare type UpdateBackupRequest = Message<"qdrant.cloud.cluster.backup.v
 export declare type UpdateBackupRequestValid = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupRequest"> & {
   /**
    * The actual backup.
-   * Only `name` is applied; every other field is ignored.
+   * Only `display_name` is applied; every other field is ignored.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
@@ -959,10 +959,9 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
 
   /**
    * The name of the backup.
-   * Required on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty: every backup carries a name, and one
-   * created before names existed reports its generated identifier.
-   * Names are labels, not identifiers: they are not unique.
+   * This is a read-only field and will be available after a backup is created.
+   * It is the generated identifier the platform stores the backup under; it never changes.
+   * For a name meant to be read by a person, use `display_name`.
    *
    * @generated from field: string name = 5;
    */
@@ -1018,6 +1017,17 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterInfo cluster_info = 12;
    */
   clusterInfo?: ClusterInfo | undefined;
+
+  /**
+   * The human-readable name of the backup.
+   * Required on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created before
+   * display names existed reports its generated `name`.
+   * Display names are labels, not identifiers: they are not unique.
+   *
+   * @generated from field: string display_name = 11;
+   */
+  displayName: string;
 };
 
 /**
@@ -1060,10 +1070,9 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
 
   /**
    * The name of the backup.
-   * Required on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty: every backup carries a name, and one
-   * created before names existed reports its generated identifier.
-   * Names are labels, not identifiers: they are not unique.
+   * This is a read-only field and will be available after a backup is created.
+   * It is the generated identifier the platform stores the backup under; it never changes.
+   * For a name meant to be read by a person, use `display_name`.
    *
    * @generated from field: string name = 5;
    */
@@ -1119,6 +1128,17 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
    * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterInfo cluster_info = 12;
    */
   clusterInfo?: ClusterInfoValid | undefined;
+
+  /**
+   * The human-readable name of the backup.
+   * Required on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created before
+   * display names existed reports its generated `name`.
+   * Display names are labels, not identifiers: they are not unique.
+   *
+   * @generated from field: string display_name = 11;
+   */
+  displayName: string;
 };
 
 /**
@@ -1709,7 +1729,7 @@ export declare const BackupService: GenService<{
   },
   /**
    * Updates a backup in the account identified by the given ID.
-   * Only the name can be changed; every other field is read-only and is ignored.
+   * Only the display name can be changed; every other field is read-only and is ignored.
    * Required permissions:
    * - write:backups
    *
