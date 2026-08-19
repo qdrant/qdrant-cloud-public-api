@@ -558,6 +558,13 @@ message CreateBackupScheduleRequest {
     message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
     expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
   };
+  // Binds the request, not `BackupSchedule.display_name`, which stays optional on the entity so a
+  // schedule stored before names existed still round-trips.
+  option (buf.validate.message).cel = {
+    id: "create_backup_schedule.display_name_rule"
+    message: "display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+  };
 }
 
 // CreateBackupScheduleResponse is the response from the CreateBackupSchedule function.
@@ -698,6 +705,39 @@ message Backup {
     message: "display_name must not be empty"
     expression: "this.display_name.size() > 0 || !has(this.created_at)"
   };
+  // What keeping this backup stored costs the account that owns it.
+  // This is a read-only field. Absent — not zero — when the cost cannot be determined:
+  // a backup not metered yet, or a region with no backup-storage price.
+  optional BackupPrice price = 13;
+}
+
+// BackupPrice represents the price of keeping one backup stored, at its current size.
+// Field names and units follow qdrant.cloud.booking.v1.PriceBreakdown.
+message BackupPrice {
+  // The currency of the prices.
+  // Specifies the currency in which the prices are denominated.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 1 [(buf.validate.field).string = {
+    len: 3
+    pattern: "^[A-Z]{3}$"
+  }];
+  // The original price per hour in millicents, before any discounts.
+  // Backup storage is billed hourly; partial hours are rounded up and billed as full hours.
+  int64 original_price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
+  // The discounted price per hour in millicents, after applying discounts.
+  // If no discounts are applied, this will be the same as original_price_per_hour.
+  int64 discounted_price_per_hour = 3 [(buf.validate.field).int64.gte = 0];
+  // The original price per month in millicents, before any discounts, at 730 hours per month.
+  int64 original_price_per_month = 4 [(buf.validate.field).int64.gte = 0];
+  // The discounted price per month in millicents, after applying discounts.
+  // If no discounts are applied, this will be the same as original_price_per_month.
+  int64 discounted_price_per_month = 5 [(buf.validate.field).int64.gte = 0];
+  // The percentage of discount applied (e.g., 10.0 for 10% discount).
+  // If no discounts are applied, this will be 0.0.
+  double discount_percentage = 6 [(buf.validate.field).double = {
+    gte: 0.0
+    lte: 100.0
+  }];
 }
 
 // Represents the cluster details associated with a backup.

@@ -1028,6 +1028,15 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: string display_name = 11;
    */
   displayName: string;
+
+  /**
+   * What keeping this backup stored costs the account that owns it.
+   * This is a read-only field. Absent — not zero — when the cost cannot be determined:
+   * a backup not metered yet, or a region with no backup-storage price.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.backup.v1.BackupPrice price = 13;
+   */
+  price?: BackupPrice | undefined;
 };
 
 /**
@@ -1139,6 +1148,15 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
    * @generated from field: string display_name = 11;
    */
   displayName: string;
+
+  /**
+   * What keeping this backup stored costs the account that owns it.
+   * This is a read-only field. Absent — not zero — when the cost cannot be determined:
+   * a backup not metered yet, or a region with no backup-storage price.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.backup.v1.BackupPrice price = 13;
+   */
+  price?: BackupPriceValid | undefined;
 };
 
 /**
@@ -1146,6 +1164,70 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
  * Use `create(BackupSchema)` to create a new message.
  */
 export declare const BackupSchema: GenMessage<Backup, {validType: BackupValid}>;
+
+/**
+ * BackupPrice represents the price of keeping one backup stored, at its current size.
+ * Field names and units follow qdrant.cloud.booking.v1.PriceBreakdown.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.BackupPrice
+ */
+export declare type BackupPrice = Message<"qdrant.cloud.cluster.backup.v1.BackupPrice"> & {
+  /**
+   * The currency of the prices.
+   * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 1;
+   */
+  currency: string;
+
+  /**
+   * The original price per hour in millicents, before any discounts.
+   * Backup storage is billed hourly; partial hours are rounded up and billed as full hours.
+   *
+   * @generated from field: int64 original_price_per_hour = 2;
+   */
+  originalPricePerHour: bigint;
+
+  /**
+   * The discounted price per hour in millicents, after applying discounts.
+   * If no discounts are applied, this will be the same as original_price_per_hour.
+   *
+   * @generated from field: int64 discounted_price_per_hour = 3;
+   */
+  discountedPricePerHour: bigint;
+
+  /**
+   * The original price per month in millicents, before any discounts, at 730 hours per month.
+   *
+   * @generated from field: int64 original_price_per_month = 4;
+   */
+  originalPricePerMonth: bigint;
+
+  /**
+   * The discounted price per month in millicents, after applying discounts.
+   * If no discounts are applied, this will be the same as original_price_per_month.
+   *
+   * @generated from field: int64 discounted_price_per_month = 5;
+   */
+  discountedPricePerMonth: bigint;
+
+  /**
+   * The percentage of discount applied (e.g., 10.0 for 10% discount).
+   * If no discounts are applied, this will be 0.0.
+   *
+   * @generated from field: double discount_percentage = 6;
+   */
+  discountPercentage: number;
+};
+
+export declare type BackupPriceValid = BackupPrice;
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.BackupPrice.
+ * Use `create(BackupPriceSchema)` to create a new message.
+ */
+export declare const BackupPriceSchema: GenMessage<BackupPrice, {validType: BackupPriceValid}>;
 
 /**
  * Represents the cluster details associated with a backup.
