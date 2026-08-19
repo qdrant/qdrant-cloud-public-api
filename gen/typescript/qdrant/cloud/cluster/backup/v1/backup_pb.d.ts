@@ -271,6 +271,76 @@ export declare type CreateBackupResponseValid = Message<"qdrant.cloud.cluster.ba
 export declare const CreateBackupResponseSchema: GenMessage<CreateBackupResponse, {validType: CreateBackupResponseValid}>;
 
 /**
+ * UpdateBackupRequest is the request for the UpdateBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.UpdateBackupRequest
+ */
+export declare type UpdateBackupRequest = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupRequest"> & {
+  /**
+   * The actual backup.
+   * Only `display_name` is applied; every other field is ignored.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup?: Backup | undefined;
+};
+
+/**
+ * UpdateBackupRequest is the request for the UpdateBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.UpdateBackupRequest
+ */
+export declare type UpdateBackupRequestValid = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupRequest"> & {
+  /**
+   * The actual backup.
+   * Only `display_name` is applied; every other field is ignored.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup: BackupValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.UpdateBackupRequest.
+ * Use `create(UpdateBackupRequestSchema)` to create a new message.
+ */
+export declare const UpdateBackupRequestSchema: GenMessage<UpdateBackupRequest, {validType: UpdateBackupRequestValid}>;
+
+/**
+ * UpdateBackupResponse is the response from the UpdateBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.UpdateBackupResponse
+ */
+export declare type UpdateBackupResponse = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupResponse"> & {
+  /**
+   * The actual backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup?: Backup | undefined;
+};
+
+/**
+ * UpdateBackupResponse is the response from the UpdateBackup function.
+ *
+ * @generated from message qdrant.cloud.cluster.backup.v1.UpdateBackupResponse
+ */
+export declare type UpdateBackupResponseValid = Message<"qdrant.cloud.cluster.backup.v1.UpdateBackupResponse"> & {
+  /**
+   * The actual backup.
+   *
+   * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
+   */
+  backup: BackupValid;
+};
+
+/**
+ * Describes the message qdrant.cloud.cluster.backup.v1.UpdateBackupResponse.
+ * Use `create(UpdateBackupResponseSchema)` to create a new message.
+ */
+export declare const UpdateBackupResponseSchema: GenMessage<UpdateBackupResponse, {validType: UpdateBackupResponseValid}>;
+
+/**
  * DeleteBackupRequest is the request for the DeleteBackup function.
  *
  * @generated from message qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
@@ -890,6 +960,8 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
   /**
    * The name of the backup.
    * This is a read-only field and will be available after a backup is created.
+   * It is the generated identifier the platform stores the backup under; it never changes.
+   * For a name meant to be read by a person, use `display_name`.
    *
    * @generated from field: string name = 5;
    */
@@ -945,6 +1017,17 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterInfo cluster_info = 12;
    */
   clusterInfo?: ClusterInfo | undefined;
+
+  /**
+   * The human-readable name of the backup.
+   * Required on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created before
+   * display names existed reports its generated `name`.
+   * Display names are labels, not identifiers: they are not unique.
+   *
+   * @generated from field: string display_name = 11;
+   */
+  displayName: string;
 };
 
 /**
@@ -988,6 +1071,8 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
   /**
    * The name of the backup.
    * This is a read-only field and will be available after a backup is created.
+   * It is the generated identifier the platform stores the backup under; it never changes.
+   * For a name meant to be read by a person, use `display_name`.
    *
    * @generated from field: string name = 5;
    */
@@ -1043,6 +1128,17 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
    * @generated from field: qdrant.cloud.cluster.backup.v1.ClusterInfo cluster_info = 12;
    */
   clusterInfo?: ClusterInfoValid | undefined;
+
+  /**
+   * The human-readable name of the backup.
+   * Required on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created before
+   * display names existed reports its generated `name`.
+   * Display names are labels, not identifiers: they are not unique.
+   *
+   * @generated from field: string display_name = 11;
+   */
+  displayName: string;
 };
 
 /**
@@ -1103,6 +1199,14 @@ export declare type ClusterInfo = Message<"qdrant.cloud.cluster.backup.v1.Cluste
    * @generated from field: optional string restore_package_id = 6;
    */
   restorePackageId?: string | undefined;
+
+  /**
+   * The creation date of the cluster this backup was taken from, preserved after the
+   * cluster is deleted.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
+   */
+  createdAt?: Timestamp | undefined;
 };
 
 /**
@@ -1157,6 +1261,14 @@ export declare type ClusterInfoValid = Message<"qdrant.cloud.cluster.backup.v1.C
    * @generated from field: optional string restore_package_id = 6;
    */
   restorePackageId?: string | undefined;
+
+  /**
+   * The creation date of the cluster this backup was taken from, preserved after the
+   * cluster is deleted.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
+   */
+  createdAt?: Timestamp | undefined;
 };
 
 /**
@@ -1307,6 +1419,15 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
    * @generated from field: qdrant.cloud.cluster.backup.v1.BackupScheduleStatus status = 8;
    */
   status: BackupScheduleStatus;
+
+  /**
+   * The name of the backup schedule, stamped onto every backup it produces from now on.
+   * Absent on a schedule created before names existed; supplying one on edit is allowed.
+   * Renaming affects future backups only.
+   *
+   * @generated from field: optional string display_name = 9;
+   */
+  displayName?: string | undefined;
 };
 
 export declare type BackupScheduleValid = BackupSchedule;
@@ -1605,6 +1726,19 @@ export declare const BackupService: GenService<{
     methodKind: "unary";
     input: typeof CreateBackupRequestSchema;
     output: typeof CreateBackupResponseSchema;
+  },
+  /**
+   * Updates a backup in the account identified by the given ID.
+   * Only the display name can be changed; every other field is read-only and is ignored.
+   * Required permissions:
+   * - write:backups
+   *
+   * @generated from rpc qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackup
+   */
+  updateBackup: {
+    methodKind: "unary";
+    input: typeof UpdateBackupRequestSchema;
+    output: typeof UpdateBackupResponseSchema;
   },
   /**
    * Deletes a backup in the account identified by the given ID.

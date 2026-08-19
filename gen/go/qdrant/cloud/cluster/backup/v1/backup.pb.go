@@ -589,6 +589,99 @@ func (x *CreateBackupResponse) GetBackup() *Backup {
 	return nil
 }
 
+// UpdateBackupRequest is the request for the UpdateBackup function.
+type UpdateBackupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The actual backup.
+	// Only `display_name` is applied; every other field is ignored.
+	Backup        *Backup `protobuf:"bytes,1,opt,name=backup,proto3" json:"backup,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBackupRequest) Reset() {
+	*x = UpdateBackupRequest{}
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBackupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBackupRequest) ProtoMessage() {}
+
+func (x *UpdateBackupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBackupRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBackupRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateBackupRequest) GetBackup() *Backup {
+	if x != nil {
+		return x.Backup
+	}
+	return nil
+}
+
+// UpdateBackupResponse is the response from the UpdateBackup function.
+type UpdateBackupResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The actual backup.
+	Backup        *Backup `protobuf:"bytes,1,opt,name=backup,proto3" json:"backup,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBackupResponse) Reset() {
+	*x = UpdateBackupResponse{}
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBackupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBackupResponse) ProtoMessage() {}
+
+func (x *UpdateBackupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBackupResponse.ProtoReflect.Descriptor instead.
+func (*UpdateBackupResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UpdateBackupResponse) GetBackup() *Backup {
+	if x != nil {
+		return x.Backup
+	}
+	return nil
+}
+
 // DeleteBackupRequest is the request for the DeleteBackup function.
 type DeleteBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -614,7 +707,7 @@ type DeleteBackupRequest struct {
 
 func (x *DeleteBackupRequest) Reset() {
 	*x = DeleteBackupRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +719,7 @@ func (x *DeleteBackupRequest) String() string {
 func (*DeleteBackupRequest) ProtoMessage() {}
 
 func (x *DeleteBackupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +732,7 @@ func (x *DeleteBackupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBackupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBackupRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteBackupRequest) GetAccountId() string {
@@ -672,7 +765,7 @@ type DeleteBackupResponse struct {
 
 func (x *DeleteBackupResponse) Reset() {
 	*x = DeleteBackupResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -684,7 +777,7 @@ func (x *DeleteBackupResponse) String() string {
 func (*DeleteBackupResponse) ProtoMessage() {}
 
 func (x *DeleteBackupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -697,7 +790,7 @@ func (x *DeleteBackupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBackupResponse.ProtoReflect.Descriptor instead.
 func (*DeleteBackupResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{9}
 }
 
 // ListBackupRestoresRequest is the request for the ListBackupRestores function.
@@ -723,7 +816,7 @@ type ListBackupRestoresRequest struct {
 
 func (x *ListBackupRestoresRequest) Reset() {
 	*x = ListBackupRestoresRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -735,7 +828,7 @@ func (x *ListBackupRestoresRequest) String() string {
 func (*ListBackupRestoresRequest) ProtoMessage() {}
 
 func (x *ListBackupRestoresRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -748,7 +841,7 @@ func (x *ListBackupRestoresRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBackupRestoresRequest.ProtoReflect.Descriptor instead.
 func (*ListBackupRestoresRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListBackupRestoresRequest) GetAccountId() string {
@@ -796,7 +889,7 @@ type ListBackupRestoresResponse struct {
 
 func (x *ListBackupRestoresResponse) Reset() {
 	*x = ListBackupRestoresResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +901,7 @@ func (x *ListBackupRestoresResponse) String() string {
 func (*ListBackupRestoresResponse) ProtoMessage() {}
 
 func (x *ListBackupRestoresResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +914,7 @@ func (x *ListBackupRestoresResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBackupRestoresResponse.ProtoReflect.Descriptor instead.
 func (*ListBackupRestoresResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListBackupRestoresResponse) GetItems() []*BackupRestore {
@@ -860,7 +953,7 @@ type RestoreBackupRequest struct {
 
 func (x *RestoreBackupRequest) Reset() {
 	*x = RestoreBackupRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -872,7 +965,7 @@ func (x *RestoreBackupRequest) String() string {
 func (*RestoreBackupRequest) ProtoMessage() {}
 
 func (x *RestoreBackupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[10]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -885,7 +978,7 @@ func (x *RestoreBackupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreBackupRequest.ProtoReflect.Descriptor instead.
 func (*RestoreBackupRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RestoreBackupRequest) GetAccountId() string {
@@ -911,7 +1004,7 @@ type RestoreBackupResponse struct {
 
 func (x *RestoreBackupResponse) Reset() {
 	*x = RestoreBackupResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -923,7 +1016,7 @@ func (x *RestoreBackupResponse) String() string {
 func (*RestoreBackupResponse) ProtoMessage() {}
 
 func (x *RestoreBackupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[11]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -936,7 +1029,7 @@ func (x *RestoreBackupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreBackupResponse.ProtoReflect.Descriptor instead.
 func (*RestoreBackupResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{13}
 }
 
 // ListBackupSchedulesRequest is the request for the ListBackupSchedules function
@@ -962,7 +1055,7 @@ type ListBackupSchedulesRequest struct {
 
 func (x *ListBackupSchedulesRequest) Reset() {
 	*x = ListBackupSchedulesRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -974,7 +1067,7 @@ func (x *ListBackupSchedulesRequest) String() string {
 func (*ListBackupSchedulesRequest) ProtoMessage() {}
 
 func (x *ListBackupSchedulesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -987,7 +1080,7 @@ func (x *ListBackupSchedulesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBackupSchedulesRequest.ProtoReflect.Descriptor instead.
 func (*ListBackupSchedulesRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListBackupSchedulesRequest) GetAccountId() string {
@@ -1035,7 +1128,7 @@ type ListBackupSchedulesResponse struct {
 
 func (x *ListBackupSchedulesResponse) Reset() {
 	*x = ListBackupSchedulesResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1047,7 +1140,7 @@ func (x *ListBackupSchedulesResponse) String() string {
 func (*ListBackupSchedulesResponse) ProtoMessage() {}
 
 func (x *ListBackupSchedulesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,7 +1153,7 @@ func (x *ListBackupSchedulesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBackupSchedulesResponse.ProtoReflect.Descriptor instead.
 func (*ListBackupSchedulesResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListBackupSchedulesResponse) GetItems() []*BackupSchedule {
@@ -1104,7 +1197,7 @@ type GetBackupScheduleRequest struct {
 
 func (x *GetBackupScheduleRequest) Reset() {
 	*x = GetBackupScheduleRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1116,7 +1209,7 @@ func (x *GetBackupScheduleRequest) String() string {
 func (*GetBackupScheduleRequest) ProtoMessage() {}
 
 func (x *GetBackupScheduleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1129,7 +1222,7 @@ func (x *GetBackupScheduleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBackupScheduleRequest.ProtoReflect.Descriptor instead.
 func (*GetBackupScheduleRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetBackupScheduleRequest) GetAccountId() string {
@@ -1164,7 +1257,7 @@ type GetBackupScheduleResponse struct {
 
 func (x *GetBackupScheduleResponse) Reset() {
 	*x = GetBackupScheduleResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1176,7 +1269,7 @@ func (x *GetBackupScheduleResponse) String() string {
 func (*GetBackupScheduleResponse) ProtoMessage() {}
 
 func (x *GetBackupScheduleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1189,7 +1282,7 @@ func (x *GetBackupScheduleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBackupScheduleResponse.ProtoReflect.Descriptor instead.
 func (*GetBackupScheduleResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetBackupScheduleResponse) GetBackupSchedule() *BackupSchedule {
@@ -1210,7 +1303,7 @@ type CreateBackupScheduleRequest struct {
 
 func (x *CreateBackupScheduleRequest) Reset() {
 	*x = CreateBackupScheduleRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1222,7 +1315,7 @@ func (x *CreateBackupScheduleRequest) String() string {
 func (*CreateBackupScheduleRequest) ProtoMessage() {}
 
 func (x *CreateBackupScheduleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1235,7 +1328,7 @@ func (x *CreateBackupScheduleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBackupScheduleRequest.ProtoReflect.Descriptor instead.
 func (*CreateBackupScheduleRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateBackupScheduleRequest) GetBackupSchedule() *BackupSchedule {
@@ -1256,7 +1349,7 @@ type CreateBackupScheduleResponse struct {
 
 func (x *CreateBackupScheduleResponse) Reset() {
 	*x = CreateBackupScheduleResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[17]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1268,7 +1361,7 @@ func (x *CreateBackupScheduleResponse) String() string {
 func (*CreateBackupScheduleResponse) ProtoMessage() {}
 
 func (x *CreateBackupScheduleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[17]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1281,7 +1374,7 @@ func (x *CreateBackupScheduleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBackupScheduleResponse.ProtoReflect.Descriptor instead.
 func (*CreateBackupScheduleResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{17}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateBackupScheduleResponse) GetBackupSchedule() *BackupSchedule {
@@ -1309,7 +1402,7 @@ type UpdateBackupScheduleRequest struct {
 
 func (x *UpdateBackupScheduleRequest) Reset() {
 	*x = UpdateBackupScheduleRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[18]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1321,7 +1414,7 @@ func (x *UpdateBackupScheduleRequest) String() string {
 func (*UpdateBackupScheduleRequest) ProtoMessage() {}
 
 func (x *UpdateBackupScheduleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[18]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1334,7 +1427,7 @@ func (x *UpdateBackupScheduleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBackupScheduleRequest.ProtoReflect.Descriptor instead.
 func (*UpdateBackupScheduleRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{18}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateBackupScheduleRequest) GetBackupSchedule() *BackupSchedule {
@@ -1362,7 +1455,7 @@ type UpdateBackupScheduleResponse struct {
 
 func (x *UpdateBackupScheduleResponse) Reset() {
 	*x = UpdateBackupScheduleResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[19]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1374,7 +1467,7 @@ func (x *UpdateBackupScheduleResponse) String() string {
 func (*UpdateBackupScheduleResponse) ProtoMessage() {}
 
 func (x *UpdateBackupScheduleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[19]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1387,7 +1480,7 @@ func (x *UpdateBackupScheduleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBackupScheduleResponse.ProtoReflect.Descriptor instead.
 func (*UpdateBackupScheduleResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{19}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UpdateBackupScheduleResponse) GetBackupSchedule() *BackupSchedule {
@@ -1415,7 +1508,7 @@ type DeleteBackupScheduleRequest struct {
 
 func (x *DeleteBackupScheduleRequest) Reset() {
 	*x = DeleteBackupScheduleRequest{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1427,7 +1520,7 @@ func (x *DeleteBackupScheduleRequest) String() string {
 func (*DeleteBackupScheduleRequest) ProtoMessage() {}
 
 func (x *DeleteBackupScheduleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +1533,7 @@ func (x *DeleteBackupScheduleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBackupScheduleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBackupScheduleRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{20}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DeleteBackupScheduleRequest) GetAccountId() string {
@@ -1473,7 +1566,7 @@ type DeleteBackupScheduleResponse struct {
 
 func (x *DeleteBackupScheduleResponse) Reset() {
 	*x = DeleteBackupScheduleResponse{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[21]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1485,7 +1578,7 @@ func (x *DeleteBackupScheduleResponse) String() string {
 func (*DeleteBackupScheduleResponse) ProtoMessage() {}
 
 func (x *DeleteBackupScheduleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[21]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1498,7 +1591,7 @@ func (x *DeleteBackupScheduleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBackupScheduleResponse.ProtoReflect.Descriptor instead.
 func (*DeleteBackupScheduleResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{21}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{23}
 }
 
 // A Backup represents a backup of a Qdrant database.
@@ -1518,6 +1611,8 @@ type Backup struct {
 	ClusterId string `protobuf:"bytes,4,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The name of the backup.
 	// This is a read-only field and will be available after a backup is created.
+	// It is the generated identifier the platform stores the backup under; it never changes.
+	// For a name meant to be read by a person, use `display_name`.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	// The current status of the backup.
 	// This is a read-only field and will be set after CreateBackup is called.
@@ -1539,14 +1634,20 @@ type Backup struct {
 	// Cluster details associated with the backup.
 	// Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
 	// This is a read-only field and will be available after the backup is created.
-	ClusterInfo   *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
+	ClusterInfo *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
+	// The human-readable name of the backup.
+	// Required on create, or stamped from the backup schedule that produced it, and can be
+	// changed later with UpdateBackup. Never empty on a response: a backup created before
+	// display names existed reports its generated `name`.
+	// Display names are labels, not identifiers: they are not unique.
+	DisplayName   string `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Backup) Reset() {
 	*x = Backup{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1558,7 +1659,7 @@ func (x *Backup) String() string {
 func (*Backup) ProtoMessage() {}
 
 func (x *Backup) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1571,7 +1672,7 @@ func (x *Backup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Backup.ProtoReflect.Descriptor instead.
 func (*Backup) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{22}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *Backup) GetId() string {
@@ -1651,6 +1752,13 @@ func (x *Backup) GetClusterInfo() *ClusterInfo {
 	return nil
 }
 
+func (x *Backup) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
 // Represents the cluster details associated with a backup.
 // The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest cluster state.
 // The configuration field is immutable and represents the values at backup time.
@@ -1671,13 +1779,16 @@ type ClusterInfo struct {
 	ResourcesSummary *ClusterResourcesSummary `protobuf:"bytes,5,opt,name=resources_summary,json=resourcesSummary,proto3" json:"resources_summary,omitempty"`
 	// Identifier of the package that best matches the recorded resources for restoration.
 	RestorePackageId *string `protobuf:"bytes,6,opt,name=restore_package_id,json=restorePackageId,proto3,oneof" json:"restore_package_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// The creation date of the cluster this backup was taken from, preserved after the
+	// cluster is deleted.
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterInfo) Reset() {
 	*x = ClusterInfo{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1689,7 +1800,7 @@ func (x *ClusterInfo) String() string {
 func (*ClusterInfo) ProtoMessage() {}
 
 func (x *ClusterInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1702,7 +1813,7 @@ func (x *ClusterInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterInfo.ProtoReflect.Descriptor instead.
 func (*ClusterInfo) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{23}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ClusterInfo) GetName() string {
@@ -1747,6 +1858,13 @@ func (x *ClusterInfo) GetRestorePackageId() string {
 	return ""
 }
 
+func (x *ClusterInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 // Describes the compute resources captured by a backup.
 type ClusterResourcesSummary struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1764,7 +1882,7 @@ type ClusterResourcesSummary struct {
 
 func (x *ClusterResourcesSummary) Reset() {
 	*x = ClusterResourcesSummary{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1776,7 +1894,7 @@ func (x *ClusterResourcesSummary) String() string {
 func (*ClusterResourcesSummary) ProtoMessage() {}
 
 func (x *ClusterResourcesSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1789,7 +1907,7 @@ func (x *ClusterResourcesSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterResourcesSummary.ProtoReflect.Descriptor instead.
 func (*ClusterResourcesSummary) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{24}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ClusterResourcesSummary) GetCpu() *ResourceQuantity {
@@ -1833,7 +1951,7 @@ type ResourceQuantity struct {
 
 func (x *ResourceQuantity) Reset() {
 	*x = ResourceQuantity{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1845,7 +1963,7 @@ func (x *ResourceQuantity) String() string {
 func (*ResourceQuantity) ProtoMessage() {}
 
 func (x *ResourceQuantity) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1858,7 +1976,7 @@ func (x *ResourceQuantity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceQuantity.ProtoReflect.Descriptor instead.
 func (*ResourceQuantity) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{25}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ResourceQuantity) GetAmount() int32 {
@@ -1902,14 +2020,18 @@ type BackupSchedule struct {
 	// This is a read-only field and will be set after DeleteBackupSchedule is called.
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	// The current status of the backup schedule.
-	Status        BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
+	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
+	// The name of the backup schedule, stamped onto every backup it produces from now on.
+	// Absent on a schedule created before names existed; supplying one on edit is allowed.
+	// Renaming affects future backups only.
+	DisplayName   *string `protobuf:"bytes,9,opt,name=display_name,json=displayName,proto3,oneof" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BackupSchedule) Reset() {
 	*x = BackupSchedule{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[26]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1921,7 +2043,7 @@ func (x *BackupSchedule) String() string {
 func (*BackupSchedule) ProtoMessage() {}
 
 func (x *BackupSchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[26]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1934,7 +2056,7 @@ func (x *BackupSchedule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupSchedule.ProtoReflect.Descriptor instead.
 func (*BackupSchedule) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{26}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *BackupSchedule) GetId() string {
@@ -1993,6 +2115,13 @@ func (x *BackupSchedule) GetStatus() BackupScheduleStatus {
 	return BackupScheduleStatus_BACKUP_SCHEDULE_STATUS_UNSPECIFIED
 }
 
+func (x *BackupSchedule) GetDisplayName() string {
+	if x != nil && x.DisplayName != nil {
+		return *x.DisplayName
+	}
+	return ""
+}
+
 // A BackupRestore represents the status of a backup restore.
 // All fields in this message are read-only.
 type BackupRestore struct {
@@ -2017,7 +2146,7 @@ type BackupRestore struct {
 
 func (x *BackupRestore) Reset() {
 	*x = BackupRestore{}
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[27]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2029,7 +2158,7 @@ func (x *BackupRestore) String() string {
 func (*BackupRestore) ProtoMessage() {}
 
 func (x *BackupRestore) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[27]
+	mi := &file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2042,7 +2171,7 @@ func (x *BackupRestore) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupRestore.ProtoReflect.Descriptor instead.
 func (*BackupRestore) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{27}
+	return file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *BackupRestore) GetId() string {
@@ -2128,11 +2257,18 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"[\n" +
 	"\x11GetBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x90\x04\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xd1\x05\n" +
 	"\x13CreateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xb0\x03\xbaH\xac\x03\x1a\xa9\x03\n" +
-	"!create_backup.no_read_only_fields\x12\x88\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xf8\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xf1\x04\xbaH\xed\x04\x1a\xa9\x03\n" +
+	"!create_backup.no_read_only_fields\x12\x88\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xf8\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\x1a\xbe\x01\n" +
+	"\x1fcreate_backup.display_name_rule\x12`display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xec\x02\n" +
+	"\x13UpdateBackupRequest\x12F\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\x8c\x02\xbaH\x88\x02\x1aU\n" +
+	"\x18update_backup.id_present\x12#backup.id is required for an update\x1a\x14this.backup.id != ''\x1a\xae\x01\n" +
+	"\x1fupdate_backup.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
+	"\x14UpdateBackupResponse\x12F\n" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x8a\x01\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
 	"\n" +
@@ -2216,7 +2352,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xa4\a\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xb5\b\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2233,19 +2369,23 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\t \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01\x12^\n" +
 	"\x10retention_period\x18\n" +
 	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12N\n" +
-	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoR\vclusterInfo:\x80\x02\xbaH\xfc\x01\x1a\xa3\x01\n" +
+	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoR\vclusterInfo\x12!\n" +
+	"\fdisplay_name\x18\v \x01(\tR\vdisplayName:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
-	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)B\x15\n" +
+	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)\x1al\n" +
+	"\x13backup.display_name\x12\x1edisplay_name must not be empty\x1a5this.display_name.size() > 0 || !has(this.created_at)B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
-	"\x11_retention_period\"\xe0\x05\n" +
+	"\x11_retention_period\"\x9b\x06\n" +
 	"\vClusterInfo\x12/\n" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
 	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12[\n" +
 	"\rconfiguration\x18\x04 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12d\n" +
 	"\x11resources_summary\x18\x05 \x01(\v27.qdrant.cloud.cluster.backup.v1.ClusterResourcesSummaryR\x10resourcesSummary\x12;\n" +
-	"\x12restore_package_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10restorePackageId\x88\x01\x01:\x91\x02\xbaH\x8d\x02\x1a\x8a\x02\n" +
+	"\x12restore_package_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10restorePackageId\x88\x01\x01\x129\n" +
+	"\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt:\x91\x02\xbaH\x8d\x02\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'B\x15\n" +
 	"\x13_restore_package_id\"\xb8\x02\n" +
 	"\x17ClusterResourcesSummary\x12B\n" +
@@ -2256,7 +2396,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x04_gpu\"G\n" +
 	"\x10ResourceQuantity\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x05R\x06amount\x12\x1b\n" +
-	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xa3\x06\n" +
+	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xf9\x06\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2269,9 +2409,11 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12V\n" +
-	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
+	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12C\n" +
+	"\fdisplay_name\x18\t \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$H\x01R\vdisplayName\x88\x01\x01:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
-	"\x11_retention_period\"\xef\x02\n" +
+	"\x11_retention_periodB\x0f\n" +
+	"\r_display_name\"\xef\x02\n" +
 	"\rBackupRestore\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -2306,7 +2448,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xe1#\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x91'\n" +
 	"\rBackupService\x12\x8d\x02\n" +
 	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\x94\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -2319,7 +2461,11 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\x11backup.cluster_id\xca\xf3\x18\x9c\x01\b\x01\x12\x06backup\"\x0eresp.backup.id*[/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{resp.backup.id}R#\n" +
 	"\n" +
-	"cluster_id\x12\x15req.backup.cluster_id\x82\xd3\xe4\x93\x02@:\x01*\";/api/cluster/backup/v1/accounts/{backup.account_id}/backups\x12\x94\x03\n" +
+	"cluster_id\x12\x15req.backup.cluster_id\x82\xd3\xe4\x93\x02@:\x01*\";/api/cluster/backup/v1/accounts/{backup.account_id}/backups\x12\xad\x03\n" +
+	"\fUpdateBackup\x123.qdrant.cloud.cluster.backup.v1.UpdateBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.UpdateBackupResponse\"\xb1\x02\x8a\xb5\x18\rwrite:backups\x92\xb5\x18\x11backup.account_id\xba\xb5\x18\x16\n" +
+	"\tbackup_id\x12\tbackup.id\xca\xf3\x18\x9a\x01\b\x02\x12\x06backup\"\rreq.backup.id*Z/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{req.backup.id}R#\n" +
+	"\n" +
+	"cluster_id\x12\x15req.backup.cluster_id\x82\xd3\xe4\x93\x02L:\x01*2G/api/cluster/backup/v1/accounts/{backup.account_id}/backups/{backup.id}\x12\x94\x03\n" +
 	"\fDeleteBackup\x123.qdrant.cloud.cluster.backup.v1.DeleteBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.DeleteBackupResponse\"\x98\x02\x8a\xb5\x18\x0edelete:backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\x9f\x01\b\x03\x12\x06backup\"\rreq.backup_id*Y/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}R)\n" +
 	"\n" +
@@ -2377,7 +2523,7 @@ func file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_cluster_backup_v1_backup_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_qdrant_cloud_cluster_backup_v1_backup_proto_goTypes = []any{
 	(BackupStatus)(0),                    // 0: qdrant.cloud.cluster.backup.v1.BackupStatus
 	(BackupScheduleStatus)(0),            // 1: qdrant.cloud.cluster.backup.v1.BackupScheduleStatus
@@ -2388,92 +2534,99 @@ var file_qdrant_cloud_cluster_backup_v1_backup_proto_goTypes = []any{
 	(*GetBackupResponse)(nil),            // 6: qdrant.cloud.cluster.backup.v1.GetBackupResponse
 	(*CreateBackupRequest)(nil),          // 7: qdrant.cloud.cluster.backup.v1.CreateBackupRequest
 	(*CreateBackupResponse)(nil),         // 8: qdrant.cloud.cluster.backup.v1.CreateBackupResponse
-	(*DeleteBackupRequest)(nil),          // 9: qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
-	(*DeleteBackupResponse)(nil),         // 10: qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
-	(*ListBackupRestoresRequest)(nil),    // 11: qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
-	(*ListBackupRestoresResponse)(nil),   // 12: qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
-	(*RestoreBackupRequest)(nil),         // 13: qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
-	(*RestoreBackupResponse)(nil),        // 14: qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
-	(*ListBackupSchedulesRequest)(nil),   // 15: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
-	(*ListBackupSchedulesResponse)(nil),  // 16: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
-	(*GetBackupScheduleRequest)(nil),     // 17: qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
-	(*GetBackupScheduleResponse)(nil),    // 18: qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
-	(*CreateBackupScheduleRequest)(nil),  // 19: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
-	(*CreateBackupScheduleResponse)(nil), // 20: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
-	(*UpdateBackupScheduleRequest)(nil),  // 21: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
-	(*UpdateBackupScheduleResponse)(nil), // 22: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
-	(*DeleteBackupScheduleRequest)(nil),  // 23: qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
-	(*DeleteBackupScheduleResponse)(nil), // 24: qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
-	(*Backup)(nil),                       // 25: qdrant.cloud.cluster.backup.v1.Backup
-	(*ClusterInfo)(nil),                  // 26: qdrant.cloud.cluster.backup.v1.ClusterInfo
-	(*ClusterResourcesSummary)(nil),      // 27: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
-	(*ResourceQuantity)(nil),             // 28: qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	(*BackupSchedule)(nil),               // 29: qdrant.cloud.cluster.backup.v1.BackupSchedule
-	(*BackupRestore)(nil),                // 30: qdrant.cloud.cluster.backup.v1.BackupRestore
-	(*fieldmaskpb.FieldMask)(nil),        // 31: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),        // 32: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),          // 33: google.protobuf.Duration
-	(*v1.ClusterConfiguration)(nil),      // 34: qdrant.cloud.cluster.v1.ClusterConfiguration
+	(*UpdateBackupRequest)(nil),          // 9: qdrant.cloud.cluster.backup.v1.UpdateBackupRequest
+	(*UpdateBackupResponse)(nil),         // 10: qdrant.cloud.cluster.backup.v1.UpdateBackupResponse
+	(*DeleteBackupRequest)(nil),          // 11: qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
+	(*DeleteBackupResponse)(nil),         // 12: qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
+	(*ListBackupRestoresRequest)(nil),    // 13: qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
+	(*ListBackupRestoresResponse)(nil),   // 14: qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
+	(*RestoreBackupRequest)(nil),         // 15: qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
+	(*RestoreBackupResponse)(nil),        // 16: qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
+	(*ListBackupSchedulesRequest)(nil),   // 17: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
+	(*ListBackupSchedulesResponse)(nil),  // 18: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
+	(*GetBackupScheduleRequest)(nil),     // 19: qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
+	(*GetBackupScheduleResponse)(nil),    // 20: qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
+	(*CreateBackupScheduleRequest)(nil),  // 21: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
+	(*CreateBackupScheduleResponse)(nil), // 22: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
+	(*UpdateBackupScheduleRequest)(nil),  // 23: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
+	(*UpdateBackupScheduleResponse)(nil), // 24: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
+	(*DeleteBackupScheduleRequest)(nil),  // 25: qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
+	(*DeleteBackupScheduleResponse)(nil), // 26: qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
+	(*Backup)(nil),                       // 27: qdrant.cloud.cluster.backup.v1.Backup
+	(*ClusterInfo)(nil),                  // 28: qdrant.cloud.cluster.backup.v1.ClusterInfo
+	(*ClusterResourcesSummary)(nil),      // 29: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
+	(*ResourceQuantity)(nil),             // 30: qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	(*BackupSchedule)(nil),               // 31: qdrant.cloud.cluster.backup.v1.BackupSchedule
+	(*BackupRestore)(nil),                // 32: qdrant.cloud.cluster.backup.v1.BackupRestore
+	(*fieldmaskpb.FieldMask)(nil),        // 33: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),        // 34: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),          // 35: google.protobuf.Duration
+	(*v1.ClusterConfiguration)(nil),      // 36: qdrant.cloud.cluster.v1.ClusterConfiguration
 }
 var file_qdrant_cloud_cluster_backup_v1_backup_proto_depIdxs = []int32{
-	25, // 0: qdrant.cloud.cluster.backup.v1.ListBackupsResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.Backup
-	25, // 1: qdrant.cloud.cluster.backup.v1.GetBackupResponse.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
-	25, // 2: qdrant.cloud.cluster.backup.v1.CreateBackupRequest.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
-	25, // 3: qdrant.cloud.cluster.backup.v1.CreateBackupResponse.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
-	30, // 4: qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestore
-	29, // 5: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	29, // 6: qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	29, // 7: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	29, // 8: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	29, // 9: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	31, // 10: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.update_mask:type_name -> google.protobuf.FieldMask
-	29, // 11: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
-	32, // 12: qdrant.cloud.cluster.backup.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 13: qdrant.cloud.cluster.backup.v1.Backup.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupStatus
-	32, // 14: qdrant.cloud.cluster.backup.v1.Backup.deleted_at:type_name -> google.protobuf.Timestamp
-	33, // 15: qdrant.cloud.cluster.backup.v1.Backup.backup_duration:type_name -> google.protobuf.Duration
-	33, // 16: qdrant.cloud.cluster.backup.v1.Backup.retention_period:type_name -> google.protobuf.Duration
-	26, // 17: qdrant.cloud.cluster.backup.v1.Backup.cluster_info:type_name -> qdrant.cloud.cluster.backup.v1.ClusterInfo
-	34, // 18: qdrant.cloud.cluster.backup.v1.ClusterInfo.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
-	27, // 19: qdrant.cloud.cluster.backup.v1.ClusterInfo.resources_summary:type_name -> qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
-	28, // 20: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 21: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.ram:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 22: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.disk:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	28, // 23: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
-	32, // 24: qdrant.cloud.cluster.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
-	33, // 25: qdrant.cloud.cluster.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
-	32, // 26: qdrant.cloud.cluster.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
-	1,  // 27: qdrant.cloud.cluster.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupScheduleStatus
-	32, // 28: qdrant.cloud.cluster.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 29: qdrant.cloud.cluster.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestoreStatus
-	32, // 30: qdrant.cloud.cluster.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
-	3,  // 31: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupsRequest
-	5,  // 32: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupRequest
-	7,  // 33: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupRequest
-	9,  // 34: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
-	11, // 35: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
-	13, // 36: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
-	15, // 37: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
-	17, // 38: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
-	19, // 39: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
-	21, // 40: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
-	23, // 41: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
-	4,  // 42: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupsResponse
-	6,  // 43: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupResponse
-	8,  // 44: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupResponse
-	10, // 45: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
-	12, // 46: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
-	14, // 47: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
-	16, // 48: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
-	18, // 49: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
-	20, // 50: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
-	22, // 51: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
-	24, // 52: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
-	42, // [42:53] is the sub-list for method output_type
-	31, // [31:42] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	27, // 0: qdrant.cloud.cluster.backup.v1.ListBackupsResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	27, // 1: qdrant.cloud.cluster.backup.v1.GetBackupResponse.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	27, // 2: qdrant.cloud.cluster.backup.v1.CreateBackupRequest.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	27, // 3: qdrant.cloud.cluster.backup.v1.CreateBackupResponse.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	27, // 4: qdrant.cloud.cluster.backup.v1.UpdateBackupRequest.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	27, // 5: qdrant.cloud.cluster.backup.v1.UpdateBackupResponse.backup:type_name -> qdrant.cloud.cluster.backup.v1.Backup
+	32, // 6: qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestore
+	31, // 7: qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse.items:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	31, // 8: qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	31, // 9: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	31, // 10: qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	31, // 11: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	33, // 12: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest.update_mask:type_name -> google.protobuf.FieldMask
+	31, // 13: qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse.backup_schedule:type_name -> qdrant.cloud.cluster.backup.v1.BackupSchedule
+	34, // 14: qdrant.cloud.cluster.backup.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 15: qdrant.cloud.cluster.backup.v1.Backup.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupStatus
+	34, // 16: qdrant.cloud.cluster.backup.v1.Backup.deleted_at:type_name -> google.protobuf.Timestamp
+	35, // 17: qdrant.cloud.cluster.backup.v1.Backup.backup_duration:type_name -> google.protobuf.Duration
+	35, // 18: qdrant.cloud.cluster.backup.v1.Backup.retention_period:type_name -> google.protobuf.Duration
+	28, // 19: qdrant.cloud.cluster.backup.v1.Backup.cluster_info:type_name -> qdrant.cloud.cluster.backup.v1.ClusterInfo
+	36, // 20: qdrant.cloud.cluster.backup.v1.ClusterInfo.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
+	29, // 21: qdrant.cloud.cluster.backup.v1.ClusterInfo.resources_summary:type_name -> qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary
+	34, // 22: qdrant.cloud.cluster.backup.v1.ClusterInfo.created_at:type_name -> google.protobuf.Timestamp
+	30, // 23: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	30, // 24: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.ram:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	30, // 25: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.disk:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	30, // 26: qdrant.cloud.cluster.backup.v1.ClusterResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.backup.v1.ResourceQuantity
+	34, // 27: qdrant.cloud.cluster.backup.v1.BackupSchedule.created_at:type_name -> google.protobuf.Timestamp
+	35, // 28: qdrant.cloud.cluster.backup.v1.BackupSchedule.retention_period:type_name -> google.protobuf.Duration
+	34, // 29: qdrant.cloud.cluster.backup.v1.BackupSchedule.deleted_at:type_name -> google.protobuf.Timestamp
+	1,  // 30: qdrant.cloud.cluster.backup.v1.BackupSchedule.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupScheduleStatus
+	34, // 31: qdrant.cloud.cluster.backup.v1.BackupRestore.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 32: qdrant.cloud.cluster.backup.v1.BackupRestore.status:type_name -> qdrant.cloud.cluster.backup.v1.BackupRestoreStatus
+	34, // 33: qdrant.cloud.cluster.backup.v1.BackupRestore.deleted_at:type_name -> google.protobuf.Timestamp
+	3,  // 34: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupsRequest
+	5,  // 35: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupRequest
+	7,  // 36: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupRequest
+	9,  // 37: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackup:input_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupRequest
+	11, // 38: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupRequest
+	13, // 39: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest
+	15, // 40: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:input_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupRequest
+	17, // 41: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:input_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest
+	19, // 42: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest
+	21, // 43: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest
+	23, // 44: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest
+	25, // 45: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:input_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest
+	4,  // 46: qdrant.cloud.cluster.backup.v1.BackupService.ListBackups:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupsResponse
+	6,  // 47: qdrant.cloud.cluster.backup.v1.BackupService.GetBackup:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupResponse
+	8,  // 48: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackup:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupResponse
+	10, // 49: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackup:output_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupResponse
+	12, // 50: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackup:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupResponse
+	14, // 51: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupRestores:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse
+	16, // 52: qdrant.cloud.cluster.backup.v1.BackupService.RestoreBackup:output_type -> qdrant.cloud.cluster.backup.v1.RestoreBackupResponse
+	18, // 53: qdrant.cloud.cluster.backup.v1.BackupService.ListBackupSchedules:output_type -> qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse
+	20, // 54: qdrant.cloud.cluster.backup.v1.BackupService.GetBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse
+	22, // 55: qdrant.cloud.cluster.backup.v1.BackupService.CreateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse
+	24, // 56: qdrant.cloud.cluster.backup.v1.BackupService.UpdateBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse
+	26, // 57: qdrant.cloud.cluster.backup.v1.BackupService.DeleteBackupSchedule:output_type -> qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse
+	46, // [46:58] is the sub-list for method output_type
+	34, // [34:46] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_cluster_backup_v1_backup_proto_init() }
@@ -2483,23 +2636,23 @@ func file_qdrant_cloud_cluster_backup_v1_backup_proto_init() {
 	}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[1].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[6].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[8].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[9].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[12].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[13].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[20].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[10].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[11].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[14].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[15].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[22].OneofWrappers = []any{}
-	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[23].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[24].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[25].OneofWrappers = []any{}
 	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[26].OneofWrappers = []any{}
+	file_qdrant_cloud_cluster_backup_v1_backup_proto_msgTypes[28].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc), len(file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   28,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
