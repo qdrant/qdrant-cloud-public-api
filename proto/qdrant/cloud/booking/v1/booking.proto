@@ -186,6 +186,13 @@ message ListGlobalPackagesRequest {
   // When false, all packages are returned except GPU.
   // When not set, all packages are returned.
   optional bool gpu = 4;
+  // Filter packages by tier.
+  // This is an optional field. If set, packages of the specified tier are returned.
+  // If not set, standard tier packages are returned.
+  optional PackageTier tier = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // ListPackagesResponse is the response from the ListPackages function

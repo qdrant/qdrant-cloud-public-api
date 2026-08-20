@@ -158,6 +158,15 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
    * @generated from field: optional bool gpu = 4;
    */
   gpu?: boolean | undefined;
+
+  /**
+   * Filter packages by tier.
+   * This is an optional field. If set, packages of the specified tier are returned.
+   * If not set, standard tier packages are returned.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.PackageTier tier = 5;
+   */
+  tier?: PackageTier | undefined;
 };
 
 export declare type ListGlobalPackagesRequestValid = ListGlobalPackagesRequest;
