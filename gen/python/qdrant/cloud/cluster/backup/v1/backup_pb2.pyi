@@ -255,7 +255,7 @@ class DeleteBackupScheduleResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Backup(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "backup_duration", "backup_schedule_id", "retention_period", "cluster_info", "display_name")
+    __slots__ = ("id", "created_at", "account_id", "cluster_id", "name", "status", "deleted_at", "backup_duration", "backup_schedule_id", "retention_period", "cluster_info", "display_name", "price")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -268,6 +268,7 @@ class Backup(_message.Message):
     RETENTION_PERIOD_FIELD_NUMBER: _ClassVar[int]
     CLUSTER_INFO_FIELD_NUMBER: _ClassVar[int]
     DISPLAY_NAME_FIELD_NUMBER: _ClassVar[int]
+    PRICE_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -280,7 +281,24 @@ class Backup(_message.Message):
     retention_period: _duration_pb2.Duration
     cluster_info: ClusterInfo
     display_name: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., cluster_info: _Optional[_Union[ClusterInfo, _Mapping]] = ..., display_name: _Optional[str] = ...) -> None: ...
+    price: BackupPrice
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., cluster_info: _Optional[_Union[ClusterInfo, _Mapping]] = ..., display_name: _Optional[str] = ..., price: _Optional[_Union[BackupPrice, _Mapping]] = ...) -> None: ...
+
+class BackupPrice(_message.Message):
+    __slots__ = ("currency", "original_price_per_hour", "discounted_price_per_hour", "original_price_per_month", "discounted_price_per_month", "discount_percentage")
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    ORIGINAL_PRICE_PER_MONTH_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNTED_PRICE_PER_MONTH_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_PERCENTAGE_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    original_price_per_hour: int
+    discounted_price_per_hour: int
+    original_price_per_month: int
+    discounted_price_per_month: int
+    discount_percentage: float
+    def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., original_price_per_month: _Optional[int] = ..., discounted_price_per_month: _Optional[int] = ..., discount_percentage: _Optional[float] = ...) -> None: ...
 
 class ClusterInfo(_message.Message):
     __slots__ = ("name", "cloud_provider_id", "cloud_provider_region_id", "configuration", "resources_summary", "restore_package_id", "created_at")

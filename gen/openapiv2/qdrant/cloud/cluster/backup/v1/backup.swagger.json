@@ -624,6 +624,10 @@
             "displayName": {
               "type": "string",
               "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+            },
+            "price": {
+              "$ref": "#/definitions/v1BackupPrice",
+              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
             }
           },
           "description": "The actual backup.",
@@ -726,6 +730,10 @@
             "displayName": {
               "type": "string",
               "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+            },
+            "price": {
+              "$ref": "#/definitions/v1BackupPrice",
+              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
             }
           },
           "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored."
@@ -881,9 +889,48 @@
         "displayName": {
           "type": "string",
           "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+        },
+        "price": {
+          "$ref": "#/definitions/v1BackupPrice",
+          "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
         }
       },
       "description": "A Backup represents a backup of a Qdrant database."
+    },
+    "v1BackupPrice": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "originalPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The original price per hour in millicents, before any discounts.\nBackup storage is billed hourly; partial hours are rounded up and billed as full hours."
+        },
+        "discountedPricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per hour in millicents, after applying discounts.\nIf no discounts are applied, this will be the same as original_price_per_hour."
+        },
+        "originalPricePerMonth": {
+          "type": "string",
+          "format": "int64",
+          "description": "The original price per month in millicents, before any discounts, at 730 hours per month."
+        },
+        "discountedPricePerMonth": {
+          "type": "string",
+          "format": "int64",
+          "description": "The discounted price per month in millicents, after applying discounts.\nIf no discounts are applied, this will be the same as original_price_per_month."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage of discount applied (e.g., 10.0 for 10% discount).\nIf no discounts are applied, this will be 0.0."
+        }
+      },
+      "description": "BackupPrice represents the price of keeping one backup stored, at its current size.\nField names and units follow qdrant.cloud.booking.v1.PriceBreakdown."
     },
     "v1BackupRestore": {
       "type": "object",
