@@ -2366,10 +2366,10 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"[\n" +
 	"\x11GetBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xd1\x05\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xf3\x05\n" +
 	"\x13CreateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xf1\x04\xbaH\xed\x04\x1a\xa9\x03\n" +
-	"!create_backup.no_read_only_fields\x12\x88\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info) must not be set on create\x1a\xf8\x01this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info)\x1a\xbe\x01\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\x93\x05\xbaH\x8f\x05\x1a\xcb\x03\n" +
+	"!create_backup.no_read_only_fields\x12\x8f\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info, price) must not be set on create\x1a\x93\x02this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info) && !has(this.backup.price)\x1a\xbe\x01\n" +
 	"\x1fcreate_backup.display_name_rule\x12`display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xec\x02\n" +
