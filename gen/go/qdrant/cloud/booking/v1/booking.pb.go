@@ -429,7 +429,7 @@ type ListGlobalPackagesRequest struct {
 	Gpu *bool `protobuf:"varint,4,opt,name=gpu,proto3,oneof" json:"gpu,omitempty"`
 	// Filter packages by tier.
 	// This is an optional field. If set, packages of the specified tier are returned.
-	// If not set, packages of the tier of the current account are returned.
+	// If not set, standard tier packages are returned.
 	Tier          *PackageTier `protobuf:"varint,5,opt,name=tier,proto3,enum=qdrant.cloud.booking.v1.PackageTier,oneof" json:"tier,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

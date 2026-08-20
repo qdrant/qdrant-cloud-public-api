@@ -162,7 +162,7 @@ export declare type ListGlobalPackagesRequest = Message<"qdrant.cloud.booking.v1
   /**
    * Filter packages by tier.
    * This is an optional field. If set, packages of the specified tier are returned.
-   * If not set, packages of the tier of the current account are returned.
+   * If not set, standard tier packages are returned.
    *
    * @generated from field: optional qdrant.cloud.booking.v1.PackageTier tier = 5;
    */

@@ -188,7 +188,7 @@ message ListGlobalPackagesRequest {
   optional bool gpu = 4;
   // Filter packages by tier.
   // This is an optional field. If set, packages of the specified tier are returned.
-  // If not set, packages of the tier of the current account are returned.
+  // If not set, standard tier packages are returned.
   optional PackageTier tier = 5 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]

@@ -428,7 +428,7 @@
           },
           {
             "name": "tier",
-            "description": "Filter packages by tier.\nThis is an optional field. If set, packages of the specified tier are returned.\nIf not set, packages of the tier of the current account are returned.\n\n - PACKAGE_TIER_STATUS_UNSPECIFIED: Unspecified package tier.\n - PACKAGE_TIER_STANDARD: Standard tier.\n - PACKAGE_TIER_PREMIUM: Premium tier.",
+            "description": "Filter packages by tier.\nThis is an optional field. If set, packages of the specified tier are returned.\nIf not set, standard tier packages are returned.\n\n - PACKAGE_TIER_STATUS_UNSPECIFIED: Unspecified package tier.\n - PACKAGE_TIER_STANDARD: Standard tier.\n - PACKAGE_TIER_PREMIUM: Premium tier.",
             "in": "query",
             "required": false,
             "type": "string",
