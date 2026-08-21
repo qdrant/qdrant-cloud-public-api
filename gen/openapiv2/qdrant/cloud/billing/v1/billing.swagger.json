@@ -350,6 +350,16 @@
         "pdfUrl": {
           "type": "string",
           "description": "The URL to download the PDF for the invoice.\nIf the invoice has not been finalized yet, this field will not be set."
+        },
+        "subtotalAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Subtotal invoice amount in millicents (gross amount before discounts)."
+        },
+        "amountDue": {
+          "type": "string",
+          "format": "int64",
+          "description": "Remaining amount due in millicents (after credit balance / prepaid credits)."
         }
       },
       "description": "Invoice represents a billing invoice issued to an account."
