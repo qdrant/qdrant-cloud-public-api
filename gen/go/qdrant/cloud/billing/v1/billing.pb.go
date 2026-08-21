@@ -292,7 +292,11 @@ type Invoice struct {
 	Status InvoiceStatus `protobuf:"varint,5,opt,name=status,proto3,enum=qdrant.cloud.billing.v1.InvoiceStatus" json:"status,omitempty"`
 	// The URL to download the PDF for the invoice.
 	// If the invoice has not been finalized yet, this field will not be set.
-	PdfUrl        *string `protobuf:"bytes,6,opt,name=pdf_url,json=pdfUrl,proto3,oneof" json:"pdf_url,omitempty"`
+	PdfUrl *string `protobuf:"bytes,6,opt,name=pdf_url,json=pdfUrl,proto3,oneof" json:"pdf_url,omitempty"`
+	// Subtotal invoice amount in millicents (gross amount before discounts).
+	SubtotalAmount *int64 `protobuf:"varint,7,opt,name=subtotal_amount,json=subtotalAmount,proto3,oneof" json:"subtotal_amount,omitempty"`
+	// Remaining amount due in millicents (after credit balance / prepaid credits).
+	AmountDue     *int64 `protobuf:"varint,8,opt,name=amount_due,json=amountDue,proto3,oneof" json:"amount_due,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -367,6 +371,20 @@ func (x *Invoice) GetPdfUrl() string {
 		return *x.PdfUrl
 	}
 	return ""
+}
+
+func (x *Invoice) GetSubtotalAmount() int64 {
+	if x != nil && x.SubtotalAmount != nil {
+		return *x.SubtotalAmount
+	}
+	return 0
+}
+
+func (x *Invoice) GetAmountDue() int64 {
+	if x != nil && x.AmountDue != nil {
+		return *x.AmountDue
+	}
+	return 0
 }
 
 // Discount represents a billing discount applied to an account.
@@ -1090,7 +1108,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"P\n" +
 	"\x15ListDiscountsResponse\x127\n" +
-	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc2\x02\n" +
+	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc9\x03\n" +
 	"\aInvoice\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12$\n" +
 	"\x06number\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06number\x88\x01\x01\x12*\n" +
@@ -1099,10 +1117,15 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tcreatedAt\x12J\n" +
 	"\x06status\x18\x05 \x01(\x0e2&.qdrant.cloud.billing.v1.InvoiceStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12&\n" +
-	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01B\t\n" +
+	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01\x125\n" +
+	"\x0fsubtotal_amount\x18\a \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x02R\x0esubtotalAmount\x88\x01\x01\x12+\n" +
+	"\n" +
+	"amount_due\x18\b \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x03R\tamountDue\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
-	"\b_pdf_url\"\xba\x03\n" +
+	"\b_pdf_urlB\x12\n" +
+	"\x10_subtotal_amountB\r\n" +
+	"\v_amount_due\"\xba\x03\n" +
 	"\bDiscount\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12M\n" +
 	"\n" +
