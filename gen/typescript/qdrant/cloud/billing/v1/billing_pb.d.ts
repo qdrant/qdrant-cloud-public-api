@@ -174,6 +174,20 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
    * @generated from field: optional string pdf_url = 6;
    */
   pdfUrl?: string | undefined;
+
+  /**
+   * Subtotal invoice amount in millicents (gross amount before discounts).
+   *
+   * @generated from field: optional int64 subtotal_amount = 7;
+   */
+  subtotalAmount?: bigint | undefined;
+
+  /**
+   * Remaining amount due in millicents (after credit balance / prepaid credits).
+   *
+   * @generated from field: optional int64 amount_due = 8;
+   */
+  amountDue?: bigint | undefined;
 };
 
 /**
@@ -225,6 +239,20 @@ export declare type InvoiceValid = Message<"qdrant.cloud.billing.v1.Invoice"> & 
    * @generated from field: optional string pdf_url = 6;
    */
   pdfUrl?: string | undefined;
+
+  /**
+   * Subtotal invoice amount in millicents (gross amount before discounts).
+   *
+   * @generated from field: optional int64 subtotal_amount = 7;
+   */
+  subtotalAmount?: bigint | undefined;
+
+  /**
+   * Remaining amount due in millicents (after credit balance / prepaid credits).
+   *
+   * @generated from field: optional int64 amount_due = 8;
+   */
+  amountDue?: bigint | undefined;
 };
 
 /**
