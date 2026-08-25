@@ -2131,8 +2131,9 @@ type BackupSchedule struct {
 	// The current status of the backup schedule.
 	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
 	// The name of the backup schedule, stamped onto every backup it produces from now on.
-	// Absent on a schedule created before names existed; supplying one on edit is allowed.
+	// Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
 	// Renaming affects future backups only.
+	// The format is checked on the requests that write it, like `Backup.display_name`.
 	DisplayName   *string `protobuf:"bytes,9,opt,name=display_name,json=displayName,proto3,oneof" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2442,11 +2443,11 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x126\n" +
 	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"|\n" +
 	"\x19GetBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xee\x04\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x89\x05\n" +
 	"\x1bCreateBackupScheduleRequest\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\xed\x03\xbaH\xe9\x03\x1a\x93\x02\n" +
-	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\x1a\xd0\x01\n" +
-	"(create_backup_schedule.display_name_rule\x12`display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores\x1aBthis.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"\x7f\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x88\x04\xbaH\x84\x04\x1a\x93\x02\n" +
+	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\x1a\xeb\x01\n" +
+	"(create_backup_schedule.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1amthis.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"\x7f\n" +
 	"\x1cCreateBackupScheduleResponse\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xb2\x02\n" +
 	"\x1bUpdateBackupScheduleRequest\x12_\n" +
@@ -2516,7 +2517,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x04_gpu\"G\n" +
 	"\x10ResourceQuantity\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x05R\x06amount\x12\x1b\n" +
-	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xf9\x06\n" +
+	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xdc\x06\n" +
 	"\x0eBackupSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -2529,8 +2530,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
 	"\n" +
 	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12V\n" +
-	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12C\n" +
-	"\fdisplay_name\x18\t \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$H\x01R\vdisplayName\x88\x01\x01:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
+	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12&\n" +
+	"\fdisplay_name\x18\t \x01(\tH\x01R\vdisplayName\x88\x01\x01:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
 	"\x11_retention_periodB\x0f\n" +
 	"\r_display_name\"\xef\x02\n" +

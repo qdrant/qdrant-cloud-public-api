@@ -674,7 +674,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
             }
           },
           "description": "The actual backup schedule.",
@@ -775,7 +775,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
             }
           },
           "description": "The actual backup schedule.",
@@ -1021,7 +1021,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."

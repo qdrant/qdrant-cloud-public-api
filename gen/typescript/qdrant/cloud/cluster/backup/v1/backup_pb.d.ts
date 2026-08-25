@@ -1504,8 +1504,9 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
 
   /**
    * The name of the backup schedule, stamped onto every backup it produces from now on.
-   * Absent on a schedule created before names existed; supplying one on edit is allowed.
+   * Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
    * Renaming affects future backups only.
+   * The format is checked on the requests that write it, like `Backup.display_name`.
    *
    * @generated from field: optional string display_name = 9;
    */
