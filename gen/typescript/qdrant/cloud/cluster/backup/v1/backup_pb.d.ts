@@ -1020,9 +1020,9 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
 
   /**
    * The human-readable name of the backup.
-   * Required on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty on a response: a backup created before
-   * display names existed reports its generated `name`.
+   * Optional on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created without
+   * a display name reports its generated `name`.
    * Display names are labels, not identifiers: they are not unique.
    *
    * @generated from field: string display_name = 11;
@@ -1140,9 +1140,9 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
 
   /**
    * The human-readable name of the backup.
-   * Required on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty on a response: a backup created before
-   * display names existed reports its generated `name`.
+   * Optional on create, or stamped from the backup schedule that produced it, and can be
+   * changed later with UpdateBackup. Never empty on a response: a backup created without
+   * a display name reports its generated `name`.
    * Display names are labels, not identifiers: they are not unique.
    *
    * @generated from field: string display_name = 11;
@@ -1504,8 +1504,9 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
 
   /**
    * The name of the backup schedule, stamped onto every backup it produces from now on.
-   * Absent on a schedule created before names existed; supplying one on edit is allowed.
+   * Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
    * Renaming affects future backups only.
+   * The format is checked on the requests that write it, like `Backup.display_name`.
    *
    * @generated from field: optional string display_name = 9;
    */

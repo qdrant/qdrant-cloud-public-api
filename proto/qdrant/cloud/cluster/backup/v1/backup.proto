@@ -385,11 +385,11 @@ message CreateBackupRequest {
   };
   // The rule binds the request rather than `Backup.display_name`: on a response that field
   // falls back to the generated snapshot identifier, which is longer than this rule allows.
-  // A display name is required; nothing is generated on the caller's behalf.
+  // A display name is optional; when omitted, the backup reports its generated `name`.
   option (buf.validate.message).cel = {
     id: "create_backup.display_name_rule"
-    message: "display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores"
-    expression: "this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+    message: "display_name must be 4-64 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
   };
 }
 
@@ -558,12 +558,11 @@ message CreateBackupScheduleRequest {
     message: "read-only fields (id, created_at, deleted_at, status) must not be set on create"
     expression: "this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0"
   };
-  // Binds the request, not `BackupSchedule.display_name`, which stays optional on the entity so a
-  // schedule stored before names existed still round-trips.
+  // A display name is optional; when omitted, the schedule stamps nothing onto its backups.
   option (buf.validate.message).cel = {
     id: "create_backup_schedule.display_name_rule"
-    message: "display_name is required and must be 4-64 characters of letters, digits, hyphens and underscores"
-    expression: "this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+    message: "display_name must be 4-64 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
   };
 }
 
@@ -695,9 +694,9 @@ message Backup {
   // This is a read-only field and will be available after the backup is created.
   ClusterInfo cluster_info = 12;
   // The human-readable name of the backup.
-  // Required on create, or stamped from the backup schedule that produced it, and can be
-  // changed later with UpdateBackup. Never empty on a response: a backup created before
-  // display names existed reports its generated `name`.
+  // Optional on create, or stamped from the backup schedule that produced it, and can be
+  // changed later with UpdateBackup. Never empty on a response: a backup created without
+  // a display name reports its generated `name`.
   // Display names are labels, not identifiers: they are not unique.
   string display_name = 11;
   option (buf.validate.message).cel = {
@@ -845,13 +844,10 @@ message BackupSchedule {
   // The current status of the backup schedule.
   BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
   // The name of the backup schedule, stamped onto every backup it produces from now on.
-  // Absent on a schedule created before names existed; supplying one on edit is allowed.
+  // Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
   // Renaming affects future backups only.
-  optional string display_name = 9 [(buf.validate.field).string = {
-    max_len: 64
-    min_len: 4
-    pattern: "^[a-zA-Z0-9-_]+$"
-  }];
+  // The format is checked on the requests that write it, like `Backup.display_name`.
+  optional string display_name = 9;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

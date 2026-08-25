@@ -623,7 +623,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -674,7 +674,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
             }
           },
           "description": "The actual backup schedule.",
@@ -729,7 +729,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -775,7 +775,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
             }
           },
           "description": "The actual backup schedule.",
@@ -888,7 +888,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+          "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
         },
         "price": {
           "$ref": "#/definitions/v1BackupPrice",
@@ -1021,7 +1021,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nAbsent on a schedule created before names existed; supplying one on edit is allowed.\nRenaming affects future backups only."
+          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
