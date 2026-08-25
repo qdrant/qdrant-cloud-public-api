@@ -623,7 +623,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -729,7 +729,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -888,7 +888,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The human-readable name of the backup.\nRequired on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created before\ndisplay names existed reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+          "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
         },
         "price": {
           "$ref": "#/definitions/v1BackupPrice",
