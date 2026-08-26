@@ -281,6 +281,10 @@ service BackupService {
         key: "space_id"
         value: "resp-md.qc-event-space-id"
       }
+      additional_context_fields: {
+        key: "delete_backups"
+        value: "req.delete_backups"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
