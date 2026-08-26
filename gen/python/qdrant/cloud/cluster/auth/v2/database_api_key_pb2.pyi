@@ -73,7 +73,7 @@ class DeleteDatabaseApiKeyResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class DatabaseApiKey(_message.Message):
-    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key")
+    __slots__ = ("id", "account_id", "created_at", "cluster_id", "name", "expires_at", "access_rules", "created_by_email", "postfix", "key", "created_by_actor_type")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -84,6 +84,7 @@ class DatabaseApiKey(_message.Message):
     CREATED_BY_EMAIL_FIELD_NUMBER: _ClassVar[int]
     POSTFIX_FIELD_NUMBER: _ClassVar[int]
     KEY_FIELD_NUMBER: _ClassVar[int]
+    CREATED_BY_ACTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     created_at: _timestamp_pb2.Timestamp
@@ -94,7 +95,8 @@ class DatabaseApiKey(_message.Message):
     created_by_email: str
     postfix: str
     key: str
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+    created_by_actor_type: _common_pb2.ActorType
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cluster_id: _Optional[str] = ..., name: _Optional[str] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., access_rules: _Optional[_Iterable[_Union[AccessRule, _Mapping]]] = ..., created_by_email: _Optional[str] = ..., postfix: _Optional[str] = ..., key: _Optional[str] = ..., created_by_actor_type: _Optional[_Union[_common_pb2.ActorType, str]] = ...) -> None: ...
 
 class AccessRule(_message.Message):
     __slots__ = ("global_access", "collection_access")

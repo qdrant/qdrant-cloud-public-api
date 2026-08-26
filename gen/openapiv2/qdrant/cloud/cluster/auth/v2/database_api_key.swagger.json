@@ -190,6 +190,10 @@
             "key": {
               "type": "string",
               "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
+            },
+            "createdByActorType": {
+              "$ref": "#/definitions/v1ActorType",
+              "description": "How the database api key was created, either directly by a user or by a management key.\nThis is a read-only field."
             }
           },
           "description": "The actual database api key.",
@@ -225,6 +229,17 @@
           }
         }
       }
+    },
+    "v1ActorType": {
+      "type": "string",
+      "enum": [
+        "ACTOR_TYPE_UNSPECIFIED",
+        "ACTOR_TYPE_USER",
+        "ACTOR_TYPE_MANAGEMENT_KEY",
+        "ACTOR_TYPE_SERVICE_ACCOUNT"
+      ],
+      "default": "ACTOR_TYPE_UNSPECIFIED",
+      "description": "ActorType specifies the type of actor that can call a method.\n\n - ACTOR_TYPE_UNSPECIFIED: Default, unspecified actor type. Should generally not be used explicitly in options\nunless to signify an error or uninitialized state.\n - ACTOR_TYPE_USER: Represents a human user, typically authenticated via an identity provider (Auth0).\n - ACTOR_TYPE_MANAGEMENT_KEY: Represents a programmatic access key, also called management key,\nthat is not be tied to a specific user or service account identity, but rather an account.\n - ACTOR_TYPE_SERVICE_ACCOUNT: Represents a service account or machine user, often used for M2M communication.\nThis is for internal platform use only."
     },
     "v2AccessRule": {
       "type": "object",
@@ -323,6 +338,10 @@
         "key": {
           "type": "string",
           "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
+        },
+        "createdByActorType": {
+          "$ref": "#/definitions/v1ActorType",
+          "description": "How the database api key was created, either directly by a user or by a management key.\nThis is a read-only field."
         }
       },
       "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."

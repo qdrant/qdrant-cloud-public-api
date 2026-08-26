@@ -5,6 +5,7 @@
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { ActorType } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/auth/v1/auth.proto.
@@ -220,6 +221,24 @@ export declare type ManagementKey = Message<"qdrant.cloud.auth.v1.ManagementKey"
    * @generated from field: string key = 5;
    */
   key: string;
+
+  /**
+   * The email of the user the management key is attributed to.
+   * This is a read-only field. If the key is created by another management key, the email is inherited
+   * from that key, so the responsible user stays visible. It is empty when no user can be attributed,
+   * for example for keys created by the system.
+   *
+   * @generated from field: string created_by_email = 6;
+   */
+  createdByEmail: string;
+
+  /**
+   * How the management key was created, either directly by a user or by another management key.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.common.v1.ActorType created_by_actor_type = 7;
+   */
+  createdByActorType: ActorType;
 };
 
 export declare type ManagementKeyValid = ManagementKey;

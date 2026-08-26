@@ -8,7 +8,7 @@ package authv2
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -475,9 +475,12 @@ type DatabaseApiKey struct {
 	// The key for the database api key.
 	// This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
 	// You should securely store this key and it should be handled as a secret.
-	Key           string `protobuf:"bytes,10,opt,name=key,proto3" json:"key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Key string `protobuf:"bytes,10,opt,name=key,proto3" json:"key,omitempty"`
+	// How the database api key was created, either directly by a user or by a management key.
+	// This is a read-only field.
+	CreatedByActorType v1.ActorType `protobuf:"varint,11,opt,name=created_by_actor_type,json=createdByActorType,proto3,enum=qdrant.cloud.common.v1.ActorType" json:"created_by_actor_type,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DatabaseApiKey) Reset() {
@@ -578,6 +581,13 @@ func (x *DatabaseApiKey) GetKey() string {
 		return x.Key
 	}
 	return ""
+}
+
+func (x *DatabaseApiKey) GetCreatedByActorType() v1.ActorType {
+	if x != nil {
+		return x.CreatedByActorType
+	}
+	return v1.ActorType(0)
 }
 
 // Represents an access rule. An access rule can either define global access to
@@ -797,8 +807,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x127\n" +
 	"\x13database_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\xc4\n" +
-	"\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\x9a\v\n" +
 	"\x0eDatabaseApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -816,7 +825,8 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"!database_api_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12\x18\n" +
 	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key:\xc1\x05\xbaH\xbd\x05\x1a\xac\x01\n" +
+	" \x01(\tR\x03key\x12T\n" +
+	"\x15created_by_actor_type\x18\v \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeR\x12createdByActorType:\xc1\x05\xbaH\xbd\x05\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xf1\x01\n" +
 	"/database_api_key.no_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\xae\x01\n" +
 	"'database_api_key.only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1ag\n" +
@@ -843,7 +853,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x98\v\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x9a\v\n" +
 	"\x15DatabaseApiKeyService\x12\xfd\x01\n" +
 	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"q\x8a\xb5\x18\rread:api_keys\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -861,7 +871,7 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"cluster_id\xba\xb5\x18*\n" +
 	"\x13database_api_key_id\x12\x13database_api_key_id\xca\xf3\x18\xc7\x01\b\x03\x12\x10database-api-key\"\x17req.database_api_key_id*m/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/database-api-keys/{req.database_api_key_id}R)\n" +
 	"\n" +
-	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}\x1a\x06µ\x18\x02\b\x01B\xa2\x02\n" +
+	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/auth/v2/accounts/{account_id}/database-api-keys/{database_api_key_id}\x1a\bµ\x18\x04\b\x01\x10\x01B\xa2\x02\n" +
 	" com.qdrant.cloud.cluster.auth.v2B\x13DatabaseApiKeyProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/auth/v2;authv2\xa2\x02\x04QCCA\xaa\x02\x1cQdrant.Cloud.Cluster.Auth.V2\xca\x02\x1cQdrant\\Cloud\\Cluster\\Auth\\V2\xe2\x02(Qdrant\\Cloud\\Cluster\\Auth\\V2\\GPBMetadata\xea\x02 Qdrant::Cloud::Cluster::Auth::V2b\x06proto3"
 
 var (
@@ -892,6 +902,7 @@ var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_goTypes = []any{
 	(*GlobalAccessRule)(nil),             // 10: qdrant.cloud.cluster.auth.v2.GlobalAccessRule
 	(*CollectionAccessRule)(nil),         // 11: qdrant.cloud.cluster.auth.v2.CollectionAccessRule
 	(*timestamppb.Timestamp)(nil),        // 12: google.protobuf.Timestamp
+	(v1.ActorType)(0),                    // 13: qdrant.cloud.common.v1.ActorType
 }
 var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_depIdxs = []int32{
 	8,  // 0: qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse.items:type_name -> qdrant.cloud.cluster.auth.v2.DatabaseApiKey
@@ -900,21 +911,22 @@ var file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_depIdxs = []int32{
 	12, // 3: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.created_at:type_name -> google.protobuf.Timestamp
 	12, // 4: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.expires_at:type_name -> google.protobuf.Timestamp
 	9,  // 5: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.access_rules:type_name -> qdrant.cloud.cluster.auth.v2.AccessRule
-	10, // 6: qdrant.cloud.cluster.auth.v2.AccessRule.global_access:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRule
-	11, // 7: qdrant.cloud.cluster.auth.v2.AccessRule.collection_access:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRule
-	0,  // 8: qdrant.cloud.cluster.auth.v2.GlobalAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType
-	1,  // 9: qdrant.cloud.cluster.auth.v2.CollectionAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType
-	2,  // 10: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:input_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest
-	4,  // 11: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest
-	6,  // 12: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest
-	3,  // 13: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:output_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse
-	5,  // 14: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse
-	7,  // 15: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse
-	13, // [13:16] is the sub-list for method output_type
-	10, // [10:13] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	13, // 6: qdrant.cloud.cluster.auth.v2.DatabaseApiKey.created_by_actor_type:type_name -> qdrant.cloud.common.v1.ActorType
+	10, // 7: qdrant.cloud.cluster.auth.v2.AccessRule.global_access:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRule
+	11, // 8: qdrant.cloud.cluster.auth.v2.AccessRule.collection_access:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRule
+	0,  // 9: qdrant.cloud.cluster.auth.v2.GlobalAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.GlobalAccessRuleAccessType
+	1,  // 10: qdrant.cloud.cluster.auth.v2.CollectionAccessRule.access_type:type_name -> qdrant.cloud.cluster.auth.v2.CollectionAccessRuleAccessType
+	2,  // 11: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:input_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest
+	4,  // 12: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest
+	6,  // 13: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:input_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyRequest
+	3,  // 14: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.ListDatabaseApiKeys:output_type -> qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse
+	5,  // 15: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.CreateDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse
+	7,  // 16: qdrant.cloud.cluster.auth.v2.DatabaseApiKeyService.DeleteDatabaseApiKey:output_type -> qdrant.cloud.cluster.auth.v2.DeleteDatabaseApiKeyResponse
+	14, // [14:17] is the sub-list for method output_type
+	11, // [11:14] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_init() }
