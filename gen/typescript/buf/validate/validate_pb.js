@@ -42,7 +42,7 @@
 // [Go](https://github.com/bufbuild/protovalidate-go),
 // [JavaScript/TypeScript](https://github.com/bufbuild/protovalidate-es),
 // [Java](https://github.com/bufbuild/protovalidate-java),
-// [Python](https://github.com/bufbuild/protovalidate-python),
+// [Python](https://github.com/bufbuild/protovalidate-py),
 // or [C++](https://github.com/bufbuild/protovalidate-cc).
 
 import { enumDesc, extDesc, fileDesc, messageDesc, tsEnum } from "@bufbuild/protobuf/codegenv2";

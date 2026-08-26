@@ -2273,7 +2273,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x84'\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xaa'\n" +
 	"\rBackupService\x12\xa9\x02\n" +
 	"\vListBackups\x12;.qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest\x1a<.qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse\"\x9e\x01\x8a\xb5\x18\x17read:serverless_backups\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18(\n" +
@@ -2307,9 +2307,10 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x12\x1abackup_schedule.account_id\x12(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule.id\x12$\n" +
 	"\bspace_id\x12\x18backup_schedule.space_id\x1a\x0fbackup_schedule\"\x0fbackup_schedule\xca\xf3\x18\xe8\x01\b\x02\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule.id*\x85\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{req.backup_schedule.id}R(\n" +
-	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xab\x04\n" +
-	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\x85\x03\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
-	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xd1\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R%\n" +
+	"\bspace_id\x12\x1creq.backup_schedule.space_id\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xd1\x04\n" +
+	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\xab\x03\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
+	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xf7\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R$\n" +
+	"\x0edelete_backups\x12\x12req.delete_backupsR%\n" +
 	"\bspace_id\x12\x19resp-md.qc-event-space-id\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\bµ\x18\x04\b\x01\x10\x01B\xe0\x02\n" +
 	"+com.qdrant.cloud.serverless.space.backup.v1B\vBackupProtoP\x01Zagithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/backup/v1;backupv1\xa2\x02\x05QCSSB\xaa\x02'Qdrant.Cloud.Serverless.Space.Backup.V1\xca\x02'Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\xe2\x023Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\\GPBMetadata\xea\x02,Qdrant::Cloud::Serverless::Space::Backup::V1b\x06proto3"
 
