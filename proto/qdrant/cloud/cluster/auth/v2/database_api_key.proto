@@ -13,7 +13,7 @@ service DatabaseApiKeyService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all database api keys in the account identified by the given ID.
@@ -217,6 +217,9 @@ message DatabaseApiKey {
   // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
   // You should securely store this key and it should be handled as a secret.
   string key = 10;
+  // How the database api key was created, either directly by a user or by a management key.
+  // This is a read-only field.
+  common.v1.ActorType created_by_actor_type = 11;
 }
 
 // Represents an access rule. An access rule can either define global access to

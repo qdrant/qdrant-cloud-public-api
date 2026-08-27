@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { ActorType } from "../../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/cluster/auth/v2/database_api_key.proto.
@@ -282,6 +283,14 @@ export declare type DatabaseApiKey = Message<"qdrant.cloud.cluster.auth.v2.Datab
    * @generated from field: string key = 10;
    */
   key: string;
+
+  /**
+   * How the database api key was created, either directly by a user or by a management key.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.common.v1.ActorType created_by_actor_type = 11;
+   */
+  createdByActorType: ActorType;
 };
 
 export declare type DatabaseApiKeyValid = DatabaseApiKey;

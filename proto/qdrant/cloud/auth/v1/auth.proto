@@ -13,7 +13,7 @@ service AuthService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all management keys in the account identified by the given ID.
@@ -139,4 +139,16 @@ message ManagementKey {
   // This is a read-only field and will be available only once in the response of CreateManagementKey.
   // You should securely store this key and it should be handled as a secret.
   string key = 5;
+  // The email of the user the management key is attributed to.
+  // This is a read-only field. If the key is created by another management key, the email is inherited
+  // from that key, so the responsible user stays visible. It is empty when no user can be attributed,
+  // for example for keys created by the system.
+  string created_by_email = 6 [(buf.validate.field).cel = {
+    id: "management_key.created_by_email"
+    message: "if set, created_by_email must be a valid email address"
+    expression: "this.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')"
+  }];
+  // How the management key was created, either directly by a user or by another management key.
+  // This is a read-only field.
+  common.v1.ActorType created_by_actor_type = 7;
 }

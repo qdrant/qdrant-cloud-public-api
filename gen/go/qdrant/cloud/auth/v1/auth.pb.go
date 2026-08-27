@@ -8,7 +8,7 @@ package authv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -324,9 +324,17 @@ type ManagementKey struct {
 	// The value of the key, to be used to authenticate requests to the Qdrant Cloud API.
 	// This is a read-only field and will be available only once in the response of CreateManagementKey.
 	// You should securely store this key and it should be handled as a secret.
-	Key           string `protobuf:"bytes,5,opt,name=key,proto3" json:"key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Key string `protobuf:"bytes,5,opt,name=key,proto3" json:"key,omitempty"`
+	// The email of the user the management key is attributed to.
+	// This is a read-only field. If the key is created by another management key, the email is inherited
+	// from that key, so the responsible user stays visible. It is empty when no user can be attributed,
+	// for example for keys created by the system.
+	CreatedByEmail string `protobuf:"bytes,6,opt,name=created_by_email,json=createdByEmail,proto3" json:"created_by_email,omitempty"`
+	// How the management key was created, either directly by a user or by another management key.
+	// This is a read-only field.
+	CreatedByActorType v1.ActorType `protobuf:"varint,7,opt,name=created_by_actor_type,json=createdByActorType,proto3,enum=qdrant.cloud.common.v1.ActorType" json:"created_by_actor_type,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ManagementKey) Reset() {
@@ -394,6 +402,20 @@ func (x *ManagementKey) GetKey() string {
 	return ""
 }
 
+func (x *ManagementKey) GetCreatedByEmail() string {
+	if x != nil {
+		return x.CreatedByEmail
+	}
+	return ""
+}
+
+func (x *ManagementKey) GetCreatedByActorType() v1.ActorType {
+	if x != nil {
+		return x.CreatedByActorType
+	}
+	return v1.ActorType(0)
+}
+
 var File_qdrant_cloud_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
@@ -412,7 +434,7 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11management_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fmanagementKeyId\"\x1d\n" +
-	"\x1bDeleteManagementKeyResponse\"\xc5\x03\n" +
+	"\x1bDeleteManagementKeyResponse\"\xee\x05\n" +
 	"\rManagementKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\n" +
@@ -420,14 +442,17 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
 	"\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n" +
-	"\x03key\x18\x05 \x01(\tR\x03key:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
+	"\x03key\x18\x05 \x01(\tR\x03key\x12\xd0\x01\n" +
+	"\x10created_by_email\x18\x06 \x01(\tB\xa5\x01\xbaH\xa1\x01\xba\x01\x9d\x01\n" +
+	"\x1fmanagement_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12T\n" +
+	"\x15created_by_actor_type\x18\a \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeR\x12createdByActorType:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
 	"\x11management_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ab\n" +
-	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xea\a\n" +
+	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xec\a\n" +
 	"\vAuthService\x12\xcb\x01\n" +
 	"\x12ListManagementKeys\x12/.qdrant.cloud.auth.v1.ListManagementKeysRequest\x1a0.qdrant.cloud.auth.v1.ListManagementKeysResponse\"R\x8a\xb5\x18\x14read:management_keys\x82\xd3\xe4\x93\x024\x122/api/auth/v1/accounts/{account_id}/management-keys\x12\x81\x03\n" +
 	"\x13CreateManagementKey\x120.qdrant.cloud.auth.v1.CreateManagementKeyRequest\x1a1.qdrant.cloud.auth.v1.CreateManagementKeyResponse\"\x84\x02\x8a\xb5\x18\x15write:management_keys\x92\xb5\x18\x19management_key.account_id\xca\xf3\x18~\b\x01\x12\x0emanagement-key\"\x16resp.management_key.id*R/accounts/{req.management_key.account_id}/management-keys/{resp.management_key.id}\x82\xd3\xe4\x93\x02F:\x01*\"A/api/auth/v1/accounts/{management_key.account_id}/management-keys\x12\x80\x03\n" +
 	"\x13DeleteManagementKey\x120.qdrant.cloud.auth.v1.DeleteManagementKeyRequest\x1a1.qdrant.cloud.auth.v1.DeleteManagementKeyResponse\"\x83\x02\x8a\xb5\x18\x16delete:management_keys\xba\xb5\x18&\n" +
-	"\x11management_key_id\x12\x11management_key_id\xca\xf3\x18m\b\x03\x12\x0emanagement-key\"\x15req.management_key_id*B/accounts/{req.account_id}/management-keys/{req.management_key_id}\x82\xd3\xe4\x93\x02H*F/api/auth/v1/accounts/{account_id}/management-keys/{management_key_id}\x1a\x06µ\x18\x02\b\x01B\xe6\x01\n" +
+	"\x11management_key_id\x12\x11management_key_id\xca\xf3\x18m\b\x03\x12\x0emanagement-key\"\x15req.management_key_id*B/accounts/{req.account_id}/management-keys/{req.management_key_id}\x82\xd3\xe4\x93\x02H*F/api/auth/v1/accounts/{account_id}/management-keys/{management_key_id}\x1a\bµ\x18\x04\b\x01\x10\x01B\xe6\x01\n" +
 	"\x18com.qdrant.cloud.auth.v1B\tAuthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1;authv1\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V1\xca\x02\x14Qdrant\\Cloud\\Auth\\V1\xe2\x02 Qdrant\\Cloud\\Auth\\V1\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V1b\x06proto3"
 
 var (
@@ -452,23 +477,25 @@ var file_qdrant_cloud_auth_v1_auth_proto_goTypes = []any{
 	(*DeleteManagementKeyResponse)(nil), // 5: qdrant.cloud.auth.v1.DeleteManagementKeyResponse
 	(*ManagementKey)(nil),               // 6: qdrant.cloud.auth.v1.ManagementKey
 	(*timestamppb.Timestamp)(nil),       // 7: google.protobuf.Timestamp
+	(v1.ActorType)(0),                   // 8: qdrant.cloud.common.v1.ActorType
 }
 var file_qdrant_cloud_auth_v1_auth_proto_depIdxs = []int32{
 	6, // 0: qdrant.cloud.auth.v1.ListManagementKeysResponse.items:type_name -> qdrant.cloud.auth.v1.ManagementKey
 	6, // 1: qdrant.cloud.auth.v1.CreateManagementKeyRequest.management_key:type_name -> qdrant.cloud.auth.v1.ManagementKey
 	6, // 2: qdrant.cloud.auth.v1.CreateManagementKeyResponse.management_key:type_name -> qdrant.cloud.auth.v1.ManagementKey
 	7, // 3: qdrant.cloud.auth.v1.ManagementKey.created_at:type_name -> google.protobuf.Timestamp
-	0, // 4: qdrant.cloud.auth.v1.AuthService.ListManagementKeys:input_type -> qdrant.cloud.auth.v1.ListManagementKeysRequest
-	2, // 5: qdrant.cloud.auth.v1.AuthService.CreateManagementKey:input_type -> qdrant.cloud.auth.v1.CreateManagementKeyRequest
-	4, // 6: qdrant.cloud.auth.v1.AuthService.DeleteManagementKey:input_type -> qdrant.cloud.auth.v1.DeleteManagementKeyRequest
-	1, // 7: qdrant.cloud.auth.v1.AuthService.ListManagementKeys:output_type -> qdrant.cloud.auth.v1.ListManagementKeysResponse
-	3, // 8: qdrant.cloud.auth.v1.AuthService.CreateManagementKey:output_type -> qdrant.cloud.auth.v1.CreateManagementKeyResponse
-	5, // 9: qdrant.cloud.auth.v1.AuthService.DeleteManagementKey:output_type -> qdrant.cloud.auth.v1.DeleteManagementKeyResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	8, // 4: qdrant.cloud.auth.v1.ManagementKey.created_by_actor_type:type_name -> qdrant.cloud.common.v1.ActorType
+	0, // 5: qdrant.cloud.auth.v1.AuthService.ListManagementKeys:input_type -> qdrant.cloud.auth.v1.ListManagementKeysRequest
+	2, // 6: qdrant.cloud.auth.v1.AuthService.CreateManagementKey:input_type -> qdrant.cloud.auth.v1.CreateManagementKeyRequest
+	4, // 7: qdrant.cloud.auth.v1.AuthService.DeleteManagementKey:input_type -> qdrant.cloud.auth.v1.DeleteManagementKeyRequest
+	1, // 8: qdrant.cloud.auth.v1.AuthService.ListManagementKeys:output_type -> qdrant.cloud.auth.v1.ListManagementKeysResponse
+	3, // 9: qdrant.cloud.auth.v1.AuthService.CreateManagementKey:output_type -> qdrant.cloud.auth.v1.CreateManagementKeyResponse
+	5, // 10: qdrant.cloud.auth.v1.AuthService.DeleteManagementKey:output_type -> qdrant.cloud.auth.v1.DeleteManagementKeyResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_auth_v1_auth_proto_init() }

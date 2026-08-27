@@ -151,6 +151,14 @@
             "key": {
               "type": "string",
               "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system."
+            },
+            "createdByActorType": {
+              "$ref": "#/definitions/v1ActorType",
+              "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field."
             }
           },
           "description": "The actual management key.",
@@ -186,6 +194,17 @@
           }
         }
       }
+    },
+    "v1ActorType": {
+      "type": "string",
+      "enum": [
+        "ACTOR_TYPE_UNSPECIFIED",
+        "ACTOR_TYPE_USER",
+        "ACTOR_TYPE_MANAGEMENT_KEY",
+        "ACTOR_TYPE_SERVICE_ACCOUNT"
+      ],
+      "default": "ACTOR_TYPE_UNSPECIFIED",
+      "description": "ActorType specifies the type of actor that can call a method.\n\n - ACTOR_TYPE_UNSPECIFIED: Default, unspecified actor type. Should generally not be used explicitly in options\nunless to signify an error or uninitialized state.\n - ACTOR_TYPE_USER: Represents a human user, typically authenticated via an identity provider (Auth0).\n - ACTOR_TYPE_MANAGEMENT_KEY: Represents a programmatic access key, also called management key,\nthat is not be tied to a specific user or service account identity, but rather an account.\n - ACTOR_TYPE_SERVICE_ACCOUNT: Represents a service account or machine user, often used for M2M communication.\nThis is for internal platform use only."
     },
     "v1CreateManagementKeyResponse": {
       "type": "object",
@@ -239,6 +258,14 @@
         "key": {
           "type": "string",
           "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+        },
+        "createdByEmail": {
+          "type": "string",
+          "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system."
+        },
+        "createdByActorType": {
+          "$ref": "#/definitions/v1ActorType",
+          "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field."
         }
       },
       "description": "A ManagementKey represents a management key of a Qdrant Cloud account.\nThis management key grants access to the Qdrant Cloud API."
