@@ -198,7 +198,7 @@ message GetClusterLogsRequest {
   };
   // Optional limit for the logs query.
   // If omitted, defaults to 100.
-  optional int32 limt = 5 [(buf.validate.field).int32 = {
+  optional int32 limit = 5 [(buf.validate.field).int32 = {
     gte: 1
     lte: 10000
   }];

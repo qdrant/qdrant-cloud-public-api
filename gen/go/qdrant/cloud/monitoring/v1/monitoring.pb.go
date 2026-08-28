@@ -700,7 +700,7 @@ type GetClusterLogsRequest struct {
 	Until *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=until,proto3,oneof" json:"until,omitempty"`
 	// Optional limit for the logs query.
 	// If omitted, defaults to 100.
-	Limt          *int32 `protobuf:"varint,5,opt,name=limt,proto3,oneof" json:"limt,omitempty"`
+	Limit         *int32 `protobuf:"varint,5,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -763,9 +763,9 @@ func (x *GetClusterLogsRequest) GetUntil() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetClusterLogsRequest) GetLimt() int32 {
-	if x != nil && x.Limt != nil {
-		return *x.Limt
+func (x *GetClusterLogsRequest) GetLimit() int32 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
 	}
 	return 0
 }
@@ -1904,20 +1904,20 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05nodes\x18\t \x03(\v23.qdrant.cloud.monitoring.v1.ClusterNodeUsageMetricsR\x05nodes\x124\n" +
 	"\x03gpu\x18\n" +
 	" \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x03gpu\x12;\n" +
-	"\agpu_ram\x18\v \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06gpuRam\"\x9e\x03\n" +
+	"\agpu_ram\x18\v \x03(\v2\".qdrant.cloud.monitoring.v1.MetricR\x06gpuRam\"\xa1\x03\n" +
 	"\x15GetClusterLogsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x125\n" +
 	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12#\n" +
-	"\x04limt\x18\x05 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\x90N(\x01H\x02R\x04limt\x88\x01\x01:\x82\x01\xbaH\x7f\x1a}\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12%\n" +
+	"\x05limit\x18\x05 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\x90N(\x01H\x02R\x05limit\x88\x01\x01:\x82\x01\xbaH\x7f\x1a}\n" +
 	"\x1fget_cluster_logs.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
-	"\x06_untilB\a\n" +
-	"\x05_limt\"T\n" +
+	"\x06_untilB\b\n" +
+	"\x06_limit\"T\n" +
 	"\x16GetClusterLogsResponse\x12:\n" +
 	"\x05items\x18\x01 \x03(\v2$.qdrant.cloud.monitoring.v1.LogEntryR\x05items\"\xf5\x02\n" +
 	"\x17GetClusterEventsRequest\x12'\n" +

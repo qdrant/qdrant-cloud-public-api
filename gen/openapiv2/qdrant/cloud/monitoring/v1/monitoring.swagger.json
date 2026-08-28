@@ -173,7 +173,7 @@
             "format": "date-time"
           },
           {
-            "name": "limt",
+            "name": "limit",
             "description": "Optional limit for the logs query.\nIf omitted, defaults to 100.",
             "in": "query",
             "required": false,

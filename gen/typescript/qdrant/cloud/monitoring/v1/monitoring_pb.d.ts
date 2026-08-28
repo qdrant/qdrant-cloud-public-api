@@ -350,9 +350,9 @@ export declare type GetClusterLogsRequest = Message<"qdrant.cloud.monitoring.v1.
    * Optional limit for the logs query.
    * If omitted, defaults to 100.
    *
-   * @generated from field: optional int32 limt = 5;
+   * @generated from field: optional int32 limit = 5;
    */
-  limt?: number | undefined;
+  limit?: number | undefined;
 };
 
 export declare type GetClusterLogsRequestValid = GetClusterLogsRequest;
