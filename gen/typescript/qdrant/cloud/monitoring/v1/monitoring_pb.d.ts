@@ -345,6 +345,14 @@ export declare type GetClusterLogsRequest = Message<"qdrant.cloud.monitoring.v1.
    * @generated from field: optional google.protobuf.Timestamp until = 4;
    */
   until?: Timestamp | undefined;
+
+  /**
+   * Optional limit for the logs query.
+   * If omitted, defaults to 100.
+   *
+   * @generated from field: optional int32 limit = 5;
+   */
+  limit?: number | undefined;
 };
 
 export declare type GetClusterLogsRequestValid = GetClusterLogsRequest;
