@@ -196,6 +196,12 @@ message GetClusterLogsRequest {
     message: "until must be after since"
     expression: "!has(this.since) || !has(this.until) || this.until > this.since"
   };
+  // Optional limit for the logs query.
+  // If omitted, defaults to 100.
+  optional int32 limt = 5 [(buf.validate.field).int32 = {
+    gte: 1
+    lte: 10000
+  }];
 }
 
 // GetClusterLogsResponse is the response from the GetClusterLogs function

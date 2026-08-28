@@ -171,6 +171,14 @@
             "required": false,
             "type": "string",
             "format": "date-time"
+          },
+          {
+            "name": "limt",
+            "description": "Optional limit for the logs query.\nIf omitted, defaults to 100.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
