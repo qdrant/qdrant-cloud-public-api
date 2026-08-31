@@ -13,6 +13,20 @@ lint:
     - QDRANT_CLOUD_METHOD_OPTIONS
     - QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
     - QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+  # qdrant/serverless is the app-facing (data-plane) API of qdrant serverless
+  # spaces, served by the serverless deployment itself, not the cloud API
+  # gateway: auth is a space API key and the tenant travels in gRPC metadata,
+  # so the cloud permissions/account_id/http-annotation conventions don't
+  # apply. Naming follows the qdrant server API it sits next to.
+  ignore_only:
+    PACKAGE_VERSION_SUFFIX:
+      - proto/qdrant/serverless
+    ENUM_VALUE_PREFIX:
+      - proto/qdrant/serverless
+    QDRANT_CLOUD_METHOD_OPTIONS:
+      - proto/qdrant/serverless
+    QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS:
+      - proto/qdrant/serverless
 breaking:
   use:
     - FILE
