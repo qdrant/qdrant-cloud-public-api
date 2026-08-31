@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             (unknown)
-// source: qdrant/serverless/serverless.proto
+// source: qdrant/serverless/collections.proto
 
 package serverless
 
@@ -249,5 +249,5 @@ var CollectionsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qdrant/serverless/serverless.proto",
+	Metadata: "qdrant/serverless/collections.proto",
 }

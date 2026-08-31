@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from qdrant.serverless import serverless_pb2 as qdrant_dot_serverless_dot_serverless__pb2
+from qdrant.serverless import collections_pb2 as qdrant_dot_serverless_dot_collections__pb2
 
 
 class CollectionsServiceStub(object):
@@ -20,23 +20,23 @@ class CollectionsServiceStub(object):
         """
         self.CreateCollection = channel.unary_unary(
                 '/qdrant.serverless.CollectionsService/CreateCollection',
-                request_serializer=qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionResponse.FromString,
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.CreateCollectionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.CreateCollectionResponse.FromString,
                 _registered_method=True)
         self.DeleteCollection = channel.unary_unary(
                 '/qdrant.serverless.CollectionsService/DeleteCollection',
-                request_serializer=qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionResponse.FromString,
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionResponse.FromString,
                 _registered_method=True)
         self.GetCollection = channel.unary_unary(
                 '/qdrant.serverless.CollectionsService/GetCollection',
-                request_serializer=qdrant_dot_serverless_dot_serverless__pb2.GetCollectionRequest.SerializeToString,
-                response_deserializer=qdrant_dot_serverless_dot_serverless__pb2.GetCollectionResponse.FromString,
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.GetCollectionRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.GetCollectionResponse.FromString,
                 _registered_method=True)
         self.ListCollections = channel.unary_unary(
                 '/qdrant.serverless.CollectionsService/ListCollections',
-                request_serializer=qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsRequest.SerializeToString,
-                response_deserializer=qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsResponse.FromString,
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.FromString,
                 _registered_method=True)
 
 
@@ -80,23 +80,23 @@ def add_CollectionsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateCollection': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateCollection,
-                    request_deserializer=qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionRequest.FromString,
-                    response_serializer=qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.CreateCollectionRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.CreateCollectionResponse.SerializeToString,
             ),
             'DeleteCollection': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteCollection,
-                    request_deserializer=qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionRequest.FromString,
-                    response_serializer=qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionResponse.SerializeToString,
             ),
             'GetCollection': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCollection,
-                    request_deserializer=qdrant_dot_serverless_dot_serverless__pb2.GetCollectionRequest.FromString,
-                    response_serializer=qdrant_dot_serverless_dot_serverless__pb2.GetCollectionResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.GetCollectionRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.GetCollectionResponse.SerializeToString,
             ),
             'ListCollections': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCollections,
-                    request_deserializer=qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsRequest.FromString,
-                    response_serializer=qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsResponse.SerializeToString,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -128,8 +128,8 @@ class CollectionsService(object):
             request,
             target,
             '/qdrant.serverless.CollectionsService/CreateCollection',
-            qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionRequest.SerializeToString,
-            qdrant_dot_serverless_dot_serverless__pb2.CreateCollectionResponse.FromString,
+            qdrant_dot_serverless_dot_collections__pb2.CreateCollectionRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.CreateCollectionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -155,8 +155,8 @@ class CollectionsService(object):
             request,
             target,
             '/qdrant.serverless.CollectionsService/DeleteCollection',
-            qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionRequest.SerializeToString,
-            qdrant_dot_serverless_dot_serverless__pb2.DeleteCollectionResponse.FromString,
+            qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.DeleteCollectionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -182,8 +182,8 @@ class CollectionsService(object):
             request,
             target,
             '/qdrant.serverless.CollectionsService/GetCollection',
-            qdrant_dot_serverless_dot_serverless__pb2.GetCollectionRequest.SerializeToString,
-            qdrant_dot_serverless_dot_serverless__pb2.GetCollectionResponse.FromString,
+            qdrant_dot_serverless_dot_collections__pb2.GetCollectionRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.GetCollectionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -209,8 +209,8 @@ class CollectionsService(object):
             request,
             target,
             '/qdrant.serverless.CollectionsService/ListCollections',
-            qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsRequest.SerializeToString,
-            qdrant_dot_serverless_dot_serverless__pb2.ListCollectionsResponse.FromString,
+            qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.FromString,
             options,
             channel_credentials,
             insecure,

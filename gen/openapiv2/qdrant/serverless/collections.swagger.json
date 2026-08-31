@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/serverless/serverless.proto",
+    "title": "qdrant/serverless/collections.proto",
     "version": "version not set"
   },
   "tags": [

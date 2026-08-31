@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: qdrant/serverless/serverless.proto
+// source: qdrant/serverless/collections.proto
 
 package serverless
 
@@ -66,11 +66,11 @@ func (x Distance) String() string {
 }
 
 func (Distance) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_serverless_serverless_proto_enumTypes[0].Descriptor()
+	return file_qdrant_serverless_collections_proto_enumTypes[0].Descriptor()
 }
 
 func (Distance) Type() protoreflect.EnumType {
-	return &file_qdrant_serverless_serverless_proto_enumTypes[0]
+	return &file_qdrant_serverless_collections_proto_enumTypes[0]
 }
 
 func (x Distance) Number() protoreflect.EnumNumber {
@@ -79,7 +79,7 @@ func (x Distance) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Distance.Descriptor instead.
 func (Distance) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{0}
 }
 
 // How much of the original vector precision may be traded for cost. The manager
@@ -125,11 +125,11 @@ func (x PrecisionTier) String() string {
 }
 
 func (PrecisionTier) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_serverless_serverless_proto_enumTypes[1].Descriptor()
+	return file_qdrant_serverless_collections_proto_enumTypes[1].Descriptor()
 }
 
 func (PrecisionTier) Type() protoreflect.EnumType {
-	return &file_qdrant_serverless_serverless_proto_enumTypes[1]
+	return &file_qdrant_serverless_collections_proto_enumTypes[1]
 }
 
 func (x PrecisionTier) Number() protoreflect.EnumNumber {
@@ -138,7 +138,7 @@ func (x PrecisionTier) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PrecisionTier.Descriptor instead.
 func (PrecisionTier) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{1}
 }
 
 // Full-text tokenizer, mirrors qdrant's `TokenizerType`.
@@ -186,11 +186,11 @@ func (x Tokenizer) String() string {
 }
 
 func (Tokenizer) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_serverless_serverless_proto_enumTypes[2].Descriptor()
+	return file_qdrant_serverless_collections_proto_enumTypes[2].Descriptor()
 }
 
 func (Tokenizer) Type() protoreflect.EnumType {
-	return &file_qdrant_serverless_serverless_proto_enumTypes[2]
+	return &file_qdrant_serverless_collections_proto_enumTypes[2]
 }
 
 func (x Tokenizer) Number() protoreflect.EnumNumber {
@@ -199,7 +199,7 @@ func (x Tokenizer) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Tokenizer.Descriptor instead.
 func (Tokenizer) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{2}
 }
 
 // Configuration of a single dense (embedding) vector.
@@ -220,7 +220,7 @@ type DenseVectorConfig struct {
 
 func (x *DenseVectorConfig) Reset() {
 	*x = DenseVectorConfig{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[0]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -232,7 +232,7 @@ func (x *DenseVectorConfig) String() string {
 func (*DenseVectorConfig) ProtoMessage() {}
 
 func (x *DenseVectorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[0]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -245,7 +245,7 @@ func (x *DenseVectorConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DenseVectorConfig.ProtoReflect.Descriptor instead.
 func (*DenseVectorConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{0}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *DenseVectorConfig) GetSize() uint64 {
@@ -290,7 +290,7 @@ type SparseVectorConfig struct {
 
 func (x *SparseVectorConfig) Reset() {
 	*x = SparseVectorConfig{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[1]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -302,7 +302,7 @@ func (x *SparseVectorConfig) String() string {
 func (*SparseVectorConfig) ProtoMessage() {}
 
 func (x *SparseVectorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[1]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -315,7 +315,7 @@ func (x *SparseVectorConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SparseVectorConfig.ProtoReflect.Descriptor instead.
 func (*SparseVectorConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SparseVectorConfig) GetUseIdf() bool {
@@ -341,7 +341,7 @@ type KeywordIndex struct {
 
 func (x *KeywordIndex) Reset() {
 	*x = KeywordIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[2]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -353,7 +353,7 @@ func (x *KeywordIndex) String() string {
 func (*KeywordIndex) ProtoMessage() {}
 
 func (x *KeywordIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[2]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +366,7 @@ func (x *KeywordIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeywordIndex.ProtoReflect.Descriptor instead.
 func (*KeywordIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{2}
 }
 
 // Exact match and/or range filters on integers, e.g. `age: 25`. Both are on
@@ -383,7 +383,7 @@ type IntegerIndex struct {
 
 func (x *IntegerIndex) Reset() {
 	*x = IntegerIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[3]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -395,7 +395,7 @@ func (x *IntegerIndex) String() string {
 func (*IntegerIndex) ProtoMessage() {}
 
 func (x *IntegerIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[3]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -408,7 +408,7 @@ func (x *IntegerIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntegerIndex.ProtoReflect.Descriptor instead.
 func (*IntegerIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{3}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *IntegerIndex) GetLookup() bool {
@@ -434,7 +434,7 @@ type FloatIndex struct {
 
 func (x *FloatIndex) Reset() {
 	*x = FloatIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[4]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -446,7 +446,7 @@ func (x *FloatIndex) String() string {
 func (*FloatIndex) ProtoMessage() {}
 
 func (x *FloatIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[4]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -459,7 +459,7 @@ func (x *FloatIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FloatIndex.ProtoReflect.Descriptor instead.
 func (*FloatIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{4}
 }
 
 // Exact match on UUID strings; like keyword but stored compactly.
@@ -471,7 +471,7 @@ type UuidIndex struct {
 
 func (x *UuidIndex) Reset() {
 	*x = UuidIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[5]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +483,7 @@ func (x *UuidIndex) String() string {
 func (*UuidIndex) ProtoMessage() {}
 
 func (x *UuidIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[5]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +496,7 @@ func (x *UuidIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UuidIndex.ProtoReflect.Descriptor instead.
 func (*UuidIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{5}
 }
 
 // Range filters on RFC 3339 datetimes, e.g. `created_at: "2023-02-08T10:49:00Z"`.
@@ -508,7 +508,7 @@ type DatetimeIndex struct {
 
 func (x *DatetimeIndex) Reset() {
 	*x = DatetimeIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[6]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -520,7 +520,7 @@ func (x *DatetimeIndex) String() string {
 func (*DatetimeIndex) ProtoMessage() {}
 
 func (x *DatetimeIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[6]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +533,7 @@ func (x *DatetimeIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatetimeIndex.ProtoReflect.Descriptor instead.
 func (*DatetimeIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{6}
 }
 
 // Full-text filtering on string values.
@@ -555,7 +555,7 @@ type TextIndex struct {
 
 func (x *TextIndex) Reset() {
 	*x = TextIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[7]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -567,7 +567,7 @@ func (x *TextIndex) String() string {
 func (*TextIndex) ProtoMessage() {}
 
 func (x *TextIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[7]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -580,7 +580,7 @@ func (x *TextIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextIndex.ProtoReflect.Descriptor instead.
 func (*TextIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TextIndex) GetTokenizer() Tokenizer {
@@ -627,7 +627,7 @@ type GeoIndex struct {
 
 func (x *GeoIndex) Reset() {
 	*x = GeoIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[8]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -639,7 +639,7 @@ func (x *GeoIndex) String() string {
 func (*GeoIndex) ProtoMessage() {}
 
 func (x *GeoIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[8]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,7 +652,7 @@ func (x *GeoIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeoIndex.ProtoReflect.Descriptor instead.
 func (*GeoIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{8}
 }
 
 // Exact match on booleans, e.g. `is_active: true`.
@@ -664,7 +664,7 @@ type BoolIndex struct {
 
 func (x *BoolIndex) Reset() {
 	*x = BoolIndex{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[9]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -676,7 +676,7 @@ func (x *BoolIndex) String() string {
 func (*BoolIndex) ProtoMessage() {}
 
 func (x *BoolIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[9]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -689,7 +689,7 @@ func (x *BoolIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BoolIndex.ProtoReflect.Descriptor instead.
 func (*BoolIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{9}
 }
 
 // One payload index. Only the *kind* of filter the field supports is chosen
@@ -715,7 +715,7 @@ type PayloadIndexConfig struct {
 
 func (x *PayloadIndexConfig) Reset() {
 	*x = PayloadIndexConfig{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[10]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +727,7 @@ func (x *PayloadIndexConfig) String() string {
 func (*PayloadIndexConfig) ProtoMessage() {}
 
 func (x *PayloadIndexConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[10]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +740,7 @@ func (x *PayloadIndexConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayloadIndexConfig.ProtoReflect.Descriptor instead.
 func (*PayloadIndexConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PayloadIndexConfig) GetIndex() isPayloadIndexConfig_Index {
@@ -899,7 +899,7 @@ type CollectionConfig struct {
 
 func (x *CollectionConfig) Reset() {
 	*x = CollectionConfig{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[11]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -911,7 +911,7 @@ func (x *CollectionConfig) String() string {
 func (*CollectionConfig) ProtoMessage() {}
 
 func (x *CollectionConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[11]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -924,7 +924,7 @@ func (x *CollectionConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectionConfig.ProtoReflect.Descriptor instead.
 func (*CollectionConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CollectionConfig) GetDenseVectors() map[string]*DenseVectorConfig {
@@ -964,7 +964,7 @@ type CreateCollectionRequest struct {
 
 func (x *CreateCollectionRequest) Reset() {
 	*x = CreateCollectionRequest{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[12]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -976,7 +976,7 @@ func (x *CreateCollectionRequest) String() string {
 func (*CreateCollectionRequest) ProtoMessage() {}
 
 func (x *CreateCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[12]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -989,7 +989,7 @@ func (x *CreateCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCollectionRequest.ProtoReflect.Descriptor instead.
 func (*CreateCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreateCollectionRequest) GetCollectionName() string {
@@ -1019,7 +1019,7 @@ type CreateCollectionResponse struct {
 
 func (x *CreateCollectionResponse) Reset() {
 	*x = CreateCollectionResponse{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[13]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1031,7 +1031,7 @@ func (x *CreateCollectionResponse) String() string {
 func (*CreateCollectionResponse) ProtoMessage() {}
 
 func (x *CreateCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[13]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1044,7 @@ func (x *CreateCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCollectionResponse.ProtoReflect.Descriptor instead.
 func (*CreateCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CreateCollectionResponse) GetCollectionName() string {
@@ -1072,7 +1072,7 @@ type DeleteCollectionRequest struct {
 
 func (x *DeleteCollectionRequest) Reset() {
 	*x = DeleteCollectionRequest{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[14]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1084,7 +1084,7 @@ func (x *DeleteCollectionRequest) String() string {
 func (*DeleteCollectionRequest) ProtoMessage() {}
 
 func (x *DeleteCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[14]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1097,7 +1097,7 @@ func (x *DeleteCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCollectionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DeleteCollectionRequest) GetCollectionName() string {
@@ -1120,7 +1120,7 @@ type DeleteCollectionResponse struct {
 
 func (x *DeleteCollectionResponse) Reset() {
 	*x = DeleteCollectionResponse{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[15]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1132,7 +1132,7 @@ func (x *DeleteCollectionResponse) String() string {
 func (*DeleteCollectionResponse) ProtoMessage() {}
 
 func (x *DeleteCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[15]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1145,7 +1145,7 @@ func (x *DeleteCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCollectionResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DeleteCollectionResponse) GetDeleted() bool {
@@ -1173,7 +1173,7 @@ type GetCollectionRequest struct {
 
 func (x *GetCollectionRequest) Reset() {
 	*x = GetCollectionRequest{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[16]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1185,7 +1185,7 @@ func (x *GetCollectionRequest) String() string {
 func (*GetCollectionRequest) ProtoMessage() {}
 
 func (x *GetCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[16]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1198,7 @@ func (x *GetCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCollectionRequest.ProtoReflect.Descriptor instead.
 func (*GetCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetCollectionRequest) GetCollectionName() string {
@@ -1224,7 +1224,7 @@ type GetCollectionResponse struct {
 
 func (x *GetCollectionResponse) Reset() {
 	*x = GetCollectionResponse{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[17]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1236,7 @@ func (x *GetCollectionResponse) String() string {
 func (*GetCollectionResponse) ProtoMessage() {}
 
 func (x *GetCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[17]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1249,7 @@ func (x *GetCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCollectionResponse.ProtoReflect.Descriptor instead.
 func (*GetCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{17}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetCollectionResponse) GetExists() bool {
@@ -1283,7 +1283,7 @@ type ListCollectionsRequest struct {
 
 func (x *ListCollectionsRequest) Reset() {
 	*x = ListCollectionsRequest{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[18]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1295,7 +1295,7 @@ func (x *ListCollectionsRequest) String() string {
 func (*ListCollectionsRequest) ProtoMessage() {}
 
 func (x *ListCollectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[18]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1308,7 @@ func (x *ListCollectionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCollectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListCollectionsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{18}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{18}
 }
 
 // One collection in a listing.
@@ -1325,7 +1325,7 @@ type CollectionSummary struct {
 
 func (x *CollectionSummary) Reset() {
 	*x = CollectionSummary{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[19]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1337,7 +1337,7 @@ func (x *CollectionSummary) String() string {
 func (*CollectionSummary) ProtoMessage() {}
 
 func (x *CollectionSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[19]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1350,7 +1350,7 @@ func (x *CollectionSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectionSummary.ProtoReflect.Descriptor instead.
 func (*CollectionSummary) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{19}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CollectionSummary) GetCollectionName() string {
@@ -1379,7 +1379,7 @@ type ListCollectionsResponse struct {
 
 func (x *ListCollectionsResponse) Reset() {
 	*x = ListCollectionsResponse{}
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[20]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1391,7 +1391,7 @@ func (x *ListCollectionsResponse) String() string {
 func (*ListCollectionsResponse) ProtoMessage() {}
 
 func (x *ListCollectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_serverless_proto_msgTypes[20]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1404,7 +1404,7 @@ func (x *ListCollectionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCollectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListCollectionsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_serverless_proto_rawDescGZIP(), []int{20}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListCollectionsResponse) GetCollections() []*CollectionSummary {
@@ -1414,11 +1414,11 @@ func (x *ListCollectionsResponse) GetCollections() []*CollectionSummary {
 	return nil
 }
 
-var File_qdrant_serverless_serverless_proto protoreflect.FileDescriptor
+var File_qdrant_serverless_collections_proto protoreflect.FileDescriptor
 
-const file_qdrant_serverless_serverless_proto_rawDesc = "" +
+const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
-	"\"qdrant/serverless/serverless.proto\x12\x11qdrant.serverless\"\xe3\x01\n" +
+	"#qdrant/serverless/collections.proto\x12\x11qdrant.serverless\"\xe3\x01\n" +
 	"\x11DenseVectorConfig\x12\x12\n" +
 	"\x04size\x18\x01 \x01(\x04R\x04size\x127\n" +
 	"\bdistance\x18\x02 \x01(\x0e2\x1b.qdrant.serverless.DistanceR\bdistance\x12 \n" +
@@ -1532,24 +1532,24 @@ const file_qdrant_serverless_serverless_proto_rawDesc = "" +
 	"\x10CreateCollection\x12*.qdrant.serverless.CreateCollectionRequest\x1a+.qdrant.serverless.CreateCollectionResponse\x12k\n" +
 	"\x10DeleteCollection\x12*.qdrant.serverless.DeleteCollectionRequest\x1a+.qdrant.serverless.DeleteCollectionResponse\x12b\n" +
 	"\rGetCollection\x12'.qdrant.serverless.GetCollectionRequest\x1a(.qdrant.serverless.GetCollectionResponse\x12h\n" +
-	"\x0fListCollections\x12).qdrant.serverless.ListCollectionsRequest\x1a*.qdrant.serverless.ListCollectionsResponseB\xd1\x01\n" +
-	"\x15com.qdrant.serverlessB\x0fServerlessProtoP\x01ZBgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/serverless\xa2\x02\x03QSX\xaa\x02\x11Qdrant.Serverless\xca\x02\x11Qdrant\\Serverless\xe2\x02\x1dQdrant\\Serverless\\GPBMetadata\xea\x02\x12Qdrant::Serverlessb\x06proto3"
+	"\x0fListCollections\x12).qdrant.serverless.ListCollectionsRequest\x1a*.qdrant.serverless.ListCollectionsResponseB\xd2\x01\n" +
+	"\x15com.qdrant.serverlessB\x10CollectionsProtoP\x01ZBgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/serverless\xa2\x02\x03QSX\xaa\x02\x11Qdrant.Serverless\xca\x02\x11Qdrant\\Serverless\xe2\x02\x1dQdrant\\Serverless\\GPBMetadata\xea\x02\x12Qdrant::Serverlessb\x06proto3"
 
 var (
-	file_qdrant_serverless_serverless_proto_rawDescOnce sync.Once
-	file_qdrant_serverless_serverless_proto_rawDescData []byte
+	file_qdrant_serverless_collections_proto_rawDescOnce sync.Once
+	file_qdrant_serverless_collections_proto_rawDescData []byte
 )
 
-func file_qdrant_serverless_serverless_proto_rawDescGZIP() []byte {
-	file_qdrant_serverless_serverless_proto_rawDescOnce.Do(func() {
-		file_qdrant_serverless_serverless_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_qdrant_serverless_serverless_proto_rawDesc), len(file_qdrant_serverless_serverless_proto_rawDesc)))
+func file_qdrant_serverless_collections_proto_rawDescGZIP() []byte {
+	file_qdrant_serverless_collections_proto_rawDescOnce.Do(func() {
+		file_qdrant_serverless_collections_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_qdrant_serverless_collections_proto_rawDesc), len(file_qdrant_serverless_collections_proto_rawDesc)))
 	})
-	return file_qdrant_serverless_serverless_proto_rawDescData
+	return file_qdrant_serverless_collections_proto_rawDescData
 }
 
-var file_qdrant_serverless_serverless_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_serverless_serverless_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
-var file_qdrant_serverless_serverless_proto_goTypes = []any{
+var file_qdrant_serverless_collections_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_qdrant_serverless_collections_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_qdrant_serverless_collections_proto_goTypes = []any{
 	(Distance)(0),                    // 0: qdrant.serverless.Distance
 	(PrecisionTier)(0),               // 1: qdrant.serverless.PrecisionTier
 	(Tokenizer)(0),                   // 2: qdrant.serverless.Tokenizer
@@ -1578,7 +1578,7 @@ var file_qdrant_serverless_serverless_proto_goTypes = []any{
 	nil,                              // 25: qdrant.serverless.CollectionConfig.SparseVectorsEntry
 	nil,                              // 26: qdrant.serverless.CollectionConfig.PayloadIndexesEntry
 }
-var file_qdrant_serverless_serverless_proto_depIdxs = []int32{
+var file_qdrant_serverless_collections_proto_depIdxs = []int32{
 	0,  // 0: qdrant.serverless.DenseVectorConfig.distance:type_name -> qdrant.serverless.Distance
 	1,  // 1: qdrant.serverless.DenseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
 	1,  // 2: qdrant.serverless.SparseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
@@ -1615,16 +1615,16 @@ var file_qdrant_serverless_serverless_proto_depIdxs = []int32{
 	0,  // [0:21] is the sub-list for field type_name
 }
 
-func init() { file_qdrant_serverless_serverless_proto_init() }
-func file_qdrant_serverless_serverless_proto_init() {
-	if File_qdrant_serverless_serverless_proto != nil {
+func init() { file_qdrant_serverless_collections_proto_init() }
+func file_qdrant_serverless_collections_proto_init() {
+	if File_qdrant_serverless_collections_proto != nil {
 		return
 	}
-	file_qdrant_serverless_serverless_proto_msgTypes[0].OneofWrappers = []any{}
-	file_qdrant_serverless_serverless_proto_msgTypes[1].OneofWrappers = []any{}
-	file_qdrant_serverless_serverless_proto_msgTypes[3].OneofWrappers = []any{}
-	file_qdrant_serverless_serverless_proto_msgTypes[7].OneofWrappers = []any{}
-	file_qdrant_serverless_serverless_proto_msgTypes[10].OneofWrappers = []any{
+	file_qdrant_serverless_collections_proto_msgTypes[0].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[1].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[3].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[7].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[10].OneofWrappers = []any{
 		(*PayloadIndexConfig_Keyword)(nil),
 		(*PayloadIndexConfig_Integer)(nil),
 		(*PayloadIndexConfig_Float)(nil),
@@ -1634,24 +1634,24 @@ func file_qdrant_serverless_serverless_proto_init() {
 		(*PayloadIndexConfig_Geo)(nil),
 		(*PayloadIndexConfig_Bool)(nil),
 	}
-	file_qdrant_serverless_serverless_proto_msgTypes[17].OneofWrappers = []any{}
-	file_qdrant_serverless_serverless_proto_msgTypes[19].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[17].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[19].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_serverless_serverless_proto_rawDesc), len(file_qdrant_serverless_serverless_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_serverless_collections_proto_rawDesc), len(file_qdrant_serverless_collections_proto_rawDesc)),
 			NumEnums:      3,
 			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_qdrant_serverless_serverless_proto_goTypes,
-		DependencyIndexes: file_qdrant_serverless_serverless_proto_depIdxs,
-		EnumInfos:         file_qdrant_serverless_serverless_proto_enumTypes,
-		MessageInfos:      file_qdrant_serverless_serverless_proto_msgTypes,
+		GoTypes:           file_qdrant_serverless_collections_proto_goTypes,
+		DependencyIndexes: file_qdrant_serverless_collections_proto_depIdxs,
+		EnumInfos:         file_qdrant_serverless_collections_proto_enumTypes,
+		MessageInfos:      file_qdrant_serverless_collections_proto_msgTypes,
 	}.Build()
-	File_qdrant_serverless_serverless_proto = out.File
-	file_qdrant_serverless_serverless_proto_goTypes = nil
-	file_qdrant_serverless_serverless_proto_depIdxs = nil
+	File_qdrant_serverless_collections_proto = out.File
+	file_qdrant_serverless_collections_proto_goTypes = nil
+	file_qdrant_serverless_collections_proto_depIdxs = nil
 }
