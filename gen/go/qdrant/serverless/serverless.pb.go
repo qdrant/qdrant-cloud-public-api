@@ -26,7 +26,7 @@ type Distance int32
 
 const (
 	// Unset; a concrete metric is required.
-	Distance_UNKNOWN_DISTANCE Distance = 0
+	Distance_DISTANCE_UNSPECIFIED Distance = 0
 	// Cosine similarity.
 	Distance_COSINE Distance = 1
 	// Euclidean (L2) distance.
@@ -40,18 +40,18 @@ const (
 // Enum value maps for Distance.
 var (
 	Distance_name = map[int32]string{
-		0: "UNKNOWN_DISTANCE",
+		0: "DISTANCE_UNSPECIFIED",
 		1: "COSINE",
 		2: "EUCLID",
 		3: "DOT",
 		4: "MANHATTAN",
 	}
 	Distance_value = map[string]int32{
-		"UNKNOWN_DISTANCE": 0,
-		"COSINE":           1,
-		"EUCLID":           2,
-		"DOT":              3,
-		"MANHATTAN":        4,
+		"DISTANCE_UNSPECIFIED": 0,
+		"COSINE":               1,
+		"EUCLID":               2,
+		"DOT":                  3,
+		"MANHATTAN":            4,
 	}
 )
 
@@ -259,7 +259,7 @@ func (x *DenseVectorConfig) GetDistance() Distance {
 	if x != nil {
 		return x.Distance
 	}
-	return Distance_UNKNOWN_DISTANCE
+	return Distance_DISTANCE_UNSPECIFIED
 }
 
 func (x *DenseVectorConfig) GetMultivector() bool {
@@ -1505,9 +1505,9 @@ const file_qdrant_serverless_serverless_proto_rawDesc = "" +
 	"pointCount\x88\x01\x01B\x0e\n" +
 	"\f_point_count\"a\n" +
 	"\x17ListCollectionsResponse\x12F\n" +
-	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections*P\n" +
-	"\bDistance\x12\x14\n" +
-	"\x10UNKNOWN_DISTANCE\x10\x00\x12\n" +
+	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections*T\n" +
+	"\bDistance\x12\x18\n" +
+	"\x14DISTANCE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06COSINE\x10\x01\x12\n" +
 	"\n" +

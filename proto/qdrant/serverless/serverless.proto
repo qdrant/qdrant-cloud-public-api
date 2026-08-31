@@ -20,7 +20,7 @@ service CollectionsService {
 // Distance metric used to compare dense vectors.
 enum Distance {
   // Unset; a concrete metric is required.
-  UNKNOWN_DISTANCE = 0;
+  DISTANCE_UNSPECIFIED = 0;
   // Cosine similarity.
   COSINE = 1;
   // Euclidean (L2) distance.

@@ -9,7 +9,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 class Distance(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    UNKNOWN_DISTANCE: _ClassVar[Distance]
+    DISTANCE_UNSPECIFIED: _ClassVar[Distance]
     COSINE: _ClassVar[Distance]
     EUCLID: _ClassVar[Distance]
     DOT: _ClassVar[Distance]
@@ -29,7 +29,7 @@ class Tokenizer(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     WHITESPACE: _ClassVar[Tokenizer]
     WORD: _ClassVar[Tokenizer]
     MULTILINGUAL: _ClassVar[Tokenizer]
-UNKNOWN_DISTANCE: Distance
+DISTANCE_UNSPECIFIED: Distance
 COSINE: Distance
 EUCLID: Distance
 DOT: Distance

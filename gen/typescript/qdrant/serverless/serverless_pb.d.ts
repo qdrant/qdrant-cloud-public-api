@@ -635,9 +635,9 @@ export enum Distance {
   /**
    * Unset; a concrete metric is required.
    *
-   * @generated from enum value: UNKNOWN_DISTANCE = 0;
+   * @generated from enum value: DISTANCE_UNSPECIFIED = 0;
    */
-  UNKNOWN_DISTANCE = 0,
+  DISTANCE_UNSPECIFIED = 0,
 
   /**
    * Cosine similarity.
