@@ -59,6 +59,10 @@ service AccountService {
       resource_type: "account"
       resource_id_field: "resp.account.id"
       resource_url_template: "/accounts/{resp.account.id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -131,6 +135,10 @@ service AccountService {
       resource_type: "account"
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
   }
   // Allows the authenticated user to leave an account they are a member of.
@@ -211,6 +219,10 @@ service AccountService {
       resource_type: "account-invite"
       resource_id_field: "resp.account_invite.id"
       resource_url_template: "/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -232,6 +244,10 @@ service AccountService {
       resource_type: "account-invite"
       resource_id_field: "req.invite_id"
       resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -260,6 +276,10 @@ service AccountService {
       resource_type: "account-invite"
       resource_id_field: "req.invite_id"
       resource_url_template: "/accounts/{req.account_id}/invites/{req.invite_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {

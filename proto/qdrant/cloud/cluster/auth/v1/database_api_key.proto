@@ -51,6 +51,10 @@ service DatabaseApiKeyService {
         key: "cluster_ids"
         value: "req.database_api_key.cluster_ids"
       }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -72,6 +76,10 @@ service DatabaseApiKeyService {
       resource_type: "database-api-key"
       resource_id_field: "req.database_api_key_id"
       resource_url_template: "/accounts/{req.account_id}/database-api-keys/{req.database_api_key_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {

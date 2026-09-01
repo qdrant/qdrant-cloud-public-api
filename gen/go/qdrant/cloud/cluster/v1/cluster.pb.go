@@ -5487,7 +5487,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xff!\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xdb$\n" +
 	"\x0eClusterService\x12\xb4\x01\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xd7\x01\n" +
 	"\n" +
@@ -5501,12 +5501,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"cluster_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"package_id\x12\n" +
-	"package_id\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\xd9\x02\n" +
-	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xe8\x01\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x1c\n" +
-	"\fcluster_name\x12\fcluster.name\xca\xf3\x18[\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xb4\x03\n" +
-	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\xa5\x02\x8a\xb5\x18\x0frestore:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
+	"package_id\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\x93\x03\n" +
+	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xa2\x02\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x1c\n" +
+	"\fcluster_name\x12\fcluster.name\xca\xf3\x18\x94\x01\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}R7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-id\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xee\x03\n" +
+	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\xdf\x02\x8a\xb5\x18\x0frestore:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xba\xb5\x18\x1c\n" +
-	"\fcluster_name\x12\fcluster_name\xca\xf3\x18t\b\x01\x12\acluster\"\x0fresp.cluster.id*5/accounts/{req.account_id}/clusters/{resp.cluster.id}R\x1f\n" +
+	"\fcluster_name\x12\fcluster_name\xca\xf3\x18\xad\x01\b\x01\x12\acluster\"\x0fresp.cluster.id*5/accounts/{req.account_id}/clusters/{resp.cluster.id}R7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-idR\x1f\n" +
 	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xe7\x03\n" +
 	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xf6\x02\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -5517,23 +5519,27 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"account_id\x12\x12cluster.account_id\x12\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xb8\x02\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xc7\x01\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
+	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xf2\x02\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\x81\x02\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Q\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xcb\x02\n" +
-	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xd7\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18\x8a\x01\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}R7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-id\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\x85\x03\n" +
+	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\x91\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestart\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xcb\x02\n" +
-	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\xd7\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18\x93\x01\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestartR7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-id\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\x85\x03\n" +
+	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\x91\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspend\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xd5\x02\n" +
-	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xdb\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18\x93\x01\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspendR7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-id\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\x8f\x03\n" +
+	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\x95\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xe9\x02\n" +
+	"cluster_id\xca\xf3\x18\x95\x01\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspendR7\n" +
+	"\x14analytics_message_id\x12\x1fresp-md.qc-analytics-message-id\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xe9\x02\n" +
 	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xe3\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +

@@ -80,6 +80,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "resp.cluster.id"
       resource_url_template: "/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -107,6 +111,10 @@ service ClusterService {
       additional_context_fields: {
         key: "from_backup_id"
         value: "req.backup_id"
+      }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
       }
     };
     // log fields
@@ -177,6 +185,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -199,6 +211,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -221,6 +237,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -243,6 +263,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {

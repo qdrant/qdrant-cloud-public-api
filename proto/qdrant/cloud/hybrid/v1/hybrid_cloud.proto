@@ -67,6 +67,10 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "resp.hybrid_cloud_environment.id"
       resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -94,6 +98,10 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "req.hybrid_cloud_environment.id"
       resource_url_template: "/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -132,6 +140,10 @@ service HybridCloudService {
       resource_type: "hybrid-cloud-environment"
       resource_id_field: "req.hybrid_cloud_environment_id"
       resource_url_template: "/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}"
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {

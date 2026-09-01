@@ -74,6 +74,10 @@ service BackupService {
         key: "cluster_id"
         value: "req.backup.cluster_id"
       }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -130,6 +134,10 @@ service BackupService {
         key: "cluster_id"
         value: "resp-md.qc-event-cluster-id"
       }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -169,6 +177,10 @@ service BackupService {
       additional_context_fields: {
         key: "cluster_id"
         value: "resp-md.qc-event-cluster-id"
+      }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
       }
     };
     // log fields
@@ -231,6 +243,10 @@ service BackupService {
       additional_context_fields: {
         key: "cluster_id"
         value: "req.backup_schedule.cluster_id"
+      }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
       }
     };
     // log fields
@@ -311,6 +327,10 @@ service BackupService {
       additional_context_fields: {
         key: "cluster_id"
         value: "resp-md.qc-event-cluster-id"
+      }
+      additional_context_fields: {
+        key: "analytics_message_id"
+        value: "resp-md.qc-analytics-message-id"
       }
     };
     // log fields
