@@ -1164,7 +1164,7 @@
         },
         "url": {
           "type": "string",
-          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already\nhas the account and cluster identifiers it needs."
+          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and\nCLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the\naccount and cluster identifiers it needs."
         }
       },
       "description": "ClusterNodeAction describes something the user can do to resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
@@ -1174,10 +1174,11 @@
       "enum": [
         "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
         "CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY",
-        "CLUSTER_NODE_ACTION_KIND_DOCUMENTATION"
+        "CLUSTER_NODE_ACTION_KIND_DOCUMENTATION",
+        "CLUSTER_NODE_ACTION_KIND_VIEW_LOGS"
       ],
       "default": "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
-      "description": "ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.\n\n - CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: The action kind is unspecified.\n - CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: Scale the cluster's resources per node.\n - CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: Read the documentation explaining the condition and how to resolve it."
+      "description": "ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.\n\n - CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: The action kind is unspecified.\n - CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: Scale the cluster's resources per node.\n - CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: Read the documentation explaining the condition and how to resolve it.\n - CLUSTER_NODE_ACTION_KIND_VIEW_LOGS: Look at the cluster's logs, where the cause is visible in the database's\nown output rather than in anything the platform can report."
     },
     "v1ClusterNodeInfo": {
       "type": "object",
@@ -1225,26 +1226,34 @@
         "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN"
       ],
       "default": "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
-      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED: Something is preventing the node's container from starting, for example an\nimage that cannot be pulled or configuration that cannot be resolved.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run, so no ClusterNodeNotReadyInfo.event accompanies\nthis condition.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.event may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status."
+      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED: Something is preventing the node's container from starting, for example an\nimage that cannot be pulled or configuration that cannot be resolved.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run.\nClusterNodeNotReadyInfo.reason may explain what is blocking it.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.reason may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status.\nNot currently emitted: where the node status does not say what is wrong,\nClusterNodeInfo.not_ready_info is left unset instead, because the node's own\nstate already reports that it is not ready."
     },
     "v1ClusterNodeNotReadyInfo": {
       "type": "object",
       "properties": {
         "condition": {
           "$ref": "#/definitions/v1ClusterNodeNotReadyCondition",
-          "description": "The reason the node is not ready right now."
+          "description": "What is wrong with the node right now."
         },
         "conditionMessage": {
           "type": "string",
           "description": "Human-readable explanation of the condition,\nfor example \"Your container is restarting\"."
         },
+        "reason": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyReason",
+          "description": "Why the node is in this condition.\nNot always set: the node status does not always say why, in which case the\ncondition is reported on its own. Each reason is only ever reported under\nthe conditions documented on ClusterNodeNotReadyReason."
+        },
+        "reasonMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the reason,\nfor example \"Your node has reached its memory limit\".\nOnly set when reason is set."
+        },
         "event": {
           "$ref": "#/definitions/v1ClusterNodeTerminationEvent",
-          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING."
+          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.\n\nDeprecated: use reason instead, which reports these two values plus the\ncauses this field cannot express. Still populated whenever reason is\nCLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or\nCLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no\nchange in behavior, and scheduled for removal once the reason tier is the\nannounced surface."
         },
         "eventMessage": {
           "type": "string",
-          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set."
+          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set.\n\nDeprecated: use reason_message instead."
         },
         "actions": {
           "type": "array",
@@ -1252,10 +1261,25 @@
             "type": "object",
             "$ref": "#/definitions/v1ClusterNodeAction"
           },
-          "description": "Actions the user can take to resolve the condition."
+          "description": "Actions the user can take to resolve the condition.\nA CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is\nonly attached where a page exists that helps with the specific cause."
         }
       },
-      "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and event values.\nAll fields in this message are read-only."
+      "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe explanation has two tiers: condition answers what is wrong with the node\nright now and is small and stable, while reason answers why and grows as more\ncauses become recognizable.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and reason values.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeNotReadyReason": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED",
+        "CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES",
+        "CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED",
+        "CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE",
+        "CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE",
+        "CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING",
+        "CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY",
+        "CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED"
+      ],
+      "default": "CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED",
+      "description": "ClusterNodeNotReadyReason describes why a node is in its current not-ready\ncondition. It is the growable second tier of the explanation: the same reason\ncan appear under more than one ClusterNodeNotReadyCondition, because some\ncauses are noticed at different points in a pod's lifecycle.\nConsumers that meet a value they do not know should fall back to rendering the\ncondition on its own.\n\n - CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED: The reason is unspecified.\n - CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES: No node in the Kubernetes cluster has enough free capacity to run the pod.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.\n - CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED: No node in the Kubernetes cluster satisfies the pod's placement\nconstraints, for example its node selector, affinity rules or the\ntolerations it would need for the available nodes' taints.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.\n - CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE: A volume the node needs cannot be provisioned, attached or mounted.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR, when\nthe claim never binds and the pod therefore cannot be placed, and under\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED, when the claim\nbinds but the volume cannot be mounted. Which of the two occurs is decided\nby the storage class's binding mode, not by the underlying problem.\n - CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE: The container image cannot be pulled, or its reference cannot be parsed.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.\n - CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING: Configuration the container needs in order to start is missing, for example\na secret holding an api-key or a TLS certificate.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.\n - CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY: The container reached its memory limit and was terminated.\nReported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING,\nwhich is what keeps this historical fact from being reported after the\nrestart loop it describes has ended.\n - CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED: The container's process exited unexpectedly, with a non-zero exit code that\nis not a memory limit kill.\nReported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING."
     },
     "v1ClusterNodeResources": {
       "type": "object",
@@ -1335,7 +1359,7 @@
         "CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED"
       ],
       "default": "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
-      "description": "ClusterNodeTerminationEvent describes what terminated a node's container the\nlast time it went down. Unlike a condition, this is a historical fact and is\nonly reported as supporting evidence for a node that is currently not ready.\n\n - CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: The event is unspecified.\n - CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: The container was terminated because it reached its memory limit.\n - CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: The container's process exited unexpectedly with a non-zero exit code."
+      "description": "ClusterNodeTerminationEvent describes what terminated a node's container the\nlast time it went down. Unlike a condition, this is a historical fact and is\nonly reported as supporting evidence for a node that is currently not ready.\n\nDeprecated: superseded by ClusterNodeNotReadyReason, which carries these two\nvalues alongside the causes that block a container from starting or a pod from\nbeing scheduled. Still populated for the two values it defines.\n\n - CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: The event is unspecified.\n - CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: The container was terminated because it reached its memory limit.\n - CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: The container's process exited unexpectedly with a non-zero exit code."
     },
     "v1ClusterPhase": {
       "type": "string",

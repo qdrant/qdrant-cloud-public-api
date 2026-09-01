@@ -113,6 +113,17 @@ class ClusterNodeNotReadyCondition(int, metaclass=_enum_type_wrapper.EnumTypeWra
     CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: _ClassVar[ClusterNodeNotReadyCondition]
     CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: _ClassVar[ClusterNodeNotReadyCondition]
 
+class ClusterNodeNotReadyReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY: _ClassVar[ClusterNodeNotReadyReason]
+    CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED: _ClassVar[ClusterNodeNotReadyReason]
+
 class ClusterNodeTerminationEvent(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: _ClassVar[ClusterNodeTerminationEvent]
@@ -124,6 +135,7 @@ class ClusterNodeActionKind(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: _ClassVar[ClusterNodeActionKind]
     CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: _ClassVar[ClusterNodeActionKind]
     CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: _ClassVar[ClusterNodeActionKind]
+    CLUSTER_NODE_ACTION_KIND_VIEW_LOGS: _ClassVar[ClusterNodeActionKind]
 
 class ClusterScalabilityStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -219,12 +231,21 @@ CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED: ClusterNodeNotReadyCon
 CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: ClusterNodeNotReadyCondition
 CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: ClusterNodeNotReadyCondition
 CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: ClusterNodeNotReadyCondition
+CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY: ClusterNodeNotReadyReason
+CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED: ClusterNodeNotReadyReason
 CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: ClusterNodeTerminationEvent
 CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: ClusterNodeTerminationEvent
 CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: ClusterNodeTerminationEvent
 CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: ClusterNodeActionKind
 CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: ClusterNodeActionKind
 CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: ClusterNodeActionKind
+CLUSTER_NODE_ACTION_KIND_VIEW_LOGS: ClusterNodeActionKind
 CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: ClusterScalabilityStatus
 CLUSTER_SCALABILITY_STATUS_SCALABLE: ClusterScalabilityStatus
@@ -686,18 +707,22 @@ class ClusterNodeAction(_message.Message):
     def __init__(self, kind: _Optional[_Union[ClusterNodeActionKind, str]] = ..., description: _Optional[str] = ..., url: _Optional[str] = ...) -> None: ...
 
 class ClusterNodeNotReadyInfo(_message.Message):
-    __slots__ = ("condition", "condition_message", "event", "event_message", "actions")
+    __slots__ = ("condition", "condition_message", "reason", "reason_message", "event", "event_message", "actions")
     CONDITION_FIELD_NUMBER: _ClassVar[int]
     CONDITION_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    REASON_FIELD_NUMBER: _ClassVar[int]
+    REASON_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     EVENT_FIELD_NUMBER: _ClassVar[int]
     EVENT_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     ACTIONS_FIELD_NUMBER: _ClassVar[int]
     condition: ClusterNodeNotReadyCondition
     condition_message: str
+    reason: ClusterNodeNotReadyReason
+    reason_message: str
     event: ClusterNodeTerminationEvent
     event_message: str
     actions: _containers.RepeatedCompositeFieldContainer[ClusterNodeAction]
-    def __init__(self, condition: _Optional[_Union[ClusterNodeNotReadyCondition, str]] = ..., condition_message: _Optional[str] = ..., event: _Optional[_Union[ClusterNodeTerminationEvent, str]] = ..., event_message: _Optional[str] = ..., actions: _Optional[_Iterable[_Union[ClusterNodeAction, _Mapping]]] = ...) -> None: ...
+    def __init__(self, condition: _Optional[_Union[ClusterNodeNotReadyCondition, str]] = ..., condition_message: _Optional[str] = ..., reason: _Optional[_Union[ClusterNodeNotReadyReason, str]] = ..., reason_message: _Optional[str] = ..., event: _Optional[_Union[ClusterNodeTerminationEvent, str]] = ..., event_message: _Optional[str] = ..., actions: _Optional[_Iterable[_Union[ClusterNodeAction, _Mapping]]] = ...) -> None: ...
 
 class ClusterEndpoint(_message.Message):
     __slots__ = ("url", "rest_port", "grpc_port")

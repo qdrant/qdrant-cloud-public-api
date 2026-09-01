@@ -1242,23 +1242,74 @@ enum ClusterNodeNotReadyCondition {
   // Something is preventing the node's container from starting, for example an
   // image that cannot be pulled or configuration that cannot be resolved.
   // Distinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the
-  // process has never run, so no ClusterNodeNotReadyInfo.event accompanies
-  // this condition.
+  // process has never run.
+  // ClusterNodeNotReadyInfo.reason may explain what is blocking it.
   CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED = 2;
   // The node's container has run before but cannot stay up, and is being
-  // restarted. ClusterNodeNotReadyInfo.event may explain what terminated it.
+  // restarted. ClusterNodeNotReadyInfo.reason may explain what terminated it.
   CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING = 3;
   // The node's container is running, but its readiness check is failing.
   CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING = 4;
   // The node is not ready for a reason that cannot be determined from the
   // reported node status.
+  // Not currently emitted: where the node status does not say what is wrong,
+  // ClusterNodeInfo.not_ready_info is left unset instead, because the node's own
+  // state already reports that it is not ready.
   CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN = 5;
+}
+
+// ClusterNodeNotReadyReason describes why a node is in its current not-ready
+// condition. It is the growable second tier of the explanation: the same reason
+// can appear under more than one ClusterNodeNotReadyCondition, because some
+// causes are noticed at different points in a pod's lifecycle.
+// Consumers that meet a value they do not know should fall back to rendering the
+// condition on its own.
+enum ClusterNodeNotReadyReason {
+  // The reason is unspecified.
+  CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED = 0;
+  // No node in the Kubernetes cluster has enough free capacity to run the pod.
+  // Reported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.
+  CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES = 1;
+  // No node in the Kubernetes cluster satisfies the pod's placement
+  // constraints, for example its node selector, affinity rules or the
+  // tolerations it would need for the available nodes' taints.
+  // Reported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.
+  CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED = 2;
+  // A volume the node needs cannot be provisioned, attached or mounted.
+  // Reported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR, when
+  // the claim never binds and the pod therefore cannot be placed, and under
+  // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED, when the claim
+  // binds but the volume cannot be mounted. Which of the two occurs is decided
+  // by the storage class's binding mode, not by the underlying problem.
+  CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE = 3;
+  // The container image cannot be pulled, or its reference cannot be parsed.
+  // Reported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.
+  CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE = 4;
+  // Configuration the container needs in order to start is missing, for example
+  // a secret holding an api-key or a TLS certificate.
+  // Reported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.
+  CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING = 5;
+  // The container reached its memory limit and was terminated.
+  // Reported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING,
+  // which is what keeps this historical fact from being reported after the
+  // restart loop it describes has ended.
+  CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY = 6;
+  // The container's process exited unexpectedly, with a non-zero exit code that
+  // is not a memory limit kill.
+  // Reported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
+  CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED = 7;
 }
 
 // ClusterNodeTerminationEvent describes what terminated a node's container the
 // last time it went down. Unlike a condition, this is a historical fact and is
 // only reported as supporting evidence for a node that is currently not ready.
+//
+// Deprecated: superseded by ClusterNodeNotReadyReason, which carries these two
+// values alongside the causes that block a container from starting or a pod from
+// being scheduled. Still populated for the two values it defines.
 enum ClusterNodeTerminationEvent {
+  option deprecated = true;
+
   // The event is unspecified.
   CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED = 0;
   // The container was terminated because it reached its memory limit.
@@ -1275,6 +1326,9 @@ enum ClusterNodeActionKind {
   CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY = 1;
   // Read the documentation explaining the condition and how to resolve it.
   CLUSTER_NODE_ACTION_KIND_DOCUMENTATION = 2;
+  // Look at the cluster's logs, where the cause is visible in the database's
+  // own output rather than in anything the platform can report.
+  CLUSTER_NODE_ACTION_KIND_VIEW_LOGS = 3;
 }
 
 // ClusterNodeAction describes something the user can do to resolve a node's
@@ -1290,18 +1344,22 @@ message ClusterNodeAction {
   string description = 2 [(buf.validate.field).string.min_len = 1];
   // The URL to open, for actions that are a navigation.
   // Not set for actions the consumer carries out itself, such as
-  // CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY, for which the consumer already
-  // has the account and cluster identifiers it needs.
+  // CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and
+  // CLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the
+  // account and cluster identifiers it needs.
   optional string url = 3 [(buf.validate.field).string.uri = true];
 }
 
 // ClusterNodeNotReadyInfo explains why a cluster node is not ready.
+// The explanation has two tiers: condition answers what is wrong with the node
+// right now and is small and stable, while reason answers why and grows as more
+// causes become recognizable.
 // The messages are short technical sentences intended for consumers without a
 // user interface of their own. Consumers are free to ignore them and render
-// their own copy based on the condition and event values.
+// their own copy based on the condition and reason values.
 // All fields in this message are read-only.
 message ClusterNodeNotReadyInfo {
-  // The reason the node is not ready right now.
+  // What is wrong with the node right now.
   ClusterNodeNotReadyCondition condition = 1 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
@@ -1309,18 +1367,47 @@ message ClusterNodeNotReadyInfo {
   // Human-readable explanation of the condition,
   // for example "Your container is restarting".
   string condition_message = 2 [(buf.validate.field).string.min_len = 1];
-  // What terminated the node's container the last time it went down.
-  // Only set together with
-  // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
-  optional ClusterNodeTerminationEvent event = 3 [(buf.validate.field).enum = {
+  // Why the node is in this condition.
+  // Not always set: the node status does not always say why, in which case the
+  // condition is reported on its own. Each reason is only ever reported under
+  // the conditions documented on ClusterNodeNotReadyReason.
+  optional ClusterNodeNotReadyReason reason = 6 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
+  // Human-readable explanation of the reason,
+  // for example "Your node has reached its memory limit".
+  // Only set when reason is set.
+  optional string reason_message = 7 [(buf.validate.field).string.min_len = 1];
+  // What terminated the node's container the last time it went down.
+  // Only set together with
+  // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
+  //
+  // Deprecated: use reason instead, which reports these two values plus the
+  // causes this field cannot express. Still populated whenever reason is
+  // CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or
+  // CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no
+  // change in behavior, and scheduled for removal once the reason tier is the
+  // announced surface.
+  optional ClusterNodeTerminationEvent event = 3 [
+    deprecated = true,
+    (buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }
+  ];
   // Human-readable explanation of the event,
   // for example "Your node has reached its memory limit".
   // Only set when event is set.
-  optional string event_message = 4 [(buf.validate.field).string.min_len = 1];
+  //
+  // Deprecated: use reason_message instead.
+  optional string event_message = 4 [
+    deprecated = true,
+    (buf.validate.field).string.min_len = 1
+  ];
   // Actions the user can take to resolve the condition.
+  // A CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is
+  // only attached where a page exists that helps with the specific cause.
   repeated ClusterNodeAction actions = 5 [(buf.validate.field).repeated = {max_items: 10}];
 }
 
