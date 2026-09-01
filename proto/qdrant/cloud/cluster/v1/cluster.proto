@@ -1300,24 +1300,6 @@ enum ClusterNodeNotReadyReason {
   CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED = 7;
 }
 
-// ClusterNodeTerminationEvent describes what terminated a node's container the
-// last time it went down. Unlike a condition, this is a historical fact and is
-// only reported as supporting evidence for a node that is currently not ready.
-//
-// Deprecated: superseded by ClusterNodeNotReadyReason, which carries these two
-// values alongside the causes that block a container from starting or a pod from
-// being scheduled. Still populated for the two values it defines.
-enum ClusterNodeTerminationEvent {
-  option deprecated = true;
-
-  // The event is unspecified.
-  CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED = 0;
-  // The container was terminated because it reached its memory limit.
-  CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY = 1;
-  // The container's process exited unexpectedly with a non-zero exit code.
-  CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED = 2;
-}
-
 // ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
 enum ClusterNodeActionKind {
   // The action kind is unspecified.
@@ -1379,32 +1361,13 @@ message ClusterNodeNotReadyInfo {
   // for example "Your node has reached its memory limit".
   // Only set when reason is set.
   optional string reason_message = 7 [(buf.validate.field).string.min_len = 1];
-  // What terminated the node's container the last time it went down.
-  // Only set together with
-  // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
-  //
-  // Deprecated: use reason instead, which reports these two values plus the
-  // causes this field cannot express. Still populated whenever reason is
-  // CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or
-  // CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no
-  // change in behavior, and scheduled for removal once the reason tier is the
-  // announced surface.
-  optional ClusterNodeTerminationEvent event = 3 [
-    deprecated = true,
-    (buf.validate.field).enum = {
-      defined_only: true
-      not_in: [0]
-    }
-  ];
-  // Human-readable explanation of the event,
-  // for example "Your node has reached its memory limit".
-  // Only set when event is set.
-  //
-  // Deprecated: use reason_message instead.
-  optional string event_message = 4 [
-    deprecated = true,
-    (buf.validate.field).string.min_len = 1
-  ];
+  // Previously: optional ClusterNodeTerminationEvent event and
+  // optional string event_message, both folded into reason and reason_message.
+  // The numbers stay retired: a client built against a release that still had
+  // them holds a differently typed enum at 3, so reason takes a new number
+  // rather than reusing it.
+  reserved 3, 4;
+  reserved "event", "event_message";
   // Actions the user can take to resolve the condition.
   // A CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is
   // only attached where a page exists that helps with the specific cause.

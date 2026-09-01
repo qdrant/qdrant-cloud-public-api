@@ -1247,14 +1247,6 @@
           "type": "string",
           "description": "Human-readable explanation of the reason,\nfor example \"Your node has reached its memory limit\".\nOnly set when reason is set."
         },
-        "event": {
-          "$ref": "#/definitions/v1ClusterNodeTerminationEvent",
-          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.\n\nDeprecated: use reason instead, which reports these two values plus the\ncauses this field cannot express. Still populated whenever reason is\nCLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or\nCLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no\nchange in behavior, and scheduled for removal once the reason tier is the\nannounced surface."
-        },
-        "eventMessage": {
-          "type": "string",
-          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set.\n\nDeprecated: use reason_message instead."
-        },
         "actions": {
           "type": "array",
           "items": {
@@ -1350,16 +1342,6 @@
       ],
       "default": "CLUSTER_NODE_STATE_UNSPECIFIED",
       "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended.\n - CLUSTER_NODE_STATE_RECOVERING: The node is started but still needs to do some operations to recover."
-    },
-    "v1ClusterNodeTerminationEvent": {
-      "type": "string",
-      "enum": [
-        "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
-        "CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY",
-        "CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED"
-      ],
-      "default": "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
-      "description": "ClusterNodeTerminationEvent describes what terminated a node's container the\nlast time it went down. Unlike a condition, this is a historical fact and is\nonly reported as supporting evidence for a node that is currently not ready.\n\nDeprecated: superseded by ClusterNodeNotReadyReason, which carries these two\nvalues alongside the causes that block a container from starting or a pod from\nbeing scheduled. Still populated for the two values it defines.\n\n - CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: The event is unspecified.\n - CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: The container was terminated because it reached its memory limit.\n - CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: The container's process exited unexpectedly with a non-zero exit code."
     },
     "v1ClusterPhase": {
       "type": "string",

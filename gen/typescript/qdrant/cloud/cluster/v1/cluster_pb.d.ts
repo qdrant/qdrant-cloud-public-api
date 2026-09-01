@@ -2431,35 +2431,6 @@ export declare type ClusterNodeNotReadyInfo = Message<"qdrant.cloud.cluster.v1.C
   reasonMessage?: string | undefined;
 
   /**
-   * What terminated the node's container the last time it went down.
-   * Only set together with
-   * CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
-   *
-   * Deprecated: use reason instead, which reports these two values plus the
-   * causes this field cannot express. Still populated whenever reason is
-   * CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or
-   * CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no
-   * change in behavior, and scheduled for removal once the reason tier is the
-   * announced surface.
-   *
-   * @generated from field: optional qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent event = 3 [deprecated = true];
-   * @deprecated
-   */
-  event?: ClusterNodeTerminationEvent | undefined;
-
-  /**
-   * Human-readable explanation of the event,
-   * for example "Your node has reached its memory limit".
-   * Only set when event is set.
-   *
-   * Deprecated: use reason_message instead.
-   *
-   * @generated from field: optional string event_message = 4 [deprecated = true];
-   * @deprecated
-   */
-  eventMessage?: string | undefined;
-
-  /**
    * Actions the user can take to resolve the condition.
    * A CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is
    * only attached where a page exists that helps with the specific cause.
@@ -3680,47 +3651,6 @@ export enum ClusterNodeNotReadyReason {
  * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeNotReadyReason.
  */
 export declare const ClusterNodeNotReadyReasonSchema: GenEnum<ClusterNodeNotReadyReason>;
-
-/**
- * ClusterNodeTerminationEvent describes what terminated a node's container the
- * last time it went down. Unlike a condition, this is a historical fact and is
- * only reported as supporting evidence for a node that is currently not ready.
- *
- * Deprecated: superseded by ClusterNodeNotReadyReason, which carries these two
- * values alongside the causes that block a container from starting or a pod from
- * being scheduled. Still populated for the two values it defines.
- *
- * @generated from enum qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
- * @deprecated
- */
-export enum ClusterNodeTerminationEvent {
-  /**
-   * The event is unspecified.
-   *
-   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * The container was terminated because it reached its memory limit.
-   *
-   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY = 1;
-   */
-  OUT_OF_MEMORY = 1,
-
-  /**
-   * The container's process exited unexpectedly with a non-zero exit code.
-   *
-   * @generated from enum value: CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED = 2;
-   */
-  PROCESS_EXITED = 2,
-}
-
-/**
- * Describes the enum qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent.
- * @deprecated
- */
-export declare const ClusterNodeTerminationEventSchema: GenEnum<ClusterNodeTerminationEvent>;
 
 /**
  * ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
