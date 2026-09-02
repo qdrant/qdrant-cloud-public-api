@@ -65,6 +65,12 @@ class SparseVectorConfig(_message.Message):
     def __init__(self, use_idf: _Optional[bool] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
 
 class KeywordIndex(_message.Message):
+    __slots__ = ("prefix",)
+    PREFIX_FIELD_NUMBER: _ClassVar[int]
+    prefix: KeywordPrefixParams
+    def __init__(self, prefix: _Optional[_Union[KeywordPrefixParams, _Mapping]] = ...) -> None: ...
+
+class KeywordPrefixParams(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
@@ -88,19 +94,51 @@ class DatetimeIndex(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class StopwordsSet(_message.Message):
+    __slots__ = ("languages", "custom")
+    LANGUAGES_FIELD_NUMBER: _ClassVar[int]
+    CUSTOM_FIELD_NUMBER: _ClassVar[int]
+    languages: _containers.RepeatedScalarFieldContainer[str]
+    custom: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, languages: _Optional[_Iterable[str]] = ..., custom: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class SnowballParams(_message.Message):
+    __slots__ = ("language",)
+    LANGUAGE_FIELD_NUMBER: _ClassVar[int]
+    language: str
+    def __init__(self, language: _Optional[str] = ...) -> None: ...
+
+class DisabledStemmer(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class StemmingAlgorithm(_message.Message):
+    __slots__ = ("snowball", "disabled")
+    SNOWBALL_FIELD_NUMBER: _ClassVar[int]
+    DISABLED_FIELD_NUMBER: _ClassVar[int]
+    snowball: SnowballParams
+    disabled: DisabledStemmer
+    def __init__(self, snowball: _Optional[_Union[SnowballParams, _Mapping]] = ..., disabled: _Optional[_Union[DisabledStemmer, _Mapping]] = ...) -> None: ...
+
 class TextIndex(_message.Message):
-    __slots__ = ("tokenizer", "lowercase", "phrase_matching", "min_token_len", "max_token_len")
+    __slots__ = ("tokenizer", "lowercase", "phrase_matching", "min_token_len", "max_token_len", "ascii_folding", "stopwords", "stemmer")
     TOKENIZER_FIELD_NUMBER: _ClassVar[int]
     LOWERCASE_FIELD_NUMBER: _ClassVar[int]
     PHRASE_MATCHING_FIELD_NUMBER: _ClassVar[int]
     MIN_TOKEN_LEN_FIELD_NUMBER: _ClassVar[int]
     MAX_TOKEN_LEN_FIELD_NUMBER: _ClassVar[int]
+    ASCII_FOLDING_FIELD_NUMBER: _ClassVar[int]
+    STOPWORDS_FIELD_NUMBER: _ClassVar[int]
+    STEMMER_FIELD_NUMBER: _ClassVar[int]
     tokenizer: Tokenizer
     lowercase: bool
     phrase_matching: bool
     min_token_len: int
     max_token_len: int
-    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., lowercase: _Optional[bool] = ..., phrase_matching: _Optional[bool] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ...) -> None: ...
+    ascii_folding: bool
+    stopwords: StopwordsSet
+    stemmer: StemmingAlgorithm
+    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., lowercase: _Optional[bool] = ..., phrase_matching: _Optional[bool] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., ascii_folding: _Optional[bool] = ..., stopwords: _Optional[_Union[StopwordsSet, _Mapping]] = ..., stemmer: _Optional[_Union[StemmingAlgorithm, _Mapping]] = ...) -> None: ...
 
 class GeoIndex(_message.Message):
     __slots__ = ()

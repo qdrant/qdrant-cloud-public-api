@@ -4,6 +4,8 @@ hotspot
 lon
 OOD
 OOM
+stopword
+stopwords
 totp
 Vulkan
 webauthn
