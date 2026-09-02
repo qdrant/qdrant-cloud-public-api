@@ -91,12 +91,12 @@ export declare const SparseVectorConfigSchema: GenMessage<SparseVectorConfig, {v
  */
 export declare type KeywordIndex = Message<"qdrant.serverless.KeywordIndex"> & {
   /**
-   * Enable prefix matching (`match: { "prefix": ... }`) on this field.
-   * Default false.
+   * If set, enable prefix matching (`match: { "prefix": ... }`) on this field.
+   * Presence of this message enables prefix matching; it has no options yet.
    *
-   * @generated from field: optional bool prefix = 1;
+   * @generated from field: optional qdrant.serverless.KeywordPrefixParams prefix = 1;
    */
-  prefix?: boolean | undefined;
+  prefix?: KeywordPrefixParams | undefined;
 };
 
 export declare type KeywordIndexValid = KeywordIndex;
@@ -106,6 +106,23 @@ export declare type KeywordIndexValid = KeywordIndex;
  * Use `create(KeywordIndexSchema)` to create a new message.
  */
 export declare const KeywordIndexSchema: GenMessage<KeywordIndex, {validType: KeywordIndexValid}>;
+
+/**
+ * Prefix matching options for the keyword index. Has no options yet:
+ * presence of this message enables prefix matching.
+ *
+ * @generated from message qdrant.serverless.KeywordPrefixParams
+ */
+export declare type KeywordPrefixParams = Message<"qdrant.serverless.KeywordPrefixParams"> & {
+};
+
+export declare type KeywordPrefixParamsValid = KeywordPrefixParams;
+
+/**
+ * Describes the message qdrant.serverless.KeywordPrefixParams.
+ * Use `create(KeywordPrefixParamsSchema)` to create a new message.
+ */
+export declare const KeywordPrefixParamsSchema: GenMessage<KeywordPrefixParams, {validType: KeywordPrefixParamsValid}>;
 
 /**
  * Exact match and/or range filters on integers, e.g. `age: 25`. Both are on
@@ -189,9 +206,9 @@ export declare const DatetimeIndexSchema: GenMessage<DatetimeIndex, {validType: 
  * Tokens ignored by a full-text index. Language names match qdrant (e.g.
  * "english"); predefined lists and custom tokens are merged.
  *
- * @generated from message qdrant.serverless.Stopwords
+ * @generated from message qdrant.serverless.StopwordsSet
  */
-export declare type Stopwords = Message<"qdrant.serverless.Stopwords"> & {
+export declare type StopwordsSet = Message<"qdrant.serverless.StopwordsSet"> & {
   /**
    * Languages whose predefined stopword lists to apply.
    *
@@ -207,20 +224,20 @@ export declare type Stopwords = Message<"qdrant.serverless.Stopwords"> & {
   custom: string[];
 };
 
-export declare type StopwordsValid = Stopwords;
+export declare type StopwordsSetValid = StopwordsSet;
 
 /**
- * Describes the message qdrant.serverless.Stopwords.
- * Use `create(StopwordsSchema)` to create a new message.
+ * Describes the message qdrant.serverless.StopwordsSet.
+ * Use `create(StopwordsSetSchema)` to create a new message.
  */
-export declare const StopwordsSchema: GenMessage<Stopwords, {validType: StopwordsValid}>;
+export declare const StopwordsSetSchema: GenMessage<StopwordsSet, {validType: StopwordsSetValid}>;
 
 /**
  * Snowball stemming for a full-text index.
  *
- * @generated from message qdrant.serverless.SnowballStemmer
+ * @generated from message qdrant.serverless.SnowballParams
  */
-export declare type SnowballStemmer = Message<"qdrant.serverless.SnowballStemmer"> & {
+export declare type SnowballParams = Message<"qdrant.serverless.SnowballParams"> & {
   /**
    * Language for the snowball algorithm, e.g. "english".
    *
@@ -229,13 +246,13 @@ export declare type SnowballStemmer = Message<"qdrant.serverless.SnowballStemmer
   language: string;
 };
 
-export declare type SnowballStemmerValid = SnowballStemmer;
+export declare type SnowballParamsValid = SnowballParams;
 
 /**
- * Describes the message qdrant.serverless.SnowballStemmer.
- * Use `create(SnowballStemmerSchema)` to create a new message.
+ * Describes the message qdrant.serverless.SnowballParams.
+ * Use `create(SnowballParamsSchema)` to create a new message.
  */
-export declare const SnowballStemmerSchema: GenMessage<SnowballStemmer, {validType: SnowballStemmerValid}>;
+export declare const SnowballParamsSchema: GenMessage<SnowballParams, {validType: SnowballParamsValid}>;
 
 /**
  * Explicitly disable stemming (overrides any language default).
@@ -256,21 +273,21 @@ export declare const DisabledStemmerSchema: GenMessage<DisabledStemmer, {validTy
 /**
  * Stemming algorithm for a full-text index. Unset: no stemming.
  *
- * @generated from message qdrant.serverless.Stemmer
+ * @generated from message qdrant.serverless.StemmingAlgorithm
  */
-export declare type Stemmer = Message<"qdrant.serverless.Stemmer"> & {
+export declare type StemmingAlgorithm = Message<"qdrant.serverless.StemmingAlgorithm"> & {
   /**
    * Which stemming algorithm to use.
    *
-   * @generated from oneof qdrant.serverless.Stemmer.algorithm
+   * @generated from oneof qdrant.serverless.StemmingAlgorithm.stemming_params
    */
-  algorithm: {
+  stemmingParams: {
     /**
      * Snowball stemmer for the given language.
      *
-     * @generated from field: qdrant.serverless.SnowballStemmer snowball = 1;
+     * @generated from field: qdrant.serverless.SnowballParams snowball = 1;
      */
-    value: SnowballStemmer;
+    value: SnowballParams;
     case: "snowball";
   } | {
     /**
@@ -283,13 +300,13 @@ export declare type Stemmer = Message<"qdrant.serverless.Stemmer"> & {
   } | { case: undefined; value?: undefined };
 };
 
-export declare type StemmerValid = Stemmer;
+export declare type StemmingAlgorithmValid = StemmingAlgorithm;
 
 /**
- * Describes the message qdrant.serverless.Stemmer.
- * Use `create(StemmerSchema)` to create a new message.
+ * Describes the message qdrant.serverless.StemmingAlgorithm.
+ * Use `create(StemmingAlgorithmSchema)` to create a new message.
  */
-export declare const StemmerSchema: GenMessage<Stemmer, {validType: StemmerValid}>;
+export declare const StemmingAlgorithmSchema: GenMessage<StemmingAlgorithm, {validType: StemmingAlgorithmValid}>;
 
 /**
  * Full-text filtering on string values.
@@ -342,16 +359,16 @@ export declare type TextIndex = Message<"qdrant.serverless.TextIndex"> & {
   /**
    * Tokens to ignore at index and query time.
    *
-   * @generated from field: optional qdrant.serverless.Stopwords stopwords = 7;
+   * @generated from field: optional qdrant.serverless.StopwordsSet stopwords = 7;
    */
-  stopwords?: Stopwords | undefined;
+  stopwords?: StopwordsSet | undefined;
 
   /**
    * Stemming algorithm. Unset: engine default (no stemming).
    *
-   * @generated from field: optional qdrant.serverless.Stemmer stemmer = 8;
+   * @generated from field: optional qdrant.serverless.StemmingAlgorithm stemmer = 8;
    */
-  stemmer?: Stemmer | undefined;
+  stemmer?: StemmingAlgorithm | undefined;
 };
 
 export declare type TextIndexValid = TextIndex;
