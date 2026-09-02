@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { MethodOptions, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Duration, MethodOptions, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Caller, CallerValid } from "../../common/v1/common_pb.js";
 
 /**
@@ -92,6 +92,43 @@ export declare type EventOptionsValid = EventOptions;
 export declare const EventOptionsSchema: GenMessage<EventOptions, {validType: EventOptionsValid}>;
 
 /**
+ * Result describes the outcome of the RPC that produced this event.
+ *
+ * @generated from message qdrant.cloud.event.v1.Result
+ */
+export declare type Result = Message<"qdrant.cloud.event.v1.Result"> & {
+  /**
+   * Outcome of the action.
+   *
+   * @generated from field: qdrant.cloud.event.v1.ResultStatus status = 1;
+   */
+  status: ResultStatus;
+
+  /**
+   * Source status code when available (e.g. gRPC status code).
+   *
+   * @generated from field: optional int32 status_code = 2;
+   */
+  statusCode?: number | undefined;
+
+  /**
+   * Sanitized reason when the action failed, was rejected, or was denied.
+   * Must not contain PII (emails, tokens, or user-supplied free text that could identify a person).
+   *
+   * @generated from field: optional string error_reason = 3;
+   */
+  errorReason?: string | undefined;
+};
+
+export declare type ResultValid = Result;
+
+/**
+ * Describes the message qdrant.cloud.event.v1.Result.
+ * Use `create(ResultSchema)` to create a new message.
+ */
+export declare const ResultSchema: GenMessage<Result, {validType: ResultValid}>;
+
+/**
  * Event represents a significant occurrence in the system, like a resource
  * being created, updated, or deleted.
  *
@@ -106,11 +143,37 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   id: string;
 
   /**
-   * The time at which the event occurred.
+   * The time at which the event was recorded — i.e. when the RPC completed
+   * (handler returned). When duration is set, approximate request start time
+   * is created_at - duration.
    *
    * @generated from field: google.protobuf.Timestamp created_at = 2;
    */
   createdAt?: Timestamp | undefined;
+
+  /**
+   * Wall-clock duration of the RPC (from request received / stream open until
+   * the event was recorded). Request start ≈ created_at - duration.
+   *
+   * @generated from field: optional google.protobuf.Duration duration = 7;
+   */
+  duration?: Duration | undefined;
+
+  /**
+   * Client IPv4 address when available (from gateway peer / X-Forwarded-For).
+   * Personal data under GDPR — subject to retention and erasure policy.
+   *
+   * @generated from field: optional string ip_address = 8;
+   */
+  ipAddress?: string | undefined;
+
+  /**
+   * Outcome of the RPC. Omitted on legacy events published before this field existed;
+   * new publishers should set it (SUCCESS for the historical success-only path).
+   *
+   * @generated from field: optional qdrant.cloud.event.v1.Result result = 9;
+   */
+  result?: Result | undefined;
 
   /**
    * The authenticated actor that performed the action which triggered this event.
@@ -207,11 +270,37 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
   id: string;
 
   /**
-   * The time at which the event occurred.
+   * The time at which the event was recorded — i.e. when the RPC completed
+   * (handler returned). When duration is set, approximate request start time
+   * is created_at - duration.
    *
    * @generated from field: google.protobuf.Timestamp created_at = 2;
    */
   createdAt?: Timestamp | undefined;
+
+  /**
+   * Wall-clock duration of the RPC (from request received / stream open until
+   * the event was recorded). Request start ≈ created_at - duration.
+   *
+   * @generated from field: optional google.protobuf.Duration duration = 7;
+   */
+  duration?: Duration | undefined;
+
+  /**
+   * Client IPv4 address when available (from gateway peer / X-Forwarded-For).
+   * Personal data under GDPR — subject to retention and erasure policy.
+   *
+   * @generated from field: optional string ip_address = 8;
+   */
+  ipAddress?: string | undefined;
+
+  /**
+   * Outcome of the RPC. Omitted on legacy events published before this field existed;
+   * new publishers should set it (SUCCESS for the historical success-only path).
+   *
+   * @generated from field: optional qdrant.cloud.event.v1.Result result = 9;
+   */
+  result?: ResultValid | undefined;
 
   /**
    * The authenticated actor that performed the action which triggered this event.
@@ -345,6 +434,53 @@ export enum EventType {
  * Describes the enum qdrant.cloud.event.v1.EventType.
  */
 export declare const EventTypeSchema: GenEnum<EventType>;
+
+/**
+ * ResultStatus identifies whether an audited RPC completed successfully.
+ *
+ * @generated from enum qdrant.cloud.event.v1.ResultStatus
+ */
+export enum ResultStatus {
+  /**
+   * Unspecified; not a valid result status.
+   *
+   * @generated from enum value: RESULT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The RPC completed successfully.
+   *
+   * @generated from enum value: RESULT_STATUS_SUCCESS = 1;
+   */
+  SUCCESS = 1,
+
+  /**
+   * The RPC failed (backend / internal error).
+   *
+   * @generated from enum value: RESULT_STATUS_FAILURE = 2;
+   */
+  FAILURE = 2,
+
+  /**
+   * The RPC was rejected by validation or policy.
+   *
+   * @generated from enum value: RESULT_STATUS_REJECTED = 3;
+   */
+  REJECTED = 3,
+
+  /**
+   * The actor was not authorized to perform the RPC.
+   *
+   * @generated from enum value: RESULT_STATUS_DENIED = 4;
+   */
+  DENIED = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.event.v1.ResultStatus.
+ */
+export declare const ResultStatusSchema: GenEnum<ResultStatus>;
 
 /**
  * The actual event options.

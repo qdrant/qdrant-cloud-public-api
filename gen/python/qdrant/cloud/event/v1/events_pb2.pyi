@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import duration_pb2 as _duration_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
@@ -20,11 +21,24 @@ class EventType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     EVENT_TYPE_UPDATED: _ClassVar[EventType]
     EVENT_TYPE_DELETED: _ClassVar[EventType]
     EVENT_TYPE_ACTION: _ClassVar[EventType]
+
+class ResultStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    RESULT_STATUS_UNSPECIFIED: _ClassVar[ResultStatus]
+    RESULT_STATUS_SUCCESS: _ClassVar[ResultStatus]
+    RESULT_STATUS_FAILURE: _ClassVar[ResultStatus]
+    RESULT_STATUS_REJECTED: _ClassVar[ResultStatus]
+    RESULT_STATUS_DENIED: _ClassVar[ResultStatus]
 EVENT_TYPE_UNSPECIFIED: EventType
 EVENT_TYPE_CREATED: EventType
 EVENT_TYPE_UPDATED: EventType
 EVENT_TYPE_DELETED: EventType
 EVENT_TYPE_ACTION: EventType
+RESULT_STATUS_UNSPECIFIED: ResultStatus
+RESULT_STATUS_SUCCESS: ResultStatus
+RESULT_STATUS_FAILURE: ResultStatus
+RESULT_STATUS_REJECTED: ResultStatus
+RESULT_STATUS_DENIED: ResultStatus
 EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
@@ -53,8 +67,18 @@ class EventOptions(_message.Message):
     additional_context_fields: _containers.ScalarMap[str, str]
     def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
+class Result(_message.Message):
+    __slots__ = ("status", "status_code", "error_reason")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
+    ERROR_REASON_FIELD_NUMBER: _ClassVar[int]
+    status: ResultStatus
+    status_code: int
+    error_reason: str
+    def __init__(self, status: _Optional[_Union[ResultStatus, str]] = ..., status_code: _Optional[int] = ..., error_reason: _Optional[str] = ...) -> None: ...
+
 class Event(_message.Message):
-    __slots__ = ("id", "created_at", "caller", "account_id", "source_rpc", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
+    __slots__ = ("id", "created_at", "duration", "ip_address", "result", "caller", "account_id", "source_rpc", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
     class AdditionalContextEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -64,6 +88,9 @@ class Event(_message.Message):
         def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    DURATION_FIELD_NUMBER: _ClassVar[int]
+    IP_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    RESULT_FIELD_NUMBER: _ClassVar[int]
     CALLER_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SOURCE_RPC_FIELD_NUMBER: _ClassVar[int]
@@ -76,6 +103,9 @@ class Event(_message.Message):
     ADDITIONAL_CONTEXT_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
+    duration: _duration_pb2.Duration
+    ip_address: str
+    result: Result
     caller: _common_pb2.Caller
     account_id: str
     source_rpc: str
@@ -86,4 +116,4 @@ class Event(_message.Message):
     resource_url: str
     action_type: str
     additional_context: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
