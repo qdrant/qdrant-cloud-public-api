@@ -147,7 +147,7 @@ message TextIndex {
   optional uint64 min_token_len = 4;
   // Maximum token length to index.
   optional uint64 max_token_len = 5;
-  // Fold accented characters to ASCII (e.g. "ação" → "acao"). Default false.
+  // Fold accented characters to ASCII. Default false.
   optional bool ascii_folding = 6;
   // Tokens to ignore at index and query time.
   optional Stopwords stopwords = 7;

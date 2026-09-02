@@ -333,7 +333,7 @@ export declare type TextIndex = Message<"qdrant.serverless.TextIndex"> & {
   maxTokenLen?: bigint | undefined;
 
   /**
-   * Fold accented characters to ASCII (e.g. "ação" → "acao"). Default false.
+   * Fold accented characters to ASCII. Default false.
    *
    * @generated from field: optional bool ascii_folding = 6;
    */

@@ -785,7 +785,7 @@ type TextIndex struct {
 	MinTokenLen *uint64 `protobuf:"varint,4,opt,name=min_token_len,json=minTokenLen,proto3,oneof" json:"min_token_len,omitempty"`
 	// Maximum token length to index.
 	MaxTokenLen *uint64 `protobuf:"varint,5,opt,name=max_token_len,json=maxTokenLen,proto3,oneof" json:"max_token_len,omitempty"`
-	// Fold accented characters to ASCII (e.g. "ação" → "acao"). Default false.
+	// Fold accented characters to ASCII. Default false.
 	AsciiFolding *bool `protobuf:"varint,6,opt,name=ascii_folding,json=asciiFolding,proto3,oneof" json:"ascii_folding,omitempty"`
 	// Tokens to ignore at index and query time.
 	Stopwords *Stopwords `protobuf:"bytes,7,opt,name=stopwords,proto3,oneof" json:"stopwords,omitempty"`
