@@ -82,7 +82,11 @@ enum Tokenizer {
 }
 
 // Exact match on string values, e.g. `color: "red"`.
-message KeywordIndex {}
+message KeywordIndex {
+  // Enable prefix matching (`match: { "prefix": ... }`) on this field.
+  // Default false.
+  optional bool prefix = 1;
+}
 
 // Exact match and/or range filters on integers, e.g. `age: 25`. Both are on
 // by default; turning one off shrinks the index.
@@ -102,6 +106,35 @@ message UuidIndex {}
 // Range filters on RFC 3339 datetimes, e.g. `created_at: "2023-02-08T10:49:00Z"`.
 message DatetimeIndex {}
 
+// Tokens ignored by a full-text index. Language names match qdrant (e.g.
+// "english"); predefined lists and custom tokens are merged.
+message Stopwords {
+  // Languages whose predefined stopword lists to apply.
+  repeated string languages = 1;
+  // Extra stopwords to ignore, merged with the language lists.
+  repeated string custom = 2;
+}
+
+// Snowball stemming for a full-text index.
+message SnowballStemmer {
+  // Language for the snowball algorithm, e.g. "english".
+  string language = 1;
+}
+
+// Explicitly disable stemming (overrides any language default).
+message DisabledStemmer {}
+
+// Stemming algorithm for a full-text index. Unset: no stemming.
+message Stemmer {
+  // Which stemming algorithm to use.
+  oneof algorithm {
+    // Snowball stemmer for the given language.
+    SnowballStemmer snowball = 1;
+    // Explicitly disable stemming.
+    DisabledStemmer disabled = 2;
+  }
+}
+
 // Full-text filtering on string values.
 message TextIndex {
   // Tokenizer to split text with. Unset: WHITESPACE.
@@ -114,6 +147,12 @@ message TextIndex {
   optional uint64 min_token_len = 4;
   // Maximum token length to index.
   optional uint64 max_token_len = 5;
+  // Fold accented characters to ASCII (e.g. "ação" → "acao"). Default false.
+  optional bool ascii_folding = 6;
+  // Tokens to ignore at index and query time.
+  optional Stopwords stopwords = 7;
+  // Stemming algorithm. Unset: engine default (no stemming).
+  optional Stemmer stemmer = 8;
 }
 
 // Geo radius / bounding box / polygon filters on `{lon, lat}` values.

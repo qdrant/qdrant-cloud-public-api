@@ -334,7 +334,10 @@ func (x *SparseVectorConfig) GetPrecisionTier() PrecisionTier {
 
 // Exact match on string values, e.g. `color: "red"`.
 type KeywordIndex struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable prefix matching (`match: { "prefix": ... }`) on this field.
+	// Default false.
+	Prefix        *bool `protobuf:"varint,1,opt,name=prefix,proto3,oneof" json:"prefix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -367,6 +370,13 @@ func (x *KeywordIndex) ProtoReflect() protoreflect.Message {
 // Deprecated: Use KeywordIndex.ProtoReflect.Descriptor instead.
 func (*KeywordIndex) Descriptor() ([]byte, []int) {
 	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *KeywordIndex) GetPrefix() bool {
+	if x != nil && x.Prefix != nil {
+		return *x.Prefix
+	}
+	return false
 }
 
 // Exact match and/or range filters on integers, e.g. `age: 25`. Both are on
@@ -536,6 +546,232 @@ func (*DatetimeIndex) Descriptor() ([]byte, []int) {
 	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{6}
 }
 
+// Tokens ignored by a full-text index. Language names match qdrant (e.g.
+// "english"); predefined lists and custom tokens are merged.
+type Stopwords struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Languages whose predefined stopword lists to apply.
+	Languages []string `protobuf:"bytes,1,rep,name=languages,proto3" json:"languages,omitempty"`
+	// Extra stopwords to ignore, merged with the language lists.
+	Custom        []string `protobuf:"bytes,2,rep,name=custom,proto3" json:"custom,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Stopwords) Reset() {
+	*x = Stopwords{}
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Stopwords) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Stopwords) ProtoMessage() {}
+
+func (x *Stopwords) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Stopwords.ProtoReflect.Descriptor instead.
+func (*Stopwords) Descriptor() ([]byte, []int) {
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Stopwords) GetLanguages() []string {
+	if x != nil {
+		return x.Languages
+	}
+	return nil
+}
+
+func (x *Stopwords) GetCustom() []string {
+	if x != nil {
+		return x.Custom
+	}
+	return nil
+}
+
+// Snowball stemming for a full-text index.
+type SnowballStemmer struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Language for the snowball algorithm, e.g. "english".
+	Language      string `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SnowballStemmer) Reset() {
+	*x = SnowballStemmer{}
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SnowballStemmer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SnowballStemmer) ProtoMessage() {}
+
+func (x *SnowballStemmer) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SnowballStemmer.ProtoReflect.Descriptor instead.
+func (*SnowballStemmer) Descriptor() ([]byte, []int) {
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SnowballStemmer) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+// Explicitly disable stemming (overrides any language default).
+type DisabledStemmer struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisabledStemmer) Reset() {
+	*x = DisabledStemmer{}
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisabledStemmer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisabledStemmer) ProtoMessage() {}
+
+func (x *DisabledStemmer) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisabledStemmer.ProtoReflect.Descriptor instead.
+func (*DisabledStemmer) Descriptor() ([]byte, []int) {
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{9}
+}
+
+// Stemming algorithm for a full-text index. Unset: no stemming.
+type Stemmer struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Which stemming algorithm to use.
+	//
+	// Types that are valid to be assigned to Algorithm:
+	//
+	//	*Stemmer_Snowball
+	//	*Stemmer_Disabled
+	Algorithm     isStemmer_Algorithm `protobuf_oneof:"algorithm"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Stemmer) Reset() {
+	*x = Stemmer{}
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Stemmer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Stemmer) ProtoMessage() {}
+
+func (x *Stemmer) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Stemmer.ProtoReflect.Descriptor instead.
+func (*Stemmer) Descriptor() ([]byte, []int) {
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Stemmer) GetAlgorithm() isStemmer_Algorithm {
+	if x != nil {
+		return x.Algorithm
+	}
+	return nil
+}
+
+func (x *Stemmer) GetSnowball() *SnowballStemmer {
+	if x != nil {
+		if x, ok := x.Algorithm.(*Stemmer_Snowball); ok {
+			return x.Snowball
+		}
+	}
+	return nil
+}
+
+func (x *Stemmer) GetDisabled() *DisabledStemmer {
+	if x != nil {
+		if x, ok := x.Algorithm.(*Stemmer_Disabled); ok {
+			return x.Disabled
+		}
+	}
+	return nil
+}
+
+type isStemmer_Algorithm interface {
+	isStemmer_Algorithm()
+}
+
+type Stemmer_Snowball struct {
+	// Snowball stemmer for the given language.
+	Snowball *SnowballStemmer `protobuf:"bytes,1,opt,name=snowball,proto3,oneof"`
+}
+
+type Stemmer_Disabled struct {
+	// Explicitly disable stemming.
+	Disabled *DisabledStemmer `protobuf:"bytes,2,opt,name=disabled,proto3,oneof"`
+}
+
+func (*Stemmer_Snowball) isStemmer_Algorithm() {}
+
+func (*Stemmer_Disabled) isStemmer_Algorithm() {}
+
 // Full-text filtering on string values.
 type TextIndex struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -548,14 +784,20 @@ type TextIndex struct {
 	// Minimum token length to index.
 	MinTokenLen *uint64 `protobuf:"varint,4,opt,name=min_token_len,json=minTokenLen,proto3,oneof" json:"min_token_len,omitempty"`
 	// Maximum token length to index.
-	MaxTokenLen   *uint64 `protobuf:"varint,5,opt,name=max_token_len,json=maxTokenLen,proto3,oneof" json:"max_token_len,omitempty"`
+	MaxTokenLen *uint64 `protobuf:"varint,5,opt,name=max_token_len,json=maxTokenLen,proto3,oneof" json:"max_token_len,omitempty"`
+	// Fold accented characters to ASCII (e.g. "ação" → "acao"). Default false.
+	AsciiFolding *bool `protobuf:"varint,6,opt,name=ascii_folding,json=asciiFolding,proto3,oneof" json:"ascii_folding,omitempty"`
+	// Tokens to ignore at index and query time.
+	Stopwords *Stopwords `protobuf:"bytes,7,opt,name=stopwords,proto3,oneof" json:"stopwords,omitempty"`
+	// Stemming algorithm. Unset: engine default (no stemming).
+	Stemmer       *Stemmer `protobuf:"bytes,8,opt,name=stemmer,proto3,oneof" json:"stemmer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TextIndex) Reset() {
 	*x = TextIndex{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -567,7 +809,7 @@ func (x *TextIndex) String() string {
 func (*TextIndex) ProtoMessage() {}
 
 func (x *TextIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[7]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -580,7 +822,7 @@ func (x *TextIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextIndex.ProtoReflect.Descriptor instead.
 func (*TextIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TextIndex) GetTokenizer() Tokenizer {
@@ -618,6 +860,27 @@ func (x *TextIndex) GetMaxTokenLen() uint64 {
 	return 0
 }
 
+func (x *TextIndex) GetAsciiFolding() bool {
+	if x != nil && x.AsciiFolding != nil {
+		return *x.AsciiFolding
+	}
+	return false
+}
+
+func (x *TextIndex) GetStopwords() *Stopwords {
+	if x != nil {
+		return x.Stopwords
+	}
+	return nil
+}
+
+func (x *TextIndex) GetStemmer() *Stemmer {
+	if x != nil {
+		return x.Stemmer
+	}
+	return nil
+}
+
 // Geo radius / bounding box / polygon filters on `{lon, lat}` values.
 type GeoIndex struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -627,7 +890,7 @@ type GeoIndex struct {
 
 func (x *GeoIndex) Reset() {
 	*x = GeoIndex{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -639,7 +902,7 @@ func (x *GeoIndex) String() string {
 func (*GeoIndex) ProtoMessage() {}
 
 func (x *GeoIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[8]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,7 +915,7 @@ func (x *GeoIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeoIndex.ProtoReflect.Descriptor instead.
 func (*GeoIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{12}
 }
 
 // Exact match on booleans, e.g. `is_active: true`.
@@ -664,7 +927,7 @@ type BoolIndex struct {
 
 func (x *BoolIndex) Reset() {
 	*x = BoolIndex{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -676,7 +939,7 @@ func (x *BoolIndex) String() string {
 func (*BoolIndex) ProtoMessage() {}
 
 func (x *BoolIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[9]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -689,7 +952,7 @@ func (x *BoolIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BoolIndex.ProtoReflect.Descriptor instead.
 func (*BoolIndex) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{13}
 }
 
 // One payload index. Only the *kind* of filter the field supports is chosen
@@ -715,7 +978,7 @@ type PayloadIndexConfig struct {
 
 func (x *PayloadIndexConfig) Reset() {
 	*x = PayloadIndexConfig{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +990,7 @@ func (x *PayloadIndexConfig) String() string {
 func (*PayloadIndexConfig) ProtoMessage() {}
 
 func (x *PayloadIndexConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[10]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +1003,7 @@ func (x *PayloadIndexConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayloadIndexConfig.ProtoReflect.Descriptor instead.
 func (*PayloadIndexConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PayloadIndexConfig) GetIndex() isPayloadIndexConfig_Index {
@@ -899,7 +1162,7 @@ type CollectionConfig struct {
 
 func (x *CollectionConfig) Reset() {
 	*x = CollectionConfig{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -911,7 +1174,7 @@ func (x *CollectionConfig) String() string {
 func (*CollectionConfig) ProtoMessage() {}
 
 func (x *CollectionConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[11]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -924,7 +1187,7 @@ func (x *CollectionConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectionConfig.ProtoReflect.Descriptor instead.
 func (*CollectionConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CollectionConfig) GetDenseVectors() map[string]*DenseVectorConfig {
@@ -964,7 +1227,7 @@ type CreateCollectionRequest struct {
 
 func (x *CreateCollectionRequest) Reset() {
 	*x = CreateCollectionRequest{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -976,7 +1239,7 @@ func (x *CreateCollectionRequest) String() string {
 func (*CreateCollectionRequest) ProtoMessage() {}
 
 func (x *CreateCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[12]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -989,7 +1252,7 @@ func (x *CreateCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCollectionRequest.ProtoReflect.Descriptor instead.
 func (*CreateCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateCollectionRequest) GetCollectionName() string {
@@ -1019,7 +1282,7 @@ type CreateCollectionResponse struct {
 
 func (x *CreateCollectionResponse) Reset() {
 	*x = CreateCollectionResponse{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1031,7 +1294,7 @@ func (x *CreateCollectionResponse) String() string {
 func (*CreateCollectionResponse) ProtoMessage() {}
 
 func (x *CreateCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[13]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1307,7 @@ func (x *CreateCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCollectionResponse.ProtoReflect.Descriptor instead.
 func (*CreateCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateCollectionResponse) GetCollectionName() string {
@@ -1072,7 +1335,7 @@ type DeleteCollectionRequest struct {
 
 func (x *DeleteCollectionRequest) Reset() {
 	*x = DeleteCollectionRequest{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1084,7 +1347,7 @@ func (x *DeleteCollectionRequest) String() string {
 func (*DeleteCollectionRequest) ProtoMessage() {}
 
 func (x *DeleteCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[14]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1097,7 +1360,7 @@ func (x *DeleteCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCollectionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeleteCollectionRequest) GetCollectionName() string {
@@ -1120,7 +1383,7 @@ type DeleteCollectionResponse struct {
 
 func (x *DeleteCollectionResponse) Reset() {
 	*x = DeleteCollectionResponse{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1132,7 +1395,7 @@ func (x *DeleteCollectionResponse) String() string {
 func (*DeleteCollectionResponse) ProtoMessage() {}
 
 func (x *DeleteCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[15]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1145,7 +1408,7 @@ func (x *DeleteCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCollectionResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DeleteCollectionResponse) GetDeleted() bool {
@@ -1173,7 +1436,7 @@ type GetCollectionRequest struct {
 
 func (x *GetCollectionRequest) Reset() {
 	*x = GetCollectionRequest{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1185,7 +1448,7 @@ func (x *GetCollectionRequest) String() string {
 func (*GetCollectionRequest) ProtoMessage() {}
 
 func (x *GetCollectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[16]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1461,7 @@ func (x *GetCollectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCollectionRequest.ProtoReflect.Descriptor instead.
 func (*GetCollectionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetCollectionRequest) GetCollectionName() string {
@@ -1224,7 +1487,7 @@ type GetCollectionResponse struct {
 
 func (x *GetCollectionResponse) Reset() {
 	*x = GetCollectionResponse{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1499,7 @@ func (x *GetCollectionResponse) String() string {
 func (*GetCollectionResponse) ProtoMessage() {}
 
 func (x *GetCollectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[17]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1512,7 @@ func (x *GetCollectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCollectionResponse.ProtoReflect.Descriptor instead.
 func (*GetCollectionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{17}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetCollectionResponse) GetExists() bool {
@@ -1283,7 +1546,7 @@ type ListCollectionsRequest struct {
 
 func (x *ListCollectionsRequest) Reset() {
 	*x = ListCollectionsRequest{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1295,7 +1558,7 @@ func (x *ListCollectionsRequest) String() string {
 func (*ListCollectionsRequest) ProtoMessage() {}
 
 func (x *ListCollectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[18]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1571,7 @@ func (x *ListCollectionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCollectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListCollectionsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{18}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{22}
 }
 
 // One collection in a listing.
@@ -1325,7 +1588,7 @@ type CollectionSummary struct {
 
 func (x *CollectionSummary) Reset() {
 	*x = CollectionSummary{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1337,7 +1600,7 @@ func (x *CollectionSummary) String() string {
 func (*CollectionSummary) ProtoMessage() {}
 
 func (x *CollectionSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[19]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1350,7 +1613,7 @@ func (x *CollectionSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectionSummary.ProtoReflect.Descriptor instead.
 func (*CollectionSummary) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{19}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CollectionSummary) GetCollectionName() string {
@@ -1379,7 +1642,7 @@ type ListCollectionsResponse struct {
 
 func (x *ListCollectionsResponse) Reset() {
 	*x = ListCollectionsResponse{}
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1391,7 +1654,7 @@ func (x *ListCollectionsResponse) String() string {
 func (*ListCollectionsResponse) ProtoMessage() {}
 
 func (x *ListCollectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_serverless_collections_proto_msgTypes[20]
+	mi := &file_qdrant_serverless_collections_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1404,7 +1667,7 @@ func (x *ListCollectionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCollectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListCollectionsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{20}
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListCollectionsResponse) GetCollections() []*CollectionSummary {
@@ -1428,8 +1691,10 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\x12SparseVectorConfig\x12\x17\n" +
 	"\ause_idf\x18\x01 \x01(\bR\x06useIdf\x12L\n" +
 	"\x0eprecision_tier\x18\x02 \x01(\x0e2 .qdrant.serverless.PrecisionTierH\x00R\rprecisionTier\x88\x01\x01B\x11\n" +
-	"\x0f_precision_tier\"\x0e\n" +
-	"\fKeywordIndex\"[\n" +
+	"\x0f_precision_tier\"6\n" +
+	"\fKeywordIndex\x12\x1b\n" +
+	"\x06prefix\x18\x01 \x01(\bH\x00R\x06prefix\x88\x01\x01B\t\n" +
+	"\a_prefix\"[\n" +
 	"\fIntegerIndex\x12\x1b\n" +
 	"\x06lookup\x18\x01 \x01(\bH\x00R\x06lookup\x88\x01\x01\x12\x19\n" +
 	"\x05range\x18\x02 \x01(\bH\x01R\x05range\x88\x01\x01B\t\n" +
@@ -1438,20 +1703,38 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
 	"FloatIndex\"\v\n" +
 	"\tUuidIndex\"\x0f\n" +
-	"\rDatetimeIndex\"\xc3\x02\n" +
+	"\rDatetimeIndex\"A\n" +
+	"\tStopwords\x12\x1c\n" +
+	"\tlanguages\x18\x01 \x03(\tR\tlanguages\x12\x16\n" +
+	"\x06custom\x18\x02 \x03(\tR\x06custom\"-\n" +
+	"\x0fSnowballStemmer\x12\x1a\n" +
+	"\blanguage\x18\x01 \x01(\tR\blanguage\"\x11\n" +
+	"\x0fDisabledStemmer\"\x9a\x01\n" +
+	"\aStemmer\x12@\n" +
+	"\bsnowball\x18\x01 \x01(\v2\".qdrant.serverless.SnowballStemmerH\x00R\bsnowball\x12@\n" +
+	"\bdisabled\x18\x02 \x01(\v2\".qdrant.serverless.DisabledStemmerH\x00R\bdisabledB\v\n" +
+	"\talgorithm\"\x95\x04\n" +
 	"\tTextIndex\x12?\n" +
 	"\ttokenizer\x18\x01 \x01(\x0e2\x1c.qdrant.serverless.TokenizerH\x00R\ttokenizer\x88\x01\x01\x12!\n" +
 	"\tlowercase\x18\x02 \x01(\bH\x01R\tlowercase\x88\x01\x01\x12,\n" +
 	"\x0fphrase_matching\x18\x03 \x01(\bH\x02R\x0ephraseMatching\x88\x01\x01\x12'\n" +
 	"\rmin_token_len\x18\x04 \x01(\x04H\x03R\vminTokenLen\x88\x01\x01\x12'\n" +
-	"\rmax_token_len\x18\x05 \x01(\x04H\x04R\vmaxTokenLen\x88\x01\x01B\f\n" +
+	"\rmax_token_len\x18\x05 \x01(\x04H\x04R\vmaxTokenLen\x88\x01\x01\x12(\n" +
+	"\rascii_folding\x18\x06 \x01(\bH\x05R\fasciiFolding\x88\x01\x01\x12?\n" +
+	"\tstopwords\x18\a \x01(\v2\x1c.qdrant.serverless.StopwordsH\x06R\tstopwords\x88\x01\x01\x129\n" +
+	"\astemmer\x18\b \x01(\v2\x1a.qdrant.serverless.StemmerH\aR\astemmer\x88\x01\x01B\f\n" +
 	"\n" +
 	"_tokenizerB\f\n" +
 	"\n" +
 	"_lowercaseB\x12\n" +
 	"\x10_phrase_matchingB\x10\n" +
 	"\x0e_min_token_lenB\x10\n" +
-	"\x0e_max_token_len\"\n" +
+	"\x0e_max_token_lenB\x10\n" +
+	"\x0e_ascii_foldingB\f\n" +
+	"\n" +
+	"_stopwordsB\n" +
+	"\n" +
+	"\b_stemmer\"\n" +
 	"\n" +
 	"\bGeoIndex\"\v\n" +
 	"\tBoolIndex\"\xdb\x03\n" +
@@ -1548,7 +1831,7 @@ func file_qdrant_serverless_collections_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_serverless_collections_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_serverless_collections_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_qdrant_serverless_collections_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_qdrant_serverless_collections_proto_goTypes = []any{
 	(Distance)(0),                    // 0: qdrant.serverless.Distance
 	(PrecisionTier)(0),               // 1: qdrant.serverless.PrecisionTier
@@ -1560,59 +1843,67 @@ var file_qdrant_serverless_collections_proto_goTypes = []any{
 	(*FloatIndex)(nil),               // 7: qdrant.serverless.FloatIndex
 	(*UuidIndex)(nil),                // 8: qdrant.serverless.UuidIndex
 	(*DatetimeIndex)(nil),            // 9: qdrant.serverless.DatetimeIndex
-	(*TextIndex)(nil),                // 10: qdrant.serverless.TextIndex
-	(*GeoIndex)(nil),                 // 11: qdrant.serverless.GeoIndex
-	(*BoolIndex)(nil),                // 12: qdrant.serverless.BoolIndex
-	(*PayloadIndexConfig)(nil),       // 13: qdrant.serverless.PayloadIndexConfig
-	(*CollectionConfig)(nil),         // 14: qdrant.serverless.CollectionConfig
-	(*CreateCollectionRequest)(nil),  // 15: qdrant.serverless.CreateCollectionRequest
-	(*CreateCollectionResponse)(nil), // 16: qdrant.serverless.CreateCollectionResponse
-	(*DeleteCollectionRequest)(nil),  // 17: qdrant.serverless.DeleteCollectionRequest
-	(*DeleteCollectionResponse)(nil), // 18: qdrant.serverless.DeleteCollectionResponse
-	(*GetCollectionRequest)(nil),     // 19: qdrant.serverless.GetCollectionRequest
-	(*GetCollectionResponse)(nil),    // 20: qdrant.serverless.GetCollectionResponse
-	(*ListCollectionsRequest)(nil),   // 21: qdrant.serverless.ListCollectionsRequest
-	(*CollectionSummary)(nil),        // 22: qdrant.serverless.CollectionSummary
-	(*ListCollectionsResponse)(nil),  // 23: qdrant.serverless.ListCollectionsResponse
-	nil,                              // 24: qdrant.serverless.CollectionConfig.DenseVectorsEntry
-	nil,                              // 25: qdrant.serverless.CollectionConfig.SparseVectorsEntry
-	nil,                              // 26: qdrant.serverless.CollectionConfig.PayloadIndexesEntry
+	(*Stopwords)(nil),                // 10: qdrant.serverless.Stopwords
+	(*SnowballStemmer)(nil),          // 11: qdrant.serverless.SnowballStemmer
+	(*DisabledStemmer)(nil),          // 12: qdrant.serverless.DisabledStemmer
+	(*Stemmer)(nil),                  // 13: qdrant.serverless.Stemmer
+	(*TextIndex)(nil),                // 14: qdrant.serverless.TextIndex
+	(*GeoIndex)(nil),                 // 15: qdrant.serverless.GeoIndex
+	(*BoolIndex)(nil),                // 16: qdrant.serverless.BoolIndex
+	(*PayloadIndexConfig)(nil),       // 17: qdrant.serverless.PayloadIndexConfig
+	(*CollectionConfig)(nil),         // 18: qdrant.serverless.CollectionConfig
+	(*CreateCollectionRequest)(nil),  // 19: qdrant.serverless.CreateCollectionRequest
+	(*CreateCollectionResponse)(nil), // 20: qdrant.serverless.CreateCollectionResponse
+	(*DeleteCollectionRequest)(nil),  // 21: qdrant.serverless.DeleteCollectionRequest
+	(*DeleteCollectionResponse)(nil), // 22: qdrant.serverless.DeleteCollectionResponse
+	(*GetCollectionRequest)(nil),     // 23: qdrant.serverless.GetCollectionRequest
+	(*GetCollectionResponse)(nil),    // 24: qdrant.serverless.GetCollectionResponse
+	(*ListCollectionsRequest)(nil),   // 25: qdrant.serverless.ListCollectionsRequest
+	(*CollectionSummary)(nil),        // 26: qdrant.serverless.CollectionSummary
+	(*ListCollectionsResponse)(nil),  // 27: qdrant.serverless.ListCollectionsResponse
+	nil,                              // 28: qdrant.serverless.CollectionConfig.DenseVectorsEntry
+	nil,                              // 29: qdrant.serverless.CollectionConfig.SparseVectorsEntry
+	nil,                              // 30: qdrant.serverless.CollectionConfig.PayloadIndexesEntry
 }
 var file_qdrant_serverless_collections_proto_depIdxs = []int32{
 	0,  // 0: qdrant.serverless.DenseVectorConfig.distance:type_name -> qdrant.serverless.Distance
 	1,  // 1: qdrant.serverless.DenseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
 	1,  // 2: qdrant.serverless.SparseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
-	2,  // 3: qdrant.serverless.TextIndex.tokenizer:type_name -> qdrant.serverless.Tokenizer
-	5,  // 4: qdrant.serverless.PayloadIndexConfig.keyword:type_name -> qdrant.serverless.KeywordIndex
-	6,  // 5: qdrant.serverless.PayloadIndexConfig.integer:type_name -> qdrant.serverless.IntegerIndex
-	7,  // 6: qdrant.serverless.PayloadIndexConfig.float:type_name -> qdrant.serverless.FloatIndex
-	8,  // 7: qdrant.serverless.PayloadIndexConfig.uuid:type_name -> qdrant.serverless.UuidIndex
-	9,  // 8: qdrant.serverless.PayloadIndexConfig.datetime:type_name -> qdrant.serverless.DatetimeIndex
-	10, // 9: qdrant.serverless.PayloadIndexConfig.text:type_name -> qdrant.serverless.TextIndex
-	11, // 10: qdrant.serverless.PayloadIndexConfig.geo:type_name -> qdrant.serverless.GeoIndex
-	12, // 11: qdrant.serverless.PayloadIndexConfig.bool:type_name -> qdrant.serverless.BoolIndex
-	24, // 12: qdrant.serverless.CollectionConfig.dense_vectors:type_name -> qdrant.serverless.CollectionConfig.DenseVectorsEntry
-	25, // 13: qdrant.serverless.CollectionConfig.sparse_vectors:type_name -> qdrant.serverless.CollectionConfig.SparseVectorsEntry
-	26, // 14: qdrant.serverless.CollectionConfig.payload_indexes:type_name -> qdrant.serverless.CollectionConfig.PayloadIndexesEntry
-	14, // 15: qdrant.serverless.CreateCollectionRequest.config:type_name -> qdrant.serverless.CollectionConfig
-	14, // 16: qdrant.serverless.GetCollectionResponse.config:type_name -> qdrant.serverless.CollectionConfig
-	22, // 17: qdrant.serverless.ListCollectionsResponse.collections:type_name -> qdrant.serverless.CollectionSummary
-	3,  // 18: qdrant.serverless.CollectionConfig.DenseVectorsEntry.value:type_name -> qdrant.serverless.DenseVectorConfig
-	4,  // 19: qdrant.serverless.CollectionConfig.SparseVectorsEntry.value:type_name -> qdrant.serverless.SparseVectorConfig
-	13, // 20: qdrant.serverless.CollectionConfig.PayloadIndexesEntry.value:type_name -> qdrant.serverless.PayloadIndexConfig
-	15, // 21: qdrant.serverless.CollectionsService.CreateCollection:input_type -> qdrant.serverless.CreateCollectionRequest
-	17, // 22: qdrant.serverless.CollectionsService.DeleteCollection:input_type -> qdrant.serverless.DeleteCollectionRequest
-	19, // 23: qdrant.serverless.CollectionsService.GetCollection:input_type -> qdrant.serverless.GetCollectionRequest
-	21, // 24: qdrant.serverless.CollectionsService.ListCollections:input_type -> qdrant.serverless.ListCollectionsRequest
-	16, // 25: qdrant.serverless.CollectionsService.CreateCollection:output_type -> qdrant.serverless.CreateCollectionResponse
-	18, // 26: qdrant.serverless.CollectionsService.DeleteCollection:output_type -> qdrant.serverless.DeleteCollectionResponse
-	20, // 27: qdrant.serverless.CollectionsService.GetCollection:output_type -> qdrant.serverless.GetCollectionResponse
-	23, // 28: qdrant.serverless.CollectionsService.ListCollections:output_type -> qdrant.serverless.ListCollectionsResponse
-	25, // [25:29] is the sub-list for method output_type
-	21, // [21:25] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	11, // 3: qdrant.serverless.Stemmer.snowball:type_name -> qdrant.serverless.SnowballStemmer
+	12, // 4: qdrant.serverless.Stemmer.disabled:type_name -> qdrant.serverless.DisabledStemmer
+	2,  // 5: qdrant.serverless.TextIndex.tokenizer:type_name -> qdrant.serverless.Tokenizer
+	10, // 6: qdrant.serverless.TextIndex.stopwords:type_name -> qdrant.serverless.Stopwords
+	13, // 7: qdrant.serverless.TextIndex.stemmer:type_name -> qdrant.serverless.Stemmer
+	5,  // 8: qdrant.serverless.PayloadIndexConfig.keyword:type_name -> qdrant.serverless.KeywordIndex
+	6,  // 9: qdrant.serverless.PayloadIndexConfig.integer:type_name -> qdrant.serverless.IntegerIndex
+	7,  // 10: qdrant.serverless.PayloadIndexConfig.float:type_name -> qdrant.serverless.FloatIndex
+	8,  // 11: qdrant.serverless.PayloadIndexConfig.uuid:type_name -> qdrant.serverless.UuidIndex
+	9,  // 12: qdrant.serverless.PayloadIndexConfig.datetime:type_name -> qdrant.serverless.DatetimeIndex
+	14, // 13: qdrant.serverless.PayloadIndexConfig.text:type_name -> qdrant.serverless.TextIndex
+	15, // 14: qdrant.serverless.PayloadIndexConfig.geo:type_name -> qdrant.serverless.GeoIndex
+	16, // 15: qdrant.serverless.PayloadIndexConfig.bool:type_name -> qdrant.serverless.BoolIndex
+	28, // 16: qdrant.serverless.CollectionConfig.dense_vectors:type_name -> qdrant.serverless.CollectionConfig.DenseVectorsEntry
+	29, // 17: qdrant.serverless.CollectionConfig.sparse_vectors:type_name -> qdrant.serverless.CollectionConfig.SparseVectorsEntry
+	30, // 18: qdrant.serverless.CollectionConfig.payload_indexes:type_name -> qdrant.serverless.CollectionConfig.PayloadIndexesEntry
+	18, // 19: qdrant.serverless.CreateCollectionRequest.config:type_name -> qdrant.serverless.CollectionConfig
+	18, // 20: qdrant.serverless.GetCollectionResponse.config:type_name -> qdrant.serverless.CollectionConfig
+	26, // 21: qdrant.serverless.ListCollectionsResponse.collections:type_name -> qdrant.serverless.CollectionSummary
+	3,  // 22: qdrant.serverless.CollectionConfig.DenseVectorsEntry.value:type_name -> qdrant.serverless.DenseVectorConfig
+	4,  // 23: qdrant.serverless.CollectionConfig.SparseVectorsEntry.value:type_name -> qdrant.serverless.SparseVectorConfig
+	17, // 24: qdrant.serverless.CollectionConfig.PayloadIndexesEntry.value:type_name -> qdrant.serverless.PayloadIndexConfig
+	19, // 25: qdrant.serverless.CollectionsService.CreateCollection:input_type -> qdrant.serverless.CreateCollectionRequest
+	21, // 26: qdrant.serverless.CollectionsService.DeleteCollection:input_type -> qdrant.serverless.DeleteCollectionRequest
+	23, // 27: qdrant.serverless.CollectionsService.GetCollection:input_type -> qdrant.serverless.GetCollectionRequest
+	25, // 28: qdrant.serverless.CollectionsService.ListCollections:input_type -> qdrant.serverless.ListCollectionsRequest
+	20, // 29: qdrant.serverless.CollectionsService.CreateCollection:output_type -> qdrant.serverless.CreateCollectionResponse
+	22, // 30: qdrant.serverless.CollectionsService.DeleteCollection:output_type -> qdrant.serverless.DeleteCollectionResponse
+	24, // 31: qdrant.serverless.CollectionsService.GetCollection:output_type -> qdrant.serverless.GetCollectionResponse
+	27, // 32: qdrant.serverless.CollectionsService.ListCollections:output_type -> qdrant.serverless.ListCollectionsResponse
+	29, // [29:33] is the sub-list for method output_type
+	25, // [25:29] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_serverless_collections_proto_init() }
@@ -1622,9 +1913,14 @@ func file_qdrant_serverless_collections_proto_init() {
 	}
 	file_qdrant_serverless_collections_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_serverless_collections_proto_msgTypes[1].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_serverless_collections_proto_msgTypes[3].OneofWrappers = []any{}
-	file_qdrant_serverless_collections_proto_msgTypes[7].OneofWrappers = []any{}
 	file_qdrant_serverless_collections_proto_msgTypes[10].OneofWrappers = []any{
+		(*Stemmer_Snowball)(nil),
+		(*Stemmer_Disabled)(nil),
+	}
+	file_qdrant_serverless_collections_proto_msgTypes[11].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[14].OneofWrappers = []any{
 		(*PayloadIndexConfig_Keyword)(nil),
 		(*PayloadIndexConfig_Integer)(nil),
 		(*PayloadIndexConfig_Float)(nil),
@@ -1634,15 +1930,15 @@ func file_qdrant_serverless_collections_proto_init() {
 		(*PayloadIndexConfig_Geo)(nil),
 		(*PayloadIndexConfig_Bool)(nil),
 	}
-	file_qdrant_serverless_collections_proto_msgTypes[17].OneofWrappers = []any{}
-	file_qdrant_serverless_collections_proto_msgTypes[19].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[21].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[23].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_serverless_collections_proto_rawDesc), len(file_qdrant_serverless_collections_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   24,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
