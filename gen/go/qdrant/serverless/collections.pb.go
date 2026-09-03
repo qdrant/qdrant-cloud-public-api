@@ -7,6 +7,7 @@
 package serverless
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1574,10 +1575,15 @@ func (x *GetCollectionResponse) GetPointCount() uint64 {
 	return 0
 }
 
-// Lists the caller's collections. The tenant travels in metadata, so there is
-// nothing to name here.
+// Lists the caller's collections. The tenant travels in metadata.
 type ListCollectionsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Maximum number of collections to return. Defaults to 20 and must not
+	// exceed 100.
+	Limit *uint32 `protobuf:"varint,1,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	// Opaque token returned as `next_offset_token` by the previous page. Clients
+	// must not interpret this value.
+	OffsetToken   *string `protobuf:"bytes,2,opt,name=offset_token,json=offsetToken,proto3,oneof" json:"offset_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1610,6 +1616,20 @@ func (x *ListCollectionsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListCollectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListCollectionsRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListCollectionsRequest) GetLimit() uint32 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *ListCollectionsRequest) GetOffsetToken() string {
+	if x != nil && x.OffsetToken != nil {
+		return *x.OffsetToken
+	}
+	return ""
 }
 
 // One collection in a listing.
@@ -1671,11 +1691,13 @@ func (x *CollectionSummary) GetPointCount() uint64 {
 // The caller's collections.
 type ListCollectionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Ordered by name. A collection whose creation never published a manifest is
-	// not listed: it is not servable.
-	Collections   []*CollectionSummary `protobuf:"bytes,1,rep,name=collections,proto3" json:"collections,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Collections in this page.
+	Collections []*CollectionSummary `protobuf:"bytes,1,rep,name=collections,proto3" json:"collections,omitempty"`
+	// Opaque token to pass as `offset_token` to retrieve the next page. Absent
+	// when there are no more results.
+	NextOffsetToken *string `protobuf:"bytes,2,opt,name=next_offset_token,json=nextOffsetToken,proto3,oneof" json:"next_offset_token,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListCollectionsResponse) Reset() {
@@ -1715,11 +1737,18 @@ func (x *ListCollectionsResponse) GetCollections() []*CollectionSummary {
 	return nil
 }
 
+func (x *ListCollectionsResponse) GetNextOffsetToken() string {
+	if x != nil && x.NextOffsetToken != nil {
+		return *x.NextOffsetToken
+	}
+	return ""
+}
+
 var File_qdrant_serverless_collections_proto protoreflect.FileDescriptor
 
 const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
-	"#qdrant/serverless/collections.proto\x12\x11qdrant.serverless\"\xe3\x01\n" +
+	"#qdrant/serverless/collections.proto\x12\x11qdrant.serverless\x1a\x1bbuf/validate/validate.proto\"\xe3\x01\n" +
 	"\x11DenseVectorConfig\x12\x12\n" +
 	"\x04size\x18\x01 \x01(\x04R\x04size\x127\n" +
 	"\bdistance\x18\x02 \x01(\x0e2\x1b.qdrant.serverless.DistanceR\bdistance\x12 \n" +
@@ -1819,15 +1848,21 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\vpoint_count\x18\x03 \x01(\x04H\x01R\n" +
 	"pointCount\x88\x01\x01B\t\n" +
 	"\a_configB\x0e\n" +
-	"\f_point_count\"\x18\n" +
-	"\x16ListCollectionsRequest\"r\n" +
+	"\f_point_count\"\x81\x01\n" +
+	"\x16ListCollectionsRequest\x12$\n" +
+	"\x05limit\x18\x01 \x01(\rB\t\xbaH\x06*\x04\x18d \x00H\x00R\x05limit\x88\x01\x01\x12&\n" +
+	"\foffset_token\x18\x02 \x01(\tH\x01R\voffsetToken\x88\x01\x01B\b\n" +
+	"\x06_limitB\x0f\n" +
+	"\r_offset_token\"r\n" +
 	"\x11CollectionSummary\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\x12$\n" +
 	"\vpoint_count\x18\x02 \x01(\x04H\x00R\n" +
 	"pointCount\x88\x01\x01B\x0e\n" +
-	"\f_point_count\"a\n" +
+	"\f_point_count\"\xa8\x01\n" +
 	"\x17ListCollectionsResponse\x12F\n" +
-	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections*T\n" +
+	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections\x12/\n" +
+	"\x11next_offset_token\x18\x02 \x01(\tH\x00R\x0fnextOffsetToken\x88\x01\x01B\x14\n" +
+	"\x12_next_offset_token*T\n" +
 	"\bDistance\x12\x18\n" +
 	"\x14DISTANCE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -1972,7 +2007,9 @@ func file_qdrant_serverless_collections_proto_init() {
 		(*PayloadIndexConfig_Bool)(nil),
 	}
 	file_qdrant_serverless_collections_proto_msgTypes[22].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[23].OneofWrappers = []any{}
 	file_qdrant_serverless_collections_proto_msgTypes[24].OneofWrappers = []any{}
+	file_qdrant_serverless_collections_proto_msgTypes[25].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
