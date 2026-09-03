@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -84,6 +85,120 @@ func (x EventType) Number() protoreflect.EnumNumber {
 // Deprecated: Use EventType.Descriptor instead.
 func (EventType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{0}
+}
+
+// ResultStatus identifies whether an audited RPC completed successfully.
+type ResultStatus int32
+
+const (
+	// Unspecified; not a valid result status.
+	ResultStatus_RESULT_STATUS_UNSPECIFIED ResultStatus = 0
+	// The RPC completed successfully.
+	ResultStatus_RESULT_STATUS_SUCCESS ResultStatus = 1
+	// The RPC failed (backend / internal error).
+	ResultStatus_RESULT_STATUS_FAILURE ResultStatus = 2
+	// The RPC was rejected by validation or policy.
+	ResultStatus_RESULT_STATUS_REJECTED ResultStatus = 3
+	// The actor was not authorized to perform the RPC.
+	ResultStatus_RESULT_STATUS_DENIED ResultStatus = 4
+)
+
+// Enum value maps for ResultStatus.
+var (
+	ResultStatus_name = map[int32]string{
+		0: "RESULT_STATUS_UNSPECIFIED",
+		1: "RESULT_STATUS_SUCCESS",
+		2: "RESULT_STATUS_FAILURE",
+		3: "RESULT_STATUS_REJECTED",
+		4: "RESULT_STATUS_DENIED",
+	}
+	ResultStatus_value = map[string]int32{
+		"RESULT_STATUS_UNSPECIFIED": 0,
+		"RESULT_STATUS_SUCCESS":     1,
+		"RESULT_STATUS_FAILURE":     2,
+		"RESULT_STATUS_REJECTED":    3,
+		"RESULT_STATUS_DENIED":      4,
+	}
+)
+
+func (x ResultStatus) Enum() *ResultStatus {
+	p := new(ResultStatus)
+	*p = x
+	return p
+}
+
+func (x ResultStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ResultStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_event_v1_events_proto_enumTypes[1].Descriptor()
+}
+
+func (ResultStatus) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_event_v1_events_proto_enumTypes[1]
+}
+
+func (x ResultStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ResultStatus.Descriptor instead.
+func (ResultStatus) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{1}
+}
+
+// EventSource identifies which API surface produced the event.
+type EventSource int32
+
+const (
+	// Unspecified; not a valid event source.
+	EventSource_EVENT_SOURCE_UNSPECIFIED EventSource = 0
+	// The event was produced from a public API RPC.
+	EventSource_EVENT_SOURCE_PUBLIC_API EventSource = 1
+	// The event was produced from an internal API RPC.
+	EventSource_EVENT_SOURCE_INTERNAL_API EventSource = 2
+)
+
+// Enum value maps for EventSource.
+var (
+	EventSource_name = map[int32]string{
+		0: "EVENT_SOURCE_UNSPECIFIED",
+		1: "EVENT_SOURCE_PUBLIC_API",
+		2: "EVENT_SOURCE_INTERNAL_API",
+	}
+	EventSource_value = map[string]int32{
+		"EVENT_SOURCE_UNSPECIFIED":  0,
+		"EVENT_SOURCE_PUBLIC_API":   1,
+		"EVENT_SOURCE_INTERNAL_API": 2,
+	}
+)
+
+func (x EventSource) Enum() *EventSource {
+	p := new(EventSource)
+	*p = x
+	return p
+}
+
+func (x EventSource) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EventSource) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_event_v1_events_proto_enumTypes[2].Descriptor()
+}
+
+func (EventSource) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_event_v1_events_proto_enumTypes[2]
+}
+
+func (x EventSource) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EventSource.Descriptor instead.
+func (EventSource) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{2}
 }
 
 // EventOptions is a custom method option to indicate that an event should be
@@ -201,14 +316,90 @@ func (x *EventOptions) GetAdditionalContextFields() map[string]string {
 	return nil
 }
 
+// Result describes the outcome of the RPC that produced this event.
+type Result struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Outcome of the action.
+	Status ResultStatus `protobuf:"varint,1,opt,name=status,proto3,enum=qdrant.cloud.event.v1.ResultStatus" json:"status,omitempty"`
+	// Source status code when available (e.g. gRPC status code).
+	StatusCode *int32 `protobuf:"varint,2,opt,name=status_code,json=statusCode,proto3,oneof" json:"status_code,omitempty"`
+	// Sanitized reason when the action failed, was rejected, or was denied.
+	// Must not contain PII (emails, tokens, or user-supplied free text that could identify a person).
+	ErrorReason   *string `protobuf:"bytes,3,opt,name=error_reason,json=errorReason,proto3,oneof" json:"error_reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Result) Reset() {
+	*x = Result{}
+	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Result) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Result) ProtoMessage() {}
+
+func (x *Result) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Result.ProtoReflect.Descriptor instead.
+func (*Result) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Result) GetStatus() ResultStatus {
+	if x != nil {
+		return x.Status
+	}
+	return ResultStatus_RESULT_STATUS_UNSPECIFIED
+}
+
+func (x *Result) GetStatusCode() int32 {
+	if x != nil && x.StatusCode != nil {
+		return *x.StatusCode
+	}
+	return 0
+}
+
+func (x *Result) GetErrorReason() string {
+	if x != nil && x.ErrorReason != nil {
+		return *x.ErrorReason
+	}
+	return ""
+}
+
 // Event represents a significant occurrence in the system, like a resource
 // being created, updated, or deleted.
 type Event struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// A unique identifier for the event, in the form of a UUID.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The time at which the event occurred.
+	// The time at which the event was recorded — i.e. when the RPC completed
+	// (handler returned). When duration is set, approximate request start time
+	// is created_at - duration.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Wall-clock duration of the RPC (from request received / stream open until
+	// the event was recorded). Request start ≈ created_at - duration.
+	Duration *durationpb.Duration `protobuf:"bytes,7,opt,name=duration,proto3,oneof" json:"duration,omitempty"`
+	// Client IPv4 address when available (from gateway peer / X-Forwarded-For).
+	// Personal data under GDPR — subject to retention and erasure policy.
+	IpAddress *string `protobuf:"bytes,8,opt,name=ip_address,json=ipAddress,proto3,oneof" json:"ip_address,omitempty"`
+	// Outcome of the RPC. Omitted on legacy events published before this field existed;
+	// new publishers should set it (SUCCESS for the historical success-only path).
+	Result *Result `protobuf:"bytes,9,opt,name=result,proto3,oneof" json:"result,omitempty"`
 	// The authenticated actor that performed the action which triggered this event.
 	Caller *v1.Caller `protobuf:"bytes,3,opt,name=caller,proto3" json:"caller,omitempty"`
 	// The account ID associated with this event (if applicable, UUID).
@@ -217,6 +408,10 @@ type Event struct {
 	// The fullname of the RPC which was invoked.
 	// E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
 	SourceRpc string `protobuf:"bytes,6,opt,name=source_rpc,json=sourceRpc,proto3" json:"source_rpc,omitempty"`
+	// Which API surface produced this event (public vs internal).
+	// Omitted on legacy events published before this field existed;
+	// new publishers should set it.
+	Source *EventSource `protobuf:"varint,16,opt,name=source,proto3,enum=qdrant.cloud.event.v1.EventSource,oneof" json:"source,omitempty"`
 	// The type of the event.
 	EventType EventType `protobuf:"varint,10,opt,name=event_type,json=eventType,proto3,enum=qdrant.cloud.event.v1.EventType" json:"event_type,omitempty"`
 	// The type of the resource that this event is about (e.g., "cluster", "backup").
@@ -244,7 +439,7 @@ type Event struct {
 
 func (x *Event) Reset() {
 	*x = Event{}
-	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -256,7 +451,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_event_v1_events_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,7 +464,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Event) GetId() string {
@@ -282,6 +477,27 @@ func (x *Event) GetId() string {
 func (x *Event) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Event) GetDuration() *durationpb.Duration {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
+func (x *Event) GetIpAddress() string {
+	if x != nil && x.IpAddress != nil {
+		return *x.IpAddress
+	}
+	return ""
+}
+
+func (x *Event) GetResult() *Result {
+	if x != nil {
+		return x.Result
 	}
 	return nil
 }
@@ -305,6 +521,13 @@ func (x *Event) GetSourceRpc() string {
 		return x.SourceRpc
 	}
 	return ""
+}
+
+func (x *Event) GetSource() EventSource {
+	if x != nil && x.Source != nil {
+		return *x.Source
+	}
+	return EventSource_EVENT_SOURCE_UNSPECIFIED
 }
 
 func (x *Event) GetEventType() EventType {
@@ -379,7 +602,7 @@ var File_qdrant_cloud_event_v1_events_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\n" +
-	"\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xa5\x04\n" +
+	"\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xa5\x04\n" +
 	"\fEventOptions\x12K\n" +
 	"\n" +
 	"event_type\x18\x01 \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +
@@ -396,16 +619,31 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x1cAdditionalContextFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_action_type\"\xf1\x05\n" +
+	"\f_action_type\"\xd5\x01\n" +
+	"\x06Result\x12G\n" +
+	"\x06status\x18\x01 \x01(\x0e2#.qdrant.cloud.event.v1.ResultStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06status\x12-\n" +
+	"\vstatus_code\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\n" +
+	"statusCode\x88\x01\x01\x122\n" +
+	"\ferror_reason\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\bH\x01R\verrorReason\x88\x01\x01B\x0e\n" +
+	"\f_status_codeB\x0f\n" +
+	"\r_error_reason\"\x95\b\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
+	"\bduration\x18\a \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x88\x01\x01\x12+\n" +
+	"\n" +
+	"ip_address\x18\b \x01(\tB\a\xbaH\x04r\x02x\x01H\x01R\tipAddress\x88\x01\x01\x12:\n" +
+	"\x06result\x18\t \x01(\v2\x1d.qdrant.cloud.event.v1.ResultH\x02R\x06result\x88\x01\x01\x12>\n" +
 	"\x06caller\x18\x03 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06caller\x12,\n" +
 	"\n" +
-	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\taccountId\x88\x01\x01\x12&\n" +
+	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x03R\taccountId\x88\x01\x01\x12&\n" +
 	"\n" +
 	"source_rpc\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n" +
+	"\x06source\x18\x10 \x01(\x0e2\".qdrant.cloud.event.v1.EventSourceB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06source\x88\x01\x01\x12K\n" +
 	"\n" +
 	"event_type\x18\n" +
 	" \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +
@@ -413,16 +651,20 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\rresource_type\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fresourceType\x12\x1f\n" +
 	"\vstatus_only\x18\f \x01(\bR\n" +
 	"statusOnly\x12-\n" +
-	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\n" +
+	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\n" +
 	"resourceId\x88\x01\x01\x12*\n" +
 	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12-\n" +
-	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\n" +
+	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
 	"actionType\x88\x01\x01\x12b\n" +
 	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x1aD\n" +
 	"\x16AdditionalContextEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
-	"\v_account_idB\x0e\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
+	"\t_durationB\r\n" +
+	"\v_ip_addressB\t\n" +
+	"\a_resultB\r\n" +
+	"\v_account_idB\t\n" +
+	"\a_sourceB\x0e\n" +
 	"\f_resource_idB\x0e\n" +
 	"\f_action_type*\x86\x01\n" +
 	"\tEventType\x12\x1a\n" +
@@ -430,7 +672,17 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x12EVENT_TYPE_CREATED\x10\x01\x12\x16\n" +
 	"\x12EVENT_TYPE_UPDATED\x10\x02\x12\x16\n" +
 	"\x12EVENT_TYPE_DELETED\x10\x03\x12\x15\n" +
-	"\x11EVENT_TYPE_ACTION\x10\x04:j\n" +
+	"\x11EVENT_TYPE_ACTION\x10\x04*\x99\x01\n" +
+	"\fResultStatus\x12\x1d\n" +
+	"\x19RESULT_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15RESULT_STATUS_SUCCESS\x10\x01\x12\x19\n" +
+	"\x15RESULT_STATUS_FAILURE\x10\x02\x12\x1a\n" +
+	"\x16RESULT_STATUS_REJECTED\x10\x03\x12\x18\n" +
+	"\x14RESULT_STATUS_DENIED\x10\x04*g\n" +
+	"\vEventSource\x12\x1c\n" +
+	"\x18EVENT_SOURCE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17EVENT_SOURCE_PUBLIC_API\x10\x01\x12\x1d\n" +
+	"\x19EVENT_SOURCE_INTERNAL_API\x10\x02:j\n" +
 	"\revent_options\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x8e\x03 \x01(\v2#.qdrant.cloud.event.v1.EventOptionsR\feventOptionsB\xef\x01\n" +
 	"\x19com.qdrant.cloud.event.v1B\vEventsProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1;eventv1\xa2\x02\x03QCE\xaa\x02\x15Qdrant.Cloud.Event.V1\xca\x02\x15Qdrant\\Cloud\\Event\\V1\xe2\x02!Qdrant\\Cloud\\Event\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Event::V1b\x06proto3"
 
@@ -446,32 +698,40 @@ func file_qdrant_cloud_event_v1_events_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_event_v1_events_proto_rawDescData
 }
 
-var file_qdrant_cloud_event_v1_events_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_event_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_qdrant_cloud_event_v1_events_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_qdrant_cloud_event_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_qdrant_cloud_event_v1_events_proto_goTypes = []any{
 	(EventType)(0),                     // 0: qdrant.cloud.event.v1.EventType
-	(*EventOptions)(nil),               // 1: qdrant.cloud.event.v1.EventOptions
-	(*Event)(nil),                      // 2: qdrant.cloud.event.v1.Event
-	nil,                                // 3: qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
-	nil,                                // 4: qdrant.cloud.event.v1.Event.AdditionalContextEntry
-	(*timestamppb.Timestamp)(nil),      // 5: google.protobuf.Timestamp
-	(*v1.Caller)(nil),                  // 6: qdrant.cloud.common.v1.Caller
-	(*descriptorpb.MethodOptions)(nil), // 7: google.protobuf.MethodOptions
+	(ResultStatus)(0),                  // 1: qdrant.cloud.event.v1.ResultStatus
+	(EventSource)(0),                   // 2: qdrant.cloud.event.v1.EventSource
+	(*EventOptions)(nil),               // 3: qdrant.cloud.event.v1.EventOptions
+	(*Result)(nil),                     // 4: qdrant.cloud.event.v1.Result
+	(*Event)(nil),                      // 5: qdrant.cloud.event.v1.Event
+	nil,                                // 6: qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
+	nil,                                // 7: qdrant.cloud.event.v1.Event.AdditionalContextEntry
+	(*timestamppb.Timestamp)(nil),      // 8: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),        // 9: google.protobuf.Duration
+	(*v1.Caller)(nil),                  // 10: qdrant.cloud.common.v1.Caller
+	(*descriptorpb.MethodOptions)(nil), // 11: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_event_v1_events_proto_depIdxs = []int32{
-	0, // 0: qdrant.cloud.event.v1.EventOptions.event_type:type_name -> qdrant.cloud.event.v1.EventType
-	3, // 1: qdrant.cloud.event.v1.EventOptions.additional_context_fields:type_name -> qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
-	5, // 2: qdrant.cloud.event.v1.Event.created_at:type_name -> google.protobuf.Timestamp
-	6, // 3: qdrant.cloud.event.v1.Event.caller:type_name -> qdrant.cloud.common.v1.Caller
-	0, // 4: qdrant.cloud.event.v1.Event.event_type:type_name -> qdrant.cloud.event.v1.EventType
-	4, // 5: qdrant.cloud.event.v1.Event.additional_context:type_name -> qdrant.cloud.event.v1.Event.AdditionalContextEntry
-	7, // 6: qdrant.cloud.event.v1.event_options:extendee -> google.protobuf.MethodOptions
-	1, // 7: qdrant.cloud.event.v1.event_options:type_name -> qdrant.cloud.event.v1.EventOptions
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	7, // [7:8] is the sub-list for extension type_name
-	6, // [6:7] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	0,  // 0: qdrant.cloud.event.v1.EventOptions.event_type:type_name -> qdrant.cloud.event.v1.EventType
+	6,  // 1: qdrant.cloud.event.v1.EventOptions.additional_context_fields:type_name -> qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
+	1,  // 2: qdrant.cloud.event.v1.Result.status:type_name -> qdrant.cloud.event.v1.ResultStatus
+	8,  // 3: qdrant.cloud.event.v1.Event.created_at:type_name -> google.protobuf.Timestamp
+	9,  // 4: qdrant.cloud.event.v1.Event.duration:type_name -> google.protobuf.Duration
+	4,  // 5: qdrant.cloud.event.v1.Event.result:type_name -> qdrant.cloud.event.v1.Result
+	10, // 6: qdrant.cloud.event.v1.Event.caller:type_name -> qdrant.cloud.common.v1.Caller
+	2,  // 7: qdrant.cloud.event.v1.Event.source:type_name -> qdrant.cloud.event.v1.EventSource
+	0,  // 8: qdrant.cloud.event.v1.Event.event_type:type_name -> qdrant.cloud.event.v1.EventType
+	7,  // 9: qdrant.cloud.event.v1.Event.additional_context:type_name -> qdrant.cloud.event.v1.Event.AdditionalContextEntry
+	11, // 10: qdrant.cloud.event.v1.event_options:extendee -> google.protobuf.MethodOptions
+	3,  // 11: qdrant.cloud.event.v1.event_options:type_name -> qdrant.cloud.event.v1.EventOptions
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	11, // [11:12] is the sub-list for extension type_name
+	10, // [10:11] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_event_v1_events_proto_init() }
@@ -481,13 +741,14 @@ func file_qdrant_cloud_event_v1_events_proto_init() {
 	}
 	file_qdrant_cloud_event_v1_events_proto_msgTypes[0].OneofWrappers = []any{}
 	file_qdrant_cloud_event_v1_events_proto_msgTypes[1].OneofWrappers = []any{}
+	file_qdrant_cloud_event_v1_events_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_event_v1_events_proto_rawDesc), len(file_qdrant_cloud_event_v1_events_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   4,
+			NumEnums:      3,
+			NumMessages:   5,
 			NumExtensions: 1,
 			NumServices:   0,
 		},

@@ -24,11 +24,12 @@ _sym_db = _symbol_database.Default()
 
 from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
+from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xa5\x04\n\x0c\x45ventOptions\x12K\n\nevent_type\x18\x01 \x01(\x0e\x32 .qdrant.cloud.event.v1.EventTypeB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\teventType\x12,\n\rresource_type\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0cresourceType\x12\x1f\n\x0bstatus_only\x18\x03 \x01(\x08R\nstatusOnly\x12\x33\n\x11resource_id_field\x18\x04 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0fresourceIdField\x12;\n\x15resource_url_template\x18\x05 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x13resourceUrlTemplate\x12-\n\x0b\x61\x63tion_type\x18\x06 \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x00R\nactionType\x88\x01\x01\x12|\n\x19\x61\x64\x64itional_context_fields\x18\n \x03(\x0b\x32@.qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntryR\x17\x61\x64\x64itionalContextFields\x1aJ\n\x1c\x41\x64\x64itionalContextFieldsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x0e\n\x0c_action_type\"\xf1\x05\n\x05\x45vent\x12\x18\n\x02id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x39\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12>\n\x06\x63\x61ller\x18\x03 \x01(\x0b\x32\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06\x63\x61ller\x12,\n\naccount_id\x18\x05 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01H\x00R\taccountId\x88\x01\x01\x12&\n\nsource_rpc\x18\x06 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n\nevent_type\x18\n \x01(\x0e\x32 .qdrant.cloud.event.v1.EventTypeB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\teventType\x12,\n\rresource_type\x18\x0b \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0cresourceType\x12\x1f\n\x0bstatus_only\x18\x0c \x01(\x08R\nstatusOnly\x12-\n\x0bresource_id\x18\r \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x01R\nresourceId\x88\x01\x01\x12*\n\x0cresource_url\x18\x0e \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0bresourceUrl\x12-\n\x0b\x61\x63tion_type\x18\x0f \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x02R\nactionType\x88\x01\x01\x12\x62\n\x12\x61\x64\x64itional_context\x18\x14 \x03(\x0b\x32\x33.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11\x61\x64\x64itionalContext\x1a\x44\n\x16\x41\x64\x64itionalContextEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\r\n\x0b_account_idB\x0e\n\x0c_resource_idB\x0e\n\x0c_action_type*\x86\x01\n\tEventType\x12\x1a\n\x16\x45VENT_TYPE_UNSPECIFIED\x10\x00\x12\x16\n\x12\x45VENT_TYPE_CREATED\x10\x01\x12\x16\n\x12\x45VENT_TYPE_UPDATED\x10\x02\x12\x16\n\x12\x45VENT_TYPE_DELETED\x10\x03\x12\x15\n\x11\x45VENT_TYPE_ACTION\x10\x04:j\n\revent_options\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x8e\x03 \x01(\x0b\x32#.qdrant.cloud.event.v1.EventOptionsR\x0c\x65ventOptionsB\xef\x01\n\x19\x63om.qdrant.cloud.event.v1B\x0b\x45ventsProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1;eventv1\xa2\x02\x03QCE\xaa\x02\x15Qdrant.Cloud.Event.V1\xca\x02\x15Qdrant\\Cloud\\Event\\V1\xe2\x02!Qdrant\\Cloud\\Event\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Event::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"qdrant/cloud/event/v1/events.proto\x12\x15qdrant.cloud.event.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xa5\x04\n\x0c\x45ventOptions\x12K\n\nevent_type\x18\x01 \x01(\x0e\x32 .qdrant.cloud.event.v1.EventTypeB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\teventType\x12,\n\rresource_type\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0cresourceType\x12\x1f\n\x0bstatus_only\x18\x03 \x01(\x08R\nstatusOnly\x12\x33\n\x11resource_id_field\x18\x04 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0fresourceIdField\x12;\n\x15resource_url_template\x18\x05 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x13resourceUrlTemplate\x12-\n\x0b\x61\x63tion_type\x18\x06 \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x00R\nactionType\x88\x01\x01\x12|\n\x19\x61\x64\x64itional_context_fields\x18\n \x03(\x0b\x32@.qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntryR\x17\x61\x64\x64itionalContextFields\x1aJ\n\x1c\x41\x64\x64itionalContextFieldsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x0e\n\x0c_action_type\"\xd5\x01\n\x06Result\x12G\n\x06status\x18\x01 \x01(\x0e\x32#.qdrant.cloud.event.v1.ResultStatusB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x06status\x12-\n\x0bstatus_code\x18\x02 \x01(\x05\x42\x07\xbaH\x04\x1a\x02(\x00H\x00R\nstatusCode\x88\x01\x01\x12\x32\n\x0c\x65rror_reason\x18\x03 \x01(\tB\n\xbaH\x07r\x05\x10\x01\x18\x80\x08H\x01R\x0b\x65rrorReason\x88\x01\x01\x42\x0e\n\x0c_status_codeB\x0f\n\r_error_reason\"\x95\x08\n\x05\x45vent\x12\x18\n\x02id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x39\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n\x08\x64uration\x18\x07 \x01(\x0b\x32\x19.google.protobuf.DurationH\x00R\x08\x64uration\x88\x01\x01\x12+\n\nip_address\x18\x08 \x01(\tB\x07\xbaH\x04r\x02x\x01H\x01R\tipAddress\x88\x01\x01\x12:\n\x06result\x18\t \x01(\x0b\x32\x1d.qdrant.cloud.event.v1.ResultH\x02R\x06result\x88\x01\x01\x12>\n\x06\x63\x61ller\x18\x03 \x01(\x0b\x32\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06\x63\x61ller\x12,\n\naccount_id\x18\x05 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01H\x03R\taccountId\x88\x01\x01\x12&\n\nsource_rpc\x18\x06 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n\x06source\x18\x10 \x01(\x0e\x32\".qdrant.cloud.event.v1.EventSourceB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00H\x04R\x06source\x88\x01\x01\x12K\n\nevent_type\x18\n \x01(\x0e\x32 .qdrant.cloud.event.v1.EventTypeB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\teventType\x12,\n\rresource_type\x18\x0b \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0cresourceType\x12\x1f\n\x0bstatus_only\x18\x0c \x01(\x08R\nstatusOnly\x12-\n\x0bresource_id\x18\r \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x05R\nresourceId\x88\x01\x01\x12*\n\x0cresource_url\x18\x0e \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x0bresourceUrl\x12-\n\x0b\x61\x63tion_type\x18\x0f \x01(\tB\x07\xbaH\x04r\x02\x10\x01H\x06R\nactionType\x88\x01\x01\x12\x62\n\x12\x61\x64\x64itional_context\x18\x14 \x03(\x0b\x32\x33.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11\x61\x64\x64itionalContext\x1a\x44\n\x16\x41\x64\x64itionalContextEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x0b\n\t_durationB\r\n\x0b_ip_addressB\t\n\x07_resultB\r\n\x0b_account_idB\t\n\x07_sourceB\x0e\n\x0c_resource_idB\x0e\n\x0c_action_type*\x86\x01\n\tEventType\x12\x1a\n\x16\x45VENT_TYPE_UNSPECIFIED\x10\x00\x12\x16\n\x12\x45VENT_TYPE_CREATED\x10\x01\x12\x16\n\x12\x45VENT_TYPE_UPDATED\x10\x02\x12\x16\n\x12\x45VENT_TYPE_DELETED\x10\x03\x12\x15\n\x11\x45VENT_TYPE_ACTION\x10\x04*\x99\x01\n\x0cResultStatus\x12\x1d\n\x19RESULT_STATUS_UNSPECIFIED\x10\x00\x12\x19\n\x15RESULT_STATUS_SUCCESS\x10\x01\x12\x19\n\x15RESULT_STATUS_FAILURE\x10\x02\x12\x1a\n\x16RESULT_STATUS_REJECTED\x10\x03\x12\x18\n\x14RESULT_STATUS_DENIED\x10\x04*g\n\x0b\x45ventSource\x12\x1c\n\x18\x45VENT_SOURCE_UNSPECIFIED\x10\x00\x12\x1b\n\x17\x45VENT_SOURCE_PUBLIC_API\x10\x01\x12\x1d\n\x19\x45VENT_SOURCE_INTERNAL_API\x10\x02:j\n\revent_options\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x8e\x03 \x01(\x0b\x32#.qdrant.cloud.event.v1.EventOptionsR\x0c\x65ventOptionsB\xef\x01\n\x19\x63om.qdrant.cloud.event.v1B\x0b\x45ventsProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1;eventv1\xa2\x02\x03QCE\xaa\x02\x15Qdrant.Cloud.Event.V1\xca\x02\x15Qdrant\\Cloud\\Event\\V1\xe2\x02!Qdrant\\Cloud\\Event\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Event::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -48,16 +49,26 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_EVENTOPTIONS'].fields_by_name['resource_url_template']._serialized_options = b'\272H\004r\002\020\001'
   _globals['_EVENTOPTIONS'].fields_by_name['action_type']._loaded_options = None
   _globals['_EVENTOPTIONS'].fields_by_name['action_type']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_RESULT'].fields_by_name['status']._loaded_options = None
+  _globals['_RESULT'].fields_by_name['status']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
+  _globals['_RESULT'].fields_by_name['status_code']._loaded_options = None
+  _globals['_RESULT'].fields_by_name['status_code']._serialized_options = b'\272H\004\032\002(\000'
+  _globals['_RESULT'].fields_by_name['error_reason']._loaded_options = None
+  _globals['_RESULT'].fields_by_name['error_reason']._serialized_options = b'\272H\007r\005\020\001\030\200\010'
   _globals['_EVENT_ADDITIONALCONTEXTENTRY']._loaded_options = None
   _globals['_EVENT_ADDITIONALCONTEXTENTRY']._serialized_options = b'8\001'
   _globals['_EVENT'].fields_by_name['id']._loaded_options = None
   _globals['_EVENT'].fields_by_name['id']._serialized_options = b'\272H\005r\003\260\001\001'
+  _globals['_EVENT'].fields_by_name['ip_address']._loaded_options = None
+  _globals['_EVENT'].fields_by_name['ip_address']._serialized_options = b'\272H\004r\002x\001'
   _globals['_EVENT'].fields_by_name['caller']._loaded_options = None
   _globals['_EVENT'].fields_by_name['caller']._serialized_options = b'\272H\003\310\001\001'
   _globals['_EVENT'].fields_by_name['account_id']._loaded_options = None
   _globals['_EVENT'].fields_by_name['account_id']._serialized_options = b'\272H\005r\003\260\001\001'
   _globals['_EVENT'].fields_by_name['source_rpc']._loaded_options = None
   _globals['_EVENT'].fields_by_name['source_rpc']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_EVENT'].fields_by_name['source']._loaded_options = None
+  _globals['_EVENT'].fields_by_name['source']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
   _globals['_EVENT'].fields_by_name['event_type']._loaded_options = None
   _globals['_EVENT'].fields_by_name['event_type']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
   _globals['_EVENT'].fields_by_name['resource_type']._loaded_options = None
@@ -68,14 +79,20 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_EVENT'].fields_by_name['resource_url']._serialized_options = b'\272H\004r\002\020\001'
   _globals['_EVENT'].fields_by_name['action_type']._loaded_options = None
   _globals['_EVENT'].fields_by_name['action_type']._serialized_options = b'\272H\004r\002\020\001'
-  _globals['_EVENTTYPE']._serialized_start=1503
-  _globals['_EVENTTYPE']._serialized_end=1637
-  _globals['_EVENTOPTIONS']._serialized_start=195
-  _globals['_EVENTOPTIONS']._serialized_end=744
-  _globals['_EVENTOPTIONS_ADDITIONALCONTEXTFIELDSENTRY']._serialized_start=654
-  _globals['_EVENTOPTIONS_ADDITIONALCONTEXTFIELDSENTRY']._serialized_end=728
-  _globals['_EVENT']._serialized_start=747
-  _globals['_EVENT']._serialized_end=1500
-  _globals['_EVENT_ADDITIONALCONTEXTENTRY']._serialized_start=1385
-  _globals['_EVENT_ADDITIONALCONTEXTENTRY']._serialized_end=1453
+  _globals['_EVENTTYPE']._serialized_start=2043
+  _globals['_EVENTTYPE']._serialized_end=2177
+  _globals['_RESULTSTATUS']._serialized_start=2180
+  _globals['_RESULTSTATUS']._serialized_end=2333
+  _globals['_EVENTSOURCE']._serialized_start=2335
+  _globals['_EVENTSOURCE']._serialized_end=2438
+  _globals['_EVENTOPTIONS']._serialized_start=227
+  _globals['_EVENTOPTIONS']._serialized_end=776
+  _globals['_EVENTOPTIONS_ADDITIONALCONTEXTFIELDSENTRY']._serialized_start=686
+  _globals['_EVENTOPTIONS_ADDITIONALCONTEXTFIELDSENTRY']._serialized_end=760
+  _globals['_RESULT']._serialized_start=779
+  _globals['_RESULT']._serialized_end=992
+  _globals['_EVENT']._serialized_start=995
+  _globals['_EVENT']._serialized_end=2040
+  _globals['_EVENT_ADDITIONALCONTEXTENTRY']._serialized_start=1875
+  _globals['_EVENT_ADDITIONALCONTEXTENTRY']._serialized_end=1943
 # @@protoc_insertion_point(module_scope)
