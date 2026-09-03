@@ -5487,7 +5487,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xff!\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xa6\"\n" +
 	"\x0eClusterService\x12\xb4\x01\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xd7\x01\n" +
 	"\n" +
@@ -5517,11 +5517,12 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"account_id\x12\x12cluster.account_id\x12\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xb8\x02\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xc7\x01\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
+	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xdf\x02\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xee\x01\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Q\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xcb\x02\n" +
+	"cluster_id\xca\xf3\x18x\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}R%\n" +
+	"\x0fbackups_deleted\x12\x12req.delete_backups\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xcb\x02\n" +
 	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xd7\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
