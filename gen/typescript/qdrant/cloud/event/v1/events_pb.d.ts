@@ -208,6 +208,15 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   source?: EventSource | undefined;
 
   /**
+   * Distributed trace / correlation id for this request (`qc-trace-id`).
+   * Omitted on legacy events or when tracing did not assign an id;
+   * new publishers should set it when available.
+   *
+   * @generated from field: optional string trace_id = 17;
+   */
+  traceId?: string | undefined;
+
+  /**
    * The type of the event.
    *
    * @generated from field: qdrant.cloud.event.v1.EventType event_type = 10;
@@ -342,6 +351,15 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: optional qdrant.cloud.event.v1.EventSource source = 16;
    */
   source?: EventSource | undefined;
+
+  /**
+   * Distributed trace / correlation id for this request (`qc-trace-id`).
+   * Omitted on legacy events or when tracing did not assign an id;
+   * new publishers should set it when available.
+   *
+   * @generated from field: optional string trace_id = 17;
+   */
+  traceId?: string | undefined;
 
   /**
    * The type of the event.

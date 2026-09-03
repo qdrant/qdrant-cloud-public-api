@@ -153,6 +153,10 @@ message Event {
     defined_only: true
     not_in: [0]
   }];
+  // Distributed trace / correlation id for this request (`qc-trace-id`).
+  // Omitted on legacy events or when tracing did not assign an id;
+  // new publishers should set it when available.
+  optional string trace_id = 17 [(buf.validate.field).string.min_len = 1];
   // The type of the event.
   EventType event_type = 10 [(buf.validate.field).enum = {
     defined_only: true
