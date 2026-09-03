@@ -412,6 +412,10 @@ type Event struct {
 	// Omitted on legacy events published before this field existed;
 	// new publishers should set it.
 	Source *EventSource `protobuf:"varint,16,opt,name=source,proto3,enum=qdrant.cloud.event.v1.EventSource,oneof" json:"source,omitempty"`
+	// Distributed trace / correlation id for this request (`qc-trace-id`).
+	// Omitted on legacy events or when tracing did not assign an id;
+	// new publishers should set it when available.
+	TraceId *string `protobuf:"bytes,17,opt,name=trace_id,json=traceId,proto3,oneof" json:"trace_id,omitempty"`
 	// The type of the event.
 	EventType EventType `protobuf:"varint,10,opt,name=event_type,json=eventType,proto3,enum=qdrant.cloud.event.v1.EventType" json:"event_type,omitempty"`
 	// The type of the resource that this event is about (e.g., "cluster", "backup").
@@ -530,6 +534,13 @@ func (x *Event) GetSource() EventSource {
 	return EventSource_EVENT_SOURCE_UNSPECIFIED
 }
 
+func (x *Event) GetTraceId() string {
+	if x != nil && x.TraceId != nil {
+		return *x.TraceId
+	}
+	return ""
+}
+
 func (x *Event) GetEventType() EventType {
 	if x != nil {
 		return x.EventType
@@ -628,7 +639,7 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\ferror_reason\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bH\x01R\verrorReason\x88\x01\x01B\x0e\n" +
 	"\f_status_codeB\x0f\n" +
-	"\r_error_reason\"\x95\b\n" +
+	"\r_error_reason\"\xcb\b\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -643,7 +654,8 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\n" +
 	"source_rpc\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n" +
 	"\x06source\x18\x10 \x01(\x0e2\".qdrant.cloud.event.v1.EventSourceB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06source\x88\x01\x01\x12K\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06source\x88\x01\x01\x12'\n" +
+	"\btrace_id\x18\x11 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\atraceId\x88\x01\x01\x12K\n" +
 	"\n" +
 	"event_type\x18\n" +
 	" \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +
@@ -651,10 +663,10 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\rresource_type\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fresourceType\x12\x1f\n" +
 	"\vstatus_only\x18\f \x01(\bR\n" +
 	"statusOnly\x12-\n" +
-	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\n" +
+	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
 	"resourceId\x88\x01\x01\x12*\n" +
 	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12-\n" +
-	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
+	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\n" +
 	"actionType\x88\x01\x01\x12b\n" +
 	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x1aD\n" +
 	"\x16AdditionalContextEntry\x12\x10\n" +
@@ -664,7 +676,8 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\v_ip_addressB\t\n" +
 	"\a_resultB\r\n" +
 	"\v_account_idB\t\n" +
-	"\a_sourceB\x0e\n" +
+	"\a_sourceB\v\n" +
+	"\t_trace_idB\x0e\n" +
 	"\f_resource_idB\x0e\n" +
 	"\f_action_type*\x86\x01\n" +
 	"\tEventType\x12\x1a\n" +
