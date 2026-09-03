@@ -29,6 +29,12 @@ class ResultStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     RESULT_STATUS_FAILURE: _ClassVar[ResultStatus]
     RESULT_STATUS_REJECTED: _ClassVar[ResultStatus]
     RESULT_STATUS_DENIED: _ClassVar[ResultStatus]
+
+class EventSource(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    EVENT_SOURCE_UNSPECIFIED: _ClassVar[EventSource]
+    EVENT_SOURCE_PUBLIC_API: _ClassVar[EventSource]
+    EVENT_SOURCE_INTERNAL_API: _ClassVar[EventSource]
 EVENT_TYPE_UNSPECIFIED: EventType
 EVENT_TYPE_CREATED: EventType
 EVENT_TYPE_UPDATED: EventType
@@ -39,6 +45,9 @@ RESULT_STATUS_SUCCESS: ResultStatus
 RESULT_STATUS_FAILURE: ResultStatus
 RESULT_STATUS_REJECTED: ResultStatus
 RESULT_STATUS_DENIED: ResultStatus
+EVENT_SOURCE_UNSPECIFIED: EventSource
+EVENT_SOURCE_PUBLIC_API: EventSource
+EVENT_SOURCE_INTERNAL_API: EventSource
 EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
@@ -78,7 +87,7 @@ class Result(_message.Message):
     def __init__(self, status: _Optional[_Union[ResultStatus, str]] = ..., status_code: _Optional[int] = ..., error_reason: _Optional[str] = ...) -> None: ...
 
 class Event(_message.Message):
-    __slots__ = ("id", "created_at", "duration", "ip_address", "result", "caller", "account_id", "source_rpc", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
+    __slots__ = ("id", "created_at", "duration", "ip_address", "result", "caller", "account_id", "source_rpc", "source", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
     class AdditionalContextEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -94,6 +103,7 @@ class Event(_message.Message):
     CALLER_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SOURCE_RPC_FIELD_NUMBER: _ClassVar[int]
+    SOURCE_FIELD_NUMBER: _ClassVar[int]
     EVENT_TYPE_FIELD_NUMBER: _ClassVar[int]
     RESOURCE_TYPE_FIELD_NUMBER: _ClassVar[int]
     STATUS_ONLY_FIELD_NUMBER: _ClassVar[int]
@@ -109,6 +119,7 @@ class Event(_message.Message):
     caller: _common_pb2.Caller
     account_id: str
     source_rpc: str
+    source: EventSource
     event_type: EventType
     resource_type: str
     status_only: bool
@@ -116,4 +127,4 @@ class Event(_message.Message):
     resource_url: str
     action_type: str
     additional_context: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., source: _Optional[_Union[EventSource, str]] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...

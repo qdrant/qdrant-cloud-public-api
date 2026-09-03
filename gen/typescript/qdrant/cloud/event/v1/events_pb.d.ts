@@ -199,6 +199,15 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   sourceRpc: string;
 
   /**
+   * Which API surface produced this event (public vs internal).
+   * Omitted on legacy events published before this field existed;
+   * new publishers should set it.
+   *
+   * @generated from field: optional qdrant.cloud.event.v1.EventSource source = 16;
+   */
+  source?: EventSource | undefined;
+
+  /**
    * The type of the event.
    *
    * @generated from field: qdrant.cloud.event.v1.EventType event_type = 10;
@@ -324,6 +333,15 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: string source_rpc = 6;
    */
   sourceRpc: string;
+
+  /**
+   * Which API surface produced this event (public vs internal).
+   * Omitted on legacy events published before this field existed;
+   * new publishers should set it.
+   *
+   * @generated from field: optional qdrant.cloud.event.v1.EventSource source = 16;
+   */
+  source?: EventSource | undefined;
 
   /**
    * The type of the event.
@@ -481,6 +499,39 @@ export enum ResultStatus {
  * Describes the enum qdrant.cloud.event.v1.ResultStatus.
  */
 export declare const ResultStatusSchema: GenEnum<ResultStatus>;
+
+/**
+ * EventSource identifies which API surface produced the event.
+ *
+ * @generated from enum qdrant.cloud.event.v1.EventSource
+ */
+export enum EventSource {
+  /**
+   * Unspecified; not a valid event source.
+   *
+   * @generated from enum value: EVENT_SOURCE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The event was produced from a public API RPC.
+   *
+   * @generated from enum value: EVENT_SOURCE_PUBLIC_API = 1;
+   */
+  PUBLIC_API = 1,
+
+  /**
+   * The event was produced from an internal API RPC.
+   *
+   * @generated from enum value: EVENT_SOURCE_INTERNAL_API = 2;
+   */
+  INTERNAL_API = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.event.v1.EventSource.
+ */
+export declare const EventSourceSchema: GenEnum<EventSource>;
 
 /**
  * The actual event options.
