@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package qdrant.serverless;
 
+import "buf/validate/validate.proto";
+
 // CollectionsService manages the collections of a qdrant serverless space.
 // Unlike the qdrant server API, it exposes only a simplified configuration:
 // the manager turns it into concrete qdrant settings, which are never
@@ -251,9 +253,18 @@ message GetCollectionResponse {
   optional uint64 point_count = 3;
 }
 
-// Lists the caller's collections. The tenant travels in metadata, so there is
-// nothing to name here.
-message ListCollectionsRequest {}
+// Lists the caller's collections. The tenant travels in metadata.
+message ListCollectionsRequest {
+  // Maximum number of collections to return. Defaults to 20 and must not
+  // exceed 100.
+  optional uint32 limit = 1 [(buf.validate.field).uint32 = {
+    gt: 0
+    lte: 100
+  }];
+  // Opaque token returned as `next_offset_token` by the previous page. Clients
+  // must not interpret this value.
+  optional string offset_token = 2;
+}
 
 // One collection in a listing.
 message CollectionSummary {
@@ -266,7 +277,9 @@ message CollectionSummary {
 
 // The caller's collections.
 message ListCollectionsResponse {
-  // Ordered by name. A collection whose creation never published a manifest is
-  // not listed: it is not servable.
+  // Collections in this page.
   repeated CollectionSummary collections = 1;
+  // Opaque token to pass as `offset_token` to retrieve the next page. Absent
+  // when there are no more results.
+  optional string next_offset_token = 2;
 }
