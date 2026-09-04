@@ -8,8 +8,16 @@ package qdrant.serverless;
 // exposed to the tenant.
 service CollectionsService {
   // Creates a collection with the given tenant-facing configuration.
+  // Runs to completion once accepted: a caller that disconnects or times out
+  // does not abort it. Idempotent on retry: a repeated create answers
+  // "already exists".
   rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse);
   // Deletes a collection and all of its data.
+  // Runs to completion once accepted: a caller that disconnects or times out
+  // does not abort it, and there is no cancel. A delete may wait for the
+  // collection's writer lock behind in-flight writes; callers should allow
+  // for that in their request timeout or retry, a retry answering
+  // deleted = false once the collection is gone.
   rpc DeleteCollection(DeleteCollectionRequest) returns (DeleteCollectionResponse);
   // Returns a single collection's configuration and stats.
   rpc GetCollection(GetCollectionRequest) returns (GetCollectionResponse);
