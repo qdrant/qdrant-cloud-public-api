@@ -1,0 +1,194 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.monitoring.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+
+// MonitoringService provides access to monitoring data for serverless spaces,
+// such as per-collection request rates, latency, vector counts, and storage usage.
+// Unlike cluster monitoring, this service does not expose logs or events.
+service MonitoringService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // Gets the summary metrics of a space in the account identified by the given ID.
+  // Metrics are aggregated per collection.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc GetSpaceSummaryMetrics(GetSpaceSummaryMetricsRequest) returns (GetSpaceSummaryMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/summary-metrics"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
+  // Metrics are aggregated per collection.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc GetSpaceUsageMetrics(GetSpaceUsageMetricsRequest) returns (GetSpaceUsageMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/usage-metrics"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+}
+
+// GetSpaceSummaryMetricsRequest is the request for the GetSpaceSummaryMetrics function.
+message GetSpaceSummaryMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional collection name to limit the response to a single collection.
+  // If omitted, metrics for all collections in the space are returned.
+  optional string collection_name = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+}
+
+// GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function.
+message GetSpaceSummaryMetricsResponse {
+  // List of metrics aggregated per collection in the space.
+  repeated SpaceCollectionMetrics collections = 1;
+}
+
+// GetSpaceUsageMetricsRequest is the request for the GetSpaceUsageMetrics function.
+message GetSpaceUsageMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the metrics query.
+  // If omitted, defaults to 1 hour ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the metrics query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
+  option (buf.validate.message).cel = {
+    id: "get_space_usage_metrics.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
+  // Aggregation function to apply to the time series data.
+  // If omitted, defaults to SUM.
+  optional Aggregator aggregator = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Optional collection name to limit the response to a single collection.
+  // If omitted, metrics for all collections in the space are returned.
+  optional string collection_name = 6 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+}
+
+// GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function.
+message GetSpaceUsageMetricsResponse {
+  // Per-collection usage metrics for the space.
+  repeated SpaceCollectionUsageMetrics collections = 1;
+}
+
+// SpaceCollectionMetrics contains a metric overview for a single collection.
+message SpaceCollectionMetrics {
+  // Name of the collection within the space.
+  string collection_name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+  // Overview of search request rates for the collection.
+  SpaceMetricOverview search_requests = 2 [(buf.validate.field).required = true];
+  // Overview of write (CRUD) request rates for the collection.
+  SpaceMetricOverview write_requests = 3 [(buf.validate.field).required = true];
+  // Overview of search latency for the collection.
+  SpaceMetricOverview search_latency = 4 [(buf.validate.field).required = true];
+  // Current number of vectors stored in the collection.
+  uint64 vector_count = 5 [(buf.validate.field).uint64.gte = 0];
+  // Current used (active) storage size of the collection, in bytes.
+  // This is actual usage. Platform or customer storage ceilings are exposed
+  // via space/collection quotas and are not part of this response.
+  uint64 used_storage_bytes = 6 [(buf.validate.field).uint64.gte = 0];
+}
+
+// SpaceMetricOverview contains average values of a metric over predefined intervals.
+message SpaceMetricOverview {
+  // Average metric values calculated over various time intervals.
+  repeated IntervalAverage avg = 1;
+}
+
+// IntervalAverage represents the average value of a metric over a specific time interval.
+message IntervalAverage {
+  // The duration of the interval.
+  google.protobuf.Duration interval = 1 [(buf.validate.field).required = true];
+  // Average value of the metric during the specified interval.
+  double value = 2 [(buf.validate.field).double.gte = 0];
+}
+
+// SpaceCollectionUsageMetrics defines per-collection usage metrics as timeseries.
+message SpaceCollectionUsageMetrics {
+  // Name of the collection within the space.
+  string collection_name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+  // Timeseries of search request rates for the collection.
+  repeated Metric search_requests = 2;
+  // Timeseries of write (CRUD) request rates for the collection.
+  repeated Metric write_requests = 3;
+  // Timeseries of search latency for the collection.
+  repeated Metric search_latency = 4;
+  // Timeseries of vector counts for the collection.
+  repeated Metric vector_count = 5;
+  // Timeseries of used (active) storage size for the collection, in bytes.
+  repeated Metric used_storage_bytes = 6;
+}
+
+// A single metric data point.
+message Metric {
+  // Timestamp of the data point.
+  google.protobuf.Timestamp timestamp = 1 [(buf.validate.field).required = true];
+  // Numerical value of the metric at the given timestamp.
+  double value = 2 [(buf.validate.field).double.gte = 0];
+}
+
+// Aggregator defines how metrics should be aggregated over time.
+enum Aggregator {
+  // Unspecified aggregation function.
+  AGGREGATOR_UNSPECIFIED = 0;
+  // SUM aggregation function.
+  AGGREGATOR_SUM = 1;
+  // AVG aggregation function.
+  AGGREGATOR_AVG = 2;
+  // MAX aggregation function.
+  AGGREGATOR_MAX = 3;
+  // MIN aggregation function.
+  AGGREGATOR_MIN = 4;
+}
