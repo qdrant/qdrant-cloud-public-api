@@ -1018,6 +1018,22 @@
       },
       "description": "Caller identifies the authenticated actor that performed an action on a resource."
     },
+    "v1CollectionSettings": {
+      "type": "object",
+      "properties": {
+        "platformMaxSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+        },
+        "maxSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional customer-defined maximum number of documents per collection, used for cost control.\nWhen set, it must not exceed `platform_max_size`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
+        }
+      },
+      "description": "CollectionSettings configures per-collection document limits for a space."
+    },
     "v1CreateBackupResponse": {
       "type": "object",
       "properties": {
@@ -1139,6 +1155,26 @@
       "type": "object",
       "description": "RestoreBackupResponse is the response from the RestoreBackup function.\n\nEmpty"
     },
+    "v1SearcherSettings": {
+      "type": "object",
+      "properties": {
+        "idleTimeout": {
+          "type": "string",
+          "description": "Idle timeout after which idle search workers may be scaled down.\nValid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.\nThis field is writable via UpdateSpace."
+        },
+        "platformMaxWorkers": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+        },
+        "maxWorkers": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum number of search workers for this space.\nValid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.\nThis field is writable via UpdateSpace."
+        }
+      },
+      "description": "SearcherSettings configures search-worker behavior for a space."
+    },
     "v1SpaceConfiguration": {
       "type": "object",
       "properties": {
@@ -1164,17 +1200,25 @@
         "platformMaxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits."
         },
         "maxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Optional customer-defined storage cap, used for cost control.\nWhen set, it must not exceed `platform_max_storage_bytes`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
+          "description": "Optional customer-defined storage cap, used for cost control.\nWhen set, it must not exceed `platform_max_storage_bytes`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies.\nDeprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits."
         },
         "maxCollectionsPerSpace": {
           "type": "string",
           "format": "uint64",
           "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+        },
+        "collectionSettings": {
+          "$ref": "#/definitions/v1CollectionSettings",
+          "description": "Per-collection size limits for this space.\nPlatform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace."
+        },
+        "searcherSettings": {
+          "$ref": "#/definitions/v1SearcherSettings",
+          "description": "Search-worker settings for this space.\nPlatform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace."
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."

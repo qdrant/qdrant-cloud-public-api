@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import duration_pb2 as _duration_pb2
 from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
@@ -167,20 +168,42 @@ class Space(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., configuration: _Optional[_Union[SpaceConfiguration, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
 
 class SpaceConfiguration(_message.Message):
-    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "platform_max_storage_bytes", "max_storage_bytes", "max_collections_per_space")
+    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "platform_max_storage_bytes", "max_storage_bytes", "max_collections_per_space", "collection_settings", "searcher_settings")
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_IP_SOURCE_RANGES_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_ORIGINS_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
     MAX_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
     MAX_COLLECTIONS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    SEARCHER_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
     allowed_ip_source_ranges: _containers.RepeatedScalarFieldContainer[str]
     allowed_origins: _containers.RepeatedScalarFieldContainer[str]
     platform_max_storage_bytes: int
     max_storage_bytes: int
     max_collections_per_space: int
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., platform_max_storage_bytes: _Optional[int] = ..., max_storage_bytes: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ...) -> None: ...
+    collection_settings: CollectionSettings
+    searcher_settings: SearcherSettings
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., platform_max_storage_bytes: _Optional[int] = ..., max_storage_bytes: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ...) -> None: ...
+
+class CollectionSettings(_message.Message):
+    __slots__ = ("platform_max_size", "max_size")
+    PLATFORM_MAX_SIZE_FIELD_NUMBER: _ClassVar[int]
+    MAX_SIZE_FIELD_NUMBER: _ClassVar[int]
+    platform_max_size: int
+    max_size: int
+    def __init__(self, platform_max_size: _Optional[int] = ..., max_size: _Optional[int] = ...) -> None: ...
+
+class SearcherSettings(_message.Message):
+    __slots__ = ("idle_timeout", "platform_max_workers", "max_workers")
+    IDLE_TIMEOUT_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
+    MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
+    idle_timeout: _duration_pb2.Duration
+    platform_max_workers: int
+    max_workers: int
+    def __init__(self, idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ...) -> None: ...
 
 class SpaceState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")

@@ -4,6 +4,7 @@ package qdrant.cloud.serverless.space.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
@@ -14,7 +15,7 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 2
+    minor: 3
     patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -450,16 +451,64 @@ message SpaceConfiguration {
 
   // Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
-  uint64 platform_max_storage_bytes = 13 [(buf.validate.field).uint64.gte = 0];
+  // Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits.
+  uint64 platform_max_storage_bytes = 13 [
+    deprecated = true,
+    (buf.validate.field).uint64.gte = 0
+  ];
 
   // Optional customer-defined storage cap, used for cost control.
   // When set, it must not exceed `platform_max_storage_bytes`.
   // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-  optional uint64 max_storage_bytes = 14 [(buf.validate.field).uint64.gte = 0];
+  // Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits.
+  optional uint64 max_storage_bytes = 14 [
+    deprecated = true,
+    (buf.validate.field).uint64.gte = 0
+  ];
 
   // Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 max_collections_per_space = 15 [(buf.validate.field).uint64.gte = 0];
+
+  // Per-collection size limits for this space.
+  // Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
+  CollectionSettings collection_settings = 16;
+
+  // Search-worker settings for this space.
+  // Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
+  SearcherSettings searcher_settings = 17;
+}
+
+// CollectionSettings configures per-collection document limits for a space.
+message CollectionSettings {
+  // Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.
+  // This is a read-only field. A value of 0 means unlimited.
+  uint64 platform_max_size = 1 [(buf.validate.field).uint64.gte = 0];
+
+  // Optional customer-defined maximum number of documents per collection, used for cost control.
+  // When set, it must not exceed `platform_max_size`.
+  // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+  optional uint64 max_size = 2 [(buf.validate.field).uint64.gte = 0];
+}
+
+// SearcherSettings configures search-worker behavior for a space.
+message SearcherSettings {
+  // Idle timeout after which idle search workers may be scaled down.
+  // Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
+  // This field is writable via UpdateSpace.
+  optional google.protobuf.Duration idle_timeout = 1 [(buf.validate.field).duration = {
+    gte: {seconds: 60}
+    lte: {seconds: 900}
+  }];
+
+  // Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.
+  // This is a read-only field. A value of 0 means unlimited.
+  uint64 platform_max_workers = 2 [(buf.validate.field).uint64.gte = 0];
+
+  // Maximum number of search workers for this space.
+  // Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
+  // This field is writable via UpdateSpace.
+  optional uint64 max_workers = 3 [(buf.validate.field).uint64 = {gte: 1}];
 }
 
 // SpaceStatePhase defines the operational phases of a Qdrant serverless space.
