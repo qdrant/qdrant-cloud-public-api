@@ -49,6 +49,7 @@ service MonitoringService {
     };
   }
   // Gets the inference token usage metrics for a space.
+  // Metrics are aggregated per collection and may be paginated (a space can have many collections).
   // Provide `inference_model_id` to limit the response to a single model.
   // Required permissions:
   // - read:serverless_spaces
@@ -64,7 +65,8 @@ service MonitoringService {
     };
   }
   // Lists the alerts for a space in the account identified by the given ID.
-  // Sorted by last_firing_at (most recent first).
+  // Alerts are scoped per collection, sorted by last_firing_at (most recent first),
+  // and may be paginated (a space can have many collections).
   // Required permissions:
   // - read:serverless_spaces
   rpc ListSpaceAlerts(ListSpaceAlertsRequest) returns (ListSpaceAlertsResponse) {
@@ -226,12 +228,58 @@ message GetSpaceInferenceMetricsRequest {
   }];
   // Optional identifier for a specific inference model to filter metrics by.
   optional string inference_model_id = 6 [(buf.validate.field).string.min_len = 1];
+  // Optional filter on collection names. At most one variant may be set.
+  // If omitted, metrics for collections in the space are returned (paginated when page_size is set).
+  oneof collection_filter {
+    // Exact collection name. Returns metrics for that collection only.
+    string collection_name = 7 [(buf.validate.field).string = {
+      min_len: 1
+      max_len: 255
+      pattern: "^[a-zA-Z0-9-_.]+$"
+    }];
+    // Case-insensitive substring matched against collection names.
+    // Returns metrics for every collection whose name contains this value.
+    string collection_name_contains = 8 [(buf.validate.field).string = {
+      min_len: 1
+      max_len: 255
+      pattern: "^[a-zA-Z0-9-_.]+$"
+    }];
+  }
+  // Maximum number of collection metrics to return.
+  // If not specified, all matching items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetSpaceInferenceMetricsResponse is the response from the GetSpaceInferenceMetrics function.
 message GetSpaceInferenceMetricsResponse {
-  // Per-model inference token usage metrics for the space.
-  repeated SpaceInferenceModelMetrics models = 1;
+  // Per-collection inference token usage metrics for the space.
+  repeated SpaceCollectionInferenceMetrics items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// SpaceCollectionInferenceMetrics groups inference metrics for a single collection.
+message SpaceCollectionInferenceMetrics {
+  // Name of the collection within the space.
+  string collection_name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+  // Per-model inference token usage metrics for the collection.
+  repeated SpaceInferenceModelMetrics models = 2;
 }
 
 // SpaceInferenceModelMetrics groups histogram data for a single inference model.
@@ -254,16 +302,50 @@ message ListSpaceAlertsRequest {
   // Optional alert-state filter. If omitted (empty), alerts in ALL states are
   // returned; if set, only alerts in that state are returned.
   optional SpaceAlertState state = 3;
+  // Optional filter on collection names. At most one variant may be set.
+  // If omitted, alerts for collections in the space are returned (paginated when page_size is set).
+  oneof collection_filter {
+    // Exact collection name. Returns alerts for that collection only.
+    string collection_name = 4 [(buf.validate.field).string = {
+      min_len: 1
+      max_len: 255
+      pattern: "^[a-zA-Z0-9-_.]+$"
+    }];
+    // Case-insensitive substring matched against collection names.
+    // Returns alerts for every collection whose name contains this value.
+    string collection_name_contains = 5 [(buf.validate.field).string = {
+      min_len: 1
+      max_len: 255
+      pattern: "^[a-zA-Z0-9-_.]+$"
+    }];
+  }
+  // Maximum number of alerts to return.
+  // If not specified, all matching items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // ListSpaceAlertsResponse is the response from the ListSpaceAlerts function.
 message ListSpaceAlertsResponse {
   // The alerts for the space, sorted by last_firing_at (descending) - most recent first.
-  repeated SpaceAlert alerts = 1;
+  repeated SpaceAlert items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// SpaceAlert is a single alert instance for a space.
+// SpaceAlert is a single alert instance for a collection in a space.
 message SpaceAlert {
   // Stable identifier for this firing instance (in GUID format).
   // Re-firing a previously-resolved alert produces a new ID.
@@ -281,8 +363,8 @@ message SpaceAlert {
   // The state of this alert. Always populated so callers can tell each row's
   // state apart when the request applies no state filter.
   SpaceAlertState state = 7;
-  // Optional collection name related to this alert, when the alert is scoped to a collection.
-  optional string collection_name = 8 [(buf.validate.field).string = {
+  // Name of the collection this alert relates to.
+  string collection_name = 8 [(buf.validate.field).string = {
     min_len: 1
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"

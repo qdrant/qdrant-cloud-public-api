@@ -369,6 +369,49 @@ export declare type GetSpaceInferenceMetricsRequest = Message<"qdrant.cloud.serv
    * @generated from field: optional string inference_model_id = 6;
    */
   inferenceModelId?: string | undefined;
+
+  /**
+   * Optional filter on collection names. At most one variant may be set.
+   * If omitted, metrics for collections in the space are returned (paginated when page_size is set).
+   *
+   * @generated from oneof qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.collection_filter
+   */
+  collectionFilter: {
+    /**
+     * Exact collection name. Returns metrics for that collection only.
+     *
+     * @generated from field: string collection_name = 7;
+     */
+    value: string;
+    case: "collectionName";
+  } | {
+    /**
+     * Case-insensitive substring matched against collection names.
+     * Returns metrics for every collection whose name contains this value.
+     *
+     * @generated from field: string collection_name_contains = 8;
+     */
+    value: string;
+    case: "collectionNameContains";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Maximum number of collection metrics to return.
+   * If not specified, all matching items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number | undefined;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string | undefined;
 };
 
 export declare type GetSpaceInferenceMetricsRequestValid = GetSpaceInferenceMetricsRequest;
@@ -386,11 +429,27 @@ export declare const GetSpaceInferenceMetricsRequestSchema: GenMessage<GetSpaceI
  */
 export declare type GetSpaceInferenceMetricsResponse = Message<"qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse"> & {
   /**
-   * Per-model inference token usage metrics for the space.
+   * Per-collection inference token usage metrics for the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics items = 1;
    */
-  models: SpaceInferenceModelMetrics[];
+  items: SpaceCollectionInferenceMetrics[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -400,11 +459,27 @@ export declare type GetSpaceInferenceMetricsResponse = Message<"qdrant.cloud.ser
  */
 export declare type GetSpaceInferenceMetricsResponseValid = Message<"qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse"> & {
   /**
-   * Per-model inference token usage metrics for the space.
+   * Per-collection inference token usage metrics for the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics items = 1;
    */
-  models: SpaceInferenceModelMetricsValid[];
+  items: SpaceCollectionInferenceMetricsValid[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -412,6 +487,54 @@ export declare type GetSpaceInferenceMetricsResponseValid = Message<"qdrant.clou
  * Use `create(GetSpaceInferenceMetricsResponseSchema)` to create a new message.
  */
 export declare const GetSpaceInferenceMetricsResponseSchema: GenMessage<GetSpaceInferenceMetricsResponse, {validType: GetSpaceInferenceMetricsResponseValid}>;
+
+/**
+ * SpaceCollectionInferenceMetrics groups inference metrics for a single collection.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
+ */
+export declare type SpaceCollectionInferenceMetrics = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics"> & {
+  /**
+   * Name of the collection within the space.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * Per-model inference token usage metrics for the collection.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 2;
+   */
+  models: SpaceInferenceModelMetrics[];
+};
+
+/**
+ * SpaceCollectionInferenceMetrics groups inference metrics for a single collection.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
+ */
+export declare type SpaceCollectionInferenceMetricsValid = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics"> & {
+  /**
+   * Name of the collection within the space.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * Per-model inference token usage metrics for the collection.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 2;
+   */
+  models: SpaceInferenceModelMetricsValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics.
+ * Use `create(SpaceCollectionInferenceMetricsSchema)` to create a new message.
+ */
+export declare const SpaceCollectionInferenceMetricsSchema: GenMessage<SpaceCollectionInferenceMetrics, {validType: SpaceCollectionInferenceMetricsValid}>;
 
 /**
  * SpaceInferenceModelMetrics groups histogram data for a single inference model.
@@ -491,6 +614,49 @@ export declare type ListSpaceAlertsRequest = Message<"qdrant.cloud.serverless.mo
    * @generated from field: optional qdrant.cloud.serverless.monitoring.v1.SpaceAlertState state = 3;
    */
   state?: SpaceAlertState | undefined;
+
+  /**
+   * Optional filter on collection names. At most one variant may be set.
+   * If omitted, alerts for collections in the space are returned (paginated when page_size is set).
+   *
+   * @generated from oneof qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.collection_filter
+   */
+  collectionFilter: {
+    /**
+     * Exact collection name. Returns alerts for that collection only.
+     *
+     * @generated from field: string collection_name = 4;
+     */
+    value: string;
+    case: "collectionName";
+  } | {
+    /**
+     * Case-insensitive substring matched against collection names.
+     * Returns alerts for every collection whose name contains this value.
+     *
+     * @generated from field: string collection_name_contains = 5;
+     */
+    value: string;
+    case: "collectionNameContains";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Maximum number of alerts to return.
+   * If not specified, all matching items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number | undefined;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string | undefined;
 };
 
 export declare type ListSpaceAlertsRequestValid = ListSpaceAlertsRequest;
@@ -510,9 +676,25 @@ export declare type ListSpaceAlertsResponse = Message<"qdrant.cloud.serverless.m
   /**
    * The alerts for the space, sorted by last_firing_at (descending) - most recent first.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceAlert alerts = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceAlert items = 1;
    */
-  alerts: SpaceAlert[];
+  items: SpaceAlert[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 export declare type ListSpaceAlertsResponseValid = ListSpaceAlertsResponse;
@@ -524,7 +706,7 @@ export declare type ListSpaceAlertsResponseValid = ListSpaceAlertsResponse;
 export declare const ListSpaceAlertsResponseSchema: GenMessage<ListSpaceAlertsResponse, {validType: ListSpaceAlertsResponseValid}>;
 
 /**
- * SpaceAlert is a single alert instance for a space.
+ * SpaceAlert is a single alert instance for a collection in a space.
  *
  * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceAlert
  */
@@ -581,11 +763,11 @@ export declare type SpaceAlert = Message<"qdrant.cloud.serverless.monitoring.v1.
   state: SpaceAlertState;
 
   /**
-   * Optional collection name related to this alert, when the alert is scoped to a collection.
+   * Name of the collection this alert relates to.
    *
-   * @generated from field: optional string collection_name = 8;
+   * @generated from field: string collection_name = 8;
    */
-  collectionName?: string | undefined;
+  collectionName: string;
 };
 
 export declare type SpaceAlertValid = SpaceAlert;
@@ -1184,6 +1366,7 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Gets the inference token usage metrics for a space.
+   * Metrics are aggregated per collection and may be paginated (a space can have many collections).
    * Provide `inference_model_id` to limit the response to a single model.
    * Required permissions:
    * - read:serverless_spaces
@@ -1197,7 +1380,8 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Lists the alerts for a space in the account identified by the given ID.
-   * Sorted by last_firing_at (most recent first).
+   * Alerts are scoped per collection, sorted by last_firing_at (most recent first),
+   * and may be paginated (a space can have many collections).
    * Required permissions:
    * - read:serverless_spaces
    *

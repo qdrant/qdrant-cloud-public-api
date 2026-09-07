@@ -67,6 +67,7 @@ class MonitoringServiceServicer(object):
 
     def GetSpaceInferenceMetrics(self, request, context):
         """Gets the inference token usage metrics for a space.
+        Metrics are aggregated per collection and may be paginated (a space can have many collections).
         Provide `inference_model_id` to limit the response to a single model.
         Required permissions:
         - read:serverless_spaces
@@ -77,7 +78,8 @@ class MonitoringServiceServicer(object):
 
     def ListSpaceAlerts(self, request, context):
         """Lists the alerts for a space in the account identified by the given ID.
-        Sorted by last_firing_at (most recent first).
+        Alerts are scoped per collection, sorted by last_firing_at (most recent first),
+        and may be paginated (a space can have many collections).
         Required permissions:
         - read:serverless_spaces
         """

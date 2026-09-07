@@ -130,26 +130,46 @@ class GetSpaceUsageMetricsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceInferenceMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "since", "until", "interval", "inference_model_id")
+    __slots__ = ("account_id", "space_id", "since", "until", "interval", "inference_model_id", "collection_name", "collection_name_contains", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     SINCE_FIELD_NUMBER: _ClassVar[int]
     UNTIL_FIELD_NUMBER: _ClassVar[int]
     INTERVAL_FIELD_NUMBER: _ClassVar[int]
     INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
     interval: InferenceMetricsInterval
     inference_model_id: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ..., inference_model_id: _Optional[str] = ...) -> None: ...
+    collection_name: str
+    collection_name_contains: str
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ..., inference_model_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceInferenceMetricsResponse(_message.Message):
-    __slots__ = ("models",)
+    __slots__ = ("items", "total_size", "next_page_token")
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[SpaceCollectionInferenceMetrics]
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionInferenceMetrics, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+
+class SpaceCollectionInferenceMetrics(_message.Message):
+    __slots__ = ("collection_name", "models")
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     MODELS_FIELD_NUMBER: _ClassVar[int]
+    collection_name: str
     models: _containers.RepeatedCompositeFieldContainer[SpaceInferenceModelMetrics]
-    def __init__(self, models: _Optional[_Iterable[_Union[SpaceInferenceModelMetrics, _Mapping]]] = ...) -> None: ...
+    def __init__(self, collection_name: _Optional[str] = ..., models: _Optional[_Iterable[_Union[SpaceInferenceModelMetrics, _Mapping]]] = ...) -> None: ...
 
 class SpaceInferenceModelMetrics(_message.Message):
     __slots__ = ("inference_model_id", "values")
@@ -160,20 +180,32 @@ class SpaceInferenceModelMetrics(_message.Message):
     def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class ListSpaceAlertsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "state")
+    __slots__ = ("account_id", "space_id", "state", "collection_name", "collection_name_contains", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
     state: SpaceAlertState
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ...) -> None: ...
+    collection_name: str
+    collection_name_contains: str
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListSpaceAlertsResponse(_message.Message):
-    __slots__ = ("alerts",)
-    ALERTS_FIELD_NUMBER: _ClassVar[int]
-    alerts: _containers.RepeatedCompositeFieldContainer[SpaceAlert]
-    def __init__(self, alerts: _Optional[_Iterable[_Union[SpaceAlert, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("items", "total_size", "next_page_token")
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[SpaceAlert]
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceAlert, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class SpaceAlert(_message.Message):
     __slots__ = ("id", "type", "severity", "title", "description", "last_firing_at", "state", "collection_name")

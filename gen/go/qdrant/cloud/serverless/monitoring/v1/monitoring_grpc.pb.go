@@ -44,12 +44,14 @@ type MonitoringServiceClient interface {
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(ctx context.Context, in *GetSpaceUsageMetricsRequest, opts ...grpc.CallOption) (*GetSpaceUsageMetricsResponse, error)
 	// Gets the inference token usage metrics for a space.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Provide `inference_model_id` to limit the response to a single model.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceInferenceMetrics(ctx context.Context, in *GetSpaceInferenceMetricsRequest, opts ...grpc.CallOption) (*GetSpaceInferenceMetricsResponse, error)
 	// Lists the alerts for a space in the account identified by the given ID.
-	// Sorted by last_firing_at (most recent first).
+	// Alerts are scoped per collection, sorted by last_firing_at (most recent first),
+	// and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	ListSpaceAlerts(ctx context.Context, in *ListSpaceAlertsRequest, opts ...grpc.CallOption) (*ListSpaceAlertsResponse, error)
@@ -122,12 +124,14 @@ type MonitoringServiceServer interface {
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(context.Context, *GetSpaceUsageMetricsRequest) (*GetSpaceUsageMetricsResponse, error)
 	// Gets the inference token usage metrics for a space.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Provide `inference_model_id` to limit the response to a single model.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceInferenceMetrics(context.Context, *GetSpaceInferenceMetricsRequest) (*GetSpaceInferenceMetricsResponse, error)
 	// Lists the alerts for a space in the account identified by the given ID.
-	// Sorted by last_firing_at (most recent first).
+	// Alerts are scoped per collection, sorted by last_firing_at (most recent first),
+	// and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	ListSpaceAlerts(context.Context, *ListSpaceAlertsRequest) (*ListSpaceAlertsResponse, error)
