@@ -98,10 +98,18 @@ type GetSpaceSummaryMetricsRequest struct {
 	// This is a required field.
 	SpaceId string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
 	// Optional collection name to limit the response to a single collection.
-	// If omitted, metrics for all collections in the space are returned.
+	// If omitted, metrics for collections in the space are returned (paginated when page_size is set).
 	CollectionName *string `protobuf:"bytes,3,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Maximum number of collection metrics to return.
+	// If not specified, all matching items are returned.
+	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	// When paginating, all other parameters provided to the request must match
+	// the call that provided the page token.
+	PageToken     *string `protobuf:"bytes,21,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetSpaceSummaryMetricsRequest) Reset() {
@@ -155,11 +163,31 @@ func (x *GetSpaceSummaryMetricsRequest) GetCollectionName() string {
 	return ""
 }
 
+func (x *GetSpaceSummaryMetricsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *GetSpaceSummaryMetricsRequest) GetPageToken() string {
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
+	}
+	return ""
+}
+
 // GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function.
 type GetSpaceSummaryMetricsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of metrics aggregated per collection in the space.
-	Collections   []*SpaceCollectionMetrics `protobuf:"bytes,1,rep,name=collections,proto3" json:"collections,omitempty"`
+	Items []*SpaceCollectionMetrics `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The total number of items available (useful in relation with pagination).
+	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -194,11 +222,25 @@ func (*GetSpaceSummaryMetricsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetSpaceSummaryMetricsResponse) GetCollections() []*SpaceCollectionMetrics {
+func (x *GetSpaceSummaryMetricsResponse) GetItems() []*SpaceCollectionMetrics {
 	if x != nil {
-		return x.Collections
+		return x.Items
 	}
 	return nil
+}
+
+func (x *GetSpaceSummaryMetricsResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
+	}
+	return 0
+}
+
+func (x *GetSpaceSummaryMetricsResponse) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
 }
 
 // GetSpaceUsageMetricsRequest is the request for the GetSpaceUsageMetrics function.
@@ -221,10 +263,18 @@ type GetSpaceUsageMetricsRequest struct {
 	// If omitted, defaults to SUM.
 	Aggregator *Aggregator `protobuf:"varint,5,opt,name=aggregator,proto3,enum=qdrant.cloud.serverless.monitoring.v1.Aggregator,oneof" json:"aggregator,omitempty"`
 	// Optional collection name to limit the response to a single collection.
-	// If omitted, metrics for all collections in the space are returned.
+	// If omitted, metrics for collections in the space are returned (paginated when page_size is set).
 	CollectionName *string `protobuf:"bytes,6,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Maximum number of collection metrics to return.
+	// If not specified, all matching items are returned.
+	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	// When paginating, all other parameters provided to the request must match
+	// the call that provided the page token.
+	PageToken     *string `protobuf:"bytes,21,opt,name=page_token,json=pageToken,proto3,oneof" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetSpaceUsageMetricsRequest) Reset() {
@@ -299,11 +349,31 @@ func (x *GetSpaceUsageMetricsRequest) GetCollectionName() string {
 	return ""
 }
 
+func (x *GetSpaceUsageMetricsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *GetSpaceUsageMetricsRequest) GetPageToken() string {
+	if x != nil && x.PageToken != nil {
+		return *x.PageToken
+	}
+	return ""
+}
+
 // GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function.
 type GetSpaceUsageMetricsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Per-collection usage metrics for the space.
-	Collections   []*SpaceCollectionUsageMetrics `protobuf:"bytes,1,rep,name=collections,proto3" json:"collections,omitempty"`
+	Items []*SpaceCollectionUsageMetrics `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The total number of items available (useful in relation with pagination).
+	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string `protobuf:"bytes,11,opt,name=next_page_token,json=nextPageToken,proto3,oneof" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -338,11 +408,25 @@ func (*GetSpaceUsageMetricsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetSpaceUsageMetricsResponse) GetCollections() []*SpaceCollectionUsageMetrics {
+func (x *GetSpaceUsageMetricsResponse) GetItems() []*SpaceCollectionUsageMetrics {
 	if x != nil {
-		return x.Collections
+		return x.Items
 	}
 	return nil
+}
+
+func (x *GetSpaceUsageMetricsResponse) GetTotalSize() int32 {
+	if x != nil && x.TotalSize != nil {
+		return *x.TotalSize
+	}
+	return 0
+}
+
+func (x *GetSpaceUsageMetricsResponse) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
 }
 
 // SpaceCollectionMetrics contains a metric overview for a single collection.
@@ -689,15 +773,28 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xce\x01\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xc6\x02\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12K\n" +
-	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x88\x01\x01B\x12\n" +
-	"\x10_collection_name\"\x81\x01\n" +
-	"\x1eGetSpaceSummaryMetricsResponse\x12_\n" +
-	"\vcollections\x18\x01 \x03(\v2=.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsR\vcollections\"\xcf\x04\n" +
+	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x88\x01\x01\x12,\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\n" +
+	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x12\n" +
+	"\x10_collection_nameB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_page_token\"\xfb\x01\n" +
+	"\x1eGetSpaceSummaryMetricsResponse\x12S\n" +
+	"\x05items\x18\x01 \x03(\v2=.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
+	"\x10_next_page_token\"\xc7\x05\n" +
 	"\x1bGetSpaceUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -708,14 +805,27 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"aggregator\x18\x05 \x01(\x0e21.qdrant.cloud.serverless.monitoring.v1.AggregatorB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\n" +
 	"aggregator\x88\x01\x01\x12K\n" +
-	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x03R\x0ecollectionName\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
+	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x03R\x0ecollectionName\x88\x01\x01\x12,\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
+	"\n" +
+	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\tpageToken\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
 	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_untilB\r\n" +
 	"\v_aggregatorB\x12\n" +
-	"\x10_collection_name\"\x84\x01\n" +
-	"\x1cGetSpaceUsageMetricsResponse\x12d\n" +
-	"\vcollections\x18\x01 \x03(\v2B.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetricsR\vcollections\"\x86\x04\n" +
+	"\x10_collection_nameB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_page_token\"\xfe\x01\n" +
+	"\x1cGetSpaceUsageMetricsResponse\x12X\n" +
+	"\x05items\x18\x01 \x03(\v2B.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetricsR\x05items\x12+\n" +
+	"\n" +
+	"total_size\x18\n" +
+	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
+	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
+	"\v_total_sizeB\x12\n" +
+	"\x10_next_page_token\"\x86\x04\n" +
 	"\x16SpaceCollectionMetrics\x12F\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\x12k\n" +
 	"\x0fsearch_requests\x18\x02 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x0esearchRequests\x12i\n" +
@@ -781,11 +891,11 @@ var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_goTypes = []any{
 	(*durationpb.Duration)(nil),            // 11: google.protobuf.Duration
 }
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_depIdxs = []int32{
-	5,  // 0: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.collections:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
+	5,  // 0: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
 	10, // 1: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
 	10, // 2: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.serverless.monitoring.v1.Aggregator
-	8,  // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.collections:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
+	8,  // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
 	6,  // 5: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
 	6,  // 6: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
 	6,  // 7: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
@@ -814,7 +924,9 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 		return
 	}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[0].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[1].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[2].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

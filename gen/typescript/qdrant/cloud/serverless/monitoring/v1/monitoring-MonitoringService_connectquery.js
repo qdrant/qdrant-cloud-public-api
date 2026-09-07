@@ -6,7 +6,7 @@ import { MonitoringService } from "./monitoring_pb.js";
 
 /**
  * Gets the summary metrics of a space in the account identified by the given ID.
- * Metrics are aggregated per collection.
+ * Metrics are aggregated per collection and may be paginated (a space can have many collections).
  * Required permissions:
  * - read:serverless_spaces
  *
@@ -16,7 +16,7 @@ export const getSpaceSummaryMetrics = MonitoringService.method.getSpaceSummaryMe
 
 /**
  * Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
- * Metrics are aggregated per collection.
+ * Metrics are aggregated per collection and may be paginated (a space can have many collections).
  * Required permissions:
  * - read:serverless_spaces
  *

@@ -36,11 +36,29 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
 
   /**
    * Optional collection name to limit the response to a single collection.
-   * If omitted, metrics for all collections in the space are returned.
+   * If omitted, metrics for collections in the space are returned (paginated when page_size is set).
    *
    * @generated from field: optional string collection_name = 3;
    */
   collectionName?: string | undefined;
+
+  /**
+   * Maximum number of collection metrics to return.
+   * If not specified, all matching items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number | undefined;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string | undefined;
 };
 
 export declare type GetSpaceSummaryMetricsRequestValid = GetSpaceSummaryMetricsRequest;
@@ -60,9 +78,25 @@ export declare type GetSpaceSummaryMetricsResponse = Message<"qdrant.cloud.serve
   /**
    * List of metrics aggregated per collection in the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics collections = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics items = 1;
    */
-  collections: SpaceCollectionMetrics[];
+  items: SpaceCollectionMetrics[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -74,9 +108,25 @@ export declare type GetSpaceSummaryMetricsResponseValid = Message<"qdrant.cloud.
   /**
    * List of metrics aggregated per collection in the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics collections = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics items = 1;
    */
-  collections: SpaceCollectionMetricsValid[];
+  items: SpaceCollectionMetricsValid[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -134,11 +184,29 @@ export declare type GetSpaceUsageMetricsRequest = Message<"qdrant.cloud.serverle
 
   /**
    * Optional collection name to limit the response to a single collection.
-   * If omitted, metrics for all collections in the space are returned.
+   * If omitted, metrics for collections in the space are returned (paginated when page_size is set).
    *
    * @generated from field: optional string collection_name = 6;
    */
   collectionName?: string | undefined;
+
+  /**
+   * Maximum number of collection metrics to return.
+   * If not specified, all matching items are returned.
+   *
+   * @generated from field: optional int32 page_size = 20;
+   */
+  pageSize?: number | undefined;
+
+  /**
+   * A page token, received from a previous call.
+   * Provide this to retrieve the subsequent page.
+   * When paginating, all other parameters provided to the request must match
+   * the call that provided the page token.
+   *
+   * @generated from field: optional string page_token = 21;
+   */
+  pageToken?: string | undefined;
 };
 
 export declare type GetSpaceUsageMetricsRequestValid = GetSpaceUsageMetricsRequest;
@@ -158,9 +226,25 @@ export declare type GetSpaceUsageMetricsResponse = Message<"qdrant.cloud.serverl
   /**
    * Per-collection usage metrics for the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics collections = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics items = 1;
    */
-  collections: SpaceCollectionUsageMetrics[];
+  items: SpaceCollectionUsageMetrics[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -172,9 +256,25 @@ export declare type GetSpaceUsageMetricsResponseValid = Message<"qdrant.cloud.se
   /**
    * Per-collection usage metrics for the space.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics collections = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics items = 1;
    */
-  collections: SpaceCollectionUsageMetricsValid[];
+  items: SpaceCollectionUsageMetricsValid[];
+
+  /**
+   * The total number of items available (useful in relation with pagination).
+   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   *
+   * @generated from field: optional int32 total_size = 10;
+   */
+  totalSize?: number | undefined;
+
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page.
+   * If this field is omitted, there are no subsequent pages.
+   *
+   * @generated from field: optional string next_page_token = 11;
+   */
+  nextPageToken?: string | undefined;
 };
 
 /**
@@ -582,7 +682,7 @@ export declare const AggregatorSchema: GenEnum<Aggregator>;
 export declare const MonitoringService: GenService<{
   /**
    * Gets the summary metrics of a space in the account identified by the given ID.
-   * Metrics are aggregated per collection.
+   * Metrics are aggregated per collection and may be paginated (a space can have many collections).
    * Required permissions:
    * - read:serverless_spaces
    *
@@ -595,7 +695,7 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-   * Metrics are aggregated per collection.
+   * Metrics are aggregated per collection and may be paginated (a space can have many collections).
    * Required permissions:
    * - read:serverless_spaces
    *

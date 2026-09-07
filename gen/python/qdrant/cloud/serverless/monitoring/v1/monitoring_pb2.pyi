@@ -28,42 +28,58 @@ AGGREGATOR_MAX: Aggregator
 AGGREGATOR_MIN: Aggregator
 
 class GetSpaceSummaryMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "collection_name")
+    __slots__ = ("account_id", "space_id", "collection_name", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
     collection_name: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ...) -> None: ...
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceSummaryMetricsResponse(_message.Message):
-    __slots__ = ("collections",)
-    COLLECTIONS_FIELD_NUMBER: _ClassVar[int]
-    collections: _containers.RepeatedCompositeFieldContainer[SpaceCollectionMetrics]
-    def __init__(self, collections: _Optional[_Iterable[_Union[SpaceCollectionMetrics, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("items", "total_size", "next_page_token")
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[SpaceCollectionMetrics]
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionMetrics, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceUsageMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "since", "until", "aggregator", "collection_name")
+    __slots__ = ("account_id", "space_id", "since", "until", "aggregator", "collection_name", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     SINCE_FIELD_NUMBER: _ClassVar[int]
     UNTIL_FIELD_NUMBER: _ClassVar[int]
     AGGREGATOR_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
     since: _timestamp_pb2.Timestamp
     until: _timestamp_pb2.Timestamp
     aggregator: Aggregator
     collection_name: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ..., collection_name: _Optional[str] = ...) -> None: ...
+    page_size: int
+    page_token: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ..., collection_name: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceUsageMetricsResponse(_message.Message):
-    __slots__ = ("collections",)
-    COLLECTIONS_FIELD_NUMBER: _ClassVar[int]
-    collections: _containers.RepeatedCompositeFieldContainer[SpaceCollectionUsageMetrics]
-    def __init__(self, collections: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("items", "total_size", "next_page_token")
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[SpaceCollectionUsageMetrics]
+    total_size: int
+    next_page_token: str
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class SpaceCollectionMetrics(_message.Message):
     __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "vector_count", "used_storage_bytes")

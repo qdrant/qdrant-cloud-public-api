@@ -18,7 +18,7 @@
   "paths": {
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/summary-metrics": {
       "get": {
-        "summary": "Gets the summary metrics of a space in the account identified by the given ID.\nMetrics are aggregated per collection.\nRequired permissions:\n- read:serverless_spaces",
+        "summary": "Gets the summary metrics of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
         "operationId": "MonitoringService_GetSpaceSummaryMetrics",
         "responses": {
           "200": {
@@ -51,7 +51,22 @@
           },
           {
             "name": "collectionName",
-            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for all collections in the space are returned.",
+            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for collections in the space are returned (paginated when page_size is set).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -64,7 +79,7 @@
     },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/usage-metrics": {
       "get": {
-        "summary": "Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.\nMetrics are aggregated per collection.\nRequired permissions:\n- read:serverless_spaces",
+        "summary": "Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
         "operationId": "MonitoringService_GetSpaceUsageMetrics",
         "responses": {
           "200": {
@@ -128,7 +143,22 @@
           },
           {
             "name": "collectionName",
-            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for all collections in the space are returned.",
+            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for collections in the space are returned (paginated when page_size is set).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -184,13 +214,22 @@
     "v1GetSpaceSummaryMetricsResponse": {
       "type": "object",
       "properties": {
-        "collections": {
+        "items": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1SpaceCollectionMetrics"
           },
           "description": "List of metrics aggregated per collection in the space."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "description": "GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function."
@@ -198,13 +237,22 @@
     "v1GetSpaceUsageMetricsResponse": {
       "type": "object",
       "properties": {
-        "collections": {
+        "items": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1SpaceCollectionUsageMetrics"
           },
           "description": "Per-collection usage metrics for the space."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
         }
       },
       "description": "GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function."

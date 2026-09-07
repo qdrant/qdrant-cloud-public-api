@@ -32,12 +32,12 @@ const (
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceClient interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(ctx context.Context, in *GetSpaceSummaryMetricsRequest, opts ...grpc.CallOption) (*GetSpaceSummaryMetricsResponse, error)
 	// Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(ctx context.Context, in *GetSpaceUsageMetricsRequest, opts ...grpc.CallOption) (*GetSpaceUsageMetricsResponse, error)
@@ -80,12 +80,12 @@ func (c *monitoringServiceClient) GetSpaceUsageMetrics(ctx context.Context, in *
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceServer interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(context.Context, *GetSpaceSummaryMetricsRequest) (*GetSpaceSummaryMetricsResponse, error)
 	// Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection.
+	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(context.Context, *GetSpaceUsageMetricsRequest) (*GetSpaceUsageMetricsResponse, error)

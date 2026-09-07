@@ -19,7 +19,7 @@ service MonitoringService {
     patch: 0
   };
   // Gets the summary metrics of a space in the account identified by the given ID.
-  // Metrics are aggregated per collection.
+  // Metrics are aggregated per collection and may be paginated (a space can have many collections).
   // Required permissions:
   // - read:serverless_spaces
   rpc GetSpaceSummaryMetrics(GetSpaceSummaryMetricsRequest) returns (GetSpaceSummaryMetricsResponse) {
@@ -34,7 +34,7 @@ service MonitoringService {
     };
   }
   // Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-  // Metrics are aggregated per collection.
+  // Metrics are aggregated per collection and may be paginated (a space can have many collections).
   // Required permissions:
   // - read:serverless_spaces
   rpc GetSpaceUsageMetrics(GetSpaceUsageMetricsRequest) returns (GetSpaceUsageMetricsResponse) {
@@ -60,18 +60,35 @@ message GetSpaceSummaryMetricsRequest {
   // This is a required field.
   string space_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Optional collection name to limit the response to a single collection.
-  // If omitted, metrics for all collections in the space are returned.
+  // If omitted, metrics for collections in the space are returned (paginated when page_size is set).
   optional string collection_name = 3 [(buf.validate.field).string = {
     min_len: 1
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"
   }];
+  // Maximum number of collection metrics to return.
+  // If not specified, all matching items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function.
 message GetSpaceSummaryMetricsResponse {
   // List of metrics aggregated per collection in the space.
-  repeated SpaceCollectionMetrics collections = 1;
+  repeated SpaceCollectionMetrics items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetSpaceUsageMetricsRequest is the request for the GetSpaceUsageMetrics function.
@@ -101,18 +118,35 @@ message GetSpaceUsageMetricsRequest {
     not_in: [0]
   }];
   // Optional collection name to limit the response to a single collection.
-  // If omitted, metrics for all collections in the space are returned.
+  // If omitted, metrics for collections in the space are returned (paginated when page_size is set).
   optional string collection_name = 6 [(buf.validate.field).string = {
     min_len: 1
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"
   }];
+  // Maximum number of collection metrics to return.
+  // If not specified, all matching items are returned.
+  optional int32 page_size = 20 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 21 [(buf.validate.field).string.min_len = 1];
 }
 
 // GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function.
 message GetSpaceUsageMetricsResponse {
   // Per-collection usage metrics for the space.
-  repeated SpaceCollectionUsageMetrics collections = 1;
+  repeated SpaceCollectionUsageMetrics items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
 }
 
 // SpaceCollectionMetrics contains a metric overview for a single collection.
