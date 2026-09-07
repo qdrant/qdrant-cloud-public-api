@@ -7,7 +7,7 @@ from qdrant.cloud.serverless.quota.v1 import quota_pb2 as qdrant_dot_cloud_dot_s
 
 class QuotaServiceStub(object):
     """QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
-    Per-space storage caps live on Space.configuration (UpdateSpace).
+    Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
     """
 
     def __init__(self, channel):
@@ -25,7 +25,7 @@ class QuotaServiceStub(object):
 
 class QuotaServiceServicer(object):
     """QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
-    Per-space storage caps live on Space.configuration (UpdateSpace).
+    Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
     """
 
     def GetQuotas(self, request, context):
@@ -55,7 +55,7 @@ def add_QuotaServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class QuotaService(object):
     """QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
-    Per-space storage caps live on Space.configuration (UpdateSpace).
+    Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
     """
 
     @staticmethod

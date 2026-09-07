@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -1062,16 +1063,28 @@ type SpaceConfiguration struct {
 	AllowedOrigins []string `protobuf:"bytes,12,rep,name=allowed_origins,json=allowedOrigins,proto3" json:"allowed_origins,omitempty"`
 	// Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
+	// Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
+	//
+	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 	PlatformMaxStorageBytes uint64 `protobuf:"varint,13,opt,name=platform_max_storage_bytes,json=platformMaxStorageBytes,proto3" json:"platform_max_storage_bytes,omitempty"`
 	// Optional customer-defined storage cap, used for cost control.
 	// When set, it must not exceed `platform_max_storage_bytes`.
 	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+	// Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
+	//
+	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 	MaxStorageBytes *uint64 `protobuf:"varint,14,opt,name=max_storage_bytes,json=maxStorageBytes,proto3,oneof" json:"max_storage_bytes,omitempty"`
 	// Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	MaxCollectionsPerSpace uint64 `protobuf:"varint,15,opt,name=max_collections_per_space,json=maxCollectionsPerSpace,proto3" json:"max_collections_per_space,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Per-collection size limits for this space.
+	// Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
+	CollectionSettings *CollectionSettings `protobuf:"bytes,16,opt,name=collection_settings,json=collectionSettings,proto3" json:"collection_settings,omitempty"`
+	// Search-worker settings for this space.
+	// Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
+	SearcherSettings *SearcherSettings `protobuf:"bytes,17,opt,name=searcher_settings,json=searcherSettings,proto3" json:"searcher_settings,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SpaceConfiguration) Reset() {
@@ -1125,6 +1138,7 @@ func (x *SpaceConfiguration) GetAllowedOrigins() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 func (x *SpaceConfiguration) GetPlatformMaxStorageBytes() uint64 {
 	if x != nil {
 		return x.PlatformMaxStorageBytes
@@ -1132,6 +1146,7 @@ func (x *SpaceConfiguration) GetPlatformMaxStorageBytes() uint64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 func (x *SpaceConfiguration) GetMaxStorageBytes() uint64 {
 	if x != nil && x.MaxStorageBytes != nil {
 		return *x.MaxStorageBytes
@@ -1142,6 +1157,148 @@ func (x *SpaceConfiguration) GetMaxStorageBytes() uint64 {
 func (x *SpaceConfiguration) GetMaxCollectionsPerSpace() uint64 {
 	if x != nil {
 		return x.MaxCollectionsPerSpace
+	}
+	return 0
+}
+
+func (x *SpaceConfiguration) GetCollectionSettings() *CollectionSettings {
+	if x != nil {
+		return x.CollectionSettings
+	}
+	return nil
+}
+
+func (x *SpaceConfiguration) GetSearcherSettings() *SearcherSettings {
+	if x != nil {
+		return x.SearcherSettings
+	}
+	return nil
+}
+
+// CollectionSettings configures per-collection size limits for a space.
+type CollectionSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	PlatformMaxSize uint64 `protobuf:"varint,1,opt,name=platform_max_size,json=platformMaxSize,proto3" json:"platform_max_size,omitempty"`
+	// Optional customer-defined maximum size in bytes per collection, used for cost control.
+	// When set, it must not exceed `platform_max_size`.
+	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+	MaxSize       *uint64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3,oneof" json:"max_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CollectionSettings) Reset() {
+	*x = CollectionSettings{}
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CollectionSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CollectionSettings) ProtoMessage() {}
+
+func (x *CollectionSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CollectionSettings.ProtoReflect.Descriptor instead.
+func (*CollectionSettings) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *CollectionSettings) GetPlatformMaxSize() uint64 {
+	if x != nil {
+		return x.PlatformMaxSize
+	}
+	return 0
+}
+
+func (x *CollectionSettings) GetMaxSize() uint64 {
+	if x != nil && x.MaxSize != nil {
+		return *x.MaxSize
+	}
+	return 0
+}
+
+// SearcherSettings configures search-worker behavior for a space.
+type SearcherSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Idle timeout after which idle search workers may be scaled down.
+	// Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
+	// This field is writable via UpdateSpace.
+	IdleTimeout *durationpb.Duration `protobuf:"bytes,1,opt,name=idle_timeout,json=idleTimeout,proto3,oneof" json:"idle_timeout,omitempty"`
+	// Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	PlatformMaxWorkers uint64 `protobuf:"varint,2,opt,name=platform_max_workers,json=platformMaxWorkers,proto3" json:"platform_max_workers,omitempty"`
+	// Maximum number of search workers per collection in this space.
+	// For example, if set to 2 and the space has 3 collections, the total maximum is 6.
+	// Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
+	// This field is writable via UpdateSpace.
+	MaxWorkers    *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearcherSettings) Reset() {
+	*x = SearcherSettings{}
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearcherSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearcherSettings) ProtoMessage() {}
+
+func (x *SearcherSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearcherSettings.ProtoReflect.Descriptor instead.
+func (*SearcherSettings) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SearcherSettings) GetIdleTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.IdleTimeout
+	}
+	return nil
+}
+
+func (x *SearcherSettings) GetPlatformMaxWorkers() uint64 {
+	if x != nil {
+		return x.PlatformMaxWorkers
+	}
+	return 0
+}
+
+func (x *SearcherSettings) GetMaxWorkers() uint64 {
+	if x != nil && x.MaxWorkers != nil {
+		return *x.MaxWorkers
 	}
 	return 0
 }
@@ -1164,7 +1321,7 @@ type SpaceState struct {
 
 func (x *SpaceState) Reset() {
 	*x = SpaceState{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1176,7 +1333,7 @@ func (x *SpaceState) String() string {
 func (*SpaceState) ProtoMessage() {}
 
 func (x *SpaceState) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1189,7 +1346,7 @@ func (x *SpaceState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceState.ProtoReflect.Descriptor instead.
 func (*SpaceState) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SpaceState) GetPhase() SpaceStatePhase {
@@ -1229,7 +1386,7 @@ type SpaceEndpoint struct {
 
 func (x *SpaceEndpoint) Reset() {
 	*x = SpaceEndpoint{}
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[17]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1241,7 +1398,7 @@ func (x *SpaceEndpoint) String() string {
 func (*SpaceEndpoint) ProtoMessage() {}
 
 func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[17]
+	mi := &file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1411,7 @@ func (x *SpaceEndpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpaceEndpoint.ProtoReflect.Descriptor instead.
 func (*SpaceEndpoint) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{17}
+	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SpaceEndpoint) GetUrl() string {
@@ -1282,7 +1439,7 @@ var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
+	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
 	"\x11ListSpacesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -1371,16 +1528,29 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12B\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateR\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\x92\x04\n" +
+	"\x16_cost_allocation_label\"\xde\x05\n" +
 	"\x12SpaceConfiguration\x12D\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
 	"\x0fallowed_origins\x18\f \x03(\tBh\xbaHe\x92\x01b\x10\n" +
-	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12D\n" +
-	"\x1aplatform_max_storage_bytes\x18\r \x01(\x04B\a\xbaH\x042\x02(\x00R\x17platformMaxStorageBytes\x128\n" +
-	"\x11max_storage_bytes\x18\x0e \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\x0fmaxStorageBytes\x88\x01\x01\x12B\n" +
-	"\x19max_collections_per_space\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpaceB\x14\n" +
-	"\x12_max_storage_bytes\"\xd6\x01\n" +
+	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12F\n" +
+	"\x1aplatform_max_storage_bytes\x18\r \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01R\x17platformMaxStorageBytes\x12:\n" +
+	"\x11max_storage_bytes\x18\x0e \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01H\x00R\x0fmaxStorageBytes\x88\x01\x01\x12B\n" +
+	"\x19max_collections_per_space\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
+	"\x13collection_settings\x18\x10 \x01(\v24.qdrant.cloud.serverless.space.v1.CollectionSettingsR\x12collectionSettings\x12_\n" +
+	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsB\x14\n" +
+	"\x12_max_storage_bytes\"\x7f\n" +
+	"\x12CollectionSettings\x123\n" +
+	"\x11platform_max_size\x18\x01 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
+	"\bmax_size\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\amaxSize\x88\x01\x01B\v\n" +
+	"\t_max_size\"\xf1\x01\n" +
+	"\x10SearcherSettings\x12R\n" +
+	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x129\n" +
+	"\x14platform_max_workers\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
+	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x01R\n" +
+	"maxWorkers\x88\x01\x01B\x0f\n" +
+	"\r_idle_timeoutB\x0e\n" +
+	"\f_max_workers\"\xd6\x01\n" +
 	"\n" +
 	"SpaceState\x12Q\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
@@ -1421,7 +1591,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\x80\x02\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18\x85\x01\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xd3\x01\n" +
-	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x02B\xb2\x02\n" +
+	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x03B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 
@@ -1438,7 +1608,7 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_serverless_space_v1_space_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
 	(SpaceStatePhase)(0),                  // 0: qdrant.cloud.serverless.space.v1.SpaceStatePhase
 	(*ListSpacesRequest)(nil),             // 1: qdrant.cloud.serverless.space.v1.ListSpacesRequest
@@ -1457,12 +1627,15 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_goTypes = []any{
 	(*SuggestSpaceNameResponse)(nil),      // 14: qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
 	(*Space)(nil),                         // 15: qdrant.cloud.serverless.space.v1.Space
 	(*SpaceConfiguration)(nil),            // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	(*SpaceState)(nil),                    // 17: qdrant.cloud.serverless.space.v1.SpaceState
-	(*SpaceEndpoint)(nil),                 // 18: qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	(*fieldmaskpb.FieldMask)(nil),         // 19: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),         // 20: google.protobuf.Timestamp
-	(*v1.KeyValue)(nil),                   // 21: qdrant.cloud.common.v1.KeyValue
-	(*v1.Caller)(nil),                     // 22: qdrant.cloud.common.v1.Caller
+	(*CollectionSettings)(nil),            // 17: qdrant.cloud.serverless.space.v1.CollectionSettings
+	(*SearcherSettings)(nil),              // 18: qdrant.cloud.serverless.space.v1.SearcherSettings
+	(*SpaceState)(nil),                    // 19: qdrant.cloud.serverless.space.v1.SpaceState
+	(*SpaceEndpoint)(nil),                 // 20: qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	(*fieldmaskpb.FieldMask)(nil),         // 21: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),         // 22: google.protobuf.Timestamp
+	(*v1.KeyValue)(nil),                   // 23: qdrant.cloud.common.v1.KeyValue
+	(*v1.Caller)(nil),                     // 24: qdrant.cloud.common.v1.Caller
+	(*durationpb.Duration)(nil),           // 25: google.protobuf.Duration
 }
 var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	15, // 0: qdrant.cloud.serverless.space.v1.ListSpacesResponse.items:type_name -> qdrant.cloud.serverless.space.v1.Space
@@ -1471,38 +1644,41 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	15, // 3: qdrant.cloud.serverless.space.v1.CreateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	15, // 4: qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
 	15, // 5: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	19, // 6: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	21, // 6: qdrant.cloud.serverless.space.v1.UpdateSpaceRequest.update_mask:type_name -> google.protobuf.FieldMask
 	15, // 7: qdrant.cloud.serverless.space.v1.UpdateSpaceResponse.space:type_name -> qdrant.cloud.serverless.space.v1.Space
-	20, // 8: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
-	20, // 9: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
-	21, // 10: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	22, // 8: qdrant.cloud.serverless.space.v1.Space.created_at:type_name -> google.protobuf.Timestamp
+	22, // 9: qdrant.cloud.serverless.space.v1.Space.deleted_at:type_name -> google.protobuf.Timestamp
+	23, // 10: qdrant.cloud.serverless.space.v1.Space.labels:type_name -> qdrant.cloud.common.v1.KeyValue
 	16, // 11: qdrant.cloud.serverless.space.v1.Space.configuration:type_name -> qdrant.cloud.serverless.space.v1.SpaceConfiguration
-	22, // 12: qdrant.cloud.serverless.space.v1.Space.created_by:type_name -> qdrant.cloud.common.v1.Caller
-	22, // 13: qdrant.cloud.serverless.space.v1.Space.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
-	22, // 14: qdrant.cloud.serverless.space.v1.Space.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
-	17, // 15: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
-	20, // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
-	0,  // 17: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
-	18, // 18: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
-	1,  // 19: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
-	3,  // 20: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
-	5,  // 21: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
-	7,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
-	9,  // 23: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
-	11, // 24: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
-	13, // 25: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:input_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest
-	2,  // 26: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
-	4,  // 27: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
-	6,  // 28: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
-	8,  // 29: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
-	10, // 30: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
-	12, // 31: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
-	14, // 32: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:output_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
-	26, // [26:33] is the sub-list for method output_type
-	19, // [19:26] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	24, // 12: qdrant.cloud.serverless.space.v1.Space.created_by:type_name -> qdrant.cloud.common.v1.Caller
+	24, // 13: qdrant.cloud.serverless.space.v1.Space.last_updated_by:type_name -> qdrant.cloud.common.v1.Caller
+	24, // 14: qdrant.cloud.serverless.space.v1.Space.deleted_by:type_name -> qdrant.cloud.common.v1.Caller
+	19, // 15: qdrant.cloud.serverless.space.v1.Space.state:type_name -> qdrant.cloud.serverless.space.v1.SpaceState
+	22, // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
+	17, // 17: qdrant.cloud.serverless.space.v1.SpaceConfiguration.collection_settings:type_name -> qdrant.cloud.serverless.space.v1.CollectionSettings
+	18, // 18: qdrant.cloud.serverless.space.v1.SpaceConfiguration.searcher_settings:type_name -> qdrant.cloud.serverless.space.v1.SearcherSettings
+	25, // 19: qdrant.cloud.serverless.space.v1.SearcherSettings.idle_timeout:type_name -> google.protobuf.Duration
+	0,  // 20: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
+	20, // 21: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
+	1,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
+	3,  // 23: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:input_type -> qdrant.cloud.serverless.space.v1.GetSpaceRequest
+	5,  // 24: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceRequest
+	7,  // 25: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:input_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest
+	9,  // 26: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:input_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceRequest
+	11, // 27: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:input_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceRequest
+	13, // 28: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:input_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest
+	2,  // 29: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:output_type -> qdrant.cloud.serverless.space.v1.ListSpacesResponse
+	4,  // 30: qdrant.cloud.serverless.space.v1.SpaceService.GetSpace:output_type -> qdrant.cloud.serverless.space.v1.GetSpaceResponse
+	6,  // 31: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpace:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceResponse
+	8,  // 32: qdrant.cloud.serverless.space.v1.SpaceService.CreateSpaceFromBackup:output_type -> qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse
+	10, // 33: qdrant.cloud.serverless.space.v1.SpaceService.UpdateSpace:output_type -> qdrant.cloud.serverless.space.v1.UpdateSpaceResponse
+	12, // 34: qdrant.cloud.serverless.space.v1.SpaceService.DeleteSpace:output_type -> qdrant.cloud.serverless.space.v1.DeleteSpaceResponse
+	14, // 35: qdrant.cloud.serverless.space.v1.SpaceService.SuggestSpaceName:output_type -> qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse
+	29, // [29:36] is the sub-list for method output_type
+	22, // [22:29] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_v1_space_proto_init() }
@@ -1516,13 +1692,15 @@ func file_qdrant_cloud_serverless_space_v1_space_proto_init() {
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[14].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[15].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[16].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[17].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_v1_space_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc), len(file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
