@@ -1,3 +1,4 @@
+from buf.validate import validate_pb2 as _validate_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -246,8 +247,12 @@ class GetCollectionResponse(_message.Message):
     def __init__(self, exists: _Optional[bool] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ...) -> None: ...
 
 class ListCollectionsRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("limit", "offset_token")
+    LIMIT_FIELD_NUMBER: _ClassVar[int]
+    OFFSET_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    limit: int
+    offset_token: str
+    def __init__(self, limit: _Optional[int] = ..., offset_token: _Optional[str] = ...) -> None: ...
 
 class CollectionSummary(_message.Message):
     __slots__ = ("collection_name", "point_count")
@@ -258,7 +263,9 @@ class CollectionSummary(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ..., point_count: _Optional[int] = ...) -> None: ...
 
 class ListCollectionsResponse(_message.Message):
-    __slots__ = ("collections",)
+    __slots__ = ("collections", "next_offset_token")
     COLLECTIONS_FIELD_NUMBER: _ClassVar[int]
+    NEXT_OFFSET_TOKEN_FIELD_NUMBER: _ClassVar[int]
     collections: _containers.RepeatedCompositeFieldContainer[CollectionSummary]
-    def __init__(self, collections: _Optional[_Iterable[_Union[CollectionSummary, _Mapping]]] = ...) -> None: ...
+    next_offset_token: str
+    def __init__(self, collections: _Optional[_Iterable[_Union[CollectionSummary, _Mapping]]] = ..., next_offset_token: _Optional[str] = ...) -> None: ...

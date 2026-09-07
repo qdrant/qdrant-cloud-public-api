@@ -708,12 +708,26 @@ export declare type GetCollectionResponseValid = GetCollectionResponse;
 export declare const GetCollectionResponseSchema: GenMessage<GetCollectionResponse, {validType: GetCollectionResponseValid}>;
 
 /**
- * Lists the caller's collections. The tenant travels in metadata, so there is
- * nothing to name here.
+ * Lists the caller's collections. The tenant travels in metadata.
  *
  * @generated from message qdrant.serverless.ListCollectionsRequest
  */
 export declare type ListCollectionsRequest = Message<"qdrant.serverless.ListCollectionsRequest"> & {
+  /**
+   * Maximum number of collections to return. Defaults to 20 and must not
+   * exceed 100.
+   *
+   * @generated from field: optional uint32 limit = 1;
+   */
+  limit?: number | undefined;
+
+  /**
+   * Opaque token returned as `next_offset_token` by the previous page. Clients
+   * must not interpret this value.
+   *
+   * @generated from field: optional string offset_token = 2;
+   */
+  offsetToken?: string | undefined;
 };
 
 export declare type ListCollectionsRequestValid = ListCollectionsRequest;
@@ -761,12 +775,19 @@ export declare const CollectionSummarySchema: GenMessage<CollectionSummary, {val
  */
 export declare type ListCollectionsResponse = Message<"qdrant.serverless.ListCollectionsResponse"> & {
   /**
-   * Ordered by name. A collection whose creation never published a manifest is
-   * not listed: it is not servable.
+   * Collections in this page.
    *
    * @generated from field: repeated qdrant.serverless.CollectionSummary collections = 1;
    */
   collections: CollectionSummary[];
+
+  /**
+   * Opaque token to pass as `offset_token` to retrieve the next page. Absent
+   * when there are no more results.
+   *
+   * @generated from field: optional string next_offset_token = 2;
+   */
+  nextOffsetToken?: string | undefined;
 };
 
 export declare type ListCollectionsResponseValid = ListCollectionsResponse;
