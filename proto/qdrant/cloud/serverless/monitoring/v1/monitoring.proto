@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
 // MonitoringService provides access to monitoring data for serverless spaces,
-// such as per-collection request rates, latency, vector counts, and storage usage.
+// such as per-collection metrics, inference token usage, and alerts.
 // Unlike cluster monitoring, this service does not expose logs or events.
 service MonitoringService {
   // The API version of this service.
@@ -42,6 +42,36 @@ service MonitoringService {
     option (common.v1.permissions) = "read:serverless_spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/usage-metrics"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // Gets the inference token usage metrics for a space.
+  // Provide `inference_model_id` to limit the response to a single model.
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc GetSpaceInferenceMetrics(GetSpaceInferenceMetricsRequest) returns (GetSpaceInferenceMetricsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/metrics/inference"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+  }
+  // Lists the alerts for a space in the account identified by the given ID.
+  // Sorted by last_firing_at (most recent first).
+  // Required permissions:
+  // - read:serverless_spaces
+  rpc ListSpaceAlerts(ListSpaceAlertsRequest) returns (ListSpaceAlertsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:serverless_spaces";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts"};
     // log fields
     option (common.v1.log_fields) = {
       name: "space_id"
@@ -169,6 +199,96 @@ message GetSpaceUsageMetricsResponse {
   optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
 }
 
+// GetSpaceInferenceMetricsRequest is the request for the GetSpaceInferenceMetrics function.
+message GetSpaceInferenceMetricsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional start time for the inference metrics query.
+  // If omitted, defaults to 7 days ago.
+  optional google.protobuf.Timestamp since = 3;
+  // Optional end time for the inference metrics query.
+  // If omitted, defaults to current time.
+  optional google.protobuf.Timestamp until = 4;
+  option (buf.validate.message).cel = {
+    id: "get_space_inference_metrics.until_gt_since"
+    message: "until must be after since"
+    expression: "!has(this.since) || !has(this.until) || this.until > this.since"
+  };
+  // Optional aggregation interval for histogram buckets.
+  optional InferenceMetricsInterval interval = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Optional identifier for a specific inference model to filter metrics by.
+  optional string inference_model_id = 6 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetSpaceInferenceMetricsResponse is the response from the GetSpaceInferenceMetrics function.
+message GetSpaceInferenceMetricsResponse {
+  // Per-model inference token usage metrics for the space.
+  repeated SpaceInferenceModelMetrics models = 1;
+}
+
+// SpaceInferenceModelMetrics groups histogram data for a single inference model.
+message SpaceInferenceModelMetrics {
+  // Identifier of the inference model.
+  string inference_model_id = 1 [(buf.validate.field).string.min_len = 1];
+  // Aggregated histogram values for the inference model.
+  repeated Metric values = 2;
+}
+
+// ListSpaceAlertsRequest is the request for the ListSpaceAlerts function.
+message ListSpaceAlertsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier for the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Optional alert-state filter. If omitted (empty), alerts in ALL states are
+  // returned; if set, only alerts in that state are returned.
+  optional SpaceAlertState state = 3;
+}
+
+// ListSpaceAlertsResponse is the response from the ListSpaceAlerts function.
+message ListSpaceAlertsResponse {
+  // The alerts for the space, sorted by last_firing_at (descending) - most recent first.
+  repeated SpaceAlert alerts = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// SpaceAlert is a single alert instance for a space.
+message SpaceAlert {
+  // Stable identifier for this firing instance (in GUID format).
+  // Re-firing a previously-resolved alert produces a new ID.
+  string id = 1;
+  // The category of alert.
+  SpaceAlertType type = 2;
+  // Severity tier, derived server-side from the alert type.
+  SpaceAlertSeverity severity = 3;
+  // Human-readable title (English, at most 80 characters).
+  string title = 4;
+  // Human-readable description (English, at most 300 characters).
+  string description = 5;
+  // UTC timestamp of the most recent firing observation for this instance.
+  google.protobuf.Timestamp last_firing_at = 6;
+  // The state of this alert. Always populated so callers can tell each row's
+  // state apart when the request applies no state filter.
+  SpaceAlertState state = 7;
+  // Optional collection name related to this alert, when the alert is scoped to a collection.
+  optional string collection_name = 8 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+}
+
 // SpaceCollectionMetrics contains a metric overview for a single collection.
 message SpaceCollectionMetrics {
   // Name of the collection within the space.
@@ -245,4 +365,55 @@ enum Aggregator {
   AGGREGATOR_MAX = 3;
   // MIN aggregation function.
   AGGREGATOR_MIN = 4;
+}
+
+// InferenceMetricsInterval defines the histogram bucket size for inference metrics.
+enum InferenceMetricsInterval {
+  // Interval is unspecified; defaults to DAY.
+  INFERENCE_METRICS_INTERVAL_UNSPECIFIED = 0;
+  // Buckets are aggregated per day.
+  INFERENCE_METRICS_INTERVAL_DAY = 1;
+  // Buckets are aggregated per week.
+  INFERENCE_METRICS_INTERVAL_WEEK = 2;
+  // Buckets are aggregated per month.
+  INFERENCE_METRICS_INTERVAL_MONTH = 3;
+}
+
+// SpaceAlertState mirrors the backend state of a space alert. It is used both as
+// the optional request-side filter AND echoed per row on the SpaceAlert response.
+enum SpaceAlertState {
+  // The alert state is unspecified.
+  SPACE_ALERT_STATE_UNSPECIFIED = 0;
+  // The alert is currently firing.
+  SPACE_ALERT_STATE_FIRING = 1;
+  // The alert has been resolved by the backend.
+  SPACE_ALERT_STATE_RESOLVED = 2;
+}
+
+// SpaceAlertType is the category of a space alert. Mirrors the backend alert types.
+enum SpaceAlertType {
+  // The alert type is unspecified.
+  SPACE_ALERT_TYPE_UNSPECIFIED = 0;
+  // Collection storage usage is over the configured size threshold.
+  SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED = 1;
+  // The space has too many collections.
+  SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS = 2;
+  // A space API key is about to expire.
+  SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE = 3;
+  // The serverless space is unhealthy.
+  SPACE_ALERT_TYPE_SPACE_UNHEALTHY = 4;
+}
+
+// SpaceAlertSeverity is the tier used by the UI to render badge color and announce severity to
+// assistive tech. Color alone never conveys severity - clients must render the label.
+enum SpaceAlertSeverity {
+  // Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
+  // there is intentionally no separate UNKNOWN value.
+  SPACE_ALERT_SEVERITY_UNSPECIFIED = 0;
+  // Informational severity.
+  SPACE_ALERT_SEVERITY_INFO = 1;
+  // Warning severity.
+  SPACE_ALERT_SEVERITY_WARNING = 2;
+  // Critical severity.
+  SPACE_ALERT_SEVERITY_CRITICAL = 3;
 }

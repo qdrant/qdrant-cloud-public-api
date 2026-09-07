@@ -22,3 +22,21 @@ export const getSpaceSummaryMetrics: typeof MonitoringService["method"]["getSpac
  * @generated from rpc qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics
  */
 export const getSpaceUsageMetrics: typeof MonitoringService["method"]["getSpaceUsageMetrics"];
+/**
+ * Gets the inference token usage metrics for a space.
+ * Provide `inference_model_id` to limit the response to a single model.
+ * Required permissions:
+ * - read:serverless_spaces
+ *
+ * @generated from rpc qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics
+ */
+export const getSpaceInferenceMetrics: typeof MonitoringService["method"]["getSpaceInferenceMetrics"];
+/**
+ * Lists the alerts for a space in the account identified by the given ID.
+ * Sorted by last_firing_at (most recent first).
+ * Required permissions:
+ * - read:serverless_spaces
+ *
+ * @generated from rpc qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts
+ */
+export const listSpaceAlerts: typeof MonitoringService["method"]["listSpaceAlerts"];

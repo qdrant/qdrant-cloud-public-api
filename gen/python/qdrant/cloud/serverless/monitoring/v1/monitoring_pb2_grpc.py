@@ -7,7 +7,7 @@ from qdrant.cloud.serverless.monitoring.v1 import monitoring_pb2 as qdrant_dot_c
 
 class MonitoringServiceStub(object):
     """MonitoringService provides access to monitoring data for serverless spaces,
-    such as per-collection request rates, latency, vector counts, and storage usage.
+    such as per-collection metrics, inference token usage, and alerts.
     Unlike cluster monitoring, this service does not expose logs or events.
     """
 
@@ -27,11 +27,21 @@ class MonitoringServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsResponse.FromString,
                 _registered_method=True)
+        self.GetSpaceInferenceMetrics = channel.unary_unary(
+                '/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceInferenceMetrics',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsResponse.FromString,
+                _registered_method=True)
+        self.ListSpaceAlerts = channel.unary_unary(
+                '/qdrant.cloud.serverless.monitoring.v1.MonitoringService/ListSpaceAlerts',
+                request_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsResponse.FromString,
+                _registered_method=True)
 
 
 class MonitoringServiceServicer(object):
     """MonitoringService provides access to monitoring data for serverless spaces,
-    such as per-collection request rates, latency, vector counts, and storage usage.
+    such as per-collection metrics, inference token usage, and alerts.
     Unlike cluster monitoring, this service does not expose logs or events.
     """
 
@@ -55,6 +65,26 @@ class MonitoringServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetSpaceInferenceMetrics(self, request, context):
+        """Gets the inference token usage metrics for a space.
+        Provide `inference_model_id` to limit the response to a single model.
+        Required permissions:
+        - read:serverless_spaces
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSpaceAlerts(self, request, context):
+        """Lists the alerts for a space in the account identified by the given ID.
+        Sorted by last_firing_at (most recent first).
+        Required permissions:
+        - read:serverless_spaces
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MonitoringServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -68,6 +98,16 @@ def add_MonitoringServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsResponse.SerializeToString,
             ),
+            'GetSpaceInferenceMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSpaceInferenceMetrics,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsResponse.SerializeToString,
+            ),
+            'ListSpaceAlerts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSpaceAlerts,
+                    request_deserializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'qdrant.cloud.serverless.monitoring.v1.MonitoringService', rpc_method_handlers)
@@ -78,7 +118,7 @@ def add_MonitoringServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class MonitoringService(object):
     """MonitoringService provides access to monitoring data for serverless spaces,
-    such as per-collection request rates, latency, vector counts, and storage usage.
+    such as per-collection metrics, inference token usage, and alerts.
     Unlike cluster monitoring, this service does not expose logs or events.
     """
 
@@ -126,6 +166,60 @@ class MonitoringService(object):
             '/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceUsageMetrics',
             qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsRequest.SerializeToString,
             qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceUsageMetricsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetSpaceInferenceMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceInferenceMetrics',
+            qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.GetSpaceInferenceMetricsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListSpaceAlerts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.serverless.monitoring.v1.MonitoringService/ListSpaceAlerts',
+            qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_serverless_dot_monitoring_dot_v1_dot_monitoring__pb2.ListSpaceAlertsResponse.FromString,
             options,
             channel_credentials,
             insecure,

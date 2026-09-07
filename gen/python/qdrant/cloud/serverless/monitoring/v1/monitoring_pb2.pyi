@@ -21,11 +21,55 @@ class Aggregator(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     AGGREGATOR_AVG: _ClassVar[Aggregator]
     AGGREGATOR_MAX: _ClassVar[Aggregator]
     AGGREGATOR_MIN: _ClassVar[Aggregator]
+
+class InferenceMetricsInterval(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    INFERENCE_METRICS_INTERVAL_UNSPECIFIED: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_DAY: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_WEEK: _ClassVar[InferenceMetricsInterval]
+    INFERENCE_METRICS_INTERVAL_MONTH: _ClassVar[InferenceMetricsInterval]
+
+class SpaceAlertState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_ALERT_STATE_UNSPECIFIED: _ClassVar[SpaceAlertState]
+    SPACE_ALERT_STATE_FIRING: _ClassVar[SpaceAlertState]
+    SPACE_ALERT_STATE_RESOLVED: _ClassVar[SpaceAlertState]
+
+class SpaceAlertType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_ALERT_TYPE_UNSPECIFIED: _ClassVar[SpaceAlertType]
+    SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED: _ClassVar[SpaceAlertType]
+    SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS: _ClassVar[SpaceAlertType]
+    SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE: _ClassVar[SpaceAlertType]
+    SPACE_ALERT_TYPE_SPACE_UNHEALTHY: _ClassVar[SpaceAlertType]
+
+class SpaceAlertSeverity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_ALERT_SEVERITY_UNSPECIFIED: _ClassVar[SpaceAlertSeverity]
+    SPACE_ALERT_SEVERITY_INFO: _ClassVar[SpaceAlertSeverity]
+    SPACE_ALERT_SEVERITY_WARNING: _ClassVar[SpaceAlertSeverity]
+    SPACE_ALERT_SEVERITY_CRITICAL: _ClassVar[SpaceAlertSeverity]
 AGGREGATOR_UNSPECIFIED: Aggregator
 AGGREGATOR_SUM: Aggregator
 AGGREGATOR_AVG: Aggregator
 AGGREGATOR_MAX: Aggregator
 AGGREGATOR_MIN: Aggregator
+INFERENCE_METRICS_INTERVAL_UNSPECIFIED: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_DAY: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_WEEK: InferenceMetricsInterval
+INFERENCE_METRICS_INTERVAL_MONTH: InferenceMetricsInterval
+SPACE_ALERT_STATE_UNSPECIFIED: SpaceAlertState
+SPACE_ALERT_STATE_FIRING: SpaceAlertState
+SPACE_ALERT_STATE_RESOLVED: SpaceAlertState
+SPACE_ALERT_TYPE_UNSPECIFIED: SpaceAlertType
+SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED: SpaceAlertType
+SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS: SpaceAlertType
+SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE: SpaceAlertType
+SPACE_ALERT_TYPE_SPACE_UNHEALTHY: SpaceAlertType
+SPACE_ALERT_SEVERITY_UNSPECIFIED: SpaceAlertSeverity
+SPACE_ALERT_SEVERITY_INFO: SpaceAlertSeverity
+SPACE_ALERT_SEVERITY_WARNING: SpaceAlertSeverity
+SPACE_ALERT_SEVERITY_CRITICAL: SpaceAlertSeverity
 
 class GetSpaceSummaryMetricsRequest(_message.Message):
     __slots__ = ("account_id", "space_id", "collection_name", "collection_name_contains", "page_size", "page_token")
@@ -84,6 +128,72 @@ class GetSpaceUsageMetricsResponse(_message.Message):
     total_size: int
     next_page_token: str
     def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+
+class GetSpaceInferenceMetricsRequest(_message.Message):
+    __slots__ = ("account_id", "space_id", "since", "until", "interval", "inference_model_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    SPACE_ID_FIELD_NUMBER: _ClassVar[int]
+    SINCE_FIELD_NUMBER: _ClassVar[int]
+    UNTIL_FIELD_NUMBER: _ClassVar[int]
+    INTERVAL_FIELD_NUMBER: _ClassVar[int]
+    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    space_id: str
+    since: _timestamp_pb2.Timestamp
+    until: _timestamp_pb2.Timestamp
+    interval: InferenceMetricsInterval
+    inference_model_id: str
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interval: _Optional[_Union[InferenceMetricsInterval, str]] = ..., inference_model_id: _Optional[str] = ...) -> None: ...
+
+class GetSpaceInferenceMetricsResponse(_message.Message):
+    __slots__ = ("models",)
+    MODELS_FIELD_NUMBER: _ClassVar[int]
+    models: _containers.RepeatedCompositeFieldContainer[SpaceInferenceModelMetrics]
+    def __init__(self, models: _Optional[_Iterable[_Union[SpaceInferenceModelMetrics, _Mapping]]] = ...) -> None: ...
+
+class SpaceInferenceModelMetrics(_message.Message):
+    __slots__ = ("inference_model_id", "values")
+    INFERENCE_MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    inference_model_id: str
+    values: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+
+class ListSpaceAlertsRequest(_message.Message):
+    __slots__ = ("account_id", "space_id", "state")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    SPACE_ID_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    space_id: str
+    state: SpaceAlertState
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ...) -> None: ...
+
+class ListSpaceAlertsResponse(_message.Message):
+    __slots__ = ("alerts",)
+    ALERTS_FIELD_NUMBER: _ClassVar[int]
+    alerts: _containers.RepeatedCompositeFieldContainer[SpaceAlert]
+    def __init__(self, alerts: _Optional[_Iterable[_Union[SpaceAlert, _Mapping]]] = ...) -> None: ...
+
+class SpaceAlert(_message.Message):
+    __slots__ = ("id", "type", "severity", "title", "description", "last_firing_at", "state", "collection_name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    SEVERITY_FIELD_NUMBER: _ClassVar[int]
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    LAST_FIRING_AT_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    type: SpaceAlertType
+    severity: SpaceAlertSeverity
+    title: str
+    description: str
+    last_firing_at: _timestamp_pb2.Timestamp
+    state: SpaceAlertState
+    collection_name: str
+    def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[SpaceAlertType, str]] = ..., severity: _Optional[_Union[SpaceAlertSeverity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ..., collection_name: _Optional[str] = ...) -> None: ...
 
 class SpaceCollectionMetrics(_message.Message):
     __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "vector_count", "used_storage_bytes")

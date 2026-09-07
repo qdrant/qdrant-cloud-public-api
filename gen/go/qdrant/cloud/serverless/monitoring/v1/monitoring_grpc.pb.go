@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MonitoringService_GetSpaceSummaryMetrics_FullMethodName = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceSummaryMetrics"
-	MonitoringService_GetSpaceUsageMetrics_FullMethodName   = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceUsageMetrics"
+	MonitoringService_GetSpaceSummaryMetrics_FullMethodName   = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceSummaryMetrics"
+	MonitoringService_GetSpaceUsageMetrics_FullMethodName     = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceUsageMetrics"
+	MonitoringService_GetSpaceInferenceMetrics_FullMethodName = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/GetSpaceInferenceMetrics"
+	MonitoringService_ListSpaceAlerts_FullMethodName          = "/qdrant.cloud.serverless.monitoring.v1.MonitoringService/ListSpaceAlerts"
 )
 
 // MonitoringServiceClient is the client API for MonitoringService service.
@@ -28,7 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // MonitoringService provides access to monitoring data for serverless spaces,
-// such as per-collection request rates, latency, vector counts, and storage usage.
+// such as per-collection metrics, inference token usage, and alerts.
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceClient interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
@@ -41,6 +43,16 @@ type MonitoringServiceClient interface {
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(ctx context.Context, in *GetSpaceUsageMetricsRequest, opts ...grpc.CallOption) (*GetSpaceUsageMetricsResponse, error)
+	// Gets the inference token usage metrics for a space.
+	// Provide `inference_model_id` to limit the response to a single model.
+	// Required permissions:
+	// - read:serverless_spaces
+	GetSpaceInferenceMetrics(ctx context.Context, in *GetSpaceInferenceMetricsRequest, opts ...grpc.CallOption) (*GetSpaceInferenceMetricsResponse, error)
+	// Lists the alerts for a space in the account identified by the given ID.
+	// Sorted by last_firing_at (most recent first).
+	// Required permissions:
+	// - read:serverless_spaces
+	ListSpaceAlerts(ctx context.Context, in *ListSpaceAlertsRequest, opts ...grpc.CallOption) (*ListSpaceAlertsResponse, error)
 }
 
 type monitoringServiceClient struct {
@@ -71,12 +83,32 @@ func (c *monitoringServiceClient) GetSpaceUsageMetrics(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *monitoringServiceClient) GetSpaceInferenceMetrics(ctx context.Context, in *GetSpaceInferenceMetricsRequest, opts ...grpc.CallOption) (*GetSpaceInferenceMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSpaceInferenceMetricsResponse)
+	err := c.cc.Invoke(ctx, MonitoringService_GetSpaceInferenceMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *monitoringServiceClient) ListSpaceAlerts(ctx context.Context, in *ListSpaceAlertsRequest, opts ...grpc.CallOption) (*ListSpaceAlertsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSpaceAlertsResponse)
+	err := c.cc.Invoke(ctx, MonitoringService_ListSpaceAlerts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MonitoringServiceServer is the server API for MonitoringService service.
 // All implementations must embed UnimplementedMonitoringServiceServer
 // for forward compatibility.
 //
 // MonitoringService provides access to monitoring data for serverless spaces,
-// such as per-collection request rates, latency, vector counts, and storage usage.
+// such as per-collection metrics, inference token usage, and alerts.
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceServer interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
@@ -89,6 +121,16 @@ type MonitoringServiceServer interface {
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(context.Context, *GetSpaceUsageMetricsRequest) (*GetSpaceUsageMetricsResponse, error)
+	// Gets the inference token usage metrics for a space.
+	// Provide `inference_model_id` to limit the response to a single model.
+	// Required permissions:
+	// - read:serverless_spaces
+	GetSpaceInferenceMetrics(context.Context, *GetSpaceInferenceMetricsRequest) (*GetSpaceInferenceMetricsResponse, error)
+	// Lists the alerts for a space in the account identified by the given ID.
+	// Sorted by last_firing_at (most recent first).
+	// Required permissions:
+	// - read:serverless_spaces
+	ListSpaceAlerts(context.Context, *ListSpaceAlertsRequest) (*ListSpaceAlertsResponse, error)
 	mustEmbedUnimplementedMonitoringServiceServer()
 }
 
@@ -104,6 +146,12 @@ func (UnimplementedMonitoringServiceServer) GetSpaceSummaryMetrics(context.Conte
 }
 func (UnimplementedMonitoringServiceServer) GetSpaceUsageMetrics(context.Context, *GetSpaceUsageMetricsRequest) (*GetSpaceUsageMetricsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSpaceUsageMetrics not implemented")
+}
+func (UnimplementedMonitoringServiceServer) GetSpaceInferenceMetrics(context.Context, *GetSpaceInferenceMetricsRequest) (*GetSpaceInferenceMetricsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSpaceInferenceMetrics not implemented")
+}
+func (UnimplementedMonitoringServiceServer) ListSpaceAlerts(context.Context, *ListSpaceAlertsRequest) (*ListSpaceAlertsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSpaceAlerts not implemented")
 }
 func (UnimplementedMonitoringServiceServer) mustEmbedUnimplementedMonitoringServiceServer() {}
 func (UnimplementedMonitoringServiceServer) testEmbeddedByValue()                           {}
@@ -162,6 +210,42 @@ func _MonitoringService_GetSpaceUsageMetrics_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MonitoringService_GetSpaceInferenceMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSpaceInferenceMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MonitoringServiceServer).GetSpaceInferenceMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MonitoringService_GetSpaceInferenceMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MonitoringServiceServer).GetSpaceInferenceMetrics(ctx, req.(*GetSpaceInferenceMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MonitoringService_ListSpaceAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSpaceAlertsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MonitoringServiceServer).ListSpaceAlerts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MonitoringService_ListSpaceAlerts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MonitoringServiceServer).ListSpaceAlerts(ctx, req.(*ListSpaceAlertsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MonitoringService_ServiceDesc is the grpc.ServiceDesc for MonitoringService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +260,14 @@ var MonitoringService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSpaceUsageMetrics",
 			Handler:    _MonitoringService_GetSpaceUsageMetrics_Handler,
+		},
+		{
+			MethodName: "GetSpaceInferenceMetrics",
+			Handler:    _MonitoringService_GetSpaceInferenceMetrics_Handler,
+		},
+		{
+			MethodName: "ListSpaceAlerts",
+			Handler:    _MonitoringService_ListSpaceAlerts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

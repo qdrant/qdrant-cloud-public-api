@@ -318,6 +318,285 @@ export declare type GetSpaceUsageMetricsResponseValid = Message<"qdrant.cloud.se
 export declare const GetSpaceUsageMetricsResponseSchema: GenMessage<GetSpaceUsageMetricsResponse, {validType: GetSpaceUsageMetricsResponseValid}>;
 
 /**
+ * GetSpaceInferenceMetricsRequest is the request for the GetSpaceInferenceMetrics function.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
+ */
+export declare type GetSpaceInferenceMetricsRequest = Message<"qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the space (in GUID format).
+   * This space should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string space_id = 2;
+   */
+  spaceId: string;
+
+  /**
+   * Optional start time for the inference metrics query.
+   * If omitted, defaults to 7 days ago.
+   *
+   * @generated from field: optional google.protobuf.Timestamp since = 3;
+   */
+  since?: Timestamp | undefined;
+
+  /**
+   * Optional end time for the inference metrics query.
+   * If omitted, defaults to current time.
+   *
+   * @generated from field: optional google.protobuf.Timestamp until = 4;
+   */
+  until?: Timestamp | undefined;
+
+  /**
+   * Optional aggregation interval for histogram buckets.
+   *
+   * @generated from field: optional qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval interval = 5;
+   */
+  interval?: InferenceMetricsInterval | undefined;
+
+  /**
+   * Optional identifier for a specific inference model to filter metrics by.
+   *
+   * @generated from field: optional string inference_model_id = 6;
+   */
+  inferenceModelId?: string | undefined;
+};
+
+export declare type GetSpaceInferenceMetricsRequestValid = GetSpaceInferenceMetricsRequest;
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.
+ * Use `create(GetSpaceInferenceMetricsRequestSchema)` to create a new message.
+ */
+export declare const GetSpaceInferenceMetricsRequestSchema: GenMessage<GetSpaceInferenceMetricsRequest, {validType: GetSpaceInferenceMetricsRequestValid}>;
+
+/**
+ * GetSpaceInferenceMetricsResponse is the response from the GetSpaceInferenceMetrics function.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+ */
+export declare type GetSpaceInferenceMetricsResponse = Message<"qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse"> & {
+  /**
+   * Per-model inference token usage metrics for the space.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 1;
+   */
+  models: SpaceInferenceModelMetrics[];
+};
+
+/**
+ * GetSpaceInferenceMetricsResponse is the response from the GetSpaceInferenceMetrics function.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+ */
+export declare type GetSpaceInferenceMetricsResponseValid = Message<"qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse"> & {
+  /**
+   * Per-model inference token usage metrics for the space.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics models = 1;
+   */
+  models: SpaceInferenceModelMetricsValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse.
+ * Use `create(GetSpaceInferenceMetricsResponseSchema)` to create a new message.
+ */
+export declare const GetSpaceInferenceMetricsResponseSchema: GenMessage<GetSpaceInferenceMetricsResponse, {validType: GetSpaceInferenceMetricsResponseValid}>;
+
+/**
+ * SpaceInferenceModelMetrics groups histogram data for a single inference model.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
+ */
+export declare type SpaceInferenceModelMetrics = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics"> & {
+  /**
+   * Identifier of the inference model.
+   *
+   * @generated from field: string inference_model_id = 1;
+   */
+  inferenceModelId: string;
+
+  /**
+   * Aggregated histogram values for the inference model.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric values = 2;
+   */
+  values: Metric[];
+};
+
+/**
+ * SpaceInferenceModelMetrics groups histogram data for a single inference model.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
+ */
+export declare type SpaceInferenceModelMetricsValid = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics"> & {
+  /**
+   * Identifier of the inference model.
+   *
+   * @generated from field: string inference_model_id = 1;
+   */
+  inferenceModelId: string;
+
+  /**
+   * Aggregated histogram values for the inference model.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric values = 2;
+   */
+  values: MetricValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics.
+ * Use `create(SpaceInferenceModelMetricsSchema)` to create a new message.
+ */
+export declare const SpaceInferenceModelMetricsSchema: GenMessage<SpaceInferenceModelMetrics, {validType: SpaceInferenceModelMetricsValid}>;
+
+/**
+ * ListSpaceAlertsRequest is the request for the ListSpaceAlerts function.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
+ */
+export declare type ListSpaceAlertsRequest = Message<"qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+
+  /**
+   * The identifier for the space (in GUID format).
+   * This space should be part of the provided account.
+   * This is a required field.
+   *
+   * @generated from field: string space_id = 2;
+   */
+  spaceId: string;
+
+  /**
+   * Optional alert-state filter. If omitted (empty), alerts in ALL states are
+   * returned; if set, only alerts in that state are returned.
+   *
+   * @generated from field: optional qdrant.cloud.serverless.monitoring.v1.SpaceAlertState state = 3;
+   */
+  state?: SpaceAlertState | undefined;
+};
+
+export declare type ListSpaceAlertsRequestValid = ListSpaceAlertsRequest;
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.
+ * Use `create(ListSpaceAlertsRequestSchema)` to create a new message.
+ */
+export declare const ListSpaceAlertsRequestSchema: GenMessage<ListSpaceAlertsRequest, {validType: ListSpaceAlertsRequestValid}>;
+
+/**
+ * ListSpaceAlertsResponse is the response from the ListSpaceAlerts function.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
+ */
+export declare type ListSpaceAlertsResponse = Message<"qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse"> & {
+  /**
+   * The alerts for the space, sorted by last_firing_at (descending) - most recent first.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceAlert alerts = 1;
+   */
+  alerts: SpaceAlert[];
+};
+
+export declare type ListSpaceAlertsResponseValid = ListSpaceAlertsResponse;
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse.
+ * Use `create(ListSpaceAlertsResponseSchema)` to create a new message.
+ */
+export declare const ListSpaceAlertsResponseSchema: GenMessage<ListSpaceAlertsResponse, {validType: ListSpaceAlertsResponseValid}>;
+
+/**
+ * SpaceAlert is a single alert instance for a space.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceAlert
+ */
+export declare type SpaceAlert = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceAlert"> & {
+  /**
+   * Stable identifier for this firing instance (in GUID format).
+   * Re-firing a previously-resolved alert produces a new ID.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The category of alert.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceAlertType type = 2;
+   */
+  type: SpaceAlertType;
+
+  /**
+   * Severity tier, derived server-side from the alert type.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity severity = 3;
+   */
+  severity: SpaceAlertSeverity;
+
+  /**
+   * Human-readable title (English, at most 80 characters).
+   *
+   * @generated from field: string title = 4;
+   */
+  title: string;
+
+  /**
+   * Human-readable description (English, at most 300 characters).
+   *
+   * @generated from field: string description = 5;
+   */
+  description: string;
+
+  /**
+   * UTC timestamp of the most recent firing observation for this instance.
+   *
+   * @generated from field: google.protobuf.Timestamp last_firing_at = 6;
+   */
+  lastFiringAt?: Timestamp | undefined;
+
+  /**
+   * The state of this alert. Always populated so callers can tell each row's
+   * state apart when the request applies no state filter.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceAlertState state = 7;
+   */
+  state: SpaceAlertState;
+
+  /**
+   * Optional collection name related to this alert, when the alert is scoped to a collection.
+   *
+   * @generated from field: optional string collection_name = 8;
+   */
+  collectionName?: string | undefined;
+};
+
+export declare type SpaceAlertValid = SpaceAlert;
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceAlert.
+ * Use `create(SpaceAlertSchema)` to create a new message.
+ */
+export declare const SpaceAlertSchema: GenMessage<SpaceAlert, {validType: SpaceAlertValid}>;
+
+/**
  * SpaceCollectionMetrics contains a metric overview for a single collection.
  *
  * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
@@ -707,8 +986,171 @@ export enum Aggregator {
 export declare const AggregatorSchema: GenEnum<Aggregator>;
 
 /**
+ * InferenceMetricsInterval defines the histogram bucket size for inference metrics.
+ *
+ * @generated from enum qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
+ */
+export enum InferenceMetricsInterval {
+  /**
+   * Interval is unspecified; defaults to DAY.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Buckets are aggregated per day.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_DAY = 1;
+   */
+  DAY = 1,
+
+  /**
+   * Buckets are aggregated per week.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_WEEK = 2;
+   */
+  WEEK = 2,
+
+  /**
+   * Buckets are aggregated per month.
+   *
+   * @generated from enum value: INFERENCE_METRICS_INTERVAL_MONTH = 3;
+   */
+  MONTH = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval.
+ */
+export declare const InferenceMetricsIntervalSchema: GenEnum<InferenceMetricsInterval>;
+
+/**
+ * SpaceAlertState mirrors the backend state of a space alert. It is used both as
+ * the optional request-side filter AND echoed per row on the SpaceAlert response.
+ *
+ * @generated from enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+ */
+export enum SpaceAlertState {
+  /**
+   * The alert state is unspecified.
+   *
+   * @generated from enum value: SPACE_ALERT_STATE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The alert is currently firing.
+   *
+   * @generated from enum value: SPACE_ALERT_STATE_FIRING = 1;
+   */
+  FIRING = 1,
+
+  /**
+   * The alert has been resolved by the backend.
+   *
+   * @generated from enum value: SPACE_ALERT_STATE_RESOLVED = 2;
+   */
+  RESOLVED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertState.
+ */
+export declare const SpaceAlertStateSchema: GenEnum<SpaceAlertState>;
+
+/**
+ * SpaceAlertType is the category of a space alert. Mirrors the backend alert types.
+ *
+ * @generated from enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
+ */
+export enum SpaceAlertType {
+  /**
+   * The alert type is unspecified.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Collection storage usage is over the configured size threshold.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED = 1;
+   */
+  COLLECTION_STORAGE_OVERUTILIZED = 1,
+
+  /**
+   * The space has too many collections.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS = 2;
+   */
+  TOO_MANY_COLLECTIONS = 2,
+
+  /**
+   * A space API key is about to expire.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE = 3;
+   */
+  SPACE_API_KEY_ABOUT_TO_EXPIRE = 3,
+
+  /**
+   * The serverless space is unhealthy.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_SPACE_UNHEALTHY = 4;
+   */
+  SPACE_UNHEALTHY = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertType.
+ */
+export declare const SpaceAlertTypeSchema: GenEnum<SpaceAlertType>;
+
+/**
+ * SpaceAlertSeverity is the tier used by the UI to render badge color and announce severity to
+ * assistive tech. Color alone never conveys severity - clients must render the label.
+ *
+ * @generated from enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
+ */
+export enum SpaceAlertSeverity {
+  /**
+   * Default / fallback tier. Also what an alert type that is not yet mapped resolves to;
+   * there is intentionally no separate UNKNOWN value.
+   *
+   * @generated from enum value: SPACE_ALERT_SEVERITY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Informational severity.
+   *
+   * @generated from enum value: SPACE_ALERT_SEVERITY_INFO = 1;
+   */
+  INFO = 1,
+
+  /**
+   * Warning severity.
+   *
+   * @generated from enum value: SPACE_ALERT_SEVERITY_WARNING = 2;
+   */
+  WARNING = 2,
+
+  /**
+   * Critical severity.
+   *
+   * @generated from enum value: SPACE_ALERT_SEVERITY_CRITICAL = 3;
+   */
+  CRITICAL = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity.
+ */
+export declare const SpaceAlertSeveritySchema: GenEnum<SpaceAlertSeverity>;
+
+/**
  * MonitoringService provides access to monitoring data for serverless spaces,
- * such as per-collection request rates, latency, vector counts, and storage usage.
+ * such as per-collection metrics, inference token usage, and alerts.
  * Unlike cluster monitoring, this service does not expose logs or events.
  *
  * @generated from service qdrant.cloud.serverless.monitoring.v1.MonitoringService
@@ -739,6 +1181,32 @@ export declare const MonitoringService: GenService<{
     methodKind: "unary";
     input: typeof GetSpaceUsageMetricsRequestSchema;
     output: typeof GetSpaceUsageMetricsResponseSchema;
+  },
+  /**
+   * Gets the inference token usage metrics for a space.
+   * Provide `inference_model_id` to limit the response to a single model.
+   * Required permissions:
+   * - read:serverless_spaces
+   *
+   * @generated from rpc qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics
+   */
+  getSpaceInferenceMetrics: {
+    methodKind: "unary";
+    input: typeof GetSpaceInferenceMetricsRequestSchema;
+    output: typeof GetSpaceInferenceMetricsResponseSchema;
+  },
+  /**
+   * Lists the alerts for a space in the account identified by the given ID.
+   * Sorted by last_firing_at (most recent first).
+   * Required permissions:
+   * - read:serverless_spaces
+   *
+   * @generated from rpc qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts
+   */
+  listSpaceAlerts: {
+    methodKind: "unary";
+    input: typeof ListSpaceAlertsRequestSchema;
+    output: typeof ListSpaceAlertsResponseSchema;
   },
 }>;
 
