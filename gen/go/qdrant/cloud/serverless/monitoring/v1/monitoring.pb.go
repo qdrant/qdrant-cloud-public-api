@@ -1109,7 +1109,9 @@ type ListSpaceAlertsRequest struct {
 	// returned; if set, only alerts in that state are returned.
 	State *SpaceAlertState `protobuf:"varint,3,opt,name=state,proto3,enum=qdrant.cloud.serverless.monitoring.v1.SpaceAlertState,oneof" json:"state,omitempty"`
 	// Optional filter on collection names. At most one variant may be set.
-	// If omitted, alerts for collections in the space are returned (paginated when page_size is set).
+	// If omitted, both space-global alerts and collection-scoped alerts are returned
+	// (paginated when page_size is set). When set, only matching collection-scoped
+	// alerts are returned (space-global alerts are excluded).
 	//
 	// Types that are valid to be assigned to CollectionFilter:
 	//
@@ -1303,7 +1305,8 @@ func (x *ListSpaceAlertsResponse) GetNextPageToken() string {
 	return ""
 }
 
-// SpaceAlert is a single alert instance for a collection in a space.
+// SpaceAlert is a single alert instance for a space.
+// Alerts may be space-global (no collection_name) or scoped to a collection.
 type SpaceAlert struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stable identifier for this firing instance (in GUID format).
@@ -1323,7 +1326,8 @@ type SpaceAlert struct {
 	// state apart when the request applies no state filter.
 	State SpaceAlertState `protobuf:"varint,7,opt,name=state,proto3,enum=qdrant.cloud.serverless.monitoring.v1.SpaceAlertState" json:"state,omitempty"`
 	// Name of the collection this alert relates to.
-	CollectionName string `protobuf:"bytes,8,opt,name=collection_name,json=collectionName,proto3" json:"collection_name,omitempty"`
+	// Omitted for space-global alerts (for example, too many collections).
+	CollectionName *string `protobuf:"bytes,8,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1408,8 +1412,8 @@ func (x *SpaceAlert) GetState() SpaceAlertState {
 }
 
 func (x *SpaceAlert) GetCollectionName() string {
-	if x != nil {
-		return x.CollectionName
+	if x != nil && x.CollectionName != nil {
+		return *x.CollectionName
 	}
 	return ""
 }
@@ -1874,7 +1878,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\xce\x03\n" +
+	"\x10_next_page_token\"\xe7\x03\n" +
 	"\n" +
 	"SpaceAlert\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12I\n" +
@@ -1883,8 +1887,9 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x05title\x18\x04 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12@\n" +
 	"\x0elast_firing_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\flastFiringAt\x12L\n" +
-	"\x05state\x18\a \x01(\x0e26.qdrant.cloud.serverless.monitoring.v1.SpaceAlertStateR\x05state\x12F\n" +
-	"\x0fcollection_name\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\"\x86\x04\n" +
+	"\x05state\x18\a \x01(\x0e26.qdrant.cloud.serverless.monitoring.v1.SpaceAlertStateR\x05state\x12K\n" +
+	"\x0fcollection_name\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x88\x01\x01B\x12\n" +
+	"\x10_collection_name\"\x86\x04\n" +
 	"\x16SpaceCollectionMetrics\x12F\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\x12k\n" +
 	"\x0fsearch_requests\x18\x02 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\x06\xbaH\x03\xc8\x01\x01R\x0esearchRequests\x12i\n" +
@@ -2053,6 +2058,7 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 		(*ListSpaceAlertsRequest_CollectionNameContains)(nil),
 	}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[9].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

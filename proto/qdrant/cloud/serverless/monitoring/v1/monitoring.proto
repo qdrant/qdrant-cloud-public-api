@@ -65,8 +65,8 @@ service MonitoringService {
     };
   }
   // Lists the alerts for a space in the account identified by the given ID.
-  // Alerts are scoped per collection, sorted by last_firing_at (most recent first),
-  // and may be paginated (a space can have many collections).
+  // Alerts may be space-global or scoped to a collection, sorted by last_firing_at
+  // (most recent first), and may be paginated.
   // Required permissions:
   // - read:serverless_spaces
   rpc ListSpaceAlerts(ListSpaceAlertsRequest) returns (ListSpaceAlertsResponse) {
@@ -303,7 +303,9 @@ message ListSpaceAlertsRequest {
   // returned; if set, only alerts in that state are returned.
   optional SpaceAlertState state = 3;
   // Optional filter on collection names. At most one variant may be set.
-  // If omitted, alerts for collections in the space are returned (paginated when page_size is set).
+  // If omitted, both space-global alerts and collection-scoped alerts are returned
+  // (paginated when page_size is set). When set, only matching collection-scoped
+  // alerts are returned (space-global alerts are excluded).
   oneof collection_filter {
     // Exact collection name. Returns alerts for that collection only.
     string collection_name = 4 [(buf.validate.field).string = {
@@ -345,7 +347,8 @@ message ListSpaceAlertsResponse {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// SpaceAlert is a single alert instance for a collection in a space.
+// SpaceAlert is a single alert instance for a space.
+// Alerts may be space-global (no collection_name) or scoped to a collection.
 message SpaceAlert {
   // Stable identifier for this firing instance (in GUID format).
   // Re-firing a previously-resolved alert produces a new ID.
@@ -364,7 +367,8 @@ message SpaceAlert {
   // state apart when the request applies no state filter.
   SpaceAlertState state = 7;
   // Name of the collection this alert relates to.
-  string collection_name = 8 [(buf.validate.field).string = {
+  // Omitted for space-global alerts (for example, too many collections).
+  optional string collection_name = 8 [(buf.validate.field).string = {
     min_len: 1
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"

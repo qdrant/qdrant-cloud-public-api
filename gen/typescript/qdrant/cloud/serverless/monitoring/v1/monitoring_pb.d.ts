@@ -617,7 +617,9 @@ export declare type ListSpaceAlertsRequest = Message<"qdrant.cloud.serverless.mo
 
   /**
    * Optional filter on collection names. At most one variant may be set.
-   * If omitted, alerts for collections in the space are returned (paginated when page_size is set).
+   * If omitted, both space-global alerts and collection-scoped alerts are returned
+   * (paginated when page_size is set). When set, only matching collection-scoped
+   * alerts are returned (space-global alerts are excluded).
    *
    * @generated from oneof qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.collection_filter
    */
@@ -706,7 +708,8 @@ export declare type ListSpaceAlertsResponseValid = ListSpaceAlertsResponse;
 export declare const ListSpaceAlertsResponseSchema: GenMessage<ListSpaceAlertsResponse, {validType: ListSpaceAlertsResponseValid}>;
 
 /**
- * SpaceAlert is a single alert instance for a collection in a space.
+ * SpaceAlert is a single alert instance for a space.
+ * Alerts may be space-global (no collection_name) or scoped to a collection.
  *
  * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceAlert
  */
@@ -764,10 +767,11 @@ export declare type SpaceAlert = Message<"qdrant.cloud.serverless.monitoring.v1.
 
   /**
    * Name of the collection this alert relates to.
+   * Omitted for space-global alerts (for example, too many collections).
    *
-   * @generated from field: string collection_name = 8;
+   * @generated from field: optional string collection_name = 8;
    */
-  collectionName: string;
+  collectionName?: string | undefined;
 };
 
 export declare type SpaceAlertValid = SpaceAlert;
@@ -1380,8 +1384,8 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Lists the alerts for a space in the account identified by the given ID.
-   * Alerts are scoped per collection, sorted by last_firing_at (most recent first),
-   * and may be paginated (a space can have many collections).
+   * Alerts may be space-global or scoped to a collection, sorted by last_firing_at
+   * (most recent first), and may be paginated.
    * Required permissions:
    * - read:serverless_spaces
    *

@@ -50,8 +50,8 @@ type MonitoringServiceClient interface {
 	// - read:serverless_spaces
 	GetSpaceInferenceMetrics(ctx context.Context, in *GetSpaceInferenceMetricsRequest, opts ...grpc.CallOption) (*GetSpaceInferenceMetricsResponse, error)
 	// Lists the alerts for a space in the account identified by the given ID.
-	// Alerts are scoped per collection, sorted by last_firing_at (most recent first),
-	// and may be paginated (a space can have many collections).
+	// Alerts may be space-global or scoped to a collection, sorted by last_firing_at
+	// (most recent first), and may be paginated.
 	// Required permissions:
 	// - read:serverless_spaces
 	ListSpaceAlerts(ctx context.Context, in *ListSpaceAlertsRequest, opts ...grpc.CallOption) (*ListSpaceAlertsResponse, error)
@@ -130,8 +130,8 @@ type MonitoringServiceServer interface {
 	// - read:serverless_spaces
 	GetSpaceInferenceMetrics(context.Context, *GetSpaceInferenceMetricsRequest) (*GetSpaceInferenceMetricsResponse, error)
 	// Lists the alerts for a space in the account identified by the given ID.
-	// Alerts are scoped per collection, sorted by last_firing_at (most recent first),
-	// and may be paginated (a space can have many collections).
+	// Alerts may be space-global or scoped to a collection, sorted by last_firing_at
+	// (most recent first), and may be paginated.
 	// Required permissions:
 	// - read:serverless_spaces
 	ListSpaceAlerts(context.Context, *ListSpaceAlertsRequest) (*ListSpaceAlertsResponse, error)

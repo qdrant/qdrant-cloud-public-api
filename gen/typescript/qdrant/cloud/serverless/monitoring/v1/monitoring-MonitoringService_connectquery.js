@@ -37,8 +37,8 @@ export const getSpaceInferenceMetrics = MonitoringService.method.getSpaceInferen
 
 /**
  * Lists the alerts for a space in the account identified by the given ID.
- * Alerts are scoped per collection, sorted by last_firing_at (most recent first),
- * and may be paginated (a space can have many collections).
+ * Alerts may be space-global or scoped to a collection, sorted by last_firing_at
+ * (most recent first), and may be paginated.
  * Required permissions:
  * - read:serverless_spaces
  *

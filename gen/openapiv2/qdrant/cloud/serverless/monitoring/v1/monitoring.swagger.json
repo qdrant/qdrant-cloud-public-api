@@ -18,7 +18,7 @@
   "paths": {
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/alerts": {
       "get": {
-        "summary": "Lists the alerts for a space in the account identified by the given ID.\nAlerts are scoped per collection, sorted by last_firing_at (most recent first),\nand may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
+        "summary": "Lists the alerts for a space in the account identified by the given ID.\nAlerts may be space-global or scoped to a collection, sorted by last_firing_at\n(most recent first), and may be paginated.\nRequired permissions:\n- read:serverless_spaces",
         "operationId": "MonitoringService_ListSpaceAlerts",
         "responses": {
           "200": {
@@ -579,10 +579,10 @@
         },
         "collectionName": {
           "type": "string",
-          "description": "Name of the collection this alert relates to."
+          "description": "Name of the collection this alert relates to.\nOmitted for space-global alerts (for example, too many collections)."
         }
       },
-      "description": "SpaceAlert is a single alert instance for a collection in a space."
+      "description": "SpaceAlert is a single alert instance for a space.\nAlerts may be space-global (no collection_name) or scoped to a collection."
     },
     "v1SpaceAlertSeverity": {
       "type": "string",
