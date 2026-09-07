@@ -1024,15 +1024,15 @@
         "platformMaxSize": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
         },
         "maxSize": {
           "type": "string",
           "format": "uint64",
-          "description": "Optional customer-defined maximum number of documents per collection, used for cost control.\nWhen set, it must not exceed `platform_max_size`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
+          "description": "Optional customer-defined maximum size in bytes per collection, used for cost control.\nWhen set, it must not exceed `platform_max_size`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
         }
       },
-      "description": "CollectionSettings configures per-collection document limits for a space."
+      "description": "CollectionSettings configures per-collection size limits for a space."
     },
     "v1CreateBackupResponse": {
       "type": "object",
@@ -1165,12 +1165,12 @@
         "platformMaxWorkers": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
         },
         "maxWorkers": {
           "type": "string",
           "format": "uint64",
-          "description": "Maximum number of search workers for this space.\nValid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.\nThis field is writable via UpdateSpace."
+          "description": "Maximum number of search workers per collection in this space.\nFor example, if set to 2 and the space has 3 collections, the total maximum is 6.\nValid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.\nThis field is writable via UpdateSpace."
         }
       },
       "description": "SearcherSettings configures search-worker behavior for a space."
@@ -1200,12 +1200,12 @@
         "platformMaxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits."
+          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits."
         },
         "maxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Optional customer-defined storage cap, used for cost control.\nWhen set, it must not exceed `platform_max_storage_bytes`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies.\nDeprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits."
+          "description": "Optional customer-defined storage cap, used for cost control.\nWhen set, it must not exceed `platform_max_storage_bytes`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies.\nDeprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits."
         },
         "maxCollectionsPerSpace": {
           "type": "string",

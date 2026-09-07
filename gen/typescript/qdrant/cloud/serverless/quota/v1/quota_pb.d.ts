@@ -62,7 +62,7 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
 
   /**
    * Platform default storage ceiling applied to each new space. 0 = unlimited.
-   * Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection document limits.
+   * Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits.
    *
    * @generated from field: uint64 platform_max_storage_bytes_per_space = 4 [deprecated = true];
    * @deprecated
@@ -86,7 +86,7 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   usedStorageBytes: bigint;
 
   /**
-   * Platform limit: maximum number of documents per collection (copied into each Space.configuration.collection_settings).
+   * Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).
    * A value of 0 means unlimited.
    *
    * @generated from field: uint64 platform_max_size_per_collection = 7;
@@ -94,12 +94,12 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   platformMaxSizePerCollection: bigint;
 
   /**
-   * Platform limit: maximum search workers per space (copied into each Space.configuration.searcher_settings).
+   * Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).
    * A value of 0 means unlimited.
    *
-   * @generated from field: uint64 platform_max_workers_per_space = 8;
+   * @generated from field: uint64 platform_max_workers_per_collection = 8;
    */
-  platformMaxWorkersPerSpace: bigint;
+  platformMaxWorkersPerCollection: bigint;
 };
 
 export declare type AccountQuotaValid = AccountQuota;

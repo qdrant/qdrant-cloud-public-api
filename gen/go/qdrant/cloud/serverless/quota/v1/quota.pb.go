@@ -81,7 +81,7 @@ type AccountQuota struct {
 	// Platform limit: maximum collections per space (copied into each Space.configuration).
 	MaxCollectionsPerSpace uint64 `protobuf:"varint,3,opt,name=max_collections_per_space,json=maxCollectionsPerSpace,proto3" json:"max_collections_per_space,omitempty"`
 	// Platform default storage ceiling applied to each new space. 0 = unlimited.
-	// Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection document limits.
+	// Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits.
 	//
 	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/quota/v1/quota.proto.
 	PlatformMaxStorageBytesPerSpace uint64 `protobuf:"varint,4,opt,name=platform_max_storage_bytes_per_space,json=platformMaxStorageBytesPerSpace,proto3" json:"platform_max_storage_bytes_per_space,omitempty"`
@@ -92,14 +92,14 @@ type AccountQuota struct {
 	//
 	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/quota/v1/quota.proto.
 	UsedStorageBytes uint64 `protobuf:"varint,6,opt,name=used_storage_bytes,json=usedStorageBytes,proto3" json:"used_storage_bytes,omitempty"`
-	// Platform limit: maximum number of documents per collection (copied into each Space.configuration.collection_settings).
+	// Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).
 	// A value of 0 means unlimited.
 	PlatformMaxSizePerCollection uint64 `protobuf:"varint,7,opt,name=platform_max_size_per_collection,json=platformMaxSizePerCollection,proto3" json:"platform_max_size_per_collection,omitempty"`
-	// Platform limit: maximum search workers per space (copied into each Space.configuration.searcher_settings).
+	// Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).
 	// A value of 0 means unlimited.
-	PlatformMaxWorkersPerSpace uint64 `protobuf:"varint,8,opt,name=platform_max_workers_per_space,json=platformMaxWorkersPerSpace,proto3" json:"platform_max_workers_per_space,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	PlatformMaxWorkersPerCollection uint64 `protobuf:"varint,8,opt,name=platform_max_workers_per_collection,json=platformMaxWorkersPerCollection,proto3" json:"platform_max_workers_per_collection,omitempty"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *AccountQuota) Reset() {
@@ -183,9 +183,9 @@ func (x *AccountQuota) GetPlatformMaxSizePerCollection() uint64 {
 	return 0
 }
 
-func (x *AccountQuota) GetPlatformMaxWorkersPerSpace() uint64 {
+func (x *AccountQuota) GetPlatformMaxWorkersPerCollection() uint64 {
 	if x != nil {
-		return x.PlatformMaxWorkersPerSpace
+		return x.PlatformMaxWorkersPerCollection
 	}
 	return 0
 }
@@ -243,7 +243,7 @@ const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	",qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\";\n" +
 	"\x10GetQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xfe\x03\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\x88\x04\n" +
 	"\fAccountQuota\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n" +
@@ -254,8 +254,8 @@ const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	"\vused_spaces\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"usedSpaces\x127\n" +
 	"\x12used_storage_bytes\x18\x06 \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01R\x10usedStorageBytes\x12O\n" +
-	" platform_max_size_per_collection\x18\a \x01(\x04B\a\xbaH\x042\x02(\x00R\x1cplatformMaxSizePerCollection\x12K\n" +
-	"\x1eplatform_max_workers_per_space\x18\b \x01(\x04B\a\xbaH\x042\x02(\x00R\x1aplatformMaxWorkersPerSpace\"Y\n" +
+	" platform_max_size_per_collection\x18\a \x01(\x04B\a\xbaH\x042\x02(\x00R\x1cplatformMaxSizePerCollection\x12U\n" +
+	"#platform_max_workers_per_collection\x18\b \x01(\x04B\a\xbaH\x042\x02(\x00R\x1fplatformMaxWorkersPerCollection\"Y\n" +
 	"\x11GetQuotasResponse\x12D\n" +
 	"\x05quota\x18\x01 \x01(\v2..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xe2\x01\n" +
 	"\fQuotaService\x12\xc7\x01\n" +

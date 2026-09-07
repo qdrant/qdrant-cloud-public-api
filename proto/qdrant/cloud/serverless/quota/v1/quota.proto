@@ -40,7 +40,7 @@ message AccountQuota {
   // Platform limit: maximum collections per space (copied into each Space.configuration).
   uint64 max_collections_per_space = 3 [(buf.validate.field).uint64.gte = 0];
   // Platform default storage ceiling applied to each new space. 0 = unlimited.
-  // Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection document limits.
+  // Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits.
   uint64 platform_max_storage_bytes_per_space = 4 [
     deprecated = true,
     (buf.validate.field).uint64.gte = 0
@@ -53,12 +53,12 @@ message AccountQuota {
     deprecated = true,
     (buf.validate.field).uint64.gte = 0
   ];
-  // Platform limit: maximum number of documents per collection (copied into each Space.configuration.collection_settings).
+  // Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).
   // A value of 0 means unlimited.
   uint64 platform_max_size_per_collection = 7 [(buf.validate.field).uint64.gte = 0];
-  // Platform limit: maximum search workers per space (copied into each Space.configuration.searcher_settings).
+  // Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).
   // A value of 0 means unlimited.
-  uint64 platform_max_workers_per_space = 8 [(buf.validate.field).uint64.gte = 0];
+  uint64 platform_max_workers_per_collection = 8 [(buf.validate.field).uint64.gte = 0];
 }
 
 // GetQuotasResponse is the response message for the GetQuotas method.

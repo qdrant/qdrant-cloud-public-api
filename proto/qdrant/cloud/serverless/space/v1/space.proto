@@ -451,41 +451,36 @@ message SpaceConfiguration {
 
   // Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
-  // Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits.
+  // Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
   uint64 platform_max_storage_bytes = 13 [
     deprecated = true,
     (buf.validate.field).uint64.gte = 0
   ];
-
   // Optional customer-defined storage cap, used for cost control.
   // When set, it must not exceed `platform_max_storage_bytes`.
   // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-  // Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits.
+  // Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
   optional uint64 max_storage_bytes = 14 [
     deprecated = true,
     (buf.validate.field).uint64.gte = 0
   ];
-
   // Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 max_collections_per_space = 15 [(buf.validate.field).uint64.gte = 0];
-
   // Per-collection size limits for this space.
   // Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
   CollectionSettings collection_settings = 16;
-
   // Search-worker settings for this space.
   // Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
   SearcherSettings searcher_settings = 17;
 }
 
-// CollectionSettings configures per-collection document limits for a space.
+// CollectionSettings configures per-collection size limits for a space.
 message CollectionSettings {
-  // Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.
+  // Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 platform_max_size = 1 [(buf.validate.field).uint64.gte = 0];
-
-  // Optional customer-defined maximum number of documents per collection, used for cost control.
+  // Optional customer-defined maximum size in bytes per collection, used for cost control.
   // When set, it must not exceed `platform_max_size`.
   // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
   optional uint64 max_size = 2 [(buf.validate.field).uint64.gte = 0];
@@ -500,12 +495,11 @@ message SearcherSettings {
     gte: {seconds: 60}
     lte: {seconds: 900}
   }];
-
-  // Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.
+  // Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 platform_max_workers = 2 [(buf.validate.field).uint64.gte = 0];
-
-  // Maximum number of search workers for this space.
+  // Maximum number of search workers per collection in this space.
+  // For example, if set to 2 and the space has 3 collections, the total maximum is 6.
   // Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
   // This field is writable via UpdateSpace.
   optional uint64 max_workers = 3 [(buf.validate.field).uint64 = {gte: 1}];

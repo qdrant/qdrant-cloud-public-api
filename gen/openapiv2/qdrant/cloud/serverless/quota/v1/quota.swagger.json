@@ -98,7 +98,7 @@
         "platformMaxStorageBytesPerSpace": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform default storage ceiling applied to each new space. 0 = unlimited.\nDeprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection document limits."
+          "description": "Platform default storage ceiling applied to each new space. 0 = unlimited.\nDeprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits."
         },
         "usedSpaces": {
           "type": "string",
@@ -113,12 +113,12 @@
         "platformMaxSizePerCollection": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform limit: maximum number of documents per collection (copied into each Space.configuration.collection_settings).\nA value of 0 means unlimited."
+          "description": "Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).\nA value of 0 means unlimited."
         },
-        "platformMaxWorkersPerSpace": {
+        "platformMaxWorkersPerCollection": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform limit: maximum search workers per space (copied into each Space.configuration.searcher_settings).\nA value of 0 means unlimited."
+          "description": "Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).\nA value of 0 means unlimited."
         }
       },
       "description": "AccountQuota represents the serverless platform limits and aggregated usage for an account."

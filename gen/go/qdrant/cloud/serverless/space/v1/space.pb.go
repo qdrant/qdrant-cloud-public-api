@@ -1063,14 +1063,14 @@ type SpaceConfiguration struct {
 	AllowedOrigins []string `protobuf:"bytes,12,rep,name=allowed_origins,json=allowedOrigins,proto3" json:"allowed_origins,omitempty"`
 	// Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
-	// Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits.
+	// Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
 	//
 	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 	PlatformMaxStorageBytes uint64 `protobuf:"varint,13,opt,name=platform_max_storage_bytes,json=platformMaxStorageBytes,proto3" json:"platform_max_storage_bytes,omitempty"`
 	// Optional customer-defined storage cap, used for cost control.
 	// When set, it must not exceed `platform_max_storage_bytes`.
 	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-	// Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits.
+	// Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
 	//
 	// Deprecated: Marked as deprecated in qdrant/cloud/serverless/space/v1/space.proto.
 	MaxStorageBytes *uint64 `protobuf:"varint,14,opt,name=max_storage_bytes,json=maxStorageBytes,proto3,oneof" json:"max_storage_bytes,omitempty"`
@@ -1175,13 +1175,13 @@ func (x *SpaceConfiguration) GetSearcherSettings() *SearcherSettings {
 	return nil
 }
 
-// CollectionSettings configures per-collection document limits for a space.
+// CollectionSettings configures per-collection size limits for a space.
 type CollectionSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.
+	// Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	PlatformMaxSize uint64 `protobuf:"varint,1,opt,name=platform_max_size,json=platformMaxSize,proto3" json:"platform_max_size,omitempty"`
-	// Optional customer-defined maximum number of documents per collection, used for cost control.
+	// Optional customer-defined maximum size in bytes per collection, used for cost control.
 	// When set, it must not exceed `platform_max_size`.
 	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
 	MaxSize       *uint64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3,oneof" json:"max_size,omitempty"`
@@ -1240,10 +1240,11 @@ type SearcherSettings struct {
 	// Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
 	// This field is writable via UpdateSpace.
 	IdleTimeout *durationpb.Duration `protobuf:"bytes,1,opt,name=idle_timeout,json=idleTimeout,proto3,oneof" json:"idle_timeout,omitempty"`
-	// Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.
+	// Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	PlatformMaxWorkers uint64 `protobuf:"varint,2,opt,name=platform_max_workers,json=platformMaxWorkers,proto3" json:"platform_max_workers,omitempty"`
-	// Maximum number of search workers for this space.
+	// Maximum number of search workers per collection in this space.
+	// For example, if set to 2 and the space has 3 collections, the total maximum is 6.
 	// Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
 	// This field is writable via UpdateSpace.
 	MaxWorkers    *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`

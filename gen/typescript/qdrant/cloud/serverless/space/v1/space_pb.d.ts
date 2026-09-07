@@ -835,7 +835,7 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
   /**
    * Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
-   * Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection document limits.
+   * Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
    *
    * @generated from field: uint64 platform_max_storage_bytes = 13 [deprecated = true];
    * @deprecated
@@ -846,7 +846,7 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
    * Optional customer-defined storage cap, used for cost control.
    * When set, it must not exceed `platform_max_storage_bytes`.
    * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-   * Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection document limits.
+   * Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
    *
    * @generated from field: optional uint64 max_storage_bytes = 14 [deprecated = true];
    * @deprecated
@@ -887,13 +887,13 @@ export declare type SpaceConfigurationValid = SpaceConfiguration;
 export declare const SpaceConfigurationSchema: GenMessage<SpaceConfiguration, {validType: SpaceConfigurationValid}>;
 
 /**
- * CollectionSettings configures per-collection document limits for a space.
+ * CollectionSettings configures per-collection size limits for a space.
  *
  * @generated from message qdrant.cloud.serverless.space.v1.CollectionSettings
  */
 export declare type CollectionSettings = Message<"qdrant.cloud.serverless.space.v1.CollectionSettings"> & {
   /**
-   * Platform-enforced maximum number of documents per collection, derived from the account's quota and platform defaults.
+   * Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
    *
    * @generated from field: uint64 platform_max_size = 1;
@@ -901,7 +901,7 @@ export declare type CollectionSettings = Message<"qdrant.cloud.serverless.space.
   platformMaxSize: bigint;
 
   /**
-   * Optional customer-defined maximum number of documents per collection, used for cost control.
+   * Optional customer-defined maximum size in bytes per collection, used for cost control.
    * When set, it must not exceed `platform_max_size`.
    * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
    *
@@ -934,7 +934,7 @@ export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1
   idleTimeout?: Duration | undefined;
 
   /**
-   * Platform-enforced maximum number of search workers for this space, derived from the account's quota and platform defaults.
+   * Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
    *
    * @generated from field: uint64 platform_max_workers = 2;
@@ -942,7 +942,8 @@ export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1
   platformMaxWorkers: bigint;
 
   /**
-   * Maximum number of search workers for this space.
+   * Maximum number of search workers per collection in this space.
+   * For example, if set to 2 and the space has 3 collections, the total maximum is 6.
    * Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
    * This field is writable via UpdateSpace.
    *
