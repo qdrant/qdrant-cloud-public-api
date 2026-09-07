@@ -51,7 +51,14 @@
           },
           {
             "name": "collectionName",
-            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for collections in the space are returned (paginated when page_size is set).",
+            "description": "Exact collection name. Returns metrics for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns metrics for every collection whose name contains this value.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -143,7 +150,14 @@
           },
           {
             "name": "collectionName",
-            "description": "Optional collection name to limit the response to a single collection.\nIf omitted, metrics for collections in the space are returned (paginated when page_size is set).",
+            "description": "Exact collection name. Returns metrics for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns metrics for every collection whose name contains this value.",
             "in": "query",
             "required": false,
             "type": "string"

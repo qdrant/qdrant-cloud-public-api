@@ -97,9 +97,14 @@ type GetSpaceSummaryMetricsRequest struct {
 	// This space should be part of the provided account.
 	// This is a required field.
 	SpaceId string `protobuf:"bytes,2,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
-	// Optional collection name to limit the response to a single collection.
+	// Optional filter on collection names. At most one variant may be set.
 	// If omitted, metrics for collections in the space are returned (paginated when page_size is set).
-	CollectionName *string `protobuf:"bytes,3,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
+	//
+	// Types that are valid to be assigned to CollectionFilter:
+	//
+	//	*GetSpaceSummaryMetricsRequest_CollectionName
+	//	*GetSpaceSummaryMetricsRequest_CollectionNameContains
+	CollectionFilter isGetSpaceSummaryMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
 	// If not specified, all matching items are returned.
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -156,9 +161,27 @@ func (x *GetSpaceSummaryMetricsRequest) GetSpaceId() string {
 	return ""
 }
 
+func (x *GetSpaceSummaryMetricsRequest) GetCollectionFilter() isGetSpaceSummaryMetricsRequest_CollectionFilter {
+	if x != nil {
+		return x.CollectionFilter
+	}
+	return nil
+}
+
 func (x *GetSpaceSummaryMetricsRequest) GetCollectionName() string {
-	if x != nil && x.CollectionName != nil {
-		return *x.CollectionName
+	if x != nil {
+		if x, ok := x.CollectionFilter.(*GetSpaceSummaryMetricsRequest_CollectionName); ok {
+			return x.CollectionName
+		}
+	}
+	return ""
+}
+
+func (x *GetSpaceSummaryMetricsRequest) GetCollectionNameContains() string {
+	if x != nil {
+		if x, ok := x.CollectionFilter.(*GetSpaceSummaryMetricsRequest_CollectionNameContains); ok {
+			return x.CollectionNameContains
+		}
 	}
 	return ""
 }
@@ -175,6 +198,27 @@ func (x *GetSpaceSummaryMetricsRequest) GetPageToken() string {
 		return *x.PageToken
 	}
 	return ""
+}
+
+type isGetSpaceSummaryMetricsRequest_CollectionFilter interface {
+	isGetSpaceSummaryMetricsRequest_CollectionFilter()
+}
+
+type GetSpaceSummaryMetricsRequest_CollectionName struct {
+	// Exact collection name. Returns metrics for that collection only.
+	CollectionName string `protobuf:"bytes,3,opt,name=collection_name,json=collectionName,proto3,oneof"`
+}
+
+type GetSpaceSummaryMetricsRequest_CollectionNameContains struct {
+	// Case-insensitive substring matched against collection names.
+	// Returns metrics for every collection whose name contains this value.
+	CollectionNameContains string `protobuf:"bytes,4,opt,name=collection_name_contains,json=collectionNameContains,proto3,oneof"`
+}
+
+func (*GetSpaceSummaryMetricsRequest_CollectionName) isGetSpaceSummaryMetricsRequest_CollectionFilter() {
+}
+
+func (*GetSpaceSummaryMetricsRequest_CollectionNameContains) isGetSpaceSummaryMetricsRequest_CollectionFilter() {
 }
 
 // GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function.
@@ -262,9 +306,14 @@ type GetSpaceUsageMetricsRequest struct {
 	// Aggregation function to apply to the time series data.
 	// If omitted, defaults to SUM.
 	Aggregator *Aggregator `protobuf:"varint,5,opt,name=aggregator,proto3,enum=qdrant.cloud.serverless.monitoring.v1.Aggregator,oneof" json:"aggregator,omitempty"`
-	// Optional collection name to limit the response to a single collection.
+	// Optional filter on collection names. At most one variant may be set.
 	// If omitted, metrics for collections in the space are returned (paginated when page_size is set).
-	CollectionName *string `protobuf:"bytes,6,opt,name=collection_name,json=collectionName,proto3,oneof" json:"collection_name,omitempty"`
+	//
+	// Types that are valid to be assigned to CollectionFilter:
+	//
+	//	*GetSpaceUsageMetricsRequest_CollectionName
+	//	*GetSpaceUsageMetricsRequest_CollectionNameContains
+	CollectionFilter isGetSpaceUsageMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
 	// If not specified, all matching items are returned.
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -342,9 +391,27 @@ func (x *GetSpaceUsageMetricsRequest) GetAggregator() Aggregator {
 	return Aggregator_AGGREGATOR_UNSPECIFIED
 }
 
+func (x *GetSpaceUsageMetricsRequest) GetCollectionFilter() isGetSpaceUsageMetricsRequest_CollectionFilter {
+	if x != nil {
+		return x.CollectionFilter
+	}
+	return nil
+}
+
 func (x *GetSpaceUsageMetricsRequest) GetCollectionName() string {
-	if x != nil && x.CollectionName != nil {
-		return *x.CollectionName
+	if x != nil {
+		if x, ok := x.CollectionFilter.(*GetSpaceUsageMetricsRequest_CollectionName); ok {
+			return x.CollectionName
+		}
+	}
+	return ""
+}
+
+func (x *GetSpaceUsageMetricsRequest) GetCollectionNameContains() string {
+	if x != nil {
+		if x, ok := x.CollectionFilter.(*GetSpaceUsageMetricsRequest_CollectionNameContains); ok {
+			return x.CollectionNameContains
+		}
 	}
 	return ""
 }
@@ -361,6 +428,26 @@ func (x *GetSpaceUsageMetricsRequest) GetPageToken() string {
 		return *x.PageToken
 	}
 	return ""
+}
+
+type isGetSpaceUsageMetricsRequest_CollectionFilter interface {
+	isGetSpaceUsageMetricsRequest_CollectionFilter()
+}
+
+type GetSpaceUsageMetricsRequest_CollectionName struct {
+	// Exact collection name. Returns metrics for that collection only.
+	CollectionName string `protobuf:"bytes,6,opt,name=collection_name,json=collectionName,proto3,oneof"`
+}
+
+type GetSpaceUsageMetricsRequest_CollectionNameContains struct {
+	// Case-insensitive substring matched against collection names.
+	// Returns metrics for every collection whose name contains this value.
+	CollectionNameContains string `protobuf:"bytes,7,opt,name=collection_name_contains,json=collectionNameContains,proto3,oneof"`
+}
+
+func (*GetSpaceUsageMetricsRequest_CollectionName) isGetSpaceUsageMetricsRequest_CollectionFilter() {}
+
+func (*GetSpaceUsageMetricsRequest_CollectionNameContains) isGetSpaceUsageMetricsRequest_CollectionFilter() {
 }
 
 // GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function.
@@ -773,17 +860,18 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xc6\x02\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x9f\x03\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
-	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12K\n" +
-	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x88\x01\x01\x12,\n" +
+	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12H\n" +
+	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
+	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
 	"\tpage_size\x18\x14 \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
-	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x12\n" +
-	"\x10_collection_nameB\f\n" +
+	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x13\n" +
+	"\x11collection_filterB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
 	"\v_page_token\"\xfb\x01\n" +
@@ -794,27 +882,28 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\xc7\x05\n" +
+	"\x10_next_page_token\"\xa0\x06\n" +
 	"\x1bGetSpaceUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x125\n" +
-	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x05since\x88\x01\x01\x125\n" +
-	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05until\x88\x01\x01\x12b\n" +
+	"\x05since\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x05since\x88\x01\x01\x125\n" +
+	"\x05until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05until\x88\x01\x01\x12b\n" +
 	"\n" +
 	"aggregator\x18\x05 \x01(\x0e21.qdrant.cloud.serverless.monitoring.v1.AggregatorB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x02R\n" +
-	"aggregator\x88\x01\x01\x12K\n" +
-	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x03R\x0ecollectionName\x88\x01\x01\x12,\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\n" +
+	"aggregator\x88\x01\x01\x12H\n" +
+	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
+	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
 	"\tpage_size\x18\x14 \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\tpageToken\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
-	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\b\n" +
+	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
+	"\x11collection_filterB\b\n" +
 	"\x06_sinceB\b\n" +
 	"\x06_untilB\r\n" +
-	"\v_aggregatorB\x12\n" +
-	"\x10_collection_nameB\f\n" +
+	"\v_aggregatorB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
 	"\v_page_token\"\xfe\x01\n" +
@@ -923,9 +1012,15 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 	if File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto != nil {
 		return
 	}
-	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[0].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[0].OneofWrappers = []any{
+		(*GetSpaceSummaryMetricsRequest_CollectionName)(nil),
+		(*GetSpaceSummaryMetricsRequest_CollectionNameContains)(nil),
+	}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[1].OneofWrappers = []any{}
-	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[2].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[2].OneofWrappers = []any{
+		(*GetSpaceUsageMetricsRequest_CollectionName)(nil),
+		(*GetSpaceUsageMetricsRequest_CollectionNameContains)(nil),
+	}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

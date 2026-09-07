@@ -35,12 +35,29 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
   spaceId: string;
 
   /**
-   * Optional collection name to limit the response to a single collection.
+   * Optional filter on collection names. At most one variant may be set.
    * If omitted, metrics for collections in the space are returned (paginated when page_size is set).
    *
-   * @generated from field: optional string collection_name = 3;
+   * @generated from oneof qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest.collection_filter
    */
-  collectionName?: string | undefined;
+  collectionFilter: {
+    /**
+     * Exact collection name. Returns metrics for that collection only.
+     *
+     * @generated from field: string collection_name = 3;
+     */
+    value: string;
+    case: "collectionName";
+  } | {
+    /**
+     * Case-insensitive substring matched against collection names.
+     * Returns metrics for every collection whose name contains this value.
+     *
+     * @generated from field: string collection_name_contains = 4;
+     */
+    value: string;
+    case: "collectionNameContains";
+  } | { case: undefined; value?: undefined };
 
   /**
    * Maximum number of collection metrics to return.
@@ -183,12 +200,29 @@ export declare type GetSpaceUsageMetricsRequest = Message<"qdrant.cloud.serverle
   aggregator?: Aggregator | undefined;
 
   /**
-   * Optional collection name to limit the response to a single collection.
+   * Optional filter on collection names. At most one variant may be set.
    * If omitted, metrics for collections in the space are returned (paginated when page_size is set).
    *
-   * @generated from field: optional string collection_name = 6;
+   * @generated from oneof qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.collection_filter
    */
-  collectionName?: string | undefined;
+  collectionFilter: {
+    /**
+     * Exact collection name. Returns metrics for that collection only.
+     *
+     * @generated from field: string collection_name = 6;
+     */
+    value: string;
+    case: "collectionName";
+  } | {
+    /**
+     * Case-insensitive substring matched against collection names.
+     * Returns metrics for every collection whose name contains this value.
+     *
+     * @generated from field: string collection_name_contains = 7;
+     */
+    value: string;
+    case: "collectionNameContains";
+  } | { case: undefined; value?: undefined };
 
   /**
    * Maximum number of collection metrics to return.
