@@ -180,12 +180,13 @@ class SpaceInferenceModelMetrics(_message.Message):
     def __init__(self, inference_model_id: _Optional[str] = ..., values: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class ListSpaceAlertsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "state", "collection_name", "collection_name_contains", "page_size", "page_token")
+    __slots__ = ("account_id", "space_id", "state", "collection_name", "collection_name_contains", "space_global_only", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
+    SPACE_GLOBAL_ONLY_FIELD_NUMBER: _ClassVar[int]
     PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -193,9 +194,10 @@ class ListSpaceAlertsRequest(_message.Message):
     state: SpaceAlertState
     collection_name: str
     collection_name_contains: str
+    space_global_only: bool
     page_size: int
     page_token: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., space_global_only: _Optional[bool] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListSpaceAlertsResponse(_message.Message):
     __slots__ = ("items", "total_size", "next_page_token")

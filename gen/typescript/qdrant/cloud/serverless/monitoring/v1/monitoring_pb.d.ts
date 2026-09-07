@@ -616,10 +616,9 @@ export declare type ListSpaceAlertsRequest = Message<"qdrant.cloud.serverless.mo
   state?: SpaceAlertState | undefined;
 
   /**
-   * Optional filter on collection names. At most one variant may be set.
+   * Optional filter for which alerts to return. At most one variant may be set.
    * If omitted, both space-global alerts and collection-scoped alerts are returned
-   * (paginated when page_size is set). When set, only matching collection-scoped
-   * alerts are returned (space-global alerts are excluded).
+   * (paginated when page_size is set).
    *
    * @generated from oneof qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.collection_filter
    */
@@ -640,6 +639,15 @@ export declare type ListSpaceAlertsRequest = Message<"qdrant.cloud.serverless.mo
      */
     value: string;
     case: "collectionNameContains";
+  } | {
+    /**
+     * When set to true, return only space-global alerts (alerts without a collection_name).
+     * Must be set to true when this variant is used.
+     *
+     * @generated from field: bool space_global_only = 6;
+     */
+    value: boolean;
+    case: "spaceGlobalOnly";
   } | { case: undefined; value?: undefined };
 
   /**

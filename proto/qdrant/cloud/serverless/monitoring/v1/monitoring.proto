@@ -302,10 +302,9 @@ message ListSpaceAlertsRequest {
   // Optional alert-state filter. If omitted (empty), alerts in ALL states are
   // returned; if set, only alerts in that state are returned.
   optional SpaceAlertState state = 3;
-  // Optional filter on collection names. At most one variant may be set.
+  // Optional filter for which alerts to return. At most one variant may be set.
   // If omitted, both space-global alerts and collection-scoped alerts are returned
-  // (paginated when page_size is set). When set, only matching collection-scoped
-  // alerts are returned (space-global alerts are excluded).
+  // (paginated when page_size is set).
   oneof collection_filter {
     // Exact collection name. Returns alerts for that collection only.
     string collection_name = 4 [(buf.validate.field).string = {
@@ -320,6 +319,9 @@ message ListSpaceAlertsRequest {
       max_len: 255
       pattern: "^[a-zA-Z0-9-_.]+$"
     }];
+    // When set to true, return only space-global alerts (alerts without a collection_name).
+    // Must be set to true when this variant is used.
+    bool space_global_only = 6 [(buf.validate.field).bool.const = true];
   }
   // Maximum number of alerts to return.
   // If not specified, all matching items are returned.

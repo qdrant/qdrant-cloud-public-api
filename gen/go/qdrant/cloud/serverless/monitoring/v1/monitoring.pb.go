@@ -1108,15 +1108,15 @@ type ListSpaceAlertsRequest struct {
 	// Optional alert-state filter. If omitted (empty), alerts in ALL states are
 	// returned; if set, only alerts in that state are returned.
 	State *SpaceAlertState `protobuf:"varint,3,opt,name=state,proto3,enum=qdrant.cloud.serverless.monitoring.v1.SpaceAlertState,oneof" json:"state,omitempty"`
-	// Optional filter on collection names. At most one variant may be set.
+	// Optional filter for which alerts to return. At most one variant may be set.
 	// If omitted, both space-global alerts and collection-scoped alerts are returned
-	// (paginated when page_size is set). When set, only matching collection-scoped
-	// alerts are returned (space-global alerts are excluded).
+	// (paginated when page_size is set).
 	//
 	// Types that are valid to be assigned to CollectionFilter:
 	//
 	//	*ListSpaceAlertsRequest_CollectionName
 	//	*ListSpaceAlertsRequest_CollectionNameContains
+	//	*ListSpaceAlertsRequest_SpaceGlobalOnly
 	CollectionFilter isListSpaceAlertsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of alerts to return.
 	// If not specified, all matching items are returned.
@@ -1206,6 +1206,15 @@ func (x *ListSpaceAlertsRequest) GetCollectionNameContains() string {
 	return ""
 }
 
+func (x *ListSpaceAlertsRequest) GetSpaceGlobalOnly() bool {
+	if x != nil {
+		if x, ok := x.CollectionFilter.(*ListSpaceAlertsRequest_SpaceGlobalOnly); ok {
+			return x.SpaceGlobalOnly
+		}
+	}
+	return false
+}
+
 func (x *ListSpaceAlertsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
@@ -1235,9 +1244,17 @@ type ListSpaceAlertsRequest_CollectionNameContains struct {
 	CollectionNameContains string `protobuf:"bytes,5,opt,name=collection_name_contains,json=collectionNameContains,proto3,oneof"`
 }
 
+type ListSpaceAlertsRequest_SpaceGlobalOnly struct {
+	// When set to true, return only space-global alerts (alerts without a collection_name).
+	// Must be set to true when this variant is used.
+	SpaceGlobalOnly bool `protobuf:"varint,6,opt,name=space_global_only,json=spaceGlobalOnly,proto3,oneof"`
+}
+
 func (*ListSpaceAlertsRequest_CollectionName) isListSpaceAlertsRequest_CollectionFilter() {}
 
 func (*ListSpaceAlertsRequest_CollectionNameContains) isListSpaceAlertsRequest_CollectionFilter() {}
+
+func (*ListSpaceAlertsRequest_SpaceGlobalOnly) isListSpaceAlertsRequest_CollectionFilter() {}
 
 // ListSpaceAlertsResponse is the response from the ListSpaceAlerts function.
 type ListSpaceAlertsResponse struct {
@@ -1854,14 +1871,15 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x06models\x18\x02 \x03(\v2A.qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetricsR\x06models\"\x9a\x01\n" +
 	"\x1aSpaceInferenceModelMetrics\x125\n" +
 	"\x12inference_model_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x10inferenceModelId\x12E\n" +
-	"\x06values\x18\x02 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricR\x06values\"\xf5\x03\n" +
+	"\x06values\x18\x02 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricR\x06values\"\xac\x04\n" +
 	"\x16ListSpaceAlertsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12Q\n" +
 	"\x05state\x18\x03 \x01(\x0e26.qdrant.cloud.serverless.monitoring.v1.SpaceAlertStateH\x01R\x05state\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\x05 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
+	"\x18collection_name_contains\x18\x05 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x125\n" +
+	"\x11space_global_only\x18\x06 \x01(\bB\a\xbaH\x04j\x02\b\x01H\x00R\x0fspaceGlobalOnly\x12,\n" +
 	"\tpage_size\x18\x14 \x01(\x05B\n" +
 	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x02R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
@@ -2056,6 +2074,7 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[8].OneofWrappers = []any{
 		(*ListSpaceAlertsRequest_CollectionName)(nil),
 		(*ListSpaceAlertsRequest_CollectionNameContains)(nil),
+		(*ListSpaceAlertsRequest_SpaceGlobalOnly)(nil),
 	}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[9].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[10].OneofWrappers = []any{}

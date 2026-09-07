@@ -77,6 +77,13 @@
             "type": "string"
           },
           {
+            "name": "spaceGlobalOnly",
+            "description": "When set to true, return only space-global alerts (alerts without a collection_name).\nMust be set to true when this variant is used.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "pageSize",
             "description": "Maximum number of alerts to return.\nIf not specified, all matching items are returned.",
             "in": "query",
