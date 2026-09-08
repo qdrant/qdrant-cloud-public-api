@@ -456,22 +456,6 @@ message SpaceConfiguration {
     }
   }];
 
-  // Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
-  // This is a read-only field. A value of 0 means unlimited.
-  // Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
-  uint64 platform_max_storage_bytes = 13 [
-    (google.api.field_behavior) = OUTPUT_ONLY,
-    deprecated = true,
-    (buf.validate.field).uint64.gte = 0
-  ];
-  // Optional customer-defined storage cap, used for cost control.
-  // When set, it must not exceed `platform_max_storage_bytes`.
-  // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-  // Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
-  optional uint64 max_storage_bytes = 14 [
-    deprecated = true,
-    (buf.validate.field).uint64.gte = 0
-  ];
   // Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 max_collections_per_space = 15 [
@@ -484,6 +468,10 @@ message SpaceConfiguration {
   // Search-worker settings for this space.
   // Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
   SearcherSettings searcher_settings = 17;
+  // Removed: platform_max_storage_bytes (13), max_storage_bytes (14).
+  // Replaced by collection_settings.
+  reserved 13, 14;
+  reserved "platform_max_storage_bytes", "max_storage_bytes";
 }
 
 // CollectionSettings configures per-collection size limits for a space.

@@ -15,24 +15,20 @@ class GetQuotasRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class AccountQuota(_message.Message):
-    __slots__ = ("account_id", "max_spaces", "max_collections_per_space", "platform_max_storage_bytes_per_space", "used_spaces", "used_storage_bytes", "platform_max_size_per_collection", "platform_max_workers_per_collection")
+    __slots__ = ("account_id", "max_spaces", "max_collections_per_space", "used_spaces", "platform_max_size_per_collection", "platform_max_workers_per_collection")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MAX_SPACES_FIELD_NUMBER: _ClassVar[int]
     MAX_COLLECTIONS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
-    PLATFORM_MAX_STORAGE_BYTES_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
     USED_SPACES_FIELD_NUMBER: _ClassVar[int]
-    USED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_SIZE_PER_COLLECTION_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_WORKERS_PER_COLLECTION_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     max_spaces: int
     max_collections_per_space: int
-    platform_max_storage_bytes_per_space: int
     used_spaces: int
-    used_storage_bytes: int
     platform_max_size_per_collection: int
     platform_max_workers_per_collection: int
-    def __init__(self, account_id: _Optional[str] = ..., max_spaces: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ..., platform_max_storage_bytes_per_space: _Optional[int] = ..., used_spaces: _Optional[int] = ..., used_storage_bytes: _Optional[int] = ..., platform_max_size_per_collection: _Optional[int] = ..., platform_max_workers_per_collection: _Optional[int] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., max_spaces: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ..., used_spaces: _Optional[int] = ..., platform_max_size_per_collection: _Optional[int] = ..., platform_max_workers_per_collection: _Optional[int] = ...) -> None: ...
 
 class GetQuotasResponse(_message.Message):
     __slots__ = ("quota",)

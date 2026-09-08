@@ -95,20 +95,10 @@
           "format": "uint64",
           "description": "Platform limit: maximum collections per space (copied into each Space.configuration)."
         },
-        "platformMaxStorageBytesPerSpace": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Platform default storage ceiling applied to each new space. 0 = unlimited.\nDeprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits."
-        },
         "usedSpaces": {
           "type": "string",
           "format": "uint64",
           "description": "Number of serverless spaces currently used."
-        },
-        "usedStorageBytes": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Total storage used across all spaces, in bytes.\nDeprecated: Account-level storage usage is no longer part of the serverless quota model."
         },
         "platformMaxSizePerCollection": {
           "type": "string",
