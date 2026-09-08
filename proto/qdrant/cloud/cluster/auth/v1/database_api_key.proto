@@ -152,10 +152,13 @@ message DatabaseApiKey {
   // A list of cluster IDs.
   // It should contain at least one ID.
   // After creation, this field cannot be changed.
-  repeated string cluster_ids = 4 [(buf.validate.field).repeated = {
-    min_items: 1
-    items: {string: {uuid: true}}
-  }];
+  repeated string cluster_ids = 4 [
+    (buf.validate.field).repeated = {
+      min_items: 1
+      items: {string: {uuid: true}}
+    },
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // Prefix for the database api key, this represents the first bytes of the key.
   // This is a read-only field and will be available after a database api key is created.
   string prefix = 5 [(google.api.field_behavior) = OUTPUT_ONLY];

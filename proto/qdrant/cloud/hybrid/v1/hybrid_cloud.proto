@@ -357,11 +357,14 @@ message HybridCloudEnvironmentConfiguration {
   // This is a read-only field and will be available after it is created.
   google.protobuf.Timestamp last_modified_at = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Namespace where qdrant components are deployed, readonly after bootstrapping
-  string namespace = 4 [(buf.validate.field).string = {
-    max_len: 253
-    min_len: 1
-    pattern: "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-  }];
+  string namespace = 4 [
+    (buf.validate.field).string = {
+      max_len: 253
+      min_len: 1
+      pattern: "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    },
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // optional HTTP proxy URL
   optional string http_proxy_url = 5 [(buf.validate.field).string.uri = true];
   // optional HTTPS proxy URL
