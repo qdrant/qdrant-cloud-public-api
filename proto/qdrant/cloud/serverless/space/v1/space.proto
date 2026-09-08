@@ -383,11 +383,17 @@ message Space {
   // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
   // In this case, `hybrid` isn't supported.
   // After creation, this field cannot be changed.
-  string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  string cloud_provider_id = 10 [
+    (buf.validate.field).string = {min_len: 3},
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // Cloud provider region where the space is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
   // After creation, this field cannot be changed.
-  string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  string cloud_provider_region_id = 11 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // List of labels for a space. These labels are used in the cloud ui and billing reports.
   // This is an optional field
   repeated common.v1.KeyValue labels = 12 [(buf.validate.field).repeated = {max_items: 10}];
