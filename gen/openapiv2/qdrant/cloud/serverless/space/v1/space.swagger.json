@@ -336,12 +336,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created."
+              "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -350,7 +352,8 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called.",
+              "readOnly": true
             },
             "cloudProviderId": {
               "type": "string",
@@ -378,19 +381,23 @@
             },
             "createdBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created."
+              "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created.",
+              "readOnly": true
             },
             "lastUpdatedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called."
+              "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called.",
+              "readOnly": true
             },
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set."
+              "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set.",
+              "readOnly": true
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
-              "description": "Status of the space\nAll fields inside `state` are read-only."
+              "description": "Status of the space\nAll fields inside `state` are read-only.",
+              "readOnly": true
             }
           },
           "title": "Space represents a space in the Qdrant serverless environment"
@@ -417,7 +424,8 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+              "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -426,7 +434,8 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+              "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called.",
+              "readOnly": true
             },
             "cloudProviderId": {
               "type": "string",
@@ -454,19 +463,23 @@
             },
             "createdBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created."
+              "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created.",
+              "readOnly": true
             },
             "lastUpdatedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called."
+              "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called.",
+              "readOnly": true
             },
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set."
+              "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set.",
+              "readOnly": true
             },
             "state": {
               "$ref": "#/definitions/v1SpaceState",
-              "description": "Status of the space\nAll fields inside `state` are read-only."
+              "description": "Status of the space\nAll fields inside `state` are read-only.",
+              "readOnly": true
             }
           },
           "description": "The actual space\nThis is a required field."
@@ -541,7 +554,8 @@
         "platformMaxSize": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "maxSize": {
           "type": "string",
@@ -633,7 +647,8 @@
         "platformMaxWorkers": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "maxWorkers": {
           "type": "string",
@@ -648,12 +663,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created."
+          "description": "Unique identifier for the space (in GUID format).\nThis is a read-only field and will be available after a space is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created."
+          "description": "Timestamp when the space was created.\nThis is a read-only field and will be available after a space is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -666,7 +683,8 @@
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called."
+          "description": "Timestamp when the space was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpace is called.",
+          "readOnly": true
         },
         "cloudProviderId": {
           "type": "string",
@@ -694,19 +712,23 @@
         },
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created."
+          "description": "The caller who created the space.\nThis is a read-only field and will be available after a space is created.",
+          "readOnly": true
         },
         "lastUpdatedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called."
+          "description": "The caller who last updated the space.\nThis is a read-only field and will be set after UpdateSpace is called.",
+          "readOnly": true
         },
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set."
+          "description": "The caller who initiated deletion of the space.\nThis is a read-only field and will be set when deleted_at is set.",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/v1SpaceState",
-          "description": "Status of the space\nAll fields inside `state` are read-only."
+          "description": "Status of the space\nAll fields inside `state` are read-only.",
+          "readOnly": true
         }
       },
       "description": "Space represents a space in the Qdrant serverless environment.\nIt can be used to store collections which can hold points."
@@ -717,7 +739,8 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space configuration was last updated.\nThis is a read-only field and will be available after a space is created."
+          "description": "Timestamp when the space configuration was last updated.\nThis is a read-only field and will be available after a space is created.",
+          "readOnly": true
         },
         "allowedIpSourceRanges": {
           "type": "array",
@@ -736,7 +759,8 @@
         "platformMaxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits."
+          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.",
+          "readOnly": true
         },
         "maxStorageBytes": {
           "type": "string",
@@ -746,7 +770,8 @@
         "maxCollectionsPerSpace": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "collectionSettings": {
           "$ref": "#/definitions/v1CollectionSettings",
@@ -764,17 +789,20 @@
       "properties": {
         "url": {
           "type": "string",
-          "title": "URL to access the qdrant space (aka serverless database) without port"
+          "title": "URL to access the qdrant space (aka serverless database) without port",
+          "readOnly": true
         },
         "restPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for HTTP REST calls (6333)"
+          "title": "The port to use for HTTP REST calls (6333)",
+          "readOnly": true
         },
         "grpcPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for gRPC calls (6334)"
+          "title": "The port to use for gRPC calls (6334)",
+          "readOnly": true
         }
       },
       "description": "Endpoint information to access the qdrant space (aka serverless database).\nAll fields in this message are a read-only field."
@@ -784,18 +812,21 @@
       "properties": {
         "phase": {
           "$ref": "#/definitions/v1SpaceStatePhase",
-          "description": "The current operational status of the space."
+          "description": "The current operational status of the space.",
+          "readOnly": true
         },
         "reason": {
           "type": "string",
-          "description": "Descriptive message explaining any errors or issues with the space.\nEmpty when the space is operating normally."
+          "description": "Descriptive message explaining any errors or issues with the space.\nEmpty when the space is operating normally.",
+          "readOnly": true
         },
         "endpoint": {
           "$ref": "#/definitions/v1SpaceEndpoint",
-          "description": "The URL endpoint where clients can connect to and interact with the space.\nNot set if the space is not yet ready or is disabled."
+          "description": "The URL endpoint where clients can connect to and interact with the space.\nNot set if the space is not yet ready or is disabled.",
+          "readOnly": true
         }
       },
-      "description": "SpaceState represents the operational state of a space in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information."
+      "description": "SpaceState represents the operational state of a space in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information.\nAll fields in this message are read-only."
     },
     "v1SpaceStatePhase": {
       "type": "string",

@@ -963,6 +963,7 @@ export declare const SearcherSettingsSchema: GenMessage<SearcherSettings, {valid
 /**
  * SpaceState represents the operational state of a space in the Qdrant serverless environment.
  * It provides status information, error details (if any), and endpoint access information.
+ * All fields in this message are read-only.
  *
  * @generated from message qdrant.cloud.serverless.space.v1.SpaceState
  */

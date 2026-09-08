@@ -3099,7 +3099,7 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"Q\n" +
+	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"Q\n" +
 	"\x1bGetAuthenticatedUserRequest\x12&\n" +
 	"\auser_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
@@ -3202,27 +3202,28 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x12role_ids_to_delete\x18\x04 \x03(\tB\r\xbaH\n" +
 	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\x0froleIdsToDelete:\x9a\x01\xbaH\x96\x01\x1a\x93\x01\n" +
 	"\x1eassign_user_roles.at_least_one\x12*at least one role must be added or deleted\x1aEthis.role_ids_to_add.size() > 0 || this.role_ids_to_delete.size() > 0\"\x19\n" +
-	"\x17AssignUserRolesResponse\"\xf9\x04\n" +
-	"\x04User\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
+	"\x17AssignUserRolesResponse\"\x8f\x05\n" +
+	"\x04User\x12\x1b\n" +
+	"\x02id\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12\x1d\n" +
-	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12A\n" +
-	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
-	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\x12\\\n" +
-	"\x11onboarding_status\x18\a \x01(\x0e2%.qdrant.cloud.iam.v1.OnboardingStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x10onboardingStatus:\xdd\x01\xbaH\xd9\x01\x1a\xd6\x01\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12I\n" +
+	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12 \n" +
+	"\x05email\x18\x04 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02`\x01R\x05email\x12D\n" +
+	"\x06status\x18\x05 \x01(\x0e2\x1f.qdrant.cloud.iam.v1.UserStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x126\n" +
+	"\x12default_account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10defaultAccountId\x12_\n" +
+	"\x11onboarding_status\x18\a \x01(\x0e2%.qdrant.cloud.iam.v1.OnboardingStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x10onboardingStatus:\xdd\x01\xbaH\xd9\x01\x1a\xd6\x01\n" +
 	"\x15user.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\"b\n" +
 	"\n" +
 	"Permission\x12\x1d\n" +
 	"\x05value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05value\x12(\n" +
 	"\bcategory\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\bcategory\x88\x01\x01B\v\n" +
-	"\t_category\"\x9b\a\n" +
-	"\x04Role\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\t_category\"\xaa\a\n" +
+	"\x04Role\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12I\n" +
+	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x04name\x18\x05 \x01(\tB \xbaH\x1dr\x1b\x10\x04\x18@2\x15^([^\\x00-\\x1F\\x7F])*$R\x04name\x12*\n" +
@@ -3274,15 +3275,15 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0elastModifiedAt\x88\x01\x01\x12\x1f\n" +
 	"\vis_accepted\x18\x04 \x01(\bR\n" +
 	"isAcceptedB\x13\n" +
-	"\x11_last_modified_at\"\xfd\x03\n" +
-	"\rUserMfaMethod\x12(\n" +
-	"\vexternal_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"externalId\x12F\n" +
-	"\x04type\x18\x02 \x01(\x0e2&.qdrant.cloud.iam.v1.UserMfaMethodTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x129\n" +
+	"\x11_last_modified_at\"\x8d\x04\n" +
+	"\rUserMfaMethod\x12+\n" +
+	"\vexternal_id\x18\x01 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\n" +
+	"externalId\x12I\n" +
+	"\x04type\x18\x02 \x01(\x0e2&.qdrant.cloud.iam.v1.UserMfaMethodTypeB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12>\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12N\n" +
-	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12 \n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12S\n" +
+	"\x15last_authenticated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x13lastAuthenticatedAt\x12 \n" +
 	"\x04name\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x04name\x88\x01\x01:\xc3\x01\xbaH\xbf\x01\x1a\xbc\x01\n" +
 	"&user_mfa_method.name_only_for_webauthn\x12]name can only be set for MFA methods of type WebAuthn (webauthn-platform or webauthn-roaming)\x1a3!has(this.name) || this.type == 3 || this.type == 4B\a\n" +
 	"\x05_name*s\n" +

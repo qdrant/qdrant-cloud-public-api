@@ -372,7 +372,8 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created."
+              "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created.",
+              "readOnly": true
             },
             "type": {
               "$ref": "#/definitions/v1PaymentProviderType",
@@ -380,7 +381,8 @@
             },
             "paymentProviderId": {
               "type": "string",
-              "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
+              "description": "The customer account identifier in the payment provider system.\nThis is read-only field.",
+              "readOnly": true
             },
             "paymentMethodDetails": {
               "$ref": "#/definitions/v1PaymentMethodDetails",
@@ -393,12 +395,14 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created."
+              "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created."
+              "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created.",
+              "readOnly": true
             },
             "taxId": {
               "type": "string",
@@ -410,7 +414,8 @@
             },
             "status": {
               "$ref": "#/definitions/v1PaymentMethodStatus",
-              "description": "Payment method status.\nThis is read-only field."
+              "description": "Payment method status.\nThis is read-only field.",
+              "readOnly": true
             }
           },
           "description": "The payment method to create.\nThis is a required field.",
@@ -451,7 +456,8 @@
             },
             "paymentProviderId": {
               "type": "string",
-              "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
+              "description": "The customer account identifier in the payment provider system.\nThis is read-only field.",
+              "readOnly": true
             },
             "paymentMethodDetails": {
               "$ref": "#/definitions/v1PaymentMethodDetails",
@@ -464,12 +470,14 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created."
+              "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created."
+              "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created.",
+              "readOnly": true
             },
             "taxId": {
               "type": "string",
@@ -481,7 +489,8 @@
             },
             "status": {
               "$ref": "#/definitions/v1PaymentMethodStatus",
-              "description": "Payment method status.\nThis is read-only field."
+              "description": "Payment method status.\nThis is read-only field.",
+              "readOnly": true
             }
           },
           "description": "The payment method to update.",
@@ -551,7 +560,8 @@
         },
         "stateFormatted": {
           "type": "string",
-          "description": "The formatted state or province name.\nThis is an read-only field, and filled out by the system."
+          "description": "The formatted state or province name.\nThis is an read-only field, and filled out by the system.",
+          "readOnly": true
         },
         "country": {
           "type": "string",
@@ -559,11 +569,13 @@
         },
         "countryFormatted": {
           "type": "string",
-          "description": "The formatted country name.\nThis is an read-only field, and filled out by the system."
+          "description": "The formatted country name.\nThis is an read-only field, and filled out by the system.",
+          "readOnly": true
         },
         "taxSupportedCountry": {
           "type": "boolean",
-          "description": "Indicates if the country supports tax.\nThis is an read-only field, and filled out by the system."
+          "description": "Indicates if the country supports tax.\nThis is an read-only field, and filled out by the system.",
+          "readOnly": true
         }
       },
       "description": "Represents a billing address for a payment method."
@@ -666,7 +678,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created."
+          "description": "Unique identifier for the payment method (in GUID format).\nThis is a read-only field and will be available after a payment method is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -678,7 +691,8 @@
         },
         "paymentProviderId": {
           "type": "string",
-          "description": "The customer account identifier in the payment provider system.\nThis is read-only field."
+          "description": "The customer account identifier in the payment provider system.\nThis is read-only field.",
+          "readOnly": true
         },
         "paymentMethodDetails": {
           "$ref": "#/definitions/v1PaymentMethodDetails",
@@ -691,12 +705,14 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created."
+          "description": "The timestamp when the payment method was created.\nThis is a read-only field and will be available after a payment method is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created."
+          "description": "The timestamp when the payment method was last updated.\nThis is a read-only field and will be available after a payment method is created.",
+          "readOnly": true
         },
         "taxId": {
           "type": "string",
@@ -708,7 +724,8 @@
         },
         "status": {
           "$ref": "#/definitions/v1PaymentMethodStatus",
-          "description": "Payment method status.\nThis is read-only field."
+          "description": "Payment method status.\nThis is read-only field.",
+          "readOnly": true
         }
       },
       "title": "Represents a payment method.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"

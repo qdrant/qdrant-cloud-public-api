@@ -268,17 +268,20 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created."
+              "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
+              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the hybrid cloud environment was modified the last time."
+              "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -286,7 +289,8 @@
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+              "readOnly": true
             },
             "bootstrapCommandsGenerated": {
               "type": "boolean",
@@ -298,7 +302,8 @@
             },
             "status": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+              "readOnly": true
             }
           },
           "title": "The actual hybrid cloud environment"
@@ -319,12 +324,14 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
+              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the hybrid cloud environment was modified the last time."
+              "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -332,7 +339,8 @@
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+              "readOnly": true
             },
             "bootstrapCommandsGenerated": {
               "type": "boolean",
@@ -344,7 +352,8 @@
             },
             "status": {
               "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+              "readOnly": true
             }
           },
           "title": "The actual hybrid cloud environment"
@@ -451,17 +460,20 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created."
+          "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created."
+          "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the hybrid cloud environment was modified the last time."
+          "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -469,7 +481,8 @@
         },
         "createdByEmail": {
           "type": "string",
-          "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty."
+          "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+          "readOnly": true
         },
         "bootstrapCommandsGenerated": {
           "type": "boolean",
@@ -481,7 +494,8 @@
         },
         "status": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
-          "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server."
+          "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+          "readOnly": true
         }
       },
       "title": "HybridCloudEnvironment represents a hybrid cloud environment"
@@ -544,7 +558,8 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the configuration was last updated.\nThis is a read-only field and will be available after it is created."
+          "description": "Timestamp when the configuration was last updated.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
         },
         "namespace": {
           "type": "string",
@@ -663,28 +678,34 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the hybrid cloud environment status was modified the last time."
+          "description": "Timestamp when the hybrid cloud environment status was modified the last time.",
+          "readOnly": true
         },
         "phase": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentStatusPhase",
-          "title": "Phase"
+          "title": "Phase",
+          "readOnly": true
         },
         "kubernetesVersion": {
           "type": "string",
-          "title": "Kubernetes version"
+          "title": "Kubernetes version",
+          "readOnly": true
         },
         "kubernetesDistribution": {
           "$ref": "#/definitions/v1KubernetesDistribution",
-          "title": "Kubernetes distribution"
+          "title": "Kubernetes distribution",
+          "readOnly": true
         },
         "numberOfNodes": {
           "type": "integer",
           "format": "int64",
-          "title": "Number of kubernetes nodes"
+          "title": "Number of kubernetes nodes",
+          "readOnly": true
         },
         "capabilities": {
           "$ref": "#/definitions/v1HybridCloudEnvironmentCapabilities",
-          "title": "Capabilities of hybrid cloud environment"
+          "title": "Capabilities of hybrid cloud environment",
+          "readOnly": true
         },
         "componentStatuses": {
           "type": "array",
@@ -692,15 +713,18 @@
             "type": "object",
             "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
           },
-          "title": "Status of deployed component"
+          "title": "Status of deployed component",
+          "readOnly": true
         },
         "clusterCreationReadiness": {
           "$ref": "#/definitions/v1QdrantClusterCreationStatus",
-          "title": "Report if the hybrid cloud environment is ready for Qdrant cluster creation"
+          "title": "Report if the hybrid cloud environment is ready for Qdrant cluster creation",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "title": "Status message"
+          "title": "Status message",
+          "readOnly": true
         },
         "storageClasses": {
           "type": "array",
@@ -708,7 +732,8 @@
             "type": "object",
             "$ref": "#/definitions/v1HybridCloudEnvironmentStorageClass"
           },
-          "title": "Storage classes available in the hybrid cloud environment"
+          "title": "Storage classes available in the hybrid cloud environment",
+          "readOnly": true
         },
         "volumeSnapshotClasses": {
           "type": "array",
@@ -716,7 +741,8 @@
             "type": "object",
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
-          "title": "Volume snapshot classes available in the hybrid cloud environment"
+          "title": "Volume snapshot classes available in the hybrid cloud environment",
+          "readOnly": true
         },
         "volumeAttributesClasses": {
           "type": "array",
@@ -724,11 +750,13 @@
             "type": "object",
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeAttributesClass"
           },
-          "title": "Volume attributes classes available in the hybrid cloud environment"
+          "title": "Volume attributes classes available in the hybrid cloud environment",
+          "readOnly": true
         },
         "storageConfigurationReadiness": {
           "$ref": "#/definitions/v1StorageConfigurationReadiness",
-          "title": "Expresses the storage configuration state of the hybrid cloud environment.\nDeprecated: because the storage configuration state is not a requirement for cluster creation"
+          "title": "Expresses the storage configuration state of the hybrid cloud environment.\nDeprecated: because the storage configuration state is not a requirement for cluster creation",
+          "readOnly": true
         }
       },
       "title": "Status of a hybrid cloud environment, read only"

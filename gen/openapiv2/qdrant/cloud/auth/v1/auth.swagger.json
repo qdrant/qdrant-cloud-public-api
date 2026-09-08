@@ -137,28 +137,34 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the management key (in GUID format).\nThis is a read-only field and will be available after a management key is created."
+              "description": "Unique identifier for the management key (in GUID format).\nThis is a read-only field and will be available after a management key is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created."
+              "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created.",
+              "readOnly": true
             },
             "prefix": {
               "type": "string",
-              "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created."
+              "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created.",
+              "readOnly": true
             },
             "key": {
               "type": "string",
-              "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+              "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret.",
+              "readOnly": true
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system."
+              "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system.",
+              "readOnly": true
             },
             "createdByActorType": {
               "$ref": "#/definitions/v1ActorType",
-              "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field."
+              "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The actual management key.",
@@ -240,7 +246,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the management key (in GUID format).\nThis is a read-only field and will be available after a management key is created."
+          "description": "Unique identifier for the management key (in GUID format).\nThis is a read-only field and will be available after a management key is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -249,23 +256,28 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created."
+          "description": "Timestamp when the management key was created.\nThis is a read-only field and will be available after a management key is created.",
+          "readOnly": true
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created."
+          "description": "Prefix for the management key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a management key is created.",
+          "readOnly": true
         },
         "key": {
           "type": "string",
-          "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret."
+          "description": "The value of the key, to be used to authenticate requests to the Qdrant Cloud API.\nThis is a read-only field and will be available only once in the response of CreateManagementKey.\nYou should securely store this key and it should be handled as a secret.",
+          "readOnly": true
         },
         "createdByEmail": {
           "type": "string",
-          "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system."
+          "description": "The email of the user the management key is attributed to.\nThis is a read-only field. If the key is created by another management key, the email is inherited\nfrom that key, so the responsible user stays visible. It is empty when no user can be attributed,\nfor example for keys created by the system.",
+          "readOnly": true
         },
         "createdByActorType": {
           "$ref": "#/definitions/v1ActorType",
-          "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field."
+          "description": "How the management key was created, either directly by a user or by another management key.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A ManagementKey represents a management key of a Qdrant Cloud account.\nThis management key grants access to the Qdrant Cloud API."

@@ -787,7 +787,7 @@ var File_qdrant_cloud_cluster_auth_v2_database_api_key_proto protoreflect.FileDe
 
 const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
-	"3qdrant/cloud/cluster/auth/v2/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v2\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
+	"3qdrant/cloud/cluster/auth/v2/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v2\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
 	"\x1aListDatabaseApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -807,26 +807,26 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x127\n" +
 	"\x13database_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\x9a\v\n" +
-	"\x0eDatabaseApiKey\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\xb6\v\n" +
+	"\x0eDatabaseApiKey\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x129\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12*\n" +
 	"\x04name\x18\x05 \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x012\n" +
 	"^[\\w\\s-]+$R\x04name\x12>\n" +
 	"\n" +
 	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12U\n" +
-	"\faccess_rules\x18\a \x03(\v2(.qdrant.cloud.cluster.auth.v2.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12\xd2\x01\n" +
-	"\x10created_by_email\x18\b \x01(\tB\xa7\x01\xbaH\xa3\x01\xba\x01\x9f\x01\n" +
-	"!database_api_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12\x18\n" +
-	"\apostfix\x18\t \x01(\tR\apostfix\x12\x10\n" +
+	"\faccess_rules\x18\a \x03(\v2(.qdrant.cloud.cluster.auth.v2.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12\xd5\x01\n" +
+	"\x10created_by_email\x18\b \x01(\tB\xaa\x01\xe0A\x03\xbaH\xa3\x01\xba\x01\x9f\x01\n" +
+	"!database_api_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12\x1d\n" +
+	"\apostfix\x18\t \x01(\tB\x03\xe0A\x03R\apostfix\x12\x15\n" +
 	"\x03key\x18\n" +
-	" \x01(\tR\x03key\x12T\n" +
-	"\x15created_by_actor_type\x18\v \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeR\x12createdByActorType:\xc1\x05\xbaH\xbd\x05\x1a\xac\x01\n" +
+	" \x01(\tB\x03\xe0A\x03R\x03key\x12Y\n" +
+	"\x15created_by_actor_type\x18\v \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\x03\xe0A\x03R\x12createdByActorType:\xc1\x05\xbaH\xbd\x05\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xf1\x01\n" +
 	"/database_api_key.no_mixed_global_and_collection\x12OThere can't be global and collection access rules in the same database api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\xae\x01\n" +
 	"'database_api_key.only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1ag\n" +

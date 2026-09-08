@@ -420,7 +420,7 @@ var File_qdrant_cloud_cluster_auth_v1_database_api_key_proto protoreflect.FileDe
 
 const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
-	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
+	"3qdrant/cloud/cluster/auth/v1/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
 	"\x1aListDatabaseApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -438,17 +438,17 @@ const file_qdrant_cloud_cluster_auth_v1_database_api_key_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x127\n" +
 	"\x13database_api_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10databaseApiKeyId\"\x1e\n" +
-	"\x1cDeleteDatabaseApiKeyResponse\"\xfc\x03\n" +
-	"\x0eDatabaseApiKey\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
+	"\x1cDeleteDatabaseApiKeyResponse\"\x90\x04\n" +
+	"\x0eDatabaseApiKey\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x129\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x120\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x120\n" +
 	"\vcluster_ids\x18\x04 \x03(\tB\x0f\xbaH\f\x92\x01\t\b\x01\"\x05r\x03\xb0\x01\x01R\n" +
-	"clusterIds\x12\x16\n" +
-	"\x06prefix\x18\x05 \x01(\tR\x06prefix\x12\x10\n" +
-	"\x03key\x18\x06 \x01(\tR\x03key:\x99\x02\xbaH\x95\x02\x1a\xac\x01\n" +
+	"clusterIds\x12\x1b\n" +
+	"\x06prefix\x18\x05 \x01(\tB\x03\xe0A\x03R\x06prefix\x12\x15\n" +
+	"\x03key\x18\x06 \x01(\tB\x03\xe0A\x03R\x03key:\x99\x02\xbaH\x95\x02\x1a\xac\x01\n" +
 	"\x13database_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ad\n" +
 	"\x17database_api_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xb6\t\n" +
 	"\x15DatabaseApiKeyService\x12\xe1\x01\n" +

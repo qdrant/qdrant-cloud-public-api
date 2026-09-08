@@ -420,7 +420,7 @@ var File_qdrant_cloud_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x1fqdrant/cloud/auth/v1/auth.proto\x12\x14qdrant.cloud.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"D\n" +
+	"\x1fqdrant/cloud/auth/v1/auth.proto\x12\x14qdrant.cloud.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"D\n" +
 	"\x19ListManagementKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n" +
@@ -434,18 +434,18 @@ const file_qdrant_cloud_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
 	"\x11management_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x0fmanagementKeyId\"\x1d\n" +
-	"\x1bDeleteManagementKeyResponse\"\xee\x05\n" +
-	"\rManagementKey\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
+	"\x1bDeleteManagementKeyResponse\"\x8a\x06\n" +
+	"\rManagementKey\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x129\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
-	"\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x10\n" +
-	"\x03key\x18\x05 \x01(\tR\x03key\x12\xd0\x01\n" +
-	"\x10created_by_email\x18\x06 \x01(\tB\xa5\x01\xbaH\xa1\x01\xba\x01\x9d\x01\n" +
-	"\x1fmanagement_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12T\n" +
-	"\x15created_by_actor_type\x18\a \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeR\x12createdByActorType:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12\x1b\n" +
+	"\x06prefix\x18\x04 \x01(\tB\x03\xe0A\x03R\x06prefix\x12\x15\n" +
+	"\x03key\x18\x05 \x01(\tB\x03\xe0A\x03R\x03key\x12\xd3\x01\n" +
+	"\x10created_by_email\x18\x06 \x01(\tB\xa8\x01\xe0A\x03\xbaH\xa1\x01\xba\x01\x9d\x01\n" +
+	"\x1fmanagement_key.created_by_email\x126if set, created_by_email must be a valid email address\x1aBthis.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')R\x0ecreatedByEmail\x12Y\n" +
+	"\x15created_by_actor_type\x18\a \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\x03\xe0A\x03R\x12createdByActorType:\x95\x02\xbaH\x91\x02\x1a\xaa\x01\n" +
 	"\x11management_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1ab\n" +
 	"\x15management_key.prefix\x12\x18prefix must not be empty\x1a/this.prefix.size() > 0 || !has(this.created_at)2\xec\a\n" +
 	"\vAuthService\x12\xcb\x01\n" +

@@ -1305,6 +1305,7 @@ func (x *SearcherSettings) GetMaxWorkers() uint64 {
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.
 // It provides status information, error details (if any), and endpoint access information.
+// All fields in this message are read-only.
 type SpaceState struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The current operational status of the space.
@@ -1439,7 +1440,7 @@ var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
+	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
 	"\x11ListSpacesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -1504,63 +1505,68 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"7\n" +
 	"\x18SuggestSpaceNameResponse\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\x9f\t\n" +
-	"\x05Space\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\xc2\t\n" +
+	"\x05Space\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
-	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x129\n" +
+	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12>\n" +
 	"\n" +
-	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x123\n" +
+	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x123\n" +
 	"\x11cloud_provider_id\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
 	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12B\n" +
 	"\x06labels\x18\f \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x06labels\x12\xc7\x01\n" +
 	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12b\n" +
-	"\rconfiguration\x18\x14 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12=\n" +
+	"\rconfiguration\x18\x14 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12B\n" +
 	"\n" +
-	"created_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tcreatedBy\x12F\n" +
-	"\x0flast_updated_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\rlastUpdatedBy\x12=\n" +
+	"created_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tcreatedBy\x12K\n" +
+	"\x0flast_updated_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\rlastUpdatedBy\x12B\n" +
 	"\n" +
-	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerR\tdeletedBy\x12B\n" +
-	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateR\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
+	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tdeletedBy\x12G\n" +
+	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateB\x03\xe0A\x03R\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\xde\x05\n" +
-	"\x12SpaceConfiguration\x12D\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12H\n" +
+	"\x16_cost_allocation_label\"\xe9\x05\n" +
+	"\x12SpaceConfiguration\x12I\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
 	"\x0fallowed_origins\x18\f \x03(\tBh\xbaHe\x92\x01b\x10\n" +
-	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12F\n" +
-	"\x1aplatform_max_storage_bytes\x18\r \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01R\x17platformMaxStorageBytes\x12:\n" +
-	"\x11max_storage_bytes\x18\x0e \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01H\x00R\x0fmaxStorageBytes\x88\x01\x01\x12B\n" +
-	"\x19max_collections_per_space\x18\x0f \x01(\x04B\a\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
+	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12I\n" +
+	"\x1aplatform_max_storage_bytes\x18\r \x01(\x04B\f\xe0A\x03\xbaH\x042\x02(\x00\x18\x01R\x17platformMaxStorageBytes\x12:\n" +
+	"\x11max_storage_bytes\x18\x0e \x01(\x04B\t\xbaH\x042\x02(\x00\x18\x01H\x00R\x0fmaxStorageBytes\x88\x01\x01\x12E\n" +
+	"\x19max_collections_per_space\x18\x0f \x01(\x04B\n" +
+	"\xe0A\x03\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
 	"\x13collection_settings\x18\x10 \x01(\v24.qdrant.cloud.serverless.space.v1.CollectionSettingsR\x12collectionSettings\x12_\n" +
 	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsB\x14\n" +
-	"\x12_max_storage_bytes\"\x7f\n" +
-	"\x12CollectionSettings\x123\n" +
-	"\x11platform_max_size\x18\x01 \x01(\x04B\a\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
+	"\x12_max_storage_bytes\"\x82\x01\n" +
+	"\x12CollectionSettings\x126\n" +
+	"\x11platform_max_size\x18\x01 \x01(\x04B\n" +
+	"\xe0A\x03\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
 	"\bmax_size\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\amaxSize\x88\x01\x01B\v\n" +
-	"\t_max_size\"\xf1\x01\n" +
+	"\t_max_size\"\xf4\x01\n" +
 	"\x10SearcherSettings\x12R\n" +
-	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x129\n" +
-	"\x14platform_max_workers\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
+	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x12<\n" +
+	"\x14platform_max_workers\x18\x02 \x01(\x04B\n" +
+	"\xe0A\x03\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
 	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x01R\n" +
 	"maxWorkers\x88\x01\x01B\x0f\n" +
 	"\r_idle_timeoutB\x0e\n" +
-	"\f_max_workers\"\xd6\x01\n" +
+	"\f_max_workers\"\xe3\x01\n" +
 	"\n" +
-	"SpaceState\x12Q\n" +
-	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\x12P\n" +
-	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointH\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\"w\n" +
-	"\rSpaceEndpoint\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
-	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xb3\x01\n" +
+	"SpaceState\x12T\n" +
+	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
+	"\x06reason\x18\x02 \x01(\tB\x03\xe0A\x03R\x06reason\x12U\n" +
+	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointB\x03\xe0A\x03H\x00R\bendpoint\x88\x01\x01B\v\n" +
+	"\t_endpoint\"\x80\x01\n" +
+	"\rSpaceEndpoint\x12\x1d\n" +
+	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03url\x12'\n" +
+	"\trest_port\x18\x02 \x01(\x05B\n" +
+	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\brestPort\x12'\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\n" +
+	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xb3\x01\n" +
 	"\x0fSpaceStatePhase\x12!\n" +
 	"\x1dSPACE_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +

@@ -459,6 +459,7 @@ export declare type HybridCloudEnvironment = Message<"qdrant.cloud.hybrid.v1.Hyb
 
   /**
    * Timestamp when the hybrid cloud environment was modified the last time.
+   * This is a read-only field and will be available after it is created.
    *
    * @generated from field: google.protobuf.Timestamp last_modified_at = 4;
    */
@@ -538,6 +539,7 @@ export declare type HybridCloudEnvironmentValid = Message<"qdrant.cloud.hybrid.v
 
   /**
    * Timestamp when the hybrid cloud environment was modified the last time.
+   * This is a read-only field and will be available after it is created.
    *
    * @generated from field: google.protobuf.Timestamp last_modified_at = 4;
    */
