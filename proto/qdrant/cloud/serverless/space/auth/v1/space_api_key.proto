@@ -4,6 +4,7 @@ package qdrant.cloud.serverless.space.auth.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -157,7 +158,7 @@ message DeleteSpaceApiKeyResponse {
 message SpaceApiKey {
   // Unique identifier for the space api key (in GUID format).
   // This is a read-only field and will be available after a space api key is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "space_api_key.id"
     message: "value must be a valid UUID"
@@ -168,7 +169,7 @@ message SpaceApiKey {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the space api key was created.
   // This is a read-only field and will be available after a space api key is created.
-  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp created_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the space (in GUID format).
   // This is a required field.
   string space_id = 4 [(buf.validate.field).string = {uuid: true}];
@@ -205,16 +206,16 @@ message SpaceApiKey {
   reserved "created_by_email";
   // The caller who created the space api key.
   // This is a read-only field and will be available after a space api key is created.
-  common.v1.Caller created_by = 11;
+  common.v1.Caller created_by = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who deleted the space api key.
   // This is a read-only field and will be available after deletion starts.
-  common.v1.Caller deleted_by = 12;
+  common.v1.Caller deleted_by = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Timestamp when the space api key was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteSpaceApiKey is called.
-  google.protobuf.Timestamp deleted_at = 13;
+  google.protobuf.Timestamp deleted_at = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Postfix for the space api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a space api key is created.
-  string postfix = 9;
+  string postfix = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "space_api_key.postfix"
     message: "postfix must not be empty"
@@ -223,16 +224,16 @@ message SpaceApiKey {
   // The key for the space api key.
   // This is a read-only field and will be available only once in the response of CreateSpaceApiKey.
   // You should securely store this key and it should be handled as a secret.
-  string key = 10;
+  string key = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Status of the space api key.
   // All fields inside `state` are read-only.
-  SpaceApiKeyState state = 100;
+  SpaceApiKeyState state = 100 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Timestamp when the space api key was revoked.
   // This is a read-only field and will be set after the space api key is revoked.
-  google.protobuf.Timestamp revoked_at = 14;
+  google.protobuf.Timestamp revoked_at = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who revoked the space api key.
   // This is a read-only field and will be available after the key is revoked.
-  common.v1.Caller revoked_by = 15;
+  common.v1.Caller revoked_by = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // SpaceApiKeyStatePhase defines the operational phases of a serverless space API key.
@@ -252,12 +253,16 @@ enum SpaceApiKeyStatePhase {
 // SpaceApiKeyState represents the operational state of a space API key in the
 // Qdrant serverless environment. It provides status information and error
 // details (if any).
+// All fields in this message are read-only.
 message SpaceApiKeyState {
   // The current operational status of the space api key.
-  SpaceApiKeyStatePhase phase = 1 [(buf.validate.field).enum.defined_only = true];
+  SpaceApiKeyStatePhase phase = 1 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Descriptive message explaining any errors or issues with the space api key.
   // Empty when the API key is operating normally.
-  string reason = 2;
+  string reason = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Represents an access rule. An access rule can either define global access to

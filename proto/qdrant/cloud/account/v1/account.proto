@@ -4,6 +4,7 @@ package qdrant.cloud.account.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
@@ -637,7 +638,7 @@ message SuggestCompaniesResponse {
 message Account {
   // Unique identifier for the account (in GUID format).
   // This is a read-only field and will be available after an account is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account.id"
     message: "value must be a valid UUID"
@@ -645,10 +646,10 @@ message Account {
   };
   // The timestamp when the account was created.
   // This is a read-only field and will be available after an account is created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The timestamp when the account was last updated.
   // This is a read-only field and will be available after an account is created.
-  google.protobuf.Timestamp last_modified_at = 3;
+  google.protobuf.Timestamp last_modified_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account.last_modified_at"
     message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
@@ -667,7 +668,7 @@ message Account {
   string external_owner_id = 6 [(buf.validate.field).string = {min_len: 1}];
   // The email address of the owner of the account.
   // This is a read-only field and is derived from the owner user.
-  string owner_email = 7;
+  string owner_email = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account.owner_email"
     message: "value must be a valid email address"
@@ -675,7 +676,10 @@ message Account {
   };
   // The privileges of the account, if any.
   // This is a read-only field.
-  repeated string privileges = 8 [(buf.validate.field).repeated.items.string = {min_len: 1}];
+  repeated string privileges = 8 [
+    (buf.validate.field).repeated.items.string = {min_len: 1},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The company associated with the account.
   // Updating or removing the company can only be done by the account owner.
   optional Company company = 9;
@@ -689,7 +693,7 @@ message Account {
 message AccountInvite {
   // Unique identifier for the invite (in GUID format).
   // This is a read-only field and will be available after an invite is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account_invite.id"
     message: "value must be a valid UUID"
@@ -700,7 +704,7 @@ message AccountInvite {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Human readable name of the account that the human is invited to join.
   // This is a read-only value.
-  string account_name = 3;
+  string account_name = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account_invite.account_name"
     message: "account_name must not be empty"
@@ -719,13 +723,19 @@ message AccountInvite {
   repeated string user_role_ids = 5 [(buf.validate.field).repeated = {items: {string: {uuid: true}}}];
   // The timestamp when the invite was created.
   // This is a read-only field.
-  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp created_at = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the user who created the invite (in GUID format).
   // This is a read-only field, populated by the server based on the authenticated user.
-  optional string created_by_user_id = 7 [(buf.validate.field).string = {uuid: true}];
+  optional string created_by_user_id = 7 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The email of the user who created this invite.
   // This is a read-only value, populated by the server based on the created_by_user_id field.
-  optional string created_by_email = 8 [(buf.validate.field).string.email = true];
+  optional string created_by_email = 8 [
+    (buf.validate.field).string.email = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   option (buf.validate.message).cel = {
     id: "account_invite.created_by_email"
     message: "created_by_email must not be empty if created_by_user_id is set"
@@ -733,7 +743,7 @@ message AccountInvite {
   };
   // The timestamp when the invite was last updated (e.g., status change).
   // This is a read-only field.
-  google.protobuf.Timestamp last_modified_at = 9;
+  google.protobuf.Timestamp last_modified_at = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "account_invite.last_modified_at"
     message: "last_modified_at must be set if created_at is set and must be after or equal to created_at"
@@ -741,7 +751,10 @@ message AccountInvite {
   };
   // The status of the invite.
   // This is a read-only field.
-  AccountInviteStatus status = 10 [(buf.validate.field).enum.defined_only = true];
+  AccountInviteStatus status = 10 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // AccountInviteStatus defines the possible statuses of an account invitation.
@@ -763,10 +776,13 @@ enum AccountInviteStatus {
 message AccountMember {
   // The user associated with this membership record.
   // This is a read-only field.
-  iam.v1.User account_member = 1 [(buf.validate.field).required = true];
+  iam.v1.User account_member = 1 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Whether or not this user is the owner of the account.
   // This is a read-only field.
-  bool is_owner = 2;
+  bool is_owner = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Company represents information about an existing company

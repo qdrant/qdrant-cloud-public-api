@@ -320,7 +320,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the space api key (in GUID format).\nThis is a read-only field and will be available after a space api key is created."
+          "description": "Unique identifier for the space api key (in GUID format).\nThis is a read-only field and will be available after a space api key is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -329,7 +330,8 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space api key was created.\nThis is a read-only field and will be available after a space api key is created."
+          "description": "Timestamp when the space api key was created.\nThis is a read-only field and will be available after a space api key is created.",
+          "readOnly": true
         },
         "spaceId": {
           "type": "string",
@@ -354,37 +356,45 @@
         },
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created."
+          "description": "The caller who created the space api key.\nThis is a read-only field and will be available after a space api key is created.",
+          "readOnly": true
         },
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who deleted the space api key.\nThis is a read-only field and will be available after deletion starts."
+          "description": "The caller who deleted the space api key.\nThis is a read-only field and will be available after deletion starts.",
+          "readOnly": true
         },
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space api key was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpaceApiKey is called."
+          "description": "Timestamp when the space api key was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteSpaceApiKey is called.",
+          "readOnly": true
         },
         "postfix": {
           "type": "string",
-          "description": "Postfix for the space api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a space api key is created."
+          "description": "Postfix for the space api key, this represents the last bytes of the key.\nThis is a read-only field and will be available after a space api key is created.",
+          "readOnly": true
         },
         "key": {
           "type": "string",
-          "description": "The key for the space api key.\nThis is a read-only field and will be available only once in the response of CreateSpaceApiKey.\nYou should securely store this key and it should be handled as a secret."
+          "description": "The key for the space api key.\nThis is a read-only field and will be available only once in the response of CreateSpaceApiKey.\nYou should securely store this key and it should be handled as a secret.",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/v1SpaceApiKeyState",
-          "description": "Status of the space api key.\nAll fields inside `state` are read-only."
+          "description": "Status of the space api key.\nAll fields inside `state` are read-only.",
+          "readOnly": true
         },
         "revokedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space api key was revoked.\nThis is a read-only field and will be set after the space api key is revoked."
+          "description": "Timestamp when the space api key was revoked.\nThis is a read-only field and will be set after the space api key is revoked.",
+          "readOnly": true
         },
         "revokedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who revoked the space api key.\nThis is a read-only field and will be available after the key is revoked."
+          "description": "The caller who revoked the space api key.\nThis is a read-only field and will be available after the key is revoked.",
+          "readOnly": true
         }
       },
       "description": "A SpaceApiKey represents one space api key of a Qdrant cloud account.\nThis space key can grant access to a Qdrant cloud serverless space."
@@ -394,14 +404,16 @@
       "properties": {
         "phase": {
           "$ref": "#/definitions/v1SpaceApiKeyStatePhase",
-          "description": "The current operational status of the space api key."
+          "description": "The current operational status of the space api key.",
+          "readOnly": true
         },
         "reason": {
           "type": "string",
-          "description": "Descriptive message explaining any errors or issues with the space api key.\nEmpty when the API key is operating normally."
+          "description": "Descriptive message explaining any errors or issues with the space api key.\nEmpty when the API key is operating normally.",
+          "readOnly": true
         }
       },
-      "description": "SpaceApiKeyState represents the operational state of a space API key in the\nQdrant serverless environment. It provides status information and error\ndetails (if any)."
+      "description": "SpaceApiKeyState represents the operational state of a space API key in the\nQdrant serverless environment. It provides status information and error\ndetails (if any).\nAll fields in this message are read-only."
     },
     "v1SpaceApiKeyStatePhase": {
       "type": "string",

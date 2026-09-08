@@ -4,6 +4,7 @@ package qdrant.cloud.serverless.space.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
@@ -355,7 +356,7 @@ message SuggestSpaceNameResponse {
 message Space {
   // Unique identifier for the space (in GUID format).
   // This is a read-only field and will be available after a space is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "space.id"
     message: "value must be a valid UUID"
@@ -363,7 +364,7 @@ message Space {
   };
   // Timestamp when the space was created.
   // This is a read-only field and will be available after a space is created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Identifier of the account associated with the space (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
@@ -377,7 +378,7 @@ message Space {
   }];
   // Timestamp when the space was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteSpace is called.
-  google.protobuf.Timestamp deleted_at = 5;
+  google.protobuf.Timestamp deleted_at = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Cloud provider where the space is hosted.
   // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
   // In this case, `hybrid` isn't supported.
@@ -401,23 +402,23 @@ message Space {
   SpaceConfiguration configuration = 20 [(buf.validate.field).required = true];
   // The caller who created the space.
   // This is a read-only field and will be available after a space is created.
-  common.v1.Caller created_by = 14;
+  common.v1.Caller created_by = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who last updated the space.
   // This is a read-only field and will be set after UpdateSpace is called.
-  common.v1.Caller last_updated_by = 15;
+  common.v1.Caller last_updated_by = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who initiated deletion of the space.
   // This is a read-only field and will be set when deleted_at is set.
-  common.v1.Caller deleted_by = 16;
+  common.v1.Caller deleted_by = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Status of the space
   // All fields inside `state` are read-only.
-  SpaceState state = 100;
+  SpaceState state = 100 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment.
 message SpaceConfiguration {
   // Timestamp when the space configuration was last updated.
   // This is a read-only field and will be available after a space is created.
-  google.protobuf.Timestamp last_modified_at = 1;
+  google.protobuf.Timestamp last_modified_at = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   // List of allowed IP source ranges for this space.
   // This is an optional field.
   // The CIDRs supports IPv4 only.
@@ -453,6 +454,7 @@ message SpaceConfiguration {
   // This is a read-only field. A value of 0 means unlimited.
   // Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
   uint64 platform_max_storage_bytes = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
     deprecated = true,
     (buf.validate.field).uint64.gte = 0
   ];
@@ -466,7 +468,10 @@ message SpaceConfiguration {
   ];
   // Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
-  uint64 max_collections_per_space = 15 [(buf.validate.field).uint64.gte = 0];
+  uint64 max_collections_per_space = 15 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Per-collection size limits for this space.
   // Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
   CollectionSettings collection_settings = 16;
@@ -479,7 +484,10 @@ message SpaceConfiguration {
 message CollectionSettings {
   // Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
-  uint64 platform_max_size = 1 [(buf.validate.field).uint64.gte = 0];
+  uint64 platform_max_size = 1 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Optional customer-defined maximum size in bytes per collection, used for cost control.
   // When set, it must not exceed `platform_max_size`.
   // This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
@@ -497,7 +505,10 @@ message SearcherSettings {
   }];
   // Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
-  uint64 platform_max_workers = 2 [(buf.validate.field).uint64.gte = 0];
+  uint64 platform_max_workers = 2 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Maximum number of search workers per collection in this space.
   // For example, if set to 2 and the space has 3 collections, the total maximum is 6.
   // Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
@@ -521,24 +532,37 @@ enum SpaceStatePhase {
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.
 // It provides status information, error details (if any), and endpoint access information.
+// All fields in this message are read-only.
 message SpaceState {
   // The current operational status of the space.
-  SpaceStatePhase phase = 1 [(buf.validate.field).enum.defined_only = true];
+  SpaceStatePhase phase = 1 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Descriptive message explaining any errors or issues with the space.
   // Empty when the space is operating normally.
-  string reason = 2;
+  string reason = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The URL endpoint where clients can connect to and interact with the space.
   // Not set if the space is not yet ready or is disabled.
-  optional SpaceEndpoint endpoint = 7;
+  optional SpaceEndpoint endpoint = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Endpoint information to access the qdrant space (aka serverless database).
 // All fields in this message are a read-only field.
 message SpaceEndpoint {
   // URL to access the qdrant space (aka serverless database) without port
-  string url = 1 [(buf.validate.field).string = {uri: true}];
+  string url = 1 [
+    (buf.validate.field).string = {uri: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The port to use for HTTP REST calls (6333)
-  int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+  int32 rest_port = 2 [
+    (buf.validate.field).int32.gt = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The port to use for gRPC calls (6334)
-  int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
+  int32 grpc_port = 3 [
+    (buf.validate.field).int32.gt = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }

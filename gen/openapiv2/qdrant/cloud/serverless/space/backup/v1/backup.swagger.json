@@ -534,12 +534,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
+              "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "spaceId": {
               "type": "string",
@@ -547,24 +549,29 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
-              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called.",
+              "readOnly": true
             },
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
+              "readOnly": true
             },
             "backupDuration": {
               "type": "string",
-              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
+              "readOnly": true
             },
             "backupScheduleId": {
               "type": "string",
-              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
+              "readOnly": true
             },
             "retentionPeriod": {
               "type": "string",
@@ -572,19 +579,23 @@
             },
             "spaceInfo": {
               "$ref": "#/definitions/v1SpaceInfo",
-              "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+              "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created.",
+              "readOnly": true
             },
             "createdBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "lastUpdatedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated."
+              "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated.",
+              "readOnly": true
             },
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
+              "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set.",
+              "readOnly": true
             },
             "collectionName": {
               "type": "string",
@@ -605,12 +616,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "spaceId": {
               "type": "string",
@@ -636,28 +649,34 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
-              "description": "The current status of the backup schedule."
+              "description": "The current status of the backup schedule.\nThis is a read-only field.",
+              "readOnly": true
             },
             "createdBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "lastUpdatedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called.",
+              "readOnly": true
             },
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set.",
+              "readOnly": true
             },
             "lastFiredAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time.",
+              "readOnly": true
             },
             "collectionName": {
               "type": "string",
@@ -679,7 +698,8 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "spaceId": {
               "type": "string",
@@ -705,28 +725,34 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
-              "description": "The current status of the backup schedule."
+              "description": "The current status of the backup schedule.\nThis is a read-only field.",
+              "readOnly": true
             },
             "createdBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "lastUpdatedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+              "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called.",
+              "readOnly": true
             },
             "deletedBy": {
               "$ref": "#/definitions/v1Caller",
-              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+              "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set.",
+              "readOnly": true
             },
             "lastFiredAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+              "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time.",
+              "readOnly": true
             },
             "collectionName": {
               "type": "string",
@@ -787,12 +813,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
+          "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+          "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -804,24 +832,29 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created."
+          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupStatus",
-          "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+          "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called.",
+          "readOnly": true
         },
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+          "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
+          "readOnly": true
         },
         "backupDuration": {
           "type": "string",
-          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
+          "readOnly": true
         },
         "backupScheduleId": {
           "type": "string",
-          "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+          "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
+          "readOnly": true
         },
         "retentionPeriod": {
           "type": "string",
@@ -829,19 +862,23 @@
         },
         "spaceInfo": {
           "$ref": "#/definitions/v1SpaceInfo",
-          "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+          "description": "Space details associated with the backup.\nIdentity fields reflect the latest space state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created.",
+          "readOnly": true
         },
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created."
+          "description": "The caller who created the backup.\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "lastUpdatedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated."
+          "description": "The caller who last updated the backup.\nThis is a read-only field and will be set when backup metadata is updated.",
+          "readOnly": true
         },
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set."
+          "description": "The caller who initiated deletion of the backup.\nThis is a read-only field and will be set when deleted_at is set.",
+          "readOnly": true
         },
         "collectionName": {
           "type": "string",
@@ -855,37 +892,45 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup restore (in GUID format)."
+          "description": "Unique identifier for the backup restore (in GUID format).",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup restore was created."
+          "description": "The timestamp when the backup restore was created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in GUID format)."
+          "description": "The identifier of the account (in GUID format).",
+          "readOnly": true
         },
         "spaceId": {
           "type": "string",
-          "description": "The identifier of the space (in GUID format)."
+          "description": "The identifier of the space (in GUID format).",
+          "readOnly": true
         },
         "backupId": {
           "type": "string",
-          "description": "The Identifier of the backup (in GUID format)."
+          "description": "The Identifier of the backup (in GUID format).",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupRestoreStatus",
-          "description": "The current status of the backup restore."
+          "description": "The current status of the backup restore.",
+          "readOnly": true
         },
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup restore was deleted (or when deletion started)."
+          "description": "The timestamp when the backup restore was deleted (or when deletion started).",
+          "readOnly": true
         },
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who initiated the backup restore.\nThis is a read-only field and will be available after a backup restore is created."
+          "description": "The caller who initiated the backup restore.\nThis is a read-only field and will be available after a backup restore is created.",
+          "readOnly": true
         }
       },
       "description": "A BackupRestore represents the status of an in-place backup restore for a space.\nAll fields in this message are read-only."
@@ -909,12 +954,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -944,28 +991,34 @@
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+          "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupScheduleStatus",
-          "description": "The current status of the backup schedule."
+          "description": "The current status of the backup schedule.\nThis is a read-only field.",
+          "readOnly": true
         },
         "createdBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "The caller who created the backup schedule.\nThis is a read-only field and will be available after a backup schedule is created.",
+          "readOnly": true
         },
         "lastUpdatedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called."
+          "description": "The caller who last updated the backup schedule.\nThis is a read-only field and will be set after UpdateBackupSchedule is called.",
+          "readOnly": true
         },
         "deletedBy": {
           "$ref": "#/definitions/v1Caller",
-          "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set."
+          "description": "The caller who initiated deletion of the backup schedule.\nThis is a read-only field and will be set when deleted_at is set.",
+          "readOnly": true
         },
         "lastFiredAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time."
+          "description": "The timestamp when this backup schedule last created a backup.\nThis is a read-only field and will be set after the schedule fires for the first time.",
+          "readOnly": true
         },
         "collectionName": {
           "type": "string",
@@ -1024,7 +1077,8 @@
         "platformMaxSize": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "maxSize": {
           "type": "string",
@@ -1165,7 +1219,8 @@
         "platformMaxWorkers": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "maxWorkers": {
           "type": "string",
@@ -1181,7 +1236,8 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the space configuration was last updated.\nThis is a read-only field and will be available after a space is created."
+          "description": "Timestamp when the space configuration was last updated.\nThis is a read-only field and will be available after a space is created.",
+          "readOnly": true
         },
         "allowedIpSourceRanges": {
           "type": "array",
@@ -1200,7 +1256,8 @@
         "platformMaxStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits."
+          "description": "Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.\nDeprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.",
+          "readOnly": true
         },
         "maxStorageBytes": {
           "type": "string",
@@ -1210,7 +1267,8 @@
         "maxCollectionsPerSpace": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited."
+          "description": "Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         },
         "collectionSettings": {
           "$ref": "#/definitions/v1CollectionSettings",

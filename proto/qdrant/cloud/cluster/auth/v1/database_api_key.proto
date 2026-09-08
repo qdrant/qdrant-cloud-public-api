@@ -4,6 +4,7 @@ package qdrant.cloud.cluster.auth.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -136,7 +137,7 @@ message DeleteDatabaseApiKeyResponse {
 message DatabaseApiKey {
   // Unique identifier for the database api key (in GUID format).
   // This is a read-only field and will be available after a database api key is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "database_api_key.id"
     message: "value must be a valid UUID"
@@ -147,7 +148,7 @@ message DatabaseApiKey {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the database api key was created.
   // This is a read-only field and will be available after a database api key is created.
-  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp created_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // A list of cluster IDs.
   // It should contain at least one ID.
   // After creation, this field cannot be changed.
@@ -157,7 +158,7 @@ message DatabaseApiKey {
   }];
   // Prefix for the database api key, this represents the first bytes of the key.
   // This is a read-only field and will be available after a database api key is created.
-  string prefix = 5;
+  string prefix = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "database_api_key.prefix"
     message: "prefix must not be empty"
@@ -166,5 +167,5 @@ message DatabaseApiKey {
   // The key for the database api key.
   // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
   // You should securely store this key and it should be handled as a secret.
-  string key = 6;
+  string key = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

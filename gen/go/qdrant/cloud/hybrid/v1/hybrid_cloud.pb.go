@@ -1050,6 +1050,7 @@ type HybridCloudEnvironment struct {
 	// This is a read-only field and will be available after it is created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp when the hybrid cloud environment was modified the last time.
+	// This is a read-only field and will be available after it is created.
 	LastModifiedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_modified_at,json=lastModifiedAt,proto3" json:"last_modified_at,omitempty"`
 	// Name of the hybrid cloud environment
 	// This is a required field.
@@ -2063,7 +2064,7 @@ var File_qdrant_cloud_hybrid_v1_hybrid_cloud_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
-	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
+	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
 	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
@@ -2101,28 +2102,28 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"k\n" +
 	"#ListHybridCloudEnvironmentsResponse\x12D\n" +
-	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\x87\x0e\n" +
+	"\x05items\x18\x01 \x03(\v2..qdrant.cloud.hybrid.v1.HybridCloudEnvironmentR\x05items\"\x9e\x0e\n" +
 	"\x16HybridCloudEnvironment\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x129\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12\x13\n" +
+	"\x02id\x18\x02 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
-	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12\xba\x01\n" +
-	"\x10created_by_email\x18\x06 \x01(\tB\x8f\x01\xbaH\x8b\x01\xba\x01\x87\x01\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12I\n" +
+	"\x10last_modified_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12/\n" +
+	"\x04name\x18\x05 \x01(\tB\x1b\xbaH\x18r\x16\x10\x01\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12\xbd\x01\n" +
+	"\x10created_by_email\x18\x06 \x01(\tB\x92\x01\xe0A\x03\xbaH\x8b\x01\xba\x01\x87\x01\n" +
 	")hybrid_cloud_environment.created_by_email\x126if set, created_by_email must be a valid email address\x1a\"this.size() == 0 || this.isEmail()R\x0ecreatedByEmail\x12@\n" +
 	"\x1cbootstrap_commands_generated\x18\x13 \x01(\bR\x1abootstrapCommandsGenerated\x12f\n" +
-	"\rconfiguration\x18\x14 \x01(\v2;.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationH\x00R\rconfiguration\x88\x01\x01\x12Q\n" +
-	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusH\x01R\x06status\x88\x01\x01:\xaa\b\xbaH\xa6\b\x1a\xb4\x01\n" +
+	"\rconfiguration\x18\x14 \x01(\v2;.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentConfigurationH\x00R\rconfiguration\x88\x01\x01\x12V\n" +
+	"\x06status\x18\x15 \x01(\v24.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusB\x03\xe0A\x03H\x01R\x06status\x88\x01\x01:\xaa\b\xbaH\xa6\b\x1a\xb4\x01\n" +
 	"\x1bhybrid_cloud_environment.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xea\x01\n" +
 	")hybrid_cloud_environment.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)\x1a\xd3\x02\n" +
 	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
 	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\xf6\r\n" +
-	"#HybridCloudEnvironmentConfiguration\x12D\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12I\n" +
+	"\a_status\"\xfb\r\n" +
+	"#HybridCloudEnvironmentConfiguration\x12I\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12I\n" +
 	"\tnamespace\x18\x04 \x01(\tB+\xbaH(r&\x10\x01\x18\xfd\x012\x1f^[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\tnamespace\x123\n" +
 	"\x0ehttp_proxy_url\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\fhttpProxyUrl\x88\x01\x01\x125\n" +
 	"\x0fhttps_proxy_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\rhttpsProxyUrl\x88\x01\x01\x12(\n" +
@@ -2157,24 +2158,24 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
 	"_log_levelB\x1d\n" +
-	"\x1b_advanced_operator_settings\"\x98\n" +
+	"\x1b_advanced_operator_settings\"\xce\n" +
 	"\n" +
-	"\x1cHybridCloudEnvironmentStatus\x12L\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12Y\n" +
-	"\x05phase\x18\x03 \x01(\x0e29.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x126\n" +
-	"\x12kubernetes_version\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11kubernetesVersion\x12x\n" +
+	"\x1cHybridCloudEnvironmentStatus\x12O\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12\\\n" +
+	"\x05phase\x18\x03 \x01(\x0e29.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStatusPhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x129\n" +
+	"\x12kubernetes_version\x18\x04 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\x11kubernetesVersion\x12{\n" +
 	"\x17kubernetes_distribution\x18\n" +
-	" \x01(\x0e2..qdrant.cloud.hybrid.v1.KubernetesDistributionB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x16kubernetesDistribution\x88\x01\x01\x12&\n" +
-	"\x0fnumber_of_nodes\x18\x05 \x01(\rR\rnumberOfNodes\x12^\n" +
-	"\fcapabilities\x18\x06 \x01(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentCapabilitiesR\fcapabilities\x12l\n" +
-	"\x12component_statuses\x18\a \x03(\v2=.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusR\x11componentStatuses\x12{\n" +
-	"\x1acluster_creation_readiness\x18\t \x01(\x0e23.qdrant.cloud.hybrid.v1.QdrantClusterCreationStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x18clusterCreationReadiness\x12\x1d\n" +
-	"\amessage\x18\v \x01(\tH\x01R\amessage\x88\x01\x01\x12c\n" +
-	"\x0fstorage_classes\x18\f \x03(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClassR\x0estorageClasses\x12y\n" +
-	"\x17volume_snapshot_classes\x18\r \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClasses\x12\x7f\n" +
-	"\x19volume_attributes_classes\x18\x0e \x03(\v2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClassR\x17volumeAttributesClasses\x12\x81\x01\n" +
-	"\x1fstorage_configuration_readiness\x18\x0f \x01(\x0e25.qdrant.cloud.hybrid.v1.StorageConfigurationReadinessB\x02\x18\x01R\x1dstorageConfigurationReadinessB\x1a\n" +
+	" \x01(\x0e2..qdrant.cloud.hybrid.v1.KubernetesDistributionB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x16kubernetesDistribution\x88\x01\x01\x12+\n" +
+	"\x0fnumber_of_nodes\x18\x05 \x01(\rB\x03\xe0A\x03R\rnumberOfNodes\x12c\n" +
+	"\fcapabilities\x18\x06 \x01(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentCapabilitiesB\x03\xe0A\x03R\fcapabilities\x12q\n" +
+	"\x12component_statuses\x18\a \x03(\v2=.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentComponentStatusB\x03\xe0A\x03R\x11componentStatuses\x12~\n" +
+	"\x1acluster_creation_readiness\x18\t \x01(\x0e23.qdrant.cloud.hybrid.v1.QdrantClusterCreationStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x18clusterCreationReadiness\x12\"\n" +
+	"\amessage\x18\v \x01(\tB\x03\xe0A\x03H\x01R\amessage\x88\x01\x01\x12h\n" +
+	"\x0fstorage_classes\x18\f \x03(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClassB\x03\xe0A\x03R\x0estorageClasses\x12~\n" +
+	"\x17volume_snapshot_classes\x18\r \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassB\x03\xe0A\x03R\x15volumeSnapshotClasses\x12\x84\x01\n" +
+	"\x19volume_attributes_classes\x18\x0e \x03(\v2C.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeAttributesClassB\x03\xe0A\x03R\x17volumeAttributesClasses\x12\x84\x01\n" +
+	"\x1fstorage_configuration_readiness\x18\x0f \x01(\x0e25.qdrant.cloud.hybrid.v1.StorageConfigurationReadinessB\x05\xe0A\x03\x18\x01R\x1dstorageConfigurationReadinessB\x1a\n" +
 	"\x18_kubernetes_distributionB\n" +
 	"\n" +
 	"\b_message\"x\n" +

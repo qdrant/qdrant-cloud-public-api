@@ -874,17 +874,20 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created."
+              "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -926,12 +929,14 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+              "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+              "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -977,20 +982,24 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+              "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+              "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created.",
+              "readOnly": true
             },
             "email": {
               "type": "string",
-              "description": "The email address of the user.\nThis is a read-only field."
+              "description": "The email address of the user.\nThis is a read-only field.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1UserStatus",
-              "description": "The status of the user.\nThis is a read-only field."
+              "description": "The status of the user.\nThis is a read-only field.",
+              "readOnly": true
             },
             "defaultAccountId": {
               "type": "string",
@@ -998,7 +1007,8 @@
             },
             "onboardingStatus": {
               "$ref": "#/definitions/v1OnboardingStatus",
-              "description": "The onboarding status of the user on the platform.\nThis is a read-only field."
+              "description": "The onboarding status of the user on the platform.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The actual user.",
@@ -1268,17 +1278,20 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created."
+          "description": "Unique identifier for the role (in GUID format).\nThis is a read-only field and will be available after a role is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created."
+          "description": "The timestamp when the role was created.\nThis is a read-only field and will be available after a role is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created."
+          "description": "The timestamp when the role was last updated.\nThis is a read-only field and will be available after a role is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -1393,25 +1406,30 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created."
+          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "email": {
           "type": "string",
-          "description": "The email address of the user.\nThis is a read-only field."
+          "description": "The email address of the user.\nThis is a read-only field.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1UserStatus",
-          "description": "The status of the user.\nThis is a read-only field."
+          "description": "The status of the user.\nThis is a read-only field.",
+          "readOnly": true
         },
         "defaultAccountId": {
           "type": "string",
@@ -1419,7 +1437,8 @@
         },
         "onboardingStatus": {
           "$ref": "#/definitions/v1OnboardingStatus",
-          "description": "The onboarding status of the user on the platform.\nThis is a read-only field."
+          "description": "The onboarding status of the user on the platform.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A User represents a user in the Qdrant cloud."
@@ -1484,21 +1503,25 @@
       "properties": {
         "externalId": {
           "type": "string",
-          "description": "Authentication method identifier for the MFA information.\nThis is a read-only field."
+          "description": "Authentication method identifier for the MFA information.\nThis is a read-only field.",
+          "readOnly": true
         },
         "type": {
           "$ref": "#/definitions/v1UserMfaMethodType",
-          "description": "Specifies the type of MFA the user enrolled in.\nThis is a read-only field."
+          "description": "Specifies the type of MFA the user enrolled in.\nThis is a read-only field.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user enrolled in MFA.\nThis is a read-only field."
+          "description": "The timestamp when the user enrolled in MFA.\nThis is a read-only field.",
+          "readOnly": true
         },
         "lastAuthenticatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field."
+          "description": "The timestamp when the user was last authenticated with MFA.\nThis is a read-only field.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
