@@ -61,29 +61,11 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   maxCollectionsPerSpace: bigint;
 
   /**
-   * Platform default storage ceiling applied to each new space. 0 = unlimited.
-   * Deprecated: Use `platform_max_size_per_collection` instead. Per-space storage caps are replaced by per-collection size limits.
-   *
-   * @generated from field: uint64 platform_max_storage_bytes_per_space = 4 [deprecated = true];
-   * @deprecated
-   */
-  platformMaxStorageBytesPerSpace: bigint;
-
-  /**
    * Number of serverless spaces currently used.
    *
    * @generated from field: uint64 used_spaces = 5;
    */
   usedSpaces: bigint;
-
-  /**
-   * Total storage used across all spaces, in bytes.
-   * Deprecated: Account-level storage usage is no longer part of the serverless quota model.
-   *
-   * @generated from field: uint64 used_storage_bytes = 6 [deprecated = true];
-   * @deprecated
-   */
-  usedStorageBytes: bigint;
 
   /**
    * Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).

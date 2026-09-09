@@ -833,27 +833,6 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
   allowedOrigins: string[];
 
   /**
-   * Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
-   * This is a read-only field. A value of 0 means unlimited.
-   * Deprecated: Use `collection_settings` instead. Per-space storage caps are replaced by per-collection size limits.
-   *
-   * @generated from field: uint64 platform_max_storage_bytes = 13 [deprecated = true];
-   * @deprecated
-   */
-  platformMaxStorageBytes: bigint;
-
-  /**
-   * Optional customer-defined storage cap, used for cost control.
-   * When set, it must not exceed `platform_max_storage_bytes`.
-   * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-   * Deprecated: Use `collection_settings.max_size` instead. Per-space storage caps are replaced by per-collection size limits.
-   *
-   * @generated from field: optional uint64 max_storage_bytes = 14 [deprecated = true];
-   * @deprecated
-   */
-  maxStorageBytes?: bigint | undefined;
-
-  /**
    * Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
    *
