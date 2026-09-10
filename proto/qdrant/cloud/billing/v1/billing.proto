@@ -220,6 +220,8 @@ message CreditContract {
   // The timestamp the balance was spent down to nothing. Absent while credits remain, and for
   // a balance zeroed at expiry rather than spent.
   google.protobuf.Timestamp exhausted_at = 11;
+  // Amount voided from this block (a full or partial correction). 0 if never voided.
+  double voided_amount = 12 [(buf.validate.field).double.gte = 0.0];
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
