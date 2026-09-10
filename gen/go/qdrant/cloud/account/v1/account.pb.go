@@ -2170,7 +2170,7 @@ var File_qdrant_cloud_account_v1_account_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
+	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
 	"\x13ListAccountsRequest\"N\n" +
 	"\x14ListAccountsResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.AccountR\x05items\"<\n" +
@@ -2257,18 +2257,18 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05emailB\x11\n" +
 	"\bcriteria\x12\x05\xbaH\x02\b\x01\"R\n" +
 	"\x18SuggestCompaniesResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.CompanyR\x05items\"\xf4\a\n" +
-	"\aAccount\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.CompanyR\x05items\"\x8b\b\n" +
+	"\aAccount\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x125\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12I\n" +
+	"\x10last_modified_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x125\n" +
 	"\x04name\x18\x05 \x01(\tB!\xbaH\x1er\x1c\x10\x04\x18\x80\x022\x15^([^\\x00-\\x1F\\x7F])*$R\x04name\x123\n" +
-	"\x11external_owner_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x0fexternalOwnerId\x12\x1f\n" +
-	"\vowner_email\x18\a \x01(\tR\n" +
-	"ownerEmail\x12,\n" +
+	"\x11external_owner_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x0fexternalOwnerId\x12$\n" +
+	"\vowner_email\x18\a \x01(\tB\x03\xe0A\x03R\n" +
+	"ownerEmail\x12/\n" +
 	"\n" +
-	"privileges\x18\b \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
+	"privileges\x18\b \x03(\tB\x0f\xe0A\x03\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\n" +
 	"privileges\x12?\n" +
 	"\acompany\x18\t \x01(\v2 .qdrant.cloud.account.v1.CompanyH\x00R\acompany\x88\x01\x01\x12I\n" +
 	"\bsettings\x18\n" +
@@ -2279,32 +2279,34 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x13account.owner_email\x12#value must be a valid email address\x1a3this.owner_email.isEmail() || !has(this.created_at)B\n" +
 	"\n" +
 	"\b_companyB\v\n" +
-	"\t_settings\"\xee\t\n" +
-	"\rAccountInvite\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
+	"\t_settings\"\x8b\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
-	"\faccount_name\x18\x03 \x01(\tR\vaccountName\x12(\n" +
+	"\rAccountInvite\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n" +
+	"\faccount_name\x18\x03 \x01(\tB\x03\xe0A\x03R\vaccountName\x12(\n" +
 	"\n" +
 	"user_email\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01`\x01R\tuserEmail\x121\n" +
 	"\ruser_role_ids\x18\x05 \x03(\tB\r\xbaH\n" +
-	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\vuserRoleIds\x129\n" +
+	"\x92\x01\a\"\x05r\x03\xb0\x01\x01R\vuserRoleIds\x12>\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
-	"\x12created_by_user_id\x18\a \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x126\n" +
-	"\x10created_by_email\x18\b \x01(\tB\a\xbaH\x04r\x02`\x01H\x01R\x0ecreatedByEmail\x88\x01\x01\x12D\n" +
-	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12N\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12=\n" +
+	"\x12created_by_user_id\x18\a \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0fcreatedByUserId\x88\x01\x01\x129\n" +
+	"\x10created_by_email\x18\b \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02`\x01H\x01R\x0ecreatedByEmail\x88\x01\x01\x12I\n" +
+	"\x10last_modified_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12Q\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x05\xbaH\xae\x05\x1a\xaa\x01\n" +
+	" \x01(\x0e2,.qdrant.cloud.account.v1.AccountInviteStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x06status:\xb2\x05\xbaH\xae\x05\x1a\xaa\x01\n" +
 	"\x11account_invite.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1at\n" +
 	"\x1baccount_invite.account_name\x12\x1eaccount_name must not be empty\x1a5this.account_name.size() > 0 || !has(this.created_at)\x1a\xa5\x01\n" +
 	"\x1faccount_invite.created_by_email\x12?created_by_email must not be empty if created_by_user_id is set\x1aA!has(this.created_by_user_id) || this.created_by_email.size() > 0\x1a\xe0\x01\n" +
 	"\x1faccount_invite.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\x15\n" +
 	"\x13_created_by_user_idB\x13\n" +
-	"\x11_created_by_email\"t\n" +
-	"\rAccountMember\x12H\n" +
-	"\x0eaccount_member\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\raccountMember\x12\x19\n" +
-	"\bis_owner\x18\x02 \x01(\bR\aisOwner\"\xa3\x01\n" +
+	"\x11_created_by_email\"|\n" +
+	"\rAccountMember\x12K\n" +
+	"\x0eaccount_member\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\raccountMember\x12\x1e\n" +
+	"\bis_owner\x18\x02 \x01(\bB\x03\xe0A\x03R\aisOwner\"\xa3\x01\n" +
 	"\aCompany\x12p\n" +
 	"\x06domain\x18\x01 \x01(\tBS\xbaHPrN2L^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$H\x00R\x06domain\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04nameB\t\n" +

@@ -629,11 +629,13 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field and will be available after an invite is created."
+              "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field and will be available after an invite is created.",
+              "readOnly": true
             },
             "accountName": {
               "type": "string",
-              "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
+              "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value.",
+              "readOnly": true
             },
             "userEmail": {
               "type": "string",
@@ -649,24 +651,29 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the invite was created.\nThis is a read-only field."
+              "description": "The timestamp when the invite was created.\nThis is a read-only field.",
+              "readOnly": true
             },
             "createdByUserId": {
               "type": "string",
-              "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
+              "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user.",
+              "readOnly": true
             },
             "createdByEmail": {
               "type": "string",
-              "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+              "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
+              "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1AccountInviteStatus",
-              "description": "The status of the invite.\nThis is a read-only field."
+              "description": "The status of the invite.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The details of the invite to create.\nThis is a required field."
@@ -683,12 +690,14 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created."
+              "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created.",
+              "readOnly": true
             },
             "lastModifiedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created."
+              "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -700,14 +709,16 @@
             },
             "ownerEmail": {
               "type": "string",
-              "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user."
+              "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user.",
+              "readOnly": true
             },
             "privileges": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "The privileges of the account, if any.\nThis is a read-only field."
+              "description": "The privileges of the account, if any.\nThis is a read-only field.",
+              "readOnly": true
             },
             "company": {
               "$ref": "#/definitions/v1Company",
@@ -771,17 +782,20 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the account (in GUID format).\nThis is a read-only field and will be available after an account is created."
+          "description": "Unique identifier for the account (in GUID format).\nThis is a read-only field and will be available after an account is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created."
+          "description": "The timestamp when the account was created.\nThis is a read-only field and will be available after an account is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created."
+          "description": "The timestamp when the account was last updated.\nThis is a read-only field and will be available after an account is created.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -793,14 +807,16 @@
         },
         "ownerEmail": {
           "type": "string",
-          "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user."
+          "description": "The email address of the owner of the account.\nThis is a read-only field and is derived from the owner user.",
+          "readOnly": true
         },
         "privileges": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The privileges of the account, if any.\nThis is a read-only field."
+          "description": "The privileges of the account, if any.\nThis is a read-only field.",
+          "readOnly": true
         },
         "company": {
           "$ref": "#/definitions/v1Company",
@@ -818,7 +834,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field and will be available after an invite is created."
+          "description": "Unique identifier for the invite (in GUID format).\nThis is a read-only field and will be available after an invite is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -826,7 +843,8 @@
         },
         "accountName": {
           "type": "string",
-          "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value."
+          "description": "Human readable name of the account that the human is invited to join.\nThis is a read-only value.",
+          "readOnly": true
         },
         "userEmail": {
           "type": "string",
@@ -842,24 +860,29 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the invite was created.\nThis is a read-only field."
+          "description": "The timestamp when the invite was created.\nThis is a read-only field.",
+          "readOnly": true
         },
         "createdByUserId": {
           "type": "string",
-          "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user."
+          "description": "The identifier of the user who created the invite (in GUID format).\nThis is a read-only field, populated by the server based on the authenticated user.",
+          "readOnly": true
         },
         "createdByEmail": {
           "type": "string",
-          "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field."
+          "description": "The email of the user who created this invite.\nThis is a read-only value, populated by the server based on the created_by_user_id field.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field."
+          "description": "The timestamp when the invite was last updated (e.g., status change).\nThis is a read-only field.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1AccountInviteStatus",
-          "description": "The status of the invite.\nThis is a read-only field."
+          "description": "The status of the invite.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "An AccountInvite represents an invitation for a user to join an account."
@@ -881,11 +904,13 @@
       "properties": {
         "accountMember": {
           "$ref": "#/definitions/v1User",
-          "description": "The user associated with this membership record.\nThis is a read-only field."
+          "description": "The user associated with this membership record.\nThis is a read-only field.",
+          "readOnly": true
         },
         "isOwner": {
           "type": "boolean",
-          "description": "Whether or not this user is the owner of the account.\nThis is a read-only field."
+          "description": "Whether or not this user is the owner of the account.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "An AccountMember represents a user who is a member of an account."
@@ -1095,25 +1120,30 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created."
+          "description": "Unique identifier for the user (in GUID format).\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created."
+          "description": "The timestamp when the user was created.\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created."
+          "description": "The timestamp when the user was last updated.\nThis is a read-only field and will be available after the user is created.",
+          "readOnly": true
         },
         "email": {
           "type": "string",
-          "description": "The email address of the user.\nThis is a read-only field."
+          "description": "The email address of the user.\nThis is a read-only field.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1UserStatus",
-          "description": "The status of the user.\nThis is a read-only field."
+          "description": "The status of the user.\nThis is a read-only field.",
+          "readOnly": true
         },
         "defaultAccountId": {
           "type": "string",
@@ -1121,7 +1151,8 @@
         },
         "onboardingStatus": {
           "$ref": "#/definitions/v1OnboardingStatus",
-          "description": "The onboarding status of the user on the platform.\nThis is a read-only field."
+          "description": "The onboarding status of the user on the platform.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A User represents a user in the Qdrant cloud."

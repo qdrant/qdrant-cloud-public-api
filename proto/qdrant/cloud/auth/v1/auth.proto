@@ -4,6 +4,7 @@ package qdrant.cloud.auth.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -115,7 +116,7 @@ message DeleteManagementKeyResponse {
 message ManagementKey {
   // Unique identifier for the management key (in GUID format).
   // This is a read-only field and will be available after a management key is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "management_key.id"
     message: "value must be a valid UUID"
@@ -126,10 +127,10 @@ message ManagementKey {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the management key was created.
   // This is a read-only field and will be available after a management key is created.
-  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp created_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Prefix for the management key, this represents the first bytes of the key.
   // This is a read-only field and will be available after a management key is created.
-  string prefix = 4;
+  string prefix = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "management_key.prefix"
     message: "prefix must not be empty"
@@ -138,17 +139,20 @@ message ManagementKey {
   // The value of the key, to be used to authenticate requests to the Qdrant Cloud API.
   // This is a read-only field and will be available only once in the response of CreateManagementKey.
   // You should securely store this key and it should be handled as a secret.
-  string key = 5;
+  string key = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The email of the user the management key is attributed to.
   // This is a read-only field. If the key is created by another management key, the email is inherited
   // from that key, so the responsible user stays visible. It is empty when no user can be attributed,
   // for example for keys created by the system.
-  string created_by_email = 6 [(buf.validate.field).cel = {
-    id: "management_key.created_by_email"
-    message: "if set, created_by_email must be a valid email address"
-    expression: "this.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')"
-  }];
+  string created_by_email = 6 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (buf.validate.field).cel = {
+      id: "management_key.created_by_email"
+      message: "if set, created_by_email must be a valid email address"
+      expression: "this.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')"
+    }
+  ];
   // How the management key was created, either directly by a user or by another management key.
   // This is a read-only field.
-  common.v1.ActorType created_by_actor_type = 7;
+  common.v1.ActorType created_by_actor_type = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

@@ -1280,6 +1280,7 @@ export declare type BackupSchedule = Message<"qdrant.cloud.serverless.space.back
 
   /**
    * The current status of the backup schedule.
+   * This is a read-only field.
    *
    * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupScheduleStatus status = 8;
    */

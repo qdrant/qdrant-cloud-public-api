@@ -4,6 +4,7 @@ package qdrant.cloud.cluster.auth.v2;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
@@ -153,7 +154,7 @@ message DeleteDatabaseApiKeyResponse {
 message DatabaseApiKey {
   // Unique identifier for the database api key (in GUID format).
   // This is a read-only field and will be available after a database api key is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "database_api_key.id"
     message: "value must be a valid UUID"
@@ -164,7 +165,7 @@ message DatabaseApiKey {
   string account_id = 2 [(buf.validate.field).string = {uuid: true}];
   // Timestamp when the database api key was created.
   // This is a read-only field and will be available after a database api key is created.
-  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp created_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the cluster (in GUID format).
   // This is a required field.
   string cluster_id = 4 [(buf.validate.field).string = {uuid: true}];
@@ -200,14 +201,17 @@ message DatabaseApiKey {
   // The email of the user who created the database api key.
   // This is an optional read-only field and will be available after a database api key is created.
   // If the DatabaseApiKey is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.
-  string created_by_email = 8 [(buf.validate.field).cel = {
-    id: "database_api_key.created_by_email"
-    message: "if set, created_by_email must be a valid email address"
-    expression: "this.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')"
-  }];
+  string created_by_email = 8 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (buf.validate.field).cel = {
+      id: "database_api_key.created_by_email"
+      message: "if set, created_by_email must be a valid email address"
+      expression: "this.size() == 0 || this.matches('^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$')"
+    }
+  ];
   // Postfix for the database api key, this represents the last bytes of the key.
   // This is a read-only field and will be available after a database api key is created.
-  string postfix = 9;
+  string postfix = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "database_api_key.postfix"
     message: "postfix must not be empty"
@@ -216,10 +220,10 @@ message DatabaseApiKey {
   // The key for the database api key.
   // This is a read-only field and will be available only once in the response of CreateDatabaseApiKey.
   // You should securely store this key and it should be handled as a secret.
-  string key = 10;
+  string key = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
   // How the database api key was created, either directly by a user or by a management key.
   // This is a read-only field.
-  common.v1.ActorType created_by_actor_type = 11;
+  common.v1.ActorType created_by_actor_type = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Represents an access rule. An access rule can either define global access to

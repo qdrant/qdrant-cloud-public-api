@@ -5143,7 +5143,7 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xb2\x06\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xb2\x06\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -5251,24 +5251,26 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12!\n" +
 	"\aversion\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\"d\n" +
 	"\x18GetQdrantReleaseResponse\x12H\n" +
-	"\arelease\x18\x01 \x01(\v2&.qdrant.cloud.cluster.v1.QdrantReleaseB\x06\xbaH\x03\xc8\x01\x01R\arelease\"\xdc\t\n" +
-	"\aCluster\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\arelease\x18\x01 \x01(\v2&.qdrant.cloud.cluster.v1.QdrantReleaseB\x06\xbaH\x03\xc8\x01\x01R\arelease\"\xf6\t\n" +
+	"\aCluster\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
-	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x02\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x129\n" +
+	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x02\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12>\n" +
 	"\n" +
-	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x123\n" +
+	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x126\n" +
 	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12B\n" +
+	" \x01(\tB\n" +
+	"\xe0A\x05\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12C\n" +
+	"\x18cloud_provider_region_id\x18\v \x01(\tB\n" +
+	"\xe0A\x05\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12B\n" +
 	"\x06labels\x18\f \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x06labels\x12\xc7\x01\n" +
 	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12[\n" +
-	"\rconfiguration\x18\x14 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12;\n" +
-	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateR\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
+	"\rconfiguration\x18\x14 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12@\n" +
+	"\x05state\x18d \x01(\v2%.qdrant.cloud.cluster.v1.ClusterStateB\x03\xe0A\x03R\x05state:\xb7\x03\xbaH\xb3\x03\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\x8a\x02\n" +
 	" cluster.cloud_provider_region_id\x12Hcloud_provider_region_id must be a UUID if cloud_provider_id is 'hybrid'\x1a\x9b\x01this.cloud_provider_region_id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || this.cloud_provider_id!= 'hybrid'B\x18\n" +
@@ -5285,9 +5287,9 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x15_force_half_precisionB\x13\n" +
 	"\x11_parallel_indexesB\x0f\n" +
 	"\r_groups_countB\x13\n" +
-	"\x11_allow_integrated\"\xe5\x10\n" +
-	"\x14ClusterConfiguration\x12D\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12/\n" +
+	"\x11_allow_integrated\"\xea\x10\n" +
+	"\x14ClusterConfiguration\x12I\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12/\n" +
 	"\x0fnumber_of_nodes\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x01R\rnumberOfNodes\x12E\n" +
 	"\aversion\x18\x03 \x01(\tB&\xbaH#r!2\x1f^(v(\\d+)\\.(\\d+)\\.(\\d+)|latest)$H\x00R\aversion\x88\x01\x01\x12'\n" +
 	"\n" +
@@ -5429,57 +5431,61 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x17_database_storage_classB\x19\n" +
 	"\x17_snapshot_storage_classB\x18\n" +
 	"\x16_volume_snapshot_classB\x1a\n" +
-	"\x18_volume_attributes_class\"\xaf\x05\n" +
-	"\fClusterState\x12!\n" +
-	"\aversion\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aversion\x12\x19\n" +
-	"\bnodes_up\x18\x02 \x01(\rR\anodesUp\x12=\n" +
-	"\frestarted_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vrestartedAt\x12E\n" +
-	"\x05phase\x18\x04 \x01(\x0e2%.qdrant.cloud.cluster.v1.ClusterPhaseB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x16\n" +
-	"\x06reason\x18\x05 \x01(\tR\x06reason\x12L\n" +
-	"\bendpoint\x18\x06 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointB\x06\xbaH\x03\xc8\x01\x01R\bendpoint\x12Z\n" +
-	"\tresources\x18\a \x01(\v24.qdrant.cloud.cluster.v1.ClusterNodeResourcesSummaryB\x06\xbaH\x03\xc8\x01\x01R\tresources\x12d\n" +
-	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\b\xbaH\x03\xc8\x01\x01\x18\x01R\x0fscalabilityInfo\x12>\n" +
-	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoR\x05nodes\x12\x19\n" +
+	"\x18_volume_attributes_class\"\xda\x05\n" +
+	"\fClusterState\x12$\n" +
+	"\aversion\x18\x01 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\aversion\x12\x1e\n" +
+	"\bnodes_up\x18\x02 \x01(\rB\x03\xe0A\x03R\anodesUp\x12B\n" +
+	"\frestarted_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\vrestartedAt\x12H\n" +
+	"\x05phase\x18\x04 \x01(\x0e2%.qdrant.cloud.cluster.v1.ClusterPhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
+	"\x06reason\x18\x05 \x01(\tB\x03\xe0A\x03R\x06reason\x12O\n" +
+	"\bendpoint\x18\x06 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\bendpoint\x12]\n" +
+	"\tresources\x18\a \x01(\v24.qdrant.cloud.cluster.v1.ClusterNodeResourcesSummaryB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\tresources\x12g\n" +
+	"\x10scalability_info\x18\b \x01(\v2/.qdrant.cloud.cluster.v1.ClusterScalabilityInfoB\v\xe0A\x03\xbaH\x03\xc8\x01\x01\x18\x01R\x0fscalabilityInfo\x12C\n" +
+	"\x05nodes\x18\t \x03(\v2(.qdrant.cloud.cluster.v1.ClusterNodeInfoB\x03\xe0A\x03R\x05nodes\x12\x1e\n" +
 	"\bjwt_rbac\x18\n" +
-	" \x01(\bR\ajwtRbac\x12X\n" +
-	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesB\x06\xbaH\x03\xc8\x01\x01R\fcapabilities\"\xcc\x03\n" +
-	"\x0fClusterNodeInfo\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x129\n" +
+	" \x01(\bB\x03\xe0A\x03R\ajwtRbac\x12[\n" +
+	"\fcapabilities\x18\v \x01(\v2,.qdrant.cloud.cluster.v1.ClusterCapabilitiesB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\fcapabilities\"\xeb\x03\n" +
+	"\x0fClusterNodeInfo\x12\x1e\n" +
+	"\x04name\x18\x01 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\x04name\x12>\n" +
 	"\n" +
-	"started_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12\x18\n" +
-	"\aversion\x18\x03 \x01(\tR\aversion\x12D\n" +
-	"\bendpoint\x18\x04 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointR\bendpoint\x12I\n" +
+	"started_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tstartedAt\x12\x1d\n" +
+	"\aversion\x18\x03 \x01(\tB\x03\xe0A\x03R\aversion\x12I\n" +
+	"\bendpoint\x18\x04 \x01(\v2(.qdrant.cloud.cluster.v1.ClusterEndpointB\x03\xe0A\x03R\bendpoint\x12L\n" +
 	"\x05state\x18\n" +
-	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05state\x120\n" +
-	"\x11availability_zone\x18\v \x01(\tH\x00R\x10availabilityZone\x88\x01\x01\x12[\n" +
-	"\x0enot_ready_info\x18\f \x01(\v20.qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfoH\x01R\fnotReadyInfo\x88\x01\x01B\x14\n" +
+	" \x01(\x0e2).qdrant.cloud.cluster.v1.ClusterNodeStateB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05state\x125\n" +
+	"\x11availability_zone\x18\v \x01(\tB\x03\xe0A\x03H\x00R\x10availabilityZone\x88\x01\x01\x12`\n" +
+	"\x0enot_ready_info\x18\f \x01(\v20.qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfoB\x03\xe0A\x03H\x01R\fnotReadyInfo\x88\x01\x01B\x14\n" +
 	"\x12_availability_zoneB\x11\n" +
-	"\x0f_not_ready_info\"\xb7\x01\n" +
-	"\x11ClusterNodeAction\x12N\n" +
-	"\x04kind\x18\x01 \x01(\x0e2..qdrant.cloud.cluster.v1.ClusterNodeActionKindB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04kind\x12)\n" +
-	"\vdescription\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12\x1f\n" +
-	"\x03url\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x00R\x03url\x88\x01\x01B\x06\n" +
-	"\x04_url\"\xe0\x04\n" +
-	"\x17ClusterNodeNotReadyInfo\x12_\n" +
-	"\tcondition\x18\x01 \x01(\x0e25.qdrant.cloud.cluster.v1.ClusterNodeNotReadyConditionB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\tcondition\x124\n" +
-	"\x11condition_message\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x10conditionMessage\x12[\n" +
-	"\x06reason\x18\x06 \x01(\x0e22.qdrant.cloud.cluster.v1.ClusterNodeNotReadyReasonB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x06reason\x88\x01\x01\x123\n" +
-	"\x0ereason_message\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rreasonMessage\x88\x01\x01\x12]\n" +
-	"\x05event\x18\x03 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterNodeTerminationEventB\f\xbaH\a\x82\x01\x04\x10\x01 \x00\x18\x01H\x02R\x05event\x88\x01\x01\x123\n" +
-	"\revent_message\x18\x04 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x03R\feventMessage\x88\x01\x01\x12N\n" +
-	"\aactions\x18\x05 \x03(\v2*.qdrant.cloud.cluster.v1.ClusterNodeActionB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"\x0f_not_ready_info\"\xc0\x01\n" +
+	"\x11ClusterNodeAction\x12Q\n" +
+	"\x04kind\x18\x01 \x01(\x0e2..qdrant.cloud.cluster.v1.ClusterNodeActionKindB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04kind\x12,\n" +
+	"\vdescription\x18\x02 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\vdescription\x12\"\n" +
+	"\x03url\x18\x03 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01H\x00R\x03url\x88\x01\x01B\x06\n" +
+	"\x04_url\"\xf5\x04\n" +
+	"\x17ClusterNodeNotReadyInfo\x12b\n" +
+	"\tcondition\x18\x01 \x01(\x0e25.qdrant.cloud.cluster.v1.ClusterNodeNotReadyConditionB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00R\tcondition\x127\n" +
+	"\x11condition_message\x18\x02 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01R\x10conditionMessage\x12^\n" +
+	"\x06reason\x18\x06 \x01(\x0e22.qdrant.cloud.cluster.v1.ClusterNodeNotReadyReasonB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x06reason\x88\x01\x01\x126\n" +
+	"\x0ereason_message\x18\a \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01H\x01R\rreasonMessage\x88\x01\x01\x12`\n" +
+	"\x05event\x18\x03 \x01(\x0e24.qdrant.cloud.cluster.v1.ClusterNodeTerminationEventB\x0f\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00\x18\x01H\x02R\x05event\x88\x01\x01\x126\n" +
+	"\revent_message\x18\x04 \x01(\tB\f\xe0A\x03\xbaH\x04r\x02\x10\x01\x18\x01H\x03R\feventMessage\x88\x01\x01\x12Q\n" +
+	"\aactions\x18\x05 \x03(\v2*.qdrant.cloud.cluster.v1.ClusterNodeActionB\v\xe0A\x03\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\aactionsB\t\n" +
 	"\a_reasonB\x11\n" +
 	"\x0f_reason_messageB\b\n" +
 	"\x06_eventB\x10\n" +
-	"\x0e_event_message\"y\n" +
-	"\x0fClusterEndpoint\x12\x1a\n" +
-	"\x03url\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01R\x03url\x12$\n" +
-	"\trest_port\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\brestPort\x12$\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xa1\x03\n" +
+	"\x0e_event_message\"\x82\x01\n" +
+	"\x0fClusterEndpoint\x12\x1d\n" +
+	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03url\x12'\n" +
+	"\trest_port\x18\x02 \x01(\x05B\n" +
+	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\brestPort\x12'\n" +
+	"\tgrpc_port\x18\x03 \x01(\x05B\n" +
+	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\bgrpcPort\"\xa1\x03\n" +
 	"\x1bClusterNodeResourcesSummary\x12I\n" +
 	"\x04disk\x18\x01 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x04disk\x12G\n" +
 	"\x03ram\x18\x02 \x01(\v2-.qdrant.cloud.cluster.v1.ClusterNodeResourcesB\x06\xbaH\x03\xc8\x01\x01R\x03ram\x12G\n" +

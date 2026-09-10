@@ -4,6 +4,7 @@ package qdrant.cloud.serverless.space.backup.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
@@ -569,7 +570,7 @@ enum BackupStatus {
 message Backup {
   // Unique identifier for the backup (in GUID format).
   // This is a read-only field and will be available after a backup is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "backup.id"
     message: "value must be a valid UUID"
@@ -577,7 +578,7 @@ message Backup {
   };
   // The timestamp when the backup was created.
   // This is a read-only field and will be available after a backup is created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
@@ -586,7 +587,7 @@ message Backup {
   string space_id = 4 [(buf.validate.field).string = {uuid: true}];
   // The name of the backup.
   // This is a read-only field and will be available after a backup is created.
-  string name = 5;
+  string name = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "backup.name"
     message: "name must not be empty"
@@ -594,17 +595,23 @@ message Backup {
   };
   // The current status of the backup.
   // This is a read-only field and will be set after CreateBackup is called.
-  BackupStatus status = 6 [(buf.validate.field).enum.defined_only = true];
+  BackupStatus status = 6 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The timestamp when the backup was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackup is called.
-  google.protobuf.Timestamp deleted_at = 7;
+  google.protobuf.Timestamp deleted_at = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The total time taken to generate the backup. This is a read-only field and
   // will be available after the backup process is completed, regardless of
   // whether it succeeded or failed.
-  google.protobuf.Duration backup_duration = 8;
+  google.protobuf.Duration backup_duration = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the backup schedule (in GUID format).
   // This is a read-only field and will be present if the backup was created by a backup schedule.
-  optional string backup_schedule_id = 9 [(buf.validate.field).string = {uuid: true}];
+  optional string backup_schedule_id = 9 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The retention period in seconds for the backup. After that period, the backup is deleted from the system.
   // The value should be between 1 day (>= 86400 seconds) and 365 days (<= 31536000 seconds).
   // If the value is unset, backups will be retained indefinitely.
@@ -615,16 +622,16 @@ message Backup {
   // Space details associated with the backup.
   // Identity fields reflect the latest space state; configuration reflects the state at backup time.
   // This is a read-only field and will be available after the backup is created.
-  SpaceInfo space_info = 12;
+  SpaceInfo space_info = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who created the backup.
   // This is a read-only field and will be available after a backup is created.
-  common.v1.Caller created_by = 13;
+  common.v1.Caller created_by = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who last updated the backup.
   // This is a read-only field and will be set when backup metadata is updated.
-  common.v1.Caller last_updated_by = 14;
+  common.v1.Caller last_updated_by = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who initiated deletion of the backup.
   // This is a read-only field and will be set when deleted_at is set.
-  common.v1.Caller deleted_by = 15;
+  common.v1.Caller deleted_by = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The name of the collection to back up.
   // When unset, the entire space is backed up.
   // When set, only the specified collection is backed up.
@@ -674,7 +681,7 @@ enum BackupScheduleStatus {
 message BackupSchedule {
   // Unique identifier for the backup schedule (in GUID format).
   // This is a read-only field and will be available after a backup schedule is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "backup_schedule.id"
     message: "value must be a valid UUID"
@@ -682,7 +689,7 @@ message BackupSchedule {
   };
   // The timestamp when the backup schedule was created.
   // This is a read-only field and will be available after a backup schedule is created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
@@ -716,21 +723,25 @@ message BackupSchedule {
   optional google.protobuf.Timestamp paused_at = 13;
   // The timestamp when the backup schedule was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackupSchedule is called.
-  google.protobuf.Timestamp deleted_at = 7;
+  google.protobuf.Timestamp deleted_at = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The current status of the backup schedule.
-  BackupScheduleStatus status = 8 [(buf.validate.field).enum.defined_only = true];
+  // This is a read-only field.
+  BackupScheduleStatus status = 8 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The caller who created the backup schedule.
   // This is a read-only field and will be available after a backup schedule is created.
-  common.v1.Caller created_by = 9;
+  common.v1.Caller created_by = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who last updated the backup schedule.
   // This is a read-only field and will be set after UpdateBackupSchedule is called.
-  common.v1.Caller last_updated_by = 10;
+  common.v1.Caller last_updated_by = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who initiated deletion of the backup schedule.
   // This is a read-only field and will be set when deleted_at is set.
-  common.v1.Caller deleted_by = 11;
+  common.v1.Caller deleted_by = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The timestamp when this backup schedule last created a backup.
   // This is a read-only field and will be set after the schedule fires for the first time.
-  optional google.protobuf.Timestamp last_fired_at = 14;
+  optional google.protobuf.Timestamp last_fired_at = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The name of the collection to back up.
   // When unset, the entire space is backed up.
   // When set, only the specified collection is backed up.
@@ -747,22 +758,37 @@ message BackupSchedule {
 // All fields in this message are read-only.
 message BackupRestore {
   // Unique identifier for the backup restore (in GUID format).
-  string id = 1 [(buf.validate.field).string = {uuid: true}];
+  string id = 1 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The timestamp when the backup restore was created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The identifier of the account (in GUID format).
-  string account_id = 3 [(buf.validate.field).string = {uuid: true}];
+  string account_id = 3 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The identifier of the space (in GUID format).
-  string space_id = 4 [(buf.validate.field).string = {uuid: true}];
+  string space_id = 4 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The Identifier of the backup (in GUID format).
-  string backup_id = 5 [(buf.validate.field).string = {uuid: true}];
+  string backup_id = 5 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The current status of the backup restore.
-  BackupRestoreStatus status = 6 [(buf.validate.field).enum.defined_only = true];
+  BackupRestoreStatus status = 6 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The timestamp when the backup restore was deleted (or when deletion started).
-  google.protobuf.Timestamp deleted_at = 7;
+  google.protobuf.Timestamp deleted_at = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The caller who initiated the backup restore.
   // This is a read-only field and will be available after a backup restore is created.
-  common.v1.Caller created_by = 8;
+  common.v1.Caller created_by = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // BackupRestoreStatus represents the current status of a backup restore.

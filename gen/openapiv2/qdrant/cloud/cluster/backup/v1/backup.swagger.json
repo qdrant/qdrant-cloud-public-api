@@ -581,12 +581,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
+              "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "clusterId": {
               "type": "string",
@@ -594,24 +596,29 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
-              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called.",
+              "readOnly": true
             },
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
+              "readOnly": true
             },
             "backupDuration": {
               "type": "string",
-              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
+              "readOnly": true
             },
             "backupScheduleId": {
               "type": "string",
-              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
+              "readOnly": true
             },
             "retentionPeriod": {
               "type": "string",
@@ -619,7 +626,8 @@
             },
             "clusterInfo": {
               "$ref": "#/definitions/v1ClusterInfo",
-              "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+              "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created.",
+              "readOnly": true
             },
             "displayName": {
               "type": "string",
@@ -627,7 +635,8 @@
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
-              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
+              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
+              "readOnly": true
             }
           },
           "description": "The actual backup.",
@@ -644,12 +653,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "clusterId": {
               "type": "string",
@@ -666,11 +677,13 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
-              "description": "The current status of the backup schedule."
+              "description": "The current status of the backup schedule.\nThis is a read-only field.",
+              "readOnly": true
             },
             "displayName": {
               "type": "string",
@@ -692,7 +705,8 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+              "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created.",
+              "readOnly": true
             },
             "clusterId": {
               "type": "string",
@@ -700,24 +714,29 @@
             },
             "name": {
               "type": "string",
-              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
+              "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupStatus",
-              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+              "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called.",
+              "readOnly": true
             },
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+              "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
+              "readOnly": true
             },
             "backupDuration": {
               "type": "string",
-              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
+              "readOnly": true
             },
             "backupScheduleId": {
               "type": "string",
-              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+              "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
+              "readOnly": true
             },
             "retentionPeriod": {
               "type": "string",
@@ -725,7 +744,8 @@
             },
             "clusterInfo": {
               "$ref": "#/definitions/v1ClusterInfo",
-              "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+              "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created.",
+              "readOnly": true
             },
             "displayName": {
               "type": "string",
@@ -733,7 +753,8 @@
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
-              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
+              "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
+              "readOnly": true
             }
           },
           "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored."
@@ -750,7 +771,8 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+              "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+              "readOnly": true
             },
             "clusterId": {
               "type": "string",
@@ -767,11 +789,13 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+              "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+              "readOnly": true
             },
             "status": {
               "$ref": "#/definitions/v1BackupScheduleStatus",
-              "description": "The current status of the backup schedule."
+              "description": "The current status of the backup schedule.\nThis is a read-only field.",
+              "readOnly": true
             },
             "displayName": {
               "type": "string",
@@ -842,12 +866,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created."
+          "description": "Unique identifier for the backup (in GUID format).\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created."
+          "description": "The timestamp when the backup was created.\nThis is a read-only field and will be available after a backup is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -859,24 +885,29 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`."
+          "description": "The name of the backup.\nThis is a read-only field and will be available after a backup is created.\nIt is the generated identifier the platform stores the backup under; it never changes.\nFor a name meant to be read by a person, use `display_name`.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupStatus",
-          "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called."
+          "description": "The current status of the backup.\nThis is a read-only field and will be set after CreateBackup is called.",
+          "readOnly": true
         },
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called."
+          "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
+          "readOnly": true
         },
         "backupDuration": {
           "type": "string",
-          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed."
+          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
+          "readOnly": true
         },
         "backupScheduleId": {
           "type": "string",
-          "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule."
+          "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
+          "readOnly": true
         },
         "retentionPeriod": {
           "type": "string",
@@ -884,7 +915,8 @@
         },
         "clusterInfo": {
           "$ref": "#/definitions/v1ClusterInfo",
-          "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created."
+          "description": "Cluster details associated with the backup.\nIdentity fields reflect the latest cluster state; configuration reflects the state at backup time.\nThis is a read-only field and will be available after the backup is created.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -892,7 +924,8 @@
         },
         "price": {
           "$ref": "#/definitions/v1BackupPrice",
-          "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price."
+          "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
+          "readOnly": true
         }
       },
       "description": "A Backup represents a backup of a Qdrant database."
@@ -937,33 +970,40 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup restore (in GUID format)."
+          "description": "Unique identifier for the backup restore (in GUID format).",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup restore was created."
+          "description": "The timestamp when the backup restore was created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
-          "description": "The identifier of the account (in GUID format)."
+          "description": "The identifier of the account (in GUID format).",
+          "readOnly": true
         },
         "clusterId": {
           "type": "string",
-          "description": "The identifier of the cluster (in GUID format)."
+          "description": "The identifier of the cluster (in GUID format).",
+          "readOnly": true
         },
         "backupId": {
           "type": "string",
-          "description": "The Identifier of the backup (in GUID format)."
+          "description": "The Identifier of the backup (in GUID format).",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupRestoreStatus",
-          "description": "The current status of the backup restore."
+          "description": "The current status of the backup restore.",
+          "readOnly": true
         },
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup restore was deleted (or when deletion started)."
+          "description": "The timestamp when the backup restore was deleted (or when deletion started).",
+          "readOnly": true
         }
       },
       "description": "A BackupRestore represents the status of a backup restore.\nAll fields in this message are read-only."
@@ -987,12 +1027,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "Unique identifier for the backup schedule (in GUID format).\nThis is a read-only field and will be available after a backup schedule is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created."
+          "description": "The timestamp when the backup schedule was created.\nThis is a read-only field and will be available after a backup schedule is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -1013,11 +1055,13 @@
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called."
+          "description": "The timestamp when the backup schedule was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackupSchedule is called.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/v1BackupScheduleStatus",
-          "description": "The current status of the backup schedule."
+          "description": "The current status of the backup schedule.\nThis is a read-only field.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -1059,7 +1103,8 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created."
+          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
         },
         "numberOfNodes": {
           "type": "integer",

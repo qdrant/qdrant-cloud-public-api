@@ -144,12 +144,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
+              "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
+              "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created.",
+              "readOnly": true
             },
             "clusterIds": {
               "type": "array",
@@ -160,11 +162,13 @@
             },
             "prefix": {
               "type": "string",
-              "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
+              "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created.",
+              "readOnly": true
             },
             "key": {
               "type": "string",
-              "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
+              "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret.",
+              "readOnly": true
             }
           },
           "description": "The actual database api key.",
@@ -216,7 +220,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created."
+          "description": "Unique identifier for the database api key (in GUID format).\nThis is a read-only field and will be available after a database api key is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -225,7 +230,8 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created."
+          "description": "Timestamp when the database api key was created.\nThis is a read-only field and will be available after a database api key is created.",
+          "readOnly": true
         },
         "clusterIds": {
           "type": "array",
@@ -236,11 +242,13 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created."
+          "description": "Prefix for the database api key, this represents the first bytes of the key.\nThis is a read-only field and will be available after a database api key is created.",
+          "readOnly": true
         },
         "key": {
           "type": "string",
-          "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret."
+          "description": "The key for the database api key.\nThis is a read-only field and will be available only once in the response of CreateDatabaseApiKey.\nYou should securely store this key and it should be handled as a secret.",
+          "readOnly": true
         }
       },
       "description": "A DatabaseApiKey represents one database api key of a Qdrant cloud account.\nThis database key can grant access to one or more Qdrant databases (clusters)."

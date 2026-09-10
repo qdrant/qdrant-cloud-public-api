@@ -127,7 +127,7 @@ class MonthlyCreditConsumption(_message.Message):
     def __init__(self, year: _Optional[int] = ..., month: _Optional[int] = ..., amount: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class CreditContract(_message.Message):
-    __slots__ = ("id", "account_id", "total_amount", "currency", "active_from", "active_to", "notes", "used_amount", "remaining_amount", "exhausted_at")
+    __slots__ = ("id", "account_id", "total_amount", "currency", "active_from", "active_to", "notes", "used_amount", "remaining_amount", "exhausted_at", "voided_amount")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
@@ -138,6 +138,7 @@ class CreditContract(_message.Message):
     USED_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     REMAINING_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     EXHAUSTED_AT_FIELD_NUMBER: _ClassVar[int]
+    VOIDED_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     total_amount: float
@@ -148,7 +149,8 @@ class CreditContract(_message.Message):
     used_amount: float
     remaining_amount: float
     exhausted_at: _timestamp_pb2.Timestamp
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ..., exhausted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    voided_amount: float
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ..., exhausted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., voided_amount: _Optional[float] = ...) -> None: ...
 
 class GetBillingAccountParentRequest(_message.Message):
     __slots__ = ("account_id",)

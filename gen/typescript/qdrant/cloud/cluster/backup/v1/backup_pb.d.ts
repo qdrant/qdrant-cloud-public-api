@@ -1497,6 +1497,7 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
 
   /**
    * The current status of the backup schedule.
+   * This is a read-only field.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.BackupScheduleStatus status = 8;
    */

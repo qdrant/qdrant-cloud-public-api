@@ -24,6 +24,7 @@ multivector
 nvidia
 oneof
 openshift
+PII
 protobuf
 qdrant
 scaleway

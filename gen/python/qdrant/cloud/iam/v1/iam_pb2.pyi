@@ -2,6 +2,7 @@ import datetime
 
 from buf.validate import validate_pb2 as _validate_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.api import field_behavior_pb2 as _field_behavior_pb2
 from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.rpc import error_details_pb2 as _error_details_pb2

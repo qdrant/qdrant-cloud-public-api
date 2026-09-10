@@ -336,6 +336,7 @@ export declare const SpaceApiKeySchema: GenMessage<SpaceApiKey, {validType: Spac
  * SpaceApiKeyState represents the operational state of a space API key in the
  * Qdrant serverless environment. It provides status information and error
  * details (if any).
+ * All fields in this message are read-only.
  *
  * @generated from message qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyState
  */

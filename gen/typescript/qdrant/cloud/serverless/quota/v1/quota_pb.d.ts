@@ -61,13 +61,6 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   maxCollectionsPerSpace: bigint;
 
   /**
-   * Platform default storage ceiling applied to each new space. 0 = unlimited.
-   *
-   * @generated from field: uint64 platform_max_storage_bytes_per_space = 4;
-   */
-  platformMaxStorageBytesPerSpace: bigint;
-
-  /**
    * Number of serverless spaces currently used.
    *
    * @generated from field: uint64 used_spaces = 5;
@@ -75,11 +68,20 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   usedSpaces: bigint;
 
   /**
-   * Total storage used across all spaces, in bytes.
+   * Platform limit: maximum size in bytes per collection (copied into each Space.configuration.collection_settings).
+   * A value of 0 means unlimited.
    *
-   * @generated from field: uint64 used_storage_bytes = 6;
+   * @generated from field: uint64 platform_max_size_per_collection = 7;
    */
-  usedStorageBytes: bigint;
+  platformMaxSizePerCollection: bigint;
+
+  /**
+   * Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).
+   * A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 platform_max_workers_per_collection = 8;
+   */
+  platformMaxWorkersPerCollection: bigint;
 };
 
 export declare type AccountQuotaValid = AccountQuota;
@@ -114,7 +116,7 @@ export declare const GetQuotasResponseSchema: GenMessage<GetQuotasResponse, {val
 
 /**
  * QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
- * Per-space storage caps live on Space.configuration (UpdateSpace).
+ * Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
  *
  * @generated from service qdrant.cloud.serverless.quota.v1.QuotaService
  */

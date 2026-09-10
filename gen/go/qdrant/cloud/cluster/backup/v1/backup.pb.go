@@ -2129,6 +2129,7 @@ type BackupSchedule struct {
 	// This is a read-only field and will be set after DeleteBackupSchedule is called.
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	// The current status of the backup schedule.
+	// This is a read-only field.
 	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
 	// The name of the backup schedule, stamped onto every backup it produces from now on.
 	// Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
@@ -2337,7 +2338,7 @@ var File_qdrant_cloud_cluster_backup_v1_backup_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xc6\x02\n" +
+	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xc6\x02\n" +
 	"\x12ListBackupsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -2463,26 +2464,26 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\x87\t\n" +
-	"\x06Backup\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xb0\t\n" +
+	"\x06Backup\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
-	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12N\n" +
-	"\x06status\x18\x06 \x01(\x0e2,.qdrant.cloud.cluster.backup.v1.BackupStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
+	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12\x17\n" +
+	"\x04name\x18\x05 \x01(\tB\x03\xe0A\x03R\x04name\x12Q\n" +
+	"\x06status\x18\x06 \x01(\x0e2,.qdrant.cloud.cluster.backup.v1.BackupStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12>\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12B\n" +
-	"\x0fbackup_duration\x18\b \x01(\v2\x19.google.protobuf.DurationR\x0ebackupDuration\x12;\n" +
-	"\x12backup_schedule_id\x18\t \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01\x12^\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x12G\n" +
+	"\x0fbackup_duration\x18\b \x01(\v2\x19.google.protobuf.DurationB\x03\xe0A\x03R\x0ebackupDuration\x12>\n" +
+	"\x12backup_schedule_id\x18\t \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01H\x00R\x10backupScheduleId\x88\x01\x01\x12^\n" +
 	"\x10retention_period\x18\n" +
-	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12N\n" +
-	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoR\vclusterInfo\x12!\n" +
-	"\fdisplay_name\x18\v \x01(\tR\vdisplayName\x12F\n" +
-	"\x05price\x18\r \x01(\v2+.qdrant.cloud.cluster.backup.v1.BackupPriceH\x02R\x05price\x88\x01\x01:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
+	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12S\n" +
+	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoB\x03\xe0A\x03R\vclusterInfo\x12!\n" +
+	"\fdisplay_name\x18\v \x01(\tR\vdisplayName\x12K\n" +
+	"\x05price\x18\r \x01(\v2+.qdrant.cloud.cluster.backup.v1.BackupPriceB\x03\xe0A\x03H\x02R\x05price\x88\x01\x01:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
 	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)\x1al\n" +
@@ -2517,36 +2518,36 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x04_gpu\"G\n" +
 	"\x10ResourceQuantity\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x05R\x06amount\x12\x1b\n" +
-	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xdc\x06\n" +
-	"\x0eBackupSchedule\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
+	"\x04unit\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\"\xee\x06\n" +
+	"\x0eBackupSchedule\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12\xb6\x01\n" +
 	"\bschedule\x18\x05 \x01(\tB\x99\x01\xbaH\x95\x01r\x92\x012\x8f\x01^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|((((\\d+,)+\\d+|([\\d\\*]+(\\/|-)\\d+)|\\d+|\\*) ?){5,7})$R\bschedule\x12^\n" +
-	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x129\n" +
+	"\x10retention_period\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x00R\x0fretentionPeriod\x88\x01\x01\x12>\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12V\n" +
-	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12&\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x12Y\n" +
+	"\x06status\x18\b \x01(\x0e24.qdrant.cloud.cluster.backup.v1.BackupScheduleStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12&\n" +
 	"\fdisplay_name\x18\t \x01(\tH\x01R\vdisplayName\x88\x01\x01:\xb2\x01\xbaH\xae\x01\x1a\xab\x01\n" +
 	"\x12backup_schedule.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x13\n" +
 	"\x11_retention_periodB\x0f\n" +
-	"\r_display_name\"\xef\x02\n" +
-	"\rBackupRestore\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
+	"\r_display_name\"\x88\x03\n" +
+	"\rBackupRestore\x12\x1b\n" +
+	"\x02id\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12>\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12*\n" +
 	"\n" +
-	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
+	"account_id\x18\x03 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\n" +
-	"cluster_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12%\n" +
-	"\tbackup_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12U\n" +
-	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x129\n" +
+	"cluster_id\x18\x04 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x12(\n" +
+	"\tbackup_id\x18\x05 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\x12X\n" +
+	"\x06status\x18\x06 \x01(\x0e23.qdrant.cloud.cluster.backup.v1.BackupRestoreStatusB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12>\n" +
 	"\n" +
-	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt*\xf4\x01\n" +
+	"deleted_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt*\xf4\x01\n" +
 	"\fBackupStatus\x12\x1d\n" +
 	"\x19BACKUP_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15BACKUP_STATUS_RUNNING\x10\x01\x12\x19\n" +

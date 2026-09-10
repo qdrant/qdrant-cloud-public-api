@@ -622,12 +622,14 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
+              "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
             },
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -636,7 +638,8 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+              "readOnly": true
             },
             "cloudProviderId": {
               "type": "string",
@@ -664,7 +667,8 @@
             },
             "state": {
               "$ref": "#/definitions/v1ClusterState",
-              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+              "readOnly": true
             }
           },
           "title": "The actual cluster"
@@ -681,7 +685,8 @@
             "createdAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
             },
             "name": {
               "type": "string",
@@ -690,7 +695,8 @@
             "deletedAt": {
               "type": "string",
               "format": "date-time",
-              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+              "readOnly": true
             },
             "cloudProviderId": {
               "type": "string",
@@ -718,7 +724,8 @@
             },
             "state": {
               "$ref": "#/definitions/v1ClusterState",
-              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+              "readOnly": true
             }
           },
           "title": "The actual cluster"
@@ -784,12 +791,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created."
+          "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created."
+          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
         },
         "accountId": {
           "type": "string",
@@ -802,7 +811,8 @@
         "deletedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called."
+          "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+          "readOnly": true
         },
         "cloudProviderId": {
           "type": "string",
@@ -830,7 +840,8 @@
         },
         "state": {
           "$ref": "#/definitions/v1ClusterState",
-          "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only."
+          "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+          "readOnly": true
         }
       },
       "description": "A Cluster represents one cluster of a Qdrant database."
@@ -883,7 +894,8 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created."
+          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
         },
         "numberOfNodes": {
           "type": "integer",
@@ -1136,17 +1148,20 @@
       "properties": {
         "url": {
           "type": "string",
-          "title": "URL to access the qdrant cluster (aka database) without port"
+          "title": "URL to access the qdrant cluster (aka database) without port",
+          "readOnly": true
         },
         "restPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for HTTP REST calls (6333)"
+          "title": "The port to use for HTTP REST calls (6333)",
+          "readOnly": true
         },
         "grpcPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for gRPC calls (6334)"
+          "title": "The port to use for gRPC calls (6334)",
+          "readOnly": true
         }
       },
       "description": "Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.\nAll fields in this message are a read-only field."
@@ -1156,15 +1171,18 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/v1ClusterNodeActionKind",
-          "description": "What the user is asked to do."
+          "description": "What the user is asked to do.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Short description of the action, for example \"Scale your cluster\"."
+          "description": "Short description of the action, for example \"Scale your cluster\".",
+          "readOnly": true
         },
         "url": {
           "type": "string",
-          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and\nCLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the\naccount and cluster identifiers it needs."
+          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and\nCLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the\naccount and cluster identifiers it needs.",
+          "readOnly": true
         }
       },
       "description": "ClusterNodeAction describes something the user can do to resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
@@ -1185,32 +1203,39 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name specifies the name of the node."
+          "description": "Name specifies the name of the node.",
+          "readOnly": true
         },
         "startedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "StartedAt specifies the time when the node started."
+          "description": "StartedAt specifies the time when the node started.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Version specifies the version of Qdrant running on the node."
+          "description": "Version specifies the version of Qdrant running on the node.",
+          "readOnly": true
         },
         "endpoint": {
           "$ref": "#/definitions/v1ClusterEndpoint",
-          "description": "Endpoint specific to this node."
+          "description": "Endpoint specific to this node.",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/v1ClusterNodeState",
-          "description": "State of the node."
+          "description": "State of the node.",
+          "readOnly": true
         },
         "availabilityZone": {
           "type": "string",
-          "description": "The availability zone where this node is running (e.g., \"us-east-1a\").\nThis is a read-only field provided by the system.\nOnly set for Multi-AZ clusters."
+          "description": "The availability zone where this node is running (e.g., \"us-east-1a\").\nThis is a read-only field provided by the system.\nOnly set for Multi-AZ clusters.",
+          "readOnly": true
         },
         "notReadyInfo": {
           "$ref": "#/definitions/v1ClusterNodeNotReadyInfo",
-          "description": "Structured explanation of why the node is not ready.\nSet alongside CLUSTER_NODE_STATE_STARTING as well as\nCLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports\nas starting, because it shares a pod-condition signature with ordinary\nstartup. Not always set: a node that is not ready may carry no explanation,\nfor example while the cluster's status is stale (CLUSTER_PHASE_UNKNOWN) and\nno current reason can be determined. Consumers should not assume this field\nis present whenever a node is not ready.\nIt clears automatically once the node recovers."
+          "description": "Structured explanation of why the node is not ready.\nSet alongside CLUSTER_NODE_STATE_STARTING as well as\nCLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports\nas starting, because it shares a pod-condition signature with ordinary\nstartup. Not always set: a node that is not ready may carry no explanation,\nfor example while the cluster's status is stale (CLUSTER_PHASE_UNKNOWN) and\nno current reason can be determined. Consumers should not assume this field\nis present whenever a node is not ready.\nIt clears automatically once the node recovers.",
+          "readOnly": true
         }
       },
       "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."
@@ -1233,27 +1258,33 @@
       "properties": {
         "condition": {
           "$ref": "#/definitions/v1ClusterNodeNotReadyCondition",
-          "description": "What is wrong with the node right now."
+          "description": "What is wrong with the node right now.",
+          "readOnly": true
         },
         "conditionMessage": {
           "type": "string",
-          "description": "Human-readable explanation of the condition,\nfor example \"Your container is restarting\"."
+          "description": "Human-readable explanation of the condition,\nfor example \"Your container is restarting\".",
+          "readOnly": true
         },
         "reason": {
           "$ref": "#/definitions/v1ClusterNodeNotReadyReason",
-          "description": "Why the node is in this condition.\nNot always set: the node status does not always say why, in which case the\ncondition is reported on its own. Each reason is only ever reported under\nthe conditions documented on ClusterNodeNotReadyReason."
+          "description": "Why the node is in this condition.\nNot always set: the node status does not always say why, in which case the\ncondition is reported on its own. Each reason is only ever reported under\nthe conditions documented on ClusterNodeNotReadyReason.",
+          "readOnly": true
         },
         "reasonMessage": {
           "type": "string",
-          "description": "Human-readable explanation of the reason,\nfor example \"Your node has reached its memory limit\".\nOnly set when reason is set."
+          "description": "Human-readable explanation of the reason,\nfor example \"Your node has reached its memory limit\".\nOnly set when reason is set.",
+          "readOnly": true
         },
         "event": {
           "$ref": "#/definitions/v1ClusterNodeTerminationEvent",
-          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.\n\nDeprecated: use reason instead, which reports these two values plus the\ncauses this field cannot express. Still populated whenever reason is\nCLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or\nCLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no\nchange in behavior, and scheduled for removal once the reason tier is the\nannounced surface."
+          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.\n\nDeprecated: use reason instead, which reports these two values plus the\ncauses this field cannot express. Still populated whenever reason is\nCLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or\nCLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no\nchange in behavior, and scheduled for removal once the reason tier is the\nannounced surface.",
+          "readOnly": true
         },
         "eventMessage": {
           "type": "string",
-          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set.\n\nDeprecated: use reason_message instead."
+          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set.\n\nDeprecated: use reason_message instead.",
+          "readOnly": true
         },
         "actions": {
           "type": "array",
@@ -1261,7 +1292,8 @@
             "type": "object",
             "$ref": "#/definitions/v1ClusterNodeAction"
           },
-          "description": "Actions the user can take to resolve the condition.\nA CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is\nonly attached where a page exists that helps with the specific cause."
+          "description": "Actions the user can take to resolve the condition.\nA CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is\nonly attached where a page exists that helps with the specific cause.",
+          "readOnly": true
         }
       },
       "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe explanation has two tiers: condition answers what is wrong with the node\nright now and is small and stable, while reason answers why and grows as more\ncauses become recognizable.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and reason values.\nAll fields in this message are read-only."
@@ -1429,37 +1461,45 @@
       "properties": {
         "version": {
           "type": "string",
-          "description": "Version of the cluster software."
+          "description": "Version of the cluster software.",
+          "readOnly": true
         },
         "nodesUp": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of cluster nodes that are up and running."
+          "description": "Number of cluster nodes that are up and running.",
+          "readOnly": true
         },
         "restartedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the cluster was restarted."
+          "description": "The date and time when the cluster was restarted.",
+          "readOnly": true
         },
         "phase": {
           "$ref": "#/definitions/v1ClusterPhase",
-          "description": "Current phase of the cluster."
+          "description": "Current phase of the cluster.",
+          "readOnly": true
         },
         "reason": {
           "type": "string",
-          "description": "Reason for the current phase of the cluster."
+          "description": "Reason for the current phase of the cluster.",
+          "readOnly": true
         },
         "endpoint": {
           "$ref": "#/definitions/v1ClusterEndpoint",
-          "description": "Endpoint information to access the qdrant cluster (aka database)."
+          "description": "Endpoint information to access the qdrant cluster (aka database).",
+          "readOnly": true
         },
         "resources": {
           "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
-          "title": "The resources used by the cluster per node.\nFor the complete cluster you have to multiply by cluster.configuration.number_of_nodes"
+          "title": "The resources used by the cluster per node.\nFor the complete cluster you have to multiply by cluster.configuration.number_of_nodes",
+          "readOnly": true
         },
         "scalabilityInfo": {
           "$ref": "#/definitions/v1ClusterScalabilityInfo",
-          "title": "Whether the cluster can be scaled up or down.\nDeprecated: Use capabilities.scalability_info instead"
+          "title": "Whether the cluster can be scaled up or down.\nDeprecated: Use capabilities.scalability_info instead",
+          "readOnly": true
         },
         "nodes": {
           "type": "array",
@@ -1467,15 +1507,18 @@
             "type": "object",
             "$ref": "#/definitions/v1ClusterNodeInfo"
           },
-          "description": "List of nodes in the cluster."
+          "description": "List of nodes in the cluster.",
+          "readOnly": true
         },
         "jwtRbac": {
           "type": "boolean",
-          "description": "Whether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control."
+          "description": "Whether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.",
+          "readOnly": true
         },
         "capabilities": {
           "$ref": "#/definitions/v1ClusterCapabilities",
-          "description": "Specifies whether some operations are supported by cluster or not."
+          "description": "Specifies whether some operations are supported by cluster or not.",
+          "readOnly": true
         }
       },
       "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."

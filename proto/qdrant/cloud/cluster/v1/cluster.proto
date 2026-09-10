@@ -4,6 +4,7 @@ package qdrant.cloud.cluster.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
@@ -600,7 +601,7 @@ message GetQdrantReleaseResponse {
 message Cluster {
   // Unique identifier for the cluster (in GUID format).
   // This is a read-only field and will be available after a cluster is created.
-  string id = 1;
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   option (buf.validate.message).cel = {
     id: "cluster.id"
     message: "value must be a valid UUID"
@@ -608,7 +609,7 @@ message Cluster {
   };
   // Timestamp when the cluster was created.
   // This is a read-only field and will be available after a cluster is created.
-  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Identifier of the account associated with the cluster (in GUID format).
   // This is a required field.
   string account_id = 3 [(buf.validate.field).string = {uuid: true}];
@@ -622,17 +623,23 @@ message Cluster {
   }];
   // Timestamp when the cluster was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteCluster is called.
-  google.protobuf.Timestamp deleted_at = 5;
+  google.protobuf.Timestamp deleted_at = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Cloud provider where the cluster is hosted.
   // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
   // After creation, this field cannot be changed.
-  string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
+  string cloud_provider_id = 10 [
+    (buf.validate.field).string = {min_len: 3},
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // Cloud provider region where the cluster is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
   // For hybrid this should be the hybrid cloud environment ID.
   // This is a required field.
   // After creation, this field cannot be changed.
-  string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  string cloud_provider_region_id = 11 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
   // Validation for `cloud_provider_region_id`, which needs to have access to the value of cloud_provider_id as well, so this can't be a simple field validator.
   option (buf.validate.message).cel = {
     id: "cluster.cloud_provider_region_id"
@@ -652,7 +659,7 @@ message Cluster {
   ClusterConfiguration configuration = 20 [(buf.validate.field).required = true];
   // Current state of the cluster (available after the cluster has been created).
   // All fields inside `state` are read-only.
-  ClusterState state = 100;
+  ClusterState state = 100 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // ClusterServiceType defines the type of service to use for the cluster.
@@ -735,7 +742,7 @@ enum ClusterConfigurationRebalanceStrategy {
 message ClusterConfiguration {
   // Timestamp when the cluster configuration was last updated.
   // This is a read-only field and will be available after a cluster is created.
-  google.protobuf.Timestamp last_modified_at = 1;
+  google.protobuf.Timestamp last_modified_at = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The number of nodes in a cluster.
   // This should be a number >= 1.
   // This is a required field.
@@ -1151,55 +1158,77 @@ enum ClusterPhase {
 // All fields in this message are read-only.
 message ClusterState {
   // Version of the cluster software.
-  string version = 1 [(buf.validate.field).string.min_len = 1];
+  string version = 1 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Number of cluster nodes that are up and running.
-  uint32 nodes_up = 2;
+  uint32 nodes_up = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The date and time when the cluster was restarted.
-  google.protobuf.Timestamp restarted_at = 3;
+  google.protobuf.Timestamp restarted_at = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Current phase of the cluster.
-  ClusterPhase phase = 4 [(buf.validate.field).enum.defined_only = true];
+  ClusterPhase phase = 4 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Reason for the current phase of the cluster.
-  string reason = 5;
+  string reason = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Endpoint information to access the qdrant cluster (aka database).
-  ClusterEndpoint endpoint = 6 [(buf.validate.field).required = true];
+  ClusterEndpoint endpoint = 6 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The resources used by the cluster per node.
   // For the complete cluster you have to multiply by cluster.configuration.number_of_nodes
-  ClusterNodeResourcesSummary resources = 7 [(buf.validate.field).required = true];
+  ClusterNodeResourcesSummary resources = 7 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Whether the cluster can be scaled up or down.
   // Deprecated: Use capabilities.scalability_info instead
   ClusterScalabilityInfo scalability_info = 8 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
     deprecated = true,
     (buf.validate.field).required = true
   ];
   // List of nodes in the cluster.
-  repeated ClusterNodeInfo nodes = 9;
+  repeated ClusterNodeInfo nodes = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Whether or not JWT Role Based Access Control (RBAC) is enabled.
   // On hybrid-cloud this is inferred from the fact a database secret is provided.
   // On managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.
   //                  When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.
   // If enabled, you can generate JWT tokens with fine-grained rules for access control.
-  bool jwt_rbac = 10;
+  bool jwt_rbac = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Specifies whether some operations are supported by cluster or not.
-  ClusterCapabilities capabilities = 11 [(buf.validate.field).required = true];
+  ClusterCapabilities capabilities = 11 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // ClusterNodeInfo represents a node in a cluster.
 // All fields in this message are read-only.
 message ClusterNodeInfo {
   // Name specifies the name of the node.
-  string name = 1 [(buf.validate.field).string.min_len = 1];
+  string name = 1 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // StartedAt specifies the time when the node started.
-  google.protobuf.Timestamp started_at = 2;
+  google.protobuf.Timestamp started_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Version specifies the version of Qdrant running on the node.
-  string version = 3;
+  string version = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Endpoint specific to this node.
-  ClusterEndpoint endpoint = 4;
+  ClusterEndpoint endpoint = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
   // State of the node.
-  ClusterNodeState state = 10 [(buf.validate.field).enum.defined_only = true];
+  ClusterNodeState state = 10 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The availability zone where this node is running (e.g., "us-east-1a").
   // This is a read-only field provided by the system.
   // Only set for Multi-AZ clusters.
-  optional string availability_zone = 11;
+  optional string availability_zone = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Structured explanation of why the node is not ready.
   // Set alongside CLUSTER_NODE_STATE_STARTING as well as
   // CLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports
@@ -1209,7 +1238,7 @@ message ClusterNodeInfo {
   // no current reason can be determined. Consumers should not assume this field
   // is present whenever a node is not ready.
   // It clears automatically once the node recovers.
-  optional ClusterNodeNotReadyInfo not_ready_info = 12;
+  optional ClusterNodeNotReadyInfo not_ready_info = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // ClusterNodeState represents the state of a cluster node.
@@ -1336,18 +1365,27 @@ enum ClusterNodeActionKind {
 // All fields in this message are read-only.
 message ClusterNodeAction {
   // What the user is asked to do.
-  ClusterNodeActionKind kind = 1 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  ClusterNodeActionKind kind = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }
+  ];
   // Short description of the action, for example "Scale your cluster".
-  string description = 2 [(buf.validate.field).string.min_len = 1];
+  string description = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The URL to open, for actions that are a navigation.
   // Not set for actions the consumer carries out itself, such as
   // CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and
   // CLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the
   // account and cluster identifiers it needs.
-  optional string url = 3 [(buf.validate.field).string.uri = true];
+  optional string url = 3 [
+    (buf.validate.field).string.uri = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // ClusterNodeNotReadyInfo explains why a cluster node is not ready.
@@ -1360,25 +1398,37 @@ message ClusterNodeAction {
 // All fields in this message are read-only.
 message ClusterNodeNotReadyInfo {
   // What is wrong with the node right now.
-  ClusterNodeNotReadyCondition condition = 1 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  ClusterNodeNotReadyCondition condition = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }
+  ];
   // Human-readable explanation of the condition,
   // for example "Your container is restarting".
-  string condition_message = 2 [(buf.validate.field).string.min_len = 1];
+  string condition_message = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Why the node is in this condition.
   // Not always set: the node status does not always say why, in which case the
   // condition is reported on its own. Each reason is only ever reported under
   // the conditions documented on ClusterNodeNotReadyReason.
-  optional ClusterNodeNotReadyReason reason = 6 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+  optional ClusterNodeNotReadyReason reason = 6 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }
+  ];
   // Human-readable explanation of the reason,
   // for example "Your node has reached its memory limit".
   // Only set when reason is set.
-  optional string reason_message = 7 [(buf.validate.field).string.min_len = 1];
+  optional string reason_message = 7 [
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // What terminated the node's container the last time it went down.
   // Only set together with
   // CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.
@@ -1391,6 +1441,7 @@ message ClusterNodeNotReadyInfo {
   // announced surface.
   optional ClusterNodeTerminationEvent event = 3 [
     deprecated = true,
+    (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum = {
       defined_only: true
       not_in: [0]
@@ -1403,23 +1454,36 @@ message ClusterNodeNotReadyInfo {
   // Deprecated: use reason_message instead.
   optional string event_message = 4 [
     deprecated = true,
-    (buf.validate.field).string.min_len = 1
+    (buf.validate.field).string.min_len = 1,
+    (google.api.field_behavior) = OUTPUT_ONLY
   ];
   // Actions the user can take to resolve the condition.
   // A CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is
   // only attached where a page exists that helps with the specific cause.
-  repeated ClusterNodeAction actions = 5 [(buf.validate.field).repeated = {max_items: 10}];
+  repeated ClusterNodeAction actions = 5 [
+    (buf.validate.field).repeated = {max_items: 10},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.
 // All fields in this message are a read-only field.
 message ClusterEndpoint {
   // URL to access the qdrant cluster (aka database) without port
-  string url = 1 [(buf.validate.field).string = {uri: true}];
+  string url = 1 [
+    (buf.validate.field).string = {uri: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The port to use for HTTP REST calls (6333)
-  int32 rest_port = 2 [(buf.validate.field).int32.gt = 0];
+  int32 rest_port = 2 [
+    (buf.validate.field).int32.gt = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // The port to use for gRPC calls (6334)
-  int32 grpc_port = 3 [(buf.validate.field).int32.gt = 0];
+  int32 grpc_port = 3 [
+    (buf.validate.field).int32.gt = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // ClusterNodeResourcesSummary represents the resources used in this cluster per node.

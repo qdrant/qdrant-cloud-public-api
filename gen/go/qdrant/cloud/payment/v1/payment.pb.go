@@ -1714,7 +1714,7 @@ var File_qdrant_cloud_payment_v1_payment_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"D\n" +
+	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"D\n" +
 	"\x19ListPaymentMethodsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"Z\n" +
@@ -1769,25 +1769,25 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x13setup_intent_status\x18\x05 \x01(\x0e20.qdrant.cloud.payment.v1.StripeSetupIntentStatusB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x11setupIntentStatus\x12F\n" +
 	"\x1bsetup_intent_payment_method\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x18setupIntentPaymentMethodB\x06\n" +
-	"\x04_url\"\xa5\t\n" +
-	"\rPaymentMethod\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
+	"\x04_url\"\xba\t\n" +
+	"\rPaymentMethod\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12L\n" +
 	"\x04type\x18\x03 \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentProviderTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12<\n" +
-	"\x13payment_provider_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12?\n" +
+	"\x13payment_provider_id\x18\x04 \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01H\x00R\x11paymentProviderId\x88\x01\x01\x12h\n" +
 	"\x16payment_method_details\x18\x05 \x01(\v2-.qdrant.cloud.payment.v1.PaymentMethodDetailsH\x01R\x14paymentMethodDetails\x88\x01\x01\x12U\n" +
-	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x129\n" +
+	"\x0fbilling_address\x18\x06 \x01(\v2'.qdrant.cloud.payment.v1.BillingAddressH\x02R\x0ebillingAddress\x88\x01\x01\x12>\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x10last_modified_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x0elastModifiedAt\x12#\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12I\n" +
+	"\x10last_modified_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12#\n" +
 	"\x06tax_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05taxId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\x12U\n" +
-	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\x94\x03\xbaH\x90\x03\x1a\xaa\x01\n" +
+	" \x01(\bR\tisDefault\x12X\n" +
+	"\x06status\x18\v \x01(\x0e2,.qdrant.cloud.payment.v1.PaymentMethodStatusB\r\xe0A\x03\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06status\x88\x01\x01:\x94\x03\xbaH\x90\x03\x1a\xaa\x01\n" +
 	"\x11payment_method.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xe0\x01\n" +
 	"\x1fpayment_method.last_modified_at\x12Zlast_modified_at must be set if created_at is set and must be after or equal to created_at\x1aa!has(this.created_at) || (has(this.last_modified_at) && this.last_modified_at >= this.created_at)B\x16\n" +
 	"\x14_payment_provider_idB\x19\n" +
@@ -1803,7 +1803,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12.\n" +
 	"\x0eentitlement_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rentitlementId\"\x82\x01\n" +
 	")RecordCloudMarketplaceEntitlementResponse\x12U\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xae\x04\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2&.qdrant.cloud.payment.v1.PaymentMethodB\x06\xbaH\x03\xc8\x01\x01R\rpaymentMethod\"\xb9\x04\n" +
 	"\x0eBillingAddress\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05line1\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05line1\x12\"\n" +
@@ -1811,13 +1811,15 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\vpostal_code\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\n" +
 	"postalCode\x88\x01\x01\x12 \n" +
 	"\x04city\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\x04city\x88\x01\x01\x12\"\n" +
-	"\x05state\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05state\x88\x01\x01\x125\n" +
-	"\x0fstate_formatted\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x0estateFormatted\x88\x01\x01\x12+\n" +
+	"\x05state\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x05state\x88\x01\x01\x128\n" +
+	"\x0fstate_formatted\x18\t \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01H\x04R\x0estateFormatted\x88\x01\x01\x12+\n" +
 	"\acountry\x18\a \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{2}$R\acountry\x129\n" +
-	"\x11country_formatted\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\x10countryFormatted\x88\x01\x01\x127\n" +
+	"^[A-Z]{2}$R\acountry\x12<\n" +
+	"\x11country_formatted\x18\b \x01(\tB\n" +
+	"\xe0A\x03\xbaH\x04r\x02\x10\x01H\x05R\x10countryFormatted\x88\x01\x01\x12<\n" +
 	"\x15tax_supported_country\x18\n" +
-	" \x01(\bH\x06R\x13taxSupportedCountry\x88\x01\x01B\b\n" +
+	" \x01(\bB\x03\xe0A\x03H\x06R\x13taxSupportedCountry\x88\x01\x01B\b\n" +
 	"\x06_line2B\x0e\n" +
 	"\f_postal_codeB\a\n" +
 	"\x05_cityB\b\n" +

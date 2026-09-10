@@ -27,7 +27,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
-// Per-space storage caps live on Space.configuration (UpdateSpace).
+// Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
 type QuotaServiceClient interface {
 	// Returns account platform limits and aggregated usage across spaces.
 	// Required permissions:
@@ -58,7 +58,7 @@ func (c *quotaServiceClient) GetQuotas(ctx context.Context, in *GetQuotasRequest
 // for forward compatibility.
 //
 // QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
-// Per-space storage caps live on Space.configuration (UpdateSpace).
+// Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
 type QuotaServiceServer interface {
 	// Returns account platform limits and aggregated usage across spaces.
 	// Required permissions:

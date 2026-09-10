@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Duration, FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Caller, CallerValid, KeyValue, KeyValueValid } from "../../../common/v1/common_pb.js";
 
 /**
@@ -833,29 +833,28 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
   allowedOrigins: string[];
 
   /**
-   * Platform-enforced storage ceiling for this space, derived from the account's quota and platform defaults.
-   * This is a read-only field. A value of 0 means unlimited.
-   *
-   * @generated from field: uint64 platform_max_storage_bytes = 13;
-   */
-  platformMaxStorageBytes: bigint;
-
-  /**
-   * Optional customer-defined storage cap, used for cost control.
-   * When set, it must not exceed `platform_max_storage_bytes`.
-   * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-   *
-   * @generated from field: optional uint64 max_storage_bytes = 14;
-   */
-  maxStorageBytes?: bigint | undefined;
-
-  /**
    * Platform-enforced limit on the number of collections for this space, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
    *
    * @generated from field: uint64 max_collections_per_space = 15;
    */
   maxCollectionsPerSpace: bigint;
+
+  /**
+   * Per-collection size limits for this space.
+   * Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.CollectionSettings collection_settings = 16;
+   */
+  collectionSettings?: CollectionSettings | undefined;
+
+  /**
+   * Search-worker settings for this space.
+   * Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SearcherSettings searcher_settings = 17;
+   */
+  searcherSettings?: SearcherSettings | undefined;
 };
 
 export declare type SpaceConfigurationValid = SpaceConfiguration;
@@ -867,8 +866,83 @@ export declare type SpaceConfigurationValid = SpaceConfiguration;
 export declare const SpaceConfigurationSchema: GenMessage<SpaceConfiguration, {validType: SpaceConfigurationValid}>;
 
 /**
+ * CollectionSettings configures per-collection size limits for a space.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.CollectionSettings
+ */
+export declare type CollectionSettings = Message<"qdrant.cloud.serverless.space.v1.CollectionSettings"> & {
+  /**
+   * Platform-enforced maximum size in bytes per collection, derived from the account's quota and platform defaults.
+   * This is a read-only field. A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 platform_max_size = 1;
+   */
+  platformMaxSize: bigint;
+
+  /**
+   * Optional customer-defined maximum size in bytes per collection, used for cost control.
+   * When set, it must not exceed `platform_max_size`.
+   * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+   *
+   * @generated from field: optional uint64 max_size = 2;
+   */
+  maxSize?: bigint | undefined;
+};
+
+export declare type CollectionSettingsValid = CollectionSettings;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.CollectionSettings.
+ * Use `create(CollectionSettingsSchema)` to create a new message.
+ */
+export declare const CollectionSettingsSchema: GenMessage<CollectionSettings, {validType: CollectionSettingsValid}>;
+
+/**
+ * SearcherSettings configures search-worker behavior for a space.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SearcherSettings
+ */
+export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1.SearcherSettings"> & {
+  /**
+   * Idle timeout after which idle search workers may be scaled down.
+   * Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
+   * This field is writable via UpdateSpace.
+   *
+   * @generated from field: optional google.protobuf.Duration idle_timeout = 1;
+   */
+  idleTimeout?: Duration | undefined;
+
+  /**
+   * Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
+   * This is a read-only field. A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 platform_max_workers = 2;
+   */
+  platformMaxWorkers: bigint;
+
+  /**
+   * Maximum number of search workers per collection in this space.
+   * For example, if set to 2 and the space has 3 collections, the total maximum is 6.
+   * Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
+   * This field is writable via UpdateSpace.
+   *
+   * @generated from field: optional uint64 max_workers = 3;
+   */
+  maxWorkers?: bigint | undefined;
+};
+
+export declare type SearcherSettingsValid = SearcherSettings;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SearcherSettings.
+ * Use `create(SearcherSettingsSchema)` to create a new message.
+ */
+export declare const SearcherSettingsSchema: GenMessage<SearcherSettings, {validType: SearcherSettingsValid}>;
+
+/**
  * SpaceState represents the operational state of a space in the Qdrant serverless environment.
  * It provides status information, error details (if any), and endpoint access information.
+ * All fields in this message are read-only.
  *
  * @generated from message qdrant.cloud.serverless.space.v1.SpaceState
  */

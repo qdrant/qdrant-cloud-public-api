@@ -1,0 +1,760 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/monitoring/v1/monitoring.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MonitoringService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/alerts": {
+      "get": {
+        "summary": "Lists the alerts for a space in the account identified by the given ID.\nAlerts may be space-global or scoped to a collection, sorted by last_firing_at\n(most recent first), and may be paginated.\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "MonitoringService_ListSpaceAlerts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSpaceAlertsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "description": "Optional alert-state filter. If omitted (empty), alerts in ALL states are\nreturned; if set, only alerts in that state are returned.\n\n - SPACE_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - SPACE_ALERT_STATE_FIRING: The alert is currently firing.\n - SPACE_ALERT_STATE_RESOLVED: The alert has been resolved by the backend.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SPACE_ALERT_STATE_UNSPECIFIED",
+              "SPACE_ALERT_STATE_FIRING",
+              "SPACE_ALERT_STATE_RESOLVED"
+            ],
+            "default": "SPACE_ALERT_STATE_UNSPECIFIED"
+          },
+          {
+            "name": "collectionName",
+            "description": "Exact collection name. Returns alerts for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns alerts for every collection whose name contains this value.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "spaceGlobalOnly",
+            "description": "When set to true, return only space-global alerts (alerts without a collection_name).\nMust be set to true when this variant is used.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of alerts to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/metrics/inference": {
+      "get": {
+        "summary": "Gets the inference token usage metrics for a space.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nProvide `inference_model_id` to limit the response to a single model.\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "MonitoringService_GetSpaceInferenceMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSpaceInferenceMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the inference metrics query.\nIf omitted, defaults to 7 days ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the inference metrics query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "interval",
+            "description": "Optional aggregation interval for histogram buckets.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+              "INFERENCE_METRICS_INTERVAL_DAY",
+              "INFERENCE_METRICS_INTERVAL_WEEK",
+              "INFERENCE_METRICS_INTERVAL_MONTH"
+            ],
+            "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED"
+          },
+          {
+            "name": "inferenceModelId",
+            "description": "Optional identifier for a specific inference model to filter metrics by.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionName",
+            "description": "Exact collection name. Returns metrics for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns metrics for every collection whose name contains this value.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/summary-metrics": {
+      "get": {
+        "summary": "Gets the summary metrics of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "MonitoringService_GetSpaceSummaryMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSpaceSummaryMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionName",
+            "description": "Exact collection name. Returns metrics for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns metrics for every collection whose name contains this value.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/usage-metrics": {
+      "get": {
+        "summary": "Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
+        "operationId": "MonitoringService_GetSpaceUsageMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSpaceUsageMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier for the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the metrics query.\nIf omitted, defaults to 1 hour ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the metrics query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "aggregator",
+            "description": "Aggregation function to apply to the time series data.\nIf omitted, defaults to SUM.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AGGREGATOR_UNSPECIFIED",
+              "AGGREGATOR_SUM",
+              "AGGREGATOR_AVG",
+              "AGGREGATOR_MAX",
+              "AGGREGATOR_MIN"
+            ],
+            "default": "AGGREGATOR_UNSPECIFIED"
+          },
+          {
+            "name": "collectionName",
+            "description": "Exact collection name. Returns metrics for that collection only.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collectionNameContains",
+            "description": "Case-insensitive substring matched against collection names.\nReturns metrics for every collection whose name contains this value.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Aggregator": {
+      "type": "string",
+      "enum": [
+        "AGGREGATOR_UNSPECIFIED",
+        "AGGREGATOR_SUM",
+        "AGGREGATOR_AVG",
+        "AGGREGATOR_MAX",
+        "AGGREGATOR_MIN"
+      ],
+      "default": "AGGREGATOR_UNSPECIFIED",
+      "description": "Aggregator defines how metrics should be aggregated over time.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function."
+    },
+    "v1GetSpaceInferenceMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SpaceCollectionInferenceMetrics"
+          },
+          "description": "Per-collection inference token usage metrics for the space."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "description": "GetSpaceInferenceMetricsResponse is the response from the GetSpaceInferenceMetrics function."
+    },
+    "v1GetSpaceSummaryMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SpaceCollectionMetrics"
+          },
+          "description": "List of metrics aggregated per collection in the space."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "description": "GetSpaceSummaryMetricsResponse is the response from the GetSpaceSummaryMetrics function."
+    },
+    "v1GetSpaceUsageMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SpaceCollectionUsageMetrics"
+          },
+          "description": "Per-collection usage metrics for the space."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "description": "GetSpaceUsageMetricsResponse is the response from the GetSpaceUsageMetrics function."
+    },
+    "v1InferenceMetricsInterval": {
+      "type": "string",
+      "enum": [
+        "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+        "INFERENCE_METRICS_INTERVAL_DAY",
+        "INFERENCE_METRICS_INTERVAL_WEEK",
+        "INFERENCE_METRICS_INTERVAL_MONTH"
+      ],
+      "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+      "description": "InferenceMetricsInterval defines the histogram bucket size for inference metrics.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month."
+    },
+    "v1IntervalAverage": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "string",
+          "description": "The duration of the interval."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Average value of the metric during the specified interval."
+        }
+      },
+      "description": "IntervalAverage represents the average value of a metric over a specific time interval."
+    },
+    "v1ListSpaceAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SpaceAlert"
+          },
+          "description": "The alerts for the space, sorted by last_firing_at (descending) - most recent first."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "description": "ListSpaceAlertsResponse is the response from the ListSpaceAlerts function."
+    },
+    "v1Metric": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the data point."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Numerical value of the metric at the given timestamp."
+        }
+      },
+      "description": "A single metric data point."
+    },
+    "v1SpaceAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier for this firing instance (in GUID format).\nRe-firing a previously-resolved alert produces a new ID."
+        },
+        "type": {
+          "$ref": "#/definitions/v1SpaceAlertType",
+          "description": "The category of alert."
+        },
+        "severity": {
+          "$ref": "#/definitions/v1SpaceAlertSeverity",
+          "description": "Severity tier, derived server-side from the alert type."
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable title (English, at most 80 characters)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description (English, at most 300 characters)."
+        },
+        "lastFiringAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the most recent firing observation for this instance."
+        },
+        "state": {
+          "$ref": "#/definitions/v1SpaceAlertState",
+          "description": "The state of this alert. Always populated so callers can tell each row's\nstate apart when the request applies no state filter."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the collection this alert relates to.\nOmitted for space-global alerts (for example, too many collections)."
+        }
+      },
+      "description": "SpaceAlert is a single alert instance for a space.\nAlerts may be space-global (no collection_name) or scoped to a collection."
+    },
+    "v1SpaceAlertSeverity": {
+      "type": "string",
+      "enum": [
+        "SPACE_ALERT_SEVERITY_UNSPECIFIED",
+        "SPACE_ALERT_SEVERITY_INFO",
+        "SPACE_ALERT_SEVERITY_WARNING",
+        "SPACE_ALERT_SEVERITY_CRITICAL"
+      ],
+      "default": "SPACE_ALERT_SEVERITY_UNSPECIFIED",
+      "description": "SpaceAlertSeverity is the tier used by the UI to render badge color and announce severity to\nassistive tech. Color alone never conveys severity - clients must render the label.\n\n - SPACE_ALERT_SEVERITY_UNSPECIFIED: Default / fallback tier. Also what an alert type that is not yet mapped resolves to;\nthere is intentionally no separate UNKNOWN value.\n - SPACE_ALERT_SEVERITY_INFO: Informational severity.\n - SPACE_ALERT_SEVERITY_WARNING: Warning severity.\n - SPACE_ALERT_SEVERITY_CRITICAL: Critical severity."
+    },
+    "v1SpaceAlertState": {
+      "type": "string",
+      "enum": [
+        "SPACE_ALERT_STATE_UNSPECIFIED",
+        "SPACE_ALERT_STATE_FIRING",
+        "SPACE_ALERT_STATE_RESOLVED"
+      ],
+      "default": "SPACE_ALERT_STATE_UNSPECIFIED",
+      "description": "SpaceAlertState mirrors the backend state of a space alert. It is used both as\nthe optional request-side filter AND echoed per row on the SpaceAlert response.\n\n - SPACE_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - SPACE_ALERT_STATE_FIRING: The alert is currently firing.\n - SPACE_ALERT_STATE_RESOLVED: The alert has been resolved by the backend."
+    },
+    "v1SpaceAlertType": {
+      "type": "string",
+      "enum": [
+        "SPACE_ALERT_TYPE_UNSPECIFIED",
+        "SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED",
+        "SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS",
+        "SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE",
+        "SPACE_ALERT_TYPE_SPACE_UNHEALTHY"
+      ],
+      "default": "SPACE_ALERT_TYPE_UNSPECIFIED",
+      "description": "SpaceAlertType is the category of a space alert. Mirrors the backend alert types.\n\n - SPACE_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED: Collection storage usage is over the configured size threshold.\n - SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS: The space has too many collections.\n - SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE: A space API key is about to expire.\n - SPACE_ALERT_TYPE_SPACE_UNHEALTHY: The serverless space is unhealthy."
+    },
+    "v1SpaceCollectionInferenceMetrics": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the collection within the space."
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SpaceInferenceModelMetrics"
+          },
+          "description": "Per-model inference token usage metrics for the collection."
+        }
+      },
+      "description": "SpaceCollectionInferenceMetrics groups inference metrics for a single collection."
+    },
+    "v1SpaceCollectionMetrics": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the collection within the space."
+        },
+        "searchRequests": {
+          "$ref": "#/definitions/v1SpaceMetricOverview",
+          "description": "Overview of search request rates for the collection."
+        },
+        "writeRequests": {
+          "$ref": "#/definitions/v1SpaceMetricOverview",
+          "description": "Overview of write (CRUD) request rates for the collection."
+        },
+        "searchLatency": {
+          "$ref": "#/definitions/v1SpaceMetricOverview",
+          "description": "Overview of search latency for the collection."
+        },
+        "vectorCount": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current number of vectors stored in the collection."
+        },
+        "usedStorageBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current used (active) storage size of the collection, in bytes.\nThis is actual usage. Platform or customer storage ceilings are exposed\nvia space/collection quotas and are not part of this response."
+        }
+      },
+      "description": "SpaceCollectionMetrics contains a metric overview for a single collection."
+    },
+    "v1SpaceCollectionUsageMetrics": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the collection within the space."
+        },
+        "searchRequests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of search request rates for the collection."
+        },
+        "writeRequests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of write (CRUD) request rates for the collection."
+        },
+        "searchLatency": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of search latency for the collection."
+        },
+        "vectorCount": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of vector counts for the collection."
+        },
+        "usedStorageBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of used (active) storage size for the collection, in bytes."
+        }
+      },
+      "description": "SpaceCollectionUsageMetrics defines per-collection usage metrics as timeseries."
+    },
+    "v1SpaceInferenceModelMetrics": {
+      "type": "object",
+      "properties": {
+        "inferenceModelId": {
+          "type": "string",
+          "description": "Identifier of the inference model."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Aggregated histogram values for the inference model."
+        }
+      },
+      "description": "SpaceInferenceModelMetrics groups histogram data for a single inference model."
+    },
+    "v1SpaceMetricOverview": {
+      "type": "object",
+      "properties": {
+        "avg": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1IntervalAverage"
+          },
+          "description": "Average metric values calculated over various time intervals."
+        }
+      },
+      "description": "SpaceMetricOverview contains average values of a metric over predefined intervals."
+    }
+  }
+}

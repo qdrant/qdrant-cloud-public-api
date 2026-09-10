@@ -613,6 +613,13 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
    * @generated from field: google.protobuf.Timestamp exhausted_at = 11;
    */
   exhaustedAt?: Timestamp | undefined;
+
+  /**
+   * Amount voided from this block (a full or partial correction). 0 if never voided.
+   *
+   * @generated from field: double voided_amount = 12;
+   */
+  voidedAmount: number;
 };
 
 /**
@@ -692,6 +699,13 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
    * @generated from field: google.protobuf.Timestamp exhausted_at = 11;
    */
   exhaustedAt?: Timestamp | undefined;
+
+  /**
+   * Amount voided from this block (a full or partial correction). 0 if never voided.
+   *
+   * @generated from field: double voided_amount = 12;
+   */
+  voidedAmount: number;
 };
 
 /**
