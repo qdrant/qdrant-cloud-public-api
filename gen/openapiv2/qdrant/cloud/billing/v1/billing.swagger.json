@@ -259,6 +259,10 @@
           "type": "number",
           "format": "double",
           "description": "Amount voided from this block (a full or partial correction). 0 if never voided."
+        },
+        "overageBilled": {
+          "type": "boolean",
+          "description": "Whether usage after `exhausted_at` is billed as pay-as-you-go. True for every ordinary\naccount; false only for a contract that covers usage past exhaustion instead of billing it.\nIndependent of `exhausted_at` so a client can show the exhaustion date without implying the\ncustomer owes anything for usage since then."
         }
       },
       "description": "CreditContract represents a prepaid credit contract for an organization."
