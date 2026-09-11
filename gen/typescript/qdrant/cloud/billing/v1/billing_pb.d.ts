@@ -620,6 +620,16 @@ export declare type CreditContract = Message<"qdrant.cloud.billing.v1.CreditCont
    * @generated from field: double voided_amount = 12;
    */
   voidedAmount: number;
+
+  /**
+   * Whether usage after `exhausted_at` is billed as pay-as-you-go. True for every ordinary
+   * account; false only for a contract that covers usage past exhaustion instead of billing it.
+   * Independent of `exhausted_at` so a client can show the exhaustion date without implying the
+   * customer owes anything for usage since then.
+   *
+   * @generated from field: bool overage_billed = 13;
+   */
+  overageBilled: boolean;
 };
 
 /**
@@ -706,6 +716,16 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
    * @generated from field: double voided_amount = 12;
    */
   voidedAmount: number;
+
+  /**
+   * Whether usage after `exhausted_at` is billed as pay-as-you-go. True for every ordinary
+   * account; false only for a contract that covers usage past exhaustion instead of billing it.
+   * Independent of `exhausted_at` so a client can show the exhaustion date without implying the
+   * customer owes anything for usage since then.
+   *
+   * @generated from field: bool overage_billed = 13;
+   */
+  overageBilled: boolean;
 };
 
 /**
