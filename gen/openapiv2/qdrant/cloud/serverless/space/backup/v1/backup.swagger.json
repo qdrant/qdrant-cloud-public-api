@@ -600,6 +600,11 @@
             "collectionName": {
               "type": "string",
               "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
+            },
+            "stats": {
+              "$ref": "#/definitions/v1BackupStats",
+              "description": "Summary stats for this backup (size, collections, points, duration, progress).\nPopulated by the control plane from the regional operator's data_plane payload.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The actual backup.",
@@ -883,6 +888,11 @@
         "collectionName": {
           "type": "string",
           "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
+        },
+        "stats": {
+          "$ref": "#/definitions/v1BackupStats",
+          "description": "Summary stats for this backup (size, collections, points, duration, progress).\nPopulated by the control plane from the regional operator's data_plane payload.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A Backup represents a backup of a Qdrant serverless space."
@@ -1038,6 +1048,35 @@
       ],
       "default": "BACKUP_SCHEDULE_STATUS_UNSPECIFIED",
       "description": "BackupScheduleStatus represents the current status of a backup schedule.\n\n - BACKUP_SCHEDULE_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_SCHEDULE_STATUS_ACTIVE: The backup schedule is active and functioning correctly.\n - BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: There was an error syncing the backup schedule in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_NOT_FOUND: The backup schedule is missing in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_DISABLED: The backup schedule is disabled."
+    },
+    "v1BackupStats": {
+      "type": "object",
+      "properties": {
+        "collectionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of collections included in this backup.\n1 when the backup was created with collection_name set; otherwise the count\nof collections present in the backup artifacts."
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total size of backed-up objects in bytes (UI may humanize for display)."
+        },
+        "totalPoints": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Sum of point counts across collections (from live stats.json when available)."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Wall-clock time from first CreateBackup work until the backup finished\n(succeeded or failed). Same semantics as Backup.backup_duration; set when\ncreate completes."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Humanized mid-copy progress string, e.g. \"35.2/75.4 GiB (46%)\".\nPresent while the backup is running; may remain after completion."
+        }
+      },
+      "description": "BackupStats summarizes what a backup contains and how create progressed.\nAll fields are read-only; values appear as the regional operator reports them."
     },
     "v1BackupStatus": {
       "type": "string",

@@ -17,7 +17,7 @@ service BackupService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 1
+    minor: 2
     patch: 0
   };
   // Lists all backups in the account identified by the given ID.
@@ -361,8 +361,8 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info)"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info, stats) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.stats)"
   };
 }
 
@@ -641,6 +641,30 @@ message Backup {
     message: "collection_name must be a valid Qdrant collection name (1-255 characters, matching [a-zA-Z0-9-_.]+)"
     expression: "!has(this.collection_name) || (this.collection_name.size() >= 1 && this.collection_name.size() <= 255 && this.collection_name.matches('^[a-zA-Z0-9-_.]+$'))"
   };
+  // Summary stats for this backup (size, collections, points, duration, progress).
+  // Populated by the control plane from the regional operator's data_plane payload.
+  // This is a read-only field.
+  BackupStats stats = 17 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// BackupStats summarizes what a backup contains and how create progressed.
+// All fields are read-only; values appear as the regional operator reports them.
+message BackupStats {
+  // Number of collections included in this backup.
+  // 1 when the backup was created with collection_name set; otherwise the count
+  // of collections present in the backup artifacts.
+  optional uint32 collection_count = 1;
+  // Total size of backed-up objects in bytes (UI may humanize for display).
+  optional int64 size_bytes = 2 [(buf.validate.field).int64.gte = 0];
+  // Sum of point counts across collections (from live stats.json when available).
+  optional uint64 total_points = 3;
+  // Wall-clock time from first CreateBackup work until the backup finished
+  // (succeeded or failed). Same semantics as Backup.backup_duration; set when
+  // create completes.
+  optional google.protobuf.Duration duration = 4;
+  // Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
+  // Present while the backup is running; may remain after completion.
+  optional string progress = 5;
 }
 
 // Represents the space details associated with a backup.
