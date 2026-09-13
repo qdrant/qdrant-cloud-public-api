@@ -905,15 +905,6 @@ export declare type Backup = Message<"qdrant.cloud.serverless.space.backup.v1.Ba
   deletedAt?: Timestamp | undefined;
 
   /**
-   * The total time taken to generate the backup. This is a read-only field and
-   * will be available after the backup process is completed, regardless of
-   * whether it succeeded or failed.
-   *
-   * @generated from field: google.protobuf.Duration backup_duration = 8;
-   */
-  backupDuration?: Duration | undefined;
-
-  /**
    * The identifier of the backup schedule (in GUID format).
    * This is a read-only field and will be present if the backup was created by a backup schedule.
    *
@@ -1043,15 +1034,6 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
    * @generated from field: google.protobuf.Timestamp deleted_at = 7;
    */
   deletedAt?: Timestamp | undefined;
-
-  /**
-   * The total time taken to generate the backup. This is a read-only field and
-   * will be available after the backup process is completed, regardless of
-   * whether it succeeded or failed.
-   *
-   * @generated from field: google.protobuf.Duration backup_duration = 8;
-   */
-  backupDuration?: Duration | undefined;
 
   /**
    * The identifier of the backup schedule (in GUID format).

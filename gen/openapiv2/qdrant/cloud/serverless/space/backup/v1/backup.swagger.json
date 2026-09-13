@@ -563,11 +563,6 @@
               "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
               "readOnly": true
             },
-            "backupDuration": {
-              "type": "string",
-              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
-              "readOnly": true
-            },
             "backupScheduleId": {
               "type": "string",
               "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
@@ -849,11 +844,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
-          "readOnly": true
-        },
-        "backupDuration": {
-          "type": "string",
-          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
           "readOnly": true
         },
         "backupScheduleId": {

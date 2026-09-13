@@ -16,8 +16,8 @@ import "qdrant/cloud/serverless/space/v1/space.proto";
 service BackupService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
-    major: 1
-    minor: 2
+    major: 2
+    minor: 0
     patch: 0
   };
   // Lists all backups in the account identified by the given ID.
@@ -361,8 +361,8 @@ message CreateBackupRequest {
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "create_backup.no_read_only_fields"
-    message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, space_info, stats) must not be set on create"
-    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.stats)"
+    message: "read-only fields (id, created_at, name, status, deleted_at, backup_schedule_id, space_info, stats) must not be set on create"
+    expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_schedule_id) && !has(this.backup.space_info) && !has(this.backup.stats)"
   };
 }
 
@@ -602,10 +602,9 @@ message Backup {
   // The timestamp when the backup was deleted (or when deletion started).
   // This is a read-only field and will be set after DeleteBackup is called.
   google.protobuf.Timestamp deleted_at = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // The total time taken to generate the backup. This is a read-only field and
-  // will be available after the backup process is completed, regardless of
-  // whether it succeeded or failed.
-  google.protobuf.Duration backup_duration = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Removed: former backup_duration; use stats.duration instead.
+  reserved 8;
+  reserved "backup_duration";
   // The identifier of the backup schedule (in GUID format).
   // This is a read-only field and will be present if the backup was created by a backup schedule.
   optional string backup_schedule_id = 9 [
