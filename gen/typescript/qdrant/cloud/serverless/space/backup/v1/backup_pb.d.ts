@@ -1152,7 +1152,7 @@ export declare type BackupStats = Message<"qdrant.cloud.serverless.space.backup.
   sizeBytes?: bigint | undefined;
 
   /**
-   * Sum of point counts across collections (from live stats.json when available).
+   * Sum of point counts across collections.
    *
    * @generated from field: optional uint64 total_points = 3;
    */
@@ -1160,8 +1160,7 @@ export declare type BackupStats = Message<"qdrant.cloud.serverless.space.backup.
 
   /**
    * Wall-clock time from first CreateBackup work until the backup finished
-   * (succeeded or failed). Same semantics as Backup.backup_duration; set when
-   * create completes.
+   * (succeeded or failed). Set when create completes.
    *
    * @generated from field: optional google.protobuf.Duration duration = 4;
    */

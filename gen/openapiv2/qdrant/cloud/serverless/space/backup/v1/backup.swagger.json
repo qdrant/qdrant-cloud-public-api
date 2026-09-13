@@ -1084,11 +1084,11 @@
         "totalPoints": {
           "type": "string",
           "format": "uint64",
-          "description": "Sum of point counts across collections (from live stats.json when available)."
+          "description": "Sum of point counts across collections."
         },
         "duration": {
           "type": "string",
-          "description": "Wall-clock time from first CreateBackup work until the backup finished\n(succeeded or failed). Same semantics as Backup.backup_duration; set when\ncreate completes."
+          "description": "Wall-clock time from first CreateBackup work until the backup finished\n(succeeded or failed). Set when create completes."
         },
         "progress": {
           "type": "string",

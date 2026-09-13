@@ -1695,11 +1695,10 @@ type BackupStats struct {
 	CollectionCount *uint32 `protobuf:"varint,1,opt,name=collection_count,json=collectionCount,proto3,oneof" json:"collection_count,omitempty"`
 	// Total size of backed-up objects in bytes (UI may humanize for display).
 	SizeBytes *int64 `protobuf:"varint,2,opt,name=size_bytes,json=sizeBytes,proto3,oneof" json:"size_bytes,omitempty"`
-	// Sum of point counts across collections (from live stats.json when available).
+	// Sum of point counts across collections.
 	TotalPoints *uint64 `protobuf:"varint,3,opt,name=total_points,json=totalPoints,proto3,oneof" json:"total_points,omitempty"`
 	// Wall-clock time from first CreateBackup work until the backup finished
-	// (succeeded or failed). Same semantics as Backup.backup_duration; set when
-	// create completes.
+	// (succeeded or failed). Set when create completes.
 	Duration *durationpb.Duration `protobuf:"bytes,4,opt,name=duration,proto3,oneof" json:"duration,omitempty"`
 	// Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
 	// Present while the backup is running; may remain after completion.
