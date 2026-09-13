@@ -1473,6 +1473,14 @@ export declare type BackupRestore = Message<"qdrant.cloud.serverless.space.backu
    * @generated from field: qdrant.cloud.common.v1.Caller created_by = 8;
    */
   createdBy?: Caller | undefined;
+
+  /**
+   * Summary stats for this restore (duration, mid-copy progress).
+   * Populated by the control plane from the regional operator status.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats stats = 9;
+   */
+  stats?: BackupRestoreStats | undefined;
 };
 
 export declare type BackupRestoreValid = BackupRestore;
@@ -1482,6 +1490,38 @@ export declare type BackupRestoreValid = BackupRestore;
  * Use `create(BackupRestoreSchema)` to create a new message.
  */
 export declare const BackupRestoreSchema: GenMessage<BackupRestore, {validType: BackupRestoreValid}>;
+
+/**
+ * BackupRestoreStats summarizes restore create progress.
+ * All fields are read-only; values appear as the regional operator reports them.
+ *
+ * @generated from message qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats
+ */
+export declare type BackupRestoreStats = Message<"qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats"> & {
+  /**
+   * Wall-clock time from first restore work until the restore finished
+   * (succeeded or failed).
+   *
+   * @generated from field: optional google.protobuf.Duration duration = 1;
+   */
+  duration?: Duration | undefined;
+
+  /**
+   * Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
+   * Present while the restore is running; may remain after completion.
+   *
+   * @generated from field: optional string progress = 2;
+   */
+  progress?: string | undefined;
+};
+
+export declare type BackupRestoreStatsValid = BackupRestoreStats;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats.
+ * Use `create(BackupRestoreStatsSchema)` to create a new message.
+ */
+export declare const BackupRestoreStatsSchema: GenMessage<BackupRestoreStats, {validType: BackupRestoreStatsValid}>;
 
 /**
  * BackupStatus represents the current status of a backup operation.

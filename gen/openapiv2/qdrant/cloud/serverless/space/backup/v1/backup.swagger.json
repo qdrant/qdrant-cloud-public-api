@@ -941,9 +941,28 @@
           "$ref": "#/definitions/v1Caller",
           "description": "The caller who initiated the backup restore.\nThis is a read-only field and will be available after a backup restore is created.",
           "readOnly": true
+        },
+        "stats": {
+          "$ref": "#/definitions/v1BackupRestoreStats",
+          "description": "Summary stats for this restore (duration, mid-copy progress).\nPopulated by the control plane from the regional operator status.",
+          "readOnly": true
         }
       },
       "description": "A BackupRestore represents the status of an in-place backup restore for a space.\nAll fields in this message are read-only."
+    },
+    "v1BackupRestoreStats": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Wall-clock time from first restore work until the restore finished\n(succeeded or failed)."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Humanized mid-copy progress string, e.g. \"35.2/75.4 GiB (46%)\".\nPresent while the restore is running; may remain after completion."
+        }
+      },
+      "description": "BackupRestoreStats summarizes restore create progress.\nAll fields are read-only; values appear as the regional operator reports them."
     },
     "v1BackupRestoreStatus": {
       "type": "string",

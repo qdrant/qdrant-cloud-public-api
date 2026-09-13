@@ -813,6 +813,20 @@ message BackupRestore {
   // The caller who initiated the backup restore.
   // This is a read-only field and will be available after a backup restore is created.
   common.v1.Caller created_by = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Summary stats for this restore (duration, mid-copy progress).
+  // Populated by the control plane from the regional operator status.
+  BackupRestoreStats stats = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// BackupRestoreStats summarizes restore create progress.
+// All fields are read-only; values appear as the regional operator reports them.
+message BackupRestoreStats {
+  // Wall-clock time from first restore work until the restore finished
+  // (succeeded or failed).
+  optional google.protobuf.Duration duration = 1;
+  // Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
+  // Present while the restore is running; may remain after completion.
+  optional string progress = 2;
 }
 
 // BackupRestoreStatus represents the current status of a backup restore.
