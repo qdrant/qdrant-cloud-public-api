@@ -563,11 +563,6 @@
               "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
               "readOnly": true
             },
-            "backupDuration": {
-              "type": "string",
-              "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
-              "readOnly": true
-            },
             "backupScheduleId": {
               "type": "string",
               "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
@@ -600,6 +595,11 @@
             "collectionName": {
               "type": "string",
               "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
+            },
+            "stats": {
+              "$ref": "#/definitions/v1BackupStats",
+              "description": "Summary stats for this backup (size, collections, points, duration, progress).\nPopulated by the control plane from the regional operator's data_plane payload.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The actual backup.",
@@ -846,11 +846,6 @@
           "description": "The timestamp when the backup was deleted (or when deletion started).\nThis is a read-only field and will be set after DeleteBackup is called.",
           "readOnly": true
         },
-        "backupDuration": {
-          "type": "string",
-          "description": "The total time taken to generate the backup. This is a read-only field and\nwill be available after the backup process is completed, regardless of\nwhether it succeeded or failed.",
-          "readOnly": true
-        },
         "backupScheduleId": {
           "type": "string",
           "description": "The identifier of the backup schedule (in GUID format).\nThis is a read-only field and will be present if the backup was created by a backup schedule.",
@@ -883,6 +878,11 @@
         "collectionName": {
           "type": "string",
           "description": "The name of the collection to back up.\nWhen unset, the entire space is backed up.\nWhen set, only the specified collection is backed up."
+        },
+        "stats": {
+          "$ref": "#/definitions/v1BackupStats",
+          "description": "Summary stats for this backup (size, collections, points, duration, progress).\nPopulated by the control plane from the regional operator's data_plane payload.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A Backup represents a backup of a Qdrant serverless space."
@@ -931,9 +931,28 @@
           "$ref": "#/definitions/v1Caller",
           "description": "The caller who initiated the backup restore.\nThis is a read-only field and will be available after a backup restore is created.",
           "readOnly": true
+        },
+        "stats": {
+          "$ref": "#/definitions/v1BackupRestoreStats",
+          "description": "Summary stats for this restore (duration, mid-copy progress).\nPopulated by the control plane from the regional operator status.",
+          "readOnly": true
         }
       },
       "description": "A BackupRestore represents the status of an in-place backup restore for a space.\nAll fields in this message are read-only."
+    },
+    "v1BackupRestoreStats": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Wall-clock time from first restore work until the restore finished\n(succeeded or failed)."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Humanized mid-copy progress string, e.g. \"35.2/75.4 GiB (46%)\".\nPresent while the restore is running; may remain after completion."
+        }
+      },
+      "description": "BackupRestoreStats summarizes restore create progress.\nAll fields are read-only; values appear as the regional operator reports them."
     },
     "v1BackupRestoreStatus": {
       "type": "string",
@@ -1038,6 +1057,35 @@
       ],
       "default": "BACKUP_SCHEDULE_STATUS_UNSPECIFIED",
       "description": "BackupScheduleStatus represents the current status of a backup schedule.\n\n - BACKUP_SCHEDULE_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - BACKUP_SCHEDULE_STATUS_ACTIVE: The backup schedule is active and functioning correctly.\n - BACKUP_SCHEDULE_STATUS_FAILED_TO_SYNC: There was an error syncing the backup schedule in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_NOT_FOUND: The backup schedule is missing in the cluster's region.\n - BACKUP_SCHEDULE_STATUS_DISABLED: The backup schedule is disabled."
+    },
+    "v1BackupStats": {
+      "type": "object",
+      "properties": {
+        "collectionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of collections included in this backup.\n1 when the backup was created with collection_name set; otherwise the count\nof collections present in the backup artifacts."
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total size of backed-up objects in bytes (UI may humanize for display)."
+        },
+        "totalPoints": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Sum of point counts across collections."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Wall-clock time from first CreateBackup work until the backup finished\n(succeeded or failed). Set when create completes."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Humanized mid-copy progress string, e.g. \"35.2/75.4 GiB (46%)\".\nPresent while the backup is running; may remain after completion."
+        }
+      },
+      "description": "BackupStats summarizes what a backup contains and how create progressed.\nAll fields are read-only; values appear as the regional operator reports them."
     },
     "v1BackupStatus": {
       "type": "string",

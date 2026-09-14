@@ -242,7 +242,7 @@ class DeleteBackupScheduleResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class Backup(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "space_id", "name", "status", "deleted_at", "backup_duration", "backup_schedule_id", "retention_period", "space_info", "created_by", "last_updated_by", "deleted_by", "collection_name")
+    __slots__ = ("id", "created_at", "account_id", "space_id", "name", "status", "deleted_at", "backup_schedule_id", "retention_period", "space_info", "created_by", "last_updated_by", "deleted_by", "collection_name", "stats")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -250,7 +250,6 @@ class Backup(_message.Message):
     NAME_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
-    BACKUP_DURATION_FIELD_NUMBER: _ClassVar[int]
     BACKUP_SCHEDULE_ID_FIELD_NUMBER: _ClassVar[int]
     RETENTION_PERIOD_FIELD_NUMBER: _ClassVar[int]
     SPACE_INFO_FIELD_NUMBER: _ClassVar[int]
@@ -258,6 +257,7 @@ class Backup(_message.Message):
     LAST_UPDATED_BY_FIELD_NUMBER: _ClassVar[int]
     DELETED_BY_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    STATS_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -265,7 +265,6 @@ class Backup(_message.Message):
     name: str
     status: BackupStatus
     deleted_at: _timestamp_pb2.Timestamp
-    backup_duration: _duration_pb2.Duration
     backup_schedule_id: str
     retention_period: _duration_pb2.Duration
     space_info: SpaceInfo
@@ -273,7 +272,22 @@ class Backup(_message.Message):
     last_updated_by: _common_pb2.Caller
     deleted_by: _common_pb2.Caller
     collection_name: str
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., backup_duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., space_info: _Optional[_Union[SpaceInfo, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., collection_name: _Optional[str] = ...) -> None: ...
+    stats: BackupStats
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., status: _Optional[_Union[BackupStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., backup_schedule_id: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., space_info: _Optional[_Union[SpaceInfo, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., collection_name: _Optional[str] = ..., stats: _Optional[_Union[BackupStats, _Mapping]] = ...) -> None: ...
+
+class BackupStats(_message.Message):
+    __slots__ = ("collection_count", "size_bytes", "total_points", "duration", "progress")
+    COLLECTION_COUNT_FIELD_NUMBER: _ClassVar[int]
+    SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_POINTS_FIELD_NUMBER: _ClassVar[int]
+    DURATION_FIELD_NUMBER: _ClassVar[int]
+    PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    collection_count: int
+    size_bytes: int
+    total_points: int
+    duration: _duration_pb2.Duration
+    progress: str
+    def __init__(self, collection_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., total_points: _Optional[int] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., progress: _Optional[str] = ...) -> None: ...
 
 class SpaceInfo(_message.Message):
     __slots__ = ("name", "cloud_provider_id", "cloud_provider_region_id", "configuration")
@@ -322,7 +336,7 @@ class BackupSchedule(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., name: _Optional[str] = ..., schedule: _Optional[str] = ..., retention_period: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., paused_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[BackupScheduleStatus, str]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_fired_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., collection_name: _Optional[str] = ...) -> None: ...
 
 class BackupRestore(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "space_id", "backup_id", "status", "deleted_at", "created_by")
+    __slots__ = ("id", "created_at", "account_id", "space_id", "backup_id", "status", "deleted_at", "created_by", "stats")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -331,6 +345,7 @@ class BackupRestore(_message.Message):
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     CREATED_BY_FIELD_NUMBER: _ClassVar[int]
+    STATS_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     account_id: str
@@ -339,4 +354,13 @@ class BackupRestore(_message.Message):
     status: BackupRestoreStatus
     deleted_at: _timestamp_pb2.Timestamp
     created_by: _common_pb2.Caller
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ...) -> None: ...
+    stats: BackupRestoreStats
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., backup_id: _Optional[str] = ..., status: _Optional[_Union[BackupRestoreStatus, str]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., stats: _Optional[_Union[BackupRestoreStats, _Mapping]] = ...) -> None: ...
+
+class BackupRestoreStats(_message.Message):
+    __slots__ = ("duration", "progress")
+    DURATION_FIELD_NUMBER: _ClassVar[int]
+    PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    duration: _duration_pb2.Duration
+    progress: str
+    def __init__(self, duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., progress: _Optional[str] = ...) -> None: ...

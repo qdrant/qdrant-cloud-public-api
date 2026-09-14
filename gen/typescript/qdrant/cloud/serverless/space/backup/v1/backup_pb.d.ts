@@ -905,15 +905,6 @@ export declare type Backup = Message<"qdrant.cloud.serverless.space.backup.v1.Ba
   deletedAt?: Timestamp | undefined;
 
   /**
-   * The total time taken to generate the backup. This is a read-only field and
-   * will be available after the backup process is completed, regardless of
-   * whether it succeeded or failed.
-   *
-   * @generated from field: google.protobuf.Duration backup_duration = 8;
-   */
-  backupDuration?: Duration | undefined;
-
-  /**
    * The identifier of the backup schedule (in GUID format).
    * This is a read-only field and will be present if the backup was created by a backup schedule.
    *
@@ -971,6 +962,15 @@ export declare type Backup = Message<"qdrant.cloud.serverless.space.backup.v1.Ba
    * @generated from field: optional string collection_name = 16;
    */
   collectionName?: string | undefined;
+
+  /**
+   * Summary stats for this backup (size, collections, points, duration, progress).
+   * Populated by the control plane from the regional operator's data_plane payload.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupStats stats = 17;
+   */
+  stats?: BackupStats | undefined;
 };
 
 /**
@@ -1036,15 +1036,6 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
   deletedAt?: Timestamp | undefined;
 
   /**
-   * The total time taken to generate the backup. This is a read-only field and
-   * will be available after the backup process is completed, regardless of
-   * whether it succeeded or failed.
-   *
-   * @generated from field: google.protobuf.Duration backup_duration = 8;
-   */
-  backupDuration?: Duration | undefined;
-
-  /**
    * The identifier of the backup schedule (in GUID format).
    * This is a read-only field and will be present if the backup was created by a backup schedule.
    *
@@ -1102,6 +1093,15 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
    * @generated from field: optional string collection_name = 16;
    */
   collectionName?: string | undefined;
+
+  /**
+   * Summary stats for this backup (size, collections, points, duration, progress).
+   * Populated by the control plane from the regional operator's data_plane payload.
+   * This is a read-only field.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupStats stats = 17;
+   */
+  stats?: BackupStatsValid | undefined;
 };
 
 /**
@@ -1109,6 +1109,61 @@ export declare type BackupValid = Message<"qdrant.cloud.serverless.space.backup.
  * Use `create(BackupSchema)` to create a new message.
  */
 export declare const BackupSchema: GenMessage<Backup, {validType: BackupValid}>;
+
+/**
+ * BackupStats summarizes what a backup contains and how create progressed.
+ * All fields are read-only; values appear as the regional operator reports them.
+ *
+ * @generated from message qdrant.cloud.serverless.space.backup.v1.BackupStats
+ */
+export declare type BackupStats = Message<"qdrant.cloud.serverless.space.backup.v1.BackupStats"> & {
+  /**
+   * Number of collections included in this backup.
+   * 1 when the backup was created with collection_name set; otherwise the count
+   * of collections present in the backup artifacts.
+   *
+   * @generated from field: optional uint32 collection_count = 1;
+   */
+  collectionCount?: number | undefined;
+
+  /**
+   * Total size of backed-up objects in bytes (UI may humanize for display).
+   *
+   * @generated from field: optional int64 size_bytes = 2;
+   */
+  sizeBytes?: bigint | undefined;
+
+  /**
+   * Sum of point counts across collections.
+   *
+   * @generated from field: optional uint64 total_points = 3;
+   */
+  totalPoints?: bigint | undefined;
+
+  /**
+   * Wall-clock time from first CreateBackup work until the backup finished
+   * (succeeded or failed). Set when create completes.
+   *
+   * @generated from field: optional google.protobuf.Duration duration = 4;
+   */
+  duration?: Duration | undefined;
+
+  /**
+   * Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
+   * Present while the backup is running; may remain after completion.
+   *
+   * @generated from field: optional string progress = 5;
+   */
+  progress?: string | undefined;
+};
+
+export declare type BackupStatsValid = BackupStats;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.backup.v1.BackupStats.
+ * Use `create(BackupStatsSchema)` to create a new message.
+ */
+export declare const BackupStatsSchema: GenMessage<BackupStats, {validType: BackupStatsValid}>;
 
 /**
  * Represents the space details associated with a backup.
@@ -1399,6 +1454,14 @@ export declare type BackupRestore = Message<"qdrant.cloud.serverless.space.backu
    * @generated from field: qdrant.cloud.common.v1.Caller created_by = 8;
    */
   createdBy?: Caller | undefined;
+
+  /**
+   * Summary stats for this restore (duration, mid-copy progress).
+   * Populated by the control plane from the regional operator status.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats stats = 9;
+   */
+  stats?: BackupRestoreStats | undefined;
 };
 
 export declare type BackupRestoreValid = BackupRestore;
@@ -1408,6 +1471,38 @@ export declare type BackupRestoreValid = BackupRestore;
  * Use `create(BackupRestoreSchema)` to create a new message.
  */
 export declare const BackupRestoreSchema: GenMessage<BackupRestore, {validType: BackupRestoreValid}>;
+
+/**
+ * BackupRestoreStats summarizes restore create progress.
+ * All fields are read-only; values appear as the regional operator reports them.
+ *
+ * @generated from message qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats
+ */
+export declare type BackupRestoreStats = Message<"qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats"> & {
+  /**
+   * Wall-clock time from first restore work until the restore finished
+   * (succeeded or failed).
+   *
+   * @generated from field: optional google.protobuf.Duration duration = 1;
+   */
+  duration?: Duration | undefined;
+
+  /**
+   * Humanized mid-copy progress string, e.g. "35.2/75.4 GiB (46%)".
+   * Present while the restore is running; may remain after completion.
+   *
+   * @generated from field: optional string progress = 2;
+   */
+  progress?: string | undefined;
+};
+
+export declare type BackupRestoreStatsValid = BackupRestoreStats;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.backup.v1.BackupRestoreStats.
+ * Use `create(BackupRestoreStatsSchema)` to create a new message.
+ */
+export declare const BackupRestoreStatsSchema: GenMessage<BackupRestoreStats, {validType: BackupRestoreStatsValid}>;
 
 /**
  * BackupStatus represents the current status of a backup operation.
