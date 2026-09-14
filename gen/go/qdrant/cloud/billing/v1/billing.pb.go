@@ -805,7 +805,12 @@ type CreditContract struct {
 	// a balance zeroed at expiry rather than spent.
 	ExhaustedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=exhausted_at,json=exhaustedAt,proto3" json:"exhausted_at,omitempty"`
 	// Amount voided from this block (a full or partial correction). 0 if never voided.
-	VoidedAmount  float64 `protobuf:"fixed64,12,opt,name=voided_amount,json=voidedAmount,proto3" json:"voided_amount,omitempty"`
+	VoidedAmount float64 `protobuf:"fixed64,12,opt,name=voided_amount,json=voidedAmount,proto3" json:"voided_amount,omitempty"`
+	// Whether this contract covers usage after `exhausted_at` instead of billing it as
+	// pay-as-you-go. False for every ordinary account; true only for a contract that waives it.
+	// Independent of `exhausted_at` so a client can show the exhaustion date without implying the
+	// customer owes anything for usage since then.
+	OverageExempt bool `protobuf:"varint,13,opt,name=overage_exempt,json=overageExempt,proto3" json:"overage_exempt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -915,6 +920,13 @@ func (x *CreditContract) GetVoidedAmount() float64 {
 		return x.VoidedAmount
 	}
 	return 0
+}
+
+func (x *CreditContract) GetOverageExempt() bool {
+	if x != nil {
+		return x.OverageExempt
+	}
+	return false
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
@@ -1164,7 +1176,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x05month\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x18\f(\x01R\x05month\x12&\n" +
 	"\x06amount\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12-\n" +
 	"\bcurrency\x18\x04 \x01(\tB\x11\xbaH\x0er\f2\n" +
-	"^[A-Z]{3}$R\bcurrency\"\xc9\x04\n" +
+	"^[A-Z]{3}$R\bcurrency\"\xf0\x04\n" +
 	"\x0eCreditContract\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12'\n" +
 	"\n" +
@@ -1181,7 +1193,8 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x10remaining_amount\x18\n" +
 	" \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fremainingAmount\x12=\n" +
 	"\fexhausted_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\vexhaustedAt\x123\n" +
-	"\rvoided_amount\x18\f \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fvoidedAmountB\b\n" +
+	"\rvoided_amount\x18\f \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fvoidedAmount\x12%\n" +
+	"\x0eoverage_exempt\x18\r \x01(\bR\roverageExemptB\b\n" +
 	"\x06_notes\"I\n" +
 	"\x1eGetBillingAccountParentRequest\x12'\n" +
 	"\n" +
