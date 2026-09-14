@@ -806,11 +806,11 @@ type CreditContract struct {
 	ExhaustedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=exhausted_at,json=exhaustedAt,proto3" json:"exhausted_at,omitempty"`
 	// Amount voided from this block (a full or partial correction). 0 if never voided.
 	VoidedAmount float64 `protobuf:"fixed64,12,opt,name=voided_amount,json=voidedAmount,proto3" json:"voided_amount,omitempty"`
-	// Whether usage after `exhausted_at` is billed as pay-as-you-go. True for every ordinary
-	// account; false only for a contract that covers usage past exhaustion instead of billing it.
+	// Whether this contract covers usage after `exhausted_at` instead of billing it as
+	// pay-as-you-go. False for every ordinary account; true only for a contract that waives it.
 	// Independent of `exhausted_at` so a client can show the exhaustion date without implying the
 	// customer owes anything for usage since then.
-	OverageBilled bool `protobuf:"varint,13,opt,name=overage_billed,json=overageBilled,proto3" json:"overage_billed,omitempty"`
+	OverageExempt bool `protobuf:"varint,13,opt,name=overage_exempt,json=overageExempt,proto3" json:"overage_exempt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -922,9 +922,9 @@ func (x *CreditContract) GetVoidedAmount() float64 {
 	return 0
 }
 
-func (x *CreditContract) GetOverageBilled() bool {
+func (x *CreditContract) GetOverageExempt() bool {
 	if x != nil {
-		return x.OverageBilled
+		return x.OverageExempt
 	}
 	return false
 }
@@ -1194,7 +1194,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	" \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fremainingAmount\x12=\n" +
 	"\fexhausted_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\vexhaustedAt\x123\n" +
 	"\rvoided_amount\x18\f \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fvoidedAmount\x12%\n" +
-	"\x0eoverage_billed\x18\r \x01(\bR\roverageBilledB\b\n" +
+	"\x0eoverage_exempt\x18\r \x01(\bR\roverageExemptB\b\n" +
 	"\x06_notes\"I\n" +
 	"\x1eGetBillingAccountParentRequest\x12'\n" +
 	"\n" +
