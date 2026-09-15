@@ -655,6 +655,10 @@
             "$ref": "#/definitions/v1KeyValue"
           },
           "title": "List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.\nThis is an optional field"
+        },
+        "clusterDomain": {
+          "type": "string",
+          "description": "The Kubernetes cluster domain used to reach in-cluster services (e.g. `cluster.local`).\nSet this only for clusters configured with a custom cluster domain; when omitted the\ndeployed components fall back to the default `cluster.local`.\nThis is an optional field."
         }
       },
       "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"

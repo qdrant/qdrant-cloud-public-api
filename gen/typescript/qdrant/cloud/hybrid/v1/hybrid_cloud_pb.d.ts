@@ -740,6 +740,16 @@ export declare type HybridCloudEnvironmentConfiguration = Message<"qdrant.cloud.
    * @generated from field: repeated qdrant.cloud.common.v1.KeyValue control_plane_labels = 25;
    */
   controlPlaneLabels: KeyValue[];
+
+  /**
+   * The Kubernetes cluster domain used to reach in-cluster services (e.g. `cluster.local`).
+   * Set this only for clusters configured with a custom cluster domain; when omitted the
+   * deployed components fall back to the default `cluster.local`.
+   * This is an optional field.
+   *
+   * @generated from field: optional string cluster_domain = 26;
+   */
+  clusterDomain?: string | undefined;
 };
 
 export declare type HybridCloudEnvironmentConfigurationValid = HybridCloudEnvironmentConfiguration;
