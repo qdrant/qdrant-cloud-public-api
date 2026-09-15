@@ -420,7 +420,7 @@ message HybridCloudEnvironmentConfiguration {
   // Set this only for clusters configured with a custom cluster domain; when omitted the
   // deployed components fall back to the default `cluster.local`.
   // This is an optional field.
-  optional string cluster_domain = 26 [(buf.validate.field).string = {max_len: 253}];
+  optional string cluster_domain = 26 [(buf.validate.field).string = {hostname: true}];
 }
 
 // HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components
