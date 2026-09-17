@@ -416,6 +416,11 @@ message HybridCloudEnvironmentConfiguration {
   // List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
   // This is an optional field
   repeated common.v1.KeyValue control_plane_labels = 25 [(buf.validate.field).repeated = {max_items: 10}];
+  // The Kubernetes cluster domain used to reach in-cluster services (e.g. `cluster.local`).
+  // Set this only for clusters configured with a custom cluster domain; when omitted the
+  // deployed components fall back to the default `cluster.local`.
+  // This is an optional field.
+  optional string cluster_domain = 26 [(buf.validate.field).string = {hostname: true}];
 }
 
 // HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components

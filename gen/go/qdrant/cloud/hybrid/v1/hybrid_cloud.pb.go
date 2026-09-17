@@ -1215,8 +1215,13 @@ type HybridCloudEnvironmentConfiguration struct {
 	// List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.
 	// This is an optional field
 	ControlPlaneLabels []*v1.KeyValue `protobuf:"bytes,25,rep,name=control_plane_labels,json=controlPlaneLabels,proto3" json:"control_plane_labels,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The Kubernetes cluster domain used to reach in-cluster services (e.g. `cluster.local`).
+	// Set this only for clusters configured with a custom cluster domain; when omitted the
+	// deployed components fall back to the default `cluster.local`.
+	// This is an optional field.
+	ClusterDomain *string `protobuf:"bytes,26,opt,name=cluster_domain,json=clusterDomain,proto3,oneof" json:"cluster_domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HybridCloudEnvironmentConfiguration) Reset() {
@@ -1380,6 +1385,13 @@ func (x *HybridCloudEnvironmentConfiguration) GetControlPlaneLabels() []*v1.KeyV
 		return x.ControlPlaneLabels
 	}
 	return nil
+}
+
+func (x *HybridCloudEnvironmentConfiguration) GetClusterDomain() string {
+	if x != nil && x.ClusterDomain != nil {
+		return *x.ClusterDomain
+	}
+	return ""
 }
 
 // Status of a hybrid cloud environment, read only
@@ -2121,7 +2133,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"7hybrid_cloud_environment.configuration.last_modified_at\x12|configuration.last_modified_at must be set if configuration and created_at are set, and must be after or equal to created_at\x1a\x99\x01!has(this.configuration) || !has(this.created_at) || (has(this.configuration.last_modified_at) && this.configuration.last_modified_at >= this.created_at)\x1a\xa9\x02\n" +
 	"0hybrid_cloud_environment.status.last_modified_at\x12nstatus.last_modified_at must be set if status and created_at are set, and must be after or equal to created_at\x1a\x84\x01!has(this.status) || !has(this.created_at) || (has(this.status.last_modified_at) && this.status.last_modified_at >= this.created_at)B\x10\n" +
 	"\x0e_configurationB\t\n" +
-	"\a_status\"\xfe\r\n" +
+	"\a_status\"\xc6\x0e\n" +
 	"#HybridCloudEnvironmentConfiguration\x12I\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12L\n" +
 	"\tnamespace\x18\x04 \x01(\tB.\xe0A\x05\xbaH(r&\x10\x01\x18\xfd\x012\x1f^[a-z0-9]([-a-z0-9]*[a-z0-9])?$R\tnamespace\x123\n" +
@@ -2146,7 +2158,8 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1aadvanced_operator_settings\x18\x18 \x01(\v2\x17.google.protobuf.StructH\n" +
 	"R\x18advancedOperatorSettings\x88\x01\x01\x12\\\n" +
 	"\x14control_plane_labels\x18\x19 \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\x12controlPlaneLabelsB\x11\n" +
+	"R\x12controlPlaneLabels\x123\n" +
+	"\x0ecluster_domain\x18\x1a \x01(\tB\a\xbaH\x04r\x02h\x01H\vR\rclusterDomain\x88\x01\x01B\x11\n" +
 	"\x0f_http_proxy_urlB\x12\n" +
 	"\x10_https_proxy_urlB\x19\n" +
 	"\x17_container_registry_urlB\x17\n" +
@@ -2158,7 +2171,8 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x1e_volume_snapshot_storage_classB\f\n" +
 	"\n" +
 	"_log_levelB\x1d\n" +
-	"\x1b_advanced_operator_settings\"\xce\n" +
+	"\x1b_advanced_operator_settingsB\x11\n" +
+	"\x0f_cluster_domain\"\xce\n" +
 	"\n" +
 	"\x1cHybridCloudEnvironmentStatus\x12O\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\t\xe0A\x03\xbaH\x03\xc8\x01\x01R\x0elastModifiedAt\x12\\\n" +
