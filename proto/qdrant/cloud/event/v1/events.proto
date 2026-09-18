@@ -22,6 +22,10 @@ import "qdrant/cloud/common/v1/common.proto";
 //      key: "cluster_id"
 //      value: "resp-md.qc-event-cluster-id"
 //    }
+//    additional_payload_fields: {
+//      key: "backup_request"
+//      value: "req"
+//    }
 //  };
 //
 extend google.protobuf.MethodOptions {
@@ -63,6 +67,10 @@ message EventOptions {
   // Key will be copied as-is, the value should be a resolvable (nested) field.
   // E.g. {'cluster_id': 'resp.cluster_id', 'backup_id': 'resp.backup_id'}
   map<string, string> additional_context_fields = 10;
+  // Additional request or response fields to include as payload.
+  // Key will be copied as-is, the value should be a resolvable (nested) field.
+  // E.g. {'backup_request': 'req'}
+  map<string, string> additional_payload_fields = 11;
 }
 
 // EventType defines the type of the event that occurred to the resource.
@@ -181,4 +189,6 @@ message Event {
   // Additional key-value context about the event.
   // For example, for a backup event, this could include the "cluster_id".
   map<string, string> additional_context = 20;
+  // Additional source-specific request or response payload fields.
+  map<string, string> additional_payload = 21;
 }

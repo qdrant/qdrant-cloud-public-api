@@ -81,6 +81,15 @@ export declare type EventOptions = Message<"qdrant.cloud.event.v1.EventOptions">
    * @generated from field: map<string, string> additional_context_fields = 10;
    */
   additionalContextFields: { [key: string]: string };
+
+  /**
+   * Additional request or response fields to include as payload.
+   * Key will be copied as-is, the value should be a resolvable (nested) field.
+   * E.g. {'backup_request': 'req'}
+   *
+   * @generated from field: map<string, string> additional_payload_fields = 11;
+   */
+  additionalPayloadFields: { [key: string]: string };
 };
 
 export declare type EventOptionsValid = EventOptions;
@@ -271,6 +280,13 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: map<string, string> additional_context = 20;
    */
   additionalContext: { [key: string]: string };
+
+  /**
+   * Additional source-specific request or response payload fields.
+   *
+   * @generated from field: map<string, string> additional_payload = 21;
+   */
+  additionalPayload: { [key: string]: string };
 };
 
 /**
@@ -416,6 +432,13 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: map<string, string> additional_context = 20;
    */
   additionalContext: { [key: string]: string };
+
+  /**
+   * Additional source-specific request or response payload fields.
+   *
+   * @generated from field: map<string, string> additional_payload = 21;
+   */
+  additionalPayload: { [key: string]: string };
 };
 
 /**
