@@ -52,8 +52,15 @@ EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
 class EventOptions(_message.Message):
-    __slots__ = ("event_type", "resource_type", "status_only", "resource_id_field", "resource_url_template", "action_type", "additional_context_fields")
+    __slots__ = ("event_type", "resource_type", "status_only", "resource_id_field", "resource_url_template", "action_type", "additional_context_fields", "additional_payload_fields")
     class AdditionalContextFieldsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    class AdditionalPayloadFieldsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -67,6 +74,7 @@ class EventOptions(_message.Message):
     RESOURCE_URL_TEMPLATE_FIELD_NUMBER: _ClassVar[int]
     ACTION_TYPE_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_CONTEXT_FIELDS_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_PAYLOAD_FIELDS_FIELD_NUMBER: _ClassVar[int]
     event_type: EventType
     resource_type: str
     status_only: bool
@@ -74,7 +82,8 @@ class EventOptions(_message.Message):
     resource_url_template: str
     action_type: str
     additional_context_fields: _containers.ScalarMap[str, str]
-    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    additional_payload_fields: _containers.ScalarMap[str, str]
+    def __init__(self, event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id_field: _Optional[str] = ..., resource_url_template: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context_fields: _Optional[_Mapping[str, str]] = ..., additional_payload_fields: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class Result(_message.Message):
     __slots__ = ("status", "status_code", "error_reason")
@@ -87,8 +96,15 @@ class Result(_message.Message):
     def __init__(self, status: _Optional[_Union[ResultStatus, str]] = ..., status_code: _Optional[int] = ..., error_reason: _Optional[str] = ...) -> None: ...
 
 class Event(_message.Message):
-    __slots__ = ("id", "created_at", "duration", "ip_address", "result", "caller", "account_id", "source_rpc", "source", "trace_id", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context")
+    __slots__ = ("id", "created_at", "duration", "ip_address", "result", "caller", "account_id", "source_rpc", "source", "trace_id", "event_type", "resource_type", "status_only", "resource_id", "resource_url", "action_type", "additional_context", "additional_payload")
     class AdditionalContextEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    class AdditionalPayloadEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -112,6 +128,7 @@ class Event(_message.Message):
     RESOURCE_URL_FIELD_NUMBER: _ClassVar[int]
     ACTION_TYPE_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_CONTEXT_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     duration: _duration_pb2.Duration
@@ -129,4 +146,5 @@ class Event(_message.Message):
     resource_url: str
     action_type: str
     additional_context: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., source: _Optional[_Union[EventSource, str]] = ..., trace_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    additional_payload: _containers.ScalarMap[str, str]
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., source: _Optional[_Union[EventSource, str]] = ..., trace_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ..., additional_payload: _Optional[_Mapping[str, str]] = ...) -> None: ...
