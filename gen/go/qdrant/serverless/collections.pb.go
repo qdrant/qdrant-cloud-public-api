@@ -1314,7 +1314,9 @@ type CreateCollectionResponse struct {
 	// Tenant-facing name of the collection.
 	CollectionName string `protobuf:"bytes,1,opt,name=collection_name,json=collectionName,proto3" json:"collection_name,omitempty"`
 	// Outcome, e.g. "created", "already exists".
-	Result        string `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
+	Result string `protobuf:"bytes,2,opt,name=result,proto3" json:"result,omitempty"`
+	// Time spent to process
+	Time          float64 `protobuf:"fixed64,3,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1361,6 +1363,13 @@ func (x *CreateCollectionResponse) GetResult() string {
 		return x.Result
 	}
 	return ""
+}
+
+func (x *CreateCollectionResponse) GetTime() float64 {
+	if x != nil {
+		return x.Time
+	}
+	return 0
 }
 
 // Names the collection to delete.
@@ -1416,8 +1425,10 @@ type DeleteCollectionResponse struct {
 	Deleted bool `protobuf:"varint,1,opt,name=deleted,proto3" json:"deleted,omitempty"`
 	// Number of storage objects removed.
 	ObjectsDeleted uint32 `protobuf:"varint,2,opt,name=objects_deleted,json=objectsDeleted,proto3" json:"objects_deleted,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Time spent to process
+	Time          float64 `protobuf:"fixed64,3,opt,name=time,proto3" json:"time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteCollectionResponse) Reset() {
@@ -1460,6 +1471,13 @@ func (x *DeleteCollectionResponse) GetDeleted() bool {
 func (x *DeleteCollectionResponse) GetObjectsDeleted() uint32 {
 	if x != nil {
 		return x.ObjectsDeleted
+	}
+	return 0
+}
+
+func (x *DeleteCollectionResponse) GetTime() float64 {
+	if x != nil {
+		return x.Time
 	}
 	return 0
 }
@@ -1519,7 +1537,9 @@ type GetCollectionResponse struct {
 	Config *CollectionConfig `protobuf:"bytes,2,opt,name=config,proto3,oneof" json:"config,omitempty"`
 	// Available points as of the last applied write (eventually consistent);
 	// absent until the updater has written stats for the collection.
-	PointCount    *uint64 `protobuf:"varint,3,opt,name=point_count,json=pointCount,proto3,oneof" json:"point_count,omitempty"`
+	PointCount *uint64 `protobuf:"varint,3,opt,name=point_count,json=pointCount,proto3,oneof" json:"point_count,omitempty"`
+	// Time spent to process
+	Time          float64 `protobuf:"fixed64,4,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1571,6 +1591,13 @@ func (x *GetCollectionResponse) GetConfig() *CollectionConfig {
 func (x *GetCollectionResponse) GetPointCount() uint64 {
 	if x != nil && x.PointCount != nil {
 		return *x.PointCount
+	}
+	return 0
+}
+
+func (x *GetCollectionResponse) GetTime() float64 {
+	if x != nil {
+		return x.Time
 	}
 	return 0
 }
@@ -1696,8 +1723,10 @@ type ListCollectionsResponse struct {
 	// Opaque token to pass as `offset_token` to retrieve the next page. Absent
 	// when there are no more results.
 	NextOffsetToken *string `protobuf:"bytes,2,opt,name=next_offset_token,json=nextOffsetToken,proto3,oneof" json:"next_offset_token,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Time spent to process
+	Time          float64 `protobuf:"fixed64,3,opt,name=time,proto3" json:"time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCollectionsResponse) Reset() {
@@ -1742,6 +1771,13 @@ func (x *ListCollectionsResponse) GetNextOffsetToken() string {
 		return *x.NextOffsetToken
 	}
 	return ""
+}
+
+func (x *ListCollectionsResponse) GetTime() float64 {
+	if x != nil {
+		return x.Time
+	}
+	return 0
 }
 
 var File_qdrant_serverless_collections_proto protoreflect.FileDescriptor
@@ -1831,22 +1867,25 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2%.qdrant.serverless.PayloadIndexConfigR\x05value:\x028\x01\"\x7f\n" +
 	"\x17CreateCollectionRequest\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\x12;\n" +
-	"\x06config\x18\x02 \x01(\v2#.qdrant.serverless.CollectionConfigR\x06config\"[\n" +
+	"\x06config\x18\x02 \x01(\v2#.qdrant.serverless.CollectionConfigR\x06config\"o\n" +
 	"\x18CreateCollectionResponse\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\x12\x16\n" +
-	"\x06result\x18\x02 \x01(\tR\x06result\"B\n" +
+	"\x06result\x18\x02 \x01(\tR\x06result\x12\x12\n" +
+	"\x04time\x18\x03 \x01(\x01R\x04time\"B\n" +
 	"\x17DeleteCollectionRequest\x12'\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"]\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"q\n" +
 	"\x18DeleteCollectionResponse\x12\x18\n" +
 	"\adeleted\x18\x01 \x01(\bR\adeleted\x12'\n" +
-	"\x0fobjects_deleted\x18\x02 \x01(\rR\x0eobjectsDeleted\"?\n" +
+	"\x0fobjects_deleted\x18\x02 \x01(\rR\x0eobjectsDeleted\x12\x12\n" +
+	"\x04time\x18\x03 \x01(\x01R\x04time\"?\n" +
 	"\x14GetCollectionRequest\x12'\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xb2\x01\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xc6\x01\n" +
 	"\x15GetCollectionResponse\x12\x16\n" +
 	"\x06exists\x18\x01 \x01(\bR\x06exists\x12@\n" +
 	"\x06config\x18\x02 \x01(\v2#.qdrant.serverless.CollectionConfigH\x00R\x06config\x88\x01\x01\x12$\n" +
 	"\vpoint_count\x18\x03 \x01(\x04H\x01R\n" +
-	"pointCount\x88\x01\x01B\t\n" +
+	"pointCount\x88\x01\x01\x12\x12\n" +
+	"\x04time\x18\x04 \x01(\x01R\x04timeB\t\n" +
 	"\a_configB\x0e\n" +
 	"\f_point_count\"\x81\x01\n" +
 	"\x16ListCollectionsRequest\x12$\n" +
@@ -1858,10 +1897,11 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\x12$\n" +
 	"\vpoint_count\x18\x02 \x01(\x04H\x00R\n" +
 	"pointCount\x88\x01\x01B\x0e\n" +
-	"\f_point_count\"\xa8\x01\n" +
+	"\f_point_count\"\xbc\x01\n" +
 	"\x17ListCollectionsResponse\x12F\n" +
 	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections\x12/\n" +
-	"\x11next_offset_token\x18\x02 \x01(\tH\x00R\x0fnextOffsetToken\x88\x01\x01B\x14\n" +
+	"\x11next_offset_token\x18\x02 \x01(\tH\x00R\x0fnextOffsetToken\x88\x01\x01\x12\x12\n" +
+	"\x04time\x18\x03 \x01(\x01R\x04timeB\x14\n" +
 	"\x12_next_offset_token*T\n" +
 	"\bDistance\x12\x18\n" +
 	"\x14DISTANCE_UNSPECIFIED\x10\x00\x12\n" +
