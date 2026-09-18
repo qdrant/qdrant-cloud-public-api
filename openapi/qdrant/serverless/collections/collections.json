@@ -1,0 +1,1152 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Qdrant Serverless Collections API",
+    "description": "Collections API of a Qdrant serverless space.\n\nA serverless space exposes the regular Qdrant API for points and search. Collections, however, are managed through this\nsimplified API: instead of HNSW, quantization and storage parameters you describe *what* the collection holds (dense and\nsparse vectors, which payload fields you filter on, and how much precision you are willing to trade for cost). The\nserverless manager turns that into concrete Qdrant settings.\n\nEvery request names the collection by its tenant-facing name. The tenant (account and space) is derived from the API key\nand never appears in URLs or payloads.\n\n## Examples\n\n### Create a collection\n\n```\ncurl -X PUT 'https://<your-space-endpoint>/collections/documents' \\\n  -H 'api-key: <YOUR_SPACE_API_KEY>' \\\n  -H 'Content-Type: application/json' \\\n  --data-raw '{\n    \"vectors\": {\n      \"text\": { \"size\": 1024, \"distance\": \"Cosine\", \"precision\": \"medium\" }\n    },\n    \"sparse_vectors\": {\n      \"bm25\": { \"modifier\": \"idf\" }\n    },\n    \"payload_indexes\": {\n      \"user_id\": \"keyword\",\n      \"created_at\": \"datetime\",\n      \"title\": { \"type\": \"text\", \"tokenizer\": \"word\", \"stopwords\": \"english\" }\n    }\n  }'\n```\n\nExpected response:\n\n```\n{\n  \"result\": { \"name\": \"documents\", \"created\": true },\n  \"status\": \"ok\",\n  \"time\": 0.031\n}\n```\n\n### Inspect it\n\n```\ncurl 'https://<your-space-endpoint>/collections/documents' \\\n  -H 'api-key: <YOUR_SPACE_API_KEY>'\n```\n\nExpected response:\n\n```\n{\n  \"result\": {\n    \"name\": \"documents\",\n    \"config\": {\n      \"vectors\": {\n        \"text\": { \"size\": 1024, \"distance\": \"Cosine\", \"multivector\": false, \"precision\": \"medium\" }\n      },\n      \"sparse_vectors\": {\n        \"bm25\": { \"modifier\": \"idf\", \"precision\": \"high\" }\n      },\n      \"payload_indexes\": {\n        \"user_id\": { \"type\": \"keyword\", \"prefix\": false },\n        \"created_at\": { \"type\": \"datetime\" },\n        \"title\": { \"type\": \"text\", \"tokenizer\": \"word\", \"lowercase\": true, \"phrase_matching\": true, \"ascii_folding\": false, \"stopwords\": { \"languages\": [\"english\"] } }\n      }\n    },\n    \"points_count\": 0\n  },\n  \"status\": \"ok\",\n  \"time\": 0.004\n}\n```\n\n### List collections, page by page\n\n```\ncurl 'https://<your-space-endpoint>/collections?limit=2' \\\n  -H 'api-key: <YOUR_SPACE_API_KEY>'\n```\n\n```\n{\n  \"result\": {\n    \"collections\": [\n      { \"name\": \"documents\", \"points_count\": 12873 },\n      { \"name\": \"images\", \"points_count\": 4096 }\n    ],\n    \"next_page_offset\": \"eyJsYXN0IjoiaW1hZ2VzIn0\"\n  },\n  \"status\": \"ok\",\n  \"time\": 0.003\n}\n```\n\nThen `GET /collections?limit=2&offset=eyJsYXN0IjoiaW1hZ2VzIn0` for the next page; `next_page_offset` is `null` on the last one.\n\n### Delete it\n\n```\ncurl -X DELETE 'https://<your-space-endpoint>/collections/documents' \\\n  -H 'api-key: <YOUR_SPACE_API_KEY>'\n```\n\n```\n{ \"result\": true, \"status\": \"ok\", \"time\": 0.12 }\n```\n",
+    "version": "0.1.0",
+    "contact": {
+      "name": "Qdrant",
+      "url": "https://qdrant.tech"
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "externalDocs": {
+    "description": "Qdrant Cloud documentation",
+    "url": "https://qdrant.tech/documentation/cloud/"
+  },
+  "servers": [
+    {
+      "url": "{space_endpoint}",
+      "description": "Endpoint of your serverless space, as shown in Qdrant Cloud.",
+      "variables": {
+        "space_endpoint": {
+          "default": "https://my-space.example.com",
+          "description": "The URL of the serverless space, without a trailing slash."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Collections",
+      "description": "Searchable collections of points."
+    }
+  ],
+  "security": [
+    {
+      "api-key": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/collections": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "List collections",
+        "description": "Lists the caller's collections, newest first, one page at a time. Pass the `next_page_offset` of a page as `offset` to fetch the following one.",
+        "operationId": "list_collections",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of collections to return.",
+            "schema": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Opaque cursor returned as `next_page_offset` by the previous page. Omit for the first page. Clients must not interpret this value.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result",
+                    "status",
+                    "time"
+                  ],
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/CollectionsResponse"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "time": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Time spent to process this request, in seconds.",
+                      "example": 0.002
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/collections/{collection_name}": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Collection info",
+        "description": "Returns the configuration the collection was created with and its current statistics.",
+        "operationId": "get_collection",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CollectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result",
+                    "status",
+                    "time"
+                  ],
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/CollectionInfo"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "time": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Time spent to process this request, in seconds.",
+                      "example": 0.002
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Create collection",
+        "description": "Creates a collection with the given tenant-facing configuration. At least one dense or sparse vector is required.\n\nThe operation is idempotent on the name: if a collection with this name already exists it is left untouched and the response carries `created: false`.",
+        "operationId": "create_collection",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CollectionName"
+          }
+        ],
+        "requestBody": {
+          "description": "Configuration of the new collection.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionConfig"
+              },
+              "examples": {
+                "single_dense": {
+                  "summary": "Single dense vector",
+                  "description": "The simplest collection: one unnamed dense vector, exact (`high`) precision, no payload indexes.",
+                  "value": {
+                    "vectors": {
+                      "size": 1536,
+                      "distance": "Cosine"
+                    }
+                  }
+                },
+                "hybrid": {
+                  "summary": "Hybrid search with payload indexes",
+                  "description": "Named dense and sparse vectors for hybrid search, a cheaper `medium` precision tier for the dense embeddings, IDF weighting for the BM25 sparse vector, and a few payload indexes for filtering.",
+                  "value": {
+                    "vectors": {
+                      "text": {
+                        "size": 1024,
+                        "distance": "Cosine",
+                        "precision": "medium"
+                      }
+                    },
+                    "sparse_vectors": {
+                      "bm25": {
+                        "modifier": "idf"
+                      }
+                    },
+                    "payload_indexes": {
+                      "user_id": "keyword",
+                      "created_at": "datetime",
+                      "price": {
+                        "type": "integer",
+                        "lookup": false,
+                        "range": true
+                      },
+                      "title": {
+                        "type": "text",
+                        "tokenizer": "word",
+                        "lowercase": true,
+                        "stopwords": "english",
+                        "stemmer": {
+                          "type": "snowball",
+                          "language": "english"
+                        }
+                      }
+                    }
+                  }
+                },
+                "multivector": {
+                  "summary": "Late-interaction (multivector) model",
+                  "description": "A ColBERT / ColPali style collection: each point stores several sub-vectors that are compared with max-sim. Aggressive `low` precision keeps the many sub-vectors cheap.",
+                  "value": {
+                    "vectors": {
+                      "colbert": {
+                        "size": 128,
+                        "distance": "Dot",
+                        "multivector": true,
+                        "precision": "low"
+                      }
+                    },
+                    "payload_indexes": {
+                      "doc_id": "uuid",
+                      "page": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result",
+                    "status",
+                    "time"
+                  ],
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/CreateCollectionResult"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "time": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Time spent to process this request, in seconds.",
+                      "example": 0.002
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Delete collection",
+        "description": "Deletes the collection and all of its data. Irreversible.",
+        "operationId": "delete_collection",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CollectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result",
+                    "status",
+                    "time"
+                  ],
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "`true` once the collection and its data are deleted.",
+                      "example": true
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "time": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Time spent to process this request, in seconds.",
+                      "example": 0.002
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/collections/{collection_name}/exists": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Check the existence of a collection",
+        "description": "Returns `true` if a collection with the given name exists, `false` otherwise. Unlike `GET /collections/{collection_name}` this never answers 404.",
+        "operationId": "collection_exists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CollectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "result",
+                    "status",
+                    "time"
+                  ],
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/CollectionExistence"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "time": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Time spent to process this request, in seconds.",
+                      "example": 0.002
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key",
+        "description": "Space API key, created in Qdrant Cloud for this serverless space."
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "The same space API key, passed as a bearer token."
+      }
+    },
+    "parameters": {
+      "CollectionName": {
+        "name": "collection_name",
+        "in": "path",
+        "required": true,
+        "description": "Name of the collection.",
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "example": "documents"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "The request is malformed or the configuration is invalid, e.g. no vectors at all, a `limit` above 100, or an unknown `distance`.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "The API key is missing or does not grant access to this space.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "No collection with this name exists in the space.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Error": {
+        "description": "Any other error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Distance": {
+        "description": "Distance metric used to compare dense vectors. Same values as the Qdrant server API.",
+        "type": "string",
+        "enum": [
+          "Cosine",
+          "Euclid",
+          "Dot",
+          "Manhattan"
+        ]
+      },
+      "PrecisionTier": {
+        "description": "How much of the original vector precision may be traded for cost.\n\n- `low`: aggressive compression, lowest cost, approximate results.\n- `medium`: moderate compression with a small accuracy trade-off.\n- `high`: no lossy compression, exact stored vectors (default).\n\nThe serverless manager turns the tier into a concrete quantization and datatype choice; scalar, product or binary quantization and their parameters are never chosen directly.",
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high"
+      },
+      "DenseVectorConfig": {
+        "description": "Configuration of a single dense (embedding) vector.",
+        "type": "object",
+        "required": [
+          "size",
+          "distance"
+        ],
+        "properties": {
+          "size": {
+            "description": "Dimensionality of the embedding, e.g. 512 (CLIP), 1536, 3072.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 1,
+            "maximum": 65536,
+            "example": 1536
+          },
+          "distance": {
+            "$ref": "#/components/schemas/Distance"
+          },
+          "multivector": {
+            "description": "Store several sub-vectors per point and compare them with max-sim, for late-interaction models (ColBERT, ColPali, ...). Default: false.",
+            "type": "boolean",
+            "default": false
+          },
+          "precision": {
+            "$ref": "#/components/schemas/PrecisionTier"
+          }
+        }
+      },
+      "VectorsConfig": {
+        "description": "Dense vectors of the collection, in one of two shapes, as in the Qdrant server API.\n\nA single unnamed vector:\n\n```json\n{ \"size\": 1536, \"distance\": \"Cosine\" }\n```\n\nor several named vectors:\n\n```json\n{ \"text\": { \"size\": 1536, \"distance\": \"Cosine\" }, \"image\": { \"size\": 512, \"distance\": \"Dot\" } }\n```\n\nA collection has either the single unnamed vector or named ones, never both.",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/DenseVectorConfig"
+          },
+          {
+            "type": "object",
+            "description": "Named dense vectors, keyed by vector name.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DenseVectorConfig"
+            }
+          }
+        ]
+      },
+      "Modifier": {
+        "description": "Weight modification applied to sparse vectors at query time.\n\n- `none`: no modification (default).\n- `idf`: inverse document frequency, based on statistics of the collection. Enable for BM25-style models.",
+        "type": "string",
+        "enum": [
+          "none",
+          "idf"
+        ],
+        "default": "none"
+      },
+      "SparseVectorConfig": {
+        "description": "Configuration of a single sparse vector.",
+        "type": "object",
+        "properties": {
+          "modifier": {
+            "$ref": "#/components/schemas/Modifier"
+          },
+          "precision": {
+            "$ref": "#/components/schemas/PrecisionTier"
+          }
+        }
+      },
+      "PayloadIndexType": {
+        "description": "Kind of filter a payload field supports. Use the bare name when the index needs no options, e.g. `\"user_id\": \"keyword\"`.\n\n- `keyword`: exact match on strings, e.g. `color: \"red\"`.\n- `integer`: exact match and range filters on integers, e.g. `age: 25`.\n- `float`: range filters on floating point (and integer) numbers, e.g. `price: 99.5`.\n- `uuid`: exact match on UUID strings; like `keyword` but stored compactly.\n- `datetime`: range filters on RFC 3339 datetimes, e.g. `created_at: \"2023-02-08T10:49:00Z\"`.\n- `text`: full-text filtering on strings.\n- `geo`: radius, bounding box and polygon filters on `{ lon, lat }` values.\n- `bool`: exact match on booleans, e.g. `is_active: true`.",
+        "type": "string",
+        "enum": [
+          "keyword",
+          "integer",
+          "float",
+          "uuid",
+          "datetime",
+          "text",
+          "geo",
+          "bool"
+        ]
+      },
+      "KeywordIndexParams": {
+        "description": "Exact match on string values, e.g. `color: \"red\"`.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "keyword"
+            ]
+          },
+          "prefix": {
+            "description": "Enable prefix matching (`match: { \"prefix\": ... }`) on this field. Default: false.",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "IntegerIndexParams": {
+        "description": "Exact match and/or range filters on integers, e.g. `age: 25`. Both are on by default; turning one off shrinks the index.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "integer"
+            ]
+          },
+          "lookup": {
+            "description": "Support exact-match filters. Default: true.",
+            "type": "boolean",
+            "default": true
+          },
+          "range": {
+            "description": "Support range filters. Default: true.",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "FloatIndexParams": {
+        "description": "Range filters on floating point (and integer) numbers, e.g. `price: 99.5`.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "float"
+            ]
+          }
+        }
+      },
+      "UuidIndexParams": {
+        "description": "Exact match on UUID strings; like `keyword` but stored compactly.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "uuid"
+            ]
+          }
+        }
+      },
+      "DatetimeIndexParams": {
+        "description": "Range filters on RFC 3339 datetimes, e.g. `created_at: \"2023-02-08T10:49:00Z\"`.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "datetime"
+            ]
+          }
+        }
+      },
+      "GeoIndexParams": {
+        "description": "Geo radius, bounding box and polygon filters on `{ lon, lat }` values.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "geo"
+            ]
+          }
+        }
+      },
+      "BoolIndexParams": {
+        "description": "Exact match on booleans, e.g. `is_active: true`.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bool"
+            ]
+          }
+        }
+      },
+      "Tokenizer": {
+        "description": "Full-text tokenizer. Same values as the Qdrant server API.\n\n- `prefix`: index every prefix of each token.\n- `whitespace`: split on whitespace (default).\n- `word`: split on word boundaries.\n- `multilingual`: language-aware tokenization.",
+        "type": "string",
+        "enum": [
+          "prefix",
+          "whitespace",
+          "word",
+          "multilingual"
+        ],
+        "default": "whitespace"
+      },
+      "Language": {
+        "description": "Language name as accepted by the Qdrant server API, lowercase, e.g. `english`, `german`, `spanish`.",
+        "type": "string",
+        "example": "english"
+      },
+      "StopwordsSet": {
+        "description": "Tokens ignored by a full-text index. Predefined language lists and custom tokens are merged.",
+        "type": "object",
+        "properties": {
+          "languages": {
+            "description": "Languages whose predefined stopword lists to apply.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Language"
+            },
+            "uniqueItems": true
+          },
+          "custom": {
+            "description": "Extra stopwords to ignore, merged with the language lists.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "Stopwords": {
+        "description": "Tokens to ignore at index and query time. Either a single language name, e.g. `\"english\"`, or a set combining several languages and custom tokens.",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Language"
+          },
+          {
+            "$ref": "#/components/schemas/StopwordsSet"
+          }
+        ]
+      },
+      "SnowballParams": {
+        "description": "Snowball stemmer for the given language.",
+        "type": "object",
+        "required": [
+          "type",
+          "language"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "snowball"
+            ]
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language"
+          }
+        }
+      },
+      "DisabledStemmerParams": {
+        "description": "Explicitly disable stemming (overrides any language default).",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "disabled"
+            ]
+          }
+        }
+      },
+      "StemmingAlgorithm": {
+        "description": "Stemming algorithm for a full-text index. Unset: no stemming.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SnowballParams"
+          },
+          {
+            "$ref": "#/components/schemas/DisabledStemmerParams"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "snowball": "#/components/schemas/SnowballParams",
+            "disabled": "#/components/schemas/DisabledStemmerParams"
+          }
+        }
+      },
+      "TextIndexParams": {
+        "description": "Full-text filtering on string values.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ]
+          },
+          "tokenizer": {
+            "$ref": "#/components/schemas/Tokenizer"
+          },
+          "lowercase": {
+            "description": "Lowercase text before indexing. Default: true.",
+            "type": "boolean",
+            "default": true
+          },
+          "phrase_matching": {
+            "description": "Support phrase queries; builds extra index structure. Default: true.",
+            "type": "boolean",
+            "default": true
+          },
+          "min_token_len": {
+            "description": "Minimum token length to index.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0
+          },
+          "max_token_len": {
+            "description": "Maximum token length to index.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0
+          },
+          "ascii_folding": {
+            "description": "Fold accented characters to ASCII (e.g. `ação` -> `acao`). Default: false.",
+            "type": "boolean",
+            "default": false
+          },
+          "stopwords": {
+            "$ref": "#/components/schemas/Stopwords"
+          },
+          "stemmer": {
+            "$ref": "#/components/schemas/StemmingAlgorithm"
+          }
+        }
+      },
+      "PayloadIndexParams": {
+        "description": "A payload index with options. `type` selects the kind of filter the field supports.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/KeywordIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/IntegerIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/FloatIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/UuidIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/DatetimeIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/TextIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/GeoIndexParams"
+          },
+          {
+            "$ref": "#/components/schemas/BoolIndexParams"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "keyword": "#/components/schemas/KeywordIndexParams",
+            "integer": "#/components/schemas/IntegerIndexParams",
+            "float": "#/components/schemas/FloatIndexParams",
+            "uuid": "#/components/schemas/UuidIndexParams",
+            "datetime": "#/components/schemas/DatetimeIndexParams",
+            "text": "#/components/schemas/TextIndexParams",
+            "geo": "#/components/schemas/GeoIndexParams",
+            "bool": "#/components/schemas/BoolIndexParams"
+          }
+        }
+      },
+      "PayloadIndexConfig": {
+        "description": "One payload index, as in the Qdrant server API: either the bare index type, e.g. `\"keyword\"`, or an object with options, e.g. `{ \"type\": \"text\", \"tokenizer\": \"word\" }`.\n\nOnly the kind of filter the field supports is chosen here; storage placement of the index is the manager's decision.",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PayloadIndexType"
+          },
+          {
+            "$ref": "#/components/schemas/PayloadIndexParams"
+          }
+        ]
+      },
+      "CollectionConfig": {
+        "description": "The tenant-facing configuration of a collection. Unlike the Qdrant server API it is deliberately small: the serverless manager turns it into concrete Qdrant settings (HNSW, quantization, storage placement, ...), which are never exposed.\n\nAt least one dense or sparse vector is required.",
+        "type": "object",
+        "properties": {
+          "vectors": {
+            "$ref": "#/components/schemas/VectorsConfig"
+          },
+          "sparse_vectors": {
+            "description": "Sparse vectors, keyed by vector name.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SparseVectorConfig"
+            }
+          },
+          "payload_indexes": {
+            "description": "Payload indexes, keyed by payload field name (a JSON path, e.g. `user_id` or `meta.tags`).",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PayloadIndexConfig"
+            }
+          }
+        },
+        "example": {
+          "vectors": {
+            "text": {
+              "size": 1024,
+              "distance": "Cosine",
+              "precision": "medium"
+            }
+          },
+          "sparse_vectors": {
+            "bm25": {
+              "modifier": "idf"
+            }
+          },
+          "payload_indexes": {
+            "user_id": "keyword",
+            "created_at": "datetime",
+            "price": {
+              "type": "integer",
+              "lookup": false,
+              "range": true
+            },
+            "title": {
+              "type": "text",
+              "tokenizer": "word",
+              "lowercase": true,
+              "stopwords": "english",
+              "stemmer": {
+                "type": "snowball",
+                "language": "english"
+              }
+            }
+          }
+        }
+      },
+      "CreateCollectionResult": {
+        "description": "Outcome of a create. Creating a collection that already exists is not an error: `created` is `false` and the existing collection is left untouched.",
+        "type": "object",
+        "required": [
+          "name",
+          "created"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the collection.",
+            "type": "string",
+            "example": "documents"
+          },
+          "created": {
+            "description": "`true` if the collection was created by this request, `false` if it already existed.",
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "CollectionInfo": {
+        "description": "Configuration and statistics of a collection.",
+        "type": "object",
+        "required": [
+          "name",
+          "config"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the collection.",
+            "type": "string"
+          },
+          "config": {
+            "$ref": "#/components/schemas/CollectionConfig"
+          },
+          "points_count": {
+            "description": "Number of available points as of the last applied write (eventually consistent). `null` until the first statistics have been collected for the collection.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          }
+        },
+        "example": {
+          "name": "documents",
+          "config": {
+            "vectors": {
+              "text": {
+                "size": 1024,
+                "distance": "Cosine",
+                "multivector": false,
+                "precision": "medium"
+              }
+            },
+            "sparse_vectors": {
+              "bm25": {
+                "modifier": "idf",
+                "precision": "high"
+              }
+            },
+            "payload_indexes": {
+              "user_id": {
+                "type": "keyword",
+                "prefix": false
+              },
+              "created_at": {
+                "type": "datetime"
+              }
+            }
+          },
+          "points_count": 12873
+        }
+      },
+      "CollectionSummary": {
+        "description": "One collection in a listing.",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the collection.",
+            "type": "string"
+          },
+          "points_count": {
+            "description": "Number of available points as of the last applied write (eventually consistent). `null` until the first statistics have been collected for the collection.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          }
+        }
+      },
+      "CollectionsResponse": {
+        "description": "A page of the caller's collections.",
+        "type": "object",
+        "required": [
+          "collections"
+        ],
+        "properties": {
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionSummary"
+            }
+          },
+          "next_page_offset": {
+            "description": "Opaque cursor to pass as `offset` to retrieve the next page. `null` when there are no more results. Clients must not interpret this value.",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "example": {
+          "collections": [
+            {
+              "name": "documents",
+              "points_count": 12873
+            },
+            {
+              "name": "images",
+              "points_count": 4096
+            },
+            {
+              "name": "just-created",
+              "points_count": null
+            }
+          ],
+          "next_page_offset": "eyJsYXN0IjoianVzdC1jcmVhdGVkIn0"
+        }
+      },
+      "CollectionExistence": {
+        "description": "Whether a collection exists.",
+        "type": "object",
+        "required": [
+          "exists"
+        ],
+        "properties": {
+          "exists": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "number",
+            "format": "float",
+            "description": "Time spent to process this request, in seconds."
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "description": "Description of the occurred error."
+              }
+            }
+          },
+          "result": {
+            "type": "object",
+            "nullable": true
+          }
+        },
+        "example": {
+          "time": 0.001,
+          "status": {
+            "error": "Not found: Collection `documents` doesn't exist!"
+          },
+          "result": null
+        }
+      }
+    }
+  }
+}
