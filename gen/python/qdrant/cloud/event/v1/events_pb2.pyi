@@ -3,6 +3,7 @@ import datetime
 from buf.validate import validate_pb2 as _validate_pb2
 from google.protobuf import descriptor_pb2 as _descriptor_pb2
 from google.protobuf import duration_pb2 as _duration_pb2
+from google.protobuf import struct_pb2 as _struct_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from google.protobuf.internal import containers as _containers
@@ -104,13 +105,6 @@ class Event(_message.Message):
         key: str
         value: str
         def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
-    class AdditionalPayloadEntry(_message.Message):
-        __slots__ = ("key", "value")
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: str
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     DURATION_FIELD_NUMBER: _ClassVar[int]
@@ -146,5 +140,5 @@ class Event(_message.Message):
     resource_url: str
     action_type: str
     additional_context: _containers.ScalarMap[str, str]
-    additional_payload: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., source: _Optional[_Union[EventSource, str]] = ..., trace_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ..., additional_payload: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    additional_payload: _struct_pb2.Struct
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., ip_address: _Optional[str] = ..., result: _Optional[_Union[Result, _Mapping]] = ..., caller: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., account_id: _Optional[str] = ..., source_rpc: _Optional[str] = ..., source: _Optional[_Union[EventSource, str]] = ..., trace_id: _Optional[str] = ..., event_type: _Optional[_Union[EventType, str]] = ..., resource_type: _Optional[str] = ..., status_only: _Optional[bool] = ..., resource_id: _Optional[str] = ..., resource_url: _Optional[str] = ..., action_type: _Optional[str] = ..., additional_context: _Optional[_Mapping[str, str]] = ..., additional_payload: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...

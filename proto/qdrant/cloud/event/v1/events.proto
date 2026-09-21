@@ -5,6 +5,7 @@ package qdrant.cloud.event.v1;
 import "buf/validate/validate.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 
@@ -190,5 +191,5 @@ message Event {
   // For example, for a backup event, this could include the "cluster_id".
   map<string, string> additional_context = 20;
   // Additional source-specific request or response payload fields.
-  map<string, string> additional_payload = 21;
+  google.protobuf.Struct additional_payload = 21;
 }
