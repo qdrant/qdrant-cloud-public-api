@@ -191,5 +191,5 @@ message Event {
   // For example, for a backup event, this could include the "cluster_id".
   map<string, string> additional_context = 20;
   // Additional source-specific request or response payload fields.
-  map<string, google.protobuf.Value> additional_payload = 21;
+  google.protobuf.Struct additional_payload = 21;
 }

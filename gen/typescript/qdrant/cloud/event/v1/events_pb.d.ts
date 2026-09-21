@@ -3,8 +3,8 @@
 /* eslint-disable */
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import type { Message } from "@bufbuild/protobuf";
-import type { Duration, MethodOptions, Timestamp, Value } from "@bufbuild/protobuf/wkt";
+import type { JsonObject, Message } from "@bufbuild/protobuf";
+import type { Duration, MethodOptions, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Caller, CallerValid } from "../../common/v1/common_pb.js";
 
 /**
@@ -284,9 +284,9 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   /**
    * Additional source-specific request or response payload fields.
    *
-   * @generated from field: map<string, google.protobuf.Value> additional_payload = 21;
+   * @generated from field: google.protobuf.Struct additional_payload = 21;
    */
-  additionalPayload: { [key: string]: Value };
+  additionalPayload?: JsonObject | undefined;
 };
 
 /**
@@ -436,9 +436,9 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
   /**
    * Additional source-specific request or response payload fields.
    *
-   * @generated from field: map<string, google.protobuf.Value> additional_payload = 21;
+   * @generated from field: google.protobuf.Struct additional_payload = 21;
    */
-  additionalPayload: { [key: string]: Value };
+  additionalPayload?: JsonObject | undefined;
 };
 
 /**

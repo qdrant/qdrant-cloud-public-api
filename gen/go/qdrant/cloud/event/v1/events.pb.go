@@ -450,7 +450,7 @@ type Event struct {
 	// For example, for a backup event, this could include the "cluster_id".
 	AdditionalContext map[string]string `protobuf:"bytes,20,rep,name=additional_context,json=additionalContext,proto3" json:"additional_context,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Additional source-specific request or response payload fields.
-	AdditionalPayload map[string]*structpb.Value `protobuf:"bytes,21,rep,name=additional_payload,json=additionalPayload,proto3" json:"additional_payload,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	AdditionalPayload *structpb.Struct `protobuf:"bytes,21,opt,name=additional_payload,json=additionalPayload,proto3" json:"additional_payload,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -604,7 +604,7 @@ func (x *Event) GetAdditionalContext() map[string]string {
 	return nil
 }
 
-func (x *Event) GetAdditionalPayload() map[string]*structpb.Value {
+func (x *Event) GetAdditionalPayload() *structpb.Struct {
 	if x != nil {
 		return x.AdditionalPayload
 	}
@@ -664,8 +664,7 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\ferror_reason\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bH\x01R\verrorReason\x88\x01\x01B\x0e\n" +
 	"\f_status_codeB\x0f\n" +
-	"\r_error_reason\"\x8d\n" +
-	"\n" +
+	"\r_error_reason\"\x93\t\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -694,14 +693,11 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12-\n" +
 	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\n" +
 	"actionType\x88\x01\x01\x12b\n" +
-	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x12b\n" +
-	"\x12additional_payload\x18\x15 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalPayloadEntryR\x11additionalPayload\x1aD\n" +
+	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x12F\n" +
+	"\x12additional_payload\x18\x15 \x01(\v2\x17.google.protobuf.StructR\x11additionalPayload\x1aD\n" +
 	"\x16AdditionalContextEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\\\n" +
-	"\x16AdditionalPayloadEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\v\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\t_durationB\r\n" +
 	"\v_ip_addressB\t\n" +
 	"\a_resultB\r\n" +
@@ -742,7 +738,7 @@ func file_qdrant_cloud_event_v1_events_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_event_v1_events_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_cloud_event_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_qdrant_cloud_event_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_qdrant_cloud_event_v1_events_proto_goTypes = []any{
 	(EventType)(0),                     // 0: qdrant.cloud.event.v1.EventType
 	(ResultStatus)(0),                  // 1: qdrant.cloud.event.v1.ResultStatus
@@ -753,34 +749,32 @@ var file_qdrant_cloud_event_v1_events_proto_goTypes = []any{
 	nil,                                // 6: qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
 	nil,                                // 7: qdrant.cloud.event.v1.EventOptions.AdditionalPayloadFieldsEntry
 	nil,                                // 8: qdrant.cloud.event.v1.Event.AdditionalContextEntry
-	nil,                                // 9: qdrant.cloud.event.v1.Event.AdditionalPayloadEntry
-	(*timestamppb.Timestamp)(nil),      // 10: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),        // 11: google.protobuf.Duration
-	(*v1.Caller)(nil),                  // 12: qdrant.cloud.common.v1.Caller
-	(*structpb.Value)(nil),             // 13: google.protobuf.Value
-	(*descriptorpb.MethodOptions)(nil), // 14: google.protobuf.MethodOptions
+	(*timestamppb.Timestamp)(nil),      // 9: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),        // 10: google.protobuf.Duration
+	(*v1.Caller)(nil),                  // 11: qdrant.cloud.common.v1.Caller
+	(*structpb.Struct)(nil),            // 12: google.protobuf.Struct
+	(*descriptorpb.MethodOptions)(nil), // 13: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_event_v1_events_proto_depIdxs = []int32{
 	0,  // 0: qdrant.cloud.event.v1.EventOptions.event_type:type_name -> qdrant.cloud.event.v1.EventType
 	6,  // 1: qdrant.cloud.event.v1.EventOptions.additional_context_fields:type_name -> qdrant.cloud.event.v1.EventOptions.AdditionalContextFieldsEntry
 	7,  // 2: qdrant.cloud.event.v1.EventOptions.additional_payload_fields:type_name -> qdrant.cloud.event.v1.EventOptions.AdditionalPayloadFieldsEntry
 	1,  // 3: qdrant.cloud.event.v1.Result.status:type_name -> qdrant.cloud.event.v1.ResultStatus
-	10, // 4: qdrant.cloud.event.v1.Event.created_at:type_name -> google.protobuf.Timestamp
-	11, // 5: qdrant.cloud.event.v1.Event.duration:type_name -> google.protobuf.Duration
+	9,  // 4: qdrant.cloud.event.v1.Event.created_at:type_name -> google.protobuf.Timestamp
+	10, // 5: qdrant.cloud.event.v1.Event.duration:type_name -> google.protobuf.Duration
 	4,  // 6: qdrant.cloud.event.v1.Event.result:type_name -> qdrant.cloud.event.v1.Result
-	12, // 7: qdrant.cloud.event.v1.Event.caller:type_name -> qdrant.cloud.common.v1.Caller
+	11, // 7: qdrant.cloud.event.v1.Event.caller:type_name -> qdrant.cloud.common.v1.Caller
 	2,  // 8: qdrant.cloud.event.v1.Event.source:type_name -> qdrant.cloud.event.v1.EventSource
 	0,  // 9: qdrant.cloud.event.v1.Event.event_type:type_name -> qdrant.cloud.event.v1.EventType
 	8,  // 10: qdrant.cloud.event.v1.Event.additional_context:type_name -> qdrant.cloud.event.v1.Event.AdditionalContextEntry
-	9,  // 11: qdrant.cloud.event.v1.Event.additional_payload:type_name -> qdrant.cloud.event.v1.Event.AdditionalPayloadEntry
-	13, // 12: qdrant.cloud.event.v1.Event.AdditionalPayloadEntry.value:type_name -> google.protobuf.Value
-	14, // 13: qdrant.cloud.event.v1.event_options:extendee -> google.protobuf.MethodOptions
-	3,  // 14: qdrant.cloud.event.v1.event_options:type_name -> qdrant.cloud.event.v1.EventOptions
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	14, // [14:15] is the sub-list for extension type_name
-	13, // [13:14] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	12, // 11: qdrant.cloud.event.v1.Event.additional_payload:type_name -> google.protobuf.Struct
+	13, // 12: qdrant.cloud.event.v1.event_options:extendee -> google.protobuf.MethodOptions
+	3,  // 13: qdrant.cloud.event.v1.event_options:type_name -> qdrant.cloud.event.v1.EventOptions
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	13, // [13:14] is the sub-list for extension type_name
+	12, // [12:13] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_event_v1_events_proto_init() }
@@ -797,7 +791,7 @@ func file_qdrant_cloud_event_v1_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_event_v1_events_proto_rawDesc), len(file_qdrant_cloud_event_v1_events_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   7,
+			NumMessages:   6,
 			NumExtensions: 1,
 			NumServices:   0,
 		},
