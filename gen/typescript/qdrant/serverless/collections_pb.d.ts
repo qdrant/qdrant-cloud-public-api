@@ -587,6 +587,13 @@ export declare type CreateCollectionResponse = Message<"qdrant.serverless.Create
    * @generated from field: string result = 2;
    */
   result: string;
+
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 3;
+   */
+  time: number;
 };
 
 export declare type CreateCollectionResponseValid = CreateCollectionResponse;
@@ -638,6 +645,13 @@ export declare type DeleteCollectionResponse = Message<"qdrant.serverless.Delete
    * @generated from field: uint32 objects_deleted = 2;
    */
   objectsDeleted: number;
+
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 3;
+   */
+  time: number;
 };
 
 export declare type DeleteCollectionResponseValid = DeleteCollectionResponse;
@@ -697,6 +711,13 @@ export declare type GetCollectionResponse = Message<"qdrant.serverless.GetCollec
    * @generated from field: optional uint64 point_count = 3;
    */
   pointCount?: bigint | undefined;
+
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 4;
+   */
+  time: number;
 };
 
 export declare type GetCollectionResponseValid = GetCollectionResponse;
@@ -788,6 +809,13 @@ export declare type ListCollectionsResponse = Message<"qdrant.serverless.ListCol
    * @generated from field: optional string next_offset_token = 2;
    */
   nextOffsetToken?: string | undefined;
+
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 3;
+   */
+  time: number;
 };
 
 export declare type ListCollectionsResponseValid = ListCollectionsResponse;

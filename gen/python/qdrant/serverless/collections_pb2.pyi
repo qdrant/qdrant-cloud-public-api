@@ -209,12 +209,14 @@ class CreateCollectionRequest(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ...) -> None: ...
 
 class CreateCollectionResponse(_message.Message):
-    __slots__ = ("collection_name", "result")
+    __slots__ = ("collection_name", "result", "time")
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     RESULT_FIELD_NUMBER: _ClassVar[int]
+    TIME_FIELD_NUMBER: _ClassVar[int]
     collection_name: str
     result: str
-    def __init__(self, collection_name: _Optional[str] = ..., result: _Optional[str] = ...) -> None: ...
+    time: float
+    def __init__(self, collection_name: _Optional[str] = ..., result: _Optional[str] = ..., time: _Optional[float] = ...) -> None: ...
 
 class DeleteCollectionRequest(_message.Message):
     __slots__ = ("collection_name",)
@@ -223,12 +225,14 @@ class DeleteCollectionRequest(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ...) -> None: ...
 
 class DeleteCollectionResponse(_message.Message):
-    __slots__ = ("deleted", "objects_deleted")
+    __slots__ = ("deleted", "objects_deleted", "time")
     DELETED_FIELD_NUMBER: _ClassVar[int]
     OBJECTS_DELETED_FIELD_NUMBER: _ClassVar[int]
+    TIME_FIELD_NUMBER: _ClassVar[int]
     deleted: bool
     objects_deleted: int
-    def __init__(self, deleted: _Optional[bool] = ..., objects_deleted: _Optional[int] = ...) -> None: ...
+    time: float
+    def __init__(self, deleted: _Optional[bool] = ..., objects_deleted: _Optional[int] = ..., time: _Optional[float] = ...) -> None: ...
 
 class GetCollectionRequest(_message.Message):
     __slots__ = ("collection_name",)
@@ -237,14 +241,16 @@ class GetCollectionRequest(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ...) -> None: ...
 
 class GetCollectionResponse(_message.Message):
-    __slots__ = ("exists", "config", "point_count")
+    __slots__ = ("exists", "config", "point_count", "time")
     EXISTS_FIELD_NUMBER: _ClassVar[int]
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
+    TIME_FIELD_NUMBER: _ClassVar[int]
     exists: bool
     config: CollectionConfig
     point_count: int
-    def __init__(self, exists: _Optional[bool] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ...) -> None: ...
+    time: float
+    def __init__(self, exists: _Optional[bool] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., time: _Optional[float] = ...) -> None: ...
 
 class ListCollectionsRequest(_message.Message):
     __slots__ = ("limit", "offset_token")
@@ -263,9 +269,11 @@ class CollectionSummary(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ..., point_count: _Optional[int] = ...) -> None: ...
 
 class ListCollectionsResponse(_message.Message):
-    __slots__ = ("collections", "next_offset_token")
+    __slots__ = ("collections", "next_offset_token", "time")
     COLLECTIONS_FIELD_NUMBER: _ClassVar[int]
     NEXT_OFFSET_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    TIME_FIELD_NUMBER: _ClassVar[int]
     collections: _containers.RepeatedCompositeFieldContainer[CollectionSummary]
     next_offset_token: str
-    def __init__(self, collections: _Optional[_Iterable[_Union[CollectionSummary, _Mapping]]] = ..., next_offset_token: _Optional[str] = ...) -> None: ...
+    time: float
+    def __init__(self, collections: _Optional[_Iterable[_Union[CollectionSummary, _Mapping]]] = ..., next_offset_token: _Optional[str] = ..., time: _Optional[float] = ...) -> None: ...
