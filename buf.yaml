@@ -31,6 +31,10 @@ breaking:
   use:
     - FILE
     - QDRANT_CLOUD_PERMISSIONS_BREAKING
+  # qdrant/serverless is not released to tenants yet; allow wire-incompatible
+  # iteration on the collections contract until the first public cut.
+  ignore:
+    - proto/qdrant/serverless
 plugins:
   - plugin: buf-plugin-method-options
   - plugin: buf-plugin-required-fields

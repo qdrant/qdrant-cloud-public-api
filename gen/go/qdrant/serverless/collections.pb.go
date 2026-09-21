@@ -1423,10 +1423,8 @@ type DeleteCollectionResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether the collection existed and was deleted.
 	Deleted bool `protobuf:"varint,1,opt,name=deleted,proto3" json:"deleted,omitempty"`
-	// Number of storage objects removed.
-	ObjectsDeleted uint32 `protobuf:"varint,2,opt,name=objects_deleted,json=objectsDeleted,proto3" json:"objects_deleted,omitempty"`
 	// Time spent to process
-	Time          float64 `protobuf:"fixed64,3,opt,name=time,proto3" json:"time,omitempty"`
+	Time          float64 `protobuf:"fixed64,2,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1466,13 +1464,6 @@ func (x *DeleteCollectionResponse) GetDeleted() bool {
 		return x.Deleted
 	}
 	return false
-}
-
-func (x *DeleteCollectionResponse) GetObjectsDeleted() uint32 {
-	if x != nil {
-		return x.ObjectsDeleted
-	}
-	return 0
 }
 
 func (x *DeleteCollectionResponse) GetTime() float64 {
@@ -1873,11 +1864,10 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\x06result\x18\x02 \x01(\tR\x06result\x12\x12\n" +
 	"\x04time\x18\x03 \x01(\x01R\x04time\"B\n" +
 	"\x17DeleteCollectionRequest\x12'\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"q\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"H\n" +
 	"\x18DeleteCollectionResponse\x12\x18\n" +
-	"\adeleted\x18\x01 \x01(\bR\adeleted\x12'\n" +
-	"\x0fobjects_deleted\x18\x02 \x01(\rR\x0eobjectsDeleted\x12\x12\n" +
-	"\x04time\x18\x03 \x01(\x01R\x04time\"?\n" +
+	"\adeleted\x18\x01 \x01(\bR\adeleted\x12\x12\n" +
+	"\x04time\x18\x02 \x01(\x01R\x04time\"?\n" +
 	"\x14GetCollectionRequest\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xc6\x01\n" +
 	"\x15GetCollectionResponse\x12\x16\n" +
