@@ -706,6 +706,43 @@ export declare type GetCollectionResponse = Message<"qdrant.serverless.GetCollec
   pointCount?: bigint | undefined;
 
   /**
+   * Operating condition of the collection.
+   *
+   * @generated from field: qdrant.serverless.CollectionStatus status = 5;
+   */
+  status: CollectionStatus;
+
+  /**
+   * Stored bytes of the collection's data as of the last applied write or
+   * optimization (eventually consistent), which is also what the space's
+   * storage quota counts. Writes still in flight are excluded. Absent until
+   * the collection has been measured.
+   *
+   * @generated from field: optional uint64 size_bytes = 6;
+   */
+  sizeBytes?: bigint | undefined;
+
+  /**
+   * Approximate number of vectors sitting in indexed segments. Vectors beyond
+   * this count are searchable, but are scanned exhaustively until an
+   * optimization indexes them. Absent until an optimization has reported one.
+   *
+   * @generated from field: optional uint64 indexed_vectors_count = 7;
+   */
+  indexedVectorsCount?: bigint | undefined;
+
+  /**
+   * Whether accepted writes are still waiting to be applied. A serverless
+   * space applies writes asynchronously, so an acknowledged write is not
+   * necessarily visible to a search yet; the qdrant server API has no
+   * equivalent, because there a write is applied before it is acknowledged.
+   * Absent when it could not be determined.
+   *
+   * @generated from field: optional bool pending_writes = 8;
+   */
+  pendingWrites?: boolean | undefined;
+
+  /**
    * Time spent to process
    *
    * @generated from field: double time = 4;
@@ -772,6 +809,13 @@ export declare type CollectionSummary = Message<"qdrant.serverless.CollectionSum
    * @generated from field: optional uint64 point_count = 2;
    */
   pointCount?: bigint | undefined;
+
+  /**
+   * Stored bytes of the collection's data, as in GetCollectionResponse.
+   *
+   * @generated from field: optional uint64 size_bytes = 3;
+   */
+  sizeBytes?: bigint | undefined;
 };
 
 export declare type CollectionSummaryValid = CollectionSummary;
@@ -954,6 +998,58 @@ export enum Tokenizer {
  * Describes the enum qdrant.serverless.Tokenizer.
  */
 export declare const TokenizerSchema: GenEnum<Tokenizer>;
+
+/**
+ * Operating condition of a collection, mirroring the qdrant server's
+ * collection status so a client can treat both the same way. A serverless
+ * space only produces GREEN and YELLOW: GREY means an optimizer that has not
+ * run since a restart, and RED is read from optimizer errors the server keeps
+ * in memory — neither has an equivalent here, where optimization is a
+ * separate, always-running service.
+ *
+ * @generated from enum qdrant.serverless.CollectionStatus
+ */
+export enum CollectionStatus {
+  /**
+   * The condition could not be determined.
+   *
+   * @generated from enum value: COLLECTION_STATUS_UNSPECIFIED = 0;
+   */
+  COLLECTION_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * Every segment is ready.
+   *
+   * @generated from enum value: GREEN = 1;
+   */
+  GREEN = 1,
+
+  /**
+   * An optimization is running. The collection stays searchable throughout.
+   *
+   * @generated from enum value: YELLOW = 2;
+   */
+  YELLOW = 2,
+
+  /**
+   * Something went wrong. Never returned by a serverless space.
+   *
+   * @generated from enum value: RED = 3;
+   */
+  RED = 3,
+
+  /**
+   * An optimization is pending. Never returned by a serverless space.
+   *
+   * @generated from enum value: GREY = 4;
+   */
+  GREY = 4,
+}
+
+/**
+ * Describes the enum qdrant.serverless.CollectionStatus.
+ */
+export declare const CollectionStatusSchema: GenEnum<CollectionStatus>;
 
 /**
  * CollectionsService manages the collections of a qdrant serverless space.

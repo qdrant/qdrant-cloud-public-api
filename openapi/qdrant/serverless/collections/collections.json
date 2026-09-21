@@ -919,6 +919,16 @@
           }
         ]
       },
+      "CollectionStatus": {
+        "description": "Operating condition of the collection, mirroring the qdrant server's collection status so a client can treat both the same way.\n\n- `green`: every segment is ready.\n- `yellow`: an optimization is running. The collection stays searchable throughout.\n- `red`: something went wrong. Never returned by a serverless space.\n- `grey`: an optimization is pending. Never returned by a serverless space.\n\n`red` and `grey` are part of the vocabulary only so the values match the qdrant server: `grey` means an optimizer that has not run since a restart, and `red` is read from optimizer errors the server keeps in memory — neither has an equivalent in a serverless space, where optimization is a separate, always-running service.",
+        "type": "string",
+        "enum": [
+          "green",
+          "yellow",
+          "red",
+          "grey"
+        ]
+      },
       "CollectionConfig": {
         "description": "The tenant-facing configuration of a collection. Unlike the Qdrant server API it is deliberately small: the serverless manager turns it into concrete Qdrant settings (HNSW, quantization, storage placement, ...), which are never exposed.\n\nAt least one dense or sparse vector is required.",
         "type": "object",
@@ -1016,6 +1026,28 @@
             "format": "uint64",
             "minimum": 0,
             "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/CollectionStatus"
+          },
+          "size_bytes": {
+            "description": "Stored bytes of the collection's data as of the last applied write or optimization (eventually consistent), which is also what the space's storage quota counts. Writes still in flight are excluded. `null` until the collection has been measured.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "indexed_vectors_count": {
+            "description": "Approximate number of vectors sitting in indexed segments. Vectors beyond this count are searchable, but are scanned exhaustively until an optimization indexes them. `null` until an optimization has reported a count.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "pending_writes": {
+            "description": "Whether accepted writes are still waiting to be applied. A serverless space applies writes asynchronously, so an acknowledged write is not necessarily visible to a search yet; the qdrant server API has no equivalent, because there a write is applied before it is acknowledged. `null` when it could not be determined.",
+            "type": "boolean",
+            "nullable": true
           }
         },
         "example": {
@@ -1045,7 +1077,11 @@
               }
             }
           },
-          "points_count": 12873
+          "points_count": 12873,
+          "status": "green",
+          "size_bytes": 481203712,
+          "indexed_vectors_count": 12873,
+          "pending_writes": false
         }
       },
       "CollectionSummary": {
@@ -1061,6 +1097,13 @@
           },
           "points_count": {
             "description": "Number of available points as of the last applied write (eventually consistent). `null` until the first statistics have been collected for the collection.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "size_bytes": {
+            "description": "Stored bytes of the collection's data as of the last applied write or optimization (eventually consistent), which is also what the space's storage quota counts. Writes still in flight are excluded. `null` until the collection has been measured.",
             "type": "integer",
             "format": "uint64",
             "minimum": 0,
