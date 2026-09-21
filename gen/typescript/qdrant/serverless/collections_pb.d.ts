@@ -640,13 +640,6 @@ export declare type DeleteCollectionResponse = Message<"qdrant.serverless.Delete
   deleted: boolean;
 
   /**
-   * Number of storage objects removed.
-   *
-   * @generated from field: uint32 objects_deleted = 2;
-   */
-  objectsDeleted: number;
-
-  /**
    * Time spent to process
    *
    * @generated from field: double time = 3;

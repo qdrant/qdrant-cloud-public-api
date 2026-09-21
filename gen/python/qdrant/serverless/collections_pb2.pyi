@@ -225,14 +225,12 @@ class DeleteCollectionRequest(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ...) -> None: ...
 
 class DeleteCollectionResponse(_message.Message):
-    __slots__ = ("deleted", "objects_deleted", "time")
+    __slots__ = ("deleted", "time")
     DELETED_FIELD_NUMBER: _ClassVar[int]
-    OBJECTS_DELETED_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
     deleted: bool
-    objects_deleted: int
     time: float
-    def __init__(self, deleted: _Optional[bool] = ..., objects_deleted: _Optional[int] = ..., time: _Optional[float] = ...) -> None: ...
+    def __init__(self, deleted: _Optional[bool] = ..., time: _Optional[float] = ...) -> None: ...
 
 class GetCollectionRequest(_message.Message):
     __slots__ = ("collection_name",)
