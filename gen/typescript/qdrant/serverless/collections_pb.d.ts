@@ -642,7 +642,7 @@ export declare type DeleteCollectionResponse = Message<"qdrant.serverless.Delete
   /**
    * Time spent to process
    *
-   * @generated from field: double time = 3;
+   * @generated from field: double time = 2;
    */
   time: number;
 };

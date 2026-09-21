@@ -1424,7 +1424,7 @@ type DeleteCollectionResponse struct {
 	// Whether the collection existed and was deleted.
 	Deleted bool `protobuf:"varint,1,opt,name=deleted,proto3" json:"deleted,omitempty"`
 	// Time spent to process
-	Time          float64 `protobuf:"fixed64,3,opt,name=time,proto3" json:"time,omitempty"`
+	Time          float64 `protobuf:"fixed64,2,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1864,10 +1864,10 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\x06result\x18\x02 \x01(\tR\x06result\x12\x12\n" +
 	"\x04time\x18\x03 \x01(\x01R\x04time\"B\n" +
 	"\x17DeleteCollectionRequest\x12'\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"_\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"H\n" +
 	"\x18DeleteCollectionResponse\x12\x18\n" +
 	"\adeleted\x18\x01 \x01(\bR\adeleted\x12\x12\n" +
-	"\x04time\x18\x03 \x01(\x01R\x04timeJ\x04\b\x02\x10\x03R\x0fobjects_deleted\"?\n" +
+	"\x04time\x18\x02 \x01(\x01R\x04time\"?\n" +
 	"\x14GetCollectionRequest\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xc6\x01\n" +
 	"\x15GetCollectionResponse\x12\x16\n" +
