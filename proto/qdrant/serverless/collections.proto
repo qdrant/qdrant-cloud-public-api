@@ -303,6 +303,21 @@ message DeleteCollectionResponse {
   double time = 2;
 }
 
+// Collection status as in the qdrant server API. A serverless space returns
+// only GREEN and YELLOW.
+enum CollectionStatus {
+  // Could not be determined.
+  COLLECTION_STATUS_UNSPECIFIED = 0;
+  // All segments are optimized.
+  GREEN = 1;
+  // Optimization is pending or running; the collection stays searchable.
+  YELLOW = 2;
+  // Not returned by a serverless space.
+  RED = 3;
+  // Not returned by a serverless space.
+  GREY = 4;
+}
+
 // Names the collection to fetch.
 message GetCollectionRequest {
   // Tenant-facing name of the collection.
@@ -318,6 +333,17 @@ message GetCollectionResponse {
   // Available points as of the last applied write (eventually consistent);
   // absent until the updater has written stats for the collection.
   optional uint64 point_count = 3;
+  // Optimization status of the collection.
+  CollectionStatus status = 5;
+  // Estimated stored bytes, which the collection size limit applies to: indexed
+  // segments as of the last optimization plus a fixed estimate per unindexed one.
+  optional uint64 size_bytes = 6;
+  // Approximate number of vectors in indexed segments; the rest are searched
+  // exhaustively until an optimization indexes them.
+  optional uint64 indexed_vectors_count = 7;
+  // Whether acknowledged writes are still waiting to be applied, and so not yet
+  // visible to search.
+  optional bool pending_writes = 8;
   // Time spent to process
   double time = 4;
 }
@@ -342,6 +368,8 @@ message CollectionSummary {
   // Available points as of the last applied write (eventually consistent);
   // absent until the updater has written stats for the collection.
   optional uint64 point_count = 2;
+  // Estimated stored bytes, as in GetCollectionResponse.
+  optional uint64 size_bytes = 3;
 }
 
 // The caller's collections.
