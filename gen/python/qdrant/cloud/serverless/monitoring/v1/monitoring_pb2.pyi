@@ -230,20 +230,20 @@ class SpaceAlert(_message.Message):
     def __init__(self, id: _Optional[str] = ..., type: _Optional[_Union[SpaceAlertType, str]] = ..., severity: _Optional[_Union[SpaceAlertSeverity, str]] = ..., title: _Optional[str] = ..., description: _Optional[str] = ..., last_firing_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., state: _Optional[_Union[SpaceAlertState, str]] = ..., collection_name: _Optional[str] = ...) -> None: ...
 
 class SpaceCollectionMetrics(_message.Message):
-    __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "vector_count", "used_storage_bytes")
+    __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "point_count", "used_storage_bytes")
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     SEARCH_REQUESTS_FIELD_NUMBER: _ClassVar[int]
     WRITE_REQUESTS_FIELD_NUMBER: _ClassVar[int]
     SEARCH_LATENCY_FIELD_NUMBER: _ClassVar[int]
-    VECTOR_COUNT_FIELD_NUMBER: _ClassVar[int]
+    POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
     USED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
     collection_name: str
     search_requests: SpaceMetricOverview
     write_requests: SpaceMetricOverview
     search_latency: SpaceMetricOverview
-    vector_count: int
+    point_count: int
     used_storage_bytes: int
-    def __init__(self, collection_name: _Optional[str] = ..., search_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., write_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., search_latency: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., vector_count: _Optional[int] = ..., used_storage_bytes: _Optional[int] = ...) -> None: ...
+    def __init__(self, collection_name: _Optional[str] = ..., search_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., write_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., search_latency: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., point_count: _Optional[int] = ..., used_storage_bytes: _Optional[int] = ...) -> None: ...
 
 class SpaceMetricOverview(_message.Message):
     __slots__ = ("avg",)
@@ -260,20 +260,20 @@ class IntervalAverage(_message.Message):
     def __init__(self, interval: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., value: _Optional[float] = ...) -> None: ...
 
 class SpaceCollectionUsageMetrics(_message.Message):
-    __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "vector_count", "used_storage_bytes")
+    __slots__ = ("collection_name", "search_requests", "write_requests", "search_latency", "point_count", "used_storage_bytes")
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     SEARCH_REQUESTS_FIELD_NUMBER: _ClassVar[int]
     WRITE_REQUESTS_FIELD_NUMBER: _ClassVar[int]
     SEARCH_LATENCY_FIELD_NUMBER: _ClassVar[int]
-    VECTOR_COUNT_FIELD_NUMBER: _ClassVar[int]
+    POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
     USED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
     collection_name: str
     search_requests: _containers.RepeatedCompositeFieldContainer[Metric]
     write_requests: _containers.RepeatedCompositeFieldContainer[Metric]
     search_latency: _containers.RepeatedCompositeFieldContainer[Metric]
-    vector_count: _containers.RepeatedCompositeFieldContainer[Metric]
+    point_count: _containers.RepeatedCompositeFieldContainer[Metric]
     used_storage_bytes: _containers.RepeatedCompositeFieldContainer[Metric]
-    def __init__(self, collection_name: _Optional[str] = ..., search_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., write_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., search_latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., vector_count: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+    def __init__(self, collection_name: _Optional[str] = ..., search_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., write_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., search_latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., point_count: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class Metric(_message.Message):
     __slots__ = ("timestamp", "value")

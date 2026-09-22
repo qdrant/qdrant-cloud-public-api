@@ -825,11 +825,11 @@ export declare type SpaceCollectionMetrics = Message<"qdrant.cloud.serverless.mo
   searchLatency?: SpaceMetricOverview | undefined;
 
   /**
-   * Current number of vectors stored in the collection.
+   * Current number of points stored in the collection.
    *
-   * @generated from field: uint64 vector_count = 5;
+   * @generated from field: uint64 point_count = 5;
    */
-  vectorCount: bigint;
+  pointCount: bigint;
 
   /**
    * Current used (active) storage size of the collection, in bytes.
@@ -876,11 +876,11 @@ export declare type SpaceCollectionMetricsValid = Message<"qdrant.cloud.serverle
   searchLatency: SpaceMetricOverviewValid;
 
   /**
-   * Current number of vectors stored in the collection.
+   * Current number of points stored in the collection.
    *
-   * @generated from field: uint64 vector_count = 5;
+   * @generated from field: uint64 point_count = 5;
    */
-  vectorCount: bigint;
+  pointCount: bigint;
 
   /**
    * Current used (active) storage size of the collection, in bytes.
@@ -1015,11 +1015,11 @@ export declare type SpaceCollectionUsageMetrics = Message<"qdrant.cloud.serverle
   searchLatency: Metric[];
 
   /**
-   * Timeseries of vector counts for the collection.
+   * Timeseries of point counts for the collection.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric vector_count = 5;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric point_count = 5;
    */
-  vectorCount: Metric[];
+  pointCount: Metric[];
 
   /**
    * Timeseries of used (active) storage size for the collection, in bytes.
@@ -1064,11 +1064,11 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
   searchLatency: MetricValid[];
 
   /**
-   * Timeseries of vector counts for the collection.
+   * Timeseries of point counts for the collection.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric vector_count = 5;
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric point_count = 5;
    */
-  vectorCount: MetricValid[];
+  pointCount: MetricValid[];
 
   /**
    * Timeseries of used (active) storage size for the collection, in bytes.

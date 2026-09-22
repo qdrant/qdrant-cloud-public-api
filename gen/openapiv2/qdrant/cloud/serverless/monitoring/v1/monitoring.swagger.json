@@ -661,10 +661,10 @@
           "$ref": "#/definitions/v1SpaceMetricOverview",
           "description": "Overview of search latency for the collection."
         },
-        "vectorCount": {
+        "pointCount": {
           "type": "string",
           "format": "uint64",
-          "description": "Current number of vectors stored in the collection."
+          "description": "Current number of points stored in the collection."
         },
         "usedStorageBytes": {
           "type": "string",
@@ -705,13 +705,13 @@
           },
           "description": "Timeseries of search latency for the collection."
         },
-        "vectorCount": {
+        "pointCount": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of vector counts for the collection."
+          "description": "Timeseries of point counts for the collection."
         },
         "usedStorageBytes": {
           "type": "array",
