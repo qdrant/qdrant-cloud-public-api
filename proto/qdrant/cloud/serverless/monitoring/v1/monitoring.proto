@@ -14,7 +14,7 @@ import "qdrant/cloud/common/v1/common.proto";
 service MonitoringService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
-    major: 1
+    major: 2
     minor: 0
     patch: 0
   };
@@ -391,8 +391,8 @@ message SpaceCollectionMetrics {
   SpaceMetricOverview write_requests = 3 [(buf.validate.field).required = true];
   // Overview of search latency for the collection.
   SpaceMetricOverview search_latency = 4 [(buf.validate.field).required = true];
-  // Current number of vectors stored in the collection.
-  uint64 vector_count = 5 [(buf.validate.field).uint64.gte = 0];
+  // Current number of points stored in the collection.
+  uint64 point_count = 5 [(buf.validate.field).uint64.gte = 0];
   // Current used (active) storage size of the collection, in bytes.
   // This is actual usage. Platform or customer storage ceilings are exposed
   // via space/collection quotas and are not part of this response.
@@ -427,8 +427,8 @@ message SpaceCollectionUsageMetrics {
   repeated Metric write_requests = 3;
   // Timeseries of search latency for the collection.
   repeated Metric search_latency = 4;
-  // Timeseries of vector counts for the collection.
-  repeated Metric vector_count = 5;
+  // Timeseries of point counts for the collection.
+  repeated Metric point_count = 5;
   // Timeseries of used (active) storage size for the collection, in bytes.
   repeated Metric used_storage_bytes = 6;
 }
