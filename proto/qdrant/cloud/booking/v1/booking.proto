@@ -482,11 +482,41 @@ message GlobalQuoteConfiguration {
   optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 6;
 }
 
+// GlobalPriceBreakdown represents the list price for one component of a global quote.
+// Amounts are in the same currency as the enclosing GlobalQuote.
+message GlobalPriceBreakdown {
+  // Hourly total for this component, in millicents per hour across all cluster nodes.
+  int64 price_per_hour = 1 [(buf.validate.field).int64.gte = 0];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// GlobalQuote is the list price for a single cluster configuration.
+// It carries no discount fields: GetGlobalQuote is unauthenticated and always quotes
+// standard-tier list price, so a discount could only ever be reported as zero.
+message GlobalQuote {
+  // The currency of the prices.
+  // Specifies the currency in which the prices are denominated.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 1 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+  // The list price per hour in millicents.
+  int64 price_per_hour = 2 [(buf.validate.field).int64.gte = 0];
+  // Hourly price breakdown for the selected package (base cluster resources).
+  // Populated for all paid clusters; omitted for free-tier quotes.
+  optional GlobalPriceBreakdown package = 3;
+  // Hourly price breakdown for additional disk beyond the package default.
+  // Populated only when GlobalQuoteConfiguration.additional_disk_gib is greater than zero.
+  optional GlobalPriceBreakdown extra_disk = 4;
+  // Hourly price breakdown for the selected storage performance tier (disk speed).
+  // Populated only when the quote uses a tier other than cost-optimised
+  // (`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.).
+  optional GlobalPriceBreakdown disk_speed = 5;
+}
+
 // GetGlobalQuoteResponse is the response from the GetGlobalQuote function
 message GetGlobalQuoteResponse {
   // The quotes for each requested configuration.
   // Index-aligned with `GetGlobalQuoteRequest.configurations`.
-  repeated GetQuoteResponse quotes = 1;
+  repeated GlobalQuote quotes = 1;
 }
 
 // GetBackupQuoteRequest is the request for the GetBackupQuote function

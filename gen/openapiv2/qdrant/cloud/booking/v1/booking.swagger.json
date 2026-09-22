@@ -631,7 +631,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1GetQuoteResponse"
+            "$ref": "#/definitions/v1GlobalQuote"
           },
           "description": "The quotes for each requested configuration.\nIndex-aligned with `GetGlobalQuoteRequest.configurations`."
         }
@@ -684,6 +684,44 @@
         }
       },
       "title": "GetQuoteResponse is the response from the GetQuote function"
+    },
+    "v1GlobalPriceBreakdown": {
+      "type": "object",
+      "properties": {
+        "pricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "Hourly total for this component, in millicents per hour across all cluster nodes."
+        }
+      },
+      "description": "GlobalPriceBreakdown represents the list price for one component of a global quote.\nAmounts are in the same currency as the enclosing GlobalQuote."
+    },
+    "v1GlobalQuote": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "pricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The list price per hour in millicents."
+        },
+        "package": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for the selected package (base cluster resources).\nPopulated for all paid clusters; omitted for free-tier quotes."
+        },
+        "extraDisk": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for additional disk beyond the package default.\nPopulated only when GlobalQuoteConfiguration.additional_disk_gib is greater than zero."
+        },
+        "diskSpeed": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for the selected storage performance tier (disk speed).\nPopulated only when the quote uses a tier other than cost-optimised\n(`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.)."
+        }
+      },
+      "description": "GlobalQuote is the list price for a single cluster configuration.\nIt carries no discount fields: GetGlobalQuote is unauthenticated and always quotes\nstandard-tier list price, so a discount could only ever be reported as zero."
     },
     "v1GlobalQuoteConfiguration": {
       "type": "object",

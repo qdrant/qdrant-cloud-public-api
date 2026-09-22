@@ -246,11 +246,31 @@ class GlobalQuoteConfiguration(_message.Message):
     storage_tier_type: _common_pb2.StorageTierType
     def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
 
+class GlobalPriceBreakdown(_message.Message):
+    __slots__ = ("price_per_hour",)
+    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    price_per_hour: int
+    def __init__(self, price_per_hour: _Optional[int] = ...) -> None: ...
+
+class GlobalQuote(_message.Message):
+    __slots__ = ("currency", "price_per_hour", "package", "extra_disk", "disk_speed")
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_FIELD_NUMBER: _ClassVar[int]
+    EXTRA_DISK_FIELD_NUMBER: _ClassVar[int]
+    DISK_SPEED_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    price_per_hour: int
+    package: GlobalPriceBreakdown
+    extra_disk: GlobalPriceBreakdown
+    disk_speed: GlobalPriceBreakdown
+    def __init__(self, currency: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., package: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ...) -> None: ...
+
 class GetGlobalQuoteResponse(_message.Message):
     __slots__ = ("quotes",)
     QUOTES_FIELD_NUMBER: _ClassVar[int]
-    quotes: _containers.RepeatedCompositeFieldContainer[GetQuoteResponse]
-    def __init__(self, quotes: _Optional[_Iterable[_Union[GetQuoteResponse, _Mapping]]] = ...) -> None: ...
+    quotes: _containers.RepeatedCompositeFieldContainer[GlobalQuote]
+    def __init__(self, quotes: _Optional[_Iterable[_Union[GlobalQuote, _Mapping]]] = ...) -> None: ...
 
 class GetBackupQuoteRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "backup_size_gib")
