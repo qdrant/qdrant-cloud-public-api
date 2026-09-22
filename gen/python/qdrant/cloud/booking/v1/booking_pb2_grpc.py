@@ -30,6 +30,11 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
                 _registered_method=True)
+        self.GetGlobalQuote = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuote',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.FromString,
+                _registered_method=True)
         self.GetQuote = channel.unary_unary(
                 '/qdrant.cloud.booking.v1.BookingService/GetQuote',
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetQuoteRequest.SerializeToString,
@@ -77,6 +82,16 @@ class BookingServiceServicer(object):
     def ListGlobalPackages(self, request, context):
         """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         Lists all public packages.
+        Authentication not required
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetGlobalQuote(self, request, context):
+        """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+        Gets price quotes for a batch of cluster configurations.
+        Always prices at standard tier with no discount, since there is no account to discount against.
         Authentication not required
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -140,6 +155,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.ListGlobalPackages,
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.SerializeToString,
+            ),
+            'GetGlobalQuote': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGlobalQuote,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.SerializeToString,
             ),
             'GetQuote': grpc.unary_unary_rpc_method_handler(
                     servicer.GetQuote,
@@ -244,6 +264,33 @@ class BookingService(object):
             '/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages',
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
             qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetGlobalQuote(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuote',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -224,6 +224,34 @@ class GetQuoteResponse(_message.Message):
     disk_speed: PriceBreakdown
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ..., package: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[PriceBreakdown, _Mapping]] = ...) -> None: ...
 
+class GetGlobalQuoteRequest(_message.Message):
+    __slots__ = ("configurations",)
+    CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
+    configurations: _containers.RepeatedCompositeFieldContainer[GlobalQuoteConfiguration]
+    def __init__(self, configurations: _Optional[_Iterable[_Union[GlobalQuoteConfiguration, _Mapping]]] = ...) -> None: ...
+
+class GlobalQuoteConfiguration(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "number_of_nodes", "package_id", "additional_disk_gib", "storage_tier_type")
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_DISK_GIB_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    number_of_nodes: int
+    package_id: str
+    additional_disk_gib: int
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
+
+class GetGlobalQuoteResponse(_message.Message):
+    __slots__ = ("quotes",)
+    QUOTES_FIELD_NUMBER: _ClassVar[int]
+    quotes: _containers.RepeatedCompositeFieldContainer[GetQuoteResponse]
+    def __init__(self, quotes: _Optional[_Iterable[_Union[GetQuoteResponse, _Mapping]]] = ...) -> None: ...
+
 class GetBackupQuoteRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "backup_size_gib")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]

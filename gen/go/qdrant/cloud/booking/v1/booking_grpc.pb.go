@@ -22,6 +22,7 @@ const (
 	BookingService_ListPackages_FullMethodName         = "/qdrant.cloud.booking.v1.BookingService/ListPackages"
 	BookingService_GetPackage_FullMethodName           = "/qdrant.cloud.booking.v1.BookingService/GetPackage"
 	BookingService_ListGlobalPackages_FullMethodName   = "/qdrant.cloud.booking.v1.BookingService/ListGlobalPackages"
+	BookingService_GetGlobalQuote_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/GetGlobalQuote"
 	BookingService_GetQuote_FullMethodName             = "/qdrant.cloud.booking.v1.BookingService/GetQuote"
 	BookingService_GetBackupQuote_FullMethodName       = "/qdrant.cloud.booking.v1.BookingService/GetBackupQuote"
 	BookingService_ListInferenceModels_FullMethodName  = "/qdrant.cloud.booking.v1.BookingService/ListInferenceModels"
@@ -45,6 +46,10 @@ type BookingServiceClient interface {
 	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(ctx context.Context, in *ListGlobalPackagesRequest, opts ...grpc.CallOption) (*ListGlobalPackagesResponse, error)
+	// Gets price quotes for a batch of cluster configurations.
+	// Always prices at standard tier with no discount, since there is no account to discount against.
+	// Authentication not required
+	GetGlobalQuote(ctx context.Context, in *GetGlobalQuoteRequest, opts ...grpc.CallOption) (*GetGlobalQuoteResponse, error)
 	// Gets a price quote for a cluster configuration.
 	// Calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
@@ -99,6 +104,16 @@ func (c *bookingServiceClient) ListGlobalPackages(ctx context.Context, in *ListG
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListGlobalPackagesResponse)
 	err := c.cc.Invoke(ctx, BookingService_ListGlobalPackages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookingServiceClient) GetGlobalQuote(ctx context.Context, in *GetGlobalQuoteRequest, opts ...grpc.CallOption) (*GetGlobalQuoteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGlobalQuoteResponse)
+	err := c.cc.Invoke(ctx, BookingService_GetGlobalQuote_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +177,10 @@ type BookingServiceServer interface {
 	// Lists all public packages.
 	// Authentication not required
 	ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error)
+	// Gets price quotes for a batch of cluster configurations.
+	// Always prices at standard tier with no discount, since there is no account to discount against.
+	// Authentication not required
+	GetGlobalQuote(context.Context, *GetGlobalQuoteRequest) (*GetGlobalQuoteResponse, error)
 	// Gets a price quote for a cluster configuration.
 	// Calculates pricing information including hourly costs,
 	// and any applicable discounts for the specified cluster configuration.
@@ -200,6 +219,9 @@ func (UnimplementedBookingServiceServer) GetPackage(context.Context, *GetPackage
 }
 func (UnimplementedBookingServiceServer) ListGlobalPackages(context.Context, *ListGlobalPackagesRequest) (*ListGlobalPackagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGlobalPackages not implemented")
+}
+func (UnimplementedBookingServiceServer) GetGlobalQuote(context.Context, *GetGlobalQuoteRequest) (*GetGlobalQuoteResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGlobalQuote not implemented")
 }
 func (UnimplementedBookingServiceServer) GetQuote(context.Context, *GetQuoteRequest) (*GetQuoteResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetQuote not implemented")
@@ -284,6 +306,24 @@ func _BookingService_ListGlobalPackages_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BookingServiceServer).ListGlobalPackages(ctx, req.(*ListGlobalPackagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookingService_GetGlobalQuote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGlobalQuoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookingServiceServer).GetGlobalQuote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookingService_GetGlobalQuote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookingServiceServer).GetGlobalQuote(ctx, req.(*GetGlobalQuoteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -378,6 +418,10 @@ var BookingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGlobalPackages",
 			Handler:    _BookingService_ListGlobalPackages_Handler,
+		},
+		{
+			MethodName: "GetGlobalQuote",
+			Handler:    _BookingService_GetGlobalQuote_Handler,
 		},
 		{
 			MethodName: "GetQuote",
