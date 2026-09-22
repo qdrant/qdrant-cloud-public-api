@@ -64,6 +64,19 @@ service BookingService {
       field_expression: "cloud_provider_region_id"
     };
   }
+  // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
+  // Gets price quotes for a batch of cluster configurations.
+  // Always prices at standard tier with no discount, since there is no account to discount against.
+  // Authentication not required
+  rpc GetGlobalQuote(GetGlobalQuoteRequest) returns (GetGlobalQuoteResponse) {
+    // authentication not required
+    option (qdrant.cloud.common.v1.requires_authentication) = false;
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/booking/v1/quote"
+      body: "*"
+    };
+  }
   // Gets a price quote for a cluster configuration.
   // Calculates pricing information including hourly costs,
   // and any applicable discounts for the specified cluster configuration.
@@ -425,6 +438,55 @@ message GetQuoteResponse {
   // Populated only when the quote uses a tier other than cost-optimised
   // (`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.).
   optional PriceBreakdown disk_speed = 7;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetGlobalQuoteRequest is the request for the GetGlobalQuote function
+message GetGlobalQuoteRequest {
+  // The cluster configurations to price.
+  // Always priced at standard tier with no discount.
+  // This is a required field, capped at 50 configurations per request.
+  repeated GlobalQuoteConfiguration configurations = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 50
+  }];
+}
+
+// GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuote request.
+message GlobalQuoteConfiguration {
+  // The cloud provider where the cluster will be hosted.
+  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
+  // The cloud region where the cluster will be hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+  // This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+  optional string cloud_provider_region_id = 2 [(buf.validate.field).string = {min_len: 1}];
+  option (buf.validate.message).cel = {
+    id: "global_quote_configuration.cloud_provider_region_id_present"
+    message: "cloud_provider_region_id is required when cloud_provider_id is not 'hybrid'"
+    expression: "this.cloud_provider_id == 'hybrid' || has(this.cloud_provider_region_id)"
+  };
+  // The number of nodes in a cluster.
+  // This should be a number >= 1.
+  // This is a required field.
+  uint32 number_of_nodes = 3 [(buf.validate.field).uint32 = {gte: 1}];
+  // The package identifier used to configure the resources of the cluster.
+  // Use `qdrant.cloud.booking.v1.BookingService.ListGlobalPackages` to select one.
+  // This is a required field.
+  string package_id = 4 [(buf.validate.field).string = {uuid: true}];
+  // The additional disk storage in GiB on top of the selected package.
+  // This is an optional field, if not specified additional disk is 0.
+  uint32 additional_disk_gib = 5 [(buf.validate.field).uint32.gte = 0];
+  // The storage tier for the cluster.
+  // This is an optional field, if not specified it defaults to Cost Optimised.
+  optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 6;
+}
+
+// GetGlobalQuoteResponse is the response from the GetGlobalQuote function
+message GetGlobalQuoteResponse {
+  // The quotes for each requested configuration.
+  // Index-aligned with `GetGlobalQuoteRequest.configurations`.
+  repeated GetQuoteResponse quotes = 1;
 }
 
 // GetBackupQuoteRequest is the request for the GetBackupQuote function
