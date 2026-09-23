@@ -128,7 +128,7 @@ message GetSpaceSummaryMetricsResponse {
   repeated SpaceCollectionMetrics items = 1;
   // Space-level effective quotas and current collection count.
   // Always populated for the requested space (including on paginated pages).
-  // Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+  // Values come from product Prometheus gauges (same ceilings the data plane enforces).
   SpaceQuotaSnapshot quota = 2 [(buf.validate.field).required = true];
   // The total number of items available (useful in relation with pagination).
   // This field is fill out when pagination is used (aka in the request `page_size` was provided).

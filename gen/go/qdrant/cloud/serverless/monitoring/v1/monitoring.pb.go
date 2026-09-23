@@ -459,7 +459,7 @@ type GetSpaceSummaryMetricsResponse struct {
 	Items []*SpaceCollectionMetrics `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Space-level effective quotas and current collection count.
 	// Always populated for the requested space (including on paginated pages).
-	// Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+	// Values come from product Prometheus gauges (same ceilings the data plane enforces).
 	Quota *SpaceQuotaSnapshot `protobuf:"bytes,2,opt,name=quota,proto3" json:"quota,omitempty"`
 	// The total number of items available (useful in relation with pagination).
 	// This field is fill out when pagination is used (aka in the request `page_size` was provided).

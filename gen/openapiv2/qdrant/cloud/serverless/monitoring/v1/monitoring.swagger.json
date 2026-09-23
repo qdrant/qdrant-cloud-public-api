@@ -454,7 +454,7 @@
         },
         "quota": {
           "$ref": "#/definitions/v1SpaceQuotaSnapshot",
-          "description": "Space-level effective quotas and current collection count.\nAlways populated for the requested space (including on paginated pages).\nValues come from product Prometheus gauges (same ceilings the dataplane enforces)."
+          "description": "Space-level effective quotas and current collection count.\nAlways populated for the requested space (including on paginated pages).\nValues come from product Prometheus gauges (same ceilings the data plane enforces)."
         },
         "totalSize": {
           "type": "integer",

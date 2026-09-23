@@ -102,7 +102,7 @@ export declare type GetSpaceSummaryMetricsResponse = Message<"qdrant.cloud.serve
   /**
    * Space-level effective quotas and current collection count.
    * Always populated for the requested space (including on paginated pages).
-   * Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+   * Values come from product Prometheus gauges (same ceilings the data plane enforces).
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
    */
@@ -141,7 +141,7 @@ export declare type GetSpaceSummaryMetricsResponseValid = Message<"qdrant.cloud.
   /**
    * Space-level effective quotas and current collection count.
    * Always populated for the requested space (including on paginated pages).
-   * Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+   * Values come from product Prometheus gauges (same ceilings the data plane enforces).
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
    */
