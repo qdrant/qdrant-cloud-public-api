@@ -100,6 +100,15 @@ export declare type GetSpaceSummaryMetricsResponse = Message<"qdrant.cloud.serve
   items: SpaceCollectionMetrics[];
 
   /**
+   * Space-level effective quotas and current collection count.
+   * Always populated for the requested space (including on paginated pages).
+   * Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
+   */
+  quota?: SpaceQuotaSnapshot | undefined;
+
+  /**
    * The total number of items available (useful in relation with pagination).
    * This field is fill out when pagination is used (aka in the request `page_size` was provided).
    *
@@ -128,6 +137,15 @@ export declare type GetSpaceSummaryMetricsResponseValid = Message<"qdrant.cloud.
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics items = 1;
    */
   items: SpaceCollectionMetricsValid[];
+
+  /**
+   * Space-level effective quotas and current collection count.
+   * Always populated for the requested space (including on paginated pages).
+   * Values come from product Prometheus gauges (same ceilings the dataplane enforces).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
+   */
+  quota: SpaceQuotaSnapshotValid;
 
   /**
    * The total number of items available (useful in relation with pagination).
@@ -265,6 +283,14 @@ export declare type GetSpaceUsageMetricsResponse = Message<"qdrant.cloud.serverl
   items: SpaceCollectionUsageMetrics[];
 
   /**
+   * Space-level effective quotas and current collection count at query time.
+   * Always populated for the requested space (including on paginated pages).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
+   */
+  quota?: SpaceQuotaSnapshot | undefined;
+
+  /**
    * The total number of items available (useful in relation with pagination).
    * This field is fill out when pagination is used (aka in the request `page_size` was provided).
    *
@@ -293,6 +319,14 @@ export declare type GetSpaceUsageMetricsResponseValid = Message<"qdrant.cloud.se
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics items = 1;
    */
   items: SpaceCollectionUsageMetricsValid[];
+
+  /**
+   * Space-level effective quotas and current collection count at query time.
+   * Always populated for the requested space (including on paginated pages).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot quota = 2;
+   */
+  quota: SpaceQuotaSnapshotValid;
 
   /**
    * The total number of items available (useful in relation with pagination).
@@ -791,6 +825,52 @@ export declare type SpaceAlertValid = SpaceAlert;
 export declare const SpaceAlertSchema: GenMessage<SpaceAlert, {validType: SpaceAlertValid}>;
 
 /**
+ * SpaceQuotaSnapshot holds space-scoped effective quota ceilings and current
+ * collection count. A value of 0 on a ceiling field means unlimited for that
+ * dimension (same semantics as serverless-quota-sidecar GetSpaceLimits).
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
+ */
+export declare type SpaceQuotaSnapshot = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot"> & {
+  /**
+   * Maximum number of collections allowed in the space. 0 means unlimited.
+   *
+   * @generated from field: uint64 max_collections = 1;
+   */
+  maxCollections: bigint;
+
+  /**
+   * Current number of collections in the space.
+   *
+   * @generated from field: uint64 current_collections = 2;
+   */
+  currentCollections: bigint;
+
+  /**
+   * Effective maximum size in bytes per collection (platform ceiling reduced by
+   * an optional customer cap). 0 means unlimited.
+   *
+   * @generated from field: uint64 effective_max_size_per_collection_bytes = 3;
+   */
+  effectiveMaxSizePerCollectionBytes: bigint;
+
+  /**
+   * Effective maximum search workers per collection. 0 means unlimited.
+   *
+   * @generated from field: uint64 searcher_effective_max_workers = 4;
+   */
+  searcherEffectiveMaxWorkers: bigint;
+};
+
+export declare type SpaceQuotaSnapshotValid = SpaceQuotaSnapshot;
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot.
+ * Use `create(SpaceQuotaSnapshotSchema)` to create a new message.
+ */
+export declare const SpaceQuotaSnapshotSchema: GenMessage<SpaceQuotaSnapshot, {validType: SpaceQuotaSnapshotValid}>;
+
+/**
  * SpaceCollectionMetrics contains a metric overview for a single collection.
  *
  * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
@@ -833,12 +913,21 @@ export declare type SpaceCollectionMetrics = Message<"qdrant.cloud.serverless.mo
 
   /**
    * Current used (active) storage size of the collection, in bytes.
-   * This is actual usage. Platform or customer storage ceilings are exposed
-   * via space/collection quotas and are not part of this response.
+   * Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
+   * for headroom (0 on that field means unlimited).
    *
    * @generated from field: uint64 used_storage_bytes = 6;
    */
   usedStorageBytes: bigint;
+
+  /**
+   * Current number of search workers (active + downloading) hosting this collection.
+   * Compare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom
+   * (0 on that field means unlimited).
+   *
+   * @generated from field: uint64 current_searcher_workers = 7;
+   */
+  currentSearcherWorkers: bigint;
 };
 
 /**
@@ -884,12 +973,21 @@ export declare type SpaceCollectionMetricsValid = Message<"qdrant.cloud.serverle
 
   /**
    * Current used (active) storage size of the collection, in bytes.
-   * This is actual usage. Platform or customer storage ceilings are exposed
-   * via space/collection quotas and are not part of this response.
+   * Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
+   * for headroom (0 on that field means unlimited).
    *
    * @generated from field: uint64 used_storage_bytes = 6;
    */
   usedStorageBytes: bigint;
+
+  /**
+   * Current number of search workers (active + downloading) hosting this collection.
+   * Compare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom
+   * (0 on that field means unlimited).
+   *
+   * @generated from field: uint64 current_searcher_workers = 7;
+   */
+  currentSearcherWorkers: bigint;
 };
 
 /**
@@ -1027,6 +1125,13 @@ export declare type SpaceCollectionUsageMetrics = Message<"qdrant.cloud.serverle
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 6;
    */
   usedStorageBytes: Metric[];
+
+  /**
+   * Timeseries of search workers (active + downloading) hosting this collection.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 7;
+   */
+  currentSearcherWorkers: Metric[];
 };
 
 /**
@@ -1076,6 +1181,13 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 6;
    */
   usedStorageBytes: MetricValid[];
+
+  /**
+   * Timeseries of search workers (active + downloading) hosting this collection.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 7;
+   */
+  currentSearcherWorkers: MetricValid[];
 };
 
 /**
@@ -1353,6 +1465,7 @@ export declare const MonitoringService: GenService<{
   /**
    * Gets the summary metrics of a space in the account identified by the given ID.
    * Metrics are aggregated per collection and may be paginated (a space can have many collections).
+   * The response also includes space-level effective quotas and current collection count.
    * Required permissions:
    * - read:serverless_spaces
    *
