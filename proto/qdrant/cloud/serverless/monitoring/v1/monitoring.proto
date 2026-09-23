@@ -15,11 +15,12 @@ service MonitoringService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Gets the summary metrics of a space in the account identified by the given ID.
   // Metrics are aggregated per collection and may be paginated (a space can have many collections).
+  // The response also includes space-level effective quotas and current collection count.
   // Required permissions:
   // - read:serverless_spaces
   rpc GetSpaceSummaryMetrics(GetSpaceSummaryMetricsRequest) returns (GetSpaceSummaryMetricsResponse) {
@@ -125,6 +126,10 @@ message GetSpaceSummaryMetricsRequest {
 message GetSpaceSummaryMetricsResponse {
   // List of metrics aggregated per collection in the space.
   repeated SpaceCollectionMetrics items = 1;
+  // Space-level effective quotas and current collection count.
+  // Always populated for the requested space (including on paginated pages).
+  // Values come from product Prometheus gauges (same ceilings the data plane enforces).
+  SpaceQuotaSnapshot quota = 2 [(buf.validate.field).required = true];
   // The total number of items available (useful in relation with pagination).
   // This field is fill out when pagination is used (aka in the request `page_size` was provided).
   optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
@@ -193,6 +198,9 @@ message GetSpaceUsageMetricsRequest {
 message GetSpaceUsageMetricsResponse {
   // Per-collection usage metrics for the space.
   repeated SpaceCollectionUsageMetrics items = 1;
+  // Space-level effective quotas and current collection count at query time.
+  // Always populated for the requested space (including on paginated pages).
+  SpaceQuotaSnapshot quota = 2 [(buf.validate.field).required = true];
   // The total number of items available (useful in relation with pagination).
   // This field is fill out when pagination is used (aka in the request `page_size` was provided).
   optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
@@ -377,6 +385,21 @@ message SpaceAlert {
   }];
 }
 
+// SpaceQuotaSnapshot holds space-scoped effective quota ceilings and current
+// collection count. A value of 0 on a ceiling field means unlimited for that
+// dimension (same semantics as serverless-quota-sidecar GetSpaceLimits).
+message SpaceQuotaSnapshot {
+  // Maximum number of collections allowed in the space. 0 means unlimited.
+  uint64 max_collections = 1 [(buf.validate.field).uint64.gte = 0];
+  // Current number of collections in the space.
+  uint64 current_collections = 2 [(buf.validate.field).uint64.gte = 0];
+  // Effective maximum size in bytes per collection (platform ceiling reduced by
+  // an optional customer cap). 0 means unlimited.
+  uint64 effective_max_size_per_collection_bytes = 3 [(buf.validate.field).uint64.gte = 0];
+  // Effective maximum search workers per collection. 0 means unlimited.
+  uint64 searcher_effective_max_workers = 4 [(buf.validate.field).uint64.gte = 0];
+}
+
 // SpaceCollectionMetrics contains a metric overview for a single collection.
 message SpaceCollectionMetrics {
   // Name of the collection within the space.
@@ -394,9 +417,13 @@ message SpaceCollectionMetrics {
   // Current number of points stored in the collection.
   uint64 point_count = 5 [(buf.validate.field).uint64.gte = 0];
   // Current used (active) storage size of the collection, in bytes.
-  // This is actual usage. Platform or customer storage ceilings are exposed
-  // via space/collection quotas and are not part of this response.
+  // Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
+  // for headroom (0 on that field means unlimited).
   uint64 used_storage_bytes = 6 [(buf.validate.field).uint64.gte = 0];
+  // Current number of search workers (active + downloading) hosting this collection.
+  // Compare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom
+  // (0 on that field means unlimited).
+  uint64 current_searcher_workers = 7 [(buf.validate.field).uint64.gte = 0];
 }
 
 // SpaceMetricOverview contains average values of a metric over predefined intervals.
@@ -431,6 +458,8 @@ message SpaceCollectionUsageMetrics {
   repeated Metric point_count = 5;
   // Timeseries of used (active) storage size for the collection, in bytes.
   repeated Metric used_storage_bytes = 6;
+  // Timeseries of search workers (active + downloading) hosting this collection.
+  repeated Metric current_searcher_workers = 7;
 }
 
 // A single metric data point.

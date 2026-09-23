@@ -211,7 +211,7 @@
     },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/summary-metrics": {
       "get": {
-        "summary": "Gets the summary metrics of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nRequired permissions:\n- read:serverless_spaces",
+        "summary": "Gets the summary metrics of a space in the account identified by the given ID.\nMetrics are aggregated per collection and may be paginated (a space can have many collections).\nThe response also includes space-level effective quotas and current collection count.\nRequired permissions:\n- read:serverless_spaces",
         "operationId": "MonitoringService_GetSpaceSummaryMetrics",
         "responses": {
           "200": {
@@ -452,6 +452,10 @@
           },
           "description": "List of metrics aggregated per collection in the space."
         },
+        "quota": {
+          "$ref": "#/definitions/v1SpaceQuotaSnapshot",
+          "description": "Space-level effective quotas and current collection count.\nAlways populated for the requested space (including on paginated pages).\nValues come from product Prometheus gauges (same ceilings the data plane enforces)."
+        },
         "totalSize": {
           "type": "integer",
           "format": "int32",
@@ -474,6 +478,10 @@
             "$ref": "#/definitions/v1SpaceCollectionUsageMetrics"
           },
           "description": "Per-collection usage metrics for the space."
+        },
+        "quota": {
+          "$ref": "#/definitions/v1SpaceQuotaSnapshot",
+          "description": "Space-level effective quotas and current collection count at query time.\nAlways populated for the requested space (including on paginated pages)."
         },
         "totalSize": {
           "type": "integer",
@@ -669,7 +677,12 @@
         "usedStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Current used (active) storage size of the collection, in bytes.\nThis is actual usage. Platform or customer storage ceilings are exposed\nvia space/collection quotas and are not part of this response."
+          "description": "Current used (active) storage size of the collection, in bytes.\nCompare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes\nfor headroom (0 on that field means unlimited)."
+        },
+        "currentSearcherWorkers": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current number of search workers (active + downloading) hosting this collection.\nCompare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom\n(0 on that field means unlimited)."
         }
       },
       "description": "SpaceCollectionMetrics contains a metric overview for a single collection."
@@ -720,6 +733,14 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of used (active) storage size for the collection, in bytes."
+        },
+        "currentSearcherWorkers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of search workers (active + downloading) hosting this collection."
         }
       },
       "description": "SpaceCollectionUsageMetrics defines per-collection usage metrics as timeseries."
@@ -755,6 +776,32 @@
         }
       },
       "description": "SpaceMetricOverview contains average values of a metric over predefined intervals."
+    },
+    "v1SpaceQuotaSnapshot": {
+      "type": "object",
+      "properties": {
+        "maxCollections": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum number of collections allowed in the space. 0 means unlimited."
+        },
+        "currentCollections": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current number of collections in the space."
+        },
+        "effectiveMaxSizePerCollectionBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Effective maximum size in bytes per collection (platform ceiling reduced by\nan optional customer cap). 0 means unlimited."
+        },
+        "searcherEffectiveMaxWorkers": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Effective maximum search workers per collection. 0 means unlimited."
+        }
+      },
+      "description": "SpaceQuotaSnapshot holds space-scoped effective quota ceilings and current\ncollection count. A value of 0 on a ceiling field means unlimited for that\ndimension (same semantics as serverless-quota-sidecar GetSpaceLimits)."
     }
   }
 }

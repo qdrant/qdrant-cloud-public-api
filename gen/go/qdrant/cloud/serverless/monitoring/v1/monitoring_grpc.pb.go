@@ -35,6 +35,7 @@ const (
 type MonitoringServiceClient interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
 	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
+	// The response also includes space-level effective quotas and current collection count.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(ctx context.Context, in *GetSpaceSummaryMetricsRequest, opts ...grpc.CallOption) (*GetSpaceSummaryMetricsResponse, error)
@@ -115,6 +116,7 @@ func (c *monitoringServiceClient) ListSpaceAlerts(ctx context.Context, in *ListS
 type MonitoringServiceServer interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
 	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
+	// The response also includes space-level effective quotas and current collection count.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(context.Context, *GetSpaceSummaryMetricsRequest) (*GetSpaceSummaryMetricsResponse, error)

@@ -48,6 +48,7 @@ class MonitoringServiceServicer(object):
     def GetSpaceSummaryMetrics(self, request, context):
         """Gets the summary metrics of a space in the account identified by the given ID.
         Metrics are aggregated per collection and may be paginated (a space can have many collections).
+        The response also includes space-level effective quotas and current collection count.
         Required permissions:
         - read:serverless_spaces
         """
