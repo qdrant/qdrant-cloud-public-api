@@ -721,6 +721,200 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
+ * GetGlobalQuotesRequest is the request for the GetGlobalQuotes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetGlobalQuotesRequest
+ */
+export declare type GetGlobalQuotesRequest = Message<"qdrant.cloud.booking.v1.GetGlobalQuotesRequest"> & {
+  /**
+   * The cluster configurations to price.
+   * Always priced at standard tier with no discount.
+   * This is a required field, capped at 50 configurations per request.
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.GlobalQuoteConfiguration configurations = 1;
+   */
+  configurations: GlobalQuoteConfiguration[];
+};
+
+export declare type GetGlobalQuotesRequestValid = GetGlobalQuotesRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetGlobalQuotesRequest.
+ * Use `create(GetGlobalQuotesRequestSchema)` to create a new message.
+ */
+export declare const GetGlobalQuotesRequestSchema: GenMessage<GetGlobalQuotesRequest, {validType: GetGlobalQuotesRequestValid}>;
+
+/**
+ * GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request.
+ *
+ * @generated from message qdrant.cloud.booking.v1.GlobalQuoteConfiguration
+ */
+export declare type GlobalQuoteConfiguration = Message<"qdrant.cloud.booking.v1.GlobalQuoteConfiguration"> & {
+  /**
+   * The cloud provider where the cluster will be hosted.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+
+  /**
+   * The cloud region where the cluster will be hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.
+   * This field can be omitted if `cloud_provider_id` is set to `hybrid`.
+   *
+   * @generated from field: optional string cloud_provider_region_id = 2;
+   */
+  cloudProviderRegionId?: string | undefined;
+
+  /**
+   * The number of nodes in a cluster.
+   * This should be a number >= 1.
+   * This is a required field.
+   *
+   * @generated from field: uint32 number_of_nodes = 3;
+   */
+  numberOfNodes: number;
+
+  /**
+   * The package identifier used to configure the resources of the cluster.
+   * Use `qdrant.cloud.booking.v1.BookingService.ListGlobalPackages` to select one.
+   * This is a required field.
+   *
+   * @generated from field: string package_id = 4;
+   */
+  packageId: string;
+
+  /**
+   * The additional disk storage in GiB on top of the selected package.
+   * This is an optional field, if not specified additional disk is 0.
+   *
+   * @generated from field: uint32 additional_disk_gib = 5;
+   */
+  additionalDiskGib: number;
+
+  /**
+   * The storage tier for the cluster.
+   * This is an optional field, if not specified it defaults to Cost Optimised.
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.StorageTierType storage_tier_type = 6;
+   */
+  storageTierType?: StorageTierType | undefined;
+};
+
+export declare type GlobalQuoteConfigurationValid = GlobalQuoteConfiguration;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GlobalQuoteConfiguration.
+ * Use `create(GlobalQuoteConfigurationSchema)` to create a new message.
+ */
+export declare const GlobalQuoteConfigurationSchema: GenMessage<GlobalQuoteConfiguration, {validType: GlobalQuoteConfigurationValid}>;
+
+/**
+ * GlobalPriceBreakdown represents the list price for one component of a global quote.
+ * Amounts are in the same currency as the enclosing GlobalQuote.
+ *
+ * @generated from message qdrant.cloud.booking.v1.GlobalPriceBreakdown
+ */
+export declare type GlobalPriceBreakdown = Message<"qdrant.cloud.booking.v1.GlobalPriceBreakdown"> & {
+  /**
+   * Hourly total for this component, in millicents per hour across all cluster nodes.
+   *
+   * @generated from field: int64 price_per_hour = 1;
+   */
+  pricePerHour: bigint;
+};
+
+export declare type GlobalPriceBreakdownValid = GlobalPriceBreakdown;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GlobalPriceBreakdown.
+ * Use `create(GlobalPriceBreakdownSchema)` to create a new message.
+ */
+export declare const GlobalPriceBreakdownSchema: GenMessage<GlobalPriceBreakdown, {validType: GlobalPriceBreakdownValid}>;
+
+/**
+ * GlobalQuote is the list price for a single cluster configuration.
+ * It carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes
+ * standard-tier list price, so a discount could only ever be reported as zero.
+ *
+ * @generated from message qdrant.cloud.booking.v1.GlobalQuote
+ */
+export declare type GlobalQuote = Message<"qdrant.cloud.booking.v1.GlobalQuote"> & {
+  /**
+   * The currency of the prices.
+   * Specifies the currency in which the prices are denominated.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 1;
+   */
+  currency: string;
+
+  /**
+   * The list price per hour in millicents.
+   *
+   * @generated from field: int64 price_per_hour = 2;
+   */
+  pricePerHour: bigint;
+
+  /**
+   * Hourly price breakdown for the selected package (base cluster resources).
+   * Populated for all paid clusters; omitted for free-tier quotes.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.GlobalPriceBreakdown package = 3;
+   */
+  package?: GlobalPriceBreakdown | undefined;
+
+  /**
+   * Hourly price breakdown for additional disk beyond the package default.
+   * Populated only when GlobalQuoteConfiguration.additional_disk_gib is greater than zero.
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.GlobalPriceBreakdown extra_disk = 4;
+   */
+  extraDisk?: GlobalPriceBreakdown | undefined;
+
+  /**
+   * Hourly price breakdown for the selected storage performance tier (disk speed).
+   * Populated only when the quote uses a tier other than cost-optimised
+   * (`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.).
+   *
+   * @generated from field: optional qdrant.cloud.booking.v1.GlobalPriceBreakdown disk_speed = 5;
+   */
+  diskSpeed?: GlobalPriceBreakdown | undefined;
+};
+
+export declare type GlobalQuoteValid = GlobalQuote;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GlobalQuote.
+ * Use `create(GlobalQuoteSchema)` to create a new message.
+ */
+export declare const GlobalQuoteSchema: GenMessage<GlobalQuote, {validType: GlobalQuoteValid}>;
+
+/**
+ * GetGlobalQuotesResponse is the response from the GetGlobalQuotes function
+ *
+ * @generated from message qdrant.cloud.booking.v1.GetGlobalQuotesResponse
+ */
+export declare type GetGlobalQuotesResponse = Message<"qdrant.cloud.booking.v1.GetGlobalQuotesResponse"> & {
+  /**
+   * The quotes for each requested configuration.
+   * Index-aligned with `GetGlobalQuotesRequest.configurations`.
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.GlobalQuote quotes = 1;
+   */
+  quotes: GlobalQuote[];
+};
+
+export declare type GetGlobalQuotesResponseValid = GetGlobalQuotesResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.GetGlobalQuotesResponse.
+ * Use `create(GetGlobalQuotesResponseSchema)` to create a new message.
+ */
+export declare const GetGlobalQuotesResponseSchema: GenMessage<GetGlobalQuotesResponse, {validType: GetGlobalQuotesResponseValid}>;
+
+/**
  * GetBackupQuoteRequest is the request for the GetBackupQuote function
  *
  * @generated from message qdrant.cloud.booking.v1.GetBackupQuoteRequest
@@ -1247,6 +1441,18 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof ListGlobalPackagesRequestSchema;
     output: typeof ListGlobalPackagesResponseSchema;
+  },
+  /**
+   * Gets price quotes for a batch of cluster configurations.
+   * Always prices at standard tier with no discount, since there is no account to discount against.
+   * Authentication not required
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetGlobalQuotes
+   */
+  getGlobalQuotes: {
+    methodKind: "unary";
+    input: typeof GetGlobalQuotesRequestSchema;
+    output: typeof GetGlobalQuotesResponseSchema;
   },
   /**
    * Gets a price quote for a cluster configuration.

@@ -444,6 +444,39 @@
           "BookingService"
         ]
       }
+    },
+    "/api/booking/v1/quote": {
+      "post": {
+        "summary": "Gets price quotes for a batch of cluster configurations.\nAlways prices at standard tier with no discount, since there is no account to discount against.\nAuthentication not required",
+        "operationId": "BookingService_GetGlobalQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetGlobalQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetGlobalQuotesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BookingService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -577,6 +610,34 @@
       },
       "title": "GetBackupQuoteResponse is the response from the GetBackupQuote function"
     },
+    "v1GetGlobalQuotesRequest": {
+      "type": "object",
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1GlobalQuoteConfiguration"
+          },
+          "description": "The cluster configurations to price.\nAlways priced at standard tier with no discount.\nThis is a required field, capped at 50 configurations per request."
+        }
+      },
+      "title": "GetGlobalQuotesRequest is the request for the GetGlobalQuotes function"
+    },
+    "v1GetGlobalQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1GlobalQuote"
+          },
+          "description": "The quotes for each requested configuration.\nIndex-aligned with `GetGlobalQuotesRequest.configurations`."
+        }
+      },
+      "title": "GetGlobalQuotesResponse is the response from the GetGlobalQuotes function"
+    },
     "v1GetPackageResponse": {
       "type": "object",
       "properties": {
@@ -623,6 +684,76 @@
         }
       },
       "title": "GetQuoteResponse is the response from the GetQuote function"
+    },
+    "v1GlobalPriceBreakdown": {
+      "type": "object",
+      "properties": {
+        "pricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "Hourly total for this component, in millicents per hour across all cluster nodes."
+        }
+      },
+      "description": "GlobalPriceBreakdown represents the list price for one component of a global quote.\nAmounts are in the same currency as the enclosing GlobalQuote."
+    },
+    "v1GlobalQuote": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The currency of the prices.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "pricePerHour": {
+          "type": "string",
+          "format": "int64",
+          "description": "The list price per hour in millicents."
+        },
+        "package": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for the selected package (base cluster resources).\nPopulated for all paid clusters; omitted for free-tier quotes."
+        },
+        "extraDisk": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for additional disk beyond the package default.\nPopulated only when GlobalQuoteConfiguration.additional_disk_gib is greater than zero."
+        },
+        "diskSpeed": {
+          "$ref": "#/definitions/v1GlobalPriceBreakdown",
+          "description": "Hourly price breakdown for the selected storage performance tier (disk speed).\nPopulated only when the quote uses a tier other than cost-optimised\n(`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.)."
+        }
+      },
+      "description": "GlobalQuote is the list price for a single cluster configuration.\nIt carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes\nstandard-tier list price, so a discount could only ever be reported as zero."
+    },
+    "v1GlobalQuoteConfiguration": {
+      "type": "object",
+      "properties": {
+        "cloudProviderId": {
+          "type": "string",
+          "description": "The cloud provider where the cluster will be hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "The cloud region where the cluster will be hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions` method.\nThis field can be omitted if `cloud_provider_id` is set to `hybrid`."
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of nodes in a cluster.\nThis should be a number \u003e= 1.\nThis is a required field."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "The package identifier used to configure the resources of the cluster.\nUse `qdrant.cloud.booking.v1.BookingService.ListGlobalPackages` to select one.\nThis is a required field."
+        },
+        "additionalDiskGib": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The additional disk storage in GiB on top of the selected package.\nThis is an optional field, if not specified additional disk is 0."
+        },
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "The storage tier for the cluster.\nThis is an optional field, if not specified it defaults to Cost Optimised."
+        }
+      },
+      "description": "GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request."
     },
     "v1InferenceModel": {
       "type": "object",

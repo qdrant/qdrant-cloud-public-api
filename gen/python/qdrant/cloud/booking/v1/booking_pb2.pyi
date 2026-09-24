@@ -224,6 +224,54 @@ class GetQuoteResponse(_message.Message):
     disk_speed: PriceBreakdown
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ..., package: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[PriceBreakdown, _Mapping]] = ...) -> None: ...
 
+class GetGlobalQuotesRequest(_message.Message):
+    __slots__ = ("configurations",)
+    CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
+    configurations: _containers.RepeatedCompositeFieldContainer[GlobalQuoteConfiguration]
+    def __init__(self, configurations: _Optional[_Iterable[_Union[GlobalQuoteConfiguration, _Mapping]]] = ...) -> None: ...
+
+class GlobalQuoteConfiguration(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id", "number_of_nodes", "package_id", "additional_disk_gib", "storage_tier_type")
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_OF_NODES_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_DISK_GIB_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_TIER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    number_of_nodes: int
+    package_id: str
+    additional_disk_gib: int
+    storage_tier_type: _common_pb2.StorageTierType
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., number_of_nodes: _Optional[int] = ..., package_id: _Optional[str] = ..., additional_disk_gib: _Optional[int] = ..., storage_tier_type: _Optional[_Union[_common_pb2.StorageTierType, str]] = ...) -> None: ...
+
+class GlobalPriceBreakdown(_message.Message):
+    __slots__ = ("price_per_hour",)
+    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    price_per_hour: int
+    def __init__(self, price_per_hour: _Optional[int] = ...) -> None: ...
+
+class GlobalQuote(_message.Message):
+    __slots__ = ("currency", "price_per_hour", "package", "extra_disk", "disk_speed")
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    PRICE_PER_HOUR_FIELD_NUMBER: _ClassVar[int]
+    PACKAGE_FIELD_NUMBER: _ClassVar[int]
+    EXTRA_DISK_FIELD_NUMBER: _ClassVar[int]
+    DISK_SPEED_FIELD_NUMBER: _ClassVar[int]
+    currency: str
+    price_per_hour: int
+    package: GlobalPriceBreakdown
+    extra_disk: GlobalPriceBreakdown
+    disk_speed: GlobalPriceBreakdown
+    def __init__(self, currency: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., package: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ...) -> None: ...
+
+class GetGlobalQuotesResponse(_message.Message):
+    __slots__ = ("quotes",)
+    QUOTES_FIELD_NUMBER: _ClassVar[int]
+    quotes: _containers.RepeatedCompositeFieldContainer[GlobalQuote]
+    def __init__(self, quotes: _Optional[_Iterable[_Union[GlobalQuote, _Mapping]]] = ...) -> None: ...
+
 class GetBackupQuoteRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "backup_size_gib")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
