@@ -165,6 +165,15 @@ while read -r dts_file; do
     fi
     
     echo "$sort_prefix|$export_key|$js_path|$ts_path"
+
+    # The strict mirror protoc-gen-strict emits, under a `strict/` prefix. One `<file>.strict.ts`
+    # per proto file covers both its messages and its services, so it is keyed off the `_pb`
+    # module only: the `_connectquery` one has no strict counterpart of its own.
+    strict_ts=$(echo "$dts_file" | sed 's/_pb\.d\.ts$/.strict.ts/')
+    if [ "$strict_ts" != "$dts_file" ] && [ -f "$strict_ts" ]; then
+        strict_path=$(echo "$strict_ts" | sed 's|^gen/typescript/|./|')
+        echo "$sort_prefix-strict|strict/$export_key|$strict_path|$strict_path"
+    fi
 done | \
 sort | \
 while IFS='|' read -r sort_prefix export_key js_path ts_path; do
@@ -175,6 +184,11 @@ done
 if [ -f "$temp_file" ] && [ "$(cat "$temp_file")" = "ERROR" ]; then
     echo "Script terminated due to error in processing files"
     exit 1
+fi
+
+# The brands and mapped types every strict module imports.
+if [ -f "gen/typescript/strict/types.ts" ]; then
+    add_export "./strict/types" "./strict/types.ts" "./strict/types.ts"
 fi
 
 echo "Generated exports for package.json"

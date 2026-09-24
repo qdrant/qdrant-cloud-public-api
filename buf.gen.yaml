@@ -37,6 +37,12 @@ plugins:
     include_imports: true
     out: gen/python
 
+  # Generate Python validation code
+  - local: protoc-gen-strict
+    out: gen/python
+    opt: paths=source_relative,lang=python
+    strategy: all
+
   # Generate bindings for gRPC-Gateway
   # We don't need the output (the api-gateway is building this dynamically), however
   # we still want to run the validation logic inside this plugin
@@ -65,6 +71,12 @@ plugins:
       - target=js+dts
       - import_extension=js
     out: gen/typescript
+
+  # Generate Typescript validation code
+  - local: protoc-gen-strict
+    out: gen/typescript
+    opt: paths=source_relative,lang=typescript
+    strategy: all
 
 inputs:
   - directory: proto
