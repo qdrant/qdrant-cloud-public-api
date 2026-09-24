@@ -448,12 +448,12 @@
     "/api/booking/v1/quote": {
       "post": {
         "summary": "Gets price quotes for a batch of cluster configurations.\nAlways prices at standard tier with no discount, since there is no account to discount against.\nAuthentication not required",
-        "operationId": "BookingService_GetGlobalQuote",
+        "operationId": "BookingService_GetGlobalQuotes",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetGlobalQuoteResponse"
+              "$ref": "#/definitions/v1GetGlobalQuotesResponse"
             }
           },
           "default": {
@@ -469,7 +469,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1GetGlobalQuoteRequest"
+              "$ref": "#/definitions/v1GetGlobalQuotesRequest"
             }
           }
         ],
@@ -610,7 +610,7 @@
       },
       "title": "GetBackupQuoteResponse is the response from the GetBackupQuote function"
     },
-    "v1GetGlobalQuoteRequest": {
+    "v1GetGlobalQuotesRequest": {
       "type": "object",
       "properties": {
         "configurations": {
@@ -622,9 +622,9 @@
           "description": "The cluster configurations to price.\nAlways priced at standard tier with no discount.\nThis is a required field, capped at 50 configurations per request."
         }
       },
-      "title": "GetGlobalQuoteRequest is the request for the GetGlobalQuote function"
+      "title": "GetGlobalQuotesRequest is the request for the GetGlobalQuotes function"
     },
-    "v1GetGlobalQuoteResponse": {
+    "v1GetGlobalQuotesResponse": {
       "type": "object",
       "properties": {
         "quotes": {
@@ -633,10 +633,10 @@
             "type": "object",
             "$ref": "#/definitions/v1GlobalQuote"
           },
-          "description": "The quotes for each requested configuration.\nIndex-aligned with `GetGlobalQuoteRequest.configurations`."
+          "description": "The quotes for each requested configuration.\nIndex-aligned with `GetGlobalQuotesRequest.configurations`."
         }
       },
-      "title": "GetGlobalQuoteResponse is the response from the GetGlobalQuote function"
+      "title": "GetGlobalQuotesResponse is the response from the GetGlobalQuotes function"
     },
     "v1GetPackageResponse": {
       "type": "object",
@@ -721,7 +721,7 @@
           "description": "Hourly price breakdown for the selected storage performance tier (disk speed).\nPopulated only when the quote uses a tier other than cost-optimised\n(`STORAGE_TIER_TYPE_BALANCED`, `STORAGE_TIER_TYPE_PERFORMANCE`, etc.)."
         }
       },
-      "description": "GlobalQuote is the list price for a single cluster configuration.\nIt carries no discount fields: GetGlobalQuote is unauthenticated and always quotes\nstandard-tier list price, so a discount could only ever be reported as zero."
+      "description": "GlobalQuote is the list price for a single cluster configuration.\nIt carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes\nstandard-tier list price, so a discount could only ever be reported as zero."
     },
     "v1GlobalQuoteConfiguration": {
       "type": "object",
@@ -753,7 +753,7 @@
           "description": "The storage tier for the cluster.\nThis is an optional field, if not specified it defaults to Cost Optimised."
         }
       },
-      "description": "GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuote request."
+      "description": "GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request."
     },
     "v1InferenceModel": {
       "type": "object",

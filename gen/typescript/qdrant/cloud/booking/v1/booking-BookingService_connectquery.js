@@ -35,9 +35,9 @@ export const listGlobalPackages = BookingService.method.listGlobalPackages;
  * Always prices at standard tier with no discount, since there is no account to discount against.
  * Authentication not required
  *
- * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetGlobalQuote
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetGlobalQuotes
  */
-export const getGlobalQuote = BookingService.method.getGlobalQuote;
+export const getGlobalQuotes = BookingService.method.getGlobalQuotes;
 
 /**
  * Gets a price quote for a cluster configuration.

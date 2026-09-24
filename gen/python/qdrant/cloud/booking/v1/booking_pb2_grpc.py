@@ -30,10 +30,10 @@ class BookingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.FromString,
                 _registered_method=True)
-        self.GetGlobalQuote = channel.unary_unary(
-                '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuote',
-                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.SerializeToString,
-                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.FromString,
+        self.GetGlobalQuotes = channel.unary_unary(
+                '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuotes',
+                request_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesResponse.FromString,
                 _registered_method=True)
         self.GetQuote = channel.unary_unary(
                 '/qdrant.cloud.booking.v1.BookingService/GetQuote',
@@ -88,7 +88,7 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetGlobalQuote(self, request, context):
+    def GetGlobalQuotes(self, request, context):
         """buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
         Gets price quotes for a batch of cluster configurations.
         Always prices at standard tier with no discount, since there is no account to discount against.
@@ -156,10 +156,10 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.ListGlobalPackagesResponse.SerializeToString,
             ),
-            'GetGlobalQuote': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetGlobalQuote,
-                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.FromString,
-                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.SerializeToString,
+            'GetGlobalQuotes': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGlobalQuotes,
+                    request_deserializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesResponse.SerializeToString,
             ),
             'GetQuote': grpc.unary_unary_rpc_method_handler(
                     servicer.GetQuote,
@@ -275,7 +275,7 @@ class BookingService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetGlobalQuote(request,
+    def GetGlobalQuotes(request,
             target,
             options=(),
             channel_credentials=None,
@@ -288,9 +288,9 @@ class BookingService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuote',
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteRequest.SerializeToString,
-            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuoteResponse.FromString,
+            '/qdrant.cloud.booking.v1.BookingService/GetGlobalQuotes',
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesRequest.SerializeToString,
+            qdrant_dot_cloud_dot_booking_dot_v1_dot_booking__pb2.GetGlobalQuotesResponse.FromString,
             options,
             channel_credentials,
             insecure,

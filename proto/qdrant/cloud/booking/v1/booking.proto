@@ -11,7 +11,7 @@ service BookingService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all packages known by the system, optional filtered.
@@ -68,7 +68,7 @@ service BookingService {
   // Gets price quotes for a batch of cluster configurations.
   // Always prices at standard tier with no discount, since there is no account to discount against.
   // Authentication not required
-  rpc GetGlobalQuote(GetGlobalQuoteRequest) returns (GetGlobalQuoteResponse) {
+  rpc GetGlobalQuotes(GetGlobalQuotesRequest) returns (GetGlobalQuotesResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
@@ -441,8 +441,8 @@ message GetQuoteResponse {
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// GetGlobalQuoteRequest is the request for the GetGlobalQuote function
-message GetGlobalQuoteRequest {
+// GetGlobalQuotesRequest is the request for the GetGlobalQuotes function
+message GetGlobalQuotesRequest {
   // The cluster configurations to price.
   // Always priced at standard tier with no discount.
   // This is a required field, capped at 50 configurations per request.
@@ -452,7 +452,7 @@ message GetGlobalQuoteRequest {
   }];
 }
 
-// GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuote request.
+// GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request.
 message GlobalQuoteConfiguration {
   // The cloud provider where the cluster will be hosted.
   // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders` method.
@@ -491,7 +491,7 @@ message GlobalPriceBreakdown {
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // GlobalQuote is the list price for a single cluster configuration.
-// It carries no discount fields: GetGlobalQuote is unauthenticated and always quotes
+// It carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes
 // standard-tier list price, so a discount could only ever be reported as zero.
 message GlobalQuote {
   // The currency of the prices.
@@ -512,10 +512,10 @@ message GlobalQuote {
   optional GlobalPriceBreakdown disk_speed = 5;
 }
 
-// GetGlobalQuoteResponse is the response from the GetGlobalQuote function
-message GetGlobalQuoteResponse {
+// GetGlobalQuotesResponse is the response from the GetGlobalQuotes function
+message GetGlobalQuotesResponse {
   // The quotes for each requested configuration.
-  // Index-aligned with `GetGlobalQuoteRequest.configurations`.
+  // Index-aligned with `GetGlobalQuotesRequest.configurations`.
   repeated GlobalQuote quotes = 1;
 }
 

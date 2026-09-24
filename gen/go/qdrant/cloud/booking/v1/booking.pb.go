@@ -1365,8 +1365,8 @@ func (x *GetQuoteResponse) GetDiskSpeed() *PriceBreakdown {
 	return nil
 }
 
-// GetGlobalQuoteRequest is the request for the GetGlobalQuote function
-type GetGlobalQuoteRequest struct {
+// GetGlobalQuotesRequest is the request for the GetGlobalQuotes function
+type GetGlobalQuotesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The cluster configurations to price.
 	// Always priced at standard tier with no discount.
@@ -1376,20 +1376,20 @@ type GetGlobalQuoteRequest struct {
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *GetGlobalQuoteRequest) Reset() {
-	*x = GetGlobalQuoteRequest{}
+func (x *GetGlobalQuotesRequest) Reset() {
+	*x = GetGlobalQuotesRequest{}
 	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetGlobalQuoteRequest) String() string {
+func (x *GetGlobalQuotesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetGlobalQuoteRequest) ProtoMessage() {}
+func (*GetGlobalQuotesRequest) ProtoMessage() {}
 
-func (x *GetGlobalQuoteRequest) ProtoReflect() protoreflect.Message {
+func (x *GetGlobalQuotesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1401,19 +1401,19 @@ func (x *GetGlobalQuoteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetGlobalQuoteRequest.ProtoReflect.Descriptor instead.
-func (*GetGlobalQuoteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetGlobalQuotesRequest.ProtoReflect.Descriptor instead.
+func (*GetGlobalQuotesRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *GetGlobalQuoteRequest) GetConfigurations() []*GlobalQuoteConfiguration {
+func (x *GetGlobalQuotesRequest) GetConfigurations() []*GlobalQuoteConfiguration {
 	if x != nil {
 		return x.Configurations
 	}
 	return nil
 }
 
-// GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuote request.
+// GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request.
 type GlobalQuoteConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The cloud provider where the cluster will be hosted.
@@ -1561,7 +1561,7 @@ func (x *GlobalPriceBreakdown) GetPricePerHour() int64 {
 }
 
 // GlobalQuote is the list price for a single cluster configuration.
-// It carries no discount fields: GetGlobalQuote is unauthenticated and always quotes
+// It carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes
 // standard-tier list price, so a discount could only ever be reported as zero.
 type GlobalQuote struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1650,30 +1650,30 @@ func (x *GlobalQuote) GetDiskSpeed() *GlobalPriceBreakdown {
 	return nil
 }
 
-// GetGlobalQuoteResponse is the response from the GetGlobalQuote function
-type GetGlobalQuoteResponse struct {
+// GetGlobalQuotesResponse is the response from the GetGlobalQuotes function
+type GetGlobalQuotesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The quotes for each requested configuration.
-	// Index-aligned with `GetGlobalQuoteRequest.configurations`.
+	// Index-aligned with `GetGlobalQuotesRequest.configurations`.
 	Quotes        []*GlobalQuote `protobuf:"bytes,1,rep,name=quotes,proto3" json:"quotes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetGlobalQuoteResponse) Reset() {
-	*x = GetGlobalQuoteResponse{}
+func (x *GetGlobalQuotesResponse) Reset() {
+	*x = GetGlobalQuotesResponse{}
 	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetGlobalQuoteResponse) String() string {
+func (x *GetGlobalQuotesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetGlobalQuoteResponse) ProtoMessage() {}
+func (*GetGlobalQuotesResponse) ProtoMessage() {}
 
-func (x *GetGlobalQuoteResponse) ProtoReflect() protoreflect.Message {
+func (x *GetGlobalQuotesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_booking_v1_booking_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1685,12 +1685,12 @@ func (x *GetGlobalQuoteResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetGlobalQuoteResponse.ProtoReflect.Descriptor instead.
-func (*GetGlobalQuoteResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetGlobalQuotesResponse.ProtoReflect.Descriptor instead.
+func (*GetGlobalQuotesResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_booking_v1_booking_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetGlobalQuoteResponse) GetQuotes() []*GlobalQuote {
+func (x *GetGlobalQuotesResponse) GetQuotes() []*GlobalQuote {
 	if x != nil {
 		return x.Quotes
 	}
@@ -2396,8 +2396,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
 	"\b_packageB\r\n" +
 	"\v_extra_diskB\r\n" +
-	"\v_disk_speed\"~\n" +
-	"\x15GetGlobalQuoteRequest\x12e\n" +
+	"\v_disk_speed\"\x7f\n" +
+	"\x16GetGlobalQuotesRequest\x12e\n" +
 	"\x0econfigurations\x18\x01 \x03(\v21.qdrant.cloud.booking.v1.GlobalQuoteConfigurationB\n" +
 	"\xbaH\a\x92\x01\x04\b\x01\x102R\x0econfigurations\"\x94\x05\n" +
 	"\x18GlobalQuoteConfiguration\x123\n" +
@@ -2425,8 +2425,8 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
 	"\b_packageB\r\n" +
 	"\v_extra_diskB\r\n" +
-	"\v_disk_speed\"V\n" +
-	"\x16GetGlobalQuoteResponse\x12<\n" +
+	"\v_disk_speed\"W\n" +
+	"\x17GetGlobalQuotesResponse\x12<\n" +
 	"\x06quotes\x18\x01 \x03(\v2$.qdrant.cloud.booking.v1.GlobalQuoteR\x06quotes\"\xf7\x03\n" +
 	"\x15GetBackupQuoteRequest\x12'\n" +
 	"\n" +
@@ -2497,7 +2497,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\x83\r\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\x88\r\n" +
 	"\x0eBookingService\x12\x8a\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -2508,12 +2508,12 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"package_id\x12\x02id\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x86\x02\n" +
 	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
-	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x97\x01\n" +
-	"\x0eGetGlobalQuote\x12..qdrant.cloud.booking.v1.GetGlobalQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetGlobalQuoteResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xa9\x01\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9a\x01\n" +
+	"\x0fGetGlobalQuotes\x12/.qdrant.cloud.booking.v1.GetGlobalQuotesRequest\x1a0.qdrant.cloud.booking.v1.GetGlobalQuotesResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xa9\x01\n" +
 	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc1\x01\n" +
 	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"N\x8a\xb5\x18\rwrite:backups\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xc4\x01\n" +
 	"\x13ListInferenceModels\x123.qdrant.cloud.booking.v1.ListInferenceModelsRequest\x1a4.qdrant.cloud.booking.v1.ListInferenceModelsResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/booking/v1/accounts/{account_id}/inference-models\x12\xc4\x01\n" +
-	"\x14ListStorageTierTypes\x124.qdrant.cloud.booking.v1.ListStorageTierTypesRequest\x1a5.qdrant.cloud.booking.v1.ListStorageTierTypesResponse\"?\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/storage-tiers\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"\x14ListStorageTierTypes\x124.qdrant.cloud.booking.v1.ListStorageTierTypesRequest\x1a5.qdrant.cloud.booking.v1.ListStorageTierTypesResponse\"?\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/storage-tiers\x1a\bµ\x18\x04\b\x01\x10\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
 var (
@@ -2549,11 +2549,11 @@ var file_qdrant_cloud_booking_v1_booking_proto_goTypes = []any{
 	(*GetQuoteRequest)(nil),                               // 15: qdrant.cloud.booking.v1.GetQuoteRequest
 	(*PriceBreakdown)(nil),                                // 16: qdrant.cloud.booking.v1.PriceBreakdown
 	(*GetQuoteResponse)(nil),                              // 17: qdrant.cloud.booking.v1.GetQuoteResponse
-	(*GetGlobalQuoteRequest)(nil),                         // 18: qdrant.cloud.booking.v1.GetGlobalQuoteRequest
+	(*GetGlobalQuotesRequest)(nil),                        // 18: qdrant.cloud.booking.v1.GetGlobalQuotesRequest
 	(*GlobalQuoteConfiguration)(nil),                      // 19: qdrant.cloud.booking.v1.GlobalQuoteConfiguration
 	(*GlobalPriceBreakdown)(nil),                          // 20: qdrant.cloud.booking.v1.GlobalPriceBreakdown
 	(*GlobalQuote)(nil),                                   // 21: qdrant.cloud.booking.v1.GlobalQuote
-	(*GetGlobalQuoteResponse)(nil),                        // 22: qdrant.cloud.booking.v1.GetGlobalQuoteResponse
+	(*GetGlobalQuotesResponse)(nil),                       // 22: qdrant.cloud.booking.v1.GetGlobalQuotesResponse
 	(*GetBackupQuoteRequest)(nil),                         // 23: qdrant.cloud.booking.v1.GetBackupQuoteRequest
 	(*GetBackupQuoteResponse)(nil),                        // 24: qdrant.cloud.booking.v1.GetBackupQuoteResponse
 	(*ListInferenceModelsRequest)(nil),                    // 25: qdrant.cloud.booking.v1.ListInferenceModelsRequest
@@ -2583,12 +2583,12 @@ var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	16, // 15: qdrant.cloud.booking.v1.GetQuoteResponse.package:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
 	16, // 16: qdrant.cloud.booking.v1.GetQuoteResponse.extra_disk:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
 	16, // 17: qdrant.cloud.booking.v1.GetQuoteResponse.disk_speed:type_name -> qdrant.cloud.booking.v1.PriceBreakdown
-	19, // 18: qdrant.cloud.booking.v1.GetGlobalQuoteRequest.configurations:type_name -> qdrant.cloud.booking.v1.GlobalQuoteConfiguration
+	19, // 18: qdrant.cloud.booking.v1.GetGlobalQuotesRequest.configurations:type_name -> qdrant.cloud.booking.v1.GlobalQuoteConfiguration
 	31, // 19: qdrant.cloud.booking.v1.GlobalQuoteConfiguration.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
 	20, // 20: qdrant.cloud.booking.v1.GlobalQuote.package:type_name -> qdrant.cloud.booking.v1.GlobalPriceBreakdown
 	20, // 21: qdrant.cloud.booking.v1.GlobalQuote.extra_disk:type_name -> qdrant.cloud.booking.v1.GlobalPriceBreakdown
 	20, // 22: qdrant.cloud.booking.v1.GlobalQuote.disk_speed:type_name -> qdrant.cloud.booking.v1.GlobalPriceBreakdown
-	21, // 23: qdrant.cloud.booking.v1.GetGlobalQuoteResponse.quotes:type_name -> qdrant.cloud.booking.v1.GlobalQuote
+	21, // 23: qdrant.cloud.booking.v1.GetGlobalQuotesResponse.quotes:type_name -> qdrant.cloud.booking.v1.GlobalQuote
 	29, // 24: qdrant.cloud.booking.v1.ListInferenceModelsResponse.items:type_name -> qdrant.cloud.booking.v1.InferenceModel
 	30, // 25: qdrant.cloud.booking.v1.ListStorageTierTypesResponse.items:type_name -> qdrant.cloud.booking.v1.StorageTiers
 	2,  // 26: qdrant.cloud.booking.v1.InferenceModel.vector_type:type_name -> qdrant.cloud.booking.v1.VectorType
@@ -2597,7 +2597,7 @@ var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	4,  // 29: qdrant.cloud.booking.v1.BookingService.ListPackages:input_type -> qdrant.cloud.booking.v1.ListPackagesRequest
 	8,  // 30: qdrant.cloud.booking.v1.BookingService.GetPackage:input_type -> qdrant.cloud.booking.v1.GetPackageRequest
 	6,  // 31: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:input_type -> qdrant.cloud.booking.v1.ListGlobalPackagesRequest
-	18, // 32: qdrant.cloud.booking.v1.BookingService.GetGlobalQuote:input_type -> qdrant.cloud.booking.v1.GetGlobalQuoteRequest
+	18, // 32: qdrant.cloud.booking.v1.BookingService.GetGlobalQuotes:input_type -> qdrant.cloud.booking.v1.GetGlobalQuotesRequest
 	15, // 33: qdrant.cloud.booking.v1.BookingService.GetQuote:input_type -> qdrant.cloud.booking.v1.GetQuoteRequest
 	23, // 34: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:input_type -> qdrant.cloud.booking.v1.GetBackupQuoteRequest
 	25, // 35: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:input_type -> qdrant.cloud.booking.v1.ListInferenceModelsRequest
@@ -2605,7 +2605,7 @@ var file_qdrant_cloud_booking_v1_booking_proto_depIdxs = []int32{
 	5,  // 37: qdrant.cloud.booking.v1.BookingService.ListPackages:output_type -> qdrant.cloud.booking.v1.ListPackagesResponse
 	9,  // 38: qdrant.cloud.booking.v1.BookingService.GetPackage:output_type -> qdrant.cloud.booking.v1.GetPackageResponse
 	7,  // 39: qdrant.cloud.booking.v1.BookingService.ListGlobalPackages:output_type -> qdrant.cloud.booking.v1.ListGlobalPackagesResponse
-	22, // 40: qdrant.cloud.booking.v1.BookingService.GetGlobalQuote:output_type -> qdrant.cloud.booking.v1.GetGlobalQuoteResponse
+	22, // 40: qdrant.cloud.booking.v1.BookingService.GetGlobalQuotes:output_type -> qdrant.cloud.booking.v1.GetGlobalQuotesResponse
 	17, // 41: qdrant.cloud.booking.v1.BookingService.GetQuote:output_type -> qdrant.cloud.booking.v1.GetQuoteResponse
 	24, // 42: qdrant.cloud.booking.v1.BookingService.GetBackupQuote:output_type -> qdrant.cloud.booking.v1.GetBackupQuoteResponse
 	26, // 43: qdrant.cloud.booking.v1.BookingService.ListInferenceModels:output_type -> qdrant.cloud.booking.v1.ListInferenceModelsResponse

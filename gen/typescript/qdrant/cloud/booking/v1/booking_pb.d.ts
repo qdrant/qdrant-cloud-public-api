@@ -721,11 +721,11 @@ export declare type GetQuoteResponseValid = GetQuoteResponse;
 export declare const GetQuoteResponseSchema: GenMessage<GetQuoteResponse, {validType: GetQuoteResponseValid}>;
 
 /**
- * GetGlobalQuoteRequest is the request for the GetGlobalQuote function
+ * GetGlobalQuotesRequest is the request for the GetGlobalQuotes function
  *
- * @generated from message qdrant.cloud.booking.v1.GetGlobalQuoteRequest
+ * @generated from message qdrant.cloud.booking.v1.GetGlobalQuotesRequest
  */
-export declare type GetGlobalQuoteRequest = Message<"qdrant.cloud.booking.v1.GetGlobalQuoteRequest"> & {
+export declare type GetGlobalQuotesRequest = Message<"qdrant.cloud.booking.v1.GetGlobalQuotesRequest"> & {
   /**
    * The cluster configurations to price.
    * Always priced at standard tier with no discount.
@@ -736,16 +736,16 @@ export declare type GetGlobalQuoteRequest = Message<"qdrant.cloud.booking.v1.Get
   configurations: GlobalQuoteConfiguration[];
 };
 
-export declare type GetGlobalQuoteRequestValid = GetGlobalQuoteRequest;
+export declare type GetGlobalQuotesRequestValid = GetGlobalQuotesRequest;
 
 /**
- * Describes the message qdrant.cloud.booking.v1.GetGlobalQuoteRequest.
- * Use `create(GetGlobalQuoteRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.booking.v1.GetGlobalQuotesRequest.
+ * Use `create(GetGlobalQuotesRequestSchema)` to create a new message.
  */
-export declare const GetGlobalQuoteRequestSchema: GenMessage<GetGlobalQuoteRequest, {validType: GetGlobalQuoteRequestValid}>;
+export declare const GetGlobalQuotesRequestSchema: GenMessage<GetGlobalQuotesRequest, {validType: GetGlobalQuotesRequestValid}>;
 
 /**
- * GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuote request.
+ * GlobalQuoteConfiguration describes a single cluster configuration to price as part of a GetGlobalQuotes request.
  *
  * @generated from message qdrant.cloud.booking.v1.GlobalQuoteConfiguration
  */
@@ -835,7 +835,7 @@ export declare const GlobalPriceBreakdownSchema: GenMessage<GlobalPriceBreakdown
 
 /**
  * GlobalQuote is the list price for a single cluster configuration.
- * It carries no discount fields: GetGlobalQuote is unauthenticated and always quotes
+ * It carries no discount fields: GetGlobalQuotes is unauthenticated and always quotes
  * standard-tier list price, so a discount could only ever be reported as zero.
  *
  * @generated from message qdrant.cloud.booking.v1.GlobalQuote
@@ -892,27 +892,27 @@ export declare type GlobalQuoteValid = GlobalQuote;
 export declare const GlobalQuoteSchema: GenMessage<GlobalQuote, {validType: GlobalQuoteValid}>;
 
 /**
- * GetGlobalQuoteResponse is the response from the GetGlobalQuote function
+ * GetGlobalQuotesResponse is the response from the GetGlobalQuotes function
  *
- * @generated from message qdrant.cloud.booking.v1.GetGlobalQuoteResponse
+ * @generated from message qdrant.cloud.booking.v1.GetGlobalQuotesResponse
  */
-export declare type GetGlobalQuoteResponse = Message<"qdrant.cloud.booking.v1.GetGlobalQuoteResponse"> & {
+export declare type GetGlobalQuotesResponse = Message<"qdrant.cloud.booking.v1.GetGlobalQuotesResponse"> & {
   /**
    * The quotes for each requested configuration.
-   * Index-aligned with `GetGlobalQuoteRequest.configurations`.
+   * Index-aligned with `GetGlobalQuotesRequest.configurations`.
    *
    * @generated from field: repeated qdrant.cloud.booking.v1.GlobalQuote quotes = 1;
    */
   quotes: GlobalQuote[];
 };
 
-export declare type GetGlobalQuoteResponseValid = GetGlobalQuoteResponse;
+export declare type GetGlobalQuotesResponseValid = GetGlobalQuotesResponse;
 
 /**
- * Describes the message qdrant.cloud.booking.v1.GetGlobalQuoteResponse.
- * Use `create(GetGlobalQuoteResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.booking.v1.GetGlobalQuotesResponse.
+ * Use `create(GetGlobalQuotesResponseSchema)` to create a new message.
  */
-export declare const GetGlobalQuoteResponseSchema: GenMessage<GetGlobalQuoteResponse, {validType: GetGlobalQuoteResponseValid}>;
+export declare const GetGlobalQuotesResponseSchema: GenMessage<GetGlobalQuotesResponse, {validType: GetGlobalQuotesResponseValid}>;
 
 /**
  * GetBackupQuoteRequest is the request for the GetBackupQuote function
@@ -1447,12 +1447,12 @@ export declare const BookingService: GenService<{
    * Always prices at standard tier with no discount, since there is no account to discount against.
    * Authentication not required
    *
-   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetGlobalQuote
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.GetGlobalQuotes
    */
-  getGlobalQuote: {
+  getGlobalQuotes: {
     methodKind: "unary";
-    input: typeof GetGlobalQuoteRequestSchema;
-    output: typeof GetGlobalQuoteResponseSchema;
+    input: typeof GetGlobalQuotesRequestSchema;
+    output: typeof GetGlobalQuotesResponseSchema;
   },
   /**
    * Gets a price quote for a cluster configuration.

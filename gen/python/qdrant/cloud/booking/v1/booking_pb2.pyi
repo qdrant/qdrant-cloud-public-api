@@ -224,7 +224,7 @@ class GetQuoteResponse(_message.Message):
     disk_speed: PriceBreakdown
     def __init__(self, currency: _Optional[str] = ..., original_price_per_hour: _Optional[int] = ..., discounted_price_per_hour: _Optional[int] = ..., discount_percentage: _Optional[float] = ..., package: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[PriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[PriceBreakdown, _Mapping]] = ...) -> None: ...
 
-class GetGlobalQuoteRequest(_message.Message):
+class GetGlobalQuotesRequest(_message.Message):
     __slots__ = ("configurations",)
     CONFIGURATIONS_FIELD_NUMBER: _ClassVar[int]
     configurations: _containers.RepeatedCompositeFieldContainer[GlobalQuoteConfiguration]
@@ -266,7 +266,7 @@ class GlobalQuote(_message.Message):
     disk_speed: GlobalPriceBreakdown
     def __init__(self, currency: _Optional[str] = ..., price_per_hour: _Optional[int] = ..., package: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., extra_disk: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ..., disk_speed: _Optional[_Union[GlobalPriceBreakdown, _Mapping]] = ...) -> None: ...
 
-class GetGlobalQuoteResponse(_message.Message):
+class GetGlobalQuotesResponse(_message.Message):
     __slots__ = ("quotes",)
     QUOTES_FIELD_NUMBER: _ClassVar[int]
     quotes: _containers.RepeatedCompositeFieldContainer[GlobalQuote]
