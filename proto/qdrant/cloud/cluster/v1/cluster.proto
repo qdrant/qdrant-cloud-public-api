@@ -830,6 +830,9 @@ message ClusterConfiguration {
   // The advanced gpu configuration for the database.
   // This is for hybrid cloud clusters only. It is ignored for managed cloud clusters.
   optional ClusterConfigurationGpuConfiguration gpu_configuration = 27;
+  // Timestamp when the cluster configuration was created.
+  // This is a read-only field and will be available after a cluster is created.
+  google.protobuf.Timestamp created_at = 28 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the
