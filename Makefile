@@ -81,7 +81,8 @@ $(BUF): $(LOCALBIN)
 buf/plugins: ## Install the required buf plugins (those that can't be installed using Buf's deps option).
 	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-required-fields@latest && \
 	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-method-options@latest && \
-	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-permissions-breaking@latest
+	go install github.com/qdrant/qdrant-cloud-buf-plugins/cmd/buf-plugin-permissions-breaking@latest && \
+	go install github.com/d0whc3r/protoc-gen-strict@latest
 
 .PHONY: buf/deps
 buf/deps: buf/plugins install/buf ## Install the required dependencies to work with the protobuf files.
