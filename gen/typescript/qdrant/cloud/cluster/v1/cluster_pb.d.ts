@@ -1317,6 +1317,14 @@ export declare type ClusterConfiguration = Message<"qdrant.cloud.cluster.v1.Clus
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration gpu_configuration = 27;
    */
   gpuConfiguration?: ClusterConfigurationGpuConfiguration | undefined;
+
+  /**
+   * Timestamp when the cluster configuration was created.
+   * This is a read-only field and will be available after a cluster is created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 28;
+   */
+  createdAt?: Timestamp | undefined;
 };
 
 /**
@@ -1498,6 +1506,14 @@ export declare type ClusterConfigurationValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: optional qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration gpu_configuration = 27;
    */
   gpuConfiguration?: ClusterConfigurationGpuConfigurationValid | undefined;
+
+  /**
+   * Timestamp when the cluster configuration was created.
+   * This is a read-only field and will be available after a cluster is created.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 28;
+   */
+  createdAt?: Timestamp | undefined;
 };
 
 /**
