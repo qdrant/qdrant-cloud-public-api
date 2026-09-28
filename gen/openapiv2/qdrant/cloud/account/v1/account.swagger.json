@@ -727,6 +727,12 @@
             "settings": {
               "$ref": "#/definitions/v1AccountSettings",
               "description": "The settings of the account.\nThis is an optional field, available to account owners only."
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the account was deleted (or is started to be deleting).\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The actual account.",
@@ -825,6 +831,12 @@
         "settings": {
           "$ref": "#/definitions/v1AccountSettings",
           "description": "The settings of the account.\nThis is an optional field, available to account owners only."
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the account was deleted (or is started to be deleting).\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "An Account represents an account in the Qdrant cloud."
@@ -1152,6 +1164,12 @@
         "onboardingStatus": {
           "$ref": "#/definitions/v1OnboardingStatus",
           "description": "The onboarding status of the user on the platform.\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the user was deleted (or is started to be deleting).\nThis is a read-only field.",
           "readOnly": true
         }
       },

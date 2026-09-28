@@ -241,7 +241,7 @@ class SuggestCompaniesResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Company, _Mapping]]] = ...) -> None: ...
 
 class Account(_message.Message):
-    __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company", "settings")
+    __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company", "settings", "deleted_at")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
@@ -251,6 +251,7 @@ class Account(_message.Message):
     PRIVILEGES_FIELD_NUMBER: _ClassVar[int]
     COMPANY_FIELD_NUMBER: _ClassVar[int]
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    DELETED_AT_FIELD_NUMBER: _ClassVar[int]
     id: str
     created_at: _timestamp_pb2.Timestamp
     last_modified_at: _timestamp_pb2.Timestamp
@@ -260,7 +261,8 @@ class Account(_message.Message):
     privileges: _containers.RepeatedScalarFieldContainer[str]
     company: Company
     settings: AccountSettings
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company: _Optional[_Union[Company, _Mapping]] = ..., settings: _Optional[_Union[AccountSettings, _Mapping]] = ...) -> None: ...
+    deleted_at: _timestamp_pb2.Timestamp
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., external_owner_id: _Optional[str] = ..., owner_email: _Optional[str] = ..., privileges: _Optional[_Iterable[str]] = ..., company: _Optional[_Union[Company, _Mapping]] = ..., settings: _Optional[_Union[AccountSettings, _Mapping]] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AccountInvite(_message.Message):
     __slots__ = ("id", "account_id", "account_name", "user_email", "user_role_ids", "created_at", "created_by_user_id", "created_by_email", "last_modified_at", "status")

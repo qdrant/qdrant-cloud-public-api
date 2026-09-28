@@ -1150,6 +1150,14 @@ export declare type User = Message<"qdrant.cloud.iam.v1.User"> & {
    * @generated from field: qdrant.cloud.iam.v1.OnboardingStatus onboarding_status = 7;
    */
   onboardingStatus: OnboardingStatus;
+
+  /**
+   * Timestamp when the user was deleted (or is started to be deleting).
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 8;
+   */
+  deletedAt?: Timestamp | undefined;
 };
 
 export declare type UserValid = User;

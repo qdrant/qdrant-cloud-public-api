@@ -686,6 +686,9 @@ message Account {
   // The settings of the account.
   // This is an optional field, available to account owners only.
   optional AccountSettings settings = 10;
+  // Timestamp when the account was deleted (or is started to be deleting).
+  // This is a read-only field.
+  google.protobuf.Timestamp deleted_at = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

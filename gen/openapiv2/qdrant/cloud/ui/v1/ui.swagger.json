@@ -228,6 +228,12 @@
           "$ref": "#/definitions/v1OnboardingStatus",
           "description": "The onboarding status of the user on the platform.\nThis is a read-only field.",
           "readOnly": true
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the user was deleted (or is started to be deleting).\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "description": "A User represents a user in the Qdrant cloud."

@@ -1072,6 +1072,14 @@ export declare type Account = Message<"qdrant.cloud.account.v1.Account"> & {
    * @generated from field: optional qdrant.cloud.account.v1.AccountSettings settings = 10;
    */
   settings?: AccountSettings | undefined;
+
+  /**
+   * Timestamp when the account was deleted (or is started to be deleting).
+   * This is a read-only field.
+   *
+   * @generated from field: google.protobuf.Timestamp deleted_at = 11;
+   */
+  deletedAt?: Timestamp | undefined;
 };
 
 export declare type AccountValid = Account;

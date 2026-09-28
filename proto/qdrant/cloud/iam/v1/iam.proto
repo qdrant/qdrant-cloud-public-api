@@ -858,6 +858,9 @@ message User {
     (buf.validate.field).enum.defined_only = true,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+  // Timestamp when the user was deleted (or is started to be deleting).
+  // This is a read-only field.
+  google.protobuf.Timestamp deleted_at = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // UserStatus defines the possible statuses of a user.
