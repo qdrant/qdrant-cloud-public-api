@@ -198,7 +198,7 @@
               "examples": {
                 "single_dense": {
                   "summary": "Single dense vector",
-                  "description": "The simplest collection: one unnamed dense vector, exact (`high`) precision, no payload indexes.",
+                  "description": "The simplest collection: one unnamed dense vector, default (`high`) precision, no payload indexes.",
                   "value": {
                     "vectors": {
                       "size": 1536,
@@ -506,12 +506,13 @@
         ]
       },
       "PrecisionTier": {
-        "description": "How much of the original vector precision may be traded for cost.\n\n- `low`: aggressive compression, lowest cost, approximate results.\n- `medium`: moderate compression with a small accuracy trade-off.\n- `high`: no lossy compression, exact stored vectors (default).\n\nThe serverless manager turns the tier into a concrete quantization and datatype choice; scalar, product or binary quantization and their parameters are never chosen directly.",
+        "description": "How much of the original vector precision may be traded for cost.\n\n- `low`: aggressive compression, lowest cost, approximate results.\n- `medium`: moderate compression with a small accuracy trade-off.\n- `high`: light compression, near-exact results (default).\n- `full`: no lossy compression, exact vectors fully in memory. Highest cost.\n\nThe serverless manager turns the tier into a concrete quantization and datatype choice; scalar, product or binary quantization and their parameters are never chosen directly.",
         "type": "string",
         "enum": [
           "low",
           "medium",
-          "high"
+          "high",
+          "full"
         ],
         "default": "high"
       },
