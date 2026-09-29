@@ -896,11 +896,18 @@ export enum PrecisionTier {
   MEDIUM = 2,
 
   /**
-   * No lossy compression: exact stored vectors.
+   * Light compression, near-exact results.
    *
    * @generated from enum value: HIGH = 3;
    */
   HIGH = 3,
+
+  /**
+   * No lossy compression: exact vectors, fully in memory. Highest cost.
+   *
+   * @generated from enum value: FULL = 4;
+   */
+  FULL = 4,
 }
 
 /**

@@ -95,8 +95,10 @@ const (
 	PrecisionTier_LOW PrecisionTier = 1
 	// Moderate compression with a small accuracy trade-off.
 	PrecisionTier_MEDIUM PrecisionTier = 2
-	// No lossy compression: exact stored vectors.
+	// Light compression, near-exact results.
 	PrecisionTier_HIGH PrecisionTier = 3
+	// No lossy compression: exact vectors, fully in memory. Highest cost.
+	PrecisionTier_FULL PrecisionTier = 4
 )
 
 // Enum value maps for PrecisionTier.
@@ -106,12 +108,14 @@ var (
 		1: "LOW",
 		2: "MEDIUM",
 		3: "HIGH",
+		4: "FULL",
 	}
 	PrecisionTier_value = map[string]int32{
 		"PRECISION_TIER_UNSPECIFIED": 0,
 		"LOW":                        1,
 		"MEDIUM":                     2,
 		"HIGH":                       3,
+		"FULL":                       4,
 	}
 )
 
@@ -1900,13 +1904,14 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
 	"\x06EUCLID\x10\x02\x12\a\n" +
 	"\x03DOT\x10\x03\x12\r\n" +
-	"\tMANHATTAN\x10\x04*N\n" +
+	"\tMANHATTAN\x10\x04*X\n" +
 	"\rPrecisionTier\x12\x1e\n" +
 	"\x1aPRECISION_TIER_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03LOW\x10\x01\x12\n" +
 	"\n" +
 	"\x06MEDIUM\x10\x02\x12\b\n" +
-	"\x04HIGH\x10\x03*^\n" +
+	"\x04HIGH\x10\x03\x12\b\n" +
+	"\x04FULL\x10\x04*^\n" +
 	"\tTokenizer\x12\x19\n" +
 	"\x15TOKENIZER_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
