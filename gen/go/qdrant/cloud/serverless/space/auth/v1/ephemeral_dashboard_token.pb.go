@@ -395,9 +395,9 @@ const file_qdrant_cloud_serverless_space_auth_v1_ephemeral_dashboard_token_proto
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x121\n" +
 	"\x10space_api_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rspaceApiKeyId\"'\n" +
-	"%RevokeEphemeralDashboardTokenResponse\"]\n" +
-	"\x17EphemeralDashboardToken\x12B\n" +
-	"\x05token\x18\x01 \x01(\tB,\xbaH)r'2%^(local|vault):v([1-9][0-9]{0,4}):.*$R\x05token2\xf5\n" +
+	"%RevokeEphemeralDashboardTokenResponse\"^\n" +
+	"\x17EphemeralDashboardToken\x12C\n" +
+	"\x05token\x18\x01 \x01(\tB-\xbaH*r(2&^(local|signed):v([1-9][0-9]{0,4}):.*$R\x05token2\xf5\n" +
 	"\n" +
 	"\x1eEphemeralDashboardTokenService\x12\xed\x03\n" +
 	"\x1dCreateEphemeralDashboardToken\x12K.qdrant.cloud.serverless.space.auth.v1.CreateEphemeralDashboardTokenRequest\x1aL.qdrant.cloud.serverless.space.auth.v1.CreateEphemeralDashboardTokenResponse\"\xb0\x02\x8a\xb5\x18\x16read:serverless_spaces\x92\xb5\x18\n" +

@@ -1215,6 +1215,12 @@
         "gpuConfiguration": {
           "$ref": "#/definitions/v1ClusterConfigurationGpuConfiguration",
           "description": "The advanced gpu configuration for the database.\nThis is for hybrid cloud clusters only. It is ignored for managed cloud clusters."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster configuration was created.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
         }
       },
       "description": "A ClusterConfiguration represents the configuration of a cluster."

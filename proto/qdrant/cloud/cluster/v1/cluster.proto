@@ -178,6 +178,10 @@ service ClusterService {
       resource_type: "cluster"
       resource_id_field: "req.cluster_id"
       resource_url_template: "/accounts/{req.account_id}/clusters/{req.cluster_id}"
+      additional_context_fields: {
+        key: "delete_backups"
+        value: "req.delete_backups"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -830,6 +834,9 @@ message ClusterConfiguration {
   // The advanced gpu configuration for the database.
   // This is for hybrid cloud clusters only. It is ignored for managed cloud clusters.
   optional ClusterConfigurationGpuConfiguration gpu_configuration = 27;
+  // Timestamp when the cluster configuration was created.
+  // This is a read-only field and will be available after a cluster is created.
+  google.protobuf.Timestamp created_at = 28 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // DatabaseConfigurationLogLevel defines the supported logging levels for the

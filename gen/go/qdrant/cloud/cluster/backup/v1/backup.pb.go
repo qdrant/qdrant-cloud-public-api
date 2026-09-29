@@ -2570,7 +2570,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\x91'\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xb7'\n" +
 	"\rBackupService\x12\x8d\x02\n" +
 	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\x94\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -2625,11 +2625,12 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\x1abackup_schedule.cluster_id\x1a\x0fbackup_schedule\"\x0fbackup_schedule\xca\xf3\x18\xd9\x01\b\x02\x12\x0fbackup-schedule\"\x16req.backup_schedule.id*~/accounts/{req.backup_schedule.account_id}/clusters/{req.backup_schedule.cluster_id}/backup_schedules/{req.backup_schedule.id}R,\n" +
 	"\n" +
-	"cluster_id\x12\x1ereq.backup_schedule.cluster_id\x82\xd3\xe4\x93\x02g:\x01*\x1ab/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xfd\x03\n" +
-	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"\xe9\x02\x8a\xb5\x18\x17delete:backup_schedules\xba\xb5\x18(\n" +
-	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xc3\x01\b\x03\x12\x0fbackup-schedule\"\x16req.backup_schedule_id*k/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backup_schedules/{req.backup_schedule_id}R)\n" +
+	"cluster_id\x12\x1ereq.backup_schedule.cluster_id\x82\xd3\xe4\x93\x02g:\x01*\x1ab/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xa3\x04\n" +
+	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"\x8f\x03\x8a\xb5\x18\x17delete:backup_schedules\xba\xb5\x18(\n" +
+	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xe9\x01\b\x03\x12\x0fbackup-schedule\"\x16req.backup_schedule_id*k/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backup_schedules/{req.backup_schedule_id}R)\n" +
 	"\n" +
-	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x01B\xa8\x02\n" +
+	"cluster_id\x12\x1bresp-md.qc-event-cluster-idR$\n" +
+	"\x0edelete_backups\x12\x12req.delete_backups\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x01B\xa8\x02\n" +
 	"\"com.qdrant.cloud.cluster.backup.v1B\vBackupProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/backup/v1;backupv1\xa2\x02\x04QCCB\xaa\x02\x1eQdrant.Cloud.Cluster.Backup.V1\xca\x02\x1eQdrant\\Cloud\\Cluster\\Backup\\V1\xe2\x02*Qdrant\\Cloud\\Cluster\\Backup\\V1\\GPBMetadata\xea\x02\"Qdrant::Cloud::Cluster::Backup::V1b\x06proto3"
 
 var (
