@@ -77,7 +77,7 @@ export type RevokeEphemeralDashboardTokenResponseStrict = RevokeEphemeralDashboa
  *
  * Left to runtime validation, having no type equivalent:
  *   token
- *     string.pattern = ^(local|vault):v([1-9][0-9]{0,4}):.*$
+ *     string.pattern = ^(local|signed):v([1-9][0-9]{0,4}):.*$
  */
 export type EphemeralDashboardTokenStrict = EphemeralDashboardToken;
 

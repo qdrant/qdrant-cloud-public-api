@@ -2,8 +2,8 @@
 // source: qdrant/cloud/booking/v1/booking.proto
 
 import type { Narrow, NonEmptyList, Require, Uuid } from "../../../../strict/types";
-import type { AvailableAdditionalResources, AvailableStoragePerformanceTierConfigurations, GetBackupQuoteRequest, GetBackupQuoteResponse, GetGlobalQuotesRequest, GetGlobalQuotesResponse, GetPackageRequest, GetPackageResponse, GetQuoteRequest, GetQuoteResponse, GlobalPriceBreakdown, GlobalQuote, GlobalQuoteConfiguration, InferenceModel, ListGlobalPackagesRequest, ListGlobalPackagesResponse, ListInferenceModelsRequest, ListInferenceModelsResponse, ListPackagesRequest, ListPackagesResponse, ListStorageTierTypesRequest, ListStorageTierTypesResponse, ModelModality, Package, PackageStatus, PackageTier, PriceBreakdown, ResourceConfiguration, ResourceConfigurationFilter, StorageTiers, VectorType } from "./booking_pb";
-import { AvailableStoragePerformanceTierConfigurationsSchema, BookingService, GetBackupQuoteRequestSchema, GetBackupQuoteResponseSchema, GetGlobalQuotesRequestSchema, GetGlobalQuotesResponseSchema, GetPackageRequestSchema, GetPackageResponseSchema, GetQuoteRequestSchema, GetQuoteResponseSchema, GlobalQuoteConfigurationSchema, InferenceModelSchema, ListGlobalPackagesRequestSchema, ListGlobalPackagesResponseSchema, ListInferenceModelsRequestSchema, ListInferenceModelsResponseSchema, ListPackagesRequestSchema, ListPackagesResponseSchema, ListStorageTierTypesRequestSchema, ListStorageTierTypesResponseSchema, PackageSchema, StorageTiersSchema } from "./booking_pb";
+import type { AvailableAdditionalResources, AvailableStoragePerformanceTierConfigurations, GetBackupQuoteRequest, GetBackupQuoteResponse, GetGlobalQuotesRequest, GetGlobalQuotesResponse, GetPackageRequest, GetPackageResponse, GetQuoteRequest, GetQuoteResponse, GlobalPriceBreakdown, GlobalQuote, GlobalQuoteConfiguration, InferenceModel, ListGlobalInferenceModelsRequest, ListGlobalInferenceModelsResponse, ListGlobalPackagesRequest, ListGlobalPackagesResponse, ListInferenceModelsRequest, ListInferenceModelsResponse, ListPackagesRequest, ListPackagesResponse, ListStorageTierTypesRequest, ListStorageTierTypesResponse, ModelModality, Package, PackageStatus, PackageTier, PriceBreakdown, ResourceConfiguration, ResourceConfigurationFilter, StorageTiers, VectorType } from "./booking_pb";
+import { AvailableStoragePerformanceTierConfigurationsSchema, BookingService, GetBackupQuoteRequestSchema, GetBackupQuoteResponseSchema, GetGlobalQuotesRequestSchema, GetGlobalQuotesResponseSchema, GetPackageRequestSchema, GetPackageResponseSchema, GetQuoteRequestSchema, GetQuoteResponseSchema, GlobalQuoteConfigurationSchema, InferenceModelSchema, ListGlobalInferenceModelsRequestSchema, ListGlobalInferenceModelsResponseSchema, ListGlobalPackagesRequestSchema, ListGlobalPackagesResponseSchema, ListInferenceModelsRequestSchema, ListInferenceModelsResponseSchema, ListPackagesRequestSchema, ListPackagesResponseSchema, ListStorageTierTypesRequestSchema, ListStorageTierTypesResponseSchema, PackageSchema, StorageTiersSchema } from "./booking_pb";
 import type { StorageTierTypeStrict } from "../../common/v1/common.strict";
 import type { GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 
@@ -406,6 +406,21 @@ export type ListInferenceModelsResponseStrict = Narrow<ListInferenceModelsRespon
 }>;
 
 /**
+ *
+ * Left to runtime validation, having no type equivalent:
+ *   cloud_provider_id
+ *     string.min_len = 3
+ *   cloud_provider_region_id
+ *     string.min_len = 1
+ */
+export type ListGlobalInferenceModelsRequestStrict = ListGlobalInferenceModelsRequest;
+
+/** ListGlobalInferenceModelsResponse is the response from the ListGlobalInferenceModels function */
+export type ListGlobalInferenceModelsResponseStrict = Narrow<ListGlobalInferenceModelsResponse, {
+  items: InferenceModelStrict[];
+}>;
+
+/**
  * ListStorageTierTypesRequest is the request for the ListStorageTierTypes function
  *
  * Left to runtime validation, having no type equivalent:
@@ -583,6 +598,14 @@ export const ListInferenceModelsResponseStrictSchema =
   ListInferenceModelsResponseSchema as GenMessage<ListInferenceModelsResponse, { validType: ListInferenceModelsResponseStrict }>;
 
 /**
+ * Describes qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse, reporting ListGlobalInferenceModelsResponseStrict as its valid type.
+ * The same descriptor protoc-gen-es generated, so the wire format and the identity
+ * this has as a query key are unchanged — only what `MessageValidType` reports differs.
+ */
+export const ListGlobalInferenceModelsResponseStrictSchema =
+  ListGlobalInferenceModelsResponseSchema as GenMessage<ListGlobalInferenceModelsResponse, { validType: ListGlobalInferenceModelsResponseStrict }>;
+
+/**
  * Describes qdrant.cloud.booking.v1.ListStorageTierTypesRequest, reporting ListStorageTierTypesRequestStrict as its valid type.
  * The same descriptor protoc-gen-es generated, so the wire format and the identity
  * this has as a query key are unchanged — only what `MessageValidType` reports differs.
@@ -654,6 +677,12 @@ type BookingServiceStrictDescriptor = GenService<{
     methodKind: "unary";
     input: typeof ListInferenceModelsRequestStrictSchema;
     output: typeof ListInferenceModelsResponseStrictSchema;
+  },
+  /** Gets the list of globally available inference models. Authentication not required */
+  listGlobalInferenceModels: {
+    methodKind: "unary";
+    input: typeof ListGlobalInferenceModelsRequestSchema;
+    output: typeof ListGlobalInferenceModelsResponseStrictSchema;
   },
   /** Gets the list of available storage tiers for a particular region Required permissions: - None (authenticated only) */
   listStorageTierTypes: {
