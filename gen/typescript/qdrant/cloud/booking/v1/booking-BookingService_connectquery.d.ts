@@ -64,6 +64,13 @@ export const getBackupQuote: typeof BookingService["method"]["getBackupQuote"];
  */
 export const listInferenceModels: typeof BookingService["method"]["listInferenceModels"];
 /**
+ * Gets the list of globally available inference models.
+ * Authentication not required
+ *
+ * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalInferenceModels
+ */
+export const listGlobalInferenceModels: typeof BookingService["method"]["listGlobalInferenceModels"];
+/**
  * Gets the list of available storage tiers for a particular region
  * Required permissions:
  * - None (authenticated only)

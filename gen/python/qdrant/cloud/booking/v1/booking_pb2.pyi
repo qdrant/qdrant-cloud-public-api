@@ -312,6 +312,20 @@ class ListInferenceModelsResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[InferenceModel]
     def __init__(self, items: _Optional[_Iterable[_Union[InferenceModel, _Mapping]]] = ...) -> None: ...
 
+class ListGlobalInferenceModelsRequest(_message.Message):
+    __slots__ = ("cloud_provider_id", "cloud_provider_region_id")
+    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    cloud_provider_id: str
+    cloud_provider_region_id: str
+    def __init__(self, cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ...) -> None: ...
+
+class ListGlobalInferenceModelsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[InferenceModel]
+    def __init__(self, items: _Optional[_Iterable[_Union[InferenceModel, _Mapping]]] = ...) -> None: ...
+
 class ListStorageTierTypesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
