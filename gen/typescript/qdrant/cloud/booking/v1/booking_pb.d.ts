@@ -1075,6 +1075,60 @@ export declare type ListInferenceModelsResponseValid = ListInferenceModelsRespon
 export declare const ListInferenceModelsResponseSchema: GenMessage<ListInferenceModelsResponse, {validType: ListInferenceModelsResponseValid}>;
 
 /**
+ * ListGlobalInferenceModelsRequest is the request for the ListGlobalInferenceModels function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalInferenceModelsRequest
+ */
+export declare type ListGlobalInferenceModelsRequest = Message<"qdrant.cloud.booking.v1.ListGlobalInferenceModelsRequest"> & {
+  /**
+   * Required field specifying the cloud provider where the inference model is available.
+   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   * This field cannot be set to `hybrid`.
+   *
+   * @generated from field: string cloud_provider_id = 1;
+   */
+  cloudProviderId: string;
+
+  /**
+   * Filter specifying the cloud region where the inference model is available.
+   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
+   *
+   * @generated from field: string cloud_provider_region_id = 2;
+   */
+  cloudProviderRegionId: string;
+};
+
+export declare type ListGlobalInferenceModelsRequestValid = ListGlobalInferenceModelsRequest;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalInferenceModelsRequest.
+ * Use `create(ListGlobalInferenceModelsRequestSchema)` to create a new message.
+ */
+export declare const ListGlobalInferenceModelsRequestSchema: GenMessage<ListGlobalInferenceModelsRequest, {validType: ListGlobalInferenceModelsRequestValid}>;
+
+/**
+ * ListGlobalInferenceModelsResponse is the response from the ListGlobalInferenceModels function
+ *
+ * @generated from message qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse
+ */
+export declare type ListGlobalInferenceModelsResponse = Message<"qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse"> & {
+  /**
+   * The actual inference models in this list
+   *
+   * @generated from field: repeated qdrant.cloud.booking.v1.InferenceModel items = 1;
+   */
+  items: InferenceModel[];
+};
+
+export declare type ListGlobalInferenceModelsResponseValid = ListGlobalInferenceModelsResponse;
+
+/**
+ * Describes the message qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse.
+ * Use `create(ListGlobalInferenceModelsResponseSchema)` to create a new message.
+ */
+export declare const ListGlobalInferenceModelsResponseSchema: GenMessage<ListGlobalInferenceModelsResponse, {validType: ListGlobalInferenceModelsResponseValid}>;
+
+/**
  * ListStorageTierTypesRequest is the request for the ListStorageTierTypes function
  *
  * @generated from message qdrant.cloud.booking.v1.ListStorageTierTypesRequest
@@ -1493,6 +1547,17 @@ export declare const BookingService: GenService<{
     methodKind: "unary";
     input: typeof ListInferenceModelsRequestSchema;
     output: typeof ListInferenceModelsResponseSchema;
+  },
+  /**
+   * Gets the list of globally available inference models.
+   * Authentication not required
+   *
+   * @generated from rpc qdrant.cloud.booking.v1.BookingService.ListGlobalInferenceModels
+   */
+  listGlobalInferenceModels: {
+    methodKind: "unary";
+    input: typeof ListGlobalInferenceModelsRequestSchema;
+    output: typeof ListGlobalInferenceModelsResponseSchema;
   },
   /**
    * Gets the list of available storage tiers for a particular region
