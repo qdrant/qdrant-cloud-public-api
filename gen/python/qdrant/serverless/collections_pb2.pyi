@@ -22,6 +22,7 @@ class PrecisionTier(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     LOW: _ClassVar[PrecisionTier]
     MEDIUM: _ClassVar[PrecisionTier]
     HIGH: _ClassVar[PrecisionTier]
+    FULL: _ClassVar[PrecisionTier]
 
 class Tokenizer(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -39,6 +40,7 @@ PRECISION_TIER_UNSPECIFIED: PrecisionTier
 LOW: PrecisionTier
 MEDIUM: PrecisionTier
 HIGH: PrecisionTier
+FULL: PrecisionTier
 TOKENIZER_UNSPECIFIED: Tokenizer
 PREFIX: Tokenizer
 WHITESPACE: Tokenizer
