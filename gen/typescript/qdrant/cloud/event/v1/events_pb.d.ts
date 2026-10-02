@@ -192,6 +192,14 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   caller?: Caller | undefined;
 
   /**
+   * True when the caller acted on the account through a Qdrant global grant rather
+   * than a role on that account. Omitted otherwise, and on legacy events.
+   *
+   * @generated from field: optional bool via_global_grant = 18;
+   */
+  viaGlobalGrant?: boolean | undefined;
+
+  /**
    * The account ID associated with this event (if applicable, UUID).
    * This field will be set if the event is bound to a specific account.
    *
@@ -342,6 +350,14 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
    * @generated from field: qdrant.cloud.common.v1.Caller caller = 3;
    */
   caller: CallerValid;
+
+  /**
+   * True when the caller acted on the account through a Qdrant global grant rather
+   * than a role on that account. Omitted otherwise, and on legacy events.
+   *
+   * @generated from field: optional bool via_global_grant = 18;
+   */
+  viaGlobalGrant?: boolean | undefined;
 
   /**
    * The account ID associated with this event (if applicable, UUID).

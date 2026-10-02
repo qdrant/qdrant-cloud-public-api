@@ -414,6 +414,9 @@ type Event struct {
 	Result *Result `protobuf:"bytes,9,opt,name=result,proto3,oneof" json:"result,omitempty"`
 	// The authenticated actor that performed the action which triggered this event.
 	Caller *v1.Caller `protobuf:"bytes,3,opt,name=caller,proto3" json:"caller,omitempty"`
+	// True when the caller acted on the account through a Qdrant global grant rather
+	// than a role on that account. Omitted otherwise, and on legacy events.
+	ViaGlobalGrant *bool `protobuf:"varint,18,opt,name=via_global_grant,json=viaGlobalGrant,proto3,oneof" json:"via_global_grant,omitempty"`
 	// The account ID associated with this event (if applicable, UUID).
 	// This field will be set if the event is bound to a specific account.
 	AccountId *string `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
@@ -525,6 +528,13 @@ func (x *Event) GetCaller() *v1.Caller {
 		return x.Caller
 	}
 	return nil
+}
+
+func (x *Event) GetViaGlobalGrant() bool {
+	if x != nil && x.ViaGlobalGrant != nil {
+		return *x.ViaGlobalGrant
+	}
+	return false
 }
 
 func (x *Event) GetAccountId() string {
@@ -664,7 +674,7 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\ferror_reason\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bH\x01R\verrorReason\x88\x01\x01B\x0e\n" +
 	"\f_status_codeB\x0f\n" +
-	"\r_error_reason\"\x93\t\n" +
+	"\r_error_reason\"\xd7\t\n" +
 	"\x05Event\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x129\n" +
 	"\n" +
@@ -673,14 +683,15 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\n" +
 	"ip_address\x18\b \x01(\tB\a\xbaH\x04r\x02x\x01H\x01R\tipAddress\x88\x01\x01\x12:\n" +
 	"\x06result\x18\t \x01(\v2\x1d.qdrant.cloud.event.v1.ResultH\x02R\x06result\x88\x01\x01\x12>\n" +
-	"\x06caller\x18\x03 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06caller\x12,\n" +
+	"\x06caller\x18\x03 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x06\xbaH\x03\xc8\x01\x01R\x06caller\x12-\n" +
+	"\x10via_global_grant\x18\x12 \x01(\bH\x03R\x0eviaGlobalGrant\x88\x01\x01\x12,\n" +
 	"\n" +
-	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x03R\taccountId\x88\x01\x01\x12&\n" +
+	"account_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x04R\taccountId\x88\x01\x01\x12&\n" +
 	"\n" +
 	"source_rpc\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tsourceRpc\x12K\n" +
 	"\x06source\x18\x10 \x01(\x0e2\".qdrant.cloud.event.v1.EventSourceB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x04R\x06source\x88\x01\x01\x12'\n" +
-	"\btrace_id\x18\x11 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\atraceId\x88\x01\x01\x12K\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\x06source\x88\x01\x01\x12'\n" +
+	"\btrace_id\x18\x11 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\atraceId\x88\x01\x01\x12K\n" +
 	"\n" +
 	"event_type\x18\n" +
 	" \x01(\x0e2 .qdrant.cloud.event.v1.EventTypeB\n" +
@@ -688,10 +699,10 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\rresource_type\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fresourceType\x12\x1f\n" +
 	"\vstatus_only\x18\f \x01(\bR\n" +
 	"statusOnly\x12-\n" +
-	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
+	"\vresource_id\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\n" +
 	"resourceId\x88\x01\x01\x12*\n" +
 	"\fresource_url\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUrl\x12-\n" +
-	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\n" +
+	"\vaction_type\x18\x0f \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\n" +
 	"actionType\x88\x01\x01\x12b\n" +
 	"\x12additional_context\x18\x14 \x03(\v23.qdrant.cloud.event.v1.Event.AdditionalContextEntryR\x11additionalContext\x12F\n" +
 	"\x12additional_payload\x18\x15 \x01(\v2\x17.google.protobuf.StructR\x11additionalPayload\x1aD\n" +
@@ -700,7 +711,8 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\t_durationB\r\n" +
 	"\v_ip_addressB\t\n" +
-	"\a_resultB\r\n" +
+	"\a_resultB\x13\n" +
+	"\x11_via_global_grantB\r\n" +
 	"\v_account_idB\t\n" +
 	"\a_sourceB\v\n" +
 	"\t_trace_idB\x0e\n" +
