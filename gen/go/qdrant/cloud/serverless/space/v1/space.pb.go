@@ -95,13 +95,9 @@ type ListSpacesRequest struct {
 	// The identifier of the account (in GUID format).
 	// This is a required field.
 	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// Cloud provider where the space is hosted.
-	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-	// In this case, `hybrid` isn't supported.
-	CloudProviderId *string `protobuf:"bytes,10,opt,name=cloud_provider_id,json=cloudProviderId,proto3,oneof" json:"cloud_provider_id,omitempty"`
-	// Cloud provider region where the space is hosted.
-	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-	CloudProviderRegionId *string `protobuf:"bytes,11,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3,oneof" json:"cloud_provider_region_id,omitempty"`
+	// Cloud region where the space is hosted.
+	// Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
+	CloudRegionId *string `protobuf:"bytes,11,opt,name=cloud_region_id,json=cloudRegionId,proto3,oneof" json:"cloud_region_id,omitempty"`
 	// Maximum number of items to return.
 	// If not specified, all items are returned.
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -151,16 +147,9 @@ func (x *ListSpacesRequest) GetAccountId() string {
 	return ""
 }
 
-func (x *ListSpacesRequest) GetCloudProviderId() string {
-	if x != nil && x.CloudProviderId != nil {
-		return *x.CloudProviderId
-	}
-	return ""
-}
-
-func (x *ListSpacesRequest) GetCloudProviderRegionId() string {
-	if x != nil && x.CloudProviderRegionId != nil {
-		return *x.CloudProviderRegionId
+func (x *ListSpacesRequest) GetCloudRegionId() string {
+	if x != nil && x.CloudRegionId != nil {
+		return *x.CloudRegionId
 	}
 	return ""
 }
@@ -876,15 +865,10 @@ type Space struct {
 	// Timestamp when the space was deleted (or is started to be deleting).
 	// This is a read-only field and will be set after DeleteSpace is called.
 	DeletedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	// Cloud provider where the space is hosted.
-	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-	// In this case, `hybrid` isn't supported.
+	// Cloud region where the space is hosted.
+	// Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
 	// After creation, this field cannot be changed.
-	CloudProviderId string `protobuf:"bytes,10,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// Cloud provider region where the space is hosted.
-	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-	// After creation, this field cannot be changed.
-	CloudProviderRegionId string `protobuf:"bytes,11,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
+	CloudRegionId string `protobuf:"bytes,11,opt,name=cloud_region_id,json=cloudRegionId,proto3" json:"cloud_region_id,omitempty"`
 	// List of labels for a space. These labels are used in the cloud ui and billing reports.
 	// This is an optional field
 	Labels []*v1.KeyValue `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty"`
@@ -975,16 +959,9 @@ func (x *Space) GetDeletedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Space) GetCloudProviderId() string {
+func (x *Space) GetCloudRegionId() string {
 	if x != nil {
-		return x.CloudProviderId
-	}
-	return ""
-}
-
-func (x *Space) GetCloudProviderRegionId() string {
-	if x != nil {
-		return x.CloudProviderRegionId
+		return x.CloudRegionId
 	}
 	return ""
 }
@@ -1411,23 +1388,20 @@ var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xa1\x04\n" +
+	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x97\x02\n" +
 	"\x11ListSpacesRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
-	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\a\xbaH\x04r\x02\x10\x03H\x00R\x0fcloudProviderId\x88\x01\x01\x12E\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15cloudProviderRegionId\x88\x01\x01\x12,\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
+	"\x0fcloud_region_id\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\rcloudRegionId\x88\x01\x01\x12,\n" +
 	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x02R\bpageSize\x88\x01\x01\x12+\n" +
+	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
-	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\tpageToken\x88\x01\x01:\xb6\x01\xbaH\xb2\x01\x1a\xaf\x01\n" +
-	"%list_spaces.cloud_provider_id_present\x12Bcloud_provider_id is required when cloud_provider_region_id is set\x1aB!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)B\x14\n" +
-	"\x12_cloud_provider_idB\x1b\n" +
-	"\x19_cloud_provider_region_idB\f\n" +
+	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x12\n" +
+	"\x10_cloud_region_idB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_page_token\"\xd9\x01\n" +
+	"\v_page_tokenJ\x04\b\n" +
+	"\x10\vR\x11cloud_provider_id\"\xd9\x01\n" +
 	"\x12ListSpacesResponse\x12=\n" +
 	"\x05items\x18\x01 \x03(\v2'.qdrant.cloud.serverless.space.v1.SpaceR\x05items\x12+\n" +
 	"\n" +
@@ -1476,7 +1450,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"7\n" +
 	"\x18SuggestSpaceNameResponse\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\xc8\t\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\x98\t\n" +
 	"\x05Space\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +
@@ -1485,12 +1459,9 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
 	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12>\n" +
 	"\n" +
-	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x126\n" +
-	"\x11cloud_provider_id\x18\n" +
-	" \x01(\tB\n" +
-	"\xe0A\x05\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12C\n" +
-	"\x18cloud_provider_region_id\x18\v \x01(\tB\n" +
-	"\xe0A\x05\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12B\n" +
+	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x122\n" +
+	"\x0fcloud_region_id\x18\v \x01(\tB\n" +
+	"\xe0A\x05\xbaH\x04r\x02\x10\x01R\rcloudRegionId\x12B\n" +
 	"\x06labels\x18\f \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x06labels\x12\xc7\x01\n" +
 	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12b\n" +
@@ -1502,7 +1473,8 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tdeletedBy\x12G\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateB\x03\xe0A\x03R\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\x87\x05\n" +
+	"\x16_cost_allocation_labelJ\x04\b\n" +
+	"\x10\vR\x11cloud_provider_id\"\x87\x05\n" +
 	"\x12SpaceConfiguration\x12I\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
@@ -1542,7 +1514,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xfd\x12\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xfb\x12\n" +
 	"\fSpaceService\x12\xca\x01\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"Q\x8a\xb5\x18\x16read:serverless_spaces\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xe7\x01\n" +
@@ -1567,7 +1539,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\x80\x02\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18\x85\x01\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xd3\x01\n" +
-	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x01\x10\x03B\xb2\x02\n" +
+	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"H\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\x06µ\x18\x02\b\x02B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 

@@ -5,215 +5,128 @@ package qdrant.cloud.serverless.platform.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-import "qdrant/cloud/hybrid/v1/hybrid_cloud.proto";
 
-// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
+// PlatformService is the API used to query for cloud regions information for the serverless spaces in the platform.
 service PlatformService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
-    major: 1
+    major: 2
     minor: 0
     patch: 0
   };
-  // Lists all available cloud providers globally (not account-specific).
+  // Lists all cloud regions (not account-specific).
   // Authentication is not required.
-  rpc ListGlobalCloudProviders(ListGlobalCloudProvidersRequest) returns (ListGlobalCloudProvidersResponse) {
+  rpc ListGlobalCloudRegions(ListGlobalCloudRegionsRequest) returns (ListGlobalCloudRegionsResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-regions"};
   }
-  // Lists all cloud providers in the account identified by the given ID.
-  // Required permissions:
-  // - None (authenticated only)
-  rpc ListCloudProviders(ListCloudProvidersRequest) returns (ListCloudProvidersResponse) {
-    // permissions
-    option (common.v1.permissions) = "";
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers"};
-  }
-  // Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
+  // Gets a specific cloud region (not account-specific) identified by cloud region ID.
   // Authentication is not required.
-  rpc ListGlobalCloudProviderRegions(ListGlobalCloudProviderRegionsRequest) returns (ListGlobalCloudProviderRegionsResponse) {
+  rpc GetGlobalCloudRegion(GetGlobalCloudRegionRequest) returns (GetGlobalCloudRegionResponse) {
     // authentication not required
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-regions/{cloud_region_id}"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
-      field_expression: "cloud_provider_id"
+      name: "cloud_region_id"
+      field_expression: "cloud_region_id"
     };
   }
-  // Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
-  // Authentication is not required.
-  rpc GetGlobalCloudProviderRegion(GetGlobalCloudProviderRegionRequest) returns (GetGlobalCloudProviderRegionResponse) {
-    // authentication not required
-    option (qdrant.cloud.common.v1.requires_authentication) = false;
-    // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
-    // log fields
-    option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
-      field_expression: "cloud_provider_id"
-    };
-    option (common.v1.log_fields) = {
-      name: "region_id"
-      field_expression: "region_id"
-    };
-  }
-  // Lists all cloud provider regions in the account identified by the given ID and cloud provider.
+  // Lists all cloud regions in the account identified by the given ID.
   // Required permissions:
   // - None (authenticated only)
-  rpc ListCloudProviderRegions(ListCloudProviderRegionsRequest) returns (ListCloudProviderRegionsResponse) {
+  rpc ListCloudRegions(ListCloudRegionsRequest) returns (ListCloudRegionsResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions"};
-    // log fields
-    option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
-      field_expression: "cloud_provider_id"
-    };
+    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-regions"};
   }
-  // Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
+  // Gets a specific cloud region in the account identified by the given ID.
   // Required permissions:
   // - None (authenticated only)
-  rpc GetCloudProviderRegion(GetCloudProviderRegionRequest) returns (GetCloudProviderRegionResponse) {
+  rpc GetCloudRegion(GetCloudRegionRequest) returns (GetCloudRegionResponse) {
     // permissions
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
-    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}"};
+    option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-regions/{cloud_region_id}"};
     // log fields
     option (common.v1.log_fields) = {
-      name: "cloud_provider_id"
-      field_expression: "cloud_provider_id"
-    };
-    option (common.v1.log_fields) = {
-      name: "region_id"
-      field_expression: "region_id"
+      name: "cloud_region_id"
+      field_expression: "cloud_region_id"
     };
   }
-}
-
-// ListCloudProvidersRequest is the request for the ListCloudProviders function.
-message ListCloudProvidersRequest {
-  // The identifier of the account (in GUID format).
-  // This is a required field.
-  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-}
-
-// ListCloudProvidersResponse is the response from the ListCloudProviders function.
-message ListCloudProvidersResponse {
-  // The cloud providers
-  repeated CloudProvider items = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
-message ListGlobalCloudProvidersRequest {
+// ListGlobalCloudRegionsRequest is the request for the ListGlobalCloudRegions function.
+message ListGlobalCloudRegionsRequest {
   // Empty
 }
 
-// ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
-message ListGlobalCloudProvidersResponse {
-  // The cloud providers
-  repeated CloudProvider items = 1;
+// ListGlobalCloudRegionsResponse is the response from the ListGlobalCloudRegions function.
+message ListGlobalCloudRegionsResponse {
+  // The cloud regions.
+  repeated CloudRegion items = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// ListGlobalCloudProviderRegionsRequest is the request for the ListGlobalCloudProviderRegions function.
-message ListGlobalCloudProviderRegionsRequest {
-  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+// GetGlobalCloudRegionRequest is the request for the GetGlobalCloudRegion function.
+message GetGlobalCloudRegionRequest {
+  // The identifier for the cloud region.
   // This is a required field.
-  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
+  string cloud_region_id = 1 [(buf.validate.field).string = {min_len: 1}];
 }
 
-// ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
-message ListGlobalCloudProviderRegionsResponse {
-  // The cloud provider regions.
-  repeated CloudProviderRegion items = 1;
+// GetGlobalCloudRegionResponse is the response from the GetGlobalCloudRegion function.
+message GetGlobalCloudRegionResponse {
+  // The cloud region.
+  CloudRegion region = 1;
 }
 
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
-// GetGlobalCloudProviderRegionRequest is the request for the GetGlobalCloudProviderRegion function.
-message GetGlobalCloudProviderRegionRequest {
-  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-  // This is a required field.
-  string cloud_provider_id = 1 [(buf.validate.field).string = {min_len: 3}];
-  // The identifier for the cloud provider region.
-  // This is a required field.
-  string region_id = 2 [(buf.validate.field).string = {min_len: 1}];
-}
-
-// GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function.
-message GetGlobalCloudProviderRegionResponse {
-  // The cloud provider region.
-  CloudProviderRegion region = 1;
-}
-
-// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
-message ListCloudProviderRegionsRequest {
+// ListCloudRegionsRequest is the request for the ListCloudRegions function.
+message ListCloudRegionsRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-  // This is a required field.
-  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
 }
 
-// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
-message ListCloudProviderRegionsResponse {
-  // The cloud provider regions.
-  repeated CloudProviderRegion items = 1;
+// ListCloudRegionsResponse is the response from the ListCloudRegions function.
+message ListCloudRegionsResponse {
+  // The cloud regions.
+  repeated CloudRegion items = 1;
 }
 
-// GetCloudProviderRegionRequest is the request for the GetCloudProviderRegion function.
-message GetCloudProviderRegionRequest {
+// GetCloudRegionRequest is the request for the GetCloudRegion function.
+message GetCloudRegionRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+  // The identifier for the cloud region.
   // This is a required field.
-  string cloud_provider_id = 2 [(buf.validate.field).string = {min_len: 3}];
-  // The identifier for the cloud provider region.
-  // This is a required field.
-  string region_id = 3 [(buf.validate.field).string = {min_len: 1}];
+  string cloud_region_id = 2 [(buf.validate.field).string = {min_len: 1}];
 }
 
-// GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function.
-message GetCloudProviderRegionResponse {
-  // The cloud provider region.
-  CloudProviderRegion region = 1;
+// GetCloudRegionResponse is the response from the GetCloudRegion function.
+message GetCloudRegionResponse {
+  // The cloud region.
+  CloudRegion region = 1;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// CloudProvider represents a cloud provider identifier and name.
-message CloudProvider {
-  // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure".
-  string id = 1 [(buf.validate.field).string.min_len = 3];
-  // The human-readable name of the cloud provider.
-  // e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure".
-  string name = 2 [(buf.validate.field).string.min_len = 1];
-  // Indicates whether the cloud provider is available at the moment.
-  bool available = 3;
-}
-
-// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
-// CloudProviderRegion represents a cloud provider region.
-message CloudProviderRegion {
-  // The identifier for the cloud provider region.
-  // e.g. "us-west-1", "europe-west1", "eastus".
+// CloudRegion represents a cloud region where serverless spaces can be hosted.
+message CloudRegion {
+  // The globally unique identifier for the cloud region.
   string id = 1 [(buf.validate.field).string.min_len = 1];
-  // The human-readable name of the cloud provider region.
+  // The human-readable name of the cloud region.
   // e.g. "Frankfurt", "Tokyo", etc.
   string name = 2 [(buf.validate.field).string.min_len = 1];
   // Indicates whether the cloud region is available.
   bool available = 3;
-  // The identifier for the cloud provider.
-  // e.g. "aws", "gcp", "azure".
-  string provider = 4 [(buf.validate.field).string.min_len = 1];
+  reserved 4;
+  reserved "provider";
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
   optional string country_iso_code = 5 [(buf.validate.field).string = {
     len: 2

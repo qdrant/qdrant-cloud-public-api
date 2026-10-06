@@ -27,21 +27,12 @@ export declare type ListSpacesRequest = Message<"qdrant.cloud.serverless.space.v
   accountId: string;
 
   /**
-   * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-   * In this case, `hybrid` isn't supported.
+   * Cloud region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
    *
-   * @generated from field: optional string cloud_provider_id = 10;
+   * @generated from field: optional string cloud_region_id = 11;
    */
-  cloudProviderId?: string | undefined;
-
-  /**
-   * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-   *
-   * @generated from field: optional string cloud_provider_region_id = 11;
-   */
-  cloudProviderRegionId?: string | undefined;
+  cloudRegionId?: string | undefined;
 
   /**
    * Maximum number of items to return.
@@ -586,23 +577,13 @@ export declare type Space = Message<"qdrant.cloud.serverless.space.v1.Space"> & 
   deletedAt?: Timestamp | undefined;
 
   /**
-   * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-   * In this case, `hybrid` isn't supported.
+   * Cloud region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
    * After creation, this field cannot be changed.
    *
-   * @generated from field: string cloud_provider_id = 10;
+   * @generated from field: string cloud_region_id = 11;
    */
-  cloudProviderId: string;
-
-  /**
-   * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-   * After creation, this field cannot be changed.
-   *
-   * @generated from field: string cloud_provider_region_id = 11;
-   */
-  cloudProviderRegionId: string;
+  cloudRegionId: string;
 
   /**
    * List of labels for a space. These labels are used in the cloud ui and billing reports.
@@ -710,23 +691,13 @@ export declare type SpaceValid = Message<"qdrant.cloud.serverless.space.v1.Space
   deletedAt?: Timestamp | undefined;
 
   /**
-   * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-   * In this case, `hybrid` isn't supported.
+   * Cloud region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
    * After creation, this field cannot be changed.
    *
-   * @generated from field: string cloud_provider_id = 10;
+   * @generated from field: string cloud_region_id = 11;
    */
-  cloudProviderId: string;
-
-  /**
-   * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-   * After creation, this field cannot be changed.
-   *
-   * @generated from field: string cloud_provider_region_id = 11;
-   */
-  cloudProviderRegionId: string;
+  cloudRegionId: string;
 
   /**
    * List of labels for a space. These labels are used in the cloud ui and billing reports.
