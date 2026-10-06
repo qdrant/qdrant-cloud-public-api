@@ -290,16 +290,14 @@ class BackupStats(_message.Message):
     def __init__(self, collection_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., total_points: _Optional[int] = ..., duration: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., progress: _Optional[str] = ...) -> None: ...
 
 class SpaceInfo(_message.Message):
-    __slots__ = ("name", "cloud_provider_id", "cloud_provider_region_id", "configuration")
+    __slots__ = ("name", "cloud_region_id", "configuration")
     NAME_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
     name: str
-    cloud_provider_id: str
-    cloud_provider_region_id: str
+    cloud_region_id: str
     configuration: _space_pb2.SpaceConfiguration
-    def __init__(self, name: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_space_pb2.SpaceConfiguration, _Mapping]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., cloud_region_id: _Optional[str] = ..., configuration: _Optional[_Union[_space_pb2.SpaceConfiguration, _Mapping]] = ...) -> None: ...
 
 class BackupSchedule(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "space_id", "name", "schedule", "retention_period", "paused_at", "deleted_at", "status", "created_by", "last_updated_by", "deleted_by", "last_fired_at", "collection_name")

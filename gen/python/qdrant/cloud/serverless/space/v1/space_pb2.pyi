@@ -31,18 +31,16 @@ SPACE_STATE_PHASE_DISABLED: SpaceStatePhase
 SPACE_STATE_PHASE_DELETING: SpaceStatePhase
 
 class ListSpacesRequest(_message.Message):
-    __slots__ = ("account_id", "cloud_provider_id", "cloud_provider_region_id", "page_size", "page_token")
+    __slots__ = ("account_id", "cloud_region_id", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
-    cloud_provider_id: str
-    cloud_provider_region_id: str
+    cloud_region_id: str
     page_size: int
     page_token: str
-    def __init__(self, account_id: _Optional[str] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., cloud_region_id: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class ListSpacesResponse(_message.Message):
     __slots__ = ("items", "total_size", "next_page_token")
@@ -137,14 +135,13 @@ class SuggestSpaceNameResponse(_message.Message):
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class Space(_message.Message):
-    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_provider_id", "cloud_provider_region_id", "labels", "cost_allocation_label", "configuration", "created_by", "last_updated_by", "deleted_by", "state")
+    __slots__ = ("id", "created_at", "account_id", "name", "deleted_at", "cloud_region_id", "labels", "cost_allocation_label", "configuration", "created_by", "last_updated_by", "deleted_by", "state")
     ID_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DELETED_AT_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_ID_FIELD_NUMBER: _ClassVar[int]
-    CLOUD_PROVIDER_REGION_ID_FIELD_NUMBER: _ClassVar[int]
+    CLOUD_REGION_ID_FIELD_NUMBER: _ClassVar[int]
     LABELS_FIELD_NUMBER: _ClassVar[int]
     COST_ALLOCATION_LABEL_FIELD_NUMBER: _ClassVar[int]
     CONFIGURATION_FIELD_NUMBER: _ClassVar[int]
@@ -157,8 +154,7 @@ class Space(_message.Message):
     account_id: str
     name: str
     deleted_at: _timestamp_pb2.Timestamp
-    cloud_provider_id: str
-    cloud_provider_region_id: str
+    cloud_region_id: str
     labels: _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValue]
     cost_allocation_label: str
     configuration: SpaceConfiguration
@@ -166,7 +162,7 @@ class Space(_message.Message):
     last_updated_by: _common_pb2.Caller
     deleted_by: _common_pb2.Caller
     state: SpaceState
-    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_provider_id: _Optional[str] = ..., cloud_provider_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., configuration: _Optional[_Union[SpaceConfiguration, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., configuration: _Optional[_Union[SpaceConfiguration, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
 
 class SpaceConfiguration(_message.Message):
     __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "max_collections_per_space", "collection_settings", "searcher_settings")

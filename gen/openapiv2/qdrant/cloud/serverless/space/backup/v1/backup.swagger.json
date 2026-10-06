@@ -1325,20 +1325,16 @@
           "type": "string",
           "description": "The latest name of the space that this backup was taken from."
         },
-        "cloudProviderId": {
+        "cloudRegionId": {
           "type": "string",
-          "description": "Cloud provider where the space is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method."
-        },
-        "cloudProviderRegionId": {
-          "type": "string",
-          "description": "Cloud provider region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method."
+          "description": "Cloud region where the space is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method."
         },
         "configuration": {
           "$ref": "#/definitions/v1SpaceConfiguration",
           "description": "The space configuration at the time of backup."
         }
       },
-      "description": "Represents the space details associated with a backup.\nThe identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.\nThe configuration field is immutable and represents the values at backup time."
+      "description": "Represents the space details associated with a backup.\nThe identity fields (name, cloud_region_id) reflect the latest space state.\nThe configuration field is immutable and represents the values at backup time."
     },
     "v1UpdateBackupScheduleResponse": {
       "type": "object",

@@ -1167,7 +1167,7 @@ export declare const BackupStatsSchema: GenMessage<BackupStats, {validType: Back
 
 /**
  * Represents the space details associated with a backup.
- * The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
+ * The identity fields (name, cloud_region_id) reflect the latest space state.
  * The configuration field is immutable and represents the values at backup time.
  *
  * @generated from message qdrant.cloud.serverless.space.backup.v1.SpaceInfo
@@ -1181,20 +1181,12 @@ export declare type SpaceInfo = Message<"qdrant.cloud.serverless.space.backup.v1
   name: string;
 
   /**
-   * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   * Cloud region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
    *
-   * @generated from field: string cloud_provider_id = 2;
+   * @generated from field: string cloud_region_id = 3;
    */
-  cloudProviderId: string;
-
-  /**
-   * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-   *
-   * @generated from field: string cloud_provider_region_id = 3;
-   */
-  cloudProviderRegionId: string;
+  cloudRegionId: string;
 
   /**
    * The space configuration at the time of backup.
@@ -1206,7 +1198,7 @@ export declare type SpaceInfo = Message<"qdrant.cloud.serverless.space.backup.v1
 
 /**
  * Represents the space details associated with a backup.
- * The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
+ * The identity fields (name, cloud_region_id) reflect the latest space state.
  * The configuration field is immutable and represents the values at backup time.
  *
  * @generated from message qdrant.cloud.serverless.space.backup.v1.SpaceInfo
@@ -1220,20 +1212,12 @@ export declare type SpaceInfoValid = Message<"qdrant.cloud.serverless.space.back
   name: string;
 
   /**
-   * Cloud provider where the space is hosted.
-   * Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
+   * Cloud region where the space is hosted.
+   * Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
    *
-   * @generated from field: string cloud_provider_id = 2;
+   * @generated from field: string cloud_region_id = 3;
    */
-  cloudProviderId: string;
-
-  /**
-   * Cloud provider region where the space is hosted.
-   * Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-   *
-   * @generated from field: string cloud_provider_region_id = 3;
-   */
-  cloudProviderRegionId: string;
+  cloudRegionId: string;
 
   /**
    * The space configuration at the time of backup.

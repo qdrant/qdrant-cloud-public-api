@@ -19,41 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlatformService_ListGlobalCloudProviders_FullMethodName       = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviders"
-	PlatformService_ListCloudProviders_FullMethodName             = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviders"
-	PlatformService_ListGlobalCloudProviderRegions_FullMethodName = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudProviderRegions"
-	PlatformService_GetGlobalCloudProviderRegion_FullMethodName   = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetGlobalCloudProviderRegion"
-	PlatformService_ListCloudProviderRegions_FullMethodName       = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudProviderRegions"
-	PlatformService_GetCloudProviderRegion_FullMethodName         = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetCloudProviderRegion"
+	PlatformService_ListGlobalCloudRegions_FullMethodName = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListGlobalCloudRegions"
+	PlatformService_GetGlobalCloudRegion_FullMethodName   = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetGlobalCloudRegion"
+	PlatformService_ListCloudRegions_FullMethodName       = "/qdrant.cloud.serverless.platform.v1.PlatformService/ListCloudRegions"
+	PlatformService_GetCloudRegion_FullMethodName         = "/qdrant.cloud.serverless.platform.v1.PlatformService/GetCloudRegion"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
+// PlatformService is the API used to query for cloud regions information for the serverless spaces in the platform.
 type PlatformServiceClient interface {
-	// Lists all available cloud providers globally (not account-specific).
+	// Lists all cloud regions (not account-specific).
 	// Authentication is not required.
-	ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error)
-	// Lists all cloud providers in the account identified by the given ID.
+	ListGlobalCloudRegions(ctx context.Context, in *ListGlobalCloudRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudRegionsResponse, error)
+	// Gets a specific cloud region (not account-specific) identified by cloud region ID.
+	// Authentication is not required.
+	GetGlobalCloudRegion(ctx context.Context, in *GetGlobalCloudRegionRequest, opts ...grpc.CallOption) (*GetGlobalCloudRegionResponse, error)
+	// Lists all cloud regions in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
-	ListCloudProviders(ctx context.Context, in *ListCloudProvidersRequest, opts ...grpc.CallOption) (*ListCloudProvidersResponse, error)
-	// Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
-	// Authentication is not required.
-	ListGlobalCloudProviderRegions(ctx context.Context, in *ListGlobalCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudProviderRegionsResponse, error)
-	// Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
-	// Authentication is not required.
-	GetGlobalCloudProviderRegion(ctx context.Context, in *GetGlobalCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetGlobalCloudProviderRegionResponse, error)
-	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
+	ListCloudRegions(ctx context.Context, in *ListCloudRegionsRequest, opts ...grpc.CallOption) (*ListCloudRegionsResponse, error)
+	// Gets a specific cloud region in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
-	ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error)
-	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
-	// Required permissions:
-	// - None (authenticated only)
-	GetCloudProviderRegion(ctx context.Context, in *GetCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetCloudProviderRegionResponse, error)
+	GetCloudRegion(ctx context.Context, in *GetCloudRegionRequest, opts ...grpc.CallOption) (*GetCloudRegionResponse, error)
 }
 
 type platformServiceClient struct {
@@ -64,60 +55,40 @@ func NewPlatformServiceClient(cc grpc.ClientConnInterface) PlatformServiceClient
 	return &platformServiceClient{cc}
 }
 
-func (c *platformServiceClient) ListGlobalCloudProviders(ctx context.Context, in *ListGlobalCloudProvidersRequest, opts ...grpc.CallOption) (*ListGlobalCloudProvidersResponse, error) {
+func (c *platformServiceClient) ListGlobalCloudRegions(ctx context.Context, in *ListGlobalCloudRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudRegionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListGlobalCloudProvidersResponse)
-	err := c.cc.Invoke(ctx, PlatformService_ListGlobalCloudProviders_FullMethodName, in, out, cOpts...)
+	out := new(ListGlobalCloudRegionsResponse)
+	err := c.cc.Invoke(ctx, PlatformService_ListGlobalCloudRegions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *platformServiceClient) ListCloudProviders(ctx context.Context, in *ListCloudProvidersRequest, opts ...grpc.CallOption) (*ListCloudProvidersResponse, error) {
+func (c *platformServiceClient) GetGlobalCloudRegion(ctx context.Context, in *GetGlobalCloudRegionRequest, opts ...grpc.CallOption) (*GetGlobalCloudRegionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCloudProvidersResponse)
-	err := c.cc.Invoke(ctx, PlatformService_ListCloudProviders_FullMethodName, in, out, cOpts...)
+	out := new(GetGlobalCloudRegionResponse)
+	err := c.cc.Invoke(ctx, PlatformService_GetGlobalCloudRegion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *platformServiceClient) ListGlobalCloudProviderRegions(ctx context.Context, in *ListGlobalCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListGlobalCloudProviderRegionsResponse, error) {
+func (c *platformServiceClient) ListCloudRegions(ctx context.Context, in *ListCloudRegionsRequest, opts ...grpc.CallOption) (*ListCloudRegionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListGlobalCloudProviderRegionsResponse)
-	err := c.cc.Invoke(ctx, PlatformService_ListGlobalCloudProviderRegions_FullMethodName, in, out, cOpts...)
+	out := new(ListCloudRegionsResponse)
+	err := c.cc.Invoke(ctx, PlatformService_ListCloudRegions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *platformServiceClient) GetGlobalCloudProviderRegion(ctx context.Context, in *GetGlobalCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetGlobalCloudProviderRegionResponse, error) {
+func (c *platformServiceClient) GetCloudRegion(ctx context.Context, in *GetCloudRegionRequest, opts ...grpc.CallOption) (*GetCloudRegionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetGlobalCloudProviderRegionResponse)
-	err := c.cc.Invoke(ctx, PlatformService_GetGlobalCloudProviderRegion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *platformServiceClient) ListCloudProviderRegions(ctx context.Context, in *ListCloudProviderRegionsRequest, opts ...grpc.CallOption) (*ListCloudProviderRegionsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCloudProviderRegionsResponse)
-	err := c.cc.Invoke(ctx, PlatformService_ListCloudProviderRegions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *platformServiceClient) GetCloudProviderRegion(ctx context.Context, in *GetCloudProviderRegionRequest, opts ...grpc.CallOption) (*GetCloudProviderRegionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCloudProviderRegionResponse)
-	err := c.cc.Invoke(ctx, PlatformService_GetCloudProviderRegion_FullMethodName, in, out, cOpts...)
+	out := new(GetCloudRegionResponse)
+	err := c.cc.Invoke(ctx, PlatformService_GetCloudRegion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,29 +99,22 @@ func (c *platformServiceClient) GetCloudProviderRegion(ctx context.Context, in *
 // All implementations must embed UnimplementedPlatformServiceServer
 // for forward compatibility.
 //
-// PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
+// PlatformService is the API used to query for cloud regions information for the serverless spaces in the platform.
 type PlatformServiceServer interface {
-	// Lists all available cloud providers globally (not account-specific).
+	// Lists all cloud regions (not account-specific).
 	// Authentication is not required.
-	ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error)
-	// Lists all cloud providers in the account identified by the given ID.
+	ListGlobalCloudRegions(context.Context, *ListGlobalCloudRegionsRequest) (*ListGlobalCloudRegionsResponse, error)
+	// Gets a specific cloud region (not account-specific) identified by cloud region ID.
+	// Authentication is not required.
+	GetGlobalCloudRegion(context.Context, *GetGlobalCloudRegionRequest) (*GetGlobalCloudRegionResponse, error)
+	// Lists all cloud regions in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
-	ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error)
-	// Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
-	// Authentication is not required.
-	ListGlobalCloudProviderRegions(context.Context, *ListGlobalCloudProviderRegionsRequest) (*ListGlobalCloudProviderRegionsResponse, error)
-	// Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
-	// Authentication is not required.
-	GetGlobalCloudProviderRegion(context.Context, *GetGlobalCloudProviderRegionRequest) (*GetGlobalCloudProviderRegionResponse, error)
-	// Lists all cloud provider regions in the account identified by the given ID and cloud provider.
+	ListCloudRegions(context.Context, *ListCloudRegionsRequest) (*ListCloudRegionsResponse, error)
+	// Gets a specific cloud region in the account identified by the given ID.
 	// Required permissions:
 	// - None (authenticated only)
-	ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error)
-	// Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
-	// Required permissions:
-	// - None (authenticated only)
-	GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error)
+	GetCloudRegion(context.Context, *GetCloudRegionRequest) (*GetCloudRegionResponse, error)
 	mustEmbedUnimplementedPlatformServiceServer()
 }
 
@@ -161,23 +125,17 @@ type PlatformServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPlatformServiceServer struct{}
 
-func (UnimplementedPlatformServiceServer) ListGlobalCloudProviders(context.Context, *ListGlobalCloudProvidersRequest) (*ListGlobalCloudProvidersResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListGlobalCloudProviders not implemented")
+func (UnimplementedPlatformServiceServer) ListGlobalCloudRegions(context.Context, *ListGlobalCloudRegionsRequest) (*ListGlobalCloudRegionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListGlobalCloudRegions not implemented")
 }
-func (UnimplementedPlatformServiceServer) ListCloudProviders(context.Context, *ListCloudProvidersRequest) (*ListCloudProvidersResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListCloudProviders not implemented")
+func (UnimplementedPlatformServiceServer) GetGlobalCloudRegion(context.Context, *GetGlobalCloudRegionRequest) (*GetGlobalCloudRegionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGlobalCloudRegion not implemented")
 }
-func (UnimplementedPlatformServiceServer) ListGlobalCloudProviderRegions(context.Context, *ListGlobalCloudProviderRegionsRequest) (*ListGlobalCloudProviderRegionsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListGlobalCloudProviderRegions not implemented")
+func (UnimplementedPlatformServiceServer) ListCloudRegions(context.Context, *ListCloudRegionsRequest) (*ListCloudRegionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCloudRegions not implemented")
 }
-func (UnimplementedPlatformServiceServer) GetGlobalCloudProviderRegion(context.Context, *GetGlobalCloudProviderRegionRequest) (*GetGlobalCloudProviderRegionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetGlobalCloudProviderRegion not implemented")
-}
-func (UnimplementedPlatformServiceServer) ListCloudProviderRegions(context.Context, *ListCloudProviderRegionsRequest) (*ListCloudProviderRegionsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListCloudProviderRegions not implemented")
-}
-func (UnimplementedPlatformServiceServer) GetCloudProviderRegion(context.Context, *GetCloudProviderRegionRequest) (*GetCloudProviderRegionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetCloudProviderRegion not implemented")
+func (UnimplementedPlatformServiceServer) GetCloudRegion(context.Context, *GetCloudRegionRequest) (*GetCloudRegionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCloudRegion not implemented")
 }
 func (UnimplementedPlatformServiceServer) mustEmbedUnimplementedPlatformServiceServer() {}
 func (UnimplementedPlatformServiceServer) testEmbeddedByValue()                         {}
@@ -200,110 +158,74 @@ func RegisterPlatformServiceServer(s grpc.ServiceRegistrar, srv PlatformServiceS
 	s.RegisterService(&PlatformService_ServiceDesc, srv)
 }
 
-func _PlatformService_ListGlobalCloudProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListGlobalCloudProvidersRequest)
+func _PlatformService_ListGlobalCloudRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalCloudRegionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlatformServiceServer).ListGlobalCloudProviders(ctx, in)
+		return srv.(PlatformServiceServer).ListGlobalCloudRegions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PlatformService_ListGlobalCloudProviders_FullMethodName,
+		FullMethod: PlatformService_ListGlobalCloudRegions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).ListGlobalCloudProviders(ctx, req.(*ListGlobalCloudProvidersRequest))
+		return srv.(PlatformServiceServer).ListGlobalCloudRegions(ctx, req.(*ListGlobalCloudRegionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlatformService_ListCloudProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCloudProvidersRequest)
+func _PlatformService_GetGlobalCloudRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGlobalCloudRegionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlatformServiceServer).ListCloudProviders(ctx, in)
+		return srv.(PlatformServiceServer).GetGlobalCloudRegion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PlatformService_ListCloudProviders_FullMethodName,
+		FullMethod: PlatformService_GetGlobalCloudRegion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).ListCloudProviders(ctx, req.(*ListCloudProvidersRequest))
+		return srv.(PlatformServiceServer).GetGlobalCloudRegion(ctx, req.(*GetGlobalCloudRegionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlatformService_ListGlobalCloudProviderRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListGlobalCloudProviderRegionsRequest)
+func _PlatformService_ListCloudRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCloudRegionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlatformServiceServer).ListGlobalCloudProviderRegions(ctx, in)
+		return srv.(PlatformServiceServer).ListCloudRegions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PlatformService_ListGlobalCloudProviderRegions_FullMethodName,
+		FullMethod: PlatformService_ListCloudRegions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).ListGlobalCloudProviderRegions(ctx, req.(*ListGlobalCloudProviderRegionsRequest))
+		return srv.(PlatformServiceServer).ListCloudRegions(ctx, req.(*ListCloudRegionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlatformService_GetGlobalCloudProviderRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetGlobalCloudProviderRegionRequest)
+func _PlatformService_GetCloudRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCloudRegionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlatformServiceServer).GetGlobalCloudProviderRegion(ctx, in)
+		return srv.(PlatformServiceServer).GetCloudRegion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PlatformService_GetGlobalCloudProviderRegion_FullMethodName,
+		FullMethod: PlatformService_GetCloudRegion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).GetGlobalCloudProviderRegion(ctx, req.(*GetGlobalCloudProviderRegionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlatformService_ListCloudProviderRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCloudProviderRegionsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlatformServiceServer).ListCloudProviderRegions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PlatformService_ListCloudProviderRegions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).ListCloudProviderRegions(ctx, req.(*ListCloudProviderRegionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlatformService_GetCloudProviderRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCloudProviderRegionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlatformServiceServer).GetCloudProviderRegion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PlatformService_GetCloudProviderRegion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlatformServiceServer).GetCloudProviderRegion(ctx, req.(*GetCloudProviderRegionRequest))
+		return srv.(PlatformServiceServer).GetCloudRegion(ctx, req.(*GetCloudRegionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -316,28 +238,20 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PlatformServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListGlobalCloudProviders",
-			Handler:    _PlatformService_ListGlobalCloudProviders_Handler,
+			MethodName: "ListGlobalCloudRegions",
+			Handler:    _PlatformService_ListGlobalCloudRegions_Handler,
 		},
 		{
-			MethodName: "ListCloudProviders",
-			Handler:    _PlatformService_ListCloudProviders_Handler,
+			MethodName: "GetGlobalCloudRegion",
+			Handler:    _PlatformService_GetGlobalCloudRegion_Handler,
 		},
 		{
-			MethodName: "ListGlobalCloudProviderRegions",
-			Handler:    _PlatformService_ListGlobalCloudProviderRegions_Handler,
+			MethodName: "ListCloudRegions",
+			Handler:    _PlatformService_ListCloudRegions_Handler,
 		},
 		{
-			MethodName: "GetGlobalCloudProviderRegion",
-			Handler:    _PlatformService_GetGlobalCloudProviderRegion_Handler,
-		},
-		{
-			MethodName: "ListCloudProviderRegions",
-			Handler:    _PlatformService_ListCloudProviderRegions_Handler,
-		},
-		{
-			MethodName: "GetCloudProviderRegion",
-			Handler:    _PlatformService_GetCloudProviderRegion_Handler,
+			MethodName: "GetCloudRegion",
+			Handler:    _PlatformService_GetCloudRegion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

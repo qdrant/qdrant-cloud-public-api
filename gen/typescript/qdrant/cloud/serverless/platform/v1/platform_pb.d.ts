@@ -11,194 +11,141 @@ import type { Message } from "@bufbuild/protobuf";
 export declare const file_qdrant_cloud_serverless_platform_v1_platform: GenFile;
 
 /**
- * ListCloudProvidersRequest is the request for the ListCloudProviders function.
- *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest
- */
-export declare type ListCloudProvidersRequest = Message<"qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest"> & {
-  /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-};
-
-export declare type ListCloudProvidersRequestValid = ListCloudProvidersRequest;
-
-/**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest.
- * Use `create(ListCloudProvidersRequestSchema)` to create a new message.
- */
-export declare const ListCloudProvidersRequestSchema: GenMessage<ListCloudProvidersRequest, {validType: ListCloudProvidersRequestValid}>;
-
-/**
- * ListCloudProvidersResponse is the response from the ListCloudProviders function.
- *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse
- */
-export declare type ListCloudProvidersResponse = Message<"qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse"> & {
-  /**
-   * The cloud providers
-   *
-   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudProvider items = 1;
-   */
-  items: CloudProvider[];
-};
-
-export declare type ListCloudProvidersResponseValid = ListCloudProvidersResponse;
-
-/**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse.
- * Use `create(ListCloudProvidersResponseSchema)` to create a new message.
- */
-export declare const ListCloudProvidersResponseSchema: GenMessage<ListCloudProvidersResponse, {validType: ListCloudProvidersResponseValid}>;
-
-/**
- * ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
+ * ListGlobalCloudRegionsRequest is the request for the ListGlobalCloudRegions function.
  *
  * Empty
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest
+ * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest
  */
-export declare type ListGlobalCloudProvidersRequest = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest"> & {
+export declare type ListGlobalCloudRegionsRequest = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest"> & {
 };
 
-export declare type ListGlobalCloudProvidersRequestValid = ListGlobalCloudProvidersRequest;
+export declare type ListGlobalCloudRegionsRequestValid = ListGlobalCloudRegionsRequest;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest.
- * Use `create(ListGlobalCloudProvidersRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest.
+ * Use `create(ListGlobalCloudRegionsRequestSchema)` to create a new message.
  */
-export declare const ListGlobalCloudProvidersRequestSchema: GenMessage<ListGlobalCloudProvidersRequest, {validType: ListGlobalCloudProvidersRequestValid}>;
+export declare const ListGlobalCloudRegionsRequestSchema: GenMessage<ListGlobalCloudRegionsRequest, {validType: ListGlobalCloudRegionsRequestValid}>;
 
 /**
- * ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
+ * ListGlobalCloudRegionsResponse is the response from the ListGlobalCloudRegions function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse
+ * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse
  */
-export declare type ListGlobalCloudProvidersResponse = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse"> & {
+export declare type ListGlobalCloudRegionsResponse = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse"> & {
   /**
-   * The cloud providers
+   * The cloud regions.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudProvider items = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudRegion items = 1;
    */
-  items: CloudProvider[];
+  items: CloudRegion[];
 };
 
-export declare type ListGlobalCloudProvidersResponseValid = ListGlobalCloudProvidersResponse;
+export declare type ListGlobalCloudRegionsResponseValid = ListGlobalCloudRegionsResponse;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse.
- * Use `create(ListGlobalCloudProvidersResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse.
+ * Use `create(ListGlobalCloudRegionsResponseSchema)` to create a new message.
  */
-export declare const ListGlobalCloudProvidersResponseSchema: GenMessage<ListGlobalCloudProvidersResponse, {validType: ListGlobalCloudProvidersResponseValid}>;
+export declare const ListGlobalCloudRegionsResponseSchema: GenMessage<ListGlobalCloudRegionsResponse, {validType: ListGlobalCloudRegionsResponseValid}>;
 
 /**
- * ListGlobalCloudProviderRegionsRequest is the request for the ListGlobalCloudProviderRegions function.
+ * GetGlobalCloudRegionRequest is the request for the GetGlobalCloudRegion function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest
+ * @generated from message qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest
  */
-export declare type ListGlobalCloudProviderRegionsRequest = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest"> & {
+export declare type GetGlobalCloudRegionRequest = Message<"qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest"> & {
   /**
-   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * The identifier for the cloud region.
    * This is a required field.
    *
-   * @generated from field: string cloud_provider_id = 1;
+   * @generated from field: string cloud_region_id = 1;
    */
-  cloudProviderId: string;
+  cloudRegionId: string;
 };
 
-export declare type ListGlobalCloudProviderRegionsRequestValid = ListGlobalCloudProviderRegionsRequest;
+export declare type GetGlobalCloudRegionRequestValid = GetGlobalCloudRegionRequest;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest.
- * Use `create(ListGlobalCloudProviderRegionsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest.
+ * Use `create(GetGlobalCloudRegionRequestSchema)` to create a new message.
  */
-export declare const ListGlobalCloudProviderRegionsRequestSchema: GenMessage<ListGlobalCloudProviderRegionsRequest, {validType: ListGlobalCloudProviderRegionsRequestValid}>;
+export declare const GetGlobalCloudRegionRequestSchema: GenMessage<GetGlobalCloudRegionRequest, {validType: GetGlobalCloudRegionRequestValid}>;
 
 /**
- * ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
+ * GetGlobalCloudRegionResponse is the response from the GetGlobalCloudRegion function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse
+ * @generated from message qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse
  */
-export declare type ListGlobalCloudProviderRegionsResponse = Message<"qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse"> & {
+export declare type GetGlobalCloudRegionResponse = Message<"qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse"> & {
   /**
-   * The cloud provider regions.
+   * The cloud region.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudProviderRegion items = 1;
+   * @generated from field: qdrant.cloud.serverless.platform.v1.CloudRegion region = 1;
    */
-  items: CloudProviderRegion[];
+  region?: CloudRegion | undefined;
 };
 
-export declare type ListGlobalCloudProviderRegionsResponseValid = ListGlobalCloudProviderRegionsResponse;
+export declare type GetGlobalCloudRegionResponseValid = GetGlobalCloudRegionResponse;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse.
- * Use `create(ListGlobalCloudProviderRegionsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse.
+ * Use `create(GetGlobalCloudRegionResponseSchema)` to create a new message.
  */
-export declare const ListGlobalCloudProviderRegionsResponseSchema: GenMessage<ListGlobalCloudProviderRegionsResponse, {validType: ListGlobalCloudProviderRegionsResponseValid}>;
+export declare const GetGlobalCloudRegionResponseSchema: GenMessage<GetGlobalCloudRegionResponse, {validType: GetGlobalCloudRegionResponseValid}>;
 
 /**
- * GetGlobalCloudProviderRegionRequest is the request for the GetGlobalCloudProviderRegion function.
+ * ListCloudRegionsRequest is the request for the ListCloudRegions function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest
+ * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest
  */
-export declare type GetGlobalCloudProviderRegionRequest = Message<"qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest"> & {
+export declare type ListCloudRegionsRequest = Message<"qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest"> & {
   /**
-   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * The identifier of the account (in GUID format).
    * This is a required field.
    *
-   * @generated from field: string cloud_provider_id = 1;
+   * @generated from field: string account_id = 1;
    */
-  cloudProviderId: string;
-
-  /**
-   * The identifier for the cloud provider region.
-   * This is a required field.
-   *
-   * @generated from field: string region_id = 2;
-   */
-  regionId: string;
+  accountId: string;
 };
 
-export declare type GetGlobalCloudProviderRegionRequestValid = GetGlobalCloudProviderRegionRequest;
+export declare type ListCloudRegionsRequestValid = ListCloudRegionsRequest;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest.
- * Use `create(GetGlobalCloudProviderRegionRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest.
+ * Use `create(ListCloudRegionsRequestSchema)` to create a new message.
  */
-export declare const GetGlobalCloudProviderRegionRequestSchema: GenMessage<GetGlobalCloudProviderRegionRequest, {validType: GetGlobalCloudProviderRegionRequestValid}>;
+export declare const ListCloudRegionsRequestSchema: GenMessage<ListCloudRegionsRequest, {validType: ListCloudRegionsRequestValid}>;
 
 /**
- * GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function.
+ * ListCloudRegionsResponse is the response from the ListCloudRegions function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse
+ * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse
  */
-export declare type GetGlobalCloudProviderRegionResponse = Message<"qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse"> & {
+export declare type ListCloudRegionsResponse = Message<"qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse"> & {
   /**
-   * The cloud provider region.
+   * The cloud regions.
    *
-   * @generated from field: qdrant.cloud.serverless.platform.v1.CloudProviderRegion region = 1;
+   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudRegion items = 1;
    */
-  region?: CloudProviderRegion | undefined;
+  items: CloudRegion[];
 };
 
-export declare type GetGlobalCloudProviderRegionResponseValid = GetGlobalCloudProviderRegionResponse;
+export declare type ListCloudRegionsResponseValid = ListCloudRegionsResponse;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse.
- * Use `create(GetGlobalCloudProviderRegionResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse.
+ * Use `create(ListCloudRegionsResponseSchema)` to create a new message.
  */
-export declare const GetGlobalCloudProviderRegionResponseSchema: GenMessage<GetGlobalCloudProviderRegionResponse, {validType: GetGlobalCloudProviderRegionResponseValid}>;
+export declare const ListCloudRegionsResponseSchema: GenMessage<ListCloudRegionsResponse, {validType: ListCloudRegionsResponseValid}>;
 
 /**
- * ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
+ * GetCloudRegionRequest is the request for the GetCloudRegion function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest
+ * @generated from message qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest
  */
-export declare type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest"> & {
+export declare type GetCloudRegionRequest = Message<"qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest"> & {
   /**
    * The identifier of the account (in GUID format).
    * This is a required field.
@@ -208,159 +155,59 @@ export declare type ListCloudProviderRegionsRequest = Message<"qdrant.cloud.serv
   accountId: string;
 
   /**
-   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+   * The identifier for the cloud region.
    * This is a required field.
    *
-   * @generated from field: string cloud_provider_id = 2;
+   * @generated from field: string cloud_region_id = 2;
    */
-  cloudProviderId: string;
+  cloudRegionId: string;
 };
 
-export declare type ListCloudProviderRegionsRequestValid = ListCloudProviderRegionsRequest;
+export declare type GetCloudRegionRequestValid = GetCloudRegionRequest;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest.
- * Use `create(ListCloudProviderRegionsRequestSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest.
+ * Use `create(GetCloudRegionRequestSchema)` to create a new message.
  */
-export declare const ListCloudProviderRegionsRequestSchema: GenMessage<ListCloudProviderRegionsRequest, {validType: ListCloudProviderRegionsRequestValid}>;
+export declare const GetCloudRegionRequestSchema: GenMessage<GetCloudRegionRequest, {validType: GetCloudRegionRequestValid}>;
 
 /**
- * ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
+ * GetCloudRegionResponse is the response from the GetCloudRegion function.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse
+ * @generated from message qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse
  */
-export declare type ListCloudProviderRegionsResponse = Message<"qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse"> & {
+export declare type GetCloudRegionResponse = Message<"qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse"> & {
   /**
-   * The cloud provider regions.
+   * The cloud region.
    *
-   * @generated from field: repeated qdrant.cloud.serverless.platform.v1.CloudProviderRegion items = 1;
+   * @generated from field: qdrant.cloud.serverless.platform.v1.CloudRegion region = 1;
    */
-  items: CloudProviderRegion[];
+  region?: CloudRegion | undefined;
 };
 
-export declare type ListCloudProviderRegionsResponseValid = ListCloudProviderRegionsResponse;
+export declare type GetCloudRegionResponseValid = GetCloudRegionResponse;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse.
- * Use `create(ListCloudProviderRegionsResponseSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse.
+ * Use `create(GetCloudRegionResponseSchema)` to create a new message.
  */
-export declare const ListCloudProviderRegionsResponseSchema: GenMessage<ListCloudProviderRegionsResponse, {validType: ListCloudProviderRegionsResponseValid}>;
+export declare const GetCloudRegionResponseSchema: GenMessage<GetCloudRegionResponse, {validType: GetCloudRegionResponseValid}>;
 
 /**
- * GetCloudProviderRegionRequest is the request for the GetCloudProviderRegion function.
+ * CloudRegion represents a cloud region where serverless spaces can be hosted.
  *
- * @generated from message qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest
+ * @generated from message qdrant.cloud.serverless.platform.v1.CloudRegion
  */
-export declare type GetCloudProviderRegionRequest = Message<"qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest"> & {
+export declare type CloudRegion = Message<"qdrant.cloud.serverless.platform.v1.CloudRegion"> & {
   /**
-   * The identifier of the account (in GUID format).
-   * This is a required field.
-   *
-   * @generated from field: string account_id = 1;
-   */
-  accountId: string;
-
-  /**
-   * The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-   * This is a required field.
-   *
-   * @generated from field: string cloud_provider_id = 2;
-   */
-  cloudProviderId: string;
-
-  /**
-   * The identifier for the cloud provider region.
-   * This is a required field.
-   *
-   * @generated from field: string region_id = 3;
-   */
-  regionId: string;
-};
-
-export declare type GetCloudProviderRegionRequestValid = GetCloudProviderRegionRequest;
-
-/**
- * Describes the message qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest.
- * Use `create(GetCloudProviderRegionRequestSchema)` to create a new message.
- */
-export declare const GetCloudProviderRegionRequestSchema: GenMessage<GetCloudProviderRegionRequest, {validType: GetCloudProviderRegionRequestValid}>;
-
-/**
- * GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function.
- *
- * @generated from message qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse
- */
-export declare type GetCloudProviderRegionResponse = Message<"qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse"> & {
-  /**
-   * The cloud provider region.
-   *
-   * @generated from field: qdrant.cloud.serverless.platform.v1.CloudProviderRegion region = 1;
-   */
-  region?: CloudProviderRegion | undefined;
-};
-
-export declare type GetCloudProviderRegionResponseValid = GetCloudProviderRegionResponse;
-
-/**
- * Describes the message qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse.
- * Use `create(GetCloudProviderRegionResponseSchema)` to create a new message.
- */
-export declare const GetCloudProviderRegionResponseSchema: GenMessage<GetCloudProviderRegionResponse, {validType: GetCloudProviderRegionResponseValid}>;
-
-/**
- * CloudProvider represents a cloud provider identifier and name.
- *
- * @generated from message qdrant.cloud.serverless.platform.v1.CloudProvider
- */
-export declare type CloudProvider = Message<"qdrant.cloud.serverless.platform.v1.CloudProvider"> & {
-  /**
-   * The identifier for the cloud provider.
-   * e.g. "aws", "gcp", "azure".
+   * The globally unique identifier for the cloud region.
    *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
-   * The human-readable name of the cloud provider.
-   * e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure".
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * Indicates whether the cloud provider is available at the moment.
-   *
-   * @generated from field: bool available = 3;
-   */
-  available: boolean;
-};
-
-export declare type CloudProviderValid = CloudProvider;
-
-/**
- * Describes the message qdrant.cloud.serverless.platform.v1.CloudProvider.
- * Use `create(CloudProviderSchema)` to create a new message.
- */
-export declare const CloudProviderSchema: GenMessage<CloudProvider, {validType: CloudProviderValid}>;
-
-/**
- * CloudProviderRegion represents a cloud provider region.
- *
- * @generated from message qdrant.cloud.serverless.platform.v1.CloudProviderRegion
- */
-export declare type CloudProviderRegion = Message<"qdrant.cloud.serverless.platform.v1.CloudProviderRegion"> & {
-  /**
-   * The identifier for the cloud provider region.
-   * e.g. "us-west-1", "europe-west1", "eastus".
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * The human-readable name of the cloud provider region.
+   * The human-readable name of the cloud region.
    * e.g. "Frankfurt", "Tokyo", etc.
    *
    * @generated from field: string name = 2;
@@ -373,14 +220,6 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.serverless.platf
    * @generated from field: bool available = 3;
    */
   available: boolean;
-
-  /**
-   * The identifier for the cloud provider.
-   * e.g. "aws", "gcp", "azure".
-   *
-   * @generated from field: string provider = 4;
-   */
-  provider: string;
 
   /**
    * ISO 3166-1 alpha-2 country codes for different countries to display for each region.
@@ -398,88 +237,65 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.serverless.platf
   geographicalSubRegion?: string | undefined;
 };
 
-export declare type CloudProviderRegionValid = CloudProviderRegion;
+export declare type CloudRegionValid = CloudRegion;
 
 /**
- * Describes the message qdrant.cloud.serverless.platform.v1.CloudProviderRegion.
- * Use `create(CloudProviderRegionSchema)` to create a new message.
+ * Describes the message qdrant.cloud.serverless.platform.v1.CloudRegion.
+ * Use `create(CloudRegionSchema)` to create a new message.
  */
-export declare const CloudProviderRegionSchema: GenMessage<CloudProviderRegion, {validType: CloudProviderRegionValid}>;
+export declare const CloudRegionSchema: GenMessage<CloudRegion, {validType: CloudRegionValid}>;
 
 /**
- * PlatformService is the API used to query for cloud provider & regional information for the serverless spaces in the platform.
+ * PlatformService is the API used to query for cloud regions information for the serverless spaces in the platform.
  *
  * @generated from service qdrant.cloud.serverless.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
   /**
-   * Lists all available cloud providers globally (not account-specific).
+   * Lists all cloud regions (not account-specific).
    * Authentication is not required.
    *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviders
+   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudRegions
    */
-  listGlobalCloudProviders: {
+  listGlobalCloudRegions: {
     methodKind: "unary";
-    input: typeof ListGlobalCloudProvidersRequestSchema;
-    output: typeof ListGlobalCloudProvidersResponseSchema;
+    input: typeof ListGlobalCloudRegionsRequestSchema;
+    output: typeof ListGlobalCloudRegionsResponseSchema;
   },
   /**
-   * Lists all cloud providers in the account identified by the given ID.
+   * Gets a specific cloud region (not account-specific) identified by cloud region ID.
+   * Authentication is not required.
+   *
+   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudRegion
+   */
+  getGlobalCloudRegion: {
+    methodKind: "unary";
+    input: typeof GetGlobalCloudRegionRequestSchema;
+    output: typeof GetGlobalCloudRegionResponseSchema;
+  },
+  /**
+   * Lists all cloud regions in the account identified by the given ID.
    * Required permissions:
    * - None (authenticated only)
    *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviders
+   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions
    */
-  listCloudProviders: {
+  listCloudRegions: {
     methodKind: "unary";
-    input: typeof ListCloudProvidersRequestSchema;
-    output: typeof ListCloudProvidersResponseSchema;
+    input: typeof ListCloudRegionsRequestSchema;
+    output: typeof ListCloudRegionsResponseSchema;
   },
   /**
-   * Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
-   * Authentication is not required.
-   *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviderRegions
-   */
-  listGlobalCloudProviderRegions: {
-    methodKind: "unary";
-    input: typeof ListGlobalCloudProviderRegionsRequestSchema;
-    output: typeof ListGlobalCloudProviderRegionsResponseSchema;
-  },
-  /**
-   * Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
-   * Authentication is not required.
-   *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudProviderRegion
-   */
-  getGlobalCloudProviderRegion: {
-    methodKind: "unary";
-    input: typeof GetGlobalCloudProviderRegionRequestSchema;
-    output: typeof GetGlobalCloudProviderRegionResponseSchema;
-  },
-  /**
-   * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
+   * Gets a specific cloud region in the account identified by the given ID.
    * Required permissions:
    * - None (authenticated only)
    *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviderRegions
+   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudRegion
    */
-  listCloudProviderRegions: {
+  getCloudRegion: {
     methodKind: "unary";
-    input: typeof ListCloudProviderRegionsRequestSchema;
-    output: typeof ListCloudProviderRegionsResponseSchema;
-  },
-  /**
-   * Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
-   * Required permissions:
-   * - None (authenticated only)
-   *
-   * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudProviderRegion
-   */
-  getCloudProviderRegion: {
-    methodKind: "unary";
-    input: typeof GetCloudProviderRegionRequestSchema;
-    output: typeof GetCloudProviderRegionResponseSchema;
+    input: typeof GetCloudRegionRequestSchema;
+    output: typeof GetCloudRegionResponseSchema;
   },
 }>;
 

@@ -1762,18 +1762,15 @@ func (x *BackupStats) GetProgress() string {
 }
 
 // Represents the space details associated with a backup.
-// The identity fields (name, cloud_provider_id, cloud_provider_region_id) reflect the latest space state.
+// The identity fields (name, cloud_region_id) reflect the latest space state.
 // The configuration field is immutable and represents the values at backup time.
 type SpaceInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The latest name of the space that this backup was taken from.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Cloud provider where the space is hosted.
-	// Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.
-	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// Cloud provider region where the space is hosted.
-	// Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.
-	CloudProviderRegionId string `protobuf:"bytes,3,opt,name=cloud_provider_region_id,json=cloudProviderRegionId,proto3" json:"cloud_provider_region_id,omitempty"`
+	// Cloud region where the space is hosted.
+	// Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
+	CloudRegionId string `protobuf:"bytes,3,opt,name=cloud_region_id,json=cloudRegionId,proto3" json:"cloud_region_id,omitempty"`
 	// The space configuration at the time of backup.
 	Configuration *v11.SpaceConfiguration `protobuf:"bytes,4,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1817,16 +1814,9 @@ func (x *SpaceInfo) GetName() string {
 	return ""
 }
 
-func (x *SpaceInfo) GetCloudProviderId() string {
+func (x *SpaceInfo) GetCloudRegionId() string {
 	if x != nil {
-		return x.CloudProviderId
-	}
-	return ""
-}
-
-func (x *SpaceInfo) GetCloudProviderRegionId() string {
-	if x != nil {
-		return x.CloudProviderRegionId
+		return x.CloudRegionId
 	}
 	return ""
 }
@@ -2371,11 +2361,10 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\v_size_bytesB\x0f\n" +
 	"\r_total_pointsB\v\n" +
 	"\t_durationB\v\n" +
-	"\t_progress\"\x97\x02\n" +
+	"\t_progress\"\xd1\x01\n" +
 	"\tSpaceInfo\x12/\n" +
-	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x123\n" +
-	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12@\n" +
-	"\x18cloud_provider_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x15cloudProviderRegionId\x12b\n" +
+	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12/\n" +
+	"\x0fcloud_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rcloudRegionId\x12b\n" +
 	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xcc\f\n" +
 	"\x0eBackupSchedule\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
@@ -2485,7 +2474,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\xab\x03\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xf7\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backupsR%\n" +
-	"\bspace_id\x12\x19resp-md.qc-event-space-id\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x02B\xe0\x02\n" +
+	"\bspace_id\x12\x19resp-md.qc-event-space-id\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x03B\xe0\x02\n" +
 	"+com.qdrant.cloud.serverless.space.backup.v1B\vBackupProtoP\x01Zagithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/backup/v1;backupv1\xa2\x02\x05QCSSB\xaa\x02'Qdrant.Cloud.Serverless.Space.Backup.V1\xca\x02'Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\xe2\x023Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\\GPBMetadata\xea\x02,Qdrant::Cloud::Serverless::Space::Backup::V1b\x06proto3"
 
 var (

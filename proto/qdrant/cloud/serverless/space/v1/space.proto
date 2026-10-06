@@ -15,8 +15,8 @@ import "qdrant/cloud/event/v1/events.proto";
 service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
-    major: 1
-    minor: 3
+    major: 2
+    minor: 0
     patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -188,18 +188,9 @@ message ListSpacesRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  // Cloud provider where the space is hosted.
-  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-  // In this case, `hybrid` isn't supported.
-  optional string cloud_provider_id = 10 [(buf.validate.field).string = {min_len: 3}];
-  option (buf.validate.message).cel = {
-    id: "list_spaces.cloud_provider_id_present"
-    message: "cloud_provider_id is required when cloud_provider_region_id is set"
-    expression: "!has(this.cloud_provider_region_id) || has(this.cloud_provider_id)"
-  };
-  // Cloud provider region where the space is hosted.
-  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-  optional string cloud_provider_region_id = 11 [(buf.validate.field).string.min_len = 1];
+  // Cloud region where the space is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
+  optional string cloud_region_id = 11 [(buf.validate.field).string.min_len = 1];
   // Maximum number of items to return.
   // If not specified, all items are returned.
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
@@ -379,18 +370,11 @@ message Space {
   // Timestamp when the space was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteSpace is called.
   google.protobuf.Timestamp deleted_at = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // Cloud provider where the space is hosted.
-  // Must match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method, which supports serverless regions.
-  // In this case, `hybrid` isn't supported.
+  // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+  // Cloud region where the space is hosted.
+  // Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
   // After creation, this field cannot be changed.
-  string cloud_provider_id = 10 [
-    (buf.validate.field).string = {min_len: 3},
-    (google.api.field_behavior) = IMMUTABLE
-  ];
-  // Cloud provider region where the space is hosted.
-  // Must match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method, which supports serverless.
-  // After creation, this field cannot be changed.
-  string cloud_provider_region_id = 11 [
+  string cloud_region_id = 11 [
     (buf.validate.field).string.min_len = 1,
     (google.api.field_behavior) = IMMUTABLE
   ];

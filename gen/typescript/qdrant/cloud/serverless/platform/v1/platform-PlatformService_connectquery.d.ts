@@ -5,47 +5,32 @@
 import { PlatformService } from "./platform_pb.js";
 
 /**
- * Lists all available cloud providers globally (not account-specific).
+ * Lists all cloud regions (not account-specific).
  * Authentication is not required.
  *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviders
+ * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudRegions
  */
-export const listGlobalCloudProviders: typeof PlatformService["method"]["listGlobalCloudProviders"];
+export const listGlobalCloudRegions: typeof PlatformService["method"]["listGlobalCloudRegions"];
 /**
- * Lists all cloud providers in the account identified by the given ID.
+ * Gets a specific cloud region (not account-specific) identified by cloud region ID.
+ * Authentication is not required.
+ *
+ * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudRegion
+ */
+export const getGlobalCloudRegion: typeof PlatformService["method"]["getGlobalCloudRegion"];
+/**
+ * Lists all cloud regions in the account identified by the given ID.
  * Required permissions:
  * - None (authenticated only)
  *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviders
+ * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions
  */
-export const listCloudProviders: typeof PlatformService["method"]["listCloudProviders"];
+export const listCloudRegions: typeof PlatformService["method"]["listCloudRegions"];
 /**
- * Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
- * Authentication is not required.
- *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviderRegions
- */
-export const listGlobalCloudProviderRegions: typeof PlatformService["method"]["listGlobalCloudProviderRegions"];
-/**
- * Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
- * Authentication is not required.
- *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudProviderRegion
- */
-export const getGlobalCloudProviderRegion: typeof PlatformService["method"]["getGlobalCloudProviderRegion"];
-/**
- * Lists all cloud provider regions in the account identified by the given ID and cloud provider.
+ * Gets a specific cloud region in the account identified by the given ID.
  * Required permissions:
  * - None (authenticated only)
  *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviderRegions
+ * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudRegion
  */
-export const listCloudProviderRegions: typeof PlatformService["method"]["listCloudProviderRegions"];
-/**
- * Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
- * Required permissions:
- * - None (authenticated only)
- *
- * @generated from rpc qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudProviderRegion
- */
-export const getCloudProviderRegion: typeof PlatformService["method"]["getCloudProviderRegion"];
+export const getCloudRegion: typeof PlatformService["method"]["getCloudRegion"];

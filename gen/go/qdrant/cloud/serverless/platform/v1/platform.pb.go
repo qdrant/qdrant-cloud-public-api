@@ -9,7 +9,6 @@ package platformv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
-	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/hybrid/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -25,8 +24,184 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ListCloudProvidersRequest is the request for the ListCloudProviders function.
-type ListCloudProvidersRequest struct {
+// ListGlobalCloudRegionsRequest is the request for the ListGlobalCloudRegions function.
+type ListGlobalCloudRegionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGlobalCloudRegionsRequest) Reset() {
+	*x = ListGlobalCloudRegionsRequest{}
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGlobalCloudRegionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGlobalCloudRegionsRequest) ProtoMessage() {}
+
+func (x *ListGlobalCloudRegionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGlobalCloudRegionsRequest.ProtoReflect.Descriptor instead.
+func (*ListGlobalCloudRegionsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{0}
+}
+
+// ListGlobalCloudRegionsResponse is the response from the ListGlobalCloudRegions function.
+type ListGlobalCloudRegionsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The cloud regions.
+	Items         []*CloudRegion `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGlobalCloudRegionsResponse) Reset() {
+	*x = ListGlobalCloudRegionsResponse{}
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGlobalCloudRegionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGlobalCloudRegionsResponse) ProtoMessage() {}
+
+func (x *ListGlobalCloudRegionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGlobalCloudRegionsResponse.ProtoReflect.Descriptor instead.
+func (*ListGlobalCloudRegionsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListGlobalCloudRegionsResponse) GetItems() []*CloudRegion {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+// GetGlobalCloudRegionRequest is the request for the GetGlobalCloudRegion function.
+type GetGlobalCloudRegionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier for the cloud region.
+	// This is a required field.
+	CloudRegionId string `protobuf:"bytes,1,opt,name=cloud_region_id,json=cloudRegionId,proto3" json:"cloud_region_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGlobalCloudRegionRequest) Reset() {
+	*x = GetGlobalCloudRegionRequest{}
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGlobalCloudRegionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGlobalCloudRegionRequest) ProtoMessage() {}
+
+func (x *GetGlobalCloudRegionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGlobalCloudRegionRequest.ProtoReflect.Descriptor instead.
+func (*GetGlobalCloudRegionRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetGlobalCloudRegionRequest) GetCloudRegionId() string {
+	if x != nil {
+		return x.CloudRegionId
+	}
+	return ""
+}
+
+// GetGlobalCloudRegionResponse is the response from the GetGlobalCloudRegion function.
+type GetGlobalCloudRegionResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The cloud region.
+	Region        *CloudRegion `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGlobalCloudRegionResponse) Reset() {
+	*x = GetGlobalCloudRegionResponse{}
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGlobalCloudRegionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGlobalCloudRegionResponse) ProtoMessage() {}
+
+func (x *GetGlobalCloudRegionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGlobalCloudRegionResponse.ProtoReflect.Descriptor instead.
+func (*GetGlobalCloudRegionResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetGlobalCloudRegionResponse) GetRegion() *CloudRegion {
+	if x != nil {
+		return x.Region
+	}
+	return nil
+}
+
+// ListCloudRegionsRequest is the request for the ListCloudRegions function.
+type ListCloudRegionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The identifier of the account (in GUID format).
 	// This is a required field.
@@ -35,196 +210,20 @@ type ListCloudProvidersRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListCloudProvidersRequest) Reset() {
-	*x = ListCloudProvidersRequest{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProvidersRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProvidersRequest) ProtoMessage() {}
-
-func (x *ListCloudProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProvidersRequest.ProtoReflect.Descriptor instead.
-func (*ListCloudProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ListCloudProvidersRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-// ListCloudProvidersResponse is the response from the ListCloudProviders function.
-type ListCloudProvidersResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud providers
-	Items         []*CloudProvider `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCloudProvidersResponse) Reset() {
-	*x = ListCloudProvidersResponse{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProvidersResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProvidersResponse) ProtoMessage() {}
-
-func (x *ListCloudProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProvidersResponse.ProtoReflect.Descriptor instead.
-func (*ListCloudProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListCloudProvidersResponse) GetItems() []*CloudProvider {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-// ListGlobalCloudProvidersRequest is the request from the ListGlobalCloudProviders function.
-type ListGlobalCloudProvidersRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListGlobalCloudProvidersRequest) Reset() {
-	*x = ListGlobalCloudProvidersRequest{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListGlobalCloudProvidersRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListGlobalCloudProvidersRequest) ProtoMessage() {}
-
-func (x *ListGlobalCloudProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListGlobalCloudProvidersRequest.ProtoReflect.Descriptor instead.
-func (*ListGlobalCloudProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{2}
-}
-
-// ListGlobalCloudProvidersResponse is the response from the ListGlobalCloudProviders function.
-type ListGlobalCloudProvidersResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud providers
-	Items         []*CloudProvider `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListGlobalCloudProvidersResponse) Reset() {
-	*x = ListGlobalCloudProvidersResponse{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListGlobalCloudProvidersResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListGlobalCloudProvidersResponse) ProtoMessage() {}
-
-func (x *ListGlobalCloudProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListGlobalCloudProvidersResponse.ProtoReflect.Descriptor instead.
-func (*ListGlobalCloudProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ListGlobalCloudProvidersResponse) GetItems() []*CloudProvider {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-// ListGlobalCloudProviderRegionsRequest is the request for the ListGlobalCloudProviderRegions function.
-type ListGlobalCloudProviderRegionsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-	// This is a required field.
-	CloudProviderId string `protobuf:"bytes,1,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *ListGlobalCloudProviderRegionsRequest) Reset() {
-	*x = ListGlobalCloudProviderRegionsRequest{}
+func (x *ListCloudRegionsRequest) Reset() {
+	*x = ListCloudRegionsRequest{}
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListGlobalCloudProviderRegionsRequest) String() string {
+func (x *ListCloudRegionsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListGlobalCloudProviderRegionsRequest) ProtoMessage() {}
+func (*ListCloudRegionsRequest) ProtoMessage() {}
 
-func (x *ListGlobalCloudProviderRegionsRequest) ProtoReflect() protoreflect.Message {
+func (x *ListCloudRegionsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -236,41 +235,41 @@ func (x *ListGlobalCloudProviderRegionsRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListGlobalCloudProviderRegionsRequest.ProtoReflect.Descriptor instead.
-func (*ListGlobalCloudProviderRegionsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListCloudRegionsRequest.ProtoReflect.Descriptor instead.
+func (*ListCloudRegionsRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ListGlobalCloudProviderRegionsRequest) GetCloudProviderId() string {
+func (x *ListCloudRegionsRequest) GetAccountId() string {
 	if x != nil {
-		return x.CloudProviderId
+		return x.AccountId
 	}
 	return ""
 }
 
-// ListGlobalCloudProviderRegionsResponse is the response from the ListGlobalCloudProviderRegions function.
-type ListGlobalCloudProviderRegionsResponse struct {
+// ListCloudRegionsResponse is the response from the ListCloudRegions function.
+type ListCloudRegionsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud provider regions.
-	Items         []*CloudProviderRegion `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// The cloud regions.
+	Items         []*CloudRegion `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListGlobalCloudProviderRegionsResponse) Reset() {
-	*x = ListGlobalCloudProviderRegionsResponse{}
+func (x *ListCloudRegionsResponse) Reset() {
+	*x = ListCloudRegionsResponse{}
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListGlobalCloudProviderRegionsResponse) String() string {
+func (x *ListCloudRegionsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListGlobalCloudProviderRegionsResponse) ProtoMessage() {}
+func (*ListCloudRegionsResponse) ProtoMessage() {}
 
-func (x *ListGlobalCloudProviderRegionsResponse) ProtoReflect() protoreflect.Message {
+func (x *ListCloudRegionsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -282,45 +281,45 @@ func (x *ListGlobalCloudProviderRegionsResponse) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListGlobalCloudProviderRegionsResponse.ProtoReflect.Descriptor instead.
-func (*ListGlobalCloudProviderRegionsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListCloudRegionsResponse.ProtoReflect.Descriptor instead.
+func (*ListCloudRegionsResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ListGlobalCloudProviderRegionsResponse) GetItems() []*CloudProviderRegion {
+func (x *ListCloudRegionsResponse) GetItems() []*CloudRegion {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-// GetGlobalCloudProviderRegionRequest is the request for the GetGlobalCloudProviderRegion function.
-type GetGlobalCloudProviderRegionRequest struct {
+// GetCloudRegionRequest is the request for the GetCloudRegion function.
+type GetCloudRegionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
+	// The identifier of the account (in GUID format).
 	// This is a required field.
-	CloudProviderId string `protobuf:"bytes,1,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// The identifier for the cloud provider region.
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The identifier for the cloud region.
 	// This is a required field.
-	RegionId      string `protobuf:"bytes,2,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	CloudRegionId string `protobuf:"bytes,2,opt,name=cloud_region_id,json=cloudRegionId,proto3" json:"cloud_region_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetGlobalCloudProviderRegionRequest) Reset() {
-	*x = GetGlobalCloudProviderRegionRequest{}
+func (x *GetCloudRegionRequest) Reset() {
+	*x = GetCloudRegionRequest{}
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetGlobalCloudProviderRegionRequest) String() string {
+func (x *GetCloudRegionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetGlobalCloudProviderRegionRequest) ProtoMessage() {}
+func (*GetCloudRegionRequest) ProtoMessage() {}
 
-func (x *GetGlobalCloudProviderRegionRequest) ProtoReflect() protoreflect.Message {
+func (x *GetCloudRegionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -332,48 +331,48 @@ func (x *GetGlobalCloudProviderRegionRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetGlobalCloudProviderRegionRequest.ProtoReflect.Descriptor instead.
-func (*GetGlobalCloudProviderRegionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetCloudRegionRequest.ProtoReflect.Descriptor instead.
+func (*GetCloudRegionRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetGlobalCloudProviderRegionRequest) GetCloudProviderId() string {
+func (x *GetCloudRegionRequest) GetAccountId() string {
 	if x != nil {
-		return x.CloudProviderId
+		return x.AccountId
 	}
 	return ""
 }
 
-func (x *GetGlobalCloudProviderRegionRequest) GetRegionId() string {
+func (x *GetCloudRegionRequest) GetCloudRegionId() string {
 	if x != nil {
-		return x.RegionId
+		return x.CloudRegionId
 	}
 	return ""
 }
 
-// GetGlobalCloudProviderRegionResponse is the response from the GetGlobalCloudProviderRegion function.
-type GetGlobalCloudProviderRegionResponse struct {
+// GetCloudRegionResponse is the response from the GetCloudRegion function.
+type GetCloudRegionResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud provider region.
-	Region        *CloudProviderRegion `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
+	// The cloud region.
+	Region        *CloudRegion `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetGlobalCloudProviderRegionResponse) Reset() {
-	*x = GetGlobalCloudProviderRegionResponse{}
+func (x *GetCloudRegionResponse) Reset() {
+	*x = GetCloudRegionResponse{}
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetGlobalCloudProviderRegionResponse) String() string {
+func (x *GetCloudRegionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetGlobalCloudProviderRegionResponse) ProtoMessage() {}
+func (*GetCloudRegionResponse) ProtoMessage() {}
 
-func (x *GetGlobalCloudProviderRegionResponse) ProtoReflect() protoreflect.Message {
+func (x *GetCloudRegionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -385,314 +384,28 @@ func (x *GetGlobalCloudProviderRegionResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetGlobalCloudProviderRegionResponse.ProtoReflect.Descriptor instead.
-func (*GetGlobalCloudProviderRegionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetCloudRegionResponse.ProtoReflect.Descriptor instead.
+func (*GetCloudRegionResponse) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetGlobalCloudProviderRegionResponse) GetRegion() *CloudProviderRegion {
+func (x *GetCloudRegionResponse) GetRegion() *CloudRegion {
 	if x != nil {
 		return x.Region
 	}
 	return nil
 }
 
-// ListCloudProviderRegionsRequest is the request for the ListCloudProviderRegions function.
-type ListCloudProviderRegionsRequest struct {
+// CloudRegion represents a cloud region where serverless spaces can be hosted.
+type CloudRegion struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in GUID format).
-	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-	// This is a required field.
-	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *ListCloudProviderRegionsRequest) Reset() {
-	*x = ListCloudProviderRegionsRequest{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProviderRegionsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProviderRegionsRequest) ProtoMessage() {}
-
-func (x *ListCloudProviderRegionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProviderRegionsRequest.ProtoReflect.Descriptor instead.
-func (*ListCloudProviderRegionsRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *ListCloudProviderRegionsRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *ListCloudProviderRegionsRequest) GetCloudProviderId() string {
-	if x != nil {
-		return x.CloudProviderId
-	}
-	return ""
-}
-
-// ListCloudProviderRegionsResponse is the response from the ListCloudProviderRegions function.
-type ListCloudProviderRegionsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud provider regions.
-	Items         []*CloudProviderRegion `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCloudProviderRegionsResponse) Reset() {
-	*x = ListCloudProviderRegionsResponse{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCloudProviderRegionsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCloudProviderRegionsResponse) ProtoMessage() {}
-
-func (x *ListCloudProviderRegionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCloudProviderRegionsResponse.ProtoReflect.Descriptor instead.
-func (*ListCloudProviderRegionsResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *ListCloudProviderRegionsResponse) GetItems() []*CloudProviderRegion {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-// GetCloudProviderRegionRequest is the request for the GetCloudProviderRegion function.
-type GetCloudProviderRegionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the account (in GUID format).
-	// This is a required field.
-	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	// The identifier for the cloud provider. One of the providers from response of the ListCloudProviders function.
-	// This is a required field.
-	CloudProviderId string `protobuf:"bytes,2,opt,name=cloud_provider_id,json=cloudProviderId,proto3" json:"cloud_provider_id,omitempty"`
-	// The identifier for the cloud provider region.
-	// This is a required field.
-	RegionId      string `protobuf:"bytes,3,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCloudProviderRegionRequest) Reset() {
-	*x = GetCloudProviderRegionRequest{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCloudProviderRegionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCloudProviderRegionRequest) ProtoMessage() {}
-
-func (x *GetCloudProviderRegionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCloudProviderRegionRequest.ProtoReflect.Descriptor instead.
-func (*GetCloudProviderRegionRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *GetCloudProviderRegionRequest) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *GetCloudProviderRegionRequest) GetCloudProviderId() string {
-	if x != nil {
-		return x.CloudProviderId
-	}
-	return ""
-}
-
-func (x *GetCloudProviderRegionRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-// GetCloudProviderRegionResponse is the response from the GetCloudProviderRegion function.
-type GetCloudProviderRegionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The cloud provider region.
-	Region        *CloudProviderRegion `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCloudProviderRegionResponse) Reset() {
-	*x = GetCloudProviderRegionResponse{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCloudProviderRegionResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCloudProviderRegionResponse) ProtoMessage() {}
-
-func (x *GetCloudProviderRegionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCloudProviderRegionResponse.ProtoReflect.Descriptor instead.
-func (*GetCloudProviderRegionResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetCloudProviderRegionResponse) GetRegion() *CloudProviderRegion {
-	if x != nil {
-		return x.Region
-	}
-	return nil
-}
-
-// CloudProvider represents a cloud provider identifier and name.
-type CloudProvider struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier for the cloud provider.
-	// e.g. "aws", "gcp", "azure".
+	// The globally unique identifier for the cloud region.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The human-readable name of the cloud provider.
-	// e.g. "Amazon Web Services", "Google Cloud", "Microsoft Azure".
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Indicates whether the cloud provider is available at the moment.
-	Available     bool `protobuf:"varint,3,opt,name=available,proto3" json:"available,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CloudProvider) Reset() {
-	*x = CloudProvider{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CloudProvider) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CloudProvider) ProtoMessage() {}
-
-func (x *CloudProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CloudProvider.ProtoReflect.Descriptor instead.
-func (*CloudProvider) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *CloudProvider) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *CloudProvider) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CloudProvider) GetAvailable() bool {
-	if x != nil {
-		return x.Available
-	}
-	return false
-}
-
-// CloudProviderRegion represents a cloud provider region.
-type CloudProviderRegion struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier for the cloud provider region.
-	// e.g. "us-west-1", "europe-west1", "eastus".
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The human-readable name of the cloud provider region.
+	// The human-readable name of the cloud region.
 	// e.g. "Frankfurt", "Tokyo", etc.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Indicates whether the cloud region is available.
 	Available bool `protobuf:"varint,3,opt,name=available,proto3" json:"available,omitempty"`
-	// The identifier for the cloud provider.
-	// e.g. "aws", "gcp", "azure".
-	Provider string `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`
 	// ISO 3166-1 alpha-2 country codes for different countries to display for each region.
 	CountryIsoCode *string `protobuf:"bytes,5,opt,name=country_iso_code,json=countryIsoCode,proto3,oneof" json:"country_iso_code,omitempty"`
 	// Geographic location grouping of the region.
@@ -702,21 +415,21 @@ type CloudProviderRegion struct {
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *CloudProviderRegion) Reset() {
-	*x = CloudProviderRegion{}
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[13]
+func (x *CloudRegion) Reset() {
+	*x = CloudRegion{}
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CloudProviderRegion) String() string {
+func (x *CloudRegion) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CloudProviderRegion) ProtoMessage() {}
+func (*CloudRegion) ProtoMessage() {}
 
-func (x *CloudProviderRegion) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[13]
+func (x *CloudRegion) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -727,47 +440,40 @@ func (x *CloudProviderRegion) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CloudProviderRegion.ProtoReflect.Descriptor instead.
-func (*CloudProviderRegion) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{13}
+// Deprecated: Use CloudRegion.ProtoReflect.Descriptor instead.
+func (*CloudRegion) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *CloudProviderRegion) GetId() string {
+func (x *CloudRegion) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *CloudProviderRegion) GetName() string {
+func (x *CloudRegion) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CloudProviderRegion) GetAvailable() bool {
+func (x *CloudRegion) GetAvailable() bool {
 	if x != nil {
 		return x.Available
 	}
 	return false
 }
 
-func (x *CloudProviderRegion) GetProvider() string {
-	if x != nil {
-		return x.Provider
-	}
-	return ""
-}
-
-func (x *CloudProviderRegion) GetCountryIsoCode() string {
+func (x *CloudRegion) GetCountryIsoCode() string {
 	if x != nil && x.CountryIsoCode != nil {
 		return *x.CountryIsoCode
 	}
 	return ""
 }
 
-func (x *CloudProviderRegion) GetGeographicalSubRegion() string {
+func (x *CloudRegion) GetGeographicalSubRegion() string {
 	if x != nil && x.GeographicalSubRegion != nil {
 		return *x.GeographicalSubRegion
 	}
@@ -778,64 +484,41 @@ var File_qdrant_cloud_serverless_platform_v1_platform_proto protoreflect.FileDes
 
 const file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc = "" +
 	"\n" +
-	"2qdrant/cloud/serverless/platform/v1/platform.proto\x12#qdrant.cloud.serverless.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a)qdrant/cloud/hybrid/v1/hybrid_cloud.proto\"D\n" +
-	"\x19ListCloudProvidersRequest\x12'\n" +
+	"2qdrant/cloud/serverless/platform/v1/platform.proto\x12#qdrant.cloud.serverless.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x1f\n" +
+	"\x1dListGlobalCloudRegionsRequest\"h\n" +
+	"\x1eListGlobalCloudRegionsResponse\x12F\n" +
+	"\x05items\x18\x01 \x03(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x05items\"N\n" +
+	"\x1bGetGlobalCloudRegionRequest\x12/\n" +
+	"\x0fcloud_region_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rcloudRegionId\"h\n" +
+	"\x1cGetGlobalCloudRegionResponse\x12H\n" +
+	"\x06region\x18\x01 \x01(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x06region\"B\n" +
+	"\x17ListCloudRegionsRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"f\n" +
-	"\x1aListCloudProvidersResponse\x12H\n" +
-	"\x05items\x18\x01 \x03(\v22.qdrant.cloud.serverless.platform.v1.CloudProviderR\x05items\"!\n" +
-	"\x1fListGlobalCloudProvidersRequest\"l\n" +
-	" ListGlobalCloudProvidersResponse\x12H\n" +
-	"\x05items\x18\x01 \x03(\v22.qdrant.cloud.serverless.platform.v1.CloudProviderR\x05items\"\\\n" +
-	"%ListGlobalCloudProviderRegionsRequest\x123\n" +
-	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\"x\n" +
-	"&ListGlobalCloudProviderRegionsResponse\x12N\n" +
-	"\x05items\x18\x01 \x03(\v28.qdrant.cloud.serverless.platform.v1.CloudProviderRegionR\x05items\"\x80\x01\n" +
-	"#GetGlobalCloudProviderRegionRequest\x123\n" +
-	"\x11cloud_provider_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12$\n" +
-	"\tregion_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bregionId\"x\n" +
-	"$GetGlobalCloudProviderRegionResponse\x12P\n" +
-	"\x06region\x18\x01 \x01(\v28.qdrant.cloud.serverless.platform.v1.CloudProviderRegionR\x06region\"\x7f\n" +
-	"\x1fListCloudProviderRegionsRequest\x12'\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"b\n" +
+	"\x18ListCloudRegionsResponse\x12F\n" +
+	"\x05items\x18\x01 \x03(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x05items\"q\n" +
+	"\x15GetCloudRegionRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
-	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\"r\n" +
-	" ListCloudProviderRegionsResponse\x12N\n" +
-	"\x05items\x18\x01 \x03(\v28.qdrant.cloud.serverless.platform.v1.CloudProviderRegionR\x05items\"\xa3\x01\n" +
-	"\x1dGetCloudProviderRegionRequest\x12'\n" +
-	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
-	"\x11cloud_provider_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x0fcloudProviderId\x12$\n" +
-	"\tregion_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bregionId\"r\n" +
-	"\x1eGetCloudProviderRegionResponse\x12P\n" +
-	"\x06region\x18\x01 \x01(\v28.qdrant.cloud.serverless.platform.v1.CloudProviderRegionR\x06region\"c\n" +
-	"\rCloudProvider\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1c\n" +
-	"\tavailable\x18\x03 \x01(\bR\tavailable\"\xca\x02\n" +
-	"\x13CloudProviderRegion\x12\x17\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
+	"\x0fcloud_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rcloudRegionId\"b\n" +
+	"\x16GetCloudRegionResponse\x12H\n" +
+	"\x06region\x18\x01 \x01(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x06region\"\x9d\x02\n" +
+	"\vCloudRegion\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1c\n" +
-	"\tavailable\x18\x03 \x01(\bR\tavailable\x12#\n" +
-	"\bprovider\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bprovider\x12C\n" +
+	"\tavailable\x18\x03 \x01(\bR\tavailable\x12C\n" +
 	"\x10country_iso_code\x18\x05 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
 	"^[A-Z]{2}$\x98\x01\x02H\x00R\x0ecountryIsoCode\x88\x01\x01\x12D\n" +
 	"\x17geographical_sub_region\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15geographicalSubRegion\x88\x01\x01B\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
-	"\x18_geographical_sub_region2\x9a\x0e\n" +
-	"\x0fPlatformService\x12\xe0\x01\n" +
-	"\x18ListGlobalCloudProviders\x12D.qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest\x1aE.qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse\"7\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02-\x12+/api/serverless/platform/v1/cloud-providers\x12\xe4\x01\n" +
-	"\x12ListCloudProviders\x12>.qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest\x1a?.qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse\"M\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02C\x12A/api/serverless/platform/v1/accounts/{account_id}/cloud-providers\x12\xb8\x02\n" +
-	"\x1eListGlobalCloudProviderRegions\x12J.qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest\x1aK.qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse\"}\x98\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02I\x12G/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions\x12\xd9\x02\n" +
-	"\x1cGetGlobalCloudProviderRegion\x12H.qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest\x1aI.qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse\"\xa3\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
-	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02U\x12S/api/serverless/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}\x12\xbd\x02\n" +
-	"\x18ListCloudProviderRegions\x12D.qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest\x1aE.qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse\"\x93\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02_\x12]/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions\x12\xdd\x02\n" +
-	"\x16GetCloudProviderRegion\x12B.qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest\x1aC.qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse\"\xb9\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
-	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02k\x12i/api/serverless/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\x06µ\x18\x02\b\x01B\xca\x02\n" +
+	"\x18_geographical_sub_region2\xf2\a\n" +
+	"\x0fPlatformService\x12\xd8\x01\n" +
+	"\x16ListGlobalCloudRegions\x12B.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest\x1aC.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse\"5\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02+\x12)/api/serverless/platform/v1/cloud-regions\x12\x8a\x02\n" +
+	"\x14GetGlobalCloudRegion\x12@.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest\x1aA.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse\"m\x98\xb5\x18\x00\xba\xb5\x18\"\n" +
+	"\x0fcloud_region_id\x12\x0fcloud_region_id\x82\xd3\xe4\x93\x02=\x12;/api/serverless/platform/v1/cloud-regions/{cloud_region_id}\x12\xdc\x01\n" +
+	"\x10ListCloudRegions\x12<.qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest\x1a=.qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse\"K\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02A\x12?/api/serverless/platform/v1/accounts/{account_id}/cloud-regions\x12\x8f\x02\n" +
+	"\x0eGetCloudRegion\x12:.qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest\x1a;.qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse\"\x83\x01\x8a\xb5\x18\x00\xba\xb5\x18\"\n" +
+	"\x0fcloud_region_id\x12\x0fcloud_region_id\x82\xd3\xe4\x93\x02S\x12Q/api/serverless/platform/v1/accounts/{account_id}/cloud-regions/{cloud_region_id}\x1a\x06µ\x18\x02\b\x02B\xca\x02\n" +
 	"'com.qdrant.cloud.serverless.platform.v1B\rPlatformProtoP\x01Z_github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/platform/v1;platformv1\xa2\x02\x04QCSP\xaa\x02#Qdrant.Cloud.Serverless.Platform.V1\xca\x02#Qdrant\\Cloud\\Serverless\\Platform\\V1\xe2\x02/Qdrant\\Cloud\\Serverless\\Platform\\V1\\GPBMetadata\xea\x02'Qdrant::Cloud::Serverless::Platform::V1b\x06proto3"
 
 var (
@@ -850,47 +533,36 @@ func file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescGZIP() []byt
 	return file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDescData
 }
 
-var file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_qdrant_cloud_serverless_platform_v1_platform_proto_goTypes = []any{
-	(*ListCloudProvidersRequest)(nil),              // 0: qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest
-	(*ListCloudProvidersResponse)(nil),             // 1: qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse
-	(*ListGlobalCloudProvidersRequest)(nil),        // 2: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest
-	(*ListGlobalCloudProvidersResponse)(nil),       // 3: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse
-	(*ListGlobalCloudProviderRegionsRequest)(nil),  // 4: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest
-	(*ListGlobalCloudProviderRegionsResponse)(nil), // 5: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse
-	(*GetGlobalCloudProviderRegionRequest)(nil),    // 6: qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest
-	(*GetGlobalCloudProviderRegionResponse)(nil),   // 7: qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse
-	(*ListCloudProviderRegionsRequest)(nil),        // 8: qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest
-	(*ListCloudProviderRegionsResponse)(nil),       // 9: qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse
-	(*GetCloudProviderRegionRequest)(nil),          // 10: qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest
-	(*GetCloudProviderRegionResponse)(nil),         // 11: qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse
-	(*CloudProvider)(nil),                          // 12: qdrant.cloud.serverless.platform.v1.CloudProvider
-	(*CloudProviderRegion)(nil),                    // 13: qdrant.cloud.serverless.platform.v1.CloudProviderRegion
+	(*ListGlobalCloudRegionsRequest)(nil),  // 0: qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest
+	(*ListGlobalCloudRegionsResponse)(nil), // 1: qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse
+	(*GetGlobalCloudRegionRequest)(nil),    // 2: qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest
+	(*GetGlobalCloudRegionResponse)(nil),   // 3: qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse
+	(*ListCloudRegionsRequest)(nil),        // 4: qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest
+	(*ListCloudRegionsResponse)(nil),       // 5: qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse
+	(*GetCloudRegionRequest)(nil),          // 6: qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest
+	(*GetCloudRegionResponse)(nil),         // 7: qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse
+	(*CloudRegion)(nil),                    // 8: qdrant.cloud.serverless.platform.v1.CloudRegion
 }
 var file_qdrant_cloud_serverless_platform_v1_platform_proto_depIdxs = []int32{
-	12, // 0: qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudProvider
-	12, // 1: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudProvider
-	13, // 2: qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudProviderRegion
-	13, // 3: qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse.region:type_name -> qdrant.cloud.serverless.platform.v1.CloudProviderRegion
-	13, // 4: qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudProviderRegion
-	13, // 5: qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse.region:type_name -> qdrant.cloud.serverless.platform.v1.CloudProviderRegion
-	2,  // 6: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviders:input_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersRequest
-	0,  // 7: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviders:input_type -> qdrant.cloud.serverless.platform.v1.ListCloudProvidersRequest
-	4,  // 8: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviderRegions:input_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsRequest
-	6,  // 9: qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudProviderRegion:input_type -> qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionRequest
-	8,  // 10: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviderRegions:input_type -> qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsRequest
-	10, // 11: qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudProviderRegion:input_type -> qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionRequest
-	3,  // 12: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviders:output_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudProvidersResponse
-	1,  // 13: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviders:output_type -> qdrant.cloud.serverless.platform.v1.ListCloudProvidersResponse
-	5,  // 14: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudProviderRegions:output_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudProviderRegionsResponse
-	7,  // 15: qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudProviderRegion:output_type -> qdrant.cloud.serverless.platform.v1.GetGlobalCloudProviderRegionResponse
-	9,  // 16: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudProviderRegions:output_type -> qdrant.cloud.serverless.platform.v1.ListCloudProviderRegionsResponse
-	11, // 17: qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudProviderRegion:output_type -> qdrant.cloud.serverless.platform.v1.GetCloudProviderRegionResponse
-	12, // [12:18] is the sub-list for method output_type
-	6,  // [6:12] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	8, // 0: qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudRegion
+	8, // 1: qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse.region:type_name -> qdrant.cloud.serverless.platform.v1.CloudRegion
+	8, // 2: qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse.items:type_name -> qdrant.cloud.serverless.platform.v1.CloudRegion
+	8, // 3: qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse.region:type_name -> qdrant.cloud.serverless.platform.v1.CloudRegion
+	0, // 4: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudRegions:input_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest
+	2, // 5: qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudRegion:input_type -> qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest
+	4, // 6: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions:input_type -> qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest
+	6, // 7: qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudRegion:input_type -> qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest
+	1, // 8: qdrant.cloud.serverless.platform.v1.PlatformService.ListGlobalCloudRegions:output_type -> qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse
+	3, // 9: qdrant.cloud.serverless.platform.v1.PlatformService.GetGlobalCloudRegion:output_type -> qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse
+	5, // 10: qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions:output_type -> qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse
+	7, // 11: qdrant.cloud.serverless.platform.v1.PlatformService.GetCloudRegion:output_type -> qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_platform_v1_platform_proto_init() }
@@ -898,14 +570,14 @@ func file_qdrant_cloud_serverless_platform_v1_platform_proto_init() {
 	if File_qdrant_cloud_serverless_platform_v1_platform_proto != nil {
 		return
 	}
-	file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[13].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_platform_v1_platform_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc), len(file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
