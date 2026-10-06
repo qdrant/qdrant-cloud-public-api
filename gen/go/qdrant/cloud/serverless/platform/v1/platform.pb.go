@@ -502,7 +502,7 @@ const file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
 	"\x0fcloud_region_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rcloudRegionId\"b\n" +
 	"\x16GetCloudRegionResponse\x12H\n" +
-	"\x06region\x18\x01 \x01(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x06region\"\xad\x02\n" +
+	"\x06region\x18\x01 \x01(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x06region\"\x9d\x02\n" +
 	"\vCloudRegion\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1c\n" +
@@ -511,7 +511,7 @@ const file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc = "" +
 	"^[A-Z]{2}$\x98\x01\x02H\x00R\x0ecountryIsoCode\x88\x01\x01\x12D\n" +
 	"\x17geographical_sub_region\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15geographicalSubRegion\x88\x01\x01B\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
-	"\x18_geographical_sub_regionJ\x04\b\x04\x10\x05R\bprovider2\xf2\a\n" +
+	"\x18_geographical_sub_region2\xf2\a\n" +
 	"\x0fPlatformService\x12\xd8\x01\n" +
 	"\x16ListGlobalCloudRegions\x12B.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest\x1aC.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse\"5\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02+\x12)/api/serverless/platform/v1/cloud-regions\x12\x8a\x02\n" +
 	"\x14GetGlobalCloudRegion\x12@.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest\x1aA.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse\"m\x98\xb5\x18\x00\xba\xb5\x18\"\n" +

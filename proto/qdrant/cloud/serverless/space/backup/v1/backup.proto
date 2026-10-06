@@ -675,8 +675,6 @@ message SpaceInfo {
     min_len: 4
     pattern: "^[a-zA-Z0-9-_]+$"
   }];
-  reserved 2;
-  reserved "cloud_provider_id";
   // Cloud region where the space is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
   string cloud_region_id = 3 [(buf.validate.field).string.min_len = 1];

@@ -125,8 +125,6 @@ message CloudRegion {
   string name = 2 [(buf.validate.field).string.min_len = 1];
   // Indicates whether the cloud region is available.
   bool available = 3;
-  reserved 4;
-  reserved "provider";
   // ISO 3166-1 alpha-2 country codes for different countries to display for each region.
   optional string country_iso_code = 5 [(buf.validate.field).string = {
     len: 2

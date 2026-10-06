@@ -2361,11 +2361,11 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\v_size_bytesB\x0f\n" +
 	"\r_total_pointsB\v\n" +
 	"\t_durationB\v\n" +
-	"\t_progress\"\xea\x01\n" +
+	"\t_progress\"\xd1\x01\n" +
 	"\tSpaceInfo\x12/\n" +
 	"\x04name\x18\x01 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12/\n" +
 	"\x0fcloud_region_id\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rcloudRegionId\x12b\n" +
-	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfigurationJ\x04\b\x02\x10\x03R\x11cloud_provider_id\"\xcc\f\n" +
+	"\rconfiguration\x18\x04 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\"\xcc\f\n" +
 	"\x0eBackupSchedule\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
 	"\n" +

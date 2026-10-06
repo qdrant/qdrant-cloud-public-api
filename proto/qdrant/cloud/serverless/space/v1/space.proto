@@ -188,8 +188,6 @@ message ListSpacesRequest {
   // The identifier of the account (in GUID format).
   // This is a required field.
   string account_id = 1 [(buf.validate.field).string = {uuid: true}];
-  reserved 10;
-  reserved "cloud_provider_id";
   // Cloud region where the space is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
   optional string cloud_region_id = 11 [(buf.validate.field).string.min_len = 1];
@@ -372,8 +370,6 @@ message Space {
   // Timestamp when the space was deleted (or is started to be deleting).
   // This is a read-only field and will be set after DeleteSpace is called.
   google.protobuf.Timestamp deleted_at = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
-  reserved 10;
-  reserved "cloud_provider_id";
   // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
   // Cloud region where the space is hosted.
   // Must match one of the region IDs returned by the `qdrant.cloud.serverless.platform.v1.PlatformService.ListCloudRegions` method.
