@@ -757,7 +757,7 @@
               "readOnly": true
             }
           },
-          "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored."
+          "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored.\nAn empty `display_name` clears the custom name, after which the backup reports\nits generated `name` again."
         }
       },
       "description": "UpdateBackupRequest is the request for the UpdateBackup function."

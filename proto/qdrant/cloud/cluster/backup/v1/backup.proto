@@ -388,13 +388,15 @@ message CreateBackupRequest {
     message: "read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info, price) must not be set on create"
     expression: "this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info) && !has(this.backup.price)"
   };
-  // The rule binds the request rather than `Backup.display_name`: on a response that field
-  // falls back to the generated snapshot identifier, which is longer than this rule allows.
+  // The rule binds the request rather than `Backup.display_name`, which on a response
+  // falls back to the generated snapshot identifier and must stay valid there too.
+  // 72 is the length of the longest generated `name`, so whatever a read returns can
+  // always be sent straight back on a write.
   // A display name is optional; when omitted, the backup reports its generated `name`.
   option (buf.validate.message).cel = {
     id: "create_backup.display_name_rule"
-    message: "display_name must be 4-64 characters of letters, digits, hyphens and underscores"
-    expression: "this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+    message: "display_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')"
   };
 }
 
@@ -408,6 +410,8 @@ message CreateBackupResponse {
 message UpdateBackupRequest {
   // The actual backup.
   // Only `display_name` is applied; every other field is ignored.
+  // An empty `display_name` clears the custom name, after which the backup reports
+  // its generated `name` again.
   Backup backup = 1 [(buf.validate.field).required = true];
   option (buf.validate.message).cel = {
     id: "update_backup.id_present"
@@ -416,8 +420,8 @@ message UpdateBackupRequest {
   };
   option (buf.validate.message).cel = {
     id: "update_backup.display_name_rule"
-    message: "display_name must be 4-64 characters of letters, digits, hyphens and underscores"
-    expression: "this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+    message: "display_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')"
   };
 }
 
@@ -566,8 +570,8 @@ message CreateBackupScheduleRequest {
   // A display name is optional; when omitted, the schedule stamps nothing onto its backups.
   option (buf.validate.message).cel = {
     id: "create_backup_schedule.display_name_rule"
-    message: "display_name must be 4-64 characters of letters, digits, hyphens and underscores"
-    expression: "this.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')"
+    message: "display_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')"
   };
 }
 
@@ -592,6 +596,13 @@ message UpdateBackupScheduleRequest {
     id: "update_backup_schedule.id_present"
     message: "backup_schedule.id is required for an update"
     expression: "this.backup_schedule.id != ''"
+  };
+  // An empty display_name clears the schedule's name. The backups it already took keep
+  // the name they were given.
+  option (buf.validate.message).cel = {
+    id: "update_backup_schedule.display_name_rule"
+    message: "display_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores"
+    expression: "this.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')"
   };
 }
 

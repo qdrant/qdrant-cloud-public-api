@@ -279,6 +279,8 @@ export declare type UpdateBackupRequest = Message<"qdrant.cloud.cluster.backup.v
   /**
    * The actual backup.
    * Only `display_name` is applied; every other field is ignored.
+   * An empty `display_name` clears the custom name, after which the backup reports
+   * its generated `name` again.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
@@ -294,6 +296,8 @@ export declare type UpdateBackupRequestValid = Message<"qdrant.cloud.cluster.bac
   /**
    * The actual backup.
    * Only `display_name` is applied; every other field is ignored.
+   * An empty `display_name` clears the custom name, after which the backup reports
+   * its generated `name` again.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
