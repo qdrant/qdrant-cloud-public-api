@@ -14,7 +14,7 @@ service AuthService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 1
+    minor: 2
     patch: 0
   };
   // Lists all management keys in the account identified by the given ID.
@@ -34,6 +34,8 @@ service AuthService {
     option (common.v1.permissions) = "write:management_keys";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "management_key.account_id";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/auth/v1/accounts/{management_key.account_id}/management-keys"

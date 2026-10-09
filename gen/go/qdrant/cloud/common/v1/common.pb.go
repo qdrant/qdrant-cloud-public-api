@@ -1333,6 +1333,14 @@ var file_qdrant_cloud_common_v1_common_proto_extTypes = []protoimpl.ExtensionInf
 		Tag:           "bytes,50009,opt,name=patch_source",
 		Filename:      "qdrant/cloud/common/v1/common.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: (*bool)(nil),
+		Field:         50012,
+		Name:          "qdrant.cloud.common.v1.interactive_only",
+		Tag:           "varint,50012,opt,name=interactive_only",
+		Filename:      "qdrant/cloud/common/v1/common.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -1376,6 +1384,15 @@ var (
 	//
 	// optional qdrant.cloud.common.v1.PatchSource patch_source = 50009;
 	E_PatchSource = &file_qdrant_cloud_common_v1_common_proto_extTypes[8]
+	// When true, the method may only be called with an interactive session credential
+	// (for example a first-party console JWT). It must be rejected for non-interactive
+	// credentials such as personal API keys and OAuth-delegated tokens, even when the
+	// actor type is USER and the caller holds the required permissions.
+	// When false or unset, any authenticated credential that passes other checks is allowed.
+	// Enforcement is performed by the API gateway once it understands credential_type.
+	//
+	// optional bool interactive_only = 50012;
+	E_InteractiveOnly = &file_qdrant_cloud_common_v1_common_proto_extTypes[9]
 )
 
 // Extension fields to descriptorpb.ServiceOptions.
@@ -1496,7 +1513,8 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"log_fields\x12\x1e.google.protobuf.MethodOptions\x18׆\x03 \x03(\v2 .qdrant.cloud.common.v1.LogFieldR\tlogFields:f\n" +
 	"\vapi_version\x12\x1f.google.protobuf.ServiceOptions\x18؆\x03 \x01(\v2\x1f.qdrant.cloud.common.v1.VersionR\n" +
 	"apiVersion\x88\x01\x01:k\n" +
-	"\fpatch_source\x12\x1e.google.protobuf.MethodOptions\x18ن\x03 \x01(\v2#.qdrant.cloud.common.v1.PatchSourceR\vpatchSource\x88\x01\x01B\xf6\x01\n" +
+	"\fpatch_source\x12\x1e.google.protobuf.MethodOptions\x18ن\x03 \x01(\v2#.qdrant.cloud.common.v1.PatchSourceR\vpatchSource\x88\x01\x01:K\n" +
+	"\x10interactive_only\x12\x1e.google.protobuf.MethodOptions\x18܆\x03 \x01(\bR\x0finteractiveOnlyB\xf6\x01\n" +
 	"\x1acom.qdrant.cloud.common.v1B\vCommonProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1;commonv1\xa2\x02\x03QCC\xaa\x02\x16Qdrant.Cloud.Common.V1\xca\x02\x16Qdrant\\Cloud\\Common\\V1\xe2\x02\"Qdrant\\Cloud\\Common\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Common::V1b\x06proto3"
 
 var (
@@ -1559,14 +1577,15 @@ var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
 	19, // 19: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
 	20, // 20: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
 	19, // 21: qdrant.cloud.common.v1.patch_source:extendee -> google.protobuf.MethodOptions
-	0,  // 22: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	5,  // 23: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	6,  // 24: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
-	3,  // 25: qdrant.cloud.common.v1.patch_source:type_name -> qdrant.cloud.common.v1.PatchSource
-	26, // [26:26] is the sub-list for method output_type
-	26, // [26:26] is the sub-list for method input_type
-	22, // [22:26] is the sub-list for extension type_name
-	13, // [13:22] is the sub-list for extension extendee
+	19, // 22: qdrant.cloud.common.v1.interactive_only:extendee -> google.protobuf.MethodOptions
+	0,  // 23: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	5,  // 24: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	6,  // 25: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
+	3,  // 26: qdrant.cloud.common.v1.patch_source:type_name -> qdrant.cloud.common.v1.PatchSource
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	23, // [23:27] is the sub-list for extension type_name
+	13, // [13:23] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
 }
 
@@ -1593,7 +1612,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
 			NumEnums:      3,
 			NumMessages:   16,
-			NumExtensions: 9,
+			NumExtensions: 10,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_common_v1_common_proto_goTypes,

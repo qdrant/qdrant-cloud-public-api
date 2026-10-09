@@ -57,6 +57,8 @@ API_VERSION_FIELD_NUMBER: _ClassVar[int]
 api_version: _descriptor.FieldDescriptor
 PATCH_SOURCE_FIELD_NUMBER: _ClassVar[int]
 patch_source: _descriptor.FieldDescriptor
+INTERACTIVE_ONLY_FIELD_NUMBER: _ClassVar[int]
+interactive_only: _descriptor.FieldDescriptor
 
 class PatchSource(_message.Message):
     __slots__ = ("get_method", "field_mapping", "response_resource_field", "request_resource_field")

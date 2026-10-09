@@ -92,6 +92,18 @@ extend google.protobuf.MethodOptions {
   optional PatchSource patch_source = 50009;
 }
 
+// The extension for restricting a method to interactive session credentials.
+// Field numbers 50010–50011 are reserved for resource-scoped RBAC / ABAC options.
+extend google.protobuf.MethodOptions {
+  // When true, the method may only be called with an interactive session credential
+  // (for example a first-party console JWT). It must be rejected for non-interactive
+  // credentials such as personal API keys and OAuth-delegated tokens, even when the
+  // actor type is USER and the caller holds the required permissions.
+  // When false or unset, any authenticated credential that passes other checks is allowed.
+  // Enforcement is performed by the API gateway once it understands credential_type.
+  bool interactive_only = 50012;
+}
+
 // PatchSource describes how to construct a Get request from an Update request,
 // enabling the API gateway to fetch the current resource for partial
 // (FieldMask-based) updates.

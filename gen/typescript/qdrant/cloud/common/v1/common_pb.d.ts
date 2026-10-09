@@ -812,3 +812,15 @@ export declare const api_version: GenExtension<ServiceOptions, Version>;
  */
 export declare const patch_source: GenExtension<MethodOptions, PatchSource>;
 
+/**
+ * When true, the method may only be called with an interactive session credential
+ * (for example a first-party console JWT). It must be rejected for non-interactive
+ * credentials such as personal API keys and OAuth-delegated tokens, even when the
+ * actor type is USER and the caller holds the required permissions.
+ * When false or unset, any authenticated credential that passes other checks is allowed.
+ * Enforcement is performed by the API gateway once it understands credential_type.
+ *
+ * @generated from extension: bool interactive_only = 50012;
+ */
+export declare const interactive_only: GenExtension<MethodOptions, boolean>;
+
