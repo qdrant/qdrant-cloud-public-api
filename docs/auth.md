@@ -39,6 +39,22 @@ rpc UserOnlyMethod(UserRequest) returns (UserResponse) {
 
 When `supported_actor_types` is not specified, all authenticated actor types are allowed (subject to authorization checks).
 
+### Interactive-only methods
+
+Some methods must only be callable from an interactive session (a real user login), not from long-lived or delegated credentials that still authenticate as `ACTOR_TYPE_USER` (personal API keys, OAuth-delegated agents). Use the `interactive_only` option:
+
+```protobuf
+rpc CreateManagementKey(CreateManagementKeyRequest) returns (CreateManagementKeyResponse) {
+  option (common.v1.permissions) = "write:management_keys";
+  option (common.v1.interactive_only) = true;
+}
+```
+
+- **`supported_actor_types = USER`** restricts *who* the principal is (user vs management key vs service account).
+- **`interactive_only = true`** restricts *how* that user authenticated (session vs personal API key / OAuth-delegated token).
+
+When `interactive_only` is unset or `false`, any credential that passes actor-type and permission checks is allowed. The API gateway enforces this once it receives `credential_type` from IAM.
+
 ## Authorization
 
 The API uses a permission-based authorization system for RPC methods. Each method defines the required permissions that must be satisfied for access to be granted.

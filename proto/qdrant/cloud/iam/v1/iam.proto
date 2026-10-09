@@ -19,7 +19,7 @@ service IAMService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Gets the authenticated user.
@@ -52,6 +52,8 @@ service IAMService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/iam/v1/users/{user.id}"
@@ -97,6 +99,8 @@ service IAMService {
     option (common.v1.permissions) = "";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/users/{user_id}"};
     // events
@@ -135,6 +139,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/iam/v1/users/me/profile"
@@ -182,6 +188,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/users/me/consent"
@@ -369,6 +377,8 @@ service IAMService {
   rpc AssignUserRoles(AssignUserRolesRequest) returns (AssignUserRolesResponse) {
     // permissions
     option (common.v1.permissions) = "write:roles";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/iam/v1/accounts/{account_id}/users/{user_id}/roles"
@@ -398,6 +408,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/iam/v1/users/me/logout"};
     // events
@@ -419,6 +431,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/mfa-methods"};
   }
@@ -432,6 +446,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {put: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
     // events
@@ -461,6 +477,8 @@ service IAMService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
     // events
